@@ -1,0 +1,313 @@
+Type        | Z0.IAny`1                                                             | Characterizes any equatable value
+Type        | Z0.IAny`2                                                             | Characterizes an equatable value reification
+Property    | Z0.IAppMsg.Content                                                    | The message body
+Property    | Z0.IAppMsg.Kind                                                       | The message classification
+Property    | Z0.IAppMsg.Color                                                      | The message foreground color when rendered for display
+Property    | Z0.IAppMsg.Displayed                                                  | Specifies whether the message has been displayed to an end-user
+Method      | Z0.IAppMsg.AsDisplayed                                                | Transitions a message to the displayed state
+Property    | Z0.IAppMsg.IsEmpty                                                    | Specifies whether the message is vaccuous
+Property    | Z0.IAppMsg.IsError                                                    | Specifies whether the message describes an error
+Type        | Z0.IBitField`1                                                        | Characterizes a content-parametric bitfield
+Property    | Z0.IBitField`1.Data                                                   | The raw bitfield data
+Type        | Z0.IBitField`2                                                        | Characterizes a content and index-parametric bitfield
+Type        | Z0.IBitField`3                                                        | Characterizes a bitfield from which segments can be specified/extracted
+Type        | Z0.IBitField`4                                                        | Characterizes a reified bitfield predicated on 3 type parameters
+Type        | Z0.IBitField`6                                                        | Characterizes a reified bitfield predicated on 4 type parameters
+Property    | Z0.IBufferTokenSource.Item(Z0.BufferSeqId)                            | Returns the token of an index-identified buffer
+Type        | Z0.IContext                                                           | Charaterizes a shared execution environment that may be stateful or stateless
+Type        | Z0.IContextual`1                                                      | Charaterizes a component that maintains readonly-access to encapsulated state, here and throughout referred to as a context
+Type        | Z0.IContext`1                                                         | Charaterizes a stateful shared execution environment over a parametric context
+Type        | Z0.IDistributionSpec                                                  | Characterizes a distribution specifier
+Type        | Z0.IDistributionSpec`1                                                | Characterizes a T-parametric distribution specifier
+Type        | Z0.IDistributionSpec`2                                                | Characterizes a T-parametric distribution specifier reification
+Property    | Z0.IEncoded`2.Encoded                                                 | The encoded data, likely in bytes
+Method      | Z0.IInterval`2.ToOpen                                                 | Creates an open interval with endpoints from the existing interval
+Method      | Z0.IInterval`2.ToLeftOpen                                             | Creates a left-open/right-closed interval with endpoints from the existing interval
+Method      | Z0.IInterval`2.ToRightClosed                                          | Creates a left-open/right-closed interval with endpoints from the existing interval
+Method      | Z0.IInterval`2.ToRightOpen                                            | Creates a left-open/right-closed interval with endpoints from the existing interval
+Method      | Z0.IInterval`2.ToLeftClosed                                           | Creates a left-closed interval with endpoints from the existing interval
+Method      | Z0.IInterval`2.ToClosed                                               | Creates a closed interval with endpoints from the existing interval
+Type        | Z0.IInterval`1                                                        | Characterizes a contiguous segment of homogenous values that lie within            left and right boundaries
+Property    | Z0.IInterval`1.Left                                                   | The left endpoint
+Property    | Z0.IInterval`1.Right                                                  | The right endpoint
+Type        | Z0.INumeric                                                           | Chracterizes a numeric thing
+Type        | Z0.INumeric`1                                                         | Chracterizes a parametric numeric thing
+Type        | Z0.IService                                                           | Characterizes nothing but is a marker for a type that, perhaps, defines something useful to someone
+Type        | Z0.IService`1                                                         | Characterizes a service that extends a parametric context with operational semantics.
+Type        | Z0.IServiceAllocation`1                                               | Characterizes a stateful service that requires explcit resource managment
+Type        | Z0.ISigned                                                            | Characterizes a signable thing
+Property    | Z0.ISigned.Sign                                                       | The sign of the signable thing
+Type        | Z0.ISigned`1                                                          | Characterizes a signable reification
+Type        | Z0.ISink                                                              | Sink interface root
+Type        | Z0.ISink`1                                                            | Characterizes a sink that accepts a single input value
+Method      | Z0.ISink`1.Deposit(`0)                                                | Receives supplied input
+Method      | Z0.XTend.BinaryOp``1(System.Reflection.MethodInfo,System.Object)      | Creates a delegate for a binary operator f:X-&gt;X-&gt;X realized by a specified method
+Method      | Z0.XTend.ExtractImm8(Z0.OpIdentity)                                   | Extracts an 8-bit immediate value from an identity if it contains an immediate suffix; otherwise, returns none
+Method      | Z0.XTend.ToChar(Z0.NumericIndicator)                                  | Converts a numeric indicator to a character
+Method      | Z0.XTend.Format(Z0.NumericIndicator)                                  | Producuces text in the form {'i' | 'u' | 'f'}
+Method      | Z0.XTend.Format(Z0.NumericKind)                                       | Produces text in the form {width}{indicator}
+Method      | Z0.XTend.Indicator(Z0.NumericKind)                                    | Determines the indicator of a numeric kind
+Method      | Z0.XTend.IsFloat(Z0.NumericKind)                                      | Determines whether a numeric kind designates a floating-point type
+Method      | Z0.XTend.IsSome(Z0.NumericKind)                                       | Determines whether a numeric kind is nonempty
+Method      | Z0.XTend.IsUnsigned(Z0.NumericKind)                                   | Determines whether a numeric kind designates an unsigned integral type
+Method      | Z0.XTend.Keyword(Z0.NumericKind)                                      | Specifies the C# keyword used to designate a kind-identified numeric type
+Method      | Z0.XTend.KeywordNot(Z0.NumericKind)                                   | Specifies the keyword not used in C# to designate a kind-identified primal type
+Method      | Z0.XTend.NumericId(Z0.NumericKind)                                    | Determines the type identifer of a numeric kind
+Method      | Z0.XTend.SystemType(Z0.NumericKind)                                   | Determines the system type represented by a numeric kind
+Method      | Z0.XTend.TypeWidth(Z0.NumericKind)                                    | Determines the width of a numeric kind
+Method      | Z0.XTend.Width(Z0.NumericKind)                                        | Determines the width of the represented kind in bits
+Method      | Z0.XTend.NumericKeyword(System.Type)                                  | Specifies the C# keyword used to designate a primal numeric type
+Method      | Z0.XTend.NumericKeywordNot(System.Type)                               | Specifies the keyword not used in C# to designate a primal numeric type
+Method      | Z0.XTend.NumericKind(System.Type)                                     | Determines the numeric kind of a type
+Method      | Z0.XTend.NumericKind(System.TypeCode)                                 | Determines the numeric kind of a type-code identified type
+Method      | Z0.XTend.IsBlocked(System.Type)                                       | Determines whether a type is classified as a blocked type via attribution
+Method      | Z0.XTend.IsFixed(System.Type)                                         | Determines whether a type is classified as a fixed type via attribution
+Method      | Z0.XTend.IsSegmented(System.Type)                                     | Returns true if the source type is intrinsic or blocked
+Method      | Z0.XTend.IsVector(System.Type)                                        | Determines whether a type is classified as an intrinsic vector
+Type        | Z0.AgentIdentity                                                      | Uniquely identifies an agent throughout a server complex
+Field       | Z0.AgentIdentity.ServerId                                             | Uniquely identifies a server
+Field       | Z0.AgentIdentity.AgentId                                              | Identifies an agent relative to a server
+Property    | Z0.AgentIdentity.Identifier                                           | Uniquely identifies an agent by composing the host on which it resides            and the host-relative identifier
+Method      | Z0.AgentIdentity.op_Implicit(System.ValueTuple{System.UInt32,System.UInt32})~Z0.AgentIdentity| Constructs an identity from server and agent id's
+Type        | Z0.AgentTransition                                                    | Specifies a transition that occurred
+Field       | Z0.AgentTransition.Agent                                              | Specifies the agent that experienced the transition
+Field       | Z0.AgentTransition.Timestamp                                          | Indicates the relative time at which the transition ocurred
+Field       | Z0.AgentTransition.SourceState                                        | Specifies the state of the agent before the transition
+Field       | Z0.AgentTransition.TargetState                                        | Specifies the state of the agent ater the transition
+Type        | Z0.Any`1                                                              | A parametric T-equatable value
+Type        | Z0.BitSize                                                            | Specifies a memory size UOM in bits
+Field       | Z0.BitSize.Bits                                                       | Specifies a bit count
+Method      | Z0.BitSize.measure``1                                                 | Computes the bit-size of a parametric type
+Method      | Z0.BitSize.div``1(System.Int32,``0)                                   | Computes the quotient q :=  a / bitsize[T] of an operand a and parametric type T
+Method      | Z0.BitSize.mod``1(System.Int32,``0)                                   | Computes the remainder r :=  a % bitsize[T] of an operand a and parametric type T
+Method      | Z0.BitSize.op_Explicit(Z0.BitSize)~Z0.ByteSize                        | Returns the minimum number of bytes required to apprehend             the size of the source bits.
+Property    | Z0.BitSize.Empty                                                      | The bit with no size
+Type        | Z0.ByteSize                                                           | Defines size with respect to bytes
+Field       | Z0.ByteSize.Count                                                     | Specifies a number of bytes
+Type        | Z0.CorrelationToken                                                   | Correlates a value with a key that uniquely identifies the value within some context
+Property    | Z0.CorrelationToken.Identifier                                        | The key that identifies the value
+Type        | Z0.NumericLiteral                                                     | Defines a (boxed) numeric literal relative to a specified base
+Type        | Z0.NumericLiteral`1                                                   | Defines a (boxed) numeric literal relative to a specified base
+Type        | Z0.Paired`2                                                           | A non-homogenous mutable 2-tuple
+Field       | Z0.Paired`2.Left                                                      | The first member
+Field       | Z0.Paired`2.Right                                                     | The second member
+Method      | Z0.Paired`2.As``2                                                     | Interprets the pair over alternate domains
+Type        | Z0.SizeAttribute                                                      | Defines the size, in bytes, of the target element
+Property    | Z0.SizeAttribute.Size                                                 | The number of bytes occupied by an instance of the targeted element
+Field       | Z0.IdentityPartKind.Name                                              | The unadorned subject name and the first part of the moniker
+Field       | Z0.IdentityPartKind.Suffix                                            | A trailing component of the form {suffix sep}{suffix name}
+Field       | Z0.IdentityPartKind.Numeric                                           | A numeric specifier of the form {width}{numeric_indicator}
+Field       | Z0.IdentityPartKind.Segment                                           | A segmentation specifier of the form {total width}x{segment width}{numeric indicator}
+Type        | Z0.IdentityShare                                                      | Defines a set of common identity-related operations
+Type        | Z0.IIdentification`1                                                  | Specifies what it means to be a reified identifier
+Type        | Z0.IIdentified                                                        | Characterizes an identifier
+Property    | Z0.OpIdentity.Identifier                                              | The operation identifier
+Property    | Z0.OpIdentity.Name                                                    | The unqualified operation name
+Property    | Z0.OpIdentity.Suffix                                                  | The identifier suffix, if any
+Property    | Z0.OpIdentity.IsGeneric                                               | Specifies whether the operation was reified from a generic definition
+Property    | Z0.OpIdentity.HasImm                                                  | Specifies whether the operation is specialized for an immediate value
+Property    | Z0.OpIdentity.TextComponents                                          | The moniker parts, as determined by part delimiters
+Property    | Z0.OpIdentity.Empty                                                   | The empty identifier
+Method      | Z0.OpIdentity.Set(System.String)                                      | Creates a moniker directly from source text
+Field       | Z0.TypeCode`1.Code                                                    | A numeric value intented to uniquely identify a system-defined or user-defiend type.             The least 8 bits are reserved for a System.TypeCode enum value for system-defined types;            the remaining bits are then reserved for user-defined types
+Method      | Z0.TypeIdentity.numeric(Z0.NumericKind)                               | Defines a scalar type identity
+Method      | Z0.TypeIdentity.numeric``1(``0)                                       | Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
+Field       | Z0.UserTypeCode`1.Code                                                | A numeric value, greater than 255, that uniquely identifies a user-defined type
+Property    | Z0.UserTypeInfo.UserTypeId                                            | The identity allocated to the type
+Property    | Z0.UserTypeInfo.DefiningType                                          | The implementation type
+Property    | Z0.UserTypeInfo.IsParametric                                          | Specifies whether type arguments are required
+Property    | Z0.UserTypeInfo.ParameterCount                                        | The number of type arguments required
+Property    | Z0.UserTypeInfo`1.TypeCode                                            | The identity allocated to the type
+Property    | Z0.UserTypeInfo`1.DefiningType                                        | The implementation type
+Property    | Z0.UserTypeInfo`1.IsParametric                                        | Specifies whether type arguments are required
+Property    | Z0.UserTypeInfo`1.ParameterCount                                      | The number of type arguments required
+Type        | Z0.ImmAttribute                                                       | Identifies a parameter that accepts an immediate value
+Type        | Z0.IArithmeticKind                                                    | Characteries an arithmetic function classifier
+Property    | Z0.IArithmeticKind.Kind                                               | The literal identifier that will be lifted to the type-level
+Type        | Z0.IArithmeticKind`1                                                  | Characterizes a reified arithmetic function classifier
+Type        | Z0.IArithmeticKind`2                                                  | Characterizes a kind-parametric and numeric-parametric arithmetic operation classifier
+Property    | Z0.IArithmeticKind`2.NumericKind                                      | The parametrically-identified numeric kind
+Type        | Z0.IBitFunctionKind                                                   | Characteries a bitfunction classifier
+Type        | Z0.IBitFunctionKind`1                                                 | Characterizes a reified bitfunction classifier
+Type        | Z0.IBitFunctionKind`2                                                 | Characterizes a kind-parametric and numeric-parametric bitfunction operation classifier
+Type        | Z0.IBitLogicKind                                                      | Characterizes a bitlogic operation classifier
+Type        | Z0.IBitLogicKind`1                                                    | Characterizes a reified bitlogic operation classifier
+Type        | Z0.IBitLogicKind`2                                                    | Characterizes a kind-parametric and numeric-parametric bitlogic operation classifier
+Property    | Z0.IBitLogicKind`2.NumericKind                                        | The parametrically-identified numeric kind
+Type        | Z0.IBitShiftKind                                                      | Characterizes a bitshift operation classifier
+Type        | Z0.IBitShiftKind`1                                                    | Characterizes a reified bitlogic operation classifier
+Type        | Z0.IBitShiftKind`2                                                    | Characterizes a kind-parametric and numeric-parametric bitshift operation classifier
+Property    | Z0.IBitShiftKind`2.NumericKind                                        | The parametrically-identified numeric kind
+Type        | Z0.IComparisonKind                                                    | Characterizes a bitshift operation classifier
+Type        | Z0.IComparisonKind`1                                                  | Characterizes a reified comparison operation classifier
+Type        | Z0.IComparisonKind`2                                                  | Characterizes a kind-parametric and numeric-parametric comparison operation classifier
+Property    | Z0.IComparisonKind`2.NumericKind                                      | The parametrically-identified numeric kind
+Type        | Z0.IBooleanPredicateKind                                              | Characteries a bitfunction classifier
+Type        | Z0.IBooleanPredicateKind`1                                            | Characterizes a reified bitfunction classifier
+Type        | Z0.IBooleanPredicateKind`2                                            | Characterizes a kind-parametric and numeric-parametric boolean predicate operation classifier
+Property    | Z0.IBooleanPredicateKind`2.NumericKind                                | The parametrically-identified numeric kind
+Type        | Z0.ISystemOpKind                                                      | Characterizes a system operation classifier
+Type        | Z0.ISystemOpKind`1                                                    | Characterizes a reified system operation classifier
+Type        | Z0.ISystemOpKind`2                                                    | Characterizes a kind-parametric and numeric-parametric system operation classifier
+Property    | Z0.ISystemOpKind`2.NumericKind                                        | The parametrically-identified numeric kind
+Method      | Z0.NumericKinds.contains(Z0.NumericKind,Z0.NumericTypeId)             | Tests whether an identified type is of specified numeric kind
+Method      | Z0.NumericKinds.floating(Z0.NumericKind)                              | Determines whether a numeric kind designates a floating-point type
+Method      | Z0.NumericKinds.floating``1                                           | Returns true if a parametric type is of floating-point numeric type, false otherwise
+Method      | Z0.NumericKinds.floating(System.Type)                                 | Returns true if the source type is a primal floating point type, false otherwise
+Method      | Z0.NumericKinds.floating(System.Object)                               | Returns true if a value is of floating-point numeric type, false otherwise
+Method      | Z0.NumericKinds.indicator(Z0.NumericKind)                             | Determines the indicator of a numeric kind
+Method      | Z0.NumericKinds.keyword(Z0.NumericKind)                               | Specifies the C# keyword used to designate a kind-identified primal type
+Method      | Z0.NumericKinds.nonkeyword(Z0.NumericKind)                            | Specifies the keyword not used in C# to designate a kind-identified primal type
+Method      | Z0.NumericKinds.kind(Z0.NumericWidth,Z0.NumericIndicator)             | Computes the numeric kind determined by a bit-width and numeric indicator
+Method      | Z0.NumericKinds.kind(System.TypeCode)                                 | Determines the numeric kind identified by a type code, if any
+Method      | Z0.NumericKinds.kind(System.Type)                                     | Determines the numeric kind of a system type
+Method      | Z0.NumericKinds.kind``1                                               | Determines the numeric kind of a parametrically-identified type
+Method      | Z0.NumericKinds.signed``1                                             | Returns true if a parametric type is of signed numeric type, false otherwise
+Method      | Z0.NumericKinds.signed(System.Type)                                   | Returns true if the source type is a primal signed type, false otherwise
+Method      | Z0.NumericKinds.signed(System.Object)                                 | Returns true if a value is of signed numeric type, false otherwise
+Method      | Z0.NumericKinds.test(System.Type)                                     | Returns true if a type is a numeric type, false otherwise
+Method      | Z0.NumericKinds.type(Z0.NumericKind)                                  | Returns a kind-identified system type if possible; throws an exception otherwise
+Method      | Z0.NumericKinds.unsigned(Z0.NumericKind)                              | Determines whether a numeric kind designates an unsigned integral type
+Method      | Z0.NumericKinds.unsigned``1                                           | Returns true if a parametric type is of unsigned numeric type, false otherwise
+Method      | Z0.NumericKinds.unsigned(System.Type)                                 | Returns true if a type is of unsigned numeric type, false otherwise
+Method      | Z0.NumericKinds.unsigned(System.Object)                               | Returns true if a value is of unsigned numeric type, false otherwise
+Property    | Z0.NumericKinds.i8                                                    | Specifies the int8 kind
+Property    | Z0.NumericKinds.u8                                                    | Specifies the uint8 kind
+Property    | Z0.NumericKinds.i16                                                   | Specifies the int16 kind
+Property    | Z0.NumericKinds.u16                                                   | Specifies the uint16 kind
+Property    | Z0.NumericKinds.i32                                                   | Specifies the int32 kind
+Property    | Z0.NumericKinds.u32                                                   | Specifies the uint32 kind
+Property    | Z0.NumericKinds.i64                                                   | Specifies the int64 kind
+Property    | Z0.NumericKinds.u64                                                   | Specifies the uint64 kind
+Property    | Z0.NumericKinds.f32                                                   | Specifies the float32 kind
+Property    | Z0.NumericKinds.f64                                                   | Specifies the float64 kind
+Property    | Z0.NumericKinds.UnsignedTypes                                         | Recognized unsigned integral types
+Property    | Z0.NumericKinds.UnsignedKindSeq                                       | Recognized unsigned integral kinds
+Property    | Z0.NumericKinds.SignedTypes                                           | Recognized signed integral kinds
+Property    | Z0.NumericKinds.SignedKindSeq                                         | Recognized signed integral kinds
+Property    | Z0.NumericKinds.IntegralTypes                                         | Recognized integral types
+Property    | Z0.NumericKinds.IntegralKindSeq                                       | Recognized integral kinds
+Property    | Z0.NumericKinds.FloatingTypes                                         | recognized floating-point types
+Property    | Z0.NumericKinds.FloatingKindSeq                                       | Recognized floating-point kinds
+Property    | Z0.NumericKinds.NumericTypes                                          | Recognized numeric types
+Type        | Z0.NK`1                                                               | Represents the parametrically-identified numeric kind
+Type        | Z0.TypeIndicator                                                      | Partitions types into manageable pieces in various ways, hopefully sensible, with 16 bits
+Property    | Z0.TypeIndicator.Empty                                                | The nonindicating indicator
+Property    | Z0.TypeIndicator.Signed                                               | Identifies the signed numeric partition
+Property    | Z0.TypeIndicator.Unsigned                                             | Identifies the unsigned numeric partition
+Property    | Z0.TypeIndicator.Float                                                | Identifies the floating-point numeric partition
+Property    | Z0.TypeIndicator.Vector                                               | Identifies the vectorized type partition
+Property    | Z0.TypeIndicator.Block                                                | Identifies the block type partition
+Property    | Z0.TypeIndicator.Generic                                              | Identifies the generic type partition
+Property    | Z0.TypeIndicator.IsEmpty                                              | Specifies whether the indicator is non-indicating
+Type        | Z0.Emitter`1                                                          | Defines the canonical shape of an emitter
+Type        | Z0.Emitter`2                                                          | Defines the canonical shape of an emitter
+Type        | Z0.StreamEmitter`1                                                    | Characterizes a function that produces a stream of values
+Type        | Z0.ValueStreamEmitter`1                                               | Characterizes a function that produces a stream of values
+Type        | Z0.IBoundValueSource`1                                                | Characterizes a value emitter that supports placcing upper and/or lower bounds on            the values produced
+Method      | Z0.IBoundValueSource`1.Next(`0)                                       | Retrieves the next point from the source, constrained by an upper bound
+Method      | Z0.IBoundValueSource`1.Next(`0,`0)                                    | Retrieves the next point from the source, constrained by upper and lower bounds
+Type        | Z0.ILimitedSource`1                                                   | Characterizes an emission service taht may run out of values to emit
+Method      | Z0.ILimitedSource`1.Next                                              | Emits the next source value, if any
+Type        | Z0.IRngBoundPointSource`1                                             | Characterizes a random source that can produce points bounded by a range
+Type        | Z0.IRngNav                                                            | Characterizes a random stream navigator
+Method      | Z0.IRngNav.Advance(System.UInt64)                                     | Moves the stream a specified number of steps forward
+Method      | Z0.IRngNav.Retreat(System.UInt64)                                     | Moves the stream a specified number of steps backward
+Type        | Z0.IRngNav`1                                                          | Characterizes a random source that can be navigated
+Property    | Z0.IRngSampler`1.BufferLength                                         | The length of the sampler's internal buffer
+Property    | Z0.IRngSampler`1.DistKind                                             | The type of distibution being sampled
+Type        | Z0.IRngSource                                                         | Identifies a source of random data
+Property    | Z0.IRngSource.RngKind                                                 | Identifies the rng that drives the source
+Type        | Z0.IRngStream`1                                                       | Characterizes a stream of random values of parametric type
+Type        | Z0.ISource                                                            | Root interface for value production services
+Type        | Z0.ISource`1                                                          | Characterizes an unlimited emitter that produces one element at a time
+Method      | Z0.ISource`1.Next                                                     | Retrieves the next item from the source
+Type        | Z0.IValueSource`1                                                     | Characterizes an unlimited value emitter that produces one value at a time
+Type        | Z0.EditorOp`1                                                         | Characterizes an operator that emits a potentially modified receipt value
+Type        | Z0.RelayOp`1                                                          | Characterizes an operator that emits a value identical to that which was received
+Type        | Z0.Mapper`2                                                           | Characterizes a function that produces T-values from S-values
+Type        | Z0.UnaryOp`1                                                          | Defines the canonical shape of a unary operator
+Type        | Z0.UnaryOp`2                                                          | Characterizes a unary operator with known operand width
+Type        | Z0.BinaryOp`1                                                         | Defines the canonical shape of a binary operator
+Type        | Z0.BinaryOp`2                                                         | Characterizes a binary operator with known operand width
+Type        | Z0.TernaryOp`1                                                        | Defines the canonical shape of a tenary operator
+Type        | Z0.TernaryOp`2                                                        | Characterizes a ternary operator with known operand width
+Type        | Z0.Receiver`1                                                         | Characterizes a function that accepts an input of parametric type
+Type        | Z0.StreamReceiver`1                                                   | Characterizes a receiver that accepts a stream
+Type        | Z0.SpanPartitioner`2                                                  | Defines the signature of an operator that accepts a primal value and             partitions the value, or portion thereof, into segments of common length
+Type        | Z0.SpanEmitter`1                                                      | Characterizes a function that produces spans values
+Type        | Z0.SpanReceiver`1                                                     | Characterizes a receiver that accepts a span
+Type        | Z0.IBinaryOp`1                                                        | Characterizes a structural binary operator
+Type        | Z0.IFunc                                                              | Characterizes a function reified as a (structural) type, referred to as a (S)tructural (Func)tion
+Property    | Z0.IFunc.Id                                                           | The operation identity
+Type        | Z0.IFunc`1                                                            | Characterizes a structural emitter; that is, the contract charactrizes a type that implements an emitter
+Type        | Z0.IFunc`2                                                            | Characterizes an identified structural unary function
+Type        | Z0.IFunc`3                                                            | Characterizes an identified structural binary function
+Method      | Z0.IFunc`3.Invoke(`0,`1)                                              | Invokes the reified function over supplied operands
+Type        | Z0.IFunc`4                                                            | Characterizes an identified structural ternary function
+Method      | Z0.IFunc`4.Invoke(`0,`1,`2)                                           | Invokes the reified function over supplied operands
+Type        | Z0.NaturalsAttribute                                                  | Specifies closures over natural number types
+Type        | Z0.NatPairsAttribute                                                  | Specifies closures over pairs of natural number types
+Type        | Z0.WidthAttribute                                                     | Applied directly to a type, or subclassed, to specify the physical or logical type width
+Property    | Z0.WidthAttribute.TypeWidth                                           | The logical width of the attributed type
+Type        | Z0.IBitWidth                                                          | Defines an aspect that specifies a bit width
+Property    | Z0.IFixedWidth.FixedWidth                                             | Defines a class specifier synonym to facilitate disambiguaton
+Type        | Z0.INaturalized`1                                                     | Characterizes a type with which a number of parametric type is associated
+Property    | Z0.INumericWidth.NumericWidth                                         | Defines a class specifier synonym to facilitate disambiguaton
+Type        | Z0.ISizedOpClass                                                      | Characterizes an operation class that classifies width-parametric operations
+Type        | Z0.ISizedOpClass`1                                                    | Characterizes a width-parametric operation class
+Type        | Z0.ISizedOpClass`2                                                    | Characterizes a width-parametric operation class that is also class-parametric
+Type        | Z0.ISizedOpClass`3                                                    | Characterizes an operation class, parametric in both width and class, is also operand-parametric
+Type        | Z0.ITypeNat                                                           | Characterizes a type-level natural number, a *typenat*
+Property    | Z0.ITypeNat.NatValue                                                  | The number's value
+Type        | Z0.ITypeNat`1                                                         | Characterizes a type with which a natural number type is associated
+Type        | Z0.ITypeNatF`1                                                        | Characterizes an F-bound polymorphic type nat reification
+Type        | Z0.INatSeq                                                            | Characterizes a type-level sequence of typenats
+Type        | Z0.INatSeq`1                                                          | Characterizes a reified natural sequence
+Type        | Z0.INatPrimitive`1                                                    | Characterizes an atom of the type natural grammar
+Type        | Z0.INatNonZero                                                        | Requires that the natural representative is nonzero
+Type        | Z0.INatNonZero`1                                                      | Requires k:K =&gt; k != 0
+Type        | Z0.INatRelation`2                                                     | Characterizes binary relationship between two type naturals
+Type        | Z0.INatRelation`3                                                     | Characterizes ternary relationship among three type naturals
+Type        | Z0.INatDivisible`2                                                    | Requires k1 = n*k2 for some n&gt;= 1
+Type        | Z0.INatGt`2                                                           | Requires k1 &gt; k2
+Type        | Z0.INatGtEq`2                                                         | Requires k1 &gt;= k2
+Type        | Z0.INatEq`2                                                           | Requires k1 == k2
+Type        | Z0.INatNEq`2                                                          | Requires k1 != k2
+Type        | Z0.INatOdd`1                                                          | Requires k:K =&gt; k % 2 != 0
+Type        | Z0.INatPrime`1                                                        | Requires k prime
+Type        | Z0.INatSeq`3                                                          | Characterizes a reified 2-term natural sequence
+Type        | Z0.INatSeq`4                                                          | Characterizes a reified 3-term natural sequence
+Property    | Z0.ITypeWidth.TypeWidth                                               | Refines the specificity of the class specifier
+Property    | Z0.IVectorWidth.VectorWidth                                           | Defines a class specifier synonym to facilitate disambiguaton
+Type        | Z0.TxN`1                                                              | Identifies a parametric type
+Type        | Z0.TxN`2                                                              | Identifies a pair of parametric types
+Type        | Z0.TxN`3                                                              | Identifies a triple of parametric types
+Type        | Z0.TxN`4                                                              | Identifies a quartet of parametric types
+Type        | Z0.TxN`5                                                              | Identifies a quintent of parametric types
+Type        | Z0.TxN`6                                                              | Identifies a sextet of parametric types
+Type        | Z0.TxN`7                                                              | Identifies a septet of parametric types
+Type        | Z0.TxN`8                                                              | Identifies an octet of parametric types
+Method      | Z0.Widths.bits``1                                                     | Computes the number of bits occupied by an instance of a parametrically-identified type
+Method      | Z0.Widths.blocked(System.Type)                                        | Determines the attributed width of a blocked type
+Method      | Z0.Widths.bytes``1                                                    | Computes the number of bytes occupied by an instance of a parametrically-identified type
+Method      | Z0.Widths.cells``2                                                    | Counts the number of numeric T-cells that can be convered by contiguous memory of width W
+Method      | Z0.Widths.cells``1(Z0.W8)                                             | Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+Method      | Z0.Widths.cells``1(Z0.W16)                                            | Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+Method      | Z0.Widths.cells``1(Z0.W32)                                            | Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+Method      | Z0.Widths.cells``1(Z0.W64)                                            | Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+Method      | Z0.Widths.cells``1(Z0.W128)                                           | Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+Method      | Z0.Widths.cells``1(Z0.W256)                                           | Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+Method      | Z0.Widths.cells``1(Z0.W512)                                           | Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+Method      | Z0.Widths.cells``1(Z0.W1024)                                          | Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+Method      | Z0.Widths.data``1                                                     | Computes the literal data width from a parametric width
+Method      | Z0.Widths.divine(System.Type)                                         | Divines the bit-width of a specified type, if possible
+Method      | Z0.Widths.tfixed(System.Type)                                         | Determines the attributed width of a fixed type
+Method      | Z0.Widths.numeric``1(``0)                                             | Computes the literal numeric width from a parametric width
+Method      | Z0.Widths.div``2(``0,``1)                                             | Computes k := width[W] / bitsize[T]
+Method      | Z0.Widths.segmented(System.Type)                                      | Determines the width of a (known) segmented type
+Method      | Z0.Widths.type``1(``0)                                                | Computes the literal type width from a parametric width
+Method      | Z0.Widths.vector(System.Type)                                         | Determines the width of a system-defined or custom intrinsic vector type
+Property    | Z0.SegmentedAttribute.CellWidths                                      | Specifies the potential cell widths of a segmented type
+Type        | Z0.IWidth`1                                                           | A trait that attaches a width to a realization
+Type        | Z0.VectorAttribute                                                    | Applied to a user-defined type to identify it as an intrinsic vector (or, rather, should be treated/classified as one)

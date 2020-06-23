@@ -1,0 +1,7 @@
+Method      | Z0.gspan.dot``1(System.ReadOnlySpan{``0},System.ReadOnlySpan{``0})    | Imagines the source operands are vectors of identical length and computes their canonical scalar product
+Method      | Z0.gspan.max``1(System.ReadOnlySpan{``0})                             | Finds a numeric cell of maximal value
+Method      | Z0.gspan.min``1(System.ReadOnlySpan{``0})                             | Finds a numeric cell of minimal value
+Method      | Z0.gspan.pow``1(System.ReadOnlySpan{``0},System.UInt32,System.Span{``0})| Computes the integral exponent of each numeric source cell and deposits the result in a caller-supplied target
+Method      | Z0.fspan.div``1(System.Span{``0},System.ReadOnlySpan{``0})            | Computes the floating-point quotient of cells in the left and right operands,            overwriting each left operand cell with the result.             Specifically, lhs[i] = lhs[i] / rhs[i] for i = 0...n - 1 where n is the common length of the operands
+Method      | Z0.fspan.div``1(System.Span{``0},``0)                                 | Computes in-place the quotient of each source element in the left operand and the right operand
+Method      | Z0.fspan.div``1(System.ReadOnlySpan{``0},System.ReadOnlySpan{``0},System.Span{``0})| Computes the floating-point quotient of cells in the left and right operands,            and writes the result in the target operand            Specifically, dst[i] = lhs[i] / rhs[i] for i = 0...n - 1 where n is the common length of the operands

@@ -1,0 +1,745 @@
+Method      | Z0.BitGrid.negate``1(Z0.BitGrid16{``0})                               | Computes the two's complement negation of source grid
+Method      | Z0.BitGrid.negate``1(Z0.BitGrid32{``0})                               | Computes the two's complement negation of source grid
+Method      | Z0.BitGrid.negate``1(Z0.BitGrid64{``0})                               | Computes the two's complement negation of source grid
+Method      | Z0.BitGrid.negate``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)               | Computes the two's complement negation of the first grid and deposits the result into the second
+Method      | Z0.BitGrid.negate``3(Z0.BitGrid16{``0,``1,``2})                       | Computes the two's complement negation of the source grid
+Method      | Z0.BitGrid.negate``3(Z0.BitGrid32{``0,``1,``2})                       | Computes the two's complement negation of the source grid
+Method      | Z0.BitGrid.negate``3(Z0.BitGrid64{``0,``1,``2})                       | Computes the two's complement negation of the source grid
+Method      | Z0.BitGrid.negate``3(Z0.BitGrid128{``0,``1,``2}@)                     | Computes the two's complement negation of the source grid
+Method      | Z0.BitGrid.negate``3(Z0.BitGrid256{``0,``1,``2}@)                     | Computes the two's complement negation of the source grid
+Method      | Z0.BitGrid.negate``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)| Computes the two's complement negation of the first grid and deposits the result into the second
+Method      | Z0.BitGrid.negate``3(Z0.BitGrid{``0,``1,``2}@)                        | Computes the two's complement negation of the source grid and returns the allocated result
+Method      | Z0.BitGrid.and``1(Z0.BitGrid16{``0},Z0.BitGrid16{``0})                | Computes the bitwise AND between fixed-width 16-bit generic bitgrids
+Method      | Z0.BitGrid.and``1(Z0.BitGrid32{``0},Z0.BitGrid32{``0})                | Computes the bitwise AND between fixed-width 32-bit generic bitgrids
+Method      | Z0.BitGrid.and``1(Z0.BitGrid64{``0},Z0.BitGrid64{``0})                | Computes the bitwise AND between fixed-width 64-bit grids
+Method      | Z0.BitGrid.and``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@,Z0.BitGrid{``0}@) | Computes the bitwise AND between generic bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.and``3(Z0.BitGrid16{``0,``1,``2},Z0.BitGrid16{``0,``1,``2})| Computes the bitwise AND between fixed-width natural bitgrids
+Method      | Z0.BitGrid.and``3(Z0.BitGrid32{``0,``1,``2},Z0.BitGrid32{``0,``1,``2})| Computes the bitwise AND between fixed-width natural bitgrids
+Method      | Z0.BitGrid.and``3(Z0.BitGrid64{``0,``1,``2},Z0.BitGrid64{``0,``1,``2})| Computes the bitwise AND between fixed-width natural bitgrids
+Method      | Z0.BitGrid.and``3(Z0.BitGrid128{``0,``1,``2}@,Z0.BitGrid128{``0,``1,``2}@)| Computes the bitwise AND between fixed-width natural bitgrids
+Method      | Z0.BitGrid.and``3(Z0.BitGrid256{``0,``1,``2}@,Z0.BitGrid256{``0,``1,``2}@)| Computes the bitwise AND between fixed-width natural bitgrids
+Method      | Z0.BitGrid.and``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)| Computes the bitwise AND between natural bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.nand``1(Z0.BitGrid16{``0},Z0.BitGrid16{``0})               | Computes the bitwise nand between generic bitgrids
+Method      | Z0.BitGrid.nand``1(Z0.BitGrid32{``0},Z0.BitGrid32{``0})               | Computes the bitwise nand between generic bitgrids
+Method      | Z0.BitGrid.nand``1(Z0.BitGrid64{``0},Z0.BitGrid64{``0})               | Computes the bitwise nand between generic bitgrids
+Method      | Z0.BitGrid.nand``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)| Computes the bitwise NAND between generic bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.nand``3(Z0.BitGrid16{``0,``1,``2},Z0.BitGrid16{``0,``1,``2})| Computes the bitwise nand between natural bitgrids
+Method      | Z0.BitGrid.nand``3(Z0.BitGrid32{``0,``1,``2},Z0.BitGrid32{``0,``1,``2})| Computes the bitwise nand between natural bitgrids
+Method      | Z0.BitGrid.nand``3(Z0.BitGrid64{``0,``1,``2},Z0.BitGrid64{``0,``1,``2})| Computes the bitwise nand between natural bitgrids
+Method      | Z0.BitGrid.nand``3(Z0.BitGrid128{``0,``1,``2}@,Z0.BitGrid128{``0,``1,``2}@)| Computes the bitwise nand between natural bitgrids
+Method      | Z0.BitGrid.nand``3(Z0.BitGrid256{``0,``1,``2}@,Z0.BitGrid256{``0,``1,``2}@)| Computes the bitwise nand between natural bitgrids
+Method      | Z0.BitGrid.nand``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)| Computes the bitwise NAND between natural bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.nand``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@) | Computes the bitwise NAND between generic bitgrids and returns the allocated result
+Method      | Z0.BitGrid.nor``1(Z0.BitGrid16{``0},Z0.BitGrid16{``0})                | Computes the bitwise NOR between 16-bit generic bitgrids
+Method      | Z0.BitGrid.nor``1(Z0.BitGrid32{``0},Z0.BitGrid32{``0})                | Computes the bitwise NOR between fixed-width 32-bit generic bitgrids
+Method      | Z0.BitGrid.nor``1(Z0.BitGrid64{``0},Z0.BitGrid64{``0})                | Computes the bitwise NOR between fixed-width 64-bit grids
+Method      | Z0.BitGrid.nor``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@,Z0.BitGrid{``0}@) | Computes the bitwise NOR between generic bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.nor``3(Z0.BitGrid16{``0,``1,``2},Z0.BitGrid16{``0,``1,``2})| Computes the bitwise NOR between fixed-width natural bitgrids
+Method      | Z0.BitGrid.nor``3(Z0.BitGrid32{``0,``1,``2},Z0.BitGrid32{``0,``1,``2})| Computes the bitwise NOR between fixed-width 32-bit natural bitgrids
+Method      | Z0.BitGrid.nor``3(Z0.BitGrid64{``0,``1,``2},Z0.BitGrid64{``0,``1,``2})| Computes the bitwise NOR between fixed-width 64-bit natural bitgrids
+Method      | Z0.BitGrid.nor``3(Z0.BitGrid128{``0,``1,``2}@,Z0.BitGrid128{``0,``1,``2}@)| Computes the bitwise NOR between 128-bit fixed-width natural bitgrids
+Method      | Z0.BitGrid.nor``3(Z0.BitGrid256{``0,``1,``2}@,Z0.BitGrid256{``0,``1,``2}@)| Computes the bitwise NOR between 256-bit fixed-width natural bitgrids
+Method      | Z0.BitGrid.nor``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)| Computes the bitwise NOR between natural bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.nor``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)  | Computes the bitwise NOR between generic bitgrids and returns the allocated result
+Method      | Z0.BitGrid.not``1(Z0.BitGrid16{``0})                                  | Computes the bitwise complement of the source grid
+Method      | Z0.BitGrid.not``1(Z0.BitGrid32{``0})                                  | Computes the bitwise complement of the source grid
+Method      | Z0.BitGrid.not``1(Z0.BitGrid64{``0})                                  | Computes the bitwise complement of the source grid
+Method      | Z0.BitGrid.not``3(Z0.BitGrid16{``0,``1,``2})                          | Computes the bitwise complement of the source grid
+Method      | Z0.BitGrid.not``3(Z0.BitGrid32{``0,``1,``2})                          | Computes the bitwise complement of the source grid
+Method      | Z0.BitGrid.not``3(Z0.BitGrid64{``0,``1,``2})                          | Computes the bitwise complement of the source grid
+Method      | Z0.BitGrid.not``3(Z0.BitGrid128{``0,``1,``2}@)                        | Computes the bitwise complement of the source grid
+Method      | Z0.BitGrid.not``3(Z0.BitGrid256{``0,``1,``2}@)                        | Computes the bitwise complement of the source grid
+Method      | Z0.BitGrid.not``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)  | Computes the bitwise complement of the source grid and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.not``3(Z0.BitGrid{``0,``1,``2}@)                           | Computes the bitwise complement of the source grid
+Method      | Z0.BitGrid.not``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)                  | Computes the bitwise complement of the source grid and deposits the result int a caller-supplied target
+Method      | Z0.BitGrid.not``1(Z0.BitGrid{``0}@)                                   | Computes the bitwise complement of the source grid
+Method      | Z0.BitGrid.or``1(Z0.BitGrid16{``0},Z0.BitGrid16{``0})                 | Computes the bitwise OR between fixed-width bitgrids
+Method      | Z0.BitGrid.or``1(Z0.BitGrid32{``0},Z0.BitGrid32{``0})                 | Computes the bitwise OR between fixed-width bitgrids
+Method      | Z0.BitGrid.or``1(Z0.BitGrid64{``0},Z0.BitGrid64{``0})                 | Computes the bitwise OR between fixed-width bitgrids
+Method      | Z0.BitGrid.or``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)  | Computes the bitwise OR between generic bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.or``3(Z0.BitGrid16{``0,``1,``2},Z0.BitGrid16{``0,``1,``2}) | Computes the bitwise OR between fixed-width bitgrids of natural dimensions
+Method      | Z0.BitGrid.or``3(Z0.BitGrid32{``0,``1,``2},Z0.BitGrid32{``0,``1,``2}) | Computes the bitwise OR between fixed-width bitgrids of natural dimensions
+Method      | Z0.BitGrid.or``3(Z0.BitGrid64{``0,``1,``2},Z0.BitGrid64{``0,``1,``2}) | Computes the bitwise OR between fixed-width bitgrids of natural dimensions
+Method      | Z0.BitGrid.or``3(Z0.BitGrid128{``0,``1,``2}@,Z0.BitGrid128{``0,``1,``2}@)| Computes the bitwise OR between fixed-width bitgrids of natural dimensions
+Method      | Z0.BitGrid.or``3(Z0.BitGrid256{``0,``1,``2}@,Z0.BitGrid256{``0,``1,``2}@)| Computes the bitwise OR between fixed-width bitgrids of natural dimensions
+Method      | Z0.BitGrid.or``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)| Computes the bitwise OR between natural bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.or``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)   | Computes the bitwise OR between generic bitgrids and returns the allocated result
+Method      | Z0.BitGrid.xnor``1(Z0.BitGrid16{``0},Z0.BitGrid16{``0})               | Computes the bitwise XNOR between generic bitgrids
+Method      | Z0.BitGrid.xnor``1(Z0.BitGrid32{``0},Z0.BitGrid32{``0})               | Computes the bitwise XNOR between generic bitgrids
+Method      | Z0.BitGrid.xnor``1(Z0.BitGrid64{``0},Z0.BitGrid64{``0})               | Computes the bitwise XNOR between generic bitgrids
+Method      | Z0.BitGrid.xnor``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)| Computes the bitwise XNOR between generic bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.xnor``3(Z0.BitGrid32{``0,``1,``2},Z0.BitGrid32{``0,``1,``2})| Computes the bitwise XNOR between natural bitgrids
+Method      | Z0.BitGrid.xnor``3(Z0.BitGrid64{``0,``1,``2},Z0.BitGrid64{``0,``1,``2})| Computes the bitwise XNOR between natural bitgrids
+Method      | Z0.BitGrid.xnor``3(Z0.BitGrid128{``0,``1,``2}@,Z0.BitGrid128{``0,``1,``2}@)| Computes the bitwise XNOR between natural bitgrids
+Method      | Z0.BitGrid.xnor``3(Z0.BitGrid256{``0,``1,``2}@,Z0.BitGrid256{``0,``1,``2}@)| Computes the bitwise XNOR between 256-bit fixed-width natural bitgrids
+Method      | Z0.BitGrid.xnor``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)| Computes the bitwise XNOR between natural bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.xnor``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@) | Computes the bitwise XNOR between generic bitgrids and returns the allocated result
+Method      | Z0.BitGrid.xor``1(Z0.BitGrid16{``0},Z0.BitGrid16{``0})                | Computes the bitwise xor between generic bitgrids
+Method      | Z0.BitGrid.xor``1(Z0.BitGrid32{``0},Z0.BitGrid32{``0})                | Computes the bitwise xor between generic bitgrids
+Method      | Z0.BitGrid.xor``1(Z0.BitGrid64{``0},Z0.BitGrid64{``0})                | Computes the bitwise xor between generic bitgrids
+Method      | Z0.BitGrid.xor``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@,Z0.BitGrid{``0}@) | Computes the bitwise XOR between generic bitgrids and stores the result to a caller-supplied target
+Method      | Z0.BitGrid.xor``3(Z0.BitGrid16{``0,``1,``2},Z0.BitGrid16{``0,``1,``2})| Computes the bitwise xor between natural bitgrids
+Method      | Z0.BitGrid.xor``3(Z0.BitGrid32{``0,``1,``2},Z0.BitGrid32{``0,``1,``2})| Computes the bitwise xor between natural bitgrids
+Method      | Z0.BitGrid.xor``3(Z0.BitGrid64{``0,``1,``2},Z0.BitGrid64{``0,``1,``2})| Computes the bitwise xor between natural bitgrids
+Method      | Z0.BitGrid.xor``3(Z0.BitGrid128{``0,``1,``2}@,Z0.BitGrid128{``0,``1,``2}@)| Computes the bitwise xor between natural bitgrids
+Method      | Z0.BitGrid.xor``3(Z0.BitGrid256{``0,``1,``2}@,Z0.BitGrid256{``0,``1,``2}@)| Computes the bitwise xor between natural bitgrids
+Method      | Z0.BitGrid.xor``3(Z0.SubGrid256{``0,``1,``2}@,Z0.SubGrid256{``0,``1,``2}@)| Computes the bitwise xor between subgrids
+Method      | Z0.BitGrid.xor``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)| Computes the bitwise xor unfixed natural bitgrids
+Method      | Z0.BitGrid.xor``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@)  | Computes the bitwise xor between natural dynamic bitgrids
+Method      | Z0.BitGrid.rotl``1(Z0.BitGrid16{``0},System.Byte)                     | Circulates grid content clockwise
+Method      | Z0.BitGrid.rotl``1(Z0.BitGrid32{``0},System.Byte)                     | Circulates grid content clockwise
+Method      | Z0.BitGrid.rotl``1(Z0.BitGrid64{``0},System.Byte)                     | Circulates grid content clockwise
+Method      | Z0.BitGrid.bitstring``1(Z0.BitGrid16{``0})                            | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.BitGrid.bitstring``1(Z0.BitGrid32{``0})                            | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.BitGrid.bitstring``1(Z0.BitGrid64{``0})                            | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.BitGrid.bitstring``3(Z0.BitGrid16{``0,``1,``2})                    | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.BitGrid.bitstring``3(Z0.BitGrid32{``0,``1,``2})                    | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.BitGrid.bitstring``3(Z0.BitGrid64{``0,``1,``2})                    | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.BitGrid.bitstring``3(Z0.BitGrid128{``0,``1,``2}@)                  | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.BitGrid.bitstring``3(Z0.BitGrid256{``0,``1,``2}@)                  | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.BitGrid.bitstring``3(Z0.BitGrid{``0,``1,``2}@)                     | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.BitGrid.bitstring``1(Z0.BitGrid{``0}@)                             | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.BitGrid.bitvector``3(Z0.BitGrid16{``0,``1,``2})                    | Presents a fixed 16-bit grid as a 16-bit bitvector
+Method      | Z0.BitGrid.bitvector``3(Z0.BitGrid32{``0,``1,``2})                    | Presents a fixed 32-bit grid as a 32-bit bitvector
+Method      | Z0.BitGrid.bitvector``3(Z0.BitGrid64{``0,``1,``2})                    | Presents a fixed 64-bit grid as a 64-bit bitvector
+Method      | Z0.BitGrid.bitvector``3(Z0.BitGrid128{``0,``1,``2})                   | Presents a fixed 128-bit grid as a 128-bit bitvector
+Method      | Z0.BitGrid.alloc``1(System.Int32,System.Int32,``0)                    | Allocates a zero-filled generic bitgrid
+Method      | Z0.BitGrid.alloc``1(Z0.N16)                                           | Creates a zero-filled 16-bit grid of caller-interpreted dimension
+Method      | Z0.BitGrid.alloc``1(Z0.N32)                                           | Creates a zero-filled 32-bit grid of caller-interpreted dimension
+Method      | Z0.BitGrid.alloc``1(Z0.N64)                                           | Creates a zero-filled 64-bit grid of caller-interpreted dimension
+Method      | Z0.BitGrid.alloc``1(Z0.N16,Z0.N1,Z0.N16,``0)                          | Allocates a zero-filled 1x16 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N16,Z0.N16,Z0.N1,``0)                          | Allocates a zero-filled 16x1 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N16,Z0.N2,Z0.N8,``0)                           | Allocates a zero-filled 2x8 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N16,Z0.N8,Z0.N2,``0)                           | Allocates a zero-filled 8x2 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N16,Z0.N4,Z0.N4,``0)                           | Allocates a zero-filled 4x4 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N32,Z0.N1,Z0.N32,``0)                          | Allocates a zero-filled 1x32 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N32,Z0.N32,Z0.N1,``0)                          | Allocates a zero-filled 32x1 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N32,Z0.N16,Z0.N2,``0)                          | Allocates a zero-filled 16x2 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N32,Z0.N8,Z0.N4,``0)                           | Allocates a zero-filled 8x4 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N32,Z0.N4,Z0.N8,``0)                           | Allocates a zero-filled 4x8 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N64,Z0.N1,Z0.N64,``0)                          | Allocates a zero-filled 1x64 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N64,Z0.N64,Z0.N1,``0)                          | Allocates a zero-filled 64x1 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N64,Z0.N2,Z0.N32,``0)                          | Allocates a zero-filled 2x32 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N64,Z0.N32,Z0.N2,``0)                          | Allocates a zero-filled 32x2 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N64,Z0.N4,Z0.N16,``0)                          | Allocates a zero-filled 4x16 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N64,Z0.N16,Z0.N4,``0)                          | Allocates a zero-filled 16x4 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N64,Z0.N8,Z0.N8,``0)                           | Allocates a zero-filled 8x8 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N128,Z0.N1,Z0.N128,``0)                        | Allocates a zero-filled 1x128 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N128,Z0.N128,Z0.N1,``0)                        | Allocates a zero-filled 128x1 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N128,Z0.N2,Z0.N64,``0)                         | Allocates a zero-filled 2x64 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N128,Z0.N64,Z0.N2,``0)                         | Allocates a zero-filled 64x2 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N128,Z0.N4,Z0.N32,``0)                         | Allocates a zero-filled 4x32 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N128,Z0.N32,Z0.N4,``0)                         | Allocates a zero-filled 32x4 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N128,Z0.N8,Z0.N16,``0)                         | Allocates a zero-filled 8x16 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N128,Z0.N16,Z0.N8,``0)                         | Allocates a zero-filled 16x8 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N256,Z0.N1,Z0.N256,``0)                        | Allocates a zero-filled 1x256 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N256,Z0.N256,Z0.N1,``0)                        | Allocates a zero-filled 256x1 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N256,Z0.N2,Z0.N128,``0)                        | Allocates a zero-filled 2x128 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N256,Z0.N128,Z0.N2,``0)                        | Allocates a zero-filled 128x2 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N256,Z0.N4,Z0.N64,``0)                         | Allocates a zero-filled 4x64 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N256,Z0.N64,Z0.N4,``0)                         | Allocates a zero-filled 64x4 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N256,Z0.N8,Z0.N32,``0)                         | Allocates a zero-filled 8x32 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N256,Z0.N32,Z0.N8,``0)                         | Allocates a zero-filled 32x8 grid
+Method      | Z0.BitGrid.alloc``1(Z0.N256,Z0.N16,Z0.N16,``0)                        | Allocates a zero-filled 16x16 grid
+Method      | Z0.BitGrid.alloc``3(``0,``1,``2)                                      | Allocates a natural bitgrid
+Method      | Z0.BitGrid.alloc16``3(``0,``1,``2)                                    | Creates a zero-filled 16-bit grid of natural dimensions
+Method      | Z0.BitGrid.alloc32``3(``0,``1,``2)                                    | Creates a zero-filled 32-bit grid of natural dimensions
+Method      | Z0.BitGrid.alloc64``3(``0,``1,``2)                                    | Creates a zero-filled 64-bit grid of natural dimensions
+Method      | Z0.BitGrid.alloc128``3(``0,``1,``2)                                   | Creates a zero-filled 128-bit grid of natural dimensions
+Method      | Z0.BitGrid.alloc256``3(``0,``1,``2)                                   | Creates a zero-filled 256-bit grid of natural dimensions
+Method      | Z0.BitGrid.broadcast``1(``0,Z0.BitGrid{``0}@)                         | Fills a caller-allocated generic grid
+Method      | Z0.BitGrid.broadcast``3(``2,Z0.BitGrid32{``0,``1,``2}@)               | Transmits the content of a single cell to all cells in a grid
+Method      | Z0.BitGrid.broadcast``3(``2,Z0.BitGrid64{``0,``1,``2}@)               | Transmits the content of a single cell to all cells in a grid
+Method      | Z0.BitGrid.broadcast``3(``2,Z0.BitGrid128{``0,``1,``2}@)              | Transmits the content of a single cell to all cells in a grid
+Method      | Z0.BitGrid.broadcast``3(``2,Z0.BitGrid256{``0,``1,``2}@)              | Transmits the content of a single cell to all cells in a grid
+Method      | Z0.BitGrid.broadcast``3(``2,Z0.BitGrid{``0,``1,``2}@)                 | Fills a caller-allocated natural grid
+Method      | Z0.BitGrid.init``1(Z0.N16,``0)                                        | Creates a 66-bit generic grid initialized with a specified fill-value
+Method      | Z0.BitGrid.init``1(Z0.N32,``0)                                        | Creates a 32-bit generic grid initialized with a specified fill-value
+Method      | Z0.BitGrid.init``1(Z0.N64,``0)                                        | Creates a 64-bit generic grid initialized with a specified fill-value
+Method      | Z0.BitGrid.init``1(Z0.N16,Z0.N1,Z0.N16,``0)                           | Creates a populated 1x16 grid
+Method      | Z0.BitGrid.init``1(Z0.N16,Z0.N16,Z0.N1,``0)                           | Creates a populated 16x1 grid
+Method      | Z0.BitGrid.init``1(Z0.N16,Z0.N2,Z0.N8,``0)                            | Creates a populated 2x8 grid
+Method      | Z0.BitGrid.init``1(Z0.N16,Z0.N8,Z0.N2,``0)                            | Creates a populated 8x2 grid
+Method      | Z0.BitGrid.init``1(Z0.N16,Z0.N4,Z0.N4,``0)                            | Creates a populated 4x4 grid
+Method      | Z0.BitGrid.init``1(Z0.N32,Z0.N1,Z0.N32,``0)                           | Creates a populated 1x32 grid
+Method      | Z0.BitGrid.init``1(Z0.N32,Z0.N32,Z0.N1,``0)                           | Creates a populated 32x1 grid
+Method      | Z0.BitGrid.init``1(Z0.N32,Z0.N16,Z0.N2,``0)                           | Creates a populated 16x2 grid
+Method      | Z0.BitGrid.init``1(Z0.N32,Z0.N8,Z0.N4,``0)                            | Creates a populated 8x4 grid
+Method      | Z0.BitGrid.init``1(Z0.N32,Z0.N4,Z0.N8,``0)                            | Creates a populated 4x8 grid
+Method      | Z0.BitGrid.init``1(Z0.N64,Z0.N1,Z0.N64,``0)                           | Creates a populated 1x64 grid
+Method      | Z0.BitGrid.init``1(Z0.N64,Z0.N64,Z0.N1,``0)                           | Creates a populated 64x1 grid
+Method      | Z0.BitGrid.init``1(Z0.N64,Z0.N2,Z0.N32,``0)                           | Creates a populated 2x32 grid
+Method      | Z0.BitGrid.init``1(Z0.N64,Z0.N32,Z0.N2,``0)                           | Creates a populated 32x2 grid
+Method      | Z0.BitGrid.init``1(Z0.N64,Z0.N4,Z0.N16,``0)                           | Creates a populated 4x16 grid
+Method      | Z0.BitGrid.init``1(Z0.N64,Z0.N16,Z0.N4,``0)                           | Creates a populated 16x4 grid
+Method      | Z0.BitGrid.init``1(Z0.N64,Z0.N8,Z0.N8,``0)                            | Creates a populated 8x8 grid
+Method      | Z0.BitGrid.init``1(Z0.N128,Z0.N1,Z0.N128,``0)                         | Creates a populated 1x128 grid
+Method      | Z0.BitGrid.init``1(Z0.N128,Z0.N128,Z0.N1,``0)                         | Creates a populated 128x1 grid
+Method      | Z0.BitGrid.init``1(Z0.N128,Z0.N2,Z0.N64,``0)                          | Creates a populated 2x64 grid
+Method      | Z0.BitGrid.init``1(Z0.N128,Z0.N64,Z0.N2,``0)                          | Creates a populated 64x2 grid
+Method      | Z0.BitGrid.init``1(Z0.N128,Z0.N4,Z0.N32,``0)                          | Creates a populated 4x32 grid
+Method      | Z0.BitGrid.init``1(Z0.N128,Z0.N32,Z0.N4,``0)                          | Creates a populated 32x4 grid
+Method      | Z0.BitGrid.init``1(Z0.N128,Z0.N8,Z0.N16,``0)                          | Creates a populated 8x16 grid
+Method      | Z0.BitGrid.init``1(Z0.N128,Z0.N16,Z0.N8,``0)                          | Creates a populated 16x8 grid
+Method      | Z0.BitGrid.init``1(Z0.N256,Z0.N1,Z0.N256,``0)                         | Creates a populated 1x256 grid
+Method      | Z0.BitGrid.init``1(Z0.N256,Z0.N256,Z0.N1,``0)                         | Creates a populated 256x1 grid
+Method      | Z0.BitGrid.init``1(Z0.N256,Z0.N2,Z0.N128,``0)                         | Creates a populated 2x128 grid
+Method      | Z0.BitGrid.init``1(Z0.N256,Z0.N128,Z0.N2,``0)                         | Creates a populated 128x2 grid
+Method      | Z0.BitGrid.init``1(Z0.N256,Z0.N4,Z0.N64,``0)                          | Creates a populated 4x64 grid
+Method      | Z0.BitGrid.init``1(Z0.N256,Z0.N64,Z0.N4,``0)                          | Creates a populated 64x4 grid
+Method      | Z0.BitGrid.init``1(Z0.N256,Z0.N8,Z0.N32,``0)                          | Creates a populated 8x32 grid
+Method      | Z0.BitGrid.init``1(Z0.N256,Z0.N32,Z0.N8,``0)                          | Creates a populated 32x8 grid
+Method      | Z0.BitGrid.init``1(Z0.N256,Z0.N16,Z0.N16,``0)                         | Creates a populated 16x16 grid
+Method      | Z0.BitGrid.init``1(System.Int32,System.Int32,``0)                     | Creates a dynamically-sized grid of soft dimensions filled with specified data
+Method      | Z0.BitGrid.init``3(``0,``1,``2)                                       | Creates a dynamically-sized grid of natural dimensions filled with specified data
+Method      | Z0.BitGrid.init16``1(System.UInt16)                                   | Initializes 16-bit grid
+Method      | Z0.BitGrid.init32``1(System.UInt32)                                   | Initializes 32-bit grid
+Method      | Z0.BitGrid.init64``1(System.UInt64)                                   | Initializes 64-bit grid
+Method      | Z0.BitGrid.init16``3(``0,``1,``2)                                     | Initializes a 128-bit grid of natural dimensions
+Method      | Z0.BitGrid.init32``3(``0,``1,``2)                                     | Initializes a 32-bit grid of natural dimensions
+Method      | Z0.BitGrid.init64``3(``0,``1,``2)                                     | Initializes a 64-bit grid of natural dimensions
+Method      | Z0.BitGrid.init128``3(``0,``1,``2)                                    | Initializes a 128-bit grid of natural dimensions
+Method      | Z0.BitGrid.init256``3(``0,``1,``2)                                    | Initializes a 256-bit grid of natural dimensions
+Method      | Z0.BitGrid.load``1(Z0.Block16{``0}@,Z0.N1,Z0.N16)                     | Loads a 1x16 grid from the first 16-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block16{``0}@,Z0.N16,Z0.N1)                     | Loads a 16x1 grid from the first 16-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block16{``0}@,Z0.N2,Z0.N8)                      | Loads a 2x8 grid from the first 16-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block16{``0}@,Z0.N8,Z0.N2)                      | Loads a 8x2 grid from the first 16-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block16{``0}@,Z0.N4,Z0.N4)                      | Loads a 4x4 grid from the first 16-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block32{``0}@,Z0.N1,Z0.N32)                     | Loads a 1x32 grid from the first 32-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block32{``0}@,Z0.N32,Z0.N1)                     | Loads a 32x1 grid from the first 32-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block32{``0}@,Z0.N2,Z0.N16)                     | Loads a 2x16 grid from the first 32-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block32{``0}@,Z0.N16,Z0.N2)                     | Loads a 16x2 grid from the first 32-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block32{``0}@,Z0.N4,Z0.N8)                      | Loads a 4x8grid from the first 32-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block32{``0}@,Z0.N8,Z0.N4)                      | Loads a 8x4 grid from the first 32-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block64{``0}@,Z0.N1,Z0.N64)                     | Loads a 1x64 grid from the first 64-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block64{``0}@,Z0.N64,Z0.N1)                     | Loads a 64x1 grid from the first 64-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block64{``0}@,Z0.N2,Z0.N32)                     | Loads a 2x32 grid from the first 64-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block64{``0}@,Z0.N32,Z0.N2)                     | Loads a 32x2 grid from the first 64-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block64{``0}@,Z0.N4,Z0.N16)                     | Loads a 4x16 grid from the first 64-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block64{``0}@,Z0.N16,Z0.N4)                     | Loads a 16x4 grid from the first 64-bit source block
+Method      | Z0.BitGrid.load``1(Z0.Block64{``0}@,Z0.N8,Z0.N8)                      | Loads an 8x8 grid from the first 64-bit source block
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N1,Z0.N128)| Loads a 1x128 grid from a 128-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N128,Z0.N1)| Forms a 128x1 grid from a 128-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N2,Z0.N64)| Forms a 2x64 grid from a 128-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N64,Z0.N2)| Forms a 64x2 grid from a 128-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N4,Z0.N32)| Forms a 4x32 grid from a 128-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N32,Z0.N4)| Forms a 32x4 grid from a 128-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N8,Z0.N16)| Forms a 8x16 grid from a 128-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N16,Z0.N8)| Forms a 16x8 grid from a 128-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N1,Z0.N256)| Forms a 1x256 grid from a 256-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N256,Z0.N1)| Forms a 256x1 grid from a 256-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N2,Z0.N128)| Forms a 2x128 grid from a 256-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N128,Z0.N2)| Forms a 128x2 grid from a 256-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N4,Z0.N64)| Forms a 4x64 grid from a 256-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N64,Z0.N4)| Forms a 64x4 grid from a 256-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N8,Z0.N32)| Forms a 8x32 grid from a 256-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N32,Z0.N8)| Loads a 32x8 grid from a 256-bit vector
+Method      | Z0.BitGrid.load``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N16,Z0.N16)| Loads a 16x16 grid from a 256-bit vector
+Method      | Z0.BitGrid.load``1(Z0.Block256{``0}@,System.UInt16,System.UInt16)     | Loads a generic bitgrid from a 256-bit block
+Method      | Z0.BitGrid.load``3(Z0.Block256{``2},``0,``1,``2)                      | Loads a natural bitgrid from a span
+Method      | Z0.BitGrid.parse``1(Z0.BitString,Z0.W16)                              | Hydrates a fixed-width 32-bit dimensionless grid from a bitstring
+Method      | Z0.BitGrid.parse``1(Z0.BitString,Z0.N32,System.Int32,System.Int32,``0)| Hydrates a fixed-width 32-bit dimensionless grid from a bitstring
+Method      | Z0.BitGrid.parse``1(Z0.BitString,Z0.N64,System.Int32,System.Int32,``0)| Hydrates a fixed-width 64-bit dimensionless grid from a bitstring
+Method      | Z0.BitGrid.parse``3(Z0.BitString,Z0.N16,``0,``1,``2)                  | Hydrates a fixed-width natural bitgrid from a bitstring
+Method      | Z0.BitGrid.parse``3(Z0.BitString,Z0.N32,``0,``1,``2)                  | Hydrates a fixed-width natural bitgrid from a bitstring
+Method      | Z0.BitGrid.parse``3(Z0.BitString,Z0.N64,``0,``1,``2)                  | Hydrates a 64-bit natural bitgrid from a bitstring
+Method      | Z0.BitGrid.parse``3(Z0.BitString,Z0.N128,``0,``1,``2)                 | Hydrates a 128-bit natural bitgrid from a bitstring
+Method      | Z0.BitGrid.parse``3(Z0.BitString,Z0.N256,``0,``1,``2)                 | Hydrates a 256-bit natural bitgrid from a bitstring
+Method      | Z0.BitGrid.slice``1(Z0.BitGrid32{``0},System.Byte,System.Byte)        | Extracts a sequence of bits
+Method      | Z0.BitGrid.slice``1(Z0.BitGrid64{``0},System.Byte,System.Byte)        | Extracts a sequence of bits
+Method      | Z0.BitGrid.store``1(System.Runtime.Intrinsics.Vector256{``0},Z0.BitGrid{``0}@,System.Int32)| Stores a 256-bit cpu vector to an index-identified block
+Method      | Z0.BitGrid.store``3(Z0.BitGrid128{``0,``1,``2}@,Z0.Block128{``2}@)    | Stores a 128-bit bitgrid to a caller-supplied target
+Method      | Z0.BitGrid.store``3(Z0.BitGrid128{``0,``1,``2}@)                      | Allocates and stores a 128-bit bitgrid to a blocked span
+Method      | Z0.BitGrid.store``3(Z0.BitGrid256{``0,``1,``2}@,Z0.Block256{``2}@)    | Stores a 256-bit bitgrid to a caller-supplied target
+Method      | Z0.BitGrid.store``3(Z0.BitGrid256{``0,``1,``2}@)                      | Allocates and stores a 256-bit bitgrid to a blocked span
+Method      | Z0.BitGrid.store``3(System.Runtime.Intrinsics.Vector256{``2},Z0.BitGrid{``0,``1,``2}@,System.Int32)| Stores a 256-bit cpu vector to an index-identified block
+Method      | Z0.BitGrid.cell``1(``0@,System.Int32)                                 | Reads/manipulates a cell identified by a linear bit position
+Method      | Z0.BitGrid.cell``1(Z0.BitGrid{``0}@,System.Int32)                     | Reads/manipulates a cell identified by a linear bit position
+Method      | Z0.BitGrid.cell``3(Z0.BitGrid{``0,``1,``2}@,System.Int32)             | Reads/manipulates a cell identified by a linear bit position
+Method      | Z0.BitGrid.col``1(Z0.BitGrid16{Z0.N1,Z0.N16,``0},System.Int32)        | Extracts an index-identifed 1-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid16{Z0.N2,Z0.N8,``0},System.Int32)         | Extracts an index-identifed 2-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid16{Z0.N8,Z0.N2,``0},System.Int32)         | Extracts an index-identifed 8-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid16{Z0.N4,Z0.N4,``0},System.Int32)         | Extracts an index-identifed 4-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid32{Z0.N1,Z0.N32,``0},System.Int32)        | Extracts an index-identifed 1-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid32{Z0.N2,Z0.N16,``0},System.Int32)        | Extracts an index-identifed 2-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid32{Z0.N4,Z0.N8,``0},System.Int32)         | Extracts an index-identifed 4-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid32{Z0.N8,Z0.N4,``0},System.Int32)         | Extracts an index-identifed 8-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid32{Z0.N16,Z0.N2,``0},System.Int32)        | Extracts an index-identifed 16-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid64{Z0.N1,Z0.N64,``0},System.Int32)        | Extracts an index-identifed 1-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid64{Z0.N2,Z0.N32,``0},System.Int32)        | Extracts an index-identifed 2-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid64{Z0.N4,Z0.N16,``0},System.Int32)        | Extracts an index-identifed 4-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid64{Z0.N8,Z0.N8,``0},System.Int32)         | Extracts an index-identifed 8-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid64{Z0.N16,Z0.N4,``0},System.Int32)        | Extracts an index-identifed 16-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid64{Z0.N32,Z0.N2,``0},System.Int32)        | Extracts an index-identifed 32-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid64{Z0.N64,Z0.N1,``0},System.Int32)        | Presents grid content as a bitvector
+Method      | Z0.BitGrid.col``1(Z0.BitGrid128{Z0.N16,Z0.N8,``0}@,System.Int32)      | Extracts an index-identifed 16-bit grid column
+Method      | Z0.BitGrid.col``1(Z0.BitGrid256{Z0.N32,Z0.N8,``0}@,System.Int32)      | Extracts an index-identifed 32-bit grid column
+Method      | Z0.BitGrid.define(Z0.Perm4L)                                          | Derives a 4x4 bitgrid from a permutation of length 4
+Method      | Z0.BitGrid.dimensions(Z0.N8)                                          | Enumerates the valid dimensions for a 16-bit fixed bitgrid
+Method      | Z0.BitGrid.dimensions(Z0.N16)                                         | Enumerates the valid dimensions for a 16-bit fixed bitgrid
+Method      | Z0.BitGrid.dimensions(Z0.N32)                                         | Enumerates the valid dimensions for a 32-bit fixed bitgrid
+Method      | Z0.BitGrid.dimensions(Z0.N64)                                         | Enumerates the valid dimensions for a 64-bit fixed bitgrid
+Method      | Z0.BitGrid.dimensions(Z0.N128)                                        | Enumerates the valid dimensions for a 128-bit fixed bitgrid
+Method      | Z0.BitGrid.dimensions(Z0.N256)                                        | Enumerates the valid dimensions for a 256-bit fixed bitgrid
+Method      | Z0.BitGrid.dimension``3(``0,``1,``2)                                  | Computes dimension information for a grid predicated on parametric types
+Method      | Z0.BitGrid.dimension``4(``0,``1,``2,``3)                              | Computes dimension information for a blocked grid predicated on parametric types
+Method      | Z0.BitGrid.p2dimensions``1                                            | Enunerates the valid grid dimensions where the total bit width is a power of 2
+Method      | Z0.BitGrid.p2dimensions(System.UInt64)                                | Enunerates the valid grid dimensions where the total bit width is a power of 2
+Method      | Z0.BitGrid.export``3(Z0.BitGrid16{``0,``1,``2},System.Boolean,System.String)| Exports a grid report to a file
+Method      | Z0.BitGrid.export``3(Z0.BitGrid32{``0,``1,``2},System.Boolean,System.String)| Exports a grid report to a file
+Method      | Z0.BitGrid.export``3(Z0.BitGrid64{``0,``1,``2},System.Boolean,System.String)| Exports a grid report to a file
+Method      | Z0.BitGrid.export``3(Z0.BitGrid128{``0,``1,``2},System.Boolean,System.String)| Exports a grid report to a file
+Method      | Z0.BitGrid.export``3(Z0.BitGrid256{``0,``1,``2},System.Boolean,System.String)| Exports a grid report to a file
+Method      | Z0.BitGrid.export``3(Z0.SubGrid16{``0,``1,``2},Z0.FilePath,System.Boolean,System.String)| Exports a grid report to a file
+Method      | Z0.BitGrid.export``3(Z0.SubGrid32{``0,``1,``2},System.Boolean,System.String)| Exports a grid report to a file
+Method      | Z0.BitGrid.export``3(Z0.SubGrid64{``0,``1,``2},Z0.FilePath,System.Boolean,System.String)| Exports a grid report to a file
+Method      | Z0.BitGrid.export``3(Z0.SubGrid128{``0,``1,``2},Z0.FilePath,System.Boolean,System.String)| Exports a grid report to a file
+Method      | Z0.BitGrid.export``3(Z0.SubGrid256{``0,``1,``2},System.Boolean,System.String)| Exports a grid report to a file
+Method      | Z0.BitGrid.writer``4(System.String,``0,``1,``2,``3)                   | Creates a grid writer predicated on type parameters
+Method      | Z0.BitGrid.export``2(System.UInt16,System.Boolean,System.String)      | Exports grid data to a file
+Method      | Z0.BitGrid.export``2(System.UInt32,System.Boolean,System.String)      | Exports grid data to a file
+Method      | Z0.BitGrid.export``2(System.UInt64,System.Boolean,System.String)      | Exports grid data to a file
+Method      | Z0.BitGrid.export``3(System.Runtime.Intrinsics.Vector128{``2},System.Boolean,System.String)| Exports grid data to a file
+Method      | Z0.BitGrid.export``3(System.Runtime.Intrinsics.Vector256{``2},System.Boolean,System.String)| Exports grid data to a file
+Method      | Z0.BitGrid.first``3(Z0.Block16{``2}@,``0,``1)                         | Loads a fixed-width natural bitgrid the first block in the source
+Method      | Z0.BitGrid.first``3(Z0.Block32{``2}@,``0,``1)                         | Loads a fixed-width natural bitgrid the first block in the source
+Method      | Z0.BitGrid.first``3(Z0.Block64{``2}@,``0,``1)                         | Loads a fixed-width natural bitgrid the first block in the source
+Method      | Z0.BitGrid.first``3(Z0.Block128{``2}@,``0,``1)                        | Loads a fixed-width natural bitgrid the first block in the source
+Method      | Z0.BitGrid.first``3(Z0.Block256{``2}@,``0,``1)                        | Loads a fixed-width natural bitgrid the first block in the source
+Method      | Z0.BitGrid.gridmap(Z0.GridSpec@)                                      | Calculates a grid layout from a specification
+Method      | Z0.BitGrid.gridmap(System.UInt16,System.UInt16,System.UInt16)         | Defines a grid map predicated row count, col count and storage segment bit width width
+Method      | Z0.BitGrid.gridmap``1(System.UInt16,System.UInt16)                    | Defines a grid map predicated row count, col count and the bit width of parametric type
+Method      | Z0.BitGrid.gridmap``3(``0,``1,``2)                                    | Defines a grid map predicated on type parameters
+Method      | Z0.BitGrid.gridstats(Z0.GridMap)                                      | Calcuates grid map statistics
+Method      | Z0.BitGrid.gridstats``1(System.UInt16,System.UInt16)                  | Computes grid map summary information
+Method      | Z0.BitGrid.gridstats(System.UInt16,System.UInt16,System.UInt16)       | Computes grid map summary information
+Method      | Z0.BitGrid.loadhi``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N1,Z0.N64)| Forms a 1x64 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadhi``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N64,Z0.N1)| Forms a 64x1 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadhi``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N2,Z0.N32)| Forms a 2x32 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadhi``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N32,Z0.N2)| Forms a 32x2 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadhi``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N4,Z0.N16)| Forms a 4x16 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadhi``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N16,Z0.N4)| Forms a 16x4 from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadhi``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N8,Z0.N8)| Forms a 8x8 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadlo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N1,Z0.N64)| Forms a 1x64 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadlo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N64,Z0.N1)| Forms a 64x1 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadlo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N2,Z0.N32)| Forms a 2x32 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadlo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N32,Z0.N2)| Forms a 32x2 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadlo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N4,Z0.N16)| Forms a 4x16 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadlo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N16,Z0.N4)| Forms a 16x4 from the lower 64 bits of a vector
+Method      | Z0.BitGrid.loadlo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N8,Z0.N8)| Forms a 8x8 grid from the lower 64 bits of a vector
+Method      | Z0.BitGrid.ones``1(Z0.W16)                                            | Retuns a one-filled 16-bit bitgrid
+Method      | Z0.BitGrid.ones``1(Z0.W32)                                            | Retuns a one-filled bitgrid
+Method      | Z0.BitGrid.ones``1(Z0.N64)                                            | Retuns a one-filled bitgrid
+Method      | Z0.BitGrid.ones``3(Z0.N16,``0,``1,``2)                                | Returns a 1-filled natural bitgrid
+Method      | Z0.BitGrid.ones``3(Z0.N32,``0,``1,``2)                                | Returns a 1-filled natural bitgrid
+Method      | Z0.BitGrid.ones``3(Z0.N64,``0,``1,``2)                                | Returns a 1-filled natural bitgrid
+Method      | Z0.BitGrid.ones``3(Z0.N128,``0,``1,``2)                               | Returns a 1-filled natural bitgrid
+Method      | Z0.BitGrid.ones``3(Z0.N256,``0,``1,``2)                               | Returns a 1-filled natural bitgrid
+Method      | Z0.BitGrid.readcell``1(``0@,System.Int32)                             | Reads a cell determined by a linear bit position
+Method      | Z0.BitGrid.readbit``2(``0,``1@,System.Int32,System.Int32)             | Reads a bit from a grid
+Method      | Z0.BitGrid.readbit``1(System.Int32,``0@,System.Int32,System.Int32)    | Reads a bit from a grid
+Method      | Z0.BitGrid.report``3(Z0.BitGrid16{``0,``1,``2},System.Boolean,System.String)| Formats a grid with a title and the option to display row indices
+Method      | Z0.BitGrid.report``3(Z0.BitGrid32{``0,``1,``2},System.Boolean,System.String)| Formats a grid with a title and the option to display row indices
+Method      | Z0.BitGrid.report``3(Z0.BitGrid64{``0,``1,``2},System.Boolean,System.String)| Formats a grid with a title and the option to display row indices
+Method      | Z0.BitGrid.report``3(Z0.BitGrid128{``0,``1,``2},System.Boolean,System.String)| Formats a grid with a title and the option to display row indices
+Method      | Z0.BitGrid.report``3(Z0.BitGrid256{``0,``1,``2},System.Boolean,System.String)| Formats a grid with a title and the option to display row indices
+Method      | Z0.BitGrid.report``3(Z0.SubGrid16{``0,``1,``2},System.Boolean,System.String)| Formats a grid with a title and the option to display row indices
+Method      | Z0.BitGrid.report``3(Z0.SubGrid32{``0,``1,``2},System.Boolean,System.String)| Formats a grid with a title and the option to display row indices
+Method      | Z0.BitGrid.report``3(Z0.SubGrid64{``0,``1,``2},System.Boolean,System.String)| Formats a grid with a title and the option to display row indices
+Method      | Z0.BitGrid.report``3(Z0.SubGrid128{``0,``1,``2},System.Boolean,System.String)| Formats a grid with a title and the option to display row indices
+Method      | Z0.BitGrid.report``3(Z0.SubGrid256{``0,``1,``2},System.Boolean,System.String)| Formats a grid with a title and the option to display row indices
+Method      | Z0.BitGrid.report``2(System.UInt16,System.Boolean,System.String)      | Renders grid data
+Method      | Z0.BitGrid.report``2(System.UInt32,System.Boolean,System.String)      | Renders grid data
+Method      | Z0.BitGrid.report``2(System.UInt64,System.Boolean,System.String)      | Renders grid data
+Method      | Z0.BitGrid.report``3(System.Runtime.Intrinsics.Vector128{``2},System.Boolean,System.String)| Renders grid data
+Method      | Z0.BitGrid.report``3(System.Runtime.Intrinsics.Vector256{``2},System.Boolean,System.String)| Renders grid data
+Method      | Z0.BitGrid.row``3(Z0.BitGrid16{``0,``1,``2},System.Int32)             | Extracts an index-identified row from a 16-bit grid
+Method      | Z0.BitGrid.row``3(Z0.BitGrid32{``0,``1,``2},System.Int32)             | Extracts an index-identified row from a 32-bit grid
+Method      | Z0.BitGrid.row``3(Z0.BitGrid64{``0,``1,``2},System.Int32)             | Extracts an index-identified row from a 64-bit grid
+Method      | Z0.BitGrid.row``3(Z0.SubGrid16{``0,``1,``2},System.Int32,``1)         | Extracts an index-identified row from a 16-bit subgrid
+Method      | Z0.BitGrid.row``3(Z0.SubGrid32{``1,``0,``2},System.Int32,``0)         | Extracts an index-identified row from a 32-bit subgrid
+Method      | Z0.BitGrid.row``3(Z0.SubGrid64{``0,``1,``2},System.Int32,``1)         | Extracts an index-identified row from a 64-bit subgrid
+Method      | Z0.BitGrid.row``1(Z0.BitGrid128{Z0.N2,Z0.N64,``0}@,System.Int32)      | Extracts an index-identifed 64-bit grid row
+Method      | Z0.BitGrid.row``1(Z0.BitGrid128{Z0.N4,Z0.N32,``0}@,System.Int32)      | Extracts an index-identifed 32-bit grid row
+Method      | Z0.BitGrid.row``1(Z0.BitGrid128{Z0.N8,Z0.N16,``0}@,System.Int32)      | Extracts an index-identifed 16-bit grid row
+Method      | Z0.BitGrid.row``1(Z0.BitGrid128{Z0.N16,Z0.N8,``0}@,System.Int32)      | Extracts an index-identifed 8-bit grid row
+Method      | Z0.BitGrid.row``1(Z0.BitGrid128{Z0.N32,Z0.N4,``0}@,System.Int32)      | Extracts an index-identifed 4-bit grid row
+Method      | Z0.BitGrid.row``1(Z0.BitGrid256{Z0.N8,Z0.N32,``0}@,System.Int32)      | Extracts an index-identifed 32-bit grid row
+Method      | Z0.BitGrid.row``1(Z0.BitGrid256{Z0.N32,Z0.N8,``0}@,System.Int32)      | Extracts an index-identifed 8-bit grid row
+Method      | Z0.BitGrid.row``1(Z0.BitGrid256{Z0.N16,Z0.N16,``0}@,System.Int32)     | Extracts an index-identifed 16-bit grid row
+Method      | Z0.BitGrid.row``1(Z0.BitGrid256{Z0.N4,Z0.N64,``0}@,System.Int32)      | Extracts an index-identifed 64-bit grid row
+Method      | Z0.BitGrid.same``1(Z0.BitGrid32{``0},Z0.BitGrid32{``0})               | Returns 1 if the source grids have identical conent and 0 otherwise
+Method      | Z0.BitGrid.same``1(Z0.BitGrid64{``0},Z0.BitGrid64{``0})               | Returns 1 if the source grids have identical conent and 0 otherwise
+Method      | Z0.BitGrid.same``3(Z0.BitGrid128{``0,``1,``2}@,Z0.BitGrid128{``0,``1,``2}@)| Returns 1 if the source grids have identical conent and 0 otherwise
+Method      | Z0.BitGrid.same``3(Z0.BitGrid256{``0,``1,``2}@,Z0.BitGrid256{``0,``1,``2}@)| Returns 1 if the source grids have identical conent and 0 otherwise
+Method      | Z0.BitGrid.same``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@) | Returns 1 if the source grids have identical conent and 0 otherwise
+Method      | Z0.BitGrid.setbit``1(System.Int32,Z0.bit,``0@)                        | Sets the state of a grid bit identified by its linear position
+Method      | Z0.BitGrid.setbit``1(System.Int32,System.Int32,System.Int32,Z0.bit,``0@)| Sets the state of an a coordinate-identified bit
+Method      | Z0.BitGrid.setbit``2(``0,System.Int32,System.Int32,Z0.bit,``1@)       | Sets the state of an a coordinate-identified bit
+Method      | Z0.BitGrid.specify(System.UInt16,System.UInt16,System.UInt16)         | Defines a grid specification predicated on specified row count, col count and bit width
+Method      | Z0.BitGrid.specify``1(System.UInt16,System.UInt16)                    | Defines a grid specification predicated on specified row count, col count and bit width of a parametric type
+Method      | Z0.BitGrid.subgrid``3(Z0.N16,``0,``1,``2)                             | Allocates a 0-filled 16-bit subgrid
+Method      | Z0.BitGrid.subgrid``3(Z0.N16,``2,``0,``1)                             | Allocates a populated 16-bit subgrid
+Method      | Z0.BitGrid.subgrid``3(Z0.N32,``0,``1,``2)                             | Allocates a 0-filled 32-bit subgrid
+Method      | Z0.BitGrid.subgrid``3(Z0.N32,``2,``0,``1)                             | Allocates a populated 32-bit subgrid
+Method      | Z0.BitGrid.subgrid``3(Z0.N64,``0,``1,``2)                             | Allocates a 0-filled 64-bitsubgrid
+Method      | Z0.BitGrid.subgrid``3(Z0.N64,``2,``0,``1)                             | Allocates a populated 64-bit subgrid
+Method      | Z0.BitGrid.subgrid``3(Z0.N128,``0,``1,``2)                            | Allocates a 0-filled 128-bit subgrid
+Method      | Z0.BitGrid.subgrid``3(System.Runtime.Intrinsics.Vector128{``2},``0,``1)| Allocates a populated 128-bit subgrid
+Method      | Z0.BitGrid.subgrid``3(Z0.N256,``0,``1,``2)                            | Allocates a 0-filled 256-bit subgrid
+Method      | Z0.BitGrid.subgrid``3(System.Runtime.Intrinsics.Vector256{``2},``0,``1)| Allocates a populated 256-bit subgrid
+Method      | Z0.BitGrid.title``4(System.String,``0,``1,``2,``3)                    | Defines a grid title suffixed with its signature
+Method      | Z0.BitGrid.sigtext``4(``0,``1,``2,``3)                                | Renders the grid signature as text
+Method      | Z0.BitGrid.vector``1(Z0.BitGrid{``0}@,System.Int32,Z0.N256)           | Loads a 256-bit cpu vector from an index-identified block
+Method      | Z0.BitGrid.vector``3(Z0.BitGrid{``0,``1,``2}@,System.Int32,Z0.N256)   | Loads a 256-bit cpu vector from an index-identified block
+Method      | Z0.BitGridA.negate``1(Z0.BitGrid{``0}@)                               | Computes the two's complement negation of source grid and returns the allocated result
+Method      | Z0.BitGridA.xor``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)                 | Computes the bitwise xor between unfixed generic bitgrids and returns the allocated result
+Method      | Z0.BitGridA.xnor``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)                | Computes the bitwise XNOR between generic bitgrids and returns the allocated result
+Method      | Z0.BitGridA.or``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)                  | Computes the bitwise OR between generic bitgrids and returns the allocated result
+Method      | Z0.BitGridA.nor``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)                 | Computes the bitwise NOR between generic bitgrids and returns the allocated result
+Method      | Z0.BitGridA.and``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)                 | Computes the bitwise AND between generic bitgrids and returns the allocated result
+Method      | Z0.BitGridA.and``3(Z0.BitGrid{``0,``1,``2}@,Z0.BitGrid{``0,``1,``2}@) | Computes the bitwise AND between generic bitgrids and returns the allocated result
+Method      | Z0.BitGridA.nand``1(Z0.BitGrid{``0}@,Z0.BitGrid{``0}@)                | Computes the bitwise NAND between generic bitgrids and returns the allocated result
+Method      | Z0.GridPatterns.exchange``1(Z0.N256,Z0.N16,Z0.N16,``0)                | Defines an anti-identity matrix pattern with ones on the anti-diagonal and zeroes elsewhere
+Method      | Z0.GridLoad.ToBitGrid(Z0.BitMatrix32)                                 | Represents the source matrix as a generic bitgrid of dimension 32x32 over cells of width 32
+Method      | Z0.GridLoad.ToBitGrid(Z0.BitMatrix64)                                 | Represents the source matrix as a generic bitgrid of dimension 64x64 over cells of width 64
+Method      | Z0.GridLoad.ToBitGrid(System.UInt32,Z0.N1,Z0.N32)                     | Represents the source value as a 32-bit natural bitgrid of dimension 1x32
+Method      | Z0.GridLoad.ToBitGrid(System.UInt32,Z0.N32,Z0.N1)                     | Represents the source value as a 32-bit natural bitgrid of dimension 32x1
+Method      | Z0.GridLoad.ToBitGrid(System.UInt32,Z0.N2,Z0.N16)                     | Represents the source value as a 32-bit natural bitgrid of dimension 2x16
+Method      | Z0.GridLoad.ToBitGrid(System.UInt32,Z0.N16,Z0.N2)                     | Represents the source value as a 32-bit natural bitgrid of dimension 16x2
+Method      | Z0.GridLoad.ToBitGrid(System.UInt32,Z0.N4,Z0.N8)                      | Represents the source value as a 32-bit natural bitgrid of dimension 4x8
+Method      | Z0.GridLoad.ToBitGrid(System.UInt32,Z0.N8,Z0.N4)                      | Represents the source value as a 32-bit natural bitgrid of dimension 8x4
+Method      | Z0.GridLoad.ToBitGrid(System.UInt64,Z0.N64,Z0.N1)                     | Represents the source value as a 64-bit natural bitgrid of dimension 64x1
+Method      | Z0.GridLoad.ToBitGrid(System.UInt64,Z0.N1,Z0.N64)                     | Represents the source value as a 64-bit natural bitgrid of dimension 1x64
+Method      | Z0.GridLoad.ToBitGrid(System.UInt64,Z0.N32,Z0.N2)                     | Represents the source value as a 64-bit natural bitgrid of dimension 32x2
+Method      | Z0.GridLoad.ToBitGrid(System.UInt64,Z0.N2,Z0.N32)                     | Represents the source value as a 64-bit natural bitgrid of dimension 2x32
+Method      | Z0.GridLoad.ToBitGrid(System.UInt64,Z0.N16,Z0.N4)                     | Represents the source value as a 64-bit natural bitgrid of dimension 16x4
+Method      | Z0.GridLoad.ToBitGrid(System.UInt64,Z0.N4,Z0.N16)                     | Represents the source value as a 64-bit natural bitgrid of dimension 4x16
+Method      | Z0.GridLoad.ToBitGrid(System.UInt64,Z0.N8,Z0.N8)                      | Represents the source value as a 64-bit natural bitgrid of dimension 8x8
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N1,Z0.N128)| Represents the source vector as a 128-bit natural bitgrid of dimension 1x128
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N128,Z0.N1)| Represents the source vector as a 128-bit natural bitgrid of dimension 128x1
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N2,Z0.N64)| Represents the source vector as a 128-bit natural bitgrid of dimension 2x64
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N64,Z0.N2)| Represents the source vector as a 128-bit natural bitgrid of dimension 64x2
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N4,Z0.N32)| Represents the source vector as a 128-bit natural bitgrid of dimension 4x32
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N32,Z0.N4)| Represents the source vector as a 128-bit natural bitgrid of dimension 32x4
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N8,Z0.N16)| Represents the source vector as a 128-bit natural bitgrid of dimension 8x16
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector128{``0},Z0.N16,Z0.N8)| Represents the source vector as a 128-bit natural bitgrid of dimension 16x8
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N1,Z0.N256)| Represents the source vector as a 256-bit natural bitgrid of dimension 1x256
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N256,Z0.N1)| Represents the source vector as a 256-bit natural bitgrid of dimension 256x1
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N2,Z0.N128)| Represents the source vector as a 256-bit natural bitgrid of dimension 2x128
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N128,Z0.N2)| Represents the source vector as a 256-bit natural bitgrid of dimension 128x2
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N4,Z0.N64)| Represents the source vector as a 256-bit natural bitgrid of dimension 4x64
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N64,Z0.N4)| Represents the source vector as a 256-bit natural bitgrid of dimension 64x4
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N8,Z0.N32)| Represents the source vector as a 256-bit natural bitgrid of dimension 8x32
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N32,Z0.N8)| Represents the source vector as a 256-bit natural bitgrid of dimension 32x8
+Method      | Z0.GridLoad.ToBitGrid``1(System.Runtime.Intrinsics.Vector256{``0},Z0.N16,Z0.N16)| Represents the source vector as a 256-bit natural bitgrid of dimension 16x16
+Method      | Z0.GridLoad.ToBitGrid``1(Z0.BitString,Z0.W16)                         | Hydrates a bitgrid from a bitstring
+Method      | Z0.GridLoad.ToBitGrid``1(Z0.BitString,Z0.N32,System.Int32,System.Int32,``0)| Hydrates a bitgrid from a bitstring
+Method      | Z0.GridLoad.ToBitGrid``1(Z0.BitString,Z0.N64,System.Int32,System.Int32,``0)| Hydrates a bitgrid from a bitstring
+Method      | Z0.GridLoad.ToBitGrid``3(Z0.BitString,Z0.N32,``0,``1,``2)             | Hydrates a bitgrid from a bitstring
+Method      | Z0.GridLoad.ToBitGrid``3(Z0.BitString,Z0.N64,``0,``1,``2)             | Hydrates a bitgrid from a bitstring
+Method      | Z0.GridLoad.ToBitGrid``3(Z0.BitString,Z0.N128,``0,``1,``2)            | Hydrates a bitgrid from a bitstring
+Method      | Z0.GridLoad.ToBitGrid``3(Z0.BitString,Z0.N256,``0,``1,``2)            | Hydrates a bitgrid from a bitstring
+Method      | Z0.XTend.Map(Z0.GridSpec)                                             | Calculates a grid layout from a specification
+Method      | Z0.XTend.ToBitString``1(Z0.BitGrid16{``0})                            | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.XTend.ToBitString``1(Z0.BitGrid32{``0})                            | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.XTend.ToBitString``1(Z0.BitGrid64{``0})                            | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.XTend.ToBitString``3(Z0.BitGrid{``0,``1,``2})                      | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.XTend.ToBitString``1(Z0.BitGrid{``0})                              | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.XTend.ToBitString``3(Z0.BitGrid16{``0,``1,``2})                    | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.XTend.ToBitString``3(Z0.BitGrid32{``0,``1,``2})                    | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.XTend.ToBitString``3(Z0.BitGrid64{``0,``1,``2})                    | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.XTend.ToBitString``3(Z0.BitGrid128{``0,``1,``2})                   | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.XTend.ToBitString``3(Z0.BitGrid256{``0,``1,``2})                   | Converts a grid to an equivalent linear bitstring representation
+Method      | Z0.XTend.ToSpan``1(Z0.BitGrid16{``0})                                 | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``1(Z0.BitGrid32{``0})                                 | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``1(Z0.BitGrid64{``0})                                 | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``3(Z0.BitGrid32{``0,``1,``2})                         | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``3(Z0.BitGrid64{``0,``1,``2})                         | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``3(Z0.BitGrid128{``0,``1,``2})                        | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``3(Z0.BitGrid256{``0,``1,``2})                        | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``3(Z0.SubGrid16{``0,``1,``2})                         | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``3(Z0.SubGrid32{``0,``1,``2})                         | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``3(Z0.SubGrid64{``0,``1,``2})                         | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``3(Z0.SubGrid128{``0,``1,``2})                        | Extracts grid content to a span
+Method      | Z0.XTend.ToSpan``3(Z0.SubGrid256{``0,``1,``2})                        | Extracts grid content to a span
+Method      | Z0.XTend.ToSubGrid(Z0.BitVector24,Z0.N2,Z0.N12)                       | Creates a subgrid of dimensions 2x12 from a 24-bit bitvector
+Method      | Z0.XTend.ToSubGrid(Z0.BitVector24,Z0.N12,Z0.N2)                       | Creates a subgrid of dimensions 12x2 from a 24-bit bitvector
+Method      | Z0.XTend.ToSubGrid(Z0.BitVector24,Z0.N3,Z0.N8)                        | Creates a subgrid of dimensions 3x8 from a 24-bit bitvector
+Method      | Z0.XTend.ToSubGrid(Z0.BitVector24,Z0.N8,Z0.N3)                        | Creates a subgrid of dimensions 8x3 from a 24-bit bitvector
+Method      | Z0.XTend.ToSubGrid(Z0.BitVector24,Z0.N4,Z0.N6)                        | Creates a subgrid of dimensions 4x6 from a 24-bit bitvector
+Method      | Z0.XTend.ToSubGrid(Z0.BitVector24,Z0.N6,Z0.N4)                        | Creates a subgrid of dimensions 6x4 from a 24-bit bitvector
+Field       | Z0.GridMap.RowCount                                                   | The number of rows in the layout
+Field       | Z0.GridMap.ColCount                                                   | The number of columns in the layout
+Field       | Z0.GridMap.SegWidth                                                   | The number of bits in a segment
+Field       | Z0.GridMap.StorageBits                                                | The number of segment-aligned bits required for storage
+Field       | Z0.GridMap.StorageBytes                                               | The number of segment-aligned bytes bits required for storage
+Field       | Z0.GridMap.SegCount                                                   | The number of segment-aligned storage segments
+Method      | Z0.GridMap.Define(Z0.GridSpec@)                                       | Defines a grid map predicated on an existing specification
+Property    | Z0.GridMap.Vec128Remainder                                            | The number bytes that do not fit into a whole number of 128-bit vectors
+Property    | Z0.GridMap.Vec128Count                                                | The number of whole 128-bit vectors required for storage
+Property    | Z0.GridMap.Vec256Count                                                | The number of whole 256-bit vectors required for storage
+Property    | Z0.GridMap.Vec256Remainder                                            | The number bytes that do not fit into a whole number of 256-bit vectors
+Property    | Z0.GridMap.PointCount                                                 | The total number of items covered by the grid
+Method      | Z0.GridMap.Pos(System.Int32,System.Int32)                             | Computes the 0-based linear index determined by a row/col coordinate
+Method      | Z0.GridMap.Offset(System.Int32,System.Int32)                          | Computes the storage segment offset for a row/col coordinate
+Method      | Z0.GridMap.Seg(System.Int32,System.Int32)                             | Computes the storage segment that covers a specifed row/col coordinate
+Type        | Z0.GridSpec                                                           | Characterizes the memory layout of a BitMatrix
+Field       | Z0.GridSpec.RowCount                                                  | The number of grid rows
+Field       | Z0.GridSpec.ColCount                                                  | The number of grid columns
+Field       | Z0.GridSpec.SegWidth                                                  | The number of bits in a storage segment
+Field       | Z0.GridSpec.StorageBits                                               | The the toal number of segment-aligned bits allocated for storage
+Field       | Z0.GridSpec.StorageBytes                                              | The the toal number of segment-aligned bytes allocated for storage
+Field       | Z0.GridSpec.StorageSegs                                               | The the toal number of segments allocated for storage
+Type        | Z0.GridSpec`1                                                         | Characterizes the memory layout of a BitMatrix
+Field       | Z0.GridSpec`1.RowCount                                                | The number of grid rows
+Field       | Z0.GridSpec`1.ColCount                                                | The number of grid columns
+Field       | Z0.GridSpec`1.SegWidth                                                | The number of bits in a storage segment
+Field       | Z0.GridSpec`1.StorageBits                                             | The the toal number of segment-aligned bits allocated for storage
+Field       | Z0.GridSpec`1.StorageBytes                                            | The the toal number of segment-aligned bytes allocated for storage
+Field       | Z0.GridSpec`1.StorageSegs                                             | The the toal number of segments allocated for storage
+Property    | Z0.GridStats.RowCount                                                 | The number of grid rows
+Property    | Z0.GridStats.ColCount                                                 | The number of grid columns
+Property    | Z0.GridStats.SegWidth                                                 | The number of bits in a storage segment
+Property    | Z0.GridStats.PointCount                                               | The number of points covered by the grid
+Property    | Z0.GridStats.SorageSegs                                               | The number of segment-aligned segments required for storage
+Property    | Z0.GridStats.StorageBits                                              | The number of segment-aligned bits required for storage
+Property    | Z0.GridStats.StorageBytes                                             | The number of segment-aligned bytes bits required for storage
+Property    | Z0.GridStats.Vec128Count                                              | The number of whole 128-bit vectors required for storage
+Property    | Z0.GridStats.Vec128Remainder                                          | The number bytes that do not fit into a whole number of 128-bit vectors
+Property    | Z0.GridStats.Vec256Count                                              | The number of whole 256-bit vectors required for storage
+Property    | Z0.GridStats.Vec256Remainder                                          | The number bytes that do not fit into a whole number of 256-bit vectors
+Method      | Z0.GridWriter.GridHeader(System.Nullable{System.Int32},System.Nullable{System.Char})| Defines a standard header for a grid map summary line
+Type        | Z0.GridDim                                                            | Defines grid dimensions based on specification without parametrization
+Field       | Z0.GridDim.RowCount                                                   | The number of grid rows
+Field       | Z0.GridDim.ColCount                                                   | The number of grid columns
+Method      | Z0.GridDim.Format                                                     | Formats the dimension in canonical form
+Type        | Z0.GridDim`3                                                          | Encapsulates metrics that characterize a grid of natural rectangular dimensions
+Property    | Z0.GridDim`3.BitCount                                                 | The total number gb of grid bits determined by gb := MxN
+Property    | Z0.GridDim`3.RowCount                                                 | The number of grid rows
+Property    | Z0.GridDim`3.ColCount                                                 | The number of grid columns
+Property    | Z0.GridDim`3.CellWidth                                                | The bit width of a storage cell
+Property    | Z0.GridDim`3.BlockWidth                                               | The bit width of a storage block
+Property    | Z0.GridDim`3.CellCount                                                | The number of cells required cover a grid
+Property    | Z0.GridDim`3.ByteCount                                                | The number of bytes required to cover a grid
+Method      | Z0.GridDim`3.BitIndex(System.Int32,System.Int32)                      | Computes the 0-based linear index determined by a row/col coordinate
+Method      | Z0.GridDim`3.Format                                                   | Returns a dimension expression of the form RxCxWw where             R := row count            C := column count            W := cell width
+Property    | Z0.GridDim`1.RowCount                                                 | The number of rows in the grid
+Property    | Z0.GridDim`1.ColCount                                                 | The number of columsn in the grid
+Property    | Z0.GridDim`1.CellWidth                                                | The bit-width of a grid cell
+Property    | Z0.GridDim`1.BlockWidth                                               | The block width, set to 1 if the grid is unblocked
+Property    | Z0.GridDim`1.BitCount                                                 | The total number gb of grid bits determined by gb := MxN
+Property    | Z0.GridDim`1.CellCount                                                | The number of cells required cover a grid
+Property    | Z0.GridDim`1.ByteCount                                                | The number of bytes required to cover a grid
+Method      | Z0.GridDim`1.Pos(System.Int32,System.Int32)                           | Computes the 0-based linear index determined by a row/col coordinate
+Method      | Z0.GridDim`1.Format                                                   | Returns a dimension expression of the form RxCxWw where             R := row count            C := column count            W := cell width
+Type        | Z0.GridDim`4                                                          | Defines a parametrically-predicated blocked grid
+Property    | Z0.GridDim`4.BlockWidth                                               | The bit width of a block
+Property    | Z0.GridDim`4.RowCount                                                 | The number of grid rows
+Property    | Z0.GridDim`4.ColCount                                                 | The number of grid columns
+Property    | Z0.GridDim`4.CellWidth                                                | The bit width of a storage cell
+Property    | Z0.GridDim`4.BitCount                                                 | The total number of grid bits
+Property    | Z0.GridDim`4.CellCount                                                | The number of cells required cover a grid
+Property    | Z0.GridDim`4.ByteCount                                                | The number of bytes required to cover a grid
+Property    | Z0.GridDim`4.BlockCount                                               | Computes the aligned number of W-blocks required to cover M*N bits
+Property    | Z0.GridDim`4.BlockLength                                              | Computes the number of cells covered by a block
+Method      | Z0.GridDim`4.Format                                                   | Returns a dimension expression of the form RxCxWw where             R := row count            C := column count            W := cell width
+Property    | Z0.IGridDim.RowCount                                                  | The numbet of rows in the grid
+Property    | Z0.IGridDim.ColCount                                                  | The number of columns in the grid
+Type        | Z0.IGridDim`1                                                         | Characterizes a grid with parametric cell type
+Type        | Z0.IGridDim`3                                                         | Characterizes a grid with parametric row, column and cell types
+Type        | Z0.IGridDim`4                                                         | Characterizes a grid with parametric block width, row, column and cell types
+Type        | Z0.BitGrid`1                                                          | Defines a grid of bits over a contiguous sequence of primal values stored in blocks of 256 bits
+Field       | Z0.BitGrid`1.RowCount                                                 | The number of grid rows
+Field       | Z0.BitGrid`1.ColCount                                                 | The number of grid columns
+Property    | Z0.BitGrid`1.CellCount                                                | The number of cells over which the grid is defined
+Property    | Z0.BitGrid`1.BitCount                                                 | The number of covered bits
+Property    | Z0.BitGrid`1.Item(System.Int32)                                       | Transfers 256-bit cpu vectors to/from blocked storage
+Method      | Z0.BitGrid`1.Cell(System.Int32)                                       | Reads/writes an index-identified grid cell
+Method      | Z0.BitGrid`1.Block(System.Int32)                                      | Returns the 256-bit block corresponding to a block index
+Type        | Z0.BitGrid128`3                                                       | A grid of natural dimensions M and N such that M*N = W := 128
+Field       | Z0.BitGrid128`3.Data                                                  | The grid state
+Field       | Z0.BitGrid128`3.ByteCount                                             | The number of bytes covered by the grid
+Method      | Z0.BitGrid128`3.op_Implicit(Z0.Block128{`2}@)~Z0.BitGrid128{`0,`1,`2} | Creates a grid from the leading source block
+Method      | Z0.BitGrid128`3.op_Implicit(System.Runtime.Intrinsics.Vector128{`2})~Z0.BitGrid128{`0,`1,`2}| Creates a grid from a generic vector
+Method      | Z0.BitGrid128`3.op_Implicit(System.Runtime.Intrinsics.Vector128{System.Byte})~Z0.BitGrid128{`0,`1,`2}| Creates a grid from a 128x8u vector
+Property    | Z0.BitGrid128`3.Content                                               | The exposed grid state
+Property    | Z0.BitGrid128`3.CellCount                                             | The number of allocated cells
+Property    | Z0.BitGrid128`3.BitCount                                              | The number of covered bits
+Property    | Z0.BitGrid128`3.RowCount                                              | The number of rows in the grid
+Property    | Z0.BitGrid128`3.ColCount                                              | The number of columns in the grid
+Method      | Z0.BitGrid128`3.Cell(System.Int32)                                    | Reads an index-identified cell
+Type        | Z0.BitGrid16`1                                                        | Defines a 16-bit grid of caller-interpreted dimension
+Field       | Z0.BitGrid16`1.Data                                                   | Grid storage
+Property    | Z0.BitGrid16`1.BitCount                                               | The number of covered bits := 16
+Property    | Z0.BitGrid16`1.Content                                                | Returns a copy of the grid's backing storage
+Property    | Z0.BitGrid16`1.CellCount                                              | The number of grid cells := {1 | 2}
+Property    | Z0.BitGrid16`1.Cells                                                  | Covers grid content with a span that defines cells of width := {1 | 2}
+Property    | Z0.BitGrid16`1.Head                                                   | Yields a mutable reference to the grid's leading storage cell
+Property    | Z0.BitGrid16`1.Item(System.Int32)                                     | Maninulates an index-identified cell, where index := {0 | 1}
+Method      | Z0.BitGrid16`1.Cell(System.Int32)                                     | Reads/writes an index-identified cell
+Type        | Z0.BitGrid16`3                                                        | A grid of natural dimensions M and N such that M*N = W := 16
+Field       | Z0.BitGrid16`3.Data                                                   | The grid state
+Field       | Z0.BitGrid16`3.ByteCount                                              | The number of bytes covered by the grid
+Property    | Z0.BitGrid16`3.Content                                                | The exposed grid state
+Property    | Z0.BitGrid16`3.CellCount                                              | The number of allocated cells
+Property    | Z0.BitGrid16`3.BitCount                                               | The number of covered bits
+Property    | Z0.BitGrid16`3.Head                                                   | The leading storage cell
+Property    | Z0.BitGrid16`3.RowCount                                               | The number of rows in the grid
+Property    | Z0.BitGrid16`3.ColCount                                               | The number of columns in the grid
+Method      | Z0.BitGrid16`3.Cell(System.Int32)                                     | Reads/writes an index-identified cell
+Property    | Z0.BitGrid16`3.Item(System.Int32)                                     | Extracts row contant as a bitvector
+Type        | Z0.BitGrid256`3                                                       | A grid of natural dimensions M and N such that M*N = W := 256
+Field       | Z0.BitGrid256`3.Data                                                  | The grid state
+Field       | Z0.BitGrid256`3.ByteCount                                             | The number of bytes covered by the grid
+Property    | Z0.BitGrid256`3.Content                                               | The exposed grid state
+Property    | Z0.BitGrid256`3.BitCount                                              | The number of covered bits
+Property    | Z0.BitGrid256`3.RowCount                                              | The number of rows in the grid
+Property    | Z0.BitGrid256`3.ColCount                                              | The number of columns in the grid
+Method      | Z0.BitGrid256`3.Cell(System.Int32)                                    | Reads an index-identified cell
+Type        | Z0.BitGrid32`1                                                        | Defines a 32-bit grid
+Property    | Z0.BitGrid32`1.BitCount                                               | The number of covered bits
+Property    | Z0.BitGrid32`1.CellCount                                              | The number of grid cells := {1 | 2 | 4}
+Method      | Z0.BitGrid32`1.Cell(System.Int32)                                     | Reads/writes an index-identified cell
+Property    | Z0.BitGrid32`1.Item(System.Byte,System.Byte)                          | Slices a sequence of bits
+Type        | Z0.BitGrid32`3                                                        | A grid of natural dimensions M and N such that M*N = W := 32
+Field       | Z0.BitGrid32`3.Data                                                   | The grid state
+Field       | Z0.BitGrid32`3.ByteCount                                              | The number of bytes covered by the grid
+Property    | Z0.BitGrid32`3.Content                                                | The exposed grid state
+Property    | Z0.BitGrid32`3.BitCount                                               | The number of covered bits
+Property    | Z0.BitGrid32`3.RowCount                                               | The number of rows in the grid
+Property    | Z0.BitGrid32`3.ColCount                                               | The number of columns in the grid
+Method      | Z0.BitGrid32`3.Cell(System.Int32)                                     | Reads/writes an index-identified cell
+Property    | Z0.BitGrid32`3.Item(System.Int32)                                     | Extracts row contant as a bitvector
+Method      | Z0.BitGrid32`3.As``1                                                  | Converts the current grid defined over T-cells to a target grid defined over U-cells
+Type        | Z0.BitGrid64`1                                                        | Defines a 64-bit grid
+Property    | Z0.BitGrid64`1.BitCount                                               | The number of covered bits
+Method      | Z0.BitGrid64`1.Cell(System.Int32)                                     | Reads/writes an index-identified cell
+Property    | Z0.BitGrid64`1.Item(System.Byte,System.Byte)                          | Slices a sequence of bits
+Type        | Z0.BitGrid64`3                                                        | A grid of natural dimensions M and N such that M*N = W := 64
+Field       | Z0.BitGrid64`3.Data                                                   | The grid state
+Field       | Z0.BitGrid64`3.ByteCount                                              | The number of bytes covered by the grid
+Property    | Z0.BitGrid64`3.BitCount                                               | The number of covered bits
+Property    | Z0.BitGrid64`3.RowCount                                               | The number of rows in the grid
+Property    | Z0.BitGrid64`3.ColCount                                               | The number of columns in the grid
+Method      | Z0.BitGrid64`3.Cell(System.Int32)                                     | Reads/writes an index-identified cell
+Property    | Z0.BitGrid64`3.Item(System.Int32)                                     | Extracts row content as a bitvector
+Method      | Z0.BitGrid64`3.As``1                                                  | Converts the current grid defined over T-cells to a target grid defined over U-cells
+Type        | Z0.BitGrid`3                                                          | Defines a maximally packed data structure of natural dimensions over a primal type
+Property    | Z0.BitGrid`3.Dim                                                      | The grid dimension
+Property    | Z0.BitGrid`3.Content                                                  | The allocated storage
+Property    | Z0.BitGrid`3.Head                                                     | A reference to the leading storage cell
+Property    | Z0.BitGrid`3.RowCount                                                 | The number of grid rows
+Property    | Z0.BitGrid`3.ColCount                                                 | The number of grid columns
+Property    | Z0.BitGrid`3.BlockCount                                               | The number of allocated 256-bit blocks
+Property    | Z0.BitGrid`3.CellCount                                                | The number of cells over which the grid is defined
+Property    | Z0.BitGrid`3.BitCount                                                 | The number of bits covered by the grid
+Property    | Z0.BitGrid`3.Item(System.Int32)                                       | Transfers 256-bit cpu vectors to/from blocked storage
+Method      | Z0.BitGrid`3.Cell(System.Int32)                                       | Reads/writes an index-identified grid cell
+Method      | Z0.BitGrid`3.SpanBlock(System.Int32)                                  | Returns the 256-bit block corresponding to a block index
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N16)                             | Creates a 16-bit generic bitgrid
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N32)                             | Creates a 32-bit generic bitgrid
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N64)                             | Creates a 64-bit generic bitgrid
+Method      | Z0.BitRng.BitGrid``3(Z0.IPolyrand,``0,``1,``2)                        | Allocates and populates a naturally-sized bitgrid from a random source
+Method      | Z0.BitRng.Fill``3(Z0.IPolyrand,Z0.BitGrid{``0,``1,``2}@)              | Fills a caller-supplied naturally-sized bitgrid from a random source
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N1,Z0.N16)                       | Creates a 1x16 16-bit natural bitgrid
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N16,Z0.N1)                       | Creates a 16x1 6-bit natural bitgrid
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N2,Z0.N8)                        | Creates a 2x8 16-bit natural bitgrid
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N8,Z0.N2)                        | Creates an 8x2 16-bit natural bitgrid
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N4,Z0.N4)                        | Creates a 4x4 16-bit natural bitgrid
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N1,Z0.N32)                       | Creates a 1x32 32-bit natural bitgrid
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N32,Z0.N1,``0)                   | Creates a 32-bit natural bitgrid of dimension 32x1
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N2,Z0.N16,``0)                   | Creates a 32-bit natural bitgrid of dimension 2x16
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N16,Z0.N2,``0)                   | Creates a 32-bit natural bitgrid of dimension 16x2
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N8,Z0.N4,``0)                    | Creates a natural 32-bit grid of dimension 8x4
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N4,Z0.N8,``0)                    | Creates a natural 32-bit grid of dimension 4x8
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N1,Z0.N64,``0)                   | Creates a natural 64-bit grid of dimension 1x64
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N64,Z0.N1,``0)                   | Creates a natural 64-bit grid of dimension 64x1
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N32,Z0.N2,``0)                   | Creates a natural 64-bit grid of dimension 32x2
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N2,Z0.N32,``0)                   | Creates a natural 64-bit grid of dimension 2x32
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N16,Z0.N4,``0)                   | Creates a natural 64-bit grid of dimension 16x4
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N4,Z0.N16,``0)                   | Creates a natural 64-bit grid of dimension 4x16
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N8,Z0.N8,``0)                    | Creates a 64-bit natural bitgrid of dimension 8x8 over generic cells
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N1,Z0.N128,``0)                  | Creates a 128-bit natural bitgrid of dimension 1x128
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N128,Z0.N1,``0)                  | Creates a 128-bit natural bitgrid of dimension 128x1
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N2,Z0.N64,``0)                   | Creates a 128-bit natural bitgrid of dimension 2x64
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N64,Z0.N2,``0)                   | Creates a 128-bit natural bitgrid of dimension 64x2
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N4,Z0.N32,``0)                   | Creates a 128-bit natural bitgrid of dimension 4x32
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N32,Z0.N4,``0)                   | Creates a 128-bit natural bitgrid of dimension 32x4
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N8,Z0.N16,``0)                   | Creates a 128-bit natural bitgrid of dimension 8x16
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N16,Z0.N8,``0)                   | Creates a 128-bit natural bitgrid of dimension 16x8
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N1,Z0.N256,``0)                  | Creates a 256-bit natural bitgrid of dimension 1x256
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N256,Z0.N1,``0)                  | Creates a 256-bit natural bitgrid of dimension 256x1
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N2,Z0.N128,``0)                  | Creates a 256-bit natural bitgrid of dimension 2x128
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N128,Z0.N2,``0)                  | Creates a 256-bit natural bitgrid of dimension 128x2
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N4,Z0.N64,``0)                   | Creates a 256-bit natural bitgrid of dimension 4x64
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N64,Z0.N4,``0)                   | Creates a 256-bit natural bitgrid of dimension 64x4
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N8,Z0.N32,``0)                   | Creates a 256-bit natural bitgrid of dimension 8x32
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N32,Z0.N8,``0)                   | Creates a 256-bit natural bitgrid of dimension 32x8
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,Z0.N16,Z0.N16,``0)                  | Creates a 256-bit natural bitgrid of dimension 16x16
+Method      | Z0.BitRng.BitGrid``1(Z0.IPolyrand,System.Int32,System.Int32,``0)      | Allocates and fills a generic bitgrid from a random source
+Method      | Z0.BitRng.Fill``1(Z0.IPolyrand,Z0.BitGrid{``0}@)                      | Fills a caller-supplied generic bitgrid from a random source
+Method      | Z0.BitRng.BitPositions``1(Z0.IPolyrand,System.UInt16,System.UInt16)   | Produces a stream of bit positions
+Method      | Z0.BitRng.BitPositions(Z0.IPolyrand,System.Byte,System.UInt16,System.UInt16)| Produces a stream of bit positions
+Method      | Z0.BitRng.BitBlock``2(Z0.IPolyrand)                                   | Produces a natural bitblock
+Method      | Z0.BitRng.BitBlock``1(Z0.IPolyrand,System.Int32)                      | Produces a bitblock over a specified number of bits
+Method      | Z0.BitRng.BitMatrix``1(Z0.IPolyrand)                                  | Produces a generic bitmatrix predicated on a primal type
+Method      | Z0.BitRng.BitMatrix4(Z0.IPolyrand)                                    | Produces a 4x4 bitmatrix from a random source
+Method      | Z0.BitRng.BitMatrix(Z0.IPolyrand,Z0.N4)                               | Produces a 4x4 bitmatrix from a random source
+Method      | Z0.BitRng.BitMatrix8(Z0.IPolyrand)                                    | Produces a 8x8 bitmatrix from a random source
+Method      | Z0.BitRng.BitMatrix(Z0.IPolyrand,Z0.N8)                               | Produces a 8x8 bitmatrix from a random source
+Method      | Z0.BitRng.BitMatrix16(Z0.IPolyrand)                                   | Produces a 16x16 bitmatrix from a random source
+Method      | Z0.BitRng.BitMatrix(Z0.IPolyrand,Z0.N16)                              | Produces a 16x16 bitmatrix from a random source
+Method      | Z0.BitRng.BitMatrix32(Z0.IPolyrand)                                   | Produces a 32x32 bitmatrix from a random source
+Method      | Z0.BitRng.BitMatrix(Z0.IPolyrand,Z0.N32)                              | Produces a 32x32 bitmatrix from a random source
+Method      | Z0.BitRng.BitMatrix64(Z0.IPolyrand)                                   | Produces a 64x64 bitmatrix from a random source
+Method      | Z0.BitRng.BitMatrix(Z0.IPolyrand,Z0.N64)                              | Produces a 64x64 bitmatrix from a random source
+Method      | Z0.BitRng.BitMatrix``3(Z0.IPolyrand,``0,``1,``2)                      | Produces a generic bitmatrix of natural dimensions
+Method      | Z0.BitRng.BitMatrix``2(Z0.IPolyrand,``0,``1)                          | Produces an generic bitmatrix of natural order
+Field       | Z0.SubGrid128`3.Data                                                  | The grid state
+Field       | Z0.SubGrid128`3.ByteCount                                             | The number of bytes covered by the grid
+Property    | Z0.SubGrid128`3.W                                                     | The maximum grid width
+Property    | Z0.SubGrid128`3.Dim                                                   | The grid dimension
+Property    | Z0.SubGrid128`3.Content                                               | The exposed grid state
+Property    | Z0.SubGrid128`3.RowCount                                              | The number of rows in the grid
+Property    | Z0.SubGrid128`3.ColCount                                              | The number of columns in the grid
+Property    | Z0.SubGrid128`3.BitCount                                              | The number of covered bits
+Method      | Z0.SubGrid128`3.Cell(System.Int32)                                    | Reads an index-identified cell
+Field       | Z0.SubGrid16`3.Data                                                   | The grid state
+Field       | Z0.SubGrid16`3.ByteCount                                              | The maximum number of bytes covered by the grid
+Property    | Z0.SubGrid16`3.W                                                      | The maximum grid width
+Property    | Z0.SubGrid16`3.Dim                                                    | The grid dimension
+Property    | Z0.SubGrid16`3.Content                                                | The exposed grid state
+Property    | Z0.SubGrid16`3.CellCount                                              | The number of allocated cells
+Property    | Z0.SubGrid16`3.BitCount                                               | The number of covered bits
+Property    | Z0.SubGrid16`3.RowCount                                               | The number of rows in the grid
+Property    | Z0.SubGrid16`3.ColCount                                               | The number of columns in the grid
+Method      | Z0.SubGrid16`3.Cell(System.Int32)                                     | Reads/writes an index-identified cell
+Property    | Z0.SubGrid16`3.Item(System.Int32)                                     | Extracts row content as a bitvector
+Field       | Z0.SubGrid256`3.Data                                                  | The grid state
+Field       | Z0.SubGrid256`3.ByteCount                                             | The maximum number of bytes covered by the grid
+Property    | Z0.SubGrid256`3.W                                                     | The maximum grid width
+Property    | Z0.SubGrid256`3.Dim                                                   | The grid dimension
+Property    | Z0.SubGrid256`3.Content                                               | The exposed grid state
+Property    | Z0.SubGrid256`3.RowCount                                              | The number of rows in the grid
+Property    | Z0.SubGrid256`3.ColCount                                              | The number of columns in the grid
+Property    | Z0.SubGrid256`3.BitCount                                              | The number of covered bits
+Method      | Z0.SubGrid256`3.Cell(System.Int32)                                    | Reads an index-identified cell
+Field       | Z0.SubGrid32`3.Data                                                   | The grid state
+Field       | Z0.SubGrid32`3.ByteCount                                              | The number of bytes covered by the grid
+Property    | Z0.SubGrid32`3.Content                                                | The exposed grid state
+Property    | Z0.SubGrid32`3.BitCount                                               | The number of covered bits
+Property    | Z0.SubGrid32`3.RowCount                                               | The number of rows in the grid
+Property    | Z0.SubGrid32`3.ColCount                                               | The number of columns in the grid
+Method      | Z0.SubGrid32`3.Cell(System.Int32)                                     | Reads/writes an index-identified cell
+Property    | Z0.SubGrid32`3.Item(System.Int32)                                     | Extracts row content as a bitvector
+Field       | Z0.SubGrid64`3.Data                                                   | The grid state
+Field       | Z0.SubGrid64`3.ByteCount                                              | The number of bytes covered by the grid
+Property    | Z0.SubGrid64`3.W                                                      | The maximum grid width
+Property    | Z0.SubGrid64`3.Dim                                                    | The grid dimension
+Property    | Z0.SubGrid64`3.Content                                                | The exposed grid state
+Property    | Z0.SubGrid64`3.RowCount                                               | The number of rows in the grid
+Property    | Z0.SubGrid64`3.ColCount                                               | The number of columns in the grid
+Property    | Z0.SubGrid64`3.BitCount                                               | The number of covered bits
+Method      | Z0.SubGrid64`3.Cell(System.Int32)                                     | Reads/writes an index-identified cell
+Property    | Z0.SubGrid64`3.Item(System.Int32)                                     | Extracts row content as a bitvector

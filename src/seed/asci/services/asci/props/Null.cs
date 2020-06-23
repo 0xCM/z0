@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{        
     partial struct asci
     {
         public static AsciNull Null 

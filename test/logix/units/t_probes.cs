@@ -6,8 +6,6 @@ namespace Z0.Logix
 {
     using System;
     
-    using static Gone;
-
 
     public class t_probes : UnitTest<t_probes>
     {

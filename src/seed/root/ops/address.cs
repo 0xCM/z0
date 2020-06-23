@@ -17,6 +17,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe static MemoryAddress address<T>(in T src)
             where T : unmanaged
-                => (ulong)Pointed.constptr(src);
+                => (ulong)As.point(src);
     }
 }

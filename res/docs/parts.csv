@@ -1,0 +1,15 @@
+Type        | Z0.FileExtension                                                      | Defines a file extension
+Property    | Z0.FileExtension.Description                                          | Describes the sort of file identified by the extension
+Type        | Z0.IFormatter                                                         | Characterizes a text serializer
+Type        | Z0.IFormatter`2                                                       | Characterizes a configurable formatter, parametric in both type and configuration
+Method      | Z0.IFormatter`2.Format(`1,`0@)                                        | Formats a source value according to a supplied configuration
+Type        | Z0.IFormatter`1                                                       | Characterizes a type-parametric formatter
+Method      | Z0.IFormatter`1.Format(`0)                                            | Renders an object as text
+Method      | Z0.ISpanFormatter`1.Format(System.ReadOnlySpan{`0})                   | Formats and concatenates span content
+Method      | Z0.ISpanFormatter`1.FormatItems(System.ReadOnlySpan{`0})              | Formats span cells
+Method      | Z0.ISpanFormatter`2.Format(System.ReadOnlySpan{`0},`1@)               | Formats and concatenates span content using a sequence format configuration
+Method      | Z0.ISpanFormatter`2.FormatItems(System.ReadOnlySpan{`0},`1@)          | Formats source span cells using a sequence format configuration
+Method      | Z0.ISpanFormatter`3.Format(System.ReadOnlySpan{`0},`1@,`2@)           | Formats a span using both sequence and element format configurations
+Type        | Z0.FormatRender`1                                                     | Characterizes an unconfigured content render function
+Type        | Z0.FormatRender`2                                                     | Characterizes a configured content render function
+Type        | Z0.TitleRender`1                                                      | Characterizes a title render function

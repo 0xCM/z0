@@ -23,7 +23,7 @@ namespace Z0
         public static Span<T> vstore<T>(Vector128<T> src, Span<T> dst)
             where T : unmanaged            
         {
-            vstore(src, ref head(dst));
+            VStore.vsave(src, ref head(dst));
             return dst;
         }
 
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector128<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => vstore(src, ref head(dst), offset);
+                => VStore.vsave(src, ref head(dst), offset);
 
         /// <summary>
         /// Stores vector content to a span
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector256<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => vstore(src, ref head(dst), offset);
+                => VStore.vsave(src, ref head(dst), offset);
 
         /// <summary>
         /// Stores vector content to a span
@@ -75,6 +75,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector512<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => vstore(src, ref head(dst), offset);
+                => VStore.vsave(src, ref head(dst), offset);
     }
 }

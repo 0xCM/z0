@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static refs;
+    using static As;
+    using static Root;
 
     [ApiHost]
     public readonly partial struct ByteReader : IApiHost<ByteReader>

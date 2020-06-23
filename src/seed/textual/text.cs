@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="length">The substring length</param>
         [MethodImpl(Inline)]
         public static string slice(string src, int startidx, int length)
-            => denullify(src).Substring(startidx,length);        
+            => denullify(src).Substring(startidx, length);        
 
         /// <summary>
         /// Splits the string, removing empty entries
@@ -474,13 +474,43 @@ namespace Z0
         }
 
         /// <summary>
-        /// Returns the index of the first occurrence of the first character and the first occurrence of the second character
+        /// Extracts text that is enclosed between left and right boundaries, i.e. {left}{content}{right} => {content}
         /// </summary>
-        /// <param name="src">The source thext</param>
-        /// <param name="first">The first index match</param>
-        /// <param name="second">THe second index match</param>
+        /// <param name="src">The source text</param>
+        /// <param name="left">The left boundary</param>
+        /// <param name="right">The right boundary</param>
+        public static string enclosed(string src, string left, string right)
+        {
+            (var i0, var i1) = indices(src, left, right);
+
+            if(i0 != NotFound && i1 != NotFound &&(i0 < i1))
+            {
+                var start = i0 + left.Length;
+                var length = i1 - start;
+                return slice(src, start, length);
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Returns the indices of the first occurrences of the first and second characters in the source, if any
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="first">The first character to match</param>
+        /// <param name="second">THe second character to match</param>
         public static (int first, int second) indices(string src, char first, char second)
             => (src.IndexOf(first), src.IndexOf(second));
+
+        /// <summary>
+        /// Returns the indices of the first occurrences of the first and second strings in the source, if any
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="first">The first character to match</param>
+        /// <param name="second">THe second character to match</param>
+        public static (int first, int second) indices(string src, string first, string second)
+            => (src.IndexOf(first), src.IndexOf(second));
+
 
         /// <summary>
         /// If fenced with specified left and right characters, extracts the enclosed content; otherwise, returns the content unmolested

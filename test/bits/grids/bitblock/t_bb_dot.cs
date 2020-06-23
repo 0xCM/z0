@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Gone;
 
     public class t_bb_dot : t_bitblock<t_bb_dot>
     {

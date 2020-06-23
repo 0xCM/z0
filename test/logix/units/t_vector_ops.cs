@@ -7,7 +7,6 @@ namespace Z0.Logix
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Gone;
     
     public class t_vector_ops : UnitTest<t_vector_ops>
     {

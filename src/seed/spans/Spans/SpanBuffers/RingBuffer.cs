@@ -44,7 +44,7 @@ namespace Z0
             if(count != capacity)
                 count++;
             
-            refs.seek(ref Head, inpos++) = src; 
+            seek(ref Head, inpos++) = src; 
         }
 
         [MethodImpl(Inline)]
@@ -55,7 +55,7 @@ namespace Z0
 
             count--;
 
-            return ref refs.seek(ref Head, outpos++);
+            return ref seek(ref Head, outpos++);
         }
 
         ref T Head

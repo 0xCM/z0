@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static Konst;
-    using static Memories;
+    using static As;
+    using static Root;
+    using static Typed;
 
     partial class BitPack
     {
@@ -23,7 +25,7 @@ namespace Z0
             var mask = BitMask.lsb<ulong>(n8,n1);
             ref var lead = ref head(dst);
             
-            refs.seek64(ref lead, 0) = Bits.scatter((ulong)(byte)src, mask);
+            seek64(ref lead, 0) = Bits.scatter((ulong)(byte)src, mask);
         }
 
         /// <summary>
@@ -37,8 +39,8 @@ namespace Z0
             var mask = BitMask.lsb<ulong>(n8,n1);
             ref var lead = ref head(dst);
             
-            refs.seek64(ref lead, 0) = Bits.scatter((ulong)(byte)src, mask);
-            refs.seek64(ref lead, 1) = Bits.scatter((ulong)((byte)(src >> 8)), mask);
+            seek64(ref lead, 0) = Bits.scatter((ulong)(byte)src, mask);
+            seek64(ref lead, 1) = Bits.scatter((ulong)((byte)(src >> 8)), mask);
         }
 
         /// <summary>
@@ -52,10 +54,10 @@ namespace Z0
             var mask = BitMask.lsb<ulong>(n8,n1);
             ref var lead = ref head(dst);
 
-            refs.seek64(ref lead, 0) = Bits.scatter((ulong)(byte)src, mask);
-            refs.seek64(ref lead, 1) = Bits.scatter((ulong)((byte)(src >> 8)), mask);
-            refs.seek64(ref lead, 2) = Bits.scatter((ulong)((byte)(src >> 16)), mask);
-            refs.seek64(ref lead, 3) = Bits.scatter((ulong)((byte)(src >> 24)), mask);
+            seek64(ref lead, 0) = Bits.scatter((ulong)(byte)src, mask);
+            seek64(ref lead, 1) = Bits.scatter((ulong)((byte)(src >> 8)), mask);
+            seek64(ref lead, 2) = Bits.scatter((ulong)((byte)(src >> 16)), mask);
+            seek64(ref lead, 3) = Bits.scatter((ulong)((byte)(src >> 24)), mask);
         }
 
         /// <summary>
@@ -68,7 +70,6 @@ namespace Z0
         {
             unpack((uint)src, dst.Slice(0,32));
             unpack((uint)(src >> 32), dst.Slice(32,32));
-        }
-        
+        }        
   }
 }

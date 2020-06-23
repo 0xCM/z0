@@ -1,0 +1,45 @@
+Method      | Z0.Symbolic.assemble(Z0.Perm4L,Z0.Perm4L,Z0.Perm4L,Z0.Perm4L)         | Constructs a permutation of length four from four ordered symbols
+Method      | Z0.Symbolic.assemble(Z0.Perm8L,Z0.Perm8L,Z0.Perm8L,Z0.Perm8L,Z0.Perm8L,Z0.Perm8L,Z0.Perm8L,Z0.Perm8L)| Constructs a permutation of length 8 from 8 ordered symbols
+Method      | Z0.Symbolic.assemble(Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L)| Constructs a permutation of length 16 from 16 ordered symbols
+Method      | Z0.Symbolic.count(System.ReadOnlySpan{System.String},System.ReadOnlySpan{System.Char})| Counts the number of source characters that exist an a specified match set
+Method      | Z0.Symbolic.enumerate``3(System.Int32)                                | Defines a symbol spec predicated on enumeration literals
+Method      | Z0.Symbolic.enumerate``2(System.Int32)                                | Defines a symbol spec predicated on enumeration literals
+Method      | Z0.Symbolic.enumerate``1(System.Int32)                                | Defines a symbol spec predicated on enumeration literals
+Method      | Z0.Symbolic.first(System.ReadOnlySpan{System.Char},System.Char)       | Returns the index of the first source character that matches a target character
+Method      | Z0.Symbolic.identity(Z0.N4)                                           | Defines the identity permutation on 4 symbols
+Method      | Z0.Symbolic.identity(Z0.N8)                                           | Defines the identity permutation on 8 symbols
+Method      | Z0.Symbolic.identity(Z0.N16)                                          | Defines the identity permutation on 16 symbols
+Method      | Z0.Symbolic.index``2                                                  | Creates value-to-symbol index
+Method      | Z0.Symbolic.index``1(Z0.HexKindValue{``0}[])                          | Creates an index that correlates 8-bit unsigned integers [0..255] with aribitrary parametric values
+Method      | Z0.Symbolic.index``1(Z0.HexKindValue{``0}[],``0[])                    | Creates an index that correlates up to 255 unsigned 8-bit integers with aribitrary parametric values
+Method      | Z0.Symbolic.indices(System.ReadOnlySpan{System.Char},System.Char,System.Span{System.Int32})| Finds indices of the source cells that contain a specified character and returns the number of matches found
+Method      | Z0.Symbolic.indices(System.ReadOnlySpan{System.Byte},System.Byte,System.Span{System.Int32})| Finds indices of the source cells that contain a specified value             and returns the number of matches found
+Method      | Z0.Symbolic.literal(Z0.Perm4L,System.Int32,Z0.Perm4L@)                | Attempts to extract an index-identified permutation symbol
+Method      | Z0.Symbolic.literal(Z0.Perm8L,System.Int32,Z0.Perm8L@)                | Attempts to extract an index-identified permutation symbol
+Method      | Z0.Symbolic.literal(Z0.Perm16L,System.Int32,Z0.Perm16L@)              | Attempts to extract an index-identified permutation symbol
+Method      | Z0.Symbolic.literals(Z0.Perm4L)                                       | Extracts the ordered sequence of symbolic literals that define a 4-symbol permutation
+Method      | Z0.Symbolic.literals(Z0.Perm8L,System.Span{Z0.Perm8L})                | Extracts the ordered sequence of symbolic literals that define an 8-symbol permutation to a caller-supplied target
+Method      | Z0.Symbolic.literals(Z0.Perm8L)                                       | Extracts the ordered sequence of symbolic literals that define an 8-symbol permutation
+Method      | Z0.Symbolic.reversed(Z0.N4)                                           | Defines the canonical literal representation of the reversal of the identity permutation on 4 symbols
+Method      | Z0.Symbolic.reversed(Z0.N8)                                           | Defines the canonical literal representation of the reversal of the identity permutation on 8 symbols
+Method      | Z0.Symbolic.reversed(Z0.N16)                                          | Returns the canonical literal representation of the reversal of the identity permutation on 16 symbols
+Method      | Z0.Symbolic.spec``3(``0[])                                            | Defines a symbol spec
+Type        | Z0.Utf8AsciPoint                                                      | Represents the least 8 bits of a unicode code point which, by definition of the encoding,            is equivalent to the 7 ascii bits.
+Property    | Z0.ILegacyAlphabet`1.Symbols                                          | Enumerates the symbols defined by an alphabet
+Type        | Z0.LegacySymbol                                                       | Represents an atomic value
+Type        | Z0.LegacySymbol`1                                                     | Represents a symbol belonging to an alphabet A
+Field       | Z0.LegacySymbol`1.EmptyChar                                           | Uses the unicode null symbol to represent an empty character
+Method      | Z0.LegacySymbol`1.op_Addition(Z0.LegacySymbol{`0},Z0.LegacySymbol{`0})| Concatenates two symbols to form a word
+Type        | Z0.LegacyWord`1                                                       | Encodes a finite, ordered sequence of symbols over some alphabet A            In the literature, a 'word' in this context is often referred to as a            'string' - the usage of which is avoided here, for obvious reasons.
+Property    | Z0.LegacyWord`1.Empty                                                 | Represents the empty word, with an invariant length of 0
+Field       | Z0.LegacyWord`1.Symbols                                               | The symbols that comprise the word
+Method      | Z0.LegacyWord`1.op_Equality(Z0.LegacyWord{`0},Z0.LegacyWord{`0})      | Determines whether two words are equivalent
+Method      | Z0.LegacyWord`1.op_Inequality(Z0.LegacyWord{`0},Z0.LegacyWord{`0})    | Determines whether two words are unequal
+Method      | Z0.LegacyWord`1.op_Implicit(Z0.LegacyWord{`0})~System.String          | Converts the word to a string via a canonical format
+Method      | Z0.LegacyWord`1.op_Implicit(Z0.LegacySymbol{`0}[])~Z0.LegacyWord{`0}  | Encloses an array of symbols by a word
+Method      | Z0.LegacyWord`1.op_Implicit(Z0.LegacyWord{`0})~Z0.LegacySymbol{`0}[]  | Converts a word to its equivalent symbolic representation
+Method      | Z0.LegacyWord`1.op_Addition(Z0.LegacyWord{`0},Z0.LegacyWord{`0})      | Concatenates a word w1 with a word w2 to form a word w' = w1w2
+Property    | Z0.LegacyWord`1.Zero                                                  | The empty word containing no symbols
+Property    | Z0.LegacyWord`1.Length                                                | Specifies the number of symbols that comprise the word
+Method      | Z0.LegacyWord`1.Format                                                | Formats the word as a string
+Method      | Z0.LegacyWord`1.Concat(Z0.LegacyWord{`0})                             | Concatenates this word w1 with another word w2 to form a new word w1w2

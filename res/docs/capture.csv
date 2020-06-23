@@ -1,0 +1,27 @@
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.MemoryOperand)                   | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.InstructionInfo)                 | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.UsedMemory)                      | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.UsedRegister)                    | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.OpAccess)                        | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.Code)                            | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.CodeSize)                        | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.ConditionCode)                   | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.CpuidFeature)                    | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.EncodingKind)                    | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.FlowControl)                     | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.MandatoryPrefix)                 | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.MemorySize)                      | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.Mnemonic)                        | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.OpCodeOperandKind)               | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.OpCodeTableKind)                 | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.OpKind)                          | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.Register)                        | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.RflagsBits)                      | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.RoundingControl)                 | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceConversion.Thaw(Iced.Intel.TupleType)                       | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceExtractors.OpcodeInfo(Iced.Intel.OpCodeInfo)                | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.IceExtractors.Inxs(Iced.Intel.Instruction,System.String)       | Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+Method      | Z0.Asm.TAsmWorkflows.CaptureWorkflow(Z0.TCaptureArchive)              | Creates a default capture worklfow
+Method      | Z0.Asm.TAsmWorkflows.CaptureWorkflow(Z0.Asm.IAsmFunctionDecoder,Z0.Asm.IAsmFormatter,Z0.TCaptureArchive)| Creates a capture workflow predicated on caller-supplied services
+Method      | Z0.Asm.TAsmWorkflows.ImmEmissionWorkflow(Z0.IAppMsgSink,Z0.IApiSet,Z0.FolderPath)| Creates an imm emission workflow using default decoding and formatting servcies
+Method      | Z0.ITestDynamicVectors.Match``1(Z0.BinaryOp{System.Runtime.Intrinsics.Vector128{``0}},Z0.BinaryOp128,Z0.OpIdentity)| Verifies that two 128-bit vectorized binary operators agree over a random set of points

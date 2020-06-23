@@ -1,0 +1,20 @@
+Method      | Z0.Identity.close(Z0.GenericApiMethod)                                | Closes generic operations over the set of primal types that each operation supports
+Method      | Z0.Identity.RequireConstructed(System.Reflection.MethodInfo)          | Raises an error if the source method is not a constructed generic method
+Method      | Z0.Identity.divine(System.Type)                                       | Divines the bit-width of a specified type, if possible
+Method      | Z0.Identity.generic(System.Reflection.MethodInfo)                     | Defines the identity of a generic method
+Method      | Z0.Identity.identify(System.Reflection.MethodInfo)                    | Identifies the method
+Method      | Z0.Identity.identify(System.Delegate)                                 | Identifies the delegate
+Method      | Z0.Identity.RequireNonGeneric(System.Reflection.MethodInfo)           | Raises an error if the source method is any flavor of generic
+Method      | Z0.XTend.Close(Z0.GenericApiMethod)                                   | Closes generic operations over the set of primal types that each operation supports
+Method      | Z0.XTend.Format(Z0.OperatorTypeClass)                                 | Formats an operator type class using divined identifiers
+Method      | Z0.XTend.Identify(System.Reflection.MethodInfo)                       | Identifies a method
+Method      | Z0.XTend.Identify(System.Delegate)                                    | Identifies a delegate
+Method      | Z0.IIdentities.HostedMembers(Z0.IApiHost)                             | Retrieves the members defined by an api host
+Method      | Z0.IIdentities.LocatedMembers(Z0.IApiHost)                            | Retrieves the members defined by an api host
+Method      | Z0.IIdentities.HostedMembers(Z0.IApiSet,Z0.ApiHostUri)                | Retrieves the members defined by an api host
+Method      | Z0.IIdentities.LocatedMembers(Z0.IApiSet,Z0.ApiHostUri)               | Retrieves the members defined by an api host
+Type        | Z0.DelegateIdentityDiviner                                            | Divines delegate identity
+Method      | Z0.TypeIdentityDiviner.IsNatSpan(System.Type)                         | Determines whether a type is a natural span
+Method      | Z0.TypeIdentityDiviner.HostedProvider(System.Type)                    | Creates a type identity provider from a host type that realizes the required interface, if possible;            otherwise, returns none
+Method      | Z0.TypeIdentityDiviner.IdentityProvider(System.Type)                  | Retrieves a cached identity provider, if found; otherwise, creates and caches the identity provider for the source type
+Method      | Z0.TypeIdentityDiviner.NatSpanId(System.Type)                         | Defines an identity for a type-natural span type

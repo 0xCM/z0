@@ -1,6 +1,0 @@
-| M:Z0.ApiUtility.SFunc``1                          | 
-            <summary>
-            Instantiates a strongly-typed operation host
-            </summary>
-            <typeparam name="S">The host type</typeparam>
-        

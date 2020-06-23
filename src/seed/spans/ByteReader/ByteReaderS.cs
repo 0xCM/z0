@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Root;
     using static As;
-    using static refs;
 
     [ApiHost("bytereader.spanned")]
     readonly struct ByteReaderS : IApiHost<ByteReaderS>

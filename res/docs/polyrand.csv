@@ -1,0 +1,166 @@
+Method      | Z0.XTend.Contract(System.UInt32,System.UInt32)                        | Evenly projects points from the interval [0,2^31 - 1] onto the interval [0,max]
+Method      | Z0.XTend.Contract(System.UInt64,System.UInt64)                        | Evenly projects points from the interval [0,2^63 - 1] onto the interval [0,max]
+Field       | Z0.EmbeddedRngKind.None                                               | The nothingness of the void
+Field       | Z0.EmbeddedRngKind.Pcg32                                              | A 32-bit PCG generator
+Field       | Z0.EmbeddedRngKind.Pcg64                                              | A 64-bit PCG generator
+Field       | Z0.EmbeddedRngKind.WyHash16                                           | A 16-bit WyHash generator
+Field       | Z0.EmbeddedRngKind.WyHash64                                           | A 64-bit WyHash generator
+Field       | Z0.EmbeddedRngKind.SplitMix64                                         | A 64-bit SplitMix generator
+Field       | Z0.EmbeddedRngKind.XOrShift128                                        | An xorshift generator with 128 bits of state
+Field       | Z0.EmbeddedRngKind.XOrShift256                                        | An xorshift generator with 256 bits of state
+Field       | Z0.EmbeddedRngKind.XOrShift1024                                       | An xorshift generator with 1024 bits of state
+Type        | Z0.CauchySpec`1                                                       | Characterizes a Cauchy distribution
+Field       | Z0.CauchySpec`1.Location                                              | The distribution mean
+Field       | Z0.CauchySpec`1.Scale                                                 | The distribution scale
+Property    | Z0.CauchySpec`1.DistKind                                              | Classifies the distribution spec
+Type        | Z0.ChiSquareSpec`1                                                    | Characterizes a bernouli distribution
+Field       | Z0.ChiSquareSpec`1.Freedom                                            | The number of degrees of freedom
+Property    | Z0.ChiSquareSpec`1.DistKind                                           | Classifies the distribution spec
+Type        | Z0.ExponentialSpec`1                                                  | Characterizes a Exponential (normal) distribution
+Property    | Z0.ExponentialSpec`1.DistKind                                         | Classifies the distribution spec
+Method      | Z0.GammaSpec.From``1(Z0.IDistributionSpec{``0})                       | Interprets a supplied spec as a gamma spec; an error            is raised if the spec does not define gamma distribution
+Method      | Z0.GammaSpec.Define``1(``0,``0,``0)                                   | Defines a gamma distribution
+Type        | Z0.GammaSpec`1                                                        | Characterizes a Gamma distribution
+Property    | Z0.GammaSpec`1.DistKind                                               | Classifies the distribution spec
+Type        | Z0.GaussianSpec`1                                                     | Characterizes a Gaussian (normal) distribution
+Method      | Z0.GaussianSpec`1.Define(`0,`0)                                       | Defines a Gaussian distribution with specified mean and standard deviation
+Field       | Z0.GaussianSpec`1.Mean                                                | The mean of the distribtion that serves as the location parameter
+Field       | Z0.GaussianSpec`1.StdDev                                              | The standard deviation
+Property    | Z0.GaussianSpec`1.DistKind                                            | Classifies the distribution spec
+Type        | Z0.GeometricSpec`1                                                    | Characterizes a geometric distribution
+Field       | Z0.GeometricSpec`1.Success                                            | Specifies a value within the unit interval [0,1] that represents the probability of success
+Type        | Z0.BernoulliSpec`1                                                    | Characterizes a bernouli distribution
+Field       | Z0.BernoulliSpec`1.Success                                            | Specifies a value within the unit interval [0,1] that represents the probability of success
+Method      | Z0.BernoulliSpec`1.Define(System.Double)                              | Defines a Bernoulli distribution predicated on the probability of trial success
+Type        | Z0.BetaSpec`1                                                         | Characterizes a beta distribution
+Property    | Z0.BetaSpec`1.DistKind                                                | Classifies the distribution spec
+Type        | Z0.BinomialSpec`1                                                     | Characterizes a binomial distribution
+Property    | Z0.BinomialSpec`1.DistKind                                            | Classifies the distribution spec
+Type        | Z0.LaplaceSpec`1                                                      | Characterizes a Laplace distribution
+Field       | Z0.LaplaceSpec`1.Location                                             | The distribution mean
+Field       | Z0.LaplaceSpec`1.Scale                                                | The standard deviation
+Property    | Z0.LaplaceSpec`1.DistKind                                             | Classifies the distribution spec
+Type        | Z0.Observations`1                                                     | Defines an observation sequence
+Field       | Z0.Observations`1.Count                                               | The number of observations that comprise the sample
+Field       | Z0.Observations`1.Dim                                                 | The sample dimensionality
+Method      | Z0.Observations`1.Observation(System.Int32)                           | Retrieves a single index-identified observation vector
+Method      | Z0.Observations`1.Slice(System.Int32,System.Int32)                    | Selects a contiguous sequence of observations beginning at a specified offset
+Property    | Z0.Observations`1.Length                                              | The data length
+Type        | Z0.PoissonSpec`1                                                      | Characterizes a Poisson distribution
+Field       | Z0.PoissonSpec`1.Rate                                                 | Specifies the event frequency
+Property    | Z0.PoissonSpec`1.DistKind                                             | Classifies the distribution spec
+Type        | Z0.RVar`1                                                             | Defines a random variable
+Method      | Z0.RVar`1.Sample(System.Int32)                                        | Samples a specified number of values
+Method      | Z0.RVar`1.Sample                                                      | Samples an arbitrary number of values
+Method      | Z0.RVar`1.Next                                                        | Samples exactly one value
+Method      | Z0.DistributionSpec.bernoulli``1(Z0.IDistributionSpec{``0})           | Casts a supplied distribution to a Bernoulli distribution
+Method      | Z0.DistributionSpec.Define``1(System.Double)                          | Specifies a Bernoulli distribution predicated on the probability of trial success
+Type        | Z0.GaussianSpec                                                       | Defines operations specific to Gaussian distributions
+Method      | Z0.GaussianSpec.From``1(Z0.IDistributionSpec{``0})                    | Interprets a supplied spec as a Gaussian spec; an error            is raised if the spec does not define a Gaussian distribution
+Method      | Z0.GaussianSpec.Define``1(``0,``0)                                    | Defines a Gaussian distribution with specified mean and standard deviation
+Method      | Z0.Observations.Load``1(``0[],System.Int32)                           | Loads a sample from an array
+Method      | Z0.Observations.Load``1(System.Span{``0},System.Int32)                | Loads a sample from a span
+Method      | Z0.Observations.Alloc``1(System.Int32,System.Int32)                   | Allocates a sample
+Type        | Z0.UniformSpec                                                        | Defines operations specific to uniform distributions
+Method      | Z0.UniformSpec.from``1(Z0.IDistributionSpec{``0})                     | Interprets a supplied spec as a uniform spec; an error            is raised if the spec does not define a uniform distribution
+Method      | Z0.UniformSpec.define``1(``0,``0)                                     | Defines a unform distribution bound between lower and upper bounds
+Method      | Z0.UniformSpec.define``1(Z0.Interval{``0}@)                           | Defines a uniform distribution bound to an interval domain
+Type        | Z0.UniformBitsSpec                                                    | Defines operations specific to uniform bit distributions
+Method      | Z0.UniformBitsSpec.From``1(Z0.IDistributionSpec{``0})                 | Interprets a supplied spec as a uniform spec; an error            is raised if the spec does not define a uniform bits distribution
+Method      | Z0.UniformBitsSpec.Define``1                                          | Defines a unform bits distribution
+Type        | Z0.UniformBitsSpec`1                                                  | Characterizes a uniform distribution
+Property    | Z0.UniformBitsSpec`1.DistKind                                         | Classifies the distribution spec
+Type        | Z0.UniformSpec`1                                                      | Characterizes a uniform distribution
+Field       | Z0.UniformSpec`1.Min                                                  | The lower bound
+Field       | Z0.UniformSpec`1.Max                                                  | The upper bound
+Method      | Z0.UniformSpec`1.Define(`0,`0)                                        | Defines a unform distribution bound between lower and upper bounds
+Method      | Z0.UniformSpec`1.Define(Z0.Interval{`0}@)                             | Defines a uniform distribution bound to an interval domain
+Property    | Z0.UniformSpec`1.DistKind                                             | Classifies the distribution
+Method      | Z0.PolEnum.EnumValues``1(Z0.IPolyrand,System.Func{``0,System.Boolean})| Produces a stream of values sampled from an enum
+Method      | Z0.PolEnum.EnumValues``1(Z0.IPolyrand,``0[])                          | Produces a stream of enum values enum
+Method      | Z0.PolyBits.BitStream32(Z0.IPolyrand)                                 | Produces an interminable stream of random bits
+Method      | Z0.PolyBits.BitStream``1(Z0.IPolyrand)                                | Produces an interminable stream of random bits from a value sequence of parametric type
+Method      | Z0.PolyBytes.Bytes(Z0.IPolyrand)                                      | Produces an interminable stream of random bytes
+Method      | Z0.PolyBytes.Bytes(Z0.IPolyrand,System.Int32)                         | Produces a limited stream of random bytes
+Method      | Z0.PolyBytes.ByteStream(Z0.IPolyrand)                                 | Produces a random stream of bytes
+Method      | Z0.PolyFill.Fill``1(Z0.IPolyrand,Z0.Interval{``0},System.Int32,``0@,System.Func{``0,System.Boolean})| Fills a caller-allocated target with a specified number of values from the source
+Method      | Z0.PolyFill.Fill``1(Z0.IRngPointSource{``0},System.Int32,``0@)        | Fills a caller-allocated target with a specified number of values from a source
+Method      | Z0.PolyFill.Fill``1(Z0.IPolyrand,System.Int32,``0@)                   | Fills a caller-allocated target with a specified number of values from the source
+Method      | Z0.PolyOne.Single``1(Z0.IPolyrand,``0)                                | Produces a single random value
+Method      | Z0.PolyOne.Single``1(Z0.IPolyrand,``0,``0)                            | Produces a single random value within a range
+Method      | Z0.PolyPower.Pow2``1(Z0.IPolyrand,``0)                                | Produces a random power of 2 within the primal type domain
+Method      | Z0.PolyPower.Pow2``1(Z0.IPolyrand,System.Int32,System.Int32)          | Produces a random power of 2 with specified min/max exponent values
+Method      | Z0.PolyRaze.Array``1(Z0.IPolyrand,System.Int32)                       | Produces an array of random values
+Method      | Z0.PolyRaze.Array``1(Z0.IPolyrand,System.Int32,Z0.Interval{``0})      | Produces an array of random values
+Method      | Z0.PolyRaze.Array``1(Z0.IPolyrand,System.Int32,``0,``0,System.Func{``0,System.Boolean})| Produces an array of random values between specified lower and upper bounds
+Method      | Z0.PolyRaze.Array``1(Z0.IPolyrand,System.Int32,``0,``0)               | Produces an array of random values between specified lower and upper bounds
+Method      | Z0.PolyShuffles.Shuffle``1(Z0.IPolyrand,System.Span{``0})             | Shuffles span content in-place
+Method      | Z0.PolyShuffles.Shuffle``1(Z0.IPolyrand,``0[])                        | Shuffles array content in-place
+Method      | Z0.PolyShuffles.Shuffle``1(Z0.IPolyrand,System.ReadOnlySpan{``0})     | Replicates and shuffles a source span
+Method      | Z0.PolySpan.SpanFill``1(Z0.IPolyrand,System.Span{``0})                | Fills a caller-allocated span with random values
+Method      | Z0.PolySpan.Span``1(Z0.IPolyrand,System.Int32,System.Nullable{Z0.Interval{``0}},System.Func{``0,System.Boolean})| Produces a span of random values
+Method      | Z0.PolySpan.Span``1(Z0.IPolyrand,System.Int32,Z0.Interval{``0})       | Produces a span of random values constraint to a specified domain
+Method      | Z0.PolySpan.Span``1(Z0.IPolyrand,System.Int32,``0,``0,System.Func{``0,System.Boolean})| Produces a span of random values constraint to a specified domain
+Method      | Z0.PolySpan.Span``1(Z0.IPolyrand,System.Int32,``0)                    | Produces a span of random values
+Method      | Z0.PolySpan.SpanFill``1(Z0.IPolyrand,``0,``0,System.Span{``0})        | Fills a caller-allocated span with random values
+Method      | Z0.PolySpan.SpanFill(Z0.IPolyrand,System.Span{Z0.bit})                | Fills a caller-supplied target with random bits
+Method      | Z0.PolySpan.ReadOnlySpan``1(Z0.IPolyrand,System.Int32,System.Nullable{Z0.Interval{``0}},System.Func{``0,System.Boolean})| Allocates and produces a readonly span populated with random values
+Method      | Z0.PolySpan.NonZeroSpan``1(Z0.IPolyrand,System.Int32,Z0.Interval{``0})| Allocates and produces a punctured span populated with nonzero random values
+Method      | Z0.PolySpan.NonZeroSpan``1(Z0.IPolyrand,System.Int32)                 | Allocates and produces a punctured span populated with nonzero random values
+Method      | Z0.PolyStream.filtered``1(Z0.IPolyrand,Z0.Interval{``0},System.Func{``0,System.Boolean})| Creates a stream predicated on a specified source over which a filter is applied
+Type        | Z0.PolyStream.RngStream`1                                             | Captures a random stream along with the generator classification
+Method      | Z0.XStream.Stream``1(Z0.IPolyrand)                                    | Produces a random stream of unfiltered/unbounded points from a source
+Method      | Z0.XStream.Stream``1(Z0.IPolyrand,``0,``0)                            | Produces a stream values from the source subject to a specified range and optional filter
+Method      | Z0.XStream.Stream``1(Z0.IPolyrand,Z0.Interval{``0})                   | Produces a stream of values from the random source
+Method      | Z0.XStream.Stream``1(Z0.IPolyrand,Z0.Interval{``0},System.Func{``0,System.Boolean})| Produces a stream of values from the random source
+Type        | Z0.PolySystem                                                         | Adapter for client code that expects to interface with the System.Random class
+Method      | Z0.PolySystem.From(Z0.IPolyrand)                                      | Derives the system random rng from polyrand
+Method      | Z0.PolyZero.NonZStream``1(Z0.IPolyrand,Z0.Interval{``0})              | Produces a stream of nonzero uniformly random values
+Method      | Z0.PolyZero.NonZ``1(Z0.IPolyrand,``0,``0)                             | Queries the source for the next nonzero value within a range
+Method      | Z0.PolyZero.NonZ``1(Z0.IPolyrand,Z0.Interval{``0})                    | Queries the source for the next nonzero value within a range
+Method      | Z0.PolyZero.NonZ``1(Z0.IPolyrand,``0)                                 | Queries the source for the next nonzero value less than a specified upper bound
+Method      | Z0.PolyZero.NonZ``1(Z0.IPolyrand)                                     | Queries the source for the next nonzero value
+Type        | Z0.Polyrand                                                           | Produces pseudorandom numeric points and streams predicated on a supplied generator
+Method      | Z0.Polyrand.Pcg64(System.Nullable{System.UInt64},System.Nullable{System.UInt64})| Creates a 64-bit Pcg RNG
+Method      | Z0.Polyrand.WyHash64(System.Nullable{System.UInt64})                  | Creates a new WyHash16 generator
+Method      | Z0.Polyrand.SplitMix(System.Nullable{System.UInt64})                  | Creates a splitmix 64-bit generator
+Method      | Z0.Polyrand.XOrStarStar256(System.UInt64[])                           | Creates an XOrShift 1024 rng
+Method      | Z0.Polyrand.XOrShift1024(System.UInt64[])                             | Creates an XOrShift 1024 rng
+Method      | Z0.Polyrand.enable(System.Int64,System.Int32)                         | Enables a specified source bit
+Method      | Z0.Entropy.Bytes(System.Int32)                                        | Produces a specified number of entropic bytes
+Method      | Z0.Entropy.Value``1                                                   | Produces a single entropic value of primal type
+Type        | Z0.PolySeed                                                           | Defines a permanent/immutable seed store to support pseudorandom reproducibility
+Method      | Z0.PolySeed.Entropic``1                                               | Produces a non-deterministic seed
+Method      | Z0.PolySeed.Configured``1(``0)                                        | Produces a seed from embedded application resources that, for a given index, remanins fixed
+Property    | Z0.PolySeed.SourceLength                                              | The total number of bytes in the embedded data
+Method      | Z0.PolySeed.MaxOffset``1                                              | Gets the maximum available offset for a given data type
+Method      | Z0.PolySeed.TakeSingle``1(System.Int32)                               | Acquires a single value from the embedded data source
+Method      | Z0.PolySeed.TakeMany``1(System.Int32,System.Int32)                    | Acauires a readonly span of values from the embedded source
+Method      | Z0.PolySeed.VerifyIndex``1(System.Int32)                              | Checks that a requested offset for a given data type is within bounds
+Property    | Z0.PolySeed.Bytes                                                     | Provides access to 32768 bytes of random data
+Type        | Z0.PolySeed256                                                        | Facilities deterministic/repeatable executions of pseudorandom processes
+Property    | Z0.PolySeed64.RawBytes                                                | See https://vcsjones.com/2019/02/01/csharp-readonly-span-bytes-static/ for an explanation of how the jit optimizes this
+Method      | Z0.Pcg.Nav32(System.Nullable{System.UInt64},System.Nullable{System.UInt64})| Creates a 32-bit Pcg RNG
+Method      | Z0.Pcg.Nav32Suite(System.ValueTuple{System.UInt64,System.UInt64}[])   | Creates a 64-bit Pcg RNG suite predicated on an array of seed and stream indices
+Method      | Z0.Pcg.Nav32Suite(System.Span{System.UInt64},System.Span{System.UInt64})| Creates a 32-bit Pcg RNG suite predicated on spans of seeds and stream indices
+Method      | Z0.Pcg32.Define(System.UInt64,System.Nullable{System.UInt64})         | Creates a pcg 64-bit rng
+Method      | Z0.Pcg32.Step                                                         | Advances the generator to the next state and returns the prior state for consumption
+Method      | Z0.Pcg32.rotr(System.UInt32,System.UInt32)                            | Rotates bits in the source rightwards by a specified offset
+Method      | Z0.Pcg32.Grind(System.UInt64)                                         | Produces a pseudorandom output from a given source state
+Type        | Z0.Pcg64                                                              | Implemements a 64-bit PCG generator
+Method      | Z0.Pcg64.Define(System.UInt64,System.Nullable{System.UInt64})         | Creates a pcg 64-bit rng
+Method      | Z0.Pcg64.Step                                                         | Advances the generator to the next state and returns the prior state for consumption
+Method      | Z0.Pcg64.Grind(System.UInt64)                                         | Produces a pseudorandom output predicated on a state
+Method      | Z0.PolyNique.Distinct``1(Z0.IPolyrand,``0[],System.Int32)             | Samples the source values without replacement
+Method      | Z0.PolyNique.Distinct``1(Z0.IPolyrand,System.Int32)                   | Takes a specified number of distinct points from a source
+Type        | Z0.SplitMix64                                                         | Implements a 64-bit random number generator
+Method      | Z0.SplitMix64.Define(System.UInt64)                                   | Defines the rng with a specified initial state
+Type        | Z0.WyHash16                                                           | Implements a 16-bit random number generator
+Method      | Z0.WyHash16.Define(System.UInt16,System.Nullable{System.UInt16})      | Creates a wyhash 16-bit rng
+Type        | Z0.WyHash64                                                           | Implements a 64-bit random number generator
+Type        | Z0.XOrShift1024                                                       | Implements an XOrShift generator
+Field       | Z0.XOrShift1024.JT                                                    | The jump table of predetermined constants to facilitate an efficient way            to simulate calls to "Next()"
+Field       | Z0.XOrShift1024.Multiplier                                            | Predetermined constant by which every generated value is multiplied
+Type        | Z0.XOrShift128                                                        | Defines pseudorandom number generator
+Type        | Z0.XOrShift256                                                        | Defines pseudorandom number generator
+Method      | Z0.XOrShift256.Define(System.UInt64[])                                | Constructs a randomizer using a specific seed

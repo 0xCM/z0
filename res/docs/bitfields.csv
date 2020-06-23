@@ -1,0 +1,87 @@
+Method      | Z0.BitFields.create``1(Z0.BitFieldSpec@)                              | Creates a stateful bitfield api surface
+Method      | Z0.BitFields.create``3                                                | Creates a stateful numeric bitfield api surface
+Method      | Z0.BitFields.create``3(Z0.BitFieldSpec@)                              | Creates a stateful numeric bitfield api surface
+Method      | Z0.BitFields.create``3(System.Int32)                                  | Defines and creates a fixed-width bitfield
+Method      | Z0.BitFields.create``4                                                | Creates a stateful numeric bitfield api surface
+Method      | Z0.BitFields.extract``2(``0,System.Byte,System.Byte)                  | Extracts a primal bitfield segment
+Method      | Z0.BitFieldSpecs.segments``2(Z0.FieldIndex{``0,``1}@)                 | Creates the field segment array as determined by a field index
+Method      | Z0.BitFieldSpecs.segment(System.String,System.Byte,System.Byte,System.Byte)| Defines a bitfield segment
+Method      | Z0.BitFieldSpecs.segment``1(System.String,``0,``0,``0)                | Defines a bitfield segment
+Method      | Z0.BitFieldSpecs.segment(Z0.BitFieldModel@,System.Byte)               | Describes an index-identifed model segment
+Method      | Z0.BitFieldSpecs.width(Z0.BitFieldSpec@)                              | Computes the aggregate width of the segments that comprise the bitfield
+Method      | Z0.BitFieldSpecs.specify(Z0.FieldSegment[])                           | Defines a bitfield predicated on explicitly-specified segments
+Method      | Z0.BitFieldSpecs.specify``3                                           | Defines a bitfield predicated on an indexing enumeration I, the underlying numeric type of I, T, and a width-defining enumeration W
+Method      | Z0.BitFieldSpecs.specify``2                                           | Defines a bitfield predicated on an indexing enumeration I, with an assumed underlying             numeric type of byte, and a width-defining enumeration W
+Type        | Z0.BitFieldSpec                                                       | Defines a partition over a contiguous sequence of bits
+Property    | Z0.BitFieldSpec.TotalWidth                                            | The sum of the widths of the defining segments
+Field       | Z0.BitFieldSpec`2.Untyped                                             | The bitfield definition upon which the reader is predicated
+Property    | Z0.FieldIndexEntry.FieldIndex                                         | The zero-based and sequential field index
+Property    | Z0.FieldIndexEntry.FieldName                                          | The field name
+Property    | Z0.FieldIndexEntry.FieldWidth                                         | The number of bits covered by the field
+Type        | Z0.FieldIndexEntry`2                                                  | Associates the declaration order of an enum literal with the corresponding literal value
+Type        | Z0.FieldIndexEntry`1                                                  | Associates the declaration order of an enum literal with the corresponding literal value
+Type        | Z0.FieldSegment                                                       | Defines a byte-parametric field segment
+Property    | Z0.FieldSegment.Name                                                  | A unique name that identifies the segment
+Property    | Z0.FieldSegment.StartPos                                              | The first index of the segment, relative to the source field
+Property    | Z0.FieldSegment.EndPos                                                | The last index of the segment, relative to the source field
+Property    | Z0.FieldSegment.Width                                                 | The number of bits in the segment
+Type        | Z0.FieldSegment`1                                                     | Defines a field segment, i.e. a congiguous run of bits that, together with other segments,            comprise a partition over a value of parametric type
+Property    | Z0.FieldSegment`1.Name                                                | A unique name that can be used as an alternate segment identifier
+Property    | Z0.FieldSegment`1.StartPos                                            | The first index of the segment, relative to the source field
+Property    | Z0.FieldSegment`1.EndPos                                              | The last index of the segment, relative to the source field
+Property    | Z0.FixedSegment`3.Name                                                | A unique name that can be used as an alternate segment identifier
+Property    | Z0.FixedSegment`3.Index                                               | The segment identifier
+Property    | Z0.FixedSegment`3.StartPos                                            | The first index of the segment, relative to the source field
+Property    | Z0.FixedSegment`3.EndPos                                              | The last index of the segment, relative to the source field
+Property    | Z0.FixedSegment`3.Width                                               | The number of bits in the segment
+Method      | Z0.BitField64`1.Test(System.Byte)                                     | Determines whether an index-identified bit is enabled
+Method      | Z0.BitField64`1.Set(System.Byte,Z0.bit)                               | Enables or disables an index-identified bit
+Method      | Z0.BitField64`1.Enable(System.Byte)                                   | Enables an index-identified bit
+Method      | Z0.BitField64`1.Disable(System.Byte)                                  | Enables an index-identified bit
+Method      | Z0.BitField64`2.Read(System.Span{System.UInt64})                      | Extracts all segments from the source value and deposits the result in a caller-suppled span
+Type        | Z0.BitField`2                                                         | Defines a stateful numeric bitfield api surface parametrized by an indexing enum and numeric type
+Field       | Z0.BitField`2.Spec                                                    | The bitfield definition upon which the reader is predicated
+Method      | Z0.BitField`2.Segment(`0)                                             | Fetches an index-identified segment
+Method      | Z0.BitField`2.Extract(Z0.FieldSegment@,`1@)                           | Extracts a contiguous range of bits from the source value per the spegment specification
+Method      | Z0.BitField`2.Extract(`0,`1@)                                         | Extracts a contiguous range of bits from the source value per the spegment specification
+Method      | Z0.BitField`2.Deposit(`1@,System.Span{`1})                            | Extracts all segments from the source value and deposits the result in a caller-suppled span
+Method      | Z0.BitField`2.Extract(Z0.FieldSegment@,`1@,System.Boolean)            | Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+Method      | Z0.BitField`2.Extract(`0,`1@,System.Boolean)                          | Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+Method      | Z0.BitField`2.Deposit(Z0.FieldSegment@,`1@,`1@)                       | Overwrites an identified target segment with the bits from the corresponding source segment
+Method      | Z0.BitField`2.Deposit(`0,`1@,`1@)                                     | Overwrites an identified target segment with the bits from the corresponding source segment
+Type        | Z0.BitField`3                                                         | Defines the (stateful) bitfield api surface parametrized by an indexing enum
+Field       | Z0.BitField`3.Spec                                                    | The bitfield definition upon which the reader is predicated
+Method      | Z0.BitField`3.Segment(`1)                                             | Fetches an index-identified segment
+Method      | Z0.BitField`3.Read(Z0.FieldSegment@,`0@)                              | Extracts a contiguous range of bits from the source value per the spegment specification
+Method      | Z0.BitField`3.Read(`1,`0@)                                            | Extracts a contiguous range of bits from the source value per the spegment specification
+Method      | Z0.BitField`3.Read(`0@,System.Span{`2})                               | Extracts all segments from the source value and deposits the result in a caller-suppled span
+Method      | Z0.BitField`3.Read(Z0.FieldSegment@,`0@,System.Boolean)               | Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+Method      | Z0.BitField`3.Read(`1,`0@,System.Boolean)                             | Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+Method      | Z0.BitField`3.Write(Z0.FieldSegment@,`0@,`2@)                         | Overwrites an identified target segment with the bits from the corresponding source segment
+Method      | Z0.BitField`3.Write(Z0.FieldSegment@,`0@,`0@)                         | Overwrites an identified target segment with the bits from the corresponding source segment
+Method      | Z0.BitField`3.Write(`1,`0@,`0@)                                       | Overwrites an identified target segment with the bits from the corresponding source segment
+Method      | Z0.BitField`3.Write(`1,`0@,`2@)                                       | Overwrites an index-identified target segment with the bits from the corresponding source segment
+Type        | Z0.BitField`1                                                         | Defines the (stateful) bitfield api surface
+Field       | Z0.BitField`1.Spec                                                    | The bitfield definition upon which the reader is predicated
+Method      | Z0.BitField`1.Segment(System.Int32)                                   | Fetches an index-identified segment
+Method      | Z0.BitField`1.Extract(Z0.FieldSegment@,`0)                            | Extracts a contiguous range of bits from the source value per the spegment specification
+Method      | Z0.BitField`1.Deposit(`0,System.Span{`0})                             | Extracts all segments from the source value and deposits the result in a caller-suppled span
+Method      | Z0.BitField`1.Extract(Z0.FieldSegment@,`0,System.Boolean)             | Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+Type        | Z0.DataBroker64`3                                                     | Mediates parametric data exchange for up to 64 enumeration-predicated classifiers
+Type        | Z0.DataBroker64`2                                                     | Mediates parametric data exchange for up to 64 enumeration-predicated classifiers
+Method      | Z0.SegmentFormatter.format``2(``0)                                    | Formats a field segments as {typeof(V):Name}:{TrimmedBits}
+Method      | Z0.SegmentFormatter.format``2(System.ReadOnlySpan{``0})               | Computes the canonical format for a contiguous field segment sequence
+Property    | Z0.IFieldIndexEntry.FieldIndex                                        | The zero-based and sequential field index
+Property    | Z0.IFieldIndexEntry.FieldName                                         | The field name
+Property    | Z0.IFieldIndexEntry.FieldWidth                                        | The number of bits covered by the field
+Property    | Z0.IFieldIndexEntry`2.FieldWidth                                      | The number of bits covered by the field
+Property    | Z0.IFieldIndexEntry`3.FieldIndex                                      | The zero-based and sequential field index
+Type        | Z0.IFieldSegment                                                      | Identifies a value partition element
+Property    | Z0.IFieldSegment.Name                                                 | A unique name that identifies the segment
+Type        | Z0.IFieldSegment`1                                                    | Characterizes an element within a field partition
+Property    | Z0.IFieldSegment`1.StartPos                                           | The first index of the segment, relative to the source field
+Property    | Z0.IFieldSegment`1.EndPos                                             | The last index of the segment, relative to the source field
+Property    | Z0.IFieldSegment`1.Width                                              | The number of bits in the segment
+Type        | Z0.INumericSegment`1                                                  | Characterizes an element within a partition of a numeric field
+Type        | Z0.IScalarField`1                                                     | Characterizes a bitfield defined over a numeric value
+Method      | Z0.IScalarField`1.Update(`0@)                                         | Updates the underlying scalar value

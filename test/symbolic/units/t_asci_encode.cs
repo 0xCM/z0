@@ -55,7 +55,7 @@ namespace Z0
             var res = AsciResourceSet.create<HexKind,asci4>();
             for(var i=0; i<res.EntryCount; i++)
             {                
-                var expect = asci.encode(n4, text.concat('x', uint8(i).FormatHex(true, false)));
+                var expect = asci.encode(n4, text.concat('x', As.uint8(i).FormatHex(true, false)));
                 ref readonly var actual = ref res[i];
                 Claim.eq(expect,actual);                        
             }

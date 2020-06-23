@@ -1,0 +1,1124 @@
+Method      | Z0.XTend.Join``1(``0[][])                                             | Sequenteially condenses a sequence of arrays into a single array
+Method      | Z0.XTend.Mapi``2(``0[],System.Func{System.Int32,``0,``1})             | Transforms an array via an indexed mapping function
+Method      | Z0.XTend.Reverse``1(``0[])                                            | Reverses an array in-place
+Method      | Z0.XTend.Cast``1(System.Object[])                                     | Populates a target array by casting each elements of a source aray to the target element type
+Method      | Z0.XTend.OrderBy``2(``0[],System.Func{``0,``1})                       | Linq orderby operator specialized for arrays
+Method      | Z0.XTend.Select``2(``0[],System.Func{``0,``1})                        | Defines an array-specific select operator
+Method      | Z0.XTend.map``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})| Applies a function to an input sequence to yield a transformed output sequence
+Method      | Z0.XTend.Where``1(``0[],System.Func{``0,System.Boolean})              | Linq where operator specialized for arrays
+Method      | Z0.XTend.Where``2(``0[],System.Func{``0,System.Boolean},System.Func{``0,``1})| Result = Filter + Project
+Method      | Z0.XTend.filter``1(``0[],System.Func{``0,System.Boolean})             | Allocates and populates a new array by filtering the source array with             a specified predicate
+Method      | Z0.XTend.AddRange``1(System.Collections.Concurrent.ConcurrentBag{``0},System.Collections.Generic.IEnumerable{``0})| Adds a collection of items to a bag
+Method      | Z0.XTend.HasAnyKey``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},System.Collections.Generic.IEnumerable{``0})| Determines whether the dictionary has any the keys that are specified in a set
+Method      | Z0.XTend.HasAllKeys``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},System.Collections.Generic.IEnumerable{``0})| Determines whether the dictionary has all of the keys that are specified in a set
+Method      | Z0.XTend.Force``1(System.Collections.Generic.IEnumerable{``0})        | Forces enumerable evaluation
+Method      | Z0.XTend.FirstOrDefault``1(System.Collections.Generic.IEnumerable{``0},``0)| Returns the first element if it exists; otherwise returns the supplied default
+Method      | Z0.XTend.FirstOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0})| Returns the first element if it exists; otherwise returns the value supplied            by invoking the default function
+Method      | Z0.XTend.OnFirstOrDefault``2(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0},System.Func{``0,``1})| Applies a function to the first item in the list that satisfies the predicate if such an item exists.            If no such item exists, the function is applied to the default value of the item
+Method      | Z0.XTend.Intersperse``1(System.Collections.Generic.IEnumerable{``0},``0)| Interleaves a specified value between each element of the source
+Method      | Z0.XTend.Iter``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0},System.Boolean)| Applies an action to each member of the collection
+Method      | Z0.XTend.Iter``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Action{``0,``0})| Enumerates stream elements in pairs, until one of the streams is exhausted,            invoking a traversal action for each enumerated pair
+Method      | Z0.XTend.LastOrDefault``1(System.Collections.Generic.IEnumerable{``0},``0)| Returns the last element if it exists; otherwise returns the supplied default
+Method      | Z0.XTend.LastOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0})| Returns the last element if it exists; otherwise returns the value supplied            by invoking the default function
+Method      | Z0.XTend.Map``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})| Applies a function to an input sequence to yield a transformed output sequence
+Method      | Z0.XTend.Partition``1(System.Collections.Generic.IEnumerable{``0},System.Int32)| Partitions a source stream into sub-arrays of a maximum length
+Method      | Z0.XTend.Partition``1(``0[],System.Int32)                             | Partitions the source array into a sequence of array segments
+Method      | Z0.XTend.Batch``1(System.Collections.Generic.IEnumerable{``0},System.Int32)| Runs through an enumerable in batches
+Method      | Z0.XTend.Prepend``1(System.Collections.Generic.IEnumerable{``0},``0[])| Prepends one or more items to the head of the sequence
+Method      | Z0.XTend.SecondOrDefault``1(System.Collections.Generic.IEnumerable{``0})| Returns the second term of the sequence if it exists; otherwise returns the default value
+Method      | Z0.XTend.Singletons``1(System.Collections.Generic.IEnumerable{``0})   | Constructs a sequence of singleton sequences from a sequence of elements
+Method      | Z0.XTend.Collapse``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})| Reduces a stream of element streams to an element stream
+Method      | Z0.XTend.StreamTo``1(System.Collections.Generic.IEnumerable{``0},System.Span{``0})| Fills an allocated span from a sequence
+Method      | Z0.XTend.Take``1(System.Collections.Generic.IEnumerable{``0},System.UInt32)| Defines missing Take(stream,n:uint) method
+Method      | Z0.XTend.ToArray``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})| Creates a transformed array
+Method      | Z0.XTend.ToConcurrentDictionary``2(System.Collections.Generic.IDictionary{``0,``1})| Creates a concurrent dictionary from an ordinary dictionary
+Method      | Z0.XTend.ToConcurrentDictionary``2(System.Collections.Generic.IEnumerable{``1},System.Func{``1,``0})| Creates a concurrent dictionary from the input sequence
+Method      | Z0.XTend.ToConcurrentDictionary``3(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Func{``0,``2})| Creates a concurrent dictionary from the input sequence
+Method      | Z0.XTend.ToDictionary``2(System.Collections.Generic.IEnumerable{System.ValueTuple{``0,``1}})| Constructs a mutable dictionary from a sequence of key-value pairs
+Method      | Z0.XTend.ReadOnly``2(System.Collections.Generic.IDictionary{``0,``1}) | Creates a read-only dictionary from an existing mutable dictionary
+Method      | Z0.XTend.ToReadOnlySpan``1(System.Collections.Generic.IEnumerable{``0},System.Int32)| Constructs a span of specified length from a sequence
+Method      | Z0.XTend.ToReadOnlySpan``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)| Constructs a span of specified length from the sequence obtained by skipping a specified number of leading elements
+Method      | Z0.XTend.ToReadOnlySpan``1(System.Collections.Generic.IEnumerable{``0})| Constructs a span from a (presumeably finite) sequence selection
+Method      | Z0.XTend.ToReadOnlySpan``1(``0[])                                     | Constructs a span from an aray
+Method      | Z0.XTend.ToSet``1(System.Collections.Generic.IEnumerable{``0})        | Creates a set from an item stream
+Method      | Z0.XTend.ToSet``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})| Creates a set from a sequence projection
+Method      | Z0.XTend.ReadOnly``1(System.Span{``0})                                | Presents a mutable span as a readonly span
+Method      | Z0.XTend.ToSpan``1(``0[])                                             | Constructs a span from an array
+Method      | Z0.XTend.ToSpan``1(System.Collections.Generic.IEnumerable{``0})       | Constructs a span from a (presumeably finite) sequence selection
+Method      | Z0.XTend.ToSpan``1(System.ReadOnlySpan{``0})                          | Constructs a span from a readonly span
+Method      | Z0.XTend.ToSpan``1(System.Collections.Generic.IEnumerable{``0},System.Int32)| Constructs a span of specified length from a sequence
+Method      | Z0.XTend.ToSpan``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)| Constructs a span of specified length from the sequence obtained by skipping a specified number of leading elements
+Method      | Z0.XTend.Dequeue``1(System.Collections.Generic.Queue{``0},System.Int32)| Removes a specified number of items from a queue
+Method      | Z0.XTend.Dequeue``1(System.Collections.Concurrent.ConcurrentQueue{``0})| Pops all items off the queue
+Method      | Z0.XTend.Dequeue``1(System.Collections.Concurrent.ConcurrentQueue{``0},System.Int32)| Pops a sequence of items off a queue
+Method      | Z0.XTend.Enqueue``1(System.Collections.Generic.Queue{``0},System.Collections.Generic.IEnumerable{``0})| Enqueues a stream
+Method      | Z0.XTend.Enqueue``1(System.Collections.Concurrent.ConcurrentQueue{``0},System.Collections.Generic.IEnumerable{``0})| Pushes a sequence of items into queue and returns the number of items enqueued
+Method      | Z0.XTend.Include``1(System.Collections.Generic.ISet{``0},System.Collections.Generic.IEnumerable{``0})| Adds items from a stream to a target set
+Method      | Z0.XTend.Include``1(System.Collections.Generic.ISet{``0},``0[])       | Adds items from a parameter array to a target set
+Method      | Z0.XTend.Intersect``1(System.Collections.Generic.ISet{``0},System.Collections.Generic.ISet{``0}[])| Computes the intersection of a target set with source sets specified in a parameter array
+Method      | Z0.XTend.IsEmpty``1(System.Collections.Generic.ISet{``0})             | Determines whether a set is empty
+Method      | Z0.XTend.IsNonEmpty``1(System.Collections.Generic.ISet{``0})          | Determines whether a set is nonempty
+Method      | Z0.XTend.IsEmpty``1(System.Collections.Generic.IReadOnlyCollection{``0})| Determines whether a collection contains any elements
+Method      | Z0.XTend.ToReadOnlyList``1(System.Collections.Generic.IEnumerable{``0})| Creates a read-only list from a source sequence
+Method      | Z0.XTend.Unions``1(System.Collections.Generic.ISet{``0},System.Collections.Generic.ISet{``0}[])| Adds all items from sets specified in a parameter array to a target set
+Method      | Z0.XTend.WithItems``1(System.Collections.Generic.ISet{``0},System.Collections.Generic.IEnumerable{``0})| Adds a stream of items to a target set
+Method      | Z0.XTend.WithItems``1(System.Collections.Generic.HashSet{``0},System.Collections.Generic.IEnumerable{``0})| Adds a stream of items to a target set
+Method      | Z0.XTend.WithItems``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IReadOnlyDictionary{``0,``1})| Addes the entries of the source dictionary to the destination dictionary
+Method      | Z0.XTend.WithItems``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}})| Addes the key-value pairs to the extended dictionary
+Method      | Z0.XTend.WithItems``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{``0})| Adds items to a list
+Method      | Z0.XTend.CopyTo``1(System.Span{``0},System.Span{``0},System.Int32)    | Copies the source span to a target span begininning at a specified target offset
+Method      | Z0.XTend.CopyTo``1(System.ReadOnlySpan{``0},System.Span{``0},System.Int32)| Copies the source span to a target span begininning at a specified target offset
+Method      | Z0.XTend.Concat``1(System.ReadOnlySpan{``0},System.ReadOnlySpan{``0}) | Forms a new span by the concatenation [head,tail]
+Method      | Z0.XTend.Concat``1(System.Span{``0},System.ReadOnlySpan{``0})         | Forms a new span by the concatenation [head,tail]
+Method      | Z0.XTend.Ignored(System.Reflection.MemberInfo)                        | Returns true if the [Ignore] attributed is applied to the target
+Method      | Z0.XTend.NotIgnored(System.Reflection.MemberInfo)                     | Returns true if the target is not attributed with the [Ignore] attribute
+Method      | Z0.XTend.Ignore``1(``0[])                                             | Excludes members with ignored metadata
+Method      | Z0.XTend.Ignore``1(System.Collections.Generic.IEnumerable{``0})       | Excludes members with ignored metadata
+Method      | Z0.XTend.ToPointer``1(System.RuntimeFieldHandle)                      | Gets the void* for the identified field
+Method      | Z0.XTend.ToVoid(System.IntPtr)                                        | Uses the (void*) explicit operator defined by the source type to            present said source as a void*
+Method      | Z0.XTend.Angled(System.String)                                        | Encloses text between less than and greater than characters
+Method      | Z0.XTend.ContainsAny(System.String,System.Collections.Generic.IEnumerable{System.Char})| Determines whether a string contains any of the characters in a supplied sequence
+Method      | Z0.XTend.ContainsAny(System.String,System.ReadOnlySpan{System.Char})  | Determines whether a string contains any of the characters in a supplied sequence
+Method      | Z0.XTend.ContainsAny(System.String,System.String[])                   | Determines whether a string contains any of the supplied substrings
+Method      | Z0.XTend.ContainsAny(System.String,System.Collections.Generic.IEnumerable{System.String})| Determines whether a string contains any of the supplied substrings
+Method      | Z0.XTend.SelectionSubject``1(System.Linq.Expressions.Expression{System.Func{``0}})| Gets the expression that directly identifies the selected subject
+Method      | Z0.XTend.SelectionSubject``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Gets the expression that directly identifies the selected subject
+Method      | Z0.XTend.SelectedPropertyName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Determines the name of the property as identified by an expression delegate
+Method      | Z0.XTend.CalledMethod(System.Linq.Expressions.Expression)             | Returns the method invoked by an expression, if any
+Method      | Z0.XTend.Conjunction``1(``0)                                          | Returns the expression if it is a logical conjunction and None otherwise
+Method      | Z0.XTend.Disjunction``1(``0)                                          | Returns the expression if it is a logical disjunction and None otherwise
+Method      | Z0.XTend.Constant(System.Linq.Expressions.Expression)                 | Extracts a value from a constant expression if possible
+Method      | Z0.XTend.Func``1(System.Reflection.MethodInfo,System.Object)          | Creates a delegate for an emitter
+Method      | Z0.XTend.Func``2(System.Reflection.MethodInfo,System.Object)          | Creates a delegate for a function f:X-&gt;Y realized by a specified method
+Method      | Z0.XTend.Func``3(System.Reflection.MethodInfo,System.Object)          | Creates a delegate for a function f:X1-&gt;X2-&gt;Y realized by a specified method
+Method      | Z0.XTend.Func``4(System.Reflection.MethodInfo,System.Object)          | Creates a delegate for a function f:X1-&gt;X2-&gt;X3-&gt;Y realized by a specified method
+Method      | Z0.XTend.Func``5(System.Reflection.MethodInfo,System.Object)          | Creates a delegate for a function f:X1-&gt;X2-&gt;X3-&gt;X4-&gt;Y realized by a specified method
+Method      | Z0.XTend.GetValueMemberName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Extracts the name of the value member referenced by an expression delegate
+Method      | Z0.XTend.GetAccessedProperty(System.Linq.Expressions.Expression)      | Extracts property info from a member expression, if possbile, and otherwise returns null
+Method      | Z0.XTend.AccessedMember(System.Linq.Expressions.Expression)           | Extracts member info from an expression, if possbile; otherwise returns none
+Method      | Z0.XTend.AccesedProperty(System.Linq.Expressions.Expression)          | Extracts property info from an expression, if possbile; otherwise returns none
+Method      | Z0.XTend.GetField``1(System.Linq.Expressions.Expression{System.Func{``0}})| Extracts the field info for the field referenced by an expression delegate
+Method      | Z0.XTend.GetField``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Extracts the field info for the field referenced by an expression delegate
+Method      | Z0.XTend.GetMember``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Extracts the member info for the member referenced by an expression delegate
+Method      | Z0.XTend.GetValueMember``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Extracts the <see cref="T:Z0.ValueMember" /> for the member referenced by a an expression delegate
+Method      | Z0.XTend.GetMethod``1(System.Linq.Expressions.Expression{System.Func{``0}})| Extracts the method info for the function referenced by an expression delegate
+Method      | Z0.XTend.GetMethod``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Extracts the method info for the function referenced by an expression delegate
+Method      | Z0.XTend.GetMethod``3(System.Linq.Expressions.Expression{System.Func{``0,``1,``2}})| Extracts the method info for the function referenced by an expression delegate
+Method      | Z0.XTend.GetMethod``4(System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``3}})| Extracts the method info for the function referenced by an expression delegate
+Method      | Z0.XTend.GetMethod``1(System.Linq.Expressions.Expression{System.Action{``0}})| Extracts the method for the action referenced by an an expression delegate
+Method      | Z0.XTend.GetMethod``2(System.Linq.Expressions.Expression{System.Action{``0,``1}})| Extracts the method info for the action referenced by an expression delegate
+Method      | Z0.XTend.GetMethod``3(System.Linq.Expressions.Expression{System.Action{``0,``1,``2}})| Extracts the method info for the action referenced by an expression delegate
+Method      | Z0.XTend.GetMethod``4(System.Linq.Expressions.Expression{System.Action{``0,``1,``2,``3}})| Extracts the method info for the action referenced by an expression delegate
+Method      | Z0.XTend.GetProperty``1(System.Linq.Expressions.Expression{System.Func{``0}})| Extracts the property info for the property referenced by an expression delegate
+Method      | Z0.XTend.GetProperty``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Extracts the property info for the property referenced by an expression delegate
+Method      | Z0.XTend.IsConversion(System.Linq.Expressions.Expression)             | Tests whether an expression is a conversion
+Method      | Z0.XTend.IsConversion``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Tests whether a member is wrapped in a conversion
+Method      | Z0.XTend.IsMemberAccess(System.Linq.Expressions.Expression)           | Tests whether the test expression is a member access expression
+Method      | Z0.XTend.IsCall(System.Linq.Expressions.Expression)                   | Tests whether the test expression is a function call
+Method      | Z0.XTend.IsSelect(System.Linq.Expressions.Expression)                 | Tests whether an expression is an application of the LINQ select operator
+Method      | Z0.XTend.IsLogical(System.Linq.Expressions.Expression)                | Tests whether an expression is a logical operator
+Method      | Z0.XTend.IsLambda(System.Linq.Expressions.Expression)                 | Tests whether an expression is a lambda expression
+Method      | Z0.XTend.IsDisjunction``1(``0)                                        | Tests whether an expression is a logical disjunction
+Method      | Z0.XTend.IsConjunction``1(``0)                                        | Tests whether an expression is a logical conjunction
+Method      | Z0.XTend.IsJunction(System.Linq.Expressions.Expression)               | Deterines whether the test expression is either a logical conjuntion or disjunction
+Method      | Z0.XTend.IsOneOf``2(System.Linq.Expressions.Expression)               | Performs a type-test on an expression
+Method      | Z0.XTend.IsOneOf``3(System.Linq.Expressions.Expression)               | Performs a type-test on an expression
+Method      | Z0.XTend.IsOneOf``4(System.Linq.Expressions.Expression)               | Performs a type-test on an expression
+Method      | Z0.XTend.TryFind``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})| Returns the first element of the sequence that satisifies the predicate, if any.
+Method      | Z0.XTend.TryFind``2(System.Collections.Generic.Dictionary{``0,``1},``0)| Retrieves the key-identified value if possible
+Method      | Z0.XTend.TryFind``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0)| Retrieves the key-identified value if possible
+Method      | Z0.XTend.TryDequeue``1(System.Collections.Concurrent.ConcurrentQueue{``0})| Removes an element from the queue if one exists
+Method      | Z0.XTend.TryRemove``2(System.Collections.Concurrent.ConcurrentDictionary{``0,``1},``0)| Removes the key-identified value if possible
+Method      | Z0.XTend.TryTake``1(System.Collections.Concurrent.ConcurrentBag{``0}) | A functional rendition of <see cref="M:System.Collections.Concurrent.ConcurrentBag`1.TryTake(`0@)" />
+Method      | Z0.XTend.TryGetSingle``1(System.Collections.Generic.IEnumerable{``0}) | Returns a value if the source stream yeilds exactly one value; otherwise, returns none
+Method      | Z0.XTend.TryGetSingle``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})| Returns a value if the source stream yeilds exactly one value that satisfied a predicate; otherwise, returns none
+Method      | Z0.XTend.First``1(Z0.Option{``0[]})                                   | Returns the value of the first element of an optional array, if extant; otherwise, raises an exception
+Method      | Z0.XTend.FirstOrDefault``1(Z0.Option{``0[]})                          | Returns the value of the first element of an optional array, if extant; otherwise, returns a parametric default
+Method      | Z0.XTend.TryGetFirst``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})| Searches for the first element in the stream that satisfies a predicate and returns the element if found; otherwise, returns None
+Method      | Z0.XTend.TryGetFirst``1(System.Collections.Generic.IEnumerable{Z0.Option{``0}})| Returns the the first realized value as a valued option, if extant, from a stream of potential values;             otherwise, returns a non-valued option
+Method      | Z0.XTend.TryPop``1(System.Collections.Generic.Queue{``0})             | Removes an element from the queue if one exists
+Method      | Z0.XTend.ToOption``1(System.Nullable{``0})                            | Lifts a nullable value type into the option monad
+Method      | Z0.XTend.ToNullable``1(Z0.Option{``0})                                | Extracts a nulluable value from an option over a nullable value type
+Method      | Z0.XTend.ToOption(System.Type)                                        | Lifts a type value to an option that is valued iff the source type is non-void
+Method      | Z0.XTend.MapRequired``2(Z0.Option{``0},System.Func{``0,``1})          | Applies a map to a valued option; otherwise, raises an exception
+Method      | Z0.XTend.Value``1(Z0.Option{``0})                                     | Extracts the encapsluated value if present; otherwise returns the default value of the type
+Method      | Z0.XTend.WhereSome``1(System.Collections.Generic.IEnumerable{Z0.Option{``0}})| Selects the subsequence for which values exist, if any
+Method      | Z0.XTend.Satisfies``1(Z0.Option{``0},System.Predicate{``0})           | Returns true if an optioal value exists an a specified predicate over the value is satisfied
+Method      | Z0.XTend.Split``1(System.Collections.Generic.IEnumerable{Z0.Option{``0}})| Bifurcates a stream of optional values into the haves/have nots
+Method      | Z0.XTend.All(Z0.IOption[])                                            | Evaluates to true iff all options have values
+Method      | Z0.XTend.WhenAll``2(Z0.Option{``0},Z0.Option{``1},System.Action{``0,``1})| Invokes an action when all supplied options have value
+Method      | Z0.XTend.WhenAll``3(Z0.Option{``0},Z0.Option{``1},Z0.Option{``2},System.Action{``0,``1,``2})| Invokes the supplied action if all values exist
+Method      | Z0.XTend.OnValue``1(System.Nullable{``0},System.Action{``0})          | Invokes an action if a nullable value type is valued
+Method      | Z0.XTend.ValueOrDefault``1(Z0.Option{System.Nullable{``0}},System.Nullable{``0})| Extracts the encapsluated value if present; otherwise reutrns the underlying value type default
+Method      | Z0.XTend.ValueOrNone``1(System.Nullable{``0})                         | Transforms a nulluble value into an optional value
+Method      | Z0.XTend.AssemblyVersion(System.Reflection.Assembly)                  | Convenience accessor for the assembly's version
+Method      | Z0.XTend.GetSimpleName(System.Reflection.Assembly)                    | Gets the simple name of an assembly
+Method      | Z0.XTend.GetTag``1(System.Reflection.Assembly)                        | Gets the identified assembly attribute if present, otherwise NULL
+Method      | Z0.XTend.IndexTaggedTypes``1(System.Reflection.Assembly,System.Func{System.Type,System.Boolean})| Gets the type attributions for the specified assembly
+Method      | Z0.XTend.Product(System.Reflection.Assembly)                          | Gets the value of <see cref="T:System.Reflection.AssemblyProductAttribute" /> if it exists
+Method      | Z0.XTend.Title(System.Reflection.Assembly)                            | Gets the value of <see cref="T:System.Reflection.AssemblyTitleAttribute" /> if it exists
+Method      | Z0.XTend.Company(System.Reflection.Assembly)                          | Gets the value of <see cref="T:System.Reflection.AssemblyCompanyAttribute" /> if it exists
+Method      | Z0.XTend.DefaultAlias(System.Reflection.Assembly)                     | Gets the value of <see cref="T:System.Reflection.AssemblyDefaultAliasAttribute" /> if it exists
+Method      | Z0.XTend.Tag``1(System.Reflection.Assembly)                           | Gets the identified assembly attribute if present, otherwise NULL
+Method      | Z0.XTend.Tagged``1(System.Reflection.Assembly)                        | Determines whether an assembly has an attribute of a given type
+Method      | Z0.XTend.Mutable(System.Reflection.FieldInfo[])                       | Selects the mmutable fields from a stream
+Method      | Z0.XTend.Immutable(System.Reflection.FieldInfo[])                     | Selects the immutable fields from a stream
+Method      | Z0.XTend.Literals(System.Collections.Generic.IEnumerable{System.Reflection.FieldInfo})| Selects literal fields from the source
+Method      | Z0.XTend.Literals(System.Reflection.FieldInfo[])                      | Selects literal fields from the source
+Method      | Z0.XTend.Literals(System.Collections.Generic.IEnumerable{System.Reflection.FieldInfo},System.Type)| Selects literal fields from the source
+Method      | Z0.XTend.Literals(System.Reflection.FieldInfo[],System.Type)          | Selects literal fields of specified type from the source
+Method      | Z0.XTend.LiteralValues(System.Collections.Generic.IEnumerable{System.Reflection.FieldInfo})| Queries literal fields for their values
+Method      | Z0.XTend.LiteralValues(System.Reflection.FieldInfo[])                 | Queries literal fields for their values
+Method      | Z0.XTend.LiteralValues``1(System.Collections.Generic.IEnumerable{System.Reflection.FieldInfo})| Queries literal fields for values of parametric type
+Method      | Z0.XTend.Public(System.Reflection.FieldInfo[])                        | Selects the public fields from a stream
+Method      | Z0.XTend.NonPublic(System.Reflection.FieldInfo[])                     | Selects the non-public fields from a stream
+Method      | Z0.XTend.Static(System.Reflection.FieldInfo[])                        | Selects the static fields from a stream
+Method      | Z0.XTend.Instance(System.Reflection.FieldInfo[])                      | Selects the instance fields from a stream
+Method      | Z0.XTend.WithTypeNameLike(System.Reflection.FieldInfo[],System.String)| Selects the fields from the stream for which the field type name contains the search string
+Method      | Z0.XTend.IsCompilerGenerated(System.Reflection.FieldInfo)             | Determines whether a field has been generated by the compiler
+Method      | Z0.XTend.Value(System.Reflection.FieldInfo,System.Object)             | Attempts to retrieve the value of an instance or static field
+Method      | Z0.XTend.Value``1(System.Reflection.FieldInfo,System.Object)          | Attempts to retrieves the value of a field
+Method      | Z0.XTend.Tagged``1(System.Collections.Generic.IEnumerable{``0},System.Type)| Selects the members with a particular attribute
+Method      | Z0.XTend.WithName``1(System.Collections.Generic.IEnumerable{``0},System.String)| Selects the members with a particular name
+Method      | Z0.XTend.WithName``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.HashSet{System.String})| Selects the members with a name that exists within a supplied set
+Method      | Z0.XTend.WithNameLike``1(System.Collections.Generic.IEnumerable{``0},System.String)| Selects the members with names that contain the supplied search field
+Method      | Z0.XTend.WithNameLike``1(``0[],System.String)                         | Selects the members with names that contain the supplied search field
+Method      | Z0.XTend.WithNameLike``1(``0[],System.String[])                       | Selects the members with names that contain the supplied search field
+Method      | Z0.XTend.WithNameStartingWith``1(``0[],System.String[])               | Selects the members with names that contain the supplied search field
+Method      | Z0.XTend.MemberValue(System.Reflection.MemberInfo,System.Object)      | Gets the value of a specified field or property
+Method      | Z0.XTend.MemberValue``1(System.Reflection.MemberInfo,System.Object)   | Gets the value of the identified member field or property
+Method      | Z0.XTend.Tag``1(System.Reflection.MemberInfo)                         | Gets the value of a member attribute if it exists
+Method      | Z0.XTend.ConversionOperators(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the conversion operators from a stream
+Method      | Z0.XTend.WithoutConversionOperators(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Reomoves any conversion operations from the stream
+Method      | Z0.XTend.Abstract(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the abstract methods from a stream
+Method      | Z0.XTend.Instance(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the instance methods from a stream
+Method      | Z0.XTend.NonPublic(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the non-public methods from a stream
+Method      | Z0.XTend.Returns``1(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the methods from a stream that return a particular type of value
+Method      | Z0.XTend.Returns``1(System.Reflection.MethodInfo[])                   | Selects the methods from a stream that return a particular type of value
+Method      | Z0.XTend.Returns(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Type)| Selects methods from a stream that return a particular type of value
+Method      | Z0.XTend.ClosedGeneric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the closed generic methods from a stream
+Method      | Z0.XTend.Concrete(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the concrete (not abstract) methods from a stream
+Method      | Z0.XTend.CreateDelegate``1(System.Reflection.MethodInfo)              | Creates a delegate for a static method via the expression api
+Method      | Z0.XTend.angled(System.String)                                        | Encloses text between less than and greater than characters
+Method      | Z0.XTend.DisplayName(System.Reflection.MethodInfo)                    | Constructs a display name for a method
+Method      | Z0.XTend.DisplayName``1(System.Reflection.MethodBase)                 | Constructs a display name for a generic method specialized for a specified type
+Method      | Z0.XTend.FullDisplayName(System.Reflection.MethodInfo)                | Constructs a display name for a method
+Method      | Z0.XTend.GenericArguments(System.Reflection.MethodInfo)               | Returns the arguments supplied to a constructed generic method; if the method is             nongeneric, a generic type definition or some other variant, an empty result is returned
+Method      | Z0.XTend.GenericDefinitions(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| For the generic methods in a stream, selects their respective definitions
+Method      | Z0.XTend.GenericParameters(System.Reflection.MethodInfo,System.Boolean)| If a method is non-generic, returns an emtpy list.            If a method is open generic, returns a list describing the open parameters            If a method is closed generic, returns a list describing the closed parameters
+Method      | Z0.XTend.GenericParameters(System.Reflection.MethodInfo)              | Returns the generic parameters specified by a generic method definition or, if constructed,            the parameters specified by the definition on which the construction was predicated. If nongeneric,            returns an empty result
+Method      | Z0.XTend.KindId(System.Reflection.MethodInfo)                         | Returns the source method's kind identifier if it exists
+Method      | Z0.XTend.MakeGenericMethods(System.Reflection.MethodInfo,System.Type[])| Creates generic methods of parametric arity *1*
+Method      | Z0.XTend.MemberOf(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.GenericPartition)| For the generic methods in a stream, selects their respective definitions
+Method      | Z0.XTend.NonGeneric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the non-generic methods from a stream
+Method      | Z0.XTend.OpenGeneric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the open generic methods from a stream
+Method      | Z0.XTend.OpenGeneric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Int32)| Selects the open generic methods from a stream with a specified argument count
+Method      | Z0.XTend.OpenTypeParameters(System.Reflection.MethodInfo,System.Boolean)| For a non-constructed generic method or a generic method definition, returns an array of the method's type parameters; otherwise, returns an empty array
+Method      | Z0.XTend.Parameters(System.Reflection.MethodInfo,System.Func{System.Reflection.ParameterInfo,System.Boolean})| Selects the method parameters that satisfy a predicate
+Method      | Z0.XTend.WithParameter(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Func{System.Reflection.ParameterInfo,System.Boolean})| Selects the methods from a stream where at least one parameter satisfies a specified predicate
+Method      | Z0.XTend.IsOpenGeneric(System.Reflection.MethodInfo)                  | Returns true if the method accepts generic parameters, false otherwise
+Method      | Z0.XTend.IsOpenGeneric(System.Reflection.MethodInfo,System.Int32)     | Returns true if the method has a specified count of open generic parameters, false otherwise
+Method      | Z0.XTend.IsClosedGeneric(System.Reflection.MethodInfo)                | Returns true if the method has unspecified generic parameters, false otherwise
+Method      | Z0.XTend.IsNonGeneric(System.Reflection.MethodInfo)                   | Returns true if the method has unspecified generic parameters, false otherwise
+Method      | Z0.XTend.HasVoidReturn(System.Reflection.MethodInfo)                  | Determines whether a method has a void return and, consequently, cannot be a function
+Method      | Z0.XTend.IsAction(System.Reflection.MethodInfo)                       | Dtermines whether a method has a void return
+Method      | Z0.XTend.IsFunction(System.Reflection.MethodInfo)                     | Determines whether a method is a function
+Method      | Z0.XTend.ArityValue(System.Reflection.MethodInfo)                     | Determines the number of parameters defined by a method
+Method      | Z0.XTend.HasArityValue(System.Reflection.MethodInfo,System.Int32)     | Determines whether a method has a speicied arity
+Method      | Z0.XTend.IsImplicitConverter(System.Reflection.MethodInfo)            | Determines whether the method is an implicit conversion operator
+Method      | Z0.XTend.IsExplicitConverter(System.Reflection.MethodInfo)            | Determines whether the method is an explicit conversion operator
+Method      | Z0.XTend.IsConversionOperator(System.Reflection.MethodInfo)           | Determines whether a method is an implict or explicit conversion operation
+Method      | Z0.XTend.ParameterTypes(System.Reflection.MethodInfo)                 | Returns a method's parameter types
+Method      | Z0.XTend.EffectiveParameterTypes(System.Reflection.MethodInfo)        | Returns a method's parameter types
+Method      | Z0.XTend.ParameterTypes(System.Reflection.MethodInfo,System.Boolean)  | Returns a method's parameter types
+Method      | Z0.XTend.ParameterType(System.Reflection.MethodInfo,System.Int32)     | Determines the type of an index-identified parameter
+Method      | Z0.XTend.Reify(System.Reflection.MethodInfo,System.Type[])            | Reifies a method if it is open generic; otherwise, returns the original method
+Method      | Z0.XTend.Reify``1(System.Reflection.MethodInfo)                       | Reifies a 1-parameter generic method with a parametric type argument
+Method      | Z0.XTend.Reify``2(System.Reflection.MethodInfo)                       | Reifies a 2-parameter generic method with a parametric type argument
+Method      | Z0.XTend.Reify(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Type[])| Reifies generic source methods with supplied type arguments
+Method      | Z0.XTend.Static(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the static methods from a stream
+Method      | Z0.XTend.Static(System.Reflection.MethodInfo[])                       | Selects the static methods from a stream
+Method      | Z0.XTend.SuppliedTypeArgs(System.Reflection.MethodInfo,System.Boolean)| For a closed generic method, returns the supplied arguments; otherwise, returns an empty array
+Method      | Z0.XTend.Tag``1(System.Reflection.MethodInfo)                         | Gets the value of a member attribute if it exists
+Method      | Z0.XTend.Tagged``1(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the methods that are adorned with parametrically-identified attribute
+Method      | Z0.XTend.Tagged``1(System.Reflection.MethodInfo[])                    | Selects the methods that are adorned with parametrically-identified attribute
+Method      | Z0.XTend.WithArity(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Int32)| Selects functions from a stream
+Method      | Z0.XTend.WithParameterCount(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Int32)| Selects methods from a stream that have a specified parameter count
+Method      | Z0.XTend.WithGenericParameterType(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Type)| Selects generic methods from a stream that have a specified generic type definition parameter
+Method      | Z0.XTend.WithParameterType(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Type)| Selects methods from a stream that declare a parameter that has a specifid type
+Method      | Z0.XTend.WithParameterTypes(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Type[])| Selects methods from a stream that have specified parameter types
+Method      | Z0.XTend.ReferenceKind(System.Reflection.ParameterInfo)               | Determines the variance of a parameter
+Method      | Z0.XTend.Tagged``1(System.Reflection.ParameterInfo)                   | Determines whether a parameter has a parametrically-identified attribute
+Method      | Z0.XTend.Instance(System.Reflection.PropertyInfo[])                   | Selects the instance properties from an array
+Method      | Z0.XTend.Static(System.Reflection.PropertyInfo[])                     | Selects the static properties from an array
+Method      | Z0.XTend.WithPropertyType(System.Reflection.PropertyInfo[],System.Type[])| Selects the source properties with property types that match one of the types in a caller-supplied parameter array
+Method      | Z0.XTend.WithSet(System.Reflection.PropertyInfo[])                    | Selects the properties with set methods from the stream
+Method      | Z0.XTend.WithPublicSet(System.Reflection.PropertyInfo[])              | Selects the properties from a stream that have public manipulators
+Method      | Z0.XTend.HasPublicGetter(System.Reflection.PropertyInfo)              | Determines whether the property has a public getter
+Method      | Z0.XTend.HasPublicGetterAndSetter(System.Reflection.PropertyInfo)     | Determines whether the property has both a public getter and setter
+Method      | Z0.XTend.HasPublicSetter(System.Reflection.PropertyInfo)              | Determines whether the property has a public setter
+Method      | Z0.XTend.IsIndexer(System.Reflection.PropertyInfo)                    | Determines whether a property is an indexer
+Method      | Z0.XTend.PropertyTypes(System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo})| Selects the property type from each source property
+Method      | Z0.XTend.Read(System.Reflection.PropertyInfo,System.Object)           | Attempts to retrieve the value of an instance or static property
+Method      | Z0.XTend.Reifies(System.Reflection.PropertyInfo[],System.Type)        | Selects the properties from a stream that reify a specified interface type
+Method      | Z0.XTend.Static(System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo})| Selects the static properties from a stream
+Method      | Z0.XTend.Tagged``1(System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo})| Selects properaties from a source stream to which a parametrically-identified attribute is attached
+Method      | Z0.XTend.Value``1(System.Reflection.PropertyInfo,System.Object)       | Attempts to retrieves the value of a static or instance property
+Method      | Z0.XTend.WithGet(System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo})| Selects the properties with get methods from the stream
+Method      | Z0.XTend.WithPublicGet(System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo})| Selects the properties from a stream that have public accessesors
+Method      | Z0.XTend.WithGetAndSet(System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo})| Selects the properties with both get/set methods from the stream
+Method      | Z0.XTend.WithPropertyType(System.Reflection.PropertyInfo[],System.Type)| Selects the properties from a stream of a specified type
+Method      | Z0.XTend.Abstract(System.Type[])                                      | Selects the abstract types from a stream
+Method      | Z0.XTend.Delegates(System.Type[])                                     | Returns all source types which are delegates
+Method      | Z0.XTend.Nested(System.Type[])                                        | Selects the nested types from a stream
+Method      | Z0.XTend.NonPublic(System.Type[])                                     | Selects the non-public types from a stream
+Method      | Z0.XTend.Public(System.Type[])                                        | Selects the public types from a stream
+Method      | Z0.XTend.Realize``1(System.Collections.Generic.IEnumerable{System.Type})| Selects the types from a stream that implement a specific interface
+Method      | Z0.XTend.Static(System.Type[])                                        | Selects the static types from a stream
+Method      | Z0.XTend.Tagged``1(System.Collections.Generic.IEnumerable{System.Type})| Selects source types from the stream to wich a parametrically-identified attribute is applied
+Method      | Z0.XTend.Tagged``1(System.Type[])                                     | Selects source types from the stream to wich a parametrically-identified attribute is applied
+Method      | Z0.XTend.CloseEnumerableType(System.Type)                             | Recursively close an IEnumerable generic type
+Method      | Z0.XTend.DeclaredFields(System.Type)                                  | Selects all instance/static and public/non-public fields declared by a type
+Method      | Z0.XTend.DeclaredMethods(System.Type,System.Boolean)                  | Selects all methods declared by a type; however, property getters/setters and other             compiler-generated artifacts are excluded
+Method      | Z0.XTend.DeclaredProperties(System.Type)                              | Retrieves all properties declared by a by a type
+Method      | Z0.XTend.DeclaredStaticProperties(System.Type)                        | Retrieves the public and non-public static properties declared by a type
+Method      | Z0.XTend.DisplayName(System.Type)                                     | Constructs a display name for a type
+Method      | Z0.XTend.Fields(System.Type)                                          | Selects all instance/static and public/non-public fields declared or inherited by a type
+Method      | Z0.XTend.InheritedPublicFields(System.Type)                           | Retrieves the public instance Fields declared by a supertype
+Method      | Z0.XTend.FlaggedMethods(System.Type,System.Reflection.BindingFlags)   | Returns the methods from the source type per the binding flags
+Method      | Z0.XTend.GenericDefinition2(System.Type)                              | For a generic type or reference to a generic type, retrieves the generic type definition;            otherwise, returns the void type
+Method      | Z0.XTend.GenericParameters(System.Type,System.Boolean)                | If a type is non-generic, returns an emtpy list.            If a type is open generic, returns a list of generic arguments            If a type is closed generic, returns a list of the types that were supplied as arguments to construct the type
+Method      | Z0.XTend.HasDefaultPublicConstructor(System.Type)                     | Determines whether a type has a public default constructor
+Method      | Z0.XTend.HasDefaultPublicConstructor``1                               | Determines whether a type has a public default constructor
+Method      | Z0.XTend.Instantiate``1(System.Type,System.Object[])                  | Creates an instance of a type and casts the instance value as specified by a type parameter
+Method      | Z0.XTend.Interfaces(System.Type)                                      | Returns all interfaces realized by the type, including those inherited from            supertypes
+Method      | Z0.XTend.IsClosedGeneric(System.Type,System.Boolean)                  | Determines whether a type is a constructed generic type
+Method      | Z0.XTend.IsConcrete(System.Type)                                      | Returns true if the source type is either non-generic or a generic type that has been closed over all parameters
+Method      | Z0.XTend.IsDelegate(System.Type)                                      | Determines whether the specified type is a delegate type
+Method      | Z0.XTend.IsEmpty(System.Type)                                         | Returns true if the source type is null or void; otherwise, returns false
+Method      | Z0.XTend.IsFloatingPoint(System.Type)                                 | Determines whether a type is a system-defined and architecture-supported floating-point type or a system-defined variation thereof
+Method      | Z0.XTend.IsGenericRef(System.Type)                                    | Determines whether a type is a reference to a generic type
+Method      | Z0.XTend.IsIntegral(System.Type)                                      | Determines whether a type is a system-defined and architecture-supported integral type or a system-defined variation thereof
+Method      | Z0.XTend.IsLiteral``1(``0)                                            | Determines whether the enum value corresponds to a defined literal
+Method      | Z0.XTend.IsNonEmpty(System.Type)                                      | Returns true if the source type is non-null and non-void; otherwise, returns false
+Method      | Z0.XTend.IsNullableType(System.Type)                                  | Determines whether a type is nullable
+Method      | Z0.XTend.IsNullable``1(System.Type)                                   | Determine whether a type is a nullable type with a given underlying type
+Method      | Z0.XTend.IsByte(System.Type)                                          | Determines whether a type is the sytem-defined 8-bit unsigned integer type or a system-defined variation thereof
+Method      | Z0.XTend.IsSByte(System.Type)                                         | Determines whether a type the sytem-defined 8-bit signed integer type or a system-defined variation thereof
+Method      | Z0.XTend.IsUInt8(System.Type)                                         | Determines whether a type the sytem-defined 8-bit unsigned integer type or a system-defined variation thereof
+Method      | Z0.XTend.IsInt8(System.Type)                                          | Determines whether a type the sytem-defined 8-bit signed integer type or a system-defined variation thereof
+Method      | Z0.XTend.IsUInt16(System.Type)                                        | Determines whether a type the sytem-defined 16-bit unsigned integer type or a system-defined variation thereof
+Method      | Z0.XTend.IsInt16(System.Type)                                         | Determines whether a type the sytem-defined 16-bit signed integer type or a system-defined variation thereof
+Method      | Z0.XTend.IsUInt32(System.Type)                                        | Determines whether a type the sytem-defined 32-bit unsigned integer type or a system-defined variation thereof
+Method      | Z0.XTend.IsInt32(System.Type)                                         | Determines whether a type the sytem-defined 32-bit signed integer type or a system-defined variation thereof
+Method      | Z0.XTend.IsUInt64(System.Type)                                        | Determines whether a type the sytem-defined 64-bit unsigned integer type or a system-defined variation thereof
+Method      | Z0.XTend.IsInt64(System.Type)                                         | Determines whether a type the sytem-defined 64-bit signed integer type or a system-defined variation thereof
+Method      | Z0.XTend.IsSingle(System.Type)                                        | Determines whether a type the sytem-defined 32-bit floating-point type or a system-defined variation thereof
+Method      | Z0.XTend.IsFloat32(System.Type)                                       | Determines whether a type the sytem-defined 32-bit floating-point type or a system-defined variation thereof
+Method      | Z0.XTend.IsDouble(System.Type)                                        | Determines whether a type the sytem-defined 64-bit floating-point type or a system-defined variation thereof
+Method      | Z0.XTend.IsFloat64(System.Type)                                       | Determines whether a type the sytem-defined 64-bit floating-point type or a system-defined variation thereof
+Method      | Z0.XTend.IsDecimal(System.Type)                                       | Determines whether a supplied type is predicated on a double, including enums, nullable wrappers and references
+Method      | Z0.XTend.IsOpenGeneric(System.Type,System.Boolean)                    | Determines whether a type is an unconstructed generic type, also called an open generic type
+Method      | Z0.XTend.IsPrimalNumeric(System.Type)                                 | Determines whether a type is a system-defined and architecture-suppored numeric type or a system-defined variation thereof
+Method      | Z0.XTend.IsRef(System.Type)                                           | Determines whether the type is a (memory) reference
+Method      | Z0.XTend.IsSignedInt(System.Type)                                     | Determines whether a type is a system-defined and architecture-supported unsigned integral type or a system-defined variation thereof
+Method      | Z0.XTend.IsSpecial(System.Reflection.MethodInfo)                      | Determines whether a method is non-special as determined by either the IsSpecialName property             or the presence of a compiler-generated character in the method name
+Method      | Z0.XTend.IsNonSpecial(System.Reflection.MethodInfo)                   | Determines whether a method is special as determined by either the IsSpecialName property             or the presence of a compiler-generated character in the method name
+Method      | Z0.XTend.IsStatic(System.Type)                                        | Determines whether a type is static
+Method      | Z0.XTend.IsStruct(System.Type)                                        | Determines whether a type is a struct
+Method      | Z0.XTend.IsSystemDefined(System.Type)                                 | Determines whether a type is system-defined primitive
+Method      | Z0.XTend.IsBool(System.Type)                                          | Determines whether a supplied type is predicated on a bool, including nullable wrappers and references
+Method      | Z0.XTend.IsString(System.Type)                                        | Determines whether a supplied type is predicated on a string, including references
+Method      | Z0.XTend.IsObject(System.Type)                                        | Determines whether a supplied type is predicated on a string, including references
+Method      | Z0.XTend.IsVoid(System.Type)                                          | Determines whether a supplied type is of type Void
+Method      | Z0.XTend.IsChar(System.Type)                                          | Determines whether a supplied type is predicated on a char, including nullable wrappers and references
+Method      | Z0.XTend.IsTypeOf(System.Type,System.Type)                            | Determines whether a source type is predicated on a specified match type, including nullable wrappers, references and enums
+Method      | Z0.XTend.IsTypeOf``1(System.Type)                                     | Determines whether a source type is predicated on a parametric type, including nullable wrappers, references and enums
+Method      | Z0.XTend.IsUnManaged(System.Type)                                     | Determines whether a type is unmanaged
+Method      | Z0.XTend.IsUnsignedInt(System.Type)                                   | Determines whether a type is a system-defined and architecture-supported signed integral type or a system-defined variation thereof
+Method      | Z0.XTend.LiteralFields(System.Type)                                   | Selects the literal fields defined by a type
+Method      | Z0.XTend.LiteralFields(System.Type,System.Type)                       | Selects the literal fields declared by a type that are of specified type
+Method      | Z0.XTend.LiteralFields``1(System.Type)                                | Selects the literal fields declared by a parametric type that are of specified type
+Method      | Z0.XTend.LiteralFieldValues``1(System.Type)                           | Selects the literal values declared by a type that are of specified parametric type
+Method      | Z0.XTend.LiteralFieldValues``2(System.Type)                           | Selects the literal values declared by a type that are of specified parametric type
+Method      | Z0.XTend.LiteralValues``1(System.Type)                                | Selects the literal fields defined by a type and extracts/casts their values
+Method      | Z0.XTend.LiteralValueIndex``1(System.Type,System.String,System.Nullable{System.Int32})| Enumerates the literals defined by a type indexed by declaration order and which have names that match a specified filter
+Method      | Z0.XTend.MatchMethod(System.Type,System.String,System.Type[])         | Searches a type for any method that matches the supplied signature
+Method      | Z0.XTend.Method(System.Type,System.String)                            | Selects the first method found on the type, if any, that has a specified name
+Method      | Z0.XTend.Methods(System.Type,System.Boolean)                          | Selects the methods available through the type, including those that were inherited;             however, property getters/setters and other compiler-generated artifacts may be excluded             via the nonspecial option
+Method      | Z0.XTend.UndeclaredMethods(System.Type,System.Boolean)                | Selects the methods available through the type that were not declared by the type
+Method      | Z0.XTend.DeclaredMethods(System.Type,System.String,System.Boolean)    | Selects the public/non-public static/instance methods declared by a type that have a specific name
+Method      | Z0.XTend.DeclaredMethods(System.Collections.Generic.IEnumerable{System.Type},System.Boolean)| Selects the public/non-public static/instance methods declared by a stream of types
+Method      | Z0.XTend.StaticMethods(System.Type,System.Boolean)                    | Gets the static methods defined on a specified type
+Method      | Z0.XTend.DeclaredStaticMethods(System.Type,System.Boolean)            | Retrieves the public and non-public static methods declared by a type
+Method      | Z0.XTend.DeclaredStaticMethods(System.Type,System.String,System.Boolean)| Retrieves the public and non-public static methods declared by a type that have a specific name
+Method      | Z0.XTend.DeclaredInstanceMethods(System.Type,System.Boolean)          | Retrieves the public and non-public instance methods declared by a type
+Method      | Z0.XTend.OpenTypeParameters(System.Type)                              | For a non-constructed generic type or a generic type definition, returns an            array of defined type parameters; otherwise, returns an empty array
+Method      | Z0.XTend.OpenTypeParameterCount(System.Type)                          | Returns the number of open generic paramters defined by the source type
+Method      | Z0.XTend.Properties(System.Type)                                      | Retrieves all declared or inheraited by a type
+Method      | Z0.XTend.PublicFields(System.Type)                                    | Selects all public static/instance fields from the source
+Method      | Z0.XTend.PublicInstanceFields(System.Type)                            | Selects all public instance fields from the source
+Method      | Z0.XTend.Reifies(System.Type,System.Type)                             | Determines whether a type implements a specified interface
+Method      | Z0.XTend.Reifies``1(System.Type)                                      | Determines whether a type implements a parametrically-specific interface
+Method      | Z0.XTend.RootType(System.Type)                                        | If a value type and not an enum, returns the type;             If an enum returns the unerlying integral type;             If a nullable value typethat is not an enum, returns the underlying type;             if nullable enum, returns the non-nullable underlying integral type            If a pointer returns the pointee type            Otherwise, reurns the effective type
+Method      | Z0.XTend.SpecialMethods(System.Type,System.Reflection.BindingFlags)   | Returns the methods from the source type per the binding flags; however, only those with special names are included
+Method      | Z0.XTend.NonSpecialMethods(System.Type,System.Reflection.BindingFlags)| Returns the methods from the source type per the binding flags, exluding those with special names
+Method      | Z0.XTend.StaticProperties(System.Type)                                | Gets the static methods defined on a specified type
+Method      | Z0.XTend.StaticProperties(System.Type,System.Boolean)                 | Gets the static methods defined on a specified type
+Method      | Z0.XTend.StaticProperties(System.Type,System.Boolean,System.Boolean)  | Gets the static properties defined on a specified type that provided get/set accessors/manipulators             per the provided specifiation
+Method      | Z0.XTend.SystemKeyword(System.Type)                                   | For a system-defined type, returns the C#-specific keyword for the type if it has one;             otherwise, returns an empty string
+Method      | Z0.XTend.Tag``1(System.Type,System.Boolean)                           | Gets the value of a member attribute if it exists
+Method      | Z0.XTend.Tagged``1(System.Type)                                       | Determines whether an attribute is applied to a type
+Method      | Z0.XTend.TEffective(System.Type)                                      | If the source type is a type reference, returns the referenced type; otherwise, returns the original type
+Method      | Z0.XTend.TEnumBase(System.Type)                                       | If source type is an enum, returns the integral base type; otherwise returns the empty type
+Method      | Z0.XTend.TNullableBase(System.Type)                                   | If source type is n nullable value type, returns the underlying type; otherwise returns the empty type
+Method      | Z0.XTend.TPointer(System.Type)                                        | If the source type is a pointer, returns the type to which the pointer points; otherwise, returns the empty type
+Method      | Z0.XTend.Concrete(System.Type[])                                      | Selects the concrete types from a stream
+Method      | Z0.XTend.Interfaces(System.Type[])                                    | Returns all source types which ar interfaces
+Method      | Z0.XTend.Classes(System.Type[])                                       | Returns all source types which are classes
+Method      | Z0.XTend.Structs(System.Type[])                                       | Returns all source types which are structs
+Method      | Z0.XTend.Enums(System.Type[])                                         | Returns all source types which are enums
+Method      | Z0.XTend.InNamespace(System.Type[],System.String)                     | Selects the types from a specified namespace
+Method      | Z0.XTend.Unwrap(System.Type)                                          | Returns the underlying system type if enclosed by a source type, otherwise returns the source type
+Method      | Z0.XTend.BlockPartition(System.String,System.Int32,System.String)     | Block-formats a string using specified block length and separator
+Method      | Z0.XTend.BlockPartition(System.String,System.Int32,System.Char)       | Block-formats a string using specified block length and separator
+Method      | Z0.XTend.BlockPartition(System.String,System.Int32,System.Char,System.String)| Block-formats a string using specified block length, separator and block prefix
+Method      | Z0.XTend.Label(System.Text.StringBuilder,System.String,System.Char)   | Appends a label suffixed by a separator to produce '{label}{sep}'
+Method      | Z0.XTend.Label(System.Text.StringBuilder,System.String,System.Char,System.Object)| Appends labeled content to produce: '{label}{sep} {content}'
+Method      | Z0.XTend.Label``1(System.Text.StringBuilder,System.String,``0,System.Char)| Appends labeled formattable content to produce: '{label}{sep} {content}'
+Method      | Z0.XTend.Label``1(System.Text.StringBuilder,System.String,System.Char,``0,Z0.Padding,System.Char)| Delimits labeled formattable content to produce '{delimiter} {label}{sep} {content}'
+Method      | Z0.XTend.build                                                        | Creates a new stringbuilder
+Method      | Z0.XTend.Concat(System.Collections.Generic.IEnumerable{System.String},System.String)| Joins the strings provided by the enumerable with an optional separator
+Method      | Z0.XTend.Concat(System.Collections.Generic.IEnumerable{System.Char},System.Char)| Joins a sequence of source characters interspersed with a supplied separator
+Method      | Z0.XTend.Concat(System.Collections.Generic.IEnumerable{System.Char})  | Forms a string by source character justapostion
+Method      | Z0.XTend.Concat(System.Char[])                                        | Forms a string from a character array
+Method      | Z0.XTend.Concat(System.ReadOnlySpan{System.Char})                     | Forms a string by source character justapostion
+Method      | Z0.XTend.Concat(System.Span{System.Char})                             | Forms a string by source character justapostion
+Method      | Z0.XTend.Concat(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char})| Forms a string by source character justapostion
+Method      | Z0.XTend.Concat(System.Span{System.String})                           | Sequentially concatenates each indexed cell to the next without deimiters/interspersal
+Method      | Z0.XTend.Concat(System.Span{System.String},System.Char)               | Sequentially concatenates each indexed cell to the next, separated by a specified character
+Method      | Z0.XTend.ContentEqual(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char})| Returns true if the character spans are equal as strings, false otherwise
+Method      | Z0.XTend.ContentEqual(System.Span{System.Char},System.ReadOnlySpan{System.Char})| Returns true if the character spans are equal as strings, false otherwise
+Method      | Z0.XTend.ContentEqual(System.Span{System.Char},System.Span{System.Char})| Returns true if the character spans are equal as strings, false otherwise
+Method      | Z0.XTend.DelimitLabel(System.Text.StringBuilder,System.String,System.Char,System.Object,Z0.Padding,System.Char)| Delimits labeled content to produce '{delimiter} {label}{sep} {content}'
+Method      | Z0.XTend.EnclosedBy(System.String,System.String,System.String,System.StringComparison)| Determines whether the subject is contained betwee specified left and right markers
+Method      | Z0.XTend.EnclosedBy(System.String,System.Char,System.Char)            | Determines whether the subject is contained betwee specified left and right markers
+Method      | Z0.XTend.EndsWith(System.String,System.Char)                          | Determines whether a string ends with a specific character
+Method      | Z0.XTend.EndsWithAny(System.String,System.Collections.Generic.IEnumerable{System.String})| Determines whether a string terminates with a value from a supplied set
+Method      | Z0.XTend.EndsWithDigit(System.String)                                 | Determines whether a string ends with a digit
+Method      | Z0.XTend.Enquote(System.String)                                       | Encloses supplied text in quotation marks
+Method      | Z0.XTend.FirstIndexOf(System.String,System.Char)                      | Searches a string for the first occurrence of a specified character
+Method      | Z0.XTend.FirstIndexOf(System.String,System.String)                    | Searches a string for the first occurrence of a specified substring
+Method      | Z0.XTend.IfBlank(System.String,System.String)                         | Returns the source string if it is not blank; otherwise, returns an alternate string
+Method      | Z0.XTend.Intersperse(System.String,System.Char)                       | Creates a new string by weaving a specified character between each character in the source
+Method      | Z0.XTend.Intersperse(System.String,System.String)                     | Creates a new string by weaving a substring between each character in the source
+Method      | Z0.XTend.IsBlank(System.String)                                       | Returns true if a string is null or whitespace; otherwise, returns false
+Method      | Z0.XTend.IsNotBlank(System.String)                                    | Returns true if a string has at least one character that is not considered whitespace
+Method      | Z0.XTend.LastIndexOf(System.String,System.Char)                       | Searches for the last index of a specified character in a string
+Method      | Z0.XTend.LastIndexOf(System.String,System.String)                     | Searches for the last index of a specified character in a string
+Method      | Z0.XTend.Partition(System.String,System.Int32)                        | Partitions a string into parts of a specified maximum width
+Method      | Z0.XTend.Replicate(System.String,System.Int32)                        | Creates a stream of replicated strings
+Method      | Z0.XTend.Replicate(System.Char,System.Int32)                          | Creates a span of replicated characters
+Method      | Z0.XTend.RightOf(System.String,System.Char)                           | Gets the string to the right of, but not including, the first instance of a specified character
+Method      | Z0.XTend.Unfence(System.String,System.Char,System.Char)               | Extracts content demarcated by left/right character boundaries
+Method      | Z0.XTend.RightOf(System.String,System.Int32)                          | Gets the string to the right of, but not including, a specified index
+Method      | Z0.XTend.RightOf(System.String,System.String)                         | Gets the string to the right of, but not including, a specified substring
+Method      | Z0.XTend.RightOfLast(System.String,System.String)                     | Retrieves the substring that follows the last occurrence of a marker
+Method      | Z0.XTend.LeftOfLast(System.String,System.Char)                        | Retrieves the substring that precedes the last occurence of a marker
+Method      | Z0.XTend.CommaSeparated(System.Int16)                                 | Formamats a number with comma separators
+Method      | Z0.XTend.CommaSeparated(System.UInt16)                                | Formamats a number with comma separators
+Method      | Z0.XTend.CommaSeparated(System.Int32)                                 | Formamats a number with comma separators
+Method      | Z0.XTend.CommaSeparated(System.UInt32)                                | Formamats a number with comma separators
+Method      | Z0.XTend.CommaSeparated(System.Int64)                                 | Formamats a number with comma separators
+Method      | Z0.XTend.CommaSeparated(System.UInt64)                                | Formamats a number with comma separators
+Method      | Z0.XTend.CommaSeparated(System.Single)                                | Formamats a number with comma separators
+Method      | Z0.XTend.CommaSeparated(System.Double)                                | Formamats a number with comma separators
+Method      | Z0.XTend.SplitClean(System.String,System.String)                      | Splits the source string predicated on a string delimiter, removing any empy entries
+Method      | Z0.XTend.SplitClean(System.String,System.Char)                        | Splits the source string predicated on a character delimiter, removing any empy entries
+Method      | Z0.XTend.StartsWith(System.String,System.Char)                        | Determines whether a string begins with a specific character
+Method      | Z0.XTend.StartsWithAny(System.String,System.Collections.Generic.IEnumerable{System.String})| Determines whether a string starts with a value from a supplied set
+Method      | Z0.XTend.StartsWithAny(System.String,System.Collections.Generic.IEnumerable{System.Char})| Determines whether a string leads with any of a specified set of characters
+Method      | Z0.XTend.StartsWithDigit(System.String)                               | Determines whether a string starts with a digit
+Method      | Z0.XTend.TakeBefore(System.String,System.Char)                        | Selects the substring prior to the first occurrence of a specified character if it is found in the string; otherwise,             returns the original string
+Method      | Z0.XTend.TakeAfter(System.String,System.Char)                         | Selects the substring after the first ocurrence of a specified character it is found in the string; otherwise,             returns the original string
+Type        | Z0.DescriptionAttribute                                               | Describes anything, or at least something
+Method      | Z0.DescriptionAttribute.TargetDescription(System.Reflection.MemberInfo)| Returns the a target description, if attributed; otherwise, returns the target's system-defined name
+Method      | Z0.DescriptionAttribute.TargetDescription``1                          | Returns the description of a parametric type, if attributed; otherwise, returns the type's name
+Type        | Z0.FactoryAttribute                                                   | Identifies a factory method which, by definition, is an emitter or a unary function
+Type        | Z0.ConstAttribute                                                     | Identifies a referentially-transparent method that produces literal values, structural values or sequences of such values
+Type        | Z0.FunctionalServiceAttribute                                         | Identifies a type that defines an interface-contracted api surface
+Method      | Z0.IdentityProviderAttribute.#ctor                                    | Use of this constructor implies that the attribution target provides identies            for what are likely unattributable types, such as framework-defined types, for example
+Type        | Z0.IgnoreAttribute                                                    | Applies to an element to exclude it from metadata discovery processes
+Type        | Z0.LabelAttribute                                                     | Labels anything since the system-defined DisplayNameAttribute has ridiculously stupid target restrictions
+Method      | Z0.LabelAttribute.TargetLabel(System.Reflection.MemberInfo)           | Returns the a target label, if attributed; otherwise, returns the target's system-defined name
+Method      | Z0.LabelAttribute.TargetLabel``1                                      | Returns the label of a parametric type, if attributed; otherwise, returns the type's name
+Type        | Z0.NameAttribute                                                      | Describes anything, or at least something
+Method      | Z0.NameAttribute.TargetName(System.Reflection.MemberInfo)             | Returns the a target description, if attributed; otherwise, returns the target's system-defined name
+Method      | Z0.NameAttribute.TargetName``1                                        | Returns the description of a parametric type, if attributed; otherwise, returns the type's name
+Type        | Z0.NumericBaseAttribute                                               | Indicates the target's numeric base preference
+Type        | Z0.PurposeAttribute                                                   | Describes the reason for a thing to be
+Type        | Z0.SpanOpAttribute                                                    | Identifies operations that accept one or more spans and computes a result that is stored in a caller-supplied target span
+Type        | Z0.IMonoid`2                                                          | Characterizes monoidal structure
+Method      | Z0.IInvertible`1.Invert                                               | Unary structural negation
+Property    | Z0.IEquivalenceClass`1.Rep                                            | The class representative
+Type        | Z0.IEquivalenceClass`2                                                | Characterizes an equivalence class, i.e. a segment of a partition effected via             an equivalence relation
+Type        | Z0.IQuotientSet`2                                                     | Characterizes a partition over a set effected via an equivalence relation.             In this context, a parition is a collection of mutually disjoint subsets             of a given set whose union recovers the original set
+Method      | Z0.IQuotientSet`2.Partition                                           | Effects a partition via the equivalence
+Method      | Z0.IQuotientSet`2.Project(`1)                                         | The canonical surjective projection from the underlying set to the equivalence             partitions that maps a given element to the equivalence class in which it            resides
+Type        | Z0.IOrdered`1                                                         | Characterizes a totally ordered structure
+Type        | Z0.IBiconverter                                                       | Characterizes a weakly-byped two-way converter
+Property    | Z0.IBiconverter.TargetType                                            | The supported type
+Method      | Z0.IBiconverter.ConvertToTarget(System.Object)                        | Converts an incoming value to a value of target type, if possible
+Method      | Z0.IBiconverter.ConvertFromTarget(System.Object,System.Type)          | Converts an incoming value of the target type to a value of specified type, if possible
+Type        | Z0.IBiconverter`1                                                     | Characterizes a strongly-byped two-way converter
+Type        | Z0.IContainer`1                                                       | Characterizes a parametric container
+Type        | Z0.ISequential`2                                                      | Characterizes a refified container over sequentially enumerable content
+Type        | Z0.IReadOnly`1                                                        | Characterizes an immutable container
+Type        | Z0.IContented`1                                                       | Characterizes a container that owns content
+Type        | Z0.IContented`2                                                       | Characterizes reified container
+Method      | Z0.IContented`2.WithContent(`1)                                       | Assigns content; whether existing content is replaced, accrued or            if a new container is created is determined by the reifying type             and its purpose in life
+Type        | Z0.IReversible`1                                                      | Characterizes a reversible structure
+Type        | Z0.IReadOnly`2                                                        | Characterizes a reified immutable container
+Type        | Z0.IContented`3                                                       | Characterizes a reified container with T-stratified content
+Type        | Z0.IReadOnly`3                                                        | Characterizes a reified immutable container with T-stratified content
+Type        | Z0.IFinite                                                            | Characterizes a type for which a well-defined Count() function can be implemented            such types will be referred to as "countable" athough this terminology unfortunately conflicts            with mathematical countability wich only requries the existence of a bijection with            the subject and the natural numbers which does imply that the cardinality is finite
+Method      | Z0.IFinite.Count                                                      | Counts the finite things
+Type        | Z0.IFinite`1                                                          | Characterizes a finite type type with a parametric count emitter since not all            countable things can be counted with a 32-bit integer
+Type        | Z0.ICounted                                                           | Characterizes a finite thing that yeilds a count value that does not require computation/enumeration             to reveal; in other words, the count function for counted things is free, as evinced by            the default implementation
+Property    | Z0.ICounted.Count                                                     | The count value
+Type        | Z0.ICounted`1                                                         | Characterizes a countable type with a parametric count type since not all            countable things can be counted with a 32-bit integer
+Type        | Z0.ILengthwise                                                        | Characterizes a type that exhibits a notion of finite length
+Type        | Z0.ILengthwise`1                                                      | Characterizes a refiied type that  exhibits a notion of length
+Type        | Z0.IFreeMonoid`1                                                      | Characterizes a free monoidal structure
+Type        | Z0.IConcatenable`1                                                    | Characterizes a reification that defines an intrinsic concatentation operator
+Method      | Z0.IConcatenable`1.Concat(`0)                                         | Concatenates the intrinsic value with a suplied value
+Type        | Z0.IElements`1                                                        | Characterizes a container over discrete/enumerable content which need not be finite
+Type        | Z0.IElements`2                                                        | Characterizes a reified container over discrete/enumerable content which need not be finite
+Type        | Z0.IDiscreteSet`1                                                     | Characterizes a set over a collection of elements and need not be finite
+Type        | Z0.IDiscreteSet`2                                                     | Characteriizes refied discrete set
+Type        | Z0.INonempySet`1                                                      | Characterizes a reified nonempty set
+Type        | Z0.NonempySet`2                                                       | Characterizes a reified nonempty set with evidence of non-absence
+Type        | Z0.IElementSet`1                                                      | Characterizes a finite set over elements of parametric type
+Method      | Z0.IElementSet`1.Contains(`0)                                         | Determines whether a value is a member
+Type        | Z0.IElementSet`2                                                      | Characterizes a reified set over elements of parametric type
+Method      | Z0.IElementSet`2.IsSubset(`0,System.Boolean)                          | Determines whether the current set is a subset of a specified set.
+Method      | Z0.IElementSet`2.IsSuperset(`0,System.Boolean)                        | Determines whether the current set is a superset of a specified set.
+Method      | Z0.IElementSet`2.Intersect(`0)                                        | Calculates the intersection between the current set and a specified set and            returns a new set that embodies this result
+Method      | Z0.IElementSet`2.Difference(`0,System.Boolean)                        | Calculates the set difference, or symmetric difference, between the current             set and a specified set and returns a new set that embodies this result
+Type        | Z0.IIndexed                                                           | Characterizes an individual that can be uniquely associatd with an integer in the range 0..n-1             within the context of a container with a capacity of n items
+Property    | Z0.IIndexed.Position                                                  | The 0-based position of the item in an enclosing container
+Type        | Z0.IIndexedContent`1                                                  | Characterizes a finite container over sequentially-indexed discrete content - an array
+Property    | Z0.IIndexedContent`1.Item(System.Int32)                               | Retrieves a mutable reference to an index-identified item
+Type        | Z0.ISeq`2                                                             | Characterizes a concatenable container with discrete content
+Type        | Z0.IFiniteSeq`1                                                       | Characterizes an element sequence that is known to be finite, but may require enumeration            to find the count; consequently, there is a "Count()" operation defined but no            "Counted" property
+Type        | Z0.IFiniteSeq`2                                                       | Characterizes a reifed finite  sequence
+Type        | Z0.IIndexedSeq`2                                                      | Characterizes a reifed finite indexed sequence
+Property    | Z0.IListed`1.Head                                                     | Returns the first constituent if extant; othewise, returns the monoidal 0
+Property    | Z0.IListed`1.Tail                                                     | Returns the last constituent if extant; othewise, returns the monoidal 0
+Method      | Z0.IListed`2.Redefine(System.Collections.Generic.IEnumerable{`1})     | Replaces the existing list with a new list with specified content
+Type        | Z0.IStepwise`1                                                        | Characterizes a structure over which both incrementing and decrementing             operations are defined
+Type        | Z0.IConverter`2                                                       | Characterizes a one-way converter
+Type        | Z0.IDescribed                                                         | Characterizes type that defines a Description facet
+Type        | Z0.IDescribed`1                                                       | Characterizes an F-bound polymorphic type that defines a Description facet
+Type        | Z0.IFactory`1                                                         | Characterizes a factory where the production type is T-parametric
+Type        | Z0.Factory`1                                                          | Refies a factory that produces no T-parametric values; the use case is            to make it convenient to create factories that do produce values that are T-parametric
+Type        | Z0.IHashed                                                            | Characterizes a hash code provider
+Property    | Z0.IHashed.Hash                                                       | The hash code as an usigned 32-bit integer
+Property    | Z0.IHashed.HashCode                                                   | The hash code that C# knows/loves as an inappropriately-ubiquitous signed 32-bit integer
+Type        | Z0.IHashed`2                                                          | Characterizes an F-bound polymorphic hash code provider for structual types
+Type        | Z0.ILabeled                                                           | Characterizes type that defines a Label facet
+Type        | Z0.ILabeled`1                                                         | Characterizes an F-bound polymorphic type that defines a Lable facet
+Type        | Z0.IMultiplicative`2                                                  | Characterizes structural multiplication
+Type        | Z0.INamed                                                             | Characterizes type that defines a Name facet
+Type        | Z0.INamed`1                                                           | Characterizes an F-bound polymorphic type that defines a Name facet
+Type        | Z0.INonEmpty`1                                                        | Characterizes a reification of the counterpoint to a nullary thing
+Type        | Z0.INonEmpty`2                                                        | Characterizes a T-parametric nonempty thing that provides evidence of non-abscence
+Property    | Z0.INonEmpty`2.Individual                                             | Proof
+Type        | Z0.IPair`2                                                            | Characterizes an homogenous 2-tuple
+Property    | Z0.IPair`2.Left                                                       | The left member
+Property    | Z0.IPair`2.Right                                                      | The right member
+Type        | Z0.IPaired`2                                                          | Characterizes a parametric join of arity 2
+Property    | Z0.IPaired`2.Left                                                     | The left value
+Property    | Z0.IPaired`2.Right                                                    | The right value
+Type        | Z0.IQuad`2                                                            | Characterizes an homogenous 4-tuple
+Type        | Z0.IReified`1                                                         | Characterizes an F-bound polymorphic reifiable abstraction
+Type        | Z0.ISequential                                                        | Characterizes an individual that can be identified, relative to other            sequentials (within the same set), by a term s(i) of a monotonic sequence             s = {0,..,n - 1} where s(i) = i
+Property    | Z0.ISequential.Sequence                                               | The sequence number assigned to the individual
+Type        | Z0.ITriple`2                                                          | Characterizes an homogenous 3-tuple
+Type        | Z0.ITuple                                                             | Common non-parametric tuple contract
+Type        | Z0.ITuple`1                                                           | Common parametric tuple contract
+Type        | Z0.ITupled`3                                                          | Characterizes a potentially non-homogenous 2-tuple
+Property    | Z0.ITupled`3.Left                                                     | The left member
+Property    | Z0.ITupled`3.Right                                                    | The right member
+Type        | Z0.ITupled`4                                                          | Characterizes a potentially non-homogenous 3-tuple
+Type        | Z0.ITupled`5                                                          | Characterizes a potentially non-homogenous 4-tuple
+Type        | Z0.Hashed                                                             | Captures a hash code
+Type        | Z0.Hashed`1                                                           | Captures a hash code for structured content
+Type        | Z0.Indexed`1                                                          | Captures a hash code for structured content
+Type        | Z0.KeyedValue`2                                                       | Correlates a value with a key that uniquely identifies the value within some context
+Field       | Z0.KeyedValue`2.Key                                                   | The key that identifies the value
+Field       | Z0.KeyedValue`2.Value                                                 | The value identified by the key
+Type        | Z0.XFunc`1                                                            | Wraps a delegate that implicitly converts into a LINQ expression
+Method      | Z0.XFunc`1.op_Implicit(Z0.XFunc{`0})~System.Linq.Expressions.Expression{System.Func{`0}}| Implicitly converts a func expression to linq expression
+Method      | Z0.XFunc`1.op_Implicit(System.Func{`0})~Z0.XFunc{`0}                  | Implicitly constructs a func expression from a func
+Property    | Z0.XFunc`1.Fx                                                         | The expression derived from the source function
+Type        | Z0.XFunc`2                                                            | Wraps a delegate that implicitly converts into a LINQ expression
+Method      | Z0.XFunc`2.op_Implicit(Z0.XFunc{`0,`1})~System.Linq.Expressions.Expression{System.Func{`0,`1}}| Implicitly converts a func expression to linq expression
+Method      | Z0.XFunc`2.op_Implicit(System.Func{`0,`1})~Z0.XFunc{`0,`1}            | Implicitly constructs a func expression from a func
+Property    | Z0.XFunc`2.Fx                                                         | The expression derived from the source function
+Type        | Z0.XFunc`3                                                            | Wraps a delegate that implicitly converts into a LINQ expression
+Method      | Z0.XFunc`3.op_Implicit(Z0.XFunc{`0,`1,`2})~System.Linq.Expressions.Expression{System.Func{`0,`1,`2}}| Implicitly converts a func expression to linq expression
+Method      | Z0.XFunc`3.op_Implicit(System.Func{`0,`1,`2})~Z0.XFunc{`0,`1,`2}      | Implicitly constructs a func expression from a func
+Property    | Z0.XFunc`3.Fx                                                         | The expression derived from the source function
+Type        | Z0.XFunc`4                                                            | Wraps a delegate that implicitly converts into a LINQ expression
+Method      | Z0.XFunc`4.op_Implicit(Z0.XFunc{`0,`1,`2,`3})~System.Linq.Expressions.Expression{System.Func{`0,`1,`2,`3}}| Implicitly converts a func expression to linq expression
+Method      | Z0.XFunc`4.op_Implicit(System.Func{`0,`1,`2,`3})~Z0.XFunc{`0,`1,`2,`3}| Implicitly constructs a func expression from a func
+Property    | Z0.XFunc`4.Fx                                                         | The expression derived from the source function
+Type        | Z0.NamedValue`1                                                       | Names a value
+Field       | Z0.NamedValue`1.Name                                                  | The name of the value
+Field       | Z0.NamedValue`1.Value                                                 | The named value
+Method      | Z0.XPress.and(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)| Creates a conjunction of a left and right expression
+Method      | Z0.XPress.and``2(System.Func{``0,System.Boolean},System.Func{``1,System.Boolean})| Forms a conjunction from two function predicates
+Method      | Z0.XPress.call(System.Object,System.Reflection.MethodInfo,System.Linq.Expressions.ParameterExpression[])| Creates an expression that invokes a static or instance method
+Method      | Z0.XPress.call(System.Reflection.MethodInfo,System.Linq.Expressions.ParameterExpression[])| Creates an expression that invokes a static method
+Method      | Z0.XPress.constant(System.Object)                                     | Creates a constant expression
+Method      | Z0.XPress.convert(System.Linq.Expressions.Expression,System.Type)     | Defines a conversion from a source expression to a target type
+Method      | Z0.XPress.convert``1(System.Linq.Expressions.Expression)              | Defines a conversion from a source expression to a target type
+Method      | Z0.XPress.factory``1                                                  | Defines a function that will invoke the default constructor to create            an instance of type <typeparamref name="X" />
+Method      | Z0.XPress.factory``2                                                  | Defines a strongly-typed function that will invoke a one-parameter constructor to create a target type instance
+Method      | Z0.XPress.factory(System.Type,System.Type)                            | Defines a weakly-typed function that will invoke a one-parameter constructor to create a target type instance
+Method      | Z0.XPress.factory``3                                                  | Defines a strongly-typed function that will invoke a two-parameter constructor to create a target type instance
+Method      | Z0.XPress.factory(System.Type,System.Type,System.Type)                | Defines a weakly-typed function that will invoke a two-parameter constructor to create a target type instance
+Method      | Z0.XPress.factory``4                                                  | Defines a strongly-typed function that will invoke a three-parameter constructor to create a target type instance
+Method      | Z0.XPress.func``1(System.Func{``0})                                   | Creates an expression from an emitter
+Method      | Z0.XPress.func``2(System.Func{``0,``1})                               | Creates an expression from a function delegate of arity 1
+Method      | Z0.XPress.func``3(System.Func{``0,``1,``2})                           | Creates an expression from a function delegate of arity 2
+Method      | Z0.XPress.func``4(System.Func{``0,``1,``2,``3})                       | Creates an expression from a function delegate of arity 3
+Method      | Z0.XPress.func``1(System.Reflection.MethodInfo,System.Object)         | Creates and caches a delegate for a method realizing an emitter
+Method      | Z0.XPress.func``2(System.Reflection.MethodInfo,System.Object)         | Creates and caches a delegate for a method realizing a function f:X-&gt;Y
+Method      | Z0.XPress.func``2(System.Type,System.String,System.Object)            | Creates and caches a delegate for a method realizing a function f:X-&gt;Y
+Method      | Z0.XPress.func1(System.Reflection.MethodInfo,System.Object)           | Creates a weakly-typed delegate for a function f:X-&gt;Y
+Method      | Z0.XPress.func2(System.Reflection.MethodInfo,System.Object)           | Creates a weakly-typed delegate for a function f:X-&gt;Y
+Method      | Z0.XPress.func``3(System.Reflection.MethodInfo,System.Object)         | Creates and caches a function delegate for a method realizing a function f:(X1,X2) -&gt; Y
+Method      | Z0.XPress.func``4(System.Reflection.MethodInfo,System.Object)         | Creates and caches a function delegate for a method realizing a function f:X1-&gt;X2-&gt;X3-&gt;Y
+Method      | Z0.XPress.func``5(System.Reflection.MethodInfo,System.Object)         | Creates and caches a function delegate for a method realizing a function f:X1-&gt;X2-&gt;X3-&gt;X4-&gt;Y
+Method      | Z0.XPress.ctor(System.Type,System.Type[])                             | Searches a type for an instance constructor that matches a specified signature
+Method      | Z0.XPress.ctor``1(System.Type[])                                      | Searches a type for an instance constructor that matches a specified signature
+Method      | Z0.XPress.ctor``2                                                     | Searches a type for an instance constructor that matches a parametrically-specified signature
+Method      | Z0.XPress.ctor``3                                                     | Searches a type for an instance constructor that matches a parametrically-specified signature
+Method      | Z0.XPress.fmake``1(System.Func{``0})                                  | Defines a function expression for an emitter
+Method      | Z0.XPress.fmake``2(System.Func{``0,``1})                              | Defines a function expression for a heterogenous fuction of arity 1
+Method      | Z0.XPress.fmake``3(System.Func{``0,``1,``2})                          | Defines a function expression for a heterogenous fuction of arity 2
+Method      | Z0.XPress.fmake``4(System.Func{``0,``1,``2,``3})                      | Produces a 3-argument func expression
+Method      | Z0.XPress.invoke(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression[])| Creates an expression to call a function
+Method      | Z0.XPress.invoke``2(System.Func{``0,``1},System.String)               | Creates an invocation expression for a function f:X-&gt;Y
+Method      | Z0.XPress.invoke``3(System.Func{``0,``1,``2},System.String,System.String)| Creates an invocation expression for a function f:X1-&gt;X2-&gt;Y
+Method      | Z0.XPress.lambda``1(System.Linq.Expressions.Expression)               | Defines a lambda expression sans parameters
+Method      | Z0.XPress.lambda``1(System.Collections.Generic.IEnumerable{System.Linq.Expressions.ParameterExpression},System.Linq.Expressions.Expression)| Creates a lambda expression
+Method      | Z0.XPress.lambda``1(System.ValueTuple{System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression},System.Linq.Expressions.Expression)| Creates a 2-parameter lambda expression
+Method      | Z0.XPress.lambda``1(System.ValueTuple{System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression},System.Linq.Expressions.Expression)| Defines a lambda expression
+Method      | Z0.XPress.emitter``1(System.Linq.Expressions.Expression)              | Creates a an emitter expression
+Method      | Z0.XPress.lambda``2(System.Collections.Generic.IEnumerable{System.Linq.Expressions.ParameterExpression},System.Linq.Expressions.Expression)| Creates a 1-argument lambda expression
+Method      | Z0.XPress.lambda``3(System.Collections.Generic.IEnumerable{System.Linq.Expressions.ParameterExpression},System.Linq.Expressions.Expression)| Creates a 2-argument lambda expression
+Method      | Z0.XPress.lambda``4(System.Collections.Generic.IEnumerable{System.Linq.Expressions.ParameterExpression},System.Linq.Expressions.Expression)| Creates a 3-argument lambda expression
+Method      | Z0.XPress.lambda``5(System.Collections.Generic.IEnumerable{System.Linq.Expressions.ParameterExpression},System.Linq.Expressions.Expression)| Creates a 4-argument lambda expression
+Method      | Z0.XPress.lambda``2(System.Func{System.Linq.Expressions.Expression,System.Linq.Expressions.UnaryExpression})| Creates a unary lambda expression
+Method      | Z0.XPress.lambda``3(System.Func{System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.BinaryExpression})| Creates a binary lambda expression
+Method      | Z0.XPress.or(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)| Creates a disjunction of a left and right expression
+Method      | Z0.XPress.or``2(System.Func{``0,System.Boolean},System.Func{``1,System.Boolean})| Forms a disjunction from two function predicates
+Method      | Z0.XPress.paramX``1(System.String)                                    | Creates a parameter expression
+Method      | Z0.XPress.paramX``2                                                   | Creates a parameter expression array of length 2
+Method      | Z0.XPress.paramX``3                                                   | Creates a parameter expression array of length 3
+Method      | Z0.XPress.paramX``4                                                   | Creates a parameter expression array of length 4
+Method      | Z0.XPress.paramX``1(System.Int32)                                     | Creates a parameter expression where the parameter name is predicated on an integer value
+Method      | Z0.XPress.paramX(System.Type,System.String)                           | Creates a parameter expression
+Method      | Z0.XPress.paramX(System.Reflection.ParameterInfo)                     | Creates a parameter expression from a reflected parameter
+Method      | Z0.XPress.paramX(System.Type,System.Int32)                            | Creates a parameter expression where the parameter name is predicated on an integer value
+Method      | Z0.XPress.paramXPair``2                                               | Creates a parameter expression 2-tuple
+Method      | Z0.XPress.paramXTriple``3                                             | Creates a parameter expression 3-tuple
+Method      | Z0.XPress.params(System.Type[])                                       | Creates an auto-named parameter expression array from an array of parameter types
+Method      | Z0.XPress.test(System.Object,System.Type)                             | Creates a type-test expression
+Method      | Z0.XPress.test``1(System.Object)                                      | Creates an expression to adjudicate whether a value if of a specified type
+Method      | Z0.XFunc.f``1(System.Func{``0})                                       | Creates a function expression for an emitter
+Method      | Z0.XFunc.f``2(System.Func{``0,``1})                                   | Creates a function expression over a fuction delegate of arity 1
+Method      | Z0.XFunc.f``3(System.Func{``0,``1,``2})                               | Creates a function expression over a fuction delegate of arity 2
+Method      | Z0.XFunc.f``4(System.Func{``0,``1,``2,``3})                           | Creates a function expression over a fuction delegate of arity 3
+Method      | Z0.XFunc.f``1(System.Func{``0,``0,``0})                               | Creates a function expression over an homogenous function delegate of arity 2
+Method      | Z0.XFunc.f``1(System.Func{``0,``0,``0,``0})                           | Creates a function expression over an homogenous function delegate of arity 3
+Method      | Z0.XFunc.fx``1(System.Func{``0})                                      | Creates a linq expression over an emitter
+Method      | Z0.XFunc.fx``2(System.Func{``0,``1})                                  | Creates a linq expression over a function delegate of arity 1
+Method      | Z0.XFunc.fx``3(System.Func{``0,``1,``2})                              | Creates a linq expression over a function delegate of arity 2
+Method      | Z0.XFunc.fx``4(System.Func{``0,``1,``2,``3})                          | Creates a linq expression over a function delegate of arity 3
+Method      | Z0.XQuery.called(System.Linq.Expressions.Expression)                  | Returns the method invoked by an expression, if any
+Method      | Z0.XQuery.constant(System.Linq.Expressions.Expression)                | Extracts a value from a constant expression if possible
+Method      | Z0.XQuery.field``1(System.Linq.Expressions.Expression{System.Func{``0}})| Extracts the field info for the field referenced by an expression delegate
+Method      | Z0.XQuery.field``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Extracts the field info for the field referenced by an expression delegate
+Method      | Z0.XQuery.IsConversion(System.Linq.Expressions.Expression)            | Tests whether an expression is a conversion
+Method      | Z0.XQuery.IsConversion``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Tests whether a member is wrapped in a conversion
+Method      | Z0.XQuery.IsAccess(System.Linq.Expressions.Expression)                | Tests whether the test expression is a member access expression
+Method      | Z0.XQuery.IsCall(System.Linq.Expressions.Expression)                  | Tests whether the test expression is a function call
+Method      | Z0.XQuery.IsSelect(System.Linq.Expressions.Expression)                | Tests whether an expression is an application of the LINQ select operator
+Method      | Z0.XQuery.IsLogical(System.Linq.Expressions.Expression)               | Tests whether an expression is a logical operator
+Method      | Z0.XQuery.IsLambda(System.Linq.Expressions.Expression)                | Tests whether an expression is a lambda expression
+Method      | Z0.XQuery.disjunction``1(``0)                                         | If the source expression is a logical disjunction, returns the expression; otherwise, returns none
+Method      | Z0.XQuery.conjunction``1(``0)                                         | Tests whether an expression is a logical conjunction
+Method      | Z0.XQuery.junction``1(``0)                                            | Deterines whether the test expression is either a logical conjuntion or disjunction
+Method      | Z0.XQuery.member``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Extracts the member info for the member referenced by an expression delegate
+Method      | Z0.XQuery.method``1(System.Linq.Expressions.Expression{System.Func{``0}})| Extracts the method info for the function referenced by an expression delegate
+Method      | Z0.XQuery.method``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Extracts the method info for the function referenced by an expression delegate
+Method      | Z0.XQuery.method``3(System.Linq.Expressions.Expression{System.Func{``0,``1,``2}})| Extracts the method info for the function referenced by an expression delegate
+Method      | Z0.XQuery.method``4(System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``3}})| Extracts the method info for the function referenced by an expression delegate
+Method      | Z0.XQuery.method``1(System.Linq.Expressions.Expression{System.Action{``0}})| Extracts the method for the action referenced by an an expression delegate
+Method      | Z0.XQuery.method``2(System.Linq.Expressions.Expression{System.Action{``0,``1}})| Extracts the method info for the action referenced by an expression delegate
+Method      | Z0.XQuery.method``3(System.Linq.Expressions.Expression{System.Action{``0,``1,``2}})| Extracts the method info for the action referenced by an expression delegate
+Method      | Z0.XQuery.method``4(System.Linq.Expressions.Expression{System.Action{``0,``1,``2,``3}})| Extracts the method info for the action referenced by an expression delegate
+Method      | Z0.XQuery.property``1(System.Linq.Expressions.Expression{System.Func{``0}})| Extracts the property info for the property referenced by an expression delegate
+Method      | Z0.XQuery.property``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})| Extracts the property info for the property referenced by an expression delegate
+Method      | Z0.XQuery.test``2(System.Linq.Expressions.Expression)                 | Performs a type-test on an expression
+Method      | Z0.XQuery.test``3(System.Linq.Expressions.Expression)                 | Performs a type-test on an expression
+Method      | Z0.XQuery.test``4(System.Linq.Expressions.Expression)                 | Performs a type-test on an expression
+Type        | Z0.Either                                                             | Constructs and manipulates <see cref="T:Z0.IEither" /> values
+Method      | Z0.Either.make``2(``0)                                                | Constructs a left-valued either
+Method      | Z0.Either.make``2(``1)                                                | Constructs a right-valued either
+Method      | Z0.Either.left``2(Z0.Either{``0,``1})                                 | If either is Left, returns the left value; oterwise, raises an error
+Method      | Z0.Either.right``2(Z0.Either{``0,``1})                                | If either is Left, returns the left value; oterwise, raises an error
+Method      | Z0.Either.map``4(System.Func{``0,``2},System.Func{``1,``3},Z0.Either{``0,``1})| Applies the left function if the either is left-values and the right function if right
+Method      | Z0.Either.map``3(System.Func{``0,``2},Z0.Either{``0,``1})             | Applies a left function if the either is left-valued; otherwise, passes the right             value through untransformed
+Method      | Z0.Either.map``3(System.Func{``1,``2},Z0.Either{``0,``1})             | Applies a right function if the either is right-valued; otherwise, passes the left            value through untransformed
+Method      | Z0.Either.isLeft``2(Z0.Either{``0,``1})                               | Determines whether the either is left-valued
+Method      | Z0.Either.isRight``2(Z0.Either{``0,``1})                              | Determines whether the either is right-valued
+Type        | Z0.Either`2                                                           | A value that realizes exactly one of two alternatives
+Property    | Z0.Either`2.Selected                                                  | Tracks the chosen alternative
+Property    | Z0.Either`2.Left                                                      | Specifies the left alternative
+Property    | Z0.Either`2.Right                                                     | Specivies the right alternative
+Method      | Z0.Either`2.#ctor(`0)                                                 | Constructs a left-valued alternative
+Method      | Z0.Either`2.#ctor(`1)                                                 | Constructs a right-valued alternative
+Property    | Z0.Either`2.IsLeft                                                    | Indicates whether the left alternative is specified
+Property    | Z0.Either`2.IsRight                                                   | Indicates whether the right alternative is specified
+Method      | Z0.Either`2.OnLeft(System.Action{`0})                                 | Invokes an action if the alternative is left-valued
+Method      | Z0.Either`2.OnRight(System.Action{`1})                                | Invokes an action if the alternative is right values
+Method      | Z0.Either`2.OnEither(System.Action{`0},System.Action{`1})             | Invokes exactly one of two alternative actions
+Method      | Z0.Either`2.Map``1(System.Func{`0,``0},System.Func{`1,``0})           | Applies exactly one of two transformations
+Method      | Z0.Either`2.Select``1(System.Func{`1,``0})                            | Defines a right-biased Linq-monad projector
+Method      | Z0.Either`2.SelectMany``2(System.Func{`1,Z0.Either{`0,``0}},System.Func{`1,``0,``1})| Defines a right-biased Linq-modad join
+Method      | Z0.Either`2.Equals(Z0.Either{`0,`1})                                  | Determines structural equality
+Type        | Z0.IEither                                                            | Defines nonparametric either attributes
+Property    | Z0.IEither.IsLeft                                                     | Specifies whether the left alternative exists
+Property    | Z0.IEither.IsRight                                                    | Specifies whether the right alternative exists
+Type        | Z0.IEither`2                                                          | Characterizes a parametric disjoint union of arity two, where exactly one state            is populated for a given instantitation
+Property    | Z0.IEither`2.Left                                                     | If <see cref="!:IsLeft" /> is true, specifies the value of the left alternative
+Property    | Z0.IEither`2.Right                                                    | If <see cref="!:IsRight" /> is true, specifies the value of the right alternative
+Type        | Z0.IMonadic                                                           | Characterizes nothing, but defines a root interface for things monadic
+Type        | Z0.IOption                                                            | Characterizes an untyped optional value
+Property    | Z0.IOption.IsSome                                                     | True if a value exists, false otherwise
+Property    | Z0.IOption.IsNone                                                     | True if a value does not exist, false otherwise
+Type        | Z0.IOption`1                                                          | Characterizes a parametric option
+Property    | Z0.IOption`1.Value                                                    | If extant, specifies the option value
+Type        | Z0.IOption`2                                                          | Characterizes an F-bound polymorphic option
+Type        | Z0.Copair`2                                                           | Characterizes (to the extent that the language conveniently supports) a disjoint union             of parametric arity 2, a categorically natural dual to a pairing
+Field       | Z0.Copair`2.Left                                                      | The potential left value
+Field       | Z0.Copair`2.Right                                                     | The potential right value
+Method      | Z0.Option.from``1(``0)                                                | Creates an option from a reference type instance, returning a valued option if the            refernce is not null; otherwise, returns none
+Method      | Z0.Option.from``1(System.Nullable{``0})                               | Creates an option from a value type, returning a valued option if the            refernce is not null; otherwise, returns none
+Method      | Z0.Option.none``1                                                     | Defines a non-valued option
+Method      | Z0.Option.some``1(``0)                                                | Defines a valued option
+Method      | Z0.Option.eval``1(``0)                                                | Classifies the value as some or none and manufactures the appropriate option encapsulation
+Method      | Z0.Option.eval``1(System.Nullable{``0})                               | Classifies the value as some or none and manufactures the appropriate option encapsulation
+Method      | Z0.Option.Try``1(System.Func{``0},System.Action{System.Exception})    | Evaluates a function within a try block and returns the value of the computation if             successful; otherwise, returns None and invokes an error handler if supplied
+Method      | Z0.Option.Try``1(System.Func{Z0.Option{``0}},System.Action{System.Exception})| Evaluates a function within a try block and returns the value of the computation if             successful; otherwise, returns None together with the reported exception
+Method      | Z0.Option.Try(System.Action,System.Action{System.Exception})          | Invokes an action within a try block and, upon error, calls            the handler if specified. If no handler is specified, the exception            message is emitted to stderr
+Method      | Z0.Option.Try``2(``0,System.Func{``0,``1},System.Action{``0,System.Exception})| Evaluates a function within a try block and returns the value of the computation if             successful; otherwise, returns None together with the reported exception
+Method      | Z0.Option.TryCast``1(System.Object)                                   | Casts a value if possible, otherwise returns none
+Method      | Z0.Option.ifNotNull``2(``0,System.Func{``0,``1},``1)                  | Evaluates a function over a value if the value is not null; otherwise, returns the default result value
+Type        | Z0.Option`1                                                           | Represents a potential value
+Field       | Z0.Option`1.value                                                     | The encapsulated value, iff Exists is true
+Property    | Z0.Option`1.Exists                                                    | Specifies whether the option has a value
+Property    | Z0.Option`1.Value                                                     | Exposes the underlying data, if extant; otherwise, yeilds the default potential value, which may of course be null
+Method      | Z0.Option`1.None                                                      | Defines a non-valued option
+Method      | Z0.Option`1.Some(`0)                                                  | Defines a valued option
+Method      | Z0.Option`1.op_Equality(Z0.Option{`0},Z0.Option{`0})                  | Implmements value-based equality
+Method      | Z0.Option`1.op_Inequality(Z0.Option{`0},Z0.Option{`0})                | Implements value-based equality negation
+Method      | Z0.Option`1.op_True(Z0.Option{`0})                                    | Returns true if the option has a value and false otherwise
+Method      | Z0.Option`1.op_False(Z0.Option{`0})                                   | Returns false if the option is non-valued and true otherwise
+Method      | Z0.Option`1.op_LogicalNot(Z0.Option{`0})                              | Returns false if the option is non-valued and true otherwise
+Method      | Z0.Option`1.IsSome                                                    | Returns true if the value exists
+Method      | Z0.Option`1.IsNone                                                    | Returns true if the value does not exist
+Method      | Z0.Option`1.IfSome``1(System.Func{`0,``0})                            | Applies the a function to evaluate the underlying value if it exists
+Method      | Z0.Option`1.OnSome(System.Action{`0})                                 | Invokes an action if the value exists
+Method      | Z0.Option`1.OnNone(System.Action)                                     | Invokes an action if the value doesn't exist
+Method      | Z0.Option`1.Require(System.String,System.String,System.Nullable{System.Int32})| Yields the encapulated value if present; otherwise, raises an exception
+Property    | Z0.Option`1.ValueType                                                 | The type of the encapsulated value, if present
+Method      | Z0.Option`1.ValueOrDefault(`0)                                        | Extracts the encapulated value if it exists; otherwise, returns the default value for            the underlying type which is NULL for reference types
+Method      | Z0.Option`1.ValueOrElse(System.Func{`0})                              | Returns the encapsulated value if it exists; otherwise, invokes the supplied fallback function
+Method      | Z0.Option`1.ValueOrElse(`0)                                           | Returns the encapsulated value if it exists; otherwise, returns the supplied value
+Method      | Z0.Option`1.Map``1(System.Func{`0,``0},System.Func{``0})              | Applies supplied function to value if present, otherwise returns the             value obtained by invoking the fallback function
+Method      | Z0.Option`1.Map``1(System.Func{`0,``0},``0)                           | Applies supplied function to value if present, otherwise returns the fallback value
+Method      | Z0.Option`1.TryMap``1(System.Func{`0,``0})                            | Applies a function to value if present, otherwise returns None
+Method      | Z0.Option`1.MapValueOrElse``1(System.Func{`0,``0},System.Func{``0})   | Transforms the value, if present, otherwise invokes a function            to produce an appropriate value of the target type if not
+Method      | Z0.Option`1.MapValueOrDefault``1(System.Func{`0,``0},``0)             | Applies a function to the encapsulated value if it exists; otherwise, returns a default value
+Method      | Z0.Option`1.MapValueOrNull``1(System.Func{`0,``0})                    | Maps an optional source value to a nullable value type
+Method      | Z0.Option`1.Bind``1(System.Func{`0,Z0.Option{``0}})                   | Implements the canonical bind operation
+Method      | Z0.Option`1.Select``1(System.Func{`0,``0})                            | LINQ integration function
+Method      | Z0.Option`1.SelectMany``2(System.Func{`0,Z0.Option{``0}},System.Func{`0,``0,``1})| LINQ integration function
+Method      | Z0.Option`1.Where(System.Func{`0,System.Boolean})                     | LINQ integration function
+Method      | Z0.IFieldParser.Parse(System.String,Z0.YeaOrNea@)                     | Parses a Y/N literal
+Method      | Z0.IFieldParser.Parse(System.String,System.String@)                   | Parses a string as a string which effects cleansing/trimming/denullifying as necessary
+Method      | Z0.IFieldParser.Numeric``1(System.String,``0@,``0)                    | Parses a numeric field if possible; else sets the result to a default value
+Method      | Z0.IFieldParser.Literal``1(System.String,Z0.ParseResult{``0}@,``0)    | Parses an enumeration literal if possible; else sets the result to a default value
+Type        | Z0.IInfallibleParser`1                                                | Characterizes a parser that cannot fail (in theory)
+Type        | Z0.IParametricParser                                                  | Characterizes a non-parametric text parser that defines a parametric parse function
+Method      | Z0.IParametricParser.Parse``1(System.String)                          | Attemps to parse the source text as a parametrically-identified target type
+Method      | Z0.IParametricParser.Parse``1(System.String,``0)                      | Returns a successfully parsed value, if possible; otherwise returns a caller-supplied default value
+Type        | Z0.IParametricParser`1                                                | Characterizes a source-parametric parser that defines a parametric parse function
+Method      | Z0.IParametricParser`1.Parse``1(`0)                                   | Attemps to parse the source as a parametrically-identified target type
+Method      | Z0.IParametricParser`1.Parse``1(`0,``0)                               | Returns a successfully parsed value, if possible; otherwise returns a caller-supplied default value
+Type        | Z0.ISequentialParser`1                                                | Characterizes a parser that yields values of a parametrically-identified type
+Type        | Z0.ISequentialParser`2                                                | Characterizes a parser that yields values of sequential aspect
+Type        | Z0.ITextParser`1                                                      | Characterizes a parser that yields values of a parametrically-identified type
+Type        | Z0.Parse`1                                                            | Defines the signature of a canonical text -&gt; T parser
+Type        | Z0.Parse`2                                                            | Defines the signature of a canonical S -&gt; T parser
+Property    | Z0.ParseResult.Source                                                 | The content that was parsed...or not
+Property    | Z0.ParseResult.TargetType                                             | The target value type
+Property    | Z0.ParseResult.SourceType                                             | The source type
+Property    | Z0.ParseResult.Succeeded                                              | Specifies whether the parse attempt succeed, and thus the Value field is meaningful
+Property    | Z0.ParseResult.Value                                                  | The parsed value, if the parse operaion succeedeed; otherwise best not look there
+Property    | Z0.ParseResult.Reason                                                 | If the parse attempt failed, the reason for the failure, if available
+Method      | Z0.ParseResult.Success``1(System.String,``0)                          | Defines a successful parse result
+Method      | Z0.ParseResult.Success``2(``0,``1)                                    | Defines a successful parse result
+Method      | Z0.ParseResult.Fail``2(``0,System.Object)                             | Defines a parse result that signals failure
+Property    | Z0.ParseResult`2.Source                                               | The content that was parsed...or not
+Property    | Z0.ParseResult`2.Succeeded                                            | Specifies whether the parse attempt succeed, and thus the Value field is meaningful
+Property    | Z0.ParseResult`2.Value                                                | Upon successful parse attempt, holds the parsed value; otherwise it may or may not hold something else
+Method      | Z0.ParseResult`2.OnSuccess(System.Action{`1})                         | Invokes an action if the value exists
+Method      | Z0.ParseResult`2.OnFailure(System.Action)                             | Invokes an action if the value doesn't exist
+Method      | Z0.ParseResult`2.OnFailure(System.Action{Z0.ParseResult{`0,`1}})      | Invokes an action if the value doesn't exist
+Method      | Z0.ParseResult`2.MapValueOrSource``1(System.Func{`1,``0},System.Func{`0,``0})| Maps the parsed value upon success and the source text upon failure
+Method      | Z0.ParseResult`2.ValueOrDefault(`1)                                   | Extracts the encapulated value if it exists; otherwise, returns the default value for            the underlying type which is NULL for reference types
+Method      | Z0.ParseResult`2.ValueOrElse(System.Func{`1})                         | Returns the encapsulated value if it exists; otherwise, invokes the supplied fallback function
+Method      | Z0.ParseResult`2.TryMap``1(System.Func{`1,``0})                       | Applies a function to value if present, otherwise returns None
+Method      | Z0.ParseResult`2.Bind``1(System.Func{`1,Z0.ParseResult{`0,``0}})      | Implements the canonical bind operation
+Method      | Z0.ParseResult`2.Select``1(System.Func{`1,``0})                       | LINQ integration function
+Method      | Z0.ParseResult`2.SelectMany``2(System.Func{`1,Z0.ParseResult{`0,``0}},System.Func{`1,``0,``1})| LINQ integration function
+Property    | Z0.ParseResult`1.Source                                               | The text that was parsed...or not
+Property    | Z0.ParseResult`1.Succeeded                                            | Specifies whether the parse attempt succeed, and thus the Value field is meaningful
+Property    | Z0.ParseResult`1.Value                                                | Upon successful parse attempt, holds the parsed value; otherwise it may or may not hold something else
+Method      | Z0.ParseResult`1.OnSuccess(System.Action{`0})                         | Invokes an action if the value exists
+Method      | Z0.ParseResult`1.OnFailure(System.Action)                             | Invokes an action if the value doesn't exist
+Method      | Z0.ParseResult`1.OnFailure(System.Action{Z0.ParseResult})             | Invokes an action if the value doesn't exist
+Method      | Z0.ParseResult`1.MapValueOrSource``1(System.Func{`0,``0},System.Func{System.String,``0})| Maps the parsed value upon success and the source text upon failure
+Method      | Z0.ParseResult`1.ValueOrDefault(`0)                                   | Extracts the encapulated value if it exists; otherwise, returns the default value for            the underlying type which is NULL for reference types
+Method      | Z0.ParseResult`1.ValueOrElse(System.Func{`0})                         | Returns the encapsulated value if it exists; otherwise, invokes the supplied fallback function
+Method      | Z0.ParseResult`1.TryMap``1(System.Func{`0,``0})                       | Applies a function to value if present, otherwise returns None
+Method      | Z0.ParseResult`1.Bind``1(System.Func{`0,Z0.ParseResult{``0}})         | Implements the canonical bind operation
+Method      | Z0.ParseResult`1.Select``1(System.Func{`0,``0})                       | LINQ integration function
+Method      | Z0.ParseResult`1.SelectMany``2(System.Func{`0,Z0.ParseResult{``0}},System.Func{`0,``0,``1})| LINQ integration function
+Type        | Z0.Parser`2                                                           | Defines a parser predicated on a supplied parse function
+Method      | Z0.EnumValue.eVal``2(``1,``0)                                         | Reads an E-value from an enum of primal T-kind
+Method      | Z0.EnumValue.tVal``2(``0,``1)                                         | Reads a T-value from the value of an E-enum of primal T-kind
+Method      | Z0.EnumValue.tVal``2(``0@,``1@)                                       | Reads a T-value from an E-enum value of primal T-kind.
+Method      | Z0.EnumValue.tVal``1(``0@,System.Byte@)                               | Reads a u8-value from an enum of primal u8-kind
+Method      | Z0.EnumValue.tVal``1(``0@,System.SByte@)                              | Reads an i8-value from an enum of primal u8-kind
+Method      | Z0.EnumValue.tVal``1(``0@,System.Int16@)                              | Reads an i16-value from an enum of primal i16-kind
+Method      | Z0.EnumValue.tVal``1(``0@,System.UInt16@)                             | Reads a u16-value from an enum of primal u16-kind
+Method      | Z0.EnumValue.tVal``1(``0@,System.Int32@)                              | Reads an i32-value from an enum of primal i32-kind
+Method      | Z0.EnumValue.tVal``1(``0@,System.UInt32@)                             | Reads a u32-value from an enum of primal u32-kind
+Method      | Z0.EnumValue.tVal``1(``0@,System.Int64@)                              | Reads an i64-value from an enum of primal i64-kind
+Method      | Z0.EnumValue.tVal``1(``0@,System.UInt64@)                             | Reads a u64-value from an enum of primal u64-kind
+Method      | Z0.EnumValue.cVal``1(``0@,System.Char@)                               | Reads a c16-value from an enum of primal u16-kind
+Method      | Z0.EnumValue.eStore``1(``0@,System.UInt64@)                           | Stores an enum value of any primal kind to a u64 target
+Method      | Z0.EnumValue.u8``1(``0@,System.UInt64@)                               | Reads a u8 value from an enum of primal u8-kind, writes the value to a u64 target, and returns the extracted u8 value
+Method      | Z0.EnumValue.i8``1(``0@,System.UInt64@)                               | Reads a u8 value from an enum of primal i8-kind, writes the value to a u64 target, and returns the extracted i8 value
+Method      | Z0.EnumValue.u16``1(``0@,System.UInt64@)                              | Reads a u16 value from an enum of primal u16-kind, writes the value to a u64 target, and returns the extracted u16 value
+Method      | Z0.EnumValue.c16``1(``0@,System.UInt64@)                              | Reads a u16 value from an enum of primal u16-kind, writes the value to a u64 target, and returns the extracted value as c16 value
+Method      | Z0.EnumValue.i16``1(``0@,System.UInt64@)                              | Reads an i16 value from an enum of primal i16-kind, writes the value to a u64 target, and returns the extracted i16 value
+Method      | Z0.EnumValue.u32``1(``0@,System.UInt64@)                              | Reads n u32 value from an enum of primal u32-kind, writes the value to a u64 target, and returns the extracted u32 value
+Method      | Z0.EnumValue.i32``1(``0@,System.UInt64@)                              | Reads an i32 value from an enum of primal i32-kind, writes the value to a u64 target, and returns the extracted i32 value
+Method      | Z0.EnumValue.u64``1(``0@,System.UInt64@)                              | Reads n u64 value from an enum of primal u64-kind, writes the value to a u64 target, and returns the extracted u64 value
+Method      | Z0.EnumValue.i64``1(``0@,System.UInt64@)                              | Reads an i64 value from an enum of primal i64-kind, writes the value to a u64 target, and returns the extracted i64 value
+Method      | Z0.EnumValue.eVal``1(System.Byte,``0)                                 | Envisions a u8 value as a value of an enum of like primal kind
+Method      | Z0.EnumValue.eVal``1(System.SByte,``0)                                | Envisions an i8 value as a value of an enum of like primal kind
+Method      | Z0.EnumValue.eVal``1(System.Int16,``0)                                | Envisions an i16 value as a value of an enum of like primal kind
+Method      | Z0.EnumValue.eVal``1(System.UInt16,``0)                               | Envisions a u16 value as a value of an enum of like primal kind
+Method      | Z0.EnumValue.eVal``1(System.Char,``0)                                 | Envisions a c16 value as a value of an enum of like u16 kind
+Method      | Z0.EnumValue.eVal``1(System.Int32,``0)                                | Envisions an i32 value as a value of an enum of like primal kind
+Method      | Z0.EnumValue.eVal``1(System.UInt32,``0)                               | Envisions a u32 value as a value of an enum of like primal kind
+Method      | Z0.EnumValue.eVal``1(System.Int64,``0)                                | Envisions an i64 value as a value of an enum of like primal kind
+Method      | Z0.EnumValue.eVal``1(System.UInt64,``0)                               | Envisions a u64 value as a value of an enum of like primal kind
+Method      | Z0.EnumValue.e8i``1(``0)                                              | Envisions an E-enum value of primal i8-kind as a like-kinded scalar value
+Method      | Z0.EnumValue.e8u``1(``0)                                              | Envisions an E-enum value of primal u8-kind as a like-kinded scalar value
+Method      | Z0.EnumValue.e16i``1(``0)                                             | Envisions an E-enum value of primal i16-kind as a like-kinded scalar value
+Method      | Z0.EnumValue.e16u``1(``0)                                             | Envisions an E-enum value of primal u16-kind as a like-kinded scalar value
+Method      | Z0.EnumValue.e16c``1(``0)                                             | Envisions an E-enum value of primal u16-kind as a c16 value
+Method      | Z0.FieldValues.from``1(System.Type)                                   | Selects the literal values declared by a type that are of specified parametric type
+Type        | Z0.MethodParameter                                                    | Represents a method (value, not type) parameter
+Type        | Z0.MethodSig                                                          | Identifies and describes a method that, whithin some useful scope, is unique
+Method      | Z0.MethodSig.TypeParameters(System.Reflection.MethodInfo)             | Describes a method's type parameters, if any
+Method      | Z0.TaggedMember.define``2(``0,``1)                                    | Defines a tagged member
+Type        | Z0.TaggedMember`2                                                     | Pairs a member attribute value with its target
+Property    | Z0.TaggedMember`2.Member                                              | The target member
+Property    | Z0.TaggedMember`2.Tag                                                 | The tag value
+Type        | Z0.TypeParameter                                                      | Represents a type parameter in a generic artifact definition
+Type        | Z0.TypeParameters                                                     | Represents the open type parameters defined by a method
+Type        | Z0.TypeSig                                                            | A succinct type signature
+Type        | Z0.ValueMember                                                        | Represents a data slot in the declaring type and may correspond to either a field or property
+Property    | Z0.ValueMember.Name                                                   | The member name
+Property    | Z0.ValueMember.ValueType                                              | The value type that defines the member
+Property    | Z0.ValueMember.MemberInfo                                             | Provides access to the represented member
+Method      | Z0.Reflective.Public(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| Selects the public methods from a stream
+Method      | Z0.DisplayNameFormatting.DisplayName(System.Reflection.PropertyInfo)  | Gets the display name specified by the eponymous attribute, if attributed; otherwise, returns the reflected property name
+Type        | Z0.DateRange                                                          | Represents a contiguous finite interval of time with calendar day resolution
+Method      | Z0.DateRange.op_Implicit(Z0.DateRange)~Z0.TimeInterval{System.DateTime}| Converts a <see cref="T:Z0.DateRange" /> value to a <see cref="T:Z0.TimeInterval`1" /> value
+Method      | Z0.DateRange.FY(System.Int32)                                         | Produces a <see cref="T:Z0.DateRange" /> that [begins | ends] on the [first | last] day of a given year
+Method      | Z0.DateRange.Q1(System.Int32)                                         | Produces a <see cref="T:Z0.DateRange" /> that begins on the first day of the year            and ends on the last day of the sixth month of that year
+Method      | Z0.DateRange.Q2(System.Int32)                                         | Produces a <see cref="T:Z0.DateRange" /> that begins on the first day of the fourth month             and ends on the last day of the sixth month of a specified year
+Method      | Z0.DateRange.Q3(System.Int32)                                         | Produces a <see cref="T:Z0.DateRange" /> that begins on the first day of the seventh month             and ends on the last day of the ninth month of a specified year
+Method      | Z0.DateRange.Q4(System.Int32)                                         | Produces a <see cref="T:Z0.DateRange" /> that begins on the first day of the tenth month             and ends on the last day of the of a specified year
+Method      | Z0.DateRange.op_Implicit(System.ValueTuple{System.Date,System.Date})~Z0.DateRange| Produces a date range from a 2-tuple
+Method      | Z0.DateRange.#ctor(System.Date,System.Date)                           | Initializes a new instance of the <see cref="T:Z0.DateRange" /> type
+Property    | Z0.DateRange.Min                                                      | The inclusive lower bound
+Property    | Z0.DateRange.Max                                                      | The inclusive upper bound
+Method      | Z0.DateRange.In(System.Date)                                          | Determines whether the test value is within the range
+Method      | Z0.DateRange.Out(System.Date)                                         | Determines whether the test value is outside the range
+Method      | Z0.DateRange.Months(System.Date,System.Date)                          | Produces a montnly <see cref="T:Z0.DateRange" /> sequence
+Method      | Z0.DateRange.CreatePartitionPoints(System.Int32)                      | Creates the points in a range partition satisfying the specified width
+Method      | Z0.DateRange.GetDates                                                 | The days that comprise the range
+Property    | Z0.DateRange.TotalDays                                                | The number of days in the range
+Property    | Z0.DateRange.IsDegenerate                                             | Specifies whether the left and right boundaries are equal
+Type        | Z0.ITimeInterval                                                      | Represents the content of a contiguous interval between comparable lower and upper bounds of the same type
+Property    | Z0.ITimeInterval.Min                                                  | The first endpoint
+Property    | Z0.ITimeInterval.Max                                                  | The second endpoint
+Property    | Z0.ITimeInterval.LeftInclusive                                        | Specifies whether the left endpoint is included in the interval
+Property    | Z0.ITimeInterval.RightInclusive                                       | Specifies whether the right endpoint is included in the interval
+Property    | Z0.ITimeInterval`1.Min                                                | The inclusive lower bound
+Property    | Z0.ITimeInterval`1.Max                                                | The inclusive upper bound
+Type        | Z0.TimeInterval`1                                                     | Defines inclusive lower and upper bounds for a comparable set of values
+Property    | Z0.TimeInterval`1.Min                                                 | The minimum value in the range
+Property    | Z0.TimeInterval`1.Max                                                 | The maximum value in the range
+Method      | Z0.TimeInterval`1.In(`0)                                              | Tests whether a value is in the range
+Type        | Z0.TimerTicks                                                         | Describes the relationship between hardware ticks and measured time
+Method      | Z0.TimerTicks.ms(System.Int64)                                        | Computes the number of milliseconds accounted for by a specified number of ticks
+Method      | Z0.TimerTicks.ns(System.Int64)                                        | Computes the number of nanoseconds accounted for by a specified number of ticks
+Property    | Z0.TimerTicks.NsPerTick                                               | The number of nanoseconds that elapse during a timer tick
+Property    | Z0.TimerTicks.TicksPerMs                                              | The number of ticks per second
+Type        | Z0.SystemCounters                                                     | Defines counter api surface
+Method      | Z0.SystemCounters.CounterDelta(System.Int64@)                         | Returns the difference between the current Counter value and a prior counter value
+Method      | Z0.SystemCounters.CounterMs(System.Int64@)                            | Converts a counter value to milliseconds
+Property    | Z0.SystemCounters.Counter                                             | Gets the current value of the counter
+Property    | Z0.SystemCounters.ThreadCpuCycles                                     | Gets the CPU cycles consumed by the calling thread
+Method      | Z0.SystemCounters.QueryPerformanceFrequency(System.Int64@)            | Retrieves the number of performance counter counts per second.
+Method      | Z0.SystemCounters.QueryThreadCycleTime(System.IntPtr,System.UInt64@)  | Retrieves the cyle time for a specified thread
+Method      | Z0.SystemCounters.QueryProcessCycleTime(System.IntPtr,System.UInt64@) | Retrieves the sum of the cycle time of all threads of the specified process.
+Method      | Z0.TimeExtensions.ToLexicalString(System.DateTime,Z0.DateTimeAccuracy)| Renders a string in a more rational manner than the default behavior
+Method      | Z0.TimeExtensions.IsDate(System.Type)                                 | Determines whether a supplied type is either a Date or Nullable Date
+Method      | Z0.TimeExtensions.ToDateKey(System.DateTime)                          | Creates an integer of the form YYYYMMDD corresponding to a supplied date
+Method      | Z0.TimeExtensions.ToDateKey(System.Nullable{System.DateTime})         | Creates an integer of the form YYYYMMDD corresponding to a supplied date if the date             is not null and returns 0 otherwise
+Method      | Z0.TimeExtensions.GetItemArray(System.Date)                           | Represents a date value as an array of integers
+Method      | Z0.TimeExtensions.Yesterday(System.DateTime)                          | Returns the instant that is one day less than the specified instant
+Method      | Z0.TimeExtensions.LastMonth(System.DateTime)                          | Returns the instant that is one day less than the specified instant
+Method      | Z0.TimeExtensions.NextMonth(System.DateTime)                          | Returns the instant that is one day less than the specified instant
+Method      | Z0.TimeExtensions.EndOfYear(System.Date)                              | The last day of the current year
+Method      | Z0.TimeExtensions.Yesterday(System.Date)                              | Returns the instant that is one day less than the specified instant
+Method      | Z0.TimeExtensions.Tomorrow(System.DateTime)                           | Returns the instant that is one day more than the specified instant
+Method      | Z0.TimeExtensions.Tomorrow(System.Date)                               | Returns the instant that is one day more than the specified instant
+Method      | Z0.TimeExtensions.EndOfDay(System.DateTime)                           | Gets the time at which the day ends
+Method      | Z0.TimeExtensions.StartOfDay(System.DateTime)                         | Gets the time at which the day begins
+Method      | Z0.TimeExtensions.ContiguousDatesTo(System.DateTime,System.DateTime)  | Creates a contiguous range of dates within a supplied range
+Method      | Z0.TimeExtensions.ContiguousDatesTo(System.Date,System.Date)          | Creates a contiguous range of dates within a supplied range
+Method      | Z0.TimeExtensions.IsSameDay(System.DateTime,System.DateTime)          | Determines whether the <see cref="T:System.DateTime" /> values occur on the same day
+Method      | Z0.TimeExtensions.ToTimeKey(System.DateTime)                          | Returns the number of seconds elapsed since midnight
+Method      | Z0.TimeExtensions.ToTimeKey(System.Nullable{System.DateTime})         | Returns the number of seconds elapsed since midnight if date is not null, 0 otherwise
+Method      | Z0.TimeExtensions.ToDate(System.DateTime)                             | Returns the <see cref="T:System.Date" /> part of the supplied <see cref="T:System.DateTime" />
+Method      | Z0.TimeExtensions.ToLexicalDateString(System.DateTime)                | Renders a <see cref="T:System.DateTime" /> to the form YYYY-MM-DD
+Type        | System.Date                                                           | Represents a whole date, having a year, month and day component.            All values are in the proleptic Gregorian (ISO 8601) calendar system unless otherwise specified.
+Method      | System.Date.Between(System.Date,System.Date)                          | Defines a <see cref="T:Z0.DateRange" /> bounded below by <paramref name="MinDate" />            and above by <paramref name="MaxDate" />
+Method      | System.Date.ToLexicalString                                           | Renders a <see cref="T:System.Date" /> to the form YYYY-MM-DD
+Field       | System.Date.MinValue                                                  | Represents the smallest possible value of <see cref="T:System.Date" />. This field is read-only.
+Field       | System.Date.MaxValue                                                  | Represents the largest possible value of <see cref="T:System.Date" />. This field is read-only.
+Method      | System.Date.#ctor(System.Int32)                                       | Initializes a new instance of a <see cref="T:System.Date" /> structure to a specified number of days.
+Method      | System.Date.#ctor(System.Int32,System.Int32,System.Int32)             | Initializes a new instance of a <see cref="T:System.Date" /> structure to a specified year, month, and day.
+Method      | System.Date.#ctor(System.Int32,System.Int32,System.Int32,System.Globalization.Calendar)| Initializes a new instance of Date structure to a specified year, month, and day for the specified calendar.
+Method      | System.Date.#ctor(System.Int32,System.Int32)                          | Initializes a new instance of a <see cref="T:System.Date" /> structure to a specified year, and day of year.
+Property    | System.Date.Year                                                      | Gets the year component of the date represented by this instance.
+Property    | System.Date.Month                                                     | Gets the month component of the date represented by this instance.
+Property    | System.Date.Day                                                       | Gets the day component of the date represented by this instance.
+Property    | System.Date.DayOfYear                                                 | Gets the day of the year represented by this instance.
+Property    | System.Date.DayOfWeek                                                 | Gets the day of the week represented by this instance.
+Property    | System.Date.DayNumber                                                 | Gets the number of days since January 1, 0001 in the proleptic Gregorian calendar.
+Method      | System.Date.At(System.TimeOfDay)                                      | Creates a <see cref="T:System.DateTime" /> object from the current <see cref="T:System.Date" /> and the specified <see cref="T:System.TimeOfDay" />.            The resulting value has a <see cref="P:System.DateTime.Kind" /> of <see cref="F:System.DateTimeKind.Unspecified" />.
+Method      | System.Date.ToDateTimeAtMidnight                                      | Creates a <see cref="T:System.DateTime" /> object from the current <see cref="T:System.Date" />, with the time set to midnight            (00:00:00). The resulting value has a <see cref="P:System.DateTime.Kind" /> of <see cref="F:System.DateTimeKind.Unspecified" />.
+Method      | System.Date.IsLeapYear(System.Int32)                                  | Returns an indication whether the specified year is a leap year.
+Method      | System.Date.DaysInMonth(System.Int32,System.Int32)                    | Returns the number of days in the specified month and year.
+Method      | System.Date.TodayInTimeZone(System.TimeZoneInfo)                      | Gets a <see cref="T:System.Date" /> object that is set to the current date in the specified time zone.
+Property    | System.Date.Today                                                     | Gets a <see cref="T:System.Date" /> object that is set to the current date,            expressed in this computer's local time zone.
+Property    | System.Date.UtcToday                                                  | Gets a <see cref="T:System.Date" /> object that is set to the current date,            expressed as Coordinated Universal Time (UTC).
+Method      | System.Date.AddYears(System.Int32)                                    | Gets a <see cref="T:System.Date" /> object whose value is ahead or behind the value of this instance by the specified            number of years. Positive values will move the date forward; negative values will move the date backwards.            <para>            If the original date is a leap day (February 29), and the resulting year is not a leap year, the resulting            value will be adjusted to February 28.            </para>
+Method      | System.Date.AddMonths(System.Int32)                                   | Gets a <see cref="T:System.Date" /> object whose value is ahead or behind the value of this instance by the specified            number of months. Positive values will move the date forward; negative values will move the date backwards.            <para>            Since the number of days in a months varies, the resulting date may not necessarily fall on the same            day. If the resulting value would have landed on a day that doesn't exist within a month, the value is            adjusted backward to the last day of the month.            </para>
+Method      | System.Date.AddDays(System.Int32)                                     | Gets a <see cref="T:System.Date" /> object whose value is ahead or behind the value of this instance by the specified            number of days. Positive values will move the date forward; negative values will move the date backwards.
+Method      | System.Date.DaysUntil(System.Date)                                    | Returns the number of days remaining from this date to the <paramref name="date" /> specified.            If the <paramref name="date" /> has already passed, the result will be negative.
+Method      | System.Date.DaysSince(System.Date)                                    | Returns the number of days elapsed from the <paramref name="date" /> specified to this date.            If the <paramref name="date" /> has not yet passed, the result will be negative.
+Method      | System.Date.MonthsUntil(System.Date)                                  | Returns the number of whole months remaining from this date to the <paramref name="date" /> specified.            If the <paramref name="date" /> has already passed, the result will be negative.
+Method      | System.Date.MonthsSince(System.Date)                                  | Returns the number of whole months elapsed from the <paramref name="date" /> specified to this date.            If the <paramref name="date" /> has not yet passed, the result will be negative.
+Method      | System.Date.YearsUntil(System.Date)                                   | Returns the number of whole years remaining from this date to the <paramref name="date" /> specified.            If the <paramref name="date" /> has already passed, the result will be negative.
+Method      | System.Date.YearsSince(System.Date)                                   | Returns the number of whole years elapsed from the <paramref name="date" /> specified to this date.            If the <paramref name="date" /> has not yet passed, the result will be negative.
+Method      | System.Date.IsBetween(System.Date,System.Date,System.Boolean)         | Determines if a date falls within the range provided.
+Method      | System.Date.Compare(System.Date,System.Date)                          | Compares two instances of <see cref="T:System.Date" /> and returns an integer that indicates whether the first            instance is earlier than, the same as, or later than the second instance.
+Method      | System.Date.CompareTo(System.Date)                                    | Compares the value of this instance to a specified <see cref="T:System.Date" /> value and returns an integer that            indicates whether this instance is earlier than, the same as, or later than the specified            <see cref="T:System.Date" /> value.
+Method      | System.Date.CompareTo(System.Object)                                  | Compares the value of this instance to a specified object that contains a <see cref="T:System.Date" /> value and            returns an integer that indicates whether this instance is earlier than, the same as, or later than the            specified <see cref="T:System.Date" /> value.
+Method      | System.Date.Equals(System.Date,System.Date)                           | Returns a value indicating whether two <see cref="T:System.Date" /> instances have the same date value.
+Method      | System.Date.Equals(System.Date)                                       | Returns a value indicating whether the value of this instance is equal to the value of the specified            <see cref="T:System.Date" /> instance.
+Method      | System.Date.Equals(System.Object)                                     | Returns a value indicating whether this instance is equal to the specified object.
+Method      | System.Date.GetHashCode                                               | Returns the hash code of this instance.
+Method      | System.Date.ToString                                                  | Converts the value of the current <see cref="T:System.Date" /> object to its equivalent string representation.
+Method      | System.Date.ToString(System.IFormatProvider)                          | Converts the value of the current <see cref="T:System.Date" /> object to its equivalent string representation            using the specified culture-specific format information.
+Method      | System.Date.ToString(System.String)                                   | Converts the value of the current <see cref="T:System.Date" /> object to its equivalent string representation            using the specified format.
+Method      | System.Date.ToString(System.String,System.IFormatProvider)            | Converts the value of the current <see cref="T:System.Date" /> object to its equivalent string representation            using the specified format and culture-specific format information.
+Method      | System.Date.ToLongDateString                                          | Converts the value of the current <see cref="T:System.Date" /> object to its equivalent long date string            representation.
+Method      | System.Date.ToShortDateString                                         | Converts the value of the current <see cref="T:System.Date" /> object to its equivalent short date string            representation.
+Method      | System.Date.ToIsoString                                               | Converts the value of the current <see cref="T:System.Date" /> object to its equivalent ISO standard string            representation (ISO-8601), which has the format: <c>yyyy-MM-dd</c>.
+Method      | System.Date.Parse(System.String)                                      | Converts the string representation of a date to its <see cref="T:System.Date" /> equivalent.
+Method      | System.Date.Parse(System.String,System.IFormatProvider)               | Converts the string representation of a date to its <see cref="T:System.Date" /> equivalent            by using culture-specific format information.
+Method      | System.Date.Parse(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)| Converts the string representation of a date to its <see cref="T:System.Date" /> equivalent            by using culture-specific format information and formatting style.
+Method      | System.Date.ParseExact(System.String,System.String,System.IFormatProvider)| Converts the specified string representation of a date to its <see cref="T:System.Date" /> equivalent            using the specified format and culture-specific format information.            The format of the string representation must match the specified format exactly or an exception is thrown.
+Method      | System.Date.ParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)| Converts the specified string representation of a date to its <see cref="T:System.Date" /> equivalent            using the specified format, culture-specific format information, and style.            The format of the string representation must match the specified format exactly or an exception is thrown.
+Method      | System.Date.ParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)| Converts the specified string representation of a date to its <see cref="T:System.Date" /> equivalent            using the specified array of formats, culture-specific format information, and style.            The format of the string representation must match at least one of the specified formats            exactly or an exception is thrown.
+Method      | System.Date.TryParse(System.String,System.Date@)                      | Converts the specified string representation of a date to its <see cref="T:System.Date" /> equivalent            and returns a value that indicates whether the conversion succeeded.
+Method      | System.Date.TryParse(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.Date@)| Converts the specified string representation of a date to its <see cref="T:System.Date" /> equivalent            using the specified culture-specific format information and formatting style,            and returns a value that indicates whether the conversion succeeded.
+Method      | System.Date.TryParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.Date@)| Converts the specified string representation of a date to its <see cref="T:System.Date" /> equivalent            using the specified format, culture-specific format information, and style.            The format of the string representation must match the specified format exactly.            The method returns a value that indicates whether the conversion succeeded.
+Method      | System.Date.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.Date@)| Converts the specified string representation of a date to its <see cref="T:System.Date" /> equivalent            using the specified array of formats, culture-specific format information, and style.            The format of the string representation must match at least one of the specified formats exactly.            The method returns a value that indicates whether the conversion succeeded.
+Method      | System.Date.op_Equality(System.Date,System.Date)                      | Determines whether two specified instances of <see cref="T:System.Date" /> are equal.
+Method      | System.Date.op_Inequality(System.Date,System.Date)                    | Determines whether two specified instances of <see cref="T:System.Date" /> are not equal.
+Method      | System.Date.op_GreaterThan(System.Date,System.Date)                   | Determines whether one specified <see cref="T:System.Date" /> is later than another specified <see cref="T:System.Date" />.
+Method      | System.Date.op_GreaterThanOrEqual(System.Date,System.Date)            | Determines whether one specified <see cref="T:System.Date" /> is equal to or later than another specified <see cref="T:System.Date" />.
+Method      | System.Date.op_LessThan(System.Date,System.Date)                      | Determines whether one specified <see cref="T:System.Date" /> is earlier than another specified <see cref="T:System.Date" />.
+Method      | System.Date.op_LessThanOrEqual(System.Date,System.Date)               | Determines whether one specified <see cref="T:System.Date" /> is equal to or earlier than another specified <see cref="T:System.Date" />.
+Method      | System.Date.op_Implicit(System.DateTime)~System.Date                  | Implicitly casts a <see cref="T:System.DateTime" /> object to a <see cref="T:System.Date" /> by returning a new            <see cref="T:System.Date" /> object that has the equivalent year, month, and day components.  This is useful when            using APIs that express a calendar date as a <see cref="T:System.DateTime" /> and expect the consumer to ignore            the time portion of the value.  This operator enables these values to be assigned to a variable having            a <see cref="T:System.Date" /> type.
+Method      | System.Date.op_Implicit(System.Date)~System.DateTime                  | Implicitly casts a <see cref="T:System.Date" /> object to a <see cref="T:System.DateTime" /> by returning a new            <see cref="T:System.DateTime" /> object that has the equivalent year, month, and day components, and has its time            set to midnight (00:00:00).  This is useful when using APIs that express a calendar date as a            <see cref="T:System.DateTime" /> and ignore the time portion of the value.  This operator enables <see cref="T:System.Date" />            values to be passed to a method expecting a <see cref="T:System.DateTime" />.            <para>            Use with caution, as midnight may not necessarily be valid in every time zone on every day of the year.            For example, when Brazil springs forward for daylight saving time, the clocks skip from 23:59:59 directly            to 01:00:00.            </para>
+Method      | System.Date.DateFromDateTime(System.DateTime)                         | Constructs a <see cref="T:System.Date" /> object from the date component of a <see cref="T:System.DateTime" />.
+Method      | System.Date.DateToDayNumber(System.Int32,System.Int32,System.Int32)   | Returns the day number count corresponding to the given year, month, and day.            Will check the if the parameters are valid.
+Method      | System.Date.GetDatePart(System.Int32)                                 | Returns a given date part of this DateTime. This method is used            to compute the year, day-of-year, month, or day part.
+Method      | System.Date.NormalizeDateFormat(System.String)                        | Normalizes a format string that has standard or custom date/time formats,            such that the formatted output can only contain a date when applied.
+Method      | System.Date.GetSchema(System.Object)                                  | Gets a <see cref="T:System.Xml.XmlQualifiedName" /> that represents the <c>xs:date</c> type of the            W3C XML Schema Definition (XSD) specification.
+Method      | System.Date.System#Xml#Serialization#IXmlSerializable#GetSchema       | Required by the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface.
+Method      | System.Date.System#Xml#Serialization#IXmlSerializable#ReadXml(System.Xml.XmlReader)| Generates a <see cref="T:System.Date" /> object from its XML representation.
+Method      | System.Date.System#Xml#Serialization#IXmlSerializable#WriteXml(System.Xml.XmlWriter)| Converts a <see cref="T:System.Date" /> object into its XML representation.
+Type        | System.Meridiem                                                       | Provides an enumeration of AM or PM to support 12-hour clock values in the <see cref="T:System.TimeOfDay" /> type.
+Field       | System.Meridiem.AM                                                    | 
+Field       | System.Meridiem.PM                                                    | 
+Type        | System.TimeOfDay                                                      | Represents a time of day, as would be read from a clock, within the range 00:00:00 to 23:59:59.9999999            Has properties for working with both 12-hour and 24-hour time values.
+Field       | System.TimeOfDay.MinValue                                             | Represents the smallest possible value of <see cref="T:System.TimeOfDay" />. This field is read-only.
+Field       | System.TimeOfDay.MaxValue                                             | Represents the largest possible value of <see cref="T:System.TimeOfDay" />. This field is read-only.
+Method      | System.TimeOfDay.#ctor(System.Int64)                                  | Initializes a new instance of a <see cref="T:System.TimeOfDay" /> structure to a specified number of ticks.
+Method      | System.TimeOfDay.#ctor(System.Int32,System.Int32)                     | Initializes a new instance of a <see cref="T:System.TimeOfDay" /> structure to the specified            hour and minute.
+Method      | System.TimeOfDay.#ctor(System.Int32,System.Int32,System.Meridiem)     | Initializes a new instance of a <see cref="T:System.TimeOfDay" /> structure to the specified            hour, minute, and meridiem, using the hours of a 12-hour clock.
+Method      | System.TimeOfDay.#ctor(System.Int32,System.Int32,System.Int32)        | Initializes a new instance of a <see cref="T:System.TimeOfDay" /> structure to the specified            hour, minute, and second, using the hours of a 24-hour clock.
+Method      | System.TimeOfDay.#ctor(System.Int32,System.Int32,System.Int32,System.Meridiem)| Initializes a new instance of a <see cref="T:System.TimeOfDay" /> structure to the specified            hour, minute, second, and meridiem, using the hours of a 12-hour clock.
+Method      | System.TimeOfDay.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)| Initializes a new instance of a <see cref="T:System.TimeOfDay" /> structure to the specified            hour, minute, second, and millisecond, using the hours of a 24-hour clock.
+Method      | System.TimeOfDay.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Meridiem)| Initializes a new instance of a <see cref="T:System.TimeOfDay" /> structure to the specified            hour, minute, second, millisecond, and meridiem, using the hours of a 12-hour clock.
+Property    | System.TimeOfDay.Hour                                                 | Gets the hour component of the time represented by this instance, using the hours of a 24-hour clock.
+Property    | System.TimeOfDay.HourOf12HourClock                                    | Gets the hour component of the time represented by this instance, using the hours of a 12-hour clock.
+Property    | System.TimeOfDay.Meridiem                                             | Gets the meridiem (AM or PM) of the time represented by this instance.            The meridiem can be used inconjunction with the <see cref="P:System.TimeOfDay.HourOf12HourClock" /> property            to represent this instance's time on a 12-hour clock.
+Property    | System.TimeOfDay.Minute                                               | Gets the minute component of the time represented by this instance.
+Property    | System.TimeOfDay.Second                                               | Gets the second component of the time represented by this instance.
+Property    | System.TimeOfDay.Millisecond                                          | Gets the millisecond component of the time represented by this instance.
+Property    | System.TimeOfDay.Ticks                                                | Gets the number of ticks that represent the time of this instance.
+Method      | System.TimeOfDay.On(System.Date)                                      | Creates a <see cref="T:System.DateTime" /> object from the current <see cref="T:System.TimeOfDay" /> and the specified <see cref="T:System.Date" />.            The resulting value has a <see cref="P:System.DateTime.Kind" /> of <see cref="F:System.DateTimeKind.Unspecified" />.
+Method      | System.TimeOfDay.NowInTimeZone(System.TimeZoneInfo)                   | Gets a <see cref="T:System.TimeOfDay" /> object that is set to the current time in the specified time zone.
+Property    | System.TimeOfDay.Now                                                  | Gets a <see cref="T:System.TimeOfDay" /> object that is set to the current time,            expressed in this computer's local time zone.
+Property    | System.TimeOfDay.UtcNow                                               | Gets a <see cref="T:System.TimeOfDay" /> object that is set to the current time,            expressed as Coordinated Universal Time (UTC).
+Method      | System.TimeOfDay.IsBetween(System.TimeOfDay,System.TimeOfDay)         | Determines if a time falls within the range provided.            Supports both "normal" ranges such as 10:00-12:00, and ranges that span midnight such as 23:00-01:00.
+Method      | System.TimeOfDay.CalculateDuration(System.TimeOfDay,System.TimeOfDay) | Calculates the duration between two time values.            Assumes a standard day, with no invalid or ambiguous times due to Daylight Saving Time.            Supports both "normal" ranges such as 10:00-12:00, and ranges that span midnight such as 23:00-01:00.            Unlike <see cref="M:System.TimeOfDay.Subtract(System.TimeOfDay)" />, this operation does not assume that both values            belong to the same calendar date.  If <paramref name="startTime" /> is greater than            <paramref name="endTime" />, it behaves as if <paramref mame="endTime" /> were on the day following            the <paramref name="startTime" /> date.
+Method      | System.TimeOfDay.Subtract(System.TimeOfDay)                           | Subtracts another <see cref="T:System.TimeOfDay" /> value from this instance, returning a <see cref="T:System.TimeSpan" />.            Assumes a standard day, with no invalid or ambiguous times due to Daylight Saving Time.            This operation assumes that both values belong to the same calendar date, and thus the result will            be negative if <paramref name="startTime" /> is greater than this instance.
+Method      | System.TimeOfDay.Add(System.TimeSpan)                                 | Gets a <see cref="T:System.TimeOfDay" /> object whose value is ahead or behind the value of this instance by the            specified amount of time. Positive values will move the time forward; negative values will move the            time backwards.
+Method      | System.TimeOfDay.AddHours(System.Double)                              | Gets a <see cref="T:System.TimeOfDay" /> object whose value is ahead or behind the value of this instance by the            specified number of hours. Positive values will move the time forward; negative values will move the            time backwards.
+Method      | System.TimeOfDay.AddMinutes(System.Double)                            | Gets a <see cref="T:System.TimeOfDay" /> object whose value is ahead or behind the value of this instance by the            specified number of minutes. Positive values will move the time forward; negative values will move the            time backwards.
+Method      | System.TimeOfDay.AddSeconds(System.Double)                            | Gets a <see cref="T:System.TimeOfDay" /> object whose value is ahead or behind the value of this instance by the            specified number of seconds. Positive values will move the time forward; negative values will move the            time backwards.
+Method      | System.TimeOfDay.AddMilliseconds(System.Double)                       | Gets a <see cref="T:System.TimeOfDay" /> object whose value is ahead or behind the value of this instance by the            specified number of milliseconds. Positive values will move the time forward; negative values will move the            time backwards.
+Method      | System.TimeOfDay.AddTicks(System.Int64)                               | Gets a <see cref="T:System.TimeOfDay" /> object whose value is ahead or behind the value of this instance by the            specified number of ticks. Positive values will move the time forward; negative values will move the            time backwards.
+Method      | System.TimeOfDay.Subtract(System.TimeSpan)                            | Gets a <see cref="T:System.TimeOfDay" /> object whose value is ahead or behind the value of this instance by the            specified amount of time. Positive values will move the time backwards; negative values will move the            time forward.  This is equivalent to calling <c>Add(timeSpan.Negate())</c>.
+Method      | System.TimeOfDay.op_Addition(System.TimeOfDay,System.TimeSpan)        | Adds a specified time interval to a specified time, yielding a new time.
+Method      | System.TimeOfDay.op_Subtraction(System.TimeOfDay,System.TimeSpan)     | Subtracts a specified time interval to a specified time, yielding a new time.
+Method      | System.TimeOfDay.op_Subtraction(System.TimeOfDay,System.TimeOfDay)    | Calculates the duration between the <paramref name="startTime" /> and <paramref name="endTime" />.            Assumes a standard day, with no invalid or ambiguous times due to Daylight Saving Time.            Supports both "normal" ranges such as 10:00-12:00, and ranges that span midnight such as 23:00-01:00.            This operation assumes that both values belong to the same calendar date, and thus the result will            be negative if <paramref name="startTime" /> is greater than <paramref name="endTime" />.
+Method      | System.TimeOfDay.Compare(System.TimeOfDay,System.TimeOfDay)           | Compares two instances of <see cref="T:System.TimeOfDay" /> and returns an integer that indicates whether the first            instance is earlier than, the same as, or later than the second instance, within the same day.
+Method      | System.TimeOfDay.CompareTo(System.TimeOfDay)                          | Compares the value of this instance to a specified <see cref="T:System.TimeOfDay" /> value and returns an integer            that indicates whether this instance is earlier than, the same as, or later than the specified            <see cref="T:System.TimeOfDay" /> value, within the same day.
+Method      | System.TimeOfDay.CompareTo(System.Object)                             | Compares the value of this instance to a specified object that contains a <see cref="T:System.TimeOfDay" /> value and            returns an integer that indicates whether this instance is earlier than, the same as, or later than the            specified <see cref="T:System.TimeOfDay" /> value, within the same day.
+Method      | System.TimeOfDay.Equals(System.TimeOfDay,System.TimeOfDay)            | Returns a value indicating whether two <see cref="T:System.TimeOfDay" /> instances have the same time value.
+Method      | System.TimeOfDay.Equals(System.TimeOfDay)                             | Returns a value indicating whether the value of this instance is equal to the value of the specified            <see cref="T:System.TimeOfDay" /> instance.
+Method      | System.TimeOfDay.Equals(System.Object)                                | Returns a value indicating whether this instance is equal to the specified object.
+Method      | System.TimeOfDay.GetHashCode                                          | Returns the hash code of this instance.
+Method      | System.TimeOfDay.ToString                                             | Converts the value of the current <see cref="T:System.TimeOfDay" /> object to its equivalent string representation.
+Method      | System.TimeOfDay.ToString(System.IFormatProvider)                     | Converts the value of the current <see cref="T:System.TimeOfDay" /> object to its equivalent string representation            using the specified culture-specific format information.
+Method      | System.TimeOfDay.ToString(System.String)                              | Converts the value of the current <see cref="T:System.TimeOfDay" /> object to its equivalent string representation            using the specified format.
+Method      | System.TimeOfDay.ToString(System.String,System.IFormatProvider)       | Converts the value of the current <see cref="T:System.TimeOfDay" /> object to its equivalent string representation            using the specified format and culture-specific format information.
+Method      | System.TimeOfDay.ToLongTimeString                                     | Converts the value of the current <see cref="T:System.TimeOfDay" /> object to its equivalent            long time string representation.
+Method      | System.TimeOfDay.ToShortTimeString                                    | Converts the value of the current <see cref="T:System.TimeOfDay" /> object to its equivalent            short time string representation.
+Method      | System.TimeOfDay.Parse(System.String)                                 | Converts the string representation of a time-of-day to its <see cref="T:System.TimeOfDay" /> equivalent.
+Method      | System.TimeOfDay.Parse(System.String,System.IFormatProvider)          | Converts the string representation of a time-of-day to its <see cref="T:System.TimeOfDay" /> equivalent            by using culture-specific format information.
+Method      | System.TimeOfDay.Parse(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)| Converts the string representation of a time-of-day to its <see cref="T:System.TimeOfDay" /> equivalent            by using culture-specific format information and formatting style.
+Method      | System.TimeOfDay.ParseExact(System.String,System.String,System.IFormatProvider)| Converts the specified string representation of a time-of-day to its <see cref="T:System.TimeOfDay" /> equivalent            using the specified format and culture-specific format information.            The format of the string representation must match the specified format exactly or an exception is thrown.
+Method      | System.TimeOfDay.ParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)| Converts the specified string representation of a time-of-day to its <see cref="T:System.TimeOfDay" /> equivalent            using the specified format, culture-specific format information, and style.            The format of the string representation must match the specified format exactly or an exception is thrown.
+Method      | System.TimeOfDay.ParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)| Converts the specified string representation of a time-of-day to its <see cref="T:System.TimeOfDay" /> equivalent            using the specified array of formats, culture-specific format information, and style.            The format of the string representation must match at least one of the specified formats            exactly or an exception is thrown.
+Method      | System.TimeOfDay.TryParse(System.String,System.TimeOfDay@)            | Converts the specified string representation of a time-of-day to its <see cref="T:System.TimeOfDay" /> equivalent            and returns a value that indicates whether the conversion succeeded.
+Method      | System.TimeOfDay.TryParse(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.TimeOfDay@)| Converts the specified string representation of a time-of-day to its <see cref="T:System.TimeOfDay" /> equivalent            using the specified culture-specific format information and formatting style,            and returns a value that indicates whether the conversion succeeded.
+Method      | System.TimeOfDay.TryParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.TimeOfDay@)| Converts the specified string representation of a time-of-day to its <see cref="T:System.TimeOfDay" /> equivalent            using the specified format, culture-specific format information, and style.            The format of the string representation must match the specified format exactly.            The method returns a value that indicates whether the conversion succeeded.
+Method      | System.TimeOfDay.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.TimeOfDay@)| Converts the specified string representation of a time-of-day to its <see cref="T:System.TimeOfDay" /> equivalent            using the specified array of formats, culture-specific format information, and style.            The format of the string representation must match at least one of the specified formats exactly.            The method returns a value that indicates whether the conversion succeeded.
+Method      | System.TimeOfDay.op_Equality(System.TimeOfDay,System.TimeOfDay)       | Determines whether two specified instances of <see cref="T:System.TimeOfDay" /> are equal.
+Method      | System.TimeOfDay.op_Inequality(System.TimeOfDay,System.TimeOfDay)     | Determines whether two specified instances of <see cref="T:System.TimeOfDay" /> are not equal.
+Method      | System.TimeOfDay.op_GreaterThan(System.TimeOfDay,System.TimeOfDay)    | Determines whether one specified <see cref="T:System.TimeOfDay" /> is later than another specified            <see cref="T:System.TimeOfDay" />, within the same day.
+Method      | System.TimeOfDay.op_GreaterThanOrEqual(System.TimeOfDay,System.TimeOfDay)| Determines whether one specified <see cref="T:System.TimeOfDay" /> is equal to or later than another specified            <see cref="T:System.TimeOfDay" />, within the same day.
+Method      | System.TimeOfDay.op_LessThan(System.TimeOfDay,System.TimeOfDay)       | Determines whether one specified <see cref="T:System.TimeOfDay" /> is earlier than another specified            <see cref="T:System.TimeOfDay" />, within the same day.
+Method      | System.TimeOfDay.op_LessThanOrEqual(System.TimeOfDay,System.TimeOfDay)| Determines whether one specified <see cref="T:System.TimeOfDay" /> is equal to or earlier than another specified            <see cref="T:System.TimeOfDay" />, within the same day.
+Method      | System.TimeOfDay.op_Implicit(System.TimeSpan)~System.TimeOfDay        | Implicitly casts a <see cref="T:System.TimeSpan" /> object to a <see cref="T:System.TimeOfDay" /> by returning a new            <see cref="T:System.TimeOfDay" /> object that has the equivalent hours, minutes, seconds, and fractional seconds            components.  This is useful when using APIs that express a time-of-day as the elapsed time since            midnight, such that their values can be assigned to a variable having a <see cref="T:System.TimeOfDay" /> type.
+Method      | System.TimeOfDay.op_Explicit(System.TimeOfDay)~System.TimeSpan        | Enables explicit casting of a <see cref="T:System.TimeOfDay" /> object to a <see cref="T:System.TimeSpan" /> by returning a new            <see cref="T:System.TimeSpan" /> object that has the equivalent hours, minutes, seconds, and fractional seconds            components.  This is useful when using APIs that express a time-of-day as the elapsed time since            midnight, such that a <see cref="T:System.TimeOfDay" /> type can be passed to a method expecting a            <see cref="T:System.TimeSpan" /> parameter as a time-of-day.
+Method      | System.TimeOfDay.Hours12To24(System.Int32,System.Meridiem)            | Converts the time from a 12-hour-clock representation to a 24-hour-clock representation.
+Method      | System.TimeOfDay.TimeOfDayFromTimeSpan(System.TimeSpan)               | Constructs a <see cref="T:System.TimeOfDay" /> from a <see cref="T:System.TimeSpan" /> representing the time elapsed since            midnight, without regard to daylight saving time transitions.
+Method      | System.TimeOfDay.NormalizeTimeFormat(System.String)                   | Normalizes a format string that has standard or custom date/time formats,            such that the formatted output can only contain a time-of-day when applied.
+Method      | System.TimeOfDay.GetSchema(System.Object)                             | Gets a <see cref="T:System.Xml.XmlQualifiedName" /> that represents the <c>xs:time</c> type of the            W3C XML Schema Definition (XSD) specification.
+Method      | System.TimeOfDay.System#Xml#Serialization#IXmlSerializable#GetSchema  | Required by the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface.
+Method      | System.TimeOfDay.System#Xml#Serialization#IXmlSerializable#ReadXml(System.Xml.XmlReader)| Generates a <see cref="T:System.TimeOfDay" /> object from its XML representation.
+Method      | System.TimeOfDay.System#Xml#Serialization#IXmlSerializable#WriteXml(System.Xml.XmlWriter)| Converts a <see cref="T:System.TimeOfDay" /> object into its XML representation.
+Type        | System.TimeZoneOffsetResolver                                         | 
+Type        | System.TimeZoneOffsetResolvers                                        | 
+Method      | System.TimeZoneOffsetResolvers.Default(System.DateTime,System.TimeZoneInfo)| 
+Type        | System.DateTimeExtensions                                             | Extension methods for <see cref="T:System.DateTime" />.
+Method      | System.DateTimeExtensions.Date(System.DateTime)                       | Gets a <see cref="M:System.DateTimeExtensions.Date(System.DateTime)" /> value that represents the date component of the current            <see cref="T:System.DateTime" /> object.
+Method      | System.DateTimeExtensions.TimeOfDay(System.DateTime)                  | Gets a <see cref="M:System.DateTimeExtensions.TimeOfDay(System.DateTime)" /> value that represents the time component of the current            <see cref="T:System.DateTime" /> object.
+Method      | System.DateTimeExtensions.NowInTimeZone(System.TimeZoneInfo)          | Gets a <see cref="T:System.DateTime" /> object that is set to the current date and time in the specified time zone.
+Method      | System.DateTimeExtensions.AddYears(System.DateTime,System.Int32,System.TimeZoneInfo)| 
+Method      | System.DateTimeExtensions.AddYears(System.DateTime,System.Int32,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeExtensions.AddMonths(System.DateTime,System.Int32,System.TimeZoneInfo)| 
+Method      | System.DateTimeExtensions.AddMonths(System.DateTime,System.Int32,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeExtensions.AddDays(System.DateTime,System.Int32,System.TimeZoneInfo)| 
+Method      | System.DateTimeExtensions.AddDays(System.DateTime,System.Int32,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeExtensions.AddHours(System.DateTime,System.Double,System.TimeZoneInfo)| 
+Method      | System.DateTimeExtensions.AddHours(System.DateTime,System.Double,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeExtensions.AddMinutes(System.DateTime,System.Double,System.TimeZoneInfo)| 
+Method      | System.DateTimeExtensions.AddMinutes(System.DateTime,System.Double,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeExtensions.AddSeconds(System.DateTime,System.Double,System.TimeZoneInfo)| 
+Method      | System.DateTimeExtensions.AddSeconds(System.DateTime,System.Double,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeExtensions.AddMilliseconds(System.DateTime,System.Double,System.TimeZoneInfo)| 
+Method      | System.DateTimeExtensions.AddMilliseconds(System.DateTime,System.Double,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeExtensions.AddTicks(System.DateTime,System.Int64,System.TimeZoneInfo)| 
+Method      | System.DateTimeExtensions.AddTicks(System.DateTime,System.Int64,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeExtensions.Add(System.DateTime,System.TimeSpan,System.TimeZoneInfo)| 
+Method      | System.DateTimeExtensions.Subtract(System.DateTime,System.TimeSpan,System.TimeZoneInfo)| 
+Method      | System.DateTimeExtensions.Subtract(System.DateTime,System.TimeSpan,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeExtensions.Add(System.DateTime,System.TimeSpan,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeExtensions.AddByDate(System.DateTime,System.Func{System.DateTime,System.DateTime},System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Type        | System.DateTimeOffsetExtensions                                       | Extension methods for <see cref="T:System.DateTimeOffset" />.
+Method      | System.DateTimeOffsetExtensions.Date(System.DateTimeOffset)           | Gets a <see cref="M:System.DateTimeOffsetExtensions.Date(System.DateTimeOffset)" /> value that represents the date component of the current            <see cref="T:System.DateTimeOffset" /> object.
+Method      | System.DateTimeOffsetExtensions.TimeOfDay(System.DateTimeOffset)      | Gets a <see cref="M:System.DateTimeOffsetExtensions.TimeOfDay(System.DateTimeOffset)" /> value that represents the time component of the current            <see cref="T:System.DateTimeOffset" /> object.
+Method      | System.DateTimeOffsetExtensions.NowInTimeZone(System.TimeZoneInfo)    | Gets a <see cref="T:System.DateTimeOffset" /> object that is set to the current date, time,            and offset from Coordinated Universal Time (UTC) in the specified time zone.
+Method      | System.DateTimeOffsetExtensions.AddYears(System.DateTimeOffset,System.Int32,System.TimeZoneInfo)| 
+Method      | System.DateTimeOffsetExtensions.AddYears(System.DateTimeOffset,System.Int32,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeOffsetExtensions.AddMonths(System.DateTimeOffset,System.Int32,System.TimeZoneInfo)| 
+Method      | System.DateTimeOffsetExtensions.AddMonths(System.DateTimeOffset,System.Int32,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeOffsetExtensions.AddDays(System.DateTimeOffset,System.Int32,System.TimeZoneInfo)| 
+Method      | System.DateTimeOffsetExtensions.AddDays(System.DateTimeOffset,System.Int32,System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 
+Method      | System.DateTimeOffsetExtensions.AddHours(System.DateTimeOffset,System.Double,System.TimeZoneInfo)| 
+Method      | System.DateTimeOffsetExtensions.AddMinutes(System.DateTimeOffset,System.Double,System.TimeZoneInfo)| 
+Method      | System.DateTimeOffsetExtensions.AddSeconds(System.DateTimeOffset,System.Double,System.TimeZoneInfo)| 
+Method      | System.DateTimeOffsetExtensions.AddMilliseconds(System.DateTimeOffset,System.Double,System.TimeZoneInfo)| 
+Method      | System.DateTimeOffsetExtensions.AddTicks(System.DateTimeOffset,System.Int64,System.TimeZoneInfo)| 
+Method      | System.DateTimeOffsetExtensions.Subtract(System.DateTimeOffset,System.TimeSpan,System.TimeZoneInfo)| 
+Method      | System.DateTimeOffsetExtensions.Add(System.DateTimeOffset,System.TimeSpan,System.TimeZoneInfo)| 
+Method      | System.DateTimeOffsetExtensions.AddByDate(System.DateTimeOffset,System.Func{System.DateTime,System.DateTime},System.TimeZoneInfo,System.TimeZoneOffsetResolver)| 

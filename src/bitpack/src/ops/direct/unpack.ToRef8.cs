@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static Konst;
-    using static Memories;
+    using static As;
+    using static Root;
+    using static Typed;
 
     partial class BitPack
     {
@@ -21,7 +23,7 @@ namespace Z0
         public static void unpack(byte packed, ref byte unpacked)
         {
             var m = BitMask.lsb<ulong>(n8,n1);
-            refs.seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
         }
 
         /// <summary>
@@ -33,8 +35,8 @@ namespace Z0
         public static void unpack(ushort packed, ref byte unpacked)
         {
             var m = BitMask.lsb<ulong>(n8,n1);
-            refs.seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
-            refs.seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
         }
 
         /// <summary>
@@ -46,10 +48,10 @@ namespace Z0
         public static void unpack(uint packed, ref byte unpacked)
         {
             var m = BitMask.lsb<ulong>(n8,n1);
-            refs.seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
-            refs.seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
-            refs.seek64(ref unpacked, 2) = Bits.scatter((ulong)((byte)(packed >> 16)), m);
-            refs.seek64(ref unpacked, 3) = Bits.scatter((ulong)((byte)(packed >> 24)), m);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(ref unpacked, 2) = Bits.scatter((ulong)((byte)(packed >> 16)), m);
+            seek64(ref unpacked, 3) = Bits.scatter((ulong)((byte)(packed >> 24)), m);
         }
 
         /// <summary>

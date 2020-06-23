@@ -110,6 +110,5 @@ namespace Z0
             else 
                 throw Unsupported.define<T>();                
         }
-
     }
 }

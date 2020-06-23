@@ -1,0 +1,125 @@
+Type        | Z0.Functional                                                         | Defines service provider implementation predicated on service factory and enclosure types
+Field       | Z0.Functional.HostTypes                                               | The types declared within the enclosure that define serviced api operations
+Field       | Z0.Functional.FactoryMethods                                          | The methods defined by the factory host that intantiate services reified by the host types
+Property    | Z0.Functional.FactoryHost                                             | The type that defines the service factory operations
+Property    | Z0.Functional.HostEnclosure                                           | The type into which api service refications are nested
+Property    | Z0.Functional.Z0#IFunctional#HostTypes                                | The types declared within the enclosure that define serviced api operations
+Property    | Z0.Functional.Z0#IFunctional#FactoryMethods                           | The methods defined by the factory host that intantiate services reified by the host types
+Method      | Z0.Functional.FactoryTypes(System.Reflection.Assembly)                | Searches an assembly for types that are attributed with the provider attribute
+Method      | Z0.Functional.Factory(System.Type)                                    | Creates a service provider reified by a specified type
+Method      | Z0.Functional.from(System.Type,System.Type)                           | Creates a provider from the service factory that defines operations to instantiate            services and an enclosing type within which the service implementations are defined
+Method      | Z0.Functional.from``2                                                 | Creates a functional predicated on parametric factory and host enclosure types
+Method      | Z0.Functional.function(System.Type)                                   | Instantiates a service operation host
+Type        | Z0.Functional`1                                                       | Reifies a functional service factory that also serves as a host enclosure
+Type        | Z0.Functional`2                                                       | Reifies a functional service factory with an H-parametric enclosure
+Method      | Z0.Structured.apply``2(``1,``1,``0)                                   | Computes z := y |&gt; f x := f(x,y) for a binary operator f
+Method      | Z0.Structured.compose``3(``2,``0,``1)                                 | Computes y := f(x,g(x)) for a unary operator g, and binary operator f
+Method      | Z0.Structured.compose``3(``2,``2,``0,``1)                             | Computes y := f(g(x),g(y)) for a unary operator g, and binary operator f
+Method      | Z0.Structured.pipe``2(``1,``0)                                        | Computes y := x |&gt; f = f(x) for a unary operator f
+Method      | Z0.Structured.pipe``3(``2,``0,``1)                                    | Computes y := x |&gt; f |&gt; g := g(f(x)) for unary operators f and g
+Method      | Z0.Structured.pipe``4(``3,``0,``1)                                    | Computes y := x |&gt; f |&gt; g |&gt; h := h(g(f(x))) for unary operators f, g and h
+Type        | Z0.IBinaryPred`1                                                      | Defines trait for a vecorized binary predicate that supports componentwise decomposition/evaluation
+Type        | Z0.IBinaryPred`2                                                      | Characterizes a natural binary predicate over non-primal operands
+Type        | Z0.IBinaryPred`3                                                      | Characterizes a natural binary predicate over non-primal operands that support scalar application
+Type        | Z0.IBinaryPred128`1                                                   | Characterizes a vectorized binary predicate over 128-bit operands
+Type        | Z0.IBinaryPred256`1                                                   | Characterizes a vectorized binary predicate over 256-bit operands
+Type        | Z0.IBinaryPred128D`1                                                  | Characterizes a vectorized binary predicate over 128-bit operands that             also supports componentwise decomposition/evaluation
+Type        | Z0.IBinaryPred256D`1                                                  | Characterizes a vectorized binary predicate over 128-bit operands that             also supports componentwise decomposition/evaluation
+Type        | Z0.IEmitter`1                                                         | Chracterizes an operation that produces a value that does not depend on arguments
+Type        | Z0.IFactory`4                                                         | Characterizes a function that produces a vector predicated on a source value
+Type        | Z0.IFactory128`2                                                      | Charcterizes an operator that produces a 128-bit target vector predicated on a source value
+Type        | Z0.IFactory256`2                                                      | Charcterizes an operator that produces a 256-bit target vector predicated on a source value
+Type        | Z0.IFunctional                                                        | Characterizes a service that exposes serviced api operations
+Property    | Z0.IFunctional.HostTypes                                              | The known types that reify contracted operation services, potentially generic
+Property    | Z0.IFunctional.FactoryMethods                                         | The methods that instantiate services reified by the hosts
+Property    | Z0.IFunctional.HostCount                                              | Specifies the number of service hosts described by the catalog
+Property    | Z0.IFunctional.IsNonEmpty                                             | Specifies whether the catalog describes any service hosts
+Type        | Z0.IFunctional`1                                                      | Characterizes an F-bound polymorphic functional service factory that also encloses service host types
+Type        | Z0.IFunctional`2                                                      | Characterizes an F-bound polymorphic functional service factory with an H-parametric enclosure
+Type        | Z0.IMap`2                                                             | Characterizes a structural transformation function
+Type        | Z0.ISFParser`1                                                        | Characterizes an operator that materializes a primal value from a string
+Type        | Z0.IMap`6                                                             | Characterizes a vectorized transformation parameterized by operand source/target bit widths and source/target component types
+Type        | Z0.IMap128`2                                                          | Characterizes a 128-bit vectorized transformation parameterized by source/target component types
+Type        | Z0.IMap256`2                                                          | Characterizes a 256-bit vectorized transformation parameterized by source/target component types
+Type        | Z0.IMerge2x128x256`2                                                  | Characterizes an operand-homogenous vectorized merge operator that carries 2 128-bit operands to a 256-bit target
+Type        | Z0.IReducer256`1                                                      | Characterizes a function that produces a 128-bit vector from a 256-bit vector
+Type        | Z0.IShiftOp128`1                                                      | Characterizes a vectorized shift operator over 128-bit operands
+Type        | Z0.IShiftOp256`1                                                      | Characterizes a vectorized shift operator over 256-bit operands
+Type        | Z0.IShiftOp128D`1                                                     | Characterizes a vectorized shift operator over 128-bit operands that also supports componentwise decomposition/evaluation
+Type        | Z0.IShiftOp256D`1                                                     | Characterizes a vectorized shift operator over 256-bit operands that also supports componentwise decomposition/evaluation
+Type        | Z0.ISpanEmitter`1                                                     | Characterizes an emitter that shoots out spans
+Type        | Z0.ISpanLoader`2                                                      | Characterizes an operation that accepts a source span and produces a derived target vector
+Type        | Z0.ISpanMap`2                                                         | Characterizes a structural transformation function defined over parametric spans
+Type        | Z0.IUnarySpanOp`1                                                     | Characterizes a structural function that accepts sourc span and             target spans defined over cells of common type
+Type        | Z0.IBinarySpanOp`1                                                    | Characterizes a function that accepts two source spans and a target span over a common element type
+Type        | Z0.ITernarySpanOp`1                                                   | Characterizes a structural function that accepts two source spans and a             target span defined over cells of common type
+Type        | Z0.IUnarySpanPred`1                                                   | Characterizes a function that accepts two source spans and a target span of bits
+Type        | Z0.IBinarySpanPred`1                                                  | Characterizes a function that accepts two source spans and a target span of bits
+Type        | Z0.ITernarySpanPred`1                                                 | Characterizes a function that accepts three source spans and a target span of bits
+Type        | Z0.ISpanShift                                                         | Characterizes an operator that applies a bitwise shift or rotation to elements in a source span
+Type        | Z0.ISpanShift`1                                                       | Characterizes a span operator that shifts each source element by the same amount
+Type        | Z0.IVarSpanShift`1                                                    | Characterizes a span operator that shifts each source element by an amount secified in a corresponding count span
+Type        | Z0.ITernaryOp`1                                                       | Characterizes a structural ternary operator
+Type        | Z0.ITernaryOp128`1                                                    | Characterizes a vectorized 128-bit ternary operator
+Type        | Z0.ITernaryOp256`1                                                    | Characterizes a vectorized 256-bit ternary operator
+Type        | Z0.ITernaryOp128D`1                                                   | Characterizes a vectorized 128-bit ternary operator that also supports evaluation via scalar decomposition
+Type        | Z0.ITernaryOp256D`1                                                   | Characterizes a vectorized 256-bit ternary operator that also supports evaluation via scalar decomposition
+Type        | Z0.IUnaryImm8Op`1                                                     | Characterizes a binary function F:A -&gt; byte -&gt; A that accepts an 8-bit immediate value in the second parameter.
+Type        | Z0.IUnaryImm8x2Op`1                                                   | Characterizes a ternary function F:A -&gt; byte -&gt; byte -&gt; A that accepts 8-bit             immediate values in the second and third parameters.
+Type        | Z0.IUnaryImm8Op`3                                                     | Characterizes a unary vectorized operator that accepts an 8-bit immediate
+Type        | Z0.IUnaryImm8Op128`1                                                  | Characterizes a vectorized unary operator over 128-bit operands that acepts an 8-bit immediate
+Type        | Z0.IUnaryImm8Op256`1                                                  | Characterizes a vectorized unary operator over 256-bit operands that acepts an 8-bit immediate
+Type        | Z0.IUnaryScalarImm8Op128`2                                            | Characterizes a unary function that accepts a 128-bit vector and an 8-bit immediate and returns a scalar value
+Type        | Z0.IUnaryScalarImm8Op256`2                                            | Characterizes a unary function that accepts a 256-bit vector argument along with an 8-bit immediate and returns a scalar value
+Type        | Z0.IUnaryImm8x2Op`3                                                   | Characterizes a unary vectorized operator that accepts two 8-bit immediates
+Type        | Z0.IUnaryImm8x2Op128`1                                                | Characterizes a vectorized unary operator over 128-bit operands that acepts two 8-bit immediates
+Type        | Z0.IUnaryImm8x2Op256`1                                                | Characterizes a vectorized unary operator over 256-bit operands that acepts two 8-bit immediates
+Type        | Z0.IUnaryImm8x2Op128D`1                                               | Characterizes a vectorized unary operator over 128-bit operands that acepts two 8-bit immediates
+Type        | Z0.IUnaryImm8x2Op256D`1                                               | Characterizes a vectorized unary operator over 256-bit operands that acepts an 8-bit immediate
+Type        | Z0.IUnaryOp`1                                                         | Characterizes a unary operator
+Type        | Z0.IUnaryOp128`1                                                      | Characterizes a vectorized unary operator over 128-bit operands
+Type        | Z0.IUnaryOp256`1                                                      | Characterizes a vectorized unary operator over 256-bit operands
+Type        | Z0.IUnaryOp128D`1                                                     | Characterizes a vectorized unary operator over 128-bit operands that also supports componentwise decomposition/evaluation
+Type        | Z0.IUnaryOp256D`1                                                     | Characterizes a vectorized unary operator over 256-bit operands also supports componentwise decomposition/evaluation
+Type        | Z0.IUnaryPred`1                                                       | Defines trait for a vecorized unary predicate that supports componentwise decomposition/evaluation
+Type        | Z0.IUnaryPred128`1                                                    | Characterizes a vectorized unary predicate over 128-bit operands
+Type        | Z0.IUnaryPred256`1                                                    | Characterizes a vectorized unary predicate over 256-bit operands
+Type        | Z0.IUnaryPred128D`1                                                   | Characterizes a vectorized unary predicate over 128-bit operands that also supports componentwise decomposition/evaluation
+Type        | Z0.IUnaryPred256D`1                                                   | Characterizes a vectorized unary predicate over 128-bit operands that also supports componentwise decomposition/evaluation
+Type        | Z0.IBinaryImm8Op128`1                                                 | Characterizes a vectorized binary operator over 128-bit operands that accepts an 8-bit immediate
+Type        | Z0.IBinaryImm8Op256`1                                                 | Characterizes a vectorized binary operator over 256-bit operands that accepts an 8-bit immediate
+Type        | Z0.IBinaryImm8Op512`1                                                 | Characterizes a vectorized binary operator over 256-bit operands that accepts an 8-bit immediate
+Type        | Z0.IBinaryOp128`1                                                     | Characterizes a vectorized binary operator over 128-bit operands
+Type        | Z0.IBinaryOp256`1                                                     | Characterizes a vectorized binary operator over 256-bit operands
+Type        | Z0.IBinaryOp512`1                                                     | Characterizes a vectorized binary operator over 256-bit operands
+Type        | Z0.IBinaryOp128D`1                                                    | Characterizes a vectorized binary operator over 128-bit operands that is accompanied by componentwise decomposition/evaluation
+Type        | Z0.IBinaryOp256D`1                                                    | Characterizes a vectorized binary operator over 256-bit operands that is accompanied by componentwise decomposition/evaluation
+Type        | Z0.IBinaryOp512D`1                                                    | Characterizes a vectorized binary operator over 256-bit operands that is accompanied by componentwise decomposition/evaluation
+Type        | Z0.IVUnaryScalarFunc`2                                                | Defines trait for a vecorized unary scalar funnction that supports componentwise decomposition/evaluation
+Type        | Z0.IVBinaryScalarFunc`2                                               | Defines trait for a vecorized binary scalar funnction that supports componentwise decomposition/evaluation
+Type        | Z0.IVTernaryScalarFunc`2                                              | Defines trait for a vecorized binary scalar funnction that supports componentwise decomposition/evaluation
+Type        | Z0.IVScalarFunc`4                                                     | Characterizes a unary function that accepts a vector argument and returns a scalar value
+Type        | Z0.IVScalarFunc`7                                                     | Characterizes a binary function that accepts two vector arguments and returns a scalar value
+Type        | Z0.IVScalarFunc`10                                                    | Characterizes a ternary function that accepts three vector arguments and returns a scalar value
+Type        | Z0.IVUnaryScalarFunc128`2                                             | Characterizes a unary function that accepts a 128-bit vector argument and returns a scalar value
+Type        | Z0.ISVBinaryScalar128D`2                                              | Characterizes a binary function that accepts homogenous 128-bit vector arguments and returns a scalar value            that supports scalar decomposition
+Type        | Z0.ISVTernaryScalar128D`2                                             | Characterizes a ternary function that accepts homogenous 128-bit vector arguments and returns a scalar value            that supports scalar decomposition
+Type        | Z0.ISVUnaryScalarFunc256`2                                            | Characterizes a unary function that accepts a 256-bit vector argument and returns a scalar value
+Type        | Z0.ISVUnaryScalarFunc256D`2                                           | Characterizes a unary function that accepts a 256-bit vector argument and returns a scalar value            that supports scalar decomposition
+Type        | Z0.ISVBinaryScalarFunc256D`2                                          | Characterizes a binary function that accepts homogenous 256-bit vector arguments and returns a scalar value            that supports scalar decomposition
+Type        | Z0.ISVTernaryScalarFunc256D`2                                         | Characterizes a ternary function that accepts homogenous 256-bit vector arguments that returns a scalar value             that supports scalar decomposition
+Type        | Z0.Surrogates                                                         | Defines surrogate api - a facility for defining structural functions over delegates
+Type        | Z0.Surrogates.Emitter`1                                               | Captures a delegate that is exposed as an emitter
+Type        | Z0.Surrogates.SpanEmitter`1                                           | Captures a delegate that is exposed as an emitter
+Method      | Z0.Surrogates.emitter``1(Z0.Emitter{``0},System.String,``0)           | Defines a delegate-predicated structural emitter
+Method      | Z0.Surrogates.unary``1(Z0.UnaryOp{``0},System.String,``0)             | Defines a delegate-predicated structural operator
+Method      | Z0.Surrogates.binary``1(Z0.BinaryOp{``0},System.String,``0)           | Defines a delegate-predicated structural operator
+Method      | Z0.Surrogates.ternary``1(Z0.TernaryOp{``0},System.String,``0)         | Defines a delegate-predicated structural operator
+Method      | Z0.Surrogates.predicate``1(Z0.UnaryPredicate{``0},System.String,``0)  | Defines a delegate-predicated structural predicate
+Method      | Z0.Surrogates.predicate``1(Z0.BinaryPredicate{``0},System.String,``0) | Defines a delegate-predicated structural predicate
+Method      | Z0.Surrogates.emitter``1(Z0.Emitter{``0},Z0.OpIdentity,``0)           | Defines an identified structural emitter predicated on a delegate
+Method      | Z0.Surrogates.unary``1(Z0.UnaryOp{``0},Z0.OpIdentity,``0)             | Defines a delegate-predicated structural operator with identity
+Method      | Z0.Surrogates.binary``1(Z0.BinaryOp{``0},Z0.OpIdentity,``0)           | Defines a delegate-predicated structural operator with identity
+Method      | Z0.Surrogates.ternary``1(Z0.TernaryOp{``0},Z0.OpIdentity,``0)         | Defines a delegate-predicated structural operator with identity
+Method      | Z0.Surrogates.predicate``1(Z0.UnaryPredicate{``0},Z0.OpIdentity,``0)  | Defines a delegate-predicated structural predicate with identity
+Method      | Z0.Surrogates.predicate``1(Z0.BinaryPredicate{``0},Z0.OpIdentity,``0) | Defines a delegate-predicated structural predicate with identity

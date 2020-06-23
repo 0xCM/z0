@@ -18,6 +18,46 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="count">The number of 8-bit elements to skip</param>
         /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref byte seek8<T>(ref T src, int count)
+            => ref Add(ref As<T,byte>(ref src), count);
+
+        /// <summary>
+        /// Interprets a generic element source as a uint16 element source and skips {count} elments of bit-width 16
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of 16-bit elements to skip</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref ushort seek16<T>(ref T src, int count)
+            => ref Add(ref As<T,ushort>(ref src), count);
+
+        /// <summary>
+        /// Interprets a generic element source as a uint32 element source and skips {count} elments of bit-width 32
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of 32-bit elements to skip</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref uint seek32<T>(ref T src, int count)
+            => ref Add(ref As<T,uint>(ref src), count);
+
+        /// <summary>
+        /// Interprets a generic element source as a uint64 element source and skips {count} elments of bit-width 64
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of 64-bit elements to skip</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref ulong seek64<T>(ref T src, int count)
+            => ref Add(ref As<T,ulong>(ref src), count);
+
+        /// <summary>
+        /// Interprets a generic element source as a uint8 element source and skips {count} elments of bit-width 8
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of 8-bit elements to skip</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte seekw<T>(W8 w, ref T src, int count)
             => ref Add(ref As<T,byte>(ref src), count);

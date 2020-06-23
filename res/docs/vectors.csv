@@ -1,0 +1,433 @@
+Method      | Z0.VBlockD.vload(Z0.Block128{System.Byte}@)                           | _m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block128{System.SByte}@)                          | __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block128{System.Int16}@)                          | __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block128{System.UInt16}@)                         | __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block128{System.Int32}@)                          | __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block128{System.UInt32}@)                         | __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block128{System.Int64}@)                          | __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block128{System.UInt64}@)                         | __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128            Loads a 128-bit cpu vector from an unaligned memory location
+Method      | Z0.VBlockD.vload(Z0.Block256{System.Byte}@)                           | __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block256{System.SByte}@)                          | __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block256{System.Int16}@)                          | __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block256{System.UInt16}@)                         | __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block256{System.Int32}@)                          | __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block256{System.UInt32}@)                         | __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block256{System.Int64}@)                          | __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.VBlockD.vload(Z0.Block256{System.UInt64}@)                         | __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256            Loads a 256-bit cpu vector from the leading block of a blocked container
+Method      | Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Byte},System.Runtime.Intrinsics.Vector128{System.Byte})| Creates a 256-bit vector by concatenating two 128-bit source vectors
+Method      | Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.SByte},System.Runtime.Intrinsics.Vector128{System.SByte})| Creates a 256-bit vector by concatenating two 128-bit source vectors
+Method      | Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Int16},System.Runtime.Intrinsics.Vector128{System.Int16})| Creates a 256-bit vector by concatenating two 128-bit source vectors
+Method      | Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.UInt16},System.Runtime.Intrinsics.Vector128{System.UInt16})| Creates a 256-bit vector by concatenating two 128-bit source vectors
+Method      | Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Int32},System.Runtime.Intrinsics.Vector128{System.Int32})| Creates a 256-bit vector by concatenating two 128-bit source vectors
+Method      | Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.UInt32},System.Runtime.Intrinsics.Vector128{System.UInt32})| Creates a 256-bit vector by concatenating two 128-bit source vectors
+Method      | Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Int64},System.Runtime.Intrinsics.Vector128{System.Int64})| Creates a 256-bit vector by concatenating two 128-bit source vectors
+Method      | Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.UInt64},System.Runtime.Intrinsics.Vector128{System.UInt64})| Creates a 256-bit vector by concatenating two 128-bit source vectors
+Method      | Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Single},System.Runtime.Intrinsics.Vector128{System.Single})| Creates a 256-bit vector by concatenating two 128-bit source vectors
+Method      | Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Double},System.Runtime.Intrinsics.Vector128{System.Double})| Creates a 256-bit vector by concatenating two 128-bit source vectors
+Method      | Z0.Vectors.vbroadcast(Z0.W128,System.SByte)                           | Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W128,System.Byte)                            | Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W128,System.Int16)                           | Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W128,System.UInt16)                          | Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W128,System.Int32)                           | Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W128,System.UInt32)                          | Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W128,System.Int64)                           | Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W128,System.UInt64)                          | Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.SByte)                           | __m256i _mm256_broadcastb_epi8 (__m128i a) VPBROADCASTB ymm, m8            Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.Byte)                            | __m256i _mm256_broadcastb_epi8 (__m128i a) VPBROADCASTB ymm, m8            Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.Int16)                           | __m256i _mm256_broadcastw_epi16 (__m128i a) VPBROADCASTW ymm, m16            Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.UInt16)                          | __m256i _mm256_broadcastw_epi16 (__m128i a) VPBROADCASTW ymm, m16            Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.Int32)                           | __m256i _mm256_broadcastd_epi32 (__m128i a) VPBROADCASTD ymm, m32            Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.UInt32)                          | __m256i _mm256_broadcastd_epi32 (__m128i a) VPBROADCASTD ymm, m32            Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.Int64)                           | __m256i _mm256_broadcastq_epi64 (__m128i a) VPBROADCASTQ ymm, m64            Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.UInt64)                          | __m256i _mm256_broadcastq_epi64 (__m128i a) VPBROADCASTQ ymm, m64            Creates a target vector where each component is initialized with the same value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.Single)                          | __m256 _mm256_broadcast_ss (float const * mem_addr) VBROADCASTSS ymm, m32
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.Double)                          | __m256d _mm256_broadcast_sd (double const * mem_addr) VBROADCASTSD ymm, m64
+Method      | Z0.Vectors.vbroadcast(Z0.W128,System.Single)                          | __m128 _mm_broadcast_ss (float const * mem_addr) VBROADCASTSS xmm, m32
+Method      | Z0.Vectors.vbroadcast(Z0.W128,System.Double)                          | Broadcasts a 64-bit floating point value to the upper and lower cells of a 128-bit floating-point vector
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.Byte,System.Byte)                | Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value            and the upper 128-bit lane is filled with replicas of the hi value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.UInt16,System.UInt16)            | Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value            and the upper 128-bit lane is filled with replicas of the hi value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.UInt32,System.UInt32)            | Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value            and the upper 128-bit lane is filled with replicas of the hi value
+Method      | Z0.Vectors.vbroadcast(Z0.W256,System.UInt64,System.UInt64)            | Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value            and the upper 128-bit lane is filled with replicas of the hi value
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.SByte},System.Runtime.Intrinsics.Vector128{System.SByte})| __m128i _mm_cmpeq_epi8 (__m128i a, __m128i b) PCMPEQB xmm, xmm/m128            Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Byte},System.Runtime.Intrinsics.Vector128{System.Byte})| __m128i _mm_cmpeq_epi8 (__m128i a, __m128i b) PCMPEQB xmm, xmm/m128            Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Int16},System.Runtime.Intrinsics.Vector128{System.Int16})| __m128i _mm_cmpeq_epi16 (__m128i a, __m128i b) PCMPEQW xmm, xmm/m128             Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.UInt16},System.Runtime.Intrinsics.Vector128{System.UInt16})| __m128i _mm_cmpeq_epi16 (__m128i a, __m128i b) PCMPEQW xmm, xmm/m128             Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Int32},System.Runtime.Intrinsics.Vector128{System.Int32})| __m128i _mm_cmpeq_epi32 (__m128i a, __m128i b) PCMPEQD xmm, xmm/m128
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.UInt32},System.Runtime.Intrinsics.Vector128{System.UInt32})| __m128i _mm_cmpeq_epi32 (__m128i a, __m128i b) PCMPEQD xmm, xmm/m128
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Int64},System.Runtime.Intrinsics.Vector128{System.Int64})| __m128i _mm_cmpeq_epi64 (__m128i a, __m128i b) PCMPEQQ xmm, xmm/m128            Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.UInt64},System.Runtime.Intrinsics.Vector128{System.UInt64})| __m128i _mm_cmpeq_epi64 (__m128i a, __m128i b) PCMPEQQ xmm, xmm/m128            Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Single},System.Runtime.Intrinsics.Vector128{System.Single})| __m128 _mm_cmpeq_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(0)
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Double},System.Runtime.Intrinsics.Vector128{System.Double})| __m128d _mm_cmpeq_pd (__m128d a, __m128d b) CMPPD xmm, xmm/m128, imm8(0)
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.SByte},System.Runtime.Intrinsics.Vector256{System.SByte})| __m256i _mm256_cmpeq_epi8 (__m256i a, __m256i b) VPCMPEQB ymm, ymm, ymm/m256            Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Byte},System.Runtime.Intrinsics.Vector256{System.Byte})| __m256i _mm256_cmpeq_epi8 (__m256i a, __m256i b) VPCMPEQB ymm, ymm, ymm/m256            Compares the operands for equality
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Int16},System.Runtime.Intrinsics.Vector256{System.Int16})| __m256i _mm256_cmpeq_epi16 (__m256i a, __m256i b) VPCMPEQW ymm, ymm, ymm/m256            Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.UInt16},System.Runtime.Intrinsics.Vector256{System.UInt16})| __m256i _mm256_cmpeq_epi16 (__m256i a, __m256i b) VPCMPEQW ymm, ymm, ymm/m256             Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Int32},System.Runtime.Intrinsics.Vector256{System.Int32})| _mm256_cmpeq_epi32 (__m256i a, __m256i b) VPCMPEQD ymm, ymm, ymm/m256            Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.UInt32},System.Runtime.Intrinsics.Vector256{System.UInt32})| __m256i _mm256_cmpeq_epi32 (__m256i a, __m256i b) VPCMPEQD ymm, ymm, ymm/m256            Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Int64},System.Runtime.Intrinsics.Vector256{System.Int64})| __m256i _mm256_cmpeq_epi64 (__m256i a, __m256i b) VPCMPEQQ ymm, ymm, ymm/m256            Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.UInt64},System.Runtime.Intrinsics.Vector256{System.UInt64})| __m256i _mm256_cmpeq_epi64 (__m256i a, __m256i b) VPCMPEQQ ymm, ymm, ymm/m256            Compares corresponding components each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Single},System.Runtime.Intrinsics.Vector256{System.Single})| __m256 _mm256_cmp_ps (__m256 a, __m256 b, const int imm8) VCMPPS ymm, ymm, ymm/m256, imm8
+Method      | Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Double},System.Runtime.Intrinsics.Vector256{System.Double})| __m256d _mm256_cmp_pd (__m256d a, __m256d b, const int imm8) VCMPPD ymm, ymm, ymm/m256, imm8
+Method      | Z0.Vectors.vinsert(System.Byte,System.Runtime.Intrinsics.Vector128{System.Byte},Z0.Bit)| __m128i _mm_insert_epi8 (__m128i a, int i, const int imm8) PINSRB xmm, reg/m8, imm8            Overwrites an identified component in the target vector with a specified value
+Method      | Z0.Vectors.vinsert(System.SByte,System.Runtime.Intrinsics.Vector128{System.SByte},Z0.Bit)| __m128i _mm_insert_epi8 (__m128i a, int i, const int imm8)PINSRB xmm, reg/m8, imm8            Overwrites an identified component in the target vector with a specified value
+Method      | Z0.Vectors.vinsert(System.Int16,System.Runtime.Intrinsics.Vector128{System.Int16},Z0.Bit)| __m128i _mm_insert_epi16 (__m128i a, int i, int immediate) PINSRW xmm, reg/m16, imm8            Overwrites an identified component in the target vector with a specified value
+Method      | Z0.Vectors.vinsert(System.UInt16,System.Runtime.Intrinsics.Vector128{System.UInt16},Z0.Bit)| __m128i _mm_insert_epi16 (__m128i a, int i, int immediate) PINSRW xmm, reg/m16, imm8            Overwrites an identified component in the target vector with a specified value
+Method      | Z0.Vectors.vinsert(System.Int32,System.Runtime.Intrinsics.Vector128{System.Int32},Z0.Bit)| __m128i _mm_insert_epi32 (__m128i a, int i, const int imm8) PINSRD xmm, reg/m32, xmm8            Overwrites an identified component in the target vector with a specified value
+Method      | Z0.Vectors.vinsert(System.UInt32,System.Runtime.Intrinsics.Vector128{System.UInt32},Z0.Bit)| __m128i _mm_insert_epi32 (__m128i a, int i, const int imm8) PINSRD xmm, reg/m32, xmm8            Overwrites an identified component in the target vector with a specified value
+Method      | Z0.Vectors.vinsert(System.Int64,System.Runtime.Intrinsics.Vector128{System.Int64},Z0.Bit)| __m128i _mm_insert_epi64 (__m128i a, __int64 i, const int imm8) PINSRQ xmm, reg/m64,imm8            Overwrites an identified component in the target vector with a specified value
+Method      | Z0.Vectors.vinsert(System.UInt64,System.Runtime.Intrinsics.Vector128{System.UInt64},Z0.Bit)| _mm_insert_epi64:            Overwrites an identified component in the target vector with a specified value
+Method      | Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.SByte},System.Runtime.Intrinsics.Vector256{System.SByte},Z0.Bit)| __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8            Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Byte},System.Runtime.Intrinsics.Vector256{System.Byte},Z0.Bit)| __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8            Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Int16},System.Runtime.Intrinsics.Vector256{System.Int16},Z0.Bit)| __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8            Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.UInt16},System.Runtime.Intrinsics.Vector256{System.UInt16},Z0.Bit)| __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8            Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Int32},System.Runtime.Intrinsics.Vector256{System.Int32},Z0.Bit)| __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8            Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.UInt32},System.Runtime.Intrinsics.Vector256{System.UInt32},Z0.Bit)| __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8            Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Int64},System.Runtime.Intrinsics.Vector256{System.Int64},Z0.Bit)| __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8            Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.UInt64},System.Runtime.Intrinsics.Vector256{System.UInt64},Z0.Bit)| __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8            Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Single},System.Runtime.Intrinsics.Vector256{System.Single},Z0.Bit)| _mm256_insertf128_ps: Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Double},System.Runtime.Intrinsics.Vector256{System.Double},Z0.Bit)| _mm256_insertf128_pd: Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector128{System.UInt64})    | Creates a scalar vector from the upper 64 bits of the source vector
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.SByte})     | __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8            Extracts the lo 128-bit lane of the source vector
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Byte})      | __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8            Extracts the lo 128-bit lane of the source vector
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Int16})     | __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8            Extracts the lo 128-bit lane of the source vector
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.UInt16})    | __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8            Extracts the lo 128-bit lane of the source vector
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Int32})     | __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8            Extracts the lo 128-bit lane of the source vector
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.UInt32})    | __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8            Extracts the lo 128-bit lane of the source vector
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Int64})     | __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8            Extracts the lo 128-bit lane of the source vector
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.UInt64})    | __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8            Extracts the lo 128-bit lane of the source vector
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Single})    | _m128 _mm256_extractf128_ps (__m256 a, const int imm8)VEXTRACTF128 xmm/m128, ymm, imm8
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Double})    | __m128d _mm256_extractf128_pd (__m256d a, const int imm8)VEXTRACTF128 xmm/m128, ymm, imm8
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.UInt64},System.UInt64@,System.UInt64@)| Extracts the lower 128-bit lane from the source vector to scalar targets
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Byte},System.UInt64@,System.UInt64@)| Extracts the lower 128-bit lane from the source vector to scalar targets
+Method      | Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.UInt64},Z0.Pair{System.UInt64}@)| Extracts the lower 128-bit lane from the source vector to a pair
+Method      | Z0.Vectors.vparts(Z0.W128,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)| Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(Z0.W128,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16)| Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(Z0.W128,System.UInt32,System.UInt32,System.UInt32,System.UInt32)| Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(System.UInt32,System.UInt32,System.UInt32,System.UInt32)| Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsi(Z0.W128,System.Int32,System.Int32,System.Int32,System.Int32)| Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsi(Z0.W128,System.Int64,System.Int64)                 | Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(Z0.W128,System.UInt64,System.UInt64)                | Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsf(Z0.W128,System.Single,System.Single,System.Single,System.Single)| Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsf(Z0.W128,System.Double,System.Double)               | Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(Z0.W256,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)| Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(Z0.W256,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16)| Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsi(Z0.W256,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16)| Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsi(Z0.W256,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)| Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(Z0.W256,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)| Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsi(Z0.W256,System.Int64,System.Int64,System.Int64,System.Int64)| Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(Z0.W256,System.UInt64,System.UInt64,System.UInt64,System.UInt64)| Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsf(Z0.W256,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)| Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsf(Z0.W256,System.Double,System.Double,System.Double,System.Double)| Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsi(Z0.W512,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16)| Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(Z0.W512,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16)| Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsi(Z0.W512,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)| Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(Z0.W512,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)| Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsi(Z0.W512,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64)| Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vparts(Z0.W512,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64)| Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsf(Z0.W512,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)| Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vpartsf(Z0.W512,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)| Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+Method      | Z0.Vectors.vscalar(Z0.W128,System.SByte)                              | Loads a scalar into the first component of a 128-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W128,System.Byte)                               | Loads a scalar into the first component of a 128-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W128,System.Int16)                              | Loads a scalar into the first component of a 128-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W128,System.UInt16)                             | Loads a scalar into the first component of a 128-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W128,System.Int32)                              | Loads a scalar into the first component of a 128-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W128,System.UInt32)                             | Loads a scalar into the first component of a 128-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W128,System.Int64)                              | Loads a scalar into the first component of a 128-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W128,System.UInt64)                             | Loads a scalar into the first component of a 128-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W128,System.Single)                             | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W128,System.Double)                             | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W256,System.SByte)                              | Loads a scalar into the first component of a 128-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W256,System.Byte)                               | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W256,System.Int16)                              | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W256,System.UInt16)                             | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W256,System.Int32)                              | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W256,System.UInt32)                             | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W256,System.Int64)                              | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W256,System.UInt64)                             | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W256,System.Single)                             | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.vscalar(Z0.W256,System.Double)                             | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.SByte}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Byte}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Int16}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.UInt16}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Int32}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.UInt32}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Int64}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.UInt64}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Single}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Double}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.SByte}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Byte}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Int16}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.UInt16}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Int32}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.UInt32}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Int64}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.UInt64}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Single}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Double}@)| Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(Z0.Vector512{System.SByte}@)                    | Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(Z0.Vector512{System.Byte}@)                     | Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(Z0.Vector512{System.Int16}@)                    | Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(Z0.Vector512{System.UInt16}@)                   | Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(Z0.Vector512{System.Int32}@)                    | Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(Z0.Vector512{System.UInt32}@)                   | Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(Z0.Vector512{System.Int64}@)                    | Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(Z0.Vector512{System.UInt64}@)                   | Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(Z0.Vector512{System.Single}@)                   | Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.generic``1(Z0.Vector512{System.Double}@)                   | Reinterprets the source vector as a vector over parametric T-cells
+Method      | Z0.Vectors.span``1(System.Runtime.Intrinsics.Vector128{``0})          | Allocates a span into which vector content is stored
+Method      | Z0.Vectors.span``1(System.Runtime.Intrinsics.Vector256{``0})          | Allocates and deposits vector content to a span
+Method      | Z0.Vectors.span``1(Z0.Vector512{``0})                                 | Allocates and deposits vector content to a span
+Method      | Z0.Vectors.vbroadcast``1(Z0.W128,``0)                                 | Projects a scalar value onto each component of a 128-bit vector
+Method      | Z0.Vectors.vbroadcast``1(Z0.W256,``0)                                 | Projects a scalar value onto each component of a 256-bit vector
+Method      | Z0.Vectors.vbroadcast``1(Z0.W512,``0)                                 | Projects a scalar value onto each component of a 512-bit vector
+Method      | Z0.Vectors.vcell``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extracts an index-identified component from the source vector
+Method      | Z0.Vectors.vhead``1(System.Runtime.Intrinsics.Vector128{``0})         | Extracts the first component of the source vector
+Method      | Z0.Vectors.vcell``2(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extracts a T-indexed component from a vector obtained by converting the S-vector to a T-vector
+Method      | Z0.Vectors.vcell``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32,``0)| Sets an index-identified component to a specified value
+Method      | Z0.Vectors.vcell``1(``0,System.Int32,System.Runtime.Intrinsics.Vector128{``0})| Sets an index-identified component to a specified value
+Method      | Z0.Vectors.vcell``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extracts an index-identified component from the source vector
+Method      | Z0.Vectors.vcell``1(``0,System.Int32,System.Runtime.Intrinsics.Vector256{``0})| Sets an index-identified component to a specified value
+Method      | Z0.Vectors.vcell8i``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell8``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell16i``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell16``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell32i``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell32``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell64i``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell64``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell32f``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell64f``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell8i``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell8``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell16i``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell16``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell32i``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell32``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell64``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell64i``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell32f``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vcell64f``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extract an index-identified component of a reinterpreted vector
+Method      | Z0.Vectors.vconcat``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})| Creates a 256-bit vector from two 128-bit vectors                This mimics the _mm256_set_m128i intrinsic which does not appear to be available
+Method      | Z0.Vectors.vto``2(System.Runtime.Intrinsics.Vector128{``0},``1)       | Reinterprets a vector over S-cells as a vector over T-cells
+Method      | Z0.Vectors.vto``2(System.Runtime.Intrinsics.Vector256{``0},``1)       | Reinterprets a vector over S-cells as a vector over T-cells
+Method      | Z0.Vectors.v8i``1(System.Runtime.Intrinsics.Vector128{``0})           | Presents a generic cpu vector as a cpu vector with components of type int8
+Method      | Z0.Vectors.v8u``1(System.Runtime.Intrinsics.Vector128{``0})           | Presents a generic cpu vector as a cpu vector with components of type uint8
+Method      | Z0.Vectors.v16i``1(System.Runtime.Intrinsics.Vector128{``0})          | Presents a generic cpu vector as a cpu vector with components of type int16
+Method      | Z0.Vectors.v16u``1(System.Runtime.Intrinsics.Vector128{``0})          | Presents a generic cpu vector as a cpu vector with components of type uint16
+Method      | Z0.Vectors.v32i``1(System.Runtime.Intrinsics.Vector128{``0})          | Presents a generic cpu vector as a cpu vector with components of type int32
+Method      | Z0.Vectors.v32u``1(System.Runtime.Intrinsics.Vector128{``0})          | Presents a generic cpu vector as a cpu vector with components of type uint32
+Method      | Z0.Vectors.v64i``1(System.Runtime.Intrinsics.Vector128{``0})          | Presents a generic cpu vector as a cpu vector with components of type int64
+Method      | Z0.Vectors.v64u``1(System.Runtime.Intrinsics.Vector128{``0})          | Presents a generic cpu vector as a cpu vector with components of type uint64
+Method      | Z0.Vectors.v32f``1(System.Runtime.Intrinsics.Vector128{``0})          | Presents a generic cpu vector as a cpu vector with components of type float32
+Method      | Z0.Vectors.v64f``1(System.Runtime.Intrinsics.Vector128{``0})          | Presents a generic cpu vector as a cpu vector with components of type float64
+Method      | Z0.Vectors.v8i``1(System.Runtime.Intrinsics.Vector256{``0})           | Presents a generic cpu vector as a cpu vector with components of type int8
+Method      | Z0.Vectors.v8u``1(System.Runtime.Intrinsics.Vector256{``0})           | Presents a generic cpu vector as a cpu vector with components of type uint8
+Method      | Z0.Vectors.v16i``1(System.Runtime.Intrinsics.Vector256{``0})          | Presents a generic cpu vector as a cpu vector with components of type int16
+Method      | Z0.Vectors.v16u``1(System.Runtime.Intrinsics.Vector256{``0})          | Presents a generic cpu vector as a cpu vector with components of type uint16
+Method      | Z0.Vectors.v32i``1(System.Runtime.Intrinsics.Vector256{``0})          | Presents a generic cpu vector as a cpu vector with components of type int32
+Method      | Z0.Vectors.v32u``1(System.Runtime.Intrinsics.Vector256{``0})          | Presents a generic cpu vector as a cpu vector with components of type uint32
+Method      | Z0.Vectors.v64i``1(System.Runtime.Intrinsics.Vector256{``0})          | Presents a generic cpu vector as a cpu vector with components of type int64
+Method      | Z0.Vectors.v64u``1(System.Runtime.Intrinsics.Vector256{``0})          | Presents a generic cpu vector as a cpu vector with components of type uint64
+Method      | Z0.Vectors.v32f``1(System.Runtime.Intrinsics.Vector256{``0})          | Presents a generic cpu vector as a cpu vector with components of type float32
+Method      | Z0.Vectors.v64f``1(System.Runtime.Intrinsics.Vector256{``0})          | Presents a generic cpu vector as a cpu vector with components of type float64
+Method      | Z0.Vectors.vcount``1(Z0.W128,``0)                                     | Computes the vector component count for a given bit-width and component type
+Method      | Z0.Vectors.vcount``1(Z0.W256,``0)                                     | Computes the vector component count for a given bit-width and component type
+Method      | Z0.Vectors.vcount``1(Z0.W512,``0)                                     | Computes the vector component count for a given bit-width and component type
+Method      | Z0.Vectors.veq``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})| Compares corresponding components in each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})| Compares corresponding components in each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.veq``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)              | Compares corresponding components in each vector for equality. For equal            components, the corresponding component the result vector has all bits             enabled; otherwise, all bits the component are disabled
+Method      | Z0.Vectors.vfirst``2(System.Runtime.Intrinsics.Vector128{``0})        | Extracts the first T-indexed component after converting the S-vector to a T-vector
+Method      | Z0.Vectors.vinsert``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector256{``0},Z0.Bit)| Overwrites a 128-bit lane in the target with the content of the source vector
+Method      | Z0.Vectors.vlo``1(System.Runtime.Intrinsics.Vector256{``0})           | Extracts the lo 128-bit lane of the source vector
+Method      | Z0.Vectors.vload``1(Z0.Block128{``0}@)                                | Loads a 128-bit vector from the first 128-bit source block
+Method      | Z0.Vectors.vload``1(Z0.Block256{``0}@)                                | Loads a 256-bit vector from the leading source block
+Method      | Z0.Vectors.vload``1(Z0.Block512{``0}@)                                | Loads a 512-bit vector from the leading source block
+Method      | Z0.Vectors.vload``1(Z0.Block128{``0}@,System.Int32)                   | Loads a block-identified 128-bit vector
+Method      | Z0.Vectors.vload``1(Z0.Block256{``0}@,System.Int32)                   | Loads a block-identified 256-bit vector
+Method      | Z0.Vectors.vload``1(Z0.Block512{``0}@,System.Int32)                   | Loads a block-identified 512-bit vector
+Method      | Z0.Vectors.vload``1(Z0.W128,``0*)                                     | Loads a 128-bit vector from a pointer-identified memory location
+Method      | Z0.Vectors.vload``1(Z0.W256,``0*)                                     | Loads a 256-bit vector from a pointer-identified memory location
+Method      | Z0.Vectors.vload``1(Z0.W512,``0*)                                     | Loads a 512-bit vector from a pointer-identified memory location
+Method      | Z0.Vectors.vload``1(``0*,System.Runtime.Intrinsics.Vector128{``0}@)   | Loads a 128-bit vector from a pointer-identified memory location
+Method      | Z0.Vectors.vload``1(``0*,System.Runtime.Intrinsics.Vector256{``0}@)   | Loads a 256-bit vector from a pointer-identified memory location
+Method      | Z0.Vectors.vload``1(Z0.W128,``0@)                                     | Loads a 128-bit vector from a readonly memory reference
+Method      | Z0.Vectors.vload``1(Z0.W256,``0@)                                     | Loads a 256-bit vector from a readonly memory reference
+Method      | Z0.Vectors.vload``1(Z0.W512,``0@)                                     | Loads a 512-bit vector from a readonly memory reference
+Method      | Z0.Vectors.vload``1(Z0.W128,``0@,System.Int32)                        | Loads a 128-bit vector from a readonly memory reference offset by a cell-relative offset
+Method      | Z0.Vectors.vload``1(Z0.W256,``0@,System.Int32)                        | Loads a 256-bit vector from a readonly memory reference offset by a cell-relative offset
+Method      | Z0.Vectors.vload``1(Z0.W512,``0@,System.Int32)                        | Loads a 256-bit vector from a readonly memory reference offset by a cell-relative offset
+Method      | Z0.Vectors.vload``1(``0@,System.Runtime.Intrinsics.Vector128{``0}@)   | Loads a 128-bit vector from a readonly memory reference
+Method      | Z0.Vectors.vload``1(``0@,System.Runtime.Intrinsics.Vector256{``0}@)   | Loads a 256-bit vector from a readonly memory reference
+Method      | Z0.Vectors.vload``1(``0@,Z0.Vector512{``0}@)                          | Loads a 512-bit vector from a readonly memory reference
+Method      | Z0.Vectors.vload``1(Z0.W128,System.Span{``0})                         | Loads a 128-bit vector from the first 128 bits of the source
+Method      | Z0.Vectors.vload``1(Z0.W128,System.ReadOnlySpan{``0})                 | Loads a 128-bit vector from the first 128 bits of the source
+Method      | Z0.Vectors.vload``1(Z0.W256,System.Span{``0})                         | Loads a 256-bit vector from the first 256 bits of the source
+Method      | Z0.Vectors.vload``1(Z0.W512,System.Span{``0})                         | Loads a 512-bit vector from the first 512 bits of the source
+Method      | Z0.Vectors.vload``1(Z0.W128,System.Span{``0},System.Int32)            | Loads a 128-bit vector beginning at a specified source cell offset
+Method      | Z0.Vectors.vload``1(Z0.W256,System.Span{``0},System.Int32)            | Loads a 256-bit vector beginning at a specified source cell offset
+Method      | Z0.Vectors.vload``1(Z0.N512,System.Span{``0},System.Int32)            | Loads a 256-bit vector beginning at a specified source cell offset
+Method      | Z0.Vectors.vload``1(Z0.N256,System.ReadOnlySpan{``0})                 | Loads a 256-bit vector from the first 256 bits of the source
+Method      | Z0.Vectors.vload``1(Z0.N512,System.ReadOnlySpan{``0})                 | Loads a 256-bit vector from the first 256 bits of the source
+Method      | Z0.Vectors.vload``1(Z0.N128,System.ReadOnlySpan{``0},System.Int32)    | Loads a 128-bit vector beginning at a specified source cell offset
+Method      | Z0.Vectors.vload``1(Z0.N256,System.ReadOnlySpan{``0},System.Int32)    | Loads a 256-bit vector beginning at a specified source cell offset
+Method      | Z0.Vectors.vload``1(Z0.N512,System.ReadOnlySpan{``0},System.Int32)    | Loads a 512-bit vector beginning at a specified source cell offset
+Method      | Z0.Vectors.vones``1(Z0.N128,``0)                                      | Creates a 128-bit vector with all bits enabled
+Method      | Z0.Vectors.vones``1(Z0.N256,``0)                                      | Creates a 256-bit vector with all bits enabled
+Method      | Z0.Vectors.vones``1(Z0.N512,``0)                                      | Creates a 512-bit vector with all bits enabled
+Method      | Z0.Vectors.vscalar``1(Z0.W128,``0)                                    | Loads a scalar into the first component of a 128-bit vector
+Method      | Z0.Vectors.vscalar``1(Z0.W256,``0)                                    | Loads a scalar into the first component of a 256-bit vector
+Method      | Z0.Vectors.block``1(System.Runtime.Intrinsics.Vector128{``0})         | Allocates and deposits vector content to a data block
+Method      | Z0.Vectors.block``1(System.Runtime.Intrinsics.Vector256{``0})         | Allocates and deposits vector content to a data block
+Method      | Z0.Vectors.block``1(Z0.Vector512{``0})                                | Allocates and deposits vector content to a data block
+Method      | Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector128{``0},Z0.Block128{``0}@)| Stores the source vector to the head of a blocked container
+Method      | Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector128{``0},Z0.Block128{``0}@,System.Int32)| Stores the source vector to a specified block in a blocked container
+Method      | Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector256{``0},Z0.Block256{``0}@)| Stores the source vector to a blocked container
+Method      | Z0.Vectors.vstore``1(Z0.Vector512{``0},Z0.Block512{``0}@)             | Stores the source vector to a blocked container
+Method      | Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector256{``0},Z0.Block256{``0}@,System.Int32)| Stores the source vector to a specified block in a blocked container
+Method      | Z0.Vectors.vstore``1(Z0.Vector512{``0},Z0.Block512{``0}@,System.Int32)| Stores the source vector to a specified block in a blocked container
+Method      | Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector128{``0},System.Span{``0})| Stores vector content to the front of a span
+Method      | Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector256{``0},System.Span{``0})| Stores vector content to the front of a span
+Method      | Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector128{``0},System.Span{``0},System.Int32)| Stores vector content to a span
+Method      | Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector256{``0},System.Span{``0},System.Int32)| Stores vector content to a span
+Method      | Z0.Vectors.vstore``1(Z0.Vector512{``0},System.Span{``0},System.Int32) | Stores vector content to a span
+Method      | Z0.Vectors.vzero``1(Z0.W128,``0)                                      | Returns a 128-bit vector with all bits disabled
+Method      | Z0.Vectors.vzero``1(Z0.W256,``0)                                      | Returns a 256-bit vector with all bits disabled
+Method      | Z0.VRand.emitter``1(Z0.N128,Z0.IPolyrand,``0)                         | Creates a 128-bit vectorized emitter predicated an a specified random source
+Method      | Z0.VRand.emitter``1(Z0.N256,Z0.IPolyrand,``0)                         | Creates a 256-bit vectorized emitter predicated an a specified random source
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N128)                          | Produces a 128-bit cpu vector over random T-cells
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N256)                          | Produces a random 256-bit cpu vector
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.Vec128Kind{``0},Z0.W128)       | Produces a 128-bit cpu vector over random T-cells
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.Vec256Kind{``0},Z0.W256)       | Produces a random 256-bit cpu vector
+Method      | Z0.VRandX.VectorEmitter``1(Z0.IPolyrand,Z0.N128,``0)                  | Creates a 128-bit vectorized emitter predicated a random source
+Method      | Z0.VRandX.VectorEmitter``1(Z0.IPolyrand,Z0.N256,``0)                  | Creates a 256-bit vectorized emitter predicated a random source
+Method      | Z0.VRandX.CpuVectors``1(Z0.IPolyrand,Z0.N128)                         | Produces a stream of 128-bit cpu vectors over random T-cells
+Method      | Z0.VRandX.CpuVectors``1(Z0.IPolyrand,Z0.N256)                         | Produces a stream of 256-bit cpu vectors over random T-cells
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N128,Z0.Interval{``0})         | Produces a 128-bit cpu vector over random T-cells, each bound to a specified common domain
+Method      | Z0.VRandX.CpuVectors``1(Z0.IPolyrand,Z0.N128,Z0.Interval{``0})        | Produces a stream of 128-bit cpu vectors over random T-cells, each bound to a specified common domain
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N128,Z0.Interval{``0},System.Func{``0,System.Boolean})| Produces a random 128-bit cpu vector
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N256,Z0.Interval{``0})         | Produces a 256-bit cpu vector over random T-cells, each bound to a specified common domain
+Method      | Z0.VRandX.CpuVectors``1(Z0.IPolyrand,Z0.N256,Z0.Interval{``0})        | Produces a stream of 256-bit cpu vectors over random T-cells, each bound to a specified common domain
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N256,Z0.Interval{``0},System.Func{``0,System.Boolean})| Produces a random 256-bit cpu vector
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N512,Z0.Interval{``0},System.Func{``0,System.Boolean})| Produces a random 512-bit cpu vector
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N512,Z0.Interval{``0})         | Produces a random 512-bit cpu vector
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N128,``0)                      | Produces a random 128-bit cpu vector
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N256,``0)                      | Produces a random 256-bit cpu vector
+Method      | Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N512,``0)                      | Produces a random 256-bit cpu vector
+Property    | Z0.IVariant.DataWidth                                                 | The number of bits that are used to store the enclosed data
+Property    | Z0.IVariant.CellKind                                                  | The numeric data type if unsegmented or, if segmented, the numeric cell kind
+Property    | Z0.IVariant.CellCount                                                 | If covering scalar data, the cell count will always be 1; when blocked or vector data             is enclosed the cell count will vary based on the specific type
+Property    | Z0.IVariant.CellWidth                                                 | If covering scalar data, will specify the width of the scalar type; otherwise,            it will specify the width of a vector or block cell
+Property    | Z0.IVariant.Segmented                                                 | For scalar data this bit will always be off; otherwise, it will be on
+Method      | Z0.XTend.Cell``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| Extracts an index-identified component from the source vector
+Method      | Z0.XTend.Cell``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32,``0)| Sets an index-identified component to a specified value
+Method      | Z0.XTend.Cell``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32,``0)| Sets an index-identified component to a specified value
+Method      | Z0.XTend.Cell``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| Extracts an index-identified component from the source vector
+Method      | Z0.XTend.Length``1(System.Runtime.Intrinsics.Vector128{``0})          | Returns the number of source vector components
+Method      | Z0.XTend.Length``1(System.Runtime.Intrinsics.Vector256{``0})          | Returns the number of source vector components
+Method      | Z0.XTend.LoadVector``1(Z0.Block128{``0}@)                             | Loads a 128-bit vector from the first 128-bit block
+Method      | Z0.XTend.LoadVector``1(Z0.Block128{``0}@,System.Int32)                | Loads a block-identified 128-bit vector
+Method      | Z0.XTend.LoadVectors``1(Z0.Block128{``0}@,System.Int32,System.Int32)  | Loads 2 block-indexed 128-bit vectors
+Method      | Z0.XTend.LoadVectors``1(Z0.Block128{``0}@,System.Int32,System.Int32,System.Int32)| Loads 3 block-indexed 128-bit vectors
+Method      | Z0.XTend.LoadVector``1(Z0.Block256{``0}@)                             | Loads a 256-bit vector from the first 256-bit block
+Method      | Z0.XTend.LoadVectors``1(Z0.Block256{``0}@,System.Int32,System.Int32)  | Loads 2 block-indexed 256-bit vectors
+Method      | Z0.XTend.LoadVectors``1(Z0.Block256{``0}@,System.Int32,System.Int32,System.Int32)| Loads 3 block-indexed 256-bit vectors
+Method      | Z0.XTend.LoadVector``1(Z0.Block512{``0}@)                             | Loads a 512-bit vector from the first 512-bit block
+Method      | Z0.XTend.LoadVector``1(Z0.Block256{``0}@,System.Int32)                | Loads a 256-bit vector from an index-identified block
+Method      | Z0.XTend.LoadVector``1(Z0.Block512{``0}@,System.Int32)                | Loads 512-bit vector from an index-identified block
+Method      | Z0.XTend.LoadVector``1(System.Span{``0},Z0.W128,System.Int32)         | Loads a 128-bit vector from a span
+Method      | Z0.XTend.LoadVector``1(System.Span{``0},Z0.W256,System.Int32)         | Loads a 256-bit vector from a span
+Method      | Z0.XTend.LoadVector``1(System.Span{``0},Z0.W512,System.Int32)         | Loads a 512-bit vector from a span
+Method      | Z0.XTend.LoadVector``1(System.ReadOnlySpan{``0},Z0.W128,System.Int32) | Loads a 128-bit vector from a readonly span
+Method      | Z0.XTend.LoadVector``1(System.ReadOnlySpan{``0},Z0.W256,System.Int32) | Loads a 256-bit vector from a readonly span
+Method      | Z0.XTend.LoadVector``1(System.ReadOnlySpan{``0},Z0.W512,System.Int32) | Loads a 512-bit vector from a readonly span
+Method      | Z0.XTend.Map``2(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Func{``0,``0,``1})| Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
+Method      | Z0.XTend.Map``2(System.Runtime.Intrinsics.Vector128{``0},System.Func{``0,``1})| Projects a 128-bit source vector into a 128-bit target vector via a mapping function
+Method      | Z0.XTend.Map``2(System.Runtime.Intrinsics.Vector256{``0},System.Func{``0,``1})| Projects a source vector into a target vector via a mapping function
+Method      | Z0.XTend.Map``2(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Func{``0,``0,``1})| Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
+Method      | Z0.XTend.Merge``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Func{``0,``0})| Combines two 128-bit source vectors into a 256-bit target vector via alternating application of a mapping function            dst[j] = f(lhs[i])            dst[j+1] = f(rhs[i])
+Method      | Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.Block128{``0}@)| Stores vector content to a caller-supplied block
+Method      | Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.Block128{``0}@,System.Int32)| Stores vector content to a specified block in a blocked container
+Method      | Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector256{``0},Z0.Block256{``0}@)| Stores vector content to a caller-supplied block
+Method      | Z0.XTend.StoreTo``1(Z0.Vector512{``0},Z0.Block512{``0}@)              | Stores vector content to a caller-supplied block
+Method      | Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector256{``0},Z0.Block256{``0}@,System.Int32)| Stores vector content to a specified block in a blocked container
+Method      | Z0.XTend.StoreTo``1(Z0.Vector512{``0},Z0.Block512{``0}@,System.Int32) | Stores vector content to a specified block in a blocked container
+Method      | Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector128{``0},``0@,System.Int32)| Stores vector content to a memory reference
+Method      | Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector256{``0},``0@,System.Int32)| Stores vector content to a memory reference
+Method      | Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector128{``0},System.Span{``0},System.Int32)| Stores vector content to a caller-supplied span
+Method      | Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector256{``0},System.Span{``0},System.Int32)| Stores vector content to a caller-supplied span
+Method      | Z0.XTend.StoreTo``1(Z0.Vector512{``0},System.Span{``0},System.Int32)  | Stores vector content to a caller-supplied span
+Method      | Z0.XTend.ToBlock``1(System.Runtime.Intrinsics.Vector128{``0})         | Allocates and deposits vector content to a data block
+Method      | Z0.XTend.ToBlock``1(System.Runtime.Intrinsics.Vector256{``0})         | Allocates and deposits vector content to a data block
+Method      | Z0.XTend.ToBlock``1(Z0.Vector512{``0})                                | Allocates and deposits vector content to a data block
+Method      | Z0.XTend.ToSpan``1(System.Runtime.Intrinsics.Vector128{``0})          | Allocates a span into which vector content is stored
+Method      | Z0.XTend.ToSpan``1(System.Runtime.Intrinsics.Vector256{``0})          | Allocates and deposits vector content to a span
+Method      | Z0.XTend.ToSpan``1(Z0.Vector512{``0})                                 | Allocates and deposits vector content to a span
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.SByte},System.SByte@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Byte},System.Byte@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Int16},System.Int16@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.UInt16},System.UInt16@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Int32},System.Int32@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.UInt32},System.UInt32@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Int64},System.Int64@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.UInt64},System.UInt64@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Single},System.Single@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Double},System.Double@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.SByte},System.SByte@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Byte},System.Byte@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Int16},System.Int16@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.UInt16},System.UInt16@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Int32},System.Int32@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.UInt32},System.UInt32@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Int64},System.Int64@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.UInt64},System.UInt64@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Single},System.Single@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Double},System.Double@)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.SByte},System.SByte@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Byte},System.Byte@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Int16},System.Int16@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.UInt16},System.UInt16@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Int32},System.Int32@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.UInt32},System.UInt32@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Int64},System.Int64@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.UInt64},System.UInt64@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Single},System.Single@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector128{System.Double},System.Double@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.SByte},System.SByte@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Byte},System.Byte@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Int16},System.Int16@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.UInt16},System.UInt16@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Int32},System.Int32@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.UInt32},System.UInt32@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Int64},System.Int64@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.UInt64},System.UInt64@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Single},System.Single@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vsave(System.Runtime.Intrinsics.Vector256{System.Double},System.Double@,System.Int32)| Stores vector content to a memory location
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector128{System.SByte},System.SByte@)| _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector128{System.Byte},System.Byte@)| _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector128{System.Int16},System.Int16@)| _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector128{System.UInt16},System.UInt16@)| _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector128{System.Int32},System.Int32@)| _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector128{System.UInt32},System.UInt32@)| _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector128{System.Int64},System.Int64@)| _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector128{System.UInt64},System.UInt64@)| _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector128{System.Single},System.Single@)| void _mm_stream_ps (float* mem_addr, __m128 a) MOVNTPS m128, xmm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector128{System.Double},System.Double@)| void _mm_stream_pd (double* mem_addr, __m128d a) MOVNTPD m128, xmm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector256{System.SByte},System.SByte@)| void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector256{System.Byte},System.Byte@)| void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector256{System.Int16},System.Int16@)| void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector256{System.UInt16},System.UInt16@)| void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector256{System.Int32},System.Int32@)| void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector256{System.UInt32},System.UInt32@)| void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector256{System.Int64},System.Int64@)| void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector256{System.UInt64},System.UInt64@)| void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector256{System.Single},System.Single@)| void _mm256_stream_ps (float * mem_addr, __m256 a) MOVNTPS m256, ymm
+Method      | Z0.VStoreD.vstream(System.Runtime.Intrinsics.Vector256{System.Double},System.Double@)| void _mm256_stream_pd (double * mem_addr, __m256d a) MOVNTPD m256, ymm
+Method      | Z0.VStore.vload``1(Z0.W128,``0*)                                      | Loads a 128-bit vector from a pointer-identified memory location
+Method      | Z0.VStore.vload``1(Z0.W256,``0*)                                      | Loads a 256-bit vector from a pointer-identified memory location
+Method      | Z0.VStore.vload``1(Z0.W512,``0*)                                      | Loads a 512-bit vector from a pointer-identified memory location
+Method      | Z0.VStore.vload``1(``0*,System.Runtime.Intrinsics.Vector128{``0}@)    | Loads a 128-bit vector from a pointer-identified memory location
+Method      | Z0.VStore.vload``1(``0*,System.Runtime.Intrinsics.Vector256{``0}@)    | Loads a 256-bit vector from a pointer-identified memory location
+Method      | Z0.VStore.vsave``1(System.Runtime.Intrinsics.Vector128{``0},``0@,System.Int32)| Stores the source vector to a reference cell
+Method      | Z0.VStore.vsave``1(System.Runtime.Intrinsics.Vector256{``0},``0@,System.Int32)| Stores the source vector to a reference cell

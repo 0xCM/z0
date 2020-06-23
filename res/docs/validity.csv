@@ -1,0 +1,11 @@
+Type        | Z0.TestApp`1                                                          | Base type for test applications
+Property    | Z0.TestContext`1.RepCount                                             | The number of elements to be selected from some sort of stream
+Property    | Z0.TestContext`1.CycleCount                                           | The number times to repeat an action
+Property    | Z0.TestContext`1.RoundCount                                           | The number of times to repeat a cycle
+Property    | Z0.TestContext`1.OpCount                                              | The number of operations performed in a benchmarking expercise
+Method      | Z0.TestContext`1.counter(System.Boolean)                              | Allocates and optionally starts a system counter
+Method      | Z0.TestContext`1.stopwatch(System.Boolean)                            | Creates a new stopwatch and optionally start it
+Method      | Z0.TestContext`1.snapshot(System.Diagnostics.Stopwatch)               | Captures a stopwatch duration
+Method      | Z0.ITestQueue.Benchmark(System.Int64,Z0.Duration,System.String)       | Captures a duration and the number of operations executed within the period
+Type        | Z0.ITestService                                                       | Defines a test service which is, by definition, a contextual service of test context kind
+Method      | Z0.Settings.ProjectRoot(System.String)                                | Gets the source directory for a specified project

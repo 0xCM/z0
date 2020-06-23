@@ -1,0 +1,99 @@
+Method      | Z0.IApiMemberOps.CreateIndex``1(System.Collections.Generic.IEnumerable{``0})| Creates an operation index from an api member stream
+Method      | Z0.IApiMemberOps.CreateIndex``1(System.ReadOnlySpan{``0})             | Creates an operation index from an api member span, readonly that is
+Method      | Z0.IApiMemberOps.CreateIndex``1(System.Span{``0})                     | Creates an operation index from an api member span
+Method      | Z0.ApiHosts.types(System.Reflection.Assembly)                         | Selects the host-attributed types from an assembly
+Method      | Z0.ApiHosts.funfacts(System.Reflection.Assembly)                      | Searches an assembly for types tagged with the <see cref="T:Z0.FunctionalServiceAttribute" />
+Method      | Z0.ApiHosts.hosts(System.Reflection.Assembly)                         | Instantiates the api hosts defined in a .net assembly
+Property    | Z0.ApiCatalog.PartId                                                  | The identity of the assembly that defines and owns the catalog
+Property    | Z0.ApiCatalog.Owner                                                   | The assembly that defines and owns the catalog
+Property    | Z0.ApiCatalog.Hosts                                                   | The api hosts known to the catalog
+Type        | Z0.ApiComposition                                                     | Defines a collection of resolved assemblies
+Property    | Z0.ApiComposition.Resolved                                            | The members of the compostion
+Type        | Z0.ApiHost                                                            | Identifies/describes a type that declares a formalized api set
+Type        | Z0.ApiMembers                                                         | A simple api member sequence adapter
+Property    | Z0.NaturalNumericOp.Host                                              | The operation host to which generic definition and any concrete closures belowng
+Property    | Z0.NaturalNumericOp.GenericId                                         | The generic operation identity
+Property    | Z0.NaturalNumericOp.Closures                                          | The supported closures
+Property    | Z0.NaturalNumericOp.Id                                                | The generalized identity
+Property    | Z0.NaturalNumericOp.Method                                            | The generic method definition
+Property    | Z0.NaturalNumericOp.HostUri                                           | The hosting type uri
+Method      | Z0.UriHexQuery.accepts(Z0.IdentifiedCode,Z0.NumericKind)              | Determines whether an operation accepts an argument of specified numeric kind
+Method      | Z0.UriHexQuery.arity(Z0.IdentifiedCode)                               | Determines the arity of the encoded operation
+Method      | Z0.UriHexQuery.index(System.Collections.Generic.IEnumerable{Z0.IdentifiedCode})| Creates an operation index from a uri bitstream
+Method      | Z0.UriHexQuery.filter(System.Collections.Generic.IEnumerable{Z0.IdentifiedCode},Z0.NumericKind,Z0.NumericKind)| Excludes source operations that do not accept two parameters of specified numeric kind
+Method      | Z0.IApiReflected.Catalog(Z0.IPart)                                    | Creates a (possibly empy) api catalog for a specified part
+Method      | Z0.IApiReflected.Hosts(System.Reflection.Assembly)                    | Instantiates the api hosts found in a specified assembly
+Method      | Z0.IApiReflected.HostTypes(System.Reflection.Assembly)                | Searches an assembly for api host types
+Method      | Z0.IUriHexParser.Z0#ITextParser{Z0#IdentifiedCode}#Parse(System.String)| Parses a row of identified hex text
+Method      | Z0.IUriHexQuery.CreateIndex(System.Collections.Generic.IEnumerable{Z0.IdentifiedCode})| Creates an operation index from a uri bitstream
+Type        | Z0.GenericApiMethod                                                   | Glues a generic method definition to a set of kinds that represent types over which the            generic method can close
+Property    | Z0.GenericApiMethod.Host                                              | The operation host to which generic definition and any concrete closures belowng
+Property    | Z0.GenericApiMethod.GenericId                                         | The generic operation identity
+Property    | Z0.GenericApiMethod.Kinds                                             | The supported closures
+Property    | Z0.GenericApiMethod.Id                                                | The generalized identity
+Property    | Z0.GenericApiMethod.Method                                            | The generic method definition
+Property    | Z0.GenericApiMethod.HostUri                                           | The hosting type uri
+Type        | Z0.ExtractParseFailure                                                | Describes an extract parse failure
+Field       | Z0.ExtractParseFailure.Data                                           | The data over which the parse failure occurrred
+Field       | Z0.ExtractParseFailure.Sequence                                       | The extracted member sequence
+Field       | Z0.ExtractParseFailure.TermCode                                       | Specifies the reason the parser stopped parsing
+Type        | Z0.ExtractParseResults                                                | Defines the shape of a sequential extract parse operation
+Field       | Z0.ExtractParseResults.Failed                                         | The unparseable members
+Field       | Z0.ExtractParseResults.Parsed                                         | The parsed members
+Method      | Z0.SegmentedIdentity.Identify(Z0.OpIdentity,System.Int32)             | Extracts an index-identified segmented identity part from an operation identity
+Method      | Z0.SegmentedIdentity.Identify(Z0.IdentityPart)                        | Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
+Property    | Z0.ApiHostQuery`1.Hosted                                              | All hosted methods
+Property    | Z0.IApiHostQuery.Hosted                                               | All hosted methods
+Property    | Z0.IApiHostQuery.Generic                                              | All hosted generic methods
+Property    | Z0.IApiHostQuery.Direct                                               | All hosted non-generic methods
+Method      | Z0.IApiHostQuery.OfKind``1(``0)                                       | Queries the host for operations of specified kind
+Method      | Z0.IApiHostQuery.OfKind``1(``0,Z0.GenericPartition)                   | Queries the host for genric operations of specified kind
+Method      | Z0.IApiHostQuery.UnaryOps(Z0.GenericPartition)                        | Queries the host for binary operators belonging to a specifed generic partition
+Method      | Z0.IApiHostQuery.BinaryOps(Z0.GenericPartition)                       | Queries the host for binary operators belonging to a specifed generic partition
+Method      | Z0.IApiHostQuery.TernaryOps(Z0.GenericPartition)                      | Queries the host for binary operators belonging to a specifed generic partition
+Method      | Z0.IApiHostQuery.Vectorized(Z0.W128,Z0.GenericPartition)              | Queries the host for operations vectorized over 128-bit vectors
+Method      | Z0.IApiHostQuery.Vectorized(Z0.W256,Z0.GenericPartition)              | Queries the host for operations vectorized over 128-bit vectors
+Method      | Z0.IApiHostQuery.Vectorized(Z0.W128,System.String,Z0.GenericPartition)| Queries the host for vectorized methods of specified vector width, name and generic partition
+Method      | Z0.IApiHostQuery.Vectorized(Z0.W256,System.String,Z0.GenericPartition)| Queries the host for vectorized methods of specified vector width, name and generic partition
+Method      | Z0.IApiHostQuery.Vectorized(Z0.W512,System.String,Z0.GenericPartition)| Queries the host for vectorized methods of specified vector width, name and generic partition
+Method      | Z0.IApiHostQuery.Vectorized``1(Z0.W128)                               | Queries the host for vectorized methods closed over cells of specified parametric type
+Method      | Z0.IApiHostQuery.Vectorized``1(Z0.W256)                               | Queries the host for vectorized methods closed over cells of specified parametric type
+Method      | Z0.IApiHostQuery.Vectorized``1(Z0.W512)                               | Queries the host for vectorized methods closed over cells of specified parametric type
+Method      | Z0.IApiHostQuery.Vectorized``1(Z0.W128,System.String)                 | Queries the host for vectorized methods closed over cells of specified parametric type and that have a specified name
+Method      | Z0.IApiHostQuery.Vectorized``1(Z0.W256,System.String)                 | Queries the host for vectorized methods closed over cells of specified parametric type and that have a specified name
+Method      | Z0.IApiHostQuery.Vectorized``1(Z0.W512,System.String)                 | Queries the host for vectorized methods closed over cells of specified parametric type and that have a specified name
+Property    | Z0.IApiHostQuery`1.Host                                               | The interrogation subject
+Method      | Z0.ExtractReport.Load(Z0.FilePath)                                    | Loads a saved extract report
+Method      | Z0.MemberExtractData.Load(Z0.FilePath)                                | Hydrates from a file
+Method      | Z0.MemberExtractData.Read(Z0.FilePath)                                | Reads extract records from a saved report
+Method      | Z0.ParseFailureReport.Load(Z0.FilePath)                               | Loads a saved failure report
+Type        | Z0.ResourceRecord                                                     | Describes an assembly code emission
+Method      | Z0.Segmentation.identify(Z0.IdentityPart)                             | Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
+Type        | Z0.IApiCatalog                                                        | Characterizes a type that supports operation discovery
+Property    | Z0.IApiCatalog.FunFactories                                           | The known types that reify contracted operation services, potentially generic
+Property    | Z0.IApiCatalog.PartId                                                 | The identity of the assembly that defines and owns the catalog
+Property    | Z0.IApiCatalog.Owner                                                  | The assembly that defines and owns the catalog
+Property    | Z0.IApiCatalog.Hosts                                                  | The api hosts known to the catalog
+Property    | Z0.IApiCatalog.GenericHosts                                           | The known generic api hosts
+Property    | Z0.IApiCatalog.DirectHosts                                            | The known direct api hosts
+Property    | Z0.IApiCatalog.IsIdentified                                           | Specifies whether the catalog contains content from an identifid assembly
+Property    | Z0.IApiCatalog.ApiHostCount                                           | Specifies the number of api hosts described by the catalog
+Property    | Z0.IApiCatalog.HasApiHostContent                                      | Specifies whether the catalog describes any api hosts
+Property    | Z0.IApiCatalog.CatalogName                                            | The name of the catalog, which should be unique with respect to known catalogs
+Property    | Z0.IApiCatalog.Query                                                  | Defines a query service over the catalog
+Property    | Z0.IApiCatalog.HostCount                                              | Specifies the number of service hosts described by the catalog
+Property    | Z0.IApiCatalog.IsNonEmpty                                             | Specifies whether the catalog describes any service hosts
+Type        | Z0.IApiComposition                                                    | Characterizes, in dependency injection vernacular, composition roots
+Property    | Z0.IApiComposition.ApiSet                                             | The api composition aggregate
+Property    | Z0.IApiComposition.Resolved                                           | The resolved assemblies that comprise the composition
+Property    | Z0.IApiComposition.Catalogs                                           | The catalogs defined by the composed parts
+Method      | Z0.IApiComposition.FindCatalog(PartId)                                | Searches for a part-identified, and returns a valued option if found
+Type        | Z0.IMethodIdentityDiviner                                             | Characterizes a serive that attempts to assign a reasonable identity to a method
+Type        | Z0.IMemberExtractor                                                   | Characterizes a service that extracts host-defined operations
+Method      | Z0.IMemberExtractor.Extract(Z0.ApiMember)                             | Extracts encoded content that defines executable code for a located member
+Method      | Z0.IMemberExtractor.Extract(Z0.ApiMember[])                           | Extracts encoded content that defines executable code for an array of located members
+Method      | Z0.IMemberExtractor.Extract(Z0.IApiHost)                              | Extracts encoded content for all operations defined by a host
+Type        | Z0.IMemberExtractReader                                               | Defines service contract to support reading text-formatted encoded x86 asm data
+Type        | Z0.IIdentityDiviner`2                                                 | Characterizes a service that attempts to assign a non-cryptic identity to a             subject that is both useful and unique within the intended scope
+Method      | Z0.IIdentityDiviner`2.DivineIdentity(`0)                              | Reifies an identity divination algorithm
+Type        | Z0.ITypeIdentityDiviner                                               | Characterizes a serive that attempts to assign a reasonable identity to a type

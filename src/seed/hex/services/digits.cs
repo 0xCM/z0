@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static refs;
+    using static Root;
     using static As;
     using static HexSpecs;
 
@@ -39,7 +39,7 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return digits(uint8(value));
             else if(typeof(T) == typeof(ushort))
-                return digits(uint16(value));
+                return digits(int16(value));
             else if(typeof(T) == typeof(uint))
                 return digits(uint32(value));
             else if(typeof(T) == typeof(ulong))

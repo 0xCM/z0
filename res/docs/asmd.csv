@@ -1,0 +1,268 @@
+Field       | Z0.Asm.Data.AsmDataField.OpCodeId                                     | The ice opcode identifer
+Field       | Z0.Asm.Data.AsmDataField.Sequence                                     | A unique 0-based sequence number
+Field       | Z0.Asm.Data.AsmDataField.Mnemonic                                     | The instruction mnemonic
+Field       | Z0.Asm.Data.AsmDataField.Op0                                          | The first instruction operand
+Field       | Z0.Asm.Data.AsmDataField.Op1                                          | "The second instruction operand"
+Field       | Z0.Asm.Data.AsmDataField.Op2                                          | The third instruction operand
+Field       | Z0.Asm.Data.AsmDataField.Op3                                          | The fourth instruction operand
+Field       | Z0.Asm.Data.AsmDataField.Op4                                          | The fifth instruction operand
+Field       | Z0.Asm.Data.AsmDataField.CpuId                                        | The ice opcode identifer
+Type        | Z0.Asm.Data.AsmFieldWidths                                            | Defines the widths of common asm record fields
+Field       | Z0.Asm.Data.AsmFieldWidths.Num8Dec                                    | The width of a field containing an 8-bit decimal number
+Field       | Z0.Asm.Data.AsmFieldWidths.Num8Hex                                    | The width of a field containing an 8-bit hex number
+Field       | Z0.Asm.Data.AsmFieldWidths.BoolSmall                                  | The width of a field containing a boolean indicator [T/F, Y/N, 0/1, ..] that has a small label
+Field       | Z0.Asm.Data.AsmFieldWidths.BoolLarge                                  | The width of a field containing a boolean indicator [T/F, Y/N, 0/1, ..] that has a large label
+Property    | Z0.Asm.Data.CpuidExpression.Length                                    | The expression length
+Property    | Z0.Asm.Data.InstructionExpression.Length                              | The expression length
+Property    | Z0.Asm.Data.MnemonicExpression.Length                                 | The expression length
+Type        | Z0.Asm.Data.EncodedOpCode                                             | Defines an op code via a sequence bytes
+Type        | Z0.Asm.Data.OpCodeIdentifier                                          | Represents an opcode identifier
+Type        | Z0.Asm.Data.OpCodeTokenKind                                           | Defines symbols used to specify opcode syntax
+Field       | Z0.Asm.Data.OpCodeTokenKind.NE                                        | Not Encodable
+Field       | Z0.Asm.Data.OpCodeTokenKind.NP                                        | Indicates the use of 66/F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction
+Field       | Z0.Asm.Data.OpCodeTokenKind.NFx                                       | Indicates the use of F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction.
+Field       | Z0.Asm.Data.OpCodeTokenKind.REXᕀW                                     | Indicates the use of a REX prefix that affects operand size or instruction semantics
+Field       | Z0.Asm.Data.OpCodeTokenKind.ﾉ0                                        | The ModR/M byte of the instruction uses only the r/m operand; The register field digit 0             provides an extension to the instruction's opcode
+Field       | Z0.Asm.Data.OpCodeTokenKind.ﾉ1                                        | The ModR/M byte of the instruction uses only the r/m operand; The register field digit 1             provides an extension to the instruction's opcode
+Field       | Z0.Asm.Data.OpCodeTokenKind.ﾉ2                                        | The ModR/M byte of the instruction uses only the r/m operand; The register field digit 2             provides an extension to the instruction's opcode
+Field       | Z0.Asm.Data.OpCodeTokenKind.ﾉ3                                        | The ModR/M byte of the instruction uses only the r/m operand; The register field digit 3             provides an extension to the instruction's opcode
+Field       | Z0.Asm.Data.OpCodeTokenKind.ﾉ4                                        | The ModR/M byte of the instruction uses only the r/m operand; The register field digit 4             provides an extension to the instruction's opcode
+Field       | Z0.Asm.Data.OpCodeTokenKind.ﾉ5                                        | The ModR/M byte of the instruction uses only the r/m operand; The register field digit 5             provides an extension to the instruction's opcode
+Field       | Z0.Asm.Data.OpCodeTokenKind.ﾉ6                                        | The ModR/M byte of the instruction uses only the r/m operand; The register field digit 6             provides an extension to the instruction's opcode
+Field       | Z0.Asm.Data.OpCodeTokenKind.ﾉ7                                        | The ModR/M byte of the instruction uses only the r/m operand; The register field digit 7             provides an extension to the instruction's opcode
+Field       | Z0.Asm.Data.OpCodeTokenKind.ﾉr                                        | Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand
+Field       | Z0.Asm.Data.OpCodeTokenKind.cb                                        | A 1-byte value following the opcode to specify a code offset and/or new value for the code segment register.
+Field       | Z0.Asm.Data.OpCodeTokenKind.cw                                        | A 2-byte value following the opcode to specify a code offset and/or new value for the code segment register.
+Field       | Z0.Asm.Data.OpCodeTokenKind.cd                                        | A 4-byte value following the opcode to specify a code offset and/or new value for the code segment register.
+Field       | Z0.Asm.Data.OpCodeTokenKind.cp                                        | A 6-byte value following the opcode to specify a code offset and/or new value for the code segment register.
+Field       | Z0.Asm.Data.OpCodeTokenKind.co                                        | A 8-byte value following the opcode to specify a code offset and/or new value for the code segment register.
+Field       | Z0.Asm.Data.OpCodeTokenKind.ct                                        | A 10-byte value following the opcode to specify a code offset and/or new value for the code segment register
+Field       | Z0.Asm.Data.OpCodeTokenKind.ib                                        | A 1-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
+Field       | Z0.Asm.Data.OpCodeTokenKind.iw                                        | A 2-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
+Field       | Z0.Asm.Data.OpCodeTokenKind.id                                        | A 4-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
+Field       | Z0.Asm.Data.OpCodeTokenKind.io                                        | A 8-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
+Field       | Z0.Asm.Data.OpCodeTokenKind.ᕀrb                                       | For an 8-bit register indicates:             (a) In non-64-bit mode, a register code is arithmetically added to the value of the opcode byte.             (b) In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
+Field       | Z0.Asm.Data.OpCodeTokenKind.ᕀrw                                       | For a 16-bit register indicates:             (a) In non-64-bit mode, a register code is arithmetically added to the value of the opcode byte.             (b) In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
+Field       | Z0.Asm.Data.OpCodeTokenKind.ᕀrd                                       | For a 32-bit register indicates:             (a) In non-64-bit mode, a register code is arithmetically added to the value of the opcode byte.             (b) In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
+Field       | Z0.Asm.Data.OpCodeTokenKind.ᕀro                                       | For a 64-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
+Field       | Z0.Asm.Data.OpCodeTokenKind.ᕀi                                        | A number used in floating-point instructions when one of the operands is ST(i) from the FPU register stack.
+Method      | Z0.Asm.Data.OpCodeIdentity.Compute(Z0.Asm.Data.OpCodeRecord@)         | Defines, in a predictable and hopefully meaningful way, a programmatic identifier that designates an op code
+Field       | Z0.Asm.FarCallCounts.TargetsFar                                       | The distinct count of far-call target addresses
+Field       | Z0.Asm.FarCallCounts.HostedCount                                      | The distinct count of host-defined addresses
+Field       | Z0.Asm.FarCallCounts.HostedReceivers                                  | The distinct count of host-defined addresses that are targets of a far-call
+Field       | Z0.Asm.FarCallCounts.UnhostedReceivers                                | The distinct count of far-call target addresses that are not provided by a howt
+Field       | Z0.Asm.FarCallSummary.FarCallTargets                                  | Far-classified call instruction operations
+Field       | Z0.Asm.FarCallSummary.HostBases                                       | Base addresses of functions defined by an api host
+Field       | Z0.Asm.FarCallSummary.HostedReceivers                                 | Base addresses of api host functions that are targets of a far call
+Field       | Z0.Asm.FarCallSummary.UnhostedReceivers                               | Far call targets that are not defined by an api host
+Type        | Z0.Asm.AsmBranchInfo                                                  | Describes a branching instruction operand
+Property    | Z0.Asm.AsmBranchTarget.Kind                                           | The target classifier, near or far
+Property    | Z0.Asm.AsmBranchTarget.Size                                           | The target size
+Property    | Z0.Asm.AsmBranchTarget.TargetAddress                                  | The target address
+Property    | Z0.Asm.AsmBranchTarget.Selector                                       | Specifies a branch target selector, if far
+Type        | Z0.Asm.AsmCommand                                                     | Defines an encoded instruction
+Type        | Z0.Asm.AsmFunction                                                    | Describes the assembly encoding of a member api
+Property    | Z0.Asm.AsmFunction.Uri                                                | The definining operation uri
+Property    | Z0.Asm.AsmFunction.OpId                                               | The function identifier
+Property    | Z0.Asm.AsmFunction.OpSig                                              | The source member signature
+Property    | Z0.Asm.AsmFunction.Code                                               | The function encoding
+Property    | Z0.Asm.AsmFunction.Inxs                                               | The encoded instructions
+Property    | Z0.Asm.AsmFunction.TermCode                                           | Specifies the reason for capture termination
+Property    | Z0.Asm.AsmFunction.BaseAddress                                        | The head of the address range
+Property    | Z0.Asm.AsmFunction.InstructionCount                                   | The number of encoded instructions
+Type        | Z0.Asm.AsmFunctionGroup                                               | Defines a group of assembly functions related by an operation identity
+Type        | Z0.Asm.AsmImmInfo                                                     | Describes an immediate value in the context of an asm instruction operand
+Type        | Z0.Asm.AsmInstructionBlock                                            | Encapsulates a contiguous instruction sequence along with the captured bits
+Field       | Z0.Asm.AsmInstructionBlock.Encoded                                    | Encoded assembly
+Field       | Z0.Asm.AsmInstructionBlock.Decoded                                    | The decoded instructions
+Field       | Z0.Asm.AsmInstructionBlock.TermCode                                   | The reason capture was terminated
+Method      | Z0.Asm.AsmInstructionBlock.Define(Z0.MemberCode,Z0.Asm.Instruction[],Z0.ExtractTermCode)| Defines an instruction sequence, in both encoded and decoded form
+Property    | Z0.Asm.AsmInstructionBlock.Item(System.Int32)                         | Queries/Manipulates an index-identified instruction
+Type        | Z0.Asm.AsmInstructionCode                                             | Captures an asm opcode together with an instruction string
+Type        | Z0.Asm.AsmInstructionList                                             | Defines a contiguous *based* instruction sequence
+Type        | Z0.Asm.AsmInstructions                                                | Defines an *unbased* sequence of instructions
+Type        | Z0.Asm.AsmInstructionSummary                                          | Describes an assembly instruction
+Property    | Z0.Asm.AsmInstructionSummary.Base                                     | The base address
+Property    | Z0.Asm.AsmInstructionSummary.Offset                                   | The zero-based offset of the function, relative to the base address
+Property    | Z0.Asm.AsmInstructionSummary.AsmContent                               | The instruction content, suitable for display
+Property    | Z0.Asm.AsmInstructionSummary.Spec                                     | The instruction string paired with the op code
+Property    | Z0.Asm.AsmInstructionSummary.Operands                                 | Describes the instruction operands
+Property    | Z0.Asm.AsmInstructionSummary.Encoded                                  | The encoded bytes
+Property    | Z0.Asm.AsmMemDx.Size                                                  | The size of the displacement in bytes
+Property    | Z0.Asm.AsmMemDx.Value                                                 | The displacement value
+Type        | Z0.Asm.AsmMemInfo                                                     | Describes a block of memory the context of an asm instruction operand
+Type        | Z0.Asm.AsmOperandInfo                                                 | Describes an operand in the context of an assembly instruction
+Property    | Z0.Asm.AsmOperandInfo.Index                                           | The 0-based operand position
+Property    | Z0.Asm.AsmOperandInfo.Kind                                            | Classifies the operand
+Property    | Z0.Asm.AsmOperandInfo.ImmInfo                                         | Operand immediate info, if applicable
+Property    | Z0.Asm.AsmOperandInfo.Memory                                          | Operand memory info, if applicable
+Property    | Z0.Asm.AsmOperandInfo.Register                                        | Operand register info, if applicable
+Property    | Z0.Asm.AsmOperandInfo.Branch                                          | Instruction branching info, if applicable
+Property    | Z0.Asm.Aspect.Name                                                    | The aspect name
+Property    | Z0.Asm.Aspect.Source                                                  | The defining oject
+Property    | Z0.Asm.Aspect.Value                                                   | The aspect value
+Property    | Z0.Asm.Aspect.Description                                             | An informative description
+Type        | Z0.Asm.EncodedCommand                                                 | Defines an encoded instruction
+Property    | Z0.Asm.EncodedCommand.EncodingSize                                    | Specifies the size of the command, in bytes, which is constrained to a number             between 0 (the empty command) and 15 (The maximum instruction size)
+Type        | Z0.Asm.HostInstructions                                               | Collects a sequence of operation instuction sequences from host-defined members
+Property    | Z0.Asm.HostInstructions.Content                                       | The decoded instructions
+Property    | Z0.Asm.HostInstructions.Host                                          | The defining host
+Property    | Z0.Asm.HostInstructions.BaseAddress                                   | The base address of the first member, where members are ordered by their individual base addresses
+Property    | Z0.Asm.HostInstructions.MemberCount                                   | The number of host-defined operations
+Property    | Z0.Asm.HostInstructions.Length                                        | The member instruction content length
+Property    | Z0.Asm.HostInstructions.Item(System.Int32)                            | Indexes into the member instruction content
+Property    | Z0.Asm.HostInstructions.TotalCount                                    | The total instruction count
+Property    | Z0.Asm.LocatedInstruction.Data                                        | The encoded content as byte array
+Property    | Z0.Asm.LocatedInstruction.ByteLength                                  | The encoded byte count
+Type        | Z0.Asm.MemberInstructions                                             | Groups a sequence of located instructions
+Type        | Z0.Asm.PartInstructions                                               | Collects sequences instructions from part-defined api hosts
+Property    | Z0.Asm.PartInstructions.Content                                       | The decoded instructions
+Property    | Z0.Asm.PartInstructions.Part                                          | The defining part
+Property    | Z0.Asm.PartInstructions.TotalCount                                    | The total instruction count
+Type        | Z0.Asm.SignExensionKind                                               | Describes a sign exension operation
+Property    | Z0.Asm.IEncodedCommand.Encoding                                       | The encoded command
+Type        | Z0.Asm.ZeroExensionKind                                               | Describes a zero exension operation
+Type        | Z0.Asm.RegisterBitField                                               | The register bitfield
+Field       | Z0.Asm.RegisterBitField.Code                                          | The register code data (1 byte)
+Field       | Z0.Asm.RegisterBitField.Class                                         | The register class data (1 byte)
+Field       | Z0.Asm.RegisterBitField.Width                                         | The register width (2 bytes)
+Method      | Z0.Asm.RegisterBitField.code(Z0.Asm.RegisterKind)                     | Determines the register code from the kind
+Method      | Z0.Asm.RegisterBitField.class(Z0.Asm.RegisterKind)                    | Determines the register class from the kind
+Method      | Z0.Asm.RegisterBitField.width(Z0.Asm.RegisterKind)                    | Determines the register width from the kind
+Field       | Z0.Asm.RegisterKinds.FI.C                                             | RegisterCode: [0..3]
+Field       | Z0.Asm.RegisterKinds.FI.K                                             | RegisterClass: [4..15]
+Field       | Z0.Asm.RegisterKinds.FI.W                                             | Register width: [16..31]
+Method      | Z0.Asm.Commands.encode(System.ReadOnlySpan{System.Byte})              | Defines a command from data supplied by a bytespan
+Method      | Z0.Asm.Commands.encode(System.UInt64)                                 | Creates a command from data supplied in a 64-bit unsigned integer
+Method      | Z0.Asm.Commands.encode(System.UInt32)                                 | Creates a command from the data supplied in a 64-bit unsigned integer
+Method      | Z0.Asm.Commands.size(Z0.Asm.EncodedCommand@)                          | Computes the length, in bytes, of the encoded content
+Method      | Z0.Asm.Commands.encoding(Z0.Asm.EncodedCommand@)                      | Presents the encoded content as a bytespan of variable length from 0 to 15 bytes
+Type        | Z0.Asm.ModRm                                                          | Defines a byte that follows an opcode that specifies either            a) two register operands or,            b) one register operand and a memory operand together with an addressing mode            ModRM = [Mod:[7 6] | Reg:[5 4 3] | Rm:[2 1 0] ]
+Property    | Z0.Asm.ModRm.Rm                                                       | Defines bits [2:0] of the modrm byte
+Property    | Z0.Asm.ModRm.Reg                                                      | Defines bits [5:3] of the modrm byte
+Property    | Z0.Asm.ModRm.Mod                                                      | Defines bits [7:6] of the modrm byte
+Property    | Z0.Asm.ModRm.Encoded                                                  | The encoded bitfield value
+Type        | Z0.Asm.RexPrefix                                                      | A prefix that occurrs at most once and is applicable to instructions in 64-bit mode and which             facilitates specifying            a) gp and sse register operands            b) 64-bit operand size            c) extended control register operands
+Property    | Z0.Asm.RexPrefix.BitField                                             | Creates a bitfield over the rex prefix data structure and using the index/width            enumerations to specified the bit layout
+Method      | Z0.Asm.AsmQuery.Identify(Z0.Asm.MemorySize)                           | Specifies the segmented identity of a specified memory size
+Method      | Z0.Asm.AsmQuery.IsNearBranch(Z0.Asm.OpKind)                           | Determines whether the classified operand is a 16-bit, 32-bit or 64-bit near branch            Assessed respectively via the NearBranch16, NearBranch32 and NearBranch64 instruction attributes
+Method      | Z0.Asm.AsmQuery.IsFarBranch(Z0.Asm.OpKind)                            | Determines whether the classified operand is a 32-bit or 64-bit far branch            Assessed respectively via the FarBranch32 and FarBranch64 instruction attributes
+Method      | Z0.Asm.AsmQuery.IsBranch(Z0.Asm.OpKind)                               | Determines whether a classified operand is associated with a branching instruction
+Method      | Z0.Asm.AsmQuery.Summarize(Z0.Asm.AsmInstructionList)                  | Describes the instructions that comprise an instruction list
+Method      | Z0.Asm.AsmQuery.Summarize(Z0.Asm.AsmFunction)                         | Describes the instructions that comprise a function
+Method      | Z0.Asm.AsmQuery.IsRegister(Z0.Asm.OpKind)                             | Tests whether the the source operand kind is a register kind
+Method      | Z0.Asm.AsmQuery.RegisterInfo(Z0.Asm.Instruction,System.Int32)         | Gets the operand's register value. Use this property if the operand has kind <see cref="F:Z0.Asm.OpKind.Register" />
+Method      | Z0.Asm.ISemanticQuery.ImmInfo(Z0.Asm.Instruction,System.Int32)        | Extracts immediate information, if applicable, from an instruction operand
+Method      | Z0.Asm.ISemanticQuery.OperandKind(Z0.Asm.Instruction,System.Int32)    | Gets an operand's kind if it exists
+Method      | Z0.Asm.ISemanticQuery.ExtractImm(Z0.Asm.Instruction,System.Int32)     | Extracts an immediate operand from an instruction
+Method      | Z0.Asm.ISemanticQuery.MemInfo(Z0.Asm.Instruction,System.Int32)        | Extracts memory information, if applicable, from an instruction operand
+Method      | Z0.Asm.ISemanticQuery.RegisterInfo(Z0.Asm.Instruction,System.Int32)   | Extracts register information, should it exist, from an index-identified register operand
+Method      | Z0.Asm.ISemanticQuery.IsSegBase(Z0.Asm.OpKind)                        | Determines whether the classified operand is a segment of the form             seg:[di], seg:[edi], seg:[esi], seg:[rdi], seg:[rsi], seg:[si]            Relevant instruction attributes include: MemorySize, MemorySegment, SegmentPrefix
+Method      | Z0.Asm.ISemanticQuery.IsNearBranch(Z0.Asm.OpKind)                     | Determines whether the classified operand is a 16-bit, 32-bit or 64-bit near branch            Assessed respectively via the NearBranch16, NearBranch32 and NearBranch64 instruction attributes
+Method      | Z0.Asm.ISemanticQuery.IsFarBranch(Z0.Asm.OpKind)                      | Determines whether the classified operand is a 32-bit or 64-bit far branch            Assessed respectively via the FarBranch32 and FarBranch64 instruction attributes
+Method      | Z0.Asm.ISemanticQuery.IsBranch(Z0.Asm.OpKind)                         | Determines whether a classified operand is associated with a branching instruction
+Method      | Z0.Asm.ISemanticQuery.ImmWidth(Z0.Asm.OpKind)                         | Determines the size of a classified immediate operand, if applicable; otherwise, returns 0
+Method      | Z0.Asm.ISemanticQuery.IsSignedImm(Z0.Asm.OpKind)                      | Determines whether the classified operand a sign-extended immediate which may include:            An 8-bit value sign extended to 16 bits, accessed via the Immediate8to16 instruction attribute            An 8-bit value sign extended to 32 bits, accessed via Immediate8to32 instruction attribute            An 8-bit value sign extended to 64 bits, accessed via the Immediate8to64 instruction attribute            A 32-bit value sign extended to 64 bits, accessed via the Immediate32to64 instruction attribute
+Method      | Z0.Asm.ISemanticQuery.IsDirectImm(Z0.Asm.OpKind)                      | Determines whether the classified operand is an 8-bit, 16-bit, 32-bit or 64-bit constant            which are accessed respectively through the Immediate8, Immediate16, Immediate32, and Immediate64            instruction attributes
+Method      | Z0.Asm.ISemanticQuery.IsSpecialImm(Z0.Asm.OpKind)                     | Determines whether the classified operand is an 8-bit immediate            used by the enter, extrq, or insertq instructions            Accessed via the instruction attribute Immediate8_2nd
+Method      | Z0.Asm.ISemanticQuery.IsImm(Z0.Asm.OpKind)                            | Determines whether the classified operand is an immediate of some sort
+Method      | Z0.Asm.ISemanticQuery.IsRegister(Z0.Asm.OpKind)                       | Tests whether the the source operand kind is a register kind
+Method      | Z0.Asm.ISemanticQuery.IsMem(Z0.Asm.OpKind)                            | Determines whether the classified operand is some sort of memory
+Method      | Z0.Asm.ISemanticQuery.IsSegEs(Z0.Asm.OpKind)                          | Determines whether the classified operand is an ES ("extra") memory segment.            Possible choices include es:[di], es:[edi], es:[rdi]            Relevant instruction attributes inlude: MemorySize
+Method      | Z0.Asm.ISemanticQuery.IsMem64(Z0.Asm.OpKind)                          | Determines whether the classified operand is a 64-bit memory offset.             Relevant instruction attributes include:            MemoryAddress64, MemorySegment, SegmentPrefix, MemorySize
+Method      | Z0.Asm.ISemanticQuery.IsMemDirect(Z0.Asm.OpKind)                      | Determines whether the classified operand is direct memory.            Relevant instruction attributes include:             MemoryDisplSize, MemorySize, MemoryIndexScale, MemoryDisplacement, MemoryBase,             MemoryIndex, MemorySegment, SegmentPrefix
+Method      | Z0.Asm.ISemanticQuery.Summarize(Z0.Asm.AsmInstructionList)            | Describes the instructions that comprise an instruction list
+Method      | Z0.Asm.ISemanticQuery.Summarize(Z0.Asm.AsmFunction)                   | Describes the instructions that comprise a function
+Method      | Z0.Asm.ISemanticQuery.Operands(Z0.MemoryAddress,Z0.Asm.Instruction)   | Extracts operand instruction data
+Type        | Z0.Asm.Dsl.arg128                                                     | Defines a 128-bit oparand
+Type        | Z0.Asm.Dsl.arg16                                                      | Defines a 16-bit operand
+Type        | Z0.Asm.Dsl.arg256                                                     | Defines a 256-bit oparand
+Type        | Z0.Asm.Dsl.arg32                                                      | Defines a 32-bit oparand
+Type        | Z0.Asm.Dsl.arg512                                                     | Defines a 512-bit oparand
+Type        | Z0.Asm.Dsl.arg64                                                      | Defines a 64-bit oparand
+Type        | Z0.Asm.Dsl.arg8                                                       | Defines an 8-bit operand
+Type        | Z0.Asm.Dsl.cmd                                                        | Describes an instruction
+Type        | Z0.Asm.Dsl.cmd`1                                                      | Defines an instruction that accepts one argument
+Type        | Z0.Asm.Dsl.cmd`2                                                      | Defines an instruction that accepts two arguments
+Type        | Z0.Asm.Dsl.cmd`3                                                      | Defines an instruction that accepts three arguments
+Type        | Z0.Asm.CmdOpCode                                                      | Yet another way to view an op code
+Type        | Z0.Asm.ICmd                                                           | Defines facets common to all instructions without regard to arity
+Property    | Z0.Asm.ICmd.Args                                                      | The instruction operands
+Property    | Z0.Asm.ICmd.Code                                                      | The instruction op code
+Property    | Z0.Asm.ICmd.Arity                                                     | The number of arguments accepted by the operand
+Type        | Z0.Asm.ICmd`1                                                         | Characterizes an instruction reification
+Type        | Z0.Asm.ICmd`2                                                         | An instruction that accepts one operand
+Type        | Z0.Asm.ICmd`3                                                         | An instruction that accepts two operands
+Type        | Z0.Asm.ICmd`4                                                         | An instruction that accepts three operands
+Property    | Z0.Asm.IOperand.OpKind                                                | The operand sort
+Property    | Z0.Asm.IOperand`1.Value                                               | The operand value
+Type        | Z0.Asm.IRegOp                                                         | Characterizes a register
+Property    | Z0.Asm.IRegOp.Kind                                                    | The register's kind classifier
+Type        | Z0.Asm.IRegOp`2                                                       | Characterizes a width-parametric register reification
+Type        | Z0.Asm.IRegOp`3                                                       | Characterizes a width-parametric and state-parametric register reification
+Type        | Z0.Asm.IXmmRegOp`2                                                    | Characterizes a 128-bit vectorized register reification of parametric index
+Type        | Z0.Asm.IYmmRegOp`2                                                    | Characterizes 128-bit vectorized register reifications of parametric index
+Type        | Z0.Asm.IZmmRegOp`2                                                    | Characterizes 128-bit vectorized register reifications of parametric index
+Property    | Z0.Asm.IAsmInxsInfo.InstructionCode                                   | Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
+Property    | Z0.Asm.IAsmInxsInfo.UsedMemory                                        | Retrieves the used memory array as specified by the InstructionInfo type
+Property    | Z0.Asm.IAsmInxsInfo.UsedRegisters                                     | Captures the used register array as specified by the InstructionInfo type
+Property    | Z0.Asm.IAsmInxsInfo.Access                                            | Captures the op access array as specified by the InstructionInfo type
+Property    | Z0.Asm.IAsmInxsInfo.FlowInfo                                          | Computes flow information upon request
+Type        | Z0.Asm.IAsmInxsIp                                                     | Defines IP-related instruction aspects
+Type        | Z0.Asm.IAsmOperandKinds                                               | Defines instruciton operand kind designation aspects
+Type        | Z0.Asm.ICalInstruction                                                | Defines call-related instruction aspects
+Type        | Z0.Asm.IInstructionBranch                                             | Defines branch-related instruction aspects
+Type        | Z0.Asm.IInstructionBranching                                          | Aggregates call/jmp/branching instruction aspects
+Type        | Z0.Asm.IInstructionFlags                                              | Defines flag-related instruction aspects
+Type        | Z0.Asm.IImmAspects                                                    | Defines imm-related instruction aspects
+Property    | Z0.Asm.IInstructionInfo.FormattedInstruction                          | Captures the formatted view of the instruction
+Type        | Z0.Asm.IInstructionMasking                                            | Defines mask-related instruction aspects
+Type        | Z0.Asm.IJccAspects                                                    | Defines branch-related instruction aspects
+Type        | Z0.Asm.IJmpAspects                                                    | Defines branch-related instruction aspects
+Property    | Z0.Asm.Instruction.InstructionCode                                    | Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
+Property    | Z0.Asm.Instruction.FormattedInstruction                               | Captures the formatted view of the instruction
+Property    | Z0.Asm.Instruction.UsedMemory                                         | Retrieves the used memory array as specified by the InstructionInfo type
+Property    | Z0.Asm.Instruction.UsedRegisters                                      | Captures the used register array as specified by the InstructionInfo type
+Property    | Z0.Asm.Instruction.Access                                             | Captures the op access array as specified by the InstructionInfo type
+Property    | Z0.Asm.Instruction.FlowInfo                                           | Computes flow information upon request
+Method      | Z0.Asm.Instruction.Create(Z0.Asm.Code,Z0.Asm.MemoryOperand@)          | Creates an instruction
+Type        | Z0.Asm.InstructionInfo                                                | Contains information about an instruction, eg. read/written registers, read/written RFLAGS bits, CPUID feature bit, etc
+Property    | Z0.Asm.InstructionInfo.IsPrivileged                                   | true if this is a privileged instruction
+Property    | Z0.Asm.InstructionInfo.IsStackInstruction                             | true if this is an instruction that implicitly uses the stack pointer (SP/ESP/RSP), eg. call, push, pop, ret, etc.            See also <see cref="P:Z0.Asm.Instruction.StackPointerIncrement" />
+Property    | Z0.Asm.InstructionInfo.IsSaveRestoreInstruction                       | true if it's an instruction that saves or restores too many registers (eg. fxrstor, xsave, etc).            <see cref="!:GetUsedRegisters" /> won't return all read/written registers.
+Property    | Z0.Asm.InstructionInfo.Encoding                                       | Instruction encoding, eg. legacy, VEX, EVEX, ...
+Property    | Z0.Asm.InstructionInfo.CpuidFeatures                                  | Gets the CPU or CPUID feature flags
+Property    | Z0.Asm.InstructionInfo.FlowControl                                    | Flow control info
+Type        | Z0.Asm.MemoryOperand                                                  | Memory operand
+Field       | Z0.Asm.MemoryOperand.SegmentPrefix                                    | Segment override or <see cref="F:Z0.Asm.Register.None" />
+Field       | Z0.Asm.MemoryOperand.Base                                             | Base register or <see cref="F:Z0.Asm.Register.None" />
+Field       | Z0.Asm.MemoryOperand.Index                                            | Index register or <see cref="F:Z0.Asm.Register.None" />
+Field       | Z0.Asm.MemoryOperand.Scale                                            | Index register scale (1, 2, 4, or 8)
+Field       | Z0.Asm.MemoryOperand.Displacement                                     | Memory displacement
+Field       | Z0.Asm.MemoryOperand.DisplSize                                        | 0 (no displ), 1 (16/32/64-bit, but use 2/4/8 if it doesn't fit in a <see cref="T:System.SByte" />), 2 (16-bit), 4 (32-bit) or 8 (64-bit)
+Field       | Z0.Asm.MemoryOperand.IsBroadcast                                      | true if it's broadcasted memory (EVEX instructions)
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register,Z0.Asm.Register,System.Int32,System.Int32,System.Int32,System.Boolean,Z0.Asm.Register)| Constructor
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register,Z0.Asm.Register,System.Int32,System.Boolean,Z0.Asm.Register)| Constructor
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register,System.Int32,System.Int32,System.Boolean,Z0.Asm.Register)| Constructor
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register,System.Int32,System.Int32,System.Int32,System.Boolean,Z0.Asm.Register)| Constructor
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register,System.Int32,System.Boolean,Z0.Asm.Register)| Constructor
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register,Z0.Asm.Register,System.Int32,System.Int32,System.Int32)| Constructor
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register,Z0.Asm.Register,System.Int32)| Constructor
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register,System.Int32,System.Int32) | Constructor
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register,System.Int32,System.Int32,System.Int32)| Constructor
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register,System.Int32)              | Constructor
+Method      | Z0.Asm.MemoryOperand.#ctor(Z0.Asm.Register)                           | Constructor
+Type        | Z0.Asm.UsedMemory                                                     | A memory location used by an instruction
+Field       | Z0.Asm.UsedMemory.Formatted                                           | Captures the result of the ToString() method at the time of replication
+Field       | Z0.Asm.UsedMemory.Segment                                             | Effective segment register
+Field       | Z0.Asm.UsedMemory.Base                                                | The base register, if any
+Field       | Z0.Asm.UsedMemory.Index                                               | The index register, if any
+Field       | Z0.Asm.UsedMemory.Scale                                               | Index scale (1, 2, 4 or 8)
+Field       | Z0.Asm.UsedMemory.Displacement                                        | Displacement
+Field       | Z0.Asm.UsedMemory.MemorySize                                          | Size of location
+Field       | Z0.Asm.UsedMemory.Access                                              | Memory access
+Type        | Z0.Asm.UsedRegister                                                   | A register used by an instruction
+Property    | Z0.Asm.UsedRegister.Register                                          | Register
+Property    | Z0.Asm.UsedRegister.Access                                            | Register access
+Method      | Z0.Asm.UsedRegister.#ctor(Z0.Asm.Register,Z0.Asm.OpAccess)            | Constructor
+Method      | Z0.Asm.UsedRegister.ToString                                          | ToString()

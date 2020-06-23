@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Gone;
-
     public class t_bb_disable : t_bitblock<t_bb_disable>
     {
         public void bb_disable_16x16()

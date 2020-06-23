@@ -12,6 +12,18 @@ namespace Z0
     partial struct asci
     {        
         [MethodImpl(Inline), Op]
+        public static unsafe void copy(in asci2 src, ref byte dst)  
+            => As.cast<byte,ushort>(dst) = src.Storage;
+
+        [MethodImpl(Inline), Op]
+        public static unsafe void copy(in asci4 src, ref byte dst)  
+            => As.cast<byte,uint>(dst) = src.Storage;
+
+        [MethodImpl(Inline), Op]
+        public static unsafe void copy(in asci8 src, ref byte dst)  
+            => As.cast<byte,ulong>(dst) = src.Storage;
+            
+        [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci16 src, ref byte dst)
             => SymBits.vstore(src.Storage, ref dst);            
 

@@ -68,6 +68,21 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static unsafe void vstore(Vector128<ushort> src, ref ushort dst)
+            => Store(ptr(ref dst), src);            
+
+        [MethodImpl(Inline), Op]
+        public static unsafe void vstore(Vector256<ushort> src, ref ushort dst)
+            => Store(ptr(ref dst), src);            
+
+        [MethodImpl(Inline), Op]
+        public static unsafe void vstore(Vector512<ushort> src, ref ushort dst)
+        {
+            vstore(src.Lo, ref dst);
+            vstore(src.Hi, ref Unsafe.Add(ref dst, 16));   
+        }
+
+        [MethodImpl(Inline), Op]
         public static unsafe void vstore(Vector128<byte> src, Span<byte> dst)
             => vstore(src, ref head(dst));
 

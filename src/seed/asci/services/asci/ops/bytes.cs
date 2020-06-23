@@ -30,26 +30,14 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci16 src)
-        {                        
-            var dst = ByteBlocks.u8s(ByteBlocks.alloc(n16));
-            SymBits.vstore(src.Storage, ref Root.head(dst));
-            return dst;
-        }
+            => As.bytes(src);
 
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci32 src)
-        {                        
-            var dst = ByteBlocks.u8s(ByteBlocks.alloc(n32));
-            SymBits.vstore(src.Storage, ref Root.head(dst));
-            return dst;
-        }
+            => As.bytes(src);
 
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci64 src)
-        {                        
-            var dst = ByteBlocks.u8s(ByteBlocks.alloc(n64));
-            SymBits.vstore(src.Storage, ref Root.head(dst));
-            return dst;
-        }        
+            => As.bytes(src);
     }
 }

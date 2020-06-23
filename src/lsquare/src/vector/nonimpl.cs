@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline), NonImpl, Closures(UnsignedInts)]
         public static void nonimpl<T>(W128 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vnonimpl(w, in a, in b), ref z);
+                => VStore.vsave(vnonimpl(w, in a, in b), ref z);
 
         [MethodImpl(Inline), NonImpl, Closures(UnsignedInts)]
         public static void nonimpl<T>(W256 w, in T a, in T b, ref T z)

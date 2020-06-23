@@ -1,0 +1,424 @@
+Method      | Z0.math.abs(System.SByte)                                             | Computes the absolute value of the source without branching
+Method      | Z0.math.abs(System.Int16)                                             | Computes the absolute value of the source without branching
+Method      | Z0.math.abs(System.Int32)                                             | Computes the absolute value of the source without branching
+Method      | Z0.math.abs(System.Int64)                                             | Computes the absolute value of the source without branching
+Method      | Z0.math.avgz(System.Byte,System.Byte)                                 | Computes the average of the operands, rounding toward zero
+Method      | Z0.math.avgz(System.UInt16,System.UInt16)                             | Takes the average of the operands, rounding toward zero
+Method      | Z0.math.avgz(System.UInt32,System.UInt32)                             | Takes the average of the operands, rounding toward zero
+Method      | Z0.math.avgz(System.UInt64,System.UInt64)                             | Takes the average of the operands, rounding toward zero
+Method      | Z0.math.avgi(System.Byte,System.Byte)                                 | Takes the average of the operands, rounding toward infinity
+Method      | Z0.math.avgi(System.UInt16,System.UInt16)                             | Takes the average of the operands, rounding toward infinity
+Method      | Z0.math.avgi(System.UInt32,System.UInt32)                             | Takes the average of the operands, rounding toward infinity
+Method      | Z0.math.avgi(System.UInt64,System.UInt64)                             | Takes the average of the operands, rounding toward infinity
+Method      | Z0.math.clamp(System.SByte,System.SByte)                              | Clamps the source value to an inclusive maximum
+Method      | Z0.math.clamp(System.Byte,System.Byte)                                | Clamps the source value to an inclusive maximum
+Method      | Z0.math.clamp(System.Int16,System.Int16)                              | Clamps the source value to an inclusive maximum
+Method      | Z0.math.clamp(System.UInt16,System.UInt16)                            | Clamps the source value to an inclusive maximum
+Method      | Z0.math.clamp(System.Int32,System.Int32)                              | Clamps the source value to an inclusive maximum
+Method      | Z0.math.clamp(System.UInt32,System.UInt32)                            | Clamps the source value to an inclusive maximum
+Method      | Z0.math.clamp(System.Int64,System.Int64)                              | Clamps the source value to an inclusive maximum
+Method      | Z0.math.clamp(System.UInt64,System.UInt64)                            | Clamps the source value to an inclusive maximum
+Method      | Z0.math.dec(System.SByte)                                             | Decrements the source value
+Method      | Z0.math.dec(System.Byte)                                              | Decrements the source value
+Method      | Z0.math.dec(System.Int16)                                             | Decrements the source value
+Method      | Z0.math.dec(System.UInt16)                                            | Decrements the source value
+Method      | Z0.math.dec(System.Int32)                                             | Decrements the source value
+Method      | Z0.math.dec(System.UInt32)                                            | Decrements the source value
+Method      | Z0.math.dec(System.Int64)                                             | Decrements the source value
+Method      | Z0.math.dec(System.UInt64)                                            | Decrements the source value
+Method      | Z0.math.dist(System.Byte,System.Byte)                                 | Computes the nonnegative distance between two numbers
+Method      | Z0.math.dist(System.SByte,System.SByte)                               | Computes the nonnegative distance between two numbers
+Method      | Z0.math.dist(System.Int16,System.Int16)                               | Computes the nonnegative distance between two numbers
+Method      | Z0.math.dist(System.UInt16,System.UInt16)                             | Computes the nonnegative distance between two numbers
+Method      | Z0.math.dist(System.Int32,System.Int32)                               | Computes the nonnegative distance between two numbers
+Method      | Z0.math.dist(System.UInt32,System.UInt32)                             | Computes the nonnegative distance between two numbers
+Method      | Z0.math.dist(System.Int64,System.Int64)                               | Computes the nonnegative distance between two numbers
+Method      | Z0.math.dist(System.UInt64,System.UInt64)                             | Computes the nonnegative distance between two numbers
+Method      | Z0.math.divmod(System.SByte,System.SByte)                             | Computes dst = (div(a,b), mod(a,b))
+Method      | Z0.math.divmod(System.Byte,System.Byte)                               | Computes dst = (div(a,b), mod(a,b))
+Method      | Z0.math.divmod(System.Int16,System.Int16)                             | Computes dst = (div(a,b), mod(a,b))
+Method      | Z0.math.divmod(System.UInt16,System.UInt16)                           | Computes dst = (div(a,b), mod(a,b))
+Method      | Z0.math.divmod(System.Int32,System.Int32)                             | Computes dst = (div(a,b), mod(a,b))
+Method      | Z0.math.divmod(System.UInt32,System.UInt32)                           | Computes dst = (div(a,b), mod(a,b))
+Method      | Z0.math.divmod(System.Int64,System.Int64)                             | Computes dst = (div(a,b), mod(a,b))
+Method      | Z0.math.divmod(System.UInt64,System.UInt64)                           | Computes dst = (div(a,b), mod(a,b))
+Method      | Z0.math.gcdbin(System.UInt32,System.UInt32)                           | Binary gcd, Wikipedia version
+Method      | Z0.math.gcdbin(System.UInt64,System.UInt64)                           | Binary gcd, Wikipedia version
+Method      | Z0.math.inc(System.SByte)                                             | Increments the source value
+Method      | Z0.math.inc(System.Byte)                                              | Increments the source value
+Method      | Z0.math.inc(System.Int16)                                             | Increments the source value
+Method      | Z0.math.inc(System.UInt16)                                            | Increments the source value
+Method      | Z0.math.inc(System.Int32)                                             | Increments the source value
+Method      | Z0.math.inc(System.UInt32)                                            | Increments the source value
+Method      | Z0.math.inc(System.Int64)                                             | Increments the source value
+Method      | Z0.math.inc(System.UInt64)                                            | Increments the source value
+Method      | Z0.math.ispow2(System.SByte)                                          | Returns 1 if the source value is a power of 2 and 0 otherwise
+Method      | Z0.math.ispow2(System.Byte)                                           | Returns 1 if the source value is a power of 2 and 0 otherwise
+Method      | Z0.math.ispow2(System.Int16)                                          | Returns 1 if the source value is a power of 2 and 0 otherwise
+Method      | Z0.math.ispow2(System.UInt16)                                         | Returns 1 if the source value is a power of 2 and 0 otherwise
+Method      | Z0.math.ispow2(System.Int32)                                          | Returns 1 if the source value is a power of 2 and 0 otherwise
+Method      | Z0.math.ispow2(System.UInt32)                                         | Returns 1 if the source value is a power of 2 and 0 otherwise
+Method      | Z0.math.ispow2(System.Int64)                                          | Returns 1 if the source value is a power of 2 and 0 otherwise
+Method      | Z0.math.ispow2(System.UInt64)                                         | Returns 1 if the source value is a power of 2 and 0 otherwise
+Method      | Z0.math.log2(System.Byte)                                             | Computes floor(log(src,2))
+Method      | Z0.math.log2(System.UInt16)                                           | Computes floor(log(src,2))
+Method      | Z0.math.log2(System.UInt32)                                           | Computes floor(log(src,2))
+Method      | Z0.math.log2(System.UInt64)                                           | Computes floor(log(src,2))
+Method      | Z0.math.mod(System.SByte,System.SByte)                                | Computes b := a % m
+Method      | Z0.math.mod(System.Byte,System.Byte)                                  | Computes b := a % m
+Method      | Z0.math.mod(System.Int16,System.Int16)                                | Computes b := a % m
+Method      | Z0.math.mod(System.UInt16,System.UInt16)                              | Computes b := a % m
+Method      | Z0.math.mod(System.Int32,System.Int32)                                | Computes b := a % m
+Method      | Z0.math.mod(System.UInt32,System.UInt32)                              | Computes b := a % m
+Method      | Z0.math.mod(System.Int64,System.Int64)                                | Computes b := a % m
+Method      | Z0.math.mod(System.UInt64,System.UInt64)                              | Computes b := a % m
+Method      | Z0.math.modmul(System.SByte,System.SByte,System.SByte)                | Computes z := (a*b) mod m
+Method      | Z0.math.modmul(System.Byte,System.Byte,System.Byte)                   | Computes z := (a*b) mod m
+Method      | Z0.math.modmul(System.Int16,System.Int16,System.Int16)                | Computes z := (a*b) mod m
+Method      | Z0.math.modmul(System.UInt16,System.UInt16,System.UInt16)             | Computes z := (a*b) mod m
+Method      | Z0.math.modmul(System.Int32,System.Int32,System.Int32)                | Computes z := (a*b) mod m
+Method      | Z0.math.modmul(System.UInt32,System.UInt32,System.UInt32)             | Computes z := (a*b) mod m
+Method      | Z0.math.modmul(System.Int64,System.Int64,System.Int64)                | Computes z := (a*b) mod m
+Method      | Z0.math.modmul(System.UInt64,System.UInt64,System.UInt64)             | Computes z := (a*b) mod m
+Method      | Z0.math.mul32x64(Z0.Pair{System.UInt32}@,Z0.Pair{System.UInt32}@)     | Computes the full 64-bit product between two unsigned 32-bit integers
+Method      | Z0.math.mul64x128(Z0.Pair{System.UInt64}@,Z0.Pair{System.UInt64}@)    | Computes the full 128-bit product between two unsigned 64-bit integers
+Method      | Z0.math.mul32x64(Z0.Pair{System.UInt32}@)                             | Computes the full 64-bit product between two unsigned 32-bit integers
+Method      | Z0.math.mul64x128(Z0.Pair{System.UInt64}@)                            | Computes the full 128-bit product between two unsigned 64-bit integers
+Method      | Z0.math.mul64x128(System.UInt64@,System.UInt64@,Z0.Pair{System.UInt64}@)| Computes the full 128-bit product between two unsigned 64-bit integers
+Method      | Z0.math.mul64x128(System.ReadOnlySpan{System.UInt64},System.ReadOnlySpan{System.UInt64},System.Span{Z0.Pair{System.UInt64}})| Computes the full 128-bit products between corresponding 64-bit span elements
+Method      | Z0.math.mul64x128(System.ReadOnlySpan{System.UInt64},System.UInt64,System.Span{Z0.Pair{System.UInt64}})| Computes the full 128-bit products between 64-bit span elements and a 64-bit scalar
+Method      | Z0.math.negate(System.SByte)                                          | Negates the source value
+Method      | Z0.math.negate(System.Byte)                                           | Computes the two's complement negation of the source value            For example, -3 = -0b00000010 = 0b11111101
+Method      | Z0.math.negate(System.Int16)                                          | Negates the source value
+Method      | Z0.math.negate(System.UInt16)                                         | Computes the two's complement negation of the source value
+Method      | Z0.math.negate(System.Int32)                                          | Negates the source value
+Method      | Z0.math.negate(System.UInt32)                                         | Computes the two's complement negation of the source value
+Method      | Z0.math.negate(System.Int64)                                          | Negates the source value
+Method      | Z0.math.negate(System.UInt64)                                         | Computes the two's complement negation of the source value
+Method      | Z0.math.negate(System.Single)                                         | Negates the source value
+Method      | Z0.math.negate(System.Double)                                         | Negates the source value
+Method      | Z0.math.even(System.SByte)                                            | Returns true if the test value is even by examining the least significant bit
+Method      | Z0.math.even(System.Byte)                                             | Returns true if the test value is even by examining the least significant bit
+Method      | Z0.math.even(System.Int16)                                            | Returns true if the test value is even by examining the least significant bit
+Method      | Z0.math.even(System.Int32)                                            | Returns true if the test value is even by examining the least significant bit
+Method      | Z0.math.even(System.UInt16)                                           | Returns true if the test value is even by examining the least significant bit
+Method      | Z0.math.even(System.UInt32)                                           | Returns true if the test value is even by examining the least significant bit
+Method      | Z0.math.even(System.Int64)                                            | Returns true if the test value is even by examining the least significant bit
+Method      | Z0.math.even(System.UInt64)                                           | Returns true if the test value is even by examining the least significant bit
+Method      | Z0.math.odd(System.SByte)                                             | Returns true if the test value is odd by examining the least significant bit
+Method      | Z0.math.odd(System.Byte)                                              | Returns true if the test value is odd by examining the least significant bit
+Method      | Z0.math.odd(System.Int16)                                             | Returns true if the test value is odd by examining the least significant bit
+Method      | Z0.math.odd(System.UInt16)                                            | Returns true if the test value is odd by examining the least significant bit
+Method      | Z0.math.odd(System.Int32)                                             | Returns true if the test value is odd by examining the least significant bit
+Method      | Z0.math.odd(System.UInt32)                                            | Returns true if the test value is odd by examining the least significant bit
+Method      | Z0.math.odd(System.Int64)                                             | Returns true if the test value is odd by examining the least significant bit
+Method      | Z0.math.odd(System.UInt64)                                            | Returns true if the test value is odd by examining the least significant bit
+Method      | Z0.math.cimpl(System.SByte,System.SByte)                              | Computes the converse implication c := ~a | b for operands a and b
+Method      | Z0.math.cimpl(System.Byte,System.Byte)                                | Computes the converse implication c := ~a | b for operands a and b
+Method      | Z0.math.cimpl(System.Int16,System.Int16)                              | Computes the converse implication c := ~a | b for operands a and b
+Method      | Z0.math.cimpl(System.UInt16,System.UInt16)                            | Computes the converse implication c := ~a | b for operands a and b
+Method      | Z0.math.cimpl(System.Int32,System.Int32)                              | Computes the converse implication c := ~a | b for operands a and b
+Method      | Z0.math.cimpl(System.UInt32,System.UInt32)                            | Computes the converse implication c := ~a | b for operands a and b
+Method      | Z0.math.cimpl(System.Int64,System.Int64)                              | Computes the converse implication c := ~a | b for operands a and b
+Method      | Z0.math.cimpl(System.UInt64,System.UInt64)                            | Computes the converse implication c := ~a | b for operands a and b
+Method      | Z0.math.impl(System.SByte,System.SByte)                               | Computes the material implication c := a | ~b for operands a and b
+Method      | Z0.math.impl(System.Byte,System.Byte)                                 | Computes the material implication c := a | ~b for operands a and b
+Method      | Z0.math.impl(System.Int16,System.Int16)                               | Computes the material implication c := a | ~b for operands a and b
+Method      | Z0.math.impl(System.UInt16,System.UInt16)                             | Computes the material implication c := a | ~b for operands a and b
+Method      | Z0.math.impl(System.Int32,System.Int32)                               | Computes the material implication c := a | ~b for operands a and b
+Method      | Z0.math.impl(System.UInt32,System.UInt32)                             | Computes the material implication c := a | ~b for operands a and b
+Method      | Z0.math.impl(System.Int64,System.Int64)                               | Computes the material implication c := a | ~b for operands a and b
+Method      | Z0.math.impl(System.UInt64,System.UInt64)                             | Computes the material implication c := a | ~b for operands a and b
+Method      | Z0.math.nor(System.SByte,System.SByte)                                | Computes the bitwise nor c := ~(a | b) for operands a and b
+Method      | Z0.math.nor(System.Byte,System.Byte)                                  | Computes the bitwise nor c := ~(a | b) for operands a and b
+Method      | Z0.math.nor(System.Int16,System.Int16)                                | Computes the bitwise nor c := ~(a | b) for operands a and b
+Method      | Z0.math.nor(System.UInt16,System.UInt16)                              | Computes the bitwise nor c := ~(a | b) for operands a and b
+Method      | Z0.math.nor(System.Int32,System.Int32)                                | Computes the bitwise nor c := ~(a | b) for operands a and b
+Method      | Z0.math.nor(System.UInt32,System.UInt32)                              | Computes the bitwise nor c := ~(a | b) for operands a and b
+Method      | Z0.math.nor(System.Int64,System.Int64)                                | Computes the bitwise nor c := ~(a | b) for operands a and b
+Method      | Z0.math.nor(System.UInt64,System.UInt64)                              | Computes the bitwise nor c := ~(a | b) for operands a and b
+Method      | Z0.math.sal(System.SByte,System.Byte)                                 | Shifts the source value arithmetically leftwards by a specified offset
+Method      | Z0.math.sal(System.Byte,System.Byte)                                  | Shifts the source value arithmetically leftwards by a specified offset
+Method      | Z0.math.sal(System.Int16,System.Byte)                                 | Shifts the source value arithmetically leftwards by a specified offset
+Method      | Z0.math.sal(System.UInt16,System.Byte)                                | Shifts the source value arithmetically leftwards by a specified offset
+Method      | Z0.math.sal(System.Int32,System.Byte)                                 | Shifts the source value arithmetically leftwards by a specified offset
+Method      | Z0.math.sal(System.UInt32,System.Byte)                                | Shifts the source value arithmetically leftwards by a specified offset
+Method      | Z0.math.sal(System.Int64,System.Byte)                                 | Shifts the source value arithmetically leftwards by a specified offset
+Method      | Z0.math.sal(System.UInt64,System.Byte)                                | Shifts the source value arithmetically leftwards by a specified offset
+Method      | Z0.math.sra(System.SByte,System.Byte)                                 | Computes the arithmetic right shift z := src &gt;&gt; offset
+Method      | Z0.math.sra(System.Byte,System.Byte)                                  | Computes the arithmetic right shift z := src &gt;&gt; offset
+Method      | Z0.math.sra(System.Int16,System.Byte)                                 | Computes the arithmetic right shift z := src &gt;&gt; offset
+Method      | Z0.math.sra(System.UInt16,System.Byte)                                | Computes the arithmetic right shift z := src &gt;&gt; offset
+Method      | Z0.math.sra(System.Int32,System.Byte)                                 | Computes the arithmetic right shift z := src &gt;&gt; offset
+Method      | Z0.math.sra(System.UInt32,System.Byte)                                | Computes the arithmetic right shift z := src &gt;&gt; offset
+Method      | Z0.math.sra(System.Int64,System.Byte)                                 | Computes the arithmetic right shift z := src &gt;&gt; offset
+Method      | Z0.math.sra(System.UInt64,System.Byte)                                | Computes the arithmetic right shift z := src &gt;&gt; offset
+Method      | Z0.math.sll(System.SByte,System.Byte)                                 | Applies a logical left shift to the source value
+Method      | Z0.math.sll(System.Byte,System.Byte)                                  | Applies a logical left shift to the source value
+Method      | Z0.math.sll(System.Int16,System.Byte)                                 | Applies a logical left shift to the source value
+Method      | Z0.math.sll(System.UInt16,System.Byte)                                | Applies a logical left shift to the source value
+Method      | Z0.math.sll(System.Int32,System.Byte)                                 | Applies a logical left shift to the source value
+Method      | Z0.math.sll(System.UInt32,System.Byte)                                | Applies a logical left shift to the source value
+Method      | Z0.math.sll(System.Int64,System.Byte)                                 | Applies a logical left shift to the source value
+Method      | Z0.math.sll(System.UInt64,System.Byte)                                | Applies a logical left shift to the source value
+Method      | Z0.math.srl(System.SByte,System.Byte)                                 | Applies a logical right shift to the source value
+Method      | Z0.math.srl(System.Byte,System.Byte)                                  | Applies a logical right shift to the source value
+Method      | Z0.math.srl(System.Int16,System.Byte)                                 | Applies a logical right shift to the source value
+Method      | Z0.math.srl(System.UInt16,System.Byte)                                | Applies a logical right shift to the source value
+Method      | Z0.math.srl(System.Int32,System.Byte)                                 | Applies a logical right shift to the source value
+Method      | Z0.math.srl(System.UInt32,System.Byte)                                | Applies a logical right shift to the source value
+Method      | Z0.math.srl(System.Int64,System.Byte)                                 | Applies a logical right shift to the source value
+Method      | Z0.math.srl(System.UInt64,System.Byte)                                | Applies a logical right shift to the source value
+Method      | Z0.math.xorsr(System.Byte,System.Byte)                                | Computes a^(a &gt;&gt; offset)
+Method      | Z0.math.xorsr(System.SByte,System.Byte)                               | Computes a^(a &gt;&gt; offset)
+Method      | Z0.math.xorsr(System.Int16,System.Byte)                               | Computes a^(a &gt;&gt; offset)
+Method      | Z0.math.xorsr(System.UInt16,System.Byte)                              | Computes a^(a &gt;&gt; offset)
+Method      | Z0.math.xorsr(System.Int32,System.Byte)                               | Computes a^(a &gt;&gt; offset)
+Method      | Z0.math.xorsr(System.UInt32,System.Byte)                              | Computes a^(a &gt;&gt; offset)
+Method      | Z0.math.xorsr(System.Int64,System.Byte)                               | Computes a^(a &gt;&gt; offset)
+Method      | Z0.math.xorsr(System.UInt64,System.Byte)                              | Computes a^(a &gt;&gt; offset)
+Method      | Z0.math.eq(System.SByte,System.SByte)                                 | Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+Method      | Z0.math.eq(System.Byte,System.Byte)                                   | Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+Method      | Z0.math.eq(System.Int16,System.Int16)                                 | Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+Method      | Z0.math.eq(System.UInt16,System.UInt16)                               | Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+Method      | Z0.math.eq(System.Int32,System.Int32)                                 | Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+Method      | Z0.math.eq(System.UInt32,System.UInt32)                               | Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+Method      | Z0.math.eq(System.Int64,System.Int64)                                 | Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+Method      | Z0.math.eq(System.UInt64,System.UInt64)                               | Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+Method      | Z0.math.eqb(System.SByte,System.SByte)                                | Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+Method      | Z0.math.eqb(System.Byte,System.Byte)                                  | Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+Method      | Z0.math.eqb(System.Int16,System.Int16)                                | Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+Method      | Z0.math.eqb(System.UInt16,System.UInt16)                              | Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+Method      | Z0.math.eqb(System.Int32,System.Int32)                                | Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+Method      | Z0.math.eqb(System.UInt32,System.UInt32)                              | Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+Method      | Z0.math.eqb(System.Int64,System.Int64)                                | Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+Method      | Z0.math.eqb(System.UInt64,System.UInt64)                              | Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+Method      | Z0.math.eqz(System.SByte,System.SByte)                                | Defines the operator eqz(a,b) := a == b ? Min : Zero
+Method      | Z0.math.eqz(System.Byte,System.Byte)                                  | Defines the operator eqz(a,b) := a == b ? Min : Zero
+Method      | Z0.math.eqz(System.Int16,System.Int16)                                | Defines the operator eqz(a,b) := a == b ? Min : Zero
+Method      | Z0.math.eqz(System.UInt16,System.UInt16)                              | Defines the operator eqz(a,b) := a == b ? Min : Zero
+Method      | Z0.math.eqz(System.Int32,System.Int32)                                | Defines the operator eqz(a,b) := a == b ? Min : Zero
+Method      | Z0.math.eqz(System.UInt32,System.UInt32)                              | Defines the operator eqz(a,b) := a == b ? Min : Zero
+Method      | Z0.math.eqz(System.Int64,System.Int64)                                | Defines the operator eqz(a,b) := a == b ? Min : Zero
+Method      | Z0.math.eqz(System.UInt64,System.UInt64)                              | Defines the operator eqz(a,b) := a == b ? Min : Zero
+Method      | Z0.math.gt(System.SByte,System.SByte)                                 | Defines the test gt:bit := a &gt; b, succeeding if the left operand is larger than the right operand
+Method      | Z0.math.gt(System.Byte,System.Byte)                                   | Defines the test gt:bit := a &gt; b, succeeding if the left operand is larger than the right operand
+Method      | Z0.math.gt(System.Int16,System.Int16)                                 | Defines the test gt:bit := a &gt; b, succeeding if the left operand is larger than the right operand
+Method      | Z0.math.gt(System.UInt16,System.UInt16)                               | Defines the test gt:bit := a &gt; b, succeeding if the left operand is larger than the right operand
+Method      | Z0.math.gt(System.Int32,System.Int32)                                 | Defines the test gt:bit := a &gt; b, succeeding if the left operand is larger than the right operand
+Method      | Z0.math.gt(System.UInt32,System.UInt32)                               | Defines the test gt:bit := a &gt; b, succeeding if the left operand is larger than the right operand
+Method      | Z0.math.gt(System.Int64,System.Int64)                                 | Defines the test gt:bit := a &gt; b, succeeding if the left operand is larger than the right operand
+Method      | Z0.math.gt(System.UInt64,System.UInt64)                               | Defines the test gt:bit := a &gt; b, succeeding if the left operand is larger than the right operand
+Method      | Z0.math.gteq(System.SByte,System.SByte)                               | Defines the test gt:bit := a &gt;= b, succeeding if the first operand is larger than or equal to the second
+Method      | Z0.math.gteq(System.Byte,System.Byte)                                 | Defines the test gt:bit := a &gt;= b, succeeding if the first operand is larger than or equal to the second
+Method      | Z0.math.gteq(System.Int16,System.Int16)                               | Defines the test gt:bit := a &gt;= b, succeeding if the first operand is larger than or equal to the second
+Method      | Z0.math.gteq(System.UInt16,System.UInt16)                             | Defines the test gt:bit := a &gt;= b, succeeding if the first operand is larger than or equal to the second
+Method      | Z0.math.gteq(System.Int32,System.Int32)                               | Defines the test gt:bit := a &gt;= b, succeeding if the first operand is larger than or equal to the second
+Method      | Z0.math.gteq(System.UInt32,System.UInt32)                             | Defines the test gt:bit := a &gt;= b, succeeding if the first operand is larger than or equal to the second
+Method      | Z0.math.gteq(System.Int64,System.Int64)                               | Defines the test gt:bit := a &gt;= b, succeeding if the first operand is larger than or equal to the second
+Method      | Z0.math.gteq(System.UInt64,System.UInt64)                             | Defines the test gt:bit := a &gt;= b, succeeding if the first operand is larger than or equal to the second
+Method      | Z0.math.negative(System.SByte)                                        | Returns true if the source value is less than zero, false otherwise
+Method      | Z0.math.negative(System.Int16)                                        | Returns true if the source value is less than zero, false otherwise
+Method      | Z0.math.negative(System.Int32)                                        | Returns true if the source value is less than zero, false otherwise
+Method      | Z0.math.negative(System.Int64)                                        | Returns true if the source value is less than zero, false otherwise
+Method      | Z0.math.neq(System.SByte,System.SByte)                                | Defines the test neq:bit := a != b, succeeding if the operands are not equal
+Method      | Z0.math.neq(System.Byte,System.Byte)                                  | Defines the test neq:bit := a != b, succeeding if the operands are not equal
+Method      | Z0.math.neq(System.Int16,System.Int16)                                | Defines the test neq:bit := a != b, succeeding if the operands are not equal
+Method      | Z0.math.neq(System.UInt16,System.UInt16)                              | Defines the test neq:bit := a != b, succeeding if the operands are not equal
+Method      | Z0.math.neq(System.Int32,System.Int32)                                | Defines the test neq:bit := a != b, succeeding if the operands are not equal
+Method      | Z0.math.neq(System.UInt32,System.UInt32)                              | Defines the test neq:bit := a != b, succeeding if the operands are not equal
+Method      | Z0.math.neq(System.Int64,System.Int64)                                | Defines the test neq:bit := a != b, succeeding if the operands are not equal
+Method      | Z0.math.neq(System.UInt64,System.UInt64)                              | Defines the test neq:bit := a != b, succeeding if the operands are not equal
+Method      | Z0.math.nonz(System.SByte,System.SByte)                               | Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate             value if the nonz test succeeds and the source value otherwise
+Method      | Z0.math.nonz(System.Byte,System.Byte)                                 | Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate             value if the nonz test succeeds and the source value otherwise
+Method      | Z0.math.nonz(System.Int16,System.Int16)                               | Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate             value if the nonz test succeeds and the source value otherwise
+Method      | Z0.math.nonz(System.UInt16,System.UInt16)                             | Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate             value if the nonz test succeeds and the source value otherwise
+Method      | Z0.math.nonz(System.Int32,System.Int32)                               | Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate             value if the nonz test succeeds and the source value otherwise
+Method      | Z0.math.nonz(System.UInt32,System.UInt32)                             | Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate             value if the nonz test succeeds and the source value otherwise
+Method      | Z0.math.nonz(System.Int64,System.Int64)                               | Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate             value if the nonz test succeeds and the source value otherwise
+Method      | Z0.math.nonz(System.UInt64,System.UInt64)                             | Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate             value if the nonz test succeeds and the source value otherwise
+Method      | Z0.math.nonz(System.SByte)                                            | Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+Method      | Z0.math.nonz(System.Byte)                                             | Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+Method      | Z0.math.nonz(System.Int16)                                            | Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+Method      | Z0.math.nonz(System.UInt16)                                           | Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+Method      | Z0.math.nonz(System.Int32)                                            | Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+Method      | Z0.math.nonz(System.UInt32)                                           | Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+Method      | Z0.math.nonz(System.Int64)                                            | Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+Method      | Z0.math.nonz(System.UInt64)                                           | Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+Method      | Z0.math.positive(System.SByte)                                        | Returns true if the source value is greater than zero, false otherwise
+Method      | Z0.math.positive(System.Byte)                                         | Returns true if the source value is greater than zero, false otherwise
+Method      | Z0.math.positive(System.Int16)                                        | Returns true if the source value is greater than zero, false otherwise
+Method      | Z0.math.positive(System.UInt16)                                       | Returns true if the source value is greater than zero, false otherwise
+Method      | Z0.math.positive(System.Int32)                                        | Returns true if the source value is greater than zero, false otherwise
+Method      | Z0.math.positive(System.UInt32)                                       | Returns true if the source value is greater than zero, false otherwise
+Method      | Z0.math.positive(System.Int64)                                        | Returns true if the source value is greater than zero, false otherwise
+Method      | Z0.math.positive(System.UInt64)                                       | Returns true if the source value is greater than zero, false otherwise
+Field       | Z0.FpErrorMode.Raise                                                  | Raise exceptions upon error
+Field       | Z0.FpErrorMode.Suppress                                               | Suppress exceptions upon error
+Field       | Z0.FpRoundDir.Default                                                 | _MM_FROUND_TO_NEAREST_INT, the default mode effects rounding to the nearest integer
+Field       | Z0.FpRoundDir.NegInf                                                  | _MM_FROUND_TO_NEG_INF, Round toward negative infinity
+Field       | Z0.FpRoundDir.PosInf                                                  | _MM_FROUND_TO_POS_INF, Round toward positive infinity
+Field       | Z0.FpRoundDir.Zero                                                    | _MM_FROUND_TO_ZERO, round toward 0
+Field       | Z0.FpRoundDir.Current                                                 | _MM_FROUND_CUR_DIRECTION, round toward the current direction as specified by __MM_SET_ROUNDING_MODE
+Field       | Z0.FpRoundDir.Ceil                                                    | _MM_FROUND_CEIL, round toward positive infinity and do not suppress exceptions
+Field       | Z0.FpRoundDir.Floor                                                   | _MM_FROUND_FLOOR, round toward negative infinity and do not suppress exceptions
+Field       | Z0.FpRoundDir.Trunc                                                   | _MM_FROUND_TRUNC, Round toward zero and do not supress exceptions
+Field       | Z0.FpRoundDir.Nearby                                                  | _MM_FROUND_NEARBYINT, round toward the current direction and suppress exceptions
+Type        | Z0.FpCmpMode                                                          | Floating point comparison mode
+Field       | Z0.FpCmpMode.EQ_OQ                                                    | 0: ordered, equal, non-signaling
+Field       | Z0.FpCmpMode.OrderedEqualNonSignaling                                 | Overly-verbose alias for EQ_OQ
+Field       | Z0.FpCmpMode.LT_OS                                                    | 1: ordered, less than, signaling
+Field       | Z0.FpCmpMode.OrderedLessThanSignaling                                 | Overly-verbose alias for LT_OS
+Field       | Z0.FpCmpMode.LE_OS                                                    | 2: ordered, less than or equal, signaling
+Field       | Z0.FpCmpMode.OrderedLessThanOrEqualSignaling                          | Overly-verbose alias for LE_OS
+Field       | Z0.FpCmpMode.UNORD_Q                                                  | 3: unordered, non-signaling
+Field       | Z0.FpCmpMode.UnorderedNonSignaling                                    | Overly-verbose alias for UNORD_Q
+Field       | Z0.FpCmpMode.NEQ_UQ                                                   | 4: unordered, not equal, non-signaling
+Field       | Z0.FpCmpMode.UnorderedNotEqualNonSignaling                            | Overly-verbose alias for NEQ_UQ
+Field       | Z0.FpCmpMode.NLT_US                                                   | 5: unordered, not less than, signaling
+Field       | Z0.FpCmpMode.UnorderedNotLessThanSignaling                            | Overly-verbose alias for NLT_US
+Field       | Z0.FpCmpMode.NLE_US                                                   | 6: unordered, not less than or equal, signaling
+Field       | Z0.FpCmpMode.UnorderedNotLessThanOrEqualSignaling                     | Ridiculously verbose alias for NLE_US
+Field       | Z0.FpCmpMode.ORD_Q                                                    | 7: ordered, non-signaling
+Field       | Z0.FpCmpMode.OrderedNonSignaling                                      | Overly-verbose alias for ORD_Q
+Field       | Z0.FpCmpMode.EQ_UQ                                                    | 8: unordered, equal, non-signaling
+Field       | Z0.FpCmpMode.UnorderedEqualNonSignaling                               | Overly-verbose alias for EQ_UQ
+Field       | Z0.FpCmpMode.NGE_US                                                   | 9: unordered, not greater than or equal, signaling
+Field       | Z0.FpCmpMode.UnorderedNotGreaterThanOrEqualSignaling                  | Ridiculously verbose alias for NGE_US
+Field       | Z0.FpCmpMode.NGT_US                                                   | 9:unordered, not greater than, signaling
+Field       | Z0.FpCmpMode.UnorderedNotGreaterThanSignaling                         | Ridiculously verbose alias for NGT_US
+Field       | Z0.FpCmpMode.FALSE_OQ                                                 | 10: ordered, false, non-signaling
+Field       | Z0.FpCmpMode.OrderedFalseNonSignaling                                 | Overly-verbose alias for FALSE_OQ
+Field       | Z0.FpCmpMode.NEQ_OQ                                                   | 12: ordered, not equal, non-signaling
+Field       | Z0.FpCmpMode.OrderedNotEqualNonSignaling                              | Overly-verbose alias for NGT_US
+Field       | Z0.FpCmpMode.GE_OS                                                    | 13: ordered, greater than or equal, signaling
+Field       | Z0.FpCmpMode.OrderedGreaterThanOrEqualSignaling                       | Ridiculously verbose alias for GE_OS
+Field       | Z0.FpCmpMode.GT_OS                                                    | 14: ordered, greater than, signaling
+Field       | Z0.FpCmpMode.OrderedGreaterThanSignaling                              | Overly-verbose alias for GT_OS
+Field       | Z0.FpCmpMode.TRUE_UQ                                                  | 15: unordered, true, non-signaling
+Field       | Z0.FpCmpMode.UnorderedTrueNonSignaling                                | Overly-verbose alias for TRUE_UQ
+Field       | Z0.FpCmpMode.EQ_OS                                                    | 16: ordered, equal, signaling
+Field       | Z0.FpCmpMode.OrderedEqualSignaling                                    | Overly-verbose alias for EQ_OS
+Field       | Z0.FpCmpMode.LT_OQ                                                    | 17: ordered, less than, non-signaling
+Field       | Z0.FpCmpMode.OrderedLessThanNonSignaling                              | Overly-verbose alias for LT_OQ
+Field       | Z0.FpCmpMode.LE_OQ                                                    | 18: ordered, less than or equal, non-signaling
+Field       | Z0.FpCmpMode.OrderedLessThanOrEqualNonSignaling                       | Ridiculously verbose alias for LE_OQ
+Field       | Z0.FpCmpMode.UNORD_S                                                  | 19: unordered, signaling
+Field       | Z0.FpCmpMode.UnorderedSignaling                                       | Overly-verbose alias for LE_OQ
+Field       | Z0.FpCmpMode.NEQ_US                                                   | 20: unordered, not equal, signaling
+Field       | Z0.FpCmpMode.UnorderedNotEqualSignaling                               | Overly-verbose alias for NEQ_US
+Field       | Z0.FpCmpMode.NLT_UQ                                                   | 21: unordered, not less, non-signaling
+Field       | Z0.FpCmpMode.UnorderedNotLessThanNonSignaling                         | Ridicuously verbose alias for NLT_UQ
+Field       | Z0.FpCmpMode.NLE_UQ                                                   | 22: unordered, not less than or equal, non-signaling
+Field       | Z0.FpCmpMode.UnorderedNotLessThanOrEqualNonSignaling                  | Ridiculously verbose alias for NLE_UQ
+Field       | Z0.FpCmpMode.ORD_S                                                    | 23: ordered, signaling
+Field       | Z0.FpCmpMode.OrderedSignaling                                         | Overly-verbose alias for ORD_S
+Field       | Z0.FpCmpMode.EQ_US                                                    | 24: unordered,equal, signaling
+Field       | Z0.FpCmpMode.UnorderedEqualSignaling                                  | Overly-verbose alias for EQ_US
+Field       | Z0.FpCmpMode.NGE_UQ                                                   | 25: unordered, not greater than or equan, non-signaling
+Field       | Z0.FpCmpMode.UnorderedNotGreaterThanOrEqualNonSignaling               | Infuriatingly verbose alias for NGE_UQ
+Field       | Z0.FpCmpMode.NGT_UQ                                                   | 26: unordered, not greater than, non-signaling
+Field       | Z0.FpCmpMode.UnorderedNotGreaterThanNonSignaling                      | Infuriatingly verbose alias for NGT_UQ
+Field       | Z0.FpCmpMode.FALSE_OS                                                 | 27: ordered, false, signaling
+Field       | Z0.FpCmpMode.OrderedFalseSignaling                                    | Overly-verbose alias for FALSE_OS
+Field       | Z0.FpCmpMode.NEQ_OS                                                   | 28: ordered, not equal, signaling
+Field       | Z0.FpCmpMode.OrderedNotEqualSignaling                                 | Overly-verbose alias for NEQ_OS
+Field       | Z0.FpCmpMode.GE_OQ                                                    | 29: ordered, greater than or equal, non-signaling
+Field       | Z0.FpCmpMode.OrderedGreaterThanOrEqualNonSignaling                    | Infuriatingly verbose alias for LE_OQ
+Field       | Z0.FpCmpMode.GT_OQ                                                    | 30: ordered, greater than, non-signaling
+Field       | Z0.FpCmpMode.OrderedGreaterThanNonSignaling                           | Overly-verbose alias for GT_OQ
+Field       | Z0.FpCmpMode.TRUE_US                                                  | 31: ordered, true, signaling
+Field       | Z0.FpCmpMode.UnorderedTrueSignaling                                   | Overly-verbose alias for TRUE_US
+Type        | Z0.fmath                                                              | Defines floating-point operations
+Method      | Z0.fmath.abs(System.Single)                                           | Computes the absolute value of the source
+Method      | Z0.fmath.abs(System.Double)                                           | Computes the absolute value of the source
+Method      | Z0.fmath.dec(System.Single)                                           | Decrements the source value
+Method      | Z0.fmath.dec(System.Double)                                           | Decrements the source value
+Method      | Z0.fmath.inc(System.Single)                                           | Increments the operand
+Method      | Z0.fmath.inc(System.Double)                                           | Increments the operand
+Method      | Z0.fmath.negate(System.Single)                                        | Negates the operand
+Method      | Z0.fmath.negate(System.Double)                                        | Negates the operand
+Method      | Z0.fmath.add(System.Single,System.Single)                             | Computes the arithmetic sum of the source operands
+Method      | Z0.fmath.add(System.Double,System.Double)                             | Computes the arithmetic sum of the source operands
+Method      | Z0.fmath.sub(System.Single,System.Single)                             | Computes the arithmetic difference between the first operand and the second
+Method      | Z0.fmath.sub(System.Double,System.Double)                             | Computes the arithmetic difference between the first operand and the second
+Method      | Z0.fmath.mul(System.Single,System.Single)                             | Computes the arithmetic product of the operands
+Method      | Z0.fmath.mul(System.Double,System.Double)                             | Computes the arithmetic product of the operands
+Method      | Z0.fmath.div(System.Single,System.Single)                             | Computes the arithmetic quotient of the first operand over the second
+Method      | Z0.fmath.div(System.Double,System.Double)                             | Computes the arithmetic quotient of the first operand over the second
+Method      | Z0.fmath.mod(System.Single,System.Single)                             | Computes the modulus of the first operand over the second
+Method      | Z0.fmath.mod(System.Double,System.Double)                             | Computes the modulus of the first operand over the second
+Method      | Z0.fmath.modmul(System.Single,System.Single,System.Single)            | Computes z := (a*b) mod m
+Method      | Z0.fmath.modmul(System.Double,System.Double,System.Double)            | Computes z := (a*b) mod m
+Method      | Z0.fmath.divmod(System.Single,System.Single)                          | Computes dst = (div(a,b), mod(a,b))
+Method      | Z0.fmath.divmod(System.Double,System.Double)                          | Computes dst = (div(a,b), mod(a,b))
+Method      | Z0.fmath.ceil(System.Single)                                          | Computes the smallest integral value greater than or equal to the source value
+Method      | Z0.fmath.ceil(System.Double)                                          | Computes the smallest integral value greater than or equal to the source value
+Method      | Z0.fmath.floor(System.Single)                                         | Computes the largest integral value less than or equal to the source value
+Method      | Z0.fmath.floor(System.Double)                                         | Computes the largest integral value less than or equal to the source value
+Method      | Z0.fmath.clamp(System.Single,System.Single)                           | Clamps the source value to an inclusive maximum
+Method      | Z0.fmath.clamp(System.Double,System.Double)                           | Clamps the source value to an inclusive maximum
+Method      | Z0.fmath.dist(System.Single,System.Single)                            | Computes the nonnegative distance between two values
+Method      | Z0.fmath.dist(System.Double,System.Double)                            | Computes the nonnegative distance between two values
+Method      | Z0.fmath.fmod(System.Single,System.Single)                            | Computes the remainder of the quotient of the operands
+Method      | Z0.fmath.fmod(System.Double,System.Double)                            | Computes the remainder of the quotient of the operands
+Method      | Z0.fmath.signum(System.Single)                                        | Computes the sign of the operand
+Method      | Z0.fmath.signum(System.Double)                                        | Computes the sign of the operand
+Method      | Z0.fmath.sqrt(System.Single)                                          | Computes the square root of the source value
+Method      | Z0.fmath.sqrt(System.Double)                                          | Computes the square root of the source value
+Method      | Z0.fmath.positive(System.Single)                                      | Returns true if the source value is greater than zero, false otherwise
+Method      | Z0.fmath.positive(System.Double)                                      | Returns true if the source value is greater than zero, false otherwise
+Method      | Z0.fmath.negative(System.Single)                                      | Returns true if the source value is less than zero, false otherwise
+Method      | Z0.fmath.negative(System.Double)                                      | Returns true if the source value is less than zero, false otherwise
+Method      | Z0.fmath.between(System.Single,System.Single,System.Single)           | Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+Method      | Z0.fmath.between(System.Double,System.Double,System.Double)           | Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+Method      | Z0.fmath.cbrt(System.Single)                                          | Computes the cube root of the source value
+Method      | Z0.fmath.cbrt(System.Double)                                          | Computes the cube root of the source value
+Method      | Z0.fmath.exp(System.Single)                                           | Raises e to a specified exponent
+Method      | Z0.fmath.exp(System.Double)                                           | Raises e to a specified exponent
+Method      | Z0.fmath.relerr(System.Single,System.Single)                          | Computes the relative error between a one floating-point calculation and another
+Method      | Z0.fmath.relerr(System.Double,System.Double)                          | Computes the relative error between a one floating-point calculation and another
+Method      | Z0.fmath.fcsum(System.Double@,System.Double@,System.Double@)          | Impelements compensated floating-point summation
+Method      | Z0.fmath.log2(System.Single)                                          | Computes the base-2 log of the operand
+Method      | Z0.fmath.log2(System.Double)                                          | Computes the base-2 log of the operand
+Method      | Z0.fmath.ln(System.Single)                                            | Computes the base-e log of the operand
+Method      | Z0.fmath.ln(System.Double)                                            | Computes the base-e log of the operand
+Method      | Z0.fmath.log(System.Single,System.Nullable{System.Single})            | Computes the log of the source value relative to an optionally-specified base            which otherwise defaults to base-10
+Method      | Z0.fmath.log(System.Double,System.Nullable{System.Double})            | Computes the log of the source value relative to an optionally-specified base            which otherwise defaults to base-10
+Method      | Z0.fmathx.IsNaN(System.Single)                                        | Returns true if a value is the NaN representative
+Method      | Z0.fmathx.IsNaN(System.Double)                                        | Returns true if a value is the NaN representative
+Method      | Z0.fmathx.Infinite(System.Single)                                     | Returns true if a floating point value represents an infinite value, false otherwise
+Method      | Z0.fmathx.Infinite(System.Double)                                     | Returns true if a floating point value represents an infinite value, false otherwise
+Method      | Z0.fmathx.Finite(System.Single)                                       | Returns true if a floating point value is non-infinite
+Method      | Z0.fmathx.Finite(System.Double)                                       | Returns true if a floating point value is non-infinite
+Method      | Z0.BmiMul.lo_ref(System.UInt64,System.UInt64)                         | Computes the lo part of the full 128-bit product of two unsigned 64-bit integers
+Method      | Z0.BmiMul.mul(System.UInt32,System.UInt32)                            | Computes the unsigned 64-bit product of two unsigned 32-bit integers
+Property    | Z0.ScalarPairs.Zero                                                   | Zero, the the one and only.
+Property    | Z0.ScalarPairs.One                                                    | One, just.
+Property    | Z0.ScalarPairs.Ones                                                   | One, so many
+Method      | Z0.ScalarPairs.not(Z0.ConstPair{System.UInt64}@)                      | Computes the bitwise complement of a 128-bit integer
+Method      | Z0.ScalarPairs.and(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Computes the bitwise AND of two 128-bit integers
+Method      | Z0.ScalarPairs.nand(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Computes the bitwise NAND of two 128-bit integers
+Method      | Z0.ScalarPairs.or(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Computes the bitwise OR of two 128-bit integers
+Method      | Z0.ScalarPairs.nor(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Computes the bitwise NOR of two 128-bit integers
+Method      | Z0.ScalarPairs.xor(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Computes the bitwise XOR of two 128-bit integers
+Method      | Z0.ScalarPairs.xnor(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Computes the bitwise XNOR of two 128-bit integers
+Method      | Z0.ScalarPairs.same(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Determines whether the left and right operands define the same value
+Method      | Z0.ScalarPairs.lt(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Determines whether the left operand is less than the right operand
+Method      | Z0.ScalarPairs.lteq(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Determines whether the left operand is less than or equal the right operand
+Method      | Z0.ScalarPairs.gt(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Determines whether the left operand is greater than the right operand
+Method      | Z0.ScalarPairs.gteq(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Determines whether the left operand is greater than or equal the right operand
+Method      | Z0.ScalarPairs.add(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Computes the sum of two 128-bit integers
+Method      | Z0.ScalarPairs.add(System.UInt64@,System.UInt64@,System.UInt64@)      | Computes the sum c := a + b of 128-bit unsigned integers a and b
+Method      | Z0.ScalarPairs.sub(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)| Computes the difference of two 128-bit integers
+Method      | Z0.ScalarPairs.sub(System.UInt64@,System.UInt64@,System.UInt64@)      | Computes the difference c := a - b between 128-bit unsigned integers a and b
+Method      | Z0.ScalarPairs.negate(Z0.ConstPair{System.UInt64})                    | Computes the two's complement of a 128-bit integer
+Method      | Z0.ScalarPairs.sll(Z0.ConstPair{System.UInt64}@,System.Byte)          | Shifts the source integer leftwards
+Method      | Z0.ScalarPairs.srl(Z0.ConstPair{System.UInt64}@,System.Byte)          | Shifts the source integer leftwards
+Method      | Z0.ScalarPairs.mul_ref(System.UInt64,System.UInt64)                   | 64x64 -&gt; 128 multiplication, reference implementation
+Method      | Z0.ScalarPairs.lo_ref(System.UInt64,System.UInt64)                    | Computes the lo part of the full 128-bit product of two unsigned 64-bit integers
+Method      | Z0.ScalarPairs.mul(System.UInt32,System.UInt32)                       | Computes the unsigned 64-bit product of two unsigned 32-bit integers
+Method      | Z0.ScalarPairs.add(System.UInt64@,System.UInt64@,System.UInt64)       | Add src to the 128 bits contained in dst. Ignores overflow, that is, the addition is done modulo 2^128.
+Method      | Z0.ScalarPairs.add(System.UInt64@,System.UInt64@,System.UInt64,System.UInt64)| Add src to dst. Ignores overflow, that is, the addition is done modulo 2^128.
+Method      | Z0.ScalarPairs.sub(System.UInt64@,System.UInt64@,System.UInt64)       | Subtract src from the 128 bits contained in dst. Ignores overflow, that is, the subtraction is            done modulo 2^128.
+Method      | Z0.ScalarPairs.sub(System.UInt64,System.UInt64,System.UInt64@,System.UInt64@)| Subtract src from dst. Ignores overflow, that is, the subtraction is done modulo 2^128.

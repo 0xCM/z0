@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Gone;
     
     public class t_bm_outer : t_bm<t_bm_outer>
     {

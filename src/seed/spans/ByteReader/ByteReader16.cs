@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static refs;
+    using static As;
 
     partial struct ByteReader
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> ReadAll(in short src)
-            => new Span<byte>(constptr(src), 2);
+            => new Span<byte>(point(src), 2);
 
         /// <summary>
         /// Reads the bytes that define a numeric value
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> ReadAll(in ushort src)
-            => new Span<byte>(constptr(src), 2);
+            => new Span<byte>(point(src), 2);
 
         /// <summary>
         /// Reads a source byte, identified by natural index
@@ -45,6 +45,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte Read(ushort src, N1 n)    
             => skip8(src,n);
-
     }
 }

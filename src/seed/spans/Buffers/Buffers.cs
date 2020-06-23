@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The executable code</param>
         [MethodImpl(Inline), Op]
         public static byte* liberate(Span<byte> src)
-            => liberate<byte>((byte*)ptr<byte>(ref head(src)), src.Length);
+            => liberate((byte*)Root.ptr(ref head(src)), src.Length);
 
         /// <summary>
         /// Enables execution over a reference-identified memory segment of specified length
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="src">The executable code</param>
         [MethodImpl(Inline), Op]
         public static byte* liberate(ref byte src, int length)
-            => liberate<byte>((byte*)ptr<byte>(ref src), length);
+            => liberate((byte*)Root.ptr(ref src), length);
 
         /// <summary>
         /// Allocates a native buffer

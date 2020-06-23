@@ -23,8 +23,8 @@ namespace Z0
 
         void Display1()
         {
-            var x = uint8(4);
-            var y = uint8(16);
+            var x = As.uint8(4);
+            var y = As.uint8(16);
             var f = K.mul();
             
             var expect = M.eval(f, x, y);            
@@ -56,8 +56,8 @@ namespace Z0
             var divCode = CalculatorCode.div_ᐤ8uㆍ8uᐤ;
             var size = mulCode.Length;
 
-            var x = uint8(4);
-            var y = uint8(4);
+            var x = As.uint8(4);
+            var y = As.uint8(4);
 
             ref var mulRef = ref mul.Address.Ref<byte>();
             for(var i=0; i<size; i++)

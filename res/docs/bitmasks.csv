@@ -1,0 +1,94 @@
+Method      | Z0.BitMask.alteven``1                                                 | Defines an alternating bit pattern 10 10...10
+Method      | Z0.BitMask.altodd``1                                                  | Defines an alternating bit pattern 01 01...01
+Method      | Z0.BitMask.central``2(Z0.N8,``0,``1)                                  | Defines a central bitmask over 8-bit segments with a parametric bit density            D:[N2 | N4 | N6]
+Method      | Z0.BitMask.central``1(Z0.N8,Z0.N2,``0)                                | [00011000]
+Method      | Z0.BitMask.central``1(Z0.N8,Z0.N4,``0)                                | [00111100]
+Method      | Z0.BitMask.central``1(Z0.N8,Z0.N6,``0)                                | [01111110]
+Method      | Z0.BitMask.mask``2(Z0.CentralMask{Z0.N8,``0,``1})                     | [00011000]
+Method      | Z0.BitMask.cjsb``1(Z0.N8,Z0.N2,Z0.N1,``0)                             | [10011001]
+Method      | Z0.BitMask.cjsb``1(Z0.N8,Z0.N2,Z0.N2,``0)                             | [11011011]
+Method      | Z0.BitMask.cjsb``1(Z0.N8,Z0.N4,Z0.N1,``0)                             | [10111101]
+Method      | Z0.BitMask.hi64(System.Int32)                                         | Produces a sequence of enabled hi bits
+Method      | Z0.BitMask.hi``1(System.Int32,``0)                                    | Produces a sequence of n enabled bits in the index range [bitsize[T] - n, bitsize[T] - 1]
+Method      | Z0.BitMask.hi``1(``0)                                                 | Produces a sequence of N enabled hi bits
+Method      | Z0.BitMask.hi``2(``0,``1)                                             | Produces a sequence of n enabled hi bits
+Method      | Z0.BitMask.jsb``1(Z0.N8,Z0.N1,``0)                                    | [10000001]
+Method      | Z0.BitMask.jsb``1(Z0.N8,Z0.N2,``0)                                    | [11000011]
+Method      | Z0.BitMask.jsb``1(Z0.N8,Z0.N3,``0)                                    | [11100111]
+Method      | Z0.BitMask.mask``1(Z0.JsbMask{Z0.N8,Z0.N1,``0})                       | [10000001]
+Method      | Z0.BitMask.mask``1(Z0.JsbMask{Z0.N8,Z0.N2,``0})                       | [11000011]
+Method      | Z0.BitMask.mask``1(Z0.JsbMask{Z0.N8,Z0.N3,``0})                       | [11100111]
+Method      | Z0.BitMask.lo64(System.Int32)                                         | Produces a sequence of n enabled bits, starting from index 0 and extending to index n - 1
+Method      | Z0.BitMask.lo``1(System.Int32,``0)                                    | Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
+Method      | Z0.BitMask.lo``1(``0)                                                 | Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
+Method      | Z0.BitMask.lo``2(``0,``1)                                             | Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
+Method      | Z0.BitMask.blsmsk``1(``0)                                             | Logically equivalent to the composite operation (src-1) ^ src that enables the             lower bits of the source up to and including the least set bit
+Method      | Z0.BitMask.blsmsk(System.Byte)                                        | unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32            Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
+Method      | Z0.BitMask.blsmsk(System.UInt16)                                      | unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32            Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
+Method      | Z0.BitMask.blsmsk(System.UInt32)                                      | unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32            Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
+Method      | Z0.BitMask.blsmsk(System.UInt64)                                      | unsigned __int64 _blsmsk_u64 (unsigned __int64 a) BLSMSK reg, reg/m6            Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
+Method      | Z0.BitMask.lsb``2(``0,Z0.N2,Z0.N1,``1)                                | [01 01 ... 01]            Defines a width-variant LSB pattern that repeats every 2 bits with density 1
+Method      | Z0.BitMask.lsb``2(``0,Z0.N3,Z0.N1,``1)                                | [001 001 ... 001]            Defines a width-variant LSB pattern that repeats every 3 bits with density 1
+Method      | Z0.BitMask.lsb``1(Z0.N1,Z0.N1,``0)                                    | [00....01]                The least bit, relative to the data type, is enabled
+Method      | Z0.BitMask.lsb``1(Z0.N2,Z0.N1,``0)                                    | [01]            The least bit of each 2-bit segment is enabled
+Method      | Z0.BitMask.lsb``1(Z0.N4,Z0.N1,``0)                                    | [0001]            The least bit of each 4-bit segment is enabled
+Method      | Z0.BitMask.lsb``1(Z0.N8,Z0.N1,``0)                                    | [00000001]            The least bit of each 8-bit segment is enabled
+Method      | Z0.BitMask.lsb``1(Z0.N16,Z0.N1,``0)                                   | [00000000 00000001]            The least bit of each 16-bit segment is enabled
+Method      | Z0.BitMask.lsb``1(Z0.N8,Z0.N2,``0)                                    | [00000011]            The least 2 bits of each 8-bits are enabled
+Method      | Z0.BitMask.lsb``1(Z0.N8,Z0.N3,``0)                                    | [00000111]            The least 3 bits of each 8-bits are enabled
+Method      | Z0.BitMask.lsb``1(Z0.N8,Z0.N4,``0)                                    | [00001111]            The least 4 bits of each 8-bits are enabled
+Method      | Z0.BitMask.lsb``1(Z0.N8,Z0.N5,``0)                                    | [00011111]            The least 5 bits of each 8-bits are enabled
+Method      | Z0.BitMask.lsb``1(Z0.N8,Z0.N6,``0)                                    | [00111111]            The least 6 bits of each 8-bits are enabled
+Method      | Z0.BitMask.lsb``1(Z0.N8,Z0.N7,``0)                                    | [01111111]            The least 7 bits of each 8-bits are enabled
+Method      | Z0.BitMask.lsb64(Z0.N16,Z0.N1)                                        | [00000000 00000001]            The least bit of each 16-bit segment is enabled
+Method      | Z0.BitMask.lsb(Z0.N32,Z0.N1,System.UInt32)                            | [00000000 00000000 00000000 0000001]            The least bit is enabled
+Method      | Z0.BitMask.lsb64(Z0.N32,Z0.N1,System.UInt64)                          | [00000000 00000000 00000000 0000001]            The least bit of each 32-bit segment is enabled
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N1,Z0.N1,``0})                       | [00000001]
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N2,Z0.N1,``0})                       | [01]
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N4,Z0.N1,``0})                       | [0001]            The least bit of each 4-bit segment is enabled
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N8,Z0.N1,``0})                       | [00000001]            The least bit of each 8-bit segment is enabled
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N16,Z0.N1,``0})                      | [00000000 00000001]            The least bit of each 16-bit segment is enabled
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N8,Z0.N2,``0})                       | [00000011]
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N8,Z0.N3,``0})                       | [000000111]
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N8,Z0.N4,``0})                       | [00000111]
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N8,Z0.N5,``0})                       | [00011111]
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N8,Z0.N6,``0})                       | [00111111]
+Method      | Z0.BitMask.mask``1(Z0.LsbMask{Z0.N8,Z0.N7,``0})                       | [01111111]
+Method      | Z0.BitMask.msb``1(Z0.N1,Z0.N1,``0)                                    | [1000...0000]            The greatest bit, relative to the data type, is enabled
+Method      | Z0.BitMask.msb``1(Z0.N2,Z0.N1,``0)                                    | [10]            The greatest bit of each 2-bit segment is enabled
+Method      | Z0.BitMask.msb``1(Z0.N4,Z0.N1,``0)                                    | [1000]            The greatest bit of each 4-bit segment is enabled
+Method      | Z0.BitMask.msb``1(Z0.N8,Z0.N1,``0)                                    | [10000000]            The greatest bit of each 8-bit segment is enabled
+Method      | Z0.BitMask.msb``1(Z0.N16,Z0.N1,``0)                                   | [10000000 00000000]            The greatest bit of each 16-bit segment is enabled
+Method      | Z0.BitMask.msb``1(Z0.N8,Z0.N2,``0)                                    | [11000000]            The greatest 2 bits of each 8-bit segment are enabled
+Method      | Z0.BitMask.msb``1(Z0.N8,Z0.N3,``0)                                    | [11100000]            The greatest 3 bits of each 8-bit segment are enabled
+Method      | Z0.BitMask.msb``1(Z0.N8,Z0.N4,``0)                                    | [11110000]            The greatest 4 bits of each 8-bit segment are enabled
+Method      | Z0.BitMask.msb``1(Z0.N8,Z0.N5,``0)                                    | [11111000]            The greatest 5 bits of each 8-bit segment are enabled
+Method      | Z0.BitMask.msb``1(Z0.N8,Z0.N6,``0)                                    | [11111100]            The greatest 6 bits of each 8-bit segment are enabled
+Method      | Z0.BitMask.msb``1(Z0.N8,Z0.N7,``0)                                    | [11111110]            The greatest 7 bits of each 8-bit segment are enabled
+Method      | Z0.BitMask.mask``1(Z0.MsbMask{Z0.N2,Z0.N1,``0})                       | [10]
+Method      | Z0.BitMask.mask``1(Z0.MsbMask{Z0.N4,Z0.N1,``0})                       | [10001000]
+Method      | Z0.BitMask.mask``1(Z0.MsbMask{Z0.N8,Z0.N1,``0})                       | [10000000]
+Method      | Z0.BitMask.mask``1(Z0.MsbMask{Z0.N16,Z0.N1,``0})                      | [10000000 00000000]
+Method      | Z0.BitMask.mask``1(Z0.MsbMask{Z0.N8,Z0.N2,``0})                       | [11000000]
+Method      | Z0.BitMask.mask``1(Z0.MsbMask{Z0.N8,Z0.N3,``0})                       | [11100000]
+Method      | Z0.BitMask.mask``1(Z0.MsbMask{Z0.N8,Z0.N4,``0})                       | [11110000]
+Method      | Z0.BitMask.mask``1(Z0.MsbMask{Z0.N8,Z0.N5,``0})                       | [11111000]
+Method      | Z0.BitMask.mask``1(Z0.MsbMask{Z0.N8,Z0.N6,``0})                       | [11111100]
+Method      | Z0.BitMask.mask``1(Z0.MsbMask{Z0.N8,Z0.N7,``0})                       | [11111110]
+Method      | Z0.BitMask.msb(Z0.N64,Z0.N16,Z0.N1)                                   | [10000000 00000000]            The greatest bit of each 16-bit segment over 64 bits of data is enabled
+Method      | Z0.BitMask.msb64(Z0.N64,Z0.N32,Z0.N1)                                 | [10000000 00000000 00000000 0000000]            The greatest bit of each 32-bit segment over 64 bits of data is enabled
+Method      | Z0.BitMask.even``1(Z0.N2,Z0.N1,``0)                                   | [01010101]
+Method      | Z0.BitMask.even``1(Z0.N2,Z0.N2,``0)                                   | [00110011]
+Method      | Z0.BitMask.odd``1(Z0.N2,Z0.N1)                                        | [10101010]
+Method      | Z0.BitMask.odd``1(Z0.N2,Z0.N2)                                        | [11001100]
+Method      | Z0.BitMask.mask``1(Z0.ParityMask{Z0.N2,Z0.N1,``0}@,Z0.N0)             | [01010101]
+Method      | Z0.BitMask.mask``1(Z0.ParityMask{Z0.N2,Z0.N1,``0}@,Z0.N1)             | [10101010]
+Method      | Z0.BitMask.mask``1(Z0.ParityMask{Z0.N2,Z0.N2,``0}@,Z0.N0)             | [00110011]
+Method      | Z0.BitMask.mask``1(Z0.ParityMask{Z0.N2,Z0.N2,``0}@,Z0.N1)             | [11001100]
+Type        | Z0.CentralMask`3                                                      | Defines a specification for producing Central-oriented masks
+Type        | Z0.IndexMask`2                                                        | Defines a specification for producing an index-oriented mask
+Type        | Z0.JsbMask`3                                                          | Defines a specification for producing joint lsb/msb mask compositions
+Type        | Z0.LsbMask`3                                                          | Defines a specification for producing LSB-oriented masks
+Type        | Z0.MaskSpec                                                           | Defines a specification for producing classified bitmasks
+Type        | Z0.MsbMask`3                                                          | Defines a specification for producing MSB-oriented masks
+Type        | Z0.ParityMask`3                                                       | Defines a specification for producing parity masks

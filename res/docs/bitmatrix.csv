@@ -1,0 +1,508 @@
+Method      | Z0.BitMatrixA.cimpl``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)         | Computes the converse implication for generic bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.impl(Z0.BitMatrix8@,Z0.BitMatrix8@)                     | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.impl(Z0.BitMatrix16@,Z0.BitMatrix16@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.impl(Z0.BitMatrix32@,Z0.BitMatrix32@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.impl(Z0.BitMatrix64@,Z0.BitMatrix64@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.nand``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrixA.nand``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)          | Computes the converse implication for generic bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.nand(Z0.BitMatrix8@,Z0.BitMatrix8@)                     | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.nand(Z0.BitMatrix16@,Z0.BitMatrix16@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.nand(Z0.BitMatrix32@,Z0.BitMatrix32@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.nand(Z0.BitMatrix64@,Z0.BitMatrix64@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.ones``1                                                 | Allocates a 1-filled generic bitmatrix
+Method      | Z0.BitMatrixA.zero``1                                                 | Allocates a 0-filled generic bitmatrix
+Method      | Z0.BitMatrixA.identity``1                                             | Allocates a generic identity matrix
+Method      | Z0.BitMatrixA.identity``2(``0,``1)                                    | Allocates an identity bitmatrix of natural order
+Method      | Z0.BitMatrixA.ones``3(``0,``1)                                        | Allocates a 1-filled natural bitmatrix
+Method      | Z0.BitMatrixA.ones``2(``0)                                            | Allocates a 1-filled bitmatrix of natural order
+Method      | Z0.BitMatrixA.and``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)           | Computes the logical And between two generic bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.or``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)            | Computes the converse implication for generic bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.nonimpl``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)       | Computes the converse implication for generic bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.not``1(Z0.BitMatrix{``0}@)                              | Computes the logical negation of a generic bitmatrix, returning the allocated result to the caller
+Method      | Z0.BitMatrixA.cnonimpl``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)      | Computes the converse implication for generic bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.and``2(Z0.BitMatrix{``0,``1}@,Z0.BitMatrix{``0,``1}@)   | Computes the bitwise AND between two square bitmatrices of common order
+Method      | Z0.BitMatrixA.nor``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)           | Computes the converse implication for generic bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.nor``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrixA.select``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Applies the ternary select operator to generic source matrices, returning the allocated result to the caller
+Method      | Z0.BitMatrixA.select(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)    | Applies the ternary select operator to primal source matrices, returning the allocated result to the caller
+Method      | Z0.BitMatrixA.select(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@) | Applies the ternary select operator to primal source matrices, returning the allocated result to the caller
+Method      | Z0.BitMatrixA.select(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@) | Applies the ternary select operator to primal source matrices, returning the allocated result to the caller
+Method      | Z0.BitMatrixA.select(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@) | Applies the ternary select operator to primal source matrices, returning the allocated result to the caller
+Method      | Z0.BitMatrixA.unpack(Z0.BitMatrix8@)                                  | Allocates a target matrix of order equivalent to that of the source and projects            each bit value into the corresponding cell in the target
+Method      | Z0.BitMatrixA.unpack(Z0.BitMatrix{System.Byte}@)                      | Allocates a target matrix of order equivalent to that of the source and projects            each bit value into the corresponding cell in the target
+Method      | Z0.BitMatrixA.unpack(Z0.BitMatrix16@)                                 | Allocates a target matrix of order equivalent to that of the source and projects            each bit value into the corresponding cell in the target
+Method      | Z0.BitMatrixA.unpack(Z0.BitMatrix{System.UInt16}@)                    | Allocates a target matrix of order equivalent to that of the source and projects            each bit value into the corresponding cell in the target
+Method      | Z0.BitMatrixA.unpack(Z0.BitMatrix32@)                                 | Allocates a target matrix of order equivalent to that of the source and projects            each bit value into the corresponding cell in the target
+Method      | Z0.BitMatrixA.unpack(Z0.BitMatrix{System.UInt32}@)                    | Allocates a target matrix of order equivalent to that of the source and projects            each bit value into the corresponding cell in the target
+Method      | Z0.BitMatrixA.unpack(Z0.BitMatrix64@)                                 | Allocates a target matrix of order equivalent to that of the source and projects            each bit value into the corresponding cell in the target
+Method      | Z0.BitMatrixA.unpack(Z0.BitMatrix{System.UInt64}@)                    | Allocates a target matrix of order equivalent to that of the source and projects            each bit value into the corresponding cell in the target
+Method      | Z0.BitMatrixA.xnor``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)          | Computes the converse implication for generic bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.xnor(Z0.BitMatrix4@,Z0.BitMatrix4@)                     | Computes the logical Xnor between two bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrixA.xnor(Z0.BitMatrix8@,Z0.BitMatrix8@)                     | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.xnor(Z0.BitMatrix16@,Z0.BitMatrix16@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.xnor(Z0.BitMatrix32@,Z0.BitMatrix32@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.xnor(Z0.BitMatrix64@,Z0.BitMatrix64@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrixA.xor``2(Z0.BitMatrix{``0,``1}@,Z0.BitMatrix{``0,``1}@)   | Computes the bitwise AND between two square bitmatrices of common order
+Method      | Z0.BitMatrixA.xor``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)           | Computes the logical Xor between two generic bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrixA.xor``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the logical Xor btween two generic bitmatrices, depositing the result to a caller-allocated target
+Method      | Z0.BitMatrixA.xor(Z0.BitMatrix8@,Z0.BitMatrix8@)                      | Computes the logical Xor between two primal bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrixA.xor(Z0.BitMatrix16@,Z0.BitMatrix16@)                    | Computes the logical Xor between two primal bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrixA.xor(Z0.BitMatrix32@,Z0.BitMatrix32@)                    | Computes the logical Xor between two primal bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrixA.xor(Z0.BitMatrix64@,Z0.BitMatrix64@)                    | Computes the logical Xor between two primal bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitBlocks.testbit``1(Z0.Block256{``0}@,System.Int32)               | Tests a bit value in a T-sequence predicated on a linear index
+Method      | Z0.BitBlocks.bitseg``1(Z0.Block256{``0}@,Z0.BitPos{``0},Z0.BitPos{``0})| Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive position range
+Method      | Z0.BitBlocks.setbit``1(Z0.Block256{``0}@,System.Int32,Z0.bit)         | Sets a bit value in a T-sequence predicated on a linear index
+Method      | Z0.BitBlocks.bitseg``1(Z0.Block256{``0}@,System.Int32,System.Int32)   | Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by             an inclusive linear index range
+Method      | Z0.BitBlocks.readcell``1(``0@,System.Int32)                           | Reads a cell determined by a linear bit position
+Method      | Z0.BitBlocks.cell``1(``0@,System.Int32)                               | Reads/manipulates a cell identified by a linear bit position
+Method      | Z0.BitBlocks.setbit``1(System.Int32,Z0.bit,``0@)                      | Sets the state of a grid bit identified by its linear position
+Method      | Z0.BitBlocks.transfer``2(System.Span{``1},``0)                        | Transfers span content to a bitblock without checks
+Method      | Z0.BitBlocks.modprod``1(Z0.BitBlock{``0}@,Z0.BitBlock{``0}@)          | Computes the Euclidean scalar product between two bitvectors using modular arithmetic
+Method      | Z0.BitBlocks.modprod``2(Z0.BitBlock{``0,``1}@,Z0.BitBlock{``0,``1}@)  | Computes the Euclidean scalar product between two natural bitvectors using modular arithmetic
+Method      | Z0.BitBlocks.cellcount``1(System.Int32)                               | Computes the number of primal cells required to cover a specified number of bits
+Method      | Z0.BitBlocks.alloc``2(``0,``1)                                        | Allocates a block and populates it with a pattern, if supplied
+Method      | Z0.BitBlocks.dot``1(Z0.BitBlock{``0}@,Z0.BitBlock{``0}@)              | Computes the scalar product between two bitblocks
+Method      | Z0.BitBlocks.dot``2(Z0.BitBlock{``0,``1}@,Z0.BitBlock{``0,``1}@)      | Computes the scalar product between this vector and another
+Method      | Z0.BitBlocks.from(Z0.BitVector4)                                      | Loads a bitblock from a 4-bit bitvector
+Method      | Z0.BitBlocks.from(Z0.BitVector8)                                      | Loads a bitblock from an 8-bit bitvector
+Method      | Z0.BitBlocks.from(Z0.BitVector16)                                     | Loads a bitblock from a 16-bit bitvector
+Method      | Z0.BitBlocks.from(Z0.BitVector32)                                     | Loads a bitblock from a 32-bit bitvector
+Method      | Z0.BitBlocks.from(Z0.BitVector64)                                     | Loads a bitblock from a 64-bit bitvector
+Method      | Z0.BitBlocks.from``1(Z0.BitVector{``0})                               | Loads a bitblock from a generic bitvector
+Method      | Z0.BitBlocks.from``1(Z0.BitString)                                    | Loads a bitblock from a bitstring
+Method      | Z0.BitBlocks.load``1(System.Span{System.Byte},System.Int32)           | Creates a bitvector from a span of bytes
+Method      | Z0.BitBlocks.single``2(``1,``0)                                       | Creates a block over a single cell
+Method      | Z0.BitBlocks.single``1(``0,System.Int32)                              | Creates a bitblock over a single cell
+Method      | Z0.BitBlocks.load``1(System.Span{``0},System.Int32)                   | Loads a bitblock from a span
+Method      | Z0.BitBlocks.load``2(``1[],``0)                                       | Loads a bitblock from an array
+Method      | Z0.BitBlocks.load``1(``0[])                                           | Creates a bitblock over an arbitrary number of segments
+Method      | Z0.BitBlocks.load``2(System.Span{``1},``0)                            | Loads a natural bitcell container from a span
+Method      | Z0.BitBlocks.load``2(System.ReadOnlySpan{``1},``0)                    | Loads a natural bitblock from a readonly span; allocation required
+Type        | Z0.BitBlock`1                                                         | A data structure that covers and arbitrary number of 256-bit blocks of packed bits
+Field       | Z0.BitBlock`1.data                                                    | The bitvector content
+Field       | Z0.BitBlock`1.BitCount                                                | The actual number of bits that are represented by the vector
+Property    | Z0.BitBlock`1.CellWidth                                               | The maximum number of bits that can be placed a single segment segment
+Method      | Z0.BitBlock`1.op_OnesComplement(Z0.BitBlock{`0}@)                     | Computes the bitwise complement of the operand
+Method      | Z0.BitBlock`1.op_True(Z0.BitBlock{`0}@)                               | Returns true if the source vector is nonzero, false otherwise
+Method      | Z0.BitBlock`1.op_False(Z0.BitBlock{`0}@)                              | Returns false if the source vector is the zero vector, false otherwise
+Property    | Z0.BitBlock`1.Data                                                    | The underlying cell data
+Property    | Z0.BitBlock`1.Bytes                                                   | Presents the represented data as a span of bytes
+Property    | Z0.BitBlock`1.NonEmpty                                                | Is true if at least one enabled bit; false otherwise
+Property    | Z0.BitBlock`1.Item(System.Int32)                                      | A bit-level accessor/manipulator
+Method      | Z0.BitBlock`1.TakeScalarBits(System.Int32,System.Int32)               | Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
+Method      | Z0.BitBlock`1.ToBitString                                             | Extracts the represented data as a bitstring
+Method      | Z0.BitBlock`1.Pop                                                     | Counts the enabled bits
+Type        | Z0.BitBlock`2                                                         | A data structure that covers a natural count of packed bits
+Property    | Z0.BitBlock`2.CellWidth                                               | The maximum number of bits contained in an N[T] vector component
+Property    | Z0.BitBlock`2.BitCount                                                | The number of bits represented by an N[T] vector
+Property    | Z0.BitBlock`2.CellCount                                               | The number of segments required to allocate an N[T] vector
+Property    | Z0.BitBlock`2.BitCapacity                                             | The maximum number of bits that can be represented by an N[T] vector
+Method      | Z0.BitBlock`2.op_OnesComplement(Z0.BitBlock{`0,`1}@)                  | Computes the bitwise complement of the operand
+Method      | Z0.BitBlock`2.op_Modulus(Z0.BitBlock{`0,`1}@,Z0.BitBlock{`0,`1}@)     | Computes the scalar product of the operands
+Method      | Z0.BitBlock`2.op_UnaryNegation(Z0.BitBlock{`0,`1}@)                   | Computes the bitwise complement of the operand
+Method      | Z0.BitBlock`2.op_True(Z0.BitBlock{`0,`1}@)                            | Returns true if the source vector is nonzero, false otherwise
+Method      | Z0.BitBlock`2.op_False(Z0.BitBlock{`0,`1}@)                           | Returns false if the source vector is the zero vector, false otherwise
+Property    | Z0.BitBlock`2.Data                                                    | The data over which the bitvector is constructed
+Property    | Z0.BitBlock`2.Head                                                    | Returns a reference to the leading segment of the underlying storage
+Property    | Z0.BitBlock`2.Width                                                   | The number of represented bits
+Property    | Z0.BitBlock`2.Length                                                  | The number of allocated cells
+Property    | Z0.BitBlock`2.Item(System.Int32)                                      | A bit-level accessor/manipulator
+Method      | Z0.BitBlock`2.Pop                                                     | Counts the vector's enabled bits
+Property    | Z0.BitBlock`2.Empty                                                   | Returns true if no bits are enabled, false otherwise
+Property    | Z0.BitBlock`2.Nonempty                                                | Returns true if the vector has at least one enabled bit; false otherwise
+Method      | Z0.BitBlock`2.Fill(Z0.bit)                                            | Sets all the bits in use to the specified state
+Method      | Z0.XTend.FormatMatrixBits(System.Span{System.Byte},System.Int32,System.Nullable{System.Int32},System.Boolean)| Formats a span as a bitmatrix
+Method      | Z0.XTend.FormatMatrixBits``1(System.Span{``0},System.Int32,System.Nullable{System.Int32},System.Boolean)| Formats the content of a generic span of primal cells as a bitmatrix
+Method      | Z0.XTend.ToBitCells``1(System.Span{``0},System.Int32)                 | Extracts the bitcells froma span
+Method      | Z0.XTend.ToBitVector``2(Z0.BitBlock{``0,``1},Z0.N8)                   | Converts the least significant elements of a generic natural bitvector to a 8-bit primal bitvector
+Method      | Z0.XTend.ToBitVector``2(Z0.BitBlock{``0,``1},Z0.N16)                  | Converts the least significant elements of a generic natural bitvector to a 16-bit primal bitvector
+Method      | Z0.XTend.ToCpuVector``1(Z0.BitString,Z0.N128,``0)                     | Extracts a 128-bit cpu vector from a bitsring of sufficient length
+Method      | Z0.XTend.ToCpuVector``1(Z0.BitString,Z0.N256,``0)                     | Extracts a 256-bit cpu vector from a bitsring of sufficient length
+Method      | Z0.XTend.ToNatBits(Z0.BitVector8)                                     | Converts the source bitvector to bit cells
+Method      | Z0.XTend.ToNatBits(Z0.BitVector16)                                    | Converts the source bitvector to an equivalent natural/generic bitvector
+Method      | Z0.XTend.ToNatBits(Z0.BitVector64)                                    | Converts the source bitvector it the equivalent natural/generic bitvector
+Method      | Z0.XTend.ToNatBits``2(System.ReadOnlySpan{``1},``0)                   | Constructs a bitvector of natural length from a source span
+Method      | Z0.XTend.ToNatBits``2(System.Span{``1},``0)                           | Constructs a bitvector of natural length from a source span
+Method      | Z0.XTend.BitSeg``1(Z0.Block256{``0},System.Int32,System.Int32)        | Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
+Method      | Z0.XTend.ToBitMatrix``1(Z0.RowBits{``0})                              | Loads a generic bitmatrix from size-conformant sequence of row bits
+Method      | Z0.XTend.ToBitString``3(Z0.BitMatrix{``0,``1,``2})                    | Exracts a contiguous bitstring that captures the defined matrix
+Method      | Z0.BitMatrix.init``1(Z0.BitVector{``0})                               | Allocates a square generic bitmatrix filled with a specified row
+Method      | Z0.BitMatrix.init``1(Z0.BitVector{``0},System.Int32)                  | Allocates a generic bitmatrix filled with a specified row
+Method      | Z0.BitMatrix.init``2(``1,``0)                                         | Allocates a square bitmatrix of natural order filled with a specified row
+Method      | Z0.BitMatrix.init``3(``2,``0,``1)                                     | Allocates a bitmatrix of natural dimensions filled with a specified cell
+Method      | Z0.BitMatrix.alloc``1                                                 | Allocates a zero-filled square generic bitmatrix
+Method      | Z0.BitMatrix.alloc``1(System.Int32)                                   | Allocates a zero-filled generic bitmatrix with a specified number of rows
+Method      | Z0.BitMatrix.alloc``2(``0,``1)                                        | Allocates a zero-filled square bitmatrix of natural order
+Method      | Z0.BitMatrix.alloc``3(``0,``1,``2)                                    | Allocates a zero-filed bitmatrix of natural dimensions
+Method      | Z0.BitMatrix.alloc(Z0.N4,Z0.bit)                                      | Allocates a primal bitmatrix
+Method      | Z0.BitMatrix.alloc(Z0.N8,Z0.bit)                                      | Allocates a primal bitmatrix
+Method      | Z0.BitMatrix.alloc(Z0.N8,Z0.BitVector8)                               | Allocates a primal bitmatrix with rows filled by a specified vector
+Method      | Z0.BitMatrix.alloc(Z0.N16,Z0.bit)                                     | Allocates a primal bitmatrix
+Method      | Z0.BitMatrix.alloc(Z0.BitVector16)                                    | Allocates a primal bitmatrix with rows filled by a specified vector
+Method      | Z0.BitMatrix.alloc(Z0.N32,Z0.bit)                                     | Allocates a primal bitmatrix
+Method      | Z0.BitMatrix.alloc(Z0.BitVector32)                                    | Allocates a primal bitmatrix with rows filled by a specified vector
+Method      | Z0.BitMatrix.alloc(Z0.N64,Z0.bit)                                     | Allocates a primal bitmatrix
+Method      | Z0.BitMatrix.alloc(Z0.BitVector64)                                    | Allocates a primal bitmatrix with rows filled by a specified vector
+Method      | Z0.BitMatrix.and``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)            | Computes the logical And between two generic bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.and``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the logical and and between two generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.and``2(Z0.BitMatrix{``0,``1}@,Z0.BitMatrix{``0,``1}@,Z0.BitMatrix{``0,``1}@)| Computes the bitwise AND between two square bitmatrices of common natural order and stores the            result a caller-supplied target matrix
+Method      | Z0.BitMatrix.and(Z0.BitMatrix4@,Z0.BitMatrix4@)                       | Computes the logical And between two source bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrix.and(Z0.BitMatrix8@,Z0.BitMatrix8@)                       | Computes the logical And between two source bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrix.and(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)        | Computes the logical and btween two source bitmatrices and deposits the result to a caller-supplied target
+Method      | Z0.BitMatrix.and(Z0.BitMatrix16@,Z0.BitMatrix16@)                     | Computes the logical And between two primal bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrix.and(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)     | Computes the logical And btween two source bitmatrices and deposits the result to a caller-supplied target
+Method      | Z0.BitMatrix.and(Z0.BitMatrix32@,Z0.BitMatrix32@)                     | Computes the logical And between two primal bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrix.and(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)     | Computes the logical and btween two source bitmatrices and deposits the result to a caller-supplied target
+Method      | Z0.BitMatrix.and(Z0.BitMatrix64@,Z0.BitMatrix64@)                     | Computes the logical And between two priaml bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrix.and(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)     | Computes the logical and btween two source bitmatrices and deposits the result to a caller-supplied target
+Method      | Z0.BitMatrix.broadcast``1(Z0.BitVector{``0},Z0.BitMatrix{``0}@)       | Overwrites each row of a generic bitmatrix with a specified source vector
+Method      | Z0.BitMatrix.broadcast(Z0.BitVector8,Z0.BitMatrix8@)                  | Overwrites each row of a primal bitmatrix with a specified source vector
+Method      | Z0.BitMatrix.broadcast(Z0.BitVector16,Z0.BitMatrix16@)                | Overwrites each row of a primal bitmatrix with a specified source vector
+Method      | Z0.BitMatrix.broadcast(Z0.BitVector32,Z0.BitMatrix32@)                | Overwrites each row of a primal bitmatrix with a specified source vector
+Method      | Z0.BitMatrix.broadcast(Z0.BitVector64,Z0.BitMatrix64@)                | Overwrites each row of a primal bitmatrix with a specified source vector
+Method      | Z0.BitMatrix.cellcount``3(``0,``1,``2)                                | Computes the minimum number of cells required to store a bitmatrix of natural dimensions where each row is data-type aligned
+Method      | Z0.BitMatrix.cimpl``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.cimpl(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)      | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.cimpl(Z0.BitMatrix8@,Z0.BitMatrix8@)                     | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.cimpl(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)   | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.cimpl(Z0.BitMatrix16@,Z0.BitMatrix16@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.cimpl(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)   | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.cimpl(Z0.BitMatrix32@,Z0.BitMatrix32@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.cimpl(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)   | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.cimpl(Z0.BitMatrix64@,Z0.BitMatrix64@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.cnonimpl``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.cnonimpl(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)   | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.cnonimpl(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)| Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.cnonimpl(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)| Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.cnonimpl(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)| Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.cnonimpl(Z0.BitMatrix8@,Z0.BitMatrix8@)                  | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.cnonimpl(Z0.BitMatrix16@,Z0.BitMatrix16@)                | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.cnonimpl(Z0.BitMatrix32@,Z0.BitMatrix32@)                | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.cnonimpl(Z0.BitMatrix64@,Z0.BitMatrix64@)                | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.col(Z0.BitMatrix4@,System.Int32)                         | Queries the matrix for the data in an index-identified column
+Method      | Z0.BitMatrix.diagonal``1(Z0.BitMatrix{``0}@)                          | Extracts the diagonal from a generic bitmatrix
+Method      | Z0.BitMatrix.diagonal(Z0.BitMatrix16@)                                | Extracts the diagonal from a primal bitmatrix
+Method      | Z0.BitMatrix.diagonal(Z0.BitMatrix32@)                                | Extracts the diagonal from a primal bitmatrix
+Method      | Z0.BitMatrix.diagonal(Z0.BitMatrix64@)                                | Extracts the diagonal from a primal bitmatrix
+Method      | Z0.BitMatrix.empty``1(Z0.BitMatrix{``0}@)                             | Determines whether the matrix is 0-filled
+Method      | Z0.BitMatrix.empty(Z0.BitMatrix8@)                                    | Determines whether the matrix is 0-filled
+Method      | Z0.BitMatrix.empty(Z0.BitMatrix16@)                                   | Determines whether the matrix is 0-filled
+Method      | Z0.BitMatrix.empty(Z0.BitMatrix32@)                                   | Determines whether the matrix is 0-filled
+Method      | Z0.BitMatrix.empty(Z0.BitMatrix64@)                                   | Determines whether the matrix is 0-filled
+Method      | Z0.BitMatrix.from``1(Z0.RowBits{``0}@)                                | Loads a generic bitmatrix from a rowbit sequence
+Method      | Z0.BitMatrix.graph``1(Z0.BitMatrix{``0}@)                             | Constructs the graph determined by an adjacency bitmatrix
+Method      | Z0.BitMatrix.graph(Z0.BitMatrix8)                                     | Constructs a 8-node graph via the adjacency matrix interpretation
+Method      | Z0.BitMatrix.graph(Z0.BitMatrix16)                                    | Constructs a 16-node graph via the adjacency matrix interpretation
+Method      | Z0.BitMatrix.graph(Z0.BitMatrix32)                                    | Constructs a 32-node graph via the adjacency matrix interpretation
+Method      | Z0.BitMatrix.graph(Z0.BitMatrix64)                                    | Constructs a 64-node graph via the adjacency matrix interpretation
+Method      | Z0.BitMatrix.graph``2(Z0.BitMatrix{``0,``1})                          | Constructs a graph from an adjacency bitmatrix of natural order
+Method      | Z0.BitMatrix.hprod``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the Hadamard product of the source matrix and another of the same dimension
+Method      | Z0.BitMatrix.hprod(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)      | Computes the Hadamard product of the source matrix and another of the same dimension
+Method      | Z0.BitMatrix.hprod(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)   | Computes the Hadamard product of the source matrix and another of the same dimension
+Method      | Z0.BitMatrix.hprod(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)   | Computes the Hadamard product of the source matrix and another of the same dimension
+Method      | Z0.BitMatrix.hprod(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)   | Computes the Hadamard product of the source matrix and another of the same dimension
+Method      | Z0.BitMatrix.impl``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)           | Computes the converse implication for generic bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.impl``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.impl(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)       | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.impl(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)    | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.impl(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)    | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.impl(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)    | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.init``2(Z0.BitBlock{``0,``1}@)                           | Creates a new generic bitmatrix where each row is initialized to a common source vector
+Method      | Z0.BitMatrix.init``3(Z0.BitBlock{``1,``2}@,``0)                       | Creates a new generic bitmatrix where each row is initialized to a common row
+Method      | Z0.BitMatrix.init(Z0.BitVector8)                                      | Creates a new primal bitmatrix where each row is initialized to a common source vector
+Method      | Z0.BitMatrix.init(Z0.BitVector16)                                     | Creates a new primal bitmatrix where each row is initialized to a common source vector
+Method      | Z0.BitMatrix.init(Z0.BitVector32)                                     | Creates a new primal bitmatrix where each row is initialized to a common source vector
+Method      | Z0.BitMatrix.init(Z0.BitVector64)                                     | Creates a new primal bitmatrix where each row is initialized to a common source vector
+Method      | Z0.BitMatrix.load``1(System.Span{``0})                                | Loads a generic bitmatrix from a span
+Method      | Z0.BitMatrix.load``2(``0,System.Span{``1})                            | Loads a square bitmatrix of natural order from an span
+Method      | Z0.BitMatrix.load``2(System.Span{``1})                                | Loads a square bitmatrix of natural order from an span
+Method      | Z0.BitMatrix.load``3(``0,``1,System.Span{``2})                        | Loads an MxN natural bitmatrix from an array
+Method      | Z0.BitMatrix.load``3(System.Span{``2})                                | Loads an MxN natural bitmatrix from an array
+Method      | Z0.BitMatrix.mul``1(Z0.BitMatrix{``0}@,Z0.BitVector{``0}@)            | Applies a bitmatrix to a bitvector to yield a transformed bitvector
+Method      | Z0.BitMatrix.mul(Z0.BitMatrix4,Z0.BitVector4)                         | Applies a bitmatrix to a bitvector to yield a transformed bitvector
+Method      | Z0.BitMatrix.mul(Z0.BitMatrix8@,Z0.BitVector8@)                       | Applies a bitmatrix to a bitvector to yield a transformed bitvector
+Method      | Z0.BitMatrix.mul(Z0.BitMatrix4@,Z0.BitMatrix4@,Z0.BitMatrix4@)        | Multiplies two primal bitmatrices of order 4, writing the result to a caller-supplied target
+Method      | Z0.BitMatrix.mul(Z0.BitMatrix4@,Z0.BitMatrix4@)                       | Multiplies two primal bitmatrices of order 8, returning the allocated result
+Method      | Z0.BitMatrix.mul(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)        | Multiplies two primal bitmatrices of order 8, writing the result to a caller-supplied target
+Method      | Z0.BitMatrix.mul(Z0.BitMatrix8@,Z0.BitMatrix8@)                       | Multiplies two primal bitmatrices of order 8, returning the allocated result
+Method      | Z0.BitMatrix.mul``4(Z0.BitMatrix{``0,``1,``3}@,Z0.BitMatrix{``1,``2,``3}@,Z0.BitMatrix{``0,``2,``3}@)| Computes the product of bitmatrices of comparible natural dimensions and stores the            result to a caller-supplied target matrix
+Method      | Z0.BitMatrix.mul``2(Z0.BitMatrix{``0,``1}@,Z0.BitMatrix{``0,``1}@,Z0.BitMatrix{``0,``1}@)| Computes the product of square bitmatrices of common natural order and stores the result to a caller-supplied target matrix
+Method      | Z0.BitMatrix.mul``2(Z0.BitMatrix{``0,``1}@,Z0.BitMatrix{``0,``1}@)    | Computes the product of square bitmatrices of common natural order and returns the allocated result
+Method      | Z0.BitMatrix.nand``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nand(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)       | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nand(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)    | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nand(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)    | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nand(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)    | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.natural(Z0.BitMatrix8@)                                  | Projects, without allocation, a primal bitmatrix onto a generic bitmatrix of natural order
+Method      | Z0.BitMatrix.natural(Z0.BitMatrix16@)                                 | Projects, without allocation, a primal bitmatrix onto a generic bitmatrix of natural order
+Method      | Z0.BitMatrix.natural(Z0.BitMatrix32@)                                 | Projects, without allocation, a primal bitmatrix onto a generic bitmatrix of natural order
+Method      | Z0.BitMatrix.natural(Z0.BitMatrix64@)                                 | Projects, without allocation, a primal bitmatrix onto a generic bitmatrix of natural order
+Method      | Z0.BitMatrix.natural``2(``1,``0)                                      | Creates a square bitmatrix of natural order from a single cell
+Method      | Z0.BitMatrix.natural``2(System.Span{``1},``0)                         | Creates a square bitmatrix of natural order from a span
+Method      | Z0.BitMatrix.natural``3(``2,``0,``1)                                  | Creates a bitmatrix of natural dimensions from a single cell
+Method      | Z0.BitMatrix.natural``3(System.Span{``2},``0,``1)                     | Creates a bitmatrix of natural dimensions from a span
+Method      | Z0.BitMatrix.nonimpl``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nonimpl(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)    | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nonimpl(Z0.BitMatrix8@,Z0.BitMatrix8@)                   | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.nonimpl(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@) | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nonimpl(Z0.BitMatrix16@,Z0.BitMatrix16@)                 | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.nonimpl(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@) | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nonimpl(Z0.BitMatrix32@,Z0.BitMatrix32@)                 | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.nonimpl(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@) | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nonimpl(Z0.BitMatrix64@,Z0.BitMatrix64@)                 | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.nor``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nor(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)        | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nor(Z0.BitMatrix4@,Z0.BitMatrix4@)                       | Computes the logical Nor between two bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrix.nor(Z0.BitMatrix8@,Z0.BitMatrix8@)                       | Computes the logical Nor between two bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.nor(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)     | Computes the logical Nor between bitmatrices and deposits the result to a caller-supplied target
+Method      | Z0.BitMatrix.nor(Z0.BitMatrix16@,Z0.BitMatrix16@)                     | Computes the logical Nor between two bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.nor(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)     | Computes the logical Nor between bitmatrices and deposits the result to a caller-supplied target
+Method      | Z0.BitMatrix.nor(Z0.BitMatrix32@,Z0.BitMatrix32@)                     | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.nor(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)     | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.nor(Z0.BitMatrix64@,Z0.BitMatrix64@)                     | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.not``1(Z0.BitMatrix{``0}@)                               | Computes the logical negation of a generic bitmatrix, returning the allocated result to the caller
+Method      | Z0.BitMatrix.not``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)            | Computes the logical negation of a generic bitmatrix, depositing the result to the caller-supplied target
+Method      | Z0.BitMatrix.not(Z0.BitMatrix4@)                                      | Computes the logical negation of the source matrix, returning the allocated result to the caller
+Method      | Z0.BitMatrix.not(Z0.BitMatrix8@)                                      | Computes the logical negation of a primal bitmatrix, returning the allocated result to the caller
+Method      | Z0.BitMatrix.not(Z0.BitMatrix8@,Z0.BitMatrix8@)                       | Computes the logical negation of a primal bitmatrix, depositing the result to the caller-supplied target
+Method      | Z0.BitMatrix.not(Z0.BitMatrix16@)                                     | Computes the logical negation of a primal bitmatrix, returning the allocated result to the caller
+Method      | Z0.BitMatrix.not(Z0.BitMatrix16@,Z0.BitMatrix16@)                     | Computes the logical negation of a primal bitmatrix, depositing the result to the caller-supplied target
+Method      | Z0.BitMatrix.not(Z0.BitMatrix32@)                                     | Computes the logical negation of a primal bitmatrix, returning the allocated result to the caller
+Method      | Z0.BitMatrix.not(Z0.BitMatrix32@,Z0.BitMatrix32@)                     | Computes the logical negation of a primal bitmatrix, depositing the result to the caller-supplied target
+Method      | Z0.BitMatrix.not(Z0.BitMatrix64@)                                     | Computes the logical negation of a primal bitmatrix, returning the allocated result to the caller
+Method      | Z0.BitMatrix.not(Z0.BitMatrix64@,Z0.BitMatrix64@)                     | Computes the logical negation of a primal bitmatrix, depositing the result to the caller-supplied target
+Method      | Z0.BitMatrix.oprod(Z0.BitVector32,Z0.BitVector32)                     | Computes the outer product of two bitvectors and returns the allocated result
+Method      | Z0.BitMatrix.oprod``1(Z0.BitVector{``0},Z0.BitVector{``0},Z0.BitMatrix{``0}@)| Computes the outer product of two bitvectors and stores the result in a caller-supplied target
+Method      | Z0.BitMatrix.oprod``1(Z0.BitVector{``0},Z0.BitVector{``0})            | Computes the outer product of two bitvectors and returns the allocated result
+Method      | Z0.BitMatrix.or``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.or(Z0.BitMatrix4@,Z0.BitMatrix4@)                        | Computes the logical Or between two bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrix.or(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)         | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.or(Z0.BitMatrix8@,Z0.BitMatrix8@)                        | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.or(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)      | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.or(Z0.BitMatrix16@,Z0.BitMatrix16@)                      | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.or(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)      | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.or(Z0.BitMatrix32@,Z0.BitMatrix32@)                      | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.or(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)      | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.or(Z0.BitMatrix64@,Z0.BitMatrix64@)                      | Computes the converse implication for primal bitmatrices, returning the allocated result
+Method      | Z0.BitMatrix.permute``1(Z0.Perm,Z0.BitMatrix{``0}@)                   | Permutes the rows of a matrix in-place according to a permutation
+Method      | Z0.BitMatrix.permute(Z0.NatPerm{Z0.N8}@,Z0.BitMatrix8@)               | Permutes the rows of a matrix in-place according to a permutation
+Method      | Z0.BitMatrix.permute(Z0.NatPerm{Z0.N16}@,Z0.BitMatrix16@)             | Permutes the rows of a matrix in-place according to a specified permutation
+Method      | Z0.BitMatrix.permute(Z0.NatPerm{Z0.N32}@,Z0.BitMatrix32@)             | Permutes the rows of a matrix in-place according to a permutation
+Method      | Z0.BitMatrix.permute(Z0.NatPerm{Z0.N64}@,Z0.BitMatrix64@)             | Permutes the rows of a matrix in-place according to a permutation
+Method      | Z0.BitMatrix.permute(Z0.NatPerm{Z0.N64})                              | Creates a canonical permutation matrix by swapping matrix rows of the identity matrix as specified by a permutation
+Method      | Z0.BitMatrix.pop(Z0.BitMatrix8@)                                      | Counts the number of enabled bits in the matrix
+Method      | Z0.BitMatrix.pop(Z0.BitMatrix16@)                                     | Counts the number of enabled bits in the matrix
+Method      | Z0.BitMatrix.pop(Z0.BitMatrix32@)                                     | Counts the number of enabled bits in the matrix
+Method      | Z0.BitMatrix.pop(Z0.BitMatrix64@)                                     | Counts the number of enabled bits in the matrix
+Method      | Z0.BitMatrix.premul(Z0.NatPerm{Z0.N8}@,Z0.BitMatrix8@)                | Permutes the rows of a target matrix via premultiplication by a permutation-identified permutation matrix
+Method      | Z0.BitMatrix.premul(Z0.NatPerm{Z0.N16}@,Z0.BitMatrix16)               | Permutes the rows of a target matrix via premultiplication by a permutation-identified permutation matrix
+Method      | Z0.BitMatrix.premul(Z0.NatPerm{Z0.N32}@,Z0.BitMatrix32@)              | Permutes the rows of a target matrix via premultiplication by a permutation-identified permutation matrix
+Method      | Z0.BitMatrix.premul(Z0.NatPerm{Z0.N64}@,Z0.BitMatrix64@)              | Permutes the rows of a target matrix via premultiplication by a permutation-identified permutation matrix
+Method      | Z0.BitMatrix.primal(Z0.N4,System.UInt16)                              | Defines a primal bitmatrix of order 4
+Method      | Z0.BitMatrix.primal(Z0.N4,Z0.BitVector4[])                            | Defines a primal bitmatrix of order 4
+Method      | Z0.BitMatrix.primal(Z0.N8,System.Span{System.Byte})                   | Defines a primal bitmatrix of order 8
+Method      | Z0.BitMatrix.primal(Z0.N8,System.ReadOnlySpan{System.Byte})           | Defines a primal bitmatrix of order 8
+Method      | Z0.BitMatrix.primal(Z0.N8,System.UInt32,System.UInt32)                | Defifines a matrix from two 32-bit unsigned integers; the upper value contains            the data for rows 0...3 and the lower value contains the dat for rows [4 ... 7]
+Method      | Z0.BitMatrix.primal(Z0.N16,System.Span{System.UInt16})                | Defines a primal bitmatrix of order 16
+Method      | Z0.BitMatrix.primal(Z0.N16,System.ReadOnlySpan{System.Byte})          | Defines a primal bitmatrix of order 16
+Method      | Z0.BitMatrix.primal(Z0.N32,System.Span{System.UInt32})                | Defines a primal bitmatrix of order 32
+Method      | Z0.BitMatrix.primal(Z0.N32,System.ReadOnlySpan{System.Byte})          | Defines a primal bitmatrix of order 32
+Method      | Z0.BitMatrix.primal(Z0.N64,System.Span{System.UInt64})                | Defines a primal bitmatrix of order 64
+Method      | Z0.BitMatrix.primal(Z0.N64,System.ReadOnlySpan{System.Byte})          | Defines a primal bitmatrix of order 64
+Method      | Z0.BitMatrix.same``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)           | Determines whether two generic bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise
+Method      | Z0.BitMatrix.same(Z0.BitMatrix4,Z0.BitMatrix4)                        | Determines whether two primal bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise
+Method      | Z0.BitMatrix.same(Z0.BitMatrix8@,Z0.BitMatrix8@)                      | Determines whether two primal bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise
+Method      | Z0.BitMatrix.same(Z0.BitMatrix16@,Z0.BitMatrix16@)                    | Determines whether two primal bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise
+Method      | Z0.BitMatrix.same(Z0.BitMatrix32@,Z0.BitMatrix32@)                    | Determines whether two primal bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise
+Method      | Z0.BitMatrix.same(Z0.BitMatrix64@,Z0.BitMatrix64@)                    | Determines whether two primal bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise
+Method      | Z0.BitMatrix.select``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Applies the ternary select operator to generic source matrices, writing the result to a caller-supplied target
+Method      | Z0.BitMatrix.select(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)| Applies the ternary select operator to primal source matrices, writing the result to a caller-supplied target
+Method      | Z0.BitMatrix.select(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)| Applies the ternary select operator to primal source matrices, writing the result to a caller-supplied target
+Method      | Z0.BitMatrix.select(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)| Applies the ternary select operator to primal source matrices, writing the result to a caller-supplied target
+Method      | Z0.BitMatrix.select(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)| Applies the ternary select operator to primal source matrices, writing the result to a caller-supplied target
+Method      | Z0.BitMatrix.testc``1(Z0.BitMatrix{``0}@)                             | Returns true if all bits in a source matrix are enabled, false otherwise
+Method      | Z0.BitMatrix.testc``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)          | Returns true if all bits in a matrix are enabled, false otherwise
+Method      | Z0.BitMatrix.testc(Z0.BitMatrix8@)                                    | Returns true if all bits in a matrix are enabled, false otherwise
+Method      | Z0.BitMatrix.testc(Z0.BitMatrix8@,Z0.BitMatrix8@)                     | Returns true if all mask-identified bits in a matrix are enabled, false otherwise
+Method      | Z0.BitMatrix.testc(Z0.BitMatrix16@)                                   | Returns true if all bits in a matrix are enabled, false otherwise
+Method      | Z0.BitMatrix.testc(Z0.BitMatrix16@,Z0.BitMatrix16@)                   | Returns true if all mask-identified bits in a matrix are enabled, false otherwise
+Method      | Z0.BitMatrix.testc(Z0.BitMatrix32@)                                   | Returns true if all bits in a matrix are enabled, false otherwise
+Method      | Z0.BitMatrix.testc(Z0.BitMatrix32@,Z0.BitMatrix32@)                   | Returns true if all mask-identified bits in a matrix are enabled, false otherwise
+Method      | Z0.BitMatrix.testc(Z0.BitMatrix64@)                                   | Returns true if all bits in a matrix are enabled, false otherwise
+Method      | Z0.BitMatrix.testc(Z0.BitMatrix64@,Z0.BitMatrix64@)                   | Returns true if all mask-identified bits in a matrix are enabled, false otherwise
+Method      | Z0.BitMatrix.testz``1(Z0.BitMatrix{``0}@)                             | Returns true if all bits in a matrix are disabled, false otherwise
+Method      | Z0.BitMatrix.testz``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)          | Returns true if all mask-identified bits in a matrix are disabled, false otherwise
+Method      | Z0.BitMatrix.testz(Z0.BitMatrix8@)                                    | Returns true if all bits in a matrix are disabled, false otherwise
+Method      | Z0.BitMatrix.testz(Z0.BitMatrix8@,Z0.BitMatrix8@)                     | Returns true if all mask-identified bits in a matrix are disabled, false otherwise
+Method      | Z0.BitMatrix.testz(Z0.BitMatrix16@)                                   | Returns true if all bits in a matrix are disabled, false otherwise
+Method      | Z0.BitMatrix.testz(Z0.BitMatrix16@,Z0.BitMatrix16@)                   | Returns true if all mask-identified bits in a matrix are disabled, false otherwise
+Method      | Z0.BitMatrix.testz(Z0.BitMatrix32@)                                   | Returns true if all bits in a matrix are disabled, false otherwise
+Method      | Z0.BitMatrix.testz(Z0.BitMatrix32@,Z0.BitMatrix32@)                   | Returns true if all mask-identified bits in a matrix are disabled, false otherwise
+Method      | Z0.BitMatrix.testz(Z0.BitMatrix64@)                                   | Returns true if all bits in a matrix are disabled, false otherwise
+Method      | Z0.BitMatrix.testz(Z0.BitMatrix64@,Z0.BitMatrix64@)                   | Returns true if all mask-identified bits in a matrix are disabled, false otherwise
+Method      | Z0.BitMatrix.transpose(Z0.BitMatrix4@)                                | Transposes a copy of the matrix
+Method      | Z0.BitMatrix.transpose_v4(Z0.BitMatrix8@,Z0.BitMatrix8@)              | Transposes an 8x8 bitmatrix
+Property    | Z0.BitMatrix.Tr8x16MaskBytes                                          | When used as a mask for _mm_shuffle_epi8, transposes a 8x16 bitmatrix
+Method      | Z0.BitMatrix.unpack``1(Z0.BitMatrix16@,Z0.Matrix{Z0.N16,``0}@)        | Projects the bits of a fixed primal bitmatrix into a generic target matrix of the same order
+Method      | Z0.BitMatrix.unpack``1(Z0.BitMatrix8@,Z0.Matrix{Z0.N8,``0}@)          | Projects the bits of a fixed primal bitmatrix into a generic target matrix of the same order
+Method      | Z0.BitMatrix.unpack``1(Z0.BitMatrix32@,Z0.Matrix{Z0.N32,``0}@)        | Projects the bits of a fixed primal bitmatrix into a generic target matrix of the same order
+Method      | Z0.BitMatrix.unpack``1(Z0.BitMatrix64@,Z0.Matrix{Z0.N64,``0}@)        | Projects the bits of a fixed primal bitmatrix into a generic target matrix of the same order
+Method      | Z0.BitMatrix.unpack``3(Z0.BitMatrix{``1}@,Z0.Matrix{``0,``2}@)        | Projects the bits in the source matrix onto cells of a conventional matrix
+Method      | Z0.BitMatrix.unpack``3(Z0.BitMatrix{``0,``1}@,Z0.Matrix{``0,``2}@)    | Projects the bits of a generic sqare bitmatix of natural order into a generic target matrix of the same order
+Method      | Z0.BitMatrix.unpack``4(Z0.BitMatrix{``0,``1,``2}@,Z0.Matrix{``0,``1,``3}@)| Projects the bits of a generic bitmatix of natural dimensions into a generic matrix of the same dimensions
+Method      | Z0.BitMatrix.unpack``3(Z0.BitMatrix{``0,``1}@,Z0.Matrix256{``0,``2}@) | Projects the bits of a square generic bitmatix of natural order into a generic block matrix of the same order
+Method      | Z0.BitMatrix.unpack``4(Z0.BitMatrix{``0,``1,``2}@,Z0.Matrix256{``0,``1,``3}@)| Projects the bits of a generic bitmatix of natural dimensions into a generic block matrix of the same dimensions
+Method      | Z0.BitMatrix.unpack(Z0.BitMatrix8@,Z0.Matrix{Z0.N8,Z0.bit}@)          | Projects each bit value in the source matrix to a cell in a caller-supplied conventional matrix
+Method      | Z0.BitMatrix.unpack(Z0.BitMatrix{System.Byte}@,Z0.Matrix{Z0.N8,Z0.bit}@)| Projects each bit value in the source matrix to a cell in a caller-supplied conventional matrix
+Method      | Z0.BitMatrix.unpack(Z0.BitMatrix16@,Z0.Matrix{Z0.N16,Z0.bit}@)        | Projects each bit value in the source matrix to a cell in a caller-supplied conventional matrix
+Method      | Z0.BitMatrix.unpack(Z0.BitMatrix{System.UInt16}@,Z0.Matrix{Z0.N16,Z0.bit}@)| Projects each bit value in the source matrix to a cell in a caller-supplied conventional matrix
+Method      | Z0.BitMatrix.unpack(Z0.BitMatrix32@,Z0.Matrix{Z0.N32,Z0.bit}@)        | Projects each bit value in the source matrix to a cell in a caller-supplied conventional matrix
+Method      | Z0.BitMatrix.unpack(Z0.BitMatrix{System.UInt32}@,Z0.Matrix{Z0.N32,Z0.bit}@)| Projects each bit value in the source matrix to a cell in a caller-supplied conventional matrix
+Method      | Z0.BitMatrix.unpack(Z0.BitMatrix64@,Z0.Matrix{Z0.N64,Z0.bit}@)        | Projects each bit value in the source matrix to a cell in a caller-supplied conventional matrix
+Method      | Z0.BitMatrix.unpack(Z0.BitMatrix{System.UInt64}@,Z0.Matrix{Z0.N64,Z0.bit}@)| Projects each bit value in the source matrix to a cell in a caller-supplied conventional matrix
+Method      | Z0.BitMatrix.vload(Z0.BitMatrix8@)                                    | Loads the lower half of a 128-bit cpu vector from matrix data
+Method      | Z0.BitMatrix.vload(Z0.BitMatrix16@)                                   | Loads a 256-bit cpu vector from matrix data
+Method      | Z0.BitMatrix.vload(Z0.BitMatrix32@,System.Int32)                      | Loads a 256-bit cpu vector from matrix data beginning at a specified offset
+Method      | Z0.BitMatrix.vload(Z0.BitMatrix64@,System.Int32)                      | Loads a 256-bit cpu vector from matrix data beginning at a specified offset
+Method      | Z0.BitMatrix.xnor``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.xnor(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)       | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.xnor(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)    | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.xnor(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)    | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.xnor(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)    | Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+Method      | Z0.BitMatrix.xor``1(Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@,Z0.BitMatrix{``0}@)| Computes the logical Xor btween two generic bitmatrices, depositing the result to a caller-allocated target
+Method      | Z0.BitMatrix.xor(Z0.BitMatrix4@,Z0.BitMatrix4@)                       | Computes the logical Xor between two bitmatrices and returns the allocated result to the caller
+Method      | Z0.BitMatrix.xor(Z0.BitMatrix8@,Z0.BitMatrix8@,Z0.BitMatrix8@)        | Computes the logical Xor btween two primal bitmatrices, depositing the result to a caller-allocated target
+Method      | Z0.BitMatrix.xor(Z0.BitMatrix16@,Z0.BitMatrix16@,Z0.BitMatrix16@)     | Computes the logical Xor btween two primal bitmatrices, depositing the result to a caller-allocated target
+Method      | Z0.BitMatrix.xor(Z0.BitMatrix32@,Z0.BitMatrix32@,Z0.BitMatrix32@)     | Computes the logical Xor btween two primal bitmatrices, depositing the result to a caller-allocated target
+Method      | Z0.BitMatrix.xor(Z0.BitMatrix64@,Z0.BitMatrix64@,Z0.BitMatrix64@)     | Computes the logical Xor btween two primal bitmatrices, depositing the result to a caller-allocated target
+Type        | Z0.RowBits                                                            | Defines primary api surface for rowbit manipulation
+Method      | Z0.RowBits.alloc``1(System.Int32)                                     | xllocates a specified number of rows
+Method      | Z0.RowBits.load``1(System.Span{System.Byte})                          | Loads loads rows from a bytespan
+Method      | Z0.RowBits.load``1(System.Span{``0})                                  | Loads loads rows from a span
+Method      | Z0.RowBits.load``1(``0[])                                             | Loads rows from an array
+Method      | Z0.BitMatrix16x.ToCells(Z0.BitMatrix16)                               | Converts the matrix to a bitvector
+Method      | Z0.BitMatrix16x.ToBitMatrix(Z0.NatPerm{Z0.N16})                       | Creates the matrix determined by a permutation
+Method      | Z0.BitMatrix16x.ToGeneric(Z0.BitMatrix16)                             | Creates a generic matrix from the primal source data
+Method      | Z0.BitMatrix16x.ToNatural(Z0.BitMatrix16)                             | Converts the source matrix to a square matrix of natural order
+Method      | Z0.BitMatrix16x.ToNatural(Z0.BitMatrix{System.UInt16})                | Converts the source matrix to a square matrix of natural order
+Method      | Z0.BitMatrix16x.IsZero(Z0.BitMatrix16)                                | Determines whether this matrix is equivalent to the canonical 0 matrix
+Method      | Z0.BitMatrix16x.Transpose(Z0.BitMatrix16)                             | Transposes a copy of the source matrix
+Method      | Z0.BitMatrix32x.ToBitCells(Z0.BitMatrix32)                            | Converts the matrix to a bitvector
+Method      | Z0.BitMatrix32x.ToBitMatrix(Z0.NatPerm{Z0.N32})                       | Creates the matrix determined by a permutation
+Method      | Z0.BitMatrix32x.ToGeneric(Z0.BitMatrix32)                             | Creates a generic matrix from the primal source data
+Method      | Z0.BitMatrix32x.ToNatural(Z0.BitMatrix32)                             | Converts the source matrix to a square matrix of natural order
+Method      | Z0.BitMatrix32x.ToNatural(Z0.BitMatrix{System.UInt32})                | Converts the source matrix to a square matrix of natural order
+Method      | Z0.BitMatrix32x.IsZero(Z0.BitMatrix32)                                | Determines whether this matrix is equivalent to the canonical 0 matrix
+Method      | Z0.BitMatrix4x.ToBitVector(Z0.BitMatrix4)                             | Converts the matrix to a bitvector
+Method      | Z0.BitMatrix4x.Transpose(Z0.BitMatrix4)                               | Transposes a copy of the source matrix
+Method      | Z0.BitMatrix64x.ToBitVector(Z0.BitMatrix64)                           | Converts the matrix to a bitvector
+Method      | Z0.BitMatrix64x.ToBitMatrix(Z0.NatPerm{Z0.N64})                       | Creates the matrix determined by a permutation
+Method      | Z0.BitMatrix64x.ToGeneric(Z0.BitMatrix64)                             | Creates a generic matrix from the primal source data
+Method      | Z0.BitMatrix64x.ToNatural(Z0.BitMatrix64)                             | Converts the source matrix to a square matrix of natural order
+Method      | Z0.BitMatrix64x.ToNatural(Z0.BitMatrix{System.UInt64})                | Converts the source matrix to a square matrix of natural order
+Method      | Z0.BitMatrix64x.IsZero(Z0.BitMatrix64)                                | Determines whether this matrix is equivalent to the canonical 0 matrix
+Method      | Z0.BitMatrix8x.ToBitVector(Z0.BitMatrix8)                             | Converts the matrix to a bitvector
+Method      | Z0.BitMatrix8x.ToGeneric(Z0.BitMatrix8)                               | Creates a generic matrix from the primal source data
+Method      | Z0.BitMatrix8x.ToBitMatrix(Z0.NatPerm{Z0.N8})                         | Creates the matrix determined by a permutation
+Method      | Z0.BitMatrix8x.ToNatural(Z0.BitMatrix8)                               | Converts the source matrix to a square matrix of natural order
+Method      | Z0.BitMatrix8x.ToNatural(Z0.BitMatrix{System.Byte})                   | Converts the source matrix to a square matrix of natural order
+Method      | Z0.BitMatrix8x.IsZero(Z0.BitMatrix8)                                  | Determines whether this matrix is equivalent to the canonical 0 matrix
+Method      | Z0.BitMatrix8x.ToGraph(Z0.BitMatrix8)                                 | Constructs an 8-node graph via the adjacency matrix interpretation
+Method      | Z0.BitMatrix8x.Pack(Z0.BitMatrix8)                                    | Packs the matrix into an unsigned 64-bit integer
+Method      | Z0.BitMatrix8x.Transpose(Z0.BitMatrix8)                               | Transposes a copy of the source matrix
+Method      | Z0.BitMatrix8x.Diagonal(Z0.BitMatrix8)                                | Retrives the bitvector determined by the matrix diagonal
+Method      | Z0.BitMatrix8x.Replicate(Z0.BitMatrix8)                               | Creates a new matrix by cloning the existing matrix or allocating a matrix with the same structure
+Method      | Z0.TabularTruth.vector(Z0.N4,Z0.UnaryBitLogic)                        | Computes a the signature, also referred to as the truth vector, for an identified unary operator
+Method      | Z0.TabularTruth.vector(Z0.N4,Z0.BinaryLogicKind)                      | Computes a the signature, also referred to as the truth vector, for an identified binary operator
+Method      | Z0.TabularTruth.vector(Z0.N4,Z0.BinaryBitLogic)                       | Computes a the signature, also referred to as the truth vector, for an identified binary operator
+Method      | Z0.TabularTruth.vector(Z0.N8,Z0.TernaryBitLogic)                      | Computes a the signature, also referred to as the truth vector, for an identified ternary operator
+Method      | Z0.TabularTruth.vector(Z0.N16,Z0.BinaryLogicKind)                     | Constructs a canonical vector that defines a kind-identified operator
+Type        | Z0.RowBits`1                                                          | Defines a sequence of generic bitvectors, interpreted as rows, for which the width is determined by the bitvector primal type
+Method      | Z0.RowBits`1.op_BitwiseAnd(Z0.RowBits{`0}@,Z0.RowBits{`0}@)           | Computes the bitwise AND between the operands
+Method      | Z0.RowBits`1.op_BitwiseOr(Z0.RowBits{`0}@,Z0.RowBits{`0}@)            | Computes the bitwise OR between the operands
+Method      | Z0.RowBits`1.op_ExclusiveOr(Z0.RowBits{`0}@,Z0.RowBits{`0}@)          | Computes the bitwise XOR between the operands
+Method      | Z0.RowBits`1.op_OnesComplement(Z0.RowBits{`0}@)                       | Computes the bitwise complement of the source matrix
+Property    | Z0.RowBits`1.Head                                                     | A reference to the first storage cell allocated to the matrix
+Property    | Z0.RowBits`1.Bytes                                                    | The underlying matrix presented as a bytespan
+Property    | Z0.RowBits`1.IsSquare                                                 | Specifies whether the matrix is square; if so, it can be represented by one of the primal matrices
+Property    | Z0.RowBits`1.Item(System.Int32)                                       | Queries/manipulates index-identified row data
+Type        | Z0.TableIndex                                                         | Correlates a linear bit index, a cell index and bit offset, and a row/column coordinate in a grid/matrix
+Field       | Z0.TableIndex.CellIndex                                               | The container-relative index of the storage segment containing the bit
+Field       | Z0.TableIndex.RowCellCount                                            | The number of cells covered by a row
+Field       | Z0.TableIndex.BitOffset                                               | The segment-relative bit offset
+Field       | Z0.TableIndex.BitIndex                                                | The 0-based position of the cell
+Field       | Z0.TableIndex.RowIndex                                                | The 0-based row index
+Field       | Z0.TableIndex.ColIndex                                                | The 0-based column index
+Type        | Z0.BitMatrix`1                                                        | Defines a square bitmatrix with order determined by the primal type over which it is defined            The intent is to provide a primal bitmatrix generalization
+Property    | Z0.BitMatrix`1.Order                                                  | Specifies the number rows/columns
+Type        | Z0.BitMatrix16                                                        | Defines a 16x16 matrix of bits
+Field       | Z0.BitMatrix16.N                                                      | The matrix order
+Property    | Z0.BitMatrix16.Identity                                               | Defines the 16x16 identity bitmatrix
+Property    | Z0.BitMatrix16.Zero                                                   | Allocates a 16x16 zero bitmatrix
+Method      | Z0.BitMatrix16.Alloc(Z0.bit)                                          | Allocates a matrix with a fill value
+Method      | Z0.BitMatrix16.op_BitwiseAnd(Z0.BitMatrix16@,Z0.BitMatrix16@)         | Computes the bitwise and of the operands
+Property    | Z0.BitMatrix16.Bytes                                                  | The underlying matrix presented as a bytespan
+Property    | Z0.BitMatrix16.Content                                                | The underlying matrix data
+Property    | Z0.BitMatrix16.Head                                                   | A reference to the first row of the matrix
+Property    | Z0.BitMatrix16.Item(System.Int32,System.Int32)                        | Reads/manipulates the bit in a specified cell
+Property    | Z0.BitMatrix16.Item(System.Int32)                                     | Gets/sets an identified row
+Type        | Z0.BitMatrix32                                                        | Defines a 32x32 matrix of bits
+Field       | Z0.BitMatrix32.N                                                      | The matrix order
+Property    | Z0.BitMatrix32.Identity                                               | Allocates a 32x32 identity bitmatrix
+Property    | Z0.BitMatrix32.Zero                                                   | Allocates a 32x32 zero bitmatrix
+Property    | Z0.BitMatrix32.Content                                                | The underlying matrix data
+Property    | Z0.BitMatrix32.Bytes                                                  | The underlying matrix presented as a bytespan
+Property    | Z0.BitMatrix32.Head                                                   | A reference to the first row of the matrix
+Property    | Z0.BitMatrix32.Order                                                  | The square matrix order
+Property    | Z0.BitMatrix32.Item(System.Int32,System.Int32)                        | Queries/manipulates a bit in an identified cell
+Property    | Z0.BitMatrix32.Item(System.Int32)                                     | Queries/manipulates row data
+Field       | Z0.BitMatrix4.N                                                       | The matrix order
+Property    | Z0.BitMatrix4.Identity                                                | Allocates a 4x4 identity bitmatrix
+Method      | Z0.BitMatrix4.Alloc(Z0.bit)                                           | Allocates a matrix, optionally assigning each element to the specified bit value
+Method      | Z0.BitMatrix4.GetRow(System.Int32)                                    | Gets an index-identified row vector
+Type        | Z0.BitMatrix64                                                        | Defines a 64x64 matrix of bits
+Field       | Z0.BitMatrix64.N                                                      | The matrix order
+Property    | Z0.BitMatrix64.Identity                                               | Defines the 64x64 identity bitmatrix
+Property    | Z0.BitMatrix64.Zero                                                   | Defines the 64x64 zero bitmatrix
+Property    | Z0.BitMatrix64.Order                                                  | Specifies the number of rows in the matrix
+Property    | Z0.BitMatrix64.Bytes                                                  | The underlying matrix presented as a bytespan
+Property    | Z0.BitMatrix64.Content                                                | The underlying matrix data
+Property    | Z0.BitMatrix64.Head                                                   | A reference to the first row of the matrix
+Property    | Z0.BitMatrix64.Item(System.Int32,System.Int32)                        | Reads/manipulates the bit in a specified cell
+Property    | Z0.BitMatrix64.Item(System.Int32)                                     | Gets or sets the data for a specified row
+Type        | Z0.BitMatrix8                                                         | Defines an 8x8 matrix of bits
+Field       | Z0.BitMatrix8.N                                                       | The matrix order
+Property    | Z0.BitMatrix8.Identity                                                | Allocates an 8x8 identity bitmatrix
+Property    | Z0.BitMatrix8.Zero                                                    | Allocates an 8x8 zero bitmatrix
+Property    | Z0.BitMatrix8.Ones                                                    | Allocates an 8x8 1-filled bitmatrix
+Property    | Z0.BitMatrix8.Head                                                    | A reference to the first row of the matrix
+Property    | Z0.BitMatrix8.Order                                                   | The square matrix order
+Property    | Z0.BitMatrix8.Item(System.Int32,System.Int32)                         | Reads/manipulates the bit in a specified cell
+Property    | Z0.BitMatrix8.Item(System.Int32)                                      | Gets/Sets the data for a row
+Type        | Z0.BitMatrix`3                                                        | Defines a bitmatrix of natural dimensions over a primal type
+Method      | Z0.BitMatrix`3.Alloc                                                  | Allocates a Zero-filled mxn matrix
+Method      | Z0.BitMatrix`3.Load(System.Span{`2})                                  | Loads a matrix from an array of appopriate length
+Property    | Z0.BitMatrix`3.Content                                                | Presents matrix storage as a span of generic cells
+Property    | Z0.BitMatrix`3.Head                                                   | Returns a reference to the leading segment of the underlying storage
+Property    | Z0.BitMatrix`3.Bytes                                                  | Presents matrix storage as a bytespan
+Property    | Z0.BitMatrix`3.RowCount                                               | The number of rows in the matrix
+Property    | Z0.BitMatrix`3.ColCount                                               | The number of columns in the matrix
+Property    | Z0.BitMatrix`3.CellCount                                              | The number of allocated storage cells
+Property    | Z0.BitMatrix`3.Item(System.Int32,System.Int32)                        | Queries/manipulates a bit at a specified row/col
+Property    | Z0.BitMatrix`3.Item(System.Int32)                                     | Queries mainpulates a row
+Method      | Z0.BitMatrix`3.SetCol(System.Int32,Z0.BitBlock{`0,`2})                | Replaces an index-identied column of data with the content of a column vector
+Method      | Z0.BitMatrix`3.GetCol(System.Int32)                                   | Retrieves an index-identied column of data presented as a bitvector
+Method      | Z0.BitMatrix`3.Fill(Z0.bit)                                           | Sets all the bits to align with the source value
+Method      | Z0.BitMatrix`3.Transpose                                              | The world's most inefficient bitmatrix transpose
+Type        | Z0.BitMatrix`2                                                        | Defines a square bitmatrix of natural order over a primal type
+Property    | Z0.BitMatrix`2.RowWidth                                               | The bit width of each row/column
+Property    | Z0.BitMatrix`2.CellWidth                                              | The bit width of a storage cell
+Property    | Z0.BitMatrix`2.RowCellCount                                           | The (padded) number of cells required for each row of storage
+Method      | Z0.BitMatrix`2.op_Multiply(Z0.BitMatrix{`0,`1},Z0.BitMatrix{`0,`1})   | Multiplies the left matrix by the right
+Property    | Z0.BitMatrix`2.Head                                                   | Returns a reference to the leading segment of the underlying storage
+Property    | Z0.BitMatrix`2.Item(System.Int32)                                     | Queries/Specifies a row
+Property    | Z0.BitMatrix`2.Order                                                  | The number of rows/cols in the matrix
+Property    | Z0.BitMatrix`2.Content                                                | Provides direct access to the underlying bitstore
+Method      | Z0.BitMatrix`2.SetCol(System.Int32,Z0.BitBlock{`0,`1})                | Replaces an index-identied column of data with the content of a column vector
+Method      | Z0.BitMatrix`2.GetCol(System.Int32)                                   | Retrieves an index-identied column of data presented as a bitvector
+Method      | Z0.BitMatrix`2.Fill(Z0.bit)                                           | Sets all the bits to align with the source value

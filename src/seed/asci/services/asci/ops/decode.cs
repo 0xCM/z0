@@ -19,7 +19,7 @@ namespace Z0
         public static ReadOnlySpan<char> decode(AsciCharCode src)
         {
             var storage = 0u;
-            ref var dst = ref Unsafe.As<uint,char>(ref storage);
+            ref var dst = ref As.@as<uint,char>(ref storage);
             seek(ref dst, 0) = (char)(byte)src;
             return As.cover(dst, 2);
         }
@@ -28,7 +28,7 @@ namespace Z0
         public static ReadOnlySpan<char> decode(in asci2 src)
         {
             var storage = 0u;
-            ref var dst = ref Unsafe.As<uint,char>(ref storage);
+            ref var dst = ref As.@as<uint,char>(ref storage);
             seek(ref dst, 0) = (char)(byte)(src.Storage >> 0);
             seek(ref dst, 1) = (char)(byte)(src.Storage >> 8);
             return As.cover(dst, 2);
@@ -38,7 +38,7 @@ namespace Z0
         public static ReadOnlySpan<char> decode(in asci4 src)
         {
             var storage = 0ul;
-            ref var dst = ref Unsafe.As<ulong,char>(ref storage);
+            ref var dst = ref As.@as<ulong,char>(ref storage);
             seek(ref dst, 0) = (char)(byte)(src.Storage >> 0);
             seek(ref dst, 1) = (char)(byte)(src.Storage >> 8);
             seek(ref dst, 2) = (char)(byte)(src.Storage >> 16);
@@ -50,20 +50,20 @@ namespace Z0
         public static ReadOnlySpan<char> decode(in asci8 src)
         {
             var decoded = vinflate(vbytes(w128, src.Storage));
-            return Root.cast<char>(bytespan(vlo(decoded)));            
+            return As.cast<char>(As.bytes(vlo(decoded)));            
         }
+
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
-            => Root.cast<char>(bytespan(vinflate(src.Storage)));
+            => As.cast<char>(As.bytes(vinflate(src.Storage)));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
         {            
             var lo = vinflate(src.Storage, n0);
             var hi = vinflate(src.Storage, n1);
-            var data = bytespan(new Seg512(lo,hi));            
-            return Root.cast<char>(data);
+            return As.cast<char>(As.bytes(new Seg512(lo,hi)));
         }
 
         [MethodImpl(Inline), Op]
@@ -74,15 +74,42 @@ namespace Z0
             var x1 = vinflate(x.Lo,n1);
             var x2 = vinflate(x.Hi,n0);
             var x3 = vinflate(x.Hi,n1);
-            var data = new Seg1024(x0,x1,x2,x3);
-            return Root.cast<char>(bytespan(data));
+            return As.cast<char>(As.bytes(new Seg1024(x0,x1,x2,x3)));
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void decode(in asci8 src, ref char dst)
+        {
+            var decoded = vinflate(vbytes(w128, src.Storage));
+            SymBits.vstore(decoded.GetLower(), ref As.@as<char,ushort>(ref dst));
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void decode(in asci16 src, ref char dst)
+        {
+           var decoded = vinflate(src.Storage);
+           SymBits.vstore(decoded, ref As.@as<char,ushort>(ref dst));
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void decode(in asci32 src, ref char dst)
+        {
+            decode(src.Lo, ref dst);
+            decode(src.Hi, ref seek(ref dst, 16));
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void decode(in asci64 src, ref char dst)
+        {
+            decode(src.Lo, ref dst);
+            decode(src.Hi, ref seek(ref dst, 32));
         }
 
         [MethodImpl(Inline)]
         static int decode(Vector256<ushort> data, ref char dst)
         {
             var bytes = bytespan(data);
-            var chars = Root.cast<char>(bytes);
+            var chars = As.cast<char>(bytes);
             var count = 0;    
             for(var i=0; i<chars.Length; i++, count++)
             {

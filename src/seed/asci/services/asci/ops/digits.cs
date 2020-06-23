@@ -14,9 +14,7 @@ namespace Z0
     using HSU = HexSymUp;
 
     partial struct asci
-    {        
-
-
+    {       
 
         [MethodImpl(Inline), Op]
         public static Span<DeciDigit> digits(ReadOnlySpan<char> src, Span<DeciDigit> dst)

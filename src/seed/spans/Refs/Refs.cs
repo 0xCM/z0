@@ -14,10 +14,6 @@ namespace Z0
     [ApiHost]
     public static class refs
     {
-        [MethodImpl(Inline)]
-        public static IntPtr intptr(long i)
-            => Pointed.intptr(i);
-
         /// <summary>
         /// Presents a readonly reference as reference
         /// </summary>
@@ -89,37 +85,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static ref byte seek8<T>(ref T src, int count)
-            => ref As.seekw(w8, ref src, count);
-
-        /// <summary>
-        /// Interprets a generic element source as a uint16 element source and skips {count} elments of bit-width 16
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="count">The number of 16-bit elements to skip</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref ushort seek16<T>(ref T src, int count)
-            => ref As.seekw(w16, ref src, count);
-
-        /// <summary>
-        /// Interprets a generic element source as a uint32 element source and skips {count} elments of bit-width 32
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="count">The number of 32-bit elements to skip</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref uint seek32<T>(ref T src, int count)
-            => ref As.seekw(w32, ref src, count);
-
-        /// <summary>
-        /// Interprets a generic element source as a uint64 element source and skips {count} elments of bit-width 64
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="count">The number of 64-bit elements to skip</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref ulong seek64<T>(ref T src, int count)
-            => ref As.seekw(w64, ref src, count);
+            => ref As.seek8(ref src, count);
 
         /// <summary>
         /// Adds an offset to a reference, measured in bytes
@@ -129,7 +95,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seekb<T>(ref T src, long count)
-            => ref Unsafe.AddByteOffset(ref src, Pointed.intptr(count));
+            => ref Unsafe.AddByteOffset(ref src, As.intptr(count));
 
         /// <summary>
         /// Skips a specified number of 8-bit source segments and returns a readonly reference to the resulting memory location
@@ -139,7 +105,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref byte skip8<T>(in T src, int count)
-            => ref As.skipw(w8, src, count);
+            => ref As.skip8(src, count);
 
         /// <summary>
         /// Interprets a readonly generic reference as a readonly uint64 reference
@@ -218,7 +184,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* constptr<T>(in T src)
             where T : unmanaged
-                => Pointed.constptr(in src);
-
+                => As.point(in src);
     }
 }

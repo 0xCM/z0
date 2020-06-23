@@ -1,0 +1,31 @@
+Method      | Z0.VData.blendspec``1(Z0.W256,Z0.bit)                                 | Defines a blend specification for combining 2 256-bit vectors that selects the odd components from each vector
+Method      | Z0.VData.blendspec``1(Z0.W256,Z0.bit,``0)                             | Retrieves a blend specification for combining 2 256-bit vectors that selects the even components from each vector
+Method      | Z0.VData.byteswap``1(Z0.N128,``0)                                     | Retrieves the shuffle pattern that, when applied, swaps the byte-level representation             of each  unsigned 16,32, or 64-bit integer component value
+Method      | Z0.VData.byteswap``1(Z0.N256,``0)                                     | Retrieves the shuffle pattern that, when applied, swaps the byte-level representation             of each  unsigned 16,32, or 64-bit integer component value
+Method      | Z0.VData.clearalt``1(Z0.N256)                                         | Creates a shuffle mask that clears every-other vector component
+Method      | Z0.VData.decrements``1(Z0.N128)                                       | Creates a 128-bit vector with component values k - 1, ..., 1, 0  where k is the length of the target vector
+Method      | Z0.VData.decrements``1(Z0.N256)                                       | Creates a 256-bit vector with component values k - 1, ..., 1, 0  where k is the length of the target vector
+Method      | Z0.VData.vincrements``1(Z0.W128)                                      | Creates a 128-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+Method      | Z0.VData.vincrements``1(Z0.W256)                                      | Creates a 256-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+Method      | Z0.VData.vincrements``1(Z0.W512)                                      | Creates a 512-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+Method      | Z0.VData.lanemerge``1                                                 | Creates a vector that decribes a lo/hi lane merge permutation            For example, if X = [A E B F | C G D H] then the lane merge pattern P will            describe a permutation that has the following effect: permute(X,P) = [A B C D | E F G H]
+Method      | Z0.VData.vload``1(Z0.N128,System.ReadOnlySpan{System.Byte})           | Loads a 128-bit pattern described by a readonly bytespan
+Method      | Z0.VData.vload``1(Z0.N256,System.ReadOnlySpan{System.Byte})           | Loads a 256-bit pattern described by a readonly bytespan
+Method      | Z0.VData.vload``1(Z0.N512,System.ReadOnlySpan{System.Byte})           | Loads a 512-bit pattern described by a readonly bytespan
+Method      | Z0.VData.vload(Z0.N128,System.ReadOnlySpan{System.Byte})              | Loads a 128-bit pattern described by a readonly bytespan
+Method      | Z0.VData.vload(Z0.N256,System.ReadOnlySpan{System.Byte})              | Loads a 256-bit pattern described by a readonly bytespan
+Method      | Z0.VData.vload(Z0.N512,System.ReadOnlySpan{System.Byte})              | Loads a 256-bit pattern described by a readonly bytespan
+Method      | Z0.VData.packusLo(Z0.N128,Z0.N32,Z0.N16)                              | Produces the lo shuffle spec for packing (128x32, 128x32) -&gt; 128x16
+Method      | Z0.VData.packusHi(Z0.N128,Z0.N32,Z0.N16)                              | Produces the hi shuffle spec for packing (128x32, 128x32) -&gt; 128x16
+Method      | Z0.VData.packusLo(Z0.N128,Z0.N16,Z0.N8)                               | Produces the lo shuffle spec for packing (128x16,128x16) -&gt; 128x8
+Method      | Z0.VData.packusHi(Z0.N128,Z0.N16,Z0.N8)                               | Produces the hi shuffle spec for packing (128x16,128x16) -&gt; 128x8
+Method      | Z0.VData.packusLo(Z0.N256,Z0.N32,Z0.N16)                              | Retrieves the lo shuffle spec for packing 256x32x2 -&gt; 256x16
+Method      | Z0.VData.packusHi(Z0.N256,Z0.N32,Z0.N16)                              | Retrieves the hi shuffle spec for packing 256x32x2 -&gt; 256x16
+Property    | Z0.VData.RotL8_128x8u                                                 | Shuffle pattern that, when applied, rotates 128 bits of content leftward by 8 bits
+Property    | Z0.VData.RotL16_128x8u                                                | Shuffle pattern that, when applied, rotates 128 bits of content leftward by 16 bits
+Property    | Z0.VData.RotL24_128x8u                                                | Shuffle pattern that, when applied, rotates 128 bits of content leftward by 24 bits
+Property    | Z0.VData.RotL32_128x8u                                                | Shuffle pattern that, when applied, rotates 128 bits of content leftward by 32 bits
+Property    | Z0.VData.RotL40_128x8u                                                | Shuffle pattern that, when applied, rotates 128 bits of content leftward by 40 bits
+Property    | Z0.VData.RotL48_128x8u                                                | Shuffle pattern that, when applied, rotates 128 bits of content leftward by 40 bits
+Method      | Z0.VData.vunits``1(Z0.N128,``0)                                       | Creates a 128-bit vector where each component is of unit value
+Method      | Z0.VData.vunits``1(Z0.N256,``0)                                       | Creates a 256-bit vector where each component is of unit value

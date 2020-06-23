@@ -25,7 +25,7 @@ namespace Z0
             var w = w128;
             var stack = Stacks.alloc(w);
             ref var dst = ref Stacks.head<T>(ref stack);
-            vstore(src,ref dst);
+            VStore.vsave(src,ref dst);
             return Blocks.load(w, ref dst);            
         }                       
 
@@ -41,7 +41,7 @@ namespace Z0
             var w = w256;
             var stack = Stacks.alloc(w);
             ref var dst = ref Stacks.head<T>(ref stack);
-            vstore(src,ref dst);
+            VStore.vsave(src,ref dst);
             return Blocks.load(w, ref dst);            
         }            
 
@@ -57,7 +57,7 @@ namespace Z0
             var w = w512;
             var stack = Stacks.alloc(w);
             ref var dst = ref Stacks.head<T>(ref stack);
-            vstore(src,ref dst);
+            VStore.vsave(src,ref dst);
             return Blocks.load(w, ref dst);            
         }                  
 
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector128<T> src, in Block128<T> dst)
             where T : unmanaged
-                => vstore(src, ref dst.Head);
+                => VStore.vsave(src, ref dst.Head);
 
         /// <summary>
         /// Stores the source vector to a specified block in a blocked container
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector128<T> src, in Block128<T> dst, int block)
             where T : unmanaged
-                => vstore(src, ref dst.BlockRef(block));
+                => VStore.vsave(src, ref dst.BlockRef(block));
 
         /// <summary>
         /// Stores the source vector to a blocked container
@@ -93,7 +93,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector256<T> src, in Block256<T> dst)
             where T : unmanaged
-                => vstore(src, ref dst.Head);
+                => VStore.vsave(src, ref dst.Head);
 
         /// <summary>
         /// Stores the source vector to a blocked container
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector512<T> src, in Block512<T> dst)
             where T : unmanaged
-                => vstore(src, ref dst.Head);
+                => VStore.vsave(src, ref dst.Head);
 
         /// <summary>
         /// Stores the source vector to a specified block in a blocked container
@@ -116,7 +116,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector256<T> src, in Block256<T> dst, int block)
             where T : unmanaged
-                => vstore(src, ref dst.BlockRef(block));
+                => VStore.vsave(src, ref dst.BlockRef(block));
 
         /// <summary>
         /// Stores the source vector to a specified block in a blocked container
@@ -128,6 +128,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector512<T> src, in Block512<T> dst, int block)
             where T : unmanaged
-                => vstore(src, ref dst.BlockRef(block));
+                => VStore.vsave(src, ref dst.BlockRef(block));
     }
 }

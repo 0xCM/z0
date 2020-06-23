@@ -5,8 +5,7 @@
 namespace Z0
 {        
     using System;
-    using static Gone;
-
+    
     public class t_bitgraph : UnitTest<t_bitgraph>
     {
         public void Create8()

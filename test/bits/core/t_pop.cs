@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Gone;
 
     public class t_pop : t_bitcore<t_pop>
     {                

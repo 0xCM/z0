@@ -1,0 +1,152 @@
+Method      | Z0.Fixed.alloc``1                                                     | Creates a fixed-type value of parametric type
+Method      | Z0.Fixed.bytes``1(``0@)                                               | Presents a fixed value as a span of bytes
+Method      | Z0.Fixed.byteview``1(``0@)                                            | Presents a fixed source value as a reaodonly span of bytes
+Method      | Z0.Fixed.cell``2(``0@,System.Int32)                                   | Queries/manipulates a cell within a fixed storage block
+Method      | Z0.Fixed.cell``1(Z0.Fixed8@,System.Int32)                             | Queries/manipulates a generic cell within an 8-bit storage block
+Method      | Z0.Fixed.cell``1(Z0.Fixed16@,System.Int32)                            | Queries/manipulates a generic cell within a 16-bit storage block
+Method      | Z0.Fixed.cell``1(Z0.Fixed32@,System.Int32)                            | Queries/manipulates a generic cell within a 32-bit storage block
+Method      | Z0.Fixed.cell``1(Z0.Fixed64@,System.Int32)                            | Queries/manipulates a generic cell within a 64-bit storage block
+Method      | Z0.Fixed.cell``1(Z0.Fixed128@,System.Int32)                           | Queries/manipulates a generic cell within a 128-bit storage block
+Method      | Z0.Fixed.cell``1(Z0.Fixed256@,System.Int32)                           | Queries/manipulates a generic cell within a 256-bit storage block
+Method      | Z0.Fixed.deposit``2(``0@,``1@)                                        | Writes source data to a fixed target which, hopefully, is of sufficient size
+Method      | Z0.Fixed.span``1(Z0.Fixed8@)                                          | Presents an 8-bit value as a single-celled T-parametric span
+Method      | Z0.Fixed.span``1(Z0.Fixed16@)                                         | Presents a 16-bit value as a T-parametric span
+Method      | Z0.Fixed.span``1(Z0.Fixed32@)                                         | Presents a 32-bit value as a T-parametric span
+Method      | Z0.Fixed.span``1(Z0.Fixed64@)                                         | Presents a 64-bit value as a T-parametric span
+Method      | Z0.Fixed.span``1(Z0.Fixed128@)                                        | Presents a 128-bit value as a T-parametric span
+Method      | Z0.Fixed.span``1(Z0.Fixed256@)                                        | Presents a 256-bit value as a T-parametric span
+Method      | Z0.Fixed.span``1(Z0.Fixed512@)                                        | Presents a 256-bit value as a T-parametric span
+Method      | Z0.Fixed.from``1(System.Runtime.Intrinsics.Vector128{``0}@)           | Presents a 128-bit vector as a 128-bit fixed block
+Method      | Z0.Fixed.from``1(System.Runtime.Intrinsics.Vector256{``0}@)           | Presents a 256-bit vector as a 256-bit fixed block
+Method      | Z0.Fixed.from``1(Z0.Vector512{``0}@)                                  | Presents a 512-bit vector as a 512-bit fixed block
+Method      | Z0.Fixed.head``1(Z0.Fixed8@)                                          | Returns a generic reference to the leading storage cell of an 8-bit storage block
+Method      | Z0.Fixed.head``1(Z0.Fixed16@)                                         | Returns a generic reference to the leading storage cell of a 16-bit storage block
+Method      | Z0.Fixed.head``1(Z0.Fixed32@)                                         | Returns a generic reference to the leading storage cell of a 32-bit storage block
+Method      | Z0.Fixed.head``1(Z0.Fixed64@)                                         | Returns a generic reference to the leading storage cell of a 64-bit storage block
+Method      | Z0.Fixed.head``1(Z0.Fixed128@)                                        | Returns a generic reference to the leading storage cell of a 128-bit storage block
+Method      | Z0.Fixed.head``1(Z0.Fixed256@)                                        | Returns a generic reference to the leading storage cell of a 256-bit storage block
+Method      | Z0.Fixed.head``1(Z0.Fixed512@)                                        | Returns a generic reference to the leading storage cell of a 512-bit storage block
+Method      | Z0.Fixed.head``2(``0@)                                                | Returns a generic reference to the leading storage cell of a fixed storage block
+Method      | Z0.Fixed.deposit``2(``0@,System.Int32,``1@,System.Int32)              | Writes a specified number of source elements to a fixed target
+Method      | Z0.Fixed.vector``1(Z0.Fixed128@)                                      | Loads a 128-bit vector from 128-bit storage block
+Method      | Z0.Fixed.vector``1(Z0.Fixed256@)                                      | Loads a 256-bit vector from 256-bit storage block
+Method      | Z0.Fixed.vector``1(Z0.Fixed512@)                                      | Loads a 512-bit vector from 512-bit storage block
+Method      | Z0.Fixed.vfix``1(System.Runtime.Intrinsics.Vector128{``0})            | Initializes a 128-bit value with a 128-bit source vector
+Method      | Z0.Fixed.vfix``1(System.Runtime.Intrinsics.Vector256{``0})            | Initializes a 256-bit value with a 256-bit source vector
+Method      | Z0.Fixed.view``1(Z0.Fixed8@)                                          | Presents an 8-bit value as a single-celled T-parametric readonly span
+Method      | Z0.Fixed.view``1(Z0.Fixed16@)                                         | Presents a 32-bit value as a T-parametric readonly span
+Method      | Z0.Fixed.view``1(Z0.Fixed32@)                                         | Presents a 32-bit value as a T-parametric readonly span
+Method      | Z0.Fixed.view``1(Z0.Fixed64@)                                         | Presents a 64-bit value as a T-parametric readonly span
+Method      | Z0.Fixed.view``1(Z0.Fixed128@)                                        | Presents a 128-bit value as a T-parametric readonly span
+Method      | Z0.Fixed.view``1(Z0.Fixed256@)                                        | Presents a 256-bit value as a T-parametric readonly span
+Method      | Z0.Fixed.view``1(Z0.Fixed512@)                                        | Presents a 512-bit value as a T-parametric readonly span
+Method      | Z0.FixedBuffers.alloc``1(System.Byte)                                 | Allocates a bufer sequence over segments of fixed type
+Method      | Z0.FixedBuffers.alloc(Z0.W128,System.Byte)                            | Allocates a bufer sequence over segments of width = 128 bits / 16 bytes
+Method      | Z0.FixedBuffers.alloc(Z0.W256,System.Byte)                            | Allocates a bufer sequence over segments of width = 256 bits / 32 bytes
+Method      | Z0.FixedBuffers.alloc(Z0.W512,System.Byte)                            | Allocates a bufer sequence over segments of width = 512 bits / 64 bytes
+Method      | Z0.ITestAction.TestAction(System.Action,System.String)                | Captures the outcome of an action invocation, identified by a supplied label
+Method      | Z0.ITestAction.TestAction``1(System.Action{``0},``0,System.String)    | Captures the outcome of an action invocation, identified by a supplied label
+Method      | Z0.ITestAction.TestAction``1(System.Action,System.String)             | Captures the outcome of action invocation, identified by a parametrically-specialized label
+Method      | Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp8,Z0.OpIdentity,Z0.UnaryOp8,Z0.OpIdentity)| Verifies that two 8-bit binary operators agree over a random set of points
+Method      | Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp16,Z0.OpIdentity,Z0.UnaryOp16,Z0.OpIdentity)| Verifies that two 16-bit binary operators agree over a random set of points
+Method      | Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp32,Z0.OpIdentity,Z0.UnaryOp32,Z0.OpIdentity)| Verifies that two 32-bit binary operators agree over a random set of points
+Method      | Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp64,Z0.OpIdentity,Z0.UnaryOp64,Z0.OpIdentity)| Verifies that two 64-bit binary operators agree over a random set of points
+Method      | Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp128,Z0.OpIdentity,Z0.UnaryOp128,Z0.OpIdentity)| Verifies that two 128-bit binary operators agree over a random set of points
+Method      | Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp256,Z0.OpIdentity,Z0.UnaryOp256,Z0.OpIdentity)| Verifies that two 128-bit binary operators agree over a random set of points
+Method      | Z0.TestFixedBinaryOp.Match(Z0.BinaryOp8,Z0.OpIdentity,Z0.BinaryOp8,Z0.OpIdentity)| Verifies that two 8-bit binary operators agree over a random set of points
+Method      | Z0.TestFixedBinaryOp.Match(Z0.BinaryOp16,Z0.OpIdentity,Z0.BinaryOp16,Z0.OpIdentity)| Verifies that two 16-bit binary operators agree over a random set of points
+Method      | Z0.TestFixedBinaryOp.Match(Z0.BinaryOp32,Z0.OpIdentity,Z0.BinaryOp32,Z0.OpIdentity)| Verifies that two 32-bit binary operators agree over a random set of points
+Method      | Z0.TestFixedBinaryOp.Match(Z0.BinaryOp64,Z0.OpIdentity,Z0.BinaryOp64,Z0.OpIdentity)| Verifies that two 64-bit binary operators agree over a random set of points
+Method      | Z0.TestFixedBinaryOp.Match(Z0.BinaryOp128,Z0.OpIdentity,Z0.BinaryOp128,Z0.OpIdentity)| Verifies that two 128-bit binary operators agree over a random set of points
+Method      | Z0.TestFixedBinaryOp.Match(Z0.BinaryOp256,Z0.OpIdentity,Z0.BinaryOp256,Z0.OpIdentity)| Verifies that two 128-bit binary operators agree over a random set of points
+Method      | Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp8,Z0.OpIdentity,Z0.BinaryOp8,Z0.OpIdentity)| Verifies that two 8-bit binary operators agree over a random set of points
+Method      | Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp16,Z0.OpIdentity,Z0.BinaryOp16,Z0.OpIdentity)| Verifies that two 16-bit binary operators agree over a random set of points
+Method      | Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp32,Z0.OpIdentity,Z0.BinaryOp32,Z0.OpIdentity)| Verifies that two 32-bit binary operators agree over a random set of points
+Method      | Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp64,Z0.OpIdentity,Z0.BinaryOp64,Z0.OpIdentity)| Verifies that two 64-bit binary operators agree over a random set of points
+Method      | Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp128,Z0.OpIdentity,Z0.BinaryOp128,Z0.OpIdentity)| Verifies that two 128-bit binary operators agree over a random set of points
+Method      | Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp256,Z0.OpIdentity,Z0.BinaryOp256,Z0.OpIdentity)| Verifies that two 128-bit binary operators agree over a random set of points
+Method      | Z0.FixedOps.apply``1(Z0.UnaryOp128,System.Runtime.Intrinsics.Vector128{``0})| Evaluates a 128-bit unary operator over a vector
+Method      | Z0.FixedOps.apply``1(Z0.UnaryOp256,System.Runtime.Intrinsics.Vector256{``0})| Evaluates a 256-bit unary operator over a vector
+Method      | Z0.FixedOps.apply``1(Z0.UnaryOp512,Z0.Vector512{``0}@)                | Evaluates a 512-bit unary operator over a vector
+Method      | Z0.FixedOps.apply``1(Z0.BinaryOp128,System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})| Evaluates a 128-bit binary operator over a pair of vectors
+Method      | Z0.FixedOps.apply``1(Z0.BinaryOp256,System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})| Evaluates a 256-bit binary operator over a pair of vectors
+Method      | Z0.FixedOps.apply``1(Z0.BinaryOp512,Z0.Vector512{``0},Z0.Vector512{``0})| Evaluates a 512-bit binary operator over a pair of vectors
+Method      | Z0.FixedOps.fix``1(System.Func{``0,``0},Z0.NumericKinds.U8)           | Creates a fixed 8-bit binary operator from caller-supplied delegate
+Method      | Z0.FixedOps.fix``1(System.Func{``0,``0},Z0.NumericKinds.U16)          | Creates a fixed 16-bit binary operator from caller-supplied delegate
+Method      | Z0.FixedOps.fix``1(System.Func{``0,``0},Z0.NumericKinds.U32)          | Creates a fixed 32-bit binary operator from caller-supplied delegate
+Method      | Z0.FixedOps.fix``1(System.Func{``0,``0},Z0.NumericKinds.U64)          | Creates a fixed 64-bit binary operator from caller-supplied delegate
+Method      | Z0.FixedOps.fix``1(System.Func{``0,``0,``0},Z0.NumericKinds.U8)       | Creates a fixed 16-bit binary operator from caller-supplied delegate
+Method      | Z0.FixedOps.fix``1(System.Func{``0,``0,``0},Z0.NumericKinds.U16)      | Creates a fixed 16-bit binary operator from caller-supplied delegate
+Method      | Z0.FixedOps.fix``1(System.Func{``0,``0,``0},Z0.NumericKinds.U32)      | Creates a fixed 32-bit binary operator from caller-supplied delegate
+Method      | Z0.FixedOps.fix``1(System.Func{``0,``0,``0},Z0.NumericKinds.U64)      | Creates a fixed 64-bit binary operator from caller-supplied delegate
+Method      | Z0.FixedOps.fix``2(Z0.UnaryOp{``1})                                   | Manufactures a fixed-parametric unary operator from T-parametric unary operator
+Method      | Z0.FixedOps.fix``2(Z0.BinaryOp{``1})                                  | Manufactures a fixed-parametric binary operator from T-parametric binary operator
+Method      | Z0.FixedOps.unfix``2(Z0.UnaryOp{``0})                                 | Manufactures a T-parametric unary operator from a fixed-parametric unary operator
+Method      | Z0.FixedOps.unfix``2(Z0.BinaryOp{``0})                                | Manufactures a T-parametric binary operator from a fixed-parametric binary operator
+Method      | Z0.FixedOps.vfix``1(System.Func{System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0}})| Creates a fixed 128-bit unary operator from caller-supplied delegate
+Method      | Z0.FixedOps.vfix``1(System.Func{System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0}})| Creates a fixed 256-bit binary operator from caller-supplied delegate
+Method      | Z0.FixedOps.vfix``1(System.Func{System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0}})| Creates a fixed 128-bit binary operator from caller-supplied delegate
+Method      | Z0.FixedOps.vfix``1(System.Func{System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0}})| Creates a fixed 256-bit binary operator from caller-supplied delegate
+Method      | Z0.XRng.FixedStream``1(Z0.IPolyrand)                                  | Creates a stream of fixed values
+Method      | Z0.XRng.NextPair``1(Z0.IPolyrand,``0)                                 | Produces the next pair of random primal values
+Method      | Z0.XRng.NextPair``1(Z0.IPolyrand,``0,``0)                             | Produces the next pair of random primal values within a specified range
+Method      | Z0.XRng.NextTriple``1(Z0.IPolyrand,``0)                               | Produces the next triple of random primal values
+Method      | Z0.XRng.NextTriple``1(Z0.IPolyrand,``0,``0)                           | Produces the next triple of random primal values within a specified range
+Method      | Z0.XRng.NextQuad``1(Z0.IPolyrand,``0)                                 | Produces the next triple of random primal values
+Method      | Z0.XRng.NextQuad``1(Z0.IPolyrand,``0,``0)                             | Produces the next triple of random primal values within a specified range
+Method      | Z0.XTend.ToFixed``1(System.Runtime.Intrinsics.Vector128{``0}@)        | Presents a 128-bit vector as a 128-bit fixed block
+Method      | Z0.XTend.ToFixed``1(System.Runtime.Intrinsics.Vector256{``0}@)        | Presents a 256-bit vector as a 256-bit fixed block
+Method      | Z0.XTend.ToFixed``1(Z0.Vector512{``0}@)                               | Presents a 512-bit vector as a 512-bit fixed block
+Method      | Z0.XTend.ToFixed``1(System.Func{System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0}})| Creates a fixed 128-bit unary operator from caller-supplied delegate
+Method      | Z0.XTend.ToFixed``1(System.Func{System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0}})| Creates a fixed 128-bit binary operator from caller-supplied delegate
+Method      | Z0.XTend.ToFixed``1(System.Func{System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0}})| Creates a fixed 256-bit binary operator from caller-supplied delegate
+Method      | Z0.XTend.ToFixed``1(System.Func{System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0}})| Creates a fixed 256-bit binary operator from caller-supplied delegate
+Property    | Z0.FixedOpKinds.BinaryOp8                                             | Specifies a fixed binary operator defined over 8-bit operands
+Property    | Z0.FixedOpKinds.BinaryOp16                                            | Specifies a fixed binary operator defined over 16-bit operands
+Property    | Z0.FixedOpKinds.BinaryOp32                                            | Specifies a fixed binary operator defined over 32-bit operands
+Property    | Z0.FixedOpKinds.BinaryOp64                                            | Specifies a fixed binary operator defined over 64-bit operands
+Property    | Z0.FixedOpKinds.BinaryOp128                                           | Specifies a fixed binary operator defined over 128-bit operands
+Property    | Z0.FixedOpKinds.BinaryOp256                                           | Specifies a fixed binary operator defined over 256-bit operands
+Property    | Z0.FixedOpKinds.BinaryOp512                                           | Specifies a fixed binary operator defined over 512-bit operands
+Property    | Z0.FixedOpKinds.BinaryPredicate8                                      | Specifies a fixed binary predicate defined over 8-bit operands
+Property    | Z0.FixedOpKinds.BinaryPredicate16                                     | Specifies a fixed binary predicate defined over 16-bit operands
+Property    | Z0.FixedOpKinds.BinaryPredicate32                                     | Specifies a fixed binary predicate defined over 32-bit operands
+Property    | Z0.FixedOpKinds.BinaryPredicate64                                     | Specifies a fixed binary predicate defined over 64-bit operands
+Property    | Z0.FixedOpKinds.BinaryPredicate128                                    | Specifies a fixed binary predicate defined over 128-bit operands
+Property    | Z0.FixedOpKinds.BinaryPredicate256                                    | Specifies a fixed binary predicate defined over 256-bit operands
+Property    | Z0.FixedOpKinds.BinaryPredicate512                                    | Specifies a fixed binary predicate defined over 512-bit operands
+Property    | Z0.FixedOpKinds.Emitter8                                              | Specifies a fixed emitter that produces 8-bit values
+Property    | Z0.FixedOpKinds.Emitter16                                             | Specifies a fixed emitter that produces 16-bit values
+Property    | Z0.FixedOpKinds.Emitter32                                             | Specifies a fixed emitter that produces 32-bit values
+Property    | Z0.FixedOpKinds.Emitter64                                             | Specifies a fixed emitter that produces 64-bit values
+Property    | Z0.FixedOpKinds.Emitter128                                            | Specifies a fixed emitter that produces 128-bit values
+Property    | Z0.FixedOpKinds.Emitter256                                            | Specifies a fixed emitter that produces 256-bit values
+Property    | Z0.FixedOpKinds.Emitter512                                            | Specifies a fixed emitter that produces 512-bit values
+Property    | Z0.FixedOpKinds.UnaryOp8                                              | Specifies a fixed unary operator defined over an 8-bit operand
+Property    | Z0.FixedOpKinds.UnaryOp16                                             | Specifies a fixed unary operator defined over a 16-bit operand
+Property    | Z0.FixedOpKinds.UnaryOp32                                             | Specifies a fixed unary operator defined over a 32-bit operand
+Property    | Z0.FixedOpKinds.UnaryOp64                                             | Specifies a fixed unary operator defined over a 64-bit operand
+Property    | Z0.FixedOpKinds.UnaryOp128                                            | Specifies a fixed unary operator defined over a 128-bit operand
+Property    | Z0.FixedOpKinds.UnaryOp256                                            | Specifies a fixed unary operator defined over a 256-bit operand
+Property    | Z0.FixedOpKinds.UnaryOp512                                            | Specifies a fixed unary operator defined over a 512-bit operand
+Property    | Z0.FixedOpKinds.UnaryPredicate8                                       | Specifies a fixed unary predicate defined over an 8-bit operand
+Property    | Z0.FixedOpKinds.UnaryPredicate16                                      | Specifies a fixed unary predicate defined over a 16-bit operand
+Property    | Z0.FixedOpKinds.UnaryPredicate32                                      | Specifies a fixed unary predicate defined over a 32-bit operand
+Property    | Z0.FixedOpKinds.UnaryPredicate64                                      | Specifies a fixed unary predicate defined over a 64-bit operand
+Property    | Z0.FixedOpKinds.UnaryPredicate128                                     | Specifies a fixed unary predicate defined over a 128-bit operand
+Property    | Z0.FixedOpKinds.UnaryPredicate256                                     | Specifies a fixed unary predicate defined over a 256-bit operand
+Property    | Z0.FixedOpKinds.UnaryPredicate512                                     | Specifies a fixed unary predicate defined over a 512-bit operand
+Type        | Z0.IFixedOpKind                                                       | Characterizes a fixed operator descriptor which both characterizes and describes             an operator defined over operands of fixed-width
+Property    | Z0.IFixedOpKind.OperandWidth                                          | The operand width
+Property    | Z0.IFixedOpKind.OperandType                                           | The fixed operand type
+Property    | Z0.IFixedOpKind.OperatorType                                          | The fixed delegate type
+Type        | Z0.IFixedOpKind`2                                                     | Characterizes a width-parametric fixed operator descriptor which both characterizes and describes            an operator defined over operands of fixed-width
+Type        | Z0.IFixedOpKind`3                                                     | Characterizes a width, operand and operator-parametric descriptor which both characterizes and describes            an operator defined over operands of fixed-width
+Property    | Z0.FixedOpKind.OperandWidth                                           | The operand width
+Property    | Z0.FixedOpKind.OperandType                                            | The fixed operand type
+Property    | Z0.FixedOpKind.OperatorType                                           | The fixed delegate type
+Property    | Z0.FixedOpKind`2.OperandType                                          | The fixed operand type
+Property    | Z0.FixedOpKind`2.OperatorType                                         | The fixed delegate type
+Property    | Z0.FixedOpKind`2.OperandWidth                                         | The operand width
+Type        | Z0.FixedOpKind`3                                                      | Classifies and describes operations defined over fixed operands
+Field       | Z0.FixedDelegate.Id                                                   | The operation identity

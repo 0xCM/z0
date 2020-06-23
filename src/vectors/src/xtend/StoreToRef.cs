@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Konst;
-    using static Widths;
 
     partial class XTend
     {
@@ -23,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector128<T> src, ref T dst, int offset = 0)
             where T : unmanaged            
-                => Vectors.vstore(src, ref dst, offset);
+                => VStore.vsave(src, ref dst, offset);
 
         /// <summary>
         /// Stores vector content to a memory reference
@@ -34,9 +33,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector256<T> src, ref T dst, int offset = 0)
             where T : unmanaged            
-                => Vectors.vstore(src, ref dst, offset);
-
-
-
+                => VStore.vsave(src, ref dst, offset);
     }
 }
