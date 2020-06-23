@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<byte> GetBytes<T>(ReadOnlySpan<T> src, int offset, int count)
             where T : struct
-                => src.Slice(offset,count).AsBytes();
+                => src.Slice(offset,count).Bytes();
 
         /// <summary>
         /// Fills a caller-supplied buffer with source bytes

@@ -118,16 +118,16 @@ namespace Z0.Logix
                 var y = gmath.inc(x);
 
                 var y0 = gmath.eq(x,x);
-                Claim.require(y0);
+                Claim.Require(y0);
 
                 var y1 = S.equals(x,x);
-                Claim.eq(NumericLiterals.maxval<T>(), y1);
+                Claim.Eq(NumericLiterals.maxval<T>(), y1);
 
                 var y2 = gmath.eq(x,y);
                 Claim.nea(y2);
 
                 var y3 = S.equals(x,y);
-                Claim.eq(NumericLiterals.zero<T>(),y3);
+                Claim.Eq(NumericLiterals.zero<T>(),y3);
 
             }
         }
@@ -143,7 +143,7 @@ namespace Z0.Logix
             {                
                 expect = gvec.vlt(x,y);
                 actual = gvec.vlt(x,y);
-                Claim.require(gvec.vsame(expect,actual));
+                Claim.Require(gvec.vsame(expect,actual));
 
                 var a =Vectors.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -162,7 +162,7 @@ namespace Z0.Logix
             {                
                 expect = gvec.vlt(x,y);
                 actual = gvec.vlt(x,y);
-                Claim.require(gvec.vsame(expect,actual));
+                Claim.Require(gvec.vsame(expect,actual));
 
                 var a =Vectors.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -182,7 +182,7 @@ namespace Z0.Logix
             {                
                 expect = gvec.vgt(x,y);
                 actual = gvec.vgt(x,y);
-                Claim.require(gvec.vsame(expect,actual));
+                Claim.Require(gvec.vsame(expect,actual));
 
                 var a =Vectors.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -202,7 +202,7 @@ namespace Z0.Logix
             {                
                 expect = gvec.vgt(x,y);
                 actual = gvec.vgt(x,y);
-                Claim.require(gvec.vsame(expect,actual));
+                Claim.Require(gvec.vsame(expect,actual));
 
                 var a =Vectors.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -220,7 +220,7 @@ namespace Z0.Logix
                 var y = Random.Next<T>();
                 var expect = gmath.lt(x,y).Promote<T>();
                 var actual = S.lt(x,y);
-                Claim.eq(expect,actual);
+                Claim.Eq(expect,actual);
             }
         }
 
@@ -233,7 +233,7 @@ namespace Z0.Logix
                 var y = Random.Next<T>();
                 var expect = gmath.lteq(x,y).Promote<T>();
                 var actual = S.lteq(x,y);
-                Claim.eq(expect,actual);
+                Claim.Eq(expect,actual);
             }
         }
 
@@ -246,7 +246,7 @@ namespace Z0.Logix
                 var y = Random.Next<T>();
                 var expect = gmath.gt(x,y).Promote<T>();
                 var actual = S.gt(x,y);
-                Claim.eq(expect,actual);
+                Claim.Eq(expect,actual);
             }
         }
 
@@ -259,7 +259,7 @@ namespace Z0.Logix
                 var y = Random.Next<T>();
                 var expect = gmath.gteq(x,y).Promote<T>();
                 var actual = S.gteq(x,y);
-                Claim.eq(expect,actual);
+                Claim.Eq(expect,actual);
             }
         }
 

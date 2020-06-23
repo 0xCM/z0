@@ -80,7 +80,7 @@ namespace Z0
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => Data.AsBytes().As<T>();
+            get => Data.AsBytes().Cast<T>();
         }
 
         public ref T Head

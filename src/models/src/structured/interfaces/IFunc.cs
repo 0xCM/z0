@@ -14,7 +14,7 @@ namespace Z0
     public interface IFunc
     {
         string Name 
-            => GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => a.Name, GetType().Name);
+            => GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => GetType().Name, GetType().Name);
         
         /// <summary>
         /// The operation identity

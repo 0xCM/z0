@@ -116,7 +116,7 @@ namespace Z0
                 var bitseq = bs.BitSeq.Blocked(block);
                 uint packed = BitPack.pack(bitseq,n8);
                 for(var i=0; i< count; i++)
-                    Claim.eq(bs[i], bit.test(packed, i));
+                    Claim.Eq(bs[i], bit.test(packed, i));
             }
         }
 
@@ -171,7 +171,7 @@ namespace Z0
             for(var i=0; i<count; i++)
                 Claim.eq((byte)gbits.testbit(src, (byte)i), y[i]);
 
-            Claim.eq(BitString.load(y).TakeScalar<T>(), src);
+            Claim.Eq(BitString.load(y).TakeScalar<T>(), src);
         }
     }
 }

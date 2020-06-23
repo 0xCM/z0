@@ -10,21 +10,13 @@ namespace Z0
     /// Identifies a formal operation and its kind
     /// </summary>
     public abstract class OpKindAttribute : OpAttribute
-    {
-        static OpKindId ToKindKid(object id)
-            => (OpKindId)(ulong)Convert.ChangeType(id, typeof(ulong));
-        
+    {        
         protected OpKindAttribute(object id, object group = null) 
+            : base(group?.ToString() ?? string.Empty)
         {
-            KindId = ToKindKid(id);
-            Group = group?.ToString() ?? string.Empty;
+            KindId = ApiAttributes.OpKindId(id);
         }
 
         public OpKindId KindId {get;}
-
-        public string Group {get;}
-
-        public override string Name 
-            => KindId.ToString().ToLower();
     }
 }

@@ -41,11 +41,11 @@ namespace Z0
             void case2()
             {
                 
-                Claim.eq((Pow2.pow(3) - 1)^Pow2.pow(3), BitMask.lo64(3));
-                Claim.eq((Pow2.pow(7) - 1)^Pow2.pow(7), BitMask.lo64(7));
-                Claim.eq((Pow2.pow(13) - 1)^Pow2.pow(13), BitMask.lo64(13));
-                Claim.eq((Pow2.pow(25) - 1)^Pow2.pow(25), BitMask.lo64(25));
-                Claim.eq((Pow2.pow(59) - 1)^Pow2.pow(59), BitMask.lo64(59));
+                Claim.Eq((Pow2.pow(3) - 1)^Pow2.pow(3), BitMask.lo64(3));
+                Claim.Eq((Pow2.pow(7) - 1)^Pow2.pow(7), BitMask.lo64(7));
+                Claim.Eq((Pow2.pow(13) - 1)^Pow2.pow(13), BitMask.lo64(13));
+                Claim.Eq((Pow2.pow(25) - 1)^Pow2.pow(25), BitMask.lo64(25));
+                Claim.Eq((Pow2.pow(59) - 1)^Pow2.pow(59), BitMask.lo64(59));
 
             }
 

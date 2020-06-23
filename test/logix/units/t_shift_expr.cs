@@ -150,7 +150,7 @@ namespace Z0.Logix
                 v1.Set(a);   
                 T actual = LogicEngine.eval(expr);
                 T expect = NumericLogixHost.eval(op,a,offset);
-                Claim.eq(actual,expect);                            
+                Claim.Eq(actual,expect);                            
             }
         }
 

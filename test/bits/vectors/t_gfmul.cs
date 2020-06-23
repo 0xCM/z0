@@ -20,8 +20,8 @@ namespace Z0
                 var p2 = Gf256.clmul((byte)v1, (byte)v2);
                 var p4 = Gf256.mul_ref(v1,v2);
 
-                Claim.eq(p1,p2);
-                Claim.eq(p1,p4);
+                Claim.Eq(p1,p2);
+                Claim.Eq(p1,p4);
             }
         }
         public void gfpoly_format()
@@ -30,8 +30,8 @@ namespace Z0
             var p2 = GfPoly16.FromExponents(8,4,3,2,0);
             var p3 = GfPoly16.FromScalar(0b100011101);
 
-            Claim.eq(p3.Degree,(byte)8);                        
-            Claim.eq(p1.Scalar, p2.Scalar);
+            Claim.Eq(p3.Degree,(byte)8);                        
+            Claim.Eq(p1.Scalar, p2.Scalar);
             ClaimPrimalSeq.eq(p1.Format(),p2.Format());                
         }
 
@@ -64,7 +64,7 @@ namespace Z0
 
             for(var i=0; i<7; i++)
             for(var j=0; j<7; j++)
-                Claim.eq(expect[i,j], actual[i,j]);
+                Claim.Eq(expect[i,j], actual[i,j]);
         }
 
         public void gfpoly()
@@ -72,7 +72,7 @@ namespace Z0
             gfpoly_check(GfPoly.Lookup<N3,byte>(), BitString.parse("1011"));            
             gfpoly_check(GfPoly.Lookup<N8,ushort>(), BitString.parse("100011101"));
             gfpoly_check(GfPoly.Lookup<N16,uint>(), BitString.parse("10000001111011101"));            
-            Claim.eq((ushort)0b100011101, GfPoly.Lookup<N8,ushort>().Scalar);
+            Claim.Eq((ushort)0b100011101, GfPoly.Lookup<N8,ushort>().Scalar);
             
         }
 

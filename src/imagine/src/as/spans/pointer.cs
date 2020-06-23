@@ -21,6 +21,5 @@ namespace Z0
             ref readonly var rHead = ref first(src);
             return (T*)AsPointer(ref edit(rHead));
         }
-
     }
 }

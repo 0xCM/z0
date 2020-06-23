@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>    
     /// Defines a test service which is, by definition, a contextual service of test context kind
     /// </summary>
-    public interface ITestService : IService<ITestContext>, IPolyrandProvider, ICheckOptions, ITestCaseIdentity, IClocked
+    public interface ITestService : IService<ITestContext>, IPolyrandProvider, TCheckOptions, TTestCaseIdentity, TClocked
     {
         IPolyrand IPolyrandProvider.Random => Context.Random;   
 

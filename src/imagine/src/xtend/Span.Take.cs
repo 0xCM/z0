@@ -31,7 +31,7 @@ namespace Z0
             {
                 var remaining = tsize - src.Length;
                 Span<T> dst = stackalloc T[1];
-                src.CopyTo(dst.AsBytes());            
+                src.CopyTo(dst.Bytes());            
                 return dst[0];
             }
         }

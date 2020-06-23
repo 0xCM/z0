@@ -11,7 +11,7 @@ namespace Z0.Logix
     using static BinaryComparisonKind;
     using static TypedLogicSpec;
 
-    public static class PredicateSpec
+    public readonly struct PredicateSpec
     {
         /// <summary>
         /// Defines a typed comparison predicate over operand expressions

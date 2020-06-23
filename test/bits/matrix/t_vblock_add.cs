@@ -92,7 +92,7 @@ namespace Z0
                 var v2 = Random.VectorBlock<N,T>();
                 var v3 = RowVector.blockload(add(v1.Unsized,v2.Unsized), n);
                 Linear.add(ref v1, v2);
-                Claim.require(v3 == v1);
+                Claim.Require(v3 == v1);
             }
         }
 

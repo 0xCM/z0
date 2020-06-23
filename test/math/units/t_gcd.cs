@@ -41,7 +41,7 @@ namespace Z0
                 var b = Random.Next(min, max);
                 var c = gmath.gcdbin(a,b);
                 var d = gmath.gcd(a,b);
-                Claim.eq(c,d);
+                Claim.Eq(c,d);
             }
         }
 

@@ -18,7 +18,7 @@ namespace Z0
         public static ICheckPrimalSeq Checker => default(CheckPrimalSeq);
     }
     
-    public interface ICheckPrimalSeq : ICheckLengths, ICheckInvariant, ICheckPrimal
+    public interface ICheckPrimalSeq : TCheckLengths, TCheckInvariant, TCheckPrimal
     {
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         void eq(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => require(ContentEqual(lhs,rhs), caller, file, line);
+            => Require(ContentEqual(lhs,rhs), caller, file, line);
 
         /// <summary>
         /// Asserts content equality for two byte spans
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         void eq(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => require(ContentEqual(lhs, rhs), caller, file, line);
+            => Require(ContentEqual(lhs, rhs), caller, file, line);
 
         /// <summary>
         /// Asserts content equality for two byte spans
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         void eq(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => require(ContentEqual(lhs, rhs), caller, file, line);
+            => Require(ContentEqual(lhs, rhs), caller, file, line);
 
         /// <summary>
         /// Asserts content equality for two byte spans
@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         void eq(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => require(ContentEqual(lhs, rhs), caller, file, line);
+            => Require(ContentEqual(lhs, rhs), caller, file, line);
 
         /// <summary>
         /// Asserts content equality for two byte spans
@@ -164,6 +164,6 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         void eq(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => require(ContentEqual(lhs, rhs), caller, file, line);
+            => Require(ContentEqual(lhs, rhs), caller, file, line);
     }
 }

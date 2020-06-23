@@ -19,7 +19,7 @@ namespace Z0
                 var A = Random.BitMatrix(n32);
                 var B = BitMatrix.not(A);
                 var C = BitMatrix.from(n32, gspan.not(A.Bytes.Replicate(), A.Bytes.Replicate()));
-                Claim.require(B == C);
+                Claim.Require(B == C);
                 
             }
         }
@@ -28,28 +28,28 @@ namespace Z0
         {
             var lhs = Random.BitMatrix8();
             var rhs = lhs.Replicate();
-            Claim.require(lhs.AndNot(rhs).IsZero());
+            Claim.Require(lhs.AndNot(rhs).IsZero());
         }
 
         public void bm_cnonimpl_16x16x16()
         {
             var lhs = Random.BitMatrix16();
             var rhs = lhs.Replicate();
-            Claim.require(lhs.AndNot(rhs).IsZero());
+            Claim.Require(lhs.AndNot(rhs).IsZero());
         }
 
         public void bm_cnonimpl_32x32x32()
         {
             var lhs = Random.BitMatrix32();
             var rhs = lhs.Replicate();
-            Claim.require(lhs.AndNot(rhs).IsZero());
+            Claim.Require(lhs.AndNot(rhs).IsZero());
         }
 
         public void bm_cnonimpl_64x64x64()
         {
             var lhs = Random.BitMatrix64();
             var rhs = lhs.Replicate();
-            Claim.require(lhs.AndNot(rhs).IsZero());
+            Claim.Require(lhs.AndNot(rhs).IsZero());
         }
     }
 }

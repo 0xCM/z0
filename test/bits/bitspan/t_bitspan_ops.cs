@@ -18,8 +18,8 @@ namespace Z0
                 var a = Random.Single(z64).ToBitSpan();
                 var b = Random.Single(z64).ToBitSpan();
                 var c = a.Replicate();
-                Claim.require(a != b);
-                Claim.require(a == c);
+                Claim.Require(a != b);
+                Claim.Require(a == c);
             }
         }
 
@@ -36,7 +36,7 @@ namespace Z0
             var x0 = 0b_01011000_00001000_11111010_01100101u;
             var x1 = x0.ToBitSpan();
             var x2 = x1.Extract<uint>();
-            Claim.eq(x0,x2);            
+            Claim.Eq(x0,x2);            
 
             var x = 0b10100001100101010001u;
             var bsSrc = "0000010100001100101010001";
@@ -48,7 +48,7 @@ namespace Z0
             Claim.eq(bs1.Trim(),bs2.Trim());
 
             var y = bs1.Convert<uint>();
-            Claim.eq(x,y);
+            Claim.Eq(x,y);
         }
 
         public void bsand_8()
@@ -179,7 +179,7 @@ namespace Z0
                 var a = x.Extract(t);
                 var b = y.Extract(t);
                 var c = gmath.and(a, b);
-                Claim.eq(c, z.Extract(t));
+                Claim.Eq(c, z.Extract(t));
             }
         }
 
@@ -196,7 +196,7 @@ namespace Z0
                 var a = x.Extract(t);
                 var b = y.Extract(t);
                 var c = gmath.or(a, b);
-                Claim.eq(c, z.Extract(t));
+                Claim.Eq(c, z.Extract(t));
             }
         }
 
@@ -213,7 +213,7 @@ namespace Z0
                 var a = x.Extract(t);
                 var b = y.Extract(t);
                 var c = gmath.xor(a, b);
-                Claim.eq(c, z.Extract(t));
+                Claim.Eq(c, z.Extract(t));
             }
         }
 
@@ -230,7 +230,7 @@ namespace Z0
             {
                 if(gmath.even(i))
                 {
-                    Claim.require(bitspan[i]);
+                    Claim.Require(bitspan[i]);
                     ClaimPrimalSeq.eq(bit.One, format[j]);
                 }
                 else
@@ -251,7 +251,7 @@ namespace Z0
             {
                 Random.SpanFill(buffer);
                 var bitspan = BitSpans.load(buffer);
-                bitspan_check(buffer.AsBytes(),bitspan);
+                bitspan_check(buffer.Bytes(),bitspan);
             }
         }
 
@@ -283,7 +283,7 @@ namespace Z0
                     var x = Random.Single<T>();
                     var y = BitSpans.from(x);
                     var z = BitSpans.extract<T>(y);
-                    Claim.eq(x,z);
+                    Claim.Eq(x,z);
                 }
             }  
 
@@ -302,7 +302,7 @@ namespace Z0
                     var x2 = x1.Format();
                     var x3 = BitSpans.parse(x2);
                     var x4 = x3.Convert<T>();
-                    Claim.eq(x0,x4);
+                    Claim.Eq(x0,x4);
                 }
             }
 
@@ -314,7 +314,7 @@ namespace Z0
             var bitcount = bitspan.Length;
             for(int i=0, k = 0; i < packed.Length; i++, k += 8)
             for(var j=0; j < 8; j++)
-                Claim.eq(bit.test(packed[i], j), bitspan[k + j]);
+                Claim.Eq(bit.test(packed[i], j), bitspan[k + j]);
         }
     }
 }

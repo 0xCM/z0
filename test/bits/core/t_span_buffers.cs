@@ -12,7 +12,7 @@ namespace Z0
 
     public sealed class t_spanbuffers : UnitTest<t_spanbuffers>
     {
-        static new ICheckNumeric Claim = CheckNumeric.Checker;
+        static new TCheckNumeric Claim = CheckNumeric.Checker;
 
         public void stacked_basecase()
         {

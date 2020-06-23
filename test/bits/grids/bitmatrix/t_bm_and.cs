@@ -57,7 +57,7 @@ namespace Z0
                 var a = (ushort)A;
                 var b = (ushort)B;
                 var z = (ushort)Z;
-                Claim.eq(math.and(a,b),z);
+                Claim.Eq(math.and(a,b),z);
             }
         }
 
@@ -75,7 +75,7 @@ namespace Z0
                     dst[j] = (byte)(A.Bytes[j] & B.Bytes[j]);
 
                 var D = BitMatrix.primal(n,dst);
-                Claim.require(D == C);                
+                Claim.Require(D == C);                
             }
         }
 
@@ -89,7 +89,7 @@ namespace Z0
                 var C = A & B;
 
                 var D = BitMatrix.from(n32,and(A.Bytes, B.Bytes));
-                Claim.require(C == D);
+                Claim.Require(C == D);
             }
         }
 
@@ -102,7 +102,7 @@ namespace Z0
                 var C = A & B;
 
                 var D = BitMatrix.primal(n64,and(A.Bytes, B.Bytes));
-                Claim.require(C == D);
+                Claim.Require(C == D);
             }
         }
     }

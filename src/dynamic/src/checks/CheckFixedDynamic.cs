@@ -13,7 +13,7 @@ namespace Z0
 
     using K = Kinds;
 
-    public interface ICheckFixedDynamic : ITestRandom, ICheckNull, ICheckDynamic, IBufferedChecker
+    public interface ICheckFixedDynamic : ITestRandom, TCheckNull, TCheckDynamic, IBufferedChecker
     {
         void CheckFixedMatch<F>(K.UnaryOpClass k, IdentifiedCode a, IdentifiedCode b)
             where F : unmanaged, IFixed
@@ -26,7 +26,7 @@ namespace Z0
 
             var points = stream.Take(RepCount);
             var checker = CheckEqual.Checker;
-            iter(points, x => checker.eq(f(x), g(x)));            
+            iter(points, x => checker.Eq(f(x), g(x)));            
         }       
     }
 }

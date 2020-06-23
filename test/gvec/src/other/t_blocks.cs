@@ -82,11 +82,11 @@ namespace Z0
             var block0 = x.Block(0);
             Claim.eq(4, block0.Length);   
             var y = Blocks.safeload(n128, span(1,2,3,4));         
-            Claim.eq(block0, y);
+            Claim.Eq(block0, y);
 
             var block2 = x.Block(1);
             Claim.eq(4, block2.Length);
-            Claim.eq(block2, Blocks.parts(n128,5,6,7,8));
+            Claim.Eq(block2, Blocks.parts(n128,5,6,7,8));
 
         }
         public void Load1()

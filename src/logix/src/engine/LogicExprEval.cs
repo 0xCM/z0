@@ -7,10 +7,12 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
+    [ApiHost]
     public readonly struct LogicExprEval
     {
         static BitLogix bitlogix => BitLogix.Service;
 
+        [Op]
         internal static bit eval(ILogicExpr expr)
         {
             switch(expr)               
@@ -33,6 +35,7 @@ namespace Z0.Logix
         /// Evaluates a logical operator expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
+        [Op]
         static bit eval(ILogicOpExpr expr)
         {
             switch(expr)               

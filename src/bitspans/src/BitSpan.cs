@@ -126,7 +126,7 @@ namespace Z0
         }        
 
         internal Span<uint> Bit32
-            => bits.As<bit,uint>();
+            => bits.Cast<bit,uint>();
 
         [MethodImpl(Inline)]
         public string Format(BitFormatConfig? fmt = null)

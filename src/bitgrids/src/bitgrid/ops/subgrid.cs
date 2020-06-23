@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Memories;
+    using static Konst;
+    using static Root;
 
     partial class BitGrid
     {
@@ -44,7 +45,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new SubGrid16<M, N, T>(convert<T,ushort>(data));
+                => new SubGrid16<M, N, T>(Cast.to<T,ushort>(data));
 
         /// <summary>
         /// Allocates a 0-filled 32-bit subgrid
@@ -78,7 +79,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new SubGrid32<M, N, T>(convert<T,uint>(data));
+                => new SubGrid32<M, N, T>(Cast.to<T,uint>(data));
 
         /// <summary>
         /// Allocates a 0-filled 64-bitsubgrid
@@ -112,7 +113,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new SubGrid64<M, N, T>(convert<T,ulong>(data));
+                => new SubGrid64<M, N, T>(Cast.to<T,ulong>(data));
 
 
         /// <summary>

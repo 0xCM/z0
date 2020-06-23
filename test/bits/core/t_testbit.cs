@@ -42,7 +42,7 @@ namespace Z0
             {
                 var src = maxval(t);
                 for(var i=0; i< bitsize<T>(); i++)
-                    Claim.require(gbits.testbit(src,(byte)i));
+                    Claim.Require(gbits.testbit(src,(byte)i));
             }            
         }
     }

@@ -409,7 +409,5 @@ namespace Z0
         /// Classifies integral types
         /// </summary>
         Integers = SignedInts | UnsignedInts,
-
     }
-
 }

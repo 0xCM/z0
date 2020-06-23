@@ -72,7 +72,7 @@ namespace Z0
             Claim.eq(pbs_expect, pbs_actual);
             
             var p_assembled = Symbolic.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
-            Claim.eq(p, p_assembled);            
+            Claim.Eq(p, p_assembled);            
             
             var pformat_actual = p.FormatMap();
             Claim.eq(pformat_epect, pformat_actual);
@@ -84,7 +84,7 @@ namespace Z0
         {
             var p1 = Random.Perm<N>();
             var p2 = p1 * NatPerm<N>.Identity;
-            Claim.require(p1 == p2);
+            Claim.Require(p1 == p2);
         }
 
        void perm_identity_check<N>(N n = default)
@@ -99,7 +99,7 @@ namespace Z0
             Claim.eq(length, terms.Length);
 
             var permB = Permute.natural(n, terms);
-            Claim.require(permA == permB);
+            Claim.Require(permA == permB);
         }
 
         void perm_invert_check<N>(N n = default)
@@ -110,7 +110,7 @@ namespace Z0
                 var p1 = Random.Perm(n);
                 var p2 = ~ p1;
                 var p3 = p1 * p2;                    
-                Claim.require(p3 == NatPerm<N>.Identity);
+                Claim.Require(p3 == NatPerm<N>.Identity);
             }
         }
     }

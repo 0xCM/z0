@@ -18,7 +18,7 @@ namespace Z0
         public static ICheckBitSpans Checker => default(CheckBitSpans);
     }
     
-    public interface ICheckBitSpans : IValidator
+    public interface ICheckBitSpans : TValidator
     {
         /// <summary>
         /// Asserts the equality of two bitspans

@@ -51,6 +51,41 @@ namespace Z0
         W8 = 8,
 
         /// <summary>
+        /// Indicates a bit-width of 9
+        /// </summary>
+        W9 = 9,
+
+        /// <summary>
+        /// Indicates a bit-width of 10
+        /// </summary>
+        W10 = 10,
+
+        /// <summary>
+        /// Indicates a bit-width of 11
+        /// </summary>
+        W11 = 11,
+
+        /// <summary>
+        /// Indicates a bit-width of 12
+        /// </summary>
+        W12 = 12,
+
+        /// <summary>
+        /// Indicates a bit-width of 13
+        /// </summary>
+        W13 = 13,
+
+        /// <summary>
+        /// Indicates a bit-width of 14
+        /// </summary>
+        W14 = 14,
+
+        /// <summary>
+        /// Indicates a bit-width of 15
+        /// </summary>
+        W15 = 15,
+
+        /// <summary>
         /// Indicates a bit-width of 16
         /// </summary>
         W16 = 16,

@@ -12,11 +12,25 @@ namespace Z0
     [ApiHost]
     public readonly partial struct As
     {
-        const NumericKind Closure = NumericKind.All;    
+        const NumericKind Closure = UnsignedInts;    
 
         [MethodImpl(Inline)]   
         internal static T[] alloc<T>(int length)
             => new T[length];
+
+        [MethodImpl(Inline)]        
+        internal static int size<T>()
+            => Unsafe.SizeOf<T>();
+
+        [MethodImpl(Inline)]        
+        internal static Span<T> EmptySpan<T>()
+            => Span<T>.Empty;
+
+        internal static Span<byte> EmptyByteSpan
+        {
+            [MethodImpl(Inline)]        
+            get => Span<byte>.Empty;
+        }
     }
 
 
@@ -24,6 +38,5 @@ namespace Z0
     public readonly partial struct AsInternal
     {
         const NumericKind Closure = NumericKind.All;    
-
     }
 }

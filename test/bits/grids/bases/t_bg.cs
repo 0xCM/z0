@@ -89,7 +89,7 @@ namespace Z0
                 {
                     var b1 = BitGrid.readbit(src.ColCount, in src.Head, row, col);
                     var b2 = BitGrid.readbit(in src.Head, bitpos);
-                    Claim.require(b1 == b2);
+                    Claim.Require(b1 == b2);
 
                     dstA[row,col] = b1;
                     dstB.SetBit(bitpos, b2);                    

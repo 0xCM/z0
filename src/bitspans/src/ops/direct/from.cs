@@ -23,7 +23,7 @@ namespace Z0
 
             BitPack.unpack(src, ref tmp); 
             distribute(in tmp, 0, ref target);
-            return BitSpans.load(Stacks.span<uint>(ref storage).As<bit>());
+            return BitSpans.load(Stacks.span<uint>(ref storage).Cast<bit>());
         }
 
         [MethodImpl(Inline), Op]
@@ -38,7 +38,7 @@ namespace Z0
             BitPack.unpack(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             distribute(in tmp, 1, ref target);
-            return BitSpans.load(Stacks.span<uint>(ref storage).As<bit>());
+            return BitSpans.load(Stacks.span<uint>(ref storage).Cast<bit>());
         }
 
         [MethodImpl(Inline), Op]
@@ -55,7 +55,7 @@ namespace Z0
             distribute(in tmp, 1, ref target);
             distribute(in tmp, 2, ref target);
             distribute(in tmp, 3, ref target);
-            return BitSpans.load(Stacks.span<uint>(ref storage).As<bit>());
+            return BitSpans.load(Stacks.span<uint>(ref storage).Cast<bit>());
         }
 
         [MethodImpl(Inline), Op]
@@ -76,7 +76,7 @@ namespace Z0
             distribute(in tmp, 5, ref target);
             distribute(in tmp, 6, ref target);
             distribute(in tmp, 7, ref target);
-            return BitSpans.load(storage.As<bit>());
+            return BitSpans.load(storage.Cast<bit>());
         }             
     }
 }

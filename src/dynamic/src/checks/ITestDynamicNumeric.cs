@@ -8,7 +8,7 @@ namespace Z0
     
     using static BufferSeqId;
 
-    public interface ITestDynamicNumeric : ITestRandom, ITestOperatorMatch, ICheckNumeric, ICheckDynamic
+    public interface ITestDynamicNumeric : ITestRandom, ITestOperatorMatch, TCheckNumeric, TCheckDynamic
     {
         TestCaseRecord MatchNumeric<T>(in BufferSeq buffers, UnaryOp<T> f, IdentifiedCode src)
             where T : unmanaged
@@ -20,7 +20,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.Next<T>();
-                    eq(f(x), g(x));
+                    Eq(f(x), g(x));
                 }
             }
 
@@ -36,7 +36,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     (var x, var y) = Random.NextPair<T>();
-                    eq(f(x,y),g(x,y));
+                    Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -52,7 +52,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     (var x, var y, var z) = Random.NextTriple<T>();
-                    eq(f(x,y,z),g(x,y,z));
+                    Eq(f(x,y,z),g(x,y,z));
                 }
             }
 

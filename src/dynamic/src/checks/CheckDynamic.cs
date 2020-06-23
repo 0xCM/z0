@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct CheckDynamic : ICheckDynamic
+    public readonly struct CheckDynamic : TCheckDynamic
     {
-        public static ICheckDynamic Checker => default(CheckDynamic);
+        public static TCheckDynamic Checker => default(CheckDynamic);
     }
 
-    public interface ICheckDynamic : IValidator
+    public interface TCheckDynamic : TValidator
     {
         IDynexus Dynamic => Dynops.Services.Dynexus;
     }

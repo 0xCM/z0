@@ -45,6 +45,10 @@ namespace Z0
             => As<T,ulong>(ref src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static UInt128 uint128<T>(T src)
+            => As<T,UInt128>(ref src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static float float32<T>(T src)
             => As<T,float>(ref src);
 

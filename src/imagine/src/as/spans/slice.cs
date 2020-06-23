@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="offset">The T-measured offset count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, int offset)
+        public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, int offset)
             => cover(skip(src,offset), src.Length - offset);
 
         /// <summary>

@@ -113,7 +113,7 @@ namespace Z0
                 return m.Name;
 
             var attribVal = attrib.Value;              
-            return !string.IsNullOrWhiteSpace(attribVal.Name) ? attribVal.Name : m.Name;                
+            return m.Name;                
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace Z0
     [ApiHost("api")]
     public partial class BitGrid : IApiHost<BitGrid>
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        //internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 
     [ApiHost("allocating")]
@@ -19,6 +19,11 @@ namespace Z0
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
+    }
+
+    public partial class BGI
+    {
+        
     }
 
     [ApiHost("patterns")]

@@ -7,19 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public sealed class t_span_convert : UnitTest<t_span_convert,CheckNumeric,ICheckNumeric>
+    public sealed class t_span_convert : UnitTest<t_span_convert,CheckNumeric,TCheckNumeric>
     {
 
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)
             where T : unmanaged
         {
-            Claim.eq(expect, Cells.cell<T>(src));
+            Claim.Eq(expect, Cells.cell<T>(src));
         }
 
         void VerifySpanBytesToValues<T>(Span<byte> src, Span<T> expect)
             where T : unmanaged
         {
-            ClaimNumeric.eq(expect, Spans.cast<T>(src));
+            ClaimNumeric.Eq(expect, Spans.cast<T>(src));
         }
 
         void VerifyBytesToValues<T>()

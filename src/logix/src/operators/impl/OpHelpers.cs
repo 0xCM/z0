@@ -12,7 +12,6 @@ namespace Z0.Logix
 
     internal static class OpHelpers
     {
-
         public static void Set<T>(IVariedExpr<T> expr, params IExpr<T>[] values)
             where T : unmanaged
         {

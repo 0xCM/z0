@@ -44,8 +44,8 @@ namespace Z0
             var x = Random.BitMatrix(n32);
             var y = Random.BitMatrix(n32);
             Claim.nea(x.Equals(y));
-            Claim.require(x.Equals(x));
-            Claim.require(y.Equals(y));
+            Claim.Require(x.Equals(x));
+            Claim.Require(y.Equals(y));
         }
 
         public void bm_eq_64x64x64()
@@ -54,9 +54,9 @@ namespace Z0
             var y = Random.BitMatrix(n64);
             Claim.nea(x.Equals(y));
             Claim.nea(x == y);
-            Claim.require(x != y);
-            Claim.require(x.Equals(x));
-            Claim.require(y.Equals(y));
+            Claim.Require(x != y);
+            Claim.Require(x.Equals(x));
+            Claim.Require(y.Equals(y));
         }
 
         public void bm_not_64x64x64()
@@ -64,14 +64,14 @@ namespace Z0
             var x = Random.BitMatrix(n64);
             var y = x.Replicate();
             var xff = ~(~x);
-            Claim.require(xff == y);
+            Claim.Require(xff == y);
 
             var c = Random.BitMatrix(n64);
             var a = new ulong[64];
             for(var i = 0; i<64; i++)
                 a[i] = ~ c[i];
             var b = BitMatrix.primal(n64,a);
-            Claim.require(b == ~c);        
+            Claim.Require(b == ~c);        
         }
 
         public void bm_getcol_8x8x8()
@@ -83,7 +83,7 @@ namespace Z0
                 {
                     var col = src.Col(c);
                     for(var r=0; r<src.Order; r++)
-                        Claim.eq(col[r], src[r,c]);
+                        Claim.Eq(col[r], src[r,c]);
                 }
             }
         }
@@ -97,7 +97,7 @@ namespace Z0
                 {
                     var col = src.Col(c);
                     for(var r=0; r<src.Order; r++)
-                        Claim.eq(col[r], src[r,c]);
+                        Claim.Eq(col[r], src[r,c]);
                 }
             }
         }
@@ -111,7 +111,7 @@ namespace Z0
                 {
                     var col = BitMatrix.col(src,c);
                     for(var r=0; r<src.Order; r++)
-                        Claim.eq(col[r], src[r,c]);
+                        Claim.Eq(col[r], src[r,c]);
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace Z0
                 {
                     var col = src.Column(c);
                     for(var r=0; r<src.Order; r++)
-                        Claim.eq(col[r], src[r,c]);
+                        Claim.Eq(col[r], src[r,c]);
                 }
             }
         }

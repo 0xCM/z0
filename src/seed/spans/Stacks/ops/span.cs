@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> span<T>(ref MemStack64 src, T t = default)
             where T : unmanaged
-                => MemoryMarshal.CreateSpan(ref head8(ref src), 8).As<byte,T>();
+                => MemoryMarshal.CreateSpan(ref head8(ref src), 8).Cast<byte,T>();
 
         /// <summary>
         /// Fills a span with data from a stack storage block
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<T> span<T>(ref MemStack128 src, T t = default)
             where T : unmanaged
-                => MemoryMarshal.CreateSpan(ref head8(ref src), 16).As<byte,T>();
+                => MemoryMarshal.CreateSpan(ref head8(ref src), 16).Cast<byte,T>();
 
         /// <summary>
         /// Fills a span with data from a stack storage block
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<T> span<T>(ref MemStack256 src, T t = default)
             where T : unmanaged
-                => MemoryMarshal.CreateSpan(ref head8(ref src), 32).As<byte,T>();
+                => MemoryMarshal.CreateSpan(ref head8(ref src), 32).Cast<byte,T>();
 
         /// <summary>
         /// Fills a span with data from a stack storage block
@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> span<T>(ref MemStack512 src, T t = default)
             where T : unmanaged
-                => MemoryMarshal.CreateSpan(ref head8(ref src), 64).As<byte,T>();
+                => MemoryMarshal.CreateSpan(ref head8(ref src), 64).Cast<byte,T>();
 
         /// <summary>
         /// Fills a span with data from a stack storage block
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> span<T>(ref MemStack1024 src, T t = default)
             where T : unmanaged
-                => MemoryMarshal.CreateSpan(ref head8(ref src), 128).As<byte,T>();
+                => MemoryMarshal.CreateSpan(ref head8(ref src), 128).Cast<byte,T>();
 
         [MethodImpl(Inline), Op]
         public static Span<char> span(ref CharStack2 src)

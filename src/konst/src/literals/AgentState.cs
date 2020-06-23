@@ -7,37 +7,54 @@ namespace Z0
     using static Pow2;
 
     /// <summary>
-    /// Defines the states in the agent lifecycle
+    /// Defines canonical states in the lifecycle of an agent
     /// </summary>
-    /// <remarks>
-    /// The agent lifecycle is as follows:
-    /// 1. New/activate/etc instantiates the ageent which leaves it in a Created state
-    /// 2. If configuration data is supplied as part of instantiation, then the agent will
-    /// transition to the Configured state automatically
-    /// 3. If not configured during activation the agent's Configuration operation must be
-    /// invoked to leave the agent in the Configured state. 
-    /// 4. Once in a configured state, the agent's Start operation can be invoked and, 
-    /// assuming success, the transitions sequence is as follows:
-    /// Starting -> Started -> Running. If a failure occurs preventing the agent from
-    /// attaining the Running state, the transition sequence will follow
-    /// Terminating -> Terminated -> Error
-    /// 5. From the running state, either the agent or an external part, may transition to
-    /// through Stopping -> Stopped sequence.
-    /// </remarks>
     public enum AgentState : uint
-    {
+    {        
+        /// <summary>
+        /// The agent state after instantiation. If configuration data is available,
+        /// the agent transitions automatically to the <see cref='Configuring' state/>
+        /// </summary>
         Created = T00,
 
+        /// <summary>
+        /// The state in which the agent is consuming configurating data and adusting
+        /// internal state accordingly and, upon successful completion, transitions to the 
+        /// <see cref='Configured'/> state
+        /// </summary>
         Configuring = T01,
-        
+                
+        /// <summary>
+        /// The state to which the agent transitions after successful completion of the 
+        /// <see cref='Configuring' state/>. Transition to this state is a precondition
+        /// to transition to the <see cref='Starting'/> state
+        /// </summary>
         Configured = T02,
-        
+            
+        /// <summary>
+        /// The state in which the agent is initialzing internal state, predicated on configuation
+        /// data, if any. Upon successufl completion, the agent tansitions to the <see cref='Started' state/>
+        /// </summary>
         Starting = T03,
         
+        /// <summary>
+        /// The state in which the agent has been initialized and, once entered, immediately transitions to 
+        /// the <see cref='Running'/> state unless the agent is configured to be inactive; if inactive,
+        /// the agent remains in this state until the agent receives an administrative-level event 
+        /// that specifies the next state
+        /// </summary>
         Started  = T04,
 
+        /// <summary>
+        /// The state in which the agent is working, querying for work or listening to events that define/imply
+        /// work. The agent will remain in this state until a stop event is received, an unrecoverable eror
+        /// occurs or other.
+        /// </summary>
         Running = T05,
 
+        /// <summary>
+        /// The state in which the agent is gracefully terminating the run-loop
+        /// </summary>
         Stopping = T06,
 
         Stopped = T07,

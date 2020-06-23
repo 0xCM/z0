@@ -24,7 +24,7 @@ namespace Z0
                 
                 for(var i=0; i< m; i++)
                 for(var j=0; j< n; j++)
-                    Claim.eq(src[i,j], dst[i,j] == 0 ? bit.Off : bit.On);
+                    Claim.Eq(src[i,j], dst[i,j] == 0 ? bit.Off : bit.On);
             }
         }
 
@@ -40,7 +40,7 @@ namespace Z0
                 
                 for(var i=0; i< m; i++)
                 for(var j=0; j< n; j++)
-                    Claim.eq(src[i,j], dst[i,j] == 0 ? bit.Off : bit.On);
+                    Claim.Eq(src[i,j], dst[i,j] == 0 ? bit.Off : bit.On);
 
             }
         }

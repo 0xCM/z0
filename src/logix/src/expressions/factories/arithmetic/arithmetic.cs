@@ -12,7 +12,7 @@ namespace Z0.Logix
     using static BinaryArithmeticKind;
     using TLS = TypedLogicSpec;
 
-    public static class ArithmeticSpec
+    public readonly struct ArithmeticSpec
     {
         /// <summary>
         /// Defines an arithmetic unary expression

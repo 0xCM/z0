@@ -15,11 +15,11 @@ namespace Z0
             var opid = Identify.Op("vgeneric_g[8u](v512x8i~in)");
             var input = $"hex://fixed/Vector512?vgeneric#{opid}";
             var attempt = OpUriParser.Service.Parse(input);
-            Claim.require(attempt.Succeeded);
+            Claim.Require(attempt.Succeeded);
             var uri = attempt.Value;
 
-            Claim.eq(OpUriScheme.Hex, uri.Scheme);
-            ClaimEquatable.eq(ApiHostUri.Define(PartId.Fixed, "Vector512"), uri.Host);
+            Claim.Eq(OpUriScheme.Hex, uri.Scheme);
+            ClaimEquatable.Eq(ApiHostUri.Define(PartId.Fixed, "Vector512"), uri.Host);
             Claim.eq("vgeneric", uri.GroupName);
             Claim.eq(opid, uri.OpId);
             Claim.eq(true, opid.IsGeneric);

@@ -14,10 +14,10 @@ namespace Z0
             {
                 var pattern = Random.Next(z8);
                 (var x0, var x1, var x2, var x3) = Bits.split(gbits.replicate<uint>(pattern),n4);
-                Claim.eq(x0, pattern);
-                Claim.eq(x1, pattern);
-                Claim.eq(x2, pattern);
-                Claim.eq(x3, pattern);                
+                Claim.Eq(x0, pattern);
+                Claim.Eq(x1, pattern);
+                Claim.Eq(x2, pattern);
+                Claim.Eq(x3, pattern);                
             }
         }
 
@@ -33,7 +33,7 @@ namespace Z0
                 if(math.between( i % 6,3,5))
                     expect[i] = bit.On;
             
-            Claim.eq(expect.Scalar,actual.Scalar);
+            Claim.Eq(expect.Scalar,actual.Scalar);
         }
 
         public void replicate_64u()
@@ -50,7 +50,7 @@ namespace Z0
                 if(math.between( i % 6,3,5))
                     expect[i] = bit.On;
             
-            Claim.eq(expect.Scalar,actual.Scalar);
+            Claim.Eq(expect.Scalar,actual.Scalar);
 
             void report()
             {

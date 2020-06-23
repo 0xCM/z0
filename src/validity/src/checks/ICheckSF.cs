@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface ICheckSF : ITestService, ICheckVectors
+    public interface ICheckSF : ITestService, TCheckVectors
     {
         bool ExcludeZero => false;        
     }

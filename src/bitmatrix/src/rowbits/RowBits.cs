@@ -92,7 +92,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => data.Bytes();
         }
 
         /// <summary>
@@ -125,6 +125,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowBits<S> As<S>()
             where S : unmanaged
-                => new RowBits<S>(data.As<T,S>());
+                => new RowBits<S>(data.Cast<T,S>());
     }
 }

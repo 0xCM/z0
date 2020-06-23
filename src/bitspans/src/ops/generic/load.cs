@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static BitSpan load<T>(Span<T> packed)
             where T : unmanaged
-                => load(packed.AsBytes());
+                => load(packed.Bytes());
 
         /// <summary>
         /// Creates a bitspan from an arbitrary number of primal values
@@ -28,6 +28,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static BitSpan load<T>(ReadOnlySpan<T> packed)
             where T : unmanaged
-                => load(packed.AsBytes());
+                => load(packed.Bytes());
     }
 }

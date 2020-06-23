@@ -240,7 +240,7 @@ namespace Z0.Mkl.Test
                 runtime += snapshot(sw);
                 
                 Mul(A, B, ref E);
-                Claim.require(E == X);
+                Claim.Require(E == X);
 
             }
 
@@ -273,7 +273,7 @@ namespace Z0.Mkl.Test
                 mkl.gemv(A,x, ref y);                
                 sw.Stop();
                 refmul(A,x,z);
-                Claim.require(z == y);
+                Claim.Require(z == y);
             }
 
             var label = $"gemv<{nati<M>()},{nati<N>()},{typeof(double).DisplayName()}>";

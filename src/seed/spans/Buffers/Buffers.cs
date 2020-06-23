@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> content<T>(IBufferToken src)
             where T : unmanaged
-                => cover((byte*)src.Handle.ToPointer(), src.Size).As<T>();
+                => cover((byte*)src.Handle.ToPointer(), src.Size).Cast<T>();
 
         /// <summary>
         /// Enables bytespan execution

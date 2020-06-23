@@ -255,7 +255,7 @@ namespace Z0
                 i, i+=2, i+=2, i+=2, i+=2, i+=2, i+=2, i+=2,
                 j, j+=2, j+=2, j+=2, j+=2, j+=2, j+=2, j+=2
             };
-            return dst.AsBytes();
+            return dst.Bytes();
         }
 
         /// <summary>

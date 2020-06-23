@@ -126,7 +126,7 @@ namespace Z0
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => data.As<F,T>();
+            get => data.Cast<F,T>();
         }
 
         public int Length

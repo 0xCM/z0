@@ -4,17 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    
-    using static Konst;
-    using static Vectors;
-    using static Typed;
-
-    public abstract class t_permute<U> : UnitTest<U,CheckVectors,ICheckVectors>
+    public abstract class t_permute<U> : UnitTest<U,CheckVectors,TCheckVectors>
         where U : t_permute<U>,new()
     {
 

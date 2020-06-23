@@ -35,7 +35,7 @@ namespace Z0
         MemberEvaluator Evaluator(BufferTokens buffers)
             => MemberEvaluator.Create(buffers);
 
-        ICheckNumeric Numeric => CheckNumeric.Checker;
+        TCheckNumeric Numeric => CheckNumeric.Checker;
 
         const int EvalCount = 100;
         
@@ -159,7 +159,7 @@ namespace Z0
                 if(fp)
                     Numeric.close(x,y);
                 else
-                    Numeric.eq(x,y);
+                    Numeric.Eq(x,y);
             }
         }
 
@@ -188,7 +188,7 @@ namespace Z0
                 if(fp)
                     Numeric.close(x,y);
                 else
-                    Numeric.eq(x,y);
+                    Numeric.Eq(x,y);
             }
         }
 

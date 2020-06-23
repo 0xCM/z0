@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static AsInternal;
  
     [ApiHost]
     public readonly struct TextResourceReader : IApiHost<TextResourceReader>
@@ -28,10 +29,10 @@ namespace Z0
             var count = Math.Min(locations.Length, dst.Length);
             for(var i=0; i<count; i++)
             {
-                ref readonly var address = ref Root.skip(locations,i);
+                ref readonly var address = ref skip(locations,i);
                 var data = Addresses.read<byte>(address, ResLength);
                 var content = Render(Symbols(data));
-                Root.seek(dst, i) = TextResource.Define((ulong)address, address, content);            
+                seek(dst, i) = TextResource.Define((ulong)address, address, content);            
             }
             return count;
         }
@@ -54,10 +55,10 @@ namespace Z0
             var dst = Root.span(Root.alloc<TextResource<E>>(count));
             for(var i=0; i<count; i++)
             {
-                ref readonly var address = ref Root.skip(locations,i);
+                ref readonly var address = ref skip(locations,i);
                 var value = Spans.cast<char>(Addresses.read<byte>(address, ResLength)).ToString();
                 var id = EnumValue.eVal<E,int>(i + 1);
-                Root.seek(dst,i) = TextResource.Define(id, address, value);            
+                seek(dst,i) = TextResource.Define(id, address, value);            
             }
             return dst;
         }

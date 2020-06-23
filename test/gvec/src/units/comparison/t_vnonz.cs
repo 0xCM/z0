@@ -52,7 +52,7 @@ namespace Z0
             Claim.nea(gvec.vnonz(Vectors.vzero(w,t)));
             
             for(var i=0; i<RepCount; i++)
-                Claim.require(f.Invoke(Random.CpuVector(w, domain)));            
+                Claim.Require(f.Invoke(Random.CpuVector(w, domain)));            
         }
 
         protected void vnonz_check<T>(N256 w, T t = default)
@@ -66,7 +66,7 @@ namespace Z0
             Claim.nea(gvec.vnonz(Vectors.vzero(w,t)));
             
             for(var i=0; i<RepCount; i++)
-                Claim.require(f.Invoke(Random.CpuVector(w,domain)));
+                Claim.Require(f.Invoke(Random.CpuVector(w,domain)));
         }
     }
 }

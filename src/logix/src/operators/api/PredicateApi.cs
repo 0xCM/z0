@@ -13,9 +13,8 @@ namespace Z0.Logix
 
     using BCK = BinaryComparisonKind;
 
-
-
-    public static class PredicateApi
+    [ApiHost]
+    public readonly struct PredicateApi
     {
         [Op, NumericClosures(Integers)]
         public static T eval<T>(BinaryComparisonKind kind, T a, T b)
@@ -48,7 +47,5 @@ namespace Z0.Logix
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
-
-
     }
 }

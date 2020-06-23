@@ -53,7 +53,7 @@ namespace Z0
             var dst = Partition.measured(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
             Claim.eq(src.Length() + 1, dst.Length);            
-            ClaimNumeric.eq(Arrays.from(5,6,7,8,9,10,11,12).ToSpan(),dst);
+            ClaimNumeric.Eq(Arrays.from(5,6,7,8,9,10,11,12).ToSpan(),dst);
         }
 
         public void part1()
@@ -62,8 +62,8 @@ namespace Z0
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(Interval.closedL(5,6), dst.First());
-            Claim.eq(Interval.closedL(19,20), dst.Last());
+            Claim.Eq(Interval.closedL(5,6), dst.First());
+            Claim.Eq(Interval.closedL(19,20), dst.Last());
 
         }
 
@@ -73,8 +73,8 @@ namespace Z0
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(Interval.closedL(5,6), dst.First());
-            Claim.eq(Interval.closed(19,20), dst.Last());
+            Claim.Eq(Interval.closedL(5,6), dst.First());
+            Claim.Eq(Interval.closed(19,20), dst.Last());
         }
 
         public void part3()
@@ -83,8 +83,8 @@ namespace Z0
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(Interval.open(5,6), dst.First());
-            Claim.eq(Interval.closedL(19,20), dst.Last());
+            Claim.Eq(Interval.open(5,6), dst.First());
+            Claim.Eq(Interval.closedL(19,20), dst.Last());
         }
 
 
@@ -102,7 +102,7 @@ namespace Z0
             var src = Interval.closed(1,103);
             var dst = Partition.width(src,13);
             var fmt = dst.Map(x => x.Format()).Concat(" + ");  
-            Claim.require(dst.Last().Closed);
+            Claim.Require(dst.Last().Closed);
         }
 
         protected void points_check<T>(T min, T max, T width)
@@ -118,7 +118,7 @@ namespace Z0
                 deltaSum = gmath.add<T>(deltaSum, gmath.sub(right,left));                
             }
 
-            Claim.eq(len, deltaSum);                        
+            Claim.Eq(len, deltaSum);                        
         }
     }
 }

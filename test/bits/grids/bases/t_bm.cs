@@ -29,7 +29,7 @@ namespace Z0
                 var C2 = and(A.Content, B.Content);
                 ClaimNumeric.eq(A.Order, nati<N>());
                 ClaimNumeric.eq(B.Order, nati<N>());                
-                ClaimNumeric.eq(C1,C2);
+                ClaimNumeric.Eq(C1,C2);
             }
         }
 
@@ -47,7 +47,7 @@ namespace Z0
                 var rbB = B.ToRowBits();
                 var rbC = rbA & rbB;
 
-                Claim.require(BitMatrix.same(rbC.ToBitMatrix(),C));                                                                     
+                Claim.Require(BitMatrix.same(rbC.ToBitMatrix(),C));                                                                     
             }
         }
 
@@ -75,7 +75,7 @@ namespace Z0
                 var C2 = xor(A.Content, B.Content);
                 ClaimNumeric.eq(A.Order, nati<N>());
                 ClaimNumeric.eq(B.Order, nati<N>());                
-                ClaimNumeric.eq(C1,C2);
+                ClaimNumeric.Eq(C1,C2);
             }
         }
 
@@ -113,7 +113,7 @@ namespace Z0
                 {
                     var x = vector[col];
                     var y = src[row,col];
-                    ClaimNumeric.eq(vector[col], src[row,col]);
+                    ClaimNumeric.Eq(vector[col], src[row,col]);
                 }
             }
         }
@@ -129,7 +129,7 @@ namespace Z0
                 var B = A.Transpose();
                 for(var i=0; i<B.RowCount; i++)
                 for(var j=0; j<B.ColCount; j++)
-                    ClaimNumeric.eq(B[i,j], A[j,i]);
+                    ClaimNumeric.Eq(B[i,j], A[j,i]);
             }
         }
 

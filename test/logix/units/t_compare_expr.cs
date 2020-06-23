@@ -73,7 +73,7 @@ namespace Z0.Logix
                 var b = vb.Set(Random);
                 var result = eval(x).Value;
                 var expect = PredicateApi.eval(BinaryComparisonKind.Lt,a,b);                
-                Claim.eq(expect,result);            
+                Claim.Eq(expect,result);            
             }
         }
 
@@ -89,7 +89,7 @@ namespace Z0.Logix
                 var b = vb.Set(Random);
                 var result = eval(x).Value;
                 var expect = PredicateApi.eval(BinaryComparisonKind.LtEq,a,b);                
-                Claim.eq(expect,result);
+                Claim.Eq(expect,result);
             }
         }
 
@@ -107,7 +107,7 @@ namespace Z0.Logix
                 var actual = eval(x).Value;
                 if(gmath.neq(actual,expect))             
                     Notify($"{a} > {b}?");
-                Claim.eq(expect,actual);            
+                Claim.Eq(expect,actual);            
             }
         }
 
@@ -123,7 +123,7 @@ namespace Z0.Logix
                 var b = vb.Set(Random);
                 var expect = PredicateApi.eval(BinaryComparisonKind.GtEq,a,b);
                 var actual = eval(x).Value;
-                Claim.eq(expect,actual);
+                Claim.Eq(expect,actual);
             }
         }         
   }

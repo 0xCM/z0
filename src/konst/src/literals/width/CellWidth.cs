@@ -9,7 +9,7 @@ namespace Z0
     using W = DataWidth;
 
     /// <summary>
-    /// Root source for width-related kinds throughout the system
+    /// Classifies widths of segment-relative cells
     /// </summary>
     [Flags]
     public enum CellWidth : ushort

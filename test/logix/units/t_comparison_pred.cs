@@ -116,15 +116,15 @@ namespace Z0.Logix
                 
                 var ab = gmath.lt(a,b);
                 var abx = eval(x);
-                Claim.require(ab == abx);
+                Claim.Require(ab == abx);
                 
                 var bc = gmath.lt(b,c);
                 var bcy = eval(y);                
-                Claim.require(bc == bcy);
+                Claim.Require(bc == bcy);
 
                 var ca = gmath.lt(c,a);
                 var caz = eval(z);
-                Claim.require(ca == caz);
+                Claim.Require(ca == caz);
             }
 
         }
@@ -141,7 +141,7 @@ namespace Z0.Logix
                 var b = vb.Set(Random);
                 var result = eval(x);
                 var expect = NumericLogixHost.eval(kind,a,b);
-                Claim.eq(expect,result);            
+                Claim.Eq(expect,result);            
             }
         }
     }

@@ -41,6 +41,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Span<uint> extract(in BitSpan src, int offset, int count)
-           => src.Bits.Slice(offset, count).As<bit,uint>();        
+           => src.Bits.Slice(offset, count).Cast<bit,uint>();        
     }
 }

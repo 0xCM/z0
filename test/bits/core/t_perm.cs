@@ -18,7 +18,7 @@ namespace Z0
             var id = Perm.identity((byte)32);
             var p = id.Replicate();
             p.Swap(3,4).Swap(4,5).Swap(5,6);
-            Claim.eq(p[6], id[3]);
+            Claim.Eq(p[6], id[3]);
         }
 
         void perm_create<T>(T m, T n)

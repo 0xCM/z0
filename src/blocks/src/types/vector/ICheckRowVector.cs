@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    public interface ICheckRowVector : IValidator
+    public interface ICheckRowVector : TValidator
     {
         static ICheckRowVector<CheckRowVector> Checker => default(CheckRowVector);
 

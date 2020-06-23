@@ -19,9 +19,9 @@ namespace Z0
         public static ICheckBitVectors Checker => default(CheckBitVectors);
     }
 
-    public interface ICheckBitVectors : ICheckPrimal, ICheckInvariant
+    public interface ICheckBitVectors : TCheckPrimal, TCheckInvariant
     {        
-        ICheckPrimal Primal => this;
+        TCheckPrimal Primal => this;
 
         [MethodImpl(Inline)]
         void eq(BitVector4 x, BitVector4 y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

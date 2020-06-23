@@ -6,6 +6,9 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+    
+    using static Konst;
     
     using static LogicSig;
 
@@ -14,6 +17,8 @@ namespace Z0.Logix
     [ApiHost("expr.arith.eval")]
     public class ArithExprEval : IApiHost<ArithExprEval>
     {
+        
+        [Op, NumericClosures(UnsignedInts)]
         public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
             where T : unmanaged
         {
@@ -25,10 +30,11 @@ namespace Z0.Logix
                     return eval(x);
                 case IArithmeticOpExpr<T> x:
                     return eval(x);
-                default: throw new NotSupportedException(expr.GetType().Name);
+                default: throw Unsupported.define<T>();
             }
         }
 
+        [Op, Closures(UnsignedInts)]
         static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged
         {
@@ -39,7 +45,8 @@ namespace Z0.Logix
             }
         }
 
-        static LiteralExpr<T> eval<T>(IVarExpr<T> expr)
+       [Op, Closures(UnsignedInts)]
+       static LiteralExpr<T> eval<T>(IVarExpr<T> expr)
             where T : unmanaged
         {
             switch(expr.Value)
@@ -51,6 +58,7 @@ namespace Z0.Logix
             }
         }
 
+        [Op, Closures(UnsignedInts)]
         static LiteralExpr<T> eval<T>(IArithmeticOpExpr<T> expr)
             where T : unmanaged
         {
@@ -64,6 +72,7 @@ namespace Z0.Logix
             }
         }
 
+        [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> eval<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged
         {
@@ -81,6 +90,7 @@ namespace Z0.Logix
             }
         }
 
+        [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> eval<T>(IUnaryArithmeticOpExpr<T> expr)
             where T : unmanaged
         {
@@ -93,32 +103,32 @@ namespace Z0.Logix
             }
         }
 
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
                 => PredicateApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> inc<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
                 => NumericLogix.inc(eval(a).Value);
 
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> dec<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
                 => NumericLogix.dec(eval(a).Value);
 
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> negate<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
                 => NumericLogix.negate(eval(a).Value);
     
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> add<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged
                 => NumericLogix.add(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> sub<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged
                 => NumericLogix.sub(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);

@@ -11,7 +11,7 @@ namespace Z0
 
     using K = Kinds.UnaryOpClass;
 
-    public interface ITestDynamicUnary : ITester, ITestOperatorMatch, ICheckDynamic
+    public interface ITestDynamicUnary : TTester, ITestOperatorMatch, TCheckDynamic
     {
         TestCaseRecord Match(K k, TypeWidth w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
         {

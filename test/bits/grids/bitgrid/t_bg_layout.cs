@@ -16,15 +16,15 @@ namespace Z0
         {
             var a0 = BitGrid.specify(n21,n32,0u);
             var b0 = BitGrid.specify(21, 32, 32);
-            Claim.eq(a0,b0);
+            Claim.Eq(a0,b0);
 
             var a1 = BitGrid.specify(n32,n64,ushort.MinValue);
             var b1 = BitGrid.specify(32, 64, 16);
-            Claim.eq(a1,b1);
+            Claim.Eq(a1,b1);
 
             var a2 = BitGrid.specify(n5,n15,byte.MinValue);
             var b2 = BitGrid.specify(5, 15, 8);
-            Claim.eq(a2,b2);
+            Claim.Eq(a2,b2);
         }
 
         public void bg_layout_32x8x8()
@@ -82,7 +82,7 @@ namespace Z0
             for(var col = 0; col < map.ColCount; col++)
             {
                 var actual = gbits.testbit(src, (byte)map.Pos(row,col));
-                Claim.require(actual == state);
+                Claim.Require(actual == state);
                 state = !state;
             }        
         }

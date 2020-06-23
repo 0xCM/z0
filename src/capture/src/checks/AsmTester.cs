@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Konst;
     using static BufferSeqId;
     
-    public readonly struct AsmTester : IAsmTester
+    public readonly struct AsmTester : TAsmTester
     {
         public IAsmContext Context {get;}
 
@@ -23,7 +23,7 @@ namespace Z0.Asm
         public ICaptureExchange CaptureExchange {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmTester Create(IAsmContext context)
+        public static TAsmTester Create(IAsmContext context)
             => new AsmTester(context);
 
         [MethodImpl(Inline)]

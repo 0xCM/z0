@@ -7,10 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Enhanced)" />
     <ProjectReference Include="$(Models)" />
-    <ProjectReference Include="$(Parts)" />
   </ItemGroup>  
-
 
 </Project>

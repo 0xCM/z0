@@ -31,7 +31,7 @@ namespace Z0
             }
 
             var B = BitMatrix.primal(n,a);
-            Claim.require(A == B);
+            Claim.Require(A == B);
         }
 
 
@@ -54,7 +54,7 @@ namespace Z0
             }
 
             var B = BitMatrix.primal(n,a);
-            Claim.require(A == B);
+            Claim.Require(A == B);
                 
         }
 
@@ -77,7 +77,7 @@ namespace Z0
             }
 
             var B = BitMatrix.primal(n,a);
-            Claim.require(A == B);
+            Claim.Require(A == B);
         }
     }
 }

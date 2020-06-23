@@ -129,19 +129,19 @@ namespace Z0
         protected IChecks Claim 
             => Checks.Checker;
 
-        protected ICheckInvariant ClaimInvariant
+        protected TCheckInvariant ClaimInvariant
             => Claim;
         
-        protected ICheckPrimal ClaimPrimal 
+        protected TCheckPrimal ClaimPrimal 
             => Claim;
 
         protected ICheckPrimalSeq ClaimPrimalSeq 
             => Claim;
 
-        protected ICheckNumeric ClaimNumeric 
+        protected TCheckNumeric ClaimNumeric 
             => CheckNumeric.Checker;
 
-        protected ICheckEquatable ClaimEquatable 
+        protected TCheckEquatable ClaimEquatable 
             => CheckEquatable.Checker;
 
         protected TAppPaths AppPaths 
@@ -173,7 +173,7 @@ namespace Z0
 
         protected virtual void OnDispose() { }
 
-        protected ITestCaseIdentity CaseIdentityService 
+        protected TTestCaseIdentity CaseIdentityService 
             => Context;
 
         protected OpIdentity CaseOpId<T>(string label, T t = default)

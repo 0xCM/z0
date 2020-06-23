@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a test service that provides access to a buffer sequence
     /// </summary>
-    public interface IBufferedChecker : IChecker, IServiceAllocation, IBufferTokenSource
+    public interface IBufferedChecker : TChecker, IServiceAllocation, IBufferTokenSource
     {
         /// <summary>
         /// All the buffers belong to this

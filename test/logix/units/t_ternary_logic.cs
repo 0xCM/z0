@@ -68,7 +68,7 @@ namespace Z0.Logix
                 var c = Random.BitVector<T>();
                 BitVector<T> x = NumericLogix.select(a.Scalar, b.Scalar, c.Scalar);
                 for(var j=0; j<x.Width; j++)
-                    Claim.eq(x[j], BitLogix.select(a[j],b[j],c[j]));
+                    Claim.Eq(x[j], BitLogix.select(a[j],b[j],c[j]));
             }
 
         }
@@ -89,7 +89,7 @@ namespace Z0.Logix
                 var sx = x.ToSpan();
 
                 for(var j=0; j< sx.Length; j++)
-                    Claim.eq(sx[j], NumericLogix.select(sa[j], sb[j], sc[j]));
+                    Claim.Eq(sx[j], NumericLogix.select(sa[j], sb[j], sc[j]));
             }
 
         }
@@ -111,7 +111,7 @@ namespace Z0.Logix
                 var sx = x.ToSpan();
 
                 for(var j=0; j< sx.Length; j++)
-                    Claim.eq(sx[j], NumericLogix.select(sa[j], sb[j], sc[j]));
+                    Claim.Eq(sx[j], NumericLogix.select(sa[j], sb[j], sc[j]));
             }
 
         }

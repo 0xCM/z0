@@ -56,11 +56,11 @@ namespace Z0
 
 
                 var m1 = Random.BitMatrix(n);
-                Claim.require(BitMatrix.same(m1,m1));
+                Claim.Require(BitMatrix.same(m1,m1));
 
                 var m2 = m1.Replicate();
-                Claim.require(BitMatrix.same(m1,m2));
-                Claim.require(are_equal(m1,m2));
+                Claim.Require(BitMatrix.same(m1,m2));
+                Claim.Require(are_equal(m1,m2));
 
                 m2[5,5] = !m1[5,5];                
                 Claim.nea(BitMatrix.same(m1,m2));
@@ -75,11 +75,11 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var m1 = Random.BitMatrix(n);
-                Claim.require(BitMatrix.same(m1,m1));
+                Claim.Require(BitMatrix.same(m1,m1));
 
                 var m2 = m1.Replicate();
-                Claim.require(BitMatrix.same(m1,m2));
-                Claim.require(are_equal(m1,m2));
+                Claim.Require(BitMatrix.same(m1,m2));
+                Claim.Require(are_equal(m1,m2));
 
                 m2[5,5] = !m1[5,5];                
                 Claim.nea(BitMatrix.same(m1,m2));
@@ -95,10 +95,10 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var m1 = Random.BitMatrix(n);
-                Claim.require(BitMatrix.same(m1,m1));
+                Claim.Require(BitMatrix.same(m1,m1));
 
                 var m2 = m1.Replicate();
-                Claim.require(BitMatrix.same(m1,m2));
+                Claim.Require(BitMatrix.same(m1,m2));
 
                 m2[5,5] = !m1[5,5];                
                 Claim.nea(BitMatrix.same(m1,m2));
@@ -113,10 +113,10 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var m1 = Random.BitMatrix(n);
-                Claim.require(BitMatrix.same(m1,m1));
+                Claim.Require(BitMatrix.same(m1,m1));
 
                 var m2 = m1.Replicate();
-                Claim.require(BitMatrix.same(m1,m2));
+                Claim.Require(BitMatrix.same(m1,m2));
 
                 m2[5,5] = !m1[5,5];                
                 Claim.nea(BitMatrix.same(m1,m2));

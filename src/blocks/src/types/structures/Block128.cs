@@ -122,7 +122,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => data.Bytes();
         }
 
         /// <summary>

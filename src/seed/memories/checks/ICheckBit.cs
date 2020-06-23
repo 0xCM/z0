@@ -15,7 +15,7 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     
 
-    public interface ICheckBit : IValidator
+    public interface ICheckBit : TValidator
     {
         [MethodImpl(Inline)]
         bool eq(bit lhs, bit rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

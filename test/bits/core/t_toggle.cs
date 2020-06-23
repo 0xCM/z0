@@ -55,9 +55,9 @@ namespace Z0
                     var before = gbits.testbit(x, j);
                     x = gbits.toggle(x, j);
                     var after = gbits.testbit(x, j);
-                    ClaimNumeric.neq(before, after);
+                    ClaimNumeric.Neq(before, after);
                     x = gbits.toggle(x, j);
-                    Claim.eq(x, src[i]);
+                    Claim.Eq(x, src[i]);
                 }
             }
         }
@@ -78,13 +78,13 @@ namespace Z0
 
         public void testbit_outline()
         {
-            Claim.require(gbits.testbit(0b00000101, (byte)0));
+            Claim.Require(gbits.testbit(0b00000101, (byte)0));
             Claim.nea(gbits.testbit(0b00000101, (byte)1));
-            Claim.require(gbits.testbit(0b00000101, (byte)2));
+            Claim.Require(gbits.testbit(0b00000101, (byte)2));
             
-            Claim.require(gbits.testbit(0b00000111, (byte)0));
-            Claim.require(gbits.testbit(0b00000111, (byte)1));
-            Claim.require(gbits.testbit(0b00000111, (byte)2));
+            Claim.Require(gbits.testbit(0b00000111, (byte)0));
+            Claim.Require(gbits.testbit(0b00000111, (byte)1));
+            Claim.Require(gbits.testbit(0b00000111, (byte)2));
         }
 
         public void enable_outline()

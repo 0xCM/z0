@@ -6,9 +6,14 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+    
+    using static Konst;
 
-    static class ScalarExprEval
+    [ApiHost]
+    public readonly struct ScalarExprEval
     {
+        [Op, Closures(UnsignedInts)]
         public static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged
         {
@@ -28,6 +33,7 @@ namespace Z0.Logix
             }
         }
 
+        [Op, Closures(UnsignedInts)]
         static LiteralExpr<T> eval<T>(IOperatorExpr<T> expr)
             where T : unmanaged
         {

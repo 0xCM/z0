@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;        
 
-    public interface ITestNumericMatch : ITestAction, ICheckNumeric, ITestRandom
+    public interface ITestNumericMatch : ITestAction, TCheckNumeric, ITestRandom
     {
         /// <summary>
         /// Evaluates a pair of unary operators and asserts their equality over a random sequence
@@ -26,7 +26,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.Next<T>();
-                    numeq(f(x),g(x));
+                    NumEq(f(x),g(x));
                 }
             }
 
@@ -49,7 +49,7 @@ namespace Z0
                 {
                     var x = Random.Next<T>();
                     var y = Random.Next<T>();                    
-                    numeq(f(x,y),g(x,y));
+                    NumEq(f(x,y),g(x,y));
                 }
             }
 

@@ -57,7 +57,7 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)
@@ -113,7 +113,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var z = f.Invoke(x);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(x,j)), vcell(z,j));
+                        Eq(f.Invoke(vcell(x,j)), vcell(z,j));
                 }
             }
             
@@ -141,7 +141,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var z = f.Invoke(x);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(x,j)), vcell(z,j));
+                        Eq(f.Invoke(vcell(x,j)), vcell(z,j));
                 }
             }
 
@@ -169,7 +169,7 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
 
@@ -197,7 +197,7 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
 
@@ -227,7 +227,7 @@ namespace Z0
 
                     var z = f.Invoke(a,b,c);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(a,j),vcell(b,j),vcell(c,j)), vcell(z,j));
+                        Eq(f.Invoke(vcell(a,j),vcell(b,j),vcell(c,j)), vcell(z,j));
                 }
             }
 
@@ -257,7 +257,7 @@ namespace Z0
 
                     var z = f.Invoke(a,b,c);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(a,j),vcell(b,j),vcell(c,j)), vcell(z,j));
+                        Eq(f.Invoke(vcell(a,j),vcell(b,j),vcell(c,j)), vcell(z,j));
                 }
             }
 
@@ -279,7 +279,7 @@ namespace Z0
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(x,j), offset), vcell(z,j));
+                        Eq(f.Invoke(vcell(x,j), offset), vcell(z,j));
                 }
             }
 
@@ -301,7 +301,7 @@ namespace Z0
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(x,j), offset), vcell(z,j));
+                        Eq(f.Invoke(vcell(x,j), offset), vcell(z,j));
                 }
             }
 

@@ -26,7 +26,7 @@ namespace Z0
                 byte y = 0b00110000;
                 byte z = 0b1111;
                 var s = gbits.stitch(x, 1, y, 1);
-                Claim.eq(z, s);
+                Claim.Eq(z, s);
             }
             
             case1();
@@ -41,8 +41,8 @@ namespace Z0
             var y0 = 0b11111111_11100111_11111111ul;
             var y1 = 0b11111111_10101010_11111111_11111111_10101010ul;
 
-            Claim.eq(x0,y0);
-            Claim.eq(x1,y1); 
+            Claim.Eq(x0,y0);
+            Claim.Eq(x1,y1); 
 
             void report()
             {

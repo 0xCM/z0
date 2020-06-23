@@ -4,16 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct CheckSymbolic : ICheckSymbolic, IValidator<CheckSymbolic,ICheckSymbolic>
+    public readonly struct CheckSymbolic : TCheckSymbolic, TValidator<CheckSymbolic,TCheckSymbolic>
     {        
-        public static ICheckSymbolic Checker => default(CheckSymbolic);         
+        public static TCheckSymbolic Checker => default(CheckSymbolic);         
     }
 
-    public interface ICheckSymbolic : ICheckNumeric, ICheckVectors
+    public interface TCheckSymbolic : TCheckNumeric, TCheckVectors
     {
             
     }
-    public abstract class t_symbolic<X> : UnitTest<X, CheckSymbolic, ICheckSymbolic>
+    public abstract class t_symbolic<X> : UnitTest<X, CheckSymbolic, TCheckSymbolic>
         where X : t_symbolic<X>, new()
     {
         

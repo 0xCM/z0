@@ -62,6 +62,6 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> encode(in EncodedOpCode src)
-            => MemoryMarshal.CreateReadOnlySpan(ref refs.edit(in src),1).AsBytes();                     
+            => MemoryMarshal.CreateReadOnlySpan(ref refs.edit(in src),1).Bytes();                     
    }
 }

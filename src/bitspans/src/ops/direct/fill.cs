@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan fill(uint src, in BitSpan dst)
         {
-            ref var tmp = ref head(dst.Bits.Slice(24,8).As<bit,byte>());
+            ref var tmp = ref head(dst.Bits.Slice(24,8).Cast<bit,byte>());
             ref var target = ref Unsafe.As<bit,uint>(ref head(dst.Bits));
 
             BitPack.unpack(src, ref tmp); 
@@ -55,7 +55,7 @@ namespace Z0
         public static ref readonly BitSpan fill(ulong src, in BitSpan dst)
         {
             var buffer = Stacks.alloc(w512);        
-            ref var tmp = ref head(dst.Bits.Slice(56,8).As<bit,byte>());
+            ref var tmp = ref head(dst.Bits.Slice(56,8).Cast<bit,byte>());
             ref var target = ref Unsafe.As<bit,uint>(ref head(dst.Bits));
 
             BitPack.unpack((uint)src, ref tmp); 

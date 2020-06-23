@@ -29,7 +29,7 @@ namespace Z0
             var n = (int)(new N().NatValue);
             Claim.eq(bs.Length, n);
             for(var i=0; i<n; i++)
-                Claim.eq(bv[i], bs[i]);
+                Claim.Eq(bv[i], bs[i]);
         }
 
         protected static NatSeq<N2,N1,N7> n217 => default;

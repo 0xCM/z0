@@ -29,9 +29,9 @@ namespace Z0
                 for(var j=0; j<n; j++)
                 {
                     if(p[i] == j)
-                        Claim.eq(m[i,j], on);
+                        Claim.Eq(m[i,j], on);
                     else
-                        Claim.eq(m[i,j], off);
+                        Claim.Eq(m[i,j], off);
                 }
             }
         }
@@ -49,9 +49,9 @@ namespace Z0
                 for(var j=0; j<n; j++)
                 {
                     if(p[i] == j)
-                        Claim.eq(m[i,j], on);
+                        Claim.Eq(m[i,j], on);
                     else
-                        Claim.eq(m[i,j], off);
+                        Claim.Eq(m[i,j], off);
                 }
             }
         }
@@ -69,9 +69,9 @@ namespace Z0
                 for(var j=0; j<n; j++)
                 {
                     if(p[i] == j)
-                        Claim.eq(m[i,j], on);
+                        Claim.Eq(m[i,j], on);
                     else
-                        Claim.eq(m[i,j], off);
+                        Claim.Eq(m[i,j], off);
                 }
             }
         }

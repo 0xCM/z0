@@ -36,7 +36,7 @@ namespace Z0
                     break;
 
                 var member = Enums.literal<Choices32i,int>(ival);
-                Claim.eq(member, values[i].LiteralValue);
+                Claim.Eq(member, values[i].LiteralValue);
 
                 var expect = (int)Math.Pow(2,i);
                 if(expect != ival)

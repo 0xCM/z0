@@ -67,7 +67,7 @@ namespace Z0
                 {
                     var x = next_x();
                     var y = next_y();
-                    eq(f.Invoke(x,y), g.Invoke(x,y));
+                    Eq(f.Invoke(x,y), g.Invoke(x,y));
                 }
             }
             catch(Exception e)
@@ -104,7 +104,7 @@ namespace Z0
             {                
                 apply(g, lhs, rhs, dst);
                 for(var i=0; i<count; i++)
-                    eq(f.Invoke(skip(in leftIn, i), skip(in rightIn, i)), skip(in target, i));
+                    Eq(f.Invoke(skip(in leftIn, i), skip(in rightIn, i)), skip(in target, i));
             }
             catch(Exception e)
             {

@@ -46,7 +46,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Data.AsBytes();
+            get => Data.Bytes();
         }
 
         public Span<T> Content
@@ -86,6 +86,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitMatrix<S> As<S>()
             where S : unmanaged
-                => new BitMatrix<S>(Content.As<T,S>());        
+                => new BitMatrix<S>(Content.Cast<T,S>());        
     }
 }

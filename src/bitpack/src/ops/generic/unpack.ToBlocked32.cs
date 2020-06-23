@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged
         {            
             var blockcount = dst.BlockCount;
-            var bytes = src.AsBytes();
+            var bytes = src.Bytes();
             ref readonly var bitsrc = ref head(bytes);
 
             for(var block=0; block < blockcount; block++)

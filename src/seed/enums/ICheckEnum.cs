@@ -21,7 +21,7 @@ namespace Z0
         public static ICheckEnum Checker => default(CheckEnum);
     }
 
-    public interface ICheckEnum : IValidator<CheckEnum,ICheckEnum>
+    public interface ICheckEnum : TValidator<CheckEnum,ICheckEnum>
     {        
         [MethodImpl(Inline)]
         void eq<E>(E lhs, E rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

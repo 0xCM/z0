@@ -23,7 +23,7 @@ namespace Z0
         public static ref T Singleton<S,T>(this Span<S> src, int offset = 0, int? length = null)
             where S : unmanaged
             where T : unmanaged
-                => ref MemoryMarshal.AsRef<T>(src.AsBytes(offset,length));
+                => ref MemoryMarshal.AsRef<T>(src.Bytes(offset,length));
     }
 
 }

@@ -28,7 +28,7 @@ namespace Z0
                 var converter = default(BoxedNumber).Converter;
                 var x = BoxedNumber.Define(Random.Next<byte>());
                 var y = converter.Convert<ushort>(x);
-                Claim.require(y.IsSome());
+                Claim.Require(y.IsSome());
                 Claim.eq(Cast.to<ushort>((byte)x.Boxed), y.Value);                        
             }
         }
@@ -38,52 +38,52 @@ namespace Z0
             var nk = NumericKind.I64;
             var x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.eq(x.Kind, nk);
+            Claim.Eq(x.Kind, nk);
 
             nk = NumericKind.U64;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.eq(x.Kind, nk);
+            Claim.Eq(x.Kind, nk);
             
             nk = NumericKind.U8;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.eq(x.Kind, nk);
+            Claim.Eq(x.Kind, nk);
 
             nk = NumericKind.I8;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.eq(x.Kind, nk);
+            Claim.Eq(x.Kind, nk);
 
             nk = NumericKind.U16;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.eq(x.Kind, nk);
+            Claim.Eq(x.Kind, nk);
 
             nk = NumericKind.I16;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.eq(x.Kind, nk);
+            Claim.Eq(x.Kind, nk);
 
             nk = NumericKind.U32;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.eq(x.Kind, nk);
+            Claim.Eq(x.Kind, nk);
 
             nk = NumericKind.I32;            
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");            
-            Claim.eq(x.Kind, nk);
+            Claim.Eq(x.Kind, nk);
 
             nk = NumericKind.F32;            
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");            
-            Claim.eq(x.Kind, nk);
+            Claim.Eq(x.Kind, nk);
 
             nk = NumericKind.F64;            
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");            
-            Claim.eq(x.Kind, nk);
+            Claim.Eq(x.Kind, nk);
         }
     }
 }

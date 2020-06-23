@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct DynamicCase : IDynamicCase, IValidator<DynamicCase,IDynamicCase>
+    public readonly struct DynamicCase : IDynamicCase, TValidator<DynamicCase,IDynamicCase>
     {        
         public static IDynamicCase Checker => default(DynamicCase);         
     }
 
-    public interface IDynamicCase : ICheckNumeric, ICheckVectors
+    public interface IDynamicCase : TCheckNumeric, TCheckVectors
     {
             
     }

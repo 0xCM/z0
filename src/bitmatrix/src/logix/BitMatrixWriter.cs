@@ -110,7 +110,7 @@ namespace Z0
         [MethodImpl(Inline)]
         void Write<T>(BitMatrix<T> src, N8 order)
             where T : unmanaged
-                => Write(BitMatrix.load<N8,N8,byte>(src.Data.AsBytes()));
+                => Write(BitMatrix.load<N8,N8,byte>(src.Data.Bytes()));
 
         [MethodImpl(Inline)]
         void Write<T>(BitMatrix<T> src, N16 order)

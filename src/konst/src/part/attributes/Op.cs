@@ -11,19 +11,19 @@ namespace Z0
     /// </summary>
     public class OpAttribute : Attribute
     {
-        public virtual string Name {get;}
+        public string Group {get;}
 
         public OpAttribute()
         {
-            this.Name = string.Empty;
+            Group = string.Empty;
         }
 
-        public OpAttribute(string name)
+        public OpAttribute(string group)
         {
-            this.Name = name;          
+            Group = group;          
         }
 
         public override string ToString()
-            => Name;
+            => Group;
     }  
 }

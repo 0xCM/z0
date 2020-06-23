@@ -595,7 +595,7 @@ namespace Z0
         {                        
             var bytes = math.square(Z0.BitMatrix<T>.N) >> 3;
             var data = random.Span<byte>((int)bytes);
-            return BM.load(data.As<byte,T>());
+            return BM.load(data.Cast<byte,T>());
         }
 
         [MethodImpl(Inline)]

@@ -31,7 +31,7 @@ namespace Z0
                 var x = Random.Next<T>();
                 var y0 = gbits.blsr(x);
                 var y1 = gmath.and(gmath.sub(x, one<T>()), x);
-                Claim.eq(y0,y1);
+                Claim.Eq(y0,y1);
             }
         }
 

@@ -8,9 +8,12 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    static class VectorExprEval
+    using static Konst;
+
+    [ApiHost]
+    public readonly struct VectorExprEval
     {
-        [Op("eval_vec128_expr"), NumericClosures(NumericKind.Integers)]
+        [Op, Closures(UnsignedInts)]
          public static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
         {
@@ -30,7 +33,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op("eval_vec256_expr"), NumericClosures(NumericKind.Integers)]
+        [Op, Closures(UnsignedInts)]
         public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
         {
@@ -50,7 +53,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op("eval_vec128_op"), NumericClosures(NumericKind.Integers)]
+        [Op, Closures(UnsignedInts)]
         static LiteralExpr<Vector128<T>> eval<T>(IOperatorExpr<Vector128<T>> expr)
             where T : unmanaged
         {
@@ -68,7 +71,7 @@ namespace Z0.Logix
             }
         }
 
-       [Op("eval_vec256_op"), NumericClosures(NumericKind.Integers)]
+       [Op, Closures(UnsignedInts)]
        static LiteralExpr<Vector256<T>> eval<T>(IOperatorExpr<Vector256<T>> expr)
             where T : unmanaged
         {

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class BitGrid
     {
@@ -18,7 +17,7 @@ namespace Z0
         /// <param name="spec">The grid specification that characterizes the layout</param>
         [MethodImpl(Inline), Op]
         public static GridMap gridmap(in GridSpec spec)
-            => GridMap.Define(spec);
+            => new GridMap(spec);
 
         /// <summary>
         /// Defines a grid map predicated row count, col count and storage segment bit width width

@@ -76,7 +76,7 @@ namespace Z0
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => Content.AsBytes().As<T>();
+            get => Content.AsBytes().Cast<T>();
         }
 
         public ref T Head

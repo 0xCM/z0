@@ -505,6 +505,7 @@ namespace Z0
         /// <param name="n">The number of grid columns</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The segment type</typeparam>
+        [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid<T> init<T>(int m, int n, T d = default)
             where T : unmanaged
         {            
@@ -515,29 +516,12 @@ namespace Z0
         }
 
         /// <summary>
-        /// Creates a dynamically-sized grid of natural dimensions filled with specified data
-        /// </summary>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        public static BitGrid<M,N,T> init<M,N,T>(M m = default, N n = default, T d = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            var blocksize = n256;
-            var blocks = Blocks.alloc<T>(blocksize, BitCalcs.tableblocks(blocksize, m,n,d));
-            Blocks.broadcast(d, blocks);
-            return new BitGrid<M,N,T>(blocks);
-        }
-
-        /// <summary>
         /// Initializes 16-bit grid
         /// </summary>
         /// <param name="data">The grid data</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        static BitGrid16<T> init16<T>(ushort data)
+        internal static BitGrid16<T> init16<T>(ushort data)
             where T : unmanaged
                 => new BitGrid16<T>(data);
 
@@ -547,7 +531,7 @@ namespace Z0
         /// <param name="data">The grid data</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        static BitGrid32<T> init32<T>(uint data)
+        internal static BitGrid32<T> init32<T>(uint data)
             where T : unmanaged
                 => new BitGrid32<T>(data);
 
@@ -557,88 +541,8 @@ namespace Z0
         /// <param name="data">The grid data</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        static BitGrid64<T> init64<T>(ulong data)
+        internal static BitGrid64<T> init64<T>(ulong data)
             where T : unmanaged
-                => new BitGrid64<T>(data);
-
-        /// <summary>
-        /// Initializes a 128-bit grid of natural dimensions
-        /// </summary>
-        /// <param name="m">The row count representative</param>
-        /// <param name="n">The col count representative</param>
-        /// <param name="d">The fill data</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        static BitGrid16<M,N,T> init16<M,N,T>(M m = default, N n = default, T d = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged  
-                => new BitGrid16<M, N, T>(gvec.broadcast<T,ushort>(d));
-
-        /// <summary>
-        /// Initializes a 32-bit grid of natural dimensions
-        /// </summary>
-        /// <param name="m">The row count representative</param>
-        /// <param name="n">The col count representative</param>
-        /// <param name="d">The fill data</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        static BitGrid32<M,N,T> init32<M,N,T>(M m = default, N n = default, T d = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged            
-                => new BitGrid32<M, N, T>(gvec.broadcast<T,uint>(d));
-
-        /// <summary>
-        /// Initializes a 64-bit grid of natural dimensions
-        /// </summary>
-        /// <param name="m">The row count representative</param>
-        /// <param name="n">The col count representative</param>
-        /// <param name="d">The fill data</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        static BitGrid64<M,N,T> init64<M,N,T>(M m = default, N n = default, T d = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged            
-                => new BitGrid64<M, N, T>(gvec.broadcast<T,ulong>(d));
-
-        /// <summary>
-        /// Initializes a 128-bit grid of natural dimensions
-        /// </summary>
-        /// <param name="m">The row count representative</param>
-        /// <param name="n">The col count representative</param>
-        /// <param name="d">The fill data</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        static BitGrid128<M,N,T> init128<M,N,T>(M m = default, N n = default, T d = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged            
-                => new BitGrid128<M, N, T>(Vectors.vbroadcast(n128, d));
-
-        /// <summary>
-        /// Initializes a 256-bit grid of natural dimensions
-        /// </summary>
-        /// <param name="m">The row count representative</param>
-        /// <param name="n">The col count representative</param>
-        /// <param name="d">The fill data</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        static BitGrid256<M,N,T> init256<M,N,T>(M m = default, N n = default, T d = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged            
-                => new BitGrid256<M, N, T>(Vectors.vbroadcast(n256, d)); 
+                => new BitGrid64<T>(data); 
     }
 }

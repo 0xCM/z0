@@ -135,7 +135,7 @@ namespace Z0
 
                 var v3 = RowVector.blockload(sub(v1.Unsized,v2.Unsized), n);                
                 Linear.sub(v1, v2, ref v1);
-                Claim.require(v3 == v1);
+                Claim.Require(v3 == v1);
             } 
         }
 

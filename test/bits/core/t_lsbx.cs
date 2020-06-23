@@ -13,7 +13,7 @@ namespace Z0
         {
             //lsbx is an identity function over a domain consisting of powers of 2
             for(byte i = 0; i< 64; i++)
-                Claim.eq(Pow2.pow(i), gbits.xlsb(Pow2.pow(i)));
+                Claim.Eq(Pow2.pow(i), gbits.xlsb(Pow2.pow(i)));
         }
 
         public void lsbx_8()
@@ -37,7 +37,7 @@ namespace Z0
                 var src = Random.Next<T>();
                 var x = gbits.xlsb(src);
                 var y = gmath.and(src, gmath.negate(src));
-                Claim.eq(x,y);
+                Claim.Eq(x,y);
             }
         }
 

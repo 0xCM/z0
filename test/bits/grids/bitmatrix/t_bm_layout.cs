@@ -47,7 +47,7 @@ namespace Z0
 
             for(var i=0; i < order; i++)
             for(var j=0; j < order; j++)
-                Claim.eq(bit.On, m[i,j]);
+                Claim.Eq(bit.On, m[i,j]);
         }
     }
 }

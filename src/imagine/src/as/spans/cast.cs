@@ -8,30 +8,33 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct As
     {
+        /// <summary>
+        /// Produces a target T-span from a source bytespan populated with a maximal
+        /// number of elemements obtainable from the source bytes; remaining bytes, if
+        /// any, are deposited into a remainder bytespan
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="rem">The span populated with left-over bytes, if any</param>
+        /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> cast<T>(Span<byte> src)
+        public static Span<T> cast<T>(Span<byte> src, out Span<byte> rem)
             where T : struct
-                => Cast<byte,T>(src);
+                => cast<byte,T>(src, out rem);
 
+        /// <summary>
+        /// Produces a target T-span from a source bytespan populated with a maximal
+        /// number of elemements obtainable from the source bytes; remaining bytes, if
+        /// any, are deposited into a remainder bytespan
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="rem">The span populated with left-over bytes, if any</param>
+        /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
+        public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src, out ReadOnlySpan<byte> rem)
             where T : struct
-                => Cast<byte,T>(src);
-
-        [MethodImpl(Inline)]        
-        public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
-            where S : struct
-            where T : struct
-                => Cast<S,T>(src);
-
-        [MethodImpl(Inline)]        
-        public static Span<T> cast<S,T>(Span<S> src)                
-            where S : struct
-            where T : struct
-                => Cast<S,T>(src);
+                => cast<byte,T>(src, out rem);
     }
 }

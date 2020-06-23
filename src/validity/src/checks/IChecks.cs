@@ -7,14 +7,14 @@ namespace Z0
     using System;
 
     public interface IChecks : 
-        ICheckLengths, 
-        ICheckPrimal, 
+        TCheckLengths, 
+        TCheckPrimal, 
         ICheckPrimalSeq, 
-        ICheckClose, 
-        ICheckFileSystem,
-        ICheckInvariant,
-        ICheckSets,
-        ICheckNull        
+        TCheckClose, 
+        TCheckFileSystem,
+        TCheckInvariant,
+        TCheckSets,
+        TCheckNull        
     {
 
     }

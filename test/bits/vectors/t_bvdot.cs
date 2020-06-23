@@ -148,7 +148,7 @@ namespace Z0
                 var y = Random.BitVector(n4);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.require(a == b);            
+                Claim.Require(a == b);            
             }
         }
 
@@ -160,12 +160,12 @@ namespace Z0
                 var y = Random.BitVector(n8);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.require(a == b);            
+                Claim.Require(a == b);            
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 var c = zx % zy;
-                Claim.require(a == c);
+                Claim.Require(a == c);
             }            
         }
 
@@ -177,12 +177,12 @@ namespace Z0
                 var y = Random.BitVector(n16);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.require(a == b);   
+                Claim.Require(a == b);   
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 var c = zx % zy;
-                Claim.require(a == c);
+                Claim.Require(a == c);
             }
         }
 
@@ -194,12 +194,12 @@ namespace Z0
                 var y = Random.BitVector(n32);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.require(a == b);   
+                Claim.Require(a == b);   
 
                 var zx = x.ToNatural();
                 var zy = y.ToNatural();
                 var c = zx % zy;
-                Claim.require(a == c);
+                Claim.Require(a == c);
             }
         }
 
@@ -211,12 +211,12 @@ namespace Z0
                 var y = Random.BitVector(n64);
                 bit a = x % y;
                 var b = modprod(x,y);
-                Claim.require(a == b);
+                Claim.Require(a == b);
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 bit c = zx % zy;
-                Claim.require(a == c);            
+                Claim.Require(a == c);            
             }
 
             for(var i=0; i< RepCount; i++)          
@@ -227,7 +227,7 @@ namespace Z0
                 var x64 = x32.Extend(n64);
                 var y64 = y32.Extend(n64);
                 var dot64 = BitVector.dot(x64,y64);
-                Claim.eq(dot32,dot64);
+                Claim.Eq(dot32,dot64);
             }
         }
 
@@ -245,7 +245,7 @@ namespace Z0
                 var xc = x.ToBitCells();
                 var yc = y.ToBitCells();
                 var b = xc % yc;
-                ClaimNumeric.eq(a,b);
+                ClaimNumeric.Eq(a,b);
             }
         }
 
@@ -271,7 +271,7 @@ namespace Z0
                     var y = Random.BitVector<N,T>();
                     bit a = x % y;
                     var b = BitVector.modprod(x,y);
-                    Claim.eq(a,b);
+                    Claim.Eq(a,b);
                 }
             }
 

@@ -36,7 +36,7 @@ namespace Z0
 
             for(var row=0; row < bm.RowCount; row++)
             for(var col=0; col < bm.ColCount; col++)
-                Claim.eq(bm[row,col], gmath.even(row) ? bit.test(p0,col) : bit.test(p1,col));
+                Claim.Eq(bm[row,col], gmath.even(row) ? bit.test(p0,col) : bit.test(p1,col));
         }
 
         public void bm_create_fromfixed_16x16x16()
@@ -46,7 +46,7 @@ namespace Z0
             Fixed.deposit(in head(data), ref src);
             var A = BitMatrix.primal(n16, Fixed.byteview(src));
             var B = BitMatrix.primal(n16, data);
-            Claim.require(BitMatrix.same(A,B));
+            Claim.Require(BitMatrix.same(A,B));
         }
 
         public void bm_load_8x8x8()
@@ -59,7 +59,7 @@ namespace Z0
                 var m2 = BitMatrix.load(n, n, BitConverter.GetBytes(src.Current).ToSpan());
                 for(var i=0; i<8; i++)
                 for(var j=0; j<8; j++)
-                    Claim.eq(m1[i,j], m2[i,j]);
+                    Claim.Eq(m1[i,j], m2[i,j]);
             }
         }
 
@@ -78,7 +78,7 @@ namespace Z0
             var fill = BitBlocks.alloc(n9, pattern);
             var matrix = BitMatrix.init(fill, n7);
             for(var i=0; i<matrix.RowCount; i++)
-                Claim.require(fill == matrix[i]);
+                Claim.Require(fill == matrix[i]);
         }
     }
 }

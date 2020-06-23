@@ -71,7 +71,7 @@ namespace Z0
 
     public abstract class UnitTest<U,V> : UnitTest<U>
         where U : UnitTest<U>
-        where V : IValidator
+        where V : TValidator
     {        
         protected new abstract V Claim {get;}
     }
@@ -79,7 +79,7 @@ namespace Z0
     public abstract class UnitTest<U,V,I> : UnitTest<U,I>
         where U : UnitTest<U>
         where V : struct, I
-        where I : IValidator
+        where I : TValidator
     {        
         protected override I Claim => default(V);
     }

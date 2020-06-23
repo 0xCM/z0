@@ -22,7 +22,7 @@ namespace Z0
             var segment = uint8(0b1010).ToBitSpan();
             var expect = segment.Replicate(4);
             var actual = dst.Data.ToBitSpan();
-            Claim.require(expect.Equals(actual));
+            Claim.Require(expect.Equals(actual));
                         
         }
 
@@ -36,7 +36,7 @@ namespace Z0
             
             Bits.part24x3(src, dst);
             for(var i=0; i<n; i++)
-                Claim.eq(dst[i],(byte)7);
+                Claim.Eq(dst[i],(byte)7);
         }
 
         public void bitpart_27x3()
@@ -57,9 +57,9 @@ namespace Z0
 
             for(var i=0; i<n; i+= 3)
             {
-                Claim.eq(expect[i],actual[i]);
-                Claim.eq(expect[i+1],actual[i+1]);
-                Claim.eq(expect[i+2],actual[i+2]);
+                Claim.Eq(expect[i],actual[i]);
+                Claim.Eq(expect[i+1],actual[i+1]);
+                Claim.Eq(expect[i+2],actual[i+2]);
             }
                         
         }
@@ -74,7 +74,7 @@ namespace Z0
             
             Bits.part30x3(src, dst);
             for(var i=0; i<n; i++)
-                Claim.eq(dst[i],(byte)7);
+                Claim.Eq(dst[i],(byte)7);
         }
 
         public void bitpart_63x3()
@@ -87,7 +87,7 @@ namespace Z0
             var dst = NatSpan.alloc(n,t);
             Bits.part63x3(src, dst);
             for(var i=0; i<n; i++)
-                Claim.eq(dst[i],(byte)7);
+                Claim.Eq(dst[i],(byte)7);
         }
 
 

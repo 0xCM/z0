@@ -23,7 +23,7 @@ namespace Z0.Asm
                 var expect = MemoryRange.Define(start,end);
                 var format = expect.Format();
                 var actual = parser.Parse(format).Value;
-                Claim.eq(expect,actual);
+                Claim.Eq(expect,actual);
             }
         }
 

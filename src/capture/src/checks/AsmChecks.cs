@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public class AsmChecks : ITestAsm
+    public class AsmChecks : TTestAsm
     {
         public static AsmChecks Create(IAsmContext context)
             => new AsmChecks(context);
@@ -36,7 +36,7 @@ namespace Z0.Asm
             BufferAlloc.Dispose();            
         }
 
-        ITestAsm Me => this;
+        TTestAsm Me => this;
 
         TCaptureArchive CodeArchive 
             => Me.CaptureArchive(Part.ExecutingPart);

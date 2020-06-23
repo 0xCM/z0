@@ -42,25 +42,25 @@ namespace Z0.Machine
         [MethodImpl(Inline)]
         public void Clear(W16 w)
         {
-            head(Content.As<T,ushort>()) = Zero16u;
+            head(Content.Cast<T,ushort>()) = Zero16u;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W32 w)
         {
-            head(Content.As<T,uint>()) = Zero32u;
+            head(Content.Cast<T,uint>()) = Zero32u;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W64 w)
         {
-            head(Content.As<T,ulong>()) = Zero64u;
+            head(Content.Cast<T,ulong>()) = Zero64u;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W128 w)
         {
-            head(Content.As<T,Fixed128>()) = Fixed128.Empty;
+            head(Content.Cast<T,Fixed128>()) = Fixed128.Empty;
         }
     }
 }

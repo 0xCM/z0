@@ -11,7 +11,7 @@ namespace Z0.Asm
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public abstract class t_asm<U> : UnitTest<U,CheckVectors,ICheckVectors>
+    public abstract class t_asm<U> : UnitTest<U,CheckVectors,TCheckVectors>
         where U : t_asm<U>
     {     
         protected TCaptureArchive TargetArchive 
@@ -29,7 +29,7 @@ namespace Z0.Asm
             UnitDataDir.Clear();
         }
 
-        protected readonly IAsmTester AsmCheck;
+        protected readonly TAsmTester AsmCheck;
 
         protected StreamWriter AsmCaseWriter([Caller] string caller = null)
             => CaseWriter(FileExtensions.Asm,caller);

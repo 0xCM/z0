@@ -282,7 +282,7 @@ namespace Z0.Logix
                 var v2 = Vectors.vbroadcast(n256,sb);
                 var v3 = Vectors.vbroadcast(n256,sc);
                 var v4 = Vector256.GetElement(V256(v1,v2,v3), 0);
-                Claim.eq(v4,z3);
+                Claim.Eq(v4,z3);
 
 
                 var u1 = gvec.vlo(v1);
@@ -290,7 +290,7 @@ namespace Z0.Logix
                 var u3 = gvec.vlo(v3);
                 var u4 = Vector128.GetElement(V128(u1,u2,u3),0);
 
-                Claim.eq(u4, z3);
+                Claim.Eq(u4, z3);
             }
         }
 
@@ -327,8 +327,8 @@ namespace Z0.Logix
                 T result1 = LogicEngine.eval(expr);
                 //T result2 = BitVectorOpApi.eval(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
                 var result2 = BitVectorLogix.Service.EvalDirect(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
-                Claim.eq(expect, result1);                            
-                Claim.eq(expect, result2);                            
+                Claim.Eq(expect, result1);                            
+                Claim.Eq(expect, result2);                            
             }
         }
 

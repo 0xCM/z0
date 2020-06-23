@@ -32,7 +32,7 @@ namespace Z0
             => Context.Deposit(src);
     }    
 
-    public interface ICheckSVF : ITestService, ICheckVectors, ITestRandom, ICheckAction
+    public interface ICheckSVF : ITestService, TCheckVectors, ITestRandom, TCheckAction
     {
         ICheckSVF<T> Typed<T>()
             where T : unmanaged
@@ -95,7 +95,7 @@ namespace Z0
                     (var x, var y) = src(i);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)
@@ -126,7 +126,7 @@ namespace Z0
                     (var x, var y) = src(i);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)

@@ -53,7 +53,7 @@ namespace Z0
                 BitStore.storeseq(a,s0);
                 BitStore.storeseq(a,s1);
                 s2 = BitStore.storeseq(a);
-                ClaimNumeric.eq(s0, s1);
+                ClaimNumeric.Eq(s0, s1);
                 ClaimNumeric.eq(s1, s2);
             }
         }

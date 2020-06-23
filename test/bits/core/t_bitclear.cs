@@ -31,7 +31,7 @@ namespace Z0
                 if(i >= first && i < first + count)
                     Claim.nea(bs[i]);
                 else
-                    Claim.require(bs[i]);
+                    Claim.Require(bs[i]);
             }
         }       
     }

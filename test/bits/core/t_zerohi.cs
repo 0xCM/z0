@@ -64,7 +64,7 @@ namespace Z0
                 var x0 = gbits.extract(x,0, (byte)(j - 1));
                 var y0 = gbits.extract(y,0, (byte)(j - 1));
                 var y1 = gbits.extract(y,(byte)j, (byte)(width - 1));
-                Claim.eq(x0,y0);
+                Claim.Eq(x0,y0);
                 Claim.nea(gmath.nonz(y1));                        
             }
         }

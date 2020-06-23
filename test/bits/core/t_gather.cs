@@ -19,10 +19,10 @@ namespace Z0
             var x2 = Bits.gather(UInt32.MaxValue, m2);
             var y2 = Bits.scatter(x2, m2).ToBitVector();
             var bv = m2.ToBitVector();
-            Claim.eq(y2.Scalar,bv.Scalar);
+            Claim.Eq(y2.Scalar,bv.Scalar);
             
             for(var i=0; i<y2.Width; i++)
-                Claim.eq(y2[i], i % 8 == 0 ? bit.On : bit.Off);
+                Claim.Eq(y2[i], i % 8 == 0 ? bit.On : bit.Off);
         }
 
         public void gather_8()
@@ -46,7 +46,7 @@ namespace Z0
                 var mask = Random.Next<T>();
                 var s1 = gather(src,mask);
                 var s2 = gbits.gather(src,mask);
-                Claim.eq(s1,s2);
+                Claim.Eq(s1,s2);
             }
         }
 

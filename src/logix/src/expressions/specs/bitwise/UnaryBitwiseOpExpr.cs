@@ -6,6 +6,8 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
+
+    using static Konst;    
     
     /// <summary>
     /// Defines a unary bitwise operator expression
@@ -23,10 +25,11 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> Arg {get;}
 
+        [MethodImpl(Inline)]
         public UnaryBitwiseOpExpr(UnaryBitLogic op, IExpr<T> operand)
         {
-            this.OpKind = op;
-            this.Arg = operand;
+            OpKind = op;
+            Arg = operand;
         }
         
         public string Format()

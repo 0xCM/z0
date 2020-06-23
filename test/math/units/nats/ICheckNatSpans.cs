@@ -14,7 +14,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckNatSpans : ICheckSpans
+    public interface ICheckNatSpans : TCheckSpans
     {
         /// <summary>
         /// Asserts content equality for two natural spans of coincident length
@@ -29,7 +29,7 @@ namespace Z0
         void eq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
             where N : unmanaged, ITypeNat             
-                => eq(lhs.Data,rhs.Data);
+                => Eq(lhs.Data,rhs.Data);
 
         /// <summary>
         /// Asserts content equality for two tabular spans of coincident dimension
@@ -46,6 +46,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged 
-                => eq(lhs.Data, rhs.Data);        
+                => Eq(lhs.Data, rhs.Data);        
     }
 }

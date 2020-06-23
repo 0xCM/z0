@@ -40,24 +40,24 @@ namespace Z0
             Claim.eq(p1[3], 3);
 
             var bm = p1.ToBitMatrix();
-            Claim.eq(bm[0,31], bit.On);
-            Claim.eq(bm[1,30], bit.On);
-            Claim.eq(bm[2,29], bit.On);
+            Claim.Eq(bm[0,31], bit.On);
+            Claim.Eq(bm[1,30], bit.On);
+            Claim.Eq(bm[2,29], bit.On);
 
 
             var v1 = BitVector32.Zero;
             var v2 = v1.Permute(p1);
 
-            Claim.eq(v1[31],v2[0]);
-            Claim.eq(v1[30],v2[1]);
-            Claim.eq(v1[29],v2[2]);
+            Claim.Eq(v1[31],v2[0]);
+            Claim.Eq(v1[30],v2[1]);
+            Claim.Eq(v1[29],v2[2]);
         }
 
         public void pbv_perm_64()
         {
             var p = Permute.natural(n64, (0,1),(1,2),(2,3),(3,4),(4,5),(5,6));
             var bv = BitVector.perm(BitVector64.One,p);
-            Claim.eq(bv[6], bit.On);
+            Claim.Eq(bv[6], bit.On);
 
             for(var j=0; j<RepCount; j++)
             {
@@ -65,7 +65,7 @@ namespace Z0
                 var v1 = Random.BitVector(n64);
                 var v2 = BitVector.perm(v1,p1);
                 for(var i=0; i<v1.Width; i++)
-                    Claim.eq(v1[p1[i]], v2[i]);
+                    Claim.Eq(v1[p1[i]], v2[i]);
             }
         }
     }

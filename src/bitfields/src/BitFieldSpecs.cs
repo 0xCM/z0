@@ -24,7 +24,7 @@ namespace Z0
             where F : unmanaged, Enum
         {
             Span<F> values = Enums.literals<F>();
-            var widths = values.AsBytes();
+            var widths = values.Bytes();
             var count = math.min(widths.Length, 32);
             var data = default(Vector256<byte>);
             for(var i=0; i<count; i++)

@@ -17,7 +17,7 @@ namespace Z0
 
         readonly int RepCount;
 
-        ICheckEquatable Claim => CheckEquatable.Checker;
+        TCheckEquatable Claim => CheckEquatable.Checker;
 
         [MethodImpl(Inline)]
         public static IEvalExecutor Create(IContext context, IPolyrand random)
@@ -132,7 +132,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -155,7 +155,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -178,7 +178,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -201,7 +201,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -224,7 +224,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -247,7 +247,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 

@@ -68,7 +68,7 @@ namespace Z0
             var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), max(default(NK<ulong>)));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,0,5,2,7,4,1,6,3);
-            Claim.require(gvec.vsame(expect,target));
+            Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -91,7 +91,7 @@ namespace Z0
             var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,0,1,2,7,4,5,6,3);
-            Claim.require(gvec.vsame(expect,target));
+            Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -114,7 +114,7 @@ namespace Z0
             var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,4,1,6,3,0,5,2,7);
-            Claim.require(gvec.vsame(expect,target));
+            Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -136,7 +136,7 @@ namespace Z0
             var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,4,5,2,3,0,1,6,7);
-            Claim.require(gvec.vsame(expect,target));
+            Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -159,7 +159,7 @@ namespace Z0
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
             
-            Claim.require(gvec.vsame(expect,target));
+            Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z16)), source,target);
             if(EmitInfo)
@@ -325,7 +325,7 @@ namespace Z0
                 {
                     var j = perm[i];
                     var k = perm[j];
-                    Claim.eq(ti,k);
+                    Claim.Eq(ti,k);
                     tc++;                    
                 }
             }
@@ -430,7 +430,7 @@ namespace Z0
                     var j = perm[i];
                     var k = perm[j];
 
-                    Claim.require(gmath.eq(convert<T>(i),k));
+                    Claim.Require(gmath.eq(convert<T>(i),k));
                 }
             }
         }
@@ -458,7 +458,7 @@ namespace Z0
                     var j = perm[i];
                     var k = perm[j];
 
-                    Claim.require(gmath.eq(convert<T>(i),k));
+                    Claim.Require(gmath.eq(convert<T>(i),k));
                 }
             }
         }

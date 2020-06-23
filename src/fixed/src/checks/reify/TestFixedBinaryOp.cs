@@ -30,11 +30,11 @@ namespace Z0
 
         ITestAction ActionTest => cast<ITestFixedBinaryOp>(this);
 
-        ITestCaseIdentity Identity => ActionTest;
+        TTestCaseIdentity Identity => ActionTest;
 
         int RepCount => ActionTest.RepCount;
 
-        ICheckEquatable Claim => CheckEquatable.Checker;
+        TCheckEquatable Claim => CheckEquatable.Checker;
 
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points
@@ -53,7 +53,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -79,7 +79,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -104,7 +104,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -129,7 +129,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -154,7 +154,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 
@@ -179,7 +179,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Claim.eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y),g(x,y));
                 }
             }
 

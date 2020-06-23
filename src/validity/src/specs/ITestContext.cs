@@ -18,14 +18,14 @@ namespace Z0
     public interface ITestContext : 
         IServiceAllocation,
         TAppEnv,
-        IClocked,
+        TClocked,
         IPolyrandProvider, 
-        ICheckAction,
+        TCheckAction,
         ITestService,
         ITestQueue,
-        ICheckOptions, 
-        ITestCaseIdentity, 
-        IValidator,
+        TCheckOptions, 
+        TTestCaseIdentity, 
+        TValidator,
         IAppMsgContext        
     {
         
@@ -34,6 +34,6 @@ namespace Z0
     public interface ITestContext<U> : ITestContext
         where U : ITestContext<U>
     {
-        Type IValidator.HostType => typeof(U);
+        Type TValidator.HostType => typeof(U);
     }
 }

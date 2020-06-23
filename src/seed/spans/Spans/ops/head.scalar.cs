@@ -9,11 +9,9 @@ namespace Z0
     using System.Runtime.InteropServices;    
 
     using static Konst;
-    using static Typed;
 
     partial class Spans
     {
-
         /// <summary>
         /// Presents the bytespan head as a reference to an unsigned 8-bit integer
         /// </summary>

@@ -35,7 +35,7 @@ namespace Z0
                 Trace($"actual := {actual}");
             }
 
-            Claim.require(succeeded);            
+            Claim.Require(succeeded);            
         }
 
         public void fixed_convert()
@@ -54,7 +54,7 @@ namespace Z0
                     var b = rhs[i];
                     var x = Fixed.fix(f(a.Content, b.Content));
                     var y = g(a,b);
-                    Claim.eq(x,y);
+                    Claim.Eq(x,y);
                 }
             }      
             CheckAction(check,nameof(fixed_convert));

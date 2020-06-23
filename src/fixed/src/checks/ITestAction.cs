@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
         
-    public interface ITestAction : ITester
+    public interface ITestAction : TTester
     {
         /// <summary>
         /// Captures the outcome of an action invocation, identified by a supplied label

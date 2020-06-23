@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="spec">The grid specification that characterizes the layout</param>
         /// <typeparam name="T">The storage type</typeparam>
         public static GridMap Map(this GridSpec spec)
-            => GridMap.Define(spec);
+            => new GridMap(spec);
 
         public static GridStats Stats(this GridMap map)
             => GridStats.Define(map);

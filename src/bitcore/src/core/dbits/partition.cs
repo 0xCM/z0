@@ -44,7 +44,7 @@ namespace Z0
         {
             // each bit has a 32-bit physical width so 2 bit values = 64 bits of storage
             // thus, the target covers 32 64-bit segments where each segment covers 2 bit values            
-            ref var target = ref head(dst.As<bit,ulong>());
+            ref var target = ref head(dst.Cast<bit,ulong>());
             for(int i=0; i<32; i++)
                 seek(ref target, i) = lsb32x1(src >> i);
         }

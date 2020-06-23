@@ -74,6 +74,6 @@ namespace Z0
         public static BitBlock<N,T> load<N,T>(Span<byte> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitBlock<N,T>(src.As<byte,T>());    
+                => new BitBlock<N,T>(src.Cast<byte,T>());    
     }
 }

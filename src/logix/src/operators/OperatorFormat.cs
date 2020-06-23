@@ -9,18 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    public static partial class XTend
+    public readonly struct ExprFormat
     {
         [MethodImpl(Inline)]
-        public static string Format(this UnaryBitLogic kind)
+        public static string format(UnaryBitLogic kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryBitLogic kind, T arg)
+        public static string format<T>(UnaryBitLogic kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
-        public static string Format(this UnaryArithmeticKind kind)
+        public static string format(UnaryArithmeticKind kind)
             => kind switch {
                 UnaryArithmeticKind.Inc => "++",
                 UnaryArithmeticKind.Dec => "--",
@@ -29,27 +29,27 @@ namespace Z0
             };
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryArithmeticKind kind, T arg)
+        public static string format<T>(UnaryArithmeticKind kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
-        public static string Format(this BinaryLogicKind kind)
+        public static string format(BinaryLogicKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryLogicKind kind, T arg1, T arg2)
+        public static string format<T>(BinaryLogicKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryArithmeticKind kind, T arg1, T arg2)
+        public static string format<T>(BinaryArithmeticKind kind, T arg1, T arg2)
             => $"{kind.ToString().ToLower()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string Format(this BinaryComparisonKind kind)
+        public static string format(BinaryComparisonKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryComparisonKind kind, T arg1, T arg2)
+        public static string format<T>(BinaryComparisonKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
     }
 }

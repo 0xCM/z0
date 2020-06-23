@@ -17,22 +17,22 @@ namespace Z0
             Span<byte> dst = stackalloc byte[8];
                         
             var r1 = gbits.extract(U64_00, 0, 7);
-            Claim.eq((byte)0b11110000, r1);
+            Claim.Eq((byte)0b11110000, r1);
 
             gbits.extract(U64_00, 0, 7, dst, 0);
-            Claim.eq((byte)0b11110000, dst[0]);
+            Claim.Eq((byte)0b11110000, dst[0]);
 
             gbits.extract(U64_00, 8, 15, dst, 0);
-            Claim.eq((byte)0b00111000, dst[0]);
+            Claim.Eq((byte)0b00111000, dst[0]);
 
             gbits.extract(U64_00, 4, 7, dst, 0);
-            Claim.eq((byte)0b1111, dst[0]);
+            Claim.Eq((byte)0b1111, dst[0]);
 
             gbits.extract(U64_00, 4, 6, dst, 1);
-            Claim.eq((byte)0b111, dst[1]);
+            Claim.Eq((byte)0b111, dst[1]);
 
             gbits.extract(U32_01, 7, 8, dst, 2);
-            Claim.eq((byte)0b11, dst[2]);                    
+            Claim.Eq((byte)0b11, dst[2]);                    
         }
 
         public void between_32u()
@@ -45,8 +45,8 @@ namespace Z0
                 var y0 = gbits.extract(x, 0, 15);
                 var y1 = gbits.extract(x, 16, 31);
 
-                Claim.eq(y0,x0);
-                Claim.eq(y1,x1);
+                Claim.Eq(y0,x0);
+                Claim.Eq(y1,x1);
             }
         }
 
@@ -59,8 +59,8 @@ namespace Z0
                 var y0 = gbits.extract(x, 0, 31);
                 var y1 = gbits.extract(x, 32, 63);
 
-                Claim.eq(y0,x0);
-                Claim.eq(y1,x1);
+                Claim.Eq(y0,x0);
+                Claim.Eq(y1,x1);
             }
         }
 
@@ -82,7 +82,7 @@ namespace Z0
                 y |= x3;
                 y |= x4;
                 y |= x5;
-                Claim.eq(x,y);
+                Claim.Eq(x,y);
             }
         }
     }

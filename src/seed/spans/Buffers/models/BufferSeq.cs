@@ -111,7 +111,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe Span<T> Cells<T>(byte index)
             where T : unmanaged
-                =>  Buffer(index).As<T>();
+                =>  Buffer(index).Cast<T>();
 
         /// <summary>
         /// Fills a token-identifed buffer with content from a source span and returns the covering span

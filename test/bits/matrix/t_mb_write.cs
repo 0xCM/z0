@@ -62,7 +62,7 @@ namespace Z0.Test
                 var path = UnitPath(Matrix.filename<M,N,T>(i));                
                 var A = Write(path);
                 var B = Read(path);                                    
-                Claim.require(A == B);
+                Claim.Require(A == B);
             }
         }
     }

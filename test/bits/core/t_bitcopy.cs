@@ -40,7 +40,7 @@ namespace Z0
                     {
                         Trace("expect", BitSpans.from(expect).Format());
                         Trace("actual", BitSpans.from(actual).Format());
-                        Claim.eq(expect,actual);            
+                        Claim.Eq(expect,actual);            
                     }
                 }
             }

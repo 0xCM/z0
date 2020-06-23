@@ -42,7 +42,7 @@ namespace Z0
             {
                 ref readonly var a = ref skip(dstA,i);
                 ref readonly var b = ref skip(dstB,i);
-                Claim.eq(a,b);
+                Claim.Eq(a,b);
             }
         }
 

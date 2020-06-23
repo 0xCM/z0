@@ -66,7 +66,7 @@ namespace Z0
                 var y = Random.BitBlock<T>(n);
                 var a = x % y;
                 var b = BitBlocks.modprod(x,y);
-                Claim.require(a == b);            
+                Claim.Require(a == b);            
             }
         }
 
@@ -89,7 +89,7 @@ namespace Z0
                 var b = BitBlocks.modprod(x,y);
                 if(a != b)
                     Notify($"nbc {n}x{Identify.numeric<T>()} is a problem");
-                Claim.require(a == b);            
+                Claim.Require(a == b);            
             }
         }
 
@@ -108,7 +108,7 @@ namespace Z0
                         Trace("bs", bs.Format());
                         Trace("bc", bc.Format());
                     }
-                    Claim.eq(bc[j],bs[j]);
+                    Claim.Eq(bc[j],bs[j]);
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace Z0
 
                 var x = src[i];
                 for(byte j = 0; j < n; j++)
-                    Claim.eq(gbits.testbit(x,j), bc[j]);     
+                    Claim.Eq(gbits.testbit(x,j), bc[j]);     
             }
         }
 
@@ -154,7 +154,7 @@ namespace Z0
                 Claim.eq(bs.Length, bitcount);
                 
                 for(var j=0; j<bc.BitCount; j++)
-                    Claim.eq(bc[j], bs[j]);
+                    Claim.Eq(bc[j], bs[j]);
             }
         }
 

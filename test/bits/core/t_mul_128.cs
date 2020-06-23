@@ -18,7 +18,7 @@ namespace Z0
             Span<Pair<ulong>> z = new Pair<ulong>[RepCount];
             math.mul64x128(x,y,z);
             for(var i=0; i<RepCount; i++)
-                Claim.eq(x[i] * y[i], z[i].Left);
+                Claim.Eq(x[i] * y[i], z[i].Left);
         }
     }
 }

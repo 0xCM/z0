@@ -118,16 +118,16 @@ namespace Z0
                 for(var j=0; j<bs.Length; j++)
                 {
                     if(j != bs.Length - 1)
-                        Claim.eq(bs[j], bit.Off);
+                        Claim.Eq(bs[j], bit.Off);
                     else
-                        Claim.eq(bs[j], bit.On);
+                        Claim.Eq(bs[j], bit.On);
                 }
                 
                 if(i <= 63)
                 {
                     var val1 = Pow2.pow((byte)i);
                     var val2 = bs.TakeScalar<ulong>();
-                    Claim.eq(val1,val2);
+                    Claim.Eq(val1,val2);
                 }    
             }
         }
@@ -141,7 +141,7 @@ namespace Z0
             
             var z = y.Pack();
             Claim.eq(1,z.Length);            
-            Claim.eq(x, z[0]);
+            Claim.Eq(x, z[0]);
         }
 
         public void bs_nlz()
@@ -181,7 +181,7 @@ namespace Z0
                 var dst = src.Truncate(len);
                 Claim.eq(len, dst.Length);
                 for(var j=0; j<len; j++)
-                    Claim.eq(src[j], dst[j]);
+                    Claim.Eq(src[j], dst[j]);
             }
         }
 
@@ -243,7 +243,7 @@ namespace Z0
         {
             var a = BitString.parse("01010111");
             var b = a.TakeScalar<byte>();
-            Claim.eq((byte)0b01010111, b);
+            Claim.Eq((byte)0b01010111, b);
 
             var x =  0b111010010110011010111001110000100001101ul;
             var xbs = BitString.parse("111010010110011010111001110000100001101");
@@ -251,15 +251,15 @@ namespace Z0
             Claim.yea(xbs == ybs);                
 
             var y = xbs.TakeScalar<ulong>();
-            Claim.eq(x, y);
+            Claim.Eq(x, y);
 
             var z = ybs.TakeScalar<ulong>();
-            Claim.eq(x, z);
+            Claim.Eq(x, z);
 
             
             var byx = BitConverter.GetBytes(x).ToSpan();
             var byy = Bytes.write(x);
-            ClaimNumeric.eq(byx,byy);
+            ClaimNumeric.Eq(byx,byy);
         }
 
         public void bs_assemble()
@@ -283,7 +283,7 @@ namespace Z0
                 var j = 0;
                 var y = Bits.concat(bytes[j++], bytes[j++], bytes[j++], bytes[j++], 
                     bytes[j++], bytes[j++], bytes[j++], bytes[j++]);
-                Claim.eq(x,y);                
+                Claim.Eq(x,y);                
             }
         }
 
@@ -302,7 +302,7 @@ namespace Z0
                     Claim.eq(seqlen, bitsize<T>());
 
                     for(byte j = 0; j < seqlen; j++)
-                        Claim.eq(gbits.testbit(x0, j), (bit)(x1[j] == 1));
+                        Claim.Eq(gbits.testbit(x0, j), (bit)(x1[j] == 1));
                 }
 
             }
@@ -319,7 +319,7 @@ namespace Z0
             {
                 var y = BitString.scalar(x);
                 var z = y.TakeScalar<T>();
-                Claim.eq(x,z);
+                Claim.Eq(x,z);
             }
         }
 
@@ -331,7 +331,7 @@ namespace Z0
             {
                 var x = BitString.bitchars(src[i]);
                 gbits.parse(x, 0, out T y);
-                Claim.eq(src[i], y);                
+                Claim.Eq(src[i], y);                
             }
         }
 
@@ -346,9 +346,9 @@ namespace Z0
                 Claim.eq(x.Length, y.Length);
                 Claim.eq(z.Length, y.Length);                
                 for(var i=0; i< x.Length; i++)
-                    Claim.eq(x[i], z[i]);
+                    Claim.Eq(x[i], z[i]);
                 
-                Claim.require(x.Equals(z));
+                Claim.Require(x.Equals(z));
                 Claim.eq(x,z);
             }
         }
@@ -362,7 +362,7 @@ namespace Z0
                 var x = src[i];
                 var bs = BitString.scalar(src[i]);
                 var y = bs.TakeScalar<T>();
-                Claim.eq(x,y);
+                Claim.Eq(x,y);
                 ClaimPrimalSeq.eq(bs.Format(), BitString.scalar(y).Format());
             }
         }

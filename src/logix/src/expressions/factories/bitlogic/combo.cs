@@ -9,11 +9,13 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
+    [ApiHost]
     partial class BitLogicSpec
     {
        /// <summary>
        /// Computes all bit sequence expressions of length n <= 8
        /// </summary>
+       [Op]
        public static IEnumerable<LiteralLogicSeqExpr> bitcombo(int n)
        {
            switch(n)
@@ -104,6 +106,7 @@ namespace Z0.Logix
         /// Computes all bit sequence expressions of length 1
         /// </summary>
         /// <param name="n">The natural selector</param>
+        [Op]
         public static IEnumerable<LiteralLogicSeqExpr<N1>> bitcombo(N1 n)
             =>  from a in bit.B01
                 select bitseq(n, a);
@@ -112,6 +115,7 @@ namespace Z0.Logix
         /// Computes all bit sequence expressions of length 2
         /// </summary>
         /// <param name="n">The natural selector</param>
+        [Op]
         public static IEnumerable<LiteralLogicSeqExpr<N2>> bitcombo(N2 n)
             =>  from a in bit.B01
                 from b in bit.B01
@@ -121,6 +125,7 @@ namespace Z0.Logix
         /// Computes all bit sequence expressions of length 3
         /// </summary>
         /// <param name="n">The natural selector</param>
+        [Op]
         public static IEnumerable<LiteralLogicSeqExpr<N3>> bitcombo(N3 n)
             =>  from a in bit.B01
                 from b in bit.B01
@@ -131,6 +136,7 @@ namespace Z0.Logix
         /// Computes all bit sequence expressions of length 4
         /// </summary>
         /// <param name="n">The natural selector</param>
+        [Op]
         public static IEnumerable<LiteralLogicSeqExpr<N4>> bitcombo(N4 n)
             =>  from a in bit.B01
                 from b in bit.B01
@@ -142,6 +148,7 @@ namespace Z0.Logix
         /// Computes all bit sequence expressions of length 5
         /// </summary>
         /// <param name="n">The natural selector</param>
+        [Op]
         public static IEnumerable<LiteralLogicSeqExpr<N5>> bitcombo(N5 n)
             =>  from a in bit.B01
                 from b in bit.B01
@@ -154,6 +161,7 @@ namespace Z0.Logix
         /// Computes all bit sequence expressions of length 6
         /// </summary>
         /// <param name="n">The natural selector</param>
+        [Op]
         public static IEnumerable<LiteralLogicSeqExpr<N6>> bitcombo(N6 n)
             =>  from a in bit.B01
                 from b in bit.B01
@@ -167,6 +175,7 @@ namespace Z0.Logix
         /// Computes all bit sequence expressions of length 7
         /// </summary>
         /// <param name="n">The natural selector</param>
+        [Op]
         public static IEnumerable<LiteralLogicSeqExpr<N7>> bitcombo(N7 n)
             =>  from a in bit.B01
                 from b in bit.B01
@@ -181,6 +190,7 @@ namespace Z0.Logix
         /// Computes all bit sequence expressions of length 8
         /// </summary>
         /// <param name="n">The natural selector</param>
+        [Op]
         public static IEnumerable<LiteralLogicSeqExpr<N8>> bitcombo(N8 n)
             =>  from a in bit.B01
                 from b in bit.B01

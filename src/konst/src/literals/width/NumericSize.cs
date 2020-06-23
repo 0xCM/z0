@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Defines a <see cref="TypeWidth"/> subset that is constrained to widths of numeric primitives
     /// and where width is expressed in bytes, not bits

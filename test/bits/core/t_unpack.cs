@@ -79,7 +79,7 @@ namespace Z0
                 {
                     var expect = bs[i] ? one<T>() : zero<T>();
                     var actual = dst[i];
-                    Claim.eq(expect,actual);
+                    Claim.Eq(expect,actual);
                 }
             }
 
@@ -91,7 +91,7 @@ namespace Z0
             {
                 var expect = y2[i] ? one<T>() : zero<T>();
                 var actual = y1[i];
-                Claim.require(gmath.eq(expect,actual));
+                Claim.Require(gmath.eq(expect,actual));
             }
         }
 

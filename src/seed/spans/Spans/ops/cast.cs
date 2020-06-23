@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;    
 
+    using static System.Runtime.InteropServices.MemoryMarshal;    
+
     using static Konst;
 
     partial class Spans
@@ -15,12 +17,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src, int offset, int length)
             where T : unmanaged
-                => MemoryMarshal.Cast<byte,T>(src.Slice(offset, length * Unsafe.SizeOf<T>()));
+                => Cast<byte,T>(src.Slice(offset, length * Unsafe.SizeOf<T>()));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<T> cast<T>(Span<byte> src, int offset, int length)
             where T : unmanaged
-                => MemoryMarshal.Cast<byte,T>(src.Slice(offset, length * Unsafe.SizeOf<T>()));
+                => Cast<byte,T>(src.Slice(offset, length * Unsafe.SizeOf<T>()));
         
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
@@ -32,25 +34,5 @@ namespace Z0
             where T : unmanaged        
                 => cast<T>(src, 0, src.Length/Unsafe.SizeOf<T>());
 
-        /// <summary>
-        /// Produces a target T-span from a source bytespan populated with a maximal
-        /// number of elemements obtainable from the source bytes; remaining bytes, if
-        /// any, are deposited into a remainder bytespan
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="rem">The span populated with left-over bytes, if any</param>
-        /// <typeparam name="T">The target element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> cast<T>(Span<byte> src, out Span<byte> rem)
-            where T : unmanaged        
-        {
-            var z = Unsafe.SizeOf<T>();
-            var n = src.Length;
-            var q = n/z;            
-            var r = n%z;
-            var dst = cast<T>(src.Slice(0, q));            
-            rem = r != 0 ? src.Slice(q) : Span<byte>.Empty;
-            return dst;
-        }            
     }
 }

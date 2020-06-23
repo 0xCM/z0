@@ -19,7 +19,7 @@ namespace Z0
             var m1 =   0b00000011_00000011_00000011_00000011u;             
             var d1e =  0b00000010_00000010_00000010_00000010u;
             var d1a = Bits.scatter(src1, m1);
-            Claim.eq(d1e,d1a);
+            Claim.Eq(d1e,d1a);
         }
 
         public void sb_scatter_8()
@@ -149,7 +149,7 @@ namespace Z0
                 var mask = Random.Next<T>();
                 var s1 = scatter(src,mask);
                 var s2 = gbits.scatter(src,mask);
-                Claim.eq(s1,s2);
+                Claim.Eq(s1,s2);
             }
         }             
     }

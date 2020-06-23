@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-    
-    public interface IRecordSink<R> : IService, ISink<R>
+    public interface IRecordSink<R> : ISink<R>
         where R : ITabular
     {
-
         
     }
 }

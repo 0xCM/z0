@@ -33,7 +33,7 @@ namespace Z0
         {
             var f = PrimalKindBitFields.Init(PrimalKind.I16);
             var width = f.FieldWidth;
-            Claim.eq(width, Pow2Width.w16);            
+            Claim.Eq(width, Pow2Width.w16);            
         }
 
         public void bitfield_a()
@@ -47,14 +47,14 @@ namespace Z0
 
             
             Claim.eq((byte)4, spec.FieldCount);
-            Claim.eq((byte)0, spec[0].StartPos);
-            Claim.eq((byte)2, spec[1].StartPos);
-            Claim.eq((byte)4, spec[2].StartPos);
-            Claim.eq((byte)6, spec[3].StartPos);
-            Claim.eq((byte)2, spec[0].Width);
-            Claim.eq((byte)2, spec[1].Width);
-            Claim.eq((byte)2, spec[2].Width);
-            Claim.eq((byte)2, spec[3].Width);
+            Claim.Eq((byte)0, spec[0].StartPos);
+            Claim.Eq((byte)2, spec[1].StartPos);
+            Claim.Eq((byte)4, spec[2].StartPos);
+            Claim.Eq((byte)6, spec[3].StartPos);
+            Claim.Eq((byte)2, spec[0].Width);
+            Claim.Eq((byte)2, spec[1].Width);
+            Claim.Eq((byte)2, spec[2].Width);
+            Claim.Eq((byte)2, spec[3].Width);
 
             var bf = BitFields.create<byte>(spec);
             for(var rep=0; rep<RepCount; rep++)
@@ -66,17 +66,17 @@ namespace Z0
                 var seg2 = bf.Extract(spec[2], input);
                 var seg3 = bf.Extract(spec[3], input);
 
-                Claim.eq(Bits.slice(input, 0, 2), seg0);
-                Claim.eq(Bits.slice(input, 2, 2), seg1);
-                Claim.eq(Bits.slice(input, 4, 2), seg2);
-                Claim.eq(Bits.slice(input, 6, 2), seg3);
+                Claim.Eq(Bits.slice(input, 0, 2), seg0);
+                Claim.Eq(Bits.slice(input, 2, 2), seg1);
+                Claim.Eq(Bits.slice(input, 4, 2), seg2);
+                Claim.Eq(Bits.slice(input, 6, 2), seg3);
 
                 var output =  gmath.or(
                     gmath.sll(seg0, spec[0].StartPos), 
                     gmath.sll(seg1, spec[1].StartPos), 
                     gmath.sll(seg2, spec[2].StartPos), 
                     gmath.sll(seg3, spec[3].StartPos));
-                Claim.eq(input,output);
+                Claim.Eq(input,output);
 
             }
         }
@@ -118,7 +118,7 @@ namespace Z0
                     gmath.sll(dst[3], spec[3].StartPos)
                 );
 
-                Claim.eq(src,output);
+                Claim.Eq(src,output);
             }
         }
 
@@ -174,8 +174,8 @@ namespace Z0
                     bf.Extract(spec[3], src, true)
                     );
                 
-                Claim.eq(src,result1);   
-                Claim.eq(src,result2);   
+                Claim.Eq(src,result1);   
+                Claim.Eq(src,result2);   
             }
         }
 
@@ -259,7 +259,7 @@ namespace Z0
                 for(byte j=0; j<spec.FieldCount; j++)
                     result2 = gmath.or(result2, gmath.sll(dst[j], spec[j].StartPos));
                 
-                Claim.eq(result1, result2);
+                Claim.Eq(result1, result2);
                 
                 if(expect != result1)
                 {
@@ -269,7 +269,7 @@ namespace Z0
                 }
 
 
-                Claim.eq(expect, result1);
+                Claim.Eq(expect, result1);
             }
         }
 
@@ -292,12 +292,12 @@ namespace Z0
         public void bitfield_model()
         {
             var m = BitFieldSpecs.model("BitsInField", new string[]{"Field1","Field2","Field3"}, new byte[]{4,8,3});
-            Claim.eq((byte)0, m.Position(0));
-            Claim.eq((byte)4, m.Position(1));
-            Claim.eq((byte)12, m.Position(2));
-            Claim.eq((byte)4, m.Width(0));
-            Claim.eq((byte)8, m.Width(1));
-            Claim.eq((byte)3, m.Width(2));
+            Claim.Eq((byte)0, m.Position(0));
+            Claim.Eq((byte)4, m.Position(1));
+            Claim.Eq((byte)12, m.Position(2));
+            Claim.Eq((byte)4, m.Width(0));
+            Claim.Eq((byte)8, m.Width(1));
+            Claim.Eq((byte)3, m.Width(2));
             Claim.eq("Field1", m.Name(0));
             Claim.eq("Field2", m.Name(1));
             Claim.eq("Field3", m.Name(2));

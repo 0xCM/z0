@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
 
     partial class XTend
     {
@@ -48,7 +47,7 @@ namespace Z0
         /// <typeparam name="T">The primal cell type</typeparam>
         public static string FormatMatrixBits<T>(this Span<T> src, int rowlen, int? maxbits = null, bool showrow = false)
             where T : unmanaged
-                => src.AsBytes().FormatMatrixBits(rowlen, maxbits, showrow);
+                => src.Bytes().FormatMatrixBits(rowlen, maxbits, showrow);
 
 
         [MethodImpl(Inline)]

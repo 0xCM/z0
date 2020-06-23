@@ -14,7 +14,7 @@ namespace Z0
             Span<bit> dst = new bit[64];
             Bits.part64x1(src,dst);
             for(var i=0; i< dst.Length; i++)
-                Claim.require(dst[i]);
+                Claim.Require(dst[i]);
         }
 
         public void sb_split_16x8()
@@ -24,8 +24,8 @@ namespace Z0
             {
                 Bits.split(x,out var x0, out var x1);
                 var y = Bits.concat(x0, x1);
-                Claim.eq(x,y);
-                Claim.eq(x, BitConvert.ToUInt16(new byte[]{x0, x1}));
+                Claim.Eq(x,y);
+                Claim.Eq(x, BitConvert.ToUInt16(new byte[]{x0, x1}));
             }
         }
 
@@ -36,8 +36,8 @@ namespace Z0
             {
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3);
                 var y = Bits.concat(x0, x1, x2, x3);
-                Claim.eq(x,y);
-                Claim.eq(x, BitConvert.ToUInt32(new byte[]{x0, x1, x2, x3}));
+                Claim.Eq(x,y);
+                Claim.Eq(x, BitConvert.ToUInt32(new byte[]{x0, x1, x2, x3}));
             }
 
         }
@@ -70,8 +70,8 @@ namespace Z0
             {
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3, out var x4, out var x5, out var x6, out var x7);
                 var y = Bits.concat(x0, x1, x2, x3, x4, x5, x6, x7);
-                Claim.eq(x,y);
-                Claim.eq(x, BitConverter.ToUInt64(new byte[]{x0, x1, x2, x3, x4, x5, x6, x7}));
+                Claim.Eq(x,y);
+                Claim.Eq(x, BitConverter.ToUInt64(new byte[]{x0, x1, x2, x3, x4, x5, x6, x7}));
 
                 for(var i=0; i<8; i++)
                 {
@@ -80,14 +80,14 @@ namespace Z0
                     pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
                     
                     byte j = 0;
-                    Claim.require(gbits.bitmatch(dst, j++, x0, pos));
-                    Claim.require(gbits.bitmatch(dst, j++, x1, pos));
-                    Claim.require(gbits.bitmatch(dst, j++, x2, pos));
-                    Claim.require(gbits.bitmatch(dst, j++, x3, pos));
-                    Claim.require(gbits.bitmatch(dst, j++, x4, pos));
-                    Claim.require(gbits.bitmatch(dst, j++, x5, pos));
-                    Claim.require(gbits.bitmatch(dst, j++, x6, pos));
-                    Claim.require(gbits.bitmatch(dst, j++, x7, pos));                    
+                    Claim.Require(gbits.bitmatch(dst, j++, x0, pos));
+                    Claim.Require(gbits.bitmatch(dst, j++, x1, pos));
+                    Claim.Require(gbits.bitmatch(dst, j++, x2, pos));
+                    Claim.Require(gbits.bitmatch(dst, j++, x3, pos));
+                    Claim.Require(gbits.bitmatch(dst, j++, x4, pos));
+                    Claim.Require(gbits.bitmatch(dst, j++, x5, pos));
+                    Claim.Require(gbits.bitmatch(dst, j++, x6, pos));
+                    Claim.Require(gbits.bitmatch(dst, j++, x7, pos));                    
                 }
             }
 
@@ -105,8 +105,8 @@ namespace Z0
                 var dst = Bits.concat(lhs[i], rhs[i]);
                 Bits.split(dst,out var x0, out var x1);
                 
-                Claim.eq(x0, lhs[i]);
-                Claim.eq(x1, rhs[i]);
+                Claim.Eq(x0, lhs[i]);
+                Claim.Eq(x1, rhs[i]);
             }        
         }
 
@@ -137,7 +137,7 @@ namespace Z0
                 var bitsPC = dst.PopCount();
                 var bytes = BitConvert.GetBytes(src);
                 var bytesPC = bytes.PopCount();
-                Claim.eq(bitsPC, bytesPC);        
+                Claim.Eq(bitsPC, bytesPC);        
             }
         }
 
