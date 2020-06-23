@@ -14,8 +14,8 @@ namespace Z0
     using static X86Missing;
 
     using static Konst; 
-    using static Memories;
-    //using static BitMasks;
+    using static As;
+    using static Typed;
 
     partial class dvec
     {

@@ -15,7 +15,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    partial class Store
+    partial class VStoreD
     {
         /// <summary>
         /// _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm

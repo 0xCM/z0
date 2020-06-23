@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Vectors;
+    using static As;
     
     partial class gvec
     {        
@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vsrlx<T>(Vector128<T> src, [Imm] byte count)        
             where T : unmanaged
                 => generic<T>(dvec.vsrlx(v64u(src), count));
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vsrlx<T>(Vector256<T> src, [Imm] byte count)        
             where T : unmanaged
                 => generic<T>(dvec.vsrlx(v64u(src), count));

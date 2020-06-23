@@ -17,7 +17,6 @@ namespace Z0
         [MethodImpl(Inline)]   
         internal static T[] alloc<T>(int length)
             => new T[length];
-
     }
 
 

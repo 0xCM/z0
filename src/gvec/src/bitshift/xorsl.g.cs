@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
         
     using static Konst;
-    using static Vectors;
+    using static As;
 
     partial class gvec
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), XorSl, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), XorSl, Closures(UnsignedInts)]
         public static Vector128<T> vxorsl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), XorSl, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), XorSl, Closures(UnsignedInts)]
         public static Vector256<T> vxorsl<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {

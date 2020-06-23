@@ -9,22 +9,21 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst; 
-    using static Memories;
     using static As;
 
     partial class gvec
     {
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers& (~NumericKind.U64))]
         public static Vector128<T> vlt<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vlt_u(x,y);
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers& (~NumericKind.U64))]
         public static Vector256<T> vlt<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vlt_u(x,y);
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers& (~NumericKind.U64))]
         public static Vector512<T> vlt<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vlt(x.Lo, y.Lo), vlt(x.Hi, y.Hi));
@@ -34,13 +33,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vlt(v8u(x), v8u(y)));
+                return Memories.generic<T>(dvec.vlt(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vlt(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dvec.vlt(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vlt(v64u(x), v64u(y)));
+                return Memories.generic<T>(dvec.vlt(v64u(x), v64u(y)));
             else
                 return vlt_i(x,y);
         }
@@ -66,7 +65,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vlt(v8u(x), v8u(y)));
+                return Memories.generic<T>(dvec.vlt(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vlt(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))

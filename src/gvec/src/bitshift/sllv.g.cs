@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Vectors;
     using static As;
     
     partial class gvec
@@ -19,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vsllv<T>(Vector128<T> x, Vector128<T> counts)
             where T : unmanaged
                 => vsllv_u(x, counts);
@@ -29,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vsllv<T>(Vector256<T> x, Vector256<T> counts)
             where T : unmanaged
                 => vsllv_u(x,counts);
@@ -39,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsllv(v8u(x), v8u(counts)));
+                return Vectors.generic<T>(dvec.vsllv(v8u(x), v8u(counts)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsllv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dvec.vsllv(v32u(x), v32u(counts)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vsllv(v64u(x), v64u(counts)));            
+                return Vectors.generic<T>(dvec.vsllv(v64u(x), v64u(counts)));            
             else
                 return vsllv_i(x,counts);
         }
@@ -71,7 +70,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsllv(v8u(x), v8u(counts)));
+                return Vectors.generic<T>(dvec.vsllv(v8u(x), v8u(counts)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsllv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))

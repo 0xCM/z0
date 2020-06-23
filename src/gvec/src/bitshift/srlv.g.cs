@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Vectors;
     using static As;
     
     partial class gvec
@@ -40,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsrlv(v8u(x), v8u(counts)));
+                return Vectors.generic<T>(dvec.vsrlv(v8u(x), v8u(counts)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsrlv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dvec.vsrlv(v32u(x), v32u(counts)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vsrlv(v64u(x), v64u(counts)));            
+                return Vectors.generic<T>(dvec.vsrlv(v64u(x), v64u(counts)));            
             else
                 return vsrlv_i(x,counts);
         }
@@ -72,7 +70,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsrlv(v8u(x), v8u(counts)));
+                return Vectors.generic<T>(dvec.vsrlv(v8u(x), v8u(counts)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsrlv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))

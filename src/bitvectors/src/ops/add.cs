@@ -81,7 +81,7 @@ namespace Z0
         {
             var sum = dvec.vadd(v64u(x.Data), v64u(y.Data));            
             bit carry = x.Lo > vcell(sum,0);
-            return  As.vgeneric<T>(dvec.vadd(sum, Vectors.vbroadcast(n128, (ulong)carry)));
+            return  As.generic<T>(dvec.vadd(sum, Vectors.vbroadcast(n128, (ulong)carry)));
         }
     }
 }

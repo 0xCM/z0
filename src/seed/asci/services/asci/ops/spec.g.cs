@@ -17,12 +17,12 @@ namespace Z0
         /// <param name="symbols"></param>
         /// <typeparam name="S">The symbol data type</typeparam>
         /// <typeparam name="T">The symbol domain type</typeparam>
-        /// <typeparam name="N">The symbol bit-width type</typeparam>
+        /// <typeparam name="W">The symbol bit-width type</typeparam>
         [MethodImpl(Inline)]
-        static SymbolSpec<S,T,N> spec<S,T,N>(params S[] symbols)
+        static SymbolSpec<S,T,W> spec<S,T,W>(params S[] symbols)
             where S : unmanaged
             where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => new SymbolSpec<S,T,N>(symbols);
+            where W : unmanaged, IDataWidth
+                => new SymbolSpec<S,T,W>(symbols);                
     }
 }

@@ -9,8 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst; 
-    using static Memories;
+    using static As;
     using static AsIn;
+    using static Typed;
 
     public static class XME
     {
@@ -25,7 +26,6 @@ namespace Z0
             var description = $"{src.Format()} |> {sym0}{sym1} = {gvec.vperm2x128(src, p0, p1).Format()}";
             return description;             
         }
-
     }
 
     partial class gvec
@@ -43,12 +43,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vgather<T>(ReadOnlySpan<T> src, Vector128<T> vidx)
             where T : unmanaged        
-                => vgather_u(n128, head(src),vidx);
+                => vgather_u(n128, first(src),vidx);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vgather<T>(ReadOnlySpan<T> src, Vector256<T> vidx)
             where T : unmanaged        
-                => vgather_u(n256, head(src), vidx);
+                => vgather_u(n256, first(src), vidx);
 
         [MethodImpl(Inline)]
         static Vector128<T> vgather_u<T>(N128 w, in T src, Vector128<T> vidx)

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     using ASym = AsciChar;
 
     public enum AsciCharCode : byte

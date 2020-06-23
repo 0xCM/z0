@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Konst;
-    using static Vectors;
+    using static As;
     
     partial class gvec
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vrotr<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {

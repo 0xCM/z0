@@ -10,7 +10,6 @@ namespace Z0
     
     using static Konst;
     using static Vectors;
-    using static Typed;
             
     partial class gvec
     {

@@ -12,20 +12,19 @@ namespace Z0
         
     }
 
-    [ApiHost]
-    public static partial class Store
-    {
-
-    }
-
     public static partial class SBlock
     {
 
     }
-    
-    public static partial class XTend
+
+    [ApiHost]
+    public partial class VBlockD : IApiHost<VBlockD>
     {
         
     }
 
+    public static partial class XTend
+    {
+        
+    }
 }

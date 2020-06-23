@@ -15,7 +15,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    partial class Store
+    partial class VStoreD
     {
         /// <summary>
         /// Stores vector content to a memory location

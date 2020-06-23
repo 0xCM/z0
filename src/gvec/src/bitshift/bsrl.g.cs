@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Vectors;
+    using static As;
     
     partial class gvec
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vbsrl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {

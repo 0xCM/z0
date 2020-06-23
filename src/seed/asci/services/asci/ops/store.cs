@@ -47,15 +47,16 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int store(in asci8 src, Span<char> dst)
         {
-            var data = asci.cover(src);
-            seek(dst,0) = skip(data,0);
-            seek(dst,1) = skip(data,1);
-            seek(dst,2) = skip(data,2);
-            seek(dst,3) = skip(data,3);
-            seek(dst,4) = skip(data,4);
-            seek(dst,5) = skip(data,5);
-            seek(dst,6) = skip(data,6);
-            seek(dst,7) = skip(data,7);
+            var decoded = decode(src);
+            // var data = asci.cover(src);
+            // seek(dst,0) = skip(data,0);
+            // seek(dst,1) = skip(data,1);
+            // seek(dst,2) = skip(data,2);
+            // seek(dst,3) = skip(data,3);
+            // seek(dst,4) = skip(data,4);
+            // seek(dst,5) = skip(data,5);
+            // seek(dst,6) = skip(data,6);
+            // seek(dst,7) = skip(data,7);
             return 8;
         } 
 

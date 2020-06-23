@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Vectors;
     using static As;
     
     partial class gvec
@@ -65,13 +64,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsllr(v8u(x), v8u(offset)));
+                return Vectors.generic<T>(dvec.vsllr(v8u(x), v8u(offset)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsllr(v16u(x), v16u(offset)));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dvec.vsllr(v32u(x), v32u(offset)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vsllr(v64u(x), v64u(offset)));
+                return Vectors.generic<T>(dvec.vsllr(v64u(x), v64u(offset)));
             else 
                 return vsllr_i(x,offset);
         }
@@ -97,13 +96,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsllr(v8u(x), uint8(offset)));
+                return Vectors.generic<T>(dvec.vsllr(v8u(x), uint8(offset)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsllr(v16u(x), uint16(offset)));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dvec.vsllr(v32u(x), uint32(offset)));
             else if(typeof(T) == typeof(ulong)) 
-                return generic<T>(dvec.vsllr(v64u(x), uint64(offset)));
+                return Vectors.generic<T>(dvec.vsllr(v64u(x), uint64(offset)));
             else 
                 return vsllr_i(x,offset);                
         }
@@ -129,7 +128,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsllr(v8u(x), uint8(offset)));
+                return Vectors.generic<T>(dvec.vsllr(v8u(x), uint8(offset)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsllr(v16u(x), uint16(offset)));
             else if(typeof(T) == typeof(uint)) 
@@ -161,7 +160,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsllr(v8u(x), v8u(vlo(offset))));
+                return Vectors.generic<T>(dvec.vsllr(v8u(x), v8u(vlo(offset))));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsllr(v16u(x), v16u(vlo(offset))));
             else if(typeof(T) == typeof(uint)) 

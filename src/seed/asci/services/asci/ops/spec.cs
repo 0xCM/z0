@@ -12,7 +12,7 @@ namespace Z0
     partial struct asci
     {
         [MethodImpl(Inline), Op]
-        public static SymbolSpec<AsciCharCode,N1> spec(params AsciCharCode[] src)
-            => spec<AsciCharCode,byte, N1>(src);
+        public static SymbolSpec<AsciCharCode,byte,W8> spec(params AsciCharCode[] src)
+            => spec<AsciCharCode,byte,W8>(src);
     }
 }

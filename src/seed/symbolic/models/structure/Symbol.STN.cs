@@ -41,9 +41,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Symbol(S value)
-        {
-            Value = value;
-        }        
+            => Value = value;
 
         public Symbol<S> Simplified
         {

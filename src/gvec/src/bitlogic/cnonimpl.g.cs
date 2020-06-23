@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst; 
-    using static Memories;
     using static As;
     
     partial class gvec
@@ -52,13 +51,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vcnonimpl(v8u(x), v8u(y)));
+                return Memories.generic<T>(dvec.vcnonimpl(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vcnonimpl(v16u(x),v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dvec.vcnonimpl(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vcnonimpl(v64u(x), v64u(y)));
+                return Memories.generic<T>(dvec.vcnonimpl(v64u(x), v64u(y)));
             else 
                 return vcnonimpl_i(x,y);
         }
@@ -84,7 +83,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vcnonimpl(v8u(x), v8u(y)));
+                return Memories.generic<T>(dvec.vcnonimpl(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vcnonimpl(v16u(x),v16u(y)));
             else if(typeof(T) == typeof(uint))

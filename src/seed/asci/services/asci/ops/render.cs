@@ -48,8 +48,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void render(Base2 @base, ReadOnlySpan<byte> src, Span<char> dst)
         {
+            var count = src.Length;
             var j = 0;
-            for(int i = 0; i<src.Length; i++)
+            for(int i = 0; i<count; i++)
             {
                 ref readonly var cell = ref skip(src,i);
                 seek(dst, j++) = (char)symbol(@base, (byte)((0b00000001 & cell) >> 0));
@@ -63,14 +64,6 @@ namespace Z0
             }            
         }
 
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> render(Base2 @base, ReadOnlySpan<byte> src)
-        {
-            Span<char> dst = new char[src.Length*8];
-            render(@base, src,dst);
-            dst.Reverse();
-            return dst;
-        }
 
         [MethodImpl(Inline), Op]
         public static int render(ReadOnlySpan<HexCode> src, Span<char> dst)
@@ -99,6 +92,14 @@ namespace Z0
                 seek(dst, j + 2) = Chars.Space;
             }
             return j;
+        }
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> render(Base2 @base, ReadOnlySpan<byte> src)
+        {
+            Span<char> dst = new char[src.Length*8];
+            render(@base, src,dst);
+            return dst;
         }
     }
 }

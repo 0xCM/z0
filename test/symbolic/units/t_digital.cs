@@ -13,6 +13,8 @@ namespace Z0
 
     public class t_digital : t_symbolic<t_digital>
     {        
+
+
         public void unpack_4()
         {
             void check(char x, AsciCharCode y)

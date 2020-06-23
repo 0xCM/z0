@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;    
     using static Memories;
-    using static TernaryBitLogic;
     using static LogicSig;
 
     using ULK = UnaryBitLogic;

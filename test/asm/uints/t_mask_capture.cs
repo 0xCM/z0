@@ -5,15 +5,18 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public sealed class t_mask_capture : t_asm<t_mask_capture>
     {    
+        public void asci_render()
+        {
+            var src = Random.Bytes(8).ToSpan();
+            var actual = asci.render(Konst.base2, src).Reverse().ToString();
+            var expect = src.ToBitSpan().Format();
+            ClaimPrimal.eq(expect,actual);
+
+        }
+
         public void capture_natural_masks()
         {
             using var hexout = HexWriter();

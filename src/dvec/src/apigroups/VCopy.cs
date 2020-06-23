@@ -23,8 +23,8 @@ namespace Z0
             for(var i=0; i<blocks; i++)
             {
                 var offset = i*seglen;
-                var vSrc = Vectors.vload(w,skip(src, offset));
-                Vectors.vstore(vSrc,ref seek(dst,offset));
+                var vSrc = Vectors.vload(w, skip(src, offset));
+                Vectors.vstore(vSrc, ref seek(dst,offset));
             }            
         }
     }

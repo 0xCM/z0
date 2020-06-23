@@ -26,13 +26,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return vgeneric<T>(Vectors.vload(w, head(Units128x8u)));
+                return generic<T>(Vectors.vload(w, head(Units128x8u)));
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return vgeneric<T>(Vectors.vload(w, head(Units128x16u)));
+                return generic<T>(Vectors.vload(w, head(Units128x16u)));
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return vgeneric<T>(Vectors.vload(w,head(Units128x32u)));
+                return generic<T>(Vectors.vload(w,head(Units128x32u)));
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return vgeneric<T>(Vectors.vload(w,head(Units128x64u)));
+                return generic<T>(Vectors.vload(w,head(Units128x64u)));
             else
                 throw Unsupported.define<T>();
         }
@@ -47,13 +47,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return vgeneric<T>(Vectors.vload(w, head(Units256x8u)));
+                return generic<T>(Vectors.vload(w, head(Units256x8u)));
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return vgeneric<T>(Vectors.vload(w, head(Units256x16u)));
+                return generic<T>(Vectors.vload(w, head(Units256x16u)));
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return vgeneric<T>(Vectors.vload(w, head(Units256x32u)));
+                return generic<T>(Vectors.vload(w, head(Units256x32u)));
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return vgeneric<T>(Vectors.vload(w, head(Units256x64u)));
+                return generic<T>(Vectors.vload(w, head(Units256x64u)));
             else
                 throw Unsupported.define<T>();
         }        

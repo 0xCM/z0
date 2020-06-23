@@ -15,7 +15,7 @@ namespace Z0
     using static Memories;
     using static Blocks;
 
-    partial class Store
+    partial class VBlockD
     {
         /// <summary>
         /// _m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128

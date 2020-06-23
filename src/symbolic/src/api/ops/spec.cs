@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static SymbolSpec<S,N> spec<S,N>(ushort segwidth, Type segdomain, params S[] symbols)
             where S : unmanaged
-            where N : unmanaged, ITypeNat
+            where N : unmanaged, ITypeWidth
                 => new SymbolSpec<S,N>(segwidth, segdomain, symbols);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         public static SymbolSpec<S,T,N> spec<S,T,N>(params S[] symbols)
             where S : unmanaged
             where T : unmanaged
-            where N : unmanaged, ITypeNat
+            where N : unmanaged, ITypeWidth
                 => new SymbolSpec<S,T,N>(symbols);
     }
 }

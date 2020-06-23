@@ -6,7 +6,6 @@ namespace Z0
 {    
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static Root;
@@ -14,32 +13,14 @@ namespace Z0
     /// <summary>
     /// Specifes symbol characteristics
     /// </summary>
-    public readonly struct SymbolSpec<S,N> : ISymbolSpec<S>
+    public readonly struct SymbolSpec<S,W> : ISymbolSpec<S>
         where S : unmanaged
-        where N : unmanaged, ITypeNat
+        where W : unmanaged, IDataWidth
     {       
-        [MethodImpl(Inline)]
-        public SymbolSpec(ushort segwidth, MetadataToken segdomain, params S[] symbols)
-        {
-            SegDomain = segdomain;
-            SegWidth = segwidth;
-            SymWidth = (ushort)value<N>();
-            Symbols = symbols;
-            Capacity = (ushort)(SegWidth/SymWidth);
-        }
-        
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolSpec(SymbolSpec<S,N> src)
-            => new SymbolSpec(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
-        
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolSpec<S>(SymbolSpec<S,N> src)
-            => new SymbolSpec<S>(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
-
         /// <summary>
-        /// The number of bits occupied by a symbol
+        /// The specified symbols
         /// </summary>
-        public ushort SymWidth {get;}
+        public S[] Symbols {get;}
 
         /// <summary>
         /// The bit-width of a storage cell
@@ -47,11 +28,27 @@ namespace Z0
         public ushort SegWidth {get;}
 
         /// <summary>
+        /// The storage cell type identifier
+        /// </summary>
+        public MetadataToken SegDomain {get;}
+
+        /// <summary>
+        /// The number of bits occupied by a symbol
+        /// </summary>
+        public ushort SymWidth  
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)Widths.data<W>();
+        }
+
+        /// <summary>
         /// The maximum number of symbols that can be stored in a segment
         /// </summary>
-        public ushort Capacity {get;}
-
-        public MetadataToken SegDomain {get;}
+        public ushort Capacity 
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)(SegWidth/SymWidth);
+        }
 
         public MetadataToken SymDomain
         {
@@ -59,12 +56,26 @@ namespace Z0
             get => typeof(S);
         }
 
-        public S[] Symbols {get;}
-
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
             get => Symbols != null  && Symbols.Length != 0;
         }
+
+        [MethodImpl(Inline)]
+        public SymbolSpec(ushort segwidth, MetadataToken segdomain, params S[] symbols)
+        {
+            SegDomain = segdomain;
+            SegWidth = segwidth;
+            Symbols = symbols;
+        }
+        
+        [MethodImpl(Inline)]
+        public static implicit operator SymbolSpec(SymbolSpec<S,W> src)
+            => new SymbolSpec(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
+        
+        [MethodImpl(Inline)]
+        public static implicit operator SymbolSpec<S>(SymbolSpec<S,W> src)
+            => new SymbolSpec<S>(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
     }
 }

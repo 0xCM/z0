@@ -9,17 +9,16 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Vectors;
     using static As;
     
     partial class gvec
     {            
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vsrl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
                 => vsrl_u(x,count);
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vsrl<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
                 => vsrl_u(x,count);
@@ -29,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsrl(v8u(x), count));
+                return Vectors.generic<T>(dvec.vsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsrl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dvec.vsrl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vsrl(v64u(x), count));
+                return Vectors.generic<T>(dvec.vsrl(v64u(x), count));
             else
                 return vsrl_i(x,count);
         }
@@ -61,7 +60,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsrl(v8u(x), count));
+                return Vectors.generic<T>(dvec.vsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsrl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
