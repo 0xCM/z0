@@ -96,7 +96,7 @@ namespace Z0
         /// The path to the root application resource directory
         /// </summary>
         FolderPath ResourceRoot 
-            => DataRoot + ResoureFolder;
+            => LogRoot + ResoureFolder;
         
         /// <summary>
         /// The runtime root

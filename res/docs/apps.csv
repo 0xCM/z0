@@ -1,2 +1,0 @@
-Type        | Z0.IAppContext                                                        | Characterizes a context that carries and provides access to a composition
-Type        | Z0.IAppShell`1                                                        | Characterizes a shell with api composition support

@@ -27,10 +27,19 @@ namespace Z0
         {   
             var docs = Commented.collect();
         }
-        
+
+        void GenerateResources()
+        {   
+             var src = Archives.Services.CaptureArchiveDir;
+             var dst = Z0.AppPaths.Default.ResourceRoot + FolderName.Define("bytes");
+             var service = HostCodeResources.Service(src, dst);
+             service.Emit();
+        }
+
         public void Generate()
         {            
             GenerateDocs();
+            GenerateResources();
             //EnumGenerator.Service.Generate();
         }
     }

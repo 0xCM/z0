@@ -15,8 +15,6 @@ namespace Z0.Asm
     {
         public void define_resources()
         {
-             var service = HostCodeResources.Service(Archives.Services.CaptureArchiveDir, Z0.AppPaths.Default.ResourceRoot + FolderName.Define("bytes"));
-             service.Emit();
         }
 
         

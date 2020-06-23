@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitSpans)" />
+    <ProjectReference Include="$(Archives)" />
 
   </ItemGroup>
 

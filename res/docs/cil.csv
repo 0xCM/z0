@@ -1,3 +1,0 @@
-Method      | Z0.ClrIndexer.ToSpec(dnlib.DotNet.MethodImplAttributes)               | Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
-Method      | Z0.ClrIndexer.ToSpec(dnlib.DotNet.Emit.Instruction)                   | Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
-Method      | Z0.ClrIndexer.ToSpec(dnlib.DotNet.Emit.OpCode)                        | Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
