@@ -37,7 +37,7 @@ namespace Z0
         IApiComposition Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
 
-        FolderPath CaptureRoot => AppPaths.AppCapturePath;
+        FolderPath CaptureRoot => AppPaths.AppCaptureDir;
 
         IAsmContext CreateAsmContext()
             => AsmContext.Create(Context.Settings, Context.Messaging, Api, CaptureRoot);

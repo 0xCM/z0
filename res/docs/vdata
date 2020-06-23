@@ -1,0 +1,223 @@
+| M:Z0.VData.blendspec``1(Z0.W256,Z0.bit)           | 
+            <summary>
+            Defines a blend specification for combining 2 256-bit vectors that selects the odd components from each vector
+            </summary>
+            <param name="n">The vector width selector</param>
+            <param name="odd">Whether to select odd or even components</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.VData.blendspec``1(Z0.W256,Z0.bit,``0)       | 
+            <summary>
+            Retrieves a blend specification for combining 2 256-bit vectors that selects the even components from each vector
+            </summary>
+            <param name="n">The vector width selector</param>
+            <param name="odd">Whether to select odd or even components</param>
+            <typeparam name="N">The component width type</typeparam>
+        
+| M:Z0.VData.byteswap``1(Z0.N128,``0)               | 
+            <summary>
+            Retrieves the shuffle pattern that, when applied, swaps the byte-level representation 
+            of each  unsigned 16,32, or 64-bit integer component value
+            </summary>
+            <param name="w">The vector width selector</param>
+            <param name="n">The integer width representative where n = 16 | 32 | 64</param>
+            <typeparam name="N">The integer width type</typeparam>
+        
+| M:Z0.VData.byteswap``1(Z0.N256,``0)               | 
+            <summary>
+            Retrieves the shuffle pattern that, when applied, swaps the byte-level representation 
+            of each  unsigned 16,32, or 64-bit integer component value
+            </summary>
+            <param name="w">The vector width selector</param>
+            <param name="n">The integer width representative where n = 16 | 32 | 64</param>
+            <typeparam name="N">The integer width type</typeparam>
+        
+| M:Z0.VData.clearalt``1(Z0.N256)                   | 
+            <summary>
+            Creates a shuffle mask that clears every-other vector component
+            </summary>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.VData.decrements``1(Z0.N128)                 | 
+            <summary>
+            Creates a 128-bit vector with component values k - 1, ..., 1, 0  where k is the length of the target vector
+            </summary>
+            <param name="w">The target vector width</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VData.decrements``1(Z0.N256)                 | 
+            <summary>
+            Creates a 256-bit vector with component values k - 1, ..., 1, 0  where k is the length of the target vector
+            </summary>
+            <param name="w">The target vector width</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VData.vincrements``1(Z0.W128)                | 
+            <summary>
+            Creates a 128-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+            </summary>
+            <param name="w">The target vector width</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VData.vincrements``1(Z0.W256)                | 
+            <summary>
+            Creates a 256-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+            </summary>
+            <param name="w">The target vector width</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VData.vincrements``1(Z0.W512)                | 
+            <summary>
+            Creates a 512-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+            </summary>
+            <param name="w">The target vector width</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VData.lanemerge``1                           | 
+            <summary>
+            Creates a vector that decribes a lo/hi lane merge permutation
+            For example, if X = [A E B F | C G D H] then the lane merge pattern P will
+            describe a permutation that has the following effect: permute(X,P) = [A B C D | E F G H]
+            </summary>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.VData.vload``1(Z0.N128,System.ReadOnlySpan{System.Byte})| 
+            <summary>
+            Loads a 128-bit pattern described by a readonly bytespan
+            </summary>
+            <param name="n">The vector width selector</param>
+            <param name="src">The pattern data source</param>
+            <typeparam name="T">The target vector component type</typeparam>
+        
+| M:Z0.VData.vload``1(Z0.N256,System.ReadOnlySpan{System.Byte})| 
+            <summary>
+            Loads a 256-bit pattern described by a readonly bytespan
+            </summary>
+            <param name="n">The vector width selector</param>
+            <param name="src">The pattern data source</param>
+            <typeparam name="T">The target vector component type</typeparam>
+        
+| M:Z0.VData.vload``1(Z0.N512,System.ReadOnlySpan{System.Byte})| 
+            <summary>
+            Loads a 512-bit pattern described by a readonly bytespan
+            </summary>
+            <param name="n">The vector width selector</param>
+            <param name="src">The pattern data source</param>
+            <typeparam name="T">The target vector component type</typeparam>
+        
+| M:Z0.VData.vload(Z0.N128,System.ReadOnlySpan{System.Byte})| 
+            <summary>
+            Loads a 128-bit pattern described by a readonly bytespan
+            </summary>
+            <param name="n">The vector width selector</param>
+            <param name="src">The pattern data source</param>
+            <typeparam name="T">The target vector component type</typeparam>
+        
+| M:Z0.VData.vload(Z0.N256,System.ReadOnlySpan{System.Byte})| 
+            <summary>
+            Loads a 256-bit pattern described by a readonly bytespan
+            </summary>
+            <param name="n">The vector width selector</param>
+            <param name="src">The pattern data source</param>
+            <typeparam name="T">The target vector component type</typeparam>
+        
+| M:Z0.VData.vload(Z0.N512,System.ReadOnlySpan{System.Byte})| 
+            <summary>
+            Loads a 256-bit pattern described by a readonly bytespan
+            </summary>
+            <param name="n">The vector width selector</param>
+            <param name="src">The pattern data source</param>
+            <typeparam name="T">The target vector component type</typeparam>
+        
+| M:Z0.VData.packusLo(Z0.N128,Z0.N32,Z0.N16)        | 
+            <summary>
+            Produces the lo shuffle spec for packing (128x32, 128x32) -&gt; 128x16
+            </summary>
+            <param name="w">The vector width selector</param>
+            <param name="src">The source cell width selector</param>
+            <param name="dst">The target cell width selector</param>
+        
+| M:Z0.VData.packusHi(Z0.N128,Z0.N32,Z0.N16)        | 
+            <summary>
+            Produces the hi shuffle spec for packing (128x32, 128x32) -&gt; 128x16
+            </summary>
+            <param name="w">The vector width selector</param>
+            <param name="src">The source cell width selector</param>
+            <param name="dst">The target cell width selector</param>
+        
+| M:Z0.VData.packusLo(Z0.N128,Z0.N16,Z0.N8)         | 
+            <summary>
+            Produces the lo shuffle spec for packing (128x16,128x16) -&gt; 128x8
+            </summary>
+            <param name="w">The vector width selector</param>
+            <param name="src">The source cell width selector</param>
+            <param name="dst">The target cell width selector</param>
+        
+| M:Z0.VData.packusHi(Z0.N128,Z0.N16,Z0.N8)         | 
+            <summary>
+            Produces the hi shuffle spec for packing (128x16,128x16) -&gt; 128x8
+            </summary>
+            <param name="w">The vector width selector</param>
+            <param name="src">The source cell width selector</param>
+            <param name="dst">The target cell width selector</param>
+        
+| M:Z0.VData.packusLo(Z0.N256,Z0.N32,Z0.N16)        | 
+            <summary>
+            Retrieves the lo shuffle spec for packing 256x32x2 -&gt; 256x16
+            </summary>
+            <param name="w">The vector width selector</param>
+            <param name="src">The source cell width selector</param>
+            <param name="dst">The target cell width selector</param>
+        
+| M:Z0.VData.packusHi(Z0.N256,Z0.N32,Z0.N16)        | 
+            <summary>
+            Retrieves the hi shuffle spec for packing 256x32x2 -&gt; 256x16
+            </summary>
+            <param name="w">The vector width selector</param>
+            <param name="src">The source cell width selector</param>
+            <param name="dst">The target cell width selector</param>
+        
+| P:Z0.VData.RotL8_128x8u                           | 
+            <summary>
+            Shuffle pattern that, when applied, rotates 128 bits of content leftward by 8 bits
+            </summary>
+        
+| P:Z0.VData.RotL16_128x8u                          | 
+            <summary>
+            Shuffle pattern that, when applied, rotates 128 bits of content leftward by 16 bits
+            </summary>
+        
+| P:Z0.VData.RotL24_128x8u                          | 
+            <summary>
+            Shuffle pattern that, when applied, rotates 128 bits of content leftward by 24 bits
+            </summary>
+        
+| P:Z0.VData.RotL32_128x8u                          | 
+            <summary>
+            Shuffle pattern that, when applied, rotates 128 bits of content leftward by 32 bits
+            </summary>
+        
+| P:Z0.VData.RotL40_128x8u                          | 
+            <summary>
+            Shuffle pattern that, when applied, rotates 128 bits of content leftward by 40 bits
+            </summary>
+        
+| P:Z0.VData.RotL48_128x8u                          | 
+            <summary>
+            Shuffle pattern that, when applied, rotates 128 bits of content leftward by 40 bits
+            </summary>
+        
+| M:Z0.VData.vunits``1(Z0.N128,``0)                 | 
+            <summary>
+            Creates a 128-bit vector where each component is of unit value 
+            </summary>
+            <param name="w">The vector width selector</param>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.VData.vunits``1(Z0.N256,``0)                 | 
+            <summary>
+            Creates a 256-bit vector where each component is of unit value 
+            </summary>
+            <param name="w">The vector width selector</param>
+            <typeparam name="T">The cell type</typeparam>
+        

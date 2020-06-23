@@ -1,0 +1,18 @@
+| M:Z0.ClrIndexer.ToSpec(dnlib.DotNet.MethodImplAttributes)| 
+            <summary>
+            Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
+            </summary>
+            <param name="src">The dnlib source value</param>
+        
+| M:Z0.ClrIndexer.ToSpec(dnlib.DotNet.Emit.Instruction)| 
+            <summary>
+            Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
+            </summary>
+            <param name="src">The dnlib source value</param>
+        
+| M:Z0.ClrIndexer.ToSpec(dnlib.DotNet.Emit.OpCode)  | 
+            <summary>
+            Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
+            </summary>
+            <param name="src">The dnlib source value</param>
+        

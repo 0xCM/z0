@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="c">The digit character</param>
         [MethodImpl(Inline), Op]
         public static byte digit8(char c)
-            => (byte)((byte)c - (byte)'0'); 
+            => (byte)asci.digit(base10, c);
 
         /// <summary>
         /// Extracts an index-identified encoded digit
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="index">An integer in the inclusive range [0, 1] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
         public static byte digit8(ushort src, int index)
-            => (byte)(F & (src >> index*4));
+            => (byte)asci.digit(base10, src, index);
 
         /// <summary>
         /// Extracts an index-identified encoded digit
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="index">An integer in the inclusive range [0, 3] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
         public static byte digit8(uint src, int index)
-            => (byte)(F & (src >> index*4));
+            => (byte)asci.digit(base10, src, index);
 
         /// <summary>
         /// Extracts an index-identified encoded digit
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="index">An integer in the inclusive range [0, 7] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
         public static byte digit8(ulong src, int index)
-            => (byte)(F & (src >> index*4));
+            => (byte)asci.digit(base10, src, index);
 
         [MethodImpl(Inline), Op]
         public static char char8(byte digit)
@@ -65,66 +65,23 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static void chars(ushort src, out char c1, out char c0)
-        {
-            c1 = char8(digit8(src,Bit1));
-            c0 = char8(digit8(src,Bit0));
-        }
+            => asci.chars(base10, src, out c1, out c0);
 
         [MethodImpl(Inline), Op]
         public static void chars(uint src, out char c3, out char c2, out char c1, out char c0)
-        {
-            c3 = char8(digit8(src,Bit3));
-            c2 = char8(digit8(src,Bit2));
-            c1 = char8(digit8(src,Bit1));
-            c0 = char8(digit8(src,Bit0));
-        }
+            => asci.chars(base10, src, out c3, out c2, out c1, out c0);
 
         [MethodImpl(Inline), Op]
         public static void chars(ulong src, out char c7, out char c6, out char c5, out char c4, out char c3, out char c2, out char c1, out char c0)
-        {
-            c7 = char8(digit8(src, Bit7));
-            c6 = char8(digit8(src, Bit6));
-            c5 = char8(digit8(src, Bit5));
-            c4 = char8(digit8(src, Bit4));
-            c3 = char8(digit8(src, Bit3));
-            c2 = char8(digit8(src, Bit2));
-            c1 = char8(digit8(src, Bit1));
-            c0 = char8(digit8(src, Bit0));
-        }
+            => asci.chars(base10, src, out c7, out c6, out c5, out c4, out c3, out c2, out c1, out c0);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(uint src)
-        {            
-            var store = z64;
-            var proxy = c16;
-            ref var dst = ref As.@as(ref store, ref proxy);            
-            chars(src, 
-                out As.add(dst, 3), 
-                out As.add(dst, 2), 
-                out As.add(dst, 1), 
-                out As.add(dst, 0)
-                );
-            return As.cover(dst, 4);            
-        }
+            => asci.chars(base10, src);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(ulong src)
-        {            
-            var store = z128f;
-            var proxy = c16;
-            ref var dst = ref As.@as(ref store, ref proxy);            
-            chars(src, 
-                out As.add(dst, 7), 
-                out As.add(dst, 6), 
-                out As.add(dst, 5), 
-                out As.add(dst, 4),
-                out As.add(dst, 3), 
-                out As.add(dst, 2), 
-                out As.add(dst, 1), 
-                out As.add(dst, 0)
-                );
-            return As.cover(dst, 4);            
-        }
+            => asci.chars(base10, src);
 
         /// <summary>
         /// Encodes two decimal digits d := 0x[c1][c0] for characters c2, c1 in the inclusive range [0,9]
@@ -132,23 +89,8 @@ namespace Z0
         /// <param name="c1">The source for digit 1, the most significant digit</param>
         /// <param name="c0">The source for digit 0, the least significant digit</param>
         [MethodImpl(Inline), Op]
-        public static ulong digits(char c1, char c0)
-        {
-            const int width = 4;
-            var packed = 0ul;
-            packed |= (digit(c0) << 0*width);
-            packed |= (digit(c1) << 1*width);
-            return packed;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ushort digits8(char c1, char c0)
-        {            
-            var packed = z16;
-            packed |= (byte)(digit8(c0) << 0*4);
-            packed |= (byte)(digit8(c1) << 1*4);
-            return packed;
-        }
+        public static ulong digits(Base10 @base, char c1, char c0)
+            => asci.pack(@base10, c1, c0);
 
         /// <summary>
         /// Encodes three decimal digits d := 0x[c2][c1][c0] for characters c2, c1, c0 in the inclusive range [0,9]
@@ -157,15 +99,8 @@ namespace Z0
         /// <param name="c1">The source for digit 1</param>
         /// <param name="c0">The source for digit 0, the least significant digit</param>
         [MethodImpl(Inline), Op]
-        public static ulong digits(char c2, char c1, char c0)
-        {
-            const int width = 4;
-            var packed = 0ul;
-            packed |= (digit(c0) << 0*width);
-            packed |= (digit(c1) << 1*width);
-            packed |= (digit(c2) << 2*width);
-            return packed;
-        }
+        public static ulong digits(Base10 @base, char c2, char c1, char c0)
+            => asci.pack(@base10, c2, c1, c0);
 
         /// <summary>
         /// Encodes four decimal digits d := 0x[c3][c2][c1][c0] for characters c3, c2, c1, c0 in the inclusive range [0,9]
@@ -175,16 +110,8 @@ namespace Z0
         /// <param name="c1">The source for digit 1</param>
         /// <param name="c0">The source for digit 0, the least significant digit</param>
         [MethodImpl(Inline), Op]
-        public static ulong digits(char c3, char c2, char c1, char c0)
-        {
-            const int width = 4;
-            var packed = 0ul;
-            packed |= (digit(c0) << 0*width);
-            packed |= (digit(c1) << 1*width);
-            packed |= (digit(c2) << 2*width);
-            packed |= (digit(c3) << 3*width);
-            return packed;
-        }
+        public static ulong digits(Base10 @base, char c3, char c2, char c1, char c0)
+            => asci.pack(@base10, c3, c2, c1, c0);
 
         /// <summary>
         /// Encodes five decimal digits d := 0x[c4][c3][c2][c1][c0] for characters c4, c3, c2, c1, c0 in the inclusive range [0,9]
@@ -195,17 +122,8 @@ namespace Z0
         /// <param name="c1">The source for digit 1</param>
         /// <param name="c0">The source for digit 0, the least significant digit</param>
         [MethodImpl(Inline), Op]
-        public static ulong digits(char c4, char c3, char c2, char c1, char c0)
-        {
-            const int width = 4;
-            var packed = 0ul;
-            packed |= (digit(c0) << 0*width);
-            packed |= (digit(c1) << 1*width);
-            packed |= (digit(c2) << 2*width);
-            packed |= (digit(c3) << 3*width);
-            packed |= (digit(c4) << 4*width);
-            return packed;
-        }
+        public static ulong digits(Base10 @base, char c4, char c3, char c2, char c1, char c0)
+            => asci.pack(@base10, c4, c3, c2, c1, c0);
 
         /// <summary>
         /// Encodes eight decimal digits d := 0x[c7][c6][c5][c4][c3][c2][c1][c0] for characters c7, c6, c5, c4, c3, c2, c1, c0 in the inclusive range [0,9]
@@ -219,20 +137,8 @@ namespace Z0
         /// <param name="c1">The source for digit 1</param>
         /// <param name="c0">The source for digit 0, the least significant digit</param>
         [MethodImpl(Inline), Op]
-        public static ulong digits(char c7, char c6, char c5, char c4, char c3, char c2, char c1, char c0)
-        {
-            const int width = 4;
-            var packed = 0ul;
-            packed |= (digit(c0) << 0*width);
-            packed |= (digit(c1) << 1*width);
-            packed |= (digit(c2) << 2*width);
-            packed |= (digit(c3) << 3*width);
-            packed |= (digit(c4) << 4*width);
-            packed |= (digit(c5) << 5*width);
-            packed |= (digit(c6) << 6*width);
-            packed |= (digit(c7) << 7*width);
-            return packed;
-        }
+        public static ulong digits(Base10 @base, char c7, char c6, char c5, char c4, char c3, char c2, char c1, char c0)
+            => asci.pack(@base10, c7, c6, c5, c4, c3, c2, c1, c0);
 
         /// <summary>
         /// Extracts an index-identified encoded digit
@@ -410,16 +316,8 @@ namespace Z0
         /// <param name="count">The digit count selector</param>
         /// <param name="dst">The digit receiver</param>
         [MethodImpl(Inline), Op]
-        public static void digits(ulong src, N8 count, ref byte dst)
-        {
-            add(ref dst, 6) = (byte)digit(src,6);
-            add(ref dst, 5) = (byte)digit(src,5);
-            add(ref dst, 4) = (byte)digit(src,4);
-            add(ref dst, 3) = (byte)digit(src,3);
-            add(ref dst, 2) = (byte)digit(src,2);
-            add(ref dst, 1) = (byte)digit(src,1);
-            add(ref dst, 0) = (byte)digit(src,0);
-        }
+        public static void unpack(Base10 @base, ulong src, N8 count, ref byte dst)
+            => asci.unpack(@base,src,count,ref dst);
 
         [MethodImpl(Inline), Op]
         static ref T add<T>(ref T src, int count)

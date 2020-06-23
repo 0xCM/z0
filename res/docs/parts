@@ -1,0 +1,95 @@
+| T:Z0.FileExtension                                | 
+            <summary>
+            Defines a file extension
+            </summary>
+        
+| P:Z0.FileExtension.Description                    | 
+            <summary>
+            Describes the sort of file identified by the extension
+            </summary>
+        
+| T:Z0.IFormatter                                   | 
+            <summary>
+            Characterizes a text serializer
+            </summary>
+        
+| T:Z0.IFormatter`2                                 | 
+            <summary>
+            Characterizes a configurable formatter, parametric in both type and configuration
+            </summary>
+        
+| M:Z0.IFormatter`2.Format(`1,`0@)                  | 
+            <summary>
+            Formats a source value according to a supplied configuration
+            </summary>
+            <param name="src">The source value</param>
+            <param name="config">The configuration</param>
+        
+| T:Z0.IFormatter`1                                 | 
+            <summary>
+            Characterizes a type-parametric formatter
+            </summary>
+        
+| M:Z0.IFormatter`1.Format(`0)                      | 
+            <summary>
+            Renders an object as text
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.ISpanFormatter`1.Format(System.ReadOnlySpan{`0})| 
+            <summary>
+            Formats and concatenates span content
+            </summary>
+            <param name="src">The source span</param>
+        
+| M:Z0.ISpanFormatter`1.FormatItems(System.ReadOnlySpan{`0})| 
+            <summary>
+            Formats span cells
+            </summary>
+            <param name="src">The source span</param>
+        
+| M:Z0.ISpanFormatter`2.Format(System.ReadOnlySpan{`0},`1@)| 
+            <summary>
+            Formats and concatenates span content using a sequence format configuration
+            </summary>
+            <param name="src">The source span</param>
+            <param name="config">The sequence format configuration</param>
+        
+| M:Z0.ISpanFormatter`2.FormatItems(System.ReadOnlySpan{`0},`1@)| 
+            <summary>
+            Formats source span cells using a sequence format configuration
+            </summary>
+            <param name="src">The source span</param>
+            <param name="config">The sequence format configuration</param>
+        
+| M:Z0.ISpanFormatter`3.Format(System.ReadOnlySpan{`0},`1@,`2@)| 
+            <summary>
+            Formats a span using both sequence and element format configurations
+            </summary>
+            <param name="src">The source span</param>
+            <param name="seq">The sequence format configuration</param>
+            <param name="config">The element format configuration</param>
+        
+| T:Z0.FormatRender`1                               | 
+            <summary>
+            Characterizes an unconfigured content render function
+            </summary>
+            <param name="src">The content value</param>
+            <typeparam name="T">The content type</typeparam>
+        
+| T:Z0.FormatRender`2                               | 
+            <summary>
+            Characterizes a configured content render function
+            </summary>
+            <param name="src">The content value</param>
+            <param name="config">The configuration value</param>
+            <typeparam name="C">THe configuration type</typeparam>
+            <typeparam name="T">The content type</typeparam>
+        
+| T:Z0.TitleRender`1                                | 
+            <summary>
+            Characterizes a title render function
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The type for which titles will be provided</typeparam>
+        

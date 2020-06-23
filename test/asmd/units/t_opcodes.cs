@@ -20,7 +20,7 @@ namespace Z0.Asm.Data
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Value.MaxLength));
+                writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
             }
         }
 
@@ -32,7 +32,7 @@ namespace Z0.Asm.Data
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Value.MaxLength));
+                writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
             }
 
         }
@@ -45,7 +45,7 @@ namespace Z0.Asm.Data
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Value.MaxLength));
+                writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
             }
 
         }
@@ -58,7 +58,7 @@ namespace Z0.Asm.Data
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Value.MaxLength));
+                writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
             }
         }
 

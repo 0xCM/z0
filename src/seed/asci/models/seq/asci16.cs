@@ -9,84 +9,69 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Typed;
     using static Root;
 
     using N = N16;
     using W = W128;
+    using A = asci16;
+    using S = System.Runtime.Intrinsics.Vector128<byte>;
 
     /// <summary>
     /// Defines an asci code sequence of length 16
     /// </summary>
-    public readonly struct asci16 : IAsciSequence<asci16,N>
+    public readonly struct asci16 : IAsciSequence<A,N>
     {
-        internal readonly Vector128<byte> Storage;        
-
-        public const int Size = 16;            
+        internal readonly S Storage;        
 
         [MethodImpl(Inline)]
-        public static asci16 Init(AsciCharCode fill = AsciCharCode.Space)
-            => new asci16(SymBits.vbroadcast(w, (byte)fill));
+        public static implicit operator A(string src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static asci16 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci16(Root.cast<AsciCharCode,byte>(src));
-
-        [MethodImpl(Inline)]
-        public static implicit operator asci16(string src)
-            => new asci16(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(asci16 src)
+        public static implicit operator string(A src)
             => src.Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(asci16 src)
+        public static implicit operator ReadOnlySpan<byte>(A src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(asci16 src)
+        public static implicit operator ReadOnlySpan<char>(A src)
             => src.Decoded;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(asci16 a, asci16 b)
+        public static bool operator ==(A a, A b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(asci16 a, asci16 b)
+        public static bool operator !=(A a, A b)
             => !a.Equals(b);
 
-        [MethodImpl(Inline)]
-        public asci16(ReadOnlySpan<byte> src)
+        public bool IsBlank
         {
-            Storage = SymBits.vload(w, head(src));
+            [MethodImpl(Inline)]
+            get => IsNull || Equals(Spaced);
         }
 
-        [MethodImpl(Inline)]
-        public asci16(Vector128<byte> src)
+        public bool IsNull
         {
-            Storage = src;
-        }
-
-        [MethodImpl(Inline)]
-        public asci16(string src)
-        {
-            Storage = asci.encode(n16,src).Storage;
+            [MethodImpl(Inline)]
+            get => Equals(Null);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Storage.Equals(default);
+            get => Equals(Null);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !Storage.Equals(default);
+            get => !Equals(Null);
         }
-
-        public asci16 Zero
+        
+        public A Zero
         {
             [MethodImpl(Inline)]
             get => Null;
@@ -98,7 +83,7 @@ namespace Z0
             get => asci.length(this);
         }
 
-        public int MaxLength
+        public int Capacity
         {
             [MethodImpl(Inline)]
             get => Size;
@@ -147,7 +132,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(asci16 src)
+        public bool Equals(A src)
             => Storage.Equals(src.Storage);
  
         [MethodImpl(Inline)]
@@ -162,7 +147,7 @@ namespace Z0
             => Storage.GetHashCode();
 
         public override bool Equals(object src)
-            => src is asci16 j && Equals(j);
+            => src is A j && Equals(j);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -171,12 +156,31 @@ namespace Z0
         public override string ToString()
             => Text;
 
+        public const int Size = 16;            
 
-        public static asci16 Blank 
-            => asci.init(n);
+        public static A Spaced 
+        {
+            [MethodImpl(Inline)]
+            get => asci.init(n);
+        }
         
-        public static asci16 Null 
-            => new asci16(Vector128<byte>.Zero);
+        public static A Null 
+        {
+            [MethodImpl(Inline)]
+            get => new A(default(S));
+        }
+
+        [MethodImpl(Inline)]
+        public asci16(S src)
+            => Storage = src;
+
+        [MethodImpl(Inline)]
+        public asci16(string src)
+            => Storage = asci.encode(n,src).Storage;
+
+        [MethodImpl(Inline)]
+        public asci16(ReadOnlySpan<byte> src)
+            => Storage = SymBits.vload(w, head(src));
 
         static N n => default;
 

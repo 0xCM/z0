@@ -1,0 +1,3271 @@
+| M:Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Byte},System.Runtime.Intrinsics.Vector128{System.Byte})| 
+            <summary>
+            Creates a 256-bit vector by concatenating two 128-bit source vectors
+            </summary>
+            <param name="lo">The lower 128-bits of the target vector</param>
+            <param name="hi">The upper 128-bits of the target vector</param>
+        
+| M:Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.SByte},System.Runtime.Intrinsics.Vector128{System.SByte})| 
+            <summary>
+            Creates a 256-bit vector by concatenating two 128-bit source vectors
+            </summary>
+            <param name="lo">The lower 128-bits of the target vector</param>
+            <param name="hi">The upper 128-bits of the target vector</param>
+        
+| M:Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Int16},System.Runtime.Intrinsics.Vector128{System.Int16})| 
+            <summary>
+            Creates a 256-bit vector by concatenating two 128-bit source vectors
+            </summary>
+            <param name="lo">The lower 128-bits of the target vector</param>
+            <param name="hi">The upper 128-bits of the target vector</param>
+        
+| M:Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.UInt16},System.Runtime.Intrinsics.Vector128{System.UInt16})| 
+            <summary>
+            Creates a 256-bit vector by concatenating two 128-bit source vectors
+            </summary>
+            <param name="lo">The lower 128-bits of the target vector</param>
+            <param name="hi">The upper 128-bits of the target vector</param>
+        
+| M:Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Int32},System.Runtime.Intrinsics.Vector128{System.Int32})| 
+            <summary>
+            Creates a 256-bit vector by concatenating two 128-bit source vectors
+            </summary>
+            <param name="lo">The lower 128-bits of the target vector</param>
+            <param name="hi">The upper 128-bits of the target vector</param>
+        
+| M:Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.UInt32},System.Runtime.Intrinsics.Vector128{System.UInt32})| 
+            <summary>
+            Creates a 256-bit vector by concatenating two 128-bit source vectors
+            </summary>
+            <param name="lo">The lower 128-bits of the target vector</param>
+            <param name="hi">The upper 128-bits of the target vector</param>
+        
+| M:Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Int64},System.Runtime.Intrinsics.Vector128{System.Int64})| 
+            <summary>
+            Creates a 256-bit vector by concatenating two 128-bit source vectors
+            </summary>
+            <param name="lo">The lower 128-bits of the target vector</param>
+            <param name="hi">The upper 128-bits of the target vector</param>
+        
+| M:Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.UInt64},System.Runtime.Intrinsics.Vector128{System.UInt64})| 
+            <summary>
+            Creates a 256-bit vector by concatenating two 128-bit source vectors
+            </summary>
+            <param name="lo">The lower 128-bits of the target vector</param>
+            <param name="hi">The upper 128-bits of the target vector</param>
+        
+| M:Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Single},System.Runtime.Intrinsics.Vector128{System.Single})| 
+            <summary>
+            Creates a 256-bit vector by concatenating two 128-bit source vectors
+            </summary>
+            <param name="lo">The lower 128-bits of the target vector</param>
+            <param name="hi">The upper 128-bits of the target vector</param>
+        
+| M:Z0.Vectors.vconcat(System.Runtime.Intrinsics.Vector128{System.Double},System.Runtime.Intrinsics.Vector128{System.Double})| 
+            <summary>
+            Creates a 256-bit vector by concatenating two 128-bit source vectors
+            </summary>
+            <param name="lo">The lower 128-bits of the target vector</param>
+            <param name="hi">The upper 128-bits of the target vector</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W128,System.SByte)     | 
+            <summary>
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W128,System.Byte)      | 
+            <summary>
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W128,System.Int16)     | 
+            <summary>
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W128,System.UInt16)    | 
+            <summary>
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W128,System.Int32)     | 
+            <summary>
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W128,System.UInt32)    | 
+            <summary>
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W128,System.Int64)     | 
+            <summary>
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W128,System.UInt64)    | 
+            <summary>
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.SByte)     | 
+            <summary>
+            __m256i _mm256_broadcastb_epi8 (__m128i a) VPBROADCASTB ymm, m8
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.Byte)      | 
+            <summary>
+            __m256i _mm256_broadcastb_epi8 (__m128i a) VPBROADCASTB ymm, m8
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.Int16)     | 
+            <summary>
+             __m256i _mm256_broadcastw_epi16 (__m128i a) VPBROADCASTW ymm, m16
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.UInt16)    | 
+            <summary>
+             __m256i _mm256_broadcastw_epi16 (__m128i a) VPBROADCASTW ymm, m16
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.Int32)     | 
+            <summary>
+            __m256i _mm256_broadcastd_epi32 (__m128i a) VPBROADCASTD ymm, m32
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.UInt32)    | 
+            <summary>
+            __m256i _mm256_broadcastd_epi32 (__m128i a) VPBROADCASTD ymm, m32
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.Int64)     | 
+            <summary>
+            __m256i _mm256_broadcastq_epi64 (__m128i a) VPBROADCASTQ ymm, m64
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.UInt64)    | 
+            <summary>
+             __m256i _mm256_broadcastq_epi64 (__m128i a) VPBROADCASTQ ymm, m64
+            Creates a target vector where each component is initialized with the same value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.Single)    | 
+            <summary>
+            __m256 _mm256_broadcast_ss (float const * mem_addr) VBROADCASTSS ymm, m32
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.Double)    | 
+            <summary>
+            __m256d _mm256_broadcast_sd (double const * mem_addr) VBROADCASTSD ymm, m64
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W128,System.Single)    | 
+            <summary>
+            __m128 _mm_broadcast_ss (float const * mem_addr) VBROADCASTSS xmm, m32
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W128,System.Double)    | 
+            <summary>
+            Broadcasts a 64-bit floating point value to the upper and lower cells of a 128-bit floating-point vector
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The value to broadcast</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.Byte,System.Byte)| 
+            <summary>
+            Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
+            and the upper 128-bit lane is filled with replicas of the hi value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="lo">The value to replicate in the lower lane</param>
+            <param name="hi">The value to replicate in the upper lane</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.UInt16,System.UInt16)| 
+            <summary>
+            Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
+            and the upper 128-bit lane is filled with replicas of the hi value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="lo">The value to replicate in the lower lane</param>
+            <param name="hi">The value to replicate in the upper lane</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.UInt32,System.UInt32)| 
+            <summary>
+            Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
+            and the upper 128-bit lane is filled with replicas of the hi value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="lo">The value to replicate in the lower lane</param>
+            <param name="hi">The value to replicate in the upper lane</param>
+        
+| M:Z0.Vectors.vbroadcast(Z0.W256,System.UInt64,System.UInt64)| 
+            <summary>
+            Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
+            and the upper 128-bit lane is filled with replicas of the hi value
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="lo">The value to replicate in the lower lane</param>
+            <param name="hi">The value to replicate in the upper lane</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.SByte},System.Runtime.Intrinsics.Vector128{System.SByte})| 
+            <summary>
+            __m128i _mm_cmpeq_epi8 (__m128i a, __m128i b) PCMPEQB xmm, xmm/m128
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Byte},System.Runtime.Intrinsics.Vector128{System.Byte})| 
+            <summary>
+            __m128i _mm_cmpeq_epi8 (__m128i a, __m128i b) PCMPEQB xmm, xmm/m128
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Int16},System.Runtime.Intrinsics.Vector128{System.Int16})| 
+            <summary>
+             __m128i _mm_cmpeq_epi16 (__m128i a, __m128i b) PCMPEQW xmm, xmm/m128 
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.UInt16},System.Runtime.Intrinsics.Vector128{System.UInt16})| 
+            <summary>
+             __m128i _mm_cmpeq_epi16 (__m128i a, __m128i b) PCMPEQW xmm, xmm/m128 
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Int32},System.Runtime.Intrinsics.Vector128{System.Int32})| 
+            <summary>
+            __m128i _mm_cmpeq_epi32 (__m128i a, __m128i b) PCMPEQD xmm, xmm/m128
+            </summary>
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.UInt32},System.Runtime.Intrinsics.Vector128{System.UInt32})| 
+            <summary>
+            __m128i _mm_cmpeq_epi32 (__m128i a, __m128i b) PCMPEQD xmm, xmm/m128
+            </summary>
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Int64},System.Runtime.Intrinsics.Vector128{System.Int64})| 
+            <summary>
+            __m128i _mm_cmpeq_epi64 (__m128i a, __m128i b) PCMPEQQ xmm, xmm/m128
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.UInt64},System.Runtime.Intrinsics.Vector128{System.UInt64})| 
+            <summary>
+            __m128i _mm_cmpeq_epi64 (__m128i a, __m128i b) PCMPEQQ xmm, xmm/m128
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Single},System.Runtime.Intrinsics.Vector128{System.Single})| 
+            <summary>
+             __m128 _mm_cmpeq_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(0)
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector128{System.Double},System.Runtime.Intrinsics.Vector128{System.Double})| 
+            <summary>
+            __m128d _mm_cmpeq_pd (__m128d a, __m128d b) CMPPD xmm, xmm/m128, imm8(0)
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.SByte},System.Runtime.Intrinsics.Vector256{System.SByte})| 
+            <summary>
+            __m256i _mm256_cmpeq_epi8 (__m256i a, __m256i b) VPCMPEQB ymm, ymm, ymm/m256
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Byte},System.Runtime.Intrinsics.Vector256{System.Byte})| 
+            <summary>
+            __m256i _mm256_cmpeq_epi8 (__m256i a, __m256i b) VPCMPEQB ymm, ymm, ymm/m256
+            Compares the operands for equality
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Int16},System.Runtime.Intrinsics.Vector256{System.Int16})| 
+            <summary>
+             __m256i _mm256_cmpeq_epi16 (__m256i a, __m256i b) VPCMPEQW ymm, ymm, ymm/m256
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.UInt16},System.Runtime.Intrinsics.Vector256{System.UInt16})| 
+            <summary>
+            __m256i _mm256_cmpeq_epi16 (__m256i a, __m256i b) VPCMPEQW ymm, ymm, ymm/m256 
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Int32},System.Runtime.Intrinsics.Vector256{System.Int32})| 
+            <summary>
+            _mm256_cmpeq_epi32 (__m256i a, __m256i b) VPCMPEQD ymm, ymm, ymm/m256
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.UInt32},System.Runtime.Intrinsics.Vector256{System.UInt32})| 
+            <summary>
+            __m256i _mm256_cmpeq_epi32 (__m256i a, __m256i b) VPCMPEQD ymm, ymm, ymm/m256
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Int64},System.Runtime.Intrinsics.Vector256{System.Int64})| 
+            <summary>
+            __m256i _mm256_cmpeq_epi64 (__m256i a, __m256i b) VPCMPEQQ ymm, ymm, ymm/m256
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.UInt64},System.Runtime.Intrinsics.Vector256{System.UInt64})| 
+            <summary>
+             __m256i _mm256_cmpeq_epi64 (__m256i a, __m256i b) VPCMPEQQ ymm, ymm, ymm/m256
+            Compares corresponding components each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Single},System.Runtime.Intrinsics.Vector256{System.Single})| 
+            <summary>
+            __m256 _mm256_cmp_ps (__m256 a, __m256 b, const int imm8) VCMPPS ymm, ymm, ymm/m256, imm8
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq(System.Runtime.Intrinsics.Vector256{System.Double},System.Runtime.Intrinsics.Vector256{System.Double})| 
+            <summary>
+            __m256d _mm256_cmp_pd (__m256d a, __m256d b, const int imm8) VCMPPD ymm, ymm, ymm/m256, imm8
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.vinsert(System.Byte,System.Runtime.Intrinsics.Vector128{System.Byte},Z0.Bit)| 
+            <summary>
+            __m128i _mm_insert_epi8 (__m128i a, int i, const int imm8) PINSRB xmm, reg/m8, imm8
+            Overwrites an identified component in the target vector with a specified value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target vector</param>
+            <param name="index">The 0-based index of the component to overwrite</param>
+        
+| M:Z0.Vectors.vinsert(System.SByte,System.Runtime.Intrinsics.Vector128{System.SByte},Z0.Bit)| 
+            <summary>
+             __m128i _mm_insert_epi8 (__m128i a, int i, const int imm8)PINSRB xmm, reg/m8, imm8
+            Overwrites an identified component in the target vector with a specified value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target vector</param>
+            <param name="index">The 0-based index of the component to overwrite</param>
+        
+| M:Z0.Vectors.vinsert(System.Int16,System.Runtime.Intrinsics.Vector128{System.Int16},Z0.Bit)| 
+            <summary>
+            __m128i _mm_insert_epi16 (__m128i a, int i, int immediate) PINSRW xmm, reg/m16, imm8
+            Overwrites an identified component in the target vector with a specified value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target vector</param>
+            <param name="index">The 0-based index of the component to overwrite</param>
+        
+| M:Z0.Vectors.vinsert(System.UInt16,System.Runtime.Intrinsics.Vector128{System.UInt16},Z0.Bit)| 
+            <summary>
+            __m128i _mm_insert_epi16 (__m128i a, int i, int immediate) PINSRW xmm, reg/m16, imm8
+            Overwrites an identified component in the target vector with a specified value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target vector</param>
+            <param name="index">The 0-based index of the component to overwrite</param>
+        
+| M:Z0.Vectors.vinsert(System.Int32,System.Runtime.Intrinsics.Vector128{System.Int32},Z0.Bit)| 
+            <summary>
+            __m128i _mm_insert_epi32 (__m128i a, int i, const int imm8) PINSRD xmm, reg/m32, xmm8
+            Overwrites an identified component in the target vector with a specified value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target vector</param>
+            <param name="index">The 0-based index of the component to overwrite</param>
+        
+| M:Z0.Vectors.vinsert(System.UInt32,System.Runtime.Intrinsics.Vector128{System.UInt32},Z0.Bit)| 
+            <summary>
+            __m128i _mm_insert_epi32 (__m128i a, int i, const int imm8) PINSRD xmm, reg/m32, xmm8
+            Overwrites an identified component in the target vector with a specified value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target vector</param>
+            <param name="index">The 0-based index of the component to overwrite</param>
+        
+| M:Z0.Vectors.vinsert(System.Int64,System.Runtime.Intrinsics.Vector128{System.Int64},Z0.Bit)| 
+            <summary>
+            __m128i _mm_insert_epi64 (__m128i a, __int64 i, const int imm8) PINSRQ xmm, reg/m64,imm8
+            Overwrites an identified component in the target vector with a specified value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target vector</param>
+            <param name="index">The 0-based index of the component to overwrite</param>
+        
+| M:Z0.Vectors.vinsert(System.UInt64,System.Runtime.Intrinsics.Vector128{System.UInt64},Z0.Bit)| 
+            <summary>
+            _mm_insert_epi64:
+            Overwrites an identified component in the target vector with a specified value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target vector</param>
+            <param name="index">The 0-based index of the component to overwrite</param>
+        
+| M:Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.SByte},System.Runtime.Intrinsics.Vector256{System.SByte},Z0.Bit)| 
+            <summary>
+             __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
+            identifing low or hi</param>
+        
+| M:Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Byte},System.Runtime.Intrinsics.Vector256{System.Byte},Z0.Bit)| 
+            <summary>
+             __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
+            identifing low or hi</param>
+        
+| M:Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Int16},System.Runtime.Intrinsics.Vector256{System.Int16},Z0.Bit)| 
+            <summary>
+             __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
+            identifing low or hi</param>
+        
+| M:Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.UInt16},System.Runtime.Intrinsics.Vector256{System.UInt16},Z0.Bit)| 
+            <summary>
+             __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
+            identifing low or hi</param>
+        
+| M:Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Int32},System.Runtime.Intrinsics.Vector256{System.Int32},Z0.Bit)| 
+            <summary>
+             __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
+            identifing low or hi</param>
+        
+| M:Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.UInt32},System.Runtime.Intrinsics.Vector256{System.UInt32},Z0.Bit)| 
+            <summary>
+             __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
+            identifing low or hi</param>
+        
+| M:Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Int64},System.Runtime.Intrinsics.Vector256{System.Int64},Z0.Bit)| 
+            <summary>
+             __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
+            identifing low or hi</param>
+        
+| M:Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.UInt64},System.Runtime.Intrinsics.Vector256{System.UInt64},Z0.Bit)| 
+            <summary>
+             __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
+            identifing low or hi</param>
+        
+| M:Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Single},System.Runtime.Intrinsics.Vector256{System.Single},Z0.Bit)| 
+            <summary>
+            _mm256_insertf128_ps: Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane the target to overwrite, either 0 or 1 respectively 
+            identifing low or hi</param>
+        
+| M:Z0.Vectors.vinsert(System.Runtime.Intrinsics.Vector128{System.Double},System.Runtime.Intrinsics.Vector256{System.Double},Z0.Bit)| 
+            <summary>
+            _mm256_insertf128_pd: Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
+            identifing low or hi</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector128{System.UInt64})| 
+            <summary>
+            Creates a scalar vector from the upper 64 bits of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.SByte})| 
+            <summary>
+            __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
+            Extracts the lo 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="pos">The index of the lane to extract</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Byte})| 
+            <summary>
+            __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
+            Extracts the lo 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="pos">The index of the lane to extract</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Int16})| 
+            <summary>
+            __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
+            Extracts the lo 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="pos">The index of the lane to extract</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.UInt16})| 
+            <summary>
+            __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
+            Extracts the lo 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Int32})| 
+            <summary>
+            __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
+            Extracts the lo 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.UInt32})| 
+            <summary>
+            __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
+            Extracts the lo 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Int64})| 
+            <summary>
+            __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
+            Extracts the lo 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.UInt64})| 
+            <summary>
+            __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
+            Extracts the lo 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Single})| 
+            <summary>
+            _m128 _mm256_extractf128_ps (__m256 a, const int imm8)VEXTRACTF128 xmm/m128, ymm, imm8
+            </summary>
+            <param name="src">The source vector</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Double})| 
+            <summary>
+            __m128d _mm256_extractf128_pd (__m256d a, const int imm8)VEXTRACTF128 xmm/m128, ymm, imm8
+            </summary>
+            <param name="src">The source vector</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.UInt64},System.UInt64@,System.UInt64@)| 
+            <summary>
+            Extracts the lower 128-bit lane from the source vector to scalar targets
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="x0">Receiver for the lo part of the exracted lane</param>
+            <param name="x1">Receiver for the hi part of the exracted lane</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.Byte},System.UInt64@,System.UInt64@)| 
+            <summary>
+            Extracts the lower 128-bit lane from the source vector to scalar targets
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="x0">Receiver for the lo part of the exracted lane</param>
+            <param name="x1">Receiver for the hi part of the exracted lane</param>
+        
+| M:Z0.Vectors.vlo(System.Runtime.Intrinsics.Vector256{System.UInt64},Z0.Pair{System.UInt64}@)| 
+            <summary>
+            Extracts the lower 128-bit lane from the source vector to a pair
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">Receiver for the lo part of the exracted lane</param>
+        
+| M:Z0.Vectors.vparts(Z0.W128,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)| 
+            <summary>
+            Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(Z0.W128,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16)| 
+            <summary>
+            Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(Z0.W128,System.UInt32,System.UInt32,System.UInt32,System.UInt32)| 
+            <summary>
+            Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(System.UInt32,System.UInt32,System.UInt32,System.UInt32)| 
+            <summary>
+            Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsi(Z0.W128,System.Int32,System.Int32,System.Int32,System.Int32)| 
+            <summary>
+            Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsi(Z0.W128,System.Int64,System.Int64)| 
+            <summary>
+            Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(Z0.W128,System.UInt64,System.UInt64)| 
+            <summary>
+            Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsf(Z0.W128,System.Single,System.Single,System.Single,System.Single)| 
+            <summary>
+            Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsf(Z0.W128,System.Double,System.Double)| 
+            <summary>
+            Defines a 128-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(Z0.W256,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)| 
+            <summary>
+            Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(Z0.W256,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16)| 
+            <summary>
+            Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsi(Z0.W256,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16)| 
+            <summary>
+            Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsi(Z0.W256,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)| 
+            <summary>
+            Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(Z0.W256,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)| 
+            <summary>
+            Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsi(Z0.W256,System.Int64,System.Int64,System.Int64,System.Int64)| 
+            <summary>
+            Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(Z0.W256,System.UInt64,System.UInt64,System.UInt64,System.UInt64)| 
+            <summary>
+            Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsf(Z0.W256,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)| 
+            <summary>
+            Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsf(Z0.W256,System.Double,System.Double,System.Double,System.Double)| 
+            <summary>
+            Defines a 256-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsi(Z0.W512,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16)| 
+            <summary>
+            Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(Z0.W512,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16)| 
+            <summary>
+            Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsi(Z0.W512,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)| 
+            <summary>
+            Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(Z0.W512,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)| 
+            <summary>
+            Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsi(Z0.W512,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64)| 
+            <summary>
+            Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vparts(Z0.W512,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64)| 
+            <summary>
+            Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsf(Z0.W512,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)| 
+            <summary>
+            Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vpartsf(Z0.W512,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)| 
+            <summary>
+            Defines a 512-bit vector by explicit component specification, from least -&gt; most significant
+            </summary>
+            <param name="w">The vector width selector</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W128,System.SByte)        | 
+            <summary>
+            Loads a scalar into the first component of a 128-bit vector
+            </summary>
+            <param name="a">The scalar to load</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W128,System.Byte)         | 
+            <summary>
+            Loads a scalar into the first component of a 128-bit vector
+            </summary>
+            <param name="a">The scalar to load</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W128,System.Int16)        | 
+            <summary>
+            Loads a scalar into the first component of a 128-bit vector
+            </summary>
+            <param name="a">The scalar to load</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W128,System.UInt16)       | 
+            <summary>
+            Loads a scalar into the first component of a 128-bit vector
+            </summary>
+            <param name="a">The scalar to load</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W128,System.Int32)        | 
+            <summary>
+            Loads a scalar into the first component of a 128-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W128,System.UInt32)       | 
+            <summary>
+            Loads a scalar into the first component of a 128-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W128,System.Int64)        | 
+            <summary>
+            Loads a scalar into the first component of a 128-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W128,System.UInt64)       | 
+            <summary>
+            Loads a scalar into the first component of a 128-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W128,System.Single)       | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W128,System.Double)       | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W256,System.SByte)        | 
+            <summary>
+            Loads a scalar into the first component of a 128-bit vector
+            </summary>
+            <param name="a">The scalar to load</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W256,System.Byte)         | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The scalar to load</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W256,System.Int16)        | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The scalar to load</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W256,System.UInt16)       | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The scalar to load</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W256,System.Int32)        | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W256,System.UInt32)       | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W256,System.Int64)        | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W256,System.UInt64)       | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W256,System.Single)       | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.vscalar(Z0.W256,System.Double)       | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The source value</param>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.SByte}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Byte}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Int16}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.UInt16}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Int32}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.UInt32}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Int64}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.UInt64}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Single}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector128{System.Double}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.SByte}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Byte}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Int16}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.UInt16}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Int32}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.UInt32}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Int64}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.UInt64}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Single}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(System.Runtime.Intrinsics.Vector256{System.Double}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(Z0.Vector512{System.SByte}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(Z0.Vector512{System.Byte}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(Z0.Vector512{System.Int16}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(Z0.Vector512{System.UInt16}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(Z0.Vector512{System.Int32}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(Z0.Vector512{System.UInt32}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(Z0.Vector512{System.Int64}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(Z0.Vector512{System.UInt64}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(Z0.Vector512{System.Single}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.generic``1(Z0.Vector512{System.Double}@)| 
+            <summary>
+            Reinterprets the source vector as a vector over parametric T-cells
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The target type</typeparam>
+            <remarks>This operation should be dissolved when the method is closed over a concrete type
+            and should not impact instruction generation</remarks>
+        
+| M:Z0.Vectors.span``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Allocates a span into which vector content is stored
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.span``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Allocates and deposits vector content to a span
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.span``1(Z0.Vector512{``0})           | 
+            <summary>
+            Allocates and deposits vector content to a span
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vbroadcast``1(Z0.W128,``0)           | 
+            <summary>
+            Projects a scalar value onto each component of a 128-bit vector
+            </summary>
+            <param name="w">The bitness selector</param>
+            <param name="src">The source value</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vbroadcast``1(Z0.W256,``0)           | 
+            <summary>
+            Projects a scalar value onto each component of a 256-bit vector
+            </summary>
+            <param name="w">The bitness selector</param>
+            <param name="src">The source value</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vbroadcast``1(Z0.W512,``0)           | 
+            <summary>
+            Projects a scalar value onto each component of a 512-bit vector
+            </summary>
+            <param name="w">The bitness selector</param>
+            <param name="src">The source value</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vcell``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extracts an index-identified component from the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vhead``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Extracts the first component of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell``2(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extracts a T-indexed component from a vector obtained by converting the S-vector to a T-vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32,``0)| 
+            <summary>
+            Sets an index-identified component to a specified value
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <param name="value">The new component value</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell``1(``0,System.Int32,System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Sets an index-identified component to a specified value
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <param name="value">The new component value</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extracts an index-identified component from the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell``1(``0,System.Int32,System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Sets an index-identified component to a specified value
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <param name="value">The new component value</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell8i``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell8``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell16i``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell16``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell32i``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell32``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell64i``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell64``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell32f``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell64f``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell8i``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell8``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell16i``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell16``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell32i``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell32``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell64``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell64i``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell32f``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcell64f``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extract an index-identified component of a reinterpreted vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vconcat``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Creates a 256-bit vector from two 128-bit vectors    
+            This mimics the _mm256_set_m128i intrinsic which does not appear to be available
+            </summary>
+            <param name="lo">The lo part</param>
+            <param name="hi">The hi part</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.Vectors.vto``2(System.Runtime.Intrinsics.Vector128{``0},``1)| 
+            <summary>
+            Reinterprets a vector over S-cells as a vector over T-cells
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="t">A target cell type representative</param>
+            <typeparam name="S">The source cell type</typeparam>
+            <typeparam name="T">The target cell type</typeparam>
+        
+| M:Z0.Vectors.vto``2(System.Runtime.Intrinsics.Vector256{``0},``1)| 
+            <summary>
+            Reinterprets a vector over S-cells as a vector over T-cells
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="t">A target cell type representative</param>
+            <typeparam name="S">The source cell type</typeparam>
+            <typeparam name="T">The target cell type</typeparam>
+        
+| M:Z0.Vectors.v8i``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type int8
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.v8u``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type uint8
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v16i``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type int16
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v16u``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type uint16
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v32i``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type int32
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v32u``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type uint32
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v64i``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type int64
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v64u``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type uint64
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v32f``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type float32
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v64f``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type float64
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v8i``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type int8
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v8u``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type uint8
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v16i``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type int16
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v16u``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type uint16
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v32i``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type int32
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v32u``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type uint32
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v64i``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type int64
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v64u``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type uint64
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v32f``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type float32
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.v64f``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Presents a generic cpu vector as a cpu vector with components of type float64
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The source vector primal component type</typeparam>
+        
+| M:Z0.Vectors.vcount``1(Z0.W128,``0)               | 
+            <summary>
+            Computes the vector component count for a given bit-width and component type
+            </summary>
+            <param name="w">The width selector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vcount``1(Z0.W256,``0)               | 
+            <summary>
+            Computes the vector component count for a given bit-width and component type
+            </summary>
+            <param name="w">The width selector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vcount``1(Z0.W512,``0)               | 
+            <summary>
+            Computes the vector component count for a given bit-width and component type
+            </summary>
+            <param name="w">The width selector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.veq``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Compares corresponding components in each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Compares corresponding components in each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.veq``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)| 
+            <summary>
+            Compares corresponding components in each vector for equality. For equal
+            components, the corresponding component the result vector has all bits 
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        
+| M:Z0.Vectors.vfirst``2(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Extracts the first T-indexed component after converting the S-vector to a T-vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vinsert``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector256{``0},Z0.Bit)| 
+            <summary>
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively identifing low or hi</param>
+        
+| M:Z0.Vectors.vlo``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Extracts the lo 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        
+| M:Z0.Vectors.vload``1(Z0.Block128{``0}@)          | 
+            <summary>
+            Loads a 128-bit vector from the first 128-bit source block
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.Block256{``0}@)          | 
+            <summary>
+            Loads a 256-bit vector from the leading source block
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.Block512{``0}@)          | 
+            <summary>
+            Loads a 512-bit vector from the leading source block
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.Block128{``0}@,System.Int32)| 
+            <summary>
+            Loads a block-identified 128-bit vector
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block">The block index</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.Block256{``0}@,System.Int32)| 
+            <summary>
+            Loads a block-identified 256-bit vector
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block">The block index</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.Block512{``0}@,System.Int32)| 
+            <summary>
+            Loads a block-identified 512-bit vector
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block">The block index</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.W128,``0*)               | 
+            <summary>
+            Loads a 128-bit vector from a pointer-identified memory location
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="pSrc">The source memory location</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.W256,``0*)               | 
+            <summary>
+            Loads a 256-bit vector from a pointer-identified memory location
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="pSrc">The source memory location</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.W512,``0*)               | 
+            <summary>
+            Loads a 512-bit vector from a pointer-identified memory location
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="pSrc">The source memory location</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vload``1(``0*,System.Runtime.Intrinsics.Vector128{``0}@)| 
+            <summary>
+            Loads a 128-bit vector from a pointer-identified memory location
+            </summary>
+            <param name="pSrc">The source memory location</param>
+            <param name="dst">The target vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vload``1(``0*,System.Runtime.Intrinsics.Vector256{``0}@)| 
+            <summary>
+            Loads a 256-bit vector from a pointer-identified memory location
+            </summary>
+            <param name="pSrc">The source memory location</param>
+            <param name="dst">The target vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.W128,``0@)               | 
+            <summary>
+            Loads a 128-bit vector from a readonly memory reference
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The memory reference</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.W256,``0@)               | 
+            <summary>
+            Loads a 256-bit vector from a readonly memory reference
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The memory reference</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.W512,``0@)               | 
+            <summary>
+            Loads a 512-bit vector from a readonly memory reference
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The memory reference</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.W128,``0@,System.Int32)  | 
+            <summary>
+            Loads a 128-bit vector from a readonly memory reference offset by a cell-relative offset
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The memory reference</param>
+            <param name="offset">The memory reference</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.W256,``0@,System.Int32)  | 
+            <summary>
+            Loads a 256-bit vector from a readonly memory reference offset by a cell-relative offset
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The memory reference</param>
+            <param name="offset">The memory reference</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.W512,``0@,System.Int32)  | 
+            <summary>
+            Loads a 256-bit vector from a readonly memory reference offset by a cell-relative offset
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The memory reference</param>
+            <param name="offset">The memory reference</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(``0@,System.Runtime.Intrinsics.Vector128{``0}@)| 
+            <summary>
+            Loads a 128-bit vector from a readonly memory reference
+            </summary>
+            <param name="src">The memory reference</param>
+            <param name="dst">The target vector</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(``0@,System.Runtime.Intrinsics.Vector256{``0}@)| 
+            <summary>
+            Loads a 256-bit vector from a readonly memory reference
+            </summary>
+            <param name="src">The memory reference</param>
+            <param name="dst">The target vector</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(``0@,Z0.Vector512{``0}@)    | 
+            <summary>
+            Loads a 512-bit vector from a readonly memory reference
+            </summary>
+            <param name="src">The memory reference</param>
+            <param name="dst">The target vector</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.vload``1(Z0.W128,System.Span{``0})   | 
+            <summary>
+            Loads a 128-bit vector from the first 128 bits of the source
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+        
+| M:Z0.Vectors.vload``1(Z0.W128,System.ReadOnlySpan{``0})| 
+            <summary>
+            Loads a 128-bit vector from the first 128 bits of the source
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+        
+| M:Z0.Vectors.vload``1(Z0.W256,System.Span{``0})   | 
+            <summary>
+            Loads a 256-bit vector from the first 256 bits of the source
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+        
+| M:Z0.Vectors.vload``1(Z0.W512,System.Span{``0})   | 
+            <summary>
+            Loads a 512-bit vector from the first 512 bits of the source
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+        
+| M:Z0.Vectors.vload``1(Z0.W128,System.Span{``0},System.Int32)| 
+            <summary>
+            Loads a 128-bit vector beginning at a specified source cell offset
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element</param>
+        
+| M:Z0.Vectors.vload``1(Z0.W256,System.Span{``0},System.Int32)| 
+            <summary>
+            Loads a 256-bit vector beginning at a specified source cell offset
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element</param>
+        
+| M:Z0.Vectors.vload``1(Z0.N512,System.Span{``0},System.Int32)| 
+            <summary>
+            Loads a 256-bit vector beginning at a specified source cell offset
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element</param>
+        
+| M:Z0.Vectors.vload``1(Z0.N256,System.ReadOnlySpan{``0})| 
+            <summary>
+            Loads a 256-bit vector from the first 256 bits of the source
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+        
+| M:Z0.Vectors.vload``1(Z0.N512,System.ReadOnlySpan{``0})| 
+            <summary>
+            Loads a 256-bit vector from the first 256 bits of the source
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+        
+| M:Z0.Vectors.vload``1(Z0.N128,System.ReadOnlySpan{``0},System.Int32)| 
+            <summary>
+            Loads a 128-bit vector beginning at a specified source cell offset
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element </param>
+        
+| M:Z0.Vectors.vload``1(Z0.N256,System.ReadOnlySpan{``0},System.Int32)| 
+            <summary>
+            Loads a 256-bit vector beginning at a specified source cell offset
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element </param>
+        
+| M:Z0.Vectors.vload``1(Z0.N512,System.ReadOnlySpan{``0},System.Int32)| 
+            <summary>
+            Loads a 512-bit vector beginning at a specified source cell offset
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element </param>
+        
+| M:Z0.Vectors.vones``1(Z0.N128,``0)                | 
+            <summary>
+            Creates a 128-bit vector with all bits enabled
+            </summary>
+            <param name="n">The vector width selector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vones``1(Z0.N256,``0)                | 
+            <summary>
+            Creates a 256-bit vector with all bits enabled
+            </summary>
+            <param name="n">The vector width selector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vones``1(Z0.N512,``0)                | 
+            <summary>
+            Creates a 512-bit vector with all bits enabled
+            </summary>
+            <param name="n">The vector width selector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vscalar``1(Z0.W128,``0)              | 
+            <summary>
+            Loads a scalar into the first component of a 128-bit vector
+            </summary>
+            <param name="w">The width of the target vector</param>
+            <param name="a">The scalar to load</param>
+        
+| M:Z0.Vectors.vscalar``1(Z0.W256,``0)              | 
+            <summary>
+            Loads a scalar into the first component of a 256-bit vector
+            </summary>
+            <param name="a">The scalar to load</param>
+        
+| M:Z0.Vectors.block``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Allocates and deposits vector content to a data block
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.Vectors.block``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Allocates and deposits vector content to a data block
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.Vectors.block``1(Z0.Vector512{``0})          | 
+            <summary>
+            Allocates and deposits vector content to a data block
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector128{``0},Z0.Block128{``0}@)| 
+            <summary>
+            Stores the source vector to the head of a blocked container
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector128{``0},Z0.Block128{``0}@,System.Int32)| 
+            <summary>
+            Stores the source vector to a specified block in a blocked container
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <param name="block">The 0-based block index at which storage should begin</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector256{``0},Z0.Block256{``0}@)| 
+            <summary>
+            Stores the source vector to a blocked container
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(Z0.Vector512{``0},Z0.Block512{``0}@)| 
+            <summary>
+            Stores the source vector to a blocked container
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector256{``0},Z0.Block256{``0}@,System.Int32)| 
+            <summary>
+            Stores the source vector to a specified block in a blocked container
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <param name="block">The 0-based block index at which storage should begin</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(Z0.Vector512{``0},Z0.Block512{``0}@,System.Int32)| 
+            <summary>
+            Stores the source vector to a specified block in a blocked container
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <param name="block">The 0-based block index at which storage should begin</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector128{``0},``0@,System.Int32)| 
+            <summary>
+            Stores the source vector to a reference cell
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target reference</param>
+            <param name="offset">The target offset</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector256{``0},``0@,System.Int32)| 
+            <summary>
+            Stores the source vector to a reference cell
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target reference</param>
+            <param name="offset">The target offset</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector128{``0},System.Span{``0})| 
+            <summary>
+            Stores vector content to the front of a span
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector256{``0},System.Span{``0})| 
+            <summary>
+            Stores vector content to the front of a span
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector128{``0},System.Span{``0},System.Int32)| 
+            <summary>
+            Stores vector content to a span
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <param name="offset">The target offset at which storage should begin</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(System.Runtime.Intrinsics.Vector256{``0},System.Span{``0},System.Int32)| 
+            <summary>
+            Stores vector content to a span
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <param name="offset">The target offset at which storage should begin</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vstore``1(Z0.Vector512{``0},System.Span{``0},System.Int32)| 
+            <summary>
+            Stores vector content to a span
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target block</param>
+            <param name="offset">The target offset at which storage should begin</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Vectors.vzero``1(Z0.W128,``0)                | 
+            <summary>
+            Returns a 128-bit vector with all bits disabled
+            </summary>
+            <param name="w">The bitness selector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Vectors.vzero``1(Z0.W256,``0)                | 
+            <summary>
+            Returns a 256-bit vector with all bits disabled
+            </summary>
+            <param name="w">The bitness selector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.Store.vload(Z0.Block128{System.Byte}@)       | 
+            <summary>
+            _m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block128{System.SByte}@)      | 
+            <summary>
+            __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block128{System.Int16}@)      | 
+            <summary>
+            __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block128{System.UInt16}@)     | 
+            <summary>
+            __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block128{System.Int32}@)      | 
+            <summary>
+            __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block128{System.UInt32}@)     | 
+            <summary>
+            __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block128{System.Int64}@)      | 
+            <summary>
+            __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly memory reference</param>
+        
+| M:Z0.Store.vload(Z0.Block128{System.UInt64}@)     | 
+            <summary>
+            __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
+            Loads a 128-bit cpu vector from an unaligned memory location
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block256{System.Byte}@)       | 
+            <summary>
+            __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block256{System.SByte}@)      | 
+            <summary>
+            __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block256{System.Int16}@)      | 
+            <summary>
+            __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block256{System.UInt16}@)     | 
+            <summary>
+            __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block256{System.Int32}@)      | 
+            <summary>
+            __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block256{System.UInt32}@)     | 
+            <summary>
+            __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block256{System.Int64}@)      | 
+            <summary>
+            __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vload(Z0.Block256{System.UInt64}@)     | 
+            <summary>
+            __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+            Loads a 256-bit cpu vector from the leading block of a blocked container
+            </summary>
+            <param name="src">A readonly blocked storage container</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.SByte},System.SByte@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Byte},System.Byte@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Int16},System.Int16@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.UInt16},System.UInt16@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Int32},System.Int32@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.UInt32},System.UInt32@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Int64},System.Int64@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.UInt64},System.UInt64@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Single},System.Single@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Double},System.Double@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.SByte},System.SByte@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Byte},System.Byte@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Int16},System.Int16@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.UInt16},System.UInt16@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Int32},System.Int32@)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.UInt32},System.UInt32@)| 
+             <summary>
+             Stores vector content to a memory location
+             </summary>
+             <param name="src">The source vector</param>
+             <param name="dst">The target memory</param>
+            <intrinsic>void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm</intrinsic>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Int64},System.Int64@)| 
+             <summary>
+             Stores vector content to a memory location
+             </summary>
+             <param name="src">The source vector</param>
+             <param name="dst">The target memory</param>
+            <intrinsic>void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm</intrinsic>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.UInt64},System.UInt64@)| 
+             <summary>
+             Stores vector content to a memory location
+             </summary>
+             <param name="src">The source vector</param>
+             <param name="dst">The target memory</param>
+            <intrinsic>void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm</intrinsic>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Single},System.Single@)| 
+             <summary>
+             Stores vector content to a memory location
+             </summary>
+             <param name="src">The source vector</param>
+             <param name="dst">The target memory</param>
+            <intrinsic>void _mm256_storeu_ps (float * mem_addr, __m256 a) MOVUPS m256, ymm</intrinsic>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Double},System.Double@)| 
+             <summary>
+             Stores vector content to a memory location
+             </summary>
+             <param name="src">The source vector</param>
+             <param name="dst">The target memory</param>
+            <intrinsic>void _mm256_storeu_pd (double * mem_addr, __m256d a) MOVUPD m256, ymm</intrinsic>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.SByte},System.SByte@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Byte},System.Byte@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Int16},System.Int16@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.UInt16},System.UInt16@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Int32},System.Int32@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.UInt32},System.UInt32@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Int64},System.Int64@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.UInt64},System.UInt64@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Single},System.Single@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector128{System.Double},System.Double@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.SByte},System.SByte@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Byte},System.Byte@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Int16},System.Int16@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.UInt16},System.UInt16@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Int32},System.Int32@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory location
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.UInt32},System.UInt32@,System.Int32)| 
+             <summary>
+             Stores vector content to a memory location
+             </summary>
+             <param name="src">The source vector</param>
+             <param name="dst">The target memory</param>
+            <intrinsic>void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm</intrinsic>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Int64},System.Int64@,System.Int32)| 
+             <summary>
+             Stores vector content to a memory location
+             </summary>
+             <param name="src">The source vector</param>
+             <param name="dst">The target memory</param>
+            <intrinsic>void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm</intrinsic>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.UInt64},System.UInt64@,System.Int32)| 
+             <summary>
+             Stores vector content to a memory location
+             </summary>
+             <param name="src">The source vector</param>
+             <param name="dst">The target memory</param>
+            <intrinsic>void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm</intrinsic>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Single},System.Single@,System.Int32)| 
+             <summary>
+             Stores vector content to a memory location
+             </summary>
+             <param name="src">The source vector</param>
+             <param name="dst">The target memory</param>
+            <intrinsic>void _mm256_storeu_ps (float * mem_addr, __m256 a) MOVUPS m256, ymm</intrinsic>
+        
+| M:Z0.Store.vsave(System.Runtime.Intrinsics.Vector256{System.Double},System.Double@,System.Int32)| 
+             <summary>
+             Stores vector content to a memory location
+             </summary>
+             <param name="src">The source vector</param>
+             <param name="dst">The target memory</param>
+            <intrinsic>void _mm256_storeu_pd (double * mem_addr, __m256d a) MOVUPD m256, ymm</intrinsic>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector128{System.SByte},System.SByte@)| 
+            <summary>
+            _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector128{System.Byte},System.Byte@)| 
+            <summary>
+            _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector128{System.Int16},System.Int16@)| 
+            <summary>
+            _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector128{System.UInt16},System.UInt16@)| 
+            <summary>
+            _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector128{System.Int32},System.Int32@)| 
+            <summary>
+            _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector128{System.UInt32},System.UInt32@)| 
+            <summary>
+            _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector128{System.Int64},System.Int64@)| 
+            <summary>
+            _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector128{System.UInt64},System.UInt64@)| 
+            <summary>
+            _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector128{System.Single},System.Single@)| 
+            <summary>
+            void _mm_stream_ps (float* mem_addr, __m128 a) MOVNTPS m128, xmm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector128{System.Double},System.Double@)| 
+            <summary>
+            void _mm_stream_pd (double* mem_addr, __m128d a) MOVNTPD m128, xmm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector256{System.SByte},System.SByte@)| 
+            <summary>
+            void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector256{System.Byte},System.Byte@)| 
+            <summary>
+            void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector256{System.Int16},System.Int16@)| 
+            <summary>
+            void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector256{System.UInt16},System.UInt16@)| 
+            <summary>
+            void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector256{System.Int32},System.Int32@)| 
+            <summary>
+            void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector256{System.UInt32},System.UInt32@)| 
+            <summary>
+            void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector256{System.Int64},System.Int64@)| 
+            <summary>
+            void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector256{System.UInt64},System.UInt64@)| 
+            <summary>
+            void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector256{System.Single},System.Single@)| 
+            <summary>
+            void _mm256_stream_ps (float * mem_addr, __m256 a) MOVNTPS m256, ymm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.Store.vstream(System.Runtime.Intrinsics.Vector256{System.Double},System.Double@)| 
+            <summary>
+            void _mm256_stream_pd (double * mem_addr, __m256d a) MOVNTPD m256, ymm
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The storage target</param>
+        
+| M:Z0.VRand.emitter``1(Z0.N128,Z0.IPolyrand,``0)   | 
+            <summary>
+            Creates a 128-bit vectorized emitter predicated an a specified random source
+            </summary>
+            <param name="w">The vector bit width</param>
+            <param name="random">The random source</param>
+            <param name="t">A vector component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRand.emitter``1(Z0.N256,Z0.IPolyrand,``0)   | 
+            <summary>
+            Creates a 256-bit vectorized emitter predicated an a specified random source
+            </summary>
+            <param name="w">The vector bit width</param>
+            <param name="random">The random source</param>
+            <param name="t">A vector component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N128)    | 
+            <summary>
+            Produces a 128-bit cpu vector over random T-cells
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The width selector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N256)    | 
+            <summary>
+            Produces a random 256-bit cpu vector
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.Vec128Kind{``0},Z0.W128)| 
+            <summary>
+            Produces a 128-bit cpu vector over random T-cells
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The width selector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.Vec256Kind{``0},Z0.W256)| 
+            <summary>
+            Produces a random 256-bit cpu vector
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.VectorEmitter``1(Z0.IPolyrand,Z0.N128,``0)| 
+            <summary>
+            Creates a 128-bit vectorized emitter predicated a random source
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector bit width</param>
+            <param name="t">A vector component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.VectorEmitter``1(Z0.IPolyrand,Z0.N256,``0)| 
+            <summary>
+            Creates a 256-bit vectorized emitter predicated a random source
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector bit width</param>
+            <param name="t">A vector component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVectors``1(Z0.IPolyrand,Z0.N128)   | 
+            <summary>
+            Produces a stream of 128-bit cpu vectors over random T-cells
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The width selector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVectors``1(Z0.IPolyrand,Z0.N256)   | 
+            <summary>
+            Produces a stream of 256-bit cpu vectors over random T-cells
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The width selector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N128,Z0.Interval{``0})| 
+            <summary>
+            Produces a 128-bit cpu vector over random T-cells, each bound to a specified common domain
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector</param>
+            <param name="domain">An interval to which component values are constrained</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVectors``1(Z0.IPolyrand,Z0.N128,Z0.Interval{``0})| 
+            <summary>
+            Produces a stream of 128-bit cpu vectors over random T-cells, each bound to a specified common domain
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector</param>
+            <param name="domain">An interval to which component values are constrained</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N128,Z0.Interval{``0},System.Func{``0,System.Boolean})| 
+            <summary>
+            Produces a random 128-bit cpu vector
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector</param>
+            <param name="domain">An interval to which component values are constrained</param>
+            <param name="filter">A domain refinement filter</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N256,Z0.Interval{``0})| 
+            <summary>
+            Produces a 256-bit cpu vector over random T-cells, each bound to a specified common domain
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector</param>
+            <param name="domain">An interval to which component values are constrained</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVectors``1(Z0.IPolyrand,Z0.N256,Z0.Interval{``0})| 
+            <summary>
+            Produces a stream of 256-bit cpu vectors over random T-cells, each bound to a specified common domain
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector</param>
+            <param name="domain">An interval to which component values are constrained</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N256,Z0.Interval{``0},System.Func{``0,System.Boolean})| 
+            <summary>
+            Produces a random 256-bit cpu vector
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector</param>
+            <param name="domain">An interval to which component values are constrained</param>
+            <param name="filter">A domain refinement filter</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N512,Z0.Interval{``0},System.Func{``0,System.Boolean})| 
+            <summary>
+            Produces a random 512-bit cpu vector
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector</param>
+            <param name="domain">An interval to which component values are constrained</param>
+            <param name="filter">A domain refinement filter</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N512,Z0.Interval{``0})| 
+            <summary>
+            Produces a random 512-bit cpu vector
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector</param>
+            <param name="domain">An interval to which vector component values are constrained</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N128,``0)| 
+            <summary>
+            Produces a random 128-bit cpu vector
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector value</param>
+            <param name="t">The component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N256,``0)| 
+            <summary>
+            Produces a random 256-bit cpu vector
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector value</param>
+            <param name="t">The component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VRandX.CpuVector``1(Z0.IPolyrand,Z0.N512,``0)| 
+            <summary>
+            Produces a random 256-bit cpu vector
+            </summary>
+            <param name="random">The random source</param>
+            <param name="w">The vector width selector value</param>
+            <param name="t">The component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| P:Z0.IVariant.DataWidth                           | 
+            <summary>
+            The number of bits that are used to store the enclosed data
+            </summary>
+        
+| P:Z0.IVariant.CellKind                            | 
+            <summary>
+            The numeric data type if unsegmented or, if segmented, the numeric cell kind
+            </summary>
+        
+| P:Z0.IVariant.CellCount                           | 
+            <summary>
+            If covering scalar data, the cell count will always be 1; when blocked or vector data 
+            is enclosed the cell count will vary based on the specific type
+            </summary>
+        
+| P:Z0.IVariant.CellWidth                           | 
+            <summary>
+            If covering scalar data, will specify the width of the scalar type; otherwise,
+            it will specify the width of a vector or block cell
+            </summary>
+        
+| P:Z0.IVariant.Segmented                           | 
+            <summary>
+            For scalar data this bit will always be off; otherwise, it will be on
+            </summary>
+        
+| M:Z0.XTend.Cell``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32)| 
+            <summary>
+            Extracts an index-identified component from the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.XTend.Cell``1(System.Runtime.Intrinsics.Vector128{``0},System.Int32,``0)| 
+            <summary>
+            Sets an index-identified component to a specified value
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <param name="value">The new component value</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.XTend.Cell``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32,``0)| 
+            <summary>
+            Sets an index-identified component to a specified value
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <param name="value">The new component value</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.XTend.Cell``1(System.Runtime.Intrinsics.Vector256{``0},System.Int32)| 
+            <summary>
+            Extracts an index-identified component from the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">The index of the component to extract</param>
+            <typeparam name="T">The primal component type</typeparam>
+        
+| M:Z0.XTend.Length``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Returns the number of source vector components
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.XTend.Length``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Returns the number of source vector components
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.XTend.LoadVector``1(Z0.Block128{``0}@)       | 
+            <summary>
+            Loads a 128-bit vector from the first 128-bit block
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block">The block index</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.LoadVector``1(Z0.Block128{``0}@,System.Int32)| 
+            <summary>
+            Loads a block-identified 128-bit vector
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block">The block index</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.LoadVectors``1(Z0.Block128{``0}@,System.Int32,System.Int32)| 
+            <summary>
+            Loads 2 block-indexed 128-bit vectors
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block1">The block index of the first vector</param>
+            <param name="block2">The block index of the second vector</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.LoadVectors``1(Z0.Block128{``0}@,System.Int32,System.Int32,System.Int32)| 
+            <summary>
+            Loads 3 block-indexed 128-bit vectors
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block1">The block index of the first vector</param>
+            <param name="block2">The block index of the second vector</param>
+            <param name="block3">The block index of the third vector</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.LoadVector``1(Z0.Block256{``0}@)       | 
+            <summary>
+            Loads a 256-bit vector from the first 256-bit block
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.LoadVectors``1(Z0.Block256{``0}@,System.Int32,System.Int32)| 
+            <summary>
+            Loads 2 block-indexed 256-bit vectors
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block1">The block index of the first vector</param>
+            <param name="block2">The block index of the second vector</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.LoadVectors``1(Z0.Block256{``0}@,System.Int32,System.Int32,System.Int32)| 
+            <summary>
+            Loads 3 block-indexed 256-bit vectors
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block1">The block index of the first vector</param>
+            <param name="block2">The block index of the second vector</param>
+            <param name="block3">The block index of the third vector</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.LoadVector``1(Z0.Block512{``0}@)       | 
+            <summary>
+            Loads a 512-bit vector from the first 512-bit block
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block">The block index</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.LoadVector``1(Z0.Block256{``0}@,System.Int32)| 
+            <summary>
+            Loads a 256-bit vector from an index-identified block
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block">The block index</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.LoadVector``1(Z0.Block512{``0}@,System.Int32)| 
+            <summary>
+            Loads 512-bit vector from an index-identified block
+            </summary>
+            <param name="src">The source span</param>
+            <param name="block">The block index</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.LoadVector``1(System.Span{``0},Z0.W128,System.Int32)| 
+            <summary>
+            Loads a 128-bit vector from a span
+            </summary>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element </param>
+        
+| M:Z0.XTend.LoadVector``1(System.Span{``0},Z0.W256,System.Int32)| 
+            <summary>
+            Loads a 256-bit vector from a span
+            </summary>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element </param>
+        
+| M:Z0.XTend.LoadVector``1(System.Span{``0},Z0.W512,System.Int32)| 
+            <summary>
+            Loads a 512-bit vector from a span
+            </summary>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element </param>
+        
+| M:Z0.XTend.LoadVector``1(System.ReadOnlySpan{``0},Z0.W128,System.Int32)| 
+            <summary>
+            Loads a 128-bit vector from a readonly span
+            </summary>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element </param>
+        
+| M:Z0.XTend.LoadVector``1(System.ReadOnlySpan{``0},Z0.W256,System.Int32)| 
+            <summary>
+            Loads a 256-bit vector from a readonly span
+            </summary>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element </param>
+        
+| M:Z0.XTend.LoadVector``1(System.ReadOnlySpan{``0},Z0.W512,System.Int32)| 
+            <summary>
+            Loads a 512-bit vector from a readonly span
+            </summary>
+            <param name="src">The source span</param>
+            <param name="offset">The position of the fist source element </param>
+        
+| M:Z0.XTend.Map``2(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Func{``0,``0,``1})| 
+            <summary>
+            Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
+            </summary>
+            <param name="lhs">The left source vector</param>
+            <param name="rhs">The right source vector</param>
+            <param name="f">The mapping function</param>
+            <typeparam name="S">The source primal type</typeparam>
+            <typeparam name="T">The target primal type</typeparam>
+        
+| M:Z0.XTend.Map``2(System.Runtime.Intrinsics.Vector128{``0},System.Func{``0,``1})| 
+            <summary>
+            Projects a 128-bit source vector into a 128-bit target vector via a mapping function
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="f">The mapping function</param>
+            <typeparam name="S">The source primal type</typeparam>
+            <typeparam name="T">The target primal type</typeparam>
+        
+| M:Z0.XTend.Map``2(System.Runtime.Intrinsics.Vector256{``0},System.Func{``0,``1})| 
+            <summary>
+            Projects a source vector into a target vector via a mapping function
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="f">The mapping function</param>
+            <typeparam name="S">The source primal type</typeparam>
+            <typeparam name="T">The target primal type</typeparam>
+        
+| M:Z0.XTend.Map``2(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Func{``0,``0,``1})| 
+            <summary>
+            Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
+            </summary>
+            <param name="x">The left source vector</param>
+            <param name="y">The right source vector</param>
+            <param name="f">The mapping function</param>
+            <typeparam name="S">The source primal type</typeparam>
+            <typeparam name="T">The target primal type</typeparam>
+        
+| M:Z0.XTend.Merge``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Func{``0,``0})| 
+            <summary>
+            Combines two 128-bit source vectors into a 256-bit target vector via alternating application of a mapping function
+            dst[j] = f(lhs[i])
+            dst[j+1] = f(rhs[i])
+            </summary>
+            <param name="x">The left source vector</param>
+            <param name="y">The right source vector</param>
+            <param name="f">The mapping function</param>
+            <typeparam name="S">The source primal type</typeparam>
+            <typeparam name="T">The target primal type</typeparam>
+        
+| M:Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.Block128{``0}@)| 
+            <summary>
+            Stores vector content to a caller-supplied block
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector128{``0},Z0.Block128{``0}@,System.Int32)| 
+            <summary>
+            Stores vector content to a specified block in a blocked container
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+            <param name="block">The 0-based block index at which storage should begin</param>
+        
+| M:Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector256{``0},Z0.Block256{``0}@)| 
+            <summary>
+            Stores vector content to a caller-supplied block
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.XTend.StoreTo``1(Z0.Vector512{``0},Z0.Block512{``0}@)| 
+            <summary>
+            Stores vector content to a caller-supplied block
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector256{``0},Z0.Block256{``0}@,System.Int32)| 
+            <summary>
+            Stores vector content to a specified block in a blocked container
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+            <param name="block">The 0-based block index at which storage should begin</param>
+        
+| M:Z0.XTend.StoreTo``1(Z0.Vector512{``0},Z0.Block512{``0}@,System.Int32)| 
+            <summary>
+            Stores vector content to a specified block in a blocked container
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+            <param name="block">The 0-based block index at which storage should begin</param>
+        
+| M:Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector128{``0},``0@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory reference
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+            <param name="offset">The target offset</param>
+        
+| M:Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector256{``0},``0@,System.Int32)| 
+            <summary>
+            Stores vector content to a memory reference
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+            <param name="offset">The target offset</param>
+        
+| M:Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector128{``0},System.Span{``0},System.Int32)| 
+            <summary>
+            Stores vector content to a caller-supplied span
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.XTend.StoreTo``1(System.Runtime.Intrinsics.Vector256{``0},System.Span{``0},System.Int32)| 
+            <summary>
+            Stores vector content to a caller-supplied span
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.XTend.StoreTo``1(Z0.Vector512{``0},System.Span{``0},System.Int32)| 
+            <summary>
+            Stores vector content to a caller-supplied span
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target memory</param>
+        
+| M:Z0.XTend.ToBlock``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Allocates and deposits vector content to a data block
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.XTend.ToBlock``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Allocates and deposits vector content to a data block
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.ToBlock``1(Z0.Vector512{``0})          | 
+            <summary>
+            Allocates and deposits vector content to a data block
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The primitive type</typeparam>
+        
+| M:Z0.XTend.ToSpan``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Allocates a span into which vector content is stored
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.XTend.ToSpan``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Allocates and deposits vector content to a span
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        
+| M:Z0.XTend.ToSpan``1(Z0.Vector512{``0})           | 
+            <summary>
+            Allocates and deposits vector content to a span
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The component type</typeparam>
+        

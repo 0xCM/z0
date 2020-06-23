@@ -452,8 +452,8 @@ namespace Z0
         {
             try            
             {  
-                Context.AppPaths.ErrorLogPath.Delete();
-                Context.AppPaths.StandardLogPath.Delete();          
+                Context.AppPaths.TestErrorPath.Delete();
+                Context.AppPaths.AppStandardOutPath.Delete();          
                 
                 Run(false,filters);
 

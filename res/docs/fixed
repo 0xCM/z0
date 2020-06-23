@@ -1,0 +1,1047 @@
+| M:Z0.Fixed.alloc``1                               | 
+            <summary>
+            Creates a fixed-type value of parametric type
+            </summary>
+            <typeparam name="F">The fixed type</typeparam>
+        
+| M:Z0.Fixed.bytes``1(``0@)                         | 
+            <summary>
+            Presents a fixed value as a span of bytes
+            </summary>
+            <param name="src">The fixed source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+        
+| M:Z0.Fixed.byteview``1(``0@)                      | 
+            <summary>
+            Presents a fixed source value as a reaodonly span of bytes
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+        
+| M:Z0.Fixed.cell``2(``0@,System.Int32)             | 
+            <summary>
+            Queries/manipulates a cell within a fixed storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <param name="index">The 0-based type-relative cell index</param>
+            <typeparam name="T">The reference cell type</typeparam>
+        
+| M:Z0.Fixed.cell``1(Z0.Fixed8@,System.Int32)       | 
+            <summary>
+            Queries/manipulates a generic cell within an 8-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <param name="index">The 0-based type-relative cell index</param>
+            <typeparam name="T">The reference cell type</typeparam>
+        
+| M:Z0.Fixed.cell``1(Z0.Fixed16@,System.Int32)      | 
+            <summary>
+            Queries/manipulates a generic cell within a 16-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <param name="index">The 0-based type-relative cell index</param>
+            <typeparam name="T">The reference cell type</typeparam>
+        
+| M:Z0.Fixed.cell``1(Z0.Fixed32@,System.Int32)      | 
+            <summary>
+            Queries/manipulates a generic cell within a 32-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <param name="index">The 0-based type-relative cell index</param>
+            <typeparam name="T">The reference cell type</typeparam>
+        
+| M:Z0.Fixed.cell``1(Z0.Fixed64@,System.Int32)      | 
+            <summary>
+            Queries/manipulates a generic cell within a 64-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <param name="index">The 0-based type-relative cell index</param>
+            <typeparam name="T">The reference cell type</typeparam>
+        
+| M:Z0.Fixed.cell``1(Z0.Fixed128@,System.Int32)     | 
+            <summary>
+            Queries/manipulates a generic cell within a 128-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <param name="index">The 0-based type-relative cell index</param>
+            <typeparam name="T">The reference cell type</typeparam>
+        
+| M:Z0.Fixed.cell``1(Z0.Fixed256@,System.Int32)     | 
+            <summary>
+            Queries/manipulates a generic cell within a 256-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <param name="index">The 0-based type-relative cell index</param>
+            <typeparam name="T">The reference cell type</typeparam>
+        
+| M:Z0.Fixed.deposit``2(``0@,``1@)                  | 
+            <summary>
+            Writes source data to a fixed target which, hopefully, is of sufficient size
+            </summary>
+            <param name="src">The source</param>
+            <param name="dst">The target</param>
+            <typeparam name="T">The source type</typeparam>
+            <typeparam name="F">The fixed target type</typeparam>
+        
+| M:Z0.Fixed.span``1(Z0.Fixed8@)                    | 
+            <summary>
+            Presents an 8-bit value as a single-celled T-parametric span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.span``1(Z0.Fixed16@)                   | 
+            <summary>
+            Presents a 16-bit value as a T-parametric span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.span``1(Z0.Fixed32@)                   | 
+            <summary>
+            Presents a 32-bit value as a T-parametric span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.span``1(Z0.Fixed64@)                   | 
+            <summary>
+            Presents a 64-bit value as a T-parametric span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.span``1(Z0.Fixed128@)                  | 
+            <summary>
+            Presents a 128-bit value as a T-parametric span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.span``1(Z0.Fixed256@)                  | 
+            <summary>
+            Presents a 256-bit value as a T-parametric span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.span``1(Z0.Fixed512@)                  | 
+            <summary>
+            Presents a 256-bit value as a T-parametric span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.from``1(System.Runtime.Intrinsics.Vector128{``0}@)| 
+            <summary>
+            Presents a 128-bit vector as a 128-bit fixed block
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Fixed.from``1(System.Runtime.Intrinsics.Vector256{``0}@)| 
+            <summary>
+            Presents a 256-bit vector as a 256-bit fixed block
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Fixed.from``1(Z0.Vector512{``0}@)            | 
+            <summary>
+            Presents a 512-bit vector as a 512-bit fixed block
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Fixed.head``1(Z0.Fixed8@)                    | 
+            <summary>
+            Returns a generic reference to the leading storage cell of an 8-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <typeparam name="T">The reference cell type, of maximal width=8</typeparam>
+        
+| M:Z0.Fixed.head``1(Z0.Fixed16@)                   | 
+            <summary>
+            Returns a generic reference to the leading storage cell of a 16-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <typeparam name="T">The reference cell type, of maximal width=16</typeparam>
+        
+| M:Z0.Fixed.head``1(Z0.Fixed32@)                   | 
+            <summary>
+            Returns a generic reference to the leading storage cell of a 32-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <typeparam name="T">The reference cell type, of maximal width=32</typeparam>
+        
+| M:Z0.Fixed.head``1(Z0.Fixed64@)                   | 
+            <summary>
+            Returns a generic reference to the leading storage cell of a 64-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <typeparam name="T">The reference cell type, of maximal width=64</typeparam>
+        
+| M:Z0.Fixed.head``1(Z0.Fixed128@)                  | 
+            <summary>
+            Returns a generic reference to the leading storage cell of a 128-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <typeparam name="T">The reference cell type, of maximal width=128</typeparam>
+        
+| M:Z0.Fixed.head``1(Z0.Fixed256@)                  | 
+            <summary>
+            Returns a generic reference to the leading storage cell of a 256-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <typeparam name="T">The reference cell type, of maximal width=256</typeparam>
+        
+| M:Z0.Fixed.head``1(Z0.Fixed512@)                  | 
+            <summary>
+            Returns a generic reference to the leading storage cell of a 512-bit storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <typeparam name="T">The reference cell type, of maximal width=512</typeparam>
+        
+| M:Z0.Fixed.head``2(``0@)                          | 
+            <summary>
+            Returns a generic reference to the leading storage cell of a fixed storage block
+            </summary>
+            <param name="src">The storage block</param>
+            <typeparam name="T">The reference cell type</typeparam>
+        
+| M:Z0.Fixed.deposit``2(``0@,System.Int32,``1@,System.Int32)| 
+            <summary>
+            Writes a specified number of source elements to a fixed target
+            </summary>
+            <param name="src">The source</param>
+            <param name="count">The number of source elements to write</param>
+            <param name="dst">The target</param>
+            <param name="offset">The element-relative offset into the target</param>
+            <typeparam name="S">The source cell type</typeparam>
+        
+| M:Z0.Fixed.vector``1(Z0.Fixed128@)                | 
+            <summary>
+            Loads a 128-bit vector from 128-bit storage block
+            </summary>
+            <param name="src">The source block</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Fixed.vector``1(Z0.Fixed256@)                | 
+            <summary>
+            Loads a 256-bit vector from 256-bit storage block
+            </summary>
+            <param name="src">The source block</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Fixed.vector``1(Z0.Fixed512@)                | 
+            <summary>
+            Loads a 512-bit vector from 512-bit storage block
+            </summary>
+            <param name="src">The source block</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Fixed.vfix``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Initializes a 128-bit value with a 128-bit source vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Fixed.vfix``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Initializes a 256-bit value with a 256-bit source vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Fixed.view``1(Z0.Fixed8@)                    | 
+            <summary>
+            Presents an 8-bit value as a single-celled T-parametric readonly span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.view``1(Z0.Fixed16@)                   | 
+            <summary>
+            Presents a 32-bit value as a T-parametric readonly span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.view``1(Z0.Fixed32@)                   | 
+            <summary>
+            Presents a 32-bit value as a T-parametric readonly span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.view``1(Z0.Fixed64@)                   | 
+            <summary>
+            Presents a 64-bit value as a T-parametric readonly span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.view``1(Z0.Fixed128@)                  | 
+            <summary>
+            Presents a 128-bit value as a T-parametric readonly span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.view``1(Z0.Fixed256@)                  | 
+            <summary>
+            Presents a 256-bit value as a T-parametric readonly span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.Fixed.view``1(Z0.Fixed512@)                  | 
+            <summary>
+            Presents a 512-bit value as a T-parametric readonly span
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="F">The fixed type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        
+| M:Z0.FixedBuffers.alloc``1(System.Byte)           | 
+            <summary>
+            Allocates a bufer sequence over segments of fixed type
+            </summary>
+            <param name="count">The number of buffers in the sequence</param>
+            <typeparam name="F">The buffer segment type</typeparam>
+        
+| M:Z0.FixedBuffers.alloc(Z0.W128,System.Byte)      | 
+            <summary>
+            Allocates a bufer sequence over segments of width = 128 bits / 16 bytes
+            </summary>
+            <param name="count">The number of buffers in the sequence</param>
+            <typeparam name="F">The buffer segment type</typeparam>
+        
+| M:Z0.FixedBuffers.alloc(Z0.W256,System.Byte)      | 
+            <summary>
+            Allocates a bufer sequence over segments of width = 256 bits / 32 bytes
+            </summary>
+            <param name="count">The number of buffers in the sequence</param>
+            <typeparam name="F">The buffer segment type</typeparam>
+        
+| M:Z0.FixedBuffers.alloc(Z0.W512,System.Byte)      | 
+            <summary>
+            Allocates a bufer sequence over segments of width = 512 bits / 64 bytes
+            </summary>
+            <param name="count">The number of buffers in the sequence</param>
+            <typeparam name="F">The buffer segment type</typeparam>
+        
+| M:Z0.ITestAction.TestAction(System.Action,System.String)| 
+            <summary>
+            Captures the outcome of an action invocation, identified by a supplied label
+            </summary>
+            <param name="f">The action to invoke</param>
+            <param name="label">The case label</param>
+        
+| M:Z0.ITestAction.TestAction``1(System.Action{``0},``0,System.String)| 
+            <summary>
+            Captures the outcome of an action invocation, identified by a supplied label
+            </summary>
+            <param name="f">The action to invoke</param>
+            <param name="label">The case label</param>
+        
+| M:Z0.ITestAction.TestAction``1(System.Action,System.String)| 
+            <summary>
+            Captures the outcome of action invocation, identified by a parametrically-specialized label
+            </summary>
+            <param name="f">The action to invoke</param>
+            <param name="label">The case label to specialize</param>
+            <typeparam name="T">The label specialization type</typeparam>
+        
+| M:Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp8,Z0.OpIdentity,Z0.UnaryOp8,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 8-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp16,Z0.OpIdentity,Z0.UnaryOp16,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 16-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp32,Z0.OpIdentity,Z0.UnaryOp32,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp64,Z0.OpIdentity,Z0.UnaryOp64,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 64-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp128,Z0.OpIdentity,Z0.UnaryOp128,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestUnaryFixedMatch.Match(Z0.UnaryOp256,Z0.OpIdentity,Z0.UnaryOp256,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp8,Z0.OpIdentity,Z0.BinaryOp8,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 8-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp16,Z0.OpIdentity,Z0.BinaryOp16,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 16-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp32,Z0.OpIdentity,Z0.BinaryOp32,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp64,Z0.OpIdentity,Z0.BinaryOp64,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 64-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp128,Z0.OpIdentity,Z0.BinaryOp128,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp256,Z0.OpIdentity,Z0.BinaryOp256,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp8,Z0.OpIdentity,Z0.BinaryOp8,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 8-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp16,Z0.OpIdentity,Z0.BinaryOp16,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 16-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp32,Z0.OpIdentity,Z0.BinaryOp32,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp64,Z0.OpIdentity,Z0.BinaryOp64,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 64-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp128,Z0.OpIdentity,Z0.BinaryOp128,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.ITestFixedBinaryOp.Match(Z0.BinaryOp256,Z0.OpIdentity,Z0.BinaryOp256,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.FixedOps.apply``1(Z0.UnaryOp128,System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Evaluates a 128-bit unary operator over a vector
+            </summary>
+            <param name="f">The operator</param>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.FixedOps.apply``1(Z0.UnaryOp256,System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Evaluates a 256-bit unary operator over a vector
+            </summary>
+            <param name="f">The operator</param>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.FixedOps.apply``1(Z0.UnaryOp512,Z0.Vector512{``0}@)| 
+            <summary>
+            Evaluates a 512-bit unary operator over a vector
+            </summary>
+            <param name="f">The operator</param>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.FixedOps.apply``1(Z0.BinaryOp128,System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Evaluates a 128-bit binary operator over a pair of vectors
+            </summary>
+            <param name="f">The operator</param>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.FixedOps.apply``1(Z0.BinaryOp256,System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Evaluates a 256-bit binary operator over a pair of vectors
+            </summary>
+            <param name="f">The operator</param>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.FixedOps.apply``1(Z0.BinaryOp512,Z0.Vector512{``0},Z0.Vector512{``0})| 
+            <summary>
+            Evaluates a 512-bit binary operator over a pair of vectors
+            </summary>
+            <param name="f">The operator</param>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.FixedOps.fix``1(System.Func{``0,``0},Z0.NumericKinds.U8)| 
+            <summary>
+            Creates a fixed 8-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.fix``1(System.Func{``0,``0},Z0.NumericKinds.U16)| 
+            <summary>
+            Creates a fixed 16-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.fix``1(System.Func{``0,``0},Z0.NumericKinds.U32)| 
+            <summary>
+            Creates a fixed 32-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.fix``1(System.Func{``0,``0},Z0.NumericKinds.U64)| 
+            <summary>
+            Creates a fixed 64-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.fix``1(System.Func{``0,``0,``0},Z0.NumericKinds.U8)| 
+            <summary>
+            Creates a fixed 16-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.fix``1(System.Func{``0,``0,``0},Z0.NumericKinds.U16)| 
+            <summary>
+            Creates a fixed 16-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.fix``1(System.Func{``0,``0,``0},Z0.NumericKinds.U32)| 
+            <summary>
+            Creates a fixed 32-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.fix``1(System.Func{``0,``0,``0},Z0.NumericKinds.U64)| 
+            <summary>
+            Creates a fixed 64-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.fix``2(Z0.UnaryOp{``1})             | 
+            <summary>
+            Manufactures a fixed-parametric unary operator from T-parametric unary operator
+            </summary>
+            <param name="f">The source operator</param>
+            <typeparam name="F">The target operand type</typeparam>
+            <typeparam name="T">The source operand type</typeparam>
+        
+| M:Z0.FixedOps.fix``2(Z0.BinaryOp{``1})            | 
+            <summary>
+            Manufactures a fixed-parametric binary operator from T-parametric binary operator
+            </summary>
+            <param name="f">The source operator</param>
+            <typeparam name="F">The target operand type</typeparam>
+            <typeparam name="T">The source operand type</typeparam>
+        
+| M:Z0.FixedOps.unfix``2(Z0.UnaryOp{``0})           | 
+            <summary>
+            Manufactures a T-parametric unary operator from a fixed-parametric unary operator
+            </summary>
+            <param name="f">The source operator</param>
+            <typeparam name="F">The source operand type</typeparam>
+            <typeparam name="T">The target operand type</typeparam>
+        
+| M:Z0.FixedOps.unfix``2(Z0.BinaryOp{``0})          | 
+            <summary>
+            Manufactures a T-parametric binary operator from a fixed-parametric binary operator
+            </summary>
+            <param name="f">The source operator</param>
+            <typeparam name="F">The source operand type</typeparam>
+            <typeparam name="T">The target operand type</typeparam>
+        
+| M:Z0.FixedOps.vfix``1(System.Func{System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0}})| 
+            <summary>
+            Creates a fixed 128-bit unary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.vfix``1(System.Func{System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0}})| 
+            <summary>
+            Creates a fixed 256-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.vfix``1(System.Func{System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0}})| 
+            <summary>
+            Creates a fixed 128-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.FixedOps.vfix``1(System.Func{System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0}})| 
+            <summary>
+            Creates a fixed 256-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.XRng.FixedStream``1(Z0.IPolyrand)            | 
+            <summary>
+            Creates a stream of fixed values
+            </summary>
+            <param name="random">The random source</param>
+            <typeparam name="F">The fixed type</typeparam>
+        
+| M:Z0.XRng.NextPair``1(Z0.IPolyrand,``0)           | 
+            <summary>
+            Produces the next pair of random primal values
+            </summary>
+            <param name="random">The random source</param>
+            <param name="a">The first element in the pair</param>
+            <param name="t">A primal type representative</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.XRng.NextPair``1(Z0.IPolyrand,``0,``0)       | 
+            <summary>
+            Produces the next pair of random primal values within a specified range
+            </summary>
+            <param name="random">The random source</param>
+            <param name="min">The inclusive minimum value</param>
+            <param name="max">The exclusive maximum value</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.XRng.NextTriple``1(Z0.IPolyrand,``0)         | 
+            <summary>
+            Produces the next triple of random primal values
+            </summary>
+            <param name="random">The random source</param>
+            <param name="a">The first element in the pair</param>
+            <param name="t">A primal type representative</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.XRng.NextTriple``1(Z0.IPolyrand,``0,``0)     | 
+            <summary>
+            Produces the next triple of random primal values within a specified range
+            </summary>
+            <param name="random">The random source</param>
+            <param name="min">The inclusive minimum value</param>
+            <param name="max">The exclusive maximum value</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.XRng.NextQuad``1(Z0.IPolyrand,``0)           | 
+            <summary>
+            Produces the next triple of random primal values
+            </summary>
+            <param name="random">The random source</param>
+            <param name="a">The first element in the pair</param>
+            <param name="t">A primal type representative</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.XRng.NextQuad``1(Z0.IPolyrand,``0,``0)       | 
+            <summary>
+            Produces the next triple of random primal values within a specified range
+            </summary>
+            <param name="random">The random source</param>
+            <param name="min">The inclusive minimum value</param>
+            <param name="max">The exclusive maximum value</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.XTend.ToFixed``1(System.Runtime.Intrinsics.Vector128{``0}@)| 
+            <summary>
+            Presents a 128-bit vector as a 128-bit fixed block
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.XTend.ToFixed``1(System.Runtime.Intrinsics.Vector256{``0}@)| 
+            <summary>
+            Presents a 256-bit vector as a 256-bit fixed block
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.XTend.ToFixed``1(Z0.Vector512{``0}@)         | 
+            <summary>
+            Presents a 512-bit vector as a 512-bit fixed block
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.XTend.ToFixed``1(System.Func{System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0}})| 
+            <summary>
+            Creates a fixed 128-bit unary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.XTend.ToFixed``1(System.Func{System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0}})| 
+            <summary>
+            Creates a fixed 128-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.XTend.ToFixed``1(System.Func{System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0}})| 
+            <summary>
+            Creates a fixed 256-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| M:Z0.XTend.ToFixed``1(System.Func{System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0}})| 
+            <summary>
+            Creates a fixed 256-bit binary operator from caller-supplied delegate
+            </summary>
+            <param name="f">The source delegate</param>
+        
+| P:Z0.FixedOpKinds.BinaryOp8                       | 
+            <summary>
+            Specifies a fixed binary operator defined over 8-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryOp16                      | 
+            <summary>
+            Specifies a fixed binary operator defined over 16-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryOp32                      | 
+            <summary>
+            Specifies a fixed binary operator defined over 32-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryOp64                      | 
+            <summary>
+            Specifies a fixed binary operator defined over 64-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryOp128                     | 
+            <summary>
+            Specifies a fixed binary operator defined over 128-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryOp256                     | 
+            <summary>
+            Specifies a fixed binary operator defined over 256-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryOp512                     | 
+            <summary>
+            Specifies a fixed binary operator defined over 512-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryPredicate8                | 
+            <summary>
+            Specifies a fixed binary predicate defined over 8-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryPredicate16               | 
+            <summary>
+            Specifies a fixed binary predicate defined over 16-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryPredicate32               | 
+            <summary>
+            Specifies a fixed binary predicate defined over 32-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryPredicate64               | 
+            <summary>
+            Specifies a fixed binary predicate defined over 64-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryPredicate128              | 
+            <summary>
+            Specifies a fixed binary predicate defined over 128-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryPredicate256              | 
+            <summary>
+            Specifies a fixed binary predicate defined over 256-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.BinaryPredicate512              | 
+            <summary>
+            Specifies a fixed binary predicate defined over 512-bit operands
+            </summary>
+        
+| P:Z0.FixedOpKinds.Emitter8                        | 
+            <summary>
+            Specifies a fixed emitter that produces 8-bit values
+            </summary>
+        
+| P:Z0.FixedOpKinds.Emitter16                       | 
+            <summary>
+            Specifies a fixed emitter that produces 16-bit values
+            </summary>
+        
+| P:Z0.FixedOpKinds.Emitter32                       | 
+            <summary>
+            Specifies a fixed emitter that produces 32-bit values
+            </summary>
+        
+| P:Z0.FixedOpKinds.Emitter64                       | 
+            <summary>
+            Specifies a fixed emitter that produces 64-bit values
+            </summary>
+        
+| P:Z0.FixedOpKinds.Emitter128                      | 
+            <summary>
+            Specifies a fixed emitter that produces 128-bit values
+            </summary>
+        
+| P:Z0.FixedOpKinds.Emitter256                      | 
+            <summary>
+            Specifies a fixed emitter that produces 256-bit values
+            </summary>
+        
+| P:Z0.FixedOpKinds.Emitter512                      | 
+            <summary>
+            Specifies a fixed emitter that produces 512-bit values
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryOp8                        | 
+            <summary>
+            Specifies a fixed unary operator defined over an 8-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryOp16                       | 
+            <summary>
+            Specifies a fixed unary operator defined over a 16-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryOp32                       | 
+            <summary>
+            Specifies a fixed unary operator defined over a 32-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryOp64                       | 
+            <summary>
+            Specifies a fixed unary operator defined over a 64-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryOp128                      | 
+            <summary>
+            Specifies a fixed unary operator defined over a 128-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryOp256                      | 
+            <summary>
+            Specifies a fixed unary operator defined over a 256-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryOp512                      | 
+            <summary>
+            Specifies a fixed unary operator defined over a 512-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryPredicate8                 | 
+            <summary>
+            Specifies a fixed unary predicate defined over an 8-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryPredicate16                | 
+            <summary>
+            Specifies a fixed unary predicate defined over a 16-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryPredicate32                | 
+            <summary>
+            Specifies a fixed unary predicate defined over a 32-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryPredicate64                | 
+            <summary>
+            Specifies a fixed unary predicate defined over a 64-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryPredicate128               | 
+            <summary>
+            Specifies a fixed unary predicate defined over a 128-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryPredicate256               | 
+            <summary>
+            Specifies a fixed unary predicate defined over a 256-bit operand
+            </summary>
+        
+| P:Z0.FixedOpKinds.UnaryPredicate512               | 
+            <summary>
+            Specifies a fixed unary predicate defined over a 512-bit operand
+            </summary>
+        
+| T:Z0.IFixedOpKind                                 | 
+            <summary>
+            Characterizes a fixed operator descriptor which both characterizes and describes 
+            an operator defined over operands of fixed-width
+            </summary>
+        
+| P:Z0.IFixedOpKind.OperandWidth                    | 
+            <summary>
+            The operand width
+            </summary>
+        
+| P:Z0.IFixedOpKind.OperandType                     | 
+            <summary>
+            The fixed operand type
+            </summary>
+        
+| P:Z0.IFixedOpKind.OperatorType                    | 
+            <summary>
+            The fixed delegate type
+            </summary>
+        
+| T:Z0.IFixedOpKind`2                               | 
+            <summary>
+            Characterizes a width-parametric fixed operator descriptor which both characterizes and describes
+            an operator defined over operands of fixed-width
+            </summary>
+            <typeparam name="W">The operand width</typeparam>
+        
+| T:Z0.IFixedOpKind`3                               | 
+            <summary>
+            Characterizes a width, operand and operator-parametric descriptor which both characterizes and describes
+            an operator defined over operands of fixed-width
+            </summary>
+            <typeparam name="W">The operand width</typeparam>
+            <typeparam name="T">The operand type</typeparam>
+            <typeparam name="D">The operator type</typeparam>
+        
+| P:Z0.FixedOpKind.OperandWidth                     | 
+            <summary>
+            The operand width
+            </summary>
+        
+| P:Z0.FixedOpKind.OperandType                      | 
+            <summary>
+            The fixed operand type
+            </summary>
+        
+| P:Z0.FixedOpKind.OperatorType                     | 
+            <summary>
+            The fixed delegate type
+            </summary>
+        
+| P:Z0.FixedOpKind`2.OperandType                    | 
+            <summary>
+            The fixed operand type
+            </summary>
+        
+| P:Z0.FixedOpKind`2.OperatorType                   | 
+            <summary>
+            The fixed delegate type
+            </summary>
+        
+| P:Z0.FixedOpKind`2.OperandWidth                   | 
+            <summary>
+            The operand width
+            </summary>
+        
+| T:Z0.FixedOpKind`3                                | 
+            <summary>
+            Classifies and describes operations defined over fixed operands
+            </summary>
+            <typeparam name="W">The operand width</typeparam>
+            <typeparam name="T">The operand type</typeparam>
+            <typeparam name="D">The operator type</typeparam>
+        
+| F:Z0.FixedDelegate.Id                             | 
+            <summary>
+            The operation identity
+            </summary>
+        

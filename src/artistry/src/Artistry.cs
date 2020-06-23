@@ -35,7 +35,7 @@ namespace Z0
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
 
         IAsmContext CreateAsmContext()
-            => AsmContext.Create(Context.Settings, Context.Messaging, Api, AppPaths.AppCapturePath);
+            => AsmContext.Create(Context.Settings, Context.Messaging, Api, AppPaths.AppCaptureDir);
         
         IArtistryContext CreateArtistryContext(IAsmContext root, PartId[] code)
             => ArtistryContext.Create(root, code);

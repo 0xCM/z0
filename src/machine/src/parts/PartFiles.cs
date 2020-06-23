@@ -37,13 +37,13 @@ namespace Z0
         
 
         IEnumerable<FilePath> ParseFilePaths
-                => CaptureArchive(AppPaths.AppCapturePath).ParseFiles;
+                => CaptureArchive(AppPaths.AppCaptureDir).ParseFiles;
 
         IEnumerable<FilePath> AsmFilePaths
-                => CaptureArchive(AppPaths.AppCapturePath).AsmFiles;
+                => CaptureArchive(AppPaths.AppCaptureDir).AsmFiles;
 
         IEnumerable<FilePath> HexFilePaths
-                => CaptureArchive(AppPaths.AppCapturePath).HexFiles;
+                => CaptureArchive(AppPaths.AppCaptureDir).HexFiles;
 
         public Dictionary<PartId,PartFile[]> ParseFiles(params PartId[] parts)
             => SelectFiles(PartFileKind.Parsed, ParseFilePaths, parts);

@@ -1,0 +1,169 @@
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.MemoryOperand)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.InstructionInfo)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.UsedMemory)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.UsedRegister)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.OpAccess)  | 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.Code)      | 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.CodeSize)  | 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.ConditionCode)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.CpuidFeature)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.EncodingKind)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.FlowControl)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.MandatoryPrefix)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.MemorySize)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.Mnemonic)  | 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.OpCodeOperandKind)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.OpCodeTableKind)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.OpKind)    | 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.Register)  | 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.RflagsBits)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.RoundingControl)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceConversion.Thaw(Iced.Intel.TupleType) | 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceExtractors.OpcodeInfo(Iced.Intel.OpCodeInfo)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.IceExtractors.Inxs(Iced.Intel.Instruction,System.String)| 
+            <summary>
+            Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+            </summary>
+            <param name="src">The iced source value</param>
+        
+| M:Z0.Asm.TAsmWorkflows.CaptureWorkflow(Z0.TCaptureArchive)| 
+            <summary>
+            Creates a default capture worklfow
+            </summary>
+            <param name="archive">The archive to target</param>
+        
+| M:Z0.Asm.TAsmWorkflows.CaptureWorkflow(Z0.Asm.IAsmFunctionDecoder,Z0.Asm.IAsmFormatter,Z0.TCaptureArchive)| 
+            <summary>
+            Creates a capture workflow predicated on caller-supplied services
+            </summary>
+            <param name="decoder">The decoder to use</param>
+            <param name="formatter">The formatter to use</param>
+            <param name="archive">The archive to target</param>
+        
+| M:Z0.Asm.TAsmWorkflows.ImmEmissionWorkflow(Z0.IAppMsgSink,Z0.IApiSet,Z0.FolderPath)| 
+            <summary>
+            Creates an imm emission workflow using default decoding and formatting servcies
+            </summary>
+            <param name="sink">The event message sink</param>
+            <param name="api">The api set available to the workflow</param>
+            <param name="dst">The emission output directory</param>
+        
+| M:Z0.ITestDynamicVectors.Match``1(Z0.BinaryOp{System.Runtime.Intrinsics.Vector128{``0}},Z0.BinaryOp128,Z0.OpIdentity)| 
+            <summary>
+            Verifies that two 128-bit vectorized binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator, considered as a basline</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator, considered as the operation under test</param>
+            <param name="gId">The identity of the second operator</param>
+        

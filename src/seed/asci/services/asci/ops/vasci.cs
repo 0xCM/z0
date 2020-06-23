@@ -43,17 +43,5 @@ namespace Z0
                 seek(ref dst, i) = skip(src, i);            
             return target;
         }
-
-        /// <summary>
-        /// Loads 16 asci symbols beginning at a specified index
-        /// </summary>
-        /// <param name="index">The index of the first code</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vsym(int index)
-        {
-            ref readonly var src = ref head(AsciStrings.charbytes(n0));         
-            return SymBits.vmove8x16(src);
-        }
-
     }
 }

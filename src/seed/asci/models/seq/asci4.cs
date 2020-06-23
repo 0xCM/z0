@@ -10,72 +10,71 @@ namespace Z0
     using static Konst;
 
     using N = N4;    
+    using W = W32;
+    using A = asci4;
+    using S = System.UInt32;
 
     /// <summary>
     /// Defines an asci code sequence of length 4
     /// </summary>
-    public readonly struct asci4 : IAsciSequence<asci4,N>
+    public readonly struct asci4 : IAsciSequence<A,N>
     {        
-        public static asci4 Blank => new asci4(0x20202020);
-
-        public static asci4 Null => new asci4(0);
-
-        public const int Size = 4;
-
-        static N n => default;
-        
-        internal readonly uint Storage;
+        internal readonly S Storage;
 
         [MethodImpl(Inline)]
-        public static asci4 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci4(Root.head(Root.cast<AsciCharCode,uint>(src)));
+        public static implicit operator A(string src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator asci4(string src)
-            => new asci4(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(asci4 src)
+        public static implicit operator string(A src)
             => src.Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(asci4 src)
+        public static implicit operator ReadOnlySpan<byte>(A src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(asci4 src)
+        public static implicit operator ReadOnlySpan<char>(A src)
             => src.Decoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator asci4(ushort src)
-            => new asci4(src);
+        public static implicit operator A(ushort src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator asci4(uint src)
-            => new asci4(src);
+        public static implicit operator A(uint src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator byte(asci4 src)
+        public static explicit operator byte(A src)
             => (byte)src.Storage;
 
         [MethodImpl(Inline)]
-        public static explicit operator ushort(asci4 src)
+        public static explicit operator ushort(A src)
             => (ushort)src.Storage;
 
         [MethodImpl(Inline)]
-        public static explicit operator uint(asci4 src)
+        public static explicit operator uint(A src)
             => src.Storage;
 
         [MethodImpl(Inline)]
-        public asci4(uint src)
-        {
-            Storage = src;
-        }
+        public static bool operator ==(A a, A b)
+            => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public asci4(string src)
+        public static bool operator !=(A a, A b)
+            => !a.Equals(b);
+
+        public bool IsBlank
         {
-            Storage = asci.encode(n,src).Storage;
+            [MethodImpl(Inline)]
+            get => IsNull || Equals(Spaced);
+        }
+
+        public bool IsNull
+        {
+            [MethodImpl(Inline)]
+            get => Equals(Null);
         }
 
         public bool IsEmpty
@@ -90,7 +89,7 @@ namespace Z0
             get => Storage != 0;
         }
 
-        public asci4 Zero
+        public A Zero
         {
             [MethodImpl(Inline)]
             get => Null;
@@ -102,7 +101,7 @@ namespace Z0
             get => asci.length(this);
         }
         
-        public int MaxLength
+        public int Capacity
         {
             [MethodImpl(Inline)]
             get => Size;
@@ -127,11 +126,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(asci4 src)
-            => Storage == src.Storage;
+        public bool Equals(A src)
+            => Storage.Equals(src.Storage);
 
         public override bool Equals(object src)
-            => src is asci4 j && Equals(j);
+            => src is A j && Equals(j);
 
         public override int GetHashCode()
             => Storage.GetHashCode();
@@ -143,12 +142,33 @@ namespace Z0
         public override string ToString()
             => Text;
 
-        [MethodImpl(Inline)]
-        public static bool operator ==(asci4 a, asci4 b)
-            => a.Equals(b);
+        public static A Null 
+        {
+            [MethodImpl(Inline)]
+            get => new A(default(S));
+        }
+
+        public static A Spaced 
+        {
+            [MethodImpl(Inline)]
+            get => asci.init(n);
+        }
+
+        public const int Size = 4;
+
+        static N n => default;
+        
 
         [MethodImpl(Inline)]
-        public static bool operator !=(asci4 a, asci4 b)
-            => !a.Equals(b);
+        public asci4(S src)
+        {
+            Storage = src;
+        }
+
+        [MethodImpl(Inline)]
+        public asci4(string src)
+        {
+            Storage = asci.encode(n,src).Storage;
+        }
     }
 }

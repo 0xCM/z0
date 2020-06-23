@@ -9,49 +9,58 @@ namespace Z0
 
     using static Konst;
 
-
     using N = N2;
+    using W = W16;
+    using A = asci2;
+    using S = System.UInt16;
 
     /// <summary>
     /// Defines an asci code sequence of length 2
     /// </summary>
-    public readonly struct asci2 : IAsciSequence<asci2,N>
+    public readonly struct asci2 : IAsciSequence<A,N>
     {
-        public static asci2 Blank => new asci2(0x2020);
-
-        public static asci2 Null => new asci2(0);
-
-        public const int Size = 2;
-
-        internal readonly ushort Storage;
+        internal readonly S Storage;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(asci2 src)
+        public static implicit operator ReadOnlySpan<byte>(A src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(asci2 src)
+        public static implicit operator ReadOnlySpan<char>(A src)
             => src.Decoded;
 
         [MethodImpl(Inline)]
-        public static asci2 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci2(Root.head(Root.cast<AsciCharCode,ushort>(src)));
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(asci2 src)
+        public static implicit operator string(A src)
             => src.Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator asci2(ushort src)
-            => new asci2(src);
+        public static implicit operator A(S src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public asci2(ushort src)
+        public static bool operator ==(A a, A b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(A a, A b)
+            => !a.Equals(b);
+        
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(A src)
+            => src.Storage;                    
+
+        public bool IsBlank
         {
-            Storage = src;
+            [MethodImpl(Inline)]
+            get => IsNull || Equals(Spaced);
         }
-        
-        
+
+        public bool IsNull
+        {
+            [MethodImpl(Inline)]
+            get => Equals(Null);
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -63,7 +72,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => !Null.Equals(this);
         }
-        public asci2 Zero
+        public A Zero
         {
             [MethodImpl(Inline)]
             get => Null;
@@ -75,7 +84,7 @@ namespace Z0
             get => asci.length(this);
         }
 
-        public int MaxLength
+        public int Capacity
         {
             [MethodImpl(Inline)]
             get => Size;
@@ -100,11 +109,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(asci2 src)
+        public bool Equals(A src)
             => Storage == src.Storage;
 
         public override bool Equals(object src)
-            => src is asci2 x && Equals(x);
+            => src is A x && Equals(x);
 
         public override int GetHashCode()
             => Storage.GetHashCode();
@@ -116,16 +125,29 @@ namespace Z0
         public override string ToString()
             => Text;
 
-        [MethodImpl(Inline)]
-        public static bool operator ==(asci2 a, asci2 b)
-            => a.Equals(b);
+
+        public const int Size = 2;
+
+        public static A Null 
+        {
+            [MethodImpl(Inline)]
+            get => new A(default(S));
+        }
+
+        public static A Spaced 
+        {
+            [MethodImpl(Inline)]
+            get => asci.init(n);
+        }
+
+        static N n => default;
+
+        static W w => default;
 
         [MethodImpl(Inline)]
-        public static bool operator !=(asci2 a, asci2 b)
-            => !a.Equals(b);
-        
-        [MethodImpl(Inline)]
-        public static implicit operator ushort(asci2 src)
-            => src.Storage;    
+        public asci2(S src)
+        {
+            Storage = src;
+        }
     }
 }

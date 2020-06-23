@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Typed;
 
     public readonly struct AsciTestCase02 : ITestCase<AsciTestCase02>
     {
@@ -17,12 +18,12 @@ namespace Z0
         AsciTestCase02(sbyte c0)
         {
             C0 = (AsciCharCode)c0;
-            A2 = asci2.From(asci.codes(c0,2));
-            A4 = asci4.From(asci.codes(c0,4));
-            A8 = asci8.From(asci.codes(c0,8));
-            A16 = asci16.From(asci.codes(c0,16));
-            A32 = asci32.From(asci.codes(c0,32));
-            A64 = asci64.From(asci.codes(c0,64));
+            A2 = asci.init(n2, asci.codes(c0,2));
+            A4 = asci.init(n4, asci.codes(c0,4));
+            A8 = asci.init(n8, asci.codes(c0,8));
+            A16 = asci.init(n16, asci.codes(c0,16));
+            A32 = asci.init(n32, asci.codes(c0,32));
+            A64 = asci.init(n64, asci.codes(c0,64));
         }
 
         public readonly AsciCharCode C0;

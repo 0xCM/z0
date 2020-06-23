@@ -1,0 +1,2305 @@
+| M:Z0.XTend.BoxedZero(Z0.NumericKind)              | 
+            <summary>
+            Returns 0 in a box
+            </summary>
+            <param name="kind">The numeric kind of 0 to be put into the box</param>
+        
+| M:Z0.XTend.Box``1(Z0.NumericKind,``0)             | 
+            <summary>
+            Puts a value of any numeric kind into a box of any numeric kind
+            </summary>
+            <param name="dst">The target box kind</param>
+            <param name="src">The source value</param>
+            <typeparam name="T">The source value type</typeparam>
+        
+| M:Z0.XTend.Box``1(``0)                            | 
+            <summary>
+            Puts an enum value into a (numeric) box
+            </summary>
+            <param name="e">The enumeration value</param>
+            <typeparam name="E">The enum type</typeparam>
+        
+| M:Z0.BitSet.uint2(System.Byte)                    | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint2(System.SByte)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint2(System.UInt16)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint2(System.Int16)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint2(System.Int32)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint2(System.UInt32)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint2(System.Int64)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint2(System.UInt64)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint2(Z0.bit,Z0.bit,Z0.bit)           | 
+            <summary>
+            Constructs a uint2 value from a sequence of bits ranging from low to high
+            </summary>
+            <param name="x0">The first/least bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x1">The second bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
+        
+| M:Z0.BitSet.uint4(System.Byte)                    | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint4(System.SByte)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint4(System.UInt16)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint4(System.Int16)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint4(System.Int32)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint4(System.UInt32)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint4(System.Int64)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint4(System.UInt64)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint4(Z0.bit,Z0.bit,Z0.bit,Z0.bit)    | 
+            <summary>
+            Constructs a uint4 value from a sequence of bits ranging from low to high
+            </summary>
+            <param name="x0">The first/least bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x1">The second bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
+        
+| M:Z0.BitSet.uint5(System.Byte)                    | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint5(System.SByte)                   | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint5(System.UInt16)                  | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint5(System.Int16)                   | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint5(System.Int32)                   | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint5(System.UInt32)                  | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint5(System.Int64)                   | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint5(System.UInt64)                  | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint5(Z0.bit,Z0.bit,Z0.bit,Z0.bit,Z0.bit)| 
+            <summary>
+            Constructs a uint5 value from a sequence of bits ranging from low to high
+            </summary>
+            <param name="x0">The first/least bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x1">The second bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
+        
+| M:Z0.BitSet.uint6(System.Byte)                    | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint6(System.SByte)                   | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint6(System.UInt16)                  | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint6(System.Int16)                   | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint6(System.Int32)                   | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint6(System.UInt32)                  | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint6(System.Int64)                   | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint6(System.UInt64)                  | 
+            <summary>
+            Creates a 5-bit usigned integer from the least 5 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint6(Z0.bit,Z0.bit,Z0.bit,Z0.bit,Z0.bit)| 
+            <summary>
+            Constructs a uint6 value from a sequence of bits ranging from low to high
+            </summary>
+            <param name="x0">The first/least bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x1">The second bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
+        
+| M:Z0.BitSet.uint1(System.Byte)                    | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint1(System.SByte)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint1(System.UInt16)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint1(System.Int16)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint1(System.Int32)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint1(System.UInt32)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint1(System.Int64)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint1(System.UInt64)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint3(System.Byte)                    | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint3(System.SByte)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint3(System.UInt16)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint3(System.Int16)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint3(System.Int32)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint3(System.UInt32)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint3(System.Int64)                   | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint3(System.UInt64)                  | 
+            <summary>
+            Creates a 4-bit usigned integer from the least 4 bits of the source
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.BitSet.uint3(Z0.bit,Z0.bit,Z0.bit)           | 
+            <summary>
+            Constructs a uint3 value from a sequence of bits ranging from low to high
+            </summary>
+            <param name="x0">The first/least bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x1">The second bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
+            <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
+        
+| M:Z0.BitSet.extend(Z0.duet,Z0.W3)                 | 
+            <summary>
+            Promotes a duet to a triad
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+        
+| M:Z0.BitSet.extend(Z0.duet,Z0.W3,Z0.N1)           | 
+            <summary>
+            Promotes a duet to a triad and shifts the promoted value 1 bit to the left
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+            <param name="n">The number of bits to left-shift</param>
+        
+| M:Z0.BitSet.extend(Z0.duet,Z0.W4)                 | 
+            <summary>
+            Promotes a duet to a quartet
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+        
+| M:Z0.BitSet.extend(Z0.duet,Z0.W5)                 | 
+            <summary>
+            Promotes a duet to a quintet
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+        
+| M:Z0.BitSet.extend(Z0.duet,Z0.W6)                 | 
+            <summary>
+            Promotes a duet to a sextet
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+        
+| M:Z0.BitSet.extend(Z0.duet,Z0.W8)                 | 
+            <summary>
+            Promotes a duet to an octet
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+        
+| M:Z0.BitSet.extend(Z0.duet,Z0.W8,Z0.N2)           | 
+            <summary>
+            Promotes a duet to an octet and shifts the promoted value 2 bits leftward
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+            <param name="n">The number of bits to shift left</param>
+        
+| M:Z0.BitSet.extend(Z0.duet,Z0.W8,Z0.N3)           | 
+            <summary>
+            Promotes a duet to an octet and shifts the promoted value 3 bits leftward
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+            <param name="n">The number of bits to shift left</param>
+        
+| M:Z0.BitSet.extend(Z0.duet,Z0.W8,Z0.N4)           | 
+            <summary>
+            Promotes a duet to an octet and shifts the promoted value 4 bits leftward
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+            <param name="n">The number of bits to shift left</param>
+        
+| M:Z0.BitSet.extend(Z0.triad,Z0.W4)                | 
+            <summary>
+            Promotes a triad to an quartet
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+        
+| M:Z0.BitSet.extend(Z0.triad,Z0.W5)                | 
+            <summary>
+            Promotes a triad to an quintet
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+        
+| M:Z0.BitSet.extend(Z0.triad,Z0.W6)                | 
+            <summary>
+            Promotes a triad to an quintet
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+        
+| M:Z0.BitSet.extend(Z0.triad,Z0.W8)                | 
+            <summary>
+            Promotes a triad to an octet
+            </summary>
+            <param name="src">The source value</param>
+            <param name="w">The target width</param>
+        
+| M:Z0.BitSet.join(Z0.single,Z0.single)             | 
+            <summary>
+            (a,b) -&gt; [ab]
+            </summary>
+            <param name="a">Source bit 0</param>
+            <param name="b">Source bit 1</param>
+        
+| M:Z0.BitSet.join(Z0.single,Z0.single,Z0.single)   | 
+            <summary>
+            (a,b) -&gt; [ab]
+            </summary>
+            <param name="a">Source bit 0</param>
+            <param name="b">Source bit 1</param>
+        
+| M:Z0.BitSet.join(Z0.duet,Z0.duet)                 | 
+            <summary>
+            (a,b) -&gt; [bbaa]
+            </summary>
+            <param name="a">Source bits 0-1</param>
+            <param name="b">Source bits 2-3</param>
+        
+| M:Z0.BitSet.join(Z0.duet,Z0.duet,Z0.duet)         | 
+            <summary>
+            (a,b) -&gt; [bbaa]
+            </summary>
+            <param name="a">Source bits 0-1</param>
+            <param name="b">Source bits 2-3</param>
+            <param name="c">Source bits 4-5</param>
+            <param name="d">Source bits 6-7</param>
+        
+| M:Z0.BitSet.join(Z0.duet,Z0.duet,Z0.duet,Z0.duet) | 
+            <summary>
+            (a,b,c,d) -&gt; [dd cc bb aa]
+            </summary>
+            <param name="a">Source bits 0-1</param>
+            <param name="b">Source bits 2-3</param>
+            <param name="c">Source bits 4-5</param>
+            <param name="d">Source bits 6-7</param>
+        
+| M:Z0.BitSet.join(Z0.triad,Z0.triad,Z0.duet)       | 
+            <summary>
+            (a:3, b:3, c:2) -&gt; [cc bbb aaa]
+            </summary>
+            <param name="a">Source bits 0-1</param>
+            <param name="b">Source bits 2-3</param>
+            <param name="c">Source bits 4-5</param>
+            <param name="d">Source bits 6-7</param>
+        
+| T:Z0.duet                                         | 
+            <summary>
+            Represents the value of a type-level duet and thus has domain {00,01,10,11}
+            </summary>
+        
+| M:Z0.duet.op_Implicit(Z0.duet)~System.Byte        | 
+            <summary>
+            Converts a 3-bit integer to an unsigned 8-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.duet.op_Implicit(Z0.duet)~System.UInt16      | 
+            <summary>
+            Converts a 3-bit integer to an unsigned 16-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.duet.op_Implicit(Z0.duet)~System.UInt32      | 
+            <summary>
+            Converts a 3-bit integer to an unsigned 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.duet.op_Implicit(Z0.duet)~System.UInt64      | 
+            <summary>
+            Converts a 3-bit integer to an unsigned 63-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.duet.op_Implicit(Z0.duet)~System.Int32       | 
+            <summary>
+            Converts a 3-bit integer to a signed 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.duet.op_Explicit(System.Byte)~Z0.duet        | 
+            <summary>
+            Creates a 3-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.duet.op_Implicit(System.UInt32)~Z0.duet      | 
+            <summary>
+            Creates a 3-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.duet.op_Explicit(System.UInt64)~Z0.duet      | 
+            <summary>
+            Creates a 3-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| P:Z0.duet.Item(System.Int32)                      | 
+            <summary>
+            Queries and manipulates a bit identified by its 0-based index
+            </summary>
+        
+| M:Z0.duet.Format                                  | 
+            <summary>
+            Renders the source value as as hexadecimal string
+            </summary>
+        
+| T:Z0.octet                                        | 
+            <summary>
+            Represents the value of a type-level octet and thus is an integer in the range [0,255]
+            </summary>
+        
+| T:Z0.quartet                                      | 
+            <summary>
+            Represents the value of a type-level quartet and thus is an integer in the range [0,15]
+            </summary>
+        
+| M:Z0.quartet.op_Implicit(Z0.quartet)~System.Byte  | 
+            <summary>
+            Converts a 4-bit integer to an unsigned 8-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quartet.op_Implicit(Z0.quartet)~System.UInt16| 
+            <summary>
+            Converts a 4-bit integer to an unsigned 16-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quartet.op_Implicit(Z0.quartet)~System.UInt32| 
+            <summary>
+            Converts a 4-bit integer to an unsigned 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quartet.op_Implicit(Z0.quartet)~System.UInt64| 
+            <summary>
+            Converts a 4-bit integer to an unsigned 64-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quartet.op_Implicit(Z0.quartet)~System.Int32 | 
+            <summary>
+            Converts a 4-bit integer to a signed 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quartet.op_Explicit(System.Byte)~Z0.quartet  | 
+            <summary>
+            Creates a 4-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quartet.op_Implicit(System.UInt32)~Z0.quartet| 
+            <summary>
+            Creates a 4-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quartet.op_Explicit(System.UInt64)~Z0.quartet| 
+            <summary>
+            Creates a 4-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| P:Z0.quartet.Item(System.Int32)                   | 
+            <summary>
+            Queries and manipulates a bit identified by its 0-based index
+            </summary>
+        
+| P:Z0.quartet.Lo                                   | 
+            <summary>
+            Queries and manipulates the lower two bits
+            </summary>
+        
+| P:Z0.quartet.Hi                                   | 
+            <summary>
+            Queries and manipulates the upper two bits
+            </summary>
+        
+| M:Z0.quartet.Format                               | 
+            <summary>
+            Renders the source value as as hexadecimal string
+            </summary>
+        
+| T:Z0.quintet                                      | 
+            <summary>
+            Represents the value of a type-level quintet and thus is an integer in the range [0,31]
+            </summary>
+        
+| M:Z0.quintet.op_Implicit(Z0.quintet)~System.Byte  | 
+            <summary>
+            Converts a 5-bit integer to an unsigned 8-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quintet.op_Implicit(Z0.quintet)~System.UInt16| 
+            <summary>
+            Converts a 5-bit integer to an unsigned 16-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quintet.op_Implicit(Z0.quintet)~System.UInt32| 
+            <summary>
+            Converts a 5-bit integer to an unsigned 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quintet.op_Implicit(Z0.quintet)~System.UInt64| 
+            <summary>
+            Converts a 5-bit integer to an unsigned 65-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quintet.op_Implicit(Z0.quintet)~System.Int32 | 
+            <summary>
+            Converts a 5-bit integer to a signed 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quintet.op_Explicit(System.Byte)~Z0.quintet  | 
+            <summary>
+            Creates a 5-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quintet.op_Implicit(System.UInt32)~Z0.quintet| 
+            <summary>
+            Creates a 5-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.quintet.op_Explicit(System.UInt64)~Z0.quintet| 
+            <summary>
+            Creates a 5-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| P:Z0.quintet.Item(System.Int32)                   | 
+            <summary>
+            Queries and manipulates a bit identified by its 0-based index
+            </summary>
+        
+| T:Z0.sextet                                       | 
+            <summary>
+            Represents the value of a type-level sextet and thus is an integer in the range [0,63]
+            </summary>
+        
+| M:Z0.sextet.op_Implicit(Z0.sextet)~System.Byte    | 
+            <summary>
+            Converts a 5-bit integer to an unsigned 8-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.sextet.op_Implicit(Z0.sextet)~System.UInt16  | 
+            <summary>
+            Converts a 5-bit integer to an unsigned 16-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.sextet.op_Implicit(Z0.sextet)~System.UInt32  | 
+            <summary>
+            Converts a 5-bit integer to an unsigned 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.sextet.op_Implicit(Z0.sextet)~System.UInt64  | 
+            <summary>
+            Converts a 5-bit integer to an unsigned 65-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.sextet.op_Implicit(Z0.sextet)~System.Int32   | 
+            <summary>
+            Converts a 5-bit integer to a signed 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.sextet.op_Explicit(System.Byte)~Z0.sextet    | 
+            <summary>
+            Creates a 5-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.sextet.op_Implicit(System.UInt32)~Z0.sextet  | 
+            <summary>
+            Creates a 5-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.sextet.op_Explicit(System.UInt64)~Z0.sextet  | 
+            <summary>
+            Creates a 5-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| P:Z0.sextet.Item(System.Int32)                    | 
+            <summary>
+            Queries and manipulates a bit identified by its 0-based index
+            </summary>
+        
+| T:Z0.single                                       | 
+            <summary>
+            Represents the value of a type-level single and thus has domain {0,1}
+            </summary>
+        
+| M:Z0.single.op_Implicit(Z0.single)~System.Byte    | 
+            <summary>
+            Converts a 1-bit integer to an unsigned 8-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.single.op_Implicit(Z0.single)~System.UInt16  | 
+            <summary>
+            Converts a 1-bit integer to an unsigned 16-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.single.op_Implicit(Z0.single)~System.UInt32  | 
+            <summary>
+            Converts a 1-bit integer to an unsigned 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.single.op_Implicit(Z0.single)~System.UInt64  | 
+            <summary>
+            Converts a 1-bit integer to an unsigned 61-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.single.op_Implicit(Z0.single)~System.Int32   | 
+            <summary>
+            Converts a 1-bit integer to a signed 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.single.op_Explicit(System.Byte)~Z0.single    | 
+            <summary>
+            Creates a 1-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.single.op_Implicit(System.UInt32)~Z0.single  | 
+            <summary>
+            Creates a 1-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.single.op_Explicit(System.UInt64)~Z0.single  | 
+            <summary>
+            Creates a 1-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.single.Format                                | 
+            <summary>
+            Renders the source value as as hexadecimal string
+            </summary>
+        
+| T:Z0.triad                                        | 
+            <summary>
+            Represents the value of a type-level triad and thus has domain {000,001,010,011,100,101,110,111}
+            </summary>
+        
+| M:Z0.triad.op_Implicit(Z0.triad)~System.Byte      | 
+            <summary>
+            Converts a 3-bit integer to an unsigned 8-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.triad.op_Implicit(Z0.triad)~System.UInt16    | 
+            <summary>
+            Converts a 3-bit integer to an unsigned 16-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.triad.op_Implicit(Z0.triad)~System.UInt32    | 
+            <summary>
+            Converts a 3-bit integer to an unsigned 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.triad.op_Implicit(Z0.triad)~System.UInt64    | 
+            <summary>
+            Converts a 3-bit integer to an unsigned 63-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.triad.op_Implicit(Z0.triad)~System.Int32     | 
+            <summary>
+            Converts a 3-bit integer to a signed 32-bit integer
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.triad.op_Explicit(System.Byte)~Z0.triad      | 
+            <summary>
+            Creates a 3-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.triad.op_Implicit(System.UInt32)~Z0.triad    | 
+            <summary>
+            Creates a 3-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.triad.op_Explicit(System.UInt64)~Z0.triad    | 
+            <summary>
+            Creates a 3-bit integer from the least four bits of the source operand
+            </summary>
+            <param name="src">The source value</param>
+        
+| P:Z0.triad.Item(System.Int32)                     | 
+            <summary>
+            Queries and manipulates a bit identified by its 0-based index
+            </summary>
+        
+| M:Z0.triad.Format                                 | 
+            <summary>
+            Renders the source value as as hexadecimal string
+            </summary>
+        
+| M:Z0.Biconverter`1.Convert``1(`0)                 | 
+            <summary>
+            Converts an incoming value of the target type to a value of specified type, if possible
+            </summary>
+            <param name="incoming">The value to convert</param>
+        
+| M:Z0.Biconverter`1.Convert``1(``0)                | 
+            <summary>
+            converts an incoming value to a value of target type
+            </summary>
+            <param name="incoming">The value to convert</param>
+            <typeparam name="T">The incoming value type</typeparam>
+        
+| T:Z0.BoxedNumber                                  | 
+            <summary>
+            A numbered box
+            </summary>
+        
+| F:Z0.BoxedNumber.Boxed                            | 
+            <summary>
+            In the box
+            </summary>
+        
+| F:Z0.BoxedNumber.Kind                             | 
+            <summary>
+            Box discriminator for runtime efficiency
+            </summary>
+        
+| M:Z0.BoxedNumber.From``1(``0)                     | 
+            <summary>
+            Puts an enum value into a (numeric) box
+            </summary>
+            <param name="e">The enumeration value</param>
+            <typeparam name="E">The enum type</typeparam>
+        
+| M:Z0.BoxedNumberConverter.Convert``1(Z0.BoxedNumber)| 
+            <summary>
+            Pulls a number of kind parametric from a box - whose kind it matters not
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The target numeric type</typeparam>
+        
+| M:Z0.BoxedNumberConverter.Convert``1(``0)         | 
+            <summary>
+            Puts a number in a box of kind parametric
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The source value type</typeparam>
+        
+| M:Z0.ComplexNumber.Define``1(``0,``0)             | 
+            <summary>
+            Defines a generic comple number
+            </summary>
+            <param name="re">The real part</param>
+            <param name="im">The imaginary part</param>
+            <typeparam name="T">The underlying primal type</typeparam>
+        
+| T:Z0.ComplexF32                                   | 
+            <summary>
+            Represents a 32-bit floating point complex number
+            </summary>
+        
+| M:Z0.ComplexF32.Load(System.Span{System.Single})  | 
+            <summary>
+            Loads a span of span of complext values from a source span where adjacent 
+            entries (i,i+j) are interpreted respectively as real and imaginary components
+            </summary>
+            <param name="src">The source span, which must contain an even number of elements</param>
+        
+| M:Z0.ComplexF32.op_Implicit(Z0.Complex{System.Single})~Z0.ComplexF32| 
+            <summary>
+            Implicitly constructs a <see cref="T:Z0.ComplexF32" /> value from its equivalent generic representation
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.ComplexF32.op_Equality(Z0.ComplexF32@,Z0.ComplexF32@)| 
+            <summary>
+            Tests the operands for exact equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexF32.op_Inequality(Z0.ComplexF32@,Z0.ComplexF32@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexF32.op_Subtraction(Z0.ComplexF32@,Z0.ComplexF32@)| 
+            <summary>
+            Subtracts the second operand from the first
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexF32.op_Addition(Z0.ComplexF32@,Z0.ComplexF32@)| 
+            <summary>
+            Adds the second operand to the first
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexF32.op_Implicit(System.ValueTuple{System.Single,System.Single}@)~Z0.ComplexF32| 
+            <summary>
+            Implcitly converts a 2-tuple to a complex value
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexF32.op_Implicit(Z0.ComplexF32@)~System.ValueTuple{System.Single,System.Single}| 
+            <summary>
+            Implcitly converts a complex value to a 2-tuple
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| F:Z0.ComplexF32.re                                | 
+            <summary>
+            specifies the real component
+            </summary>
+        
+| F:Z0.ComplexF32.im                                | 
+            <summary>
+            Specifies the imaginary component
+            </summary>
+        
+| M:Z0.ComplexF32.#ctor(System.ValueTuple{System.Single,System.Single}@)| 
+            <summary>
+            Constructs the complex number from a tuple with real and imaginary parts
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexF32.#ctor(System.Single,System.Single)| 
+            <summary>
+            Constructs the complex number from real and imaginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexF32.Format(System.Boolean)            | 
+            <summary>
+            Formats the real and imaginar parts of a complex number in one of two canonical forms
+            </summary>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| M:Z0.ComplexF32.Deconstruct(System.Single@,System.Single@)| 
+            <summary>
+            Partitions the complex number into real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| T:Z0.ComplexF64                                   | 
+            <summary>
+            Represents a 32-bit floating point complex number
+            </summary>
+        
+| F:Z0.ComplexF64.re                                | 
+            <summary>
+            Specifies the real component
+            </summary>
+        
+| F:Z0.ComplexF64.im                                | 
+            <summary>
+            Specifies the imaginary component
+            </summary>
+        
+| M:Z0.ComplexF64.Load(System.Span{System.Double})  | 
+            <summary>
+            Loads a span of span of complext values from a source span where adjacent 
+            entries (i,i+j) are interpreted respectively as real and imaginary components
+            </summary>
+            <param name="src">The source span, which must contain an even number of elements</param>
+        
+| M:Z0.ComplexF64.op_Implicit(Z0.ComplexF64@)~System.ValueTuple{System.Double,System.Double}| 
+            <summary>
+            Implcitly converts a complex value to a 2-tuple
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexF64.op_Implicit(Z0.Complex{System.Double})~Z0.ComplexF64| 
+            <summary>
+            Implicitly constructs a <see cref="T:Z0.ComplexF32" /> value from its equivalent generic representation
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.ComplexF64.op_Equality(Z0.ComplexF64@,Z0.ComplexF64@)| 
+            <summary>
+            Tests the operands for exact equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexF64.op_Inequality(Z0.ComplexF64@,Z0.ComplexF64@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexF64.op_Subtraction(Z0.ComplexF64@,Z0.ComplexF64@)| 
+            <summary>
+            Subtracts the second operand from the first
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexF64.op_Addition(Z0.ComplexF64@,Z0.ComplexF64@)| 
+            <summary>
+            Adds the second operand to the first
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexF64.op_Implicit(System.ValueTuple{System.Double,System.Double}@)~Z0.ComplexF64| 
+            <summary>
+            Implcitly converts a 2-tuple to a complex value
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexF64.#ctor(System.ValueTuple{System.Double,System.Double}@)| 
+            <summary>
+            Constructs the complex number from a tuple with real and imaginary parts
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexF64.#ctor(System.Double,System.Double)| 
+            <summary>
+            Constructs the complex number from real and imaginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexF64.Deconstruct(System.Double@,System.Double@)| 
+            <summary>
+            Partitions the complex number into real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexF64.Format(System.Boolean)            | 
+            <summary>
+            Formats the real and imaginar parts of a complex number in one of two canonical forms
+            </summary>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| T:Z0.ComplexI16                                   | 
+            <summary>
+            Represents a complex value with signed 16-bit integer components
+            </summary>
+        
+| M:Z0.ComplexI16.Load(System.Span{System.Int16})   | 
+            <summary>
+            Loads a span of span of complext values from a source span where adjacent 
+            entries (i,i+j) are shorterpreted respectively as real and imaginary components
+            </summary>
+            <param name="src">The source span, which must contain an even number of elements</param>
+        
+| M:Z0.ComplexI16.op_Subtraction(Z0.ComplexI16@,Z0.ComplexI16@)| 
+            <summary>
+            Subtracts the second operand from the first
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI16.op_Addition(Z0.ComplexI16@,Z0.ComplexI16@)| 
+            <summary>
+            Adds the second operand to the first
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI16.op_Equality(Z0.ComplexI16@,Z0.ComplexI16@)| 
+            <summary>
+            Tests the operands for equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI16.op_Inequality(Z0.ComplexI16@,Z0.ComplexI16@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI16.op_Implicit(System.ValueTuple{System.Int16,System.Int16})~Z0.ComplexI16| 
+            <summary>
+            Implcitly converts a 2-tuple to a complex value
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI16.op_Implicit(Z0.ComplexI16)~System.ValueTuple{System.Int16,System.Int16}| 
+            <summary>
+            Implcitly converts a complex value to a 2-tuple
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| F:Z0.ComplexI16.re                                | 
+            <summary>
+            Specifies the real component
+            </summary>
+        
+| F:Z0.ComplexI16.im                                | 
+            <summary>
+            Specifies the imaginary component
+            </summary>
+        
+| M:Z0.ComplexI16.#ctor(System.ValueTuple{System.Int16,System.Int16})| 
+            <summary>
+            Constructs the complex number from a tuple with real and imaginary parts
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI16.#ctor(System.Int16,System.Int16)  | 
+            <summary>
+            Constructs the complex number from real and imaginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI16.Deconstruct(System.Int16@,System.Int16@)| 
+            <summary>
+            Partitions the complex number shorto real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI16.Format(System.Boolean)            | 
+            <summary>
+            Formats the real and imaginar parts of a complex number in one of two canonical forms
+            </summary>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| T:Z0.ComplexI32                                   | 
+            <summary>
+            Represents a complex value with signed 32-bit integer components
+            </summary>
+        
+| M:Z0.ComplexI32.Load(System.Span{System.Int32})   | 
+            <summary>
+            Loads a span of span of complext values from a source span where adjacent 
+            entries (i,i+j) are interpreted respectively as real and imaginary components
+            </summary>
+            <param name="src">The source span, which must contain an even number of elements</param>
+        
+| M:Z0.ComplexI32.op_Subtraction(Z0.ComplexI32@,Z0.ComplexI32@)| 
+            <summary>
+            Subtracts the second operand from the first
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI32.op_Addition(Z0.ComplexI32@,Z0.ComplexI32@)| 
+            <summary>
+            Adds the second operand to the first
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI32.op_Equality(Z0.ComplexI32@,Z0.ComplexI32@)| 
+            <summary>
+            Tests the operands for equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI32.op_Inequality(Z0.ComplexI32@,Z0.ComplexI32@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI32.op_Implicit(System.ValueTuple{System.Int32,System.Int32})~Z0.ComplexI32| 
+            <summary>
+            Implcitly converts a 2-tuple to a complex value
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI32.op_Implicit(Z0.ComplexI32)~System.ValueTuple{System.Int32,System.Int32}| 
+            <summary>
+            Implcitly converts a complex value to a 2-tuple
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| F:Z0.ComplexI32.re                                | 
+            <summary>
+            Specifies the real component
+            </summary>
+        
+| F:Z0.ComplexI32.im                                | 
+            <summary>
+            Specifies the imaginary component
+            </summary>
+        
+| M:Z0.ComplexI32.#ctor(System.ValueTuple{System.Int32,System.Int32})| 
+            <summary>
+            Constructs the complex number from a tuple with real and imaginary parts
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI32.#ctor(System.Int32,System.Int32)  | 
+            <summary>
+            Constructs the complex number from real and imaginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI32.Deconstruct(System.Int32@,System.Int32@)| 
+            <summary>
+            Partitions the complex number into real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI32.Format(System.Boolean)            | 
+            <summary>
+            Formats the real and imaginar parts of a complex number in one of two canonical forms
+            </summary>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| T:Z0.ComplexI64                                   | 
+            <summary>
+            Represents a complex value with signed 64-bit integer components
+            </summary>
+        
+| M:Z0.ComplexI64.Load(System.Span{System.Int64})   | 
+            <summary>
+            Loads a span of span of complext values from a source span where adjacent 
+            entries (i,i+j) are interpreted respectively as real and imaginary components
+            </summary>
+            <param name="src">The source span, which must contain an even number of elements</param>
+        
+| M:Z0.ComplexI64.op_Equality(Z0.ComplexI64@,Z0.ComplexI64@)| 
+            <summary>
+            Tests the operands for equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI64.op_Inequality(Z0.ComplexI64@,Z0.ComplexI64@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI64.op_Implicit(System.ValueTuple{System.Int64,System.Int64}@)~Z0.ComplexI64| 
+            <summary>
+            Implcitly converts a 2-tuple to a complex value
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI64.op_Implicit(Z0.ComplexI64@)~System.ValueTuple{System.Int64,System.Int64}| 
+            <summary>
+            Implcitly converts a complex value to a 2-tuple
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| F:Z0.ComplexI64.re                                | 
+            <summary>
+            Specifies the real component
+            </summary>
+        
+| F:Z0.ComplexI64.im                                | 
+            <summary>
+            Specifies the imaginary component
+            </summary>
+        
+| M:Z0.ComplexI64.#ctor(System.ValueTuple{System.Int64,System.Int64})| 
+            <summary>
+            Constructs the complex number from a tuple with real and imaginary parts
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI64.#ctor(System.Int64,System.Int64)  | 
+            <summary>
+            Constructs the complex number from real and imaginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI64.Deconstruct(System.Int64@,System.Int64@)| 
+            <summary>
+            Partitions the complex number into real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI64.Format(System.Boolean)            | 
+            <summary>
+            Renders the value as a string per supplied options
+            </summary>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| T:Z0.ComplexI8                                    | 
+            <summary>
+            Represents a complex value with signed 8-bit integer components
+            </summary>
+        
+| M:Z0.ComplexI8.Load(System.Span{System.SByte})    | 
+            <summary>
+            Loads a span of span of complext values from a source span where adjacent 
+            entries (i,i+j) are interpreted respectively as real and imaginary components
+            </summary>
+            <param name="src">The source span, which must contain an even number of elements</param>
+        
+| M:Z0.ComplexI8.op_Subtraction(Z0.ComplexI8@,Z0.ComplexI8@)| 
+            <summary>
+            Subtracts the second operand from the first
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI8.op_Addition(Z0.ComplexI8@,Z0.ComplexI8@)| 
+            <summary>
+            Adds the second operand to the first
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI8.op_Equality(Z0.ComplexI8@,Z0.ComplexI8@)| 
+            <summary>
+            Tests the operands for equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI8.op_Inequality(Z0.ComplexI8@,Z0.ComplexI8@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexI8.op_Implicit(System.ValueTuple{System.SByte,System.SByte})~Z0.ComplexI8| 
+            <summary>
+            Implcitly converts a 2-tuple to a complex value
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI8.op_Implicit(Z0.ComplexI8)~System.ValueTuple{System.SByte,System.SByte}| 
+            <summary>
+            Implcitly converts a complex value to a 2-tuple
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| F:Z0.ComplexI8.re                                 | 
+            <summary>
+            Specifies the real component
+            </summary>
+        
+| F:Z0.ComplexI8.im                                 | 
+            <summary>
+            Specifies the imaginary component
+            </summary>
+        
+| M:Z0.ComplexI8.#ctor(System.ValueTuple{System.SByte,System.SByte})| 
+            <summary>
+            Constructs the complex number from a tuple with real and imaginary parts
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI8.#ctor(System.SByte,System.SByte)   | 
+            <summary>
+            Constructs the complex number from real and imaginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI8.Deconstruct(System.SByte@,System.SByte@)| 
+            <summary>
+            Partitions the complex number into real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexI8.Format(System.Boolean)             | 
+            <summary>
+            Formats the real and imaginar parts of a complex number in one of two canonical forms
+            </summary>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| T:Z0.Complex`1                                    | 
+            <summary>
+            Defines a complex number parameterized over the primal types
+            </summary>
+        
+| M:Z0.Complex`1.Format(`0,`0,System.Boolean)       | 
+            <summary>
+            Formats the real and imaginar parts of a complex number in one of two canonical forms
+            </summary>
+            <param name="re">The real part</param>
+            <param name="im">The imaginary part</param>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| M:Z0.Complex`1.Hash(`0,`0)                        | 
+            <summary>
+            Creates a combined hash code for the real and imaginary parts of a complex number
+            </summary>
+            <param name="re">The real part</param>
+            <param name="im">The imaginary part</param>
+        
+| M:Z0.Complex`1.op_Implicit(System.ValueTuple{`0,`0})~Z0.Complex{`0}| 
+            <summary>
+            Implicitly constructs a generic complex value from an ordered pair
+            interpreted as the real/imaginary parts, respectively, of a 
+            complex number
+            </summary>
+            <param name="re">The real part</param>
+            <param name="im">The imaginary part</param>
+            <typeparam name="T">The underlying primal type</typeparam>
+        
+| M:Z0.Complex`1.op_Implicit(Z0.Complex{`0})~System.ValueTuple{`0,`0}| 
+            <summary>
+            Implictly constructes an ordered pair consisting respectively of
+            the real an imaginary parts of the source value
+            </summary>
+            <param name="re">The real part</param>
+            <param name="im">The imaginary part</param>
+        
+| M:Z0.Complex`1.op_Equality(Z0.Complex{`0}@,Z0.Complex{`0}@)| 
+            <summary>
+            Tests the operands for exact equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.Complex`1.op_Inequality(Z0.Complex{`0}@,Z0.Complex{`0}@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.Complex`1.Deconstruct(`0@,`0@)               | 
+            <summary>
+            Partitions the complex number into real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| T:Z0.ComplexU16                                   | 
+            <summary>
+            Represents a complex value with unsigned 16-bit integer components
+            </summary>
+        
+| M:Z0.ComplexU16.Load(System.Span{System.UInt16})  | 
+            <summary>
+            Loads a span of span of complext values from a source span where adjacent 
+            entries (i,i+j) are interpreted respectively as real and imaginary components
+            </summary>
+            <param name="src">The source span, which must contain an even number of elements</param>
+        
+| M:Z0.ComplexU16.op_Equality(Z0.ComplexU16@,Z0.ComplexU16@)| 
+            <summary>
+            Tests the operands for equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexU16.op_Inequality(Z0.ComplexU16@,Z0.ComplexU16@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexU16.op_Implicit(System.ValueTuple{System.UInt16,System.UInt16}@)~Z0.ComplexU16| 
+            <summary>
+            Implcitly converts a 2-tuple to a complex value
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU16.op_Implicit(Z0.ComplexU16@)~System.ValueTuple{System.UInt16,System.UInt16}| 
+            <summary>
+            Implcitly converts a complex value to a 2-tuple
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| F:Z0.ComplexU16.re                                | 
+            <summary>
+            Specifies the real component
+            </summary>
+        
+| F:Z0.ComplexU16.im                                | 
+            <summary>
+            Specifies the imaginary component
+            </summary>
+        
+| M:Z0.ComplexU16.#ctor(System.ValueTuple{System.UInt16,System.UInt16})| 
+            <summary>
+            Constructs the complex number from a tuple with real and imaginary parts
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU16.#ctor(System.UInt16,System.UInt16)| 
+            <summary>
+            Constructs the complex number from real and imaginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU16.Deconstruct(System.UInt16@,System.UInt16@)| 
+            <summary>
+            Partitions the complex number into real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU16.Format(System.Boolean)            | 
+            <summary>
+            Renders the value as a string per supplied options
+            </summary>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| T:Z0.ComplexU32                                   | 
+            <summary>
+            Represents a complex value with unsigned 32-bit integer components
+            </summary>
+        
+| M:Z0.ComplexU32.Load(System.Span{System.UInt32})  | 
+            <summary>
+            Loads a span of span of complext values from a source span where adjacent 
+            entries (i,i+j) are interpreted respectively as real and imaginary components
+            </summary>
+            <param name="src">The source span, which must contain an even number of elements</param>
+        
+| M:Z0.ComplexU32.op_Equality(Z0.ComplexU32@,Z0.ComplexU32@)| 
+            <summary>
+            Tests the operands for equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexU32.op_Inequality(Z0.ComplexU32@,Z0.ComplexU32@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexU32.op_Implicit(System.ValueTuple{System.UInt32,System.UInt32}@)~Z0.ComplexU32| 
+            <summary>
+            Implcitly converts a 2-tuple to a complex value
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU32.op_Implicit(Z0.ComplexU32@)~System.ValueTuple{System.UInt32,System.UInt32}| 
+            <summary>
+            Implcitly converts a complex value to a 2-tuple
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| F:Z0.ComplexU32.re                                | 
+            <summary>
+            Specifies the real component
+            </summary>
+        
+| F:Z0.ComplexU32.im                                | 
+            <summary>
+            Specifies the imaginary component
+            </summary>
+        
+| M:Z0.ComplexU32.#ctor(System.ValueTuple{System.UInt32,System.UInt32})| 
+            <summary>
+            Constructs the complex number from a tuple with real and imaginary parts
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU32.#ctor(System.UInt32,System.UInt32)| 
+            <summary>
+            Constructs the complex number from real and imaginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU32.Deconstruct(System.UInt32@,System.UInt32@)| 
+            <summary>
+            Partitions the complex number into real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU32.Format(System.Boolean)            | 
+            <summary>
+            Renders the value as a string per supplied options
+            </summary>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| T:Z0.ComplexU64                                   | 
+            <summary>
+            Represents a complex value with unsigned 64-bit integer components
+            </summary>
+        
+| M:Z0.ComplexU64.Load(System.Span{System.UInt64})  | 
+            <summary>
+            Loads a span of span of complext values from a source span where adjacent 
+            entries (i,i+j) are interpreted respectively as real and imaginary components
+            </summary>
+            <param name="src">The source span, which must contain an even number of elements</param>
+        
+| M:Z0.ComplexU64.op_Implicit(Z0.Complex{System.UInt64})~Z0.ComplexU64| 
+            <summary>
+            Implicitly constructs a <see cref="T:Z0.ComplexF32" /> value from its equivalent generic representation
+            </summary>
+            <param name="src">The source value</param>
+        
+| M:Z0.ComplexU64.op_Equality(Z0.ComplexU64@,Z0.ComplexU64@)| 
+            <summary>
+            Tests the operands for equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexU64.op_Inequality(Z0.ComplexU64@,Z0.ComplexU64@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexU64.op_Implicit(System.ValueTuple{System.UInt64,System.UInt64}@)~Z0.ComplexU64| 
+            <summary>
+            Implcitly converts a 2-tuple to a complex value
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU64.op_Implicit(Z0.ComplexU64@)~System.ValueTuple{System.UInt64,System.UInt64}| 
+            <summary>
+            Implcitly converts a complex value to a 2-tuple
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| F:Z0.ComplexU64.re                                | 
+            <summary>
+            Specifies the real component
+            </summary>
+        
+| F:Z0.ComplexU64.im                                | 
+            <summary>
+            Specifies the imaginary component
+            </summary>
+        
+| M:Z0.ComplexU64.#ctor(System.ValueTuple{System.UInt64,System.UInt64})| 
+            <summary>
+            Constructs the complex number from a tuple with real and imaginary parts
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU64.#ctor(System.UInt64,System.UInt64)| 
+            <summary>
+            Constructs the complex number from real and imaginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU64.Deconstruct(System.UInt64@,System.UInt64@)| 
+            <summary>
+            Partitions the complex number into real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU64.Format(System.Boolean)            | 
+            <summary>
+            Formats the real and imaginar parts of a complex number in one of two canonical forms
+            </summary>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| T:Z0.ComplexU8                                    | 
+            <summary>
+            Represents a complex value with unsigned 8-bit integer components
+            </summary>
+        
+| M:Z0.ComplexU8.Load(System.Span{System.Byte})     | 
+            <summary>
+            Loads a span of span of complext values from a source span where adjacent 
+            entries (i,i+j) are interpreted respectively as real and imaginary components
+            </summary>
+            <param name="src">The source span, which must contain an even number of elements</param>
+        
+| M:Z0.ComplexU8.op_Equality(Z0.ComplexU8@,Z0.ComplexU8@)| 
+            <summary>
+            Tests the operands for equality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexU8.op_Inequality(Z0.ComplexU8@,Z0.ComplexU8@)| 
+            <summary>
+            Tests the operands for inequality
+            </summary>
+            <param name="lhs">The first operand</param>
+            <param name="rhs">The second operand</param>
+        
+| M:Z0.ComplexU8.op_Implicit(System.ValueTuple{System.Byte,System.Byte})~Z0.ComplexU8| 
+            <summary>
+            Implcitly converts a 2-tuple to a complex value
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU8.op_Implicit(Z0.ComplexU8)~System.ValueTuple{System.Byte,System.Byte}| 
+            <summary>
+            Implcitly converts a complex value to a 2-tuple
+            </summary>
+            <param name="x">The source value</param>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| F:Z0.ComplexU8.re                                 | 
+            <summary>
+            Specifies the real component
+            </summary>
+        
+| F:Z0.ComplexU8.im                                 | 
+            <summary>
+            Specifies the imaginary component
+            </summary>
+        
+| M:Z0.ComplexU8.#ctor(System.ValueTuple{System.Byte,System.Byte})| 
+            <summary>
+            Constructs the complex number from a tuple with real and imaginary parts
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU8.#ctor(System.Byte,System.Byte)     | 
+            <summary>
+            Constructs the complex number from real and imaginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU8.Deconstruct(System.Byte@,System.Byte@)| 
+            <summary>
+            Partitions the complex number into real and imanginary components
+            </summary>
+            <param name="re">The real component</param>
+            <param name="im">The imaginary component</param>
+        
+| M:Z0.ComplexU8.Format(System.Boolean)             | 
+            <summary>
+            Renders the value as a string per supplied options
+            </summary>
+            <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
+        
+| T:Z0.Edge`1                                       | 
+            <summary>
+            Defines an unweighted edge, parameterized by the vertex index type
+            </summary>
+            <typeparam name="V">The vertex index type</typeparam>
+        
+| F:Z0.Edge`1.Source                                | 
+            <summary>
+            The index of the source vertex
+            </summary>
+        
+| F:Z0.Edge`1.Target                                | 
+            <summary>
+            The index of the target vertex
+            </summary>
+        
+| T:Z0.Edge`2                                       | 
+            <summary>
+            Defines a weighted edge, parameterized by the vertex index type and the weight type
+            </summary>
+        
+| F:Z0.Edge`2.Source                                | 
+            <summary>
+            The index of the source vertex
+            </summary>
+        
+| F:Z0.Edge`2.Target                                | 
+            <summary>
+            The index of the target vertex
+            </summary>
+        
+| F:Z0.Edge`2.Weight                                | 
+            <summary>
+            The weight given to the edge
+            </summary>
+        
+| M:Z0.Edge`2.op_Implicit(Z0.Edge{`0,`1})~Z0.Edge{`0}| 
+            <summary>
+            Sheds the associated weight to form a weight-free edge
+            </summary>
+            <param name="src">The source vertex</param>
+        
+| M:Z0.Edge`2.op_Implicit(System.ValueTuple{`0,`0,`1})~Z0.Edge{`0,`1}| 
+            <summary>
+            Constructs an edge from a 3-tuple
+            </summary>
+            <param name="src">The source index</param>
+            <param name="dst">The target index</param>
+            <param name="weight">The weight</param>
+            <typeparam name="V">The vertex index type</typeparam>
+            <typeparam name="W">The weight type</typeparam>
+        
+| T:Z0.Graph                                        | 
+            <summary>
+            Defines the primary API surface for manipulated graphs
+            and related elements
+            </summary>
+        
+| M:Z0.Graph.define``2(System.Span{Z0.Vertex{``0,``1}},System.Collections.Generic.IEnumerable{Z0.Edge{``0}})| 
+            <summary>
+            Creates a graph from supplied vertices and edges and assumes the vertices are already appropriately sorted
+            </summary>
+            <param name="vertices">The vertices in the graph</param>
+            <param name="edges">The edges that connect the vertices</param>
+        
+| M:Z0.Graph.define``1(System.Span{Z0.Vertex{``0}},System.Collections.Generic.IEnumerable{Z0.Edge{``0}})| 
+            <summary>
+            Creates a graph from supplied vertices and edges
+            </summary>
+            <param name="vertices">The vertices in the graph</param>
+            <param name="edges">The edges that connect the vertices</param>
+            <typeparam name="V">The vertex index type</typeparam>
+        
+| M:Z0.Graph.edge``1(``0,``0)                       | 
+            <summary>
+            Defines an edge from an index-identified source to an index identified target
+            </summary>
+            <param name="source">The source index</param>
+            <param name="target">The target index</param>
+            <typeparam name="V">The vertex index type</typeparam>
+        
+| M:Z0.Graph.edge``2(``0,``0,``1)                   | 
+            <summary>
+            Defines a weighted edge from an index-identified source to an index identified target
+            </summary>
+            <param name="source">The source index</param>
+            <param name="target">The target index</param>
+            <typeparam name="V">The vertex index type</typeparam>
+        
+| M:Z0.Graph.connect``2(Z0.Vertex{``0,``1}@,Z0.Vertex{``0,``1}@)| 
+            <summary>
+            Connects a source vertex to a target vertex
+            </summary>
+            <param name="source">The source vertex</param>
+            <param name="target">The target vertex</param>
+            <typeparam name="V">The vertex index type</typeparam>
+            <typeparam name="T">The vertex payload type</typeparam>
+        
+| M:Z0.Graph.connect``1(Z0.Vertex{``0}@,Z0.Vertex{``0}@)| 
+            <summary>
+            Connects a source vertex to a target vertex
+            </summary>
+            <param name="source">The source vertex</param>
+            <param name="target">The target vertex</param>
+            <typeparam name="V">The vertex index type</typeparam>
+        
+| M:Z0.Graph.vertex``1(``0)                         | 
+            <summary>
+            Creates a vertex without payload
+            </summary>
+            <param name="index">The index of the vertex that servies as a 
+            unique identifier within the context of a graph</param>
+            <typeparam name="V">The index type</typeparam>
+        
+| M:Z0.Graph.vertices``1(System.Int32)              | 
+            <summary>
+            Defines a vertex sequence with a specified length
+            </summary>
+            <param name="count">The number of virtices in the sequence</param>
+            <typeparam name="V">The index type</typeparam>
+        
+| M:Z0.Graph.vertices``2(``0,``1[])                 | 
+            <summary>
+            Defines a vertex with payload for each source item
+            </summary>
+            <param name="s0">The first index assigned</param>
+            <param name="data">The vertex payloads</param>
+            <typeparam name="V">The index type</typeparam>
+        
+| M:Z0.Graph.vertex``2(``0,``1)                     | 
+            <summary>
+            Creates a vertex with payload
+            </summary>
+            <param name="index">The index of the vertex that servies as a 
+            unique identifier within the context of a graph</param>
+            <typeparam name="V">The index type</typeparam>
+            <typeparam name="V">The payload type</typeparam>
+        
+| M:Z0.Graph.incoming``1(Z0.Graph{``0},``0)         | 
+            <summary>
+            Finds the edges in a graph that target an identified vertex
+            </summary>
+            <param name="graph">The declaring graph</param>
+            <param name="target">The index of the target vertex</param>
+            <typeparam name="V">The vertex index type</typeparam>
+        
+| M:Z0.Graph.outgoing``1(Z0.Graph{``0},``0)         | 
+            <summary>
+            Finds the edges in a graph that emit from an identified vertex
+            </summary>
+            <param name="graph">The declaring graph</param>
+            <param name="target">The index of the target vertex</param>
+            <typeparam name="V">The vertex index type</typeparam>
+        
+| M:Z0.Graph.format``1(Z0.Graph{``0},System.String) | 
+            <summary>
+            Renders a graph using basic graphviz format
+            </summary>
+            <param name="graph">The declaring graph</param>
+            <param name="label">An optional label for the graph</param>
+            <typeparam name="V">The verex index type</typeparam>
+        
+| M:Z0.XGraph.Connect``2(Z0.Vertex{``0,``1},Z0.Vertex{``0,``1})| 
+            <summary>
+            Produces an edge that connects a source vertex to a target vertex
+            </summary>
+            <param name="src">The source vertex</param>
+            <param name="dst">The target vertex</param>
+            <typeparam name="V">The vertex index type</typeparam>
+            <typeparam name="T">The vertex payload type</typeparam>
+        
+| M:Z0.XGraph.Connect``1(Z0.Vertex{``0},Z0.Vertex{``0})| 
+            <summary>
+            Produces an edge that connects a source vertex to a target vertex
+            </summary>
+            <param name="src">The source vertex</param>
+            <param name="dst">The target vertex</param>
+            <typeparam name="V">The vertex index type</typeparam>
+        
+| M:Z0.XGraph.Format``1(Z0.Graph{``0},System.String)| 
+            <summary>
+            Renders a graph using basic graphviz format
+            </summary>
+            <param name="graph">The declaring graph</param>
+            <param name="label">An optional label for the graph</param>
+            <typeparam name="V">The verex index type</typeparam>
+        
+| M:Z0.XGraph.Incoming``1(Z0.Graph{``0},``0)        | 
+            <summary>
+            Finds the edges in a graph that target an identified vertex
+            </summary>
+            <param name="graph">The declaring graph</param>
+            <param name="target">The index of the target vertex</param>
+            <typeparam name="V">The vertex index type</typeparam>
+        
+| M:Z0.XGraph.Outgoing``1(Z0.Graph{``0},``0)        | 
+            <summary>
+            Finds the edges in a graph that emit from an identified vertex
+            </summary>
+            <param name="graph">The declaring graph</param>
+            <param name="target">The index of the target vertex</param>
+            <typeparam name="V">The vertex index type</typeparam>
+        
+| M:Z0.Graph`1.Sources(`0)                          | 
+            <summary>
+            Retrieves the indices of a targets' source vertices 
+            </summary>
+            <param name="source">The source vertex</param>
+        
+| M:Z0.Graph`1.Targets(`0)                          | 
+            <summary>
+            Retrieves the indices of a sources' target vertices
+            </summary>
+            <param name="source">The source vertex</param>
+        
+| M:Z0.Graph`1.Vertex(`0)                           | 
+            <summary>
+            Looks up a vertex based on its index
+            </summary>
+            <param name="index">The vertex index</param>
+        
+| M:Z0.Graph`1.Edge(System.Int32)                   | 
+            <summary>
+            Looks up an edge based on its index
+            </summary>
+            <param name="index">The vertex index</param>
+        
+| P:Z0.Graph`1.Item(`0)                             | 
+            <summary>
+            Looks up a vertex based on its index
+            </summary>
+            <param name="index">The vertex index</param>
+        
+| P:Z0.Graph`1.EdgeCount                            | 
+            <summary>
+            Specifies the edges declared by the graph
+            </summary>
+        
+| P:Z0.Graph`1.VertexCount                          | 
+            <summary>
+            Specifies the number of vertices declared by the graph
+            </summary>
+        
+| M:Z0.Graph`1.InDegree(`0)                         | 
+            <summary>
+            Computes the in-degree of a vertex; i.e. the count of incoming vertices
+            </summary>
+            <param name="target">The target vector</param>
+        
+| M:Z0.Graph`1.OutDegree(`0)                        | 
+            <summary>
+            Computes the out-degree of a vertex; i.e. the count of outgoing vertices
+            </summary>
+            <param name="source">The source vector</param>
+        
+| M:Z0.Graph`1.IsIsolated(`0)                       | 
+            <summary>
+            Determines whether a vertex is disconnected from the graph
+            </summary>
+            <param name="vertex">The vertext to test</param>
+        
+| M:Z0.Graph`1.IsSink(`0)                           | 
+            <summary>
+            Determines whether the vertex is a sink, i.e. has no outgoing edges
+            </summary>
+            <param name="vertex">The vertex to test</param>
+            <remarks>An isolated node in this context is not considered to be a 
+            sink (or source) so "degenerate" sinks are excluded
+            </remarks>
+        
+| M:Z0.Graph`1.IsSource(`0)                         | 
+            <summary>
+            Determines whether the vertex is a source, i.e. has only outgoing edges
+            </summary>
+            <param name="vertex">The vertex to test</param>
+            <remarks>An isolated node in this context is not considered to be a 
+            sink (or source) so "degenerate" sources are excluded
+            </remarks>
+        
+| M:Z0.Graph`1.Traverse(`0,System.Action{`0},`0)    | 
+            <summary>
+            Traverses the graph until a sink is reached, a cycle is  detected, 
+            or an optionally-specified vertex is reached
+            </summary>
+            <param name="v0">The start vertex</param>
+            <param name="traversed">The traversal action</param>
+            <param name="vEnd">An optional endpoint</param>
+        
+| M:Z0.Graph`1.Path(`0,`0)                          | 
+            <summary>
+            Computes the path from a source vertex to a sink, a specified endpoint or when a cycle is detected
+            </summary>
+            <param name="v0">The start vertex</param>
+            <param name="vEnd">An optional endpoint</param>
+        
+| T:Z0.Graph`2                                      | 
+            <summary>
+            Defines a graph in which data may be associated with each node
+            </summary>
+            <typeparam name="V">The vertex index type</typeparam>
+            <typeparam name="T">The node payload type</typeparam>
+        
+| P:Z0.Graph`2.EdgeCount                            | 
+            <summary>
+            Specifies the edges declared by the graph
+            </summary>
+        
+| P:Z0.Graph`2.VertexCount                          | 
+            <summary>
+            Specifies the number of vertices declared by the graph
+            </summary>
+        
+| M:Z0.Graph`2.Vertex(`0)                           | 
+            <summary>
+            Looks up a vertex based on its index
+            </summary>
+            <param name="index">The vertex index</param>
+        
+| M:Z0.Graph`2.Edge(System.Int32)                   | 
+            <summary>
+            Looks up an edge based on its index
+            </summary>
+            <param name="index">The vertex index</param>
+        
+| P:Z0.Graph`2.Item(`0)                             | 
+            <summary>
+            Looks up a vertex based on its index
+            </summary>
+            <param name="index">The vertex index</param>
+        
+| T:Z0.Graph`3                                      | 
+            <summary>
+            Defines a graph in which data may be associated with each node and edges are weighted
+            </summary>
+            <typeparam name="V">The vertex index type</typeparam>
+            <typeparam name="W">The weight type</typeparam>
+            <typeparam name="T">The vertext payload type</typeparam>
+        
+| P:Z0.Graph`3.EdgeCount                            | 
+            <summary>
+            Specifies the edges declared by the graph
+            </summary>
+        
+| P:Z0.Graph`3.VertexCount                          | 
+            <summary>
+            Specifies the number of vertices declared by the graph
+            </summary>
+        
+| M:Z0.Graph`3.Vertex(`0)                           | 
+            <summary>
+            Looks up a vertex based on its index
+            </summary>
+            <param name="index">The vertex index</param>
+        
+| M:Z0.Graph`3.Edge(System.Int32)                   | 
+            <summary>
+            Looks up an edge based on its index
+            </summary>
+            <param name="index">The vertex index</param>
+        
+| P:Z0.Graph`3.Item(`0)                             | 
+            <summary>
+            Looks up a vertex based on its index
+            </summary>
+            <param name="index">The vertex index</param>
+        
+| F:Z0.NodeIndex`1.SourceIndex                      | 
+            <summary>
+            Correlates sources with their targets
+            </summary>
+        
+| F:Z0.NodeIndex`1.TargetIndex                      | 
+            <summary>
+            Correlates targets with their sources
+            </summary>
+        
+| M:Z0.NodeIndex`1.Sources(`0)                      | 
+            <summary>
+            Retrieves the indices of a targets' source vertices 
+            </summary>
+            <param name="source">The source vertex</param>
+        
+| M:Z0.NodeIndex`1.Targets(`0)                      | 
+            <summary>
+            Retrieves the indices of a sources' target vertices
+            </summary>
+            <param name="source">The source vertex</param>
+        
+| T:Z0.Vertex`1                                     | 
+            <summary>
+            Defines a vertex within a graph
+            </summary>
+        
+| F:Z0.Vertex`1.Index                               | 
+            <summary>
+            The index of the vertex that uniquely identifies it within a graph
+            </summary>
+        
+| T:Z0.Vertex`2                                     | 
+            <summary>
+            Defines a vertex to which data may be attached
+            </summary>
+            <typeparam name="V">The vertex index type</typeparam>
+            <typeparam name="T">The payload type</typeparam>
+        
+| F:Z0.Vertex`2.Index                               | 
+            <summary>
+            The index of the vertex that uniquely identifies it within a graph
+            </summary>
+        
+| F:Z0.Vertex`2.Data                                | 
+            <summary>
+            The vertex payload
+            </summary>
+        
+| M:Z0.Vertex`2.op_Implicit(Z0.Vertex{`0,`1}@)~Z0.Vertex{`0}| 
+            <summary>
+            Sheds the associated data to form a payload-free vertex
+            </summary>
+            <param name="src">The source vertex</param>
+        
+| T:Z0.Ratio`1                                      | 
+            <summary>
+            Defines a ratio between two values, a measure that indicates how many times the first number contains the second
+            </summary>
+            <remarks>See https://en.wikipedia.org/wiki/Ratio</remarks>
+        
+| F:Z0.Ratio`1.A                                    | 
+            <summary>
+            The left value
+            </summary>
+        
+| F:Z0.Ratio`1.B                                    | 
+            <summary>
+            The right value
+            </summary>
+        

@@ -1,0 +1,2345 @@
+| P:Z0.Kinds.v128                                   | 
+            <summary>
+            Specifies the 128-bit vector type classifier
+            </summary>
+        
+| P:Z0.Kinds.v256                                   | 
+            <summary>
+            Specifies the 256-bit vector type classifier
+            </summary>
+        
+| P:Z0.Kinds.v512                                   | 
+            <summary>
+            Specifies the 512-bit vector type classifier
+            </summary>
+        
+| M:Z0.Kinds.vk128``1(``0)                          | 
+            <summary>
+            Reifies a cell-parametric 128-bit vector kind
+            </summary>
+        
+| M:Z0.Kinds.vk256``1(``0)                          | 
+            <summary>
+            Reifies a cell-parametric 256-bit vector kind
+            </summary>
+        
+| M:Z0.Kinds.vk512``1(``0)                          | 
+            <summary>
+            Reifies a cell-parametric 512-bit vector kind
+            </summary>
+        
+| P:Z0.IVectorKind.TypeDefinition                   | 
+            <summary>
+            The vector's generic type definition
+            </summary>
+        
+| P:Z0.IVectorKind.CellKind                         | 
+            <summary>
+            The vector numeric cell kind
+            </summary>
+        
+| P:Z0.IVectorKind.CellWidth                        | 
+            <summary>
+            The vector numeric cell width
+            </summary>
+        
+| M:Z0.IVectorKind.Close                            | 
+            <summary>
+            The reified vector type as determined by kind facets
+            </summary>
+        
+| T:Z0.IVectorType`2                                | 
+            <summary>
+            Characterizes an F-bound polymorphic reification that identifies an intrinsic vector generic type definition
+            </summary>
+            <typeparam name="F">The reification type</typeparam>
+        
+| T:Z0.A0`1                                         | 
+            <summary>
+            Classifies generic operations of arity 0
+            </summary>
+        
+| T:Z0.A1`1                                         | 
+            <summary>
+            Classifies parametric operations of arity 1
+            </summary>
+        
+| T:Z0.A2`1                                         | 
+            <summary>
+            Classifies parametric operations of arity 2
+            </summary>
+        
+| T:Z0.A3`1                                         | 
+            <summary>
+            Classifies parametric operations of arity 3
+            </summary>
+        
+| T:Z0.A0                                           | 
+            <summary>
+            Classifies operations of arity 0
+            </summary>
+        
+| T:Z0.A1                                           | 
+            <summary>
+            Classifies operations of arity 0
+            </summary>
+        
+| T:Z0.A2                                           | 
+            <summary>
+            Classifies operations of arity 0
+            </summary>
+        
+| T:Z0.A3                                           | 
+            <summary>
+            Classifies operations of arity 3
+            </summary>
+        
+| M:Z0.IdentityPart.Define(System.Byte,Z0.IdentityPartKind,System.String)| 
+            <summary>
+            Defines an identity part
+            </summary>
+            <param name="width">The scalar bit-width</param>
+        
+| T:Z0.NatNumericIdentity                           | 
+            <summary>
+            Defines identity for a pair NxT or MxNxT where M and N are natural types and T is numeric
+            </summary>
+        
+| F:Z0.NatNumericIdentity.M                         | 
+            <summary>
+            The number of grid rows
+            </summary>
+        
+| F:Z0.NatNumericIdentity.N                         | 
+            <summary>
+            The number of grid columns
+            </summary>
+        
+| F:Z0.NatNumericIdentity.T                         | 
+            <summary>
+            The numeric cell type
+            </summary>
+        
+| M:Z0.NatNumericIdentity.Format                    | 
+            <summary>
+            Formats the dimension in canonical form
+            </summary>
+        
+| T:Z0.PartUri                                      | 
+            <summary>
+            Uri for .net clr assembly
+            </summary>
+        
+| F:Z0.PartUri.Id                                   | 
+            <summary>
+            The assembly identifier, constrained to the defining enumeration
+            </summary>
+        
+| P:Z0.PartUri.UriText                              | 
+            <summary>
+            The uri content
+            </summary>
+        
+| T:Z0.Vec128Type                                   | 
+            <summary>
+            Represents the generic type definition for a 128-bit vector
+            </summary>
+        
+| T:Z0.Vec256Type                                   | 
+            <summary>
+            Represents the generic type definition for a 256-bit vector
+            </summary>
+        
+| T:Z0.Vec512Type                                   | 
+            <summary>
+            Represents the generic type definition for a 512-bit vector
+            </summary>
+        
+| M:Z0.BlockedKinds.kind(System.Type)               | 
+            <summary>
+            Determines the block classifier for a blocked type
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.BlockedKinds.segment(System.Type)            | 
+            <summary>
+            Determines the segment kind classifier for a blocked type
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.XTend.IsFloat(Z0.BlockedKind)                | 
+            <summary>
+            Determines whether the floating facet of a block classification is enabled
+            </summary>
+            <param name="k">The vector classifier</param>
+        
+| M:Z0.XTend.IsIntegral(Z0.BlockedKind)             | 
+            <summary>
+            Determines whether the signed or unsigned facet of a block classification is enabled
+            </summary>
+            <param name="k">The vector classifier</param>
+        
+| M:Z0.XTend.IsSigned(Z0.BlockedKind)               | 
+            <summary>
+            Determines whether the signed facet of a block classification is enabled
+            </summary>
+            <param name="k">The vector classifier</param>
+        
+| M:Z0.XTend.Format(Z0.FixedWidth)                  | 
+            <summary>
+            Produces a canonical text representation of the source kind
+            </summary>
+            <param name="src">The source kind</param>
+        
+| M:Z0.XTend.DistinctTypes(Z0.NumericKind)          | 
+            <summary>
+            Computes the primal types identified by a specified kind
+            </summary>
+            <param name="k">The primal kind</param>
+        
+| M:Z0.XTend.DistinctKinds(Z0.NumericKind)          | 
+            <summary>
+            Enumerates the distinct numeric kinds represented by the (bitfield) source kind
+            </summary>
+            <param name="k">The kind to evaluate</param>
+        
+| M:Z0.XTend.IsNumeric(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method has numeric operands (if any) and a numeric return type (if any)
+            </summary>
+            <param name="src">The method to examine</param>
+        
+| M:Z0.XTend.IsNumericOperator(System.Reflection.MethodInfo,System.Nullable{System.Int32})| 
+            <summary>
+            Determines whether a method is a numeric operator with a specified arity
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.NumericOperators(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Queries the stream for methods that are recognized as numeric operators
+            </summary>
+            <param name="src">The source stream</param>
+        
+| M:Z0.XTend.NumericOperators(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Int32)| 
+            <summary>
+            Selects numeric operators with a specifed arity from the source stream
+            </summary>
+            <param name="src">The methods to filter</param>
+        
+| M:Z0.XTend.Signature(System.Reflection.MethodInfo)| 
+            <summary>
+            Derives a signature from reflected method metadata
+            </summary>
+            <param name="src">The source method</param>
+        
+| M:Z0.XTend.WithAsm(Z0.OpIdentity)                 | 
+            <summary>
+            Enables the assembly indicator
+            </summary>
+        
+| M:Z0.XTend.WithGeneric(Z0.OpIdentity)             | 
+            <summary>
+            Enables the generic indicator
+            </summary>
+        
+| M:Z0.XTend.WithImm8(Z0.OpIdentity,System.Byte)    | 
+            <summary>        
+            Attaches an immediate suffix to an identity, removing an existing immediate suffix if necessary
+            </summary>
+            <param name="src">The source identity</param>
+            <param name="immval">The immediate value to attach</param>
+        
+| M:Z0.XTend.WithoutGeneric(Z0.OpIdentity)          | 
+            <summary>
+            Disables the generic indicator
+            </summary>
+        
+| M:Z0.XTend.WithoutImm8(Z0.OpIdentity)             | 
+            <summary>        
+            Clears an attached immediate suffix, if any
+            </summary>
+        
+| M:Z0.XTend.IsSome(Z0.FixedWidth)                  | 
+            <summary>
+            Determines whether the kind has a nonzero value
+            </summary>
+            <param name="src">The source kind</param>
+        
+| M:Z0.XTend.AcceptsImmediate(System.Reflection.MethodInfo,Z0.ImmRefinementKind)| 
+            <summary>
+            Determines whether a method defines a parameter that requires an 8-bit immediate immediate
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.AcceptsImmediate(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method defines a parameter that requires an 8-bit immediate immediate
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.AcceptsImmediate(System.Reflection.MethodInfo,System.Int32,Z0.ImmRefinementKind)| 
+            <summary>
+            Determines whether a method defines an index-identified parameter that requires an 8-bit immediate immediate
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.IsBinaryOperator(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method is a binary operator
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.IsBinaryFunction(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method defines a binary function
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.BinaryOperators(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Selects binary operators from a stream
+            </summary>
+            <param name="src">The methods to examine</param>
+        
+| M:Z0.XTend.ImmFunctionClass(System.Reflection.MethodInfo,Z0.ImmRefinementKind)| 
+            <summary>
+            Calculates a method's immediate class
+            </summary>
+            <param name="src">The method to classify</param>
+        
+| M:Z0.XTend.IsVectorizedImm(System.Reflection.MethodInfo,Z0.ImmRefinementKind)| 
+            <summary>
+            Determines whether a method is (partially) vectorized and accepts an immediate value
+            </summary>
+            <param name="src">The method to query</param>
+        
+| M:Z0.XTend.IsVectorizedUnaryImm(System.Reflection.MethodInfo,Z0.ImmRefinementKind)| 
+            <summary>
+            Determines whether a method is a vectorized unary operator that accepts an immediate value
+            </summary>
+            <param name="src">The method to query</param>
+        
+| M:Z0.XTend.IsVectorizedBinaryImm(System.Reflection.MethodInfo,Z0.ImmRefinementKind)| 
+            <summary>
+            Determines whether a method is a vectorized binary operator that accepts an immediate value
+            </summary>
+            <param name="src">The method to query</param>
+        
+| M:Z0.XTend.IsFullyVectorized(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method has intrinsic parameters or return type
+            </summary>
+            <param name="src">The method to test</param>
+        
+| M:Z0.XTend.IsFullyVectorized(System.Reflection.MethodInfo,Z0.W128)| 
+            <summary>
+            Determines whether all parameters of a method are 128-bit intrinsic vectors
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.XTend.IsFullyVectorized(System.Reflection.MethodInfo,Z0.W256)| 
+            <summary>
+            Determines whether all parameters of a method are 256-bit intrinsic vectors
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.XTend.IsFullyVectorized(System.Reflection.MethodInfo,Z0.W512)| 
+            <summary>
+            Determines whether all parameters of a method are 256-bit intrinsic vectors
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.XTend.IsFullyVectorized(System.Reflection.MethodInfo,Z0.W128,System.Type)| 
+            <summary>
+            Determines whether all parameters of a method are 128-bit intrinsic vectors with a specified cell type
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="w">The width to match</param>
+            <param name="tCell">The cell type to match</param>
+        
+| M:Z0.XTend.IsFullyVectorized(System.Reflection.MethodInfo,Z0.W256,System.Type)| 
+            <summary>
+            Determines whether all parameters of a method are 256-bit intrinsic vectors with a specified cell type
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="w">The width to match</param>
+            <param name="tCell">The cell type to match</param>
+        
+| M:Z0.XTend.IsFullyVectorized(System.Reflection.MethodInfo,Z0.W512,System.Type)| 
+            <summary>
+            Determines whether all parameters of a method are 512-bit intrinsic vectors with a specified cell type
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="w">The width to match</param>
+            <param name="tCell">The cell type to match</param>
+        
+| M:Z0.XTend.IsKind(System.Reflection.MethodInfo,Z0.Vec128Type,System.Boolean)| 
+            <summary>
+            Determines whether a method has intrinsic parameters or return type of specified width
+            </summary>
+            <param name="m">The method to examine</param>
+            <param name="width">The required vector width</param>
+            <param name="total">Whether all parameters and return type must be intrinsic</param>
+        
+| M:Z0.XTend.IsKind(System.Reflection.MethodInfo,Z0.Vec256Type,System.Boolean)| 
+            <summary>
+            Determines whether a method is of characterized vector kind
+            </summary>
+            <param name="m">The method to examine</param>
+            <param name="vk">The vector kind under test</param>
+            <param name="total">Whether all parameters and return type must be intrinsic</param>
+        
+| M:Z0.XTend.IsKind(System.Reflection.MethodInfo,Z0.Vec512Type,System.Boolean)| 
+            <summary>
+            Determines whether a method is of characterized vector kind
+            </summary>
+            <param name="m">The method to examine</param>
+            <param name="vk">The vector kind under test</param>
+            <param name="total">Whether all parameters and return type must be intrinsic</param>
+        
+| M:Z0.XTend.IsKind``1(System.Reflection.MethodInfo,Z0.Vec128Kind{``0})| 
+            <summary>
+            Determines whether a method is of characterized vector kind
+            </summary>
+            <param name="m">The method to examine</param>
+            <param name="vk">The vector kind under test</param>
+            <param name="total">Whether all parameters and return type must be intrinsic</param>
+        
+| M:Z0.XTend.IsKind``1(System.Reflection.MethodInfo,Z0.Vec256Kind{``0})| 
+            <summary>
+            Determines whether a method is of characterized vector kind
+            </summary>
+            <param name="m">The method to examine</param>
+            <param name="vk">The vector kind under test</param>
+            <param name="total">Whether all parameters and return type must be intrinsic</param>
+        
+| M:Z0.XTend.IsKind``1(System.Reflection.MethodInfo,Z0.Vec512Kind{``0})| 
+            <summary>
+            Determines whether a method is of characterized vector kind
+            </summary>
+            <param name="m">The method to examine</param>
+            <param name="vk">The vector kind under test</param>
+            <param name="total">Whether all parameters and return type must be intrinsic</param>
+        
+| M:Z0.XTend.IsNaturalNumeric(System.Reflection.MethodInfo)| 
+            <summary>
+            Returns true if a method is open generic with parametric arity 2 and is attributed 
+            with both natural an numeric closures
+            </summary>
+            <param name="m">The method to test</param>
+        
+| M:Z0.XTend.NaturalNumeric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Selects the natural numeric methods from a stream
+            </summary>
+            <param name="src">The methods to examine</param>
+        
+| M:Z0.XTend.IsVectorized(System.Reflection.MethodInfo,Z0.W128)| 
+            <summary>
+            Determines whether a method has at least one 128-bit intrinsic vector parameter 
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.XTend.IsVectorized(System.Reflection.MethodInfo,Z0.W256)| 
+            <summary>
+            Determines whether a method has at least one 128-bit intrinsic vector parameter 
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.XTend.IsVectorized(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method has intrinsic parameters or return type
+            </summary>
+            <param name="src">The method to test</param>
+        
+| M:Z0.XTend.IsVectorized(System.Reflection.MethodInfo,Z0.W512)| 
+            <summary>
+            Determines whether a method has at least one 128-bit intrinsic vector parameter 
+            </summary>
+            <param name="m">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.XTend.IsVectorized(System.Reflection.MethodInfo,Z0.W128,System.Type)| 
+            <summary>
+            Determines whether a method has at least one 128-bit intrinsic vector parameter closed over a specified type
+            </summary>
+            <param name="m">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.XTend.IsVectorized(System.Reflection.MethodInfo,Z0.W256,System.Type)| 
+            <summary>
+            Determines whether a method has at least one 256-bit intrinsic vector parameter closed over a specified type
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.XTend.IsVectorized(System.Reflection.MethodInfo,Z0.W512,System.Type)| 
+            <summary>
+            Determines whether a method has at least one 512-bit intrinsic vector parameter closed over a specified type
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.XTend.IsVectorized(System.Reflection.MethodInfo,Z0.W128,Z0.GenericPartition)| 
+            <summary>
+            Selcts vectorized methods from a source stream
+            </summary>
+            <param name="src">The source strean</param>
+            <param name="w">The vector width</param>
+            <param name="g">The generic partition from which methods should be selected</param>
+        
+| M:Z0.XTend.IsVectorized(System.Reflection.MethodInfo,Z0.W256,Z0.GenericPartition)| 
+            <summary>
+            Selcts vectorized methods from a source stream
+            </summary>
+            <param name="src">The source strean</param>
+            <param name="w">The vector width</param>
+            <param name="g">The generic partition from which methods should be selected</param>
+        
+| M:Z0.XTend.IsVectorized(System.Reflection.MethodInfo,Z0.W512,Z0.GenericPartition)| 
+            <summary>
+            Selcts vectorized methods from a source stream
+            </summary>
+            <param name="src">The source strean</param>
+            <param name="w">The vector width</param>
+            <param name="g">The generic partition from which methods should be selected</param>
+        
+| M:Z0.XTend.IsVectorizedOperator(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method is a vectorized operator which, by definition, is an operator 
+            (which, by definition, is an homogenous function) with a vectorized operand which, by definition, 
+            is an operand of intrinsic vector type (which, by definition, is one of the system-defined intrinsic vector types
+            or a custom instrinsic vector type)
+            </summary>
+            <param name="src">The method to test</param>
+        
+| M:Z0.XTend.IsKinded(System.Reflection.MethodInfo) | 
+            <summary>
+            Determines whether the method has a kind identifier
+            </summary>
+            <param name="m">The source method</param>
+        
+| M:Z0.XTend.IsKindedOperator(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method defines an operator with identified kind
+            </summary>
+            <param name="m">The source method</param>
+        
+| M:Z0.XTend.Kinded(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Queries the stream for methods that have a nonemtpy kind assignment
+            </summary>
+            <param name="src">The souce methods</param>
+        
+| M:Z0.XTend.Kinded(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.OpKindId)| 
+            <summary>
+            Queries the stream for mathods that are of a specified kind
+            </summary>
+            <param name="src">The souce methods</param>
+            <param name="kind">The kind to match</param>
+        
+| M:Z0.XTend.KindedOperators(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Queries the stream for methods that have a nonemtpy kind assignment
+            </summary>
+            <param name="src">The souce methods</param>
+            <param name="kind">The kind to match</param>
+        
+| M:Z0.XTend.OfKind(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.Vec128Type,System.Boolean)| 
+            <summary>
+            Selects methods from a stream that accept and/or return intrinsic vectors
+            </summary>
+            <param name="src">The methods to examine</param>
+        
+| M:Z0.XTend.OfKind(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.Vec256Type,System.Boolean)| 
+            <summary>
+            Selects methods from a stream that accept and/or return intrinsic vectors
+            </summary>
+            <param name="src">The methods to examine</param>
+        
+| M:Z0.XTend.OfKind``1(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.Vec128Kind{``0})| 
+            <summary>
+            Selects methods from a stream that accept and/or return intrinsic vectors
+            </summary>
+            <param name="src">The methods to examine</param>
+        
+| M:Z0.XTend.OfKind``1(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.Vec256Kind{``0})| 
+            <summary>
+            Selects methods from a stream that accept and/or return intrinsic vectors
+            </summary>
+            <param name="src">The methods to examine</param>
+        
+| M:Z0.XTend.IsOperator(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method defines an operator over a (common) domain
+            </summary>
+            <param name="src">The method to examine</param>
+        
+| M:Z0.XTend.IsHomogenous(System.Reflection.MethodInfo)| 
+            <summary>
+            Returns true if all non-void input/output values are of the same type
+            </summary>
+            <param name="src">The method to examine</param>
+        
+| M:Z0.XTend.ClassifyOperator(System.Reflection.MethodInfo)| 
+            <summary>
+            Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
+            </summary>
+            <param name="src">The method to examine</param>
+        
+| M:Z0.XTend.ReturnsVector(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method returns an intrinsic vector
+            </summary>
+            <param name="src">The method to test</param>
+        
+| M:Z0.XTend.IsTernaryFunction(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method defines a binary function
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.IsTernaryOperator(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method is a ternary operator
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.TernaryOperators(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Selects ternary operators from a stream
+            </summary>
+            <param name="src">The methods to examine</param>
+        
+| M:Z0.XTend.IsUnaryFunction(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method defines a unary function
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.IsUnaryOperator(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method is a unary operator
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.UnaryOperators(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Selects unary operators from a stream
+            </summary>
+            <param name="src">The methods to examine</param>
+        
+| M:Z0.XTend.Vectorized(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W128,System.Boolean)| 
+            <summary>
+            Selcts vectorized methods from a source stream
+            </summary>
+            <param name="src">The source strean</param>
+            <param name="w">The vector width</param>
+            <param name="g">The generic partition from which methods should be selected</param>
+        
+| M:Z0.XTend.Vectorized(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W256,System.Boolean)| 
+            <summary>
+            Selcts vectorized methods from a source stream
+            </summary>
+            <param name="src">The source strean</param>
+            <param name="w">The vector width</param>
+            <param name="g">The generic partition from which methods should be selected</param>
+        
+| M:Z0.XTend.Vectorized(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W512,System.Boolean)| 
+            <summary>
+            Selcts vectorized methods from a source stream
+            </summary>
+            <param name="src">The source strean</param>
+            <param name="w">The vector width</param>
+            <param name="g">The generic partition from which methods should be selected</param>
+        
+| M:Z0.XTend.Vectorized(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W128,System.String,System.Boolean)| 
+            <summary>
+            Selects vectorized methods from a stream predicated on width, name and generic partition membership
+            </summary>
+            <param name="src">The source stream</param>
+            <param name="w">The vector width</param>
+            <param name="name">The name to match</param>
+            <param name="g">The generic partition to which the considered members belong</param>
+        
+| M:Z0.XTend.Vectorized(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W256,System.String,System.Boolean)| 
+            <summary>
+            Selects vectorized methods from a stream predicated on width, name and generic partition membership
+            </summary>
+            <param name="src">The source stream</param>
+            <param name="w">The vector width</param>
+            <param name="name">The name to match</param>
+            <param name="g">The generic partition to which the considered members belong</param>
+        
+| M:Z0.XTend.Vectorized(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W512,System.String,System.Boolean)| 
+            <summary>
+            Selects vectorized methods from a stream predicated on width, name and generic partition membership
+            </summary>
+            <param name="src">The source stream</param>
+            <param name="w">The vector width</param>
+            <param name="name">The name to match</param>
+            <param name="generic">The generic partition to which the considered members belong</param>
+        
+| M:Z0.XTend.VectorizedDirect(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W128)| 
+            <summary>
+            Selects nongeneric source methods that have at least one 128-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedDirect(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W256)| 
+            <summary>
+            Selects nongeneric source methods that have at least one 256-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedDirect(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W512)| 
+            <summary>
+            Selects nongeneric source methods that have at least one 512-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedDirect(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W128,System.String)| 
+            <summary>
+            Selects nongeneric source methods with a specified name that have at least one 128-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedDirect(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W256,System.String)| 
+            <summary>
+            Selects nongeneric source methods with a specified name that have at least one 256-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedDirect(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W512,System.String)| 
+            <summary>
+            Selects nongeneric source methods with a specified name that have at least one 512-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedDirect(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W128,System.Type)| 
+            <summary>
+            Selects nongeneric source methods that have at least one 128-bit vector parameter closed over a specified type
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedDirect(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W256,System.Type)| 
+            <summary>
+            Selects nongeneric source methods that have at least one 256-bit vector parameter closed over a specified type
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedDirect(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W512,System.Type)| 
+            <summary>
+            Selects nongeneric source methods that have at least one 512-bit vector parameter closed over a specified type
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedDirect``1(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W128)| 
+            <summary>
+            Selects nongeneric source methods that have at least one 128-bit vector parameter closed over a specified parametric type
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+            <typeparam name="T">The type to match</typeparam>
+        
+| M:Z0.XTend.VectorizedDirect``1(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W256)| 
+            <summary>
+            Selects nongeneric source methods that have at least one 256-bit vector parameter closed over a specified parametric type
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+            <typeparam name="T">The type to match</typeparam>
+        
+| M:Z0.XTend.VectorizedDirect``1(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W512)| 
+            <summary>
+            Selects nongeneric source methods that have at least one 512-bit vector parameter closed over a specified parametric type
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+            <typeparam name="T">The type to match</typeparam>
+        
+| M:Z0.XTend.VectorizedGeneric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W128)| 
+            <summary>
+            Selects open generic source methods that have at least one 128-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedGeneric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W256)| 
+            <summary>
+            Selects open generic source methods that have at least one 256-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedGeneric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W512)| 
+            <summary>
+            Selects open generic source methods that have at least one 512-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedGeneric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W128,System.String)| 
+            <summary>
+            Selects open generic source methods with a specified name that have at least one 128-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedGeneric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W256,System.String)| 
+            <summary>
+            Selects open generic source methods with a specified name that have at least one 256-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.VectorizedGeneric(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.W512,System.String)| 
+            <summary>
+            Selects open generic source methods with a specified name that have at least one 512-bit vector parameter
+            </summary>
+            <param name="src">The source methods</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.ArityValue(Z0.OperatorClass)           | 
+            <summary>
+            Determines the numeric arity of a classified operator
+            </summary>
+            <param name="src">The operator class</param>
+        
+| M:Z0.XTend.ImmParameters(System.Reflection.MethodInfo,Z0.ImmRefinementKind)| 
+            <summary>
+            Selects parameters from a method, if any, that acceptrequire an immediate value
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.ImmRefinementType(System.Reflection.ParameterInfo)| 
+            <summary>
+            Determines the imm refinement type, if any
+            </summary>
+            <param name="src">The source parameter</param>
+        
+| M:Z0.XTend.IsClosedVector(System.Reflection.ParameterInfo,Z0.W128)| 
+            <summary>
+            Returns true if a method parameter is a closed 128-bit intrinsic vector
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.IsClosedVector(System.Reflection.ParameterInfo,Z0.W256)| 
+            <summary>
+            Returns true if a method parameter is a closed 256-bit intrinsic vector
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.IsClosedVector(System.Reflection.ParameterInfo,Z0.W512)| 
+            <summary>
+            Returns true if a method parameter is a closed 512-bit intrinsic vector
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.IsImmediate(System.Reflection.ParameterInfo,Z0.ImmRefinementKind)| 
+            <summary>
+            Determines whether a parameters is an immediate
+            </summary>
+            <param name="src">The source parameter</param>
+        
+| M:Z0.XTend.IsUnrefinedImmediate(System.Reflection.ParameterInfo)| 
+            <summary>
+            Determines whether a parameters is an unrefined immediate
+            </summary>
+            <param name="src">The source parameter</param>
+        
+| M:Z0.XTend.IsRefinedImmediate(System.Reflection.ParameterInfo)| 
+            <summary>
+            Determines whether a parameters is a refined immediate
+            </summary>
+            <param name="src">The source parameter</param>
+        
+| M:Z0.XTend.ImmParameterTypes(System.Reflection.MethodInfo,Z0.ImmRefinementKind)| 
+            <summary>
+            Returns a method's immediate parameter types
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.XTend.IsVector(System.Reflection.ParameterInfo)| 
+            <summary>
+            Determines whether a parameter is of intrinsic vector type
+            </summary>
+            <param name="p">The parameter to examine</param>
+        
+| M:Z0.XTend.IsVector(System.Reflection.ParameterInfo,Z0.W128)| 
+            <summary>
+            Determines whether a parameter is of type 128-bit intrinsic vector
+            </summary>
+            <param name="p">The parameter to examine</param>
+        
+| M:Z0.XTend.IsVector(System.Reflection.ParameterInfo,Z0.W256)| 
+            <summary>
+            Determines whether a parameter is of type 256-bit intrinsic vector
+            </summary>
+            <param name="p">The parameter to examine</param>
+        
+| M:Z0.XTend.IsVector(System.Reflection.ParameterInfo,Z0.W512)| 
+            <summary>
+            Determines whether a parameter is of type 512-bit intrinsic vector
+            </summary>
+            <param name="p">The parameter to examine</param>
+        
+| M:Z0.XTend.IsVector(System.Reflection.ParameterInfo,Z0.W128,System.Type)| 
+            <summary>
+            Returns true if a method parameter is a 128-bit intrinsic vector closed over a specified argument type
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+            <param name="tCell">The argument type to match</param>
+        
+| M:Z0.XTend.IsVector(System.Reflection.ParameterInfo,Z0.W256,System.Type)| 
+            <summary>
+            Returns true if a method parameter is a 256-bit intrinsic vector closed over a specified argument type
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+            <param name="tCell">The argument type to match</param>
+        
+| M:Z0.XTend.IsVector(System.Reflection.ParameterInfo,Z0.W512,System.Type)| 
+            <summary>
+            Returns true if a method parameter is a 512-bit intrinsic vector closed over a specified argument type
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+            <param name="tCell">The argument type to match</param>
+        
+| M:Z0.XTend.IsClosedVector(System.Type,Z0.W128)    | 
+            <summary>
+            Returns true if a type is a closed 128-bit intrinsic vector
+            </summary>
+            <param name="param">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.IsClosedVector(System.Type,Z0.W256)    | 
+            <summary>
+            Returns true if a type is a closed 256-bit intrinsic vector
+            </summary>
+            <param name="param">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.IsClosedVector(System.Type,Z0.W512)    | 
+            <summary>
+            Returns true if a type is a closed 512-bit intrinsic vector
+            </summary>
+            <param name="param">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.IsOpenVector(System.Type,Z0.W128)      | 
+            <summary>
+            Returns true if a type is an open generic 512-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.IsOpenVector(System.Type,Z0.W256)      | 
+            <summary>
+            Returns true if a type is an open generic 512-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.IsOpenVector(System.Type,Z0.W512)      | 
+            <summary>
+            Returns true if a type is an open generic 512-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.XTend.IsVector(System.Type,Z0.W128,System.Type)| 
+            <summary>
+            Determines whether a type is a 128-bit intrinsic vector closed over a specified type
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.XTend.IsVector(System.Type,Z0.W256,System.Type)| 
+            <summary>
+            Determines whether a type is a 256-bit intrinsic vector closed over a specified type
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.XTend.IsVector(System.Type,Z0.W512,System.Type)| 
+            <summary>
+            Determines whether a type is a 512-bit intrinsic vector closed over a specified type
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.XTend.IsVector(System.Type,Z0.W128)          | 
+            <summary>
+            Determines whether a type is a 128-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.XTend.IsVector(System.Type,Z0.W256)          | 
+            <summary>
+            Determines whether a type is a 256-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.XTend.IsVector(System.Type,Z0.W512)          | 
+            <summary>
+            Determines whether a type is a 512-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.XTend.BitWidth(Z0.VectorKind)                | 
+            <summary>
+            Specifies the bit-width of a classified cpu vector
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.XTend.CellType(Z0.VectorKind)                | 
+            <summary>
+            Returns the clr cell type of a vector of specified kind
+            </summary>
+            <param name="kind">The vector kind</param>
+        
+| M:Z0.XTend.HasCellType(Z0.VectorKind,System.SByte)| 
+            <summary>
+            Determines whether a vector of specified kind has a singed 8-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.XTend.HasCellType(Z0.VectorKind,System.Byte) | 
+            <summary>
+            Determines whether a vector of specified kind has an unsigned 8-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.XTend.HasCellType(Z0.VectorKind,System.Int16)| 
+            <summary>
+            Determines whether a vector of specified kind has a singed 16-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.XTend.HasCellType(Z0.VectorKind,System.UInt16)| 
+            <summary>
+            Determines whether a vector of specified kind has an unsigned 16-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.XTend.HasCellType(Z0.VectorKind,System.Int32)| 
+            <summary>
+            Determines whether a vector of specified kind has a singed 32-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.XTend.HasCellType(Z0.VectorKind,System.UInt32)| 
+            <summary>
+            Determines whether a vector of specified kind has an unsigned 32-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.XTend.HasCellType(Z0.VectorKind,System.Int64)| 
+            <summary>
+            Determines whether a vector of specified kind has a singed 64-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.XTend.HasCellType(Z0.VectorKind,System.UInt64)| 
+            <summary>
+            Determines whether a vector of specified kind has an unsigned 64-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.XTend.HasCellType(Z0.VectorKind,System.Single)| 
+            <summary>
+            Determines whether a vector of specified kind has a 32-bit floating-point cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.XTend.HasCellType(Z0.VectorKind,System.Double)| 
+            <summary>
+            Determines whether a vector of specified kind has a 64-bit floating-point cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.XTend.VectorKind``1(Z0.W128)                 | 
+            <summary>
+            Classifies a 128-bit vector
+            </summary>
+            <param name="w">The vector width</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.XTend.VectorKind``1(Z0.W256)                 | 
+            <summary>
+            Classifies a 256-bit vector
+            </summary>
+            <param name="w">The vector width</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.XTend.VectorKind``1(Z0.W512)                 | 
+            <summary>
+            Classifies a 512-bit vector
+            </summary>
+            <param name="w">The vector width</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.ICheckAction.CheckAction(System.Action,System.String)| 
+            <summary>
+            Manages the execution of an action that performs a validation exercise
+            </summary>
+            <param name="f">The action under test</param>
+            <param name="name">The action name</param>
+        
+| M:Z0.Identify.resource(System.String,Z0.ITypeWidth,Z0.NumericKind)| 
+            <summary>
+            
+            </summary>
+            <param name="basename">The base name of the resource</param>
+            <param name="w">The resource bit width</param>
+            <param name="kind">The numeric kind of the resource</param>
+        
+| M:Z0.Identify.resource(System.String,Z0.ITypeWidth,Z0.ITypeWidth,Z0.NumericKind)| 
+            <summary>
+            
+            </summary>
+            <param name="basename">The base name of the resource</param>
+            <param name="w1">The first bit width</param>
+            <param name="w2">The second bit width</param>
+            <param name="kind">The numeric kind of the resource</param>
+        
+| M:Z0.Identify.resource(System.String,Z0.ITypeNat,Z0.NumericKind)| 
+            <summary>
+            Defines a numeric resource identity predicated on natural bitwidth
+            </summary>
+            <param name="basename">The base name of the resource</param>
+            <param name="w">The resource bit width</param>
+            <param name="kind">The numeric kind of the resource</param>
+        
+| M:Z0.Identify.resource(System.String,Z0.ITypeNat,Z0.ITypeNat,Z0.NumericKind)| 
+            <summary>
+            Defines a numeric resource identity predicated on two natural bitwidths
+            </summary>
+            <param name="basename">The base name of the resource</param>
+            <param name="w1">The first bit width</param>
+            <param name="w2">The second bit width</param>
+            <param name="kind">The numeric kind of the resource</param>
+        
+| M:Z0.Identify.segmented(System.String,Z0.TypeWidth,Z0.NumericKind)| 
+            <summary>
+            Defines a segmented type identity predicated on type width numeric kind specifications
+            </summary>
+            <param name="name">The type name</param>
+            <param name="wk">The width kind</param>
+            <param name="nk">The numeric kind</param>
+        
+| M:Z0.Identify.types(Z0.NumericKind)               | 
+            <summary>
+            Computes the primal types identified by a specified kind
+            </summary>
+            <param name="k">The primal kind</param>
+        
+| M:Z0.Identify.kinds(Z0.NumericKind)               | 
+            <summary>
+            Computes the primal types identified by a specified kind
+            </summary>
+            <param name="k">The primal kind</param>
+        
+| M:Z0.Identify.Imm8(System.Byte)                   | 
+            <summary>
+            Defines an 8-bit immediate suffix predicated on an immediate value
+            </summary>
+            <param name="immval">The source value</param>
+        
+| M:Z0.Identify.Owner(System.Type)                  | 
+            <summary>
+            Produces the formatted identifier of the declaring assembly
+            </summary>
+            <param name="host">The source type</param>
+        
+| M:Z0.Identify.TestCase(System.Type,Z0.IFunc)      | 
+            <summary>
+            Produces the name of the test case for the specified function
+            </summary>
+            <param name="f">The function</param>
+        
+| M:Z0.Identify.HostUri(System.Type)                | 
+            <summary>
+            Produces an identifier of the form {owner}/{host} where owner is the formatted identifier of the declaring assembly
+            and host is the name of the type
+            </summary>
+            <param name="host">The source type</param>
+        
+| M:Z0.Identify.duplicates(System.Collections.Generic.IEnumerable{Z0.OpIdentity})| 
+            <summary>
+            Returns the duplicate identities found in the source stream, if any; otherwise, returns an empty array
+            </summary>
+            <param name="src">The identities to search for duplicates</param>
+        
+| M:Z0.Identify.name(Z0.OpKindId)                   | 
+            <summary>
+            Produces the canonical name of a kinded operation
+            </summary>
+            <param name="k">The operation kind id</param>
+        
+| M:Z0.Identify.vname(Z0.OpKindId)                  | 
+            <summary>
+            Produces the canonical name of a kinded vectorized operation
+            </summary>
+            <param name="k">The operation kind id</param>
+        
+| M:Z0.Identify.numeric``1(Z0.OpKindId,``0,System.Boolean)| 
+            <summary>
+            Produces an identifer for a kinded numeric operation
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+            <typeparam name="T">The operation numeric kind</typeparam>
+        
+| M:Z0.Identify.vectorized(Z0.OpKindId,Z0.TypeWidth,Z0.NumericKind,System.Boolean)| 
+            <summary>
+            Produces an identifier for a kinded vectorized operation
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector operand width</param>
+            <param name="nk">The vector cell kind</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+        
+| M:Z0.Identify.vdirect``1(Z0.OpKindId,Z0.TypeWidth,``0)| 
+            <summary>
+            Produces an identifier for a kinded nongeneric vectorized operation
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector operand width</param>
+            <typeparam name="W">The vector operand width</typeparam>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Identify.vdirect``2(Z0.OpKindId,``0,``1)     | 
+            <summary>
+            Produces an identifier for a kinded nongeneric vectorized operation
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector operand width</param>
+            <typeparam name="W">The vector operand width</typeparam>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Identify.vgeneric``2(Z0.OpKindId,``0,``1)    | 
+            <summary>
+            Produces an identifier for a kinded generic vectorized operation
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector operand width</param>
+            <typeparam name="W">The vector operand width</typeparam>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Identify.sfunc``1(Z0.OpKindId,``0)           | 
+            <summary>
+            Produces an identifier for a kinded numeric structural function
+            </summary>
+            <param name="k">The operation kind id</param>
+            <typeparam name="T">The numeric type</typeparam>
+        
+| M:Z0.Identify.sfunc(Z0.OpKindId,Z0.NumericKind)   | 
+            <summary>
+            Produces an identifier for a kinded numeric structural function
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="nk">The operation numeric kind</param>
+        
+| M:Z0.Identify.sfunc(Z0.OpKindId,Z0.TypeWidth,Z0.NumericKind,System.Boolean)| 
+            <summary>
+            Produces an identifier for a kinded structural function of segmented type
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">A segment width representative</param>
+            <param name="t">A cell type representative</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+        
+| M:Z0.Identify.sfunc``1(Z0.OpKindId,Z0.TypeWidth,``0,System.Boolean)| 
+            <summary>
+            Produces an identifier for a kinded structural function of segmented type
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">A segment width representative</param>
+            <param name="t">A cell type representative</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+        
+| M:Z0.Identify.sfunc``2(Z0.OpKindId,``0,``1,System.Boolean)| 
+            <summary>
+            Produces an identifier for a kinded structural function of segmented type
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">A segment width representative</param>
+            <param name="t">A cell type representative</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+            <typeparam name="W">The width type</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        
+| M:Z0.Identify.vsfunc(Z0.OpKindId,Z0.TypeWidth,Z0.NumericKind,System.Boolean)| 
+            <summary>
+            Produces an identifier for a kinded vectorized structural function
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector width</param>
+            <param name="nk">The cell numeric kind</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+        
+| M:Z0.Identify.vsfunc``1(Z0.OpKindId,Z0.TypeWidth,``0,System.Boolean)| 
+            <summary>
+            Produces an identifier for a kinded vectorized structural function
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector width</param>
+            <param name="nk">The cell numeric kind</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Identify.vsfunc``2(Z0.OpKindId,``0,``1,System.Boolean)| 
+            <summary>
+            Produces an identifier for a kinded vectorized structural function
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">A vector width representative</param>
+            <param name="t">A cell type representative</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+            <typeparam name="W">The vector width type</typeparam>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.Identify.numeric(Z0.NumericKind)             | 
+            <summary>
+            Defines a scalar type identity
+            </summary>
+            <param name="width">The scalar bit-width</param>
+        
+| M:Z0.Identify.numeric``1(``0)                     | 
+            <summary>
+            Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
+            </summary>
+            <param name="t">A primal type representative</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.Identify.numeric(System.String)              | 
+            <summary>
+            Attempts to parse a numeric kind from a string in the form {width}{indicator} 
+            </summary>
+            <param name="src">The source text</param>
+        
+| M:Z0.Identify.numeric(System.Collections.Generic.IEnumerable{System.String})| 
+            <summary>
+            Attempts to parse a sequence of numeric kinds from a sequence of strings in the form {width}{indicator} 
+            </summary>
+            <param name="src">The source text</param>
+        
+| M:Z0.Identify.NumericOp(System.String,Z0.NumericKind,System.Boolean)| 
+            <summary>
+            Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="k">The primal kind over which the identifier is deined</param>
+        
+| M:Z0.Identify.NumericOp``1(System.String,Z0.NK{``0},System.Boolean)| 
+            <summary>
+            Produces an identifier of the form {opname}_g{kind}{u | i | f}
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="t">A primal type representative</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.Identify.NumericOp``1(System.String,System.Boolean)| 
+            <summary>
+            Produces an identifier of the form {opname}_g{kind}{u | i | f}
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="t">A primal type representative</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.Identify.NumericOp(Z0.OpKindId,System.Boolean,Z0.NumericKind[])| 
+            <summary>
+            Defines kinded identifiers for numeric functions
+            </summary>
+            <param name="id">The operation kind id</param>
+            <param name="generic">Whether the operation should include a generic marker</param>
+            <param name="kinds">The numeric argument kinds</param>
+        
+| M:Z0.Identify.NumericOp(Z0.OpKindId,Z0.NumericKind[])| 
+            <summary>
+            Defines kinded identifiers for nongeneric numeric functions
+            </summary>
+            <param name="id">The operation kind id</param>
+            <param name="kinds">The numeric argument kinds</param>
+        
+| M:Z0.Identify.Op(System.String,Z0.TypeWidth,Z0.NumericKind,System.Boolean)| 
+            <summary>
+            Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="w">The covering bit width representative</param>
+            <param name="t">A primal cell type representative</param>
+            <typeparam name="W">The bit width type</typeparam>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.Identify.Op``2(System.String,``0,``1)        | 
+            <summary>
+            Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="w">The covering bit width representative</param>
+            <param name="t">A primal cell type representative</param>
+            <typeparam name="W">The bit width type</typeparam>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.Identify.Op``1(System.String,``0,System.Boolean)| 
+            <summary>
+            Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="k">The primal kind over which the identifier is deined</param>
+        
+| M:Z0.Identify.Op(System.String,Z0.NumericKind,System.Boolean)| 
+            <summary>
+            Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="k">The primal kind over which the identifier is deined</param>
+        
+| M:Z0.Identify.sfunc``2(System.String,``0,``1,System.Boolean)| 
+            <summary>
+            Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="w">The covering bit width representative</param>
+            <param name="t">A primal cell type representative</param>
+            <typeparam name="W">The bit width type</typeparam>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.Identify.sfunc``1(System.String)             | 
+            <summary>
+            Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="t">A primal type representative</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.Identify.sfunc``1(System.String,Z0.Vec128Kind{``0})| 
+            <summary>
+            Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="t">A primal type representative</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.Identify.sfunc``1(System.String,Z0.Vec256Kind{``0})| 
+            <summary>
+            Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="t">A primal type representative</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.IdentityReflector.IsHomogenous(System.Reflection.MethodInfo)| 
+            <summary>
+            Returns true if all non-void input/output values are of the same type
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.TIdentityReflector.AcceptsVector(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method accepts an intrinsic vector in some parameter slot
+            </summary>
+            <param name="src">The method to test</param>
+        
+| M:Z0.TIdentityReflector.AcceptsVector(System.Reflection.MethodInfo,System.Int32)| 
+            <summary>
+            Determines whether a method accepts an intrinsic vector at an index-identified parameter
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="index">THe parameter index to match</param>
+        
+| M:Z0.TIdentityReflector.AcceptsVector(System.Reflection.MethodInfo,System.Int32,Z0.W128)| 
+            <summary>
+            Determines whether a method accepts a 128-bit intrinsic vector at an index-identified parameter
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="index">THe parameter index to match</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.TIdentityReflector.AcceptsVector(System.Reflection.MethodInfo,System.Int32,Z0.W256)| 
+            <summary>
+            Determines whether a method accepts a 128-bit intrinsic vector at an index-identified parameter
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="index">THe parameter index to match</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.TIdentityReflector.AcceptsVector(System.Reflection.MethodInfo,System.Int32,Z0.W512)| 
+            <summary>
+            Determines whether a method accepts a 128-bit intrinsic vector at an index-identified parameter
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="index">THe parameter index to match</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.TIdentityReflector.AcceptsVector(System.Reflection.MethodInfo,System.Int32,Z0.W128,System.Type)| 
+            <summary>
+            Determines whether a method accepts a 128-bit intrinsic vector at an index-identified parameter of specified cell type
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="index">THe parameter index to match</param>
+            <param name="w">The width to match</param>
+            <param name="tCell">The cell type to match</param>
+        
+| M:Z0.TIdentityReflector.AcceptsVector(System.Reflection.MethodInfo,System.Int32,Z0.W256,System.Type)| 
+            <summary>
+            Determines whether a method accepts a 256-bit intrinsic vector at an index-identified parameter of specified cell type
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="index">THe parameter index to match</param>
+            <param name="w">The width to match</param>
+            <param name="tCell">The cell type to match</param>
+        
+| M:Z0.TIdentityReflector.AcceptsVector(System.Reflection.MethodInfo,System.Int32,Z0.W512,System.Type)| 
+            <summary>
+            Determines whether a method accepts a 512-bit intrinsic vector at an index-identified parameter of specified cell type
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="index">The parameter index to match</param>
+            <param name="w">The width to match</param>
+            <param name="tCell">The cell type to match</param>
+        
+| M:Z0.TIdentityReflector.IsAction(System.Reflection.MethodInfo)| 
+            <summary>
+            Dtermines whether a method has a void return
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.TIdentityReflector.Actions(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Queries the stream for methods that are actions
+            </summary>
+            <param name="src">The source stream</param>
+        
+| M:Z0.TIdentityReflector.ArityClass(System.Reflection.MethodInfo)| 
+            <summary>
+            Assigns an arity classification, if any, to a method
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.TIdentityReflector.WithArityClass(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Queries the stream for methods with a nonempty arity classification
+            </summary>
+            <param name="src">The source stream</param>
+        
+| M:Z0.TIdentityReflector.WithArityClass(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.ArityClass)| 
+            <summary>
+            Queries the stream for methods with a specified arity classification
+            </summary>
+            <param name="src">The source stream</param>
+        
+| M:Z0.TIdentityReflector.IsSource(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
+            </summary>
+            <param name="m">The method to classify</param>
+        
+| M:Z0.TIdentityReflector.IsSink(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method has void return and has arity = 1
+            </summary>
+            <param name="m">The method to classify</param>
+        
+| M:Z0.TIdentityReflector.IsFunction(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method is a function
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.TIdentityReflector.IsNumericFunction(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method is a function with numeric operands (if any) and return type
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.TIdentityReflector.Functions(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Queries the stream for methods that are functions
+            </summary>
+            <param name="src">The source stream</param>
+        
+| M:Z0.TIdentityReflector.IsOperator(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method defines an operator over a (common) domain
+            </summary>
+            <param name="src">The method to examine</param>
+        
+| M:Z0.TIdentityReflector.ClassifyOperator(System.Reflection.MethodInfo)| 
+            <summary>
+            Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
+            </summary>
+            <param name="src">The method to examine</param>
+        
+| M:Z0.TIdentityReflector.WithOperatorClass(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Queries the stream for methods with a nonempty operator classification
+            </summary>
+            <param name="src">The source stream</param>
+        
+| M:Z0.TIdentityReflector.WithOperatorClass(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.OperatorClass)| 
+            <summary>
+            Queries the stream for methods with a specified operator classification
+            </summary>
+            <param name="src">The source stream</param>
+        
+| M:Z0.TIdentityReflector.IsPredicate(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method defines a predicate that returns a bit or bool value
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.TIdentityReflector.ClassifyPredicate(System.Reflection.MethodInfo)| 
+            <summary>
+            Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
+            </summary>
+            <param name="m">The method to examine</param>
+        
+| M:Z0.TIdentityReflector.WithPredicateClass(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},Z0.PredicateClass)| 
+            <summary>
+            Queries the stream for methods with a specified predicate classification
+            </summary>
+            <param name="src">The source stream</param>
+        
+| M:Z0.TIdentityReflector.WithPredicateClass(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo})| 
+            <summary>
+            Queries the stream for methods with a nonempty predicate classification
+            </summary>
+            <param name="src">The source stream</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo,System.Nullable{System.Int32},System.Boolean)| 
+            <summary>
+            Determines whether a method has intrinsic paremeters or return type of specified width
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="width">The required vector width</param>
+            <param name="total">Whether all parameters and return type must be intrinsic</param>
+        
+| M:Z0.TIdentityReflector.ReturnsVector(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method returns an intrinsic vector
+            </summary>
+            <param name="src">The method to test</param>
+        
+| M:Z0.TIdentityReflector.ReturnsVector(System.Reflection.MethodInfo,Z0.W128)| 
+            <summary>
+            Determines whether a method returns a 128-bit intrinsic vector
+            </summary>
+            <param name="src">The method to test</param>
+        
+| M:Z0.TIdentityReflector.ReturnsVector(System.Reflection.MethodInfo,Z0.W256)| 
+            <summary>
+            Determines whether a method returns a 256-bit intrinsic vector
+            </summary>
+            <param name="src">The method to test</param>
+        
+| M:Z0.TIdentityReflector.ReturnsVector(System.Reflection.MethodInfo,Z0.W512)| 
+            <summary>
+            Determines whether a method returns a 256-bit intrinsic vector
+            </summary>
+            <param name="src">The method to test</param>
+        
+| M:Z0.TIdentityReflector.ReturnsVector(System.Reflection.MethodInfo,Z0.W128,System.Type)| 
+            <summary>
+            Determines whether a method returns a 128-bit intrinsic vector of specified cell type
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="w">The width to match</param>
+            <param name="tCell">The cell type to match</param>
+        
+| M:Z0.TIdentityReflector.ReturnsVector(System.Reflection.MethodInfo,Z0.W256,System.Type)| 
+            <summary>
+            Determines whether a method returns a 256-bit intrinsic vector of specified cell type
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="w">The width to match</param>
+            <param name="tCell">The cell type to match</param>
+        
+| M:Z0.TIdentityReflector.ReturnsVector(System.Reflection.MethodInfo,Z0.W512,System.Type)| 
+            <summary>
+            Determines whether a method returns a 512-bit intrinsic vector with of specified cell type
+            </summary>
+            <param name="src">The method to test</param>
+            <param name="w">The width to match</param>
+            <param name="tCell">The cell type to match</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method has intrinsic parameters or return type
+            </summary>
+            <param name="src">The method to test</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo,Z0.W128)| 
+            <summary>
+            Determines whether a method has at least one 128-bit intrinsic vector parameter 
+            </summary>
+            <param name="m">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo,Z0.W256)| 
+            <summary>
+            Determines whether a method has at least one 128-bit intrinsic vector parameter 
+            </summary>
+            <param name="m">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo,Z0.W512)| 
+            <summary>
+            Determines whether a method has at least one 128-bit intrinsic vector parameter 
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo,Z0.W128,System.Type)| 
+            <summary>
+            Determines whether a method has at least one 128-bit intrinsic vector parameter closed over a specified type
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo,Z0.W256,System.Type)| 
+            <summary>
+            Determines whether a method has at least one 256-bit intrinsic vector parameter closed over a specified type
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo,Z0.W512,System.Type)| 
+            <summary>
+            Determines whether a method has at least one 512-bit intrinsic vector parameter closed over a specified type
+            </summary>
+            <param name="src">The method to examine</param>
+            <param name="w">The width to match</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo,Z0.W128,Z0.GenericPartition)| 
+            <summary>
+            Selcts vectorized methods from a source stream
+            </summary>
+            <param name="src">The source strean</param>
+            <param name="w">The vector width</param>
+            <param name="g">The generic partition from which methods should be selected</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo,Z0.W256,Z0.GenericPartition)| 
+            <summary>
+            Selcts vectorized methods from a source stream
+            </summary>
+            <param name="src">The source strean</param>
+            <param name="w">The vector width</param>
+            <param name="g">The generic partition from which methods should be selected</param>
+        
+| M:Z0.TIdentityReflector.IsVectorized(System.Reflection.MethodInfo,Z0.W512,Z0.GenericPartition)| 
+            <summary>
+            Selcts vectorized methods from a source stream
+            </summary>
+            <param name="src">The source strean</param>
+            <param name="w">The vector width</param>
+            <param name="g">The generic partition from which methods should be selected</param>
+        
+| M:Z0.ITestCaseIdentity.CaseName(Z0.OpIdentity)    | 
+            <summary>
+            Produces a test case name predicated on an operation identity
+            </summary>
+            <param name="id">Identifies the operation under test</param>
+        
+| M:Z0.ITestCaseIdentity.CaseName``1(System.String) | 
+            <summary>
+            Produces a test case name predicated on a parametrically-specialized label
+            </summary>
+            <param name="label">The case label</param>
+            <typeparam name="T">The label specialization type</typeparam>
+        
+| M:Z0.ITestCaseIdentity.CaseName``1(System.Type,System.String)| 
+            <summary>
+            Produces the name of the test case predicated on a root name and parametric type
+            </summary>
+            <param name="label">The root name</param>
+        
+| M:Z0.ITestCaseIdentity.CaseName``2(Z0.IFunc,``0,System.Boolean)| 
+            <summary>
+            Computes a test case identifier for a segmented structured function
+            </summary>
+            <param name="f">The function under test</param>
+            <param name="w">The domainant operand width</param>
+            <param name="generic">Whether the test subject is generic</param>
+            <typeparam name="W">The type width</typeparam>
+            <typeparam name="T">The cell width</typeparam>
+        
+| M:Z0.ITestCaseIdentity.MatchCaseName(Z0.OpIdentity,Z0.OpIdentity)| 
+            <summary>
+            Produces a case name for an identified operation match test
+            </summary>
+            <param name="f">The left operation</param>
+            <param name="g">The right operation</param>
+        
+| F:Z0.OperatorTypeClass.OperandType                | 
+            <summary>
+            The operator operand type
+            </summary>
+        
+| F:Z0.OperatorTypeClass.OperatorClass              | 
+            <summary>
+            The operator classification
+            </summary>
+        
+| M:Z0.OpUriBuilder.HostUri(System.Type)            | 
+            <summary>
+            Produces an identifier of the form {owner}/{host} where owner is the formatted identifier of the declaring assembly
+            and host is the name of the type
+            </summary>
+            <param name="host">The source type</param>
+        
+| M:Z0.OpUriBuilder.TestCase(System.Reflection.MethodInfo)| 
+            <summary>
+            Produces the name of the test case determined by a source method
+            </summary>
+            <param name="method">The method that implements the test</param>
+        
+| M:Z0.OpUriBuilder.TestCase(System.Type,System.String)| 
+            <summary>
+            Produces the name of the test case predicated on fully-specified name, exluding the host name
+            </summary>
+            <param name="fullname">The full name of the test</param>
+        
+| M:Z0.OpUriBuilder.TestCase(System.Type,Z0.OpIdentity)| 
+            <summary>
+            Produces the name of the test case predicated on fully-specified name, exluding the host name
+            </summary>
+            <param name="id">Identity of the operation under test</param>
+        
+| M:Z0.SpanTypes.kind(System.Type)                  | 
+            <summary>
+            Classifies a type according to whether it is a span, a readonly span, or otherwise
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.SpanTypes.test(System.Type)                  | 
+            <summary>
+            Determines whether a type is a span
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.SpanTypes.IsSystemSpan(System.Type)          | 
+            <summary>
+            Tests whether a type defines a system-defined span
+            </summary>
+            <param name="t">The type to test</param>
+        
+| T:Z0.IArithmeticKind`3                            | 
+            <summary>
+            Characterizes a kind, numeric, and width-parametric arithmetic operation classifier
+            </summary>
+            <typeparam name="F">The kind classifier type</typeparam>
+            <typeparam name="W">The width type</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        
+| P:Z0.IArithmeticKind`3.OperandWidth               | 
+            <summary>
+            The parametrically-identified operand width
+            </summary>
+        
+| T:Z0.IBitLogicKind`3                              | 
+            <summary>
+            Characterizes a kind, numeric, and width-parametric bitlogic operation classifier
+            </summary>
+            <typeparam name="F">The kind classifier type</typeparam>
+            <typeparam name="W">The width type</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        
+| P:Z0.IBitLogicKind`3.OperandWidth                 | 
+            <summary>
+            The parametrically-identified operand width
+            </summary>
+        
+| T:Z0.IBitFunctionKind`3                           | 
+            <summary>
+            Characterizes a kind, numeric, and width-parametric bitfunction operation classifier
+            </summary>
+            <typeparam name="K">The kind classifier type</typeparam>
+            <typeparam name="W">The width type</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        
+| P:Z0.IBitFunctionKind`3.OperandWidth              | 
+            <summary>
+            The parametrically-identified operand width
+            </summary>
+        
+| T:Z0.IComparisonKind`3                            | 
+            <summary>
+            Characterizes a kind, numeric, and width-parametric comparison operation classifier
+            </summary>
+            <typeparam name="K">The kind classifier type</typeparam>
+            <typeparam name="W">The width type</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        
+| P:Z0.IComparisonKind`3.OperandWidth               | 
+            <summary>
+            The parametrically-identified operand width
+            </summary>
+        
+| T:Z0.ISystemOpKind`3                              | 
+            <summary>
+            Characterizes a kind, numeric, and width-parametric system operation classifier
+            </summary>
+            <typeparam name="F">The kind classifier type</typeparam>
+            <typeparam name="W">The width type</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        
+| P:Z0.ISystemOpKind`3.OperandWidth                 | 
+            <summary>
+            The parametrically-identified operand width
+            </summary>
+        
+| T:Z0.IBitShiftKind`3                              | 
+            <summary>
+            Characterizes a kind, numeric, and width-parametric bitshift operation classifier
+            </summary>
+            <typeparam name="K">The kind classifier type</typeparam>
+            <typeparam name="W">The width type</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        
+| P:Z0.IBitShiftKind`3.OperandWidth                 | 
+            <summary>
+            The parametrically-identified operand width
+            </summary>
+        
+| T:Z0.ICanonicalKind`3                             | 
+            <summary>
+            Characterizes a kind, numeric, and width-parametric canonical operation classifier
+            </summary>
+            <typeparam name="K">The kind classifier type</typeparam>
+            <typeparam name="W">The width type</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        
+| P:Z0.ICanonicalKind`3.OperandWidth                | 
+            <summary>
+            The parametrically-identified operand width
+            </summary>
+        
+| M:Z0.TestCaseIdentity.owner(System.Type)          | 
+            <summary>
+            Produces the formatted identifier of the declaring assembly
+            </summary>
+            <param name="host">The source type</param>
+        
+| M:Z0.TestCaseIdentity.name(System.Type,Z0.OpIdentity)| 
+            <summary>
+            Produces a test case name predicated on an operation identity
+            </summary>
+            <param name="id">Identifies the operation under test</param>
+        
+| M:Z0.TestCaseIdentity.name``1(System.Type,System.String)| 
+            <summary>
+            Produces a test case name predicated on a parametrically-specialized label
+            </summary>
+            <param name="label">The case label</param>
+            <typeparam name="T">The label specialization type</typeparam>
+        
+| M:Z0.TestCaseIdentity.match(System.Type,Z0.OpIdentity,Z0.OpIdentity)| 
+            <summary>
+            Produces a case name for an identified operation match test
+            </summary>
+            <param name="f">The left operation</param>
+            <param name="g">The right operation</param>
+        
+| M:Z0.VectorType.closed(System.Type,Z0.W128)       | 
+            <summary>
+            Returns true if a type is a closed 128-bit intrinsic vector
+            </summary>
+            <param name="param">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.closed(System.Type,Z0.W256)       | 
+            <summary>
+            Returns true if a type is a closed 256-bit intrinsic vector
+            </summary>
+            <param name="param">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.closed(System.Type,Z0.W512)       | 
+            <summary>
+            Returns true if a type is a closed 512-bit intrinsic vector
+            </summary>
+            <param name="param">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.closed(System.Reflection.ParameterInfo,Z0.W128)| 
+            <summary>
+            Returns true if a method parameter is a closed 128-bit intrinsic vector
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.closed(System.Reflection.ParameterInfo,Z0.W256)| 
+            <summary>
+            Returns true if a method parameter is a closed 256-bit intrinsic vector
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.closed(System.Reflection.ParameterInfo,Z0.W512)| 
+            <summary>
+            Returns true if a method parameter is a closed 512-bit intrinsic vector
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.width(Z0.VectorKind)              | 
+            <summary>
+            Determines the number of bits covered by a k-kinded vector
+            </summary>
+            <param name="k">The type kine</param>
+        
+| M:Z0.VectorType.size(Z0.VectorKind)               | 
+            <summary>
+            Determines the number of bytes covered by a k-kinded type
+            </summary>
+            <param name="k">The type kine</param>
+        
+| M:Z0.VectorType.segwidth(Z0.VectorKind)           | 
+            <summary>
+            Determines the component width of a k-kinded vector
+            </summary>
+            <param name="k">The vector kind</param>
+        
+| M:Z0.VectorType.unsigned(Z0.VectorKind)           | 
+            <summary>
+            Determines whether a classfied vector is defined over primal unsigned integer components
+            </summary>
+            <param name="k">The vector classifier</param>
+        
+| M:Z0.VectorType.signed(Z0.VectorKind)             | 
+            <summary>
+            Determines whether a classfied vector is defined over primal signed integer components
+            </summary>
+            <param name="k">The vector classifier</param>
+        
+| M:Z0.VectorType.floating(Z0.VectorKind)           | 
+            <summary>
+            Determines whether a classfied vector is defined over floating-point components
+            </summary>
+            <param name="k">The vector classifier</param>
+        
+| M:Z0.VectorType.integral(Z0.VectorKind)           | 
+            <summary>
+            Determines whether a classfied vector is defined over primal integer components
+            </summary>
+            <param name="k">The vector classifier</param>
+        
+| M:Z0.VectorType.kind``1(System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Computes a vector kind classifier from a 128-bit vector instance
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.VectorType.kind``1(System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Computes a vector kind classifier from a 256-bit vector instance
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.VectorType.kind``1(Z0.Vector512{``0})        | 
+            <summary>
+            Computes a vector kind classifier from a 512-bit vector instance
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        
+| M:Z0.VectorType.kind(System.Type)                 | 
+            <summary>
+            Computes the vector kind classifier determined by a system type
+            </summary>
+            <param name="src">The source type</param>
+        
+| M:Z0.VectorType.kind``1(Z0.W128,``0)              | 
+            <summary>
+            Computes a 128-bit vector kind classifier for a parametrically-specified cell type
+            </summary>
+            <param name="w">The vector width</param>
+            <param name="t">A represenative cell value</param>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.VectorType.kind``1(Z0.W256,``0)              | 
+            <summary>
+            Computes a 256-bit vector kind classifier for a parametrically-specified cell type
+            </summary>
+            <param name="w">The vector width</param>
+            <param name="t">A represenative cell value</param>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.VectorType.kind``1(Z0.W512,``0)              | 
+            <summary>
+            Computes a 512-bit vector kind classifier for a parametrically-specified cell type
+            </summary>
+            <param name="w">The vector width</param>
+            <param name="t">A represenative cell value</param>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.VectorType.kind``2(``0,``1)                  | 
+            <summary>
+            Computes the vector kind classifier determined by parametric width and cell types
+            </summary>
+            <param name="w">A width type representative</param>
+            <param name="t">A cell type representative</param>
+            <typeparam name="W">The width type</typeparam>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.VectorType.open(System.Type,Z0.W128)         | 
+            <summary>
+            Returns true if a type is an open generic 128-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.open(System.Type,Z0.W256)         | 
+            <summary>
+            Returns true if a type is an open generic 256-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.open(System.Type,Z0.W512)         | 
+            <summary>
+            Returns true if a type is an open generic 512-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.tcell(Z0.VectorKind)              | 
+            <summary>
+            Returns the clr cell type of a vector of specified kind
+            </summary>
+            <param name="kind">The vector kind</param>
+        
+| M:Z0.VectorType.test(System.Type)                 | 
+            <summary>
+            Determines whether a type is classified as an intrinsic vector
+            </summary>
+            <param name="t">The type to test</param>
+        
+| M:Z0.VectorType.test(System.Type,System.Nullable{System.Int32})| 
+            <summary>
+            Determines whether a type is an intrinsic vector of specified width
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.VectorType.test(Z0.VectorKind,System.SByte)  | 
+            <summary>
+            Determines whether a vector of specified kind has a singed 8-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.VectorType.test(Z0.VectorKind,System.Byte)   | 
+            <summary>
+            Determines whether a vector of specified kind has an unsigned 8-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.VectorType.test(Z0.VectorKind,System.Int16)  | 
+            <summary>
+            Determines whether a vector of specified kind has a singed 16-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.VectorType.test(Z0.VectorKind,System.UInt16) | 
+            <summary>
+            Determines whether a vector of specified kind has an unsigned 16-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.VectorType.test(Z0.VectorKind,System.Int32)  | 
+            <summary>
+            Determines whether a vector of specified kind has a singed 32-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.VectorType.test(Z0.VectorKind,System.UInt32) | 
+            <summary>
+            Determines whether a vector of specified kind has an unsigned 32-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.VectorType.test(Z0.VectorKind,System.Int64)  | 
+            <summary>
+            Determines whether a vector of specified kind has a singed 64-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.VectorType.test(Z0.VectorKind,System.UInt64) | 
+            <summary>
+            Determines whether a vector of specified kind has an unsigned 64-bit cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.VectorType.test(Z0.VectorKind,System.Single) | 
+            <summary>
+            Determines whether a vector of specified kind has a 32-bit floating-point cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.VectorType.test(Z0.VectorKind,System.Double) | 
+            <summary>
+            Determines whether a vector of specified kind has a 64-bit floating-point cell type
+            </summary>
+            <param name="k">The vector kind</param>
+            <param name="t">The type to match as specified by a representative value</param>
+        
+| M:Z0.VectorType.test(System.Type,Z0.W128,System.Type)| 
+            <summary>
+            Determines whether a type is a 128-bit intrinsic vector closed over a specified type
+            </summary>
+            <param name="t">The type to examine</param>
+            <param name="w">The vector width</param>
+            <param name="tCell">The vector cell type</param>
+        
+| M:Z0.VectorType.test(System.Type,Z0.W256,System.Type)| 
+            <summary>
+            Determines whether a type is a 256-bit intrinsic vector closed over a specified type
+            </summary>
+            <param name="t">The type to examine</param>
+            <param name="w">The vector width</param>
+            <param name="tCell">The vector cell type</param>
+        
+| M:Z0.VectorType.test(System.Type,Z0.W512,System.Type)| 
+            <summary>
+            Determines whether a type is a 512-bit intrinsic vector closed over a specified type
+            </summary>
+            <param name="t">The type to examine</param>
+            <param name="w">The vector width</param>
+            <param name="tCell">The vector cell type</param>
+        
+| M:Z0.VectorType.test(System.Type,Z0.W128)         | 
+            <summary>
+            Determines whether a type is a 128-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.VectorType.test(System.Type,Z0.W256)         | 
+            <summary>
+            Determines whether a type is a 256-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.VectorType.test(System.Type,Z0.W512)         | 
+            <summary>
+            Determines whether a type is a 512-bit intrinsic vector
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.VectorType.test(System.Reflection.ParameterInfo)| 
+            <summary>
+            Determines whether a parameter is of some intrinsic vector type
+            </summary>
+            <param name="p">The parameter to examine</param>
+        
+| M:Z0.VectorType.test(System.Reflection.ParameterInfo,Z0.W128)| 
+            <summary>
+            Determines whether a parameter accepts a 128-bit intrinsic vector
+            </summary>
+            <param name="p">The parameter to examine</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.test(System.Reflection.ParameterInfo,Z0.W256)| 
+            <summary>
+            Determines whether a parameter accepts a 256-bit intrinsic vector
+            </summary>
+            <param name="p">The parameter to examine</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.test(System.Reflection.ParameterInfo,Z0.W512)| 
+            <summary>
+            Determines whether a parameter accepts a 512-bit intrinsic vector
+            </summary>
+            <param name="p">The parameter to examine</param>
+            <param name="w">The vector width</param>
+        
+| M:Z0.VectorType.test(System.Reflection.ParameterInfo,Z0.W128,System.Type)| 
+            <summary>
+            Returns true if a method parameter is a 128-bit intrinsic vector closed over a specified argument type
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+            <param name="tCell">The argument type to match</param>
+        
+| M:Z0.VectorType.test(System.Reflection.ParameterInfo,Z0.W256,System.Type)| 
+            <summary>
+            Returns true if a method parameter is a 256-bit intrinsic vector closed over a specified argument type
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+            <param name="tCell">The argument type to match</param>
+        
+| M:Z0.VectorType.test(System.Reflection.ParameterInfo,Z0.W512,System.Type)| 
+            <summary>
+            Returns true if a method parameter is a 512-bit intrinsic vector closed over a specified argument type
+            </summary>
+            <param name="p">The source parameter</param>
+            <param name="w">The vector width</param>
+            <param name="tCell">The argument type to match</param>
+        
+| P:Z0.VectorType.Types128                          | 
+            <summary>
+            Closed vector types of width 128
+            </summary>
+        
+| P:Z0.VectorType.Types256                          | 
+            <summary>
+            Closed vector types of width 256
+            </summary>
+        
+| P:Z0.VectorType.Types512                          | 
+            <summary>
+            Closed vector types of width 512
+            </summary>
+        
+| M:Z0.TVectorKind`3.Z0#IVectorKind#Close           | 
+            <summary>
+            The reified vector type as determined by kind facets
+            </summary>
+        
+| M:Z0.VectorTypesOps.IsVectorFactory(System.Reflection.MethodInfo)| 
+            <summary>
+            Determines whether a method produces, but does not accept, vector values
+            </summary>
+            <param name="m">The method to examine</param>
+        

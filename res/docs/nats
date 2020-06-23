@@ -1,0 +1,480 @@
+| T:Z0.NatTry                                       | 
+            <summary>
+            Defines proof attempts for type naturals
+            </summary>
+        
+| M:Z0.NatTry.Try``1(System.Func{``0},System.Action{System.Exception})| 
+            <summary>
+            Evaluates a function within a try block and returns the value of the computation if 
+            successful; otherwise, returns None together with the reported exceptions
+            </summary>
+            <typeparam name="T">The result type</typeparam>
+            <param name="f">The function to evaluate</param>
+        
+| M:Z0.NatTry.TryEven``1(``0)                       | 
+            <summary>
+            Attempts to prove that k:K1 =&gt; k % 2 == 0
+            Signals success by returning evidence
+            Signals failure by returning none
+            </summary>
+            <typeparam name="K">An even natural type</typeparam>
+        
+| M:Z0.NatTry.TryEven``1                            | 
+            <summary>
+            Attempts to prove that k:K1 =&gt; k % 2 == 0
+            Signals success by returning evidence
+            Signals failure by returning none
+            </summary>
+            <typeparam name="K">An even natural type</typeparam>
+        
+| M:Z0.NatTry.tryOdd``1(``0)                        | 
+            <summary>
+            Attempts to prove that k:K1 =&gt; k % 2 != 0
+            Signals success by returning evidence
+            Signals failure by returning none
+            </summary>
+            <typeparam name="K">An odd natural type</typeparam>
+        
+| M:Z0.NatTry.TryOdd``1                             | 
+            <summary>
+            Attempts to prove that k:K1 =&gt; k % 2 != 0
+            Signals success by returning evidence
+            Signals failure by returning none
+            </summary>
+            <typeparam name="K">An odd natural type</typeparam>
+        
+| M:Z0.NatTry.TryNonzero``1                         | 
+            <summary>
+            Attempts to prove that k:K =&gt; k != 0
+            Signals success by returning evidence
+            Signals failure by returning none
+            </summary>
+            <typeparam name="K">A nonzero natural type</typeparam>
+        
+| M:Z0.NatTry.TryNonzero``1(``0)                    | 
+            <summary>
+            Attempts to prove that k:K =&gt; k != 0
+            Signals success by returning evidence
+            Signals failure by returning none
+            </summary>
+            <typeparam name="K">A nonzero natural type</typeparam>
+        
+| M:Z0.NatTry.TryPrime``1                           | 
+            <summary>
+            If possible, constructs evidence that n:K =&gt; n prime; otherwise,
+            yields none
+            </summary>
+            <typeparam name="K">The subject</typeparam>
+        
+| M:Z0.NatTry.TryPrime``1(``0)                      | 
+            <summary>
+            If possible, constructs evidence that n:K =&gt; n prime; otherwise,
+            yields none
+            </summary>
+            <typeparam name="K">The subject</typeparam>
+        
+| M:Z0.NatClaim.sum``2(``0,``1,System.UInt64)       | 
+            <summary>
+            Attempts to prove that k1 + k2 = expected 
+            Signals success by returning evidence
+            Signals failure by raising an error
+            </summary>
+            <param name="k1">The first operand value</param>
+            <param name="k2">The second operand value</param>
+            <typeparam name="K1">The first type</typeparam>
+            <typeparam name="K2">The second type</typeparam>
+        
+| M:Z0.NatClaim.eq``1(System.UInt64)                | 
+            <summary>
+            Retrieves the value of the natural number associated with a typenat
+            and retuns the value if it agrees with a supplied expected value; othwise,
+            raises an exception
+            </summary>
+            <param name="expected">The expected natural value</param>
+            <typeparam name="K">The natural type</typeparam>
+        
+| M:Z0.NatClaim.eq``1(``0,System.UInt64)            | 
+            <summary>
+            Retrieves the value of the natural number associated with a typenat
+            and retuns the value if it agrees with a supplied expected value; othwise,
+            raises an exception
+            </summary>
+            <param name="k">The reification of K</param>
+            <param name="expected">The expected natural value</param>
+            <typeparam name="K">The natural type</typeparam>
+        
+| M:Z0.NatClaim.eq``1(System.Int32)                 | 
+            <summary>
+            Attempts to prove that k:K =&gt; k == expected
+            Registers success by returning the expected value
+            Registers failure by raising an error
+            </summary>
+            <param name="expected">The expected natural value</param>
+            <typeparam name="K">The natural type</typeparam>
+        
+| M:Z0.NatClaim.eq``1(``0,System.Int32)             | 
+            <summary>
+            Attempts to prove that k:K =&gt; k == expected
+            Registers success by returning the expected value
+            Registers failure by raising an error
+            </summary>
+            <param name="k">The reification of K</param>
+            <param name="expected">The expected natural value</param>
+            <typeparam name="K">The natural type</typeparam>
+        
+| M:Z0.NatClaim.eq``1(System.UInt32,System.Boolean) | 
+            <summary>
+            Prooves that a test value is equal to the value of a natural representative
+            </summary>
+            <param name="test">The value to test</param>
+            <param name="raise">Specifies whether an error should be raised if the check fails</param>
+            <typeparam name="K">The natural representative</typeparam>
+        
+| M:Z0.NatClaim.eq``2(``0,``1)                      | 
+            <summary>
+            Attemts to construct evidence that k1 == k2
+            </summary>
+            <typeparam name="K1">The first type</typeparam>
+            <typeparam name="K2">The second type</typeparam>
+        
+| M:Z0.NatClaim.neq``2(``0,``1)                     | 
+            <summary>
+            Attemts to construct evidence that k1 != k2
+            </summary>
+            <typeparam name="K1">The first type</typeparam>
+            <typeparam name="K2">The second type</typeparam>
+        
+| M:Z0.NatClaim.gt``1(``0,System.UInt64)            | 
+            <summary>
+            Attempts to prove k &gt; a
+            Signals success by returning true
+            Signals failure by raising an error
+            </summary>
+            <param name="a">The value to test</param>
+            <typeparam name="K">The natural representative</typeparam>
+        
+| M:Z0.NatClaim.gteq``1(``0,System.UInt64)          | 
+            <summary>
+            Attempts to prove k &gt;= a
+            Signals success by returning true
+            Signals failure by raising an error
+            </summary>
+            <param name="t">The value to test</param>
+            <typeparam name="K">The natural representative</typeparam>
+        
+| M:Z0.NatClaim.gt``2(``0,``1)                      | 
+            <summary>
+            Attempts to prove k1 &gt; k2
+            Signals success by returning evidence
+            Signals failure by raising an error
+            </summary>
+            <typeparam name="K1">The larger type</typeparam>
+            <typeparam name="K2">The smaller type</typeparam>
+        
+| M:Z0.NatClaim.length``2(System.Collections.Generic.IReadOnlyList{``1})| 
+            <summary>
+            Attempts to prove that the k:K =&gt; src.length = k
+            Registers success by returning src
+            Registers failure by raising an error
+            </summary>
+            <param name="src">The source array</param>
+            <typeparam name="K">The natural type</typeparam>
+            <typeparam name="T">The list element type</typeparam>
+        
+| M:Z0.NatClaim.length``2(``0,System.Collections.Generic.IReadOnlyList{``1})| 
+            <summary>
+            Attempts to prove that the k:K =&gt; src.length = k
+            Registers success by returning src
+            Registers failure by raising an error
+            </summary>
+            <param name="src">The source array</param>
+            <typeparam name="K">The natural type</typeparam>
+            <typeparam name="T">The list element type</typeparam>
+        
+| M:Z0.NatClaim.length``2(``0,``1[])                | 
+            <summary>
+            Attempts to prove that the k:K =&gt; src.length = k
+            Registers success by returning src
+            Registers failure by raising an error
+            </summary>
+            <param name="src">The source array</param>
+            <typeparam name="K">The natural type</typeparam>
+            <typeparam name="T">The element type</typeparam>
+        
+| M:Z0.NatClaim.length``2(``1[])                    | 
+            <summary>
+            Attempts to prove that the k:K =&gt; src.length = k
+            Registers success by returning src
+            Registers failure by raising an error
+            </summary>
+            <param name="src">The source array</param>
+            <typeparam name="K">The natural type</typeparam>
+            <typeparam name="T">The element type</typeparam>
+        
+| M:Z0.NatClaim.even``1                             | 
+            <summary>
+            Attempts to prove that k:K1 =&gt; k % 2 == 0
+            Signals success by returning evidence
+            Signals failure by raising an error
+            </summary>
+            <typeparam name="K">An even natural type</typeparam>
+        
+| M:Z0.NatClaim.even``1(``0)                        | 
+            <summary>
+            Attempts to prove that k:K1 =&gt; k % 2 == 0
+            Signals success by returning evidence
+            Signals failure by raising an error
+            </summary>
+            <typeparam name="K">An even natural type</typeparam>
+        
+| M:Z0.NatClaim.odd``1                              | 
+            <summary>
+            Attempts to prove that k:K1 =&gt; k % 2 != 0
+            Signals success by returning evidence
+            Signals failure by raising an error
+            </summary>
+            <typeparam name="K">An odd natural type</typeparam>
+        
+| M:Z0.NatClaim.odd``1(``0)                         | 
+            <summary>
+            Attempts to prove that k:K1 =&gt; k % 2 != 0
+            Signals success by returning evidence
+            Signals failure by raising an error
+            </summary>
+            <typeparam name="K">An odd natural type</typeparam>
+        
+| M:Z0.NatClaim.mul``2(System.UInt32)               | 
+            <summary>
+            Attempts to prove k1 * k2 = expected 
+            Signals success by returning evidence
+            Signals failure by raising an error
+            </summary>
+            <typeparam name="K1">The first type</typeparam>
+            <typeparam name="K2">The second type</typeparam>
+        
+| M:Z0.NatClaim.mul``2(``0,``1,System.UInt32)       | 
+            <summary>
+            Attempts to prove k1 * k2 = expected 
+            Signals success by returning evidence
+            Signals failure by raising an error
+            </summary>
+            <param name="k1">The first operand value</param>
+            <param name="k2">The second operand value</param>
+            <typeparam name="K1">The first type</typeparam>
+            <typeparam name="K2">The second type</typeparam>
+        
+| M:Z0.NatClaim.product``2(``0,``1)                 | 
+            <summary>
+            Constructs a natural representative that encodes the product of two naturals
+            </summary>
+            <typeparam name="K1">The first operand type</typeparam>
+            <typeparam name="K2">The second operand type</typeparam>
+        
+| M:Z0.NatClaim.failure``1(System.String,System.UInt32,System.Boolean)| 
+            <summary>
+            Registers natural constraint failure
+            </summary>
+            <param name="name">The name of the constraint that failed</param>
+            <param name="n">The subject value</param>
+            <param name="raise">Specifies whether to raise an error</param>
+            <typeparam name="K">The natural type for which a constraint failed</typeparam>
+        
+| M:Z0.NatClaim.failure``1(System.String,System.UInt64,System.Boolean)| 
+            <summary>
+            Registers natural constraint failure
+            </summary>
+            <param name="name">The name of the constraint that failed</param>
+            <param name="n">The subject value</param>
+            <param name="raise">Specifies whether to raise an error</param>
+            <typeparam name="K">The natural type for which a constraint failed</typeparam>
+        
+| M:Z0.NatClaim.failure``2(System.String,``1,System.Boolean)| 
+            <summary>
+            Registers a natural constraint failure
+            </summary>
+            <param name="name">The name of the constraint that failed</param>
+            <param name="n">The subject value</param>
+            <param name="raise">Specifies whether to raise an error</param>
+            <typeparam name="K">The natural type for which a constraint failed</typeparam>
+            <typeparam name="T">The subject type</typeparam>
+        
+| M:Z0.NatClaim.failure``2(System.String,System.Boolean)| 
+            <summary>
+            Registers a natural pair constraint failure
+            </summary>
+            <param name="name">The name of the constraint that failed</param>
+            <param name="raise">Specifies whether to raise an error</param>
+            <typeparam name="K1">The first natural type</typeparam>
+            <typeparam name="K2">The second natural type</typeparam>
+        
+| M:Z0.NatClaim.nonzero``1                          | 
+            <summary>
+            Attempts to prove that k:K =&gt; k != 0
+            Signals success by returning evidence
+            Signals failure by raising an error
+            </summary>
+            <typeparam name="K">A nonzero natural type</typeparam>
+        
+| M:Z0.NatClaim.nonzero``1(``0)                     | 
+            <summary>
+            Attempts to prove that k:K =&gt; k != 0
+            Signals success by returning evidence
+            Signals failure by raising an error
+            </summary>
+            <typeparam name="K">A nonzero natural type</typeparam>
+        
+| M:Z0.NatClaim.prime``1                            | 
+            <summary>
+            If possible, constructs evidence that n:K =&gt; n prime; otherwise,
+            raises an error
+            </summary>
+            <typeparam name="K">The subject</typeparam>
+        
+| M:Z0.NatClaim.prime``1(``0)                       | 
+            <summary>
+            If possible, constructs evidence that n:K =&gt; n prime; otherwise,
+            raises an error
+            </summary>
+            <typeparam name="K">The subject</typeparam>
+        
+| M:Z0.NatClaim.prior``2(``0,``1)                   | 
+            <summary>
+            Attempts construct evidence that k1 = k2 + 1;
+            </summary>
+            <typeparam name="K1">The source type</typeparam>
+            <typeparam name="K2">The successor type</typeparam>
+        
+| M:Z0.XTend.NatSpan``2(Z0.IPolyrand,``0,System.Nullable{Z0.Interval{``1}},System.Func{``1,System.Boolean})| 
+            <summary>
+            Allocates a span of natural dimensions and populates it with random values
+            </summary>
+            <param name="random">The random source</param>
+            <param name="n">The natural length of the produced span</param>
+            <param name="domain">An optional domain to which values are constrained</param>
+            <param name="filter">An optional filter that refines the domain</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The primal random value type</typeparam>
+        
+| M:Z0.XTend.TableSpan``3(Z0.IPolyrand,``0,``1)     | 
+            <summary>
+            Allocates a table span of natural dimensions and populates the cells with random values
+            </summary>
+            <param name="random">The random source</param>
+            <param name="rows">The row count</param>
+            <param name="cols">The column count</param>
+            <typeparam name="M">The row count type</typeparam>
+            <typeparam name="N">The col count type</typeparam>
+            <typeparam name="T">The primal random value type</typeparam>
+        
+| M:Z0.XTend.TableSpan``3(Z0.IPolyrand,``0,``1,Z0.Interval{``2})| 
+            <summary>
+            Allocates a table span of natural dimensions and populates the cells with random values that
+            are confined to a specified domain
+            </summary>
+            <param name="random">The random source</param>
+            <param name="rows">The row count</param>
+            <param name="cols">The column count</param>
+            <param name="cols">The interval domain to which values are confined</param>
+            <typeparam name="M">The row count type</typeparam>
+            <typeparam name="N">The col count type</typeparam>
+            <typeparam name="T">The primal random value type</typeparam>
+        
+| T:Z0.NatEq`2                                      | 
+            <summary>
+            Captures evidence that n1 == n2
+            </summary>
+            <typeparam name="K1">The first nat type</typeparam>
+            <typeparam name="N2">The second nat type</typeparam>
+        
+| T:Z0.NatNEq`2                                     | 
+            <summary>
+            Captures evidence that k1 != k2
+            </summary>
+            <typeparam name="K1">The first nat type</typeparam>
+            <typeparam name="N2">The second nat type</typeparam>
+        
+| T:Z0.NatEven`1                                    | 
+            <summary>
+            Captures evidence that k % 2 == 0
+            </summary>
+            <typeparam name="K">An even natural type</typeparam>
+        
+| T:Z0.NatGt`2                                      | 
+            <summary>
+            Captures evidence that k1 &gt; k2
+            </summary>
+            <typeparam name="K1">The larger nat type</typeparam>
+            <typeparam name="K2">The smaller nat type</typeparam>
+        
+| T:Z0.Nonzero`1                                    | 
+            <summary>
+            Captures evidence that k != 0
+            </summary>
+            <typeparam name="K">A nonzero natural type</typeparam>
+        
+| T:Z0.NatOdd`1                                     | 
+            <summary>
+            Captures evidence that k % 2 != 0
+            </summary>
+            <typeparam name="K">An odd natural type</typeparam>
+        
+| T:Z0.Pow`2                                        | 
+            <summary>
+            Encodes a natural number k := b^e
+            </summary>
+        
+| M:Z0.Pow`2.pow(System.UInt64,System.UInt64)       | 
+            <summary>
+            Raises a baise to a power
+            </summary>
+            <param name="@base">The base value</param>
+            <param name="exp">The exponent value</param>
+        
+| M:Z0.NatPrime.test(System.UInt64)                 | 
+            <summary>
+            Determines whether an integer is prime, very inefficiently
+            </summary>
+            <param name="x">The integer to examine</param>
+            <typeparam name="T">The underlying integer type</typeparam>
+        
+| T:Z0.NatNext`2                                    | 
+            <summary>
+            Captures evidence that k1 + 1 = k2
+            </summary>
+            <typeparam name="K1">The first nat type</typeparam>
+            <typeparam name="K2">The second nat type</typeparam>
+        
+| T:Z0.NatPrior`2                                   | 
+            <summary>
+            Captures evidence that k1 - 1 = k2
+            </summary>
+            <typeparam name="K1">The first nat type</typeparam>
+            <typeparam name="K2">The second nat type</typeparam>
+        
+| T:Z0.Product`2                                    | 
+            <summary>
+            Encodes a natural number k := k1*k2
+            </summary>
+        
+| T:Z0.Sub`2                                        | 
+            <summary>
+            Encodes a natural number k := k1 - k2
+            </summary>
+        
+| T:Z0.NatSum`2                                     | 
+            <summary>
+            Encodes a natural number k := k1 + k2
+            </summary>
+        
+| M:nfunc.natrep``1                                 | 
+            <summary>
+            Constructs a natural representative
+            </summary>
+            <typeparam name="K">The representative type</typeparam>
+        
+| M:nfunc.demand(System.Boolean,System.String)      | 
+            <summary>
+            Demands truth that is enforced with an exeption upon false
+            </summary>
+            <param name="x">The value to test</param>
+        

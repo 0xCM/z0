@@ -52,7 +52,6 @@ namespace Z0
             where N : unmanaged, ITypeNat                
                 => (AsciCharCode)vextract(src.Storage, index);
 
-
         /// <summary>
         /// Returns the upper-case hex code for a specified digit
         /// </summary>

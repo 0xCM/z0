@@ -42,6 +42,24 @@ namespace Z0
             get => new string((char)Covered,1);
         }
 
+        int IAsciSequence.Length
+        {
+            [MethodImpl(Inline)]
+            get => Length;
+        }
+
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Root.bytes(this);
+        }
+
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => asci.decode(this);
+        }
+
         public C Zero
         {
             [MethodImpl(Inline)]
@@ -59,6 +77,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Covered != AsciCharCode.Null;
         }
+
 
         [MethodImpl(Inline)]
         public bool Equals(C src)

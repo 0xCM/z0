@@ -19,9 +19,9 @@ namespace Z0
         
         readonly TAppEnv AppEnv;
 
-        FilePath DefaultTarget => AppEnv.AppPaths.StandardLogPath;
+        FilePath DefaultTarget => AppEnv.AppPaths.AppStandardOutPath;
 
-        FilePath ErrorTarget => AppEnv.AppPaths.ErrorLogPath;
+        FilePath ErrorTarget => AppEnv.AppPaths.TestErrorPath;
                 
         [MethodImpl(Inline)]
         AppMsgLog(TAppEnv env)

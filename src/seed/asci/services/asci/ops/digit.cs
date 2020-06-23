@@ -8,9 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static HexConst;
 
     partial struct asci
     {
+
         [MethodImpl(Inline), Op]
         public static BinaryDigit digit(BinarySym c)
             => (BinaryDigit)(c - BinarySym.First); 
@@ -31,9 +33,6 @@ namespace Z0
         public static OctalDigit digit(Base8 @base, char c)
             => (OctalDigit)((OctalSym)c - OctalSym.First);
 
-        [MethodImpl(Inline), Op]
-        public static DeciDigit digit(Base10 @base, char c)
-            => (DeciDigit)((DeciSym)c - DeciSym.First);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -75,5 +74,38 @@ namespace Z0
             ? (HexDigit)(src - HexSymUp.NumeralOffset) 
             : (HexDigit)(src - HexSymUp.LetterOffset);
 
+        [MethodImpl(Inline), Op]
+        public static DeciDigit digit(Base10 @base, char c)
+            => (DeciDigit)((DeciSym)c - DeciSym.First);
+
+        /// <summary>
+        /// Extracts an index-identified encoded digit
+        /// </summary>
+        /// <param name="base">The base selector</param>
+        /// <param name="src">The digit source</param>
+        /// <param name="index">An integer in the inclusive range [0, 1] that identifies the digit to extract</param>
+        [MethodImpl(Inline), Op]
+        public static DeciDigit digit(Base10 @base, ushort src, int index)
+            => (DeciDigit)(F & (src >> index*4));
+
+        /// <summary>
+        /// Extracts an index-identified encoded digit
+        /// </summary>
+        /// <param name="base">The base selector</param>
+        /// <param name="src">The digit source</param>
+        /// <param name="index">An integer in the inclusive range [0, 3] that identifies the digit to extract</param>        
+        [MethodImpl(Inline), Op]
+        public static DeciDigit digit(Base10 @base, uint src, int index)
+            => (DeciDigit)(F & (src >> index*4));
+
+        /// <summary>
+        /// Extracts an index-identified encoded digit
+        /// </summary>
+        /// <param name="base">The base selector</param>
+        /// <param name="src">The digit source</param>
+        /// <param name="index">An integer in the inclusive range [0, 7] that identifies the digit to extract</param>
+        [MethodImpl(Inline), Op]
+        public static DeciDigit digit(Base10 @base, ulong src, int index)
+            => (DeciDigit)(F & (src >> index*4));
     }
 }

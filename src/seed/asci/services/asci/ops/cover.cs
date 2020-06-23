@@ -22,10 +22,6 @@ namespace Z0
             => Root.cast<AsciCodeCover>(bytespan(src));
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciCodeCover> cover(asci5 src)
-            => Root.cast<AsciCodeCover>(bytespan(src));
-
-        [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci8 src)
             => Root.cast<AsciCodeCover>(bytespan(src));
 

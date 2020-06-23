@@ -10,8 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct asci
-    {
-                    
+    {                    
         [MethodImpl(Inline), Op]
         public static asci16[] alloc(N16 n, int count)
         {

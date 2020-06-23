@@ -14,10 +14,6 @@ namespace Z0
     partial struct asci
     {
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<AsciChar> symbols()
-            => cast<char,AsciChar>(AsciStrings.Text(n0));
-
-        [MethodImpl(Inline), Op]
         public ReadOnlySpan<AsciChar> symbols(int i0, int i1)
             => cast<char,AsciChar>(As.segment(AsciStrings.Text(n0),i0,i1));
 

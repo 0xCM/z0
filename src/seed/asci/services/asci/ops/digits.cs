@@ -15,6 +15,9 @@ namespace Z0
 
     partial struct asci
     {        
+
+
+
         [MethodImpl(Inline), Op]
         public static Span<DeciDigit> digits(ReadOnlySpan<char> src, Span<DeciDigit> dst)
         {

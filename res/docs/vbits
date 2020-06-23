@@ -1,0 +1,934 @@
+| M:Z0.VBits.bfly``1(Z0.N1,System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.bfly``1(Z0.N2,System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.bfly``1(Z0.N4,System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] -&gt; [0 2 1 3 | 4 6 5 7 | 8 A 9 B | C E D F]</remarks>
+        
+| M:Z0.VBits.bfly``1(Z0.N8,System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7] -&gt; [0 2 1 3 | 4 6 5 7]</remarks>
+        
+| M:Z0.VBits.bfly``1(Z0.N16,System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 16-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.bfly``1(Z0.N1,System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.bfly``1(Z0.N2,System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.bfly``1(Z0.N4,System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] -&gt; [0 2 1 3 | 4 6 5 7 | 8 A 9 B | C E D F]</remarks>
+        
+| M:Z0.VBits.bfly``1(Z0.N8,System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7] -&gt; [0 2 1 3 | 4 6 5 7]</remarks>
+        
+| M:Z0.VBits.bfly``1(Z0.N16,System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 16-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector128{System.Byte})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector128{System.UInt16})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector128{System.UInt32})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector128{System.UInt64})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector128{System.Byte})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 2-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector128{System.UInt16})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector128{System.UInt32})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector128{System.UInt64})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector128{System.UInt16})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 ] -&gt; [0 2 1 3] </remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector128{System.UInt32})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> 
+            [0 | 1 2 | 3 || 4 | 5 6 | 7] -&gt; 
+            [0 | 2 1 | 3 || 4 | 6 5 | 7]
+            </remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector128{System.UInt64})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> 
+            [0 | 1 2 | 3 || 4 | 5 6 | 7 || 8 | 9 A | B || C | D E | F] -&gt;
+            [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
+            </remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N8,System.Runtime.Intrinsics.Vector128{System.UInt32})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>[0 1 2 3] -&gt; [0 2 1 3]</remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N8,System.Runtime.Intrinsics.Vector128{System.UInt64})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7] -&gt; [0 2 1 3 | 4 6 5 7]</remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N16,System.Runtime.Intrinsics.Vector128{System.UInt64})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 16-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>[0 1 2 3] -&gt; [0 2 1 3]</remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector256{System.Byte})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector256{System.UInt16})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector256{System.UInt32})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector256{System.UInt64})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector256{System.Byte})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 2-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector256{System.UInt16})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector256{System.UInt32})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector256{System.UInt64})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        
+| M:Z0.VBits.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector256{System.UInt16})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 ] -&gt; [0 2 1 3] </remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector256{System.UInt32})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> 
+            [0 | 1 2 | 3 || 4 | 5 6 | 7] -&gt; 
+            [0 | 2 1 | 3 || 4 | 6 5 | 7]
+            </remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector256{System.UInt64})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> 
+            [0 | 1 2 | 3 || 4 | 5 6 | 7 || 8 | 9 A | B || C | D E | F] -&gt;
+            [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
+            </remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N8,System.Runtime.Intrinsics.Vector256{System.UInt32})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>[0 1 2 3] -&gt; [0 2 1 3]</remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N8,System.Runtime.Intrinsics.Vector256{System.UInt64})| 
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7] -&gt; [0 2 1 3 | 4 6 5 7]</remarks>
+        
+| M:Z0.VBits.vbfly(Z0.N16,System.Runtime.Intrinsics.Vector256{System.UInt64})| 
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 16-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>[0 1 2 3] -&gt; [0 2 1 3]</remarks>
+        
+| M:Z0.VBits.vbutterfly``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Byte)| 
+            <summary>
+            Effects a butterfly permutation on the source value, predicated on a supplied mask and shift amount
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>The algorithm follows that of Arndt's Matters Computational, bitbutterfly.h.</remarks>
+        
+| M:Z0.VBits.vbutterfly``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Byte)| 
+            <summary>
+            Effects a butterfly permutation on the source value, predicated on a supplied mask and shift amount
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>The algorithm follows that of Arndt's Matters Computational, bitbutterfly.h.</remarks>
+        
+| M:Z0.VBits.bitblend``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <typeparam name="T">The cell type</typeparam>
+            <remarks>Equivalent to select</remarks>
+        
+| M:Z0.VBits.bitblend``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <typeparam name="T">The cell type</typeparam>
+            <remarks>Equivalent to select</remarks>
+        
+| M:Z0.VBits.bitblend(System.Runtime.Intrinsics.Vector128{System.Byte},System.Runtime.Intrinsics.Vector128{System.Byte},System.Runtime.Intrinsics.Vector128{System.Byte})| 
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <remarks>Equivalent to select</remarks>
+        
+| M:Z0.VBits.bitblend(System.Runtime.Intrinsics.Vector128{System.UInt16},System.Runtime.Intrinsics.Vector128{System.UInt16},System.Runtime.Intrinsics.Vector128{System.UInt16})| 
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <remarks>Equivalent to select</remarks>
+        
+| M:Z0.VBits.bitblend(System.Runtime.Intrinsics.Vector128{System.UInt32},System.Runtime.Intrinsics.Vector128{System.UInt32},System.Runtime.Intrinsics.Vector128{System.UInt32})| 
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <remarks>Equivalent to select</remarks>
+        
+| M:Z0.VBits.bitblend(System.Runtime.Intrinsics.Vector128{System.UInt64},System.Runtime.Intrinsics.Vector128{System.UInt64},System.Runtime.Intrinsics.Vector128{System.UInt64})| 
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <remarks>Equivalent to select</remarks>
+        
+| M:Z0.VBits.bitblend(System.Runtime.Intrinsics.Vector256{System.Byte},System.Runtime.Intrinsics.Vector256{System.Byte},System.Runtime.Intrinsics.Vector256{System.Byte})| 
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <remarks>Equivalent to select</remarks>
+        
+| M:Z0.VBits.bitblend(System.Runtime.Intrinsics.Vector256{System.UInt16},System.Runtime.Intrinsics.Vector256{System.UInt16},System.Runtime.Intrinsics.Vector256{System.UInt16})| 
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <remarks>Equivalent to select</remarks>
+        
+| M:Z0.VBits.bitblend(System.Runtime.Intrinsics.Vector256{System.UInt32},System.Runtime.Intrinsics.Vector256{System.UInt32},System.Runtime.Intrinsics.Vector256{System.UInt32})| 
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <remarks>Equivalent to select</remarks>
+        
+| M:Z0.VBits.bitblend(System.Runtime.Intrinsics.Vector256{System.UInt64},System.Runtime.Intrinsics.Vector256{System.UInt64},System.Runtime.Intrinsics.Vector256{System.UInt64})| 
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <remarks>Equivalent to select</remarks>
+        
+| M:Z0.VBits.bitclear``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte,System.Byte)| 
+            <summary>
+            Clears a sequence of bits from each component
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="start">The cell-relative start index</param>
+            <param name="count">The number of bits to disable</param>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.VBits.bitclear``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte,System.Byte)| 
+            <summary>
+            Clears a sequence of bits from each component
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="start">The cell-relative start index</param>
+            <param name="count">The number of bits to disable</param>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.VMask.veven``3(Z0.N128,``0,``1,``2)          | 
+            <summary>
+            [01010101] | [00110011]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.veven``3(Z0.N256,``0,``1,``2)          | 
+            <summary>
+            [01010101] | [00110011]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.veven``1(Z0.N128,Z0.N2,Z0.N1,``0)      | 
+            <summary>
+            [01010101]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.veven``1(Z0.N256,Z0.N2,Z0.N1,``0)      | 
+            <summary>
+            [01010101]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.veven``1(Z0.N128,Z0.N2,Z0.N2,``0)      | 
+            <summary>
+            [00110011]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.veven``1(Z0.N256,Z0.N2,Z0.N2,``0)      | 
+            <summary>
+            [00110011]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N1,Z0.N1,``0)       | 
+            <summary>
+            [000...001]    
+            The least bit, relative to the component, is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N2,Z0.N1,``0)       | 
+            <summary>
+            [01]    
+            The least bit of each 2-bit segment is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N4,Z0.N1,``0)       | 
+            <summary>
+            [0001]
+            The least bit of each 4-bit segment is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N8,Z0.N1,``0)       | 
+            <summary>
+            [00000001]
+            The least bit of each 8-bit segment is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N16,Z0.N1,``0)      | 
+            <summary>
+            [00000000 00000001]
+            The least bit of each 16-bit segment is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N8,Z0.N2,``0)       | 
+            <summary>
+            [00000011]
+            The least 2 bits of each 8-bits are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N8,Z0.N3,``0)       | 
+            <summary>
+            [00000111]
+            The least 3 bits of each 8-bits are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N8,Z0.N4,``0)       | 
+            <summary>
+            [00001111]
+            The least 4 bits of each 8-bits are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N8,Z0.N5,``0)       | 
+            <summary>
+            [00011111]
+            The least 5 bits of each 8-bits are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N8,Z0.N6,``0)       | 
+            <summary>
+            [00111111]
+            The least 6 bits of each 8-bits are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N8,Z0.N7,``0)       | 
+            <summary>
+            [01111111]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <param name="t">A component type representative</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N1,Z0.N1,``0)       | 
+            <summary>
+            [00....01]    
+            The least bit of each component is enabled
+            </summary>
+            <param name="n">The repetition frequency</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N2,Z0.N1,``0)       | 
+            <summary>
+            [01]    
+            The least bit of each 2-bit segment is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N4,Z0.N1,``0)       | 
+            <summary>
+            [00010001]
+            The least bit of each 4-bit segment is enabled
+            </summary>
+            <param name="f">The repetition frequency</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N8,Z0.N1,``0)       | 
+            <summary>
+            [00000001]
+            The least bit of each 8-bit segment is enabled
+            </summary>
+            <param name="f">The repetition frequency</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N16,Z0.N1,``0)      | 
+            <summary>
+            [00000000 00000001]
+            The least significant bit out of each 16 bits is enabled
+            </summary>
+            <param name="f">The repetition frequency</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N8,Z0.N2,``0)       | 
+            <summary>
+            [00000011]
+            The least significant 2 bits of each 8-bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N8,Z0.N3,``0)       | 
+            <summary>
+            [00000111]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N8,Z0.N4,``0)       | 
+            <summary>
+            [00001111]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N8,Z0.N5,``0)       | 
+            <summary>
+            [00011111]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N8,Z0.N6,``0)       | 
+            <summary>
+            [00111111]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N8,Z0.N7,``0)       | 
+            <summary>
+            [01111111]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N128,Z0.N8,System.Byte,``0) | 
+            <summary>
+            The f least significant bits of each 8 bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">A value in the range [2,7] that defines the bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vlsb``1(Z0.N256,Z0.N8,System.Byte,``0) | 
+            <summary>
+            The f least significant bits of each 8 bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">A value in the range [2,7] that defines the bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,``0)                   | 
+            <summary>
+            [100...000 ... 100...000]    
+            The greatest bit of each component is enabled
+            </summary>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N2,Z0.N1,``0)       | 
+            <summary>
+            [01]    
+            The greatest bit of each 2-bit segment is enabled
+            </summary>
+            <param name="f">The repetition frequency</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N4,Z0.N1,``0)       | 
+            <summary>
+            [1000]
+            The greatest bit of each 4-bit segment is enabled
+            </summary>
+            <param name="f">The repetition frequency</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N8,Z0.N1,``0)       | 
+            <summary>
+            [10000000]
+            The greatest bit of each 8-bit segment is enabled
+            </summary>
+            <param name="f">The repetition frequency</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N16,Z0.N1,``0)      | 
+            <summary>
+            [10000000 00000000]
+            The greatest bit of each 16-bit segment is enabled
+            </summary>
+            <param name="f">The repetition frequency</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N8,Z0.N2,``0)       | 
+            <summary>
+            [11000000]
+            The 2 greatest bits of each 8-bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N8,Z0.N3,``0)       | 
+            <summary>
+            [11100000]
+            The greatest 3 bits of each 8-bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N8,Z0.N4,``0)       | 
+            <summary>
+            [11110000]
+            The greatest 4 bits of each 8-bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N8,Z0.N5,``0)       | 
+            <summary>
+            [11111000]
+            The greatest 5 bits of each 8-bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N8,Z0.N6,``0)       | 
+            <summary>
+            [11111100]
+            The greatest 6 bits of each 8-bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N8,Z0.N7,``0)       | 
+            <summary>
+            [11111110]
+            The greatest 7 bits of each 8-bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N128,Z0.N8,System.Byte,``0) | 
+            <summary>
+            The f most significant bits of each 8 bits are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">A value in the range [2,7] that defines the bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,``0)                   | 
+            <summary>
+            [100...00]    
+            The greatest bit of each component is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N2,Z0.N1,``0)       | 
+            <summary>
+            [01    
+            The greatest bit of each 2-bit segment is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N4,Z0.N1,``0)       | 
+            <summary>
+            [1000]
+            The greatest bit of each 4-bit segment is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N8,Z0.N1,``0)       | 
+            <summary>
+            [10000000]
+            The greatest bit of each 8-bit segment is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N16,Z0.N1,``0)      | 
+            <summary>
+            [10000000 00000000]
+            The greatest bit of each 16-bit segment is enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The component data type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N8,Z0.N2,``0)       | 
+            <summary>
+            [11000000]
+            The 2 greatest bits of each 8-bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N8,Z0.N3,``0)       | 
+            <summary>
+            [11100000]
+            The 3 greatest bits of each 8-bit segment are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N8,Z0.N4,``0)       | 
+            <summary>
+            [11110000]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N8,Z0.N5,``0)       | 
+            <summary>
+            [11111000]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N8,Z0.N6,``0)       | 
+            <summary>
+            [11111100]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N8,Z0.N7,``0)       | 
+            <summary>
+            [11111110]
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">The bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        
+| M:Z0.VMask.vmsb``1(Z0.N256,Z0.N8,System.Byte,``0) | 
+            <summary>
+            Creates a mask where f most significant bits of each 8 bits are enabled
+            </summary>
+            <param name="w">The target vector width</param>
+            <param name="f">The repetition frequency</param>
+            <param name="d">A value in the range [2,7] that defines the bit density</param>
+            <typeparam name="T">The vector component type</typeparam>
+        

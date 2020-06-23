@@ -31,6 +31,11 @@ namespace Z0
         public static FileName Define(string name, FileExtension ext)
             => new FileName(name, ext.Name);
 
+        [MethodImpl(Inline)]
+        public static FileName Define<A>(string name, A ext)
+            where A : unmanaged, IAsciSequence
+                => new FileName(name, ext.Text);
+
         /// <summary>
         /// Does the file have an extension?
         /// </summary>
@@ -51,11 +56,6 @@ namespace Z0
             ? FileExtension.Define(Path.GetExtension(Name)) 
             : FileExtension.Empty;
 
-        /// <summary>
-        /// The file extension, if any
-        /// </summary>
-        public Option<FileExtension> ExtOption
-            => Ext.IsNonEmpty ? Option.some(Ext) : Option.none<FileExtension>();
 
         /// <summary>
         /// Renames the file (in the model, not on disk)
@@ -77,7 +77,12 @@ namespace Z0
         public static FilePath Timestamped(FilePath src)
             => src.RenameFile(Timestamped(src.FileName));
         
+        [MethodImpl(Inline)]
         public static FileName operator + (FileName name, FileExtension ext)
+            => FileName.Define($"{name.Name}.{ext.Name}");
+
+        [MethodImpl(Inline)]
+        public static FileName operator + (FileName name, FileExt ext)
             => FileName.Define($"{name.Name}.{ext.Name}");
 
         public FileName()
@@ -144,6 +149,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public FileName ChangeExtension(FileExtension ext)
             => Define(Path.GetFileNameWithoutExtension(Name), ext);
+
+        [MethodImpl(Inline)]
+        public FileName ChangeExtension<A>(FileExt<A> ext)
+            where A : unmanaged, IAsciSequence
+                => Define(Path.GetFileNameWithoutExtension(Name), ext.Name);
+
+        /// <summary>
+        /// The file extension, if any
+        /// </summary>
+        Option<FileExtension> ExtOption
+            => Ext.IsNonEmpty ? Option.some(Ext) : Option.none<FileExtension>();
 
         public FileName WithOwner(PartId part)
             => new FileName(

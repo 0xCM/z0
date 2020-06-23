@@ -10,86 +10,88 @@ namespace Z0
     using static Konst;
 
     using N = N8;
-    
+    using A = asci8;
+    using W = W64;
+    using S = System.UInt64;
+
     /// <summary>
     /// Defines a 64-bit asci code sequence of length 8
     /// </summary>
-    public readonly struct asci8 : IAsciSequence<asci8,N>
-    {        
-        public static asci8 Blank => new asci8(0x2020202020202020ul);        
-
-        public static asci8 Null => new asci8(0);
-
-        public const int Size = 8;
-
-        static N n => default;
-        
-        internal readonly ulong Storage;
+    public readonly struct asci8 : IAsciSequence<A,N>
+    {                
+        internal readonly S Storage;
 
         [MethodImpl(Inline)]
-        public static asci8 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci8(Root.head(Root.cast<AsciCharCode,ulong>(src)));
+        public static implicit operator A(string src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator asci8(string src)
-            => new asci8(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(asci8 src)
+        public static implicit operator string(A src)
             => src.Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(asci8 src)
+        public static implicit operator ReadOnlySpan<byte>(A src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(asci8 src)
+        public static implicit operator ReadOnlySpan<char>(A src)
             => src.Decoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator asci8(uint src)
-            => new asci8(src);
+        public static implicit operator A(uint src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator asci8(ulong src)
-            => new asci8(src);
+        public static implicit operator A(S src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public asci8(ulong src)
-        {
-            Storage = src;
-        }
-      
+        public static bool operator ==(A a, A b)
+            => a.Equals(b);
+
         [MethodImpl(Inline)]
-        public asci8(string src)
-        {
-            Storage = asci.encode(n,src).Storage;
-        }
+        public static bool operator !=(A a, A b)
+            => !a.Equals(b);
         
+        public bool IsBlank
+        {
+            [MethodImpl(Inline)]
+            get => IsNull || Equals(Spaced);
+        }
+
+        public bool IsNull
+        {
+            [MethodImpl(Inline)]
+            get => Equals(Null);
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Storage == 0;
+            get => Equals(Null);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Storage != 0;
+            get => !Equals(Null);
         }
 
-        public asci8 Zero
+        public A Zero
         {
             [MethodImpl(Inline)]
-            get => Blank;
+            get => Null;
         }
-
+        
+        /// <summary>
+        /// Specifies the number of characters that precede a null terminator, if any; otherwise, returns the maximum content length
+        /// </summary>
         public int Length
         {
             [MethodImpl(Inline)]
             get => asci.length(this);
         }
-        public int MaxLength
+        public int Capacity
         {
             [MethodImpl(Inline)]
             get => Size;
@@ -114,11 +116,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(asci8 src)
-            => Storage == src.Storage;
+        public bool Equals(A src)
+            => Storage.Equals(src.Storage);
 
         public override bool Equals(object src)
-            => src is asci8 x && Equals(x);
+            => src is A x && Equals(x);
 
         public override int GetHashCode()
             => Storage.GetHashCode();
@@ -130,12 +132,31 @@ namespace Z0
         public override string ToString()
             => Text;
 
-        [MethodImpl(Inline)]
-        public static bool operator ==(asci8 a, asci8 b)
-            => a.Equals(b);
+        public const int Size = 8;
+
+        static N n => default;
+        
+        static W w => default;
+        public static A Null 
+        {
+            [MethodImpl(Inline)]
+            get => new A(default(S));
+        }
+
+        public static A Spaced 
+        {
+            [MethodImpl(Inline)]
+            get => asci.init(n);
+        }
 
         [MethodImpl(Inline)]
-        public static bool operator !=(asci8 a, asci8 b)
-            => !a.Equals(b);
+        public asci8(S src)
+            => Storage = src;
+      
+        [MethodImpl(Inline)]
+        public asci8(string src)
+            => Storage = asci.encode(n,src).Storage;
+
+ 
     }
 }

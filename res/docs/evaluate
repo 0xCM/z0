@@ -1,0 +1,107 @@
+| M:Z0.EvalDispatcher.FixedPairs``1(System.Int32,``0)| 
+            <summary>
+            Produces an homogenous point index of dimension 2
+            </summary>
+            <param name="random">The random source</param>
+            <param name="count">The number of points to load into the index</param>
+            <typeparam name="T">The coordinate domain</typeparam>
+        
+| M:Z0.EvalDispatcher.LoadFixedinaryOp``1(Z0.BufferTokens,Z0.BufferSeqId,Z0.ApiCode)| 
+            <summary>
+            Loads executable code into an index-identifed target buffer and manufactures a fixed binary operator 
+            that executes the code in the buffer upon invocation
+            </summary>
+            <param name="buffers">The target buffer sequence</param>
+            <param name="index">The index of the target buffer</param>
+            <param name="src">The executable source that conforms to a fixed binary operator</param>
+            <typeparam name="F">The operand type</typeparam>
+        
+| M:Z0.EvalDispatcher.ExecBinaryOp``1(Z0.BufferTokens,Z0.BufferSeqId,Z0.ApiCode,``0,``0)| 
+            <summary>
+            Loads and invokes a fixed binary operator
+            </summary>
+            <param name="buffers">The target buffer sequence</param>
+            <param name="index">The index of the target buffer</param>
+            <param name="src">The executable source that conforms to a fixed binary operator</param>
+            <param name="x">The first operand</param>
+            <param name="y">The second operand</param>
+            <typeparam name="F">The operand type</typeparam>
+        
+| M:Z0.EvalExecutor.CheckMatch(Z0.BinaryOp8,Z0.OpUri,Z0.BinaryOp8,Z0.OpUri)| 
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator, considered as a basline</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator, considered as the operation under test</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.EvalExecutor.CheckMatch(Z0.BinaryOp16,Z0.OpUri,Z0.BinaryOp16,Z0.OpUri)| 
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator, considered as a basline</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator, considered as the operation under test</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.EvalExecutor.CheckMatch(Z0.BinaryOp32,Z0.OpUri,Z0.BinaryOp32,Z0.OpUri)| 
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator, considered as a basline</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator, considered as the operation under test</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.EvalExecutor.CheckMatch(Z0.BinaryOp64,Z0.OpUri,Z0.BinaryOp64,Z0.OpUri)| 
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator, considered as a basline</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator, considered as the operation under test</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.EvalExecutor.CheckMatch(Z0.BinaryOp128,Z0.OpUri,Z0.BinaryOp128,Z0.OpUri)| 
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator, considered as a basline</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator, considered as the operation under test</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.EvalExecutor.CheckMatch(Z0.BinaryOp256,Z0.OpUri,Z0.BinaryOp256,Z0.OpUri)| 
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator, considered as a basline</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator, considered as the operation under test</param>
+            <param name="gId">The identity of the second operator</param>
+        
+| M:Z0.MemberEvaluator.Eval``1(Z0.ApiCode@,Z0.Kinds.BinaryOpClass,Z0.Pairs{``0}@,Z0.Triples{``0}@)| 
+            <summary>
+            Evaluates a binary operator over a pair index and deposits the result into a caller-supplied triple index
+            </summary>
+            <param name="api">The api member</param>
+            <param name="src">The source pairs over which to evaluate the operator</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.MemberEvaluator.Eval``1(Z0.ApiCode@,Z0.Kinds.BinaryOpClass,Z0.Pairs{``0}@)| 
+            <summary>
+            Evaluates a binary operator over a pair index
+            </summary>
+            <param name="api">The api member</param>
+            <param name="src">The source pairs over which to evaluate the operator</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.MemberEvaluator.EvalFixed``1(Z0.ApiCode@,Z0.Kinds.BinaryOpClass,Z0.Pairs{``0}@)| 
+            <summary>
+            Evaluates a binary operator over a pair index of fixed types
+            </summary>
+            <param name="api">The api member</param>
+            <param name="src">The source pairs over which to evaluate the operator</param>
+            <typeparam name="T">The operand type</typeparam>
+        

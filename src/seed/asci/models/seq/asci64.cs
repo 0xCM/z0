@@ -9,61 +9,43 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static Root;
 
     using N = N64;
     using W = W512;
+    using A = asci64;
+    using S = Vector512<byte>;
 
-    public readonly struct asci64 : IAsciSequence<asci64,N>
+    public readonly struct asci64 : IAsciSequence<A,N>
     {
-        internal readonly Vector512<byte> Storage;        
-
-        public static asci64 Blank => asci.init(n);
-
-        public static asci64 Null => new asci64(Vector512<byte>.Zero);
-
-        public const int Size = 64;
-
-        static N n => default;
-
-        static W w => default;
-
+        internal readonly S Storage;        
 
         [MethodImpl(Inline)]
-        public static asci64 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci64(Root.cast<AsciCharCode,byte>(src));
+        public static implicit operator A(string src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator asci64(string src)
-            => new asci64(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(asci64 src)
+        public static implicit operator string(A src)
             => src.Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(asci64 src)
+        public static implicit operator ReadOnlySpan<byte>(A src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(asci64 src)
+        public static implicit operator ReadOnlySpan<char>(A src)
             => src.Decoded;
 
-        [MethodImpl(Inline)]
-        public asci64(Vector512<byte> src)
+        public bool IsBlank
         {
-            Storage = src;
+            [MethodImpl(Inline)]
+            get => IsNull || Equals(Spaced);
         }
 
-        [MethodImpl(Inline)]
-        public asci64(string src)
+        public bool IsNull
         {
-            Storage = asci.encode(n,src).Storage;
-        }
-
-        [MethodImpl(Inline)]
-        public asci64(ReadOnlySpan<byte> src)
-        {
-            Storage = SymBits.vload(w, Root.head(src));
+            [MethodImpl(Inline)]
+            get => Equals(Null);
         }
 
         public bool IsEmpty
@@ -84,7 +66,7 @@ namespace Z0
             get => asci.length(this);
         }
 
-        public int MaxLength
+        public int Capacity
         {
             [MethodImpl(Inline)]
             get => Size;
@@ -96,7 +78,7 @@ namespace Z0
             get => asci.bytes(this);
         }
         
-        public asci64 Zero
+        public A Zero
         {
             [MethodImpl(Inline)]
             get => default;
@@ -113,7 +95,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new asci32(Storage.Hi);
         }
-
 
         public ReadOnlySpan<char> Decoded
         {
@@ -135,13 +116,43 @@ namespace Z0
             => Text;
 
         [MethodImpl(Inline)]
-        public bool Equals(asci64 src)
+        public bool Equals(A src)
             => Storage.Equals(src.Storage);
  
          public override int GetHashCode()
             => Storage.GetHashCode();
 
-        public override bool Equals(object src)
-            => src is asci64 j && Equals(j);
+        public override bool Equals(object src)        
+            => src is A j && Equals(j);
+
+        public const int Size = 64;
+
+        public static A Spaced 
+        {
+            [MethodImpl(Inline)]
+            get => asci.init(n);
+        }
+        
+        public static A Null 
+        {
+            [MethodImpl(Inline)]
+            get => new A(default(S));
+        }
+        
+        [MethodImpl(Inline)]
+        public asci64(S src)
+            => Storage = src;
+
+        [MethodImpl(Inline)]
+        public asci64(string src)
+            => Storage = asci.encode(n,src).Storage;
+
+        [MethodImpl(Inline)]
+        public asci64(ReadOnlySpan<byte> src)
+            => Storage = SymBits.vload(w, head(src));
+
+        static N n => default;
+
+        static W w => default;
     }
 }

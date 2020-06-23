@@ -1,0 +1,292 @@
+| M:Z0.Symbolic.assemble(Z0.Perm4L,Z0.Perm4L,Z0.Perm4L,Z0.Perm4L)| 
+            <summary>
+            Constructs a permutation of length four from four ordered symbols
+            </summary>
+        
+| M:Z0.Symbolic.assemble(Z0.Perm8L,Z0.Perm8L,Z0.Perm8L,Z0.Perm8L,Z0.Perm8L,Z0.Perm8L,Z0.Perm8L,Z0.Perm8L)| 
+            <summary>
+            Constructs a permutation of length 8 from 8 ordered symbols
+            </summary>
+        
+| M:Z0.Symbolic.assemble(Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L,Z0.Perm16L)| 
+            <summary>
+            Constructs a permutation of length 16 from 16 ordered symbols
+            </summary>
+        
+| M:Z0.Symbolic.count(System.ReadOnlySpan{System.String},System.ReadOnlySpan{System.Char})| 
+            <summary>
+            Counts the number of source characters that exist an a specified match set
+            </summary>
+            <param name="src"></param>
+            <param name="match"></param>
+        
+| M:Z0.Symbolic.enumerate``3(System.Int32)          | 
+            <summary>
+            Defines a symbol spec predicated on enumeration literals
+            </summary>
+            <typeparam name="E"></typeparam>
+            <typeparam name="T"></typeparam>
+            <typeparam name="N"></typeparam>
+        
+| M:Z0.Symbolic.enumerate``2(System.Int32)          | 
+            <summary>
+            Defines a symbol spec predicated on enumeration literals
+            </summary>
+            <typeparam name="E"></typeparam>
+            <typeparam name="T"></typeparam>
+        
+| M:Z0.Symbolic.enumerate``1(System.Int32)          | 
+            <summary>
+            Defines a symbol spec predicated on enumeration literals
+            </summary>
+            <typeparam name="E"></typeparam>
+            <typeparam name="T"></typeparam>
+        
+| M:Z0.Symbolic.first(System.ReadOnlySpan{System.Char},System.Char)| 
+            <summary>
+            Returns the index of the first source character that matches a target character
+            </summary>
+            <param name="src">The data source</param>
+            <param name="match">The character to match</param>
+        
+| M:Z0.Symbolic.identity(Z0.N4)                     | 
+            <summary>
+            Defines the identity permutation on 4 symbols
+            </summary>
+            <param name="n">The symbol count selector</param>
+        
+| M:Z0.Symbolic.identity(Z0.N8)                     | 
+            <summary>
+            Defines the identity permutation on 8 symbols
+            </summary>
+            <param name="n">The symbol count selector</param>
+        
+| M:Z0.Symbolic.identity(Z0.N16)                    | 
+            <summary>
+            Defines the identity permutation on 16 symbols
+            </summary>
+            <param name="n">The symbol count selector</param>
+        
+| M:Z0.Symbolic.index``2                            | 
+            <summary>
+            Creates value-to-symbol index
+            </summary>
+            <typeparam name="E">The enumeration type that defines the symbols</typeparam>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.Symbolic.index``1(Z0.HexKindValue{``0}[])    | 
+            <summary>
+            Creates an index that correlates 8-bit unsigned integers [0..255] with aribitrary parametric values
+            </summary>
+            <param name="src">The values to correlate</param>
+            <typeparam name="T">The value type</typeparam>
+        
+| M:Z0.Symbolic.index``1(Z0.HexKindValue{``0}[],``0[])| 
+            <summary>
+            Creates an index that correlates up to 255 unsigned 8-bit integers with aribitrary parametric values
+            </summary>
+            <param name="src">The values to correlate</param>
+            <typeparam name="T">The value type</typeparam>
+        
+| M:Z0.Symbolic.indices(System.ReadOnlySpan{System.Char},System.Char,System.Span{System.Int32})| 
+            <summary>
+            Finds indices of the source cells that contain a specified character and returns the number of matches found
+            </summary>
+            <param name="src">The data source</param>
+            <param name="match">The character to match</param>
+            <param name="dst">The index target</param>
+        
+| M:Z0.Symbolic.indices(System.ReadOnlySpan{System.Byte},System.Byte,System.Span{System.Int32})| 
+            <summary>
+            Finds indices of the source cells that contain a specified value 
+            and returns the number of matches found
+            </summary>
+            <param name="src">The data source</param>
+            <param name="match">The value to match</param>
+            <param name="dst">The index target</param>
+        
+| M:Z0.Symbolic.literal(Z0.Perm4L,System.Int32,Z0.Perm4L@)| 
+            <summary>
+            Attempts to extract an index-identified permutation symbol
+            </summary>
+            <param name="src">The permutation spec</param>
+            <param name="index">The symbol index</param>
+            <param name="dst">The symbol, if successful</param>
+            <returns>True if symbol was successfully extracted, false otherwise</returns>
+        
+| M:Z0.Symbolic.literal(Z0.Perm8L,System.Int32,Z0.Perm8L@)| 
+            <summary>
+            Attempts to extract an index-identified permutation symbol
+            </summary>
+            <param name="src">The permutation spec</param>
+            <param name="index">The symbol index</param>
+            <param name="dst">The symbol, if successful</param>
+            <returns>True if symbol was successfully extracted, false otherwise</returns>
+        
+| M:Z0.Symbolic.literal(Z0.Perm16L,System.Int32,Z0.Perm16L@)| 
+            <summary>
+            Attempts to extract an index-identified permutation symbol
+            </summary>
+            <param name="src">The permutation spec</param>
+            <param name="index">The symbol index</param>
+            <param name="dst">The symbol, if successful</param>
+            <returns>True if symbol was successfully extracted, false otherwise</returns>
+        
+| M:Z0.Symbolic.literals(Z0.Perm4L)                 | 
+            <summary>
+            Extracts the ordered sequence of symbolic literals that define a 4-symbol permutation
+            </summary>
+            <param name="src">The canonical literal representation</param>
+        
+| M:Z0.Symbolic.literals(Z0.Perm8L,System.Span{Z0.Perm8L})| 
+            <summary>
+            Extracts the ordered sequence of symbolic literals that define an 8-symbol permutation to a caller-supplied target
+            </summary>
+            <param name="src">The canonical literal representation</param>
+            <param name="dst">The literal receiver</param>
+        
+| M:Z0.Symbolic.literals(Z0.Perm8L)                 | 
+            <summary>
+            Extracts the ordered sequence of symbolic literals that define an 8-symbol permutation
+            </summary>
+            <param name="src">The canonical literal representation</param>
+        
+| M:Z0.Symbolic.reversed(Z0.N4)                     | 
+            <summary>
+            Defines the canonical literal representation of the reversal of the identity permutation on 4 symbols
+            </summary>
+            <param name="n">The symbol count selector</param>
+        
+| M:Z0.Symbolic.reversed(Z0.N8)                     | 
+            <summary>
+            Defines the canonical literal representation of the reversal of the identity permutation on 8 symbols
+            </summary>
+            <param name="n">The symbol count selector</param>
+        
+| M:Z0.Symbolic.reversed(Z0.N16)                    | 
+            <summary>
+            Returns the canonical literal representation of the reversal of the identity permutation on 16 symbols
+            </summary>
+            <param name="n">The symbol count selector</param>
+        
+| M:Z0.Symbolic.spec``3(``0[])                      | 
+            <summary>
+            Defines a symbol spec
+            </summary>
+            <param name="symbols"></param>
+            <typeparam name="S">The symbol data type</typeparam>
+            <typeparam name="T">The symbol domain type</typeparam>
+            <typeparam name="N">The symbol bit-width type</typeparam>
+        
+| T:Z0.Utf8AsciPoint                                | 
+            <summary>
+            Represents the least 8 bits of a unicode code point which, by definition of the encoding,
+            is equivalent to the 7 ascii bits.
+            </summary>
+        
+| P:Z0.ILegacyAlphabet`1.Symbols                    | 
+            <summary>
+            Enumerates the symbols defined by an alphabet
+            </summary>
+        
+| T:Z0.LegacySymbol                                 | 
+            <summary>
+            Represents an atomic value
+            </summary>
+        
+| T:Z0.LegacySymbol`1                               | 
+            <summary>
+            Represents a symbol belonging to an alphabet A
+            </summary>
+        
+| F:Z0.LegacySymbol`1.EmptyChar                     | 
+            <summary>
+            Uses the unicode null symbol to represent an empty character
+            </summary>
+        
+| M:Z0.LegacySymbol`1.op_Addition(Z0.LegacySymbol{`0},Z0.LegacySymbol{`0})| 
+            <summary>
+            Concatenates two symbols to form a word
+            </summary>
+            <param name="lhs">The left symbol, which will form the head of the new word</param>
+            <param name="rhs">The right symbol, which will form the tail of the new word</param>
+        
+| T:Z0.LegacyWord`1                                 | 
+            <summary>
+            Encodes a finite, ordered sequence of symbols over some alphabet A
+            In the literature, a 'word' in this context is often referred to as a
+            'string' - the usage of which is avoided here, for obvious reasons.
+            </summary>
+        
+| P:Z0.LegacyWord`1.Empty                           | 
+            <summary>
+            Represents the empty word, with an invariant length of 0
+            </summary>
+            <typeparam name="A">The alphabet type</typeparam>
+        
+| F:Z0.LegacyWord`1.Symbols                         | 
+            <summary>
+            The symbols that comprise the word
+            </summary>
+        
+| M:Z0.LegacyWord`1.op_Equality(Z0.LegacyWord{`0},Z0.LegacyWord{`0})| 
+            <summary>
+            Determines whether two words are equivalent
+            </summary>
+            <param name="lhs">The first word</param>
+            <param name="rhs">The second word</param>
+        
+| M:Z0.LegacyWord`1.op_Inequality(Z0.LegacyWord{`0},Z0.LegacyWord{`0})| 
+            <summary>
+            Determines whether two words are unequal
+            </summary>
+            <param name="lhs">The first word</param>
+            <param name="rhs">The second word</param>
+        
+| M:Z0.LegacyWord`1.op_Implicit(Z0.LegacyWord{`0})~System.String| 
+            <summary>
+            Converts the word to a string via a canonical format
+            </summary>
+            <param name="src">The source word</param>
+        
+| M:Z0.LegacyWord`1.op_Implicit(Z0.LegacySymbol{`0}[])~Z0.LegacyWord{`0}| 
+            <summary>
+            Encloses an array of symbols by a word
+            </summary>
+            <param name="src">The source symbols</param>
+            <typeparam name="A">The alphabet</typeparam>
+        
+| M:Z0.LegacyWord`1.op_Implicit(Z0.LegacyWord{`0})~Z0.LegacySymbol{`0}[]| 
+            <summary>
+            Converts a word to its equivalent symbolic representation
+            </summary>
+            <param name="src">The source word</param>
+        
+| M:Z0.LegacyWord`1.op_Addition(Z0.LegacyWord{`0},Z0.LegacyWord{`0})| 
+            <summary>
+            Concatenates a word w1 with a word w2 to form a word w' = w1w2
+            </summary>
+            <param name="w1">The first word</param>
+            <param name="w2">The second word</param>
+        
+| P:Z0.LegacyWord`1.Zero                            | 
+            <summary>
+            The empty word containing no symbols
+            </summary>
+        
+| P:Z0.LegacyWord`1.Length                          | 
+            <summary>
+            Specifies the number of symbols that comprise the word
+            </summary>
+        
+| M:Z0.LegacyWord`1.Format                          | 
+            <summary>
+            Formats the word as a string
+            </summary>
+        
+| M:Z0.LegacyWord`1.Concat(Z0.LegacyWord{`0})       | 
+            <summary>
+            Concatenates this word w1 with another word w2 to form a new word w1w2
+            </summary>
+            <param name="w2">The word to concatenate with the current word</param>
+        

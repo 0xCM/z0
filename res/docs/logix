@@ -1,0 +1,2985 @@
+| M:Z0.Logix.LogicEngine.eval(Z0.Logix.ILogicExpr)  | 
+            <summary>
+            Evalutates an untyped expression
+            </summary>
+            <param name="expr">The expression to evaluate</param>
+        
+| M:Z0.Logix.LogicEngine.eval``1(Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Evalutates a typed logic expression
+            </summary>
+            <param name="expr">The expression to evaluate</param>
+        
+| M:Z0.Logix.LogicEngine.eval``1(Z0.Logix.IExpr{``0})| 
+            <summary>
+            Evalutates a typed scalar expression
+            </summary>
+            <param name="expr">The expression to evaluate</param>
+        
+| M:Z0.Logix.LogicEngine.eval``1(Z0.Logix.IComparisonExpr{``0})| 
+            <summary>
+            Evaluates a comparison expression, returning literal expression over the comparison type
+            and the interpretation of this literal is type-dependent
+            </summary>
+            <param name="expr">The predicate to evaluate</param>
+            <typeparam name="T">The type over which the comparison is defined</typeparam>
+        
+| M:Z0.Logix.LogicEngine.eval``1(Z0.Logix.IComparisonExpr{System.Runtime.Intrinsics.Vector128{``0}})| 
+            <summary>
+            Evaluates a comparison expression over 128-bit intrinsic vectors
+            </summary>
+            <param name="expr">The expression to evaluate</param>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.Logix.LogicEngine.eval``1(Z0.Logix.IComparisonExpr{System.Runtime.Intrinsics.Vector256{``0}})| 
+            <summary>
+            Evaluates a comparison expression over 256-bit intrinsic vectors
+            </summary>
+            <param name="expr">The expression to evaluate</param>
+            <typeparam name="T">The cell type</typeparam>
+        
+| M:Z0.Logix.LogicEngine.eval``1(Z0.Logix.IComparisonPredExpr{``0})| 
+            <summary>
+            Evaluates a comparison predicate, returning an enabled bit if the comparison succeeds and 
+            a disabled bit otherwise
+            </summary>
+            <param name="expr">The predicate to evaluate</param>
+            <typeparam name="T">The type over which the comparison is defined</typeparam>
+        
+| M:Z0.Logix.LogicEngine.eval``1(Z0.Logix.IArithmeticExpr{``0})| 
+            <summary>
+            Evalutates a typed scalar expression
+            </summary>
+            <param name="expr">The expression to evaluate</param>
+        
+| M:Z0.Logix.LogicEngine.eval``1(Z0.Logix.IExpr{System.Runtime.Intrinsics.Vector128{``0}})| 
+            <summary>
+            Evalutates a typed 128-bit intrinsic expression
+            </summary>
+            <param name="expr">The expression to evaluate</param>
+        
+| M:Z0.Logix.LogicEngine.eval``1(Z0.Logix.IExpr{System.Runtime.Intrinsics.Vector256{``0}})| 
+            <summary>
+            Evalutates a typed 256-bit intrinsic expression
+            </summary>
+            <param name="expr">The expression to evaluate</param>
+        
+| M:Z0.Logix.LogicEngine.satisfied(Z0.Logix.ComparisonExpr,Z0.bit,Z0.bit)| 
+            <summary>
+            Returns an enabled bit if the equality expression is satisfied with 
+            specified variable values and a disabled bit otherwise
+            </summary>
+            <param name="expr">The expression to test</param>
+            <param name="a">The first variable value</param>
+            <param name="b">The second variable value</param>
+        
+| M:Z0.Logix.LogicEngine.satisfied``1(Z0.Logix.ComparisonExpr{``0},``0,``0)| 
+            <summary>
+            Returns an enabled bit if the equality expression is satisfied with 
+            specified variable values and a disabled bit otherwise
+            </summary>
+            <param name="expr">The expression to test</param>
+            <param name="a">The first variable value</param>
+            <param name="b">The second variable value</param>
+        
+| M:Z0.Logix.LogicEngine.satisfied``1(Z0.Logix.ComparisonExpr{System.Runtime.Intrinsics.Vector128{``0}},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})| 
+            <summary>
+            Returns an enabled bit if the equality expression is satisfied with 
+            specified variable values and a disabled bit otherwise
+            </summary>
+            <param name="expr">The expression to test</param>
+            <param name="a">The first variable value</param>
+            <param name="b">The second variable value</param>
+        
+| M:Z0.Logix.LogicEngine.satisfied``1(Z0.Logix.ComparisonExpr{System.Runtime.Intrinsics.Vector256{``0}},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})| 
+            <summary>
+            Returns an enabled bit if the equality expression is satisfied with 
+            specified variable values and a disabled bit otherwise
+            </summary>
+            <param name="expr">The expression to test</param>
+            <param name="a">The first variable value</param>
+            <param name="b">The second variable value</param>
+        
+| M:Z0.Logix.LogicEngine.equal(Z0.Logix.VariedLogicExpr,Z0.Logix.VariedLogicExpr)| 
+            <summary>
+            Determines by exhaustion whether the left and right operands are equal
+            </summary>
+            <param name="a">The left operandd</param>
+            <param name="b">The right operand</param>
+        
+| M:Z0.Logix.LogicExprEval.eval(Z0.Logix.ILogicOpExpr)| 
+            <summary>
+            Evaluates a logical operator expression
+            </summary>
+            <param name="expr">The expression to evaluate</param>
+        
+| T:Z0.Logix.IComparisonExpr                        | 
+            <summary>
+            Characterizes a claim that two variable-dependent comparison expressions are equivalent
+            </summary>
+        
+| P:Z0.Logix.IComparisonExpr.Lhs                    | 
+            <summary>
+            The left expression
+            </summary>
+        
+| P:Z0.Logix.IComparisonExpr.Rhs                    | 
+            <summary>
+            The right expression
+            </summary>
+        
+| P:Z0.Logix.IComparisonExpr.Vars                   | 
+            <summary>
+            Variables upon which the expression depends
+            </summary>
+        
+| T:Z0.Logix.IComparisonExpr`1                      | 
+            <summary>
+            Characterizes a claim that two variable-dependent typed comparison expressions are equivalent
+            </summary>
+        
+| P:Z0.Logix.IComparisonExpr`1.LeftArg              | 
+            <summary>
+            The left expression
+            </summary>
+        
+| P:Z0.Logix.IComparisonExpr`1.RightArg             | 
+            <summary>
+            The right expression
+            </summary>
+        
+| P:Z0.Logix.IComparisonExpr`1.Vars                 | 
+            <summary>
+            Variables upon which the expression depends
+            </summary>
+        
+| P:Z0.Logix.IComparisonExpr`1.ComparisonKind       | 
+            <summary>
+            The sort of comparison to be applied
+            </summary>
+        
+| T:Z0.Logix.IComparisonPredExpr`1                  | 
+            <summary>
+            Characterizes a comparison expression that evaluates as a predicate where a single bit, or bitvector, 
+            characterizes the evaluation result. This is in contradistinction to the more general typed comparison expression
+            where the result is predicated on the type and may be scalar/vector/etc in nature
+            </summary>
+            <typeparam name="T">The type over which the comparison is defined</typeparam>
+        
+| T:Z0.Logix.IExpr                                  | 
+            <summary>
+            Characterizes an expression
+            </summary>
+        
+| M:Z0.Logix.IExpr.Format                           | 
+            <summary>
+            Renders the expression in canonical form
+            </summary>
+        
+| T:Z0.Logix.IExpr`1                                | 
+            <summary>
+            Characterizes an parametric expression
+            </summary>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| T:Z0.Logix.ILogicExpr                             | 
+            <summary>
+            Characterizes a logicical expression over a bit
+            </summary>
+        
+| T:Z0.Logix.ILogicExpr`1                           | 
+            <summary>
+            Characterizes a typed expression that admits logical evaluation
+            </summary>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| T:Z0.Logix.IOperatorExpr                          | 
+            <summary>
+            Characterizes an expression defined via an operator
+            </summary>
+        
+| T:Z0.Logix.IOperatorExpr`1                        | 
+            <summary>
+            Characterizes a parametric operator that varies over operand type
+            </summary>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| T:Z0.Logix.IOperatorExpr`2                        | 
+            <summary>
+            Characterizes a parametric operator that varies over operator kind and operand type
+            </summary>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+            <typeparam name="K">The operator classifier</typeparam>
+        
+| P:Z0.Logix.IOperatorExpr`2.OpKind                 | 
+            <summary>
+            Specifies the class to which the operator belongs
+            </summary>
+        
+| T:Z0.Logix.IBinaryOpExpr`1                        | 
+            <summary>
+            Characterizes a binary operator parametrized by expression type
+            </summary>
+        
+| T:Z0.Logix.IUnaryOpExpr`1                         | 
+            <summary>
+            Characterizes a unary operator parametrized by an expression type
+            </summary>
+        
+| P:Z0.Logix.IUnaryOpExpr`1.Arg                     | 
+            <summary>
+            The operand
+            </summary>
+        
+| T:Z0.Logix.ITernaryOpExpr`1                       | 
+            <summary>
+            Characterizes a ternary operator parametrized by expression type
+            </summary>
+        
+| T:Z0.Logix.IFormulaExpr                           | 
+            <summary>
+            Characterizes a formula which, by definition, is a named expression
+            </summary>
+        
+| P:Z0.Logix.IFormulaExpr.Name                      | 
+            <summary>
+            The formula name, unique with respect to some context
+            </summary>
+        
+| P:Z0.Logix.IFormulaExpr.Encoding                  | 
+            <summary>
+            The defining expression
+            </summary>
+        
+| T:Z0.Logix.IFormulaExpr`1                         | 
+            <summary>
+            Characterizes a typed formula, a named typed expression
+            </summary>
+        
+| P:Z0.Logix.IFormulaExpr`1.Encoding                | 
+            <summary>
+            The defining expression
+            </summary>
+        
+| P:Z0.Logix.ILiteralExpr`1.Value                   | 
+            <summary>
+            The value of the literal
+            </summary>
+        
+| T:Z0.Logix.ILogicOpExpr                           | 
+            <summary>
+            Characterizes an operator reified as a boolean function
+            </summary>
+        
+| T:Z0.Logix.ILogicOpExpr`2                         | 
+            <summary>
+            Characterizes a logic operator that varies by operator kind and is evaluated in the context of a parametric type
+            </summary>
+            <typeparam name="T">The context type</typeparam>
+            <typeparam name="K">The operator classifier</typeparam>
+        
+| P:Z0.Logix.ILazySeqExpr`1.Terms                   | 
+            <summary>
+            The terms in the sequence that are evaluated on-demand
+            </summary>
+        
+| T:Z0.Logix.ISeqExpr`1                             | 
+            <summary>
+            Characterizes a finite sequence of terms
+            </summary>
+            <typeparam name="T">The term type</typeparam>
+        
+| P:Z0.Logix.ISeqExpr`1.Terms                       | 
+            <summary>
+            The terms in the sequence
+            </summary>
+        
+| P:Z0.Logix.ISeqExpr`1.Item(System.Int32)          | 
+            <summary>
+            Sequence value accessor/manipulator
+            </summary>
+        
+| P:Z0.Logix.ISeqExpr`1.Length                      | 
+            <summary>
+            The number of terms in the sequence
+            </summary>
+        
+| P:Z0.Logix.IShiftOpExpr`1.Subject                 | 
+            <summary>
+            The thing to shift
+            </summary>
+        
+| T:Z0.Logix.ITernaryBitwiseOpExpr`1                | 
+            <summary>
+            Characterizes a typed ternary bitwise operator
+            </summary>
+            <typeparam name="T">The type over which the operator is defined</typeparam>
+        
+| T:Z0.Logix.IVarExpr                               | 
+            <summary>
+            Characterizes a variable
+            </summary>
+        
+| P:Z0.Logix.IVarExpr.Name                          | 
+            <summary>
+            The name of the variable
+            </summary>
+        
+| T:Z0.Logix.IVarExpr`1                             | 
+            <summary>
+            Characterizes a typed variable
+            </summary>
+        
+| M:Z0.Logix.IVarExpr`1.Set(Z0.Logix.IExpr{`0})     | 
+            <summary>
+            Updates the variable
+            </summary>
+            <param name="expr">The value to assigned to the variable</param>
+        
+| M:Z0.Logix.IVarExpr`1.Set(`0)                     | 
+            <summary>
+            Updates the expression value
+            </summary>
+            <param name="literal">The literal value to assign to the variable</param>
+        
+| P:Z0.Logix.IVarExpr`1.Value                       | 
+            <summary>
+            The current value of the variable
+            </summary>
+        
+| T:Z0.Logix.ILogicVarExpr                          | 
+            <summary>
+            Characterizes a logical variable
+            </summary>
+        
+| M:Z0.Logix.ILogicVarExpr.Set(Z0.Logix.ILogicExpr) | 
+            <summary>
+            Updates the variable
+            </summary>
+            <param name="expr">The value to assigned to the variable</param>
+        
+| M:Z0.Logix.ILogicVarExpr.Set(Z0.bit)              | 
+            <summary>
+            Updates the expression value
+            </summary>
+            <param name="literal">The literal value to assign to the variable</param>
+        
+| P:Z0.Logix.ILogicVarExpr.Value                    | 
+            <summary>
+            The current value of the variable
+            </summary>
+        
+| T:Z0.Logix.ILogicVarExpr`1                        | 
+            <summary>
+            Characterizes a logical variable that also carries type information
+            </summary>
+        
+| M:Z0.Logix.ILogicVarExpr`1.Set(Z0.Logix.ILogicExpr{`0})| 
+            <summary>
+            Updates the variable
+            </summary>
+            <param name="expr">The value to assigned to the variable</param>
+        
+| P:Z0.Logix.ILogicVarExpr`1.Value                  | 
+            <summary>
+            The current value of the variable
+            </summary>
+        
+| T:Z0.Logix.IVariedExpr                            | 
+            <summary>
+            Distinguishes varied expressions from other sorts of expressions
+            </summary>
+        
+| T:Z0.Logix.IVariedExpr`1                          | 
+            <summary>
+            Characterizes an expression that varies over a typed expression
+            </summary>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| T:Z0.Logix.IVariedLogicExpr                       | 
+            <summary>
+            Characterizes an expression that depends on a boolean variable
+            </summary>
+        
+| T:Z0.Logix.IVariedLogicExpr`1                     | 
+            <summary>
+            Characterizes an expression that depends on a boolean variable but which
+            also carries type information
+            </summary>
+        
+| M:Z0.Logix.ArithmeticSpec.unary``1(Z0.UnaryArithmeticKind,Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines an arithmetic unary expression
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="a">The operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.unary``1(Z0.UnaryArithmeticKind,``0)| 
+            <summary>
+            Defines an arithmetic unary expression over a literal operand
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="operand">The literal value</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.binary``1(Z0.BinaryArithmeticKind,Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a binary arithmetic expression
+            </summary>
+            <param name="a">The left expression</param>
+            <param name="b">The right expression</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.binary``1(Z0.BinaryArithmeticKind,``0,``0)| 
+            <summary>
+            Defines a binary arithmetic expression over literal operands
+            </summary>
+            <param name="a">The left expression</param>
+            <param name="b">The right expression</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.inc``1(Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a unary increment expression
+            </summary>
+            <param name="a">The expression operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.inc``1(``0)             | 
+            <summary>
+            Defines a unary increment expression with a literal operand
+            </summary>
+            <param name="a">The literal value</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.dec``1(Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a unary decrement expression
+            </summary>
+            <param name="a">The expression operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.dec``1(``0)             | 
+            <summary>
+            Defines a decrement increment expression with a literal operand
+            </summary>
+            <param name="a">The literal value</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.negate``1(Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a unary decrement expression
+            </summary>
+            <param name="a">The expression operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.negate``1(``0)          | 
+            <summary>
+            Defines a decrement increment expression with a literal operand
+            </summary>
+            <param name="a">The literal value</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.add``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a binary addition expression
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.add``1(``0,``0)         | 
+            <summary>
+            Defines a binary addition expression over literal operands
+            </summary>
+            <param name="a">The left literal value</param>
+            <param name="b">The right literal value</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.sub``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a binary subtraction expression
+            </summary>
+            <param name="a">The left expression</param>
+            <param name="b">The right expression</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.ArithmeticSpec.sub``1(``0,``0)         | 
+            <summary>
+            Defines a binary subtraction expression over literal operands
+            </summary>
+            <param name="a">The left literal value</param>
+            <param name="b">The right literal value</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.compare``1(Z0.BinaryComparisonKind,Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a typed comparison predicate over operand expressions
+            </summary>
+            <param name="kind">The comparison kind</param>
+            <param name="a">The left expression</param>
+            <param name="b">The right expression</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.compare``1(Z0.BinaryComparisonKind,``0,``0)| 
+            <summary>
+            Defines a typed comparison predicate over literal operands
+            </summary>
+            <param name="kind">The comparison kind</param>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.equals``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines an equality comparison expression
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.equals``1(``0,``0)       | 
+            <summary>
+            Defines an equality comparison expression over literal operands
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.lt``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a less-than comparison expression
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.lt``1(``0,``0)           | 
+            <summary>
+            Defines a less-than comparison expression over literal operands
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.lteq``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a less-than or equal comparison expression
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.lteq``1(``0,``0)         | 
+            <summary>
+            Defines a less-than or equal comparison expression over literal operands
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.gt``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a greater-than comparison expression
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.gt``1(``0,``0)           | 
+            <summary>
+            Defines a greater-than comparison expression over literal operands
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.gteq``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a greater-than or equal comparison expression
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.PredicateSpec.gteq``1(``0,``0)         | 
+            <summary>
+            Defines a greater-than or equal comparison expression over literal operands
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| T:Z0.Logix.BitLogicSpec                           | 
+            <summary>
+            Defines factories that create structures for logic over a single bit
+            </summary>
+        
+| M:Z0.Logix.BitLogicSpec.bitseq(Z0.bit[])          | 
+            <summary>
+            Defines a bit sequence expression with an arbitrary number of terms
+            </summary>
+            <param name="terms">The sequence terms</param>
+        
+| M:Z0.Logix.BitLogicSpec.bitseq``1(``0,Z0.bit[])   | 
+            <summary>
+            Defines a bit sequence expression of natural length
+            </summary>
+            <param name="length">The natural length of the sequence</param>
+            <param name="terms">The sequence terms</param>
+        
+| M:Z0.Logix.BitLogicSpec.not(Z0.Logix.ILogicExpr)  | 
+            <summary>
+            Defines a logical not operator over a logic expression
+            </summary>
+            <param name="a">The operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.not(Z0.bit)               | 
+            <summary>
+            Defines a logical not operator over a bit literal
+            </summary>
+            <param name="a">The operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.not``1(Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a logical not operator over a typed logic expression
+            </summary>
+            <param name="a">The operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.not``1(Z0.bit)            | 
+            <summary>
+            Defines a logical not operator over a typed literal
+            </summary>
+            <param name="a">The operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.and(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a logical And operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.and(Z0.bit,Z0.bit)        | 
+            <summary>
+            Defines a logical And operator over bit literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.and``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a logical And operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.and``1(Z0.bit,Z0.bit)     | 
+            <summary>
+            Defines a logical And operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.nand(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a logical Nand operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.nand(Z0.bit,Z0.bit)       | 
+            <summary>
+            Defines a logical Nand operator over bit literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.nand``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a logical Nand operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.nand``1(Z0.bit,Z0.bit)    | 
+            <summary>
+            Defines a logical Nand operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.or(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a logical Or operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.or(Z0.bit,Z0.bit)         | 
+            <summary>
+            Defines a logical Or operator over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.or``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a logical Or operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.or``1(Z0.bit,Z0.bit)      | 
+            <summary>
+            Defines a logical Or operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.nor(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a nor operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.nor``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a logical Nor operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.nor(Z0.bit,Z0.bit)        | 
+            <summary>
+            Defines a nor operator over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.nor``1(Z0.bit,Z0.bit)     | 
+            <summary>
+            Defines a logical Nor operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.xor(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a logical Xor operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.xor(Z0.bit,Z0.bit)        | 
+            <summary>
+            Defines a logical Xor operator over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.xor``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a logical Xor operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.xor``1(Z0.bit,Z0.bit)     | 
+            <summary>
+            Defines a logical Xor operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.xnor(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines an xnor operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.xnor(Z0.bit,Z0.bit)       | 
+            <summary>
+            Defines an xnor operator over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.xnor``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a logical Xnor operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.xnor``1(Z0.bit,Z0.bit)    | 
+            <summary>
+            Defines a logical Xnor operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.left(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a left projection operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.left``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a logical Xor operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.left(Z0.bit,Z0.bit)       | 
+            <summary>
+            Defines a left projection over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.left``1(Z0.bit,Z0.bit)    | 
+            <summary>
+            Defines a left projection operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.right(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a right projection operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.right(Z0.bit,Z0.bit)      | 
+            <summary>
+            Defines a right projection over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.right``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a right projection operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.right``1(Z0.bit,Z0.bit)   | 
+            <summary>
+            Defines a right projection operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.lnot(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a left negation operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.lnot(Z0.bit,Z0.bit)       | 
+            <summary>
+            Defines a left negation operator over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.lnot``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a left negation operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.lnot``1(Z0.bit,Z0.bit)    | 
+            <summary>
+            Defines a left negation operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.rnot(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a right negation operator over expression operands 
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.rnot(Z0.bit,Z0.bit)       | 
+            <summary>
+            Defines a right negation operator over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.rnot``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a right negation operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.rnot``1(Z0.bit,Z0.bit)    | 
+            <summary>
+            Defines a right negation operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.imply(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a material implication operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.imply(Z0.bit,Z0.bit)      | 
+            <summary>
+            Defines a material implication operator over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.imply``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a material implication operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.imply``1(Z0.bit,Z0.bit)   | 
+            <summary>
+            Defines a material implication operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.notimply(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a material nonimplication operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.notimply(Z0.bit,Z0.bit)   | 
+            <summary>
+            Defines a material nonimplication operator over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.notimply``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a material nonimplication operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.notimply``1(Z0.bit,Z0.bit)| 
+            <summary>
+            Defines a material nonimplication operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.cimply(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a converse implication operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.cimply(Z0.bit,Z0.bit)     | 
+            <summary>
+            Defines a converse implication operator over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.cimply``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a converse implication operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.cimply``1(Z0.bit,Z0.bit)  | 
+            <summary>
+            Defines a converse implication operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.cnotimply(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a converse nonimplication operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.cnotimply(Z0.bit,Z0.bit)  | 
+            <summary>
+            Defines a converse nonimplication operator over literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.cnotimply``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a converse nonimplication operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.cnotimply``1(Z0.bit,Z0.bit)| 
+            <summary>
+            Defines a converse nonimplication operator over typed literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.select(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a ternary select operator over expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.select(Z0.bit,Z0.bit,Z0.bit)| 
+            <summary>
+            Defines a ternary select operator over bit literal operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.select``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a ternary select operator over typed expression operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.bitcombo(Z0.N1)           | 
+            <summary>
+            Computes all bit sequence expressions of length 1
+            </summary>
+            <param name="n">The natural selector</param>
+        
+| M:Z0.Logix.BitLogicSpec.bitcombo(Z0.N2)           | 
+            <summary>
+            Computes all bit sequence expressions of length 2
+            </summary>
+            <param name="n">The natural selector</param>
+        
+| M:Z0.Logix.BitLogicSpec.bitcombo(Z0.N3)           | 
+            <summary>
+            Computes all bit sequence expressions of length 3
+            </summary>
+            <param name="n">The natural selector</param>
+        
+| M:Z0.Logix.BitLogicSpec.bitcombo(Z0.N4)           | 
+            <summary>
+            Computes all bit sequence expressions of length 4
+            </summary>
+            <param name="n">The natural selector</param>
+        
+| M:Z0.Logix.BitLogicSpec.bitcombo(Z0.N5)           | 
+            <summary>
+            Computes all bit sequence expressions of length 5
+            </summary>
+            <param name="n">The natural selector</param>
+        
+| M:Z0.Logix.BitLogicSpec.bitcombo(Z0.N6)           | 
+            <summary>
+            Computes all bit sequence expressions of length 6
+            </summary>
+            <param name="n">The natural selector</param>
+        
+| M:Z0.Logix.BitLogicSpec.bitcombo(Z0.N7)           | 
+            <summary>
+            Computes all bit sequence expressions of length 7
+            </summary>
+            <param name="n">The natural selector</param>
+        
+| M:Z0.Logix.BitLogicSpec.bitcombo(Z0.N8)           | 
+            <summary>
+            Computes all bit sequence expressions of length 8
+            </summary>
+            <param name="n">The natural selector</param>
+        
+| M:Z0.Logix.BitLogicSpec.compare(Z0.BinaryComparisonKind,Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr,Z0.Logix.ILogicVarExpr[])| 
+            <summary>
+            Defines comparison expression
+            </summary>
+            <param name="kind">The comparisonkind</param>
+            <param name="lhs">The left expression</param>
+            <param name="rhs">The right expression</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.BitLogicSpec.compare``1(Z0.BinaryComparisonKind,Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0},Z0.Logix.IVarExpr{``0}[])| 
+            <summary>
+            Defines comparison expression
+            </summary>
+            <param name="kind">The comparisonkind</param>
+            <param name="lhs">The left expression</param>
+            <param name="rhs">The right expression</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.BitLogicSpec.equals(Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr,Z0.Logix.ILogicVarExpr[])| 
+            <summary>
+            Defines an equality comparison expression
+            </summary>
+            <param name="lhs">The left expression</param>
+            <param name="rhs">The right expression</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.BitLogicSpec.equals``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0},Z0.Logix.IVarExpr{``0}[])| 
+            <summary>
+            Defines an equality comparison expression
+            </summary>
+            <param name="lhs">The left expression</param>
+            <param name="rhs">The right expression</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.BitLogicSpec.true                      | 
+            <summary>
+            Creates a logical TRUE expression, i.e. an expression that is always true
+            </summary>
+        
+| M:Z0.Logix.BitLogicSpec.true``1                   | 
+            <summary>
+            Creates a logical TRUE expression, i.e. an expression that is always true
+            </summary>
+        
+| M:Z0.Logix.BitLogicSpec.false                     | 
+            <summary>
+            Creates a logical FALSE expression, i.e. an expression that is always false
+            </summary>
+        
+| M:Z0.Logix.BitLogicSpec.false``1                  | 
+            <summary>
+            Creates a logical FALSE expression, i.e. an expression that is always false
+            </summary>
+        
+| M:Z0.Logix.BitLogicSpec.literal(Z0.bit)           | 
+            <summary>
+            Creates a bit literal expression
+            </summary>
+            <param name="a">The literal value</param>
+        
+| M:Z0.Logix.BitLogicSpec.literal``1(Z0.bit)        | 
+            <summary>
+            Creates a typed logic literal
+            </summary>
+            <param name="a">The literal value</param>
+        
+| M:Z0.Logix.BitLogicSpec.identity(Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a logical identity expression
+            </summary>
+            <param name="a">The operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.identity``1(Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a typed logical identity expression
+            </summary>
+            <param name="a">The operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.unary(Z0.UnaryBitLogic,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a unary logic operator over an expression
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="a">The operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.BitLogicSpec.unary``1(Z0.UnaryBitLogic,Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a unary logic operator over an expression
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="a">The operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.BitLogicSpec.unary``1(Z0.UnaryBitLogic,Z0.bit)| 
+            <summary>
+            Defines a unary logic operator over a typed literal operand
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="a">The operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.BitLogicSpec.unary(Z0.UnaryBitLogic,Z0.bit)| 
+            <summary>
+            Defines a unary logic operator over a literal
+            </summary>
+            <param name="kind">The operator classifier</param>
+            <param name="a">The operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.BitLogicSpec.binary(Z0.BinaryLogicKind,Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a binary logic operator over expression operands
+            </summary>
+            <param name="kind">The operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.binary``1(Z0.BinaryLogicKind,Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a binary logic operator over typed expression operands
+            </summary>
+            <param name="kind">The operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.binary(Z0.BinaryLogicKind,Z0.bit,Z0.bit)| 
+            <summary>
+            Defines a binary logic operator over bit literal operands
+            </summary>
+            <param name="kind">The operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.binary``1(Z0.BinaryLogicKind,Z0.bit,Z0.bit)| 
+            <summary>
+            Defines a binary logic operator over typed literal operands
+            </summary>
+            <param name="kind">The operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.ternary(Z0.TernaryBitLogic,Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr,Z0.Logix.ILogicExpr)| 
+            <summary>
+            Defines a ternary logic operator over expression operands
+            </summary>
+            <param name="kind">The operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <param name="c">The third operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.ternary``1(Z0.TernaryBitLogic,Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0},Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a ternary logic operator over expression operands
+            </summary>
+            <param name="kind">The operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <param name="c">The third operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.ternary(Z0.TernaryBitLogic,Z0.bit,Z0.bit,Z0.bit)| 
+            <summary>
+            Defines a ternary logic operator over bit literal operands
+            </summary>
+            <param name="kind">The operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <param name="c">The third operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.ternary``1(Z0.TernaryBitLogic,Z0.bit,Z0.bit,Z0.bit)| 
+            <summary>
+            Defines a ternary logic operator over typed literal operands
+            </summary>
+            <param name="kind">The operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <param name="c">The third operand</param>
+        
+| M:Z0.Logix.BitLogicSpec.lvar(System.String,Z0.bit)| 
+            <summary>
+            Defines a bit variable expression initialized to a literal value
+            </summary>
+            <param name="name">The variable's name</param>
+            <param name="init">The variable's initial value</param>
+        
+| M:Z0.Logix.BitLogicSpec.lvar(System.Char,Z0.bit)  | 
+            <summary>
+            Defines a bit variable expression initialized to a literal value
+            </summary>
+            <param name="name">The variable's single-character name</param>
+            <param name="init">The variable's initial value</param>
+        
+| M:Z0.Logix.BitLogicSpec.lvar(System.UInt32,Z0.bit)| 
+            <summary>
+            Defines a bit variable expression initialized to a literal value
+            and the variable name is defined by an integer
+            </summary>
+            <param name="name">The variable's name</param>
+            <param name="init">The variable's initial value</param>
+        
+| M:Z0.Logix.BitLogicSpec.lvar``1(System.String,Z0.bit)| 
+            <summary>
+            Defines a typed logic variable expression initialized to a literal value
+            </summary>
+            <param name="name">The variable's name</param>
+            <param name="init">The variable's initial value</param>
+        
+| M:Z0.Logix.BitLogicSpec.lvar``1(System.String,Z0.Logix.ILogicExpr{``0})| 
+            <summary>
+            Defines a typed logic variable expression initialized to a literal value
+            </summary>
+            <param name="name">The variable's name</param>
+            <param name="init">The variable's initial value</param>
+        
+| M:Z0.Logix.BitLogicSpec.lvar``1(System.Char,Z0.bit)| 
+            <summary>
+            Defines a typed logic variable expression initialized to a literal value
+            </summary>
+            <param name="name">The variable's name</param>
+            <param name="init">The variable's initial value</param>
+        
+| M:Z0.Logix.BitLogicSpec.lvar``1(System.UInt32,Z0.bit)| 
+            <summary>
+            Defines a typed logic variable expression initialized to a literal value
+            </summary>
+            <param name="name">The variable's name</param>
+            <param name="init">The variable's initial value</param>
+        
+| M:Z0.Logix.BitLogicSpec.lvars(System.Int32)       | 
+            <summary>
+            Defines a specified number n of logic variable expressions where each variable is respectively named 0,..., n - 1
+            </summary>
+            <param name="n">The number of variables to define</param>
+        
+| M:Z0.Logix.BitLogicSpec.lvars``1(System.Int32)    | 
+            <summary>
+            Defines a specified number n of typed logic variable expressions where each variable is respectively named 0,..., n - 1
+            </summary>
+            <param name="n">The number of variables to define</param>
+        
+| M:Z0.Logix.BitLogicSpec.varied(Z0.Logix.ILogicExpr,Z0.Logix.LogicVariable[])| 
+            <summary>
+            Creates a varied expression predicated on a specified variable sequence
+            </summary>
+            <param name="expr">The variable-dependent expression</param>
+            <param name="vars">The variable sequence</param>
+        
+| M:Z0.Logix.BitLogicSpec.varied``1(Z0.Logix.ILogicExpr{``0},Z0.Logix.LogicVariable{``0}[])| 
+            <summary>
+            Creates a varied expression predicated on a specified variable sequence
+            </summary>
+            <param name="expr">The variable-dependent expression</param>
+            <param name="vars">The variable sequence</param>
+        
+| M:Z0.Logix.ExprX.Set``1(Z0.Logix.IVarExpr{``0},Z0.IPolyrand)| 
+            <summary>
+            Assigns a random value to a variable and returns that value to the caller
+            </summary>
+            <param name="v">The variable to set</param>
+            <param name="random">The random source</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.Logix.ExprX.Set``1(Z0.Logix.IVarExpr{``0},Z0.IPolyrand,``0,``0)| 
+            <summary>
+            Assigns a random value to a variable and returns that value to the caller
+            </summary>
+            <param name="v">The variable to set</param>
+            <param name="random">The random source</param>
+            <param name="min">The inclusive min value to assign</param>
+            <param name="max">The exclusive max value to assign</param>
+            <typeparam name="T">The primal type</typeparam>
+        
+| M:Z0.Logix.ExprX.Var0``1(Z0.Logix.VariedExpr{Z0.N1,``0})| 
+            <summary>
+            Returns the source expression variable at index 0
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var0``1(Z0.Logix.VariedExpr{Z0.N1,``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Returns the source expression variable at index 0, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var0``1(Z0.Logix.VariedExpr{Z0.N1,``0},``0)| 
+            <summary>
+            Returns the source expression variable at index 0, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var0``1(Z0.Logix.VariedExpr{Z0.N2,``0})| 
+            <summary>
+            Returns the source expression variable at index 0
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var0``1(Z0.Logix.VariedExpr{Z0.N2,``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Returns the source expression variable at index 0, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var0``1(Z0.Logix.VariedExpr{Z0.N2,``0},``0)| 
+            <summary>
+            Returns the source expression variable at index 0, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var1``1(Z0.Logix.VariedExpr{Z0.N2,``0})| 
+            <summary>
+            Returns the source expression variable at index 1
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var1``1(Z0.Logix.VariedExpr{Z0.N2,``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Returns the source expression variable at index 1, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var1``1(Z0.Logix.VariedExpr{Z0.N2,``0},``0)| 
+            <summary>
+            Returns the source expression variable at index 1, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var0``1(Z0.Logix.VariedExpr{Z0.N3,``0})| 
+            <summary>
+            Returns the source expression variable at index 0
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var0``1(Z0.Logix.VariedExpr{Z0.N3,``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Returns the source expression variable at index 0, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var0``1(Z0.Logix.VariedExpr{Z0.N3,``0},``0)| 
+            <summary>
+            Returns the source expression variable at index 0, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var1``1(Z0.Logix.VariedExpr{Z0.N3,``0})| 
+            <summary>
+            Returns the source expression variable at index 1
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var1``1(Z0.Logix.VariedExpr{Z0.N3,``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Returns the source expression variable at index 1, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var1``1(Z0.Logix.VariedExpr{Z0.N3,``0},``0)| 
+            <summary>
+            Returns the source expression variable at index 1, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var2``1(Z0.Logix.VariedExpr{Z0.N3,``0})| 
+            <summary>
+            Returns the source expression variable at index 2
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var2``1(Z0.Logix.VariedExpr{Z0.N3,``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Returns the source expression variable at index 2, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.Var2``1(Z0.Logix.VariedExpr{Z0.N3,``0},``0)| 
+            <summary>
+            Returns the source expression variable at index 2, optionally assigned to supplied value
+            </summary>
+            <param name="src">The source expression</param>
+            <param name="value">The value, if any, to assign the variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.ExprX.ToLogicSeq(Z0.BitString)         | 
+            <summary>
+            Transforms a bitstring into a literal logic sequence
+            </summary>
+            <param name="bs">The source bitstring</param>
+        
+| M:Z0.Logix.ExprX.ToLogicSeq``1(Z0.BitString,``0)  | 
+            <summary>
+            Transforms a bitstring into a literal logic sequence of natural length
+            </summary>
+            <param name="bs">The source bitstring</param>
+            <typeparam name="N">The length type</typeparam>
+        
+| P:Z0.Logix.LogicIdentities.AndOverOr              | 
+            <summary>
+            Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))
+            </summary>
+        
+| P:Z0.Logix.LogicIdentities.AndOverXOr             | 
+            <summary>
+            Specifies the identity and(a,xor(b,c)) == xor(and(a,b), and(a,c))
+            </summary>
+        
+| P:Z0.Logix.LogicIdentities.OrOverAnd              | 
+            <summary>
+            Specifies the identity or(a,and(b,c)) == and(or(a,b), or(a,c))
+            </summary>
+        
+| P:Z0.Logix.LogicIdentities.NotOverAnd             | 
+            <summary>
+            Specifies the identity not(and(a,b)) == or(not(x),not(y))
+            </summary>
+        
+| P:Z0.Logix.LogicIdentities.NotOverXOr             | 
+            <summary>
+            Specifies the identity not(xor(a,b)) == xor(not(x),y)
+            </summary>
+        
+| M:Z0.Logix.TypedIdentities.AndOverOr``1           | 
+            <summary>
+            Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))
+            </summary>
+        
+| M:Z0.Logix.TypedIdentities.AndOverXOr``1          | 
+            <summary>
+            Specifies the identity and(a,xor(b,c)) == xor(and(a,b), and(a,c))
+            </summary>
+        
+| M:Z0.Logix.TypedIdentities.OrOverAnd``1           | 
+            <summary>
+            Specifies the identity or(a,and(b,c)) == and(or(a,b), or(a,c))
+            </summary>
+        
+| M:Z0.Logix.TypedIdentities.NotOverAnd``1          | 
+            <summary>
+            Specifies the identity not(and(a,b)) == or(not(x),not(y))
+            </summary>
+        
+| M:Z0.Logix.TypedIdentities.NotOverXOr``1          | 
+            <summary>
+            Specifies the identity not(xor(a,b)) == xor(not(x),y)
+            </summary>
+        
+| M:Z0.Logix.TypedLogicSpec.true``1                 | 
+            <summary>
+            Defines a typed literal where all bits are on
+            </summary>
+            <typeparam name="T">The literal type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.true``1(Z0.N128)        | 
+            <summary>
+            Defines a 128-bit cpu vector where all bits are on
+            </summary>
+            <typeparam name="T">The literal type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.true``1(Z0.N256)        | 
+            <summary>
+            Defines a 128-bit cpu vector where all bits are on
+            </summary>
+            <typeparam name="T">The literal type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.false``1                | 
+            <summary>
+            Defines a typed literal where all bits are off
+            </summary>
+            <typeparam name="T">The literal type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.and``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a bitwise and expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.and``1(``0,``0)         | 
+            <summary>
+            Defines a bitwise and expression with literal operands
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.or``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a bitwise or expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.or``1(``0,``0)          | 
+            <summary>
+            Defines a bitwise or expression with literal operands
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.xor``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a bitwise xor expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.xor``1(``0,``0)         | 
+            <summary>
+            Defines a bitwise xor expression with literal operands
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.not``1(Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a a bitwise complement expression
+            </summary>
+            <param name="operand">The expression operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.not``1(``0)             | 
+            <summary>
+            Defines a a bitwise complement expression with a literal operand
+            </summary>
+            <param name="operand">The expression operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.nand``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a bitwise NAND expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.nand``1(``0,``0)        | 
+            <summary>
+            Defines a bitwise NAND expression with literal operands
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.nor``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a bitwise NOR expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.nor``1(``0,``0)         | 
+            <summary>
+            Defines a bitwise NOR expression with literal operands
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.xnor``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a bitwise XNOR expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.xnor``1(``0,``0)        | 
+            <summary>
+            Defines a bitwise XNOR expression with literal operands
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.literal``1(``0)         | 
+            <summary>
+            Creates a literal expression
+            </summary>
+            <param name="value">The literal value</param>
+            <typeparam name="T">The literal type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.unary``1(Z0.UnaryBitLogic,Z0.Logix.IExpr{``0})| 
+            <summary>
+            Creates a bitwise unary expression
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="operand">The operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.binary``1(Z0.BinaryLogicKind,Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Creates a bitwise binary expression
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="left">The left operand</param>
+            <param name="right">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.binary``1(Z0.BinaryComparisonKind,Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Creates a binary comparison expression
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="left">The left operand</param>
+            <param name="right">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.ternary``1(Z0.TernaryBitLogic,Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Creates a bitwise ternary expression
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.rangexpr``1(``0,``0,System.Nullable{``0})| 
+            <summary>
+            Defines a scalar range expression
+            </summary>
+            <param name="min">The minimum scalar in the range</param>
+            <param name="max">The maximum scalar in the range</param>
+            <typeparam name="T">The scalar type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.shift``1(Z0.BitShiftKind,Z0.Logix.IExpr{``0},System.Byte)| 
+            <summary>
+            Creates a shift expression
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.shiftx``1(Z0.BitShiftKind,Z0.Logix.IExpr{``0},Z0.Logix.IExpr{System.Byte})| 
+            <summary>
+            Creates a shift expression
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.sll``1(Z0.Logix.IExpr{``0},System.Byte)| 
+            <summary>
+            Defines a bitwise sll expression
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.sll``1(``0,System.Byte) | 
+            <summary>
+            Defines a bitwise sll expression with literal operands
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.srl``1(Z0.Logix.IExpr{``0},System.Byte)| 
+            <summary>
+            Defines a bitwise srl expression
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.srl``1(``0,System.Byte) | 
+            <summary>
+            Defines a bitwise srl expression with literal operands
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.rotr``1(Z0.Logix.IExpr{``0},System.Byte)| 
+            <summary>
+            Defines a bitwise rotr expression
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.rotr``1(``0,System.Byte)| 
+            <summary>
+            Defines a bitwise rotr expression with literal operands
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.rotl``1(Z0.Logix.IExpr{``0},System.Byte)| 
+            <summary>
+            Defines a bitwise rotl expression
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.rotl``1(``0,System.Byte)| 
+            <summary>
+            Defines a bitwise rotl expression with literal operands
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.sll``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{System.Byte})| 
+            <summary>
+            Defines a bitwise sll expression
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.sllx``1(``0,Z0.Logix.IExpr{System.Byte})| 
+            <summary>
+            Defines a bitwise sll expression with literal operands
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.srl``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{System.Byte})| 
+            <summary>
+            Defines a bitwise srl expression
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.srl``1(``0,Z0.Logix.IExpr{System.Byte})| 
+            <summary>
+            Defines a bitwise srl expression with literal operands
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.rotr``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{System.Byte})| 
+            <summary>
+            Defines a bitwise rotr expression
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.rotr``1(``0,Z0.Logix.IExpr{System.Byte})| 
+            <summary>
+            Defines a bitwise rotr expression with literal operands
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.rotl``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{System.Byte})| 
+            <summary>
+            Defines a bitwise rotl expression
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.rotl``1(``0,Z0.Logix.IExpr{System.Byte})| 
+            <summary>
+            Defines a bitwise rotl expression with literal operands
+            </summary>
+            <param name="src">The left operand</param>
+            <param name="count">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.variable``1(System.String,Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a variable expression
+            </summary>
+            <param name="value">The initial value of the variable</param>
+            <typeparam name="T">The variable type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.variable``1(System.Char,Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a variable expression
+            </summary>
+            <param name="value">The initial value of the variable</param>
+            <typeparam name="T">The variable type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.variable``1(Z0.AsciLetterLo,Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a variable expression
+            </summary>
+            <param name="value">The initial value of the variable</param>
+            <typeparam name="T">The variable type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.variable``1(System.UInt32,Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a bit variable expression where the variable name is defined by an integer
+            </summary>
+            <param name="name">The variable's name</param>
+            <param name="init">The variable's initial value</param>
+        
+| M:Z0.Logix.TypedLogicSpec.variable``1(System.String,``0)| 
+            <summary>
+            Defines a variable expression with an initial value specified by a literal
+            </summary>
+            <param name="value">The initial value of the variable</param>
+            <typeparam name="T">The variable type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.variable``1(System.Char,``0)| 
+            <summary>
+            Defines a variable expression with an initial value specified by a literal
+            </summary>
+            <param name="value">The initial value of the variable</param>
+            <typeparam name="T">The variable type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.variable``1(Z0.AsciLetterLo,``0)| 
+            <summary>
+            Defines a variable expression with an initial value specified by a literal
+            </summary>
+            <param name="value">The initial value of the variable</param>
+            <typeparam name="T">The variable type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.variable``1(System.UInt32,``0)| 
+            <summary>
+            Defines a variable expression where the variable name is defined by an integer and 
+            an initial value is specified by a literal
+            </summary>
+            <param name="value">The initial value of the variable</param>
+            <typeparam name="T">The variable type</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.varied``1(Z0.Logix.IExpr{``0},Z0.Logix.VariableExpr{``0}[])| 
+            <summary>
+            Creates a varied expression predicated on a typed variable sequence
+            </summary>
+            <param name="subject">The variable-dependent expression</param>
+            <param name="variables">The variable sequence</param>
+        
+| M:Z0.Logix.TypedLogicSpec.varied``2(``0,Z0.Logix.IExpr{``1},Z0.Logix.IVarExpr{``1}[])| 
+            <summary>
+            Creates a varied expression predicated on a typed variable sequence of natural length
+            </summary>
+            <param name="subject">The variable-dependent expression</param>
+            <param name="variables">The variable sequence</param>
+        
+| M:Z0.Logix.TypedLogicSpec.varied``1(Z0.N1,Z0.Logix.IExpr{``0},Z0.Logix.IVarExpr{``0})| 
+            <summary>
+            Defines a varied expression of 1 variable
+            </summary>
+            <param name="n">The number of variables in the expression</param>
+            <param name="baseExpr">The variable-dependent expression </param>
+            <param name="v0">The variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.varied``1(Z0.N2,Z0.Logix.IExpr{``0},Z0.Logix.IVarExpr{``0},Z0.Logix.IVarExpr{``0})| 
+            <summary>
+            Defines a varied expression of 2 variables
+            </summary>
+            <param name="n">The number of variables in the expression</param>
+            <param name="baseExpr">The variable-dependent expression </param>
+            <param name="v0">The first variable</param>
+            <param name="v1">The second variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.varied``1(Z0.N3,Z0.Logix.IExpr{``0},Z0.Logix.IVarExpr{``0},Z0.Logix.IVarExpr{``0},Z0.Logix.IVarExpr{``0})| 
+            <summary>
+            Defines a varied expression of 3 variables
+            </summary>
+            <param name="n">The number of variables in the expression</param>
+            <param name="baseExpr">The variable-dependent expression </param>
+            <param name="v0">The first variable</param>
+            <param name="v1">The second variable</param>
+            <param name="v2">The third variable</param>
+            <typeparam name="T">The type over which the expression is defined</typeparam>
+        
+| M:Z0.Logix.TypedLogicSpec.equals``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0},Z0.Logix.IVarExpr{``0}[])| 
+            <summary>
+            Defines a typed test expression
+            </summary>
+            <param name="test">The logical operator to use for the test</param>
+            <param name="lhs">The control expression</param>
+            <param name="rhs">The test subject</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| T:Z0.Logix.TypedComparisonSpec                    | 
+            <summary>
+            Constructs type operator comparison expressions
+            </summary>
+        
+| M:Z0.Logix.TypedComparisonSpec.compare``1(Z0.BinaryComparisonKind,Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a comparison expression of specified kind over typed expressions
+            </summary>
+            <param name="kind">The comparison kind</param>
+            <param name="lhs">The left expression</param>
+            <param name="rhs">The right expression</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.compare``1(Z0.BinaryComparisonKind,``0,``0)| 
+            <summary>
+            Defines a comparison expression of specified kind over literals
+            </summary>
+            <param name="kind">The comparison kind</param>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.equals``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines an equals operator expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.equals``1(``0,``0) | 
+            <summary>
+            Defines an equals operator expression over literal values
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.neq``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a not equal operator expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.neq``1(``0,``0)    | 
+            <summary>
+            Defines a not equal operator expression over literal values
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.lt``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a less than operator expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.lt``1(``0,``0)     | 
+            <summary>
+            Defines an less than operator expression over literal values
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.lteq``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a less than or equal operator expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.lteq``1(``0,``0)   | 
+            <summary>
+            Defines an less than or equal operator expression over literal values
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.gt``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a greater than operator expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.gt``1(``0,``0)     | 
+            <summary>
+            Defines greater than operator expression over literal values
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.gteq``1(Z0.Logix.IExpr{``0},Z0.Logix.IExpr{``0})| 
+            <summary>
+            Defines a greater than or equal operator expression
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| M:Z0.Logix.TypedComparisonSpec.gteq``1(``0,``0)   | 
+            <summary>
+            Defines a greater than or equal operator expression over literal values
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        
+| T:Z0.Logix.BinaryArithmeticOpExpr`1               | 
+            <summary>
+            Defines a typed binary arithmetic operator expression
+            </summary>
+        
+| P:Z0.Logix.BinaryArithmeticOpExpr`1.OpKind        | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.BinaryArithmeticOpExpr`1.LeftArg       | 
+            <summary>
+            The left operand
+            </summary>
+        
+| P:Z0.Logix.BinaryArithmeticOpExpr`1.RightArg      | 
+            <summary>
+            The right operand
+            </summary>
+        
+| M:Z0.Logix.BinaryArithmeticOpExpr`1.Format        | 
+            <summary>
+            Renders the expression in canonical form
+            </summary>
+        
+| T:Z0.Logix.UnaryAritheticOpExpr`1                 | 
+            <summary>
+            Defines a typed unary arithmetic operator expression
+            </summary>
+        
+| P:Z0.Logix.UnaryAritheticOpExpr`1.OpKind          | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.UnaryAritheticOpExpr`1.Arg             | 
+            <summary>
+            The operand
+            </summary>
+        
+| T:Z0.Logix.BinaryBitwiseOpExpr`1                  | 
+            <summary>
+            Captures a binary bitwise operator along with with its operands
+            </summary>
+        
+| P:Z0.Logix.BinaryBitwiseOpExpr`1.OpKind           | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.BinaryBitwiseOpExpr`1.LeftArg          | 
+            <summary>
+            The left operand
+            </summary>
+        
+| P:Z0.Logix.BinaryBitwiseOpExpr`1.RightArg         | 
+            <summary>
+            The right operand
+            </summary>
+        
+| M:Z0.Logix.BinaryBitwiseOpExpr`1.Format           | 
+            <summary>
+            Renders the expression in canonical form
+            </summary>
+        
+| T:Z0.Logix.ShiftOpExpr`1                          | 
+            <summary>
+            Defines a bitwise shift operator expression
+            </summary>
+        
+| P:Z0.Logix.ShiftOpExpr`1.OpKind                   | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.ShiftOpExpr`1.Subject                  | 
+            <summary>
+            The operand
+            </summary>
+        
+| P:Z0.Logix.ShiftOpExpr`1.Offset                   | 
+            <summary>
+            The magnitude of the shift
+            </summary>
+        
+| T:Z0.Logix.TernaryBitwiseOpExpr`1                 | 
+            <summary>
+            Defines a typed ternary bitwise operator expression
+            </summary>
+        
+| P:Z0.Logix.TernaryBitwiseOpExpr`1.OpKind          | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.TernaryBitwiseOpExpr`1.FirstArg        | 
+            <summary>
+            The first operand
+            </summary>
+        
+| P:Z0.Logix.TernaryBitwiseOpExpr`1.SecondArg       | 
+            <summary>
+            The second operand
+            </summary>
+        
+| P:Z0.Logix.TernaryBitwiseOpExpr`1.ThirdArg        | 
+            <summary>
+            The third operand
+            </summary>
+        
+| T:Z0.Logix.UnaryBitwiseOpExpr`1                   | 
+            <summary>
+            Defines a unary bitwise operator expression
+            </summary>
+        
+| P:Z0.Logix.UnaryBitwiseOpExpr`1.OpKind            | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.UnaryBitwiseOpExpr`1.Arg               | 
+            <summary>
+            The operand
+            </summary>
+        
+| T:Z0.Logix.FormulaExpr                            | 
+            <summary>
+            Defines an untyped identified expression, identifier := expression
+            </summary>
+        
+| P:Z0.Logix.FormulaExpr.Name                       | 
+            <summary>
+            The identifier
+            </summary>
+        
+| P:Z0.Logix.FormulaExpr.Encoding                   | 
+            <summary>
+            The identified expression
+            </summary>
+        
+| T:Z0.Logix.FormulaExpr`1                          | 
+            <summary>
+            Defines a typed identified expression, identifier := expression
+            </summary>
+        
+| P:Z0.Logix.FormulaExpr`1.Name                     | 
+            <summary>
+            The identifier
+            </summary>
+        
+| P:Z0.Logix.FormulaExpr`1.Encoding                 | 
+            <summary>
+            The identified expression
+            </summary>
+        
+| M:Z0.Logix.VarRandom.SetNext``1(Z0.IPolyrand,Z0.Logix.VariableExpr{``0})| 
+            <summary>
+            Obtains the next primal value from the random source, assigns the
+            variable to this value and returns the value to the caller
+            </summary>
+            <param name="random"></param>
+            <param name="current"></param>
+            <typeparam name="T">The primal value over which the variable is defined</typeparam>
+        
+| T:Z0.Logix.RangeExpr`1                            | 
+            <summary>
+            Defines a stewise-contiguous sequence of scalar values, available on-demand, 
+            that satisfy upper/lower bound constraints
+            </summary>
+            <typeparam name="T">The scalar type</typeparam>
+        
+| F:Z0.Logix.RangeExpr`1.Min                        | 
+            <summary>
+            The min value in the range
+            </summary>
+        
+| F:Z0.Logix.RangeExpr`1.Max                        | 
+            <summary>
+            The max value in the range
+            </summary>
+        
+| F:Z0.Logix.RangeExpr`1.Step                       | 
+            <summary>
+            The distance between successive range points
+            </summary>
+        
+| T:Z0.Logix.LiteralExpr`1                          | 
+            <summary>    
+            Lifts a literal value to an expression
+            </summary>
+        
+| P:Z0.Logix.LiteralExpr`1.Value                    | 
+            <summary>
+            The literal value
+            </summary>
+        
+| M:Z0.Logix.LiteralExpr`1.op_Implicit(Z0.Logix.LiteralExpr{`0})~`0| 
+            <summary>
+            Implicitly converts a literal expression to the underlying value 
+            </summary>
+            <param name="src">The source epxression</param>
+        
+| M:Z0.Logix.LiteralExpr`1.op_Implicit(`0)~Z0.Logix.LiteralExpr{`0}| 
+            <summary>
+            Implicitly converts a value to a literal expression
+            </summary>
+            <param name="src">The source value</param>
+        
+| P:Z0.Logix.VariableExpr`1.Name                    | 
+            <summary>
+            The name of the variable
+            </summary>
+        
+| P:Z0.Logix.VariableExpr`1.Value                   | 
+            <summary>
+            The value of the variable
+            </summary>
+        
+| M:Z0.Logix.VariableExpr`1.Set(Z0.Logix.IExpr{`0}) | 
+            <summary>
+            Updates the variable's value
+            </summary>
+            <param name="value">The new value</param>
+        
+| T:Z0.Logix.VariedExpr`1                           | 
+            <summary>
+            Defines a variable-dependent typed expression
+            </summary>
+            <typeparam name="T">The operand type</typeparam>
+        
+| P:Z0.Logix.VariedExpr`1.BaseExpr                  | 
+            <summary>
+            A variable-dependent expression
+            </summary>
+        
+| P:Z0.Logix.VariedExpr`1.Vars                      | 
+            <summary>
+            The variables upon which the expression depends
+            </summary>
+        
+| T:Z0.Logix.VariedExpr`2                           | 
+            <summary>
+             Defines a typed expression over a variable sequence of natural length
+            </summary>
+            <typeparam name="N">The sequence length type</typeparam>
+            <typeparam name="T">The operand type</typeparam>
+        
+| T:Z0.Logix.ComparisonExpr                         | 
+            <summary>
+            Defines an untyped comparison expression
+            </summary>
+        
+| P:Z0.Logix.ComparisonExpr.ComparisonKind          | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.ComparisonExpr.Lhs                     | 
+            <summary>
+            The left operand
+            </summary>
+        
+| P:Z0.Logix.ComparisonExpr.Rhs                     | 
+            <summary>
+            The right operand
+            </summary>
+        
+| P:Z0.Logix.ComparisonExpr.Vars                    | 
+            <summary>
+            The variables upon which the operands depend
+            </summary>
+        
+| T:Z0.Logix.ComparisonExpr`1                       | 
+            <summary>
+            Defines a typed comparison expression
+            </summary>
+        
+| P:Z0.Logix.ComparisonExpr`1.ComparisonKind        | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.ComparisonExpr`1.LeftArg               | 
+            <summary>
+            The left expression
+            </summary>
+        
+| P:Z0.Logix.ComparisonExpr`1.RightArg              | 
+            <summary>
+            The right expression
+            </summary>
+        
+| P:Z0.Logix.ComparisonExpr`1.Vars                  | 
+            <summary>
+            The variables upon which the operands depend
+            </summary>
+        
+| T:Z0.Logix.ComparisonPredExpr`1                   | 
+            <summary>
+            Defines a typed comparison predicate
+            </summary>
+        
+| P:Z0.Logix.ComparisonPredExpr`1.ComparisonKind    | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.ComparisonPredExpr`1.LeftArg           | 
+            <summary>
+            The left operand
+            </summary>
+        
+| P:Z0.Logix.ComparisonPredExpr`1.RightArg          | 
+            <summary>
+            The right operand
+            </summary>
+        
+| P:Z0.Logix.ComparisonPredExpr`1.Vars              | 
+            <summary>
+            The variables upon which the operands depend
+            </summary>
+        
+| T:Z0.Logix.BinaryLogicOpExpr                      | 
+            <summary>
+            Definesan untyped binary logical operator expression
+            </summary>
+        
+| P:Z0.Logix.BinaryLogicOpExpr.OpKind               | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.BinaryLogicOpExpr.LeftArg              | 
+            <summary>
+            The left operand
+            </summary>
+        
+| P:Z0.Logix.BinaryLogicOpExpr.RightArg             | 
+            <summary>
+            The right operand
+            </summary>
+        
+| T:Z0.Logix.BinaryLogicOpExpr`1                    | 
+            <summary>
+            Defines a typed binary logical operator expression
+            </summary>
+        
+| P:Z0.Logix.BinaryLogicOpExpr`1.LeftArg            | 
+            <summary>
+            The left operand
+            </summary>
+        
+| P:Z0.Logix.BinaryLogicOpExpr`1.RightArg           | 
+            <summary>
+            The right operand
+            </summary>
+        
+| P:Z0.Logix.BinaryLogicOpExpr`1.OpKind             | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| T:Z0.Logix.LiteralLogicSeqExpr`1                  | 
+            <summary>
+            Defines a natural-length sequence of literal bit values
+            </summary>
+        
+| T:Z0.Logix.LiteralLogicExpr                       | 
+            <summary>    
+            Defines an untyped literal logic expression
+            </summary>
+        
+| P:Z0.Logix.LiteralLogicExpr.Value                 | 
+            <summary>
+            The literal value
+            </summary>
+        
+| M:Z0.Logix.LiteralLogicExpr.op_Implicit(Z0.Logix.LiteralLogicExpr)~Z0.bit| 
+            <summary>
+            Implicitly converts a literal expression to the underlying value 
+            </summary>
+            <param name="src">The source epxression</param>
+        
+| M:Z0.Logix.LiteralLogicExpr.op_Implicit(Z0.bit)~Z0.Logix.LiteralLogicExpr| 
+            <summary>
+            Implicitly converts a value to a literal expression
+            </summary>
+            <param name="src">The source value</param>
+        
+| T:Z0.Logix.LiteralLogicExpr`1                     | 
+            <summary>    
+            Defines a typed literal logic expression
+            </summary>
+        
+| P:Z0.Logix.LiteralLogicExpr`1.Value               | 
+            <summary>
+            The literal value
+            </summary>
+        
+| T:Z0.Logix.LiteralLogicSeqExpr                    | 
+            <summary>
+            Defines a sequence of literal bit values
+            </summary>
+        
+| P:Z0.Logix.LiteralLogicSeqExpr.ExprKind           | 
+            <summary>
+            The expression classifier
+            </summary>
+        
+| T:Z0.Logix.LogicVariable                          | 
+            <summary>
+            Defines an untyped logic variable
+            </summary>
+        
+| P:Z0.Logix.LogicVariable.Name                     | 
+            <summary>
+            The variable name
+            </summary>
+        
+| P:Z0.Logix.LogicVariable.Value                    | 
+            <summary>
+            The varible value
+            </summary>
+        
+| T:Z0.Logix.LogicVariable`1                        | 
+            <summary>
+            Defines a typed logic variable expression
+            </summary>
+        
+| P:Z0.Logix.LogicVariable`1.Name                   | 
+            <summary>
+            The variable name
+            </summary>
+        
+| P:Z0.Logix.LogicVariable`1.Value                  | 
+            <summary>
+            The varible value
+            </summary>
+        
+| T:Z0.Logix.TernaryLogicOpExpr                     | 
+            <summary>
+            Defines the application of an untyped ternary logic operator
+            </summary>
+        
+| P:Z0.Logix.TernaryLogicOpExpr.OpKind              | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.TernaryLogicOpExpr.FirstArg            | 
+            <summary>
+            The first operand
+            </summary>
+        
+| P:Z0.Logix.TernaryLogicOpExpr.SecondArg           | 
+            <summary>
+            The second operand
+            </summary>
+        
+| P:Z0.Logix.TernaryLogicOpExpr.ThirdArg            | 
+            <summary>
+            The third operand
+            </summary>
+        
+| T:Z0.Logix.TernaryLogicOpExpr`1                   | 
+            <summary>
+            Defines a typed ternary logic operator expression
+            </summary>
+        
+| P:Z0.Logix.TernaryLogicOpExpr`1.OpKind            | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.TernaryLogicOpExpr`1.FirstArg          | 
+            <summary>
+            The first operand
+            </summary>
+        
+| P:Z0.Logix.TernaryLogicOpExpr`1.SecondArg         | 
+            <summary>
+            The second operand
+            </summary>
+        
+| P:Z0.Logix.TernaryLogicOpExpr`1.ThirdArg          | 
+            <summary>
+            The third operand
+            </summary>
+        
+| T:Z0.Logix.UnaryLogicOpExpr                       | 
+            <summary>
+            Defines an untyped unary logic operator expression
+            </summary>
+        
+| P:Z0.Logix.UnaryLogicOpExpr.OpKind                | 
+            <summary>
+            The operator kind
+            </summary>
+        
+| P:Z0.Logix.UnaryLogicOpExpr.Arg                   | 
+            <summary>
+            The operand
+            </summary>
+        
+| T:Z0.Logix.VariedLogicExpr                        | 
+            <summary>
+            Defines an untyped logic expression over one or more variables
+            </summary>
+        
+| P:Z0.Logix.VariedLogicExpr.BaseExpr               | 
+            <summary>
+            The variable-dependent expression
+            </summary>
+        
+| P:Z0.Logix.VariedLogicExpr.Vars                   | 
+            <summary>
+            The variables that parametrize the base expression
+            </summary>
+        
+| T:Z0.Logix.VariedLogicExpr`1                      | 
+            <summary>
+            Defines a typed logic expression over one or more variables
+            </summary>
+        
+| P:Z0.Logix.VariedLogicExpr`1.BaseExpr             | 
+            <summary>
+            The variable-dependent expression
+            </summary>
+        
+| P:Z0.Logix.VariedLogicExpr`1.Vars                 | 
+            <summary>
+            The variables that parametrize the base expression
+            </summary>
+        
+| T:Z0.Logix.Question`1                             | 
+            <summary>
+            Defines a question in the context of a survey
+            </summary>
+            <typeparam name="T">The primal survey representation type</typeparam>
+        
+| P:Z0.Logix.Question`1.Id                          | 
+            <summary>
+            Uniquely identifies a question relative to a survey
+            </summary>
+        
+| P:Z0.Logix.Question`1.Label                       | 
+            <summary>
+            The question statement
+            </summary>
+        
+| P:Z0.Logix.Question`1.MaxSelect                   | 
+            <summary>
+            The maximum number of choices allowed for a response, between 0 and the number of available choices
+            </summary>
+        
+| P:Z0.Logix.Question`1.Choices                     | 
+            <summary>
+            The potiential choices/answers 
+            </summary>
+        
+| T:Z0.Logix.QuestionChoice`1                       | 
+            <summary>
+            Defines a choice in the context of a survey question
+            </summary>
+            <typeparam name="T">The primal survey representation type</typeparam>
+        
+| P:Z0.Logix.QuestionChoice`1.Id                    | 
+            <summary>
+            Uniquely identifies a choice relative to a question
+            </summary>
+        
+| P:Z0.Logix.QuestionChoice`1.Label                 | 
+            <summary>
+            The meaning of the choice
+            </summary>
+        
+| T:Z0.Logix.QuestionResponse`1                     | 
+            <summary>
+            Defines a response to a survey question
+            </summary>
+            <typeparam name="T">The primal survey representation type</typeparam>
+        
+| M:Z0.Logix.Survey.Template``1(System.UInt32,System.String,System.Int32,System.Int32)| 
+            <summary>
+            Creates a stock survey that contains no meaningful content
+            </summary>
+            <param name="id">The survey id</param>
+            <param name="name">The survey name</param>
+            <param name="length">The number of questions in the survey</param>
+            <param name="width">The (uniform) number of choices in each question</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.Template``1(System.UInt32,System.String)| 
+            <summary>
+            Creates a stock survey with the maximum number of questions/choices supported by the primal type
+            </summary>
+            <param name="id">The survey id</param>
+            <param name="name">The survey name</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.Template``1(System.UInt32,System.String,System.Int32)| 
+            <summary>
+            Creates a stock survey with a specified number of questions, each of which has the maximum number 
+            of choices supported by the primal type
+            </summary>
+            <param name="id">The survey id</param>
+            <param name="name">The survey name</param>
+            <param name="length">The number of questions in the survey</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.Choice``1(``0,System.String)    | 
+            <summary>
+            Creates a choice for a survey question
+            </summary>
+            <param name="id">The question-relative choice identifier</param>
+            <param name="label">The choice name</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.Question``1(System.UInt32,System.String,System.Int32,Z0.Logix.QuestionChoice{``0}[])| 
+            <summary>
+            Creates a question for a survey
+            </summary>
+            <param name="id">The survey-relative question identifier</param>
+            <param name="statement">The question statement</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.Response``1(System.UInt32,Z0.Logix.QuestionChoice{``0}[])| 
+            <summary>
+            Creates a response to a survey question
+            </summary>
+            <param name="questionId">The id of the question to which a reponse is given</param>
+            <param name="chosen">The selected choices</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.Response``1(System.UInt32,Z0.Logix.QuestionResponse{``0}[])| 
+            <summary>
+            Creates a response to a survey
+            </summary>
+            <param name="surveyId">The id of the question to which a reponse is given</param>
+            <param name="answered">The selected choices</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.CreateSuvey``1(System.UInt32,System.String,Z0.Logix.Question{``0}[])| 
+            <summary>
+            Creates a survey
+            </summary>
+            <param name="id">The survey identifier, unique within some external scope</param>
+            <param name="name">The name of the survey, unique within some external scope</param>
+            <param name="questions"></param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.Vector``1(Z0.Logix.Question{``0}@)| 
+            <summary>
+            Creates a bitvector representation of a question
+            </summary>
+            <param name="src">The question upon which the bitvector will be predicated</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.Vector``1(Z0.Logix.QuestionResponse{``0}@)| 
+            <summary>
+            Creates a bitvector representation of a question response
+            </summary>
+            <param name="src">The response upon which the bitvector will be predicated</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.Matrix``1(Z0.Logix.SurveyResponse{``0}@)| 
+            <summary>
+            Creates a bitmatrix representation of a survey response
+            </summary>
+            <param name="src">The survey upon which the matrix will be predicated</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| M:Z0.Logix.Survey.Matrix``1(Z0.Logix.Survey{``0}@)| 
+            <summary>
+            Creates a bitmatrix representation of a survey
+            </summary>
+            <param name="src">The survey upon which the matrix will be predicated</param>
+            <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
+        
+| P:Z0.Logix.Survey.ChoiceCodes                     | 
+            <summary>
+            The numeric codes for the asci characters 'A' .. 'Z'
+            </summary>
+        
+| T:Z0.Logix.Survey`1                               | 
+            <summary>
+            Defines a survey predicated on primal type evaluation
+            </summary>
+            <typeparam name="T">The primal survey representation type</typeparam>
+        
+| T:Z0.Logix.SurveyResponse`1                       | 
+            <summary>
+            Defines a response to a survey
+            </summary>
+            <typeparam name="T">The primal survey representation type</typeparam>
+        
+| F:Z0.Logix.SurveyResponse`1.SurveyId              | 
+            <summary>
+            The survey identifier
+            </summary>
+        
+| F:Z0.Logix.SurveyResponse`1.Answered              | 
+            <summary>
+            The answered survey questions
+            </summary>
+        
+| T:Z0.LogicExprKind                                | 
+            <summary>
+            Classifier for logical expressions
+            </summary>
+        
+| F:Z0.LogicExprKind.Variable                       | 
+            <summary>
+            Classifies boolean bariables
+            </summary>
+        
+| F:Z0.LogicExprKind.Varied                         | 
+            <summary>
+            Classifies a boolean expression that depends on one or more variables
+            </summary>
+        
+| F:Z0.LogicExprKind.Literal                        | 
+            <summary>
+            Classifies a boolean literal expression
+            </summary>
+        
+| F:Z0.LogicExprKind.Comparison                     | 
+            <summary>
+            Classifies a boolean comparison expression
+            </summary>
+        
+| F:Z0.LogicExprKind.UnaryOperator                  | 
+            <summary>
+            Classifies a boolean unary operator
+            </summary>
+        
+| F:Z0.LogicExprKind.BinaryOperator                 | 
+            <summary>
+            Classifies a boolean binary operator
+            </summary>
+        
+| F:Z0.LogicExprKind.TernaryOperator                | 
+            <summary>
+            Classifies a boolean ternary operator
+            </summary>
+        
+| T:Z0.TimeRelationKind                             | 
+            <summary>
+            Classifies the chronological disposition of one instant in time with respect to another
+            </summary>
+        
+| F:Z0.TimeRelationKind.Before                      | 
+            <summary>
+            Indicates the subject is antecedent to the comperand
+            </summary>
+        
+| F:Z0.TimeRelationKind.Matches                     | 
+            <summary>
+            Indicates the subject is identical to the comperand
+            </summary>
+        
+| F:Z0.TimeRelationKind.After                       | 
+            <summary>
+            Indicates the subject follows the comperand
+            </summary>
+        
+| F:Z0.TimeRelationKind.Between                     | 
+            <summary>
+            Indicates the subject is inclusively between a start date and an end date
+            </summary>
+        
+| T:Z0.TypedExprKind                                | 
+            <summary>
+            Classifies typed expressions
+            </summary>
+        
+| F:Z0.TypedExprKind.Variable                       | 
+            <summary>
+            Classifies a variable
+            </summary>
+        
+| F:Z0.TypedExprKind.Varied                         | 
+            <summary>
+            Classifies an expression that depends on one or more variables
+            </summary>
+        
+| F:Z0.TypedExprKind.Literal                        | 
+            <summary>
+            Classifies a literal expression
+            </summary>
+        
+| F:Z0.TypedExprKind.Comparison                     | 
+            <summary>
+            Classifies a comparison expression
+            </summary>
+        
+| F:Z0.TypedExprKind.UnaryOperator                  | 
+            <summary>
+            Classifies a unary operator
+            </summary>
+        
+| F:Z0.TypedExprKind.BinaryOperator                 | 
+            <summary>
+            Classifies a binary operator
+            </summary>
+        
+| F:Z0.TypedExprKind.TernaryOperator                | 
+            <summary>
+            Classifies a ternary operator
+            </summary>
+        
+| F:Z0.TypedExprKind.ShiftExpr                      | 
+            <summary>
+            Classifies a shift expression
+            </summary>
+        
+| T:Z0.Choice16                                     | 
+            <summary>
+            Reprsents a subset of 16 distinct choices, including the empty set
+            </summary>
+        
+| T:Z0.Choice32                                     | 
+            <summary>
+            Reprsents a subset of 32 distinct choices, including the empty set
+            </summary>
+        
+| T:Z0.Choice8                                      | 
+            <summary>
+            Reprsents a subset of 8 distinct choices, including the empty set
+            </summary>
+        

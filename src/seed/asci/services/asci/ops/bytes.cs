@@ -16,7 +16,6 @@ namespace Z0
         public static ReadOnlySpan<byte> bytes(ReadOnlySpan<AsciCharCode> src)
             => Root.cast<AsciCharCode,byte>(src);        
 
-
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci2 src)
             => Root.bytes(src);
@@ -24,10 +23,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci4 src)
             => Root.bytes(src);
-
-        [MethodImpl(Inline), Op]
-        public static Span<byte> bytes(in asci5 src)
-            => Root.bytes(src).Slice(0,5);
 
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci8 src)

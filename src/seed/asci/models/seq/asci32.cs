@@ -9,65 +9,56 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static Root;
 
     using N = N32;
     using W = W256;
+    using A = asci32;
+    using S = System.Runtime.Intrinsics.Vector256<byte>;
             
     /// <summary>
     /// Defines an asci code sequence of length 32
     /// </summary>
-    public readonly struct asci32 : IAsciSequence<asci32,N>
-    {
-        public static asci32 Blank => asci.init(n);
-
-        public static asci32 Null => new asci32(Vector256<byte>.Zero);
-
-        public const int Size = 32;
-
-        static N n => default;
-
-        static W w => default;
+    public readonly struct asci32 : IAsciSequence<A,N>
+    {     
+        internal readonly S Storage;        
 
         [MethodImpl(Inline)]
-        public static asci32 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci32(Root.cast<AsciCharCode,byte>(src));
-
-        internal readonly Vector256<byte> Storage;        
+        public static implicit operator A(string src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator asci32(string src)
-            => new asci32(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(asci32 src)
+        public static implicit operator string(A src)
             => src.Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(asci32 src)
+        public static implicit operator ReadOnlySpan<byte>(A src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(asci32 src)
+        public static implicit operator ReadOnlySpan<char>(A src)
             => src.Decoded;
 
         [MethodImpl(Inline)]
-        public asci32(Vector256<byte> src)
+        public static bool operator ==(A a, A b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(A a, A b)
+            => !a.Equals(b); 
+        
+        public bool IsBlank
         {
-            Storage = src;
+            [MethodImpl(Inline)]
+            get => IsNull || Equals(Spaced);
+        }
+
+        public bool IsNull
+        {
+            [MethodImpl(Inline)]
+            get => Equals(Null);
         }
         
-        [MethodImpl(Inline)]
-        public asci32(ReadOnlySpan<byte> src)
-        {
-            Storage = SymBits.vload(w, Root.head(src));
-        }
-
-        [MethodImpl(Inline)]
-        public asci32(string src)
-        {
-            Storage = asci.encode(n,src).Storage;
-        }
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -86,7 +77,7 @@ namespace Z0
             get => asci.length(this);
         }
         
-        public int MaxLength
+        public int Capacity
         {
             [MethodImpl(Inline)]
             get => Size;
@@ -96,6 +87,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => asci.bytes(this);
+        }
+
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => asci.decode(this);
         }
 
         public AsciCharCode this[int index]
@@ -122,7 +119,7 @@ namespace Z0
             get =>  Storage.As<byte,ulong>().GetElement(index/8);
         }
 
-        public asci32 Zero
+        public A Zero
         {
             [MethodImpl(Inline)]
             get => Null;
@@ -140,11 +137,6 @@ namespace Z0
             get => new asci16(Storage.GetUpper());
         }
 
-        public ReadOnlySpan<char> Decoded
-        {
-            [MethodImpl(Inline)]
-            get => asci.decode(this);
-        }
 
         public string Text
         {
@@ -154,14 +146,14 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public bool Equals(asci32 src)
+        public bool Equals(A src)
             => Storage.Equals(src.Storage);
  
          public override int GetHashCode()
             => Storage.GetHashCode();
 
         public override bool Equals(object src)
-            => src is asci32 j && Equals(j);
+            => src is A j && Equals(j);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -170,12 +162,42 @@ namespace Z0
         public override string ToString()
             => Text;
 
-        [MethodImpl(Inline)]
-        public static bool operator ==(asci32 a, asci32 b)
-            => a.Equals(b);
+
+        public const int Size = 32;
+
+        public static A Spaced 
+        {
+            [MethodImpl(Inline)]
+            get => asci.init(n);
+        }
+        
+        public static A Null 
+        {
+            [MethodImpl(Inline)]
+            get => new A(default(S));
+        }
+
 
         [MethodImpl(Inline)]
-        public static bool operator !=(asci32 a, asci32 b)
-            => !a.Equals(b); 
+        public asci32(Vector256<byte> src)
+        {
+            Storage = src;
+        }
+
+        [MethodImpl(Inline)]
+        public asci32(string src)
+        {
+            Storage = asci.encode(n,src).Storage;
+        }
+
+        [MethodImpl(Inline)]
+        public asci32(ReadOnlySpan<byte> src)
+        {
+            Storage = SymBits.vload(w, head(src));
+        }
+
+        static N n => default;
+
+        static W w => default;
     }
 }

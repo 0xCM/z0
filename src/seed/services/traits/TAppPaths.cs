@@ -5,62 +5,250 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public interface TAppPaths : ITextual
     {
         /// <summary>
-        /// The application part identifier
+        /// The name of the folder that receives standard out stream data
         /// </summary>
-        PartId AppId => Part.ExecutingPart;
+        FolderName StandardOutFolder 
+            => FolderName.Define("stdout");
 
         /// <summary>
-        /// The application-wide root output directory
+        /// The name of the folder that receives error stream data
         /// </summary>
-        FolderPath LogRoot => Env.Current.LogDir;
+        FolderName ErrorOutFolder 
+            => FolderName.Define("errors");
+
+        /// <summary>
+        /// The name of a data folder
+        /// </summary>
+        FolderName DataFolder
+            => FolderName.Define("data");
+
+        /// <summary>
+        /// The name of a folder that contains test result logs
+        /// </summary>
+        FolderName TestLogFolder
+            => FolderName.Define("test");
+
+        /// <summary>
+        /// The name of a folder to which test data is emitted
+        /// </summary>
+        FolderName TestDataFolder
+            => FolderName.Define("data");
+
+        /// <summary>
+        /// The name of an application resource folder
+        /// </summary>
+        FolderName ResoureFolder 
+            => FolderName.Define("res");
+
+        /// <summary>
+        /// The name of the folder into which test results are deposited
+        /// </summary>
+        FolderName TestResultFolder 
+            => FolderName.Define("results");
+
+        /// <summary>
+        /// The name of the runtime log folder
+        /// </summary>
+        FolderName RuntimeLogFolder
+            => FolderName.Define("apps");
+
+        /// <summary>
+        /// The name of the folder into which capture results are deposited
+        /// </summary>
+        FolderName CaptureFolder 
+            => FolderName.Define("capture");        
+
+        /// <summary>
+        /// The name of the development source folder
+        /// </summary>
+        FolderName SrcFolder 
+            => FolderName.Define("src");        
+
+        /// <summary>
+        /// The name of an application configuration file
+        /// </summary>
+        FileName ConfigFileName 
+            => FileName.Define("config.json");
+
+        /// <summary>
+        /// The global application log root
+        /// </summary>
+        FolderPath LogRoot 
+            => Env.Current.LogDir;
 
         /// <summary>
         /// The path to the root data directory
         /// </summary>
-        FolderPath DataRoot => Env.Current.DevDir + FolderName.Define("data");
+        FolderPath DataRoot 
+            => Env.Current.DevDir + DataFolder;
 
         /// <summary>
-        /// The default application configuration file filename
+        /// The path to the root development directory
         /// </summary>
-        FileName ConfigFileName => FileName.Define("config.json");
-
-        /// <summary>
-        /// The application name
-        /// </summary>
-        string AppName => AppId.Format();
-
-        /// <summary>
-        /// The name of the test partition
-        /// </summary>
-        FolderName TestRootFolder => FolderName.Define("test");
-
-        /// <summary>
-        /// The root test directory
-        /// </summary>
-        FolderPath TestRoot => LogRoot + TestRootFolder;
-
-        /// <summary>
-        /// The root folder for test-specific data
-        /// </summary>
-        FolderPath TestDataRoot => TestRoot + FolderName.Define("data");
-
-        /// <summary>
-        /// The name of the application resource folder
-        /// </summary>
-        FolderName Resources => FolderName.Define("res");
+        FolderPath DevRoot 
+            => Env.Current.DevDir;
 
         /// <summary>
         /// The path to the root application resource directory
         /// </summary>
-        FolderPath ResourceRoot => DataRoot + Resources;
+        FolderPath ResourceRoot 
+            => DataRoot + ResoureFolder;
+        
+        /// <summary>
+        /// The runtime root
+        /// </summary>
+        FolderPath RuntimeRoot
+            => LogRoot +  RuntimeLogFolder;
+
+        /// <summary>
+        /// The executing application's part identifier
+        /// </summary>
+        PartId AppId 
+            => Part.ExecutingPart;
+
+        /// <summary>
+        /// The executing application's name
+        /// </summary>
+        string AppName 
+            => AppId.Format();
+
+        /// <summary>
+        /// The executing application's folder name
+        /// </summary>
+        FolderName AppFolder
+            => FolderName.Define(AppName);
+
+        /// <summary>
+        /// The root test directory
+        /// </summary>
+        FolderPath TestLogRoot 
+            => LogRoot + TestLogFolder;
+
+        /// <summary>
+        /// The directory into into which standard out stream emissions are deposited
+        /// </summary>
+        FolderPath AppStandardOut 
+            => RuntimeRoot + StandardOutFolder;
+
+        /// <summary>
+        /// The path to the global test error log directory
+        /// </summary>
+        FolderPath AppErrorOut 
+            => RuntimeRoot + ErrorOutFolder;
+
+        /// <summary>
+        /// The executing application's standard out log filename
+        /// </summary>
+        FileName AppStandardOutName 
+            => FileName.Define($"{AppName}.stdout", FileExtensions.Log);
+
+        /// <summary>
+        /// The executing application's error log filename
+        /// </summary>
+        FileName AppErrorOutName 
+            => FileName.Define($"{AppName}.errors", FileExtensions.Log);
+
+        /// <summary>
+        /// The executing application's data filename
+        /// </summary>
+        FileName AppDataFileName
+            => FileName.Define($"{AppName}", FileExtensions.Csv);
+
+        /// <summary>
+        /// The executing application's standard out log path
+        /// </summary>
+        FilePath AppStandardOutPath 
+            => AppStandardOut + AppStandardOutName;
+        
+        /// <summary>
+        /// The executing application's error log path 
+        /// </summary>
+        FilePath AppErrorOutPath
+            => AppErrorOut + AppErrorOutName;
+
+        /// <summary>
+        /// The application-relative source code directory
+        /// </summary>
+        FolderPath AppDevRoot 
+            => (DevRoot +  SrcFolder) + AppFolder;
+
+        /// <summary>
+        /// The executing application's configuration file path
+        /// </summary>
+        FilePath AppConfigPath 
+            => AppDevRoot + ConfigFileName;
+
+        /// <summary>
+        /// The executing application's data directory
+        /// </summary>
+        FolderPath AppDataPath 
+            => (LogRoot + RuntimeLogFolder) + AppFolder;
+
+        /// <summary>
+        /// The application-relative capture directory
+        /// </summary>
+        FolderPath AppCaptureDir 
+            => AppDataPath + CaptureFolder;
+
+        /// <summary>
+        /// The root folder for test-specific data
+        /// </summary>
+        FolderPath TestDataRoot 
+            => TestLogRoot + TestDataFolder;
+
+        /// <summary>
+        /// The path to the global test error log directory
+        /// </summary>
+        FolderPath TestErrorOut 
+            => TestLogRoot + ErrorOutFolder;
+
+        /// <summary>
+        /// The application-specific error stream log path
+        /// </summary>
+        FilePath TestErrorPath 
+            => TestErrorOut + AppErrorOutName;
+
+        /// <summary>
+        /// The directory into which structured data describing test results are deposited
+        /// </summary>
+        FolderPath TestResults 
+            => TestLogRoot + TestResultFolder;
+
+        /// <summary>
+        /// The application-specific test result file path
+        /// </summary>
+        FilePath TestResultPath
+            => TestResults + AppDataFileName;
+
+        /// <summary>
+        /// The name of the root bench partition
+        /// </summary>
+        FolderName BenchRootFolder 
+            => FolderName.Define("bench");
+
+        /// <summary>
+        /// The directory into which structured data describing test results are deposited
+        /// </summary>
+        FolderPath BenchResults 
+            => LogRoot + BenchRootFolder;
+
+        /// <summary>
+        /// The application-specific bench result file path
+        /// </summary>
+        FilePath BenchResultPath
+            => BenchResults + FileName.Define($"{AppName}", FileExtensions.Csv);        
+ 
+        /// <summary>
+        /// Creates a provider rooted at the current root directory for another application
+        /// </summary>
+        /// <param name="dst">The target app id</param>
+
+        TAppPaths ForApp(PartId dst)
+            => AppPaths.Init(dst, LogRoot);
 
         /// <summary>
         /// Defines a test-specific data folder
@@ -73,119 +261,8 @@ namespace Z0
         /// Defines a parametrically-identified test-specific data folder
         /// </summary>
         /// <typeparam name="T">The test host type</typeparam>
-        FolderPath TestDataDir<T>() => TestDataDir(typeof(T));
-
-        /// <summary>
-        /// The name of the folder into which standard out stream emissions during test execution are deposited
-        /// </summary>
-        FolderName StandardOutFolder => FolderName.Define("stdout");
-
-        /// <summary>
-        /// The directory into into which standard out stream emissions are deposited
-        /// </summary>
-        FolderPath StandardOut => TestRoot + StandardOutFolder;
-
-        /// <summary>
-        /// The application-specific standard out stream log path
-        /// </summary>
-        FilePath StandardLogPath => StandardOut + FileName.Define($"{AppName}.stdout", FileExtensions.Log);
-
-        /// <summary>
-        /// The name of the folder into which error stream emissions are deposited
-        /// </summary>
-        FolderName ErrorOutFolder => FolderName.Define("errors");
-
-        /// <summary>
-        /// The directory into which error stream emissions during test execution are deposited
-        /// </summary>
-        FolderPath ErrorOut => TestRoot + ErrorOutFolder;
-
-        /// <summary>
-        /// The application-specific error stream log path
-        /// </summary>
-        FilePath ErrorLogPath => ErrorOut + FileName.Define($"{AppName}.errors", FileExtensions.Log);
-
-        /// <summary>
-        /// The name of the folder into which test results are deposited
-        /// </summary>
-        FolderName TestResultFolder => FolderName.Define("results");
-
-        /// <summary>
-        /// The directory into which structured data describing test results are deposited
-        /// </summary>
-        FolderPath TestResults => TestRoot + TestResultFolder;
-
-        /// <summary>
-        /// The application-specific test result file path
-        /// </summary>
-        FilePath TestResultPath
-            => TestResults + FileName.Define($"{AppName}", FileExtensions.Csv);
-
-
-        /// <summary>
-        /// The name of the root bench partition
-        /// </summary>
-        FolderName BenchRootFolder => FolderName.Define("bench");
-
-        /// <summary>
-        /// The directory into which structured data describing test results are deposited
-        /// </summary>
-        FolderPath BenchResults => LogRoot + BenchRootFolder;
-
-        /// <summary>
-        /// The application-specific bench result file path
-        /// </summary>
-        FilePath BenchResultPath
-            => BenchResults + FileName.Define($"{AppName}", FileExtensions.Csv);        
-
-        /// <summary>
-        /// The name of the root app partition
-        /// </summary>
-        FolderName AppRootFolder => FolderName.Define("apps");
-
-        /// <summary>
-        /// The path to the root development directory
-        /// </summary>
-        FolderPath DevRoot => Env.Current.DevDir;
-
-        /// <summary>
-        /// The application-relative source code directory
-        /// </summary>
-        FolderPath AppSrcPath => DevRoot + RelativeLocation.Define($"src/{AppName}");
-
-        /// <summary>
-        /// The appliction-relative source file generation target directory
-        /// </summary>
-        FolderPath GenSrcDir => AppSrcPath + FolderName.Define("generated");
-
-        /// <summary>
-        /// The application-relative configuration path
-        /// </summary>
-        FilePath AppConfigPath => AppSrcPath + ConfigFileName;
-
-        /// <summary>
-        /// The application-relative data directory
-        /// </summary>
-        FolderPath AppDataPath => LogRoot + RelativeLocation.Define($"apps/{AppName}");        
-
-        /// <summary>
-        /// The name of the folder into which capture results are deposited
-        /// </summary>
-        FolderName CaptureFolder => FolderName.Define("capture");        
-
-        /// <summary>
-        /// The application-relative capture directory
-        /// </summary>
-        FolderPath AppCapturePath => AppDataPath + CaptureFolder;
-
-        /// <summary>
-        /// Creates a provider rooted at the current root directory for another application
-        /// </summary>
-        /// <param name="dst">The target app id</param>
-
-        [MethodImpl(Inline)]
-        TAppPaths ForApp(PartId dst)
-            => AppPaths.Init(dst, LogRoot);
+        FolderPath TestDataDir<T>() 
+            => TestDataDir(typeof(T));
 
         string ITextual.Format() 
             => AppName;

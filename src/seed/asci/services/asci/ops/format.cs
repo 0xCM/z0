@@ -16,7 +16,7 @@ namespace Z0
         public static string format(in asci2 src)
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n2));
-            decode(src,dst);
+            store(src,dst);
             return @string(dst);
         }       
 
@@ -25,18 +25,10 @@ namespace Z0
             => @string(asci.decode(src));
 
         [MethodImpl(Inline), Op]
-        public static string format(in asci5 src)
-        {
-            var dst = CharBlocks.c16s(CharBlocks.alloc(n5));
-            decode(src,dst);
-            return @string(dst.Slice(0, src.Length));
-        }
-
-        [MethodImpl(Inline), Op]
         public static string format(in asci8 src)
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n8));
-            decode(src,dst);            
+            store(src,dst);            
             return @string(dst.Slice(0, src.Length));
         }        
 

@@ -77,7 +77,7 @@ public enum PartId : ulong
 
     Datasets = 122,
 
-    Generate = 123,
+    Gen = 123,
     
     Artifacts = 124,
 

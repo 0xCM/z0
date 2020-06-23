@@ -1,0 +1,568 @@
+| M:Z0.IApiMemberOps.CreateIndex``1(System.Collections.Generic.IEnumerable{``0})| 
+            <summary>
+            Creates an operation index from an api member stream
+            </summary>
+            <param name="src">The members to index</param>
+            <typeparam name="M">The member type</typeparam>
+        
+| M:Z0.IApiMemberOps.CreateIndex``1(System.ReadOnlySpan{``0})| 
+            <summary>
+            Creates an operation index from an api member span, readonly that is
+            </summary>
+            <param name="src">The members to index</param>
+            <typeparam name="M">The member type</typeparam>
+        
+| M:Z0.IApiMemberOps.CreateIndex``1(System.Span{``0})| 
+            <summary>
+            Creates an operation index from an api member span
+            </summary>
+            <param name="src">The members to index</param>
+            <typeparam name="M">The member type</typeparam>
+        
+| M:Z0.ApiHosts.types(System.Reflection.Assembly)   | 
+            <summary>
+            Selects the host-attributed types from an assembly
+            </summary>
+            <param name="src">The source assembly</param>
+        
+| M:Z0.ApiHosts.funfacts(System.Reflection.Assembly)| 
+            <summary>
+            Searches an assembly for types tagged with the <see cref="T:Z0.FunctionalServiceAttribute" />
+            </summary>
+            <param name="src">The assembly to search</param>
+        
+| M:Z0.ApiHosts.hosts(System.Reflection.Assembly)   | 
+            <summary>
+            Instantiates the api hosts defined in a .net assembly
+            </summary>
+            <param name="src">The assembly to search</param>
+        
+| P:Z0.ApiCatalog.PartId                            | 
+            <summary>
+            The identity of the assembly that defines and owns the catalog
+            </summary>
+        
+| P:Z0.ApiCatalog.Owner                             | 
+            <summary>
+            The assembly that defines and owns the catalog
+            </summary>
+        
+| P:Z0.ApiCatalog.Hosts                             | 
+            <summary>
+            The api hosts known to the catalog
+            </summary>
+        
+| T:Z0.ApiComposition                               | 
+            <summary>
+            Defines a collection of resolved assemblies
+            </summary>
+        
+| P:Z0.ApiComposition.Resolved                      | 
+            <summary>
+            The members of the compostion
+            </summary>
+        
+| T:Z0.ApiHost                                      | 
+            <summary>
+            Identifies/describes a type that declares a formalized api set
+            </summary>
+        
+| T:Z0.ApiMembers                                   | 
+            <summary>
+            A simple api member sequence adapter
+            </summary>
+        
+| P:Z0.NaturalNumericOp.Host                        | 
+            <summary>
+            The operation host to which generic definition and any concrete closures belowng
+            </summary>
+        
+| P:Z0.NaturalNumericOp.GenericId                   | 
+            <summary>
+            The generic operation identity
+            </summary>
+        
+| P:Z0.NaturalNumericOp.Closures                    | 
+            <summary>
+            The supported closures
+            </summary>
+        
+| P:Z0.NaturalNumericOp.Id                          | 
+            <summary>
+            The generalized identity
+            </summary>
+        
+| P:Z0.NaturalNumericOp.Method                      | 
+            <summary>
+            The generic method definition
+            </summary>
+        
+| P:Z0.NaturalNumericOp.HostUri                     | 
+            <summary>
+            The hosting type uri
+            </summary>
+        
+| M:Z0.UriHexQuery.accepts(Z0.IdentifiedCode,Z0.NumericKind)| 
+            <summary>
+            Determines whether an operation accepts an argument of specified numeric kind
+            </summary>
+            <param name="src">The encoded operation</param>
+            <param name="match">The kind to match</param>
+        
+| M:Z0.UriHexQuery.arity(Z0.IdentifiedCode)         | 
+            <summary>
+            Determines the arity of the encoded operation
+            </summary>
+            <param name="src">The encoded operation</param>
+        
+| M:Z0.UriHexQuery.index(System.Collections.Generic.IEnumerable{Z0.IdentifiedCode})| 
+            <summary>
+            Creates an operation index from a uri bitstream
+            </summary>
+            <param name="src">The source bits</param>
+        
+| M:Z0.UriHexQuery.filter(System.Collections.Generic.IEnumerable{Z0.IdentifiedCode},Z0.NumericKind,Z0.NumericKind)| 
+            <summary>
+            Excludes source operations that do not accept two parameters of specified numeric kind
+            </summary>
+            <param name="src">The data source</param>
+            <param name="k1">The first parameter kind</param>
+            <param name="k2">The second parameter kind</param>
+        
+| M:Z0.IApiReflected.Catalog(Z0.IPart)              | 
+            <summary>
+            Creates a (possibly empy) api catalog for a specified part
+            </summary>
+            <param name="src">The source part</param>
+        
+| M:Z0.IApiReflected.Hosts(System.Reflection.Assembly)| 
+            <summary>
+            Instantiates the api hosts found in a specified assembly
+            </summary>
+            <param name="src">The assembly to search</param>
+        
+| M:Z0.IApiReflected.HostTypes(System.Reflection.Assembly)| 
+            <summary>
+            Searches an assembly for api host types
+            </summary>
+            <param name="src">The assembly to search</param>
+        
+| M:Z0.IUriHexParser.Z0#ITextParser{Z0#IdentifiedCode}#Parse(System.String)| 
+            <summary>
+            Parses a row of identified hex text
+            </summary>
+            <param name="src">The formatted text</param>
+        
+| M:Z0.IUriHexQuery.CreateIndex(System.Collections.Generic.IEnumerable{Z0.IdentifiedCode})| 
+            <summary>
+            Creates an operation index from a uri bitstream
+            </summary>
+            <param name="src">The source bits</param>
+        
+| T:Z0.GenericApiMethod                             | 
+            <summary>
+            Glues a generic method definition to a set of kinds that represent types over which the
+            generic method can close
+            </summary>
+        
+| P:Z0.GenericApiMethod.Host                        | 
+            <summary>
+            The operation host to which generic definition and any concrete closures belowng
+            </summary>
+        
+| P:Z0.GenericApiMethod.GenericId                   | 
+            <summary>
+            The generic operation identity
+            </summary>
+        
+| P:Z0.GenericApiMethod.Kinds                       | 
+            <summary>
+            The supported closures
+            </summary>
+        
+| P:Z0.GenericApiMethod.Id                          | 
+            <summary>
+            The generalized identity
+            </summary>
+        
+| P:Z0.GenericApiMethod.Method                      | 
+            <summary>
+            The generic method definition
+            </summary>
+        
+| P:Z0.GenericApiMethod.HostUri                     | 
+            <summary>
+            The hosting type uri
+            </summary>
+        
+| T:Z0.ExtractParseFailure                          | 
+            <summary>
+            Describes an extract parse failure
+            </summary>
+        
+| F:Z0.ExtractParseFailure.Data                     | 
+            <summary>
+            The data over which the parse failure occurrred
+            </summary>
+        
+| F:Z0.ExtractParseFailure.Sequence                 | 
+            <summary>
+            The extracted member sequence
+            </summary>
+        
+| F:Z0.ExtractParseFailure.TermCode                 | 
+            <summary>
+            Specifies the reason the parser stopped parsing
+            </summary>
+        
+| T:Z0.ExtractParseResults                          | 
+            <summary>
+            Defines the shape of a sequential extract parse operation
+            </summary>
+        
+| F:Z0.ExtractParseResults.Failed                   | 
+            <summary>
+            The unparseable members
+            </summary>
+        
+| F:Z0.ExtractParseResults.Parsed                   | 
+            <summary>
+            The parsed members
+            </summary>
+        
+| M:Z0.SegmentedIdentity.Identify(Z0.OpIdentity,System.Int32)| 
+            <summary>
+            Extracts an index-identified segmented identity part from an operation identity
+            </summary>
+            <param name="src">The source identity</param>
+            <param name="partidx">The 0-based part index</param>
+        
+| M:Z0.SegmentedIdentity.Identify(Z0.IdentityPart)  | 
+            <summary>
+            Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
+            </summary>
+            <param name="part">The source part</param>
+        
+| P:Z0.ApiHostQuery`1.Hosted                        | 
+            <summary>
+            All hosted methods
+            </summary>
+        
+| P:Z0.IApiHostQuery.Hosted                         | 
+            <summary>
+            All hosted methods
+            </summary>
+        
+| P:Z0.IApiHostQuery.Generic                        | 
+            <summary>
+            All hosted generic methods
+            </summary>
+        
+| P:Z0.IApiHostQuery.Direct                         | 
+            <summary>
+            All hosted non-generic methods
+            </summary>
+        
+| M:Z0.IApiHostQuery.OfKind``1(``0)                 | 
+            <summary>
+            Queries the host for operations of specified kind
+            </summary>
+            <param name="k">The kind classifier</param>
+            <typeparam name="K">The kind type</typeparam>
+        
+| M:Z0.IApiHostQuery.OfKind``1(``0,Z0.GenericPartition)| 
+            <summary>
+            Queries the host for genric operations of specified kind
+            </summary>
+            <param name="k">The kind classifier</param>
+            <typeparam name="K">The kind type</typeparam>
+        
+| M:Z0.IApiHostQuery.UnaryOps(Z0.GenericPartition)  | 
+            <summary>
+            Queries the host for binary operators belonging to a specifed generic partition
+            </summary>
+            <param name="g">The generic partition</param>
+        
+| M:Z0.IApiHostQuery.BinaryOps(Z0.GenericPartition) | 
+            <summary>
+            Queries the host for binary operators belonging to a specifed generic partition
+            </summary>
+            <param name="g">The generic partition</param>
+        
+| M:Z0.IApiHostQuery.TernaryOps(Z0.GenericPartition)| 
+            <summary>
+            Queries the host for binary operators belonging to a specifed generic partition
+            </summary>
+            <param name="g">The generic partition</param>
+        
+| M:Z0.IApiHostQuery.Vectorized(Z0.W128,Z0.GenericPartition)| 
+            <summary>
+            Queries the host for operations vectorized over 128-bit vectors
+            </summary>
+            <param name="w">The vector width</param>
+            <param name="generic">Whether generic or non-generc methods should be selected</param>
+        
+| M:Z0.IApiHostQuery.Vectorized(Z0.W256,Z0.GenericPartition)| 
+            <summary>
+            Queries the host for operations vectorized over 128-bit vectors
+            </summary>
+            <param name="w">The vector width</param>
+            <param name="generic">Whether generic or non-generc methods should be selected</param>
+        
+| M:Z0.IApiHostQuery.Vectorized(Z0.W128,System.String,Z0.GenericPartition)| 
+            <summary>
+            Queries the host for vectorized methods of specified vector width, name and generic partition
+            </summary>
+            <param name="w">The width to match</param>
+            <param name="name">The name to match</param>
+            <param name="g">The generic parition to consider</param>
+        
+| M:Z0.IApiHostQuery.Vectorized(Z0.W256,System.String,Z0.GenericPartition)| 
+            <summary>
+            Queries the host for vectorized methods of specified vector width, name and generic partition
+            </summary>
+            <param name="w">The width to match</param>
+            <param name="name">The name to match</param>
+            <param name="g">The generic parition to consider</param>
+        
+| M:Z0.IApiHostQuery.Vectorized(Z0.W512,System.String,Z0.GenericPartition)| 
+            <summary>
+            Queries the host for vectorized methods of specified vector width, name and generic partition
+            </summary>
+            <param name="w">The width to match</param>
+            <param name="name">The name to match</param>
+            <param name="g">The generic parition to consider</param>
+        
+| M:Z0.IApiHostQuery.Vectorized``1(Z0.W128)         | 
+            <summary>
+            Queries the host for vectorized methods closed over cells of specified parametric type
+            </summary>
+            <param name="w">The width to match</param>
+            <typeparam name="T">The cell type to match</typeparam>
+        
+| M:Z0.IApiHostQuery.Vectorized``1(Z0.W256)         | 
+            <summary>
+            Queries the host for vectorized methods closed over cells of specified parametric type
+            </summary>
+            <param name="w">The width to match</param>
+            <typeparam name="T">The cell type to match</typeparam>
+        
+| M:Z0.IApiHostQuery.Vectorized``1(Z0.W512)         | 
+            <summary>
+            Queries the host for vectorized methods closed over cells of specified parametric type
+            </summary>
+            <param name="w">The width to match</param>
+            <typeparam name="T">The cell type to match</typeparam>
+        
+| M:Z0.IApiHostQuery.Vectorized``1(Z0.W128,System.String)| 
+            <summary>
+            Queries the host for vectorized methods closed over cells of specified parametric type and that have a specified name
+            </summary>
+            <param name="w">The width to match</param>
+            <param name="name">The name to match</param>
+            <typeparam name="T">The cell type to match</typeparam>
+        
+| M:Z0.IApiHostQuery.Vectorized``1(Z0.W256,System.String)| 
+            <summary>
+            Queries the host for vectorized methods closed over cells of specified parametric type and that have a specified name
+            </summary>
+            <param name="w">The width to match</param>
+            <param name="name">The name to match</param>
+            <typeparam name="T">The cell type to match</typeparam>
+        
+| M:Z0.IApiHostQuery.Vectorized``1(Z0.W512,System.String)| 
+            <summary>
+            Queries the host for vectorized methods closed over cells of specified parametric type and that have a specified name
+            </summary>
+            <param name="w">The width to match</param>
+            <param name="name">The name to match</param>
+            <typeparam name="T">The cell type to match</typeparam>
+        
+| P:Z0.IApiHostQuery`1.Host                         | 
+            <summary>
+            The interrogation subject
+            </summary>
+        
+| M:Z0.ExtractReport.Load(Z0.FilePath)              | 
+            <summary>
+            Loads a saved extract report
+            </summary>
+            <param name="src">The report path</param>
+        
+| M:Z0.MemberExtractData.Load(Z0.FilePath)          | 
+            <summary>
+            Hydrates from a file
+            </summary>
+            <param name="src">The source path</param>
+        
+| M:Z0.MemberExtractData.Read(Z0.FilePath)          | 
+            <summary>
+            Reads extract records from a saved report
+            </summary>
+            <param name="src">The report path</param>
+        
+| M:Z0.ParseFailureReport.Load(Z0.FilePath)         | 
+            <summary>
+            Loads a saved failure report
+            </summary>
+            <param name="src">The report path</param>
+        
+| T:Z0.ResourceRecord                               | 
+            <summary>
+            Describes an assembly code emission
+            </summary>
+        
+| M:Z0.Segmentation.identify(Z0.IdentityPart)       | 
+            <summary>
+            Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
+            </summary>
+            <param name="part">The source part</param>
+        
+| T:Z0.IApiCatalog                                  | 
+            <summary>
+            Characterizes a type that supports operation discovery
+            </summary>
+        
+| P:Z0.IApiCatalog.FunFactories                     | 
+            <summary>
+            The known types that reify contracted operation services, potentially generic
+            </summary>
+        
+| P:Z0.IApiCatalog.PartId                           | 
+            <summary>
+            The identity of the assembly that defines and owns the catalog
+            </summary>
+        
+| P:Z0.IApiCatalog.Owner                            | 
+            <summary>
+            The assembly that defines and owns the catalog
+            </summary>
+        
+| P:Z0.IApiCatalog.Hosts                            | 
+            <summary>
+            The api hosts known to the catalog
+            </summary>
+        
+| P:Z0.IApiCatalog.GenericHosts                     | 
+            <summary>
+            The known generic api hosts
+            </summary>
+        
+| P:Z0.IApiCatalog.DirectHosts                      | 
+            <summary>
+            The known direct api hosts
+            </summary>
+        
+| P:Z0.IApiCatalog.IsIdentified                     | 
+            <summary>
+            Specifies whether the catalog contains content from an identifid assembly
+            </summary>
+        
+| P:Z0.IApiCatalog.ApiHostCount                     | 
+            <summary>
+            Specifies the number of api hosts described by the catalog
+            </summary>
+        
+| P:Z0.IApiCatalog.HasApiHostContent                | 
+            <summary>
+            Specifies whether the catalog describes any api hosts
+            </summary>
+        
+| P:Z0.IApiCatalog.CatalogName                      | 
+            <summary>
+            The name of the catalog, which should be unique with respect to known catalogs
+            </summary>
+        
+| P:Z0.IApiCatalog.Query                            | 
+            <summary>
+            Defines a query service over the catalog
+            </summary>
+        
+| P:Z0.IApiCatalog.HostCount                        | 
+            <summary>
+            Specifies the number of service hosts described by the catalog
+            </summary>
+        
+| P:Z0.IApiCatalog.IsNonEmpty                       | 
+            <summary>
+            Specifies whether the catalog describes any service hosts
+            </summary>
+        
+| T:Z0.IApiComposition                              | 
+            <summary>
+            Characterizes, in dependency injection vernacular, composition roots
+            </summary>
+        
+| P:Z0.IApiComposition.ApiSet                       | 
+            <summary>
+            The api composition aggregate
+            </summary>
+        
+| P:Z0.IApiComposition.Resolved                     | 
+            <summary>
+            The resolved assemblies that comprise the composition
+            </summary>
+        
+| P:Z0.IApiComposition.Catalogs                     | 
+            <summary>
+            The catalogs defined by the composed parts
+            </summary>
+        
+| M:Z0.IApiComposition.FindCatalog(PartId)          | 
+            <summary>
+            Searches for a part-identified, and returns a valued option if found
+            </summary>
+            <param name="id">The part id</param>
+        
+| T:Z0.IMethodIdentityDiviner                       | 
+            <summary>
+            Characterizes a serive that attempts to assign a reasonable identity to a method
+            </summary>
+        
+| T:Z0.IMemberExtractor                             | 
+            <summary>
+            Characterizes a service that extracts host-defined operations
+            </summary>
+        
+| M:Z0.IMemberExtractor.Extract(Z0.ApiMember)       | 
+            <summary>
+            Extracts encoded content that defines executable code for a located member
+            </summary>
+            <param name="src">The source member</param>
+        
+| M:Z0.IMemberExtractor.Extract(Z0.ApiMember[])     | 
+            <summary>
+            Extracts encoded content that defines executable code for an array of located members
+            </summary>
+            <param name="src">The source member</param>
+        
+| M:Z0.IMemberExtractor.Extract(Z0.IApiHost)        | 
+            <summary>
+            Extracts encoded content for all operations defined by a host
+            </summary>
+            <param name="src">The source member</param>
+        
+| T:Z0.IMemberExtractReader                         | 
+            <summary>
+            Defines service contract to support reading text-formatted encoded x86 asm data
+            </summary>
+        
+| T:Z0.IIdentityDiviner`2                           | 
+            <summary>
+            Characterizes a service that attempts to assign a non-cryptic identity to a 
+            subject that is both useful and unique within the intended scope
+            </summary>
+            <typeparam name="S">The type of the thing to identify</typeparam>
+            <typeparam name="T">The target identity type</typeparam>
+        
+| M:Z0.IIdentityDiviner`2.DivineIdentity(`0)        | 
+            <summary>
+            Reifies an identity divination algorithm
+            </summary>
+            <param name="arg">The divinity source</param>
+        
+| T:Z0.ITypeIdentityDiviner                         | 
+            <summary>
+            Characterizes a serive that attempts to assign a reasonable identity to a type
+            </summary>
+        

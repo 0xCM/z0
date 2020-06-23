@@ -1,0 +1,120 @@
+| M:Z0.Identity.close(Z0.GenericApiMethod)          | 
+            <summary>
+            Closes generic operations over the set of primal types that each operation supports
+            </summary>
+            <param name="generics">Metadata for generic operations</param>
+        
+| M:Z0.Identity.RequireConstructed(System.Reflection.MethodInfo)| 
+            <summary>
+            Raises an error if the source method is not a constructed generic method
+            </summary>
+            <param name="src">The method to examine</param>
+        
+| M:Z0.Identity.divine(System.Type)                 | 
+            <summary>
+            Divines the bit-width of a specified type, if possible
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.Identity.generic(System.Reflection.MethodInfo)| 
+            <summary>
+            Defines the identity of a generic method
+            </summary>
+            <param name="src">The source method</param>
+        
+| M:Z0.Identity.identify(System.Reflection.MethodInfo)| 
+            <summary>
+            Identifies the method
+            </summary>
+            <param name="m">The method to identify</param>
+        
+| M:Z0.Identity.identify(System.Delegate)           | 
+            <summary>
+            Identifies the delegate
+            </summary>
+            <param name="m">The method to identify</param>
+        
+| M:Z0.Identity.RequireNonGeneric(System.Reflection.MethodInfo)| 
+            <summary>
+            Raises an error if the source method is any flavor of generic
+            </summary>
+            <param name="src">The method to examine</param>
+        
+| M:Z0.XTend.Close(Z0.GenericApiMethod)             | 
+            <summary>
+            Closes generic operations over the set of primal types that each operation supports
+            </summary>
+            <param name="generics">Metadata for generic operations</param>
+        
+| M:Z0.XTend.Format(Z0.OperatorTypeClass)           | 
+            <summary>
+            Formats an operator type class using divined identifiers
+            </summary>
+            <param name="src">The class to format</param>
+        
+| M:Z0.XTend.Identify(System.Reflection.MethodInfo) | 
+            <summary>
+            Identifies a method
+            </summary>
+            <param name="m">The method to identify</param>
+        
+| M:Z0.XTend.Identify(System.Delegate)              | 
+            <summary>
+            Identifies a delegate
+            </summary>
+            <param name="m">The method to identify</param>
+        
+| M:Z0.IIdentities.HostedMembers(Z0.IApiHost)       | 
+            <summary>
+            Retrieves the members defined by an api host
+            </summary>
+            <param name="host">The host uri</param>
+        
+| M:Z0.IIdentities.LocatedMembers(Z0.IApiHost)      | 
+            <summary>
+            Retrieves the members defined by an api host
+            </summary>
+            <param name="host">The host uri</param>
+        
+| M:Z0.IIdentities.HostedMembers(Z0.IApiSet,Z0.ApiHostUri)| 
+            <summary>
+            Retrieves the members defined by an api host
+            </summary>
+            <param name="host">The host uri</param>
+        
+| M:Z0.IIdentities.LocatedMembers(Z0.IApiSet,Z0.ApiHostUri)| 
+            <summary>
+            Retrieves the members defined by an api host
+            </summary>
+            <param name="host">The host uri</param>
+        
+| T:Z0.DelegateIdentityDiviner                      | 
+            <summary>
+            Divines delegate identity
+            </summary>
+        
+| M:Z0.TypeIdentityDiviner.IsNatSpan(System.Type)   | 
+            <summary>
+            Determines whether a type is a natural span
+            </summary>
+            <param name="t">The type to examine</param>
+        
+| M:Z0.TypeIdentityDiviner.HostedProvider(System.Type)| 
+            <summary>
+            Creates a type identity provider from a host type that realizes the required interface, if possible;
+            otherwise, returns none
+            </summary>
+            <param name="host">A type that realizes an identity provider</param>
+        
+| M:Z0.TypeIdentityDiviner.IdentityProvider(System.Type)| 
+            <summary>
+            Retrieves a cached identity provider, if found; otherwise, creates and caches the identity provider for the source type
+            </summary>
+            <param name="t">The source type</param>
+        
+| M:Z0.TypeIdentityDiviner.NatSpanId(System.Type)   | 
+            <summary>
+            Defines an identity for a type-natural span type
+            </summary>
+            <param name="src">The type to examin</param>
+        

@@ -14,19 +14,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static SymbolSpec<AsciCharCode,N1> spec(params AsciCharCode[] src)
             => spec<AsciCharCode,byte, N1>(src);
-
-        /// <summary>
-        /// Defines a symbol spec
-        /// </summary>
-        /// <param name="symbols"></param>
-        /// <typeparam name="S">The symbol data type</typeparam>
-        /// <typeparam name="T">The symbol domain type</typeparam>
-        /// <typeparam name="N">The symbol bit-width type</typeparam>
-        [MethodImpl(Inline)]
-        static SymbolSpec<S,T,N> spec<S,T,N>(params S[] symbols)
-            where S : unmanaged
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => new SymbolSpec<S,T,N>(symbols);
     }
 }
