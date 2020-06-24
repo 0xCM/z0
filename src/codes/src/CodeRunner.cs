@@ -26,7 +26,7 @@ namespace Z0
         IApiSet Api
         {
             [MethodImpl(Inline)]
-            get => Context.ApiSet;
+            get => Context.Api;
         }
 
         [MethodImpl(Inline)]

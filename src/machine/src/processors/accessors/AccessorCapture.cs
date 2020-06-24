@@ -88,7 +88,7 @@ namespace Z0.Asm
         public CapturedAccessor[] CaptureKnown(FilePath outpath)
         {
             var stores = ResourceStore.Service;
-            var assemblies = Context.ApiSet.Composition.Assemblies;
+            var assemblies = Context.Api.Composition.Assemblies;
             var methods = span(stores.Accessors(assemblies));
             return Capture(methods, outpath);
         }

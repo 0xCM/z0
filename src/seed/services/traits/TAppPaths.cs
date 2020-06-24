@@ -97,7 +97,13 @@ namespace Z0
         /// </summary>
         FolderPath ResourceRoot 
             => LogRoot + ResoureFolder;
-        
+
+        /// <summary>
+        /// The global capture archive root directory
+        /// </summary>
+        FolderPath CaptureRoot
+            => LogRoot + RelativeLocation.Define("apps/control/capture");
+
         /// <summary>
         /// The runtime root
         /// </summary>
@@ -181,6 +187,7 @@ namespace Z0
         /// </summary>
         FilePath AppConfigPath 
             => AppDevRoot + ConfigFileName;
+
 
         /// <summary>
         /// The executing application's data directory

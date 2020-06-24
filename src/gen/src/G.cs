@@ -5,10 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
+
+    using Z0.Asm;
+
     using static Konst;
     using static Root;
 
-    public readonly struct G
+    public readonly struct G 
     {
         public static G Service => default(G);
 
@@ -22,7 +27,22 @@ namespace Z0
                 term.print(x);
             }
         }
-        
+
+        public static void CaptureResBytes(ISuiteContext context)
+        {
+
+            var src = FilePath.Define(@"J:\dev\projects\z0-logs\res\bin\lib\netcoreapp3.0\z0.res.bytes.dll");
+            Demands.insist(src.Exists);
+
+            // var dir = context.AsmContext.AppPaths.CaptureRoot;
+
+            // var svc = AccessorCapture.Service(context.AsmContext);
+            // var captured = svc.Capture(src, CasePath(FileExtensions.Asm));
+            // var addresses = CasePath(FileExtensions.Csv);            
+            // svc.CollectAddresses(captured, addresses);
+
+        }
+
         void GenerateDocs()
         {   
             var docs = Commented.collect();
@@ -30,7 +50,7 @@ namespace Z0
 
         void GenerateResources()
         {   
-             var src = Archives.Services.CaptureArchiveDir;
+             var src = Archives.Services.CaptureRoot;
              var dst = Z0.AppPaths.Default.ResourceRoot + FolderName.Define("bytes");
              var service = HostCodeResources.Service(src, dst);
              service.Emit();
@@ -42,11 +62,12 @@ namespace Z0
             service.Emit();
         }
 
-        public void Generate()
+        public void Generate(IAppContext app)
         {            
             GenerateDocs();
             GenerateResources();
             EmitMetadata();
+            var suite = ContextFactory.CreateSuiteContext(app);
             //EnumGenerator.Service.Generate();
         }
     }

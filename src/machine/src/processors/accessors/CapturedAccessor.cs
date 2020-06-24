@@ -18,8 +18,8 @@ namespace Z0.Asm
             this.Code = code;
         }
         
-        public readonly ResourceAccessor Accessor {get;}
+        public readonly ResourceAccessor Accessor;
 
-        public readonly AsmFunctionCode Code {get;}
+        public readonly AsmFunctionCode Code;
     }
 }

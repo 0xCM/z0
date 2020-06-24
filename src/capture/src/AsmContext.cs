@@ -9,78 +9,51 @@ namespace Z0.Asm
     
     public class AsmContext : IAsmContext 
     {            
-        public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition,
-             FolderPath root = null, in AsmFormatSpec? format = null)
-                => new AsmContext(settings,queue, composition, root ?? Env.Current.LogDir, format);
+        public static IAsmContext Create(IAppContext root, Action<IAppMsg> relay = null)
+            => new AsmContext(root, relay);
+        
+        public static IAsmContext Create(IAppMsgQueue queue)
+            => new AsmContext(queue);
+
+        public IAppContext ContextRoot {get;}
 
         public event Action<IAppMsg> Next;
 
-        public IPolyrand Random {get;}
+        public IAppMsgQueue MessageQueue {get;}
+                
+        public ICaptureServices CaptureServices {get;}
 
-        public IAppMsgQueue Queue {get;}
-        
-        public IAppSettings Settings {get;}
+        AsmContext(IAppContext root, Action<IAppMsg> relay = null)
+        {
+            ContextRoot = root;
+            MessageQueue = root.MessageQueue;
+            Next  = relay ?? root.MessageRelay;
+            root.MessageQueue.Next += Relay;                  
+            CaptureServices = Capture.Services;
+        }
 
-        public AsmFormatSpec AsmFormat {get;}
-
-        public FolderPath RootCapturePath {get;}
-
-        public IApiSet ApiSet {get;}
-
-        public TAppPaths AppPaths {get;}
-
-        public IAsmFormatter Formatter {get;}
-        
-        public IAsmFunctionDecoder Decoder {get;}
-
-        public ICaptureCore CaptureCore {get;}
-
-        public IDynexus Dynamic {get;}
-
-        public IImmSpecializer ImmServices {get;}        
-
-        AsmContext(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition, FolderPath root = null, AsmFormatSpec? format = null)
+        AsmContext(IAppMsgQueue queue)
         {
             Next  = e => {};
-            AppPaths = Z0.AppPaths.Default;
-
-            Settings = settings;
-            Queue = queue;
-            Queue.Next += Relay;      
-            ApiSet = composition.ApiSet;
-            RootCapturePath = root ?? Env.Current.LogDir;      
-            AsmFormat = format ?? AsmFormatSpec.DefaultStreamFormat;
-            Random = Polyrand.Pcg64(PolySeed64.Seed05);
-            Dynamic = Capture.Services.Dynexus;            
-            Decoder = Capture.Services.AsmDecoder(AsmFormat);
-            Formatter  = Capture.Services.Formatter(AsmFormat);
-            WriterFactory = Capture.Services.AsmWriterFactory;
-            CaptureCore =  Capture.Core;
-            ImmServices = Capture.Services.ImmSpecializer(Decoder);
+            MessageQueue = queue;
+            MessageQueue.Next += Relay;      
+            CaptureServices = Capture.Services;
         }
        
-        AsmWriterFactory WriterFactory {get;}
-
-        public TAsmContextual Contextual 
-            => AsmWorkflows.Service(this);
-
-        public IAsmFunctionWriter Writer(FilePath dst)
-            => WriterFactory(dst, Formatter);
-
         public void Deposit(IAppMsg msg)
-            => Queue.Deposit(msg);
+            => MessageQueue.Deposit(msg);
 
         public void Notify(string msg, AppMsgKind? severity = null)
-            => Queue.Notify(msg, severity);
+            => MessageQueue.Notify(msg, severity);
 
         public IReadOnlyList<IAppMsg> Dequeue()
-            => Queue.Dequeue();
+            => MessageQueue.Dequeue();
 
         public IReadOnlyList<IAppMsg> Flush(Exception e)
-            => Queue.Flush(e);
+            => MessageQueue.Flush(e);
 
         public void Emit(FilePath dst) 
-            => Queue.Emit(dst);
+            => MessageQueue.Emit(dst);
 
         void Relay(IAppMsg msg)
             => Next(msg);

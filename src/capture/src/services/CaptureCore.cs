@@ -12,9 +12,10 @@ namespace Z0.Asm
     using static Memories;
     using static ExtractTermCode;
     
-    unsafe readonly struct CaptureCore : ICaptureCore
+    public unsafe readonly struct CaptureCore : ICaptureCore
     {      
-        public static ICaptureCore Service => default(CaptureCore);  
+        public static ICaptureCore Service 
+            => default(CaptureCore);  
 
         [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedOperation bits, ExtractTermCode term)

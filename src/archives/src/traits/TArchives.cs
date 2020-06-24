@@ -11,21 +11,24 @@ namespace Z0
 
     public interface TArchives
     {        
+        TAppPaths Paths
+            => AppPaths.Default;
+
+        FolderPath LogRoot 
+            => Paths.LogRoot;
+
+        FolderPath CaptureRoot
+            => Paths.CaptureRoot;
+
         TSemanticArchive Semantic 
             => SemanticArchive.Service;
-
-        FolderPath DefaultRootDir 
-            => Env.Current.LogDir;
-
-        FolderPath CaptureArchiveDir
-            => DefaultRootDir + RelativeLocation.Define("apps/control/capture");
 
         IEncodedHexReader UriHexReader 
             => new EncodedHexReader();
 
         [MethodImpl(Inline)]
         IEncodedHexArchive HexArchive(FolderPath root = null)
-            => new EncodedHexArchive(root ?? DefaultRootDir);
+            => new EncodedHexArchive(root ?? LogRoot);
         
         [MethodImpl(Inline)]
         IIdentifiedCodeWriter UriHexWriter(FilePath dst)
@@ -44,11 +47,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         TCaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
-            => new CaptureArchive(root ?? DefaultRootDir, area ?? FolderName.Empty, subject ?? FolderName.Empty);
+            => new CaptureArchive(root ?? LogRoot, area ?? FolderName.Empty, subject ?? FolderName.Empty);
         
         [MethodImpl(Inline)]
         THostCaptureArchive HostCapture(FolderPath root, ApiHostUri host) 
-            => new HostCaptureArchive(root ?? DefaultRootDir, host);    
+            => new HostCaptureArchive(root ?? LogRoot, host);    
 
         IdentifiedCode[] SaveUriHex(ApiHostUri host, ParsedExtract[] src, FilePath dst)
             => Z0.UriHexWriter.save(host,src,dst);

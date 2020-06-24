@@ -4,76 +4,70 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
+    using System;
+
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
     public interface IAsmContext : IAppMsgQueue, IPolyrandProvider, IAppMsgContext
     {
         /// <summary>
-        /// The api collection known to the context
+        /// The root of this context
         /// </summary>
-        IApiSet ApiSet {get;}
-        
-        /// <summary>
-        /// The default asm formatting configuration
-        /// </summary>
-        AsmFormatSpec AsmFormat {get;}
+        IAppContext ContextRoot {get;}
 
-        /// <summary>
-        /// The context formatter
-        /// </summary>
-        IAsmFormatter Formatter {get;}
-
-        /// <summary>
-        /// The context decoder
-        /// </summary>
-        IAsmFunctionDecoder Decoder {get;}
-
-        /// <summary>
-        /// The context writer factory
-        /// </summary>
-        IAsmFunctionWriter Writer(FilePath dst);            
+        ICaptureServices CaptureServices {get;}
 
         /// <summary>
         /// The capture service
         /// </summary>
-        ICaptureCore CaptureCore {get;}       
+        ICaptureCore CaptureCore  
+            => CaptureServices.CaptureCore;
 
-        /// <summary>
-        /// Provides access to dynamic operator production facilities
-        /// </summary>
-        IDynexus Dynamic {get;}
+        TAppPaths TAppEnv.AppPaths
+             => ContextRoot.AppPaths;
 
-        /// <summary>
-        /// Provides access to immeditate specialization services
-        /// </summary>
-        IImmSpecializer ImmServices {get;}
+        IAppSettings TAppEnv.Settings 
+            => ContextRoot.Settings;
 
-        /// <summary>
-        /// Reveals the context-predicated service factory
-        /// </summary>
-        TAsmContextual Contextual {get;}
+        IPolyrand IPolyrandProvider.Random 
+            => ContextRoot.Random;
+
+        IAppMsgQueue MessageQueue 
+            => ContextRoot.MessageQueue;
+
+        Action<IAppMsg> MessageRelay
+            => ContextRoot.MessageRelay;
 
         /// <summary>
         /// The capture archive root
         /// </summary>
-        FolderPath RootCapturePath => Env.Current.LogDir;
+        FolderPath CaptureRoot 
+            => ContextRoot.AppPaths.CaptureRoot;
 
         /// <summary>
         /// The hosts known to the context
         /// </summary>
-        IApiHost[] Hosts => ApiSet.Hosts;
+        IApiHost[] Hosts 
+            => Api.Hosts;
+
+        /// <summary>
+        /// The api collection known to the context
+        /// </summary>
+        IApiSet Api 
+            => ContextRoot.Api;
 
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified
         /// </summary>
-        int DefaultBufferLength => Pow2.T14;
+        int DefaultBufferLength 
+            => Pow2.T14;
 
         /// <summary>
         /// The primary capture archive, predicated on the context-specified root path
         /// </summary>
         TCaptureArchive RootCaptureArchive 
-            => Archives.Services.CaptureArchive(RootCapturePath);
+            => Archives.Services.CaptureArchive(CaptureRoot);
 
         /// <summary>
         /// A root archive descendant narrowed by area/subject
@@ -82,5 +76,49 @@ namespace Z0.Asm
         /// <param name="subject">Area stratification</param>
         TCaptureArchive CaptureArchive(FolderName area, FolderName subject) 
             => RootCaptureArchive.Narrow(area,subject);
+
+        /// <summary>
+        /// The default asm formatting configuration
+        /// </summary>
+        AsmFormatSpec AsmFormat
+            => AsmFormatSpec.DefaultStreamFormat;           
+
+        /// <summary>
+        /// The context formatter
+        /// </summary>
+        IAsmFormatter Formatter 
+            => CaptureServices.Formatter(AsmFormat);
+
+        /// <summary>
+        /// The context decoder
+        /// </summary>
+        IAsmFunctionDecoder Decoder 
+            => CaptureServices.AsmDecoder(AsmFormat);
+
+        /// <summary>
+        /// Provides access to dynamic operator production facilities
+        /// </summary>
+        IDynexus Dynamic 
+            => CaptureServices.Dynexus;
+
+        /// <summary>
+        /// Provides access to immeditate specialization services
+        /// </summary>
+        IImmSpecializer ImmServices 
+            => CaptureServices.ImmSpecializer(Decoder);
+
+        AsmWriterFactory WriterFactory 
+            => CaptureServices.AsmWriterFactory;
+        
+        IEvalWorkflow CreateEvalWorkflow(AsmArchiveConfig config)
+            => EvalWorkflow.Create(Z0.AppContext.Create(Api, Random, Settings, AppMsgExchange.Create(ContextRoot)), Random, config.ArchiveRoot);
+
+        /// <summary>
+        /// The context writer factory
+        /// </summary>
+        IAsmFunctionWriter Writer(FilePath dst)
+            => WriterFactory(dst, Formatter);            
+
+ 
     }   
 }

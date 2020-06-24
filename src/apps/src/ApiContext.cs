@@ -17,35 +17,48 @@ namespace Z0
 
         public IPolyrand Random {get;}
 
-        public IAppMsgQueue Messaging {get;}
+        public IAppMsgQueue MessageQueue {get;}
+
+        public TAppPaths AppPaths {get;}
 
         public event Action<IAppMsg> Next;
 
-        [MethodImpl(Inline)]
+        public static IAppContext Create(TAppPaths paths, IApiComposition api, IPolyrand random)
+            => new AppContext(paths, api, random, AppSettings.Load(paths.AppConfigPath), AppMsgExchange.Create());
+
         public static IAppContext Create(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
-            => new AppContext(composition, random, settings ?? AppSettings.Empty, queue);
+            => new AppContext(composition, random, settings, queue);
 
-        [MethodImpl(Inline)]
         public static IAppContext Create(IApiSet api, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
-            => new AppContext(api, random, settings ?? AppSettings.Empty, queue);
+            => new AppContext(api, random, settings, queue);
 
-        [MethodImpl(Inline)]
         AppContext(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
         {
+            AppPaths = Z0.AppPaths.Default;
             Next = msg => {};
             Random = random;
-            Settings = settings;
-            Messaging = queue;
+            Settings = settings ?? AppSettings.Load(AppPaths.AppConfigPath);
+            MessageQueue = queue;
             Api = ApiSet.Create(composition);
         }
 
-        [MethodImpl(Inline)]
-        AppContext(IApiSet api, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+        AppContext(TAppPaths paths, IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
         {
+            AppPaths = paths;
             Next = msg => {};
             Random = random;
-            Settings = settings;
-            Messaging = queue;
+            Settings = settings ?? AppSettings.Load(AppPaths.AppConfigPath);
+            MessageQueue = queue;
+            Api = ApiSet.Create(composition);
+        }
+
+        AppContext(IApiSet api, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+        {
+            AppPaths = Z0.AppPaths.Default;
+            Next = msg => {};
+            Random = random;
+            Settings = settings ?? AppSettings.Load(AppPaths.AppConfigPath);
+            MessageQueue = queue;
             Api = api;
         }
 

@@ -43,14 +43,14 @@ namespace Z0
             WorkflowConfig = new AsmArchiveConfig(root);
             Settings = CaptureConfig.From(context.Settings);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
-            Formatter = context.Contextual.Formatter(FormatConfig);            
+            Formatter = context.CaptureServices.Formatter(FormatConfig);            
 
             var wfc = AsmWorkflows.Service(context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
             UriBitsReader = Capture.Services.UriHexReader;
             CaptureWorkflow = wfc.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(root));
             Broker = CaptureWorkflow.Broker;
-            ImmWorkflow = wfc.ImmEmissionWorkflow(Sink, context.ApiSet, Formatter, Decoder, root);
+            ImmWorkflow = wfc.ImmEmissionWorkflow(Sink, context.Api, Formatter, Decoder, root);
             
             (this as ICaptureClient).Connect();            
         }
@@ -85,7 +85,7 @@ namespace Z0
 
         void CheckExec(params PartId[] parts)
         {            
-            Context.Contextual.CreateEvalWorkflow(WorkflowConfig).Execute(parts);
+            Context.CreateEvalWorkflow(WorkflowConfig).Execute(parts);
         }
 
         public void OnEvent(FunctionsDecoded e)

@@ -36,16 +36,6 @@ namespace Z0.Asm
             }    
         }
         
-        public void res_bytes()
-        {
-            var src = FilePath.Define(@"J:\dev\projects\z0-logs\res\bin\lib\netcoreapp3.0\z0.res.bytes.dll");
-            Demands.insist(src.Exists);
-            var svc = AccessorCapture.Service(Context);
-            var captured = svc.Capture(src, CasePath(FileExtensions.Asm));
-            var addresses = CasePath(FileExtensions.Csv);            
-            svc.CollectAddresses(captured, addresses);
-
-        }
 
         
         public void capture_known_resources()

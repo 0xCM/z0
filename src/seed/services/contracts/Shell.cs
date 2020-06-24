@@ -42,7 +42,8 @@ namespace Z0
         /// <summary>
         /// The parts that are not unknown
         /// </summary>
-        protected static PartIndex KnownParts => LazyParts.Value;
+        protected static PartIndex KnownParts 
+            => LazyParts.Value;
 
         static Lazy<PartIndex> LazyParts {get;} 
             = Root.defer(Indexer.IndexBuiler.Build);        
@@ -82,8 +83,7 @@ namespace Z0
         public C Context {get;}
     
         protected Shell(C context)
-        {
-            Context = context;
-        }    
+            => Context = context;
+
     }
 }

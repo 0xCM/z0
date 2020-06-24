@@ -18,36 +18,15 @@ namespace Z0
     }
 
     class App : AppShell<App,IAppContext>
-    {        
-        static IAppContext CreateApiContext()
-        {
-            var parts = PartSelection.Selected;
-            var resolved = ApiComposition.Assemble(parts.Where(r => r.Id != 0));
-            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
-            var settings = AppSettings.Load(AppPaths.AppConfigPath);
-            var exchange = AppMsgExchange.Create();
-            return AppContext.Create(resolved, random, settings, exchange);
-        }
-        
+    {                
         public App()
-            : base(CreateApiContext())
+            : base(ContextFactory.CreateAppContext())
         {
         }
-
-        IApiComposition Api 
-            => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
-
-        FolderPath CaptureRoot => AppPaths.AppCaptureDir;
-
-        IAsmContext CreateAsmContext()
-            => AsmContext.Create(Context.Settings, Context.Messaging, Api, CaptureRoot);
-
-        ICaptureHost CreateCaptureHost()
-            => new CaptureHost(CreateAsmContext(), CaptureRoot);
 
         void SurveyArchive()
         {
-            var archive = Archives.Services.CaptureArchive(CaptureRoot);
+            var archive = Archives.Services.CaptureArchive(Context.AppPaths.CaptureRoot);
 
             Print($"Examining capture archive rooted at {archive.ArchiveRoot}");
 
@@ -55,32 +34,12 @@ namespace Z0
             Root.iter(archive.HexFiles, file => Print(file));  
             Root.iter(archive.ExtractFiles, file => Print(file));  
             Root.iter(archive.ParseFiles, file => Print(file));              
-            // Control.iter(archive.AsmImmFiles, file => Print(file));  
-            // Control.iter(archive.HexImmFiles, file => Print(file));  
         }
 
         void RunCapture(params PartId[] parts)
         {
-            using var host = CreateCaptureHost();
+            using var host = new CaptureHost(ContextFactory.CreateAsmContext(Context), Context.AppPaths.CaptureRoot);
             host.Execute(parts);
-        }
-
-        void DescribeControl(params string[] args)
-        {
-            var parts = ParseParts(args);    
-            iter(parts, part => Print($"The {part} part was supplied via command-line"));        
-
-            void Detail()
-            {
-                Print("I assemble parts:");
-                iter(Context.Parts, part => Print(part));
-
-                Print("I know parts:");
-                iter(KnownParts, part => Print(part));
-
-                Print("I am configured with:");                
-                iter(Context.Settings, setting => Print(setting));
-            }
         }
 
         static PartId[] ParseParts(params string[] args)

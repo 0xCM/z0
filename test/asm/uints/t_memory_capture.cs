@@ -34,7 +34,7 @@ namespace Z0.Asm
 
         public void check_decoder()
         {
-            DecodeHostBits(Context.ApiSet.Hosts.Map(h => h.Uri));
+            DecodeHostBits(Context.Api.Hosts.Map(h => h.Uri));
                        
         }
 

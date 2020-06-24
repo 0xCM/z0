@@ -8,22 +8,14 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
    
     using static Konst;
-    
-    public readonly struct AsmWorkflows : TAsmWorkflows
+        
+    public interface TAsmWorkflows : TAsmCore, ICaptureServices
     {
-        public IAsmContext Context {get;}
-
-        [MethodImpl(Inline)]
-        public static TAsmWorkflows Service(IAsmContext context) 
-            => new AsmWorkflows(context);
-
-        [MethodImpl(Inline)]
-        internal AsmWorkflows(IAsmContext context) 
-            => Context = context;
-    }
-    
-    public interface TAsmWorkflows : TAsmContextual, TAsmCore
-    {
+        IAsmContext Context {get;}        
+        
+        ICaptureCore ICaptureServices.CaptureCore 
+            => new CaptureCore();
+        
         CaptureExchange CaptureExchange
             => Asm.CaptureExchange.Create(Context);        
 

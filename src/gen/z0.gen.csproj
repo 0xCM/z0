@@ -14,6 +14,11 @@
     <ProjectReference Include="$(BitSpans)" />
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(MetaReader)" />
+    <ProjectReference Include="$(Machine)" />
+    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(AsmD)" />
+    <ProjectReference Include="$(Machine)" />
+    <ProjectReference Include="$(Capture)" />
 
   </ItemGroup>
 

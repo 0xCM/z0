@@ -35,7 +35,7 @@ namespace Z0.Asm
         public CaptureWorkflowContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
             ICaptureBroker broker, TCaptureArchive archive)
         {
-            ApiSet = context.ApiSet;
+            ApiSet = context.Api;
             Extractor = Capture.Services.HostExtractor();
             Parser = Extract.Services.ExtractParser();
             Decoder = decoder;

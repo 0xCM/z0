@@ -4,13 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    public interface TAsmContextual : IServiceFactory<IAsmContext>, ICaptureServices 
+    public interface TAsmContextual : ICaptureServices 
     {
-        IEvalWorkflow CreateEvalWorkflow(AsmArchiveConfig config)
-        {
-            var mx = AppMsgExchange.Create(Context);
-            var ac = Z0.AppContext.Create(Context.ApiSet, Context.Random, Context.Settings, mx);
-            return EvalWorkflow.Create(ac, ac.Random, config.ArchiveRoot);
-        }
+        IAsmContext Context {get;}        
     }
 }

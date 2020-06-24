@@ -29,7 +29,7 @@ namespace Z0.Asm
         internal ImmSpecializer(IAsmFunctionDecoder decoder)
         {            
             Decoder = decoder;
-            Capture = Z0.Asm.Capture.Core;
+            Capture = new CaptureCore();
             Dynamic = Dynops.Services.Dynexus;
         }
 

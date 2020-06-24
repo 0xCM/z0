@@ -13,6 +13,6 @@ namespace Z0
             => Z0.AppPaths.Default;
 
         IAppSettings Settings 
-            => AppSettings.Empty;
+            => AppSettings.Load(AppPaths.AppConfigPath);
     }
 }

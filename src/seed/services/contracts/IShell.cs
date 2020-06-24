@@ -51,7 +51,8 @@ namespace Z0
     public interface IShell<S> : IShell
         where S : IShell<S>, new()
     {
-        PartId IShell.AppId => typeof(S).Assembly.Id();
+        PartId IShell.AppId 
+            => typeof(S).Assembly.Id();
 
     }
 

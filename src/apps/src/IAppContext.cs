@@ -13,21 +13,27 @@ namespace Z0
     /// </summary>
     public interface IAppContext : TAppEnv, IAppMsgQueue, IPolyrandProvider, IApiSet, IAppMsgContext
     {        
-        IAppMsgQueue Messaging {get;}
-        
+        IAppMsgQueue MessageQueue {get;}
+                
+        IApiSet Api 
+            => this;
+
+        Action<IAppMsg> MessageRelay 
+            => (e => {});
+
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
-            => Messaging.Deposit(msg);
+            => MessageQueue.Deposit(msg);
 
         void IAppMsgSink.Notify(string msg, AppMsgKind? severity)
-            => Messaging.Notify(msg, severity);
+            => MessageQueue.Notify(msg, severity);
 
         IReadOnlyList<IAppMsg> IAppMsgQueue.Dequeue()
-            => Messaging.Dequeue();
+            => MessageQueue.Dequeue();
 
         IReadOnlyList<IAppMsg> IAppMsgQueue.Flush(Exception e)
-            => Messaging.Flush(e);
+            => MessageQueue.Flush(e);
 
         void IAppMsgQueue.Emit(FilePath dst) 
-            => Messaging.Emit(dst);
+            => MessageQueue.Emit(dst);
     }
 }
