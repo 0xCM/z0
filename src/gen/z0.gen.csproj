@@ -13,6 +13,7 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitSpans)" />
     <ProjectReference Include="$(Archives)" />
+    <ProjectReference Include="$(MetaReader)" />
 
   </ItemGroup>
 

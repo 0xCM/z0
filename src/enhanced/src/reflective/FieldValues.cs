@@ -13,7 +13,7 @@ namespace Z0
             where T : unmanaged
         {
             var tValues = src.LiteralFieldValues<T>();
-            return tValues.Data.Select(x => FieldValue.from(x.Field, EnumValue.eVal<E,T>(x.Value), x.Value));
+            return tValues.Data.Select(x => FieldValue.from(x.Field, EnumValue.literal<E,T>(x.Value), x.Value));
         }
 
         /// <summary>

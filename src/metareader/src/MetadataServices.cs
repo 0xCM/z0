@@ -13,18 +13,11 @@ namespace Z0
     using static Root;
     using static Konst;
 
-    using static MetadataRecords;
+    using static PartRecords;
 
-    public readonly struct MetadataServices
+    struct MetaReader : IPartReader
     {
-        [MethodImpl(Inline)]
-        public static IMetadataReader Reader(FilePath src)
-            => MetaReader.Init(src.Name);
-    }
-
-    struct MetaReader : IMetadataReader
-    {
-        public static IMetadataReader Init(string path)
+        public static IPartReader Init(string path)
         {
             var stream = File.OpenRead(path);
             var peFile = new PEReader(stream);
@@ -44,24 +37,26 @@ namespace Z0
             State.Dispose();
         }
                 
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<R> Read<R>()
+            where R : struct, IPartRecord
+                => PartReader.read<R>(State);
+
         public ReadOnlySpan<StringValueRecord> ReadStrings()
-            => MetadataRead.strings(State);
+            => PartReader.strings(State);
 
         public ReadOnlySpan<StringValueRecord> ReadUserStrings()
-            => MetadataRead.ustrings(State);
+            => PartReader.ustrings(State);
 
         public ReadOnlySpan<BlobRecord> ReadBlobs()
-            => MetadataRead.blobs(State);
+            => PartReader.blobs(State);
 
         public ReadOnlySpan<ConstantRecord> ReadConstants()
-            => MetadataRead.constants(State);
+            => PartReader.constants(State);
             
         public ReadOnlySpan<FieldRecord> ReadFields()
-            => MetadataRead.fields(State);
+            => PartReader.fields(State);
         
-        public ReadOnlySpan<ResourceRecord> ReadManifestResources()
-            => MetadataRead.resources(State);
-
         MetadataReader Reader 
             => State.Reader;        
 

@@ -151,9 +151,9 @@ namespace Z0
             => Define(Path.GetFileNameWithoutExtension(Name), ext);
 
         [MethodImpl(Inline)]
-        public FileName ChangeExtension<A>(FileExt<A> ext)
+        public FileName ChangeExtension<A>(A ext)
             where A : unmanaged, IAsciSequence
-                => Define(Path.GetFileNameWithoutExtension(Name), ext.Name);
+                => Define(Path.GetFileNameWithoutExtension(Name), ext);
 
         /// <summary>
         /// The file extension, if any

@@ -12,6 +12,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
+    using static Root;
 
     public static class text
     {
@@ -654,7 +655,7 @@ namespace Z0
         public static int width<E>(E field)
             where E : unmanaged, Enum
         {
-            var w = Root.tVal<E,uint>(field) >> 16;
+            var w = Root.scalar<E,uint>(field) >> 16;
             return (int)w;
         }
 
@@ -712,5 +713,72 @@ namespace Z0
         public static string hex<T>(T src)
             where T : unmanaged
                 => SystemHexFormatters.Create<T>().Format(src);
+
+        [MethodImpl(Inline)]
+        public static string rpad<T>(T src, int width, char c = Space)
+            where T : ITextual
+                => src.Format().PadRight(width, c);
+
+        [MethodImpl(Inline)]
+        public static string rpad(byte[] src, int width, char c = Space, HexFormatConfig? config = null)
+            => src.FormatHexBytes(config).PadRight(width, c);
+
+        [MethodImpl(Inline)]
+        public static string rpad(object src, int width, char c = Space)
+            => $"{src}".PadRight(width, c);
+
+        [MethodImpl(Inline)]
+        public static string rpad(string src, int width, char c = Space)
+            => src.PadRight(width, c);
+
+        [MethodImpl(Inline)]
+        public static string rpad(char src, int width, char c = Space)
+            => $"{src}".PadRight(width, c);
+
+        /// <summary>
+        /// Intersperses the source strings with a delimiter followed by a space, i.e.,
+        /// result := "{s1}{delimiter} {s2}{delimiter} ... {sn}{delimiter}"
+        /// </summary>
+        /// <param name="fields">The fields to delimit</param>
+        /// <param name="delimiter">The delimiter to use</param>
+        public static string delimit(ReadOnlySpan<string> fields, char delimiter = FieldDelimiter)
+        {
+            var dst = text.build();
+            var count = fields.Length;
+            for(byte i=0; i<count; i++)
+            {
+                dst.Append(Root.skip(fields, i));
+                if(i != count - 1)
+                {
+                    dst.Append(delimiter);
+                    dst.Append(Chars.Space);
+                }
+            }
+            return dst.ToString();
+        }
+
+        /// <summary>
+        /// Concatentates a sequence of strings, padding each to a specified width and interspersed with a specified delimiter
+        /// </summary>
+        /// <param name="src">The text to join</param>
+        /// <param name="widths">The corresponding widths</param>
+        /// <param name="delimiter">The delimiter to use</param>
+        public static string concat(ReadOnlySpan<string> src, ReadOnlySpan<byte> widths, char delimiter = FieldDelimiter)
+        {
+            var dst = text.build();
+            var count = length(src,widths);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var field = ref skip(src,i);
+                ref readonly var width = ref skip(widths,i);
+                dst.Append(field.PadRight(width));
+                if(i != count - 1)
+                {
+                    dst.Append(delimiter);
+                    dst.Append(Chars.Space);
+                }
+            }
+            return dst.ToString();
+        }
     }
 }

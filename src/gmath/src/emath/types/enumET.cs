@@ -118,13 +118,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public @enum(T scalar)
         {
-            Literal = eVal<E,T>(scalar);
+            Literal = literal<E,T>(scalar);
         }                
 
         public T Scalar 
         {
             [MethodImpl(Inline)]
-            get => tVal<E,T>(Literal);
+            get => scalar<E,T>(Literal);
         }
 
         public DataWidth Width 

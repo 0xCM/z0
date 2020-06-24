@@ -68,9 +68,9 @@ namespace Z0
                 return;
 
             if(header)
-                dst.AppendLine(RecordHeader.format<F>(delimiter));
+                dst.AppendLine(Tabular.HeaderText<F>(delimiter));
 
-            var formatter = Reports.formatter<F>();
+            var formatter = Tabular.FieldFormatter<F>(delimiter);
 
             Root.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
         }

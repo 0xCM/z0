@@ -11,16 +11,20 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Konst;    
-    using static MetadataRecords;
+    using static PartRecords;
     
-    partial class MetadataRead
+    partial class PartReader
     {        
+        [MethodImpl(Inline)]
+        internal static ReadOnlySpan<R> empty<R>()
+            => ReadOnlySpan<R>.Empty;
+
         internal static ReadOnlySpan<StringValueRecord> strings(in ReaderState state)
         {
             var reader = state.Reader;
             int size = reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
-                return MetadataFormat.empty<StringValueRecord>();
+                return empty<StringValueRecord>();
 
             var values = new List<StringValueRecord>();
             var handle = MetadataTokens.StringHandle(0);
@@ -46,7 +50,7 @@ namespace Z0
             var reader = state.Reader;
             int size = reader.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
-                return MetadataFormat.empty<StringValueRecord>();
+                return empty<StringValueRecord>();
 
             var values = new List<StringValueRecord>();
             var handle = MetadataTokens.UserStringHandle(0);

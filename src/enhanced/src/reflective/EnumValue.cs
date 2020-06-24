@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe E eVal<E,T>(T tVal, E eRep = default)
+        public static unsafe E literal<E,T>(T tVal, E eRep = default)
             where E : unmanaged, Enum
             where T : unmanaged
                 => Unsafe.Read<E>((E*)&tVal);
@@ -32,7 +32,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe T tVal<E,T>(E eVal, T tRep = default)
+        public static unsafe T scalar<E,T>(E eVal, T tRep = default)
             where E : unmanaged, Enum
             where T : unmanaged
                 => Unsafe.Read<T>((T*)(&eVal));
@@ -45,7 +45,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly T tVal<E,T>(in E eVal, out T tVal) 
+        public static ref readonly T scalar<E,T>(in E eVal, out T tVal) 
             where E : unmanaged, Enum
             where T : unmanaged
         {
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly byte tVal<E>(in E eVal, out byte tVal) 
+        public static ref readonly byte scalar<E>(in E eVal, out byte tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly sbyte tVal<E>(in E eVal, out sbyte tVal) 
+        public static ref readonly sbyte scalar<E>(in E eVal, out sbyte tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly short tVal<E>(in E eVal, out short tVal) 
+        public static ref readonly short scalar<E>(in E eVal, out short tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly ushort tVal<E>(in E eVal, out ushort tVal) 
+        public static ref readonly ushort scalar<E>(in E eVal, out ushort tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly int tVal<E>(in E eVal, out int tVal) 
+        public static ref readonly int scalar<E>(in E eVal, out int tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly uint tVal<E>(in E eVal, out uint tVal) 
+        public static ref readonly uint scalar<E>(in E eVal, out uint tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -126,7 +126,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly long tVal<E>(in E eVal, out long tVal) 
+        public static ref readonly long scalar<E>(in E eVal, out long tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly ulong tVal<E>(in E eVal, out ulong tVal) 
+        public static ref readonly ulong scalar<E>(in E eVal, out ulong tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -148,10 +148,10 @@ namespace Z0
         /// <param name="cVal">The character output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly char cVal<E>(in E eVal, out char cVal) 
+        public static ref readonly char scalar<E>(in E eVal, out char cVal) 
             where E : unmanaged, Enum
         {
-            cVal = (char)tVal(eVal, out ushort _);
+            cVal = (char)scalar(eVal, out ushort _);
             return ref cVal;
         }
 
@@ -309,6 +309,75 @@ namespace Z0
             return ref tVal;
         }
 
+        /// <summary>
+        /// Envisions an E-enum value of primal i8-kind as a like-kinded scalar value
+        /// </summary>
+        /// <param name="eVal">The enum source value</param>
+        /// <typeparam name="E">The enum type of primal i8-kind</typeparam>
+        [MethodImpl(Inline)]
+        public static sbyte e8i<E>(E eVal) 
+            where E : unmanaged, Enum
+                => scalar<E,sbyte>(eVal);
+
+        /// <summary>
+        /// Envisions an E-enum value of primal u8-kind as a like-kinded scalar value
+        /// </summary>
+        /// <param name="eVal">The enum source value</param>
+        /// <typeparam name="E">The enum type of primal u8-kind</typeparam>
+        [MethodImpl(Inline)]
+        public static byte e8u<E>(E eVal) 
+            where E : unmanaged, Enum
+                => scalar<E,byte>(eVal);
+
+        /// <summary>
+        /// Envisions an E-enum value of primal i16-kind as a like-kinded scalar value
+        /// </summary>
+        /// <param name="eVal">The enum source value</param>
+        /// <typeparam name="E">The enum type of primal i16-kind</typeparam>
+        [MethodImpl(Inline)]
+        public static short e16i<E>(E eVal) 
+            where E : unmanaged, Enum
+                => scalar<E,short>(eVal);
+
+        /// <summary>
+        /// Envisions an E-enum value of primal u16-kind as a like-kinded scalar value
+        /// </summary>
+        /// <param name="eVal">The enum source value</param>
+        /// <typeparam name="E">The enum type of primal u16-kind</typeparam>
+        [MethodImpl(Inline)]
+        public static ushort e16u<E>(E eVal) 
+            where E : unmanaged, Enum
+                => scalar<E,ushort>(eVal);
+
+        /// <summary>
+        /// Envisions an E-enum value of primal u16-kind as a c16 value
+        /// </summary>
+        /// <param name="eVal">The enum source value</param>
+        /// <typeparam name="E">The enum type of primal u16-kind</typeparam>
+        [MethodImpl(Inline)]
+        public static char e16c<E>(E eVal) 
+            where E : unmanaged, Enum
+                => (char)scalar<E,ushort>(eVal);
+
+        [MethodImpl(Inline)]
+        public static int e32i<E>(E eVal) 
+            where E : unmanaged, Enum
+                => scalar<E,int>(eVal);
+
+        [MethodImpl(Inline)]
+        public static uint e32u<E>(E eVal) 
+            where E : unmanaged, Enum
+                => scalar<E,uint>(eVal);
+
+        [MethodImpl(Inline)]
+        public static long e64i<E>(E eVal) 
+            where E : unmanaged, Enum
+                => scalar<E,long>(eVal);
+
+        [MethodImpl(Inline)]
+        public static ulong e64u<E>(E eVal) 
+            where E : unmanaged, Enum
+                => scalar<E,ulong>(eVal);
 
         /// <summary>
         /// Envisions a u8 value as a value of an enum of like primal kind
@@ -319,7 +388,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static E eVal<E>(byte tVal, E eRep = default) 
             where E : unmanaged, Enum
-                => eVal<E,byte>(tVal);
+                => literal<E,byte>(tVal);
 
         /// <summary>
         /// Envisions an i8 value as a value of an enum of like primal kind
@@ -330,7 +399,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static E eVal<E>(sbyte src, E rep = default) 
             where E : unmanaged, Enum
-                => eVal<E,sbyte>(src);
+                => literal<E,sbyte>(src);
 
         /// <summary>
         /// Envisions an i16 value as a value of an enum of like primal kind
@@ -341,7 +410,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static E eVal<E>(short src, E rep = default) 
             where E : unmanaged, Enum
-                => eVal<E,short>(src);
+                => literal<E,short>(src);
 
         /// <summary>
         /// Envisions a u16 value as a value of an enum of like primal kind
@@ -352,7 +421,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static E eVal<E>(ushort src, E rep = default) 
             where E : unmanaged, Enum
-                => eVal<E,ushort>(src);
+                => literal<E,ushort>(src);
 
         /// <summary>
         /// Envisions a c16 value as a value of an enum of like u16 kind
@@ -361,9 +430,9 @@ namespace Z0
         /// <param name="eRep">A representative enum value, used only for type inference</param>
         /// <typeparam name="E">The enum target type of primal u16-kind</typeparam>
         [MethodImpl(Inline)]
-        public static E eVal<E>(char src, E rep = default) 
+        public static E literal<E>(char src, E rep = default) 
             where E : unmanaged, Enum
-                => eVal<E,ushort>((ushort)src);
+                => literal<E,ushort>((ushort)src);
 
         /// <summary>
         /// Envisions an i32 value as a value of an enum of like primal kind
@@ -372,9 +441,9 @@ namespace Z0
         /// <param name="eRep">A representative enum value, used only for type inference</param>
         /// <typeparam name="E">The enum target type of primal i32-kind</typeparam>
         [MethodImpl(Inline)]
-        public static E eVal<E>(int src, E rep = default) 
+        public static E literal<E>(int src, E rep = default) 
             where E : unmanaged, Enum
-                => eVal<E,int>(src);
+                => literal<E,int>(src);
 
         /// <summary>
         /// Envisions a u32 value as a value of an enum of like primal kind
@@ -383,9 +452,9 @@ namespace Z0
         /// <param name="eRep">A representative enum value, used only for type inference</param>
         /// <typeparam name="E">The enum target type of primal u32-kind</typeparam>
         [MethodImpl(Inline)]
-        public static E eVal<E>(uint src, E rep = default) 
+        public static E literal<E>(uint src, E rep = default) 
             where E : unmanaged, Enum
-                => eVal<E,uint>(src);
+                => literal<E,uint>(src);
 
         /// <summary>
         /// Envisions an i64 value as a value of an enum of like primal kind
@@ -394,9 +463,9 @@ namespace Z0
         /// <param name="eRep">A representative enum value, used only for type inference</param>
         /// <typeparam name="E">The enum target type of primal i64-kind</typeparam>
         [MethodImpl(Inline)]
-        public static E eVal<E>(long src, E rep = default) 
+        public static E literal<E>(long src, E rep = default) 
             where E : unmanaged, Enum
-                => eVal<E,long>(src);
+                => literal<E,long>(src);
 
         /// <summary>
         /// Envisions a u64 value as a value of an enum of like primal kind
@@ -405,80 +474,10 @@ namespace Z0
         /// <param name="eRep">A representative enum value, used only for type inference</param>
         /// <typeparam name="E">The enum target type of primal u64-kind</typeparam>
         [MethodImpl(Inline)]
-        public static E eVal<E>(ulong src, E rep = default) 
+        public static E literal<E>(ulong src, E rep = default) 
             where E : unmanaged, Enum
-                => eVal<E,ulong>(src);
+                => literal<E,ulong>(src);
  
-
-        /// <summary>
-        /// Envisions an E-enum value of primal i8-kind as a like-kinded scalar value
-        /// </summary>
-        /// <param name="eVal">The enum source value</param>
-        /// <typeparam name="E">The enum type of primal i8-kind</typeparam>
-        [MethodImpl(Inline)]
-        public static sbyte e8i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => tVal<E,sbyte>(eVal);
-
-        /// <summary>
-        /// Envisions an E-enum value of primal u8-kind as a like-kinded scalar value
-        /// </summary>
-        /// <param name="eVal">The enum source value</param>
-        /// <typeparam name="E">The enum type of primal u8-kind</typeparam>
-        [MethodImpl(Inline)]
-        public static byte e8u<E>(E eVal) 
-            where E : unmanaged, Enum
-                => tVal<E,byte>(eVal);
-
-        /// <summary>
-        /// Envisions an E-enum value of primal i16-kind as a like-kinded scalar value
-        /// </summary>
-        /// <param name="eVal">The enum source value</param>
-        /// <typeparam name="E">The enum type of primal i16-kind</typeparam>
-        [MethodImpl(Inline)]
-        public static short e16i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => tVal<E,short>(eVal);
-
-        /// <summary>
-        /// Envisions an E-enum value of primal u16-kind as a like-kinded scalar value
-        /// </summary>
-        /// <param name="eVal">The enum source value</param>
-        /// <typeparam name="E">The enum type of primal u16-kind</typeparam>
-        [MethodImpl(Inline)]
-        public static ushort e16u<E>(E eVal) 
-            where E : unmanaged, Enum
-                => tVal<E,ushort>(eVal);
-
-        /// <summary>
-        /// Envisions an E-enum value of primal u16-kind as a c16 value
-        /// </summary>
-        /// <param name="eVal">The enum source value</param>
-        /// <typeparam name="E">The enum type of primal u16-kind</typeparam>
-        [MethodImpl(Inline)]
-        public static char e16c<E>(E eVal) 
-            where E : unmanaged, Enum
-                => (char)tVal<E,ushort>(eVal);
-
-        [MethodImpl(Inline)]
-        public static int e32i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => tVal<E,int>(eVal);
-
-        [MethodImpl(Inline)]
-        public static uint e32u<E>(E eVal) 
-            where E : unmanaged, Enum
-                => tVal<E,uint>(eVal);
-
-        [MethodImpl(Inline)]
-        public static long e64i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => tVal<E,long>(eVal);
-
-        [MethodImpl(Inline)]
-        public static ulong e64u<E>(E eVal) 
-            where E : unmanaged, Enum
-                => tVal<E,ulong>(eVal);
         
         [MethodImpl(Inline)]
         static int size<X>()

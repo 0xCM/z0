@@ -71,7 +71,7 @@ namespace Z0
         
         public string DelimitedText(char delimiter)
         {            
-            var dst = Reports.formatter<F>(delimiter);
+            var dst = Tabular.FieldFormatter<F>(delimiter);
             dst.Append(F.Sequence, Sequence);
             dst.Delimit(F.CaseName, CaseName);
             dst.Delimit(F.Status, Status);

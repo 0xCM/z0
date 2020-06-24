@@ -22,7 +22,7 @@ namespace Z0
         public void GenerateEnum(TextDoc spec)
         {
             var records = ParseEnumLiterals(spec).ToReadOnlySpan();
-            var formatter = Records.Formatter<EnumLiteralRecordField>();
+            var formatter = Tabular.Formatter<EnumLiteralRecordField>();
             for(var i=0; i<records.Length; i++)
             {
                 ref readonly var record = ref skip(records, i);

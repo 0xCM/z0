@@ -40,7 +40,7 @@ namespace Z0
                     
         public string DelimitedText(char delimiter)
         {
-            var formatter = Tabular.formatter<F>(delimiter);
+            var formatter = Tabular.FieldFormatter<F>(delimiter);
             formatter.Append(F.TypeName, TypeName);
             formatter.Delimit(F.Index, Index);
             formatter.Delimit(F.Name, Name);

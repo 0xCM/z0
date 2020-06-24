@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public interface IIndexedView<T> : ILengthwise
     {
@@ -26,6 +23,6 @@ namespace Z0
             => ref Lookup(index);        
 
         ref readonly T IIndexedView<T>.Lookup(int index)            
-            => ref Lookup(Root.eVal<E>(index));
+            => ref Lookup(Root.literal<E>(index));
     }
 }

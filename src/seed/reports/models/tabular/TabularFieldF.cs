@@ -42,7 +42,7 @@ namespace Z0
             var numeric = Enums.e32u(spec);
             this.Specifier = spec;
             this.Name = spec.ToString();
-            this.Index = Tabular.index(spec);
+            this.Index = Tabular.Index(spec);
             this.Width = text.width(spec);
         }   
 

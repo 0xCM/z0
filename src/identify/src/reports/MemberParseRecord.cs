@@ -148,7 +148,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = Tabular.formatter<F>(delimiter);            
+            var dst = Tabular.FieldFormatter<F>(delimiter);            
             dst.Delimit(F.Seq, Seq);
             dst.Delimit(F.SourceSeq, SourceSeq);
             dst.Delimit(F.Address, Address);

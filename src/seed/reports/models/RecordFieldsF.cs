@@ -32,5 +32,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public short Width(F f)
             => Service.Width(f);
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Literals.Length;
+        }
+        
+        public ref readonly F this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Literals[index];
+        }
     }
 }

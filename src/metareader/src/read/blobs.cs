@@ -12,11 +12,18 @@ namespace Z0
     using System.Linq;
 
     using static Konst;    
-    using static MetadataRecords;
-    using static Root;
-    
-    partial class MetadataRead
+    using static PartRecords;
+        
+    partial class PartReader
     {        
+        internal static BlobRecord record(in ReaderState state, BlobHandle handle, int seq)
+        {
+            var offset = state.Reader.GetHeapOffset(handle);            
+            var value = state.Reader.GetBlobBytes(handle) ?? Root.array<byte>();
+            var size = state.Reader.GetHeapSize(HeapIndex.Blob);
+            return new BlobRecord(seq, size,offset,value);                    
+        }
+
         internal static ReadOnlySpan<BlobRecord> blobs(in ReaderState state)
         {
             var reader = state.Reader;

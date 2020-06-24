@@ -36,10 +36,17 @@ namespace Z0
              service.Emit();
         }
 
+        void EmitMetadata()
+        {   
+            var service = MetadataEmitter.Service();
+            service.Emit();
+        }
+
         public void Generate()
         {            
             GenerateDocs();
             GenerateResources();
+            EmitMetadata();
             //EnumGenerator.Service.Generate();
         }
     }

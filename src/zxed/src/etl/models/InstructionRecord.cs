@@ -59,7 +59,7 @@ namespace Z0.Xed
         
         public string DelimitedText(char delimiter)
         {            
-            var formatter = RecordFormatter.Create<F>(delimiter);
+            var formatter = RecordFormatter.create<F>(delimiter);
             formatter.Delimit(F.Sequence, Sequence);
             formatter.Delimit(F.Mnemonic, Mnemonic);
             formatter.Delimit(F.Extension, Extension);

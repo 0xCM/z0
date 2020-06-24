@@ -42,7 +42,7 @@ namespace Z0.Asm.Data
     public struct CommandInfo : IRecord<F,R>
     {                   
         public static string FormatHeader(char delimiter = FieldDelimiter)
-            => RecordHeader.format<F>(delimiter);
+            => Tabular.HeaderText<F>(delimiter);
             
         public int Sequence;
 
@@ -107,7 +107,7 @@ namespace Z0.Asm.Data
 
         public string DelimitedText(char delimiter)
         {
-            var formatter = Records.Formatter<F>(delimiter);
+            var formatter = Tabular.Formatter<F>(delimiter);
             formatter.Delimit(F.Sequence, Sequence);
             formatter.Delimit(F.Address, Address);
             formatter.Delimit(F.GlobalOffset, GlobalOfset);

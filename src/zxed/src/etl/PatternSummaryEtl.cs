@@ -6,9 +6,6 @@
 namespace Z0.Xed
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static Root;
@@ -115,7 +112,7 @@ namespace Z0.Xed
 
         public static string FormatPattern(this InstructionPattern src, char delimiter)
         {
-            var dst = Reports.formatter<F>(delimiter);
+            var dst =Tabular.FieldFormatter<F>(delimiter);
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
             dst.Delimit(F.Extension, src.Extension);
@@ -130,7 +127,7 @@ namespace Z0.Xed
 
         public static string FormatRow(this PatternSummary src, char delimiter)
         {
-            var dst = Reports.formatter<F>(delimiter);
+            var dst = Tabular.FieldFormatter<F>(delimiter);
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
             dst.Delimit(F.Extension, src.Extension);

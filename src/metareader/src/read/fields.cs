@@ -11,36 +11,39 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Konst;    
-    using static MetadataRecords;
+    using static PartRecords;
     using static Root;
+    using static ReaderInternals;
 
-    using M = MetadataRecords;
+    using M = PartRecords;
+
     
-    partial class MetadataRead
+    partial class PartReader
     {        
-        internal static M.LiteralRecord name(in ReaderState state, FieldDefinition entry, int seq)
+        internal static M.LiteralRecord record(in ReaderState state, StringHandle handle, int seq)
         {
-            return LiteralValue(state, entry.Name, seq);
+            var value = state.Reader.GetString(handle);
+            var offset = state.Reader.GetHeapOffset(handle);
+            var size = state.Reader.GetHeapSize(HeapIndex.String);
+            return new M.LiteralRecord(seq, size, offset, value);                    
         }
+
+        internal static M.LiteralRecord name(in ReaderState state, FieldDefinition entry, int seq)
+            => record(state, entry.Name, seq);
         
         internal static string format(FieldAttributes src)
-        {
-            return src.ToString();
-        }
+            => src.ToString();
 
         internal static BlobRecord signature(in ReaderState state, FieldDefinition entry, int seq)
-        {
-            return LiteralValue(state, entry.Signature, seq);
-        }
+            => record(state, entry.Signature, seq);
 
         internal static ReadOnlySpan<FieldRecord> fields(in ReaderState state)
         {
             var reader = state.Reader;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = alloc<FieldRecord>(count);
+            var dst = Spans.alloc<FieldRecord>(count);
             
-
             for(var i=0; i<count; i++)
             {
                 ref readonly var handle = ref skip(handles,i);
@@ -53,7 +56,7 @@ namespace Z0
                     Name: name(state, entry, i),
                     Signature: signature(state, entry, i),
                     Attributes: format(entry.Attributes),
-                    Marshalling: Literal(state, entry.GetMarshallingDescriptor(), i)
+                    Marshalling: literal(state, entry.GetMarshallingDescriptor(), i)
                 );
             }
             return dst;
