@@ -8,34 +8,33 @@ namespace Z0
 
     public interface IPartRecord : IRecord
     {
-        string Format(char delimiter);  
-
+        string Format(char delimiter)
+            => string.Empty;
+            
         string ITabular.DelimitedText(char delimiter) 
-            => Format(delimiter);
+            => string.Empty;
 
-        IPartRecordSpec Kind {get;}
+        PartRecordKind Kind {get;}
+                
     }
     
     public interface IPartRecord<K> : IPartRecord
         where K : unmanaged, IPartRecordSpec
     {
-        new K Kind => default;
-        
-        IPartRecordSpec IPartRecord.Kind 
-            => Kind;
+
     }
     
-    public interface IPartRecord<F,K> : IPartRecord<K>
-        where F : struct, IPartRecord<F,K>
-        where K : unmanaged, IPartRecordSpec
+    public interface IPartRecord<F,R> : ITabular<F,R>, IPartRecord
+        where R : struct, IPartRecord<F,R>
+        where F : unmanaged, Enum
     {
         
     }
 
-    public interface IPartRecord<F,K,I> : IPartRecord<F,K>
-        where F : struct, IPartRecord<F,K,I>
-        where I : unmanaged, Enum
+    public interface IPartRecord<F,P,K> : ITabular<F,P>
+        where P : struct, IPartRecord<F,P,K>
         where K : unmanaged, IPartRecordSpec
+        where F : unmanaged, Enum
     {
         
     }    

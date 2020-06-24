@@ -20,6 +20,49 @@ namespace Z0
     
     partial class PartReader
     {        
+        internal static ReadOnlySpan<FieldRvaRecord> fieldrva(in ReaderState state)        
+        {                
+            var reader = state.Reader;                
+            var offset = reader.GetTableMetadataOffset(System.Reflection.Metadata.Ecma335.TableIndex.FieldRva);
+            var rowcount = reader.GetTableRowCount(System.Reflection.Metadata.Ecma335.TableIndex.FieldRva);
+            var rowsize = reader.GetTableRowCount(System.Reflection.Metadata.Ecma335.TableIndex.FieldRva);
+
+            var rvaCount = FieldRvaCount(state);
+            var handles = reader.FieldDefinitions.ToReadOnlySpan();
+            var count = handles.Length;
+            var dst = Root.alloc<FieldRvaRecord>(count);
+            
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var handle = ref Root.skip(handles,i);
+                var entry = reader.GetFieldDefinition(handle);
+
+                var sig = signature(state, entry, i);
+                dst[i] = new FieldRvaRecord(
+                    Sequence: i, 
+                    Signature: sig, 
+                    Rva: (uint)entry.GetRelativeVirtualAddress()
+                );                    
+            }
+            
+            return dst;
+        }
+
+        internal static Pairings<string,Address32> methods(in ReaderState state)
+        {
+            var reader = state.Reader;
+            var defs = reader.MethodDefinitions.ToReadOnlySpan();
+            var methods = Spans.alloc<Paired<string,Address32>>(defs.Length);
+            for(var i=0; i<defs.Length; i++)
+            {
+                var def = reader.GetMethodDefinition(skip(defs, i));
+                var rva = (Address32)def.RelativeVirtualAddress;
+                var name = reader.GetString(def.Name);
+                seek(methods,i) = (name,rva);            
+            }
+            return methods;
+        }
+
         internal static M.LiteralRecord record(in ReaderState state, StringHandle handle, int seq)
         {
             var value = state.Reader.GetString(handle);
@@ -48,15 +91,13 @@ namespace Z0
             {
                 ref readonly var handle = ref skip(handles,i);
                 var entry = reader.GetFieldDefinition(handle);
+                int offset = entry.GetOffset();
 
                 seek(dst,i) = new FieldRecord(
                     Sequence: i,
-                    Rva: entry.GetRelativeVirtualAddress(),                    
-                    Offset: entry.GetOffset(),
                     Name: name(state, entry, i),
-                    Signature: signature(state, entry, i),
-                    Attributes: format(entry.Attributes),
-                    Marshalling: literal(state, entry.GetMarshallingDescriptor(), i)
+                    SigCode: signature(state, entry, i),
+                    Attributes: format(entry.Attributes)                    
                 );
             }
             return dst;

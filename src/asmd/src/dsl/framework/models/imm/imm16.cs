@@ -22,6 +22,22 @@ namespace Z0.Asm.Dsl
             => new imm16((ushort)src);
 
         [MethodImpl(Inline)]
+        public static bool operator <(imm16 a, imm16 b)
+            => a.Value < b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator >(imm16 a, imm16 b)
+            => a.Value > b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(imm16 a, imm16 b)
+            => a.Value <= b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(imm16 a, imm16 b)
+            => a.Value >= b.Value;
+
+        [MethodImpl(Inline)]
         public imm16(byte value)
         {
             Value = value;

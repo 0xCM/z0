@@ -34,7 +34,7 @@ namespace Z0.Asm.Dsl
             => value;
 
         [MethodImpl(Inline), Op]
-        public D.imm32 imm32(Fixed32 value)
+        public D.imm32 imm32(uint value)
             => value;
 
         [MethodImpl(Inline), Op]
@@ -46,11 +46,12 @@ namespace Z0.Asm.Dsl
             => value;
 
         [MethodImpl(Inline), Op]
-        public D.imm64 imm64(Fixed32 value)
+        public D.imm64 imm64(uint value)
             => value;
 
         [MethodImpl(Inline), Op]
-        public D.imm64 imm64(Fixed64 value)
+        public D.imm64 imm64(ulong value)
             => value;
+
     }
 }

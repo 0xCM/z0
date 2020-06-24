@@ -8,106 +8,79 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static PartRecords.BlobField;
 
-    using S = PartRecords.BlobSpec;
-    using F = PartRecords.BlobField;
+    using F = BlobField;
+    using W = BlobFieldWidth;
     using R = PartRecords.BlobRecord;
+
+    public enum BlobField : ushort
+    {
+        Sequence = 0,
+
+        HeapSize = 1,
+
+        Offset = 2,
+
+        Value = 3,                    
+    }
+
+    public enum BlobFieldWidth : ushort
+    {
+        Sequence = 12,
+
+        HeapSize = 12,
+
+        Offset = 12,
+
+        Value = 30,                       
+    }
 
     partial class PartRecords
     {
-        public enum BlobField : ushort
-        {
-            Sequence = 0,
 
-            HeapSize = 1,
+        public static RecordFormatter<F,W> formatter(BlobRecord spec)
+            => Tabular.Formatter<F,W>();
 
-            Offset = 2,
-
-            Value = 3,
-
-            RecordFieldCount = 4,            
-        }
-    
-        public static string format(in BlobRecord src, char delimiter)
+        public static ref readonly RecordFormatter<F,W> format(in BlobRecord src, in RecordFormatter<F,W> dst, bool eol = true)
         {            
-            var widths = widths<S>(src.Kind);
-            var count = count<S>(src.Kind);
-            var dst = Spans.alloc<string>(count);
-            Root.eSeek(dst, Sequence) = text.format(src.Sequence, Root.eSkip(widths, Sequence));
-            Root.eSeek(dst, HeapSize) = hex(src.HeapSize, Root.eSkip(widths, HeapSize));
-            Root.eSeek(dst, Offset) = hex(src.Offset, Root.eSkip(widths, Offset));
-            Root.eSeek(dst, Value) = text.format(src.Value, Root.eSkip(widths, Value));
-            return text.delimit(dst,delimiter);
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.HeapSize, src.HeapSize);
+            dst.Delimit(F.Offset, src.Offset);
+            dst.Delimit(F.Value, src.Value);
+            if(eol)
+                dst.EmitEol();
+            return ref dst;
         }        
 
-        public readonly struct BlobRecord : IPartRecord<R,S,F>
+        public readonly struct BlobRecord : IPartRecord<F,R>
         {
             public int Sequence {get;}
             
             public int HeapSize {get;}
 
-            public int Offset {get;}
+            public Address32 Offset {get;}
             
-            public byte[] Value {get;}
+            public BinaryCode Value {get;}
 
-            public S Kind => default;
+            public PartRecordKind Kind 
+                => PartRecordKind.Blob;
 
             [MethodImpl(Inline)]
             public BlobRecord(int Sequence, int HeapSize, int Offset, byte[] Value)
             {
                 this.Sequence = Sequence;
                 this.HeapSize = HeapSize;
-                this.Offset = Offset;
+                this.Offset = (uint)Offset;
                 this.Value = Value;
             }
 
-            public string[] HeaderNames 
-                => new string[(int)RecordFieldCount]{
-                    nameof(Sequence), 
-                    nameof(HeapSize), 
-                    nameof(Offset), 
-                    nameof(Value), 
-                    };
-
             public string Format()
-                => format(this, FieldDelimiter);
+                => format(this, formatter(this), false);
 
-            public string Format(char delimiter)
-                => format(this, delimiter);
+            public void Format(RecordFormatter<F,W> dst)
+                => format(this,dst);
+
         }
-        
-        public readonly struct BlobSpec : IPartRecordSpec<S>
-        {
-            [MethodImpl(Inline)]
-            public static implicit operator PartRecordKind(S src)
-                => src.RecordType;
-
-            public PartRecordKind RecordType 
-                => PartRecordKind.Blob;       
-
-            public byte FieldCount 
-                => (byte)RecordFieldCount;
-
-            public ReadOnlySpan<string> HeaderFields 
-                => new string[(int)RecordFieldCount]{
-                    nameof(Sequence), 
-                    nameof(HeapSize), 
-                    nameof(Offset), 
-                    nameof(Value), 
-                    };
-            
-            public ReadOnlySpan<byte> FieldWidths 
-                => new byte[(int)RecordFieldCount]{12, 12, 12, 30};
-
-            public string HeaderText
-            {
-                [MethodImpl(Inline)]
-                get => text.concat(HeaderFields, FieldWidths);
-            }
-
-            public override string ToString()
-                => (this as ITextual).Format();            
-        }
+    
     }
 }

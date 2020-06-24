@@ -29,7 +29,7 @@ namespace Z0
 
         public string Render(char delimiter)
         {
-            var service = RecordFormatter.create<F>(delimiter);
+            var service = Tabular.Formatter<F>(delimiter);
             var cols = Fields;
             var labels = Labels;
             for(var i=0; i<cols.Length; i++)
@@ -45,7 +45,7 @@ namespace Z0
         /// <typeparam name="F">The field type</typeparam>
         public string Render(Func<int,F,string> label, char delimiter)
         {
-            var service = RecordFormatter.create<F>(delimiter);
+            var service = Tabular.Formatter<F>(delimiter);
             var cols = Fields;
             var labels = Labels;
             for(var i=0; i<cols.Length; i++)

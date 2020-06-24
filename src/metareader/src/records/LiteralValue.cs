@@ -8,18 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
-    using static PartRecords.LiteralField;
 
-    using R = PartRecords.LiteralRecord;
-    using S = PartRecords.LiteralRecordSpec;
     using F = PartRecords.LiteralField;
-    using M = PartRecords;
+    using W = PartRecords.LiteralFieldWidth;
+    using R = PartRecords.LiteralRecord;
 
     partial class PartRecords
     {
-        const char FieldDelimiter = Chars.Pipe;
-
         public enum LiteralField : ushort
         {
             Sequence = 0,
@@ -32,35 +27,52 @@ namespace Z0
 
             Value = 4,
 
-            FieldCount = 5,
         }
-        
-        [Op]
-        public static string format(in M.LiteralRecord src, char delimiter)
-        {            
-            var w = widths(src.Kind);
-            var k = count(src.Kind);
-            var dst = Spans.alloc<string>(k);
-            Root.eSeek(dst, Sequence) = text.format(src.Sequence, Root.eSkip(w, Sequence));
-            Root.eSeek(dst, HeapSize) = hex(src.HeapSize, Root.eSkip(w, HeapSize));
-            Root.eSeek(dst, Length) = text.format(src.Length, Root.eSkip(w, Length));
-            Root.eSeek(dst, Offset) = hex(src.Offset, Root.eSkip(w, Offset));
-            Root.eSeek(dst, Value) = src.Value;
-            return text.delimit(dst, delimiter);
-        }                
-        public readonly struct LiteralRecord : IPartRecord<R,S,F>
+
+        public enum LiteralFieldWidth : ushort
         {
+            Sequence = 12,
+            
+            HeapSize = 12,
+
+            Length = 12,
+
+            Offset = 12,
+
+            Value = 30,
+
+        }
+
+        public static RecordFormatter<F,W> formatter(LiteralRecord spec)
+            => Tabular.Formatter<F,W>();
+
+        public static ref readonly RecordFormatter<F,W> format(in LiteralRecord src, in RecordFormatter<F,W> dst, bool eol = true)
+        {            
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.HeapSize, hex(src.HeapSize));
+            dst.Delimit(F.Length, src.Length);
+            dst.Delimit(F.Offset, src.Offset);
+            dst.Delimit(F.Value, src.Value);
+            if(eol)
+                dst.EmitEol();
+            return ref dst;
+        }        
+
+        public readonly struct LiteralRecord : IPartRecord<F,R>
+        {
+
             public int Sequence {get;}
 
             public int HeapSize {get;}
 
             public int Length {get;}
             
-            public int Offset {get;}
+            public Address32 Offset {get;}
             
             public string Value {get;}
 
-            public S Kind => default;
+            public PartRecordKind Kind 
+                => PartRecordKind.Literal;
 
             [MethodImpl(Inline)]
             public LiteralRecord(int Sequence, int HeapSize, int Offset, string Value)
@@ -68,58 +80,15 @@ namespace Z0
                 this.Sequence = Sequence;
                 this.HeapSize = HeapSize;
                 this.Length = Value.Length;
-                this.Offset = Offset;
+                this.Offset = (uint)Offset;
                 this.Value = Value;
             }                        
 
-            public string[] HeaderNames
-                => new string[(int)F.FieldCount]{
-                    nameof(Sequence), 
-                    nameof(HeapSize), 
-                    nameof(Length), 
-                    nameof(Offset), 
-                    nameof(Value)
-                    };
-
             public string Format()
-                => format(this, FieldDelimiter);
+                => format(this, formatter(this), false);
 
-            public string Format(char delimiter)
-                => format(this, delimiter);
+            public void Format(RecordFormatter<F,W> dst)
+                => format(this,dst);
         }            
-
-        public readonly struct LiteralRecordSpec  : IPartRecordSpec<S>
-        {
-            [MethodImpl(Inline)]
-            public static implicit operator PartRecordKind(S src)
-                => src.RecordType;
-
-            public PartRecordKind RecordType
-                => PartRecordKind.Literal;       
-
-            public byte FieldCount
-                => (byte)F.FieldCount;
-            
-            public ReadOnlySpan<string> HeaderFields 
-                => new string[(int)F.FieldCount]{
-                    nameof(Sequence), 
-                    nameof(HeapSize), 
-                    nameof(Length), 
-                    nameof(Offset), 
-                    nameof(Value)
-                    };
-
-            public ReadOnlySpan<byte> FieldWidths 
-                => new byte[(int)F.FieldCount]{12, 12, 12, 12, 12};
-
-            public string HeaderText
-            {
-                [MethodImpl(Inline)]
-                get => text.concat(HeaderFields, FieldWidths);
-            }
-
-            public override string ToString()
-                => (this as ITextual).Format();
-        }
-    }
+   }
 }

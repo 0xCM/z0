@@ -87,6 +87,12 @@ namespace Z0
             where F :unmanaged, Enum
                 => new RecordFormatter<F>(text.build());        
 
+        [MethodImpl(Inline)]
+        public static RecordFormatter<F,W> Formatter<F,W>(char delimiter = FieldDelimiter)
+            where F : unmanaged, Enum
+            where W : unmanaged, Enum
+                => new RecordFormatter<F,W>(text.build(), delimiter);
+
         /// <summary>
         /// Creates a record formatter predicated on a field definition set defined by an enum
         /// </summary>

@@ -13,9 +13,7 @@ namespace Z0
     /// An homogenous mutable 2-tuple
     /// </summary>
     public struct Pair<T> : IPair<Pair<T>,T>
-    {
-        public static Pair<T> Empty => new Pair<T>(default,default);
-        
+    {        
         /// <summary>
         /// The first member
         /// </summary>
@@ -106,5 +104,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static Pair<T> Empty 
+            => new Pair<T>(default,default);
+
     }
 }

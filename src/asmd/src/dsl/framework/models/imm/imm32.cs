@@ -11,14 +11,11 @@ namespace Z0.Asm.Dsl
 
     public readonly struct imm32 : IImmOp32<imm32>
     {
-        public Fixed32 Value {get;}
+        public uint Value {get;}
+
 
         [MethodImpl(Inline)]
         public static implicit operator imm32(uint src)
-            => new imm32(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator imm32(Fixed32 src)
             => new imm32(src);
 
         [MethodImpl(Inline)]
@@ -28,8 +25,26 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public static implicit operator imm32(Fixed16 src)
             => new imm32(src);
+
+
         [MethodImpl(Inline)]
-        public imm32(Fixed32 value)
+        public static bool operator <(imm32 a, imm32 b)
+            => a.Value < b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator >(imm32 a, imm32 b)
+            => a.Value > b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(imm32 a, imm32 b)
+            => a.Value <= b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(imm32 a, imm32 b)
+            => a.Value >= b.Value;
+
+        [MethodImpl(Inline)]
+        public imm32(uint value)
         {
             Value = value;
         }

@@ -8,62 +8,59 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static PartRecords.StringValueField;
-    using static PartRecordFormat;
 
-    using S = PartRecords.StringValueSpec;
-    using F = PartRecords.StringValueField;
+    using F = StringValueField;
+    using W = StringValueWidths;
     using R = PartRecords.StringValueRecord;
+
+    public enum StringValueField : ushort
+    {
+        Sequence = 0,
+        
+        HeapSize = 1,
+
+        Length = 2,
+
+        Offset = 3,
+
+        Value = 4,
+        
+    }
+
+    public enum StringValueWidths : ushort
+    {
+        Sequence = 12,
+        
+        HeapSize = 12,
+
+        Length = 12,
+
+        Offset = 12,
+
+        Value = 12,            
+    }
 
     partial class PartRecords
     {
-        public enum StringValueField : ushort
-        {
-            Sequence = 0,
-            
-            HeapSize = 1,
 
-            Length = 2,
-
-            Offset = 3,
-
-            Value = 4,
-
-            FieldCount = 5,
-        }
-
-        public enum StringValueWidths : ushort
-        {
-            Sequence = 12,
-            
-            HeapSize = 12,
-
-            Length = 12,
-
-            Offset = 12,
-
-            Value = 12,
-
-            FieldCount = 12,
-        }
+        public static RecordFormatter<F,W> formatter(StringValueRecord spec)
+            => Tabular.Formatter<F,W>();
 
         [Op]
-        public static string format(in StringValueRecord src, char delimiter)
+        public static ref readonly RecordFormatter<F,W> format(in StringValueRecord src, in RecordFormatter<F,W> dst, bool eol = true)
         {            
-            var w = widths<StringValueSpec>(src.Kind);
-            var eWidths = Root.literals<StringValueWidths>();
-            var k = count<StringValueSpec>(src.Kind);
-            var dst = Spans.alloc<string>(k);
-            Root.eSeek(dst, Sequence) = text.format(src.Sequence, Root.eSkip(w, Sequence));
-            Root.eSeek(dst, HeapSize) = hex(src.HeapSize, Root.eSkip(w, HeapSize));
-            Root.eSeek(dst, Length) = text.format(src.Length, Root.eSkip(w, Length));
-            Root.eSeek(dst, Offset) = hex(src.Offset, Root.eSkip(w, Offset));
-            Root.eSeek(dst, Value) = src.Value;
-            return text.delimit(dst,delimiter);
-        }        
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.HeapSize, src.HeapSize);
+            dst.Delimit(F.Length, src.Length);
+            dst.Delimit(F.Offset, src.Offset);
+            dst.Delimit(F.Value, src.Value);
+            if(eol)
+                dst.EmitEol();
+            return ref dst;
+        }
 
-        public readonly struct StringValueRecord : IPartRecord<R,S,F>
-        {
+        public readonly struct StringValueRecord : IPartRecord<F,R>
+        {            
             public int Sequence {get;}
 
             public int HeapSize {get;}
@@ -74,7 +71,7 @@ namespace Z0
 
             public string Value {get;}
 
-            public S Kind => default;
+            public PartRecordKind Kind => PartRecordKind.String;
 
             [MethodImpl(Inline)]
             public StringValueRecord(int Sequence, int HeapSize, int Offset, string Value)
@@ -86,54 +83,11 @@ namespace Z0
                 this.Value = Value;
             }                     
 
-            public string[] HeaderNames
-                => new string[(int)F.FieldCount]{
-                    nameof(Sequence), 
-                    nameof(HeapSize), 
-                    nameof(Length), 
-                    nameof(Offset), 
-                    nameof(Value)
-                    };
-
             public string Format()
-                => format(this, FieldDelimiter);
+                => format(this, formatter(this), false);
 
-            public string Format(char delimiter)
-                => format(this, delimiter);
+            public void Format(RecordFormatter<F,W> dst)
+                => format(this,dst);            
         }
-
-        public readonly struct StringValueSpec : IPartRecordSpec<S>
-        {
-            [MethodImpl(Inline)]
-            public static implicit operator PartRecordKind(S src)
-                => src.RecordType;
-            
-            public PartRecordKind RecordType 
-                => PartRecordKind.String;
-
-            public byte FieldCount 
-                => (byte)F.FieldCount;
-            
-            public ReadOnlySpan<string> HeaderFields 
-                => new string[(int)F.FieldCount]{
-                    nameof(Sequence), 
-                    nameof(HeapSize), 
-                    nameof(Length), 
-                    nameof(Offset), 
-                    nameof(Value)
-                    };
-
-            public ReadOnlySpan<byte> FieldWidths 
-                => new byte[(int)F.FieldCount]{12, 12, 12, 12, 12};            
-
-            public string HeaderText
-            {
-                [MethodImpl(Inline)]
-                get => text.concat(HeaderFields, FieldWidths);
-            }
-
-            public override string ToString()
-                => (this as ITextual).Format();
-        }        
     }
 }

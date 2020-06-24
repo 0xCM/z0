@@ -35,25 +35,24 @@ namespace Z0.Asm
                 asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
             }    
         }
+        
+        public void res_bytes()
+        {
+            var src = FilePath.Define(@"J:\dev\projects\z0-logs\res\bin\lib\netcoreapp3.0\z0.res.bytes.dll");
+            Demands.insist(src.Exists);
+            var svc = AccessorCapture.Service(Context);
+            var captured = svc.Capture(src, CasePath(FileExtensions.Asm));
+            var addresses = CasePath(FileExtensions.Csv);            
+            svc.CollectAddresses(captured, addresses);
 
-        public void resource_method_capture()
+        }
+
+        
+        public void capture_known_resources()
         {
             var svc = AccessorCapture.Service(Context);
-            var accessors = span(svc.CaptureAccessors(CasePath(FileExtensions.Asm)));
-            using var addresses = CaseWriter(FileExtensions.Csv);
-            addresses.WriteLine(text.concat("Addresss".PadRight(16),  " | ", "Accessor"));
-            for(var i=0; i<accessors.Length; i++)
-            {
-                ref readonly var accessor = ref skip(accessors, i);
-                var f = accessor.Code.Function;
-                var moves = AsmAnalyzer.moves(f);
-                for(var j =0; j<moves.Length; j++)
-                {
-                    ref readonly var move = ref skip(moves,j);
-                    var description = text.concat(move.Src.ToAddress(), " | ", accessor.Code.Code.OpUri);
-                    addresses.WriteLine(description);
-                }
-            }            
+            var accessors = span(svc.CaptureKnown(CasePath(FileExtensions.Asm)));
+            svc.CollectAddresses(accessors,CasePath(FileExtensions.Csv));
         }
 
         public void numeric_literals()

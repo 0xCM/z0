@@ -9,11 +9,10 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static Konst;
-    using static PartRecords.ConstantField;
 
-    using R = PartRecords.ConstantRecord;
     using F = PartRecords.ConstantField;
-    using S = PartRecords.ConstantRecordSpec;
+    using W = PartRecords.ConstantFieldWidth;
+    using R = PartRecords.ConstantRecord;
 
     partial class PartRecords
     {
@@ -25,25 +24,47 @@ namespace Z0
 
             DataType = 2,
 
-            Value = 3,
+            HeapSize = 3,
 
-            FieldCount = 4,
+            Offset = 4,
+
+            Code = 5,
+            
         }
 
-        [Op]
-        public static string format(in ConstantRecord src, char delimiter)
+        public enum ConstantFieldWidth : ushort
+        {
+            Sequence = 12,
+
+            Parent = 20,
+
+            DataType = 20,
+
+            HeapSize = 12,
+
+            Offset = 12,
+
+            Code = 30,                       
+
+        }
+
+        public static RecordFormatter<F,W> formatter(ConstantRecord spec)
+            => Tabular.Formatter<F,W>();
+
+        public static ref readonly RecordFormatter<F,W> format(in ConstantRecord src, in RecordFormatter<F,W> dst, bool eol = true)
         {            
-            var w = widths(src.Kind);
-            var k = count(src.Kind);
-            var dst = Spans.alloc<string>(k);
-            Root.eSeek(dst, Sequence) = text.format(src.Sequence, Root.eSkip(w, Sequence));
-            Root.eSeek(dst, Parent) = text.format(src.Parent, Root.eSkip(w, Parent));
-            Root.eSeek(dst, DataType) = text.format(src.DataType, Root.eSkip(w, DataType));
-            Root.eSeek(dst, Value) = text.format(src.Value, Root.eSkip(w, Value));
-            return text.delimit(dst, delimiter);
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.Parent, src.Parent);
+            dst.Delimit(F.DataType, src.DataType);
+            dst.Delimit(F.HeapSize, src.HeapSize);
+            dst.Delimit(F.Offset, src.Offset);
+            dst.Delimit(F.Code, src.Code);
+            if(eol)
+                dst.EmitEol();
+            return ref dst;
         }        
 
-        public readonly struct ConstantRecord : IPartRecord<R,S,F>
+        public readonly struct ConstantRecord : IPartRecord<F,R>
         {            
             public int Sequence {get;}
 
@@ -51,65 +72,31 @@ namespace Z0
 
             public ConstantTypeCode DataType {get;}
 
-            public BlobRecord Value {get;}
+            public int HeapSize {get;}
 
-            public S Kind => default;
+            public Address32 Offset {get;}
+            
+            public BinaryCode Code {get;}
+
+            public PartRecordKind Kind 
+                => PartRecordKind.Constant;
 
             [MethodImpl(Inline)]
-            internal ConstantRecord(int Sequence, string Parent, ConstantTypeCode Type, BlobRecord Value)
+            internal ConstantRecord(int Sequence, string Parent, ConstantTypeCode Type, BlobRecord data)
             {
                 this.Sequence = Sequence;
                 this.Parent = Parent;
                 this.DataType = Type;
-                this.Value = Value;
+                this.HeapSize = data.HeapSize;
+                this.Offset = data.Offset;
+                this.Code =  data.Value;
             }            
 
-            public string[] HeaderNames
-                => new string[(int)F.FieldCount]{
-                    nameof(Sequence), 
-                    nameof(Parent), 
-                    nameof(DataType), 
-                    nameof(Value),                     
-                    };
-
             public string Format()
-                => format(this, FieldDelimiter);
+                => format(this, formatter(this), false);
 
-            public string Format(char delimiter)
-                => format(this, delimiter);
-        }
-
-        public readonly struct ConstantRecordSpec  : IPartRecordSpec<S>
-        {
-            [MethodImpl(Inline)]
-            public static implicit operator PartRecordKind(S src)
-                => src.RecordType;
-
-            public PartRecordKind RecordType 
-                => PartRecordKind.Constant;            
-
-            public byte FieldCount 
-                => (byte)F.FieldCount;
-            
-            public ReadOnlySpan<string> HeaderFields 
-                => new string[(int)F.FieldCount]{
-                    nameof(Sequence), 
-                    nameof(Parent), 
-                    nameof(DataType), 
-                    nameof(Value),                     
-                    };
-
-            public ReadOnlySpan<byte> FieldWidths 
-                => new byte[(int)F.FieldCount]{20,20,20,20};
-
-            public string HeaderText
-            {
-                [MethodImpl(Inline)]
-                get => text.concat(HeaderFields, FieldWidths);
-            }
-
-            public override string ToString()
-                => (this as ITextual).Format();
+            public void Format(RecordFormatter<F,W> dst)
+                => format(this,dst);
         }
     }
 }

@@ -19,8 +19,9 @@ namespace Z0
     {
         int Counter;
 
-        public Interval<T> Domain {get;}
+        public readonly Interval<T> Domain;
 
+        [MethodImpl(Inline)]
         public static Bin<T> operator ++(Bin<T> src)
             => src.Increment();
 

@@ -11,19 +11,41 @@ namespace Z0
 
     using static Konst;
 
-
     public readonly struct RecordFormatter<F> : IRecordFormatter<F>
         where F : unmanaged, Enum
     {        
+        public static RecordFormatter<F> Default 
+            => new RecordFormatter<F>(text.build());
+                    
         readonly StringBuilder State;
 
         readonly char Delimiter;
+        
+        public static implicit operator string(RecordFormatter<F> src)
+            => src.Format();
         
         [MethodImpl(Inline)]
         public RecordFormatter(StringBuilder state, char delimiter = FieldDelimiter)
         {
             State = state;
             Delimiter = delimiter;
+        }
+
+        public void EmitHeader(bool eol = true)
+        {
+            var header = Tabular.Header<F>();    
+            for(var i=0; i<header.Fields.Length; i++)
+                Delimit(header.Fields[i], header.Labels[i]);
+            if(eol)
+                State.Append(Eol);
+        }
+
+        public string HeaderText
+            => Tabular.HeaderText<F>();
+
+        public void EmitEol()
+        {
+            State.Append(Eol);
         }
 
         public void Append(F f, object content)
@@ -77,8 +99,13 @@ namespace Z0
             State.Append(Render(content).PadRight(Tabular.Width(f)));
         }
 
-        public string Render()
-            => State.ToString();
+        public string Render(bool reset = true)
+        {            
+            var result = State.ToString();
+            if(reset)
+                State.Clear();
+            return result;
+        }            
 
         public void Reset()
             => State.Clear();

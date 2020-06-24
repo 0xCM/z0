@@ -10,15 +10,10 @@ namespace Z0
     
     using static Konst;
 
-    public static class Bin
+    public readonly struct Bins
     {
         [MethodImpl(Inline)]
-        public static Bin<T> define<T>(in Interval<T> domain, int count)
-            where T : unmanaged
-                => new Bin<T>(domain, count);
-
-        [MethodImpl(Inline)]
-        public static ulong sum<T>(this ReadOnlySpan<Bin<T>> bins)
+        public static ulong sum<T>(ReadOnlySpan<Bin<T>> bins)
             where T : unmanaged
         {
             var sum = 0ul;

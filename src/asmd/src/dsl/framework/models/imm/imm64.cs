@@ -11,15 +11,12 @@ namespace Z0.Asm.Dsl
 
     public readonly struct imm64 : IImmOp64<imm64>
     {
-        public Fixed64 Value {get;}
+        public ulong Value {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator imm64(ulong src)
             => new imm64(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator imm64(Fixed64 src)
-            => new imm64(src);
 
         [MethodImpl(Inline)]
         public static implicit operator imm64(Fixed8 src)
@@ -30,11 +27,23 @@ namespace Z0.Asm.Dsl
             => new imm64(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator imm64(Fixed32 src)
-            => new imm64(src);
+        public static bool operator <(imm64 a, imm64 b)
+            => a.Value < b.Value;
 
         [MethodImpl(Inline)]
-        public imm64(Fixed64 value)
+        public static bool operator >(imm64 a, imm64 b)
+            => a.Value > b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(imm64 a, imm64 b)
+            => a.Value <= b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(imm64 a, imm64 b)
+            => a.Value >= b.Value;
+
+        [MethodImpl(Inline)]
+        public imm64(ulong value)
         {
             Value = value;
         }

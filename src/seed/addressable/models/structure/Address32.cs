@@ -38,6 +38,10 @@ namespace Z0
             => new Address32(offset);
 
         [MethodImpl(Inline)]
+        public static implicit operator Address32(int src)
+            => new Address32((uint)src);
+
+        [MethodImpl(Inline)]
         public static implicit operator Address32(uint src)
             => new Address32(src);
 

@@ -8,15 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
-    using S = PartRecords.ResourceSpec;
-    
-    public enum ResourceField : uint
-    {
-
-
-    }
-    
+        
     partial class PartRecords
     {
         public readonly struct ResourceRecord
@@ -28,8 +20,6 @@ namespace Z0
             public string Attribute {get;}
 
             public string Implementation {get;}
-
-            public S Kind => default;
 
             [MethodImpl(Inline)]
             internal ResourceRecord(string Name, string Attribute, long Offset, string Implementation)
@@ -58,18 +48,5 @@ namespace Z0
             }
 
         }                    
-
-        public readonly struct ResourceSpec : IPartRecordSpec<ResourceSpec>
-        {
-            [MethodImpl(Inline)]
-            public static implicit operator PartRecordKind(ResourceSpec src)
-                => src.RecordType;
-
-            public PartRecordKind RecordType 
-                => PartRecordKind.ManifestResource;  
-
-            public override string ToString()
-                => (this as ITextual).Format();
-        }
     }
 }

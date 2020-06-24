@@ -44,14 +44,14 @@ namespace Z0.Asm
 
     }
 
-    public interface IImmOp32<F> : IImmOp<F,W32,Fixed32>, IImmOp<W32,Address32>
+    public interface IImmOp32<F> : IImmOp<F,W32,uint>, IImmOp<W32,Address32>
         where F : unmanaged, IImmOp32<F>
     {
         
 
     }
 
-    public interface IImmOp64<F> : IImmOp<F,W64,Fixed64>, IImmOp<W64,Address64>
+    public interface IImmOp64<F> : IImmOp<F,W64,ulong>, IImmOp<W64,Address64>
         where F : unmanaged, IImmOp64<F>
     {        
 

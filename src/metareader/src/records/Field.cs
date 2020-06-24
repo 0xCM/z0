@@ -8,130 +8,77 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static PartRecords.FieldRecordField;
 
-    using K = PartRecords.FieldRecordSpec;
-    using F = PartRecords.FieldRecordField;
+    using F = FieldRecordField;
+    using W = FieldRecordFieldWidth;
     using R = PartRecords.FieldRecord;
+
+    public enum FieldRecordField : ushort
+    {
+        Sequence,
+
+        Name,
+
+        SigCode, 
+
+        Attributes,
+    }
+
+    public enum FieldRecordFieldWidth : ushort
+    {
+        Sequence = 12,
+
+        Name = 60,
+
+        SigCode = 30,                       
+
+        Attributes = 10,
+    }
 
     partial class PartRecords
     {
-        public enum FieldRecordField : ushort
-        {
-            Sequence = 0,
-            
-            Rva = 1,
 
-            Offset = 2,
+        public static RecordFormatter<F,W> formatter(FieldRecord spec)
+            => Tabular.Formatter<F,W>();
 
-            Name = 3,
-
-            Signature = 4,
-
-            Attributes = 5,
-
-            Marshalling = 6,
-            
-            FieldCount = 7,
-        }
-
-        [Op]
-        public static string format(in FieldRecord src, char delimiter)
+        public static ref readonly RecordFormatter<F,W> format(in FieldRecord src, in RecordFormatter<F,W> dst, bool eol = true)
         {            
-            var w = widths(src.Kind);
-            var k = count(src.Kind);
-            var dst = Spans.alloc<string>(k);
-            Root.eSeek(dst, Sequence) = text.format(src.Sequence, Root.eSkip(w, Sequence));
-            Root.eSeek(dst, Rva) = hex(src.Rva, Root.eSkip(w,Rva));
-            Root.eSeek(dst, Offset) = hex(src.Offset, Root.eSkip(w, Offset));
-            Root.eSeek(dst, Name) = text.format(src.Name, Root.eSkip(w, Name));
-            Root.eSeek(dst, Signature) = text.format(src.Signature, Root.eSkip(w, Signature));
-            Root.eSeek(dst, Attributes) = text.format(src.Attributes, Root.eSkip(w, Attributes));
-            Root.eSeek(dst, Marshalling) = text.format(src.Marshalling, Root.eSkip(w, Marshalling));
-            return text.delimit(dst,delimiter);
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.Name, src.Name);
+            dst.Delimit(F.SigCode, src.SigCode);
+            dst.Delimit(F.Attributes, src.Attributes);
+            if(eol)
+                dst.EmitEol();
+            return ref dst;
         }        
 
-        public readonly struct FieldRecord : IPartRecord<R,K,F>
+        public readonly struct FieldRecord : IPartRecord<F,R>
         {
             public int Sequence {get;}
+
+            public string Name {get;}
             
-            public int Rva {get;}
-
-            public int Offset {get;}
-
-            public LiteralRecord Name {get;}
-
-            public BlobRecord Signature {get;}
+            public BinaryCode SigCode {get;}
 
             public string Attributes {get;}
 
-            public string Marshalling {get;}
-
-            public K Kind => default;
+            public PartRecordKind Kind 
+                => PartRecordKind.Field;
 
             [MethodImpl(Inline)]
-            internal FieldRecord(int Sequence, int Rva, int Offset, LiteralRecord Name, BlobRecord Signature, string Attributes, string Marshalling)
+            public FieldRecord(int Sequence, LiteralRecord Name, BlobRecord SigCode, string Attributes)
             {
                 this.Sequence = Sequence;
-                this.Rva = Rva == -1 ? 0 : Rva;
-                this.Offset = Offset == -1 ? 0 : Offset;
-                this.Name = Name;
-                this.Signature = Signature;
+                this.Name = Name.Value;
+                this.SigCode = SigCode.Value;
                 this.Attributes = Attributes;
-                this.Marshalling = Marshalling;
             }            
 
-            public string[] HeaderNames
-                => new string[(int)F.FieldCount]{
-                    nameof(Sequence), 
-                    nameof(Rva), 
-                    nameof(Offset), 
-                    nameof(Name), 
-                    nameof(Signature),
-                    nameof(Attributes),
-                    nameof(Marshalling),
-                    };
-
-            public string Format(char delimiter)
-                => format(this,delimiter);
-
             public string Format()
-                => format(this, FieldDelimiter);
-        }
+                => format(this, formatter(this), false);
 
-        public readonly struct FieldRecordSpec  : IPartRecordSpec<FieldRecordSpec>
-        {
-            [MethodImpl(Inline)]
-            public static implicit operator PartRecordKind(FieldRecordSpec src)
-                => src.RecordType;
-
-            public PartRecordKind RecordType => PartRecordKind.Field;            
-
-            public byte FieldCount => (byte)F.FieldCount;
-            
-            public ReadOnlySpan<string> HeaderFields 
-                => new string[(int)F.FieldCount]{
-                    nameof(Sequence), 
-                    nameof(Rva), 
-                    nameof(Offset), 
-                    nameof(Name), 
-                    nameof(Signature),
-                    nameof(Attributes),
-                    nameof(Marshalling),
-                    };
-            
-            public ReadOnlySpan<byte> FieldWidths 
-                => new byte[(int)F.FieldCount]{12, 12, 12, 30, 30, 10, 10,};
-
-            public string HeaderText
-            {
-                [MethodImpl(Inline)]
-                get => text.concat(HeaderFields, FieldWidths);
-            }
-
-            public override string ToString()
-                => (this as ITextual).Format();
-
+            public void Format(RecordFormatter<F,W> dst)
+                => format(this,dst);
         }
     }
 }

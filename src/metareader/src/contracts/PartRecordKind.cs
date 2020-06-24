@@ -21,5 +21,7 @@ namespace Z0
         Literal = 6,
 
         MethodDefinition = 7,
+
+        FieldRva = 8
     }
 }

@@ -23,5 +23,6 @@ namespace Z0
 
         ReadOnlySpan<FieldRecord> ReadFields();
         
+        ReadOnlySpan<FieldRvaRecord> ReadFieldRva();
     }
 }

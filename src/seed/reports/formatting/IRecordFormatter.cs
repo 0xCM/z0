@@ -8,7 +8,7 @@ namespace Z0
 
     public interface IRecordFormatter
     {
-        string Render();
+        string Render(bool reset = true);
 
         void Reset();
     }

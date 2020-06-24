@@ -8,7 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Text;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Konst;
 
@@ -24,6 +23,10 @@ namespace Z0
 
         readonly W[] Widths;
         
+        public static implicit operator string(RecordFormatter<F,W> src)
+            => src.Format();
+
+
         [MethodImpl(Inline)]
         public RecordFormatter(StringBuilder state, char delimiter = FieldDelimiter)
         {
@@ -31,6 +34,24 @@ namespace Z0
             Delimiter = delimiter;
             Fields = Root.literals<F>();
             Widths = Root.literals<W>();
+        }
+
+        public void EmitHeader(bool eol = true)
+        {
+            var header = Tabular.Header<F>();    
+            for(var i=0; i<header.Fields.Length; i++)
+                Delimit(header.Fields[i], header.Labels[i]);
+            
+            if(eol)
+                EmitEol();
+        }
+        
+        public string HeaderText
+            => Tabular.HeaderText<F>();
+
+        public void EmitEol()
+        {
+            State.Append(Eol);
         }
 
         public ref readonly W this[F field]
@@ -68,19 +89,16 @@ namespace Z0
                 return content.ToString();
         }
 
-        [MethodImpl(Inline)]
         public void Delimit(F field, object content)
         {            
             State.Append(rspace(Delimiter));            
             State.Append(Render(content).PadRight(Width(field)));
         }
 
-        [MethodImpl(Inline)]
         public void DelimitSome<T>(F field, T src)
             where T : unmanaged, Enum
                 => DelimitField(field, src.IsSome()  ? src.ToString() : text.Empty, Delimiter);        
 
-        [MethodImpl(Inline)]
         public void Delimit<T>(F field, T src)
             where T : ITextual
         {
@@ -94,8 +112,13 @@ namespace Z0
             State.Append(Render(content).PadRight(Width(f)));
         }
 
-        public string Render()
-            => State.ToString();
+        public string Render(bool clear = true)
+        {            
+            var result = State.ToString();
+            if(clear)
+                State.Clear();
+            return result;
+        }            
 
         public void Reset()
             => State.Clear();
@@ -108,6 +131,5 @@ namespace Z0
         
         public override string ToString()
             => Format();
-
     }
 }

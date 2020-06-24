@@ -12,7 +12,6 @@ namespace Z0
     using static Konst;
 
     public readonly ref struct Triples<T>
-        where T : unmanaged
     {
         readonly Span<Triple<T>> Data;
 

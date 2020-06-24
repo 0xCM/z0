@@ -10,16 +10,16 @@ namespace Z0
 
     public readonly struct PartRecordSpecs
     {
-        public static StringValueSpec Strings => default;
+        public static StringValueRecord Strings => default;
         
-        public static BlobSpec Blobs => default;
+        public static BlobRecord Blobs => default;
         
-        public static ConstantRecordSpec Constants => default;
+        public static ConstantRecord Constants => default;
 
-        public static FieldRecordSpec Fields => default;
+        public static FieldRecord Fields => default;
 
-        public static ResourceSpec Resources => default;
+        public static LiteralRecord Literals => default;
 
-        public static LiteralRecordSpec Literals => default;
+        public static FieldRvaRecord FieldRva => default;
     }
 }

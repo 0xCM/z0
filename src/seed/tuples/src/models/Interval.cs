@@ -87,17 +87,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval(T left, bool leftclosed, T right, bool rightclosed)
         {
-            this.Left = left;
-            this.Right = right;
-            this.Kind = Classify(leftclosed,rightclosed);
+            Left = left;
+            Right = right;
+            Kind = Classify(leftclosed,rightclosed);
         }
 
         [MethodImpl(Inline)]
         public Interval(T left, T right, K kind)
         {
-            this.Left = left;
-            this.Right = right;
-            this.Kind = kind;
+            Left = left;
+            Right = right;
+            Kind = kind;
         }
 
         public ulong Width

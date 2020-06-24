@@ -13,19 +13,18 @@ namespace Z0
     partial class PartReader
     {                
         internal static ReadOnlySpan<ConstantRecord> constants(in ReaderState state)
-        {
+        {            
             var reader = state.Reader;
             var count = ConstantCount(state);
             var dst = Spans.alloc<ConstantRecord>(count);
-
-            for (int i = 1; i <= count; i++)
+            for(var i=1; i<= count; i++)
             {
                 var entry = reader.GetConstant(ConstantHandle(i));
-                Root.seek(dst,i-1) = new ConstantRecord(
+                Root.seek(dst,i - 1) = new ConstantRecord(
                     Sequence: i,
                     Parent: token(state, entry.Parent),
                     Type: entry.TypeCode,
-                    Value: record(state, entry.Value,i)
+                    data: record(state, entry.Value,i)
                 );
             }
 

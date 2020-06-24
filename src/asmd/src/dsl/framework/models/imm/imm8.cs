@@ -34,6 +34,22 @@ namespace Z0.Asm.Dsl
             => new imm8(src);
 
         [MethodImpl(Inline)]
+        public static bool operator <(imm8 a, imm8 b)
+            => a.Value < b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator >(imm8 a, imm8 b)
+            => a.Value > b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(imm8 a, imm8 b)
+            => a.Value <= b.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(imm8 a, imm8 b)
+            => a.Value >= b.Value;
+
+        [MethodImpl(Inline)]
         public imm8(Fixed8 value)
         {
             Value = value;

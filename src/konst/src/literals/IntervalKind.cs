@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    
     /// <summary>
     /// Defines interval classifications predicated on endpoint containment
     /// </summary>
-    public enum IntervalKind : uint
+    public enum IntervalKind : byte
     {
         Closed = 0,
         
