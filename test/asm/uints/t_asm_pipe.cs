@@ -54,7 +54,7 @@ namespace Z0.Asm
             var gSrc = ApiHostUri.FromHost(typeof(gmath));
             var id = PartId.GMath;   
             var paths = AppPaths.ForApp(PartId.Control);
-            var capture = AsmCheck.CaptureArchive(paths.AppCaptureDir);
+            var capture = AsmCheck.CaptureArchive(paths.AppCaptureRoot);
             var archive = Archives.Services.HexArchive(capture.CodeDir);
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();

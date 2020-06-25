@@ -17,13 +17,4 @@ namespace Z0
         /// <param name="src">The source value</param>
         string Format(T src);
     } 
-
-    public interface IValueFormatter<T> : IFormatter<T>
-        where T : struct
-    {
-        string Format(in T src);
-
-        string IFormatter<T>.Format(T src)
-            => Format(src);
-    }
 }

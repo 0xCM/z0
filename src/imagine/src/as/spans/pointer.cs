@@ -10,11 +10,10 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct As
     {
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public unsafe static T* pointer<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {

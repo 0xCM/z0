@@ -68,7 +68,7 @@ namespace Z0
             this.GlobalPointerTableSize = GlobalPointerTableSize;
         }
 
-        public static void format(in HeaderInfo src, in RecordFormatter<F> dst, bool eol = true)
+        public static void format(in HeaderInfo src, IDatasetFormatter<F> dst, bool eol = true)
         {
             dst.Delimit(F.FileName, src.FileName);
             dst.Delimit(F.Section, src.Section);
@@ -95,8 +95,8 @@ namespace Z0
             return dst;
         }
 
-        public static RecordFormatter<F> Formatter 
-            => RecordFormatter<F>.Default;
+        public static IDatasetFormatter<F> Formatter 
+            => DatasetFormatter<F>.Default;
     }
     public class MethodBodyInfo
     {

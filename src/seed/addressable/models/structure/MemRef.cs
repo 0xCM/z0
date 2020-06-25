@@ -36,7 +36,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe static MemRef memref(ReadOnlySpan<byte> src)
-            => new MemRef(Root.gptr(Root.head(src)), src.Length);
+            => new MemRef(As.point(Root.head(src)), src.Length);
                 
         ulong Lo
         {

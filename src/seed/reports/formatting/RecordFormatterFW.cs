@@ -11,11 +11,11 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct RecordFormatter<F,W> : IRecordFormatter<F>
+    public readonly struct RecordFormatter<F,W> : IDatasetFormatter<F>
         where F : unmanaged, Enum
         where W : unmanaged, Enum
     {        
-        readonly StringBuilder State;
+        public StringBuilder State {get;}
 
         readonly char Delimiter;
 

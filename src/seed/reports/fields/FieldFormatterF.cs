@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public struct FieldFormatter<F> : ITextual
+    public struct FieldFormatter<F> : IFieldFormatter<F>
         where F : unmanaged, Enum
     {        
         readonly StringBuilder Target;
@@ -24,6 +24,9 @@ namespace Z0
             Delimiter = delimiter;
         }
 
+        public void EmitEol()
+            => Target.Append(Eol);        
+        
         public void Append(F f, object content)
             => Target.Append(Render(content).PadRight(Tabular.Width(f)));
 

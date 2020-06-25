@@ -107,7 +107,7 @@ namespace Z0.Asm
         CommandRecordSets<Mnemonic> ProcessOpCodes(params PartId[] parts)
         {            
             var paths = Context.AppPaths.ForApp(PartId.Control);
-            var capture = CaptureArchive(paths.AppCaptureDir);
+            var capture = CaptureArchive(paths.AppCaptureRoot);
             var archive = UriBitsArchive(capture.CodeDir);
 
             for(var i=0; i<parts.Length; i++)

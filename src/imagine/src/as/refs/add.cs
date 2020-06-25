@@ -28,6 +28,7 @@ namespace Z0
         public static ref T add<T>(in T src, int offset)
             => ref Add(ref edit(src), offset);
 
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte add<T>(W8 w, in T src, int count)
             => ref Add(ref edit<T,byte>(src), count);

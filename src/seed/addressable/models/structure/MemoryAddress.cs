@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     
-    public interface IMemoryAddress  : IAddress<MemoryAddress,W64,ulong>, IAddressable, IIdentification<MemoryAddress>
+    public interface IMemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable, IIdentification<MemoryAddress>
     {
 
     }
@@ -20,8 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe MemoryAddress From<T>(in T src)
-            where T : unmanaged
-                => (T*)Root.pvoid(ref Root.edit(in src));        
+            => Pointed.pvoid(ref Root.edit(in src));        
 
         [MethodImpl(Inline)]
         public static unsafe MemoryAddress From(ulong src)
@@ -116,7 +115,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(ushort src)
             => Addresses.address(src);
-
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(short src)

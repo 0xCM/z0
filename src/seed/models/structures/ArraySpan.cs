@@ -169,7 +169,7 @@ namespace Z0
             ref readonly var input = ref head(src);
             ref var target = ref head(dst);
             for(var i=0; i<src.Length; i++)
-                Root.seek(ref target,i) = (ulong)Root.pvoid(ref cell(src, i));
+                Root.seek(ref target,i) = (ulong)Pointed.pvoid(ref cell(src, i));
         }
     
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]

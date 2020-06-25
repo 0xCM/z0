@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    
     /// <summary>
-    /// Defines identifiers corresponding to the hex digits 0,..,7
+    /// Defines identifiers corresponding to the hex digits 0,..,3
     /// </summary>
-    public enum Hex3 : byte
+    public enum HexKind2 : byte
     {
         /// <summary> 
         /// Identifies the hex value 0x00 := 0
@@ -30,25 +28,5 @@ namespace Z0
         /// Identifies the hex value 0x03 := 3
         /// </summary> 
         x3 = 0x3,
-
-        /// <summary> 
-        /// Identifies the hex value 0x04 := 4
-        /// </summary> 
-        x4 = 0x4,
-
-        /// <summary> 
-        /// Identifies the hex value 0x05 := 5
-        /// </summary> 
-        x5 = 0x5,
-
-        /// <summary> 
-        /// Identifies the hex value 0x06 := 6
-        /// </summary> 
-        x6 = 0x6,
-
-        /// <summary> 
-        /// Identifies the hex value 0x07 := 7
-        /// </summary> 
-        x7 = 0x7,
     }
 }

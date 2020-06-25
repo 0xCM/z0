@@ -22,7 +22,7 @@ namespace Z0
 
         public FolderPath LogRoot {get;}
 
-        public FolderPath DataRoot {get;}
+        public FolderPath TrackedDataRoot {get;}
 
         [MethodImpl(Inline)]
         public static TAppPaths Init(PartId id, FolderPath log = null, FolderPath data = null)
@@ -33,7 +33,7 @@ namespace Z0
         {
             AppId = id;
             LogRoot = log;
-            DataRoot = data;
+            TrackedDataRoot = data;
         }
     }
 }

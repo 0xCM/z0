@@ -23,15 +23,6 @@ namespace Z0
             => new IntPtr(p);
 
         /// <summary>
-        /// Converts a generic reference into a void pointer
-        /// </summary>
-        /// <param name="src">The memory reference</param>
-        /// <typeparam name="T">The type of the referenced data</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe void* pvoid<T>(in T src)
-            => AsPointer(ref edit(src)); 
-
-        /// <summary>
         /// Presents a generic reference as a generic pointer
         /// </summary>
         /// <param name="src">The memory reference</param>
@@ -53,7 +44,6 @@ namespace Z0
             where T : unmanaged
                 => ptr(ref edit(skip(src, offset)));
 
-
         /// <summary>
         /// Presents a generic reference r:T as a generic pointer p:T
         /// </summary>
@@ -65,15 +55,5 @@ namespace Z0
             where T : unmanaged
             where P : unmanaged
                 => (P*)AsPointer(ref edit(r));
-
-        /// <summary>
-        /// Presents a generic reference as a byte pointer
-        /// </summary>
-        /// <param name="r">The memory reference</param>
-        /// <typeparam name="T">The source reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe byte* pbyte<T>(in T r)
-            where T : unmanaged
-                => ptr<T,byte>(ref edit(r));
     }
 }

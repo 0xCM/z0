@@ -14,11 +14,6 @@ namespace Z0
     public readonly struct Addresses : IApiHost<Addresses>
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe MemoryAddress reference<T>(in T src)
-            where T : unmanaged
-                => Root.gptr<T>(src);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public unsafe static ReadOnlySpan<T> read<T>(MemoryAddress location, int count)
             where T : unmanaged
         {
@@ -26,6 +21,10 @@ namespace Z0
             ref var first = ref Unsafe.AsRef<T>(pFirst);
             return MemoryMarshal.CreateReadOnlySpan<T>(ref first, count);      
         }        
+
+        [MethodImpl(Inline), Op]
+        public static unsafe MemoryAddress location<T>(in T src)
+            => As.pvoid(src);
 
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(ulong src)

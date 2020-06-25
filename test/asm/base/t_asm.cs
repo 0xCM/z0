@@ -58,7 +58,7 @@ namespace Z0.Asm
         protected MemberCode[] ReadHostBits(ApiHostUri host)
         {            
             var paths = AppPaths.ForApp(PartId.Control);
-            var root = paths.AppCaptureDir;
+            var root = paths.AppCaptureRoot;
             var capture = Archives.Services.CaptureArchive(root);
             return UriCodeReader.Service.Read(capture.HexPath(host)).ToArray();
         }

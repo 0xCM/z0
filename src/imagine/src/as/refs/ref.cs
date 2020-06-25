@@ -23,6 +23,11 @@ namespace Z0
             where T : unmanaged
                 => ref AsRef<T>(ptr);
 
+        [MethodImpl(Inline)]
+        public static unsafe ref T @ref<S,T>(S* pSrc)            
+            where S : unmanaged
+                => ref @as<S,T>(ref @ref<S>(pSrc));
+                
         /// <summary>
         /// Presents a T-reference as a byte reference
         /// </summary>

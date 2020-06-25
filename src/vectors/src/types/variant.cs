@@ -11,129 +11,17 @@ namespace Z0
     
     using static Konst;
     using static Vectors;
+    using Api = Variant;
 
     using NK = NumericKind;
     
-    public interface IVariant
+    public readonly struct variant : IVariant<variant>
     {
-        /// <summary>
-        /// The number of bits that are used to store the enclosed data
-        /// </summary>
-        int DataWidth {get;}
+        internal readonly Vector128<ulong> data;
 
-        /// <summary>
-        /// The numeric data type if unsegmented or, if segmented, the numeric cell kind
-        /// </summary>
-        NK CellKind {get;}
-
-        /// <summary>
-        /// If covering scalar data, the cell count will always be 1; when blocked or vector data 
-        /// is enclosed the cell count will vary based on the specific type
-        /// </summary>
-        int CellCount 
-            => 1;
-
-        /// <summary>
-        /// If covering scalar data, will specify the width of the scalar type; otherwise,
-        /// it will specify the width of a vector or block cell
-        /// </summary>
-        int CellWidth
-            => DataWidth;
-
-        /// <summary>
-        /// For scalar data this bit will always be off; otherwise, it will be on
-        /// </summary>
-        bool Segmented 
-            => CellWidth < DataWidth;        
-    }
-
-    public interface IVariant<V>  : IVariant, IEquatable<V>, ITextual<V>
-        where V : unmanaged, IVariant<V>
-    {
-
-    }
-
-    public interface IScalarVariant<V> : IVariant<V>
-        where V : unmanaged, IScalarVariant<V>
-    {
-
-    }
-
-    [StructLayout(LayoutKind.Sequential, Size = 16)]
-    public readonly struct variant : IScalarVariant<variant>
-    {
-        public static variant Zero => FromScalar(0);
-
-        readonly Vector128<ulong> data;
+        public static variant Zero 
+            => default;
         
-        [MethodImpl(Inline)]
-        public static variant FromGeneric<T>(T src)
-            where T : unmanaged
-                => new variant(Store((ulong)Cast.to<T,ulong>(src), NumericKinds.kind<T>(), (uint)BitSize.measure<T>()));
-
-        [MethodImpl(Inline)]
-        public static variant FromScalar(sbyte src)
-            => new variant(src);
-
-        [MethodImpl(Inline)]
-        public static variant FromScalar(byte src)
-            => new variant(src);
-
-        [MethodImpl(Inline)]
-        public static variant FromScalar(short src)
-            => new variant(src);
-
-        [MethodImpl(Inline)]
-        public static variant FromScalar(ushort src)
-            => new variant(src);
-
-        [MethodImpl(Inline)]
-        public static variant FromScalar(int src)
-            => new variant(src);
-
-        [MethodImpl(Inline)]
-        public static variant FromScalar(uint src)
-            => new variant(src);        
-
-        [MethodImpl(Inline)]
-        public static variant FromScalar(long src)
-            => new variant(src);
-
-        [MethodImpl(Inline)]
-        public static variant FromScalar(ulong src)
-            => new variant(src);
-
-        [MethodImpl(Inline)]
-        public static variant FromScalar(float src)
-            => new variant(src);
-
-        [MethodImpl(Inline)]
-        public static variant FromScalar(double src)
-            => new variant(src);
-
-        [MethodImpl(Inline)]
-        public T Extract<T>()
-            where T : unmanaged
-                => cell<T>(0);
-
-
-        public variant Convert(NumericKind dst)
-        {
-            return dst switch
-            {                        
-                NK.I8 => FromScalar(Extract<sbyte>()),
-                NK.U8 => FromScalar(Extract<byte>()),
-                NK.I16 => FromScalar(Extract<short>()),
-                NK.U16 => FromScalar(Extract<ushort>()),
-                NK.I32 => FromScalar(Extract<int>()),
-                NK.U32 => FromScalar(Extract<uint>()),
-                NK.I64 => FromScalar(Extract<long>()),
-                NK.U64 => FromScalar(Extract<ulong>()),
-                NK.F32 => FromScalar(Extract<float>()),
-                NK.F64 => FromScalar(Extract<double>()),
-                _ => this,
-            };
-        }
         public NK CellKind
         {
             [MethodImpl(Inline)]
@@ -161,7 +49,7 @@ namespace Z0
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        variant(Vector128<ulong> src)
+        internal variant(Vector128<ulong> src)
             => data = src;
         
         [MethodImpl(Inline)]
@@ -245,11 +133,6 @@ namespace Z0
             get => vcell(data,0);
         }
 
-        ulong Hi64
-        {
-            [MethodImpl(Inline)]
-            get => vcell(data,1);
-        }
 
         [MethodImpl(Inline)]
         static Vector128<ulong> Store(ulong value, NK kind, uint bitwidth)

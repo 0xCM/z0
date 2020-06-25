@@ -32,7 +32,7 @@ namespace Z0.Asm
         }
 
         FolderPath DataRoot 
-            => Context.AppPaths.AppDataPath;
+            => Context.AppPaths.AppDataRoot;
 
         FolderPath ResDir
             => DataRoot + FolderName.Define("resbytes");
@@ -40,11 +40,16 @@ namespace Z0.Asm
         FolderPath AsmDst
             => ResDir + FolderName.Define("asm");
         
+        const string ResourceProvider = "z0.res.bytes.dll";
+
         public void CaptureResBytes()
         {
+            var root = Context.AppPaths.LogRoot;
+            var provider = ResourceProvider;
             var src = FilePath.Define(@"J:\dev\projects\z0-logs\res\bin\lib\netcoreapp3.0\z0.res.bytes.dll");
+            
             Demands.insist(src.Exists);
-            var csvDst = ResDir + FileName.Define("z0.res.bytes.csv", FileExtensions.Csv);
+            var csvDst = ResDir + FileName.Define(ResourceProvider).ChangeExtension(FileExtensions.Csv);
             var captured = Capture(src, AsmDst);
             CollectAddresses(captured, csvDst);
         }

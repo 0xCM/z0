@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="kind">The source kind</param>
         [MethodImpl(Inline)]
         public static TypeWidth TypeWidth(this NumericKind kind)
-            => (TypeWidth)(ushort)kind; 
+            => NumericKinds.width(kind);
     }
 }

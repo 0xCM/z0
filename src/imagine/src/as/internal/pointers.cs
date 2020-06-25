@@ -14,7 +14,6 @@ namespace Z0
 
     partial struct AsInternal
     {
-
         /// <summary>
         /// Converts a generic reference into a void pointer
         /// </summary>
@@ -23,18 +22,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe void* pvoid<T>(ref T src)
             => AsPointer(ref src); 
-
-        /// <summary>
-        /// Presents a readonly reference as a generic pointer displaced by an element offset
-        /// </summary>
-        /// <param name="src">The memory reference</param>
-        /// <param name="offset">The number of elements to skip</param>
-        /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe T* constptr<T>(in T src, int offset)
-            where T : unmanaged
-                => ptr(ref edit(in skip(in src, offset)));
-
 
         /// <summary>
         /// Presents a generic reference as a byte pointer

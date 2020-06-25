@@ -27,13 +27,13 @@ namespace Z0.Dynamics.Operators
                 switch (typecode<T>())
                 {
                     case TypeCode.Byte:
-                        return cast<Func<T, T, bool>>(ByteOps.LT.Compile());
+                        return cast<Func<T,T,bool>>(ByteOps.LT.Compile());
                     case TypeCode.SByte:
-                        return cast<Func<T, T, bool>>(SByteOps.LT.Compile());
+                        return cast<Func<T,T,bool>>(SByteOps.LT.Compile());
                     case TypeCode.UInt16:
-                        return cast<Func<T, T, bool>>(UInt16Ops.LT.Compile());
+                        return cast<Func<T,T,bool>>(UInt16Ops.LT.Compile());
                     default:
-                        return lambda<T, T, bool>(Expression.LessThan).Compile();
+                        return lambda<T,T,bool>(Expression.LessThan).Compile();
                 }
             });
 

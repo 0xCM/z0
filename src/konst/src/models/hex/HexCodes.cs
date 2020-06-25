@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    using System;
-    
     public class HexLevel
     {
         public static X00 x00 => default;

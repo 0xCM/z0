@@ -29,7 +29,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public unsafe static MemoryAddress location<T>(in T src)
-            where T : unmanaged
-                => (MemoryAddress)gptr(src);
+            => (MemoryAddress)As.pvoid(src);
     }
 }

@@ -9,6 +9,10 @@ namespace Z0
 
     using NK = NumericKind;
 
+    using static Konst;
+    
+    
+    
     partial class NumericKinds
     {            
         /// <summary>
@@ -30,5 +34,6 @@ namespace Z0
                 NK.F64 => typeof(double),
                 _ => typeof(void)
             };
-    }
+
+        }
 }

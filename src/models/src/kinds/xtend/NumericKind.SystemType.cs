@@ -15,5 +15,8 @@ namespace Z0
         /// <param name="src">The source kind</param>
         public static Type SystemType(this NumericKind src)
             => NumericKinds.type(src);
+
+        public static TypeCode TypeCode(this NumericKind src)
+            => Type.GetTypeCode(NumericKinds.type(src));
     }
 }

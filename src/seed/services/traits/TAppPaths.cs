@@ -81,16 +81,16 @@ namespace Z0
             => Env.Current.LogDir;
 
         /// <summary>
-        /// The path to the root data directory
-        /// </summary>
-        FolderPath DataRoot 
-            => Env.Current.DevDir + DataFolder;
-
-        /// <summary>
         /// The path to the root development directory
         /// </summary>
         FolderPath DevRoot 
             => Env.Current.DevDir;
+
+        /// <summary>
+        /// The path to the root data directory
+        /// </summary>
+        FolderPath TrackedDataRoot 
+            => DevRoot + DataFolder;
 
         /// <summary>
         /// The path to the root application resource directory
@@ -188,18 +188,17 @@ namespace Z0
         FilePath AppConfigPath 
             => AppDevRoot + ConfigFileName;
 
-
         /// <summary>
         /// The executing application's data directory
         /// </summary>
-        FolderPath AppDataPath 
+        FolderPath AppDataRoot 
             => (LogRoot + RuntimeLogFolder) + AppFolder;
 
         /// <summary>
         /// The application-relative capture directory
         /// </summary>
-        FolderPath AppCaptureDir 
-            => AppDataPath + CaptureFolder;
+        FolderPath AppCaptureRoot 
+            => AppDataRoot + CaptureFolder;
 
         /// <summary>
         /// The root folder for test-specific data
@@ -253,7 +252,6 @@ namespace Z0
         /// Creates a provider rooted at the current root directory for another application
         /// </summary>
         /// <param name="dst">The target app id</param>
-
         TAppPaths ForApp(PartId dst)
             => AppPaths.Init(dst, LogRoot);
 

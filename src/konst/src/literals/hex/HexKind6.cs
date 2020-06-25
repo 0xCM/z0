@@ -1,3 +1,4 @@
+
 //-----------------------------------------------------------------------------
 // copyright   :  (c) chris Moore, 2020
 // License     :  MIT
@@ -7,9 +8,9 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Defines identifiers corresponding to each value that can be represented with a 5-bit unsigned integer
+    /// Defines identifiers corresponding to each value that can be represented with a 6-bit unsigned integer
     /// </summary>
-    public enum Hex5 : byte
+    public enum HexKind6 : byte
     {
         /// <summary> 
         /// Defines 0x00 = 0
@@ -170,5 +171,165 @@ namespace Z0
         /// Defines 0x1f = 31
         /// </summary> 
         x1f = 0x1f,
+
+        /// <summary> 
+        /// Defines 0x20 = 32
+        /// </summary> 
+        x20 = 0x20,
+
+        /// <summary> 
+        /// Defines 0x21 = 33
+        /// </summary> 
+        x21 = 0x21,
+
+        /// <summary> 
+        /// Defines 0x22 = 34
+        /// </summary> 
+        x22 = 0x22,
+
+        /// <summary> 
+        /// Defines 0x23 = 35
+        /// </summary> 
+        x23 = 0x23,
+
+        /// <summary> 
+        /// Defines 0x24 = 36
+        /// </summary> 
+        x24 = 0x24,
+
+        /// <summary> 
+        /// Defines 0x25 = 37
+        /// </summary> 
+        x25 = 0x25,
+
+        /// <summary> 
+        /// Defines 0x26 = 38
+        /// </summary> 
+        x26 = 0x26,
+
+        /// <summary> 
+        /// Defines 0x27 = 39
+        /// </summary> 
+        x27 = 0x27,
+
+        /// <summary> 
+        /// Defines 0x28 = 40
+        /// </summary> 
+        x28 = 0x28,
+
+        /// <summary> 
+        /// Defines 0x29 = 41
+        /// </summary> 
+        x29 = 0x29,
+
+        /// <summary> 
+        /// Defines 0x2a = 42
+        /// </summary> 
+        x2a = 0x2a,
+
+        /// <summary> 
+        /// Defines 0x2b = 43
+        /// </summary> 
+        x2b = 0x2b,
+
+        /// <summary> 
+        /// Defines 0x2c = 44
+        /// </summary> 
+        x2c = 0x2c,
+
+        /// <summary> 
+        /// Defines 0x2d = 45
+        /// </summary> 
+        x2d = 0x2D,
+
+        /// <summary> 
+        /// Defines 0x2e = 46
+        /// </summary> 
+        x2e = 0x2e,
+
+        /// <summary> 
+        /// Defines 0x2f = 47
+        /// </summary> 
+        x2f = 0x2f,
+
+        /// <summary> 
+        /// Defines 0x30 = 48
+        /// </summary> 
+        x30 = 0x30,
+
+        /// <summary> 
+        /// Defines 0x31 = 49
+        /// </summary> 
+        x31 = 0x31,
+
+        /// <summary> 
+        /// Defines 0x32 = 50
+        /// </summary> 
+        x32 = 0x32,
+
+        /// <summary> 
+        /// Defines 0x33 = 51
+        /// </summary> 
+        x33 = 0x33,
+
+        /// <summary> 
+        /// Defines 0x34 = 52
+        /// </summary> 
+        x34 = 0x34,
+
+        /// <summary> 
+        /// Defines 0x35 = 53
+        /// </summary> 
+        x35 = 0x35,
+
+        /// <summary> 
+        /// Defines 0x36 = 54
+        /// </summary> 
+        x36 = 0x36,
+
+        /// <summary> 
+        /// Defines 0x37 = 55
+        /// </summary> 
+        x37 = 0x37,
+
+        /// <summary> 
+        /// Defines 0x38 = 56
+        /// </summary> 
+        x38 = 0x38,
+
+        /// <summary> 
+        /// Defines 0x39 = 57
+        /// </summary> 
+        x39 = 0x39,
+
+        /// <summary> 
+        /// Defines 0x3a = 58
+        /// </summary> 
+        x3a = 0x3a,
+
+        /// <summary> 
+        /// Defines 0x3b = 59
+        /// </summary> 
+        x3b = 0x3b,
+
+        /// <summary> 
+        /// Defines 0x3c = 60
+        /// </summary> 
+        x3c = 0x3c,
+
+        /// <summary> 
+        /// Defines 0x3d = 61
+        /// </summary> 
+        x3d = 0x3D,
+
+        /// <summary> 
+        /// Defines 0x3e = 62
+        /// </summary> 
+        x3e = 0x3e,
+
+        /// <summary> 
+        /// Defines 0x3f = 63
+        /// </summary> 
+        x3f = 0x3f,
     }
 }

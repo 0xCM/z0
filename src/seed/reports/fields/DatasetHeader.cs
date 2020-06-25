@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;   
 
+    using static Dataset;
+
     /// <summary>
     /// Defines enum-predicated header content
     /// </summary>
@@ -27,9 +29,9 @@ namespace Z0
             get => Fields.Map(f => f.ToString());
         }
 
-        public string Render(char delimiter)
+        public string Render(char delimiter = FieldDelimiter)
         {
-            var service = Tabular.Formatter<F>(delimiter);
+            var service = formatter<F>(delimiter);
             var cols = Fields;
             var labels = Labels;
             for(var i=0; i<cols.Length; i++)
@@ -43,9 +45,9 @@ namespace Z0
         /// <param name="label">The label factory</param>
         /// <param name="delimiter">The delimiter</param>
         /// <typeparam name="F">The field type</typeparam>
-        public string Render(Func<int,F,string> label, char delimiter)
+        public string Render(Func<int,F,string> label, char delimiter = FieldDelimiter)
         {
-            var service = Tabular.Formatter<F>(delimiter);
+            var service = formatter<F>(delimiter);
             var cols = Fields;
             var labels = Labels;
             for(var i=0; i<cols.Length; i++)

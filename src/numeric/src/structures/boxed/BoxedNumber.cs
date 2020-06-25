@@ -18,9 +18,7 @@ namespace Z0
         ConversionProvider(typeof(BoxedNumberConverter))
     ]
     public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>
-    {
-        public static BoxedNumber Empty => new BoxedNumber(DBNull.Value, NumericKind.None);
-        
+    {        
         /// <summary>
         /// In the box
         /// </summary>
@@ -75,8 +73,8 @@ namespace Z0
         [MethodImpl(Inline)]
         BoxedNumber(object src, NumericKind kind)
         {
-            this.Boxed = src;
-            this.Kind = kind;
+            Boxed = src;
+            Kind = kind;
         }
 
         public bool IsSignedInt
@@ -231,6 +229,15 @@ namespace Z0
         public bool Equals(BoxedNumber other)
             => Boxed.Equals(other.Boxed);
 
+        public string Format(Base10 @base)
+            => Boxed.ToString();        
+
+        public string Format(Base16 @base)
+            => Convert<ulong>().FormatHex(false,true);
+
+        public string Format(Base2 @base)
+            => BitFormatter.format(Boxed, Kind.TypeCode());
+
         public override string ToString()
             => Boxed.ToString();
 
@@ -317,5 +324,9 @@ namespace Z0
             => Formattable.ToString(format, formatProvider);     
         public TypeIdentity Identity()
             => TypeIdentity.Define("nbox");
+
+        public static BoxedNumber Empty 
+            => new BoxedNumber(DBNull.Value, NumericKind.None);
+
     }
 }

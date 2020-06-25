@@ -20,13 +20,19 @@ namespace Z0
         void EmitMasks(IAppContext context)
         {
             var literals = span(BitMaskCollector.collect());
+            var formatter = NumericLiteralFormatter.Service;
+            var appdata = context.AppPaths.AppDataRoot;
+            var dst = appdata + FileName.Define("Bitmasks", FileExtensions.Csv);
+            term.print($"Found {literals.Length} bitmask literals that will be emitted to {dst}");
+
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.HeaderText);
             for(var i=0; i <literals.Length; i++)
             {
                 ref readonly var literal = ref skip(literals,i);
-                
-                //var x = $"{literal.Name} = {literal.Text}";
-                //term.print(x);
+                writer.WriteLine(formatter.Format(literal));                
             }
+            
         }
 
         void EmitDocs(IAppContext app)
@@ -53,10 +59,11 @@ namespace Z0
 
         public void Generate(IAppContext app)
         {            
-            EmitMetadata(app);
-            EmitDocs(app);
-            EmitResources(app);
-            CaptureEmissions(app);
+            EmitMasks(app);
+            // EmitMetadata(app);
+            // EmitDocs(app);
+            // EmitResources(app);
+            // CaptureEmissions(app);
         }
     }
 }

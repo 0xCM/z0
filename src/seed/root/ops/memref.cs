@@ -21,6 +21,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe static MemRef memref(ReadOnlySpan<byte> src)
-            => new MemRef(gptr(head(src)), src.Length);
+            => new MemRef(As.point(head(src)), src.Length);
     }
 }

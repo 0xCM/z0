@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
 
+    using static Konst;
+
     /// <summary>
     /// Defines numeric identifiers for primal numeric types
     /// </summary>
@@ -13,25 +15,24 @@ namespace Z0
     {
         None = 0,
 
-        U8 = (1u << 16),
+        U8 = 1 << WidthOffset,
 
-        I8 = (2u << 16),
+        I8 = 2 << WidthOffset,
 
-        U16 = 4u << 16,
+        U16 = 4 << WidthOffset,
 
-        I16 = 8u << 16,
+        I16 = 8 << WidthOffset,
 
-        U32 = 16u << 16,
+        U32 = 16 << WidthOffset,
 
-        I32 = 32u << 16,
+        I32 = 32 << WidthOffset,
 
-        U64 = 64u << 16,
+        U64 = 64 << WidthOffset,
 
-        I64 = 128u << 16,
+        I64 = 128 << WidthOffset,
         
-        F32 = 512u << 16,
+        F32 = 512 << WidthOffset,
 
-        F64 = 1024u << 16,
+        F64 = 1024 << WidthOffset,                
     }        
-
 }

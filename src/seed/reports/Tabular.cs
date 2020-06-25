@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Index<F>(F field)
             where F : unmanaged, Enum
-                => (int)(Tabular.PosMask & Enums.e32u(field));
+                => Dataset.index(field);
 
         /// <summary>
         /// Computes the field width from a field specifier
@@ -70,21 +70,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Width<F>(F field)
             where F : unmanaged, Enum
-                => text.width(field);
+                => Dataset.width(field);
     
         [MethodImpl(Inline)]
         public static string[] Headers<F>()
             where F : unmanaged, Enum
-                => DataFields.labels<F>();    
+                => Dataset.labels<F>();    
 
         /// <summary>
         /// Creates a record formatter predicated on an enum that specifies the record fields
         /// </summary>
         /// <typeparam name="F">The field specification type</typeparam>
         [MethodImpl(Inline)]
-        public static RecordFormatter<F> Formatter<F>()
+        public static IDatasetFormatter<F> Formatter<F>()
             where F :unmanaged, Enum
-                => new RecordFormatter<F>(text.build());        
+                => Dataset.formatter<F>();
 
         [MethodImpl(Inline)]
         public static RecordFormatter<F,W> Formatter<F,W>(char delimiter = FieldDelimiter)
@@ -98,19 +98,14 @@ namespace Z0
         /// <param name="sep">The default field delimiter</param>
         /// <typeparam name="F">The type of the defining enum</typeparam>
         [MethodImpl(Inline)]
-        public static RecordFormatter<F> Formatter<F>(char sep)
+        public static IDatasetFormatter<F> Formatter<F>(char sep)
             where F : unmanaged, Enum
-                => new RecordFormatter<F>(text.build(), sep);
+                => new DatasetFormatter<F>(text.build(), sep);
                 
         [MethodImpl(Inline)]
         public static DatasetHeader<F> Header<F>()
             where F : unmanaged, Enum
-                => default;
-
-        [MethodImpl(Inline)]
-        public static string[] Labels<F>()
-            where F : unmanaged, Enum
-                => Header<F>().Labels;
+                => Dataset.header<F>();
 
         [MethodImpl(Inline)]
         public static string HeaderText<F>(char delimiter = FieldDelimiter)
@@ -127,7 +122,6 @@ namespace Z0
         public static string HeaderText<F>(Func<int,F,string> f, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
                 => Header<F>().Render(f,delimiter);
-
 
         public static ParallelQuery<string> Render<R>(R[] src, Func<R,string> formatter)
             where R : IRecord

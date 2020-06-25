@@ -16,19 +16,19 @@ namespace Z0
             => (char)src;
 
         [MethodImpl(Inline), Op]
-        public static char @char(in asci2 src, Hex1 index)
+        public static char @char(in asci2 src, HexKind1 index)
             => (char)code(src, index);
 
         [MethodImpl(Inline), Op]
-        public static char @char(in asci4 src, Hex2 index)
+        public static char @char(in asci4 src, HexKind2 index)
             => (char)code(src, index);
 
         [MethodImpl(Inline), Op]
-        public static char @char(in asci8 src, Hex3 index)
+        public static char @char(in asci8 src, HexKind3 index)
             => (char)code(src, index);
 
         [MethodImpl(Inline), Op]
-        public static char @char(in asci16 src, Hex4 index)
+        public static char @char(in asci16 src, HexKind4 index)
             => (char)code(src,index);
 
         [MethodImpl(Inline), Op]

@@ -9,17 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    public interface IFieldRender<F>
+    
+    public readonly struct FieldRender<F> : TFieldRender<F>
         where F : unmanaged, Enum
     {
-        RecordFormatter<F> Formatter => RecordFormatter<F>.Default;        
-
-    }
-
-    public readonly struct FieldRender<F> : IFieldRender<F>
-        where F : unmanaged, Enum
-    {
-        public RecordFormatter<F> Formatter 
-            => RecordFormatter<F>.Default;        
+        public static TFieldRender<F> Service
+            => default(FieldRender<F>);
     }
 }

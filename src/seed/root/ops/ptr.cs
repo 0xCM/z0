@@ -10,10 +10,6 @@ namespace Z0
     partial class Root
     {
         [MethodImpl(Inline)]
-        public static unsafe void* pvoid<T>(ref T src)
-            => Pointed.pvoid(ref src); 
-
-        [MethodImpl(Inline)]
         public static unsafe T* ptr<T>(ref T src)
             where T : unmanaged
                 => Pointed.ptr(ref src);

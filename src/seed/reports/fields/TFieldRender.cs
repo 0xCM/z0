@@ -3,17 +3,19 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    partial class Root
+    public interface TFieldRender<F>
+        where F : unmanaged, Enum
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe T* gptr<T>(in T src)
-            where T : unmanaged
-                => (T*)Root.pvoid(ref edit(in src));
+        IDatasetFormatter<F> Formatter 
+            => Dataset.formatter<F>();
+
+        DatasetHeader<F> Header
+                => Dataset.header<F>();
     }
 }

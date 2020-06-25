@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     using NK = NumericKind;
     using NI = NumericIndicator;
@@ -12,6 +15,14 @@ namespace Z0
 
     partial class NumericKinds
     {            
+        /// <summary>
+        /// Determines the width of the identified numeric type
+        /// </summary>
+        /// <param name="kind">The source kind</param>
+        [MethodImpl(Inline), Op]
+        public static TypeWidth width(NumericKind kind)
+            => (TypeWidth)(ushort)kind;         
+
         /// <summary>
         /// Computes the numeric kind determined by a bit-width and numeric indicator
         /// </summary>

@@ -11,10 +11,9 @@ namespace Z0
 
     using static Konst;
 
-    public interface IFieldFormatter<F>
+    public interface IFieldFormatter<F> : ITextual
         where F : unmanaged, Enum
     {
         void EmitEol();        
     }
-
 }

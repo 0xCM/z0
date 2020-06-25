@@ -12,6 +12,7 @@ namespace Z0.Asm
     using static Konst;
     using static Memories;
 
+
     public class t_decode : t_asm<t_decode>
     {
         IAsmFunctionCases TestCases {get;}

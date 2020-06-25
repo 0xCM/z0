@@ -15,16 +15,16 @@ namespace Z0
     {
         public static BitFormatter Service => default(BitFormatter);
 
-        public static string unsigned(object src, TypeCode type)
+        public static string format(object src, TypeCode type)
         {
-            if(type == TypeCode.Byte)
-                return Formatters.bits<byte>().Format((byte)src);
-            else if(type == TypeCode.UInt16)
-                return Formatters.bits<ushort>().Format((ushort)src);
-            else if(type == TypeCode.UInt32)
-                return Formatters.bits<uint>().Format((uint)src);
-            else if(type == TypeCode.UInt64)
-                return Formatters.bits<ulong>().Format((ulong)src);
+            if(type == TypeCode.Byte || type == TypeCode.SByte)
+                return Formatters.bits<byte>().Format((byte)Boxy.rebox(src, NumericKind.U8));
+            else if(type == TypeCode.UInt16 || type == TypeCode.Int16)
+                return Formatters.bits<ushort>().Format((ushort)Boxy.rebox(src, NumericKind.U16));
+            else if(type == TypeCode.UInt32  || type == TypeCode.Int32 || type == TypeCode.Single)
+                return Formatters.bits<uint>().Format((uint)Boxy.rebox(src, NumericKind.U32));
+            else if(type == TypeCode.UInt64 || type == TypeCode.Int64 || type == TypeCode.Double)
+                return Formatters.bits<ulong>().Format((ulong)Boxy.rebox(src, NumericKind.U64));
             else
                 return string.Empty;
         }
@@ -33,7 +33,6 @@ namespace Z0
         public static string format<T>(T src)
             where T : struct
                 => create<T>().Format(src);
-
 
         [MethodImpl(Inline)]
         public static string format<T>(T src, BitFormatConfig config)

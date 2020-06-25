@@ -23,6 +23,6 @@ namespace Z0.Machine
         IAsmFormatter Formatter {get;}
 
         FolderPath TargetRoot 
-            => AsmContext.AppPaths.AppDataPath;
+            => AsmContext.AppPaths.AppDataRoot;
     }
 }

@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+ 
+    using static Konst;
     
     using TC = System.TypeCode;
 
@@ -14,40 +17,67 @@ namespace Z0
     /// </summary>
     public enum PrimalKindId : byte
     {
-        // 1
+        // 0
+        None = 0,
+
+        /// <summary>
+        /// 1
+        /// </summary>
         Object = TC.Object,
 
-        // 2
+        /// <summary>
+        /// 2
+        /// </summary>
         DBNull = TC.DBNull,
 
-        // 3
+        /// <summary>
+        /// 3
+        /// </summary>
         U1 = TC.Boolean,
 
-        // 4
+        /// <summary>
+        /// 4
+        /// </summary>
         Char16 = TC.Char,
         
-        // 5
+        /// <summary>
+        /// 5
+        /// </summary>
         I8 = TC.SByte,
 
-        // 6
+        /// <summary>
+        /// 6
+        /// </summary>
         U8 = TC.Byte,
 
-        // 7
+        /// <summary>
+        /// 7
+        /// </summary>
         I16 = TC.Int16,
         
-        // 8
+        /// <summary>
+        /// 8
+        /// </summary>
         U16 = TC.UInt16,
         
-        // 9
+        /// <summary>
+        /// 9
+        /// </summary>
         I32 = TC.Int32,
 
-        // 10        
+        /// <summary>
+        /// 10
+        /// </summary>
         U32 = TC.UInt32,
 
-        // 11
+        /// <summary>
+        /// 11
+        /// </summary>
         I64 = TC.Int64,
         
-        // 12
+        /// <summary>
+        /// 12
+        /// </summary>
         U64 = TC.UInt64,
 
         // 13
@@ -64,5 +94,17 @@ namespace Z0
 
         // 18
         String = TC.String
+    }
+
+    partial class XTend
+    {
+        [MethodImpl(Inline)]
+        public static PrimalKindId ToKind(this TypeCode src)
+            => (PrimalKindId)src;
+
+       [MethodImpl(Inline)]
+        public static TypeCode ToTypeCode(this PrimalKindId src)
+            => (TypeCode)src;
+             
     }
 }
