@@ -10,8 +10,6 @@ namespace Z0.Asm
 
     using static Konst;
  
-    using FK = FixedOpKinds;
-
     public class t_fixed_binary_op : t_asm<t_fixed_binary_op>
     {
         ITestFixedBinaryOp Checker => CheckFixed.BinaryOp(Random);

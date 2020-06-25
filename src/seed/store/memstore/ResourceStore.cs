@@ -45,6 +45,15 @@ namespace Z0
             => Accessors(src.GetTypes());
 
         /// <summary>
+        /// Collects all resource accessors defined by a specified assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        public ResourceAccessors[] AccesorIndex(Assembly src)    
+            => (from a in Accessors(src) 
+                let t = a.Member.DeclaringType
+                group a by t).Map(x => new ResourceAccessors(x.Key, x.ToArray()));
+        
+        /// <summary>
         /// Queries the source assemblies for ByteSpan property getters
         /// </summary>
         /// <param name="src">The assemblies to query</param>

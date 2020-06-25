@@ -1,4 +1,4 @@
-# SUB - Op Codes
+# SUB
 -------------------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction      | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                         |
 | 2C ib            | SUB AL, i mm8    | I     | Valid       | Valid           | Subtract imm8 from AL.                              |

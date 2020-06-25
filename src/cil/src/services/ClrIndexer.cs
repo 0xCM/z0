@@ -67,12 +67,12 @@ namespace Z0
             
         void IndexClrMethod(MethodInfo m)
         {
-            require(MethodIndex.TryAdd(m.MetadataToken, m));
+            Require(MethodIndex.TryAdd(m.MetadataToken, m));
         }
         
         void IndexClrType(Type t)
         {
-            require(TypeIndex.TryAdd(t.MetadataToken, t));            
+            Require(TypeIndex.TryAdd(t.MetadataToken, t));            
             iter(t.DeclaredMethods(),IndexClrMethod);
         }
 
@@ -96,18 +96,18 @@ namespace Z0
 
         void IndexMethodDef(Dn.MethodDef md)
         {            
-            require(MethodDefIndex.TryAdd((int)md.MDToken.Raw, md));
+            Require(MethodDefIndex.TryAdd((int)md.MDToken.Raw, md));
         }
 
         void IndexTypeDef(Dn.TypeDef t)
         {
-            require(TypeDefIndex.TryAdd((int)t.MDToken.Raw, t));
+            Require(TypeDefIndex.TryAdd((int)t.MDToken.Raw, t));
             iter(t.Methods,IndexMethodDef);
         }
 
         Dn.ModuleDefMD AddModuleDef(Dn.ModuleDefMD mod)
         {
-            require(ModuleDefIndex.TryAdd((int)mod.MDToken.Raw, mod));
+            Require(ModuleDefIndex.TryAdd((int)mod.MDToken.Raw, mod));
             return mod;
         }
 

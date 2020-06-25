@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct EnumDatasetEntry<E,T>
+    public readonly struct EnumDatasetEntry
     {
         public MetadataToken Token {get;}
 
@@ -19,9 +19,9 @@ namespace Z0
 
         public string Name {get;}
 
-        public E Literal {get;}
+        public Enum Literal {get;}
 
-        public T Scalar {get;}
+        public object Scalar {get;}
 
         public string Description {get;}
 
@@ -29,14 +29,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public EnumDatasetEntry(MetadataToken token, MetadataToken declarer, 
-            int index, string identifier,  E literal, T numeric, string description, UserMetadata user)
+            int index, string identifier,  Enum literal, object scalar, string description, UserMetadata user)
         {
             Token = token;
             Declarer = declarer;
             Index = index;
             Name = identifier;
             Literal = literal;
-            Scalar = numeric;
+            Scalar = scalar;
             Description = description;
             UserData = user;
         }    

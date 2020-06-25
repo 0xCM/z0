@@ -15,18 +15,12 @@ namespace Z0
     /// </summary>
     public readonly struct MetadataToken : ITextual, IEquatable<MetadataToken>, INullity
     {
-        readonly ulong Data;        
+        readonly Address32 Data;        
     
         public int TokenValue
         {
             [MethodImpl(Inline)]
             get => (int)Data;
-        }
-
-        public int TokenModule
-        {
-            [MethodImpl(Inline)]
-            get => (int)(Data >> 32);
         }
          
         public bool IsEmpty
@@ -40,21 +34,8 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data != 0;
         }
-
-        string FormatModule()
-        {
-            var m = TokenModule;
-            if(m <= byte.MaxValue)
-                return ((byte)m).FormatHex(zpad:true,specifier:false);
-            else if(m <= ushort.MaxValue)
-                return ((ushort)m).FormatHex(zpad:true,specifier:false);
-            else
-                return m.FormatHex(zpad:true,specifier:false);
-        }
-
         public string Format()
-            => $"{FormatModule()}:{TokenValue.FormatHex(zpad:true, specifier:false)}";
-
+            => Data.Format();
  
         [MethodImpl(Inline)]
         public static MetadataToken From(Type src)
@@ -108,51 +89,46 @@ namespace Z0
         public static implicit operator MetadataToken(ParameterInfo src)
             => From(src);
 
-        MetadataToken(double x)
-        {
-            Data = 0;
-        }
         
         [MethodImpl(Inline)]
         MetadataToken(Type src)
-            : this(src.MetadataToken, src.Module)
+            : this(src.MetadataToken)
         {
             
         }
 
         [MethodImpl(Inline)]
         MetadataToken(FieldInfo src)
-            : this(src.MetadataToken, src.Module)
+            : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
         MetadataToken(PropertyInfo src)
-            : this(src.MetadataToken, src.Module)
+            : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
         MetadataToken(ParameterInfo src)
-            : this(src.MetadataToken, src.Member.Module)
+            : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
         MetadataToken(MethodInfo src)
-            : this(src.MetadataToken, src.Module)
+            : this(src.MetadataToken)
         {
 
         }
 
-
         [MethodImpl(Inline)]
-        MetadataToken(int token, Module m)
+        MetadataToken(int token)
         {
-            Data = (uint)token | ((ulong)m.MetadataToken << 32);
+            Data = (uint)token;
         }        
 
         public override string ToString()
@@ -169,6 +145,6 @@ namespace Z0
             => src is MetadataToken t && Equals(t);
 
         public static MetadataToken Empty 
-            => new MetadataToken(0.0);            
+            => default;
     }
 }

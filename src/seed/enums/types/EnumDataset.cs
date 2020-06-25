@@ -11,6 +11,8 @@ namespace Z0
     using static Root;
 
     public readonly struct EnumDataset<E,T>
+        where E : unmanaged, Enum
+        where T : unmanaged
     {
         public MetadataToken Token {get;}
 

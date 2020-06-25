@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         public static ByteSize size(MethodInfo src)
-            => src.Tag<SizeAttribute>().MapValueOrDefault(a => a.Size, ByteSize.Empty);
+            => src.Tag<SizeAttribute>().MapValueOrDefault(a => (ByteSize)a.Size, ByteSize.Empty);
     }
     
     public interface IFunctionJit

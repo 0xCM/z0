@@ -70,7 +70,8 @@ namespace Z0
         ulong IEnumLiteral.LiteralValue 
             => Enums.untype(LiteralValue);
 
-        public NumericKind NumericKind => LiteralValue.GetType().GetEnumUnderlyingType().NumericKind();
+        public NumericKind NumericKind 
+            => LiteralValue.GetType().GetEnumUnderlyingType().NumericKind();
 
         [MethodImpl(Inline)]
         internal EnumLiteral(FieldInfo field, EnumScalarKind type, int index, string identifier, E value, string description, UserMetadata data)

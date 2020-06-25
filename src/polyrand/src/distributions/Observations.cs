@@ -59,18 +59,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public Observations(Span<T> src, int dim)
         {
-            this.Dim = dim;            
-            this.Count = Math.DivRem(src.Length, dim, out int remainder);    
-            Root.require(remainder == 0);
+            Dim = dim;            
+            Count = Math.DivRem(src.Length, dim, out int remainder);    
+            Require(remainder == 0);
             Data = src;
         }
 
         [MethodImpl(Inline)]
         public Observations(T[] src, int dim)
         {
-            this.Dim = dim;            
-            this.Count = Math.DivRem(src.Length, dim, out int remainder);    
-            Root.require(remainder == 0);
+            Dim = dim;            
+            Count = Math.DivRem(src.Length, dim, out int remainder);    
+            Require(remainder == 0);
             Data = src;
         }
                 

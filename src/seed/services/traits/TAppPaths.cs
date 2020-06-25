@@ -271,5 +271,8 @@ namespace Z0
 
         string ITextual.Format() 
             => AppName;
+
+        FilePath ResBytes
+            => FilePath.Define(@"J:\dev\projects\z0-logs\res\bin\lib\netcoreapp3.0\z0.res.bytes.dll");
     }
 }

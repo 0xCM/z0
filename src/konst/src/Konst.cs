@@ -151,5 +151,38 @@ namespace Z0
         internal static ReadOnlySpan<T> transform<T>(ReadOnlySpan<byte> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<byte,T>(MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(src), src.Length));
+
+
+        public static void ThrowInvariantFailure(string msg)
+            => throw new Exception($"Application invaraiant failed: {msg}");
+
+        public static void ThrowInvariantFailure()
+            => throw new Exception($"Application invaraiant failed");
+
+        public static void ThrowNullRefError<T>()
+            => throw new NullReferenceException($"Application nullity invaraiant failed for {typeof(T)}");
+
+        [MethodImpl(Inline)]
+        public static void Require(bool invariant)
+        {
+            if(!invariant)
+                ThrowInvariantFailure();
+        }
+
+        [MethodImpl(Inline)]
+        public static void Require(bool invariant, string msg)
+        {
+            if(!invariant)
+                ThrowInvariantFailure(msg);
+        }        
+
+        public static T Require<T>(T src)
+            where T : class
+        {
+            if(src == null)
+                ThrowNullRefError<T>();
+            return src;
+        }
+
     }
 }

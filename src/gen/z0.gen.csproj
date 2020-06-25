@@ -20,6 +20,11 @@
     <ProjectReference Include="$(Machine)" />
     <ProjectReference Include="$(Capture)" />
 
+    <!-- <Reference Include="$(ResBytesLib)">
+      <HintPath>$(ResLibDir)$(ResBytesLib).dll</HintPath>
+    </Reference> -->
+
+
   </ItemGroup>
 
 </Project>

@@ -32,6 +32,9 @@
     <SrcDir>$(TopDir)src/</SrcDir>
     <TestDir>$(TopDir)test/</TestDir>
     <NativeDir>$(TopDir)native/</NativeDir>
+    <LogDir>$(ZLogs)\</LogDir>
+    <ResLibDir>$(LogDir)res\bin\lib\netcoreapp3.0\</ResLibDir>
+    <ResBytesLib>z0.res.bytes</ResBytesLib>
   </PropertyGroup>
 
 </Project>

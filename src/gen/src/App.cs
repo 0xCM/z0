@@ -35,8 +35,6 @@ namespace Z0
             return AppContext.Create(resolved, random, settings, exchange);
         }
 
-
-
         public App()
             : base(CreateAppContext())
         {
@@ -52,7 +50,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {                        
             var parts = PartIdParser.Service.ParseValid(args);  
-            G.Service.Generate(Context);
+            Emissions.Service.Generate(Context);
         }
 
         public static void Main(params string[] args)

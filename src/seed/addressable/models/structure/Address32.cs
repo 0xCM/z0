@@ -13,8 +13,6 @@ namespace Z0
     {
         public uint Location {get;}
 
-        public static Address32 Empty => new Address32(0);
-
         public bool IsEmpty 
         {
              [MethodImpl(Inline)] 
@@ -40,6 +38,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Address32(int src)
             => new Address32((uint)src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator int(Address32 src)
+            => (int)src.Location;
 
         [MethodImpl(Inline)]
         public static implicit operator Address32(uint src)
@@ -78,5 +80,9 @@ namespace Z0
         
         public override bool Equals(object src)
             => src is Address32 l && Equals(l);
+
+        public static Address32 Empty 
+            => new Address32(0);
+
     }
 }

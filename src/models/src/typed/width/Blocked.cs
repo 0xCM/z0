@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
-
     public sealed class BlockedAttribute : SegmentedAttribute
     {
         public BlockedAttribute(TypeWidth width, params CellWidth[] cells)
