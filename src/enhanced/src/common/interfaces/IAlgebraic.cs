@@ -16,12 +16,7 @@ namespace Z0
     {
         
     }                
-        // public interface ISemigroup<F,S> : IReified<F>
-    //     where F : ISemigroup<F,S>, new()
-    // {
-
-    // }
-
+ 
     public interface IMonoid<T> : ISemigroup<T>
     {
 
@@ -112,35 +107,4 @@ namespace Z0
     {
 
     }
-    /// <summary>
-    /// Characterizes a totally ordered structure
-    /// </summary>
-    /// <typeparam name="S">The structure reification type</typeparam>
-    public interface IOrdered<S>
-        where S : IOrdered<S>, new()
-    {   
-        /// <summary>
-        /// Determines whether this:S & rhs:S => this < rhs
-        /// </summary>
-        /// <param name="rhs">The operand to compare</param>
-        bool Lt(S rhs);
-        
-        /// <summary>
-        /// Determines whether this:S & rhs:S => this <= rhs
-        /// </summary>
-        /// <param name="rhs">The operand to compare</param>
-        bool LtEq(S rhs);
-        
-        /// <summary>
-        /// Determines whether this:S & rhs:S => this > rhs
-        /// </summary>
-        /// <param name="rhs">The operand to compare</param>
-        bool Gt(S rhs);                
-        
-        /// <summary>
-        /// Determines whether this:S & rhs:S => this >= rhs
-        /// </summary>
-        /// <param name="rhs">The operand to compare</param>
-        bool GtEq(S rhs);              
-    }        
 }

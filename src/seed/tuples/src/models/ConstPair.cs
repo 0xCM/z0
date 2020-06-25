@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// An homogenous immutable 2-tuple
     /// </summary>
-    public readonly struct ConstPair<T> : IPair<ConstPair<T>, T>, ITextual<ConstPair<T>>
+    public readonly struct ConstPair<T> : IPair<ConstPair<T>,T>, ITextual<ConstPair<T>>
     {
         /// <summary>
         /// The first/left/lo member of the pair

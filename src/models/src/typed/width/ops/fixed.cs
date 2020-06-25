@@ -13,13 +13,6 @@ namespace Z0
 
     partial class Widths
     {        
-        /// <summary>
-        /// Determines the attributed width of a fixed type
-        /// </summary>
-        /// <param name="src">The source type</param>
-        public static TypeWidth tfixed(Type src)
-            => src.Tag<FixedAttribute>().MapValueOrDefault(a =>a.TypeWidth, TypeWidth.None);
-
         [MethodImpl(Inline)]
         public static FixedWidth tfixed<W>(W w = default)
             where W : struct, IFixedWidth

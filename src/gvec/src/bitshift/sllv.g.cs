@@ -38,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Vectors.generic<T>(dvec.vsllv(v8u(x), v8u(counts)));
+                return generic<T>(dvec.vsllv(v8u(x), v8u(counts)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsllv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dvec.vsllv(v32u(x), v32u(counts)));
             else if(typeof(T) == typeof(ulong))
-                return Vectors.generic<T>(dvec.vsllv(v64u(x), v64u(counts)));            
+                return generic<T>(dvec.vsllv(v64u(x), v64u(counts)));            
             else
                 return vsllv_i(x,counts);
         }
@@ -70,7 +70,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Vectors.generic<T>(dvec.vsllv(v8u(x), v8u(counts)));
+                return generic<T>(dvec.vsllv(v8u(x), v8u(counts)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vsllv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))

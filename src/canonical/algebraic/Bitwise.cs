@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Characterizes bitwise operations over an operand
     /// </summary>
@@ -41,45 +39,4 @@ namespace Z0
 
     }
 
-    public interface IShiftOps<T>
-    {
-        T Sll(T a, int offset);
-
-        T Srl(T a, int offset);
-
-        /// <summary>
-        /// Rotates bits rightwards, from MSB -> LSB
-        /// </summary>
-        /// <param name="lhs">The value to rotate</param>
-        /// <param name="offset">The magnitude of the rotation</param>
-        T RotL(T lhs, int offset);
-        
-        /// <summary>
-        /// Rotates bits leftwards, from LSB -> MSB
-        /// </summary>
-        /// <param name="lhs">The value to rotate</param>
-        /// <param name="rotl">The magnitude of the rotation</param>
-        T RotR(T lhs, int rotl);
-
-    }
-
-    public interface IShiftable<S>
-        where S : IShiftable<S>, new()
-    {
-        S ShiftL(int rhs);
-
-        S ShiftR(int rhs);
-
-        /// <summary>
-        /// Rotates bits rightwards, from MSB -> LSB
-        /// </summary>
-        /// <param name="rhs">The magnitude of the rotation</param>
-        S RotL(int rhs);
-        
-        /// <summary>
-        /// Rotates bits leftwards, from LSB -> MSB
-        /// </summary>
-        /// <param name="rhs">The magnitude of the rotation</param>
-        S RotR(int rhs);
-    }
 }

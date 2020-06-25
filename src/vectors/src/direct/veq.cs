@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector128<sbyte> veq(Vector128<sbyte> x, Vector128<sbyte> y)
             => CompareEqual(x,y);
             
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector128<byte> veq(Vector128<byte> x, Vector128<byte> y)
             => CompareEqual(x,y);
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector128<short> veq(Vector128<short> x, Vector128<short> y)
             => CompareEqual(x,y);
 
@@ -64,7 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector128<ushort> veq(Vector128<ushort> x, Vector128<ushort> y)
             => CompareEqual(x,y);
 
@@ -76,7 +76,7 @@ namespace Z0
         /// enabled; otherwise, all bits the component are disabled
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector128<int> veq(Vector128<int> x, Vector128<int> y)
             => CompareEqual(x,y);
 
@@ -88,7 +88,7 @@ namespace Z0
         /// enabled; otherwise, all bits the component are disabled
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector128<uint> veq(Vector128<uint> x, Vector128<uint> y)
             => CompareEqual(x,y);
 
@@ -100,7 +100,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector128<long> veq(Vector128<long> x, Vector128<long> y)
             => CompareEqual(x,y);
 
@@ -112,7 +112,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector128<ulong> veq(Vector128<ulong> x, Vector128<ulong> y)
             => CompareEqual(x,y);
 
@@ -121,7 +121,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector128<float> veq(Vector128<float> x, Vector128<float> y)
             => CompareEqual(x, y);
 
@@ -130,7 +130,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector128<double> veq(Vector128<double> x, Vector128<double> y)
             => CompareEqual(x, y);
 
@@ -142,7 +142,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector256<sbyte> veq(Vector256<sbyte> x, Vector256<sbyte> y)
             => CompareEqual(x,y);
             
@@ -152,7 +152,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector256<byte> veq(Vector256<byte> x, Vector256<byte> y)
             => CompareEqual(x,y);
 
@@ -164,7 +164,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector256<short> veq(Vector256<short> x, Vector256<short> y)
             => CompareEqual(x,y);
 
@@ -176,7 +176,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector256<ushort> veq(Vector256<ushort> x, Vector256<ushort> y)
             => CompareEqual(x,y);
 
@@ -188,7 +188,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector256<int> veq(Vector256<int> x, Vector256<int> y)
             => CompareEqual(x,y);
 
@@ -200,7 +200,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector256<uint> veq(Vector256<uint> x, Vector256<uint> y)
             => CompareEqual(x,y);
 
@@ -212,7 +212,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector256<long> veq(Vector256<long> x, Vector256<long> y)
             => CompareEqual(x,y);
 
@@ -224,7 +224,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Eq]
+        [MethodImpl(Inline)]
         public static Vector256<ulong> veq(Vector256<ulong> x, Vector256<ulong> y)
             => CompareEqual(x,y);
 
@@ -233,7 +233,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector256<float> veq(Vector256<float> x, Vector256<float> y)
             => Compare(x, y, FloatComparisonMode.UnorderedEqualNonSignaling);
 
@@ -242,7 +242,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector256<double> veq(Vector256<double> x, Vector256<double> y)
             => Compare(x, y, FloatComparisonMode.UnorderedEqualNonSignaling);
     }

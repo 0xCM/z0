@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{    
     public interface ISized<W> : ISized
         where W : unmanaged, IDataWidth
     {        

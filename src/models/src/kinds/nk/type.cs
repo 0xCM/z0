@@ -9,10 +9,6 @@ namespace Z0
 
     using NK = NumericKind;
 
-    using static Konst;
-    
-    
-    
     partial class NumericKinds
     {            
         /// <summary>

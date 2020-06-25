@@ -82,7 +82,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Next<T>()
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(UInt8Source.Next());                
@@ -97,7 +97,7 @@ namespace Z0
         }
 
         T Next_i<T>()
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>(Int8Source.Next());                
@@ -113,7 +113,7 @@ namespace Z0
         }
 
         T Next_f<T>()
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(float))
                 return generic<T>(Float32Source.Next());                
@@ -125,7 +125,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Next<T>(T max)
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(UInt8Source.Next(uint8(max)));                
@@ -141,7 +141,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         T Next_i<T>(T max)
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>(Int8Source.Next(int8(max)));                
@@ -157,7 +157,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         T Next_f<T>(T max)
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(float))
                 return generic<T>(Float32Source.Next(float32(max)));                
@@ -169,7 +169,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Next<T>(T min, T max)
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(UInt8Source.Next(uint8(min), uint8(max)));                
@@ -186,7 +186,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         T Next_i<T>(T min, T max)
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>(Int8Source.Next(int8(min), int8(max)));                
@@ -202,7 +202,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         T Next_f<T>(T min, T max)
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(float))
                 return generic<T>(Float32Source.Next(float32(min), float32(max)));                

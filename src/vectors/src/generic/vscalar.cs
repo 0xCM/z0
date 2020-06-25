@@ -63,13 +63,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(vscalar(w, uint8(src)));
+                return As.generic<T>(vscalar(w, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(vscalar(w, uint16(src)));
+                return As.generic<T>(vscalar(w, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(vscalar(w, uint32(src)));
+                return As.generic<T>(vscalar(w, uint32(src)));
             else 
-                return generic<T>(vscalar(w, uint64(src)));
+                return As.generic<T>(vscalar(w, uint64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -77,13 +77,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(vscalar(w, int8(src)));
+                return As.generic<T>(vscalar(w, int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(vscalar(w, int16(src)));
+                return As.generic<T>(vscalar(w, int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(vscalar(w, int32(src)));
+                return As.generic<T>(vscalar(w, int32(src)));
             else
-                return generic<T>(vscalar(w, int64(src)));
+                return As.generic<T>(vscalar(w, int64(src)));
         }
 
 
@@ -92,9 +92,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(vscalar(w, float32(src)));
+                return As.generic<T>(vscalar(w, float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(vscalar(w, float64(src)));
+                return As.generic<T>(vscalar(w, float64(src)));
             else 
                 throw Unsupported.define<T>();
         }
@@ -104,13 +104,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(vscalar(w,uint8(src)));
+                return As.generic<T>(vscalar(w,uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(vscalar(w,uint16(src)));
+                return As.generic<T>(vscalar(w,uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(vscalar(w,uint32(src)));
+                return As.generic<T>(vscalar(w,uint32(src)));
             else 
-                return generic<T>(vscalar(w,uint64(src)));
+                return As.generic<T>(vscalar(w,uint64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -118,13 +118,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(vscalar(w, int8(src)));
+                return As.generic<T>(vscalar(w, int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(vscalar(w, int16(src)));
+                return As.generic<T>(vscalar(w, int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(vscalar(w, int32(src)));
+                return As.generic<T>(vscalar(w, int32(src)));
             else
-                return generic<T>(vscalar(w, int64(src)));
+                return As.generic<T>(vscalar(w, int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -132,9 +132,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(vscalar(n,float32(src)));
+                return As.generic<T>(vscalar(n,float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(vscalar(n,float64(src)));
+                return As.generic<T>(vscalar(n,float64(src)));
             else 
                 throw Unsupported.define<T>();
         }

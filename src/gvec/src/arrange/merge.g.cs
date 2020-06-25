@@ -10,7 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Konst;
-    using static Vectors;
+    using static As;
+    using static Root;
 
     partial class gvec
     {

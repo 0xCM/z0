@@ -60,8 +60,8 @@ namespace Z0
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]        
         public static Span<T> Cast<S,T>(this Span<S> src)
-            where S : unmanaged
-            where T : unmanaged
+            where S : struct
+            where T : struct
                 => As.cast<S,T>(src);
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace Z0
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]        
         public static ReadOnlySpan<T> Cast<S,T>(this ReadOnlySpan<S> src)
-            where S : unmanaged
-            where T : unmanaged
+            where S : struct
+            where T : struct
                 => As.cast<S,T>(src);
     }
 }

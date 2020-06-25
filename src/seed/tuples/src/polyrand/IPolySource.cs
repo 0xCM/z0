@@ -12,32 +12,8 @@ namespace Z0
     /// <summary>
     /// Characterizes a fountain of generic points
     /// </summary>
-    public interface IPolySource
+    public interface IPolySource : IBoundValueSource, IValueSource
     {
-        /// <summary>
-        /// Retrieves the next point from the source, bound only by the domain of the type
-        /// </summary>
-        /// <typeparam name="T">The point type</typeparam>
-        T Next<T>()
-            where T : unmanaged;
-
-        /// <summary>
-        /// Retrieves the next point from the source, constrained by an upper bounds
-        /// </summary>
-        /// <param name="max">The exclusive max value</param>
-        /// <typeparam name="T">The point type</typeparam>
-        T Next<T>(T max)
-            where T : unmanaged;
-
-        /// <summary>
-        /// Retrieves the next point from the source, constrained by upper and lower bounds
-        /// </summary>
-        /// <param name="min">The inclusive min value</param>
-        /// <param name="max">The exclusive max value</param>
-        /// <typeparam name="T">The point type</typeparam>
-        T Next<T>(T min, T max)
-            where T : unmanaged;
-
         /// <summary>
         /// Returns the default domain used when producing random points for a parametrically-identifed type
         /// </summary>

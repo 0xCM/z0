@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
 
     /// <summary>
     /// Characterizes operations over an integer type
@@ -73,7 +72,7 @@ namespace Z0
 
     }
 
-    public interface IInteger<S> :  IRealNumber<S>, IStepwise<S>, IShiftable<S> 
+    public interface IInteger<S> :  IRealNumber<S>, IStepwise<S>
         where S : IInteger<S>, new()
     { }
 

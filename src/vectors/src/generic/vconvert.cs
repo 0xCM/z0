@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector128<sbyte> v8i<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsSByte();
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector128<byte> v8u<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsByte();
@@ -63,7 +63,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector128<short> v16i<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsInt16();
@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector128<ushort> v16u<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsUInt16();
@@ -83,7 +83,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector128<int> v32i<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsInt32();
@@ -93,7 +93,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector128<uint> v32u<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsUInt32();
@@ -103,7 +103,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector128<long> v64i<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsInt64();
@@ -113,7 +113,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector128<ulong> v64u<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsUInt64();
@@ -123,7 +123,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector128<float> v32f<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsSingle();
@@ -133,7 +133,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector128<double> v64f<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsDouble();
@@ -143,7 +143,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector256<sbyte> v8i<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsSByte();
@@ -153,7 +153,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector256<byte> v8u<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsByte();
@@ -163,7 +163,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector256<short> v16i<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsInt16();
@@ -173,7 +173,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector256<ushort> v16u<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsUInt16();
@@ -183,7 +183,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector256<int> v32i<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsInt32();
@@ -193,7 +193,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector256<uint> v32u<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsUInt32();
@@ -203,7 +203,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector256<long> v64i<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsInt64();
@@ -213,7 +213,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector256<ulong> v64u<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsUInt64();
@@ -223,7 +223,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector256<float> v32f<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsSingle();
@@ -233,7 +233,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Vector256<double> v64f<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsDouble(); 

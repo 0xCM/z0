@@ -9,7 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    
+
+    using static As;
+
     partial class Vectors
     {
         /// <summary>
@@ -26,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(vlo(v8u(src)));
+                return As.generic<T>(vlo(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(vlo(v16u(src)));
+                return As.generic<T>(vlo(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(vlo(v32u(src)));
+                return As.generic<T>(vlo(v32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(vlo(v64u(src)));
+                return As.generic<T>(vlo(v64u(src)));
             else
                 return vlo_i(src);
         }
@@ -42,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(vlo(v8i(src)));
+                return As.generic<T>(vlo(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(vlo(v16i(src)));
+                return As.generic<T>(vlo(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(vlo(v32i(src)));
+                return As.generic<T>(vlo(v32i(src)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(vlo(v64i(src)));
+                return As.generic<T>(vlo(v64i(src)));
             else
                 return vlo_f(src);            
         }
@@ -58,9 +60,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(vlo(v32f(src)));
+                return As.generic<T>(vlo(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(vlo(v64f(src)));
+                return As.generic<T>(vlo(v64f(src)));
             else 
                 throw Unsupported.define<T>();
         }

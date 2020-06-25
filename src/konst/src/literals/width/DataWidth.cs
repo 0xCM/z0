@@ -5,7 +5,7 @@
 namespace Z0
 {
     /// <summary>
-    /// Root source for width-related kinds throughout the system
+    /// Defines data widths expressed in bits
     /// </summary>
     public enum DataWidth : uint
     {

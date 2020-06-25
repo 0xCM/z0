@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => generic<T>(vscalar(n128, vcell(v64u(src),1)));
+                => As.generic<T>(vscalar(n128, vcell(v64u(src),1)));
 
         /// <summary>
         /// Extracts hi 128-bit lane of the source vector
@@ -75,13 +75,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vhi(v8u(src)));
+                return As.generic<T>(dvec.vhi(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vhi(v16u(src)));
+                return As.generic<T>(dvec.vhi(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vhi(v32u(src)));
+                return As.generic<T>(dvec.vhi(v32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vhi(v64u(src)));
+                return As.generic<T>(dvec.vhi(v64u(src)));
             else
                 return vhi_i(src);
         }
@@ -91,13 +91,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vhi(v8i(src)));
+                return As.generic<T>(dvec.vhi(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vhi(v16i(src)));
+                return As.generic<T>(dvec.vhi(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vhi(v32i(src)));
+                return As.generic<T>(dvec.vhi(v32i(src)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vhi(v64i(src)));
+                return As.generic<T>(dvec.vhi(v64i(src)));
             else
                 return vhi_f(src);
         }
@@ -107,9 +107,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vhi(v32f(src)));
+                return As.generic<T>(dinxfp.vhi(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vhi(v64f(src)));
+                return As.generic<T>(dinxfp.vhi(v64f(src)));
             else 
                 throw Unsupported.define<T>();
         }

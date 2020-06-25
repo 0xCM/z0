@@ -32,6 +32,5 @@ namespace Z0
         public static Fixed256 vfix<T>(Vector256<T> x)
             where T : unmanaged
                 => new Fixed256(v64u(x));
-
     }
 }

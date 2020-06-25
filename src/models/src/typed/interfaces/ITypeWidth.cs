@@ -3,9 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System;
-    
+{    
     public interface ITypeWidth : IDataWidth, ITypedLiteral<TypeWidth,uint>
     {
         /// <summary>
@@ -22,5 +20,4 @@ namespace Z0
         string ITypedLiteral<TypeWidth>.Name 
             => TypeWidth.FormatName();        
     }
-
 }

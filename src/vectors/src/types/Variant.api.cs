@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static Konst;
-    using static Vectors;
+    using static As;
     using static Root;
 
     using NK = NumericKind;
@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static NK kind(variant src)
-            => (NK)vcell(src.data,1);
+            => (NK)Vectors.vcell(src.data,1);
 
         [MethodImpl(Inline)]
         public static DataWidth width(variant src)
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T extract<T>(variant src)
             where T : unmanaged
-                => vcell(vector<T>(src), 0);
+                => Vectors.vcell(vector<T>(src), 0);
 
         [MethodImpl(Inline), Op]
         public static variant from(sbyte src)
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static T cell<T>(variant src, byte index)
             where T : unmanaged
-                => vcell(vector<T>(src), index);
+                => Vectors.vcell(vector<T>(src), index);
     
         [MethodImpl(Inline)]
         static Vector128<ulong> store(ulong value, NK kind)

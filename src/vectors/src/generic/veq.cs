@@ -53,13 +53,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(veq(v8u(x), v8u(y)));
+                return As.generic<T>(veq(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(veq(v16u(x), v16u(y)));
+                return As.generic<T>(veq(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(veq(v32u(x), v32u(y)));
+                return As.generic<T>(veq(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(veq(v64u(x), v64u(y)));
+                return As.generic<T>(veq(v64u(x), v64u(y)));
             else
                 return veq_i(x,y);
         }
@@ -69,13 +69,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(veq(v8i(x), v8i(y)));
+                return As.generic<T>(veq(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(veq(v16i(x), v16i(y)));
+                return As.generic<T>(veq(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(veq(v32i(x), v32i(y)));
+                return As.generic<T>(veq(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(veq(v64i(x), v64i(y)));
+                return As.generic<T>(veq(v64i(x), v64i(y)));
             else
                 return veq_f(x,y);
         }
@@ -85,9 +85,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(veq(v32f(x), v32f(y)));
+                return As.generic<T>(veq(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(veq(v64f(x), v64f(y)));
+                return As.generic<T>(veq(v64f(x), v64f(y)));
             else 
                 throw Unsupported.define<T>();
         }
@@ -97,13 +97,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(veq(v8u(x), v8u(y)));
+                return As.generic<T>(veq(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(veq(v16u(x), v16u(y)));
+                return As.generic<T>(veq(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(veq(v32u(x), v32u(y)));
+                return As.generic<T>(veq(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(veq(v64u(x), v64u(y)));
+                return As.generic<T>(veq(v64u(x), v64u(y)));
             else
                 return veq_i(x,y);
         }
@@ -113,13 +113,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(veq(v8i(x), v8i(y)));
+                return As.generic<T>(veq(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(veq(v16i(x), v16i(y)));
+                return As.generic<T>(veq(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(veq(v32i(x), v32i(y)));
+                return As.generic<T>(veq(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(veq(v64i(x), v64i(y)));
+                return As.generic<T>(veq(v64i(x), v64i(y)));
             else
                 return veq_f(x,y);
         }
@@ -130,9 +130,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(veq(v32f(x), v32f(y)));
+                return As.generic<T>(veq(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(veq(v64f(x), v64f(y)));
+                return As.generic<T>(veq(v64f(x), v64f(y)));
             else 
                 throw Unsupported.define<T>();
         } 

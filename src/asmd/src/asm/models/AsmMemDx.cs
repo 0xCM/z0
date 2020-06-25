@@ -11,24 +11,34 @@ namespace Z0.Asm
 
     [Label(TypeLabels.Dx)]
     public readonly struct AsmMemDx : INullity, INullary<AsmMemDx>, ITextual
-    {
-        public static AsmMemDx Empty => new AsmMemDx(0, NumericSize.None);
-        
+    {        
         /// <summary>
         /// The size of the displacement in bytes
         /// </summary>
-        public NumericSize Size {get;}
+        public DataSize Size {get;}
 
         /// <summary>
         /// The displacement value
         /// </summary>
         public ulong Value {get;}
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => Value == 0 && Size == 0; }
+        public bool IsEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => Value == 0 && Size == 0; 
+        }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => Value != 0 && Size != 0; }
+        public bool IsNonEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => Value != 0 && Size != 0; 
+        }
 
-        public bool NonZero => Value != 0;
+        public bool NonZero 
+        {
+            [MethodImpl(Inline)] 
+            get => Value != 0;
+        }
 
         public AsmMemDx Zero => Empty;
 
@@ -37,15 +47,15 @@ namespace Z0.Asm
             => From(src.value, src.size);
 
         [MethodImpl(Inline)]
-        public static AsmMemDx Create(ulong value, NumericSize size)
+        public static AsmMemDx Create(ulong value, DataSize size)
             => new AsmMemDx(value, size);
         
         [MethodImpl(Inline)]
         public static AsmMemDx From(ulong value, int size)
-            => new AsmMemDx(value,  Enums.definedOrElse((NumericSize)size, NumericSize.None));
+            => new AsmMemDx(value,  Enums.definedOrElse((DataSize)size, DataSize.None));
 
         [MethodImpl(Inline)]
-        public AsmMemDx(ulong value, NumericSize size)
+        public AsmMemDx(ulong value, DataSize size)
         {
             this.Value = value;
             this.Size = size;
@@ -56,13 +66,17 @@ namespace Z0.Asm
 
         public string Format()
             => (Size switch{
-                NumericSize.SZ1 => ((byte)Value).FormatHex(HexSpec),
-                NumericSize.SZ2 => ((ushort)Value).FormatHex(HexSpec),
-                NumericSize.SZ4 => ((uint)Value).FormatHex(HexSpec),
+                DataSize.Size1 => ((byte)Value).FormatHex(HexSpec),
+                DataSize.Size2 => ((ushort)Value).FormatHex(HexSpec),
+                DataSize.Size4 => ((uint)Value).FormatHex(HexSpec),
                 _ => (Value).FormatHex(HexSpec),
             }) + "dx";
 
         public override string ToString()
             => Format();
+
+        public static AsmMemDx Empty 
+            => default;
+
     }
 }

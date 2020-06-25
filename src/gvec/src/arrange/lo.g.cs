@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vlo<T>(Vector128<T> src)
             where T : unmanaged
-                =>  generic<T>(vzerohi(v64u(src)));
+                =>  As.generic<T>(vzerohi(v64u(src)));
 
         /// <summary>
         /// Extracts the lo 128-bit lane of the source vector
@@ -85,13 +85,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vlo(v8i(src)));
+                return As.generic<T>(dvec.vlo(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vlo(v16i(src)));
+                return As.generic<T>(dvec.vlo(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vlo(v32i(src)));
+                return As.generic<T>(dvec.vlo(v32i(src)));
             else
-                return generic<T>(dvec.vlo(v64i(src)));
+                return As.generic<T>(dvec.vlo(v64i(src)));
         }
 
         [MethodImpl(Inline)]
@@ -99,13 +99,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vlo(v8u(src)));
+                return As.generic<T>(dvec.vlo(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vlo(v16u(src)));
+                return As.generic<T>(dvec.vlo(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vlo(v32u(src)));
+                return As.generic<T>(dvec.vlo(v32u(src)));
             else 
-                return generic<T>(dvec.vlo(v64u(src)));
+                return As.generic<T>(dvec.vlo(v64u(src)));
         }
 
         [MethodImpl(Inline)]
@@ -113,9 +113,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vlo(v32f(src)));
+                return As.generic<T>(dinxfp.vlo(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vlo(v64f(src)));
+                return As.generic<T>(dinxfp.vlo(v64f(src)));
             else 
                 throw Unsupported.define<T>();
         }

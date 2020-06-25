@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Security;
-
     partial class FixedOpKinds
     {
         /// <summary>

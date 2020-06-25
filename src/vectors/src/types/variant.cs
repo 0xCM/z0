@@ -120,7 +120,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Vector128<T> to<T>()
             where T : unmanaged
-                => generic<T>(data);
+                => As.generic<T>(data);
 
         [MethodImpl(Inline)]
         T cell<T>(int index)

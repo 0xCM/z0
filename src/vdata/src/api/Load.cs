@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static Konst;
-    using static Vectors;
-    using static refs;
+    using static As;
+    using static Root;
   
     partial class VData
     {                

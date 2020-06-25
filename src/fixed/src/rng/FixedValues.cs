@@ -9,36 +9,35 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Widths;
 
     partial class XRng
     {
         [MethodImpl(Inline)]
-        public static Fixed8 Fixed(this IPolyrand random, W8 w)
-            => random.Next<byte>();
+        public static Fixed8 Fixed(this IValueSource source, W8 w)
+            => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static Fixed16 Fixed(this IPolyrand random, W16 w)
-            => random.Next<ushort>();
+        public static Fixed16 Fixed(this IValueSource source, W16 w)
+            => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static Fixed32 Fixed(this IPolyrand random, W32 w)
-            => random.Next<uint>();
+        public static Fixed32 Fixed(this IValueSource source, W32 w)
+            => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static Fixed64 Fixed(this IPolyrand random, W64 w)
-            => random.Next<ulong>();
+        public static Fixed64 Fixed(this IValueSource source, W64 w)
+            => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static Fixed128 Fixed(this IPolyrand random, W128 w)
-            => random.NextPair<ulong>();
+        public static Fixed128 Fixed(this IValueSource source, W128 w)
+            => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static Fixed256 Fixed(this IPolyrand random, W256 w)
-            => (random.Fixed(w128), random.Fixed(w128));
+        public static Fixed256 Fixed(this IValueSource source, W256 w)
+            => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static Fixed512 Fixed(this IPolyrand random, W512 w)
-            => (random.Fixed(w256), random.Fixed(w256));
+        public static Fixed512 Fixed(this IValueSource source, W512 w)
+            => FixedValues.next(source, w);
     }
 }

@@ -27,4 +27,25 @@ namespace Z0
         /// </summary>
         T Individual {get;}
     }    
+
+    /// <summary>
+    /// Characterizes a reified nonempty set
+    /// </summary>
+    /// <typeparam name="F">The reifying type</typeparam>
+    public interface INonempySet<F> : INonEmpty<F>
+        where F : INonempySet<F>, new()
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a reified nonempty set with evidence of non-absence
+    /// </summary>
+    /// <typeparam name="F">The reifying type</typeparam>
+    /// <typeparam name="T">The member type</typeparam>
+    public interface NonempySet<F,T> : INonempySet<F>, INonEmpty<F,T>
+        where F : NonempySet<F,T>, new()
+    {
+
+    }
 }

@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Fixed32 F32<T>(T src)
             where T : unmanaged
-                => Fixed32.From(Cast.to<T,uint>(src));
+                => Fixed32.init(Cast.to<T,uint>(src));
 
         [MethodImpl(Inline)]
         public static Fixed64 F64<T>(T src)

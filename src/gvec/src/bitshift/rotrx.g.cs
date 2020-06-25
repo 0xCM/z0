@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vrotrx<T>(Vector128<T> src, [Imm] byte count)        
             where T : unmanaged
-                => Vectors.generic<T>(dvec.vrotrx(v64u(src), count));
+                => generic<T>(dvec.vrotrx(v64u(src), count));
 
         /// <summary>
         /// Rotates the each 128-bit lane rightward at bit-level resolution

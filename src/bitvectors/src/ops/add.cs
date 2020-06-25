@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static As;
+    using static Typed;
 
     partial class BitVector
     {
@@ -80,7 +81,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var sum = dvec.vadd(v64u(x.Data), v64u(y.Data));            
-            bit carry = x.Lo > vcell(sum,0);
+            bit carry = x.Lo > Vectors.vcell(sum,0);
             return  As.generic<T>(dvec.vadd(sum, Vectors.vbroadcast(n128, (ulong)carry)));
         }
     }

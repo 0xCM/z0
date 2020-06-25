@@ -304,6 +304,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vmsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(Vectors.vbroadcast<byte>(w, BitMask.msb8f(d)));
+                => As.generic<T>(Vectors.vbroadcast<byte>(w, BitMask.msb8f(d)));
     }
 }

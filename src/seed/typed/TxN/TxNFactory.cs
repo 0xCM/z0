@@ -11,7 +11,6 @@ namespace Z0
 
     public readonly struct Tx
     {
-
         [MethodImpl(Inline)]
         public static TxN<T0> T<T0>(T0 t0 = default)
             => default;
@@ -59,6 +58,5 @@ namespace Z0
             T2 t2 = default, T3 t3 = default, T4 t4 = default, T5 t5 = default, T6 t6 = default, 
             T7 t7 = default, T8 t8 = default, T9 t9 = default) 
                 => new TxN<T0,T1,T2,T3,T4,T5,T6,T7,T8,T9>(0);
-
     }    
 }

@@ -19,7 +19,7 @@ namespace Z0
     /// Characterizes a signable reification
     /// </summary>
     /// <typeparam name="S">The reification type</typeparam>
-    public interface ISigned<F> : ISigned
+    public interface ISigned<F> : ISigned, IReified<F>
         where F : ISigned<F>, new()
     {
     

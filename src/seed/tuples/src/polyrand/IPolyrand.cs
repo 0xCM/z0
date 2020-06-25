@@ -34,6 +34,4 @@ namespace Z0
     {
         IPolyrand Random {get;}
     }
-
-
 }

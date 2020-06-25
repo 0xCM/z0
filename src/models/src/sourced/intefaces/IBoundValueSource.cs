@@ -30,4 +30,24 @@ namespace Z0
         /// <param name="max">The exclusive max value</param>
         T Next(T min, T max);        
     }
+
+    public interface IBoundValueSource
+    {
+        /// <summary>
+        /// Retrieves the next point from the source, constrained by an upper bounds
+        /// </summary>
+        /// <param name="max">The exclusive max value</param>
+        /// <typeparam name="T">The point type</typeparam>
+        T Next<T>(T max)
+            where T : struct;
+
+        /// <summary>
+        /// Retrieves the next point from the source, constrained by upper and lower bounds
+        /// </summary>
+        /// <param name="min">The inclusive min value</param>
+        /// <param name="max">The exclusive max value</param>
+        /// <typeparam name="T">The point type</typeparam>
+        T Next<T>(T min, T max)
+            where T : struct;
+    }
 }

@@ -191,7 +191,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<T> vmsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
+                => As.generic<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
 
         /// <summary>
         /// Creates a mask where f most significant bits of each 8 bits are enabled
@@ -203,6 +203,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<T> vmsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
+                => As.generic<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
     }
 }

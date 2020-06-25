@@ -36,5 +36,14 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte @ref<T>(W8 w, ref T src)
             => ref As<T,byte>(ref src);
+
+        /// <summary>
+        /// Presents a T-reference as a uint64 reference
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref ulong @ref<T>(W64 w, ref T src)
+            => ref As<T,ulong>(ref src);
     }
 }

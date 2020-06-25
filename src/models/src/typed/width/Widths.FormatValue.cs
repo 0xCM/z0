@@ -11,7 +11,7 @@ namespace Z0
 
     partial class XTend 
     {        
-        public static string Format(this NumericSize src)
+        public static string Format(this DataSize src)
             => ((byte)src).ToString();
 
         [MethodImpl(Inline)]
