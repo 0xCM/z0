@@ -29,6 +29,12 @@ namespace Z0
         {
             Data = content;            
         }        
+
+        public T[] Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
         
         public ref T this[int i]
         {

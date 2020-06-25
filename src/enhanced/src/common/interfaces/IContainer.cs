@@ -66,6 +66,16 @@ namespace Z0
         C Content {get;}
     }
 
+
+    public interface IElements<T> : IContented<IEnumerable<T>>, IEnumerable<T>
+    {
+        IEnumerator IEnumerable.GetEnumerator()
+            => Content.GetEnumerator();
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+            => Content.ToList().GetEnumerator();
+    }
+
     public interface INamedContent<C> : IContented<C>, INamed
     {
 
@@ -102,8 +112,8 @@ namespace Z0
     /// Characterizes a reversible structure
     /// </summary>
     /// <typeparam name="S">The structure type</typeparam>
-    public interface IReversible<F>
-        where F : IReversible<F>, new()
+    public interface IReversible<F,T>
+        where F : IReversible<F,T>, new()
     {
         F Reverse();
     }    
@@ -158,19 +168,6 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a finite type type with a parametric count emitter since not all
-    /// countable things can be counted with a 32-bit integer
-    /// </summary>
-    /// <typeparam name="T">The count type</typeparam>
-    public interface IFinite<T> : IFinite
-    {
-        new T Count();
-    
-        int IFinite.Count() 
-            => (int)(object)Count();
-    }
-
-    /// <summary>
     /// Characterizes a finite thing that yeilds a count value that does not require computation/enumeration 
     /// to reveal; in other words, the count function for counted things is free, as evinced by
     /// the default implementation
@@ -194,23 +191,9 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a countable type with a parametric count type since not all
-    /// countable things can be counted with a 32-bit integer
-    /// </summary>
-    /// <typeparam name="T">The count type</typeparam>
-    public interface ICounted<T> : ICounted, IFinite<T>
-    {
-        new T Count {get;}
-
-        [MethodImpl(Inline)]
-        T IFinite<T>.Count() 
-            => Count;
-    }
-
-    /// <summary>
     /// Characterizes a type that exhibits a notion of finite length
     /// </summary>
-    public interface ILengthwise : ICounted
+    public interface IMeasured : ICounted
     {
         int Length {get;}
 
@@ -221,42 +204,52 @@ namespace Z0
     /// <summary>
     /// Characterizes a refiied type that  exhibits a notion of length
     /// </summary>
-    public interface ILengthwise<S> : ILengthwise, IReified<S>
-        where S : ILengthwise<S>, new()
+    public interface IMeasured<S> : IMeasured, IReified<S>
+        where S : IMeasured<S>, new()
     {
 
     }
     
     /// <summary>
-    /// Characterizes a free monoidal structure
+    /// Characterizes a (finite) free monoidal structure
     /// </summary>
     /// <typeparam name="S">The structure type</typeparam>
     /// <typeparam name="T">The underlying type</typeparam>
-    public interface IFreeMonoid<S> :  IMonoid<S>, IConcatenable<S>, ILengthwise<S>, INullary<S>
-        where S : IFreeMonoid<S>, new()
+    public interface IFreeMonoid<T> : IMonoid<T>, IConcatenable<T>, ICounted
     {
 
     }    
+
+    public interface IFreeMonoid<F,S> : IMonoid<S>, IConcatenable<F,S>, ICounted, INullary<S>
+        where F : IFreeMonoid<F,S>, new()
+    {
+
+    }    
+    
+    public interface IConcatenable<T>
+    {
+
+    }
 
     /// <summary>
     /// Characterizes a reification that defines an intrinsic concatentation operator
     /// </summary>
     /// <typeparam name="S">The reifying type</typeparam>
-    public interface IConcatenable<S> : IReified<S>
-        where S : IConcatenable<S>, new()
+    public interface IConcatenable<F,T> : IConcatenable<T>
+        where F : IConcatenable<F,T>, new()
     {
         /// <summary>
         /// Concatenates the intrinsic value with a suplied value 
         /// </summary>
         /// <param name="rhs">The right value supplied to the concatenation operator</param>
-        S Concat(S rhs);
+        F Concat(F rhs);
     }
 
     /// <summary>
     /// Characterizes a container over discrete/enumerable content which need not be finite
     /// </summary>
     /// <typeparam name="T">The element type</typeparam>
-    public interface IElements<T> : IContented<IEnumerable<T>>, IEnumerable<T>
+    public interface IDeferred<T> : IContented<IEnumerable<T>>, IEnumerable<T>
     {
         IEnumerator IEnumerable.GetEnumerator()
             => Content.GetEnumerator();
@@ -270,31 +263,51 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="T">The element type</typeparam>
-    public interface IElements<F,T> :  IElements<T>, IContented<F,IEnumerable<T>,T>, IReified<F>, IConcatenable<F>
-        where F : IElements<F,T>, new()
+    public interface IDeferred<F,T> : IDeferred<T>, IContented<F,IEnumerable<T>,T>, IReified<F>, IConcatenable<F,T>
+        where F : IDeferred<F,T>, new()
     {
-        F IConcatenable<F>.Concat(F rhs)
+        F IConcatenable<F,T>.Concat(F rhs)
             => WithContent(Content.Concat(rhs.Content));        
     }
 
     /// <summary>
-    /// Characterizes a set over a collection of elements and need not be finite
+    /// Characterizes a finite deferred T-sequence
     /// </summary>
-    /// <typeparam name="T">The element type</typeparam>
-    public interface IDiscreteSet<T> : IElements<T>, INullity
-    {
-
+    /// <typeparam name="T">The sequence element type</typeparam>
+    public interface IFiniteDeferral<T> : IDeferred<T>, IFinite
+    {       
+        /// <summary>
+        /// Brings the deferral to life
+        /// </summary>
+        T[] Force() 
+            => Content.ToArray();
     }
 
     /// <summary>
-    /// Characteriizes refied discrete set
+    /// Characterizes a reifed finite sequence
     /// </summary>
-    /// <typeparam name="F">The reifying type</typeparam>
-    /// <typeparam name="T">The member type</typeparam>
-    public interface IDiscreteSet<F,T> : IDiscreteSet<T>, IElements<F,T>
-        where F: IDiscreteSet<F,T>, new()
+    /// <typeparam name="S">The reifying type</typeparam>
+    /// <typeparam name="T">The sequence element type</typeparam>
+    public interface IFiniteDeferral<F,T> : IDeferred<F,T>, IFiniteDeferral<T>
+        where F : IFiniteDeferral<F,T>, new()   
+    {        
+            
+    }
+
+    public interface IMaterialied<T> : IFinite, IContented<T>, IIndex<T> 
     {
 
+    }
+    
+    public interface IMaterialized<F,T> : IMaterialied<T>, IReified<F>
+        where T : IFiniteDeferral<T>
+        where F : IMaterialized<F,T>, new()
+    {
+        /// <summary>
+        /// Replaces materialized content forced from a source
+        /// </summary>
+        /// <param name="src"></param>
+        F Redefine(T src);
     }
 
     /// <summary>
@@ -319,25 +332,19 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a finite set over elements of parametric type
+    /// Characterizes a reified set over elements of parametric type
     /// </summary>
-    public interface IElementSet<T> : IDiscreteSet<T>, ICounted
+    /// <typeparam name="F">The reifying type</typeparam>
+    /// <typeparam name="T">The element type</typeparam>
+    public interface IDeferredSet<F,T> : IFiniteDeferral<F,T>, ICounted, INullity
+        where F : IDeferredSet<F,T>, new()
     {
         /// <summary>
         /// Determines whether a value is a member
         /// </summary>
         /// <param name="candidate">The potential member</param>
         bool Contains(T candidate);
-    }
 
-    /// <summary>
-    /// Characterizes a reified set over elements of parametric type
-    /// </summary>
-    /// <typeparam name="F">The reifying type</typeparam>
-    /// <typeparam name="T">The element type</typeparam>
-    public interface IElementSet<F,T> : IElementSet<T>, IDiscreteSet<F,T>
-        where F : IElementSet<F,T>, new()
-    {
         /// <summary>
         /// Determines whether the current set is a subset of a specified set.
         /// </summary>
@@ -379,7 +386,7 @@ namespace Z0
     /// Characterizes an individual that can be uniquely associatd with an integer in the range 0..n-1 
     /// within the context of a container with a capacity of n items
     /// </summary>
-    public interface IIndexed
+    public interface IPositional
     {
         /// <summary>
         /// The 0-based position of the item in an enclosing container
@@ -387,23 +394,15 @@ namespace Z0
         int Position {get;}
     }
 
-    public interface IIndexed<F> : IIndexed, IReified<F>
-        where F : struct, IIndexed<F>
+    public interface IPositional<F> : IPositional, IReified<F>
+        where F : IPositional<F>, new()
     {
         
     }
 
-    public interface IDataIndex<T> : ILengthwise
+    public interface IDataIndex<T> : IMeasured
     {
     
-    }
-
-    public interface IIndex<T> : ILengthwise
-    {
-        ref T this[int index] {get;}  
-
-        ref T Lookup(int index) 
-            => ref this[index];
     }
 
     public interface IReadOnlyIndex<T> : IDataIndex<T>
@@ -414,31 +413,11 @@ namespace Z0
             => ref this[index];    
     }
 
-    public interface IIndex<F,T> : IIndex<T>, IReified<F>
-        where F : IIndex<F,T>, new()
-    {
-
-    }
-
-    public interface INonEmptyList<T> : IIndex<T>
-    {
-        ref T Head {get;}
-
-        ref T Tail {get;}
-    }
-
-    public interface INonEmptyList<F,T> : INonEmptyList<T>
-        where F : INonEmptyList<F,T>, new()
-         
-    {
-
-    }
-
     /// <summary>
     /// Characterizes a finite container over sequentially-indexed discrete content - an array
     /// </summary>
     /// <typeparam name="T">The element type</typeparam>
-    public interface IIndexedContent<T> : IContented<T[]>, IEnumerable<T>, ILengthwise
+    public interface IIndex<T> : IContented<T[]>, IMeasured, IEnumerable<T>
     {
         IEnumerator IEnumerable.GetEnumerator()
             => Content.GetEnumerator();
@@ -446,60 +425,28 @@ namespace Z0
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
             => Content.ToList().GetEnumerator();
 
-        int ILengthwise.Length
-        {
-            [MethodImpl(Inline)]
-            get => Content.Length;
-        }
-        
-        /// <summary>
-        /// Retrieves a mutable reference to an index-identified item
-        /// </summary>
+        int IMeasured.Length
+            => Content?.Length ?? 0;
+
         ref T this[int index]
-        {         
-            [MethodImpl(Inline)]
-            get => ref Content[index];
-        }
+            => ref Content[index];
+
+        ref T Lookup(int index) 
+            => ref this[index];
     }
-
-    public interface ISeq<T> : IElements<T>
-    {        
-
-    }
-
-    /// <summary>
-    /// Characterizes a concatenable container with discrete content 
-    /// </summary>
-    /// <typeparam name="S">The container type</typeparam>
-    /// <typeparam name="T">The contained type</typeparam>
-    public interface ISeq<S,T> : ISeq<T>, IElements<S,T>, IConcatenable<S>
-        where S : ISeq<S,T>, new()
-    {
-        S IConcatenable<S>.Concat(S rhs)
-            => WithContent(Content.Concat(rhs.Content));
-    }
-
-    /// <summary>
-    /// Characterizes an element sequence that is known to be finite, but may require enumeration
-    /// to find the count; consequently, there is a "Count()" operation defined but no
-    /// "Counted" property
-    /// </summary>
-    /// <typeparam name="T">The element type</typeparam>
-    public interface IFiniteSeq<T> : ISeq<T>, IFinite
-    {
-        int IFinite.Count() 
-            => Content.Count();
-    }
-
-    /// <summary>
-    /// Characterizes a reifed finite  sequence
-    /// </summary>
-    /// <typeparam name="S">The reifying type</typeparam>
-    /// <typeparam name="T">The sequence element type</typeparam>
-    public interface IFiniteSeq<F,T> : IFiniteSeq<T>, ISeq<F,T>
-        where F : IFiniteSeq<F,T>, new()         
-    {        
     
+    public interface IIndex<F,T> : IIndex<T>, IReified<F>, INullary<F,T>
+        where F : IIndex<F,T>, new()
+    {
+        bool INullity.IsEmpty 
+            => Content?.Length == 0;
+    }
+
+    public interface INonEmptyIndex<T> : IIndex<T>
+    {
+        ref T Head {get;}
+
+        ref T Tail {get;}
     }
 
     /// <summary>
@@ -507,35 +454,29 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The reifying type</typeparam>
     /// <typeparam name="T">The sequence element type</typeparam>
-    public interface IIndexedSeq<F,T> : IFiniteSeq<F,T>, IIndex<F,T>, IReversible<F>, INonEmptyList<F,T>
+    public interface IIndexedSeq<F,T> : INonEmptyIndex<T>, IReversible<F,T> 
         where F : IIndexedSeq<F,T>, new()
     {
 
     }
     
-    public interface IListed<S> : INullary<S>, IReversible<S>, ILengthwise<S>
-        where S : IListed<S>, new()
+    public interface IListed<T> : IMeasured
     {
         /// <summary>
         /// Returns the first constituent if extant; othewise, returns the monoidal 0
         /// </summary>
-        S Head {get;}
+        T Head {get;}
 
         /// <summary>
         /// Returns the last constituent if extant; othewise, returns the monoidal 0
         /// </summary>
-        S Tail {get;}
+        T Tail {get;}
     }
 
-    public interface IListed<S,T> : IListed<S>
+    public interface IListed<S,T> : IListed<T>, IReversible<S,T> 
         where S : IListed<S,T>, new()
-        where T : unmanaged//, IMonoidA<T>
     {
-        /// <summary>
-        /// Replaces the existing list with a new list with specified content
-        /// </summary>
-        /// <param name="src"></param>
-        S Redefine(IEnumerable<T> src);
+
     }
 
     public interface IDecrementable<S> : IOrdered<S>

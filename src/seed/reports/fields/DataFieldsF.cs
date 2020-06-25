@@ -8,30 +8,30 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;   
-    using static RecordFields;
+    using static Root;
 
-   public readonly struct RecordFields<F> : IRecordFields<F>
+   public readonly struct DataFields<F> : IDataFields<F>
         where F : unmanaged, Enum
     {
         public F[] Literals 
         {        
             [MethodImpl(Inline)]
-            get => Service.Literals<F>();
+            get => Enums.literals<F>();
         }
 
         public string[] Labels 
         {        
             [MethodImpl(Inline)]
-            get => Service.Labels<F>();
+            get => Literals.Map(f => f.ToString());
         }
 
         [MethodImpl(Inline)]
         public short Index(F f)
-            => Service.Index(f);
+            => (short)scalar<F,int>(f);
 
         [MethodImpl(Inline)]
         public short Width(F f)
-            => Service.Width(f);
+            => (short)(scalar<F,int>(f) >> 16);
 
         public int Length
         {

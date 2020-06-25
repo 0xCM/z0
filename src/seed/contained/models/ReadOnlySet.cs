@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Contains a finite set of values
     /// </summary>
-    public readonly struct ReadOnlySet<T> : IElementSet<ReadOnlySet<T>,T>, IEquatable<ReadOnlySet<T>>
+    public readonly struct ReadOnlySet<T> : IDeferredSet<ReadOnlySet<T>,T>, IEquatable<ReadOnlySet<T>>
         where T : ISemigroup<T>, new()
     {
         readonly HashSet<T> data;

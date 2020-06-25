@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using W = TabularWidths;
+    using W = DataFieldWidths;
     using F = EnumLiteralRecordField;
 
     public enum EnumLiteralRecordField : uint
@@ -56,7 +56,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var formatter = Tabular.FieldFormatter<F>(delimiter);
+            var formatter = DataFields.formatter<F>(delimiter);
             formatter.Append(F.Sequence, Sequence);
             formatter.Delimit(F.Identifier, Identifier);
             formatter.Delimit(F.Description, Description);

@@ -67,7 +67,7 @@ namespace Z0
             => new Report<F,R>();
 
         public FieldFormatter<F> Formatter 
-            => Tabular.FieldFormatter<F>();
+            => DataFields.formatter<F>();
 
         public new TabularFormat<F> Format {get;}
 

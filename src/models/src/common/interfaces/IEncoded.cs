@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IEncoded<F> : IEquatable<F>, ILengthwise, ITextual
+    public interface IEncoded<F> : IEquatable<F>, IMeasured, ITextual
         where F : struct, IEncoded<F>
     {
 

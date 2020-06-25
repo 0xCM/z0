@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    
-    public interface IMultiplicative<S>
-        where S : IMultiplicative<S>, new()
+    public interface IMultiplicative<T>
     {
-        S Mul(S rhs);
+        T Mul(T rhs);
     }
 
     /// <summary>
@@ -17,8 +14,8 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The structure type</typeparam>
     /// <typeparam name="T">The individual type</typeparam>
-    public interface IMultiplicative<S,T> : IMultiplicative<S>
-        where S : IMultiplicative<S,T>, new()
+    public interface IMultiplicative<F,T> : IMultiplicative<F>
+        where F : IMultiplicative<F,T>, new()
     {
         
     }    

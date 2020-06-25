@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Refies a canonical sequence container with content that need not be finite
     /// </summary>
-    public readonly struct Seq<T> : ISeq<Seq<T>,T>
+    public readonly struct Seq<T> : IDeferred<Seq<T>,T>
     {
 
         public IEnumerable<T> Content {get;}

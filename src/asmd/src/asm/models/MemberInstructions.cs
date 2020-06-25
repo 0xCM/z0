@@ -14,17 +14,8 @@ namespace Z0.Asm
     /// <summary>
     /// Groups a sequence of located instructions
     /// </summary>         
-    public readonly struct MemberInstructions : 
-        INullity, 
-        INullary<MemberInstructions>,
-        IIndex<LocatedInstruction>
+    public readonly struct MemberInstructions : INullary<MemberInstructions,LocatedInstruction[]>, IIndex<LocatedInstruction>
     {
-        public static MemberInstructions Empty => new MemberInstructions(MemoryAddress.Empty, Root.array<LocatedInstruction>());
-        
-        [MethodImpl(Inline)]
-        public static MemberInstructions Create(MemoryAddress hostaddr, MemberCode uriCode, Instruction[] src)
-            => new MemberInstructions(hostaddr, LocatedInstruction.Many(uriCode, src.ToArray()));
-
         public OpUri OpUri {get;}
     
         public LocatedInstruction[] Content {get;}
@@ -38,17 +29,38 @@ namespace Z0.Asm
 
         public OpIdentity OpId => OpUri.OpId;
 
-        public int TotalCount { [MethodImpl(Inline)] get => Content.Length; }
+        public int TotalCount 
+        { 
+            [MethodImpl(Inline)] 
+            get => Content.Length; 
+        }
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => TotalCount == 0; }
+        public bool IsEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => TotalCount == 0; 
+        }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => TotalCount != 0; }
+        public bool IsNonEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => TotalCount != 0; 
+        }
 
-        public int Length { [MethodImpl(Inline)] get => Content.Length;}
+        public int Length         
+        { 
+            [MethodImpl(Inline)] 
+            get => Content.Length;
+        }
         
-        public ref LocatedInstruction this[int i] { [MethodImpl(Inline)] get => ref Content[i];}
+        public ref LocatedInstruction this[int i] 
+        { 
+            [MethodImpl(Inline)] 
+            get => ref Content[i];
+        }
 
-        public MemberInstructions Zero => Empty;
+        public MemberInstructions Zero 
+            => Empty;
 
         [MethodImpl(Inline)]        
         public MemberInstructions(MemoryAddress hostaddr, LocatedInstruction[] located)
@@ -58,5 +70,13 @@ namespace Z0.Asm
             HostAddress = hostaddr;
             BaseAddress = located.Length != 0 ? located[0].BaseAddress : MemoryAddress.Empty;
         }
+
+        public static MemberInstructions Empty 
+            => new MemberInstructions(MemoryAddress.Empty, Array.Empty<LocatedInstruction>());
+        
+        [MethodImpl(Inline)]
+        public static MemberInstructions Create(MemoryAddress hostaddr, MemberCode uriCode, Instruction[] src)
+            => new MemberInstructions(hostaddr, LocatedInstruction.Many(uriCode, src.ToArray()));
+
     }
 }

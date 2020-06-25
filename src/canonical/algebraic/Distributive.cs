@@ -38,7 +38,6 @@ namespace Z0
     }
 
     public interface ILeftDistributive<S>: IMultiplicative<S>, IAdditive<S>
-        where S : ILeftDistributive<S>, new()
     {
         /// <summary>
         /// Characterizes a type that defines an operator that left-distributes
@@ -46,11 +45,9 @@ namespace Z0
         /// </summary>
         /// <typeparam name="X">The operand type</typeparam>
         S LeftDistribute((S x, S y) rhs);
-
     }
 
     public interface IRightDistributive<S> : IMultiplicative<S>, IAdditive<S>
-        where S : IRightDistributive<S>, new()
     {
         /// <summary>
         /// Characterizes a type that defines an operator that left-distributes
@@ -58,11 +55,9 @@ namespace Z0
         /// </summary>
         /// <typeparam name="X">The operand type</typeparam>
         S RightDistribute((S x, S y) rhs);
-
     }
     
     public interface IDistributive<S> : ILeftDistributive<S>, IRightDistributive<S> 
-        where S : IDistributive<S>, new()
     {}
 
     public interface ILeftDistributive<S,T>  : ILeftDistributive<S>, IMultiplicative<S,T>, IAdditive<S>

@@ -10,17 +10,17 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmFunctionList :  IEquatable<AsmFunctionList>, IIndexedContent<AsmFunction>
+    public readonly struct AsmFunctionList : IEquatable<AsmFunctionList>, IIndex<AsmFunction>
     {                        
+        public AsmFunction[] Content {get;}
+
         [MethodImpl(Inline)]
         public static AsmFunctionList Define(params AsmFunction[] src)
             => new AsmFunctionList(src);
 
         [MethodImpl(Inline)]
-        AsmFunctionList(AsmFunction[] src)
-            => Content = src;
-        
-        public AsmFunction[] Content {get;}
+        public AsmFunctionList(AsmFunction[] src)
+            => Content = src;        
 
         bool IEquatable<AsmFunctionList>.Equals(AsmFunctionList src)
             => Enumerable.SequenceEqual(this, src);

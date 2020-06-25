@@ -70,7 +70,7 @@ namespace Z0
             if(header)
                 dst.AppendLine(Tabular.HeaderText<F>(delimiter));
 
-            var formatter = Tabular.FieldFormatter<F>(delimiter);
+            var formatter = DataFields.formatter<F>(delimiter);
 
             Root.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
         }

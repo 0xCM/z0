@@ -8,6 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.IO;
     using System.Reflection;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static Konst;
     using static Root;
@@ -24,17 +26,27 @@ namespace Z0.Asm
         internal AccessorCapture(IAsmContext context)
         {
             Context = context;
+            DataRoot.Clear();
+            ResDir.Clear();
+            AsmDst.Clear();
         }
 
-        public static void CaptureResBytes(IAsmContext context, FolderPath dstdir)
-        {
-            var src = FilePath.Define(@"J:\dev\projects\z0-logs\res\bytes\bin\Debug\netcoreapp3.0\z0.res.bytes.dll");
-            var asmDst = dstdir + FileName.Define("resbytes",(FileExtensions.Asm));
-            var csvDst = asmDst.ChangeExtension(FileExtensions.Csv);
-            var svc = AccessorCapture.Service(context);
-            var captured = svc.Capture(src, asmDst);
-            svc.CollectAddresses(captured, csvDst);
+        FolderPath DataRoot 
+            => Context.AppPaths.AppDataPath;
 
+        FolderPath ResDir
+            => DataRoot + FolderName.Define("resbytes");
+
+        FolderPath AsmDst
+            => ResDir + FolderName.Define("asm");
+        
+        public void CaptureResBytes()
+        {
+            var src = FilePath.Define(@"J:\dev\projects\z0-logs\res\bin\lib\netcoreapp3.0\z0.res.bytes.dll");
+            Demands.insist(src.Exists);
+            var csvDst = ResDir + FileName.Define("z0.res.bytes.csv", FileExtensions.Csv);
+            var captured = Capture(src, AsmDst);
+            CollectAddresses(captured, csvDst);
         }
 
         void WriteAsm(CapturedCode capture, StreamWriter dst)
@@ -58,7 +70,27 @@ namespace Z0.Asm
             var assembly = Assembly.LoadFrom(src.Name);  
             var stores = ResourceStore.Service;
             var methods = span(stores.Accessors(assembly));            
-            return Capture(methods,dst);
+            return Capture(methods, dst);
+        }
+
+        public CapturedAccessor[] Capture(FilePath src, FolderPath dst)        
+        {
+            var assembly = Assembly.LoadFrom(src.Name);  
+            var stores = ResourceStore.Service;
+            var groups = (from a in stores.Accessors(assembly) 
+                            let t = a.Member.DeclaringType
+                            group a by t).Map(x => new ResourceAccessors(x.Key, x.ToArray())).ToSpan();
+            
+            var results = Root.list<CapturedAccessor>();
+            for(var i=0; i<groups.Length; i++)
+            {
+                ref readonly var accessors =  ref Root.skip(groups,i);
+                var path = dst + FileName.Define(accessors.DeclaringType.Name, FileExtensions.Asm);
+                var captured = Capture(accessors.Accessors, path);
+                results.AddRange(captured);
+            }
+                            
+            return results.ToArray();
         }
 
         public CapturedAccessor[] Capture(ReadOnlySpan<ResourceAccessor> src, FilePath outpath)
@@ -115,6 +147,5 @@ namespace Z0.Asm
                 }
             }            
         }
-
     }
 }

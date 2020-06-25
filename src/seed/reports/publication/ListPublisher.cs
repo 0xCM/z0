@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;   
 
-    using FW = TabularWidths;
+    using FW = DataFieldWidths;
     
     public readonly struct ListPublisher : IListPublisher
     {

@@ -29,17 +29,11 @@ namespace Z0
 
     }
 
-    public interface IRing<S> : IGroupA<S>, IMonoidM<S>, IDistributive<S>
-        where S : IRing<S>, new()
+    public interface IRing<T> : IGroupA<T>, IMonoidM<T>, IDistributive<T>
     {
 
     }
     
-    public interface IRing<S,T> : IRing<S>, IGroupA<S,T>, IMonoidM<S,T>, IDistributive<S,T>
-        where S : IRing<S,T>, new()
-    {
-        
-    }
 
     public interface ICommutativeRing<S> : IRing<S>
         where S : ICommutativeRing<S>, new()

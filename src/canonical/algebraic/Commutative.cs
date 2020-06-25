@@ -20,7 +20,6 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The structure type</typeparam>
     public interface ICommutative<S>
-        where S : ICommutative<S>, new()
     {
 
     }

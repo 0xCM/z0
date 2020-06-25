@@ -6,7 +6,7 @@ namespace Z0.Asm.Data
 {        
     using System;
 
-    using C = TabularWidths;
+    using C = DataFieldWidths;
 
     /// <summary>
     /// Defines the widths of common asm record fields

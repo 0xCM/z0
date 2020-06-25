@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// A simple api member sequence adapter
     /// </summary>
-    public readonly struct ApiMembers : IIndexedContent<ApiMember>
+    public readonly struct ApiMembers : IIndex<ApiMember>
     {
         public ApiMember[] Content {get;}
 

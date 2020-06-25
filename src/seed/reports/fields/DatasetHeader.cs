@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines enum-predicated header content
     /// </summary>
-    public readonly struct RecordHeader<F>
+    public readonly struct DatasetHeader<F>
         where F : unmanaged, Enum
     {
         public F[] Fields

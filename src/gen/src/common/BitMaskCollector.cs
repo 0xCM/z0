@@ -12,17 +12,11 @@ namespace Z0
     using static Konst;
     using static Root;
 
-    partial class BitMask
-    {                                           
-        public static ReadOnlySpan<NumericLiteral> NumericLiterals
+    public readonly struct BitMaskCollector
+    {
+        public static NumericLiteral[] collect()
         {
-            [MethodImpl(Inline)]
-            get => _NumericLiterals.Value;
-        }
-
-        static NumericLiteral[] CreateLiterals()
-        {
-            ReadOnlySpan<FieldInfo> fields = typeof(BitMasks).LiteralFields();
+            var fields = span(typeof(BitMasks).LiteralFields());
             var dst = new List<NumericLiteral>();
             for(var i = 0; i<fields.Length; i++)
             {
@@ -38,8 +32,5 @@ namespace Z0
             }
             return dst.ToArray();            
         }
-
-        static Lazy<NumericLiteral[]> _NumericLiterals {get;} 
-            = defer(CreateLiterals);
     }
 }

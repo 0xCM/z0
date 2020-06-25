@@ -47,10 +47,12 @@ namespace Z0
         public static HostCodeResources Service(FolderPath src, FolderPath dst) 
             => new HostCodeResources(src,dst);
 
+        public static HostCodeResources Service(IAppContext app) 
+            => Service(app.AppPaths.CaptureRoot, app.AppPaths.ResourceRoot + FolderName.Define("bytes"));
+
         public HostCodeResources(FolderPath src, FolderPath dst)
         {
-            Source = Archives.Services.HexArchive(src);
-            
+            Source = Archives.Services.HexArchive(src);            
             Target = dst;
         }
         

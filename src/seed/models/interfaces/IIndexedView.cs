@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IIndexedView<T> : ILengthwise
+    public interface IIndexedView<T> : IMeasured
     {
         ref readonly T Lookup(int index);
 

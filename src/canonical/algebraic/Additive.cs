@@ -20,13 +20,17 @@ namespace Z0
         T Add(T lhs, T rhs);                    
     }
 
+    public interface IAdditive<T>
+    {
+        T Add(T src);
+    }
+    
     /// <summary>
     /// Characterizes a structure that supports semigroup additivity
     /// </summary>
     /// <typeparam name="S">The structure type</typeparam>
-    public interface IAdditive<S> : ICommutative<S>
-        where S : IAdditive<S>, new()
-    {
-        S Add(S rhs);
+    public interface IAdditive<F,T> : IAdditive<T>, ICommutative<T>
+        where F : IAdditive<F,T>, new()
+    {        
     }
 }

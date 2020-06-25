@@ -57,14 +57,12 @@ namespace Z0
         
     }
 
-    public interface IMonoidM<S> : IMonoid<S>, ISemigroupM<S>, IUnital<S>
-        where S: IMonoidM<S>, new()
+    public interface IMonoidM<T> : IMonoid<T>, ISemigroupM<T>, IUnital<T>
     {
 
     }
 
     public interface IMonoidA<S> : IMonoid<S>, ISemigroupA<S>, INullary<S>
-        where S : IMonoidA<S>, new()
     {
 
     }
@@ -74,7 +72,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The classified structure</typeparam>
     /// <typeparam name="T">The underlying type</typeparam>
-    public interface IMonoidM<S,T> : IMonoidM<S>, IMonoid<S,T>, ISemigroupM<S,T>
+    public interface IMonoidM<S,T> : IMonoidM<T>
         where S : IMonoidM<S,T>, new()
     {
 
@@ -85,7 +83,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The classified structure</typeparam>
     /// <typeparam name="T">The underlying type</typeparam>
-    public interface IMonoidA<S,T> :  IMonoidA<S>, IMonoid<S,T>, ISemigroupA<S,T>
+    public interface IMonoidA<S,T> :  IMonoidA<S>
         where S : IMonoidA<S,T>, new()
     {
 

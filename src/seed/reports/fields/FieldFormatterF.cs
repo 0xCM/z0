@@ -13,7 +13,6 @@ namespace Z0
     public struct FieldFormatter<F> : ITextual
         where F : unmanaged, Enum
     {        
-
         readonly StringBuilder Target;
         
         char Delimiter;

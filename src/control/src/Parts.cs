@@ -6,7 +6,7 @@ namespace Z0
 {
     using P = Z0.Parts;
 
-    public readonly struct PartSelection : IIndexedContent<IPart>
+    public readonly struct PartSelection : IIndex<IPart>
     {
         public static PartSelection Selected => default(PartSelection);
         

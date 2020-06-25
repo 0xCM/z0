@@ -6,25 +6,35 @@ namespace Z0
 {
     using System;
 
-    public interface ISemigroup<F> : IReified<F>
-        where F : ISemigroup<F>, new()
+    public interface ISemigroup<T>
     {
 
     }
 
-    public interface IMonoid<S> : ISemigroup<S>
-        where S : IMonoid<S>, new()
+    public interface ISemigroup<F,T> : ISemigroup<T>
+        where F : ISemigroup<F,T>, new()
+    {
+        
+    }                
+        // public interface ISemigroup<F,S> : IReified<F>
+    //     where F : ISemigroup<F,S>, new()
+    // {
+
+    // }
+
+    public interface IMonoid<T> : ISemigroup<T>
     {
 
     }
+
 
     /// <summary>
     /// Characterizes monoidal structure
     /// </summary>
     /// <typeparam name="S">The classified structure</typeparam>
     /// <typeparam name="T">The underlying type</typeparam>
-    public interface IMonoid<S,T> : IMonoid<S>, ISemigroup<S,T>
-        where S : IMonoid<S,T>, new()
+    public interface IMonoid<F,T> : IMonoid<T>, ISemigroup<F,T>
+        where F : IMonoid<F,T>, new()
     {
         
     }            
@@ -43,12 +53,6 @@ namespace Z0
     {
 
     }
-
-    public interface ISemigroup<S,T> : ISemigroup<S>
-        where S : ISemigroup<S,T>, new()
-    {
-        
-    }            
 
     public interface IEquivalenceClass<T>
     {
@@ -94,6 +98,20 @@ namespace Z0
         C Project(T src);
     }
 
+    /// <summary>
+    /// Characterizes a discrete partition over a discrete set and, consequently, 
+    /// is a constructive presentation of an equivalence relation. In this context, a parition
+    /// is a collection of mutually disjoint subsets of a given set whose union
+    /// is recovers the original set
+    /// </summary>
+    /// <typeparam name="T">The element type</typeparam>
+    /// <remarks>See https://en.wikipedia.org/wiki/Setoid</remarks>
+    public interface ISetoid<C,T> : IQuotientSet<C,T>
+        where C : IEquivalenceClass<C,T>, new()
+        where T : ISemigroup<T>, new()
+    {
+
+    }
     /// <summary>
     /// Characterizes a totally ordered structure
     /// </summary>

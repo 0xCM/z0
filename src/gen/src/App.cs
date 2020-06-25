@@ -5,21 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using Z0.Asm;
-
 
     using static Konst;
     using static Memories;
 
     using P = Z0.Parts;
 
-    readonly struct SelectedParts : IIndexedContent<IPart>
+    readonly struct SelectedParts : IIndex<IPart>
     {
         public static SelectedParts Selected => default(SelectedParts);
         
+
+
         IPart[] IContented<IPart[]>.Content
             => new IPart[]{
                 P.GMath.Resolved,  

@@ -16,6 +16,7 @@ namespace Z0
         
         public readonly MethodInfo Member;
 
+
         [MethodImpl(Inline)]
         public ResourceAccessor(MethodInfo member, ResourceFormat format)
         {
@@ -23,4 +24,17 @@ namespace Z0
             Format = format;;
         }       
     }
+
+    public readonly struct ResourceAccessors
+    {
+        public readonly Type DeclaringType;
+
+        public readonly ResourceAccessor[] Accessors;
+
+        public ResourceAccessors(Type declaring, ResourceAccessor[] accessors)
+        {
+            DeclaringType = declaring;
+            Accessors = accessors;
+        }
+    }    
 }

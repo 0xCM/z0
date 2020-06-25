@@ -18,7 +18,6 @@ namespace Z0
         /// </summary>
         public const ushort PosMask = 0xFFFF;
 
-
         public static TableStore<F,R> Store<F,R>()
             where F : unmanaged, Enum
             where R : ITabular
@@ -38,7 +37,7 @@ namespace Z0
         public static TabularFormat<F> Specify<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
         {
-            var literals = @readonly(RecordFields.Service.Literals<F>());
+            var literals = @readonly(DataFields.literals<F>());
             var count = literals.Length;
             var headBuffer = alloc<string>(count);
             var fieldBuffer = alloc<TabularField<F>>(count);            
@@ -76,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string[] Headers<F>()
             where F : unmanaged, Enum
-                => RecordFields.Service.Labels<F>();    
+                => DataFields.labels<F>();    
 
         /// <summary>
         /// Creates a record formatter predicated on an enum that specifies the record fields
@@ -104,17 +103,7 @@ namespace Z0
                 => new RecordFormatter<F>(text.build(), sep);
                 
         [MethodImpl(Inline)]
-        public static FieldFormatter<F> FieldFormatter<F>(char delimiter = FieldDelimiter) 
-            where F : unmanaged, Enum
-                => new FieldFormatter<F>(text.build(), delimiter);        
-
-        [MethodImpl(Inline)]
-        public static RecordFields<F> Fields<F>()
-            where F : unmanaged, Enum
-                => RecordFields.Create<F>();
-
-        [MethodImpl(Inline)]
-        public static RecordHeader<F> Header<F>()
+        public static DatasetHeader<F> Header<F>()
             where F : unmanaged, Enum
                 => default;
 

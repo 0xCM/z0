@@ -16,7 +16,7 @@ namespace Z0
         R[] Records {get;}
 
         FieldFormatter<F> Formatter 
-            => Tabular.FieldFormatter<F>();
+            => DataFields.formatter<F>();
 
         string IReport.ReportName
             => typeof(R).DisplayName();        

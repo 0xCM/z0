@@ -15,7 +15,8 @@ namespace Z0.Asm
 
     public readonly struct InstructionHandlers
     {
-        public static InstructionHandlers Default => new InstructionHandlers(null);
+        public static InstructionHandlers Default 
+            => new InstructionHandlers(null);
         
         public readonly uint[] Activations;
 

@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operational type</typeparam>
     /// <typeparam name="S">The structure type</typeparam>
-    public interface IDiscreteGroup<S,T> : IGroupLike<S,T>, IDiscreteSet<S,T>
+    public interface IDiscreteGroup<S,T> : IGroupLike<S,T>, IDeferredSet<S,T>
         where S : IDiscreteGroup<S,T>, new()
     {
 
@@ -30,13 +30,13 @@ namespace Z0
 
     }
 
-    public interface IDiscreteAbelianGroup<S,T> : IGroupA<S,T>, IDiscreteSet<S,T>
+    public interface IDiscreteAbelianGroup<S,T> : IGroupA<S,T>, IDeferredSet<S,T>
         where S : IDiscreteAbelianGroup<S,T>, new()
     {
 
     }
 
-    public interface IFiniteAbelianGroup<S,T> : IDiscreteAbelianGroup<S,T>, IElementSet<S,T>
+    public interface IFiniteAbelianGroup<S,T> : IDiscreteAbelianGroup<S,T>, IDeferredSet<S,T>
         where S : IFiniteAbelianGroup<S,T>, new()
     {
 

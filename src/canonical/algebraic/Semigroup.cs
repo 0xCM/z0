@@ -27,26 +27,24 @@ namespace Z0
 
     }
 
-    public interface ISemigroupM<S>: ISemigroup<S>, IMultiplicative<S>
-        where S : ISemigroupM<S>, new()
+    public interface ISemigroupM<T>: ISemigroup<T>, IMultiplicative<T>
     {
 
     }            
 
-    public interface ISemigroupA<S>: ISemigroup<S>, IAdditive<S>
-        where S : ISemigroupA<S>, new()
+    public interface ISemigroupA<T>: ISemigroup<T>, IAdditive<T>
     {
 
     }            
 
 
-    public interface ISemigroupA<S,T> : ISemigroup<S,T>, ISemigroupA<S>,  IAdditive<S>
+    public interface ISemigroupA<S,T> : ISemigroupA<T>
         where S : ISemigroupA<S,T>, new()
     {
 
     }            
 
-    public interface ISemigroupM<S,T> : ISemigroupM<S>, ISemigroup<S,T>, IMultiplicative<S,T>
+    public interface ISemigroupM<S,T> : ISemigroup<T>, IMultiplicative<T>
         where S : ISemigroupM<S,T>, new()
     {
 

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface ISpan : ILengthwise, INullity
+    public interface ISpan : IMeasured, INullity
     {        
         Span<byte> Bytes {get;}
 

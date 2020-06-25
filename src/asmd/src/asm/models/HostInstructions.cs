@@ -15,7 +15,6 @@ namespace Z0.Asm
     /// </summary>         
     public readonly struct HostInstructions : IIndex<MemberInstructions>
     {
-        public static HostInstructions Empty => new HostInstructions(ApiHostUri.Empty, Root.array<MemberInstructions>());
 
         /// <summary>
         /// The decoded instructions
@@ -63,5 +62,8 @@ namespace Z0.Asm
             Content = inxs.OrderBy(x => x.BaseAddress).ToArray();
             BaseAddress = Content.Length != 0 ? Content[0].BaseAddress : MemoryAddress.Empty;
         }
+
+        public static HostInstructions Empty 
+            => new HostInstructions(ApiHostUri.Empty, Root.array<MemberInstructions>());
     }
 }

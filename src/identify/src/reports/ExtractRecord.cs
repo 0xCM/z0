@@ -73,7 +73,7 @@ namespace Z0
         
         public string DelimitedText(char delimiter)
         {
-            var dst = FieldFormatter<F>(delimiter);
+            var dst = DataFields.formatter<F>(delimiter);
             dst.Delimit(F.Sequence, Sequence);
             dst.Delimit(F.Address, Address);
             dst.Delimit(F.Length, Length);

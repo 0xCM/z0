@@ -104,9 +104,6 @@ namespace Z0
         public IndexedSeq<T> WithContent(IEnumerable<T> content)
             => new IndexedSeq<T>(content);
 
-        IEnumerable<T> IContented<IEnumerable<T>>.Content 
-            => Data;
-
         [MethodImpl(Inline)]
         public bool Equals(IndexedSeq<T> rhs)
             => Data.Equals(rhs.Data);

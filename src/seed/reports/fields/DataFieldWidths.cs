@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    public enum TabularWidths
+    public enum DataFieldWidths
     {
         /// <summary>
         /// The width of a sequence number field

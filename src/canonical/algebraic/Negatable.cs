@@ -7,7 +7,6 @@ namespace Z0
     using System;
     
     public interface INegatableOps<T>
-        where T : unmanaged
     {
         /// <summary>
         /// Unary negation of input

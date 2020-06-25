@@ -22,4 +22,17 @@ namespace Z0.Asm
 
         public readonly AsmFunctionCode Code;
     }
+
+    public readonly struct CapturedAccessors
+    {
+        public readonly Type DeclaringType;
+
+        public readonly CapturedAccessor[] Accessors;
+
+        public CapturedAccessors(Type declaring, CapturedAccessor[] accessors)
+        {
+            this.DeclaringType = declaring;
+            Accessors = accessors;
+        }
+    }
 }

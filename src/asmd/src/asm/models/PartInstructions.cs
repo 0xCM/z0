@@ -16,7 +16,6 @@ namespace Z0.Asm
     /// </summary>         
     public readonly struct PartInstructions: IIndex<HostInstructions>
     {
-        public static PartInstructions Empty => new PartInstructions(PartId.None, Root.array<HostInstructions>());
 
         /// <summary>
         /// The decoded instructions
@@ -28,7 +27,10 @@ namespace Z0.Asm
         /// </summary>
         public PartId Part {get;}
 
-        public ref HostInstructions this[int index] => ref Content[index];
+        public ref HostInstructions this[int index] 
+        {
+            get => ref Content[index];
+        }
 
         public int Length { [MethodImpl(Inline)] get => Content.Length;}
 
@@ -47,5 +49,9 @@ namespace Z0.Asm
             Part = part;
             Content = inxs;
         }
+
+        public static PartInstructions Empty 
+            => new PartInstructions(PartId.None, Array.Empty<HostInstructions>());
+
     }
 }

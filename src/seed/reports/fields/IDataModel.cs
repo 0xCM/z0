@@ -14,7 +14,8 @@ namespace Z0
     public interface IDataModel<M> : IDataModel
         where M : IDataModel<M>, new()
     {
-        string IDataModel.Name => typeof(M).Name;
+        string IDataModel.Name 
+            => typeof(M).Name;
     }
 
     public interface IDataModel<M,D> : IDataModel<M>

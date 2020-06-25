@@ -31,6 +31,6 @@ namespace Z0
         where R : ITabular
     {
         string[] ITabular.HeaderNames 
-            => RecordFields.Service.Labels<F>();
+            => DataFields.labels<F>();
     }
 }

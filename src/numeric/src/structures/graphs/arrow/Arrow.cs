@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static Graphs;
 
-    public interface IArrow<A> : ITextual, ILengthwise
+    public interface IArrow<A> : ITextual, IMeasured
         where A : IEquatable<A>
     {
         Span<A> Nodes {get;}

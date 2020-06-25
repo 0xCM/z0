@@ -20,7 +20,8 @@ namespace Z0
     public interface INullary<F,T> : INullary<F>, INullity
         where F : INullary<F,T>, new()
     {
-        F INullary<F>.Zero => new F();
+        F INullary<F>.Zero 
+            => new F();
 
         bool INullity.IsEmpty 
             => this.Equals(Zero);
