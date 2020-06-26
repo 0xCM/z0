@@ -17,8 +17,8 @@ namespace Z0
             var w = n128;
             var cellmax = Max8u;
             
-            var vsmax = vbroadcast(w, (ushort)cellmax);
-            var vtmax = vbroadcast(w,cellmax);
+            var vsmax = V0d.vbroadcast(w, (ushort)cellmax);
+            var vtmax = V0d.vbroadcast(w,cellmax);
             var expect = dvec.vsub(vtmax, gvec.vinc(w,z8));
 
             var x = dvec.vsub(vsmax, gvec.vinc(w, z16));
@@ -49,8 +49,8 @@ namespace Z0
             var w = n128;
             var cellmax = Max16u;
             
-            var vsmax = vbroadcast(w, (uint)cellmax);
-            var vtmax = vbroadcast(w,cellmax);
+            var vsmax = V0d.vbroadcast(w, (uint)cellmax);
+            var vtmax = V0d.vbroadcast(w,cellmax);
             var expect = dvec.vsub(vtmax, gvec.vinc(w,z16));
 
             var x = dvec.vsub(vsmax, gvec.vinc(w, 0u));
@@ -89,8 +89,8 @@ namespace Z0
         {
             var src = VData.vincrements<byte>(n128);
             var z =  dvec.vinflate(src, n256, z16);
-            var lo = dvec.vlo(z);
-            var hi = dvec.vhi(z);
+            var lo = V0d.vlo(z);
+            var hi = V0d.vhi(z);
             var loExpect = VData.vincrements<ushort>(n128);
             var hiExpect = gvec.vinc<ushort>(n128,8);
             Claim.veq(loExpect, lo);
@@ -104,8 +104,8 @@ namespace Z0
         {
             var src = VData.vincrements<byte>(n128);            
             var z =  dvec.vinflate(src, n256, z16);
-            var lo = dvec.vlo(z);
-            var hi = dvec.vhi(z);
+            var lo = V0d.vlo(z);
+            var hi = V0d.vhi(z);
             for(var i=0; i<8; i++)
                 Claim.eq(src.Cell(i), lo.Cell(i));            
         }

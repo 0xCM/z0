@@ -18,7 +18,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector128<T> x, Vector128<T> y) 
-                => Vectors.vconcat(x,y);           
+                => V0.vconcat(x,y);           
         }
     }
 }

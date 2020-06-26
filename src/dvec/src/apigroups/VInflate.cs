@@ -10,6 +10,7 @@ namespace Z0
 
     using static Memories;
     using static dvec;
+    using static V0d;
 
     [ApiHost]
     public readonly struct VInflate : IApiHost<VInflate>
@@ -22,7 +23,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate(Vector128<byte> src, W16 w, N1 i)
-            => dvec.vconvert(src, w256, z16i);
+            => vconvert(src, w256, z16i);
 
         /// <summary>
         /// 16x8i -> 16x16i
@@ -32,7 +33,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate(Vector128<sbyte> src, W16 w)
-            => Vectors.vconcat(dvec.vmaplo(src, n128, z16i), VHiMap.vmaphi(src, n128, z16i));
+            => vconcat(vmaplo(src, n128, z16i), V0d.vmaphi(src, n128, z16i));
 
         /// <summary>
         /// 32x8w -> 32x16i
@@ -62,7 +63,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(Vector128<byte> src, W16 w)
-            => dvec.vconvert(src, w256, z16);
+            => vconvert(src, w256, z16);
 
         /// <summary>
         /// 32x8u -> 32x16u
@@ -82,7 +83,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vinflate(Vector128<short> src, W32 w)
-            => dvec.vconvert(src, w256, z32i);
+            => vconvert(src, w256, z32i);
 
         /// <summary>
         /// 16x16i -> 16x32i
@@ -159,7 +160,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate(Vector128<byte> src, W32 w)
-            => dvec.vconvert(src, w512, z32);        
+            => V0d.vconvert(src, w512, z32);        
 
         /// <summary>
         /// 8x16u -> 8x32u
@@ -170,7 +171,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vinflate(Vector128<ushort> src, W32 w)
-            => dvec.vconvert(src, w256, z32);
+            => V0d.vconvert(src, w256, z32);
 
         /// <summary>
         /// 16x16u -> 16x32u

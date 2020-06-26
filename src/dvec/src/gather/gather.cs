@@ -160,28 +160,28 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vgather(N256 w, in sbyte src, Vector256<sbyte> vidx)        
-            => Vectors.vconcat(
-                    vgather(n128, in src, dvec.vlo(vidx)), 
-                    vgather(n128, in src, dvec.vhi(vidx)));
+            => V0d.vconcat(
+                    vgather(n128, in src, V0d.vlo(vidx)), 
+                    vgather(n128, in src, V0d.vhi(vidx)));
 
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vgather(N256 w, in byte src, Vector256<byte> vidx)        
-            => Vectors.vconcat(
-                    vgather(n128, in src, dvec.vlo(vidx)), 
-                    vgather(n128, in src, dvec.vhi(vidx)));
+            => V0d.vconcat(
+                    vgather(n128, in src, V0d.vlo(vidx)), 
+                    vgather(n128, in src, V0d.vhi(vidx)));
 
 
         [MethodImpl(Inline), Op]
         public static Vector256<short> vgather(N256 w, in short src, Vector256<short> vidx)        
-            => Vectors.vconcat(
-                    vgather(n128, in src, dvec.vlo(vidx)), 
-                    vgather(n128, in src, dvec.vhi(vidx)));
+            => V0d.vconcat(
+                    vgather(n128, in src, V0d.vlo(vidx)), 
+                    vgather(n128, in src, V0d.vhi(vidx)));
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vgather(N256 w, in ushort src, Vector256<ushort> vidx)        
-            => Vectors.vconcat(
-                    vgather(n128, in src, dvec.vlo(vidx)), 
-                    vgather(n128, in src, dvec.vhi(vidx)));
+            => V0d.vconcat(
+                    vgather(n128, in src, V0d.vlo(vidx)), 
+                    vgather(n128, in src, V0d.vhi(vidx)));
 
         /// <summary>
         /// __m256i _mm256_i64gather_epi64 (__int64 const* base_addr, __m256i vindex, const int scale) VPGATHERQQ ymm, vm64y, ymm

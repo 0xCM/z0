@@ -18,7 +18,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) 
-                => Vectors.vload(n128,x,offset);            
+                => V0.vload(n128,x,offset);            
         }
 
         public readonly struct LoadSpan256<T> : ISpanLoader256<T,T>
@@ -26,7 +26,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) 
-                => Vectors.vload(n256,x,offset);
+                => V0.vload(n256,x,offset);
         }
     }
 }

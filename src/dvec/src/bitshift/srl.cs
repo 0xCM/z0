@@ -111,8 +111,8 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector256<sbyte> vsrl(Vector256<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(vinflate(vlo(src), n256, z16i),count));
-            var y = v16u(ShiftRightLogical(vinflate(vhi(src), n256, z16i),count));
+            var x = v16u(ShiftRightLogical(vinflate(V0d.vlo(src), n256, z16i),count));
+            var y = v16u(ShiftRightLogical(vinflate(V0d.vhi(src), n256, z16i),count));
             var m = v16u(Vectors.vbroadcast(n256, byte.MaxValue));
             return v8i(vcompact(vand(x,m),vand(y,m),n256,z8));
         } 

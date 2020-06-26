@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
-    using static Vectors;
-
+    using static Root;
+    using static V0;
 
     partial class LogicSquare
     {     
@@ -34,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void not<T>(W128 w, in T src, ref T dst)
             where T : unmanaged
-                => Vectors.vstore(vnot(w, src), ref dst);
+                => vsave(vnot(w, src), ref dst);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void not<T>(W128 w, int count, int step, in T src, ref T dst)
@@ -47,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void not<T>(W256 w, in T src, ref T dst)
             where T : unmanaged
-                => vstore(vnot(w, src), ref dst);
+                => vsave(vnot(w, src), ref dst);
         
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void not<T>(W256 w, int count, int step, in T src, ref T dst)

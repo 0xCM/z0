@@ -91,7 +91,7 @@ namespace Z0
         {
             var xL = vinsert(x,default,0);
             var yL = vinsert(y,default,0);
-            return vlo(vmax(xL,yL));
+            return V0d.vlo(vmax(xL,yL));
         }
 
         /// <summary>

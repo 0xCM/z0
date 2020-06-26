@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => As.generic<T>(vscalar(n128, vcell(v64u(src),1)));
+                => As.generic<T>(vscalar(n128, V0.vcell(v64u(src),1)));
 
         /// <summary>
         /// Extracts hi 128-bit lane of the source vector
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vhi<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
-                => dvec.vhi(v64u(src), out x0, out x1);
+                => V0d.vhi(v64u(src), out x0, out x1);
 
         /// <summary>
         /// Extracts the hi 128-bit lane of the source vector to a pair
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Closures(AllNumeric)]
         public static ref Pair<ulong> vhi<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged
-                => ref dvec.vhi(src.AsUInt64(), ref dst);
+                => ref V0d.vhi(src.AsUInt64(), ref dst);
 
         /// <summary>
         /// Extracts the upper 256-bits from the source vector
@@ -75,13 +75,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.generic<T>(dvec.vhi(v8u(src)));
+                return As.generic<T>(V0d.vhi(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return As.generic<T>(dvec.vhi(v16u(src)));
+                return As.generic<T>(V0d.vhi(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return As.generic<T>(dvec.vhi(v32u(src)));
+                return As.generic<T>(V0d.vhi(v32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return As.generic<T>(dvec.vhi(v64u(src)));
+                return As.generic<T>(V0d.vhi(v64u(src)));
             else
                 return vhi_i(src);
         }
@@ -91,13 +91,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.generic<T>(dvec.vhi(v8i(src)));
+                return As.generic<T>(V0d.vhi(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return As.generic<T>(dvec.vhi(v16i(src)));
+                return As.generic<T>(V0d.vhi(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return As.generic<T>(dvec.vhi(v32i(src)));
+                return As.generic<T>(V0d.vhi(v32i(src)));
             else if(typeof(T) == typeof(long))
-                return As.generic<T>(dvec.vhi(v64i(src)));
+                return As.generic<T>(V0d.vhi(v64i(src)));
             else
                 return vhi_f(src);
         }

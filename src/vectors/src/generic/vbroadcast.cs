@@ -52,13 +52,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.generic<T>(vbroadcast(w, uint8(src)));
+                return As.generic<T>(V0d.vbroadcast(w, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return As.generic<T>(vbroadcast(w, uint16(src)));
+                return As.generic<T>(V0d.vbroadcast(w, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return As.generic<T>(vbroadcast(w, uint32(src)));
+                return As.generic<T>(V0d.vbroadcast(w, uint32(src)));
             else if(typeof(T) == typeof(ulong))
-                return As.generic<T>(vbroadcast(w, uint64(src)));
+                return As.generic<T>(V0d.vbroadcast(w, uint64(src)));
             else
                 return vbroadcast_i(w,src);
         }
@@ -68,13 +68,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.generic<T>(vbroadcast(w, int8(src)));
+                return As.generic<T>(V0d.vbroadcast(w, int8(src)));
             else if(typeof(T) == typeof(short))
-                return As.generic<T>(vbroadcast(w, int16(src)));
+                return As.generic<T>(V0d.vbroadcast(w, int16(src)));
             else if(typeof(T) == typeof(int))
-                return As.generic<T>(vbroadcast(w, int32(src)));
+                return As.generic<T>(V0d.vbroadcast(w, int32(src)));
             else if(typeof(T) == typeof(long))
-                return As.generic<T>(vbroadcast(w, int64(src)));
+                return As.generic<T>(V0d.vbroadcast(w, int64(src)));
             else
                 return vbroadcast_f(w,src);
         }
@@ -84,9 +84,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return  As.generic<T>(vbroadcast(w, float32(src)));
+                return  As.generic<T>(V0d.vbroadcast(w, float32(src)));
             else if(typeof(T) == typeof(double))
-                return As.generic<T>(vbroadcast(w, float64(src)));
+                return As.generic<T>(V0d.vbroadcast(w, float64(src)));
             else 
                 throw Unsupported.define<T>();
         }
@@ -96,13 +96,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.generic<T>(vbroadcast(w, uint8(src)));
+                return As.generic<T>(V0d.vbroadcast(w, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return As.generic<T>(vbroadcast(w, uint16(src)));
+                return As.generic<T>(V0d.vbroadcast(w, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return As.generic<T>(vbroadcast(w, uint32(src)));
+                return As.generic<T>(V0d.vbroadcast(w, uint32(src)));
             else if(typeof(T) == typeof(ulong))
-                return As.generic<T>(vbroadcast(w, uint64(src)));
+                return As.generic<T>(V0d.vbroadcast(w, uint64(src)));
             else
                 return vbroadcast_i(w,src);
         }
@@ -112,13 +112,13 @@ namespace Z0
             where T : unmanaged
         {
              if(typeof(T) == typeof(sbyte))
-                return As.generic<T>(vbroadcast(w, int8(src)));
+                return As.generic<T>(V0d.vbroadcast(w, int8(src)));
             else if(typeof(T) == typeof(short))
-                return As.generic<T>(vbroadcast(w, int16(src)));
+                return As.generic<T>(V0d.vbroadcast(w, int16(src)));
             else if(typeof(T) == typeof(int))
-                return As.generic<T>(vbroadcast(w, int32(src)));
+                return As.generic<T>(V0d.vbroadcast(w, int32(src)));
             else if(typeof(T) == typeof(long))
-                return As.generic<T>(vbroadcast(w, int64(src)));
+                return As.generic<T>(V0d.vbroadcast(w, int64(src)));
             else
                 return vbroadcast_f(w,src);
        }
@@ -128,9 +128,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return As.generic<T>(vbroadcast(w, float32(src)));
+                return As.generic<T>(V0d.vbroadcast(w, float32(src)));
             else if(typeof(T) == typeof(double))
-                return As.generic<T>(vbroadcast(w, float64(src)));
+                return As.generic<T>(V0d.vbroadcast(w, float64(src)));
             else 
                 throw Unsupported.define<T>();
         }

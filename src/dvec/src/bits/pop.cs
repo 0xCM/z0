@@ -98,19 +98,4 @@ namespace Z0
             return (uint)total;            
         }
     }
-
-    public static class BitPop
-    {        
-        public static Vector256<ulong> K1 => Vectors.vbroadcast(n256, BitMasks.Even64);
-
-        public static Vector256<ulong> K2 => Vectors.vbroadcast(n256, BitMasks.Even64x2);
-
-        public static Vector256<ulong> K4 => Vectors.vbroadcast(n256, BitMasks.Lsb64x8x4);        
-
-        public static Vector128<ulong> v128K1 => Vectors.vbroadcast(n128, BitMasks.Even64);
-
-        public static Vector128<ulong> v128K2 => Vectors.vbroadcast(n128, BitMasks.Even64x2);
-
-        public static Vector128<ulong> v128K4 => Vectors.vbroadcast(n128, BitMasks.Lsb64x8x4);
-    }
 }

@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
+    using static FixedStream;
+    using static FixedSource;
+
     partial class XTend
     {
         /// <summary>
@@ -16,6 +19,6 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         public static IEnumerable<F> FixedStream<F>(this IPolyrand random)
             where F: unmanaged, IFixed
-                => FixedStreams.stream<F>(random);
+                => create(create<F>(random));     
     }
 }

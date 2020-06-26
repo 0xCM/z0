@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Memories;
     using static VectorKonst;
  
     partial class VData
@@ -20,17 +19,17 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector128<T> decrements<T>(N128 w)
+        public static Vector128<T> vdecrements<T>(N128 w)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return vload<T>(w, Dec128x8u);
+                return V0.vload<T>(w, Dec128x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return vload<T>(w, Dec128x16u);
+                return V0.vload<T>(w, Dec128x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return vload<T>(w, Dec128x32u);
+                return V0.vload<T>(w, Dec128x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return vload<T>(w, Dec128x64u);
+                return V0.vload<T>(w, Dec128x64u);
             else
                 throw Unsupported.define<T>();
         }
@@ -41,17 +40,17 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector256<T> decrements<T>(N256 w)
+        public static Vector256<T> vdecrements<T>(N256 w)
             where T : unmanaged
         {            
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return vload<T>(w,Dec256x8u);
+                return V0.vload<T>(w,Dec256x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return vload<T>(w,Dec256x16u);
+                return V0.vload<T>(w,Dec256x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return vload<T>(w,Dec256x32u);
+                return V0.vload<T>(w,Dec256x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return vload<T>(w,Dec256x64u);
+                return V0.vload<T>(w,Dec256x64u);
             else
                 throw Unsupported.define<T>();
         }

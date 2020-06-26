@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class BitGrid
     {        
@@ -118,7 +117,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Vectors.vload(w, bs.Pack(0,w));
+                => V0.vload(w, bs.Pack(0,w));
 
         /// <summary>
         /// Hydrates a 256-bit natural bitgrid from a bitstring
@@ -136,6 +135,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Vectors.vload(w, bs.Pack(0,w));
+                => V0.vload(w, bs.Pack(0,w));
     }
 }

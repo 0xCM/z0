@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using static System.Runtime.CompilerServices.Unsafe;
 
     using static Konst;
     using static AsInternal;
@@ -21,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe T* pointer<T>(in T src)
             where T : unmanaged
-                => ptr(ref edit(src));
+                => pref(ref edit(src));
 
         /// <summary>
         /// Presents a readonly reference to an unmanaged value as a pointer displaced 
@@ -33,6 +34,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe T* pointer<T>(in T src, int offset)
             where T : unmanaged
-                => ptr(ref edit(in skip(in src, offset)));
+                => pref(ref edit(in skip(in src, offset)));            
     }
 }

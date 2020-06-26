@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> valt<T>(W256 w, T a, T b)
             where T : unmanaged
-                => gvec.vblend(Vectors.vbroadcast(w,a), Vectors.vbroadcast(w,b), VData.blendspec<T>(w,false));
+                => gvec.vblend(Vectors.vbroadcast(w,a), Vectors.vbroadcast(w,b), VData.vblendspec<T>(w,false));
 
         /// <summary>
         /// 

@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = Blocks.alloc<T>(w128);
-            VStore.vsave(src, ref dst.Head);
+            V0.vsave(src, ref dst.Head);
             return dst.Data;
         }
 
@@ -37,7 +37,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = Blocks.alloc<T>(w256);
-            VStore.vsave(src, ref dst.Head);
+            V0.vsave(src, ref dst.Head);
             return dst.Data;
         }
 
@@ -51,7 +51,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = Blocks.alloc<T>(w512);
-            VStore.vsave(src, ref dst.Head);
+            V0.vsave(src, ref dst.Head);
             return dst.Data;
         } 
     }

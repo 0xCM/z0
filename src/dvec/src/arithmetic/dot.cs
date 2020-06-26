@@ -23,7 +23,7 @@ namespace Z0
         public static long vdot(Vector256<int> x, Vector256<int> y)
         {
             var product = Multiply(x,y);
-            var sum = vadd(vlo(product),vhi(product));
+            var sum = vadd(V0d.vlo(product),V0d.vhi(product));
             return sum.Cell(0) + sum.Cell(1);
         }
 
@@ -31,7 +31,7 @@ namespace Z0
         public static ulong vdot(Vector256<uint> x, Vector256<uint> y)
         {
             var product = Multiply(x,y);
-            var sum = vadd(vlo(product),vhi(product));
+            var sum = vadd(V0d.vlo(product),V0d.vhi(product));
             return sum.Cell(0) + sum.Cell(1);
         }
     }

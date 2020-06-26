@@ -134,8 +134,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<sbyte> src, Vector256<byte> mask, in Block256<byte> dst)
         {
-            vmstore(vlo(src), vlo(mask), ref dst.Head);
-            vmstore(vhi(src), vhi(mask), ref seek(ref dst.Head, 16));
+            vmstore(V0d.vlo(src), V0d.vlo(mask), ref dst.Head);
+            vmstore(V0d.vhi(src), V0d.vhi(mask), ref seek(ref dst.Head, 16));
         }
 
         /// <summary>
@@ -149,8 +149,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<byte> src, Vector256<byte> mask, in Block256<byte> dst)
         {
-            vmaskstore(vlo(src), vlo(mask), ref dst.Head);
-            vmaskstore(vhi(src), vhi(mask), ref seek(ref dst.Head, 16));
+            vmaskstore(V0d.vlo(src), V0d.vlo(mask), ref dst.Head);
+            vmaskstore(V0d.vhi(src), V0d.vhi(mask), ref seek(ref dst.Head, 16));
         }
 
         /// <summary>
@@ -164,8 +164,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<short> src, Vector256<byte> mask, in Block256<byte> dst)
         {
-            vmaskstore(vlo(src), vlo(mask), ref dst.Head);
-            vmaskstore(vhi(src), vhi(mask), ref seek(ref dst.Head, 16));
+            vmaskstore(V0d.vlo(src), V0d.vlo(mask), ref dst.Head);
+            vmaskstore(V0d.vhi(src), V0d.vhi(mask), ref seek(ref dst.Head, 16));
         }
 
         /// <summary>
@@ -179,8 +179,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<ushort> src, Vector256<byte> mask, in Block256<byte> dst)
         {
-            vmstore(vlo(src), vlo(mask), ref dst.Head);
-            vmstore(vhi(src), vhi(mask), ref seek(ref dst.Head, 16));
+            vmstore(V0d.vlo(src), V0d.vlo(mask), ref dst.Head);
+            vmstore(V0d.vhi(src), V0d.vhi(mask), ref seek(ref dst.Head, 16));
         }
 
         /// <summary>
@@ -194,8 +194,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<int> src, Vector256<byte> mask, in Block256<byte> dst)
         {
-            vmaskstore(vlo(src), vlo(mask), ref dst.Head);
-            vmaskstore(vhi(src), vhi(mask), ref seek(ref dst.Head, 16));
+            vmaskstore(V0d.vlo(src), V0d.vlo(mask), ref dst.Head);
+            vmaskstore(V0d.vhi(src), V0d.vhi(mask), ref seek(ref dst.Head, 16));
         }
 
         /// <summary>
@@ -209,8 +209,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<uint> src, Vector256<byte> mask, in Block256<byte> dst)
         {
-            vmaskstore(vlo(src), vlo(mask), ref dst.Head);
-            vmaskstore(vhi(src), vhi(mask), ref seek(ref dst.Head, 16));
+            vmaskstore(V0d.vlo(src), V0d.vlo(mask), ref dst.Head);
+            vmaskstore(V0d.vhi(src), V0d.vhi(mask), ref seek(ref dst.Head, 16));
         }
 
         /// <summary>
@@ -224,8 +224,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<long> src, Vector256<byte> mask, in Block256<byte> dst)
         {
-            vmaskstore(vlo(src), vlo(mask), ref dst.Head);
-            vmaskstore(vhi(src), vhi(mask), ref seek(ref dst.Head, 16));
+            vmaskstore(V0d.vlo(src), V0d.vlo(mask), ref dst.Head);
+            vmaskstore(V0d.vhi(src), V0d.vhi(mask), ref seek(ref dst.Head, 16));
         }
 
         /// <summary>
@@ -239,8 +239,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<ulong> src, Vector256<byte> mask, in Block256<byte> dst)
         {
-            vmaskstore(vlo(src), vlo(mask), ref dst.Head);
-            vmaskstore(vhi(src), vhi(mask), ref seek(ref dst.Head, 16));
+            vmaskstore(V0d.vlo(src), V0d.vlo(mask), ref dst.Head);
+            vmaskstore(V0d.vhi(src), V0d.vhi(mask), ref seek(ref dst.Head, 16));
         }
 
         /// <summary>
@@ -406,8 +406,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector256<byte> src, Vector256<byte> mask, in Block256<byte> dst)
         {
-            vmaskstore(vlo(src), vlo(mask), ref dst.Head);
-            vmaskstore(vhi(src), vhi(mask), ref seek(ref dst.Head, 16));
+            vmaskstore(V0d.vlo(src), V0d.vlo(mask), ref dst.Head);
+            vmaskstore(V0d.vhi(src), V0d.vhi(mask), ref seek(ref dst.Head, 16));
         }
 
         /// <summary>

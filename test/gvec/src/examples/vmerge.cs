@@ -20,7 +20,7 @@ namespace Z0
             
             var w = n256;
             var t = z32;
-            var count = vcount(w,t);
+            var count = V0.vcount(w,t);
 
             var x = gvec.vinc(w,t);
             var y = gvec.vinc(w, (x.LastCell() + 1));
@@ -50,8 +50,8 @@ namespace Z0
 
             void report()
             {
-                var x = VData.vincrements<byte>(n128);
-                var y = dvec.vadd(x, Vectors.vbroadcast(n128, (byte)16));
+                var x = V0p.vincrements<byte>(n128);
+                var y = dvec.vadd(x, V0d.vbroadcast(n128, (byte)16));
 
                 var lo = gvec.vmergelo(x,y);
                 var hi = gvec.vmergehi(x,y);

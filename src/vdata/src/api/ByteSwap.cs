@@ -21,15 +21,15 @@ namespace Z0
         /// <param name="n">The integer width representative where n = 16 | 32 | 64</param>
         /// <typeparam name="N">The integer width type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<byte> byteswap<N>(N128 w, N n = default)
+        public static Vector128<byte> vbyteswap<N>(N128 w, N n = default)
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N16))
-                return vload<byte>(w, ByteSwap128x16u);
+                return V0.vload<byte>(w, ByteSwap128x16u);
             else if(typeof(N) == typeof(N32))
-                return vload<byte>(w, ByteSwap128x32u);
+                return V0.vload<byte>(w, ByteSwap128x32u);
             else if(typeof(N) == typeof(N64))
-                return vload<byte>(w, ByteSwap128x64u);
+                return V0.vload<byte>(w, ByteSwap128x64u);
             else
                 throw Unsupported.define<N>();            
         }
@@ -42,15 +42,15 @@ namespace Z0
         /// <param name="n">The integer width representative where n = 16 | 32 | 64</param>
         /// <typeparam name="N">The integer width type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<byte> byteswap<N>(N256 w, N n = default)
+        public static Vector256<byte> vbyteswap<N>(N256 w, N n = default)
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N16))
-                return vload<byte>(w, ByteSwap256x16u);
+                return V0.vload<byte>(w, ByteSwap256x16u);
             else if(typeof(N) == typeof(N32))
-                return vload<byte>(w, ByteSwap256x32u);
+                return V0.vload<byte>(w, ByteSwap256x32u);
             else if(typeof(N) == typeof(N64))
-                return vload<byte>(w, ByteSwap256x64u);
+                return V0.vload<byte>(w, ByteSwap256x64u);
             else
                 throw Unsupported.define<N>();            
         }         

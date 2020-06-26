@@ -27,8 +27,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(Vectors.vcount<S>(w128), Vectors.vcount<T>(w128));
-            var dstLen = Vectors.vcount<T>(w128);
+            var xLen = Math.Min(V0.vcount<S>(w128), V0.vcount<T>(w128));
+            var dstLen = V0.vcount<T>(w128);
             var lhsData = lhs.ToSpan();
             var rhsData = rhs.ToSpan();
             Span<T> dst = new T[dstLen];
@@ -48,8 +48,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(Vectors.vcount<S>(w128), Vectors.vcount<T>(w128));
-            var dstLen = Vectors.vcount<T>(w128);
+            var xLen = Math.Min(V0.vcount<S>(w128), V0.vcount<T>(w128));
+            var dstLen = V0.vcount<T>(w128);
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
@@ -67,8 +67,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(Vectors.vcount<S>(w256), Vectors.vcount<T>(w256));
-            var dstLen = Vectors.vcount<T>(w256);
+            var xLen = Math.Min(V0.vcount<S>(w256), V0.vcount<T>(w256));
+            var dstLen = V0.vcount<T>(w256);
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
@@ -89,8 +89,8 @@ namespace Z0
             where S : unmanaged
         {
             var w = w256;
-            var xLen = Math.Min(Vectors.vcount<S>(w), Vectors.vcount<T>(w));
-            var dstLen = Vectors.vcount<T>(w);
+            var xLen = Math.Min(V0.vcount<S>(w), V0.vcount<T>(w));
+            var dstLen = V0.vcount<T>(w);
             var lhsData = x.ToSpan();
             var rhsData = y.ToSpan();
             Span<T> dst = new T[dstLen];

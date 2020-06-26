@@ -28,7 +28,7 @@ namespace Z0
         public static Vector256<T> Merge<T>(this Vector128<T> x, Vector128<T> y, Func<T,T> f)
             where T : unmanaged
         {
-            var srcLen = vcount<T>(n128);
+            var srcLen = V0.vcount<T>(n128);
             var dstLen = 2*srcLen;
             var lhsData = x.ToSpan();
             var rhsData = y.ToSpan();

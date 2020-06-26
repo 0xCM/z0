@@ -24,7 +24,6 @@ namespace Z0
             where T : unmanaged
                 => src.GetElement(index);
 
-
         /// <summary>
         /// Extracts a T-indexed component from a vector obtained by converting the S-vector to a T-vector
         /// </summary>

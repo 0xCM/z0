@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Memories;
-    using static Vectors;
+    using static Root;
+    using static V0;
     
     partial class LogicSquare
     {     
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Or, Closures(UnsignedInts)]
         public static void or<T>(W128 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => Vectors.vstore(vor(w, in a, in b), ref z);
+                => vsave(vor(w, in a, in b), ref z);
 
         [MethodImpl(Inline), Or, Closures(UnsignedInts)]
         public static void or<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T z)

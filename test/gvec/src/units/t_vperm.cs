@@ -131,7 +131,7 @@ namespace Z0
             var u = VData.vincrements<uint>(n);
             Claim.veq(vparts(n,0,1,2,3), u);
 
-            var v = VData.decrements<uint>(n);
+            var v = VData.vdecrements<uint>(n);
             Claim.veq(vparts(n,3,2,1,0),v);
 
             Claim.veq(v, dvec.vperm4x32(u, Perm4L.DCBA));
@@ -281,8 +281,8 @@ namespace Z0
         public static Vector256<byte> vswaphl(Vector256<byte> x)
         {
             Vector256<byte> y = default;
-            y = dvec.vinsert(dvec.vhi(x), y, 0);
-            y = dvec.vinsert(dvec.vlo(x), y, 1);
+            y = dvec.vinsert(V0d.vhi(x), y, 0);
+            y = dvec.vinsert(V0d.vlo(x), y, 1);
             return y;
         }
 
@@ -312,7 +312,7 @@ namespace Z0
         public void vperm_256u8_outline()
         {
             var x = VData.vincrements<byte>(n256);
-            var y = VData.decrements<byte>(n256);
+            var y = VData.vdecrements<byte>(n256);
             var z = dvec.vreverse(dvec.vshuf32x8(x,y));
             Claim.veq(x,z);
         }

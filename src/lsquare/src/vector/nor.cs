@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Memories;
-    using static Vectors;
+    using static Root;
+    using static V0;
     
     partial class LogicSquare
     {     
@@ -27,15 +27,15 @@ namespace Z0
         public static Vector256<T> vnor<T>(W256 n, in T a, in T b)
             where T : unmanaged
         {                    
-            Vectors.vload(in a, out Vector256<T> vA);
-            Vectors.vload(in b, out Vector256<T> vB);
+            vload(in a, out Vector256<T> vA);
+            vload(in b, out Vector256<T> vB);
             return gvec.vnor(vA,vB);
         }
 
         [MethodImpl(Inline), Nor, Closures(UnsignedInts)]
         public static void nor<T>(W128 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => Vectors.vstore(vnor(n, in a, in b), ref z);
+                => vsave(vnor(n, in a, in b), ref z);
 
         [MethodImpl(Inline), Nor, Closures(UnsignedInts)]
         public static void nor<T>(W128 n, int vcount, int blocklen, in T a, in T b, ref T z)

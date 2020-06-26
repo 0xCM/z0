@@ -24,7 +24,7 @@ namespace Z0
             where W : unmanaged, ITypeWidth
         
             => typeof(Vectors).DeclaredMethods()
-                    .WithName(nameof(Vectors.vbroadcast))
+                    .WithName(nameof(V0d.vbroadcast))
                     .WithParameterTypes(w.GetType(), tCell)
                     .WithParameterCount(2)
                     .Single();

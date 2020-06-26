@@ -13,7 +13,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
 
     using static Konst; 
-    using static Memories;    
+    using static Typed;    
+    using static V0;
+    using static V0d;
 
     partial class dvec
     {
@@ -37,12 +39,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vpackus(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var mask = Vectors.vbroadcast(n128, (ushort)(byte.MaxValue));
-            var v1 = v16i(dvec.vand(x,mask));
-            var v2 = v16i(dvec.vand(y,mask));
+            var mask = vbroadcast(n128, (ushort)(byte.MaxValue));
+            var v1 = v16i(vand(x,mask));
+            var v2 = v16i(vand(y,mask));
             return PackUnsignedSaturate(v1,v2);         
         }
-
 
         /// <summary>
         ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128 
@@ -64,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vpackus(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = Vectors.vbroadcast(n128, (uint)(ushort.MaxValue));
+            var mask = vbroadcast(n128, (uint)(ushort.MaxValue));
             var z0 = v32i(vand(x,mask));
             var z1 = v32i(vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
@@ -89,9 +90,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vpackus(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var mask = Vectors.vbroadcast(n256, (ushort)(byte.MaxValue));
-            var v1 = v16i(dvec.vand(x,mask));
-            var v2 = v16i(dvec.vand(y,mask));
+            var mask = vbroadcast(n256, (ushort)(byte.MaxValue));
+            var v1 = v16i(vand(x,mask));
+            var v2 = v16i(vand(y,mask));
             return PackUnsignedSaturate(v1,v2);         
         }
 
@@ -115,9 +116,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vpackus(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = Vectors.vbroadcast<uint>(n256, (uint)(ushort.MaxValue));
-            var z0 = v32i(dvec.vand(x,mask));
-            var z1 = v32i(dvec.vand(y,mask));
+            var mask = vbroadcast<uint>(n256, (uint)(ushort.MaxValue));
+            var z0 = v32i(vand(x,mask));
+            var z1 = v32i(vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
         }
 

@@ -30,37 +30,37 @@ namespace Z0
             var xE = Vectors.vparts(n128,1,2,3,4);
             var yE = Vectors.vparts(n128,5,6,7,8);
             var z = dvec.vconvert(block, n256,z32);
-            Claim.eq(xE, dvec.vlo(z));
-            Claim.eq(yE, dvec.vhi(z));
+            Claim.eq(xE, V0d.vlo(z));
+            Claim.eq(yE, V0d.vhi(z));
         }
 
         public void block_32x8u_to_2x128x64u()
         {
             var block = Blocks.parts<byte>(n32,1,2,3,4);
-            var xE = Vectors.vparts(n128,1,2);
-            var yE = Vectors.vparts(n128,3,4);
+            var xE = V0d.vparts(n128,1,2);
+            var yE = V0d.vparts(n128,3,4);
 
             var z = dvec.vconvert(block,n256,z64);
-            Claim.eq(xE, dvec.vlo(z));
-            Claim.eq(yE, dvec.vhi(z));
+            Claim.eq(xE, V0d.vlo(z));
+            Claim.eq(yE, V0d.vhi(z));
         }
 
         public void block_128x8u_to_2x128x16u()
         {
             var block = Blocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
-            var xE = Vectors.vparts(n128,1,2,3,4,5,6,7,8);
-            var yE = Vectors.vparts(n128,9,10,11,12,13,14,15,16);
+            var xE = V0d.vparts(n128,1,2,3,4,5,6,7,8);
+            var yE = V0d.vparts(n128,9,10,11,12,13,14,15,16);
             var z = dvec.vconvert(block,n256,z16);
             
-            Claim.eq(xE, dvec.vlo(z));
-            Claim.eq(yE, dvec.vhi(z));
+            Claim.eq(xE, V0d.vlo(z));
+            Claim.eq(yE, V0d.vhi(z));
         }
 
         public void v128x8u_v128x16u()
         {
-            var x = Vectors.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
-            var y = dvec.vmaplo(x, n128, z16);
-            var z = Vectors.vparts(n128,0,1,2,3,4,5,6,7);
+            var x = V0d.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var y = V0d.vmaplo(x, n128, z16);
+            var z = V0d.vparts(n128,0,1,2,3,4,5,6,7);
             Claim.eq(y,z);
         }
 
@@ -68,7 +68,7 @@ namespace Z0
         {
             var x = Blocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
             var y = dvec.vconvert(x, n128, z16);
-            var z = Vectors.vparts(n128,0,1,2,3,4,5,6,7);            
+            var z = V0d.vparts(n128,0,1,2,3,4,5,6,7);            
 
             Claim.eq(y,z);            
         }
@@ -79,8 +79,8 @@ namespace Z0
             var q = dvec.vconvert(x, n256, z16);
             var z0 = x.LoBlock(0);
             var z1 = x.HiBlock(0);
-            var y0s = dvec.vlo(q).ToSpan();
-            var y1s = dvec.vhi(q).ToSpan();
+            var y0s = V0d.vlo(q).ToSpan();
+            var y1s = V0d.vhi(q).ToSpan();
 
             for(var i=0; i <8; i++)
             {
@@ -95,8 +95,8 @@ namespace Z0
             var y = dvec.vconvert(x,n256,z32);
             var z0 = x.Slice(0,4);
             var z1 = x.Slice(4,4);
-            var y0s = dvec.vlo(y).ToSpan();
-            var y1s = dvec.vhi(y).ToSpan();
+            var y0s = V0d.vlo(y).ToSpan();
+            var y1s = V0d.vhi(y).ToSpan();
 
             for(var i=0; i <4; i++)
             {
@@ -121,7 +121,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = dvec.vconvert(sv,tw,tt);
+                var tv = V0d.vconvert(sv,tw,tt);
                 
                 sv.StoreTo(sb);
                 tv.StoreTo(tb);
@@ -149,9 +149,9 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = dvec.vconvert(sv,n256,tt);
-                var tvLo = dvec.vlo(tv);
-                var tvHi = dvec.vhi(tv);
+                var tv = V0d.vconvert(sv,n256,tt);
+                var tvLo = V0d.vlo(tv);
+                var tvHi = V0d.vhi(tv);
                 
                 sv.StoreTo(sb);
                 tvLo.StoreTo(tb,0);

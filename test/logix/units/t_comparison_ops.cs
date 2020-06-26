@@ -8,9 +8,9 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
 
-    using static VLogix;
+    using static V0;
+    using static V0d;
     
     using S = NumericLogix;
 
@@ -137,15 +137,15 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = Vectors.vzero<T>(n);
-            var actual = Vectors.vzero<T>(n);
+            var expect = vzero<T>(n);
+            var actual = vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {                
                 expect = gvec.vlt(x,y);
                 actual = gvec.vlt(x,y);
                 Claim.Require(gvec.vsame(expect,actual));
 
-                var a =Vectors.vbroadcast(n,Random.Next<T>());
+                var a = Vectors.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
                 y = gvec.vxor(y,a);                
             }
@@ -156,15 +156,15 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = Vectors.vzero<T>(n);
-            var actual = Vectors.vzero<T>(n);
+            var expect = vzero<T>(n);
+            var actual = vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {                
                 expect = gvec.vlt(x,y);
                 actual = gvec.vlt(x,y);
                 Claim.Require(gvec.vsame(expect,actual));
 
-                var a =Vectors.vbroadcast(n,Random.Next<T>());
+                var a = Vectors.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
                 y = gvec.vxor(y,a);                
             }

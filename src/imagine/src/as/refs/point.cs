@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe T* point<T>(in T src)
             where T : unmanaged
-                => ptr(ref edit(in src));
+                => pref(ref edit(in src));
 
         /// <summary>
         /// Presents a generic reference as a generic pointer displaced by an element offset
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe T* point<T>(in T src, int offset)
             where T : unmanaged
-                => ptr(ref edit(skip(src, offset)));
+                => pref(ref edit(skip(src, offset)));
 
         /// <summary>
         /// Presents a generic reference r:T as a generic pointer p:T

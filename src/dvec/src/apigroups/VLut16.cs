@@ -49,6 +49,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         VLut16(ReadOnlySpan<byte> src) 
-            => Mask = Vectors.vload(w128,src);
+            => Mask = V0.vload(w128,src);
     }
 }

@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Perm16 vreversed(W128 w)
-            => new Perm16(VData.decrements<byte>(w));
+            => new Perm16(VData.vdecrements<byte>(w));
 
         /// <summary>
         /// Creates the identity permutation
@@ -44,6 +44,6 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Perm32 vreversed(W256 w)
-            => new Perm32(VData.decrements<byte>(w));
+            => new Perm32(VData.vdecrements<byte>(w));
     }
 }

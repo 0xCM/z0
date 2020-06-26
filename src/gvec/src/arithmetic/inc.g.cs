@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Inc, Closures(Integers)]
         public static Vector128<T> vinc<T>(N128 n, T x0)
             where T : unmanaged
-                => vadd(VData.vincrements<T>(n), x0);
+                => vadd(V0p.vincrements<T>(n), x0);
 
         /// <summary>
         /// Creates a 256-bit vector with components that increase by unit step from an initial value

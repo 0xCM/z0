@@ -10,7 +10,7 @@ namespace Z0
     
     using static Konst;
     using static Memories;
-    using static Vectors;
+    using static V0;
         
     partial class LogicSquare
     {     
@@ -27,12 +27,12 @@ namespace Z0
         [MethodImpl(Inline), CImpl, Closures(UnsignedInts)]
         public static void cimpl<T>(W128 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vcimpl(w, in a, in b), ref z);
+                => V0.vsave(vcimpl(w, in a, in b), ref z);
 
         [MethodImpl(Inline), CImpl, Closures(UnsignedInts)]
         public static void cimpl<T>(W256 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vcimpl(w, in a, in b), ref z);
+                => V0.vsave(vcimpl(w, in a, in b), ref z);
 
         [MethodImpl(Inline), CImpl, Closures(UnsignedInts)]
         public static void cimpl<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T z)

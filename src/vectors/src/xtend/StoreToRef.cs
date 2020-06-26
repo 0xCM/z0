@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector128<T> src, ref T dst, int offset = 0)
             where T : unmanaged            
-                => VStore.vsave(src, ref dst, offset);
+                => V0.vsave(src, ref dst, offset);
 
         /// <summary>
         /// Stores vector content to a memory reference
@@ -33,6 +33,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector256<T> src, ref T dst, int offset = 0)
             where T : unmanaged            
-                => VStore.vsave(src, ref dst, offset);
+                => V0.vsave(src, ref dst, offset);
     }
 }

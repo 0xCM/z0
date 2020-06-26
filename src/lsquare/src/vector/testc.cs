@@ -9,7 +9,7 @@ namespace Z0
     
     using static Konst;
     using static Memories;
-    using static Vectors;
+    using static V0;
     
     partial class LogicSquare
     {     

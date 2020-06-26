@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Memories;
-    using static Vectors;
+    using static Root;
+    using static V0;
     
     partial class LogicSquare
     {     

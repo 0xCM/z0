@@ -12,38 +12,6 @@ namespace Z0
 
     partial class Vectors
     {
-        /// <summary>
-        /// Loads a 128-bit vector from a pointer-identified memory location
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="pSrc">The source memory location</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe Vector128<T> vload<T>(W128 w, T* pSrc)
-            where T : unmanaged
-                => VStore.vload(w, pSrc);
-        
-        /// <summary>
-        /// Loads a 256-bit vector from a pointer-identified memory location
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="pSrc">The source memory location</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe Vector256<T> vload<T>(W256 w, T* pSrc)
-            where T : unmanaged
-                => VStore.vload(w, pSrc);
-
-        /// <summary>
-        /// Loads a 512-bit vector from a pointer-identified memory location
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="pSrc">The source memory location</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe Vector512<T> vload<T>(W512 w, T* pSrc)
-            where T : unmanaged
-                => VStore.vload(w, pSrc);
 
         /// <summary>
         /// Loads a 128-bit vector from a pointer-identified memory location
@@ -54,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe ref Vector128<T> vload<T>(T* pSrc, out Vector128<T> dst)
             where T : unmanaged
-                => ref VStore.vload(pSrc, out dst);
+                => ref V0.vload(pSrc, out dst);
 
         /// <summary>
         /// Loads a 256-bit vector from a pointer-identified memory location
@@ -65,11 +33,11 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe ref Vector256<T> vload<T>(T* pSrc, out Vector256<T> dst)
             where T : unmanaged
-                => ref VStore.vload(pSrc, out dst);
+                => ref V0.vload(pSrc, out dst);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe ref Vector512<T> vload<T>(T* pSrc, out Vector512<T> dst)
             where T : unmanaged
-                => ref VStore.vload(pSrc, out dst);
+                => ref V0.vload(pSrc, out dst);
     }
 }

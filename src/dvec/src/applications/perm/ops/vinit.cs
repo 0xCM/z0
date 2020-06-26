@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source permutation</param>
         [MethodImpl(Inline), Op]
         public static Perm16 vinit(W128 w, Perm<byte> spec)
-            => new Perm16(Vectors.vload(w128, spec.Terms));
+            => new Perm16(V0.vload(w128, spec.Terms));
 
         /// <summary>
         /// Creates a fixed 32-bit permutation over a generic permutation over 32 elements
@@ -27,11 +27,11 @@ namespace Z0
         /// <param name="src">The source permutation</param>
         [MethodImpl(Inline), Op]
         public static Perm32 vinit(W256 w, Perm<byte> src)
-            => new Perm32(Vectors.vload(w, src.Terms));
+            => new Perm32(V0.vload(w, src.Terms));
 
         [MethodImpl(Inline), Op]
         public static Perm16 vinit(Vector128<byte> data)
-            => new Perm16(dvec.vand(data, Vectors.vbroadcast(w128, BitMasks.Msb8x8x3)));
+            => new Perm16(dvec.vand(data, V0d.vbroadcast(w128, BitMasks.Msb8x8x3)));
                 
         [MethodImpl(Inline), Op]
         public static Perm32 vinit(Vector256<byte> data)

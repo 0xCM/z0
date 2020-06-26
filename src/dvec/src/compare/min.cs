@@ -82,7 +82,7 @@ namespace Z0
         {
             var xL = vinsert(x,default,0);
             var yL = vinsert(y,default,0);
-            return vlo(vmin(xL,yL));
+            return V0d.vlo(vmin(xL,yL));
         }
 
         /// <summary>

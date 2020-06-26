@@ -15,52 +15,52 @@ namespace Z0
     partial class VData
     {
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotl(N128 n, N8 offset)
-            => vload<byte>(n, RotL8_128x8u);
+        public static Vector128<byte> vrotl(N128 n, N8 offset)
+            => V0.vload<byte>(n, RotL8_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotl(N128 n, N16 offset)
-            => vload<byte>(n,RotL16_128x8u);
+        public static Vector128<byte> vrotl(N128 n, N16 offset)
+            => V0.vload<byte>(n,RotL16_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotl(N128 n, N24 offset)
-            => vload<byte>(n,RotL24_128x8u);
+        public static Vector128<byte> vrotl(N128 n, N24 offset)
+            => V0.vload<byte>(n,RotL24_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotl(N128 n, N32 offset)
-            => vload<byte>(n,RotL32_128x8u);
+        public static Vector128<byte> vrotl(N128 n, N32 offset)
+            => V0.vload<byte>(n,RotL32_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotl(N128 n, N40 offset)
-            => vload<byte>(n,RotL40_128x8u);
+        public static Vector128<byte> vrotl(N128 n, N40 offset)
+            => V0.vload<byte>(n,RotL40_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotl(N128 n, N48 offset)
-            => vload<byte>(n,RotL48_128x8u);
+        public static Vector128<byte> vrotl(N128 n, N48 offset)
+            => V0.vload<byte>(n,RotL48_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotr(N128 n, N8 offset)
-            => vload<byte>(n,RotR8_128x8u);
+        public static Vector128<byte> vrotr(N128 n, N8 offset)
+            => V0.vload<byte>(n,RotR8_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotr(N128 n, N16 offset)
-            => vload<byte>(n,RotR16_128x8u);
+        public static Vector128<byte> vrotr(N128 n, N16 offset)
+            => V0.vload<byte>(n,RotR16_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotr(N128 n, N24 offset)
-            => Vectors.vload(n,RotR24_128x8u);
+        public static Vector128<byte> vrotr(N128 n, N24 offset)
+            => V0.vload(n,RotR24_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotr(N128 n, N32 offset)
-            => Vectors.vload(n, RotR32_128x8u);
+        public static Vector128<byte> vrotr(N128 n, N32 offset)
+            => V0.vload(n, RotR32_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotr(N128 n, N40 offset)
-            => Vectors.vload(n,RotR40_128x8u);
+        public static Vector128<byte> vrotr(N128 n, N40 offset)
+            => V0.vload(n,RotR40_128x8u);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> rotr(N128 n, N48 offset)
-            => Vectors.vload(n,RotR48_128x8u);
+        public static Vector128<byte> vrotr(N128 n, N48 offset)
+            => V0.vload(n,RotR48_128x8u);
 
         /// <summary>
         /// Shuffle pattern that, when applied, rotates 128 bits of content leftward by 8 bits

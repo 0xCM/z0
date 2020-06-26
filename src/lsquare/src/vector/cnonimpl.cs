@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Memories;
-    using static Vectors;
+    using static Root;
+    using static V0;
         
     partial class LogicSquare
     {     
@@ -27,12 +27,12 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl, Closures(UnsignedInts)]
         public static void cnonimpl<T>(W128 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vcnonimpl(w, in a, in b), ref z);
+                => vsave(vcnonimpl(w, in a, in b), ref z);
 
         [MethodImpl(Inline), CNonImpl, Closures(UnsignedInts)]
         public static void cnonimpl<T>(W256 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vcnonimpl(w, in a, in b), ref z);
+                => vsave(vcnonimpl(w, in a, in b), ref z);
 
         [MethodImpl(Inline), CNonImpl, Closures(UnsignedInts)]
         public static void cnonimpl<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T z)

@@ -14,10 +14,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static Perm32 unsize(in NatPerm<N32,byte> spec)
-            => new Perm32(Vectors.vload(n256, spec.Terms));
+            => new Perm32(V0.vload(n256, spec.Terms));
 
         [MethodImpl(Inline), Op]
         public static Perm16 unsize(in NatPerm<N16,byte> spec)
-            => new Perm16(Vectors.vload(n128, spec.Terms));
+            => new Perm16(V0.vload(n128, spec.Terms));
     }
 }

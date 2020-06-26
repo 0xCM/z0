@@ -37,7 +37,7 @@ namespace Z0
 
             Claim.Require(succeeded);            
         }
-
+        
         public void fixed_convert()
         {
             BinaryOp<uint> f = gmath.add<uint>;

@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using static V0;
  
     public class t_cnonimpl : t_bitcore<t_cnonimpl>
     {
@@ -23,7 +24,7 @@ namespace Z0
         protected void cnonimpl_check<T>(T t = default)
             where T : unmanaged
         {
-            var vZero = Vectors.vzero<T>(n128);
+            var vZero = vzero<T>(n128);
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();                    

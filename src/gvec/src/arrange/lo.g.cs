@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static Konst;
-    using static Vectors;
+    using static V0;
 
     partial class gvec
     {        
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vlo<T>(Vector128<T> src)
             where T : unmanaged
-                =>  As.generic<T>(vzerohi(v64u(src)));
+                =>  As.generic<T>(vzerohi(As.v64u(src)));
 
         /// <summary>
         /// Extracts the lo 128-bit lane of the source vector
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vlo<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
-                => dvec.vlo(v64u(src), out x0, out x1);
+                => V0d.vlo(v64u(src), out x0, out x1);
 
         /// <summary>
         /// Extracts the lo 128-bit lane of the source vector to a pair
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline), Closures(AllNumeric)]
         public static ref Pair<ulong> vlo<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged        
-                => ref dvec.vlo(v64u(src), ref dst);
+                => ref V0d.vlo(v64u(src), ref dst);
 
         /// <summary>
         /// Extracts the lower 256-bits from the source vector
@@ -85,13 +85,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.generic<T>(dvec.vlo(v8i(src)));
+                return As.generic<T>(V0d.vlo(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return As.generic<T>(dvec.vlo(v16i(src)));
+                return As.generic<T>(V0d.vlo(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return As.generic<T>(dvec.vlo(v32i(src)));
+                return As.generic<T>(V0d.vlo(v32i(src)));
             else
-                return As.generic<T>(dvec.vlo(v64i(src)));
+                return As.generic<T>(V0d.vlo(v64i(src)));
         }
 
         [MethodImpl(Inline)]
@@ -99,13 +99,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.generic<T>(dvec.vlo(v8u(src)));
+                return As.generic<T>(V0d.vlo(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return As.generic<T>(dvec.vlo(v16u(src)));
+                return As.generic<T>(V0d.vlo(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return As.generic<T>(dvec.vlo(v32u(src)));
+                return As.generic<T>(V0d.vlo(v32u(src)));
             else 
-                return As.generic<T>(dvec.vlo(v64u(src)));
+                return As.generic<T>(V0d.vlo(v64u(src)));
         }
 
         [MethodImpl(Inline)]
@@ -113,9 +113,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return As.generic<T>(dinxfp.vlo(v32f(src)));
+                return As.generic<T>(V0d.vlo(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return As.generic<T>(dinxfp.vlo(v64f(src)));
+                return As.generic<T>(V0d.vlo(v64f(src)));
             else 
                 throw Unsupported.define<T>();
         }

@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector128<short> vmap(Vector128<sbyte> src, N1 n, W16 w)
-            => ConvertToVector128Int16(dvec.vhi(src));
+            => ConvertToVector128Int16(V0d.vhi(src));
 
         /// <summary>
         /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="i">Specifies a target sign extension</param>
         [MethodImpl(Inline), VMap]
         public static Vector128<ushort> vmap(Vector128<sbyte> src, N1 n, W16 w, N1 i)
-            => v16u(ConvertToVector128Int16(dvec.vhi(src)));
+            => v16u(ConvertToVector128Int16(V0d.vhi(src)));
 
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi32 (__m128i a) VPMOVSXBD ymm, xmm/m128
@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<int> vmap(Vector128<sbyte> src, N1 n, W32 w)
-            => ConvertToVector256Int32(dvec.vhi(src));
+            => ConvertToVector256Int32(V0d.vhi(src));
 
         // ~ 128x8u -> X
         // ~ ------------------------------------------------------------------
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="i">Specifies a target sign extension</param>
         [MethodImpl(Inline), VMap]
         public static Vector128<short> vmap(Vector128<byte> src, N1 n, W16 w, N1 i)
-            =>  ConvertToVector128Int16(dvec.vhi(src));
+            =>  ConvertToVector128Int16(V0d.vhi(src));
 
         /// <summary>
         /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmap(Vector128<byte> src, N1 n, W16 w)
-            => v16u(ConvertToVector128Int16(dvec.vhi(src)));
+            => v16u(ConvertToVector128Int16(V0d.vhi(src)));
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
@@ -163,7 +163,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<uint> vmap(Vector128<byte> src, N1 n, W32 w)
-            => v32u(ConvertToVector256Int32(dvec.vhi(src)));
+            => v32u(ConvertToVector256Int32(V0d.vhi(src)));
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
@@ -187,7 +187,7 @@ namespace Z0
         /// <param name="i">Specifies a target sign extension</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<int> vmap(Vector128<byte> src, N1 n, W32 w, N1 i)
-            => ConvertToVector256Int32(dvec.vhi(src));
+            => ConvertToVector256Int32(V0d.vhi(src));
 
         // ~ 128x16i -> X
         // ~ ------------------------------------------------------------------
@@ -209,7 +209,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), VMap]
         public static Vector128<int> vmap(Vector128<short> src, N1 n, N32 w)
-            => ConvertToVector128Int32(dvec.vhi(src));
+            => ConvertToVector128Int32(V0d.vhi(src));
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
@@ -231,7 +231,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<long> vmap(Vector128<short> src, N1 n, W64 w)
-            => ConvertToVector256Int64(dvec.vhi(src));
+            => ConvertToVector256Int64(V0d.vhi(src));
 
         // ~ 128x16u -> X
         // ~ ------------------------------------------------------------------
@@ -254,7 +254,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector128<uint> vmap(Vector128<ushort> src, N1 n, W32 w)
-            => v32u(ConvertToVector128Int32(dvec.vhi(src)));
+            => v32u(ConvertToVector128Int32(V0d.vhi(src)));
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
@@ -276,7 +276,7 @@ namespace Z0
         /// <param name="i">Specifies a target sign extension</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<long> vmap(Vector128<ushort> src, N1 n, W64 w, N1 i)
-            => ConvertToVector256Int64(dvec.vhi(src));
+            => ConvertToVector256Int64(V0d.vhi(src));
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
@@ -296,7 +296,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<ulong> vmap(Vector128<ushort> src, N1 n, W64 w)
-            => v64u(ConvertToVector256Int64(dvec.vhi(src)));
+            => v64u(ConvertToVector256Int64(V0d.vhi(src)));
 
         // ~ 128x32u -> X
         // ~ ------------------------------------------------------------------
@@ -325,7 +325,7 @@ namespace Z0
         /// <param name="i">Specifies a target sign extension</param>
         [MethodImpl(Inline), VMap]
         public static Vector128<long> vmap(Vector128<uint> src, N1 n, W64 w, N1 i)
-            => ConvertToVector128Int64(dvec.vhi(src));
+            => ConvertToVector128Int64(V0d.vhi(src));
 
         /// <summary>
         /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
@@ -349,7 +349,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector128<ulong> vmap(Vector128<uint> src, N1 n, W64 w)
-            => v64u(ConvertToVector128Int64(dvec.vhi(src)));
+            => v64u(ConvertToVector128Int64(V0d.vhi(src)));
 
         // ~ 256x8i -> X
         // ~ ------------------------------------------------------------------
@@ -363,7 +363,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<short> vmap(Vector256<sbyte> src, N0 n, W16 w)
-            => ConvertToVector256Int16(dvec.vlo(src));
+            => ConvertToVector256Int16(V0d.vlo(src));
 
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
@@ -374,7 +374,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<short> vmap(Vector256<sbyte> src, N1 n, W16 w)
-            => ConvertToVector256Int16(dvec.vhi(src));
+            => ConvertToVector256Int16(V0d.vhi(src));
 
         // ~ 256x8u -> X
         // ~ ------------------------------------------------------------------
@@ -388,7 +388,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<ushort> vmap(Vector256<byte> src, N0 n, W16 w)
-            => v16u(ConvertToVector256Int16(dvec.vlo(src)));
+            => v16u(ConvertToVector256Int16(V0d.vlo(src)));
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -399,7 +399,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<ushort> vmap(Vector256<byte> src, N1 n, W16 w)
-            => v16u(ConvertToVector256Int16(dvec.vhi(src)));
+            => v16u(ConvertToVector256Int16(V0d.vhi(src)));
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -411,7 +411,7 @@ namespace Z0
         /// <param name="i">Specifies a target sign extension</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<short> vmap(Vector256<byte> src, N0 n, W16 w, N1 i)
-            => ConvertToVector256Int16(dvec.vlo(src));
+            => ConvertToVector256Int16(V0d.vlo(src));
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -423,7 +423,7 @@ namespace Z0
         /// <param name="i">Specifies a target sign extension</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<short> vmap(Vector256<byte> src, N1 n, W16 w, N1 i)
-            => ConvertToVector256Int16(dvec.vhi(src));
+            => ConvertToVector256Int16(V0d.vhi(src));
 
         // ~ 256x16i -> X
         // ~ ------------------------------------------------------------------
@@ -437,7 +437,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<int> vmap(Vector256<short> src, N0 n, W32 w)
-            => ConvertToVector256Int32(dvec.vlo(src));
+            => ConvertToVector256Int32(V0d.vlo(src));
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
@@ -448,7 +448,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<int> vmap(Vector256<short> src, N1 n, W32 w)
-            => ConvertToVector256Int32(dvec.vhi(src));
+            => ConvertToVector256Int32(V0d.vhi(src));
 
         // ~ 256x16u -> X
         // ~ ------------------------------------------------------------------
@@ -462,7 +462,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<uint> vmap(Vector256<ushort> src, N0 n, W32 w)
-            => v32u(ConvertToVector256Int32(dvec.vlo(src)));
+            => v32u(ConvertToVector256Int32(V0d.vlo(src)));
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
@@ -473,7 +473,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<uint> vmap(Vector256<ushort> src, N1 n, W32 w)
-            => v32u(ConvertToVector256Int32(dvec.vhi(src)));
+            => v32u(ConvertToVector256Int32(V0d.vhi(src)));
 
         // ~ 256x32i -> X
         // ~ ------------------------------------------------------------------
@@ -487,7 +487,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<long> vmap(Vector256<int> src, N0 n, W64 w)
-            => ConvertToVector256Int64(dvec.vlo(src));
+            => ConvertToVector256Int64(V0d.vlo(src));
 
         /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
@@ -498,7 +498,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<long> vmap(Vector256<int> src, N1 n, W64 w)
-            => ConvertToVector256Int64(dvec.vhi(src));
+            => ConvertToVector256Int64(V0d.vhi(src));
 
         // ~ 256x32u -> X
         // ~ ------------------------------------------------------------------
@@ -512,7 +512,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<ulong> vmap(Vector256<uint> src, N0 n, W64 w)
-            => v64u(ConvertToVector256Int64(dvec.vlo(src)));
+            => v64u(ConvertToVector256Int64(V0d.vlo(src)));
 
         /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
@@ -523,6 +523,6 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<ulong> vmap(Vector256<uint> src, N1 n, W64 w)
-            => v64u(ConvertToVector256Int64(dvec.vhi(src)));    
+            => v64u(ConvertToVector256Int64(V0d.vhi(src)));    
     }
 }

@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector128<sbyte> vzip(Vector128<short> x, Vector128<short> y, W8 w)
-            => dvec.vpackss(x,y);
+            => V0d.vpackss(x,y);
 
         /// <summary>
         /// (8x16i,8x16i) -> 16x8u
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector256<sbyte> vzip(Vector256<short> x, Vector256<short> y, W8 w)            
-            => dvec.vperm4x64(dvec.vpackss(x,y), Perm4L.ACBD);
+            => dvec.vperm4x64(V0d.vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (8x16u,8x16u) -> 16x8u
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         [MethodImpl(Inline), VZip]
         public static Vector128<short> vzip(Vector128<int> x, Vector128<int> y, W16 w)
-            => dvec.vpackss(x,y);
+            => V0d.vpackss(x,y);
 
         /// <summary>
         /// (8x32i,8x32i) -> 16x16i
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector256<short> vzip(Vector256<int> x, Vector256<int> y, W16 w)            
-            => dvec.vperm4x64(dvec.vpackss(x,y), Perm4L.ACBD);
+            => dvec.vperm4x64(V0d.vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (4x32u,4x32u) -> 8x16u
@@ -173,7 +173,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector256<uint> vzip(Vector256<ulong> x, Vector256<ulong> y, W32 w)
-            => Vectors.vconcat(dvec.vcompact(x, n128,z32), dvec.vcompact(y, n128,z32));
+            => V0d.vconcat(dvec.vcompact(x, n128,z32), dvec.vcompact(y, n128,z32));
 
         /// <summary>
         /// (4x32u,4x32u,4x32u,4x32u) -> 16x8u

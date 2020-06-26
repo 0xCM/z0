@@ -21,13 +21,13 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lanemerge<T>()
+        public static Vector256<T> vlanemerge<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vload<T>(n256,LaneMerge256x8u);
+                return V0.vload<T>(n256,LaneMerge256x8u);
             else if(typeof(T) == typeof(ushort))
-                return vload<T>(n256,LaneMerge256x16u);
+                return V0.vload<T>(n256,LaneMerge256x16u);
             else 
                 return default;
         }

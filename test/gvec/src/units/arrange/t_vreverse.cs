@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Memories;
+    using static V0;
+    using static V0d;
 
     public class t_vreverse : t_inx<t_vreverse>
     {
@@ -54,7 +55,7 @@ namespace Z0
             where T : unmanaged
         {            
             var v1 = VData.vincrements<T>(w);
-            var v2 = VData.decrements<T>(w);
+            var v2 = VData.vdecrements<T>(w);
             var v3 = gvec.vreverse(v1);
             Claim.veq(v2,v3);
         }
@@ -63,7 +64,7 @@ namespace Z0
             where T : unmanaged
         {
             var v1 = VData.vincrements<T>(w);
-            var v2 = VData.decrements<T>(w);            
+            var v2 = VData.vdecrements<T>(w);            
             var v3 = gvec.vreverse(v1);
             Claim.veq(v2,v3);
         }
@@ -79,7 +80,7 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = Vectors.vzero(w,t);
+                var expect = vzero(w,t);
                 for(var j = 0; j < n; j++)
                     expect = vcell(vcell(input,(n - 1) - j),j,expect);
 
@@ -100,7 +101,7 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = Vectors.vzero(w,t);
+                var expect = vzero(w,t);
                 for(var j = 0; j < n; j++)
                     expect = vcell(vcell(input,(n - 1) - j),j,expect);
 

@@ -20,8 +20,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vpart32x8x1(uint src)
         {
-            var x = vbroadcast(n256, src);
-            var y = vbroadcast(n256,BitMasks.Msb32x8x7);
+            var x = V0d.vbroadcast(n256, src);
+            var y = V0d.vbroadcast(n256,BitMasks.Msb32x8x7);
             return v8u(dvec.vand(x,y));
         }
     }

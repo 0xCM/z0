@@ -83,10 +83,10 @@ namespace Z0
         /// </summary>
         static Vector256<byte> ToShuffleSpec(Vector256<ushort> src)
             => ToShuffleSpec(
-                Vectors.vcell(src,0), Vectors.vcell(src,1), Vectors.vcell(src,2),Vectors.vcell(src,3), 
-                Vectors.vcell(src,4), Vectors.vcell(src,5), Vectors.vcell(src,6), Vectors.vcell(src,7),
-                Vectors.vcell(src,8), Vectors.vcell(src,9), Vectors.vcell(src,10), Vectors.vcell(src,11), 
-                Vectors.vcell(src,12), Vectors.vcell(src,13), Vectors.vcell(src,14), Vectors.vcell(src,15)
+                V0.vcell(src,0), V0.vcell(src,1), V0.vcell(src,2),V0.vcell(src,3), 
+                V0.vcell(src,4), V0.vcell(src,5), V0.vcell(src,6), V0.vcell(src,7),
+                V0.vcell(src,8), V0.vcell(src,9), V0.vcell(src,10), V0.vcell(src,11), 
+                V0.vcell(src,12), V0.vcell(src,13), V0.vcell(src,14), V0.vcell(src,15)
                 );
 
         static Vector256<byte> ToShuffleSpec2(Vector256<ushort> src)
@@ -99,9 +99,9 @@ namespace Z0
         {
             var w = n256;
             var x = gvec.vinc(w,z16);            
-            var reverse = VData.decrements<ushort>(w);
-            var identity = VData.vincrements<ushort>(w);
-            var pairswap = Vectors.vparts(w,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
+            var reverse = V0p.vdecrements<ushort>(w);
+            var identity = V0p.vincrements<ushort>(w);
+            var pairswap = V0d.vparts(w,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);
             Claim.veq(reverse, y1);
@@ -116,36 +116,36 @@ namespace Z0
         public void vshuf16x8_128x8u()
         {
             var n = n128;
-            var x0 = VData.vincrements<byte>(n);
+            var x0 = V0p.vincrements<byte>(n);
             var x0Spec = Vectors.vload(n, in head(Pattern1));
             var x0Dst = dvec.vshuf16x8(x0,x0Spec);
             Claim.veq(x0Spec,x0Dst);
 
-            var x1 = VData.vincrements<byte>(n);
+            var x1 = V0p.vincrements<byte>(n);
             var x1Spec = Vectors.vload(n, in head(Pattern2));
             var x1Dst = dvec.vshuf16x8(x1,x1Spec);
             Claim.veq(x1Spec,x1Dst);
 
-            var x2 = VData.vincrements<byte>(n);
-            var x2Spec = VData.rotl(n128, n8);
+            var x2 = V0p.vincrements<byte>(n);
+            var x2Spec = VData.vrotl(n128, n8);
             var x2Dst = dvec.vshuf16x8(x2,x2Spec);
             Claim.veq(x2Spec,x2Dst);
 
-            var x3 = VData.vincrements<byte>(n);
-            var x3Spec = VData.rotr(n128, n8);
+            var x3 = V0p.vincrements<byte>(n);
+            var x3Spec = VData.vrotr(n128, n8);
             var x3Dst = dvec.vshuf16x8(x3,x3Spec);
             Claim.veq(x3Spec,x3Dst);
 
-            var x4 = VData.vincrements<byte>(n);
-            var x4Spec1 = VData.rotl(n128, n8);
-            var x4Spec2 = VData.rotr(n128, n8);
+            var x4 = V0p.vincrements<byte>(n);
+            var x4Spec1 = VData.vrotl(n128, n8);
+            var x4Spec2 = VData.vrotr(n128, n8);
             var x4Dst = dvec.vshuf16x8(dvec.vshuf16x8(x4,x4Spec1), x4Spec2);
             Claim.veq(x4,x4Dst);
 
             var x5 = Random.CpuVector<byte>(n);
-            var x5Spec = Vectors.vbroadcast(n,(byte)0b10000000);
+            var x5Spec = V0d.vbroadcast(n,(byte)0b10000000);
             var x5Dst = dvec.vshuf16x8(x5, x5Spec);
-            Claim.veq(x5Dst,Vectors.vbroadcast(n,(byte)0));                        
+            Claim.veq(x5Dst, V0d.vbroadcast(n,(byte)0));                        
         }
 
 
@@ -158,7 +158,7 @@ namespace Z0
 
             var shufspec = perm.ToShuffleSpec();
             var dst = dvec.vshuf16x8(src,shufspec);
-            var expect = VData.decrements<byte>(n128);
+            var expect = VData.vdecrements<byte>(n128);
             Claim.veq(expect, dst);
 
             var identity = ShuffleIdentityMask();
@@ -172,7 +172,7 @@ namespace Z0
 
         public void vperm4x16()
         {
-            var id = Vectors.vparts(n128,0,1,2,3,6,7,8,9);
+            var id = V0d.vparts(n128,0,1,2,3,6,7,8,9);
             Claim.veq(dvec.vperm4x16(Vectors.vparts(n128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), Vectors.vparts(n128,0,3,2,1,6,9,8,7));
         }
 

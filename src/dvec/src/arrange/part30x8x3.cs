@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<uint> vpart30x8x3Mask(uint src) 
-            => Vectors.vparts(n256, m0, m1, m2, m3, m4,0,0,0);
+            => V0d.vparts(n256, m0, m1, m2, m3, m4,0,0,0);
 
         // The components are now in the following order, from lo to hi:
         // 0, 5, 1, 6, 2, 7, 3, 8, 4, 9
@@ -43,17 +43,17 @@ namespace Z0
         // Permuting would be cheaper but, in any case...
         [MethodImpl(Inline)]
         static Vector256<ushort> vpart30x8x3Assemble(Vector256<ushort> y)
-            => Vectors.vparts(n256, 
-                Vectors.vcell(y,0), // 0
-                Vectors.vcell(y,2), // 1
-                Vectors.vcell(y,4), // 2
-                Vectors.vcell(y,6), // 3
-                Vectors.vcell(y,8), // 4
-                Vectors.vcell(y,1), // 5
-                Vectors.vcell(y,3), // 6
-                Vectors.vcell(y,5), // 7
-                Vectors.vcell(y,7), // 8
-                Vectors.vcell(y,9), // 9
+            => V0d.vparts(n256, 
+                V0.vcell(y,0), // 0
+                V0.vcell(y,2), // 1
+                V0.vcell(y,4), // 2
+                V0.vcell(y,6), // 3
+                V0.vcell(y,8), // 4
+                V0.vcell(y,1), // 5
+                V0.vcell(y,3), // 6
+                V0.vcell(y,5), // 7
+                V0.vcell(y,7), // 8
+                V0.vcell(y,9), // 9
                 0,0,0,0,0,0);
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace Z0
             var lo = uint16(BitMasks.Lsb16x16x15 & a);
             var hi = uint16(BitMasks.Lsb16x16x15 & (a >> 15));            
             var m = vpart30x8x3Mask(src);
-            var shifts = Vectors.vparts(n256,0, 3, 6, 9, 12,0,0,0); 
-            var x = vbroadcast(n256, uint32(lo | hi << 16));            
+            var shifts = V0d.vparts(n256,0, 3, 6, 9, 12,0,0,0); 
+            var x = V0d.vbroadcast(n256, uint32(lo | hi << 16));            
             var y = v16u(dvec.vsrlv(dvec.vand(x,m), shifts));
             var z = vpart30x8x3Assemble(y);
             return z;

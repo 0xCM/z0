@@ -87,7 +87,7 @@ namespace Z0
         {
             var lo = Multiply(x, y);                        
             var hi = Multiply(vswaphl(x), vswaphl(y));
-            return Vectors.vconcat(lo,hi);
+            return V0d.vconcat(lo,hi);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         {
             var lo = Multiply(x, y);                        
             var hi = Multiply(vswaphl(x), vswaphl(y));
-            return Vectors.vconcat(lo,hi);
+            return V0d.vconcat(lo,hi);
         }
 
         /// <summary>

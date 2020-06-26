@@ -17,11 +17,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector128<T> src, ref T dst)
             where T : unmanaged
-                => VStore.vsave(src, ref dst);
+                => V0.vsave(src, ref dst);
 
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector256<T> src, ref T dst)
             where T : unmanaged
-                => VStore.vsave(src, ref dst);
+                => V0.vsave(src, ref dst);
     }
 }

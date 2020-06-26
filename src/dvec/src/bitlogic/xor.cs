@@ -162,5 +162,4 @@ namespace Z0
         public static Vector256<ulong> vxor(Vector256<ulong> x, Vector256<ulong> y)
             => Xor(x, y);
    }
-
 }

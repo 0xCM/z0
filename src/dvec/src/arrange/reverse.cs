@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vreverse(Vector128<byte> src)
-            => vshuf16x8(src, VData.decrements<byte>(n128));
+            => vshuf16x8(src, VData.vdecrements<byte>(n128));
 
         /// <summary>
         /// Reverses the source vector components
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vreverse(Vector128<sbyte> src)
-            => vshuf16x8(src, VData.decrements<sbyte>(n128));
+            => vshuf16x8(src, VData.vdecrements<sbyte>(n128));
 
         /// <summary>
         /// Reverses the source vector components
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vreverse(Vector256<byte> src)
-            => vshuf32x8(src, VData.decrements<byte>(n256));
+            => vshuf32x8(src, VData.vdecrements<byte>(n256));
 
         /// <summary>
         /// Reverses the source vector components
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vreverse(Vector256<sbyte> src)
-            => Vectors.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => V0d.vconcat(vreverse(V0d.vhi(src)), vreverse(V0d.vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vreverse(Vector256<short> src)
-            => Vectors.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => V0d.vconcat(vreverse(V0d.vhi(src)), vreverse(V0d.vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vreverse(Vector256<ushort> src)
-            => Vectors.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => V0d.vconcat(vreverse(V0d.vhi(src)), vreverse(V0d.vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components

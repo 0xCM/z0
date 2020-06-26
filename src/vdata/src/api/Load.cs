@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> vload<T>(N512 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => generic<T>(Vectors.vload(n, in head(src)));    
+                => generic<T>(V0.vload(n, in head(src)));    
 
         /// <summary>
         /// Loads a 128-bit pattern described by a readonly bytespan
