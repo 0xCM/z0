@@ -21,7 +21,7 @@ namespace Z0
 
         public Enum Literal {get;}
 
-        public object Scalar {get;}
+        public variant Scalar {get;}
 
         public string Description {get;}
 
@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public EnumDatasetEntry(MetadataToken token, MetadataToken declarer, 
-            int index, string identifier,  Enum literal, object scalar, string description, UserMetadata user)
+            int index, string identifier,  Enum literal, variant scalar, string description, UserMetadata user)
         {
             Token = token;
             Declarer = declarer;

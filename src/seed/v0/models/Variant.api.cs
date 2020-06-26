@@ -25,6 +25,10 @@ namespace Z0
                 => from(store(Cast.to<T,ulong>(src), NumericKinds.kind<T>()));
 
         [MethodImpl(Inline), Op]
+        public static variant define(ulong src, NumericKind dst)
+            => from(store(src, dst));
+
+        [MethodImpl(Inline), Op]
         public static variant convert(variant src, NumericKind dst)
             => from(src.data.WithElement(1,(ulong)dst));
 

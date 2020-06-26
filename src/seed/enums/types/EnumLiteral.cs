@@ -33,14 +33,12 @@ namespace Z0
         /// <summary>
         /// The literal value
         /// </summary>
-        public ulong LiteralValue {get;}
+        public Enum LiteralValue {get;}
 
         /// <summary>
         /// The enum's numeric data type
         /// </summary>
-        public EnumScalarKind DataType {get;}
-
-        public NumericKind NumericKind => LiteralValue.GetType().GetEnumUnderlyingType().NumericKind();
+        public NumericKind DataType {get;}
 
         /// <summary>
         /// The metadata token that identifies the backing field
@@ -52,11 +50,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public EnumLiteral(FieldInfo field, int index, string identifier, EnumScalarKind type, ulong value)
+        public EnumLiteral(FieldInfo field, NumericKind kind, int index, string identifier, Enum value)
         {
             Field = field;
             Identifier = identifier;
-            DataType = type;
+            DataType = kind;
             Index = index;
             LiteralValue = value;
         }           

@@ -11,6 +11,7 @@ namespace Z0
     [ApiHost]
     public partial class Boxy
     {
+
         /// <summary>
         /// Uncoditionaly converts a boxed numeric value of one kind to a boxed numeric value of specified kind, if possible.
         /// If not possible, returns the original value

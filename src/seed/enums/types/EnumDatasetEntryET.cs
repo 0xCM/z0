@@ -49,7 +49,7 @@ namespace Z0
         public EnumDatasetEntry Untyped
         {
             [MethodImpl(Inline)]
-            get => new EnumDatasetEntry(Token, Declarer, Index,Name, Literal,Scalar, Description, UserData);
+            get => new EnumDatasetEntry(Token, Declarer, Index,Name, Literal, Variant.from(Scalar), Description, UserData);
         }
     }
 }

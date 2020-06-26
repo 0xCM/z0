@@ -45,8 +45,8 @@ namespace Z0
             get => ref Data[i];
         }
         
-        public ulong[] Values 
-            => Data.Map(x => x.LiteralValue);
+        public variant[] Values 
+            => Data.Map(x => Enums.scalar(x.LiteralValue));
 
         public F[] Convert<F>()
             where F : unmanaged, Enum
@@ -59,7 +59,7 @@ namespace Z0
             return dst;
         }
                 
-        public IEnumerable<NamedValue<ulong>> NamedValues
+        public IEnumerable<NamedValue<Enum>> NamedValues
             => from i in Data select NamedValue.define(i.Identifier, i.LiteralValue);
     }
 }

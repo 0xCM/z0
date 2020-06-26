@@ -46,7 +46,7 @@ namespace Z0
         /// <summary>
         /// The enum's numeric data type
         /// </summary>
-        public EnumScalarKind DataType {get;}
+        public NumericKind DataType {get;}
 
         /// <summary>
         /// The meaning of the literal, if available
@@ -67,17 +67,17 @@ namespace Z0
             get => Field;
         }
 
-        ulong IEnumLiteral.LiteralValue 
-            => Enums.untype(LiteralValue);
+        // ulong IEnumLiteral.LiteralValue 
+        //     => Enums.untype(LiteralValue);
 
-        public NumericKind NumericKind 
-            => LiteralValue.GetType().GetEnumUnderlyingType().NumericKind();
+        // public NumericKind DataType 
+        //     => LiteralValue.GetType().GetEnumUnderlyingType().NumericKind();
 
         [MethodImpl(Inline)]
         internal EnumLiteral(FieldInfo field, EnumScalarKind type, int index, string identifier, E value, string description, UserMetadata data)
         {
             Field = field;
-            DataType = type;
+            DataType = typeof(E).GetEnumUnderlyingType().NumericKind();
             Identifier = identifier;
             Index = index;
             LiteralValue = value;

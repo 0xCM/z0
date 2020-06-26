@@ -12,6 +12,13 @@ namespace Z0
 
     partial class XTend
     {
+        public static void Delimit<T>(this StringBuilder sb, string content, Padding pad, char delimiter = Chars.Pipe)
+        {
+            sb.Append(text.rspace(delimiter));            
+            sb.Append($"{content}".PadRight((int)pad));
+        }
+
+
         public static void Delimit<T>(this StringBuilder sb, T content, Padding pad, char delimiter = Chars.Pipe)
             where T : ITextual             
         {

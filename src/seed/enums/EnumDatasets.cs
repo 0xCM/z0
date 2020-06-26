@@ -46,7 +46,28 @@ namespace Z0.Asm
 
             return dst.ToString();
         }
-        
+
+        public string format(in EnumDatasetEntry src, char delimiter = Chars.Pipe)
+        {
+            var dst = text.build();
+            dst.Delimit(F.Token, src.Token);
+            dst.Delimit(F.Index, src.Index);
+            dst.Delimit(F.Name, src.Name);
+            dst.Delimit(F.Scalar, src.Scalar);
+
+            return dst.ToString();
+        }
+
+        public void emit(Type @enum, FilePath dst)
+        {
+            using var writer = dst.Writer();
+            writer.WriteLine(header<F>());
+            
+            var dataset = Enums.dataset(@enum);
+            for(var i=0; i<dataset.EntryCount; i++)
+                writer.WriteLine(format(dataset[i]));
+        }        
+
         public void emit<E,T>(FilePath dst)
             where E : unmanaged, Enum
             where T : unmanaged

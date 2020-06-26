@@ -21,11 +21,10 @@ namespace Z0
         /// <summary>
         /// The literal value in an unfortunate box
         /// </summary>
-        ulong LiteralValue {get;}        
+        Enum LiteralValue {get;}        
+    
+        NumericKind DataType {get;}
 
-        NumericKind NumericKind {get;}
-            //=> LiteralValue.GetType().GetEnumUnderlyingType().NumericKind();
-        
         string ITextual.Format()
             => $"{Index.ToString().PadLeft(2, '0')} {LiteralValue}:{Identifier}";        
     }
@@ -50,7 +49,10 @@ namespace Z0
         /// <summary>
         /// The literal value
         /// </summary>
-        new E LiteralValue {get;}        
+        new E LiteralValue {get;}  
+
+        Enum IEnumLiteral.LiteralValue 
+            => LiteralValue;      
     }
 
     /// <summary>

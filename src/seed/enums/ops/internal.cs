@@ -38,6 +38,23 @@ namespace Z0
             return indices.ToIndex();
         }
 
+        public static EnumLiterals CreateIndex(Type @enum)
+        {
+            var nk = @enum.GetEnumUnderlyingType().NumericKind();
+            var ek = Enums.@base(nk);
+            var type = Enums.@base(@enum);
+            var fields = @enum.LiteralFields().ToArray();
+            var indices = new List<EnumLiteral>(fields.Length);
+            for(var i=0; i< fields.Length; i++)
+            {
+                var field = fields[i];
+
+                var value = (Enum)field.GetValue(null);
+                indices.Add(new EnumLiteral(field, nk, i, field.Name, value));
+            }
+            return indices.ToIndex();
+        }
+
         /// <summary>
         /// Gets the literals defined by an enumeration together with their integral values
         /// </summary>
@@ -56,6 +73,7 @@ namespace Z0
             }
             return dst;        
         }
+
 
         /// <summary>
         /// Gets the literals defined by an enumeration

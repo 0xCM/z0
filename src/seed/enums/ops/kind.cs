@@ -11,12 +11,17 @@ namespace Z0
 
     partial class Enums
     {
+
+        [MethodImpl(Inline)]
+        public static EnumScalarKind kind(Type e)
+        {
+            var tc = Type.GetTypeCode(e.GetEnumUnderlyingType());
+            return (EnumScalarKind)Root.primal(tc);
+        }
+
         [MethodImpl(Inline)]
         public static EnumScalarKind kind<E>(E e = default)
             where E : unmanaged, Enum 
-        {
-            var tc = Type.GetTypeCode(typeof(E).GetEnumUnderlyingType());
-            return (EnumScalarKind)Root.primal(tc);
-        }
+                => kind(typeof(E));
     }
 }

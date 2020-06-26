@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public interface IVariant
+    public interface IVariant : ITextual
     {
         /// <summary>
         /// The number of bits that are used to store the enclosed data
@@ -26,7 +26,7 @@ namespace Z0
 
     }
 
-    public interface ISegmentedVariant<V>  : IVariant, IEquatable<V>, ITextual<V>
+    public interface ISegmentedVariant<V>  : IVariant, IEquatable<V>
         where V : unmanaged, ISegmentedVariant<V>
     {
 

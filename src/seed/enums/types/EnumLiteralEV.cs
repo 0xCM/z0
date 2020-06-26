@@ -54,7 +54,7 @@ namespace Z0
         /// <summary>
         /// The numeric kind refined by the enum
         /// </summary>
-        public EnumScalarKind DataType 
+        public EnumScalarKind PrimalKind 
         {
             [MethodImpl(Inline)]
             get => Enums.@base<E>();
@@ -72,7 +72,7 @@ namespace Z0
             get => Literal.Field;
         }
 
-        public NumericKind NumericKind 
+        public NumericKind DataType 
         {
             [MethodImpl(Inline)]
             get => NumericKinds.kind<V>();
@@ -90,8 +90,8 @@ namespace Z0
             get => Literal.UserData;
         }
 
-        ulong IEnumLiteral.LiteralValue 
-            => Enums.untype(LiteralValue);
+        // ulong IEnumLiteral.LiteralValue 
+        //     => Enums.untype(LiteralValue);
 
         [MethodImpl(Inline)]
         internal EnumLiteral(EnumLiteral<E> literal, V v)

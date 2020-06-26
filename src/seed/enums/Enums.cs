@@ -115,6 +115,13 @@ namespace Z0
             where T : unmanaged
                 => EnumValue.scalar<E,T>(e);
 
+        public static unsafe variant scalar(Enum src)
+        {
+            var kind = src.GetType().GetEnumUnderlyingType().NumericKind();             
+            var converted = (ulong)Boxy.rebox(src,NumericKind.U64);
+            return Variant.define(converted, kind);
+        }
+
         /// <summary>
         /// Reads a generic enum member from a generic value
         /// </summary>
@@ -210,6 +217,19 @@ namespace Z0
         public static E[] literals<E>()
             where E : unmanaged, Enum
                 => (E[])LiteralCache.GetOrAdd(typeof(E), _ => CreateLiteralArray<E>());
+
+        /// <summary>
+        /// Gets the literals defined by an enumeration
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        public static Enum[] literals(Type @enum)
+        {
+            var i = CreateIndex(@enum);
+            var dst = new Enum[i.Length];
+            for(var j = 0; j<dst.Length; j++)
+                dst[j] = i[j].LiteralValue;
+            return dst;    
+        }
 
         public static ReadOnlySpan<E> literals<E>(int crop)
             where E : unmanaged, Enum
