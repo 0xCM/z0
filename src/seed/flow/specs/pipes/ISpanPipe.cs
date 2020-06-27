@@ -17,7 +17,7 @@ namespace Z0
         Span<T> Flow(Span<T> src)
         {
             for(var i=0; i<src.Length; i++)
-                Flow(ref refs.seek(src, i));
+                Flow(ref Root.seek(src, i));
             return src;
         }
 

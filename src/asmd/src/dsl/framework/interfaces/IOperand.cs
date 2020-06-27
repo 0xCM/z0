@@ -21,8 +21,8 @@ namespace Z0.Asm
         /// </summary>
         T Value {get;}   
 
-        DataWidth ISized.Width 
-            => (DataWidth)bitsize<T>();
+        BitSize ISized.Width 
+            => bitsize<T>();
     }
 
     public interface IOperand<W,T> : IOperand<T>

@@ -6,20 +6,32 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    
+    using System.Reflection;
+    using System.Linq;
+
     using static Konst;
 
     public readonly struct Null : ITextual, INullity, INullary<Null>
     {
-        public static Null Value => default(Null);
-        
+        public const string Identifier = "∅";
+
+        public const string Label = "null";
+
+        public const string NullField = Identifier + nameof(NullField) + Identifier;
+
+        public const string NullMethod = Identifier + nameof(NullMethod) + Identifier;
+
+        public const string NullType = Identifier + nameof(NullType) + Identifier;
+                
+        public static Null Value => default;        
+                
         [MethodImpl(Inline)]
         public static object Banish(object src) 
             => src ?? Value;
 
         [MethodImpl(Inline)]
         public static string Banish(string src)
-            => src ?? "null";
+            => src ?? Identifier;
 
         [MethodImpl(Inline)]
         public static bool Is(object src)
@@ -34,12 +46,15 @@ namespace Z0
             where T : class
                 => src ?? alt;
 
-        public bool IsEmpty => true;
+        public bool IsEmpty 
+            => true;
         
-        public Null Zero => Value;
+        public Null Zero 
+            => Value;
         
+        [MethodImpl(Inline)]
         public string Format()
-            => nameof(Null).ToLower();
+            => Label;
 
         public override string ToString()
             => Format();

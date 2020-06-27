@@ -5,15 +5,8 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Linq;
 
-    using Z0.Asm.Data;
-
-    using static Root;
-
-    using F = EnumDatasetEntryField;
 
     public readonly struct EnumDatasetEmitter
     {
@@ -51,7 +44,6 @@ namespace Z0.Asm
             EnumDatasets.Service.emit<E,T>(dst);
         }
 
-
         void emit(PartId part, Type[] enums)
         {
             dir(part).Clear();
@@ -80,27 +72,7 @@ namespace Z0.Asm
             foreach(var part in parts)
             {
                 emit(part.Id, part.enums);
-            }
-
-
-            
-            
-                                            
-                      
-
-            //emit(typeof(RegisterKind));
-
-            // emit<AsciCharCode,byte>();
-            // emit<Octet,byte>();
-            // emit<HexKind,byte>();
-            //emit<RegisterKind,uint>();
-            // emit<RegisterCode,byte>();
-            // emit<RegisterClass,byte>();
-            // emit<RegisterWidth,ushort>();
-            // emit<OperatingMode,byte>();
-            // emit<InstructionToken,byte>();
-            // emit<OpCodeTokenKind,byte>();
-
+            }                                                        
         }    
     }
 }

@@ -38,7 +38,7 @@ namespace Z0
 
             var dst = 0ul;
             for(var i=0; i<count; i++)
-                refs.seek8(ref dst, i) = refs.skip(src,i);            
+                As.seek8(ref dst, i) = Root.skip(src,i);            
             
             return dst;
         }

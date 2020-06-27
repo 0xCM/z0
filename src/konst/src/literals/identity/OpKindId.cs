@@ -386,5 +386,40 @@ namespace Z0
 
         VMap,
 
+        
+        /// <summary>
+        /// Identifies a function that invokes framework/system operations wich are located in an external scope that does not disolve
+        /// </summary>        
+        Opaque = uint.MaxValue + 1ul,
+    
     }    
+
+    public enum OpacityKind : ulong
+    {
+        None = 0,
+
+        Closure = NumericKind.All,
+        
+        Root = OpKindId.Opaque,
+
+        First = Root + 1,
+
+        Unbox = First,
+
+        CreateString,
+
+        Alloc,
+        
+        Equals,
+
+        GetType,
+
+        GetTypeCode,
+
+        Write,
+
+        Copy,
+
+
+    }
 }

@@ -68,16 +68,6 @@ namespace Z0.Asm.Data
                     case F.M64:
                         parser.Parse(cell, out dst.M64);
                         break;        
-
-                    // case F.Encoded:
-                    //     parser.Parse(cell, out dst.Encoded);
-                    //     break;                    
-                    // case F.InstructionFormat:
-                    //     parser.Parse(cell, out dst.InstructionFormat);
-                    //     break;                    
-                    // case F.InstructionCode:
-                    //     parser.Parse(cell, out dst.InstructionCode);
-                    //     break;                    
                     case F.CpuId:
                         parser.Parse(cell, out dst.CpuId);
                         break;                    

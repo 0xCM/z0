@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     class AspectLabels
     {
         public const string mem = nameof(mem);

@@ -30,10 +30,6 @@ namespace Z0.Asm.Data
             => result = @enum(src, out var _, YeaOrNea.N);
 
         [MethodImpl(Inline)]
-        public BinaryCode Parse(string src, out BinaryCode result)     
-            => result = HexByteParser.Service.ParseData(src).ValueOrDefault(BinaryCode.Empty);
-
-        [MethodImpl(Inline)]
         public OpCodeId Parse(string src, out OpCodeId result)     
             => result = @enum(src, out var _, OpCodeId.INVALID);
 
@@ -71,7 +67,7 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public MemoryAddress Parse(string src, out MemoryAddress result, MemoryAddress? @default = null)     
-            => result = Addresses.location((ulong)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
+            => result = Addresses.locate((ulong)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
 
         [MethodImpl(Inline)]
         public string Parse(string src, out string result)
@@ -81,7 +77,7 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline)]
-        E @enum<E>(string src, out ParseResult<E> result, E @default = default)
+        public E @enum<E>(string src, out ParseResult<E> result, E @default = default)
             where E : unmanaged, Enum
         {
             result = parse(src, x => Enums.Parse(src, @default));
@@ -91,16 +87,20 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline)]
         T ParseNumeric<T>(string src, out T result, T @default = default)     
             where T : unmanaged
-                => result = numeric<T>(src, out var _,  @default);
+                => result = Numeric<T>(src, out var _,  @default);
 
         [MethodImpl(Inline)]
-        T numeric<T>(string src, out ParseResult<T> result, T @default = default)     
+        public T Numeric<T>(string src, out T result, T @default = default)     
             where T : unmanaged
-        {      
+        {
             var parser = NumericParser.create<T>();
-            result = parser.Parse(src);
-            return result.ValueOrDefault(default(T));
+            result = parser.Parse(src).ValueOrDefault(@default);
+            return result;
         }
+
+        [MethodImpl(Inline)]
+        public BinaryCode Parse(string src, out BinaryCode result)     
+            => result = HexByteParser.Service.ParseData(src).ValueOrDefault(BinaryCode.Empty);
 
         static ParseResult<T> parse<T>(string src, Func<string,T> parser)
         {

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IEnum<E> : ITextual, ISized, IEquatable<E>
+    public interface IEnum<E> : ITextual, IEquatable<E>
         where E : unmanaged, Enum
     {
         E Literal {get;}

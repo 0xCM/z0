@@ -12,11 +12,8 @@ namespace Z0
     partial class Root
     {
         [MethodImpl(Inline)]
-        public static int bitsize<T>()            
+        public static BitSize bitsize<T>()            
             => Unsafe.SizeOf<T>()*8;
 
-        [MethodImpl(Inline)]
-        public static int bitsize<T>(T rep)            
-            => Unsafe.SizeOf<T>()*8;        
     }
 }

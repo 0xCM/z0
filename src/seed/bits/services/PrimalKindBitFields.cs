@@ -12,74 +12,101 @@ namespace Z0
     using static Root;
     
     [ApiHost]
-    public readonly struct PrimalKindBitFields : IApiHost<PrimalKindBitFields>
+    public readonly struct PrimalKindBitFields
     {
-        public static ReadOnlySpan<SegIndex> Indices
-        {
-            [MethodImpl(Inline), Op]
-            get => cast<SegIndex>(FieldSegments);
-        }
-
-        public static ReadOnlySpan<SegMask> Masks
-        {
-            [MethodImpl(Inline), Op]
-            get => cast<SegMask>(FieldMasks);
-        }
-
-        public static ReadOnlySpan<Field> Fields
-        {
-            [MethodImpl(Inline), Op]
-            get => cast<Field>(FieldParts);
-        }
-
-        public static ReadOnlySpan<SegWidth> SegWidths
-        {
-            [MethodImpl(Inline), Op]
-            get => Root.cast<SegWidth>(FieldWidths);
-        }
+        public const byte TotalWidth
+            = (byte)SegWidth.KindId + (byte)SegWidth.Width + (byte)SegWidth.Sign;
 
         [MethodImpl(Inline), Op]
-        public static PrimalKindBitField Init(PrimalKind data)
+        public static PrimalKindBitField define(PrimalKind data)
             => new PrimalKindBitField(data);
 
         [MethodImpl(Inline), Op]
-        public static PrimalKindBitField Init(byte data)
+        public static PrimalKindBitField define(byte data)
             => new PrimalKindBitField(data);
 
         [MethodImpl(Inline), Op]
-        public static SegMask Mask(Field i)
-            => skip(Masks, (int)i);            
+        public static TypeCode code(PrimalKindBitField f)
+            => (TypeCode)segval(f, SegField.KindId);
 
         [MethodImpl(Inline), Op]
-        public static SegIndex StartPos(Field i)
-            => skip(Indices, (int)i);
+        public static byte width(PrimalKindBitField f)
+            => segval(f, SegField.Width);
 
         [MethodImpl(Inline), Op]
-        public static byte SegData(PrimalKindBitField f, Field i)
-            => (byte)(((byte)Mask(i) & (byte)f.FieldValue) >> (int)StartPos(i));
+        public static SignKind sign(PrimalKindBitField f)
+            => (SignKind)segval(f, SegField.Sign);
 
         [MethodImpl(Inline), Op]
-        public static Pow2Width Width(PrimalKindBitField f)
-            => (Pow2Width)SegData(f, Field.Width);
+        static ref readonly SegIndex offset(SegField i)
+            => ref skip(segindices(),(byte)i);
 
         [MethodImpl(Inline), Op]
-        public static PrimalKindId KindId(PrimalKindBitField f)
-            => (PrimalKindId)SegData(f, Field.KindId);
+        static ref readonly SegMask segmask(SegField i)
+            => ref skip(segmasks(), (byte)i);
 
         [MethodImpl(Inline), Op]
-        public static Sign8Kind Sign(PrimalKindBitField f)
-            => (Sign8Kind)SegData(f, Field.Sign);
+        static byte segval(PrimalKindBitField f, SegField i)
+            => (byte)(((byte)segmask(i) & (byte)f.FieldValue) >> (int)offset(i));
 
-        static ReadOnlySpan<byte> FieldMasks 
+        [MethodImpl(Inline), Op]
+        static ref readonly SegField segfield(SegField i)
+            => ref skip(segfields(),(byte)i);
+
+        [MethodImpl(Inline), Op]
+        static ref readonly SegWidth segwidth(SegField i)
+            => ref skip(segwidths(), (byte)i);
+
+        [MethodImpl(Inline), Op]
+        static ReadOnlySpan<SegIndex> segindices()
+            => SegIndices;
+        
+        [MethodImpl(Inline), Op]
+        static ReadOnlySpan<SegMask> segmasks()
+            => SegMasks;
+
+        [MethodImpl(Inline), Op]
+        static ReadOnlySpan<SegField> segfields()
+            => SegFields;
+
+        [MethodImpl(Inline), Op]
+        static ReadOnlySpan<SegWidth> segwidths()
+            => SegWidths;
+
+        static ReadOnlySpan<SegIndex> SegIndices
+        {
+            [MethodImpl(Inline)]
+            get => cast<SegIndex>(FieldSegData);
+        }
+
+        static ReadOnlySpan<SegMask> SegMasks
+        {
+            [MethodImpl(Inline)]
+            get => cast<SegMask>(FieldMaskData);
+        }
+
+        static ReadOnlySpan<SegField> SegFields
+        {
+            [MethodImpl(Inline)]
+            get => cast<SegField>(FieldPartData);
+        }
+
+        static ReadOnlySpan<SegWidth> SegWidths
+        {
+            [MethodImpl(Inline), Op]
+            get => Root.cast<SegWidth>(FieldWidthData);
+        }
+
+        static ReadOnlySpan<byte> FieldMaskData 
             => new byte[3]{(byte)SegMask.Width, (byte)SegMask.KindId, (byte)SegMask.Sign};
 
-        static ReadOnlySpan<byte> FieldSegments
+        static ReadOnlySpan<byte> FieldSegData
             => new byte[3]{(byte)SegIndex.Width, (byte)SegIndex.KindId, (byte)SegIndex.Sign};
 
-        static ReadOnlySpan<byte> FieldParts
-            => new byte[3]{(byte)Field.Width,(byte)Field.KindId, (byte)Field.Sign};
+        static ReadOnlySpan<byte> FieldPartData
+            => new byte[3]{(byte)SegField.Width,(byte)SegField.KindId, (byte)SegField.Sign};
 
-        static ReadOnlySpan<byte> FieldWidths
+        static ReadOnlySpan<byte> FieldWidthData
             => new byte[3]{(byte)SegWidth.Width,(byte)SegWidth.KindId, (byte)SegWidth.Sign};
     }
 }

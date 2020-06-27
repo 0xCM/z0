@@ -36,7 +36,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe static MemRef memref(ReadOnlySpan<byte> src)
-            => new MemRef(As.point(Root.head(src)), src.Length);
+            => new MemRef(As.pointer(Root.head(src)), src.Length);
                 
         ulong Lo
         {
@@ -55,6 +55,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Lo;
         }
+        
+        public MemoryRange Segment
+        {
+            get => new MemoryRange(Address, Address + Hi);
+        }
+        
         public ByteSize Length 
         {
             [MethodImpl(Inline)]

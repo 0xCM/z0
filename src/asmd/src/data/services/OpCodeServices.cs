@@ -25,7 +25,7 @@ namespace Z0.Asm.Data
             for(byte i=0; i<src.Length; i++)
             {
                 ref readonly var field = ref skip(src,i);
-                var data = cover(field.C16, field.Location.Length);
+                var data = cover(field.C16, field.Reference.Length);
                 var value = asci8.Null;
                 asci.encode(data, out value);
                 seek(buffer, i) = new OpCodeToken(i, (OpCodeTokenKind)i, value);
@@ -34,7 +34,7 @@ namespace Z0.Asm.Data
         }
 
         public static unsafe OpCodeTokens tokens()
-            => load(FieldCapture.Service.StringLiterals(typeof(OpCodeTokenKinds)),alloc<OpCodeToken>(OpCodeTokenKinds.Count));
+            => load(LiteralFieldRefs.strings(typeof(OpCodeTokenKinds)),alloc<OpCodeToken>(OpCodeTokenKinds.Count));
 
         [MethodImpl(Inline), Op]
         public void Partition(in OpCodePartitoner processor, in OpCodePartition handler, ReadOnlySpan<OpCodeRecord> src)
@@ -62,6 +62,6 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> encode(in EncodedOpCode src)
-            => MemoryMarshal.CreateReadOnlySpan(ref refs.edit(in src),1).Bytes();                     
+            => MemoryMarshal.CreateReadOnlySpan(ref As.edit(src),1).Bytes();                     
    }
 }

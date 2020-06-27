@@ -12,6 +12,7 @@ namespace Z0
 
     partial struct As
     {
+
         /// <summary>
         /// Adds an offset to a reference
         /// </summary>

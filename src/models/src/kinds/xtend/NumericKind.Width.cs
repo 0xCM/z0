@@ -18,5 +18,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Width(this NumericKind k)
             => (int)(ushort)k;
+
+        /// <summary>
+        /// Determines the width of the represented kind in bytes
+        /// </summary>
+        /// <param name="k">The kind to examine</param>
+        [MethodImpl(Inline)]
+        public static int Size(this NumericKind k)
+            => ((int)(ushort)k)/8;
     }
 }

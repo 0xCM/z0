@@ -19,8 +19,7 @@ namespace Z0.Asm.Data
     using static CreditTypes.ContentType;
 
     public class t_docref : t_asmd<t_docref>
-    { 
-        
+    {         
         public void t_component_encode()
         {
             Claim.Eq(Credits.vendor(Intel).Vendor, Intel);

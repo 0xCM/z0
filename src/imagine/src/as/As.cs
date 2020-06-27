@@ -12,7 +12,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct As
     {
-        const NumericKind Closure = UnsignedInts;    
+        const NumericKind Closure = AllNumeric;    
 
         [MethodImpl(Inline)]   
         internal static T[] alloc<T>(int length)

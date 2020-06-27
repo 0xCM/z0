@@ -12,6 +12,10 @@ namespace Z0
     partial class Root
     {                
         [MethodImpl(Inline)]
+        public static PrimalLiteralKind literal(Type src)
+            => Primitive.literal(src);
+
+        [MethodImpl(Inline)]
         public static E[] literals<E>()
             where E : unmanaged, Enum
                 => Enums.literals<E>();

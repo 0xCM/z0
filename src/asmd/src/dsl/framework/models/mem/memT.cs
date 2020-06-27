@@ -15,7 +15,8 @@ namespace Z0.Asm.Dsl
     {
         readonly T Value;
 
-        public DataWidth Width => (DataWidth)bitsize<T>();
+        public BitSize Width 
+            => bitsize<T>();
 
         [MethodImpl(Inline)]
         public mem(T value)

@@ -17,7 +17,8 @@ namespace Z0
 
         readonly NumericWidth Size;
 
-        public static RelAddress Empty => new RelAddress(0, NW.None);
+        public static RelAddress Empty 
+            => new RelAddress(0, NW.None);
 
         public bool IsEmpty 
         {

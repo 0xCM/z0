@@ -11,7 +11,7 @@ namespace Z0
     
     using static Konst;
     using static Widths;
-    using static refs;
+    using static As;
 
     partial class XTend
     {
@@ -34,7 +34,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return Vectors.vload(w128, in head(dst));        
+            return Vectors.vload(w128, first(dst));        
         } 
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);
-            return Vectors.vload(w128, in head(dst));        
+            return Vectors.vload(w128, first(dst));        
         } 
         /// <summary>
         /// Projects a source vector into a target vector via a mapping function
@@ -73,7 +73,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);            
-            return Vectors.vload(w256, in head(dst));        
+            return Vectors.vload(w256, first(dst));        
         } 
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return Vectors.vload(w, in head(dst));        
+            return Vectors.vload(w, first(dst));        
         } 
     }
 }

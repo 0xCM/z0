@@ -8,23 +8,48 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static PrimalKindField;
 
-    public readonly struct PrimalKindBitField : IBitField<PrimalKind,byte>
-    {
-        public const byte TotalFieldWidth = (byte)SegWidth.KindId + (byte)SegWidth.Width + (byte)SegWidth.Sign;
-
+    public readonly struct PrimalKindBitField : IRefinedBitField<PrimalKind,byte>
+    {        
         public PrimalKind FieldValue {get;}
 
-        public byte Data
+        public PrimalKind Kind
         {
             [MethodImpl(Inline)]
-            get => (byte)FieldValue;
+            get => FieldValue;
         }
+
+        public TypeCode TypeCode
+        {
+            [MethodImpl(Inline)]
+            get => PrimalKindBitFields.code(this);
+        }
+
+        public SignKind Sign
+        {
+            [MethodImpl(Inline)]
+            get => PrimalKindBitFields.sign(this);
+        }
+
+        public BitSize Width
+        {
+            [MethodImpl(Inline)]
+            get => PrimalKindBitFields.width(this);
+        }        
+
+        public ByteSize Size
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Width/8;
+        }        
 
         [MethodImpl(Inline)]
         public PrimalKindBitField(PrimalKind src)
             => FieldValue = src;
+
+        [MethodImpl(Inline)]
+        public PrimalKindBitField(PrimalLiteralKind src)
+            => FieldValue = (PrimalKind)src;
 
         [MethodImpl(Inline)]
         public PrimalKindBitField(byte src)
@@ -33,11 +58,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(PrimalKindBitField src)
             => FieldValue == src.FieldValue;
-
-        public Pow2Width FieldWidth
-        {
-            [MethodImpl(Inline)]
-            get => PrimalKindBitFields.Width(this);
-        }        
     }
 }

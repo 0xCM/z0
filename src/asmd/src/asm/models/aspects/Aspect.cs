@@ -66,8 +66,10 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
-        public static Aspect Empty => (string.Empty, Null.Value, Null.Value, string.Empty);
+        public static Aspect Empty 
+            => (string.Empty, Null.Value, Null.Value, string.Empty);
         
-        const string DefaultSep = CharText.Space + CharText.Pipe + CharText.Space;        
+        const string DefaultSep 
+            = CharText.Space + CharText.Pipe + CharText.Space;        
     }
 }

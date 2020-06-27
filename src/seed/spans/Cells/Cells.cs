@@ -90,7 +90,7 @@ namespace Z0
             where S: unmanaged
             where T :unmanaged
         {
-            ref var input =  ref As.uint8(ref refs.edit(in refs.skip(src,start)));
+            ref var input =  ref As.uint8(ref As.edit(in Root.skip(src,start)));
             ref var target = ref As.uint8(ref Root.seek(dst, offset));
             var bytecount =  (uint)(count*Unsafe.SizeOf<S>());
             Unsafe.CopyBlock(ref target, ref input, bytecount);

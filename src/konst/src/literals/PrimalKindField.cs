@@ -4,19 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public readonly struct PrimalKindField
     {
         /// <summary>
         /// Defines indexed bitfield identifers
         /// </summary>
-        public enum Field : byte
-        {
+        public enum SegField : byte
+        {            
+            /// <summary>
+            /// Identifies the bitfield segment that specifies a primitive width
+            /// </summary>
             Width = 0,
 
+            /// <summary>
+            /// Identifies the bitfield segment that specifies a primtive kind identifier
+            /// </summary>
             KindId = 1,
 
+            /// <summary>
+            /// Identifies the bitfield segment that specifies a primtive sign classifier
+            /// </summary>
             Sign = 2,
         }
 

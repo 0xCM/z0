@@ -6,6 +6,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static As;
 
     partial class Root
     {
@@ -17,6 +18,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe static MemoryAddress address<T>(in T src)
             where T : unmanaged
-                => (ulong)As.point(src);
+                => (ulong)pointer(src);
     }
 }

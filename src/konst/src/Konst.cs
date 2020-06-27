@@ -147,11 +147,13 @@ namespace Z0
         /// </summary>
         public static Base16 base16 => default;
 
+        public const OpacityKind Opaque = OpacityKind.Closure;
+
+
         [MethodImpl(Inline)]
         internal static ReadOnlySpan<T> transform<T>(ReadOnlySpan<byte> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<byte,T>(MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(src), src.Length));
-
 
         public static void ThrowInvariantFailure(string msg)
             => throw new Exception($"Application invaraiant failed: {msg}");

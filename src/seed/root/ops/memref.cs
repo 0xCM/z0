@@ -6,6 +6,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static As;
 
     partial class Root
     {
@@ -18,9 +19,8 @@ namespace Z0
         public static MemRef memref(MemoryAddress address, ByteSize size)
             => new MemRef(address,size);
 
-
         [MethodImpl(Inline)]
         public unsafe static MemRef memref(ReadOnlySpan<byte> src)
-            => new MemRef(As.point(head(src)), src.Length);
+            => new MemRef(pointer(head(src)), src.Length);
     }
 }

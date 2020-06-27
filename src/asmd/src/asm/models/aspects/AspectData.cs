@@ -16,6 +16,7 @@ namespace Z0
 
         public string[] Rows {get;}
 
+        [MethodImpl(Inline)]
         public AspectData(T src, string[] rows)
         {
             Source = src;

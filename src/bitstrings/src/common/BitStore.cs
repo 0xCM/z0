@@ -166,13 +166,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe byte* bitseqP(byte value)
-            => refs.constptr(in skip(in head(BitSeqData), 8*value));
+            => As.pointer(in skip(in head(BitSeqData), 8*value));
 
         [MethodImpl(Inline)]
         static unsafe char* bitcharP(byte value)
         {
             ref readonly var start = ref skip(head(BitChars), 16*value);
-            return (char*)refs.constptr(in start);
+            return (char*)As.pointer(start);
         }
 
         [MethodImpl(Inline)]

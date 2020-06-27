@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe byte* point8u<T>(ref T r)
             where T : unmanaged
-                => pref<T,byte>(ref r);
+                => refptr<T,byte>(ref r);
 
         /// <summary>
         /// Presents a generic reference as an sbyte pointer
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe sbyte* point8i<T>(ref T r)
             where T : unmanaged
-                => pref<T,sbyte>(ref r);
+                => refptr<T,sbyte>(ref r);
         
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe short* point16i<T>(ref T r)
             where T : unmanaged
-                => pref<T,short>(ref r);
+                => refptr<T,short>(ref r);
 
         /// <summary>
         /// Presents a generic reference as a ushort pointer
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe ushort* point16u<T>(ref T r)
             where T : unmanaged
-                => pref<T,ushort>(ref r);
+                => refptr<T,ushort>(ref r);
 
         /// <summary>
         /// Presents a generic reference as an int32 pointer
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe int* point32i<T>(ref T r)
             where T : unmanaged
-                => pref<T,int>(ref r);
+                => refptr<T,int>(ref r);
 
         /// <summary>
         /// Presents a generic reference as an uint32 pointer
@@ -73,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe uint* point32u<T>(ref T r)
             where T : unmanaged
-                => pref<T,uint>(ref r);
+                => refptr<T,uint>(ref r);
 
         /// <summary>
         /// Presents a generic reference as an int64 pointer
@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe long* point64i<T>(ref T r)
             where T : unmanaged
-                => pref<T,long>(ref r);
+                => refptr<T,long>(ref r);
 
         /// <summary>
         /// Presents a generic reference as an int64 pointer
@@ -93,7 +93,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe long* point64u<T>(ref T r)
             where T : unmanaged
-                => pref<T,long>(ref r);
+                => refptr<T,long>(ref r);
 
         /// <summary>
         /// Presents a generic reference as a uint64 pointer
@@ -103,7 +103,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe ulong* pulong<T>(ref T r)
             where T : unmanaged
-                => pref<T,ulong>(ref r);
+                => refptr<T,ulong>(ref r);
 
         /// <summary>
         /// Presents a generic reference as a uint64 pointer
@@ -113,7 +113,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe ulong* puint64<T>(ref T r)
             where T : unmanaged
-                => pref<T,ulong>(ref r);                
+                => refptr<T,ulong>(ref r);                
 
     }
 }

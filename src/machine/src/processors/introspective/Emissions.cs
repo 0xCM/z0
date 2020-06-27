@@ -52,6 +52,7 @@ namespace Z0
             var ac = AccessorCapture.Service(suite.AsmContext);
             ac.CaptureResBytes();        
         }
+
         void EmitMetadata(IAppContext app)
         {   
             var service = MetadataEmitter.Service();
@@ -83,8 +84,10 @@ namespace Z0
         }        
         public void Generate(IAppContext app)
         {     
-            EmitEnumDatasets(app);
-       
+
+            var emitter = new LiteralFieldEmitter(app);
+            emitter.Emit();
+
             //var index = Load(app);
         }
     }

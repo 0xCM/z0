@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The raw bitfield data
         /// </summary>
-        T Data {get;}
+        T FieldData {get;}
     }
 
     /// <summary>
@@ -37,6 +37,16 @@ namespace Z0
         where T : unmanaged 
     {
         
+    }
+
+   public interface IRefinedBitField<F,T> : IBitField<T>
+        where F : unmanaged, Enum
+        where T : unmanaged 
+    {
+        F FieldValue {get;}
+
+        T IBitField<T>.FieldData 
+            => EnumValue.scalar<F,T>(FieldValue);
     }
 
     /// <summary>

@@ -31,9 +31,9 @@ namespace Z0
 
         public void primal_kind()
         {
-            var f = PrimalKindBitFields.Init(PrimalKind.I16);
-            var width = f.FieldWidth;
-            Claim.Eq(width, Pow2Width.w16);            
+            var f = PrimalKindBitFields.define(PrimalKind.I16);
+            var width = (DataWidth)(uint)f.Width;
+            Claim.Eq(width, DataWidth.W16);            
         }
 
         public void bitfield_a()

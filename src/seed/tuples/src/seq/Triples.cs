@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref Triple<T> Select(int index)
-            => ref refs.seek(Data, index);
+            => ref Root.seek(Data, index);
 
         public ref Triple<T> this[int index]
         {

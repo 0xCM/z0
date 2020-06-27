@@ -10,16 +10,16 @@ namespace Z0
     using static Konst;
     using static NumericCast;
 
-    using NW = NumericWidth;
-
     public readonly struct RelAddress<T> : INullary<RelAddress<T>>, ITextual, INullity
         where T : unmanaged         
     {
         readonly T Offset;
 
-        NW Size => (NW)Root.bitsize<T>();
-
-        public static RelAddress<T> Empty => new RelAddress<T>(default);
+        NumericWidth Size 
+        {
+            [MethodImpl(Inline)] 
+            get => Root.bitsize<T>();
+        }
 
         public bool IsEmpty 
         {
@@ -62,9 +62,9 @@ namespace Z0
         {
             switch(Size)
             {
-                case NW.W8:
+                case NumericWidth.W8:
                     return convert<T,byte>(Offset).FormatSmallHex();
-                case NW.W16:
+                case NumericWidth.W16:
                     return convert<T,ushort>(Offset).FormatSmallHex();
                 default:
                     return convert<T,uint>(Offset).FormatAsmHex();
@@ -82,5 +82,8 @@ namespace Z0
         
         public override bool Equals(object src)
             => src is RelAddress l && Equals(l);
+
+        public static RelAddress<T> Empty 
+            => default;
     }
 }

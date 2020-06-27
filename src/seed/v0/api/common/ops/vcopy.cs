@@ -12,6 +12,12 @@ namespace Z0
     using static Typed;
     using static As;
     using static Root;
+    using static System.Runtime.CompilerServices.Unsafe;
+
+    public readonly struct CopyOps
+    {
+
+    }
 
     partial struct V0
     {
@@ -27,7 +33,6 @@ namespace Z0
                 var vSrc = vload(w, skip(src, offset));
                 vsave(vSrc, ref seek(dst,offset));
             }            
-        }        
-
+        }         
     }
 }

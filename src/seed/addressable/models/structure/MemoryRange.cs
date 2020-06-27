@@ -60,16 +60,15 @@ namespace Z0
         public static bool operator>=(MemoryRange a, MemoryRange b)
             => a.Start >= b.Start;
 
-
         [MethodImpl(Inline)]
-        public static implicit operator MemoryRange((ulong start, ulong end) src)
+        public static implicit operator MemoryRange((MemoryAddress start, MemoryAddress end) src)
             => new MemoryRange(src.start, src.end);
 
         [MethodImpl(Inline)]
-        MemoryRange(MemoryAddress start, MemoryAddress end)
+        public MemoryRange(MemoryAddress start, MemoryAddress end)
         {
-            this.Start = start;
-            this.End = end;
+            Start = start;
+            End = end;
         }
         
         [MethodImpl(Inline)]

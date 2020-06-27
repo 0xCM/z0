@@ -20,8 +20,7 @@ namespace Z0.Asm
         where T : unmanaged
         where W : unmanaged, ITypeWidth
     {
-        DataWidth ISized.Width 
-            => Widths.data<W>();
+        
     }
 
     public interface IMemOp<F,W,T> : IMemOp<W,T>, IOperand<F,W,T>

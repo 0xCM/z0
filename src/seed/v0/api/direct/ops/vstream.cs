@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector128<sbyte> src, ref sbyte dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector128<byte> src, ref byte dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector128<short> src, ref short dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector128<ushort> src, ref ushort dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector128<int> src, ref int dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector128<uint> src, ref uint dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector128<long> src, ref long dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// _mm_stream_si128 (__m128i* mem_addr, __m128i a) MOVNTDQ m128, xmm
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector128<ulong> src, ref ulong dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm_stream_ps (float* mem_addr, __m128 a) MOVNTPS m128, xmm
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector128<float> src, ref float dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm_stream_pd (double* mem_addr, __m128d a) MOVNTPD m128, xmm
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector128<double> src, ref double dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector256<sbyte> src, ref sbyte dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector256<byte> src, ref byte dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector256<short> src, ref short dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector256<ushort> src, ref ushort dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector256<int> src, ref int dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector256<uint> src, ref uint dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
@@ -168,7 +168,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector256<long> src, ref long dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a) VMOVNTDQ m256, ymm
@@ -177,7 +177,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector256<ulong> src, ref ulong dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);                        
+            => StoreAlignedNonTemporal(refptr(ref dst), src);                        
  
         /// <summary>
         /// void _mm256_stream_ps (float * mem_addr, __m256 a) MOVNTPS m256, ymm
@@ -186,7 +186,7 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector256<float> src, ref float dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src);            
+            => StoreAlignedNonTemporal(refptr(ref dst), src);            
 
         /// <summary>
         /// void _mm256_stream_pd (double * mem_addr, __m256d a) MOVNTPD m256, ymm
@@ -195,6 +195,6 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
         public static unsafe void vstream(Vector256<double> src, ref double dst)
-            => StoreAlignedNonTemporal(pref(ref dst), src); 
+            => StoreAlignedNonTemporal(refptr(ref dst), src); 
     }
 }

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static As;
     
     public interface IMemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable, IIdentification<MemoryAddress>
     {
@@ -19,16 +20,9 @@ namespace Z0
         public ulong Location {get;}
 
         [MethodImpl(Inline)]
-        public static unsafe MemoryAddress From<T>(in T src)
-            => Pointed.pvoid(ref Root.edit(in src));        
-
-        [MethodImpl(Inline)]
-        public static unsafe MemoryAddress From(ulong src)
-            => Addresses.address(src);
+        public static unsafe MemoryAddress from<T>(in T src)
+            => pvoid<T>(src);        
                 
-        public static MemoryAddress Empty 
-            => new MemoryAddress(0);
- 
         public bool IsEmpty 
         {
              [MethodImpl(Inline)] 
@@ -156,6 +150,7 @@ namespace Z0
         public static MemoryAddress operator+(MemoryAddress a, MemoryAddress b)
             => new MemoryAddress(a.Location + b.Location);
 
+
         [MethodImpl(Inline)]
         public static MemoryAddress operator-(MemoryAddress a, MemoryAddress b)
             => new MemoryAddress(a.Location - b.Location);
@@ -212,5 +207,10 @@ namespace Z0
         public unsafe T* Pointer<T>()
             where T : unmanaged
                 => (T*)Location;
+
+        public static MemoryAddress Empty 
+            => new MemoryAddress(0);
+ 
+
     }
 }

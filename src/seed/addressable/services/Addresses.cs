@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
+    using static As;
 
     [ApiHost]
     public readonly struct Addresses : IApiHost<Addresses>
@@ -23,8 +24,8 @@ namespace Z0
         }        
 
         [MethodImpl(Inline), Op]
-        public static unsafe MemoryAddress location<T>(in T src)
-            => As.pvoid(src);
+        public static unsafe MemoryAddress locate<T>(in T src)
+            => pvoid(src);
 
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(ulong src)

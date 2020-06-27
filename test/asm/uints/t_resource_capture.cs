@@ -35,9 +35,7 @@ namespace Z0.Asm
                 asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
             }    
         }
-        
-
-        
+                
         public void capture_known_resources()
         {
             var svc = AccessorCapture.Service(Context);
@@ -49,24 +47,25 @@ namespace Z0.Asm
         {
 
         }
-        public void string_literals()
-        {
-            var svc = FieldCapture.Service;
-            var fields = span(svc.StringLiterals(typeof(InstructionTokenPurpose)));
-            svc.Emit(fields, CasePath(FileExtensions.Csv));
+        
+        // public void literal_fields()
+        // {
+        //     var svc = FieldCapture.Service;
+        //     var segments = span(LiteralFieldRefs.search(typeof(InstructionTokenPurpose)));
+        //     FieldCapture.emit(segments, CasePath(FileExtensions.Csv));
 
-            for(var i=0; i<fields.Length; i++)
-            {
-                ref readonly var field = ref skip(fields,i);
-                var memref = field.Location;
-                var address = memref.Address;
-                var data = memref.Load();
-                var chars = span16c(data);
-                var cstr = chars.ToString();      
-                var expect = field.Field.GetRawConstantValue() as string;          
-                Claim.eq(expect, cstr);
-            }
-        }
+        //     for(var i=0; i<segments.Length; i++)
+        //     {
+        //         ref readonly var field = ref skip(segments,i);
+        //         var memref = field.Reference;
+        //         var address = memref.Address;
+        //         var data = memref.Load();
+        //         var chars = span16c(data);
+        //         var cstr = chars.ToString();      
+        //         var expect = field.Metadata.GetRawConstantValue() as string;          
+        //         Claim.eq(expect, cstr);
+        //     }
+        // }
 
     }
 }

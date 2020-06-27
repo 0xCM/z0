@@ -10,14 +10,32 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Specifies a memory size UOM in bits
+    /// Specifies data size in bits
     /// </summary>
     public readonly struct BitSize
     {
         /// <summary>
+        /// The maximum number of bits apprehended by this data structure
+        /// </summary>
+        public const uint MaxBits = uint.MaxValue;
+
+        /// <summary>
+        /// The maximum number of bytes apprehended by this data structure
+        /// </summary>
+        public const int MaxBytes = (int)(UInt32.MaxValue/8);
+
+        /// <summary>
         /// Specifies a bit count
         /// </summary>
-        public readonly ulong Bits;
+        public readonly uint Count;
+
+        [MethodImpl(Inline)]
+        public static BitSize init(int bits)
+            => new BitSize((uint)bits);
+
+        [MethodImpl(Inline)]
+        public static BitSize init(uint bits)
+            => new BitSize(bits);
 
         /// <summary>
         /// Computes the bit-size of a parametric type
@@ -26,18 +44,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int measure<T>()
             => Unsafe.SizeOf<T>()*8;
-
-        [MethodImpl(Inline)]
-        public static BitSize Define(int bits)
-            => new BitSize((ulong)bits);
-
-        [MethodImpl(Inline)]
-        public static BitSize Define(long bits)
-            => new BitSize((ulong)bits);
-
-        [MethodImpl(Inline)]
-        public static BitSize Define(ulong bits)
-            => new BitSize(bits);
 
         /// <summary>
         /// Computes the quotient q :=  a / bitsize[T] of an operand a and parametric type T
@@ -58,123 +64,133 @@ namespace Z0
         public static int mod<T>(int a, T t = default)
             where T : unmanaged
                 => a % measure<T>();
-         
-        /// <summary>
-        /// Returns the minimum number of bytes required to apprehend 
-        /// the size of the source bits.
-        /// </summary>
-        /// <param name="src">The source bits</param>
+
         [MethodImpl(Inline)]
         public static explicit operator ByteSize(BitSize src)
-            => src.MaxByteCount;
+            => src.Bytes;
 
         [MethodImpl(Inline)]
-        public static explicit operator byte(BitSize src)
-            => (byte)src.Bits;
+        public static implicit operator BitSize(DataWidth src)
+            => new BitSize((uint)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator int(BitSize src)
-            => (int)src.Bits;
+        public static implicit operator DataWidth(BitSize src)
+            => (DataWidth)src.Count;
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(BitSize src)
-            => (uint)src.Bits;
+        public static implicit operator BitSize(TypeWidth src)
+            => new BitSize((uint)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator long(BitSize src)
-            => (long)src.Bits;
+        public static implicit operator TypeWidth(BitSize src)
+            => (TypeWidth)src.Count;
 
         [MethodImpl(Inline)]
-        public static implicit operator ulong(BitSize src)
-            => src.Bits;
+        public static implicit operator BitSize(VectorWidth src)
+            => new BitSize((uint)src);
 
         [MethodImpl(Inline)]
-        public static explicit operator double(BitSize src)
-            => src.Bits;
+        public static implicit operator BitSize(NumericWidth src)
+            => new BitSize((uint)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(int src)
-            => new BitSize((ulong)src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSize(long src)
-            => new BitSize((ulong)src);
+        public static implicit operator NumericWidth(BitSize src)
+            => (NumericWidth)src.Count;
 
         [MethodImpl(Inline)]
         public static implicit operator BitSize(byte src)
-            => new BitSize((ulong)src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSize(ushort src)
-            => new BitSize((ulong)src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSize(uint src)
-            => new BitSize((ulong)src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSize(ulong src)
             => new BitSize(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator BitSize(ByteSize src)
-            => src.Count * 8;
+        public static implicit operator BitSize(ushort src)
+            => new BitSize(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitSize(uint src)
+            => new BitSize(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator byte(BitSize src)
+            => (byte)src.Count;
+
+        [MethodImpl(Inline)]
+        public static implicit operator int(BitSize src)
+            => (int)src.Count;
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(BitSize src)
+            => src.Count;
+
+        [MethodImpl(Inline)]
+        public static implicit operator long(BitSize src)
+            => (long)src.Count;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(BitSize src)
+            => src.Count;
+
+        [MethodImpl(Inline)]
+        public static explicit operator double(BitSize src)
+            => src.Count;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitSize(int src)
+            => new BitSize((uint)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitSize(ByteSize src)
+            => new BitSize(src.Count * 8);
         
         [MethodImpl(Inline)]
         public static bool operator ==(BitSize lhs, BitSize rhs)
-            => lhs.Bits == rhs.Bits;
+            => lhs.Count == rhs.Count;
 
         [MethodImpl(Inline)]
         public static bool operator !=(BitSize lhs, BitSize rhs)
-            => lhs.Bits != rhs.Bits;
+            => lhs.Count != rhs.Count;
 
         [MethodImpl(Inline)]
         public static BitSize operator +(BitSize lhs, BitSize rhs)
-            => lhs.Bits + rhs.Bits;
+            => lhs.Count + rhs.Count;
 
         [MethodImpl(Inline)]
         public static BitSize operator -(BitSize lhs, BitSize rhs)
-            => lhs.Bits - rhs.Bits;
+            => lhs.Count - rhs.Count;
 
         [MethodImpl(Inline)]
         public static BitSize operator *(BitSize lhs, BitSize rhs)
-            => lhs.Bits * rhs.Bits;
+            => lhs.Count * rhs.Count;
 
         [MethodImpl(Inline)]
         public static BitSize operator /(BitSize lhs, BitSize rhs)
-            => lhs.Bits / rhs.Bits;
+            => lhs.Count / rhs.Count;
 
         [MethodImpl(Inline)]
         public static BitSize operator %(BitSize lhs, BitSize rhs)
-            => lhs.Bits % rhs.Bits;
-
+            => lhs.Count % rhs.Count;
 
         [MethodImpl(Inline)]
-        public BitSize(ulong bits)
-            => Bits = bits;
+        public BitSize(uint bits)
+            => Count = bits;
 
-        public ByteSize MaxByteCount
+        public ByteSize Bytes
         {
             [MethodImpl(Inline)]
-            get
-            {
-                var q = Math.DivRem((long)Bits, 8L, out long r);
-                return r == 0 ? (ulong)q : (ulong)(q + 1);
-            }
+            get => Count/8;
         }
-
+    
         public BitSize Zero 
-            => Empty;
+            => default;
 
         [MethodImpl(Inline)]
         public bool Equals(BitSize rhs)
-            => Bits == rhs.Bits;
+            => Count == rhs.Count;
 
         public override string ToString()
-            => Bits.ToString();
+            => Count.ToString();
 
         public override int GetHashCode()
-            => Bits.GetHashCode();
+            => Count.GetHashCode();
 
         public override bool Equals(object obj)
             => obj is BitSize x && Equals(x);
@@ -182,6 +198,7 @@ namespace Z0
         /// <summary>
         /// The bit with no size
         /// </summary>
-        public static BitSize Empty => default;
+        public static BitSize Empty 
+            => default;
     }
 }

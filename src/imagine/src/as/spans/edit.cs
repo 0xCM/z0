@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct As
     {
+
         /// <summary>
         /// Covers the content of a readonly span with an editable span
         /// </summary>
@@ -18,7 +19,7 @@ namespace Z0
         /// <param name="count">The number of source cells to read</param>
         /// <typeparam name="T">The cell type</typeparam>
         /// <returns>Obviously, this trick could be particularly dangerous</returns>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> edit<T>(ReadOnlySpan<T> src)
             =>  cover(edit(first(src)), src.Length);
     }

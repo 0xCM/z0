@@ -79,7 +79,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void copy<T>(T* pSrc, Span<T> dst, int offset, uint srcCount)
             where T : unmanaged
-                =>  copy(pSrc, refs.ptr(ref Root.head(dst), offset), srcCount); 
+                =>  copy(pSrc, As.refptr(ref Root.head(dst), offset), srcCount); 
 
         /// <summary>
         /// Copies a contiguous segments of bytes from a source location to a target span
@@ -89,6 +89,6 @@ namespace Z0
         /// <param name="srcCount">The number of values to copy</param>
         [MethodImpl(Inline), Op]
         public static unsafe void copy(byte* pSrc, Span<byte> dst, int offset, uint srcCount)
-            => copy(pSrc, (byte*)AsPointer(ref refs.seek(dst, offset)) , srcCount);
+            => copy(pSrc, (byte*)AsPointer(ref Root.seek(dst, offset)) , srcCount);
     }
 }

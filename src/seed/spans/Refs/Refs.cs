@@ -43,25 +43,6 @@ namespace Z0
         public static ref readonly T skip<T>(in T src, int count)
             => ref Root.skip(in src, count);
 
-        /// <summary>
-        /// Skips a specified number of source elements and returns a readonly reference to the resulting element
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="count">The number of elements to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly T skip<T>(in T src, uint count)
-            => ref Root.skip(in src, (int)count);
-
-        /// <summary>
-        /// Skips a specified number of source elements and returns a readonly reference to the resulting element
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="count">The number of elements to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly T skip<T>(in T src, ulong count)
-            => ref Root.skip(in src, (int)count);
 
         /// <summary>
         /// The canonical swap function
@@ -77,15 +58,6 @@ namespace Z0
             rhs = temp;
         }
 
-        /// <summary>
-        /// Interprets a generic element source as a uint8 element source and skips {count} elments of bit-width 8
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="count">The number of 8-bit elements to skip</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref byte seek8<T>(ref T src, int count)
-            => ref As.seek8(ref src, count);
 
         /// <summary>
         /// Adds an offset to a reference, measured in bytes
@@ -95,26 +67,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seekb<T>(ref T src, long count)
-            => ref Unsafe.AddByteOffset(ref src, As.intptr(count));
-
-        /// <summary>
-        /// Skips a specified number of 8-bit source segments and returns a readonly reference to the resulting memory location
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="count">The number of 8-bit segments to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref byte skip8<T>(in T src, int count)
-            => ref As.skip8(src, count);
-
-        /// <summary>
-        /// Interprets a readonly generic reference as a readonly uint64 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly ulong const64<T>(in T src)
-            => ref Unsafe.As<T,ulong>(ref Unsafe.AsRef(in src));
+            => ref Unsafe.AddByteOffset(ref src, As.safe(count));
 
         /// <summary>
         /// Returns a reference to the location of the first span element
@@ -154,36 +107,5 @@ namespace Z0
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
             => ref Root.skip(src,count);
 
-        /// <summary>
-        /// Adds an offset to the head of a span, measured relative to the reference type
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="bytes">The number of elements to advance</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T seek<T>(Span<T> src, int count)
-            => ref Root.seek(src,count);
-
-        /// <summary>
-        /// Presents generic reference as a generic pointer displaced by an element offset
-        /// </summary>
-        /// <param name="src">The memory reference</param>
-        /// <param name="offset">The number of elements to skip</param>
-        /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe T* ptr<T>(ref T src, int offset)
-            where T : unmanaged
-                => Pointed.ptr(ref src, offset);
-
-        /// <summary>
-        /// Presents a readonly reference as a generic pointer which should intself be considered constant
-        /// but, as far as the author is aware, no facility within the language can encode that constraint
-        /// </summary>
-        /// <param name="src">The memory reference</param>
-        /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe T* constptr<T>(in T src)
-            where T : unmanaged
-                => As.point(in src);
     }
 }

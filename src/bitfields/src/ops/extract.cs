@@ -33,7 +33,7 @@ namespace Z0
         public static T extract<F,T>(F src, byte i0, byte i1)
             where F : IBitField<T>
             where T : unmanaged 
-                => gbits.extract(src.Data,i0,i1);
+                => gbits.extract(src.FieldData,i0,i1);
 
         [MethodImpl(Inline)]
         public static T extract<F,I,T>(F f, I i0, I i1)

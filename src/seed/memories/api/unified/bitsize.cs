@@ -16,8 +16,7 @@ namespace Z0
             => Root.bitsize<T>();
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int bitsize<T>(T rep)            
-            => Root.bitsize<T>(rep);
-
+        public static BitSize bitsize<T>(T rep)            
+            => Root.bitsize<T>();
     }
 }

@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static System.Runtime.InteropServices.MemoryMarshal;
-    using static System.Runtime.CompilerServices.Unsafe;
 
     partial struct As
     {

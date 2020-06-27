@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> ReadAll(in long src)
-            => new Span<byte>(point(in src), 8);
+            => new Span<byte>(pointer(in src), 8);
 
         /// <summary>
         /// Reads the bytes that define a numeric value
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> ReadAll(in ulong src)
-            => new Span<byte>(point(src), 8);
+            => new Span<byte>(pointer(src), 8);
 
         /// <summary>
         /// Reads the bytes that define a numeric value
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> ReadAll(in float src)
-            => new Span<byte>(point(src), 4);
+            => new Span<byte>(pointer(src), 4);
 
         /// <summary>
         /// Reads the bytes that define a numeric value
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> ReadAll(in double src)
-            => new Span<byte>(point(src), 8);            
+            => new Span<byte>(pointer(src), 8);            
 
         /// <summary>
         /// Reads a source byte, identified by natural index

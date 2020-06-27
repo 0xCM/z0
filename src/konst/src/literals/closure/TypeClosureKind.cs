@@ -20,6 +20,9 @@ namespace Z0
 
         Fixed = 5,
 
-        NaturalPairs = 6
+        NaturalPairs = 6,
+
+
+        Opaque = 7,
     }
 }

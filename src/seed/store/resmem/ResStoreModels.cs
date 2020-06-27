@@ -171,7 +171,7 @@ namespace Z0
                         ref readonly var x = ref skip(data,j);
                         if(j == 0)
                         {
-                            var a = MemoryAddress.From(x);
+                            var a = MemoryAddress.from(x);
                             if(source.Address == a)
                                 seek(results,i) = a;
                         }

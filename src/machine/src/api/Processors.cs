@@ -8,7 +8,6 @@ namespace Z0.Machine
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     using Z0.Asm;
 

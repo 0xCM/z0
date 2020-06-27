@@ -8,7 +8,7 @@ namespace Z0.Asm.Dsl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static Root;
 
     public readonly struct reg<T> : IRegOp
         where T : IFixed
@@ -17,8 +17,11 @@ namespace Z0.Asm.Dsl
 
         public RegisterKind Kind {get;}
 
-        public DataWidth Width 
-            => (DataWidth)bitsize<T>();
+        public BitSize Width 
+        {
+            [MethodImpl(Inline)]
+            get => bitsize<T>();
+        }
 
         [MethodImpl(Inline)]
         public reg(T value, RegisterKind kind)

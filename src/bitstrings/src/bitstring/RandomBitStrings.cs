@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="len">The bitstring length</param>
         [MethodImpl(Inline)]
         public static BitString BitString(this IPolyrand random, BitSize len)
-            => BS.scalars(random.Span<byte>(len.MaxByteCount), len);        
+            => BS.scalars(random.Span<byte>(BitSize.MaxBytes), len);        
 
         /// <summary>
         /// Produces a bitstring with randomized length

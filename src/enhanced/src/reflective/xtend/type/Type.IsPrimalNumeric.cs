@@ -15,7 +15,7 @@ namespace Z0
         /// Determines whether a type is a system-defined and architecture-suppored numeric type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
-         /// <remarks>
+        /// <remarks>
         /// Variations accounted for include
         /// A) System-defined nullable parametric closures over the type 
         /// B) System-defined reference types that cover the type, including ref/out parameters and such

@@ -34,7 +34,7 @@ namespace Z0
             Widths = Enums.index<W>().Map(x => x.LiteralValue);
         }
 
-        public T Data => Cell;
+        public T FieldData => Cell;
 
         [MethodImpl(Inline)]
         public S Segment(I index)

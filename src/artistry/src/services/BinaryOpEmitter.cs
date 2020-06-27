@@ -35,7 +35,7 @@ namespace Z0
 
             var method = new DynamicMethod(idMethod, tOperand, args, tFunc.Module);                
             var g = method.GetILGenerator();
-            var dst = MemoryAddress.From(head(buffer));
+            var dst = MemoryAddress.from(head(buffer));
             g.Emit(OpCodes.Ldarg_0);
             g.Emit(OpCodes.Ldarg_1);                
             g.Emit(OpCodes.Ldc_I8, dst);

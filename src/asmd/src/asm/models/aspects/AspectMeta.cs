@@ -11,7 +11,6 @@ namespace Z0.Asm
 
     using static Konst;
     
-
     class AspectMeta
     {
         public static string FormatValue(object value)
