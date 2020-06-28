@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Pow2Kind;
+    using static Pow2x64;
 
     using PNK = PrimalNumericKind;
     using AF = ArtifactFacetKind;

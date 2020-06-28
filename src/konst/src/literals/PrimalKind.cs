@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
-    using static Pow2Width;
+    using static Log2x8;
     using static Sign8Kind;
 
     using K = PrimalKindId;

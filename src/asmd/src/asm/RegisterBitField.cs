@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Konst;
     using static Memories;        
 
-    using static RegisterFieldSpecs;
+    using static RegisterBitFields;
 
     /// <summary>
     /// The register bitfield

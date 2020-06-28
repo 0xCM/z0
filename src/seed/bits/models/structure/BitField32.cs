@@ -11,13 +11,13 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Defines an extremely lo-tech 32-bit bitfield
+    /// Defines a minimalistic 32-bit bitfield
     /// </summary>
-    public readonly ref struct BitField32
+    public readonly struct BitField32
     {        
         const int BitCount = 32;
 
-        readonly Span<byte> Data;
+        readonly byte[] Data;
 
         [MethodImpl(Inline)]
         public static BitField32 Init(byte[] data)
@@ -25,25 +25,25 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitField32 Alloc()
-            => new BitField32(new byte[BitCount]);
+            => new BitField32(sys.alloc<byte>(BitCount));
 
         [MethodImpl(Inline)]
-        public static BitField32<E> Alloc<E>()
+        public static BitField32<E> alloc<E>()
             where E : unmanaged, Enum
                 => new BitField32<E>(Alloc());
 
         [MethodImpl(Inline)]
-        public static BitField32<E> Init<E>(byte[] data)
+        public static BitField32<E> init<E>(byte[] data)
             where E : unmanaged, Enum
                 => new BitField32<E>(Init(data));
 
         [MethodImpl(Inline)]
-        BitField32(Span<byte> data)
+        public BitField32(byte[] data)
             => Data = data;
 
         [MethodImpl(Inline)]
         ref byte Bit(int index)
-            => ref Root.seek(Data,index);
+            => ref Data[index];
 
         public bit this[int index]
         {
@@ -68,7 +68,7 @@ namespace Z0
     /// Defines an extremely lo-tech 32-bit bitfield, as in the non-parametric version,
     /// but field content is indexed by an enumeration
     /// </summary>
-    public readonly ref struct BitField32<E>
+    public readonly struct BitField32<E>
         where E : unmanaged, Enum
     {
         readonly BitField32 Data;
