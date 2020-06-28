@@ -34,11 +34,11 @@ namespace Z0
         bool StartCpu {get;} 
             = true;
 
-        IApiComposition Api 
+        IResolvedApi Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
 
         IAsmContext CreateAsmContext()
-            => AsmContext.Create(Context.MessageQueue);
+            => AsmContext.Create(Context);
         
         IMachineContext CreateMachineContext(IAsmContext root, PartId[] code)
             => MachineContext.Create(root, code);

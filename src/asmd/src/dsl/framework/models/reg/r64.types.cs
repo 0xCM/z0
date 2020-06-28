@@ -193,7 +193,7 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
-        public K Kind => K.R8q;
+        public K Kind => K.R8Q;
 
         public r64 Generalized
         {
@@ -212,7 +212,7 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
-        public K Kind => K.R9q;
+        public K Kind => K.R9Q;
 
         public r64 Generalized
         {
@@ -231,7 +231,7 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
-        public K Kind => K.R10q;
+        public K Kind => K.R10Q;
 
         public r64 Generalized
         {
@@ -250,7 +250,7 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
-        public K Kind => K.R11q;
+        public K Kind => K.R11Q;
 
         public r64 Generalized
         {
@@ -269,7 +269,7 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
-        public K Kind => K.R12q;
+        public K Kind => K.R12Q;
 
         public r64 Generalized
         {
@@ -288,7 +288,7 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
-        public K Kind => K.R13q;
+        public K Kind => K.R13Q;
 
         public r64 Generalized
         {
@@ -307,7 +307,7 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
-        public K Kind => K.R14q;
+        public K Kind => K.R14Q;
 
         public r64 Generalized
         {
@@ -326,7 +326,7 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
-        public K Kind => K.R15q;
+        public K Kind => K.R15Q;
 
         public r64 Generalized
         {

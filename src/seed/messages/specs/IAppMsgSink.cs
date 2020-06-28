@@ -10,7 +10,7 @@ namespace Z0
     public interface IAppMsgSink : ISink<IAppMsg>, TAppEnv
     {
         void Deposit(IEnumerable<IAppMsg> msg)
-            => Root.iter(msg,Deposit);        
+            => Root.iter(msg, Deposit);        
 
         void Notify(IAppMsg msg)
             => Deposit(msg);

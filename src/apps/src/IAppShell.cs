@@ -3,11 +3,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    public interface IAppShell : IShell, IAppMsgContext,  IApiComposition
+    public interface IAppShell : IShell, IAppMsgContext,  IResolvedApi
     {
     
     }

@@ -44,10 +44,10 @@ namespace Z0.Asm
         protected IMemberCodeWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
-            return Archives.Services.UriCodeWriter(dstPath);
+            return Archives.Services.MemberCodeWriter(dstPath);
         }
 
-        protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)
+        protected AsmFunctionWriter AsmWriter([Caller] string caller = null)
         {
             var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
             var format = AsmFormatSpec.WithFunctionTimestamp;

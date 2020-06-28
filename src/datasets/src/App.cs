@@ -29,7 +29,7 @@ namespace Z0
         {
         }
 
-        IApiComposition Api 
+        IResolvedApi Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
     
         

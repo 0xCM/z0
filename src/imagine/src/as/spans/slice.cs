@@ -55,6 +55,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> slice<T>(Span<T> src, int offset, int length)
             => CreateSpan(ref seek(src,offset), length);
-
     }
 }

@@ -43,7 +43,6 @@ namespace Z0
             return new ApiCodeIndex(apicode.Select(c => (c.Id, c)).ToOpIndex());
         }
 
-
         static TArchives Services => Archives.Services;
 
         public static ApiCodeIndex create(IMemberLocator locator, IApiSet api, ApiHostUri host, FolderPath root)

@@ -22,9 +22,12 @@ namespace Z0.Asm
 
         protected new IAsmContext Context;
         
+        IAppContext AppContext 
+            => Z0.AppContext.Create(Api, Random, base.Context.Settings, Queue);
+        
         public t_asm()
         {
-            Context = AsmContext.Create(Queue);
+            Context = AsmContext.Create(AppContext);
             AsmCheck = AsmTester.Create(Context);
             UnitDataDir.Clear();
         }
@@ -46,7 +49,7 @@ namespace Z0.Asm
         protected IMemberCodeWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = TargetArchive.HexPath(FileName.Define(caller, FileExtensions.Hex));
-            return Archives.Services.UriCodeWriter(dstPath);
+            return Archives.Services.MemberCodeWriter(dstPath);
         }
 
         protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)

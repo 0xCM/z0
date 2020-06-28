@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     public interface IImmEmissionWorkflow : IWorkflow<IImmEmissionBroker>
     {
         void EmitLiteral(byte[] imm8, params PartId[] parts);

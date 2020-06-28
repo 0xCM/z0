@@ -14,11 +14,7 @@ namespace Z0.Asm
 
     public readonly struct HostArchiver : IHostArchiver
     {                
-        [MethodImpl(Inline)]
-        public static IHostArchiver Create(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
-            => new HostArchiver(host,formatter,dst);
-
-        public PartId Owner  => Host.Owner;
+        public PartId Owner => Host.Owner;
 
         public ApiHostUri Host {get;}
 
@@ -46,7 +42,7 @@ namespace Z0.Asm
             {
                 var idpad = src.Select(f => f.OpId.Identifier.Length).Max() + 1;
                 var dst = HostArchive.HexPath;
-                using var writer = Archives.Services.UriHexWriter(dst);
+                using var writer = Archives.Services.IdentifiedCodeWriter(dst);
                 for(var i=0; i<src.Length; i++)
                 {
                     ref readonly var f = ref src[i];

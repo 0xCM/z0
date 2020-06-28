@@ -20,7 +20,7 @@ namespace Z0.Asm
             => new MnemonicParser((int)Mnemonic.LAST);
 
         [MethodImpl(Inline)]
-        MnemonicParser(int capacity)
+        public MnemonicParser(int capacity)
         {
             Index = new Dictionary<string, Mnemonic>(capacity);
             var literals = Enums.literals<Mnemonic>();
@@ -36,5 +36,4 @@ namespace Z0.Asm
                 return ParseResult.Fail<string,Mnemonic>(src);
         }            
     }                 
-
 }

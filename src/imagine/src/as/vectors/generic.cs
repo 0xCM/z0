@@ -373,7 +373,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref Vector512<T> generic<T>(in Vector512<double> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<double>,Vector512<T>>(ref edit(in src));                        
-
+                => ref Unsafe.As<Vector512<double>,Vector512<T>>(ref edit(in src));
     }
 }

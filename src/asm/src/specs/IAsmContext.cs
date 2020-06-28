@@ -55,7 +55,7 @@ namespace Z0.Asm
         /// The api collection known to the context
         /// </summary>
         IApiSet Api 
-            => ContextRoot.Api;
+            => ContextRoot;
 
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified
@@ -117,8 +117,6 @@ namespace Z0.Asm
         /// The context writer factory
         /// </summary>
         IAsmFunctionWriter Writer(FilePath dst)
-            => WriterFactory(dst, Formatter);            
-
- 
+            => WriterFactory(dst, Formatter); 
     }   
 }

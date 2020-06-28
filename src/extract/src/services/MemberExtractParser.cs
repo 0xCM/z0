@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static Memories;
     
-    using BP = ByteParser<EncodingPatternKind>;
+    using BP = BytePatternParser<EncodingPatternKind>;
 
     public readonly struct MemberExtractParser : IExtractParser
     {
@@ -31,7 +31,7 @@ namespace Z0
         BP Parser 
         {        
             [MethodImpl(Inline)]
-            get => Extract.Services.PatternParser(Buffer.Clear());
+            get => Extracts.Services.PatternParser(Buffer.Clear());
         }
 
         [MethodImpl(Inline)]

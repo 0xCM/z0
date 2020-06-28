@@ -56,10 +56,10 @@ namespace Z0.Asm
             var id = PartId.GMath;   
             var paths = AppPaths.ForApp(PartId.Control);
             var capture = AsmCheck.CaptureArchive(paths.AppCaptureRoot);
-            var archive = Archives.Services.HexArchive(capture.CodeDir);
+            var archive = Archives.Services.EncodedHexArchive(capture.CodeDir);
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();
-            var builder = Archives.Services.IndexBuilder(Api.ApiSet, Identities.Services.ApiLocator);            
+            var builder = Archives.Services.IndexBuilder(ApiSet.Create(Api), Identities.Services.ApiLocator);            
             check_unary_ops(direct);        
             check_unary_ops(generic);        
         }

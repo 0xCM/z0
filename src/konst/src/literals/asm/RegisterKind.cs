@@ -14,6 +14,9 @@ namespace Z0.Asm
     /// </summary>
     public enum RegisterKind : uint
     {
+        // ~ 8-bit registers
+        // ~ ------------------------------------------------------------------
+
         AL = r0 | GP << ClassIndex | W8 << WidthIndex,
 
         CL = r1 | GP << ClassIndex | W8 << WidthIndex,
@@ -29,54 +32,6 @@ namespace Z0.Asm
         SIL = r6 | GP << ClassIndex | W8 << WidthIndex,
 
         DIL = r7 | GP << ClassIndex | W8 << WidthIndex,
-
-        AX = r0 | GP << ClassIndex | W16 << WidthIndex,
-
-        CX = r1 | GP << ClassIndex | W16 << WidthIndex,
-
-        DX = r2 | GP << ClassIndex | W16 << WidthIndex,
-
-        BX = r3 | GP << ClassIndex | W16 << WidthIndex,
-
-        SP = r4 | GP << ClassIndex | W16 << WidthIndex,
-
-        BP = r5 | GP << ClassIndex | W16 << WidthIndex,
-
-        SI = r6 | GP << ClassIndex | W16 << WidthIndex,
-
-        DI = r7 | GP << ClassIndex | W16 << WidthIndex,
-
-        EAX = r0 | GP << ClassIndex | W32 << WidthIndex,
-
-        ECX = r1 | GP << ClassIndex | W32 << WidthIndex,
-
-        EDX = r2 | GP << ClassIndex | W32 << WidthIndex,
-
-        EBX = r3 | GP << ClassIndex | W32 << WidthIndex,
-
-        ESP = r4 | GP << ClassIndex | W32 << WidthIndex,
-
-        EBP = r5 | GP << ClassIndex | W32 << WidthIndex,
-
-        ESI = r6 | GP << ClassIndex | W32 << WidthIndex,
-
-        EDI = r7 | GP << ClassIndex | W32 << WidthIndex,
-
-        RAX = r0 | GP << ClassIndex | W64 << WidthIndex,
-
-        RCX = r1 | GP << ClassIndex | W64 << WidthIndex,
-
-        RDX = r2 | GP << ClassIndex | W64 << WidthIndex,
-
-        RBX = r3 | GP << ClassIndex | W64 << WidthIndex,
-
-        RSP = r4 | GP << ClassIndex | W64 << WidthIndex,
-
-        RBP = r5 | GP << ClassIndex | W64 << WidthIndex,
-
-        RSI = r6 | GP << ClassIndex | W64 << WidthIndex,
-
-        RDI = r7 | GP << ClassIndex | W64 << WidthIndex,
 
         R8L = r0 | GPN << ClassIndex | W8 << WidthIndex,
 
@@ -94,6 +49,25 @@ namespace Z0.Asm
 
         R15L = r7 | GPN << ClassIndex | W8 << WidthIndex,
 
+        // ~ 16-bit registers
+        // ~ ------------------------------------------------------------------
+
+        AX = r0 | GP << ClassIndex | W16 << WidthIndex,
+
+        CX = r1 | GP << ClassIndex | W16 << WidthIndex,
+
+        DX = r2 | GP << ClassIndex | W16 << WidthIndex,
+
+        BX = r3 | GP << ClassIndex | W16 << WidthIndex,
+
+        SP = r4 | GP << ClassIndex | W16 << WidthIndex,
+
+        BP = r5 | GP << ClassIndex | W16 << WidthIndex,
+
+        SI = r6 | GP << ClassIndex | W16 << WidthIndex,
+
+        DI = r7 | GP << ClassIndex | W16 << WidthIndex,
+
         R8W = r0 | GPN << ClassIndex | W16 << WidthIndex,
 
         R9W = r1 | GPN << ClassIndex | W16 << WidthIndex,
@@ -109,6 +83,25 @@ namespace Z0.Asm
         R14W = r6 | GPN << ClassIndex | W16 << WidthIndex,
 
         R15W = r7 | GPN << ClassIndex | W16 << WidthIndex,
+
+        // ~ 32-bit registers
+        // ~ ------------------------------------------------------------------
+
+        EAX = r0 | GP << ClassIndex | W32 << WidthIndex,
+
+        ECX = r1 | GP << ClassIndex | W32 << WidthIndex,
+
+        EDX = r2 | GP << ClassIndex | W32 << WidthIndex,
+
+        EBX = r3 | GP << ClassIndex | W32 << WidthIndex,
+
+        ESP = r4 | GP << ClassIndex | W32 << WidthIndex,
+
+        EBP = r5 | GP << ClassIndex | W32 << WidthIndex,
+
+        ESI = r6 | GP << ClassIndex | W32 << WidthIndex,
+
+        EDI = r7 | GP << ClassIndex | W32 << WidthIndex,
 
         R8D = r0 | GPN << ClassIndex | W32 << WidthIndex,
 
@@ -126,21 +119,43 @@ namespace Z0.Asm
 
         R15D = r7 | GPN << ClassIndex | W32 << WidthIndex,
 
-        R8q = r0 | GPN << ClassIndex | W64 << WidthIndex,
+        // ~ 64-bit registers
+        // ~ ------------------------------------------------------------------
 
-        R9q = r1 | GPN << ClassIndex | W64 << WidthIndex,
+        RAX = r0 | GP << ClassIndex | W64 << WidthIndex,
 
-        R10q = r2 | GPN << ClassIndex | W64 << WidthIndex,
+        RCX = r1 | GP << ClassIndex | W64 << WidthIndex,
 
-        R11q = r3 | GPN << ClassIndex | W64 << WidthIndex,
+        RDX = r2 | GP << ClassIndex | W64 << WidthIndex,
 
-        R12q = r4 | GPN << ClassIndex | W64 << WidthIndex,
+        RBX = r3 | GP << ClassIndex | W64 << WidthIndex,
 
-        R13q = r5 | GPN << ClassIndex | W64 << WidthIndex,
+        RSP = r4 | GP << ClassIndex | W64 << WidthIndex,
 
-        R14q = r6 | GPN << ClassIndex | W64 << WidthIndex,
+        RBP = r5 | GP << ClassIndex | W64 << WidthIndex,
 
-        R15q = r7 | GPN << ClassIndex | W64 << WidthIndex,
+        RSI = r6 | GP << ClassIndex | W64 << WidthIndex,
+
+        RDI = r7 | GP << ClassIndex | W64 << WidthIndex,
+
+        R8Q = r0 | GPN << ClassIndex | W64 << WidthIndex,
+
+        R9Q = r1 | GPN << ClassIndex | W64 << WidthIndex,
+
+        R10Q = r2 | GPN << ClassIndex | W64 << WidthIndex,
+
+        R11Q = r3 | GPN << ClassIndex | W64 << WidthIndex,
+
+        R12Q = r4 | GPN << ClassIndex | W64 << WidthIndex,
+
+        R13Q = r5 | GPN << ClassIndex | W64 << WidthIndex,
+
+        R14Q = r6 | GPN << ClassIndex | W64 << WidthIndex,
+
+        R15Q = r7 | GPN << ClassIndex | W64 << WidthIndex,
+
+        // ~ 128-bit registers
+        // ~ ------------------------------------------------------------------
 
         XMM0 = r0 | XMM << ClassIndex | W128 << WidthIndex,
 
@@ -206,6 +221,9 @@ namespace Z0.Asm
 
         XMM31 = r31 | XMM << ClassIndex | W128 << WidthIndex,
 
+        // ~ 256-bit registers
+        // ~ ------------------------------------------------------------------
+
         YMM0 = r0 | YMM << ClassIndex | W256 << WidthIndex,
 
         YMM1 = r1 | YMM << ClassIndex | W256 << WidthIndex,
@@ -270,6 +288,9 @@ namespace Z0.Asm
 
         YMM31 = r31 | YMM << ClassIndex | W256 << WidthIndex,
 
+        // ~ 512-bit registers
+        // ~ ------------------------------------------------------------------
+        
         ZMM0 = r0 | ZMM << ClassIndex | W512 << WidthIndex,
 
         ZMM1 = r1 | ZMM << ClassIndex | W512 << WidthIndex,

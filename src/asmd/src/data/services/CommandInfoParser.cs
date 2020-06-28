@@ -40,7 +40,7 @@ namespace Z0.Asm.Data
             ReadOnlySpan<string> cells = src.CellContent;
             var count = length(cells,fields);
 
-            var parser = AsmFieldParser.Service;            
+            var parser = AsmParsers.fields();
             for(var i=0; i<count; i++)
             {   
                 ref readonly var cell = ref skip(cells,i);

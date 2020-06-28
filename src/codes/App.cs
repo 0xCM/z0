@@ -34,7 +34,7 @@ namespace Z0
             var exchange = AppMsgExchange.Create();
             var api = ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
             var appContext = AppContext.Create(resolved, random, settings, exchange);
-            return AsmContext.Create(appContext.MessageQueue);            
+            return AsmContext.Create(appContext);            
         }
 
         public App()

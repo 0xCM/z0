@@ -7,7 +7,7 @@ namespace Z0.Asm
 	/// <summary>
 	/// CPUID feature flags
 	/// </summary>
-	public enum CpuidFeature 
+	public enum CpuidFeature : byte 
     {
 		/// <summary>
 		/// 8086 or later

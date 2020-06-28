@@ -12,7 +12,5 @@ namespace Z0
     public interface IMemoryReader : IService
     {
         int Read(MemoryAddress src, Span<byte> dst, int? count = null);
-
-        int Read(MemoryAddress src, ref byte dst, int count);        
     }
 }

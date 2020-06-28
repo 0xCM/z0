@@ -12,21 +12,21 @@ namespace Z0
         /// <summary> 
         /// Identifies the hex value 0x00 := 0
         /// </summary> 
-        x0 = 0x0,
+        x00 = 0x0,
 
         /// <summary> 
         /// Identifies the hex value 0x01 := 1
         /// </summary> 
-        x1 = 0x1,
+        x01 = 0x1,
 
         /// <summary> 
         /// Identifies the hex value 0x02 := 2
         /// </summary> 
-        x2 = 0x2,
+        x02 = 0x2,
 
         /// <summary> 
         /// Identifies the hex value 0x03 := 3
         /// </summary> 
-        x3 = 0x3,
+        x03 = 0x3,
     }
 }

@@ -5,21 +5,15 @@
 namespace Z0.Asm.Data
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     public readonly struct AsmStatementParser : ITextParser<AsmStatement>
-    {
-        public static AsmStatementParser Default => Create();
-
-        public static AsmStatementParser Create(IParser<string,Mnemonic> parser = null)
-        {
-            if(parser != null)   
-                return new AsmStatementParser(src => parser.Parse(src).ValueOrDefault(Mnemonic.INVALID));
-            else
-                return new AsmStatementParser(src => Enums.Parse(src,Mnemonic.INVALID));
-        }
-
+    {        
         readonly Func<string,Mnemonic> MnemonicParse;
         
+        [MethodImpl(Inline)]
         public AsmStatementParser(Func<string,Mnemonic> parser)
         {
             MnemonicParse = parser;

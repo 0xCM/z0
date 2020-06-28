@@ -46,8 +46,7 @@ namespace Z0.Asm
         {
             var root = Context.AppPaths.LogRoot;
             var provider = ResourceProvider;
-            var src = Context.AppPaths.ResBytes; //FilePath.Define(@"J:\dev\projects\z0-logs\res\bin\lib\netcoreapp3.0\z0.res.bytes.dll");
-            
+            var src = Context.AppPaths.ResBytes;            
             Demands.insist(src.Exists);
             var csvDst = ResBytesDir + FileName.Define(ResourceProvider).ChangeExtension(FileExtensions.Csv);
             var captured = Capture(src, AsmDst);
@@ -82,10 +81,6 @@ namespace Z0.Asm
         {
             var assembly = Assembly.LoadFrom(src.Name);  
             var store = ResourceStore.Service;
-            // var groups = (from a in stores.Accessors(assembly) 
-            //                 let t = a.Member.DeclaringType
-            //                 group a by t).Map(x => new ResourceAccessors(x.Key, x.ToArray())).ToSpan();
-
             var index = span(store.AccesorIndex(assembly));
             var results = Root.list<CapturedAccessor>();
             for(var i=0; i<index.Length; i++)

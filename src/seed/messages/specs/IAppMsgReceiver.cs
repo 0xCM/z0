@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IAppMsgReceiver : IService
+    public interface IAppMsgReceiver
     {
         IAppMsgSink Sink {get;}
 

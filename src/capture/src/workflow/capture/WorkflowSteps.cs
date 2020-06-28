@@ -27,8 +27,6 @@ namespace Z0.Asm
     {
         void CaptureCatalogs(AsmArchiveConfig config, params PartId[] parts);
         
-        void CaptureCatalogs(TCaptureArchive dst, params PartId[] parts);
-
         void CaptureHost(ICaptureHostStep step, IApiHost host, TCaptureArchive dst);
 
         void CaptureCatalog(IApiCatalog src, TCaptureArchive dst);

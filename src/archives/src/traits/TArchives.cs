@@ -23,26 +23,23 @@ namespace Z0
         TSemanticArchive Semantic 
             => SemanticArchive.Service;
 
-        IEncodedHexReader UriHexReader 
+        IEncodedHexReader EncodedHexReader 
             => new EncodedHexReader();
 
         [MethodImpl(Inline)]
-        IEncodedHexArchive HexArchive(FolderPath root = null)
+        IEncodedHexArchive EncodedHexArchive(FolderPath root = null)
             => new EncodedHexArchive(root ?? LogRoot);
         
         [MethodImpl(Inline)]
-        IIdentifiedCodeWriter UriHexWriter(FilePath dst)
-            => new UriHexWriter(dst);
-
-        UriHexWriterFactory UriHexWriterFactory
-            => dst => UriHexWriter(dst);        
+        IdentifiedCodeWriter IdentifiedCodeWriter(FilePath dst)
+            => new IdentifiedCodeWriter(dst);
 
         [MethodImpl(Inline)]
-        IMemberCodeWriter UriCodeWriter(FilePath dst)
-            => new UriCodeWriter(dst);        
+        MemberCodeWriter MemberCodeWriter(FilePath dst)
+            => new MemberCodeWriter(dst);        
 
         [MethodImpl(Inline)]
-        IApiIndexBuilder IndexBuilder(IApiSet api, IMemberLocator locator)
+        ApiIndexBuilder IndexBuilder(IApiSet api, IMemberLocator locator)
             => new ApiIndexBuilder(api,locator);
 
         [MethodImpl(Inline)]
@@ -52,8 +49,5 @@ namespace Z0
         [MethodImpl(Inline)]
         THostCaptureArchive HostCapture(FolderPath root, ApiHostUri host) 
             => new HostCaptureArchive(root ?? LogRoot, host);    
-
-        IdentifiedCode[] SaveUriHex(ApiHostUri host, ParsedExtract[] src, FilePath dst)
-            => Z0.UriHexWriter.save(host,src,dst);
     }
 }

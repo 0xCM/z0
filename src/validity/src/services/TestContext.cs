@@ -19,12 +19,12 @@ namespace Z0
 
     public abstract class TestContext
     {
-        protected IApiComposition Api => _Api.Value;
+        protected IResolvedApi Api => _Api.Value;
 
-        static IApiComposition ComposeApi()
+        static IResolvedApi ComposeApi()
             => ApiComposition.Assemble(PartIndexer.Fatory.IndexBuiler.Build());
         
-        static Lazy<IApiComposition> _Api {get;}
+        static Lazy<IResolvedApi> _Api {get;}
             = Root.defer(ComposeApi);
     }
     

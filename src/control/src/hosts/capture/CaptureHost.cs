@@ -47,7 +47,7 @@ namespace Z0
 
             var wfc = AsmWorkflows.Service(context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
-            UriBitsReader = Capture.Services.UriHexReader;
+            UriBitsReader = Capture.Services.EncodedHexReader;
             CaptureWorkflow = wfc.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(root));
             Broker = CaptureWorkflow.Broker;
             ImmWorkflow = wfc.ImmEmissionWorkflow(Sink, context.Api, Formatter, Decoder, root);

@@ -9,12 +9,6 @@ namespace Z0.Asm
         IImmSpecializer ImmSpecializer(IAsmFunctionDecoder decoder);        
 
         /// <summary>
-        /// Creates a service that extracts data that lives in memory using a caller-suppled working buffer
-        /// </summary>
-        /// <param name="buffer">The working buffer</param>
-        IMemoryExtractor MemoryExtractor(byte[] buffer);
-
-        /// <summary>
         /// Creates a function decoder
         /// </summary>
         /// <param name="context">The source context</param>
@@ -22,10 +16,10 @@ namespace Z0.Asm
         IAsmFunctionDecoder AsmDecoder(in AsmFormatSpec? format = null);
 
         /// <summary>
-        /// Creates a code extractor with an optionally-specified buffer length
+        /// Creates a code extractor with a specified buffer length
         /// </summary>
         /// <param name="bufferlen">The desired buffer length</param>
-        IMemberExtractor HostExtractor(int? bufferlen = null);
+        IMemberExtractor HostExtractor(int bufferlen);
 
         IAsmFunctionDecoder DefaultFunctionDecoder {get;}
 

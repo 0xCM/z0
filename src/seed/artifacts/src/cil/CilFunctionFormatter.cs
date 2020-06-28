@@ -12,16 +12,12 @@ namespace Z0
 
     public readonly struct CilFunctionFormatter : ICilFunctionFormatter
     {
-        readonly CilFormatConfig config;
-
-        [MethodImpl(Inline)]
-        public static ICilFunctionFormatter Create(CilFormatConfig config = null)
-            => new CilFunctionFormatter(config ?? CilFormatConfig.Default);
+        readonly CilFormatConfig Config;
         
         [MethodImpl(Inline)]
-        internal CilFunctionFormatter(CilFormatConfig config)
+        public CilFunctionFormatter(CilFormatConfig config)
         {
-            this.config = config;
+            Config = config ?? CilFormatConfig.Default;
         }
         
         static string Comment(string text, string delimiter = "//", int pad = 0)

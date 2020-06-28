@@ -21,7 +21,7 @@ namespace Z0
 
         IApiHost[] Hosts {get;}
 
-        IApiComposition Composition {get;}
+        IResolvedApi Composition {get;}
 
         Option<IPart> FindPart(PartId id)
             => option(Parts.FirstOrDefault(p => p.Id == id));      

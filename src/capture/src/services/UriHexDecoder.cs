@@ -12,8 +12,7 @@ namespace Z0.Asm
     public readonly struct UriHexDecoder : IUriHexDecoder
     {        
         public static IUriHexDecoder Service => default(UriHexDecoder);
-                    
-        
+                            
         public int Decode(ReadOnlySpan<IdentifiedCode> src, Span<AsmInstructions> dst)
         {
             var decoder = Capture.Services.AsmDecoder();
@@ -40,9 +39,9 @@ namespace Z0.Asm
         }
 
         public Option<AsmInstructions> Decode(IdentifiedCode src)
-            => Capture.Services.DefaultFunctionDecoder.Decode(src);
+            => Capture.DefaultDecoder.Decode(src);
 
         public Option<AsmInstructionList> Decode(MemberCode src)
-            => Capture.Services.DefaultFunctionDecoder.Decode(src.Encoded);            
+            => Capture.DefaultDecoder.Decode(src.Encoded);            
     }
 }

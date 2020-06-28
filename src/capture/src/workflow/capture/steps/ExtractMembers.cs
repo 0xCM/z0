@@ -31,9 +31,9 @@ namespace Z0.Asm
         }
 
         public static ExtractedCode[] extract(IApiHost host)
-        {
-            var members = locate(host);    
-            var extractor = Capture.Services.HostExtractor();
+        {            
+            var members = locate(host);
+            var extractor = MemberExtraction.service(Extracts.DefaultBufferLength);    
             return extractor.Extract(members);
         }
         

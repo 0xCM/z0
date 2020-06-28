@@ -12,6 +12,7 @@ namespace Z0.Asm
 
     public delegate void CpuidProcessStep(Vector128<byte> src);
  
+    [ApiHost]
     public readonly struct AsmProcessors
     {
         public static AsmProcessors Service => default;
@@ -19,11 +20,14 @@ namespace Z0.Asm
         public asci16 Process(ReadOnlySpan<CpuidFeature> src, CpuidProcessStep step)
             => CpuidProcessor.Service.Process(src,step ?? OnStep);
         
-        [MethodImpl(Inline)]
+        [Op]
         public AsmCmdProcessor Parsed(IAsmContext context)
             => AsmCmdProcessor.Service(context);
         
-        static void OnStep(Vector128<byte> src) {}
+        static void OnStep(Vector128<byte> src) 
+        {
+
+        }
         
     }
 }

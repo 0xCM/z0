@@ -39,7 +39,8 @@ namespace Z0.Asm.Data
                 return fail;
 
             var body = parts[0];
-            var statement = AsmStatementParser.Default.Parse(body);
+            var sParser = AsmParsers.statement();
+            var statement = sParser.Parse(body);
             if(statement.Failed)
                 return fail;
 

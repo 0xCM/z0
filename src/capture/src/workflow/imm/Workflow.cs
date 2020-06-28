@@ -16,27 +16,10 @@ namespace Z0.Asm
     {                        
         public IImmEmissionBroker Broker {get;} 
 
+        readonly IAsmContext Context;
+
         public IAppMsgSink Sink {get;}
 
-        internal ImmEmissionWorkflow(IAsmContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
-        {
-            Broker = ImmEmissionBroker.New;
-            Context = context;
-            Sink = sink;
-            Formatter = formatter;
-            Decoder = decoder;
-            ImmSpecializer = Capture.Services.ImmSpecializer(decoder);
-            ApiSet = api;
-            CodeArchive = Archives.Services.CaptureArchive(root);
-            ApiCollector =  Identities.Services.ApiCollector;
-            ConnectReceivers(Broker);
-        }
-
-        bool Append = true;
-
-        IWorkflow<IImmEmissionBroker> Flow 
-            => this;
-        
         readonly IApiSet ApiSet;
 
         readonly IAsmFormatter Formatter;
@@ -49,8 +32,26 @@ namespace Z0.Asm
 
         readonly IImmSpecializer ImmSpecializer;
 
-        readonly IAsmContext Context;
 
+        internal ImmEmissionWorkflow(IAsmContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
+        {
+            Broker = ImmEmissionBroker.New;
+            Context = context;
+            Sink = sink;
+            Formatter = formatter;
+            Decoder = decoder;
+            ApiSet = api;
+            CodeArchive = Archives.Services.CaptureArchive(root);
+            ImmSpecializer = Capture.Services.ImmSpecializer(decoder);
+            ApiCollector =  Identities.Services.ApiCollector;
+            ConnectReceivers(Broker);
+        }
+
+        bool Append = true;
+
+        IWorkflow<IImmEmissionBroker> Flow 
+            => this;
+        
         void ConnectReceivers(IImmEmissionBroker relay)
         {
             relay.EmittedEmbeddedImm.Subscribe(relay, OnEvent);          
@@ -152,13 +153,10 @@ namespace Z0.Asm
             }
         }
 
-        // IEnumerable<IApiHost> ApiHosts 
-        //     => ApiSet.Hosts;
-
         IEnumerable<IApiHost> Hosts(params PartId[] parts)
             => ApiSet.DefinedHosts(parts);
 
-        IHostArchiver Archive(IApiHost host)
+        HostArchiver Archive(IApiHost host)
             => AsmCore.Services.HostArchiver(host.Uri, Formatter, CodeArchive.ArchiveRoot);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8Value[] imm8, params PartId[] parts)

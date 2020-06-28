@@ -30,7 +30,7 @@ namespace Z0.Asm
         public void MatchEmissions(ApiHostUri host, ReadOnlySpan<IdentifiedCode> srcA, FilePath srcB)
         {                
             var wfStateless = Capture.Services;
-            var reader = wfStateless.UriHexReader;
+            var reader = wfStateless.EncodedHexReader;
             var fileSrc = reader.Read(srcB).ToArray().ToSpan();                        
 
             Claim.Eq(fileSrc.Length, srcA.Length);  

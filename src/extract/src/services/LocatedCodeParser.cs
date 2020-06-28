@@ -8,27 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
     
     public readonly struct LocatedCodeParser : ILocatedCodeParser
     {
         readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
-        internal LocatedCodeParser(byte[] buffer)
+        public LocatedCodeParser(byte[] buffer)
         {
             Buffer = buffer;
         }
 
         public Option<LocatedCode> Parse(LocatedCode src)
-        {
-            var parser = Extract.Services.PatternParser(Buffer.Clear());
-            var status = parser.Parse(src);            
-            var matched = parser.Result;
-            var succeeded = matched.IsSome() && status.Success();
-            return succeeded 
-                ? new LocatedCode(src.Address, parser.Parsed) 
-                : none<LocatedCode>();
-        }               
+            => Extracts.parse(src, Buffer);
     }
 }

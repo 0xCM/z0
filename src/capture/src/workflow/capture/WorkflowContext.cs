@@ -36,8 +36,8 @@ namespace Z0.Asm
             ICaptureBroker broker, TCaptureArchive archive)
         {
             ApiSet = context.Api;
-            Extractor = Capture.Services.HostExtractor();
-            Parser = Extract.Services.ExtractParser();
+            Extractor = Capture.Services.HostExtractor(Extracts.DefaultBufferLength);
+            Parser = Extracts.Services.ExtractParser(Extracts.DefaultBufferLength);
             Decoder = decoder;
             Formatter = formatter;
             WriterFactory = wf;

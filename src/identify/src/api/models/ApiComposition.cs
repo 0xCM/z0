@@ -15,9 +15,9 @@ namespace Z0
     /// <summary>
     /// Defines a collection of resolved assemblies
     /// </summary>
-    public readonly struct ApiComposition : IApiComposition,  ITextual
+    public readonly struct ApiComposition : IResolvedApi,  ITextual
     {
-        public static IApiComposition Empty => Assemble();
+        public static IResolvedApi Empty => Assemble();
 
         [MethodImpl(Inline)]
         public static ApiComposition Assemble(params IPart[] parts)

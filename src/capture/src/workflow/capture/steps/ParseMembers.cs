@@ -23,7 +23,7 @@ namespace Z0.Asm
         internal ParseMembersStep(ICaptureWorkflow workflow)
         {
             Workflow = workflow;
-            Parser = Extract.Services.ExtractParser();
+            Parser = Extracts.Services.ExtractParser(Extracts.DefaultBufferLength);
         }
 
         public ParsedExtract[] Parse(ApiHostUri host, ExtractedCode[] extracts)
@@ -53,8 +53,8 @@ namespace Z0.Asm
         public void SaveHex(ApiHostUri host, ParsedExtract[] src, FilePath dst)
         {
             try
-            {
-                var hex = Archives.Services.SaveUriHex(host, src, dst);
+            {                
+                var hex = IdentifiedCodeWriter.save(host,src,dst);
                 var saved = new HexCodeSaved(host,  hex, dst);
                 Context.Raise(saved);
             }

@@ -19,7 +19,7 @@ namespace Z0
 
         public const K Min = K.x00;
 
-        public const K Max = K.xF;
+        public const K Max = K.x0F;
 
         readonly K Value;
         

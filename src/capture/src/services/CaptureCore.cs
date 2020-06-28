@@ -19,11 +19,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedOperation bits, ExtractTermCode term)
-            => new CapturedCode(id, null, src, bits.Unparsed, bits.Encoded, term);
+            => new CapturedCode(id, null, src, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, Delegate src, Z0.ParsedOperation bits, ExtractTermCode term)
-            => new CapturedCode(id, src, src.Method, bits.Unparsed, bits.Encoded, term);
+            => new CapturedCode(id, src, src.Method, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, Delegate src, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
@@ -70,7 +70,7 @@ namespace Z0.Asm
                 var pSrc = Jitter.jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
-                var captured = new CapturedCode(id, src.DynamicOp, src.SourceMethod, summary.Encoded.Unparsed, summary.Encoded.Encoded, outcome.TermCode);                
+                var captured = new CapturedCode(id, src.DynamicOp, src.SourceMethod, summary.Encoded.ParseInput, summary.Encoded.ParseResult, outcome.TermCode);                
                 insist((MemoryAddress)pSrc,captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }

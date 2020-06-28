@@ -13,7 +13,6 @@ namespace Z0.Asm
     public readonly struct AsmCore : TAsmCore
     {
         public static TAsmCore Services => default(AsmCore);
-
     }
 
     /// <summary>
@@ -30,14 +29,8 @@ namespace Z0.Asm
         /// <summary>
         /// Function Builder service accessor
         /// </summary>
-        IAsmFunctionBuilder FunctionBuilder 
+        AsmFunctionBuilder FunctionBuilder 
             => AsmFunctionBuilder.Service;
-
-        /// <summary>
-        /// Memory Reader service accessor
-        /// </summary>
-        IMemoryReader MemoryReader
-            => Z0.MemoryReader.Service;
 
         /// <summary>
         /// Default asm formatter accessor
@@ -52,62 +45,48 @@ namespace Z0.Asm
         /// Accessor for default CIL formatter
         /// </summary>
         /// <param name="config">The format configuration</param>
-        ICilFunctionFormatter DefaultCilFormatter
+        CilFunctionFormatter DefaultCilFormatter
         {
             [MethodImpl(Inline)]
-            get => CilFormatter(null);
+            get => CilFormatter();
         }
 
         /// <summary>
         /// Creates an asm formatter with an optional configuration
         /// </summary>
         /// <param name="config">The format configuration, if any</param>
-        [MethodImpl(Inline)]
-        IAsmFormatter Formatter(in AsmFormatSpec? config = null)
-            => Asm.AsmFormatter.Create(config ?? AsmFormatSpec.Default);
+        AsmFormatter Formatter(in AsmFormatSpec? config = null)
+            => new AsmFormatter(config);
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer with the default formatter
         /// </summary>
         /// <param name="dst">The target path</param>
-        [MethodImpl(Inline)]
-        IAsmFunctionWriter AsmWriter(FilePath dst)
-            => AsmFunctionWriter.Create(dst, DefaultFormatter);  
+        AsmFunctionWriter AsmWriter(FilePath dst)
+            => new AsmFunctionWriter(dst, DefaultFormatter);  
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer with a specified formatter
         /// </summary>
         /// <param name="dst">The target path</param>
         /// <param name="formatter">The formatter to use</param>
-        [MethodImpl(Inline)]
-        IAsmFunctionWriter AsmWriter(FilePath dst, IAsmFormatter formatter)
-            => AsmFunctionWriter.Create(dst, formatter);
+        AsmFunctionWriter AsmWriter(FilePath dst, IAsmFormatter formatter)
+            => new AsmFunctionWriter(dst, formatter);
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer with a customized format configuration
         /// </summary>
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The target path</param>
-        [MethodImpl(Inline)]
-        IAsmFunctionWriter AsmWriter(FilePath dst, in AsmFormatSpec config)
-            => AsmFunctionWriter.Create(dst, DefaultFormatter);  
+        AsmFunctionWriter AsmWriter(FilePath dst, in AsmFormatSpec config)
+            => new AsmFunctionWriter(dst, DefaultFormatter);  
 
         /// <summary>
         /// Creates a cil function formatter with an optionally-specified configuration
         /// </summary>
         /// <param name="config">The format configuration</param>
-        [MethodImpl(Inline)]
-        ICilFunctionFormatter CilFormatter(CilFormatConfig config = null)          
-            => CilFunctionFormatter.Create(config);
-
-        /// <summary>
-        /// Creates a host-specific archiver service using the default formatter
-        /// </summary>
-        /// <param name="host">The host uri</param>
-        /// <param name="dst">The archive target</param>
-        [MethodImpl(Inline)]
-        IHostArchiver HostArchiver(ApiHostUri host, FolderPath dst)
-            => new HostArchiver(host, DefaultFormatter, insist(dst));
+        CilFunctionFormatter CilFormatter(CilFormatConfig config = null)          
+            => new CilFunctionFormatter(config);
 
         /// <summary>
         /// Creates a host-specific archiver service
@@ -115,8 +94,7 @@ namespace Z0.Asm
         /// <param name="host">The host uri</param>
         /// <param name="formatter">The formatter to use</param>
         /// <param name="dst">The archive target</param>
-        [MethodImpl(Inline)]
-        IHostArchiver HostArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
+        HostArchiver HostArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
             => new HostArchiver(host, formatter, insist(dst));
     }
 }

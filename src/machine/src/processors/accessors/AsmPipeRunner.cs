@@ -114,6 +114,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         IEncodedHexArchive UriBitsArchive(FolderPath root)
-            => DataSource.HexArchive(root);
+            => DataSource.EncodedHexArchive(root);
     }
 }

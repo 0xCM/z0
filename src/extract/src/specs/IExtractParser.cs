@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Characterizes a service that consumes raw extract bytes and emits, hopefully,
     /// a sequence of bytes that defines member content exactly, with no more nor less
     /// bits than needed
     /// </summary>    
-    public interface IExtractParser : IService
+    public interface IExtractParser
     {
         /// <summary>
         /// Parses a single extract
@@ -19,7 +17,6 @@ namespace Z0
         /// <param name="src"></param>
         /// <param name="seq"></param>
         ExtractParseResult Parse(ExtractedCode src, int seq);
-
 
         /// <summary>
         /// Parses an extract sequence, returning a comprehensive result set that includes

@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Konst;
 
@@ -18,25 +19,22 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         internal ManageCaptureStep(ICaptureWorkflow workflow)
+            => Workflow = workflow;
+        
+        static TCaptureArchive TargetArchive(AsmArchiveConfig config, params PartId[] parts) 
         {
-            Workflow = workflow;
+            var archive = Archives.Services.CaptureArchive(config.ArchiveRoot);
+            archive.Clear(parts);
+            return archive;
         }
-
+        
         public void CaptureCatalogs(AsmArchiveConfig config, params PartId[] parts)
         {
-            var root = Archives.Services.CaptureArchive(config.ArchiveRoot);
-            CaptureCatalogs(root, parts);
-        }
+            var dst = TargetArchive(config, parts);      
+            var catalogs = Context.ApiSet.MatchingCatalogs(parts).Where(x => x.ApiHostCount != 0).ToArray();                  
+            foreach(var catalog in catalogs)   
+                CaptureCatalog(catalog, dst);
 
-        public void CaptureCatalogs(TCaptureArchive dst, params PartId[] parts)
-        {                
-            dst.Clear(parts);                
-            
-            foreach(var catalog in Context.ApiSet.MatchingCatalogs(parts))   
-            {
-                if(catalog.ApiHostCount != 0)                    
-                    CaptureCatalog(catalog, dst);
-            }
         }
 
         public void CaptureHost(ICaptureHostStep step, IApiHost host, TCaptureArchive dst)

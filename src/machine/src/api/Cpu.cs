@@ -9,15 +9,8 @@ namespace Z0.Machine
     using System.Collections.Generic;
 
     using Z0.Asm;
-    using Z0.Asm.Data;
 
     using static Konst;
-    using static Memories;
-
-    readonly struct AsmParseCases
-    {
-        public const string Case01 = "002ch vmovdqu xmmword ptr [rcx],xmm0          ; VMOVDQU xmm2/m128, xmm1 || VEX.128.F3.0F.WIG 7F /r || encoded[4]{c5 fa 7f 01}";
-    }
 
     [ApiHost]
     public class Cpu
@@ -50,10 +43,7 @@ namespace Z0.Machine
 
         void AddAsmDoc(FilePath src, TextDoc doc)
         {
-            var parser = AsmDocParser.Service;
-            var blocks = parser.Parse(doc);
-            if(blocks)
-                AsmDocs.Add(new AsmSourceDoc(src,doc,blocks.Value));            
+            AsmDocs.Add(new AsmSourceDoc(src,doc, Array.Empty<AsmStatementBlock>()));            
         }
 
         void LoadAsmDoc(FilePath src)
@@ -67,11 +57,12 @@ namespace Z0.Machine
             Notify(CpuEvent.Create("Loaded asm docs", AsmDocs.Count));
         }
 
-        [Op, MethodImpl(Inline)]
+        [Op]
         public void Run()
         {            
-            LoadAsmDocs();
+            const string Case01 = "002ch vmovdqu xmmword ptr [rcx],xmm0 ; VMOVDQU xmm2/m128, xmm1 || VEX.128.F3.0F.WIG 7F /r || encoded[4]{c5 fa 7f 01}";
 
+            LoadAsmDocs();
             
             var data = 0xCE_38ul;
             var command = Asm.Commands.encode(data);
@@ -82,9 +73,8 @@ namespace Z0.Machine
             var count = asci.render(steps, buffer);
             var hexline = buffer.Slice(0,count).ToString();
             term.print(hexline);
-
             var seq = 0;
-            var parsed = Asm.Data.AsmCommandParser.ParseAsmLine(AsmParseCases.Case01,ref seq);
+            var parsed = Asm.Data.AsmCommandParser.ParseAsmLine(Case01,ref seq);
             if(parsed)
                 term.print($"{parsed.Value.Statement.ToString()}");
             else

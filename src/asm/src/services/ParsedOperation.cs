@@ -12,17 +12,33 @@ namespace Z0
 
     public readonly struct ParsedOperation : ILocatedCode<ParsedOperation,LocatedCode>
     {
-        public MemoryAddress Address {get;}
+        readonly BinaryCode Input;
 
-        public LocatedCode Unparsed {get;}
+        public LocatedCode ParseResult {get;}
+        
+        public LocatedCode Encoded
+        {
+            [MethodImpl(Inline)] 
+            get => ParseResult;
+        }
 
-        public LocatedCode Encoded {get;}
+        public LocatedCode ParseInput
+        {
+            [MethodImpl(Inline)] 
+            get => new LocatedCode(Address, Input);
+        }
+
+        public MemoryAddress Address  
+        {
+            [MethodImpl(Inline)] 
+            get => Encoded.Address;
+        }
 
         public byte[] Data 
         { 
             [MethodImpl(Inline)] 
             get => Encoded.Data;
-        }
+        }        
         
         public int Length 
         { 
@@ -51,19 +67,27 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsedOperation(MemoryAddress src, LocatedCode raw, LocatedCode parsed)
         {
-            Address = insist(src, x => x.IsNonEmpty);
+            //Address = insist(src, x => x.IsNonEmpty);
             insist(src.Equals(raw.Address));
             insist(src.Equals(parsed.Address));
-            Unparsed = raw;
-            Encoded = parsed;
+            Input = raw;
+            ParseResult = parsed;
+        }
+
+        [MethodImpl(Inline)]
+        public ParsedOperation(LocatedCode src, LocatedCode parsed)
+        {
+            insist(src.Address, parsed.Address);
+            Input = src;
+            ParseResult = parsed;
         }
 
         [MethodImpl(Inline)]
         public ParsedOperation(MemoryAddress src, byte[] raw, byte[] parsed)
         {
-            Address = insist(src, x => x.IsNonEmpty);
-            Unparsed = new LocatedCode(src, raw);
-            Encoded = new LocatedCode(src, parsed);
+            //Address = insist(src, x => x.IsNonEmpty);
+            Input = new LocatedCode(src, raw);
+            ParseResult = new LocatedCode(src, parsed);
         }
  
         [MethodImpl(Inline)]

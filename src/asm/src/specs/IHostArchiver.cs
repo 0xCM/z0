@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines service contract for persisting asm functions which are derived from .net member functions
     /// </summary>
-    public interface IHostArchiver : IService
+    public interface IHostArchiver
     {
         /// <summary>
         /// The .net assembly from which deposited asm originates

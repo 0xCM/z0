@@ -15,9 +15,6 @@ namespace Z0
     {        
         IAppMsgQueue MessageQueue {get;}
                 
-        IApiSet Api 
-            => this;
-
         Action<IAppMsg> MessageRelay 
             => (e => {});
 

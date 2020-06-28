@@ -30,7 +30,7 @@ namespace Z0
 
         public HostCodeResources(FolderPath src, FolderPath dst)
         {
-            Source = Archives.Services.HexArchive(src);            
+            Source = Archives.Services.EncodedHexArchive(src);            
             Target = dst;
         }
         

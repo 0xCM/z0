@@ -16,9 +16,9 @@ namespace Z0
     {                
         public const ushort Width = 2;
 
-        public const K Min = K.x0;
+        public const K Min = K.x00;
 
-        public const K Max = K.x3;
+        public const K Max = K.x03;
 
         readonly K Value;
         

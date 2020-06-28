@@ -9,12 +9,8 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public class MemoryCaptureService : IMemoryCapture
-    {
-        [MethodImpl(Inline)]
-        public static IMemoryCapture Create(IAsmFunctionDecoder decoder, int? bufferlen = null)
-            => new MemoryCaptureService(decoder, bufferlen ?? Pow2.T14);
-        
+    public class MemoryCaptureService 
+    {        
         readonly byte[] ExtractBuffer;
 
         readonly byte[] ParseBuffer;
@@ -24,24 +20,32 @@ namespace Z0.Asm
         readonly IAsmFunctionDecoder Decoder;
 
         [MethodImpl(Inline)]
-        static ILocatedCodeParser ExtractParser(byte[] buffer) 
-            => Z0.Extract.Services.LocatedParser(buffer);
-
-        [MethodImpl(Inline)]
-        static IMemoryExtractor MemoryExtractor(byte[] buffer) 
-            => Z0.Asm.Capture.Services.MemoryExtractor(buffer);
-
-        [MethodImpl(Inline)]
-        internal MemoryCaptureService(IAsmFunctionDecoder decoder, int bufferlen)
+        public MemoryCaptureService(int? bufferlen = null)
         {
-            ExtractBuffer = new byte[bufferlen];
-            ParseBuffer = new byte[bufferlen];
-            Extractor = MemoryExtractor(ExtractBuffer);
-            Decoder = decoder;
+            ExtractBuffer = new byte[bufferlen ?? Extracts.DefaultBufferLength];
+            ParseBuffer = new byte[bufferlen ?? Extracts.DefaultBufferLength];
+            Extractor = MemoryExtractor.service(ExtractBuffer);
+            Decoder = EncodingDecoder.Service;
+        }
+
+        public static void capture(MemoryAddress src, byte[] buffer)
+        {
+            var extract = Extracts.extract(src, buffer);
+        }
+
+        public static void parse(LocatedCode src, byte[] buffer)
+        {
+            if(ExtractParsers.parse(src, buffer, out var parsed) && parsed.IsNonEmpty)
+            {
+                var decoder = AsmFunctionDecoder.Default;
+                var instructions = decoder.Decode(parsed); 
+                var bits = new Z0.ParsedOperation(src.Address, src, parsed)               ;
+            }
+
         }
 
         public Option<CapturedMemory> Capture(MemoryAddress src)        
-            => from raw in Extract(src)
+            => from raw in Option.some(Extracts.extract(src, ParseBuffer.Clear()))
                 from parsed in Parse(raw)
                 where parsed.IsNonEmpty
                 from instructions in Decoder.Decode(parsed)
@@ -53,9 +57,7 @@ namespace Z0.Asm
             => Extractor.Extract(src);
 
         public Option<LocatedCode> Parse(LocatedCode src)
-            => from parsed in  ExtractParser(ParseBuffer.Clear()).Parse(src)
-               let encoded = new LocatedCode(src.Address, parsed)
-               select encoded;
+            => Extracts.parse(src, ParseBuffer.Clear());
 
         [MethodImpl(Inline)]
         public Option<AsmInstructionList> Decode(LocatedCode src)

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class EventBroker<F,E> : EventBroker
         where F : EventBroker<F,E>, E, new()
         where E : IEventBroker

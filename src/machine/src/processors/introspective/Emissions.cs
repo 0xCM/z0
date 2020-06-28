@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Reflection;
 
     using Z0.Asm;
@@ -32,8 +30,7 @@ namespace Z0
             {
                 ref readonly var literal = ref skip(literals,i);
                 writer.WriteLine(formatter.Format(literal));                
-            }
-            
+            }            
         }
 
         void EmitDocs(IAppContext app)
@@ -48,7 +45,7 @@ namespace Z0
 
         void CaptureEmissions(IAppContext app)
         {
-            var suite = ContextFactory.CreateSuiteContext(app);
+            var suite = ContextFactory.CreateClientContext(app);
             var ac = AccessorCapture.Service(suite.AsmContext);
             ac.CaptureResBytes();        
         }

@@ -10,6 +10,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static Root;
+    using static As;
 
     [ApiHost]
     public readonly struct CpuidProcessor 
@@ -21,7 +22,7 @@ namespace Z0.Asm
         {
             var srcCount = src.Length;
             var storage = default(Vector128<byte>);
-            ref var dst = ref Unsafe.As<Vector128<byte>,byte>(ref storage);
+            ref var dst = ref vfirst(storage);
             
             var consumed = 0;
             var remaining = asci16.Size;
@@ -43,17 +44,14 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        int Capture(in CpuidFeature src, int remaining, int consumed, ref byte dst)
+        public int Capture(in CpuidFeature src, int remaining, int consumed, ref byte dst)
         {
             var name = src.ToString();
             ReadOnlySpan<char> rendered = name;
 
-            var take = math.min(rendered.Length, remaining);                
-            
-            var source = As.slice(rendered,0,take);
-            
-            ref var target = ref Unsafe.Add(ref dst, consumed);
-            
+            var take = math.min(rendered.Length, remaining);                            
+            var source = slice(rendered,0,take);            
+            ref var target = ref Unsafe.Add(ref dst, consumed);        
             asci.encode(source, ref target);
             return take;
         }

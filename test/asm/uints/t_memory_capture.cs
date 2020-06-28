@@ -10,17 +10,17 @@ namespace Z0.Asm
     {    
         public override bool Enabled => false;
 
-        bool MemcapCheck(IMemoryCapture memcap, MemberCode src)
-        {
-            var captured = memcap.Capture(src.Address);
-            if(!captured)
-                return false;
+        // bool MemcapCheck(IMemoryCapture memcap, MemberCode src)
+        // {
+        //     var captured = memcap.Capture(src.Address);
+        //     if(!captured)
+        //         return false;
 
-            var data = captured.Value.Encoded.Encoded;
-            if(data.Length != src.Length)
-                return false;
-            return true;
-        }
+        //     var data = captured.Value.Encoded.Encoded;
+        //     if(data.Length != src.Length)
+        //         return false;
+        //     return true;
+        // }
 
         public void call32_intr_pattern()
         {

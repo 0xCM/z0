@@ -9,15 +9,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public readonly struct ApiSet : IApiSet
     {
-        [MethodImpl(Inline)]
-        public static IApiSet Create(IApiComposition composition)
-            => new ApiSet(composition);
+        public static IApiSet Create(IResolvedApi resolved)
+            => new ApiSet(resolved);
 
-        public IApiComposition Composition {get;}
+        public IResolvedApi Composition {get;}
 
         public IApiHost[] Hosts {get;}
 
@@ -27,7 +25,7 @@ namespace Z0
 
         public PartId[] PartIdentities {get;}
                 
-        internal ApiSet(IApiComposition api)
+        internal ApiSet(IResolvedApi api)
         {
             Composition = api;
             Catalogs = api.Catalogs.ToArray();    

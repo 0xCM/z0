@@ -29,8 +29,6 @@ namespace Z0.Asm.Data
         public string[] OpCodeSpecText
             => ResText(OpCodeSpecName.Name).Require();
 
-        public AsmStatementParser StatementParser
-            => AsmStatementParser.Default;
         
         public AppResourceDoc OpCodeSpecDoc
             => ResDoc(OpCodeSpecName).Require();

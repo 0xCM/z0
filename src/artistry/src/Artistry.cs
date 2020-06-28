@@ -31,11 +31,11 @@ namespace Z0
         {
         }
 
-        IApiComposition Api 
+        IResolvedApi Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
 
         IAsmContext CreateAsmContext()
-            => AsmContext.Create(Context.MessageQueue);
+            => AsmContext.Create(Context);
         
         IArtistryContext CreateArtistryContext(IAsmContext root, PartId[] code)
             => ArtistryContext.Create(root, code);

@@ -13,54 +13,38 @@ namespace Z0
     /// Extracts operations from an api host
     /// </summary>
     public readonly struct MemberExtractor : IMemberExtractor
-    {
-        readonly int BufferLength;
+    {     
+        readonly byte[] _Buffer;
 
-        [MethodImpl(Inline)]
-        public static IMemberExtractor Create(int bufferlen)
-            => new MemberExtractor(bufferlen);
+        Span<byte> Buffer
+        {
+            [MethodImpl(Inline)]
+            get
+            {
+                Span<byte> buffer = _Buffer;
+                return sys.clear(buffer);
+            }
+        }
             
         [MethodImpl(Inline)]
         internal MemberExtractor(int bufferlen)            
-        {
-            BufferLength = bufferlen;
-        }
+            => _Buffer = sys.alloc<byte>(bufferlen);
 
-        /// <summary>
-        /// Extracts encoded content that defines executable code for a located member
-        /// </summary>
-        /// <param name="src">The source member</param>
+        [MethodImpl(Inline)]
+        internal MemberExtractor(byte[] buffer)            
+            => _Buffer = buffer;
+
         public ExtractedCode Extract(ApiMember src)
-        {
-            Span<byte> buffer = stackalloc byte[BufferLength];
-            return Extract(src, MemoryReader.Service, buffer);
-        }
+            => MemberExtraction.extract(src, Buffer);
 
         public ExtractedCode[] Extract(ApiMember[] members)
-        {
-            var dst = new ExtractedCode[members.Length];
-            Span<byte> buffer = stackalloc byte[BufferLength];            
-            var reader = MemoryReader.Service;
-            for(var i=0; i<members.Length; i++)
-                dst[i] = Extract(members[i], reader, buffer);
-            return dst;
-        }
+            => MemberExtraction.extract(members, Buffer);
 
         /// <summary>
         /// Extracts encoded content for all operations defined by a host
         /// </summary>
         /// <param name="src">The source member</param>
         public ExtractedCode[] Extract(IApiHost src)
-            => Extract(Identities.Services.ApiLocator.Located(src));
-
-        [MethodImpl(Inline)]
-        ExtractedCode Extract(ApiMember src, IMemoryReader reader, Span<byte> buffer)
-        {
-            buffer.Clear();      
-            var address = src.Address;          
-            var length = reader.Read(address, buffer);
-            return new ExtractedCode(src, 
-                new LocatedCode(address, buffer.Slice(0,length).ToArray()));
-        }
+            => MemberExtraction.extract(Identities.Services.ApiLocator.Located(src), Buffer);
     }
 }

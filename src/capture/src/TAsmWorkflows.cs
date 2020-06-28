@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-   
-    using static Konst;
-        
     public interface TAsmWorkflows : TAsmCore, ICaptureServices
     {
         IAsmContext Context {get;}        
@@ -25,14 +20,11 @@ namespace Z0.Asm
         IImmSpecializer ICaptureServices.ImmSpecializer(IAsmFunctionDecoder decoder)
             => new ImmSpecializer(decoder);        
 
-        IMemoryExtractor ICaptureServices.MemoryExtractor(byte[] buffer)
-            => new MemoryExtractor(buffer);
-
         IAsmFunctionDecoder ICaptureServices.AsmDecoder(in AsmFormatSpec? format)
             => new AsmFunctionDecoder(format ?? AsmFormatSpec.Default);
 
-        IMemberExtractor ICaptureServices.HostExtractor(int? bufferlen)
-            => MemberExtractor.Create(bufferlen ?? Pow2.T14);
+        IMemberExtractor ICaptureServices.HostExtractor(int bufferlen)
+            => MemberExtraction.service(bufferlen);
 
         /// <summary>
         /// Creates a default capture worklfow

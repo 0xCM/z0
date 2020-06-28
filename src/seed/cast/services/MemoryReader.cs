@@ -9,12 +9,12 @@ namespace Z0
     
     using static Konst;
     using static Root;
-
+    
     public readonly struct MemoryReader : IMemoryReader
     {
         const int MaxZeroCount = 10;
         
-        public static IMemoryReader Service => default(MemoryReader);
+        public static MemoryReader Service => default;
 
         [MethodImpl(Inline)]
         public unsafe int Read(MemoryAddress src, Span<byte> dst, int? count = null)

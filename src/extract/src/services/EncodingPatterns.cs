@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
+    using Asm;
+
     using static Konst;
 
     using static EncodingPatternKind;
@@ -14,11 +16,11 @@ namespace Z0
     
     using D = EncodingPatternOffset;
 
-    using Asm;
 
     public readonly struct EncodingPatterns : IBytePatternSet<EncodingPatternKind>
     {
-        public static EncodingPatterns Default => new EncodingPatterns(0);
+        public static EncodingPatterns Default 
+            => new EncodingPatterns(0);
 
         readonly EncodingPatternKind[] FullKinds;
 

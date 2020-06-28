@@ -17,14 +17,14 @@ namespace Z0
         readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
-        public static IMemoryExtractor Create(byte[] buffer)
+        public static IMemoryExtractor service(byte[] buffer)
             => new MemoryExtractor(buffer);
 
         [MethodImpl(Inline)]
         public MemoryExtractor(byte[] buffer)
         {
-            this.Buffer = buffer;
-            this.Reader =  MemoryReader.Service;
+            Buffer = buffer;
+            Reader =  MemoryReader.Service;
         }
 
         [MethodImpl(Inline)]

@@ -17,29 +17,10 @@ namespace Z0.Asm
 
     public readonly struct AsmCmdProcessor
     {                
-        IAsmFunctionDecoder Decoder
-            => Context.Decoder;
-
-        [MethodImpl(Inline)]
-        TCaptureArchive CaptureArchive(FolderPath root)
-            => DataSource.CaptureArchive(root, null, null);
-
-        [MethodImpl(Inline)]
-        IEncodedHexArchive UriBitsArchive(FolderPath root)
-            => DataSource.HexArchive(root);
-
-        [MethodImpl(Inline)]
-        TCaptureArchive CaptureArchive(PartId part)
-            => DataSource.CaptureArchive(
-                (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
-                FolderName.Define("capture"));
- 
-        ParseResult<AsmStatement> ParseStatement(string src)
-                => StatementParse.Parse(src);
-
         readonly Dictionary<Mnemonic, ArrayBuilder<CommandInfo>> Index;
 
-        readonly TArchives DataSource; 
+        TArchives DataSource 
+            => Archives.Services;            
 
         readonly int[] Sequence;
 
@@ -49,8 +30,22 @@ namespace Z0.Asm
 
         readonly MnemonicParser MnemonicParse;
 
-        readonly AsmStatementParser StatementParse;
+        IAsmFunctionDecoder Decoder
+            => Context.Decoder;
 
+        [MethodImpl(Inline)]
+        TCaptureArchive CaptureArchive(FolderPath root)
+            => DataSource.CaptureArchive(root, null, null);
+
+        [MethodImpl(Inline)]
+        IEncodedHexArchive UriBitsArchive(FolderPath root)
+            => DataSource.EncodedHexArchive(root);
+
+        [MethodImpl(Inline)]
+        TCaptureArchive CaptureArchive(PartId part)
+            => DataSource.CaptureArchive(
+                (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
+                FolderName.Define("capture"));
         int NextSequence
         {
             [MethodImpl(Inline)]
@@ -71,13 +66,10 @@ namespace Z0.Asm
         internal AsmCmdProcessor(IAsmContext context)
         {
             Context = context;
-            DataSource = Archives.Services;            
             MnemonicParse = MnemonicParser.Create();
-            StatementParse = AsmStatementParser.Create(MnemonicParse);
-
             Index = new Dictionary<Mnemonic, ArrayBuilder<CommandInfo>>();
-            Sequence = new int[1];
-            Offset = new uint[1];
+            Sequence = sys.alloc<int>(1);
+            Offset = sys.alloc<uint>(1);
         }
 
         public CommandRecordSets<Mnemonic> Process(params PartId[] parts)

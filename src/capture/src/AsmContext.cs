@@ -6,14 +6,15 @@ namespace Z0.Asm
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
     public class AsmContext : IAsmContext 
     {            
-        public static IAsmContext Create(IAppContext root, Action<IAppMsg> relay = null)
-            => new AsmContext(root, relay);
-        
-        public static IAsmContext Create(IAppMsgQueue queue)
-            => new AsmContext(queue);
+        [MethodImpl(Inline)]
+        public static IAsmContext Create(IAppContext root)
+            => new AsmContext(root);
 
         public IAppContext ContextRoot {get;}
 
@@ -23,20 +24,17 @@ namespace Z0.Asm
                 
         public ICaptureServices CaptureServices {get;}
 
-        AsmContext(IAppContext root, Action<IAppMsg> relay = null)
+        [MethodImpl(Inline)]
+        void Relay(IAppMsg msg)
+            => Next(msg);
+
+        [MethodImpl(Inline)]
+        public AsmContext(IAppContext root)
         {
             ContextRoot = root;
             MessageQueue = root.MessageQueue;
-            Next  = relay ?? root.MessageRelay;
-            root.MessageQueue.Next += Relay;                  
-            CaptureServices = Capture.Services;
-        }
-
-        AsmContext(IAppMsgQueue queue)
-        {
-            Next  = e => {};
-            MessageQueue = queue;
-            MessageQueue.Next += Relay;      
+            Next = root.MessageRelay;
+            root.MessageQueue.Next += Relay;      
             CaptureServices = Capture.Services;
         }
        
@@ -54,8 +52,5 @@ namespace Z0.Asm
 
         public void Emit(FilePath dst) 
             => MessageQueue.Emit(dst);
-
-        void Relay(IAppMsg msg)
-            => Next(msg);
     }   
 }

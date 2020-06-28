@@ -16,21 +16,18 @@ namespace Z0
 
         readonly CilFormatConfig Config;
         
-        [MethodImpl(Inline)]
-        public static CilFunctionWriter Create(FilePath dst, CilFormatConfig config = null)
-            => new CilFunctionWriter(dst, config ?? CilFormatConfig.Default);
         
         [MethodImpl(Inline)]
-        CilFunctionWriter(FilePath dst, CilFormatConfig config)            
+        public CilFunctionWriter(FilePath dst, CilFormatConfig config = null)
         {
-            this.Target = dst;
-            this.Config = config;
+            Target = dst;
+            Config = config ?? CilFormatConfig.Default;
         }
 
-        ICilFunctionFormatter Formatter
+        CilFunctionFormatter Formatter
         {
             [MethodImpl(Inline)]
-            get =>  CilFunctionFormatter.Create();
+            get =>  new CilFunctionFormatter();
         }
 
         public void Write(CilFunction[] src)
