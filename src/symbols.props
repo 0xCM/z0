@@ -6,6 +6,8 @@
     <Enhanced>$(Src)enhanced/z0.enhanced.csproj</Enhanced>
     <Parts>$(Src)parts/z0.parts.csproj</Parts>
     <Imagine>$(Src)imagine/z0.imagine.csproj</Imagine>
+    <Rooted>$(Src)rooted/z0.rooted.csproj</Rooted>
+
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
     
 

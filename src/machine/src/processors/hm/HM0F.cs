@@ -8,13 +8,14 @@ namespace Z0.Machine
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static Memories;
+    using static Root;
     using static HexLevel;
 
     [ApiHost]
     public struct HM0F
     {
+        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+
         Vector128<byte> State;
 
         bit Processed;
@@ -46,60 +47,60 @@ namespace Z0.Machine
         public bit Process(byte code)
         {
             Processed = false;
-            Process(x00, code);
+            Process(h00, code);
             return Processed;
         }
 
         [MethodImpl(Inline)]
         void Process(X00 a, byte code)
         {
-            if(code == x00)
-                Process(x00);
-            else if(code == x01)
-                Process(x01);
-            else if(code== x02)
-                Process(x02);
-            else if(code == x03)
-                Process(x03);
-            else if(code == x04)
-                Process(x04);
-            else if(code == x05)
-                Process(x05);
+            if(code == h00)
+                Process(h00);
+            else if(code == h01)
+                Process(h01);
+            else if(code== h02)
+                Process(h02);
+            else if(code == h03)
+                Process(h03);
+            else if(code == h04)
+                Process(h04);
+            else if(code == h05)
+                Process(h05);
             else
-                Process(x06,code);
+                Process(h06,code);
         }
 
         [MethodImpl(Inline)]
         void Process(X06 a, byte code)
         {
-            if(code == x06)
-                Process(x06);
-            else if(code == x07)
-                Process(x07);
-            else if(code == x08)
-                Process(x08);
-            else if(code == x09)
-                Process(x09);
-            else if(code == x0a)
-                Process(x0a);
-            else if(code == x0b)
-                Process(x0b);
+            if(code == h06)
+                Process(h06);
+            else if(code == h07)
+                Process(h07);
+            else if(code == h08)
+                Process(h08);
+            else if(code == h09)
+                Process(h09);
+            else if(code == h0A)
+                Process(h0A);
+            else if(code == h0B)
+                Process(h0B);
             else
-                Process(x0c,code);
+                Process(h0C,code);
 
         }
 
         [MethodImpl(Inline)]
         void Process(X0C a, byte code)
         {
-            if(code == x0c)
-                Process(x0c);
-            else if(code == x0d)
-                Process(x0d);
-            else if(code == x0e)
-                Process(x0e);
-            else if(code == x0f)
-                Process(x0f);
+            if(code == h0C)
+                Process(h0C);
+            else if(code == h0D)
+                Process(h0D);
+            else if(code == h0E)
+                Process(h0E);
+            else if(code == h0F)
+                Process(h0F);
         }
 
         [MethodImpl(Inline), Op]

@@ -12,7 +12,7 @@ namespace Z0
     partial class Symbolic
     {
         [MethodImpl(Inline)]
-        public static HexKind hexkind<H>(H h= default)
+        public static HexKind8 hexkind<H>(H h= default)
             where H : unmanaged, IHexCode
                 => h.Kind;
 

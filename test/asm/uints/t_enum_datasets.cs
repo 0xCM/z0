@@ -78,7 +78,7 @@ namespace Z0.Asm
         {            
             emit<AsciCharCode,byte>();
             emit<Octet,byte>();
-            emit<HexKind,byte>();
+            emit<HexKind8,byte>();
             emit<RegisterKind,uint>();
             emit<RegisterCode,byte>();
             emit<RegisterClass,byte>();

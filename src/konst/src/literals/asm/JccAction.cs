@@ -6,7 +6,7 @@ namespace Z0.Asm
 {        
 
     using static JccTest;
-    using static HexKind;
+    using static HexKind8;
 
     public enum JccAction : byte
     {

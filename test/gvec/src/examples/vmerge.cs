@@ -51,7 +51,7 @@ namespace Z0
             void report()
             {
                 var x = V0p.vincrements<byte>(n128);
-                var y = dvec.vadd(x, V0d.vbroadcast(n128, (byte)16));
+                var y = V0d.vadd(x, V0d.vbroadcast(n128, (byte)16));
 
                 var lo = gvec.vmergelo(x,y);
                 var hi = gvec.vmergehi(x,y);

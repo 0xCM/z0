@@ -6,7 +6,7 @@ namespace Z0
 {        
     public interface IHexHandler
     {
-        void OnHex(HexKind src);
+        void OnHex(HexKind8 src);
     }
 
     public interface IHexHandler<H> : IHexHandler
@@ -14,13 +14,13 @@ namespace Z0
     {
         void OnHex(H h);
 
-        void IHexHandler.OnHex(HexKind src)
+        void IHexHandler.OnHex(HexKind8 src)
             => OnHex(default);
     }
 
     public interface IHexMapper<T>
     {
-        T Map(HexKind src);
+        T Map(HexKind8 src);
     }
 
     public interface IHexMapper<H,T> : IHexMapper<T>
@@ -28,7 +28,7 @@ namespace Z0
     {
         T Map(H src);
 
-        T IHexMapper<T>.Map(HexKind src)
+        T IHexMapper<T>.Map(HexKind8 src)
             => Map(default);
     }
 }

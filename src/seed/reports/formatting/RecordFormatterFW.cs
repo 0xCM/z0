@@ -32,8 +32,8 @@ namespace Z0
         {
             State = state;
             Delimiter = delimiter;
-            Fields = Root.literals<F>();
-            Widths = Root.literals<W>();
+            Fields = Enums.literals<F>();
+            Widths = Enums.literals<W>();
         }
 
         public void EmitHeader(bool eol = true)

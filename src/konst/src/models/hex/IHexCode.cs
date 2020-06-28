@@ -11,7 +11,7 @@ namespace Z0
 
     public interface IHexCode
     {
-        HexKind Kind {get;}        
+        HexKind8 Kind {get;}        
 
         Type Reified {get;}
     }

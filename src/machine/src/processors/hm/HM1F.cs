@@ -8,13 +8,14 @@ namespace Z0.Machine
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
     using static Memories;
     using static HexLevel;
 
     [ApiHost]
     public struct HM1F
     {
+        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+
         Vector128<byte> State;
 
         bit Processed;
@@ -37,12 +38,12 @@ namespace Z0.Machine
         {
             Processed = false;
 
-            if(code <= x15)
-                Process(x10,dst);
-            else if(code <= x0b)
-                Process(x16,dst);
+            if(code <= h15)
+                Process(h10,dst);
+            else if(code <= h0B)
+                Process(h16,dst);
             else
-                Process(x1c,dst);            
+                Process(h1C,dst);            
             return Processed;
         }
 
@@ -50,38 +51,38 @@ namespace Z0.Machine
         void Process(X10 a, byte code, Span<byte> dst)
         {
             if(code == 0x10)
-                Process(x10, dst);
+                Process(h10, dst);
             else if(code == 0x11)
-                Process(x11, dst);
+                Process(h11, dst);
             else if(code== 0x12)
-                Process(x12, dst);
+                Process(h12, dst);
             else if(code == 0x13)
-                Process(x13, dst);
+                Process(h13, dst);
             else if(code == 0x14)
-                Process(x14, dst);
+                Process(h14, dst);
             else if(code == 0x15)
-                Process(x15, dst);
+                Process(h15, dst);
             else
-                Process(x16,code,dst);
+                Process(h16,code,dst);
         }
 
         [MethodImpl(Inline)]
         void Process(X16 a, byte code, Span<byte> dst)
         {
             if(code == 0x16)
-                Process(x16, dst);
+                Process(h16, dst);
             else if(code == 0x17)
-                Process(x17, dst);
+                Process(h17, dst);
             else if(code == 0x18)
-                Process(x18, dst);
+                Process(h18, dst);
             else if(code == 0x19)
-                Process(x19, dst);
+                Process(h19, dst);
             else if(code == 0x1a)
-                Process(x1a, dst);
+                Process(h1A, dst);
             else if(code == 0x1b)
-                Process(x1b, dst);
+                Process(h1B, dst);
             else
-                Process(x1c,code,dst);
+                Process(h1C,code,dst);
 
         }
 
@@ -89,13 +90,13 @@ namespace Z0.Machine
         void Process(X1C a, byte code, Span<byte> dst)
         {
             if(code == 0x1c)
-                Process(x1c, dst);
+                Process(h1C, dst);
             else if(code == 0x1d)
-                Process(x1d, dst);
+                Process(h1D, dst);
             else if(code == 0x1e)
-                Process(x1e, dst);
+                Process(h1E, dst);
             else if(code == 0x1f)
-                Process(x1f, dst);
+                Process(h1F, dst);
         }
 
         [MethodImpl(Inline), Op]

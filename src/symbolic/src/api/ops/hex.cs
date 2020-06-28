@@ -29,7 +29,7 @@ namespace Z0
             => enumerate<HexKind5,byte,N5>();
 
         [MethodImpl(Inline), Op]
-        public static Symbols<HexKind,byte,N8> hex(N8 n)                     
-            => enumerate<HexKind,byte,N8>();
+        public static Symbols<HexKind8,byte,N8> hex(N8 n)                     
+            => enumerate<HexKind8,byte,N8>();
     }
 }

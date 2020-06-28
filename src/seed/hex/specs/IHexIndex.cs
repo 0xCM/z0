@@ -11,10 +11,10 @@ namespace Z0
 
     public interface IHexIndex<T> : IReadOnlyIndex<T>
     {
-        ref readonly T this[HexKind index] {get;}
+        ref readonly T this[HexKind8 index] {get;}
 
         [MethodImpl(Inline)]
-        ref readonly T Lookup(HexKind index)
+        ref readonly T Lookup(HexKind8 index)
             => ref this[index];
     }
 }

@@ -15,7 +15,6 @@ namespace Z0
 
     partial struct V0p
     {
-
         /// <summary>
         /// Creates a 128-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
         /// </summary>

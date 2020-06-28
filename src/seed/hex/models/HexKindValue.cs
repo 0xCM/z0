@@ -17,7 +17,7 @@ namespace Z0
     {
         readonly T value;
 
-        public HexKind Kind {get;}
+        public HexKind8 Kind {get;}
 
         public T Value
         {
@@ -32,19 +32,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator HexKindValue<T>((HexKind k, T value) src)
+        public static implicit operator HexKindValue<T>((HexKind8 k, T value) src)
             => new HexKindValue<T>(src.k, src.value);
 
         [MethodImpl(Inline)]
         public static implicit operator HexKindValue<T>((byte k, T value) src)
-            => new HexKindValue<T>((HexKind)src.k, src.value);
+            => new HexKindValue<T>((HexKind8)src.k, src.value);
 
         [MethodImpl(Inline)]
         public static implicit operator HexKindValue<T>((int k, T value) src)
-            => new HexKindValue<T>((HexKind)src.k, src.value);
+            => new HexKindValue<T>((HexKind8)src.k, src.value);
 
         [MethodImpl(Inline)]
-        public HexKindValue(HexKind code, T value)
+        public HexKindValue(HexKind8 code, T value)
         {
             this.Kind = code;
             this.value = value;

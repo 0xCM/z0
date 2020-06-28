@@ -62,7 +62,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static HexIndex<T> index<T>(Func<T,HexKind> f, T[] src, T[] dst)
+        public static HexIndex<T> index<T>(Func<T,HexKind8> f, T[] src, T[] dst)
             where T : unmanaged
         {
             Span<T> index = dst;
@@ -79,7 +79,7 @@ namespace Z0
         }                
 
         [MethodImpl(Inline)]
-        public static HexIndex<T> index<T>(Func<T,HexKind> f, params T[] src)
+        public static HexIndex<T> index<T>(Func<T,HexKind8> f, params T[] src)
             where T : unmanaged
                 => index(f, src, new T[src.Length]);
     }

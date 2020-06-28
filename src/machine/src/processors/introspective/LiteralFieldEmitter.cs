@@ -31,7 +31,7 @@ namespace Z0.Asm
 
             foreach(var part in parts)
             {
-                var segments = LiteralFieldRefs.search(part.types);
+                var segments = LiteralFieldRefs.strings(part.types);
                 if(segments.Length != 0)
                     FieldCapture.emit(segments, EmissionRoot + FileName.Define(part.Id.Format(), FileExtensions.Csv));
             }

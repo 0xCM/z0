@@ -24,10 +24,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly T Lookup(HexKind key)
+        public ref readonly T Lookup(HexKind8 key)
             => ref Data[(int)key];
 
-        public ref readonly T this[HexKind index]
+        public ref readonly T this[HexKind8 index]
         {
             [MethodImpl(Inline)]
             get => ref Lookup(index);
@@ -42,7 +42,7 @@ namespace Z0
         public ref readonly T this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Lookup((HexKind)index);
+            get => ref Lookup((HexKind8)index);
         }
     }
 }

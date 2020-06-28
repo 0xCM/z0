@@ -16,7 +16,8 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke() => VData.vunits(Kinds.vk128<T>());            
+            public Vector128<T> Invoke() 
+                => VData.vunits(Kinds.vk128<T>());            
         }
 
         public readonly struct Units256<T> : IEmitter256<T>
@@ -24,7 +25,8 @@ namespace Z0
         {
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke() => VData.vunits<T>(Kinds.vk256<T>());
+            public Vector256<T> Invoke() 
+                => VData.vunits<T>(Kinds.vk256<T>());
         }
     }
 }

@@ -40,13 +40,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vinsert(v8u(src), v8u(dst), index));
+                return generic<T>(V0d.vinsert(v8u(src), v8u(dst), index));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vinsert(v16u(src), v16u(dst), index));
+                return generic<T>(V0d.vinsert(v16u(src), v16u(dst), index));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vinsert(v64i(src), v64i(dst), index));
+                return generic<T>(V0d.vinsert(v64i(src), v64i(dst), index));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vinsert(v64u(src), v64u(dst), index));
+                return generic<T>(V0d.vinsert(v64u(src), v64u(dst), index));
             else
                 return vinsert_i(src,dst,index);
         }
@@ -56,13 +56,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vinsert(v8i(src), v8i(dst), index));
+                return generic<T>(V0d.vinsert(v8i(src), v8i(dst), index));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vinsert(v16i(src), v16i(dst), index));
+                return generic<T>(V0d.vinsert(v16i(src), v16i(dst), index));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vinsert(v32i(src), v32i(dst), index));
+                return generic<T>(V0d.vinsert(v32i(src), v32i(dst), index));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vinsert(v64i(src), v64i(dst), index));
+                return generic<T>(V0d.vinsert(v64i(src), v64i(dst), index));
             else 
                 return vinsert_f(src,dst,index);
         }
@@ -72,9 +72,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vinsert(v32f(src), v32f(dst), index));
+                return generic<T>(V0d.vinsert(v32f(src), v32f(dst), index));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vinsert(v64f(src), v64f(dst), index));
+                return generic<T>(V0d.vinsert(v64f(src), v64f(dst), index));
             else
                 throw Unsupported.define<T>();
         } 

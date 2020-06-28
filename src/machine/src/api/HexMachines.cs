@@ -8,13 +8,14 @@ namespace Z0.Machine
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static Memories;
+    using static Root;
     using static HexLevel;
 
     [ApiHost]
     public struct HexMachines : IApiHost<HexMachines>
     {
+        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+
         [MethodImpl(Inline), Op]
         public static HexMachines create(Vector128<byte> state)
             => new HexMachines(state);
@@ -52,9 +53,9 @@ namespace Z0.Machine
         [MethodImpl(Inline), Op]
         public bit Process(byte src, Span<byte> dst)
         {
-            Processed = Process(x00,src);
+            Processed = Process(h00,src);
             if(!Processed)
-                Processed = Process(x01,src,dst);            
+                Processed = Process(h01,src,dst);            
             return Processed;
         }
 

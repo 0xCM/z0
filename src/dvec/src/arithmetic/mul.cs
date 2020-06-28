@@ -17,7 +17,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Ssse3;
 
     using static Typed;    
-    using static Vectors;
+    using static As;
 
     partial class dvec
     {
@@ -194,12 +194,12 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
         {
-            var loMask = Vectors.vbroadcast(n256, 0x00000000fffffffful);                
+            var loMask = V0d.vbroadcast(n256, 0x00000000fffffffful);                
             var xh = v32u(vsrl(x, 32));
             var yl = v32u(vand(y, loMask));
-            return vadd(
+            return V0d.vadd(
                 Multiply(v32u(vand(x, loMask)), yl), 
-                vadd(vsll(Multiply(xh, yl), 32), 
+                V0d.vadd(vsll(Multiply(xh, yl), 32), 
                     vsll(Multiply(xh, v32u(vsrl(y, 32))), 32)));
         }
     }

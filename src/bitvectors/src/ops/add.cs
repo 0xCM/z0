@@ -80,9 +80,9 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var sum = dvec.vadd(v64u(x.Data), v64u(y.Data));            
+            var sum = V0d.vadd(v64u(x.Data), v64u(y.Data));            
             bit carry = x.Lo > Vectors.vcell(sum,0);
-            return  As.generic<T>(dvec.vadd(sum, V0d.vbroadcast(n128, (ulong)carry)));
+            return  As.generic<T>(V0d.vadd(sum, V0d.vbroadcast(n128, (ulong)carry)));
         }
     }
 }
