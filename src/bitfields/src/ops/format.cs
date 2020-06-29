@@ -13,12 +13,12 @@ namespace Z0
     partial class BitFields
     {        
         [MethodImpl(Inline)]
-        public static string format(ReadOnlySpan<FieldSegment> src)
-            => SegmentFormatter.format<FieldSegment,byte>(src);
+        public static string format(ReadOnlySpan<BitFieldSegment> src)
+            => BitFieldSegmentFormatter.format<BitFieldSegment,byte>(src);
 
         [MethodImpl(Inline)]
-        public static string format<T>(ReadOnlySpan<FieldSegment<T>> src)
+        public static string format<T>(ReadOnlySpan<BitFieldSegment<T>> src)
             where T : unmanaged
-                => SegmentFormatter.format<FieldSegment<T>,T>(src);
+                => BitFieldSegmentFormatter.format<BitFieldSegment<T>,T>(src);
     }
 }

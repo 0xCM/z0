@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     using static Konst;        
+    using static Typed;
 
     partial class Blocks
     {
@@ -20,7 +21,17 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Numeric8)]
         public static void broadcast<T>(T data, in Block8<T> dst)
             where T : unmanaged        
-                => dst.Fill(data);
+        {
+            if(aligned<T>(w128,dst.CellCount))
+            {
+                for(var i=0; i<dst.BlockCount; i++)
+                {
+                    V0.vload(n128, dst.Block(i));
+                }
+            }
+
+            
+        }
 
         /// <summary>
         /// Fills a target block with replicated cell data

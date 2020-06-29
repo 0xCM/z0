@@ -13,7 +13,7 @@ namespace Z0
     partial class BitFields
     {            
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref T deposit<T>(in FieldSegment seg, in T src, ref T dst)
+        public static ref T deposit<T>(in BitFieldSegment seg, in T src, ref T dst)
             where T : unmanaged
                 => ref gbits.copy(src, seg.StartPos, seg.Width, ref dst);
 
@@ -40,7 +40,7 @@ namespace Z0
                 => field.Deposit(src, dst);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public ref T deposit<T>(in BitField<T> field, in FieldSegment seg, in T src, ref T dst) 
+        public ref T deposit<T>(in BitField<T> field, in BitFieldSegment seg, in T src, ref T dst) 
             where T : unmanaged
                 => ref field.Deposit(seg, src, ref dst);
 
@@ -62,7 +62,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static void deposit<S,T>(in BitFieldSpec spec, in S src, Span<T> dst)
-            where S : IScalarField<T>
+            where S : IScalarBitField<T>
             where T : unmanaged
         {
             for(var i=0; i<spec.FieldCount; i++)
@@ -70,14 +70,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref T deposit<S,T>(in FieldSegment segment, in S src, ref T dst)
-            where S : IScalarField<T>
+        public static ref T deposit<S,T>(in BitFieldSegment segment, in S src, ref T dst)
+            where S : IScalarBitField<T>
             where T : unmanaged
                 => ref gbits.copy(src.Scalar, segment.StartPos, segment.Width, ref dst);
 
         [MethodImpl(Inline)]
-        public static ref S deposit<S,T>(in FieldSegment segment, in S src, ref S dst)
-            where S : IScalarField<T>
+        public static ref S deposit<S,T>(in BitFieldSegment segment, in S src, ref S dst)
+            where S : IScalarBitField<T>
             where T : unmanaged
         {
             var dstData = dst.Scalar;
@@ -87,7 +87,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T deposit<S,T>(in BitFieldSpec spec, ReadOnlySpan<T> src, ref T data)
-            where S : IScalarField<T>
+            where S : IScalarBitField<T>
             where T : unmanaged
         {
             for(var i=0; i<spec.FieldCount; i++)

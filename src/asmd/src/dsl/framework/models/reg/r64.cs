@@ -6,20 +6,28 @@ namespace Z0.Asm.Dsl
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
     using static Konst;
+    using static Typed;
 
     public readonly struct r64 : IRegOp64
     {    
-        public ulong Content  {get;}
+        readonly Vector128<ulong> Data;
+        
+        public ulong Content
+        {
+            [MethodImpl(Inline)]
+            get => V0.vcell(Data, 0);
+        }
 
-        public RegisterKind Kind {get;}
+        public RegisterKind Kind 
+        {
+            get => (RegisterKind)V0.vcell(Data,1);
+        }
         
         [MethodImpl(Inline)]
         public r64(ulong value, RegisterKind kind)
-        {
-            Content = value;
-            Kind = kind;
-        }
+            => Data = V0d.vparts(w128, value, (ulong)kind);
     }   
 }

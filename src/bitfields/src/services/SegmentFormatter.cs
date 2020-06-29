@@ -9,9 +9,8 @@ namespace Z0
     using System.Text;
 
     using static Konst;    
-    using static Memories;
 
-    public readonly struct SegmentFormatter
+    public readonly struct BitFieldSegmentFormatter
     {
         /// <summary>
         /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
@@ -33,19 +32,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static IFormatter<IFieldSegment<T>> create<T>()
+        public static IFormatter<IBitFieldSegment<T>> create<T>()
             where T : unmanaged 
                 => default(SegmentFormatter<T>);
 
         [MethodImpl(Inline)]
         public static IFormatter<S> create<S,T>()
             where T : unmanaged
-            where S : IFieldSegment<T>
+            where S : IBitFieldSegment<T>
                 => default(SegmentFormatter<S,T>);
 
         [MethodImpl(Inline)]
         public static string entry<F>(F entry)
-            where F : IFieldIndexEntry
+            where F : IBitFieldIndexEntry
                 => $"{entry.FieldWidth.GetType().Name}[{entry.FieldIndex}] = {entry.FieldName}";
 
         /// <summary>
@@ -55,7 +54,7 @@ namespace Z0
         /// <typeparam name="T">The type over which the segment is defined</typeparam>
         public static string format<S,T>(ReadOnlySpan<S> src)
             where T : unmanaged
-            where S : IFieldSegment<T>
+            where S : IBitFieldSegment<T>
         {
             var sep =$"{Chars.Comma}{Chars.Space}";
             var segformat = create<T>();            
@@ -73,16 +72,16 @@ namespace Z0
         }
     }
 
-    readonly struct SegmentFormatter<T> : IFormatter<IFieldSegment<T>>
+    readonly struct SegmentFormatter<T> : IFormatter<IBitFieldSegment<T>>
         where T : unmanaged
     {
-        public string Format(IFieldSegment<T> src)
+        public string Format(IBitFieldSegment<T> src)
             => $"{src.Name}({src.Width}:{src.StartPos}..{src.EndPos})";
     }
 
     readonly struct SegmentFormatter<S,T> : IFormatter<S>
         where T : unmanaged
-        where S : IFieldSegment<T>
+        where S : IBitFieldSegment<T>
     {
         public string Format(S src)
             => default(SegmentFormatter<T>).Format(src);

@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static DynamicDelegate<D> dynamic<D>(OpIdentity id, MethodInfo src, DynamicMethod dst)
             where D : Delegate
-                => new DynamicDelegate<D>(id, src,dst, (D)dst.CreateDelegate(typeof(D)));
+                => new DynamicDelegate<D>(id, src, dst, (D)dst.CreateDelegate(typeof(D)));
 
         /// <summary>
         /// Creates a non-parameteric dynamic delegate
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="@delegate">The target delegate type</param>
         [MethodImpl(Inline)]
         public static DynamicDelegate dynamic(OpIdentity id, MethodInfo src, DynamicMethod dst, Type @delegate)
-            => DynamicDelegate.Define(id, src, dst, dst.CreateDelegate(@delegate));
+            => DynamicDelegate.define(id, src, dst, dst.CreateDelegate(@delegate));
 
         /// <summary>
         /// Creates a non-parameteric dynamic delegate
@@ -45,6 +45,6 @@ namespace Z0
         /// <param name="@delegate">The target delegate type</param>
         [MethodImpl(Inline)]
         public static DynamicDelegate dynamic(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
-            => DynamicDelegate.Define(id, src, dst, op);
+            => DynamicDelegate.define(id, src, dst, op);
     }
 }

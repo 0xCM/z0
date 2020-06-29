@@ -6,16 +6,22 @@ namespace Z0.Dynamics.Operators
 {
     using System;
     using System.Linq.Expressions;
-
+    using System.Runtime.CompilerServices;
+    
+    using static Konst;
     using static XPress;
-
-    public static class Negate<T>
+        
+    public readonly struct Negate<T> : IFunc<T,T>
     {
-        static readonly Func<T,T> _OP
-            = lambda<T,T>(Expression.Negate).Compile();
+        readonly Func<T,T> F;
 
-        public static T Apply(T x)
-            => _OP(x);
+        [MethodImpl(Inline)]
+        internal Negate(Func<T,T> f)
+            => F = f;
+
+        [MethodImpl(Inline)]
+        public T Invoke(T x)
+            => F(x);
     }
 
     public static class NegateChecked<T>

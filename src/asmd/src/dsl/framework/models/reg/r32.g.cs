@@ -16,9 +16,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public r32(uint value)
-        {
-            Data = value;
-        }
+            => Data = value;
 
         public RegisterKind Kind 
         {

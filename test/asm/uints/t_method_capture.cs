@@ -69,6 +69,15 @@ namespace Z0.Asm
             
         }
 
+        public void capture_dynamic_delegates()
+        {
+            using var dst = CaseWriter(FileExtensions.Asm);
+
+            var f = LinqDynamic.xor<uint>();
+            var id = Identity.identify(f.Method);
+            AsmCheck.WriteAsm(AsmCheck.Capture(id,f.Method).Require(),dst);        
+        }
+
         public void capture_delegates()
         {
             using var dst = CaseWriter(FileExtensions.Asm);

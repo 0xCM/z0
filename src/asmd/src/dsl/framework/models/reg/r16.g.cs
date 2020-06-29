@@ -16,9 +16,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public r16(ushort value)
-        {
-            Data = value;
-        }
+            => Data = value;
 
         public RegisterKind Kind 
         {

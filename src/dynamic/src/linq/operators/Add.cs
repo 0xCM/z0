@@ -15,28 +15,28 @@ namespace Z0.Dynamics.Operators
 
     public static class Add<T>
     {
-        static readonly Option<Func<T, T, T>> _OPSafe
+        static readonly Option<Func<T,T,T>> _OPSafe
             = TryConstruct();
 
-        static Func<T, T, T> _OP
+        static Func<T,T,T> _OP
             => _OPSafe.Require();
 
-        static Option<Func<T, T, T>> TryConstruct()
+        static Option<Func<T,T,T>> TryConstruct()
             => Try(() =>
             {
-                switch (typecode<T>())
+                switch (sys.typecode<T>())
                 {
 
                     case TypeCode.String:
-                        return fx(method<T, T, T>(nameof(String.Concat)).Require().Func<T, T, T>()).Compile();
+                        return fx(method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
                     case TypeCode.Byte:
-                        return cast<Func<T, T, T>>(ByteOps.Add.Compile());
+                        return cast<Func<T,T,T>>(Ops8u.Add.Compile());
                     case TypeCode.SByte:
-                        return cast<Func<T, T, T>>(SByteOps.Add.Compile());
+                        return cast<Func<T,T,T>>(Ops8i.Add.Compile());
                     case TypeCode.UInt16:
-                        return cast<Func<T, T, T>>(UInt16Ops.Add.Compile());
+                        return cast<Func<T,T,T>>(Ops16u.Add.Compile());
                     default:
-                        return lambda<T, T, T>(Expression.Add).Compile();
+                        return lambda<T,T,T>(Expression.Add).Compile();
                 }
             });
 
@@ -52,8 +52,8 @@ namespace Z0.Dynamics.Operators
 
     public static class AddChecked<T>
     {
-        static readonly Func<T, T, T> _OP
-            = lambda<T, T, T>(Expression.AddChecked).Compile();
+        static readonly Func<T,T,T> _OP
+            = lambda<T,T,T>(Expression.AddChecked).Compile();
 
         public static T Apply(T x, T y)
             => _OP(x, y);

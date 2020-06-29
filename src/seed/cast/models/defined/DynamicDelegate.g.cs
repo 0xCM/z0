@@ -49,7 +49,7 @@ namespace Z0
         public DynamicDelegate Untyped
         {
             [MethodImpl(Inline)]
-            get => DynamicDelegate.Define(Id, Source, Target, DynamicOp);
+            get => DynamicDelegate.define(Id, Source, Target, DynamicOp);
         }
     }
 }

@@ -11,8 +11,8 @@ namespace Z0.Dynamics.Operators
 
     public static class AndAlso<T>
     {
-        static readonly Func<T, T, bool> _OP
-            = lambda<T, T, bool>(Expression.AndAlso).Compile();
+        static readonly Func<T,T,bool> _OP
+            = lambda<T,T,bool>(Expression.AndAlso).Compile();
 
         public static bool Apply(T x, T y)
             => _OP(x, y);

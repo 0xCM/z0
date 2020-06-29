@@ -8,7 +8,6 @@ namespace Z0.Asm.Dsl
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Root;
 
     partial class asm
     {

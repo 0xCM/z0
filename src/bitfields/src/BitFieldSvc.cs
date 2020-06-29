@@ -14,14 +14,14 @@ namespace Z0
     public partial class BitFieldServices : IApiHost<BitFieldServices>
     {        
         [MethodImpl(Inline)]
-        public static IFormatter<IFieldSegment<T>> SegFormatter<T>()
+        public static IFormatter<IBitFieldSegment<T>> SegFormatter<T>()
             where T : unmanaged 
                 => default(SegmentFormatter<T>);
 
         [MethodImpl(Inline)]
         public static IFormatter<S> SegFormatter<S,T>()
             where T : unmanaged
-            where S : IFieldSegment<T>
+            where S : IBitFieldSegment<T>
                 => default(SegmentFormatter<S,T>);
     }
 }

@@ -18,18 +18,17 @@ namespace Z0.Dynamics.Operators
         static Func<T, T, T> Construct()
         {
 
-            switch (typecode<T>())
+            switch (sys.typecode<T>())
             {
 
                 case TypeCode.Byte:
-                    return cast<Func<T, T, T>>(ByteOps.Sub.Compile());
+                    return cast<Func<T,T,T>>(Ops8u.Sub.Compile());
                 case TypeCode.SByte:
-                    return cast<Func<T, T, T>>(SByteOps.Sub.Compile());
+                    return cast<Func<T,T,T>>(Ops8i.Sub.Compile());
                 case TypeCode.UInt16:
-                    return cast<Func<T, T, T>>(UInt16Ops.Sub.Compile());
+                    return cast<Func<T,T,T>>(Ops16u.Sub.Compile());
                 default:
-                    return lambda<T, T, T>(Expression.Subtract).Compile();
-
+                    return lambda<T,T,T>(Expression.Subtract).Compile();
             }
         }
 

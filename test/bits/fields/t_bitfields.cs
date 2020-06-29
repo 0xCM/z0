@@ -13,7 +13,7 @@ namespace Z0
     public class t_bitfields : t_bitcore<t_bitfields>
     {
         [MethodImpl(Inline)]
-        public static FieldSegment segment<E>(E segid, byte startpos, byte endpos)
+        public static BitFieldSegment segment<E>(E segid, byte startpos, byte endpos)
             where E : unmanaged, Enum
                 => BitFieldSpecs.segment(segid, startpos, endpos); 
                 

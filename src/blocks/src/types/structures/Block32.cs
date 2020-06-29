@@ -9,6 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;    
         
     using static Konst;
+    using static As;
+    using static Root;
 
     /// <summary>
     /// Defines a span of contiguous memory that can be evenly partitioned into 8, 16 and 32-bit segments
@@ -50,7 +52,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref MemoryMarshal.GetReference(data);
+            get => ref first(data);
         }
 
         public bool IsEmpty
@@ -74,7 +76,7 @@ namespace Z0
         public int BlockLength 
         {
             [MethodImpl(Inline)]
-            get => 4/Unsafe.SizeOf<T>();
+            get => 4/size<T>();
         }            
 
         /// <summary>
@@ -92,7 +94,7 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * (ulong)Unsafe.SizeOf<T>()*8;
+            get => (ulong)CellCount * bitsize<T>();
         }
 
         /// <summary>
@@ -129,7 +131,7 @@ namespace Z0
         /// <param name="segment">The cell relative block index</param>
         [MethodImpl(Inline)]
         public ref T Cell(int block, int segment)
-            => ref Unsafe.Add(ref Head, BlockLength*block + segment);
+            => ref add(Head, BlockLength*block + segment);
 
         /// <summary>
         /// Retrieves an index-identified data block
@@ -137,7 +139,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)    
-            => data.Slice(block * BlockLength,BlockLength);
+            => slice(data, block * BlockLength,BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
@@ -173,7 +175,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block32<S> As<S>()                
             where S : unmanaged
-                => new Block32<S>(MemoryMarshal.Cast<T,S>(data));                    
+                => new Block32<S>(Z0.As.cast<T,S>(data));                    
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()

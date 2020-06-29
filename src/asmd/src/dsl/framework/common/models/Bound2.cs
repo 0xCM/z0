@@ -21,10 +21,6 @@ namespace Z0.Asm.Dsl
         public readonly T1 B;
 
         [MethodImpl(Inline)]
-        public static implicit operator Bound<T0,T1>(in Paired<T0,T1> src)
-            => new Bound<T0,T1>(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
         public Bound(T0 arg0, T1 arg1)
         {
             A = arg0;

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     using static Konst;
+    using static As;
 
     [ApiHost]
     public readonly struct ArraySpan : IApiHost<ArraySpan>
@@ -169,18 +170,18 @@ namespace Z0
             ref readonly var input = ref head(src);
             ref var target = ref head(dst);
             for(var i=0; i<src.Length; i++)
-                Root.seek(ref target,i) = (ulong)Pointed.pvoid(ref cell(src, i));
+                Root.seek(ref target,i) = (ulong)As.pvoid(cell(src, i));
         }
     
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> bytes<T>(in ArraySpan<T> src)
             where T : struct
-                => Root.cast<T,byte>(src.Cells);
+                => cast<T,byte>(src.Cells);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<byte> byteview<T>(in ArraySpan<T> src)
             where T : struct
-                => Root.cast<T,byte>(src.Cells);
+                => cast<T,byte>(src.Cells);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T pinnable<T>(in ArraySpan<T> src)
@@ -202,7 +203,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref byte seek8<T>(in ArraySpan<T> src, int offset = 0)
             where T : struct
-                => ref Unsafe.As<T,byte>(ref cell(src,offset));
+                => ref @as<T,byte>(ref cell(src,offset));
 
         /// <summary>
         /// Advances a data source reference to a cell-relative offset and presents the offset cell 
@@ -214,7 +215,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref ushort seek16<T>(in ArraySpan<T> src, int offset = 0)
             where T : struct
-                => ref Unsafe.As<T,ushort>(ref cell(src,offset));
+                => ref @as<T,ushort>(ref cell(src,offset));
 
         /// <summary>
         /// Advances a data source reference to a cell-relative offset and presents the offset cell 
@@ -226,7 +227,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref uint seek32<T>(in ArraySpan<T> src, int offset = 0)
             where T : struct
-                => ref Unsafe.As<T,uint>(ref cell(src,offset));
+                => ref @as<T,uint>(ref cell(src,offset));
 
         /// <summary>
         /// Advances a data source reference to a cell-relative offset and presents the offset cell 
@@ -292,13 +293,13 @@ namespace Z0
         public static Span<T> span<S,T>(in ArraySpan<S> src)
             where S : struct
             where T : struct
-                => Root.cast<S,T>(span(src));
+                => cast<S,T>(span(src));
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> view<S,T>(in ArraySpan<S> src)
             where S : struct
             where T : struct            
-                => Root.cast<S,T>(span(src));
+                => cast<S,T>(span(src));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void* pvoid<T>(in ArraySpan<T> src, int offset = 0)
@@ -315,9 +316,5 @@ namespace Z0
             where T : struct
                 => Unsafe.InitBlock(ref seek8(src), value, size(src));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        static unsafe void copy_alt<T>(in ArraySpan<T> src, in ArraySpan<T> dst)
-            where T : struct
-                => Unsafe.CopyBlock(ref seek8(dst), ref Root.edit(skip8(src)), size(src));
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     partial class BitFields
     {            
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public ref readonly FieldSegment segment<T>(in BitField<T> field, int index)
+        public ref readonly BitFieldSegment segment<T>(in BitField<T> field, int index)
             where T : unmanaged
                 => ref field.Segment(index);        
     }

@@ -12,12 +12,12 @@ namespace Z0
     partial class BitFields
     {            
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public T extract<T>(in BitField<T> field, in FieldSegment seg, T src)
+        public T extract<T>(in BitField<T> field, in BitFieldSegment seg, T src)
             where T : unmanaged
                 => field.Extract(seg, src);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public T extract<T>(in BitField<T> field,in FieldSegment seg, T src, bool offset)
+        public T extract<T>(in BitField<T> field,in BitFieldSegment seg, T src, bool offset)
             where T : unmanaged
                 => field.Extract(seg, src, offset);
 
@@ -43,25 +43,25 @@ namespace Z0
                 => extract<F,T>(f, Enums.e8u(i0), Enums.e8u(i1));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T extract<T>(in FieldSegment seg, T src)
+        public static T extract<T>(in BitFieldSegment seg, T src)
             where T : unmanaged
             => gbits.slice(src, seg.StartPos, seg.Width);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T extract<T>(in FieldSegment seg, T src, bool offset)
+        public static T extract<T>(in BitFieldSegment seg, T src, bool offset)
             where T : unmanaged
             => offset ? gmath.sll(extract(seg, src), seg.StartPos) : extract(seg,src);
 
 
         [MethodImpl(Inline)]
-        public static T extract<S,T>(in FieldSegment segment, in S src)
-            where S : IScalarField<T>
+        public static T extract<S,T>(in BitFieldSegment segment, in S src)
+            where S : IScalarBitField<T>
             where T : unmanaged
                 => gbits.slice(src.Scalar, segment.StartPos, segment.Width);
 
         [MethodImpl(Inline)]
-        public static T extract<S,T>(in FieldSegment segment, in S src, bool offset)            
-            where S : IScalarField<T>
+        public static T extract<S,T>(in BitFieldSegment segment, in S src, bool offset)            
+            where S : IScalarBitField<T>
             where T : unmanaged
                 => offset
                  ? gmath.sll(extract<S,T>(segment, src), segment.StartPos)  

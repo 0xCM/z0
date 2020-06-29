@@ -19,8 +19,6 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public Bound(T arg0)
-        {
-            A = arg0;
-        }
+            => A = arg0;
     }
 }

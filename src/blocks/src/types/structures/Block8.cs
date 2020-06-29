@@ -9,6 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;    
         
     using static Konst;
+    using static Root;
+    using static As;
 
     /// <summary>
     /// Defines a span of contiguous memory that can be evenly partitioned into 8-bit segments
@@ -29,11 +31,11 @@ namespace Z0
                     
         [MethodImpl(Inline)]
         internal Block8(Span<T> src)
-            => this.data = src;
+            => data = src;
 
         [MethodImpl(Inline)]
         internal Block8(params T[] src)
-            => this.data = src;
+            => data = src;
 
         /// <summary>
         /// The backing storage
@@ -50,7 +52,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref MemoryMarshal.GetReference(data);
+            get => ref first(data);
         }
 
         public bool IsEmpty
@@ -74,7 +76,7 @@ namespace Z0
         public int BlockLength 
         {
             [MethodImpl(Inline)]
-            get => 2/Unsafe.SizeOf<T>();
+            get => size<T>();
         }            
 
         /// <summary>
@@ -92,7 +94,13 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * (ulong)Unsafe.SizeOf<T>()*8;
+            get => (ulong)CellCount * bitsize<T>();
+        }
+
+        public int ByteCount
+        {
+            [MethodImpl(Inline)]
+            get => size<T>() * CellCount;
         }
 
         /// <summary>
@@ -101,7 +109,7 @@ namespace Z0
         public ref T this[int index] 
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, index);
+            get => ref add(Head, index);
         }
 
         /// <summary>
@@ -119,7 +127,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.Bytes();
+            get => bytes(data);
         }
 
         /// <summary>
@@ -129,7 +137,7 @@ namespace Z0
         /// <param name="segment">The cell relative block index</param>
         [MethodImpl(Inline)]
         public ref T Cell(int block, int segment)
-            => ref Unsafe.Add(ref Head, BlockLength*block + segment);
+            => ref add(Head, BlockLength*block + segment);
 
         /// <summary>
         /// Retrieves an index-identified data block
@@ -137,7 +145,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)    
-            => data.Slice(block * BlockLength, BlockLength);
+            => slice(data,block * BlockLength, BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
@@ -177,7 +185,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block8<S> As<S>()                
             where S : unmanaged
-                => new Block8<S>(MemoryMarshal.Cast<T,S>(data));                    
+                => new Block8<S>(Z0.As.cast<T,S>(data));                    
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()

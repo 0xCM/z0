@@ -15,6 +15,6 @@ namespace Z0.Dynamics.Operators
     public static class One<T>
     {
         public static T Value { get; }
-            = Increment<T>.Apply(Zero<T>.Value);
+            = Inc<T>.Apply(Zero<T>.Value);
     }
 }

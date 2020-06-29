@@ -21,7 +21,7 @@ namespace Z0.Asm
     /// b) 64-bit operand size
     /// c) extended control register operands
     /// </summary>
-    public struct RexPrefix : IScalarField<byte>
+    public struct RexPrefix : IScalarBitField<byte>
     {                    
         public static RexPrefix Empty => Define(0,0,0,0,0);
 

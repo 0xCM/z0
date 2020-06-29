@@ -17,7 +17,7 @@ namespace Z0
     public partial class BitFieldSpecs : IApiHost<BitFieldSpecs>
     {
         public static string[] format(in BitFieldModel src)
-            => BitFieldModelFormatter.Service.FormatLines(src);
+            => BitFieldFormatters.Service.FormatLines(src);
 
         [MethodImpl(Inline)]
         public static BitFieldSpec256<F> specify<F>(W256 w)
@@ -32,7 +32,7 @@ namespace Z0
             return new BitFieldSpec256<F>(data);              
         }
 
-        internal static FieldSegment segment<I,W>(in FieldIndexEntry<I,W> entry, ref byte start)
+        internal static BitFieldSegment segment<I,W>(in BitFieldIndexEntry<I,W> entry, ref byte start)
             where I : unmanaged, Enum
             where W : unmanaged, Enum
         {
@@ -49,13 +49,13 @@ namespace Z0
         /// </summary>
         /// <param name="index">The source index</param>
         /// <typeparam name="W">The enum type with width-defining literals</typeparam>
-        internal static FieldSegment[] segments<I,W>(in FieldIndex<I,W> index)
+        internal static BitFieldSegment[] segments<I,W>(in BitFieldIndex<I,W> index)
             where I : unmanaged, Enum
             where W : unmanaged, Enum
         {            
             var count = index.Length;
             var start = Konst.z8;
-            var segments = new FieldSegment[count];            
+            var segments = new BitFieldSegment[count];            
             for(var i=0; i<count; i++)
                 segments[i] = segment(index[i], ref start);
             return segments;
@@ -69,8 +69,8 @@ namespace Z0
         /// <param name="startpos">The position of the first bit in the segment</param>
         /// <param name="endpos">The position of the last bit in the segment</param>
         [MethodImpl(Inline), Op]
-        public static FieldSegment segment(string name, byte startpos, byte endpos, byte width)
-            => new FieldSegment(name,startpos, endpos, width);
+        public static BitFieldSegment segment(string name, byte startpos, byte endpos, byte width)
+            => new BitFieldSegment(name,startpos, endpos, width);
 
         /// <summary>
         /// Defines a bitfield segment
@@ -80,9 +80,9 @@ namespace Z0
         /// <param name="i0">The position of the first bit in the segment</param>
         /// <param name="i1">The position of the last bit in the segment</param>
         [MethodImpl(Inline)]
-        public static FieldSegment<T> segment<T>(string name, T i0, T i1, T width)
+        public static BitFieldSegment<T> segment<T>(string name, T i0, T i1, T width)
             where T : unmanaged
-                => new FieldSegment<T>(name, i0, i1, width);
+                => new BitFieldSegment<T>(name, i0, i1, width);
 
         /// <summary>
         /// Describes an index-identifed model segment
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source model</param>
         /// <param name="index">The field index</param>
         [MethodImpl(Inline), Op]
-        public static FieldSegment segment(in BitFieldModel src, byte index)
+        public static BitFieldSegment segment(in BitFieldModel src, byte index)
         {
             var width = src.Width(index);
             var i0 = src.Position(index);
@@ -99,7 +99,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static FieldSegment segment<E>(E id, byte startpos, byte endpos)
+        public static BitFieldSegment segment<E>(E id, byte startpos, byte endpos)
             where E : unmanaged, Enum
                 => segment(id.ToString(), startpos, endpos, (byte)(endpos - startpos + 1));
 
@@ -141,7 +141,7 @@ namespace Z0
         /// </summary>
         /// <param name="segments">The defining segments</param>
         [MethodImpl(Inline), Op]
-        public static BitFieldSpec specify(params FieldSegment[] segments)
+        public static BitFieldSpec specify(params BitFieldSegment[] segments)
             => new BitFieldSpec(segments);
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Z0
             where I : unmanaged, Enum
             where U : unmanaged
             where W : unmanaged, Enum
-                => new BitFieldSpec(segments(FieldIndex.Create<I,U,W>()));
+                => new BitFieldSpec(segments(BitFieldIndex.Create<I,U,W>()));
 
         [MethodImpl(Inline)]
         internal static BitFieldSpec GetSpec<I,U,W>()

@@ -85,7 +85,7 @@ namespace Z0.RefOps
             where T :unmanaged
         {
             ref var input = ref @as<S,byte>(ref Root.edit(src));
-            ref var target = ref @as<T,byte>(ref add(ref dst, dstOffset));
+            ref var target = ref @as<T,byte>(ref add(dst, dstOffset));
             var dstSize =  srcCount*size<S>();
             sys.copy(input, ref target, dstSize);
             return dstSize;

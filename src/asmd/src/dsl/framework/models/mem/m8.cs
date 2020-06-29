@@ -9,7 +9,6 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-
     public readonly struct m8 : IMemOp8<m8,byte>
     {
         public readonly byte Data;
@@ -24,9 +23,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public m8(byte src)
-        {
-            Data = src;
-        }        
+            => Data = src;
 
         public DataWidth Width 
             => DataWidth.W8;

@@ -52,7 +52,7 @@ namespace Z0
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline)]
         public static BitField<S,E,T> create<S,E,T>(in BitFieldSpec spec)
-            where S : IScalarField<T>
+            where S : IScalarBitField<T>
             where E : unmanaged, Enum
             where T : unmanaged
                 => new BitField<S,E,T>(spec);
@@ -90,7 +90,7 @@ namespace Z0
         /// <typeparam name="W">A width-defining enumeration</typeparam>
         [MethodImpl(Inline)]
         public static BitField<S,E,T> create<S,E,T,W>()
-            where S : IScalarField<T>
+            where S : IScalarBitField<T>
             where E : unmanaged, Enum
             where W : unmanaged, Enum
             where T : unmanaged

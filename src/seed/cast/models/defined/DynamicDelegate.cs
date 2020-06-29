@@ -37,16 +37,16 @@ namespace Z0
         public readonly Delegate DynamicOp;
 
         [MethodImpl(Inline)]
-        public static DynamicDelegate Define(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
+        public static DynamicDelegate define(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
             => new DynamicDelegate(id, src, dst, op);
 
         [MethodImpl(Inline)]
-        DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
+        public DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
         {
-            this.Id = id;
-            this.SourceMethod = src;
-            this.TargetMethod = dst;
-            this.DynamicOp = op;
+            Id = id;
+            SourceMethod = src;
+            TargetMethod = dst;
+            DynamicOp = op;
         }
 
         /// <summary>

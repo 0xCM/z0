@@ -8,18 +8,26 @@ namespace Z0.Asm.Dsl
     using System.Runtime.CompilerServices;
     
     using static Konst;
+    using static math;
 
     public readonly struct r32 : IRegOp32
     {   
-        public uint Content  {get;}
+        readonly ulong Data;
 
-        public RegisterKind Kind {get;}             
+        public uint Content
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Data;
+        }
+
+        public RegisterKind Kind 
+        {
+            [MethodImpl(Inline)]
+            get => (RegisterKind)srl(Data, 32);
+        }
 
         [MethodImpl(Inline)]
         public r32(uint value, RegisterKind kind)
-        {
-            Content = value;
-            Kind = kind;
-        }
+            => Data = or((ulong)value, sll((ulong)kind, 32));
     } 
 }
