@@ -13,7 +13,7 @@ namespace Z0.Asm.Dsl
     
     public readonly struct rax : IRegOp64<rax,N0>
     {        
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r64(rax src)
@@ -22,7 +22,7 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public rax(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.RAX;
@@ -30,13 +30,13 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }
 
     public readonly struct rcx : IRegOp64<rcx,N1>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r64(rcx src)
@@ -45,7 +45,7 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public rcx(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.RAX;
@@ -53,13 +53,13 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }    
 
     public readonly struct rdx : IRegOp64<rdx,N2>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r64(rdx src)
@@ -68,7 +68,7 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public rdx(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.RDX;
@@ -76,13 +76,13 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }    
 
     public readonly struct rbx : IRegOp64<rbx,N3>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r64(rbx src)
@@ -91,7 +91,7 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public rbx(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.RBX;
@@ -99,13 +99,13 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }    
 
     public readonly struct rsi : IRegOp64<rsi,N4>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r64(rsi src)
@@ -114,7 +114,7 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public rsi(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.RSI;
@@ -122,18 +122,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }    
 
     public readonly struct rdi : IRegOp64<rdi,N5>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public rdi(ulong value)
         {
-            Value = value;
+            Content = value;
         }
         
         public K Kind => K.RDI;
@@ -141,18 +141,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }        
 
     public readonly struct rsp : IRegOp64<rsp,N6>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public rsp(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.RSP;
@@ -160,18 +160,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }            
 
     public readonly struct rbp : IRegOp64<rbp,N7>
     {            
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public rbp(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.RBP;
@@ -179,18 +179,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }                
 
     public readonly struct r8q : IRegOp64<r8q,N8>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public r8q(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.R8Q;
@@ -198,18 +198,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }                    
 
     public readonly struct r9q : IRegOp64<r9q,N9>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public r9q(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.R9Q;
@@ -217,18 +217,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }                        
 
     public readonly struct r10q : IRegOp64<r10q,N10>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public r10q(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.R10Q;
@@ -236,18 +236,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }                        
 
     public readonly struct r11q : IRegOp64<r11q,N11>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public r11q(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.R11Q;
@@ -255,18 +255,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }                        
 
     public readonly struct r12q : IRegOp64<r12q,N12>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public r12q(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.R12Q;
@@ -274,18 +274,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }                    
 
     public readonly struct r13q : IRegOp64<r13q,N13>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public r13q(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.R13Q;
@@ -293,18 +293,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }                        
 
     public readonly struct r14q : IRegOp64<r14q,N14>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public r14q(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.R14Q;
@@ -312,18 +312,18 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     }                        
 
     public readonly struct r15q : IRegOp64<r15q,N15>
     {
-        public ulong Value  {get;}
+        public ulong Content  {get;}
 
         [MethodImpl(Inline)]
         public r15q(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public K Kind => K.R15Q;
@@ -331,7 +331,7 @@ namespace Z0.Asm.Dsl
         public r64 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r64(Value, Kind);
+            get =>new r64(Content, Kind);
         }
     } 
 }

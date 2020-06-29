@@ -25,7 +25,7 @@ namespace Z0
                 return ParseResult.Fail<Pair<T>>(src);
             
             var parser = NumericParser.create<T>();
-            var result = Option.Try(() => Pairs.pair(parser.Parse(indices[0]).ValueOrDefault(), parser.Parse(indices[1]).ValueOrDefault()));
+            var result = Option.Try(() => Tuples.pair(parser.Parse(indices[0]).ValueOrDefault(), parser.Parse(indices[1]).ValueOrDefault()));
             if(result.IsSome())
                 return ParseResult.Success(src, result.Value());
             else

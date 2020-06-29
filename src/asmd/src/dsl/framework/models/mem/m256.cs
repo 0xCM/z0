@@ -9,16 +9,17 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct mem32 : IMemOp32<mem32>
+    public readonly struct m256 : IMemOp256<m256>
     {
-        public Fixed32 Value {get;}
+        public Fixed256 Content {get;}
 
         [MethodImpl(Inline)]
-        public mem32(Fixed32 src)
+        public m256(Fixed256 src)
         {
-            Value = src;
+            Content = src;
         }
-        
-        public DataWidth Width => DataWidth.W32;
+
+        public DataWidth Width 
+            => DataWidth.W256;
     }
 }

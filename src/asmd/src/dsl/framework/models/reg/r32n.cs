@@ -13,12 +13,12 @@ namespace Z0.Asm.Dsl
     public readonly struct r32<N> : IRegOp32<r32<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public uint Value {get;}
+        public uint Content {get;}
 
         [MethodImpl(Inline)]
         public r32(uint value)
         {
-            Value = value;
+            Content = value;
         }
 
         public RegisterKind Kind 

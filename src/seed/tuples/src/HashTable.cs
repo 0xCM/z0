@@ -61,8 +61,8 @@ namespace Z0
                     if(args.Length != 2)
                         break;
 
-                    pPair = Pairs.pair(kvpProps[0],kvpProps[1]);
-                    tPair = Pairs.pair(args[0],args[1]);
+                    pPair = Tuples.pair(kvpProps[0],kvpProps[1]);
+                    tPair = Tuples.pair(args[0],args[1]);
                 }
 
                 var kvp = enumerator.Current;

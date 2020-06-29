@@ -11,16 +11,15 @@ namespace Z0.Asm.Dsl
 
     public readonly struct imm32 : IImmOp32<imm32>
     {
-        public uint Value {get;}
-
+        public Imm32 Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator imm32(uint src)
             => new imm32(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator imm32(Fixed8 src)
-            => new imm32(src);
+        public static implicit operator imm32(Imm32 src)
+            => new imm32(src.Data);
 
         [MethodImpl(Inline)]
         public static implicit operator imm32(Fixed16 src)
@@ -29,29 +28,29 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public static bool operator <(imm32 a, imm32 b)
-            => a.Value < b.Value;
+            => a.Content < b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator >(imm32 a, imm32 b)
-            => a.Value > b.Value;
+            => a.Content > b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator <=(imm32 a, imm32 b)
-            => a.Value <= b.Value;
+            => a.Content <= b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator >=(imm32 a, imm32 b)
-            => a.Value >= b.Value;
+            => a.Content >= b.Content;
 
         [MethodImpl(Inline)]
-        public imm32(uint value)
+        public imm32(uint src)
         {
-            Value = value;
+            Content = src;
         }
 
         [MethodImpl(Inline)]
         public Address32 ToAddress()
-            => Addresses.address32((uint)Value);
+            => Addresses.address32((uint)Content);
 
         public DataWidth Width 
             => DataWidth.W32;

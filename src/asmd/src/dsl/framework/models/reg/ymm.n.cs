@@ -13,12 +13,12 @@ namespace Z0.Asm.Dsl
     public readonly struct ymm<N> : IYmmRegOp<ymm<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public Fixed256 Value {get;}
+        public Fixed256 Content {get;}
 
         [MethodImpl(Inline)]
         public ymm(Fixed256 value)
         {
-            Value = value;
+            Content = value;
         }
 
         public RegisterKind Kind 

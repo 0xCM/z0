@@ -11,7 +11,7 @@ namespace Z0.Asm.Dsl
 
     public readonly struct imm64 : IImmOp64<imm64>
     {
-        public ulong Value {get;}
+        public Imm64 Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator imm64(ulong src)
@@ -23,29 +23,29 @@ namespace Z0.Asm.Dsl
             => new imm64(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator imm64(Fixed16 src)
-            => new imm64(src);
+        public static implicit operator imm64(Imm64 src)
+            => new imm64(src.Data);
 
         [MethodImpl(Inline)]
         public static bool operator <(imm64 a, imm64 b)
-            => a.Value < b.Value;
+            => a.Content < b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator >(imm64 a, imm64 b)
-            => a.Value > b.Value;
+            => a.Content > b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator <=(imm64 a, imm64 b)
-            => a.Value <= b.Value;
+            => a.Content <= b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator >=(imm64 a, imm64 b)
-            => a.Value >= b.Value;
+            => a.Content >= b.Content;
 
         [MethodImpl(Inline)]
         public imm64(ulong value)
         {
-            Value = value;
+            Content = value;
         }
         
         public DataWidth Width 
@@ -53,10 +53,10 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public Address64 ToAddress()
-            => Addresses.address64((ulong)Value);
+            => Addresses.address64((ulong)Content);
 
         public string Format()
-            => Value.FormatHex();
+            => Content.Data.FormatHex();
 
         public override string ToString()
             => Format();

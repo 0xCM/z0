@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <summary>
         /// The operand value
         /// </summary>
-        T Value {get;}   
+        T Content {get;}   
 
         BitSize ISized.Width 
             => bitsize<T>();

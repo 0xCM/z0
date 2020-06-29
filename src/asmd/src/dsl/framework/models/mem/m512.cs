@@ -6,20 +6,20 @@ namespace Z0.Asm.Dsl
 {        
     using System;
     using System.Runtime.CompilerServices;
-    
+        
     using static Konst;
 
-    public readonly struct mem16 : IMemOp16<mem16>        
+    public readonly struct m512 : IMemOp512<m512>
     {
-        public Fixed16 Value {get;}
-
+        public Fixed512 Content {get;}
 
         [MethodImpl(Inline)]
-        public mem16(Fixed16 src)
+        public m512(Fixed512 src)
         {
-            Value = src;
+            Content = src;
         }
 
-        public DataWidth Width => DataWidth.W16;
+        public DataWidth Width 
+            => DataWidth.W512;
     }
 }

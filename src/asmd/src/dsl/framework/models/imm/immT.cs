@@ -13,12 +13,12 @@ namespace Z0.Asm.Dsl
     public readonly struct imm<T> : IImmOp<T>
         where T : unmanaged
     {
-        public T Value {get;}
+        public T Content {get;}
 
         [MethodImpl(Inline)]
         public imm(T value)
         {
-            Value = value;
+            Content = value;
         }
 
         public DataWidth Width 
@@ -32,18 +32,18 @@ namespace Z0.Asm.Dsl
         where T : unmanaged
         where E : unmanaged, Enum
     {
-        public @enum<E,T> Value {get;}
+        public @enum<E,T> Content {get;}
 
         [MethodImpl(Inline)]
         public imm(@enum<E,T> value)
         {
-            Value = value;
+            Content = value;
         }
 
         public DataWidth Width 
         {
             [MethodImpl(Inline)]
-            get => Value.Width;
+            get => Content.Width;
         }
     }    
 }

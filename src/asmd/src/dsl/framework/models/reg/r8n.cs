@@ -13,12 +13,12 @@ namespace Z0.Asm.Dsl
     public readonly struct r8<N> : IRegOp8<r8<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public byte Value {get;}
+        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public r8(byte value)
         {
-            Value = value;
+            Content = value;
         }
 
         public RegisterKind Kind 

@@ -37,11 +37,11 @@ namespace Z0
             return false;
         }
 
-        public static Imm8Value[] ToImm8Values(this byte[] src, ImmRefinementKind kind)
-            => src.Map(x => new Imm8Value(x,kind));
+        public static Imm8R[] ToImm8Values(this byte[] src, ImmRefinementKind kind)
+            => src.Map(x => new Imm8R(x, kind != 0));
 
-        public static Imm8Value[] ToImm8Values(this IEnumerable<byte> src, ImmRefinementKind kind)
-            => src.Map(x => new Imm8Value(x,kind));
+        public static Imm8R[] ToImm8Values(this IEnumerable<byte> src, ImmRefinementKind kind)
+            => src.Map(x => new Imm8R(x, kind != 0));
         
         /// <summary>
         /// Determines whether a parameters is an unrefined immediate

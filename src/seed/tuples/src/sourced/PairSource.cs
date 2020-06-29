@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Pair<T> next<T>(IValueSource source, T t = default)
             where T : struct
-                => Pairs.pair(VS.next(source, t), VS.next(source, t));
+                => Tuples.pair(VS.next(source, t), VS.next(source, t));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static IEnumerable<Pair<T>> stream<T>(IValueSource source, T t = default)

@@ -14,7 +14,7 @@ namespace Z0.Asm.Dsl
     /// </summary>
     public readonly struct arg32 : IOperand<arg32,W32,uint>
     {
-        public uint Value {get;}
+        public uint Content {get;}
 
         public SignKind Sign {get;}
 
@@ -23,7 +23,7 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public arg32(uint value, SignKind sign, OperandKind kind)
         {
-            Value = value;
+            Content = value;
             OpKind = kind;
             Sign = sign;
         }

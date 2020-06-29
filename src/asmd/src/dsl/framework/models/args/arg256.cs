@@ -14,7 +14,7 @@ namespace Z0.Asm.Dsl
     /// </summary>
     public readonly struct arg256: IOperand<arg256,W256,Fixed256>
     {
-        public Fixed256 Value {get;}
+        public Fixed256 Content {get;}
 
         public SignKind Sign {get;}
 
@@ -23,7 +23,7 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public arg256(Fixed256 value, SignKind sign, OperandKind kind)
         {
-            Value = value;
+            Content = value;
             OpKind = kind;
             Sign = sign;
         }

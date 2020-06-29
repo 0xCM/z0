@@ -21,4 +21,11 @@ namespace Z0
         BitSize ISized.Width 
             => Widths.data<W>();
     }
+
+    public interface ISized<F,W> : ISized<W>
+        where F : unmanaged, ISized<F,W>
+        where W : unmanaged, IDataWidth
+    {        
+
+    }
 }

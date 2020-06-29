@@ -14,7 +14,7 @@ namespace Z0.Asm.Dsl
     /// </summary>
     public readonly struct arg64 : IOperand<arg64,W64,ulong>
     {
-        public ulong Value {get;}
+        public ulong Content {get;}
 
         public SignKind Sign {get;}
 
@@ -23,7 +23,7 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public arg64(ulong value, SignKind sign, OperandKind kind)
         {
-            Value = value;
+            Content = value;
             OpKind = kind;
             Sign = sign;
         }

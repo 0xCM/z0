@@ -13,12 +13,12 @@ namespace Z0.Asm.Dsl
     public readonly struct r64<N> : IRegOp64<r64<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public ulong Value {get;}
+        public ulong Content {get;}
 
         [MethodImpl(Inline)]
         public r64(ulong value)
         {
-            Value = value;
+            Content = value;
         }
 
         public RegisterKind Kind 

@@ -31,25 +31,25 @@ namespace Z0.Asm
 
     }
 
-    public interface IMemOp8<F> : IMemOp<F,W8,Fixed8>
+    public interface IMemOp8<F> : IMemOp<F,W8,byte>
         where F : unmanaged, IMemOp8<F>
     {
 
     }
 
-    public interface IMemOp16<F> : IMemOp<F,W16,Fixed16>
+    public interface IMemOp16<F> : IMemOp<F,W16,ushort>
         where F : unmanaged, IMemOp16<F>
     {
 
     }
 
-    public interface IMemOp32<F> : IMemOp<F,W32,Fixed32>
+    public interface IMemOp32<F> : IMemOp<F,W32,uint>
         where F : unmanaged, IMemOp32<F>
     {
 
     }
 
-    public interface IMemOp64<F> : IMemOp<F,W64,Fixed64>
+    public interface IMemOp64<F> : IMemOp<F,W64,ulong>
         where F : unmanaged, IMemOp64<F>
     {
 

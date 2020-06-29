@@ -11,14 +11,14 @@ namespace Z0.Asm.Dsl
 
     public readonly struct r8 : IRegOp8
     {    
-        public byte Value  {get;}
+        public byte Content  {get;}
         
         public RegisterKind Kind {get;}        
         
         [MethodImpl(Inline)]
         public r8(byte value, RegisterKind kind)
         {
-            Value = value;
+            Content = value;
             Kind = kind;
         }            
     } 

@@ -11,11 +11,15 @@ namespace Z0.Asm.Dsl
 
     public readonly struct imm16 : IImmOp16<imm16>
     {
-        public ushort Value {get;}
+        public Imm16 Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator imm16(ushort src)
             => new imm16(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator imm16(Imm16 src)
+            => new imm16(src.Data);
 
         [MethodImpl(Inline)]
         public static implicit operator imm16(byte src)
@@ -23,35 +27,35 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public static bool operator <(imm16 a, imm16 b)
-            => a.Value < b.Value;
+            => a.Content < b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator >(imm16 a, imm16 b)
-            => a.Value > b.Value;
+            => a.Content > b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator <=(imm16 a, imm16 b)
-            => a.Value <= b.Value;
+            => a.Content <= b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator >=(imm16 a, imm16 b)
-            => a.Value >= b.Value;
+            => a.Content >= b.Content;
 
         [MethodImpl(Inline)]
         public imm16(byte value)
         {
-            Value = value;
+            Content = value;
         }
 
         [MethodImpl(Inline)]
-        public imm16(Fixed16 value)
+        public imm16(Imm16 value)
         {
-            Value = value;
+            Content = value;
         }
 
         [MethodImpl(Inline)]
         public Address16 ToAddress()
-            => Addresses.address16((ushort)Value);
+            => Addresses.address16((ushort)Content);
 
         public DataWidth Width 
             => DataWidth.W16;

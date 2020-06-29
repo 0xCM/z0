@@ -15,11 +15,6 @@ namespace Z0.Asm
         IOperand[] Args {get;}
 
         /// <summary>
-        /// The instruction op code
-        /// </summary>
-        CmdOpCode Code {get;}
-
-        /// <summary>
         /// The number of arguments accepted by the operand
         /// </summary>
         int Arity => Args.Length;

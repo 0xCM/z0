@@ -13,12 +13,12 @@ namespace Z0.Asm.Dsl
     public readonly struct zmm<N> : IZmmRegOp<zmm<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public Fixed512 Value {get;}
+        public Fixed512 Content {get;}
 
         [MethodImpl(Inline)]
         public zmm(Fixed512 value)
         {
-            Value = value;
+            Content = value;
         }
 
         public RegisterKind Kind 

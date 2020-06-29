@@ -13,12 +13,12 @@ namespace Z0.Asm.Dsl
     public readonly struct r16<N> : IRegOp16<r16<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public ushort Value {get;}
+        public ushort Content {get;}
 
         [MethodImpl(Inline)]
         public r16(ushort value)
         {
-            Value = value;
+            Content = value;
         }
 
         public RegisterKind Kind 

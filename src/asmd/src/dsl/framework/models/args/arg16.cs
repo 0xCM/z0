@@ -14,7 +14,7 @@ namespace Z0.Asm.Dsl
     /// </summary>
     public readonly struct arg16 : IOperand<arg16,W16,ushort>
     {
-        public ushort Value {get;}
+        public ushort Content {get;}
 
         public SignKind Sign {get;}
 
@@ -23,7 +23,7 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public arg16(ushort value, SignKind sign, OperandKind kind)
         {
-            Value = value;
+            Content = value;
             OpKind = kind;
             Sign = sign;
         }

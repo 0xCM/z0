@@ -9,21 +9,24 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Imm8Value
+    /// <summary>
+    /// Describes an 8-bit immediate that is potentially refined
+    /// </summary>
+    public readonly struct Imm8R
     {
-        public readonly byte Value;
+        public readonly byte Data;
 
-        public readonly ImmRefinementKind Refinement;
-
-        [MethodImpl(Inline)]
-        public static implicit operator byte(Imm8Value imm8)
-            => imm8.Value;
+        public readonly bool Refined;
 
         [MethodImpl(Inline)]
-        public Imm8Value(byte value, ImmRefinementKind refinement)
+        public static implicit operator byte(Imm8R imm8)
+            => imm8.Data;
+
+        [MethodImpl(Inline)]
+        public Imm8R(byte value, bool refined)
         {
-            Value = value;
-            Refinement = refinement;
+            Data = value;
+            Refined = refined;
         }
     }
 }

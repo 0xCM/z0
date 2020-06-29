@@ -11,14 +11,14 @@ namespace Z0.Asm.Dsl
 
     public readonly struct r32 : IRegOp32
     {   
-        public uint Value  {get;}
+        public uint Content  {get;}
 
         public RegisterKind Kind {get;}             
 
         [MethodImpl(Inline)]
         public r32(uint value, RegisterKind kind)
         {
-            Value = value;
+            Content = value;
             Kind = kind;
         }
     } 

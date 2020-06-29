@@ -9,16 +9,18 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct mem256 : IMemOp256<mem256>
+    /// <summary>
+    /// Defines an enclosure for a single operand
+    /// </summary>
+    public readonly struct Bound<T>
+        where T : unmanaged, IOperand
     {
-        public Fixed256 Value {get;}
+        public readonly T A;
 
         [MethodImpl(Inline)]
-        public mem256(Fixed256 src)
+        public Bound(T arg0)
         {
-            Value = src;
+            A = arg0;
         }
-
-        public DataWidth Width => DataWidth.W256;
     }
 }

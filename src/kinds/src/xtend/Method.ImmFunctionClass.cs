@@ -24,7 +24,7 @@ namespace Z0
             if(count == 0 || count > 2)
                 return 0;
 
-            var immc = Imm8;
+            var immc = Z0.ImmFunctionClass.Imm8;
             var first = parms.First();
             switch(count)
             {

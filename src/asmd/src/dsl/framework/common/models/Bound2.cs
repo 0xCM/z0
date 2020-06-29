@@ -6,34 +6,29 @@ namespace Z0.Asm.Dsl
 {        
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
-    /// Defines an instruction that accepts one argument
+    /// Defines an enclosure for a pair of operands
     /// </summary>
-    public readonly struct cmd<X0> : ICmd<cmd<X0>,X0>
-        where X0 : struct, IOperand
+    public readonly struct Bound<T0,T1>
+        where T0 : unmanaged, IOperand
+        where T1 : unmanaged, IOperand
     {
-        public CmdOpCode Code {get;}
+        public readonly T0 A;
 
-        public X0 A {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator cmd(cmd<X0> src)
-            => src.Untyped;
+        public readonly T1 B;
 
         [MethodImpl(Inline)]
-        public cmd(CmdOpCode code, X0 arg0)
+        public static implicit operator Bound<T0,T1>(in Paired<T0,T1> src)
+            => new Bound<T0,T1>(src.Left, src.Right);
+
+        [MethodImpl(Inline)]
+        public Bound(T0 arg0, T1 arg1)
         {
-            Code = code;
             A = arg0;
-        }
-
-        public cmd Untyped 
-        { 
-            [MethodImpl(Inline)] 
-            get => new cmd(A);
+            B = arg1;
         }
     }
 }

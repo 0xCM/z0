@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+    
     using static Konst;
 
     partial class Tuples
@@ -13,9 +16,9 @@ namespace Z0
         /// </summary>
         /// <param name="count">The store capacity</param>
         /// <typeparam name="T">The member type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Pairs<T> pairs<T>(int count)
             where T : unmanaged
-                => new Pairs<T>(new Pair<T>[count]);
+                => new Pairs<T>(sys.alloc<Pair<T>>(count));
     }
 }

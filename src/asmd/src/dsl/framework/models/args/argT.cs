@@ -13,7 +13,7 @@ namespace Z0.Asm.Dsl
     public readonly struct arg<T> : IOperand<T>
         where T : unmanaged
     {
-        public T Value {get;}
+        public T Content {get;}
 
         public SignKind Sign {get;}
 
@@ -24,7 +24,7 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public arg(T value, SignKind sign, OperandKind kind, uint width)
         {
-            Value = value;
+            Content = value;
             Sign = sign;
             Width =  width;
             OpKind = kind;

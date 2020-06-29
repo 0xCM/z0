@@ -13,12 +13,12 @@ namespace Z0.Asm.Dsl
     public readonly struct xmm<N> : IXmmRegOp<xmm<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public Fixed128 Value {get;}
+        public Fixed128 Content {get;}
 
         [MethodImpl(Inline)]
         public xmm(Fixed128 value)
         {
-            Value = value;
+            Content = value;
         }
 
         public RegisterKind Kind 

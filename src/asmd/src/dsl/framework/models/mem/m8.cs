@@ -9,14 +9,22 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct mem8 : IMemOp8<mem8>
+    public readonly struct m8 : IMemOp8<m8>
     {
-        public Fixed8 Value {get;}
+        public byte Content {get;}
 
         [MethodImpl(Inline)]
-        public mem8(Fixed8 src)
+        public static implicit operator m8(byte src)
+            => new m8(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(m8 src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public m8(byte src)
         {
-            Value = src;
+            Content = src;
         }        
 
         public DataWidth Width => DataWidth.W8;
