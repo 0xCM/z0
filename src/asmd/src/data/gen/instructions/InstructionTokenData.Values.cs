@@ -6,7 +6,7 @@ namespace Z0.Asm.Data
 {
     using System;
 
-    using static InstructionTokenValue;
+    using static InstructionTokenDefinitions;
 
     partial class InstructionTokenData
     {

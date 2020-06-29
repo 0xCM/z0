@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FileName Define<A>(string name, A ext)
             where A : unmanaged, IAsciSequence
-                => new FileName(name, ext.Text);
+                => new FileName(name, ext.Format());
 
         /// <summary>
         /// Does the file have an extension?

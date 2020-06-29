@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
 
-    public readonly struct imm32 : IImmOp32<imm32>
+    public readonly struct imm32 : IImmAddress32<imm32>
     {
         public Imm32 Content {get;}
 

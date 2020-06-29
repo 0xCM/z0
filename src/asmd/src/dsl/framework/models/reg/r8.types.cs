@@ -11,9 +11,12 @@ namespace Z0.Asm.Dsl
 
     using K = RegisterKind;
         
-    public readonly struct al : IRegOp8<al,N0>
+    public readonly struct al : IRegOp8<al,byte>
     {            
-        public byte Content {get;}
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
 
         [MethodImpl(Inline)]
         public static implicit operator r8(al src)
@@ -21,45 +24,56 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public al(byte value)
-        {
-            Content = value;
-        }
+            => Data = value;
 
-        public K Kind => K.AL;
+        public K Kind 
+            => K.AL;
 
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
     }
 
-    public readonly struct cl : IRegOp8<cl,N1>
+    public readonly struct cl : IRegOp8<cl,byte>
     {        
-        public byte Content {get;}
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Data, Kind);
+        }
+        
+        [MethodImpl(Inline)]
+        public cl(byte value)
+        {
+            Data = value;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator r8(cl src)
             => src.Generalized;
 
-        [MethodImpl(Inline)]
-        public cl(byte value)
-        {
-            Content = value;
-        }
-
         public K Kind => K.CL;
+    }    
+
+    public readonly struct dl : IRegOp8<dl,byte>
+    {            
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
 
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }    
-
-    public readonly struct dl : IRegOp8<dl,N2>
-    {            
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r8(dl src)
@@ -68,21 +82,24 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public dl(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.DL;
+    }    
+
+    public readonly struct bl : IRegOp8<bl,byte>
+    {        
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
 
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }    
-
-    public readonly struct bl : IRegOp8<bl,N3>
-    {        
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r8(bl src)
@@ -91,21 +108,25 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public bl(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.BL;
 
+    }    
+
+    public readonly struct sil : IRegOp8<sil,byte>
+    {            
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
+
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }    
-
-    public readonly struct sil : IRegOp8<sil,N4>
-    {            
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r8(sil src)
@@ -114,21 +135,24 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public sil(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.SIL;
+    }    
+
+    public readonly struct dil : IRegOp8<dil,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
 
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }    
-
-    public readonly struct dil : IRegOp8<dil,N5>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r8(dil src)
@@ -137,21 +161,25 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public dil(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.DIL;
 
+    }        
+
+    public readonly struct spl : IRegOp8<spl,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
+
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }        
-
-    public readonly struct spl : IRegOp8<spl,N6>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r8(spl src)
@@ -160,21 +188,24 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public spl(byte value)
         {
-            Content = value;
+            Data = value;
         }
-
         public K Kind => K.SPL;
+
+    }            
+
+    public readonly struct bpl : IRegOp8<bpl,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
 
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }            
-
-    public readonly struct bpl : IRegOp8<bpl,N7>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r8(bpl src)
@@ -183,21 +214,24 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public bpl(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.BPL;
+    }                
+
+    public readonly struct r8b : IRegOp8<r8b,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
 
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }                
-
-    public readonly struct r8b : IRegOp8<r8b,N8>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator r8(r8b src)
@@ -206,148 +240,169 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public r8b(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.R8L;
 
+    }                    
+
+    public readonly struct r9b : IRegOp8<r9b,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
+
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }                    
-
-    public readonly struct r9b : IRegOp8<r9b,N9>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public r9b(byte value)
         {
-            Content = value;
+            Data = value;
         }
-
+        
         public K Kind => K.R9L;
+    }                        
+
+    public readonly struct r10b : IRegOp8<r10b,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
 
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }                        
-
-    public readonly struct r10b : IRegOp8<r10b,N10>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public r10b(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.R10L;
 
+
+    }                        
+
+    public readonly struct r11b : IRegOp8<r11b,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
+
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }                        
-
-    public readonly struct r11b : IRegOp8<r11b,N11>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public r11b(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.R11L;
 
+    }                        
+
+    public readonly struct r12b : IRegOp8<r12b,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
+
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }                        
-
-    public readonly struct r12b : IRegOp8<r12b,N12>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public r12b(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.R12L;
+    }                    
+
+    public readonly struct r13b : IRegOp8<r13b,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
 
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }                    
-
-    public readonly struct r13b : IRegOp8<r13b,N13>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public r13b(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.R13L;
 
+    }                        
+
+    public readonly struct r14b : IRegOp8<r14b,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
+
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }                        
-
-    public readonly struct r14b : IRegOp8<r14b,N14>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public r14b(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.R14L;
 
+    }                        
+
+    public readonly struct r15b : IRegOp8<r15b,byte>
+    {
+        public readonly byte Data;
+
+        byte IOperand<byte>.Content 
+            => Data;
+
         public r8 Generalized
         {
             [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
+            get =>new r8(Data, Kind);
         }
-    }                        
-
-    public readonly struct r15b : IRegOp8<r15b,N15>
-    {
-        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public r15b(byte value)
         {
-            Content = value;
+            Data = value;
         }
 
         public K Kind => K.R15L;
-
-        public r8 Generalized
-        {
-            [MethodImpl(Inline)]
-            get =>new r8(Content, Kind);
-        }
     }
 }

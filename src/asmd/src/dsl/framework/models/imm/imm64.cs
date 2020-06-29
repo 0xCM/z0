@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct imm64 : IImmOp64<imm64>
+    public readonly struct imm64 : IImmAddress64<imm64>
     {
         public Imm64 Content {get;}
 

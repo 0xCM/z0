@@ -11,7 +11,7 @@ namespace Z0.Asm.Dsl
 
     using K = RegisterKind;
 
-    public readonly struct ax : IRegOp16<ax,N0>
+    public readonly struct ax : IRegOp16<ax,ushort>
     {
         public ushort Content  {get;}
 
@@ -34,7 +34,7 @@ namespace Z0.Asm.Dsl
         }
     }
 
-    public readonly struct cx : IRegOp16<cx,N1>
+    public readonly struct cx : IRegOp16<cx,ushort>
     {
         public ushort Content  {get;}
 
@@ -57,7 +57,7 @@ namespace Z0.Asm.Dsl
         }
     }    
 
-    public readonly struct dx : IRegOp16<dx,N2>
+    public readonly struct dx : IRegOp16<dx,ushort>
     {        
         public ushort Content  {get;}
 
@@ -81,7 +81,7 @@ namespace Z0.Asm.Dsl
 
     }    
 
-    public readonly struct bx : IRegOp16<bx,N3>
+    public readonly struct bx : IRegOp16<bx,ushort>
     {
         public ushort Content  {get;}
 
@@ -104,7 +104,7 @@ namespace Z0.Asm.Dsl
         }
     }    
 
-    public readonly struct si : IRegOp16<si,N4>
+    public readonly struct si : IRegOp16<si,ushort>
     {
         public ushort Content  {get;}
 
@@ -128,7 +128,7 @@ namespace Z0.Asm.Dsl
 
     }    
 
-    public readonly struct di : IRegOp16<di,N5>
+    public readonly struct di : IRegOp16<di,ushort>
     {
         public ushort Content  {get;}
 
@@ -151,7 +151,7 @@ namespace Z0.Asm.Dsl
         }
     }        
 
-    public readonly struct sp : IRegOp16<sp,N6>
+    public readonly struct sp : IRegOp16<sp,ushort>
     {            
         public ushort Content  {get;}
 
@@ -175,7 +175,7 @@ namespace Z0.Asm.Dsl
         }
     }            
 
-    public readonly struct bp : IRegOp16<bp,N7>
+    public readonly struct bp : IRegOp16<bp,ushort>
     {
         public ushort Content  {get;}
 
@@ -198,7 +198,7 @@ namespace Z0.Asm.Dsl
         }
     }                
 
-    public readonly struct r8w : IRegOp16<r8w,N8>
+    public readonly struct r8w : IRegOp16<r8w,ushort>
     {
         public ushort Content  {get;}
 
@@ -222,7 +222,7 @@ namespace Z0.Asm.Dsl
         }
     }                    
 
-    public readonly struct r9w : IRegOp16<r9w,N9>
+    public readonly struct r9w : IRegOp16<r9w,ushort>
     {
         public ushort Content  {get;}
 
@@ -245,7 +245,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r10w : IRegOp16<r10w,N10>
+    public readonly struct r10w : IRegOp16<r10w,ushort>
     {        
         public ushort Content  {get;}
 
@@ -268,7 +268,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r11w : IRegOp16<r11w,N11>
+    public readonly struct r11w : IRegOp16<r11w,ushort>
     {            
         public ushort Content  {get;}
 
@@ -291,7 +291,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r12w : IRegOp16<r12w,N12>
+    public readonly struct r12w : IRegOp16<r12w,ushort>
     {
         public ushort Content  {get;}
 
@@ -314,7 +314,7 @@ namespace Z0.Asm.Dsl
         }
     }                    
 
-    public readonly struct r13w : IRegOp16<r13w,N13>
+    public readonly struct r13w : IRegOp16<r13w,ushort>
     {
         public ushort Content  {get;}
 
@@ -337,7 +337,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r14w : IRegOp16<r14w,N14>
+    public readonly struct r14w : IRegOp16<r14w,ushort>
     {            
         public ushort Content  {get;}
 
@@ -360,7 +360,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r15w : IRegOp16<r15w,N15>
+    public readonly struct r15w : IRegOp16<r15w,ushort>
     {
         public ushort Content  {get;}
 

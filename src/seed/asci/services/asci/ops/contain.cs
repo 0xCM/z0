@@ -12,9 +12,13 @@ namespace Z0
 
     partial struct asci
     {         
+        [MethodImpl(Inline), Op]
+        public static AsciSequence sequence(byte[] src)
+            => new AsciSequence(src, asci.length(src));
+
         [MethodImpl(Inline)]
-        public static AsciContainer<A> contain<A>(A content)
+        public static AsciSequence<A> contain<A>(A content)
             where A : unmanaged, IAsciSequence
-                => new AsciContainer<A>(content);
+                => new AsciSequence<A>(content);
     }
 }

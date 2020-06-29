@@ -21,7 +21,7 @@ namespace Z0.Asm.Dsl
         public static Bound<A,B> bind<A,B>(A a, B b)
             where A : unmanaged, IOperand
             where B : unmanaged, IOperand        
-                => new Bound<A, B>(a,b);
+                => new Bound<A,B>(a,b);
 
         [MethodImpl(Inline)]
         public static Bound<A,B,C> bind<A,B,C>(A a, B b, C c)

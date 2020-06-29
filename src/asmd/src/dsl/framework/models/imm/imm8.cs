@@ -12,9 +12,9 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Defines an 8-bit immediate operand
     /// </summary>
-    public readonly struct imm8 : IImmOp8<imm8>
+    public readonly struct imm8 : IImm8Address8<imm8>
     {
-        public Imm8 Content {get;}
+        public readonly Imm8 Data;
 
         [MethodImpl(Inline)]
         public static implicit operator imm8(Imm8 src)
@@ -26,31 +26,34 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public static bool operator <(imm8 a, imm8 b)
-            => a.Content < b.Content;
+            => a.Data < b.Data;
 
         [MethodImpl(Inline)]
         public static bool operator >(imm8 a, imm8 b)
-            => a.Content > b.Content;
+            => a.Data > b.Data;
 
         [MethodImpl(Inline)]
         public static bool operator <=(imm8 a, imm8 b)
-            => a.Content <= b.Content;
+            => a.Data <= b.Data;
 
         [MethodImpl(Inline)]
         public static bool operator >=(imm8 a, imm8 b)
-            => a.Content >= b.Content;
+            => a.Data >= b.Data;
 
         [MethodImpl(Inline)]
         public imm8(Imm8 value)
         {
-            Content = value;
+            Data = value;
         }
 
         [MethodImpl(Inline)]
         public Address8 ToAddress()
-            => Addresses.address8((byte)Content);
+            => Addresses.address8((byte)Data);
 
         public DataWidth Width 
             => DataWidth.W8;
+
+        Imm8 IOperand<Imm8>.Content 
+            => Data;
     }
 }

@@ -10,18 +10,35 @@ namespace Z0.Asm.Dsl
     using static Konst;
     using static Memories;
 
-    public readonly struct mem<T> : IMemOp
-        where T : IFixed
+    /// <summary>
+    /// Defines an M-parametric memory cell
+    /// </summary>
+    public readonly struct mem<M> : IMemOp<M>
+        where M : unmanaged, IMemOp
     {
-        readonly T Value;
-
-        public BitSize Width 
-            => bitsize<T>();
+        public readonly M Data;
 
         [MethodImpl(Inline)]
-        public mem(T value)
+        public static implicit operator mem<M>(M src)
+            => new mem<M>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator M(mem<M> src)
+            => src.Data;
+
+        public BitSize Width 
         {
-            Value = value;
+            [MethodImpl(Inline)]
+            get => bitsize<M>();
+        }
+
+        M IOperand<M>.Content 
+            => Data;
+
+        [MethodImpl(Inline)]
+        public mem(M value)
+        {
+            Data = value;
         }
     }
 }

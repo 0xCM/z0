@@ -10,24 +10,27 @@ namespace Z0.Asm.Dsl
     using static Konst;
     using static Root;
 
-    public readonly struct reg<T> : IRegOp
-        where T : IFixed
+    public readonly struct reg<R> : IRegOp
+        where R : unmanaged, IRegOp
     {
-        public T Value {get;}
+        public R Value {get;}
 
-        public RegisterKind Kind {get;}
+        public RegisterKind Kind 
+        {
+            [MethodImpl(Inline)]
+            get => Value.Kind;
+        }
 
         public BitSize Width 
         {
             [MethodImpl(Inline)]
-            get => bitsize<T>();
+            get => bitsize<R>();
         }
 
         [MethodImpl(Inline)]
-        public reg(T value, RegisterKind kind)
+        public reg(R value)
         {
             Value = value;
-            Kind = kind;
         }
     }
 }

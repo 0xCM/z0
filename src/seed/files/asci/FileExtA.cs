@@ -25,6 +25,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Name.Text;
+            => Name.Format();
     }
 }

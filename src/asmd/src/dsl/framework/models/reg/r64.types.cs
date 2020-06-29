@@ -11,7 +11,7 @@ namespace Z0.Asm.Dsl
 
     using K = RegisterKind;
     
-    public readonly struct rax : IRegOp64<rax,N0>
+    public readonly struct rax : IRegOp64<rax,ulong>
     {        
         public ulong Content  {get;}
 
@@ -34,7 +34,7 @@ namespace Z0.Asm.Dsl
         }
     }
 
-    public readonly struct rcx : IRegOp64<rcx,N1>
+    public readonly struct rcx : IRegOp64<rcx,ulong>
     {
         public ulong Content  {get;}
 
@@ -57,7 +57,7 @@ namespace Z0.Asm.Dsl
         }
     }    
 
-    public readonly struct rdx : IRegOp64<rdx,N2>
+    public readonly struct rdx : IRegOp64<rdx,ulong>
     {
         public ulong Content  {get;}
 
@@ -80,7 +80,7 @@ namespace Z0.Asm.Dsl
         }
     }    
 
-    public readonly struct rbx : IRegOp64<rbx,N3>
+    public readonly struct rbx : IRegOp64<rbx,ulong>
     {
         public ulong Content  {get;}
 
@@ -103,7 +103,7 @@ namespace Z0.Asm.Dsl
         }
     }    
 
-    public readonly struct rsi : IRegOp64<rsi,N4>
+    public readonly struct rsi : IRegOp64<rsi,ulong>
     {
         public ulong Content  {get;}
 
@@ -126,7 +126,7 @@ namespace Z0.Asm.Dsl
         }
     }    
 
-    public readonly struct rdi : IRegOp64<rdi,N5>
+    public readonly struct rdi : IRegOp64<rdi,ulong>
     {
         public ulong Content  {get;}
 
@@ -145,7 +145,7 @@ namespace Z0.Asm.Dsl
         }
     }        
 
-    public readonly struct rsp : IRegOp64<rsp,N6>
+    public readonly struct rsp : IRegOp64<rsp,ulong>
     {
         public ulong Content  {get;}
 
@@ -164,7 +164,7 @@ namespace Z0.Asm.Dsl
         }
     }            
 
-    public readonly struct rbp : IRegOp64<rbp,N7>
+    public readonly struct rbp : IRegOp64<rbp,ulong>
     {            
         public ulong Content  {get;}
 
@@ -183,7 +183,7 @@ namespace Z0.Asm.Dsl
         }
     }                
 
-    public readonly struct r8q : IRegOp64<r8q,N8>
+    public readonly struct r8q : IRegOp64<r8q,ulong>
     {
         public ulong Content  {get;}
 
@@ -202,7 +202,7 @@ namespace Z0.Asm.Dsl
         }
     }                    
 
-    public readonly struct r9q : IRegOp64<r9q,N9>
+    public readonly struct r9q : IRegOp64<r9q,ulong>
     {
         public ulong Content  {get;}
 
@@ -221,7 +221,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r10q : IRegOp64<r10q,N10>
+    public readonly struct r10q : IRegOp64<r10q,ulong>
     {
         public ulong Content  {get;}
 
@@ -240,7 +240,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r11q : IRegOp64<r11q,N11>
+    public readonly struct r11q : IRegOp64<r11q,ulong>
     {
         public ulong Content  {get;}
 
@@ -259,7 +259,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r12q : IRegOp64<r12q,N12>
+    public readonly struct r12q : IRegOp64<r12q,ulong>
     {
         public ulong Content  {get;}
 
@@ -278,7 +278,7 @@ namespace Z0.Asm.Dsl
         }
     }                    
 
-    public readonly struct r13q : IRegOp64<r13q,N13>
+    public readonly struct r13q : IRegOp64<r13q,ulong>
     {
         public ulong Content  {get;}
 
@@ -297,7 +297,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r14q : IRegOp64<r14q,N14>
+    public readonly struct r14q : IRegOp64<r14q,ulong>
     {
         public ulong Content  {get;}
 
@@ -316,7 +316,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r15q : IRegOp64<r15q,N15>
+    public readonly struct r15q : IRegOp64<r15q,ulong>
     {
         public ulong Content  {get;}
 

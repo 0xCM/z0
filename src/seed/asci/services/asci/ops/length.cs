@@ -57,6 +57,6 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci64 src)
-            => IndexLength(first(src, AsciNone), src.Capacity);            
+            => IndexLength(first(src, AsciNone), src.Capacity);      
     }
 }

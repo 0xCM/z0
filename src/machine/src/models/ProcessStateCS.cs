@@ -11,7 +11,6 @@ namespace Z0.Machine
     using Z0.Asm;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Tracks the state of a process stream and the commands that effected the state

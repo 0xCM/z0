@@ -14,6 +14,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string @string<A>(in A src)
             where A : unmanaged, IAsciSequence
-                => src.Text;
+                => src.Format();
     }
 }

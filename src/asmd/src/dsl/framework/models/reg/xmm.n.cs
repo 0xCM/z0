@@ -10,8 +10,8 @@ namespace Z0.Asm.Dsl
     using static Konst;
     using static Typed;
 
-    public readonly struct xmm<N> : IXmmRegOp<xmm<N>,N>
-        where N : unmanaged, ITypeNat
+    public readonly struct xmm<R> : IXmmRegOp<xmm<R>,R>
+        where R : unmanaged, IRegOp
     {
         public Fixed128 Content {get;}
 
@@ -22,9 +22,7 @@ namespace Z0.Asm.Dsl
         }
 
         public RegisterKind Kind 
-        {
-            [MethodImpl(Inline)]
-            get => RegisterBitField.join((RegisterCode)value<N>(), RegisterClass.XMM, RegisterWidth.W128);
-        }
+            => default;
+
     }
 }

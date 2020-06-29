@@ -7,11 +7,11 @@ namespace Z0
     using System;
 
     public interface IAsciSequence : INullity, ITextual
-    {
+    {    
         /// <summary>
-        /// Specifies the number of characters that precede a null terminator, if any; otherwise, returns the capacity
+        /// The sequence prasented as an encoded byte span
         /// </summary>
-        int Length {get;}
+        ReadOnlySpan<byte> Encoded {get;}            
 
         /// <summary>
         /// The maximum number of asci characters the sequence can cover
@@ -19,24 +19,11 @@ namespace Z0
         int Capacity {get;}
 
         /// <summary>
-        /// The sequence content rendered as text
+        /// Specifies the number of characters that precede a null terminator, if any; otherwise, returns the capacity
         /// </summary>
-        string Text {get;}
-        
-        /// <summary>
-        /// The sequence prasented as an encoded byte span
-        /// </summary>
-        ReadOnlySpan<byte> Encoded {get;}            
-
-        /// <summary>
-        /// The sequence prasented as a decoded character span
-        /// </summary>
-        ReadOnlySpan<char> Decoded {get;}
-        
-        string ITextual.Format()
-            => Text;
+        int Length {get;}
     }
-
+    
     public interface IAsciSequence<N> : IAsciSequence
         where N : unmanaged, ITypeNat
     {

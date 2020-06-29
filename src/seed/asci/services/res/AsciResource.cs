@@ -56,16 +56,5 @@ namespace Z0
         static AsciResource<A> resource<A>(asci32 name, A content, asci64? description = null)
             where A : IAsciSequence
                 => new AsciResource<A>(name, content, description);
-
-        /// <summary>
-        /// Creates an eponymous asci resource
-        /// </summary>
-        /// <param name="content">The resource data</param>
-        /// <param name="description">The resource description</param>
-        /// <typeparam name="A">The asci element type</typeparam>
-        [MethodImpl(Inline)]
-        static AsciResource<A> resource<A>(A content, asci64? description = null)
-            where A : IAsciSequence
-                => new AsciResource<A>(content.Text, content, description);
     }
 }
