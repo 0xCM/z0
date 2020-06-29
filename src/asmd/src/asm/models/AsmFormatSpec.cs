@@ -6,13 +6,17 @@ namespace Z0.Asm
 {        
     public readonly struct AsmFormatSpec
     {        
-        public static AsmFormatSpec Default => Create();
+        public static AsmFormatSpec Default 
+            => Create();
 
-        public static AsmFormatSpec WithSectionDelimiter => Create(EmitSectionDelimiter : true);
+        public static AsmFormatSpec WithSectionDelimiter 
+            => Create(EmitSectionDelimiter : true);
 
-        public static AsmFormatSpec WithFunctionTimestamp => Create(EmitFunctionTimestamp : true);
+        public static AsmFormatSpec WithFunctionTimestamp 
+            => Create(EmitFunctionTimestamp : true);
 
-        public static AsmFormatSpec DefaultStreamFormat => Create(EmitSectionDelimiter : true, EmitLocation : false);
+        public static AsmFormatSpec DefaultStreamFormat 
+            => Create(EmitSectionDelimiter : true, EmitLocation : false);
 
         public static AsmFormatSpec Create(
            bool EmitCaptureTermCode = true, 

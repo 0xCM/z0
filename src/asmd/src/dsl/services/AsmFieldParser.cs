@@ -74,7 +74,6 @@ namespace Z0.Asm.Data
             return result;
         }
 
-
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public T Numeric<T>(string src, out T result, T @default = default)     
             where T : unmanaged

@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;    
 
-    using API = BitFieldSpecs;
-
     public readonly struct BitFieldModel
     {                
         readonly asci16 FieldName;
@@ -53,11 +51,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public byte Position(int index)
             => Positions[index];
-
-        public string[] FormatLines()
-            => API.format(this);
-
-        public string Format()
-            => BitFieldFormatters.Service.Format(this);    
     }
 }

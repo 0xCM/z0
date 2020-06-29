@@ -16,40 +16,28 @@ namespace Z0
         where I : unmanaged, Enum
         where W : unmanaged, Enum
     {
-        ulong data;
+        internal ulong Data;
 
-        readonly BitFieldSpec<I,W> spec;
-
-        readonly ReadOnlySpan<BitFieldSegment> segments;
-        
+        internal readonly BitFieldSpec<I,W> Spec;
+            
         [MethodImpl(Inline)]
-        BitField64(in BitFieldSpec<I,W> spec, ulong data)
+        internal BitField64(in BitFieldSpec<I,W> spec, ulong data)
         {
-            this.spec = spec;
-            this.segments = spec.Segments;
-            this.data = data;
+            Spec = spec;
+            Data = data;
         }
 
         [MethodImpl(Inline)]
-        BitFieldSegment segment(I index)
-            => skip(segments, Enums.scalar<I,byte>(index));
+        public BitFieldSegment segment(I index)
+            => skip(Spec.Segments, Enums.scalar<I,byte>(index));
 
         public ulong this[I index]
         {
             [MethodImpl(Inline)]
-            get => API.extract(segment(index), data);
+            get => API.extract(segment(index), Data);
             
             [MethodImpl(Inline)]
-            set => API.deposit(segment(index), value, ref data);
+            set => API.deposit(segment(index), value, ref Data);
         }
-
-        /// <summary>
-        /// Extracts all segments from the source value and deposits the result in a caller-suppled span
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
-        public void Read(Span<ulong> dst)
-            => API.deposit(spec, data, dst);
     }
 }

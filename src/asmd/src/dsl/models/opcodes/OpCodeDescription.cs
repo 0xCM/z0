@@ -13,8 +13,6 @@ namespace Z0.Asm.Data
     {
         public string Body {get;}
 
-        public static OpCodeDescription Empty 
-            => new OpCodeDescription(string.Empty);
 
         [MethodImpl(Inline)]
         public static implicit operator TextExpression(OpCodeDescription src)
@@ -64,5 +62,9 @@ namespace Z0.Asm.Data
         
         public override string ToString()
             => Format();
+
+        public static OpCodeDescription Empty 
+            => new OpCodeDescription(string.Empty);
+
     }
 }

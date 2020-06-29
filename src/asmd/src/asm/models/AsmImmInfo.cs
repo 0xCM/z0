@@ -15,8 +15,6 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmImmInfo : INullity
     {
-        public static AsmImmInfo Empty => default(AsmImmInfo);
-
         public NumericWidth Width {get;}
 
         public ulong Value {get;}
@@ -56,23 +54,23 @@ namespace Z0.Asm
             => new AsmImmInfo(W64, value, direct, sek);
 
         [MethodImpl(Inline)]
-        AsmImmInfo(NumericWidth size, ulong value, bool direct, SignExensionKind? sek = null)
+        internal AsmImmInfo(NumericWidth size, ulong value, bool direct, SignExensionKind? sek = null)
         {
-            this.Width = size;
-            this.Value = value;
-            this.Signed = false;
-            this.Direct = direct;
-            this.SignExension = sek ?? SignExensionKind.None;
+            Width = size;
+            Value = value;
+            Signed = false;
+            Direct = direct;
+            SignExension = sek ?? SignExensionKind.None;
         }
 
         [MethodImpl(Inline)]
-        AsmImmInfo(NumericWidth size, long value, bool direct, SignExensionKind? sek = null)
+        internal AsmImmInfo(NumericWidth size, long value, bool direct, SignExensionKind? sek = null)
         {
-            this.Width = size;
-            this.Value = (ulong)value;
-            this.Signed = true;
-            this.Direct = direct;
-            this.SignExension = sek ?? SignExensionKind.None;
+            Width = size;
+            Value = (ulong)value;
+            Signed = true;
+            Direct = direct;
+            SignExension = sek ?? SignExensionKind.None;
         }
         
         public bool IsEmpty
@@ -86,5 +84,9 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => !IsEmpty;
         }                
+
+        public static AsmImmInfo Empty 
+            => default;
+
     }
 }

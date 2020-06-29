@@ -39,18 +39,12 @@ namespace Z0
             => new BitFieldSegment<byte>(src.Name, src.StartPos, src.EndPos, src.Width);
 
         [MethodImpl(Inline)]
-        internal BitFieldSegment(string name, byte startpos, byte endpos, byte width)
+        public BitFieldSegment(string name, byte startpos, byte endpos, byte width)
         {
-            this.Name = name;
-            this.StartPos = startpos;
-            this.EndPos = endpos;
-            this.Width = width;
+            Name = name;
+            StartPos = startpos;
+            EndPos = endpos;
+            Width = width;
         }
-
-        public string Format()
-            => BitFieldSegmentFormatter.create<byte>().Format(this);
-
-        public override string ToString()
-            => Format();
     }
 }

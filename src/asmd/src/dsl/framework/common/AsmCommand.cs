@@ -27,11 +27,11 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmCommand(int seq, AsmStatement statement, string opcode, string instruction, EncodedCommand encoded)
         {
-            this.Sequence = seq;
-            this.Statement = statement;
-            this.OpCode = new AsmOpCode(opcode);
-            this.Instruction = new InstructionCodeData(instruction);
-            this.Encoded = encoded;
+            Sequence = seq;
+            Statement = statement;
+            OpCode = new AsmOpCode(opcode);
+            Instruction = new InstructionCodeData(instruction);
+            Encoded = encoded;
         }
         
         public byte EncodingSize

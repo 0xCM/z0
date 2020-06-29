@@ -9,6 +9,7 @@ namespace Z0.Machine
     using System.Collections.Generic;
 
     using Z0.Asm;
+    using Z0.Asm.Data;
 
     using static Konst;
 
@@ -65,7 +66,7 @@ namespace Z0.Machine
             LoadAsmDocs();
             
             var data = 0xCE_38ul;
-            var command = Asm.Commands.encode(data);
+            var command = Encoding.encode(data);
             Dispatch(command);
 
             var steps = Buffers.Run().Slice(0, Count);
@@ -74,7 +75,7 @@ namespace Z0.Machine
             var hexline = buffer.Slice(0,count).ToString();
             term.print(hexline);
             var seq = 0;
-            var parsed = Asm.Data.AsmCommandParser.ParseAsmLine(Case01,ref seq);
+            var parsed = Asm.Data.AsmParsers.ParseLine(Case01,ref seq);
             if(parsed)
                 term.print($"{parsed.Value.Statement.ToString()}");
             else
@@ -89,7 +90,7 @@ namespace Z0.Machine
         [Op, MethodImpl(Inline)]
         public void Run(ulong data)
         {
-            Dispatch(Asm.Commands.encode(data));
+            Dispatch(Encoding.encode(data));
         }
 
         [Op, MethodImpl(Inline)]

@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Identifies a value partition element
     /// </summary>
-    public interface IBitFieldSegment : ITextual
+    public interface IBitFieldSegment
     {
         /// <summary>
         /// A unique name that identifies the segment

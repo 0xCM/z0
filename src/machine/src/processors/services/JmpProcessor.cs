@@ -13,7 +13,7 @@ namespace Z0.Machine
 
     public struct JmpProcessor : IJmpProcessor
     {
-        readonly DataBroker64<JmpKind,LocatedInstruction> broker;
+        readonly BitBroker<JmpKind,LocatedInstruction> broker;
         
         public IMachineContext Context {get;}
         

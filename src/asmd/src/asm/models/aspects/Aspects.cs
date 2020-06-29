@@ -75,11 +75,17 @@ namespace Z0.Asm
         public ref readonly Aspect Aspect(int index) 
             => ref Data[index];
         
-        public ref readonly Aspect this[int index] { [MethodImpl(Inline)] get => ref Aspect(index);}
+        public ref readonly Aspect this[int index] 
+        {
+             [MethodImpl(Inline)] 
+             get => ref Aspect(index);
+        }
         
-        public int Length => Data.Length;
+        public int Length 
+            => Data.Length;
 
-        public int Count => Data.Length;
+        public int Count 
+            => Data.Length;
 
         const string DefaultSep = CharText.Space + CharText.Pipe + CharText.Space;
 

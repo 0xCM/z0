@@ -33,7 +33,7 @@ namespace Z0.Asm.Dsl
         public RegisterKind Kind 
         {
             [MethodImpl(Inline)]
-            get => RegisterBitField.join(Code, RegisterClass.XMM, RegisterWidth.W128);
+            get => RegisterBits.join(Code, RegisterClass.XMM, RegisterWidth.W128);
         }
     }
 
@@ -46,7 +46,7 @@ namespace Z0.Asm.Dsl
         public RegisterCode Code 
         {
             [MethodImpl(Inline)]
-            get => RegisterBitField.code(Kind);
+            get => RegisterBits.code(Kind);
         }
 
         [MethodImpl(Inline)]

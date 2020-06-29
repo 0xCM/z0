@@ -37,7 +37,7 @@ namespace Z0.Asm
                 select Services.FunctionBuilder.BuildFunction(src.OpUri, src.Method.Signature().Format(), block);
 
         public Option<AsmFunction> Decode(ParsedExtract src)
-            =>  from i in Decode(src.Encoded) select AsmFunction.Define(src,i);
+            =>  from i in Decode(src.Encoded) select AsmFunction.define(src,i);
 
         public Option<AsmInstructionList> Decode(LocatedCode src)        
             => Decode(src.Encoded, src.Address).TryMap(x => AsmInstructionList.Create(x, src));
@@ -46,7 +46,7 @@ namespace Z0.Asm
             => Decode(src.Encoded, MemoryAddress.Empty);
 
         public Option<AsmFunction> Decode(ParsedExtract src, Action<Asm.Instruction> f)
-            => Decode(src.Encoded,f).TryMap(x => AsmFunction.Define(src,x));
+            => Decode(src.Encoded,f).TryMap(x => AsmFunction.define(src,x));
 
         public Option<AsmInstructionList> Decode(LocatedCode src, Action<Asm.Instruction> f)        
         {

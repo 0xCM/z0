@@ -20,7 +20,7 @@ namespace Z0.Asm
                 => new AsmInstructionSummary(@base, offset, content, spec, operands, encoded);
         
         [MethodImpl(Inline)]
-        AsmInstructionSummary(MemoryAddress @base, ushort offset, string content, AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
+        internal AsmInstructionSummary(MemoryAddress @base, ushort offset, string content, AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
         {
             Base = @base;
             Offset = offset;

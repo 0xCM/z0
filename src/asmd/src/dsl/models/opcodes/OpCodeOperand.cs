@@ -9,17 +9,16 @@ namespace Z0.Asm.Data
 
     using static Konst;
 
+    /// <summary>
+    /// Defines an operand in the context of an opcode expression
+    /// </summary>
     public readonly struct OpCodeOperand : IExpressional<OpCodeOperand,ushort>
     {
         readonly ushort Source;        
-
-        public static OpCodeOperand Empty => new OpCodeOperand(0);
                 
         [MethodImpl(Inline)]
         public OpCodeOperand(ushort data)
-        {
-            this.Source = data;
-        }       
+            => Source = data;
 
         public ushort Body
         {
@@ -50,9 +49,12 @@ namespace Z0.Asm.Data
             => Source == src.Source;
 
         public string Format()
-            =>  Source.ToString();
+            => Source.ToString();
 
         public override string ToString()
             => Format();
+
+        public static OpCodeOperand Empty 
+            => new OpCodeOperand(0);
     }
 }

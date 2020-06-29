@@ -9,7 +9,6 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
 
     public readonly struct InstructionCodeData
     {

@@ -13,7 +13,7 @@ namespace Z0.Asm
     using NI = NumericIndicator;
     using TI = TypeIndicator;
 
-    partial struct AsmQuery : ISemanticQuery
+    partial struct AsmQuery : TSemanticQuery
     {
         [MethodImpl(Inline), Op]
         public bool IsSegBase(OpKind src)

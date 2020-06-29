@@ -11,9 +11,6 @@ namespace Z0.Asm.Data
 
     public partial class AsmCommandParser
     {
-        public static ParseResult<AsmCommand> ParseAsmLine(string line, ref int seq)
-            => AsmSourceLineParser.Service.Parse(line, ref seq);
-
         internal const string LocatedMarker = "located://";
 
         internal const char Assign = Chars.Eq;

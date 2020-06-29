@@ -17,12 +17,10 @@ namespace Z0.Asm
         public bool IsEmpty 
             => Register == Register.None;
 
-        public static SegmentPrefix Empty => new SegmentPrefix(Register.None);   
+        public static bool test(Instruction inxs, int index)     
+            => !from(inxs,index).IsEmpty;
 
-        public static bool Test(Instruction inxs, int index)     
-            => !From(inxs,index).IsEmpty;
-
-        public static SegmentPrefix From(Instruction inxs, int index) 
+        public static SegmentPrefix from(Instruction inxs, int index) 
         {
             var kind = AsmQuery.Direct.OperandKind(inxs, index);
             switch(kind)
@@ -38,9 +36,13 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        SegmentPrefix(Register src)
+        internal SegmentPrefix(Register src)
         {
             Register = src;
         }        
+
+        public static SegmentPrefix Empty 
+            => new SegmentPrefix(Register.None);   
+
     }
 }

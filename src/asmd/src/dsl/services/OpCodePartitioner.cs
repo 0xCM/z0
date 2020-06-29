@@ -17,24 +17,24 @@ namespace Z0.Asm.Data
         public static OpCodePartitoner Create(int seq = 0) 
             => new OpCodePartitoner(seq);
 
-        int seq;
+        int S0;
 
         [MethodImpl(Inline)]
-        OpCodePartitoner(int seq)
+        internal OpCodePartitoner(int seq)
         {
-            this.seq = seq;
+            S0 = seq;
         }
         
         public int Sequence 
         {
             [MethodImpl(Inline)]
-            get => seq;
+            get => S0;
         }
 
         [MethodImpl(Inline), Op]
         public void Partition(ReadOnlySpan<OpCodeRecord> src, in OpCodePartition handler)
         {
-            for(var i=seq; i<src.Length; i++)
+            for(var i=S0; i<src.Length; i++)
                 Partition(skip(src,i), handler);
         }
 
@@ -42,7 +42,7 @@ namespace Z0.Asm.Data
         public void Partition(in OpCodeRecord src, in OpCodePartition handler)
         {
             Process(src, handler);
-            seq++;
+            S0++;
         }
 
         [MethodImpl(Inline)]

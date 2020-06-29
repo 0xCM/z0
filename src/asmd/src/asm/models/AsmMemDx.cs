@@ -22,6 +22,14 @@ namespace Z0.Asm
         /// </summary>
         public ulong Value {get;}
 
+        [MethodImpl(Inline)]
+        public static AsmMemDx Create(ulong value, DataSize size)
+            => new AsmMemDx(value, size);
+        
+        [MethodImpl(Inline)]
+        public static AsmMemDx From(ulong value, int size)
+            => new AsmMemDx(value,  Enums.definedOrElse((DataSize)size, DataSize.None));
+
         public bool IsEmpty 
         { 
             [MethodImpl(Inline)] 
@@ -40,29 +48,23 @@ namespace Z0.Asm
             get => Value != 0;
         }
 
-        public AsmMemDx Zero => Empty;
+        public AsmMemDx Zero 
+            => Empty;
 
         [MethodImpl(Inline)]
         public static implicit operator AsmMemDx((ulong value, int size) src)
             => From(src.value, src.size);
 
-        [MethodImpl(Inline)]
-        public static AsmMemDx Create(ulong value, DataSize size)
-            => new AsmMemDx(value, size);
-        
-        [MethodImpl(Inline)]
-        public static AsmMemDx From(ulong value, int size)
-            => new AsmMemDx(value,  Enums.definedOrElse((DataSize)size, DataSize.None));
 
         [MethodImpl(Inline)]
         public AsmMemDx(ulong value, DataSize size)
         {
-            this.Value = value;
-            this.Size = size;
-            HexSpec = HexFormatConfig.Define(zpad:false, specifier:false);
+            Value = value;
+            Size = size;
         }
 
-        readonly HexFormatConfig HexSpec; 
+        HexFormatConfig HexSpec 
+            => HexFormatConfig.Define(zpad:false, specifier:false);
 
         public string Format()
             => (Size switch{
@@ -77,6 +79,5 @@ namespace Z0.Asm
 
         public static AsmMemDx Empty 
             => default;
-
     }
 }

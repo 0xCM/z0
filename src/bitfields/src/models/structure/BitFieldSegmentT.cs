@@ -41,18 +41,12 @@ namespace Z0
         public T Width {get;}
 
         [MethodImpl(Inline)]
-        internal BitFieldSegment(string name, T first, T last, T width)
+        public BitFieldSegment(string name, T first, T last, T width)
         {
-            this.Name = name;
-            this.StartPos = first;
-            this.EndPos = last;
-            this.Width = width;
+            Name = name;
+            StartPos = first;
+            EndPos = last;
+            Width = width;
         }
-
-        public string Format()
-            => BitFieldSegmentFormatter.create<T>().Format(this);
-
-        public override string ToString()
-            => Format();
     }    
 }

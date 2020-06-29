@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public interface IAsmSemantic : ISemanticQuery
+    public interface IAsmSemantic : TSemanticQuery
     {
 
             

@@ -12,8 +12,9 @@ namespace Z0.Asm.Data
         public void modrm_encode()
         {
             var encoder = PrefixEncoders.ModRm;
-            Span<ModRmEncoding> dst = new ModRmEncoding[1024];
-            var count = encoder.table(dst);
+            var dst = Encoding.modrmTable();
+            var count = dst.Length;
+            
             Claim.eq(256,count);
             
             for(var i=0; i<count; i++)

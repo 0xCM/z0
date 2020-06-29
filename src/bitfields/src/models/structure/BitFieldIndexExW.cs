@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;    
 
-    public readonly struct BitFieldIndex<E,W> : IBitFieldIndex<BitFieldIndexEntry<E,W>>, ITextual<BitFieldIndex<E,W>>
+    public readonly struct BitFieldIndex<E,W> : IBitFieldIndex<BitFieldIndexEntry<E,W>>
         where E : unmanaged, Enum
         where W : unmanaged, Enum
     {
@@ -52,11 +52,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref entries[index];
         }
-
-        public string Format()
-            => Formattable.format(Entries, Chars.Eol);
-
-        public override string ToString()
-            => Format();
     }        
 }

@@ -24,7 +24,7 @@ namespace Z0.Asm.Dsl
         public RegisterKind Kind 
         {
             [MethodImpl(Inline)]
-            get => RegisterBitField.join((RegisterCode)value<N>(), RegisterClass.YMM, RegisterWidth.W512);
+            get => RegisterBits.join((RegisterCode)value<N>(), RegisterClass.YMM, RegisterWidth.W512);
         }
     }
 }

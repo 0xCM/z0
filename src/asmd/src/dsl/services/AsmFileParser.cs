@@ -8,7 +8,6 @@ namespace Z0.Asm.Data
 
     using static Konst;
     using static Memories;
-
     using static AsmCommandParser;
 
     public readonly struct AsmFileParser
@@ -58,7 +57,7 @@ namespace Z0.Asm.Data
                         continue;
                 }
 
-                var parsed = ParseAsmLine(line, ref seq);
+                var parsed = AsmParsers.ParseLine(line, ref seq);
                 if(parsed.Failed)
                     continue;
 

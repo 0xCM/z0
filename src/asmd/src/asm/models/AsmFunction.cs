@@ -14,9 +14,7 @@ namespace Z0.Asm
     /// </summary>
     public class AsmFunction
     {           
-        public static AsmFunction Empty => new AsmFunction(OpUri.Empty, string.Empty, MemberCode.Empty, 0, AsmInstructionList.Empty);
-
-        public static AsmFunction Define(ParsedExtract encoding,  AsmInstructionList inxs)
+        public static AsmFunction define(ParsedExtract encoding,  AsmInstructionList inxs)
         {         
             var code = MemberCode.Define(encoding.OpUri, encoding.Encoded);  
             var sig = encoding.Method.Signature().Format();          
@@ -24,17 +22,17 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static AsmFunction Define(OpUri uri, string sig, MemberCode code, ExtractTermCode term, AsmInstructionList inxs)
+        public static AsmFunction define(OpUri uri, string sig, MemberCode code, ExtractTermCode term, AsmInstructionList inxs)
             => new AsmFunction(uri,sig,code,term,inxs);
 
-        AsmFunction(OpUri uri, string sig, MemberCode code, ExtractTermCode term, AsmInstructionList instructions)
+        internal AsmFunction(OpUri uri, string sig, MemberCode code, ExtractTermCode term, AsmInstructionList instructions)
         {
-            this.Uri = uri;
-            this.OpId = uri.OpId;
-            this.OpSig = sig;
-            this.Inxs = instructions;
-            this.Code = code;            
-            this.TermCode =term;
+            Uri = uri;
+            OpId = uri.OpId;
+            OpSig = sig;
+            Inxs = instructions;
+            Code = code;            
+            TermCode =term;
         }
 
         /// <summary>
@@ -85,8 +83,13 @@ namespace Z0.Asm
             get => Inxs.Length;            
         }
 
-        public bool IsEmpty => InstructionCount == 0;
+        public bool IsEmpty 
+            => InstructionCount == 0;
 
-        public bool IsNonEmpty => InstructionCount != 0;
+        public bool IsNonEmpty 
+            => InstructionCount != 0;
+
+        public static AsmFunction Empty 
+            => new AsmFunction(OpUri.Empty, string.Empty, MemberCode.Empty, 0, AsmInstructionList.Empty);
     }
 }

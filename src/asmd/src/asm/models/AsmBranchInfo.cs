@@ -13,10 +13,7 @@ namespace Z0.Asm
     /// Describes a branching instruction operand
     /// </summary>
     public readonly struct AsmBranchInfo : INullity, INullary<AsmBranchInfo>, IRender
-    {
-        public static AsmBranchInfo Empty 
-            => new AsmBranchInfo(new Instruction(),MemoryAddress.Empty, 0, AsmBranchTarget.Empty, 0);
-        
+    {        
         public Instruction Instruction {get;}
         
         public MemoryAddress Base {get;}
@@ -27,13 +24,23 @@ namespace Z0.Asm
 
         public MemoryAddress TargetOffset {get;}
         
-        public bool IsEmpty { [MethodImpl(Inline)] get => Base == 0 && Source == 0; }
+        public bool IsEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => Base == 0 && Source == 0; 
+        }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => !IsEmpty; }
+        public bool IsNonEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => !IsEmpty; 
+        }
 
-        public bool IsNear => Target.IsNear;
-
-        public AsmBranchInfo Zero => Empty;
+        public bool IsNear 
+            => Target.IsNear;
+        
+        public AsmBranchInfo Zero 
+            => Empty;
 
         [MethodImpl(Inline)]
         static uint Offset(MemoryAddress src, int inxsSize, MemoryAddress dst)
@@ -55,5 +62,8 @@ namespace Z0.Asm
 
         public string Render()
             => text.concat(Source.Format(), " + ",  TargetOffset.FormatMinimal(), " -> ",  (Source + TargetOffset).Format());
+
+        public static AsmBranchInfo Empty 
+            => new AsmBranchInfo(new Instruction(),MemoryAddress.Empty, 0, AsmBranchTarget.Empty, 0);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0.Asm.Data
     using static Konst;
     using static Root;
 
-    using F = OpCodeInfoField;
+    using F = OpCodeRecordField;
 
     [ApiHost]
     public readonly struct CommandInfoParser : IApiHost<CommandInfoParser>

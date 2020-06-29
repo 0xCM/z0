@@ -13,9 +13,7 @@ namespace Z0.Asm
     /// Describes a zero exension operation
     /// </summary>
     public readonly struct ZeroExensionKind
-    {
-        public static ZeroExensionKind None => default(ZeroExensionKind);
-        
+    {        
         public readonly NumericWidth SourceWidth;
 
         public readonly NumericWidth TargetWidth;
@@ -27,8 +25,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public ZeroExensionKind(NumericWidth src, NumericWidth dst)
         {
-            this.SourceWidth = src;
-            this.TargetWidth = dst;
+            SourceWidth = src;
+            TargetWidth = dst;
         }
+
+        public static ZeroExensionKind None => default;
     }
 }

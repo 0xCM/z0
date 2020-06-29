@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
     using static OpKind;
 
-    partial struct AsmQuery : ISemanticQuery
+    partial struct AsmQuery : TSemanticQuery
     {
         [MethodImpl(Inline), Op]
         public bool IsCall(Instruction src)

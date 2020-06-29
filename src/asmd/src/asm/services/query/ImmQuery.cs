@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using W = NumericWidth;
 
-    partial struct AsmQuery : ISemanticQuery
+    partial struct AsmQuery : TSemanticQuery
     {
         public NumericWidth ImmWidth(OpKind src)
         {

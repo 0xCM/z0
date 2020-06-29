@@ -21,10 +21,6 @@ namespace Z0.Asm.Data
             => src.Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator OpCodeIdentifier(string src)
-            => new OpCodeIdentifier(src);
-
-        [MethodImpl(Inline)]
         public static implicit operator asci32(OpCodeIdentifier src)
             => src.Value;
 
@@ -44,13 +40,6 @@ namespace Z0.Asm.Data
         public OpCodeIdentifier(asci32 src)
         {
             Value = src;
-        }
-
-        [MethodImpl(Inline)]
-        public OpCodeIdentifier(string src)
-        {
-            asci.encode(src,out Value);
-            //Body = asci.encode(n, src ?? string.Empty);
         }
 
         public bool IsEmpty

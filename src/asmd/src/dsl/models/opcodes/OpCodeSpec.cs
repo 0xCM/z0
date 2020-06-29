@@ -9,13 +9,14 @@ namespace Z0.Asm.Data
 
     using static Konst;
     
+    /// <summary>
+    /// Defines a componentized opcode and carries opcode expression from whence they came
+    /// </summary>
     public readonly struct OpCodeSpec
-    {        
-        public static OpCodeSpec Empty => new OpCodeSpec(OpCodeExpression.Empty);
-        
-        public OpCodeExpression Source {get;}
+    {                
+        public readonly OpCodeExpression Source;
 
-        public OpCodePart[] Components {get;}
+        public readonly OpCodePart[] Components;
 
         [MethodImpl(Inline)]
         public OpCodeSpec(OpCodeExpression expression, params OpCodePart[] components)
@@ -23,5 +24,8 @@ namespace Z0.Asm.Data
             Source = expression;
             Components = components;
         }        
+
+        public static OpCodeSpec Empty 
+            => new OpCodeSpec(OpCodeExpression.Empty);
     }
 }

@@ -27,7 +27,7 @@ namespace Z0
         Enum FieldWidth {get;}
     }
 
-    public interface IBitFieldIndexEntry<F> : IBitFieldIndexEntry, ITextual, IEquatable<F>, IComparable<F>
+    public interface IBitFieldIndexEntry<F> : IBitFieldIndexEntry, IEquatable<F>, IComparable<F>
     {
    
     }

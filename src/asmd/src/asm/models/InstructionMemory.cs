@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Konst;
     using static OpKind;
-    using static AspectLabels;
 
     [Label(TypeLabels.Mem)]
     public struct InstructionMemory : IInstructionMemory

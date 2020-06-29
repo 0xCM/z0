@@ -37,7 +37,7 @@ namespace Z0.Asm.Dsl
             LocationBuffer = new MemoryAddress[k];
             for(var i=0; i<k; i++)
             {
-                seek(Buffer,i) = new R.xmm(default, RegisterBitField.join((RegisterCode)i, RegisterClass.XMM, RegisterWidth.W128));
+                seek(Buffer,i) = new R.xmm(default, RegisterBits.join((RegisterCode)i, RegisterClass.XMM, RegisterWidth.W128));
             }
         }
 

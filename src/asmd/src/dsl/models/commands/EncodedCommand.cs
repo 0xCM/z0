@@ -9,8 +9,7 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
 
     using static Konst;
-
-    using API = Commands;
+    using static V0;
 
     /// <summary>
     /// Defines an encoded instruction
@@ -26,7 +25,7 @@ namespace Z0.Asm
         public ReadOnlySpan<byte> Encoding
         {
             [MethodImpl(Inline)]
-            get => API.encoding(this);
+            get => Asm.Data.Encoding.encoding(this);
         }
 
         /// <summary>
@@ -36,11 +35,11 @@ namespace Z0.Asm
         public byte EncodingSize
         {
             [MethodImpl(Inline)]
-            get => API.size(this);
+            get => vcell(Data, 15);
         }
 
         public string Format()
-            => API.format(this);
+            => Asm.Data.Encoding.format(this);
 
         public override string ToString()
             => Format();        

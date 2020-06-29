@@ -11,21 +11,43 @@ namespace Z0.Asm
 
     public readonly struct AsmMemScale : INullary<AsmMemScale>, INullity
     {   
-        public static AsmMemScale Empty => new AsmMemScale(MemScaleKind.None);
-        
         public MemScaleKind Kind {get;}
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => Kind == 0; }
+        public static AsmMemScale Empty 
+            => new AsmMemScale(MemScaleKind.None);
+        
+        public bool IsEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => Kind == 0; 
+        }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => Kind != 0; }
+        public bool IsNonEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => Kind != 0; 
+        }
 
-        public bool NonUnital { [MethodImpl(Inline)] get => Kind != MemScaleKind.S1;}
+        public bool NonUnital 
+        {
+             [MethodImpl(Inline)] 
+             get => Kind != MemScaleKind.S1;
+        }
 
-        public bool NonZero { [MethodImpl(Inline)] get =>  Kind != 0; }
+        public bool NonZero 
+        { 
+            [MethodImpl(Inline)] 
+            get =>  Kind != 0; 
+        }
 
-        public byte Value { [MethodImpl(Inline)] get => (byte) Kind; }
+        public byte Value 
+        { 
+            [MethodImpl(Inline)] 
+            get => (byte) Kind; 
+        }
 
-        public AsmMemScale Zero => Empty;
+        public AsmMemScale Zero 
+            => Empty;
 
         [MethodImpl(Inline)]
         public static implicit operator AsmMemScale(int src)

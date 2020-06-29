@@ -64,7 +64,7 @@ namespace Z0.Asm.Data
 
         public void opcode_encode()
         {
-            var encoder = OpCodeEncoder.Service();
+            var encoder = OpCodeServices.encoder();
             var encoded = encoder.Encode();
             using var dst = CaseWriter("OpCodes.Encoded");
             for(var i=0; i<encoded.Length; i++)
@@ -81,9 +81,9 @@ namespace Z0.Asm.Data
                 Trace(tokens[i].Value);            
             }
             
-            var data = OpCodeDataset.Create();
+            var data = OpCodeServices.dataset();
             var count = data.OpCodeCount;
-            var records = data.OpCodeRecords.ToReadOnlySpan();
+            var records = data.Records.ToReadOnlySpan();
             using var writer = CaseWriter("OpCodes");
             
             writer.WriteLine(OpCodeRecord.FormatHeader());
@@ -93,9 +93,9 @@ namespace Z0.Asm.Data
 
         void opcode_tokens()
         {
-            var data = OpCodeDataset.Create();
+            var data = OpCodeServices.dataset();
             var count = data.OpCodeCount;
-            var records = data.OpCodeRecords.ToReadOnlySpan();
+            var records = data.Records.ToReadOnlySpan();
             var identifers = data.OpCodeIdentifiers.ToReadOnlySpan();
             Claim.eq(count, records.Length);
             Claim.eq(count, identifers.Length);

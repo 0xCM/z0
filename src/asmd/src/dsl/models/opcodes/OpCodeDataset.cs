@@ -11,34 +11,22 @@ namespace Z0.Asm.Data
     using static Konst;    
     
     public readonly struct OpCodeDataset
-    {
-        [MethodImpl(Inline)]
-        public static OpCodeDataset Create()
-            => new OpCodeDataset(0);
-        
-        public readonly int OpCodeCount;
-        
-        public readonly OpCodeRecord[] OpCodeRecords;
-
-        public readonly AppResourceDoc ResourceDoc;
+    {                
+        public readonly OpCodeRecord[] Records;
 
         public readonly OpCodeIdentifier[] OpCodeIdentifiers;
 
-        public const byte EncodingDelimiter = 0xFF;
+        public OpCodeDataset(OpCodeRecord[] records, OpCodeIdentifier[] identifiers)
+        {
+            Records = records;
+            OpCodeIdentifiers = identifiers;
+        }
+
+        public int OpCodeCount 
+            => Records.Length;
 
         [MethodImpl(Inline), Op]
-        public OpCodeIdentifier opcode(int index)
-            => OpCodeIdentifiers[index];
-
-        [MethodImpl(Inline)]
-        OpCodeDataset(int i)
-        {
-            ResourceDoc = AsmD.Service.OpCodeSpecDoc;
-            OpCodeCount = ResourceDoc.RowCount;
-            OpCodeRecords = new OpCodeRecord[OpCodeCount];
-            CommandInfoParser.Service.Parse(ResourceDoc, OpCodeRecords);
-            OpCodeIdentifiers = new OpCodeIdentifier[OpCodeCount];
-            OpCodeIdentity.Service.Compute(OpCodeRecords, OpCodeIdentifiers);
-        }
+        public ref readonly OpCodeIdentifier opcode(int index)
+            => ref OpCodeIdentifiers[index];
     }
 }

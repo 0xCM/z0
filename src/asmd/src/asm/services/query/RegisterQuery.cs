@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    partial struct AsmQuery : ISemanticQuery
+    partial struct AsmQuery : TSemanticQuery
     {
         /// <summary>
         /// Tests whether the the source operand kind is a register kind

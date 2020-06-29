@@ -44,7 +44,7 @@ namespace Z0
         public uint TotalWidth
         {
             [MethodImpl(Inline)]
-            get => BitFieldSpecs.width(this);
+            get => BitFields.width(this);
         }
 
         public ReadOnlySpan<BitFieldSegment> Segments 

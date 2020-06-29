@@ -12,6 +12,7 @@ namespace Z0
 
     partial class BitFields
     {
+
         [MethodImpl(Inline)]
         internal static T Mask<F,T>(BitField256<F,T> src, F index)
             where T : unmanaged

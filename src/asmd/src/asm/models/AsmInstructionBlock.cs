@@ -41,9 +41,9 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         AsmInstructionBlock(MemberCode encoded, Instruction[] decoded, ExtractTermCode term)
         {
-            this.Encoded = encoded;
-            this.Decoded = decoded;
-            this.TermCode = term;
+            Encoded = encoded;
+            Decoded = decoded;
+            TermCode = term;
         }
 
         public MemoryAddress BaseAddress 

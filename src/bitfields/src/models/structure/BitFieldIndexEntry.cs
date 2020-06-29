@@ -37,14 +37,11 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitFieldIndexEntry(int index, string name, Enum width)
         {
-            this.FieldIndex = index;
-            this.FieldName = name;
-            this.FieldWidth = width;
+            FieldIndex = index;
+            FieldName = name;
+            FieldWidth = width;
         }
         
-        public string Format()
-            => BitFieldSegmentFormatter.entry(this);
-
         [MethodImpl(Inline)]
         public bool Equals(BitFieldIndexEntry other)
             => FieldIndex == other.FieldIndex && FieldWidth.Equals(other.FieldWidth) && FieldName.Equals(other.FieldName);
@@ -52,9 +49,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(BitFieldIndexEntry other)
             => FieldIndex.CompareTo(other.FieldIndex);
- 
-        public override string ToString()
-            => Format();
            
         public override int GetHashCode()
             => HashCode.Combine(FieldIndex,FieldWidth);

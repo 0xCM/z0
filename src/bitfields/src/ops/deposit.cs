@@ -59,6 +59,15 @@ namespace Z0
                 seek(dst,i) = extract(skip(spec.Segments,i), src);
         }
 
+        [MethodImpl(Inline)]
+        public static void deposit<E,W,T>(in BitField64<E,W> field, T src, Span<T> dst)
+            where E : unmanaged, Enum
+            where W : unmanaged, Enum
+            where T : unmanaged
+        {
+            for(var i=0; i<field.Spec.Segments.Length; i++)
+                seek(dst,i) = extract(skip(field.Spec.Segments,i), src);
+        }
 
         [MethodImpl(Inline)]
         public static void deposit<S,T>(in BitFieldSpec spec, in S src, Span<T> dst)

@@ -15,7 +15,7 @@ namespace Z0.Machine
     {
         public IMachineContext Context {get;}
 
-        readonly DataBroker64<PartHandlerKind,PartInstructions> broker;
+        readonly BitBroker<PartHandlerKind,PartInstructions> broker;
 
         public IDataBroker<PartHandlerKind,PartInstructions> Broker 
             => broker;

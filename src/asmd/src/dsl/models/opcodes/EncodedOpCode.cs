@@ -16,15 +16,11 @@ namespace Z0.Asm.Data
     {
         readonly ulong Data;
 
-        public static implicit operator EncodedOpCode(ulong data)
-            => new EncodedOpCode(data);
-
         [MethodImpl(Inline)]
         public EncodedOpCode(ulong data)
         {
             Data = data;
         }       
-
         public string Format()
             => asci.format(Data);
 

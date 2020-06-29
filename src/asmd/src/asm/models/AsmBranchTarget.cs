@@ -11,8 +11,6 @@ namespace Z0.Asm
 
     public readonly struct AsmBranchTarget : INullity, INullary<AsmBranchTarget>, ITextual
     {
-        public static AsmBranchTarget Empty => new AsmBranchTarget(BranchTargetKind.None, BranchTargetSize.None, 0, 0);
-
         [MethodImpl(Inline)]
         public static AsmBranchTarget Define(BranchTargetKind kind, BranchTargetSize size, MemoryAddress address, ushort selector = 0)
             => new AsmBranchTarget(kind,size,address,selector);
@@ -67,5 +65,7 @@ namespace Z0.Asm
                 : text.bracket(text.concat(address, Chars.Colon, Selector.FormatAsmHex())));                    
         }
 
+        public static AsmBranchTarget Empty 
+            => new AsmBranchTarget(BranchTargetKind.None, BranchTargetSize.None, 0, 0);
     }
 }
