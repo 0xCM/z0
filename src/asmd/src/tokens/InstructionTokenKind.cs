@@ -4,12 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum InstructionTokenKind : byte
     {
         None = 0,
         
+        /// <summary>
+        /// A 128-bit bounds register. BND0 through BND3
+        /// </summary>
         bnd = 1,
 
+        /// <summary>
+        /// The destination in an instruction; this field is encoded by reg_field
+        /// </summary>
         DST = 2,
 
         ᛁerᛁ = 3,

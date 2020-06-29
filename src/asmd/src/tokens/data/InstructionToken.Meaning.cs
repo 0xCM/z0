@@ -30,7 +30,7 @@ namespace Z0.Asm.Data
 
         public const string bnd =           "A 128-bit bounds register. BND0 through BND3";
 
-        public const string DST =           "The destination in an instruction. This field is encoded by reg_field";
+        public const string DST =           "The destination in an instruction; this field is encoded by reg_field";
 
         public const string ᛁerᛁ =           "Indicates support for embedded rounding control, which is only applicable to the register-register form of the instruction. This also implies support for SAE (Suppress All Exceptions)";
 
