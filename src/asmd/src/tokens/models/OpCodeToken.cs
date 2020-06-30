@@ -15,14 +15,17 @@ namespace Z0.Asm.Data
         
         public readonly OpCodeTokenKind Identifier;
 
-        public readonly asci8 Value;
+        public readonly StringRef Value;
 
         [MethodImpl(Inline)]
-        public OpCodeToken(byte index, OpCodeTokenKind identifier, asci8 value)
+        public OpCodeToken(byte index, OpCodeTokenKind identifier, StringRef value)
         {
             Index = index;
             Identifier = identifier;
             Value = value;
         }
+
+        public string Format()
+            => text.concat(Identifier.Format(), " := ", Value.Format());
     }
 }

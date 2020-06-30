@@ -4,29 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    using System;
-    using System.Runtime.CompilerServices;
-
-    public class CilFormatConfig
+    public readonly struct CilFormatConfig
     {
         public static CilFormatConfig Default
-            => new CilFormatConfig();
+            => default;
 
-        public CilFormatConfig()
-        {
+        public bool EmitFileHeader
+            => false;
 
-        }
+        public bool EmitFunctionHeader
+            => true;
 
-        public bool EmitFileHeader {get;set;}
-            = false;
+        public string SectionDelimiter
+            => new string(Chars.Dash, 120);        
 
-        public bool EmitFunctionHeader {get; set;}
-            = true;
-
-        public string SectionDelimiter {get;set;}
-            = new string(Chars.Dash, 120);        
-
-        public bool EmitSectionDelimiter {get;set;}
-            = true;
+        public bool EmitSectionDelimiter
+            => true;
     }
 }

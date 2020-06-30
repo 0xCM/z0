@@ -19,16 +19,20 @@ namespace Z0
         readonly MemRef Ref;
 
         [MethodImpl(Inline), Op]
+        public static StringRef from(MemRef src)
+            => new StringRef(src);
+
+        [MethodImpl(Inline), Op]
+        public static StringRef create(string src)
+            => from(memref(src));
+
+        [MethodImpl(Inline), Op]
         public static StringRef empty()
             => new StringRef(MemRef.Empty);
 
         [MethodImpl(Inline), Op]
         public static unsafe string @string(StringRef src)
             => As.@string(src.Data);
-
-        [MethodImpl(Inline), Op]
-        public static StringRef create(string src)
-            => new StringRef(new MemRef(MemoryAddress.from(src), src.Length));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> data(StringRef src)
@@ -70,6 +74,12 @@ namespace Z0
             get => @string(this);
         }
 
+        public MemoryAddress Address
+        {
+            [MethodImpl(Inline)]
+            get => Ref.Address;
+        }
+
         public ref readonly char this[int index]
         {
             [MethodImpl(Inline)]
@@ -106,5 +116,8 @@ namespace Z0
             [MethodImpl(Inline)]
             get => empty();
         }
+
+        public string Diagnostic()
+            => text.concat(Address, text.bracket(Length), " := ", text.embrace(Text));
     }
 }

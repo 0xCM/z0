@@ -23,7 +23,6 @@ namespace Z0
             where T : unmanaged
                 => CreateSpan(ref @ref<T>(pSrc), count);
 
-        
         /// <summary>
         /// Covers a reference-identified T-counted buffer with a span
         /// </summary>
@@ -33,6 +32,16 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cover<T>(in T src, int count)
             => CreateSpan(ref edit(src), count);    
+
+        /// <summary>
+        /// Covers a reference-identified T-counted buffer with a span
+        /// </summary>
+        /// <param name="src">A reference to the leading cell</param>
+        /// <param name="count">The number of T-cells to cover</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> cover<T>(in T src, uint count)
+            => CreateSpan(ref edit(src),(int)count);    
 
         /// <summary>
         /// Creates a span over a sequence of T-cells from a specified number of S-cells

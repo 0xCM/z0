@@ -13,7 +13,7 @@ namespace Z0
     partial struct As
     {
         /// <summary>
-        /// Increments a cell reference by a unit
+        /// Increments a reference by a unit
         /// </summary>
         /// <param name="src">The source cell</param>
         /// <param name="count">The cell offset count</param>

@@ -18,11 +18,6 @@ namespace Z0
     {
         byte[] data;
 
-        /// <summary>
-        /// Defines the canonical emtpy bitstring of 0 length
-        /// </summary>
-        public static BitString Empty => parse(string.Empty);
-
         [MethodImpl(Inline)]
         public static implicit operator string(BitString src)                
             => src.Format();
@@ -622,7 +617,7 @@ namespace Z0
         {
             var len = Math.Min((count == null ? BitSize.measure<T>() : count.Value), Length - offset);       
             var bits = BitSeq.Slice(offset, len);
-            return bits.TakeScalar<T>();
+            return bits.Take<T>();
         }
 
         [MethodImpl(Inline)]
@@ -666,5 +661,11 @@ namespace Z0
             }
             return dst;
         }
+
+        /// <summary>
+        /// Defines the canonical emtpy bitstring of 0 length
+        /// </summary>
+        public static BitString Empty 
+            => parse(string.Empty);
     }
 }

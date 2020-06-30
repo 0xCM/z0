@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void encode(ReadOnlySpan<string> resSrc, Span<byte> resDst, byte n, int i, int j)
         {
-            var chars = span(skip(resSrc,i));
+            var chars = As.span(skip(resSrc,i));
             var count = min(chars.Length, n);
             ref readonly var src = ref head(chars);
             ref var dst = ref seek(resDst, j);

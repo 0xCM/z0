@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    using System;
-    
     /// <summary>
     /// Defines service contract for persistent emission of cil functions that accompany asm functions
     /// </summary>
-    public interface ICilFunctionWriter : IService
+    public interface ICilFunctionWriter
     {
         /// <summary>
         /// The writer's destintation path

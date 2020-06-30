@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static AsInternal;
 
     partial struct As
     {
@@ -18,8 +17,8 @@ namespace Z0
             var len = xs.Length;
             ref var xh = ref first(xs);
             ref var yh = ref first(ys);        
-            for(var i = 0; i < len ; i++)
-                seek(ref xh, i) = f(skip(in xh,i), skip(in yh, i));
+            for(var i = 0u; i < len ; i++)
+                seek(xh, i) = f(skip(xh,i), skip(in yh, i));
             return xs;
         }     
     }

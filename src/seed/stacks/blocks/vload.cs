@@ -20,67 +20,67 @@ namespace Z0
     {        
         [MethodImpl(Inline)]
         public static unsafe Vector128<sbyte> vload(W128 w, in sbyte src)
-            => LoadDquVector128(As.pointer(src));            
+            => LoadDquVector128(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<byte> vload(W128 w, in byte src)
-            => LoadDquVector128(As.pointer(src));
+            => LoadDquVector128(As.gptr(src));
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<short> vload(W128 w, in short src)
-            => LoadDquVector128(As.pointer(src));            
+            => LoadDquVector128(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<ushort> vload(W128 w, in ushort src)
-            => LoadDquVector128(As.pointer(src));            
+            => LoadDquVector128(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<int> vload(W128 w, in int src)
-            => LoadDquVector128(As.pointer(src));            
+            => LoadDquVector128(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<uint> vload(W128 w, in uint src)
-            => LoadDquVector128(As.pointer(src));            
+            => LoadDquVector128(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<long> vload(W128 w, in long src)
-            => LoadDquVector128(As.pointer(src));            
+            => LoadDquVector128(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<ulong> vload(W128 w, in ulong src)
-            => LoadDquVector128(As.pointer(src));            
+            => LoadDquVector128(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<sbyte> vload(W256 w, in sbyte src)
-            => LoadDquVector256(As.pointer(src));            
+            => LoadDquVector256(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<byte> vload(W256 w, in byte src)
-            => LoadDquVector256(As.pointer(src));            
+            => LoadDquVector256(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<short> vload(W256 w, in short src)
-            => LoadDquVector256(As.pointer(src));            
+            => LoadDquVector256(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<ushort> vload(W256 w, in ushort src)
-            => LoadDquVector256(As.pointer(src));            
+            => LoadDquVector256(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<int> vload(W256 w, in int src)
-            => LoadDquVector256(As.pointer(src));            
+            => LoadDquVector256(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<uint> vload(W256 w, in uint src)
-            => LoadDquVector256(As.pointer(src));            
+            => LoadDquVector256(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<long> vload(W256 w, in long src)
-            => LoadDquVector256(As.pointer(src));            
+            => LoadDquVector256(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<ulong> vload(W256 w, in ulong src)
-            => LoadDquVector256(As.pointer(src));            
+            => LoadDquVector256(As.gptr(src));            
 
         [MethodImpl(Inline)]
         public static unsafe Vector512<byte> vload(W512 w, in byte src)

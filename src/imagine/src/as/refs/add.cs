@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct As
     {
-
         /// <summary>
         /// Adds an offset to a reference
         /// </summary>
@@ -28,23 +27,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T add<T>(in T src, int offset)
             => ref Add(ref edit(src), offset);
-
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref byte add<T>(W8 w, in T src, int count)
-            => ref Add(ref edit<T,byte>(src), count);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref ushort add<T>(W16 w, in T src, int count)
-            => ref Add(ref edit<T,ushort>(src), count);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref uint add<T>(W32 w, in T src, int count)
-            => ref Add(ref edit<T,uint>(src), count);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref ulong add<T>(W64 w, in T src, int count)
-            => ref Add(ref edit<T,ulong>(src), count);
 
         /// <summary>
         /// Adds a T-counted offset to a readonly S-reference and returns the result for

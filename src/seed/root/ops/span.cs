@@ -16,14 +16,6 @@ namespace Z0
     partial class Root
     {
         /// <summary>
-        /// Creates a readonly character span from a string
-        /// </summary>
-        /// <param name="src">The source string</param>
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> span(string src)
-            => src;
-
-        /// <summary>
         /// Creates a span from an array
         /// </summary>
         /// <param name="src">A reference to the leading cell</param>

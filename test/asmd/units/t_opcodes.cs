@@ -11,6 +11,15 @@ namespace Z0.Asm.Data
 
     public class t_opcodes : t_asmd<t_opcodes>
     {
+        public void check_opcoded_models()
+        {
+            // var sr = StringRef.create("ABCDEFG");
+            // term.print(sr.Diagnostic());
+            
+            term.print(OpCodeModels.Service.JaeRel16().Format(true));
+            term.print(OpCodeModels.Service.JaeRel32().Format(true));
+            term.print(OpCodeModels.Service.JaeRel8().Format(true));
+        }
 
         void emit(ReadOnlySpan<InstructionExpression> src)
         {
@@ -62,25 +71,31 @@ namespace Z0.Asm.Data
             }
         }
 
-        public void opcode_encode()
+        public void instruction_tokens()
         {
-            var encoder = OpCodeServices.encoder();
-            var encoded = encoder.Encode();
-            using var dst = CaseWriter("OpCodes.Encoded");
-            for(var i=0; i<encoded.Length; i++)
+            var opcodes = span(OpCodeServices.InstructionTokens);
+            using var dst = CaseWriter("InstructionTokens", FileExtensions.Csv);
+            var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
+            for(var i=0; i<opcodes.Length; i++)
             {
-                dst.WriteLine(encoded[i]);
+                ref readonly var token = ref skip(opcodes,i);
+                var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
+                dst.WriteLine(line);
+            }
+        }
+
+        public void op_code_tokens()
+        {
+            var opcodes = OpCodeServices.OpCodeTokens;
+            using var dst = CaseWriter("OpCodesTokens", FileExtensions.Csv);
+            for(var i=0; i<opcodes.Length; i++)
+            {
+                dst.WriteLine(opcodes[i].Format());
             }
         }
 
         public void opcode_reccords()
-        {
-            var tokens = OpCodeServices.tokens();
-            for(var i=0; i<tokens.Length; i++)
-            {
-                Trace(tokens[i].Value);            
-            }
-            
+        {            
             var data = OpCodeServices.dataset();
             var count = data.OpCodeCount;
             var records = data.Records.ToReadOnlySpan();

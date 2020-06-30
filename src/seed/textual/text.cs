@@ -248,13 +248,6 @@ namespace Z0
         /// Concatenates a sequence of strings intersprsed by a character delimiter with a space on either side
         /// </summary>
         /// <param name="src">The characters to concatenate</param>
-        public static string join(char sep, params object[] src)
-            => string.Join(spaced(sep), src);
-
-        /// <summary>
-        /// Concatenates a sequence of strings intersprsed by a character delimiter with a space on either side
-        /// </summary>
-        /// <param name="src">The characters to concatenate</param>
         public static string concat(char sep, IEnumerable<object> src)
             => string.Join(spaced(sep), src);
 
@@ -284,6 +277,21 @@ namespace Z0
                     builder.Append(sep);
             }
             return builder.ToString();
+        }
+
+        public static string join(string sep, params StringRef[] refs)
+        {
+            var dst = build();
+            var count = refs.Length;
+            var src = Root.span(refs);
+            for(var i=0; i<count; i++)
+            {
+                dst.Append(Root.skip(refs,i).Format());
+                if(i != count - 1)
+                    dst.Append(sep);                    
+            }
+            
+            return dst.ToString();
         }
 
         public static string concat(string sep, Span<string> src)

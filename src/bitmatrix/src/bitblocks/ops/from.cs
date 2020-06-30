@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static Root;
 
     partial class BitBlocks
     {
@@ -84,7 +84,7 @@ namespace Z0
             
             var cells = new T[cellcount];
             for(int i=0, offset = 0; i< cellcount; i++, offset += capacity)
-                cells[i] = src.Slice(offset).TakeScalar<T>();
+                cells[i] = src.Slice(offset).Take<T>();
             return new BitBlock<T>(cells, n);
         }
     }

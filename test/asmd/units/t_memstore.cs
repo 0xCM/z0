@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Collections.Generic;
     using System.Linq;
     
     using static Memories;
@@ -20,11 +21,14 @@ namespace Z0
             var svc = ResStoreModels.Service;
             var store = svc.store();
             var results = svc.locations(store);
+            var dst = CaseWriter(FileExtensions.Csv);
             for(var i=0; i<results.Length; i++)
             {
                 var result = results[i];
                 Claim.yea(result.IsNonEmpty);
-                Trace(result);
+                dst.WriteLine(result);
+
+                //Trace(result);
             }
         }
 
@@ -46,32 +50,39 @@ namespace Z0
             }
         }
 
-        public void search()
+        public void Resource_Prop_Cil()
         {
-            var src = typeof(Konst).Assembly;
+            var summary = CaseWriter(FileExtensions.Csv);
+            var header = text.concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
+            summary.WriteLine(header);
 
-            var xRef = MemRef.memref(SymbolKonst.UpperHexCodes);            
+            var types = array(typeof(SymbolKonst), typeof(VectorKonst));
+            var mod = types[0].Module;
+            var props = types.StaticProperties().Where(p => p.GetGetMethod() != null && p.PropertyType == typeof(ReadOnlySpan<byte>));
 
-            var xProp = src.Properties().WithName("UpperHexCodes").Single();
-            
-            var xMethod = xProp.GetGetMethod();
-            Trace(xMethod.Name);
+            foreach(var p in props)
+            {
+                var m = p.GetGetMethod();
+                var body = m.GetMethodBody();
+                var cil = body.GetILAsByteArray();
+                var line = string.Concat(m.DeclaringType.Name.PadRight(20), "| ", m.Name.PadRight(30), "| ", cil.FormatHexBytes());
+                summary.WriteLine(line);
+            }
 
-            var xBody = xMethod.GetMethodBody();
-            var xCil = xBody.GetILAsByteArray();
-            Trace($"{xMethod.Name} {xRef} {xCil.FormatHexBytes()}");            
-
+            var decoded = CilServices.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
+            var cilwriter = new CilFunctionWriter(CasePath(FileExtensions.Il));
+            cilwriter.Write(decoded);        
         }
 
         public void emit_data()
         {
                                 
             var refs = Digits.HexRefs.ToArray();   
+            using var dst = CasePath($"Symbolic").Writer();
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];
                 var data = Addresses.cover(r.Address, r.Length);
-                using var dst = CasePath($"Symbolic{i}").Writer();
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
 
             }

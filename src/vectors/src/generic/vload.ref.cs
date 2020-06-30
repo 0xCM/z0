@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector128<T> vload<T>(W128 w, in T src)
             where T : unmanaged                    
-                => V0.vload(As.pointer(src), out Vector128<T> _);
+                => V0.vload(As.gptr(src), out Vector128<T> _);
 
         /// <summary>
         /// Loads a 256-bit vector from a readonly memory reference
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> vload<T>(W256 w, in T src)
             where T : unmanaged
-                => V0.vload(As.pointer(src), out Vector256<T> _);
+                => V0.vload(As.gptr(src), out Vector256<T> _);
 
         /// <summary>
         /// Loads a 128-bit vector from a readonly memory reference
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref Vector128<T> vload<T>(in T src, out Vector128<T> dst)
             where T : unmanaged
-                => ref vload(As.pointer(src), out dst);
+                => ref vload(As.gptr(src), out dst);
 
         /// <summary>
         /// Loads a 256-bit vector from a readonly memory reference
@@ -54,6 +54,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref Vector256<T> vload<T>(in T src, out Vector256<T> dst)
             where T : unmanaged
-                => ref vload(As.pointer(src), out dst);
+                => ref vload(As.gptr(src), out dst);
     }
 }

@@ -13,11 +13,11 @@ namespace Z0
     {        
         public readonly int Index;
         
-        public readonly string Identifier;
+        public readonly StringRef Identifier;
 
-        public readonly string Value;
+        public readonly StringRef Value;
 
-        public readonly string Description;
+        public readonly StringRef Description;
 
         [MethodImpl(Inline)]
         public static TokenInfo Define<T>(T index, string id, string value, string description)
@@ -29,7 +29,7 @@ namespace Z0
         {
             Index = index;
             Identifier = id ?? text.Empty;
-            Value = value ?? text.Empty;
+            Value = value;
             Description = description ?? text.Empty;
         }
 
@@ -39,7 +39,10 @@ namespace Z0
             get => text.empty(Identifier) || text.empty(Value);
         }
 
+        public string Format()
+            => text.concat(Identifier, " := ", Value, "; ", Description);
+        
         public static TokenInfo Empty 
-            => new TokenInfo(0,text.Empty, text.Empty, text.Empty);
+            => new TokenInfo(0, EmptyString, EmptyString, EmptyString);
     }
 }

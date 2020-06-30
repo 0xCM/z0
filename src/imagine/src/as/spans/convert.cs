@@ -313,7 +313,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static ref readonly Span<T> convert<S,T>(in ReadOnlySpan<S> src, in Span<T> dst)
         {
-            for(var i=0; i<src.Length; i++)
+            for(var i=0u; i<src.Length; i++)
                 seek(dst,i) = As<S,T>(ref edit(skip(src,i)));
             return ref dst;
         }

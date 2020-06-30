@@ -86,12 +86,40 @@ namespace Z0
             if(!md.HasBody || !md.Body.HasInstructions)
                 return default;
             
-            var mcil = CilFunction.Create((int)md.MDToken.Raw, 
+            var mcil = new CilFunction((int)md.MDToken.Raw, 
                 md.FullName, 
                 ToSpec(md.ImplAttributes), 
                 md.Body.Instructions.Map(ToSpec));
             md.FreeMethodBody();
             return mcil;
+        }
+
+        public static Option<CilFunction> decode(MethodInfo src)
+        {            
+            var mod = src.DeclaringType.Module;
+            var dnMod = Dn.ModuleDefMD.Load(mod);
+            var types = dnMod.GetTypes();
+            foreach(var tDef in types)
+            {
+                foreach(var mDef in tDef.Methods)
+                {
+                    if(!mDef.HasBody || !mDef.Body.HasInstructions)
+                        continue;
+
+                    var token = mDef.MDToken.Raw;
+                    if(token == src.MetadataToken)
+                    {
+                        var mcil = new CilFunction((int)token, 
+                            mDef.FullName, 
+                            ToSpec(mDef.ImplAttributes), 
+                            mDef.Body.Instructions.Map(ToSpec)
+                            );
+                        mDef.FreeMethodBody();
+                        return mcil;                           
+                    }
+                }
+            }
+            return Option.none<CilFunction>();                        
         }
 
         void IndexMethodDef(Dn.MethodDef md)

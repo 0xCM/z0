@@ -17,6 +17,24 @@ namespace Z0.Asm.Data
     {                
         public static OpCodeServices Service => default;
 
+        public static TokenInfo[] InstructionTokens
+            => InstructionTokenInfo.Models; 
+
+        [MethodImpl(Inline), Op]
+        public static string Meaning(InstructionTokenKind token)
+            => InstructionTokenInfo.Meanings[(int)token];
+
+        [MethodImpl(Inline), Op]
+        public static string Identity(InstructionTokenKind token)
+            => InstructionTokenInfo.Identity[(int)token];
+
+        [MethodImpl(Inline), Op]
+        public static string Definition(InstructionTokenKind token)
+            => InstructionTokenInfo.Definitions[(int)token];
+
+        public static OpCodeTokens OpCodeTokens
+            => load(LiteralFieldRefs.strings(typeof(OpCodeTokenValues)), alloc<OpCodeToken>(OpCodeTokenValues.Count));
+
         [MethodImpl(Inline)]
         public static OpCodeDataset dataset()
         {
@@ -45,14 +63,6 @@ namespace Z0.Asm.Data
                 dst[i] = OpCodeServices.identity(skip(src,i));
         }
 
-        [Op]
-        public static OpCodeEncoder encoder()
-        {
-            var document = doc();
-            var records = sys.alloc<OpCodeRecord>(document.RowCount);
-            CommandInfoParser.Service.Parse(document, records);
-            return new OpCodeEncoder(tokens(),records);
-        }
 
         [Op]
         public static unsafe OpCodeTokens load(ReadOnlySpan<FieldRef> src, OpCodeToken[] dst)
@@ -62,17 +72,15 @@ namespace Z0.Asm.Data
             for(byte i=0; i<src.Length; i++)
             {
                 ref readonly var field = ref skip(src,i);
-                var data = cover(field.C16, field.Reference.Length);
-                var value = asci8.Null;
-                asci.encode(data, out value);
-                seek(buffer, i) = new OpCodeToken(i, (OpCodeTokenKind)i, value);
+                var sref = field.ToStingRef();
+                seek(buffer, i) = new OpCodeToken(i, (OpCodeTokenKind)(i + 1), sref);
             }
             return new OpCodeTokens(dst);            
         }
 
         [Op]
         public static unsafe OpCodeTokens tokens()
-            => load(LiteralFieldRefs.strings(typeof(OpCodeTokenValues)),alloc<OpCodeToken>(OpCodeTokenValues.Count));
+            => load(LiteralFieldRefs.strings(typeof(OpCodeTokenValues)), alloc<OpCodeToken>(OpCodeTokenValues.Count));
 
         [Op]
         public void Partition(in OpCodePartitoner processor, in OpCodePartition handler, ReadOnlySpan<OpCodeRecord> src)

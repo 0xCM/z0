@@ -9,9 +9,9 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// Selects the nested types from a stream
+        /// Selects all nested types declared by an array of source types
         /// </summary>
-        /// <param name="src">The source stream</param>
+        /// <param name="src">The source types</param>
         public static Type[] Nested(this Type[] src)
             => src.Where(t => t.IsNested);
     }

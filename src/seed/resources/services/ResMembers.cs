@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public unsafe static ResMember define<T>(MemberInfo member, ReadOnlySpan<T> src)
             where T : unmanaged
-                => new ResMember(member, MemRef.memref(cast<T,byte>(src)));
+                => new ResMember(member, MemRef.from(cast<T,byte>(src)));
 
         [MethodImpl(Inline), Op]
         public unsafe static ReadOnlySpan<char> segment(in ResIdentity<char> res, int i0, int i1)

@@ -106,6 +106,6 @@ namespace Z0
         static unsafe E literal<E,T>(in T tVal, E eRep = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => Unsafe.Read<E>(pointer<T,E>(tVal));
+                => Unsafe.Read<E>(gptr<T,E>(tVal));
     }
 }

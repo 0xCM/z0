@@ -15,10 +15,8 @@ namespace Z0
         readonly CilFormatConfig Config;
         
         [MethodImpl(Inline)]
-        public CilFunctionFormatter(CilFormatConfig config)
-        {
-            Config = config ?? CilFormatConfig.Default;
-        }
+        public CilFunctionFormatter(CilFormatConfig? config = null)
+            => Config = config ?? CilFormatConfig.Default;
         
         static string Comment(string text, string delimiter = "//", int pad = 0)
             => pad == 0 ? $"{delimiter} {text}" : delimiter.PadRight(pad) + text;
@@ -29,11 +27,8 @@ namespace Z0
 
             var margin = new string(Chars.Space,4);
             rendered.AppendLine(Comment(f.FullName));
-            f.Sig.TryMap(s => rendered.AppendLine(Comment(s.Format())));
             rendered.AppendLine(Comment(f.ImplSpec.ToString()));            
-            rendered.AppendLine(f.Sig.MapValueOrElse(s => s.Format(), () => string.Empty));
-            rendered.AppendLine(Chars.LBrace.ToString());                    
-            
+            rendered.AppendLine(Chars.LBrace.ToString());            
             foreach(var i in f.Instructions)
                 rendered.AppendLine(margin + i.ToString());
             rendered.AppendLine(Chars.RBrace.ToString());                        

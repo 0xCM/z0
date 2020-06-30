@@ -24,8 +24,6 @@ namespace Z0
     [ApiHost]
     public readonly struct FieldCapture
     {
-        public static FieldCapture Service => default;
-                
 
         [MethodImpl(Inline)]
         static string format<T>(T src)
@@ -43,7 +41,7 @@ namespace Z0
             if(src.Contains((char)0))
                 return string.Empty;
                 
-            var dst = new string(pointer(first(src)));
+            var dst = new string(gptr(first(src)));
             return dst;
         }
         
@@ -107,7 +105,6 @@ namespace Z0
                 writer.WriteLine(header);
                 iter(dst,line => writer.WriteLine(line));
             }
-
         }
     }
 }

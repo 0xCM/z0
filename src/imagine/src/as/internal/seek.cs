@@ -18,13 +18,8 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The number of elements to advance</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref T seek<T>(ref T src, int count)
             => ref Add(ref src, count);
-
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T seek<T>(ref T src, IntPtr offset)
-            => ref Add(ref src, offset);
     }
 }

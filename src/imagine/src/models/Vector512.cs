@@ -11,13 +11,12 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Konst;
+    using static Typed;
 
     [StructLayout(LayoutKind.Sequential, Size = 64), Vector(TypeWidth.W512)]
     public readonly struct Vector512<T>
         where T : unmanaged
-    {        
-        public static Vector512<T> Zero => default;
-        
+    {                
         /// <summary>
         /// The lo 256 bits 
         /// </summary>
@@ -27,13 +26,6 @@ namespace Z0
         /// The hi 256 bits
         /// </summary>
         public readonly Vector256<T> Hi;
-
-        public const int Size = 64;
-        
-        /// <summary>
-        /// The number of cells covered by the vector
-        /// </summary>
-        public static int Count => 2*Vector256<T>.Count;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector512<T>((Vector256<T> a, Vector256<T> b) src)
@@ -69,10 +61,28 @@ namespace Z0
             Hi = Vector256.WithUpper(Vector256.WithLower(default, c), d);
         }                
 
-        public T this[int i]
+        public Vector128<T> this[N0 n]
         {
             [MethodImpl(Inline)]
-            get => default;
+            get => Vector256.GetLower(Lo);
+        }
+
+        public Vector128<T> this[N1 n]
+        {
+            [MethodImpl(Inline)]
+            get => Vector256.GetUpper(Lo);
+        }
+
+        public Vector128<T> this[N2 n]
+        {
+            [MethodImpl(Inline)]
+            get => Vector256.GetLower(Hi);
+        }
+
+        public Vector128<T> this[N3 n]
+        {
+            [MethodImpl(Inline)]
+            get => Vector256.GetUpper(Hi);
         }
 
         [MethodImpl(Inline)]
@@ -80,6 +90,15 @@ namespace Z0
         {
             a = Lo;
             b = Hi;
+        }
+
+        [MethodImpl(Inline)]
+        public void Deconstruct(out Vector128<T> a, out Vector128<T> b, out Vector128<T> c, out Vector128<T> d)
+        {
+            a = this[n0];
+            b = this[n1];
+            c = this[n2];
+            d = this[n3];
         }
 
         /// <summary>
@@ -104,5 +123,17 @@ namespace Z0
 
         public override string ToString()
             => string.Join(" ", Lo.ToString(), Hi.ToString());
+
+        public static Vector512<T> Zero 
+            => default;
+    
+        public const int Size = 64;
+        
+        /// <summary>
+        /// The number of cells covered by the vector
+        /// </summary>
+        public static int Count 
+            => 2*Vector256<T>.Count;
+
     }
 }

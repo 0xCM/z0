@@ -185,6 +185,10 @@ namespace Z0
             get => ref Reference.Address.Ref<char>();
         }
 
+        [MethodImpl(Inline)]
+        public StringRef ToStingRef()
+            => new StringRef(Reference);
+            
         /// <summary>
         /// Presents the leading source cell as a reference to an enum value of parametric kind
         /// </summary>

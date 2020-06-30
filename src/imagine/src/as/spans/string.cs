@@ -12,8 +12,8 @@ namespace Z0
 
     partial struct As
     {
-       [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op]
         public static string @string(ReadOnlySpan<char> src)
-            => @view<char,string>(first(src));
+            => sys.@string(src); //@view<char,string>(first(src));
     }   
 }

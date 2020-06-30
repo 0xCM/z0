@@ -12,22 +12,7 @@ namespace Z0
     using static As;
 
     partial struct V0
-    {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T vcell<T>(ref Vector128<T> src)        
-            where T : unmanaged
-                => ref @as<Vector128<T>,T>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T vcell<T>(ref Vector256<T> src)        
-            where T : unmanaged
-                => ref @as<Vector256<T>,T>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T vcell<T>(ref Vector512<T> src)        
-            where T : unmanaged
-                => ref @as<Vector512<T>,T>(ref src);
-
+    {        
         /// <summary>
         /// Extracts an index-identified component from the source vector
         /// </summary>
@@ -40,14 +25,15 @@ namespace Z0
                 => src.GetElement(index);
 
         /// <summary>
-        /// Extracts the first component of the source vector
+        /// Extracts an index-identified component from the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
+        /// <param name="index">The index of the component to extract</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T vhead<T>(Vector128<T> src)
+        public static T vcell<T>(Vector256<T> src, int index)
             where T : unmanaged
-                => vcell(src,0);
+                => src.GetElement(index);
 
         /// <summary>
         /// Extracts a T-indexed component from a vector obtained by converting the S-vector to a T-vector
@@ -85,16 +71,6 @@ namespace Z0
             where T : unmanaged
                 => dst.WithElement(index, src);
 
-        /// <summary>
-        /// Extracts an index-identified component from the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">The index of the component to extract</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T vcell<T>(Vector256<T> src, int index)
-            where T : unmanaged
-                => src.GetElement(index);
                 
         /// <summary>
         /// Sets an index-identified component to a specified value

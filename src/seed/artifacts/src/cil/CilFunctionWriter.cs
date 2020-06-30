@@ -14,11 +14,10 @@ namespace Z0
     {        
         public FilePath Target {get;}
 
-        readonly CilFormatConfig Config;
-        
+        readonly CilFormatConfig Config;        
         
         [MethodImpl(Inline)]
-        public CilFunctionWriter(FilePath dst, CilFormatConfig config = null)
+        public CilFunctionWriter(FilePath dst, CilFormatConfig? config = null)
         {
             Target = dst;
             Config = config ?? CilFormatConfig.Default;

@@ -9,7 +9,9 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    
+    using static As;
+    using static Typed;
+
     public static class SpanTake
     {
         /// <summary>
@@ -17,8 +19,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static T TakeScalar<T>(this Span<byte> src)
-            where T : unmanaged
+        public static T Take<T>(this Span<byte> src)
+            where T : struct
         {
             if(src.Length == 0)
                 return default;
@@ -26,13 +28,19 @@ namespace Z0
             var tsize = Unsafe.SizeOf<T>();
             var srclen = src.Length;
             if(srclen >= tsize)
-                return MemoryMarshal.Read<T>(src);
+                return read<T>(src);
             else
             {
                 var remaining = tsize - src.Length;
-                Span<T> dst = stackalloc T[1];
-                src.CopyTo(dst.Bytes());            
-                return dst[0];
+                var storage = default(T);
+                ref var dst = ref @as<T,byte>(ref storage);
+                for(var i=0u; i<src.Length; i++)
+                    seek(dst,i) = skip(src,i);
+                return storage;
+
+                //Span<T> dst = stackalloc T[1];
+                // src.CopyTo(dst.Bytes());            
+                // return dst[0];
             }
         }
 
@@ -54,33 +62,33 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte TakeUInt8<T>(this ReadOnlySpan<T> src)
             where T : unmanaged        
-                => As.first(default(W8),src);
+                => first(w8, src);
 
         [MethodImpl(Inline)]
         public static byte TakeUInt8<T>(this Span<T> src)
             where T : unmanaged        
-                => As.first(default(W8),src);
+                => first(w8, src);
 
         [MethodImpl(Inline)]
         public static ushort TakeUInt16<T>(this Span<T> src)
             where T : unmanaged        
-                => As.first(default(W16),src);
+                => first(w16, src);
 
         [MethodImpl(Inline)]
         public static uint TakeUInt32<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
-                => As.first(default(W32),src);
+                => first(w32, src);
 
         [MethodImpl(Inline)]
         public static uint TakeUInt24<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
         {
             var storage = 0u;
-            ref var dst = ref As.@as<uint,byte>(ref storage);
-            ref readonly var src8 = ref As.first(default(W8),src);
-            AsInternal.seek(ref dst,0) = AsInternal.skip(src8,0);
-            AsInternal.seek(ref dst,1) = AsInternal.skip(src8,1);
-            AsInternal.seek(ref dst,2) = AsInternal.skip(src8,2);
+            ref var dst = ref @as<uint,byte>(ref storage);
+            ref readonly var src8 = ref As.first(w8, src);
+            seek(dst,0) = skip(src8,0);
+            seek(dst,1) = skip(src8,1);
+            seek(dst,2) = skip(src8,2);
             return storage;
         }
         
@@ -97,16 +105,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint TakeUInt32<T>(this Span<T> src)
             where T : unmanaged        
-                => As.first(default(W32), src);
+                => first(w32, src);
 
         [MethodImpl(Inline)]
         public static ulong TakeUInt64<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
-                => As.first(default(W64),src);
+                => first(w64, src);
 
         [MethodImpl(Inline)]
         public static ulong TakeUInt64<T>(this Span<T> src)
             where T : unmanaged        
-                => As.first(default(W64),src);
+                => first(w64, src);
     }
 }

@@ -12,6 +12,7 @@ namespace Z0
     using static Konst;
     using static Widths;
     using static As;
+    using static V0;
 
     partial class XTend
     {
@@ -27,14 +28,14 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(V0.vcount<S>(w128), V0.vcount<T>(w128));
-            var dstLen = V0.vcount<T>(w128);
+            var xLen = math.min(vcount<S>(w128), vcount<T>(w128));
+            var dstLen = vcount<T>(w128);
             var lhsData = lhs.ToSpan();
             var rhsData = rhs.ToSpan();
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return Vectors.vload(w128, first(dst));        
+            return vload(w128, first(dst));        
         } 
 
         /// <summary>
@@ -48,13 +49,13 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(V0.vcount<S>(w128), V0.vcount<T>(w128));
-            var dstLen = V0.vcount<T>(w128);
+            var xLen = math.min(vcount<S>(w128), vcount<T>(w128));
+            var dstLen = vcount<T>(w128);
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);
-            return Vectors.vload(w128, first(dst));        
+            return vload(w128, first(dst));        
         } 
         /// <summary>
         /// Projects a source vector into a target vector via a mapping function
@@ -67,13 +68,13 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(V0.vcount<S>(w256), V0.vcount<T>(w256));
+            var xLen = math.min(vcount<S>(w256), vcount<T>(w256));
             var dstLen = V0.vcount<T>(w256);
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);            
-            return Vectors.vload(w256, first(dst));        
+            return vload(w256, first(dst));        
         } 
 
         /// <summary>
@@ -89,14 +90,14 @@ namespace Z0
             where S : unmanaged
         {
             var w = w256;
-            var xLen = Math.Min(V0.vcount<S>(w), V0.vcount<T>(w));
-            var dstLen = V0.vcount<T>(w);
+            var xLen = math.min(vcount<S>(w), vcount<T>(w));
+            var dstLen = vcount<T>(w);
             var lhsData = x.ToSpan();
             var rhsData = y.ToSpan();
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return Vectors.vload(w, first(dst));        
+            return vload(w, first(dst));        
         } 
     }
 }

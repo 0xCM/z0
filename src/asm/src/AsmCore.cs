@@ -85,7 +85,7 @@ namespace Z0.Asm
         /// Creates a cil function formatter with an optionally-specified configuration
         /// </summary>
         /// <param name="config">The format configuration</param>
-        CilFunctionFormatter CilFormatter(CilFormatConfig config = null)          
+        CilFunctionFormatter CilFormatter(CilFormatConfig? config = null)          
             => new CilFunctionFormatter(config);
 
         /// <summary>

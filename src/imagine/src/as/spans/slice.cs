@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.InteropServices.MemoryMarshal;
-
-    using static AsInternal;
     
     partial struct As
     {
@@ -21,8 +19,18 @@ namespace Z0
         /// <param name="offset">The T-measured offset count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, uint offset)
+            => cover(skip(src,offset), (uint)(src.Length - offset));
+
+        /// <summary>
+        /// Selects a segment [offset, length(src) - 1] from a source span src:ReadOnlySpan[T]
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, int offset)
-            => cover(skip(src,offset), src.Length - offset);
+            => cover(skip(src,(uint)offset), src.Length - offset);
 
         /// <summary>
         /// Draws a specified count of T-cells from a source span beginning at a specified offset
@@ -33,7 +41,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, int offset, int length)
-            => cover(skip(src,offset), length);
+            => cover(skip(src,(uint)offset), length);
 
         /// <summary>
         /// Selects a segment [offset, length(src) - 1] from a source span src:Span[T]
@@ -43,7 +51,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> slice<T>(Span<T> src, int offset)
-            => CreateSpan(ref seek(src,offset), src.Length - offset);
+            => CreateSpan(ref seek(first(src), offset), src.Length - offset);
 
         /// <summary>
         /// Draws a specified count of T-cells from a source span beginning at a specified offset
@@ -54,6 +62,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> slice<T>(Span<T> src, int offset, int length)
-            => CreateSpan(ref seek(src,offset), length);
+            => CreateSpan(ref seek(first(src), offset), length);
     }
 }

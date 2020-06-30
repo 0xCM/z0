@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using static AsInternal;
-
     partial struct As
     {
         /// <summary>
@@ -25,7 +23,7 @@ namespace Z0
             ref readonly var input = ref first(src);
             int count = src.Length;
 
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
                 f(skip(input,i));
         }
 
@@ -42,7 +40,7 @@ namespace Z0
             int count = src.Length;
 
             for(var i=0; i<count; i++)
-                f(i,skip(input,i));
+                f(i,skip(input,(uint)i));
         }
 
         /// <summary>
@@ -58,7 +56,7 @@ namespace Z0
             ref readonly var x = ref first(a);
             ref readonly var y = ref first(b);
             
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
                 f(skip(x,i),skip(y,i));
         }
 

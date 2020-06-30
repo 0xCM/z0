@@ -58,7 +58,7 @@ namespace Z0.Asm
 
         public static ModRmEncoding[] Table()
         {
-            var dst = sys.alloc<ModRmEncoding>(1024);            
+            var dst = sys.alloc<ModRmEncoding>(256);            
             fill(dst);
             return dst;
         }            

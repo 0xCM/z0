@@ -13,13 +13,12 @@ namespace Z0
 
     partial struct V0
     {           
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> vspan<T>(Vector128<T> src, W128 w = default)
             where T : unmanaged            
         {
             var dst = vinit<T>(w);
-            ref var storage = ref vcell(ref dst);
+            ref var storage = ref vfirst(dst);
             vsave(src, ref storage);
             return cover(storage, vcount<T>(w));
         }
@@ -29,7 +28,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = vinit<T>(w);
-            ref var storage = ref vcell(ref dst);
+            ref var storage = ref vfirst(dst);
             vsave(src, ref storage);
             return cover(storage, vcount<T>(w));
         }
@@ -39,7 +38,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = vinit<T>(w);
-            ref var storage = ref vcell(ref dst);
+            ref var storage = ref vfirst(dst);
             vsave(src, ref storage);
             return cover(storage, vcount<T>(w));
         }

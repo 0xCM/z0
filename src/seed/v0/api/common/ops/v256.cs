@@ -6,17 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
-
-    partial class Root
+        
+    partial struct V0
     {
-        [MethodImpl(Inline), Op]
-        public static void locations(ReadOnlySpan<string> src, Span<MemoryAddress> dst)
-        {
-            ref readonly var r0 = ref head(src);
-            for(var i=0; i<src.Length; i++)
-                seek(dst,i) = location(skip(r0,i));
-        }
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector256<T> v256<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => Vector256.WithUpper(Vector256.WithLower(default,a),b);
     }
 }

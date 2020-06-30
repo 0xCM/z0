@@ -136,7 +136,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe TypeCode Lookup(byte index)        
         {
-            var address = Root.location(this);
+            var address = MemoryAddress.from(this);
             return (TypeCode)(*(address + index).Pointer<byte>());
         }
 

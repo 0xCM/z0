@@ -11,6 +11,10 @@ namespace Z0
 
     partial struct As
     {     
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> span(string src)
+            => src;
+            
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(Memory<T> src)
             where T : struct

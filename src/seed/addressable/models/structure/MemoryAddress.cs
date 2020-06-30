@@ -159,6 +159,10 @@ namespace Z0
         internal MemoryAddress(ulong absolute)
             => Location = absolute;
 
+        [MethodImpl(Inline)]
+        internal MemoryAddress(void* pSrc)
+            => Location = (ulong)pSrc;
+
         public string Format()
             => Identifier;        
 

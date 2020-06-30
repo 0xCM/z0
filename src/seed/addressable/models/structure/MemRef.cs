@@ -9,45 +9,27 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
+    using static V0;
+    using static As;
 
     public readonly struct MemRef : IAddressable<MemRef>, ITextual, IEquatable<MemRef>
     {
         readonly Vector128<ulong> Data;        
         
         [MethodImpl(Inline)]
-        public static unsafe Span<byte> read(MemRef src)
-        {
-            var reader = PointedReader.create(src.Address.Pointer<byte>(), src.Length);
-            Span<byte> dstA = new byte[src.Length];            
-            var count = reader.ReadAll(dstA);
-            return dstA;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe int read(MemRef src, Span<byte> dst)
-        {
-            var reader = PointedReader.create(src.Address.Pointer<byte>(), src.Length);
-            return reader.ReadAll(dst);            
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ReadOnlySpan<byte> cover(MemRef src)
-            => Addresses.cover(src.Address, src.Length);        
-
-        [MethodImpl(Inline)]
-        public unsafe static MemRef memref(ReadOnlySpan<byte> src)
-            => new MemRef(As.pointer(Root.head(src)), src.Length);
+        public unsafe static MemRef from(ReadOnlySpan<byte> src)
+            => new MemRef(gptr(first(src)), src.Length);
                 
         ulong Lo
         {
             [MethodImpl(Inline)]
-            get => Data.GetElement(0);
+            get => vcell(Data,0);
         }
 
         ulong Hi
         {
             [MethodImpl(Inline)]
-            get => Data.GetElement(1);
+            get => vcell(Data,1);
         }
 
         public MemoryAddress Address 
@@ -80,6 +62,10 @@ namespace Z0
             => Length/Root.size<T>();
 
         [MethodImpl(Inline)]
+        public static implicit operator Vector128<ulong>(in MemRef src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
         internal MemRef(Vector128<ulong> src)
         {
             Data = src;
@@ -88,13 +74,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe MemRef(byte* src, int length)
         {
-            Data = Vector128.Create((ulong)src, (ulong)length);
+            Data = vparts((ulong)src, (ulong)length);
         }
 
         [MethodImpl(Inline)]
         public MemRef(MemoryAddress src, int length)
         {
-            Data = Vector128.Create((ulong)src, (ulong)length);
+            Data = vparts((ulong)src, (ulong)length);
         }  
 
         public bool IsEmpty
@@ -121,12 +107,11 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load()
-            => Addresses.cover(Address, Length);
+            => Root.view<byte>(this);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Load<T>()
-            => Addresses.cover<T>(Address, Length);
-
+            => Root.view<T>(this);
 
         [MethodImpl(Inline)]
         public unsafe T* Pointer<T>()

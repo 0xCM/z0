@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The number of elements to skip</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         internal static ref readonly T skip<T>(in T src, byte count)
             => ref Add(ref edit(in src), count); 
 
@@ -30,28 +30,27 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The number of elements to skip</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         internal static ref readonly T skip<T>(in T src, int count)
             => ref Add(ref edit(in src), count); 
 
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, byte count)
             => ref skip(in first(src), count);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T skip<T>(Span<T> src, byte count)
             => ref skip(in first(src), count);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
             => ref skip(in first(src), count);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T skip<T>(Span<T> src, int count)
             => ref skip(in first(src), count);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, int count)
             => ref add(first(src), count);            
     }

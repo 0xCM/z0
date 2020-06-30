@@ -14,30 +14,23 @@ namespace Z0
     /// <summary>
     /// Adheres a set of IL instructions with the source method
     /// </summary>
-    public class CilFunction
+    public readonly struct CilFunction
     {
-        [MethodImpl(Inline)]
-        public static CilFunction Create(int MethodId, string FullName, MethodImplAttributes ImplSpec, Instruction[] Instructions)
-            => new CilFunction(MethodId, FullName, ImplSpec, Instructions);
+        public readonly int MethodId;
 
-        [MethodImpl(Inline)]
-        CilFunction(int MethodId, string FullName, MethodImplAttributes ImplSpec, Instruction[] Instructions)
-        {
-            this.MethodId = MethodId;
-            this.FullName = FullName;
-            this.ImplSpec = ImplSpec;
-            this.Instructions = Instructions;
-        }
-        
-        public int MethodId {get;}
-
-        public MethodImplAttributes ImplSpec {get;}
+        public readonly MethodImplAttributes ImplSpec;
                 
-        public string FullName {get;}
+        public readonly string FullName;
 
-        public Option<MethodSig> Sig {get; private set;}
+        public readonly Instruction[] Instructions;
 
-        public Instruction[] Instructions {get;}
-
+        [MethodImpl(Inline)]
+        public CilFunction(int id, string name, MethodImplAttributes attribs, Instruction[] instructions)
+        {
+            MethodId = id;
+            FullName = name;
+            ImplSpec = attribs;
+            Instructions = instructions;    
+        }       
     }
 }

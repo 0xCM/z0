@@ -6,19 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
-    using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct As
+    partial class Root
     {
-        [MethodImpl(Inline)]
-        public unsafe static T* pointer<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
+        [MethodImpl(Inline), Op]
+        public static void addresses(ReadOnlySpan<string> src, Span<MemoryAddress> dst)
         {
-            ref readonly var rHead = ref first(src);
-            return (T*)AsPointer(ref edit(rHead));
+            ref readonly var r0 = ref head(src);
+            for(var i=0; i<src.Length; i++)
+                seek(dst,i) = address(skip(r0,i));
         }
     }
 }

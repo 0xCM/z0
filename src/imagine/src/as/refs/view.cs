@@ -14,6 +14,16 @@ namespace Z0
     partial struct As
     {
         /// <summary>
+        /// Presents an S-cell as a T-cell
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T view<S,T>(in S src)   
+            => ref As<S,T>(ref AsRef(src));        
+
+        /// <summary>
         /// Interprets a readonly T-reference as a readonly int8 reference
         /// </summary>
         /// <param name="src">The source reference</param>
@@ -120,24 +130,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly bool view1u<T>(in T src)
             => ref view<T,bool>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly bool reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric16)]
-        public static ref readonly string viewS<T>(in T src)
-            => ref view<T,string>(src);
-
-        /// <summary>
-        /// Presents an S-cell as a T-cell
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly T view<S,T>(in S src)   
-            => ref As<S,T>(ref AsRef(src));
     }
 }

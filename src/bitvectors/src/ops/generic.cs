@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst;
 
     partial class BitVector
     {
@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> generic<T>(Span<byte> src)
             where T : unmanaged
-                => generic(src.TakeScalar<T>());
+                => generic(src.Take<T>());
 
         /// <summary>
         /// Loads an bitvector of minimal size from a source bitstring

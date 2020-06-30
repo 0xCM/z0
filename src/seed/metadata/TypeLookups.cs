@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static unsafe ref readonly Type fetchU(in NumericTx10 lu, byte index)
         {
-            var address = Root.location(lu);
+            var address = MemoryAddress.from(lu);
             var offset = (byte)index;
             var pType = (address + offset).Pointer<ulong>();
             return ref As.@ref<ulong,Type>(pType);                    

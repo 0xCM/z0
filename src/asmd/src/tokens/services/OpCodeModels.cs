@@ -19,27 +19,34 @@ namespace Z0.Asm.Data
     [ApiHost("opcodes.models")]
     public readonly struct OpCodeModels
     {
-        [MethodImpl(Inline), Op]
-        public static M JaRel8() => define(E.JaRel8, C.JaRel8, I.JaRel8);
+        public static OpCodeModels Service => default;
 
         [MethodImpl(Inline), Op]
-        public static M JaRel16() => define(E.JaRel16, C.JaRel16, I.JaRel16);
+        public M JaRel8() 
+            => define(E.JaRel8, C.JaRel8, I.JaRel8);
 
         [MethodImpl(Inline), Op]
-        public static M JaRel32() => define(E.JaRel32, C.JaRel32, I.JaRel32);
+        public M JaRel16() 
+            => define(E.JaRel16, C.JaRel16, I.JaRel16);
 
         [MethodImpl(Inline), Op]
-        public static M JaeRel8() => define(E.JaeRel8, C.JaeRel8, I.JaeRel8);
+        public M JaRel32() 
+            => define(E.JaRel32, C.JaRel32, I.JaRel32);
 
         [MethodImpl(Inline), Op]
-        public static M JaeRel16() => define(E.JaeRel16, C.JaeRel16, I.JaeRel16);
+        public M JaeRel8() 
+            => define(E.JaeRel8, C.JaeRel8, I.JaeRel8);
 
         [MethodImpl(Inline), Op]
-        public static M JaeRel32() => define(E.JaeRel32, C.JaeRel32, I.JaeRel32);
+        public M JaeRel16() 
+            => define(E.JaeRel16, C.JaeRel16, I.JaeRel16);
 
         [MethodImpl(Inline), Op]
-        public static OpCodeModel define(string id, string cx, string ix)
+        public M JaeRel32() 
+            => define(E.JaeRel32, C.JaeRel32, I.JaeRel32);
+
+        [MethodImpl(Inline), Op]
+        static OpCodeModel define(string id, string cx, string ix)
             => new OpCodeModel(id,cx,ix);
-
     }
 }

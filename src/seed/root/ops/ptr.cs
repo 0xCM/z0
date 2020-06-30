@@ -17,6 +17,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* constptr<T>(in T src)
             where T : unmanaged
-                => As.pointer(src);
+                => As.gptr(src);
     }
 }

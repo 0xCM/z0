@@ -15,20 +15,9 @@ namespace Z0
     [ApiHost]
     public readonly struct LiteralFieldRefs
     {
-        // [MethodImpl(Inline), Op]
-        // public static unsafe MemoryAddress address(Type src)
-        //     => src.TypeHandle.Value.ToPointer();
-
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address(Type src)
-        {
-
-            // var tref = __makeref(src);
-            // var pTref = TypedReference.TargetTypeToken(tref).Value.ToPointer();
-            // return pTref;
-
-            return src.TypeHandle.Value.ToPointer();
-        }
+            => src.TypeHandle.Value.ToPointer();
 
         [Op]
         public static FieldRef[] search(params Type[] src)
@@ -85,7 +74,7 @@ namespace Z0
             var datatype = type.PrimalKind();
             if(data is string s)
             {                                
-                var content = span(s);
+                var content = As.span(s);
                 var size = s.Length*2;
                 var segment = memref(pvoid(first(content)), size);
                 return new FieldRef(src, segment);

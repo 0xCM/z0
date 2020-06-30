@@ -12,8 +12,6 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    using static AsInternal;
-
     partial struct As
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -21,7 +19,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = i1 - i0 + 1;
-            ref readonly var first = ref skip(src, i0);
+            ref readonly var first = ref skip(src, (uint)i0);
             return CreateReadOnlySpan(ref edit(first), count);      
         }
 
@@ -31,7 +29,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = i1 - i0 + 1;
-            ref readonly var first = ref skip(src, i0);
+            ref readonly var first = ref skip(src, (uint)i0);
             return cast<S,T>(CreateReadOnlySpan(ref edit(first), count));      
         }
 
@@ -40,8 +38,8 @@ namespace Z0
             where T : unmanaged
         {
             var count = i1 - i0 + 1;
-            var pFirst = Unsafe.Add<T>(pSrc, count);
-            ref var first = ref Unsafe.AsRef<T>(pFirst);
+            var pFirst = Add<T>(pSrc, count);
+            ref var first = ref AsRef<T>(pFirst);
             return CreateReadOnlySpan<T>(ref first, count);      
         }
     }
