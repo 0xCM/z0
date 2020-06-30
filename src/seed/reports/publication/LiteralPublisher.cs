@@ -34,7 +34,7 @@ namespace Z0
 
         static string DescribeLiteral<E>(E literal)
             where E : unmanaged, Enum
-                => LiteralAttribute.Describe(typeof(E).Field(literal.ToString()).Require());
+                => LiteralInfo.from(typeof(E).Field(literal.ToString()).Require()).Text;                            
 
         public LiteralRecord[] PublishLiterals<E>(out FilePath dst)
             where E : unmanaged, Enum

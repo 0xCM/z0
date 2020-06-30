@@ -33,8 +33,13 @@ namespace Z0
         {
             dst.Delimit(NumericLiteralField.Name, src.Name);
             dst.Delimit(NumericLiteralField.Base, src.Base);
-            dst.Delimit(NumericLiteralField.Data, BoxedNumber.From(src.Data).Format(base2));
+
+            dst.Delimit(NumericLiteralField.Data, src.Data);
+
+            //dst.Delimit(NumericLiteralField.Data, BoxedNumber.From(src.Data).Format(base2));
             dst.Delimit(NumericLiteralField.Text, src.Text);
+
+            throw new Exception("Fix me");
         }
     }
 }

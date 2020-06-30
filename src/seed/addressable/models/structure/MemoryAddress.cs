@@ -80,7 +80,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(IntPtr src)
-            => Addresses.address(src);
+            => Root.address(src);
 
         [MethodImpl(Inline)]
         public static implicit operator IntPtr(MemoryAddress src)
@@ -209,8 +209,6 @@ namespace Z0
                 => (T*)Location;
 
         public static MemoryAddress Empty 
-            => new MemoryAddress(0);
- 
-
+            => new MemoryAddress(0); 
     }
 }

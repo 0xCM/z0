@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
 
-
     /// <summary>
     /// Lifts an enumeration literal to a type
     /// </summary>

@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
 
-            var literals = Literati.attributed<T>(Konst.base2, typeof(BitMasks));
+            var literals = BinaryLiterals.attributed<T>(Konst.base2, typeof(BitMasks));
             var masks = literals.ToArray();            
             foreach(var m in masks)
             {

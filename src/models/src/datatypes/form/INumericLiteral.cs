@@ -4,14 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public interface INumericLiteral : ILiteral
-    {
-        
-    }
-
-    public interface INumericLiteral<F> : INumericLiteral, ILiteral<F>
+    public interface INumericLiteral<F> : ILiteral<F>
         where F : struct, INumericLiteral<F>
     {
     }

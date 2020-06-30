@@ -8,61 +8,65 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
+    using static As;
 
-    [ApiHost]
     public unsafe struct PointedReader  
     {
-        [MethodImpl(Inline)]
-        public static PointedReader<T> Create<T>(T* pSrc, int length)
-            where T : unmanaged
-                => new PointedReader<T>(pSrc, length);
-
-        [MethodImpl(Inline), Op]
-        public static PointedReader Create(byte* pSrc, int length)
-            => new PointedReader(pSrc, length);
-
         readonly byte* Source;
 
         PointedReaderState State;
+
+        [MethodImpl(Inline)]
+        public static PointedReader<T> create<T>(T* pSrc, int length)
+            where T : unmanaged
+                => new PointedReader<T>(pSrc, length);
+
+        [MethodImpl(Inline)]
+        public static PointedReader create(byte* pSrc, int length)
+            => new PointedReader(pSrc, length);
+
+        [MethodImpl(Inline)]
+        public static PointedReader<T> create<T>(MemRef src)
+            where T : unmanaged
+                => create(src.Pointer<T>(), src.Length);
         
         [MethodImpl(Inline)]
-        PointedReader(byte* pSrc, int length)
+        internal PointedReader(byte* pSrc, int length)
         {
-            this.State = PointedReaderState.Create(length,0);
-            this.Source = pSrc;
+            State = new PointedReaderState(length,0);
+            Source = pSrc;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         void Advance()
             => State.Advance();
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         void Advance(uint count)
             => State.Advance(count);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public bool Read(ref byte dst)
         {
-            As.read(Source, State.Position, ref dst);
+            read(Source, State.Position, ref dst);
             Advance();
             return State.HasNext;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public int Read(int offset, int wantedCount, Span<byte> dst)
         {
             int count = Math.Min(wantedCount, State.Remaining);
-            As.read(Source, offset, ref head(dst), count);            
+            read(Source, offset, ref first(dst), count);            
             Advance((uint)count);
             return count;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public int ReadAll(Span<byte> dst)
             => Read(0, Length, dst);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public bool Seek(uint pos)
             => State.Seek(pos);
 

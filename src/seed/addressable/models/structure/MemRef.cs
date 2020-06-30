@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Span<byte> read(MemRef src)
         {
-            var reader = PointedReader.Create(src.Address.Pointer<byte>(), src.Length);
+            var reader = PointedReader.create(src.Address.Pointer<byte>(), src.Length);
             Span<byte> dstA = new byte[src.Length];            
             var count = reader.ReadAll(dstA);
             return dstA;
@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe int read(MemRef src, Span<byte> dst)
         {
-            var reader = PointedReader.Create(src.Address.Pointer<byte>(), src.Length);
+            var reader = PointedReader.create(src.Address.Pointer<byte>(), src.Length);
             return reader.ReadAll(dst);            
         }
 
@@ -61,11 +61,23 @@ namespace Z0
             get => new MemoryRange(Address, Address + Hi);
         }
         
+        /// <summary>
+        /// Specifies the segment byte count
+        /// </summary>
+        /// <typeparam name="T">The cell type</typeparam>
         public ByteSize Length 
         {
             [MethodImpl(Inline)]
             get => (uint)Hi;
         }
+
+        /// <summary>
+        /// Computes the whole number of T-cells covered by segment
+        /// </summary>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public int Count<T>()
+            => Length/Root.size<T>();
 
         [MethodImpl(Inline)]
         internal MemRef(Vector128<ulong> src)
@@ -114,7 +126,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Load<T>()
             => Addresses.cover<T>(Address, Length);
-       
+
+
+        [MethodImpl(Inline)]
+        public unsafe T* Pointer<T>()
+            where T : unmanaged
+                => Address.Pointer<T>();
+
         [MethodImpl(Inline)]
         public uint Hash()
             => Root.hash(Lo, Hi);

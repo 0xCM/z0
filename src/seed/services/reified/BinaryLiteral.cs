@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using API = Literati;
+    using API = BinaryLiterals;
 
     /// <summary>
     /// Defines a base2 literal via text and a boxed value; for the literal to be valid,
@@ -67,9 +67,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BinaryLiteral src)
-            => string.Equals(Text, src.Text) 
-            && object.Equals(Data, src.Data) 
-            && string.Equals(Name, src.Name);
+            => API.eq(this, src);
 
         public static BinaryLiteral Empty   
             => new BinaryLiteral(string.Empty, 0, string.Empty);         

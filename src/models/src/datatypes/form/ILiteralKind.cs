@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     /// <summary>
     /// Characterizes a parametric literal: typed literals that support kind partitioning
     /// </summary>
@@ -39,7 +38,7 @@ namespace Z0
         where F : ILiteralKind<E>, new()
         where E : unmanaged, Enum
     {
-        E ITypedLiteral<E>.Class => new F().Class;
+        E ITypedLiteral<E>.Class 
+            => new F().Class;
     }
-
 }

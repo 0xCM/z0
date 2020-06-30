@@ -24,16 +24,8 @@ namespace Z0
         }        
 
         [MethodImpl(Inline), Op]
-        public static unsafe MemoryAddress locate<T>(in T src)
-            => pvoid(src);
-
-        [MethodImpl(Inline), Op]
         public static MemoryAddress address(ulong src)
             => new MemoryAddress(src);
-
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress address(IntPtr src)
-            => new MemoryAddress((ulong)src.ToInt64());
 
         [MethodImpl(Inline), Op]
         public static Address8 address8(byte src)
@@ -51,9 +43,6 @@ namespace Z0
         public static Address64 address64(ulong src)
             => new Address64(src);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe ref T toRef<T>(MemoryAddress src)
-            => ref src.Ref<T>();
          
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> edit<T>(MemoryAddress src, int length)

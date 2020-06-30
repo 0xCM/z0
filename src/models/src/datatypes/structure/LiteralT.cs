@@ -14,9 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct Literal<T> : ILiteral<Literal<T>,T> 
     {
-        public static Literal<T> Empty 
-            => new Literal<T>(string.Empty, default, string.Empty, 0, false, false);
-
         public string Name {get;}        
 
         public T Data {get;}
@@ -90,5 +87,9 @@ namespace Z0
         
         public override bool Equals(object src)
             => src is Literal<T> v && Equals(v);
+
+        public static Literal<T> Empty 
+            => new Literal<T>(EmptyString, default, EmptyString, 0, false, false);
+
     }
 }

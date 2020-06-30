@@ -23,6 +23,7 @@ namespace Z0
             where T : unmanaged
                 => CreateSpan(ref @ref<T>(pSrc), count);
 
+        
         /// <summary>
         /// Covers a reference-identified T-counted buffer with a span
         /// </summary>

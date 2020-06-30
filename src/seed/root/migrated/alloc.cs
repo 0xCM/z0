@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T[] alloc<T>(int count)
-            => new T[count];
+            => sys.alloc<T>(count);
     }
 }

@@ -8,9 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static As;
 
     partial class Root
     {
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe MemoryAddress location<T>(ReadOnlySpan<T> src)
             where T : unmanaged

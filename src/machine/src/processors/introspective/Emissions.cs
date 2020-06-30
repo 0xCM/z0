@@ -16,22 +16,22 @@ namespace Z0
     {
         public static Emissions Service => default(Emissions);
 
-        void EmitMasks(IAppContext context)
-        {
-            var literals = span(BitMaskCollector.collect());
-            var formatter = NumericLiteralFormatter.Service;
-            var appdata = context.AppPaths.AppDataRoot;
-            var dst = appdata + FileName.Define("Bitmasks", FileExtensions.Csv);
-            term.print($"Found {literals.Length} bitmask literals that will be emitted to {dst}");
+        // void EmitMasks(IAppContext context)
+        // {
+        //     var literals = span(Literati.collect());
+        //     var formatter = NumericLiteralFormatter.Service;
+        //     var appdata = context.AppPaths.AppDataRoot;
+        //     var dst = appdata + FileName.Define("Bitmasks", FileExtensions.Csv);
+        //     term.print($"Found {literals.Length} bitmask literals that will be emitted to {dst}");
 
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.HeaderText);
-            for(var i=0; i <literals.Length; i++)
-            {
-                ref readonly var literal = ref skip(literals,i);
-                writer.WriteLine(formatter.Format(literal));                
-            }            
-        }
+        //     using var writer = dst.Writer();
+        //     writer.WriteLine(formatter.HeaderText);
+        //     for(var i=0; i <literals.Length; i++)
+        //     {
+        //         ref readonly var literal = ref skip(literals,i);
+        //         writer.WriteLine(formatter.Format(literal));                
+        //     }            
+        // }
 
         void EmitDocs(IAppContext app)
         {   
@@ -63,7 +63,7 @@ namespace Z0
 
         void Gen(IAppContext app)
         {
-            EmitMasks(app);
+            ReflectedLiterals.emit(typeof(BitMasks), app.AppPaths);
             EmitMetadata(app);
             EmitDocs(app);
             EmitResources(app);

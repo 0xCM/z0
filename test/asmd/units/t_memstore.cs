@@ -30,7 +30,7 @@ namespace Z0
 
         unsafe void Process(in MemRef src, in MemStore store)
         {
-            var reader = PointedReader.Create(src.Address.Pointer<byte>(), src.Length);
+            var reader = PointedReader.create(src.Address.Pointer<byte>(), src.Length);
             var dstA = Spans.alloc<byte>(src.Length);            
             var count = reader.ReadAll(dstA);            
             Claim.eq(count,src.Length);

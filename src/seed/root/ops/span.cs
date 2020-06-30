@@ -24,16 +24,6 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Creates a T-span from a supplied reference
-        /// </summary>
-        /// <param name="src">A reference to the leading cell</param>
-        /// <param name="count">The source cell count</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> span<T>(in T src, int count)
-            => CreateReadOnlySpan(ref edit(src), count);
-
-        /// <summary>
         /// Creates a span from an array
         /// </summary>
         /// <param name="src">A reference to the leading cell</param>
@@ -114,6 +104,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> span16c(ReadOnlySpan<byte> src)
             => cast<char>(src);
-
     }
 }

@@ -6,15 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
     partial class Root
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static bool equal<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
-            where T : IEquatable<T>
-                => a.SequenceEqual(b);
+        [MethodImpl(Inline), Op]
+        public static Span<byte> replicate(MemRef src)
+        {
+            Span<byte> dst = sys.alloc<byte>(src.Length);            
+            copy(src, dst);
+            return dst;
+        }
     }
 }

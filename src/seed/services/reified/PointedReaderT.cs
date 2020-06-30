@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
+    using static As;
     
     /// <summary>
     /// Defines a stream reader (of sourts) over a sequence of pointer-identified unmanaged values
@@ -21,21 +21,21 @@ namespace Z0
 
         PointedReaderState State;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         internal PointedReader(T* pSrc, int length)
         {
             Source = pSrc;
-            State = PointedReaderState.Create(length, 0);
+            State = new PointedReaderState(length, 0);
         }
 
         /// <summary>
         /// Deposits the next byte in a caller-supplied target and returns true if there are yet more bytes to read
         /// </summary>
         /// <param name="dst">The value of the next byte</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public bool Read(ref T dst)
         {
-            As.read(Source, State.Position, ref dst);
+            read(Source, State.Position, ref dst);
             State.Advance();
             return State.HasNext;
         }
@@ -47,11 +47,11 @@ namespace Z0
         /// <param name="offset">The offset at which to begin reading</param>
         /// <param name="wantedCount">The number of desired</param>
         /// <param name="dst">The target buffer</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public int Read(int offset, int wantedCount, Span<T> dst)
         {
             int count = Math.Min(wantedCount, State.Remaining);
-            As.read<T>(Source, offset, ref head(dst), count);            
+            read<T>(Source, offset, ref first(dst), count);            
             State.Advance((uint)count);
             return count;
         }
@@ -63,16 +63,16 @@ namespace Z0
         /// <param name="offset">The offset at which to begin reading</param>
         /// <param name="wantedCount">The number of desired</param>
         /// <param name="dst">The target buffer</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public int Read(int offset, int wantedCount, ref T dst)
         {
             int count = Math.Min(wantedCount, State.Remaining);
-            As.read<T>(Source, offset, ref dst, count);            
+            read<T>(Source, offset, ref dst, count);            
             State.Advance((uint)count);
             return count;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public int ReadAll(Span<T> dst)
             => Read(0, Length, dst);
 
@@ -81,7 +81,7 @@ namespace Z0
         /// otherwise, assigns Current = -1 and returns true if the former and false if the latter
         /// </summary>
         /// <param name="pos">The desired reader position</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public bool Seek(uint pos)
             => State.Seek(pos);
 

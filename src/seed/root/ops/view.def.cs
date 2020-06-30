@@ -20,5 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly T view<S,T>(in S src)
             => ref Unsafe.As<S,T>(ref edit(src));        
+
+
     }
 }

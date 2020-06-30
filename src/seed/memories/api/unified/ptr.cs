@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(ref T src)
             where T : unmanaged
-                => Pointed.ptr(ref src);
+                => (T*)Unsafe.AsPointer(ref src); 
 
 
         /// <summary>
@@ -31,6 +31,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(ref T src, int offset)
             where T : unmanaged
-                => Pointed.ptr(ref src, offset);
+                => (T*)Unsafe.AsPointer(ref seek(ref src, offset));
     }
 }

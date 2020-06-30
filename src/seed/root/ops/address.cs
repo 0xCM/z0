@@ -19,5 +19,10 @@ namespace Z0
         public unsafe static MemoryAddress address<T>(in T src)
             where T : unmanaged
                 => (ulong)pointer(src);
+
+
+        [MethodImpl(Inline), Op]
+        public static MemoryAddress address(IntPtr src)
+            => new MemoryAddress((ulong)src.ToInt64());
     }
 }

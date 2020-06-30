@@ -15,8 +15,23 @@ namespace Z0
     /// </summary>
     public readonly struct LiteralInfo : ILiteral<LiteralInfo> 
     {
-        public static LiteralInfo Empty 
-            => new LiteralInfo(string.Empty, string.Empty, string.Empty, 0, false, false);
+        public static LiteralInfo from(FieldInfo target)
+        {
+            var tagged = target.Tagged<LiteralAttribute>();
+            if(tagged)
+            {
+                var attrib = (LiteralAttribute)target.GetCustomAttribute(typeof(LiteralAttribute));
+                var data = attrib.Description;
+                if(!string.IsNullOrWhiteSpace(data))
+                    return LiteralInfo.Define(target.Name, 
+                    target.GetRawConstantValue(), data, 
+                    Type.GetTypeCode(target.FieldType), 
+                    target.FieldType.IsEnum, 
+                    false);
+            }
+            return LiteralInfo.Empty;
+        }
+        
 
         public string Name {get;}        
 
@@ -65,7 +80,7 @@ namespace Z0
             => new LiteralInfo(Name,Data, Text, TypeCode, IsEnum, MultiLiteral);
         
         [MethodImpl(Inline)]
-        LiteralInfo(string Name, object Data, string Text, TypeCode TypeCode, bool IsEnum, bool MultiLiteral)
+        public LiteralInfo(string Name, object Data, string Text, TypeCode TypeCode, bool IsEnum, bool MultiLiteral)
         {
             this.Name = Name;
             this.Data = Data;
@@ -256,5 +271,11 @@ namespace Z0
         
         public override bool Equals(object src)
             => src is LiteralInfo v && Equals(v);
+
+
+        public static LiteralInfo Empty 
+            => new LiteralInfo(string.Empty, string.Empty, string.Empty, 0, false, false);
+
+
     }
 }

@@ -6,18 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
+    
+    using static System.Runtime.CompilerServices.Unsafe;
 
     using static Konst;
 
-    public interface IReflector
+    partial class Root
     {
-        [MethodImpl(Inline)]
-        ITypeReflector<T> Reflect<T>()
-            => TypeReflector<T>.Service;
-
-        [MethodImpl(Inline)]
-        ITypeReflector Reflect(Type t)
-            => new TypeReflector(t);
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static unsafe ref T @ref<T>(MemoryAddress src)
+            => ref AsRef<T>((void*)src.Location);
     }
 }

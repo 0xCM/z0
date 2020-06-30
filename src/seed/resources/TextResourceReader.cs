@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(string src)
-            => Addresses.locate(As.first(Root.span(src)));            
+            => Root.locate(As.first(Root.span(src)));            
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<MemoryAddress> addresses(Type declarer)

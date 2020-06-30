@@ -77,7 +77,7 @@ namespace Z0
                   where K : unmanaged, Enum
                         => from m in HostedDirect(src, kind)                        
                         let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Method.Name, m.Id)
-                        let address = Addresses.address(Jit(m.Method))
+                        let address = Root.address(Jit(m.Method))
                         select new ApiMember(uri, m.Method, m.KindId, address);
 
             public IEnumerable<ApiMember> LocatedGeneric<K>(IApiHost src, K kind)
@@ -87,7 +87,7 @@ namespace Z0
                   let reified = m.MakeGenericMethod(t)
                   let id = Diviner.Identify(reified)
                   let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Name, id)
-                  let address = Addresses.address(Jit(reified))
+                  let address = Root.address(Jit(reified))
                   select new ApiMember(uri, reified, m.KindId(), address);
 
             public IEnumerable<ApiMember> LocatedDirect(IApiHost src)
@@ -95,7 +95,7 @@ namespace Z0
                   let kid = m.KindId()
                   let id = Diviner.Identify(m)
                   let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Name, id)
-                  let address = Addresses.address(Jit(m))
+                  let address = Root.address(Jit(m))
                   select new ApiMember(uri, m, kid, address);
                         
             public IEnumerable<ApiMember> LocatedGeneric(IApiHost src)
@@ -103,7 +103,7 @@ namespace Z0
                   let kid = m.KindId()
                   from t in ApiCollector.NumericClosures(m)
                   let reified = m.MakeGenericMethod(t)
-                  let address = Addresses.address(Jit(reified))
+                  let address = Root.address(Jit(reified))
                   let id = Diviner.Identify(reified)
                   let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Name, id)
                   select new ApiMember(uri, reified, kid, address);

@@ -16,11 +16,7 @@ namespace Z0
         public int Position;
 
         [MethodImpl(Inline)]
-        public static PointedReaderState Create(int length, int position)
-                => new PointedReaderState(length,position);
-
-        [MethodImpl(Inline)]
-        PointedReaderState(int length, int position)
+        internal PointedReaderState(int length, int position)
         {
             Length = length;
             Position = position;
@@ -46,7 +42,7 @@ namespace Z0
         /// otherwise, assigns Current = -1 and returns true if the former and false if the latter
         /// </summary>
         /// <param name="pos">The desired reader position</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public bool Seek(uint pos)
         {
             if(pos >= Length)

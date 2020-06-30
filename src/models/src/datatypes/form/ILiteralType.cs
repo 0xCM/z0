@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     /// <summary>
     /// Characterizes an E-parametric literal that supports T-parametric stratification
     /// </summary>

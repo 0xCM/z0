@@ -10,16 +10,16 @@ namespace Z0
    using System.Collections.Generic;
 
    using static Konst;
-   using static Memories;
+   using static Root;
 
     partial class XTend
     {
         public static T[] Validate<T>(this IEnumerable<BinaryLiteral<T>> src, Type declarer)
             where T : unmanaged
         {
-            var literals = Literati.attributed<T>(Konst.base2, declarer).ToArray();
+            var literals = BinaryLiterals.attributed<T>(Konst.base2, declarer).ToArray();
             var count = literals.Length;
-            var dst = Root.alloc<T>(count);
+            var dst = sys.alloc<T>(count);
             for(var i=0; i< count; i++)        
             {
                 var mask = literals[i];
@@ -28,24 +28,6 @@ namespace Z0
                 insist(gmath.eq(bitval, mask.Data));
             }
 
-            return dst;            
-        }
-    }
-
-    public class BinaryLiteralValues
-    {
-        public static T[] extract<T>(Type declarer)
-            where T : unmanaged
-        {
-            Span<BinaryLiteral<T>> literals = Literati.attributed<T>(Konst.base2, declarer).ToArray();
-            
-            var count = literals.Length;
-            var dst = Root.alloc<T>(count);
-
-            Span<T> target = dst;
-            
-            for(var i=0; i< count; i++)        
-                seek(target,i) = skip(literals,i).Data;
             return dst;            
         }
     }
