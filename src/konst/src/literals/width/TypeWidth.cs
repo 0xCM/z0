@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using FW = DataWidth;
+    using W = DataWidth;
 
     /// <summary>
-    /// Defines a <see cref="FixedWidth"/> subset that is constrained to widths 
-    /// that correspond to data type widths suported by type-systems and native OS/hardware types
+    /// Defines a <see cref="DataWidth"/> subset that is constrained to widths that correspond 
+    /// to scalar primitives or vectorized registers
     /// </summary>
-    /// <remarks>
-    /// The selected subset is clearly biased towards x86 OS/sytem architectures
-    /// </remarks>
     public enum TypeWidth : ushort
     {
         /// <summary>
@@ -27,46 +24,46 @@ namespace Z0
         /// Ok, this one is synthetic; but it is useful to pretend that the type system
         /// supports 1-bit types
         /// </remarks>
-        W1 = (ushort)FW.W1,
+        W1 = (ushort)W.W1,
 
         /// <summary>
         /// Indicates a bit-width of 8
         /// </summary>
-        W8 = (ushort)FW.W8,
+        W8 = (ushort)W.W8,
 
         /// <summary>
         /// Indicates a bit-width of 16
         /// </summary>
-        W16 = (ushort)FW.W16,
+        W16 = (ushort)W.W16,
 
         /// <summary>
         /// Indicates a bit-width of 32
         /// </summary>
-        W32 = (ushort)FW.W32,
+        W32 = (ushort)W.W32,
 
         /// <summary>
         /// Indicates a bit-width of 64
         /// </summary>
-        W64 = (ushort)FW.W64,
+        W64 = (ushort)W.W64,
 
         /// <summary>
         /// Indicates a bit-width of 128
         /// </summary>
-        W128 = (ushort)FW.W128,
+        W128 = (ushort)W.W128,
 
         /// <summary>
         /// Indicates a bit-width of 256
         /// </summary>
-        W256 = (ushort)FW.W256,
+        W256 = (ushort)W.W256,
 
         /// <summary>
         /// Indicates a bit-width of 512
         /// </summary>
-        W512 = (ushort)FW.W512,
+        W512 = (ushort)W.W512,
 
         /// <summary>
         /// Indicates a bit-width of 1024
         /// </summary>
-        W1024 = (ushort)FW.W1024,
+        W1024 = (ushort)W.W1024,
     }
 }

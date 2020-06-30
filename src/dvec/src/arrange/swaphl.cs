@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
         
     using static Konst; 
-    using static Memories;
 
     partial class dvec
     {        

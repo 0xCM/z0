@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst; 
-    using static As;
+    using static V0;
     using static Typed;
         
     partial class gvec
@@ -85,29 +85,29 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsub(v8u(x), v8u(y)));
+                return vgeneric<T>(V0d.vsub(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vsub(v16u(x), v16u(y)));
+                return vgeneric<T>(V0d.vsub(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vsub(v32u(x), v32u(y)));
+                return vgeneric<T>(V0d.vsub(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vsub(v64u(x), v64u(y)));
+                return vgeneric<T>(V0d.vsub(v64u(x), v64u(y)));
             else
                 return vsub_i(x,y);
         }
-
+    
         [MethodImpl(Inline)]
         static Vector128<T> vsub_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dvec.vsub(v8i(x), v8i(y)));
+                 return vgeneric<T>(V0d.vsub(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dvec.vsub(v16i(x), v16i(y)));
+                 return vgeneric<T>(V0d.vsub(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dvec.vsub(v32i(x), v32i(y)));
+                 return vgeneric<T>(V0d.vsub(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(dvec.vsub(v64i(x), v64i(y)));
+                 return vgeneric<T>(V0d.vsub(v64i(x), v64i(y)));
             else
                 return ginxfp.vsub(x,y);
         }
@@ -117,13 +117,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vsub(v8u(x), v8u(y)));
+                return vgeneric<T>(V0d.vsub(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vsub(v16u(x), v16u(y)));
+                return vgeneric<T>(V0d.vsub(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vsub(v32u(x), v32u(y)));
+                return vgeneric<T>(V0d.vsub(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vsub(v64u(x), v64u(y)));
+                return vgeneric<T>(V0d.vsub(v64u(x), v64u(y)));
             else
                 return vsub_i(x,y);
         }    
@@ -133,13 +133,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dvec.vsub(v8i(x), v8i(y)));
+                 return vgeneric<T>(V0d.vsub(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dvec.vsub(v16i(x), v16i(y)));
+                 return vgeneric<T>(V0d.vsub(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dvec.vsub(v32i(x), v32i(y)));
+                 return vgeneric<T>(V0d.vsub(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vsub(v64i(x), v64i(y)));
+                return vgeneric<T>(V0d.vsub(v64i(x), v64i(y)));
             else
                 return ginxfp.vsub(x,y);
         }    

@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct As
     {        
-
         /// <summary>
         /// Presents a vector over T-cells as a vector over cells of type uint16
         /// </summary>

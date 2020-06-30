@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using TW = TypeWidth;
+    using W = DataWidth;
     
     /// <summary>
-    /// Defines a <see cref="TypeWidth"/> subset that is constrained to widths that correspond to x86-supported widths
+    /// Defines a <see cref="DataWidth"/> subset that is constrained to widths that correspond to x86 vectorized registers
     /// </summary>
     public enum VectorWidth : ushort
     {
@@ -17,18 +17,23 @@ namespace Z0
         None = 0,
 
         /// <summary>
+        /// Indicates a bit-width of 64
+        /// </summary>
+        W64 = W.W64,
+
+        /// <summary>
         /// Indicates a bit-width of 128
         /// </summary>
-        W128 = TW.W128,
+        W128 = W.W128,
 
         /// <summary>
         /// Indicates a bit-width of 256
         /// </summary>
-        W256 = TW.W256,
+        W256 = W.W256,
 
         /// <summary>
         /// Indicates a bit-width of 512
         /// </summary>
-        W512 = TW.W512,
+        W512 = W.W512,
     }
 }

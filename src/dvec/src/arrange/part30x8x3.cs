@@ -10,6 +10,8 @@ namespace Z0
 
     using static As;
     using static Typed;
+    using static V0;
+    using static Konst;
 
     partial class dvec
     {            
@@ -35,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<uint> vpart30x8x3Mask(uint src) 
-            => V0d.vparts(n256, m0, m1, m2, m3, m4,0,0,0);
+            => vparts(m0, m1, m2, m3, m4,0,0,0);
 
         // The components are now in the following order, from lo to hi:
         // 0, 5, 1, 6, 2, 7, 3, 8, 4, 9
@@ -43,7 +45,7 @@ namespace Z0
         // Permuting would be cheaper but, in any case...
         [MethodImpl(Inline)]
         static Vector256<ushort> vpart30x8x3Assemble(Vector256<ushort> y)
-            => V0d.vparts(n256, 
+            => vparts(
                 V0.vcell(y,0), // 0
                 V0.vcell(y,2), // 1
                 V0.vcell(y,4), // 2
@@ -68,9 +70,9 @@ namespace Z0
             var lo = uint16(BitMasks.Lsb16x16x15 & a);
             var hi = uint16(BitMasks.Lsb16x16x15 & (a >> 15));            
             var m = vpart30x8x3Mask(src);
-            var shifts = V0d.vparts(n256,0, 3, 6, 9, 12,0,0,0); 
-            var x = V0d.vbroadcast(n256, uint32(lo | hi << 16));            
-            var y = v16u(dvec.vsrlv(dvec.vand(x,m), shifts));
+            var shifts = vparts(0, 3, 6, 9, 12, 0, 0, 0); 
+            var x = vbroadcast(n256, uint32(lo | hi << 16));            
+            var y = V0.v16u(dvec.vsrlv(vand(x,m), shifts));
             var z = vpart30x8x3Assemble(y);
             return z;
         }

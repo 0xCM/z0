@@ -9,7 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst; 
-    using static Memories;
+    using static V0;
+    using static V0p;
+    using static Typed;
 
     partial class dvec
     {
@@ -22,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline), Op]        
         public static Vector128<byte> vswap(Vector128<byte> src, int i, int j)
         {
-            var perm = V0p.vincrements<byte>(n128);
+            var perm = vincrements<byte>(w128);
             perm = perm.Cell(j,(byte)i);
             perm = perm.Cell(i,(byte)j);
             return vshuf16x8(src,perm);            
@@ -31,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op]        
         public static Vector128<ushort> vswap(Vector128<ushort> src, int i, int j)
         {
-            var perm = V0p.vincrements<byte>(n128);
+            var perm = vincrements<byte>(w128);
 
             var i0 = Bits.pindex(i, bit.Off);
             var i1 = Bits.pindex(i, bit.On);

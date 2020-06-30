@@ -10,8 +10,8 @@ namespace Z0
         
     using static Konst;
     using static VectorKonst;
-    using static As;
     using static Root;
+    using static V0;
 
     partial struct V0p
     {
@@ -25,13 +25,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return generic<T>(V0.vload(w, head(Units128x8u)));
+                return vgeneric<T>(vload(w, head(Units128x8u)));
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return generic<T>(V0.vload(w, head(Units128x16u)));
+                return vgeneric<T>(vload(w, head(Units128x16u)));
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return generic<T>(V0.vload(w,head(Units128x32u)));
+                return vgeneric<T>(vload(w,head(Units128x32u)));
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return generic<T>(V0.vload(w,head(Units128x64u)));
+                return vgeneric<T>(vload(w,head(Units128x64u)));
             else
                 throw Unsupported.define<T>();
         }
@@ -46,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return generic<T>(V0.vload(w, head(Units256x8u)));
+                return vgeneric<T>(vload(w, head(Units256x8u)));
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return generic<T>(V0.vload(w, head(Units256x16u)));
+                return vgeneric<T>(vload(w, head(Units256x16u)));
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return generic<T>(V0.vload(w, head(Units256x32u)));
+                return vgeneric<T>(vload(w, head(Units256x32u)));
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return generic<T>(V0.vload(w, head(Units256x64u)));
+                return vgeneric<T>(vload(w, head(Units256x64u)));
             else
                 throw Unsupported.define<T>();
         }        

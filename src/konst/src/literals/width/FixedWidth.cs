@@ -9,10 +9,10 @@ namespace Z0
     using DW = DataWidth;
 
     /// <summary>
-    /// Defines fixed bit-width classifiers/identifiers
+    /// Defines a <see cref="DataWidth"/> constrained to widths supported by available fixed-width types
     /// </summary>
     [Flags]
-    public enum FixedWidth : uint
+    public enum FixedWidth : ushort
     {
         /// <summary>
         /// Vaccuous

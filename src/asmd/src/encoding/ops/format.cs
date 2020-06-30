@@ -5,12 +5,6 @@
 namespace Z0.Asm.Data
 {        
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-
-    using static Konst;
-    using static V0;
-    using static Root;
 
     partial struct Encoding
     {            
@@ -20,6 +14,19 @@ namespace Z0.Asm.Data
             var data = Encoding.encoding(src);
             var size = src.EncodingSize;
             return text.concat($"data", text.bracket(size), Chars.Colon, text.embrace(data.FormatHex()));
+        }
+
+        public static string format(in ModRmEncoding src)
+        {
+            const string Sep = " | ";
+
+            const string Assign = " = ";
+            
+            var a = src.Rm.Format();
+            var b = src.Reg.Format();
+            var c = src.Mod.Format();
+            var e = src.Encoded.Format();
+            return text.concat(a, Sep, b, Sep, c, Assign, e);
         }
     }
 }

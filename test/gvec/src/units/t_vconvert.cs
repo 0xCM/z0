@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static Memories;
     using static HexConst;
+    using static V0;
+    using static V0d;
 
     public class t_vconvert : t_inx<t_vconvert>
     {   
@@ -37,8 +39,8 @@ namespace Z0
         public void block_32x8u_to_2x128x64u()
         {
             var block = Blocks.parts<byte>(n32,1,2,3,4);
-            var xE = V0d.vparts(n128,1,2);
-            var yE = V0d.vparts(n128,3,4);
+            var xE = vparts(1,2);
+            var yE = vparts(3,4);
 
             var z = dvec.vconvert(block,n256,z64);
             Claim.eq(xE, V0d.vlo(z));
@@ -48,19 +50,19 @@ namespace Z0
         public void block_128x8u_to_2x128x16u()
         {
             var block = Blocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
-            var xE = V0d.vparts(n128,1,2,3,4,5,6,7,8);
-            var yE = V0d.vparts(n128,9,10,11,12,13,14,15,16);
+            var xE = vparts(n128,1,2,3,4,5,6,7,8);
+            var yE = vparts(n128,9,10,11,12,13,14,15,16);
             var z = dvec.vconvert(block,n256,z16);
             
-            Claim.eq(xE, V0d.vlo(z));
-            Claim.eq(yE, V0d.vhi(z));
+            Claim.eq(xE, vlo(z));
+            Claim.eq(yE, vhi(z));
         }
 
         public void v128x8u_v128x16u()
         {
-            var x = V0d.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var x = vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
             var y = V0d.vmaplo(x, n128, z16);
-            var z = V0d.vparts(n128,0,1,2,3,4,5,6,7);
+            var z = vparts(n128,0,1,2,3,4,5,6,7);
             Claim.eq(y,z);
         }
 
@@ -68,7 +70,7 @@ namespace Z0
         {
             var x = Blocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
             var y = dvec.vconvert(x, n128, z16);
-            var z = V0d.vparts(n128,0,1,2,3,4,5,6,7);            
+            var z = vparts(w128,0,1,2,3,4,5,6,7);            
 
             Claim.eq(y,z);            
         }

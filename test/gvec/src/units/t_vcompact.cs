@@ -19,10 +19,10 @@ namespace Z0
             
             var vsmax = V0d.vbroadcast(w, (ushort)cellmax);
             var vtmax = V0d.vbroadcast(w,cellmax);
-            var expect = dvec.vsub(vtmax, gvec.vinc(w,z8));
+            var expect = V0d.vsub(vtmax, gvec.vinc(w,z8));
 
-            var x = dvec.vsub(vsmax, gvec.vinc(w, z16));
-            var y = dvec.vsub(vsmax, gvec.vinc(w, (ushort)8));
+            var x = V0d.vsub(vsmax, gvec.vinc(w, z16));
+            var y = V0d.vsub(vsmax, gvec.vinc(w, (ushort)8));
             var actual = dvec.vcompact(x,y,n128,z8);
             
             Claim.veq(expect,actual);            
@@ -35,10 +35,10 @@ namespace Z0
             
             var vsmax = vbroadcast(w, (ushort)cellmax);
             var vtmax = vbroadcast(w,cellmax);
-            var expect = dvec.vsub(vtmax, gvec.vinc(w,z8));
+            var expect = V0d.vsub(vtmax, gvec.vinc(w,z8));
 
-            var x = dvec.vsub(vsmax, gvec.vinc(w, z16));
-            var y = dvec.vsub(vsmax, gvec.vinc(w, (ushort)16));
+            var x = V0d.vsub(vsmax, gvec.vinc(w, z16));
+            var y = V0d.vsub(vsmax, gvec.vinc(w, (ushort)16));
             var actual = dvec.vcompact(x,y,n256,z8);
             
             Claim.veq(expect,actual);            
@@ -51,10 +51,10 @@ namespace Z0
             
             var vsmax = V0d.vbroadcast(w, (uint)cellmax);
             var vtmax = V0d.vbroadcast(w,cellmax);
-            var expect = dvec.vsub(vtmax, gvec.vinc(w,z16));
+            var expect = V0d.vsub(vtmax, gvec.vinc(w,z16));
 
-            var x = dvec.vsub(vsmax, gvec.vinc(w, 0u));
-            var y = dvec.vsub(vsmax, gvec.vinc(w, 4u));
+            var x = V0d.vsub(vsmax, gvec.vinc(w, 0u));
+            var y = V0d.vsub(vsmax, gvec.vinc(w, 4u));
             var actual = dvec.vcompact(x,y,n128,z16);
             
             Claim.veq(expect,actual);            
@@ -68,10 +68,10 @@ namespace Z0
             var vsmax = vbroadcast<uint>(w, (uint)cellmax);
             var vtmax = vbroadcast(w,cellmax);
             
-            var x = dvec.vsub(vsmax, gvec.vinc(w, 0u));
-            var y = dvec.vsub(vsmax, gvec.vinc(w, 8u));
+            var x = V0d.vsub(vsmax, gvec.vinc(w, 0u));
+            var y = V0d.vsub(vsmax, gvec.vinc(w, 8u));
             var v = dvec.vcompact(x,y,n256,z16);
-            var expect = dvec.vsub(vtmax, gvec.vinc(w,z16));
+            var expect = V0d.vsub(vtmax, gvec.vinc(w,z16));
             Claim.veq(expect,v);            
         }
 

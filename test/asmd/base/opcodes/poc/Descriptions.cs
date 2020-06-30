@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
 {
+    
     partial class OpCodesPoc
     {
         public class Descriptions

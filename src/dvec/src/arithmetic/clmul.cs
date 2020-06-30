@@ -11,7 +11,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
  
     using static Konst;    
-    using static Memories;
+    using static V0;
+    using static Typed;
 
     partial class dvec
     {
@@ -24,9 +25,9 @@ namespace Z0
         [MethodImpl(Inline), ClMul]
         public static byte clmulr(N8 r, byte a, byte b, ushort poly)
         {
-            var prod = dvec.clmul(a,b);
-            prod ^= (ushort)dvec.clmul((ushort)(prod >> 8), poly);
-            prod ^= (ushort)dvec.clmul((ushort)(prod >> 8), poly);
+            var prod = clmul(a,b);
+            prod ^= (ushort)clmul((ushort)(prod >> 8), poly);
+            prod ^= (ushort)clmul((ushort)(prod >> 8), poly);
             return (byte)prod;
         }
 
@@ -48,9 +49,9 @@ namespace Z0
         [MethodImpl(Inline), ClMul]
         public static ushort clmulr(N16 r, ushort a, ushort b, uint poly)
         {
-            var prod = dvec.clmul(a,b);
-            prod ^= (uint)dvec.clmul(prod >> 16, poly);
-            prod ^= (uint)dvec.clmul(prod >> 16, poly);
+            var prod = clmul(a,b);
+            prod ^= (uint)clmul(prod >> 16, poly);
+            prod ^= (uint)clmul(prod >> 16, poly);
             return (ushort)prod;
         }
 
@@ -78,8 +79,8 @@ namespace Z0
         [MethodImpl(Inline), ClMul]
         public static ConstPair<ulong> clmul(ulong lhs, ulong rhs)
         {
-            var a = Vectors.vscalar(n128, lhs);
-            var b = Vectors.vscalar(n128, rhs);
+            var a = vscalar(w128, lhs);
+            var b = vscalar(w128, rhs);
             var result = CarrylessMultiply(a,b,0x00);
             return (vcell(result,0), vcell(result,1));
         }
@@ -87,8 +88,8 @@ namespace Z0
         [MethodImpl(Inline), ClMul]
         public static ulong clmul64(ulong x, ulong y)
         {
-            var u = Vectors.vscalar(n128, x);
-            var v = Vectors.vscalar(n128, y);
+            var u = vscalar(w128, x);
+            var v = vscalar(w128, y);
             var z = CarrylessMultiply(u, v, 0);
             return vcell(z,0);
         }

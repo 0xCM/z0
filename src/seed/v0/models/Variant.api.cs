@@ -13,6 +13,7 @@ namespace Z0
     using static As;
     using static Root;
     using static Typed;
+    using static V0;
 
     using NK = NumericKind;
 
@@ -101,11 +102,11 @@ namespace Z0
     
         [MethodImpl(Inline)]
         static Vector128<ulong> store(ulong value, NK kind)
-            => V0d.vparts(w128,(ulong)value, (ulong)kind);
+            => vparts((ulong)value, (ulong)kind);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> store(long value, NK kind)
-            => V0d.vparts(w128,(ulong)value, (ulong)kind);
+            => vparts((ulong)value, (ulong)kind);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> store(double value, NK kind)

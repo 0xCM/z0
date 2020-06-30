@@ -7,24 +7,24 @@ namespace Z0
     partial struct Konst
     {
         /// <summary>
-        /// The largest representable int 8 value
+        /// The maximum representable <see cref='sbyte'/> value
         /// </summary>
-        public const sbyte Max8i = sbyte.MaxValue;
+        public const sbyte Max8i = (sbyte)Limits.Max8i;
 
         /// <summary>
-        /// The largest representable uint8 value
+        /// The maximum representable <see cref='byte'/> value
         /// </summary>
-        public const byte Max8u = byte.MaxValue;
+        public const byte Max8u = (byte)Limits.Max8u;
 
         /// <summary>
-        /// The largest representable int16 value
+        /// The maximum representable <see cref='short'/> value
         /// </summary>
-        public const short Max16i = short.MaxValue;
+        public const short Max16i = (short)Limits.Max8i;
 
         /// <summary>
-        /// The largest representable uint16 value
+        /// The maximum representable <see cref='ushort'/> value
         /// </summary>
-        public const ushort Max16u = ushort.MaxValue;
+        public const ushort Max16u = (ushort)Limits.Max16u;
 
         /// <summary>
         /// The largest representable uint64 value
@@ -34,7 +34,7 @@ namespace Z0
         /// <summary>
         /// The largest representable uint32 value
         /// </summary>
-        public const uint Max32u = uint.MaxValue;
+        public const uint Max32u = (uint)Limits.Max32u;
 
         /// <summary>
         /// The largest representable value v where v:uint40
@@ -52,29 +52,28 @@ namespace Z0
         public const ulong Max56u = (ulong)Max48u | ((ulong)Max8u << 48);
 
         /// <summary>
-        /// The largest representable value v where v:uint64
+        /// The maximum representable <see cref='ulong'/> value
         /// </summary>
         public const ulong Max64u = ulong.MaxValue;
-
-        /// <summary>
-        /// The largest representable value v where v:float32
-        /// </summary>
-        public const float Max32f = float.MaxValue;
-
-        /// <summary>
-        /// The largest representable value v where v:float64
-        /// </summary>
-        public const double Max64f = double.MaxValue;
-
  
         /// <summary>
-        /// The largest representable value v where v:int32
+        /// The minimum representable <see cref='long'/> value
         /// </summary>
         public const int Max32i = int.MaxValue;
 
         /// <summary>
-        /// The largest representable value v where v:int64
+        /// The maximum representable <see cref='long'/> value
         /// </summary>
         public const long Max64i = long.MaxValue;        
+
+        /// <summary>
+        /// The maximum representable <see cref='float'/> value
+        /// </summary>
+        public const float Max32f = float.MaxValue;
+
+        /// <summary>
+        /// The maximum representable <see cref='double'/> value
+        /// </summary>
+        public const double Max64f = double.MaxValue;
     }
 }

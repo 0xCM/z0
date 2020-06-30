@@ -11,8 +11,7 @@ namespace Z0.Asm.Data
     {
         public void modrm_encode()
         {
-            var encoder = PrefixEncoders.ModRm;
-            var dst = Encoding.modrmTable();
+            var dst = ModRmEncoder.Table();
             var count = dst.Length;
             
             Claim.eq(256,count);

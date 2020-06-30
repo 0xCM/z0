@@ -34,17 +34,17 @@ namespace Z0.Asm.Data
 
         public const string ᛁerᛁ =           "Indicates support for embedded rounding control, which is only applicable to the register-register form of the instruction. This also implies support for SAE (Suppress All Exceptions)";
 
-        public const string imm8 =          "An immediate byte value. The imm8 symbol is a signed number between –128 and +127 inclusive. For instructions in which imm8 is combined with a word or doubleword operand, the immediate value is sign-extended to form a word or doubleword. The upper byte of the word is filled with the topmost bit of the immediate value";
+        public const string imm8 =          "An immediate 8-bit value in the inclusive range [–128, 127]. For instructions in which imm8 is combined with a word or doubleword operand, the immediate value is sign-extended to form a word or doubleword. The upper byte of the word is filled with the topmost bit of the immediate value";
 
-        public const string imm16 =         "An immediate word value used for instructions whose operand-size attribute is 16 bits.This is a number between [–32,768] and [+32,767] inclusive";
+        public const string imm16 =         "An immediate value for a 16-bit operand in the inclusive range [–32_768, 32_767]";
 
-        public const string imm32 =         "An immediate doubleword value used for instructions whose operand-size attribute is 32 bits. It allows the use of a number between [+2147483647, –2147483648] inclusive";
+        public const string imm32 =         "An immediate value for a 32-bit operand in the inclusive range [–2_147_483_648, 2_147_483_647]";
 
-        public const string imm64 =         "An immediate quadword value used for instructions whose operand-size attribute is 64 bits. The value allows the use of a number between +9,223,372,036,854,775,807 and –9,223,372,036,854,775,808 inclusive";
+        public const string imm64 =         "An immediate value for a 64-bit operand in the inclusive range [–9_223_372_036_854_775_808, 9_223_372_036_854_775_807]";
 
         public const string k1 =            "A mask register used as a regular operand (either destination or source). The 64-bit k registers are: k0 through k7";
 
-        public const string m =             "A 16- 32- or 64-bit operand in memory";
+        public const string m =             "An operand in memory of width 16, 32 or 64 bits";
 
         public const string m8 =            "A byte operand in memory ( usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. In 64-bit mode, it is pointed to by the RSI or RDI registers";
 

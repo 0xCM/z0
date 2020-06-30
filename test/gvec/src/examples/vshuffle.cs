@@ -11,6 +11,7 @@ namespace Z0
     using static HexConst;
     using static As;
     using static Root;
+    using static V0;
     
     partial class vexamples
     {        
@@ -93,7 +94,7 @@ namespace Z0
             => dvec.vcompact(src, gvec.vinc(n256, As.uint16(16)),n256,z8);
 
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
-            => v16u(dvec.vshuf32x8(v8u(a), ToShuffleSpec(spec)));
+            => V0.v16u(dvec.vshuf32x8(V0.v8u(a), ToShuffleSpec(spec)));
 
         public void vshuf16x16()
         {
@@ -101,7 +102,7 @@ namespace Z0
             var x = gvec.vinc(w,z16);            
             var reverse = V0p.vdecrements<ushort>(w);
             var identity = V0p.vincrements<ushort>(w);
-            var pairswap = V0d.vparts(w,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
+            var pairswap = vparts(1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);
             Claim.veq(reverse, y1);
@@ -172,7 +173,7 @@ namespace Z0
 
         public void vperm4x16()
         {
-            var id = V0d.vparts(n128,0,1,2,3,6,7,8,9);
+            var id = vparts(n128,0,1,2,3,6,7,8,9);
             Claim.veq(dvec.vperm4x16(Vectors.vparts(n128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), Vectors.vparts(n128,0,3,2,1,6,9,8,7));
         }
 

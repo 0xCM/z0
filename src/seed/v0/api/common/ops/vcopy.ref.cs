@@ -9,10 +9,8 @@ namespace Z0.RefOps
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Typed;
     using static As;
     using static Root;
-    using static System.Runtime.CompilerServices.Unsafe;
     
     public readonly struct CopyOps
     {

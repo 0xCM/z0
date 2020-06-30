@@ -5,9 +5,9 @@
 namespace Z0
 {
     /// <summary>
-    /// Defines data widths expressed in bits
+    /// Defines reference literals that specify data bit-widths
     /// </summary>
-    public enum DataWidth : uint
+    public enum DataWidth : ushort
     {
         /// <summary>
         /// Nothingness

@@ -68,9 +68,9 @@ namespace Z0.Asm
 
         public string Format()
             => (Size switch{
-                DataSize.Size1 => ((byte)Value).FormatHex(HexSpec),
-                DataSize.Size2 => ((ushort)Value).FormatHex(HexSpec),
-                DataSize.Size4 => ((uint)Value).FormatHex(HexSpec),
+                DataSize.y1 => ((byte)Value).FormatHex(HexSpec),
+                DataSize.y2 => ((ushort)Value).FormatHex(HexSpec),
+                DataSize.y4 => ((uint)Value).FormatHex(HexSpec),
                 _ => (Value).FormatHex(HexSpec),
             }) + "dx";
 

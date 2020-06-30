@@ -10,6 +10,7 @@ namespace Z0
         
     using static Memories;
     using static BitPop;
+    using static V0d;
 
     partial class dvec
     {
@@ -36,13 +37,13 @@ namespace Z0
             maj = vsub(maj, vand(vsrl(maj, 1), k1));
             odd = vsub(odd, vand(vsrl(odd, 1), k1));
             
-            maj = V0d.vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
-            odd = V0d.vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
+            maj = vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
+            odd = vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
 
-            maj = vand(V0d.vadd(maj, vsrl(maj,4)), k4);
-            odd = vand(V0d.vadd(odd, vsrl(odd,4)), k4);
+            maj = vand(vadd(maj, vsrl(maj,4)), k4);
+            odd = vand(vadd(odd, vsrl(odd,4)), k4);
             
-            odd = V0d.vadd(V0d.vadd(maj, maj), odd);
+            odd = vadd(vadd(maj, maj), odd);
 
             var dst = Stacks.alloc(n128);
             Vectors.vstore(odd, ref dst.X0);
@@ -77,13 +78,13 @@ namespace Z0
             maj = vsub(maj, vand(vsrl(maj, 1), k1));
             odd = vsub(odd, vand(vsrl(odd, 1), k1));
             
-            maj = V0d.vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
-            odd = V0d.vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
+            maj = vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
+            odd = vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
 
-            maj = vand(V0d.vadd(maj, vsrl(maj,4)), k4);
-            odd = vand(V0d.vadd(odd, vsrl(odd,4)), k4);
+            maj = vand(vadd(maj, vsrl(maj,4)), k4);
+            odd = vand(vadd(odd, vsrl(odd,4)), k4);
             
-            odd = V0d.vadd(V0d.vadd(maj, maj), odd);
+            odd = vadd(vadd(maj, maj), odd);
 
             var dst = Stacks.alloc(n256);
             ref var X = ref Stacks.head(ref dst, z64);

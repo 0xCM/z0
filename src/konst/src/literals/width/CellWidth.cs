@@ -9,7 +9,7 @@ namespace Z0
     using W = DataWidth;
 
     /// <summary>
-    /// Classifies widths of segment-relative cells
+    /// Defines a <see cref='DataWidth'/> subset that classifes widths of segment-relative cells
     /// </summary>
     [Flags]
     public enum CellWidth : ushort

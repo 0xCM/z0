@@ -11,12 +11,9 @@ namespace Z0
     using static Konst;
     using static Typed;
     using static As;
-    using static Root;
 
     partial struct V0
     {
-
-
         /// <summary>
         /// Projects a scalar value onto each component of a 128-bit vector
         /// </summary>

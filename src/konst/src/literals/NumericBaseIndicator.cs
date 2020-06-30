@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Defines common numeric base indicators that prefix or suffix a numeric literal
     /// to designate the literal's numeric base

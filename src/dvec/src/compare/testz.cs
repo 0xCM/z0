@@ -12,21 +12,23 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static Konst; 
-    using static Memories;    
+    using static Typed;    
+    using static V0;
+    using static V0d;
 
     partial class dvec
     {
         [MethodImpl(Inline), TestZ]
         public static bit testz(ulong a, ulong b)
-            => TestZ(V0d.vbroadcast(w128,a), V0d.vbroadcast(w128,b));
+            => TestZ(vbroadcast(w128,a), vbroadcast(w128,b));
 
         [MethodImpl(Inline), TestZ]
         public static bit testc(ulong a, ulong b)
-            => TestC(V0d.vbroadcast(w128,a), V0d.vbroadcast(w128,b));
+            => TestC(vbroadcast(w128,a), vbroadcast(w128,b));
 
         [MethodImpl(Inline), TestZ]
         public static bit testc(ulong a)
-            => TestC(V0d.vbroadcast(w128,a), Vectors.vones<ulong>(w128));
+            => TestC(vbroadcast(w128,a), vones<ulong>(w128));
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128

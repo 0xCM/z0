@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vones<T>(W128 w, T t = default)
             where T : unmanaged
-                => veq(default(Vector128<T>), default(Vector128<T>));
+                => V0.vones(w,t);
 
         /// <summary>
         /// Creates a 256-bit vector with all bits enabled
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vones<T>(W256 w, T t = default)
             where T : unmanaged
-                => veq(default(Vector256<T>), default(Vector256<T>));
+                => V0.vones(w,t);
 
         /// <summary>
         /// Creates a 512-bit vector with all bits enabled
@@ -40,6 +40,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector512<T> vones<T>(W512 w, T t = default)
             where T : unmanaged
-                => veq(default(Vector512<T>), default(Vector512<T>));
+                => V0.vones(w,t);
     }
 }

@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst; 
+    using static gmath;
             
     partial class gvec
     {
@@ -29,9 +30,9 @@ namespace Z0
         public static void csa<T>(T a, T b, T c, out T lo, out T hi)
             where T : unmanaged
         {
-            var u = gmath.xor(a,b);
-            lo = gmath.xor(u,c);
-            hi = gmath.or(gmath.and(a,b), gmath.and(u,c));
+            var u = xor(a,b);
+            lo = xor(u,c);
+            hi = or(and(a,b), and(u,c));
         }
          
         /// <summary>
@@ -51,9 +52,9 @@ namespace Z0
         public static Vector512<T> vcsa<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
         {
-            var u = gvec.vxor(a,b);
-            var lo = gvec.vxor(u,c);            
-            var hi = gvec.vor(gvec.vand(a,b), gvec.vand(u,c));
+            var u = vxor(a,b);
+            var lo = vxor(u,c);            
+            var hi = vor(vand(a,b), vand(u,c));
             return(lo,hi);
         }
     }

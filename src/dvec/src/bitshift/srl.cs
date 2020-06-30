@@ -13,7 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
 
     using static Typed;
-    using static Vectors;    
+    using static V0;    
 
     partial class dvec
     {         
@@ -213,6 +213,5 @@ namespace Z0
         static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => As.generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
-
     }
 }

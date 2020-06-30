@@ -9,7 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
         
     using static Konst; 
-    using static Memories;
+    using static Typed;
+    using static V0;
+    using static V0d;
 
     partial class dvec    
     {        
@@ -22,8 +24,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuf32x8(Vector256<byte> a, Vector256<byte> spec)
         {            
-            var x = vshuf16x8(a, V0d.vadd(spec, K0V));
-            var y = vshuf16x8(vswaphl(a), V0d.vadd(spec, K1V));
+            var x = vshuf16x8(a, vadd(spec, K0V));
+            var y = vshuf16x8(vswaphl(a), vadd(spec, K1V));
             return vor(x,y);
         }
 
@@ -34,13 +36,13 @@ namespace Z0
         static Vector256<byte> K0V 
         {
             [MethodImpl(Inline)]
-            get => VData.vload(n256, K0Bytes);
+            get => vload(n256, K0Bytes);
         }
 
         static Vector256<byte> K1V 
         {
             [MethodImpl(Inline)]
-            get => VData.vload(n256,K1Bytes);
+            get => vload(n256,K1Bytes);
         }
 
         static ReadOnlySpan<byte> K0Bytes
