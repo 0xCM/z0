@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static Root;
 
-    partial class Symbolic
-    {
+    partial struct Symbolic
+    {        
         [MethodImpl(Inline), Op]
         public static ref ushort write(ref char src)
             => ref SymBits.write(ref src);

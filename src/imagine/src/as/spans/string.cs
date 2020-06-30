@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
 
-    partial class Symbolic
-    {        
-        static AsciDataStrings AsciStrings => default;
-
-    }
+    partial struct As
+    {
+       [MethodImpl(Inline), Op]
+        public static string @string(ReadOnlySpan<char> src)
+            => @view<char,string>(first(src));
+    }   
 }

@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static Root;
 
-    partial class Symbolic
-    {
+    partial struct Symbolic
+    {        
         /// <summary>
         /// Finds indices of the source cells that contain a specified character and returns the number of matches found
         /// </summary>
@@ -59,6 +59,6 @@ namespace Z0
             Span<int> dst = new int[src.Length];
             var j = indices(src,match,dst);
             return dst.Slice(0,j);
-        }
+        }        
     }
 }

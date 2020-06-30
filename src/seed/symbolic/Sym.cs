@@ -4,14 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
- 
-    using static Konst;
-        
-    
-    public static partial class XTend
+    [ApiHost]
+    public readonly partial struct Symbolic
     {
-
+                    
     }
 }

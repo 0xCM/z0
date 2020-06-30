@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static Root;
 
-    partial class Symbolic
-    {
+    partial struct Symbolic
+    {        
         /// <summary>
         /// Attempts to extract an index-identified permutation symbol
         /// </summary>
@@ -27,7 +27,7 @@ namespace Z0
             var last = (byte)(first + segwidth - 1);
 
             dst = (Perm4L)SymBits.extract((byte)src, first, last);
-            return PermLiterals.test(dst);
+            return Symbolic.test(dst);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
             var last = (byte)(first + segwidth - 1);
 
             dst = (Perm8L)SymBits.extract((uint)src, first, last);
-            return PermLiterals.test(dst);
+            return Symbolic.test(dst);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
             var last = (byte)(first + segwidth - 1);
 
             dst = (Perm16L)SymBits.extract((ulong)src, first, last);
-            return PermLiterals.test(dst);
+            return Symbolic.test(dst);
         }        
     }
 }

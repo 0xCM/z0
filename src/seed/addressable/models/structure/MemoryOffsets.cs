@@ -9,12 +9,10 @@ namespace Z0
 
     using static Konst;
 
-
     public readonly struct MemoryOffsets : IReadOnlyIndex<MemoryOffset>
     {
         readonly MemoryOffset[] Offsets;
         
-
         [MethodImpl(Inline)]
         public static MemoryOffset legacy(MemoryAddress @base, MemoryAddress relative)
         {

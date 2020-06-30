@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
-    using static Konst;
-    using static Memories;
-
     public class t_bg_permute : t_bg<t_bg_permute>
     {                
         public void bg_permute_32x5()

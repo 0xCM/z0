@@ -14,6 +14,14 @@ namespace Z0
     partial struct As
     {
         /// <summary>
+        /// Retrieves the address of (a presumeably interned) string
+        /// </summary>
+        /// <param name="src">The source string</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe char* pointer(string src) 
+            => (char*) pvoid(src);
+
+        /// <summary>
         /// Presents a readonly reference to an unmanaged value as a pointer displaced 
         /// by a specified element offset
         /// </summary>

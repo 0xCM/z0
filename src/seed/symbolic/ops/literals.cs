@@ -6,12 +6,42 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static Root;
 
-    partial class Symbolic
-    {
+    partial struct Symbolic
+    {        
+        /// <summary>
+        /// Extracts the ordered sequence of symbolic literals that define a 16-symbol permutation to a caller-supplied target
+        /// </summary>
+        /// <param name="src">The canonical literal representation</param>
+        /// <param name="dst">The literal receiver</param>
+        [MethodImpl(Inline), Op]
+        public static bit literals(Perm16L src, Span<Perm16L> dst)
+        {
+            const int length = 16;
+
+            for(var i=0; i< length; i++)
+                if(!Symbolic.literal(src, i, out seek(dst,i)))
+                    return false;
+            
+            return true;
+        }
+
+        /// <summary>
+        /// Extracts the ordered sequence of symbolic literals that define a 16-symbol permutation to a caller-supplied target
+        /// </summary>
+        /// <param name="src">The canonical literal representation</param>
+        [MethodImpl(Inline)]
+        public static Span<Perm16L> literals(Perm16L src)
+        {            
+            Span<Perm16L> dst = new Perm16L[16];
+            if(!Symbolic.literals(src,dst))
+                return Span<Perm16L>.Empty;            
+            return dst;
+        }
+
         /// <summary>
         /// Extracts the ordered sequence of symbolic literals that define a 4-symbol permutation
         /// </summary>
@@ -23,7 +53,7 @@ namespace Z0
 
             Span<Perm4L> dst = new Perm4L[length];
             for(var i=0; i < length; i++)
-                if(!Symbolic.literal(src,i, out seek(dst,i)))
+                if(!literal(src,i, out seek(dst,i)))
                     return Span<Perm4L>.Empty;
 
             return dst;
@@ -40,7 +70,7 @@ namespace Z0
             const int length = 8;
 
             for(var i=0; i< length; i++)
-                if(!Symbolic.literal(src, i, out seek(dst,i)))
+                if(!literal(src, i, out seek(dst,i)))
                     return false;
             
             return true;

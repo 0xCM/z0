@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Root;
     
-    partial class Symbolic    
+    partial struct Symbolic   
     {   
         /// <summary>
         /// Counts the number of source characters that exist an a specified match set

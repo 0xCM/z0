@@ -6,23 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static Root;
 
-    partial class Symbolic
-    {
+    partial struct Symbolic
+    {        
         [MethodImpl(Inline), Op]
-        public static bool eq(ReadOnlySpan<char> x, ReadOnlySpan<char> y)
-        {
-            var count = x.Length;
-            if(count != y.Length)
-                return false;
-
-            for(var i=0; i<count; i++)
-                if(skip(x,i) != skip(y,i))
-                    return false;
-            return true;
-        }
+        public static ref readonly ushort read(in char src)        
+            => ref SymBits.read(src);
+                    
+        [MethodImpl(Inline), Op]
+        public static ref readonly ushort read(in char src, int offset)        
+            => ref SymBits.read(src,offset);
     }
 }

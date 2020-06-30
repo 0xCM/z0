@@ -3,14 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
-     
-    using static Konst;
 
-    partial class Symbolic
-    {    
+    using static Konst;
+    using static Root;
+
+    partial struct Symbolic
+    {        
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Symbols<Singleton,T,N1> bits<T>(N1 n)         
             where T : unmanaged
@@ -39,11 +40,11 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Symbols<Sextet,T,N6> bits<T>(N6 n)         
             where T : unmanaged
-            => enumerate<Sextet,T,N6>();
+                => enumerate<Sextet,T,N6>();
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Symbols<Octet,T,N8> bits<T>(N8 n)         
             where T : unmanaged
-            => enumerate<Octet,T,N8>();
+                => enumerate<Octet,T,N8>();
     }
 }

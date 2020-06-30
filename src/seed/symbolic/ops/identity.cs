@@ -6,12 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
 
-    partial class Symbolic    
+    using static Konst;
+    using static As;
+
+    partial struct Symbolic
     {        
-       /// <summary>
+        /// <summary>
         /// Defines the identity permutation on 4 symbols
         /// </summary>
         /// <param name="n">The symbol count selector</param>

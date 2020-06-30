@@ -32,7 +32,7 @@ namespace Z0
         {            
             ref readonly var input = ref Symbolic.read(src,offset);
             ref var target = ref write(ref dst);
-            vstore(vcompact(vload(w256,input), w8), ref target);        
+            V0.vsave(vcompact(V0.vload(w256,input), w8), ref target);        
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Z0
         {
              [MethodImpl(Inline)] 
              get => Location == 0; 
-        }
+        }   
 
         public bool IsNonEmpty 
         {

@@ -8,9 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static asci;
 
     public class t_asci_encode : t_symbolic<t_asci_encode>
     {        
+        public void unpack_4()
+        {
+            void check(char x, AsciCharCode y)
+                => Claim.Eq(encode(x), y);
+            
+            var src = span(array('1','2','3','4'));
+            var dst = span(alloc<AsciCharCode>(4));
+            encode(src,dst);
+            iter(src, dst, check);            
+        }
+
         public void test_case_01()
         {
             var tc = default(AsciTestCase01);

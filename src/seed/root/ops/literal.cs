@@ -6,7 +6,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
 
     partial class Root
     {
@@ -14,7 +13,7 @@ namespace Z0
         public static BinaryLiteral literal(Base2 @base2, string name, object value, string text)
             => new BinaryLiteral(name,value,text);
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static BinaryLiteral<T> literal<T>(Base2 @base2, string name, T value, string text)
             where T : unmanaged
                 => new BinaryLiteral<T>(name, value, text);

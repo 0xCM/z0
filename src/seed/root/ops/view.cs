@@ -15,11 +15,10 @@ namespace Z0
     partial class Root
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public ReadOnlySpan<T> view<T>(MemRef src)
+        public static ReadOnlySpan<T> view<T>(MemRef src)
             => CreateReadOnlySpan(ref @ref<T>(src.Address), src.Count<T>());
 
-
-        /// <summary>
+        /// <summary>   
         /// Creates a T-span from a supplied reference
         /// </summary>
         /// <param name="src">A reference to the leading cell</param>

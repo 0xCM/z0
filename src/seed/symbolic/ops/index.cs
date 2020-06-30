@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     using static Konst;
     using static Root;
 
-    partial class Symbolic
-    {
+    partial struct Symbolic
+    {        
         /// <summary>
         /// Creates value-to-symbol index
         /// </summary>
@@ -81,6 +81,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static HexIndex<T> index<T>(Func<T,HexKind8> f, params T[] src)
             where T : unmanaged
-                => index(f, src, new T[src.Length]);
+                => index(f, src, new T[src.Length]);     
     }
 }

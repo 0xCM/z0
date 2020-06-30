@@ -17,8 +17,6 @@ namespace Z0
     public readonly struct NumericLiteral<T> : INumericLiteral<NumericLiteral<T>,T>
         where T : unmanaged
     {
-        public static NumericLiteral<T> Empty 
-            => new NumericLiteral<T>(string.Empty, default, string.Empty, NBK.None);
 
         public string Name {get;}
         
@@ -103,5 +101,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(NumericLiteral<T> src)            
             => object.Equals(Data, src.Data);        
+
+        public static NumericLiteral<T> Empty 
+            => new NumericLiteral<T>(string.Empty, default, string.Empty, NBK.None);
+        
     }
 }

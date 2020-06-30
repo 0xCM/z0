@@ -9,21 +9,34 @@ namespace Z0
 
     using static Root;
     using static Konst;
-    using static asci;
 
-    public class t_digital : t_symbolic<t_digital>
+    public class t_stringref : t_symbolic<t_stringref>
     {        
+        const string S0 = "ABCDEFG";
+
+        const string S1 ="HIJKLMN";
 
 
-        public void unpack_4()
+        public void tc_literal()
         {
-            void check(char x, AsciCharCode y)
-                => Claim.Eq(encode(x), y);
-            
-            var src = span(array('1','2','3','4'));
-            var dst = span(alloc<AsciCharCode>(4));
-            encode(src,dst);
-            iter(src, dst, check);            
+            var r0 = StringRef.create(S0);
+            Claim.eq(r0.Text, S0);
+
+            var r1 = StringRef.create(S1);
+            Claim.eq(r1.Text, S1);
         }
+
+
+        public void tc_dynamic()
+        {
+            var dst = EmptyString;
+            for(var i=0; i<9; i++)
+            {
+                dst += i.ToString()[0];
+            }
+            var r = StringRef.create(dst);
+            Claim.eq(dst, r.Text);
+        }
+
     }
 }

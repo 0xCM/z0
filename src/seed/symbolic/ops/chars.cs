@@ -9,28 +9,13 @@ namespace Z0
 
     using static Konst;
     using static Root;
-    using static Typed;
 
-    partial class Symbolic    
-    {           
-
-        [MethodImpl(Inline), Op]
-        public static SuperSym supersym(int n)
-            => n switch {
-            0 => SuperSym.Sup0,
-            1 => SuperSym.Sup1,
-            2 => SuperSym.Sup2,
-            3 => SuperSym.Sup3,
-            4 => SuperSym.Sup4,
-            5 => SuperSym.Sup5,
-            6 => SuperSym.Sup6,
-            _  => SuperSym.H            
-        };   
-
+    partial struct Symbolic
+    {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars<E>(ReadOnlySpan<E> src)
             where E : unmanaged, Enum
                 => cast<E,char>(src);
-
     }
+
 }

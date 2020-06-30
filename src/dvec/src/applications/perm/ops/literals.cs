@@ -16,36 +16,6 @@ namespace Z0
     partial class Permute
     {
         /// <summary>
-        /// Extracts the ordered sequence of symbolic literals that define a 16-symbol permutation to a caller-supplied target
-        /// </summary>
-        /// <param name="src">The canonical literal representation</param>
-        /// <param name="dst">The literal receiver</param>
-        [MethodImpl(Inline), Op]
-        public static bit literals(Perm16L src, Span<Perm16L> dst)
-        {
-            const int length = 16;
-
-            for(var i=0; i< length; i++)
-                if(!Symbolic.literal(src, i, out seek(dst,i)))
-                    return false;
-            
-            return true;
-        }
-
-        /// <summary>
-        /// Extracts the ordered sequence of symbolic literals that define a 16-symbol permutation to a caller-supplied target
-        /// </summary>
-        /// <param name="src">The canonical literal representation</param>
-        [MethodImpl(Inline)]
-        public static Span<Perm16L> literals(Perm16L src)
-        {            
-            Span<Perm16L> dst = new Perm16L[16];
-            if(!literals(src,dst))
-                return Span<Perm16L>.Empty;            
-            return dst;
-        }
-
-        /// <summary>
         /// Enumerates all permutation map format strings on 4 symbols
         /// </summary>
         public static IEnumerable<(Perm4L perm, string format)> Exhaust(N4 n)

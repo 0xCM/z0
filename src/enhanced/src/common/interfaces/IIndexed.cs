@@ -45,6 +45,24 @@ namespace Z0
             => ref this[index];
     }
     
+    public interface IReadOnlySpan<F,T> : IMeasured, IReified<F>, INullary<F,T>
+        where F : IReadOnlySpan<F,T>, new()
+    {
+        ReadOnlySpan<T> Data {get;}
+        
+        ReadOnlySpan<T>.Enumerator GetEnumerator()
+            => Data.GetEnumerator();
+
+        bool INullity.IsEmpty 
+            => Data.Length == 0;
+
+        ref readonly T this[int index]
+            => ref Data[index];
+
+        ref readonly T Lookup(int index) 
+            => ref this[index];
+    }
+    
     public interface IIndex<F,T> : IIndex<T>, IReified<F>, INullary<F,T>
         where F : IIndex<F,T>, new()
     {

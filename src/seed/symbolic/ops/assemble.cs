@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static As;
 
-    partial class Symbolic    
-    {        
-        /// <summary>
+    partial struct Symbolic
+    {   
+        // <summary>
         /// Constructs a permutation of length four from four ordered symbols
         /// </summary>
         [MethodImpl(Inline), Op]

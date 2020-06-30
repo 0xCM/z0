@@ -141,6 +141,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<char> src)
             where T : struct
-                => Cast<char,T>(src);                
+                => Cast<char,T>(src);
     }
 }
