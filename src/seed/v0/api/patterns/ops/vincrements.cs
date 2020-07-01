@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector128<T> vincrements<T>(W128 w)
+        internal static Vector128<T> vincrements<T>(W128 w)
             where T : unmanaged
        {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector256<T> vincrements<T>(W256 w)
+        internal static Vector256<T> vincrements<T>(W256 w)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))

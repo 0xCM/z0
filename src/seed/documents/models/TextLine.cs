@@ -12,33 +12,31 @@ namespace Z0
     /// <summary>
     /// Represents a line of text in the context of a line-oriented text data source
     /// </summary>
-    public readonly struct TextLine 
+    public readonly struct TextDocLine 
     {            
-        public static TextLine Empty => new TextLine(0, string.Empty);
-
         /// <summary>
         /// The line number of the data source from which the line was extracted
         /// </summary>
-        public uint LineNumber {get;}
+        public readonly uint LineNumber;
         
         /// <summary>
         /// The line text, as it was found in the source
         /// </summary>
-        public string LineText {get;}
+        public readonly string LineText;
 
         [MethodImpl(Inline)]
-        public static explicit operator TextLine(string text) 
-            =>  new TextLine(0, text);
+        public static explicit operator TextDocLine(string text) 
+            =>  new TextDocLine(0, text);
 
         [MethodImpl(Inline)]
-        public static implicit operator string(TextLine line) 
+        public static implicit operator string(TextDocLine line) 
             => line.LineText;
 
         [MethodImpl(Inline)]
-        public TextLine(uint number, string text)
+        public TextDocLine(uint number, string text)
         {
             LineNumber = number;
-            LineText = text ?? string.Empty;
+            LineText = text ?? EmptyString;
         }
         
         public char this[int charidx]
@@ -69,7 +67,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public string[] Split(in TextFormat spec)
+        public string[] Split(in TextDocFormat spec)
             => StartsWith(spec.Delimiter)  
             ? LineText.Substring(1).SplitClean(spec.Delimiter)  
             : LineText.SplitClean(spec.Delimiter);
@@ -79,5 +77,8 @@ namespace Z0
 
         public string this[int startpos, int endpos] 
             => LineText.Substring(startpos, endpos - startpos + 1);
+
+        public static TextDocLine Empty 
+            => new TextDocLine(0, EmptyString);
     }
 }

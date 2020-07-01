@@ -12,35 +12,59 @@ namespace Z0
     using DW = DataWidth;
     using TW = TypeWidth;
     using FW = FixedWidth;
+    using VW = VectorWidth;
+    using TS = TypeSignKind;
+    
     using W = W1024;
 
+    /// <summary>
+    /// Defines a type-level representation of <see cref='DW.W1024'/>
+    /// </summary>
     public readonly struct W1024 : IFixedWidth<W> 
     {
-        public DW DataWidth => DW.W1024;         
+        public const DW Width = DW.W1024; 
 
-        public FW FixedWidth => FW.W1024; 
+        public const TS Sign = TS.Unsigned;
 
-        public TW TypeWidth => TW.W1024; 
+        public DW DataWidth 
+            => Width;
 
-        [MethodImpl(Inline)]
-        public static implicit operator int(W src) => (int)src.DataWidth;
+        public FW FixedWidth 
+            => (FW)Width;
 
-        [MethodImpl(Inline)]
-        public static implicit operator DW(W src) => src.DataWidth;
+        public TW TypeWidth 
+            => (TW)Width;
 
-        [MethodImpl(Inline)]
-        public static implicit operator FW(W src) => src.FixedWidth;
-
-        [MethodImpl(Inline)]
-        public static implicit operator TW(W src) => src.TypeWidth;
+        public TS TypeSign
+            => Sign;
 
         [MethodImpl(Inline)]
-        public bool Equals(W w) => true;
+        public static implicit operator int(W src) 
+            => (int)Width;
 
-        public override string ToString() => DataWidth.FormatValue();
+        [MethodImpl(Inline)]
+        public static implicit operator DW(W src) 
+            => Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator FW(W src) 
+            => (FW)Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator TW(W src) 
+            => (TW)Width;
+
+        [MethodImpl(Inline)]
+        public bool Equals(W w) 
+            => true;
+
+        public override string ToString() 
+            => Width.FormatValue();
         
-        public override int GetHashCode() => DataWidth.GetHashCode();
+        public override int GetHashCode() 
+            => (int)Width;
 
-        public override bool Equals(object obj) => obj is W;
+        public override bool Equals(object obj) 
+            => obj is W;
     }
 }

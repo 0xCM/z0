@@ -189,7 +189,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vcompact(Vector256<long> src, N128 w, int t = default)            
-            => V0.vpartsi((int)V0.vcell(src, 0),(int)V0.vcell(src, 1),(int)V0.vcell(src, 2),(int)V0.vcell(src, 3));
+            => V0.vparts(w128i, (int)V0.vcell(src, 0),(int)V0.vcell(src, 1),(int)V0.vcell(src, 2),(int)V0.vcell(src, 3));
 
         /// <summary>
         /// 16x16i -> 16x8i

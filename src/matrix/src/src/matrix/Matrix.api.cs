@@ -229,12 +229,12 @@ namespace Z0
         /// <typeparam name="M">The natural row count type</typeparam>
         /// <typeparam name="N">The natural column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void write<M,N,T>(Matrix256<M,N,T> src, StreamWriter dst, bool overwrite = true, TextFormat? fmt = null)
+        public static void write<M,N,T>(Matrix256<M,N,T> src, StreamWriter dst, bool overwrite = true, TextDocFormat? fmt = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var options = fmt ?? TextFormat.Structured;
+            var options = fmt ?? TextDocFormat.Structured;
             var width = fmt?.ColWidth ?? src.ColFormatWidth();
             var sep = options.Delimiter;
             var rows = (int)value<M>();
@@ -267,12 +267,12 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static Matrix256<M,N,T> blockread<M,N,T>(StreamReader src, TextFormat? fmt = null)
+        public static Matrix256<M,N,T> blockread<M,N,T>(FilePath src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var doc = src.ReadTextDoc().Require();
+            var doc = TextDocParser.parse(src).Require();
             var m = (int)value<M>();
             var n = (int)value<N>();
 
@@ -283,7 +283,7 @@ namespace Z0
                 return default;
 
             var parser = NumericParser.create<T>();
-            var dst =  Matrix.blockload<M,N,T>(Blocks.rectangle<T>(n256,(int)value<M>(),(int)value<N>()));
+            var dst =  Matrix.blockload<M,N,T>(Blocks.rectangle<T>(n256, (int)value<M>(), (int)value<N>()));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];

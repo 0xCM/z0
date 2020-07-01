@@ -34,7 +34,7 @@ namespace Z0.RefOps
         /// <param name="count">The number of values to copy</param>
         [MethodImpl(Inline), Op]
         public static unsafe void copy(byte* pSrc, byte* pDst, int count)
-            => sys.copy(pSrc, pDst, count);
+            => sys.copy(pSrc, pDst, (uint)count);
 
         /// <summary>
         /// Copies a contiguous segments of values from one location to another
@@ -45,7 +45,7 @@ namespace Z0.RefOps
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe void copy<T>(T* pSrc, T* pDst, int count)
             where T : unmanaged
-                => sys.copy(pSrc, pDst, count);
+                => sys.copy(pSrc, pDst, (uint)count);
 
         /// <summary>
         /// Copies a contiguous segments of values to a span
@@ -85,7 +85,7 @@ namespace Z0.RefOps
             ref var input = ref @as<S,byte>(ref Root.edit(src));
             ref var target = ref @as<T,byte>(ref add(dst, dstOffset));
             var dstSize =  srcCount*size<S>();
-            sys.copy(input, ref target, dstSize);
+            sys.copy(input, ref target, (uint)dstSize);
             return dstSize;
         }
     }

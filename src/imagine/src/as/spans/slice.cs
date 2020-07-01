@@ -44,6 +44,17 @@ namespace Z0
             => cover(skip(src,(uint)offset), length);
 
         /// <summary>
+        /// Draws a specified count of T-cells from a source span beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <param name="length"></param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, uint offset, uint length)
+            => cover(skip(src, offset), length);
+
+        /// <summary>
         /// Selects a segment [offset, length(src) - 1] from a source span src:Span[T]
         /// </summary>
         /// <param name="src">The data source</param>
@@ -52,6 +63,16 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> slice<T>(Span<T> src, int offset)
             => CreateSpan(ref seek(first(src), offset), src.Length - offset);
+
+        /// <summary>
+        /// Selects a segment [offset, length(src) - 1] from a source span src:Span[T]
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> slice<T>(Span<T> src, uint offset)
+            => CreateSpan(ref seek(first(src), offset), (int)(src.Length - offset));
 
         /// <summary>
         /// Draws a specified count of T-cells from a source span beginning at a specified offset
@@ -63,5 +84,16 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> slice<T>(Span<T> src, int offset, int length)
             => CreateSpan(ref seek(first(src), offset), length);
+
+        /// <summary>
+        /// Draws a specified count of T-cells from a source span beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <param name="length"></param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> slice<T>(Span<T> src, uint offset, uint length)
+            => CreateSpan(ref seek(first(src), offset), (int)length);            
     }
 }

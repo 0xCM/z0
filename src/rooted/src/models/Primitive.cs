@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The type code</param>
         [MethodImpl(Inline), Op]
         public static PrimalKind kind(TypeCode src)
-            => AsInternal.skip(Kinds,(int)src);
+            => As.skip(Kinds,(uint)src);
 
         [MethodImpl(Inline), Op]
         public static PrimalKind kind(Type src)
@@ -47,14 +47,6 @@ namespace Z0
         public static PrimalKind kind<T>()
             => kind(typeof(T));
         
-        // [MethodImpl(Inline), Op]
-        // public static BitSize width(Type src)
-        //     => kind(src).BitField().Width;
-
-        // [MethodImpl(Inline), Op]
-        // public static ByteSize size(Type src)
-        //     => kind(src).BitField().Size;
-
         [MethodImpl(Inline), Op]
         public static bool literal(PrimalKind src)
             => ((byte)src > 2 && (byte)src<16) || (byte)src == 18;
@@ -68,7 +60,7 @@ namespace Z0
         {
             var i = index(src);
             var test = (i > 2 && i <16) || i == 18;
-            return test ? (PrimalLiteralKind)AsInternal.skip(PrimalKindData,i) : PrimalLiteralKind.None;            
+            return test ? (PrimalLiteralKind)As.skip(PrimalKindData,i) : PrimalLiteralKind.None;            
         }
 
         static ReadOnlySpan<PrimalKind> Kinds

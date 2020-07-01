@@ -15,8 +15,8 @@ namespace Z0
         /// <summary>
         /// Reads a T-cell from a bytespan
         /// </summary>
-        /// <param name="src"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The target type</typeparam>
         
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T read<T>(ReadOnlySpan<byte> src)

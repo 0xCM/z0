@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Typed;
+    using static Root;
 
     partial class SpannedBits
     {

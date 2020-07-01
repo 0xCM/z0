@@ -10,7 +10,6 @@ namespace Z0
 
     partial class Root
     {
-
         /// <summary>
         /// Hydrates a T-cell from an S-reference
         /// </summary>

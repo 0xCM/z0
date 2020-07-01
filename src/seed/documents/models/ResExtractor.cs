@@ -64,7 +64,7 @@ namespace Z0
         {
             using var stream = Source.GetManifestResourceStream(name);
             using var reader = new StreamReader(stream);
-            return reader.ReadTextDoc().TryMap(doc => new AppResourceDoc(name,doc));            
+            return TextDocParser.parse(reader).TryMap(doc => new AppResourceDoc(name,doc));            
         }
 
         public Option<AppResourceDoc> ExtractDocument(FileName name)

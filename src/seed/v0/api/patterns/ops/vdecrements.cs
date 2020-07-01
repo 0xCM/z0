@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector128<T> vdecrements<T>(N128 w)
+        internal static Vector128<T> vdecrements<T>(N128 w)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
@@ -36,14 +36,13 @@ namespace Z0
                 throw Unsupported.define<T>();
         }
 
-
         /// <summary>
         /// Creates a 256-bit vector with component values k - 1, ..., 1, 0  where k is the length of the target vector
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector256<T> vdecrements<T>(N256 w)
+        internal static Vector256<T> vdecrements<T>(N256 w)
             where T : unmanaged
         {            
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))

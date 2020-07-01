@@ -129,7 +129,7 @@ namespace Z0
             var count = input.Length;
             var target = dst.ToSpan();
             for(var i=0; i<count; i++)
-                AsInternal.seek(target,i) = ToNumeric.to<S,T>(AsInternal.skip(input,i));        
+                AsInternal.seek(target,i) = ToNumeric.to<S,T>(As.skip(input,(uint)i));        
             return dst;
         }
 
@@ -148,7 +148,7 @@ namespace Z0
             var buffer = new T[count];
             var dst = buffer.ToSpan();
             for(var i=0; i<count; i++)
-                AsInternal.seek(dst,i) = ToNumeric.to<S,T>(AsInternal.skip(input,i));        
+                AsInternal.seek(dst,i) = ToNumeric.to<S,T>(As.skip(input,(uint)i));        
             return buffer;
         }
     }

@@ -66,8 +66,6 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly ulong view<T>(W64 w, in T src)
-            => ref view<T,ulong>(src);    
-
-
+            => ref view<T,ulong>(src);
     }
 }

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{    
     public enum Sign8Kind : byte
     {
         Unsigned = 0,

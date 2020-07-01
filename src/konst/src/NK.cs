@@ -5,6 +5,7 @@
 namespace Z0
 {        
     using NK = NumericKind;
+    using static DataWidth;
 
     partial struct Konst
     {
@@ -67,5 +68,11 @@ namespace Z0
         public const NK Numeric16x32u = NK.U16 | NK.U32;
         
         public const NK Numeric32x64u = NK.U32 | NK.U64;
+
+        /// <summary>
+        /// Specifies <see cref='W8'/> and <see cref='W64'/> unsigned numeric types
+        /// </summary>
+        public const NK Numeric8x64u = Numeric8u | Numeric64u;
+
     }
 }

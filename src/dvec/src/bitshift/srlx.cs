@@ -23,9 +23,9 @@ namespace Z0
         public static Vector128<ulong> vsrlx(Vector128<ulong> src, [Imm] byte count)        
         {
             if(count >= 64)
-                return vsrl(vbsrl(src, 8), (byte)(count - 64));     
+                return vsrl(V0d.vbsrl(src, 8), (byte)(count - 64));     
             else
-                return vor(vsrl(src, count), vsll(vbsrl(src, 8), (byte)(64 - count)));
+                return vor(vsrl(src, count), vsll(V0d.vbsrl(src, 8), (byte)(64 - count)));
         }
 
         [MethodImpl(Inline), Op]
@@ -50,9 +50,9 @@ namespace Z0
         public static Vector256<ulong> vsrlx(Vector256<ulong> src, [Imm] byte count)        
         {
             if(count >= 64)
-                return vsrl(vbsrl(src, 8), (byte)(count - 64));     
+                return vsrl(V0d.vbsrl(src, 8), (byte)(count - 64));     
             else
-                return vor(vsrl(src, count), vsll(vbsrl(src, 8), (byte)(64 - count)));
+                return vor(vsrl(src, count), vsll(V0d.vbsrl(src, 8), (byte)(64 - count)));
         }
 
         [MethodImpl(Inline), Op]

@@ -45,7 +45,7 @@ namespace Z0
         // Permuting would be cheaper but, in any case...
         [MethodImpl(Inline)]
         static Vector256<ushort> vpart30x8x3Assemble(Vector256<ushort> y)
-            => vparts(
+            => vparts(w256,
                 V0.vcell(y,0), // 0
                 V0.vcell(y,2), // 1
                 V0.vcell(y,4), // 2
@@ -71,7 +71,7 @@ namespace Z0
             var hi = uint16(BitMasks.Lsb16x16x15 & (a >> 15));            
             var m = vpart30x8x3Mask(src);
             var shifts = vparts(0, 3, 6, 9, 12, 0, 0, 0); 
-            var x = vbroadcast(n256, uint32(lo | hi << 16));            
+            var x = vbroadcast(w256, uint32(lo | hi << 16));            
             var y = V0.v16u(dvec.vsrlv(vand(x,m), shifts));
             var z = vpart30x8x3Assemble(y);
             return z;

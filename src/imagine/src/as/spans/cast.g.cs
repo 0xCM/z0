@@ -30,10 +30,10 @@ namespace Z0
             where S : struct
         {    
             var z = size<T>();
-            var n = src.Length;
+            var n = (uint)src.Length;
             var q = n/z;            
             var r = n%z;
-            var dst = cast<S,T>(slice(src,0, q));            
+            var dst = cast<S,T>(slice(src, 0, q));            
             rem = r != 0 ? slice(src,q) : EmptySpan<S>();
             return dst;
         }            
@@ -44,7 +44,7 @@ namespace Z0
             where S : struct
         {    
             var z = size<T>();
-            var n = src.Length;
+            var n = (uint)src.Length;
             var q = n/z;            
             var r = n%z;
             var dst = cast<S,T>(slice(src,0, q));            

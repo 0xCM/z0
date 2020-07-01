@@ -12,15 +12,16 @@ namespace Z0
     [ApiHost]
     public readonly partial struct As
     {
-        const NumericKind Closure = AllNumeric;    
+        const NumericKind Closure = Numeric8x64u;    
+
 
         [MethodImpl(Inline)]   
         internal static T[] alloc<T>(int length)
             => new T[length];
 
         [MethodImpl(Inline)]        
-        internal static int size<T>()
-            => Unsafe.SizeOf<T>();
+        internal static uint size<T>()
+            => (uint)Unsafe.SizeOf<T>();
 
         [MethodImpl(Inline)]        
         internal static Span<T> EmptySpan<T>()

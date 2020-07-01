@@ -12,6 +12,7 @@ namespace Z0
 
     partial struct Symbolic
     {        
+        
         /// <summary>
         /// Defines the identity permutation on 4 symbols
         /// </summary>
@@ -41,5 +42,34 @@ namespace Z0
                 Perm16L.X4, Perm16L.X5, Perm16L.X6, Perm16L.X7,
                 Perm16L.X8, Perm16L.X9, Perm16L.XA, Perm16L.XB,
                 Perm16L.XC, Perm16L.XD, Perm16L.XE, Perm16L.XF);
+
+
+        /// <summary>
+        /// Creates the identity permutation
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static Perm16 videntity(W128 w)
+            => new Perm16(V0.vincrements<byte>(w));
+
+        /// <summary>
+        /// Creates the reversal of the identity permutation
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static Perm16 vreversed(W128 w)
+            => new Perm16(V0.vdecrements<byte>(w));
+
+        /// <summary>
+        /// Creates the identity permutation
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static Perm32 videntity(W256 w)
+            => new Perm32(V0.vincrements<byte>(w));
+
+        /// <summary>
+        /// Creates the reversal of the identity permutation
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static Perm32 vreversed(W256 w)
+            => new Perm32(V0.vdecrements<byte>(w));
     }
 }

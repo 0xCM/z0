@@ -49,8 +49,7 @@ namespace Z0.Test
 
             Matrix256<M,N,T> Read(FilePath src)
             {
-                using var reader = src.Reader();
-                var B = Matrix.blockread<M,N,T>(reader);
+                var B = Matrix.blockread<M,N,T>(src);
                 if(isFp)
                     B.Apply(round);
                 return B;

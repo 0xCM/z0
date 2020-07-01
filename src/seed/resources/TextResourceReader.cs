@@ -27,7 +27,7 @@ namespace Z0
             var count = Math.Min(locations.Length, dst.Length);
             for(var i=0; i<count; i++)
             {
-                ref readonly var address = ref skip(locations,i);
+                ref readonly var address = ref As.skip(locations,(uint)i);
                 var data = Addresses.read<byte>(address, ResLength);
                 var content = Render(Symbols(data));
                 seek(dst, i) = TextResource.Define((ulong)address, address, content);            
@@ -53,7 +53,7 @@ namespace Z0
             var dst = Root.span(Root.alloc<TextResource<E>>(count));
             for(var i=0; i<count; i++)
             {
-                ref readonly var address = ref skip(locations,i);
+                ref readonly var address = ref As.skip(locations,(uint)i);
                 var value = Spans.cast<char>(Addresses.read<byte>(address, ResLength)).ToString();
                 var id = EnumValue.literal<E,int>(i + 1);
                 seek(dst,i) = TextResource.Define(id, address, value);            

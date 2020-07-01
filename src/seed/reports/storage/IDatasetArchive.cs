@@ -15,7 +15,7 @@ namespace Z0
         FolderName RootFolder {get;}
 
         Option<TextDoc> Dataset(FilePath src)
-            => src.ReadTextDoc();
+            => TextDocParser.parse(src);
 
         Option<TextDoc> Dataset(FileName name)
             => from p in DatasetPaths().TryGetFirst(p => p.FileName == name)

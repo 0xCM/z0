@@ -13,51 +13,67 @@ namespace Z0
     using TW = TypeWidth;
     using FW = FixedWidth;
     using NW = NumericWidth;
+    using TS = TypeSignKind;
+
     using W = W8i;
 
+    /// <summary>
+    /// Defines a type-level representation of <see cref='DW.W8'/> with a <see cref='TS.Signed'/> classifier
+    /// </summary>
     public readonly struct W8i : INumericWidth<W> 
     { 
+        public const DW Width = DW.W8; 
+
+        public const TS Sign = TS.Signed;
+
         public DW DataWidth 
-            => DW.W8; 
+            => Width;
 
         public FW FixedWidth 
-            => FW.W8; 
+            => (FW)Width;
 
         public TW TypeWidth 
-            => TW.W8; 
+            => (TW)Width;
 
         public NW NumericWidth 
-            => NW.W8; 
+            => (NW)Width;
+
+        public TS TypeSign
+            => Sign;
 
         [MethodImpl(Inline)]
         public static implicit operator int(W src) 
-            => (int)src.DataWidth;
+            => (int)Width;
 
         [MethodImpl(Inline)]
         public static implicit operator DW(W src) 
-            => src.DataWidth;
+            => Width;
 
         [MethodImpl(Inline)]
         public static implicit operator TW(W src) 
-            => src.TypeWidth;
+            => (TW)Width;
 
         [MethodImpl(Inline)]
         public static implicit operator FW(W src) 
-            => src.FixedWidth;
+            => (FW)Width;
 
         [MethodImpl(Inline)]
         public static implicit operator NW(W src) 
-            => src.NumericWidth;
+            => (NW)Width;
 
         [MethodImpl(Inline)]        
         public bool Equals(W w) 
             => true;
 
+        [MethodImpl(Inline)]
+        public string Format()
+            => Width.FormatValue();
+
         public override string ToString() 
-            => DataWidth.FormatValue();
+            => Format();
         
         public override int GetHashCode() 
-            => DataWidth.GetHashCode();
+            => (int)Width;
         
         public override bool Equals(object obj) 
             => obj is W;

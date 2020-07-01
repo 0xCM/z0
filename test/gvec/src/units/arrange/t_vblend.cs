@@ -18,9 +18,9 @@ namespace Z0
         public void vblend_256x32f_outline()
         {
             var w = n256;
-            var x = vpartsf(0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
-            var y = vpartsf(8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
-            var spec = vpartsf(0f,-1,0f,-1,0f,-1,0f,-1);
+            var x = vparts(0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
+            var y = vparts(8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
+            var spec = vparts(0f,-1,0f,-1,0f,-1,0f,-1);
             var z = dvec.vblendv(x,y,spec);
         }
 

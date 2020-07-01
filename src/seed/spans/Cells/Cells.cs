@@ -9,6 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
+    using static System.Runtime.InteropServices.MemoryMarshal;
+    using static System.Runtime.CompilerServices.Unsafe;
 
     [ApiHost]
     public static class Cells
@@ -21,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T cell<T>(ReadOnlySpan<byte> src)
             where T : unmanaged        
-                => MemoryMarshal.Read<T>(src);
+                => Read<T>(src);
 
         /// <summary>
         /// Reads a generic value beginning at a specified offset
@@ -32,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T cell<T>(ReadOnlySpan<byte> src, int offset)
             where T : unmanaged        
-                => MemoryMarshal.Read<T>(src.Slice(offset));
+                => Read<T>(src.Slice(offset));
 
         /// <summary>
         /// Reads a generic value from the head of a source span
@@ -42,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T cell<T>(Span<byte> src)
             where T : unmanaged           
-                => MemoryMarshal.Read<T>(src);
+                => Read<T>(src);
 
         /// <summary>
         /// Reads an unmanaged generic value from a bytespan beginning at a specified offset
@@ -53,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T cell<T>(Span<byte> src, int offset)
             where T : unmanaged
-                => MemoryMarshal.Read<T>(src.Slice(offset));
+                => Read<T>(src.Slice(offset));
    
         /// <summary>
         /// Copies a specified number of source values to the target and returns the count of copied bytes
@@ -71,7 +73,7 @@ namespace Z0
             ref var input = ref As.uint8(ref As.edit(in src));
             ref var target = ref As.uint8(ref refs.seek(ref dst, dstOffset));
             var bytecount =  (uint)(srcCount*Unsafe.SizeOf<S>());
-            Unsafe.CopyBlock(ref target, ref input, bytecount);
+            CopyBlock(ref target, ref input, bytecount);
             return bytecount;
         }
 
@@ -93,7 +95,7 @@ namespace Z0
             ref var input =  ref As.uint8(ref As.edit(in Root.skip(src,start)));
             ref var target = ref As.uint8(ref Root.seek(dst, offset));
             var bytecount =  (uint)(count*Unsafe.SizeOf<S>());
-            Unsafe.CopyBlock(ref target, ref input, bytecount);
+            CopyBlock(ref target, ref input, bytecount);
             return bytecount;
         }
 

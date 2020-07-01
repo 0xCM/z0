@@ -15,14 +15,14 @@ namespace Z0
     {
         public readonly TextRow[] RowData;        
 
-        public TextFormat Format {get;}
+        public TextDocFormat Format {get;}
 
-        public Option<TextHeader> Header {get;}
+        public Option<TextDocHeader> Header {get;}
         
         public uint TotalLineCount {get;}
 
         [MethodImpl(Inline)]
-        public TextDoc(TextFormat format, Option<TextHeader> header,  uint count, params TextRow[] rows)
+        public TextDoc(TextDocFormat format, Option<TextDocHeader> header,  uint count, params TextRow[] rows)
         {
             this.RowData = rows;
             this.Header = header;

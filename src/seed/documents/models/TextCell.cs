@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     
+    
     /// <summary>
     /// Defines a text segment in the context of a line in a file
     /// </summary>
@@ -25,11 +26,11 @@ namespace Z0
             => src.Content;
                 
         [MethodImpl(Inline)]
-        internal TextCell(uint Row, uint Col, string Content)
+        internal TextCell(uint row, uint col, string content)
         {
-            this.Row = Row;
-            this.Col = Col;
-            this.Content = Content;
+            Row = row;
+            Col = col;
+            Content = content;
         }    
 
         public char this[int index]    

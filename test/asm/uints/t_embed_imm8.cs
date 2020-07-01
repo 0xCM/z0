@@ -12,7 +12,9 @@ namespace Z0.Asm
 
 
     using static Konst;
-    using static Memories;
+    using static V0;
+    using static Typed;
+    using static Root;
 
     using K = Kinds;
 
@@ -108,9 +110,9 @@ namespace Z0.Asm
         {   const byte imm8 = 4;
 
             var dynamics = FunctionDynamic.Service;
-            var name = nameof(dvec.vbsll);
+            var name = "vbsll";
             var vKind = K.vk256<uint>();
-            var src = typeof(dvec).DeclaredMethods().WithName(name).OfKind(vKind).Single();
+            var src = typeof(V0d).DeclaredMethods().WithName(name).OfKind(vKind).Single();
             var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(vKind, id, src, imm8);
             var method = dynamics.Method(dynamics.Handle(f.Target));

@@ -272,6 +272,15 @@ namespace Z0
         string ITextual.Format() 
             => AppName;
 
+        /// <summary>
+        /// The name of the captured x86 resource assembly
+        /// </summary>
+        FileName ResBytesFileName 
+            => FileName.Define("z0.res.bytes", FileExtensions.Dll);
+
+        /// <summary>
+        /// The path to the captured x86 resource assembly
+        /// </summary>
         FilePath ResBytes
             => FilePath.Define(@"J:\dev\projects\z0-logs\res\bin\lib\netcoreapp3.0\z0.res.bytes.dll");
     }

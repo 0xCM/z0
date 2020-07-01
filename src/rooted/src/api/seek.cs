@@ -13,26 +13,26 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ref T seek<T>(ref T src, byte count)
-            => ref AsInternal.seek(ref src, count);
+            => ref As.seek(src, count);
 
         [MethodImpl(Inline)]
         public static ref T seek<T>(ref T src, int count)
-            => ref AsInternal.seek(ref src, count);
+            => ref As.seek(src, count);
 
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, byte count)
-            => ref AsInternal.seek(src, count);
+            => ref As.seek(src, count);
 
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, ushort count)
-            => ref AsInternal.seek(src, count);
+            => ref As.seek(src, count);
 
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, int count)
-            => ref AsInternal.seek(src, count);
+            => ref As.seek(src, (uint)count);
 
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, uint count)
-            => ref AsInternal.seek(src, (int)count); 
+            => ref As.seek(src, count); 
     }
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Defines orientation - a choice between exactly one of two values, e.g. top/bottom, front/back, 
     /// left/right, true/false. The labels chosen - "Left" and "Right" reflect convention, not semantics

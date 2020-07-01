@@ -14,16 +14,16 @@ namespace Z0
     partial struct sys
     {
         [MethodImpl(Options), Opaque(O.CopyBlock)]
-        public static void copy(in byte src, ref byte dst, int count)
-            => CopyBlock(ref dst, ref AsRef(src), (uint)count);
+        public static void copy(in byte src, ref byte dst, uint count)
+            => CopyBlock(ref dst, ref AsRef(src), count);
 
         [MethodImpl(Options), Opaque(O.CopyBlock)]
-        public static unsafe void copy(byte* pSrc, byte* pDst, int count)
-            => CopyBlock(pDst, pSrc, (uint)count);
+        public static unsafe void copy(byte* pSrc, byte* pDst, uint count)
+            => CopyBlock(pDst, pSrc, count);
 
         [MethodImpl(Options), Opaque(O.CopyBlock)]
-        public static unsafe void copy<T>(T* pSrc, T* pDst, int count)
+        public static unsafe void copy<T>(T* pSrc, T* pDst, uint count)
             where T : unmanaged
-                => CopyBlock(pDst, pSrc, (uint)(count* SizeOf<T>()));
+                => CopyBlock(pDst, pSrc, count* (uint)SizeOf<T>());
     }
 }

@@ -12,6 +12,7 @@ namespace Z0
     using static As;
     using static Root;
     using static V0;
+    using static Typed;
     
     partial class vexamples
     {        
@@ -84,10 +85,10 @@ namespace Z0
         /// </summary>
         static Vector256<byte> ToShuffleSpec(Vector256<ushort> src)
             => ToShuffleSpec(
-                V0.vcell(src,0), V0.vcell(src,1), V0.vcell(src,2),V0.vcell(src,3), 
-                V0.vcell(src,4), V0.vcell(src,5), V0.vcell(src,6), V0.vcell(src,7),
-                V0.vcell(src,8), V0.vcell(src,9), V0.vcell(src,10), V0.vcell(src,11), 
-                V0.vcell(src,12), V0.vcell(src,13), V0.vcell(src,14), V0.vcell(src,15)
+                vcell(src,0), vcell(src,1), vcell(src,2),vcell(src,3), 
+                vcell(src,4), vcell(src,5), vcell(src,6), vcell(src,7),
+                vcell(src,8), vcell(src,9), vcell(src,10), vcell(src,11), 
+                vcell(src,12), vcell(src,13), vcell(src,14), vcell(src,15)
                 );
 
         static Vector256<byte> ToShuffleSpec2(Vector256<ushort> src)
@@ -100,9 +101,9 @@ namespace Z0
         {
             var w = n256;
             var x = gvec.vinc(w,z16);            
-            var reverse = V0p.vdecrements<ushort>(w);
-            var identity = V0p.vincrements<ushort>(w);
-            var pairswap = vparts(1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
+            var reverse = V0.vdecrements<ushort>(w);
+            var identity = V0.vincrements<ushort>(w);
+            var pairswap = vparts(w256,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);
             Claim.veq(reverse, y1);
@@ -117,27 +118,27 @@ namespace Z0
         public void vshuf16x8_128x8u()
         {
             var n = n128;
-            var x0 = V0p.vincrements<byte>(n);
+            var x0 = V0.vincrements<byte>(n);
             var x0Spec = Vectors.vload(n, in head(Pattern1));
             var x0Dst = dvec.vshuf16x8(x0,x0Spec);
             Claim.veq(x0Spec,x0Dst);
 
-            var x1 = V0p.vincrements<byte>(n);
+            var x1 = V0.vincrements<byte>(n);
             var x1Spec = Vectors.vload(n, in head(Pattern2));
             var x1Dst = dvec.vshuf16x8(x1,x1Spec);
             Claim.veq(x1Spec,x1Dst);
 
-            var x2 = V0p.vincrements<byte>(n);
+            var x2 = V0.vincrements<byte>(n);
             var x2Spec = VData.vrotl(n128, n8);
             var x2Dst = dvec.vshuf16x8(x2,x2Spec);
             Claim.veq(x2Spec,x2Dst);
 
-            var x3 = V0p.vincrements<byte>(n);
+            var x3 = V0.vincrements<byte>(n);
             var x3Spec = VData.vrotr(n128, n8);
             var x3Dst = dvec.vshuf16x8(x3,x3Spec);
             Claim.veq(x3Spec,x3Dst);
 
-            var x4 = V0p.vincrements<byte>(n);
+            var x4 = V0.vincrements<byte>(n);
             var x4Spec1 = VData.vrotl(n128, n8);
             var x4Spec2 = VData.vrotr(n128, n8);
             var x4Dst = dvec.vshuf16x8(dvec.vshuf16x8(x4,x4Spec1), x4Spec2);
@@ -149,10 +150,9 @@ namespace Z0
             Claim.veq(x5Dst, V0d.vbroadcast(n,(byte)0));                        
         }
 
-
         public void vshuf16x8()
         {
-            var src = VData.vincrements<byte>(n128);
+            var src = V0.vincrements<byte>(n128);
             var perm = Permute.natural(Symbolic.reversed(n16));
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i],j);

@@ -24,13 +24,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vbsrl(v8u(x), count));
+                return generic<T>(V0d.vbsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vbsrl(v16u(x), count));
+                return generic<T>(V0d.vbsrl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dvec.vbsrl(v32u(x), count));
+                return generic<T>(V0d.vbsrl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vbsrl(v64u(x), count));
+                return generic<T>(V0d.vbsrl(v64u(x), count));
             else
                 throw Unsupported.define<T>();
         }
@@ -46,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vbsrl(v8u(x), count));
+                return generic<T>(V0d.vbsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vbsrl(v16u(x), count));
+                return generic<T>(V0d.vbsrl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dvec.vbsrl(v32u(x), count));
+                return generic<T>(V0d.vbsrl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vbsrl(v64u(x), count));
+                return generic<T>(V0d.vbsrl(v64u(x), count));
             else
                 throw Unsupported.define<T>();
         }

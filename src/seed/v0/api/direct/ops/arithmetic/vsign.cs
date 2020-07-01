@@ -12,6 +12,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst;
+    using static V0;
+    using static Typed;
     
     partial struct V0d
     {
@@ -25,6 +27,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vsign(Vector128<sbyte> dst, Vector128<sbyte> match)
             => Sign(dst, match);
+
+        [MethodImpl(Inline), Op]
+        public static Vector128<sbyte> vsign(Vector128<sbyte> src)
+            => Sign(vones<sbyte>(w128),src);
 
         /// <summary>
         ///  __m128i _mm_sign_epi16 (__m128i a, __m128i b)PSIGNW xmm, xmm/m128

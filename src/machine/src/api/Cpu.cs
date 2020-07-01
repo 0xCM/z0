@@ -49,7 +49,7 @@ namespace Z0.Machine
 
         void LoadAsmDoc(FilePath src)
         {
-            src.ReadTextDoc().OnSome(doc => AddAsmDoc(src,doc));
+            TextDocParser.parse(src).OnSome(doc => AddAsmDoc(src,doc));
         }
         
         void LoadAsmDocs()

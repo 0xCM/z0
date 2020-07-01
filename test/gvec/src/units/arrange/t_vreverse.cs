@@ -54,7 +54,7 @@ namespace Z0
         void check_invariant<T>(N128 w, T t = default)
             where T : unmanaged
         {            
-            var v1 = VData.vincrements<T>(w);
+            var v1 = V0.vincrements<T>(w);
             var v2 = VData.vdecrements<T>(w);
             var v3 = gvec.vreverse(v1);
             Claim.veq(v2,v3);
@@ -63,7 +63,7 @@ namespace Z0
         void check_invariant<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var v1 = VData.vincrements<T>(w);
+            var v1 = V0.vincrements<T>(w);
             var v2 = VData.vdecrements<T>(w);            
             var v3 = gvec.vreverse(v1);
             Claim.veq(v2,v3);

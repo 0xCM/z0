@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static As;
 
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
@@ -18,6 +18,8 @@ namespace Z0
     [ApiHost]
     public readonly struct Perm : IApiHost<Perm>
     {        
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
         /// where n is the length of the array
@@ -25,12 +27,29 @@ namespace Z0
         readonly int[] terms;
 
         /// <summary>
+        /// Shuffles span content as determined by a permutation
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="p">The permutation to apply</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly Span<T> apply<T>(Perm p, ReadOnlySpan<T> src, in Span<T> dst)
+        {            
+            for(var i=0u; i<p.Length; i++)
+                seek(dst,i) = skip(src,(uint)p[i]);                
+            return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<T> apply<T>(Perm p, ReadOnlySpan<T> src)
+            => apply(p,src, sys.alloc<T>(src.Length));
+
+        /// <summary>
         /// Creates a generic permutation by application of a sequence of transpositions to the identity permutation
         /// </summary>
         /// <param name="n">The permutation length</param>
         /// <param name="swaps">Pairs of permutation indices (i,j) to be transposed</param>
         /// <typeparam name="T">The integral type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Build<T>(T n, params (T i, T j)[] swaps)
             where T : unmanaged
                 => new Perm<T>(n, swaps);
@@ -41,7 +60,7 @@ namespace Z0
         /// <param name="n">The permutation length</param>
         /// <param name="swaps">Pairs of permutation indices (i,j) to be transposed</param>
         /// <typeparam name="T">The integral type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Build<T>(T n, params Swap<T>[] swaps)
             where T : unmanaged
                 => new Perm<T>(n,swaps);
@@ -56,8 +75,8 @@ namespace Z0
         /// <summary>
         /// Allocates an empty permutation of specified length
         /// </summary>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Perm<T> Alloc<T>(int n)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Perm<T> Alloc<T>(uint n)
             where T : unmanaged
                 => new Perm<T>(new T[n]);
 
@@ -70,10 +89,18 @@ namespace Z0
             => new Perm(gmath.range(0, n-1));
 
         /// <summary>
+        /// Defines an untyped identity permutation
+        /// </summary>
+        /// <param name="n">The permutation length</param>
+        [MethodImpl(Inline), Op]
+        public static Perm Identity(uint n)
+            => new Perm(gmath.range((int)n, (int)n-1));
+
+        /// <summary>
         /// Defines an identity permutation on n symbols
         /// </summary>
         /// <param name="n">The permutation length</param>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> identity<T>(T n)
             where T : unmanaged
                 => Perm.Init(gmath.range(default, gmath.dec(n)));
@@ -91,7 +118,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The integral type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Init<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => new Perm<T>(src.ToArray());
@@ -101,7 +128,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The length of the permutation</param>
         /// <param name="swaps">The transpositions applied to the identity</param>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Init<T>(T n, (T i, T j)[] swaps)
             where T : unmanaged
                 => new Perm<T>(n, swaps);
@@ -111,7 +138,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The length of the permutation</param>
         /// <param name="swaps">The transpositions applied to the identity</param>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Init<T>(T n, Swap<T>[] swaps)
             where T : unmanaged
                 => new Perm<T>(n, swaps);
@@ -121,12 +148,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The integral type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Init<T>(Span<T> src)
             where T : unmanaged
                 => new Perm<T>(src);
 
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Init<T>(IEnumerable<T> src)
             where T : unmanaged
                 => new Perm<T>(src);
@@ -136,7 +163,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source array</param>
         /// <typeparam name="T">The integral type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Init<T>(params T[] src)
             where T : unmanaged
                 => new Perm<T>(src);
@@ -145,7 +172,7 @@ namespace Z0
         /// Defines an identity permutation on n symbols
         /// </summary>
         /// <param name="n">The permutation length</param>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Identity<T>(T n)
             where T : unmanaged
                 => new Perm<T>(gmath.range(default, gmath.dec(n)));
@@ -235,6 +262,15 @@ namespace Z0
         /// Term accessor where the term index is in the inclusive range [0, N-1]
         /// </summary>
         public ref int this[int i]
+        {
+            [MethodImpl(Inline)]
+            get => ref terms[i];
+        }
+
+        /// <summary>
+        /// Term accessor where the term index is in the inclusive range [0, N-1]
+        /// </summary>
+        public ref int this[uint i]
         {
             [MethodImpl(Inline)]
             get => ref terms[i];
@@ -365,7 +401,7 @@ namespace Z0
         {
             var dst = new T[terms.Length];
             for(var i=0; i<terms.Length; i++)
-                dst[i] = convert<T>(terms[i]);
+                dst[i] = Cast.to<T>(terms[i]);
             return new Perm<T>(dst);
         }
 
@@ -396,7 +432,7 @@ namespace Z0
         /// <param name="start">The domain point at which evaluation will begin</param>
         public PermCycle Cycle(int start)
         {
-            insist(start >= 0 && start < Length);
+            Root.insist(start >= 0 && start < Length);
             Span<PermTerm> cterms = stackalloc PermTerm[Length];
             var traversed = new HashSet<int>(Length);
             var index = start;

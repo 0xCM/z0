@@ -10,25 +10,44 @@ namespace Z0
     using static Konst;
     
     using DW = DataWidth;
+    using TS = TypeSignKind;
+
     using W = W4;
 
     public readonly struct W4 : IDataWidth<W> 
     { 
-        public DW DataWidth => DW.W4; 
+        public const DW Width = DW.W4; 
+
+        public const TS Sign = TS.Unsigned;
+
+        public DW DataWidth 
+            => Width;
+
+        public TS TypeSign
+            => Sign;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(W src) => (int)src.DataWidth;
+        public static implicit operator int(W src) 
+            => (int)Width;
 
         [MethodImpl(Inline)]
-        public static implicit operator DW(W src) => src.DataWidth;
+        public static implicit operator DW(W src) 
+            => Width;
 
         [MethodImpl(Inline)]        
-        public bool Equals(W w) => true;
+        public bool Equals(W w) 
+            => true;
 
-        public override string ToString() => DataWidth.FormatValue();
+        [MethodImpl(Inline)]
+        public string Format()
+            => Width.FormatValue();
+
+        public override string ToString() 
+            => Format();
         
-        public override int GetHashCode() => DataWidth.GetHashCode();
+        public override int GetHashCode() 
+            => (int)Width;
         
-        public override bool Equals(object obj) => obj is W;
-    }
+        public override bool Equals(object obj) 
+            => obj is W;    }
 }

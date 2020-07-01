@@ -10,7 +10,6 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
 
     using static Konst;
-    using static AsInternal;
 
     partial struct As
     {
