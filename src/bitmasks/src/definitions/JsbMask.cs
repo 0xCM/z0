@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MaskSpec(JsbMask<F,D,T> src)
-            => MaskSpec.Define<F,D,T>(M);
+            => MaskSpec.define<F,D,T>(M);
 
         MaskKind IMaskSpec.M => M;
 

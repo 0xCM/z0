@@ -30,27 +30,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MaskSpec(ParityMask<F,D,T> src)
-            => MaskSpec.Define<F,D,T>(M);
+            => MaskSpec.define<F,D,T>(M);
 
         MaskKind IMaskSpec.M => M;
-
-        NumericKind IMaskSpec.K 
-        {
-            [MethodImpl(Inline)]
-            get => NumericKinds.kind<T>();
-        }
-
-        uint IBitFrequency.F 
-        {
-            [MethodImpl(Inline)]
-            get => (uint)TypeNats.value<F>();
-        }
-
-        uint IBitDensity.D 
-        {
-            [MethodImpl(Inline)]
-            get => (uint)TypeNats.value<D>();
-        }
 
         [MethodImpl(Inline)]
         public ParityMask<F,D,S> As<S>(S s = default)

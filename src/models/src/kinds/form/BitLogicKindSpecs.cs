@@ -14,7 +14,8 @@ namespace Z0
     {
         K Kind {get;}
 
-        OpKindId IOpKind.KindId => (OpKindId)Kind;        
+        OpKindId IOpKind.KindId 
+            => (OpKindId)Kind;        
     }    
 
     /// <summary>
@@ -24,7 +25,8 @@ namespace Z0
     public interface IBitLogicKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId => default(F).KindId;        
+        OpKindId IOpKind.KindId 
+            => default(F).KindId;        
     }
     
     /// <summary>
@@ -35,11 +37,13 @@ namespace Z0
     public interface IBitLogicKind<F,T> : IBitLogicKind<F>
         where F : unmanaged, I
     {
-        BitLogicKind I.Kind => default(F).Kind;
+        BitLogicKind I.Kind 
+            => default(F).Kind;
 
         /// <summary>
         /// The parametrically-identified numeric kind
         /// </summary>
-        NumericKind NumericKind => NumericKinds.kind<T>();
+        NumericKind NumericKind 
+            => NumericKinds.kind<T>();
     }
 }

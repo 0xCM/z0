@@ -25,12 +25,6 @@ namespace Z0
 
         MaskKind IMaskSpec.M => M;
 
-        NumericKind IMaskSpec.K 
-        {
-            [MethodImpl(Inline)]
-            get => NumericKinds.kind<T>();
-        }
-
         public string Format()
             => $"n(f:{value<N>()}, t:{NumericKinds.kind<T>().Format()})";        
     }

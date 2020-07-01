@@ -66,7 +66,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x64x1);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x2x1);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x4x1);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x8x1);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x16x1);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x8x2);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x8x3);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x8x4);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -256,7 +256,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x8x5);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x8x6);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Lsb64x8x7);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -480,7 +480,7 @@ namespace Z0
             else if(typeof(W) == typeof(N64))
                 return BitMasks.Lsb64x2x1;
             else 
-                throw Unsupported.define<W>();
+                throw no<W>();
         }
 
         [MethodImpl(Inline)]
@@ -544,7 +544,7 @@ namespace Z0
             else if(typeof(W) == typeof(N63))
                 return BitMasks.Lsb63x3x1;
             else 
-                 throw Unsupported.define<W>();
+                 throw no<W>();
        }
     }
 }

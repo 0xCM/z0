@@ -12,7 +12,6 @@ namespace Z0
     using NK = NumericKind;
     using TC = System.TypeCode;
 
-
     partial class NumericKinds
     {            
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
@@ -65,6 +64,42 @@ namespace Z0
             else
                 return TC.Object;            
         }
+
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        static Paired<NK,Type> find<T>()
+            => where_u<T>();
+
+        [MethodImpl(Inline)]
+        static unsafe Paired<NK,Type> where_u<T>()
+        {
+            if(typeof(T) == typeof(byte))
+                return (NK.U8,typeof(byte));
+            else if(typeof(T) == typeof(ushort))
+                return (NK.U16,typeof(ushort));
+            else if(typeof(T) == typeof(uint))
+                return (NK.U32,typeof(uint));
+            else if(typeof(T) == typeof(ulong))
+                return (NK.U64,typeof(ulong));
+            else
+                return where_i<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static unsafe Paired<NK,Type> where_i<T>()
+        {
+            if(typeof(T) == typeof(sbyte))
+                return (NK.I8,typeof(sbyte));
+            else if(typeof(T) == typeof(short))
+                return (NK.I16,typeof(short));
+            else if(typeof(T) == typeof(int))
+                return (NK.I32,typeof(int));
+            else if(typeof(T) == typeof(long))
+                return (NK.I64,typeof(long));
+            else
+                return (NK.None,typeof(byte));
+        }
+
 
         /// <summary>
         /// Determines the numeric kind identified by a type code, if any

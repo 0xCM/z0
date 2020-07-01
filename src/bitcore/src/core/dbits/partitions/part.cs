@@ -25,8 +25,8 @@ namespace Z0
 
             var x = BitMask.lo(n63) & src;
             seek64(dst, 0) = scatter(x, M); 
-            seek64(dst,1) = scatter(x >> 24, M); 
-            seek64(dst,2) = scatter(x >> 48, M); 
+            seek64(dst, 1) = scatter(x >> 24, M); 
+            seek64(dst, 2) = scatter(x >> 48, M); 
         }
     }
 }

@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     [ApiHost]
     public partial class BitMask : IApiHost<BitMask>
     {
 
     }       
-
 }

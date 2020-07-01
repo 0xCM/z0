@@ -29,7 +29,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(U64_AltOdd);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         const byte U8_AltOdd = 0x55;

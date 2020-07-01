@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-        
     using K = BooleanPredicateKind;
     using I = IBooleanPredicateKind;
 
@@ -16,7 +14,8 @@ namespace Z0
     {
         K Kind {get;}
 
-        OpKindId IOpKind.KindId => (OpKindId)Kind;
+        OpKindId IOpKind.KindId 
+            => (OpKindId)Kind;
     }    
 
     /// <summary>
@@ -26,7 +25,8 @@ namespace Z0
     public interface IBooleanPredicateKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId => default(F).KindId;                
+        OpKindId IOpKind.KindId 
+            => default(F).KindId;                
     }
 
     /// <summary>

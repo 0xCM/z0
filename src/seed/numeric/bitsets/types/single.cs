@@ -11,7 +11,7 @@ namespace Z0
     using static BitSet;
 
     using analog = single;
-    using BK = Singleton;
+    using BK = Bit;
     using N = N1;
 
     /// <summary>

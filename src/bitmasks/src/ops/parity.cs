@@ -33,7 +33,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Even64);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Even64x2);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
         
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Odd64);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
 
@@ -103,7 +103,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Odd64x2);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>

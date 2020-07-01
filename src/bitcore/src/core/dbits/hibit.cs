@@ -16,63 +16,63 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Singleton msb(byte src)
-            => (Singleton)(byte)testbit(src,7);
+        public static Bit msb(byte src)
+            => As.testbit(src,7);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Singleton msb(sbyte src)
-            => (Singleton)(byte)testbit(src,7);
+        public static Bit msb(sbyte src)
+            => As.testbit(src,7);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Singleton msb(ushort src)
-            => (Singleton)(byte)testbit(src,15);
+        public static Bit msb(ushort src)
+            => As.testbit(src,15);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Singleton msb(short src)
-            => (Singleton)(byte)testbit(src,15);
+        public static Bit msb(short src)
+            => As.testbit(src,15);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Singleton msb(uint src)
-            => (Singleton)(byte)testbit(src,31);
+        public static Bit msb(uint src)
+            => As.testbit(src,31);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Singleton msb(int src)
-            => (Singleton)(byte)testbit(src,31);
+        public static Bit msb(int src)
+            => As.testbit(src,31);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Singleton msb(ulong src)
-            => (Singleton)(byte)testbit(src,63);
+        public static Bit msb(ulong src)
+            => As.testbit(src,63);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Singleton msb(long src)
-            => (Singleton)(byte)testbit(src,63);
+        public static Bit msb(long src)
+            => As.testbit(src,63);
     }
 }

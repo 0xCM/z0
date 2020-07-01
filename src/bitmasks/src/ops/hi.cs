@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static NumericCast;
+    using static Root;
     
     partial class BitMask
     {           
@@ -29,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T hi<T>(int n, T t = default)
             where T : unmanaged
-            => convert<T>(lo64(n) << (Root.bitsize<T>() - n));
+            => convert<T>(lo64(n) << (bitsize<T>() - n));
 
         /// <summary>
         /// Produces a sequence of N enabled hi bits
@@ -39,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong hi<N>(N n = default)
             where N : unmanaged, ITypeNat
-                => hi<ulong>((int)TypeNats.value(n));
+                => hi<ulong>((int)value(n));
 
         /// <summary>
         /// Produces a sequence of n enabled hi bits
@@ -50,6 +51,6 @@ namespace Z0
         public static T hi<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => hi<T>((int)TypeNats.value(n));
+                => hi<T>((int)value(n));
     }
 }

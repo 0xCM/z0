@@ -34,7 +34,7 @@ namespace Z0
             else if(typeof(D) == typeof(N6))
                 return central<T>(f,n6);
             else
-                throw Unsupported.define<D>();        
+                throw no<D>();        
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Central64x8x2);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Central64x8x4);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Central64x8x6);
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>

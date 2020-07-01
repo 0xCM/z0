@@ -17,7 +17,8 @@ namespace Z0
         /// </summary>
         K Kind {get;}
 
-        OpKindId IOpKind.KindId => (OpKindId)Kind;
+        OpKindId IOpKind.KindId 
+            => (OpKindId)Kind;
     }    
 
     /// <summary>
@@ -27,7 +28,8 @@ namespace Z0
     public interface IArithmeticKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId => default(F).KindId;                
+        OpKindId IOpKind.KindId 
+            => default(F).KindId;                
     }
     
     /// <summary>
@@ -38,11 +40,13 @@ namespace Z0
     public interface IArithmeticKind<F,T> : IArithmeticKind<F>
         where F : unmanaged, I
     {
-        K I.Kind => default(F).Kind;
+        K I.Kind 
+            => default(F).Kind;
 
         /// <summary>
         /// The parametrically-identified numeric kind
         /// </summary>
-        NumericKind NumericKind => NumericKinds.kind<T>();
+        NumericKind NumericKind 
+            => NumericKinds.kind<T>();
     }
 }

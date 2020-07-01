@@ -15,18 +15,14 @@ namespace Z0
     public readonly struct MaskSpec : IMaskSpec
     {
         [MethodImpl(Inline)]
-        public static MaskSpec Define(MaskKind m, NumericKind k, uint f, uint d)
-            => new MaskSpec(m,k,f,d);
-
-        [MethodImpl(Inline)]
-        public static MaskSpec Define<F,D,T>(MaskKind m, F f = default, D d = default, T t = default)
+        public static MaskSpec define<F,D,T>(MaskKind m, F f = default, D d = default, T t = default)
             where F : unmanaged, ITypeNat
             where D : unmanaged, ITypeNat
             where T : unmanaged
                 => new MaskSpec(m, NumericKinds.kind<T>(), (uint)TypeNats.value<F>(), (uint)TypeNats.value<D>());
 
         [MethodImpl(Inline)]
-        MaskSpec(MaskKind m, NumericKind k, uint f, uint d)
+        public MaskSpec(MaskKind m, NumericKind k, uint f, uint d)
         {
             M = m;
             K = k;
