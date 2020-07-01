@@ -7,7 +7,8 @@ namespace Z0
     using System;
     
     using static Konst;
-    using static Memories;
+    using static As;
+    using static V0;
 
     public class t_vpatterns : t_inx<t_vpatterns>
     {
@@ -73,19 +74,18 @@ namespace Z0
 
         void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(VSvc.vunits(w,t), Vectors.vbroadcast(w,one(t)));
+                => CheckSVF.CheckPattern(VSvc.vunits(w,t), vbroadcast(w,one(t)));
 
         void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(VSvc.vunits(w,t), Vectors.vbroadcast(w,one(t)));
+                => CheckSVF.CheckPattern(VSvc.vunits(w,t), vbroadcast(w,one(t)));
 
         void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(VSvc.vones(w,t), Vectors.vbroadcast(w,ones(t)));
+                => CheckSVF.CheckPattern(VSvc.vones(w,t), vbroadcast(w,ones(t)));
 
         void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(VSvc.vones(w,t), Vectors.vbroadcast(w,ones(t)));
-
+                => CheckSVF.CheckPattern(VSvc.vones(w,t), vbroadcast(w,ones(t)));
    }
 }

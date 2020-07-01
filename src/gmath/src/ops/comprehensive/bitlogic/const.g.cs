@@ -8,14 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst; 
-    using static Memories;
 
     partial class gmath
     {
         [MethodImpl(Inline), False, Closures(Integers)]
         public static T @false<T>()
             where T:unmanaged
-                => zero<T>();
+                => default;
 
         [MethodImpl(Inline), False, Closures(Integers)]
         public static T @false<T>(T a)
@@ -30,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>()
             where T:unmanaged
-                => NumericLiterals.ones<T>();
+                => As.ones<T>();
 
         [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>(T a)

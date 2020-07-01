@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ulong bitcount<T>(T t = default)
             where T : unmanaged
-                => (ulong)Unsafe.SizeOf<T>();
+                => (ulong)Unsafe.SizeOf<T>() * 8;
 
         /// <summary>
         /// Computes b := k1 * k2 <= k3

@@ -23,7 +23,7 @@ namespace Z0
         {            
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(dst.Length, src.Length - offset);
-            Cells.copy(src.Bits, offset, len, dst);
+            Copier.copy(src.Bits, offset, len, dst);
             return BitPack.pack<T>(dst);
         }
 
@@ -38,7 +38,7 @@ namespace Z0
         {            
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(dst.Length, src.Length);
-            Cells.copy(src.Bits, 0, len, dst);
+            Copier.copy(src.Bits, 0, len, dst);
             return BitPack.pack<T>(dst);
         }
 
@@ -55,7 +55,7 @@ namespace Z0
         {            
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(count, src.Length - offset);
-            Cells.copy(src.Bits, offset, len, dst);
+            Copier.copy(src.Bits, offset, len, dst);
             return BitPack.pack<T>(dst);
         }
    }

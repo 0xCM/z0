@@ -143,7 +143,7 @@ namespace Z0
 
             ulong z = 0b01011_00010_01110_11010_00111_00101_01110_10110;           
             var bvz = BitBlocks.single(z,40);
-            var xSrc =  BitConvert.GetBytes(z);
+            var xSrc =  BitConvert.bytes(z);
             Span<ushort> ySrc = xSrc.AsUInt16();
             Claim.eq(ySrc.Length*2, xSrc.Length);
 

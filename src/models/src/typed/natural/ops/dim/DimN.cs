@@ -9,41 +9,6 @@ namespace Z0
     using static Konst;
     using static TypeNats;
 
-    /// <summary>
-    /// Specifies a dimension with one axis
-    /// </summary>
-    public readonly struct Dim1 : IDim1
-    {
-        public readonly ulong I;
-
-        public static implicit operator DimInfo(Dim1 src)
-            => new DimInfo(src.Order, new ulong[]{src.I}, src.Volume);
-
-        public Dim1(ulong I)
-        {
-            this.I = I;
-        }
-
-        public ulong Volume
-            => I;
-
-        public ulong this[int axis]            
-            => axis == 0 ? I : 0;
-        
-        public int Order 
-            => 1;
-
-        ulong IDim1.I => I;
-
-        public string Format()
-            => $"{I}";
-
-        public override string ToString()
-            => Format();
-
-        public DimInfo Describe()
-            => new DimInfo(Order, new ulong[]{I}, Volume);
-    }
 
     /// <summary>
     /// Defines a dimension axis which may represent the dimension of a vector of length N
@@ -56,12 +21,6 @@ namespace Z0
         public static implicit operator ulong(Dim<N> x)
             => x.I;
     
-        public static implicit operator Dim1(Dim<N> x)
-            => new Dim1(x.I);
-
-        public static implicit operator DimK(Dim<N> x)
-            => new DimK(x.I);
-
         /// <summary>
         /// The one-dimensional axis
         /// </summary>
@@ -83,7 +42,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public DimInfo Describe()
-            => new DimInfo(1, new ulong[]{value<N>()}, value<N>());
+        public Dimensions Describe()
+            => new Dimensions(1, new ulong[]{value<N>()}, value<N>());
     }
 }

@@ -66,7 +66,7 @@ namespace Z0
         {
             var dst = alloc(w);
             var cells = 64/Unsafe.SizeOf<T>();
-            Cells.copy(in src, ref head<T>(ref dst), cells);
+            Copier.copy(in src, ref head<T>(ref dst), cells);
             return dst;
         }
     }

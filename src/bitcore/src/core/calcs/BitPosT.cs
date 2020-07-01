@@ -32,22 +32,22 @@ namespace Z0
         /// <summary>
         /// The zero position
         /// </summary>
-		public static BitPos<T> Zero => default(BitPos<T>);
+		public static BitPos<T> Zero 
+			=> default(BitPos<T>);
 
 		/// <summary>
 		/// Specifies the number of bits that can be placed in one segment
 		/// </summary>
-		public static byte CellWidth => uint8(bitsize<T>());
+		public static byte CellWidth 
+			=> uint8(bitsize<T>());
 
 		/// <summary>
 		/// Constructs a bit position from a linear/absolute index
 		/// </summary>
 		/// <param name="bitindex">The linear index</param>
 		[MethodImpl(Inline)]
-		public static BitPos<T> FromBitIndex(uint bitindex)
-			=> new BitPos<T>(
-					BitPos.CalcCellIndex(CellWidth,bitindex), 
-					BitPos.CalcBitOffset(CellWidth, bitindex));
+		public static BitPos<T> FromLinearIndex(uint bitindex)
+			=> new BitPos<T>(BitPos.linear(CellWidth,bitindex), BitPos.offset(CellWidth, bitindex));
 
 		[MethodImpl(Inline)]
 		public static BitPos<T>operator +(BitPos<T> pos, uint count)
@@ -137,8 +137,8 @@ namespace Z0
         public void Add(uint rhs)
         {
             var newIndex = (uint)(BitIndex + rhs);
-            this.CellIndex = CalcCellIndex(CellWidth,newIndex);
-            this.BitOffset = CalcBitOffset(CellWidth,newIndex);
+            CellIndex = linear(CellWidth,newIndex);
+            BitOffset = offset(CellWidth,newIndex);
         }
 
 		[MethodImpl(Inline)]
@@ -147,13 +147,13 @@ namespace Z0
             var newindex = uint32(BitIndex - rhs);
             if(newindex > 0)
 			{
-				this.CellIndex = CalcCellIndex(CellWidth,newindex);
-				this.BitOffset = CalcBitOffset(CellWidth,newindex);
+				CellIndex = linear(CellWidth,newindex);
+				BitOffset = offset(CellWidth,newindex);
 			}
 			else
 			{
-				this.CellIndex = 0;
-				this.BitOffset = 0;
+				CellIndex = 0;
+				BitOffset = 0;
 			}
         }
 

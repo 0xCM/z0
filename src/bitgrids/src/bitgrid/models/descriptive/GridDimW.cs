@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst; 
-    using static Memories;
-
+    using static Root;
 
     /// <summary>
     /// Defines a parametrically-predicated blocked grid
@@ -26,7 +25,7 @@ namespace Z0
         public int BlockWidth
         {
             [MethodImpl(Inline)]
-            get => nati<W>();
+            get => (int)value<W>();
         }
 
         /// <summary>
@@ -35,7 +34,7 @@ namespace Z0
         public int RowCount
         {
             [MethodImpl(Inline)]
-            get => nati<M>();
+            get => (int)value<M>();
         }
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace Z0
         public int ColCount
         {
             [MethodImpl(Inline)]
-            get => nati<N>();
+            get => (int)value<N>();
         }
 
         /// <summary>
@@ -80,9 +79,8 @@ namespace Z0
         public int ByteCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.tablesize<M,N>();
+            get => Cells.minimum<M,N>();
         }
-
 
         /// <summary>
         /// Computes the aligned number of W-blocks required to cover M*N bits

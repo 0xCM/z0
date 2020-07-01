@@ -7,6 +7,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static As;
 
     partial class Root
     {
@@ -17,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T write<T>(ref sbyte src)
-            => ref write<sbyte,T>(ref src);
+            => ref @as<sbyte,T>(ref src);
 
         /// <summary>
         /// Hydrates a T-cell from a reference
@@ -26,7 +27,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T write<T>(ref byte src)
-            => ref write<byte,T>(ref src);
+            => ref @as<byte,T>(ref src);
 
         /// <summary>
         /// Hydrates a T-cell from a reference
@@ -35,7 +36,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T write<T>(ref short src)
-            => ref write<short,T>(ref src);
+            => ref @as<short,T>(ref src);
 
         /// <summary>
         /// Hydrates a T-cell from a reference
@@ -44,7 +45,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T write<T>(ref ushort src)
-            => ref write<ushort,T>(ref src);
+            => ref @as<ushort,T>(ref src);
 
         /// <summary>
         /// Hydrates a T-cell from a reference
@@ -53,7 +54,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T write<T>(ref int src)
-            => ref write<int,T>(ref src);
+            => ref @as<int,T>(ref src);
 
         /// <summary>
         /// Hydrates a T-cell from a reference
@@ -62,7 +63,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T write<T>(ref uint src)
-            => ref write<uint,T>(ref src);
+            => ref @as<uint,T>(ref src);
 
         /// <summary>
         /// Hydrates a T-cell from a reference
@@ -71,7 +72,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T write<T>(ref long src)
-            => ref write<long,T>(ref src);
+            => ref @as<long,T>(ref src);
 
         /// <summary>
         /// Hydrates a T-cell from a reference
@@ -80,7 +81,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T write<T>(ref bool src)
-            => ref write<bool,T>(ref src);
+            => ref @as<bool,T>(ref src);
 
         /// <summary>
         /// Hydrates a T-cell from a reference
@@ -89,7 +90,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T write<T>(ref char src)
-            => ref write<char,T>(ref src);
+            => ref @as<char,T>(ref src);
 
         /// <summary>
         /// Hydrates a T-cell from a reference
@@ -98,7 +99,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T write<T>(ref decimal src)
-            => ref write<decimal,T>(ref src);
+            => ref @as<decimal,T>(ref src);
 
 
         /// <summary>

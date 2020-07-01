@@ -14,16 +14,16 @@ namespace Z0
     {        
         public void bg_layout_21x32x32()
         {
-            var a0 = BitGrid.specify(n21,n32,0u);
-            var b0 = BitGrid.specify(21, 32, 32);
+            var a0 = Cells.grid(n21,n32,0u);
+            var b0 = Cells.grid(21, 32, 32);
             Claim.Eq(a0,b0);
 
-            var a1 = BitGrid.specify(n32,n64,ushort.MinValue);
-            var b1 = BitGrid.specify(32, 64, 16);
+            var a1 = Cells.grid(n32,n64,ushort.MinValue);
+            var b1 = Cells.grid(32, 64, 16);
             Claim.Eq(a1,b1);
 
-            var a2 = BitGrid.specify(n5,n15,byte.MinValue);
-            var b2 = BitGrid.specify(5, 15, 8);
+            var a2 = Cells.grid(n5,n15,byte.MinValue);
+            var b2 = Cells.grid(5, 15, 8);
             Claim.Eq(a2,b2);
         }
 
@@ -32,17 +32,17 @@ namespace Z0
             const ushort rows = 32;
             const ushort cols = 8;            
             const ushort cellwidth = 8;
-            var map = BitGrid.gridmap(rows, cols, cellwidth);
-            Claim.eq(8*32, map.StorageBits);
+            var map = BitGrid.metrics(rows, cols, cellwidth);
+            Claim.eq(8*32, map.StoreWidth);
             
             var current = 0;
 
             for(var row = 0; row < rows; row++)
             for(var col = 0; col < cols; col++, current++)
-                Claim.eq(map.Pos(row,col), current);
+                Claim.eq(map.Position(row,col), current);
 
             Claim.eq(current, rows*cols);
-            Claim.eq(current, map.PointCount);
+            Claim.eq(current, map.CellCount);
         }
 
         public void bg_layout_17x11x8()
@@ -53,18 +53,18 @@ namespace Z0
             var points = rows*cols;
             var bytes = points/8 + (points % 8 != 0 ? 1 : 0);
             var bits = bytes/8;
-            var map = BitGrid.gridmap(rows,cols,segwidth);
-            Claim.eq(bytes, map.SegCount);
-            Claim.eq(points, map.PointCount);
+            var map = BitGrid.metrics(rows,cols,segwidth);
+            Claim.eq(bytes, map.CellCount);
+            Claim.eq(points, map.CellCount);
 
             var current = 0;
 
             for(var row = 0; row < rows; row++)
             for(var col = 0; col < cols; col++, current++)
-                Claim.eq(map.Pos(row,col), current);
+                Claim.eq(map.Position(row,col), current);
                 
             Claim.eq(current, rows*cols);
-            Claim.eq(current, map.PointCount);        
+            Claim.eq(current, map.CellCount);        
         }
 
         public void bg_layout_8x8()
@@ -74,14 +74,14 @@ namespace Z0
             data.Fill(0b10101010);
 
             ref readonly var src = ref As.first64(data);
-            var spec = BitGrid.specify(n8, n8, byte.MinValue);
+            var spec = Cells.grid(n8, n8, byte.MinValue);
             var map = spec.Map();
             var state = bit.Off;
-            Claim.eq(map.PointCount, data.Length * bitsize<byte>());
+            Claim.eq(map.CellCount, data.Length * bitsize<byte>());
             for(var row = 0; row < map.RowCount; row++)
             for(var col = 0; col < map.ColCount; col++)
             {
-                var actual = gbits.testbit(src, (byte)map.Pos(row,col));
+                var actual = gbits.testbit(src, (byte)map.Position(row,col));
                 Claim.Require(actual == state);
                 state = !state;
             }        

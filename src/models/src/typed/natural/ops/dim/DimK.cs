@@ -11,9 +11,6 @@ namespace Z0
     {
         public readonly ulong[] Axes;
 
-        public static implicit operator DimInfo(DimK src)
-            => new DimInfo(src.Order, src.Axes, src.Volume);
-
         public DimK(params ulong[] Axes)
             => this.Axes = Axes;            
 

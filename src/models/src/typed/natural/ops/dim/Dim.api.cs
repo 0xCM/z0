@@ -21,13 +21,5 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => default;
-
-        /// <summary>
-        /// Defines a dimension of order 2 
-        /// </summary>
-        /// <param name="i">The length of the first axis</param>
-        [MethodImpl(Inline)]
-        public static Dim2 define(ulong i, ulong j)
-            => new Dim2(i, j);
     }
 }

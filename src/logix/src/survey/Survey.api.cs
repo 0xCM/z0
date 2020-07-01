@@ -9,7 +9,8 @@ namespace Z0.Logix
     using System.Linq;
 
     using static Konst;
-    using static Memories;
+    using static As;
+    using static Root;
 
     public class Survey
     {

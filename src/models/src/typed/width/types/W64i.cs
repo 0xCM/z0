@@ -20,7 +20,7 @@ namespace Z0
     /// <summary>
     /// Defines a type-level representation of <see cref='DW.W64'/> with a <see cref='TS.Signed'/> classifier
     /// </summary>
-    public readonly struct W64i : INumericWidth<W> 
+    public readonly struct W64i : TNumericWidth<W> 
     {
         public const DW Width = DW.W64; 
 
@@ -34,6 +34,9 @@ namespace Z0
         public DW DataWidth 
             => Width;
 
+        public TS TypeSign
+            => Sign;
+
         public FW FixedWidth 
             => (FW)Width;
 
@@ -43,9 +46,6 @@ namespace Z0
         public NW NumericWidth 
             => (NW)Width;
 
-        public TS TypeSign
-            => Sign;
-
         [MethodImpl(Inline)]
         public static implicit operator int(W src) 
             => (int)Width;
@@ -53,6 +53,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DW(W src) 
             => Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator DataWidth<W>(W src) 
+            => default;
 
         [MethodImpl(Inline)]
         public static implicit operator TW(W src) 

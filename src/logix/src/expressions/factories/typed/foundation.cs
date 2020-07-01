@@ -9,7 +9,6 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static Konst;    
-    using static Memories;
 
     public static partial class TypedLogicSpec
     {
@@ -79,6 +78,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static RangeExpr<T> rangexpr<T>(T min, T max, T? step = null)
             where T : unmanaged
-                => new RangeExpr<T>(min,max,step ?? one<T>());        
+                => new RangeExpr<T>(min,max,step ?? As.one<T>());        
     }       
 }

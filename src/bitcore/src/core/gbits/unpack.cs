@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static Memories;
+    using static Root;
 
     partial class gbits
     {
@@ -67,7 +67,7 @@ namespace Z0
             var len = bitsize<S>();
             insist(dst.Length - offset >= len);
             for(var i=0; i< len; i++)
-                seek(dst,offset + i)  = testbit(src, (byte)i) == bit.On ? one<T>() : zero<T>();            
+                seek(dst,offset + i)  = testbit(src, (byte)i) == bit.On ? As.one<T>() : As.zero<T>();            
             return dst;
         }
 
@@ -94,7 +94,7 @@ namespace Z0
                 var k = 0;
                 for(var i=0; i < src.Length; i++)
                 for(byte j=0; j < srcsize; j++)
-                    seek(dst,k++)  = testbit(skip(src,i), j) == bit.On ? one<T>() : zero<T>();            
+                    seek(dst,k++)  = testbit(skip(src,i), j) == bit.On ? As.one<T>() : As.zero<T>();            
                 return dst;
             }
         }

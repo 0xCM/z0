@@ -166,7 +166,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 V0d.vsave(v64f(src), ref float64(ref dst));
             else 
-                throw Unsupported.define<T>();                
+                throw no<T>();                
         }
 
         [MethodImpl(Inline)]
@@ -246,7 +246,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 V0d.vsave(v64f(src), ref float64(ref dst), offset);
             else 
-                throw Unsupported.define<T>();                
+                throw no<T>();                
         }
     }
 }

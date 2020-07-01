@@ -99,7 +99,7 @@ namespace Z0
         public asci8 BytCount
         {
             [MethodImpl(Inline)]
-            get => $"{BitCalcs.tablesize<M,N>()}";
+            get => $"{Cells.tablesize<M,N>()}";
         }
 
         /// <summary>

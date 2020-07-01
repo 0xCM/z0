@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
 
     public class t_lsboff : t_bitcore<t_lsboff>
     {
@@ -30,7 +29,7 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var y0 = gbits.blsr(x);
-                var y1 = gmath.and(gmath.sub(x, one<T>()), x);
+                var y1 = gmath.and(gmath.sub(x, As.one<T>()), x);
                 Claim.Eq(y0,y1);
             }
         }

@@ -16,7 +16,7 @@ namespace Z0
         /// Adds an offset to a reference
         /// </summary>
         /// <param name="src">The source reference</param>
-        /// <param name="offset">The source-relative offset amount</param>
+        /// <param name="count">The T-cell count to add</param>
         /// <typeparam name="T">The reference type</typeparam>
         /// <remarks>
         /// u8:  movsxd rax,edx -> add rax,rcx
@@ -25,19 +25,7 @@ namespace Z0
         /// u64: movsxd rax,edx -> lea rax,[rcx+rax*8]
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T add<T>(in T src, int offset)
-            => ref Add(ref edit(src), offset);
-
-        /// <summary>
-        /// Adds a T-counted offset to a readonly S-reference and returns the result for
-        /// the greater, or perhaps lesser, good
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="tCount">The T-cell count</param>
-        /// <typeparam name="S">The source cell type</typeparam>
-        /// <typeparam name="T">The target cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T add<S,T>(in S src, int tCount)
-            => ref Add(ref edit<S,T>(src), tCount);
+        public static ref T add<T>(in T src, int count)
+            => ref Add(ref edit(src), count);
     }
 }

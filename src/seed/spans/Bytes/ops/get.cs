@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct Bytes 
     {
-
         /// <summary>
         /// Converts the source value to a bytespan
         /// </summary>

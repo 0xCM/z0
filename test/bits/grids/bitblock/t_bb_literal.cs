@@ -17,7 +17,7 @@ namespace Z0
             var n = n40;      
             ulong z = 0b01011_00010_01110_11010_00111_00101_01110_10110;     
             var bvz = BitBlocks.single(z,n);
-            Span<byte> xSrc =  BitConvert.GetBytes(z);
+            Span<byte> xSrc =  BitConvert.bytes(z);
             var bvx = BitBlocks.load(xSrc.Slice(0,5).ToArray());
             Claim.eq(gbits.pop(z), bvz.Pop());
             Claim.Eq(gbits.pop(z), bvx.Pop());

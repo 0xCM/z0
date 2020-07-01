@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
                 
     using static Konst; 
-    using static Memories;
+    using static As;
 
     partial class gmath
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Eqz, Closures(AllNumeric)]
         public static T eqz<T>(T a, T b)
             where T : unmanaged
-                => gmath.mul(convert<T>((uint)gmath.eq(a,b)),ones<T>()); 
+                => gmath.mul(Cast.to<T>((uint)gmath.eq(a,b)),ones<T>()); 
 
         /// <summary>
         /// Defines the operator ltz:T = lt(a,b) ? ones[T] : zero[T]
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Ltz, Closures(Integers)]
         public static T ltz<T>(T a, T b)
             where T : unmanaged
-                => gmath.mul(convert<T>((uint)gmath.lt(a,b)), ones<T>());
+                => gmath.mul(Cast.to<T>((uint)gmath.lt(a,b)), ones<T>());
 
         /// <summary>
         /// Defines the operator gtz:T = gt(a,b) ? ones[T] : zero[T]
@@ -43,6 +43,6 @@ namespace Z0
         [MethodImpl(Inline), Gtz, Closures(Integers)]
         public static T gtz<T>(T a, T b)
             where T : unmanaged
-                => gmath.mul(convert<T>((uint)gt(a,b)), ones<T>());
+                => gmath.mul(Cast.to<T>((uint)gt(a,b)), ones<T>());
     }
 }

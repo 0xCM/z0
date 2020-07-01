@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines a type-level representation of <see cref='DW.W7'/>
     /// </summary>
-    public readonly struct W7 : IDataWidth<W> 
+    public readonly struct W7 : TDataWidth<W> 
     { 
         public const DW Width = DW.W7; 
 
@@ -41,6 +41,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DW(W src) 
             => Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator DataWidth<W>(W src) 
+            => default;
 
         [MethodImpl(Inline)]        
         public bool Equals(W w) 

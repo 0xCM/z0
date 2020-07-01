@@ -241,7 +241,7 @@ namespace Z0
             
             var spec = pattern.LoadVector();
             var x = gvec.vinc(w, t);
-            var y = gvec.vadd(x, gmath.add(x.LastCell(), one(t)));            
+            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));            
             var z = gvec.vblendp(x,y,spec);       
 
 
@@ -307,7 +307,7 @@ namespace Z0
             Claim.eq(value(pn), NatCalc.divT(w,t) * 2);
 
             var left = gvec.vinc(w, t);
-            var right = gvec.vadd(left, gmath.add(left.LastCell(), one(t)));            
+            var right = gvec.vadd(left, gmath.add(left.LastCell(), As.one(t)));            
             var blend = gvec.vblendp(left,right,spec);       
 
 
@@ -414,7 +414,7 @@ namespace Z0
         {
             var spec = vto(Vectors.vbroadcast(w, pattern),t);
             var x = gvec.vinc(w, t);
-            var y = gvec.vadd(x, gmath.add(x.LastCell(), one(t)));            
+            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));            
             var z = gvec.vblendp(x,y,spec);         
 
             var dst = Blocks.alloc(w,2,t);
@@ -442,7 +442,7 @@ namespace Z0
         {
             var spec = vto(Vectors.vbroadcast(w, pattern),t);
             var x = gvec.vinc(w, t);
-            var y = gvec.vadd(x, gmath.add(x.LastCell(), one(t)));            
+            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));            
             var z = gvec.vblendp(x,y,spec);         
 
             var dst = Blocks.alloc(w,2,t);

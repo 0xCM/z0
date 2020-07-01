@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static Root;
-    using static Typed;
 
     partial struct asci
     {        
@@ -23,7 +22,7 @@ namespace Z0
         {                          
             var src = AsciStrings.scalars(offset, (sbyte)count);
             var target = default(Vector256<ushort>);
-            ref var dst = ref vref(ref target);
+            ref var dst = ref V0.vref(ref target);
             for(byte i=0; i<(byte)count; i++)
                 seek(ref dst,i) = skip(src,i);            
             return target;
@@ -38,7 +37,7 @@ namespace Z0
         {
             var src = AsciStrings.scalars(offset, (sbyte)count);
             var target = default(Vector512<ushort>);
-            ref var dst = ref vref(ref target);
+            ref var dst = ref V0.vref(ref target);
             for(byte i=0; i<(byte)count; i++)
                 seek(ref dst, i) = skip(src, i);            
             return target;

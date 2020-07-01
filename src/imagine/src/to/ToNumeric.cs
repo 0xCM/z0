@@ -57,7 +57,7 @@ namespace Z0
             else if(typeof(S) == typeof(char))
                 return to<T>(char16(src));
             else            
-                return Unsupported.define<S,T>(src);
+                return no<S,T>();
         }
     }
 }

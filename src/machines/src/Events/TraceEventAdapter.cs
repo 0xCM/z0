@@ -51,6 +51,6 @@ namespace Z0
         where T : unmanaged
     {
         public virtual T Body
-            => Cells.cell<T>(Subject.Payload<byte[]>(nameof(Body)).ToSpan());
+            => As.cell<T>(Subject.Payload<byte[]>(nameof(Body)).ToSpan());
     }
 }

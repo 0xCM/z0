@@ -68,6 +68,6 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public Span<byte> Serialize()
-            => BitConvert.GetBytes(this);       
+            => BitConvert.bytes(this);       
     }
 }

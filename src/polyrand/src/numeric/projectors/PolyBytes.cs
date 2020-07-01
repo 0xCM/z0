@@ -21,7 +21,7 @@ namespace Z0
             while(true)
             {
                 var src = random.Next<ulong>();
-                BitConvert.GetBytes(src,cache);   
+                As.deposit(src,cache);   
                 for(var i=0; i < cache.Length; i++)
                     yield return cache[i];
             }
@@ -39,7 +39,7 @@ namespace Z0
             for(var j=0; j<count; j+=8)
             {
                 var src = random.Next<ulong>();
-                BitConvert.GetBytes(src, bytes);   
+                As.deposit(src, bytes);   
                 for(var k=0; k<8; k++, counter++)
                 {
                     if(counter == count)

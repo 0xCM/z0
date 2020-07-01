@@ -27,7 +27,8 @@ namespace Z0
             where F : unmanaged, IFixed
             where T : unmanaged
                 => new FixedIndex<F,T>(src);
-    }       
+    } 
+         
     public readonly ref struct FixedIndex<F>
         where F : struct, IFixed     
     {

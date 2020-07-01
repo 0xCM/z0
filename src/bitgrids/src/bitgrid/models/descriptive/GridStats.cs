@@ -12,20 +12,20 @@ namespace Z0
     public class GridStats
     {        
         [MethodImpl(Inline)]
-        public static GridStats Define(GridMap src)
+        public static GridStats Define(in GridMetrics src)
             => new GridStats(
             
                 RowCount : src.RowCount,
                 ColCount : src.ColCount,
-                SegWidth : src.SegWidth,
-                StorageSegs : src.SegCount,
-                StorageBits : src.StorageBits,
-                StorageBytes : src.StorageBytes,
-                PointCount : src.PointCount,
-                Vec128Count : src.Vec128Count,
-                Vec128Remainder : src.Vec128Remainder,
-                Vec256Count : src.Vec256Count,
-                Vec256Remainder : src.Vec256Remainder
+                SegWidth : src.CellWidth,
+                StorageSegs : src.CellCount,
+                StorageBits : src.StoreWidth,
+                StorageBytes : src.StoreSize,
+                PointCount : GridMetrics.points(src),
+                Vec128Count : GridMetrics.coverage(src,W128.W),
+                Vec128Remainder : GridMetrics.remainder(src,W128.W),
+                Vec256Count : GridMetrics.coverage(src,W256.W),
+                Vec256Remainder : GridMetrics.remainder(src,W256.W)
             );
         
         GridStats()

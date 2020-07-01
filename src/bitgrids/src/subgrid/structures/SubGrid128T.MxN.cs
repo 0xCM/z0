@@ -36,11 +36,6 @@ namespace Z0
         /// The maximum grid width
         /// </summary>
         public static W128 W => default;
-
-        /// <summary>
-        /// The grid dimension
-        /// </summary>
-        public static GridDim<M,N,T> Dim => default;
     
         [MethodImpl(Inline)]
         public static implicit operator Vector128<T>(in SubGrid128<M,N,T> src)

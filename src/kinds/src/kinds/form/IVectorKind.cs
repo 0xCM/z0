@@ -33,12 +33,10 @@ namespace Z0
     /// Characterizes an F-bound polymorphic reification that identifies an intrinsic vector generic type definition
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IVectorType<F,W> :  IVectorWidth<F>, ITypedLiteral<F,VectorWidth,uint>
+    public interface IVectorType<F,W> :  TVectorWidth<F>, ITypedLiteral<F,VectorWidth,uint>
         where F : struct, IVectorType<F,W>
         where W : unmanaged, ITypeWidth
     {
         
     }
-
-
 }

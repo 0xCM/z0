@@ -67,7 +67,7 @@ namespace Z0
         public Bit this[ByteSize offset, byte pos]        
         {
             [MethodImpl(Inline)]
-            get => BitTest.test(Bytes[offset], pos);
+            get => As.testbit(Bytes[offset], pos);
         }
 
         [MethodImpl(Inline)]

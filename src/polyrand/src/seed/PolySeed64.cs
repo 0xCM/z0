@@ -17,7 +17,7 @@ namespace Z0
         public static ulong Lookup(uint i)
         {
             if(i < Count)
-                return Cells.cell<ulong>(RawBytes, (int)(i*8));
+                return As.cell<ulong>(RawBytes, (int)(i*8));
             else
             {               
                 //AppErrors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1); 

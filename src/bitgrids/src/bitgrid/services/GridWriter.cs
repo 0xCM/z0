@@ -34,7 +34,7 @@ namespace Z0
 
             for(var i = 0; i<points.Length; i++)
             {                    
-                var gs = BitGrid.gridmap((ushort)points[i].row, (ushort)points[i].col, (ushort)segwidth).Stats();
+                var gs = BitGrid.metrics((ushort)points[i].row, (ushort)points[i].col, (ushort)segwidth).Stats();
                     if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
                         dst.WriteLine(Format(gs));
             }

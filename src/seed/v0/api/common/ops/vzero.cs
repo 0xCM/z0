@@ -42,6 +42,5 @@ namespace Z0
         public static Vector512<T> vzero<T>(W512 w, T t = default)
             where T : unmanaged
                 => default;
-
     }
 }

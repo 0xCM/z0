@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static V0;
     using static Typed;
     using static As;
@@ -15,7 +13,7 @@ namespace Z0
         public void check_vwrite_u8()
         {
             var src = Random.Span<byte>(16);        
-            var dst = vwrite<uint>(w128, ref first(src));
+            var dst = vcover<uint>(w128, ref first(src));
             var a = Spans.alloc<uint>(4);
             vsave(dst, ref first(a));
             var b = uint32(src);

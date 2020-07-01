@@ -22,11 +22,6 @@ namespace Z0
     {                
         internal readonly Block256<T> Data;
 
-        /// <summary>
-        /// The grid dimension
-        /// </summary>
-        public static GridDim<M,N,T> Dim => default;
-
         [MethodImpl(Inline)]
         public static bit operator ==(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
             => BitGrid.same(g1,g2);

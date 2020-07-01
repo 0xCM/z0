@@ -8,6 +8,9 @@ namespace Z0
     {
         DataWidth DataWidth {get;}   
 
+        TypeSignKind TypeSign
+            => TypeSignKind.Unsigned;
+        
         DataWidth ITypedLiteral<DataWidth>.Class 
             => DataWidth;
 

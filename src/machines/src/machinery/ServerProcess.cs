@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     
     using static Konst;
-    using static Memories;
+    using static Root;
 
     /// <summary>
     /// Responsible for managing agents owned by a server
@@ -25,11 +25,11 @@ namespace Z0
         public static ServerProcess Define(AgentContext Context, uint ServerId, uint CoreNumber, params ISystemAgent[] ServerAgents)
             => new ServerProcess(Context, ServerId, CoreNumber, ServerAgents);
 
-        ServerProcess(AgentContext Context, uint ServerId, uint CoreNumber, params ISystemAgent[] ServerAgents)
-            : base(Context, (ServerId, 1u))
+        internal ServerProcess(AgentContext content, uint server, uint core, params ISystemAgent[] agents)
+            : base(content, (server, 1u))
         {
-            this.Agents = ServerAgents.ToList();
-            this.CoreNumber = (int)CoreNumber;
+            Agents = agents.ToList();
+            CoreNumber = (int)core;
         }
 
         readonly int CoreNumber;

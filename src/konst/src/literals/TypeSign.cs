@@ -8,23 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    public readonly struct TypeSign
+    
+    public readonly struct TypeSign : ITypeSign<TypeSign>
     {    
-        public readonly TypeSignKind Kind;
-        
+        public TypeSignKind Sign {get;}
+
         [MethodImpl(Inline)]
         public static implicit operator TypeSign(TypeSignKind src)
             => new TypeSign(src);
 
         [MethodImpl(Inline)]
         public static implicit operator TypeSignKind(TypeSign src)
-            => src.Kind;
+            => src.Sign;
 
         [MethodImpl(Inline)]
         public TypeSign(TypeSignKind kind)
         {
-            Kind = kind;
+            Sign = kind;
         }            
     }
 }

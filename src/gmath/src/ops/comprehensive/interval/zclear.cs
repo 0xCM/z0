@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Memories;
+    using static As;
 
     partial class gmath
     {
@@ -22,6 +22,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T zclear<T>(T src)
             where T : unmanaged
-                => sub(src, convert<T>((uint)eq(src,zero<T>())));
+                => sub(src, Cast.to<T>((uint)eq(src,zero<T>())));
     }
 }

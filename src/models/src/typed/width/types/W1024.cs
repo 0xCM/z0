@@ -20,7 +20,7 @@ namespace Z0
     /// <summary>
     /// Defines a type-level representation of <see cref='DW.W1024'/>
     /// </summary>
-    public readonly struct W1024 : IFixedWidth<W> 
+    public readonly struct W1024 : TFixedWidth<W> 
     {
         public const DW Width = DW.W1024; 
 
@@ -34,14 +34,14 @@ namespace Z0
         public DW DataWidth 
             => Width;
 
+        public TS TypeSign
+            => Sign;
+
         public FW FixedWidth 
             => (FW)Width;
 
         public TW TypeWidth 
             => (TW)Width;
-
-        public TS TypeSign
-            => Sign;
 
         [MethodImpl(Inline)]
         public static implicit operator int(W src) 
@@ -50,6 +50,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DW(W src) 
             => Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator DataWidth<W>(W src) 
+            => default;
 
         [MethodImpl(Inline)]
         public static implicit operator FW(W src) 

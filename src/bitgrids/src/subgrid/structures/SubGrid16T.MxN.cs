@@ -36,11 +36,6 @@ namespace Z0
         /// </summary>
         public static N16 W => default;
 
-        /// <summary>
-        /// The grid dimension
-        /// </summary>
-        public static GridDim<M,N,T> Dim => default;
-
         [MethodImpl(Inline)]
         public static implicit operator SubGrid16<M,N,T>(in Block16<T> src)
             => new SubGrid16<M, N, T>(src);

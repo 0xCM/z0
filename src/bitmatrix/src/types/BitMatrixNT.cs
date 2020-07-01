@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst; 
-    using static Memories;
+    using static As;
+    using static Root;
 
     /// <summary>
     /// Defines a square bitmatrix of natural order over a primal type
@@ -29,7 +30,7 @@ namespace Z0
         public static int RowWidth 
         {
             [MethodImpl(Inline)]
-            get => nati<N>();
+            get => (int)value<N>();
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace Z0
     /// <summary>
     /// Defines a type-level representation of <see cref='DW.W512'/> with a <see cref='TS.Signed'/> classifier
     /// </summary>
-    public readonly struct W512i : IVectorWidth<W> 
+    public readonly struct W512i : TVectorWidth<W> 
     {
         public const DW Width = DW.W512; 
 
@@ -53,6 +53,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DW(W src) 
             => Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator DataWidth<W>(W src) 
+            => default;
 
         [MethodImpl(Inline)]
         public static implicit operator FW(W src) 

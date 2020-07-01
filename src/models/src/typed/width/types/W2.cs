@@ -14,7 +14,7 @@ namespace Z0
 
     using W = W2;
 
-    public readonly struct W2 : IDataWidth<W> 
+    public readonly struct W2 : TDataWidth<W> 
     { 
         public const DW Width = DW.W2; 
 
@@ -38,6 +38,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DW(W src) 
             => Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator DataWidth<W>(W src) 
+            => default;
 
         [MethodImpl(Inline)]        
         public bool Equals(W w) 

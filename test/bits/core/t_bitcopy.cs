@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
+    using static As;
    
     public class t_bitcopy : t_bitcore<t_bitcopy>
     {            
@@ -26,7 +26,7 @@ namespace Z0
             var zed = zero<T>();
             var lit = ones<T>();
             var min = byte.MinValue;
-            var max = (byte)bitsize<T>();
+            var max = (byte)Root.bitsize<T>();
 
             void check()
             {                                

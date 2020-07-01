@@ -9,6 +9,7 @@ namespace Z0
     
     using static Konst;
     using static Root;
+    using static As;
     
     [ApiHost]
     public readonly struct BitFormatter : IApiHost<BitFormatter>, IBitFormatter
@@ -18,13 +19,13 @@ namespace Z0
         public static string format(object src, TypeCode type)
         {
             if(type == TypeCode.Byte || type == TypeCode.SByte)
-                return Formatters.bits<byte>().Format((byte)Boxy.rebox(src, NumericKind.U8));
+                return Formatters.bits<byte>().Format((byte)rebox(src, NumericKind.U8));
             else if(type == TypeCode.UInt16 || type == TypeCode.Int16)
-                return Formatters.bits<ushort>().Format((ushort)Boxy.rebox(src, NumericKind.U16));
+                return Formatters.bits<ushort>().Format((ushort)rebox(src, NumericKind.U16));
             else if(type == TypeCode.UInt32  || type == TypeCode.Int32 || type == TypeCode.Single)
-                return Formatters.bits<uint>().Format((uint)Boxy.rebox(src, NumericKind.U32));
+                return Formatters.bits<uint>().Format((uint)rebox(src, NumericKind.U32));
             else if(type == TypeCode.UInt64 || type == TypeCode.Int64 || type == TypeCode.Double)
-                return Formatters.bits<ulong>().Format((ulong)Boxy.rebox(src, NumericKind.U64));
+                return Formatters.bits<ulong>().Format((ulong)rebox(src, NumericKind.U64));
             else
                 return string.Empty;
         }
@@ -51,8 +52,7 @@ namespace Z0
             {                
                 if(k>=maxbits)
                     break;
-
-                seek(dst, k) = @char(testbit(src, j));
+                seek(dst, k) = @char(@bool(testbit(src, j)));
             }
         }
 

@@ -15,10 +15,5 @@ namespace Z0
         public static byte uint8<T>(T src)
             => As.uint8(src);
 
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
-        public static byte? uint8<T>(T? src)
-            where T : unmanaged
-                => As.uint8(src);
     }
 }

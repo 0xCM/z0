@@ -68,7 +68,7 @@ namespace Z0
 
         [MethodImpl(Inline)]   
         public static object to(object src, NumericKind dst)
-            => Boxy.rebox(src,dst);
+            => As.rebox(src,dst);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(object src) 

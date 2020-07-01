@@ -4,34 +4,32 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Defines a server configuration record
     /// </summary>
-    public class ServerConfig 
+    public readonly struct ServerConfig 
     {
-        public ServerConfig(uint ServerId, string ServerName, uint CoreNumber)
-        {
-            this.ServerId = ServerId;
-            this.ServerName = ServerName;
-            this.CoreNumber = CoreNumber;
-        }
-
         /// <summary>
         /// Identifes the server to which the configuration applies
         /// </summary>        
-        public uint ServerId {get;}
+        public readonly uint ServerId;
 
         /// <summary>
         /// A descriptive name
         /// </summary>
-        public string ServerName {get;}
+        public readonly asci32 ServerName;
 
         /// <summary>
         /// The CPU core to which the server is assigned
         /// </summary>
-        public uint CoreNumber {get;}
+        public readonly uint CoreNumber;
+
+        public ServerConfig(uint id, string name, uint core)
+        {
+            ServerId = id;
+            ServerName = name;
+            CoreNumber = core;
+        }
 
         public override string ToString()
             => $"Server {ServerId}, Core={CoreNumber}";

@@ -92,7 +92,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix8(ulong src)
-            => this.Data = BitConvert.GetBytes(src).Replicate();
+            => this.Data = BitConvert.bytes(src).Replicate();
 
         public ReadOnlySpan<byte> Bytes
         {

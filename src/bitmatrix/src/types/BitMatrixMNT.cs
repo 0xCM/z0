@@ -132,7 +132,7 @@ namespace Z0
         int RowCellCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.mincells<N,T>();
+            get => Cells.minimum<N,T>();
         }
 
         /// <summary>

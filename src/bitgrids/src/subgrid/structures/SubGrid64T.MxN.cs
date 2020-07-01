@@ -36,11 +36,6 @@ namespace Z0
         /// </summary>
         public static N64 W => default;
 
-        /// <summary>
-        /// The grid dimension
-        /// </summary>
-        public static GridDim<M,N,T> Dim => default;        
-
         [MethodImpl(Inline)]
         public static implicit operator SubGrid64<M,N,T>(in Block64<T> src)
             => new SubGrid64<M,N,T>(src);

@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The canonical zero polynomial - with one term of order 0 with coefficient 0
         /// </summary>
-        public static readonly Polynomial<T> Zero = Define((zero<T>(), 0));
+        public static readonly Polynomial<T> Zero = Define((As.zero<T>(), 0));
 
         /// <summary>
         /// Constructs a polynomial from a sparse term sequence of scalar coefficients  paired with the

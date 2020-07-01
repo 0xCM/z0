@@ -9,7 +9,6 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
     
     using static Konst;    
-    using static Memories;
     using BLK = BinaryLogicKind;
 
     partial class TypedLogicSpec
@@ -21,7 +20,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static LiteralExpr<T> @true<T>()
             where T : unmanaged
-                => maxval<T>();
+                => As.maxval<T>();
 
         /// <summary>
         /// Defines a 128-bit cpu vector where all bits are on
@@ -48,7 +47,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static LiteralExpr<T> @false<T>()
             where T : unmanaged
-                => zero<T>();
+                => default(T);
 
         [MethodImpl(Inline)]
         public static LiteralExpr<Vector256<T>> @false<T>(N256 n)

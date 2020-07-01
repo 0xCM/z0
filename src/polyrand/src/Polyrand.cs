@@ -7,7 +7,6 @@ namespace Z0
     using static Konst;
     using static As;
     using static NumericCast;
-    using static NumericLiterals;
 
     /// <summary>
     /// Produces pseudorandom numeric points and streams predicated on a supplied generator
@@ -493,8 +492,8 @@ namespace Z0
                 return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
             else
             {
-                var min = NumericKinds.signed<T>() ? gmath.negate(gmath.sra(maxval<T>(), 1)) : minval<T>();                
-                var max = NumericKinds.signed<T>() ? gmath.sra(maxval<T>(), 1)  : maxval<T>();
+                var min = NumericKinds.signed<T>() ? gmath.negate(gmath.sra(As.maxval<T>(), 1)) : As.minval<T>();                
+                var max = NumericKinds.signed<T>() ? gmath.sra(As.maxval<T>(), 1)  : As.maxval<T>();
                 return (min,max);
             }            
         }

@@ -11,15 +11,6 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline)]
-        public static T zero<T>()
-            where T : unmanaged
-                => default(T);
-
-        [MethodImpl(Inline)]
-        public static T zero<T>(T t)
-            where T : unmanaged
-                => default(T);
 
                 
     }

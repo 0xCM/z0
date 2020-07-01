@@ -135,7 +135,7 @@ namespace Z0
                 var src = Random.Next<ulong>();
                 Bits.unpack64x1(src, dst);
                 var bitsPC = dst.PopCount();
-                var bytes = BitConvert.GetBytes(src);
+                var bytes = BitConvert.bytes(src);
                 var bytesPC = bytes.PopCount();
                 Claim.Eq(bitsPC, bytesPC);        
             }

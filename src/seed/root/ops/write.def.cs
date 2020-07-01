@@ -11,16 +11,6 @@ namespace Z0
     partial class Root
     {
         /// <summary>
-        /// Hydrates a T-cell from an S-reference
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T write<S,T>(ref S src)
-            => ref Unsafe.As<S,T>(ref src);
-
-        /// <summary>
         /// Hydrates a T-cell from an S-reference after skipping a specified number of S-cells
         /// </summary>
         /// <param name="src">The data source</param>
@@ -29,6 +19,6 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static ref T write<S,T>(ref S src, int offset)        
-            => ref write<S,T>(ref Unsafe.Add(ref edit(src), offset));
+            => ref As.@as<S,T>(ref As.add(src, offset));
     }
 }

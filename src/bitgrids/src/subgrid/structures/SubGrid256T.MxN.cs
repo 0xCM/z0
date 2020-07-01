@@ -37,11 +37,6 @@ namespace Z0
         /// </summary>
         public static W256 W => default;
 
-        /// <summary>
-        /// The grid dimension
-        /// </summary>
-        public static GridDim<M,N,T> Dim => default;        
-
         [MethodImpl(Inline)]
         public static implicit operator Vector256<T>(in SubGrid256<M,N,T> src)
             => src.Data;

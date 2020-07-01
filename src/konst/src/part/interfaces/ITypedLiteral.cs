@@ -15,7 +15,8 @@ namespace Z0
     {
         E Class {get;}
 
-        string Name => Class.ToString().ToLower();
+        string Name 
+            => Class.ToString().ToLower();
     }
 
     /// <summary>

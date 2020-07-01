@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using System.Linq;
-
     partial class XTend
     {
         /// <summary>
@@ -16,10 +11,10 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The grid specification that characterizes the layout</param>
         /// <typeparam name="T">The storage type</typeparam>
-        public static GridMap Map(this GridSpec spec)
-            => new GridMap(spec);
+        public static GridMetrics Map(this GridSpec spec)
+            => new GridMetrics(spec);
 
-        public static GridStats Stats(this GridMap map)
+        public static GridStats Stats(this GridMetrics map)
             => GridStats.Define(map);
     }
 }

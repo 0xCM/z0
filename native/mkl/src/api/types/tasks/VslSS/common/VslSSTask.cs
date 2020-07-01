@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
+    using static As;
 
     public interface IVslSSTask<T> : IMklTask<T>
         where T : unmanaged
@@ -64,7 +64,7 @@ namespace Z0.Mkl
             this.Weights = Weights;
             this.Indices = Indices;
 
-            insist(Weights.Length == SampleCount);
+            Root.insist(Weights.Length == SampleCount);
         }
 
         public abstract VslSSStatus Allocate();

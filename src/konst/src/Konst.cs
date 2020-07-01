@@ -8,6 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     public readonly partial struct Konst
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
@@ -185,6 +189,17 @@ namespace Z0
                 ThrowNullRefError<T>();
             return src;
         }
+
+        /// <summary>
+        /// Populates a <see cref="NotSupportedException"/> complaining that a 
+        /// parametrically-identified type is not supported
+        /// </summary>
+        /// <typeparam name="T">The unsupported type</typeparam>
+        public static NotSupportedException no<T>()
+            => new NotSupportedException($"The type {typeof(T).Name} is unhandled");
+
+        public static T no<S,T>()
+            => Unsupported.raise<T>($"The transformation {typeof(S).Name} -> {typeof(T).Name} is undefined");
 
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     {
         public static string format<T>(T src, BitFormatConfig config)
             where T : struct
-                => format(BitConvert.GetBytes(in src), config);
+                => format(BitConvert.bytes(in src), config);
 
     }
 }

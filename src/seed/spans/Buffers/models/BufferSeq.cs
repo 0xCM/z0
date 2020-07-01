@@ -67,12 +67,21 @@ namespace Z0
             => View.Slice(index*BufferSize, BufferSize);
 
         /// <summary>
+        /// Covers a token-identified buffer with a span over cells of unmanaged type
+        /// </summary>
+        /// <param name="index">The buffer index</param>
+        [MethodImpl(Inline)]
+        public Span<T> Buffer<T>(byte index)
+            where T : unmanaged
+                => Buffer(index).Cast<T>();
+
+        /// <summary>
         /// Retrieves an index-identifed token
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
         public ref readonly BufferToken Token(byte index)
-            => ref refs.skip(Tokens,index);
+            => ref As.skip(Tokens,index);
 
         /// <summary>
         /// Retrieves an index-identifed token
@@ -103,15 +112,6 @@ namespace Z0
             Token(index).Clear();
             return Buffer(index);
         }
-
-        /// <summary>
-        /// Covers a token-identified buffer with a span over cells of unmanaged type
-        /// </summary>
-        /// <param name="index">The buffer index</param>
-        [MethodImpl(Inline)]
-        public unsafe Span<T> Cells<T>(byte index)
-            where T : unmanaged
-                =>  Buffer(index).Cast<T>();
 
         /// <summary>
         /// Fills a token-identifed buffer with content from a source span and returns the covering span
