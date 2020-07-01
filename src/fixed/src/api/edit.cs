@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8)]
+        [MethodImpl(Inline), Op, Closures(Numeric8k)]
         public static Span<T> span<T>(ref Fixed8 src)
             where T : unmanaged
                 => span<Fixed8,T>(ref src);
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8x16)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
         public static Span<T> span<T>(ref Fixed16 src)
             where T : unmanaged
                 => span<Fixed16,T>(ref src);
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8x16x32)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
         public static Span<T> span<T>(ref Fixed32 src)
             where T : unmanaged
                 => span<Fixed32,T>(ref src);

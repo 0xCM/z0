@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static As;
     using static Konst;
 
     partial class BitGrid
@@ -23,7 +23,7 @@ namespace Z0
         public static BitGrid<T> alloc<T>(int m, int n, T t = default)
             where T : unmanaged
         {            
-            var blocksize = n256;
+            var blocksize = W256.W;
             var blocks = BitCalcs.tableblocks<T>(blocksize,m,n);
             var data = Z0.Blocks.alloc<T>(blocksize, blocks); 
             return new BitGrid<T>(data,m,n);            
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The grid width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<T> alloc<T>(N16 w)
             where T : unmanaged
                 => new BitGrid16<T>(Konst.z16);
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The grid width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<T> alloc<T>(N32 w)
             where T : unmanaged
                => new BitGrid32<T>(Konst.z32);
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<N1,N16,T> alloc<T>(N16 w, N1 m, N16 n, T t = default)
             where T : unmanaged            
                 => alloc16<N1,N16,T>();
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<N16,N1,T> alloc<T>(N16 w, N16 m, N1 n, T t = default)
             where T : unmanaged            
                 => alloc16<N16,N1,T>();
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<N2,N8,T> alloc<T>(N16 w, N2 m, N8 n, T t = default)
             where T : unmanaged            
                 => alloc16<N2,N8,T>();
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<N8,N2,T> alloc<T>(N16 w, N8 m, N2 n, T t = default)
             where T : unmanaged            
                 => alloc16<N8,N2,T>();
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<N4,N4,T> alloc<T>(N16 w, N4 m, N4 n, T t = default)
             where T : unmanaged            
                 => alloc16<N4,N4,T>();
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N1,N32,T> alloc<T>(N32 w, N1 m, N32 n, T t = default)
             where T : unmanaged            
                 => alloc32<N1,N32,T>();
@@ -145,7 +145,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N32,N1,T> alloc<T>(N32 w, N32 m = default, N1 n = default, T t = default)
             where T : unmanaged            
                 => alloc32<N32,N1,T>();
@@ -158,7 +158,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N16,N2,T> alloc<T>(N32 w, N16 m = default, N2 n = default, T t = default)
             where T : unmanaged            
                 => alloc32<N16,N2,T>();
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N2,N16,T> alloc<T>(N32 w, N2 m = default, N16 n = default, T t = default)
             where T : unmanaged            
                 => alloc32<N2,N16,T>();
@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N8,N4,T> alloc<T>(N32 w, N8 m = default, N4 n = default, T t = default)
             where T : unmanaged            
                 => alloc32<N8,N4,T>();
@@ -196,7 +196,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N4,N8,T> alloc<T>(N32 w, N4 m = default, N8 n = default, T t = default)
             where T : unmanaged            
                 => alloc32<N4,N8,T>();

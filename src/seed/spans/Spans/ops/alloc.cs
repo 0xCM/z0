@@ -16,26 +16,17 @@ namespace Z0
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Closures(UnsignedInts), Op]
+        [MethodImpl(Inline), Closures(AllNumeric), Op]
         public static Span<T> alloc<T>(int length)
-            => new Span<T>(new T[length]);
+            => sys.alloc<T>(length);
 
         /// <summary>
         /// Allocates a span
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Closures(UnsignedInts), Op]
-        public static Span<T> alloc<T>(ushort length)
-            => new Span<T>(new T[length]);
-
-        /// <summary>
-        /// Allocates a span
-        /// </summary>
-        /// <param name="length">The number cells to allocate</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [Closures(UnsignedInts), Op]
-        public static Span<T> alloc<T>(byte length)
-            => new Span<T>(new T[length]);
+        [MethodImpl(Inline)]
+        public static Span<T> alloc<T>(ulong length)
+            => sys.alloc<T>(length);
     }
 }

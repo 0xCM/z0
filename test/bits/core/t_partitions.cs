@@ -18,7 +18,7 @@ namespace Z0
             var t = z8;
             var src = BitMask.msb(n2,n1,z16);
             var dst = NatSpan.alloc(n,t);
-            Bits.part4x4(src, dst);
+            Bits.part4x4(src, ref dst.Head);
             var segment = uint8(0b1010).ToBitSpan();
             var expect = segment.Replicate(4);
             var actual = dst.Data.ToBitSpan();
@@ -34,7 +34,7 @@ namespace Z0
             var src = uint.MaxValue;
             var dst = NatSpan.alloc(n,t);
             
-            Bits.part24x3(src, dst);
+            Bits.part24x3(src, ref dst.Head);
             for(var i=0; i<n; i++)
                 Claim.Eq(dst[i],(byte)7);
         }
@@ -47,7 +47,7 @@ namespace Z0
             var src = uint.MaxValue;
             var dst = NatSpan.alloc(n,t);
             
-            Bits.part27x3(src, dst);
+            Bits.part27x3(src, ref dst.Head);
 
             var expect = BitSpans.parse("000001110000011100000111000001110000011100000111000001110000011100000111");
             var actual = dst.Data.ToBitSpan();
@@ -72,7 +72,7 @@ namespace Z0
             var src = uint.MaxValue;
             var dst = NatSpan.alloc(n,t);
             
-            Bits.part30x3(src, dst);
+            Bits.part30x3(src, ref dst.Head);
             for(var i=0; i<n; i++)
                 Claim.Eq(dst[i],(byte)7);
         }
@@ -85,7 +85,7 @@ namespace Z0
 
             var src = ulong.MaxValue;
             var dst = NatSpan.alloc(n,t);
-            Bits.part63x3(src, dst);
+            Bits.part63x3(src, ref dst.Head);
             for(var i=0; i<n; i++)
                 Claim.Eq(dst[i],(byte)7);
         }

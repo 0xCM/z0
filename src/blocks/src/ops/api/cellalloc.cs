@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(Numeric8u)]
+        [Alloc, Closures(UInt8k)]
         public static Block8<T> cellalloc<T>(W8 n, int cellcount)
             where T : unmanaged        
                 => alloc<T>(n, cellcover<T>(n, cellcount));
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(Numeric16u)]
+        [Alloc, Closures(UInt16k)]
         public static Block16<T> cellalloc<T>(W16 n, int cellcount)
             where T : unmanaged        
                 => alloc<T>(n, cellcover<T>(n, cellcount));
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(Numeric32u)]
+        [Alloc, Closures(UInt32k)]
         public static Block32<T> cellalloc<T>(W32 n, int cellcount)
             where T : unmanaged        
                 => alloc<T>(n, cellcover<T>(n, cellcount));
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(Numeric32u)]
+        [Alloc, Closures(UInt32k)]
         public static Block64<T> cellalloc<T>(W64 n, int cellcount)
             where T : unmanaged        
                 => alloc<T>(n, cellcover<T>(n, cellcount));
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(Numeric32u)]
+        [Alloc, Closures(UInt32k)]
         public static Block128<T> cellalloc<T>(W128 n, int cellcount)
             where T : unmanaged        
                 => alloc<T>(n, cellcover<T>(n, cellcount));
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(Numeric32u)]
+        [Alloc, Closures(UInt32k)]
         public static Block256<T> cellalloc<T>(W256 n, int cellcount)
             where T : unmanaged        
                 => alloc<T>(n, cellcover<T>(n, cellcount));
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(Numeric32u)]
+        [Alloc, Closures(UInt32k)]
         public static Block512<T> cellalloc<T>(W512 n, int cellcount)
             where T : unmanaged        
                 => alloc<T>(n, cellcover<T>(n, cellcount));

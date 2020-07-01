@@ -38,29 +38,29 @@ namespace Z0
         public static string[] strings(Type src)
             => LF.strings(src).Select(@string);
 
-        [Op, Closures(Numeric64u)]
+        [Op, Closures(UInt64k)]
         public static T value<T>(FieldInfo f)
             => (T)f.GetRawConstantValue();
 
         public static T[] values<T>(Type src)
             => search<T>(src).Select(value<T>);
 
-        [Op, Closures(Numeric64u)]
+        [Op, Closures(UInt64k)]
         public static T numeric<T>(FieldInfo f)
             where T : unmanaged
                 => (T)f.GetRawConstantValue();
 
-        [Op, Closures(Numeric64u)]
+        [Op, Closures(UInt64k)]
         public static T[] numeric<T>(Type src)
             where T : unmanaged
                 => search<T>(src).Select(numeric<T>);
 
-        [Op, Closures(Numeric64u)]
+        [Op, Closures(UInt64k)]
         public static FieldValues<T> from<T>(Type src)
             where T : unmanaged
                 => search<T>(src).Select(f => (f,(T)f.GetRawConstantValue()));        
 
-        [Op, Closures(Numeric64u)]
+        [Op, Closures(UInt64k)]
         public FieldValues<T> numeric<T>(Type[] types)
             where T : unmanaged
         {
@@ -96,7 +96,7 @@ namespace Z0
             return index(eValueBuffer);
         }
 
-        [MethodImpl(Inline), Op, Closures(Numeric64u)]
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static FieldValues<E,T> index<E,T>(FieldValue<E,T>[] src)
             where E : unmanaged, Enum
             where T : unmanaged

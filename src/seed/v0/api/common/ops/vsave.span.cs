@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Avx2;
-
     using static Konst;
     using static Root;
 
@@ -79,6 +76,5 @@ namespace Z0
         public static void vsave<T>(Vector512<T> src, Span<T> dst, int offset)
             where T : unmanaged
                 => vsave(src, ref head(dst), offset);
-
     }
 }

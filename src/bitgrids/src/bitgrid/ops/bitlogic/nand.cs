@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static As;
 
     partial class BitGrid
     {                
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="x">The left grid</param>
         /// <param name="y">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Nand, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Nand, Closures(UInt8x16k)]
         public static BitGrid16<T> nand<T>(BitGrid16<T> x, BitGrid16<T> y)
             where T : unmanaged
                 => init16<T>(math.nand(x,y));
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="x">The left grid</param>
         /// <param name="y">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Nand, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Nand, Closures(UInt8x16x32k)]
         public static BitGrid32<T> nand<T>(BitGrid32<T> x, BitGrid32<T> y)
             where T : unmanaged
                 => init32<T>(math.nand(x,y));
@@ -140,7 +140,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var blocks = BitCalcs.tableblocks<M,N,T>(n256);
+            var blocks = BitCalcs.tableblocks<M,N,T>(W256.W);
             for(var i=0; i<blocks; i++)
                 gz[i] = gvec.vnand(x[i],y[i]);
             return ref gz;

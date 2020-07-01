@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static As;
 
     partial class BitGrid
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="w">The grid width selector</param>
         /// <param name="data">The fill data</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<T> init<T>(N16 w, T data)
             where T : unmanaged
                 => new BitGrid16<T>(gvec.broadcast<T,ushort>(data));
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="w">The grid width selector</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<T> init<T>(N32 w, T data)
             where T : unmanaged
                 => new BitGrid32<T>(gvec.broadcast<T,uint>(data));
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<N1,N16,T> init<T>(N16 w, N1 m = default, N16 n = default, T d = default)
             where T : unmanaged            
                 => init16(m,n,d);
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<N16,N1,T> init<T>(N16 w, N16 m = default, N1 n = default, T d = default)
             where T : unmanaged            
                 => init16(m,n,d);
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<N2,N8,T> init<T>(N16 w, N2 m = default, N8 n = default, T d = default)
             where T : unmanaged            
                 => init16(m,n,d);
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<N8,N2,T> init<T>(N16 w, N8 m = default, N2 n = default, T d = default)
             where T : unmanaged            
                 => init16(m,n,d);
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<N4,N4,T> init<T>(N16 w, N4 m = default, N4 n = default, T d = default)
             where T : unmanaged            
                 => init16(m,n,d);
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N1,N32,T> init<T>(N32 w, N1 m = default, N32 n = default, T d = default)
             where T : unmanaged            
                 => init32(m,n,d);
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N32,N1,T> init<T>(N32 w, N32 m = default, N1 n = default, T d = default)
             where T : unmanaged            
                 => init32(m,n,d);
@@ -144,7 +144,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N16,N2,T> init<T>(N32 w, N16 m = default, N2 n = default, T d = default)
             where T : unmanaged            
                 => init32(m,n,d);
@@ -156,7 +156,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N2,N16,T> init<T>(N32 w, N2 m = default, N16 n = default, T d = default)
             where T : unmanaged            
                 => init32(m,n,d);
@@ -169,7 +169,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N8,N4,T> init<T>(N32 w, N8 m = default, N4 n = default, T d = default)
             where T : unmanaged            
                 => init32(m,n,d);
@@ -182,7 +182,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The  cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N4,N8,T> init<T>(N32 w, N4 m = default, N8 n = default, T d = default)
             where T : unmanaged            
                 => init32(m,n,d);
@@ -509,7 +509,7 @@ namespace Z0
         public static BitGrid<T> init<T>(int m, int n, T d = default)
             where T : unmanaged
         {            
-            var w = n256;
+            var w = W256.W;
             var blocks = Z0.Blocks.alloc<T>(w, BitCalcs.tableblocks<T>(w, m, n));
             Z0.Blocks.broadcast(d, blocks);
             return new BitGrid<T>(blocks,m,n);            

@@ -13,7 +13,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct sys
     {
-        const NumericKind Closure = Numeric8u | Numeric64u;
+        const NumericKind Closure = UInt8k | UInt64k;
 
         const MethodImplOptions Options = MethodImplOptions.NoInlining;                    
     }

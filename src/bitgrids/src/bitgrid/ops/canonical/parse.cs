@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="w">The number of bitstring bits to parse</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Parse, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Parse, Closures(UInt8x16k)]
         public static BitGrid16<T> parse<T>(BitString bs, W16 w)
             where T : unmanaged
                 => init16<T>(bs.TakeUInt16());
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="n">The number of bitstring bits to parse</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Parse, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Parse, Closures(UInt8x16x32k)]
         public static BitGrid32<T> parse<T>(BitString bs, N32 n, int rows, int cols, T t = default)
             where T : unmanaged
                 => init32<T>(bs.TakeUInt32());

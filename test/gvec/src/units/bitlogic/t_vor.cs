@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
 
     public class t_vor : t_inx<t_vor>
     {
@@ -150,7 +149,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = RepCount;
-            var stats = Blocks.stats(blocks,w,t);
+            var stats = Blocks.metrics(blocks,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -167,7 +166,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = RepCount;
-            var stats = Blocks.stats(blocks,w,t);
+            var stats = Blocks.metrics(blocks,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 

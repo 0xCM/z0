@@ -24,8 +24,11 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vsave(Vector128<sbyte> src, ref sbyte dst)
-            => Store(refptr(ref dst), src);            
+        public static unsafe ref sbyte vsave(Vector128<sbyte> src, ref sbyte dst)
+        {
+            Store(refptr(ref dst), src);         
+            return ref dst;
+        }
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -33,8 +36,11 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vsave(Vector128<byte> src, ref byte dst)
-            => Store(refptr(ref dst), src);            
+        public static unsafe ref byte vsave(Vector128<byte> src, ref byte dst)
+        {
+            Store(refptr(ref dst), src);         
+            return ref dst;
+        }
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -42,8 +48,11 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vsave(Vector128<short> src, ref short dst)
-            => Store(refptr(ref dst), src);            
+        public static unsafe ref short vsave(Vector128<short> src, ref short dst)
+        {
+            Store(refptr(ref dst), src);         
+            return ref dst;
+        }
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -51,8 +60,11 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vsave(Vector128<ushort> src, ref ushort dst)
-            => Store(refptr(ref dst), src);            
+        public static unsafe ref ushort vsave(Vector128<ushort> src, ref ushort dst)
+        {
+            Store(refptr(ref dst), src);         
+            return ref dst;
+        }
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -60,8 +72,11 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vsave(Vector128<int> src, ref int dst)
-            => Store(refptr(ref dst), src);            
+        public static unsafe ref int vsave(Vector128<int> src, ref int dst)
+        {
+            Store(refptr(ref dst), src);         
+            return ref dst;
+        }
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -69,8 +84,11 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vsave(Vector128<uint> src, ref uint dst)
-            => Store(refptr(ref dst), src);            
+        public static unsafe ref uint vsave(Vector128<uint> src, ref uint dst)
+        {
+            Store(refptr(ref dst), src);         
+            return ref dst;
+        }
 
         /// <summary>
         /// Stores vector content to a memory location

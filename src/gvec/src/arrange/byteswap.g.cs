@@ -18,7 +18,7 @@ namespace Z0
         /// Effects the reversal of the byte-level representation of each component in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op, Closures(Numeric16x32x64u)]
+        [MethodImpl(Inline), Op, Closures(UInt16x32x64k)]
         public static Vector128<T> vbyteswap<T>(Vector128<T> x)
             where T : unmanaged
         {
@@ -38,7 +38,7 @@ namespace Z0
         /// Effects the reversal of the byte-level representation of each component in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op, Closures(Numeric16x32x64u)]
+        [MethodImpl(Inline), Op, Closures(UInt16x32x64k)]
         public static Vector256<T> vbyteswap<T>(Vector256<T> x)
             where T : unmanaged
         {

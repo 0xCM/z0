@@ -12,7 +12,7 @@ namespace Z0
     
     partial class gbits
     {    
-        [MethodImpl(Inline), Op, Closures(Numeric16x32x64u)]
+        [MethodImpl(Inline), Op, Closures(UInt16x32x64k)]
         public static T byteswap<T>(T src)
             where T : unmanaged
         {

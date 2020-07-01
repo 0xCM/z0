@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class BitGrid
     {
@@ -18,7 +17,7 @@ namespace Z0
         /// <param name="g">The source grid</param>
         /// <param name="shift">The rotation amount</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Rotl, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Rotl, Closures(UInt8x16k)]
         public static BitGrid16<T> rotl<T>(BitGrid16<T> g, byte shift)
             where T : unmanaged
                 => init16<T>(Bits.rotl(g, shift));
@@ -29,7 +28,7 @@ namespace Z0
         /// <param name="g">The source grid</param>
         /// <param name="shift">The rotation amount</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Rotl, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Rotl, Closures(UInt8x16x32k)]
         public static BitGrid32<T> rotl<T>(BitGrid32<T> g, byte shift)
             where T : unmanaged
                 => init32<T>(Bits.rotl(g, shift));

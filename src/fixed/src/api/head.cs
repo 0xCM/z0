@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=8</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8)]
+        [MethodImpl(Inline), Op, Closures(Numeric8k)]
         public static ref T head<T>(ref Fixed8 src)
             where T : unmanaged
                 => ref head(ref src, default(T));
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=16</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8x16)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
         public static ref T head<T>(ref Fixed16 src)
             where T : unmanaged
                 => ref head(ref src, default(T));
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=32</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8x16x32)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
         public static ref T head<T>(ref Fixed32 src)
             where T : unmanaged
                 => ref head(ref src, default(T));

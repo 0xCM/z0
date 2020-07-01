@@ -11,12 +11,12 @@ namespace Z0
 
     partial class BitGrid
     {                
-        [MethodImpl(Inline), Op, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Op, Closures(UInt8x16k)]
         public static BitGrid16<T> define<T>(N16 w, ushort data)
             where T : unmanaged
                 => new BitGrid16<T>(data);
 
-        [MethodImpl(Inline), Op, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Op, Closures(UInt8x16x32k)]
         public static BitGrid32<T> define<T>(N32 w, uint data)
             where T : unmanaged
                 => new BitGrid32<T>(data);

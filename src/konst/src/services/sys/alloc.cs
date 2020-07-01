@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static OpacityKind;
-    
+    using static Konst;
+
     partial struct sys
     {
         /// <summary>
@@ -27,5 +28,9 @@ namespace Z0
         [MethodImpl(Options), Opaque(Alloc)]
         public static byte[] alloc(int count)
             => new byte[count];
+
+        [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
+        public static T[] alloc<T>(ulong count)
+            => new T[count];
     }
 }

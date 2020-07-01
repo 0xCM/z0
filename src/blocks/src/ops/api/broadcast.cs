@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>        
-        [MethodImpl(Inline), Op, Closures(Numeric8)]
+        [MethodImpl(Inline), Op, Closures(Numeric8k)]
         public static void broadcast<T>(T data, in Block8<T> dst)
             where T : unmanaged        
         {
@@ -28,9 +28,7 @@ namespace Z0
                 {
                     V0.vload(n128, dst.Block(i));
                 }
-            }
-
-            
+            }            
         }
 
         /// <summary>
@@ -39,7 +37,7 @@ namespace Z0
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>        
-        [MethodImpl(Inline), Op, Closures(Numeric8x16)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
         public static void broadcast<T>(T data, in Block16<T> dst)
             where T : unmanaged        
                 => dst.Fill(data);
@@ -50,7 +48,7 @@ namespace Z0
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>        
-        [MethodImpl(Inline),Op, Closures(Numeric8x16x32)]
+        [MethodImpl(Inline),Op, Closures(Numeric8x16x32k)]
         public static void broadcast<T>(T data, in Block32<T> dst)
             where T : unmanaged        
                 => dst.Fill(data);

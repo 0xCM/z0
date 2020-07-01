@@ -14,62 +14,62 @@ namespace Z0
     [ApiHost("emath")]
     readonly struct EClosures
     {
-        [MethodImpl(Inline), Add, Closures(Numeric8u)]
+        [MethodImpl(Inline), Add, Closures(UInt8k)]
         public static @enum<E8u,T> add<T>(@enum<E8u,T> a, @enum<E8u,T> b)
             where T : unmanaged
                 => emath.add(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric8u)]
+        [MethodImpl(Inline), Add, Closures(UInt8k)]
         public static @enum<E8u,T> mul<T>(@enum<E8u,T> a, @enum<E8u,T> b)
             where T : unmanaged
                 => emath.mul(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric8u)]
+        [MethodImpl(Inline), Add, Closures(UInt8k)]
         public static @enum<E8u,T> and<T>(@enum<E8u,T> a, @enum<E8u,T> b)
             where T : unmanaged
                 => emath.and(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric8i)]
+        [MethodImpl(Inline), Add, Closures(Int8k)]
         public static @enum<E8i,T> add<T>(@enum<E8i,T> a, @enum<E8i,T> b)
             where T : unmanaged
                 => emath.add(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric8i)]
+        [MethodImpl(Inline), Add, Closures(Int8k)]
         public static @enum<E8i,T> mul<T>(@enum<E8i,T> a, @enum<E8i,T> b)
             where T : unmanaged
                 => emath.mul(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric8i)]
+        [MethodImpl(Inline), Add, Closures(Int8k)]
         public static @enum<E8i,T> and<T>(@enum<E8i,T> a, @enum<E8i,T> b)
             where T : unmanaged
                 => emath.and(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric32u)]
+        [MethodImpl(Inline), Add, Closures(UInt32k)]
         public static @enum<E32u,T> add<T>(@enum<E32u,T> a, @enum<E32u,T> b)
             where T : unmanaged
                 => emath.add(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric32u)]
+        [MethodImpl(Inline), Add, Closures(UInt32k)]
         public static @enum<E32u,T> mul<T>(@enum<E32u,T> a, @enum<E32u,T> b)
             where T : unmanaged
                 => emath.mul(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric32u)]
+        [MethodImpl(Inline), Add, Closures(UInt32k)]
         public static @enum<E32u,T> and<T>(@enum<E32u,T> a, @enum<E32u,T> b)
             where T : unmanaged
                 => emath.and(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric64u)]
+        [MethodImpl(Inline), Add, Closures(UInt64k)]
         public static @enum<E64u,T> add<T>(@enum<E64u,T> a, @enum<E64u,T> b)
             where T : unmanaged
                 => emath.add(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric64u)]
+        [MethodImpl(Inline), Add, Closures(UInt64k)]
         public static @enum<E64u,T> mul<T>(@enum<E64u,T> a, @enum<E64u,T> b)
             where T : unmanaged
                 => emath.mul(a, b);
 
-        [MethodImpl(Inline), Add, Closures(Numeric64u)]
+        [MethodImpl(Inline), Add, Closures(UInt64k)]
         public static @enum<E64u,T> and<T>(@enum<E64u,T> a, @enum<E64u,T> b)
             where T : unmanaged
                 => emath.and(a, b);

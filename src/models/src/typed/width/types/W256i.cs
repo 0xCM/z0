@@ -26,6 +26,11 @@ namespace Z0
 
         public const TS Sign = TS.Signed;
 
+        /// <summary>
+        /// An instance-level representative
+        /// </summary>
+        public static W W => default;    
+
         public DW DataWidth 
             => Width;
 

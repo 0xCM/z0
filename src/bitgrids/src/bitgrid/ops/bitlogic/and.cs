@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class BitGrid
     {        
@@ -18,7 +17,7 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), And, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), And, Closures(UInt8x16k)]
         public static BitGrid16<T> and<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
                 => init16<T>(math.and(gx,gy));
@@ -29,7 +28,7 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), And, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), And, Closures(UInt8x16x32k)]
         public static BitGrid32<T> and<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
                 => init32<T>(math.and(gx,gy));

@@ -10,6 +10,7 @@ namespace Z0.Xed
     using static Konst;
     using static Root;
     using static SourceMarkers;
+    using static As;
 
     using R = PatternSummary;
     using F = PatternField;
@@ -73,16 +74,16 @@ namespace Z0.Xed
         public static BinaryCode BaseCode(this InstructionPattern src)
         {
             var dst = 0ul;
-            var pos = 0;
+            var pos = 0u;
             var parser = HexByteParser.Service;
-            for(var i=0; i<src.Parts.Length; i++)
+            for(var i=0u; i<src.Parts.Length; i++)
             {
                 var part = src.Parts[i];
                 if(parser.HasPreSpec(part))
-                    As.seek8(ref dst, pos++) = parser.ParseByte(part);
+                    seek8(dst, pos++) = parser.ParseByte(part);
             }
 
-            return ByteReader.ReadAll(dst).Slice(0, pos);            
+            return slice(ByteReader.ReadAll(dst),0, pos);            
         }
 
         const char LeftFence = Chars.LBracket;

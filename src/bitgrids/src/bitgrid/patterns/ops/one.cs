@@ -14,7 +14,7 @@ namespace Z0
 
     partial class GridPatterns
     {
-        [MethodImpl(Inline), One, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), One, Closures(UInt8x16k)]
         public static BitGrid16<N4,N4,T> one<T>(N16 w, N4 m, N4 n, T t = default)
             where T : unmanaged
         {
@@ -22,7 +22,7 @@ namespace Z0
             return init(w,m,n,pattern).As<T>();
         }
 
-        [MethodImpl(Inline), One, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), One, Closures(UInt8x16x32k)]
         public static SubGrid32<N5,N5,T> one<T>(N32 w, N5 m, N5 n, T t = default)
             where T : unmanaged
         {

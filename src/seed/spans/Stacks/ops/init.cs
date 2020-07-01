@@ -14,7 +14,7 @@ namespace Z0
 
     partial class Stacks
     {
-        [MethodImpl(Inline), Op, Closures(Numeric8x16x32)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
         public static MemStack32 init<T>(W32 w, in T src)
             where T : unmanaged
         {

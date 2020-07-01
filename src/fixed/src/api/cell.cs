@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8)]
+        [MethodImpl(Inline), Op, Closures(Numeric8k)]
         public static ref T cell<T>(ref Fixed8 src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.As<Fixed8,T>(ref src), index);
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8x16)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
         public static ref T cell<T>(ref Fixed16 src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.As<Fixed16,T>(ref src), index);
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8x16x32)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
         public static ref T cell<T>(ref Fixed32 src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.As<Fixed32,T>(ref src), index);

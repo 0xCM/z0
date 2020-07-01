@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Load, Closures(Numeric8u)]
+        [MethodImpl(Inline), Load, Closures(UInt8k)]
         internal static Block8<T> unsafeload<T>(W8 w, Span<T> src)
             where T : unmanaged
                 => new Block8<T>(src);
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Load, Closures(Numeric16u)]
+        [MethodImpl(Inline), Load, Closures(UInt16k)]
         internal static Block16<T> unsafeload<T>(W16 w, Span<T> src)
             where T : unmanaged
                 => new Block16<T>(src);
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Load, Closures(Numeric32u)]
+        [MethodImpl(Inline), Load, Closures(UInt32k)]
         internal static Block32<T> unsafeload<T>(W32 w, Span<T> src)
             where T : unmanaged
                 => new Block32<T>(src);
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Load, Closures(Numeric32u)]
+        [MethodImpl(Inline), Load, Closures(UInt32k)]
         internal static Block64<T> unsafeload<T>(W64 w, Span<T> src)
             where T : unmanaged
                 => new Block64<T>(src);
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Load, Closures(Numeric32u)]
+        [MethodImpl(Inline), Load, Closures(UInt32k)]
         public static Block128<T> unsafeload<T>(W128 w, Span<T> src)
             where T : unmanaged
                 => new Block128<T>(src);
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Load, Closures(Numeric32u)]
+        [MethodImpl(Inline), Load, Closures(UInt32k)]
         internal static Block256<T> unsafeload<T>(W256 w, Span<T> src)
             where T : unmanaged
                 => new Block256<T>(src);
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Load, Closures(Numeric32u)]
+        [MethodImpl(Inline), Load, Closures(UInt32k)]
         internal static Block512<T> unsafeload<T>(W512 w, Span<T> src)
             where T : unmanaged
                 => new Block512<T>(src);

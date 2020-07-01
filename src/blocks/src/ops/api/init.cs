@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8)]
+        [MethodImpl(Inline), Init, Closures(Numeric8k)]
         public static Block8<T> init<T>(W8 w, Span<T> src)
             where T : unmanaged        
                 => unsafeload(w, src.Slice(0, length<T>(w)));
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16)]
+        [MethodImpl(Inline), Init, Closures(Numeric8x16k)]
         public static Block16<T> init<T>(W16 w, Span<T> src)
             where T : unmanaged        
                 => unsafeload(w, src.Slice(0, length<T>(w)));
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Init, Closures(Numeric8x16x32)]
+        [MethodImpl(Inline), Init, Closures(Numeric8x16x32k)]
         public static Block32<T> init<T>(W32 w, Span<T> src)
             where T : unmanaged        
                 => unsafeload(w, src.Slice(0, length<T>(w)));

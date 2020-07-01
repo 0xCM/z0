@@ -11,7 +11,7 @@ namespace Z0
 
     partial class BC
     {
-        [Closures(Numeric16x32x64u)]
+        [Closures(UInt16x32x64k)]
         public readonly struct ByteSwap<T> : IUnaryOp<T>
             where T : unmanaged        
         {

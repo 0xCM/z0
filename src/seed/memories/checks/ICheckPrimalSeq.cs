@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
     using static AppErrorMsg;    
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -26,13 +25,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         bool ContentEqual(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)  
-        {
-            var count = length(lhs,rhs);
-            for(var i=0; i<count; i++)
-                if(refs.skip(lhs, i) != refs.skip(rhs, i))
-                    return false;
-            return true;
-        }      
+            => Spans.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -40,13 +33,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         bool ContentEqual(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)  
-        {
-            var count = length(lhs,rhs);
-            for(var i=0; i<count; i++)
-                if(refs.skip(lhs, i) != refs.skip(rhs, i))
-                    return false;
-            return true;
-        }      
+            => Spans.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -54,13 +41,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         bool ContentEqual(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs)  
-        {
-            var count = length(lhs,rhs);
-            for(var i=0; i<count; i++)
-                if(refs.skip(lhs, i) != refs.skip(rhs, i))
-                    return false;
-            return true;
-        }      
+            => Spans.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -68,13 +49,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         bool ContentEqual(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs)  
-        {
-            var count = length(lhs,rhs);
-            for(var i=0; i<count; i++)
-                if(refs.skip(lhs, i) != refs.skip(rhs, i))
-                    return false;
-            return true;
-        }      
+            => Spans.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -82,13 +57,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         bool ContentEqual(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs)  
-        {
-            var count = length(lhs,rhs);
-            for(var i=0; i<count; i++)
-                if(refs.skip(lhs, i) != refs.skip(rhs, i))
-                    return false;
-            return true;
-        }      
+            => Spans.eq(lhs,rhs);
 
         /// <summary>
         /// Asserts the equality of two boolean arrays

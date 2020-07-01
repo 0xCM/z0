@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="n">The width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Ones, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Ones, Closures(UInt8x16k)]
         public static BitGrid16<T> ones<T>(W16 w)
             where T : unmanaged
                 => init16<T>(ushort.MaxValue);
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="n">The width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Ones, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Ones, Closures(UInt8x16x32k)]
         public static BitGrid32<T> ones<T>(W32 w)
             where T : unmanaged
                 => init32<T>(uint.MaxValue);

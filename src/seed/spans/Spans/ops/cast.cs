@@ -11,28 +11,28 @@ namespace Z0
     using static System.Runtime.InteropServices.MemoryMarshal;    
 
     using static Konst;
+    using static Root;
 
     partial class Spans
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src, int offset, int length)
             where T : unmanaged
-                => Cast<byte,T>(src.Slice(offset, length * Unsafe.SizeOf<T>()));
+                => Cast<byte,T>(src.Slice(offset, length * size<T>()));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cast<T>(Span<byte> src, int offset, int length)
             where T : unmanaged
-                => Cast<byte,T>(src.Slice(offset, length * Unsafe.SizeOf<T>()));
+                => Cast<byte,T>(src.Slice(offset, length * size<T>()));
         
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
             where T : unmanaged
-                => cast<T>(src, 0, src.Length/Unsafe.SizeOf<T>());
+                => cast<T>(src, 0, src.Length/size<T>());
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cast<T>(Span<byte> src)
             where T : unmanaged        
-                => cast<T>(src, 0, src.Length/Unsafe.SizeOf<T>());
-
+                => cast<T>(src, 0, src.Length/size<T>());
     }
 }

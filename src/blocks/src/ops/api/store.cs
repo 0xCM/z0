@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="offset">The absolute number of bytes, measured from the head of the data structure, to skip</param>
         /// <param name="count">The number of to copy from the source into the target</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        [MethodImpl(Inline), Store, Closures(Numeric32u)]
+        [MethodImpl(Inline), Store, Closures(UInt32k)]
         public static void store<T>(in byte src, in Block256<T> dst, int offset, int count)
             where T : unmanaged        
         {            
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="offset">The absolute number of bytes, measured from the head of the data structure, to skip</param>
         /// <param name="count">The number of to copy from the source into the target</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        [MethodImpl(Inline), Store, Closures(Numeric32u)]
+        [MethodImpl(Inline), Store, Closures(UInt32k)]
         public static void store<T>(in byte src, in Block512<T> dst, int offset, int count)
             where T : unmanaged        
         {            

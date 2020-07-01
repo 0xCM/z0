@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8)]
+        [MethodImpl(Inline), Op, Closures(Numeric8k)]
         public static ReadOnlySpan<T> view<T>(in Fixed8 src)
             where T : unmanaged
                 => view<Fixed8,T>(src);
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8x16)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
         public static ReadOnlySpan<T> view<T>(in Fixed16 src)
             where T : unmanaged
                 => view<Fixed16,T>(src);
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8x16x32)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
         public static ReadOnlySpan<T> view<T>(in Fixed32 src)
             where T : unmanaged
                 => view<Fixed32,T>(src);

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static As;
 
     partial class BitGrid
     {        
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="index">The offset</param>
         /// <param name="index">The bit count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Slice, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Slice, Closures(UInt8x16x32k)]
         public static BitVector<T> slice<T>(BitGrid32<T> g, byte index, byte length)
             where T : unmanaged
                 => generic<T>(gbits.slice(g.Data, uint8(index*length), length));

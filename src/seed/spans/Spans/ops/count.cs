@@ -21,8 +21,8 @@ namespace Z0
         public static int count<T>(ReadOnlySpan<T> src, Func<T,bool> f)
         {
             int count = 0;
-            for(var i=0; i<src.Length; i++)
-                if(f(skip(src,i)))
+            for(var i=0u; i<src.Length; i++)
+                if(f(As.skip(src,i)))
                     count++;
             return count;
         }

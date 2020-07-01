@@ -48,7 +48,7 @@ namespace Z0
                    let a = f.Tag<BinaryLiteralAttribute>().Require()
                    select literal(@base, f.Name, (T)f.GetRawConstantValue(), a.Text);
 
-        [MethodImpl(Inline), Op, Closures(Numeric64u)]
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static T[] values<T>(Base2 @base, Type src)
             where T : unmanaged
         {

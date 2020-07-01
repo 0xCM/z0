@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Xor, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Xor, Closures(UInt8x16k)]
         public static BitGrid16<T> xor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
                 => init16<T>(math.xor(gx,gy));
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Xor, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Xor, Closures(UInt8x16x32k)]
         public static BitGrid32<T> xor<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
                 => init32<T>(math.xor(gx,gy));

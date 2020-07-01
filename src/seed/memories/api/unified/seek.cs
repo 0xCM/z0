@@ -31,14 +31,5 @@ namespace Z0
         public static ref T seek<T>(Span<T> src, int count)
             => ref seek(ref head(src), count); 
 
-        /// <summary>
-        /// Adds an offset to the head of a span, measured relative to 64-bit segments, and returns the resulting reference
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="count">The number of 64-bit segments to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref ulong seek64<T>(Span<T> src, int count)
-            => ref Spans.seek64(src,count);
     }
 }

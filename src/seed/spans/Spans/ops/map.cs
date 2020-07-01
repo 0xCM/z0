@@ -21,12 +21,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> map<S,T>(ReadOnlySpan<S> src, Func<S,T> f, Span<T> dst)
         {
-            ref readonly var input = ref head(src);
-            ref var output = ref head(dst);
+            ref readonly var input = ref As.first(src);
+            ref var output = ref As.first(dst);
             int count = src.Length;
             
-            for(var i=0; i<count; i++)
-                seek(ref output, i)= f(skip(in input, i));
+            for(var i=0u; i<count; i++)
+                As.seek(output, i)= f(As.skip(in input, i));
             
             return dst;
         }
@@ -41,12 +41,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> mapi<S,T>(ReadOnlySpan<S> src, Func<int,S,T> f, Span<T> dst)
         {
-            ref readonly var input = ref head(src);
-            ref var output = ref head(dst);
+            ref readonly var input = ref As.first(src);
+            ref var output = ref As.first(dst);
             int count = src.Length;
             
-            for(var i=0; i<count; i++)
-                seek(ref output, i)= f(i,skip(in input, i));
+            for(var i=0u; i<count; i++)
+                As.seek(output, i)= f((int)i,As.skip(in input, i));
             
             return dst;
         }

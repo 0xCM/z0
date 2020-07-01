@@ -12,8 +12,15 @@ namespace Z0
     [ApiHost]
     public readonly partial struct As
     {
-        const NumericKind Closure = Numeric8x64u;    
+        const NumericKind Closure = UInt8x64k;    
 
+        [MethodImpl(Inline)]
+        internal static int length<S,T>(ReadOnlySpan<S> lhs, ReadOnlySpan<T> rhs)
+        {
+            var l1 = lhs.Length;
+            var l2 = rhs.Length;
+            return l1 == l2 ? l1 : -1;
+        }
 
         [MethodImpl(Inline)]   
         internal static T[] alloc<T>(int length)

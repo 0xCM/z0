@@ -8,16 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class BitGrid
     {
-        [MethodImpl(Inline), Rotr, Closures(Numeric8x16u)]
+        [MethodImpl(Inline), Rotr, Closures(UInt8x16k)]
         public static BitGrid16<T> rotr<T>(BitGrid16<T> g, byte offset)
             where T : unmanaged
                 => init16<T>(Bits.rotr(g, offset));
 
-        [MethodImpl(Inline), Rotr, Closures(Numeric8x16x32u)]
+        [MethodImpl(Inline), Rotr, Closures(UInt8x16x32k)]
         public static BitGrid32<T> rotr<T>(BitGrid32<T> g, byte offset)
             where T : unmanaged
                 => init32<T>(Bits.rotr(g, offset));

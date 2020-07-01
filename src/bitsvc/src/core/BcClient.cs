@@ -12,7 +12,7 @@ namespace Z0
     [ApiHost("bits")]
     public readonly struct BcServices : IApiHost<BcServices>
     {
-        [MethodImpl(Inline), Op, Closures(Numeric16x32x64u)]
+        [MethodImpl(Inline), Op, Closures(UInt16x32x64k)]
         public static T byteswap<T>(T a)
             where T : unmanaged        
                 => BC.byteswap<T>().Invoke(a);

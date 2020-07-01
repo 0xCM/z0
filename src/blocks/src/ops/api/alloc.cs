@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8)]
+        [MethodImpl(Inline), Alloc, Closures(Numeric8k)]
         public static Block8<T> alloc<T>(W8 w)
             where T : unmanaged        
                 => alloc<T>(w,1);
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16)]
+        [MethodImpl(Inline), Alloc, Closures(Numeric8x16k)]
         public static Block16<T> alloc<T>(W16 w)
             where T : unmanaged        
                 => alloc<T>(w,1);
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(Numeric8x16x32)]
+        [MethodImpl(Inline), Alloc, Closures(Numeric8x16x32k)]
         public static Block32<T> alloc<T>(W32 w)
             where T : unmanaged        
                 => alloc<T>(w,1);
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(Numeric8u)]
+        [Alloc, Closures(UInt8k)]
         public static Block8<T> alloc<T>(W8 w, int count, T t = default)
             where T : unmanaged        
                 => new Block8<T>(new T[count * length<T>(w)]);
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(Numeric8x16u)]
+        [Alloc, Closures(UInt8x16k)]
         public static Block16<T> alloc<T>(W16 w, int count, T t = default)
             where T : unmanaged        
                 => new Block16<T>(new T[count * length<T>(w)]);
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(Numeric8x16x32u)]
+        [Alloc, Closures(UInt8x16x32k)]
         public static Block32<T> alloc<T>(W32 w, int count, T t = default)
             where T : unmanaged        
                 => new Block32<T>(new T[count * length<T>(w)]);

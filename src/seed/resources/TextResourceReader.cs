@@ -30,7 +30,7 @@ namespace Z0
                 ref readonly var address = ref As.skip(locations,(uint)i);
                 var data = Addresses.read<byte>(address, ResLength);
                 var content = Render(Symbols(data));
-                seek(dst, i) = TextResource.Define((ulong)address, address, content);            
+                As.seek(dst, (uint)i) = TextResource.Define((ulong)address, address, content);            
             }
             return count;
         }
@@ -56,7 +56,7 @@ namespace Z0
                 ref readonly var address = ref As.skip(locations,(uint)i);
                 var value = Spans.cast<char>(Addresses.read<byte>(address, ResLength)).ToString();
                 var id = EnumValue.literal<E,int>(i + 1);
-                seek(dst,i) = TextResource.Define(id, address, value);            
+                As.seek(dst,(uint)i) = TextResource.Define(id, address, value);            
             }
             return dst;
         }

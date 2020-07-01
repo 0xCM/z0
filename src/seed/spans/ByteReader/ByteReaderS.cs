@@ -37,8 +37,8 @@ namespace Z0
                 return 0;
 
             var dst = 0ul;
-            for(var i=0; i<count; i++)
-                As.seek8(ref dst, i) = Root.skip(src,i);            
+            for(var i=0u; i<count; i++)
+                As.seek8(dst, i) = skip(src,i);            
             
             return dst;
         }
@@ -70,7 +70,7 @@ namespace Z0
         public static ulong Read1(ReadOnlySpan<byte> src)
         {
             var dst = 0ul;
-            seek8(ref dst, 0) = skip(src,0);
+            seek8(dst, 0) = skip(src,0);
             return dst;        
         }
 
@@ -78,9 +78,9 @@ namespace Z0
         public static ulong Read2(ReadOnlySpan<byte> src)
         {
             var dst = 0ul;
-            var i = 0;
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
+            var i = 0u;
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
             return dst;        
         }
 
@@ -88,10 +88,10 @@ namespace Z0
         public static ulong Read3(ReadOnlySpan<byte> src)
         {
             var dst = 0ul;
-            var i = 0;
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
+            var i = 0u;
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
             return dst;        
         }
 
@@ -99,11 +99,11 @@ namespace Z0
         public static ulong Read4(ReadOnlySpan<byte> src)
         {
             var dst = 0ul;
-            var i = 0;
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
+            var i = 0u;
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
             return dst;        
         }
 
@@ -111,12 +111,12 @@ namespace Z0
         public static ulong Read5(ReadOnlySpan<byte> src)
         {
             var dst = 0ul;
-            var i = 0;
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
+            var i = 0u;
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
             return dst;        
         }
 
@@ -125,13 +125,13 @@ namespace Z0
         public static ulong Read6(ReadOnlySpan<byte> src)
         {
             var dst = 0ul;
-            var i = 0;
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
+            var i = 0u;
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
             return dst;        
         }
 
@@ -139,14 +139,14 @@ namespace Z0
         public static ulong Read7(ReadOnlySpan<byte> src)
         {
             var dst = 0ul;
-            var i = 0;
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
+            var i = 0u;
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
             return dst;        
         }
 
@@ -154,15 +154,15 @@ namespace Z0
         public static ulong Read8(ReadOnlySpan<byte> src)
         {
             var dst = 0ul;
-            var i = 0;
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
-            seek8(ref dst, i++) = skip(src,i);
+            var i = 0u;
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src,i);
             return dst;        
         }
 
@@ -170,14 +170,14 @@ namespace Z0
         static ulong Read8_NoInc(ReadOnlySpan<byte> src)
         {
             var dst = 0ul;
-            seek8(ref dst, 0) = skip(src,0);            
-            seek8(ref dst, 1) = skip(src,1);            
-            seek8(ref dst, 2) = skip(src,2);            
-            seek8(ref dst, 3) = skip(src,3);            
-            seek8(ref dst, 4) = skip(src,4);            
-            seek8(ref dst, 5) = skip(src,5);            
-            seek8(ref dst, 6) = skip(src,6);            
-            seek8(ref dst, 7) = skip(src,7);    
+            seek8(dst, 0) = skip(src,0);            
+            seek8(dst, 1) = skip(src,1);            
+            seek8(dst, 2) = skip(src,2);            
+            seek8(dst, 3) = skip(src,3);            
+            seek8(dst, 4) = skip(src,4);            
+            seek8(dst, 5) = skip(src,5);            
+            seek8(dst, 6) = skip(src,6);            
+            seek8(dst, 7) = skip(src,7);    
             return dst;        
         }
 

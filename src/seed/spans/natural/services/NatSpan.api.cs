@@ -7,11 +7,24 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;
+    using static System.Runtime.InteropServices.MemoryMarshal;
 
     using static Konst;
+    using static Root;
 
-    public static class NatSpan
+    [ApiHost]
+    public readonly struct NatSpan
     {
+        /// <summary>
+        /// Loads a bytespan of natural length 16 from a generic source span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static NatSpan<N16,byte> bytes<T>(Span<T> src, N16 n)
+            where T : unmanaged            
+                => load(AsBytes(src),n);
+
         /// <summary>
         /// Loads a bytespan of natural length from a generic source span
         /// </summary>
@@ -21,7 +34,8 @@ namespace Z0
         public static NatSpan<N,byte> bytes<N,T>(Span<T> src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => NatSpan.load(MemoryMarshal.AsBytes(src),n);
+                => load(AsBytes(src),n);
+
 
         /// <summary>
         /// Allocates span of natural length
@@ -33,7 +47,7 @@ namespace Z0
         public static NatSpan<N,T> alloc<N,T>(N n = default, T t = default) 
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new NatSpan<N,T>(new T[TypeNats.value<N>()]);
+                => new NatSpan<N,T>(sys.alloc<T>(value<N>()));
 
         /// <summary>
         /// Fills a target block with replicated cell data
@@ -59,7 +73,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             
-            Require(src.Length >= (int)TypeNats.value<N>());
+            Require(src.Length >= (int)value<N>());
             return new NatSpan<N,T>(src);
         }
 
@@ -75,7 +89,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {                
-            var data = MemoryMarshal.CreateSpan(ref src, (int)TypeNats.value<N>());
+            var data = CreateSpan(ref src, (int)value<N>());
             return new NatSpan<N,T>(data);
         }
 
