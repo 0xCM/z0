@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines the state of the routine capture workflow at a given step
     /// </summary>
-    public readonly struct ExtractState : ITextual, IAddressable, IIdentified<OpIdentity>
+    public readonly struct ExtractState : ITextual, IAddressable64, IIdentified<OpIdentity>
     {
         /// <summary>
         /// The operation identifier

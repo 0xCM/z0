@@ -7,21 +7,13 @@ namespace Z0
     /// <summary>
     /// Characterizes an address-identified target
     /// </summary>
-    public interface IAddressable
+    public interface IAddressable64
     {
         MemoryAddress Address {get;}
     }     
 
-    public interface IAddressable<F> : IAddressable, INullity, INullary<F>
-        where F : struct, IAddressable<F>
-    {
+    // public interface IMemoryAddress64 : IAddressable64, IIdentification<MemoryAddress>
+    // {
 
-    }
-
-    public interface IAddressable<W,T> : IAddressable
-        where W : unmanaged, ITypeWidth
-        where T : unmanaged
-    {
-        
-    }       
+    // }
 }

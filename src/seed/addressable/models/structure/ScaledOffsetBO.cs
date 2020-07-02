@@ -12,16 +12,16 @@ namespace Z0
     /// <summary>
     /// Represents an address A as a base address B with a byte-scaled O-offset, A := Base + Scale*Offset
     /// </summary>
-    public readonly struct ScaledOffset
+    public readonly struct ScaledOffset<B,O>
     {
-        public readonly MemoryAddress Base;
+        public readonly B Base;
 
-        public readonly MemoryAddress Offset;
+        public readonly O Offset;
         
         public readonly byte Scale;
 
         [MethodImpl(Inline)]
-        public ScaledOffset(MemoryAddress @base, MemoryAddress offset, byte scale)
+        public ScaledOffset(B @base, O offset, byte scale)
         {
             Base = @base;
             Offset = offset;

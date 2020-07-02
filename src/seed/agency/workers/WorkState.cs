@@ -9,11 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using Z0.Asm;
-
     using static Konst;
 
-    public struct CommandProcessorState
+    public struct WorkState
     {
         internal object Current;
         
@@ -23,14 +21,14 @@ namespace Z0
             => Current;
 
         [MethodImpl(Inline)]
-        public CommandProcessorState(object state, Seq<IOperands> commands)
+        public WorkState(object state, Seq<IOperands> commands)
         {
             Current = state;
             Commands = commands.ToList();
         }
 
         [MethodImpl(Inline)]
-        public CommandProcessorState(object state)
+        public WorkState(object state)
         {
             Current = state;
             Commands = new List<IOperands>();

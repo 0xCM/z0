@@ -9,12 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct MemoryAddress<W,T> : IAddressable<W,T>, IIdentification<MemoryAddress>
+    public readonly struct MemoryAddress<W,T> : IAddress<W,T>
         where W : unmanaged, INumericWidth
         where T : unmanaged
     {
-        public static MemoryAddress<W,T> Zero => default;
-
         public T Location {get;}
 
         public NumericWidth Size
@@ -37,12 +35,7 @@ namespace Z0
 
         public string Identifier 
             => Cast.to<T,ulong>(Location).ToString("x") + "h";
-
-        MemoryAddress IAddressable.Address 
-        {
-            [MethodImpl(Inline)]
-            get => Location64;
-        }
+        
 
         [MethodImpl(Inline)]
         public static MemoryAddress<W64,ulong> Define(ulong location)
@@ -131,5 +124,8 @@ namespace Z0
         public unsafe P* ToPointer<P>()
             where P : unmanaged
                 => (P*)Location64;
+
+        public static MemoryAddress<W,T> Zero 
+            => default;
     }
 }

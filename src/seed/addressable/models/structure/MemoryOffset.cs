@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct MemoryOffset : IAddressable<MemoryOffset>
+    public readonly struct MemoryOffset : IAddressable64
     {
         public MemoryAddress Base {get;}
 
@@ -35,7 +35,7 @@ namespace Z0
             get => IsEmpty ? MemoryAddress.Empty : (Base + Offset);
         }
 
-        MemoryAddress IAddressable.Address 
+        MemoryAddress IAddressable64.Address 
             => IsEmpty ? MemoryAddress.Empty : (Base + Offset);
 
         public MemoryOffset Zero  

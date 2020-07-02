@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Pairs a located operation with, well, its location
     /// </summary>
-    public readonly struct OpAddress : ITextual, IAddressable<OpAddress>
+    public readonly struct OpAddress : ITextual, IAddressable64
     {        
         public OpUri OpUri {get;}
 

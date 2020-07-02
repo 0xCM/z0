@@ -7,24 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Konst;
 
-    public interface ICommandProcessor
+    public interface IWorker
     {
-        void Process(IOperands args, ICommandProcessorState state) {}
+        void Process(IOperands args, IWorkState state) {}
     }
 
-    public interface ICommandProcessor<C>: ICommandProcessor
+    public interface IWorker<C>: IWorker
         where C : IOperands
     {
         
     }
 
-    public interface ICommandProcessor<C,S> : ICommandProcessor<C>
+    public interface IWorker<C,S> : IWorker<C>
         where C : unmanaged, IOperands
-        where S : ICommandProcessorState
+        where S : IWorkState
     {
         void Process(in C cmd, ref S state);      
 
@@ -33,10 +31,10 @@ namespace Z0
             => Process((C)cmd, ref state);
     }
             
-    public interface ICommandProcessor<P,C,S> : ICommandProcessor<C>
-        where P : unmanaged, ICommandProcessor<P,C,S>
+    public interface IWorker<P,C,S> : IWorker<C>
+        where P : unmanaged, IWorker<P,C,S>
         where C : unmanaged, IOperands
-        where S : ICommandProcessorState
+        where S : IWorkState
     {
         void Process(in C cmd, ref S state);    
     }    

@@ -10,18 +10,18 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Represents an address A as a base address B with a byte-scaled O-offset, A := Base + Scale*Offset
+    /// Represents an address A as a base address B with an S-scaled O-offset, A := Base + Scale*Offset
     /// </summary>
-    public readonly struct ScaledOffset
+    public readonly struct ScaledOffset<B,O,S>
     {
-        public readonly MemoryAddress Base;
+        public readonly B Base;
 
-        public readonly MemoryAddress Offset;
-        
-        public readonly byte Scale;
+        public readonly O Offset;
+
+        public readonly S Scale;        
 
         [MethodImpl(Inline)]
-        public ScaledOffset(MemoryAddress @base, MemoryAddress offset, byte scale)
+        public ScaledOffset(B @base, O offset, S scale)
         {
             Base = @base;
             Offset = offset;

@@ -12,7 +12,7 @@ namespace Z0
     using static V0;
     using static As;
 
-    public readonly struct MemRef : IAddressable<MemRef>, ITextual, IEquatable<MemRef>
+    public readonly struct MemRef : IAddressable64, ITextual, IEquatable<MemRef>
     {
         readonly Vector128<ulong> Data;        
         

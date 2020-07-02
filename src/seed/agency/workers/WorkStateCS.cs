@@ -8,14 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using Z0.Asm;
-
     using static Konst;
 
     /// <summary>
     /// Tracks the state of a process stream and the commands that effected the state
     /// </summary>
-    public struct CommandProcessorState<C,S> : ICommandProcessorState<C,S>
+    public struct WorkState<C,S> : IWorkState<C,S>
         where C : unmanaged, IOperands
     {
         internal S Current;
@@ -23,7 +21,7 @@ namespace Z0
         List<C> Commands;
 
         [MethodImpl(Inline)]
-        internal CommandProcessorState(S state)
+        public WorkState(S state)
         {
             Current = state;
             Commands = new List<C>();
@@ -47,7 +45,7 @@ namespace Z0
         public void Handled(in C cmd)
             => Commands.Add(cmd);
         
-        public CommandProcessorState Generalized
-            => new CommandProcessorState(Current, from c in Processed select c as IOperands);
+        public WorkState Generalized
+            => new WorkState(Current, from c in Processed select c as IOperands);
     }
 }

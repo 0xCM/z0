@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using Z0.Asm;
-
-    public interface ICommandProcessorState
+    public interface IWorkState
     {
         /// <summary>
         /// The state effected by the processed commands
@@ -26,18 +22,18 @@ namespace Z0
         Seq<IOperands> Processed {get;}
     }
 
-    public interface ICommandProcessorState<S> : ICommandProcessorState
+    public interface IWorkState<S> : IWorkState
     {
         /// <summary>
         /// The state effected by the processed commands
         /// </summary>
         new S Evolved {get;}
 
-        object ICommandProcessorState.Evolved 
+        object IWorkState.Evolved 
             => Evolved;
     }
 
-    public interface ICommandProcessorState<C,S> : ICommandProcessorState<S>
+    public interface IWorkState<C,S> : IWorkState<S>
         where C : unmanaged, IOperands
     {
         /// <summary>
@@ -50,10 +46,10 @@ namespace Z0
         /// </summary>
         new Seq<C> Processed {get;}
 
-        Seq<IOperands> ICommandProcessorState.Processed 
+        Seq<IOperands> IWorkState.Processed 
             => from c in Processed select c as IOperands;
 
-        void ICommandProcessorState.Handled(IOperands cmd) 
+        void IWorkState.Handled(IOperands cmd) 
             => Handled((C)cmd);
     }
 }
