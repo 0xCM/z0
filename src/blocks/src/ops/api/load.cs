@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;    
 
     using static Konst;        
-    using static Memories;
+    using static As;
 
     partial class Blocks
     {
@@ -27,7 +27,7 @@ namespace Z0
             if(!aligned<T>(w,src.Length - offset))
                 AppErrors.ThrowBadSize(w, src.Length - offset);      
 
-            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+            return unsafeload(w, offset == 0 ? src : slice(src,offset));
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
             if(!aligned<T>(w,src.Length - offset))
                 AppErrors.ThrowBadSize(w, src.Length - offset);      
 
-            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+            return unsafeload(w, offset == 0 ? src : slice(src,offset));
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
             if(!aligned<T>(w,src.Length - offset))
                 AppErrors.ThrowBadSize(w, src.Length - offset);      
 
-            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+            return unsafeload(w, offset == 0 ? src : slice(src,offset));
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
             if(!aligned<T>(w,src.Length - offset))
                 AppErrors.ThrowBadSize(w, src.Length - offset);      
 
-            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+            return unsafeload(w, offset == 0 ? src : slice(src,offset));
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
             if(!aligned<T>(w, src.Length - offset))
                 AppErrors.ThrowBadSize(w, src.Length - offset);      
 
-            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+            return unsafeload(w, offset == 0 ? src : slice(src,offset));
         }
 
  
@@ -113,7 +113,7 @@ namespace Z0
             if(!aligned<T>(w,src.Length - offset))
                 AppErrors.ThrowBadSize(w, src.Length - offset);      
 
-            return unsafeload(w,offset == 0 ? src : src.Slice(offset));
+            return unsafeload(w,offset == 0 ? src : slice(src,offset));
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Z0
             if(!aligned<T>(w,src.Length - offset))
                 AppErrors.ThrowBadSize(w, src.Length - offset);      
 
-            return unsafeload(w,offset == 0 ? src : src.Slice(offset));
+            return unsafeload(w,offset == 0 ? src : slice(src,offset));
         }
     }
 }

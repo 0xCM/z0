@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Root
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static NK<T> kNum<T>()
             where T : unmanaged
                 => default;

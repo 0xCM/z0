@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;    
 
+    using N = N32;
+
     public readonly struct N32 : 
         INativeNatural,
         INatSeq<N32>,  
@@ -20,20 +22,23 @@ namespace Z0
     {
         public const ulong Value = 32;
 
-        public static N32 Rep => default;
+        public static N N => default;
 
         public static NatSeq<N3,N2> Seq => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N32 src) => 32;
+        public static implicit operator int(N src) => 32;
 
         [MethodImpl(Inline)]
-        public static implicit operator W32(N32 src) => default(W32);
+        public static implicit operator W32(N src) 
+            => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator N32(W32 src) => default(N32);
+        public static implicit operator N(W32 src) 
+            => default;
 
-        public ulong NatValue => Value;
+        public ulong NatValue 
+            => Value;
 
         public override string ToString() 
             => Value.ToString();

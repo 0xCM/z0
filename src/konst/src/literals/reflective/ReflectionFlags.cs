@@ -37,7 +37,7 @@ namespace Z0
         /// <summary>
         /// All declared instance members
         /// </summary>
-        public const BindingFlags BF_DeclaredInstance =  FlattenHierarchy | Public | NonPublic | Instance;
+        public const BindingFlags BF_DeclaredInstance = FlattenHierarchy | Public | NonPublic | Instance;
 
         /// <summary>
         ///  All public static members, declared or inherited
@@ -63,5 +63,10 @@ namespace Z0
         ///  All members, declared or inherited
         /// </summary>
         public const BindingFlags BF_All = BF_Public | BF_Static | BF_NonPublic | BF_Instance;
+
+        public const BindingFlags BF_Declared = DeclaredOnly | BF_Public | BF_Static | BF_NonPublic | BF_Instance;
+
+        public const BindingFlags BF_DeclaredStatic = DeclaredOnly | BF_Public | BF_NonPublic | BF_Static;
+
     }
 }

@@ -26,6 +26,6 @@ namespace Z0.Asm.Data
         }
 
         public string Format()
-            => text.concat(Identifier.Format(), " := ", Value.Format());
+            => text.concat(Identifier.ToString(), " := ", Value.Format());
     }
 }

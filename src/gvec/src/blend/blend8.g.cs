@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Konst; 
-    using static As;
+    using static V0;
 
     partial class gvec
     {
@@ -63,13 +63,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vblend(v8u(x), v8u(y), spec));
+                return vgeneric<T>(dvec.vblend(v8u(x), v8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vblend(v16u(x), v16u(y), spec));
+                return vgeneric<T>(dvec.vblend(v16u(x), v16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vblend(v32u(x), v32u(y), spec));
+                return vgeneric<T>(dvec.vblend(v32u(x), v32u(y), spec));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vblend(v64u(x), v64u(y), spec));
+                return vgeneric<T>(dvec.vblend(v64u(x), v64u(y), spec));
             else
                 return vblend_i(x,y,spec);
         }
@@ -79,15 +79,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vblend(v8i(x), v8i(y), spec));
+                return vgeneric<T>(dvec.vblend(v8i(x), v8i(y), spec));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vblend(v16i(x), v16i(y), spec));
+                return vgeneric<T>(dvec.vblend(v16i(x), v16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vblend(v32i(x), v32i(y), spec));
+                return vgeneric<T>(dvec.vblend(v32i(x), v32i(y), spec));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vblend(v64i(x), v64i(y), spec));
+                return vgeneric<T>(dvec.vblend(v64i(x), v64i(y), spec));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -95,13 +95,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vblend(v8u(x), v8u(y), spec));
+                return vgeneric<T>(dvec.vblend(v8u(x), v8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vblend(v16u(x), v16u(y), spec));
+                return vgeneric<T>(dvec.vblend(v16u(x), v16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vblend(v32u(x), v32u(y), spec));
+                return vgeneric<T>(dvec.vblend(v32u(x), v32u(y), spec));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vblend(v64u(x), v64u(y), spec));
+                return vgeneric<T>(dvec.vblend(v64u(x), v64u(y), spec));
             else
                 return vblend_i(x,y,spec);
         }
@@ -111,15 +111,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vblend(v8i(x), v8i(y), spec));
+                return vgeneric<T>(dvec.vblend(v8i(x), v8i(y), spec));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vblend(v16i(x), v16i(y), spec));
+                return vgeneric<T>(dvec.vblend(v16i(x), v16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vblend(v32i(x), v32i(y), spec));
+                return vgeneric<T>(dvec.vblend(v32i(x), v32i(y), spec));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vblend(v64i(x), v64i(y), spec));
+                return vgeneric<T>(dvec.vblend(v64i(x), v64i(y), spec));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

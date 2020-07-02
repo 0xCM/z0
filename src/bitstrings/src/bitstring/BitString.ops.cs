@@ -10,6 +10,8 @@ namespace Z0
 
     using static Konst;
     using static As;
+    using static Root;
+    using static V0;
 
     partial struct BitString
     {
@@ -19,7 +21,7 @@ namespace Z0
         /// <param name="len">The length of the bitstring</param>
         [MethodImpl(Inline)]
         public static BitString alloc(int len)
-            => new BitString(new byte[len]);
+            => new BitString(sys.alloc(len));
 
         /// <summary>
         /// Loads a bitstring from a bitseq
@@ -46,11 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString load<T>(Vector128<T> src, int? maxbits = null)
             where T : unmanaged        
-        {       
-            ref readonly var data = ref As.@as<Vector128<T>,T>(ref src);            
-            var covered = cover(data, Vector128<T>.Count);
-            return BitString.scalars(covered, maxbits);            
-        }
+                => scalars(cover(vref(ref src), vcount<T>(W128.W)), maxbits);
 
         /// <summary>
         /// Populates a bitstring from a 256-bit cpu vector
@@ -61,11 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString load<T>(Vector256<T> src, int? maxbits = null)
             where T : unmanaged        
-        {       
-            ref readonly var data = ref As.@as<Vector256<T>,T>(ref src);            
-            var covered = cover(data, Vector128<T>.Count);
-            return BitString.scalars(covered, maxbits);            
-        }
+                => scalars(cover(vref(ref src), vcount<T>(W256.W)), maxbits);
 
         /// <summary>
         /// Populates a bitstring from a 256-bit cpu vector
@@ -76,11 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString load<T>(Vector512<T> src, int? maxbits = null)
             where T : unmanaged        
-        {       
-            ref readonly var data = ref As.@as<Vector512<T>,T>(ref src);            
-            var covered = cover(data, Vector128<T>.Count);
-            return BitString.scalars(covered, maxbits);            
-        }
+                => scalars(cover(vref(ref src), vcount<T>(W512.W)), maxbits);
 
         /// <summary>
         /// Constructs a bitstring from a span of bits
@@ -98,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString scalar<T>(T src, int? maxbits = null)
             where T : unmanaged
-                => new BitString(BitStore.bitseq(src, maxbits ?? BitSize.measure<T>()));                
+                => new BitString(BitStore.bitseq(src, maxbits ?? bitsize<T>()));                
 
         /// <summary>
         /// Constructs a bitstring from primal value, using caller-supplied storage instead of allocation
@@ -110,7 +100,7 @@ namespace Z0
         public static BitString scalar<T>(T src, byte[] storage, int? maxbits = null)
             where T : unmanaged
         {
-            var bitseq = BitStore.bitseq(src, maxbits ?? BitSize.measure<T>());
+            var bitseq = BitStore.bitseq(src, maxbits ?? bitsize<T>());
             bitseq.CopyTo(storage);
             return new BitString(storage);
         }
@@ -123,7 +113,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString @enum<T>(T src, int? maxbits = null)
             where T : unmanaged, Enum
-                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? BitSize.measure<T>());        
+                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? bitsize<T>());        
 
         /// <summary>
         /// Constructs a bitstring from span of scalar values
@@ -135,17 +125,19 @@ namespace Z0
         public static BitString scalars<T>(ReadOnlySpan<T> src, int? maxbits = null)
             where T : unmanaged
         {
-            var segbits = BitSize.measure<T>();
+            var segbits = bitsize<T>();
             var bitcount = maxbits ?? segbits*src.Length;
             var k = 0;
-            var bitseq = new byte[bitcount];
+            var buffer = sys.alloc(bitcount);
+            var dst = span(buffer);
+
             for(int i=0; i<src.Length; i++)
             {
-                var bits = BitStore.bitseq(src[i]);
+                var bits = BitStore.bitseq(skip(src,i));
                 for(var j = 0; j<segbits && k<bitcount; j++, k++)
-                    bitseq[k] = bits[j];                        
+                    seek(dst,k) = skip(bits,j);
             }
-            return new BitString(bitseq);
+            return new BitString(buffer);
         }
 
         /// <summary>
@@ -330,6 +322,9 @@ namespace Z0
             return dst;
         }
 
+        public static BitString transpose(BitString src, ulong m, ulong n)
+            => transpose(src,(int)m, (int)n);
+        
         /// <summary>
         /// Overwrites selected target bits with lower bits from the source
         /// </summary>

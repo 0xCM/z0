@@ -15,16 +15,20 @@ namespace Z0
     [ApiHost]
     public readonly struct BitStream
     {
-        public static IEnumerable<bit> from<T>(T src)
+        public static bit[] from<T>(T src)
             where T : struct
         {
-            var bytes = Root.bytes(src).ToArray();
-            for(var i=0; i< bytes.Length; i++)
+            var bytes = Root.bytes(src);
+            var buffer = sys.alloc<bit>(bytes.Length*8);
+            var dst = span(buffer);
+            
+            for(var i=0; i<bytes.Length; i++)
             {
-                var b = bytes[i];
+                var b = skip(bytes,i);
                 for(var j=0; j<8; j++)
-                    yield return bit.test(b,j);
+                    seek(dst,j) = bit.test(b,j);
             }
+            return buffer;
         }
 
         /// <summary>

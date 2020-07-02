@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Linq;
 
     using static Konst;
     using BS = Z0.BitString;
@@ -19,8 +20,8 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="len">The bitstring length</param>
         [MethodImpl(Inline)]
-        public static BitString BitString(this IPolyrand random, BitSize len)
-            => BS.scalars(random.Span<byte>(BitSize.MaxBytes), len);        
+        public static BitString BitString(this IPolyrand random, int len)
+            => BS.load(random.BitStream<byte>().Take((int)len).ToArray());
 
         /// <summary>
         /// Produces a bitstring with randomized length

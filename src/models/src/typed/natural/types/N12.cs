@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;    
+    
+    using N = N12;
 
     public readonly struct N12 : 
         INativeNatural, 
@@ -25,19 +27,24 @@ namespace Z0
             => Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N12 src) => (int)Value;
+        public static implicit operator int(N src) 
+            => (int)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(N12 src) => (byte)Value;
+        public static implicit operator byte(N src) 
+            => (byte)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator ushort(N12 src) => (ushort)Value;
+        public static implicit operator ushort(N src) 
+            => (ushort)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(N12 src) => (uint)Value;
+        public static implicit operator uint(N src) 
+            => (uint)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator ulong(N12 src) => Value;
+        public static implicit operator ulong(N src) 
+            => Value;
 
         [MethodImpl(Inline)]
         public string Format()

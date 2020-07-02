@@ -46,14 +46,32 @@ namespace Z0
 
         void Gen(IAppContext app)
         {
+            term.magenta("Emitting bitmask data");
             ReflectedLiterals.emit(typeof(BitMasks), app.AppPaths);
+
+            term.magenta("Emitting metadata");
             EmitMetadata(app);
+            
+            term.magenta("Emitting documentation");
             EmitDocs(app);
+
+            term.magenta("Emitting resources");
             EmitResources(app);
-            CaptureEmissions(app);
-            EmitEnumDatasets(app);
-            new LiteralFieldEmitter(app).Emit();            
+            
+            term.magenta("Capturing emissions");
+            CaptureEmissions(app);            
+            
         }
+        
+        void Gen2(IAppContext app)
+        {
+            term.magenta("Emitting enum datasets");
+            EmitEnumDatasets(app);
+
+            term.magenta("Emitting literal fields");
+            new LiteralFieldEmitter(app).Emit();                        
+        }
+        
         public CodeResourceIndex Load(IAppContext app)
         {
             var index = new CodeResourceIndex(Assembly.LoadFrom(app.AppPaths.ResBytes.Name));
@@ -62,10 +80,12 @@ namespace Z0
             return index;
 
         }        
+        
         public void Generate(IAppContext app)
         {     
-
+            
             Gen(app);
+
         }
     }
 }

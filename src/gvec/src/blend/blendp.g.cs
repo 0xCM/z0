@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst; 
+    using static V0;
 
     partial class gvec
     {
@@ -25,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector512<T> vblendp<T>(Vector256<T> x, Vector256<T> y, Vector256<T> spec)        
             where T : unmanaged
-                => (vblendv(x,y,spec),vblendv(x,y,vnot(spec)));
+                => (vblendv(x,y,spec), vblendv(x,y, vnot(spec)));
 
         /// <summary>
         /// Efects a "paired" or "permutation" blend that computes vectors
@@ -40,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector512<T> vblendp<T>(Vector512<T> x, Vector256<T> spec)        
             where T : unmanaged
-                => (vblendv(x.Lo,x.Hi,spec),vblendv(x.Lo,x.Hi,vnot(spec)));
+                => (vblendv(x.Lo, x.Hi, spec), vblendv(x.Lo, x.Hi, vnot(spec)));
 
         /// <summary>
         /// Efects a "paired" or "permutation" blend that computes vectors
@@ -55,7 +56,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vblendp<T>(Vector128<T> x, Vector128<T> y, Vector128<T> spec)        
             where T : unmanaged
-                => V0.vconcat(vblendv(x,y,spec),vblendv(x,y,vnot(spec)));
+                => vconcat(vblendv(x,y,spec), vblendv(x,y,vnot(spec)));
 
         /// <summary>
         /// Efects a "paired" or "permutation" blend that computes vectors
@@ -70,6 +71,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vblendp<T>(Vector256<T> x, Vector128<T> spec)        
             where T : unmanaged
-                => V0.vconcat(vblendv(vlo(x),vhi(x),spec),vblendv(vlo(x),vhi(x),vnot(spec)));
+                => vconcat(vblendv(vlo(x),vhi(x),spec), vblendv(vlo(x),vhi(x),vnot(spec)));
     }
 }

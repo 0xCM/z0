@@ -9,6 +9,9 @@ namespace Z0
 
     using static Konst;    
 
+    using N = N128;
+    using W = W128;
+
     public readonly struct N128 : 
         INativeNatural,
         INatSeq<N128>,  
@@ -20,22 +23,34 @@ namespace Z0
         INatDivisible<N128,N32>, 
         INatDivisible<N128,N64>        
     {
-        public const ulong Value = 1ul << 7;      
+        public const ulong Value = 128;
                   
-        public static NatSeq<N1,N2,N8> Seq => default;
-        
-        [MethodImpl(Inline)]
-        public static implicit operator int(N128 src) => 128;
-        
-        [MethodImpl(Inline)]
-        public static implicit operator W128(N128 src) => default(W128);
+        public const string Text = "128";
+
+        public static N N => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator N128(W128 src) => default(N128);
+        public static implicit operator int(N src) 
+            => (int)Value;
+        
+        [MethodImpl(Inline)]
+        public static implicit operator W(N src) 
+            => default;
 
-        public ulong NatValue => Value;
-               
+        [MethodImpl(Inline)]
+        public static implicit operator N(W src) 
+            => default;
+        public ulong NatValue 
+            => Value;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Text;
+                
         public override string ToString() 
-            => Seq.format();
+             => Text;
+
+        public static NatSeq<N1,N2,N8> Seq 
+            => default;        
     }
 }

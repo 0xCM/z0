@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">A reference to the leading cell</param>
         /// <param name="count">The source cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(T[] src)
             => src;
 
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A reference to the cell</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(ref T src)
             => CreateSpan(ref src, 1);
 
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<byte> span8u<T>(ref T src)
             where T : struct
                 => AsBytes(CreateSpan(ref src, 1));
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<ushort> span16u<T>(ref T src)
             where T : struct
                 => cast<ushort>(AsBytes(CreateSpan(ref src, 1)));
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<uint> span32u<T>(ref T src)
             where T : struct
                 => cast<uint>(AsBytes(CreateSpan(ref src, 1)));
@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<ulong> span64u<T>(ref T src)
             where T : struct            
                 => cast<ulong>(AsBytes(CreateSpan(ref src, 1)));
@@ -79,12 +79,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<char> span16c<T>(ref T src)
             where T : struct
                 => cast<char>(AsBytes(CreateSpan(ref src, 1)));
     
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static Span<T> span<T>(IEnumerable<T> src)
             => src.ToArray();
 

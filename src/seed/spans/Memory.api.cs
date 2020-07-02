@@ -12,31 +12,11 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-
+    using static As;
  
     [ApiHost]
     public static unsafe class memory
     {
-        /// <summary>
-        /// Allocates a caller-disposed read-only stream over a block of unmanaged memory
-        /// </summary>
-        /// <param name="pSrc">The address of the leading cell</param>
-        /// <param name="length">The number of available bytes</param>
-        /// <param name="capacity">The size of the working buffer</param>
-        [MethodImpl(Inline)]
-        public static UnmanagedMemoryStream reader(byte* pSrc, long length, long capacity = 1024)
-            => new UnmanagedMemoryStream(pSrc, length, capacity, FileAccess.Read);
-
-        /// <summary>
-        /// Allocates a caller-disposed read/write stream over a block of unmanaged memory
-        /// </summary>
-        /// <param name="pSrc">The address of the leading cell</param>
-        /// <param name="length">The number of available bytes</param>
-        /// <param name="capacity">The size of the working buffer</param>
-        [MethodImpl(Inline)]
-        public static UnmanagedMemoryStream writer(byte* pSrc, long length, long capacity = 1024)
-            => new UnmanagedMemoryStream(pSrc, length, capacity, FileAccess.ReadWrite);
-
         /// <summary>
         /// Copies a specified number of source values to the target and returns the count of copied bytes
         /// </summary>
@@ -50,10 +30,10 @@ namespace Z0
             where S: unmanaged
             where T :unmanaged
         {
-            ref var input = ref Unsafe.As<S,byte>(ref Unsafe.AsRef(in src));
-            ref var target = ref Unsafe.As<T,byte>(ref Unsafe.Add(ref dst, dstOffset));
-            var srcBytes =  (uint)(srcCount*Unsafe.SizeOf<S>());
-            Unsafe.CopyBlock(ref target, ref input, srcBytes);
+            ref var input = ref @as<S,byte>(ref Unsafe.AsRef(in src));
+            ref var target = ref @as<T,byte>(ref add(dst, dstOffset));
+            var srcBytes = (uint)(srcCount*Unsafe.SizeOf<S>());
+            sys.copy(input, ref target, srcBytes);
             return srcBytes;
         }
 
@@ -68,10 +48,9 @@ namespace Z0
         public static void copy<S,T>(ref S src, Span<T> dst)
             where T : unmanaged
         {
-            ref var dstBytes = ref Unsafe.As<T, byte>(ref Root.head(dst));
+            ref var dstBytes = ref @as<T,byte>(ref first(dst));
             Unsafe.WriteUnaligned<S>(ref dstBytes, src);
         }
-
 
         /// <summary>
         /// Copies a contiguous segments of values to a span
@@ -82,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void copy<T>(T* pSrc, Span<T> dst, int offset, uint srcCount)
             where T : unmanaged
-                => Copier.copy(pSrc,dst,offset,srcCount);
+                => Copier.copy(pSrc, dst, offset, srcCount);
 
         /// <summary>
         /// Copies a contiguous segments of bytes from a source location to a target span
@@ -92,7 +71,7 @@ namespace Z0
         /// <param name="srcCount">The number of values to copy</param>
         [MethodImpl(Inline), Op]
         public static unsafe void copy(byte* pSrc, Span<byte> dst, int offset, uint srcCount)
-            => Copier.copy(pSrc,dst,offset,srcCount);
+            => Copier.copy(pSrc, dst, offset, srcCount);
 
         /// <summary>
         /// Copies a byte
@@ -157,7 +136,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store8(byte src, ref byte dst)
-            => *((byte*)Root.ptr(ref dst)) = src;
+            => *(gptr(dst)) = src;
 
         /// <summary>
         /// Projects 16 source bits onto a contiguous sequence of 2 bytes
@@ -166,7 +145,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store16(ushort src, ref byte dst)
-            => *((ushort*)Root.ptr(ref dst)) = src;
+            => *(gptr<ushort>(dst)) = src;
 
         /// <summary>
         /// Projects 32 source bits onto a contiguous sequence of 4 bytes
@@ -175,7 +154,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store32(uint src, ref byte dst)
-            => *((uint*)Root.ptr(ref dst)) = src;
+            => *(gptr<uint>(dst)) = src;
 
         /// <summary>
         /// Projects 32 source bits onto a contiguous sequence of 2 16-bit integers
@@ -184,7 +163,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store32(uint src, ref ushort dst)
-            => *((uint*)Root.ptr(ref dst)) = src;
+            => *(gptr<uint>(dst)) = src;
 
         /// <summary>
         /// Projects 64 source bits onto a contiguous sequence of 8 bytes
@@ -193,7 +172,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store64(ulong src, ref byte dst)
-            => *((ulong*)Root.ptr(ref dst)) = src;        
+            => *(gptr<ulong>(dst)) = src;        
 
         /// <summary>
         /// Projects 64 source bits onto a contiguous sequence of 4 16-bit integers
@@ -202,7 +181,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store64(ulong src, ref ushort dst)
-            => *((ulong*)Root.ptr(ref dst)) = src;        
+            => *(gptr<ulong>(dst)) = src;        
 
         /// <summary>
         /// Projects 64 source bits onto a contiguous sequence of 2 32-bit integers
@@ -211,7 +190,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store64(ulong src, ref uint dst)
-            => *((ulong*)Root.ptr(ref dst)) = src;        
+            => *(gptr<ulong>(dst)) = src;        
 
         /// <summary>
         /// Casts memory cells of one type to another

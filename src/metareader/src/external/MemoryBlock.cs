@@ -53,7 +53,7 @@ namespace Z0.MS
         {
             if (unchecked((ulong)(uint)offset + (uint)byteCount) > (ulong)Length)
             {
-                @throw("Out of bounds");
+                sys.@throw("Out of bounds");
             }
         }
 
@@ -127,7 +127,7 @@ namespace Z0.MS
             uint result = PeekUInt32(offset);
             if (unchecked((int)result != result))
             {
-                @throw("Value overflow");
+                sys.@throw("Value overflow");
             }
 
             return (int)result;
@@ -231,7 +231,7 @@ namespace Z0.MS
 
             if (!TokenTypeIds.IsValidRowId(value))
             {
-                @throw("Reference overflow");
+                sys.@throw("Reference overflow");
             }
 
             return (int)value;
@@ -249,7 +249,7 @@ namespace Z0.MS
 
             if (!HeapHandleType.IsValidHeapOffset(value))
             {
-                @throw("Reference overflow");
+                sys.@throw("Reference overflow");
             }
 
             return (int)value;

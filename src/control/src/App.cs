@@ -18,11 +18,6 @@ namespace Z0
             : base(ContextFactory.CreateAppContext())
         {
 
-
-            var svc = Z0.KnownParts.Service;
-            term.print($"Part location: {svc.SearchLocation}");
-            term.print($"Part Count: {svc.Parts(svc.ComponentPaths).Length}");
-
         }
 
 

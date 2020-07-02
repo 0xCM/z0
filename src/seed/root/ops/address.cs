@@ -10,7 +10,7 @@ namespace Z0
 
     partial class Root
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress address<P>(P* pSrc)
             where P : unmanaged
                 => new MemoryAddress(pSrc);
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static MemoryAddress address<T>(in T src)
             where T : unmanaged
                 => (ulong)gptr(src);

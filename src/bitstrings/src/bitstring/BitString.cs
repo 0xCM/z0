@@ -61,23 +61,22 @@ namespace Z0
         [MethodImpl(Inline)]
         BitString(byte[] src)
         {
-            this.data = src;
+            data = src;
         }
 
         [MethodImpl(Inline)]
         BitString(ReadOnlySpan<byte> src)
         {
-            this.data = src.ToArray();
+            data = src.ToArray();
         }
 
         [MethodImpl(Inline)]
         BitString(ReadOnlySpan<bit> src)
         {
-            this.data = new byte[src.Length];
+            data = new byte[src.Length];
             for(var i=0; i<src.Length; i++)
-                this.data[i] = (byte)src[i];
+                data[i] = (byte)src[i];
         }
-
 
         /// <summary>
         /// Queries/manipulates bit at specified index

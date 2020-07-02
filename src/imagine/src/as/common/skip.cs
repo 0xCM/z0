@@ -51,7 +51,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(in T src, ulong count)
             => ref Add(ref edit(in src), (int)count); 
-
  
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, byte count)
@@ -68,7 +67,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, ulong count)
             => ref skip(in first(src), count);
-
     
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(Span<T> src, byte count)

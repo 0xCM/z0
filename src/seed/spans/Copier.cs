@@ -10,6 +10,7 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
 
     using static Konst;
+    using static As;
 
     [ApiHost]
     public readonly struct Copier
@@ -27,9 +28,9 @@ namespace Z0
             where S: unmanaged
             where T :unmanaged
         {
-            ref var input = ref As<S,byte>(ref AsRef(in src));
-            ref var target = ref As<T,byte>(ref Add(ref dst, dstOffset));
-            var srcBytes =  (uint)(srcCount*SizeOf<S>());
+            ref var input = ref @as<S,byte>(ref edit(src));
+            ref var target = ref As<T,byte>(ref add(dst, dstOffset));
+            var srcBytes =  (uint)(srcCount*Root.size<S>());
             CopyBlock(ref target, ref input, srcBytes);
             return srcBytes;
         }
@@ -45,7 +46,7 @@ namespace Z0
         public static void copy<S,T>(ref S src, Span<T> dst)
             where T : unmanaged
         {
-            ref var dstBytes = ref As<T,byte>(ref Root.head(dst));
+            ref var dstBytes = ref @as<T,byte>(ref first(dst));
             WriteUnaligned<S>(ref dstBytes, src);
         }
 
@@ -57,7 +58,7 @@ namespace Z0
         /// <param name="srcCount">The number of values to copy</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void copy(byte* pSrc, byte* pDst, uint srcCount)
-            => CopyBlock(pDst, pSrc, srcCount);
+            => sys.copy(pSrc, pDst, srcCount);
 
         /// <summary>
         /// Copies a contiguous segments of values from one location to another
@@ -68,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void copy<T>(T* pSrc, T* pDst, uint srcCount)
             where T : unmanaged
-                => CopyBlock(pDst, pSrc, (uint)(SizeOf<T>()*srcCount));
+                => sys.copy(pSrc, pDst, (uint)(SizeOf<T>()*srcCount));
 
         /// <summary>
         /// Copies a contiguous segments of values to a span
@@ -79,7 +80,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void copy<T>(T* pSrc, Span<T> dst, int offset, uint srcCount)
             where T : unmanaged
-                =>  copy(pSrc, As.refptr(ref Root.head(dst), offset), srcCount); 
+                =>  copy(pSrc, gptr(first(dst), offset), srcCount); 
 
         /// <summary>
         /// Copies a contiguous segments of bytes from a source location to a target span
@@ -89,8 +90,7 @@ namespace Z0
         /// <param name="srcCount">The number of values to copy</param>
         [MethodImpl(Inline), Op]
         public static unsafe void copy(byte* pSrc, Span<byte> dst, int offset, uint srcCount)
-            => copy(pSrc, (byte*)AsPointer(ref Root.seek(dst, offset)) , srcCount);
-
+            => copy(pSrc, gptr(seek(dst, (uint)offset)) , srcCount);
 
         /// <summary>
         /// Copies a specified number source cells to the target and returns the count of copied bytes
@@ -107,10 +107,10 @@ namespace Z0
             where S: unmanaged
             where T :unmanaged
         {
-            ref var input =  ref As.uint8(ref As.edit(in Root.skip(src,start)));
-            ref var target = ref As.uint8(ref Root.seek(dst, offset));
-            var bytecount =  (uint)(count*Unsafe.SizeOf<S>());
-            CopyBlock(ref target, ref input, bytecount);
+            ref var input =  ref uint8(ref edit(skip(src,(uint)start)));
+            ref var target = ref uint8(ref seek(dst, (uint)offset));
+            var bytecount =  (uint)(count*Root.size<S>());
+            sys.copy(input, ref target, bytecount);
             return bytecount;
         }
 

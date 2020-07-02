@@ -10,8 +10,7 @@ namespace Z0
 
     using static Konst;
     using static AsIn;
-    using static BitSize;         
-    using static refs;
+    using static Root;
     
     public static class BitStore
     {
@@ -42,10 +41,7 @@ namespace Z0
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
         public static unsafe ReadOnlySpan<char> bitchars(byte value)
-        {
-            var selection = new ReadOnlySpan<byte>((byte*)bitcharP(value), 16);
-            return MemoryMarshal.Cast<byte,char>(selection);
-        }
+            => MemoryMarshal.Cast<byte,char>(new ReadOnlySpan<byte>((byte*)bitcharP(value), 16));
 
         /// <summary>
         /// Selects an identified bit sequence
@@ -74,7 +70,7 @@ namespace Z0
         public static ReadOnlySpan<byte> bitseq<T>(T src)
             where T : unmanaged
         {
-            var dst = new byte[measure<T>()];
+            var dst = sys.alloc(bitsize<T>());
             bitseq(src,dst);
             return dst;                
         }
@@ -82,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> bitseq<T>(T src, int count)
             where T : unmanaged
-                => bitseq(src).Slice(0, Math.Min(measure<T>(), count));
+                => bitseq(src).Slice(0, min(bitsize<T>(), count));
 
         [MethodImpl(Inline)]
         public static void bitseq<T>(T src, Span<byte> dst, int offset = 0)
@@ -119,48 +115,6 @@ namespace Z0
             else 
                 bitchars_f(src,dst,offset);
         }        
-
-        [MethodImpl(Inline)]
-        static int popd(in byte a)
-            => skip(in head(PopCounts), a);
-
-        [MethodImpl(Inline)]
-        static int popd(in ushort a)
-        {
-            var count = 0;
-            ref readonly var src = ref uint8(in a);
-            count += popd(skip(in src, 0));
-            count += popd(skip(in src, 1));
-            return count;
-        }
-
-        [MethodImpl(Inline)]
-        static int popd(in uint a)
-        {
-            var count = 0;
-            ref readonly var src = ref uint8(in a);
-            count += popd(skip(in src, 0));
-            count += popd(skip(in src, 1));
-            count += popd(skip(in src, 2));
-            count += popd(skip(in src, 3));
-            return count;
-        }
-
-        [MethodImpl(Inline)]
-        static int popd(in ulong a)
-        {
-            var count = 0;
-            ref readonly var src = ref uint8(in a);
-            count += popd(skip(in src, 0));
-            count += popd(skip(in src, 1));
-            count += popd(skip(in src, 2));
-            count += popd(skip(in src, 3));
-            count += popd(skip(in src, 4));
-            count += popd(skip(in src, 5));
-            count += popd(skip(in src, 6));
-            count += popd(skip(in src, 7));
-            return count;
-        }
 
         const int seglen = 8;
 
@@ -225,7 +179,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static unsafe void bitchars(double src, Span<char> dst, int offset)
             => bitchars(BitConvert.ToUInt64(src), dst, offset);
-
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(byte src, Span<byte> dst, int offset)

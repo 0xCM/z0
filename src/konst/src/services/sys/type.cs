@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
             
     using static Konst;
+
     using O = OpacityKind;
 
     partial struct sys
     {        
-
         [MethodImpl(Options), Opaque(O.GetGenericType), Closures(AllNumeric)]
         public static Type type<T>()
             => typeof(T);

@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static Konst;
-    using static Memories;
- 
+    using static As;
+    using static Typed;
+
     partial class BitPack
     {
         /// <summary>
@@ -22,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static byte pack<T>(ReadOnlySpan<T> src, N8 count, N8 mod, int offset = 0)
             where T : unmanaged
-                => pack8(uint64(skip(src,offset)));
+                => pack8(uint64(skip(src,(uint)offset)));
 
         /// <summary>
         /// Pack 16 1-bit values taken from the least significant bit of each source byte
@@ -34,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ushort pack<T>(ReadOnlySpan<T> src, N16 count, N8 mod, int offset = 0)
             where T : unmanaged
-                => pack(skip(src,offset), count, mod);
+                => pack(skip(src,(uint)offset), count, mod);
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -46,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static uint pack<T>(ReadOnlySpan<T> src, N32 count, N8 mod, int offset = 0)
             where T : unmanaged
-                => pack(skip(src,offset), count, mod);
+                => pack(skip(src,(uint)offset), count, mod);
 
         /// <summary>
         /// Packs 64 1-bit values taken from the least significant bit of each source byte
@@ -58,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong pack<T>(ReadOnlySpan<T> src, N64 count, N8 mod, int offset = 0)
             where T : unmanaged
-                => pack(skip(src,offset),count,mod);        
+                => pack(skip(src,(uint)offset),count,mod);        
 
         /// <summary>
         /// Packs bitsize[T] values taken from the least significant bit of each source byte
@@ -113,15 +114,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(pack(src, n8, n8, offset));
+                return generic<T>(pack(src, n8, n8, offset));
             else if(typeof(T) == typeof(short))
-                return convert<T>(pack(src, n16, n8, offset));
+                return generic<T>(pack(src, n16, n8, offset));
             else if(typeof(T) == typeof(int))
-                return convert<T>(pack(src, n32, n8, offset));
+                return generic<T>(pack(src, n32, n8, offset));
             else if(typeof(T) == typeof(long))
-                return convert<T>(pack(src, n32, n8, offset));
+                return generic<T>(pack(src, n32, n8, offset));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

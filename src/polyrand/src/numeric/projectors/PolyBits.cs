@@ -5,7 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Linq;
 
     public static class PolyBits
     {
@@ -28,9 +30,16 @@ namespace Z0
         /// Produces an interminable stream of random bits from a value sequence of parametric type
         /// </summary>
         /// <param name="random">The random source</param>
-        public static IEnumerable<bit> BitStream<T>(this IPolyrand random)
+        public static IEnumerable<T> BitStream<T>(this IPolyrand src)
             where T : unmanaged
-                => Z0.BitStream.from(random.Stream<T>());      
+        {
+            while(true)
+            {
+                var data = src.Next<ulong>();
+                for(var i=0; i<64; i++)
+                    yield return Cast.to<byte,T>((byte)As.testbit(data,i));
+            }
+        }
 
     }
 }

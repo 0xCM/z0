@@ -161,14 +161,21 @@ namespace Z0
             where T : unmanaged
                 => MemoryMarshal.Cast<byte,T>(MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(src), src.Length));
 
+        [MethodImpl(Inline)]
         public static void ThrowInvariantFailure(string msg)
-            => throw new Exception($"Application invaraiant failed: {msg}");
+            => sys.@throw($"The invariant, it failed: {msg}");
 
+        [MethodImpl(Inline)]
         public static void ThrowInvariantFailure()
-            => throw new Exception($"Application invaraiant failed");
+            => sys.@throw($"The invarant, it failed");
 
+        [MethodImpl(Inline)]
         public static void ThrowNullRefError<T>()
-            => throw new NullReferenceException($"Application nullity invaraiant failed for {typeof(T)}");
+            => sys.@throw(new NullReferenceException($"A value of type {typeof(T)}, it is null"));
+
+        [MethodImpl(Inline)]
+        public static void ThrowEmptySpanError()
+            => sys.@throw($"The span, it is empty");
 
         [MethodImpl(Inline)]
         public static void Require(bool invariant)

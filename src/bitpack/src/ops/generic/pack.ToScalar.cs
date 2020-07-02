@@ -10,7 +10,7 @@ namespace Z0
     using static dvec;
     using static Konst;
     using static Memories;
-    using static Vectors;
+    using static V0;
 
     partial class BitPack
     {
@@ -58,8 +58,8 @@ namespace Z0
             where T : unmanaged
         {
             var dst = 0ul;
-            dst = (ulong)pack(in src, n32, n8);
-            dst |=(ulong)pack(in skip(in src, 32), n32, n8) << 32;
+            dst = (ulong)pack(src, n32, n8);
+            dst |=(ulong)pack(skip(src, 32), n32, n8) << 32;
             return dst;
         }        
     }

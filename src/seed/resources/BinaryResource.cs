@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.InteropServices;
 
     using static Konst;
     using static As;

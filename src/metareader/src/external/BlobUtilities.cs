@@ -45,150 +45,6 @@ namespace Z0.MS
             return result;
         }
 
-        public static ImmutableArray<byte> ReadImmutableBytes(byte* buffer, int byteCount)
-        {
-            byte[] bytes = ReadBytes(buffer, byteCount);
-            return ImmutableByteArrayInterop.DangerousCreateFromUnderlyingArray(ref bytes);
-        }
-
-        public static void WriteBytes(this byte[] buffer, int start, byte value, int byteCount)
-        {
-            Debug.Assert(buffer.Length > 0);
-
-            fixed (byte* bufferPtr = &buffer[0])
-            {
-                byte* startPtr = bufferPtr + start;
-                for (int i = 0; i < byteCount; i++)
-                {
-                    startPtr[i] = value;
-                }
-            }
-        }
-
-        public static void WriteDouble(this byte[] buffer, int start, double value)
-        {
-            WriteUInt64(buffer, start, *(ulong*)&value);
-        }
-
-        public static void WriteSingle(this byte[] buffer, int start, float value)
-        {
-            WriteUInt32(buffer, start, *(uint*)&value);
-        }
-
-        public static void WriteByte(this byte[] buffer, int start, byte value)
-        {
-            // Perf: The compiler emits a check when pinning the buffer. It's thus not worth doing so.
-            buffer[start] = value;
-        }
-
-        public static void WriteUInt16(this byte[] buffer, int start, ushort value)
-        {
-            fixed (byte* ptr = &buffer[start])
-            {
-                unchecked
-                {
-                    ptr[0] = (byte)value;
-                    ptr[1] = (byte)(value >> 8);
-                }
-            }
-        }
-
-        public static void WriteUInt16BE(this byte[] buffer, int start, ushort value)
-        {
-            fixed (byte* ptr = &buffer[start])
-            {
-                unchecked
-                {
-                    ptr[0] = (byte)(value >> 8);
-                    ptr[1] = (byte)value;
-                }
-            }
-        }
-
-        public static void WriteUInt32BE(this byte[] buffer, int start, uint value)
-        {
-            fixed (byte* ptr = &buffer[start])
-            {
-                unchecked
-                {
-                    ptr[0] = (byte)(value >> 24);
-                    ptr[1] = (byte)(value >> 16);
-                    ptr[2] = (byte)(value >> 8);
-                    ptr[3] = (byte)value;
-                }
-            }
-        }
-
-        public static void WriteUInt32(this byte[] buffer, int start, uint value)
-        {
-            fixed (byte* ptr = &buffer[start])
-            {
-                unchecked
-                {
-                    ptr[0] = (byte)value;
-                    ptr[1] = (byte)(value >> 8);
-                    ptr[2] = (byte)(value >> 16);
-                    ptr[3] = (byte)(value >> 24);
-                }
-            }
-        }
-
-        public static void WriteUInt64(this byte[] buffer, int start, ulong value)
-        {
-            WriteUInt32(buffer, start, unchecked((uint)value));
-            WriteUInt32(buffer, start + 4, unchecked((uint)(value >> 32)));
-        }
-
-        public const int SizeOfSerializedDecimal = sizeof(byte) + 3 * sizeof(uint);
-
-        public static void WriteDecimal(this byte[] buffer, int start, decimal value)
-        {
-            bool isNegative;
-            byte scale;
-            uint low, mid, high;
-            value.GetBits(out isNegative, out scale, out low, out mid, out high);
-
-            WriteByte(buffer, start, (byte)(scale | (isNegative ? 0x80 : 0x00)));
-            WriteUInt32(buffer, start + 1, low);
-            WriteUInt32(buffer, start + 5, mid);
-            WriteUInt32(buffer, start + 9, high);
-        }
-
-        public const int SizeOfGuid = 16;
-
-        public static void WriteGuid(this byte[] buffer, int start, Guid value)
-        {
-            fixed (byte* dst = &buffer[start])
-            {
-                byte* src = (byte*)&value;
-
-                uint a = *(uint*)(src + 0);
-                unchecked
-                {
-                    dst[0] = (byte)a;
-                    dst[1] = (byte)(a >> 8);
-                    dst[2] = (byte)(a >> 16);
-                    dst[3] = (byte)(a >> 24);
-
-                    ushort b = *(ushort*)(src + 4);
-                    dst[4] = (byte)b;
-                    dst[5] = (byte)(b >> 8);
-
-                    ushort c = *(ushort*)(src + 6);
-                    dst[6] = (byte)c;
-                    dst[7] = (byte)(c >> 8);
-                }
-
-                dst[8] = src[8];
-                dst[9] = src[9];
-                dst[10] = src[10];
-                dst[11] = src[11];
-                dst[12] = src[12];
-                dst[13] = src[13];
-                dst[14] = src[14];
-                dst[15] = src[15];
-            }
-        }
 
         public static void WriteUTF8(this byte[] buffer, int start, char* charPtr, int charCount, int byteCount, bool allowUnpairedSurrogates)
         {
@@ -339,12 +195,12 @@ namespace Z0.MS
         {
             if (start < 0 || start > bufferLength)
             {
-                @throw(new ArgumentOutOfRangeException(nameof(start)));
+                sys.@throw(new ArgumentOutOfRangeException(nameof(start)));
             }
 
             if (byteCount < 0 || byteCount > bufferLength - start)
             {
-                @throw(new ArgumentOutOfRangeException(byteCountParameterName));
+                sys.@throw(new ArgumentOutOfRangeException(byteCountParameterName));
             }
         }
 

@@ -50,6 +50,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {                        
             var parts = PartIdParser.Service.ParseValid(args);  
+                        
             AppDataEmitter.Service.Generate(Context);
         }
 

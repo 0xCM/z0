@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static Konst;
-    using static Memories;
+    using static As;
 
     partial class BitPack
     {
@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 unpack(uint64(src), dst);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

@@ -31,9 +31,15 @@ namespace Z0.Asm
 
             foreach(var part in parts)
             {
-                var segments = LiteralFieldRefs.strings(part.types);
-                if(segments.Length != 0)
-                    FieldCapture.emit(segments, EmissionRoot + FileName.Define(part.Id.Format(), FileExtensions.Csv));
+                var fields = LiteralFields.stringrefs(part.types);
+                if(fields.Length != 0)
+                {
+                    var datapath = EmissionRoot + FileName.Define(part.Id.Format(), FileExtensions.Csv);
+                    LiteralFields.emit(fields, datapath);
+
+                    var codepath = datapath.ChangeExtension(FileExtensions.Cs);
+                 
+                }
             }
         }
     }

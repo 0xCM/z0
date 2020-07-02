@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ushort pack<T>(in Block128<T> src, N8 mod, int block = 0)
             where T : unmanaged
-                => pack(in src.BlockRef(block), n16, mod);
+                => pack(src.BlockRef(block), n16, mod);
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static uint pack<T>(in Block256<T> src, N8 mod, int block = 0)
             where T : unmanaged
-                => pack(in src.BlockRef(block), n32, mod);
+                => pack(src.BlockRef(block), n32, mod);
 
         /// <summary>
         /// Packs 64 1-bit values taken from the least significant bit of each source byte
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong pack<T>(in Block512<T> src, N8 mod, int block = 0)
             where T : unmanaged
-                => pack(in src.BlockRef(block), n64, mod);
+                => pack(src.BlockRef(block), n64, mod);
 
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte

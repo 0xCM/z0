@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst; 
-    using static Memories;
+    using static Root;
+    using static V0;
     
     partial class gvec
     {
@@ -25,15 +26,13 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var count = Vector128<T>.Count;
-            Span<T> buffer = stackalloc T[count];
-            ref var dst = ref head(buffer);
-
-            var length = math.min(count, bitsize<S>());
-            for(var i=0; i< length; i++)
-                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
-            
-            return buffer.LoadVector(w);
+            var count = vcount(w, enabled);
+            var buffer = vzero<T>(w);
+            ref var dst = ref vref(ref buffer);
+            var length = min(count, bitsize<S>());
+            for(var i=0; i<length; i++)
+                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;            
+            return buffer;
         }
 
         /// <summary>
@@ -48,15 +47,23 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var count = Vector256<T>.Count;
-            Span<T> buffer = stackalloc T[count];
-            ref var dst = ref head(buffer);
+            var count = vcount(w, enabled);
+            var buffer = vzero<T>(w);
+            ref var dst = ref vref(ref buffer);
+            var length = min(count, bitsize<S>());
+            for(var i=0; i<length; i++)
+                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;            
+            return buffer;
 
-            var length = math.min(count, bitsize<S>());
-            for(var i=0; i< length; i++)
-                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
+            // var count = vcount(w,enabled);
+            // Span<T> buffer = stackalloc T[count];
+            // ref var dst = ref head(buffer);
+
+            // var length = min(count, bitsize<S>());
+            // for(var i=0; i< length; i++)
+            //     seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
             
-            return buffer.LoadVector(w);
+            // return buffer.LoadVector(w);
         }
 
         /// <summary>
@@ -108,6 +115,6 @@ namespace Z0
         public static T broadcast<S,T>(S src, T t = default)
             where S : unmanaged
             where T : unmanaged
-                => Vectors.vfirst<S,T>(Vectors.vbroadcast(n128, src));                
+                => Vectors.vfirst<S,T>(Vectors.vbroadcast(N128.N, src));                
     }
 }

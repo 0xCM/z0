@@ -11,6 +11,7 @@ namespace Z0
     using System.Collections.Concurrent;
 
     using static Konst;
+    using static Root;
 
     /// <summary>
     /// Base type for test applications
@@ -115,46 +116,9 @@ namespace Z0
                 return;            
 
             using var unit = host.Instantiate<IUnitTest>();
+
             if(unit.Enabled)
-                Run(host, unit);
-                
-            // var results = new List<TestCaseRecord>();
-            // var enabled = true;
-
-            // try
-            // {
-            //     using var unit = host.Instantiate<IUnitTest>();
-            //     enabled = unit.Enabled;
-                
-            //     if(enabled)             
-            //     {
-            //         var execTime = Duration.Zero;
-            //         var clock = counter(true);                    
-            //         var tsStart = time.now();
-
-            //         if(unit is IExplicitTest et)  
-            //             ExecExplicit(et, host.Name,results);
-            //         else
-            //         {                    
-            //             Control.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));   
-            //             PostBenchResult(unit.TakeBenchmarks().ToArray());
-            //         }
-
-            //         clock.Stop();
-                    
-            //         var hosturi = OpUriBuilder.HostUri(host);
-            //         term.print(PostUnit(hosturi, clock.Time, tsStart, time.now())); 
-            //     }               
-            // }
-            // catch(Exception e)
-            // {
-            //     term.error($"Harness execution failed: {e}");
-            // }  
-            // finally
-            // {
-            //     if(enabled)
-            //         PostTestResults(results);
-            // }
+                Run(host, unit);            
         }
 
         const int CasePad = (int)((ulong)TestCaseField.Case >> 32);
@@ -273,11 +237,6 @@ namespace Z0
             return clock.Time;
         }
 
-        void Run(bool concurrent, params string[] filters)
-        {
-            var hosts = Hosts().ToArray();
-            Root.iter(hosts, h =>  Run(h,filters), concurrent);
-        }
         
         IEnumerable<MethodInfo> Tests(Type host)
             =>  host.DeclaredMethods().Public().NonGeneric().WithArity(0);
@@ -446,6 +405,12 @@ namespace Z0
                 // Overwrite the current test log file for the app
                 LogTestResults2(basename, results, LogWriteMode.Overwrite);
             }
+        }
+
+        void Run(bool concurrent, params string[] filters)
+        {
+            var hosts = Hosts().ToArray();
+            iter(hosts, h =>  Run(h,filters), concurrent);
         }
 
         protected virtual void RunTests(params string[] filters)

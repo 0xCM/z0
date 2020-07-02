@@ -47,7 +47,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return convert<T>(pack(src, n64));
             else
-                throw Unsupported.define<T>();            
+                throw no<T>();            
         }
     }
 }

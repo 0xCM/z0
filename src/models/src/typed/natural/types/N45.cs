@@ -13,6 +13,8 @@ namespace Z0
     {
         public const ulong Value = 45;
 
+        public const string Text = "45";
+
         public static N45 Rep => default;
         
         public static NatSeq<N4,N5> Seq => default;

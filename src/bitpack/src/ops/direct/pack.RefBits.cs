@@ -10,7 +10,7 @@ namespace Z0
     //using static Konst;
     using static Root;
     using static Typed;
-    using static Vectors;
+    using static V0;
     
     partial class BitPack
     {

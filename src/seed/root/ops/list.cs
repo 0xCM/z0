@@ -18,8 +18,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source items</param>
         /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static List<T> list<T>(params T[] src)
-            => src.ToList();
+            => sys.list(src);
     }
 }

@@ -40,15 +40,16 @@ namespace Z0.Asm
         FolderPath AsmDst
             => ResBytesDir + FolderName.Define("asm");
                 
-
         public void CaptureResBytes()
         {
             var root = Context.AppPaths.LogRoot;
             var src = Context.AppPaths.ResBytes;            
-            var provider = src.FileName;
-
             Demands.insist(src.Exists);
-            var csvDst = ResBytesDir + provider.ChangeExtension(FileExtensions.Csv);
+
+            var csvDst = ResBytesDir + src.FileName.ChangeExtension(FileExtensions.Csv);
+            
+            term.magenta($"resbytes:{src} -> {csvDst}");
+
             var captured = Capture(src, AsmDst);
             CollectAddresses(captured, csvDst);
         }

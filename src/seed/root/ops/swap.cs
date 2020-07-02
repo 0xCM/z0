@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="i">An index of a span element</param>
         /// <param name="j">An index of a span element</param>
         /// <typeparam name="T">The span element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void swap<T>(Span<T> src, int i, int j)
             where T : unmanaged
         {

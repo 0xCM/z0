@@ -41,12 +41,12 @@ namespace Z0
             => new NumericLiteral(Name,Value,Text,NumericBase);
 
         [MethodImpl(Inline)]
-        NumericLiteral(string Name, object Value, string Text, NBK NumericBase)
+        public NumericLiteral(string name, object data, string text, NBK @base)
         {
-            this.Name = Name;
-            this.Data = Value ?? string.Empty;
-            this.Text = Text ?? this.Data.ToString();
-            this.Base = NumericBase;
+            Name = name;
+            Data = data ?? 0;
+            Text = text ?? Data.ToString();
+            Base = @base;
         }        
 
         public bool IsEmpty

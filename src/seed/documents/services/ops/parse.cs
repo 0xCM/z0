@@ -32,7 +32,6 @@ namespace Z0
             using var reader = src.Reader();
             return parse(reader,format);
         }            
-
         
         /// <summary>
         /// Attempts to parse a text document and returns the result if successful

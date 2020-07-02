@@ -105,6 +105,9 @@ namespace Z0
        [MethodImpl(Inline)]
         public static TypeCode ToTypeCode(this PrimalKindId src)
             => (TypeCode)src;
-             
+
+ 
+        public static string Format(this PrimalKindId src)
+                => $"{src}";            
     }
 }

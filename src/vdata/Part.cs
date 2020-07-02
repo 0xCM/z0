@@ -6,12 +6,9 @@
 
 namespace Z0.Parts
 {
-    using System;
-    using System.Collections.Generic;
-
-    public sealed class VData : Part<VData>, IResourceProvider
+    public sealed class VData : Part<VData>
     {        
-        public IEnumerable<BinaryResource> Resources 
-            => Root.seq<BinaryResource>();
+
+
     }
 }

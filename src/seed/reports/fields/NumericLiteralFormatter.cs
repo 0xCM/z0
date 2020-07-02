@@ -29,17 +29,15 @@ namespace Z0
         public static ValueFormatter<F,R> Service 
             => ValueFormatter.from(default(NumericLiteralFormatter));
 
+        static string Format(Base2 @base, NumericLiteral src)
+            => BitFormatter.format(src.Data, src.TypeCode);
+
         public void Format(in R src, IDatasetFormatter<F> dst)
         {
             dst.Delimit(NumericLiteralField.Name, src.Name);
             dst.Delimit(NumericLiteralField.Base, src.Base);
-
-            dst.Delimit(NumericLiteralField.Data, src.Data);
-
-            //dst.Delimit(NumericLiteralField.Data, BoxedNumber.From(src.Data).Format(base2));
+            dst.Delimit(NumericLiteralField.Data, Format(base2, src));        
             dst.Delimit(NumericLiteralField.Text, src.Text);
-
-            throw new Exception("Fix me");
         }
     }
 }

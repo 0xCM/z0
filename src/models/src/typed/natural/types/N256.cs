@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;    
 
+    using N = N256;
+    using W = W256;
     public readonly struct N256 : 
         INativeNatural,
         INatSeq<N256,N2,N5,N6>, 
@@ -21,18 +23,26 @@ namespace Z0
         INatDivisible<N256,N64>, 
         INatDivisible<N256,N128>
     {
-        public const ulong Value = 1ul << 8;
+        public const ulong Value = 256;
+
+        public const string Text = "256";
+
+        public static N N => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N256 src) => 256;
+        public static implicit operator int(N src) 
+            => (int)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator W256(N256 src) => default(W256);
+        public static implicit operator W(N src) 
+            => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator N256(W256 src) => default(N256);
-
-        public ulong NatValue => Value;
+        public static implicit operator N(W src) 
+            => default;
+        
+        public ulong NatValue 
+            => Value;
         
         public override string ToString() 
             => Value.ToString();

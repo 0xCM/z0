@@ -4,8 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_bitsvc<X> : UnitTest<X,CheckVectors,TCheckVectors>
-        where X : t_bitsvc<X>, new()
+    using System;
+    using System.Runtime.CompilerServices;
+
+    public abstract class t_bitvectors<X> : t_bitcore<X>
+        where X : t_bitvectors<X>, new()
     {
         protected override int RepCount => Pow2.T08;
 

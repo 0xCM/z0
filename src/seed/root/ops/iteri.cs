@@ -53,7 +53,7 @@ namespace Z0
                 action(index++, it.Current);
         }      
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void iteri<T>(ReadOnlySpan<T> src, Action<int,T> action)
         {
             for(var i=0; i<src.Length; i++)

@@ -11,15 +11,13 @@ namespace Z0
 
     partial class Root
     {
-        public static void ThrowEmptySpanError()
-            => throw new Exception($"The span is empty");
-
-        [MethodImpl(NotInline), Op]
+        [MethodImpl(Inline), Op]
         public static void @throw(string msg)
-            => throw new Exception(msg);
+            => sys.@throw(msg);
 
-        [MethodImpl(NotInline), Op]
+        [MethodImpl(Inline), Op]
         public static void @throw(Exception e)
-            => throw e;
+            => sys.@throw(e);
+
     }
 }

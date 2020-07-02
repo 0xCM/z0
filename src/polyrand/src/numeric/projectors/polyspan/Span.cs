@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Root;
+    using static As;
 
     public static partial class PolySpan
     {
@@ -23,8 +24,8 @@ namespace Z0
         public static Span<T> Span<T>(this IPolyrand random, int length, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
         {
-            Span<T> dst = new T[length];
-            random.Fill(domain.ValueOrElse(() => random.Domain<T>()), length, ref head(dst), filter);
+            var dst = span(sys.alloc<T>(length));
+            random.Fill(domain.ValueOrElse(() => random.Domain<T>()), length, ref first(dst), filter);
             return dst;
         }
 
@@ -37,7 +38,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> Span<T>(this IPolyrand random, int length, Interval<T> domain)
             where T : unmanaged
-                => random.Span<T>(length,domain,null);
+                => random.Span<T>(length, domain, null);
 
         /// <summary>
         /// Produces a span of random values constraint to a specified domain

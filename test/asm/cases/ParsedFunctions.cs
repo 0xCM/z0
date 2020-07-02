@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface IAsmFunctionCases : IBinaryResources
+    public interface IAsmFunctionCases : IBinaryResourceIndex
     {
         LocatedCode Case(OpKindId k, params NumericKind[] kinds)
         {

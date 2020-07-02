@@ -5,12 +5,11 @@
 namespace Z0
 {
     using static Konst;
-    using static Memories;
-
+    using static Root;
     
     public static class BitStringNatX
     {
-       /// <summary>
+        /// <summary>
         /// Pretends the source bitstring is an mxn matrix and computes the transposition maxtrix of dimension nxm encoded as a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -19,7 +18,7 @@ namespace Z0
         public static BitString Transpose<M,N>(this BitString src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => BitString.transpose(src, nati(m), nati(n));
+                => BitString.transpose(src, value(m), value(n));
         
         public static BitString Transpose(this BitString bs, int m, int n)        
             => BitString.transpose(bs,m,n);                         

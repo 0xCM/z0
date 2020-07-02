@@ -12,71 +12,71 @@ namespace Z0
     partial class Blocks
     {
         /// <summary>
-        /// Determines whether a specified number of elements can be evenly covered by 8-bit blocks
+        /// Determines whether a specified number of elements can be evenly covered by 8-bit segments
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W8 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
 
         /// <summary>
-        /// Determines whether a specified number of elements can be evenly covered by 16-bit blocks
+        /// Determines whether a specified number of elements can be evenly covered by 16-bit segments
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W16 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
 
         /// <summary>
-        /// Determines whether a specified number of elements can be evenly covered by 32-bit blocks
+        /// Determines whether a specified number of elements can be evenly covered by 32-bit segments
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W32 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
 
         /// <summary>
-        /// Determines whether a specified number of elements can be evenly covered by 64-bit blocks
+        /// Determines whether a specified number of elements can be evenly covered by 64-bit segments
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W64 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
 
         /// <summary>
-        /// Determines whether a specified number of elements can be evenly covered by 128-bit blocks
+        /// Determines whether a specified number of elements can be evenly covered by 128-bit segments
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W128 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
 
         /// <summary>
-        /// Determines whether a specified number of elements can be evenly covered by 256-bit blocks
+        /// Determines whether a specified number of elements can be evenly covered by 256-bit segments
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W256 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
 
         /// <summary>
-        /// Determines whether a specified number of elements can be evenly covered by 512-bit blocks
+        /// Determines whether a specified number of elements can be evenly covered by 512-bit segments
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W512 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;

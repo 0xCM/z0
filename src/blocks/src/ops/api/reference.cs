@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
         
-    using static Konst;        
+    using static Konst;      
+    using static As;  
 
     partial class Blocks
     {
@@ -20,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(Numeric8k)]
         public static ref T reference<T>(in Block8<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
+                => ref add(src.Head, index*src.BlockLength); 
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -31,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(Numeric8x16k)]
         public static ref T reference<T>(in Block16<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
+                => ref add(src.Head, index*src.BlockLength); 
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -42,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(Numeric8x16x32k)]
         public static ref T reference<T>(in Block32<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
+                => ref add(src.Head, index*src.BlockLength); 
         
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -53,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T reference<T>(in Block64<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
+                => ref add(src.Head, index*src.BlockLength); 
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -64,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T reference<T>(in Block128<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
+                => ref add(src.Head, index*src.BlockLength); 
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -75,7 +76,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T reference<T>(in Block256<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
+                => ref add(src.Head, index*src.BlockLength); 
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -86,6 +87,6 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T reference<T>(in Block512<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
+                => ref add(src.Head, index*src.BlockLength); 
     }
 }

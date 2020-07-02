@@ -80,7 +80,7 @@ namespace Z0
 
     public class ResourceReport : Report<ResourceReport,F,R>
     {        
-        public static ResourceReport Create(ResourceIndex resources)
+        public static ResourceReport Create(BinaryResourceIndex resources)
             => new ResourceReport(resources);
 
         public static ResourceReport Create(IEnumerable<BinaryResource> resources)
@@ -91,13 +91,13 @@ namespace Z0
 
         }
 
-        ResourceReport(ResourceIndex index)
+        ResourceReport(BinaryResourceIndex index)
             : base(CreateRecords(index))
         {
 
         }
 
-        static ResourceRecord[] CreateRecords(ResourceIndex index)
+        static ResourceRecord[] CreateRecords(BinaryResourceIndex index)
         {
             var records = new List<ResourceRecord>();
             var start = 0ul;

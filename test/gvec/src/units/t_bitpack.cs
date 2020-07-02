@@ -73,7 +73,6 @@ namespace Z0
                 var rebound = BitPack.pack(dst,n8);
                 Claim.eq(src,rebound);
             }
-
         }
 
 
@@ -88,7 +87,6 @@ namespace Z0
             block2[0] = uint.MaxValue;
             var val2 = block2.BlockRef(0);
             Trace(val2.ToBitString());
-
         }
 
 
@@ -110,7 +108,7 @@ namespace Z0
             var count = n32;
             var block = n256;
             
-            for(var sample = 0; sample < RepCount; sample++)
+            for(var sample = 0; sample<RepCount; sample++)
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);

@@ -33,7 +33,7 @@ namespace Z0.Asm.Data
             => InstructionTokenInfo.Definitions[(int)token];
 
         public static OpCodeTokens OpCodeTokens
-            => load(LiteralFieldRefs.strings(typeof(OpCodeTokenValues)), alloc<OpCodeToken>(OpCodeTokenValues.Count));
+            => load(LiteralFields.stringrefs(typeof(OpCodeTokenValues)), alloc<OpCodeToken>(OpCodeTokenValues.Count));
 
         [MethodImpl(Inline)]
         public static OpCodeDataset dataset()
@@ -80,7 +80,7 @@ namespace Z0.Asm.Data
 
         [Op]
         public static unsafe OpCodeTokens tokens()
-            => load(LiteralFieldRefs.strings(typeof(OpCodeTokenValues)), alloc<OpCodeToken>(OpCodeTokenValues.Count));
+            => load(LiteralFields.stringrefs(typeof(OpCodeTokenValues)), alloc<OpCodeToken>(OpCodeTokenValues.Count));
 
         [Op]
         public void Partition(in OpCodePartitoner processor, in OpCodePartition handler, ReadOnlySpan<OpCodeRecord> src)

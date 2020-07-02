@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static Memories;
-    using static Vectors;
+    using static V0;
 
     partial class BitPack
     {

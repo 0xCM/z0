@@ -63,5 +63,12 @@ namespace Z0
         CopySpan,
 
         EmptyStringTest,
+
+        ArrayToList,
+
+       ListToArray,
+
+        Throw,
+
     }
 }

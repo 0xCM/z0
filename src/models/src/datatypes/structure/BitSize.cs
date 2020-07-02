@@ -15,11 +15,6 @@ namespace Z0
     public readonly struct BitSize
     {
         /// <summary>
-        /// The maximum number of bits apprehended by this data structure
-        /// </summary>
-        public const uint MaxBits = uint.MaxValue;
-
-        /// <summary>
         /// The maximum number of bytes apprehended by this data structure
         /// </summary>
         public const int MaxBytes = (int)(UInt32.MaxValue/8);
@@ -28,14 +23,6 @@ namespace Z0
         /// Specifies a bit count
         /// </summary>
         public readonly uint Count;
-
-        [MethodImpl(Inline)]
-        public static BitSize init(int bits)
-            => new BitSize((uint)bits);
-
-        [MethodImpl(Inline)]
-        public static BitSize init(uint bits)
-            => new BitSize(bits);
 
         /// <summary>
         /// Computes the bit-size of a parametric type
@@ -53,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int div<T>(int a, T t = default)
             where T : unmanaged
-                => a / measure<T>();
+                => a / (Unsafe.SizeOf<T>()*8);
 
         /// <summary>
         /// Computes the remainder r :=  a % bitsize[T] of an operand a and parametric type T
@@ -63,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int mod<T>(int a, T t = default)
             where T : unmanaged
-                => a % measure<T>();
+                => a % (Unsafe.SizeOf<T>()*8);
 
         [MethodImpl(Inline)]
         public static explicit operator ByteSize(BitSize src)
@@ -190,7 +177,7 @@ namespace Z0
             => Count.ToString();
 
         public override int GetHashCode()
-            => Count.GetHashCode();
+            => (int)Count;
 
         public override bool Equals(object obj)
             => obj is BitSize x && Equals(x);

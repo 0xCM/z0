@@ -10,7 +10,7 @@ namespace Z0
 
     partial class Root
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress locate<T>(in T src)
             => pvoid(src);
     }

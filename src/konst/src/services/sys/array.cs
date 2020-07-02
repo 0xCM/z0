@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
         
     using static OpacityKind;
     
@@ -14,5 +16,10 @@ namespace Z0
         [MethodImpl(Options), Opaque(SpanToArray), Closures(Closure)]
         public static T[] array<T>(Span<T> src)
             => src.ToArray();
+
+        [MethodImpl(Options), Opaque(ListToArray), Closures(Closure)]
+        public static T[] array<T>(List<T> src)
+            => src.ToArray();
+
     }
 }

@@ -5,9 +5,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.MS
 {
-    using System;
-    using System.Reflection;
-
     internal static class DecimalUtilities
     {
         public static int GetScale(this decimal value)

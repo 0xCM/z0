@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
+
+    using static As;
 
     public static class PolyFill
     {
@@ -23,10 +23,10 @@ namespace Z0
         public static void Fill<T>(this IPolyrand random, Interval<T> domain, int count, ref T dst, Func<T,bool> filter = null)
             where T : unmanaged
         {
-            var it = random.Stream<T>(domain,filter).Take(count).GetEnumerator();
+            var it = random.Stream<T>(domain, filter).Take(count).GetEnumerator();
             var counter = 0;
             while(it.MoveNext())
-                Unsafe.Add(ref dst, counter++) = it.Current;
+                add(dst, counter++) = it.Current;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i<count; i++)
-                Unsafe.Add(ref dst, i) = src.Next();
+                add(dst, i) = src.Next();
         }
                 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
             var it = random.Stream<T>().Take(count).GetEnumerator();
             var counter = 0;
             while(it.MoveNext())
-                Unsafe.Add(ref dst, counter++) = it.Current;
+                add(dst, counter++) = it.Current;
         }
     }
 }

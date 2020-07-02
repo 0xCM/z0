@@ -11,6 +11,7 @@ namespace Z0
     using static Konst; 
     using static As;
 
+
     partial class gvec
     {
         /// <summary>
@@ -22,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> valt<T>(W256 w, T a, T b)
             where T : unmanaged
-                => gvec.vblend(Vectors.vbroadcast(w,a), Vectors.vbroadcast(w,b), VData.vblendspec<T>(w,false));
+                => gvec.vblend(V0.vbroadcast(w,a), V0.vbroadcast(w,b), V0p.vblendspec<T>(w,false));
 
         /// <summary>
         /// 

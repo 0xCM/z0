@@ -14,7 +14,6 @@ namespace Z0
 
     partial struct TextDocParser
     {
-
         /// <summary>
         /// Parses a header row from a line of text
         /// </summary>
