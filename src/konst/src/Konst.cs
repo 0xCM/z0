@@ -7,11 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
+    using System.Reflection;
+    
     public readonly partial struct Konst
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
@@ -21,11 +18,16 @@ namespace Z0
         public const MethodImplOptions Suboptimal = MethodImplOptions.NoOptimization;
 
         public const string Kernel32 = "kernel32.dll";
-
+    
         /// <summary>
-        /// The empty type
+        /// A type considered to be empty
         /// </summary>
-        public static Type EmptyType => typeof(void);
+        public static Type EmptyType => DefaultType.Empty;
+        
+        /// <summary>
+        /// A method considered to be empty
+        /// </summary>
+        public static MethodInfo EmptyMethod => DefaultMethod.Empty;
 
         /// <summary>
         /// Uppercase letter classifier accessor
@@ -200,6 +202,5 @@ namespace Z0
 
         public static T no<S,T>()
             => Unsupported.raise<T>($"The transformation {typeof(S).Name} -> {typeof(T).Name} is undefined");
-
     }
 }

@@ -59,6 +59,10 @@ namespace Z0
         public bool Equals(A src)        
             => Location == src.Location;
 
+        [MethodImpl(Inline)]
+        public int CompareTo(A src)
+            => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
+
         public override string ToString()
             => Format();
         

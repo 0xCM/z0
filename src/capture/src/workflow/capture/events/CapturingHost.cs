@@ -9,21 +9,21 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct CapturingPart : IAppEvent<CapturingPart>
+    public readonly struct CapturingHost : IAppEvent<CapturingHost>
     {            
-        public readonly PartId Part;
+        public readonly ApiHostUri Host;
 
         [MethodImpl(Inline)]
-        public CapturingPart(PartId part)
-            => Part = part;
+        public CapturingHost(ApiHostUri host)
+            => Host = host;
 
         public string Description
-            => $"{Part.Format()} part capture step starting";
+            => $"{Host.Format()} host capture step starting";
 
-        public CapturingPart Zero
+        public CapturingHost Zero
             => Empty;
         
-        public static CapturingPart Empty 
-            => new CapturingPart(0);
+        public static CapturingHost Empty 
+            => new CapturingHost(ApiHostUri.Empty);
     }    
 }

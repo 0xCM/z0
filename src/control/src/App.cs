@@ -4,14 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
-
-    using Z0.Asm;
-
-    using static Konst;
-    using static Memories;
-
     public static partial class XTend
     {
 

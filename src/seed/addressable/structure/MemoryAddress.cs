@@ -187,8 +187,8 @@ namespace Z0
             => Location.FormatHex(config);
 
         [MethodImpl(Inline)]
-        public int CompareTo(MemoryAddress other)
-            => this == other ? 0 : this < other ? -1 : 1;
+        public int CompareTo(MemoryAddress src)
+            => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
 
         [MethodImpl(Inline)]
         public bool Equals(MemoryAddress src)

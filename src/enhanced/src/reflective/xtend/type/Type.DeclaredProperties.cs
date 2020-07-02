@@ -24,6 +24,6 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static PropertyInfo[] DeclaredStaticProperties(this Type t)
-            => t.GetProperties(BF_DeclaredStatic);
+            => t.GetProperties(BF_Static);
     }
 }

@@ -27,8 +27,6 @@ namespace Z0.Asm
 
         public void Execute(IApiHost host, TCaptureArchive dst)
         {
-            var step = Context.Raise(StepEvents.Started(host, Context.Correlate()));
-
             try
             {
                 var paths = dst.HostArchive(host.Uri);
@@ -39,6 +37,7 @@ namespace Z0.Asm
 
                 if(extracts.Length == 0)
                     return;
+
                                 
                 var extractRpt = Workflow.ReportExtracts.CreateExtractReport(host.Uri, extracts);
                 Workflow.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
@@ -63,10 +62,6 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 Context.Raise(Error(e));
-            }
-            finally
-            {
-                Context.Raise(StepEvents.Ended(host, step.Correlation));
             }
         }      
     }

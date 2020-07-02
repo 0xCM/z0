@@ -11,43 +11,40 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// A simple api member sequence adapter
+    /// Defines and index over <see cref='ApiMember'/> values
     /// </summary>
     public readonly struct ApiMembers : IIndex<ApiMember>
     {
-        public ApiMember[] Content {get;}
+        public readonly ApiMember[] Data;
 
         [MethodImpl(Inline)]
         public static implicit operator ApiMembers(ApiMember[] src)
-            => Define(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ApiMember[](ApiMembers src)
-            => src.Content;
-
-        [MethodImpl(Inline)]
-        public static ApiMembers Define(params ApiMember[] src)
             => new ApiMembers(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator ApiMember[](ApiMembers src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
         public ApiMembers(params ApiMember[] src)
-        {
-            this.Content = src;
-        }
+            => Data = src;
 
         public int Length 
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => Data.Length;
         }
-    
+
         public ref ApiMember this[int index] 
         {
             [MethodImpl(Inline)]
-            get => ref Content[index];
+            get => ref Data[index];
         }
 
         public ApiMembers Where(Func<ApiMember,bool> predicate)
-            => Content.Where(predicate).ToArray();
+            => Data.Where(predicate).ToArray();
+
+       ApiMember[] IContented<ApiMember[]>.Content 
+            => Data;             
     }
 }

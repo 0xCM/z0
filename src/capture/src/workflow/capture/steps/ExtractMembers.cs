@@ -23,7 +23,7 @@ namespace Z0.Asm
             => Workflow = workflow;
 
         public static ApiMember[] locate(IApiHost host)
-        {
+        {            
             var locator = Identities.Services.ApiLocator;
             return locator.Located(host).ToArray();
         }
@@ -32,7 +32,8 @@ namespace Z0.Asm
         {            
             var members = locate(host);
             var extractor = MemberExtraction.service(Extracts.DefaultBufferLength);    
-            return extractor.Extract(members);
+            var extracted = extractor.Extract(members);
+            return extracted;
         }
         
         public ApiMember[] LocateMembers(IApiHost host)
@@ -43,6 +44,18 @@ namespace Z0.Asm
         }
 
         public ExtractedCode[] ExtractMembers(IApiHost host)
-            => extract(host); 
+        {
+            var extracted = Array.Empty<ExtractedCode>();            
+            try
+            {
+                extracted = extract(host); 
+                Context.Raise(new ExtractedMembers(host.Uri, extracted.Length));
+            }
+            catch(Exception e)
+            {
+                Context.Raise(new WorkflowError($"{host.Uri} extract failure", e));
+            }
+            return extracted;
+        }
     }
 }

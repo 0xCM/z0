@@ -31,7 +31,7 @@ namespace Z0
             => Widths.data<W>();
     }
 
-    public interface IAddress<F,W,T> : IAddress<W,T>, INullary<F>, IEquatable<F>
+    public interface IAddress<F,W,T> : IAddress<W,T>, INullary<F>, IEquatable<F>, IComparable<F>
         where W : unmanaged, IDataWidth
         where F : unmanaged, IAddress<F,W,T>
         where T : unmanaged

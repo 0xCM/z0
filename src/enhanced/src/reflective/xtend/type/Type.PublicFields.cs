@@ -16,6 +16,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         public static FieldInfo[] PublicFields(this Type src)
-            => src.GetFields(BF_AllPublicStatic | BF_AllPublicInstance);
+            => src.GetFields(BF_PublicStatic | BF_PublicInstance);
     }
 }

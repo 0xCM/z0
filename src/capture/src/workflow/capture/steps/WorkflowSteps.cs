@@ -34,7 +34,7 @@ namespace Z0.Asm
 
     public interface IManageCaptureStep
     {
-        void CaptureHost(CaptureHostStep step, IApiHost host, TCaptureArchive dst);
+        void CaptureHost(ICaptureHostStep step, IApiHost host, TCaptureArchive dst);
 
         void CaptureCatalogs(AsmArchiveConfig config, params PartId[] parts);
         

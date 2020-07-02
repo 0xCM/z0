@@ -35,6 +35,8 @@ namespace Z0
         readonly IEncodedHexReader UriBitsReader;
 
         readonly AsmFormatSpec FormatConfig;
+
+        readonly TCaptureServices Services;
         
         internal CaptureHost(IAsmContext context, FolderPath root)
         {                    
@@ -44,14 +46,12 @@ namespace Z0
             Settings = CaptureConfig.From(context.Settings);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = context.CaptureServices.Formatter(FormatConfig);            
-
-            var wfc = CaptureServices.Service(context);            
+            Services = CaptureServices.Service(context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
             UriBitsReader = Capture.Services.EncodedHexReader;
-            CaptureWorkflow = wfc.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(root));
+            CaptureWorkflow = Services.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(root));
             Broker = CaptureWorkflow.Broker;
-            ImmWorkflow = wfc.ImmEmissionWorkflow(Sink, context.Api, Formatter, Decoder, root);
-            
+            ImmWorkflow = Services.ImmEmissionWorkflow(Sink, context.Api, Formatter, Decoder, root);            
             (this as ICaptureClient).Connect();            
         }
 

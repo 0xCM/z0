@@ -18,11 +18,14 @@ namespace Z0
 
     public interface IIdentities : IStateless<Identities>
     {
-        IMultiDiviner Diviner => MultiDiviner.Service;
+        IMultiDiviner Diviner 
+            => MultiDiviner.Service;
 
-        IApiCollector ApiCollector => Svc.ApiCollector.Service;
+        IApiCollector ApiCollector 
+            => Svc.ApiCollector.Service;
 
-        IMemberLocator ApiLocator => Svc.MemberLocator.Service;
+        IMemberLocator ApiLocator 
+            => Svc.MemberLocator.Service;
 
         [MethodImpl(Inline)]
         IApiMemberQuery QueryHosted(IApiHost host)

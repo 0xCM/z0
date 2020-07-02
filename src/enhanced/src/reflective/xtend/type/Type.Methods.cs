@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static IEnumerable<MethodInfo> DeclaredStaticMethods(this Type t, bool nonspecial = true)
-            => nonspecial ?  t.NonSpecialMethods(BF_DeclaredStatic) : t.FlaggedMethods(BF_DeclaredStatic);
+            => nonspecial ?  t.NonSpecialMethods(BF_Static) : t.FlaggedMethods(BF_Static);
 
         /// <summary>
         /// Retrieves the public and non-public static methods declared by a type that have a specific name

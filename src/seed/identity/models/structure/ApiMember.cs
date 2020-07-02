@@ -66,6 +66,6 @@ namespace Z0
         }
         
         public static ApiMember Empty 
-            => new ApiMember(OpUri.Empty, typeof(object).Methods().First(), OpKindId.None, MemoryAddress.Empty);
+            => new ApiMember(OpUri.Empty, EmptyMethod, 0, 0);
     }        
 }

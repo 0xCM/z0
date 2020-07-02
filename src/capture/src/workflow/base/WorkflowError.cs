@@ -17,8 +17,16 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public WorkflowError(string description)
-            => Description= description;
-                        
+            => Description = description;
+
+        [MethodImpl(Inline)]
+        public WorkflowError(string description, Exception e)
+            => Description = text.concat(description, Eol, e);
+
+        [MethodImpl(Inline)]
+        public WorkflowError(Exception e)
+            => Description = e.ToString();
+
         public E Zero 
             => Empty;
 

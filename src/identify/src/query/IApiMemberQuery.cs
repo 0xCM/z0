@@ -5,74 +5,73 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
-    using static Konst;
+    using static ApiMemberQuery;
 
-    public interface IApiMemberQuery : IService
+    public interface IApiMemberQuery
     {
         ApiMembers Members {get;}
 
-        IEnumerable<ApiMember> Located => Members.Where(m => m.Address.IsNonEmpty);
+        ApiMembers Located 
+            => located(Members);
 
-        ApiMembers OfKind<K>(K kind)
+        ApiMembers OfKind<K>(K k)
             where K : unmanaged, Enum
-                => Members.Where(m =>  text.equals(m.KindId.ToString(),kind.ToString()));
+                => kind(Members, k);
 
-        ApiMembers OfKind<K>(K kind, GenericPartition g = default)
+        ApiMembers OfKind<K>(K k, GenericPartition g = default)
             where K : unmanaged, Enum
-                => OfKind(kind).Where(m => m.Method.IsMemberOf(g));
+                => kind(Members, k, g);
         
-        ApiMembers OfKind<K>(W128 w, K kind, GenericPartition g = default)
+        ApiMembers OfKind<K>(W128 w, K k, GenericPartition g = default)
             where K : unmanaged, Enum
-                => OfKind(kind,g).Where(m => m.Method.IsVectorized(w,g));
+                => kind(Members, w, k, g);
 
-        ApiMembers OfKind<K>(W256 w, K kind, GenericPartition g = default)
+        ApiMembers OfKind<K>(W256 w, K k, GenericPartition g = default)
             where K : unmanaged, Enum
-                => OfKind(kind,g).Where(m => m.Method.IsVectorized(w,g));
+                => kind(Members, w, k, g);
 
-        ApiMembers OfKind<K>(W512 w, K kind, GenericPartition g = default)
+        ApiMembers OfKind<K>(W512 w, K k, GenericPartition g = default)
             where K : unmanaged, Enum
-                => OfKind(kind,g).Where(m => m.Method.IsVectorized(w,g));
+                => kind(Members, w, k, g);
 
         ApiMembers UnaryOps(GenericPartition g = default)
-            => Members.Where(m => m.Method.IsMemberOf(g) && m.Method.IsUnaryOperator());
+            => unary(Members, g);
 
         ApiMembers BinaryOps(GenericPartition g = default)
-            => Members.Where(m => m.Method.IsMemberOf(g) && m.Method.IsBinaryOperator());
+            => binary(Members, g);
 
         ApiMembers TernaryOps(GenericPartition g = default)
-            => Members.Where(m => m.Method.IsMemberOf(g) && m.Method.IsTernaryOperator());
+            => ternary(Members, g);
 
         ApiMembers Vectorized(W128 w, GenericPartition g = default)
-            => Members.Where(m => m.Method.IsVectorized(w,g));
+            => vectorized(Members, w, g);
 
         ApiMembers Vectorized(W256 w, GenericPartition g = default)
-            => Members.Where(m => m.Method.IsVectorized(w,g));
+            => vectorized(Members, w, g);
 
         ApiMembers Vectorized(W512 w, GenericPartition g = default)
-            => Members.Where(m => m.Method.IsVectorized(w,g));
+            => vectorized(Members, w, g);
 
         ApiMembers Vectorized(W128 w, string name, GenericPartition g = default)
-            => Members.Where(m => m.Method.IsVectorized(w,g) && text.equals(m.Method.Name, name));
+            => vectorized(Members, w, name, g);
 
         ApiMembers Vectorized(W256 w, string name, GenericPartition g = default)
-            => Members.Where(m => m.Method.IsVectorized(w,g) && text.equals(m.Method.Name, name));
+            => vectorized(Members, w, name, g);
 
         ApiMembers Vectorized(W512 w, string name, GenericPartition g = default)
-            => Members.Where(m => m.Method.IsVectorized(w,g) && text.equals(m.Method.Name, name));
+            => vectorized(Members, w, name, g);
 
         ApiMembers Vectorized<T>(W128 w)
             where T : unmanaged
-                => Members.Where(m => m.Method.IsVectorized(w,typeof(T)));
+                => vectorized<T>(Members, w);
 
         ApiMembers Vectorized<T>(W256 w)
             where T : unmanaged
-                => Members.Where(m => m.Method.IsVectorized(w,typeof(T)));
+                => vectorized<T>(Members, w);
 
         ApiMembers Vectorized<T>(W512 w)
             where T : unmanaged
-                => Members.Where(m => m.Method.IsVectorized(w,typeof(T)));
+                => vectorized<T>(Members, w);
     }
 }

@@ -11,14 +11,19 @@ namespace Z0.Asm
 
     public readonly struct ExtractedMembers : IAppEvent<ExtractedMembers>
     {            
-        public readonly PartId Part;
+        public readonly ApiHostUri Host;
+
+        public readonly int MemberCount;
 
         [MethodImpl(Inline)]
-        public ExtractedMembers(PartId part)
-            => Part = part;
+        public ExtractedMembers(ApiHostUri host, int count)
+        {
+            Host = host;
+            MemberCount = count;
+        }
 
         public string Description
-            => $"{Part.Format()} capture completed";
+            => $"{MemberCount} {Host.Format()} members extracted";
 
         public ExtractedMembers Zero
             => Empty;

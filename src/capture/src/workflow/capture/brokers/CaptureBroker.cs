@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {    
-    sealed class CaptureBroker : EventBroker, ICaptureBroker
+    sealed class CaptureBroker : EventBroker<CaptureBroker,ICaptureBroker>, ICaptureBroker
     {
         public static ICaptureBroker Service 
             => new CaptureBroker();           
@@ -12,9 +12,13 @@ namespace Z0.Asm
     
     public interface ICaptureBroker : IEventBroker, IImmEmissionBroker
     {
+        AppErrorEvent Error => AppErrorEvent.Empty;
+
         ExtractReportCreated ExtractReportCreated => ExtractReportCreated.Empty;
 
         WorkflowError WorkflowError => WorkflowError.Empty;
+
+        ExtractedMembers ExtractedMembers=> ExtractedMembers.Empty;
 
         ExtractReportSaved ExtractReportSaved => ExtractReportSaved.Empty;                
 
@@ -29,7 +33,11 @@ namespace Z0.Asm
         CapturingPart CapturingPart => CapturingPart.Empty;
 
         CapturedPart CapturedPart => CapturedPart.Empty;
-        
+
+        CapturingHost CapturingHost => CapturingHost.Empty;
+
+        CapturedHost CapturedHost => CapturedHost.Empty;
+
         HexCodeSaved HexSaved => HexCodeSaved.Empty;  
 
         ExtractParseFailed ExtractParseFailed => ExtractParseFailed.Empty;

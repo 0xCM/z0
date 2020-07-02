@@ -23,6 +23,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static FieldInfo[] InheritedPublicFields(this Type src)
-            => src.BaseType?.GetFields(BF_AllPublicInstance) ?? new FieldInfo[] { };
+            => src.BaseType?.GetFields(BF_PublicInstance) ?? new FieldInfo[] { };
     }
 }

@@ -37,9 +37,11 @@ namespace Z0.Asm
 
         }
 
-        public void CaptureHost(CaptureHostStep step, IApiHost host, TCaptureArchive dst)
+        public void CaptureHost(ICaptureHostStep step, IApiHost host, TCaptureArchive dst)
         {                
+            Context.Raise(new CapturingHost(host.Uri));
             step.Execute(host, dst);
+            Context.Raise(new CapturedHost(host.Uri));
         }
 
         public void CaptureCatalog(IApiCatalog src, TCaptureArchive dst)

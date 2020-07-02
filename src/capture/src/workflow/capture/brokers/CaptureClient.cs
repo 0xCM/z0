@@ -4,29 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Konst;
-
-    public readonly struct CaptureClient : ICaptureClient
-    {
-        public ICaptureBroker Broker {get;}
-
-        public IAppMsgSink Sink {get;}
-
-        [MethodImpl(Inline)]
-        public CaptureClient(ICaptureBroker broker, IAppMsgSink sink, bool connect)
-        {
-            Broker = broker;
-            Sink = sink;
-            if(connect)
-                ((ICaptureClient)this).Connect();
-        }
-    }    
-    
     public interface ICaptureClient : IBrokerClient<ICaptureBroker>
     {
+        void OnEvent(AppErrorEvent e) 
+            => Sink.Deposit(e);
+
+        void OnEvent(CapturingPart e) 
+            => Sink.Deposit(e);
+
+        void OnEvent(CapturingHost e) 
+            => Sink.Deposit(e);
+
+        void OnEvent(CapturedHost e) 
+            => Sink.Deposit(e);
+
+        void OnEvent(CapturedPart e) 
+            => Sink.Deposit(e);            
+
         void OnEvent(ExtractParseFailed e) 
             => Sink.Deposit(e);
 
@@ -39,7 +33,7 @@ namespace Z0.Asm
         void OnEvent(HexCodeSaved e) 
             => Sink.Deposit(e);        
 
-        void OnEvent(AppErrorEvent e) 
+        void OnEvent(WorkflowError e) 
             => Sink.Deposit(e);
 
         void OnEvent(ExtractReportCreated e) 
@@ -59,19 +53,21 @@ namespace Z0.Asm
 
         void OnEvent(MatchedCapturedEmissions e) 
             => Sink.Deposit(e);
-
-        void OnEvent(CapturingPart e) 
-            => Sink.Deposit(e);
-
-        void OnEvent(CapturedPart e) 
-            => Sink.Deposit(e);            
-
+            
         void OnEvent(ExtractedMembers e) 
             => Sink.Deposit(e);            
 
         void Connect()
         {
-            //Broker.Error.Subscribe(Broker,OnEvent);
+            Broker.Error.Subscribe(Broker,OnEvent);
+            Broker.CapturingPart.Subscribe(Broker, OnEvent);
+            Broker.CapturedPart.Subscribe(Broker, OnEvent);
+            
+            Broker.CapturingHost.Subscribe(Broker, OnEvent);
+            Broker.CapturedHost.Subscribe(Broker, OnEvent);
+
+            Broker.WorkflowError.Subscribe(Broker,OnEvent);
+
             Broker.MembersLocated.Subscribe(Broker,OnEvent);
             Broker.ExtractReportCreated.Subscribe(Broker,OnEvent);
             Broker.ExtractReportSaved.Subscribe(Broker,OnEvent);
@@ -81,9 +77,8 @@ namespace Z0.Asm
             Broker.ExtractsParsed.Subscribe(Broker,OnEvent);
             Broker.ExtractParseFailed.Subscribe(Broker,OnEvent);
             Broker.MatchedEmissions.Subscribe(Broker, OnEvent);
-            Broker.CapturingPart.Subscribe(Broker, OnEvent);
-            Broker.CapturedPart.Subscribe(Broker, OnEvent);
             Broker.ClearedDirectory.Subscribe(Broker, OnEvent);
+            Broker.ExtractedMembers.Subscribe(Broker, OnEvent); 
         }        
     }
 }

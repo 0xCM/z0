@@ -12,11 +12,11 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// Gets the static methods defined on a specified type
+        /// Gets the static properties declared by a specified type
         /// </summary>
         /// <param name="this">The type to examine</param>
         public static PropertyInfo[] StaticProperties(this Type src)
-            => src.GetProperties(BF_AllStatic);
+            => src.GetProperties(BF_Static);
 
         /// <summary>
         /// Gets the static methods defined on a specified type

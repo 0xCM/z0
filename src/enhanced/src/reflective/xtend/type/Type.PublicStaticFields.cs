@@ -12,13 +12,13 @@ namespace Z0
     partial class XTend
     {
         public static FieldInfo[] PublicStaticFields(this Type src)
-            => src.GetFields(BF_AllPublicStatic);
+            => src.GetFields(BF_PublicStatic);
             
         /// <summary>
         /// Selects all public instance fields from the source
         /// </summary>
         /// <param name="src">The source type</param>
         public static FieldInfo[] PublicInstanceFields(this Type src)
-            => src.GetFields(BF_AllPublicInstance);
+            => src.GetFields(BF_PublicInstance);
     }
 }
