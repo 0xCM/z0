@@ -11,7 +11,7 @@ namespace Z0.Asm.Dsl
 
     using K = RegisterKind;
         
-    public readonly struct al : IRegOp8<al,byte>
+    public readonly struct al : IRegOperand8<al,byte>
     {            
         public readonly byte Data;
 
@@ -36,7 +36,7 @@ namespace Z0.Asm.Dsl
         }
     }
 
-    public readonly struct cl : IRegOp8<cl,byte>
+    public readonly struct cl : IRegOperand8<cl,byte>
     {        
         public readonly byte Data;
 
@@ -62,7 +62,7 @@ namespace Z0.Asm.Dsl
         public K Kind => K.CL;
     }    
 
-    public readonly struct dl : IRegOp8<dl,byte>
+    public readonly struct dl : IRegOperand8<dl,byte>
     {            
         public readonly byte Data;
 
@@ -88,7 +88,7 @@ namespace Z0.Asm.Dsl
         public K Kind => K.DL;
     }    
 
-    public readonly struct bl : IRegOp8<bl,byte>
+    public readonly struct bl : IRegOperand8<bl,byte>
     {        
         public readonly byte Data;
 
@@ -115,7 +115,7 @@ namespace Z0.Asm.Dsl
 
     }    
 
-    public readonly struct sil : IRegOp8<sil,byte>
+    public readonly struct sil : IRegOperand8<sil,byte>
     {            
         public readonly byte Data;
 
@@ -141,7 +141,7 @@ namespace Z0.Asm.Dsl
         public K Kind => K.SIL;
     }    
 
-    public readonly struct dil : IRegOp8<dil,byte>
+    public readonly struct dil : IRegOperand8<dil,byte>
     {
         public readonly byte Data;
 
@@ -168,7 +168,7 @@ namespace Z0.Asm.Dsl
 
     }        
 
-    public readonly struct spl : IRegOp8<spl,byte>
+    public readonly struct spl : IRegOperand8<spl,byte>
     {
         public readonly byte Data;
 
@@ -194,7 +194,7 @@ namespace Z0.Asm.Dsl
 
     }            
 
-    public readonly struct bpl : IRegOp8<bpl,byte>
+    public readonly struct bpl : IRegOperand8<bpl,byte>
     {
         public readonly byte Data;
 
@@ -220,7 +220,7 @@ namespace Z0.Asm.Dsl
         public K Kind => K.BPL;
     }                
 
-    public readonly struct r8b : IRegOp8<r8b,byte>
+    public readonly struct r8b : IRegOperand8<r8b,byte>
     {
         public readonly byte Data;
 
@@ -247,7 +247,7 @@ namespace Z0.Asm.Dsl
 
     }                    
 
-    public readonly struct r9b : IRegOp8<r9b,byte>
+    public readonly struct r9b : IRegOperand8<r9b,byte>
     {
         public readonly byte Data;
 
@@ -269,7 +269,7 @@ namespace Z0.Asm.Dsl
         public K Kind => K.R9L;
     }                        
 
-    public readonly struct r10b : IRegOp8<r10b,byte>
+    public readonly struct r10b : IRegOperand8<r10b,byte>
     {
         public readonly byte Data;
 
@@ -293,7 +293,7 @@ namespace Z0.Asm.Dsl
 
     }                        
 
-    public readonly struct r11b : IRegOp8<r11b,byte>
+    public readonly struct r11b : IRegOperand8<r11b,byte>
     {
         public readonly byte Data;
 
@@ -316,7 +316,7 @@ namespace Z0.Asm.Dsl
 
     }                        
 
-    public readonly struct r12b : IRegOp8<r12b,byte>
+    public readonly struct r12b : IRegOperand8<r12b,byte>
     {
         public readonly byte Data;
 
@@ -338,7 +338,7 @@ namespace Z0.Asm.Dsl
         public K Kind => K.R12L;
     }                    
 
-    public readonly struct r13b : IRegOp8<r13b,byte>
+    public readonly struct r13b : IRegOperand8<r13b,byte>
     {
         public readonly byte Data;
 
@@ -361,7 +361,7 @@ namespace Z0.Asm.Dsl
 
     }                        
 
-    public readonly struct r14b : IRegOp8<r14b,byte>
+    public readonly struct r14b : IRegOperand8<r14b,byte>
     {
         public readonly byte Data;
 
@@ -384,7 +384,7 @@ namespace Z0.Asm.Dsl
 
     }                        
 
-    public readonly struct r15b : IRegOp8<r15b,byte>
+    public readonly struct r15b : IRegOperand8<r15b,byte>
     {
         public readonly byte Data;
 

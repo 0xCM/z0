@@ -9,8 +9,8 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
 
-    public readonly struct r8<R> : IRegOp8<r8<R>,R>
-        where R : unmanaged, IRegOp8
+    public readonly struct r8<R> : IRegOperand8<r8<R>,byte>
+        where R : unmanaged, IRegOperand8
     {
         public readonly byte Data;
 
@@ -26,7 +26,7 @@ namespace Z0.Asm.Dsl
             get => default(R).Kind;
         }
 
-        byte IOperand<byte>.Content 
+        byte IOperand<byte>.Content
             => Data;
     }
 }

@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool nonempty(string src)
-            => !string.IsNullOrWhiteSpace(src);
+            => sys.nonempty(src);
 
         /// <summary>
         /// Tests whether the source string is empty
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool empty(string src)
-            => string.IsNullOrWhiteSpace(src);
+            => sys.empty(src);
 
         /// <summary>
         /// A string-specific coalescing operation
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline)]
         public static string denullify(string test)
-            => empty(test) ? string.Empty : test;
+            => empty(test) ? EmptyString : test;
 
         /// <summary>
         /// Extracts a substring

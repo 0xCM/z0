@@ -76,7 +76,8 @@ namespace Z0.Asm.Data
             var opcodes = span(OpCodeServices.InstructionTokens);
             using var dst = CaseWriter("InstructionTokens", FileExtensions.Csv);
             var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
-            for(var i=0; i<opcodes.Length; i++)
+            dst.WriteLine(header);
+            for(var i=1; i<opcodes.Length; i++)
             {
                 ref readonly var token = ref skip(opcodes,i);
                 var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
@@ -99,8 +100,7 @@ namespace Z0.Asm.Data
             var data = OpCodeServices.dataset();
             var count = data.OpCodeCount;
             var records = data.Records.ToReadOnlySpan();
-            using var writer = CaseWriter("OpCodes");
-            
+            using var writer = CaseWriter("OpCodes");            
             writer.WriteLine(OpCodeRecord.FormatHeader());
             for(var i=0; i<records.Length; i++)
                 writer.WriteLine(skip(records,i).Format());        

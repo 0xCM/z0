@@ -9,12 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Address16 : IAddress<Address16,W16,ushort>
-    {
-        public ushort Location {get;}
+    using A = Address16;
+    using W = W16;
+    using T = System.UInt16;
 
-        public static Address16 Empty 
-            => new Address16(0);
+    public readonly struct Address16 : IAddress<A,W,T>
+    {
+        public readonly T Location;
 
         public bool IsEmpty 
         {
@@ -28,43 +29,34 @@ namespace Z0
              get => Location != 0; 
         }
 
-        public Address16 Zero 
+        public A Zero 
         {
              [MethodImpl(Inline)] 
              get => Empty; 
         }
 
         [MethodImpl(Inline)]
-        public static Address16 From(ushort offset)
-            => new Address16(offset);
+        public static implicit operator A(T src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Address16(ushort src)
-            => From(src);
+        public static A operator+(A x, T y)
+            => new A((T)(x.Location + y));
 
         [MethodImpl(Inline)]
-        public static Address16 operator+(Address16 x, ushort y)
-            => From((ushort)(x.Location + y));
+        public static bool operator==(A x, A y)
+            => x.Location == y.Location;
 
         [MethodImpl(Inline)]
-        public static bool operator==(Address16 x, Address16 y)
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(Address16 x, Address16 y)
-            => !x.Equals(y);
-
-        [MethodImpl(Inline)]
-        internal Address16(ushort offset)
-        {
-            Location = offset;
-        }
+        public static bool operator!=(A x, A y)
+            => x.Location != y.Location;
 
         [MethodImpl(Inline)]
         public string Format()
             => Location.FormatSmallHex(true);
         
-        public bool Equals(Address16 src)        
+        [MethodImpl(Inline)]
+        public bool Equals(A src)        
             => Location == src.Location;
 
         public override string ToString()
@@ -73,7 +65,17 @@ namespace Z0
         public override int GetHashCode()
             => Location.GetHashCode();
         
-        public override bool Equals(object src)
-            => src is Address16 l && Equals(l);
+        public override bool Equals(object src)        
+            => src is A a && Equals(a);
+        
+        public static A Empty 
+            => new A(0);
+
+        T IAddress<W,T>.Location 
+            => Location;
+
+        [MethodImpl(Inline)]
+        public Address16(T offset)
+            => Location = offset;
     }
 }

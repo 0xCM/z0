@@ -12,8 +12,8 @@ namespace Z0.Asm.Dsl
 
     using K = RegisterKind;
 
-    public readonly struct xmm<R,N> : IXmmRegOp<xmm<R,N>, N>
-        where R : unmanaged, IXmmRegOp
+    public readonly struct xmm<R,N> : IXmmOperand<xmm<R,N>, N>
+        where R : unmanaged, IXmmOperand
         where N : unmanaged, ITypeNat                      
     {
         public Fixed128 Content {get;}
@@ -37,7 +37,7 @@ namespace Z0.Asm.Dsl
         }
     }
 
-    public readonly struct xmm : IXmmRegOp
+    public readonly struct xmm : IXmmOperand
     {
         public Fixed128 Content {get;}
         

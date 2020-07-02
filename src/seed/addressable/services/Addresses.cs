@@ -42,7 +42,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Address64 address64(ulong src)
             => new Address64(src);
-
          
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> edit<T>(MemoryAddress src, int length)

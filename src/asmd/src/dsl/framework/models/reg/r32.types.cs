@@ -11,7 +11,7 @@ namespace Z0.Asm.Dsl
     
     using K = RegisterKind;
 
-    public readonly struct eax : IRegOp32<eax,uint>
+    public readonly struct eax : IRegOperand32<eax,uint>
     {            
         public uint Content {get;}
 
@@ -34,7 +34,7 @@ namespace Z0.Asm.Dsl
         }
     }
 
-    public readonly struct ecx : IRegOp32<ecx,uint>
+    public readonly struct ecx : IRegOperand32<ecx,uint>
     {
         public uint Content {get;}
 
@@ -57,7 +57,7 @@ namespace Z0.Asm.Dsl
         }
     }    
 
-    public readonly struct edx : IRegOp32<edx,uint>
+    public readonly struct edx : IRegOperand32<edx,uint>
     {
         public uint Content {get;}
 
@@ -81,7 +81,7 @@ namespace Z0.Asm.Dsl
         }
     }    
 
-    public readonly struct ebx : IRegOp32<ebx,uint>
+    public readonly struct ebx : IRegOperand32<ebx,uint>
     {
         public uint Content {get;}
 
@@ -104,7 +104,7 @@ namespace Z0.Asm.Dsl
         }
     }    
 
-    public readonly struct esi : IRegOp32<esi,uint>
+    public readonly struct esi : IRegOperand32<esi,uint>
     {            
         public uint Content {get;}
 
@@ -127,7 +127,7 @@ namespace Z0.Asm.Dsl
         }
     }    
 
-    public readonly struct edi : IRegOp32<edi,uint>
+    public readonly struct edi : IRegOperand32<edi,uint>
     {
         public uint Content {get;}
 
@@ -150,7 +150,7 @@ namespace Z0.Asm.Dsl
         }
     }        
 
-    public readonly struct esp : IRegOp32<esp,uint>
+    public readonly struct esp : IRegOperand32<esp,uint>
     {            
         public uint Content {get;}
 
@@ -173,7 +173,7 @@ namespace Z0.Asm.Dsl
         }
     }            
 
-    public readonly struct ebp : IRegOp32<ebp,uint>
+    public readonly struct ebp : IRegOperand32<ebp,uint>
     {
         public uint Content {get;}
 
@@ -196,7 +196,7 @@ namespace Z0.Asm.Dsl
         }
     }                
 
-    public readonly struct r8d : IRegOp32<r8d,uint>
+    public readonly struct r8d : IRegOperand32<r8d,uint>
     {
         public uint Content {get;}
 
@@ -215,7 +215,7 @@ namespace Z0.Asm.Dsl
         }
     }                    
 
-    public readonly struct r9d : IRegOp32<r9d,uint>
+    public readonly struct r9d : IRegOperand32<r9d,uint>
     {            
         public uint Content {get;}
 
@@ -234,7 +234,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r10d : IRegOp32<r10d,uint>
+    public readonly struct r10d : IRegOperand32<r10d,uint>
     {            
         public uint Content {get;}
 
@@ -253,7 +253,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r11d : IRegOp32<r11d,uint>
+    public readonly struct r11d : IRegOperand32<r11d,uint>
     {
         public uint Content {get;}
 
@@ -272,7 +272,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r12d : IRegOp32<r12d,uint>
+    public readonly struct r12d : IRegOperand32<r12d,uint>
     {            
         public uint Content {get;}
 
@@ -291,7 +291,7 @@ namespace Z0.Asm.Dsl
         }
     }                    
 
-    public readonly struct r13d : IRegOp32<r13d,uint>
+    public readonly struct r13d : IRegOperand32<r13d,uint>
     {
         public uint Content {get;}
         
@@ -310,7 +310,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r14d : IRegOp32<r14d,uint>
+    public readonly struct r14d : IRegOperand32<r14d,uint>
     {
         public uint Content {get;}
 
@@ -330,7 +330,7 @@ namespace Z0.Asm.Dsl
         }
     }                        
 
-    public readonly struct r15d : IRegOp32<r15d,uint>
+    public readonly struct r15d : IRegOperand32<r15d,uint>
     {            
         public uint Content {get;}
 

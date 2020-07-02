@@ -20,7 +20,7 @@ namespace Z0
         public int TokenValue
         {
             [MethodImpl(Inline)]
-            get => (int)Data;
+            get => (int)Data.Location;
         }
          
         public bool IsEmpty

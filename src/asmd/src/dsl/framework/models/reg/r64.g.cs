@@ -9,8 +9,8 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
 
-    public readonly struct r64<R> : IRegOp64<r64<R>,R>
-        where R : unmanaged, IRegOp64
+    public readonly struct r64<R> : IRegOperand64<r64<R>,R>
+        where R : unmanaged, IRegOperand64
     {
         public readonly ulong Data;
 

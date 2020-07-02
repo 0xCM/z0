@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct m128 : IMemOp128<m128>
+    public readonly struct m128 : IMemOperand128<m128,Fixed128>
     {
         public Fixed128 Content {get;}
 

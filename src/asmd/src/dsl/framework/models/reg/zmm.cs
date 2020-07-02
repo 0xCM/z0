@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct zmm : IZmmRegOp
+    public readonly struct zmm : IZmmOperand
     {
         public Fixed512 Content {get;}
         

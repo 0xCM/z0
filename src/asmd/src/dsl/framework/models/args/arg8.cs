@@ -18,10 +18,10 @@ namespace Z0.Asm.Dsl
 
         public SignKind Sign {get;}
 
-        public OperandKind OpKind {get;}
+        public AsmOperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public arg8(byte value, SignKind sign, OperandKind kind)
+        public arg8(byte value, SignKind sign, AsmOperandKind kind)
         {
             Content = value;
             OpKind = kind;

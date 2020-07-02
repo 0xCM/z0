@@ -10,7 +10,7 @@ namespace Z0.Asm.Dsl
     using static Konst;
     using static math;
 
-    public readonly struct r32 : IRegOp32
+    public readonly struct r32 : IRegOperand32
     {   
         readonly ulong Data;
 

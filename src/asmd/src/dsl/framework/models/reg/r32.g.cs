@@ -9,8 +9,8 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
 
-    public readonly struct r32<R> : IRegOp32<r32<R>,R>
-        where R : unmanaged, IRegOp32
+    public readonly struct r32<R> : IRegOperand32<r32<R>,R>
+        where R : unmanaged, IRegOperand32
     {
         public readonly uint Data;
 

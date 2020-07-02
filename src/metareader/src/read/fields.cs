@@ -56,7 +56,7 @@ namespace Z0
             for(var i=0; i<defs.Length; i++)
             {
                 var def = reader.GetMethodDefinition(skip(defs, i));
-                var rva = (Address32)def.RelativeVirtualAddress;
+                var rva = (Address32)(uint)def.RelativeVirtualAddress;
                 var name = reader.GetString(def.Name);
                 seek(methods,i) = (name,rva);            
             }

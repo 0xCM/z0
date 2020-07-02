@@ -10,8 +10,8 @@ namespace Z0.Asm.Dsl
     using static Konst;
     using static Root;
 
-    public readonly struct reg<R> : IRegOp
-        where R : unmanaged, IRegOp
+    public readonly struct reg<R> : IRegOperand
+        where R : unmanaged, IRegOperand
     {
         public R Value {get;}
 

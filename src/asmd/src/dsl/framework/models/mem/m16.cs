@@ -9,9 +9,9 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct m16 : IMemOp16<m16>        
+    public readonly struct m16 : IMemOperand16<m16,ushort>        
     {
-        public ushort Content {get;}
+        public readonly ushort Data;
 
         [MethodImpl(Inline)]
         public static implicit operator m16(ushort src)
@@ -19,14 +19,14 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public static implicit operator ushort(m16 src)
-            => src.Content;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public m16(ushort src)
-        {
-            Content = src;
-        }
+            => Data = src;
 
+        ushort IOperand<ushort>.Content 
+            => Data;
         public DataWidth Width 
             => DataWidth.W16;
     }

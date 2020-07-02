@@ -11,7 +11,7 @@ namespace Z0.Asm.Dsl
     using static Konst;
     using static V0;
 
-    public readonly struct r64 : IRegOp64
+    public readonly struct r64 : IRegOperand64
     {    
         readonly Vector128<ulong> Data;
         

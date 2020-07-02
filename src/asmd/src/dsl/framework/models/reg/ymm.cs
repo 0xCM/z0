@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct ymm : IYmmRegOp
+    public readonly struct ymm : IYmmOperand
     {
         public Fixed256 Content {get;}
         public RegisterKind Kind {get;}

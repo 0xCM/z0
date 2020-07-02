@@ -10,7 +10,7 @@ namespace Z0.Asm.Dsl
     using static Konst;    
     using static Memories;
     
-    public readonly struct imm<T> : IImmOp<T>
+    public readonly struct imm<T> : IImmOperand<T>
         where T : unmanaged
     {
         public T Content {get;}
@@ -28,7 +28,7 @@ namespace Z0.Asm.Dsl
         }
     }
 
-    public readonly struct imm<E,T> : IImmOp<@enum<E,T>>        
+    public readonly struct imm<E,T> : IImmOperand<@enum<E,T>>        
         where T : unmanaged
         where E : unmanaged, Enum
     {

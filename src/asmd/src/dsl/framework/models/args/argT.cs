@@ -19,10 +19,10 @@ namespace Z0.Asm.Dsl
 
         public uint Width {get;}
 
-        public OperandKind OpKind {get;}
+        public AsmOperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public arg(T value, SignKind sign, OperandKind kind, uint width)
+        public arg(T value, SignKind sign, AsmOperandKind kind, uint width)
         {
             Content = value;
             Sign = sign;

@@ -9,11 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Address64 : IAddress<Address64,W64,ulong>
-    {
-        public ulong Location {get;}
+    using A = Address64;
+    using W = W64;
+    using T = System.UInt64;
 
-        public static Address64 Empty => new Address64(0);
+    public readonly struct Address64 : IAddress<A,W,T>
+    {
+        public readonly T Location;
 
         public bool IsEmpty 
         {
@@ -27,39 +29,34 @@ namespace Z0
              get => Location != 0; 
         }
 
-        public Address64 Zero 
+        public A Zero 
         {
              [MethodImpl(Inline)] 
              get => Empty; 
         }
 
         [MethodImpl(Inline)]
-        public static Address64 From(ulong offset)
-            => new Address64(offset);
+        public static implicit operator A(T src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static Address64 operator+(Address64 x, ulong y)
-            => From((ulong)(x.Location + y));
+        public static A operator+(A x, T y)
+            => new A((T)(x.Location + y));
 
         [MethodImpl(Inline)]
-        public static bool operator==(Address64 x, Address64 y)
-            => x.Equals(y);
+        public static bool operator==(A x, A y)
+            => x.Location == y.Location;
 
         [MethodImpl(Inline)]
-        public static bool operator!=(Address64 x, Address64 y)
-            => !x.Equals(y);
-
-        [MethodImpl(Inline)]
-        internal Address64(ulong offset)
-        {
-            Location = offset;
-        }
+        public static bool operator!=(A x, A y)
+            => x.Location != y.Location;
 
         [MethodImpl(Inline)]
         public string Format()
             => Location.FormatSmallHex(true);
         
-        public bool Equals(Address64 src)        
+        [MethodImpl(Inline)]
+        public bool Equals(A src)        
             => Location == src.Location;
 
         public override string ToString()
@@ -68,7 +65,17 @@ namespace Z0
         public override int GetHashCode()
             => Location.GetHashCode();
         
-        public override bool Equals(object src)
-            => src is Address64 l && Equals(l);
+        public override bool Equals(object src)        
+            => src is A a && Equals(a);
+        
+        public static A Empty 
+            => new A(0);
+
+        T IAddress<W,T>.Location 
+            => Location;
+
+        [MethodImpl(Inline)]
+        public Address64(T offset)
+            => Location = offset;
     }
 }

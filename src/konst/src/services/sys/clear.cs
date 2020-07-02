@@ -12,10 +12,10 @@ namespace Z0
     partial struct sys
     {
         [MethodImpl(Options), Opaque(ClearSpan), Closures(Closure)]
-        public static Span<T> clear<T>(Span<T> src)
+        public static ref readonly Span<T> clear<T>(in Span<T> src)
         {
             src.Clear();
-            return src;
+            return ref src;
         }
     }
 }

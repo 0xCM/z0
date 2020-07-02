@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
 
-    public readonly struct m64 : IMemOp64<m64>
+    public readonly struct m64 : IMemOperand64<m64,ulong>
     {
         public ulong Content {get;}
 

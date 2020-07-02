@@ -53,15 +53,15 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline), Op]
         public Address8 Parse(string src, out Address8 result, Address8? @default = null)     
-            => result = Address8.From((byte)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
+            => result = new Address8((byte)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
 
         [MethodImpl(Inline), Op]
         public Address16 Parse(string src, out Address16 result, Address16? @default = null)     
-            => result = Address16.From((ushort)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
+            => result = new Address16((ushort)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
 
         [MethodImpl(Inline), Op]
         public Address32 Parse(string src, out Address32 result, Address32? @default = null)     
-            => result = Address32.From((uint)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
+            => result = new Address32((uint)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
 
         [MethodImpl(Inline), Op]
         public MemoryAddress Parse(string src, out MemoryAddress result, MemoryAddress? @default = null)     

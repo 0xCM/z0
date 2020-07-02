@@ -10,8 +10,8 @@ namespace Z0.Asm.Dsl
     using static Konst;
     using static Typed;
 
-    public readonly struct ymm<R> : IYmmRegOp<ymm<R>,R>
-        where R : unmanaged, IRegOp
+    public readonly struct ymm<R> : IYmmRegOperand<ymm<R>,R>
+        where R : unmanaged, IRegOperand
     {
         public Fixed256 Content {get;}
 

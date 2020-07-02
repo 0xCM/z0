@@ -7,14 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     using static Konst;
 
     public readonly struct MemoryOffset : IAddressable<MemoryOffset>
     {
-        public static MemoryOffset Empty 
-            => new MemoryOffset(MemoryAddress.Empty, 0, NumericWidth.None);
-
         public MemoryAddress Base {get;}
 
         public ulong Offset {get;}
@@ -105,5 +101,8 @@ namespace Z0
 
         public override string ToString() 
             => Format();
+
+        public static MemoryOffset Empty 
+            => new MemoryOffset(MemoryAddress.Empty, 0, NumericWidth.None);
     }
 }

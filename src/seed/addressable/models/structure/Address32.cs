@@ -9,9 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Address32 : IAddress<Address32,W32,uint>
+    using A = Address32;
+    using W = W32;
+    using T = System.UInt32;
+
+    public readonly struct Address32 : IAddress<A,W,T>
     {
-        public uint Location {get;}
+        public readonly T Location;
 
         public bool IsEmpty 
         {
@@ -25,51 +29,34 @@ namespace Z0
              get => Location != 0; 
         }
 
-        public Address32 Zero 
+        public A Zero 
         {
              [MethodImpl(Inline)] 
              get => Empty; 
         }
 
         [MethodImpl(Inline)]
-        public static Address32 From(uint offset)
-            => new Address32(offset);
+        public static implicit operator A(T src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Address32(int src)
-            => new Address32((uint)src);
+        public static A operator+(A x, T y)
+            => new A((T)(x.Location + y));
 
         [MethodImpl(Inline)]
-        public static explicit operator int(Address32 src)
-            => (int)src.Location;
+        public static bool operator==(A x, A y)
+            => x.Location == y.Location;
 
         [MethodImpl(Inline)]
-        public static implicit operator Address32(uint src)
-            => new Address32(src);
-
-        [MethodImpl(Inline)]
-        public static Address32 operator+(Address32 x, uint y)
-            => From((uint)(x.Location + y));
-
-        [MethodImpl(Inline)]
-        public static bool operator==(Address32 x, Address32 y)
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(Address32 x, Address32 y)
-            => !x.Equals(y);
-
-        [MethodImpl(Inline)]
-        internal Address32(uint offset)
-        {
-            Location = offset;
-        }
+        public static bool operator!=(A x, A y)
+            => x.Location != y.Location;
 
         [MethodImpl(Inline)]
         public string Format()
             => Location.FormatSmallHex(true);
         
-        public bool Equals(Address32 src)        
+        [MethodImpl(Inline)]
+        public bool Equals(A src)        
             => Location == src.Location;
 
         public override string ToString()
@@ -78,11 +65,17 @@ namespace Z0
         public override int GetHashCode()
             => Location.GetHashCode();
         
-        public override bool Equals(object src)
-            => src is Address32 l && Equals(l);
+        public override bool Equals(object src)        
+            => src is A a && Equals(a);
+        
+        public static A Empty 
+            => new A(0);
 
-        public static Address32 Empty 
-            => new Address32(0);
+        T IAddress<W,T>.Location 
+            => Location;
 
+        [MethodImpl(Inline)]
+        public Address32(T offset)
+            => Location = offset;
     }
 }

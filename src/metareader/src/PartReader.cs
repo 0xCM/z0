@@ -165,7 +165,7 @@ namespace Z0
 
                         var info = new MethodBodyInfo{
                             Name = reader.GetString(md.Name),
-                            Rva = rva,
+                            Rva = (uint)rva,
                             Cil = body.GetILBytes()
                             };
                         dst.Add(info);

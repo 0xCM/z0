@@ -182,7 +182,7 @@ namespace Z0.Asm
                 var size = (ushort)instruction.ByteLength;
                 var encoded = bytes.Slice(offset, size);
                 
-                var a16 = Address16.From(offset);
+                var a16 = new Address16(offset);
                 Process(a16, encoded, instruction);
                 offset += size;
             }

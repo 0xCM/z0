@@ -52,6 +52,16 @@ namespace Z0
 
         SpanToArray,
 
-        
+        InitRefBlock,       
+
+        FillSpan,
+
+        CopyCellToVoidPointer,
+
+        CopyCellToGenericPointer,
+
+        CopySpan,
+
+        EmptyStringTest,
     }
 }

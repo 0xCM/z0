@@ -23,7 +23,5 @@ namespace Z0
         [MethodImpl(Options), Opaque(CharSpanToString)]
         public static string @string(ReadOnlySpan<char> src)
             => src.ToString();
-
-
     }
 }

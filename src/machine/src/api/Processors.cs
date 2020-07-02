@@ -18,14 +18,14 @@ namespace Z0.Machine
         /// Creates a nonparametric process state
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static ProcessState state(object initial)
-            => new ProcessState(initial);
+        public static CommandProcessorState state(object initial)
+            => new CommandProcessorState(initial);
 
         /// <summary>
         /// Creates a nongeneric processor
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static Processor processor()
+        public static CommandProcessor processor()
             => default;
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace Z0.Machine
         /// <typeparam name="C">The command type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static ProcessState<C,S> state<C,S>(S initial, C cmd = default)
-            where C : unmanaged, ICmd<C>
-                => new ProcessState<C,S>(initial);
+        public static CommandProcessorState<C,S> state<C,S>(S initial, C cmd = default)
+            where C : unmanaged, IOperands<C>
+                => new CommandProcessorState<C,S>(initial);
 
         /// <summary>
         /// Creates a processor parametric in both command and state
@@ -76,16 +76,16 @@ namespace Z0.Machine
         /// <typeparam name="C">The command type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static Processor<C,S> processor<C,S>(C cmd = default, S state = default)
-            where C : unmanaged, ICmd<C>
-            where S : IProcessState<C,S>
+        public static CommandProcessor<C,S> processor<C,S>(C cmd = default, S state = default)
+            where C : unmanaged, IOperands<C>
+            where S : ICommandProcessorState<C,S>
                 => default;
 
         [MethodImpl(Inline)]
-        public static Processor<P,C,S> processor<P,C,S>(P p = default, C cmd = default, S state = default)
-            where P : unmanaged, IProcessor
-            where C : unmanaged, ICmd<C>
-            where S : IProcessState<C,S>
+        public static CommandProcessor<P,C,S> processor<P,C,S>(P p = default, C cmd = default, S state = default)
+            where P : unmanaged, ICommandProcessor
+            where C : unmanaged, IOperands<C>
+            where S : ICommandProcessorState<C,S>
                 => default;
     }
 }

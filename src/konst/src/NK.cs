@@ -135,13 +135,18 @@ namespace Z0
         public const NK UInt32x64k = NK.U32 | NK.U64;
 
         /// <summary>
+        /// Specifies signed integral types of width <see cref='W8'/> and <see cref='W64'/>
+        /// </summary>
+        public const NK Int8x64k = Int8k | Int64k;
+
+        /// <summary>
         /// Specifies unsigned integral types of width <see cref='W8'/> and <see cref='W64'/>
         /// </summary>
         public const NK UInt8x64k = UInt8k | UInt64k;
 
         /// <summary>
-        /// Specifies integral types of width <see cref='W8'/> and <see cref='W64'/>
+        /// Specifies signed and unsigned integral types of width <see cref='W8'/> and <see cref='W64'/>
         /// </summary>
-        public const NK Int8x64k = Numeric8k | Numeric64k;
+        public const NK Integers8x64k = UInt8x64k | Int8x64k;
     }
 }

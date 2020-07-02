@@ -31,6 +31,10 @@ namespace Z0
             => (uint)Unsafe.SizeOf<T>();
 
         [MethodImpl(Inline)]        
+        internal static uint bitsize<T>()
+            => (uint)Unsafe.SizeOf<T>() * 8;
+
+        [MethodImpl(Inline)]        
         internal static Span<T> EmptySpan<T>()
             => Span<T>.Empty;
 

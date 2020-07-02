@@ -10,7 +10,7 @@ namespace Z0.Asm.Dsl
     using static Konst;
     using static Typed;
 
-    public readonly struct zmm<N> : IZmmRegOp<zmm<N>,N>
+    public readonly struct zmm<N> : IZmmOperand<zmm<N>,N>
         where N : unmanaged, ITypeNat
     {
         public Fixed512 Content {get;}

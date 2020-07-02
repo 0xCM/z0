@@ -18,16 +18,17 @@ namespace Z0.Asm.Dsl
 
         public SignKind Sign {get;}
 
-        public OperandKind OpKind {get;}
+        public AsmOperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public arg256(Fixed256 value, SignKind sign, OperandKind kind)
+        public arg256(Fixed256 value, SignKind sign, AsmOperandKind kind)
         {
             Content = value;
             OpKind = kind;
             Sign = sign;
         }
 
-        public DataWidth Width => DataWidth.W256;
+        public DataWidth Width 
+            => DataWidth.W256;
     }
 }

@@ -13,8 +13,8 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Defines an M-parametric memory cell
     /// </summary>
-    public readonly struct mem<M> : IMemOp<M>
-        where M : unmanaged, IMemOp
+    public readonly struct mem<M> : IMemOperand<M>
+        where M : unmanaged, IMemOperand
     {
         public readonly M Data;
 
