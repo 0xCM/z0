@@ -34,7 +34,7 @@ namespace Z0
 
         unsafe void Process(in MemRef src, in MemStore store)
         {
-            var reader = PointedReader.create(src.Address.Pointer<byte>(), src.Length);
+            var reader = PointedReader.create(src.Location.Pointer<byte>(), src.Length);
             var dstA = Spans.alloc<byte>(src.Length);            
             var count = reader.ReadAll(dstA);            
             Claim.eq(count,src.Length);
@@ -82,7 +82,7 @@ namespace Z0
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];
-                var data = Addresses.cover(r.Address, r.Length);
+                var data = Addressable.view(r.Location, r.Length);
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
 
             }

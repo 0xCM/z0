@@ -8,7 +8,7 @@ namespace Z0.Asm.Dsl
     using System.Runtime.CompilerServices;
 
     using static Konst;    
-    using static Memories;
+    using static Root;
     
     public readonly struct imm<T> : IImmOperand<T>
         where T : unmanaged

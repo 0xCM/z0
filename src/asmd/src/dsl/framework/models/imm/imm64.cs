@@ -9,14 +9,17 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
+    using W = W64;
+
     public readonly struct imm64 : IImmAddress64<imm64>
     {
         public Imm64 Content {get;}
 
+        public static W W => default;
+
         [MethodImpl(Inline)]
         public static implicit operator imm64(ulong src)
             => new imm64(src);
-
 
         [MethodImpl(Inline)]
         public static implicit operator imm64(Fixed8 src)
@@ -53,7 +56,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public Address64 ToAddress()
-            => Addresses.address64((ulong)Content);
+            => Addressable.address(W, (ulong)Content);
 
         public string Format()
             => Content.Data.FormatHex();

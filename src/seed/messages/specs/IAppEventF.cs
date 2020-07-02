@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Characterizes a reified application event
     /// </summary>
@@ -22,5 +20,4 @@ namespace Z0
         object IAppEvent.Content
             => Content;                
     }
-
 }

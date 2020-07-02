@@ -20,9 +20,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         internal ExtractMembersStep(ICaptureWorkflow workflow)
-        {
-            Workflow = workflow;
-        }
+            => Workflow = workflow;
 
         public static ApiMember[] locate(IApiHost host)
         {

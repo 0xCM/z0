@@ -8,51 +8,42 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using E = ExtractEvents.ExtractParseFailed;
 
-    partial class ExtractEvents
+    using E = ExtractParseFailed;
+
+    public readonly struct ExtractParseFailed : IAppEvent<E>
     {
-        public enum ExtractParseFailedField
+        [MethodImpl(Inline)]
+        public static E Define(ExtractParseFailure data)
+            => new E(data);
+        
+        [MethodImpl(Inline)]
+        public ExtractParseFailed(ExtractParseFailure data)
         {
-            Title,
-
-            Term,
-
-            Uri,
+            Data = data;
         }
+        
+        public ExtractParseFailure Data {get;}
+        
+        const string Title = "Extract Parse Failure";
+        
+        const string TermLabel = "term";
 
-        public readonly struct ExtractParseFailed : IAppEvent<E>
-        {
-            public static E Empty => new E(ExtractParseFailure.Empty);
+        const string UriLabel = "uri";
 
-            [MethodImpl(Inline)]
-            public static E Define(ExtractParseFailure data)
-                => new E(data);
+        const string Delimiter = " | ";
+
+        public string Description
+            => text.label(Title, 
+                text.concat(
+                    text.assign(TermLabel, Data.TermCode), Delimiter, 
+                    text.assign(UriLabel, Data.OpUri)
+                    ));
             
-            [MethodImpl(Inline)]
-            ExtractParseFailed(ExtractParseFailure data)
-            {
-                Data = data;
-            }
-            
-            public ExtractParseFailure Data {get;}
-            
-            const string Title = "Extract Parse Failure";
-            
-            const string TermLabel = "term";
+        public E Zero => Empty;            
 
-            const string UriLabel = "uri";
+        public static E Empty 
+            => new E(ExtractParseFailure.Empty);
 
-            const string Delimiter = " | ";
-
-            public string Description
-                => text.label(Title, 
-                    text.concat(
-                        text.assign(TermLabel, Data.TermCode), Delimiter, 
-                        text.assign(UriLabel, Data.OpUri)
-                        ));
-                
-            public E Zero => Empty;            
-        }    
-    }
+    }    
 }

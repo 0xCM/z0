@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an application even exchange hub
     /// </summary>
-    public interface IEventBroker : IService
+    public interface IEventBroker
     {
         /// <summary>
         /// Registers a target sink to which events will be routed

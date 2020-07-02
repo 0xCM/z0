@@ -172,7 +172,7 @@ namespace Z0
                         if(j == 0)
                         {
                             var a = MemoryAddress.from(x);
-                            if(source.Address == a)
+                            if(source.Location == a)
                                 seek(results,i) = a;
                         }
                     }

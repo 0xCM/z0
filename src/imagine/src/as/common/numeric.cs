@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct As
     {
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static short int16<T>(T src)
             => As<T,short>(ref src);
@@ -33,7 +32,6 @@ namespace Z0
         public static ulong uint64<T>(T src)
             => As<T,ulong>(ref src);
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static float float32<T>(T src)
             => As<T,float>(ref src);
@@ -45,7 +43,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool bool8<T>(T src)
             => As<T,bool>(ref src);        
-
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref short int16<T>(ref T src)

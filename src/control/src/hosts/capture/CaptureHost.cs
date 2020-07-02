@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
+    using static Konst; 
     using static Root;
     
     public class CaptureHost : ICaptureHost
@@ -45,7 +45,7 @@ namespace Z0
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = context.CaptureServices.Formatter(FormatConfig);            
 
-            var wfc = AsmWorkflows.Service(context);            
+            var wfc = CaptureServices.Service(context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
             UriBitsReader = Capture.Services.EncodedHexReader;
             CaptureWorkflow = wfc.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(root));

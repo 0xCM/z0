@@ -26,7 +26,7 @@ namespace Z0
     public readonly struct ParsedFunctions : IBinaryResourceHost<ParsedFunctions>, IAsmFunctionCases
     {        
         public static IAsmFunctionCases Service 
-            => new ParsedFunctions(BinaryResource.Providers<ParsedFunctions>().Length);
+            => new ParsedFunctions(BinaryResource.providers<ParsedFunctions>().Length);
 
         [MethodImpl(Inline)]
         ParsedFunctions(int count)
@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         unsafe void Register(int index, OpIdentity id, ReadOnlySpan<byte> src)
-            => Data[index] = BinaryResource.Define(PartId.AsmTest, id, src); 
+            => Data[index] = BinaryResource.define(PartId.AsmTest, id, src); 
 
         public static ReadOnlySpan<byte> or_ᐤ8uㆍ8uᐤ 
             => new byte[17]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xd2,0x0b,0xc2,0x0f,0xb6,0xc0,0xc3}; 

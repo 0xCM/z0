@@ -46,7 +46,7 @@ namespace Z0
         {
             Id = opid;
             Offset = offset - 1;
-            Address = Addresses.address((ulong)location - 1ul);
+            Address = Addressable.address((ulong)location - 1ul);
             Captured = captured;
         }
 

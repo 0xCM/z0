@@ -9,9 +9,13 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
 
+    using W = W32;
+
     public readonly struct imm32 : IImmAddress32<imm32>
     {
         public Imm32 Content {get;}
+
+        public static W W => default;
 
         [MethodImpl(Inline)]
         public static implicit operator imm32(uint src)
@@ -24,7 +28,6 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public static implicit operator imm32(Fixed16 src)
             => new imm32(src);
-
 
         [MethodImpl(Inline)]
         public static bool operator <(imm32 a, imm32 b)
@@ -50,7 +53,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public Address32 ToAddress()
-            => Addresses.address32((uint)Content);
+            => Addressable.address(W, (uint)Content);
 
         public DataWidth Width 
             => DataWidth.W32;

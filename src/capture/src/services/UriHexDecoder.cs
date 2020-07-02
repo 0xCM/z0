@@ -7,13 +7,13 @@ namespace Z0.Asm
     using System;
     
     using static Konst;
-    using static Memories;
-
-    public readonly struct UriHexDecoder : IUriHexDecoder
+    using static Root;
+    
+    public readonly struct UriHexDecoder : TUriHexDecoder
     {        
         public static IUriHexDecoder Service => default(UriHexDecoder);
-                            
-        public int Decode(ReadOnlySpan<IdentifiedCode> src, Span<AsmInstructions> dst)
+
+        public static int decode(ReadOnlySpan<IdentifiedCode> src, Span<AsmInstructions> dst)
         {
             var decoder = Capture.Services.AsmDecoder();
             var count = src.Length;
@@ -22,26 +22,26 @@ namespace Z0.Asm
             return count;
         }
 
-        public AsmInstructions[] Decode(ReadOnlySpan<IdentifiedCode> src)
+        public static AsmInstructions[] decode(ReadOnlySpan<IdentifiedCode> src)
         {
             var count = src.Length;
             var dst = Root.alloc<AsmInstructions>(count);
-            Decode(src, dst);
+            decode(src, dst);
             return dst;
         }
 
-        public AsmInstructions[] Decode(params IdentifiedCode[] src)
+        public static AsmInstructions[] decode(params IdentifiedCode[] src)
         {
             var count = src.Length;
             var dst = Root.alloc<AsmInstructions>(count);
-            Decode(src, dst);
+            decode(src, dst);
             return dst;
         }
-
-        public Option<AsmInstructions> Decode(IdentifiedCode src)
+        
+        public static Option<AsmInstructions> decode(IdentifiedCode src)
             => Capture.DefaultDecoder.Decode(src);
 
-        public Option<AsmInstructionList> Decode(MemberCode src)
-            => Capture.DefaultDecoder.Decode(src.Encoded);            
+        public static Option<AsmInstructionList> decode(MemberCode src)
+            => Capture.DefaultDecoder.Decode(src.Encoded);      
     }
 }

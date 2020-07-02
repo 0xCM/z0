@@ -9,9 +9,13 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
 
+    using W = W16;
+
     public readonly struct imm16 : IImmAddress16<imm16>
     {
         public Imm16 Content {get;}
+
+        public static W W => default;
 
         [MethodImpl(Inline)]
         public static implicit operator imm16(ushort src)
@@ -55,7 +59,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public Address16 ToAddress()
-            => Addresses.address16((ushort)Content);
+            => Addressable.address(W, (ushort)Content);
 
         public DataWidth Width 
             => DataWidth.W16;

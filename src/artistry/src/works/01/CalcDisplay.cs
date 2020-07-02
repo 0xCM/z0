@@ -46,7 +46,7 @@ namespace Z0
 
         public void Display()
         {
-            var slots = MemorySlots.from<CalcSlotIndex>(typeof(CalcSlots));
+            var slots = MemSlots.from<CalcSlotIndex>(typeof(CalcSlots));
             ref readonly var add = ref slots[CalcSlotIndex.Add];
             ref readonly var sub = ref slots[CalcSlotIndex.Sub];
             ref readonly var mul = ref slots[CalcSlotIndex.Mul];

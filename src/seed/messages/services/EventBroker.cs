@@ -13,7 +13,7 @@ namespace Z0
 
     public class EventBroker : IEventBroker
     {
-        readonly Dictionary<Type, ISink> Subscriptions;
+        readonly Dictionary<Type,ISink> Subscriptions;
 
         [MethodImpl(Inline)]
         public EventBroker()

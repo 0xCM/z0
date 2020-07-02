@@ -10,7 +10,6 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Konst;
-    using static CaptureWorkflowEvents;
     using static Memories;
 
     public readonly struct MatchEmissionsStep : IMatchEmissions
@@ -41,7 +40,7 @@ namespace Z0.Asm
                 Claim.Eq(skip(fileSrc,i).Encoded.Length, skip(srcA, i).Encoded.Length);
             }
 
-            Context.Raise(new MatchedEmissions(host, srcA.Length, srcB));
+            Context.Raise(new MatchedCapturedEmissions(host, srcA.Length, srcB));
         }
     }
 }

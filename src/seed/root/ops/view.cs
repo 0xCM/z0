@@ -15,8 +15,8 @@ namespace Z0
     partial class Root
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ReadOnlySpan<T> view<T>(MemRef src)
-            => CreateReadOnlySpan(ref @ref<T>(src.Address), src.Count<T>());
+        public static ReadOnlySpan<T> view<T>(in MemRef src)
+            => CreateReadOnlySpan(ref @ref<T>(src.Location), src.Count<T>());
 
         /// <summary>   
         /// Creates a T-span from a supplied reference
