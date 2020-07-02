@@ -15,22 +15,8 @@ namespace Z0
         /// Selects literal fields from the source
         /// </summary>
         /// <param name="src">The data source</param>
-        public static IEnumerable<FieldInfo> Literals(this IEnumerable<FieldInfo> src)
-            => src.Where(x => x.IsLiteral);
-
-        /// <summary>
-        /// Selects literal fields from the source
-        /// </summary>
-        /// <param name="src">The data source</param>
         public static FieldInfo[] Literals(this FieldInfo[] src)
             => src.Where(x => x.IsLiteral).ToArray();
-
-        /// <summary>
-        /// Selects literal fields from the source
-        /// </summary>
-        /// <param name="src">The data source</param>
-        public static IEnumerable<FieldInfo> Literals(this IEnumerable<FieldInfo> src, Type match)
-            => src.Where(x => x.IsLiteral&& x.FieldType == match);
 
         /// <summary>
         /// Selects literal fields of specified type from the source

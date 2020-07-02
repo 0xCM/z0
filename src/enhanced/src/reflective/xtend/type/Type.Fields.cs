@@ -17,12 +17,5 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         public static FieldInfo[] Fields(this Type src)
             => src.GetFields(BF_All);
-
-        /// <summary>
-        /// Retrieves the public instance Fields declared by a supertype
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static FieldInfo[] InheritedPublicFields(this Type src)
-            => src.BaseType?.GetFields(BF_PublicInstance) ?? new FieldInfo[] { };
     }
 }

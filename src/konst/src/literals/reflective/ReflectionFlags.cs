@@ -15,29 +15,29 @@ namespace Z0
     public static class ReflectionFlags
     {
         /// <summary>
-        ///  All declared public members
+        ///  All declared non-public members
         /// </summary>
-        public const BindingFlags BF_Public = DeclaredOnly | Public | Instance | Static;
+        public const BindingFlags BF_Public = FlattenHierarchy | Public | Instance | Static;
 
         /// <summary>
         ///  All declared non-public members
         /// </summary>
-        public const BindingFlags BF_NonPublic = DeclaredOnly | NonPublic | Instance | Static;
+        public const BindingFlags BF_NonPublic = FlattenHierarchy | NonPublic | Instance | Static;
 
         /// <summary>
         /// All declared static members
         /// </summary>
-        public const BindingFlags BF_Static = DeclaredOnly | Public | NonPublic | Static;
+        public const BindingFlags BF_Static = FlattenHierarchy | Public | NonPublic | Static;
 
         /// <summary>
         ///  All instance mebers
         /// </summary>
-        public const BindingFlags BF_Instance = Public | NonPublic | Instance;
+        public const BindingFlags BF_Instance = FlattenHierarchy | Public | NonPublic | Instance;
 
         /// <summary>
         /// All declared instance members
         /// </summary>
-        public const BindingFlags BF_DeclaredInstance = DeclaredOnly | Public | NonPublic | Instance;
+        public const BindingFlags BF_DeclaredInstance =  FlattenHierarchy | Public | NonPublic | Instance;
 
         /// <summary>
         ///  All public static members, declared or inherited
@@ -52,30 +52,16 @@ namespace Z0
         /// <summary>
         ///  All declared non-public static members
         /// </summary>
-        public const BindingFlags BF_NonPublicStatic = DeclaredOnly | NonPublic | Static;
+        public const BindingFlags BF_NonPublicStatic = FlattenHierarchy | NonPublic | Static;
 
         /// <summary>
         ///  All declared non-public instance members
         /// </summary>
-        public const BindingFlags BF_NonPublicInstance = DeclaredOnly | NonPublic | Instance;
+        public const BindingFlags BF_NonPublicInstance = FlattenHierarchy | NonPublic | Instance;
                     
-        /// <summary>
-        /// All declared members
-        /// </summary>
-        public const BindingFlags BF_Declared = BF_DeclaredInstance | BF_Static;
-
-        /// <summary>
-        /// Public, non-public, instance and static members
-        /// </summary>
-        public const BindingFlags AnyVisibilityOrInstanceType
-            = Public
-            | NonPublic
-            | Instance
-            | Static;
-
         /// <summary>
         ///  All members, declared or inherited
         /// </summary>
-        public const BindingFlags BF_All = BF_Instance | BF_Static;
+        public const BindingFlags BF_All = BF_Public | BF_Static | BF_NonPublic | BF_Instance;
     }
 }

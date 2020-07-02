@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Linq;
+
     public static partial class XTend
     {
 
@@ -14,19 +17,14 @@ namespace Z0
         public App()
             : base(ContextFactory.CreateAppContext())
         {
+
+
+            var svc = Z0.KnownParts.Service;
+            term.print($"Part location: {svc.SearchLocation}");
+            term.print($"Part Count: {svc.Parts(svc.ComponentPaths).Length}");
+
         }
 
-        void SurveyArchive()
-        {
-            var archive = Archives.Services.CaptureArchive(Context.AppPaths.CaptureRoot);
-
-            Print($"Examining capture archive rooted at {archive.ArchiveRoot}");
-
-            Root.iter(archive.AsmFiles, file => Print(file));            
-            Root.iter(archive.HexFiles, file => Print(file));  
-            Root.iter(archive.ExtractFiles, file => Print(file));  
-            Root.iter(archive.ParseFiles, file => Print(file));              
-        }
 
         void RunCapture(params PartId[] parts)
         {

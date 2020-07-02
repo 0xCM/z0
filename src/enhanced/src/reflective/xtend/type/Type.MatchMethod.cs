@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="paramTypes">The method parameter types in ordinal position</param>
         public static Option<MethodInfo> MatchMethod(this Type declarer, string name, params Type[] paramTypes)
             => paramTypes.Length != 0
-                ? declarer.GetMethod(name, bindingAttr: AnyVisibilityOrInstanceType, binder: null, types: paramTypes, modifiers: null)
-                : declarer.GetMethod(name, AnyVisibilityOrInstanceType);
+                ? declarer.GetMethod(name, bindingAttr: BF_All, binder: null, types: paramTypes, modifiers: null)
+                : declarer.GetMethod(name, BF_All);
     }
 }

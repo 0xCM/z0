@@ -25,7 +25,8 @@ namespace Z0.Asm
         public static ApiMember[] locate(IApiHost host)
         {            
             var locator = Identities.Services.ApiLocator;
-            return locator.Located(host).ToArray();
+            var located = locator.Located(host);
+            return located;
         }
 
         public static ExtractedCode[] extract(IApiHost host)

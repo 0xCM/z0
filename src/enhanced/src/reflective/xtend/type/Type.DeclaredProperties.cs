@@ -17,13 +17,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static PropertyInfo[] DeclaredProperties(this Type src)
-            => src.GetProperties(BF_Declared);
-
-        /// <summary>
-        /// Retrieves the public and non-public static properties declared by a type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static PropertyInfo[] DeclaredStaticProperties(this Type t)
-            => t.GetProperties(BF_Static);
+            => src.GetProperties(BF_All);
     }
 }

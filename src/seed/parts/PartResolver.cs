@@ -27,15 +27,20 @@ namespace Z0
                 from part in resolve(prop)
                 select part;        
 
-        public IEnumerable<IPart> Resolve(IEnumerable<FilePath> paths)
-        {
-            foreach(var path in paths)
-            {
-                var part = Resolve(path);
-                if(part.IsSome())
-                    yield return part.Value;
-            }
-        } 
+        public IPart[] Resolve(FilePath[] paths)
+            => paths.Select(Resolve).Where(x => x.IsSome()).Select(x => x.Value);
+
+        public bool IsPart(Assembly src)
+            => test(src);
+
+        public Assembly[] Parts(FilePath[] src)
+            => src.Map(LoadAssembly).Where(x => x.IsSome()).Select(x => x.Value).Where(IsPart);
+
+        public bool DefinesPart(FilePath src)
+            => LoadAssembly(src).MapValueOrDefault(x => test(x));
+
+        static bool test(Assembly src)
+            => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Count() > 0;
 
         /// <summary>
         /// Loads an assembly from a potential part path
@@ -60,6 +65,5 @@ namespace Z0
         /// </summary>
         static Option<IPart> resolve(PropertyInfo src)
             => Option.Try(src, x => (IPart)x.GetValue(null));
-
     }
 }

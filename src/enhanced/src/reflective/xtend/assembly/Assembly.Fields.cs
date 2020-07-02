@@ -11,6 +11,6 @@ namespace Z0
     partial class XTend
     {
         public static FieldInfo[] Fields(this Assembly a)
-            => a.GetTypes().SelectMany(x => x.DeclaredFields()).ToArray();
+            => a.GetTypes().SelectMany(x => x.Fields()).ToArray();
     }
 }

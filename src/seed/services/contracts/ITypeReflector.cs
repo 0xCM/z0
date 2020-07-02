@@ -18,7 +18,7 @@ namespace Z0
             => Type.StaticProperties();
 
         FieldInfo[] DeclaredFields
-            => Type.DeclaredFields();
+            => Type.Fields();
     }
 
     public interface ITypeReflector<F> : ITypeReflector

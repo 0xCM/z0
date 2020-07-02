@@ -18,8 +18,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static MethodInfo[] DeclaredMethods(this Type src, bool nonspecial = true)
-            => nonspecial 
-            ? src.NonSpecialMethods(BF_Declared) 
-            : src.GetMethods(BF_Declared);
+            => src.NonSpecialMethods(BF_All);
     }
 }

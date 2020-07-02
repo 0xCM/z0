@@ -16,7 +16,7 @@ namespace Z0
         internal static PartIndex Define(IEnumerable<IPart> parts)        
             => new PartIndex(parts);
 
-        PartIndex(IEnumerable<IPart> src)
+        public PartIndex(IEnumerable<IPart> src)
         {
             Parts = new Dictionary<PartId, IPart>();
             foreach(var part in src)
@@ -26,6 +26,11 @@ namespace Z0
         public bool Contains(PartId id)
             => Parts.ContainsKey(id);
 
+        public int PartCount
+        {
+            get => Parts.Count;
+        }
+        
         public IEnumerator<IPart> GetEnumerator()
             => Parts.Values.GetEnumerator();
 

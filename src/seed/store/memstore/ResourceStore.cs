@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to query</param>
         public ResourceAccessor[] Accessors(Type src)        
-            => src.DeclaredStaticProperties()
+            => src.StaticProperties()
                  .Ignore()
                   .WithPropertyType(AccessorTypes)
                   .Select(p => p.GetGetMethod(true))                  

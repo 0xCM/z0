@@ -37,7 +37,6 @@ namespace Z0.Asm
 
                 if(extracts.Length == 0)
                     return;
-
                                 
                 var extractRpt = Workflow.ReportExtracts.CreateExtractReport(host.Uri, extracts);
                 Workflow.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);

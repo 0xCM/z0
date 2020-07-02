@@ -11,10 +11,10 @@ namespace Z0
     {
         IEnumerable<IPart> Known {get;}
 
-        IEnumerable<FilePath> ComponentPaths {get;}
+        FilePath[] ComponentPaths {get;}
 
         FolderPath SearchLocation {get;}
 
-        IEnumerable<PartDescription> Descriptions {get;}        
+        PartDescription[] Descriptions {get;}        
     }
 }

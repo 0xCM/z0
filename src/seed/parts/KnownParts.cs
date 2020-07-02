@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using static Konst;
     using static PartId;
@@ -15,23 +16,37 @@ namespace Z0
     {
         public static KnownParts Service => default;
         
+        PartResolver Resolver => PartResolver.Service;
+
         public IEnumerable<IPart> Known
             => PartResolver.Service.Resolve(ComponentPaths);
 
-        public IEnumerable<FilePath> ComponentPaths
+        public FilePath[] ComponentPaths
             => SearchLocation.Files(FileExtensions.Dll)
                               .Include(nameof(Z0))                              
                               .Exclude(nameof(Test))
-                              .Exclude(External.Select(x => x.Format()).ToArray());
+                              .Exclude(External.Select(x => x.Format()));
 
-        public IEnumerable<PartDescription> Descriptions
+        public bool DefinesPart(FilePath src)
+            => Resolver.DefinesPart(src);
+
+        public Assembly[] Parts(FilePath[] src)
+            => Resolver.Parts(src);
+
+        public bool IsPart(Assembly src)
+            => Resolver.IsPart(src);
+
+        public Assembly[] Parts(Assembly[] src)
+            => src.Where(IsPart);
+        
+        public PartDescription[] Descriptions
             => ComponentPaths.Select(p => new PartDescription(p));
         
         /// <summary>
         /// The location of potentially knowable parts
         /// </summary>
         public FolderPath SearchLocation 
-            => FilePath.Define(Parts.Seed.Resolved.Owner.Location).FolderPath;
+            => FilePath.Define(Z0.Parts.Seed.Resolved.Owner.Location).FolderPath;
 
         /// <summary>
         /// External dependencies that don' participate in the componentization framework

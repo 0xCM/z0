@@ -21,7 +21,7 @@ namespace Z0
         
         [Op]
         public static FieldInfo[] search(Type src)
-            => src.GetFields(BF_Declared).Where(f => f.IsLiteral);        
+            => src.LiteralFields();
         
         [Op]
         public static FieldInfo[] search(Type src, Type match)

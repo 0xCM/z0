@@ -14,6 +14,6 @@ namespace Z0
     partial class XTend
     {
         public static Option<PropertyInfo> Property(this Type src, string name)
-            => src.GetProperties(BF_Declared).Where(p => p.Name == name).FirstOrDefault();
+            => src.GetProperties(BF_All).Where(p => p.Name == name).FirstOrDefault();
     }
 }

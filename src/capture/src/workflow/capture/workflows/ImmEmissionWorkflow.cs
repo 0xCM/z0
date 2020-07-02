@@ -168,7 +168,7 @@ namespace Z0.Asm
         void EmitRefined(in CaptureExchange exchange, params PartId[] parts)
         {
             foreach(var host in Hosts(parts))
-            {
+            {                
                 var archive = Archive(host);
                 EmitDirectRefinements(exchange, host, archive);                
                 EmitGenericRefinements(exchange, host, archive);

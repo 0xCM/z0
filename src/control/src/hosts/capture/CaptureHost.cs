@@ -62,6 +62,7 @@ namespace Z0
         
         public void Execute(params PartId[] parts)
         {
+
             if(Settings.EmitImmArtifacts)
                 EmitImm(parts);
 

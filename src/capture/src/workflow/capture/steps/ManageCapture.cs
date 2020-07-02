@@ -30,8 +30,14 @@ namespace Z0.Asm
         
         public void CaptureCatalogs(AsmArchiveConfig config, params PartId[] parts)
         {
+
             var dst = TargetArchive(config, parts);      
-            var catalogs = Context.ApiSet.MatchingCatalogs(parts).Where(x => x.ApiHostCount != 0).ToArray();                  
+            var api = Context.ApiSet;
+            
+
+            var catalogs = Context.ApiSet.MatchingCatalogs(parts).Where(x => x.ApiHostCount != 0).ToArray();
+
+
             foreach(var catalog in catalogs)   
                 CaptureCatalog(catalog, dst);
 

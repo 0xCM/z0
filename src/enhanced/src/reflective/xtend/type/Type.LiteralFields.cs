@@ -14,6 +14,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         public static FieldInfo[] LiteralFields(this Type src)
-            => src.DeclaredFields().Literals();
+            => src.Fields().Literals();
     }
 }

@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// A type considered to be empty
         /// </summary>
-        public static Type EmptyType => DefaultType.Empty;
+        public static Type EmptyType => typeof(void);
         
         /// <summary>
         /// A method considered to be empty
