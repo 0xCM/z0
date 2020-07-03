@@ -40,7 +40,10 @@ namespace Z0
             Register(index++, Identify.Op(nameof(within_ᐤ8uㆍ8uㆍ8uᐤ)), within_ᐤ8uㆍ8uㆍ8uᐤ);
         }
 
-        public BinaryResource[] Data {get;}
+        public readonly BinaryResource[] Data;
+
+        BinaryResource[] IContented<BinaryResource[]>.Content 
+            => Data;
 
         [MethodImpl(Inline)]
         unsafe void Register(int index, OpIdentity id, ReadOnlySpan<byte> src)

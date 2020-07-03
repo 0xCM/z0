@@ -9,7 +9,7 @@ namespace Z0
     using OC = OperationClass;
 
     [Flags]
-    public enum FixedOperationClass : ushort
+    public enum SegOpClass : ushort
     {
         /// <summary>
         /// The class that classifies nothing

@@ -4,20 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public enum WidthClosureKind : byte
+    /// <summary>
+    /// Defines literals that correspond to base-2 digits
+    /// </summary>
+    public enum BinaryDigit : byte
     {
-        None = 0,
+        /// <summary>
+        /// Specifies 0 base 2
+        /// </summary>
+        b0 = 0,
         
         /// <summary>
-        /// Indicates closure is specified for an explicitly-specified set naturals
+        /// Specifies 1 base 2
         /// </summary>
-        Individuals = 1,
-
-        /// <summary>
-        /// Indicates closure is specified for a continuous power-of-two sequence
-        /// </summary>
-        Range = 2,
+        b1 = 1,
     }
 }

@@ -11,6 +11,67 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
     using static As;
 
+    public readonly unsafe struct To
+    {
+        /// <summary>
+        /// Copies a byte
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        public static byte read8(in byte src)
+            => *gptr(src);
+
+        /// <summary>
+        /// Reads 16 bits from a contiguous sequence of 2 bytes
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        public static ushort read16(in byte src)
+            => *gptr<ushort>(src);
+
+        /// <summary>
+        /// Reads 32 bits from a contiguous sequence of 4 bytes
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        public static uint read32(in byte src)
+            => *gptr<uint>(src);
+
+        /// <summary>
+        /// Reads 32 bits from a contiguous sequence of 2 16-bit integers
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline), Op]
+        public static uint read32(in ushort src)
+            => *gptr<uint>(src);
+
+        /// <summary>
+        /// Reads 64 bits from a contiguous sequence of 8 bytes
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        public static ulong read64(in byte src)
+            => *gptr<ulong>(src);
+
+        /// <summary>
+        /// Reads 64 bits from a contiguous sequence of 4 16-bit integers
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        public static ulong read64(in ushort src)
+            => *gptr<ulong>(src);
+
+        /// <summary>
+        /// Reads 64 bits from a contiguous sequence of 2 32-bit integers
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        public static ulong read64(in uint src)
+            => *gptr<ulong>(src);
+
+    }
+
+
     [ApiHost]
     public readonly struct AsIn
     {

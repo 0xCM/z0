@@ -4,25 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public enum ImmClosureKind : byte
+    public enum GenericStateKind : byte
     {
+        /// <summary>
+        /// Indicates subject is nongeneric
+        /// </summary>
         None = 0,
-        
-        /// <summary>
-        /// Indicates closure is specified for an explicitly-specified set of immediates
-        /// </summary>
-        Individuals = 1,
 
         /// <summary>
-        /// Indicates closure is specified for a range of immediates
+        /// Indicates subject is a generic defintion
         /// </summary>
-        Range = 2,
+        Definition = 16,
 
         /// <summary>
-        /// Indicates closure is specified for an inclusive range of powers of 2
+        /// Indicates subject is open generic
         /// </summary>
-        Powers2 = 3,
+        Open = 32,
+
+        /// <summary>
+        /// Indicates subject is closed generic
+        /// </summary>
+        Closed = 64,
     }
 }

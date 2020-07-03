@@ -9,7 +9,7 @@ namespace Z0
     using W = DataWidth;  
 
     /// <summary>
-    /// Clasifies concrete storage linear memory segments of total width w over segments of numeric width
+    /// Defines segmented storage classifiers
     /// </summary>
     [Flags]
     public enum SegKind : ushort

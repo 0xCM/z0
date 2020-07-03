@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static IDI;
     
-    public interface IIdentityParser : IInfallibleParser<OpIdentity>, IStateless<OpIdentityParser,IIdentityParser>
+    public interface IIdentityParser : IInfallibleParser<OpIdentity>
     {
         [MethodImpl(Inline)]
         OpIdentity IInfallibleParser<OpIdentity>.Parse(string text)

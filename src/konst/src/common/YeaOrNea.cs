@@ -3,22 +3,20 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System;
-
+{        
     /// <summary>
-    /// Defines literals that correspond to base-2 digits
+    /// A binary choice, symbolically
     /// </summary>
-    public enum BinaryDigit : byte
+    public enum YeaOrNea : ushort
     {
         /// <summary>
-        /// Specifies 0 base 2
+        /// Aye
         /// </summary>
-        b0 = 0,
-        
+        Y = AsciLetterUp.Y,
+
         /// <summary>
-        /// Specifies 1 base 2
+        /// ~Aye
         /// </summary>
-        b1 = 1,
+        N = AsciLetterUp.N,       
     }
 }

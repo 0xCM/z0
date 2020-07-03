@@ -7,13 +7,13 @@ namespace Z0
     using System;
 
     using FW = FixedWidth;
-    using FC = FixedOperationClass;
+    using FC = SegOpClass;
 
     /// <summary>
-    /// Defines kind classifiers for functions defined over fixed-width operands
+    /// Defines segmented operation signature classifiers
     /// </summary>
     [Flags]
-    public enum FixedOperationKind : uint
+    public enum SegOpSig : uint
     {
        /// <summary>
        /// Classifies nothing

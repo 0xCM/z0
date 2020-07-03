@@ -4,41 +4,38 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using S = BinarySym;
 
-    /// <summary>
-    /// Defines the symbols that represent the base-2 digits
-    /// </summary>
-    public enum BinarySym : ushort
+    public enum BinaryDigitCode : byte
     {
         /// <summary>
-        /// The symbolic void
+        /// The binary digit with no code
         /// </summary>
         None = 0,
 
         /// <summary>
-        /// Specifies 0 base 2, asci code 48
+        /// Specifies the asci code for the eponymous binary digit
         /// </summary>
-        b0 = '0',
-        
-        /// <summary>
-        /// Specifies 1 base 2, asci code 49
-        /// </summary>
-        b1 = '1',
+        b0 = (byte)S.b0,
 
         /// <summary>
-        /// The first declared symbol
+        /// Specifies the asci code for the eponymous binary digit
+        /// </summary>
+        b1 = (byte)S.b1,
+
+        /// <summary>
+        /// The first declared code
         /// </summary>
         First = b0,
 
         /// <summary>
-        /// The last declared symbol
+        /// The last declared code
         /// </summary>
         Last = b1,
 
         /// <summary>
-        /// The symbol declaration count
+        /// The code declaration count
         /// </summary>
-        Count = Last - First + 1
-    }
+        Count = Last - First + 1         
+   }
 }
