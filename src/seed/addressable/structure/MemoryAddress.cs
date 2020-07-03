@@ -8,25 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
     
     public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable64
     {
         public ulong Location {get;}
 
-        [MethodImpl(Inline)]
-        public static unsafe MemoryAddress from<T>(in T src)
-            => pvoid<T>(src);        
-
-        /// <summary>
-        /// Defines an address predicated on the leading source cell
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline)]
-        public static unsafe MemoryAddress from<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => gptr(first(src));
-                
         public bool IsEmpty 
         {
              [MethodImpl(Inline)] 
@@ -71,8 +57,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator MemoryAddress(void* p)
-            => Addressable.address(p);
+        public static implicit operator MemoryAddress(void* pSrc)
+            => new MemoryAddress(pSrc);
 
         [MethodImpl(Inline)]
         public static explicit operator char*(MemoryAddress src)
@@ -83,16 +69,12 @@ namespace Z0
             => (byte*)src.Location;
 
         [MethodImpl(Inline)]
-        public static implicit operator MemoryAddress(IntPtr src)
-            => Root.address(src);
+        public static implicit operator MemoryAddress(IntPtr src)            
+            => new MemoryAddress((ulong)src.ToInt64());
 
         [MethodImpl(Inline)]
         public static implicit operator IntPtr(MemoryAddress src)
             => (IntPtr)src.Location;
-
-        [MethodImpl(Inline)]
-        public static implicit operator MemoryAddress(ulong src)
-            => Addressable.address(src);
 
         [MethodImpl(Inline)]
         public static implicit operator long(MemoryAddress src)
@@ -103,20 +85,24 @@ namespace Z0
             => src.Location;
 
         [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(ulong src)
+            => new MemoryAddress(src);
+
+        [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(long src)
-            => Addressable.address((ulong)src);
+            => new MemoryAddress((ulong)src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(int src)
-            => Addressable.address((uint)src);
+            => new MemoryAddress((uint)src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(ushort src)
-            => Addressable.address(src);
+            => new MemoryAddress(src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(short src)
-            => Addressable.address((ushort)src);
+            => new MemoryAddress((ushort)src);
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(MemoryAddress src)
@@ -153,7 +139,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static MemoryAddress operator+(MemoryAddress a, MemoryAddress b)
             => new MemoryAddress(a.Location + b.Location);
-
 
         [MethodImpl(Inline)]
         public static MemoryAddress operator-(MemoryAddress a, MemoryAddress b)
@@ -196,7 +181,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Hash()
-            => Root.hash(Location);
+            => core.hash(Location);
 
         public override int GetHashCode()
             => (int)Hash();

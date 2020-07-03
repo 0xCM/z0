@@ -4,17 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
-
-    [ApiHost]
-    partial class core
+    public enum ResourceFormat : byte
     {
+        None = 0,
 
+        ByteSpan,
 
+        CharSpan
     }
-
 }

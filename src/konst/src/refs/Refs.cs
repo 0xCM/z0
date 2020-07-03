@@ -15,33 +15,33 @@ namespace Z0
     [ApiHost]
     public readonly struct Refs
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe Ref from(sbyte[] src)
-            => define(ptr(@ref(span(src))), src.Length);
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static unsafe Ref<T> from<T>(in T src, uint count)
+            => new Ref<T>(define(ptr(src), size<T>(count)));
 
-        [MethodImpl(Inline), Op]
-        public static unsafe Ref from(byte[] src)
-            => define(ptr(@ref(span(src))), src.Length);
-
-        [MethodImpl(Inline), Op]
-        public static unsafe Ref from(ulong[] src)
-            => define(ptr(@ref(span(src))), src.Length);
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static unsafe Ref<T> from<T>(in T src, int count)
+            => new Ref<T>(define(ptr(src), size<T>((uint)count)));
 
         [MethodImpl(Inline), Op]
         public static unsafe ConstRef<char> from(string src)
             => new ConstRef<char>(define(ptr(@ref(span(src))), src.Length));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Ref<T> from<T>(T[] src)
-            => new Ref<T>(define(ptr(@ref(span(src))), size<T>((uint)src.Length)));
+            => from(span(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe ConstRef<T> from<T>(ReadOnlySpan<T> src)
+            => new ConstRef<T>(define(ptr(@ref(src)), size<T>((uint)src.Length)));
+
+        [MethodImpl(Inline)]
+        public static unsafe Ref<T> from<T>(Span<T> src)
+            => new Ref<T>(define(ptr(@ref(src)), size<T>((uint)src.Length)));
 
         [MethodImpl(Inline)]
         public static unsafe ConstRef<T> @const<T>(in T src, uint count)
             => new ConstRef<T>(define(ptr(src), size<T>(count)));
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe Ref<T> from<T>(in T src, uint count)
-            => new Ref<T>(define(ptr(src), size<T>(count)));
 
         [MethodImpl(Inline)]
         public static unsafe Ref<T> one<T>(in T src)
@@ -51,6 +51,18 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Ref boxed(object src)
             => define(ptr(src), 8);
+
+        [MethodImpl(Inline), Op]
+        static unsafe Ref from(sbyte[] src)
+            => define(ptr(@ref(span(src))), src.Length);
+
+        [MethodImpl(Inline), Op]
+        static unsafe Ref from(byte[] src)
+            => define(ptr(@ref(span(src))), src.Length);
+
+        [MethodImpl(Inline), Op]
+        static unsafe Ref from(ulong[] src)
+            => define(ptr(@ref(span(src))), src.Length);
 
         [MethodImpl(Inline)]
         static uint size<T>(uint count)

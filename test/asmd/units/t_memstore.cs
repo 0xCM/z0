@@ -10,13 +10,26 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     
-    using static Memories;
+    using static Root;
  
     using Z0.Asm.Data;
 
     public class t_memstore : t_asmd<t_memstore>
     {
-        public  void run_it()
+
+        public void read_ref()
+        {
+            var src = array(3u,5u,6u,7u);        
+            var r = Refs.from(src);
+            var z = r.As<uint>();
+            
+            Addressable.address(in src[0]);
+            Trace(r.Location.FormatAsmHex());                        
+            Trace(r.Size);                        
+
+        }
+        
+        public void read_models()
         {
             var svc = ResStoreModels.Service;
             var store = svc.store();

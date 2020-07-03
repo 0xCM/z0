@@ -44,7 +44,19 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => R.Bytes;
+            get => R.Bytes; 
+        }
+
+        public uint Size
+        {
+            [MethodImpl(Inline)]
+            get => R.Size;
+        } 
+
+        public ulong Location
+        {
+            [MethodImpl(Inline)]
+            get => R.Location;
         }
 
         [MethodImpl(Inline)]

@@ -14,19 +14,16 @@ namespace Z0
     {
         readonly Assembly Component;
 
-        readonly ResourceAccessors[] Index;
+        readonly ResourceDeclarations[] Index;
 
         public CodeResourceIndex(Assembly component)
         {
             Component = component;            
-            Index = ResourceStore.Service.AccesorIndex(Component);
+            Index = ResourceStore.Service.Declarations(component);
         }    
-
-        public ReadOnlySpan<ResourceAccessors> Accessors
-            => Index;
         
-        public IEnumerable<Type> Hosts 
-            => Index.Select(i => i.DeclaringType);
+        public Type[] Hosts 
+            => Index.Select(x => x.DeclaringType);
     }
   
 }

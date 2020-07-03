@@ -74,25 +74,31 @@ namespace Z0.Asm
         {
             var assembly = Assembly.LoadFrom(src.Name);  
             var stores = ResourceStore.Service;
-            var methods = span(stores.Accessors(assembly));            
-            return Capture(methods, dst);
+            return Capture(stores.Accessors(assembly), dst);
         }
 
         public CapturedAccessor[] Capture(FilePath src, FolderPath dst)        
         {
             var assembly = Assembly.LoadFrom(src.Name);  
             var store = ResourceStore.Service;
-            var index = span(store.AccesorIndex(assembly));
+            var declared = span(store.Declarations(assembly));
             var results = Root.list<CapturedAccessor>();
-            for(var i=0; i<index.Length; i++)
+            for(var i=0; i<declared.Length; i++)
             {
-                ref readonly var accessors =  ref Root.skip(index,i);
-                var path = dst + FileName.Define(accessors.DeclaringType.Name, FileExtensions.Asm);
-                var captured = Capture(accessors.Accessors, path);
+                ref readonly var declaration =  ref Root.skip(declared,i);                            
+                var path = dst + FileName.Define(declaration.DeclaringType.Name, FileExtensions.Asm);
+                var captured = Capture(declaration.Data, path);
                 results.AddRange(captured);
             }
                             
             return results.ToArray();
+        }
+
+        public CapturedAccessor[] CaptureKnown(FilePath outpath)
+        {
+            var stores = ResourceStore.Service;
+            var assemblies = Context.Api.Composition.Assemblies;
+            return Capture(stores.Accessors(assemblies), outpath);
         }
 
         public CapturedAccessor[] Capture(ReadOnlySpan<ResourceAccessor> src, FilePath outpath)
@@ -119,14 +125,7 @@ namespace Z0.Asm
             }
             return captured.ToArray();
         }
-        public CapturedAccessor[] CaptureKnown(FilePath outpath)
-        {
-            var stores = ResourceStore.Service;
-            var assemblies = Context.Api.Composition.Assemblies;
-            var methods = span(stores.Accessors(assemblies));
-            return Capture(methods, outpath);
-        }
-
+        
         public void CollectAddresses(ReadOnlySpan<CapturedAccessor> src, FilePath dst)
         {
             const ulong Cut = 0x55005500550;

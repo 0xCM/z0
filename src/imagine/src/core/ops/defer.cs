@@ -9,12 +9,10 @@ namespace Z0
 
     using static Konst;
 
-
-    [ApiHost]
-    partial class core
+    partial class core    
     {
-
-
+        [MethodImpl(Inline)]
+        public static Lazy<T> defer<T>(Func<T> factory) 
+            => new Lazy<T>(factory);
     }
-
 }

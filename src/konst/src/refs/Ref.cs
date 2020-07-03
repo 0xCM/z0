@@ -46,17 +46,17 @@ namespace Z0
             get => cover(Location, Size);
         }
 
-        ulong Location
-        {
-            [MethodImpl(Inline)]
-            get => R.GetElement(0);
-        }
-
-        uint Size
+        public uint Size
         {
             [MethodImpl(Inline)]
             get => (uint)R.GetElement(1);
         } 
+
+        public ulong Location
+        {
+            [MethodImpl(Inline)]
+            get => R.GetElement(0);
+        }
 
         [MethodImpl(Inline)]
         static uint size<T>()

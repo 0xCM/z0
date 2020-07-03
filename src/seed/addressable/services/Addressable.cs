@@ -13,7 +13,24 @@ namespace Z0
 
     [ApiHost]
     public readonly struct Addressable : IApiHost<Addressable>
-    {
+    {        
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static Span<T> read<T>(in Ref src)
+            => src.As<T>();
+
+        [MethodImpl(Inline), Op]
+        public static unsafe MemoryAddress address<T>(in T src)
+            => new MemoryAddress(pvoid(src));
+
+        /// <summary>
+        /// Defines an address predicated on the leading source cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline)]
+        public static unsafe MemoryAddress address<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => gptr(first(src));                
+
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(ulong src)
             => new MemoryAddress(src);

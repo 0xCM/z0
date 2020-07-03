@@ -76,9 +76,7 @@ namespace Z0
         {
             var index = new CodeResourceIndex(Assembly.LoadFrom(app.AppPaths.ResBytes.Name));
             Root.iter(index.Hosts, h => term.print(h.DisplayName()));
-
             return index;
-
         }        
         
         public void Generate(IAppContext app)

@@ -32,12 +32,6 @@ namespace Z0
             get => vcell(Data,1);
         }
 
-        // public MemoryAddress Address 
-        // {
-        //     [MethodImpl(Inline)]
-        //     get => Lo;
-        // }
-
         public MemoryAddress Location
         {
             [MethodImpl(Inline)]
@@ -126,7 +120,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Hash()
-            => Root.hash(Lo, Hi);
+            => core.hash(Lo, Hi);
         
         [MethodImpl(Inline)]
         public bool Equals(MemRef src)

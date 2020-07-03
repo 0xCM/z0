@@ -7,9 +7,6 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Konst;
-    using static Memories;
-
     public class t_asm_rex : t_asmd<t_asm_rex>
     {
         void rex_field_reader()

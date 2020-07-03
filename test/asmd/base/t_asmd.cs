@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-
-    using static Konst;
-    using static Memories;
     
     public abstract class t_asmd<U> : UnitTest<U,CheckVectorBits, ICheckVectorBits>
         where U : t_asmd<U>, new()

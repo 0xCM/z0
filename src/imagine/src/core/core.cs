@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
+        
     using static Konst;
 
-
     [ApiHost]
-    partial class core
+    public partial class core
     {
 
 
     }
-
 }
