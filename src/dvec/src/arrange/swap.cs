@@ -26,7 +26,7 @@ namespace Z0
             var perm = V0.vincrements<byte>(w128);
             perm = perm.Cell(j,(byte)i);
             perm = perm.Cell(i,(byte)j);
-            return vshuf16x8(src,perm);            
+            return V0d.vshuf16x8(src,perm);            
         }
         
         [MethodImpl(Inline), Op]        
@@ -44,7 +44,7 @@ namespace Z0
             perm = vcell(j0, i0, perm);
             perm = vcell(j1, i1, perm);
 
-            return vshuf16x8(src,perm);            
+            return V0d.vshuf16x8(src,perm);            
         }
     }
 }

@@ -50,13 +50,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(v8u(dvec.vblend4x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v8u(V0d.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(v16u(dvec.vblend4x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v16u(V0d.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dvec.vblend4x32(v32u(x), v32u(y), spec));
+                return vgeneric<T>(V0d.vblend4x32(v32u(x), v32u(y), spec));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(v64u(dvec.vblend4x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v64u(V0d.vblend4x32(v32u(x), v32u(y), spec)));
             else
                 return vblend4x32_i(x, y, spec);
         }
@@ -66,13 +66,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(v8i(dvec.vblend4x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v8i(V0d.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(v16i(dvec.vblend4x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v16i(V0d.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dvec.vblend4x32(v32i(x), v32i(y), spec));
+                return vgeneric<T>(V0d.vblend4x32(v32i(x), v32i(y), spec));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(v64i(dvec.vblend4x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v64i(V0d.vblend4x32(v32u(x), v32u(y), spec)));
             else 
                 throw no<T>();
         }
@@ -82,13 +82,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(v8u(dvec.vblend8x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v8u(V0d.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(v16u(dvec.vblend8x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v16u(V0d.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dvec.vblend8x32(v32u(x), v32u(y), spec));
+                return vgeneric<T>(V0d.vblend8x32(v32u(x), v32u(y), spec));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(v64u(dvec.vblend8x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v64u(V0d.vblend8x32(v32u(x), v32u(y), spec)));
             else
                 return vblend8x32_i(x, y, spec);
         }
@@ -98,13 +98,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(v8i(dvec.vblend8x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v8i(V0d.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(v16i(dvec.vblend8x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v16i(V0d.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dvec.vblend8x32(v32i(x), v32i(y), spec));
+                return vgeneric<T>(V0d.vblend8x32(v32i(x), v32i(y), spec));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(v64i(dvec.vblend8x32(v32u(x), v32u(y), spec)));
+                return vgeneric<T>(v64i(V0d.vblend8x32(v32u(x), v32u(y), spec)));
             else 
                 throw no<T>();
         }

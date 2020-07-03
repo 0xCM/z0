@@ -10,7 +10,7 @@ namespace Z0
     
     using static Konst; 
     using static As;
-    using static VMov;
+    using static V0d;
     using static Typed;
     
     partial class gvec

@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static Memories;
-    
     public class t_bm_and : t_bm<t_bm_and>
     {
         public void bm_and_n64x64x64()

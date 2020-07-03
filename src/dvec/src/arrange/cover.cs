@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcover(Vector128<ushort> src, out Vector128<byte> dst)
-            => dst = v8u(vor(vsll(src,8),src));
+            => dst = v8u(V0d.vor(vsll(src,8),src));
 
         /// <summary>
         /// 16x16w -> 32x8w
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vcover(Vector256<ushort> src, out Vector256<byte> dst)
-            => dst = v8u(vor(vsll(src,8),src));
+            => dst = v8u(V0d.vor(vsll(src,8),src));
 
         /// <summary>
         /// 4x8w -> 8x16w
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vcover(Vector128<uint> src, out Vector128<ushort> dst)
-            => dst = v16u(vor(vsll(src,16),src));
+            => dst = v16u(V0d.vor(vsll(src,16),src));
 
         /// <summary>
         /// 8x32w -> 16x16w

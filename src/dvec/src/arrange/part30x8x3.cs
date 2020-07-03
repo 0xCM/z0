@@ -37,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<uint> vpart30x8x3Mask(uint src) 
-            => vparts(m0, m1, m2, m3, m4,0,0,0);
+            => V0.vparts(m0, m1, m2, m3, m4,0,0,0);
 
         // The components are now in the following order, from lo to hi:
         // 0, 5, 1, 6, 2, 7, 3, 8, 4, 9

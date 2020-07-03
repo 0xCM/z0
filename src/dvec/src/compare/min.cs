@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vmin(Vector128<ulong> x, Vector128<ulong> y)
-            => vselect(vlt(x,y),x,y);
+            => V0d.vselect(vlt(x,y),x,y);
 
         /// <summary>
         /// __m256i _mm256_min_epu8 (__m256i a, __m256i b) VPMINUB ymm, ymm, ymm/m256
@@ -155,7 +155,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Min]
         public static Vector256<ulong> vmin(Vector256<ulong> x, Vector256<ulong> y)
-            => vselect(vlt(x,y),x,y);
+            => V0d.vselect(vlt(x,y),x,y);
 
         /// <summary>
         /// Computes the maximum values of corresponding components

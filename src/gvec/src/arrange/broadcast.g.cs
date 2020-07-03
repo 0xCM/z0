@@ -54,16 +54,6 @@ namespace Z0
             for(var i=0; i<length; i++)
                 seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;            
             return buffer;
-
-            // var count = vcount(w,enabled);
-            // Span<T> buffer = stackalloc T[count];
-            // ref var dst = ref head(buffer);
-
-            // var length = min(count, bitsize<S>());
-            // for(var i=0; i< length; i++)
-            //     seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
-            
-            // return buffer.LoadVector(w);
         }
 
         /// <summary>

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Runtime.CompilerServices;    
-
     /// <summary>
     /// Generic vectorized intrinsics
     /// </summary>
@@ -14,5 +12,4 @@ namespace Z0
     {        
         
     }
-
 }

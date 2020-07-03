@@ -49,10 +49,7 @@ namespace Z0
             var g = BitMatrix.graph(m);
 
             Claim.eq(64,g.VertexCount);
-            Claim.eq(63,g.EdgeCount);
-        
-            // Trace(m.Format());
-            // Trace(g.Format());                
+            Claim.eq(63,g.EdgeCount);       
         }
 
     }

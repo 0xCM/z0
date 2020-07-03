@@ -136,10 +136,10 @@ namespace Z0
             var w = w32;
             var left =  vparts(n,0,1,2,3);
             var right = vparts(n,4,5,6,7);
-            Claim.veq(vparts(n,0,5,2,7), dvec.vblend(left,right,Blend4x32.LRLR));
-            Claim.veq(vparts(n,4,1,6,3), dvec.vblend(left,right,Blend4x32.RLRL));
-            Claim.veq(vparts(n,0,1,6,7), dvec.vblend(left,right,Blend4x32.LLRR));
-            Claim.veq(vparts(n,4,5,2,3), dvec.vblend(left,right,Blend4x32.RRLL));
+            Claim.veq(vparts(n,0,5,2,7), V0d.vblend(left,right,Blend4x32.LRLR));
+            Claim.veq(vparts(n,4,1,6,3), V0d.vblend(left,right,Blend4x32.RLRL));
+            Claim.veq(vparts(n,0,1,6,7), V0d.vblend(left,right,Blend4x32.LLRR));
+            Claim.veq(vparts(n,4,5,2,3), V0d.vblend(left,right,Blend4x32.RRLL));
         }
 
         public void vblend_8x32_basecases()
@@ -148,10 +148,10 @@ namespace Z0
             var w = w32;    
             var left =  vparts(0,1,2,3,4,5,6,7);
             var right = vparts(8,9,A,B,C,D,E,F);            
-            Claim.veq(vparts(0,9,2,B,4,D,6,F),dvec.vblend(left,right, Blend8x32.LRLRLRLR));
-            Claim.veq(vparts(8,1,A,3,C,5,E,7),dvec.vblend(left,right, Blend8x32.RLRLRLRL));
-            Claim.veq(vparts(0,1,A,B,4,5,E,F),dvec.vblend(left,right, Blend8x32.LLRRLLRR));
-            Claim.veq(vparts(8,9,2,3,C,D,6,7),dvec.vblend(left,right, Blend8x32.RRLLRRLL));
+            Claim.veq(vparts(0,9,2,B,4,D,6,F),V0d.vblend(left,right, Blend8x32.LRLRLRLR));
+            Claim.veq(vparts(8,1,A,3,C,5,E,7),V0d.vblend(left,right, Blend8x32.RLRLRLRL));
+            Claim.veq(vparts(0,1,A,B,4,5,E,F),V0d.vblend(left,right, Blend8x32.LLRRLLRR));
+            Claim.veq(vparts(8,9,2,3,C,D,6,7),V0d.vblend(left,right, Blend8x32.RRLLRRLL));
 
             
             var lrpattern = V0.v32u(vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
@@ -160,7 +160,7 @@ namespace Z0
             
             var zero = Vectors.vzero<uint>(n);            
             var ones = gvec.vones<uint>(n);
-            Claim.veq(lrpattern, dvec.vblend(zero, ones, Blend8x32.LRLRLRLR));            
+            Claim.veq(lrpattern, V0d.vblend(zero, ones, Blend8x32.LRLRLRLR));            
         }
 
         public void vblend_32x8_256x32u_basecase()

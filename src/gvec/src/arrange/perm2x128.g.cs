@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst; 
-    using static As;
+    using static V0;
 
     partial class gvec
     {
@@ -52,13 +52,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vperm2x128(v8u(lhs), v8u(rhs), spec));
+                return vgeneric<T>(V0d.vperm2x128(v8u(lhs), v8u(rhs), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vperm2x128(v16u(lhs), v16u(rhs), spec));
+                return vgeneric<T>(V0d.vperm2x128(v16u(lhs), v16u(rhs), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vperm2x128(v32u(lhs), v32u(rhs), spec));
+                return vgeneric<T>(V0d.vperm2x128(v32u(lhs), v32u(rhs), spec));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vperm2x128(v64u(lhs), v64u(rhs), spec));
+                return vgeneric<T>(V0d.vperm2x128(v64u(lhs), v64u(rhs), spec));
             else
                 return vperm2x128_i(lhs,rhs,spec);
         }
@@ -68,13 +68,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vperm2x128(v8i(lhs), v8i(rhs), spec));
+                return vgeneric<T>(V0d.vperm2x128(v8i(lhs), v8i(rhs), spec));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vperm2x128(v16i(lhs), v16i(rhs), spec));
+                return vgeneric<T>(V0d.vperm2x128(v16i(lhs), v16i(rhs), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vperm2x128(v32i(lhs), v32i(rhs), spec));
+                return vgeneric<T>(V0d.vperm2x128(v32i(lhs), v32i(rhs), spec));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vperm2x128(v64i(lhs), v64i(rhs), spec));
+                return vgeneric<T>(V0d.vperm2x128(v64i(lhs), v64i(rhs), spec));
             else
                 return vperm2x128_f(lhs,rhs,spec);
         }
@@ -84,11 +84,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vperm2x128(v32f(lhs), v32f(rhs),spec));
+                return vgeneric<T>(V0d.vperm2x128(v32f(lhs), v32f(rhs),spec));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vperm2x128(v64f(lhs), v64f(rhs),spec));
+                return vgeneric<T>(V0d.vperm2x128(v64f(lhs), v64f(rhs),spec));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

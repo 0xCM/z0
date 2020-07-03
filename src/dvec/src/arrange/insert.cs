@@ -18,7 +18,6 @@ namespace Z0
     
     partial class dvec
     {
-
         /// <summary>
         ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
         /// Overwrites a 128-bit lane in the target with the content of the source vector

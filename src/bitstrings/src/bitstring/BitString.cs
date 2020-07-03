@@ -9,11 +9,11 @@ namespace Z0
     using System.Text;
 
     using static Konst;
+    using static Root;
 
     /// <summary>
     /// Represents a sequence of bits
     /// </summary>
-    ///IWord<BitString, BinaryAlphabet>
     public partial struct BitString : IEquatable<BitString>
     {
         byte[] data;
@@ -614,7 +614,7 @@ namespace Z0
         public T Scalar<T>(int offset = 0, int? count = null)
             where T : unmanaged
         {
-            var len = Math.Min((count == null ? BitSize.measure<T>() : count.Value), Length - offset);       
+            var len = min((count == null ? (int)bitsize<T>() : count.Value), Length - offset);       
             var bits = BitSeq.Slice(offset, len);
             return bits.Take<T>();
         }
@@ -624,7 +624,7 @@ namespace Z0
             where T : unmanaged
         {                        
             var src = data.ToReadOnlySpan();
-            var packed = PackedBits(src, offset, BitSize.measure<T>());
+            var packed = PackedBits(src, offset, bitsize<T>());
             return packed.Length != 0 ? packed.Singleton<byte,T>() : default;
         }
 
@@ -643,11 +643,11 @@ namespace Z0
                 return new byte[minlen ?? 1];
 
             var srcLen = (uint)(src.Length - offset);
-            var dstLen = Mod8.div(srcLen) + (Mod8.mod(srcLen) == 0 ? 0 : 1);   
+            var dstLen = srcLen/8 + (srcLen % 8 == 0 ? 0 : 1);   
             if(minlen != null && dstLen < minlen)
                 dstLen = minlen.Value;
 
-            Span<byte> dst = new byte[dstLen];
+            Span<byte> dst = sys.alloc((int)dstLen);
             for(int i=0, j=0; j < dstLen; i+=8, j++)
             {
                 ref var x = ref dst[j];

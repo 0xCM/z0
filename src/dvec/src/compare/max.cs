@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vmax(Vector128<ulong> x, Vector128<ulong> y)
-            => vselect(vgt(x,y),x,y);
+            => V0d.vselect(vgt(x,y),x,y);
 
         /// <summary>
         /// Computes the maximum values of corresponding components
@@ -155,7 +155,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vmax(Vector256<ulong> x, Vector256<ulong> y)
-            => vselect(vgt(x,y),x,y);
+            => V0d.vselect(vgt(x,y),x,y);
 
         /// <summary>
         /// Computes the maximum values of corresponding components

@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<ushort> vinflate(Vector256<byte> src, N512 w, ushort t = default)
-            => vconvert(src, n512,t);
+            => V0d.vconvert(src, n512,t);
 
         /// <summary>
         /// 8x16i -> 8x32i
@@ -104,7 +104,6 @@ namespace Z0
         public static Vector1024<int> vinflate(Vector256<sbyte> src, N1024 w, int t = default)
             => vconvert(src,w,t);
 
-
         /// <summary>
         /// 4x32u -> 4x64u
         /// </summary>
@@ -113,7 +112,7 @@ namespace Z0
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vinflate(Vector128<uint> src, N256 w, ulong t = default)        
-            => vconvert(src, w, t);
+            => V0d.vconvert(src, w, t);
         
         /// <summary>
         /// 4x32w -> 4x64w
@@ -122,7 +121,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vinflate(Vector128<int> src, N256 w, long t = default)
-            => vconvert(src, w, t);
+            => V0d.vconvert(src, w, t);
  
         /// <summary>
         /// 8x32u -> 8x64u

@@ -125,8 +125,8 @@ namespace Z0
         public static BitString scalars<T>(ReadOnlySpan<T> src, int? maxbits = null)
             where T : unmanaged
         {
-            var segbits = bitsize<T>();
-            var bitcount = maxbits ?? segbits*src.Length;
+            var cellbits = bitsize<T>();
+            var bitcount = maxbits ?? cellbits*src.Length;
             var k = 0;
             var buffer = sys.alloc(bitcount);
             var dst = span(buffer);
@@ -134,7 +134,7 @@ namespace Z0
             for(int i=0; i<src.Length; i++)
             {
                 var bits = BitStore.bitseq(skip(src,i));
-                for(var j = 0; j<segbits && k<bitcount; j++, k++)
+                for(var j = 0; j<cellbits && k<bitcount; j++, k++)
                     seek(dst,k) = skip(bits,j);
             }
             return new BitString(buffer);
@@ -183,7 +183,7 @@ namespace Z0
             src = src.RemoveBlanks();
             var len = src.Length;
             var lastix = len - 1;
-            Span<byte> dst = new byte[len];
+            Span<byte> dst = sys.alloc(len);
             for(var i=0; i<= lastix; i++)
                 dst[lastix - i] = src[i] == bit.Zero ? (byte)0 : (byte)1;
             return new BitString(dst);                        

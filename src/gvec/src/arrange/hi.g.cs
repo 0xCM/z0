@@ -9,8 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static Konst;
-    using static Vectors;
     using static Typed;
+    using static V0;
+    using static V0d;
 
     partial class gvec
     {        
@@ -22,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => As.generic<T>(vscalar(n128, V0.vcell(v64u(src),1)));
+                => vgeneric<T>(vscalar(w128, vcell(v64u(src),1)));
 
         /// <summary>
         /// Extracts hi 128-bit lane of the source vector
@@ -41,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vhi<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
-                => V0d.vhi(v64u(src), out x0, out x1);
+                => vhi(v64u(src), out x0, out x1);
 
         /// <summary>
         /// Extracts the hi 128-bit lane of the source vector to a pair
@@ -50,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Closures(AllNumeric)]
         public static ref Pair<ulong> vhi<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged
-                => ref V0d.vhi(src.AsUInt64(), ref dst);
+                => ref vhi(v64u(src), ref dst);
 
         /// <summary>
         /// Extracts the upper 256-bits from the source vector
@@ -75,13 +76,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.generic<T>(V0d.vhi(v8u(src)));
+                return vgeneric<T>(vhi(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return As.generic<T>(V0d.vhi(v16u(src)));
+                return vgeneric<T>(vhi(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return As.generic<T>(V0d.vhi(v32u(src)));
+                return vgeneric<T>(vhi(v32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return As.generic<T>(V0d.vhi(v64u(src)));
+                return vgeneric<T>(vhi(v64u(src)));
             else
                 return vhi_i(src);
         }
@@ -91,13 +92,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.generic<T>(V0d.vhi(v8i(src)));
+                return vgeneric<T>(vhi(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return As.generic<T>(V0d.vhi(v16i(src)));
+                return vgeneric<T>(vhi(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return As.generic<T>(V0d.vhi(v32i(src)));
+                return vgeneric<T>(vhi(v32i(src)));
             else if(typeof(T) == typeof(long))
-                return As.generic<T>(V0d.vhi(v64i(src)));
+                return vgeneric<T>(vhi(v64i(src)));
             else
                 return vhi_f(src);
         }
@@ -107,11 +108,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return As.generic<T>(dinxfp.vhi(v32f(src)));
+                return vgeneric<T>(vhi(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return As.generic<T>(dinxfp.vhi(v64f(src)));
+                return vgeneric<T>(vhi(v64f(src)));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

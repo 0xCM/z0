@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst; 
-    using static As;
+    using static V0;
+    
     
     partial class gvec
     {
@@ -80,13 +81,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.veq(v8i(x), v8i(y)));
+                return vgeneric<T>(V0d.veq(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.veq(v16i(x), v16i(y)));
+                return vgeneric<T>(V0d.veq(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.veq(v32i(x), v32i(y)));
+                return vgeneric<T>(V0d.veq(v32i(x), v32i(y)));
             else 
-                return generic<T>(dvec.veq(v64i(x), v64i(y)));
+                return vgeneric<T>(V0d.veq(v64i(x), v64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -94,13 +95,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Memories.generic<T>(dvec.veq(v8u(x), v8u(y)));
+                return vgeneric<T>(V0d.veq(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.veq(v16u(x), v16u(y)));
+                return vgeneric<T>(V0d.veq(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.veq(v32u(x), v32u(y)));
+                return vgeneric<T>(V0d.veq(v32u(x), v32u(y)));
             else 
-                return Memories.generic<T>(dvec.veq(v64u(x), v64u(y)));
+                return vgeneric<T>(V0d.veq(v64u(x), v64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -108,11 +109,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.veq(v32f(x), v32f(y)));
+                return vgeneric<T>(V0d.veq(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.veq(v64f(x), v64f(y)));
+                return vgeneric<T>(V0d.veq(v64f(x), v64f(y)));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -120,13 +121,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.veq(v8i(x), v8i(y)));
+                return vgeneric<T>(V0d.veq(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.veq(v16i(x), v16i(y)));
+                return vgeneric<T>(V0d.veq(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.veq(v32i(x), v32i(y)));
+                return vgeneric<T>(V0d.veq(v32i(x), v32i(y)));
             else 
-                return generic<T>(dvec.veq(v64i(x), v64i(y)));
+                return vgeneric<T>(V0d.veq(v64i(x), v64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -134,13 +135,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Memories.generic<T>(dvec.veq(v8u(x), v8u(y)));
+                return vgeneric<T>(V0d.veq(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.veq(v16u(x), v16u(y)));
+                return vgeneric<T>(V0d.veq(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.veq(v32u(x), v32u(y)));
+                return vgeneric<T>(V0d.veq(v32u(x), v32u(y)));
             else 
-                return generic<T>(dvec.veq(v64u(x), v64u(y)));
+                return vgeneric<T>(V0d.veq(v64u(x), v64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -148,11 +149,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.veq(v32f(x), v32f(y)));
+                return vgeneric<T>(V0d.veq(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.veq(v64f(x), v64f(y)));
+                return vgeneric<T>(V0d.veq(v64f(x), v64f(y)));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

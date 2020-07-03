@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="counts">The variable shift spec</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vrotrv(Vector128<uint> src, Vector128<uint> counts)
-            => dvec.vor(dvec.vsrlv(src, counts),dvec.vsllv(src, V0d.vsub(Vector128u32, counts)));             
+            => V0d.vor(dvec.vsrlv(src, counts),dvec.vsllv(src, V0d.vsub(Vector128u32, counts)));             
 
         /// <summary>
         /// Rotates each component the source vector rightwards by the corresponding component in the shift spec
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="counts">The variable shift spec</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vrotrv(Vector128<ulong> src, Vector128<ulong> counts)
-            => dvec.vor(dvec.vsrlv(src, counts),dvec.vsllv(src, V0d.vsub(Vector128u64, counts)));             
+            => V0d.vor(dvec.vsrlv(src, counts),dvec.vsllv(src, V0d.vsub(Vector128u64, counts)));             
 
         /// <summary>
         /// Rotates each component the source vector rightwards by the corresponding component in the shift spec

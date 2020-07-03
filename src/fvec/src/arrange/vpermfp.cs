@@ -97,9 +97,9 @@ namespace Z0
  
         [MethodImpl(Inline), Op]
         public static Vector256<float> vreverse(Vector256<float> src)
-            => dinxfp.vperm8x32(src,MRev256f32);    
+            => vperm8x32(src,MRev256f32);    
 
         static Vector256<int> MRev256f32 
-            => Vectors.vpartsi(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
+            => V0.vparts(w256i, 7, 6, 5, 4, 3, 2, 1, 0);    
     }
 }

@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vcompact(Vector256<short> x, Vector256<short> y, N256 w, sbyte t = default)            
-            => vperm4x64(vpackss(x,y), Perm4L.ACBD);
+            => V0d.vperm4x64(vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (8x16u,8x16u) -> 16x8u
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vcompact(Vector256<ushort> x, Vector256<ushort> y, N256 w, byte t = default)            
-            => vperm4x64(vpackus(x,y), Perm4L.ACBD);
+            => V0d.vperm4x64(vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (4x32i,4x32i) -> 8x16i
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vcompact(Vector256<int> x, Vector256<int> y, N256 w, short t = default)            
-            => vperm4x64(vpackss(x,y), Perm4L.ACBD);
+            => V0d.vperm4x64(vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (4x32u,4x32u) -> 8x16u
@@ -108,7 +108,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vcompact(Vector256<uint> x, Vector256<uint> y, N256 w, ushort t = default)            
-            => vperm4x64(vpackus(x,y), Perm4L.ACBD);
+            => V0d.vperm4x64(vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (8x32u, 8x32u) -> 16x8u

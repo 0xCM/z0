@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vreverse(Vector128<byte> src)
-            => vshuf16x8(src, V0.vdecrements<byte>(w128));
+            => V0d.vshuf16x8(src, V0.vdecrements<byte>(w128));
 
         /// <summary>
         /// Reverses the source vector components
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vreverse(Vector128<sbyte> src)
-            => vshuf16x8(src, V0.vdecrements<sbyte>(w128));
+            => V0d.vshuf16x8(src, V0.vdecrements<sbyte>(w128));
 
         /// <summary>
         /// Reverses the source vector components
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vreverse(Vector128<short> src)
-            => vswaphl(vshuf4x16(src, Arrange4L.DCBA, Arrange4L.DCBA));
+            => V0d.vswaphl(vshuf4x16(src, Arrange4L.DCBA, Arrange4L.DCBA));
 
         /// <summary>
         /// Reverses the source vector components
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vreverse(Vector128<ushort> src)
-            => vswaphl(vshuf4x16(src, Arrange4L.DCBA, Arrange4L.DCBA));
+            => V0d.vswaphl(vshuf4x16(src, Arrange4L.DCBA, Arrange4L.DCBA));
 
         /// <summary>
         /// Reverses the source vector components
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vreverse(Vector128<int> src)
-            => vperm4x32(src, Perm4L.DCBA);
+            => V0d.vperm4x32(src, Perm4L.DCBA);
 
         /// <summary>
         /// Reverses the source vector components
@@ -63,11 +63,11 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vreverse(Vector128<uint> src)
-            => vperm4x32(src, Perm4L.DCBA);
+            => V0d.vperm4x32(src, Perm4L.DCBA);
 
         [MethodImpl(Inline), Op]
         public static Vector128<long> vreverse(Vector128<long> src)
-            => vswaphl(src);
+            => V0d.vswaphl(src);
 
         /// <summary>
         /// Reverses the source vector components
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vreverse(Vector256<byte> src)
-            => vshuf32x8(src, V0.vdecrements<byte>(n256));
+            => V0d.vshuf32x8(src, vdecrements<byte>(n256));
 
         /// <summary>
         /// Reverses the source vector components
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vreverse(Vector256<long> src)
-            => vperm4x64(src,Perm4L.DCBA); 
+            => V0d.vperm4x64(src,Perm4L.DCBA); 
 
         /// <summary>
         /// Reverses the source vector components
@@ -139,10 +139,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vreverse(Vector256<ulong> src)
-            => vperm4x64(src,Perm4L.DCBA);
+            => V0d.vperm4x64(src,Perm4L.DCBA);
 
         static Vector256<uint> MRev256u32 
-            => v32u(VData.vload(n256,MRev256u32Data));
+            => v32u(V0.vload(n256,MRev256u32Data));
             
             //=> vbuild.parts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       
 

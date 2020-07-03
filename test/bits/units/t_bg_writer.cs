@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-
-    using static Konst;
-    using static Memories;
 
     public class t_grid_writer : t_bg<t_grid_writer>
     {

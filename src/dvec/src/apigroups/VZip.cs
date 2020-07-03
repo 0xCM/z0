@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector256<sbyte> vzip(Vector256<short> x, Vector256<short> y, W8 w)            
-            => dvec.vperm4x64(V0d.vpackss(x,y), Perm4L.ACBD);
+            => V0d.vperm4x64(V0d.vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (8x16u,8x16u) -> 16x8u
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), VZip]
         public static Vector256<byte> vzip(Vector256<ushort> x, Vector256<ushort> y, W8 w)            
-            => dvec.vperm4x64(dvec.vpackus(x,y), Perm4L.ACBD);
+            => V0d.vperm4x64(dvec.vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (4x32i,4x32i) -> 8x16i
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector256<short> vzip(Vector256<int> x, Vector256<int> y, W16 w)            
-            => dvec.vperm4x64(V0d.vpackss(x,y), Perm4L.ACBD);
+            => V0d.vperm4x64(V0d.vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (4x32u,4x32u) -> 8x16u
@@ -143,7 +143,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), VZip]
         public static Vector256<ushort> vzip(Vector256<uint> x, Vector256<uint> y, W16 w)            
-            => dvec.vperm4x64(dvec.vpackus(x,y), Perm4L.ACBD);
+            => V0d.vperm4x64(dvec.vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (8x32u, 8x32u) -> 16x8u

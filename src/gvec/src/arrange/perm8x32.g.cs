@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static As;
+    using static V0;
 
     partial class gvec
     {
@@ -29,13 +29,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vperm8x32(v8u(src), spec));
+                return vgeneric<T>(V0d.vperm8x32(v8u(src), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vperm8x32(v16u(src), spec));
+                return vgeneric<T>(V0d.vperm8x32(v16u(src), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vperm8x32(v32u(src), spec));
+                return vgeneric<T>(V0d.vperm8x32(v32u(src), spec));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vperm8x32(v64u(src), spec));
+                return vgeneric<T>(V0d.vperm8x32(v64u(src), spec));
             else
                 return vperm8x32_i(src,spec);
         }
@@ -45,15 +45,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vperm8x32(v8i(src), spec));
+                return vgeneric<T>(V0d.vperm8x32(v8i(src), spec));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vperm8x32(v16i(src), spec));
+                return vgeneric<T>(V0d.vperm8x32(v16i(src), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vperm8x32(v32i(src), spec));
+                return vgeneric<T>(V0d.vperm8x32(v32i(src), spec));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vperm8x32(v64i(src), spec));
+                return vgeneric<T>(V0d.vperm8x32(v64i(src), spec));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

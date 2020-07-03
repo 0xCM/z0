@@ -7,49 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static System.Runtime.CompilerServices.Unsafe;
-
     using static Konst;
     using static As;
 
     [ApiHost]
     public readonly struct Copier
     {
-        /// <summary>
-        /// Copies a specified number of source values to the target and returns the count of copied bytes
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="srcCount">The number of source values to copy</param>
-        /// <param name="dst">The target reference</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static uint copy<S,T>(in S src, ref T dst, int srcCount, int dstOffset = 0)
-            where S: unmanaged
-            where T :unmanaged
-        {
-            ref var input = ref @as<S,byte>(ref edit(src));
-            ref var target = ref As<T,byte>(ref add(dst, dstOffset));
-            var srcBytes =  (uint)(srcCount*Root.size<S>());
-            CopyBlock(ref target, ref input, srcBytes);
-            return srcBytes;
-        }
-
-        /// <summary>
-        /// Copies data from an unmanaged value to a target span
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target span</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target cell type</typeparam>
-        [MethodImpl(Inline)]   
-        public static void copy<S,T>(ref S src, Span<T> dst)
-            where T : unmanaged
-        {
-            ref var dstBytes = ref @as<T,byte>(ref first(dst));
-            WriteUnaligned<S>(ref dstBytes, src);
-        }
-
         /// <summary>
         /// Copies a contiguous segments of bytes from one location to another
         /// </summary>
@@ -69,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void copy<T>(T* pSrc, T* pDst, uint srcCount)
             where T : unmanaged
-                => sys.copy(pSrc, pDst, (uint)(SizeOf<T>()*srcCount));
+                => sys.copy(pSrc, pDst, srcCount);
 
         /// <summary>
         /// Copies a contiguous segments of values to a span
@@ -108,7 +71,7 @@ namespace Z0
             where T :unmanaged
         {
             ref var input =  ref uint8(ref edit(skip(src,(uint)start)));
-            ref var target = ref uint8(ref seek(dst, (uint)offset));
+            ref var target = ref uint8(ref seek(dst,(uint)offset));
             var bytecount =  (uint)(count*Root.size<S>());
             sys.copy(input, ref target, bytecount);
             return bytecount;

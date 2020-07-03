@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     public sealed class t_spanbuffers : UnitTest<t_spanbuffers>
     {
         static new TCheckNumeric Claim = CheckNumeric.Checker;

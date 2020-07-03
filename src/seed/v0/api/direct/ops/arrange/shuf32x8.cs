@@ -13,7 +13,7 @@ namespace Z0
     using static V0;
     using static V0d;
 
-    partial class dvec    
+    partial struct V0d
     {        
         /// <summary>
         /// Rearranges the source vector according to the indices specified in the control vector dst[i] = src[spec[i]]
@@ -24,9 +24,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuf32x8(Vector256<byte> a, Vector256<byte> spec)
         {            
-            var x = vshuf16x8(a, vadd(spec, K0V));
-            var y = vshuf16x8(vswaphl(a), vadd(spec, K1V));
-            return vor(x,y);
+            var x = V0d.vshuf16x8(a, V0d.vadd(spec, K0V));
+            var y = V0d.vshuf16x8(V0d.vswaphl(a), V0d.vadd(spec, K1V));
+            return V0d.vor(x,y);
         }
 
         const byte M70 = 0b01110000;

@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// This class contains random algorithms from the book "Hackers Delight"

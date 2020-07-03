@@ -15,42 +15,7 @@ namespace Z0
     using static V0d;
 
     partial class dvec
-    {               
-
-        // ~ 128x32i -> X
-        // ~ ------------------------------------------------------------------        
-
-        /// <summary>
-        /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
-        /// 4x32i -> 4x64i
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<long> vconvert(Vector128<int> src, N256 w, long t = default)
-            => ConvertToVector256Int64(src);
-
-        // ~ 128x32u -> X
-        // ~ ------------------------------------------------------------------        
-
-        /// <summary>
-        ///  __m256i _mm256_cvtepu32_epi64 (__m128i a) VPMOVZXDQ ymm, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<long> vconvert(Vector128<uint> src, N256 w, long t = default)
-            => ConvertToVector256Int64(src);
-
-        /// <summary>
-        /// _m256i _mm256_cvtepu32_epi64 (__m128i a) VPMOVZXDQ ymm, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vconvert(Vector128<uint> src, N256 w, ulong t = default)
-            => v64u(ConvertToVector256Int64(src));
-        
+    {                       
         // ~ 256
         // ~ ------------------------------------------------------------------     
 
@@ -79,14 +44,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// 32x8u -> (16x16u, 16x16u)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector512<ushort> vconvert(Vector256<byte> src, N512 w, ushort t = default)
-             => (vmaplo(src, n256, z16), vmaphi(src, n256, z16));
-
-        /// <summary>
         /// 32x8u -> (16x16i, 16x16i)
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -103,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector1024<uint> vconvert(Vector256<byte> src, N1024 w, uint t = default)
         {
-            (var lo, var hi) = vconvert(src, n512, z16);            
+            (var lo, var hi) = V0d.vconvert(src, n512, z16);            
             (var x0, var x1) = vconvert(lo, n512, t);
             (var x2, var x3) = vconvert(hi, n512, t);
             return (x0,x1,x2,x3);

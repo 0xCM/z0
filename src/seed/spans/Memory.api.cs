@@ -26,31 +26,10 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static uint copy<S,T>(in S src, ref T dst, int srcCount, int dstOffset = 0)
+        public static void copy<S,T>(in S src, ref T dst, int srcCount, int dstOffset = 0)
             where S: unmanaged
-            where T :unmanaged
-        {
-            ref var input = ref @as<S,byte>(ref Unsafe.AsRef(in src));
-            ref var target = ref @as<T,byte>(ref add(dst, dstOffset));
-            var srcBytes = (uint)(srcCount*Unsafe.SizeOf<S>());
-            sys.copy(input, ref target, srcBytes);
-            return srcBytes;
-        }
-
-        /// <summary>
-        /// Copies data from an unmanaged value to a target span
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target span</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target cell type</typeparam>
-        [MethodImpl(Inline)]   
-        public static void copy<S,T>(ref S src, Span<T> dst)
-            where T : unmanaged
-        {
-            ref var dstBytes = ref @as<T,byte>(ref first(dst));
-            Unsafe.WriteUnaligned<S>(ref dstBytes, src);
-        }
+            where T :unmanaged  
+                => sys.copy(view<S,byte>(src), ref edit<T,byte>(add(dst, dstOffset)), (uint)srcCount);
 
         /// <summary>
         /// Copies a contiguous segments of values to a span
@@ -119,7 +98,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe ulong read64(in ushort src)
-            => *(ulong*)Root.constptr(in src);
+            => *As.gptr<ulong>(src);
 
         /// <summary>
         /// Reads 64 bits from a contiguous sequence of 2 32-bit integers
@@ -127,7 +106,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe ulong read64(in uint src)
-            => *(ulong*)Root.constptr(in src);
+            => *As.gptr<ulong>(src);
 
         /// <summary>
         /// Projects a source byte onto a byte reference
@@ -191,94 +170,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void store64(ulong src, ref uint dst)
             => *(gptr<ulong>(dst)) = src;        
-
-        /// <summary>
-        /// Casts memory cells of one type to another
-        /// </summary>
-        /// <param name="src">The source memory</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static Memory<T> cast<S,T>(Memory<S> src)
-            where S : unmanaged
-            where T : unmanaged
-        {
-            if (typeof(S) == typeof(T)) 
-                return (Memory<T>)(object)src;
-            return new MemoryCast<S,T>(src).Memory;
-        }
-
-        /// <summary>
-        /// Constructs a mutable memory segment from a readonly memory segment
-        /// </summary>
-        /// <param name="src">The source memory</param>
-        /// <typeparam name="T">The memory cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static Memory<T> edit<T>(ReadOnlyMemory<T> src)
-            => MemoryMarshal.AsMemory(src);
-
-        /// <summary>
-        /// Reverses the memory cells in-place
-        /// </summary>
-        /// <param name="src">The source memory</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static Memory<T> reverse<T>(Memory<T> src)
-        {
-            src.Span.Reverse();
-            return src;
-        }
-
-        /// <summary>
-        /// Enumerates the content of a readonly memory segment
-        /// </summary>
-        /// <param name="src">The source memory</param>
-        /// <typeparam name="T">The memory cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static IEnumerable<T> enumerate<T>(ReadOnlyMemory<T> src)
-            => MemoryMarshal.ToEnumerable(src);
-
-        /// <summary>
-        /// Projects a memory source to target via a supplied transformation
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="f">The transformation</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        public static Span<T> map<S,T>(Memory<S> src, Func<S,T> f)
-        {
-            var dst = new T[src.Length];
-            for(var i= 0; i<src.Length; i++)
-                dst[i] = f(src.Span[i]);
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        internal static int size<T>()
-            => Unsafe.SizeOf<T>();
-
     }
-
-    //https://stackoverflow.com/questions/54511330/how-can-i-cast-memoryt-to-another
-    public sealed class MemoryCast<S,T> : MemoryManager<T>
-        where S : unmanaged
-        where T : unmanaged
-    {
-        readonly Memory<S> source;
-
-        [MethodImpl(Inline)]
-        public MemoryCast(Memory<S> source) 
-            => this.source = source;
-
-        public override Span<T> GetSpan()
-            => MemoryMarshal.Cast<S, T>(source.Span);
-
-        protected override void Dispose(bool disposing) {}
-
-        public override MemoryHandle Pin(int elementIndex = 0)
-            => throw new NotSupportedException();
-
-        public override void Unpin()
-            => throw new NotSupportedException();
-    }    
 }

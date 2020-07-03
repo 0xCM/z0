@@ -59,15 +59,5 @@ namespace Z0
             seek(ref dst64, 3) = skip(in src64, 3);
             return dst;
         }
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static MemStack512 init<T>(W512 w, in T src)
-            where T : unmanaged
-        {
-            var dst = alloc(w);
-            var cells = 64/Unsafe.SizeOf<T>();
-            Copier.copy(in src, ref head<T>(ref dst), cells);
-            return dst;
-        }
     }
 }

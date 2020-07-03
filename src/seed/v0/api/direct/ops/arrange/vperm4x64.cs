@@ -7,14 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
+    using System.Runtime.Intrinsics.X86;
 
+    using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-        
-    using static Konst; 
+    
+    using static Konst;
+    using static Typed;
     using static V0;
-
-    partial class dvec    
-    {        
+    
+    partial struct V0d
+    {
         /// <summary>
         /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8
         /// Permutes vector content across lanes at 64-bit granularity
@@ -173,6 +176,24 @@ namespace Z0
         /// <param name="spec">The control byte</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vperm4x64(Vector256<long> x, [Imm] Perm4L spec)
-            => vperm4x64(x,(byte)spec);             
+            => vperm4x64(x,(byte)spec);                     
+        /// <summary>
+        /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8) VPERMPD ymm, ymm/m256, imm8
+        /// Permutes components in the source vector across lanes as specified by the control byte
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="spec">The control byte</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<double> vperm4x64(Vector256<double> x, [Imm] byte spec)
+            => Permute4x64(x,spec); 
+
+        /// <summary>
+        /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8)VPERMPD ymm, ymm/m256, imm8
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="spec">The permutation spec</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<double> vperm4x64(Vector256<double> x, [Imm] Perm4L spec)
+            => vperm4x64(x,(byte)spec);
     }
 }

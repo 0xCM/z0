@@ -48,13 +48,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dvec.vtestz(v8u(src), v8u(mask));
+                return V0d.vtestz(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return dvec.vtestz(v16u(src), v16u(mask));
+                return V0d.vtestz(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return dvec.vtestz(v32u(src), v32u(mask));
+                return V0d.vtestz(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return dvec.vtestz(v64u(src), v64u(mask));
+                return V0d.vtestz(v64u(src), v64u(mask));
             else
                 return vtestz_i(src,mask);
         }
@@ -64,13 +64,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dvec.vtestz(v8i(src), v8i(mask));
+                return V0d.vtestz(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return dvec.vtestz(v16i(src), v16i(mask));
+                return V0d.vtestz(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return dvec.vtestz(v32i(src), v32i(mask));
+                return V0d.vtestz(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return dvec.vtestz(v64i(src), v64i(mask));
+                return V0d.vtestz(v64i(src), v64i(mask));
             else 
                 return vtestz_f<T>(src,mask);
         }
@@ -80,11 +80,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinxfp.vtestz(v32f(src), v32f(mask));
+                return V0d.vtestz(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return dinxfp.vtestz(v64f(src), v64f(mask));
+                return V0d.vtestz(v64f(src), v64f(mask));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -92,13 +92,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dvec.vtestz(v8u(src), v8u(mask));
+                return V0d.vtestz(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return dvec.vtestz(v16u(src), v16u(mask));
+                return V0d.vtestz(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return dvec.vtestz(v32u(src), v32u(mask));
+                return V0d.vtestz(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return dvec.vtestz(v64u(src), v64u(mask));
+                return V0d.vtestz(v64u(src), v64u(mask));
             else
                 return vtestz_i(src,mask);
         }
@@ -108,13 +108,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dvec.vtestz(v8i(src), v8i(mask));
+                return V0d.vtestz(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return dvec.vtestz(v16i(src), v16i(mask));
+                return V0d.vtestz(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return dvec.vtestz(v32i(src), v32i(mask));
+                return V0d.vtestz(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return dvec.vtestz(v64i(src), v64i(mask));
+                return V0d.vtestz(v64i(src), v64i(mask));
             else 
                 return vtestz_f<T>(src,mask);
         }
@@ -124,11 +124,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinxfp.vtestz(v32f(src), v32f(mask));
+                return V0d.vtestz(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return dinxfp.vtestz(v64f(src), v64f(mask));
+                return V0d.vtestz(v64f(src), v64f(mask));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

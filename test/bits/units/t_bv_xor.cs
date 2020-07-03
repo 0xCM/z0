@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
-    using static Memories;
 
     public class t_bv_xor : t_bitsvc<t_bv_xor>
     {

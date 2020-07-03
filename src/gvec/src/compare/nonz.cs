@@ -75,13 +75,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dvec.vnonz(v8i(src));
+                return V0d.vnonz(v8i(src));
             else if(typeof(T) == typeof(short))
-                return dvec.vnonz(v16i(src));
+                return V0d.vnonz(v16i(src));
             else if(typeof(T) == typeof(int))
-                return dvec.vnonz(v32i(src));
+                return V0d.vnonz(v32i(src));
             else 
-                return dvec.vnonz(v64i(src));
+                return V0d.vnonz(v64i(src));
         }
 
         [MethodImpl(Inline)]
@@ -89,13 +89,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dvec.vnonz(v8u(src));
+                return V0d.vnonz(v8u(src));
             else if(typeof(T) == typeof(ushort))
-                return dvec.vnonz(v16u(src));
+                return V0d.vnonz(v16u(src));
             else if(typeof(T) == typeof(uint))
-                return dvec.vnonz(v32u(src));
+                return V0d.vnonz(v32u(src));
             else 
-                return dvec.vnonz(v64u(src));
+                return V0d.vnonz(v64u(src));
         }
 
         [MethodImpl(Inline)]
@@ -103,11 +103,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinxfp.vnonz(v32f(src));
+                return V0d.vnonz(v32f(src));
             else if(typeof(T) == typeof(double))
-                return dinxfp.vnonz(v64f(src));
+                return V0d.vnonz(v64f(src));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -115,13 +115,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dvec.vnonz(v8i(src));
+                return V0d.vnonz(v8i(src));
             else if(typeof(T) == typeof(short))
-                return dvec.vnonz(v16i(src));
+                return V0d.vnonz(v16i(src));
             else if(typeof(T) == typeof(int))
-                return dvec.vnonz(v32i(src));
+                return V0d.vnonz(v32i(src));
             else 
-                return dvec.vnonz(v64i(src));
+                return V0d.vnonz(v64i(src));
         }
 
         [MethodImpl(Inline)]
@@ -129,13 +129,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dvec.vnonz(v8u(src));
+                return V0d.vnonz(v8u(src));
             else if(typeof(T) == typeof(ushort))
-                return dvec.vnonz(v16u(src));
+                return V0d.vnonz(v16u(src));
             else if(typeof(T) == typeof(uint))
-                return dvec.vnonz(v32u(src));
+                return V0d.vnonz(v32u(src));
             else 
-                return dvec.vnonz(v64u(src));
+                return V0d.vnonz(v64u(src));
         }
 
         [MethodImpl(Inline)]
@@ -143,11 +143,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinxfp.vnonz(v32f(src));
+                return V0d.vnonz(v32f(src));
             else if(typeof(T) == typeof(double))
-                return dinxfp.vnonz(v64f(src));
+                return V0d.vnonz(v64f(src));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

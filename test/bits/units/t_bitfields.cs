@@ -9,7 +9,6 @@ namespace Z0
     
     using static Konst;
 
-
     public class t_bitfields : t_bitcore<t_bitfields>
     {
         [MethodImpl(Inline)]

@@ -5,13 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using BS = Z0.BitString;
 
     public class t_bb_bitstring : t_bitblock<t_bb_bitstring>
     {
-
         public void bsp_16u_from_bs()
             => bitspan_from_bitstring_check<ushort>();
 

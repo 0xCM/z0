@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static refs;
+    using static Root;
 
     partial struct BitString
     {
@@ -35,7 +35,7 @@ namespace Z0
         public static ReadOnlySpan<char> bitchars<T>(in T src)
             where T : unmanaged
         {
-            var dst = new char[BitSize.measure<T>()];
+            var dst = sys.alloc<char>(bitsize<T>());
             bitchars(src, dst);
             return dst;
         }
@@ -49,9 +49,9 @@ namespace Z0
         public static Span<char> bitchars<T>(ReadOnlySpan<T> src, int? maxlen = null)
             where T : unmanaged
         {
-            var seglen = BitSize.measure<T>();
+            var seglen = bitsize<T>();
             var srclen = src.Length;
-            Span<char> dst = new char[srclen * seglen];
+            Span<char> dst = sys.alloc<char>(srclen * seglen);
             ref readonly var input = ref head(src);
 
             for(var i=0; i<srclen; i++)
@@ -90,8 +90,8 @@ namespace Z0
         public static BitString replicate<T>(T src, int reps)                
             where T : unmanaged
         {
-            BitSize capacity = Unsafe.SizeOf<T>() * 8;
-            var bitseq = new byte[capacity*reps];            
+            var capacity = bitsize<T>();
+            var bitseq = sys.alloc<byte>(capacity*reps);            
             var pattern = scalar(src);
             for(var i=0; i<reps; i++)
                 pattern.BitSeq.CopyTo(bitseq, i*capacity);

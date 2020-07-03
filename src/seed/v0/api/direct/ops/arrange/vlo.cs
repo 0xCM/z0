@@ -19,7 +19,7 @@ namespace Z0
     using static V0;
 
     partial struct V0d
-    {
+    {                    
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
         /// </summary>
