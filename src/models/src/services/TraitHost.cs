@@ -9,6 +9,32 @@ namespace Z0
 
     using static Konst;
 
+    public interface ITraitHost
+    {
+
+    }
+    
+    public interface ITraitHost<F> : ITraitHost
+        where F : new()        
+    {
+        F Host
+        {
+            [MethodImpl(Inline)]
+            get => new F();
+        }
+    }
+
+    public interface ITraitHost<F,T> : ITraitHost<F>
+        where F : T, new()
+        where T : class
+    {
+        T Trait
+        {
+            [MethodImpl(Inline)]
+            get => new F();
+        }
+    }
+
     public readonly struct TraitHost
     {
         [MethodImpl(Inline)]

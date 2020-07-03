@@ -383,8 +383,9 @@ namespace Z0
         VZip,
 
         VMap,
-
         
+        Recover,
+
         /// <summary>
         /// Identifies a function that invokes framework/system operations wich are located in an external scope that does not disolve
         /// </summary>        

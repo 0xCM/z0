@@ -13,4 +13,6 @@ namespace Z0
 
     public class AllocAttribute : A { public AllocAttribute() : base(K.Alloc) {} }
 
+    public class RecoverAttribute : A { public RecoverAttribute() : base(K.Recover) {} }
+
 }

@@ -23,7 +23,7 @@ namespace Z0
         /// width[T] = 64: mov rax,[rdx] => [rcx],rax => mov dword ptr [rcx+8],8 => mov rax,rcx 
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<sbyte> src)
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<sbyte> src)
             where T : unmanaged
                 => recover<sbyte,T>(src);
 

@@ -15,6 +15,7 @@ namespace Z0
             
         }
 
-        public NumericKind NumericPrimitive => (NumericKind)Spec;
+        public NumericKind NumericPrimitive 
+            => (NumericKind)Spec;
     }    
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     /// <summary>
     /// Defines an arbitrary collection of character literals
     /// </summary>
@@ -245,6 +243,10 @@ namespace Z0
         /// The '↦' character
         /// </summary>
         public const char MapsTo = (char)ArrowSymbols.MapsTo;
-        
+
+        /// <summary>
+        /// The asci null character '\0'
+        /// </summary>
+        public const char Null = (char)0;       
     }
 }

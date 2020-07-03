@@ -8,6 +8,13 @@ namespace Z0
     
     partial struct As
     {        
+        // public static object box<T>(T src, NumericKind dst)
+        //     where T : unmanaged
+        // {
+
+
+        // }
+
         /// <summary>
         /// Converts a numeric source value to a boxed numeric value of specified kind
         /// </summary>

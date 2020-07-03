@@ -11,9 +11,6 @@ namespace Z0
 
     public readonly struct UpperCased : ILetterCase<UpperCased>
     {    
-        public static UpperCased Case 
-            => default(UpperCased);
-
         [MethodImpl(Inline)]
         public static implicit operator LetterCase(UpperCased src)
             => new LetterCase(src.IsUpper, src.IsLower, src.Kind);
@@ -26,5 +23,8 @@ namespace Z0
 
         public LetterCaseKind Kind 
             => LetterCaseKind.Upper;
+
+        public static UpperCased Case 
+            => default(UpperCased);
     }
 }

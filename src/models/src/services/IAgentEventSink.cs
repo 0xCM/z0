@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public delegate void OnAgentTransition(in AgentTransition transition);
 
     public interface IAgentEventSink

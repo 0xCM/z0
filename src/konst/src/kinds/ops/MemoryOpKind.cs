@@ -23,5 +23,11 @@ namespace Z0
         /// </summary>
         Load = OpKindId.Load,
 
+        /// <summary>
+        /// Identifies an operation that accepts a memory buffer, such as a memory segmented covered by an S-span, 
+        /// and returns the buffer unaltered but with an alternate presentation, such as a T-span
+        /// </summary>        
+        Recover = OpKindId.Recover,
+
     }
 }
