@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using PSym = AsciPair;
 
     public enum AsciPairCode : byte

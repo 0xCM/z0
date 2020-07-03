@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     /// <summary>
     /// Defines an arbitrary collection of text literals
     /// </summary>
@@ -34,16 +32,6 @@ namespace Z0
         /// The ''' character text
         /// </summary>
         public const string SQuote = "\'";
-
-        /// <summary>
-        /// The '0' character text
-        /// </summary>
-        public const string D0 = "0";
-        
-        /// <summary>
-        /// The '1' character text
-        /// </summary>
-        public const string D1 = "1";
     
     }
 }

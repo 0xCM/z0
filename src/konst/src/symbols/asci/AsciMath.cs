@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     public enum AsciMath : ushort
     {        
         /// <summary>

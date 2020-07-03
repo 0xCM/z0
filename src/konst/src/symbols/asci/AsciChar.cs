@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     using CSym = AsciControl;
     using MSym = AsciMath;
     using LSym = AsciLetter;

@@ -16,19 +16,32 @@ namespace Z0
 
     public class t_memstore : t_asmd<t_memstore>
     {
-
-        public void read_ref()
+        const string A = "abcdefghijklmnopqrstuvwxyz";
+        
+        public void read_ref_1()
         {
             var src = array(3u,5u,6u,7u);        
             var r = Refs.from(src);
             var z = r.As<uint>();
             
-            Addressable.address(in src[0]);
-            Trace(r.Location.FormatAsmHex());                        
-            Trace(r.Size);                        
-
+            Claim.eq(16, r.DataSize);
+            Claim.eq(4, r.CellCount);
+            for(var i=0; i<src.Length; i++)
+                Claim.eq(r[i],src[i]);                        
         }
-        
+
+        public void read_ref_2()
+        {
+            var src = A;
+            var r = Refs.from(src);
+            Claim.eq(A.Length, r.CellCount);
+            Claim.eq(A.Length*2, r.DataSize);
+            
+            // Claim.eq(16, r.DataSize);
+            for(var i=0; i<src.Length; i++)
+                Claim.eq(r[i],src[i]);                        
+        }
+
         public void read_models()
         {
             var svc = ResStoreModels.Service;

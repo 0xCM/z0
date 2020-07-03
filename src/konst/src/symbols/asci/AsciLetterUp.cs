@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     /// <summary>
     /// Defines symbols corresponding to the letters A,..Z
     /// </summary>

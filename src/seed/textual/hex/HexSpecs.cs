@@ -14,12 +14,12 @@ namespace Z0
         /// <summary>
         /// The uppercase hex format code
         /// </summary>
-        public const string UC = LetterText.X;
+        public const string UC = AsciCharText.X;
 
         /// <summary>
         /// The lowercase hex format code
         /// </summary>
-        public const string LC = LetterText.x;
+        public const string LC = AsciCharText.x;
 
         /// <summary>
         /// The delimiter used to separate hex numbers when rendering a hex data sequence

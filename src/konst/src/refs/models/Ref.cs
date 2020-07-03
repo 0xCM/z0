@@ -18,7 +18,7 @@ namespace Z0
     /// <summary>
     /// A reference?
     /// </summary>        
-    public readonly struct Ref
+    public readonly struct Ref : IRefBuffer<byte>
     {
         readonly Vector128<ulong> R;    
 
@@ -28,7 +28,15 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline)]
         public static Span<byte> operator !(Ref src)
-            => src.Bytes;
+            => src.Buffer;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Ref lhs, Ref rhs)
+            => lhs.Equals(rhs);
+        
+        [MethodImpl(Inline)]
+        public static bool operator !=(Ref lhs, Ref rhs)
+            => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
         internal Ref(ulong location, uint size)
@@ -38,15 +46,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public Span<T> As<T>()
-            => cover<T>(Location, (uint)size<T>()/Size);
+            => cover<T>(Location, DataSize/size<T>());
 
-        public Span<byte> Bytes
+        public Span<byte> Buffer
         {
             [MethodImpl(Inline)]
-            get => cover(Location, Size);
+            get => cover(Location, DataSize);
         }
 
-        public uint Size
+        public uint DataSize
         {
             [MethodImpl(Inline)]
             get => (uint)R.GetElement(1);
@@ -57,6 +65,38 @@ namespace Z0
             [MethodImpl(Inline)]
             get => R.GetElement(0);
         }
+
+        public uint CellSize 
+        {
+            [MethodImpl(Inline)]
+            get => 1;
+        }
+
+        public uint CellCount
+        {
+            [MethodImpl(Inline)]
+            get => DataSize;
+        }
+
+        [MethodImpl(Inline)]
+        public unsafe ref byte Cell(int index)
+            => ref Unsafe.AsRef<byte>((void*)(Location + (uint)index));
+        
+        public ref byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(index);
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(Ref src)
+            => R.Equals(src.R);
+
+        public override bool Equals(object src)        
+            => src is Ref r && Equals(r);
+        
+        public override int GetHashCode()
+            => (int) Location;
 
         [MethodImpl(Inline)]
         static uint size<T>()

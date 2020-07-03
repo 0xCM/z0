@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     using C = Chars;
 
     public enum CharSymbolic : ushort

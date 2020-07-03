@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     using S = AsciMath;
 
     public enum AsciMathCode : byte

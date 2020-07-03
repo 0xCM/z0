@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     /// <summary>
-    /// Defines character literals a,...z,A,..Z as text
+    /// Defines asci string iterals
     /// </summary>
-    public static class LetterText
+    public static class AsciCharText
     {
         /// <summary>
         /// The'a' character represented as text
@@ -126,8 +124,14 @@ namespace Z0
         /// </summary>
         public const string I = "I";
         
+        /// <summary>
+        /// The 'J' character represented as text
+        /// </summary>
         public const string J = "J";
 
+        /// <summary>
+        /// The 'K' character represented as text
+        /// </summary>
         public const string K = "K";
 
         public const string L = "L";
@@ -160,5 +164,18 @@ namespace Z0
 
         public const string Z = "Z";
 
+        public const string UpperCased = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        public const string LowerCased = "abcdefghijklmnopqrstuvwxyz";
+
+        public const string Binary = "01";
+        
+        public const string Octal = "01234567";
+    
+        public const string Decimal = "0123456789";
+
+        public const string UpperHex = "0123456789ABCDEF";
+        
+        public const string LowerHex = "0123456789abcdef";        
     }
 }

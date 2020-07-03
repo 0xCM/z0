@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     public enum AsciDigit : ushort
     {
         Null = 0,

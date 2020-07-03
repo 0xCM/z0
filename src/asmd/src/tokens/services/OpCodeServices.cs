@@ -63,7 +63,6 @@ namespace Z0.Asm.Data
                 dst[i] = OpCodeServices.identity(skip(src,i));
         }
 
-
         [Op]
         public static unsafe OpCodeTokens load(ReadOnlySpan<FieldRef> src, OpCodeToken[] dst)
         {

@@ -25,7 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe ConstRef<char> from(string src)
-            => new ConstRef<char>(define(ptr(@ref(span(src))), src.Length));
+            => new ConstRef<char>(define(ptr(@ref(span(src))), size<char>((uint)src.Length)));
 
         [MethodImpl(Inline), Op]
         public static unsafe Ref<T> from<T>(T[] src)
