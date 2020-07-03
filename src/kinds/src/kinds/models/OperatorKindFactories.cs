@@ -4,38 +4,36 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using K = Kinds;
-
     partial class Kinds
     {
-        public static K.OperatorClass Operator 
+        public static OperatorClass Operator 
             => default;
 
-        public static K.EmitterOpClass EmitterOp
+        public static EmitterOpClass EmitterOp
             => default;
 
-        public static K.UnaryOpClass UnaryOp 
+        public static UnaryOpClass UnaryOp 
             => default;
 
-        public static K.BinaryOpClass BinaryOp 
+        public static BinaryOpClass BinaryOp 
             => default;
 
-        public static K.TernaryOpClass TernaryOp 
+        public static TernaryOpClass TernaryOp 
             => default;
 
-        public static K.ShiftOpClass ShiftOp 
+        public static ShiftOpClass ShiftOp 
             => default;
 
-        public static K.EmitterOpClass<T> emitter<T>(T t = default) 
+        public static EmitterOpClass<T> emitter<T>(T t = default) 
             where T : unmanaged => default;
 
-        public static K.UnaryOpClass<T> unaryop<T>(T t = default) 
+        public static UnaryOpClass<T> unaryop<T>(T t = default) 
             where T : unmanaged => default;
 
-        public static K.BinaryOpClass<T> binaryop<T>(T t = default) 
+        public static BinaryOpClass<T> binaryop<T>(T t = default) 
             where T : unmanaged => default;
 
-        public static K.TernaryOpClass<T> ternaryop<T>(T t = default)  
+        public static TernaryOpClass<T> ternaryop<T>(T t = default)  
             where T : unmanaged => default;
     }
 }

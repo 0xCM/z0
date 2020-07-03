@@ -19,6 +19,7 @@ namespace Z0
         public static UnaryPredicate8 fix(UnaryPredicate<sbyte> f) 
             => a => f((sbyte)a.Content);
 
+
         [MethodImpl(Inline), Op]
         public static UnaryPredicate8 fix(UnaryPredicate<byte> f) 
             => a => f((byte)a.Content);

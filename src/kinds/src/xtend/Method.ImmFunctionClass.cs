@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static ImmFunctionClass;
+    using static ImmFunctionClassKind;
 
     partial class XTend
     {
@@ -17,14 +17,14 @@ namespace Z0
         /// Calculates a method's immediate class
         /// </summary>
         /// <param name="src">The method to classify</param>
-        public static ImmFunctionClass ImmFunctionClass(this MethodInfo src, ImmRefinementKind refinement)
+        public static ImmFunctionClassKind ImmFunctionClass(this MethodInfo src, ImmRefinementKind refinement)
         {
             var parms = src.ImmParameters(refinement).ToArray();
             var count = parms.Length;
             if(count == 0 || count > 2)
                 return 0;
 
-            var immc = Z0.ImmFunctionClass.Imm8;
+            var immc = Z0.ImmFunctionClassKind.Imm8;
             var first = parms.First();
             switch(count)
             {

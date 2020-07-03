@@ -6,6 +6,9 @@ namespace Z0
 {
     partial class Kinds
     {
+        //~ Parametric
+        //~ -------------------------------------------------------------------
+
         public readonly struct TestZ<T> : IBitFunctionKind<TestZ,T> {}
 
         public readonly struct TestC<T> : IBitFunctionKind<TestC,T> {}

@@ -9,23 +9,10 @@ namespace Z0
     
     using static Konst;
 
-    using K = OperatorClass;
+    using K = OperatorClassKind;
 
     partial class Kinds
     {
-        public readonly struct OperatorClass<T> : IOpClass<K,T> 
-        { 
-            public K Class {get;}
-
-            [MethodImpl(Inline)]
-            public static implicit operator OperatorClass(OperatorClass<T> src)
-                => new OperatorClass(src.Class);
-
-            [MethodImpl(Inline)]
-            public OperatorClass(K k)
-                => Class = k;
-        }
-
         public readonly struct EmitterOpClass<T> : IOperatorClass<EmitterOpClass<T>,K,T> 
         { 
             [MethodImpl(Inline)]
@@ -36,11 +23,11 @@ namespace Z0
             public static implicit operator EmitterOpClass(EmitterOpClass<T> src)
                 => src.NonGeneric;
 
-            public K Class 
+            public K Kind 
                 => K.Emitter; 
 
             public OperatorClass<T> Generalized 
-                => new OperatorClass<T>(Class);
+                => new OperatorClass<T>(Kind);
 
             public EmitterOpClass NonGeneric 
                 => default;
@@ -56,11 +43,11 @@ namespace Z0
             public static implicit operator UnaryOpClass(UnaryOpClass<T> src)
                 => src.NonGeneric;
                         
-            public K Class 
+            public K Kind 
                 => K.UnaryOp; 
 
             public OperatorClass<T> Generalized 
-                => new OperatorClass<T>(Class);
+                => new OperatorClass<T>(Kind);
 
             public UnaryOpClass NonGeneric 
                 => default;
@@ -68,7 +55,7 @@ namespace Z0
 
         public readonly struct BinaryOpClass<T> : IOperatorClass<BinaryOpClass<T>,K,T> 
         { 
-            public K Class 
+            public K Kind 
                 => K.BinaryOp; 
 
             [MethodImpl(Inline)]
@@ -80,7 +67,7 @@ namespace Z0
                 => src.NonGeneric;
                         
             public OperatorClass<T> Generalized 
-                => new OperatorClass<T>(Class);
+                => new OperatorClass<T>(Kind);
 
             public BinaryOpClass NonGeneric 
                 => default;            
@@ -88,7 +75,7 @@ namespace Z0
 
         public readonly struct TernaryOpClass<T> : IOperatorClass<TernaryOpClass<T>,K,T> 
         {
-            public K Class => K.TernaryOp; 
+            public K Kind => K.TernaryOp; 
 
             [MethodImpl(Inline)]
             public static implicit operator OperatorClass<T>(TernaryOpClass<T> src)
@@ -99,7 +86,7 @@ namespace Z0
                 => src.NonGeneric;
 
             public OperatorClass<T> Generalized 
-                => new OperatorClass<T>(Class);
+                => new OperatorClass<T>(Kind);
 
             public TernaryOpClass NonGeneric 
                 => default;
@@ -115,11 +102,11 @@ namespace Z0
             public static implicit operator ShiftOpClass(ShiftOpClass<T> src)
                 => src.NonGeneric;
 
-            public K Class 
+            public K Kind 
                 => K.ShiftOp; 
 
             public OperatorClass<T> Generalized 
-                => new OperatorClass<T>(Class);
+                => new OperatorClass<T>(Kind);
 
             public ShiftOpClass NonGeneric 
                 => default;

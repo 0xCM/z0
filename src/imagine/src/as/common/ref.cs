@@ -18,16 +18,18 @@ namespace Z0
         /// </summary>
         /// <param name="ptr">The source pointer</param>
         /// <typeparam name="T">The reference type</typeparam>
+        /// <remarks>For all T, effects: mov rax,rcx</remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ref T @ref<T>(T* ptr)            
             where T : unmanaged
                 => ref AsRef<T>(ptr);
                 
         /// <summary>
-        /// Presents a T-reference as a byte reference
+        /// Presents a T-reference as a byte reference and effects mov rax,rdx for all T
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The source type</typeparam>
+        /// <remarks>For all T, effects: mov rax,rdx</remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte @ref<T>(W8 w, ref T src)
             => ref As<T,byte>(ref src);
@@ -37,6 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The source type</typeparam>
+        /// <remarks>For all T, effects: mov rax,rdx</remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ushort @ref<T>(W16 w, ref T src)
             => ref As<T,ushort>(ref src);
@@ -46,6 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The source type</typeparam>
+        /// <remarks>For all T, effects: mov rax,rdx</remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref uint @ref<T>(W32 w, ref T src)
             => ref As<T,uint>(ref src);
@@ -55,13 +59,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The source type</typeparam>
+        /// <remarks>For all T, effects: mov rax,rdx</remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ulong @ref<T>(W64 w, ref T src)
             => ref As<T,ulong>(ref src);
-
-        [MethodImpl(Inline)]
-        public static unsafe ref T @ref<S,T>(S* pSrc)            
-            where S : unmanaged
-                => ref @as<S,T>(ref @ref<S>(pSrc));
     }
 }

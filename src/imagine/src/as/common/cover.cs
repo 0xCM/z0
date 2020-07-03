@@ -41,7 +41,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cover<T>(in T src, uint count)
-            => CreateSpan(ref edit(src),(int)count);    
+            => CreateSpan(ref edit(src), (int)count);    
 
         /// <summary>
         /// Creates a span over a sequence of T-cells from a specified number of S-cells

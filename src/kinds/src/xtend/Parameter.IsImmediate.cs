@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static ImmFunctionClass;
+    using static ImmFunctionClassKind;
 
     partial class XTend
     {
@@ -64,7 +64,7 @@ namespace Z0
         public static IEnumerable<Type> ImmParameterTypes(this MethodInfo src, ImmRefinementKind kind)
             => src.ImmParameters(kind).Select(p => p.ParameterType);
 
-        static ImmFunctionClass ImmSlot(this ParameterInfo p)
+        static ImmFunctionClassKind ImmSlot(this ParameterInfo p)
         {
             switch(p.Position)
             {

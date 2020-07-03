@@ -4,25 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Konst; 
+    using static Kinds;
 
-    using K = Kinds;
 
     public interface IDynamicFactories : IService
     {
-        IEmitterOpFactory<T> Factory<T>(K.EmitterOpClass<T> k)
+        IEmitterOpFactory<T> Factory<T>(EmitterOpClass<T> k)
             where T : unmanaged;        
 
-        IUnaryOpFactory<T> Factory<T>(K.UnaryOpClass<T> op)        
+        IUnaryOpFactory<T> Factory<T>(UnaryOpClass<T> op)        
             where T :  unmanaged;
 
-        IBinaryOpFactory<T> Factory<T>(K.BinaryOpClass<T> op)        
+        IBinaryOpFactory<T> Factory<T>(BinaryOpClass<T> op)        
             where T :  unmanaged;
 
-        ITernaryOpFactory<T> Factory<T>(K.TernaryOpClass<T> op)        
+        ITernaryOpFactory<T> Factory<T>(TernaryOpClass<T> op)        
             where T :  unmanaged;
     }
 }

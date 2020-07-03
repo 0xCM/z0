@@ -10,8 +10,6 @@ namespace Z0
  
     using static Konst;
 
-    using K = Kinds;
-
     partial class FixedOps
     {
         /// <summary>

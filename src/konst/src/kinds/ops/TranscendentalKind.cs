@@ -3,9 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System;
-        
+{        
     using Id = OpKindId;
 
     /// <summary>
@@ -21,5 +19,4 @@ namespace Z0
 
         Log = Id.Log
     }
-
 }

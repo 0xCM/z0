@@ -9,7 +9,7 @@ namespace Z0
     
     using static Konst;
 
-    using C = OperatorClass;
+    using C = OperatorClassKind;
     using K = Kinds;
     
     partial class Kinds
@@ -18,7 +18,7 @@ namespace Z0
         {
             public TypeWidth Width {get;}
 
-            public C Class 
+            public C Kind 
                 => C.UnaryOp; 
                         
             public OperatorClass Generalized 
@@ -48,7 +48,7 @@ namespace Z0
             public static implicit operator FixedUnaryOp(FixedUnaryOp<W> src)
                 => src.NonGeneric;
 
-            public C Class 
+            public C Kind 
                 => C.UnaryOp; 
 
             public TypeWidth Width 
@@ -69,13 +69,13 @@ namespace Z0
             public static implicit operator OperatorClass(FixedBinaryOp src)
                 => src.Generalized;
 
-            public C Class 
+            public C Kind 
                 => C.BinaryOp; 
 
             public OperatorClass Generalized 
             {
                 [MethodImpl(Inline)]
-                get => new OperatorClass(Class);
+                get => new OperatorClass(Kind);
             }
 
 
@@ -101,7 +101,7 @@ namespace Z0
             public static implicit operator FixedBinaryOp(FixedBinaryOp<W> src)
                 => src.NonGeneric;
 
-            public C Class 
+            public C Kind 
                 => C.BinaryOp; 
 
             public TypeWidth Width 
@@ -110,7 +110,7 @@ namespace Z0
             public OperatorClass<W> Generalized
             { 
                 [MethodImpl(Inline)]
-                get => new OperatorClass<W>(Class);
+                get => new OperatorClass<W>(Kind);
             }
 
             public FixedBinaryOp NonGeneric 
@@ -126,9 +126,9 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator OperatorClass(FixedTernaryOp src)
-                => new OperatorClass(src.Class);
+                => new OperatorClass(src.Kind);
 
-            public C Class 
+            public C Kind 
                 => C.TernaryOp; 
 
             public OperatorClass Generalized 
@@ -154,7 +154,7 @@ namespace Z0
             public static implicit operator FixedTernaryOp(FixedTernaryOp<W> src)
                 => src.NonGeneric;
 
-            public C Class 
+            public C Kind 
                 => C.TernaryOp; 
 
             public TypeWidth Width 

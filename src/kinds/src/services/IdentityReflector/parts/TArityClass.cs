@@ -9,8 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
  
-    using AC = ArityClass;
-    using OC = OperatorClass;
+    using AC = ArityClassKind;
+    using OC = OperatorClassKind;
 
     partial interface TIdentityReflector
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// Assigns an arity classification, if any, to a method
         /// </summary>
         /// <param name="m">The method to examine</param>
-        ArityClass ArityClass(MethodInfo m)
+        ArityClassKind ArityClass(MethodInfo m)
             => m.ArityValue() switch{
                 0 => AC.Nullary,
                 1 => AC.Unary,
@@ -27,7 +27,7 @@ namespace Z0
                 _ => AC.None
             };
 
-        int ArityValue(OperatorClass src)
+        int ArityValue(OperatorClassKind src)
             => src switch{
                OC.UnaryOp => 1,
                OC.BinaryOp => 2,
@@ -46,7 +46,7 @@ namespace Z0
         /// Queries the stream for methods with a specified arity classification
         /// </summary>
         /// <param name="src">The source stream</param>
-        IEnumerable<MethodInfo> WithArityClass(IEnumerable<MethodInfo> src, ArityClass @class)
+        IEnumerable<MethodInfo> WithArityClass(IEnumerable<MethodInfo> src, ArityClassKind @class)
             => from m in src where ArityClass(m) == @class select m;
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
  
-    using OC = OperatorClass;
+    using OC = OperatorClassKind;
 
     partial interface TIdentityReflector
     {
@@ -51,7 +51,7 @@ namespace Z0
         /// Queries the stream for methods with a specified operator classification
         /// </summary>
         /// <param name="src">The source stream</param>
-        IEnumerable<MethodInfo> WithOperatorClass(IEnumerable<MethodInfo> src, OperatorClass @class)
+        IEnumerable<MethodInfo> WithOperatorClass(IEnumerable<MethodInfo> src, OperatorClassKind @class)
             => from m in src where ClassifyOperator(m) == @class select m;
     }
 }

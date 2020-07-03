@@ -17,7 +17,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        /// <remarks>For all T, effects: mov rax,rcx</remarks>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe T* refptr<T>(ref T src)
             where T : unmanaged
                 => (T*)AsPointer(ref src); 
@@ -28,7 +29,14 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The number of elements to skip</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        /// <remarks>
+        /// Effects
+        /// width[T]=8:  movsxd rax,edx => add rax,rcx
+        /// width[T]=16: movsxd rax,edx => lea rax,[rcx+rax*2]
+        /// width[T]=32: movsxd rax,edx => lea rax,[rcx+rax*4]
+        /// width[T]=64: movsxd rax,edx => lea rax,[rcx+rax*8]
+        /// </remarks>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe T* refptr<T>(ref T src, int offset)
             where T : unmanaged
                 => (T*)AsPointer(ref Add(ref src, offset));

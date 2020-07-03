@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="f">The operator</param>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> apply<T>(UnaryOp128 f, Vector128<T> x)
             where T : unmanaged
                 => f(x.ToFixed()).ToVector<T>();
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="f">The operator</param>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> apply<T>(UnaryOp256 f, Vector256<T> x)
             where T : unmanaged
                 => f(x.ToFixed()).ToVector<T>();
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="f">The operator</param>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector512<T> apply<T>(UnaryOp512 f, in Vector512<T> x)
             where T : unmanaged
                 => f(x.ToFixed()).ToVector<T>();
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> apply<T>(BinaryOp128 f, Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> apply<T>(BinaryOp256 f, Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector512<T> apply<T>(BinaryOp512 f, Vector512<T> x, Vector512<T> y)
             where T : unmanaged
                 => f(x.ToFixed(), y.ToFixed()).ToVector<T>(); 

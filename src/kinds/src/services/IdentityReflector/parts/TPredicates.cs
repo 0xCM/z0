@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
  
-    using PC = PredicateClass;
+    using PC = PredicateClassKind;
 
     partial interface TIdentityReflector
     {
@@ -25,7 +25,7 @@ namespace Z0
         /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
         /// </summary>
         /// <param name="m">The method to examine</param>
-        PredicateClass ClassifyPredicate(MethodInfo m)
+        PredicateClassKind ClassifyPredicate(MethodInfo m)
         {
             if(IsPredicate(m))
             {
@@ -44,7 +44,7 @@ namespace Z0
         /// Queries the stream for methods with a specified predicate classification
         /// </summary>
         /// <param name="src">The source stream</param>
-        IEnumerable<MethodInfo> WithPredicateClass(IEnumerable<MethodInfo> src, PredicateClass @class)
+        IEnumerable<MethodInfo> WithPredicateClass(IEnumerable<MethodInfo> src, PredicateClassKind @class)
             => from m in src where ClassifyPredicate(m) == @class select m;
 
         /// <summary>

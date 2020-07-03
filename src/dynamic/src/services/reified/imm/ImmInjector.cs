@@ -10,8 +10,7 @@ namespace Z0
     using System.Reflection;
    
     using static Konst;
-
-    using K = Kinds;
+    using static Kinds;
 
     readonly struct ImmInjector : IImmInjector
     {                
@@ -29,44 +28,44 @@ namespace Z0
                 => new ImmInjector<D>(diviner, factory);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IMultiDiviner diviner, Vec128Type v, K.UnaryOpClass k)
+        public static IImmInjector Create(IMultiDiviner diviner, Vec128Type v, UnaryOpClass k)
             => new ImmInjector(diviner, v, k);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IMultiDiviner diviner, Vec256Type v, K.UnaryOpClass k)
+        public static IImmInjector Create(IMultiDiviner diviner, Vec256Type v, UnaryOpClass k)
             => new ImmInjector(diviner, v, k);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IMultiDiviner diviner, Vec128Type v, K.BinaryOpClass k)
+        public static IImmInjector Create(IMultiDiviner diviner, Vec128Type v, BinaryOpClass k)
             => new ImmInjector(diviner, v, k);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IMultiDiviner diviner, Vec256Type v, K.BinaryOpClass k)
+        public static IImmInjector Create(IMultiDiviner diviner, Vec256Type v, BinaryOpClass k)
             => new ImmInjector(diviner, v, k);
 
         [MethodImpl(Inline)]
-        ImmInjector(IMultiDiviner diviner, Vec128Type vk, K.UnaryOpClass opk)
+        ImmInjector(IMultiDiviner diviner, Vec128Type vk, UnaryOpClass opk)
         {
             Injective = V128UnaryOpImmInjector.Create(diviner);
             Diviner = diviner;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IMultiDiviner diviner, Vec256Type vk, K.UnaryOpClass opk)
+        ImmInjector(IMultiDiviner diviner, Vec256Type vk, UnaryOpClass opk)
         {
             Injective = V256UnaryOpImmInjector.Create(diviner);
             Diviner = diviner;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IMultiDiviner diviner, Vec128Type vk, K.BinaryOpClass opk)
+        ImmInjector(IMultiDiviner diviner, Vec128Type vk, BinaryOpClass opk)
         {
             Injective = V128BinaryOpImmInjector.Create(diviner);
             Diviner = diviner;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IMultiDiviner diviner, Vec256Type vk, K.BinaryOpClass opk)
+        ImmInjector(IMultiDiviner diviner, Vec256Type vk, BinaryOpClass opk)
         {
             Injective = V256BinaryOpImmInjector.Create(diviner);
             Diviner = diviner;

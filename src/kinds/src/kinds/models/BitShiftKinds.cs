@@ -20,5 +20,22 @@ namespace Z0
         public readonly struct Rotl : I { K I.Kind => K.Rotl; }
 
         public readonly struct Rotr : I { K I.Kind => K.Rotr; }
+
+
+        //~ Parametric
+        //~ -------------------------------------------------------------------
+
+        public readonly struct Sll<T> : IBitShiftKind<Sll,T> {}
+
+        public readonly struct Sllv<T> : IBitShiftKind<Sllv,T> {}
+
+        public readonly struct Srl<T> : IBitShiftKind<Srl,T> {}
+
+        public readonly struct Srlv<T> : IBitShiftKind<Srlv,T> {}
+
+        public readonly struct Rotl<T> : IBitShiftKind<Rotl,T> {}
+
+        public readonly struct Rotr<T> : IBitShiftKind<Rotr,T> {}
+
     }
 }

@@ -27,12 +27,13 @@ namespace Z0
     /// Charactrizes a class-parametric operation class
     /// </summary>
     /// <typeparam name="E">The class type</typeparam>
-    public interface IOpClass<E> : IOpClass 
+    public interface IOpClass<E> : IOpClass
         where E : unmanaged, Enum
     {
-        E Class {get;}
+        E Kind {get;}
 
-        string Name => Class.ToString().ToLower();        
+        string Name 
+            => Kind.ToString().ToLower();        
     }
 
     /// <summary>
@@ -50,7 +51,7 @@ namespace Z0
         where E : unmanaged, Enum
         where K : IOpClass<E>, new()
     {
-        E IOpClass<E>.Class => new K().Class;
+        E IOpClass<E>.Kind => new K().Kind;
     }
 
     /// <summary>

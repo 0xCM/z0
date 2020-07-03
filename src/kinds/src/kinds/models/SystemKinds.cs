@@ -9,14 +9,16 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct Alloc : I { K I.Kind => K.Alloc; }
-
-        public readonly struct Store : I { K I.Kind => K.Store; }
-
-        public readonly struct Load : I { K I.Kind => K.Load; }
-
         public readonly struct Init : I { K I.Kind => K.Init; }
         
         public readonly struct Kind : I { K I.Kind => K.Kind; }
+
+
+        //~ Parametric
+        //~ -------------------------------------------------------------------
+        
+        public readonly struct Init<T> : ISystemOpKind<Init,T> {}
+
+        public readonly struct Kind<T> : ISystemOpKind<Kind,T> {}        
     }
 }

@@ -85,21 +85,6 @@ namespace Z0
         TypeWidth OperandWidth => Widths.type<W>();
     }    
 
-    /// <summary>
-    /// Characterizes a kind, numeric, and width-parametric system operation classifier
-    /// </summary>
-    /// <typeparam name="F">The kind classifier type</typeparam>
-    /// <typeparam name="W">The width type</typeparam>
-    /// <typeparam name="T">The numeric type</typeparam>
-    public interface ISystemOpKind<F,W,T> : ISystemOpKind<F,T>
-        where W : unmanaged, ITypeWidth
-        where F : unmanaged, ISystemOpKind
-    {
-        /// <summary>
-        /// The parametrically-identified operand width
-        /// </summary>
-        TypeWidth OperandWidth => Widths.type<W>();
-    }    
 
     /// <summary>
     /// Characterizes a kind, numeric, and width-parametric bitshift operation classifier

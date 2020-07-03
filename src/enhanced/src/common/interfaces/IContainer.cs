@@ -128,25 +128,6 @@ namespace Z0
         F Redefine(T src);
     }
 
-
-    /// <summary>
-    /// Characterizes an individual that can be uniquely associatd with an integer in the range 0..n-1 
-    /// within the context of a container with a capacity of n items
-    /// </summary>
-    public interface IPositional
-    {
-        /// <summary>
-        /// The 0-based position of the item in an enclosing container
-        /// </summary>
-        int Position {get;}
-    }
-
-    public interface IPositional<F> : IPositional, IReified<F>
-        where F : IPositional<F>, new()
-    {
-        
-    }
-
     public interface IReversible<T>
     {
 

@@ -11,6 +11,7 @@ namespace Z0
 
     using static Konst;
     using static Memories;
+    using static Kinds;
 
 
     using K = Kinds;
@@ -39,7 +40,7 @@ namespace Z0
 
         const int EvalCount = 100;
         
-        UnaryEval<T> eval<T>(BufferTokens buffers, in ApiCode code,  K.UnaryOpClass<T> k)
+        UnaryEval<T> eval<T>(BufferTokens buffers, in ApiCode code,  UnaryOpClass<T> k)
             where T : unmanaged
         {
             var src = Random.Array<T>(EvalCount);
@@ -51,7 +52,7 @@ namespace Z0
             return evaluator.Evaluate(package);
         }
 
-        BinaryEval<T> eval<T>(BufferTokens buffers, in ApiCode code,  K.BinaryOpClass<T> k)
+        BinaryEval<T> eval<T>(BufferTokens buffers, in ApiCode code,  BinaryOpClass<T> k)
             where T : unmanaged
         {
             var src = Random.Pairs<T>(EvalCount);
@@ -105,7 +106,7 @@ namespace Z0
             var apiclass = api.Method.ClassifyOperator();
             switch(apiclass)
             {
-                case OperatorClass.BinaryOp:
+                case OperatorClassKind.BinaryOp:
                 switch(nk)
                 {
                     case NumericKind.U8:

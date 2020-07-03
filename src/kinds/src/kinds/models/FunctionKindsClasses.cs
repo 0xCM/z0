@@ -4,19 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = FunctionClass;
+    using K = FunctionClassKind;
 
     partial class Kinds
     {
-        public readonly struct FunctionClass : IOpClass<K> { public K Class => K.Function; }
+        public readonly struct FunctionClass : IOpClass<K> { public K Kind => K.Function; }
 
-        public readonly struct EmitterFunc : IOpClass<K> { public K Class => K.Emitter; }
+        public readonly struct EmitterFunc : IOpClass<K> { public K Kind => K.Emitter; }
 
-        public readonly struct UnaryFunc : IOpClass<K> { public K Class => K.UnaryFunc; }
+        public readonly struct UnaryFunc : IOpClass<K> { public K Kind => K.UnaryFunc; }
 
-        public readonly struct BinaryFunc : IOpClass<K> { public K Class => K.BinaryFunc; }
+        public readonly struct BinaryFunc : IOpClass<K> { public K Kind => K.BinaryFunc; }
 
-        public readonly struct TernaryFunc : IOpClass<K> { public K Class => K.TernaryFunc; }
+        public readonly struct TernaryFunc : IOpClass<K> { public K Kind => K.TernaryFunc; }
 
         public readonly struct FunctionClass<T> : IOpClass<FunctionClass,K,T>  {}
 

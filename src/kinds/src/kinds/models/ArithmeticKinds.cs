@@ -34,5 +34,34 @@ namespace Z0
         public readonly struct Square : I {  K I.Kind => K.Square; }
 
         public readonly struct Sqrt : I {  K I.Kind => K.Sqrt; }
+
+        //~ Parametric
+        //~ -------------------------------------------------------------------
+        
+        public readonly struct Add<T> : IArithmeticKind<Add,T> {}
+
+        public readonly struct Sub<T> : IArithmeticKind<Sub,T> {}
+
+        public readonly struct Mul<T> : IArithmeticKind<Mul,T> {}
+
+        public readonly struct Div<T> : IArithmeticKind<Div,T> {}
+
+        public readonly struct Mod<T> : IArithmeticKind<Mod,T> {}
+
+        public readonly struct Clamp<T> : IArithmeticKind<Clamp,T> {}
+
+        public readonly struct Dot<T> : IArithmeticKind<Dot,T> {}
+
+        public readonly struct Inc<T> : IArithmeticKind<Inc,T> {}
+
+        public readonly struct Dec<T> : IArithmeticKind<Dec,T> {}
+
+        public readonly struct Negate<T> : IArithmeticKind<Negate,T> {}
+
+        public readonly struct Abs<T> : IArithmeticKind<Abs,T> {}
+
+        public readonly struct Square<T> : IArithmeticKind<Square,T> {}
+
+        public readonly struct Sqrt<T> : IArithmeticKind<Sqrt,T> {}        
     }
 }

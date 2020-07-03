@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-        
     using Id = OpKindId;
 
     public enum AggregateFunctionKind : ulong

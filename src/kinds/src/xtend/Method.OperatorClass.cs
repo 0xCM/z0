@@ -27,7 +27,7 @@ namespace Z0
         /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
         /// </summary>
         /// <param name="src">The method to examine</param>
-        public static OperatorClass ClassifyOperator(this MethodInfo src)
+        public static OperatorClassKind ClassifyOperator(this MethodInfo src)
             => RC.ClassifyOperator(src);
     }
 }

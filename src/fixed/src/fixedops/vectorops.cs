@@ -16,7 +16,7 @@ namespace Z0
         /// Creates a fixed 128-bit unary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static UnaryOp128 vfix<T>(Func<Vector128<T>, Vector128<T>> f)
             where T : unmanaged
                 => (Fixed128 a) => f(a.ToVector<T>()).ToFixed();
@@ -25,7 +25,7 @@ namespace Z0
         /// Creates a fixed 256-bit binary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static UnaryOp256 vfix<T>(Func<Vector256<T>,Vector256<T>> f)
             where T : unmanaged
                 => (Fixed256 a) => f(a.ToVector<T>()).ToFixed();  
@@ -34,7 +34,7 @@ namespace Z0
         /// Creates a fixed 128-bit binary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static BinaryOp128 vfix<T>(Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
             where T : unmanaged
                 => (Fixed128 a, Fixed128 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToFixed();
@@ -43,7 +43,7 @@ namespace Z0
         /// Creates a fixed 256-bit binary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static BinaryOp256 vfix<T>(Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
             where T : unmanaged
                 => (Fixed256 a, Fixed256 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToFixed();          

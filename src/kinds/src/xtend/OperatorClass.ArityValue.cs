@@ -12,7 +12,7 @@ namespace Z0
         /// Determines the numeric arity of a classified operator
         /// </summary>
         /// <param name="src">The operator class</param>
-        public static int ArityValue(this OperatorClass src)
+        public static int ArityValue(this OperatorClassKind src)
             => RC.ArityValue(src);
     }
 }

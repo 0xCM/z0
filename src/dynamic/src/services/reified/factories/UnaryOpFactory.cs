@@ -15,7 +15,8 @@ namespace Z0
 
     readonly struct UnaryOpFactory<T> : IUnaryOpFactory<T>
     {
-        public static IUnaryOpFactory<T> Service => default(UnaryOpFactory<T>);
+        public static IUnaryOpFactory<T> Service 
+            => default(UnaryOpFactory<T>);
         
         public Func<T,T> Manufacture(MethodInfo method, object instance)
         {
