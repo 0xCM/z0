@@ -9,8 +9,38 @@ namespace Z0
  
     using static Konst;
 
+    [ApiHost]
     public readonly struct TypeCodes
     {
+        [MethodImpl(Inline), Op]
+        public static TypeCodes init()
+            => new TypeCodes(0); 
+
+        [MethodImpl(Inline), Op]
+        public static TypeIndex index(in TypeCodes src)
+            => new TypeIndex(src.Types);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe TypeCode lookup(in TypeCodes src, byte index)        
+        {
+            var address = MemoryAddress.from(src);
+            return (TypeCode)(*(address + index).Pointer<byte>());
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly Type type(in TypeCodes src, TypeCode tc)        
+            => ref src[tc];
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly Type type(in TypeIndex src, TypeCode tc)
+            => ref src[tc];        
+
+        public ref readonly Type this[TypeCode tc]
+        {
+            [MethodImpl(Inline)]
+            get => ref Types[(int)tc];
+        }
+
         /// <summary>
         /// 0
         /// </summary>
@@ -132,23 +162,6 @@ namespace Z0
             s = TypeCode.String.ToKind();
             Types = CodedTypes;
         }
-
-        [MethodImpl(Inline)]
-        public unsafe TypeCode Lookup(byte index)        
-        {
-            var address = MemoryAddress.from(this);
-            return (TypeCode)(*(address + index).Pointer<byte>());
-        }
-
-        [MethodImpl(Inline)]
-        public ref readonly Type Type(TypeCode tc)        
-            => ref Types[(int)tc];
-
-        public ref readonly Type this[TypeCode tc]
-        {
-            [MethodImpl(Inline)]
-            get => ref Type(tc);
-        }
         
         internal static Type[] CodedTypes
         {
@@ -176,9 +189,6 @@ namespace Z0
                 typeof(string),     //18
                 }; 
             }       
-        }                    
-        
-        public static TypeIndex Index()
-            => new TypeIndex(CodedTypes);
+        }                            
     }
 }

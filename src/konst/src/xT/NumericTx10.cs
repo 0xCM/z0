@@ -11,6 +11,12 @@ namespace Z0
 
     public readonly struct NumericTx10
     {
+        public static NumericTx10 Tx10 
+        {
+            [MethodImpl(Inline)]
+           get => new NumericTx10(0);
+        }
+        
         public readonly TxN<sbyte,byte,short,ushort,int,uint,long,ulong,float,double> T;
                 
         [MethodImpl(Inline)]

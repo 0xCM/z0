@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     
     public readonly struct TypeIndex
-    {
+    {        
         readonly Type[] PrimalTypes;
 
         [MethodImpl(Inline)]

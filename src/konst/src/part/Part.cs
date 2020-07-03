@@ -5,41 +5,66 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    
+    using System.Reflection;
+    using System.Runtime.Intrinsics;
+
     using static Konst;
-
-    public static partial class XTend
-    {
-        [MethodImpl(Inline)]
-        public static PartId Id(this Assembly src)
-            =>  Part.id(src);
-    }
-
-    public readonly struct Part
-    {
+            
+    public abstract class Part<P> : IPart<P> 
+        where P : Part<P>, IPart<P>, new()
+    {                
         /// <summary>
-        /// Retrieves the part identifier, if any, of the entry assembly
+        /// The resolved part
         /// </summary>
-        public static PartId ExecutingPart        
-            => id(Assembly.GetEntryAssembly());
+        public static P Resolved 
+            => new P();
         
-        public static PartId CallingPart
-            => id(Assembly.GetCallingAssembly());
+        public Assembly Owner {get;}
 
-        /// <summary>
-        /// Retrieves the part identifier, if any, of a specified assembly
-        /// </summary>
-        /// <param name="src">The source assembly</param>
-        public static PartId id(Assembly src)
+        public string Name {get;}
+
+        public PartId Id {get;}
+
+        public readonly Ref Buffer;
+        
+        protected Part()
         {
-            if(Attribute.IsDefined(src, typeof(PartIdAttribute)))
-            {
-                var attrib = (PartIdAttribute)Attribute.GetCustomAttribute(src, typeof(PartIdAttribute));
-                return attrib.Id;
-            }
-            else return PartId.None;     
+            Owner = typeof(P).Assembly;            
+            Name = Owner.GetName().Name;
+            Id = Attribute.IsDefined(Owner, typeof(PartIdAttribute))  
+              ? ((PartIdAttribute)Attribute.GetCustomAttribute(Owner, typeof(PartIdAttribute))).Id
+              : PartId.None;
         }
+
+        protected Part(Ref buffer)
+            : this()
+        {
+            Buffer = buffer;
+        }
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Part<P> p1, Part<P> p2)
+            => p1.Id == p2.Id;
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Part<P> p1, Part<P> p2)
+            => p1.Id != p2.Id;
+                                    
+        [MethodImpl(Inline)]
+        public bool Equals(P src)
+            => Id == src.Id;
+
+        public string Format() 
+            => Id.Format();
+
+        public override bool Equals(object src)
+            => src is P a && a.Id == Id;
+
+        public override int GetHashCode() 
+            => Id.GetHashCode();     
+
+        public override string ToString()
+            => Format();
     }
 }
