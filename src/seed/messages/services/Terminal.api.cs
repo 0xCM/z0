@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-
     public readonly partial struct term
     {
-        static readonly ITerminal T = Terminal.Get();
+        static readonly Terminal T = Terminal.Get();
     }
 }

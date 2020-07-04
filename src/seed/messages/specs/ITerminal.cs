@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface ITerminal : IService
+    public interface ITerminal
     {
         void SetTerminationHandler(Action handler);        
          

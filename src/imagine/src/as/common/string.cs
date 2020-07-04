@@ -13,11 +13,11 @@ namespace Z0
     partial struct As
     {
         [MethodImpl(Inline), Op]
-        public static string @string(ReadOnlySpan<char> src)
-        {         
-            return @view<char,string>(first(src));
-            //=> sys.@string(src); 
+        public static unsafe string @string(char* pSrc) 
+            => new string(pSrc);
 
-        }
+        [MethodImpl(Inline), Op]
+        public static unsafe string @string(ReadOnlySpan<byte> src) 
+            => new string(gptr(recover<sbyte>(src)));
     }   
 }

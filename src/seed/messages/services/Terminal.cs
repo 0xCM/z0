@@ -18,7 +18,7 @@ namespace Z0
     public class Terminal : ITerminal
     {
         [MethodImpl(Inline)]
-        public static ITerminal Get() => TheOnly;
+        public static Terminal Get() => TheOnly;
         
         static readonly Terminal TheOnly = new Terminal();
         

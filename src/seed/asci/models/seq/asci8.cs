@@ -83,6 +83,12 @@ namespace Z0
             get => Null;
         }
         
+        public AsciCharCode this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => (AsciCharCode)(Storage >> index*8);
+        }
+        
         /// <summary>
         /// Specifies the number of characters that precede a null terminator, if any; otherwise, returns the maximum content length
         /// </summary>

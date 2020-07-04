@@ -34,6 +34,10 @@ namespace Z0
             => src.Text;
 
         [MethodImpl(Inline)]
+        public static implicit operator A(string src)
+            => new A(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator A(S src)
             => new A(src);
 
@@ -125,7 +129,6 @@ namespace Z0
         public override string ToString()
             => Text;
 
-
         public const int Size = 2;
 
         public static A Null 
@@ -149,5 +152,11 @@ namespace Z0
         {
             Storage = src;
         }
+       
+        [MethodImpl(Inline)]
+        public asci2(string src)
+        {
+            Storage = asci.encode(n,src).Storage;
+        }        
     }
 }

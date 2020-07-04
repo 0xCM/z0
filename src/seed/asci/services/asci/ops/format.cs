@@ -9,11 +9,36 @@ namespace Z0
 
     using static Konst;
     using static Typed;
+    using F = AsciFormatter;
 
     partial struct asci
     {
         [MethodImpl(Inline), Op]
         public static string format(in asci2 src)
+            => F.format(src);
+
+        [MethodImpl(Inline), Op]
+        public static string format(in asci4 src)
+            => F.format(src);
+
+        [MethodImpl(Inline), Op]
+        public static string format(in asci8 src)
+            => F.format(src);
+
+        [MethodImpl(Inline), Op]
+        public static string format(in asci16 src)
+            => F.format(src);
+
+        [MethodImpl(Inline), Op]
+        public static string format(in asci32 src)
+            => F.format(src);
+
+        [MethodImpl(Inline), Op]
+        public static string format(in asci64 src)
+            => F.format(src);
+
+        [MethodImpl(Inline), Op]
+        public static string format_old(in asci2 src)
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n2));
             store(src,dst);
@@ -21,11 +46,11 @@ namespace Z0
         }       
 
         [MethodImpl(Inline), Op]
-        public static string format(in asci4 src)
+        public static string format_old(in asci4 src)
             => @string(asci.decode(src));
 
         [MethodImpl(Inline), Op]
-        public static string format(in asci8 src)
+        public static string format_old(in asci8 src)
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n8));
             store(src,dst);            
@@ -33,15 +58,15 @@ namespace Z0
         }        
 
         [MethodImpl(Inline), Op]
-        public static string format(in asci16 src)
+        public static string format_old(in asci16 src)
             => @string(decode(src));
 
         [MethodImpl(Inline), Op]
-        public static string format(in asci32 src)
+        public static string format_old(in asci32 src)
             => @string(decode(src));
 
         [MethodImpl(Inline), Op]
-        public static string format(in asci64 src)
+        public static string format_old(in asci64 src)
             => @string(decode(src));
 
         [Op]

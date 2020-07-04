@@ -10,7 +10,6 @@ namespace Z0
     
     public class t_vsign : t_dynamic<t_vsign>
     {
-
         public void check_vsign_8i()
         {
             var x = V0.vincrements<sbyte>(w128);
@@ -20,11 +19,11 @@ namespace Z0
             var b = vsign(y);
             var c = vsign(z);
 
-            Trace("x", x.ToString());
-            Trace("vsign(x)", a.ToString());
+            // Trace("x", x.ToString());
+            // Trace("vsign(x)", a.ToString());
 
-            Trace("vnegate(x)", y.ToString());
-            Trace("vsign(vnegate(x))", b.ToString());
+            // Trace("vnegate(x)", y.ToString());
+            // Trace("vsign(vnegate(x))", b.ToString());
 
         }
     }

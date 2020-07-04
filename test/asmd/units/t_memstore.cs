@@ -13,7 +13,6 @@ namespace Z0
 
     public class t_memstore : t_asmd<t_memstore>
     {
-        const string A = "abcdefghijklmnopqrstuvwxyz";
         
         public void read_ref_1()
         {
@@ -27,17 +26,6 @@ namespace Z0
                 Claim.eq(r[i],src[i]);                        
         }
 
-        public void read_ref_2()
-        {
-            var src = A;
-            var r = Refs.from(src);
-            Claim.eq(A.Length, r.CellCount);
-            Claim.eq(A.Length*2, r.DataSize);
-            
-            // Claim.eq(16, r.DataSize);
-            for(var i=0; i<src.Length; i++)
-                Claim.eq(r[i],src[i]);                        
-        }
 
         public void read_models()
         {

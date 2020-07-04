@@ -5,42 +5,74 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
     using static V0;
     using static Typed;
     using static As;
+    using static Konst;
 
     public class t_vwrite : t_vcheck<t_vwrite>
     {
-        string format(ReadOnlySpan<char> src)
+        public static void asci_format_16()
         {
-            return sys.@string(src);
+            term.print(AsciFormatter.format((asci2)"01"));
+            term.print(AsciFormatter.format((asci4)"1234"));
+            term.print(AsciFormatter.format((asci8)"abcdefg"));
+            term.print(AsciFormatter.format((asci16)"abcdefghijklmnop"));
+            term.print(AsciFormatter.format((asci32)"abcdefghijklmnopqrstuvwxyz"));
+            term.print(AsciFormatter.format((asci64)"abcdefghijklmnopqrstuvwxyzABCdDEghijklmnopqrstuvwxyz"));
+            term.print(AsciFormatter.format((asci64)"ABCdDEghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"));
         }
 
-        public void format_hex()
+        public static unsafe string format(ReadOnlySpan<char> src)
+        {
+            const string Buffer = "                                                                                                                                ";
+
+            var pDst = As.pchar(Buffer);
+            var pSrc = As.gptr(first(src));
+            var count = Math.Min(src.Length, Buffer.Length);
+            for(var i=0; i<count; i++)
+                *pDst++ = *pSrc++;
+                            
+            return Buffer;
+        }
+
+        public void format_1()
+        {
+            var src = "abcdefghijklmnopqrstuvwxyz";
+            var dst = format(src);
+            term.print(dst.Length);
+            term.print(dst);
+
+        }
+        public unsafe void format_3()
+        {
+            const string A = "abcdefghijklmnopqrstuvwxyz";
+
+            var src = A;
+            var r = Refs.from(src);
+            Claim.eq(A.Length, r.CellCount);
+            Claim.eq(A.Length*2, r.DataSize);
+            
+            for(var i=0; i<src.Length; i++)
+                Claim.eq(r[i],src[i]);     
+
+            var pSrc = (char*)r.Location; 
+            var data = cover(pSrc, A.Length);
+            
+            ref readonly var rC = ref As.@ref(pSrc);
+
+            
+            for(var i=0u; i<data.Length; i++)
+                term.write(skip(data,i));
+            
+            term.print();
+        }
+
+        public void format_2()
         {       
             var refs = xHex.store(n3, new StringRef[Hex3.Count]);
-            for(var i=0; i<refs.Length; i++)
-            {
-                var current = refs[i];
-                if(i != 0)
-                    Trace(current.Diagnostic(refs[i - 1]));
-                else
-                    Trace(current.Diagnostic());
-            }
-
-            // var s00 = format(xHex.chars(src, Hex4Kind.x00));
-            // var s01 = format(xHex.chars(src, Hex4Kind.x01));
-            // var s02 = format(xHex.chars(src, Hex4Kind.x02));
-            // var s03 = format(xHex.chars(src, Hex4Kind.x03));
-            // var s04 = format(xHex.chars(src, Hex4Kind.x04));
-            // var s05 = format(xHex.chars(src, Hex4Kind.x05));
-
-            // Trace(s00);
-            // Trace(s01);
-            // Trace(s02);
-            // Trace(s03);
-            // Trace(s04);
-            // Trace(s05);
 
         }
         
