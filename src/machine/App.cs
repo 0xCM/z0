@@ -32,7 +32,7 @@ namespace Z0
         }
 
         bool StartCpu {get;} 
-            = true;
+            = false;
 
         IResolvedApi Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
@@ -51,8 +51,10 @@ namespace Z0
             var parts = PartIdParser.Service.ParseValid(args);  
             var context = CreateMachineContext(CreateAsmContext(), parts);  
             
-            if(StartCpu)
+            if(StartCpu)            
                 RunCpu(context);
+            else
+                AppDataEmitter.Service.Generate(Context);
         }
 
         public static void Main(params string[] args)

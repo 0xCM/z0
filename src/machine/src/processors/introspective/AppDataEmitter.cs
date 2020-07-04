@@ -55,11 +55,11 @@ namespace Z0
             term.magenta("Emitting documentation");
             EmitDocs(app);
 
-            term.magenta("Emitting resources");
+            term.magenta("Emitting resbytes");
             EmitResources(app);
             
-            term.magenta("Capturing emissions");
-            CaptureEmissions(app);            
+            // term.magenta("Capturing emissions");
+            // CaptureEmissions(app);            
             
         }
         

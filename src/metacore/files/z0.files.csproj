@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>  
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Compile Remove="Common\TypedTemplates\TypedItemList.Template.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Common\TypedTemplates\TypedItemList.Template.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Floor)" />
+  </ItemGroup>
+
+</Project>

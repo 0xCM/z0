@@ -1,0 +1,29 @@
+<Project>
+  <Import Project="../directory.build.props"/>
+
+
+  <PropertyGroup>
+    <SlnId>metacore</SlnId>
+    <SlnRoot>$(Src)$(SlnId)/</SlnRoot>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Basement>$(SlnRoot)basement/z0.basement.csproj</Basement>
+    <Dynamo>$(SlnRoot)dynamo/z0.dynamo.csproj</Dynamo>
+    <Substructure>$(SlnRoot)substructure/z0.substructure.csproj</Substructure>
+    <Collections>$(SlnRoot)collections/z0.collections.csproj</Collections>
+    <Floor>$(SlnRoot)floor/z0.floor.csproj</Floor>
+    <Agents>$(SlnRoot)agents/z0.agents.csproj</Agents>
+    <Etude>$(SlnRoot)etude/z0.etude.csproj</Etude>
+    <Floor>$(SlnRoot)floor/z0.floor.csproj</Floor>
+    <Lang>$(SlnRoot)lang/z0.lang.csproj</Lang>
+    <Messaging>$(SlnRoot)messaging/z0.messaging.csproj</Messaging>
+    <Json>$(SlnRoot)json/z0.json.csproj</Json>
+    <Files>$(SlnRoot)files/z0.files.csproj</Files>
+    <Command>$(SlnRoot)command/z0.command.csproj</Command>
+    <Commands>$(SlnRoot)commands/z0.commands.csproj</Commands>
+    <Processes>$(SlnRoot)processes/z0.processes.csproj</Processes>
+
+  </PropertyGroup>
+
+</Project>
