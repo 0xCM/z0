@@ -161,4 +161,8 @@ namespace Z0
             where T : unmanaged
                 => MemoryMarshal.Cast<byte,T>(MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(src), src.Length));
     }
+
+    public static partial class XTend
+    {
+    }
 }

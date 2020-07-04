@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>    
-    <ProjectReference Include="$(Rooted)" />
+    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Models)" />
+    <ProjectReference Include="$(Enhanced)" />
+    <ProjectReference Include="$(Imagine)" />
   </ItemGroup>
 
 </Project>

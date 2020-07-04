@@ -1,16 +1,14 @@
 <Project>
 
   <PropertyGroup>
+    <Part>$(Src)part/z0.part.csproj</Part>
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
     <Models>$(Src)models/z0.models.csproj</Models>
     <Enhanced>$(Src)enhanced/z0.enhanced.csproj</Enhanced>
-    <Parts>$(Src)parts/z0.parts.csproj</Parts>
     <Imagine>$(Src)imagine/z0.imagine.csproj</Imagine>
-    <Rooted>$(Src)rooted/z0.rooted.csproj</Rooted>
 
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
     
-
     <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
 
     <Artifacts>$(Src)artifacts/z0.artifacts.csproj</Artifacts>

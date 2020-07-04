@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public sealed class EmptyPart : PartId<EmptyPart> 
+    using System;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    
+    partial struct Part
     {
-        public EmptyPart()
-            : base(PartId.None)
-        {
-            
-        }
+        [Op]
+        public static string name(Assembly src)
+            => src.GetName().Name;
     }
 }

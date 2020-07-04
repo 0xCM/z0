@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public sealed class EmptyPart : PartId<EmptyPart> 
+    public interface IFormatProvider<T> 
     {
-        public EmptyPart()
-            : base(PartId.None)
-        {
-            
-        }
-    }
+        IFormatter<T> Formatter {get;}
+    }    
 }

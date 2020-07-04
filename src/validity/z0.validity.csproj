@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Parts)" />
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Structured)" />

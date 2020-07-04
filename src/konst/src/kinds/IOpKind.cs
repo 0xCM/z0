@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     public interface IOpKind : IKind, ITextual
     {
@@ -26,5 +29,14 @@ namespace Z0
         where K : unmanaged, IOpKind<E>
     {
         K Kind => default;     
+    }
+
+
+    partial class XTend
+    {
+        [MethodImpl(Inline)]
+        public static string Format<K>(this K kind)
+            where K : IOpKind   
+                => kind.Format();        
     }
 }

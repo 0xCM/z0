@@ -2,14 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
-{
-    public sealed class EmptyPart : PartId<EmptyPart> 
+using System;
+
+[AttributeUsage(AttributeTargets.Assembly)]
+public class PartIdAttribute : Attribute
+{    
+    public PartIdAttribute(object id)
     {
-        public EmptyPart()
-            : base(PartId.None)
-        {
-            
-        }
+        Id = (PartId)id;
     }
+
+    public PartId Id {get;}
 }

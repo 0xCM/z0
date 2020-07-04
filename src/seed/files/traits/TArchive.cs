@@ -29,7 +29,7 @@ namespace Z0
         /// A folder name of the form PartFolder(part):{TestPartition | AppPartition} as determined by the identifier of the entry process  
         /// </summary>
         FolderName RootPartition 
-            => Part.ExecutingPart.IsTest() ? TestPartition : AppPartition;
+            => Part.isTest(Part.ExecutingPart) ? TestPartition : AppPartition;
 
         /// <summary>
         /// Defines a path that determines the root directory for process-specific archives 

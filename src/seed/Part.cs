@@ -14,10 +14,6 @@ namespace Z0.Parts
     {
         static readonly TypeCodes Codes = TypeCodes.init();
 
-        public Seed()
-            : base(Refs.boxed(Codes))
-        {
-            
-        }    
+        //Refs.boxed(Codes) 
     }
 }

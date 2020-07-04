@@ -4,12 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public sealed class EmptyPart : PartId<EmptyPart> 
+    /// <summary>
+    /// Characterizes a text serializer
+    /// </summary>
+    public interface IFormatter
     {
-        public EmptyPart()
-            : base(PartId.None)
-        {
-            
-        }
+
     }
 }

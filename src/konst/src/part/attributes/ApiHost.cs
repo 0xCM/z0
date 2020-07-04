@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Identifies an api host
@@ -13,16 +12,20 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class ApiHostAttribute : Attribute
     {
+        public string HostName {get;}
+
+        public ApiHostKind HostKind {get;}        
+        
         public ApiHostAttribute(string name, ApiHostKind kind)
         {
-            this.HostName = name;
-            this.HostKind = kind;
+            HostName = name;
+            HostKind = kind;
         }
 
         public ApiHostAttribute(ApiHostKind kind)
         {
-            this.HostName = string.Empty;
-            this.HostKind = kind;
+            HostName = string.Empty;
+            HostKind = kind;
         }
 
         public ApiHostAttribute(string name)
@@ -35,9 +38,5 @@ namespace Z0
         {
  
         }
-
-        public string HostName {get;}
-
-        public ApiHostKind HostKind {get;}
     }
 }
