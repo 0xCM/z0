@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The number of symbols to load</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vasci(W256 w, sbyte offset, HexKind4 count)
+        public static Vector256<ushort> vasci(W256 w, sbyte offset, Hex4Kind count)
         {                          
             var src = AsciStrings.scalars(offset, (sbyte)count);
             var target = default(Vector256<ushort>);
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The number of symbols to load</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<ushort> vasci(W512 w, sbyte offset, HexKind5 count)
+        public static Vector512<ushort> vasci(W512 w, sbyte offset, Hex5Kind count)
         {
             var src = AsciStrings.scalars(offset, (sbyte)count);
             var target = default(Vector512<ushort>);

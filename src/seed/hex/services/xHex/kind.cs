@@ -12,7 +12,7 @@ namespace Z0
     partial struct xHex
     {
         [MethodImpl(Inline)]
-        public static HexKind8 kind<H>(H h= default)
+        public static Hex8Kind kind<H>(H h= default)
             where H : unmanaged, IHexType
                 => h.Value;
     }

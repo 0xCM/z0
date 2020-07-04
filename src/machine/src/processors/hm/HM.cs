@@ -22,7 +22,7 @@ namespace Z0.Machine
         
 
         [MethodImpl(Inline), Op]
-        public void Process(ReadOnlySpan<HexKind8> src)
+        public void Process(ReadOnlySpan<Hex8Kind> src)
         {
             var count = 0;
             for(var i=0; i<src.Length; i++)
@@ -36,7 +36,7 @@ namespace Z0.Machine
         }
 
         [Op]
-        public sbyte Process(HexKind8 code)
+        public sbyte Process(Hex8Kind code)
         {
             Process(h00, h0F, code);
             return (sbyte)vcell(State,15);
@@ -44,7 +44,7 @@ namespace Z0.Machine
 
 
         [Op]
-        public void Process(X00 a, X0F b, HexKind8 code)
+        public void Process(X00 a, X0F b, Hex8Kind code)
         {
             switch(code)
             {
@@ -118,7 +118,7 @@ namespace Z0.Machine
         const ulong P10_To_P20_Call_Offset = P10_Base - P10_Call_Target; //16,201,904
 
         [Op]
-        public void Process(X10 a, X1F b, HexKind8 code)
+        public void Process(X10 a, X1F b, Hex8Kind code)
         {
             switch(code)
             {
@@ -143,7 +143,7 @@ namespace Z0.Machine
         }
 
         [Op]
-        public void Process(X20 a, X2F b, HexKind8 code)
+        public void Process(X20 a, X2F b, Hex8Kind code)
         {
             switch(code)
             {
@@ -168,7 +168,7 @@ namespace Z0.Machine
         }
 
         [Op]
-        public void Process(X30 a, X3F b, HexKind8 code)
+        public void Process(X30 a, X3F b, Hex8Kind code)
         {
             switch(code)
             {
@@ -193,7 +193,7 @@ namespace Z0.Machine
         }
 
         [Op]
-        public void Process(X40 a, X4F b, HexKind8 code)
+        public void Process(X40 a, X4F b, Hex8Kind code)
         {
             switch(code)
             {
@@ -218,7 +218,7 @@ namespace Z0.Machine
         }
 
         [Op]
-        public void Process(X50 a, X5F b, HexKind8 code)
+        public void Process(X50 a, X5F b, Hex8Kind code)
         {
             switch(code)
             {
@@ -243,7 +243,7 @@ namespace Z0.Machine
         }
 
         [Op]
-        public void Process(X60 a, X6F b, HexKind8 code)
+        public void Process(X60 a, X6F b, Hex8Kind code)
         {
             switch(code)
             {

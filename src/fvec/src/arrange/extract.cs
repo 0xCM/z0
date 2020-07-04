@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
         [MethodImpl(Inline), Op]
-        public static float vextract(Vector128<float> src, HexKind2 pos)
+        public static float vextract(Vector128<float> src, Hex2Kind pos)
             => Extract(src, (byte)pos);
 
         /// <summary>

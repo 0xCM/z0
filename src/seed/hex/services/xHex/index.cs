@@ -13,16 +13,16 @@ namespace Z0
     partial struct xHex
     {
         [MethodImpl(Inline), Op]
-        public static HexIndex<Hex5> index(HexKind5[] src)
-            => index<Hex5>(As.@as<HexKind5[],Hex5[]>(ref src));
+        public static HexIndex<Hex5> index(Hex5Kind[] src)
+            => index<Hex5>(As.@as<Hex5Kind[],Hex5[]>(ref src));
 
         [MethodImpl(Inline), Op]
-        public static HexIndex<Hex6> index(HexKind6[] src)
-            => index<Hex6>(As.@as<HexKind6[],Hex6[]>(ref src));
+        public static HexIndex<Hex6> index(Hex6Kind[] src)
+            => index<Hex6>(As.@as<Hex6Kind[],Hex6[]>(ref src));
 
         [MethodImpl(Inline), Op]
-        public static HexIndex<Hex8> index(HexKind8[] src)
-            => index<Hex8>(As.@as<HexKind8[],Hex8[]>(ref src));
+        public static HexIndex<Hex8> index(Hex8Kind[] src)
+            => index<Hex8>(As.@as<Hex8Kind[],Hex8[]>(ref src));
 
         [MethodImpl(Inline), Op]
         public static HexIndex<Hex1> index(N1 n, byte[] src)

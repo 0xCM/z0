@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using static HexKind8;
+    using static Hex8Kind;
 
     using K = RegisterKind;
 

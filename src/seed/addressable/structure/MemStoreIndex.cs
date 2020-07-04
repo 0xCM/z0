@@ -11,7 +11,7 @@ namespace Z0
 
     public struct MemStoreIndex
     {   
-        HexKind8 Current;
+        Hex8Kind Current;
 
         [MethodImpl(Inline)]
         public static MemStoreIndex Init()
@@ -31,14 +31,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MemStoreIndex(int src)
-            => new MemStoreIndex((HexKind8)src);
+            => new MemStoreIndex((Hex8Kind)src);
 
         [MethodImpl(Inline)]
         public static implicit operator MemStoreIndex(byte src)
-            => new MemStoreIndex((HexKind8)src);
+            => new MemStoreIndex((Hex8Kind)src);
 
         [MethodImpl(Inline)]
-        public MemStoreIndex(HexKind8 value)
+        public MemStoreIndex(Hex8Kind value)
         {
             this.Current = value;
         }        
@@ -63,8 +63,8 @@ namespace Z0
             return this;
         }
 
-        const HexKind8 FirstKey = HexKind8.x00;
+        const Hex8Kind FirstKey = Hex8Kind.x00;
 
-        const HexKind8 LastKey = HexKind8.xff;
+        const Hex8Kind LastKey = Hex8Kind.xff;
     }
 }

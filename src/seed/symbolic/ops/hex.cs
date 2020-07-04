@@ -13,23 +13,23 @@ namespace Z0
     partial struct Symbolic
     {
         [MethodImpl(Inline), Op]
-        public static Symbols<HexKind2,byte,N2> hex(N2 n)         
-            => enumerate<HexKind2,byte,N2>();
+        public static Symbols<Hex2Kind,byte,N2> hex(N2 n)         
+            => enumerate<Hex2Kind,byte,N2>();
 
         [MethodImpl(Inline), Op]
-        public static Symbols<HexKind3,byte,N3> hex(N3 n)         
-            => enumerate<HexKind3,byte,N3>();
+        public static Symbols<Hex3Kind,byte,N3> hex(N3 n)         
+            => enumerate<Hex3Kind,byte,N3>();
 
         [MethodImpl(Inline), Op]
-        public static Symbols<HexKind4,byte,N4> hex(N4 n)         
-            => enumerate<HexKind4,byte,N4>();
+        public static Symbols<Hex4Kind,byte,N4> hex(N4 n)         
+            => enumerate<Hex4Kind,byte,N4>();
 
         [MethodImpl(Inline), Op]
-        public static Symbols<HexKind5,byte,N5> hex(N5 n)         
-            => enumerate<HexKind5,byte,N5>();
+        public static Symbols<Hex5Kind,byte,N5> hex(N5 n)         
+            => enumerate<Hex5Kind,byte,N5>();
 
         [MethodImpl(Inline), Op]
-        public static Symbols<HexKind8,byte,N8> hex(N8 n)                     
-            => enumerate<HexKind8,byte,N8>();
+        public static Symbols<Hex8Kind,byte,N8> hex(N8 n)                     
+            => enumerate<Hex8Kind,byte,N8>();
     }
 }

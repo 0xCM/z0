@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
         
     using static JccTest;
-    using static HexKind4;
+    using static Hex4Kind;
     using static math;
 
     partial class AsmPatterns

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     using H = Hex3;
-    using K = HexKind3;
+    using K = Hex3Kind;
 
     public readonly struct Hex3 : IHexNumber<H,K>
     {                
@@ -18,24 +18,29 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Hex3(K src)
-            => Value = src & Max;
+            => Value = src & KMax;
 
         [MethodImpl(Inline)]
         public Hex3(byte src)
-             => Value = (K)src & Max;
+             => Value = (K)src & KMax;
 
         public const byte Width = 3;
 
-        public const K Min = K.x00;
+        public const uint Count = 8;
 
-        public const K Max = K.x03;
+        public const K KMin = K.x00;
+
+        public const K KMax = K.x03;
         
-        public string Text
-        {
-            [MethodImpl(Inline)]
-            get => $"{Value}";
-        }
+        public const K KOne = K.x01;
 
+        public static H Zero => KMin;
+
+        public static H One => KOne;
+
+        public static H Min => KMin;
+
+        public static H Max => KMax;
 
         [MethodImpl(Inline)]
         public static implicit operator H(K src)
@@ -44,7 +49,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator K(H src)
             => src.Value;
-
 
         [MethodImpl(Inline)]
         public static implicit operator Hex4(Hex3 src)
@@ -59,16 +63,16 @@ namespace Z0
             => new Hex8((byte)src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator HexKind4(Hex3 src)
-            => (HexKind4)src;
+        public static implicit operator Hex4Kind(Hex3 src)
+            => (Hex4Kind)src;
 
         [MethodImpl(Inline)]
-        public static implicit operator HexKind5(Hex3 src)
-            => (HexKind5)src;
+        public static implicit operator Hex5Kind(Hex3 src)
+            => (Hex5Kind)src;
 
         [MethodImpl(Inline)]
-        public static implicit operator HexKind8(Hex3 src)
-            => (HexKind8)src;
+        public static implicit operator Hex8Kind(Hex3 src)
+            => (Hex8Kind)src;
 
         [MethodImpl(Inline)]
         public static implicit operator H(byte src)
@@ -91,22 +95,20 @@ namespace Z0
             => (ulong)src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator H(HexKind1 src)
+        public static implicit operator H(Hex1Kind src)
             => new H((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator H(HexKind2 src)
+        public static implicit operator H(Hex2Kind src)
             => new H((byte)src);
 
         K IHexNumber<K>.Value 
             => Value;
 
-        public static H Zero 
-            => default;
-
         [MethodImpl(Inline)]
         public bool Equals(H src)
             => Value == src.Value;
+
         public uint Hash
         {
             [MethodImpl(Inline)]
@@ -118,6 +120,12 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is H c && Equals(c);
+
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => $"{Value}";
+        }
 
         [MethodImpl(Inline)]
         public string Format()

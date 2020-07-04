@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     using H = Hex4;
-    using K = HexKind4;
+    using K = Hex4Kind;
 
     public readonly struct Hex4 : IHexNumber<H,K>
     {                
@@ -18,25 +18,30 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Hex4(K src)
-            => Value = src & Max;
+            => Value = src & KMax;
 
         [MethodImpl(Inline)]
         public Hex4(byte src)
-             => Value = (K)src & Max;
+             => Value = (K)src & KMax;
 
         public const byte Width = 4;
 
-        public const K Min = K.x00;
+        public const uint Count = 16;
 
-        public const K Max = K.x0F;
-        
-        public string Text
-        {
-            [MethodImpl(Inline)]
-            get => $"{Value}";
-        }
+        public const K KMin = K.x00;
 
- 
+        public const K KMax = K.x0F;
+    
+        public const K KOne = K.x01;
+
+        public static H Zero => KMin;
+
+        public static H One => KOne;
+
+        public static H Min => KMin;
+
+        public static H Max => KMax;
+
         [MethodImpl(Inline)]
         public static implicit operator H(K src)
             => new H(src);
@@ -75,21 +80,19 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static implicit operator H(HexKind1 src)
+        public static implicit operator H(Hex1Kind src)
             => new H((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator H(HexKind2 src)
+        public static implicit operator H(Hex2Kind src)
             => new H((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator H(HexKind3 src)
+        public static implicit operator H(Hex3Kind src)
             => new H((byte)src);
 
         K IHexNumber<K>.Value 
             => Value;
-        public static H Zero 
-            => default;
 
         [MethodImpl(Inline)]
         public bool Equals(H src)
@@ -106,6 +109,12 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is H c && Equals(c);
+
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => $"{Value}";
+        }
 
         [MethodImpl(Inline)]
         public string Format()

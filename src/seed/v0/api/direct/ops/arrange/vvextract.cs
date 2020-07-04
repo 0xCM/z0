@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the cell to extract</param>
         [MethodImpl(Inline), Op]
-        public static sbyte vextract(Vector128<sbyte> src, [Imm] HexKind4 index)
+        public static sbyte vextract(Vector128<sbyte> src, [Imm] Hex4Kind index)
             => (sbyte)Extract(v8u(src),(byte)index);
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the cell to extract</param>
         [MethodImpl(Inline), Op]
-        public static byte vextract(Vector128<byte> src, [Imm] HexKind4 index)
+        public static byte vextract(Vector128<byte> src, [Imm] Hex4Kind index)
             => Extract(src,(byte)index);
         
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the cell to extract</param>
         [MethodImpl(Inline), Op]
-        public static short vextract(Vector128<short> src, [Imm] HexKind3 index)
+        public static short vextract(Vector128<short> src, [Imm] Hex3Kind index)
             => (short)Extract(v16u(src),(byte)index);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the cell to extract</param>
         [MethodImpl(Inline), Op]
-        public static ushort vextract(Vector128<ushort> src, [Imm] HexKind3 index)
+        public static ushort vextract(Vector128<ushort> src, [Imm] Hex3Kind index)
             => Extract(src,(byte)index);
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the cell to extract</param>
         [MethodImpl(Inline), Op]
-        public static uint vextract(Vector128<uint> src, [Imm] HexKind2 index)
+        public static uint vextract(Vector128<uint> src, [Imm] Hex2Kind index)
             => Extract(src,(byte)index);
 
         /// <summary>
@@ -67,15 +67,15 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the cell to extract</param>
         [MethodImpl(Inline), Op]
-        public static int vextract(Vector128<int> src, [Imm] HexKind2 index)
+        public static int vextract(Vector128<int> src, [Imm] Hex2Kind index)
             => Extract(src,(byte)index);
 
         [MethodImpl(Inline), Op]
-        public static ushort vextract(Vector256<byte> src, [Imm] HexKind5 index)   
+        public static ushort vextract(Vector256<byte> src, [Imm] Hex5Kind index)   
             => src.GetElement((byte)index);
 
         [MethodImpl(Inline), Op]
-        public static ushort vextract(Vector256<ushort> src, [Imm] HexKind4 index)   
+        public static ushort vextract(Vector256<ushort> src, [Imm] Hex4Kind index)   
             => src.GetElement((byte)index);
     }
 }

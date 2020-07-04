@@ -29,7 +29,7 @@ namespace Z0.Machine
         }
         
         [MethodImpl(Inline), Op]
-        public void Process(ReadOnlySpan<HexKind8> data)
+        public void Process(ReadOnlySpan<Hex8Kind> data)
         {
             Machine.Process(data);
         }

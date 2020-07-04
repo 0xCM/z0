@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines identifiers corresponding to each value that can be represented with a 5-bit unsigned integer
     /// </summary>
-    public enum HexKind5 : byte
+    public enum Hex5Kind : byte
     {
         /// <summary> 
         /// Defines 0x00 = 0

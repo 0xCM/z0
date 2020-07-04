@@ -73,7 +73,7 @@ namespace Z0
             => (BK)src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator analog(HexKind2 src) => (byte)src;
+        public static implicit operator analog(Hex2Kind src) => (byte)src;
 
         [MethodImpl(Inline)]
         public static implicit operator analog(X00 src) => (byte)src;

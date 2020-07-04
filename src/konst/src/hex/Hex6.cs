@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     using H = Hex6;
-    using K = HexKind6;
+    using K = Hex6Kind;
 
     public readonly struct Hex6 : IHexNumber<H,K>
     {                
@@ -18,23 +18,29 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Hex6(K src)
-             => Value = src & Max;
+             => Value = src & KMax;
 
         [MethodImpl(Inline)]
         public Hex6(byte src)
-            => Value = (K)src & Max;
+            => Value = (K)src & KMax;
 
         public const byte Width = 6;
 
-        public const K Min = K.x00;
+        public const uint Count = 64;
 
-        public const K Max = K.x3f;
+        public const K KMin = K.x00;
 
-        public string Text
-        {
-            [MethodImpl(Inline)]
-            get => $"{Value}";
-        }
+        public const K KMax = K.x3f;
+
+        public const K KOne = K.x01;
+
+        public static H Zero => KMin;
+
+        public static H One => KOne;
+
+        public static H Min => KMin;
+
+        public static H Max => KMax;
 
         [MethodImpl(Inline)]
         public static implicit operator H(K src)
@@ -67,9 +73,6 @@ namespace Z0
         K IHexNumber<K>.Value 
             => Value;
 
-        public static H Zero 
-            => default;
-
         [MethodImpl(Inline)]
         public bool Equals(H src)
             => Value == src.Value;
@@ -86,12 +89,17 @@ namespace Z0
         public override int GetHashCode()
             => (int)Hash;
 
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => $"{Value}";
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => Text;
 
         public override string ToString()
             => Text;
-
     }
 }

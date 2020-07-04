@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="count">The number of characters to encode</param>
         /// <param name="dst">The receiver</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly asci2 encode(in char src, HexKind1 count, out asci2 dst)        
+        public static ref readonly asci2 encode(in char src, Hex1Kind count, out asci2 dst)        
         {
             dst = asci2.Null;
             ref var codes = ref Unsafe.As<asci2,AsciCharCode>(ref dst);
@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="count">The number of characters to encode</param>
         /// <param name="dst">The receiver</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly asci4 encode(in char src, HexKind2 count, out asci4 dst)        
+        public static ref readonly asci4 encode(in char src, Hex2Kind count, out asci4 dst)        
         {
             dst = asci4.Null;
             ref var codes = ref Unsafe.As<asci4,AsciCharCode>(ref dst);
@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="count">The number of characters to encode</param>
         /// <param name="dst">The receiver</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly asci8 encode(in char src, HexKind3 count, out asci8 dst)        
+        public static ref readonly asci8 encode(in char src, Hex3Kind count, out asci8 dst)        
         {
             dst = asci8.Null;
             ref var codes = ref Unsafe.As<asci8,AsciCharCode>(ref dst);
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="count">The number of characters to encode</param>
         /// <param name="dst">The receiver</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly asci16 encode(in char src, HexKind4 count, out asci16 dst)        
+        public static ref readonly asci16 encode(in char src, Hex4Kind count, out asci16 dst)        
         {
             dst = asci16.Null;
             ref var codes = ref Unsafe.As<asci16,AsciCharCode>(ref dst);
@@ -155,7 +155,7 @@ namespace Z0
         /// <param name="count">The number of characters to encode</param>
         /// <param name="dst">The receiver</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly asci32 encode(in char src, HexKind5 count, out asci32 dst)        
+        public static ref readonly asci32 encode(in char src, Hex5Kind count, out asci32 dst)        
         {
             dst = asci32.Null;
             ref var codes = ref Unsafe.As<asci32,AsciCharCode>(ref dst);
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="count">The number of characters to encode</param>
         /// <param name="dst">The receiver</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly asci64 encode(in char src, HexKind6 count, out asci64 dst)        
+        public static ref readonly asci64 encode(in char src, Hex6Kind count, out asci64 dst)        
         {
             dst = asci64.Null;
             ref var codes = ref Unsafe.As<asci64,AsciCharCode>(ref dst);

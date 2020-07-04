@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines identifiers corresponding to each value that can be represented with an 8-bit unsigned integer
     /// </summary>
-    public enum HexKind8 : byte
+    public enum Hex8Kind : byte
     {
         /// <summary> 
         /// Defines 0x00 = 0

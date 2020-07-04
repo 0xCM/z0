@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines identifiers corresponding to the hex digits 0,..,3
     /// </summary>
-    public enum HexKind2 : byte
+    public enum Hex2Kind : byte
     {
         /// <summary> 
         /// Identifies the hex value 0x00 := 0
