@@ -10,28 +10,28 @@ namespace Z0
 
     partial class XTend
     {
-        public static string FormatBlockedBits(this byte src, BitFormatConfig config)
+        public static string FormatBlockedBits(this byte src, in BitFormatConfig config)
             => Api.blocked(src, config);
 
-        public static string FormatBlockedBits(this ushort src, BitFormatConfig config)
+        public static string FormatBlockedBits(this ushort src, in BitFormatConfig config)
             => Api.blocked(src, config);
 
-        public static string FormatBlockedBits(this uint src, BitFormatConfig config)
+        public static string FormatBlockedBits(this uint src, in BitFormatConfig config)
             => Api.blocked(src, config);
 
-        public static string FormatBlockedBits(this ulong src, BitFormatConfig config)
+        public static string FormatBlockedBits(this ulong src, in BitFormatConfig config)
             => Api.blocked(src, config);
 
         public static string FormatBlockedBits(this byte src, int width)
-            => Api.blocked(src, BitFormatConfig.Blocked(width));
+            => Api.blocked(src, BitFormatter.blocked(width));
 
         public static string FormatBlockedBits(this ushort src, int width)
-            => Api.blocked(src, BitFormatConfig.Blocked(width));
+            => Api.blocked(src, BitFormatter.blocked(width));
 
         public static string FormatBlockedBits(this uint src, int width)
-            => Api.blocked(src, BitFormatConfig.Blocked(width));
+            => Api.blocked(src, BitFormatter.blocked(width));
 
         public static string FormatBlockedBits(this ulong src, int width)
-            => Api.blocked(src, BitFormatConfig.Blocked(width));
+            => Api.blocked(src, BitFormatter.blocked(width));
     }
 }

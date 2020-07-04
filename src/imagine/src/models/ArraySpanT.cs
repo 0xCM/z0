@@ -16,7 +16,7 @@ namespace Z0
     public readonly struct ArraySpan<T> : ISpan<ArraySpan<T>,T>
         where T : struct
     {        
-        internal readonly T[] Data;
+        internal readonly T[] Content;
 
         [MethodImpl(Inline)]
         public static implicit operator ArraySpan<T>(T[] src)
@@ -30,18 +30,24 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ArraySpan(params T[] data)   
-            => Data = data;
+            => Content = data;
         
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Content.Length;
+        }
+
+        public Span<T> Data
+        {
+            [MethodImpl(Inline)]
+            get => Content;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data is null || Data.Length == 0;
+            get => Content is null || Content.Length == 0;
         }
 
         public bool IsNonEmpty
@@ -53,7 +59,7 @@ namespace Z0
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Content;
         }
 
         public ArraySpan<T> Zero
@@ -120,8 +126,9 @@ namespace Z0
             => src is ArraySpan<T> x && Equals(x);
 
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => Content.GetHashCode();
 
+        
         public struct Enumerator : ISpanEnumerator<Enumerator,T>
         {
             readonly ArraySpan<T> Data;

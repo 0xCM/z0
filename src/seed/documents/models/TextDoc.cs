@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct TextDoc  : IReadOnlyIndex<TextRow>
+    public readonly struct TextDoc  : IConstIndex<TextRow>
     {
         public readonly TextRow[] RowData;        
 

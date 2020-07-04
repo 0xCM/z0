@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         public static string FormatBlockedBits<T>(this Vector128<T> src, int width, int? maxbits = null)
             where T : unmanaged        
-                => text.bracket(src.ToBitString(maxbits).Format(BitFormatConfig.Blocked(width, Chars.Space, maxbits)));
+                => text.bracket(src.ToBitString(maxbits).Format(BitFormatter.blocked(width, Chars.Space, maxbits)));
 
         /// <summary>
         /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where default the size of each block is the bit-width of a component
@@ -28,6 +28,6 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         public static string FormatBlockedBits<T>(this Vector256<T> src, int width, int? maxbits = null)
             where T : unmanaged        
-                => text.bracket(src.ToBitString(maxbits).Format(BitFormatConfig.Blocked(width, Chars.Space, maxbits)));
+                => text.bracket(src.ToBitString(maxbits).Format(BitFormatter.blocked(width, Chars.Space, maxbits)));
     }
 }

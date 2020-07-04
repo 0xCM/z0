@@ -12,10 +12,10 @@ namespace Z0
     {
         public static string FormatBits<T>(this ReadOnlySpan<T> src, BitFormatConfig? config = null)
             where T : unmanaged
-                => Api.format(src, config ?? BitFormatConfig.Default);
+                => Api.format(src, config ?? BitFormatter.configure());
         
         public static string FormatBits<T>(this Span<T> src, BitFormatConfig? config = null)
             where T : unmanaged
-                => Api.format(src.ReadOnly(), config ?? BitFormatConfig.Default);
+                => Api.format(src.ReadOnly(), config ?? BitFormatter.configure());
     }
 }

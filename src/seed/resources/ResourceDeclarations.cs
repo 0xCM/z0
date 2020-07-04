@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
 
-    public readonly struct ResourceDeclarations : IReadOnlySpan<ResourceDeclarations,ResourceAccessor>
+    public readonly struct ResourceDeclarations : IConstSpan<ResourceDeclarations,ResourceAccessor>
     {
         public readonly Type DeclaringType;
 

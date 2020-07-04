@@ -12,43 +12,31 @@ namespace Z0
     using H = Hex4;
     using K = HexKind4;
 
-    public readonly struct Hex4
+    public readonly struct Hex4 : IHexNumber<H,K>
     {                
-        public const ushort Width = 4;
+        public readonly K Value;
+
+        [MethodImpl(Inline)]
+        public Hex4(K src)
+            => Value = src & Max;
+
+        [MethodImpl(Inline)]
+        public Hex4(byte src)
+             => Value = (K)src & Max;
+
+        public const byte Width = 4;
 
         public const K Min = K.x00;
 
         public const K Max = K.x0F;
-
-        readonly K Value;
         
-        [MethodImpl(Inline), Op]
-        public static ref readonly H view(in byte src)
-            => ref Hex8.view<byte,H>(src);
-
         public string Text
         {
             [MethodImpl(Inline)]
             get => $"{Value}";
         }
 
-        [MethodImpl(Inline)]
-        public bool Equals(H src)
-            => Value == src.Value;
-
-        public override int GetHashCode()
-            => (int)Value;
-
-        public override bool Equals(object src)
-            => src is H c && Equals(c);
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Text;
-
-        public override string ToString()
-            => Text;
-
+ 
         [MethodImpl(Inline)]
         public static implicit operator H(K src)
             => new H(src);
@@ -98,19 +86,32 @@ namespace Z0
         public static implicit operator H(HexKind3 src)
             => new H((byte)src);
 
-        [MethodImpl(Inline)]
-        public Hex4(K src)
-        {
-            Value = src & Max;
-        }
-
-        [MethodImpl(Inline)]
-        public Hex4(byte src)
-        {
-             Value = (K)src & Max;
-        }        
-
+        K IHexNumber<K>.Value 
+            => Value;
         public static H Zero 
             => default;
+
+        [MethodImpl(Inline)]
+        public bool Equals(H src)
+            => Value == src.Value;
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Value;
+        }
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        public override bool Equals(object src)
+            => src is H c && Equals(c);
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Text;
+
+        public override string ToString()
+            => Text;
     }
 }

@@ -31,15 +31,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Symbols<HexKind8,byte,N8> hex(N8 n)                     
             => enumerate<HexKind8,byte,N8>();
-
-        [MethodImpl(Inline)]
-        public static HexKind8 hexkind<H>(H h= default)
-            where H : unmanaged, IHexCode
-                => h.Kind;
-
-        [MethodImpl(Inline)]
-        public static byte hexval<H>(H h= default)
-            where H : unmanaged, IHexCode
-                => (byte)h.Kind;                            
     }
 }

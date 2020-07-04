@@ -199,7 +199,7 @@ namespace Z0
             => new analog((byte)src,false);
 
         static BitFormatConfig FormatConfig3 
-            => BitFormatConfig.Limited(analog.Width,analog.Width);
+            => BitFormatter.limited(analog.Width,analog.Width);
         
         [MethodImpl(Inline)]
         public static string format(analog src)

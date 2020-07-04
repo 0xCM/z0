@@ -25,14 +25,11 @@ namespace Z0
         public static P Resolved 
             => new P();
 
-        //public string Name {get;}
-        
         protected Part()
         {
             Box = PartBox.Empty;
             Owner = typeof(P).Assembly;            
-            //Name = Owner.GetName().Name;
-            Id =  id(Owner); //Attribute.IsDefined(Owner, typeof(PartIdAttribute))  ? ((PartIdAttribute)Attribute.GetCustomAttribute(Owner, typeof(PartIdAttribute))).Id : PartId.None;
+            Id =  id(Owner);
         }
 
         protected Part(PartBox box)

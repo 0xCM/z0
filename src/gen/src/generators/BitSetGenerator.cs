@@ -11,7 +11,7 @@ namespace Z0
     public abstract class BitSetGenerator : CodeGenerator
     {
         protected string TypeDigits(int m, int n)
-            => BitFormatter.format(n,BitFormatConfig.Limited(m,m));
+            => BitFormatter.format(n, BitFormatter.limited(m,m));
         protected string TypeName(int m, byte n)
             => text.concat(AsciLetterUp.B, TypeDigits(m,n));
 

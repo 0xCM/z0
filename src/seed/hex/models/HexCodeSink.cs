@@ -10,18 +10,18 @@ namespace Z0
     using static Konst;
     
     public delegate void HexReceiver<H>(H h)
-        where H :unmanaged, IHexCode;
+        where H : unmanaged, IHexType;
 
     public class HexCodeSink
     {
         [MethodImpl(Inline)]
         public static HexCodeSink<H> Create<H>(HexReceiver<H> receiver)
-            where H :unmanaged, IHexCode
+            where H:unmanaged, IHexType
                 => new HexCodeSink<H>(receiver);
     }
     
     public readonly struct HexCodeSink<H> : IHexHandler<H>, IHexHandler
-        where H :unmanaged, IHexCode
+        where H:unmanaged, IHexType
     {
         static H Code => default;
 
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void OnHex(HexKind8 kind)
         {
-            if(kind == Code.Kind)
+            if(kind == Code.Value)
                 OnHex(Code);
         }
 

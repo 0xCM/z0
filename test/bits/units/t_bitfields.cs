@@ -263,10 +263,10 @@ namespace Z0
                 if(expect != result1)
                 {
                     Trace(src.FormatBits());
+                    var config = BitFormatter.configure(true);
                     for(var i=0; i<dst.Length; i++)
-                        Trace(dst[i].FormatBits(BitFormatConfig.Tlz));
+                        Trace(dst[i].FormatBits(config));
                 }
-
 
                 Claim.Eq(expect, result1);
             }

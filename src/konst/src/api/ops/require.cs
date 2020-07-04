@@ -10,6 +10,10 @@ namespace Z0
 
     partial struct Konst
     {
+        [MethodImpl(Inline)]
+        internal static ref readonly T view<S,T>(in S src)
+            => ref Unsafe.As<S,T>(ref Unsafe.AsRef(src));                
+         
         [MethodImpl(Inline), Op]
         public static void Require(bool invariant)
         {

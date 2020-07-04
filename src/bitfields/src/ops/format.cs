@@ -51,7 +51,7 @@ namespace Z0
             var formatter = BitFormatter.create<T>();
             var data = Enums.scalar<V,T>(value);
             var limit = gbits.effwidth(data);
-            var config = BitFormatConfig.Limited(limit);
+            var config = BitFormatter.limited(limit);
             var name = typeof(V).Name;
             var bits = formatter.Format(data,config);
             return text.concat(name, Chars.Colon, bits);

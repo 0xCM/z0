@@ -14,7 +14,7 @@ namespace Z0
     /// A string?
     /// </summary>
     [ApiHost]
-    public readonly struct StringRef : ITextual, IReadOnlySpan<StringRef,char>
+    public readonly struct StringRef : ITextual, IConstSpan<StringRef,char>
     {            
         readonly MemRef Ref;
 

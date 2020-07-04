@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines an untyped literal index
     /// </summary>
-    public readonly struct EnumLiterals : IReadOnlyIndex<EnumLiteral>
+    public readonly struct EnumLiterals : IConstIndex<EnumLiteral>
     {
         readonly EnumLiteral[] Data;
 

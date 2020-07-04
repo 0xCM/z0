@@ -3,8 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    
+{            
     partial struct HexLevel
     {
         public static X00 h00 => default;
@@ -518,6 +517,5 @@ namespace Z0
         public static XFE hFE => default;
 
         public static XFF hFF => default;                
-
     }
 }

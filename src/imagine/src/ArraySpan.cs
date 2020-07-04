@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] uncover<T>(in ArraySpan<T> src)
             where T : struct
-                => src.Data;
+                => src.Content;
 
         /// <summary>
         /// Presents the covered array as a span
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(in ArraySpan<T> src)
             where T : struct
-                => src.Data;
+                => src.Content;
 
         /// <summary>
         /// Presents a segment of covered cells as a span
@@ -111,7 +111,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int count<T>(in ArraySpan<T> src)
             where T : struct
-                => src.Data.Length;
+                => src.Content.Length;
 
         /// <summary>
         /// Computes the size of the source in bytes
@@ -121,7 +121,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint size<T>(in ArraySpan<T> src)
             where T : struct
-                => (uint)(src.Data.Length * As.size<T>());
+                => (uint)(src.Content.Length * As.size<T>());
 
         /// <summary>
         /// Computes the size of the source in bits
@@ -131,7 +131,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong width<T>(in ArraySpan<T> src)
             where T : struct
-                => (ulong)(src.Data.Length * bitsize<T>());
+                => (ulong)(src.Content.Length * bitsize<T>());
 
         /// <summary>
         /// Zero-fills the data source

@@ -22,7 +22,7 @@ namespace Z0
         protected IResolvedApi Api => _Api.Value;
 
         static IResolvedApi ComposeApi()
-            => ApiComposition.Assemble(PartIndexer.Fatory.IndexBuiler.Build());
+            => ApiComposition.Assemble(Parted.index());
         
         static Lazy<IResolvedApi> _Api {get;}
             = Root.defer(ComposeApi);

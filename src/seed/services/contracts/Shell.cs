@@ -22,9 +22,6 @@ namespace Z0
         protected static ITerminal Term 
             => Terminal.Get();
 
-        protected static TPartIndexer Indexer 
-            => PartIndexer.Fatory;
-
         public void Dispose()
             => OnDispose();
 
@@ -46,7 +43,7 @@ namespace Z0
             => LazyParts.Value;
 
         static Lazy<PartIndex> LazyParts {get;} 
-            = Root.defer(Indexer.IndexBuiler.Build);        
+            = Root.defer(Parted.index);        
 
         protected static void Launch(params string[] args)
         {

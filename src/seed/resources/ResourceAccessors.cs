@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ResourceAccessors : IReadOnlySpan<ResourceAccessors,ResourceAccessor>
+    public readonly struct ResourceAccessors : IConstSpan<ResourceAccessors,ResourceAccessor>
     {
         public readonly ResourceAccessor[] Accessors;
 

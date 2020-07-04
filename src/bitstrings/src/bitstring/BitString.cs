@@ -461,6 +461,7 @@ namespace Z0
             return true;
         }
 
+
         /// <summary>
         /// Partitions the bitstring into blocks of a specified maximum width
         /// </summary>
@@ -561,7 +562,7 @@ namespace Z0
             else
             {
                 var blockWidth = style.BlockWidth;
-                var sb = new StringBuilder();
+                var sb = text.build();
                 var blocks = Partition(blockWidth).Reverse();
                 var lastix = blocks.Length - 1;
                 var counter = 0;

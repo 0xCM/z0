@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines an E-V parametric literal index
     /// </summary>
-     public readonly struct EnumLiterals<E,V> : IEnumerable<EnumLiteral<E,V>>, IReadOnlyIndex<EnumLiteral<E,V>>
+     public readonly struct EnumLiterals<E,V> : IEnumerable<EnumLiteral<E,V>>, IConstIndex<EnumLiteral<E,V>>
         where E : unmanaged, Enum
         where V : unmanaged
     {
