@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Defines the symbols that represent lowercase base-16 digits
     /// </summary>

@@ -71,7 +71,7 @@ namespace Z0.Asm.Data
             for(byte i=0; i<src.Length; i++)
             {
                 ref readonly var field = ref skip(src,i);
-                var sref = field.ToStingRef();
+                var sref = field.ToStringRef();
                 seek(buffer, i) = new OpCodeToken(i, (OpCodeTokenKind)(i + 1), sref);
             }
             return new OpCodeTokens(dst);            

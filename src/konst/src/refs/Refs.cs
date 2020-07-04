@@ -16,6 +16,14 @@ namespace Z0
     public readonly struct Refs
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static unsafe Ref<T> located<T>(ulong location, uint count)
+            => new Ref<T>(define((void*)location, size<T>(count)));
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static unsafe Ref located(ulong location, uint size)
+            => new Ref(location, size);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe Ref<T> from<T>(in T src, uint count)
             => new Ref<T>(define(ptr(src), size<T>(count)));
 
@@ -45,8 +53,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe Ref<T> one<T>(in T src)
-            where T : unmanaged
-                => new Ref<T>(define(ptr(src), size<T>()));
+            => new Ref<T>(define(ptr(src), size<T>()));
 
         [MethodImpl(Inline), Op]
         public static unsafe Ref boxed(object src)

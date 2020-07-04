@@ -14,74 +14,53 @@ namespace Z0
 
     public readonly struct MemRef : IAddress<MemoryAddress>, ITextual, IEquatable<MemRef>
     {
-        readonly Vector128<ulong> Data;        
-        
+        internal readonly Vector128<ulong> Data;        
+                        
         [MethodImpl(Inline)]
         public unsafe static MemRef from(ReadOnlySpan<byte> src)
             => new MemRef(gptr(first(src)), src.Length);
-                
-        ulong Lo
-        {
-            [MethodImpl(Inline)]
-            get => vcell(Data,0);
-        }
 
-        ulong Hi
-        {
-            [MethodImpl(Inline)]
-            get => vcell(Data,1);
-        }
-
-        public MemoryAddress Location
+        public MemoryAddress Address
         {
             [MethodImpl(Inline)]
             get => Lo;
         }
-
+        
         public MemoryRange Segment
         {
-            get => new MemoryRange(Location, Location + Hi);
+            [MethodImpl(Inline)]
+            get => new MemoryRange(Address, Address + Hi);
         }
         
         /// <summary>
         /// Specifies the segment byte count
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
-        public ByteSize Length 
+        public uint DataSize 
         {
             [MethodImpl(Inline)]
             get => (uint)Hi;
         }
-
-        /// <summary>
-        /// Computes the whole number of T-cells covered by segment
-        /// </summary>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public int Count<T>()
-            => Length/Root.size<T>();
-
+        
         [MethodImpl(Inline)]
         public static implicit operator Vector128<ulong>(in MemRef src)
             => src.Data;
 
         [MethodImpl(Inline)]
+        internal MemRef(ulong location, uint size)
+            => Data = V0.vparts(N128.N, location, (ulong)size);
+
+        [MethodImpl(Inline)]
         internal MemRef(Vector128<ulong> src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
         [MethodImpl(Inline)]
         public unsafe MemRef(byte* src, int length)
-        {
-            Data = vparts((ulong)src, (ulong)length);
-        }
+            =>  Data = vparts((ulong)src, (ulong)length);
 
         [MethodImpl(Inline)]
         public MemRef(MemoryAddress src, int length)
-        {
-            Data = vparts((ulong)src, (ulong)length);
-        }  
+            => Data = vparts((ulong)src, (ulong)length);
 
         public bool IsEmpty
         {
@@ -101,9 +80,18 @@ namespace Z0
             get => Empty;
         }
 
+        /// <summary>
+        /// Computes the whole number of T-cells covered by segment
+        /// </summary>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public int Count<T>()
+            => (int)DataSize/Root.size<T>();
+
+ 
         [MethodImpl(Inline)]
         public string Format()
-            => Location.Format();
+            => Address.Format();
         
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load()
@@ -116,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe T* Pointer<T>()
             where T : unmanaged
-                => Location.Pointer<T>();
+                => Address.Pointer<T>();
 
         [MethodImpl(Inline)]
         public uint Hash()
@@ -131,7 +119,25 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash();
-        
+
+        ulong Lo
+        {
+            [MethodImpl(Inline)]
+            get => vcell(Data,0);
+        }
+
+        ulong Hi
+        {
+            [MethodImpl(Inline)]
+            get => vcell(Data,1);
+        }
+       
+        MemoryAddress IAddress<MemoryAddress>.Location
+        {
+            [MethodImpl(Inline)]
+            get => Lo;
+        }
+
         public static MemRef Empty 
             => new MemRef(default(Vector128<ulong>));
     }

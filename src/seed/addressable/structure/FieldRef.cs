@@ -56,10 +56,10 @@ namespace Z0
         /// <summary>
         /// Specifies the size, in bytes of the fields data
         /// </summary>
-        public ByteSize Size
+        public uint DataSize
         {
             [MethodImpl(Inline)]
-            get => Reference.Length;
+            get => Reference.DataSize;
         }
 
         /// <summary>
@@ -68,13 +68,13 @@ namespace Z0
         public BitSize Width
         {
             [MethodImpl(Inline)]
-            get => Reference.Length;
+            get => Reference.DataSize;
         }
 
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Reference.Location;
+            get => Reference.Address;
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public StringRef ToStingRef()
+        public StringRef ToStringRef()
             => new StringRef(Reference);
             
         /// <summary>

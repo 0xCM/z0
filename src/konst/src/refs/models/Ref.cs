@@ -39,7 +39,7 @@ namespace Z0
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        internal Ref(ulong location, uint size)
+        public Ref(ulong location, uint size)
         {
             R = Vector128.Create(location, (ulong)size);
         }

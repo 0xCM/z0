@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Linq;
     
     using static Root;
@@ -60,10 +57,10 @@ namespace Z0
 
         unsafe void Process(in MemRef src, in MemStore store)
         {
-            var reader = PointedReader.create(src.Location.Pointer<byte>(), src.Length);
-            var dstA = Spans.alloc<byte>(src.Length);            
+            var reader = PointedReader.create(src.Address.Pointer<byte>(), (int)src.DataSize);
+            var dstA = Spans.alloc<byte>(src.DataSize);            
             var count = reader.ReadAll(dstA);            
-            Claim.eq(count,src.Length);
+            Claim.eq(count,src.DataSize);
 
             var dstB = MemStores.Service.load(src);
             Claim.eq(count, dstB.Length);
@@ -108,7 +105,7 @@ namespace Z0
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];
-                var data = Addressable.view(r.Location, r.Length);
+                var data = Addressable.view(r.Address, r.DataSize);
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
 
             }

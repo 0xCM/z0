@@ -12,25 +12,27 @@ namespace Z0
     
     public readonly struct ResMember : ITextual
     {
-        public MemberInfo Member {get;}
+        public readonly MemberInfo Member;
 
-        public MemRef Reference {get;}
+        public readonly MemRef Reference;
         
-        public MemoryAddress Address 
-            => Reference.Location;
-
-        public ByteSize Size 
-            => Reference.Length;
-
         [MethodImpl(Inline)]
-        public static ResMember Define(MemberInfo member, MemRef memref)
-            => new ResMember(member, memref);
-
-        [MethodImpl(Inline)]
-        public ResMember(MemberInfo member, MemRef memref)
+        public ResMember(MemberInfo member, in MemRef memref)
         {
             Member = member;
             Reference = memref;
+        }
+
+        public MemoryAddress Address 
+        {
+            [MethodImpl(Inline)]
+            get => Reference.Address;
+        }
+
+        public uint DataSize 
+        {
+            [MethodImpl(Inline)]
+            get => Reference.DataSize;
         }
 
         public string Format()

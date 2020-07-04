@@ -11,11 +11,11 @@ namespace Z0
 
     public readonly struct MemoryOffset : IAddressable64
     {
-        public MemoryAddress Base {get;}
+        public readonly MemoryAddress Base;
 
-        public ulong Offset {get;}
+        public readonly ulong Offset;
 
-        public NumericWidth OffsetWidth {get;}
+        public readonly NumericWidth OffsetWidth;
 
         /// <summary>
         /// The offset magnitude presented as an address

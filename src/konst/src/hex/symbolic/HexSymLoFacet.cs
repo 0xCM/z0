@@ -3,8 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System;
+{    
     using static HexSymLo;
 
     public enum HexSymLoFacet : ushort   

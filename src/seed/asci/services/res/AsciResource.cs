@@ -15,11 +15,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> read(in ResIdentity<byte> id)
-            => Addressable.view<byte>(id.Location, id.CellCount);
+            => Addressable.view<byte>(id.Address, id.CellCount);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> read(in ResIdentity<char> id)
-            => Addressable.view<char>(id.Location, id.CellCount);             
+            => Addressable.view<char>(id.Address, id.CellCount);             
 
         [MethodImpl(Inline), Op]
         public static AsciResource<asci2> define(in asci32 name, asci2 content, asci64? description = null)

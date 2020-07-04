@@ -161,7 +161,7 @@ namespace Z0
             for(var i=0; i<sources.Length; i++)
             {
                 ref readonly var source = ref skip(sources,i);
-                var length = source.Length;
+                var length = source.DataSize;
                 var data = MemStores.Service.load(source);                                
                 
                 if(data.Length == length)
@@ -172,7 +172,7 @@ namespace Z0
                         if(j == 0)
                         {
                             var a = Addressable.address(x);
-                            if(source.Location == a)
+                            if(source.Address == a)
                                 seek(results,i) = a;
                         }
                     }

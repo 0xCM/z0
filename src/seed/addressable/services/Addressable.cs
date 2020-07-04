@@ -91,6 +91,11 @@ namespace Z0
             where T : unmanaged
                 => As.cover<T>(src.Ref<T>(), (uint)count);
 
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> view<T>(MemoryAddress src, uint count)
+            where T : unmanaged
+                => As.cover<T>(src.Ref<T>(), count);
+
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<byte> view(MemoryAddress src, ByteSize size)
             => As.cover<byte>(src.Ref<byte>(), size);

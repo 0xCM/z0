@@ -16,7 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<T> view<T>(in MemRef src)
-            => CreateReadOnlySpan(ref @ref<T>(src.Location), src.Count<T>());
+            => CreateReadOnlySpan(ref @ref<T>(src.Address), src.Count<T>());
 
         /// <summary>   
         /// Creates a T-span from a supplied reference

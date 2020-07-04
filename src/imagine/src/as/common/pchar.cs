@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source string</param>
         [MethodImpl(Inline), Op]
-        public static unsafe char*  pchar(string src) 
+        public static unsafe char* pchar(string src) 
             => gptr(first(span(src)));
     }
 }

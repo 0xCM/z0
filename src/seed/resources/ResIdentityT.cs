@@ -13,43 +13,43 @@ namespace Z0
     public readonly struct ResIdentity<T>
         where T : unmanaged
     {
-        public asci32 Name {get;}
+        public readonly asci32 Name;
 
-        public MemRef Reference {get;}
+        public readonly MemRef Reference;
 
         [MethodImpl(Inline)]
         public static implicit operator ResIdentity(ResIdentity<T> src)
             => new ResIdentity(src.Name,src.Reference, Root.primal<T>());
 
         [MethodImpl(Inline)]
-        public ResIdentity(asci32 name, MemRef memref)
+        public ResIdentity(in asci32 name, in MemRef memref)
         {
             Name = name;
             Reference = memref;            
         }
 
-        public MemoryAddress Location 
+        public MemoryAddress Address 
         {
             [MethodImpl(Inline)]
-            get => Reference.Location;
+            get => Reference.Address;
         }
 
-        public int CellCount 
+        public uint CellCount 
         {
             [MethodImpl(Inline)]
-            get => ByteCount/CellSize;
+            get => DataSize/CellSize;
         }
 
-        public int CellSize 
+        public uint CellSize 
         {
             [MethodImpl(Inline)]
-            get => size<T>();
+            get => (uint)size<T>();
         }
 
-        public ByteSize ByteCount 
+        public uint DataSize 
         {
             [MethodImpl(Inline)]
-            get => Reference.Length;
+            get => Reference.DataSize;
         }
     }
 }

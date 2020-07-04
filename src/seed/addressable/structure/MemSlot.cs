@@ -14,23 +14,23 @@ namespace Z0
         readonly MemRef Ref;
 
         [MethodImpl(Inline)]
-        public MemSlot(MemRef src)
+        public MemSlot(in MemRef src)
             => Ref = src;
 
         [MethodImpl(Inline)]
-        public MemSlot(MemoryAddress address, ByteSize size)
+        public MemSlot(MemoryAddress address, uint size)
             => Ref = new MemRef(address,size);
 
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Ref.Location;
+            get => Ref.Address;
         }
 
-        public ByteSize Size
+        public uint DataSize
         {
             [MethodImpl(Inline)]
-            get => Ref.Length;
+            get => Ref.DataSize;
         }
     }
 }

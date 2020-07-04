@@ -37,7 +37,7 @@ namespace Z0
                     if(segment.IsNonEmpty)
                     {
                         dst.Add(segment);
-                        offset += (uint)segment.Size;
+                        offset += segment.DataSize;
                     }
                 }
             }
@@ -94,7 +94,7 @@ namespace Z0
                     if(segment.IsNonEmpty)
                     {
                         dst.Add(segment);
-                        offset += (uint)segment.Size;
+                        offset += segment.DataSize;
                     }
 
                 }

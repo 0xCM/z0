@@ -13,9 +13,7 @@ namespace Z0
     /// Defines an inclusive address range
     /// </summary>
     public readonly struct MemoryRange : IMemoryRange<MemoryRange>
-    {
-        public static MemoryRange Empty => default;
-        
+    {        
         public readonly MemoryAddress Start;
 
         public readonly MemoryAddress End;
@@ -110,5 +108,8 @@ namespace Z0
         
         public string Format()
             => bracket(string.Concat(Start.Format(), Chars.Comma, Chars.Space, End.Format()));
+
+        public static MemoryRange Empty => default;
+
     }
 }

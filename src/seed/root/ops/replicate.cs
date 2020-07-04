@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Span<byte> replicate(MemRef src)
         {
-            Span<byte> dst = sys.alloc<byte>(src.Length);            
+            Span<byte> dst = sys.alloc<byte>(src.DataSize);            
             copy(src, dst);
             return dst;
         }

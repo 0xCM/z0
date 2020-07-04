@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal MemoryOffsets(MemoryOffset[] src)
         {
-            this.Offsets = src;
+            Offsets = src;
         }
 
         public ReadOnlySpan<MemoryOffset> Content
