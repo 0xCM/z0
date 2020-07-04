@@ -5,7 +5,7 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyDescription("The root of the knowable part tree")]
+[assembly: AssemblyDescription("I am a part, a harbinger of the many")]
 [assembly: PartId(PartId.Part)]
 
 namespace Z0.Parts
