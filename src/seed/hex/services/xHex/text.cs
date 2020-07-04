@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
- 
+    using static Typed;
+
     partial struct xHex
     {
         [MethodImpl(Inline), Op]
@@ -28,17 +29,21 @@ namespace Z0
             => text<Hex4Kind>();
 
         [MethodImpl(Inline)]
+        static StringRef @ref(string src)
+            => StringRef.create(src);
+
+        [MethodImpl(Inline)]
         public static HexText<K> text<K>()
             where K : unmanaged, Enum
         {
             if(typeof(K) == typeof(Hex1Kind))
-                return generic<K>(new HexText<Hex1Kind>(StringRef.sequence(Hex1Text.x00, Hex1.Count)));
+                return generic<K>(new HexText<Hex1Kind>(@ref(Hex1Text.x00)));
             else if(typeof(K) == typeof(Hex2Kind))
-                return generic<K>(new HexText<Hex2Kind>(StringRef.sequence(Hex2Text.x00, Hex2.Count)));
+                return generic<K>(new HexText<Hex2Kind>(@ref(Hex2Text.x00)));
             else if(typeof(K) == typeof(Hex3Kind))
-                return generic<K>(new HexText<Hex3Kind>(StringRef.sequence(Hex3Text.x00, Hex3.Count)));
+                return generic<K>(new HexText<Hex3Kind>(@ref(Hex3Text.x00)));
             else if(typeof(K) == typeof(Hex4Kind))
-                return generic<K>(new HexText<Hex4Kind>(StringRef.sequence(Hex4Text.x00, Hex4.Count)));
+                return generic<K>(new HexText<Hex4Kind>(@ref(Hex4Text.x00)));
             else
                 return HexText<K>.Empty;
         }

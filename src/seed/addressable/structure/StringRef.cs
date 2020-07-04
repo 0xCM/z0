@@ -12,6 +12,7 @@ namespace Z0
     using static Root;
     using static As;
     using static V0;
+    using static Chars;
 
     /// <summary>
     /// A string?
@@ -23,11 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe StringRef create(string src)
-            => new StringRef((ulong)pchar(src), src.Length, 1);
-
-        [MethodImpl(Inline), Op]
-        public static unsafe StringRef sequence(string src, uint count)
-            => new StringRef((ulong)pchar(src), src.Length, count);
+            => new StringRef((ulong)pchar(src), src.Length);
 
         [MethodImpl(Inline), Op]
         public static StringRef from(MemRef src)
@@ -35,35 +32,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public StringRef(in MemRef src)
-            => Data = vparts(N128.N, src.Address, ((ulong)src.DataSize | Singleton)); 
+            => Data = vparts(N128.N, src.Address, (ulong)src.DataSize); 
 
         [MethodImpl(Inline)]
-        static Vector128<ulong> store(ulong location, uint length, uint count)
-            => vparts(N128.N, location, (ulong)length*Scale | ((ulong)count << CountShift));
+        static Vector128<ulong> store(ulong location, uint length)
+            => vparts(N128.N, location, (ulong)length*Scale);
 
         [MethodImpl(Inline)]
         public StringRef(in Ref src)
-            => Data = vparts(N128.N, src.Location, ((ulong)src.DataSize | Singleton)); 
+            => Data = vparts(N128.N, src.Location, (ulong)src.DataSize); 
 
         [MethodImpl(Inline)]
-        public StringRef(ulong location, int length, uint count)
-            => Data = store(location, (uint)length, count);
-
-        [MethodImpl(Inline)]
-        public StringRef(in Ref src, uint count)
-            => Data = vparts(N128.N, src.Location, ((ulong)src.DataSize | (count << CountShift))); 
+        public StringRef(ulong location, int length)
+            => Data = vparts(N128.N, location, (ulong)(length*Scale)); 
 
         [MethodImpl(Inline)]
         internal StringRef(Vector128<ulong> data)
             => Data = data;
 
-        [MethodImpl(Inline)]
-        public unsafe StringRef Next(int length)
-            => new StringRef(vparts((ulong)(char*)(Lo + UnitSize), (ulong)DataSize | (Count << CountShift)));
-
         [MethodImpl(Inline), Op]
         public static unsafe string @string(StringRef src)
-            => As.@string(src.Chars);
+            => src.Text;
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> data(StringRef src)
@@ -83,22 +72,13 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => (int)Hi;
-        }
-
-        /// <summary>
-        /// The number of strings in the sequence, parhaps only 1
-        /// </summary>
-        public uint Count
-        {
-            [MethodImpl(Inline)]
-            get => (uint)(Hi >> CountShift);
+            get => (int)Hi/Scale;
         }
 
         public unsafe string Text
         {
             [MethodImpl(Inline)]
-            get => @string(this);
+            get => sys.@string(Address.Pointer<char>());
         }
 
         public MemoryAddress Address
@@ -188,15 +168,15 @@ namespace Z0
             get => vcell(Data,1);
         }
 
-        const byte CountShift = 32;
-
         const byte Scale = 2;
 
-        const byte UnitSize = 8;
-
-        const ulong Singleton = 1ul << CountShift;
-        
         public string Diagnostic()
-            => text.concat(Address, text.bracket(Length), " := ", text.embrace(Text));
+            => text.concat(Address.Format().PadRight(14), 
+                text.bracket(text.concat(text.squote(Text), text.spaced(Pipe), Length)));
+
+        public string Diagnostic(in StringRef prior)
+            => text.concat((Address - prior.Address).Format().PadRight(4), 
+                text.bracket(text.concat(text.squote(Text), text.spaced(Pipe), Length)));
+             
     }
 }

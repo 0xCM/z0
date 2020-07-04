@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class core
-    {
+    {                                    
         /// <summary>
         /// Implements the canonical bind operation
         /// </summary>

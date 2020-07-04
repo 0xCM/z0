@@ -22,7 +22,6 @@ namespace Z0
             where T : struct
                 => lookup<Hex5Kind,T>(src, sys.alloc<T>(32));
 
-
         /// <summary>
         /// Creates an index that correlates up to 255 unsigned 8-bit integers with aribitrary structural T-parameteric values
         /// </summary>

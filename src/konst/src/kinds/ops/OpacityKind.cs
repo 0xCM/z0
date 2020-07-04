@@ -52,6 +52,8 @@ namespace Z0
 
         SpanToArray,
 
+        ParameterArray,
+
         InitRefBlock,       
 
         FillSpan,

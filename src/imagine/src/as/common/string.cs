@@ -14,6 +14,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string @string(ReadOnlySpan<char> src)
-            => sys.@string(src); //@view<char,string>(first(src));
+        {         
+            return @view<char,string>(first(src));
+            //=> sys.@string(src); 
+
+        }
     }   
 }

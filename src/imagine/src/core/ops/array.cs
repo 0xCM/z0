@@ -6,28 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-        
-    using static OpacityKind;
-    
-    partial struct sys
-    {
-        [MethodImpl(Options), Opaque(SpanToArray), Closures(Closure)]
-        public static T[] array<T>(Span<T> src)
-            => src.ToArray();
 
-        [MethodImpl(Options), Opaque(ListToArray), Closures(Closure)]
-        public static T[] array<T>(List<T> src)
-            => src.ToArray();
+    using static Konst;
 
+    partial class core
+    {                
         /// <summary>
         /// Produces an array from a parameter array
         /// </summary>
         /// <param name="src">The source items</param>
         /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Options), Opaque(ParameterArray), Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T[] array<T>(params T[] src)
-            => src;
+            => sys.array(src);    
     }
 }
