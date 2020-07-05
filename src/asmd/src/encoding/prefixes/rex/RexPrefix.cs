@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;         
-    using static Quartet;
+    using static BitSeq4;
 
     using RFI = RexFieldIndex;   
     using RFW = RexFieldWidth;
@@ -43,7 +43,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static byte Encode(Singleton b, Singleton x, Singleton r, Singleton w)
+        public static byte Encode(BitSeq1 b, BitSeq1 x, BitSeq1 r, BitSeq1 w)
         {
             var rex = math.sll((byte)b0100, 4);
             var bx = math.slor((byte)b, 0, (byte)x, 1);

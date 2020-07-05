@@ -33,15 +33,15 @@ namespace Z0.Asm
             => new ModRm(src);        
 
         [MethodImpl(Inline), Op]
-        public static ModRm define(triad rm, triad reg, duet mod)
+        public static ModRm define(uint3 rm, uint3 reg, uint2 mod)
             => new ModRm(rm,reg,mod);
 
         [MethodImpl(Inline), Op]
         public static int fill(Span<ModRmEncoding> dst)
         {
-            var rm = BitSet.Triads;
-            var reg = BitSet.Triads;
-            var mod = BitSet.Duets;
+            var rm = BitSeqD.Triads;
+            var reg = BitSeqD.Triads;
+            var mod = BitSeqD.Duets;
             var i = 0;
             for(var a=0; a<rm.Length; a++)
             for(var b=0; b<reg.Length; b++)

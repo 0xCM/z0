@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     using analog = uint8_t;
-    using BK = Octet;
+    using BK = BitSeq8;
 
     public struct uint8_t : IEquatable<analog>
     {

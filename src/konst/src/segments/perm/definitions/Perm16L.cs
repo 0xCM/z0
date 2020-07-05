@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Perm16L;
-    using static Quartet;
+    using static BitSeq4;
 
     /// <summary>
     /// Defines canonical literals for representing terms of permutations on 16 symbols

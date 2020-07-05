@@ -21,11 +21,11 @@ namespace Z0.Asm
         readonly octet Data;
 
         [MethodImpl(Inline)]
-        public static ModRm Define(triad rm, triad reg, duet mod)
+        public static ModRm Define(uint3 rm, uint3 reg, uint2 mod)
             => new ModRm(rm,reg,mod);
 
         [MethodImpl(Inline)]
-        public ModRm(triad rm, triad reg, duet mod)
+        public ModRm(uint3 rm, uint3 reg, uint2 mod)
         {
             Data = (octet)rm | ((octet)reg << RegIndex ) | ((octet)mod << ModIndex);
         }        
@@ -39,7 +39,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines bits [2:0] of the modrm byte
         /// </summary>
-        public triad Rm
+        public uint3 Rm
         {
             [MethodImpl(Inline)]
             get => (Data & RmMask) >> RmIndex;
@@ -48,7 +48,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines bits [5:3] of the modrm byte
         /// </summary>
-        public triad Reg
+        public uint3 Reg
         {
             [MethodImpl(Inline)]
             get => (Data & RegMask) >> RegIndex;
@@ -57,7 +57,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines bits [7:6] of the modrm byte
         /// </summary>
-        public duet Mod
+        public uint2 Mod
         {
             [MethodImpl(Inline)]
             get => (Data & ModMask) >> ModIndex;

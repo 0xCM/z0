@@ -19,23 +19,23 @@ namespace Z0.Asm
 
         public readonly ModRm Encoded;
 
-        public readonly triad Rm 
+        public readonly uint3 Rm 
         {
-            get => (triad)Input;
+            get => (uint3)Input;
         }
         
-        public readonly triad Reg 
+        public readonly uint3 Reg 
         {
-            get => (triad)(srl(Input,3));
+            get => (uint3)(srl(Input,3));
         }
 
-        public readonly duet Mod 
+        public readonly uint2 Mod 
         {
-            get => (duet)(srl(Input,3 + 3));
+            get => (uint2)(srl(Input,3 + 3));
         }
 
         [MethodImpl(Inline)]
-        public ModRmEncoding(triad rm, Triad reg, Duet mod, ModRm encoded)
+        public ModRmEncoding(uint3 rm, BitSeq3 reg, BitSeq2 mod, ModRm encoded)
         {
             Input = or((byte)rm, sll((byte)reg,3), sll((byte)mod, 3 + 3));
             // Rm = rm;

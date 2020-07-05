@@ -44,7 +44,6 @@ namespace Z0
     public interface IUnital<F,T> : IUnital<F>
         where F : IUnital<F,T>, new()
     {
-        F IUnital<F>.One 
-            => new F();
+
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static BitSet;
+    using static BitSeqD;
     public class t_quartet : UnitTest<t_quartet>
     {
         public void add_4u_check()
@@ -16,12 +16,12 @@ namespace Z0
             Claim.eq(8u, x);
 
             var y = uint4(10u) + uint4(5u);
-            Claim.eq(quartet.Max,y);
+            Claim.eq(uint4.Max,y);
         }
 
         public void inc_4u_check()
         {
-            var i = quartet.Min;
+            var i = uint4.Min;
             i++;
             i++;
             i++;
@@ -44,47 +44,47 @@ namespace Z0
             i++;
             i++;
             i++;
-            Claim.eq(i,quartet.Min);
+            Claim.eq(i,uint4.Min);
 
         }
 
         public void dec_4u_check()
         {
-            var i = quartet.Max;
+            var i = uint4.Max;
             i--;
             i--;
             i--;
             i--;
-            Claim.eq(i, quartet.Max - 4);
+            Claim.eq(i, uint4.Max - 4);
 
             i--;
             i--;
             i--;
             i--;
-            Claim.eq(i, quartet.Max - 8);
+            Claim.eq(i, uint4.Max - 8);
 
             i--;
             i--;
             i--;
             i--;
-            Claim.eq(i, quartet.Max - 12);
+            Claim.eq(i, uint4.Max - 12);
 
             i--;
             i--;
             i--;
             i--;
-            Claim.eq(i,quartet.Max);
+            Claim.eq(i,uint4.Max);
 
         }
 
         public void uint4_create()
         {
-            var x0 = (quartet)0;
+            var x0 = (uint4)0;
             byte y0 = x0;
             var z0 = (byte)0;
             Claim.eq(y0,z0);
 
-            var x1 = (quartet)5;
+            var x1 = (uint4)5;
             byte y1 = x1;
             var z1 = (byte)5;
             Claim.eq(y1,z1);
@@ -110,10 +110,10 @@ namespace Z0
 
         public void uint4_format()
         {
-            var x0 = (quartet)0;
-            var x1 = (quartet)1;
-            var x2 = (quartet)2;
-            var x3 = (quartet)3;
+            var x0 = (uint4)0;
+            var x1 = (uint4)1;
+            var x2 = (uint4)2;
+            var x3 = (uint4)3;
             ClaimPrimalSeq.eq(x0.Format(), "0");
             ClaimPrimalSeq.eq(x1.Format(), "1");
             ClaimPrimalSeq.eq(x2.Format(), "2");
@@ -123,59 +123,59 @@ namespace Z0
 
         public void uint4_inc()
         {
-            var x = (quartet)7;
+            var x = (uint4)7;
             for(var i=0; i< 3; i++)
                 x++;
             
-            Claim.eq((quartet)10,x);
+            Claim.eq((uint4)10,x);
 
             for(var i=0; i< 3; i++)
                 x++;
 
-            Claim.eq((quartet)13,x);
+            Claim.eq((uint4)13,x);
 
             for(var i=0; i< 3; i++)
                 x++;
 
-            Claim.eq((quartet)0,x);
+            Claim.eq((uint4)0,x);
 
         }
 
         public void uint4_dec()
         {
-            var x = (quartet)7;
+            var x = (uint4)7;
             for(var i=0; i< 3; i++)
                 x--;
             
-            Claim.eq((quartet)4,x);
+            Claim.eq((uint4)4,x);
 
             for(var i=0; i< 3; i++)
                 x--;
 
-            Claim.eq((quartet)1,x);
+            Claim.eq((uint4)1,x);
 
             for(var i=0; i< 3; i++)
                 x--;
 
-            Claim.eq((quartet)14,x);
+            Claim.eq((uint4)14,x);
 
         }
 
         public void uint4_flip()
         {
-            var x0 = (quartet)0b1011;
+            var x0 = (uint4)0b1011;
             var y0 = ~x0;
-            var z0 = (quartet)0b0100;
+            var z0 = (uint4)0b0100;
             Claim.eq(y0,z0);
         }
        
         public void uint4_add()
         {
-            var x1 = (quartet)3;
-            var x2 = (quartet)4;
-            var y0 = (quartet)7;
-            var z0 = (quartet)10;
-            var z1 = (quartet)1;
+            var x1 = (uint4)3;
+            var x2 = (uint4)4;
+            var y0 = (uint4)7;
+            var z0 = (uint4)10;
+            var z1 = (uint4)1;
             Claim.eq(y0, x1 + x2);
             Claim.eq(z0, y0 + x1);
             Claim.eq(z1, z0 + y0);
@@ -184,13 +184,13 @@ namespace Z0
 
         public void uint4_hilo()
         {
-            Claim.eq((quartet)0b11, ((quartet)0b1011).Lo);
-            Claim.eq((quartet)0b10, ((quartet)0b1011).Hi);
+            Claim.eq((uint4)0b11, ((uint4)0b1011).Lo);
+            Claim.eq((uint4)0b10, ((uint4)0b1011).Hi);
 
-            var x0 = (quartet)0b1011;
-            x0.Lo = (quartet)0b01;
-            x0.Hi = (quartet)0b01;
-            var y0 = (quartet)0b0101;
+            var x0 = (uint4)0b1011;
+            x0.Lo = (uint4)0b01;
+            x0.Hi = (uint4)0b01;
+            var y0 = (uint4)0b0101;
             Claim.eq(y0,x0);            
         }
     }

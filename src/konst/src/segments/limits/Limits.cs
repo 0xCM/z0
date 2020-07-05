@@ -10,6 +10,76 @@ namespace Z0
     public readonly struct Limits
     {
         /// <summary>
+        /// The minimum representable <see cref='BitSeq1'/> value
+        /// </summary>
+        public const Limits1u Min1u = Limits1u.Min;
+
+        /// <summary>
+        /// The maximum representable <see cref='BitSeq1'/> value
+        /// </summary>
+        public const Limits1u Max1u = Limits1u.Max;
+
+        /// <summary>
+        /// The minimum representable <see cref='BitSeq2'/> value
+        /// </summary>
+        public const Limits2u Min2u = Limits2u.Min;
+
+        /// <summary>
+        /// The maximum representable <see cref='BitSeq2'/> value
+        /// </summary>
+        public const Limits2u Max2u = Limits2u.Max;
+
+        /// <summary>
+        /// The minimum representable <see cref='BitSeq3'/> value
+        /// </summary>
+        public const Limits3u Min3u = Limits3u.Min;
+
+        /// <summary>
+        /// The maximum representable <see cref='BitSeq3'/> value
+        /// </summary>
+        public const Limits3u Max3u = Limits3u.Max;
+
+        /// <summary>
+        /// The minimum representable <see cref='BitSeq4'/> value
+        /// </summary>
+        public const Limits4u Min4u = Limits4u.Min;
+
+        /// <summary>
+        /// The maximum representable <see cref='BitSeq4'/> value
+        /// </summary>
+        public const Limits4u Max4u = Limits4u.Max;
+
+        /// <summary>
+        /// The minimum representable <see cref='BitSeq5'/> value
+        /// </summary>
+        public const Limits5u Min5u = Limits5u.Min;
+
+        /// <summary>
+        /// The maximum representable <see cref='BitSeq5'/> value
+        /// </summary>
+        public const Limits5u Max5u = Limits5u.Max;
+
+        /// <summary>
+        /// The minimum representable <see cref='BitSeq6'/> value
+        /// </summary>
+        public const Limits6u Min6u = Limits6u.Min;
+
+        /// <summary>
+        /// The maximum representable <see cref='BitSeq6'/> value
+        /// </summary>
+        public const Limits6u Max6u = Limits6u.Max;
+
+        /// <summary>
+        /// The minimum representable <see cref='BitSeq7'/> value
+        /// </summary>
+        public const Limits7u Min7u = Limits7u.Min;
+
+        /// <summary>
+        /// The maximum representable <see cref='BitSeq7'/> value
+        /// </summary>
+        public const Limits7u Max7u = Limits7u.Max;
+
+        /// <summary>
         /// The minimum representable <see cref='sbyte'/> value
         /// </summary>
         public const Limits8i Min8i = Limits8i.Min;

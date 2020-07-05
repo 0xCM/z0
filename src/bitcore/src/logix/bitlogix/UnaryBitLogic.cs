@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Duet;
+    using static BitSeq2;
 
     /// <summary>
     /// Classifies unary logic operators

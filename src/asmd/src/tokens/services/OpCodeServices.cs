@@ -109,7 +109,7 @@ namespace Z0.Asm.Data
             => new AsmCommandGroup(name);
     
         [MethodImpl(Inline), Op]
-        public OpCodeOperand operand(ulong src, duet index)
+        public OpCodeOperand operand(ulong src, uint2 index)
             => new OpCodeOperand((ushort)Bits.slice(src, index*16, 16));
 
         [MethodImpl(Inline), Op]

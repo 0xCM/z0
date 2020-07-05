@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    using static Quartet;        
+    using static BitSeq4;        
 
     using L = CreditTypes.ContentLevel;
     

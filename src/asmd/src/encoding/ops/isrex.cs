@@ -10,13 +10,13 @@ namespace Z0.Asm.Data
 
     using static Konst;
     using static Root;
-    using static Quartet;
+    using static BitSeq4;
 
     partial struct Encoding
     {            
         [MethodImpl(Inline)]
         public static bool isrex(byte src)
-            => (quartet)(src >> 4) == b0100;
+            => (uint4)(src >> 4) == b0100;
 
         [MethodImpl(Inline)]
         public static ParseResult<RexPrefix> rex(byte src)

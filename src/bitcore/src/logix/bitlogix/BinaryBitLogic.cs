@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    using static Quartet;
+    using static BitSeq4;
 
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
