@@ -12,7 +12,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct As
     {
-        const NumericKind Closure = UInt8x64k;    
+        const NumericKind Closure = UnsignedInts;    
 
         [MethodImpl(Inline)]
         internal static int length<S,T>(ReadOnlySpan<S> lhs, ReadOnlySpan<T> rhs)

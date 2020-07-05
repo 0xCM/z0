@@ -8,16 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static System.Runtime.CompilerServices.Unsafe;
 
     partial struct As
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void apply<T>(Func<uint,T> f, Span<T> dst)
             where T : unmanaged
         {
             for(var i=0u; i<dst.Length; i++)
-                As.seek(dst,i) = f(i);            
+                seek(dst,i) = f(i);            
         }
     }
 }

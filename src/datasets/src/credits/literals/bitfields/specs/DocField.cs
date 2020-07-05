@@ -19,7 +19,7 @@ namespace Z0
             /// <summary>
             /// Defines the (uniform) bitfield segment width
             /// </summary>
-            [SegWidth("[11111111]")]
+            [FieldSeg("[11111111]")]
             SegWidth = b11111111,
 
             /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
             [FieldSeg("[00000000 00000000 11111111 00000000 00000000 00000000 00000000]")]
             Topic = SegWidth << P.Topic,
 
-            [SegWidth("[11111111 11111111]")]
+            [FieldSeg("[11111111 11111111]")]
             ContentWidth = ushort.MaxValue,
 
             /// <summary>

@@ -12,16 +12,17 @@ namespace Z0
 
     using HSU = HexSymUp;
     using HSL = HexSymLo;
+    using H = HexSymData;
 
     partial struct asci
     {
         [MethodImpl(Inline), Op]
         public static HSU hex(UpperCased casing, byte index)
-            => skip(SymbolKonst.UpperHexSymbols, index);
+            => skip(H.UpperSymbols, index);
 
         [MethodImpl(Inline), Op]
         public static HSL hex(LowerCased casing, byte index)
-            => skip(SymbolKonst.LowerHexSymbols, index);
+            => skip(H.LowerSymbols, index);
 
         [MethodImpl(Inline), Op]   
         public static HexSym hex(UpperCased @case, HexDigit src)

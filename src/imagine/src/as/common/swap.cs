@@ -24,5 +24,25 @@ namespace Z0
             edit(lhs) = rhs;
             edit(rhs) = temp;
         }
+
+        /// <summary>
+        /// Exchanges operand targets
+        /// </summary>
+        /// <param name="pLhs"></param>
+        /// <param name="pRhs"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <remarks>
+        /// T:uint32: mov eax,[rdx] => mov [rcx],eax => mov eax,[rcx] => mov [rdx],eax
+        /// T:uint32: *rdx -> eax => eax -> *rcx => *rcx -> eax -> eax -> *rdx
+        /// T:uint64: mov rax,[rdx] => mov [rcx],rax => mov rax,[rcx] => mov [rdx],rax
+        /// </remarks>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static unsafe void swap<T>(T* pLhs, T* pRhs)
+            where T : unmanaged
+        {
+            var pTmp = pLhs;
+            *pLhs = *pRhs;
+            *pRhs = *pTmp;
+        }
     }
 }

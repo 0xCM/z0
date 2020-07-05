@@ -22,7 +22,7 @@ namespace Z0
         /// width[T] = 32: mov rax,[rdx] => [rcx],rax => mov dword ptr [rcx+8],4 => mov rax,rcx 
         /// width[T] = 64: mov rax,[rdx] => [rcx],rax => mov dword ptr [rcx+8],8 => mov rax,rcx 
         /// </remarks>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<sbyte> src)
             where T : unmanaged
                 => recover<sbyte,T>(src);
@@ -45,7 +45,7 @@ namespace Z0
         /// 0017h ret                     
         /// 0018h mov ecx,28h             
         /// </remarks>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<byte> src)
             where T : unmanaged
                 => recover<byte,T>(src);
@@ -55,8 +55,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<short> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<short> src)
             where T : unmanaged
                 => recover<short,T>(src);
 
@@ -65,8 +65,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<ushort> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<ushort> src)
             where T : unmanaged
                 => recover<ushort,T>(src);
 
@@ -75,8 +75,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<uint> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<uint> src)
             where T : unmanaged
                 => recover<uint,T>(src);
 
@@ -85,8 +85,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<int> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<int> src)
             where T : unmanaged
                  => recover<int,T>(src);
 
@@ -95,8 +95,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<long> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<long> src)
             where T : unmanaged
                  => recover<long,T>(src);
 
@@ -105,8 +105,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<ulong> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<ulong> src)
             where T : unmanaged
                  => recover<ulong,T>(src);
 
@@ -115,8 +115,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<float> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<float> src)
             where T : unmanaged
                 => recover<float,T>(src);
 
@@ -125,8 +125,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<double> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<double> src)
             where T : unmanaged
                 => recover<double,T>(src); 
 
@@ -135,8 +135,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<decimal> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<decimal> src)
             where T : unmanaged
                 => recover<decimal,T>(src);      
 
@@ -145,8 +145,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<byte> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<byte> src)
             where T : unmanaged
                 => recover<byte,T>(src);
 
@@ -155,8 +155,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<uint> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<uint> src)
             where T : unmanaged
                 => recover<uint,T>(src);
 
@@ -165,8 +165,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<sbyte> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<sbyte> src)
             where T : unmanaged
                 => recover<sbyte,T>(src);
 
@@ -175,8 +175,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<short> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<short> src)
             where T : unmanaged
                 => recover<short,T>(src);
 
@@ -185,8 +185,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<ushort> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<ushort> src)
             where T : unmanaged
                 => recover<ushort,T>(src);
 
@@ -195,8 +195,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<int> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<int> src)
             where T : unmanaged
                 => recover<int,T>(src);
 
@@ -205,8 +205,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<long> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<long> src)
             where T : unmanaged
                 => recover<long,T>(src);
 
@@ -215,8 +215,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<ulong> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<ulong> src)
             where T : unmanaged
                  => recover<ulong,T>(src);
 
@@ -225,8 +225,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<float> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<float> src)
             where T : unmanaged
                  => recover<float,T>(src);
 
@@ -235,8 +235,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<double> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<double> src)
             where T : unmanaged
                  => recover<double,T>(src);
 
@@ -245,8 +245,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> generic<T>(Span<decimal> src)
+        [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
+        public static Span<T> recover<T>(Span<decimal> src)
             where T : unmanaged
                  => recover<decimal,T>(src);
     }

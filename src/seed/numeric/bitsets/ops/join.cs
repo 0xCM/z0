@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="b">Source bit 1</param>
         [MethodImpl(Inline), Op]
         public static triad join(single a, single b, single c)
-            =>(triad)a | ((triad)b << 1) | ((triad)c << 2);
+            => (triad)a | ((triad)b << 1) | ((triad)c << 2);
 
         /// <summary>
         /// (a,b) -> [bbaa]
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="b">Source bits 2-3</param>
         [MethodImpl(Inline), Op]
         public static quartet join(duet a, duet b)
-            =>(quartet)a | ((quartet)b << 2);
+            => (quartet)a | ((quartet)b << 2);
 
         /// <summary>
         /// (a,b) -> [bbaa]
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="d">Source bits 6-7</param>
         [MethodImpl(Inline), Op]
         public static sextet join(duet a, duet b, duet c)
-            =>(sextet)a | ((sextet)b << 2) | ((sextet)c << 4);
+            => (sextet)a | ((sextet)b << 2) | ((sextet)c << 4);
 
         /// <summary>
         /// (a,b,c,d) -> [dd cc bb aa]
@@ -69,8 +69,6 @@ namespace Z0
         /// <param name="d">Source bits 6-7</param>
         [MethodImpl(Inline), Op]
         public static octet join(triad a, triad b, duet c)
-            => (octet)a | ((octet)b << 3) | ((octet)c << 6);
-
-        
+            => (octet)a | ((octet)b << 3) | ((octet)c << 6);      
     }
 }

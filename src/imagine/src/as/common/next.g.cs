@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct As
     {
-
         [MethodImpl(Inline), Op]
         static ref  S gNext<S,T>(in S src, ref T dst)
             where S : unmanaged
@@ -21,6 +20,5 @@ namespace Z0
             dst = add(dst, 1);
             return ref add(src, size<T>());
         }
-
     }
 }

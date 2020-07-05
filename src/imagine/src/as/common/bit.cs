@@ -11,9 +11,13 @@ namespace Z0
 
     partial struct As
     {
-        [MethodImpl(Inline), TestBit]
+        /// <summary>
+        /// Converts a <see cref='bool' /> to a <see cref='Bit' />
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
         public static unsafe Bit bit(bool src)
-            => (Bit) (*((byte*)(&src))); 
+            => (Bit) @byte(src);
 
         [MethodImpl(Inline), TestBit]
         public static unsafe bool @bool(Bit src)
@@ -24,6 +28,5 @@ namespace Z0
             *pDst = *pSrc;
             return dst;
         }
-
     }
 }

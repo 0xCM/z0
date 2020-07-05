@@ -19,7 +19,7 @@ namespace Z0
             /// <summary>
             /// Defines the (uniform) bitfield segment width
             /// </summary>
-            [SegWidth("[1111]")]
+            [FieldSeg("[1111]")]
             SegWidth = b1111,
 
             /// <summary>

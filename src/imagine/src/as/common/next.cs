@@ -48,6 +48,42 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static ref byte next(in sbyte src, ref byte dst)
+            => ref @as<byte>(gNext(src, ref dst));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        [MethodImpl(Inline), Op]
+        public static ref byte next(in sbyte src, ref ushort dst)
+            => ref @as<byte>(gNext(src, ref dst));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static ref byte next(in sbyte src, ref uint dst)
+            => ref @as<byte>(gNext(src, ref dst));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static ref byte next(in sbyte src, ref ulong dst)
+            => ref @as<byte>(gNext(src, ref dst));
+
+        /// <summary>
         /// movzx eax,byte ptr [rcx] => mov [rdx],al => movzx eax,byte ptr [rdx+1] => mov [rdx],al => lea rax,[rcx+2]
         /// </summary>
         /// <param name="src">The source</param>
