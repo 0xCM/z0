@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using g = BitSeqG;
     using S4 = uint4;
     using S5 = uint5;
 
@@ -24,31 +23,9 @@ namespace Z0
     }
 
     [ApiHost]
-    public readonly struct BitSeq
+    public readonly partial struct BitSeq
     {
-        [Op]
-        public static uint4 max(W4 w)
-            => g.max<uint4,byte>();
 
-        [Op]
-        public static uint6 max(W6 w)
-            => g.max<uint6,byte>();
-
-        [Op]
-        public static uint7 max(W7 w)
-            => g.max<uint7,byte>();
-
-        [Op]
-        public static uint4 inc(uint4 src)
-            => g.inc(src);
-            
-        [Op]
-        public static uint6 inc(uint6 src)
-            => g.inc(src);
+ 
     }
-    
-    public partial class BitSeqG
-    {
-        
-    }    
 }

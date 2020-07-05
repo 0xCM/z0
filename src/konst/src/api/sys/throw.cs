@@ -20,5 +20,10 @@ namespace Z0
         [MethodImpl(Options), Opaque(Throw)]
         public static void @throw(Exception e)
             => throw e;
+
+        [MethodImpl(Options), Opaque(Throw)]
+        public static T @throw<T>(Exception e)
+            => throw e;
+
     }
 }

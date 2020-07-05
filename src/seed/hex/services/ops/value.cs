@@ -8,12 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Root;
 
-    partial struct xHex
+    partial class Hex
     {
         [MethodImpl(Inline)]
-        public static Hex8Kind kind<H>(H h= default)
+        public static byte value<H>(H h= default)
             where H : unmanaged, IHexType
-                => h.Value;
+                => (byte)h.Value;
     }
 }

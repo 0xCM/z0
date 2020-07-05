@@ -11,7 +11,6 @@ namespace Z0
 
     partial class TypeNats
     {        
-
         /// <summary>
         /// Reveals the natural number in bijection with a parametric type natural
         /// </summary>

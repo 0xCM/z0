@@ -88,7 +88,7 @@ namespace Z0
         public void emit_data()
         {
                                 
-            var refs = Digits.HexRefs;   
+            var refs = Hex.HexRefs;   
             using var dst = CasePath($"Symbolic").Writer();
             for(var i=0; i<refs.Length; i++)
             {

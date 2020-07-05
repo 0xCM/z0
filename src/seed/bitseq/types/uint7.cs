@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static BitSeqD;
+    using static BitSeq;
 
     using S = uint7;
     using W = W7;

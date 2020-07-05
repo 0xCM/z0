@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Typed;
+    using static BitSeq;
 
     using S = uint1;
 

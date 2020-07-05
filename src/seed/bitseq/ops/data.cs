@@ -12,54 +12,38 @@ namespace Z0
 
     using D = BitSeqData;
 
-    public partial class BitSeqD
+    partial struct BitSeq
     {
-        public static ReadOnlySpan<uint1> U1
-        {
-            [MethodImpl(Inline)]
-            get => recover<byte,uint1>(D.Singletons);
-        }
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<uint1> data(W1 w)
+            => recover<byte,uint1>(D.W1);
 
-        public static ReadOnlySpan<uint2> U2
-        {
-            [MethodImpl(Inline)]
-            get => recover<byte,uint2>(D.Duets);
-        }
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<uint2> data(W2 w)
+            => recover<byte,uint2>(D.W2);
 
-        public static ReadOnlySpan<uint3> U3
-        {
-            [MethodImpl(Inline)]
-            get => recover<byte,uint3>(D.Triads);
-        }
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<uint3> data(W3 w)
+            => recover<byte,uint3>(D.W3);
 
-        public static ReadOnlySpan<uint4> U4
-        {
-            [MethodImpl(Inline)]
-            get => recover<byte,uint4>(D.Quartets);
-        }
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<uint4> data(W4 w)
+             => recover<byte,uint4>(D.W4);
 
-        public static ReadOnlySpan<uint5> U5
-        {
-            [MethodImpl(Inline)]
-            get => recover<byte,uint5>(D.Quintets);
-        }
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<uint5> data(W5 w)
+             => recover<byte,uint5>(D.W5);
 
-        public static ReadOnlySpan<uint6> U6
-        {
-            [MethodImpl(Inline)]
-            get => recover<byte,uint6>(D.Sextets);
-        }        
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<uint6> data(W6 w)
+            => recover<byte,uint6>(D.W6);
 
-        public static ReadOnlySpan<uint6> U7
-        {
-            [MethodImpl(Inline)]
-            get => recover<byte,uint6>(D.Septets);
-        }        
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<uint7> data(W7 w)
+            => recover<byte,uint7>(D.W7);
 
-        public static ReadOnlySpan<octet> U8
-        {
-            [MethodImpl(Inline)]
-            get => recover<byte,octet>(D.Octets);
-        }        
-   }
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<octet> data(W8 w)
+             => recover<byte,octet>(D.W8);
+    }
 }

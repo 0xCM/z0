@@ -17,7 +17,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public HexText(StringRef src)
             => Ref = src;
-
         
         public static HexText Empty 
             => new HexText(StringRef.Empty);        

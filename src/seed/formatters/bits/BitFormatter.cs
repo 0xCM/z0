@@ -92,8 +92,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Format(ReadOnlySpan<byte> src, int maxbits, Span<char> dst)
             => Format(head(src), src.Length, maxbits, dst);
-    }
-
-
-    
+    }    
 }

@@ -10,6 +10,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static Root;
+    using static Typed;
 
     [ApiHost("encoding.modrm")]
     public readonly struct ModRmEncoder
@@ -39,9 +40,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static int fill(Span<ModRmEncoding> dst)
         {
-            var rm = BitSeqD.U3;
-            var reg = BitSeqD.U3;
-            var mod = BitSeqD.U2;
+            var rm = BitSeq.data(w3);
+            var reg = BitSeq.data(w3);
+            var mod = BitSeq.data(w2);
             var i = 0;
             for(var a=0; a<rm.Length; a++)
             for(var b=0; b<reg.Length; b++)

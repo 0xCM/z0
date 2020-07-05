@@ -8,13 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     using static Konst;
+    using static BitSeqD;
+    using static BitSeq;
 
     using S = octet;
     using W = W8;
     using K = BitSeq8;
     using T = System.Byte;
     using N = N8;
-    using static BitSeqD;
 
     /// <summary>
     /// Represents the value of a type-level octet and thus is an integer in the range [0,255]

@@ -9,28 +9,27 @@ namespace Z0
 
     using static Konst;
     using static Root;
-    using static HexSpecs;
 
     partial class Hex
     {        
         [MethodImpl(Inline), Op]
         public static char digit(byte value)
-            => (char)skip(in head(Uppercase), 0xF & value);
+            => (char)skip(in head(UpperDigits), 0xF & value);
 
         [MethodImpl(Inline), Op]
         public static char digit(byte value, int pos)
-            => (char)skip(in head(Uppercase), 0xF & (byte)(value >> pos*4));
+            => (char)skip(in head(UpperDigits), 0xF & (byte)(value >> pos*4));
 
         [MethodImpl(Inline), Op]
         public static char digit(ushort value, int pos)
-            => (char)skip(in head(Uppercase), 0xF & (byte)(value >> pos*4));
+            => (char)skip(in head(UpperDigits), 0xF & (byte)(value >> pos*4));
 
         [MethodImpl(Inline), Op]
         public static char digit(uint value, int pos)
-            => (char)skip(in head(Uppercase), 0xF & (byte)(value >> pos*4));
+            => (char)skip(in head(UpperDigits), 0xF & (byte)(value >> pos*4));
 
         [MethodImpl(Inline), Op]
         public static char digit(ulong value, int pos)
-            => (char)skip(in head(Uppercase), 0xF & (byte)(value >> pos*4));
+            => (char)skip(in head(UpperDigits), 0xF & (byte)(value >> pos*4));
     }
 }

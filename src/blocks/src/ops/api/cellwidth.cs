@@ -19,6 +19,5 @@ namespace Z0
         public static int cellsize<T>()
             where T : unmanaged        
                 => Unsafe.SizeOf<T>();
-
     }
 }

@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Typed;
+    using static BitSeq;
 
     using S = uint3;
 
@@ -144,14 +146,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static S sll(S lhs, byte rhs)
             => uint3(lhs.data << rhs);
-
-        [MethodImpl(Inline), Op]
-        public static S inc(S x)
-            => !x.IsMax ? new S(core.add(x.data, 1), false) : S.Min;
-
-        [MethodImpl(Inline), Op]
-        public static S dec(S x)
-            => !x.IsMin ? new S(core.sub(x.data, 1), false) : S.Max;
 
         [MethodImpl(Inline), Op]
         public static Bit test(S src, byte pos)

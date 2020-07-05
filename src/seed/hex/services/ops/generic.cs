@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static As;
  
-    partial struct xHex
+    partial class Hex
     {
         [MethodImpl(Inline)]
         public static ref HexText<K> generic<K>(in HexText<Hex1Kind> src)

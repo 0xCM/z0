@@ -16,7 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ref T cast<S,T>(in S src)
-            => ref As<S,T>(ref edit(src));
+            => ref Unsafe.As<S,T>(ref As.edit(src));
 
         [MethodImpl(Inline)]        
         public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                

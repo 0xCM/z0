@@ -11,7 +11,7 @@ namespace Z0
     using static Typed;
     using static As;
 
-    partial struct xHex
+    partial class Hex
     {
         [MethodImpl(Inline), Op]
         public static HexTextIndex<Hex1Kind> textidx(N1 n)
@@ -40,36 +40,6 @@ namespace Z0
                     @ref(Hex4Text.x08), @ref(Hex4Text.x09), @ref(Hex4Text.x0A), @ref(Hex4Text.x0B),
                     @ref(Hex4Text.x0C), @ref(Hex4Text.x0D), @ref(Hex4Text.x0E), @ref(Hex4Text.x0F)
                     ));        
-
-        public static HexTextIndex<Hex3Kind> index(N3 n, StringRef[] buffer)
-        {
-            var dst = Root.span(buffer);
-            byte i = 0;
-            seek(dst,i++) = @ref(Hex3Text.x00);
-            seek(dst,i++) = @ref(Hex3Text.x01);
-            seek(dst,i++) = @ref(Hex3Text.x02);            
-            seek(dst,i++) = @ref(Hex3Text.x03);
-            seek(dst,i++) = @ref(Hex3Text.x04);
-            seek(dst,i++) = @ref(Hex3Text.x05);
-            seek(dst,i++) = @ref(Hex3Text.x06);            
-            seek(dst,i++) = @ref(Hex3Text.x07);
-            return new HexTextIndex<Hex3Kind>(buffer);
-        }
-
-        [Op]
-        public static Span<StringRef> store(N3 n, Span<StringRef> dst)
-        {   
-            byte i = 0;
-            seek(dst,i++) = @ref(Hex3Text.x00);
-            seek(dst,i++) = @ref(Hex3Text.x01);
-            seek(dst,i++) = @ref(Hex3Text.x02);            
-            seek(dst,i++) = @ref(Hex3Text.x03);
-            seek(dst,i++) = @ref(Hex3Text.x04);
-            seek(dst,i++) = @ref(Hex3Text.x05);
-            seek(dst,i++) = @ref(Hex3Text.x06);            
-            seek(dst,i++) = @ref(Hex3Text.x07);            
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         public static HexTextIndex<K> textidx<K>()

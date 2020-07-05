@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Root;
 
-    partial struct xHex
+    partial class Hex
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static HexLookup<Hex8Kind,T> lookup<T>(N8 n, HexLookupEntry<Hex8Kind,T>[] src)
@@ -79,7 +79,5 @@ namespace Z0
             
             return new HexLookup<K,T>(dst);
         }                
-
-
     }
 }

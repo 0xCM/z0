@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Typed;
+    using static BitSeq;
 
     using S = uint4;
     
@@ -122,14 +124,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static S mul(S lhs, S rhs)
             => reduce4((byte)(lhs.data * rhs.data));
-
-        [MethodImpl(Inline), Op]
-        public static S inc(S x)
-            => !x.IsMax ? new S(core.add(x.data, 1), false) : S.Min;
-
-        [MethodImpl(Inline), Op]
-        public static S dec(S x)
-            => !x.IsMin ? new S(core.sub(x.data, 1), false) : S.Max;
 
         [MethodImpl(Inline), Op]
         public static S hi(S src)

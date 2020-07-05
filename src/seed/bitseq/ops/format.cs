@@ -9,10 +9,14 @@ namespace Z0
 
     using static Konst;
 
-    partial class Hex
+    partial struct BitSeq
     {
+        static BitFormatConfig FormatConfig2 
+            => BitFormatter.limited(uint2.Width, uint2.Width);
+        
         [MethodImpl(Inline), Op]
-        public static bool test(char c)
-            => HexSpecs.IsHex(c);
+        public static string format(uint2 src)
+            => BitFormatter.format(src.data, FormatConfig2);
+
     }
 }

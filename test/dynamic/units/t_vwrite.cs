@@ -72,7 +72,7 @@ namespace Z0
 
         public void format_2()
         {       
-            var refs = xHex.store(n3, new StringRef[Hex3.Count]);
+            var refs = Hex.store(n3, new StringRef[Hex3.Count]);
 
         }
         

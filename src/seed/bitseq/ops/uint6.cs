@@ -103,9 +103,6 @@ namespace Z0
                  ((uint)x5 << 5)
                 ));
 
-        [MethodImpl(Inline), Op]
-        public static ref S edit(in S src)
-            => ref Unsafe.AsRef(src);
         
         [MethodImpl(Inline), Op]
         public static S add(S x, S y)
@@ -153,13 +150,6 @@ namespace Z0
         public static S sll(S lhs, byte rhs)
             => uint6(lhs.data << rhs);
 
-        [MethodImpl(Inline), Op]
-        public static S inc(S x)
-            => !x.IsMax ? new S(core.add(x.data, 1), false) : S.Min;
-
-        [MethodImpl(Inline), Op]
-        public static S dec(S x)
-            => !x.IsMin ? new S(core.sub(x.data, 1), false) : S.Max;
 
         [MethodImpl(Inline), Op]
         public static Bit test(S src, byte pos)

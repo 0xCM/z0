@@ -9,24 +9,34 @@ namespace Z0
 
     using static Konst;
     using static Typed;
-
-    using X = Z0;
-
-    partial class BitSeqG
+    
+    partial struct BitSeq
     {
+        [MethodImpl(Inline), Op]
+        public static uint4 max(W4 w)
+            => max<uint4,byte>();
+
+        [MethodImpl(Inline), Op]
+        public static uint6 max(W6 w)
+            => max<uint6,byte>();
+
+        [MethodImpl(Inline), Op]
+        public static uint7 max(W7 w)
+            => max<uint7,byte>();
+
         [MethodImpl(Inline)]
-        public static S max<S,T>()
+        static S max<S,T>()
             where S : unmanaged, IBitSeq<S,T>
             where T : unmanaged
         {
             if(match<S,uint1>())
-                return cast<S>(X.uint1.MaxVal);
+                return cast<S>(uint1.MaxVal);
             else if(match<S,uint2>())
-                return cast<S>(X.uint2.MaxVal);
+                return cast<S>(uint2.MaxVal);
             else if(match<S,uint3>())
-                return cast<S>(X.uint3.MaxVal);
+                return cast<S>(uint3.MaxVal);
             else if(match<S,uint4>())
-                return cast<S>(X.uint4.MaxVal);
+                return cast<S>(uint4.MaxVal);
             else 
                 return max<S,T>(w5);
         }
@@ -37,13 +47,13 @@ namespace Z0
             where T : unmanaged
         {
             if(match<S,uint5>())
-                return cast<S>(X.uint5.MaxVal);
+                return cast<S>(uint5.MaxVal);
             else if(match<S,uint6>())
-                return cast<S>(X.uint6.MaxVal);
+                return cast<S>(uint6.MaxVal);
             else if(match<S,uint7>())
-                return cast<S>(X.uint7.MaxVal);
+                return cast<S>(uint7.MaxVal);
             else if(match<S,octet>())
-                return cast<S>(X.octet.MaxVal);
+                return cast<S>(octet.MaxVal);
             else
                 throw no<S>();
         }

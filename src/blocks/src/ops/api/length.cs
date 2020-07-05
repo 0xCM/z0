@@ -99,29 +99,38 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]
         public static int length<S,T>(Block128<S> lhs, Block128<T> rhs)
             where T : unmanaged
             where S : unmanaged
-                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount);
+                => lhs.CellCount == rhs.CellCount 
+                ? lhs.CellCount 
+                : sys.@throw<int>(AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount));
 
         /// <summary>
         /// Returns the length of equal-length blocks; otherwise raises an error
         /// </summary>
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]
         public static int length<S,T>(Block256<S> lhs, Block256<T> rhs)
             where T : unmanaged
             where S : unmanaged
-                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount);
+                => lhs.CellCount == rhs.CellCount 
+                ? lhs.CellCount 
+                : sys.@throw<int>(AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount));
 
         /// <summary>
         /// Returns the length of equal-length blocks; otherwise raises an error
         /// </summary>
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]
         public static int length<S,T>(Block512<S> lhs, Block512<T> rhs)
             where T : unmanaged
             where S : unmanaged
-                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount);
+                => lhs.CellCount == rhs.CellCount 
+                ? lhs.CellCount 
+                : sys.@throw<int>(AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount));
     }
 }

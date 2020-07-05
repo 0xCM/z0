@@ -9,16 +9,23 @@ namespace Z0
 
     using static Konst;
     using static Root;
-    using static HexSpecs;
 
     partial class Hex
     {
         /// <summary>
         /// Returns the hex character code for a number in the interval [0,15]
         /// </summary>
-        /// <param name="value">The value to be hex-encoded</param>
+        /// <param name="n">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
-        public static byte code(byte value)
-            => skip(in head(Uppercase), value & 0xf);
+        public static byte code(UpperCased upper, byte n)
+            => skip(in head(UpperDigits), n & 0xf);
+
+        /// <summary>
+        /// Returns the hex character code for a number in the interval [0,15]
+        /// </summary>
+        /// <param name="n">The value to be hex-encoded</param>
+        [MethodImpl(Inline), Op]
+        public static byte code(LowerCased lower, byte n)
+            => skip(in head(LowerDigits), n & 0xf);
     }
 }

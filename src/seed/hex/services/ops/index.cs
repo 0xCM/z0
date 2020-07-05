@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static As;
 
-    partial struct xHex
+    partial class Hex
     {
         [MethodImpl(Inline), Op]
         public static HexIndex<Hex5> index(Hex5Kind[] src)
@@ -83,5 +84,21 @@ namespace Z0
         public static HexIndex<K> index<K>(K[] src)
             where K : unmanaged, IHexNumber
                 => new HexIndex<K>(src);
+
+        [MethodImpl(Inline), Op]
+        public static HexTextIndex<Hex3Kind> index(N3 n, StringRef[] buffer)
+        {
+            var dst = Root.span(buffer);
+            byte i = 0;
+            seek(dst,i++) = @ref(Hex3Text.x00);
+            seek(dst,i++) = @ref(Hex3Text.x01);
+            seek(dst,i++) = @ref(Hex3Text.x02);            
+            seek(dst,i++) = @ref(Hex3Text.x03);
+            seek(dst,i++) = @ref(Hex3Text.x04);
+            seek(dst,i++) = @ref(Hex3Text.x05);
+            seek(dst,i++) = @ref(Hex3Text.x06);            
+            seek(dst,i++) = @ref(Hex3Text.x07);
+            return new HexTextIndex<Hex3Kind>(buffer);
+        }
      }
 }

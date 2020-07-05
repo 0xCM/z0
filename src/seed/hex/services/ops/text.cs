@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
 
-    partial struct xHex
+    partial class Hex
     {
         [MethodImpl(Inline), Op]
         public static HexText<Hex1Kind> text(N1 n)

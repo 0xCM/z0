@@ -3,17 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static Root;
+    using static HexSpecs;
 
-    [ApiHost]
-    public readonly partial struct xHex
+    partial class Hex
     {
-        
         [MethodImpl(Inline), Op]
         public static Hex1 hex1(byte src)
             => new Hex1(src);

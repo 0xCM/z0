@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Typed;
  
-    partial struct xHex
+    partial class Hex
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(in HexText<Hex1Kind> src, Hex1Kind kind)

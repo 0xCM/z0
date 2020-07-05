@@ -8,22 +8,22 @@ namespace Z0
 
     public readonly struct BitSeqData
     {
-        public static ReadOnlySpan<byte> Singletons
+        public static ReadOnlySpan<byte> W1
             => new byte[2]{0b00,0b01};
 
-        public static ReadOnlySpan<byte> Duets
+        public static ReadOnlySpan<byte> W2
             => new byte[4]{0b00,0b01,0b10,0b11};
  
-        public static ReadOnlySpan<byte> Triads
+        public static ReadOnlySpan<byte> W3
             => new byte[8]{0b000,0b001,0b010,0b011,0b100,0b101,0b110,0b111};
 
-        public static ReadOnlySpan<byte> Quartets
+        public static ReadOnlySpan<byte> W4
             => new byte[16]{
                 0b0000,0b0001,0b0010,0b0011,0b0100,0b0101,0b0110,0b0111,
                 0b1000,0b1001,0b1010,0b1011,0b1100,0b1101,0b1110,0b1111,
                 };
 
-        public static ReadOnlySpan<byte> Quintets
+        public static ReadOnlySpan<byte> W5
             => new byte[32]{
                 0b00000,0b00001,0b00010,0b00011,0b00100,0b00101,0b00110,0b00111,
                 0b01000,0b01001,0b01010,0b01011,0b01100,0b01101,0b01110,0b01111,
@@ -31,7 +31,7 @@ namespace Z0
                 0b11000,0b11001,0b11010,0b11011,0b11100,0b11101,0b11110,0b11111,
                 };
 
-        public static ReadOnlySpan<byte> Sextets
+        public static ReadOnlySpan<byte> W6
             => new byte[64]{
                 0b000000,0b000001,0b000010,0b000011,0b000100,0b000101,0b000110,0b000111,
                 0b001000,0b001001,0b001010,0b001011,0b001100,0b001101,0b001110,0b001111,
@@ -43,7 +43,7 @@ namespace Z0
                 0b111000,0b111001,0b111010,0b111011,0b111100,0b111101,0b111110,0b111111,
                 };
 
-        public static ReadOnlySpan<byte> Septets
+        public static ReadOnlySpan<byte> W7
             => new byte[128]{
                 0b0000000,0b0000001,0b0000010,0b0000011,0b0000100,0b0000101,0b0000110,0b0000111,
                 0b0001000,0b0001001,0b0001010,0b0001011,0b0001100,0b0001101,0b0001110,0b0001111,
@@ -64,7 +64,7 @@ namespace Z0
                 };
 
 
-        public static ReadOnlySpan<byte> Octets
+        public static ReadOnlySpan<byte> W8
             => new byte[256]{
                 0b00000000,0b00000001,0b00000010,0b00000011,0b00000100,0b00000101,0b00000110,0b00000111,
                 0b00001000,0b00001001,0b00001010,0b00001011,0b00001100,0b00001101,0b00001110,0b00001111,

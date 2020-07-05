@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Typed;
+    using static BitSeq;
 
     using S = octet;
 
@@ -98,12 +100,5 @@ namespace Z0
                 return src;
         }
 
-        [MethodImpl(Inline), Op]
-        public static S inc(S x)
-            => !x.IsMax ? new S(core.add(x.data, 1)) : S.Min;
-
-        [MethodImpl(Inline), Op]
-        public static S dec(S x)
-            => !x.IsMin ? new S(core.sub(x.data, 1)) : S.Max;
     }
 }

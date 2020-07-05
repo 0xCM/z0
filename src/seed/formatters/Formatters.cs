@@ -14,7 +14,6 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Formatters
     {        
-
         /// <summary>
         /// Reifies a formatter via Object.ToString()
         /// </summary>

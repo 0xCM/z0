@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
 
     using static BitSeqD;
+    using static BitSeq;
 
     using S = uint2;
     using W = W2;
@@ -188,7 +189,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static explicit operator S(byte src)
-            => uint2(src);
+            => create(W,src);
 
         /// <summary>
         /// Creates a 3-bit integer from the least four bits of the source operand
@@ -196,7 +197,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static implicit operator S(uint src)
-            => uint2(src);
+            => create(W,src);
 
         /// <summary>
         /// Creates a 3-bit integer from the least four bits of the source operand
@@ -204,11 +205,11 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static explicit operator S(ulong src)
-            => uint2(src);
+            => create(W,src);
 
         [MethodImpl(Inline)]    
-        public static S @bool(bool x)
-            => uint2(x);
+        public static S @bool(bool src)
+            => create(W,src);
 
         [MethodImpl(Inline)]    
         public static bool operator true(S x)
