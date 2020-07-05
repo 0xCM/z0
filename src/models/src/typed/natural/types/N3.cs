@@ -9,14 +9,37 @@ namespace Z0
 
     using static Konst;
 
+    using N = N3;
+    using W = W3;
+
     /// <summary>
     /// The singleton type representative for 3
     /// </summary>
-    public readonly struct N3 : INat3<N3>, INativeNatural
+    public readonly struct N3  : INatPrimitive<N>, INativeNatural
     {
         public const ulong Value = 3;
 
         public const string Text = "3";
+
+        public static N N => default;
+
+        public static W W => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(N src) 
+            => (byte)Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator int(N src) 
+            => (int)Value;
+    
+        [MethodImpl(Inline)]
+        public static implicit operator W(N src) 
+            => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator N(W src) 
+            => default;
 
         public ulong NatValue 
             => Value;
@@ -24,15 +47,7 @@ namespace Z0
         public string NatText 
             => Text;
 
-        [MethodImpl(Inline)]
-        public static implicit operator byte(N3 src) 
-            => (byte)Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator int(N3 src) 
-            => (int)Value;
-    
-        [MethodImpl(Inline)]
+       [MethodImpl(Inline)]
         public string Format()
             => Text;
 

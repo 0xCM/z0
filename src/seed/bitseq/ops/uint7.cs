@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using analog = uint7;
+    using S = uint7;
 
     partial class BitSeqD
     {
@@ -18,72 +18,72 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint7(bool src)        
-            => new analog(As.bit(src));
+        public static S uint7(bool src)        
+            => new S(As.bit(src));
 
         /// <summary>
         /// Creates a 7-bit usigned integer from the least 7 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint7(byte src)
-            => new analog(src);
+        public static S uint7(byte src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 7-bit usigned integer from the least 7 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint7(sbyte src)
-            => new analog(src);
+        public static S uint7(sbyte src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 7-bit usigned integer from the least 7 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint7(ushort src)
-            => new analog(src);
+        public static S uint7(ushort src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 7-bit usigned integer from the least 7 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint7(short src)
-            => new analog(src);
+        public static S uint7(short src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 7-bit usigned integer from the least 7 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint7(int src)
-            => new analog(src);
+        public static S uint7(int src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 7-bit usigned integer from the least 7 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint7(uint src)
-            => new analog(src);
+        public static S uint7(uint src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 7-bit usigned integer from the least 7 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint7(long src)
-            => new analog(src);
+        public static S uint7(long src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 7-bit usigned integer from the least 7 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint7(ulong src)        
-            => new analog((byte)((byte)src & analog.MaxVal));
+        public static S uint7(ulong src)        
+            => new S((byte)((byte)src & S.MaxVal));
 
 
         /// <summary>
@@ -94,116 +94,101 @@ namespace Z0
         /// <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
         /// <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
         [MethodImpl(Inline), Op]
-        public static analog uint7(Bit x0, Bit x1 = default, Bit x2 = default, Bit x3 = default, Bit x4 = default, Bit x5 = default, Bit x6 = default)
+        public static S uint7(Bit x0, Bit x1 = default, Bit x2 = default, Bit x3 = default, Bit x4 = default, Bit x5 = default, Bit x6 = default)
              => wrap7(((uint)x0 << 0) | ((uint)x1 << 1) | ((uint)x2 << 2) | ((uint)x3 << 3) | ((uint)x4 << 4) | ((uint)x5 << 5) | ((uint)x6 << 6));
-
-        [MethodImpl(Inline), Op]
-        public static ref analog edit(in analog src)
-            => ref Unsafe.AsRef(src);
         
         [MethodImpl(Inline), Op]
-        public static analog add(analog x, analog y)
+        public static S add(S x, S y)
         {
             var sum = (byte)(x.data + y.data);
-            return wrap7((sum >= analog.Count) ? (byte)(sum - analog.Count): sum);
+            return wrap7((sum >= S.Count) ? (byte)(sum - S.Count): sum);
         }
 
         [MethodImpl(Inline), Op]
-        public static analog sub(analog x, analog y)
+        public static S sub(S x, S y)
         {
             var diff = (int)x - (int)y;
-            return wrap7(diff < 0 ? (uint)(diff + analog.Count) : (uint)diff);
+            return wrap7(diff < 0 ? (uint)(diff + S.Count) : (uint)diff);
         }
 
         [MethodImpl(Inline), Op]
-        public static analog div (analog lhs, analog rhs) 
-            => wrap7((byte)(lhs.data / rhs.data));
+        public static S div (S x, S y) 
+            => wrap7((byte)(x.data / y.data));
 
         [MethodImpl(Inline), Op]
-        public static analog mod (analog lhs, analog rhs)
+        public static S mod (S lhs, S rhs)
             => wrap7((byte)(lhs.data % rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog mul(analog lhs, analog rhs)
-            => reduce7(lhs.data * rhs.data);
+        public static S mul(S lhs, S rhs)
+            => reduce7((byte)(lhs.data * rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog or(analog lhs, analog rhs)
+        public static S or(S lhs, S rhs)
             => wrap7((byte)(lhs.data | rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog and(analog lhs, analog rhs)
+        public static S and(S lhs, S rhs)
             => wrap7((byte)(lhs.data & rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog xor(analog lhs, analog rhs)
+        public static S xor(S lhs, S rhs)
             => wrap7((byte)(lhs.data ^ rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog srl(analog lhs, int rhs)
+        public static S srl(S lhs, byte rhs)
             => uint7(lhs.data >> rhs);
 
         [MethodImpl(Inline), Op]
-        public static analog sll(analog lhs, int rhs)
+        public static S sll(S lhs, byte rhs)
             => uint7(lhs.data << rhs);
 
         [MethodImpl(Inline), Op]
-        public static analog inc(analog x)
-        {
-            if(x.data != analog.MaxVal)
-                return ++x.data;
-            else
-                return  analog.MinVal;
-        }
+        public static S inc(S x)
+            => !x.IsMax ? new S(core.add(x.data, 1), false) : S.Min;
 
         [MethodImpl(Inline), Op]
-        public static analog dec(analog src)
-        {
-            if(src.data != analog.MinVal)
-                src.data--;
-            else
-                src.data = analog.MaxVal;
-            return src;
-        }
+        public static S dec(S x)
+            => !x.IsMin ? new S(core.sub(x.data, 1), false) : S.Max;
 
         [MethodImpl(Inline), Op]
-        public static Bit test(analog src, byte pos)
+        public static Bit test(S src, byte pos)
             => core.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static ref analog set(in analog src, byte pos, Bit state)
+        public static S set(S src, byte pos, Bit state)
         {
-            ref var dst = ref Unsafe.AsRef(src);
-            if(pos < analog.Width)
-                dst.data = core.set(src.data, pos, state);
-            return ref dst;
+            if(pos < S.Width)
+                return wrap7(core.set(src.data, pos, state));
+            else
+                return src;
         }
 
         [MethodImpl(Inline)]
-        public static bool eq(analog x, analog y)
+        public static bool eq(S x, S y)
             => x.data == y.data;
 
-        [MethodImpl(Inline), Op]
-        internal static byte reduce7(uint x) 
-            => (byte)(x % analog.Count);
+        [MethodImpl(Inline)]
+        internal static byte crop7(byte x) 
+            => (byte)(S.MaxVal & x);
 
         [MethodImpl(Inline), Op]
-        internal static byte reduce7(int x) 
-            => (byte)((uint)x % analog.Count);
+        internal static byte reduce7(byte x) 
+            => (byte)(x % S.Count);
+ 
+        [MethodImpl(Inline)]
+        internal static S wrap7(byte src) 
+            => new S(src,false);
 
         [MethodImpl(Inline)]
-        internal static analog wrap7(uint src) 
-            => new analog(src,false);
-
-        [MethodImpl(Inline)]
-        internal static analog wrap7(int src) 
-            => new analog((byte)src,false);
+        internal static S wrap7(uint src) 
+            => new S(src,false);
 
         static BitFormatConfig FormatConfig7 
-            => BitFormatter.limited(analog.Width,analog.Width);
+            => BitFormatter.limited(S.Width,S.Width);
         
         [MethodImpl(Inline)]
-        public static string format(analog src)
+        public static string format(S src)
             => BitFormatter.format(src.data, FormatConfig7);
     }
 }

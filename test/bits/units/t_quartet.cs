@@ -89,12 +89,12 @@ namespace Z0
             var z1 = (byte)5;
             Claim.eq(y1,z1);
 
-            var x2 = uint4(true,false,true,true);
+            var x2 = uint4(Bit.On,Bit.Off,Bit.On,Bit.On);
             byte y2 = x2;
             var z2 = (byte)0b1101;
             Claim.eq(y2,z2);
 
-            var x3 = uint4(bit.On, bit.Off, bit.On, bit.On);
+            var x3 = uint4(Bit.On, Bit.Off, Bit.On, Bit.On);
             byte y3 = x3;
             var z3 = (byte)0b1101;
             Claim.eq(y3,z3);
@@ -182,16 +182,16 @@ namespace Z0
         
         }
 
-        public void uint4_hilo()
-        {
-            Claim.eq((uint4)0b11, ((uint4)0b1011).Lo);
-            Claim.eq((uint4)0b10, ((uint4)0b1011).Hi);
+        // public void uint4_hilo()
+        // {
+        //     Claim.eq((uint4)0b11, ((uint4)0b1011).Lo);
+        //     Claim.eq((uint4)0b10, ((uint4)0b1011).Hi);
 
-            var x0 = (uint4)0b1011;
-            x0.Lo = (uint4)0b01;
-            x0.Hi = (uint4)0b01;
-            var y0 = (uint4)0b0101;
-            Claim.eq(y0,x0);            
-        }
+        //     var x0 = (uint4)0b1011;
+        //     x0.Lo = (uint4)0b01;
+        //     x0.Hi = (uint4)0b01;
+        //     var y0 = (uint4)0b0101;
+        //     Claim.eq(y0,x0);            
+        // }
     }
 }

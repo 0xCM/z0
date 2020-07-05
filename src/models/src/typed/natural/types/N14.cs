@@ -9,10 +9,9 @@ namespace Z0
 
     using static Konst;    
 
-    public readonly struct N14 : 
-        INativeNatural, 
-        INatNumber<N14>,
-        INatPrior<N14,N13>
+    using N = N14;
+
+    public readonly struct N14 : INativeNatural, INatPrimitive<N>
     {
         public const ulong Value = 14;
 

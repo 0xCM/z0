@@ -14,21 +14,28 @@ namespace Z0
             => !IsZero;
     }
 
-    public interface IBitSeq<S> : IBitSeq
+    public interface IBitSeq<S> : IBitSeq, IEquatable<S>    
         where S : unmanaged, IBitSeq<S>
     {
-
+        
     }    
 
-    public interface IBitSeq<F,W,T> : IBitSeq, IEquatable<F>    
-        where F : unmanaged, IBitSeq<F,W,T>
-        where W : unmanaged, IDataWidth
+    public interface IBitSeq<S,T> : IBitSeq<S>, INullary<S,T>
+        where S : unmanaged, IBitSeq<S,T>
         where T : unmanaged         
     {
         T Value {get;}
+    }    
+
+    public interface IBitSeq<S,W,T> : IBitSeq<S,T> 
+        where S : unmanaged, IBitSeq<S,W,T>
+        where W : unmanaged, IDataWidth
+        where T : unmanaged         
+    {
+        
     }
 
-    public interface IBitSeq<F,W,K,T> : IBitSeq<F,W,T>, INullary<F,T>
+    public interface IBitSeq<F,W,K,T> : IBitSeq<F,W,T>
         where F : unmanaged, IBitSeq<F,W,K,T>
         where W : unmanaged, IDataWidth
         where K : unmanaged, Enum

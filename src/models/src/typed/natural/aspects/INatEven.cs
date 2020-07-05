@@ -9,7 +9,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">An even natural type</typeparam>
     public interface INatEven<K> : ITypeNat, INatDivisible<K,N2>
-        where K : unmanaged, ITypeNat<K>
+        where K : unmanaged, ITypeNat
     {
 
     }    

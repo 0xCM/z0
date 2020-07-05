@@ -9,105 +9,101 @@ namespace Z0
 
     using static Konst;
 
-    using analog = octet;
+    using S = octet;
 
     partial class BitSeqD
     {
         /// <summary>
-        /// Creates a 7-bit unsigned integer, equal to zero or one, according to whether the source is respectively false or true
+        /// Creates a 8-bit unsigned integer, equal to zero or one, according to whether the source is respectively false or true
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint8(bool src)        
-            => new analog(As.bit(src));
+        public static S uint8(bool src)        
+            => new S(As.bit(src));
 
         /// <summary>
-        /// Creates a 7-bit usigned integer from the least 7 source bits
+        /// Creates a 8-bit usigned integer from the least 8 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint8(byte src)
-            => new analog(src);
+        public static S uint8(byte src)
+            => new S(src);
 
         /// <summary>
-        /// Creates a 7-bit usigned integer from the least 7 source bits
+        /// Creates a 8-bit usigned integer from the least 8 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint8(sbyte src)
-            => new analog((byte)src);
+        public static S uint8(sbyte src)
+            => new S((byte)src);
 
         /// <summary>
-        /// Creates a 7-bit usigned integer from the least 7 source bits
+        /// Creates a 8-bit usigned integer from the least 8 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint8(ushort src)
-            => new analog((byte)src);
+        public static S uint8(ushort src)
+            => new S((byte)src);
 
         /// <summary>
-        /// Creates a 7-bit usigned integer from the least 7 source bits
+        /// Creates a 8-bit usigned integer from the least 8 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint8(short src)
-            => new analog((byte)src);
+        public static S uint8(short src)
+            => new S((byte)src);
 
         /// <summary>
-        /// Creates a 7-bit usigned integer from the least 7 source bits
+        /// Creates a 8-bit usigned integer from the least 8 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint8(int src)
-            => new analog((byte)src);
+        public static S uint8(int src)
+            => new S((byte)src);
 
         /// <summary>
-        /// Creates a 7-bit usigned integer from the least 7 source bits
+        /// Creates a 8-bit usigned integer from the least 8 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint8(uint src)
-            => new analog((byte)src);
+        public static S uint8(uint src)
+            => new S((byte)src);
 
         /// <summary>
-        /// Creates a 7-bit usigned integer from the least 7 source bits
+        /// Creates a 8-bit usigned integer from the least 8 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint8(long src)
-            => new analog((byte)src);
+        public static S uint8(long src)
+            => new S((byte)src);
 
         /// <summary>
-        /// Creates a 7-bit usigned integer from the least 7 source bits
+        /// Creates a 8-bit usigned integer from the least 8 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint8(ulong src)        
-            => new analog((byte)src);
+        public static S uint8(ulong src)        
+            => new S((byte)src);
 
         [MethodImpl(Inline), Op]
-        public static Bit test(analog src, byte pos)
+        public static Bit test(S src, byte pos)
             => core.test(src,pos);
-
-        [MethodImpl(Inline), Op]
-        public static ref analog edit(in analog src)
-            => ref Unsafe.AsRef(src);
         
         [MethodImpl(Inline), Op]
-        public static ref analog set(in analog src, byte pos, Bit state)
+        public static S set(S src, byte pos, Bit state)
         {
-            ref var dst = ref edit(src);
-            if(pos < analog.Width)
-                dst.data = core.set(src.data, pos, state);
-            return ref dst;
+            if(pos < S.Width)
+                return new S(core.set(src.data, pos, state));
+            else
+                return src;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref analog inc(in analog src)
-        {
-            ref var dst = ref edit(src);
-            ++dst.data;
-            return ref dst;
-        }
+        public static S inc(S x)
+            => !x.IsMax ? new S(core.add(x.data, 1)) : S.Min;
+
+        [MethodImpl(Inline), Op]
+        public static S dec(S x)
+            => !x.IsMin ? new S(core.sub(x.data, 1)) : S.Max;
     }
 }

@@ -203,7 +203,7 @@ namespace Z0
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
             where K3 : unmanaged, ITypeNat
-                => Try( () => new NatMod<K1,K2,K3>(k1, k2, k3));
+                => Try(() => new NatMod<K1,K2,K3>(k1, k2, k3));
 
         /// <summary>
         /// Attempts to prove that k:K1 => k % 2 == 0
@@ -212,7 +212,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="K">An even natural type</typeparam>
         public static Option<NatEven<K>> TryEven<K>(K k)
-            where K: unmanaged, ITypeNat<K>
+            where K: unmanaged, ITypeNat
                 => Try(() => new NatEven<K>(k));
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="K">An even natural type</typeparam>
         public static Option<NatEven<K>> TryEven<K>()
-            where K: unmanaged, ITypeNat<K>
+            where K: unmanaged, ITypeNat
                 => Try(() => new NatEven<K>(natrep<K>()));
 
         /// <summary>

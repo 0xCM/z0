@@ -10,55 +10,46 @@ namespace Z0
     using static Konst;
     using static As;
 
-    using S1 = uint1;
-    using S2 = uint2;
-    using S3 = uint3;
-    using S4 = uint4;
-    using S5 = uint5;
-    using S6 = uint6;
-    using S7 = uint7;
-    using S8 = octet;
-
     partial class BitSeqG
     {
         [MethodImpl(Inline)]
-        public static ref S edit<S>(in S1 src)
+        public static ref S edit<S>(in uint1 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S1,S>(ref As.edit(src));
+                => ref @as<uint1,S>(ref As.edit(src));
 
         [MethodImpl(Inline)]
-        public static ref S edit<S>(in S2 src)
+        public static ref S edit<S>(in uint2 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S2,S>(ref As.edit(src));
+                => ref @as<uint2,S>(ref As.edit(src));
 
         [MethodImpl(Inline)]
-        public static ref S edit<S>(in S3 src)
+        public static ref S edit<S>(in uint3 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S3,S>(ref As.edit(src));
+                => ref @as<uint3,S>(ref As.edit(src));
 
         [MethodImpl(Inline)]
-        public static ref S edit<S>(in S4 src)
+        public static ref S edit<S>(in uint4 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S4,S>(ref As.edit(src));
+                => ref @as<uint4,S>(ref As.edit(src));
 
         [MethodImpl(Inline)]
-        public static ref S edit<S>(in S5 src)
+        public static ref S edit<S>(in uint5 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S5,S>(ref As.edit(src));
+                => ref @as<uint5,S>(ref As.edit(src));
 
         [MethodImpl(Inline)]
-        public static ref S edit<S>(in S6 src)
+        public static ref S edit<S>(in uint6 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S6,S>(ref As.edit(src));
+                => ref @as<uint6,S>(ref As.edit(src));
 
         [MethodImpl(Inline)]
-        public static ref S edit<S>(in S7 src)
+        public static ref S edit<S>(in uint7 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S7,S>(ref As.edit(src));
+                => ref @as<uint7,S>(ref As.edit(src));
 
         [MethodImpl(Inline)]
-        public static ref S edit<S>(in S8 src)
+        public static ref S edit<S>(in octet src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S8,S>(ref As.edit(src));
+                => ref @as<octet,S>(ref As.edit(src));
     }
 }

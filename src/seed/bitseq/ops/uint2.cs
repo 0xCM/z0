@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using analog = uint2;
+    using S = uint2;
 
     partial class BitSeqD
     {
@@ -18,72 +18,72 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint2(bool src)
-            => new analog(As.bit(src));
+        public static S uint2(bool src)
+            => new S(As.bit(src));
 
         /// <summary>
         /// Creates a 2-bit usigned integer from the least 2 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint2(byte src)
-            => new analog(src);
+        public static S uint2(byte src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 2-bit usigned integer from the least 2 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint2(sbyte src)
-            => new analog(src);
+        public static S uint2(sbyte src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 2-bit usigned integer from the least 2 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint2(ushort src)
-            => new analog(src);
+        public static S uint2(ushort src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 2-bit usigned integer from the least 2 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint2(short src)
-            => new analog(src);
+        public static S uint2(short src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 2-bit usigned integer from the least 2 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint2(int src)
-            => new analog(src);
+        public static S uint2(int src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 2-bit usigned integer from the least 2 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint2(uint src)
-            => new analog(src);
+        public static S uint2(uint src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 2-bit usigned integer from the least 2 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint2(long src)
-            => new analog(src);
+        public static S uint2(long src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 2-bit usigned integer from the least 2 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint2(ulong src)        
-            => new analog((byte)((byte)src & analog.MaxVal));
+        public static S uint2(ulong src)        
+            => new S((byte)((byte)src & S.MaxVal));
 
         /// <summary>
         /// Creates a 2-bit unsigned integer from a 2-term bit sequence
@@ -91,116 +91,105 @@ namespace Z0
         /// <param name="x0">The term at index 0</param>
         /// <param name="x1">The term at index 1</param>
         [MethodImpl(Inline), Op]
-        public static analog uint2(bit x0, bit x1 = default)
+        public static S uint2(bit x0, bit x1 = default)
              => wrap2(((uint)x0 << 0) | ((uint)x1 << 1));
 
         [MethodImpl(Inline), Op]
-        public static analog add(analog x, analog y)
+        public static S add(S x, S y)
         {
             var sum = x.data + y.data;
-            return wrap2((sum >= analog.Count) ? sum - (byte)analog.Count: sum);
+            return wrap2((sum >= S.Count) ? sum - (byte)S.Count: sum);
         }
 
         [MethodImpl(Inline), Op]
-        public static analog sub(analog x, analog y)
+        public static S sub(S x, S y)
         {
             var diff = (int)x - (int)y;
-            return wrap2(diff < 0 ? (byte)(diff + analog.Count) : (byte)diff);
+            return wrap2(diff < 0 ? (byte)(diff + S.Count) : (byte)diff);
         }
 
         [MethodImpl(Inline), Op]
-        public static analog mul(analog lhs, analog rhs)
+        public static S mul(S lhs, S rhs)
             => reduce4((byte)(lhs.data * rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog div (analog lhs, analog rhs) 
+        public static S div (S lhs, S rhs) 
             => wrap2((byte)(lhs.data / rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog mod (analog lhs, analog rhs)
+        public static S mod (S lhs, S rhs)
             => wrap2((byte)(lhs.data % rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog or(analog lhs, analog rhs)
+        public static S or(S lhs, S rhs)
             => wrap2((byte)(lhs.data | rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog and(analog lhs, analog rhs)
+        public static S and(S lhs, S rhs)
             => wrap2((byte)(lhs.data & rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog xor(analog lhs, analog rhs)
+        public static S xor(S lhs, S rhs)
             => wrap2((byte)(lhs.data ^ rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog srl(analog lhs, int rhs)
+        public static S srl(S lhs, byte rhs)
             => uint2(lhs.data >> rhs);
 
         [MethodImpl(Inline), Op]
-        public static analog sll(analog lhs, int rhs)
+        public static S sll(S lhs, byte rhs)
             => uint2(lhs.data << rhs);
 
         [MethodImpl(Inline), Op]
-        public static analog inc(analog x)
-        {
-            if(x.data != analog.MaxVal)
-                return ++x.data;
-            else
-                return  analog.MinVal;
-        }
+        public static S inc(S x)
+            => !x.IsMax ? new S(core.add(x.data, 1), false) : S.Min;
 
         [MethodImpl(Inline), Op]
-        public static analog dec(analog src)
-        {
-            if(src.data != analog.MinVal)
-                src.data--;
-            else
-                src.data = analog.MaxVal;
-            return src;
-        }
+        public static S dec(S x)
+            => !x.IsMin ? new S(core.sub(x.data, 1), false) : S.Max;
 
         [MethodImpl(Inline), Op]
-        public static Bit test(analog src, byte pos)
+        public static Bit test(S src, byte pos)
             => core.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static ref analog set(in analog src, byte pos, Bit state)
+        public static S set(S src, byte pos, Bit state)
         {
-            ref var dst = ref Unsafe.AsRef(src);
-            if(pos < analog.Width)
-                dst.data = core.set(src.data, pos, state);
-            return ref dst;
+            if(pos < S.Width)
+                return wrap2(core.set(src.data, pos, state));
+            else
+                return src;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref analog edit(in analog src)
+        public static ref S edit(in S src)
             => ref Unsafe.AsRef(src);    
 
         [MethodImpl(Inline), Op]
-        public static bool eq(analog x, analog y)
+        public static bool eq(S x, S y)
             => x.data == y.data;
 
-        [MethodImpl(Inline), Op]
-        internal static uint reduce2(uint x) 
-            => x % analog.Count;
+        [MethodImpl(Inline)]
+        internal static byte crop2(byte x) 
+            => (byte)(S.MaxVal & x);
 
         [MethodImpl(Inline), Op]
         internal static byte reduce2(byte x) 
-            => (byte)(x % analog.Count);
+            => (byte)(x % S.Count);
 
         [MethodImpl(Inline)]
-        internal static analog wrap2(uint src) 
-            => new analog((byte)src,false);
+        internal static S wrap2(uint src) 
+            => new S((byte)src,false);
 
         [MethodImpl(Inline)]
-        internal static analog wrap2(int src) 
-            => new analog((byte)src,false);
+        internal static S wrap2(int src) 
+            => new S((byte)src,false);
 
         static BitFormatConfig FormatConfig2 
-            => BitFormatter.limited(analog.Width, analog.Width);
+            => BitFormatter.limited(S.Width, S.Width);
         
         [MethodImpl(Inline)]
-        public static string format(analog src)
+        public static string format(S src)
             => BitFormatter.format(src.data, FormatConfig2);
 
         /// <summary>
@@ -209,7 +198,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static uint3 extend(analog src, W3 w)
+        public static uint3 extend(S src, W3 w)
             => src;
 
         /// <summary>
@@ -220,7 +209,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="n">The leftward shift count</param>
         [MethodImpl(Inline), Op]
-        public static uint3 extend(analog src, W3 w, N1 n)
+        public static uint3 extend(S src, W3 w, N1 n)
             => (uint3)src << 1;
 
         /// <summary>
@@ -229,7 +218,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static uint4 extend(analog src, W4 w)
+        public static uint4 extend(S src, W4 w)
             => src;
 
         /// <summary>
@@ -238,7 +227,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static uint5 extend(analog src, W5 w)
+        public static uint5 extend(S src, W5 w)
             => src;
 
         /// <summary>
@@ -247,7 +236,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static uint6 extend(analog src, W6 w)
+        public static uint6 extend(S src, W6 w)
             => src;
 
         /// <summary>
@@ -256,7 +245,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static octet extend(analog src, W8 w)
+        public static octet extend(S src, W8 w)
             => src;
 
         /// <summary>
@@ -267,7 +256,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="n">The leftward shift count</param>
         [MethodImpl(Inline), Op]
-        public static octet extend(analog src, W8 w, N2 n)
+        public static octet extend(S src, W8 w, N2 n)
             => (octet)src << 2;
 
         /// <summary>
@@ -278,7 +267,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="n">The leftward shift count</param>
         [MethodImpl(Inline), Op]
-        public static octet extend(analog src, W8 w, N3 n)
+        public static octet extend(S src, W8 w, N3 n)
             => (octet)src << 3;
 
         /// <summary>
@@ -289,7 +278,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="n">The leftward shift count</param>
         [MethodImpl(Inline), Op]
-        public static octet extend(analog src, W8 w, N4 n)
+        public static octet extend(S src, W8 w, N4 n)
             => (octet)src << 4;
     }
 }

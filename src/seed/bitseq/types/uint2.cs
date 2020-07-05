@@ -20,9 +20,9 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level duet and thus has domain {00,01,10,11}
     /// </summary>
-    public struct uint2 : IBitSeq<S,W,K,T>
+    public readonly struct uint2 : IBitSeq<S,W,K,T>
     {    
-        internal byte data;
+        internal readonly byte data;
 
         /// <summary>
         /// Specifies the inclusive lower bound of the <see cref='S'/> data type as a literal value
@@ -50,30 +50,45 @@ namespace Z0
         public static W W => default;
 
         /// <summary>
-        /// Specifies the minimum <see cref='S'/> value
-        /// </summary>
-        public static S Min => MinVal;
-
-        /// <summary>
-        /// Specifies the maximum <see cref='S'/> value
-        /// </summary>
-        public static S Max => MaxVal;
-
-        /// <summary>
-        /// Specifies the <see cref='S'/> zero value
-        /// </summary>
-        public static S Zero => 0;
-
-        /// <summary>
-        /// Specifies the <see cref='S'/> one value
-        /// </summary>
-        public static S One => 1;
-
-        /// <summary>
         /// Specifies the <see cref='S'/> bit-width as a natural number
         /// </summary>
         public static N N => default;
 
+        /// <summary>
+        /// Specifies the minimum <see cref='S'/> value
+        /// </summary>
+        public static S Min 
+        {
+            [MethodImpl(Inline)]
+            get => new S(MinVal,true);
+        }
+
+        /// <summary>
+        /// Specifies the maximum <see cref='S'/> value
+        /// </summary>
+        public static S Max 
+        {
+            [MethodImpl(Inline)]
+            get => new S(MaxVal,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='S'/> zero value
+        /// </summary>
+        public static S Zero 
+        {
+            [MethodImpl(Inline)]
+            get => new S(0,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='S'/> one value
+        /// </summary>
+        public static S One 
+        {
+            [MethodImpl(Inline)]
+            get => new S(1,true);
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator S(octet src)
@@ -236,12 +251,12 @@ namespace Z0
             => xor(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static S operator >>(S lhs, int rhs)
-            => srl(lhs,rhs);
+        public static S operator >>(S lhs, int count)
+            => srl(lhs, (byte)count);
 
         [MethodImpl(Inline)]
-        public static S operator <<(S lhs, int rhs)
-            => sll(lhs,rhs);
+        public static S operator <<(S lhs, int count)
+            => sll(lhs, (byte)count);
 
         [MethodImpl(Inline)]
         public static S operator ~(S src)
@@ -288,12 +303,16 @@ namespace Z0
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
+        internal uint2(byte src, bool @unchecked)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
         internal uint2(sbyte src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((byte)src & MaxVal);
 
         [MethodImpl(Inline)]
         internal uint2(short src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((byte)src & MaxVal);
 
         [MethodImpl(Inline)]
         internal uint2(ushort src)
@@ -301,7 +320,7 @@ namespace Z0
 
         [MethodImpl(Inline)]    
         internal uint2(int x)
-            => data = (byte)((uint)x & MaxVal);
+            => data = (byte)((byte)x & MaxVal);
         
         [MethodImpl(Inline)]
         internal uint2(uint src)
@@ -309,7 +328,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal uint2(long src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((byte)src & MaxVal);
 
         [MethodImpl(Inline)]
         internal uint2(uint src, bool safe)
@@ -356,6 +375,23 @@ namespace Z0
             get => data != 0;
         }
 
+        /// <summary>
+        /// Specifies whether the current value is the maximum value
+        /// </summary>
+        public bool IsMax
+        {
+            [MethodImpl(Inline)]
+            get => data == MaxVal;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the minimum value
+        /// </summary>
+        public bool IsMin
+        {
+            [MethodImpl(Inline)]
+            get => data == MinVal;
+        }
 
         /// <summary>
         /// Renders the source value as as hexadecimal string

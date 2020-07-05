@@ -9,6 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    using N = N2;
+    using W = W2;
+
     /// <summary>
     /// The type that represents 2
     /// </summary>
@@ -18,20 +21,32 @@ namespace Z0
 
         public const string Text = "2";
 
+        public static N N => default;
+
+        public static W W => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(N src) 
+            => (byte)Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator int(N src) 
+            => (int)Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator W(N src) 
+            => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator N(W src) 
+            => default;
+
         public ulong NatValue 
             => Value;
 
         public string NatText 
             => Text;
-
-        [MethodImpl(Inline)]
-        public static implicit operator byte(N2 src) 
-            => (byte)Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator int(N2 src) 
-            => (int)Value;
-                
+               
         [MethodImpl(Inline)]
         public string Format()
             => Text;

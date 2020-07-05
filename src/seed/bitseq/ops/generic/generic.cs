@@ -8,16 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    using S1 = uint1;
-    using S2 = uint2;
-    using S3 = uint3;
-    using S4 = uint4;
-    using S5 = uint5;
-    using S6 = uint6;
-    using S7 = uint7;
-    using S8 = octet;
-
     using static As;
 
     partial class BitSeqG
@@ -26,44 +16,89 @@ namespace Z0
         public static bool match<A,B>()
             => typeof(B) == typeof(A);
 
- 
         [MethodImpl(Inline)]
-        public static ref S1 uint1<S>(in S src)
+        public static S cast<S>(byte src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S,S1>(ref As.edit(src));
+                => cast<byte,S>(src);
 
         [MethodImpl(Inline)]
-        public static ref S2 uint2<S>(in S src)
+        public static S generic<S>(uint1 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S,S2>(ref As.edit(src));
+                => cast<uint1,S>(src);
 
         [MethodImpl(Inline)]
-        public static ref S3 uint3<S>(in S src)
+        public static S generic<S>(uint2 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S,S3>(ref As.edit(src));
+                => cast<uint2,S>(src);
 
         [MethodImpl(Inline)]
-        public static ref S4 uint4<S>(in S src)
+        public static S generic<S>(uint3 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S,S4>(ref As.edit(src));
+                => cast<uint3,S>(src);
 
         [MethodImpl(Inline)]
-        public static ref S5 uint5<S>(in S src)
+        public static S generic<S>(uint4 src)
             where S : unmanaged, IBitSeq<S>
-                => ref @as<S,S5>(ref As.edit(src));
+                => cast<uint4,S>(src);
+
+        [MethodImpl(Inline)]
+        public static S generic<S>(uint5 src)
+            where S : unmanaged, IBitSeq<S>
+                => cast<uint5,S>(src);
+
+        [MethodImpl(Inline)]
+        public static S generic<S>(uint6 src)
+            where S : unmanaged, IBitSeq<S>
+                => cast<uint6,S>(src);
+
+        [MethodImpl(Inline)]
+        public static S generic<S>(in uint7 src)
+            where S : unmanaged, IBitSeq<S>
+                => cast<uint7,S>(src);
+
+        [MethodImpl(Inline)]
+        public static S generic<S>(octet src)
+            where S : unmanaged, IBitSeq<S>
+                => cast<octet,S>(src);
+
+        [MethodImpl(Inline)]
+        public static uint1 uint1<S>(S src)
+            where S : unmanaged, IBitSeq<S,byte>
+                => cast<S,uint1>(src);
+
+        [MethodImpl(Inline)]
+        public static uint2 uint2<S>(S src)
+            where S : unmanaged, IBitSeq<S,byte>
+                => cast<S,uint2>(src);
+
+        [MethodImpl(Inline)]
+        public static uint3 uint3<S>(S src)
+            where S : unmanaged, IBitSeq<S,byte>
+                => cast<S,uint3>(src);
+
+        [MethodImpl(Inline)]
+        public static uint4 uint4<S>(S src)
+            where S : unmanaged, IBitSeq<S,byte>
+                => cast<S,uint4>(src);
+
+        [MethodImpl(Inline)]
+        public static uint5 uint5<S>(S src)
+            where S : unmanaged, IBitSeq<S,byte>
+                => cast<S,uint5>(src);
+
+        [MethodImpl(Inline)]
+        public static uint6 uint6<S>(S src)
+            where S : unmanaged, IBitSeq<S,byte>
+                => cast<S,uint6>(src);
+
+        [MethodImpl(Inline)]
+        public static uint7 uint7<S>(S src)
+            where S : unmanaged, IBitSeq<S,byte>
+                => cast<S,uint7>(src);
         
         [MethodImpl(Inline)]
-        public static ref S6 uint6<S>(in S src)
-            where S : unmanaged, IBitSeq<S>
-                => ref @as<S,S6>(ref As.edit(src));
-        [MethodImpl(Inline)]
-        public static ref S7 uint7<S>(in S src)
-            where S : unmanaged, IBitSeq<S>
-                => ref @as<S,S7>(ref As.edit(src));
-
-        [MethodImpl(Inline)]
-        public static ref S8 uint8<S>(in S src)
-            where S : unmanaged, IBitSeq<S>
-                => ref @as<S,S8>(ref As.edit(src));        
+        public static octet uint8<S>(S src)
+            where S : unmanaged, IBitSeq<S,byte>
+                => cast<S,octet>(src);
     }
 }

@@ -14,13 +14,14 @@ namespace Z0
     using K = BitSeq8;
     using T = System.Byte;
     using N = N8;
+    using static BitSeqD;
 
     /// <summary>
     /// Represents the value of a type-level octet and thus is an integer in the range [0,255]
     /// </summary>
-    public struct octet : IBitSeq<S,W,K,T>
+    public readonly struct octet : IBitSeq<S,W,K,T>
     {
-        internal byte data;
+        internal readonly byte data;
 
         public const byte MinVal = 0;
 
@@ -32,9 +33,23 @@ namespace Z0
 
         public static W W => default;
 
-        public static S Min => MinVal;
+        /// <summary>
+        /// Specifies the minimum <see cref='S'/> value
+        /// </summary>
+        public static S Min 
+        {
+            [MethodImpl(Inline)]
+            get => new S(MinVal);
+        }
 
-        public static S Max => MaxVal;
+        /// <summary>
+        /// Specifies the maximum <see cref='S'/> value
+        /// </summary>
+        public static S Max 
+        {
+            [MethodImpl(Inline)]
+            get => new S(MaxVal);
+        }
 
         public static S Zero => 0;
 
@@ -195,11 +210,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static S operator -- (S src) 
-            =>  --src.data;
+            => dec(src);
 
         [MethodImpl(Inline)]
         public static S operator ++ (S src) 
-            =>  ++src.data;
+            => inc(src);
 
         /// <summary>
         /// Queries the state of an index-identified bit
@@ -234,6 +249,24 @@ namespace Z0
             get => data != 0;
         }
 
+        /// <summary>
+        /// Specifies whether the current value is the maximum value
+        /// </summary>
+        public bool IsMax
+        {
+            [MethodImpl(Inline)]
+            get => data == MaxVal;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the minimum value
+        /// </summary>
+        public bool IsMin
+        {
+            [MethodImpl(Inline)]
+            get => data == MinVal;
+        }
+
         [MethodImpl(Inline)]    
         public octet(byte x)
             => data = x;
@@ -253,7 +286,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(S rhs)
             => data == rhs.data;
-
+        
         public uint Hash
         {
             [MethodImpl(Inline)]

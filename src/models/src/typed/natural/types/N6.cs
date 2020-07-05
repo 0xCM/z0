@@ -9,31 +9,49 @@ namespace Z0
 
     using static Konst;
 
+    using N = N6;
+    using W = W6;
+
     /// <summary>
     /// The singleton type representative for 6
     /// </summary>
-    public readonly struct N6 : INat6<N6>, INativeNatural
+    public readonly struct N6 : INatPrimitive<N>, INativeNatural
     {
         public const ulong Value = 6;
 
         public const string Text = "6";
 
-        public ulong NatValue => Value;
+        public static N N => default;
+
+        public static W W => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(N6 src) 
+        public static implicit operator byte(N src) 
             => (byte)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N6 src) 
+        public static implicit operator int(N src) 
             => (int)Value;
 
+        [MethodImpl(Inline)]
+        public static implicit operator W(N src) 
+            => default;
 
-        public override string ToString() 
+        [MethodImpl(Inline)]
+        public static implicit operator N(W src) 
+            => default;
+
+        public ulong NatValue 
+            => Value;
+
+        public string NatText
             => Text;
 
         [MethodImpl(Inline)]
         public string Format()
             => Text;
+
+        public override string ToString() 
+            => Format();
      }
 }

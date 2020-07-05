@@ -19,30 +19,57 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level quintet and thus is an integer in the range [0,31]
     /// </summary>
-    public struct uint5 : IBitSeq<S,W,K,T>
+    public readonly struct uint5 : IBitSeq<S,W,K,T>
     {
-        internal byte data;
+        internal readonly byte data;
         
         public const byte MinVal = 0;
 
         public const byte MaxVal = 31;
 
-        public const int Width = 5;        
+        public const byte Width = 5;        
 
         public const byte Count = (byte)MaxVal + 1;
 
         public static W W => default;
 
-        public static S Zero => 0;
-
-        public static S One => 1;
-
-        public static S Min => MinVal;
-
-        public static S Max => MaxVal;
-
         public static N N => default;
+        
+        /// <summary>
+        /// Specifies the minimum <see cref='S'/> value
+        /// </summary>
+        public static S Min 
+        {
+            [MethodImpl(Inline)]
+            get => new S(MinVal,true);
+        }
 
+        /// <summary>
+        /// Specifies the maximum <see cref='S'/> value
+        /// </summary>
+        public static S Max 
+        {
+            [MethodImpl(Inline)]
+            get => new S(MaxVal,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='S'/> zero value
+        /// </summary>
+        public static S Zero 
+        {
+            [MethodImpl(Inline)]
+            get => new S(0,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='S'/> one value
+        /// </summary>
+        public static S One 
+        {
+            [MethodImpl(Inline)]
+            get => new S(1,true);
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator octet(S src)
@@ -169,12 +196,12 @@ namespace Z0
             => xor(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static S operator >>(S lhs, int rhs)
-            => srl(lhs,rhs);
+        public static S operator >>(S lhs, int count)
+            => srl(lhs, (byte)count);
 
         [MethodImpl(Inline)]
-        public static S operator <<(S lhs, int rhs)
-            => sll(lhs,rhs);
+        public static S operator <<(S lhs, int count)
+            => sll(lhs, (byte)count);
 
         [MethodImpl(Inline)]
         public static S operator ~(S src)
@@ -213,7 +240,7 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
-        uint5(octet src)
+        internal uint5(octet src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
@@ -221,8 +248,8 @@ namespace Z0
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint5(byte src, bool safe)
-            => data = (byte)(src & MaxVal);
+        internal uint5(byte src, bool @unchecked)
+            => data = (byte)src;
 
         [MethodImpl(Inline)]
         internal uint5(sbyte src)
@@ -291,6 +318,24 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data != 0;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the maximum value
+        /// </summary>
+        public bool IsMax
+        {
+            [MethodImpl(Inline)]
+            get => data == MaxVal;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the minimum value
+        /// </summary>
+        public bool IsMin
+        {
+            [MethodImpl(Inline)]
+            get => data == MinVal;
         }
 
         [MethodImpl(Inline)]

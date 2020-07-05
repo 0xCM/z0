@@ -8,11 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;    
+    using N = N15;
 
-    public readonly struct N15 : 
-        INativeNatural, 
-        INatNumber<N15>,
-        INatPrior<N15,N14>
+    public readonly struct N15 : INatPrimitive<N>, INativeNatural        
     {
         public const ulong Value = 15;
 

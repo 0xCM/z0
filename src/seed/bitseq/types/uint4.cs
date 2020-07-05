@@ -19,9 +19,9 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level quartet and thus is an integer in the range [0,15]
     /// </summary>
-    public struct uint4 : IBitSeq<S,W,K,T>
+    public readonly struct uint4 : IBitSeq<S,W,K,T>
     {
-        internal byte data;
+        internal readonly byte data;
 
         public const byte MinVal = 0;
 
@@ -29,19 +29,47 @@ namespace Z0
 
         public const byte Count = (byte)MaxVal + 1;
 
-        public const int Width = 4;        
+        public const byte Width = 4;        
 
         public static W W => default;
 
-        public static S Min => MinVal;
-
-        public static S Max => MaxVal;
-
-        public static S Zero => 0;
-
-        public static S One => 1;
-
         public static N N => default;
+
+        /// <summary>
+        /// Specifies the minimum <see cref='S'/> value
+        /// </summary>
+        public static S Min 
+        {
+            [MethodImpl(Inline)]
+            get => new S(MinVal,true);
+        }
+
+        /// <summary>
+        /// Specifies the maximum <see cref='S'/> value
+        /// </summary>
+        public static S Max 
+        {
+            [MethodImpl(Inline)]
+            get => new S(MaxVal,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='S'/> zero value
+        /// </summary>
+        public static S Zero 
+        {
+            [MethodImpl(Inline)]
+            get => new S(0,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='S'/> one value
+        /// </summary>
+        public static S One 
+        {
+            [MethodImpl(Inline)]
+            get => new S(1,true);
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator octet(S src)
@@ -149,27 +177,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static S operator * (S lhs, S rhs)
-            => reduce((uint)lhs.data * (uint)rhs.data);
+            => reduce4((byte)(lhs.data * rhs.data));
 
         [MethodImpl(Inline)]
         public static S operator / (S lhs, S rhs) 
-            => wrap4((uint)lhs.data / (uint)rhs.data);
+            => wrap4((byte)(lhs.data / rhs.data));
 
         [MethodImpl(Inline)]
         public static S operator % (S lhs, S rhs)
-            => wrap4((uint)lhs.data % (uint)rhs.data);
+            => wrap4((byte)(lhs.data % rhs.data));
 
         [MethodImpl(Inline)]
         public static S operator |(S lhs, S rhs)
-            => wrap4((uint)lhs.data | (uint)rhs.data);
+            => wrap4((byte)(lhs.data | rhs.data));
 
         [MethodImpl(Inline)]
         public static S operator &(S lhs, S rhs)
-            => wrap4((uint)lhs.data & (uint)rhs.data);
+            => wrap4((byte)(lhs.data & rhs.data));
 
         [MethodImpl(Inline)]
         public static S operator ^(S lhs, S rhs)
-            => wrap4((uint)(lhs.data & rhs.data) & (uint)MaxVal);
+            => wrap4((byte)((byte)(lhs.data & rhs.data) & MaxVal));
 
         [MethodImpl(Inline)]
         public static S operator >>(S lhs, int rhs)
@@ -181,7 +209,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static S operator ~(S src)
-            => wrap4((uint)(~src.data & MaxVal));
+            => wrap4((byte)(~src.data & MaxVal));
 
         [MethodImpl(Inline)]
         public static S operator ++(S x)
@@ -249,35 +277,21 @@ namespace Z0
         }
 
         /// <summary>
-        /// Queries and manipulates the lower two bits
+        /// Specifies whether the current value is the maximum value
         /// </summary>
-        public S Lo
+        public bool IsMax
         {
             [MethodImpl(Inline)]
-            get => lo(this);
-            
-            [MethodImpl(Inline)]
-            set 
-            {
-                BitSeqD.set(this, 0, BitSeqD.test(this, 0));
-                BitSeqD.set(this, 1, BitSeqD.test(this, 1));
-            }
+            get => data == MaxVal;
         }
 
         /// <summary>
-        /// Queries and manipulates the upper two bits
+        /// Specifies whether the current value is the minimum value
         /// </summary>
-        public S Hi
+        public bool IsMin
         {
             [MethodImpl(Inline)]
-            get => BitSeqD.hi(this);
-
-            [MethodImpl(Inline)]
-            set
-            {
-                BitSeqD.set(this, 2, BitSeqD.test(this, 2));
-                BitSeqD.set(this, 3, BitSeqD.test(this, 3));
-            }
+            get => data == MinVal;
         }
 
         [MethodImpl(Inline)]
@@ -289,43 +303,11 @@ namespace Z0
             => data = crop4(src);
 
         [MethodImpl(Inline)]
-        internal uint4(sbyte src)
-            => data = crop4(src);
-
-        [MethodImpl(Inline)]
-        internal uint4(short src)
-            => data = crop4(src);
-
-        [MethodImpl(Inline)]
-        internal uint4(ushort src)
-            => data = crop4(src);
-
-        [MethodImpl(Inline)]    
-        internal uint4(int src)
-            => data = crop4(src);
-        
-        [MethodImpl(Inline)]
-        internal uint4(uint src)
-            => data = crop4(src);
-
-        [MethodImpl(Inline)]
-        internal uint4(long src)
-            => data = (byte)((uint)src & MaxVal);
-
-        [MethodImpl(Inline)]
-        internal uint4(uint src, bool safe)
+        internal uint4(byte src, bool @unchecked)
             => data = (byte)src;
 
         [MethodImpl(Inline)]
         internal uint4(K src)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint4(bool src)
-            => data = (byte)As.bit(src);
-
-        [MethodImpl(Inline)]
-        internal uint4(Bit src)
             => data = (byte)src;
 
         /// <summary>
@@ -352,14 +334,6 @@ namespace Z0
         }
 
         public override int GetHashCode()
-            => (int)Hash;
-
-        [MethodImpl(Inline)]
-        internal static uint reduce(uint x) 
-            => BitSeqD.reduce4(x);
-
-        [MethodImpl(Inline)]
-        internal static S Wrap(uint src) 
-            => BitSeqD.wrap4(src);
+            => (int)Hash; 
     }
 }

@@ -19,29 +19,57 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level sextet and thus is an integer in the range [0,63]
     /// </summary>
-    public struct uint6 : IBitSeq<S,W,K,T>
+    public readonly struct uint6 : IBitSeq<S,W,K,T>
     {
-        internal byte data;
+        internal readonly byte data;
 
         public const byte MinVal = 0;
 
         public const byte MaxVal = 63;
 
-        public const uint Count = MaxVal + 1;
+        public const byte Count = MaxVal + 1;
 
         public const byte Width = 6;        
 
         public static W W => default;
 
-        public static S Min => MinVal;
-
-        public static S Max => MaxVal;
-
         public static N N => default;
 
-        public static S Zero => 0;
+        /// <summary>
+        /// Specifies the minimum <see cref='S'/> value
+        /// </summary>
+        public static S Min 
+        {
+            [MethodImpl(Inline)]
+            get => new S(MinVal,true);
+        }
 
-        public static S One => 1;
+        /// <summary>
+        /// Specifies the maximum <see cref='S'/> value
+        /// </summary>
+        public static S Max 
+        {
+            [MethodImpl(Inline)]
+            get => new S(MaxVal,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='S'/> zero value
+        /// </summary>
+        public static S Zero 
+        {
+            [MethodImpl(Inline)]
+            get => new S(0,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='S'/> one value
+        /// </summary>
+        public static S One 
+        {
+            [MethodImpl(Inline)]
+            get => new S(1,true);
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator octet(S src)
@@ -168,16 +196,16 @@ namespace Z0
             => xor(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static S operator >>(S lhs, int rhs)
-            => srl(lhs,rhs);
+        public static S operator >>(S lhs, int count)
+            => srl(lhs, (byte)count);
 
         [MethodImpl(Inline)]
-        public static S operator <<(S lhs, int rhs)
-            => sll(lhs,rhs);
+        public static S operator <<(S lhs, int count)
+            => sll(lhs, (byte)count);
 
         [MethodImpl(Inline)]
         public static S operator ~(S src)
-            => wrap6(~src.data & MaxVal);
+            => wrap6((byte)(~src.data & MaxVal));
 
         [MethodImpl(Inline)]
         public static S operator ++(S x)
@@ -212,13 +240,17 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
-        uint6(octet src)
+        internal uint6(octet src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
         internal uint6(byte src)
             => data = (byte)(src & MaxVal);
 
+        [MethodImpl(Inline)]
+        internal uint6(byte src, bool @unchecked)
+            => data = (byte)src;
+        
         [MethodImpl(Inline)]
         internal uint6(sbyte src)
             => data = (byte)((uint)src & MaxVal);
@@ -286,6 +318,24 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data != 0;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the maximum value
+        /// </summary>
+        public bool IsMax
+        {
+            [MethodImpl(Inline)]
+            get => data == MaxVal;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the minimum value
+        /// </summary>
+        public bool IsMin
+        {
+            [MethodImpl(Inline)]
+            get => data == MinVal;
         }
 
         [MethodImpl(Inline)]

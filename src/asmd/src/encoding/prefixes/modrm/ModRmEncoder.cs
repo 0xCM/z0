@@ -39,9 +39,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static int fill(Span<ModRmEncoding> dst)
         {
-            var rm = BitSeqD.Triads;
-            var reg = BitSeqD.Triads;
-            var mod = BitSeqD.Duets;
+            var rm = BitSeqD.U3;
+            var reg = BitSeqD.U3;
+            var mod = BitSeqD.U2;
             var i = 0;
             for(var a=0; a<rm.Length; a++)
             for(var b=0; b<reg.Length; b++)

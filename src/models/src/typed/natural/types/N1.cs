@@ -9,6 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    using N = N1;
+    using W = W1;
+
     /// <summary>
     /// The singleton type representative for 1
     /// </summary>
@@ -18,27 +21,31 @@ namespace Z0
 
         public const string Text = "1";
 
+        public static N N => default;
+
+        public static W W => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator int(N src) 
+            => (int)Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(N src) 
+            => (byte)Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator W(N src) 
+            => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator N(W src) 
+            => default;
+
         public ulong NatValue 
             => Value;
 
         public string NatText 
             => Text;
-
-        [MethodImpl(Inline)]
-        public static implicit operator int(N1 src) 
-            => (int)Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator byte(N1 src) 
-            => (byte)Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator W1(N1 src) 
-            => default;
-
-        [MethodImpl(Inline)]
-        public static implicit operator N1(W1 src) 
-            => default;
 
         [MethodImpl(Inline)]
         public string Format()

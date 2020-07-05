@@ -45,16 +45,6 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes an F-bound polymorphic type nat reification
-    /// </summary>
-    /// <typeparam name="F">The reification type</typeparam>
-    public interface ITypeNatF<F> : ITypeNat<F>, IReified<F>
-        where F : unmanaged, ITypeNatF<F>
-    {
-
-    }
-
-    /// <summary>
     /// Characterizes a type-level sequence of typenats
     /// </summary>
     public interface INatSeq : ITypeNat
@@ -72,7 +62,7 @@ namespace Z0
 
     }
 
-    public interface INatNumber<F> : ITypeNatF<F>
+    public interface INatNumber<F> : ITypeNat<F>
         where F : unmanaged, INatNumber<F>
     {
 
@@ -90,7 +80,7 @@ namespace Z0
     /// Characterizes an atom of the type natural grammar
     /// </summary>
     /// <typeparam name="N">The reifying type</typeparam>
-    public interface INatPrimitive<N> : INatNumber<N>
+    public interface INatPrimitive<N> : INatNumber<N>, INatSeq<N>
         where N : unmanaged, INatPrimitive<N>
     {
         

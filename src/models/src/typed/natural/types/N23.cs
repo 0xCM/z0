@@ -8,19 +8,27 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;    
+    using N = N23;
 
-    public readonly struct N23 : INativeNatural, INatSeq<N23,N2,N3>
+    public readonly struct N23 : INativeNatural, INatPrimitive<N>
     {
         public const ulong Value = 23;
 
-        public static N23 Rep => default;
+        public const string Text = "23";
+
+        public static N N  => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N23 src) => 23;
+        public static implicit operator int(N23 src) 
+            => (int)Value;
         
-        public ulong NatValue => Value;
+        public ulong NatValue 
+            => Value;
+
+        public string NatText 
+            => Text;
 
         public override string ToString() 
-            => Value.ToString();
+            => Text;
     }
 }

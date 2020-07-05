@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">An even natural type</typeparam>
     public readonly struct NatEven<K> : INatEven<K>
-        where K: unmanaged, ITypeNat<K>
+        where K: unmanaged, ITypeNat
     {
         static K k => default;
         

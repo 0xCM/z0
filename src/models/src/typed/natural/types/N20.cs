@@ -9,43 +9,53 @@ namespace Z0
     
     using static Konst;    
 
-    public readonly struct N20 : 
-        INativeNatural, 
-        INatNumber<N20>
+    using N = N20;
+    
+    public readonly struct N20 : INativeNatural, INatPrimitive<N>
     {
         public const ulong Value = 20;
 
         public const string Text = "20";
-
-        public ulong NatValue => Value;
-
-        public string NatText => Text;
+        
+        public static N N => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N20 src) 
+        public static implicit operator int(N src) 
             => (int)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(N20 src) 
+        public static implicit operator byte(N src) 
             => (byte)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator ushort(N20 src) 
+        public static implicit operator ushort(N src) 
             => (ushort)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(N20 src) 
+        public static implicit operator uint(N src) 
             => (uint)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator ulong(N20 src) 
+        public static implicit operator ulong(N src) 
+            => Value; 
+
+        public uint Hash
+            => (uint)Value;
+
+        public override int GetHashCode() 
+            => (int)Hash;
+        
+        public ulong NatValue 
             => Value;
 
-        public override string ToString() 
+        public string NatText 
             => Text;
-        
+
         [MethodImpl(Inline)]
         public string Format()
             => Text;             
+ 
+        public override string ToString() 
+            => Format();       
     }
 }

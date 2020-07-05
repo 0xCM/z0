@@ -8,8 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;    
+    
+    using N = N21;
 
-    public readonly struct N21 : INativeNatural, INatSeq<N21>
+    public readonly struct N21 : INativeNatural, INatPrimitive<N>
     {
         public const ulong Value = 21;
 

@@ -9,8 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    using analog = uint4;
-
+    using S = uint4;
+    
     partial class BitSeqD
     {
         /// <summary>
@@ -18,77 +18,73 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint4(bool src)
-            => new analog(As.bit(src));
+        public static S uint4(bool src)
+            => wrap4((byte)As.bit(src));
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint4(byte src)
-            => new analog(src);
+        public static S uint4(byte src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint4(sbyte src)
-            => new analog(src);
+        public static S uint4(sbyte src)
+            => new S((byte)src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint4(ushort src)
-            => new analog(src);
+        public static S uint4(ushort src)
+            => new S((byte)src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint4(short src)
-            => new analog(src);
+        public static S uint4(short src)
+            => new S((byte)src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint4(int src)
-            => new analog(src);
+        public static S uint4(int src)
+            => new S((byte)src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint4(uint src)
-            => new analog(src);
+        public static S uint4(uint src)
+            => new S((byte)src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint4(long src)
-            => new analog(src);
+        public static S uint4(long src)
+            => new S((byte)src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint4(ulong src)        
-            => new analog((byte)((byte)src & analog.MaxVal));
+        public static S uint4(ulong src)        
+            => new S((byte)((byte)src & S.MaxVal));
 
-        [MethodImpl(Inline), Op]
-        public static ref analog edit(in analog src)
-            => ref Unsafe.AsRef(src);
-        
         /// <summary>
         /// Creates a 4-bit unsigned integer from a 4-term bit sequence
         /// </summary>
@@ -97,102 +93,86 @@ namespace Z0
         /// <param name="x2">The term at index 2</param>
         /// <param name="x3">The term at index 3</param>
         [MethodImpl(Inline), Op]
-        public static analog uint4(bit x0, bit x1 = default, bit x2 = default, bit x3 = default)
-             => analog.Wrap(((uint)x0 << 0) | ((uint)x1 << 1) | ((uint)x2 << 2) | ((uint)x3 << 3));
-
+        public static S uint4(Bit x0, Bit x1 = default, Bit x2 = default, Bit x3 = default)
+             => wrap4(core.or(
+                 core.sll((byte)x0, 0),
+                 core.sll((byte)x1, 1),
+                 core.sll((byte)x2, 2),
+                 core.sll((byte)x3, 3)
+                 ));
+                 
         [MethodImpl(Inline), Op]
-        public static analog add(analog x, analog y)
+        public static S add(S x, S y)
         {
-            const byte modulus = 16;
-            var sum = (byte)(x.data + y.data);
-            return analog.Wrap((sum >= modulus) ? (byte)(sum - modulus): sum);
+            var sum = core.add(x.data,y.data);
+            var result = core.gteq(sum, S.Count) ? core.sub(sum, S.Count) : sum;
+            return new S(result, true);
         }
 
         [MethodImpl(Inline), Op]
-        public static analog sub(analog x, analog y)
+        public static S sub(S x, S y)
         {
-            const byte modulus = 16;
-            var diff = (int)x - (int)y;
-            return analog.Wrap(diff < 0 ? (uint)(diff + modulus) : (uint)diff);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static analog mul(analog lhs, analog rhs)
-            => reduce4(lhs.data * rhs.data);
-
-        [MethodImpl(Inline), Op]
-        public static analog inc(analog x)
-        {
-            if(x.data != analog.MaxVal)
-                return ++x.data;
+            var delta = x.data - y.data;
+            if(delta < 0)
+                return wrap4((byte)(delta + S.Count));
             else
-                return analog.MinVal;
+                return wrap4((byte)delta);            
         }
 
         [MethodImpl(Inline), Op]
-        public static analog dec(analog src)
-        {
-            if(src.data != analog.MinVal)
-                src.data--;
-            else
-                src.data = analog.MaxVal;
-            return src;
-        }
+        public static S mul(S lhs, S rhs)
+            => reduce4((byte)(lhs.data * rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog hi(analog src)
-            => wrap4(src.data >> 2 & 0b11);
+        public static S inc(S x)
+            => !x.IsMax ? new S(core.add(x.data, 1), false) : S.Min;
 
         [MethodImpl(Inline), Op]
-        public static analog lo(analog src)
-            => wrap4(src.data & 0b11);
+        public static S dec(S x)
+            => !x.IsMin ? new S(core.sub(x.data, 1), false) : S.Max;
 
         [MethodImpl(Inline), Op]
-        public static Bit test(analog src, byte pos)
+        public static S hi(S src)
+            => wrap4((byte)(src.data >> 2 & 0b11));
+
+        [MethodImpl(Inline), Op]
+        public static S lo(S src)
+            => wrap4((byte)(src.data & 0b11));
+
+        [MethodImpl(Inline), Op]
+        public static Bit test(S src, byte pos)
             => core.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static ref analog set(in analog src, byte pos, Bit state)
+        public static S set(S src, byte pos, Bit state)
         {
-            ref var dst = ref Unsafe.AsRef(src);
-            if(pos < analog.Width)
-                dst.data = core.set(src.data, pos, state);
-            return ref dst;
+            if(pos < S.Width)
+                return wrap4(core.set(src.data, pos, state));
+            else
+                return src;
         }
 
         [MethodImpl(Inline)]
-        public static bool eq(analog x, analog y)
+        public static bool eq(S x, S y)
             => x.data == y.data;
 
         [MethodImpl(Inline), Op]
-        internal static byte reduce4(uint x) 
-            => (byte)(x % analog.Count);
-
-        [MethodImpl(Inline), Op]
-        internal static byte reduce4(int x) 
-            => (byte)((uint)x % analog.Count);
+        internal static byte reduce4(byte x) 
+            => (byte)(x % S.Count);
 
         [MethodImpl(Inline)]
-        internal static analog wrap4(uint src) 
-            => new analog(src,false);
+        internal static S wrap4(byte src) 
+            => new S(src, false);
 
         [MethodImpl(Inline)]
-        internal static analog wrap4(int src) 
-            => new analog((byte)src,false);
-
-        [MethodImpl(Inline)]
-        internal static byte crop4(int x) 
-            => (byte)(0xF & x);
-
-        [MethodImpl(Inline)]
-        internal static byte crop4(uint x) 
-            => (byte)(0xF & x);
+        internal static byte crop4(byte x) 
+            => (byte)(S.MaxVal & x);
 
         static BitFormatConfig FormatConfig4 
-            => BitFormatter.limited(analog.Width,analog.Width);
+            => BitFormatter.limited(S.Width, S.Width);
         
         [MethodImpl(Inline)]
-        public static string format(analog src)
+        public static string format(S src)
             => BitFormatter.format(src.data, FormatConfig4);
     }
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    
     using N = N0;
 
     public interface INat0<F> : INatNumber<N>, INatSeq<N>, INatEven<N>, INatPrimitive<N>

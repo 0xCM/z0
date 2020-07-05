@@ -9,17 +9,12 @@ namespace Z0
 
     using static Konst;
 
+    using N = N9;
+
     /// <summary>
     /// The singleton type representative for 9
     /// </summary>
-    public readonly struct N9 : 
-        INat9<N9>,
-        INativeNatural,
-        INatPrimitive<N9>, 
-        INatPrior<N9,N8>,
-        INatSeq<N9>,
-        INatOdd<N9>,
-        INatDivisible<N9,N3>
+    public readonly struct N9 : INatPrimitive<N>, INativeNatural
     {
         public const ulong Value = 9;
 

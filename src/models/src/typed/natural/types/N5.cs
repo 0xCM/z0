@@ -9,29 +9,47 @@ namespace Z0
 
     using static Konst;
 
+    using N = N5;
+    using W = W5;
+
     /// <summary>
     /// The singleton type representative for 5
     /// </summary>
-    public readonly struct N5 : INat5<N5>, INativeNatural
+    public readonly struct N5 : INatPrimitive<N>, INativeNatural
     {
         public const ulong Value = 5;
 
         public const string Text = "5";
 
-        public ulong NatValue => Value;
-
-        public string NatText => Text;
+        public static N N => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(N5 src) => (byte)Value;
+        public static implicit operator byte(N src)
+            => (byte)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N5 src) => (int)Value;
+        public static implicit operator int(N src) 
+            => (int)Value;
 
-        public override string ToString() => Text;
+        [MethodImpl(Inline)]
+        public static implicit operator W(N src) 
+            => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator N(W src) 
+            => default;
+
+        public ulong NatValue 
+            => Value;
+
+        public string NatText 
+            => Text;
 
         [MethodImpl(Inline)]
         public string Format()
             => Text;
+
+        public override string ToString() 
+            => Format();
     }
 }

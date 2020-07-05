@@ -9,7 +9,9 @@ namespace Z0
     
     using static Konst;    
 
-    public readonly struct N22 : INativeNatural, INatSeq<N22>, INatEven<N22>
+    using N = N22;
+
+    public readonly struct N22 : INativeNatural, INatPrimitive<N>
     {
         public const ulong Value = 22;
 

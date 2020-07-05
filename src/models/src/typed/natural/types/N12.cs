@@ -11,10 +11,7 @@ namespace Z0
     
     using N = N12;
 
-    public readonly struct N12 : 
-        INativeNatural, 
-        INatPrior<N12,N11>,
-        INatNumber<N12>
+    public readonly struct N12 : INativeNatural, INatPrimitive<N>
     {
         public const ulong Value = 12;
 

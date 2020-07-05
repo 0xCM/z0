@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using analog = uint3;
+    using S = uint3;
 
     partial class BitSeqD
     {
@@ -18,73 +18,72 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint3(bool src)
-            => new analog(As.bit(src));
+        public static S uint3(bool src)
+            => new S(As.bit(src));
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from the least 3 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(byte src)
-            => new analog(src);
+        public static S uint3(byte src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from the least 3 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(sbyte src)
-            => new analog(src);
+        public static S uint3(sbyte src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from the least 3 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(ushort src)
-            => new analog(src);
+        public static S uint3(ushort src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from the least 3 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(short src)
-            => new analog(src);
+        public static S uint3(short src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from the least 3 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint3(int src)
-            => new analog(src);
+        public static S uint3(int src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from the least 3 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(uint src)
-            => new analog(src);
+        public static S uint3(uint src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from the least 3 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint3(long src)
-            => new analog(src);
+        public static S uint3(long src)
+            => new S(src);
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from the least 3 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(ulong src)        
-            => new analog((byte)((byte)src & analog.MaxVal));
-
+        public static S uint3(ulong src)        
+            => new S((byte)((byte)src & S.MaxVal));
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from a 3-term bit sequence
@@ -93,116 +92,105 @@ namespace Z0
         /// <param name="x1">The term at index 1</param>
         /// <param name="x2">The term at index 2</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(Bit x0, Bit x1 = default, Bit x2 = default)
-             => wrap3(((uint)x0 << 0) | ((uint)x1 << 1) | ((uint)x2 << 2));
-
-        [MethodImpl(Inline), Op]
-        public static ref analog edit(in analog src)
-            => ref Unsafe.AsRef(src);
+        public static S uint3(Bit x0, Bit x1 = default, Bit x2 = default)
+             => wrap3((byte)(
+                 ((uint)x0 << 0) | 
+                 ((uint)x1 << 1) | 
+                 ((uint)x2 << 2)
+                 ));
         
         [MethodImpl(Inline), Op]
-        public static analog add(analog x, analog y)
+        public static S add(S x, S y)
         {
             var sum = x.data + y.data;
-            return wrap3((sum >= analog.Count) ? sum - analog.Count: sum);
+            return wrap3((sum >= S.Count) ? (byte)(sum - S.Count): (byte)sum);
         }
 
         [MethodImpl(Inline), Op]
-        public static analog sub(analog x, analog y)
+        public static S sub(S x, S y)
         {
             var diff = (int)x - (int)y;
-            return wrap3(diff < 0 ? (byte)(diff + analog.Count) : (byte)diff);
+            return wrap3(diff < 0 ? (byte)(diff + S.Count) : (byte)diff);
         }
 
         [MethodImpl(Inline), Op]
-        public static analog mul(analog lhs, analog rhs)
+        public static S mul(S lhs, S rhs)
             => reduce4((byte)(lhs.data * rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog div (analog lhs, analog rhs) 
+        public static S div (S lhs, S rhs) 
             => wrap3((byte)(lhs.data / rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog mod (analog lhs, analog rhs)
+        public static S mod (S lhs, S rhs)
             => wrap3((byte)(lhs.data % rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog or(analog lhs, analog rhs)
+        public static S or(S lhs, S rhs)
             => wrap3((byte)(lhs.data | rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog and(analog lhs, analog rhs)
+        public static S and(S lhs, S rhs)
             => wrap3((byte)(lhs.data & rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog xor(analog lhs, analog rhs)
+        public static S xor(S lhs, S rhs)
             => wrap3((byte)(lhs.data ^ rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static analog srl(analog lhs, int rhs)
+        public static S srl(S lhs, byte rhs)
             => uint3(lhs.data >> rhs);
 
         [MethodImpl(Inline), Op]
-        public static analog sll(analog lhs, int rhs)
+        public static S sll(S lhs, byte rhs)
             => uint3(lhs.data << rhs);
 
         [MethodImpl(Inline), Op]
-        public static analog inc(analog x)
-        {
-            if(x.data != analog.MaxVal)
-                return ++x.data;
-            else
-                return  analog.MinVal;
-        }
+        public static S inc(S x)
+            => !x.IsMax ? new S(core.add(x.data, 1), false) : S.Min;
 
         [MethodImpl(Inline), Op]
-        public static analog dec(analog src)
-        {
-            if(src.data != analog.MinVal)
-                src.data--;
-            else
-                src.data = analog.MaxVal;
-            return src;
-        }
+        public static S dec(S x)
+            => !x.IsMin ? new S(core.sub(x.data, 1), false) : S.Max;
 
         [MethodImpl(Inline), Op]
-        public static Bit test(analog src, byte pos)
+        public static Bit test(S src, byte pos)
             => core.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static ref analog set(in analog src, byte pos, Bit state)
+        public static S set(S src, byte pos, Bit state)
         {
-            ref var dst = ref Unsafe.AsRef(src);
-            if(pos < analog.Width)
-                dst.data = core.set(src.data, pos, state);
-            return ref dst;
+            if(pos < S.Width)
+                return wrap3(core.set(src.data, pos, state));
+            else
+                return src;
         }
 
         [MethodImpl(Inline), Op]
-        public static bool eq(analog x, analog y)
+        public static bool eq(S x, S y)
             => x.data == y.data;
 
         [MethodImpl(Inline), Op]
-        internal static uint reduce3(uint x) 
-            => x % analog.Count;
-
-        [MethodImpl(Inline), Op]
         internal static byte reduce3(byte x) 
-            => (byte)(x % analog.Count);
+            => (byte)(x % S.Count);
 
         [MethodImpl(Inline)]
-        internal static analog wrap3(uint src) 
-            => new analog((byte)src,false);
+        internal static S wrap3(byte src) 
+            => new S(src,false);
 
         [MethodImpl(Inline)]
-        internal static analog wrap3(int src)         
-            => new analog((byte)src,false);
+        internal static S wrap3(int src)         
+            => new S((byte)src,false);
 
+        [MethodImpl(Inline)]
+        internal static byte crop3(byte x) 
+            => (byte)(S.MaxVal & x);
+        
         static BitFormatConfig FormatConfig3 
-            => BitFormatter.limited(analog.Width,analog.Width);
+            => BitFormatter.limited(S.Width,S.Width);
         
         [MethodImpl(Inline)]
-        public static string format(analog src)
+        public static string format(S src)
             => BitFormatter.format(src.data, FormatConfig3);
 
         /// <summary>
@@ -211,7 +199,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static uint4 extend(analog src, W4 w)
+        public static uint4 extend(S src, W4 w)
             => src;
 
         /// <summary>
@@ -220,7 +208,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static uint5 extend(analog src, W5 w)
+        public static uint5 extend(S src, W5 w)
             => src;
 
         /// <summary>
@@ -229,7 +217,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static uint6 extend(analog src, W6 w)
+        public static uint6 extend(S src, W6 w)
             => src;
 
         /// <summary>
@@ -238,7 +226,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static octet extend(analog src, W8 w)
+        public static octet extend(S src, W8 w)
             => src;
     }
 }

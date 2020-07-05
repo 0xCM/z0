@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface INat2<F> : 
         INatNumber<N2>, 
         INatPrimitive<N2>, 

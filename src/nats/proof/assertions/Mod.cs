@@ -42,7 +42,6 @@ namespace Z0
             where K3 : unmanaged, ITypeNat
                 => new NatMod<K1,K2,K3>(k1, k2, k3);
 
-
         /// <summary>
         /// Attempts to prove that k:K1 => k % 2 == 0
         /// Signals success by returning evidence
@@ -51,7 +50,7 @@ namespace Z0
         /// <typeparam name="K">An even natural type</typeparam>
         [MethodImpl(Inline)]
         public static NatEven<K> even<K>()
-            where K: unmanaged, ITypeNat<K>
+            where K: unmanaged, ITypeNat
                 => new NatEven<K>(natrep<K>());
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace Z0
         /// <typeparam name="K">An even natural type</typeparam>
         [MethodImpl(Inline)]
         public static NatEven<K> even<K>(K k)
-            where K: unmanaged, ITypeNat<K>
+            where K: unmanaged, ITypeNat
                 => new NatEven<K>(k);
 
         /// <summary>

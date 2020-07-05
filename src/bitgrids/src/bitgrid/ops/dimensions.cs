@@ -122,7 +122,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="W">The grid dimension type</typeparam>
         public static IEnumerable<Pair<ulong>> p2dimensions<W>()
-            where W : unmanaged,  ITypeNat<W>, INatPow2<W>
+            where W : unmanaged,INatPow2<W>
                 => p2dimensions(value<W>());
 
         /// <summary>

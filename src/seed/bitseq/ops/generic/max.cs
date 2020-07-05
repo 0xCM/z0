@@ -10,38 +10,40 @@ namespace Z0
     using static Konst;
     using static Typed;
 
-    using d = BitSeqD;
+    using X = Z0;
 
     partial class BitSeqG
     {
         [MethodImpl(Inline)]
-        public static S inc<S>(S src)
-            where S : unmanaged, IBitSeq<S,byte>
+        public static S max<S,T>()
+            where S : unmanaged, IBitSeq<S,T>
+            where T : unmanaged
         {
-            if(typeof(S) == typeof(uint1))
-                return generic<S>(d.inc(uint1(src)));
+            if(match<S,uint1>())
+                return cast<S>(X.uint1.MaxVal);
             else if(match<S,uint2>())
-                return generic<S>(d.inc(uint2(src)));
+                return cast<S>(X.uint2.MaxVal);
             else if(match<S,uint3>())
-                return generic<S>(d.inc(uint3(src)));
+                return cast<S>(X.uint3.MaxVal);
             else if(match<S,uint4>())
-                return generic<S>(d.inc(uint4(src)));
+                return cast<S>(X.uint4.MaxVal);
             else 
-                return inc<S>(w5, src);
+                return max<S,T>(w5);
         }
 
         [MethodImpl(Inline)]
-        static S inc<S>(W5 w5, S src)
-            where S : unmanaged, IBitSeq<S,byte>
+        static S max<S,T>(W5 w5)
+            where S : unmanaged, IBitSeq<S,T>
+            where T : unmanaged
         {
             if(match<S,uint5>())
-                return generic<S>(d.inc(uint5(src)));
+                return cast<S>(X.uint5.MaxVal);
             else if(match<S,uint6>())
-                return generic<S>(d.inc(uint6(src)));
+                return cast<S>(X.uint6.MaxVal);
             else if(match<S,uint7>())
-                return generic<S>(d.inc(uint7(src)));
+                return cast<S>(X.uint7.MaxVal);
             else if(match<S,octet>())
-                return generic<S>(d.inc(uint8(src)));
+                return cast<S>(X.octet.MaxVal);
             else
                 throw no<S>();
         }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;    
 
-    public readonly struct N35 : INatSeq<N35>
+    public readonly struct N35 : INativeNatural, INatPrimitive<N35>
     {
         public const ulong Value = 35;
 
