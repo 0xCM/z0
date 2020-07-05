@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static analog uint3(ulong src)        
-            => new analog((byte)((byte)src & analog.Max8u));
+            => new analog((byte)((byte)src & analog.MaxVal));
 
 
         /// <summary>
@@ -100,14 +100,14 @@ namespace Z0
         public static analog add(analog x, analog y)
         {
             var sum = x.data + y.data;
-            return wrap3((sum >= analog.Base) ? sum - analog.Base: sum);
+            return wrap3((sum >= analog.Count) ? sum - analog.Count: sum);
         }
 
         [MethodImpl(Inline), Op]
         public static analog sub(analog x, analog y)
         {
             var diff = (int)x - (int)y;
-            return wrap3(diff < 0 ? (byte)(diff + analog.Base) : (byte)diff);
+            return wrap3(diff < 0 ? (byte)(diff + analog.Count) : (byte)diff);
         }
 
         [MethodImpl(Inline), Op]
@@ -145,19 +145,19 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static analog inc(analog x)
         {
-            if(x.data != analog.Max8u)
+            if(x.data != analog.MaxVal)
                 return ++x.data;
             else
-                return  analog.Min8u;
+                return  analog.MinVal;
         }
 
         [MethodImpl(Inline), Op]
         public static analog dec(analog src)
         {
-            if(src.data != analog.Min8u)
+            if(src.data != analog.MinVal)
                 src.data--;
             else
-                src.data = analog.Max8u;
+                src.data = analog.MaxVal;
             return src;
         }
 
@@ -166,20 +166,12 @@ namespace Z0
             => core.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static analog bit(analog src, byte pos, Bit state)
+        public static ref analog set(in analog src, byte pos, Bit state)
         {
+            ref var dst = ref Unsafe.AsRef(src);
             if(pos < analog.Width)
-                return core.set(src.data, pos, state);
-            else
-                return src;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref analog bit(ref analog src, byte pos, Bit state)
-        {
-            if(pos < analog.Width)
-                src.data = core.set(src.data, pos, state);
-            return ref src;
+                dst.data = core.set(src.data, pos, state);
+            return ref dst;
         }
 
         [MethodImpl(Inline), Op]
@@ -188,11 +180,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         internal static uint reduce3(uint x) 
-            => x % analog.Base;
+            => x % analog.Count;
 
         [MethodImpl(Inline), Op]
         internal static byte reduce3(byte x) 
-            => (byte)(x % analog.Base);
+            => (byte)(x % analog.Count);
 
         [MethodImpl(Inline)]
         internal static analog wrap3(uint src) 

@@ -25,9 +25,9 @@ namespace Z0
 
         public const byte MaxVal = 31;
 
-        public const int BitWidth = 5;        
+        public const int Width = 5;        
 
-        public const byte Base = (byte)MaxVal + 1;
+        public const byte Count = (byte)MaxVal + 1;
 
         public static analog Zero => 0;
 
@@ -213,6 +213,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal quintet(byte src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal quintet(byte src, bool safe)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]

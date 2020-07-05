@@ -18,13 +18,15 @@ namespace Z0
     /// </summary>
     public struct octet : IEquatable<analog>
     {
-        byte data;
+        internal byte data;
 
         public const byte MinVal = 0;
 
         public const byte MaxVal = byte.MaxValue;
 
-        public const int Width = 8;        
+        public const byte Width = 8; 
+
+        public const uint Count = 256;       
 
         public static analog Min => MinVal;
 

@@ -89,5 +89,13 @@ namespace Z0
         public static Bit test(analog src, byte pos)
             => core.test(src,pos);
 
+        [MethodImpl(Inline), Op]
+        public static ref analog set(in analog src, byte pos, Bit state)
+        {
+            ref var dst = ref Unsafe.AsRef(src);
+            if(pos < analog.Width)
+                dst.data = core.set(src.data, pos, state);
+            return ref dst;
+        }
     }
 }

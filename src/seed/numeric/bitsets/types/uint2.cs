@@ -22,22 +22,49 @@ namespace Z0
     {    
         internal byte data;
 
+        /// <summary>
+        /// Specifies the inclusive lower bound of the <see cref='analog'/> data type as a literal value
+        /// </summary>
         public const byte MinVal = 0;
 
+        /// <summary>
+        /// Specifies the inclusive upper bound of the <see cref='analog'/> data type as a literal value
+        /// </summary>
         public const byte MaxVal = 3;
 
-        public const int Width = 2;        
+        /// <summary>
+        /// Specifies the bit-width of the <see cref='analog'/> data type
+        /// </summary>
+        public const byte Width = 2;        
 
-        public const byte Base = (byte)MaxVal + 1;
+        /// <summary>
+        /// Specifies the count of unique values representable by a <see cref='analog'/>
+        /// </summary>
+        public const uint Count = MaxVal + 1;
 
+        /// <summary>
+        /// Specifies the minimum <see cref='analog'/> value
+        /// </summary>
         public static analog Min => MinVal;
 
+        /// <summary>
+        /// Specifies the maximum <see cref='analog'/> value
+        /// </summary>
         public static analog Max => MaxVal;
 
+        /// <summary>
+        /// Specifies the <see cref='analog'/> zero value
+        /// </summary>
         public static analog Zero => 0;
 
+        /// <summary>
+        /// Specifies the <see cref='analog'/> one value
+        /// </summary>
         public static analog One => 1;
 
+        /// <summary>
+        /// Specifies the <see cref='analog'/> bit-width as a natural number
+        /// </summary>
         public static N N => default;
 
         [MethodImpl(Inline)]
@@ -73,22 +100,27 @@ namespace Z0
             => (BK)src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator analog(Hex2Kind src) => (byte)src;
+        public static implicit operator analog(Hex2Kind src) 
+            => (byte)src;
 
         [MethodImpl(Inline)]
-        public static implicit operator analog(X00 src) => (byte)src;
+        public static implicit operator analog(X00 src) 
+            => (byte)src;
 
         [MethodImpl(Inline)]
-        public static implicit operator analog(X01 src) => (byte)src;
+        public static implicit operator analog(X01 src) 
+            => (byte)src;
 
         [MethodImpl(Inline)]
-        public static implicit operator analog(X02 src) => (byte)src;
+        public static implicit operator analog(X02 src) 
+            => (byte)src;
 
         [MethodImpl(Inline)]
-        public static implicit operator analog(X03 src) => (byte)src;
+        public static implicit operator analog(X03 src) 
+            => (byte)src;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 8-bit integer
+        /// Implicitly promotes a <see cref='analog'> value to a <see cref='byte'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -96,7 +128,7 @@ namespace Z0
             => (byte)src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 16-bit integer
+        /// Implicitly promotes a <see cref='analog'> value to a <see cref='ushort'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -104,7 +136,7 @@ namespace Z0
             => (ushort)src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 32-bit integer
+        /// Implicitly promotes a <see cref='analog'> value to a <see cref='uint'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -112,7 +144,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 63-bit integer
+        /// Implicitly promotes a <see cref='analog'> value to a <see cref='ulong'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -120,7 +152,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to a signed 32-bit integer
+        /// Implicitly promotes a <see cref='analog'> value to a <see cref='int'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -128,7 +160,7 @@ namespace Z0
             => (int)src.data;
 
         /// <summary>
-        /// Creates a 3-bit integer from the least four bits of the source operand
+        /// Converts a <see cref='byte'> value to a <see cref='analog'/> value, truncating as necessary
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]

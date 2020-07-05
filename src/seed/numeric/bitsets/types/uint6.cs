@@ -25,9 +25,9 @@ namespace Z0
 
         public const byte MaxVal = 63;
 
-        internal const byte Base = (byte)MaxVal + 1;
+        public const uint Count = MaxVal + 1;
 
-        internal const int BitWidth = 6;        
+        public const byte Width = 6;        
 
         public static analog Min => MinVal;
 
@@ -262,7 +262,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(N2 b)
-            => BitFormatter.format(data,BitWidth);
+            => BitFormatter.format(data,Width);
 
         [MethodImpl(Inline)]
         public string Format(N16 b)

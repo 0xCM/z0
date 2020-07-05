@@ -25,9 +25,9 @@ namespace Z0
 
         public const byte MaxVal = 127;
 
-        internal const byte Base = (byte)MaxVal + 1;
+        public const uint Count = MaxVal + 1;
 
-        internal const int Width = 7;        
+        public const byte Width = 7;        
 
         public static analog Min => MinVal;
 

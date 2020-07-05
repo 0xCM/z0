@@ -25,9 +25,9 @@ namespace Z0
 
         public const byte MaxVal = 1;
 
-        public const int Width = 1;        
+        public const byte Width = 1;        
 
-        public const byte Base = (byte)MaxVal + 1;
+        public const uint Count = MaxVal + 1;
 
         public static analog Min => MinVal;
 
@@ -58,7 +58,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator sextet(analog src)
             => new sextet(src.data);
-
 
         [MethodImpl(Inline)]
         public static implicit operator octet(analog src)
@@ -243,7 +242,7 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
-        single(octet src)
+        internal single(octet src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
@@ -279,12 +278,8 @@ namespace Z0
             => data = (byte)src;
 
         [MethodImpl(Inline)]
-        internal single(BK src)
+        internal single(Bit src)
             => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal single(bool src)
-            => data = (byte)As.bit(src);
 
         /// <summary>
         /// Renders the source value as as hexadecimal string

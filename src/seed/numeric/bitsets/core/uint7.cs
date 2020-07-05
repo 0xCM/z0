@@ -101,14 +101,14 @@ namespace Z0
         public static analog add(analog x, analog y)
         {
             var sum = (byte)(x.data + y.data);
-            return wrap7((sum >= analog.Base) ? (byte)(sum - analog.Base): sum);
+            return wrap7((sum >= analog.Count) ? (byte)(sum - analog.Count): sum);
         }
 
         [MethodImpl(Inline), Op]
         public static analog sub(analog x, analog y)
         {
             var diff = (int)x - (int)y;
-            return wrap7(diff < 0 ? (uint)(diff + analog.Base) : (uint)diff);
+            return wrap7(diff < 0 ? (uint)(diff + analog.Count) : (uint)diff);
         }
 
         [MethodImpl(Inline), Op]
@@ -168,23 +168,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ref analog set(in analog src, byte pos, Bit state)
-            => ref bit(ref As.edit(src), pos, state);   
-
-        [MethodImpl(Inline), Op]
-        public static analog bit(analog src, int pos, Bit bit)
         {
+            ref var dst = ref Unsafe.AsRef(src);
             if(pos < analog.Width)
-                return core.set(src.data, (byte)pos, bit);
-            else
-                return src;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref analog bit(ref analog src, int pos, Bit bit)
-        {
-            if(pos < analog.Width)
-                src.data = core.set(src.data, (byte)pos, bit);
-            return ref src;
+                dst.data = core.set(src.data, pos, state);
+            return ref dst;
         }
 
         [MethodImpl(Inline)]
@@ -193,11 +181,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         internal static byte reduce7(uint x) 
-            => (byte)(x % analog.Base);
+            => (byte)(x % analog.Count);
 
         [MethodImpl(Inline), Op]
         internal static byte reduce7(int x) 
-            => (byte)((uint)x % analog.Base);
+            => (byte)((uint)x % analog.Count);
 
         [MethodImpl(Inline)]
         internal static analog wrap7(uint src) 

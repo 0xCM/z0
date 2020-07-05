@@ -13,6 +13,10 @@ namespace Z0
 
     partial class BitSet
     {
+        [MethodImpl(Inline), Op]    
+        public static analog uint1(bool src)
+            => new analog(As.bit(src));
+
         /// <summary>
         /// Creates a 1-bit usigned integer from the least 4 bits of the source
         /// </summary>
@@ -77,23 +81,19 @@ namespace Z0
         public static analog uint1(ulong src)        
             => new analog((byte)((byte)src & analog.MaxVal));
 
-        [MethodImpl(Inline), Op]    
-        public static analog uint1(bool x)
-            => x ? analog.One : analog.Zero;
-
 
         [MethodImpl(Inline), Op]
         public static analog add(analog x, analog y)
         {
             var sum = x.data + y.data;
-            return wrap1((sum >= analog.Base) ? sum - analog.Base: sum);
+            return wrap1((sum >= analog.Count) ? sum - (byte)analog.Count: sum);
         }
 
         [MethodImpl(Inline), Op]
         public static analog sub(analog x, analog y)
         {
             var diff = (int)x - (int)y;
-            return wrap1(diff < 0 ? (byte)(diff + analog.Base) : (byte)diff);
+            return wrap1(diff < 0 ? (byte)(diff + analog.Count) : (byte)diff);
         }
 
         [MethodImpl(Inline), Op]
@@ -152,20 +152,12 @@ namespace Z0
             => core.test(src.data, 0);
 
         [MethodImpl(Inline), Op]
-        public static analog bit(analog src, byte pos, Bit state)
+        public static ref analog set(in analog src, byte pos, Bit state)
         {
+            ref var dst = ref Unsafe.AsRef(src);
             if(pos < analog.Width)
-                return core.set(src.data, pos, state);
-            else
-                return src;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref analog bit(ref analog src, byte pos, Bit state)
-        {
-            if(pos < analog.Width)
-                src.data = core.set(src.data, (byte)pos, state);
-            return ref src;
+                dst.data = core.set(src.data, pos, state);
+            return ref dst;
         }
 
         [MethodImpl(Inline), Op]
@@ -174,11 +166,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         internal static uint reduce1(uint x) 
-            => x % analog.Base;
+            => x % analog.Count;
 
         [MethodImpl(Inline), Op]
         internal static byte reduce1(byte x) 
-            => (byte)(x % analog.Base);
+            => (byte)(x % analog.Count);
 
         [MethodImpl(Inline)]
         internal static analog wrap1(uint src) 

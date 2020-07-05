@@ -100,14 +100,14 @@ namespace Z0
         public static analog add(analog x, analog y)
         {
             var sum = (byte)(x.data + y.data);
-            return wrap6((sum >= analog.Base) ? (byte)(sum - analog.Base): sum);
+            return wrap6((sum >= analog.Count) ? (byte)(sum - (byte)analog.Count): sum);
         }
 
         [MethodImpl(Inline), Op]
         public static analog sub(analog x, analog y)
         {
             var diff = (int)x - (int)y;
-            return wrap6(diff < 0 ? (uint)(diff + analog.Base) : (uint)diff);
+            return wrap6(diff < 0 ? (uint)(diff + analog.Count) : (uint)diff);
         }
 
         [MethodImpl(Inline), Op]
@@ -166,24 +166,12 @@ namespace Z0
             => core.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static bit bit(analog src, int pos)
-            => pos < analog.BitWidth ? Z0.bit.test(src.data, pos) : Z0.bit.Off;
-
-        [MethodImpl(Inline), Op]
-        public static analog bit(analog src, byte pos, Bit state)
+        public static ref analog set(in analog src, byte pos, Bit state)
         {
-            if(pos < analog.BitWidth)
-                return core.set(src.data, pos, state);
-            else
-                return src;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref analog bit(ref analog src, byte pos, Bit state)
-        {
-            if(pos < analog.BitWidth)
-                src.data = core.set(src.data, pos, state);
-            return ref src;
+            ref var dst = ref Unsafe.AsRef(src);
+            if(pos < analog.Width)
+                dst.data = core.set(src.data, pos, state);
+            return ref dst;
         }
 
         [MethodImpl(Inline)]
@@ -192,11 +180,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         internal static byte reduce6(uint x) 
-            => (byte)(x % analog.Base);
+            => (byte)(x % analog.Count);
 
         [MethodImpl(Inline), Op]
         internal static byte reduce6(int x) 
-            => (byte)((uint)x % analog.Base);
+            => (byte)((uint)x % analog.Count);
 
         [MethodImpl(Inline)]
         internal static analog wrap6(uint src) 
@@ -207,7 +195,7 @@ namespace Z0
             => new analog((byte)src,false);
 
         static BitFormatConfig FormatConfig6 
-            => BitFormatter.limited(analog.BitWidth,analog.BitWidth);
+            => BitFormatter.limited(analog.Width,analog.Width);
         
         [MethodImpl(Inline)]
         public static string format(analog src)

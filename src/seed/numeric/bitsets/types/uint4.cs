@@ -27,7 +27,7 @@ namespace Z0
 
         public const int Width = 4;        
 
-        public const byte Base = (byte)MaxVal + 1;
+        public const byte Count = (byte)MaxVal + 1;
 
         public static analog Min => MinVal;
 
@@ -211,14 +211,6 @@ namespace Z0
         public static analog operator >= (analog lhs, analog rhs) 
             => @bool(lhs.data >= rhs.data);
 
-        [MethodImpl(Inline)]
-        static byte crop(int x) 
-            => (byte)(0xF & x);
-
-        [MethodImpl(Inline)]
-        static byte crop(uint x) 
-            => (byte)(0xF & x);
-            
         /// <summary>
         /// Queries an index-identifed bit
         /// </summary>
@@ -239,8 +231,8 @@ namespace Z0
             [MethodImpl(Inline)]
             set 
             {
-                BitSet.set(ref this, 0, BitSet.test(this, 0));
-                BitSet.set(ref this, 1, BitSet.test(this, 1));
+                BitSet.set(this, 0, BitSet.test(this, 0));
+                BitSet.set(this, 1, BitSet.test(this, 1));
             }
         }
 
@@ -255,8 +247,8 @@ namespace Z0
             [MethodImpl(Inline)]
             set
             {
-                BitSet.set(ref this, 2, BitSet.test(this, 2));
-                BitSet.set(ref this, 3, BitSet.test(this, 3));
+                BitSet.set(this, 2, BitSet.test(this, 2));
+                BitSet.set(this, 3, BitSet.test(this, 3));
             }
         }
 
@@ -266,27 +258,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal quartet(byte src)
-            => data = crop(src);
+            => data = crop4(src);
 
         [MethodImpl(Inline)]
         internal quartet(sbyte src)
-            => data = crop(src);
+            => data = crop4(src);
 
         [MethodImpl(Inline)]
         internal quartet(short src)
-            => data = crop(src);
+            => data = crop4(src);
 
         [MethodImpl(Inline)]
         internal quartet(ushort src)
-            => data = crop(src);
+            => data = crop4(src);
 
         [MethodImpl(Inline)]    
         internal quartet(int src)
-            => data = crop(src);
+            => data = crop4(src);
         
         [MethodImpl(Inline)]
         internal quartet(uint src)
-            => data = crop(src);
+            => data = crop4(src);
 
         [MethodImpl(Inline)]
         internal quartet(long src)

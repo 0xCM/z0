@@ -148,20 +148,12 @@ namespace Z0
             => core.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static analog bit(analog src, byte pos, Bit state)
+        public static ref analog set(in analog src, byte pos, Bit state)
         {
+            ref var dst = ref Unsafe.AsRef(src);
             if(pos < analog.Width)
-                return core.set(src.data, pos, state);
-            else
-                return src;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref analog set(ref analog src, byte pos, Bit state)
-        {
-            if(pos < analog.Width)
-                src.data = core.set(src.data, pos, state);
-            return ref src;
+                dst.data = core.set(src.data, pos, state);
+            return ref dst;
         }
 
         [MethodImpl(Inline)]
@@ -170,11 +162,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         internal static byte reduce4(uint x) 
-            => (byte)(x % analog.Base);
+            => (byte)(x % analog.Count);
 
         [MethodImpl(Inline), Op]
         internal static byte reduce4(int x) 
-            => (byte)((uint)x % analog.Base);
+            => (byte)((uint)x % analog.Count);
 
         [MethodImpl(Inline)]
         internal static analog wrap4(uint src) 
@@ -184,12 +176,19 @@ namespace Z0
         internal static analog wrap4(int src) 
             => new analog((byte)src,false);
 
+        [MethodImpl(Inline)]
+        internal static byte crop4(int x) 
+            => (byte)(0xF & x);
+
+        [MethodImpl(Inline)]
+        internal static byte crop4(uint x) 
+            => (byte)(0xF & x);
+
         static BitFormatConfig FormatConfig4 
             => BitFormatter.limited(analog.Width,analog.Width);
         
         [MethodImpl(Inline)]
         public static string format(analog src)
             => BitFormatter.format(src.data, FormatConfig4);
-
     }
 }
