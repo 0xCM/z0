@@ -26,6 +26,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Cells.minimum<N,T>() * nati<M>();
+                => GridCells.minimum<N,T>() * nati<M>();
     }
 }

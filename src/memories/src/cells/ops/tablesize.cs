@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Root;
     
-    partial struct Cells
+    partial struct GridCells
     {
         /// <summary>
         /// Computes the number of bytes required to cover a grid, predicated on row/col counts

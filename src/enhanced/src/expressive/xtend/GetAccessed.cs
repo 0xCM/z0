@@ -14,10 +14,12 @@ namespace Z0
     using static Konst;
     using static Option;
 
-    using XPR = System.Linq.Expressions.Expression;
-
     partial class XTend
     {
+        [MethodImpl(Inline)]
+        static T cast<T>(object src)
+            => (T)src;
+
         /// <summary>
         /// Extracts the name of the value member referenced by an expression delegate
         /// </summary>
@@ -49,7 +51,6 @@ namespace Z0
 
         public static Option<MemberInfo> AccessedMember(this BinaryExpression X)
             => X.Left.AccessedMember().ValueOrElse(() => X.Right.AccessedMember().ValueOrDefault());
-
 
         /// <summary>
         /// Extracts property info from an expression, if possbile; otherwise returns none

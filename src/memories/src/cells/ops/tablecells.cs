@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Root;
     
-    partial struct Cells
+    partial struct GridCells
     {
         /// <summary>
         /// Computes the number of packed cells required to cover a rectangular area

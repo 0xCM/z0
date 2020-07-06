@@ -27,14 +27,6 @@ namespace Z0
             F08_3 = 3
         }
 
-
-        public void primal_kind()
-        {
-            var f = PrimalKindBitField.create(PrimalKind.I16);
-            var width = (DataWidth)(uint)f.Width;
-            Claim.Eq(width, DataWidth.W16);            
-        }
-
         public void bitfield_a()
         {
             var spec = BitFields.specify(

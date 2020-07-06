@@ -50,7 +50,7 @@ namespace Z0
             var data = LiteralFieldValues.value(src);
             var type = src.FieldType;
 
-            var datatype = type.PrimalKind();
+            var datatype = Primitive.kind(type);
             if(data is string s)
             {                                
                 var content = As.span(s);

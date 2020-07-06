@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Cells
+    partial struct GridCells
     {
         /// <summary>
         /// Computes the minimum number of w-cells required to evenly cover a grid of bit-dimensions mxn

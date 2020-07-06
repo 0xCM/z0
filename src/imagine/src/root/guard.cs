@@ -11,7 +11,6 @@ namespace Z0
 
     partial class Root
     {
-
         /// <summary>
         /// Evaluates a function if a predicate is satisfied; otherwise, returns None
         /// </summary>

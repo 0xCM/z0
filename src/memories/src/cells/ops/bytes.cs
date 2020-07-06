@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Root;
 
-    partial struct Cells
+    partial struct GridCells
     {
         /// <summary>
         /// Computes dimension information for a grid predicated on parametric types

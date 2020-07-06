@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline)]
         public static int linear(in GridMetrics src, int row, int col)
-            => Cells.linear(src.ColCount, row, col);
+            => GridCells.linear(src.ColCount, row, col);
 
         /// <summary>
         /// Computes the storage segment offset for a row/col coordinate

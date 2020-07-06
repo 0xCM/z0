@@ -21,7 +21,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var rowCellCount = uint16(Cells.minimum<N,T>());
+            var rowCellCount = uint16(GridCells.minimum<N,T>());
             var rowOffset = uint32(rowCellCount*row);
             return TableIndex.Define(
                 CellIndex: uint16(rowOffset + BitSize.div(col,t)), 

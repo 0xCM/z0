@@ -14,16 +14,16 @@ namespace Z0
     {        
         public void bg_layout_21x32x32()
         {
-            var a0 = Cells.grid(n21,n32,0u);
-            var b0 = Cells.grid(21, 32, 32);
+            var a0 = GridCells.grid(n21,n32,0u);
+            var b0 = GridCells.grid(21, 32, 32);
             Claim.Eq(a0,b0);
 
-            var a1 = Cells.grid(n32,n64,ushort.MinValue);
-            var b1 = Cells.grid(32, 64, 16);
+            var a1 = GridCells.grid(n32,n64,ushort.MinValue);
+            var b1 = GridCells.grid(32, 64, 16);
             Claim.Eq(a1,b1);
 
-            var a2 = Cells.grid(n5,n15,byte.MinValue);
-            var b2 = Cells.grid(5, 15, 8);
+            var a2 = GridCells.grid(n5,n15,byte.MinValue);
+            var b2 = GridCells.grid(5, 15, 8);
             Claim.Eq(a2,b2);
         }
 
@@ -74,7 +74,7 @@ namespace Z0
             data.Fill(0b10101010);
 
             ref readonly var src = ref As.first64(data);
-            var spec = Cells.grid(n8, n8, byte.MinValue);
+            var spec = GridCells.grid(n8, n8, byte.MinValue);
             var map = spec.Map();
             var state = bit.Off;
             Claim.eq(map.CellCount, data.Length * bitsize<byte>());

@@ -15,10 +15,6 @@ namespace Z0
 
     partial class XTend
     {
-        [MethodImpl(Inline)]
-        static T cast<T>(object src)
-            => (T)src;
-
         public static NamedValue<T> Evaluate<T>(this Expression<Func<T>> fx)
             => XPress.evaluate(fx);
 

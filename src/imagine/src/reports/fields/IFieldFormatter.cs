@@ -5,11 +5,6 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Text;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public interface IFieldFormatter<F> : ITextual
         where F : unmanaged, Enum

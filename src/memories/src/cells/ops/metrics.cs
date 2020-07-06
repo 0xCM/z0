@@ -8,16 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
     
-    partial struct Cells
-    {
-        [MethodImpl(Inline)]
-        public static ConversionMetrics<S,T> conversion<S,T>(uint srcCount)
-            where S : struct
-            where T : struct
-                => ConversionMetrics.define<S,T>(srcCount);        
-                
+    partial struct GridCells
+    {                
         /// <summary>
         /// Calculates memory block statistics for specified parameters
         /// </summary>
@@ -25,8 +18,8 @@ namespace Z0
         /// <param name="bw">The block width</param>
         /// <param name="cw">The cell width</param>
         [MethodImpl(Inline), Op]
-        public static CellMetrics metrics(int bc, int bw, int cw)
-            => new CellMetrics(bc, bw, cw);
+        public static GridCellMetrics metrics(int bc, int bw, int cw)
+            => new GridCellMetrics(bc, bw, cw);
 
         /// <summary>
         /// Calculates memory block statistics for specified function and type parameters
@@ -35,9 +28,9 @@ namespace Z0
         /// <param name="bw">The block width</param>
         /// <typeparam name="T">The type that determines cell width</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static CellMetrics<T> metrics<T>(int bc, int bw)
+        public static GridCellMetrics<T> metrics<T>(int bc, int bw)
             where T : unmanaged
-                => new CellMetrics<T>(bc, bw);
+                => new GridCellMetrics<T>(bc, bw);
 
         /// <summary>
         /// Calculates memory block statistics for specified function and type parameters
@@ -48,10 +41,10 @@ namespace Z0
         /// <typeparam name="N">The type that dermines block width</typeparam>
         /// <typeparam name="T">The type that determines cell width</typeparam>
         [MethodImpl(Inline)]
-        public static CellMetrics<W,T> metrics<W,T>(int bc, W bw = default, T t = default)
+        public static GridCellMetrics<W,T> metrics<W,T>(int bc, W bw = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => new CellMetrics<W,T>(bc);        
+                => new GridCellMetrics<W,T>(bc);        
 
         /// <summary>
         /// Calculates a grid layout from a specification
@@ -69,7 +62,7 @@ namespace Z0
         /// <param name="segwidth">The width of a grid cell</param>
         [MethodImpl(Inline), Op]
         public static GridMetrics gmetrics(ushort rows, ushort cols, ushort segwidth)    
-             => metrics(Cells.grid(rows, cols, segwidth));
+             => metrics(GridCells.grid(rows, cols, segwidth));
 
         /// <summary>
         /// Defines a grid map predicated row count, col count and the bit width of parametric type
@@ -79,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static GridMetrics gmetrics<T>(ushort rows, ushort cols)    
             where T : unmanaged
-                => metrics(Cells.grid<T>(rows,cols));
+                => metrics(GridCells.grid<T>(rows,cols));
 
         /// <summary>
         /// Defines a grid map predicated on type parameters
@@ -93,6 +86,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => metrics(Cells.grid(m,n, zero));
+                => metrics(GridCells.grid(m,n, zero));
     }
 }

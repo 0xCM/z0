@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Root;
 
-    partial struct Cells
+    partial struct GridCells
     {
         /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate

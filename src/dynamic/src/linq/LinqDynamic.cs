@@ -51,11 +51,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return new GtEq<T>(generic<T>(Ops8u.GtEq.Compile()));
             else if(typeof(T) == typeof(ushort))
-                return new GtEq<T>(cast<Func<T,T,bool>>(Ops16u.GtEq.Compile()));
+                return new GtEq<T>(Root.cast<Func<T,T,bool>>(Ops16u.GtEq.Compile()));
             else if(typeof(T) == typeof(uint))
-                return new GtEq<T>(cast<Func<T,T,bool>>(Ops32u.GtEq.Compile()));
+                return new GtEq<T>(Root.cast<Func<T,T,bool>>(Ops32u.GtEq.Compile()));
             else if(typeof(T) == typeof(ulong))
-                return new GtEq<T>(cast<Func<T,T,bool>>(Ops64u.GtEq.Compile()));
+                return new GtEq<T>(Root.cast<Func<T,T,bool>>(Ops64u.GtEq.Compile()));
             else
                 return new GtEq<T>(lambda<T,T,bool>(Expression.GreaterThanOrEqual).Compile());
         }

@@ -99,7 +99,7 @@ namespace Z0
         public asci8 BytCount
         {
             [MethodImpl(Inline)]
-            get => $"{Cells.tablesize<M,N>()}";
+            get => $"{GridCells.tablesize<M,N>()}";
         }
 
         /// <summary>

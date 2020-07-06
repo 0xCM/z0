@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="cw">The storage cell width</param>
         [MethodImpl(Inline), Op]
         public static uint aligned(uint rows, uint cols, uint w)
-            => Cells.aligned(rows,cols,w);
+            => GridCells.aligned(rows,cols,w);
 
         /// <summary>
         /// Computes the number of packed cells required to cover a rectangular area
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="cw">The storage cell width</param>
         [MethodImpl(Inline), Op]
         public static int tablecells(ulong rows, ulong cols, int cw)
-            => Cells.count(rows,cols,cw);
+            => GridCells.count(rows,cols,cw);
 
         /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate

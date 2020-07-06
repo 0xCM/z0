@@ -20,34 +20,25 @@ namespace Z0
             => ref As.cast<S,T>(src);
             
         [MethodImpl(Inline)]
-        public static T[] cast<T>(object[] src)
-        {
-            var dst = sys.alloc<T>(src.Length);
-            for(var i=0; i<src.Length; i++)
-                dst[i] = cast<T>(src[i]);
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
         public static Span<T> cast<T>(Span<byte> src)
             where T : struct
-                => As.cast<T>(src);
+                => As.recover<T>(src);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
             where T : struct
-                => As.cast<T>(src);
+                => As.recover<T>(src);
 
         [MethodImpl(Inline)]        
         public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
             where S : struct
             where T : struct
-                => As.cast<S,T>(src);
+                => As.recover<S,T>(src);
 
         [MethodImpl(Inline)]        
         public static Span<T> cast<S,T>(Span<S> src)                
             where S : struct
             where T : struct
-                => As.cast<S,T>(src);
+                => As.recover<S,T>(src);
     }
 }

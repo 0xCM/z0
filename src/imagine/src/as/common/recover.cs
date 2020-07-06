@@ -24,7 +24,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<sbyte> src)
-            where T : unmanaged
+            where T : struct
                 => recover<sbyte,T>(src);
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<byte> src)
-            where T : unmanaged
+            where T : struct
                 => recover<byte,T>(src);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<short> src)
-            where T : unmanaged
+            where T : struct
                 => recover<short,T>(src);
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<ushort> src)
-            where T : unmanaged
+            where T : struct
                 => recover<ushort,T>(src);
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<uint> src)
-            where T : unmanaged
+            where T : struct
                 => recover<uint,T>(src);
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<int> src)
-            where T : unmanaged
+            where T : struct
                  => recover<int,T>(src);
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<long> src)
-            where T : unmanaged
+            where T : struct
                  => recover<long,T>(src);
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<ulong> src)
-            where T : unmanaged
+            where T : struct
                  => recover<ulong,T>(src);
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<float> src)
-            where T : unmanaged
+            where T : struct
                 => recover<float,T>(src);
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<double> src)
-            where T : unmanaged
+            where T : struct
                 => recover<double,T>(src); 
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<decimal> src)
-            where T : unmanaged
+            where T : struct
                 => recover<decimal,T>(src);      
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<byte> src)
-            where T : unmanaged
+            where T : struct
                 => recover<byte,T>(src);
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<uint> src)
-            where T : unmanaged
+            where T : struct
                 => recover<uint,T>(src);
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<sbyte> src)
-            where T : unmanaged
+            where T : struct
                 => recover<sbyte,T>(src);
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<short> src)
-            where T : unmanaged
+            where T : struct
                 => recover<short,T>(src);
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<ushort> src)
-            where T : unmanaged
+            where T : struct
                 => recover<ushort,T>(src);
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<int> src)
-            where T : unmanaged
+            where T : struct
                 => recover<int,T>(src);
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<long> src)
-            where T : unmanaged
+            where T : struct
                 => recover<long,T>(src);
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<ulong> src)
-            where T : unmanaged
+            where T : struct
                  => recover<ulong,T>(src);
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<float> src)
-            where T : unmanaged
+            where T : struct
                  => recover<float,T>(src);
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<double> src)
-            where T : unmanaged
+            where T : struct
                  => recover<double,T>(src);
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace Z0
         /// <typeparam name="T">The target span cell type</typeparam>
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static Span<T> recover<T>(Span<decimal> src)
-            where T : unmanaged
+            where T : struct
                  => recover<decimal,T>(src);
     }
 }

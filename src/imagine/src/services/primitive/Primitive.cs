@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static As;
 
     using PK = PrimalKind;
         
@@ -17,7 +18,7 @@ namespace Z0
         static ReadOnlySpan<PrimalKind> Kinds
         {
             [MethodImpl(Inline)]
-            get => As.cast<PrimalKind>(PrimalKindData);
+            get => recover<PrimalKind>(PrimalKindData);
         }
 
         //PrimalKindId|TypeCode -> PrimalKind                
