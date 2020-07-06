@@ -13,8 +13,8 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
-    {
+    partial class RootLegacy
+    {        
         /// <summary>
         /// Creates a span from an array
         /// </summary>

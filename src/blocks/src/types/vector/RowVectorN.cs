@@ -62,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector(T[] src)
         {
-            insist(src.Length >= Dim, $"{src.Length} < {Dim}");
+            Demands.insist(src.Length >= Dim, $"{src.Length} < {Dim}");
             data = src;
         }
                     

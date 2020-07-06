@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static NK<T> kNum<T>()

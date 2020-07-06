@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Returns true if the source is non-null

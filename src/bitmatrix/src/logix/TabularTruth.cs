@@ -242,7 +242,7 @@ namespace Z0
                 table[1] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[1], off, on));
                 table[2] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[2], on, off));
                 table[3] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[3], on, on));
-                insist(table.GetCol(2) == bbResult);                
+                Demands.insist(table.GetCol(2) == bbResult);                
                 dst.Write(table);
             }
         }
@@ -263,7 +263,7 @@ namespace Z0
                 table[5] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[5], on, off, on));
                 table[6] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[6], on, on, off));
                 table[7] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[7], on, on, on));
-                insist(table.GetCol(3) == bbResult);                
+                Demands.insist(table.GetCol(3) == bbResult);                
                 dst.Write(table);
             }
         }

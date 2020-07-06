@@ -7,7 +7,7 @@ namespace Z0
 
     using static Konst;
     
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Takes a value out of a box

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// An indespensable combinator that produces a stream from a parameter array

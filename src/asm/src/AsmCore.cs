@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static Root;
 
     public readonly struct AsmCore : TAsmCore
     {

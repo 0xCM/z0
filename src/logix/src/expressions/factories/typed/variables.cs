@@ -114,7 +114,7 @@ namespace Z0.Logix
             where T : unmanaged             
             where N : unmanaged, ITypeNat
         {
-            insist<N>(variables.Length);
+            Demands.insist<N>(variables.Length);
             return new VariedExpr<N,T>(baseExpr, variables);
         }
 

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Evaluates a function over a value if the value is not null; otherwise, returns the default result value

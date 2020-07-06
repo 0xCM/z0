@@ -30,7 +30,7 @@ namespace Z0
             var rvaCount = FieldRvaCount(state);
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = Root.alloc<FieldRvaRecord>(count);
+            var dst = sys.alloc<FieldRvaRecord>(count);
             
             for(var i=0; i<count; i++)
             {

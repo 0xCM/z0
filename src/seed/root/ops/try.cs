@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {        
         /// <summary>
         /// Evaluates a function within a try block and returns the value of the computation if 
@@ -61,6 +61,6 @@ namespace Z0
         /// <param name="item">The object to cast</param>
         [MethodImpl(Inline)]   
         public static Option<T> TryCast<T>(object item)
-            => item is T ? some((T)item) : none<T>();
+            => item is T ? Option.some((T)item) : Option.none<T>();
     }
 }

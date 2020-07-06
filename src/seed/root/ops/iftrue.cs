@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Executes a function if the criterion is true, otherwise returns the supplied value

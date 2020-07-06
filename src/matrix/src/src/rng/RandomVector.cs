@@ -281,7 +281,7 @@ namespace Z0
             where T : unmanaged
         {
             var len = src.Length;
-            insist(len == max.Length);
+            Demands.insist(len == max.Length);
             var dst = Z0.RowVector.blockalloc<T>(len);
             for(var i=0; i<dst.Length; i++)
                 dst[i] = gmath.squeeze(src[i],max[i]);

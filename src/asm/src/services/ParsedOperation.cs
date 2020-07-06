@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Konst;
-    using static Memories;
+    using static Root;
 
     public readonly struct ParsedOperation : ILocatedCode<ParsedOperation,LocatedCode>
     {
@@ -77,7 +77,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsedOperation(LocatedCode src, LocatedCode parsed)
         {
-            insist(src.Address, parsed.Address);
+            Demands.insist(src.Address, parsed.Address);
             Input = src;
             ParseResult = parsed;
         }

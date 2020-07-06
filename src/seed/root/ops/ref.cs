@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe ref T @ref<T>(MemoryAddress src)

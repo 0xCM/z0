@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Presents a readonly S-reference as a readonly T-reference

@@ -7,7 +7,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         [MethodImpl(Inline), Op]
         public static BinaryLiteral literal(Base2 @base2, string name, object value, string text)

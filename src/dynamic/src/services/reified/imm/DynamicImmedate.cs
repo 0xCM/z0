@@ -27,7 +27,7 @@ namespace Z0
 
         public static DynamicDelegate EmbedV128UnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
         {
-            insist(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
+            Demands.insist(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();            
             var wrapped = src.Reify(tCell);
             var idTarget = id.WithImm8(imm8);
@@ -40,7 +40,7 @@ namespace Z0
 
         public static DynamicDelegate EmbedV256UnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
         {
-            insist(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
+            Demands.insist(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var wrapped = src.Reify(tCell);
             var idTarget = id.WithImm8(imm8);
@@ -53,7 +53,7 @@ namespace Z0
 
         public static DynamicDelegate EmbedV128BinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
         {
-            insist(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
+            Demands.insist(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();            
             var wrapped = src.Reify(tCell);
             var idTarget = id.WithImm8(imm8);
@@ -66,7 +66,7 @@ namespace Z0
 
         public static DynamicDelegate EmbedV256BinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
         {
-            insist(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
+            Demands.insist(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var wrapped = src.Reify(tCell);
             var idTarget = id.WithImm8(imm8);

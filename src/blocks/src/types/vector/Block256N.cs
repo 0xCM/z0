@@ -85,7 +85,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Block256(Block256<T> src)
         {
-            insist(src.CellCount >= Length);
+            Root.insist(src.CellCount >= Length);
             data = src;
         }
 

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Populates a caller-supplied target with unpacked source bits

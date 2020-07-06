@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Searches for a thread given an OS-assigned id, not the useless clr id

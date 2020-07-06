@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Reimagines a boolean value as a character value

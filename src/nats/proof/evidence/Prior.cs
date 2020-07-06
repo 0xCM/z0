@@ -37,8 +37,8 @@ namespace Z0
 
         public NatNext(K1 n1, K2 n2)
         {
-            insist(n1.NatValue + 1 == n2.NatValue);
-            this.valid = true;
+            Root.insist(n1.NatValue + 1 == n2.NatValue);
+            valid = true;
         }
 
         public bool valid {get;}
@@ -65,7 +65,7 @@ namespace Z0
         public NatPrior(K1 n1, K2 n2)
         {
             valid = true; 
-            insist(n1.NatValue - 1 == n2.NatValue);
+            Root.insist(n1.NatValue - 1 == n2.NatValue);
         }
 
         public bool valid {get;}

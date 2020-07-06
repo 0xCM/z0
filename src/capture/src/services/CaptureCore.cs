@@ -53,7 +53,7 @@ namespace Z0.Asm
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;            
                 var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode); 
-                insist((MemoryAddress)pSrc, captured.Address);               
+                Demands.insist((MemoryAddress)pSrc, captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -71,7 +71,7 @@ namespace Z0.Asm
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
                 var captured = new CapturedCode(id, src.DynamicOp, src.SourceMethod, summary.Encoded.ParseInput, summary.Encoded.ParseResult, outcome.TermCode);                
-                insist((MemoryAddress)pSrc,captured.Address);               
+                Demands.insist((MemoryAddress)pSrc,captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -103,7 +103,7 @@ namespace Z0.Asm
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode);  
-                insist((MemoryAddress)pSrc,captured.Address);               
+                Demands.insist((MemoryAddress)pSrc,captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)

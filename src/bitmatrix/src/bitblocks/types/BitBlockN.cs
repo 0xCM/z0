@@ -113,7 +113,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitBlock(Span<T> src)
         {
-            insist(src.Length * CellWidth >= BitCount);
+            Demands.insist(src.Length * CellWidth >= BitCount);
             this.data = src;
         }
 

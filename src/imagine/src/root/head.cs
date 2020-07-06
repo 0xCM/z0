@@ -1,0 +1,23 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
+    using static Konst;
+
+    partial class Root
+    {
+        [MethodImpl(Inline)]
+        public static ref readonly T head<T>(ReadOnlySpan<T> src)
+            => ref MemoryMarshal.GetReference<T>(src);
+
+        [MethodImpl(Inline)]
+        public static ref T head<T>(Span<T> src)
+            => ref MemoryMarshal.GetReference<T>(src);
+    }
+}

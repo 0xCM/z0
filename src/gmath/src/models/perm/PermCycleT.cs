@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static Root;
 
     /// <summary>
     /// Describes cycle in a perutation

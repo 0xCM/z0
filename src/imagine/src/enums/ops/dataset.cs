@@ -38,13 +38,13 @@ namespace Z0
             var datatype = kind(@enum);
             var description = string.Empty;
             var enumData = UserMetadata.Empty;
-            var indices = alloc<int>(count);
-            var names = alloc<string>(count);
-            var literals = alloc<Enum>(count);
-            var numeric = alloc<variant>(count);
-            var descriptions = alloc<string>(count);
-            var userData = alloc<UserMetadata>(count);
-            var tokens = alloc<MetadataToken>(count);
+            var indices = sys.alloc<int>(count);
+            var names = sys.alloc<string>(count);
+            var literals = sys.alloc<Enum>(count);
+            var numeric = sys.alloc<variant>(count);
+            var descriptions = sys.alloc<string>(count);
+            var userData = sys.alloc<UserMetadata>(count);
+            var tokens = sys.alloc<MetadataToken>(count);
 
             var dst = new EnumDataset(token, description,  UserMetadata.Empty, datatype, 
                 tokens, indices,  names, literals, numeric, descriptions, userData);
@@ -71,13 +71,13 @@ namespace Z0
             var datatype = kind<E>();
             var description = string.Empty;
             var enumData = UserMetadata.Empty;
-            var indices = alloc<int>(count);
-            var names = alloc<string>(count);
-            var literals = alloc<E>(count);
-            var numeric = alloc<T>(count);
-            var descriptions = alloc<string>(count);
-            var userData = alloc<UserMetadata>(count);
-            var tokens = alloc<MetadataToken>(count);
+            var indices = sys.alloc<int>(count);
+            var names = sys.alloc<string>(count);
+            var literals = sys.alloc<E>(count);
+            var numeric = sys.alloc<T>(count);
+            var descriptions = sys.alloc<string>(count);
+            var userData = sys.alloc<UserMetadata>(count);
+            var tokens = sys.alloc<MetadataToken>(count);
 
             var dst = new EnumDataset<E,T>(token, description,  UserMetadata.Empty, datatype, 
                 tokens, indices,  names, literals, numeric, descriptions, userData);

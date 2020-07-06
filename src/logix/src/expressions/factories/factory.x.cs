@@ -280,7 +280,7 @@ namespace Z0.Logix
         public static LiteralLogicSeqExpr<N> ToLogicSeq<N>(this BitString src, N n = default)
             where N : unmanaged, ITypeNat
         {
-            insist<N>(src.Length);
+            Demands.insist<N>(src.Length);
             return new LiteralLogicSeqExpr<N>(src.ToLogicSeq().Terms);
         }
 

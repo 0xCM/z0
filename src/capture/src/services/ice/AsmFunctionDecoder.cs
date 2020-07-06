@@ -10,7 +10,7 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Konst;
-    using static Memories;
+    using static Root;
     using static AsmCore;
 
     using Iced = Iced.Intel;

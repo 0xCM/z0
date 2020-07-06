@@ -8,8 +8,7 @@ namespace Z0
     
     using static Konst;
 
-    [ApiHost]
-    public partial class Root : IApiHost<Root>
+    partial class RootLegacy
     {
         const NumericKind Closure = Integers8x64k;
     }

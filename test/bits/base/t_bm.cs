@@ -96,7 +96,7 @@ namespace Z0
                     var z = Z[i];
 
                     var x = BitVector.xor(a,b);
-                    insist(x == z);
+                    Demands.insist(x == z);
                 }
             }
         }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool equal<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)

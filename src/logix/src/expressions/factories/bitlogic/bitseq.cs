@@ -29,7 +29,7 @@ namespace Z0.Logix
         public static LiteralLogicSeqExpr<N> bitseq<N>(N length, params bit[] terms)
             where N : unmanaged, ITypeNat
         {
-            insist<N>(terms.Length);
+            Demands.insist<N>(terms.Length);
             return new LiteralLogicSeqExpr<N>(terms);
         }
     }

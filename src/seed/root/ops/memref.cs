@@ -9,7 +9,7 @@ namespace Z0
     using static Konst;
     using static As;
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Defines a memory reference
@@ -19,10 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static MemRef memref(MemoryAddress address, ByteSize bytes)
             => new MemRef(address,bytes);
-
-        [MethodImpl(Inline), Op]
-        public static MemRef memref(Vector128<ulong> src)
-            => new MemRef(src);
 
         [MethodImpl(Inline), Op]
         public unsafe static MemRef memref(ReadOnlySpan<byte> src)

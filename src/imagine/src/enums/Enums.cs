@@ -275,8 +275,8 @@ namespace Z0
         /// </summary>
         /// <param name="e">An enum type representative</param>
         /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static string[] names<E>()
-            => Enum.GetNames(typeof(E));
+         public static string[] names<F>()
+            where F : unmanaged, Enum
+                => literals<F>().Map(f => f.ToString());
    }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using static Konst;
     using static As;
 
-    partial class Root
+    partial class RootLegacy
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress locate<T>(in T src)

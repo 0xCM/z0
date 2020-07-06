@@ -70,8 +70,8 @@ namespace Z0
             var series = Define(domain, seed); 
             var terms = series.Terms().ToSpan(count);
             var elapsed = Duration.Define(sw.ElapsedTicks);
-            insist(terms.Length == count);
-            insist(series.Observed.Observed.Equals(terms[count - 1].Observed));
+            Demands.insist(terms.Length == count);
+            Demands.insist(series.Observed.Observed.Equals(terms[count - 1].Observed));
             complete(series,elapsed);
         }
 
@@ -83,8 +83,8 @@ namespace Z0
             var series = Define(domain, seed); 
             var s0 = series.Snapshot();                     
             var terms = series.Terms().ToSpan(steps);
-            insist(terms.Length == steps);
-            insist(series.Observed.Observed.Equals(terms[steps - 1].Observed));
+            Demands.insist(terms.Length == steps);
+            Demands.insist(series.Observed.Observed.Equals(terms[steps - 1].Observed));
             
             var elapsed = Duration.Define(sw.ElapsedTicks);
             var evolved = SeriesEvolution.Define(seed, domain, s0.Observed, series.Observed, elapsed);

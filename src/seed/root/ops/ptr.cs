@@ -7,7 +7,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         [MethodImpl(Inline)]
         public static unsafe T* ptr<T>(ref T src)

@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst; 
     using static V0;
-    using static V0p;
     using static V0d;
 
     using static Typed;
@@ -83,7 +82,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vreverse(Vector256<byte> src)
-            => V0d.vshuf32x8(src, vdecrements<byte>(n256));
+            => V0d.vshuf32x8(src, V0p.vdecrements<byte>(n256));
 
         /// <summary>
         /// Reverses the source vector components

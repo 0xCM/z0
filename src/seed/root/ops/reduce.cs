@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Implements the canonical join operation that reduces the monadic depth by one level

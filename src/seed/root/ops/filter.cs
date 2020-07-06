@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class Root
+    partial class RootLegacy
     {
         /// <summary>
         /// Allocates and populates a new array by filtering the source array with 

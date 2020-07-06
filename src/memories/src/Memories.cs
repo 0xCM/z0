@@ -20,10 +20,4 @@ namespace Z0
     {
 
     }
-
-    partial class Root
-    {
-
-
-    }
 }
