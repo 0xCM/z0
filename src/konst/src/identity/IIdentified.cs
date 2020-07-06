@@ -4,13 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
-
-    public interface ITypeCodeSource
+    public interface IIdentified<T> : IIdentified
+        where T : IIdentification
     {
-        PartId Owner {get;}
-        
-        ulong[] AssignedCodes {get;}
+        T Id {get;}
+
+        string IIdentified.Identifier 
+            => Id.Identifier;
     }
 }

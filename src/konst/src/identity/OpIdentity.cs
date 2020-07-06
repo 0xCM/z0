@@ -74,7 +74,7 @@ namespace Z0
         static string Safe(string src)
             => src.Replace(Chars.Lt, IDI.TypeArgsOpen).Replace(Chars.Gt, IDI.TypeArgsClose);
 
-        OpIdentity(string text, string name, string suffix, bool generic, bool imm, string[] components)
+        public OpIdentity(string text, string name, string suffix, bool generic, bool imm, string[] components)
         {
             Identifier = Safe(text);
             Name = name; 

@@ -19,7 +19,7 @@ namespace Z0
         readonly ulong Code;
 
         [MethodImpl(Inline)]
-        internal TypeCode(ulong code)
+        public TypeCode(ulong code)
         {
             this.Code = code;
         }

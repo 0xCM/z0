@@ -7,6 +7,13 @@ namespace Z0
     using System;
     using System.Linq;
 
+    public interface ITypeCodeSource
+    {
+        PartId Owner {get;}
+        
+        ulong[] AssignedCodes {get;}
+    }
+    
     public interface ITypeCodeSource<S> : ITypeCodeSource
         where S : struct, ITypeCodeSource<S>
     {
