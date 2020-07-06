@@ -75,7 +75,7 @@ namespace Z0
         /// <summary>
         /// What else could this be?
         /// </summary>
-        public const string EmptyString = "";
+        public const string EmptyString = Zero.zS;
 
         /// <summary>
         /// What else could this be?
@@ -155,6 +155,11 @@ namespace Z0
         public static Base16 base16 => default;
 
         public const OpacityKind Opaque = OpacityKind.Closure;
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static T zed<T>(T t = default)
+            where T : unmanaged
+                => Zero.zed(t);
 
         [MethodImpl(Inline)]
         internal static ReadOnlySpan<T> transform<T>(ReadOnlySpan<byte> src)

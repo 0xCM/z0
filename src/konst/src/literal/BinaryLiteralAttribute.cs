@@ -11,12 +11,11 @@ namespace Z0
     /// </summary>
     public class BinaryLiteralAttribute : Attribute
     {
+        public string Text {get;}
+        
         public BinaryLiteralAttribute(string src)
         {
-            Text = src ?? string.Empty;
+            Text = src ?? Konst.EmptyString;
         }
-
-        public string Text {get;}            
-
     }
 }

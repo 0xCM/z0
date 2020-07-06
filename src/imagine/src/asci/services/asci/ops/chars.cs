@@ -44,7 +44,7 @@ namespace Z0
         public static ReadOnlySpan<char> chars(Base10 @base, uint src)
         {            
             var store = z64;
-            var proxy = c16;
+            var proxy = z16c;
             ref var dst = ref As.@as(ref store, ref proxy);            
             chars(@base, src, 
                 out As.add(dst, 3), 
@@ -60,7 +60,7 @@ namespace Z0
         public static ReadOnlySpan<char> chars(Base10 @base, ulong src)
         {            
             var store = z128f;
-            var proxy = c16;
+            var proxy = z16c;
             ref var dst = ref As.@as(ref store, ref proxy);            
             chars(@base, src, 
                 out As.add(dst, 7), 

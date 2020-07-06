@@ -11,9 +11,6 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
-        public static sbyte int8<T>(T src)
-            => As.int8(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static sbyte? int8<T>(T? src)

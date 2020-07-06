@@ -10,26 +10,6 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Characterizes an identifier
-    /// </summary>
-    public interface IIdentified
-    {        
-        string Identifier {get;}
-
-        bool IsEmpty 
-        {
-            [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Identifier);
-        }               
-
-        bool IsNonEmpty
-        {            
-            [MethodImpl(Inline)]
-            get => !IsEmpty;
-        }
-    }
-
-    /// <summary>
     /// Defines a set of common identity-related operations
     /// </summary>    
     public readonly struct IdentityShare

@@ -3,8 +3,8 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    public interface TNumericWidth<F> : INumericWidth, TFixedWidth<F>, ITypedLiteral<F,NumericWidth,uint>
+{    
+    public interface TNumericWidth<F> : INumericWidth<F>
         where F : struct, TNumericWidth<F>
     {     
         NumericWidth INumericWidth.NumericWidth 

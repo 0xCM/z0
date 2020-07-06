@@ -3,8 +3,8 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    public interface TTypeWidth<F> : ITypeWidth, TDataWidth<F>, ITypedLiteral<F,TypeWidth,uint>
+{    
+    public interface TTypeWidth<F> : ITypeWidth<F>
         where F : struct, TTypeWidth<F>
     {        
         TypeWidth ITypeWidth.TypeWidth 

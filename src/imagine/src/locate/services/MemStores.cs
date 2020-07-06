@@ -46,11 +46,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> slice(ReadOnlySpan<MemRef> refs, MemStoreIndex n, int offset)
-            => Reader.slice(load(refs, n),offset);
+            => As.slice(load(refs, n),offset);
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> slice(ReadOnlySpan<MemRef> refs, MemStoreIndex n, int offset, int length)
-            => Reader.slice(load(refs,n), offset, length);
+            => As.slice(load(refs,n), offset, length);
 
         [MethodImpl(Inline)]
         public ulong sib(in MemRef n, int i, byte scale, ushort offset)
@@ -58,9 +58,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong sib(ReadOnlySpan<MemRef> refs, in MemStoreIndex n, int i, byte scale, ushort offset)
-            => sib(memref(refs,n), i, scale,offset);
-        
-        static SpanReader Reader 
-            => SpanReader.Service;
+            => sib(memref(refs,n), i, scale,offset);        
     }
 }

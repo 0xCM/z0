@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-
-    public interface TDataWidth<F> : IDataWidth, ITypedLiteral<F,DataWidth,uint>, IEquatable<F>
-        where F : struct, TDataWidth<F>
+    
+    public interface TDataWidth<W> : IDataWidth<W>
+        where W : struct, TDataWidth<W>
     {        
         DataWidth IDataWidth.DataWidth 
-            => (DataWidth)Widths.data<F>();        
+            => (DataWidth)Widths.data<W>();        
 
-        bool IEquatable<F>.Equals(F src) 
+        bool IEquatable<W>.Equals(W src) 
             => src.BitWidth == BitWidth;        
-    }
+    }    
 }

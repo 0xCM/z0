@@ -30,6 +30,14 @@ namespace Z0
         /// An instance-level representative
         /// </summary>
         public static W W => default;
+        
+        /// <summary>
+        /// The width identity
+        /// </summary>
+        public const string Identifier = "w8";
+
+        public string Id 
+            => Identifier;
 
         public DW DataWidth 
             => Width;

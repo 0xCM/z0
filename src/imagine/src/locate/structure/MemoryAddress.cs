@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable64
     {
         public ulong Location {get;}

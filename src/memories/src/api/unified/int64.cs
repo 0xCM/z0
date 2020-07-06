@@ -11,9 +11,6 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
-        public static long int64<T>(T src)
-            => As.int64(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static long? int64<T>(T? src)

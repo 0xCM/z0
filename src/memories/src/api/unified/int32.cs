@@ -11,9 +11,6 @@ namespace Z0
 
     partial class Memories
     {                        
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
-        public static int int32<T>(T src)
-            => As.int32(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static int? int32<T>(T? src)

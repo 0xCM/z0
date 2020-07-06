@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Imagine)" />
-    <ProjectReference Include="$(Text)" />
   </ItemGroup>  
 
 </Project>

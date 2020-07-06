@@ -13,7 +13,6 @@ namespace Z0
         /// </summary>
         public const byte One8u = 1;
 
-
         /// <summary>
         /// Zero, presented as a 16-bit signed integer
         /// </summary>

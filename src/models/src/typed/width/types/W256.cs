@@ -31,6 +31,14 @@ namespace Z0
         /// </summary>
         public static W W => default;
         
+        /// <summary>
+        /// The width identity
+        /// </summary>
+        public const string Identifier = "w256";
+        
+        public string Id 
+            => Identifier;
+
         public DW DataWidth 
             => Width;
 

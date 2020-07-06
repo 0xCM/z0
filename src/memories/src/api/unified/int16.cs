@@ -11,9 +11,6 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
-        public static short int16<T>(T src)
-            => As.int16(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static short? int16<T>(T? src)

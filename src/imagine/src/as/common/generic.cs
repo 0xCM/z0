@@ -10,7 +10,6 @@ namespace Z0
     
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct As
     {
@@ -164,7 +163,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T generic<T>(ref decimal src)
             => ref As<decimal,T>(ref src);
- 
-
     }
 }

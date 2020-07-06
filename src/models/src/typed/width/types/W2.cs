@@ -14,7 +14,7 @@ namespace Z0
 
     using W = W2;
 
-    public readonly struct W2 : TDataWidth<W> 
+    public readonly struct W2 : TDataWidth<W>, IIdentified<string>
     { 
         public const DW Width = DW.W2; 
 
@@ -25,9 +25,15 @@ namespace Z0
         /// </summary>
         public static W W => default;
 
+        /// <summary>
+        /// The width identity
+        /// </summary>
+        public const string Identifier = "w2";
+
+        public string Id 
+            => Identifier;
         public DW DataWidth 
             => Width;
-
         public TS TypeSign
             => Sign;
 

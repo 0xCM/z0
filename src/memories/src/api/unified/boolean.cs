@@ -11,8 +11,6 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static bool boolean<T>(T src)
-            => As.bool8(src);
+
     }
 }

@@ -4,10 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    public interface IDataWidth : IBitWidth, ITypedLiteral<DataWidth,uint>, ITextual
+    public interface IDataWidth : IBitWidth, ITypedLiteral<DataWidth,uint>, ITextual, IIdentified<string>
     {
         DataWidth DataWidth {get;}   
 
+        string IIdentified<string>.Id 
+            => $"{DataWidth}";
+        
         TypeSignKind TypeSign
             => TypeSignKind.Unsigned;
         

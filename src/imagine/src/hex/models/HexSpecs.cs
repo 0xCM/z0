@@ -56,6 +56,8 @@ namespace Z0
         /// </summary>
         public const string PostSpec = "h";
 
+        public const string SmallHexSpec = "x4";
+
         /// <summary>
         /// Selects either the uppercase format code 'X' or lowercase format code 'x'
         /// </summary>
@@ -63,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static char CaseSpec(bool upper)
             => upper ? 'X' : 'x';
-
+        
         /// <summary>
         /// Removes leading or trailing hex specifiers
         /// </summary>

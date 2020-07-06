@@ -19,9 +19,5 @@ namespace Z0
         public static double? float64<T>(T? src)
             where T : unmanaged
                 => As.float64(src);
-
-        [MethodImpl(Inline)]   
-        public static double float64<T>(T src)
-            => As.float64(src);
     }
 }
