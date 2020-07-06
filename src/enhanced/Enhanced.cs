@@ -42,27 +42,6 @@ namespace Z0
         internal static ref T seek<T>(Span<T> src, uint offset)
             => ref add(first(src), (int)offset);
 
-        /// <summary>
-        /// Allocates and populates a new array by filtering the source array with 
-        /// a specified predicate
-        /// </summary>
-        /// <param name="src">The soruce array</param>
-        /// <param name="f">The predicate</param>
-        /// <typeparam name="T">The array element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
-        public static T[] filter<T>(ReadOnlySpan<T> src, Func<T,bool> f)
-        {
-            var length = src.Length;
-            Span<T> dst = sys.alloc<T>(length);
-            var count = 0u;
-            for(var i=0u; i<length; i++)
-            {
-                ref readonly var test = ref skip(src,i);
-                if(f(test))
-                    seek(dst, count++) = test;                    
-            }   
-            return sys.array(dst.Slice(0, (int)count));
-        }
     }
 
     public static partial class XTend

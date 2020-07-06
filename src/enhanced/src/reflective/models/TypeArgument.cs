@@ -6,21 +6,22 @@ namespace Z0
 {
     using System;
     
-    public readonly struct TypeArgument : ITextual<TypeArgument>
+    public readonly struct TypeArgument : ITextual
     {
-        public string Name {get;}
-        public Type Target {get;}
+        public readonly string Name;
+        
+        public readonly Type Target;
 
-        public TypeParameter Parameter {get;}
+        public readonly TypeParameter Parameter;
 
-        public Type Argument {get;}
+        public readonly Type Argument;
 
-        internal TypeArgument(Type target, TypeParameter parameter, Type arg)
+        public TypeArgument(Type target, TypeParameter parameter, Type arg)
         {
-            this.Name = arg.Name;
-            this.Target = target;
-            this.Parameter = parameter;
-            this.Argument = arg;
+            Name = arg.Name;
+            Target = target;
+            Parameter = parameter;
+            Argument = arg;
         }
         
         public string Format()

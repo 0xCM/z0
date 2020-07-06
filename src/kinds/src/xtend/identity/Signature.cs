@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-
     partial class XTend
     {
         /// <summary>
@@ -16,6 +15,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         public static MethodSig Signature(this MethodInfo src)
-            => MethodSig.Define(src);
+            => MethodSig.define(src);
     }
 }

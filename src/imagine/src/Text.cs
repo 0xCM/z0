@@ -682,7 +682,7 @@ namespace Z0
             if(src.Length == 0)
                 return string.Empty;
             
-            var dst = new StringBuilder();
+            var dst = build();
             
             for(var i = offset; i< src.Length; i++)
             {

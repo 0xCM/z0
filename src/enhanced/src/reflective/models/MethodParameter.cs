@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Represents a method (value, not type) parameter 
     /// </summary>
-    public readonly struct MethodParameter : ITextual<MethodParameter>
+    public readonly struct MethodParameter : ITextual
     {        
         public string Name {get;}
 
@@ -17,14 +17,14 @@ namespace Z0
 
         public TypeSig Type {get;}
 
-        public ParamRefKind Variance {get;}
+        public ParamRefKind RefKind {get;}
 
-        public MethodParameter(TypeSig Type, ParamRefKind Variance, string ParamName, int Position)
+        public MethodParameter(TypeSig sig, ParamRefKind refkind, string name, int position)
         {
-            this.Name = ParamName;
-            this.Position = Position;
-            this.Type = Type;
-            this.Variance = Variance;
+            Type = sig;
+            Name = name;
+            Position = position;
+            RefKind = refkind;
         }
         
         public string Format()

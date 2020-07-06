@@ -16,7 +16,7 @@ namespace Z0
             => new TypeArguments(args);
 
         [MethodImpl(Inline)]
-        internal TypeArguments(TypeArgument[] args)
+        public TypeArguments(TypeArgument[] args)
         {
             Arguments = args;
         }

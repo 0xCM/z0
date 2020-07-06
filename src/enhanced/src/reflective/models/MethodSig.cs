@@ -12,9 +12,25 @@ namespace Z0
     /// <summary>
     /// Identifies and describes a method that, whithin some useful scope, is unique
     /// </summary>
-    public sealed class MethodSig
+    public readonly struct MethodSig
     {
-        public static MethodSig Define(MethodInfo method)                    
+        public readonly int MethodId;
+        
+        public readonly string MethodName;
+
+        public readonly string DefiningAssembly;
+
+        public readonly string DefiningModule;
+
+        public readonly TypeSig DeclaringType;
+
+        public readonly TypeSig ReturnType;
+
+        public readonly MethodParameters Args;
+
+        public readonly TypeParameters TypeParams;
+
+        public static MethodSig define(MethodInfo method)                    
             => new MethodSig(
                 MethodId: method.MetadataToken,
                 DefiningAssembly: method.Module.Assembly.GetSimpleName(),
@@ -22,12 +38,19 @@ namespace Z0
                 DeclaringType: TypeSig.FromType(method.DeclaringType),
                 MethodName: method.DisplayName(),
                 ReturnType: TypeSig.FromType(method.ReturnType),
-                Args: method.GetParameters().Select(p => new MethodParameter(TypeSig.FromParameter(p), p.ReferenceKind(), p.Name, p.Position)).ToArray(),
+                Args: method.GetParameters().Select(p => new MethodParameter(TypeSig.FromParameter(p), p.ReferenceKind(), p.Name, p.Position)),
                 TypeParams: TypeParameters(method));
         
-        internal MethodSig(int MethodId, string DefiningAssembly, string DefiningModule,
-            TypeSig DeclaringType, string MethodName, TypeSig ReturnType, 
-            MethodParameters Args, TypeParameters TypeParams)
+        MethodSig(
+            int MethodId, 
+            string DefiningAssembly, 
+            string DefiningModule, 
+            TypeSig DeclaringType, 
+            string MethodName, 
+            TypeSig ReturnType, 
+            MethodParameters Args, 
+            TypeParameters TypeParams
+            )
         {
             this.MethodId = MethodId;
             this.DefiningAssembly = DefiningAssembly;
@@ -39,21 +62,6 @@ namespace Z0
             this.TypeParams = TypeParams;
         }
         
-        public int MethodId {get;}
-        
-        public string MethodName {get;}
-
-        public string DefiningAssembly {get;}
-
-        public string DefiningModule {get;}
-
-        public TypeSig DeclaringType {get;}
-
-        public TypeSig ReturnType {get; }
-
-        public MethodParameters Args {get; }
-
-        public TypeParameters TypeParams {get; }
                 
         public string Format()
         {

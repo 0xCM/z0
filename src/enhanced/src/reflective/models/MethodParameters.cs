@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct MethodParameters : ITextual<MethodParameters>
+    public readonly struct MethodParameters : ITextual
     {
         public MethodParameter[] Index {get;}
 

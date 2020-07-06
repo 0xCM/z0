@@ -21,7 +21,9 @@ namespace Z0
         CreateString,
 
         Alloc,
-        
+
+        AllocSpan,
+
         Equals,
 
         GetInstanceType,

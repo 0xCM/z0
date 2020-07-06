@@ -19,10 +19,10 @@ namespace Z0
         public int Position {get;}
 
         [MethodImpl(Inline)]
-        internal TypeParameter(string Name, int Position)
+        public TypeParameter(string name, int position)
         {
-            this.Name = Name;
-            this.Position = Position;
+            Name = name;
+            Position = position;
         }
 
         public string Format(bool fence)

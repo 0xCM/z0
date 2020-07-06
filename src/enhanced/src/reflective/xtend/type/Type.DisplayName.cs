@@ -17,7 +17,7 @@ namespace Z0
         public static string DisplayName(this Type src)
         {
             if(src == null)
-                throw new ArgumentNullException(nameof(src));
+                sys.@throw(new ArgumentNullException(nameof(src)));
                 
             if(Attribute.IsDefined(src, typeof(DisplayNameAttribute)))
                 return src.GetCustomAttribute<DisplayNameAttribute>().DisplayName;

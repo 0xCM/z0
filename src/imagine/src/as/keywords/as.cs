@@ -12,6 +12,27 @@ namespace Z0
 
     partial struct As
     {
+        /// <summary>
+        /// Presents an S-cell as a T-cell
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T @as<S,T>(ref S src)   
+            => ref As<S,T>(ref src);
+
+        /// <summary>
+        /// Presents an S-cell as a T-cell
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        /// <param name="src">The target cell</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T @as<S,T>(ref S src, ref T dst)   
+            => ref As<S,T>(ref src);
+                    
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T @as<T>(in sbyte src)        
             => ref As<sbyte,T>(ref AsRef(src));
