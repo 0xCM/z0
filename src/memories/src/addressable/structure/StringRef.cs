@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
+    //using static Root;
     using static As;
     using static V0;
     using static Chars;
@@ -90,7 +90,7 @@ namespace Z0
         public ref readonly char this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref skip(Chars,index);
+            get => ref skip(Chars,(uint)index);
         }
 
         /// <summary>
@@ -176,7 +176,6 @@ namespace Z0
 
         public string Diagnostic(in StringRef prior)
             => text.concat((Address - prior.Address).Format().PadRight(4), 
-                text.bracket(text.concat(text.squote(Text), text.spaced(Pipe), Length)));
-             
+                text.bracket(text.concat(text.squote(Text), text.spaced(Pipe), Length)));             
     }
 }

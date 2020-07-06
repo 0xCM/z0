@@ -8,11 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     [ApiHost]
-    public partial class Memories : IApiHost<Memories>
+    public partial class Memories
     {
         public Memories()
         {
             
         }
+    }
+
+    public static partial class XTend
+    {
+
+    }
+
+    partial class Root
+    {
+
+
     }
 }

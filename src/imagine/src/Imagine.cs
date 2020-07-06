@@ -16,4 +16,10 @@ namespace Z0
     {
         
     }
+
+    class Root
+    {
+
+        
+    }
 }

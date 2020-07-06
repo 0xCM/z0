@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
 
     using PK = PrimalKind;
+    
 
     partial class XTend
     {

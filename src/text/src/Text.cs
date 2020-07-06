@@ -14,6 +14,17 @@ namespace Z0
     using static Konst;
     using static Root;
 
+    class Root
+    {
+
+
+    }
+
+    public static partial class XTend
+    {
+        
+    }
+
     public static class text
     {
         public const string PageBreak = "--------------------------------------------------------------------------------------------------------------";
@@ -790,3 +801,4 @@ namespace Z0
         }
     }
 }
+

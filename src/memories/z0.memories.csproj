@@ -5,14 +5,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>    
-    <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Models)" />
-    <ProjectReference Include="$(Enhanced)" />
+  <ItemGroup>
     <ProjectReference Include="$(Imagine)" />
-    <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Text)" />
-
-  </ItemGroup>
+  </ItemGroup>  
 
 </Project>
