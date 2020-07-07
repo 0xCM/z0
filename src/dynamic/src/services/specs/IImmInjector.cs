@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface IImmInjector : IService
+    public interface IImmInjector
     {     
         DynamicDelegate EmbedImmediate(MethodInfo method, byte imm);
     }

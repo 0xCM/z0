@@ -17,25 +17,14 @@ namespace Z0
 
         readonly int RepCount;
 
-        TCheckEquatable Claim => CheckEquatable.Checker;
+        ExecutorContext Context;
 
         [MethodImpl(Inline)]
-        public static IEvalExecutor Create(IContext context, IPolyrand random)
-            => new EvalExecutor(context,random);
-
-        [MethodImpl(Inline)]
-        EvalExecutor(IContext context, IPolyrand random)
+        internal EvalExecutor(IPolyrand random)
         {
-            this.RepCount = 128;
-            this.Random = random;
-        }
-
-        static int _checkseq;
-
-        static int seq
-        {
-            [MethodImpl(Inline)]
-            get => increment(ref _checkseq);
+            RepCount = 128;
+            Random = random;
+            Context = Evaluate.context(random, 128);
         }
         
         public EvalResult MatchBinaryOps(in BufferSeq buffers, FixedWidth w, in ConstPair<ApiCode> paired)
@@ -69,7 +58,7 @@ namespace Z0
             }
             catch(Exception error)
             {
-                return EvalResult.Define(seq, (paired.Left.Uri, paired.Right.Uri), clock, error);  
+                return Evaluated.result(seq, (paired.Left.Uri, paired.Right.Uri), clock, error);  
             }
         }
 
@@ -115,7 +104,6 @@ namespace Z0
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);  
         }
 
-
         /// <summary>
         /// Verifies that two 32-bit binary operators agree over a random set of points
         /// </summary>
@@ -124,20 +112,7 @@ namespace Z0
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
         public EvalResult CheckMatch(BinaryOp8 f, OpUri fUri, BinaryOp8 g, OpUri gUri)
-        {
-            var w = n8;
-            void check()
-            {
-                for(var i=0; i < RepCount; i++)
-                {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
-                    Claim.Eq(f(x,y),g(x,y));
-                }
-            }
-
-            return ExecAction(check, fUri, gUri);
-        }
+            => Executor.validate(Context, f, fUri, g, gUri);
 
         /// <summary>
         /// Verifies that two 32-bit binary operators agree over a random set of points
@@ -255,8 +230,7 @@ namespace Z0
         }
 
         public EvalResult ExecAction(Action action, OpUri f)
-        {
-            
+        {            
             var clock = Time.counter(true);
             try
             {
@@ -282,6 +256,16 @@ namespace Z0
             {
                 return EvalResult.Define(seq, (f,g), clock, e);
             }
+        }
+
+        static TCheckEquatable Claim => CheckEquatable.Checker;
+
+        static int _checkseq;
+
+        static int seq
+        {
+            [MethodImpl(Inline)]
+            get => increment(ref _checkseq);
         }
     }
 }

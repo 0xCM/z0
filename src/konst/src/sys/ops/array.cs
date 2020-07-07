@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-        
+    using System.Reflection;
+
+    using static ReflectionFlags;        
     using static OpacityKind;
     
     partial struct sys
@@ -29,5 +31,9 @@ namespace Z0
         [MethodImpl(Options), Opaque(ParameterArray), Closures(Closure)]
         public static T[] array<T>(params T[] src)
             => src;
+
+        [MethodImpl(Options), Opaque(EnumerableToArray), Closures(Closure)]
+        public static T[] array<T>(IEnumerable<T> src)
+            => src.ToArray();
     }
 }

@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
             
     using static Konst;
 
     using O = OpacityKind;
 
     partial struct sys
-    {        
-        [MethodImpl(Options), Opaque(O.GetGenericType), Closures(AllNumeric)]
+    {                
+        [MethodImpl(Options), Opaque(O.GetGenericType), Closures(AllNumeric)]                
         public static Type type<T>()
             => typeof(T);
 

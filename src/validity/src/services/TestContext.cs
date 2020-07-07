@@ -126,7 +126,7 @@ namespace Z0
         protected virtual bool TraceDetailEnabled
             => false;
 
-        protected IChecks Claim 
+        protected TChecks Claim 
             => Checks.Checker;
 
         protected TCheckInvariant ClaimInvariant
@@ -135,7 +135,7 @@ namespace Z0
         protected TCheckPrimal ClaimPrimal 
             => Claim;
 
-        protected ICheckPrimalSeq ClaimPrimalSeq 
+        protected TCheckPrimalSeq ClaimPrimalSeq 
             => Claim;
 
         protected TCheckNumeric ClaimNumeric 

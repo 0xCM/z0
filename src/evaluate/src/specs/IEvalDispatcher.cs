@@ -6,11 +6,11 @@ namespace Z0
 {
     using K = Kinds;
 
-    interface IEvalDispatcher : IService
+    public interface IEvalDispatcher : IService
     {
         bit EvalFixedOperators(BufferTokens buffers, ApiCode[] api);
 
-        void Dispatch(BufferTokens buffers, in ApiCode api, K.BinaryOpClass k);    
+        void Dispatch(BufferTokens buffers, in ApiCode api, BinaryOpClass k);    
 
         void Dispatch(BufferTokens buffers, in ApiCode api, K.UnaryOpClass k);    
 

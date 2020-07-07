@@ -12,14 +12,6 @@ namespace Z0
     partial struct core
     {
         /// <summary>
-        /// Defines a non-valued option
-        /// </summary>
-        /// <typeparam name="T">The value type, if the value existed</typeparam>
-        [MethodImpl(Inline)]
-        public static Option<T> none<T>()
-            => Option<T>.None();
-
-        /// <summary>
         /// Transforms an input, branching on nullity evaluation
         /// </summary>
         /// <param name="x">The input</param>

@@ -8,12 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public readonly struct CheckFixed
     {
         [MethodImpl(Inline)]
-        public static ITestFixedBinaryOp BinaryOp(IPolyrand random)
+        public static TTestFixedBinaryOp BinaryOp(IPolyrand random)
             => TestFixedBinaryOp.Service(random);
     }
 }

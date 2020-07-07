@@ -23,7 +23,7 @@ namespace Z0.Machine
 
         IMachineFiles Files {get;}
 
-        IMachineIndexBuilder IndexBuilder {get;}            
+        EncodedIndexBuilder IndexBuilder {get;}            
 
         TCaptureArchive Archive 
             => Context.Archive;
@@ -34,7 +34,7 @@ namespace Z0.Machine
             Context = context;
             Broker = new EventBroker();
             Files = MachineFiles.Service(context);            
-            IndexBuilder = MachineIndexBuilder.Service;
+            IndexBuilder = Encoded.indexer();
             (this as IMachineEventClient).Connect();            
         }
 
@@ -146,7 +146,7 @@ namespace Z0.Machine
         PartInstructions DecodePart(PartCodeIndex pcs)
         {
             var dst = list<HostInstructions>();
-            var hcSets = pcs.Code;
+            var hcSets = pcs.Data;
             for(var i=0; i<hcSets.Length; i++)
             {
                 var hcs = hcSets[i];
@@ -160,7 +160,7 @@ namespace Z0.Machine
             return inxs;                        
         }
 
-        HostInstructions Decode(HostCodeIndex hcs)
+        HostInstructions Decode(MemberCodeIndex hcs)
         {
             var inxs = Root.list<MemberInstructions>();    
             
@@ -174,7 +174,7 @@ namespace Z0.Machine
             for(var i=0; i<hcs.Length; i++)
             {
                 dst.Clear();
-                var uriCode = hcs[i];
+                ref readonly var uriCode = ref hcs[i];
                 decoder.Decode(uriCode, OnDecoded);
                 
                 if(i == 0)
@@ -184,7 +184,7 @@ namespace Z0.Machine
                 inxs.Add(member);
             }
 
-            return HostInstructions.Create(hcs.Id, inxs.ToArray());
+            return HostInstructions.Create(hcs.Host, inxs.ToArray());
         }
 
         void Index(MemberParseReport report)

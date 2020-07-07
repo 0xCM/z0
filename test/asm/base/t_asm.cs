@@ -28,7 +28,7 @@ namespace Z0.Asm
         public t_asm()
         {
             Context = AsmContext.Create(AppContext);
-            AsmCheck = AsmTester.Create(Context);
+            AsmCheck = AsmTest.tester(Context);
             UnitDataDir.Clear();
         }
 

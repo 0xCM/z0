@@ -16,7 +16,7 @@ namespace Z0
         public ReadOnlySpan<AsciChar> CharSet
         {
             [MethodImpl(Inline), Op]
-            get => cast<char,AsciChar>(AsciStrings.Text(n0));
+            get => recover<char,AsciChar>(AsciStrings.Text(n0));
         }
     }
 }

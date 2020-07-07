@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public readonly struct CheckClose : TCheckClose
     {
         public static TCheckClose Checker => default(CheckClose);

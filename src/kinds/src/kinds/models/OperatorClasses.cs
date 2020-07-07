@@ -11,22 +11,8 @@ namespace Z0
 
     using K = OperatorClassKind;
 
-
-    public readonly struct ShiftOpClass : IOperatorClass<ShiftOpClass,K> 
-    {
-        public static implicit operator OperatorClass(ShiftOpClass src)
-            => src.Generalized;
-
-        public K Kind 
-            => K.ShiftOp; 
-
-        public OperatorClass Generalized 
-            => new OperatorClass(Kind);
-    }    
-
     partial class Kinds
     {
-
         public readonly struct EmitterOpClass : IOperatorClass<EmitterOpClass,K> 
         {
             public K Kind 
@@ -53,17 +39,17 @@ namespace Z0
                 => new OperatorClass(Kind);
         }
 
-        public readonly struct BinaryOpClass : IOperatorClass<BinaryOpClass,K> 
-        {
-            public static implicit operator OperatorClass(BinaryOpClass src)
-                => src.Generalized;
+        // public readonly struct BinaryOpClass : IOperatorClass<BinaryOpClass,K> 
+        // {
+        //     public static implicit operator OperatorClass(BinaryOpClass src)
+        //         => src.Generalized;
 
-            public K Kind 
-                => K.BinaryOp; 
+        //     public K Kind 
+        //         => K.BinaryOp; 
 
-            public OperatorClass Generalized 
-                => new OperatorClass(Kind);
-        }
+        //     public OperatorClass Generalized 
+        //         => new OperatorClass(Kind);
+        // }
 
         public readonly struct TernaryOpClass : IOperatorClass<TernaryOpClass,K> 
         {

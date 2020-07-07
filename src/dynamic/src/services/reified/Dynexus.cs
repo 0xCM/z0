@@ -20,7 +20,7 @@ namespace Z0
     using I = Z0;
 
     using U = Kinds.UnaryOpClass;
-    using B = Kinds.BinaryOpClass;
+    using B = BinaryOpClass;
     using T = Kinds.TernaryOpClass;
 
     readonly struct Dynexus : IDynexus
@@ -171,163 +171,163 @@ namespace Z0
                 => ImmInjector.FromFactory(Diviner, I.V256BinaryOpImmInjector.Create<T>(Diviner));
 
         [MethodImpl(Inline)]
-        FixedUnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(IBufferToken dst, IdentifiedCode src)
+        FixedUnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(BufferToken dst, IdentifiedCode src)
             => (FixedUnaryOp<F>)Emit(src.Id, typeof(FixedUnaryOp<F>), typeof(F), 
                     array(typeof(F)), dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
-        FixedBinaryOp<F> IFixedDynamic.EmitFixedBinary<F>(IBufferToken dst, IdentifiedCode src)
+        FixedBinaryOp<F> IFixedDynamic.EmitFixedBinary<F>(BufferToken dst, IdentifiedCode src)
             => (FixedBinaryOp<F>)Emit(src.Id, typeof(FixedBinaryOp<F>), typeof(F), 
                     array(typeof(F),typeof(F)),dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
-        FixedTernaryOp<F> IFixedDynamic.EmitFixedTernary<F>(IBufferToken dst, IdentifiedCode src)
+        FixedTernaryOp<F> IFixedDynamic.EmitFixedTernary<F>(BufferToken dst, IdentifiedCode src)
             => (FixedTernaryOp<F>)Emit(src.Id, typeof(FixedTernaryOp<F>), typeof(F), 
                     array(typeof(F), typeof(F), typeof(F)), dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
-        UnaryOp8 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W8 w, IdentifiedCode src)
+        UnaryOp8 IFixedDynamic.EmitFixedUnary(BufferToken dst, W8 w, IdentifiedCode src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp16 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W16 w, IdentifiedCode src)               
+        UnaryOp16 IFixedDynamic.EmitFixedUnary(BufferToken dst, W16 w, IdentifiedCode src)               
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp32 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W32 w, IdentifiedCode src)
+        UnaryOp32 IFixedDynamic.EmitFixedUnary(BufferToken dst, W32 w, IdentifiedCode src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp64 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W64 w, IdentifiedCode src)
+        UnaryOp64 IFixedDynamic.EmitFixedUnary(BufferToken dst, W64 w, IdentifiedCode src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp128 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W128 w, IdentifiedCode src)
+        UnaryOp128 IFixedDynamic.EmitFixedUnary(BufferToken dst, W128 w, IdentifiedCode src)
             => Emit(dst.Load(src.Encoded), src.Id, Unary, w);
 
         [MethodImpl(Inline)]
-        UnaryOp256 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W256 w, IdentifiedCode src)
+        UnaryOp256 IFixedDynamic.EmitFixedUnary(BufferToken dst, W256 w, IdentifiedCode src)
             => Emit(dst.Load(src.Encoded), src.Id, Unary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp8 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W8 w, IdentifiedCode src)
+        BinaryOp8 IFixedDynamic.EmitFixedBinary(BufferToken dst, W8 w, IdentifiedCode src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp16 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W16 w, IdentifiedCode src)
+        BinaryOp16 IFixedDynamic.EmitFixedBinary(BufferToken dst, W16 w, IdentifiedCode src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp32 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W32 w, IdentifiedCode src)
+        BinaryOp32 IFixedDynamic.EmitFixedBinary(BufferToken dst, W32 w, IdentifiedCode src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp64 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W64 w, IdentifiedCode src)
+        BinaryOp64 IFixedDynamic.EmitFixedBinary(BufferToken dst, W64 w, IdentifiedCode src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp128 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W128 w, IdentifiedCode src)
+        BinaryOp128 IFixedDynamic.EmitFixedBinary(BufferToken dst, W128 w, IdentifiedCode src)
             => Emit(src.Id, Binary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        BinaryOp256 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W256 w, IdentifiedCode src)
+        BinaryOp256 IFixedDynamic.EmitFixedBinary(BufferToken dst, W256 w, IdentifiedCode src)
             => Emit(src.Id, Binary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp<T> IDynamicNumeric.EmitUnaryOp<T>(IBufferToken dst, IdentifiedCode src)
+        UnaryOp<T> IDynamicNumeric.EmitUnaryOp<T>(BufferToken dst, IdentifiedCode src)
             => EmitUnaryOp<T>(src.Id, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        BinaryOp<T> IDynamicNumeric.EmitBinaryOp<T>(IBufferToken dst, IdentifiedCode src)
+        BinaryOp<T> IDynamicNumeric.EmitBinaryOp<T>(BufferToken dst, IdentifiedCode src)
             => EmitBinaryOp<T>(src.Id, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        TernaryOp<T> IDynamicNumeric.EmitTernaryOp<T>(IBufferToken dst, IdentifiedCode src)
+        TernaryOp<T> IDynamicNumeric.EmitTernaryOp<T>(BufferToken dst, IdentifiedCode src)
             => EmitTernaryOp<T>(src.Id, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp8 Emit(OpIdentity id, U f, W8 w, IBufferToken dst)
+        UnaryOp8 Emit(OpIdentity id, U f, W8 w, BufferToken dst)
             => (UnaryOp8)Emit(id, f, typeof(UnaryOp8), typeof(Fixed8), dst);
 
         [MethodImpl(Inline)]
-        UnaryOp16 Emit(OpIdentity id, U f, W16 w, IBufferToken dst)
+        UnaryOp16 Emit(OpIdentity id, U f, W16 w, BufferToken dst)
             => (UnaryOp16)Emit(id, f, typeof(UnaryOp16), typeof(Fixed16), dst);
 
         [MethodImpl(Inline)]
-        UnaryOp32 Emit(OpIdentity id, U f, W32 w, IBufferToken dst)
+        UnaryOp32 Emit(OpIdentity id, U f, W32 w, BufferToken dst)
             => (UnaryOp32)Emit(id, f, typeof(UnaryOp32), typeof(Fixed32), dst);
 
         [MethodImpl(Inline)]
-        UnaryOp64 Emit(OpIdentity id, U f, W64 w, IBufferToken dst)
+        UnaryOp64 Emit(OpIdentity id, U f, W64 w, BufferToken dst)
             => (UnaryOp64)Emit(id, f, typeof(UnaryOp64), typeof(Fixed64), dst);
 
         [MethodImpl(Inline)]
-        UnaryOp128 Emit(IBufferToken dst, OpIdentity id, U f, N128 w)
+        UnaryOp128 Emit(BufferToken dst, OpIdentity id, U f, N128 w)
             => (UnaryOp128)Emit(id, f, typeof(UnaryOp128), typeof(Fixed128), dst);
 
         [MethodImpl(Inline)]
-        UnaryOp256 Emit(IBufferToken dst, OpIdentity id, U f, N256 w)
+        UnaryOp256 Emit(BufferToken dst, OpIdentity id, U f, N256 w)
             => (UnaryOp256)Emit(id, f, typeof(UnaryOp256), typeof(Fixed256), dst);
 
         [MethodImpl(Inline)]
-        BinaryOp8 Emit(IBufferToken dst, OpIdentity id, B f, W8 w)
+        BinaryOp8 Emit(BufferToken dst, OpIdentity id, B f, W8 w)
             => (BinaryOp8)Emit(id, f, typeof(BinaryOp8), typeof(Fixed8), dst);
 
         [MethodImpl(Inline)]
-        BinaryOp16 Emit(IBufferToken dst, OpIdentity id, B f, W16 w)
+        BinaryOp16 Emit(BufferToken dst, OpIdentity id, B f, W16 w)
             => (BinaryOp16)Emit(id, f, typeof(BinaryOp16), typeof(Fixed16), dst);
 
         [MethodImpl(Inline)]
-        BinaryOp32 Emit(IBufferToken dst, OpIdentity id, B f, W32 w)
+        BinaryOp32 Emit(BufferToken dst, OpIdentity id, B f, W32 w)
             => (BinaryOp32)Emit(id, f, typeof(BinaryOp32), typeof(Fixed32), dst);
 
         [MethodImpl(Inline)]
-        BinaryOp64 Emit(IBufferToken dst, OpIdentity id, B f, W64 w)
+        BinaryOp64 Emit(BufferToken dst, OpIdentity id, B f, W64 w)
             => (BinaryOp64)Emit(id, f, typeof(BinaryOp64), typeof(Fixed64), dst);
 
         [MethodImpl(Inline)]
-        BinaryOp128 Emit(OpIdentity id, B f, N128 w, IBufferToken dst)
+        BinaryOp128 Emit(OpIdentity id, B f, N128 w, BufferToken dst)
             => (BinaryOp128)Emit(id, f, typeof(BinaryOp128), typeof(Fixed128), dst);
 
         [MethodImpl(Inline)]
-        BinaryOp256 Emit(OpIdentity id, B f, N256 w, IBufferToken dst)
+        BinaryOp256 Emit(OpIdentity id, B f, N256 w, BufferToken dst)
             => (BinaryOp256)Emit(id, f, typeof(BinaryOp256), typeof(Fixed256), dst);
 
         [MethodImpl(Inline)]
-        FixedDelegate Emit(OpIdentity id, U f, Type operatorType, Type operandType, IBufferToken dst)        
+        FixedDelegate Emit(OpIdentity id, U f, Type operatorType, Type operandType, BufferToken dst)        
             => Emit(id, functype:operatorType, result:operandType, 
                     args:array(operandType, operandType), dst.Handle);
 
         [MethodImpl(Inline)]
-        FixedDelegate Emit(OpIdentity id, B f, Type operatorType, Type operandType, IBufferToken dst)        
+        FixedDelegate Emit(OpIdentity id, B f, Type operatorType, Type operandType, BufferToken dst)        
             => Emit(id, functype:operatorType, result:operandType, 
                     args:array(operandType, operandType), dst.Handle);
 
         [MethodImpl(Inline)]
-        UnaryOp<T> EmitUnaryOp<T>(OpIdentity id, IBufferToken dst)
+        UnaryOp<T> EmitUnaryOp<T>(OpIdentity id, BufferToken dst)
             where T : unmanaged
                 => (UnaryOp<T>)EmitFixedUnaryOp(id, typeof(UnaryOp<T>), typeof(T), dst);
 
         [MethodImpl(Inline)]
-        BinaryOp<T> EmitBinaryOp<T>(OpIdentity id, IBufferToken dst)
+        BinaryOp<T> EmitBinaryOp<T>(OpIdentity id, BufferToken dst)
             where T : unmanaged
                 => (BinaryOp<T>)EmitFixedBinaryOp(id, typeof(BinaryOp<T>), typeof(T), dst);
 
         [MethodImpl(Inline)]
-        TernaryOp<T> EmitTernaryOp<T>(OpIdentity id, IBufferToken dst)
+        TernaryOp<T> EmitTernaryOp<T>(OpIdentity id, BufferToken dst)
             where T : unmanaged
                 => (TernaryOp<T>)EmitFixedTernaryOp(id,typeof(TernaryOp<T>), typeof(T), dst);
 
         [MethodImpl(Inline)]
-        FixedDelegate EmitFixedUnaryOp(OpIdentity id, Type operatorType, Type operandType, IBufferToken dst)
+        FixedDelegate EmitFixedUnaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
             => Emit(id, functype: operatorType, result: operandType, args: array(operandType), dst.Handle);
 
         [MethodImpl(Inline)]
-        FixedDelegate EmitFixedBinaryOp(OpIdentity id, Type operatorType, Type operandType, IBufferToken dst)        
-            => Emit(id,functype:operatorType, result:operandType, args: array(operandType, operandType), dst.Handle);
+        FixedDelegate EmitFixedBinaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)        
+            => Emit(id, functype:operatorType, result:operandType, args: array(operandType, operandType), dst.Handle);
 
         [MethodImpl(Inline)]
-        FixedDelegate EmitFixedTernaryOp(OpIdentity id, Type operatorType, Type operandType, IBufferToken dst)        
+        FixedDelegate EmitFixedTernaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)        
             => Emit(id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType), dst.Handle);
 
         FixedDelegate Emit(OpIdentity id, Type functype, Type result, Type[] args, IntPtr dst)

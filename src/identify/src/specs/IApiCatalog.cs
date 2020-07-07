@@ -102,8 +102,8 @@ namespace Z0
         public ApiHost[] DirectHosts 
             => Array.Empty<ApiHost>();
 
-        public BinaryResourceIndex Resources 
-            => BinaryResourceIndex.Empty;
+        public BinaryResources Resources 
+            => BinaryResources.Empty;
 
         public Type[] FunFactories 
             => Array.Empty<Type>();

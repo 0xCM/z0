@@ -22,13 +22,13 @@ namespace Z0
             where A : unmanaged, IAsciSequence
         {
             if(typeof(A) == typeof(asci2))
-                return Root.cast<AsciCharCode>(cast(n2,src).Encoded);
+                return Root.recover<AsciCharCode>(cast(n2,src).Encoded);
             else if(typeof(A) == typeof(asci4))
-                return Root.cast<AsciCharCode>(cast(n4,src).Encoded);
+                return Root.recover<AsciCharCode>(cast(n4,src).Encoded);
             else if(typeof(A) == typeof(asci8))
-                return Root.cast<AsciCharCode>(cast(n8,src).Encoded);
+                return Root.recover<AsciCharCode>(cast(n8,src).Encoded);
             else if(typeof(A) == typeof(asci16))
-                return Root.cast<AsciCharCode>(cast(n16,src).Encoded);
+                return Root.recover<AsciCharCode>(cast(n16,src).Encoded);
             else                
                 return codes(n32, src);
         }
@@ -38,9 +38,9 @@ namespace Z0
             where A : unmanaged, IAsciSequence
         {
             if(typeof(A) == typeof(asci32))
-                return Root.cast<AsciCharCode>(cast(n32,src).Encoded);
+                return Root.recover<AsciCharCode>(cast(n32,src).Encoded);
             else if(typeof(A) == typeof(asci64))
-                return Root.cast<AsciCharCode>(cast(n64,src).Encoded);
+                return Root.recover<AsciCharCode>(cast(n64,src).Encoded);
             else
                 return ReadOnlySpan<AsciCharCode>.Empty;
         }

@@ -12,17 +12,16 @@ namespace Z0
     partial struct core
     {
         /// <summary>
-        /// Allocates and populates a new array by filtering the source array with 
-        /// a specified predicate
+        /// Allocates and populates a new array by filtering the source array with a specified predicate 
         /// </summary>
         /// <param name="src">The soruce array</param>
         /// <param name="f">The predicate</param>
         /// <typeparam name="T">The array element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T[] filter<T>(ReadOnlySpan<T> src, Func<T,bool> f)
+        public static T[] where<T>(ReadOnlySpan<T> src, Func<T,bool> f)
         {
             var length = src.Length;
-            var dst = span<T>(length);
+            var dst = sys.span<T>(length);
             var count = 0u;
             for(var i=0u; i<length; i++)
             {

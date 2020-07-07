@@ -13,55 +13,68 @@ namespace Z0
     using static Memories;
     using static Kinds;
 
-
     using K = Kinds;
 
+    static class EvalMessages
+    {
+        public static void EvaluatedPoint<T>(this IAppMsgSink dst, string opname, T a, T b, T result)
+            => dst.NotifyConsole(AppMsg.NoCaller($"{opname}({a}, {b}) = {result}"));
+
+        public static void AnalyzingEvaluation(this IAppMsgSink dst, in ApiCode api)
+            => dst.NotifyConsole(AppMsg.NoCaller($"Analyzing evaluation of {api.Uri.WithScheme(OpUriScheme.Located)}", AppMsgKind.Babble));
+    }
+    
     class EvalDispatcher : IEvalDispatcher
     {        
         readonly IPolyrand Random;
 
         readonly IAppMsgSink Sink;
+
+        readonly uint BufferSize;
                                 
         [MethodImpl(Inline)]
-        public static IEvalDispatcher Create(IPolyrand random, IAppMsgSink sink)
-            => new EvalDispatcher(random, sink);
-
-        [MethodImpl(Inline)]
-        internal EvalDispatcher(IPolyrand random, IAppMsgSink sink)
+        internal EvalDispatcher(IPolyrand random, IAppMsgSink sink, uint bufferSize)
         {
-            this.Random = random;
-            this.Sink = sink;
+            Random = random;
+            Sink = sink;
+            BufferSize = bufferSize;            
         }
+
+        uint PointCount<T>()
+            => (uint)Root.size<T>()/BufferSize;
 
         MemberEvaluator Evaluator(BufferTokens buffers)
-            => MemberEvaluator.Create(buffers);
+            => Evaluate.evaluator(buffers);
 
         TCheckNumeric Numeric => CheckNumeric.Checker;
-
-        const int EvalCount = 100;
         
-        UnaryEval<T> eval<T>(BufferTokens buffers, in ApiCode code,  UnaryOpClass<T> k)
+        Pair<string> Labels => ("method", "asm");
+
+        PairEvalOutcomes<T> init<T>()
             where T : unmanaged
         {
-            var src = Random.Array<T>(EvalCount);
-            var target =  Evaluations.pairs(("method", "asm"), Tuples.index(new Pair<T>[EvalCount]));
-            var count = src.Length;
-            var content = Evaluations.unary(src, target);
-            var package = new UnaryOpEval<T>(new ApiCodeEval(buffers, code), content);
-            var evaluator = new UnaryOpEvaluator<T>();
-            return evaluator.Evaluate(package);
+            var count = PointCount<T>();
+            var dst = Tuples.index(sys.alloc<Pair<T>>(count));
+            return Evaluated.pairs(Labels, dst);
         }
 
-        BinaryEval<T> eval<T>(BufferTokens buffers, in ApiCode code,  BinaryOpClass<T> k)
+        UnaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiCode code, UnaryOpClass<T> k)
             where T : unmanaged
         {
-            var src = Random.Pairs<T>(EvalCount);
-            var count = src.Count;
-            var target =  Evaluations.pairs(("method", "asm"), Tuples.index(new Pair<T>[EvalCount]));
-            var content = Evaluations.binary(src, target);
-            var package = new BinaryOpEval<T>(new ApiCodeEval(buffers, code), content);
-            var evaluator = new BinaryOpEvaluator<T>();
-            return evaluator.Evaluate(package);
+            var target = init<T>();
+            var src = Random.Array<T>(target.Count);
+            var context = EvalContext.unary(buffers, code, Evaluated.unary(src, target));
+            return Evaluate.compute(context);
+        }
+
+        
+        BinaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiCode code, BinaryOpClass<T> k)
+            where T : unmanaged
+        {
+            var target = init<T>();
+            var src = Random.Pairs<T>(target.Count);
+            var context = EvalContext.binary(buffers, code, Evaluated.binary(src, target));
+            return Evaluate.compute(context);
         }
 
         MemberEvaluator Evaluator<E,T>(BufferTokens buffers, IOpClass<E,T> k)
@@ -133,7 +146,7 @@ namespace Z0
         HashSet<OpKindId> EvalSkip {get;}
             = new HashSet<OpKindId>(seq(OpKindId.Inc));
 
-        void Analyze<T>(in ApiCode api, in UnaryEval<T> eval)
+        void Analyze<T>(in ApiCode api, in UnaryEvaluations<T> eval)
             where T : unmanaged
         {
             if(EvalSkip.Contains(api.KindId))
@@ -154,8 +167,8 @@ namespace Z0
                 ref readonly var input = ref eval.Source[i];
                 ref readonly var result = ref eval.Target;
                 
-                var x = result.Target[i].Left;
-                var y = result.Target[i].Right;                
+                var x = result[i].Left;
+                var y = result[i].Right;                
                 
                 if(fp)
                     Numeric.close(x,y);
@@ -164,7 +177,7 @@ namespace Z0
             }
         }
 
-       void Analyze<T>(in ApiCode api, in BinaryEval<T> eval)
+       void Analyze<T>(in ApiCode api, in BinaryEvaluations<T> eval)
             where T : unmanaged
         {
             if(EvalSkip.Contains(api.KindId))
@@ -184,8 +197,8 @@ namespace Z0
             {
                 ref readonly var input = ref eval.Source[i];
                 ref readonly var result = ref eval.Target;
-                var x = result.Target[i].Left;
-                var y = result.Target[i].Right;
+                var x = result[i].Left;
+                var y = result[i].Right;
                 if(fp)
                     Numeric.close(x,y);
                 else
@@ -246,7 +259,7 @@ namespace Z0
             }           
         }
 
-        public void Dispatch(BufferTokens buffers, in ApiCode api, K.BinaryOpClass k)
+        public void Dispatch(BufferTokens buffers, in ApiCode api, BinaryOpClass k)
         {
             var kid = api.Member.KindId;
             int count = 128;

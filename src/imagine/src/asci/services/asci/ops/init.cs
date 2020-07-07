@@ -37,27 +37,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static asci2 init(N2 n, ReadOnlySpan<AsciCharCode> src)
-            => new asci2(head(cast<AsciCharCode,ushort>(src)));
+            => new asci2(head(recover<AsciCharCode,ushort>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci4 init(N4 n, ReadOnlySpan<AsciCharCode> src)
-            => new asci4(Root.head(Root.cast<AsciCharCode,asci4>(src)));
+            => new asci4(Root.head(Root.recover<AsciCharCode,asci4>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci8 init(N8 n, ReadOnlySpan<AsciCharCode> src)
-            => new asci8(head(Root.cast<AsciCharCode,asci8>(src)));
+            => new asci8(head(Root.recover<AsciCharCode,asci8>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci16 init(N16 n, ReadOnlySpan<AsciCharCode> src)
-            => new asci16(cast<AsciCharCode,byte>(src));
+            => new asci16(recover<AsciCharCode,byte>(src));
 
         [MethodImpl(Inline), Op]
         public static asci32 init(N32 n, ReadOnlySpan<AsciCharCode> src)
-            => new asci32(cast<AsciCharCode,byte>(src));
+            => new asci32(recover<AsciCharCode,byte>(src));
 
         [MethodImpl(Inline), Op]
         public static asci64 init(N64 n, ReadOnlySpan<AsciCharCode> src)
-            => new asci64(cast<AsciCharCode,byte>(src));
+            => new asci64(recover<AsciCharCode,byte>(src));
 
         [MethodImpl(Inline), Op]
         public static asci64 init(N64 n, AsciCharCode fill = AsciCharCode.Space)
@@ -65,15 +65,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static asci2 init(N2 n, ReadOnlySpan<byte> src)
-            => view(n,head(cast<byte,ushort>(src)));
+            => view(n,head(recover<byte,ushort>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci4 init(N4 n, ReadOnlySpan<byte> src)
-            => view(n,head(cast<byte,uint>(src)));
+            => view(n,head(recover<byte,uint>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci8 init(N8 n, ReadOnlySpan<byte> src)
-            => view(n, head(cast<byte,uint>(src)));
+            => view(n, head(recover<byte,uint>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci16 init(N16 n, ulong lo, ulong hi)

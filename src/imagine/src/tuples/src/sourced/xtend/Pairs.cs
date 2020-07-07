@@ -33,5 +33,9 @@ namespace Z0
         public static Pairs<T> Pairs<T>(this IValueSource source, Pair<T>[] dst)
             where T : struct
                 => PairSource.index(source, dst);
+
+        public static Pairs<T> Pairs<T>(this IValueSource source, uint count, T t = default)
+            where T : struct
+                => PairSource.index(source, (int)count,t);
     }
 }

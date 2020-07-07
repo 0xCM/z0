@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ByteBlock16 copy(ReadOnlySpan<byte> src, ref ByteBlock16 dst)
         {
-            var vSrc = SymBits.vload(w128, head(cast<byte,byte>(src)));
+            var vSrc = SymBits.vload(w128, head(recover<byte,byte>(src)));
             SymBits.vstore(vSrc, ref u8r(dst));
             return ref dst;
         }
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ByteBlock32 copy(ReadOnlySpan<byte> src, ref ByteBlock32 dst)
         {
-            var vSrc = SymBits.vload(w256, head(cast<byte,byte>(src)));
+            var vSrc = SymBits.vload(w256, head(recover<byte,byte>(src)));
             SymBits.vstore(vSrc, ref u8r(dst));
             return ref dst;
         }
@@ -73,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ByteBlock64 copy(ReadOnlySpan<byte> src, ref ByteBlock64 dst)
         {
-            var vSrc = SymBits.vload(w512, head(cast<byte,byte>(src)));
+            var vSrc = SymBits.vload(w512, head(recover<byte,byte>(src)));
             SymBits.vstore(vSrc, ref u8r(dst));
             return ref dst;
         }

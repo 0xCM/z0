@@ -21,7 +21,11 @@ namespace Z0
 
         public PartId[] Parts {get;}
 
-        public EncodedIndex(PartId[] parts, HashTable<MemoryAddress,MemberCode> members, HashTable<MemoryAddress,OpUri> memuri, Dictionary<ApiHostUri,MemberCode[]> hostcode)
+        public EncodedIndex(PartId[] parts, 
+            HashTable<MemoryAddress,MemberCode> members, 
+            HashTable<MemoryAddress,OpUri> memuri, 
+            Dictionary<ApiHostUri,MemberCode[]> hostcode
+            )
         {
             Parts = parts;
             MemoryTable = members;
@@ -78,12 +82,12 @@ namespace Z0
             => MemoryTable[location];
 
         [MethodImpl(Inline)]
-        public HostCodeIndex CodeSet(ApiHostUri id)
-            => new HostCodeIndex(id, HostCode[id]);
+        public MemberCodeIndex CodeSet(ApiHostUri id)
+            => Encoded.index(id, HostCode[id]);
 
         [MethodImpl(Inline)]
         public PartCodeIndex CodeSet(PartId id)
-            => new PartCodeIndex(id, Hosts.Map(CodeSet));
+            => Encoded.index(id, Hosts.Map(CodeSet));
 
         public MemberCode this[MemoryAddress location]
         {
@@ -91,7 +95,7 @@ namespace Z0
             get => Code(location);
         }
 
-        public HostCodeIndex this[ApiHostUri id]
+        public MemberCodeIndex this[ApiHostUri id]
         {
             [MethodImpl(Inline)]
             get => CodeSet(id);

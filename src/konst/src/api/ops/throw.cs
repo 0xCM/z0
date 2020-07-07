@@ -26,5 +26,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void ThrowEmptySpanError()
             => sys.@throw($"The span, it is empty");
+
+        [MethodImpl(Inline), Op]
+        public static void ThrowDuplicated<K,V>(KeyedValue<K,V> kvp)
+            => sys.@throw(new Exception($"The key {kvp.Key} for {kvp.Value} is not unique"));
     }
 }

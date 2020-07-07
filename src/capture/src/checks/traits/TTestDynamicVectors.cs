@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using Z0.Asm;
-
     using static Konst;
     using static Memories;
     using static BufferSeqId;
 
-    public interface TTestDynamicVectors : TCheckVectors, ITestAction, ITestDynamic, IBufferedChecker
+    public interface TTestDynamicVectors : TCheckVectors, TTestAction, ITestDynamic, IBufferedChecker
     {
         TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, IdentifiedCode bits)
             where T : unmanaged

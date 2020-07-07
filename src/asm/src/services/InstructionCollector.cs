@@ -21,7 +21,7 @@ namespace Z0.Asm
             => new InstructionCollector(src);
         
         [MethodImpl(Inline)]
-        InstructionCollector(params Instruction[] src)
+        internal InstructionCollector(params Instruction[] src)
         {
             items = new List<Instruction>();
             items.AddRange(src);

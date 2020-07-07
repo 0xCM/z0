@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    public interface IOperatorFactory<D,T> : IService
+    public interface IOperatorFactory<D,T>
         where D : Delegate
     {
         D Manufacture(MethodInfo method, object instance);

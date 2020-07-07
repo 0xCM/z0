@@ -37,11 +37,14 @@ namespace Z0
         readonly AsmFormatSpec FormatConfig;
 
         readonly TCaptureServices Services;
+
+        readonly uint EvalBufferSize;
         
         internal CaptureHost(IAsmContext context, FolderPath root)
         {                    
             Context = context;
             Sink = context;
+            EvalBufferSize = Pow2.T14;
             WorkflowConfig = new AsmArchiveConfig(root);
             Settings = CaptureConfig.From(context.Settings);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
@@ -86,7 +89,7 @@ namespace Z0
 
         void CheckExec(params PartId[] parts)
         {            
-            Context.CreateEvalWorkflow(WorkflowConfig).Execute(parts);
+            Context.CreateEvalWorkflow(WorkflowConfig, EvalBufferSize).Execute(parts);
         }
 
         public void OnEvent(FunctionsDecoded e)

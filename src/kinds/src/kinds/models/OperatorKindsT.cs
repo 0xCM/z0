@@ -53,25 +53,6 @@ namespace Z0
                 => default;
         }
 
-        public readonly struct BinaryOpClass<T> : IOperatorClass<BinaryOpClass<T>,K,T> 
-        { 
-            public K Kind 
-                => K.BinaryOp; 
-
-            [MethodImpl(Inline)]
-            public static implicit operator OperatorClass<T>(BinaryOpClass<T> src)
-                => src.Generalized;
-            
-            [MethodImpl(Inline)]
-            public static implicit operator BinaryOpClass(BinaryOpClass<T> src)
-                => src.NonGeneric;
-                        
-            public OperatorClass<T> Generalized 
-                => new OperatorClass<T>(Kind);
-
-            public BinaryOpClass NonGeneric 
-                => default;            
-        }
 
         public readonly struct TernaryOpClass<T> : IOperatorClass<TernaryOpClass<T>,K,T> 
         {

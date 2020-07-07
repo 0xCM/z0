@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Reflection;
 
     using static Konst;
 
@@ -28,5 +30,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(uint count)
             => sys.span<T>(count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> span<T>(IEnumerable<T> src)
+            => sys.array(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> span<T>(T[] src)
+            => src;
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> bytes(ReadOnlySpan<AsciCharCode> src)
-            => Root.cast<AsciCharCode,byte>(src);        
+            => Root.recover<AsciCharCode,byte>(src);        
 
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci2 src)

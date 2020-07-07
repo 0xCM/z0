@@ -70,9 +70,17 @@ namespace Z0
 
         ArrayToList,
 
-       ListToArray,
+        ListToArray,
+
+        EnumerableToArray,
+
+        EnumerableToSpan,
 
         Throw,
+
+        GetFieldConstant,
+
+        GetTypeFields,
 
     }
 }

@@ -35,6 +35,19 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
+        public static T[] Array<T>(this IPolyrand random, uint length)
+            where T : unmanaged
+                => random.Stream<T>().TakeArray((int)length);
+
+        /// <summary>
+        /// Produces an array of random values
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="length">The length of the produced array</param>
+        /// <param name="domain">An optional domain to which values are constrained</param>
+        /// <param name="filter">An optional filter that refines the domain</param>
+        /// <typeparam name="T">The generated value type</typeparam>
+        [MethodImpl(Inline)]
         public static T[] Array<T>(this IPolyrand random, int length, Interval<T> domain)
             where T : unmanaged
                 => random.Stream(domain).TakeArray(length);
@@ -66,6 +79,5 @@ namespace Z0
         public static T[] Array<T>(this IPolyrand random, int length, T min, T max)
             where T : unmanaged
                 => random.Stream(min,max).TakeArray(length);
-
     }
 }

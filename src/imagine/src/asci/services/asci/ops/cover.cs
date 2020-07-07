@@ -15,26 +15,26 @@ namespace Z0
     {         
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci2 src)
-            => Root.cast<AsciCodeCover>(bytespan(src));
+            => Root.recover<AsciCodeCover>(bytespan(src));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci4 src)
-            => Root.cast<AsciCodeCover>(bytespan(src));
+            => Root.recover<AsciCodeCover>(bytespan(src));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci8 src)
-            => Root.cast<AsciCodeCover>(bytespan(src));
+            => Root.recover<AsciCodeCover>(bytespan(src));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci16 src)
-            => Root.cast<AsciCodeCover>(bytespan(src)); 
+            => Root.recover<AsciCodeCover>(bytespan(src)); 
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci32 src)
-            => Root.cast<AsciCodeCover>(bytespan(src)); 
+            => Root.recover<AsciCodeCover>(bytespan(src)); 
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci64 src)
-            => Root.cast<AsciCodeCover>(bytespan(src)); 
+            => Root.recover<AsciCodeCover>(bytespan(src)); 
     }
 }

@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IDynamicNumeric : IService
+    public interface IDynamicNumeric
     {
-        UnaryOp<T> EmitUnaryOp<T>(IBufferToken dst, IdentifiedCode src)
+        UnaryOp<T> EmitUnaryOp<T>(BufferToken dst, IdentifiedCode src)
             where T : unmanaged;
 
-        BinaryOp<T> EmitBinaryOp<T>(IBufferToken dst, IdentifiedCode src)
+        BinaryOp<T> EmitBinaryOp<T>(BufferToken dst, IdentifiedCode src)
             where T : unmanaged;            
 
-        TernaryOp<T> EmitTernaryOp<T>(IBufferToken dst, IdentifiedCode src)
+        TernaryOp<T> EmitTernaryOp<T>(BufferToken dst, IdentifiedCode src)
             where T : unmanaged;            
     }
 }

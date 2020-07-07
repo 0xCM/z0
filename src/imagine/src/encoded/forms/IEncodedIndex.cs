@@ -14,13 +14,13 @@ namespace Z0
 
         MemberCode Code(MemoryAddress src);
 
-        HostCodeIndex CodeSet(ApiHostUri host);
+        MemberCodeIndex CodeSet(ApiHostUri host);
 
         PartCodeIndex CodeSet(PartId part);
 
         MemberCode this[MemoryAddress address] {get;}
 
-        HostCodeIndex this[ApiHostUri uri] {get;}
+        MemberCodeIndex this[ApiHostUri uri] {get;}
 
         PartCodeIndex this[PartId id] {get;}
     }

@@ -14,6 +14,8 @@ namespace Z0
     [ApiHost]
     public readonly struct PrimalKindBitField : IRefinedBitField<PrimalKind,byte>
     {        
+        internal readonly byte Data;
+
         /// <summary>
         /// Creates a bitfield over a specified primitive kind
         /// </summary>
@@ -81,8 +83,8 @@ namespace Z0
             => ref skip(Masks, (byte)i);
 
         [MethodImpl(Inline), Op]
-        public static PrimalKind filter(PrimalKind src, SegMask mask)
-            => (PrimalKind)((byte)mask & (byte)src);
+        public static PrimalKind filter(byte src, SegMask mask)
+            => (PrimalKind)(src & (byte)mask);
 
         [MethodImpl(Inline), Op]
         public static PrimalKind view(PrimalKind src, SegPos offset)
@@ -92,30 +94,38 @@ namespace Z0
         public static ref readonly SegPos index(SegId i)
             => ref skip(Positions, (byte)i);
 
-        internal readonly PrimalKind Data;
+        public static LiteralBitField<byte,SegId,SegPos,SegWidth,SegMask> Definition
+            => LiteralBitFields.specify(default(byte), default(SegId), default(SegPos), default(SegWidth), default(SegMask));
 
-        public PrimalKind FieldValue 
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-        
+
         [MethodImpl(Inline)]
         public PrimalKindBitField(PrimalKind src)
-            => Data = src;
+            => Data = (byte)src;
 
         [MethodImpl(Inline)]
         public PrimalKindBitField(PrimalLiteralKind src)
-            => Data = (PrimalKind)src;
+            => Data = (byte)src;
 
         [MethodImpl(Inline)]
         public PrimalKindBitField(byte src)
-            => Data = (PrimalKind)src;
+            => Data = src;
 
         [MethodImpl(Inline)]
         public bool Equals(PrimalKindBitField src)
             => Data == src.Data;
 
+        public PrimalKind Kind 
+        {
+            [MethodImpl(Inline)]
+            get => (PrimalKind)Data;
+        }
+
+        public byte Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+        
         public TypeWidth Width
         {
             [MethodImpl(Inline)]

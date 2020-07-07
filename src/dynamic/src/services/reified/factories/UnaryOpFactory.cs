@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst; 
-    using static Memories;
     using static XPress;
 
     readonly struct UnaryOpFactory<T> : IUnaryOpFactory<T>
@@ -20,7 +19,7 @@ namespace Z0
         
         public Func<T,T> Manufacture(MethodInfo method, object instance)
         {
-            var args = seq(paramX<T>());
+            var args = Root.seq(paramX<T>());
             var callExpr = call(instance, method, args.ToArray());
             var f = lambda<T,T>(args, callExpr).Compile();
             return f;

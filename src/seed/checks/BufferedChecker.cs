@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BufferedChecker(int length, byte count)
         {
-            Buffers = BufferSeq.alloc(length, count, out BufferAlloc).Tokenize();            
+            Buffers = Z0.Buffers.sequence(length, count, out BufferAlloc).Tokenize();            
         }
          
         public void Dispose()

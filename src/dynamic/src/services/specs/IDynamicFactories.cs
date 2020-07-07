@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst; 
     using static Kinds;
 
-
-    public interface IDynamicFactories : IService
+    public interface IDynamicFactories
     {
         IEmitterOpFactory<T> Factory<T>(EmitterOpClass<T> k)
             where T : unmanaged;        

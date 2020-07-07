@@ -11,12 +11,12 @@ namespace Z0
 
     public readonly struct IdentifiedCodeIndex
     {                
-        public ApiHostUri Host {get;}
+        public readonly ApiHostUri Host;
 
-        public IdentifiedCode[] Code {get;}
+        public readonly IdentifiedCode[] Code;
 
         [MethodImpl(Inline)]
-        public IdentifiedCodeIndex(ApiHostUri host, IdentifiedCode[] code)
+        internal IdentifiedCodeIndex(ApiHostUri host, IdentifiedCode[] code)
         {
             Root.insist(host.IsNonEmpty);
             Host = host;
@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public IdentifiedCodeIndex(IdentifiedCode[] code)
+        IdentifiedCodeIndex(IdentifiedCode[] code)
         {            
             Host = ApiHostUri.Empty;
             Code = code;

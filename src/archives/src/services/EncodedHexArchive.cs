@@ -71,7 +71,7 @@ namespace Z0
                 foreach(var item in Read(file))
                     if(item.IsNonEmpty)
                         dst.Add(item);
-                return new IdentifiedCodeIndex(uri, dst.ToArray());            
+                return Encoded.index(uri, dst.ToArray());            
             }
             return Option.none<IdentifiedCodeIndex>();
         }

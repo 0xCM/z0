@@ -24,14 +24,6 @@ namespace Z0
         public static PrimalKind kind(Type src)
             => kind(sys.typecode(src));
 
-        /// <summary>
-        /// Specifies the primitive kind represented by the bitfield
-        /// </summary>
-        /// <param name="src">The source field</param>
-        [MethodImpl(Inline), Op]
-        public static PrimalKind kind(PrimalKindBitField src)
-            => src.Data;
-
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static PrimalKind kind<T>()
             => kind(sys.typecode<T>());

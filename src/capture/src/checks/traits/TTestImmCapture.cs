@@ -8,12 +8,13 @@ namespace Z0.Asm
     using System.Reflection;
 
     using static BufferSeqId;
+    using static Kinds;
 
     using K = Kinds;
 
     public interface TTestImmCapture : TTestCapture
     {
-        TestCaseRecord TestImmInjection<T>(W128 w, K.BinaryOpClass k, MethodInfo src, byte imm)
+        TestCaseRecord TestImmInjection<T>(W128 w, BinaryOpClass k, MethodInfo src, byte imm)
             where T : unmanaged        
         {            
             void check()
@@ -35,7 +36,7 @@ namespace Z0.Asm
             return TestAction(check, CaseName<T>(src.Name));
         }        
 
-        TestCaseRecord TestImmInjection<T>(W256 w, K.BinaryOpClass k, MethodInfo src, byte imm)
+        TestCaseRecord TestImmInjection<T>(W256 w, BinaryOpClass k, MethodInfo src, byte imm)
             where T : unmanaged        
         {            
             void check()

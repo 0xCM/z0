@@ -15,13 +15,6 @@ namespace Z0
 
     partial class Dynop
     {
-        [MethodImpl(Inline)]
-        internal static IBufferToken Load(this IBufferToken dst, in BinaryCode src)
-        {
-            dst.Fill(src.Data);
-            return dst;
-        }
-
         internal static DynamicMethod DynamicSignature(string name, Type owner, Type @return, params Type[] args)
             => new DynamicMethod(name: name, 
                 attributes: MethodAttributes.Public | MethodAttributes.Static,  

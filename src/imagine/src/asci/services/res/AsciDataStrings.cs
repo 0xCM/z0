@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="count">Tne number of codes to select</param>
         [MethodImpl(Inline)]
         public ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)
-            => Root.cast<AsciCharCode>(AsciKonst.CodeBytes.Slice(offset,count));
+            => Root.recover<AsciCharCode>(AsciKonst.CodeBytes.Slice(offset,count));
 
         /// <summary>
         /// Returns the acsci characters corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline)]
         public ReadOnlySpan<AsciChar> symbols(sbyte offset, sbyte count)
-            => Root.cast<char,AsciChar>(chars(offset,count));
+            => Root.recover<char,AsciChar>(chars(offset,count));
 
         /// <summary>
         /// Returns the uint16 asci scalar values corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline)]
         public ReadOnlySpan<ushort> scalars(sbyte offset, sbyte count)
-            => Root.cast<char,ushort>(chars(offset,count));
+            => Root.recover<char,ushort>(chars(offset,count));
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<char> Text(N0 index)
@@ -122,11 +122,11 @@ namespace Z0
 
         ReadOnlySpan<ResIdentity<byte>> ByteResInfo
             => new ResIdentity<byte>[ByteResCount]{
-                ResMembers.identify<byte>(
+                Resources.identify<byte>(
                     name: nameof(CharBytes), 
                     location: Root.address(head(CharBytes)),
                     length: CharBytes.Length),
-                ResMembers.identify<byte>(
+                Resources.identify<byte>(
                     name: nameof(B001), 
                     location: Root.address(head(B001)),
                     length: B001.Length),
@@ -134,11 +134,11 @@ namespace Z0
 
         ReadOnlySpan<ResIdentity<char>> TextResInfo
             => new ResIdentity<char>[TextResCount]{
-                ResMembers.identify<char>(
+                Resources.identify<char>(
                     name: nameof(S000), 
                     location: Root.address(head(C000)),
                     length: S000.Length),
-                ResMembers.identify<char>(
+                Resources.identify<char>(
                     name: nameof(S001), 
                     location: Root.address(head(C001)),
                     length: S001.Length),

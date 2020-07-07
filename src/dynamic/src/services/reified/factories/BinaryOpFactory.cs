@@ -11,7 +11,6 @@ namespace Z0
 
     using static Konst; 
 
-    using static Memories;
     using static XPress;
     
     readonly struct BinaryOpFactory<T> : IBinaryOpFactory<T>

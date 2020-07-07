@@ -73,15 +73,13 @@ namespace Z0.Asm
         public CapturedAccessor[] Capture(FilePath src, FilePath dst)        
         {
             var assembly = Assembly.LoadFrom(src.Name);  
-            var stores = ResourceStore.Service;
-            return Capture(stores.Accessors(assembly), dst);
+            return Capture(Resources.accessors(assembly), dst);
         }
 
         public CapturedAccessor[] Capture(FilePath src, FolderPath dst)        
         {
             var assembly = Assembly.LoadFrom(src.Name);  
-            var store = ResourceStore.Service;
-            var declared = span(store.Declarations(assembly));
+            var declared = span(Resources.declarations(assembly));
             var results = Root.list<CapturedAccessor>();
             for(var i=0; i<declared.Length; i++)
             {
@@ -96,9 +94,8 @@ namespace Z0.Asm
 
         public CapturedAccessor[] CaptureKnown(FilePath outpath)
         {
-            var stores = ResourceStore.Service;
             var assemblies = Context.Api.Composition.Assemblies;
-            return Capture(stores.Accessors(assemblies), outpath);
+            return Capture(Resources.accessors(assemblies), outpath);
         }
 
         public CapturedAccessor[] Capture(ReadOnlySpan<ResourceAccessor> src, FilePath outpath)

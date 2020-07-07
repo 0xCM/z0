@@ -80,7 +80,7 @@ namespace Z0
 
     public class ResourceReport : Report<ResourceReport,F,R>
     {        
-        public static ResourceReport Create(BinaryResourceIndex resources)
+        public static ResourceReport Create(BinaryResources resources)
             => new ResourceReport(resources);
 
         public static ResourceReport Create(IEnumerable<BinaryResource> resources)
@@ -91,18 +91,18 @@ namespace Z0
 
         }
 
-        ResourceReport(BinaryResourceIndex index)
+        ResourceReport(BinaryResources index)
             : base(CreateRecords(index))
         {
 
         }
 
-        static ResourceRecord[] CreateRecords(BinaryResourceIndex index)
+        static ResourceRecord[] CreateRecords(BinaryResources index)
         {
             var records = new List<ResourceRecord>();
             var start = 0ul;
 
-            foreach(var r in index.Indexed.OrderBy(x => x.Address))
+            foreach(var r in index.Ordered)
             {
                 if(start == 0)
                     start = r.Address;

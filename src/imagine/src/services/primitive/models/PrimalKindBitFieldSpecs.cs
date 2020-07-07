@@ -12,9 +12,6 @@ namespace Z0
 
     public readonly struct PrimalKindBitFieldSpecs
     {
-        public static LiteralBitField<SegId,SegPos,SegWidth,SegMask> Definition
-            => LiteralBitFields.specify(default(SegId),default(SegPos),default(SegWidth),default(SegMask));
-
         public const byte TotalWidth = (byte)SegWidth.KindId + (byte)SegWidth.Width + (byte)SegWidth.Sign;
 
         public const byte SegCount = 3;

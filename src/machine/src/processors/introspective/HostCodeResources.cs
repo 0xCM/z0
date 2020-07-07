@@ -94,7 +94,7 @@ namespace Z0
             Chars.Semicolon
             );
 
-        HostResourceSpec Specify(IdentifiedCodeIndex src)
+        HostResources Specify(IdentifiedCodeIndex src)
         {                        
             var count = src.Code.Length;
             var res = alloc<BinaryResourceSpec>(count);
@@ -102,10 +102,10 @@ namespace Z0
             {
                 res[i] = Specify(src.Code[i]);
             }            
-            return new HostResourceSpec(src.Host,res);
+            return new HostResources(src.Host,res);
         }
 
-        HostResourceSpec Specify(ApiHostUri src)
+        HostResources Specify(ApiHostUri src)
         {            
             var code = Source.Read(src).ToArray();
             var res = alloc<BinaryResourceSpec>(code.Length);
@@ -113,7 +113,7 @@ namespace Z0
             {
                 res[i] = Specify(code[i]);
             }            
-            return new HostResourceSpec(src,res);
+            return new HostResources(src,res);
         }
 
         static BinaryResourceSpec Specify(IdentifiedCode src)

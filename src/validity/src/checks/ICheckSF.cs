@@ -27,8 +27,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public CheckSF(ITestContext context, bool xzero = false)
         {
-            this.Context= context;
-            this.ExcludeZero = xzero;
+            Context= context;
+            ExcludeZero = xzero;
         }
     }
 }

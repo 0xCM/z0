@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static ReflectionFlags;
-    
     partial class XTend
     {
         /// <summary>
@@ -16,6 +14,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static FieldInfo[] Fields(this Type src)
-            => src.GetFields(BF_All);
+            => sys.fields(src);
     }
 }

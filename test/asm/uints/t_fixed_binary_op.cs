@@ -12,7 +12,7 @@ namespace Z0.Asm
  
     public class t_fixed_binary_op : t_asm<t_fixed_binary_op>
     {
-        ITestFixedBinaryOp Checker => CheckFixed.BinaryOp(Random);
+        TTestFixedBinaryOp Checker => CheckFixed.BinaryOp(Random);
         
         void check_fixed_lists()
         {

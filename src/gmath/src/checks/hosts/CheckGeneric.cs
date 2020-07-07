@@ -9,12 +9,10 @@ namespace Z0
         
     using static Konst;
     using static AppErrorMsg;
-    using api = CheckGeneric;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
 
     public readonly struct CheckGeneric : TCheckGeneric
     {

@@ -5,6 +5,10 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static core;
 
     partial class XTend
     {
@@ -13,9 +17,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source array</param>
         /// <param name="f"></param>
-        /// <typeparam name="T">The array element type</typeparam>
+        /// <typeparam name="T">The array element type</typeparam>        
+        [MethodImpl(Inline)]
         public static T[] Where<T>(this T[] src, Func<T,bool> f)
-            => core.filter(src,f);
+            => where(src,f);
 
         /// <summary>
         /// Result = Filter + Project
@@ -25,7 +30,8 @@ namespace Z0
         /// <param name="project"></param>
         /// <typeparam name="S"></typeparam>
         /// <typeparam name="T"></typeparam>
+        [MethodImpl(Inline)]
         public static T[] Where<S,T>(this S[] src, Func<S,bool> test, Func<S,T> project)
-            => core.map(core.filter(src,test), project);
+            => map(where(src,test), project);
    }
 }

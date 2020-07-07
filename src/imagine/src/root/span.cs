@@ -77,7 +77,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<ushort> span16u<T>(ref T src)
             where T : struct
-                => cast<ushort>(AsBytes(CreateSpan(ref src, 1)));
+                => recover<ushort>(AsBytes(CreateSpan(ref src, 1)));
 
         /// <summary>
         /// Creates a u32 span from a T-cell reference
@@ -87,7 +87,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<uint> span32u<T>(ref T src)
             where T : struct
-                => cast<uint>(AsBytes(CreateSpan(ref src, 1)));
+                => recover<uint>(AsBytes(CreateSpan(ref src, 1)));
 
         /// <summary>
         /// Creates a u64 span from a T-cell reference
@@ -97,7 +97,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<ulong> span64u<T>(ref T src)
             where T : struct            
-                => cast<ulong>(AsBytes(CreateSpan(ref src, 1)));
+                => recover<ulong>(AsBytes(CreateSpan(ref src, 1)));
 
         /// <summary>
         /// Creates a u16 span from a T-cell reference
@@ -107,7 +107,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<char> span16c<T>(ref T src)
             where T : struct
-                => cast<char>(AsBytes(CreateSpan(ref src, 1)));
+                => recover<char>(AsBytes(CreateSpan(ref src, 1)));
     
         [Op, Closures(Closure)]
         public static Span<T> span<T>(IEnumerable<T> src)
@@ -120,6 +120,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> span16c(ReadOnlySpan<byte> src)
-            => cast<char>(src);
+            => recover<char>(src);
     }
 }

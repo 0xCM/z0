@@ -15,32 +15,20 @@ namespace Z0
     public readonly struct IdentifiedCode : IIdentifiedCode<IdentifiedCode,BinaryCode>
     {
         /// <summary>
-        /// Defines uri bits with a potentially bad uri (for diagnostic purposes)
-        /// </summary>
-        /// <param name="perhaps">The uri, perhaps</param>
-        /// <param name="src">The source code</param>
-        [MethodImpl(Inline)]
-        public static IdentifiedCode From(ParseResult<OpUri> perhaps, BinaryCode src)
-            => perhaps.MapValueOrSource(
-                    uri => new IdentifiedCode(uri,src), 
-                    baduri => new IdentifiedCode(baduri, src)
-                    );
-
-        /// <summary>
         /// The encoded operation data
         /// </summary>
-        public BinaryCode Encoded {get;}
+        public readonly BinaryCode Encoded {get;}
 
         /// <summary>
         /// An identifier populated with parsed operation uri text, when possible; otherwise populated with unparseable uri text 
         /// </summary>
-        public string Identifier {get;}
+        public readonly string Identifier {get;}
 
         /// <summary>
         /// The operation uri
         /// </summary>
-        public OpUri OpUri {get;}
-                
+        public readonly OpUri OpUri {get;}
+ 
         public byte[] Data 
         { 
             [MethodImpl(Inline)] 
@@ -80,7 +68,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        IdentifiedCode(string baduri, BinaryCode src)
+        internal IdentifiedCode(string baduri, BinaryCode src)
         {
             Identifier = baduri;
             OpUri = OpUri.Empty;

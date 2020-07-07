@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The raw bitfield data
         /// </summary>
-        T FieldData {get;}
+        T Content {get;}
     }
 
     /// <summary>
@@ -43,10 +43,10 @@ namespace Z0
         where F : unmanaged, Enum
         where T : unmanaged 
     {
-        F FieldValue {get;}
+        F Kind {get;}
 
-        T IBitField<T>.FieldData 
-            => EnumValue.scalar<F,T>(FieldValue);
+        T IBitField<T>.Content 
+            => EnumValue.scalar<F,T>(Kind);
     }
 
     /// <summary>

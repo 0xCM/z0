@@ -19,23 +19,17 @@ namespace Z0.Asm
         /// <summary>
         /// The buffer that receives the captured data
         /// </summary>
-        public IBufferToken TargetBuffer {get;}
-        
-        /// <summary>
-        /// A buffer that tracks state meaningful to the capture workflow
-        /// </summary>
-        public IBufferToken StateBuffer {get;}
-
-        [MethodImpl(Inline)]
-        public static ICaptureExchange Create(ICaptureCore service, IBufferToken capture, IBufferToken state)
-            => new CaptureExchangeProxy(service,capture,state);
+        public BufferToken TargetBuffer {get;}
         
         [MethodImpl(Inline)]
-        internal CaptureExchangeProxy(ICaptureCore service, IBufferToken target, IBufferToken state)            
+        public static ICaptureExchange Create(ICaptureCore service, BufferToken capture)
+            => new CaptureExchangeProxy(service, capture);
+        
+        [MethodImpl(Inline)]
+        internal CaptureExchangeProxy(ICaptureCore service, BufferToken target)            
         {
-            this.TargetBuffer = target;
-            this.StateBuffer = state;
-            this.Service = service;
+            TargetBuffer = target;
+            Service = service;
         }
     }
 }

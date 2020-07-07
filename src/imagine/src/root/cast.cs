@@ -17,28 +17,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T cast<S,T>(in S src)
-            => ref As.cast<S,T>(src);
-            
-        [MethodImpl(Inline)]
-        public static Span<T> cast<T>(Span<byte> src)
-            where T : struct
-                => As.recover<T>(src);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
-            where T : struct
-                => As.recover<T>(src);
-
-        [MethodImpl(Inline)]        
-        public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
-            where S : struct
-            where T : struct
-                => As.recover<S,T>(src);
-
-        [MethodImpl(Inline)]        
-        public static Span<T> cast<S,T>(Span<S> src)                
-            where S : struct
-            where T : struct
-                => As.recover<S,T>(src);
+            => ref core.cast<S,T>(src);            
     }
 }

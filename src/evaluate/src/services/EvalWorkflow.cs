@@ -17,7 +17,7 @@ namespace Z0.Asm
         
         readonly IEvalDispatcher Dispatcher;
         
-        readonly ByteSize BufferSize;
+        readonly uint BufferSize;
 
         readonly byte BufferCount;
 
@@ -25,15 +25,12 @@ namespace Z0.Asm
 
         readonly IApiSet ApiSet;
                 
-        public static IEvalWorkflow Create(IAppContext context, IPolyrand random, FolderPath root)
-            => new EvalWorkflow(context, random, root);
-
-        internal EvalWorkflow(IAppContext context, IPolyrand random, FolderPath root)
+        internal EvalWorkflow(IAppContext context, IPolyrand random, FolderPath root, uint buffersize)
         {                    
-            Context = context;
-            Dispatcher = EvalDispatcher.Create(random, context);
-            BufferSize = 1024;
             BufferCount = 3;
+            BufferSize = buffersize;
+            Context = context;
+            Dispatcher = Evaluate.dispatcher(random, context, buffersize);
             CodeArchive = Archives.Services.CaptureArchive(root);
             ApiSet = context;
         }
@@ -56,7 +53,7 @@ namespace Z0.Asm
 
         void ExecuteCatalog(IApiCatalog catalog)
         {
-            using var buffers = BufferSeq.alloc(BufferSize, BufferCount);
+            using var buffers = Buffers.sequence(BufferSize, BufferCount);
             
             foreach(var host in catalog.Hosts)
             {
@@ -66,7 +63,7 @@ namespace Z0.Asm
         
         public void Execute(params PartId[] parts)
         {
-            using var buffers = BufferSeq.alloc(BufferSize, BufferCount);
+            using var buffers = Buffers.sequence(BufferSize, BufferCount);
             iter(ApiSet.MatchingCatalogs(parts), ExecuteCatalog);
         }
     }

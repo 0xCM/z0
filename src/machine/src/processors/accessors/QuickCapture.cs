@@ -26,21 +26,20 @@ namespace Z0
         
         public static QuickCapture Alloc(IAsmContext context)
         {            
-            var tokens = BufferSeq.alloc(context.DefaultBufferLength, 5, out var buffer).Tokenize();
-            var exchange = CaptureExchangeProxy.Create(context.CaptureCore, tokens[BufferSeqId.Aux3], tokens[BufferSeqId.Aux4]);
+            var tokens = Buffers.sequence(context.DefaultBufferLength, 5, out var buffer).Tokenize();
+            var exchange = CaptureExchangeProxy.Create(context.CaptureCore, tokens[BufferSeqId.Aux3]);
             var service = CaptureServiceProxy.Create(context.CaptureCore, exchange);
             return new QuickCapture(context, buffer, tokens, service);
         }
 
         [MethodImpl(Inline)]
-        QuickCapture(IAsmContext context, BufferAllocation buffer, BufferTokens tokens, ICaptureServiceProxy capture)
+        internal QuickCapture(IAsmContext context, BufferAllocation buffer, BufferTokens tokens, ICaptureServiceProxy capture)
         {
             Context = context;
             Tokens = tokens;
             Service = capture;     
             Buffer =  buffer;
         }
-
 
         [MethodImpl(Inline)]
         public Option<CapturedCode> Capture(MethodInfo src)
@@ -49,11 +48,9 @@ namespace Z0
             return Service.Capture(id,src);
         }
 
-
         public void Dispose()
         {
             Buffer.Dispose();
         }
-
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface TCheckVectors : TChecker, ICheckPrimalSeq, TCheckNumeric, TCheckSets
+    public interface TCheckVectors : TChecker, TCheckPrimalSeq, TCheckNumeric, TCheckSets
     {
         /// <summary>
         /// Asserts the equality of two vectors

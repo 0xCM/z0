@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct core
-    {                
+    {                                        
         [MethodImpl(Inline), Op]
         public static byte inc(byte x)
             => (byte)(++x);

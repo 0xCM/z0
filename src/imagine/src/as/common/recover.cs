@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<sbyte> src)
             where T : struct
-                => recover<sbyte,T>(src);
+                => core.recover<sbyte,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<byte> src)
             where T : struct
-                => recover<byte,T>(src);
+                => core.recover<byte,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<short> src)
             where T : struct
-                => recover<short,T>(src);
+                => core.recover<short,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<ushort> src)
             where T : struct
-                => recover<ushort,T>(src);
+                => core.recover<ushort,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<uint> src)
             where T : struct
-                => recover<uint,T>(src);
+                => core.recover<uint,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -88,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<int> src)
             where T : struct
-                 => recover<int,T>(src);
+                 => core.recover<int,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -249,5 +249,42 @@ namespace Z0
         public static Span<T> recover<T>(Span<decimal> src)
             where T : struct
                  => recover<decimal,T>(src);
+
+        [MethodImpl(Inline)]
+        public static Span<T> recover<S,T>(Span<S> src)
+            => cover(@as<S,T>(ref first(src)), size<T>()/size<S>());
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> recover<S,T>(ReadOnlySpan<S> src)
+            => cover(@as<S,T>(ref edit(first(src))), size<T>()/size<S>());
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> recover<S,T>(ReadOnlySpan<S> src, out ReadOnlySpan<S> rem)
+            where T : struct
+            where S : struct
+        {    
+            var z = size<T>();
+            var n = (uint)src.Length;
+            var q = n/z;            
+            var r = n%z;
+            var dst = recover<S,T>(slice(src, 0, q));            
+            rem = r != 0 ? slice(src,q) : EmptySpan<S>();
+            return dst;
+        }            
+
+        [MethodImpl(Inline)]
+        public static Span<T> recover<S,T>(Span<S> src, out Span<S> rem)
+            where T : struct
+            where S : struct
+        {    
+            var z = size<T>();
+            var n = (uint)src.Length;
+            var q = n/z;            
+            var r = n%z;
+            var dst = recover<S,T>(slice(src,0, q));            
+            rem = r != 0 ? slice(src,q) : EmptySpan<S>();
+            return dst;
+        }            
+
     }
 }

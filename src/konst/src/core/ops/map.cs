@@ -20,8 +20,18 @@ namespace Z0
         /// <param name="f">The projector</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
         public static T[] map<S,T>(IEnumerable<S> src, Func<S,T> f)
-            => src.Select(item => f(item)).ToArray();
+        {
+            var source = sys.span(src);
+            var count = source.Length;
+            var buffer = sys.alloc<T>(count);
+            var target = core.span(buffer);
+            for(var i=0u; i<count; i++)
+                seek(target,i) = f(skip(source,i));            
+            return buffer;
+            //return src.Select(item => f(item)).ToArray();
+        }
 
         /// <summary>
         /// Projects a source value, if non-null, onto a target value; otherwise, returns the target's default value
