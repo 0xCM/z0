@@ -21,7 +21,7 @@ namespace Z0.Asm.Dsl
             get => Value.Kind;
         }
 
-        public BitSize Width 
+        public uint Width 
         {
             [MethodImpl(Inline)]
             get => bitsize<R>();

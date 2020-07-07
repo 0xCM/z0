@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface IApiIndexBuilder
     {
-        ApiCodeIndex CreateIndex(ApiHostUri uri, FilePath src);
+        ApiCodeIndex IndexCode(ApiHostUri uri, FilePath src);
 
         ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<IdentifiedCode> code);
     }

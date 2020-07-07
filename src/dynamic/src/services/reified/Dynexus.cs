@@ -37,14 +37,6 @@ namespace Z0
         OpIdentity Identify(MethodInfo src)
             => Diviner.Identify(src);
 
-        [MethodImpl(Inline)]
-        public TypeIdentity Identify(Type src)
-            => Diviner.Identify(src);
-
-        [MethodImpl(Inline)]
-        public OpIdentity Identify(Delegate src)        
-            => Diviner.Identify(src);
-
         U Unary => default;
 
         B Binary => default;

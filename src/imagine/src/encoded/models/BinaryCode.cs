@@ -29,6 +29,14 @@ namespace Z0
             get => Encoded;
         }
                 
+        /// <summary>
+        /// Returns a reference to the encoded data
+        /// </summary>
+        public Ref Ref
+        {
+            [MethodImpl(Inline)] 
+            get => Addressable.@ref(in this[0], (uint)Encoded.Length);
+        }
         public int Length 
         { 
             [MethodImpl(Inline)] 
@@ -55,9 +63,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BinaryCode(byte[] bytes)
-        {
-            Encoded = Root.insist(bytes);
-        }
+            => Encoded = Root.insist(bytes);
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(Span<byte> src)

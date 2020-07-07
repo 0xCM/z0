@@ -21,16 +21,23 @@ namespace Z0
         internal ApiIndexBuilder(IApiSet api, IMemberLocator locator)
         {
             this.ApiSet = api;
-            this.Locator = locator;
+            this.Locator = locator;        
         }
         
-        public ApiCodeIndex CreateIndex(ApiHostUri uri, FilePath src)
+        public static ApiIndex IndexApi(IEnumerable<ApiMember> src)
+        {
+            var pairs = src.Select(h => (h.Id, h));
+            var opindex = Identify.index(pairs,true);
+            return new ApiIndex(opindex.HashTable, opindex.Duplicates);                
+        }            
+
+        public ApiCodeIndex IndexCode(ApiHostUri uri, FilePath src)
         {
             var code = EncodedHexReader.Service.Read(src).ToArray();
             var host = ApiSet.FindHost(uri).Require();
             var members = Locator.Hosted(host);
             var codeIndex =  UriHexQuery.Service.CreateIndex(code);
-            var memberIndex = ApiIndex.Create(members);
+            var memberIndex = ApiIndexBuilder.IndexApi(members);
             return CreateIndex(memberIndex, codeIndex);
         }
 
@@ -49,7 +56,7 @@ namespace Z0
         {
             var indexer =  Services.IndexBuilder(api,locator);
             var members = locator.Hosted(api.FindHost(host).Require());
-            var apiIndex = ApiIndex.Create(members);
+            var apiIndex = IndexApi(members);
             var archive =  Services.CaptureArchive(root);
             var paths = archive.HostArchive(host);
             var code = EncodedHexReader.Service.Read(paths.HexPath);

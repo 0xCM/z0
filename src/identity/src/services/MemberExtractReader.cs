@@ -5,6 +5,8 @@
 namespace Z0
 {        
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -12,6 +14,14 @@ namespace Z0
 
     public readonly struct MemberExtractReader : IMemberExtractReader
     {
+
+        static ApiIndex IndexApi(IEnumerable<ApiMember> src)
+        {
+            var pairs = src.Select(h => (h.Id, h));
+            var opindex = Identify.index(pairs,true);
+            return new ApiIndex(opindex.HashTable, opindex.Duplicates);                
+        }            
+
         readonly IApiSet ApiSet;
 
         [MethodImpl(Inline)]
@@ -45,7 +55,7 @@ namespace Z0
         ExtractedCode[] CreateExtracts(IApiHost host, ExtractRecord[] records)
         {
             var data = new ExtractedCode[records.Length];
-            var index = ApiIndex.Create(MemberLocator.Service.Hosted(host));
+            var index = IndexApi(MemberLocator.Service.Hosted(host));
             Span<ExtractedCode> extracts = data;
             for(var i = 0; i<records.Length; i++)
             {

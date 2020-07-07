@@ -4,14 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Root;
-
-    public interface IRegOp32<T> : IRegOperand<W32,T>
-        where T : unmanaged
+    public interface IRegOperand32 : IRegOperand<W32,uint>
     {
-
+        RegisterClass IRegOperand.Class 
+            => RegisterClass.GP;
     }
-
 
     public interface IRegOperand32<F,T> : IRegOperand32
         where F : unmanaged, IRegOperand32<F,T>
@@ -20,9 +17,9 @@ namespace Z0.Asm
 
     }    
 
-    public interface IRegOperand32 : IRegOperand<W32,uint>
+    public interface IRegOp32<T> : IRegOperand<W32,T>
+        where T : unmanaged
     {
-        RegisterClass IRegOperand.Class 
-            => RegisterClass.GP;
+
     }
 }

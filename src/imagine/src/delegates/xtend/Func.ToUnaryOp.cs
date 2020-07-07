@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static UnaryOp<T> ToUnaryOp<T>(this System.Func<T,T> f)
-            => Delegated.@operator(f);
+            => Delegates.@operator(f);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Widths;
 
     [ApiHost]
-    public partial class VectorType : IApiHost<VectorType>
+    public partial class VectorType
     {
 
     }

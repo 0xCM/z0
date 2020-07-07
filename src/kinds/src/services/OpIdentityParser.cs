@@ -33,7 +33,7 @@ namespace Z0
             var suffixed = src.Contains(SuffixSep);
             var suffix = suffixed ? src.TakeAfter(IDI.SuffixSep) : string.Empty;
             var generic = src.TakeAfter(PartSep)[0] == IDI.Generic;
-            var imm = suffix.Contains(Imm);
+            var imm = suffix.Contains(IDI.Imm);
             var components = src.SplitClean(PartSep);
             var id = OpIdentity.Define(src, name, suffix, generic, imm, components);
             return id;

@@ -18,7 +18,7 @@ namespace Z0.Asm.Dsl
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public static Bound<al,imm8> cmp(al dst, imm8 src)
+        public static Bound<al,Imm8> cmp(al dst, Imm8 src)
             => asm.bind(dst,src);         
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0.Asm.Dsl
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline),Op]
-        public static Bound<m8,imm8> cmp(m8 dst, imm8 src)
+        public static Bound<m8,Imm8> cmp(m8 dst, Imm8 src)
             => asm.bind(dst,src);
             
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0.Asm.Dsl
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public static Bound<eax,imm32> cmp(eax dst, imm32 src)
+        public static Bound<eax,Imm32> cmp(eax dst, Imm32 src)
             => asm.bind(dst,src);         
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0.Asm.Dsl
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public static Bound<rax,imm32> cmp(rax dst, imm32 src)
+        public static Bound<rax,Imm32> cmp(rax dst, Imm32 src)
             => asm.bind(dst,src);         
 
         /// <summary>

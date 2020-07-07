@@ -7,25 +7,25 @@ namespace Z0
 
     partial class Kinds
     {
-        public static UnaryAction action(A1 rep) 
+        public static UnaryActionClass action(A1 rep) 
             => default;
 
-        public static BinaryAction action(A2 rep) 
+        public static BinaryActionClass action(A2 rep) 
             => default;
 
-        public static TernaryAction action(A3 rep) 
+        public static TernaryActionClass action(A3 rep) 
             => default;
 
-        public static Receiver<T> receiver<T>() 
+        public static ReceiverClass<T> receiver<T>() 
             where T : unmanaged => default;
 
-        public static UnaryAction<T> action<T>(A1<T> rep) 
+        public static UnaryActionClass<T> action<T>(A1<T> rep) 
             where T : unmanaged =>  default;
 
-        public static BinaryAction<T> action<T>(A2<T> rep) 
+        public static BinaryActionClass<T> action<T>(A2<T> rep) 
             where T : unmanaged =>  default;
 
-        public static TernaryAction<T> action<T>(A3<T> rep)    
+        public static TernaryActionClass<T> action<T>(A3<T> rep)    
             where T : unmanaged =>  default;
     }
 }

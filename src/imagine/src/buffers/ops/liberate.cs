@@ -30,30 +30,15 @@ namespace Z0
         public static byte* liberate(ref byte src, int length)
             => liberate((byte*)Root.ptr(ref src), length);
 
-        /// <summary>
-        /// This may not be the best idea to solve your problem
-        /// </summary>
-        /// <param name="src">The buffer to let it be what it wants</param>
-        [MethodImpl(Inline), Op]
-        public static IntPtr Liberate(ReadOnlySpan<byte> src)
-            => Liberate(ref As.edit(head(src)), src.Length); 
-
-        /// <summary>
-        /// Enables en executable memory segment
-        /// </summary>
-        /// <param name="src">The leading cell reference</param>
-        /// <param name="length">The length of the segment, in bytes</param>
-        /// <typeparam name="T">The memory cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static IntPtr Liberate<T>(ref T src, int length)
+        [MethodImpl(Inline)]
+        public static T* liberate<T>(T* pSrc, int length)
             where T : unmanaged
         {
-            var pSrc = Unsafe.AsPointer(ref src);
-            IntPtr buffer = (IntPtr)pSrc;
+            IntPtr buffer = (IntPtr)(void*)pSrc;
             if (!VirtualProtectEx(CurrentProcess.Handle, buffer, (UIntPtr)length, 0x40, out uint _))
                 ThrowLiberationError(buffer, length);
-            return buffer;
-        }
+            return pSrc;
+        }             
 
         /// <summary>
         /// Enables an executable memory segment
@@ -68,27 +53,17 @@ namespace Z0
             return src;
         }
 
-        static void ThrowLiberationError(IntPtr pCode, int Length)
+        internal static void ThrowLiberationError(IntPtr pCode, int Length)
         {
             var start = (ulong)pCode;
             var end = start + (ulong)Length;            
             throw new Exception($"An attempt to liberate {Length} bytes of memory for execution failed");     
         }
 
-        [MethodImpl(Inline)]
-        static T* liberate<T>(T* pBuffer, int length)
-            where T : unmanaged
-        {
-            IntPtr buffer = (IntPtr)(void*)pBuffer;
-            if (!VirtualProtectEx(CurrentProcess.Handle, buffer, (UIntPtr)length, 0x40, out uint _))
-                ThrowLiberationError(buffer, length);
-            return pBuffer;
-        }             
-
         /// <summary>
         /// Windows API that applies memory protection attributes
         /// </summary>
         [DllImport(Kernel32)]
-        static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, uint flags, out uint oldFlags); 
+        internal static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, uint flags, out uint oldFlags); 
     }
 }

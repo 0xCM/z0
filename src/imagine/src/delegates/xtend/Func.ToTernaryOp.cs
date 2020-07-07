@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static TernaryOp<T> ToTernaryOp<T>(this System.Func<T,T,T,T> f)
-            => Delegated.@operator(f);
+            => Delegates.@operator(f);
     }
 }

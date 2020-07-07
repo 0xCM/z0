@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static UnaryPredicate<T> ToUnaryPredicate<T>(this System.Func<T,bit> f)
-            => Delegated.predicate(f);
+            => Delegates.predicate(f);
     }
 }

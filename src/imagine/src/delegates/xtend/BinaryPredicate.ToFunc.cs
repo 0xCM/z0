@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static System.Func<T,T,bit> ToFunc<T>(this BinaryPredicate<T> f)
-            => Delegated.func(f);
+            => Delegates.func(f);
     }
 }
