@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using In = AsIn;
 
     partial struct As
     {

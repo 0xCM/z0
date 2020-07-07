@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Defines the available tuple format styles that may be applied when representing a tuple as text
     /// </summary>

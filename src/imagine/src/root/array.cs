@@ -18,6 +18,6 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         [MethodImpl(Inline)]
         public static T[] array<T>(params T[] src)
-            => core.array(src);    
+            => sys.array(src);    
     }
 }

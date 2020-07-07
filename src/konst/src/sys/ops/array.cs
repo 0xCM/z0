@@ -15,14 +15,6 @@ namespace Z0
     
     partial struct sys
     {
-        [MethodImpl(Options), Opaque(SpanToArray), Closures(Closure)]
-        public static T[] array<T>(Span<T> src)
-            => src.ToArray();
-
-        [MethodImpl(Options), Opaque(ListToArray), Closures(Closure)]
-        public static T[] array<T>(List<T> src)
-            => src.ToArray();
-
         /// <summary>
         /// Produces an array from a parameter array
         /// </summary>
@@ -31,6 +23,15 @@ namespace Z0
         [MethodImpl(Options), Opaque(ParameterArray), Closures(Closure)]
         public static T[] array<T>(params T[] src)
             => src;
+
+        [MethodImpl(Options), Opaque(SpanToArray), Closures(Closure)]
+        public static T[] array<T>(Span<T> src)
+            => src.ToArray();
+
+        [MethodImpl(Options), Opaque(ListToArray), Closures(Closure)]
+        public static T[] array<T>(List<T> src)
+            => src.ToArray();
+
 
         [MethodImpl(Options), Opaque(EnumerableToArray), Closures(Closure)]
         public static T[] array<T>(IEnumerable<T> src)

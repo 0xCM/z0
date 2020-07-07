@@ -14,33 +14,31 @@ namespace Z0
     {            
         public readonly EvalContext Context;
 
-        public readonly BinaryEvaluations<T> Content;
+        public readonly BinaryEvaluations<T> Target;
 
         [MethodImpl(Inline)]
-        public BinaryEvalContext(in EvalContext context, in BinaryEvaluations<T> content)
+        public BinaryEvalContext(in EvalContext context, in BinaryEvaluations<T> dst)
         {
+            Demands.insist(dst.Source.PointCount, dst.Target.PointCount);
             Context = context;
-            Content = content;
+            Target = dst;
         }
 
-        public Pairs<T> Src 
+        public Pairs<T> Input 
         {
             [MethodImpl(Inline)]
-            get => Content.Source;
+            get => Target.Source;
         }
 
-        public PairEvalOutcomes<T> Dst 
+        public PairEvalOutcomes<T> Outcomes 
         {
             [MethodImpl(Inline)]
-            get => Content.Target;
+            get => Target.Target;
         }
 
-        public int SrcCount
-            => Content.Source.Count;
+        public int PointCount
+            => Target.Source.PointCount;
 
-        public int DstCount
-            => Content.Target.Count;
-        
         public BufferTokens Buffers
             => Context.Buffers;
         

@@ -14,15 +14,6 @@ namespace Z0
     using static Kinds;
 
     using K = Kinds;
-
-    static class EvalMessages
-    {
-        public static void EvaluatedPoint<T>(this IAppMsgSink dst, string opname, T a, T b, T result)
-            => dst.NotifyConsole(AppMsg.NoCaller($"{opname}({a}, {b}) = {result}"));
-
-        public static void AnalyzingEvaluation(this IAppMsgSink dst, in ApiCode api)
-            => dst.NotifyConsole(AppMsg.NoCaller($"Analyzing evaluation of {api.Uri.WithScheme(OpUriScheme.Located)}", AppMsgKind.Babble));
-    }
     
     class EvalDispatcher : IEvalDispatcher
     {        
@@ -58,23 +49,27 @@ namespace Z0
             return Evaluated.pairs(Labels, dst);
         }
 
+        void error(Exception e)
+        {
+            term.error(e);
+        }
+        
         UnaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiCode code, UnaryOpClass<T> k)
             where T : unmanaged
         {
             var target = init<T>();
-            var src = Random.Array<T>(target.Count);
-            var context = EvalContext.unary(buffers, code, Evaluated.unary(src, target));
-            return Evaluate.compute(context);
+            var src = Random.Array<T>(target.PointCount);
+            var context = EvalContext.unary(buffers, code, Evaluated.unary(src, target));            
+            return Evaluate.compute(context, error);
         }
-
         
         BinaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiCode code, BinaryOpClass<T> k)
             where T : unmanaged
         {
             var target = init<T>();
-            var src = Random.Pairs<T>(target.Count);
+            var src = Random.Pairs<T>(target.PointCount);
             var context = EvalContext.binary(buffers, code, Evaluated.binary(src, target));
-            return Evaluate.compute(context);
+            return Evaluate.compute(context, error);
         }
 
         MemberEvaluator Evaluator<E,T>(BufferTokens buffers, IOpClass<E,T> k)
@@ -193,7 +188,7 @@ namespace Z0
             var xLabel = eval.LeftLabel;                
             var yLabel = eval.RightLabel;
 
-            for(var i=0; i<eval.Count; i++, sample++)
+            for(var i=0; i<eval.PointCount; i++, sample++)
             {
                 ref readonly var input = ref eval.Source[i];
                 ref readonly var result = ref eval.Target;
@@ -253,9 +248,8 @@ namespace Z0
                 } 
             }
             catch(Exception e)
-            {
-                Notify(AppMsg.Error($"Failure evaluating operation {api.Id} of kind {kid}"));
-                Notify(AppMsg.Error(e));
+            {            
+                Sink.RuntimeEvalFailure(api, e);
             }           
         }
 
@@ -307,8 +301,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Notify(AppMsg.Error($"Failure evaluating operation {api.Id} of kind {kid}"));
-                Notify(AppMsg.Error(e));
+                Sink.RuntimeEvalFailure(api, e);
             }           
         }
 

@@ -20,7 +20,6 @@ namespace Z0
 
         public readonly IntPtr Handle;
 
-
         [MethodImpl(Inline)]
         public static DynamicPointer From(DynamicDelegate src)
             => new DynamicPointer(src, pointer(src.TargetMethod));

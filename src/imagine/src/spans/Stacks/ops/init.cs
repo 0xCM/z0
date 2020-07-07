@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static AsIn;
+    using static In;
     using static Stacked;
     using static Root;
 

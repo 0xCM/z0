@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The target method</param>
         /// <param name="tDelegate">The delegate type</param>
         /// <param name="host">The host instance if not static</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Delegate from(MethodInfo src, Type tDelegate, object host = null)
             => Delegate.CreateDelegate(tDelegate, host, src);
 

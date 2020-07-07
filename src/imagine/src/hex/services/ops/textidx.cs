@@ -15,26 +15,25 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static HexTextIndex<Hex1Kind> textidx(N1 n)
-            => new HexTextIndex<Hex1Kind>(core.array(
-                    @ref(Hex1Text.x00), @ref(Hex1Text.x01)
-                    ));
+            => new HexTextIndex<Hex1Kind>(sys.array(@ref(Hex1Text.x00), @ref(Hex1Text.x01)));
 
         [MethodImpl(Inline), Op]
         public static HexTextIndex<Hex2Kind> textidx(N2 n)
-            => new HexTextIndex<Hex2Kind>(core.array(
-                    @ref(Hex2Text.x00), @ref(Hex2Text.x01), @ref(Hex2Text.x02), @ref(Hex2Text.x03)
-                        ));
+            => new HexTextIndex<Hex2Kind>(sys.array(
+                @ref(Hex2Text.x00), @ref(Hex2Text.x01), 
+                @ref(Hex2Text.x02), @ref(Hex2Text.x03)
+                ));
 
         [Op]
         public static HexTextIndex<Hex3Kind> textidx(N3 n)
-            => new HexTextIndex<Hex3Kind>(core.array(
+            => new HexTextIndex<Hex3Kind>(sys.array(
                     @ref(Hex3Text.x00), @ref(Hex3Text.x01), @ref(Hex3Text.x02), @ref(Hex3Text.x03),
                     @ref(Hex3Text.x04), @ref(Hex3Text.x05), @ref(Hex3Text.x06), @ref(Hex3Text.x07)
                         ));
 
         [Op]
         public static HexTextIndex<Hex4Kind> textidx(N4 n)
-            => new HexTextIndex<Hex4Kind>(core.array(
+            => new HexTextIndex<Hex4Kind>(sys.array(
                     @ref(Hex4Text.x00), @ref(Hex4Text.x01), @ref(Hex4Text.x02), @ref(Hex4Text.x03),
                     @ref(Hex4Text.x04), @ref(Hex4Text.x05), @ref(Hex4Text.x06), @ref(Hex4Text.x07),
                     @ref(Hex4Text.x08), @ref(Hex4Text.x09), @ref(Hex4Text.x0A), @ref(Hex4Text.x0B),

@@ -17,11 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]        
         internal MemberEvaluator(BufferTokens src)
-        {
-            Tokens = src;
-        }
-
-        IDynexus Dynamic => Dynops.Services.Dynexus;
+            => Tokens = src;
 
         /// <summary>
         /// Evaluates a binary operator over a pair index and deposits the result into a caller-supplied triple index
@@ -32,7 +28,7 @@ namespace Z0
         public ref readonly Triples<T> Eval<T>(in ApiCode api, BinaryOpClass op, in Pairs<T> src, in Triples<T> dst)
             where T : unmanaged
         {
-            var count = src.Count;
+            var count = src.PointCount;
             var f = Dynamic.EmitBinaryOp<T>(Tokens[Left], api.Encoded);
             for(var i=0; i<count; i++)
             {
@@ -50,7 +46,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public Triples<T> Eval<T>(in ApiCode api, BinaryOpClass op, in Pairs<T> src)
             where T : unmanaged
-                => Eval(api,op, src, Tuples.triples<T>(src.Count));
+                => Eval(api,op, src, Tuples.triples<T>(src.PointCount));
 
         /// <summary>
         /// Evaluates a binary operator over a pair index of fixed types
@@ -61,9 +57,9 @@ namespace Z0
         public Triples<F> EvalFixed<F>(in ApiCode api, BinaryOpClass op, in Pairs<F> src)
             where F : unmanaged, IFixed
         {
-            var count = src.Count;
+            var count = src.PointCount;
             var f = Dynamic.EmitBinaryOp<F>(Tokens[Left], api.Encoded);
-            var dst = Tuples.triples<F>(src.Count);
+            var dst = Tuples.triples<F>(src.PointCount);
             for(var i=0; i<count; i++)
             {
                 ref readonly var pair = ref src[i];
@@ -71,5 +67,7 @@ namespace Z0
             }
             return dst;
         }
+
+        IDynexus Dynamic => Dynops.Services.Dynexus;
     }
 }

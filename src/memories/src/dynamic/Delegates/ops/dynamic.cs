@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="dst">The dynamic method</param>
         /// <param name="@delegate">The target delegate type</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static DynamicDelegate dynamic(OpIdentity id, MethodInfo src, DynamicMethod dst, Type @delegate)
             => DynamicDelegate.define(id, src, dst, dst.CreateDelegate(@delegate));
 
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="dst">The dynamic method</param>
         /// <param name="@delegate">The target delegate type</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static DynamicDelegate dynamic(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
             => DynamicDelegate.define(id, src, dst, op);
     }

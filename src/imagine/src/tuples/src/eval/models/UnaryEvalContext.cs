@@ -14,33 +14,36 @@ namespace Z0
     {            
         public readonly EvalContext Context;
 
-        public readonly UnaryEvaluations<T> Content;
+        public readonly UnaryEvaluations<T> Target;
 
         [MethodImpl(Inline)]
-        internal UnaryEvalContext(in EvalContext context, in UnaryEvaluations<T> content)
+        internal UnaryEvalContext(in EvalContext context, in UnaryEvaluations<T> dst)
         {
+            Demands.insist(dst.Source.Length, dst.Target.PointCount);
             Context = context;
-            Content = content;
+            Target = dst;
         }
         
-        public Span<T> Src 
+        public Span<T> Input 
         { 
             [MethodImpl(Inline)] 
-            get => Content.Source; 
+            get => Target.Source; 
         }
 
-        public PairEvalOutcomes<T> Dst 
+        public PairEvalOutcomes<T> Outcomes 
         {
              [MethodImpl(Inline)] 
-             get => Content.Target; 
+             get => Target.Target; 
         }
 
-        public int SrcCount 
-            => Content.Source.Length;
+        public int PointCount 
+            => Target.Source.Length;
 
         public int DstCount 
-            => Content.Target.Count;
+            => Target.Target.PointCount;
         
+        public ApiCode ApiCode
+            => Context.ApiCode;
 
         public BufferTokens Buffers 
             => Context.Buffers;

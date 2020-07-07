@@ -55,7 +55,7 @@ namespace Z0
         /// <summary>
         /// Specifies the number of elements in the sequence
         /// </summary>
-        public int Count
+        public int PointCount
         {
             [MethodImpl(Inline)]
             get => Data.Length;

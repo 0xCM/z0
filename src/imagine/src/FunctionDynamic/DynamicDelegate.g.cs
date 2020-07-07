@@ -40,10 +40,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, D op)
         {
-            this.Id = id;
-            this.Source = src;
-            this.Target = dst;
-            this.DynamicOp = op;
+            Id = id;
+            Source = src;
+            Target = dst;
+            DynamicOp = op;
         }
 
         public DynamicDelegate Untyped

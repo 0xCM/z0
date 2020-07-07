@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst; 
     using static As;
-    using static AsIn;
+    using static In;
     using static Typed;
 
     public static class XME

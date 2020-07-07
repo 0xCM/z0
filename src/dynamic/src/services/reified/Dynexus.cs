@@ -173,17 +173,17 @@ namespace Z0
         [MethodImpl(Inline)]
         FixedUnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(BufferToken dst, IdentifiedCode src)
             => (FixedUnaryOp<F>)Emit(src.Id, typeof(FixedUnaryOp<F>), typeof(F), 
-                    array(typeof(F)), dst.Load(src.Encoded).Handle);
+                    sys.array(typeof(F)), dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
         FixedBinaryOp<F> IFixedDynamic.EmitFixedBinary<F>(BufferToken dst, IdentifiedCode src)
             => (FixedBinaryOp<F>)Emit(src.Id, typeof(FixedBinaryOp<F>), typeof(F), 
-                    array(typeof(F),typeof(F)),dst.Load(src.Encoded).Handle);
+                    sys.array(typeof(F),typeof(F)),dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
         FixedTernaryOp<F> IFixedDynamic.EmitFixedTernary<F>(BufferToken dst, IdentifiedCode src)
             => (FixedTernaryOp<F>)Emit(src.Id, typeof(FixedTernaryOp<F>), typeof(F), 
-                    array(typeof(F), typeof(F), typeof(F)), dst.Load(src.Encoded).Handle);
+                    sys.array(typeof(F), typeof(F), typeof(F)), dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
         UnaryOp8 IFixedDynamic.EmitFixedUnary(BufferToken dst, W8 w, IdentifiedCode src)

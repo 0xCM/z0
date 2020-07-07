@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static AsIn;
+    using static In;
     using static Root;
     
     public static class BitStore

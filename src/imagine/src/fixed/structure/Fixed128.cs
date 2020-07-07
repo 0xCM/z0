@@ -116,7 +116,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T As<T>()
             where T : struct
-                => AsIn.generic<F,T>(this);
+                => In.generic<F,T>(this);
 
         [MethodImpl(Inline)]
         public Vector128<T> ToVector<T>()

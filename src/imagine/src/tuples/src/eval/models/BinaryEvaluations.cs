@@ -23,12 +23,13 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BinaryEvaluations(in Pairs<T> src, PairEvalOutcomes<T> dst)
         {
+            Demands.insist(src.PointCount, dst.PointCount);
             Source = src;
             Target = dst;
         }        
 
-        public int Count 
-            => Source.Count;
+        public int PointCount 
+            => Source.PointCount;
 
         public string LeftLabel 
             => Target.LeftLabel;

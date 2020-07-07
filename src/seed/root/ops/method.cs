@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="args">The method parameter types in ordinal position</param>
         [MethodImpl(Inline)]
         public static Option<ConstructorInfo> ctor(Type declaring, params Type[] args)
-            => declaring.GetConstructor(BF_Instance, null, args, array<ParameterModifier>());
+            => declaring.GetConstructor(BF_Instance, null, args, Array.Empty<ParameterModifier>());
 
         /// <summary>
         /// Searches a type for an instance constructor that matches a specified signature

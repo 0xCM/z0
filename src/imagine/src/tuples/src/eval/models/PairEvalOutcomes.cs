@@ -21,10 +21,10 @@ namespace Z0
         readonly Pairs<T> Target;     
            
         [MethodImpl(Inline)]
-        public PairEvalOutcomes(Pair<string> labels, in Pairs<T> target)
+        public PairEvalOutcomes(Pair<string> labels, in Pairs<T> dst)
         {
             Labels = labels;
-            Target = target;
+            Target = dst;
         }        
 
         [MethodImpl(Inline)]
@@ -37,10 +37,10 @@ namespace Z0
             get => ref Pair(index);
         }
 
-        public int Count
+        public int PointCount
         {
             [MethodImpl(Inline)]
-            get => Target.Count;
+            get => Target.PointCount;
         }        
 
         public string LeftLabel 

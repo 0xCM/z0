@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     
     using static Memories; 
-    using static AsIn;
+    using static In;
 
     partial class dvec
     {    

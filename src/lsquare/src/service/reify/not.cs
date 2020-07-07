@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Memories;
-    using static AsIn;
+    using static In;
 
     using BL = ByteLogic;
 

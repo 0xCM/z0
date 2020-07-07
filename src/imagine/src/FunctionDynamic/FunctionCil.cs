@@ -11,7 +11,6 @@ namespace Z0
 
     using static Konst;
 
-
     public readonly struct FunctionCil : IFunctionCil
     {
         public static FunctionCil Service => default;

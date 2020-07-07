@@ -278,7 +278,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval<U> As<U>()
             where U : unmanaged, IComparable<U>, IEquatable<U>
-                => new Interval<U>(AsIn.generic<T,U>(Left), AsIn.generic<T,U>(Right), Kind);
+                => new Interval<U>(In.generic<T,U>(Left), In.generic<T,U>(Right), Kind);
 
         [MethodImpl(Inline)]
         public void Deconstruct(out T left, out T right)

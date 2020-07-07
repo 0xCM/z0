@@ -78,8 +78,8 @@ namespace Z0
             KeyedValues = new Dictionary<K,V>();
             ValueSet = new HashSet<V>();
             IndexedValues = new Dictionary<V,K[]>();
-            Keys = Root.array<K>();
-            Values = Root.array<V>();
+            Keys = Array.Empty<K>();
+            Values = Array.Empty<V>();
         }
         
         public HashTable(IReadOnlyDictionary<K,V> data)

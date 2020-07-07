@@ -15,20 +15,56 @@ namespace Z0
     public readonly struct IdentifiedCode : IIdentifiedCode<IdentifiedCode,BinaryCode>
     {
         /// <summary>
+        /// The operation uri
+        /// </summary>
+        public readonly OpUri Uri;
+
+        /// <summary>
         /// The encoded operation data
         /// </summary>
-        public readonly BinaryCode Encoded {get;}
+        public readonly BinaryCode Code;
+
+        [MethodImpl(Inline)]
+        public IdentifiedCode(OpUri uri, BinaryCode src)
+        {
+            Uri = uri;
+            Code = src;            
+        }
+
+        [MethodImpl(Inline)]
+        internal IdentifiedCode(string baduri, BinaryCode src)
+        {
+            Uri = OpUri.Empty;
+            Code = src;
+        }
 
         /// <summary>
         /// An identifier populated with parsed operation uri text, when possible; otherwise populated with unparseable uri text 
         /// </summary>
-        public readonly string Identifier {get;}
+        public readonly string Identifier
+        {
+             [MethodImpl(Inline)]
+             get => Uri.UriText;
+        }
 
         /// <summary>
         /// The operation uri
         /// </summary>
-        public readonly OpUri OpUri {get;}
- 
+        public readonly OpUri OpUri 
+        {
+            [MethodImpl(Inline)] 
+            get => Uri;
+        }
+  
+        /// <summary>
+        /// The encoded operation data
+        /// </summary>
+        public readonly BinaryCode Encoded 
+        {
+            [MethodImpl(Inline)] 
+            get => Code;
+        }
+        
         public byte[] Data 
         { 
             [MethodImpl(Inline)] 
@@ -59,29 +95,13 @@ namespace Z0
             get => Encoded.IsNonEmpty; 
         }
 
-        [MethodImpl(Inline)]
-        public IdentifiedCode(OpUri uri, BinaryCode src)
-        {
-            OpUri = uri;
-            Encoded = src;
-            Identifier = uri.UriText;
-        }
-
-        [MethodImpl(Inline)]
-        internal IdentifiedCode(string baduri, BinaryCode src)
-        {
-            Identifier = baduri;
-            OpUri = OpUri.Empty;
-            Encoded = src;
-        }
-
         /// <summary>
         /// The identifier of the defined operation
         /// </summary>
         public OpIdentity Id 
         { 
             [MethodImpl(Inline)] 
-            get => OpUri.OpId; 
+            get => Uri.OpId; 
         }
 
         [MethodImpl(Inline)]
@@ -93,6 +113,9 @@ namespace Z0
 
         public string Format(int uripad)
             => text.concat(OpUri.UriText.PadRight(uripad), Encoded.Format());            
+
+        public override string ToString()
+            => Format();
 
         /// <summary>
         /// No code, no identity, no life

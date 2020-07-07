@@ -81,16 +81,6 @@ namespace Z0
             get => ref Token((byte)id);
         }
 
-        /// <summary>
-        /// Zero-fills a token-identified buffer and returns the cleared memory content
-        /// </summary>
-        [MethodImpl(Inline)]
-        public Span<byte> Clear(byte index)
-        {
-            Token(index).Clear();
-            return Buffer(index);
-        }
-
         [MethodImpl(Inline)]
         public BufferTokens Tokenize() 
             => Tokens.ToArray();

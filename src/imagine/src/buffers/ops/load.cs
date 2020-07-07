@@ -12,8 +12,23 @@ namespace Z0
 
     partial struct Buffers
     {
+        [MethodImpl(Inline)]
+        static void @check(in BinaryCode src, BufferToken dst)
+        {
+            var srcSize = src.Length;
+            var dstSize = dst.BufferSize;
+
+            if(srcSize > dstSize)
+                sys.@throw(new Exception($"The target buffer of size {dstSize} is insufficient to accomodate the data source of size {srcSize}"));
+        }
+
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> load(in BinaryCode src, BufferToken dst)
-            => fill<byte>(src,dst);
+        {
+            @check(src,dst);
+            var source = core.span(src.Data);            
+            var target = sys.clear(As.cover(dst.Address.Pointer<byte>(), dst.BufferSize));     
+            return sys.copy(source,target);        
+        }
     }
 }
