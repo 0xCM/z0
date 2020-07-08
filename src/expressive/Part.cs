@@ -5,12 +5,12 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyDescription("A bevy of embellishment")]
-[assembly: PartId(PartId.Enhanced)]
+[assembly: AssemblyDescription("x")]
+[assembly: PartId(PartId.Expressive)]
 
 namespace Z0.Parts
 {        
-    public sealed class Enhanced : Part<Enhanced>
+    public sealed class Expressive : Part<Expressive>
     {
 
     }
