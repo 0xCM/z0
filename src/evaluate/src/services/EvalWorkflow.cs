@@ -51,14 +51,12 @@ namespace Z0.Asm
             }
         }
 
-        void ExecuteCatalog(IApiCatalog catalog)
+        void ExecuteCatalog(IPartCatalog catalog)
         {
             using var buffers = Buffers.sequence(BufferSize, BufferCount);
             
             foreach(var host in catalog.Hosts)
-            {
                 ExecuteHost(buffers.Tokenize(), host);
-            }
         }
         
         public void Execute(params PartId[] parts)

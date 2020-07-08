@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static core;
 
     partial class math
     {
@@ -164,8 +164,8 @@ namespace Z0
             {
                 var sum = default(long);
                 
-                ref readonly var current = ref head(src);                
-                for(var i=0; i<src.Length; i++)
+                ref readonly var current = ref first(src);                
+                for(var i=0u; i<src.Length; i++)
                     sum += skip(current,i);
                 
                 return (sbyte)(sum/(long)src.Length);
@@ -179,8 +179,8 @@ namespace Z0
             {
                 var sum = default(ulong);
 
-                ref readonly var current = ref head(src);                
-                for(var i=0; i<src.Length; i++)
+                ref readonly var current = ref first(src);                
+                for(var i=0u; i<src.Length; i++)
                     sum += skip(current,i);
 
                 return (byte)(sum/(ulong)src.Length);
@@ -194,8 +194,8 @@ namespace Z0
             {
                 var sum = default(long);
                 
-                ref readonly var current = ref head(src);                
-                for(var i=0; i<src.Length; i++)
+                ref readonly var current = ref first(src);                
+                for(var i=0u; i<src.Length; i++)
                     sum += skip(current,i);
                 
                 return (short)(sum/(long)src.Length);
@@ -209,8 +209,8 @@ namespace Z0
             {
                 var sum = default(ulong);
 
-                ref readonly var current = ref head(src);                
-                for(var i=0; i<src.Length; i++)
+                ref readonly var current = ref first(src);                
+                for(var i=0u; i<src.Length; i++)
                     sum += skip(current,i);
 
                 return (ushort)(sum/(ulong)src.Length);
@@ -224,8 +224,8 @@ namespace Z0
             {
                 var sum = default(long);
                 
-                ref readonly var current = ref head(src);                
-                for(var i=0; i<src.Length; i++)
+                ref readonly var current = ref first(src);                
+                for(var i=0u; i<src.Length; i++)
                     sum += skip(current,i);
                 
                 return (int)(sum/(long)src.Length);
@@ -239,8 +239,8 @@ namespace Z0
             {
                 var sum = default(ulong);
                 
-                ref readonly var current = ref head(src);                
-                for(var i=0; i<src.Length; i++)
+                ref readonly var current = ref first(src);                
+                for(var i=0u; i<src.Length; i++)
                     sum += skip(current,i);
                 
                 return (uint)(sum/(ulong)src.Length);
@@ -254,8 +254,8 @@ namespace Z0
             {
                 var sum = default(long);
 
-                ref readonly var current = ref head(src);                
-                for(var i=0; i<src.Length; i++)
+                ref readonly var current = ref first(src);                
+                for(var i=0u; i<src.Length; i++)
                     sum += skip(current,i);
 
                 return sum/src.Length;
@@ -269,8 +269,8 @@ namespace Z0
             {
                 var sum = default(ulong);
 
-                ref readonly var current = ref head(src);                
-                for(var i=0; i<src.Length; i++)
+                ref readonly var current = ref first(src);                
+                for(var i=0u; i<src.Length; i++)
                     sum += skip(current,i);
 
                 return sum/(ulong)src.Length;

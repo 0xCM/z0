@@ -12,6 +12,8 @@ namespace Z0
 
     partial struct core
     {
+
+
         /// <summary>
         /// Presents an S-cell as a T-cell
         /// </summary>

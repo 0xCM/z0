@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
 
+
     /// <summary>
     /// An homogenous immutable 2-tuple
     /// </summary>
@@ -23,6 +24,10 @@ namespace Z0
         /// The second/right/hi member of the pair
         /// </summary>
         public readonly T Right;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ConstPair<T>(in Pair<T> src)
+            => new ConstPair<T>(src.Left, src.Right);
 
         [MethodImpl(Inline)]
         public static implicit operator ConstPair<T>((T a, T b) src)

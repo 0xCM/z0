@@ -31,7 +31,7 @@ namespace Z0
                             Polyrand.Pcg64(PolySeed64.Seed05));
 
         public static IAppContext CreateApiContext()
-            => AppContext.Create(ApiComposition.Assemble(SelectedParts.Known), 
+            => Apps.context(ApiComposition.Assemble(SelectedParts.Known), 
                     Polyrand.Pcg64(PolySeed64.Seed05), 
                         AppSettings.Load(AppPaths.Default.AppConfigPath), 
                         AppMsgExchange.Create());

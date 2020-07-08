@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
 
     partial struct As
-    {
+    {                        
         /// <summary>
         /// Transforms a readonly S-cell into an editable T-cell
         /// </summary>

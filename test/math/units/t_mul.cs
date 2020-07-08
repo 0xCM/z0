@@ -23,17 +23,17 @@ namespace Z0
                 var y = Random.Next<uint>(2, Pow2.T08);
                 var z = Random.Next<uint>(2, Pow2.T08);
             
-                var lo = BmiMul.mullo(x,y);
+                var lo = math.mullo(x,y);
                 Claim.eq(x*y,lo);
 
-                var hi = BmiMul.mulhi(x,y);
+                var hi = math.mulhi(x,y);
                 Claim.eq(0,hi);
 
-                BmiMul.mul(x,y, out uint a, out uint b);
+                math.mul(x,y, out uint a, out uint b);
                 Claim.eq(lo, a);
                 Claim.eq(hi, b);
 
-                BmiMul.mul(z,MAX, out uint c, out uint d);
+                math.mul(z,MAX, out uint c, out uint d);
                 ClaimNumeric.gt(c,0u);
                 ClaimNumeric.gt(d,0u);
 
@@ -46,7 +46,7 @@ namespace Z0
                 var xi = Random.Next<uint>();
                 var yi = Random.Next<uint>();
                 var z = (ulong)xi * (ulong)yi;
-                Claim.eq(z, BmiMul.mul(xi,yi));
+                Claim.eq(z, math.mul64(xi,yi));
             }
         }        
 
@@ -81,24 +81,26 @@ namespace Z0
                 var y = Random.Next<ulong>(2, Pow2.T08);
                 var z = Random.Next<ulong>(2, Pow2.T08);
             
-                var lo = BmiMul.mullo(x,y);
+                var lo = math.mullo(x,y);
                 Claim.eq(x*y,lo);
 
-                var hi = BmiMul.mulhi(x,y);
+                var hi = math.mulhi(x,y);
                 Claim.eq(0,hi);
 
-                ClaimNumeric.nonzero(BmiMul.mulhi(z,MAX));
+                ClaimNumeric.nonzero(math.mulhi(z,MAX));
 
-                BmiMul.mul(x,y, out ulong a, out ulong b);
+                math.mul(x,y, out ulong a, out ulong b);
                 Claim.eq(lo, a);
                 Claim.eq(hi, b);
 
-                BmiMul.mul(z,MAX, out ulong c, out ulong d);
+                math.mul(z,MAX, out ulong c, out ulong d);
                 ClaimNumeric.gt(c,0ul);
                 ClaimNumeric.gt(d,0ul);
             }
         }        
 
+        public static ulong lo_ref(ulong x, ulong y)
+            => x*y;
         public void mullo_2x64u()
         {
 
@@ -106,7 +108,7 @@ namespace Z0
             {
                 var a = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
                 var b = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
-                Claim.eq(BmiMul.lo_ref(a,b), BmiMul.mullo(a,b));
+                Claim.eq(lo_ref(a,b), math.mullo(a,b));
             }
 
         }

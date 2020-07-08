@@ -8,34 +8,36 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Konst;
-
-    public readonly struct ProjectorProxy
-    {
-        [MethodImpl(Inline)]
-        public static ValueFunc<T> valuefunc<T>(Func<object,T> f)
-            where T : struct
-                => new ProjectorProxy<T>(f).F;
-    }
     
-    readonly struct ProjectorProxy<T> : IValueProjector<T>
+    public readonly struct ProjectorProxy<T> : IValueProjector<T>
         where T : struct
     {          
-        readonly Func<object,T> f;
+        /// <summary>
+        /// The proxy subject
+        /// </summary>
+        internal readonly Func<object,T> Delegate;
 
+        /// <summary>
+        /// Captures a projected value
+        /// </summary>
         readonly T[] Target;
 
         [MethodImpl(Inline)]
-        public ProjectorProxy(Func<object,T> f)
+        public static implicit operator BoxedValueMap<T>(ProjectorProxy<T> src)
+            => src.Project;
+
+        [MethodImpl(Inline)]
+        public ProjectorProxy(Func<object,T> f, T[] dst)
         {
-            this.f = f;
-            Target = sys.alloc<T>(1);
+            Delegate = f;
+            Target = dst;
         }
 
         [MethodImpl(Inline)]
         public ref T Project(object src)
         {
             ref var dst = ref Target[0];
-            dst = f(src);
+            dst = Delegate(src);
             return ref dst;                        
         }
 
@@ -43,21 +45,12 @@ namespace Z0
         public ref T Project(in ValueType src)
         {
             ref var dst = ref Target[0];
-            dst = f(src);
+            dst = Delegate(src);
             return ref dst;                        
         }
 
-        public ValueFunc<T> F 
-        {
-            [MethodImpl(Inline)]
-            get => Project;
-        }
-
         [MethodImpl(Inline)]
-        public ValueType Untyped(ValueType src)
-            => f(src);    
-        
-        ValueFunc IValueProjector.F         
-            => Untyped;
+        ValueType IValueProjector.Project(ValueType src)
+            => Delegate(src);    
     }
 }

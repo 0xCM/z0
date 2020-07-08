@@ -20,7 +20,7 @@ namespace Z0
 
         protected AppShell(C context)
             : base(context)
-        {
+        {         
             Messaging = context.MessageQueue;
         }
 

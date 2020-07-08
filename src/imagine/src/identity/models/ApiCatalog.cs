@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    public readonly struct ApiCatalog : IApiCatalog
+    public readonly struct ApiCatalog : IPartCatalog
     {
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog

@@ -14,7 +14,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit ispow2(sbyte x)
+        public static bool ispow2(sbyte x)
             => (x & (x - 1)) == 0;
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit ispow2(byte x)
+        public static bool ispow2(byte x)
             => (x & (x - 1)) == 0;
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit ispow2(short x)
+        public static bool ispow2(short x)
             => (x & (x - 1)) == 0;
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit ispow2(ushort x)
+        public static bool ispow2(ushort x)
             => (x & (x - 1)) == 0;
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit ispow2(int x)
+        public static bool ispow2(int x)
             => (x & (x - 1)) == 0;
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit ispow2(uint x)
+        public static bool ispow2(uint x)
             => (x & (x - 1)) == 0;
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit ispow2(long x)
+        public static bool ispow2(long x)
             => (x & (x - 1)) == 0;
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit ispow2(ulong x)
+        public static bool ispow2(ulong x)
             => (x & (x - 1)) == 0;
     }
 }

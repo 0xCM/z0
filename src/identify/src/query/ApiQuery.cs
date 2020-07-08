@@ -12,16 +12,16 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ApiQuery : IService<IApiCatalog>
+    public readonly struct ApiQuery : IService<IPartCatalog>
     {
-        public IApiCatalog Context {get;}
+        public IPartCatalog Context {get;}
 
         [MethodImpl(Inline)]
-        public static ApiQuery Over(IApiCatalog src)
+        public static ApiQuery Over(IPartCatalog src)
             => new ApiQuery(src);
 
         [MethodImpl(Inline)]
-        ApiQuery(IApiCatalog src)
+        ApiQuery(IPartCatalog src)
         {
             this.Context = src;
         }

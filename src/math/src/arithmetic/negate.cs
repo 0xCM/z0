@@ -97,5 +97,13 @@ namespace Z0
         [MethodImpl(Inline), Negate]
         public static double negate(double src)
             => -src;
+
+        /// <summary>
+        /// Computes the two's complement of a 128-bit integer
+        /// </summary>
+        /// <param name="x">The integer, represented via paired hi/lo components</param>
+        [MethodImpl(Inline), Op]
+        public static ConstPair<ulong> negate(ConstPair<ulong> x)
+            => math.add(not(x), ConstPair.define(1ul,0ul));
    }
 }

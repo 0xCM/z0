@@ -22,51 +22,40 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(squeeze(uint8(src), uint8(max)));
+                return generic<T>(math.squeeze(uint8(src), uint8(max)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(squeeze(uint16(src), (uint16(max))));
+                return generic<T>(math.squeeze(uint16(src), (uint16(max))));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(squeeze(uint32(src), (uint32(max))));
+                return generic<T>(math.squeeze(uint32(src), (uint32(max))));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(squeeze(uint64(src), (uint64(max))));
+                return generic<T>(math.squeeze(uint64(src), (uint64(max))));
             else
                 throw Unsupported.define<T>();
         }
 
-        /// <summary>
-        /// Evenly projects points from the interval [0,2^8 - 1] onto the interval [0,max]
-        /// </summary>
-        /// <param name="src">The value to contract</param>
-        /// <param name="max">The maximum value in the target interval</param>
-        [MethodImpl(Inline), Op]
-        static byte squeeze(byte src, byte max)
-            => (byte)(((ushort)src * (ushort)max) >> 8);
+        [MethodImpl(Inline), Closures(UnsignedInts)]
+        public static void squeeze<T>(in T src, in T max, ref T dst, uint count)
+            where T : unmanaged
+        {
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = squeeze(skip(src,i), skip(max,i));
+        }               
 
-        /// <summary>
-        /// Evenly projects points from the interval [0,2^15 - 1] onto the interval [0,max]
-        /// </summary>
-        /// <param name="src">The value to contract</param>
-        /// <param name="max">The maximum value in the target interval</param>
-        [MethodImpl(Inline), Op]
-        static ushort squeeze(ushort src, ushort max)
-            => (ushort)(((uint)src * (uint)max) >> 16);
+        [MethodImpl(Inline), Closures(UnsignedInts)]
+        public static void squeeze<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> max, Span<T> dst)
+            where T : unmanaged
+        {
+            squeeze(first(src),first(max), ref first(dst), (uint)dst.Length);
+        }               
 
-        /// <summary>
-        /// Evenly projects points from the interval [0,2^31 - 1] onto the interval [0,max]
-        /// </summary>
-        /// <param name="src">The value to contract</param>
-        /// <param name="max">The maximum value in the target interval</param>
-        [MethodImpl(Inline), Op]
-        static uint squeeze(uint src, uint max)
-            => (uint)(((ulong)src * (ulong)max) >> 32);
-
-        /// <summary>
-        /// Evenly projects points from the interval [0,2^63 - 1] onto the interval [0,max]
-        /// </summary>
-        /// <param name="src">The value to contract</param>
-        /// <param name="max">The maximum value in the target interval</param>
-        [MethodImpl(Inline), Op]
-        static ulong squeeze(ulong src, ulong max)
-            => BmiMul.mulhi(src,max);
+        [MethodImpl(Inline), Closures(UnsignedInts)]
+        public static Span<T> squeeze<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> max)
+            where T : unmanaged
+        {
+            var count = (uint)Root.length(src,max);
+            var dst = Spans.alloc<T>(count);
+            squeeze<T>(first(src), first(max), ref first(dst), count);
+            return dst;
+        }               
     }
 }

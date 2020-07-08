@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct As
-    {
+    {                    
         /// <summary>
         /// Presents a generic reference as an sbyte pointer
         /// </summary>

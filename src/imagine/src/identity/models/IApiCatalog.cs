@@ -8,9 +8,9 @@ namespace Z0
     using System.Reflection;
 
     /// <summary>
-    /// Characterizes a type that supports operation discovery
+    /// Characterizes the api set exposed by a part
     /// </summary>
-    public interface IApiCatalog
+    public interface IPartCatalog
     {
         /// <summary>
         /// The known types that reify contracted operation services, potentially generic
@@ -66,12 +66,6 @@ namespace Z0
         string CatalogName
             => PartId.Format();        
 
-        // /// <summary>
-        // /// Defines a query service over the catalog
-        // /// </summary>
-        // ApiQuery Query
-        //     => ApiQuery.Over(this);
-
         /// <summary>
         /// Specifies the number of service hosts described by the catalog
         /// </summary>
@@ -83,29 +77,5 @@ namespace Z0
         /// </summary>
         bool IsNonEmpty 
             => HostCount != 0;
-    }
-    
-    public readonly struct EmptyCatalog : IApiCatalog
-    {    
-        public PartId PartId 
-            => PartId.None;
-
-        public Assembly Owner 
-            => Assembly.GetEntryAssembly();
-
-        public ApiHost[] Hosts 
-            => Array.Empty<ApiHost>();
-
-        public ApiHost[] GenericHosts 
-            => Array.Empty<ApiHost>();
-
-        public ApiHost[] DirectHosts 
-            => Array.Empty<ApiHost>();
-
-        public BinaryResources Resources 
-            => BinaryResources.Empty;
-
-        public Type[] FunFactories 
-            => Array.Empty<Type>();
-    }
+    }    
 }

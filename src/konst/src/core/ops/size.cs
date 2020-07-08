@@ -16,5 +16,6 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static uint size<T>()
             => (uint)SizeOf<T>();
+
     }
 }

@@ -14,12 +14,10 @@ namespace Z0
 
     partial class RootLegacy
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe Span<T> edit<T>(MemoryAddress src, int length)
-            => CreateSpan(ref src.Ref<T>(), length);
 
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> edit(MemoryAddress src, int length)
-            => CreateSpan(ref src.Ref<byte>(), length);
+        [MethodImpl(Inline)]
+        public static ref T edit<T>(in T src)
+            => ref Unsafe.AsRef(in src);
+
     }
 }

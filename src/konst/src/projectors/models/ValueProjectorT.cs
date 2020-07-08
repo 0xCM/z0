@@ -12,18 +12,25 @@ namespace Z0
     public readonly struct ValueProjector<T> : IValueProjector<T>
         where T : struct
     {
-        public ValueFunc<T> F {get;}
+        internal readonly BoxedValueMap<T> Delegate;
 
         [MethodImpl(Inline)]
-        public ValueProjector(ValueFunc<T> f)
-            => F = f;
+        public static implicit operator BoxedValueMap<T>(ValueProjector<T> src)
+            => src.Delegate;
+
+        [MethodImpl(Inline)]
+        public ValueProjector(BoxedValueMap<T> src)
+            => Delegate = src;
 
         [MethodImpl(Inline)]
         public ref T Project(object src)
-            => ref core.unbox<T>(F((ValueType)src));
+            => ref core.unbox<T>(Delegate((ValueType)src));
 
         [MethodImpl(Inline)]
         public ref T Project(ValueType src)
-            => ref core.unbox<T>(F(src));
+            => ref core.unbox<T>(Delegate(src));
+
+        ValueType IValueProjector.Project(ValueType src)
+            => Delegate(src);
     }
 }

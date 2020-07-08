@@ -35,6 +35,6 @@ namespace Z0.Asm
             => new MatchEmissionsStep(this);
         
         void Run(AsmArchiveConfig config, params PartId[] parts)
-            => ManageCapture.CaptureCatalogs(config, parts);        
+            => ManageCapture.CaptureParts(config, parts);        
     }
 }

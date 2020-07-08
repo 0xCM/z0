@@ -82,5 +82,11 @@ namespace Z0
 
         GetTypeFields,
 
+        GetEnumerator,
+
+       MoveNext,
+
+       Current,
+
     }
 }

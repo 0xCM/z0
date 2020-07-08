@@ -28,13 +28,13 @@ namespace Z0
         public static double Truncate(this double src)
             => (long)src;
 
-        [MethodImpl(Inline)]
-        public static int ToBits(this float src)
-            => BitConvert.ToInt32(src);
+        // [MethodImpl(Inline)]
+        // public static int ToBits(this float src)
+        //     => BitConvert.ToInt32(src);
 
-        [MethodImpl(Inline)]
-        public static long ToBits(this double src)
-            => BitConvert.ToInt64(src);
+        // [MethodImpl(Inline)]
+        // public static long ToBits(this double src)
+        //     => BitConvert.ToInt64(src);
 
         /// <summary>
         /// Returns true if a value is the NaN representative
@@ -83,6 +83,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool Finite(this double src)
             => !double.IsPositiveInfinity(src) && !double.IsNegativeInfinity(src) && !double.IsNaN(src);
-
     }
 }

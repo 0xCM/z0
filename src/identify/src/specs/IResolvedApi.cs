@@ -26,7 +26,7 @@ namespace Z0
         /// <summary>
         /// The catalogs defined by the composed parts
         /// </summary>
-        IEnumerable<IApiCatalog> Catalogs 
+        IEnumerable<IPartCatalog> Catalogs 
             => from part in Resolved
                 let c = Catalog(part)
                 where c.IsIdentified 
@@ -36,13 +36,13 @@ namespace Z0
         /// Searches for a part-identified, and returns a valued option if found
         /// </summary>
         /// <param name="id">The part id</param>
-        Option<IApiCatalog> FindCatalog(PartId id)
+        Option<IPartCatalog> FindCatalog(PartId id)
         {
             var c = Catalogs.Where(c => c.PartId == id).FirstOrDefault();
             if(c != null)
                 return Option.some(c);
             else
-                return Option.none<IApiCatalog>();
+                return Option.none<IPartCatalog>();
         }
     }
 }

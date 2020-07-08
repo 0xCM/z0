@@ -10,12 +10,16 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline), Op]
+        public static sbyte sign(sbyte src)
+            => mul(core.@sbyte(src < 0),(sbyte)-1);
+        
+        [MethodImpl(Inline), Op]
         public static SignKind signum(sbyte src)
             => signum((int)src);
-
+            
         [MethodImpl(Inline), Op]
         public static SignKind signum(byte src)
-            => src != 0 ? SignKind.Positive : SignKind.Negative;
+            => (SignKind)core.@byte(src != 0);
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(short src)
@@ -23,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(ushort src)
-            => src != 0 ? SignKind.Positive : SignKind.Negative;
+            => (SignKind)core.@byte(src != 0);
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(int src)
@@ -31,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(uint src)
-            => src != 0 ? SignKind.Positive : SignKind.Negative;
+            => (SignKind)core.@byte(src != 0);
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(long src)
@@ -39,6 +43,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(ulong src)
-            => src != 0 ? SignKind.Positive : SignKind.Negative;
+            => (SignKind)core.@byte(src != 0);
     }
 }

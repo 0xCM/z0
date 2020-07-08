@@ -14,7 +14,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bit positive(sbyte a)
+        public static bool positive(sbyte a)
             => a > 0;
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bit positive(byte a)
+        public static bool positive(byte a)
             => a > 0;
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bit positive(short a)
+        public static bool positive(short a)
             => a > 0;
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bit positive(ushort a)
+        public static bool positive(ushort a)
             => a > 0;
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bit positive(int a)
+        public static bool positive(int a)
             => a > 0;
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bit positive(uint a)
+        public static bool positive(uint a)
             => a > 0;
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bit positive(long a)
+        public static bool positive(long a)
             => a > 0;
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bit positive(ulong a)
+        public static bool positive(ulong a)
             => a > 0;
     }
 }

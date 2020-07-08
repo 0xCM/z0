@@ -9,3 +9,4 @@
 | A5         | MOVSW          | ZO    | Valid       | Valid           | For legacy mode, move word from address DS:(E)SI to ES:(E)DI. For 64-bit mode move word at address (R/E)SI to (R/E)DI.         |
 | A5         | MOVSD          | ZO    | Valid       | Valid           | For legacy mode, move dword from address DS:(E)SI to ES:(E)DI. For 64-bit mode move dword from address (R/E)SI to (R/E)DI.     |
 | REX.W + A5 | MOVSQ          | ZO    | Valid       | N.E.            | Move qword from address (R/E)SI to (R/E)DI.                                                                                    |
+

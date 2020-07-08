@@ -8,6 +8,8 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
     using System.Linq;
 
+    using Z0.Tokens;
+
     using M = OpCodeModel;
 
     using E = OpCodeIdentity;

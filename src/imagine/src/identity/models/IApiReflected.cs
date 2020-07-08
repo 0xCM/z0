@@ -16,7 +16,7 @@ namespace Z0
         /// Creates a (possibly empy) api catalog for a specified part
         /// </summary>
         /// <param name="src">The source part</param>
-        IApiCatalog Catalog(IPart src)
+        IPartCatalog Catalog(IPart src)
             => ApiHosts.catalog(src);
 
         /// <summary>

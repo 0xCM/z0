@@ -182,13 +182,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(MemoryAddress src)
             => Location == src.Location;
-
-        [MethodImpl(Inline)]
-        public uint Hash()
-            => core.hash(Location);
+        
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => core.hash(Location);
+        }
 
         public override int GetHashCode()
-            => (int)Hash();
+            => (int)Hash;
 
         public override bool Equals(object obj)
             => obj is MemoryAddress a && Equals(a);                    

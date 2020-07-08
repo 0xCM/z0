@@ -40,5 +40,14 @@ namespace Z0
         [MethodImpl(Inline), Xor]
         public static ulong xor(ulong a, ulong b)
             => a ^ b;
+
+        /// <summary>
+        /// Computes the bitwise XOR of two 128-bit integers
+        /// </summary>
+        /// <param name="x">The first integer, represented via paired hi/lo components</param>
+        /// <param name="y">The second integer, represented via paired hi/lo components</param>
+        [MethodImpl(Inline), Op]
+        public static ConstPair<ulong> xor(in ConstPair<ulong> x, in ConstPair<ulong> y)
+            => ConstPair.define(x.Left ^ y.Left, x.Right ^ y.Right);
     }
 }

@@ -13,20 +13,6 @@ namespace Z0
 
     partial class RootLegacy
     {
-        /// <summary>
-        /// Fills a caller-supplied span with data produced by a T-enumerable
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="dst">The target</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static Span<T> store<T>(IEnumerable<T> src, Span<T> dst)
-        {
-            var i = 0;
-            var e = src.GetEnumerator();
-            while(e.MoveNext() && i < dst.Length)
-                dst[i++] = e.Current;
-            return dst;
-        }            
 
 
         [MethodImpl(Inline)]

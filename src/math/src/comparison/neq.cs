@@ -15,7 +15,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Neq]
-        public static bit neq(sbyte a, sbyte b)
+        public static bool neq(sbyte a, sbyte b)
             => a != b;
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Neq]
-        public static bit neq(byte a, byte b)
+        public static bool neq(byte a, byte b)
             => a != b;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Neq]
-        public static bit neq(short a, short b)
+        public static bool neq(short a, short b)
             => a != b;
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Neq]
-        public static bit neq(ushort a, ushort b)
+        public static bool neq(ushort a, ushort b)
             => a != b;
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Neq]
-        public static bit neq(int a, int b)
+        public static bool neq(int a, int b)
             => a != b;
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Neq]
-        public static bit neq(uint a, uint b)
+        public static bool neq(uint a, uint b)
             => a != b;
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Neq]
-        public static bit neq(long a, long b)
+        public static bool neq(long a, long b)
             => a != b;
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Neq]
-        public static bit neq(ulong a, ulong b)
+        public static bool neq(ulong a, ulong b)
             => a != b;
     }
 }

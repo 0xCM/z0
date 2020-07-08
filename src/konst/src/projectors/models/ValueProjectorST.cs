@@ -13,37 +13,29 @@ namespace Z0
         where S : struct
         where T : struct
     {
-        readonly ValueFunc<S,T> f;
-        
-        public readonly ValueFunc<S,T> F 
-        {
-            [MethodImpl(Inline)]
-            get => f;
-        }
+        internal readonly ValueMap<S,T> Delegate;
         
         [MethodImpl(Inline)]
-        public ValueProjector(ValueFunc<S,T> f)
-            => this.f = f;
+        public static implicit operator ValueMap<S,T>(ValueProjector<S,T> src)
+            => src.Delegate;
+
+        [MethodImpl(Inline)]
+        public ValueProjector(ValueMap<S,T> f)
+            => Delegate = f;
 
         [MethodImpl(Inline)]
         public T map(object src)
-            => f(core.unbox<S>(src));
+            => Delegate(core.unbox<S>(src));
 
         [MethodImpl(Inline)]
         public T map(ValueType src)
-            => f(core.unbox<S>(src));
+            => Delegate(core.unbox<S>(src));
 
         [MethodImpl(Inline)]
         public ref T Project(in S src)
-            => ref f(src);
+            => ref Delegate(src);
 
-        public ValueProjector<T> Reduced
-        {
-            [MethodImpl(Inline)]
-            get => ValueProjector.from(map);
-        }
-
-        ValueFunc<T> IValueProjector<T>.F 
-            => Reduced.F;
+        ValueType IValueProjector.Project(ValueType src)
+            => map(src);
     }
 }

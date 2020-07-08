@@ -19,7 +19,7 @@ namespace Z0
 
         public IApiHost[] Hosts {get;}
 
-        public IApiCatalog[] Catalogs {get;}
+        public IPartCatalog[] Catalogs {get;}
 
         public IPart[] Parts {get;}
 

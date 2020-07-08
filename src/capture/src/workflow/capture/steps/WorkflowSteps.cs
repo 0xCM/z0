@@ -36,9 +36,9 @@ namespace Z0.Asm
     {
         void CaptureHost(ICaptureHostStep step, IApiHost host, TCaptureArchive dst);
 
-        void CaptureCatalogs(AsmArchiveConfig config, params PartId[] parts);
+        void CaptureParts(AsmArchiveConfig config, params PartId[] parts);
         
-        void CaptureCatalog(IApiCatalog src, TCaptureArchive dst);
+        void CaptureCatalog(IPartCatalog src, TCaptureArchive dst);
     }    
 
     public interface IReportExtractsStep 

@@ -8,6 +8,8 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
+    using Z0.Tokens;
+
     using static Konst;
     using static Root;
     using static As;

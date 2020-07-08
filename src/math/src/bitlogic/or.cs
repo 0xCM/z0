@@ -20,7 +20,6 @@ namespace Z0
         public static byte slor(byte a, byte asl, byte b, byte bsl)
             => or(sll(a,asl), sll(b, bsl));
 
-
         [MethodImpl(Inline), Or]
         public static sbyte or(sbyte a, sbyte b)
             => (sbyte)(a | b);
@@ -28,7 +27,6 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static byte or(byte a, byte b)
             => (byte)(a | b);
-
 
         [MethodImpl(Inline), Or]
         public static short or(short a, short b)
@@ -117,5 +115,14 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static ulong or(ulong a, ulong b, ulong c, ulong d)
             => or(or(a,b), or(c,d));
+
+        /// <summary>
+        /// Computes the bitwise OR of two 128-bit integers
+        /// </summary>
+        /// <param name="x">The first integer, represented via paired hi/lo components</param>
+        /// <param name="y">The second integer, represented via paired hi/lo components</param>
+        [MethodImpl(Inline), Op]
+        public static ConstPair<ulong> or(in ConstPair<ulong> x, in ConstPair<ulong> y)
+            => ConstPair.define(x.Left | y.Left, x.Right | y.Right);
     }
 }

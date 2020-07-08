@@ -9,3 +9,6 @@
 | 63 / r*           | MOVSXD r16, r/m16 | RM    | Valid       | Valid           | Move word to word with sign-extension.             |
 | 63 / r*           | MOVSXD r32, r/m32 | RM    | Valid       | Valid           | Move doubleword to doubleword with sign-extension. |
 | REX.W + 63 / r    | MOVSXD r64, r/m32 | RM    | Valid       | N.E.            | Move doubleword to quadword with sign-extension.   |
+
+# Operation
+----------------------------------------------------------------------------------

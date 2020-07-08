@@ -25,7 +25,7 @@ namespace Z0
             if(i==j)
                 return;
             
-            ref var data = ref head(src);
+            ref var data = ref As.first(src);
             var a = seek(ref data, i);
             seek(ref data, i) = skip(in data, j);
             seek(ref data, j) = a;

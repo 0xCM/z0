@@ -23,3 +23,6 @@
 | 83 /4 ib         | AND r/m16, imm8   | MI    | Valid       | Valid           | r/m16 AND imm8 (sign-extended).           |
 | 83 /4 ib         | AND r/m32, imm8   | MI    | Valid       | Valid           | r/m32 AND imm8 (sign-extended).           |
 | REX.W + 83 /4 ib | AND r/m64, imm8   | MI    | Valid       | N.E.            | r/m64 AND imm8 (sign-extended).           |
+
+# Operation
+----------------------------------------------------------------------------------

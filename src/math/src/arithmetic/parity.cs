@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit even(sbyte test)
+        public static bool even(sbyte test)
             => (test & 1) == 0;
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit even(byte test)
+        public static bool even(byte test)
             => (test & 1) == 0;
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit even(short test)
+        public static bool even(short test)
             => (test & 1) == 0;
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit even(int test)
+        public static bool even(int test)
             => (test & 1) == 0;
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit even(ushort test)
+        public static bool even(ushort test)
             => (test & 1) == 0;
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit even(uint test)
+        public static bool even(uint test)
             => (test & 1) == 0;
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit even(long test)
+        public static bool even(long test)
             => (test & 1) == 0;
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit even(ulong test)
+        public static bool even(ulong test)
             => (test & 1) == 0;
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit odd(sbyte test)
+        public static bool odd(sbyte test)
             => (test & 1) != 0;
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit odd(byte test)
+        public static bool odd(byte test)
             => (test & 1) != 0;
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit odd(short test)
+        public static bool odd(short test)
             => (test & 1) != 0;
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit odd(ushort test)
+        public static bool odd(ushort test)
             => (test & 1) != 0;
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit odd(int test)
+        public static bool odd(int test)
             => (test & 1) != 0;
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit odd(uint test)
+        public static bool odd(uint test)
             => (test & 1) != 0;
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit odd(long test)
+        public static bool odd(long test)
             => (test & 1) != 0;
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit odd(ulong test)
+        public static bool odd(ulong test)
             => (test & 1) != 0;        
     }
 }

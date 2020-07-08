@@ -1,0 +1,285 @@
+# OpCode Map Description
+
+Tables in this appendix list opcodes of instructions (including required instruction prefixes, opcode extensions in
+associated ModR/M byte). Blank cells in the tables indicate opcodes that are reserved or undefined. Cells marked
+“Reserved-NOP” are also reserved but may behave as NOP on certain processors. Software should not use opcodes
+corresponding blank cells or cells marked “Reserved-NOP” nor depend on the current behavior of those opcodes.
+The opcode map tables are organized by hex values of the upper and lower 4 bits of an opcode byte. For 1-byte
+encodings (Table A-2), use the four high-order bits of an opcode to index a row of the opcode table; use the four
+low-order bits to index a column of the table. For 2-byte opcodes beginning with 0FH (Table A-3), skip any instruc-
+tion prefixes, the 0FH byte (0FH may be preceded by 66H, F2H, or F3H) and use the upper and lower 4-bit values
+of the next opcode byte to index table rows and columns. Similarly, for 3-byte opcodes beginning with 0F38H or
+0F3AH (Table A-4), skip any instruction prefixes, 0F38H or 0F3AH and use the upper and lower 4-bit values of the
+third opcode byte to index table rows and columns. See Section A.2.4, “Opcode Look-up Examples for One, Two,
+and Three-Byte Opcodes.”
+When a ModR/M byte provides opcode extensions, this information qualifies opcode execution. For information on
+how an opcode extension in the ModR/M byte modifies the opcode map in Table A-2 and Table A-3, see Section A.4.
+The escape (ESC) opcode tables for floating point instructions identify the eight high order bits of opcodes at the
+top of each page. See Section A.5. If the accompanying ModR/M byte is in the range of 00H-BFH, bits 3-5 (the top
+row of the third table on each page) along with the reg bits of ModR/M determine the opcode. ModR/M bytes
+outside the range of 00H-BFH are mapped by the bottom two tables on each page of the section.
+
+Operands are identified by a two-character code of the form Zz. The first character, an uppercase letter, specifies
+the addressing method; the second character, a lowercase letter, specifies the type of operand.
+
+# Addressing Method Codes
+----------------------------------------------------------------------------------------------------------------------
+| Symbol | Meaning                                                                                                   |
+| A      | Direct address: the instruction has no ModR/M byte; the address of the operand is encoded in the          |
+|        | instruction.                                                                                              |
+|        | No base register, index register, or scaling factor can be applied (for example, far JMP (EA)).           |
+| B      | The VEX.vvvv field of the VEX prefix selects a general purpose register.                                  |
+| C      | The reg field of the ModR/M byte selects a control register (for example, MOV (0F20, 0F22)).              |
+| D      | The reg field of the ModR/M byte selects a debug register (for example, MOV (0F21,0F23)).                 |
+| E      | A ModR/M byte follows the opcode and specifies the operand. The operand is either a general-purpose       |
+|        | register or a memory address. If it is a memory address, the address is computed from                     |
+|        | a segment register and any of the following values: a base register, an index register, a scaling         |
+|        | factor, a displacement.                                                                                   |
+| F      | EFLAGS/RFLAGS Register.                                                                                   |
+| G      | The reg field of the ModR/M byte selects a general register (for example, AX (000)).                      |
+| H      | The VEX.vvvv field of the VEX prefix selects a 128-bit XMM register or a 256-bit YMM register,            |
+|        | determined by operand type.                                                                               |
+|        | For legacy SSE encodings this operand does not exist, changing the instruction to destructive form.       |
+| I      | Immediate data: the operand value is encoded in subsequent bytes of the instruction.                      |
+| J      | The instruction contains a relative offset to be added to the instruction pointer register                |
+|        | (for example, JMP (0E9), LOOP).                                                                           |
+| L      | The upper 4 bits of the 8-bit immediate selects a 128-bit XMM register or a 256-bit YMM register,         |
+|        | determined by                                                                                             |
+|        | operand type. (the MSB is ignored in 32-bit mode)                                                         |
+| M      | The ModR/M byte may refer only to memory (for example, BOUND, LES, LDS, LSS, LFS, LGS, CMPXCHG8B).        |
+| N      | The R/M field of the ModR/M byte selects a packed-quadword, MMX technology register.                      |
+| O      | The instruction has no ModR/M byte. The offset of the operand is coded as a word or double word           |
+|        | (depending on address size attribute) in the instruction. No base register, index register, or            |
+|        | scaling factor can be applied                                                                             |
+|        | (for example, MOV (A0–A3)).                                                                               |
+| P      | The reg field of the ModR/M byte selects a packed quadword MMX technology register.                       |
+| Q      | A ModR/M byte follows the opcode and specifies the operand. The operand is either an MMX technology       |
+|        | register or a memory                                                                                      |
+|        | address. If it is a memory address, the address is computed from a segment register and any of the        |
+|        | following values: a base                                                                                  |
+|        | register, an index register, a scaling factor, and a displacement.                                        |
+| R      | The R/M field of the ModR/M byte may refer only to a general register (for example, MOV (0F20-0F23)).     |
+| S      | The reg field of the ModR/M byte selects a segment register (for example, MOV (8C,8E)).                   |
+| U      | The R/M field of the ModR/M byte selects a 128-bit XMM register or a 256-bit YMM register,                |
+|        | determined by operand type.                                                                               |
+| V      | The reg field of the ModR/M byte selects a 128-bit XMM register or a 256-bit YMM register, determined     |
+|        | by operand type.                                                                                          |
+| W      | A ModR/M byte follows the opcode and specifies the operand. The operand is either a 128-bit XMM register, |
+|        | a 256-bit                                                                                                 |
+|        | YMM register (determined by operand type), or a memory address. If it is a memory address, the            |
+|        | address is computed from a                                                                                |
+|        | segment register and any of the following values: a base register, an index register, a scaling factor,   |
+|        | and a displacement.                                                                                       |
+| X      | Memory addressed by the DS:rSI register pair (for example, MOVS, CMPS, OUTS, or LODS).                    |
+| Y      | Memory addressed by the ES:rDI register pair (for example, MOVS, CMPS, INS, STOS, or SCAS).               |
+
+
+# Operand Type Codes
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Symbol | Meaning                                                                                                                                          |
+| a      | Two one-word operands in memory or two double-word operands in memory, depending on operand-size attribute (used only by the BOUND instruction). |
+| b      | Byte, regardless of operand-size attribute.                                                                                                      |
+| c      | Byte or word, depending on operand-size attribute.                                                                                               |
+| d      | Doubleword, regardless of operand-size attribute.                                                                                                |
+| dq     | Double-quadword, regardless of operand-size attribute.                                                                                           |
+| p      | 32-bit, 48-bit, or 80-bit pointer, depending on operand-size attribute.                                                                          |
+| pd     | 128-bit or 256-bit packed double-precision floating-point data.                                                                                  |
+| pi     | Quadword MMX technology register (for example: mm0).                                                                                             |
+| ps     | 128-bit or 256-bit packed single-precision floating-point data.                                                                                  |
+| q      | Quadword, regardless of operand-size attribute.                                                                                                  |
+| qq     | Quad-Quadword (256-bits), regardless of operand-size attribute.                                                                                  |
+| s      | 6-byte or 10-byte pseudo-descriptor.                                                                                                             |
+| sd     | Scalar element of a 128-bit double-precision floating data.                                                                                      |
+| ss     | Scalar element of a 128-bit single-precision floating data.                                                                                      |
+| si     | Doubleword integer register (for example: eax).                                                                                                  |
+| v      | Word, doubleword or quadword (in 64-bit mode), depending on operand-size attribute.                                                              |
+| w      | Word, regardless of operand-size attribute.                                                                                                      |
+| x      | dq or qq based on the operand-size attribute.                                                                                                    |
+| y      | Doubleword or quadword (in 64-bit mode), depending on operand-size attribute.                                                                    |
+| z      | Word for 16-bit operand-size or doubleword for 32 or 64-bit operand-size.                                                                        |
+
+# Register Codes
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Symbol | Meaning                                                                                                    | Example                                                                                                                                             |
+| eXX    | Form of register identifier that indicates 16 or 32-bit widths are applicable                              | eAX indicates that the AX register is used when the operand-size attribute is 16 and the EAX register is used when the operand-size attribute is 32 |
+| rXX    | Form of register identifier that indicates 16, 32 or 64-bit widths are applicable                          | rAX can indicate AX, EAX or RAX.                                                                                                                    |
+| /x     | Indicates that the Rex.B bit is used to modify the register specified in the reg field of the opcode       | rCX/r9 is used to indicate that the register could either be rCX or r9                                                                              |
+| *      | When an opcode requires a specific register as an operand, the register is identified by name              |                                                                                                                                                     |
+|        | (for example, AX, CL, or ESI). The name indicates whether the                                              |                                                                                                                                                     |
+|        | register is 64, 32, 16, or 8 bits wide.                                                                    |                                                                                                                                                     |
+| *      | A register identifier of the form eXX or rXX is used when register width depends on the operand-size       |                                                                                                                                                     |
+|        | attribute. eXX is used when 16 or 32-bit sizes                                                             |                                                                                                                                                     |
+|        | are possible; rXX is used when 16, 32, or 64-bit sizes are possible. For example: eAX indicates that       |                                                                                                                                                     |
+|        | the AX register is used when the operand-size attribute                                                    |                                                                                                                                                     |
+|        | is 16 and the EAX register is used when the operand-size attribute is 32. rAX can indicate AX, EAX or RAX. |                                                                                                                                                     |
+| *      | When the REX.B bit is used to modify the register specified in the reg field of the opcode, this fact is   |                                                                                                                                                     |
+|        | indicated by adding “/x” to the register name                                                              |                                                                                                                                                     |
+|        | to indicate the additional possibility. For example, rCX/r9 is used to indicate that the register could    |                                                                                                                                                     |
+|        | either be rCX or r9. Note that the size of r9 in                                                           |                                                                                                                                                     |
+|        | this case is determined by the operand size attribute (just as for rCX).                                   |                                                                                                                                                     |
+
+# OpCode Tables Superscripts
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Symbol | Meaning                                                                                                                                                                                                                                                                              |
+| 1A     | Bits 5, 4, and 3 of ModR/M byte used as an opcode extension (refer to Section A.4, “Opcode Extensions For One-Byte And Two-byte Opcodes”).                                                                                                                                           |
+| 1B     | Use the 0F0B opcode (UD2 instruction), the 0FB9H opcode (UD1 instruction), or the 0FFFH opcode (UD0 instruction) when deliberately trying to generate an invalid opcode exception (#UD).                                                                                             |
+| 1C     | Some instructions use the same two-byte opcode. If the instruction has variations, or the opcode represents different instructions, the ModR/M byte will be used to differentiate the instruction. For the value of the ModR/M byte needed to decode the instruction, see Table A-6. |
+| i64    | The instruction is invalid or not encodable in 64-bit mode. 40 through 4F (single-byte INC and DEC) are REX prefix combinations when in 64-bit mode (use FE/FF Grp 4 and 5 for INC and DEC).                                                                                         |
+| o64    | Instruction is only available when in 64-bit mode.                                                                                                                                                                                                                                   |
+| d64    | When in 64-bit mode, instruction defaults to 64-bit operand size and cannot encode 32-bit operand size.                                                                                                                                                                              |
+| f64    | The operand size is forced to a 64-bit operand size when in 64-bit mode (prefixes that change operand size are ignored for this instruction in 64-bit mode).                                                                                                                         |
+| v      | VEX form only exists. There is no legacy SSE form of the instruction. For Integer GPR instructions it means VEX prefix required.                                                                                                                                                     |
+| v1     | VEX128 & SSE forms only exist (no VEX256), when can’t be inferred from the data size                                                                                                                                                                                                 |
+
+# OpCode Tables Combined Notation
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Symbol | Meaning                                                                    |
+| Ev     | The ModR/M byte follows the opcode to specify a word or doubleword operand |
+| Gv     | The reg field of the ModR/M byte selects a general-purpose register        |
+| Ib     | Immediate data is encoded in the subsequent byte of the instruction.       |
+
+# Instruction Encodings
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Symbol | Bit Count | Meaning                                                                                    |
+| reg    | 3         | General-register specifier (see Table B-4 or B-5)                                          |
+| w      | 1         | Specifies if data is byte or full-sized, where full-sized is 16 or 32 bits (see Table B-6) |
+| s      | 1         | Specifies sign extension of an immediate field (see Table B-7)                             |
+| sreg2  | 2         | Segment register specifier for CS, SS, DS, ES (see Table B-8)                              |
+| sreg3  | 3         | Segment register specifier for CS, SS, DS, ES, FS, GS (see Table B-8)                      |
+| eee    | 3         | Specifies a special-purpose (control or debug) register (see Table B-9)                    |
+| tttn   | 4         | For conditional instructions, specifies a condition asserted or negated (see Table B-12)   |
+| d      | 1         | Specifies direction of data operation (see Table B-11)1                                    |
+
+# EFLAGS Condition Codes Encoding Notes
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Code   | Description
+| ttt0   | Tests the condition
+| ttn1   | Tests the negated condition
+
+1-byte primary opcodes => the tttn field is located in bits 3, 2, 1, and 0 of the opcode byte.
+2-byte primary opcodes => the tttn field is located in bits 3, 2, 1, and 0 of the second opcode byte.
+
+# Parametric
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Identifier    | Sort        | Symbol      | Description                                                                                                                                                                                                                                                                                                                                                     |
+| Stᐸiᐳ         | Instruction | ST(i)       | The i th element from the top of the FPU register stack (i ← 0 through 7).                                                                                                                                                                                                                                                                                      |
+| Vm32ᐸxㆍyㆍzᐳ | Instruction | vm32{x,y,z} | A vector array of memory operands specified using VSIB memory addressing. The                                                                                                                                                                                                                                                                                   |
+|               |             |             | array of memory addresses are specified using a common base register, a constant scale factor,                                                                                                                                                                                                                                                                  |
+|               |             |             | and a vector index register with individual elements of 32-bit index value in an XMM register (vm32x), a YMM register (vm32y) or a ZMM register (vm32z).                                                                                                                                                                                                        |
+| Vm64ᐸxㆍyㆍzᐳ | Instruction | vm64{x,y,z} | A vector array of memory operands specified using VSIB memory addressing. The array of memory addresses are specified using a common base register, a constant scale factor, and a vector index register with individual elements of 64-bit index value in an XMM register (vm64x), a YMM register (vm64y) or a ZMM register (vm64z).                           |
+| Mask<k1ᐳ      | Instruction | {k1}        | A mask register used as instruction writemask for instructions that do not allow zeroing-masking but support merging-masking. This corresponds to instructions that require the value of the aaa field to be different than 0 (e.g., gather) and store-type instructions which allow only merging-masking.                                                      |
+| Maskᐸk1ㆍzᐳ   | Instruction | {k1}{z}     | A mask register used as instruction writemask. The 64-bit k registers are: k1 through k7. Writemask specification is available exclusively via EVEX prefix. The masking can either be done as a merging masking, where the old values are preserved for masked out elements or as a zeroing masking. The type of masking is determined by using the EVEX.z bit. |
+
+
+
+# One-byte Opcode Map: (00H — F7H)
+-----------------------------------------------------------------------------------
+| * | 0      | 1      | 2      | 3      | 4      | 5       | 6        | 7         |
+| 0 | ADD    | ADD    | ADD    | ADD    | ADD    | ADD     | PUSH     | POP       |
+| 0 | Eb, Gb | Ev, Gv | Gb, Eb | Gv, Ev | AL, Ib | rAX, Iz | ES^{i64} | ES^{i64}  |
+| 1 | ADC    | ADC    | ADC    | ADC    | ADC    | ADC     | PUSH     | Pop       |
+| 1 | Eb, Gb | Ev, Gv | Gb, Eb | Gv, Ev | AL, Ib | rAX, Iz | SS^{i64} | SS^{i64}  |
+| 2 | AND    | AND    | AND    | AND    | AND    | AND     | SEG=ES   | DAA^{i64} |
+| 2 | Eb, Gb | Ev, Gv | Gb, Eb | Gv, Ev | AL, Ib | rAX, Iz | (Prefix) |           |
+| 3 | XOR    | XOR    | XOR    | XOR    | XOR    | XOR     | SEG=SS   | AAA^{i64} |
+| 3 | Eb, Gb | Ev, Gv | Gb, Eb | Gv, Ev | AL, Ib | rAX, Iz | (Prefix) |           |
+
+
+| 4  | INC i64 general register / REX o64 Prefixes
+| eAX
+| REX
+| eCX
+| REX.B
+| eDX
+| REX.X
+| eBX
+| REX.XB
+| eSP
+| REX.R
+| eBP
+| REX.RB
+| eSI
+| REX.RX
+| eDI
+| REX.RXB
+| 5  | PUSH d64 general register
+| rAX/r8 rCX/r9 rDX/r10 rBX/r11 rSP/r12 rBP/r13 rSI/r14 rDI/r15
+| 6  | PUSHA i64 /
+| PUSHAD i64
+| POPA i64 /
+| POPAD i64
+| BOUND i64
+| Gv, Ma
+| ARPL i64
+| Ew, Gw
+| MOVSXD o64
+| Gv, Ev
+| SEG=FS
+| (Prefix)
+| SEG=GS
+| (Prefix)
+| Operand
+| Size
+| (Prefix)
+| Address
+| Size
+| (Prefix)
+| 7  | Jcc f64 , Jb - Short-displacement jump on condition
+| O NO B/NAE/C NB/AE/NC Z/E NZ/NE BE/NA NBE/A
+| 8  | Immediate Grp 1 1A TEST XCHG
+| Eb, Ib Ev, Iz Eb, Ib i64 Ev, Ib Eb, Gb Ev, Gv Eb, Gb Ev, Gv
+| 9  | NOP
+| PAUSE(F3)
+| XCHG r8, rAX
+| XCHG word, double-word or quad-word register with rAX
+| rCX/r9 rDX/r10 rBX/r11 rSP/r12 rBP/r13 rSI/r14 rDI/r15
+| A  | MOV MOVS/B
+| Yb, Xb
+| MOVS/W/D/Q
+| Yv, Xv
+| CMPS/B
+| Xb, Yb
+| CMPS/W/D
+| Xv, Yv
+| AL, Ob rAX, Ov Ob, AL Ov, rAX
+| B  | MOV immediate byte into byte register
+| AL/R8L, Ib CL/R9L, Ib DL/R10L, Ib BL/R11L, Ib AH/R12L, Ib CH/R13L, Ib DH/R14L, Ib BH/R15L, Ib
+| C  | Shift Grp 2 1A near RET f64
+| Iw
+| near RET f64 LES i64
+| Gz, Mp
+| VEX+2byte
+| LDS i64
+| Gz, Mp
+| VEX+1byte
+| Grp 11 1A - MOV
+| Eb, Ib Ev, Ib Eb, Ib Ev, Iz
+| D  | Shift Grp 2 1A AAM i64
+| Ib
+| AAD i64
+| Ib
+| XLAT/
+| XLATB
+| Eb, 1 Ev, 1 Eb, CL Ev, CL
+| E  | LOOPNE f64 /
+| LOOPNZ f64
+| Jb
+| LOOPE f64 /
+| LOOPZ f64
+| Jb
+| LOOP f64
+| Jb
+| JrCXZ f64 /
+| Jb
+| IN OUT
+| AL, Ib eAX, Ib Ib, AL Ib, eAX
+| F  | LOCK
+| (Prefix)
+| INT1 REPNE
+| XACQUIRE
+| (Prefix)
+| REP/REPE
+| XRELEASE
+| (Prefix)
+| HLT CMC Unary Grp 3 1A
+| Eb Ev

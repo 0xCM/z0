@@ -30,7 +30,7 @@ namespace Z0
 
     public interface IAddress<F,W,T> : IAddress<W,T>, INullary<F>, IEquatable<F>, IComparable<F>
         where W : unmanaged, IDataWidth
-        where F : unmanaged, IAddress<F,W,T>
+        where F : struct, IAddress<F,W,T>
         where T : unmanaged
     {
         

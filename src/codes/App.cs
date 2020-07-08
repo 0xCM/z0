@@ -23,7 +23,7 @@ namespace Z0
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
-            return AppContext.Create(resolved, random, settings, exchange);
+            return Apps.context(resolved, random, settings, exchange);
         }
 
         static IAsmContext CreateAsmContext()
@@ -33,7 +33,7 @@ namespace Z0
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
             var api = ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
-            var appContext = AppContext.Create(resolved, random, settings, exchange);
+            var appContext = Apps.context(resolved, random, settings, exchange);
             return AsmContext.Create(appContext);            
         }
 

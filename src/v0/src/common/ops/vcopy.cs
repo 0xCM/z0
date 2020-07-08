@@ -12,7 +12,6 @@ namespace Z0
     using static Typed;
     using static As;
     using static Root;
-    using static System.Runtime.CompilerServices.Unsafe;
 
     public readonly struct CopyOps
     {
@@ -26,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             var seglen = vcount<T>(w);
-            var blocks = length(src,dst)/seglen;
+            var blocks = core.length(src,dst)/seglen;
             for(var i=0; i<blocks; i++)
             {
                 var offset = i*seglen;

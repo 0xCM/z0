@@ -32,7 +32,7 @@ namespace Z0
             => new AppContext(api, random, settings, queue);
 
         internal AppContext(IResolvedApi composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
-        {
+        {            
             AppPaths = Z0.AppPaths.Default;
             Next = msg => {};
             Random = random;
@@ -67,7 +67,7 @@ namespace Z0
         public IApiHost[] Hosts  
             => Api.Hosts;
 
-        public IApiCatalog[] Catalogs 
+        public IPartCatalog[] Catalogs 
             => Api.Catalogs;
 
         public IPart[] Parts 

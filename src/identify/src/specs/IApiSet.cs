@@ -15,7 +15,7 @@ namespace Z0
     {
         IPart[] Parts {get;}   
 
-        IApiCatalog[] Catalogs {get;}
+        IPartCatalog[] Catalogs {get;}
 
         PartId[] PartIdentities {get;}
 
@@ -29,7 +29,7 @@ namespace Z0
         Option<IApiHost> FindHost(ApiHostUri uri)
             => option(Hosts.Where(h => h.Uri == uri).FirstOrDefault());
         
-        IEnumerable<IApiCatalog> MatchingCatalogs(params PartId[] parts)
+        IEnumerable<IPartCatalog> MatchingCatalogs(params PartId[] parts)
         {
             if(parts.Length == 0)
                 return Catalogs;

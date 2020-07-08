@@ -14,7 +14,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bit positive(float a)
+        public static bool positive(float a)
             => a > 0;
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bit positive(double a)
+        public static bool positive(double a)
             => a > 0;
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline), Negative]
-        public static bit negative(float x)
+        public static bool negative(float x)
             => x < 0;
 
         /// <summary>
@@ -38,63 +38,63 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline), Negative]
-        public static bit negative(double x)
+        public static bool negative(double x)
             => x < 0;
 
         [MethodImpl(Inline), Eq]
-        public static bit eq(float a, float b)
+        public static bool eq(float a, float b)
             => a == b;
 
         [MethodImpl(Inline), Eq]
-        public static bit eq(double a, double b)
+        public static bool eq(double a, double b)
             => a == b;
 
         [MethodImpl(Inline), Neq]
-        public static bit neq(float a, float b)
+        public static bool neq(float a, float b)
             => a != b;
 
         [MethodImpl(Inline), Neq]
-        public static bit neq(double a, double b)
+        public static bool neq(double a, double b)
             => a != b;
 
         [MethodImpl(Inline), Gt]
-        public static bit gt(float a, float b)
+        public static bool gt(float a, float b)
             => a > b;
 
         [MethodImpl(Inline), Gt]
-        public static bit gt(double a, double b)
+        public static bool gt(double a, double b)
             => a > b;        
 
         [MethodImpl(Inline), GtEq]
-        public static bit gteq(float a, float b)
+        public static bool gteq(float a, float b)
             => a >= b;
 
         [MethodImpl(Inline), GtEq]
-        public static bit gteq(double a, double b)
+        public static bool gteq(double a, double b)
             => a >= b;        
 
         [MethodImpl(Inline), Lt]
-        public static bit lt(float lhs, float rhs)
+        public static bool lt(float lhs, float rhs)
             => lhs < rhs;
 
         [MethodImpl(Inline), Lt]
-        public static bit lt(double lhs, double rhs)
+        public static bool lt(double lhs, double rhs)
             => lhs < rhs;        
 
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(float lhs, float rhs)
+        public static bool lteq(float lhs, float rhs)
             => lhs <= rhs;
 
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(double lhs, double rhs)
+        public static bool lteq(double lhs, double rhs)
             => lhs <= rhs;        
 
         [MethodImpl(Inline), Nonz]
-        public static bit nonz(float src)
+        public static bool nonz(float src)
             => src != 0;
             
         [MethodImpl(Inline), Nonz]
-        public static bit nonz(double src)
+        public static bool nonz(double src)
             => src != 0;
 
         [MethodImpl(Inline), Op]
@@ -130,12 +130,12 @@ namespace Z0
             => abs(rhs - lhs);
 
         [MethodImpl(Inline), Op]
-        public static bit within(float a, float b, float delta)
+        public static bool within(float a, float b, float delta)
             => a > b ? a - b <= delta 
               : b - a <= delta;
 
         [MethodImpl(Inline), Op]
-        public static bit within(double a, double b, double delta)
+        public static bool within(double a, double b, double delta)
             => a > b ? a - b <= delta 
               : b - a <= delta;
 
@@ -146,7 +146,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline), Between]
-        public static bit between(float x, float a, float b)    
+        public static bool between(float x, float a, float b)    
             => x >= a && x <= b;
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline), Between]
-        public static bit between(double x, double a, double b)    
+        public static bool between(double x, double a, double b)    
             => x >= a && x <= b;
 
         [Op]
@@ -252,7 +252,7 @@ namespace Z0
         public static bool[] fcmp(Span<float> lhs, Span<float> rhs, FpCmpMode kind)
         {
             var len =  lhs.Length;
-            var result = Arrays.alloc<bool>(len);
+            var result = sys.alloc<bool>(len);
             for(var i = 0; i< len; i++)
                 result[i] = fmath.fcmp(lhs[i], rhs[i], kind);
             return result;
@@ -261,7 +261,7 @@ namespace Z0
         public static bool[] fcmp(Span<double> lhs, Span<double> rhs, FpCmpMode kind)
         {
             var len =  lhs.Length;
-            var result = Arrays.alloc<bool>(len);
+            var result = sys.alloc<bool>(len);
             for(var i = 0; i< len; i++)
                 result[i] = fmath.fcmp(lhs[i], rhs[i], kind);
             return result;

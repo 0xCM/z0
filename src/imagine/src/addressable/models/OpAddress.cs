@@ -9,19 +9,23 @@ namespace Z0
 
     using static Konst;
     
+    using A = OpAddress;
+    using W = W64;
+    using T = MemoryAddress;
+
     /// <summary>
     /// Pairs a located operation with, well, its location
     /// </summary>
-    public readonly struct OpAddress : ITextual, IAddressable64
+    public readonly struct OpAddress : IAddress<A,W,T>
     {        
-        public OpUri OpUri {get;}
+        public readonly MemoryAddress Location;
 
-        public MemoryAddress Address {get;}
-
+        public readonly OpUri OpUri;        
+        
         public bool IsEmpty 
         {  
             [MethodImpl(Inline)] 
-            get => OpUri.IsEmpty && Address.IsEmpty;
+            get => OpUri.IsEmpty && Location.IsEmpty;
         }
 
         public bool IsNonEmpty 
@@ -41,12 +45,36 @@ namespace Z0
         public OpAddress(OpUri uri, MemoryAddress address)
         {
             OpUri = uri;
-            Address = address;
+            Location = address;
         }
+ 
+         T IAddress<T>.Location 
+            => Location;
+
         public string Format()
-            => OpUri.Format() + Chars.Dash + Address.Format();
+            => OpUri.Format() + Chars.Dash + Location.Format();
 
         public static OpAddress Empty 
             => (OpUri.Empty, MemoryAddress.Empty);
+        
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => Location.Hash;
+        }
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        [MethodImpl(Inline)]
+        public bool Equals(A src)        
+            => Location == src.Location;
+
+        public override bool Equals(object src)        
+            => src is A a && Equals(a);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(A src)
+            => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
     }
 }

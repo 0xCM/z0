@@ -21,20 +21,17 @@ namespace Z0.Asm
         internal ManageCaptureStep(ICaptureWorkflow workflow)
             => Workflow = workflow;
         
-        static TCaptureArchive TargetArchive(AsmArchiveConfig config, params PartId[] parts) 
+        static TCaptureArchive InitTarget(AsmArchiveConfig config, params PartId[] parts) 
         {
             var archive = Archives.Services.CaptureArchive(config.ArchiveRoot);
             archive.Clear(parts);
             return archive;
         }
         
-        public void CaptureCatalogs(AsmArchiveConfig config, params PartId[] parts)
+        public void CaptureParts(AsmArchiveConfig config, params PartId[] parts)
         {
-
-            var dst = TargetArchive(config, parts);      
-            var api = Context.ApiSet;
-            
-
+            var dst = InitTarget(config, parts);      
+            var api = Context.ApiSet;            
             var catalogs = Context.ApiSet.MatchingCatalogs(parts).Where(x => x.ApiHostCount != 0).ToArray();
 
 
@@ -50,7 +47,7 @@ namespace Z0.Asm
             Context.Raise(new CapturedHost(host.Uri));
         }
 
-        public void CaptureCatalog(IApiCatalog src, TCaptureArchive dst)
+        public void CaptureCatalog(IPartCatalog src, TCaptureArchive dst)
         {
             if(src.HasApiHostContent)
             {

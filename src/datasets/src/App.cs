@@ -21,7 +21,7 @@ namespace Z0
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
-            return AppContext.Create(resolved, random, settings, exchange);
+            return Apps.context(resolved, random, settings, exchange);
         }
         
         public App()

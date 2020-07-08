@@ -42,8 +42,7 @@ namespace Z0
         /// <param name="max">The maximum value in the target interval</param>
         [MethodImpl(Inline)]
         internal static ulong Contract(this ulong src, ulong max)
-            => BmiMul.mulhi(src,max); 
-
+            => math.mulhi(src,max); 
     }
 
     public static partial class XRng

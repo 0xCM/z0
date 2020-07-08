@@ -84,7 +84,6 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
-
      
         [MethodImpl(Inline)]
         public int CompareTo(I src)

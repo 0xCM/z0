@@ -77,16 +77,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(A x, A y)
             => x.Location != y.Location;
-
-        
+    
         [MethodImpl(Inline)]
         public bool Equals(A src)        
             => Location == src.Location;
 
+        public override bool Equals(object src)        
+            => src is A a && Equals(a);
+ 
         [MethodImpl(Inline)]
         public int CompareTo(A src)
             => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
-
 
         [MethodImpl(Inline)]
         public string Format()
@@ -97,10 +98,7 @@ namespace Z0
 
         public override int GetHashCode()
             => Location.GetHashCode();
-        
-        public override bool Equals(object src)        
-            => src is A a && Equals(a);
-        
+                
         public static A Empty 
             => new A(0);
 

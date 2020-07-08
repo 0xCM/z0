@@ -13,7 +13,6 @@ namespace Z0.Asm.Data
     {
         public string Body {get;}
 
-
         [MethodImpl(Inline)]
         public static implicit operator TextExpression(OpCodeDescription src)
             => new TextExpression(src.Body);

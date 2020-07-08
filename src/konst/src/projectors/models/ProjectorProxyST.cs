@@ -9,50 +9,37 @@ namespace Z0
  
     using static Konst;
 
-    readonly struct ProjectorProxy<S,T> : IValueProjector<S,T>
+    public readonly struct ProjectorProxy<S,T> : IValueProjector<S,T>
         where S : struct
         where T : struct
     {
-        readonly Func<S,T> f;
+        internal readonly Func<S,T> Delegate;
 
+        /// <summary>
+        /// Captures a projected value
+        /// </summary>
         readonly T[] Dst;
 
         [MethodImpl(Inline)]
-        public ProjectorProxy(Func<S,T> f)
+        public static implicit operator ValueMap<S,T>(ProjectorProxy<S,T> src)
+            => src.Project;
+
+        [MethodImpl(Inline)]
+        public ProjectorProxy(Func<S,T> f, T[] dst)
         {
-            this.f = f;
-            Dst = sys.alloc<T>(1);
+            Delegate = f;
+            Dst = dst;
         }
-        
+
         [MethodImpl(Inline)]
         public ref T Project(in S src)
         {
             ref var dst = ref Dst[0];
-            dst = f(src);
+            dst = Delegate(src);
             return ref dst;                        
         }
 
-        [MethodImpl(Inline)]
-        public T map(object src)
+        ValueType IValueProjector.Project(ValueType src)
             => Project(core.unbox<S>(src));
-
-        [MethodImpl(Inline)]
-        public T map(ValueType src)
-            => Project(core.unbox<S>(src));
-
-        public ValueFunc<S,T> F 
-        {
-            [MethodImpl(Inline)]
-            get => Project;
-        }
-
-        public ValueProjector<T> Reduced
-        {
-            [MethodImpl(Inline)]
-            get => ValueProjector.from(map);
-        }
-
-        ValueFunc<T> IValueProjector<T>.F 
-            => Reduced.F;
     }
 }

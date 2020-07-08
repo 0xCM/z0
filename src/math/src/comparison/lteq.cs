@@ -10,35 +10,35 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(sbyte a, sbyte b)
+        public static bool lteq(sbyte a, sbyte b)
             => a <= b;
 
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(byte a, byte b)
+        public static bool lteq(byte a, byte b)
             => a <= b;
 
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(short a, short b)
+        public static bool lteq(short a, short b)
             => a <= b;
 
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(ushort a, ushort b)
+        public static bool lteq(ushort a, ushort b)
             => a <= b;
 
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(int a, int b)
+        public static bool lteq(int a, int b)
             => a <= b;
 
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(uint a, uint b)
+        public static bool lteq(uint a, uint b)
             => a <= b;
 
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(long a, long b)
+        public static bool lteq(long a, long b)
             => a <= b;
 
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(ulong a, ulong b)
+        public static bool lteq(ulong a, ulong b)
             => a <= b; 
     }
 }
