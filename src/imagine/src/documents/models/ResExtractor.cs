@@ -60,14 +60,14 @@ namespace Z0
             }
         }
 
-        public Option<AppResourceDoc> ExtractDocument(string name)
+        public ParseResult<AppResourceDoc> ExtractDocument(string name)
         {
             using var stream = Source.GetManifestResourceStream(name);
             using var reader = new StreamReader(stream);
             return TextDocParser.parse(reader).TryMap(doc => new AppResourceDoc(name,doc));            
         }
 
-        public Option<AppResourceDoc> ExtractDocument(FileName name)
+        public ParseResult<AppResourceDoc> ExtractDocument(FileName name)
             => ExtractDocument(name.Name);
         
         public string[] ResourceNames

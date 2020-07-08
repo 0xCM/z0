@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector256<ushort> v16u<T>(in Vector256<T> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector256<T>,Vector256<ushort>>(ref edit(in src));
+                => ref core.@as<Vector256<T>,Vector256<ushort>>(src);
 
         /// <summary>
         /// VPMOVZXBW ymm, m128
@@ -50,7 +50,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<byte> vbytes(W256 w, ulong x0, ulong x1, ulong x2, ulong x3)
             => Vector256.Create(x0,x1,x2,x3).As<ulong,byte>();
-
 
         [MethodImpl(Inline), Op]
         public static unsafe void vstore(Vector128<byte> src, ref byte dst)
@@ -94,7 +93,6 @@ namespace Z0
         public static unsafe void vstore(Vector512<byte> src, Span<byte> dst)
             => vstore(src, ref head(dst));
 
- 
         [MethodImpl(Inline)]
         public static ulong vlo(Vector128<byte> src)
             => src.AsUInt64().GetElement(0);
@@ -126,13 +124,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<ushort> vhi(Vector256<ushort> src)
             => Vector256.GetUpper(src);
-
-        [MethodImpl(Inline)]
-        public static Vector256<byte> vlo(Vector512<byte> src)
-            => src.Lo;
-
-        [MethodImpl(Inline)]
-        public static Vector256<byte> vhi(Vector512<byte> src)
-            => src.Hi;
     }
 }

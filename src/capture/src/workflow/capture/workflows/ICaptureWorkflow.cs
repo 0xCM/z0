@@ -22,7 +22,7 @@ namespace Z0.Asm
         IEmitParsedReportStep ReportParsed
             => new EmitParsedReportStep(this);
 
-        IExtractMembers ExtractMembers
+        ExtractMembersStep ExtractMembers
             => new ExtractMembersStep(this);
 
         IDecodeStep DecodeParsed

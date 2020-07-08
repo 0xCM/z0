@@ -36,12 +36,20 @@ namespace Z0
             => src.TrimEnd().EndsWith(HexSpecs.PostSpec);
 
         /// <summary>
-        /// Parses the Hex digit if possible; otherwise raises an error
+        /// Parses a single hex digit
         /// </summary>
         /// <param name="c">The source character</param>
         [MethodImpl(Inline)]
         public ParseResult<byte> Parse(char c)
-            => HexSpecs.Parse(c);
+        {
+            var u = Char.ToUpperInvariant(c);
+            if(Hex.isNumber(c))
+                return ParseResult.Success(c, (byte)((byte)u - Hex.MinScalarCode));
+            else if(Hex.isUpper(c))
+                return ParseResult.Success(c, (byte)((byte)u - Hex.MinCharCodeU + 0xA));
+            else
+                return ParseResult.Fail<byte>(c);
+        }
 
         /// <summary>
         /// Parses a space-delimited sequence of hex text

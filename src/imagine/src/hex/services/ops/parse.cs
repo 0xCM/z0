@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
-    using static HexSpecs;
 
     partial class Hex
     {
@@ -23,12 +21,12 @@ namespace Z0
             }
             else if(isUpper(src))
             {
-                dst = (byte)((byte)src - MinCharCodeU + 0xA);
+                dst = core.add(core.sub((byte)src, MinCharCodeU), (byte)0xA);
                 return true;
             }
             else if(isLower(src))
             {
-                dst = (byte)((byte)src - MinCharCodeL + 0xA);
+                dst = core.add(core.sub((byte)src,  MinCharCodeL), (byte)0xA);
                 return true;
             }
             else

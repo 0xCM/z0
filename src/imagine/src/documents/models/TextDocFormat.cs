@@ -11,6 +11,9 @@ namespace Z0
    
     public readonly struct TextDocFormat
     {        
+        public static TextDocFormat Empty
+            => new TextDocFormat(EmptyString);
+
         public static TextDocFormat Structured 
             => Define();
 
@@ -21,6 +24,13 @@ namespace Z0
         public static TextDocFormat Define(bool HasHeader = true, bool delimited = true, 
             char Delimiter = Chars.Pipe, char CommentPrefix = Chars.Hash, int? ColWidth = null)
                 => new TextDocFormat(HasHeader, delimited, Delimiter, CommentPrefix,ColWidth);
+        
+        [MethodImpl(Inline)]
+        TextDocFormat(string empty)
+            : this()
+        {
+            RowSeparator = EmptyString;
+        }
         
         [MethodImpl(Inline)]
         public TextDocFormat(bool header, bool delimited, char sep, char cp, int? colwidth)

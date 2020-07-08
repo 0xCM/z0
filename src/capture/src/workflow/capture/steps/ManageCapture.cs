@@ -7,10 +7,11 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Collections.Generic;
 
     using static Konst;
 
-    public readonly struct ManageCaptureStep : IManageCaptureStep
+    public class ManageCaptureStep : IManageCaptureStep
     {
         public ICaptureWorkflow Workflow {get;}
 
@@ -28,37 +29,40 @@ namespace Z0.Asm
             return archive;
         }
         
+        IEnumerable<IPartCatalog> Catalogs(IApiSet src, params PartId[] parts)
+            => parts.Length == 0 ? src.Catalogs 
+            : from c in src.Catalogs
+              where parts.Contains(c.PartId) && c.ApiHostCount != 0
+              select c;
+        
+
         public void CaptureParts(AsmArchiveConfig config, params PartId[] parts)
         {
             var dst = InitTarget(config, parts);      
-            var api = Context.ApiSet;            
-            var catalogs = Context.ApiSet.MatchingCatalogs(parts).Where(x => x.ApiHostCount != 0).ToArray();
-
-
-            foreach(var catalog in catalogs)   
-                CaptureCatalog(catalog, dst);
-
+            core.iter(Catalogs(Context.ApiSet, parts), c => CapturePart(c,dst));
         }
 
-        public void CaptureHost(ICaptureHostStep step, IApiHost host, TCaptureArchive dst)
-        {                
-            Context.Raise(new CapturingHost(host.Uri));
-            step.Execute(host, dst);
-            Context.Raise(new CapturedHost(host.Uri));
-        }
-
-        public void CaptureCatalog(IPartCatalog src, TCaptureArchive dst)
+        public void CapturePart(IPartCatalog src, TCaptureArchive dst)
         {
             if(src.HasApiHostContent)
             {
                 Context.Raise(new CapturingPart(src.PartId));
-
-                var step = new CaptureHostStep(Workflow);             
-                foreach(var host in src.Hosts)
-                    CaptureHost(step, host, dst);
-
+                CaptureHosts(src,dst);
                 Context.Raise(new CapturedPart(src.PartId));
             }
+        }
+
+        public void CaptureHosts(IPartCatalog src, TCaptureArchive dst)
+        {
+            var step = CaptureHostStep.create(Workflow);             
+            core.iter(src.Hosts, h => CaptureHost(step, h, dst));
+        }
+
+        public void CaptureHost(CaptureHostStep step, IApiHost host, TCaptureArchive dst)
+        {                
+            Context.Raise(new CapturingHost(host.Uri));
+            step.Execute(host, dst);
+            Context.Raise(new CapturedHost(host.Uri));
         }
     }
 }

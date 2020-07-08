@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+    using static Konst;
     partial class XTend
     {
         /// <summary>
@@ -14,7 +15,7 @@ namespace Z0
         /// <param name="s">The string to search</param>
         /// <param name="idx">The index</param>
         public static string LeftOf(this string s, int idx)
-            => (idx >= s.Length - 1) ? String.Empty : s.Substring(0, idx);
+            => (idx >= s.Length - 1) ? EmptyString : s.Substring(0, idx);
 
         /// <summary>
         /// Gets the string to the left of, but not including, the first instance of a specified character

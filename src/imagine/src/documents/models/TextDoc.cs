@@ -22,12 +22,12 @@ namespace Z0
         public uint TotalLineCount {get;}
 
         [MethodImpl(Inline)]
-        public TextDoc(TextDocFormat format, Option<TextDocHeader> header,  uint count, params TextRow[] rows)
+        public TextDoc(TextDocFormat format, Option<TextDocHeader> header, uint count, params TextRow[] rows)
         {
-            this.RowData = rows;
-            this.Header = header;
-            this.Format = format;
-            this.TotalLineCount = count;
+            RowData = rows;
+            Header = header;
+            Format = format;
+            TotalLineCount = count;
         }
 
         public ReadOnlySpan<TextRow> Rows
@@ -38,6 +38,7 @@ namespace Z0
         
         public string Content
         {
+            [MethodImpl(Inline)]
             get => RowData.Map(r => r.Format()).Concat(text.Eol);
         }
 
@@ -91,5 +92,8 @@ namespace Z0
                     part.Add(row);
             }
         }
+
+        public static TextDoc Empty 
+            => new TextDoc(TextDocFormat.Empty, default, 0, Array.Empty<TextRow>());        
     }
 }

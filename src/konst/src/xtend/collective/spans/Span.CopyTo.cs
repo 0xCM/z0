@@ -11,6 +11,7 @@ namespace Z0
 
     partial class XTend
     {
+        
         /// <summary>
         /// Copies the source span to a target span begininning at a specified target offset
         /// </summary>

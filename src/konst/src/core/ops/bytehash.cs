@@ -19,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint bytehash<C>(C src)
             where C : struct
-                => hash(bytes(src));
+                => hash<byte>(bytes(src));
     }
 }

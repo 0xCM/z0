@@ -22,34 +22,29 @@ namespace Z0.Asm
         internal ExtractMembersStep(ICaptureWorkflow workflow)
             => Workflow = workflow;
 
-        public static ApiMember[] locate(IApiHost host)
+        static ApiMember[] locate(IApiHost host)
         {            
             var locator = Identities.Services.ApiLocator;
-            var located = locator.Located(host);
+            var located = locator.Locate(host);
             return located;
         }
 
-        public static ExtractedCode[] extract(IApiHost host)
+        static MemberExtractor Extractor
+            => MemberExtraction.service(Extracts.DefaultBufferLength);    
+        
+        static ExtractedCode[] extract(ICaptureContext context, IApiHost host)
         {            
             var members = locate(host);
-            var extractor = MemberExtraction.service(Extracts.DefaultBufferLength);    
-            var extracted = extractor.Extract(members);
-            return extracted;
+            context.Raise(new MembersLocated(host.Uri, members));            
+            return Extractor.Extract(members);
         }
         
-        public ApiMember[] LocateMembers(IApiHost host)
-        {
-            var located = locate(host);
-            Context.Raise(new MembersLocated(host.Uri, located));              
-            return located;
-        }
-
         public ExtractedCode[] ExtractMembers(IApiHost host)
         {
             var extracted = Array.Empty<ExtractedCode>();            
             try
             {
-                extracted = extract(host); 
+                extracted = extract(Context,host); 
                 Context.Raise(new ExtractedMembers(host.Uri, extracted.Length));
             }
             catch(Exception e)

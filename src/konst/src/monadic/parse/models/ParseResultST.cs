@@ -61,10 +61,10 @@ namespace Z0
         [MethodImpl(Inline)]
         ParseResult(S source, T value, object reason = null)
         {
-            this.Source = source;
-            this.Succeeded = true;
-            this.Value = value;
-            this.Reason = reason != null ? Option.some(reason) : Option.none<object>();
+            Source = source;
+            Succeeded = true;
+            Value = value;
+            Reason = reason != null ? Option.some(reason) : Option.none<object>();
         }        
 
         /// <summary>
@@ -79,6 +79,7 @@ namespace Z0
             return this;
         }
 
+        
         /// <summary>
         /// Invokes an action if the value doesn't exist
         /// </summary>
@@ -112,6 +113,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public Y MapValueOrSource<Y>(Func<T,Y> success, Func<S,Y> failure)
             =>  Succeeded ? success(Value) : failure(Source);
+
+        [MethodImpl(Inline)]
+        public Y MapValueOrElse<Y>(Func<T,Y> success, Func<Y> failure)
+            =>  Succeeded ? success(Value) : failure();
+
+        [MethodImpl(Inline)]
+        public Y MapValueOrDefault<Y>(Func<T,Y> success, Y @default)
+            => Succeeded ? success(Value) : @default;
+
+        public T Require()
+        {
+            if(Succeeded)
+                return Value;
+            else    
+                throw new Exception($"{Source} could not be parsed {Reason}");
+        }
 
         /// <summary>
         /// Extracts the encapulated value if it exists; otherwise, returns the default value for

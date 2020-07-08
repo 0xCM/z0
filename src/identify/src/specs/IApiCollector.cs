@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-    public interface IApiCollector<S> : IService
+    public interface IApiCollector<S>
     {
         IEnumerable<DirectApiGroup> CollectDirect(S source);
 

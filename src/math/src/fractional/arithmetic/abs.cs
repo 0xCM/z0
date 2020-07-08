@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Abs]
         public static float abs(float a)
         {
-            var b =  bits(a);
+            var b =  new F32Bits(a);
             b.Bits &= F32Bits.SignMask;
             return b.Data;
         }
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Abs]
         public static double abs(double a)
         {
-            var b = bits(a);
+            var b = new F64Bits(a);
             b.Bits &= F64Bits.SignMask;
             return b.Data;
         }

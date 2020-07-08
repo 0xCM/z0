@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static System.Runtime.Intrinsics.Vector128;
-    using static System.Runtime.Intrinsics.Vector256;
 
     partial struct V0
     {

@@ -38,5 +38,9 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(T[] src)
             => src;
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> span(string src)
+            => src;
     }
 }

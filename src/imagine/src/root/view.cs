@@ -24,9 +24,6 @@ namespace Z0
         public static ref readonly T view<S,T>(in S src)
             => ref Unsafe.As<S,T>(ref edit(src));        
             
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ReadOnlySpan<T> view<T>(in MemRef src)
-            => CreateReadOnlySpan(ref @ref<T>(src.Address), src.Count<T>());
 
         /// <summary>   
         /// Creates a T-span from a supplied reference

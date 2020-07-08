@@ -15,7 +15,7 @@ namespace Z0
         public static void refs(ReadOnlySpan<string> src, Span<StringRef> dst)
         {
             for(var i=0; i<src.Length; i++)
-                seek(dst,i) = @ref(skip(src,i));
+                seek(dst,i) = StringRef.@ref(skip(src,i));
         }
 
         [MethodImpl(Inline), Op]

@@ -18,7 +18,7 @@ namespace Z0.Asm.Data
                 for(var j=0; j<data.Length; j++)
                 {
                     ref readonly var c = ref Root.skip(data,j);
-                    if(!AsciTest.IsWhiteSpace(c) && c != exclude)
+                    if(!AsciTest.whitespace(c) && c != exclude)
                         count++;
                 }
             }

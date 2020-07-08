@@ -14,15 +14,15 @@ namespace Z0
 
         FolderName RootFolder {get;}
 
-        Option<TextDoc> Dataset(FilePath src)
+        ParseResult<TextDoc> Dataset(FilePath src)
             => TextDocParser.parse(src);
 
-        Option<TextDoc> Dataset(FileName name)
-            => from p in DatasetPaths().TryGetFirst(p => p.FileName == name)
-               from d in Dataset(p) 
-               select d;
+        ParseResult<TextDoc> Dataset(FileName name)
+            => (from p in DatasetPaths().Where(p => p.FileName == name)
+                select Dataset(p)).FirstOrDefault(); 
+              
 
-        Option<TextDoc> Dataset(string name)
+        ParseResult<TextDoc> Dataset(string name)
             => Dataset(ArchiveRoot + FileName.Define(name, FileExtensions.Csv));
 
         IEnumerable<FilePath> DatasetPaths(FolderName subject = default)

@@ -17,7 +17,7 @@ namespace Z0.Xed
 
         public SourceFileData LoadSource(FilePath src)
             => TextDocParser.parse(src,TextDocFormat.Unstructured)
-                   .MapValueOrDefault(c => SourceFileData.Define(src, c.RowData), SourceFileData.Empty);
+                    .MapValueOrDefault(c => SourceFileData.Define(src, c.RowData), SourceFileData.Empty);
 
         public InstructionData ParseInstruction(SourceFileData src, in int idxStart, ref int idxterm)
         {

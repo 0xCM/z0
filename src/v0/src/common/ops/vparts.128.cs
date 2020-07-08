@@ -13,8 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.Vector256;
 
     partial struct V0
-    {
-        
+    {        
         /// <summary>
         /// Defines a 128-bit vector by explicit component specification, from least -> most significant
         /// </summary>

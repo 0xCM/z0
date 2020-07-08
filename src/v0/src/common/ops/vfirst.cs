@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
         
     using static Konst; 
-    using static As;
 
     partial struct V0
     {
@@ -21,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vfirst<T>(in Vector128<T> src)        
             where T : unmanaged
-                => ref @as<Vector128<T>,T>(ref edit(src));
+                => ref core.@as<Vector128<T>,T>(src);
 
         /// <summary>
         /// Returns a reference to the leading cell of the data source
@@ -31,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vfirst<T>(in Vector256<T> src)        
             where T : unmanaged
-                => ref @as<Vector256<T>,T>(ref edit(src));
+                => ref core.@as<Vector256<T>,T>(src);
 
         /// <summary>
         /// Returns a reference to the leading cell of the data source
@@ -41,6 +40,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vfirst<T>(in Vector512<T> src)        
             where T : unmanaged
-                => ref @as<Vector512<T>,T>(ref edit(src));
+                => ref core.@as<Vector512<T>,T>(src);
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
+    //using static Root;
     using static As;
 
     partial struct Symbolic
@@ -24,7 +24,7 @@ namespace Z0
             const int length = 16;
 
             for(var i=0; i< length; i++)
-                if(!Symbolic.literal(src, i, out seek(dst,i)))
+                if(!literal(src, i, out Root.seek(dst,i)))
                     return false;
             
             return true;
@@ -54,7 +54,7 @@ namespace Z0
 
             Span<Perm4L> dst = new Perm4L[length];
             for(var i=0; i < length; i++)
-                if(!literal(src,i, out seek(dst,i)))
+                if(!literal(src,i, out Root.seek(dst,i)))
                     return Span<Perm4L>.Empty;
 
             return dst;
@@ -71,7 +71,7 @@ namespace Z0
             const int length = 8;
 
             for(var i=0; i< length; i++)
-                if(!literal(src, i, out seek(dst,i)))
+                if(!literal(src, i, out Root.seek(dst,i)))
                     return false;
             
             return true;

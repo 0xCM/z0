@@ -27,6 +27,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref T @ref<S,T>(S* pSrc)            
             where S : unmanaged
-                => ref @as<S,T>(ref @ref<S>(pSrc));                
+                => ref @as<S,T>(@ref<S>(pSrc));                
     }
 }

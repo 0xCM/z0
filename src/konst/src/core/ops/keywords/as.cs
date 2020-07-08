@@ -12,8 +12,6 @@ namespace Z0
 
     partial struct core
     {
-
-
         /// <summary>
         /// Presents an S-cell as a T-cell
         /// </summary>
@@ -21,8 +19,8 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T @as<S,T>(ref S src)   
-            => ref As<S,T>(ref src);
+        public static ref T @as<S,T>(in S src)   
+            => ref As<S,T>(ref edit(src));
 
         /// <summary>
         /// Presents an S-cell as a T-cell
@@ -32,8 +30,8 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T @as<S,T>(ref S src, ref T dst)   
-            => ref As<S,T>(ref src);
+        public static ref T @as<S,T>(in S src, ref T dst)   
+            => ref As<S,T>(ref edit(src));
                     
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T @as<T>(in sbyte src)        

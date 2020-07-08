@@ -14,6 +14,10 @@ namespace Z0.Asm
     {
         public ICaptureWorkflow Workflow {get;}
 
+        [MethodImpl(Inline)]
+        public static CaptureHostStep create(ICaptureWorkflow workflow)
+            => new CaptureHostStep(workflow);
+
         public ICaptureContext Context 
             => Workflow.Context;
         

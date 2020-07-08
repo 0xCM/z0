@@ -11,26 +11,29 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
+    using static core;
 
     partial struct TextDocParser
-    {
+    {   
         public static ParseResult<T> parse<T>(string data, Func<TextDoc,ParseResult<T>> pfx)
         {
-            using var stream = text.stream(data);
-            using var reader = new StreamReader(stream);
-            return TextDocParser.parse(reader).TryMap(pfx).ValueOrDefault(ParseResult.Fail<T>(data));            
+            using var stream = core.stream(data);            
+            using var reader = core.reader(stream);
+            return from doc in parse(reader)
+                from content in pfx(doc)
+                select content;                
         }
 
-        public static Option<TextDoc> parse(FilePath src, TextDocFormat? format = null)
+        public static ParseResult<string,TextDoc> parse(FilePath src, TextDocFormat? format = null)
         {
             if(!src.Exists)
             {
                 term.error($"No such file {src}");
-                return Option.none<TextDoc>();
+                return unparsed(src.Name, default(TextDoc));
             };
 
             using var reader = src.Reader();
-            return parse(reader,format);
+            return parse(reader,format).Select(doc => parsed(src.Name, doc)).Value;
         }            
         
         /// <summary>
@@ -39,7 +42,7 @@ namespace Z0
         /// <param name="src">The source document path</param>
         /// <param name="format">The document format</param>
         /// <param name="observer">An optional observer to witness intersting events</param>
-        public static Option<TextDoc> parse(StreamReader reader, TextDocFormat? format = null)
+        public static ParseResult<TextDoc> parse(StreamReader reader, TextDocFormat? format = null)
         {            
             var rows = new List<TextRow>();
             var counter = 1u;
@@ -71,13 +74,15 @@ namespace Z0
                     else
                         row(line,fmt).OnSome(row => rows.Add(row));
                 }
+
+                var doc = new TextDoc(fmt, docheader, counter, rows.ToArray());
+                return parsed(string.Empty, doc);
             }
             catch(Exception e)
             {
                 term.error(e);
-            }
-
-            return new TextDoc(fmt, docheader, counter, rows.ToArray());
+                return unparsed<TextDoc>(EmptyString,e);
+            }            
         }
     }
 }

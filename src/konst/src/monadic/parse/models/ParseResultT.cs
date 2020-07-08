@@ -21,12 +21,6 @@ namespace Z0
         /// </summary>
         public bool Succeeded {get;}
 
-        public bool Failed 
-        {
-            [MethodImpl(Inline)]
-            get => !Succeeded;
-        }
-
         /// <summary>
         /// Upon successful parse attempt, holds the parsed value; otherwise it may or may not hold something else
         /// </summary>
@@ -34,6 +28,16 @@ namespace Z0
 
         public Option<object> Reason {get;}
 
+        public bool Failed 
+        {
+            [MethodImpl(Inline)]
+            get => !Succeeded;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ParseResult<T>(ParseResult<string,T> src)
+            => new ParseResult<T>(src.Source, src.Value, src.Reason);
+        
         [MethodImpl(Inline)]
         public static ParseResult<T> Success(string source, T value)
             => new ParseResult<T>(source, value, null);
@@ -182,6 +186,22 @@ namespace Z0
             }
             else
                 return ParseResult<Z>.Fail(src);
+        }
+
+        [MethodImpl(Inline)]
+        public Y MapValueOrElse<Y>(Func<T,Y> success, Func<Y> failure)
+            =>  Succeeded ? success(Value) : failure();
+
+        [MethodImpl(Inline)]
+        public Y MapValueOrDefault<Y>(Func<T,Y> success, Y @default)
+            => Succeeded ? success(Value) : @default;
+
+        public T Require()
+        {
+            if(Succeeded)
+                return Value;
+            else    
+                throw new Exception($"{Source} could not be parsed {Reason}");
         }
 
         [MethodImpl(Inline)]

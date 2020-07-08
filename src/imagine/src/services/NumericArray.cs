@@ -128,7 +128,7 @@ namespace Z0
             var count = input.Length;
             var target = dst.ToSpan();
             for(var i=0; i<count; i++)
-                As.seek(target,(uint)i) = ToNumeric.to<S,T>(As.skip(input,(uint)i));        
+                core.seek(target,(uint)i) = ToNumeric.to<S,T>(core.skip(input,(uint)i));        
             return dst;
         }
 
@@ -144,10 +144,10 @@ namespace Z0
         {
             var input = src.ToSpan();
             var count = input.Length;
-            var buffer = new T[count];
+            var buffer = sys.alloc<T>(count);
             var dst = buffer.ToSpan();
             for(var i=0; i<count; i++)
-                As.seek(dst,(uint)i) = ToNumeric.to<S,T>(As.skip(input,(uint)i));        
+                core.seek(dst,(uint)i) = ToNumeric.to<S,T>(core.skip(input,(uint)i));        
             return buffer;
         }
     }

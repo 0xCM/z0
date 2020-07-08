@@ -12,9 +12,8 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static As;
+    //using static As;
     using static Root;
-
 
     public static class text
     {
@@ -288,7 +287,7 @@ namespace Z0
             var src = Root.span(refs);
             for(var i=0u; i<count; i++)
             {
-                dst.Append(skip(refs,i).Format());
+                dst.Append(core.skip(refs,i).Format());
                 if(i != count - 1)
                     dst.Append(sep);                    
             }
@@ -696,7 +695,6 @@ namespace Z0
             return dst.ToString();
         }
 
-
         /// <summary>
         /// Formats a sequence of formattable things as delimited list
         /// </summary>
@@ -757,7 +755,7 @@ namespace Z0
             var count = fields.Length;
             for(byte i=0; i<count; i++)
             {
-                dst.Append(skip(fields, i));
+                dst.Append(core.skip(fields, i));
                 if(i != count - 1)
                 {
                     dst.Append(delimiter);
@@ -779,8 +777,8 @@ namespace Z0
             var count = As.length(src,widths);
             for(var i=0u; i<count; i++)
             {
-                ref readonly var field = ref skip(src,i);
-                ref readonly var width = ref skip(widths,i);
+                ref readonly var field = ref core.skip(src,i);
+                ref readonly var width = ref core.skip(widths,i);
                 dst.Append(field.PadRight(width));
                 if(i != count - 1)
                 {

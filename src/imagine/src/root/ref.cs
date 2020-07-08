@@ -13,12 +13,6 @@ namespace Z0
 
     partial class Root
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe ref T @ref<T>(MemoryAddress src)
-            => ref AsRef<T>((void*)src.Location);
 
-        [MethodImpl(Inline), Op]
-        public static unsafe StringRef @ref(string src)
-            => new StringRef(memref(src));        
     }
 }

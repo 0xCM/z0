@@ -94,7 +94,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Slice(offset,count);
         }
-
     }
 
     public readonly ref struct Symbols<S,T,N>

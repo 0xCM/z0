@@ -13,7 +13,7 @@ namespace Z0
     /// Defines operations over character digits
     /// </summary>
     [ApiHost]
-    public readonly struct Digital : IApiHost<Digital>
+    public readonly struct Digital
     {        
         /// <summary>
         /// Converts a character in the inclusive range [0,9] to the corresponding number in the same range
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="index">An integer in the inclusive range [0, 1] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
-        public static byte digit8(ushort src, int index)
+        public static byte digit8(ushort src, byte index)
             => (byte)asci.digit(base10, src, index);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="index">An integer in the inclusive range [0, 3] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
-        public static byte digit8(uint src, int index)
+        public static byte digit8(uint src, byte index)
             => (byte)asci.digit(base10, src, index);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="index">An integer in the inclusive range [0, 7] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
-        public static byte digit8(ulong src, int index)
+        public static byte digit8(ulong src, byte index)
             => (byte)asci.digit(base10, src, index);
 
         [MethodImpl(Inline), Op]
@@ -212,7 +212,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N1 count, ref byte dst)
         {
-            add(ref dst, 0) = (byte)digit(src,0);
+            core.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -224,8 +224,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N2 count, ref byte dst)
         {
-            add(ref dst, 1) = (byte)digit(src,1);
-            add(ref dst, 0) = (byte)digit(src,0);
+            core.add(dst, 1) = (byte)digit(src,1);
+            core.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -237,9 +237,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N3 count, ref byte dst)
         {
-            add(ref dst, 2) = (byte)digit(src,2);
-            add(ref dst, 1) = (byte)digit(src,1);
-            add(ref dst, 0) = (byte)digit(src,0);
+            core.add(dst, 2) = (byte)digit(src,2);
+            core.add(dst, 1) = (byte)digit(src,1);
+            core.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -251,10 +251,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N4 count, ref byte dst)
         {
-            add(ref dst, 3) = (byte)digit(src,3);
-            add(ref dst, 2) = (byte)digit(src,2);
-            add(ref dst, 1) = (byte)digit(src,1);
-            add(ref dst, 0) = (byte)digit(src,0);
+            core.add(dst, 3) = (byte)digit(src,3);
+            core.add(dst, 2) = (byte)digit(src,2);
+            core.add(dst, 1) = (byte)digit(src,1);
+            core.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -266,11 +266,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N5 count, ref byte dst)
         {
-            add(ref dst, 4) = (byte)digit(src,4);
-            add(ref dst, 3) = (byte)digit(src,3);
-            add(ref dst, 2) = (byte)digit(src,2);
-            add(ref dst, 1) = (byte)digit(src,1);
-            add(ref dst, 0) = (byte)digit(src,0);
+            core.add(dst, 4) = (byte)digit(src,4);
+            core.add(dst, 3) = (byte)digit(src,3);
+            core.add(dst, 2) = (byte)digit(src,2);
+            core.add(dst, 1) = (byte)digit(src,1);
+            core.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -282,12 +282,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N6 count, ref byte dst)
         {
-            add(ref dst, 5) = (byte)digit(src,5);
-            add(ref dst, 4) = (byte)digit(src,4);
-            add(ref dst, 3) = (byte)digit(src,3);
-            add(ref dst, 2) = (byte)digit(src,2);
-            add(ref dst, 1) = (byte)digit(src,1);
-            add(ref dst, 0) = (byte)digit(src,0);
+            core.add(dst, 5) = (byte)digit(src,5);
+            core.add(dst, 4) = (byte)digit(src,4);
+            core.add(dst, 3) = (byte)digit(src,3);
+            core.add(dst, 2) = (byte)digit(src,2);
+            core.add(dst, 1) = (byte)digit(src,1);
+            core.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -299,13 +299,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N7 count, ref byte dst)
         {
-            add(ref dst, 6) = (byte)digit(src,6);
-            add(ref dst, 5) = (byte)digit(src,5);
-            add(ref dst, 4) = (byte)digit(src,4);
-            add(ref dst, 3) = (byte)digit(src,3);
-            add(ref dst, 2) = (byte)digit(src,2);
-            add(ref dst, 1) = (byte)digit(src,1);
-            add(ref dst, 0) = (byte)digit(src,0);
+            core.add(dst, 6) = (byte)digit(src,6);
+            core.add(dst, 5) = (byte)digit(src,5);
+            core.add(dst, 4) = (byte)digit(src,4);
+            core.add(dst, 3) = (byte)digit(src,3);
+            core.add(dst, 2) = (byte)digit(src,2);
+            core.add(dst, 1) = (byte)digit(src,1);
+            core.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>

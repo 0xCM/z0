@@ -35,43 +35,14 @@ namespace Z0
                 => EnumValue.e8u(eVal);
 
         [MethodImpl(Inline)]
-        public static sbyte e8i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e8i(eVal);
-
-        [MethodImpl(Inline)]
-        public static short e16i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e16i(eVal);
-
-        [MethodImpl(Inline)]
         public static ushort e16u<E>(E eVal) 
             where E : unmanaged, Enum
                 => EnumValue.e16u(eVal);
 
-        [MethodImpl(Inline)]
-        public static char e16c<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e16c(eVal);
-
-        [MethodImpl(Inline)]
-        public static int e32i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e32i(eVal);
 
         [MethodImpl(Inline)]
         public static uint e32u<E>(E eVal) 
             where E : unmanaged, Enum
                 => EnumValue.e32u(eVal);
-
-        [MethodImpl(Inline)]
-        public static long e64i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e64i(eVal);
-
-        [MethodImpl(Inline)]
-        public static ulong e64u<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e64u(eVal);
     }
 }

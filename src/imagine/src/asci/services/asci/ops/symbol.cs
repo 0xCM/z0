@@ -9,11 +9,14 @@ namespace Z0
     
     using static Konst;
 
+    using DF = DecimalSymFacet;
+    using BF = BinarySymFacet;
+
     partial struct asci
     {
         [MethodImpl(Inline), Op]   
         public static Symbol<BinarySym,byte,N1> symbol(BinaryDigit src)
-            => symbol<BinarySym,byte,N1>((BinarySym)((byte)src + (byte)BinarySym.First));
+            => symbol<BinarySym,byte,N1>((BinarySym)(src + (byte)BF.First));
 
         [MethodImpl(Inline), Op]
         public static Symbol<OctalSym,byte,N3> symbol(OctalDigit src)
@@ -21,11 +24,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]   
         public static Symbol<BinarySym,byte,N1> symbol(Base2 @base, byte src)
-            => symbol<BinarySym,byte,N1>((BinarySym)(src + (byte)BinarySym.First));
+            => symbol<BinarySym,byte,N1>((BinarySym)(src + (byte)BF.First));
 
         [MethodImpl(Inline), Op]
-        public static Symbol<DeciSym,byte,N4> symbol(DeciDigit src)
-            => symbol<DeciSym,byte,N4>((DeciSym)((byte)src + (byte)DeciSym.First));
+        public static Symbol<DecimalSym,byte,N4> symbol(DecimalDigit src)
+            => symbol<DecimalSym,byte,N4>((DecimalSym)((byte)src + DF.First));
 
         [MethodImpl(Inline), Op]
         public static Symbol<HexSym,byte,N4> symbol(UpperCased @case, HexDigit src)

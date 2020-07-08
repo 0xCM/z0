@@ -32,7 +32,6 @@ namespace Z0.Asm
 
         readonly IImmSpecializer ImmSpecializer;
 
-
         internal ImmEmissionWorkflow(IAsmContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
         {
             Broker = ImmEmissionBroker.New;

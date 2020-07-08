@@ -21,10 +21,10 @@ namespace Z0
         IMultiDiviner Diviner 
             => MultiDiviner.Service;
 
-        IApiCollector ApiCollector 
+        ApiCollector ApiCollector 
             => Svc.ApiCollector.Service;
 
-        IMemberLocator ApiLocator 
+        MemberLocator ApiLocator 
             => Svc.MemberLocator.Service;
 
         [MethodImpl(Inline)]
@@ -33,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         IApiMemberQuery QueryLocated(IApiHost host)
-            => ApiMemberQuery.Create(ApiLocator.Located(host));
+            => ApiMemberQuery.Create(ApiLocator.Locate(host));
 
         [MethodImpl(Inline)]
         IMemberExtractReader ExtractReader(IApiSet api)
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="host">The host uri</param>
         [MethodImpl(Inline)]
         ApiMembers LocatedMembers(IApiHost host)
-            => ApiLocator.Located(host);
+            => ApiLocator.Locate(host);
 
         /// <summary>
         /// Retrieves the members defined by an api host

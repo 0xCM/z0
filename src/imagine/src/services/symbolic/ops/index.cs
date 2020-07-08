@@ -29,7 +29,5 @@ namespace Z0
                 index[kvp.Key] = kvp.Value.ToString().Last();
             return index;
         }
-
-
     }
 }

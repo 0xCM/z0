@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> veq<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => veq_u(x,y);
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> veq<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => veq_u(x,y);
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<T> veq<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (veq(x.Lo, y.Lo), veq(x.Hi, y.Hi));
@@ -134,7 +134,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return vgeneric<T>(V0d.veq(v64f(x), v64f(y)));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         } 
     }
 }

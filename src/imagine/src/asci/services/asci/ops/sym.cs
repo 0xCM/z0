@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source digit</param>
         [MethodImpl(Inline), Op]
-        public static DeciSym symval(DeciDigit src)
+        public static DecimalSym symval(DecimalDigit src)
             => symbol(src).Value;
 
         /// <summary>

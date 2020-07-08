@@ -12,11 +12,10 @@ namespace Z0
 
       using static Konst;
 
-      public class MemberLocator : IMemberLocator
+      public readonly struct MemberLocator : IMemberLocator
       {
-            IMultiDiviner Diviner  => MultiDiviner.Service;
-
-            public static IMemberLocator Service => new MemberLocator();
+            public static MemberLocator Service 
+                  => default;
 
             [MethodImpl(Inline)]
             static IntPtr Jit(MethodInfo src)
@@ -28,7 +27,7 @@ namespace Z0
             public ApiMembers Hosted(IApiHost src)
                   => HostedGeneric(src).Concat(HostedDirect(src)).OrderBy(x => x.Method.MetadataToken).ToArray();
 
-            public ApiMembers Located(IApiHost src)
+            public ApiMembers Locate(IApiHost src)
                   => LocatedGeneric(src).Concat(LocatedDirect(src)).OrderBy(x => x.Address).ToArray();
 
             public IEnumerable<ApiMember> HostedKind<K>(IApiHost src, K kind, bool generic = false)
@@ -53,7 +52,7 @@ namespace Z0
             public IEnumerable<ApiMember> HostedGeneric<K>(IApiHost src, K kind)
                   where K : unmanaged, Enum
                         => from m in GenericMethods(src,kind)
-                        from closure in ApiCollector.NumericClosures(m)
+                        from closure in ApiClosures.numeric(m)
                         let reified = m.MakeGenericMethod(closure)
                         let id = Diviner.Identify(reified)
                         let uri = OpUri.Define(OpUriScheme.Type, src.Uri, m.Name, id)
@@ -67,7 +66,7 @@ namespace Z0
 
             public IEnumerable<ApiMember> HostedGeneric(IApiHost src)
                   => from m in GenericMethods(src)
-                  from closure in ApiCollector.NumericClosures(m)
+                  from closure in ApiClosures.numeric(m)
                   let reified = m.MakeGenericMethod(closure)
                   let id = Diviner.Identify(reified)
                   let uri = OpUri.Define(OpUriScheme.Type, src.Uri, m.Name, id)
@@ -83,7 +82,7 @@ namespace Z0
             public IEnumerable<ApiMember> LocatedGeneric<K>(IApiHost src, K kind)
                   where K : unmanaged, Enum
                   => from m in GenericMethods(src,kind)
-                  from t in ApiCollector.NumericClosures(m)
+                  from t in ApiClosures.numeric(m)
                   let reified = m.MakeGenericMethod(t)
                   let id = Diviner.Identify(reified)
                   let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Name, id)
@@ -101,7 +100,7 @@ namespace Z0
             public IEnumerable<ApiMember> LocatedGeneric(IApiHost src)
                   => from m in GenericMethods(src)
                   let kid = m.KindId()
-                  from t in ApiCollector.NumericClosures(m)
+                  from t in ApiClosures.numeric(m)
                   let reified = m.MakeGenericMethod(t)
                   let address = Root.address(Jit(reified))
                   let id = Diviner.Identify(reified)
@@ -136,5 +135,8 @@ namespace Z0
                         && !m.AcceptsImmediate() 
                         && m.KindId().ToString() == kind.ToString()                  
                   select m;
+
+            static IMultiDiviner Diviner 
+                  => MultiDiviner.Service;
       }
 }

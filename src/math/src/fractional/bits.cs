@@ -13,16 +13,20 @@ namespace Z0
     partial class fmath
     {
         [MethodImpl(Inline), Op]
-        public static F32Bits bits(float src)
-            => new F32Bits(src);
+        public static uint bits(float src)
+            => core.@as<float,uint>(src);
 
         [MethodImpl(Inline), Op]
-        public static F64Bits bits(double src)
-            => new F64Bits(src);
+        public static ulong bits(double src)
+            => core.@as<double,ulong>(src);
 
         [MethodImpl(Inline), Op]
-        public static F128Bits bits(decimal src)
-            => new F128Bits(src);
+        public static ulong lobits(decimal src)
+            => core.@as<decimal,ulong>(src);
+
+        [MethodImpl(Inline), Op]
+        public static ulong hibits(decimal src)
+            => core.skip(core.@as<decimal,ulong>(src), 1);
     }
 
 

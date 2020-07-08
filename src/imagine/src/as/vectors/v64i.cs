@@ -32,7 +32,7 @@ namespace Z0
             where T : unmanaged
                 => x.AsInt64();
 
-       /// <summary>
+        /// <summary>
         /// Presents a vector over T-cells as a vector over cells of type uint64
         /// </summary>
         /// <param name="x">The source vector</param>

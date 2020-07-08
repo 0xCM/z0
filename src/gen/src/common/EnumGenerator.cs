@@ -16,7 +16,7 @@ namespace Z0
         {
             var archive = ReferenceArchive.Service;
             var ds = archive.Dataset("EnumTypes");
-            ds.OnSome(GenerateEnums);
+            ds.OnSuccess(GenerateEnums);
         }
 
         public void GenerateEnum(TextDoc spec)
@@ -38,7 +38,7 @@ namespace Z0
             {
                 var filename = FileName.Define(row[0]);
                 var  doc = archive.Dataset(filename);
-                doc.OnSome(GenerateEnum);
+                doc.OnSuccess(GenerateEnum);
             }
         }
 

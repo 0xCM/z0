@@ -5,8 +5,10 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Globalization;
 
-    using static Root;
+    using static Konst;
 
     using H = HexSymData;
 
@@ -43,7 +45,6 @@ namespace Z0
         /// </summary>
         public const byte MaxCharCodeL = 102;
 
-
        /// <summary>
         /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, A, ..., F
         /// </summary>
@@ -57,11 +58,11 @@ namespace Z0
             => new byte[]{48,49,50,51,52,53,54,55,56,57,97,98,99,100,101,102};
 
         public static MemRef[] HexRefs
-            => array(
-                memref(H.UpperSymData),
-                memref(H.LowerSymData), 
-                memref(H.UpperCodes), 
-                memref(H.LowerCodes)
+            => sys.array(
+                Root.memref(H.UpperSymData),
+                Root.memref(H.LowerSymData), 
+                Root.memref(H.UpperCodes), 
+                Root.memref(H.LowerCodes)
                 );            
     }
 }

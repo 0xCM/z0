@@ -10,13 +10,19 @@ namespace Z0
     using static Root;
     using static Konst;
 
+    using XF = HexSymFacet;
+    using DF = DecimalSymFacet;
+    
     using UP = AsciLetterUp;
     using LO = AsciLetterLo;
-    using HCL = HexCodeLo;
-    using HCU = HexCodeUp;
+    
     using HSL = HexSymLo;
-    using HSLF = HexSymLoFacet;
     using HSU = HexSymUp;
+
+    using UC = UpperCased;
+    using LC = LowerCased;
+
+    using AC = AsciCharCode;
 
     [ApiHost]
     public readonly struct AsciTest
@@ -27,15 +33,14 @@ namespace Z0
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
         public static bool digit(char c)
-            => (DeciSym)c >= DeciSym.First
-            && (DeciSym)c <= DeciSym.Last;
+            => (DF)c >= DF.First && (DF)c <= DF.Last;
 
         /// <summary>
         /// Tests whether a character is an uppercase asci letter character
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool letter(UpperCased @case, char c)
+        public static bool letter(UC @case, char c)
             => (ushort)c >= (ushort)UP.First  && (ushort)c <= (ushort)UP.Last;
 
         /// <summary>
@@ -43,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool letter(LowerCased @case, char c)
+        public static bool letter(LC @case, char c)
             => (ushort)c >= (ushort)LO.First  && (ushort)c <= (ushort)LO.Last;
 
         /// <summary>
@@ -59,39 +64,39 @@ namespace Z0
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool IsNumeral(HSL src)
-            => src <= (HSL)HSLF.LastNumeral;
+        public static bool number(HSL src)
+            => (XF)src <= XF.LastNumber;
 
         /// <summary>
         /// Tests whether a uppercas hex symbol is a numeral
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool IsNumeral(HSU src)
-            => src <= HSU.LastNumeral;        
+        public static bool number(HSU src)
+            => (XF)src <= XF.LastNumber;
 
         /// <summary>
         /// Tests whether a lowercase hex symbol is a letter
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool IsLetter(HSL src)
-            => src >= (HSL)HSLF.FirstLetter;
+        public static bool letter(HSL src)
+            => (XF)src >= XF.FirstLetterLo;
 
         /// <summary>
         /// Tests whether an uppercase hex symbol is a letter
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool IsLetter(HSU src)
-            => src >= HexSymUp.FirstLetter;
+        public static bool letter(HSU src)
+            => (XF)src >= XF.FirstLetterUp;
             
         /// <summary>
         /// Determines whether a character is an upper-cased hex digit
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool IsHexDigit(UpperCased casing, char c)
+        public static bool hex(UpperCased casing, char c)
             => IsHexScalar(c) || IsHexUpper(c);
 
         /// <summary>
@@ -99,7 +104,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool IsHexDigit(LowerCased casing, char c)
+        public static bool hex(LowerCased casing, char c)
             => IsHexScalar(c) || IsHexLower(c);
 
         /// <summary>
@@ -107,8 +112,36 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool IsHexDigit(char c)
+        public static bool hex(char c)
             => IsHexScalar(c) || IsHexLower(c) || IsHexUpper(c);
+
+        /// <summary>
+        /// Tests whether a character is a space
+        /// </summary>
+        /// <param name="src">The symbol to test</param>
+        [MethodImpl(Inline), Op]
+        public static bool space(char c)
+            => (ushort)AC.Space == (ushort)c;
+
+        /// <summary>
+        /// Tests whether a character is a space
+        /// </summary>
+        /// <param name="src">The symbol to test</param>
+        [MethodImpl(Inline), Op]
+        public static bool tab(char c)
+            => (ushort)AC.Tab == (ushort)c;
+
+        [MethodImpl(Inline), Op]
+        public static bool nl(char c)
+            => (ushort)AC.NL == (ushort)c;
+
+        [MethodImpl(Inline), Op]
+        public static bool cr(char c)
+            => (ushort)AC.CR == (ushort)c;
+
+        [MethodImpl(Inline), Op]
+        public static bool whitespace(char c)
+            => space(c) || tab(c) || nl(c) || cr(c);
 
         /// <summary>
         /// Determines whether a character corresponds to one of the lower hex codes
@@ -116,7 +149,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
         static bool IsHexScalar(char c)
-            => (HCL)c >= HCL.FirstNumeral && (HCL)c <= HCL.LastNumeral;
+            => (XF)c >= XF.FirstNumber && (XF)c <= XF.LastNumber;
 
         /// <summary>
         /// Determines whether a character corresponds to one of the uppercase hex code characters
@@ -124,7 +157,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
         static bool IsHexUpper(char c)
-            => (HCU)c >= HCU.FirstLetter && (HCU)c <= HCU.LastLetter;        
+            => (XF)c >= XF.FirstLetterUp && (XF)c <= XF.LastLetterUp;        
 
         /// <summary>
         /// Determines whether a character corresponds to one of the lowercase hex code characters
@@ -132,35 +165,6 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
         static bool IsHexLower(char c)
-            => (HCL)c >= HCL.FirstLetter && (HCL)c <= HCL.LastLetter;        
-
-
-        /// <summary>
-        /// Tests whether a character is a space
-        /// </summary>
-        /// <param name="src">The symbol to test</param>
-        [MethodImpl(Inline), Op]
-        public static bool IsSpace(char c)
-            => (ushort)AsciCharCode.Space == (ushort)c;
-
-        /// <summary>
-        /// Tests whether a character is a space
-        /// </summary>
-        /// <param name="src">The symbol to test</param>
-        [MethodImpl(Inline), Op]
-        public static bool IsTab(char c)
-            => (ushort)AsciCharCode.Tab == (ushort)c;
-
-        [MethodImpl(Inline), Op]
-        public static bool IsNewLine(char c)
-            => (ushort)AsciCharCode.NL == (ushort)c;
-
-        [MethodImpl(Inline), Op]
-        public static bool IsLineFeed(char c)
-            => (ushort)AsciCharCode.CR == (ushort)c;
-
-        [MethodImpl(Inline), Op]
-        public static bool IsWhiteSpace(char c)
-            => IsSpace(c) || IsTab(c) || IsNewLine(c) || IsLineFeed(c);
+            => (XF)c >= XF.FirstLetterLo && (XF)c <= XF.LastLetterUp;        
     }
 }

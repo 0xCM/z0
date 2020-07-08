@@ -78,7 +78,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(ReadOnlySpan<DeciDigit> src)
+        public static string format(ReadOnlySpan<DecimalDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length]; 
             render(src,dst);

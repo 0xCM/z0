@@ -34,11 +34,11 @@ namespace Z0.Asm
 
     public interface IManageCaptureStep
     {
-        void CaptureHost(ICaptureHostStep step, IApiHost host, TCaptureArchive dst);
+        void CaptureHost(CaptureHostStep step, IApiHost host, TCaptureArchive dst);
 
         void CaptureParts(AsmArchiveConfig config, params PartId[] parts);
         
-        void CaptureCatalog(IPartCatalog src, TCaptureArchive dst);
+        void CapturePart(IPartCatalog src, TCaptureArchive dst);
     }    
 
     public interface IReportExtractsStep 
@@ -50,8 +50,6 @@ namespace Z0.Asm
 
     public interface IExtractMembers
     {
-        ApiMember[] LocateMembers(IApiHost host);
-
         ExtractedCode[] ExtractMembers(IApiHost host);
     }    
 

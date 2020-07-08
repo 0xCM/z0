@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct As
     {
-
         [MethodImpl(Inline)]        
         public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
             where S : struct

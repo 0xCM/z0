@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static core;
 
     partial struct asci
     {        
@@ -21,8 +22,8 @@ namespace Z0
         {
             const int width = 4;
             var packed = 0ul;
-            packed |= (asci.u64(@base, c0) << 0*width);
-            packed |= (asci.u64(@base, c1) << 1*width);
+            packed |= (u64(@base, c0) << 0*width);
+            packed |= (u64(@base, c1) << 1*width);
             return packed;
         }
 
@@ -37,9 +38,9 @@ namespace Z0
         {
             const int width = 4;
             var packed = 0ul;
-            packed |= (asci.u64(@base, c0) << 0*width);
-            packed |= (asci.u64(@base, c1) << 1*width);
-            packed |= (asci.u64(@base, c2) << 2*width);
+            packed |= (u64(@base, c0) << 0*width);
+            packed |= (u64(@base, c1) << 1*width);
+            packed |= (u64(@base, c2) << 2*width);
             return packed;
         }
 
@@ -55,10 +56,10 @@ namespace Z0
         {
             const int width = 4;
             var packed = 0ul;
-            packed |= (asci.u64(@base, c0) << 0*width);
-            packed |= (asci.u64(@base, c1) << 1*width);
-            packed |= (asci.u64(@base, c2) << 2*width);
-            packed |= (asci.u64(@base, c3) << 3*width);
+            packed |= (u64(@base, c0) << 0*width);
+            packed |= (u64(@base, c1) << 1*width);
+            packed |= (u64(@base, c2) << 2*width);
+            packed |= (u64(@base, c3) << 3*width);
             return packed;
         }
 
@@ -75,11 +76,11 @@ namespace Z0
         {
             const int width = 4;
             var packed = 0ul;
-            packed |= (asci.u64(@base, c0) << 0*width);
-            packed |= (asci.u64(@base, c1) << 1*width);
-            packed |= (asci.u64(@base, c2) << 2*width);
-            packed |= (asci.u64(@base, c3) << 3*width);
-            packed |= (asci.u64(@base, c4) << 4*width);
+            packed |= (u64(@base, c0) << 0*width);
+            packed |= (u64(@base, c1) << 1*width);
+            packed |= (u64(@base, c2) << 2*width);
+            packed |= (u64(@base, c3) << 3*width);
+            packed |= (u64(@base, c4) << 4*width);
             return packed;
         }
 
@@ -119,14 +120,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(Base10 @base, ulong src, N8 count, ref byte dst)
         {
-            As.add(dst, 7) = (byte)asci.digit(@base, src, 7);
-            As.add(dst, 6) = (byte)asci.digit(@base, src, 6);
-            As.add(dst, 5) = (byte)asci.digit(@base, src, 5);
-            As.add(dst, 4) = (byte)asci.digit(@base, src, 4);
-            As.add(dst, 3) = (byte)asci.digit(@base, src, 3);
-            As.add(dst, 2) = (byte)asci.digit(@base, src, 2);
-            As.add(dst, 1) = (byte)asci.digit(@base, src, 1);
-            As.add(dst, 0) = (byte)asci.digit(@base, src, 0);
+            add(dst, 7) = (byte)digit(@base, src, 7);
+            add(dst, 6) = (byte)digit(@base, src, 6);
+            add(dst, 5) = (byte)digit(@base, src, 5);
+            add(dst, 4) = (byte)digit(@base, src, 4);
+            add(dst, 3) = (byte)digit(@base, src, 3);
+            add(dst, 2) = (byte)digit(@base, src, 2);
+            add(dst, 1) = (byte)digit(@base, src, 1);
+            add(dst, 0) = (byte)digit(@base, src, 0);
         }
     }
 }

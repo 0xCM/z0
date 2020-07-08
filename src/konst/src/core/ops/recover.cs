@@ -252,11 +252,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<T> recover<S,T>(Span<S> src)
-            => cover(@as<S,T>(ref first(src)), size<T>()/size<S>());
+            => cover(@as<S,T>(first(src)), size<T>()/size<S>());
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> recover<S,T>(ReadOnlySpan<S> src)
-            => cover(@as<S,T>(ref edit(first(src))), size<T>()/size<S>());
+            => cover(@as<S,T>(edit(first(src))), size<T>()/size<S>());
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> recover<S,T>(ReadOnlySpan<S> src, out ReadOnlySpan<S> rem)

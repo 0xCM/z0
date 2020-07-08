@@ -37,7 +37,7 @@ namespace Z0
         {
             var archive = ReferenceArchive.Service;
             var ds = archive.Dataset("EnumTypes");
-            ds.OnSome(doc => term.print(doc.Content));
+            ds.OnSuccess(doc => term.print(doc.Content));
             //Control.iter(archive.DatasetPaths(), ds => term.print(ds.FileName));
         }
 

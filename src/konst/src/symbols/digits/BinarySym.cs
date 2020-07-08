@@ -23,20 +23,5 @@ namespace Z0
         /// Specifies 1 base 2, asci code 49
         /// </summary>
         b1 = '1',
-
-        /// <summary>
-        /// The first declared symbol
-        /// </summary>
-        First = b0,
-
-        /// <summary>
-        /// The last declared symbol
-        /// </summary>
-        Last = b1,
-
-        /// <summary>
-        /// The symbol declaration count
-        /// </summary>
-        Count = Last - First + 1
     }
 }

@@ -21,7 +21,8 @@ namespace Z0
         public static int count(ReadOnlySpan<string> src, ReadOnlySpan<char> match)
         {
             var total = 0;
-            for(var i=0; i<src.Length; i++)
+            var len = src.Length;
+            for(var i=0; i<len; i++)
                 total += count(skip(src,i),match);
             return total;
         }
@@ -29,16 +30,16 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int count(ReadOnlySpan<char> src, ReadOnlySpan<char> match)
         {
-            var count = 0;
+            var total = 0;
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var c = ref skip(src,i);
                 for(var j=0; j<match.Length; j++)
                     if(skip(match,j) == c)
-                        count++;
+                        total++;
             }
 
-            return count;
+            return total;
         }
     }
 }

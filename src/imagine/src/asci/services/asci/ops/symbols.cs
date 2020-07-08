@@ -22,7 +22,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void symbols(ReadOnlySpan<DeciDigit> src, Span<DeciSym> dst)
+        public static void symbols(ReadOnlySpan<DecimalDigit> src, Span<DecimalSym> dst)
         {
             var len = src.Length;
             for(var i = 0; i<len; i++)
