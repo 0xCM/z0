@@ -43,6 +43,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static string hex<T>(T src)
             where T : unmanaged
-                => HexFormat.scalar(src, false, false);        
+                => Hex.format(src, false, false);        
     }
 }

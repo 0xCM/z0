@@ -88,7 +88,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Formatters.format(Data, Width);
+            => Hex.format(Data, Width);
 
         public override string ToString()
             => Format();

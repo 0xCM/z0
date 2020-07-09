@@ -48,7 +48,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Formatters.format(Data, W);
+            => Hex.format(Data, W);
 
         public override string ToString()
             => Format();
@@ -61,6 +61,5 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
-
     }
 }

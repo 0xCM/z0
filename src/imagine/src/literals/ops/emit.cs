@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
+    
     using static Konst;
-    using static Root;
-    using static As;
+    using static core;
 
     partial struct LiteralFields
     {
@@ -21,7 +18,7 @@ namespace Z0
             var src = span(fields);            
             var dst = list<string>();
             
-            for(var i=0; i<src.Length; i++)
+            for(var i=0u; i<src.Length; i++)
             {
                 ref readonly var field = ref skip(src,i);
                 var datatype = field.KindId;

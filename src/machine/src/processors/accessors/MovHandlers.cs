@@ -12,14 +12,14 @@ namespace Z0.Asm
 
     public readonly ref struct MovHandler 
     {
-        readonly Span<ArrowPath<Imm64,Register>> Buffer;
+        readonly Span<MixedPath<Imm64,Register>> Buffer;
 
         readonly Span<int> I;
 
         [MethodImpl(Inline)]
         public MovHandler(int capacity)
         {
-            Buffer = new ArrowPath<Imm64,Register>[capacity];
+            Buffer = new MixedPath<Imm64,Register>[capacity];
             I = new int[]{0};
         }
 
@@ -30,7 +30,7 @@ namespace Z0.Asm
                 Handle(i.Immediate64, i.Op0Register);
         }
 
-        public ReadOnlySpan<ArrowPath<Imm64,Register>> Collected
+        public ReadOnlySpan<MixedPath<Imm64,Register>> Collected
         {
             [MethodImpl(Inline)]
             get => Buffer.Slice(0, Index);
@@ -42,7 +42,7 @@ namespace Z0.Asm
             get => Index;
         }
 
-        ArrowPath<Imm64,Register> this[int index]
+        MixedPath<Imm64,Register> this[int index]
         {
             [MethodImpl(Inline)]
             set => seek(Buffer,index) = value;
@@ -64,7 +64,7 @@ namespace Z0.Asm
         void Handle(Imm64 src, Register dst)
         {
             if(HasCapacity)
-                this[Index++] = Arrows.connect(src,dst);
+                this[Index++] = MixedPaths.connect(src,dst);
         }   
     }
 }

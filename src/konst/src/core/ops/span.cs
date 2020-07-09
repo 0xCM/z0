@@ -36,7 +36,7 @@ namespace Z0
             => sys.array(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(T[] src)
+        public static Span<T> span<T>(params T[] src)
             => src;
 
         [MethodImpl(Inline), Op]

@@ -27,22 +27,33 @@ namespace Z0
         /// <summary>
         /// The argument supplied to the call instruction
         /// </summary>
-        public readonly MemoryAddress Target;
+        public readonly CallTarget CalledTarget;
+
+        /// <summary>
+        /// The base address of the intended target, magically-known
+        /// </summary>
+        public readonly CallTarget ActualTaget;
 
         [MethodImpl(Inline)]
-        public Invocation(CallClient client, ushort site, MemoryAddress target)        
+        public Invocation(CallClient client, ushort site, CallTarget called, CallTarget actual = default)        
         {
             Client = client;
             CallSite = site;
-            Target = target;
+            CalledTarget = called;
+            ActualTaget = actual;
         }
 
-        [MethodImpl(Inline)]
-        public Invocation(OpIdentity id, MemoryAddress @base, ushort site, MemoryAddress target)        
+        /// <summary>
+        /// The callsite-relative target location
+        /// </summary>
+        public MemoryAddress TargetOffset 
         {
-            Client = new CallClient(id, @base);
-            CallSite = site;
-            Target = target;
-        }
+            [MethodImpl(Inline)]
+            get => CalledTarget.Base - (Client.Base + CallSite);
+        }        
+
+        
+        public override string ToString()
+            => $"{TargetOffset}";
     }
 }

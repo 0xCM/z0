@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="kind">The numeric kind of 0 to be put into the box</param>
         [MethodImpl(Inline)]
         public static BoxedNumber BoxedZero(this NumericKind kind)
-            => BoxedNumber.Define(Cast.to(byte.MinValue, kind), kind); 
+            => BoxedNumber.Define(core.rebox(byte.MinValue, kind), kind); 
 
         /// <summary>
         /// Puts a value of any numeric kind into a box of any numeric kind
@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BoxedNumber Box<T>(this NumericKind dst, T src)
             where T : unmanaged
-                => BoxedNumber.Define(Cast.to(src,dst), dst);
+                => BoxedNumber.Define(core.rebox(src,dst), dst);
         
         /// <summary>
         /// Puts an enum value into a (numeric) box

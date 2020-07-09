@@ -19,15 +19,15 @@ namespace Z0
         /// Returns an empty array
         /// </summary>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T[] empty<T>() => new T[]{};
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static T[] empty<T>() => sys.empty<T>();
 
         /// <summary>
         /// Returns a reference to the location of the first element
         /// </summary>
         /// <param name="src">The source array</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static unsafe ref T head<T>(T[] src)
             => ref MemoryMarshal.GetReference<T>(src);
 
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="bytes">The number of elements to advance</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly T skip<T>(T[] src, int count)
             => ref core.skip(in head<T>(src), (uint)count);
 
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="bytes">The number of elements to advance</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref T seek<T>(T[] src, int count)
             => ref core.seek(head<T>(src), count);
 
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The array to test</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static bool empty<T>(T[] src)
             =>  src == null || src.Length == 0;
 
@@ -65,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="length">The array length</param>
         /// <typeparam name="T">The element type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Integers)]
         public static T[] alloc<T>(int length)
             => new T[length];
 
@@ -75,18 +75,18 @@ namespace Z0
         /// <param name="length">The array length</param>
         /// <param name="src">The value with which to populate the array</param>
         /// <typeparam name="T">The element type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Integers)]
         public static T[] alloc<T>(int length, T src)
         {
             var dst = alloc<T>(length);
             return fill(dst,src);
         }            
 
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Integers)]
         public static T[] from<T>(IEnumerable<T> src)
             => src.ToArray();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T[] from<T>(params T[] src)
             => src;
 
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="dst">The target array</param>
         /// <param name="dst">The source value</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T[] fill<T>(T[] dst, T src)
         {
             Array.Fill(dst, src);
@@ -108,7 +108,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The source array</param>
         /// <typeparam name="T">The array element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T[] clear<T>(T[] dst)
         {
             if(dst != null)
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="value">The value to replicate</param>
         /// <param name="count">The number of replicants</param>
         /// <typeparam name="T">The replicant type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Integers)]
         public static T[] replicate<T>(T value, int count)
         {
             var dst = alloc<T>((int)count);
@@ -136,14 +136,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source array</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T[] reverse<T>(T[] src)
         {
             Array.Reverse(src);
             return src;        
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static void copy<T>(T[] src, T[] dst)
             => Array.Copy(src,dst, src.Length);
 
@@ -224,7 +224,7 @@ namespace Z0
             return ret;
         }
 
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Integers)]
         public static IEnumerable<T> singletons<T>(params IEnumerable<T>[] src)
             where T : unmanaged
                 => src.SelectMany(x => x);
@@ -235,7 +235,7 @@ namespace Z0
         /// <param name="src">The source array</param>
         /// <param name="indices">The indices that define the values to be extracted from the source</param>
         /// <typeparam name="T">The element type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Integers)]
         public static T[] indexed<T>(T[] src, int[] indices)
         {
             var dst = new T[indices.Length];

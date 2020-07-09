@@ -28,6 +28,10 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] array<T>(List<T> src)
-            => sys.array(src);            
+            => sys.array(src); 
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T[] array<T>(params T[] src)           
+            => sys.array(src);
     }
 }

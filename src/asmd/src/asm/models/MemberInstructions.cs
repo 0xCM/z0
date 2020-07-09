@@ -25,7 +25,7 @@ namespace Z0.Asm
         public MemoryAddress HostAddress {get;}
 
         public MemoryOffset OffsetAddress 
-            => MemoryOffsets.legacy(BaseAddress, HostAddress);
+            => MemoryOffsets.offset(BaseAddress, HostAddress);
 
         public OpIdentity OpId => OpUri.OpId;
 

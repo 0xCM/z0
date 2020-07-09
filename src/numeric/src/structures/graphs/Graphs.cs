@@ -4,17 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    public static partial class XGraphs
+    public static partial class Graphs
     {
         
     }
-
-    public static partial class Graphs
-    {
-        public const string Connector = " -> ";
-    }
-
 }

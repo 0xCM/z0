@@ -9,8 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static Root;
-    using static As;
+    using static core;
 
     partial struct LiteralFields
     {
@@ -23,9 +22,9 @@ namespace Z0
             var eValueBuffer = sys.alloc<FieldValue<E,T>>(count);
             var dst = span(eValueBuffer);
             
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
-                ref readonly var srcVal = ref tValues[i];
+                ref readonly var srcVal = ref tValues[(int)i];
                 ref readonly var tVal = ref srcVal.Value;
                 ref readonly var srcField = ref srcVal.Field;
 

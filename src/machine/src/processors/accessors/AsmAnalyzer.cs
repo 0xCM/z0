@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     public readonly struct AsmAnalyzer
     {
-        static ReadOnlySpan<ArrowPath<Imm64,Register>> Analyze(ReadOnlySpan<AsmInstructionList> src)
+        static ReadOnlySpan<MixedPath<Imm64,Register>> Analyze(ReadOnlySpan<AsmInstructionList> src)
         {
             var handler = new MovHandler(100);
             for(var i = 0; i<src.Length; i++)
@@ -28,7 +28,7 @@ namespace Z0.Asm
             return handler.Collected;
         }
 
-        public static ReadOnlySpan<ArrowPath<Imm64,Register>> moves(AsmFunction src, int capacity = 10)
+        public static ReadOnlySpan<MixedPath<Imm64,Register>> moves(AsmFunction src, int capacity = 10)
         {
             var hander = new MovHandler(capacity);
             var inxs = span(src.Inxs.Data);

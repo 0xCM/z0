@@ -16,12 +16,12 @@ namespace Z0
             => new ByteSpanProperty(name,data,isStatic, access);
         
         [MethodImpl(Inline)]
-        ByteSpanProperty(string name, byte[] data, bool isStatic = true, ClrAccessKind access = ClrAccessKind.Public)
+        internal ByteSpanProperty(string name, byte[] data, bool isStatic = true, ClrAccessKind access = ClrAccessKind.Public)
         {
-            this.Name = name;
-            this.Data = data;
-            this.IsStatic = isStatic;
-            this.Access = access;
+            Name = name;
+            Data = data;
+            IsStatic = isStatic;
+            Access = access;
         }
 
         public readonly string Name;
@@ -46,7 +46,7 @@ namespace Z0
             dst.Append(Chars.Space);
             dst.Append(Name);
             dst.Append(PropLambda);
-            dst.Append(string.Concat("new byte", text.bracket(Data.Length), text.embrace(HexFormat.array(Data))));
+            dst.Append(string.Concat("new byte", text.bracket(Data.Length), text.embrace(HexFormat.format(Data))));
             dst.Append(Chars.Semicolon);
             return dst.ToString();
         }

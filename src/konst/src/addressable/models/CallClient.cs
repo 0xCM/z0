@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The clients's operation identifier
         /// </summary>
-        public readonly OpIdentity Id;
+        public readonly string Id;
         
         /// <summary>
         /// The clients's base address
@@ -22,10 +22,23 @@ namespace Z0
         public readonly MemoryAddress Base;
 
         [MethodImpl(Inline)]
-        public CallClient(OpIdentity id, MemoryAddress @base)
+        public CallClient(MemoryAddress @base)
+        {
+            Id = EmptyString;
+            Base = @base;
+        }       
+
+        [MethodImpl(Inline)]
+        public CallClient(string id, MemoryAddress @base)
         {
             Id = id;
             Base = @base;
         }       
+
+        public string Format()
+            => text.concat(Base.Format(), Chars.Colon, Chars.Space, core.ifempty(Id, "client"));
+        
+        public override string ToString()
+            => Format();
     }
 }

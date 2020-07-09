@@ -12,9 +12,9 @@ namespace Z0
     public readonly struct CallTarget
     {
         /// <summary>
-        /// The target's operation identifier
+        /// The target's identifier
         /// </summary>
-        public readonly OpIdentity Id;
+        public readonly string Id;
         
         /// <summary>
         /// The target's base address
@@ -22,10 +22,23 @@ namespace Z0
         public readonly MemoryAddress Base;
 
         [MethodImpl(Inline)]
-        public CallTarget(OpIdentity id, MemoryAddress @base)
+        public CallTarget(MemoryAddress @base)
+        {
+            Id = EmptyString;
+            Base = @base;
+        }       
+
+        [MethodImpl(Inline)]
+        public CallTarget(string id, MemoryAddress @base)
         {
             Id = id;
             Base = @base;
         }       
+
+        public string Format()
+            => text.concat(Base.Format(), Chars.Colon, Chars.Space, core.ifempty(Id, "target"));
+        
+        public override string ToString()
+            => Format();
     }
 }

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    
     public readonly struct Cells<W,T>
         where W : unmanaged, IDataWidth
         where T : unmanaged

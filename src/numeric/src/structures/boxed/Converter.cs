@@ -10,12 +10,12 @@ namespace Z0
 
     using static Konst;
     using static Memories;
-    
+    using static core;
+
     readonly struct BoxedNumberConverter : IConversionProvider<BoxedNumberConverter,BoxedNumber>, IBiconverter<BoxedNumber>
     {
-        static BoxedNumberConverter TheOnly => default;
-
-        public BoxedNumberConverter Converter {[MethodImpl(Inline)] get => TheOnly;}
+        public BoxedNumberConverter Converter 
+            => default;
         
         /// <summary>
         /// Pulls a number of kind parametric from a box - whose kind it matters not
@@ -24,7 +24,7 @@ namespace Z0
         /// <typeparam name="T">The target numeric type</typeparam>
         [MethodImpl(Inline)]
         public T Convert<T>(BoxedNumber src) 
-            => (T)Cast.to(src.Boxed, NumericKinds.kind<T>());
+            => (T)core.rebox(src.Boxed, NumericKinds.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric
@@ -40,7 +40,7 @@ namespace Z0
             try
             {
                 var src = (BoxedNumber)incoming;
-                return Cast.to(src.Boxed, dst.NumericKind());
+                return rebox(src.Boxed, dst.NumericKind());
             }
             catch(Exception e)
             {

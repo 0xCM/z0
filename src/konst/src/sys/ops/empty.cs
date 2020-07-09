@@ -24,7 +24,7 @@ namespace Z0
         /// Returns an empty array
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Options), Opaque(GetEmptyArray)]
+        [MethodImpl(Options), Opaque(GetEmptyArray), Closures(AllNumeric)]
         public static T[] empty<T>()
             => Array.Empty<T>();
     }

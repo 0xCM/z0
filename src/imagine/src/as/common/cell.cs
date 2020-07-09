@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UInt8x64k)]
+        [MethodImpl(Inline), Op, Closures(Int8x64k)]
         public static T cell<T>(ReadOnlySpan<byte> src)
             where T : unmanaged        
                 => read<T>(src);
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="offset">The index at which span consumption should begin</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UInt8x64k)]
+        [MethodImpl(Inline), Op, Closures(Int8x64k)]
         public static T cell<T>(ReadOnlySpan<byte> src, int offset)
             where T : unmanaged        
                 => read<T>(slice(src,offset));
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UInt8x64k)]
+        [MethodImpl(Inline), Op, Closures(Int8x64k)]
         public static T cell<T>(Span<byte> src)
             where T : unmanaged           
                 => read<T>(src);
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The source array offset</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UInt8x64k)]
+        [MethodImpl(Inline), Op, Closures(Int8x64k)]
         public static T cell<T>(Span<byte> src, uint offset)
             where T : unmanaged
                 => read<T>(slice(src, offset));

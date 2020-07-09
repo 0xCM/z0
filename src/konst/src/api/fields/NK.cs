@@ -35,7 +35,6 @@ namespace Z0
 
         public const NK AllNumeric = NK.All;
 
-
         /// <summary>
         /// Specifies numeric types of width <see cref='W8'/>
         /// </summary>
@@ -57,51 +56,9 @@ namespace Z0
         public const NK Numeric64k = NK.Width64;
 
         /// <summary>
-        /// Specifies an unsigned itegral type of width <see cref='W8'/>
-        /// </summary>
-        public const NK UInt8k = NK.U8;
-
-        /// <summary>
-        /// Specifies a signed itegral type of width <see cref='W8'/>
-        /// </summary>
-        public const NK Int8k = NK.I8;
-
-        /// <summary>
-        /// Specifies an unsigned itegral type of width <see cref='W16'/>
-        /// </summary>
-        public const NK UInt16k = NK.U16;
-
-        /// <summary>
-        /// Specifies a signed itegral type of width <see cref='W16'/>
-        /// </summary>
-        public const NK Int16k = NK.I16;
-
-        public const NK UInt32k = NK.U32;
-
-        public const NK Int32k = NK.I32;
-
-        public const NK UInt64k = NK.U64;
-
-        public const NK Int64k = NK.I64;
-
-        public const NK Float32k = NK.F32;
-
-        public const NK Float64k = NK.F64;
-
-        /// <summary>
-        /// Specifies numeric types of width <see cref='W8'/> and <see cref='W16'/> 
-        /// </summary>
-        public const NK Numeric8x16k = NK.Width8 | NK.Width16;
-
-        /// <summary>
         /// Specifies numeric types of width <see cref='W8'/>, <see cref='W16'/> and <see cref='W32'/>
         /// </summary>
         public const NK Numeric8x16x32k = NK.Width8 | NK.Width16 | NK.Width32;
-
-        /// <summary>
-        /// Specifies numeric types of width <see cref='W16'/> and <see cref='W32'/>
-        /// </summary>
-        public const NK Numeric16x32k = NK.Width16 | NK.Width32;
 
         /// <summary>
         /// Specifies numeric types of width <see cref='W16'/>, <see cref='W32'/>, and <see cref='W64'/>
@@ -109,53 +66,68 @@ namespace Z0
         public const NK Numeric16x32x64k = NK.Width16 | NK.Width32 | NK.Width64;
 
         /// <summary>
-        /// Specifies unsigned integral types of width <see cref='W16'/>, <see cref='W32'/>, and <see cref='W64'/>
-        /// </summary>
-        public const NK UInt16x32x64k = NK.U16 | NK.U32 | NK.U64;
-
-        /// <summary>
-        /// Specifies signed integral types of width <see cref='W16'/>, <see cref='W32'/>, and <see cref='W64'/>
-        /// </summary>
-        public const NK Int16x32x64k = NK.I16 | NK.I32 | NK.I64;
-
-        /// <summary>
         /// Specifies numeric types of width <see cref='W32'/>, and <see cref='W64'/>
         /// </summary>
         public const NK Numeric32x64k = NK.Width32 | NK.Width64;
 
         /// <summary>
-        /// Specifies unsigned numeric types of width <see cref='W8'/>, and <see cref='W16'/>
+        /// Specifies signed and unsigned itegral type of width <see cref='W8'/>
         /// </summary>
-        public const NK UInt8x16k = NK.U8 | NK.U16;
+        public const NK Int8k = NK.I8 | NK.U8;
 
         /// <summary>
-        /// Specifies unsigned numeric types of width <see cref='W8'/>, <see cref='W16'/>, and <see cref='W32'/>
+        /// Specifies signed and unsigned itegral type of width <see cref='W16'/>
         /// </summary>
-        public const NK UInt8x16x32k = NK.U8 | NK.U16 | NK.U32;
+        public const NK Int16k = NK.I16 | NK.U16;
 
         /// <summary>
-        /// Specifies unsigned numeric types of width <see cref='W16'/> and <see cref='W32'/>
+        /// Specifies signed and unsigned itegral type of width <see cref='W32'/>
         /// </summary>
-        public const NK UInt16x32k = NK.U16 | NK.U32;
-        
-        /// <summary>
-        /// Specifies unsigned numeric types of width <see cref='W32'/> and <see cref='W64'/>
-        /// </summary>
-        public const NK UInt32x64k = NK.U32 | NK.U64;
+        public const NK Int32k = NK.I32 | NK.U32;
 
         /// <summary>
-        /// Specifies signed integral types of width <see cref='W8'/> and <see cref='W64'/>
+        /// Specifies signed and unsigned itegral type of width <see cref='W64'/>
         /// </summary>
-        public const NK Int8x64k = Int8k | Int64k;
+        public const NK Int64k = NK.I64 | NK.U64;
 
         /// <summary>
-        /// Specifies unsigned integral types of width <see cref='W8'/> and <see cref='W64'/>
+        /// Specifies signed and unsigned integral types of width <see cref='W8'/> and <see cref='W16'/>
         /// </summary>
-        public const NK UInt8x64k = UInt8k | UInt64k;
+        public const NK Int8x16k = NK.I8 | NK.U8 | NK.I16 | NK.U16;
+
+        /// <summary>
+        /// Specifies signed and unsigned integral types of width <see cref='W8'/>, <see cref='W16'/>, and <see cref='W32'/>
+        /// </summary>
+        public const NK Int8x16x32k = NK.I8 | NK.U8 | NK.I16 | NK.U16 | NK.I32 | NK.U32;
+
+        /// <summary>
+        /// Specifies signed and unsigned integral types of width <see cref='W16'/>, <see cref='W32'/>, and <see cref='W64'/>
+        /// </summary>
+        public const NK Int16x32x64k = NK.I16 | NK.U16 | NK.I32 | NK.U32 | NK.I64 | NK.U64;
 
         /// <summary>
         /// Specifies signed and unsigned integral types of width <see cref='W8'/> and <see cref='W64'/>
         /// </summary>
-        public const NK Integers8x64k = UInt8x64k | Int8x64k;
+        public const NK Int8x64k = NK.I8 | NK.U8 | NK.I64 | NK.U64;
+
+        public const NK Integers8x64k = Int8x64k;
+
+        public const NK Numeric8x16k = Int8x16k;
+
+        public const NK UInt8k = NK.U8;
+
+        public const NK UInt16k = NK.U16;
+
+        public const NK UInt32k = NK.U32;
+
+        public const NK UInt64k = NK.U64;
+
+        public const NK UInt8x64k = Int8x64k;
+
+        public const NK UInt8x16k = Int8x16k;
+
+        public const NK UInt8x16x32k = Int8x16x32k;
+
+        public const NK UInt16x32x64k = Int16x32x64k;
     }
 }

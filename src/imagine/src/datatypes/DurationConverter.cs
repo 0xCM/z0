@@ -24,9 +24,9 @@ namespace Z0
             => Cast.to<T,long>(src);
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
-            => Option.Try(() => Cast.to(((Duration)incoming).Ticks, dst.NumericKind()));
+            => Option.Try(() => core.rebox(((Duration)incoming).Ticks, dst.NumericKind()));
 
         public Option<object> ConvertToTarget(object incoming)
-            => Option.Try(() => (Duration)(long)Cast.to(incoming, NumericKind.I64));
+            => Option.Try(() => (Duration)(long)core.rebox(incoming, NumericKind.I64));
     }
 }

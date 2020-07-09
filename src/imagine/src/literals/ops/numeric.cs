@@ -9,8 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static Root;
-    using static As;
+    using static core;
 
     partial struct LiteralFields
     {
@@ -29,10 +28,10 @@ namespace Z0
             where T : unmanaged
         {
             var literals = list<FieldValue<T>>();
-            for(var i=0; i<types.Length; i++)
+            for(var i=0u; i<types.Length; i++)
             {
                 var values = from<T>(types[i]).ToSpan();
-                for(var j=0; j<values.Length; j++)
+                for(var j=0u; j<values.Length; j++)
                     literals.Add(skip(values,j));
             }
             return sys.array(literals);

@@ -156,6 +156,9 @@ namespace Z0
 
         public const OpacityKind Opaque = OpacityKind.Closure;
 
+        public const string Connector = " -> ";
+
+        
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T zed<T>(T t = default)
             where T : unmanaged

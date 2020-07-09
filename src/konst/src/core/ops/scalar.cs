@@ -40,7 +40,6 @@ namespace Z0
             return ref tVal;
         }
 
-
         /// <summary>
         /// Reads a u8-value from an enum of primal u8-kind
         /// </summary>

@@ -84,19 +84,19 @@ namespace Z0
                         var length = component.Length;
                         if(length > 0)
                         {
-                            var indicator = NumericBases.indicator(component[0]);
+                            var indicator = Typed.nbi(component[0]);
 
                             if(indicator != 0)
-                                dst[i] = NumericLiteral.Define(src.Name, value, component.Substring(1), NumericBases.kind(indicator));
+                                dst[i] = NumericLiteral.Define(src.Name, value, component.Substring(1), Typed.kind(indicator));
                             else
                             {
-                                indicator = NumericBases.indicator(component[length - 1]);
+                                indicator = Typed.nbi(component[length - 1]);
                                 indicator = indicator != 0 ? indicator : NBI.Base2;
                                 dst[i] = NumericLiteral.Define(
                                     src.Name,
                                     value,
                                     component.Substring(0, length - 1),
-                                    NumericBases.kind(indicator)                                    
+                                    Typed.kind(indicator)                                    
                                     );
                             }                            
                         }

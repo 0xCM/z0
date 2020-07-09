@@ -24,6 +24,7 @@ namespace Z0
     {
         new P Converter {get;}
 
-        IBiconverter<S> IConversionProvider<S>.Converter => Converter;
+        IBiconverter<S> IConversionProvider<S>.Converter 
+            => Converter;
     }
 }
