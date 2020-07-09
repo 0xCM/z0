@@ -25,7 +25,7 @@ namespace Z0
             for(var i=0; i<= 0xFF;i++)
             {
                 yield return template.Populate(Name((byte)i), Kind((byte)i));
-                yield return text.blank;
+                yield return EmptyString;
             }
         }
 
@@ -35,7 +35,7 @@ namespace Z0
             for(var i=0; i<= 0xFF;i++)
             {
                 yield return template.Instance(Name((byte)i), Kind((byte)i));
-                yield return text.blank;
+                yield return EmptyString;
             }
         }
 

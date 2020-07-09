@@ -17,5 +17,8 @@ namespace Z0
         public static uint size<T>()
             => (uint)SizeOf<T>();
 
+        [MethodImpl(Inline), Op]
+        public static uint size(string src)
+            => (uint)src.Length*scale<char>();
     }
 }

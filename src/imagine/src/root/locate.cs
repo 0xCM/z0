@@ -12,6 +12,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress locate<T>(in T src)
-            => pvoid(src);
+            => core.pvoid(src);
     }
 }

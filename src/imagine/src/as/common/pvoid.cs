@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static System.Runtime.CompilerServices.Unsafe;
 
     partial struct As
     {
@@ -19,6 +18,6 @@ namespace Z0
         /// <typeparam name="T">The type of the referenced data</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe void* pvoid<T>(in T src)
-            => AsPointer(ref edit(src));    
+            => core.pvoid(src);    
     }
 }

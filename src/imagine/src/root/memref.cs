@@ -18,18 +18,18 @@ namespace Z0
         /// <param name="bytes">The number of reference bytes</param>
         [MethodImpl(Inline), Op]
         public static MemRef memref(MemoryAddress address, ByteSize bytes)
-            => new MemRef(address,bytes);
+            => core.memref(address,bytes);
 
         [MethodImpl(Inline), Op]
         public static MemRef memref(Vector128<ulong> src)
-            => new MemRef(src);
+            => core.memref(src);
 
         [MethodImpl(Inline), Op]
         public unsafe static MemRef memref(ReadOnlySpan<byte> src)
-            => memref((ulong)gptr(src), src.Length);
+            => core.memref(src);
         
         [MethodImpl(Inline), Op]
         public static unsafe MemRef memref(string src)
-            => memref(address(src), src.Length*2);
+            => core.memref(src);
     }
 }

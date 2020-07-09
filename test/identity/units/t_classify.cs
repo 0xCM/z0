@@ -16,10 +16,10 @@ namespace Z0
     public sealed class t_classify : t_identity<t_classify>
     {        
         static string FormatList(IEnumerable<NumericKind> src, char? sep = null)
-            => src.Select(k => k.ToString()).Concat(sep ?? text.comma);
+            => src.Select(k => k.ToString()).Concat(sep ?? Chars.Comma);
 
         static string FormatList(IEnumerable<Type> src, char? sep = null)
-            => src.Select(k => k.DisplayName()).Concat(sep ?? text.comma);
+            => src.Select(k => k.DisplayName()).Concat(sep ?? Chars.Comma);
 
         public void classify_numeric()
         {

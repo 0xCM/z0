@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe TypeCode lookup(in TypeCodes src, byte index)        
         {
-            var address = Addressable.address(src);
+            var address = core.address(src);
             return (TypeCode)(*(address + index).Pointer<byte>());
         }
 

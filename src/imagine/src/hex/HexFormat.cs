@@ -14,9 +14,23 @@ namespace Z0
     public static class HexFormat
     {
         [MethodImpl(Inline)]
+        public static string single<T>(T src)
+            where T : unmanaged
+                => system<T>().Format(src);
+
+        [MethodImpl(Inline)]
+        public static string rpad(byte[] src, int width, char c = Space, HexFormatConfig? config = null)
+            => src.FormatHexBytes(config).PadRight(width, c);
+
+        [MethodImpl(Inline)]
+        public static ISystemHexFormatter<T> system<T>()
+            where T : unmanaged
+                => SystemHexFormatters.Create<T>();
+
+        [MethodImpl(Inline)]
         public static HexFormatter<T> formatter<T>()
             where T : unmanaged
-                => new HexFormatter<T>(SystemHexFormatters.Create<T>());                   
+                => new HexFormatter<T>(SystemHexFormatters.Create<T>());
 
         /// <summary>
         /// Formats a numeric array as hex data content

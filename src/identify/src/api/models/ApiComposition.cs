@@ -47,8 +47,8 @@ namespace Z0
                 dst.Append(Resolved[i].Format());
                 if(i != Resolved.Length - 1)
                 {
-                    dst.Append(text.comma);
-                    dst.Append(text.space());
+                    dst.Append(Chars.Comma);
+                    dst.Append(Chars.Space);
                 }
             }
             return dst.ToString();                

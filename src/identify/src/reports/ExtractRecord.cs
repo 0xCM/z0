@@ -52,7 +52,7 @@ namespace Z0
 
             var parser = NumericParser.create<int>();
             var seq = parser.Parse(fields[0]).ValueOrDefault();            
-            var address = Addressable.address(Parsers.hex().Parse(fields[1]).ValueOrDefault());
+            var address = core.address(Parsers.hex().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();            
             var uri = OpUriParser.Service.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
@@ -84,7 +84,7 @@ namespace Z0
         }
 
         public static R Empty 
-            => new R(0, MemoryAddress.Empty, 0, OpUri.Empty, text.blank, LocatedCode.Empty);
+            => new R(0, MemoryAddress.Empty, 0, OpUri.Empty, EmptyString, LocatedCode.Empty);
 
     }
 }

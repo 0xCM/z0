@@ -46,7 +46,7 @@ namespace Z0
         {
             Id = opid;
             Offset = offset - 1;
-            Address = Addressable.address((ulong)location - 1ul);
+            Address = core.address((ulong)location - 1ul);
             Captured = captured;
         }
 
@@ -57,7 +57,7 @@ namespace Z0
         }
 
         public string Format()
-            => text.concat(Id.ToString(), text.space(), Offset.FormatAsmHex(4), text.space(), Address.Format(), text.space(), Captured.FormatHex());
+            => text.concat(Id.ToString(), Chars.Space, Offset.FormatAsmHex(4), Chars.Space, Address.Format(), Chars.Space, Captured.FormatHex());
 
         public override string ToString() 
             => Format();

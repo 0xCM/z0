@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static BinaryResource binary(PartId owner, string id, ReadOnlySpan<byte> src)
-            => new BinaryResource(owner, id, src.Length, Addressable.address(src));
+            => new BinaryResource(owner, id, src.Length, core.address(src));
 
         [MethodImpl(Inline), Op]
         public static BinaryResource binary(PartId owner, string id, int Length, ulong address)

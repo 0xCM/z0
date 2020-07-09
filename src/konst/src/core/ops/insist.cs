@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct core
     {
+
         [MethodImpl(Inline), Op]
         public static void insist(bool invariant)
         {
@@ -18,16 +19,39 @@ namespace Z0
                 sys.@throw($"Application invaraiant failed");
         }
 
-        /// <summary>
-        /// Complains if the source operand, of reference type, is null; otherwise returns it
-        /// </summary>
-        /// <param name="src">The thing that should not be null</param>
-        /// <typeparam name="T">The thing's type</typeparam>
-        [MethodImpl(Inline)]
-        public static T insist<T>(T src)
-            where T : class
+        [MethodImpl(Inline), Op]
+        public static void insist(bool invariant, string msg)
         {
-            insist(src != null);
+            if(!invariant)
+                sys.@throw(new Exception($"Application invaraiant failed: {msg}"));
+        }
+
+        // [MethodImpl(Inline)]
+        // public static T insist<T>(T src)
+        //     where T : class
+        // {
+        //     insist(src != null);
+        //     return src;
+        // }
+
+        [MethodImpl(Inline)]
+        public static ulong insist<N>(ulong src, N n = default)
+            where N : unmanaged, ITypeNat
+        {
+            insist(value<N>() == src, $"The source value {src} does not match the required natural value {value<N>()}");   
+            return src;     
+        }
+
+        [MethodImpl(Inline)]
+        public static int insist<N>(int src, N n = default)
+            where N : unmanaged, ITypeNat            
+                => (int)insist<N>((ulong)src);
+
+        [MethodImpl(Inline)]
+        public static T[] insist<N,T>(T[] src, N n = default)
+            where N : unmanaged, ITypeNat
+        {
+            insist(src.Length,n);
             return src;
         }
     }

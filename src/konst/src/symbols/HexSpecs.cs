@@ -6,11 +6,24 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Globalization;
 
     using static Konst;
 
     public static class HexSpecs
     {
+        /// <summary>
+        /// Attempts to parse a hex string as an unsigned long
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static ParseResult<ulong> ParseHex(string src)
+        {            
+            if(ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ulong value))
+                return core.parsed(src,value);
+            else 
+                return core.unparsed<ulong>(src);
+        }        
+        
         /// <summary>
         /// The uppercase hex format code
         /// </summary>
@@ -73,5 +86,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string ClearSpecs(string src)
             => src.Remove("0x").RemoveAny('h');
+        
+
     }
 }

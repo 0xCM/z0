@@ -12,6 +12,16 @@ namespace Z0
     public static class NumericFormatter
     {
         [MethodImpl(Inline)]
+        public static string format<F>(F src)
+            where F : unmanaged, INumericFormatProvider<F>
+                => src.Formatter.Format(src);
+
+        [MethodImpl(Inline)]
+        public static string format<F>(F src, NumericBaseKind @base)
+            where F : unmanaged, INumericFormatProvider<F>
+                => src.Formatter.Format(src, @base);
+
+        [MethodImpl(Inline)]
         public static INumericFormatter<T> Define<T>(Func<T,string> f, Func<T,NumericBaseKind,string> g)
             where T : unmanaged
                 => new FunctionalNumericFormatter<T>(f,g);
