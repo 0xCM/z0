@@ -12,7 +12,6 @@ namespace Z0
     [ApiHost]
     public partial struct core
     {
-
         [MethodImpl(Inline)]        
         internal static Span<T> EmptySpan<T>()
             => Span<T>.Empty;

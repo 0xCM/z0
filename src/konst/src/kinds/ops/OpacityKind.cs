@@ -88,5 +88,7 @@ namespace Z0
 
        Current,
 
+       GetEmptyArray
+
     }
 }

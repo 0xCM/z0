@@ -30,12 +30,16 @@ namespace Z0
         /// <param name="reason">The failure reason, if available</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ParseResult<string,T> unparsed<T>(string source, T target = default)
             => ParseResult<string,T>.Fail(source);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ParseResult<string,T> unparsed<T>(string source, Exception error, T target = default)
-            => ParseResult<string,T>.Fail(source, error?.ToString() ?? EmptyString);            
+            => ParseResult<string,T>.Fail(source, error?.ToString() ?? EmptyString);    
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ParseResult<T> unparsed<T>(char source, object reason = null)
+            => ParseResult<T>.Fail(source.ToString(), reason);
     }
 }

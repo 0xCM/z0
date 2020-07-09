@@ -27,6 +27,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref T @ref<S,T>(S* pSrc)            
             where S : unmanaged
-                => ref @as<S,T>(@ref<S>(pSrc));                
+                => ref @as<S,T>(@ref<S>(pSrc));    
+
+        /// <summary>
+        /// Creates a reference to a string
+        /// </summary>
+        /// <param name="src">The source string</param>
+        [MethodImpl(Inline), Op]
+        public static StringRef @ref(string src)
+            => StringRefs.create(src);
     }
 }

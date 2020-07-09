@@ -87,12 +87,12 @@ namespace Z0
         [MethodImpl(Inline)]
         OpIdentity(string text)
         {
-            this.Identifier = Safe(text);
-            this.Name = string.Empty;
-            this.Suffix = string.Empty;
-            this.IsGeneric = false;
-            this.HasImm = false;
-            this.TextComponents = new string[]{};
+            Identifier = Safe(text);
+            Name = EmptyString;
+            Suffix = EmptyString;
+            IsGeneric = false;
+            HasImm = false;
+            TextComponents = sys.empty<string>();
         }
 
         IIdentifedOp<OpIdentity> Identified 

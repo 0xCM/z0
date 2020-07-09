@@ -13,19 +13,11 @@ namespace Z0
     partial struct sys
     {
         /// <summary>
-        /// Tests whether the source string is empty
+        /// Tests whether the source string is nonempty
         /// </summary>
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Options), Opaque(EmptyStringTest)]
-        public static bool empty(string src)
-            => string.IsNullOrWhiteSpace(src);
-
-        /// <summary>
-        /// Returns an empty array
-        /// </summary>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Options), Opaque(GetEmptyArray)]
-        public static T[] empty<T>()
-            => Array.Empty<T>();
+        public static bool nonempty(string src)
+            => !string.IsNullOrWhiteSpace(src);
     }
 }

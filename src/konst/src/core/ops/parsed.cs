@@ -22,5 +22,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ParseResult<S,T> parsed<S,T>(S source, T value)
             => ParseResult<S,T>.Success(source, value);
+
+        [MethodImpl(Inline)]
+        public static ParseResult<T> parsed<T>(char source, T value)
+            => ParseResult<T>.Success(source.ToString(), value);
     }
 }

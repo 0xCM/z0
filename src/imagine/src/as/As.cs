@@ -14,14 +14,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;    
 
-        [MethodImpl(Inline)]
-        internal static int length<S,T>(ReadOnlySpan<S> lhs, ReadOnlySpan<T> rhs)
-        {
-            var l1 = lhs.Length;
-            var l2 = rhs.Length;
-            return l1 == l2 ? l1 : -1;
-        }
-
         [MethodImpl(Inline)]   
         internal static T[] alloc<T>(int length)
             => new T[length];

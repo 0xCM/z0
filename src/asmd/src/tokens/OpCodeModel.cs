@@ -41,7 +41,7 @@ namespace Z0.Asm.Data
         }  
 
         public string Format()
-            => Addressable.join(" ", Identifier, Expression, Instruction);
+            => StringRefs.join(" ", Identifier, Expression, Instruction);
 
         public string Format(bool diagnostic)
             => text.concat(

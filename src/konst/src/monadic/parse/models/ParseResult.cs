@@ -57,13 +57,14 @@ namespace Z0
         public static ParseResult<T> Success<T>(string source, T value)
             => ParseResult<T>.Success(source, value);
 
-        [MethodImpl(Inline)]
-        public static ParseResult<T> Success<T>(char source, T value)
-            => ParseResult<T>.Success(source.ToString(), value);
 
         [MethodImpl(Inline)]
         public static ParseResult<T> Fail<T>(string source, object reason = null)
             => ParseResult<T>.Fail(source, reason);
+
+        [MethodImpl(Inline)]
+        public static ParseResult<T> Success<T>(char source, T value)
+            => ParseResult<T>.Success(source.ToString(), value);
 
         [MethodImpl(Inline)]
         public static ParseResult<T> Fail<T>(char source, object reason = null)

@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct core
     {
+
         /// <summary>
         /// Converts a <see cref='sbyte'/> to a <see cref='byte'/>
         /// </summary>
