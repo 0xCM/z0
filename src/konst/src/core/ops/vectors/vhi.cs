@@ -10,21 +10,21 @@ namespace Z0
 
     using static Konst;
         
-    partial struct V0
+    partial struct core
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ulong vlo<T>(Vector128<T> src)
+        public static ulong vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => vcell(v64u(src),0);
+                => vcell(v64u(src),1);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlo<T>(Vector256<T> src)
+        public static Vector128<T> vhi<T>(Vector256<T> src)
             where T : unmanaged
-                => Vector256.GetLower(src);
+                => Vector256.GetUpper(src);
         
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlo<T>(Vector512<T> src)
+        public static Vector256<T> vhi<T>(Vector512<T> src)
             where T : unmanaged
-                => src.Lo;
+                => src.Hi;
     }
 }

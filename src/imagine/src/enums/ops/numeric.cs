@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static sbyte e8i<E>(E e = default)
             where E : unmanaged, Enum
-                => EnumValue.e8i(e);
+                => EnumValue.e8i(ref e);
 
         /// <summary>
         /// Interprets an enum value as a byte

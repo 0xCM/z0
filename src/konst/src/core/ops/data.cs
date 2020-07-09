@@ -7,22 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.CompilerServices.Unsafe;
-
     using static Konst;
 
     partial struct core
-    {
-        [MethodImpl(Inline)]        
-        public static uint size<T>()
-            => (uint)SizeOf<T>();
-
-        [MethodImpl(Inline)]
-        public static uint size<T>(uint count)
-            => (uint)SizeOf<T>() * count;
-
+    {                
+        /// <summary>
+        /// Reveals the character data identified by a string reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
-        public static uint size(string src)
-            => (uint)src.Length*scale<char>();
+        public static unsafe ReadOnlySpan<char> data(in StringRef src)
+            => cover<char>(src.Address.Pointer<char>(), (uint)src.Length);
     }
 }

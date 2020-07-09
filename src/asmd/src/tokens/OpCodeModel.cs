@@ -19,19 +19,19 @@ namespace Z0.Asm.Data
         public StringRef Identifier
         {
             [MethodImpl(Inline)]
-            get => StringRef.from(memref(Locations[n0]));
+            get => memref(Locations[n0]);
         }  
 
         public StringRef Expression
         {
             [MethodImpl(Inline)]
-            get => StringRef.from(memref(Locations[n1]));
+            get => memref(Locations[n1]);
         }  
 
         public StringRef Instruction
         {
             [MethodImpl(Inline)]
-            get => StringRef.from(memref(Locations[n2]));
+            get => memref(Locations[n2]);
         }  
 
         [MethodImpl(Inline)]

@@ -15,6 +15,15 @@ namespace Z0
     partial struct core
     {
         /// <summary>
+        /// Covers a memory reference with a readonly span
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> view<T>(in MemRef src)
+            => cover(src.Address.Ref<T>(), count<T>(src));
+
+        /// <summary>
         /// Presents a readonly S-reference as a readonly T-reference
         /// </summary>
         /// <param name="src">The data soruce</param>

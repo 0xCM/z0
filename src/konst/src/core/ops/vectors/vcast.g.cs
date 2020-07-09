@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="S">The source cell type</typeparam>
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vto<S,T>(Vector128<S> x, T t = default)
+        public static Vector128<T> vcast<S,T>(Vector128<S> x, T t = default)
             where S : unmanaged
             where T : unmanaged
                 => x.As<S,T>();
@@ -33,7 +33,7 @@ namespace Z0
         /// <typeparam name="S">The source cell type</typeparam>
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vto<S,T>(Vector256<S> x, T t = default)
+        public static Vector256<T> vcast<S,T>(Vector256<S> x, T t = default)
             where S : unmanaged
             where T : unmanaged
                 => x.As<S,T>();
@@ -46,7 +46,7 @@ namespace Z0
         /// <typeparam name="S">The source cell type</typeparam>
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector512<T> vto<S,T>(Vector512<S> x, T t = default)
+        public static Vector512<T> vcast<S,T>(Vector512<S> x, T t = default)
             where S : unmanaged
             where T : unmanaged
                 => x.As<T>();

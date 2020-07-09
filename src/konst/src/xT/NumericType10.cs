@@ -9,18 +9,18 @@ namespace Z0
     
     using static Konst;
 
-    public readonly struct NumericTx10
+    public readonly struct NumericType10
     {
-        public static NumericTx10 Tx10 
+        public static NumericType10 Tx10 
         {
             [MethodImpl(Inline)]
-           get => new NumericTx10(0);
+           get => new NumericType10(0);
         }
         
         public readonly TxN<sbyte,byte,short,ushort,int,uint,long,ulong,float,double> T;
                 
         [MethodImpl(Inline)]
-        public NumericTx10(int i)
+        public NumericType10(int i)
         {
             T = Tx.T<sbyte,byte,short,ushort,int,uint,long,ulong,float,double>();
         }        

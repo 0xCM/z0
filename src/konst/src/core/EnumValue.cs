@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Typed;
 
     public readonly struct EnumValue
     {
@@ -19,10 +20,10 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe E literal<E,T>(T tVal, E eRep = default)
+        public static ref E literal<E,T>(in T tVal, E eRep = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => Unsafe.Read<E>((E*)&tVal);
+                => ref core.@as<T,E>(tVal);
 
         /// <summary>
         /// Reads a T-value from the value of an E-enum of primal T-kind
@@ -32,10 +33,10 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe T scalar<E,T>(E eVal, T tRep = default)
+        public static ref T scalar<E,T>(in E eVal, T tRep = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => Unsafe.Read<T>((T*)(&eVal));
+                => ref core.@as<E,T>(eVal);
 
         /// <summary>
         /// Reads a T-value from an E-enum value of primal T-kind. 
@@ -45,11 +46,11 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly T scalar<E,T>(in E eVal, out T tVal) 
+        public static ref T scalar<E,T>(in E eVal, out T tVal) 
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            tVal = to<E,T>(eVal);
+            tVal = core.@as<E,T>(eVal);
             return ref tVal;
         }
 
@@ -60,7 +61,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly byte scalar<E>(in E eVal, out byte tVal) 
+        public static ref byte scalar<E>(in E eVal, out byte tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -71,7 +72,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly sbyte scalar<E>(in E eVal, out sbyte tVal) 
+        public static ref sbyte scalar<E>(in E eVal, out sbyte tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -82,7 +83,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly short scalar<E>(in E eVal, out short tVal) 
+        public static ref short scalar<E>(in E eVal, out short tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -93,7 +94,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly ushort scalar<E>(in E eVal, out ushort tVal) 
+        public static ref ushort scalar<E>(in E eVal, out ushort tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -104,7 +105,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly int scalar<E>(in E eVal, out int tVal) 
+        public static ref int scalar<E>(in E eVal, out int tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -115,7 +116,7 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly uint scalar<E>(in E eVal, out uint tVal) 
+        public static ref uint scalar<E>(in E eVal, out uint tVal) 
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
@@ -126,9 +127,9 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly long scalar<E>(in E eVal, out long tVal) 
+        public static ref long scalar<E>(in E eVal, out long tVal) 
             where E : unmanaged, Enum
-                => ref store(eVal, out tVal);
+                => ref core.store(eVal, out tVal);
 
         /// <summary>
         /// Reads a u64-value from an enum of primal u64-kind
@@ -137,9 +138,9 @@ namespace Z0
         /// <param name="tVal">The primal output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly ulong scalar<E>(in E eVal, out ulong tVal) 
+        public static ref ulong scalar<E>(in E eVal, out ulong tVal) 
             where E : unmanaged, Enum
-                => ref store(eVal, out tVal);
+                => ref core.store(eVal, out tVal);
 
         /// <summary>
         /// Reads a c16-value from an enum of primal u16-kind
@@ -148,77 +149,62 @@ namespace Z0
         /// <param name="cVal">The character output value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly char scalar<E>(in E eVal, out char cVal) 
+        public static ref char scalar<E>(in E eVal, out char cVal) 
             where E : unmanaged, Enum
         {
             cVal = (char)scalar(eVal, out ushort _);
             return ref cVal;
         }
 
-        /// <summary>
-        /// Stores an enum value of any primal kind to a u64 target
-        /// </summary>
-        /// <param name="eVal">The enum value</param>
-        /// <param name="dst">The storage target</param>
-        /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly ulong eStore<E>(in E eVal, out ulong dst) 
-            where E : unmanaged, Enum
+        public static ref ulong store<E>(in E src, out ulong dst) 
+            where E : unmanaged
         {
             dst = 0ul;
-            var eSize = size<E>();
+            var eSize = core.size<E>();
             if(eSize == 1)
-                u8(eVal, ref dst);
+                store(w8, src, ref dst);
             else if(eSize == 2)
-                u16(eVal, ref dst);
+                store(w16, src, ref dst);
             else if(eSize == 4)
-                u32(eVal, ref dst);
+                store(w32, src, ref dst);
             else
-                u64(eVal, ref dst);
+                store(w64, src, ref dst);
             return ref dst;
         }
 
-        /// <summary>
-        /// Reads a u8 value from an enum of primal u8-kind, writes the value to a u64 target, and returns the extracted u8 value
-        /// </summary>
-        /// <param name="eVal">The enum value</param>
-        /// <param name="dst">The storage target</param>
-        /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly byte u8<E>(in E eVal, ref ulong dst) 
-            where E : unmanaged, Enum
+        public static ref byte store<E>(W8 w, in E src, ref ulong dst) 
+            where E : unmanaged
         {
-            ref readonly var tVal = ref to<E,byte>(eVal);
+            ref var u8 = ref core.@as<E,byte>(src);
+            dst = u8;
+            return ref u8;
+        }
+
+        [MethodImpl(Inline)]
+        public static ref ushort store<E>(W16 w, in E src, ref ulong dst) 
+            where E : unmanaged
+        {
+            ref var tVal = ref core.@as<E,ushort>(src);
             dst = tVal;
             return ref tVal;
         }
 
-        /// <summary>
-        /// Reads a u8 value from an enum of primal i8-kind, writes the value to a u64 target, and returns the extracted i8 value
-        /// </summary>
-        /// <param name="eVal">The enum value</param>
-        /// <param name="dst">The storage target</param>
-        /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly sbyte i8<E>(in E eVal, ref ulong dst) 
-            where E : unmanaged, Enum
+        public static ref uint store<E>(W32 w, in E src, ref ulong dst) 
+            where E : unmanaged
         {
-            ref readonly var tVal = ref to<E,sbyte>(eVal);
-            dst = (byte)tVal;
+            ref var tVal = ref core.@as<E,uint>(src);
+            dst = tVal;
             return ref tVal;
         }
 
-        /// <summary>
-        /// Reads a u16 value from an enum of primal u16-kind, writes the value to a u64 target, and returns the extracted u16 value
-        /// </summary>
-        /// <param name="eVal">The enum value</param>
-        /// <param name="dst">The storage target</param>
-        /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly ushort u16<E>(in E eVal, ref ulong dst) 
-            where E : unmanaged, Enum
+        public static ref ulong store<E>(W64 w, in E src, ref ulong dst) 
+            where E : unmanaged
         {
-            ref readonly var tVal = ref to<E,ushort>(eVal);
+            ref var tVal = ref core.@as<E,ulong>(src);
             dst = tVal;
             return ref tVal;
         }
@@ -226,85 +212,73 @@ namespace Z0
         /// <summary>
         /// Reads a u16 value from an enum of primal u16-kind, writes the value to a u64 target, and returns the extracted value as c16 value
         /// </summary>
-        /// <param name="eVal">The enum value</param>
+        /// <param name="src">The enum value</param>
         /// <param name="dst">The storage target</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly char c16<E>(in E eVal, ref ulong dst) 
+        public static ref char c16<E>(in E src, ref ulong dst) 
             where E : unmanaged, Enum
-                => ref to<ushort,char>(u16(eVal, ref dst));
+                => ref core.@as<ushort,char>(store(w16, src, ref dst));
+
+        /// <summary>
+        /// Reads a u8 value from an enum of primal i8-kind, writes the value to a u64 target, and returns the extracted i8 value
+        /// </summary>
+        /// <param name="src">The enum value</param>
+        /// <param name="dst">The storage target</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref sbyte i8<E>(in E src, ref ulong dst) 
+            where E : unmanaged, Enum
+        {
+            ref var tVal = ref core.@as<E,sbyte>(src);
+            dst = (byte)tVal;
+            return ref tVal;
+        }
+
 
         /// <summary>
         /// Reads an i16 value from an enum of primal i16-kind, writes the value to a u64 target, and returns the extracted i16 value
         /// </summary>
-        /// <param name="eVal">The enum value</param>
+        /// <param name="src">The enum value</param>
         /// <param name="dst">The storage target</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly short i16<E>(in E eVal, ref ulong dst) 
+        public static ref short i16<E>(in E src, ref ulong dst) 
             where E : unmanaged, Enum
         {
-            ref readonly var tVal = ref to<E,short>(eVal);
+            ref var tVal = ref core.@as<E,short>(src);
             dst = (ushort)tVal;
             return ref tVal;
         }
 
-        /// <summary>
-        /// Reads n u32 value from an enum of primal u32-kind, writes the value to a u64 target, and returns the extracted u32 value
-        /// </summary>
-        /// <param name="eVal">The enum value</param>
-        /// <param name="dst">The storage target</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly uint u32<E>(in E eVal, ref ulong dst) 
-            where E : unmanaged, Enum
-        {
-            ref readonly var tVal = ref to<E,uint>(eVal);
-            dst = tVal;
-            return ref tVal;
-        }
 
         /// <summary>
         /// Reads an i32 value from an enum of primal i32-kind, writes the value to a u64 target, and returns the extracted i32 value
         /// </summary>
-        /// <param name="eVal">The enum value</param>
+        /// <param name="src">The enum value</param>
         /// <param name="dst">The storage target</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly int i32<E>(in E eVal, ref ulong dst) 
+        public static ref int i32<E>(in E src, ref ulong dst) 
             where E : unmanaged, Enum
         {
-            ref readonly var tVal = ref to<E,int>(eVal);
+            ref var tVal = ref core.@as<E,int>(src);
             dst = (uint)tVal;
             return ref tVal;
         }
 
-        /// <summary>
-        /// Reads n u64 value from an enum of primal u64-kind, writes the value to a u64 target, and returns the extracted u64 value
-        /// </summary>
-        /// <param name="eVal">The enum value</param>
-        /// <param name="dst">The storage target</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly ulong u64<E>(in E eVal, ref ulong dst) 
-            where E : unmanaged, Enum
-        {
-            ref readonly var tVal = ref to<E,ulong>(eVal);
-            dst = tVal;
-            return ref tVal;
-        }
 
         /// <summary>
         /// Reads an i64 value from an enum of primal i64-kind, writes the value to a u64 target, and returns the extracted i64 value
         /// </summary>
-        /// <param name="eVal">The enum value</param>
+        /// <param name="src">The enum value</param>
         /// <param name="dst">The storage target</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly long i64<E>(in E eVal, ref ulong dst) 
+        public static ref long i64<E>(in E src, ref ulong dst) 
             where E : unmanaged, Enum
         {
-            ref readonly var tVal = ref to<E,long>(eVal);
+            ref var tVal = ref core.@as<E,long>(src);
             dst = (ulong)tVal;
             return ref tVal;
         }
@@ -315,9 +289,9 @@ namespace Z0
         /// <param name="eVal">The enum source value</param>
         /// <typeparam name="E">The enum type of primal i8-kind</typeparam>
         [MethodImpl(Inline)]
-        public static sbyte e8i<E>(E eVal) 
+        public static ref sbyte e8i<E>(ref E eVal) 
             where E : unmanaged, Enum
-                => scalar<E,sbyte>(eVal);
+                => ref scalar<E,sbyte>(eVal);
 
         /// <summary>
         /// Envisions an E-enum value of primal u8-kind as a like-kinded scalar value
@@ -482,20 +456,13 @@ namespace Z0
         static int size<X>()
             => Unsafe.SizeOf<X>();
 
-        [MethodImpl(Inline)]
-        static ref X edit<X>(in X x)
-            => ref Unsafe.AsRef(in x);
 
         [MethodImpl(Inline)]
-        static ref Y to<X,Y>(in X x)
-            => ref Unsafe.As<X,Y>(ref edit(x));
-
-        [MethodImpl(Inline)]
-        static ref readonly T store<E,T>(in E e, out T dst) 
+        public static ref T store<E,T>(in E e, out T dst) 
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            dst = to<E,T>(e);
+            dst = core.@as<E,T>(e);
             return ref dst;
         }
     }

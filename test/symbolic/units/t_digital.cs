@@ -16,16 +16,14 @@ namespace Z0
 
         const string S1 ="HIJKLMN";
 
-
         public void tc_literal()
         {
-            var r0 = StringRef.create(S0);
+            var r0 = core.@ref(S0);
             Claim.eq(r0.Text, S0);
 
-            var r1 = StringRef.create(S1);
+            var r1 = core.@ref(S1);
             Claim.eq(r1.Text, S1);
         }
-
 
         public void tc_dynamic()
         {
@@ -34,9 +32,8 @@ namespace Z0
             {
                 dst += i.ToString()[0];
             }
-            var r = StringRef.create(dst);
+            var r = core.@ref(dst);
             Claim.eq(dst, r.Text);
         }
-
     }
 }

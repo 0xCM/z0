@@ -29,7 +29,7 @@ namespace Z0.Asm.Data
 
             var l2Parts = lines[2].RightOf(CommentMarker).SplitClean(Assign);
             var baseText = l2Parts.Length == 2 ? l2Parts[1] : string.Empty;
-            var @base = Root.locate(HexScalarParser.Service.Parse(baseText).ValueOrDefault(0ul));
+            var @base = core.address(HexScalarParser.Service.Parse(baseText).ValueOrDefault(0ul));
             
             var l3Parts = lines[3].RightOf(CommentMarker).SplitClean(Assign);
             var tcText = l3Parts.Length == 2 ? l3Parts[1] : string.Empty;

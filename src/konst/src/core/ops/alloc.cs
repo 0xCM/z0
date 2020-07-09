@@ -5,15 +5,20 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
 
     partial struct core
-    {                        
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> chars<E>(ReadOnlySpan<E> src)
-            where E : unmanaged, Enum
-                => recover<E,char>(src);
+    {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T[] alloc<T>(uint count)
+            => sys.alloc<T>(count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T[] alloc<T>(long count)
+            => sys.alloc<T>((int)count);
     }
 }

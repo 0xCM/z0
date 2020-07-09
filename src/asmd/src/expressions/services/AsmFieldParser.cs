@@ -65,7 +65,7 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline), Op]
         public MemoryAddress Parse(string src, out MemoryAddress result, MemoryAddress? @default = null)     
-            => result = Root.locate((ulong)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
+            => result = core.address((ulong)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
 
         [MethodImpl(Inline), Op]
         public string Parse(string src, out string result)

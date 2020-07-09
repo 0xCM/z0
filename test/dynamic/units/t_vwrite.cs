@@ -45,28 +45,16 @@ namespace Z0
             return Buffer;
         }
         
-        public unsafe void format_3()
+        public unsafe void check_ref_data()
         {
             const string A = "abcdefghijklmnopqrstuvwxyz";
 
             var src = A;
-            var r = Refs.from(src);
-            Claim.eq(A.Length, r.CellCount);
-            Claim.eq(A.Length*2, r.DataSize);
+            var r = core.data(src);
+            Claim.eq(A.Length, r.Length);
             
             for(var i=0; i<src.Length; i++)
-                Claim.eq(r[i],src[i]);     
-
-            var pSrc = (char*)r.Location; 
-            var data = cover(pSrc, A.Length);
-            
-            ref readonly var rC = ref As.@ref(pSrc);
-
-            
-            // for(var i=0u; i<data.Length; i++)
-            //     term.write(skip(data,i));
-            
-            // term.print();
+                Claim.eq(r[i], src[i]);                 
         }
 
         public void check_vwrite_u8()

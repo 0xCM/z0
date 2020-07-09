@@ -11,7 +11,6 @@ namespace Z0
     using static core;
     using static Typed;
 
-
     using H = Hex3;
     using K = Hex3Kind;
     using T = Hex3Text;
@@ -25,14 +24,14 @@ namespace Z0
         {
             var target = span(dst);
             byte i = 0;
-            seek(target,i++) = StringRefs.create(T.x00);
-            seek(target,i++) = StringRefs.create(T.x01);
-            seek(target,i++) = StringRefs.create(T.x02);            
-            seek(target,i++) = StringRefs.create(T.x03);
-            seek(target,i++) = StringRefs.create(T.x04);
-            seek(target,i++) = StringRefs.create(T.x05);
-            seek(target,i++) = StringRefs.create(T.x06);            
-            seek(target,i++) = StringRefs.create(T.x07);
+            seek(target,i++) = @ref(T.x00);
+            seek(target,i++) = @ref(T.x01);
+            seek(target,i++) = @ref(T.x02);            
+            seek(target,i++) = @ref(T.x03);
+            seek(target,i++) = @ref(T.x04);
+            seek(target,i++) = @ref(T.x05);
+            seek(target,i++) = @ref(T.x06);            
+            seek(target,i++) = @ref(T.x07);
             return new HexTextIndex<K>(dst);
         }                
         
@@ -151,7 +150,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexIndex<H> init(N n, byte[] src)
             => index<H>(@as<byte[],H[]>(src));
-
-
     }    
 }

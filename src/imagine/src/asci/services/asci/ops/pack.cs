@@ -12,6 +12,20 @@ namespace Z0
 
     partial struct asci
     {        
+        [MethodImpl(Inline), Op]
+        public static ref ushort pack(AsciCharCode c0, AsciCharCode c1, out ushort dst)
+        {
+            dst = (ushort)((ushort)c0 | ((ushort)c1 << 8));
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref uint pack(AsciCharCode c0, AsciCharCode c1, AsciCharCode c2, AsciCharCode c3, out uint dst)
+        {
+            dst = (uint)c0 | ((uint)c1 << 8) | (uint)c2 << 16 | (uint)c3 << 24;
+            return ref dst;
+        }
+
         /// <summary>
         /// Encodes two decimal digits d := 0x[c1][c0] for characters c2, c1 in the inclusive range [0,9]
         /// </summary>

@@ -35,10 +35,16 @@ namespace Z0
 
         public const NK AllNumeric = NK.All;
 
+
         /// <summary>
         /// Specifies numeric types of width <see cref='W8'/>
         /// </summary>
         public const NK Numeric8k = NK.Width8;
+
+        /// <summary>
+        /// Specifies numeric types of width <see cref='W16'/>
+        /// </summary>
+        public const NK Numeric16k = NK.Width16;
 
         /// <summary>
         /// Specifies numeric types of width <see cref='W32'/>
@@ -82,6 +88,9 @@ namespace Z0
 
         public const NK Float64k = NK.F64;
 
+        /// <summary>
+        /// Specifies numeric types of width <see cref='W8'/> and <see cref='W16'/> 
+        /// </summary>
         public const NK Numeric8x16k = NK.Width8 | NK.Width16;
 
         /// <summary>

@@ -16,16 +16,24 @@ namespace Z0
     partial struct asci
     {
         [MethodImpl(Inline), Op]
-        public static asci2 init(N2 n, ushort fill = 0x2020)
-            => new asci2(fill);
+        public static asci2 init(AsciCharCode c0, AsciCharCode c1)
+            => new asci2(pack(c0,c1, out var dst));
 
         [MethodImpl(Inline), Op]
-        public static asci4 init(N4 n, uint fill = 0x20202020)
-            => new asci4(fill);
+        public static asci2 init(N2 n)
+            => new asci2(0x2020);
 
         [MethodImpl(Inline), Op]
-        public static asci8 init(N8 n, ulong fill = 0x2020202020202020ul)
-            => new asci8(fill);
+        public static asci4 init(AsciCharCode c0, AsciCharCode c1, AsciCharCode c2, AsciCharCode c3)
+            => new asci4(pack(c0,c1,c2,c3, out var dst));
+
+        [MethodImpl(Inline), Op]
+        public static asci4 init(N4 n)
+            => new asci4(0x20202020);
+
+        [MethodImpl(Inline), Op]
+        public static asci8 init(N8 n, AsciCharCode fill = AsciCharCode.Space)
+            => new asci8(core.vlo(vbroadcast(w128, (byte)fill)));
 
         [MethodImpl(Inline), Op]
         public static asci16 init(N16 n, AsciCharCode fill = AsciCharCode.Space)

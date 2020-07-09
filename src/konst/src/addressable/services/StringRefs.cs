@@ -11,15 +11,12 @@ namespace Z0
     using static Konst;
     using static core;
     
+    [ApiHost]
     public readonly struct StringRefs
     {
         [MethodImpl(Inline), Op]
         public static unsafe string format(StringRef src)
             => sys.@string(src.Address.Pointer<char>());
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(StringRef src)
-            => Refs.from<char>(src.Location).Data;
 
         [MethodImpl(Inline), Op]
         public static int length(StringRef src)
@@ -66,11 +63,32 @@ namespace Z0
             return dst.ToString();
         }
 
-        public static void materialize(ReadOnlySpan<StringRef> src, Span<string> dst)
+        [Op]
+        public static void store(ReadOnlySpan<StringRef> src, Span<string> dst)
         {
             var count = src.Length;            
             for(var i=0u; i<count; i++)
                 seek(dst,i) = skip(src,i);
+        }
+
+
+        [Op]
+        public static void materialize(ReadOnlySpan<StringRef> src, Span<char> dst, char? delimiter = null)
+        {
+            var m = src.Length;
+            var n = dst.Length;
+            var o = 0u;
+            for(var i=0u; i<m; i++)
+            {
+                var c = skip(src,i).Data;
+                var p = c.Length;
+                
+                for(var j=0u; j<p && o<n; j++, o++)
+                    seek(dst,o) = skip(c,j);
+                
+                if(delimiter != null)
+                    seek(dst, ++o) = delimiter.Value;
+            }    
         }
 
         [MethodImpl(Inline), Op]

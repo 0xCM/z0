@@ -15,8 +15,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst; 
-    
-    
+        
     partial struct V0d
     {
         /// <summary>

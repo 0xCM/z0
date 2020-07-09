@@ -5,19 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    partial class RootLegacy
-    {
+    partial struct core
+    {                
         /// <summary>
-        /// Returns the type of the type
+        /// Computes the whole number of T-cells identified by a reference
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Type type<T>()
-            => typeof(T);    
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint count<T>(in MemRef src)
+            => (uint)(src.DataSize/size<T>());
     }
 }

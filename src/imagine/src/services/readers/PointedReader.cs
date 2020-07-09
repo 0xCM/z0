@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static PointedReader<T> create<T>(MemRef src)
             where T : unmanaged
-                => create(src.Pointer<T>(), (int)src.DataSize);
+                => create(src.Address.Pointer<T>(), (int)src.DataSize);
         
         [MethodImpl(Inline)]
         internal PointedReader(byte* pSrc, int length)

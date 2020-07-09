@@ -16,18 +16,9 @@ namespace Z0
     /// <summary>
     /// A string?
     /// </summary>
-    [ApiHost]
     public readonly struct StringRef : ITextual, IConstSpan<StringRef,char>
     {            
         internal readonly Vector128<ulong> Location;
-
-        [MethodImpl(Inline), Op]
-        public static unsafe StringRef create(string src)
-            => new StringRef((ulong)pchar(src), src.Length);
-
-        [MethodImpl(Inline), Op]
-        public static StringRef from(MemRef src)
-            => new StringRef(src);
 
         [MethodImpl(Inline)]
         public StringRef(in MemRef src)
@@ -41,21 +32,17 @@ namespace Z0
         internal StringRef(Vector128<ulong> data)
             => Location = data;
 
-        [MethodImpl(Inline), Op]
-        public static unsafe string @string(StringRef src)
-            => src.Text;
+        [MethodImpl(Inline)]
+        public static implicit operator StringRef(MemRef src)
+            => new StringRef(src);
 
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> data(StringRef src)
-            => src.Chars;
-                
         [MethodImpl(Inline)]
         public static implicit operator string(StringRef src)
             => src.Text;
 
         [MethodImpl(Inline)]
         public static implicit operator StringRef(string src)
-            => api.create(src);
+            => core.@ref(src);
 
         /// <summary>
         /// The length of the represented string
@@ -69,7 +56,7 @@ namespace Z0
         public unsafe string Text
         {
             [MethodImpl(Inline)]
-            get => sys.@string(Address.Pointer<char>());
+            get => core.@string(this);            
         }
 
         public MemoryAddress Address
@@ -81,16 +68,16 @@ namespace Z0
         public ref readonly char this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref skip(Chars,(uint)index);
+            get => ref skip(Data,(uint)index);
         }
 
         /// <summary>
         /// The string content presented as a span
         /// </summary>
-        public ReadOnlySpan<char> Chars
+        public ReadOnlySpan<char> Data
         {
             [MethodImpl(Inline)]
-            get => data(this);
+            get => core.data(this);
         }
 
         /// <summary>
@@ -109,7 +96,7 @@ namespace Z0
         ReadOnlySpan<char> IConstSpan<StringRef,char>.Data
         {
             [MethodImpl(Inline)]
-            get => data(this);
+            get => core.data(this);
         }
 
         public bool IsEmpty
@@ -160,13 +147,5 @@ namespace Z0
         }
 
         const byte Scale = 2;
-
-        // public string Diagnostic()
-        //     => String.Concat(Address.Format().PadRight(14), 
-        //         text.bracket(text.concat(text.squote(Text), text.spaced(Pipe), Length)));
-
-        // public string Diagnostic(in StringRef prior)
-        //     => String.Concat((Address - prior.Address).Format().PadRight(4), 
-        //         text.bracket(text.concat(text.squote(Text), text.spaced(Pipe), Length)));             
-    }
+   }
 }

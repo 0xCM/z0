@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct Symbolic
     {        
+
         [MethodImpl(Inline)]
         public static char @char<S,T,N>(Symbol<S,T,N> src)
             where S : unmanaged

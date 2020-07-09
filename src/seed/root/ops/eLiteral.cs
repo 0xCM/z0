@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly T eSkip<E,T>(ReadOnlySpan<T> src, E field)
             where E : unmanaged, Enum
-                => ref As.skip(src, scalar<E,ushort>(field));                    
+                => ref core.skip(src, scalar<E,ushort>(field));                    
 
         /// <summary>
         /// Stores an enum value of any primal kind to a u64 target
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly ulong eStore<E>(in E eVal, out ulong tVal) 
             where E : unmanaged, Enum
-                => ref EnumValue.eStore(eVal, out tVal);
+                => ref EnumValue.store(eVal, out tVal);
                         
         [MethodImpl(Inline), Op]
         public static BinaryLiteral literal(Base2 @base2, string name, object value, string text)
@@ -72,45 +72,6 @@ namespace Z0
             where E : unmanaged, Enum
                 => EnumValue.e8u(eVal);
 
-        [MethodImpl(Inline)]
-        public static sbyte e8i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e8i(eVal);
-
-        [MethodImpl(Inline)]
-        public static short e16i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e16i(eVal);
-
-        [MethodImpl(Inline)]
-        public static ushort e16u<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e16u(eVal);
-
-        [MethodImpl(Inline)]
-        public static char e16c<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e16c(eVal);
-
-        [MethodImpl(Inline)]
-        public static int e32i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e32i(eVal);
-
-        [MethodImpl(Inline)]
-        public static uint e32u<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e32u(eVal);
-
-        [MethodImpl(Inline)]
-        public static long e64i<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e64i(eVal);
-
-        [MethodImpl(Inline)]
-        public static ulong e64u<E>(E eVal) 
-            where E : unmanaged, Enum
-                => EnumValue.e64u(eVal);
 
         /// <summary>
         /// Reads an E-value from an enum of primal T-kind

@@ -19,9 +19,29 @@ namespace Z0
         /// <param name="count">The number of bytes to cover</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> cover<T>(T* pSrc, int count)
+        public static unsafe Span<T> cover<T>(T* pSrc, uint count)
             where T : unmanaged
-                => CreateSpan(ref @ref<T>(pSrc), count);
+                => CreateSpan(ref @ref<T>(pSrc), (int)count);
+
+        /// <summary>
+        /// Covers T-parametric content beginning at a specified address with a span
+        /// </summary>
+        /// <param name="address">The source address</param>
+        /// <param name="count">The number of cells to cover</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> cover<T>(MemoryAddress address, uint count)
+            where T : unmanaged
+                => cover<T>((T*)address, count); 
+        
+        /// <summary>
+        /// Covers content beginning at a specified address with a bytespan
+        /// </summary>
+        /// <param name="location">The source address</param>
+        /// <param name="size">The number of bytes to cover</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Span<byte> cover(MemoryAddress location, uint size)
+            => cover<byte>(location, size);
 
         /// <summary>
         /// Covers a reference-identified T-counted buffer with a span

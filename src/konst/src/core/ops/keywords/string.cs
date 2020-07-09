@@ -10,10 +10,9 @@ namespace Z0
     using static Konst;
 
     partial struct core
-    {                        
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> chars<E>(ReadOnlySpan<E> src)
-            where E : unmanaged, Enum
-                => recover<E,char>(src);
+    {
+        [MethodImpl(Inline), Op]
+        public static string @string(in StringRef src)                
+            => sys.@string(data(src));
     }
 }

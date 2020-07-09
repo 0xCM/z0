@@ -13,18 +13,12 @@ namespace Z0
 
     partial class RootLegacy
     {
-
-
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, int count)
             => ref Add(ref edit(in src), count); 
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
-            => ref skip(in As.first(src), count);
-
-        [MethodImpl(Inline)]
-        public static ref readonly T skip<T>(Span<T> src, int count)
             => ref skip(in As.first(src), count);
     }
 }

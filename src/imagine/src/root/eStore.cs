@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="dst">The storage target</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly ulong eStore<E>(in E eVal, out ulong tVal) 
+        public static ref ulong eStore<E>(in E eVal, out ulong tVal) 
             where E : unmanaged, Enum
-                => ref EnumValue.eStore(eVal, out tVal);
+                => ref EnumValue.store(eVal, out tVal);
     }
 }

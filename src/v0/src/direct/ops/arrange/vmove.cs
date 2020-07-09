@@ -487,6 +487,5 @@ namespace Z0
         public static unsafe Vector512<ulong> vmove(in uint src, N8 n, W64 w)
             => (v64u(ConvertToVector256Int64(As.gptr(src))),
                 v64u(ConvertToVector256Int64(As.gptr(src,4)))); 
-
     }
 }

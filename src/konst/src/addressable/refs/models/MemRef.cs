@@ -15,10 +15,6 @@ namespace Z0
     public readonly struct MemRef : IAddress<MemoryAddress>, ITextual, IEquatable<MemRef>
     {
         internal readonly Vector128<ulong> Data;        
-                        
-        [MethodImpl(Inline)]
-        public unsafe static MemRef from(ReadOnlySpan<byte> src)
-            => new MemRef(core.gptr(core.first(src)), src.Length);
 
         public MemoryAddress Address
         {
@@ -100,16 +96,11 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load()
-            => view<byte>(this);
+            => core.view<byte>(this);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Load<T>()
-            => view<T>(this);
-
-        [MethodImpl(Inline)]
-        public unsafe T* Pointer<T>()
-            where T : unmanaged
-                => Address.Pointer<T>();
+            => core.view<T>(this);
 
         [MethodImpl(Inline)]
         public uint Hash()
@@ -164,11 +155,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<ulong> vparts(ulong x0, ulong x1)
             => Create(x0,x1);
-
-
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<T> view<T>(in MemRef src)
-            => core.cover(src.Address.Ref<T>(), src.Count<T>());
-
     }
 }

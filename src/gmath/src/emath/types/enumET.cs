@@ -118,7 +118,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public @enum(T scalar)
         {
-            Literal = literal<E,T>(scalar);
+            Literal = EnumValue.literal<E,T>(scalar);
         }                
 
         public T Scalar 

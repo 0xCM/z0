@@ -12,10 +12,6 @@ namespace Z0
     partial class RootLegacy
     {
         [MethodImpl(Inline)]
-        public static ref T seek<T>(ref T src, int count)
-            => ref As.seek(src, count);
-
-        [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, int count)
             => ref As.seek(src, (uint)count);
     }

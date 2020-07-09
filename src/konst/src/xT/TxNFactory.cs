@@ -15,12 +15,12 @@ namespace Z0
     public readonly struct Tx
     {
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Type match<T>(in NumericTx10 src)
+        public static Type match<T>(in NumericType10 src)
             where T : unmanaged
                 => src.T.match<T>();
 
         [MethodImpl(Inline), Op]
-        public static unsafe ref readonly Type lookup(in NumericTx10 src, byte index)
+        public static unsafe ref readonly Type lookup(in NumericType10 src, byte index)
             => ref Unsafe.AsRef<Type>((byte*)pvoid(src) + index);            
 
         [MethodImpl(Inline)]

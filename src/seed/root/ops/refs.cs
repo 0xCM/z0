@@ -39,27 +39,6 @@ namespace Z0
         public static char @char(bool src)
             => (char)(u8(src) + 48);
 
-        [MethodImpl(Inline)]
-        public static char @char<S,T,N>(Symbol<S,T,N> src)
-            where S : unmanaged
-            where T : unmanaged
-            where N : unmanaged, ITypeNat         
-                => Unsafe.As<S,char>(ref edit(src.Value));
-
-        [MethodImpl(Inline)]
-        public static char @char<S,T>(Symbol<S,T> src)
-            where S : unmanaged
-            where T : unmanaged
-                => Unsafe.As<S,char>(ref edit(src.Value));
-
-        [MethodImpl(Inline)]
-        public static char @char<S>(Symbol<S> src)
-            where S : unmanaged
-                => Unsafe.As<S,char>(ref edit(src.Value));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe MemoryAddress locate<T>(in T src)
-            => As.pvoid(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress address<P>(P* pSrc)
@@ -73,9 +52,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void addresses(ReadOnlySpan<string> src, Span<MemoryAddress> dst)
         {
-            ref readonly var r0 = ref As.first(src);
-            for(var i=0; i<src.Length; i++)
-                seek(dst,i) = address(skip(r0,i));
+            ref readonly var r0 = ref core.first(src);
+            for(var i=0u; i<src.Length; i++)
+                core.seek(dst,i) = address(core.skip(r0,i));
         }
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
@@ -116,8 +95,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<T> view<T>(in MemRef src)
-            => CreateReadOnlySpan(ref @ref<T>(src.Address), src.Count<T>());
-
+            => CreateReadOnlySpan(ref @ref<T>(src.Address), (int)core.count<T>(src));
 
         [MethodImpl(Inline), Op]
         public static void refs(ReadOnlySpan<string> src, Span<StringRef> dst)

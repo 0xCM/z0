@@ -10,6 +10,8 @@ namespace Z0
     using static Root;
     using static asci;
 
+    using C = AsciCharCode;
+
     public class t_asci_encode : t_symbolic<t_asci_encode>
     {        
         public void unpack_4()
@@ -34,32 +36,35 @@ namespace Z0
 
         public void test_case_02()
         {
-            var c0 = AsciCharCode.Bang;
-            var tc = AsciTestCase02.Create(c0);
+
+            var a2 = asci.init(C.A, C.Z);
+            Claim.eq(a2, "AZ");
+
+            //var tc = AsciTestCase02.Create(c0);
             
-            var a2d = asci.chars(tc.A2);
-            var a2c = asci.codes((sbyte)c0, (sbyte)asci2.Size);
-            Claim.yea(asci.eq(a2d,a2c));
+            // var a2d = asci.chars(tc.A2);
+            // var a2c = asci.codes((sbyte)c0, (sbyte)asci2.Size);
+            // Claim.yea(asci.eq(a2d,a2c));
 
-            var a4d = asci.chars(tc.A4);
-            var a4c = asci.codes((sbyte)c0, (sbyte)asci4.Size);
-            Claim.yea(asci.eq(a4d,a4c));
+            // var a4d = asci.chars(tc.A4);
+            // var a4c = asci.codes((sbyte)c0, (sbyte)asci4.Size);
+            // Claim.yea(asci.eq(a4d,a4c));
             
-            var a8d = asci.chars(tc.A8);
-            var a8c = asci.codes((sbyte)c0, (sbyte)asci8.Size);
-            Claim.yea(asci.eq(a8d,a8c));
+            // var a8d = asci.chars(tc.A8);
+            // var a8c = asci.codes((sbyte)c0, (sbyte)asci8.Size);
+            // Claim.yea(asci.eq(a8d,a8c));
 
-            var a16d = asci.chars(tc.A16);
-            var a16c = asci.codes((sbyte)c0, (sbyte)asci16.Size);
-            Claim.yea(asci.eq(a16d,a16c));
+            // var a16d = asci.chars(tc.A16);
+            // var a16c = asci.codes((sbyte)c0, (sbyte)asci16.Size);
+            // Claim.yea(asci.eq(a16d,a16c));
 
-            var a32d = asci.chars(tc.A32);
-            var a32c = asci.codes((sbyte)c0,(sbyte)asci32.Size);
-            Claim.yea(asci.eq(a32d,a32c));
+            // var a32d = asci.chars(tc.A32);
+            // var a32c = asci.codes((sbyte)c0,(sbyte)asci32.Size);
+            // Claim.yea(asci.eq(a32d,a32c));
 
-            var a64d = asci.chars(tc.A64);
-            var a64c = asci.codes((sbyte)c0, (sbyte)asci64.Size);
-            Claim.yea(asci.eq(a64d,a64c));        
+            // var a64d = asci.chars(tc.A64);
+            // var a64c = asci.codes((sbyte)c0, (sbyte)asci64.Size);
+            // Claim.yea(asci.eq(a64d,a64c));        
         }
 
         public void res_HexKind()

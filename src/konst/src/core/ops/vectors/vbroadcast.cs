@@ -12,10 +12,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst;
-    using static Typed;
-    using static Root;
-
-    partial struct V0d
+    
+    partial struct core
     {
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value
@@ -176,7 +174,7 @@ namespace Z0
         /// <param name="src">The value to broadcast</param>
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<float> vbroadcast(W256 w, float src)
-            => BroadcastScalarToVector256(ptr(ref As.edit(src)));
+            => BroadcastScalarToVector256(core.gptr(src));
 
         /// <summary>
         /// __m256d _mm256_broadcast_sd (double const * mem_addr) VBROADCASTSD ymm, m64
@@ -185,7 +183,7 @@ namespace Z0
         /// <param name="src">The value to broadcast</param>
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<double> vbroadcast(W256 w, double src)
-            => BroadcastScalarToVector256(ptr(ref As.edit(src)));
+            => BroadcastScalarToVector256(core.gptr(src));
 
         /// <summary>
         /// __m128 _mm_broadcast_ss (float const * mem_addr) VBROADCASTSS xmm, m32
@@ -194,7 +192,7 @@ namespace Z0
         /// <param name="src">The value to broadcast</param>
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<float> vbroadcast(W128 w, float src)
-            => BroadcastScalarToVector128(ptr(ref As.edit(src)));
+            => BroadcastScalarToVector128(core.gptr(src));
 
         /// <summary>
         /// Broadcasts a 64-bit floating point value to the upper and lower cells of a 128-bit floating-point vector
@@ -204,50 +202,5 @@ namespace Z0
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<double> vbroadcast(W128 w, double src)
             => Vector128.Create(src);             
-
-        /// <summary>
-        /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
-        /// and the upper 128-bit lane is filled with replicas of the hi value
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="lo">The value to replicate in the lower lane</param>
-        /// <param name="hi">The value to replicate in the upper lane</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<byte> vbroadcast(W256 w, byte lo, byte hi)
-            => V0d.vconcat(vbroadcast(w128, lo),vbroadcast(w128, hi));            
-
-        /// <summary>
-        /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
-        /// and the upper 128-bit lane is filled with replicas of the hi value
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="lo">The value to replicate in the lower lane</param>
-        /// <param name="hi">The value to replicate in the upper lane</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vbroadcast(W256 w, ushort lo, ushort hi)
-            => V0d.vconcat(vbroadcast(w128, lo),vbroadcast(w128, hi));            
-
-        /// <summary>
-        /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
-        /// and the upper 128-bit lane is filled with replicas of the hi value
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="lo">The value to replicate in the lower lane</param>
-        /// <param name="hi">The value to replicate in the upper lane</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<uint> vbroadcast(W256 w, uint lo, uint hi)
-            => V0d.vconcat(vbroadcast(w128, lo),vbroadcast(w128, hi));            
-
-        /// <summary>
-        /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
-        /// and the upper 128-bit lane is filled with replicas of the hi value
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="lo">The value to replicate in the lower lane</param>
-        /// <param name="hi">The value to replicate in the upper lane</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vbroadcast(W256 w, ulong lo, ulong hi)
-            => V0d.vconcat(vbroadcast(w128, lo),vbroadcast(w128, hi));            
-
     }
 }

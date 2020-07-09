@@ -73,6 +73,10 @@ namespace Z0
             => (byte*)src.Location;
 
         [MethodImpl(Inline)]
+        public static explicit operator void*(MemoryAddress src)
+            => (void*)src.Location;
+
+        [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(IntPtr src)            
             => new MemoryAddress((ulong)src.ToInt64());
 

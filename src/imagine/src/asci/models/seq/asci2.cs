@@ -152,7 +152,7 @@ namespace Z0
         {
             Storage = src;
         }
-       
+
         [MethodImpl(Inline)]
         public asci2(string src)
         {
