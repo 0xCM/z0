@@ -48,7 +48,7 @@ namespace Z0
 
         FilePath EmissionTarget<R>(PartId part, R r = default)
             where R : struct, IPartRecord
-                => TargetDir + FileName.Define($"{part}.{r.Kind}", Csv);
+                => TargetDir + FileExt.FileName($"{part}.{r.Kind}", Csv);
 
         static void Emit<R,K>(ReadOnlySpan<R> src, FilePath dst, K k =default)
             where R : struct, IPartRecord<K>
@@ -149,7 +149,7 @@ namespace Z0
                 var assembly = part.Owner;                
                 var methods = PartReader.methods(FilePath.Define(assembly.Location));
                 var count = methods.Length;
-                var dst = TargetDir + FileName.Define($"{part}.Methdods", Csv);
+                var dst = TargetDir + FileExt.FileName($"{part}.Methdods", Csv);
                 using var writer = dst.Writer();
                 writer.WriteLine(text.concat(Sep, "Method".PadRight(50), Sep, "Rva".PadRight(12), Sep, "Il"));
                 for(var i=0; i<count; i++)
@@ -167,7 +167,7 @@ namespace Z0
             {
                 var assembly = part.Owner;                
                 var headers = PartReader.headers(FilePath.Define(assembly.Location));
-                var dst = TargetDir + FileName.Define($"{part.Id}.Headers", Csv);
+                var dst = TargetDir + FileExt.FileName($"{part.Id}.Headers", Csv);
                 var rendered = HeaderInfo.render(headers);
                 
                 using var writer = dst.Writer();

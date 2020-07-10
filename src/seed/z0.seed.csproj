@@ -7,11 +7,8 @@
 
   <ItemGroup>    
     <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Expressive)" />
     <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Text)" />
-
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,8 @@ namespace Z0.Parts
 {        
     public sealed class Sys : Part<Sys>
     {
-
+        public override PartId[] Needs  
+            => parts(PartId.Part);
     }    
 }
 

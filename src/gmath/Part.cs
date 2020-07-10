@@ -8,6 +8,7 @@ namespace Z0.Parts
 {
     public sealed class GMath : Part<GMath>
     {        
-        
+        public override PartId[] Needs  
+            => parts(PartId.Seed, PartId.Math);        
     }
 }

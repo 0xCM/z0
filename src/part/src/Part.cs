@@ -13,12 +13,14 @@ namespace Z0
     using NK = NumericKind;
     using DW = DataWidth;
 
-    [ApiHost]
+    [ApiHost("api")]
     public readonly partial struct Part
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
                 
         public const string EmpyString = "";
+
+        public const string Connector = " -> ";                
 
         /// <summary>
         /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field

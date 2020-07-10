@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Defines service operations that support reading text-formatted encoded x86 asm data
     /// </summary>
-    public interface IMemberCodeReader : IService
+    public interface IMemberCodeReader
     {
         /// <summary>
         /// Reads the content of a source file

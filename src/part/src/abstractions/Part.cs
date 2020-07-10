@@ -19,6 +19,11 @@ namespace Z0
 
         public readonly PartBox Box;
 
+        public virtual PartId[] Needs {get;}
+
+        protected static PartId[] parts(params PartId[] src)
+            => src;
+
         /// <summary>
         /// The resolved part
         /// </summary>

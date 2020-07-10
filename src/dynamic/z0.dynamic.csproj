@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Expressive)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Identity)" />
   </ItemGroup>
