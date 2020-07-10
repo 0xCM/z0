@@ -10,6 +10,6 @@ namespace Z0
 
     partial class RootLegacy
     {
-        const NumericKind Closure = Integers8x64k;
+        
     }
 }

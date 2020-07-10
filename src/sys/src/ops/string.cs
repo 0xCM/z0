@@ -16,14 +16,14 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static string @string<T>(T src)
-            => xsys.@string(src);
+            => proxy.@string(src);
 
         [MethodImpl(Options), Op]
         public static unsafe string @string(char* pSrc)
-            => xsys.@string(pSrc);
+            => proxy.@string(pSrc);
         
         [MethodImpl(Options), Op]
         public static string @string(ReadOnlySpan<char> src)
-            => xsys.@string(src);
+            => proxy.@string(src);
     }
 }

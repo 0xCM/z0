@@ -92,7 +92,11 @@ namespace Z0
 
        Current,
 
-       GetEmptyArray
+       GetEmptyArray,
+
+       GetEnumNames,
+
+      GetEnumValues,       
 
     }
 }

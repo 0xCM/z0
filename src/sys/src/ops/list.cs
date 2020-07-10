@@ -17,6 +17,6 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static List<T> list<T>(params T[] src)
-            => xsys.list(src);
+            => proxy.list(src);
     }
 }

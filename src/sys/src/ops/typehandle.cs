@@ -11,10 +11,10 @@ namespace Z0
     {
         [MethodImpl(Options), Op]
         public static IntPtr handle(Type src) 
-            => xsys.handle(src);
+            => proxy.handle(src);
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static IntPtr handle<T>() 
-            => xsys.handle<T>();
+            => proxy.handle<T>();
     }
 }

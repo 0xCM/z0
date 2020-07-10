@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static Span<T> span<T>(int count)
-            => xsys.span<T>(count);
+            => proxy.span<T>(count);
 
         /// <summary>
         /// Allocates storage for a specified number of T-cells
@@ -27,10 +27,10 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static Span<T> span<T>(uint count)
-            => xsys.span<T>((int)count);
+            => proxy.span<T>((int)count);
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static Span<T> span<T>(IEnumerable<T> src)
-            => xsys.span(src);
+            => proxy.span(src);
     }
 }

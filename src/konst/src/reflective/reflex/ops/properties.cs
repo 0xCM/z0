@@ -12,11 +12,12 @@ namespace Z0
 
     partial struct Reflex
     {
-        /// Selects all instance/static and public/non-public fields declared or inherited by a type
+        /// <summary>
+        /// Selects all instance/static and public/non-public properties declared or inherited by a type
         /// </summary>
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<PropertyInfo> properties(Type src)
-            => src.GetProperties(BF);            
+        public static Indexed<PropertyInfo> properties(Type src)
+            => src.GetProperties(BF);     
     }
 }

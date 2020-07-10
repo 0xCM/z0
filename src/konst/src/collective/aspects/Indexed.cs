@@ -16,36 +16,58 @@ namespace Z0
     {
         public readonly T[] Data;
         
+        public ReadOnlySpan<T> View
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public Span<T> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public MemoryAddress Address
+        {
+            [MethodImpl(Inline)]
+            get => z.address(Data);
+        }
+
         [MethodImpl(Inline)]
-        public static implicit operator T[](Indexed<T> src)
-            => src.Data;
-        
+        public static implicit operator Span<T>(Indexed<T> src)
+            => src.Edit;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<T>(Indexed<T> src)
+            => src.View;
+
         [MethodImpl(Inline)]
         public static implicit operator Indexed<T>(T[] src)
             => new Indexed<T>(src);
 
         [MethodImpl(Inline)]
         public Indexed(T[] content)
-        {
-            Data = content;            
-        }        
+            => Data = content;            
 
-        public T[] Content
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-        
         public ref T this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];
         }
 
-        public int Length
+        public ref T this[uint i]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[i];
+        }
+       public int Length
         {
             [MethodImpl(Inline)]
             get => (int)Data.Length;
-        }        
+        }
+
+        T[] IContented<T[]>.Content 
+            => Data;
     }
 }

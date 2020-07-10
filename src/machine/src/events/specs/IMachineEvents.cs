@@ -5,9 +5,7 @@
 namespace Z0.Machine
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static MachineEvents;
             
     public interface IMachineEvents

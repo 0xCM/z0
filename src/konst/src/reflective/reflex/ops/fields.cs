@@ -17,7 +17,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<FieldInfo> fields(Type src)
-            => src.GetFields(BF);            
+        public static Indexed<FieldInfo> fields(Type src)
+            => src.GetFields(BF);
+
+        [MethodImpl(Inline), Op]
+        public static Indexed<object> attributes(Type src)
+            => src.GetCustomAttributes(false); 
+
+        [MethodImpl(Inline), Op]
+        public static Indexed<string> EnumNames(Type src)                   
+            => sys.EnumNames(src);
     }
 }

@@ -15,9 +15,6 @@ namespace Z0.Asm
     {
         public ICaptureWorkflow Workflow {get;}
 
-        static MemberLocator Locator => Identities.Services.ApiLocator;
-
-
         public ICaptureContext Context 
             => Workflow.Context;
 
@@ -25,7 +22,13 @@ namespace Z0.Asm
         internal ExtractMembersStep(ICaptureWorkflow workflow)
             => Workflow = workflow;
 
-        static ApiMember[] locate(IApiHost host)
+        public static ApiMember[] locate(IApiHost host)
+        {            
+            var located = ApiMemberJit.jit(host);
+            return located;
+        }
+
+        public static ApiMember[] locate(ApiHost[] host)
         {            
             var located = ApiMemberJit.jit(host);
             return located;
@@ -34,16 +37,19 @@ namespace Z0.Asm
         static MemberExtractor Extractor
             => MemberExtraction.service(Extracts.DefaultBufferLength);    
         
-        static ExtractedCode[] extract(ICaptureContext context, IApiHost host)
+        public static ExtractedCode[] extract(ICaptureContext context, IApiHost host)
         {            
             var members = locate(host);
             context.Raise(new MembersLocated(host.Uri, members));            
             return Extractor.Extract(members);
         }
-        
+
+        public static ExtractedCode[] extract(ICaptureContext context, ApiHost[] hosts)
+            => Extractor.Extract(locate(hosts));
+
         public ExtractedCode[] ExtractMembers(IApiHost host)
         {
-            var extracted = Array.Empty<ExtractedCode>();            
+            var extracted = sys.empty<ExtractedCode>();            
             try
             {
                 extracted = extract(Context,host); 
@@ -52,6 +58,20 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 Context.Raise(new WorkflowError($"{host.Uri} extract failure", e));
+            }
+            return extracted;
+        }
+
+        public ExtractedCode[] ExtractMembers(ApiHost[] hosts)
+        {
+            var extracted = sys.empty<ExtractedCode>();            
+            try
+            {
+                extracted = extract(Context,hosts); 
+            }
+            catch(Exception e)
+            {
+                Context.Raise(new WorkflowError($"Extract failure", e));
             }
             return extracted;
         }

@@ -17,7 +17,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static void fill<T>(T src, Span<T> dst)
-            => xsys.fill(src,dst);
+            => proxy.fill(src,dst);
 
         /// <summary>
         /// Overwrites a reference-identified memory segment with a specified value
@@ -27,6 +27,6 @@ namespace Z0
         /// <param name="length">The byte-measured segment length</param>
         [MethodImpl(Options), Op]
         public static ref byte fill(byte src, ref byte dst, uint length)
-            => ref xsys.fill(src, ref dst, length);
+            => ref proxy.fill(src, ref dst, length);
     }
 }

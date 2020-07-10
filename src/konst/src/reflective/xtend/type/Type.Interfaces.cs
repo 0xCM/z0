@@ -14,6 +14,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static Type[] Interfaces(this Type src)
-            => src.GetInterfaces() ?? Array.Empty<Type>();
+            => src.GetInterfaces() ?? sys.empty<Type>();
     }
 }

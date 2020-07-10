@@ -17,18 +17,18 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] array<T>(params T[] src)
-            => xsys.array(src);
+            => proxy.array(src);
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] array<T>(Span<T> src)
-            => xsys.array(src);
+            => proxy.array(src);
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] array<T>(List<T> src)
-            => xsys.array(src);
+            => proxy.array(src);
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] array<T>(IEnumerable<T> src)
-            => xsys.array(src);
+            => proxy.array(src);
     }
 }

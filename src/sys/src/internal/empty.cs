@@ -9,7 +9,7 @@ namespace Z0
             
     using static OpacityKind;
     
-    partial struct xsys
+    partial struct proxy
     {
         [MethodImpl(Options), Opaque(EmptyStringTest)]
         public static bool empty(string src)

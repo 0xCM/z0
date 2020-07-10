@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Machine
 {
-    using System;
-
     public interface IMachineFiles : IContextual<IMachineContext>
     {
         TCaptureArchive Archive {get;}

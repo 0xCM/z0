@@ -11,11 +11,11 @@ namespace Z0
     {
         [MethodImpl(Options), Op]
         public static bool equals(object lhs, object rhs)
-            => xsys.equals(lhs,rhs);
+            => proxy.equals(lhs,rhs);
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static bool equals<T>(T lhs, T rhs)
             where T : struct
-                => xsys.equals(lhs,rhs);
+                => proxy.equals(lhs,rhs);
     }
 }

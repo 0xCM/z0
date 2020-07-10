@@ -11,7 +11,7 @@ namespace Z0
 
     using O = OpacityKind;
 
-    partial struct xsys
+    partial struct proxy
     {
         [MethodImpl(Options), Opaque(O.UnboxObject), Closures(Closure)]
         public static ref T unbox<T>(object src)

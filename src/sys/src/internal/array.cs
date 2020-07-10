@@ -13,7 +13,7 @@ namespace Z0
 
     using static OpacityKind;
 
-    partial struct xsys
+    partial struct proxy
     {
         [MethodImpl(Options), Opaque(ParameterArray), Closures(Closure)]
         public static T[] array<T>(params T[] src)

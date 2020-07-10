@@ -13,14 +13,14 @@ namespace Z0
     {
         [MethodImpl(Options), Op, Closures(Closure)]
         public static IEnumerator<T> enumerator<T>(IEnumerable<T> src)
-            => xsys.enumerator(src);
+            => proxy.enumerator(src);
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static bool next<T>(IEnumerator<T> src)
-            => xsys.next(src);
+            => proxy.next(src);
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T current<T>(IEnumerator<T> src)
-            => xsys.current(src);
+            => proxy.current(src);
     }
 }

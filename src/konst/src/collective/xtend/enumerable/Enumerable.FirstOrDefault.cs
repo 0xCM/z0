@@ -12,14 +12,6 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// Forces enumerable evaluation
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static T[] Force<T>(this IEnumerable<T> src)
-            => src.ToArray();
-
-        /// <summary>
         /// Returns the first element if it exists; otherwise returns the supplied default
         /// </summary>
         /// <typeparam name="T">The item type</typeparam>
@@ -47,7 +39,7 @@ namespace Z0
         /// <param name="items">The items to search</param>
         /// <param name="predicate">The predicate applied during the search</param>
         /// <param name="f">The function to apply to the identified item</param>
-        public static R OnFirstOrDefault<T, R>(this IEnumerable<T> items, Predicate<T> predicate, Func<T, R> f) 
+        public static R OnFirstOrDefault<T, R>(this IEnumerable<T> items, Predicate<T> predicate, Func<T,R> f) 
             => f(items.FirstOrDefault(x => predicate(x)));
     }
 }

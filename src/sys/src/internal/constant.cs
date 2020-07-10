@@ -10,7 +10,7 @@ namespace Z0
             
     using O = OpacityKind;
 
-    partial struct xsys
+    partial struct proxy
     {        
         [MethodImpl(Options), Opaque(O.GetFieldConstant), Closures(Closure)]
         public static T constant<T>(FieldInfo f)

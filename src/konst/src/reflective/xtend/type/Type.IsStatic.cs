@@ -15,8 +15,8 @@ namespace Z0
         /// Determines whether a type is static
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bool IsStatic(this Type t)
-            => t.IsAbstract && t.IsSealed;
+            => Reflex.IsStatic(t);
     }
 }

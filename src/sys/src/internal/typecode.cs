@@ -9,7 +9,7 @@ namespace Z0
         
     using static OpacityKind;
     
-    partial struct xsys
+    partial struct proxy
     {
         [MethodImpl(Options), Opaque(GetGenericTypeCode), Closures(Closure)]
         public static TypeCode typecode<T>()

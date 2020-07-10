@@ -9,7 +9,7 @@ namespace Z0
             
     using static OpacityKind;
 
-    partial struct xsys
+    partial struct proxy
     {        
         [MethodImpl(Options), Opaque(Throw)]
         public static void @throw(string msg)

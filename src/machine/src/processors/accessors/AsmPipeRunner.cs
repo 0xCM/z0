@@ -44,6 +44,10 @@ namespace Z0.Asm
             ListCount = new int[]{0};
         }
 
+        [MethodImpl(Inline)]
+        public bool Include(InstructionSink sink)
+            => Handlers.Include(sink);
+
         public Dictionary<Mnemonic,Instruction[]> RunPipe(params PartId[] parts)
         {            
             using var log = LogPath.Writer();
@@ -54,7 +58,7 @@ namespace Z0.Asm
             for(var i=0; i<parts.Length; i++)
             {
                 var part = parts[i];
-                var data = archive.Read(part).ToArray();
+                var data = archive.Read(part).Array();
                 log.WriteLine($"Running {part} instruction lists through the pipe");
                 RunPipe(data,log);
             }

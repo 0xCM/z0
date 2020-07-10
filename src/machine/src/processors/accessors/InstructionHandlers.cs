@@ -11,8 +11,6 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using K = Kinds;
-
     public readonly struct InstructionHandlers
     {
         public static InstructionHandlers Default 
@@ -22,6 +20,8 @@ namespace Z0.Asm
 
         readonly int BufferLength;
 
+        readonly Dictionary<Mnemonic, InstructionSink> Sinks;
+
         readonly Dictionary<Mnemonic, InstructionCollector> Collectors;
 
         [MethodImpl(Inline)]
@@ -29,6 +29,7 @@ namespace Z0.Asm
         {
             BufferLength = count ??(int)Mnemonic.LAST + 1;
             Activations = new uint[BufferLength];
+            Sinks = new Dictionary<Mnemonic, InstructionSink>();
             Collectors = new Dictionary<Mnemonic, InstructionCollector>();
         }
 
@@ -39,6 +40,9 @@ namespace Z0.Asm
                 collector.Collect(i);
             else
                 Collectors[i.Mnemonic] = InstructionCollector.Create(i);
+
+            if(Sinks.TryGetValue(i.Mnemonic, out var sink))
+                sink.Deposit(i);            
 
             Activations[(int)i.Mnemonic]++;
 
@@ -56,6 +60,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public void OnCall(in Instruction i)
             => Collect(i);        
+
+        [MethodImpl(Inline)]
+        public bool Include(InstructionSink sink)
+            => Sinks.TryAdd(sink.Kind, sink);
 
         public Dictionary<Mnemonic, Instruction[]> Handled
         {

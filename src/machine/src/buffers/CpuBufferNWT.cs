@@ -15,10 +15,6 @@ namespace Z0.Machine
         where W : unmanaged, ITypeWidth
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public static implicit operator CpuBuffer<T>(CpuBuffer<N,W,T> src)
-            => new CpuBuffer<N,W,T>(src.Data);
-
         readonly T[] Data;
 
         [MethodImpl(Inline)]

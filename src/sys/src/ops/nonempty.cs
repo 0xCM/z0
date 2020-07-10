@@ -15,6 +15,6 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Options), Op]
         public static bool nonempty(string src)
-            => xsys.nonempty(src);
+            => proxy.nonempty(src);
     }
 }

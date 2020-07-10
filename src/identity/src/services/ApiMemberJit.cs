@@ -12,6 +12,7 @@ namespace Z0
 
       using static Konst;
 
+    
     public readonly struct ApiMemberJit
     {
         public static ApiMembers jit(IApiHost src)
@@ -22,9 +23,57 @@ namespace Z0
             return all.OrderBy(x => x.Address);
         }
 
+        public static ApiMembers jit(ApiHost[] src)
+        {
+            var direct = JitDirectMembers(src);
+            var generic = JitGenericMembers(src);
+            var all = direct.Concat(generic).Array(); 
+            return all.OrderBy(x => x.Address);
+        }
+
         public static ApiMembers jit<K>(IApiHost src, K kind, GenericPartition g)
             where K : unmanaged, Enum
                 => g.IsGeneric() ? JitLocatedGeneric(src, kind) : JitLocatedDirect(src, kind);
+
+        static ApiMember[] JitDirectMembers(ApiHost[] src)
+            => DefineMembers(JitDirect(src));
+
+        static ApiMember[] JitGenericMembers(ApiHost[] src)
+            => DefineMembers(JitGeneric(src));
+
+        static HostedMethod[] JitDirect(ApiHost[] src)
+        {   
+            var methods = DirectMethods(src);            
+            var located = methods.Select(m => m.WithLocation(Root.address(Jit(m.Method))));  
+            Array.Sort(located);
+            return located;
+        }
+
+        static HostedMethod[] JitGeneric(ApiHost[] src)
+        {   
+            var methods = GenericMethods(src);            
+            var closed = methods.SelectMany(m => (from t in ClosureQuery.numeric(m.Method) select new HostedMethod(m.Host, m.Method.MakeGenericMethod(t))));
+            var located = closed.Select(m => m.WithLocation(Root.address(Jit(m.Method))));
+            Array.Sort(located);
+            return located;
+        }
+
+        static ApiMember[] DefineMembers(HostedMethod[] located)
+        {               
+            var dst = sys.alloc<ApiMember>(located.Length);
+
+            for(var i=0; i<located.Length; i++)
+            {
+                var member = located[i];
+                var method = member.Method;
+                var kind = method.KindId();
+                var id = Diviner.Identify(method);
+                var uri = OpUri.Define(OpUriScheme.Located, member.Host, method.Name, id);
+                dst[i] = new ApiMember(uri,method, kind, member.Location);
+            }
+
+            return dst;                    
+        }
 
         static ApiMember[] JitLocatedDirect(IApiHost src)
             =>  from m in DirectMethods(src)
@@ -68,7 +117,6 @@ namespace Z0
                 let address = Root.address(Jit(reified))
                 select new ApiMember(uri, reified, m.KindId(), address)).Array();
 
-
         static ApiMember[] HostedGeneric<K>(IApiHost src, K kind)
             where K : unmanaged, Enum
                 => (from m in GenericMethods(src,kind)
@@ -77,7 +125,6 @@ namespace Z0
                 let id = Diviner.Identify(reified)
                 let uri = OpUri.Define(OpUriScheme.Type, src.Uri, m.Name, id)
                 select new ApiMember(uri, reified, m.KindId())).Array();
-
 
         static MethodInfo[] GenericMethods(IApiHost src)
             => from m in src.HostType.DeclaredMethods().OpenGeneric(1)
@@ -90,6 +137,31 @@ namespace Z0
             => from m in src.HostType.DeclaredMethods().NonGeneric()
             where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
             select m;
+
+        public static HostedMethod[] DirectMethods(ApiHost[] src)
+        {
+            var dst = z.list<HostedMethod>();
+            foreach(var host in src)
+            {
+                var methods = host.HostType.DeclaredMethods().NonGeneric().Where(IsDirectApiMember).Select(m => new HostedMethod(host.Uri, m));
+                dst.AddRange(methods);
+            }
+            return dst.ToArray();
+        }
+
+        public static HostedMethod[] GenericMethods(ApiHost[] src)
+        {
+            var dst = z.list<HostedMethod>();
+            foreach(var host in src)
+                dst.AddRange(host.HostType.DeclaredMethods().OpenGeneric(1).Where(IsGenericApiMember).Select(m => new HostedMethod(host.Uri, m)));
+            return dst.ToArray();
+        }
+
+        static bool IsDirectApiMember(MethodInfo src)
+            => src.Tagged<OpAttribute>() && !src.AcceptsImmediate();
+
+        static bool IsGenericApiMember(MethodInfo src)
+            => src.Tagged<OpAttribute>() && src.Tagged<ClosuresAttribute>() && !src.AcceptsImmediate();
 
         static MethodInfo[] GenericMethods<K>(IApiHost src, K kind)
             where K : unmanaged, Enum

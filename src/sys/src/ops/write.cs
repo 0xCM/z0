@@ -11,6 +11,6 @@ namespace Z0
     {
         [MethodImpl(Options), Op, Closures(Closure)]
         public static void write<T>(in T src, ref byte dst)
-            => xsys.write(src, ref dst);
+            => proxy.write(src, ref dst);
     }
 }

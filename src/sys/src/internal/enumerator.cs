@@ -11,7 +11,7 @@ namespace Z0
 
     using static OpacityKind;
 
-    partial struct xsys
+    partial struct proxy
     {
         [MethodImpl(Options), Opaque(GetEnumerator), Closures(Closure)]
         public static IEnumerator<T> enumerator<T>(IEnumerable<T> src)

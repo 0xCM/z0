@@ -9,7 +9,7 @@ namespace Z0
         
     using static OpacityKind;
 
-    partial struct xsys
+    partial struct proxy
     {
         [MethodImpl(Options), Opaque(ClearSpan), Closures(Closure)]
         public static ref readonly Span<T> clear<T>(in Span<T> src)

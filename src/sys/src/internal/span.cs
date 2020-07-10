@@ -11,7 +11,7 @@ namespace Z0
 
     using static OpacityKind;
     
-    partial struct xsys
+    partial struct proxy
     {
         [MethodImpl(Options), Opaque(AllocSpan), Closures(Closure)]
         public static Span<T> span<T>(int count)

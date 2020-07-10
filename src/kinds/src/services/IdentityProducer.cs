@@ -8,8 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
+    public interface TKindServices
+    {
+        TIdentityProducer IdentityProducer 
+            => Z0.IdentityProducer.Service;
+        
+        TIdentityReflector IdentityReflector 
+            => Z0.IdentityReflector.Service;
+
+        TIdentityParser IdentityParser 
+            => OpIdentityParser.Service;
+    }   
+    
     [ApiHost]
     public readonly struct IdentityProducer : TIdentityProducer, IApiHost<IdentityProducer>
     {

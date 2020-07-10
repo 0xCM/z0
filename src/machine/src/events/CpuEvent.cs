@@ -11,12 +11,10 @@ namespace Z0.Machine
     
     public readonly struct CpuEvent : IAppEvent<CpuEvent>
     {
-        public static CpuEvent Empty => default;
+        public string Label {get;}
 
-        [MethodImpl(Inline)]
-        public static CpuEvent Create(string label, object content)
-            => new CpuEvent(label, content.ToString());
-
+        public string Content {get;}        
+        
         [MethodImpl(Inline)]
         public static implicit operator CpuEvent((string label, object content) src)
             => new CpuEvent(src.label, src.content?.ToString() ?? string.Empty);
@@ -28,14 +26,13 @@ namespace Z0.Machine
             Content = content;
         }
 
-        public string Label {get;}
-
-        public string Content {get;}
-
         public string Description
              => $"{Label}: {Content}";
     
         public CpuEvent Zero 
             => Empty;                
+
+        public static CpuEvent Empty 
+            => default;
     }
 }

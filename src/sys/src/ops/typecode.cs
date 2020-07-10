@@ -11,10 +11,10 @@ namespace Z0
     {
         [MethodImpl(Options), Op, Closures(Closure)]
         public static TypeCode typecode<T>()
-            => xsys.typecode<T>();
+            => proxy.typecode<T>();
 
         [MethodImpl(Options), Op]
         public static TypeCode typecode(Type src)
-            => xsys.typecode(src);
+            => proxy.typecode(src);
     }
 }

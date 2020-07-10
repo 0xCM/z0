@@ -12,8 +12,8 @@ namespace Z0
 
     partial class XTend
     {
-       [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T[] Array<T>(this IEnumerable<T> src)
-            => sys.array(src);
+            => proxy.array(src);
     }
 }

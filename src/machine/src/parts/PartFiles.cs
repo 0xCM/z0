@@ -13,9 +13,28 @@ namespace Z0
 
     using static Konst;
 
-
     public readonly struct PartFiles
     {
+        public static MemberParseRecord[] parsed(IAsmContext context, PartId part)
+        {
+            var pfs = PartFiles.Service(context);
+            var files = PartFiles.Service(context).ParseFiles(part);
+            var parser = ParseReportParser.Service;
+            if(files.TryGetValue(part, out var partFiles))
+            {
+                for(var j= 0; j<partFiles.Length; j++)
+                {
+                    var path = partFiles[j].Path;
+                    var records = parser.ParseRecords(path);
+                    if(records)
+                    {
+                        return records.Value;
+                    }
+                }                    
+            }       
+            return sys.empty<MemberParseRecord>();
+        }
+
         public static PartFiles Service(IAsmContext context)
             => new PartFiles(context);
 
@@ -35,7 +54,6 @@ namespace Z0
             AppPaths = Context.AppPaths.ForApp(PartId.Control);
         }
         
-
         IEnumerable<FilePath> ParseFilePaths
                 => CaptureArchive(AppPaths.AppCaptureRoot).ParseFiles;
 
@@ -82,6 +100,5 @@ namespace Z0
             else
                 return PartId.None;
         }
-
     }
 }

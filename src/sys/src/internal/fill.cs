@@ -11,7 +11,7 @@ namespace Z0
 
     using static OpacityKind;
 
-    partial struct xsys
+    partial struct proxy
     {
         [MethodImpl(Options), Opaque(FillSpan), Closures(Closure)]
         public static void fill<T>(T src, Span<T> dst)

@@ -21,17 +21,6 @@ namespace Z0.Machine
             where T : unmanaged
                 => new CpuBuffer<N,W,T>(new T[value<N>()]);
 
-        [MethodImpl(Inline)]
-        public static CpuBuffer<N,W,T> Init<N,W,T>(T[] data)
-            where N : unmanaged, ITypeNat
-            where W : unmanaged, ITypeWidth
-            where T : unmanaged
-                => new CpuBuffer<N,W,T>(data);
-
-        [MethodImpl(Inline)]
-        public static CpuBuffer Init(byte[] data)
-            => new CpuBuffer(data);
-
         /// <summary>
         /// The number of bytes covered by the buffer
         /// </summary>

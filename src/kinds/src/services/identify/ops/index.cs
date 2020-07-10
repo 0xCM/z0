@@ -19,27 +19,6 @@ namespace Z0
         static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
 
-        /// <summary>
-        /// Returns the duplicate identities found in the source stream, if any; otherwise, returns an empty array
-        /// </summary>
-        /// <param name="src">The identities to search for duplicates</param>
-        public static OpIdentity[] duplicates(IEnumerable<OpIdentity> src)
-        {
-            var index = new Dictionary<OpIdentity,int>();            
-            var distinct = src.ToHashSet();
-            if(distinct.Count != src.Count())
-            {
-                foreach(var id in src)
-                {
-                    if(index.TryGetValue(id, out var count ))
-                        index[id] = ++count;
-                    else
-                        index[id] = 1;
-                }
-            }
-
-            return (from kvp in index where kvp.Value > 1 select kvp.Key).ToArray();
-        }
         
         public static OpIndex<T> index<T>(IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
         {

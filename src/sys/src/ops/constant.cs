@@ -13,10 +13,10 @@ namespace Z0
     {        
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T constant<T>(FieldInfo src)
-            => xsys.constant<T>(src);
+            => proxy.constant<T>(src);
 
         [MethodImpl(Options), Op]
         public static object constant(FieldInfo src)
-            => xsys.constant(src);
+            => proxy.constant(src);
     }
 }

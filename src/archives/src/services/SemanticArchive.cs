@@ -8,5 +8,4 @@ namespace Z0
     {
         public static TSemanticArchive Service => default(SemanticArchive);        
     }
-
 }

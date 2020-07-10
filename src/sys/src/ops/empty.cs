@@ -15,7 +15,7 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Options), Op]
         public static bool empty(string src)
-            => xsys.empty(src);
+            => proxy.empty(src);
 
         /// <summary>
         /// Returns an empty array
@@ -23,6 +23,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] empty<T>()
-            => xsys.empty<T>();
+            => proxy.empty<T>();
     }
 }

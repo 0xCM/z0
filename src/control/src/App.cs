@@ -10,6 +10,7 @@ namespace Z0
     public static partial class XTend
     {
 
+
     }
 
     class App : AppShell<App,IAppContext>
@@ -27,19 +28,18 @@ namespace Z0
             host.Execute(parts);
         }
 
-        static PartId[] ParseParts(params string[] args)
-            => args.Map(arg => Enums.Parse<PartId>(arg).ValueOrDefault()).WhereSome();
-        
+        void RunCapture2(params PartId[] parts)
+        {
+            using var host = new CaptureHost(ContextFactory.CreateAsmContext(Context), Context.AppPaths.CaptureRoot);
+            host.Execute2(parts);
+        }
+
         public override void RunShell(params string[] args)
         {            
-            var parts = PartIdParser.Service.ParseValid(args);
-            if(parts.Length != 0)
-            {
-                var describe = parts.Map(p => p.Format()).Concat(Chars.Comma);
-                Context.NotifyConsole($"Constraining capture workflow to: {describe}");
-            }
-            
-            RunCapture(parts);   
+            var parts = PartIdParser.parse(args);
+            term.magenta($"Capturing {parts.Describe()}");            
+            //RunCapture(parts);   
+            RunCapture2(parts);
         }
 
         public static void Main(params string[] args)

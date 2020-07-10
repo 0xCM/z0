@@ -6,11 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Diagnostics;
 
     using static Konst;
 
     partial struct z
-    {            
+    {                                 
         /// <summary>
         /// Creates an homogenous pair
         /// </summary>

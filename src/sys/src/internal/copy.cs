@@ -13,7 +13,7 @@ namespace Z0
 
     using O = OpacityKind;
 
-    partial struct xsys
+    partial struct proxy
     {
         [MethodImpl(Options), Opaque(O.CopyBlock)]
         public static void copy(in byte src, ref byte dst, uint count)

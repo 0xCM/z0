@@ -14,7 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct FileExt : IFileExt<asci8>
     {        
-
         [MethodImpl(Inline)]
         public static FileName FileName<A>(string name, A ext)
             where A : unmanaged, IAsciSequence

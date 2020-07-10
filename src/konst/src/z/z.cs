@@ -24,4 +24,12 @@ namespace Z0
 
         const NumericKind Closure = UnsignedInts;
     }
+
+    [ApiHost("x")]
+    public static partial class XTend
+    {
+        const NumericKind Closure = UnsignedInts;
+
+        const MethodImplOptions MethodOptions = MethodImplOptions.AggressiveInlining;
+    }
 }

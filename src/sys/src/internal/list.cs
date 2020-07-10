@@ -11,7 +11,7 @@ namespace Z0
             
     using static OpacityKind;
 
-    partial struct xsys
+    partial struct proxy
     {        
         [MethodImpl(Options), Opaque(ArrayToList), Closures(Closure)]
         public static List<T> list<T>(params T[] src)

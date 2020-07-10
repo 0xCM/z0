@@ -20,7 +20,10 @@ namespace Z0
         public static MemberExtractor service(byte[] buffer)
             => new MemberExtractor(buffer);
         
-        static ApiMembers members(IApiHost src)
+        public static ApiMembers members(IApiHost src)
+            => ApiMemberJit.jit(src);
+
+        public static ApiMembers members(ApiHost[] src)
             => ApiMemberJit.jit(src);
 
         /// <summary>

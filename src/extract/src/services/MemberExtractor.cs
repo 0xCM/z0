@@ -40,11 +40,11 @@ namespace Z0
         public ExtractedCode[] Extract(ApiMember[] members)
             => MemberExtraction.extract(members, Buffer);
 
-        /// <summary>
-        /// Extracts encoded content for all operations defined by a host
-        /// </summary>
-        /// <param name="src">The source member</param>
         public ExtractedCode[] Extract(IApiHost src)
             => MemberExtraction.extract(ApiMemberJit.jit(src), Buffer);
+
+        public ExtractedCode[] Extract(ApiHost[] src)
+            => MemberExtraction.extract(ApiMemberJit.jit(src), Buffer);
+
     }
 }

@@ -6,23 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Konst;
     using static IDI;
     
-    public interface IIdentityParser : IInfallibleParser<OpIdentity>
+    public readonly struct OpIdentityParser : TIdentityParser
     {
-        [MethodImpl(Inline)]
-        OpIdentity IInfallibleParser<OpIdentity>.Parse(string text)
-            => OpIdentityParser.Service.Parse(text);
-        
-        OpIdentity INullary<OpIdentity>.Zero 
-            => OpIdentity.Empty;
-    }
-
-    public readonly struct OpIdentityParser : IIdentityParser
-    {
-        public static IIdentityParser Service => default(OpIdentityParser);
+        public static OpIdentityParser Service => default(OpIdentityParser);
 
         public static OpIdentity parse(string text)        
         {

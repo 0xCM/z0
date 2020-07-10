@@ -16,11 +16,11 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] alloc<T>(int count)
-            => xsys.alloc<T>(count);
+            => proxy.alloc<T>(count);
 
         [MethodImpl(Options)]
         public static T[] alloc<T>(ulong count)
-            => xsys.alloc<T>((int)count);
+            => proxy.alloc<T>((int)count);
 
         /// <summary>
         /// Allocates a specified number of bytes
@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="count">The number of bytes to allocate</param>
         [MethodImpl(Options),  Op]
         public static byte[] alloc(int count)
-            => xsys.alloc(count);
+            => proxy.alloc(count);
     }
 }

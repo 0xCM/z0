@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Dsl;
-
     using static Konst;
     using static Root;
 

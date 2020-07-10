@@ -11,14 +11,14 @@ namespace Z0
     {        
         [MethodImpl(Options), Op]
         public static void @throw(string msg)
-            => xsys.@throw(msg);
+            => proxy.@throw(msg);
 
         [MethodImpl(Options), Op]
         public static void @throw(Exception e)
-            => xsys.@throw(e);
+            => proxy.@throw(e);
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T @throw<T>(Exception e)
-            => xsys.@throw<T>(e);
+            => proxy.@throw<T>(e);
     }
 }

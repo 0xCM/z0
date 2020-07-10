@@ -30,18 +30,48 @@ namespace Z0.Asm
         }
         
         IEnumerable<IPartCatalog> Catalogs(IApiSet src, params PartId[] parts)
-            => parts.Length == 0 ? src.Catalogs 
-            : from c in src.Catalogs
-              where parts.Contains(c.PartId) && c.ApiHostCount != 0
-              select c;
+        {
+            if(parts.Length == 0)
+            {
+                foreach(var c in src.Catalogs)
+                    yield return c;
+            }
+            else
+            {
+                for(var i=0; i<parts.Length; i++)                
+                {
+                    var id = parts[i];
+                    var catalog = src.Catalogs.Where(c => c.PartId == id && c.ApiHostCount != 0).FirstOrDefault();
+                    if(catalog != null)
+                        yield return catalog;
+                }
+            }
+        }
         
-
         public void CaptureParts(AsmArchiveConfig config, params PartId[] parts)
         {
             var dst = InitTarget(config, parts);      
-            z.iter(Catalogs(Context.ApiSet, parts), c => CapturePart(c,dst));
+            var catalogs = Catalogs(Context.ApiSet, parts).Array();
+            CaptureParts(catalogs, dst);
         }
 
+        public void CaptureParts2(AsmArchiveConfig config, params PartId[] parts)
+        {
+            var dst = InitTarget(config, parts);      
+            var catalogs = Catalogs(Context.ApiSet, parts).Array();
+            var hosts = catalogs.SelectMany(c => c.Hosts).Array();
+            var step = CaptureHostStep.create(Workflow); 
+            step.CaptureHosts(hosts,dst);
+        }
+
+        public void CaptureParts(IPartCatalog[] src, TCaptureArchive dst)
+        {
+            for(var i=0; i<src.Length; i++)
+            {
+                CapturePart(src[i], dst);
+            }
+        }
+        
         public void CapturePart(IPartCatalog src, TCaptureArchive dst)
         {
             if(src.HasApiHostContent)

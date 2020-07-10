@@ -11,6 +11,6 @@ namespace Z0
     {
         [MethodImpl(Options), Op, Closures(Closure)]
         public static ref readonly Span<T> clear<T>(in Span<T> src)
-            => ref xsys.clear(src);
+            => ref proxy.clear(src);
     }
 }

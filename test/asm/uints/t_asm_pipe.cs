@@ -8,6 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Collections.Generic;
+    using System.IO;
+
+    using D = Dsl;
 
     using static Konst;
     using static Root;
@@ -16,22 +19,38 @@ namespace Z0.Asm
 
     public class t_asm_pipe : t_asm<t_asm_pipe>
     {
+        readonly StreamWriter SinkLog;
+
+        int Counter;
+        
         public t_asm_pipe()
         {
-            FakeBase = 1;
+            SinkLog = CaseWriter("sink_log");
         }
         
+        void Receiver(in Instruction src)
+        {
+            SinkLog.WriteLine(text.concat(((MemoryAddress)src.IP).Format(), Space,  src.Mnemonic.ToString().PadRight(12), ++Counter));
+        }
+        
+        protected override void OnDispose()
+        {
+            SinkLog.Dispose();
+        }
+        
+        InstructionSink CallSink()
+            => D.Call.sink(Receiver);
 
         public void RunPipe()
         {            
-            var parts = Root.array(PartId.DVec, PartId.GVec);
+            var parts = z.array(PartId.DVec, PartId.GVec);
             Trace($"Running pipe for parts {parts.Format()}");
             var runner = AsmPipeRunner.Create(AppPaths, AsmCheck.Archives, CasePath("AsmPipeLog"));
+            runner.Include(CallSink());
+            
             var handled = runner.RunPipe(parts);
             Trace($"Collected data for {handled.Count} instruction classes");            
         }
-
-        MemoryAddress FakeBase;
 
         void check_unary_ops(IdentifiedCode[] src)
         {

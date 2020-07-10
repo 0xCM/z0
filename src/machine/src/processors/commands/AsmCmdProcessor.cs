@@ -71,7 +71,7 @@ namespace Z0.Asm
             Sequence = sys.alloc<int>(1);
             Offset = sys.alloc<uint>(1);
         }
-
+        
         public CommandRecordSets<Mnemonic> Process(params PartId[] parts)
         {
             var pfs = PartFiles.Service(Context);

@@ -9,7 +9,7 @@ namespace Z0
         
     using static OpacityKind;
 
-    partial struct xsys
+    partial struct proxy
     {
         [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
         public static T[] alloc<T>(int count)

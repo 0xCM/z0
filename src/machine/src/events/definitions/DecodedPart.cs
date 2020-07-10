@@ -17,7 +17,10 @@ namespace Z0.Machine
     {
         public readonly struct DecodedPart : IMachineEvent<E>
         {
-            public static E Empty => new E(PartInstructions.Empty);
+            public PartInstructions Instructions {get;}
+
+            public static E Empty 
+                => new E(PartInstructions.Empty);
 
             [MethodImpl(Inline)]
             public static DecodedPart Create(PartInstructions inxs)
@@ -29,13 +32,14 @@ namespace Z0.Machine
                 Instructions = inxs;
             }
             
-            public PartInstructions Instructions {get;}
+            public PartId Part 
+                => Instructions.Part;
 
-            public PartId Part => Instructions.Part;
-
-            public AppMsgColor Flair => AppMsgColor.Cyan;
+            public AppMsgColor Flair 
+                => AppMsgColor.Cyan;
             
-            public E Zero => Empty; 
+            public E Zero 
+                => Empty; 
             
             public string Description
                 => $"{Instructions.TotalCount}  {Instructions.Part} instructions decoded";

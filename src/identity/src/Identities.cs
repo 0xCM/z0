@@ -27,31 +27,19 @@ namespace Z0
         MemberLocator ApiLocator 
             => Svc.MemberLocator.Service;
 
-        // [MethodImpl(Inline)]
-        // IApiMemberQuery QueryHosted(IApiHost host)
-        //     => ApiMemberQuery.Create(ApiLocator.Hosted(host));
-
-        // [MethodImpl(Inline)]
-        // IApiMemberQuery JitMembers(IApiHost host)
-        //     => ApiMemberQuery.Create(ApiLocator.Jit(host));
-
-        /// <summary>
-        /// Retrieves the members defined by an api host
-        /// </summary>
-        /// <param name="host">The host uri</param>
-        [MethodImpl(Inline)]
         ApiMembers JitHosted(IApiHost host)
             => ApiMemberJit.jit(host);
 
+        ApiMembers JitHosted(ApiHost[] hosts)
+            => ApiMemberJit.jit(hosts);
+
         /// <summary>
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        [MethodImpl(Inline)]
         ApiMembers JitApi(IApiSet api, ApiHostUri host)
             => api.FindHost(host).MapRequired(host => JitHosted(host));        
 
-        [MethodImpl(Inline)]
         IMemberExtractReader ExtractReader(IApiSet api)
             => MemberExtractReader.Create(api);
 
@@ -59,7 +47,6 @@ namespace Z0
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        [MethodImpl(Inline)]
         ApiMembers HostedMembers(IApiHost host)
             => ApiLocator.Locate(host);
 
@@ -67,7 +54,6 @@ namespace Z0
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        [MethodImpl(Inline)]
         ApiMembers HostedMembers(IApiSet api, ApiHostUri host)
             => api.FindHost(host).MapRequired(host => HostedMembers(host));
     }

@@ -12,11 +12,11 @@ namespace Z0
         [MethodImpl(Options), Op, Closures(Closure)]
         public static ref T unbox<T>(object src)
             where T : struct
-                => ref xsys.unbox<T>(src);
+                => ref proxy.unbox<T>(src);
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static ref T unbox<T>(Enum src)
             where T : unmanaged
-                => ref xsys.unbox<T>(src);
+                => ref proxy.unbox<T>(src);
     }
 }

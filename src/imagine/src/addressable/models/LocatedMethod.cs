@@ -5,13 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct LocatedMethod : ITextual
+    public readonly struct LocatedMethod : ITextual, IComparable<LocatedMethod>
     {
         public MethodInfo Method {get;}
 
@@ -57,5 +58,9 @@ namespace Z0
 
         public override string ToString() 
             => Format();
+
+        [MethodImpl(Inline)]
+        public int CompareTo(LocatedMethod src)
+            => Location.CompareTo(src.Location);
     }
 }

@@ -11,10 +11,10 @@ namespace Z0
     {                
         [MethodImpl(Options), Op, Closures(Closure)]                
         public static Type type<T>()
-            => xsys.type<T>();
+            => proxy.type<T>();
 
         [MethodImpl(Options), Op]
         public static Type type(object src)
-            => xsys.type(src);
+            => proxy.type(src);
     }
 }

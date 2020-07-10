@@ -53,5 +53,12 @@ namespace Z0.Asm
                 writer.WriteLine(record.Format());
             }            
         }
+
+
+        public void blah_blah()
+        {
+            var records = PartFiles.parsed(Context, PartId.Sys);
+            Trace(records.Length);
+        }        
     }
 }

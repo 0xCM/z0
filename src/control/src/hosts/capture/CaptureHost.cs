@@ -65,7 +65,6 @@ namespace Z0
         
         public void Execute(params PartId[] parts)
         {
-
             if(Settings.EmitImmArtifacts)
                 EmitImm(parts);
 
@@ -76,6 +75,19 @@ namespace Z0
                 CheckExec(parts);
         }
 
+        public void Execute2(params PartId[] parts)
+        {
+            if(Settings.EmitPrimaryArtifacts)
+                EmitPrimary2(parts);
+
+            if(Settings.EmitImmArtifacts)
+                EmitImm(parts);
+
+            if(Settings.CheckExecution)
+                CheckExec(parts);
+        }
+
+
         void EmitImm(params PartId[] parts)
         {
             ImmWorkflow.ClearArchive(parts);
@@ -85,6 +97,11 @@ namespace Z0
         void EmitPrimary(params PartId[] parts)
         {
             CaptureWorkflow.Run(WorkflowConfig, parts);
+        }
+
+        void EmitPrimary2(params PartId[] parts)
+        {
+            CaptureWorkflow.Run2(WorkflowConfig, parts);
         }
 
         void CheckExec(params PartId[] parts)

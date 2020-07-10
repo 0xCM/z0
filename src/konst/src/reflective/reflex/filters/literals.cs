@@ -14,13 +14,14 @@ namespace Z0
     partial struct Reflex
     {
         [MethodImpl(Inline), Op]
-        public static Span<FieldInfo> literals(ReadOnlySpan<FieldInfo> src, Span<FieldInfo> dst)
+        public static Span<FieldInfo> literals(in Indexed<FieldInfo> src, Span<FieldInfo> dst)
         {
             var k = 0u;            
-            var count = src.Length;
+            var view = src.View;
+            var count = view.Length;
             for(var i=0u; i<count; i++)
-                if(IsLiteral(skip(src,i)))
-                    seek(dst, k++) = skip(src,i);            
+                if(IsLiteral(skip(view,i)))
+                    seek(dst, k++) = skip(view,i);
             return slice(dst,k);                    
         }
 

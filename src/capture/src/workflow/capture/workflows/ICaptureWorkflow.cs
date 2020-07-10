@@ -13,7 +13,7 @@ namespace Z0.Asm
         IMatchAddresses MatchAddresses 
             => new MatchAddressesStep(this);
 
-        IManageCaptureStep ManageCapture
+        ManageCaptureStep ManageCapture
             => new ManageCaptureStep(this);
 
         IReportExtractsStep ReportExtracts
@@ -36,5 +36,9 @@ namespace Z0.Asm
         
         void Run(AsmArchiveConfig config, params PartId[] parts)
             => ManageCapture.CaptureParts(config, parts);        
+
+        void Run2(AsmArchiveConfig config, params PartId[] parts)
+            => ManageCapture.CaptureParts2(config, parts);        
+
     }
 }
