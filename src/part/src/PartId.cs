@@ -10,13 +10,16 @@ public enum PartId : ulong
 {
     None = 0,
 
-    Konst = 1,
+    Sys = 1,
 
-    Models = 2,
 
-    Part = 3,
+    Konst = 20,
 
-    Seed = 4,     
+    Models = 21,
+
+    Part = 22,
+
+    Seed = 23,     
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <Part>$(Src)part/z0.part.csproj</Part>
+    <Sys>$(Src)sys/z0.sys.csproj</Sys>
+
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
     <Models>$(Src)models/z0.models.csproj</Models>
     <Expressive>$(Src)expressive/z0.expressive.csproj</Expressive>

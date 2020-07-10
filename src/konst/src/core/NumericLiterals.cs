@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost("numeric.literals")]
+    [ApiHost]
     public readonly struct NumericLiterals
     {       
         /// <summary>

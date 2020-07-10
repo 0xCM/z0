@@ -7,8 +7,6 @@ namespace Z0
     using NK = NumericKind;
     using DW = DataWidth;
 
-    using static DataWidth;
-
     partial struct Konst
     {
         /// <summary>
