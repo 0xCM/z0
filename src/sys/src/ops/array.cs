@@ -11,6 +11,7 @@ namespace Z0
     using System.Reflection;
 
     using static OpacityKind;
+    using static Part;
     
     partial struct sys
     {

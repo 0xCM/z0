@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
 
@@ -32,4 +33,10 @@ namespace Z0
         public static PartId Id(this Assembly src)
             => Part.id(src);
     }
+
+    partial class XTend
+    {
+    }    
+
+
 }

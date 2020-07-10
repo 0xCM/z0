@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static IdentityShare;
 
-
     public readonly struct ApiHostUri : IUri<ApiHostUri>, INullary<ApiHostUri>
     {        
         public static FileName HostFileName(PartId owner, string hostname, FileExtension ext)

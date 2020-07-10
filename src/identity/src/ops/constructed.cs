@@ -46,7 +46,7 @@ namespace Z0
             id += IDI.Generic;                           
             id += TypeArgIdentity(src);
             id += ParamIdentity(src);
-            return Identify.Op(id);
+            return OpIdentityParser.parse(id);
         }                
     }
 }

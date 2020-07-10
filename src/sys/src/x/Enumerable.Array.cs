@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
-    using static Konst;
-        
+    using static Part;
+
     partial class XTend
     {
-        [MethodImpl(Inline)]
-        public static OpIdentity Generialize(this GenericOpIdentity src)
-            => Identify.Op(src.Identifier);
+       [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static T[] Array<T>(this IEnumerable<T> src)
+            => sys.array(src);
     }
 }

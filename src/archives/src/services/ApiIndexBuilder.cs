@@ -35,7 +35,7 @@ namespace Z0
         {
             var code = EncodedHexReader.Service.Read(src).ToArray();
             var host = ApiSet.FindHost(uri).Require();
-            var members = Locator.Hosted(host);
+            var members = Locator.Locate(host);
             var codeIndex =  UriHexQuery.Service.CreateIndex(code);
             var memberIndex = ApiIndexBuilder.IndexApi(members);
             return CreateIndex(memberIndex, codeIndex);
@@ -55,7 +55,7 @@ namespace Z0
         public static ApiCodeIndex create(IMemberLocator locator, IApiSet api, ApiHostUri host, FolderPath root)
         {
             var indexer =  Services.IndexBuilder(api,locator);
-            var members = locator.Hosted(api.FindHost(host).Require());
+            var members = locator.Locate(api.FindHost(host).Require());
             var apiIndex = IndexApi(members);
             var archive =  Services.CaptureArchive(root);
             var paths = archive.HostArchive(host);

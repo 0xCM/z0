@@ -19,61 +19,6 @@ namespace Z0
 
     public partial class Identify
     {        
-        public static ITypeIdentityProvider provider(Type src, Func<Type,ITypeIdentityProvider> fallback)
-            => TypeIdentityProviders.GetOrAdd(src.EffectiveType(), fallback);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="basename">The base name of the resource</param>
-        /// <param name="w">The resource bit width</param>
-        /// <param name="kind">The numeric kind of the resource</param>
-        [MethodImpl(Inline)]
-        public static TypeIdentity resource(string basename, ITypeWidth w, NumericKind kind)
-            => TypeIdentity.Define($"{basename}{w}x{kind.Format()}");
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="basename">The base name of the resource</param>
-        /// <param name="w1">The first bit width</param>
-        /// <param name="w2">The second bit width</param>
-        /// <param name="kind">The numeric kind of the resource</param>
-        [MethodImpl(Inline)]
-        public static TypeIdentity resource(string basename, ITypeWidth w1, ITypeWidth w2, NumericKind kind)
-            => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Format()}");
-
-        /// <summary>
-        /// Defines a numeric resource identity predicated on natural bitwidth
-        /// </summary>
-        /// <param name="basename">The base name of the resource</param>
-        /// <param name="w">The resource bit width</param>
-        /// <param name="kind">The numeric kind of the resource</param>
-        [MethodImpl(Inline)]
-        public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
-            => TypeIdentity.Define($"{basename}{w}x{kind.Format()}");
-
-        /// <summary>
-        /// Defines a numeric resource identity predicated on two natural bitwidths
-        /// </summary>
-        /// <param name="basename">The base name of the resource</param>
-        /// <param name="w1">The first bit width</param>
-        /// <param name="w2">The second bit width</param>
-        /// <param name="kind">The numeric kind of the resource</param>
-        [MethodImpl(Inline)]
-        public static TypeIdentity resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
-            => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Format()}");   
-         
-        /// <summary>
-        /// Defines a segmented type identity predicated on type width numeric kind specifications
-        /// </summary>
-        /// <param name="name">The type name</param>
-        /// <param name="wk">The width kind</param>
-        /// <param name="nk">The numeric kind</param>
-        [MethodImpl(Inline)]
-        public static TypeIdentity segmented(string name, TypeWidth wk, NumericKind nk)
-            => TypeIdentity.Define($"{name}{wk.FormatValue()}x{nk.Format()}");
-
         /// <summary>
         /// Computes the primal types identified by a specified kind
         /// </summary>
@@ -139,16 +84,11 @@ namespace Z0
         public static string HostUri(Type host)
             => $"{Identify.Owner(host)}{PathSep}{host.Name}";
 
-
         static ConcurrentDictionary<NumericKind, HashSet<NumericKind>> KindsetCache {get;}       
             = new ConcurrentDictionary<NumericKind, HashSet<NumericKind>>();
 
         static ConcurrentDictionary<NumericKind, HashSet<Type>> TypesetCache {get;}       
             = new ConcurrentDictionary<NumericKind, HashSet<Type>>();                 
-
-        static ConcurrentDictionary<Type, ITypeIdentityProvider> TypeIdentityProviders {get;}
-            = new ConcurrentDictionary<Type, ITypeIdentityProvider>();
-
 
         static HashSet<Type> CreateTypeset(NumericKind k)
             => GetKindset(k).Select(NumericKinds.type).ToHashSet();         

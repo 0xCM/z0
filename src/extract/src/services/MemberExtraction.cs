@@ -21,7 +21,7 @@ namespace Z0
             => new MemberExtractor(buffer);
         
         static ApiMembers members(IApiHost src)
-            => Identities.Services.ApiLocator.Locate(src);
+            => ApiMemberJit.jit(src);
 
         /// <summary>
         /// Extracts encoded content for all operations defined by a host

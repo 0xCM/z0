@@ -45,6 +45,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source member</param>
         public ExtractedCode[] Extract(IApiHost src)
-            => MemberExtraction.extract(Identities.Services.ApiLocator.Locate(src), Buffer);
+            => MemberExtraction.extract(ApiMemberJit.jit(src), Buffer);
     }
 }

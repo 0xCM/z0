@@ -32,7 +32,7 @@ namespace Z0
             id += IDI.PartSep;
             id += FormatArgs(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, args(src));
 
-            return Identify.Op(id);
+            return OpIdentityParser.parse(id);
         }        
 
         static string FormatArgs(object open, object close, char sep, IEnumerable<string> args)

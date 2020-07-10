@@ -129,8 +129,8 @@ namespace Z0.Asm
 
         TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)
         {
-            var dId = Identify.Op(name, w, kind, false);
-            var gId = Identify.Op(name, w, kind, true);            
+            var dId = OpIdentityBuilder.build(name, w, kind, false);
+            var gId = OpIdentityBuilder.build(name, w, kind, true);            
             var archive = EncodedHexArchive.Service(TargetArchive.CodeDir);
             var dBits = archive.Read(ApiHosts.from<dvec>().Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiHosts.from<gvec>().Uri).Where(x => x.Id == gId).Single();

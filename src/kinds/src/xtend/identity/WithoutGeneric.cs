@@ -23,7 +23,7 @@ namespace Z0
                 return src;
 
             parts[1] = parts[1].WithText(parts[1].Identifier.Substring(1));
-            return Identify.Op(parts);
+            return OpIdentityBuilder.build(parts);
         }        
     }
 }

@@ -23,14 +23,14 @@ namespace Z0
         /// Instantiates the api hosts found in a specified assembly
         /// </summary>
         /// <param name="src">The assembly to search</param>
-        IEnumerable<IApiHost> Hosts(Assembly src)
+        IApiHost[] Hosts(Assembly src)
             => ApiHosts.from(src); 
 
         /// <summary>
         /// Searches an assembly for api host types
         /// </summary>
         /// <param name="src">The assembly to search</param>
-        IEnumerable<Type> HostTypes(Assembly src)
+        Type[] HostTypes(Assembly src)
             => ApiHosts.types(src);
     }
 }

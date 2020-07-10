@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.InteropServices;    
 
     using static Konst;
-    using static Root;
 
     partial class XTend
     {            

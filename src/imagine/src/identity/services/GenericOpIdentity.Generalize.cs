@@ -5,15 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    partial class Root
+    using static Konst;
+        
+    partial class XTend
     {
-        public static T[] concat<T>(T[] a, T[] b)
-        {
-            var dst = new T[a.Length + b.Length];
-            a.CopyTo(dst,0);
-            b.CopyTo(dst,a.Length);
-            return dst;
-        }            
+        [MethodImpl(Inline)]
+        public static OpIdentity Generialize(this GenericOpIdentity src)
+            => OpIdentityParser.parse(src.Identifier);
     }
 }

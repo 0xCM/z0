@@ -12,7 +12,6 @@ namespace Z0
     using System.Linq.Expressions;
 
     using static Konst;
-    using static Root;
 
     [ApiHost]
     public partial class Delegates
@@ -34,7 +33,7 @@ namespace Z0
             var args = src.ParameterTypes().ToArray();
             return src.IsAction()
                 ? Expression.GetActionType(args)
-                : Expression.GetFuncType(concat(args, sys.array(src.ReturnType)));
+                : Expression.GetFuncType(z.concat(args, sys.array(src.ReturnType)));
         }
     }
 }

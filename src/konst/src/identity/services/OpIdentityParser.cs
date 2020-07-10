@@ -16,14 +16,15 @@ namespace Z0
         OpIdentity IInfallibleParser<OpIdentity>.Parse(string text)
             => OpIdentityParser.Service.Parse(text);
         
-        OpIdentity INullary<OpIdentity>.Zero => OpIdentity.Empty;
+        OpIdentity INullary<OpIdentity>.Zero 
+            => OpIdentity.Empty;
     }
 
     public readonly struct OpIdentityParser : IIdentityParser
     {
         public static IIdentityParser Service => default(OpIdentityParser);
-        
-        public OpIdentity Parse(string text)
+
+        public static OpIdentity parse(string text)        
         {
             if(string.IsNullOrWhiteSpace(text))
                 return OpIdentity.Empty;
@@ -38,5 +39,8 @@ namespace Z0
             var id = OpIdentity.Define(src, name, suffix, generic, imm, components);
             return id;
         }
+        
+        public OpIdentity Parse(string text)
+            => parse(text);
     }
 }

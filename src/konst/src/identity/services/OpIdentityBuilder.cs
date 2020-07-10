@@ -8,15 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    partial class Identify
+    
+    [ApiHost]
+    public readonly struct OpIdentityBuilder
     {
-        [MethodImpl(Inline)]
-        public static OpIdentity Op(string src)
-            => OpIdentityParser.Service.Parse(src);
-
-        public static OpIdentity Op(params IdentityPart[] parts)
-            => Op(string.Join(IDI.PartSep, parts.Select(x =>x.Identifier)));
+        [Op]   
+        public static OpIdentity build(params IdentityPart[] parts)
+            => OpIdentityParser.parse(string.Join(IDI.PartSep, parts.Select(x =>x.Identifier)));
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -26,18 +24,31 @@ namespace Z0
         /// <param name="t">A primal cell type representative</param>
         /// <typeparam name="W">The bit width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]   
-        public static OpIdentity Op(string opname, TypeWidth tw, NumericKind k,  bool generic)
+        [MethodImpl(Inline), Op]   
+        public static OpIdentity build(string opname, TypeWidth tw, NumericKind k,  bool generic)
         {
             var w = (FixedWidth)tw;
             var g = generic ? $"{IDI.Generic}" : string.Empty;
             if(generic && k == NumericKind.None)
-                return Op(text.concat(opname, IDI.PartSep, IDI.Generic));
+                return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, IDI.Generic));
             else if(w.IsSome())
-                return Op(text.concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}"));
+                return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}"));
             else
-                return Op(text.concat($"{opname}_{g}{k.Format()}"));
+                return OpIdentityParser.parse(text.concat($"{opname}_{g}{k.Format()}"));
         }
+
+        /// <summary>
+        /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="k">The primal kind over which the identifier is deined</param>
+        [MethodImpl(Inline), Op]   
+        public static OpIdentity build(string opname, NumericKind k, bool generic)
+            => build(opname, TypeWidth.None, k, generic);
+
+        [MethodImpl(Inline), Op]   
+        public static OpIdentity build(OpKindId k, NumericKind nk, bool generic)
+            => build(k.Format(), nk, generic);        
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -48,10 +59,10 @@ namespace Z0
         /// <typeparam name="W">The bit width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity Op<W,T>(string opname, W w = default, T t = default)
+        public static OpIdentity build<W,T>(string opname, W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => Op(opname, w.TypeWidth, NumericKinds.kind<T>(), true);
+                => build(opname, w.TypeWidth, NumericKinds.kind<T>(), true);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
@@ -59,21 +70,8 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="k">The primal kind over which the identifier is deined</param>
         [MethodImpl(Inline)]   
-        public static OpIdentity Op<K>(string opname, K k, bool generic)
+        public static OpIdentity build<K>(string opname, K k, bool generic)
             where K : unmanaged, INumericKind
-                => Op(opname, TypeWidth.None, k.Class, generic);
-
-        /// <summary>
-        /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="k">The primal kind over which the identifier is deined</param>
-        [MethodImpl(Inline)]   
-        public static OpIdentity Op(string opname, NumericKind k, bool generic)
-            => Op(opname, TypeWidth.None, k, generic);
-
-        [MethodImpl(Inline)]   
-        public static OpIdentity Op(OpKindId k, NumericKind nk, bool generic)
-            => Op(k.Format(), nk, generic);
+                => build(opname, TypeWidth.None, k.Class, generic);
     }
 }

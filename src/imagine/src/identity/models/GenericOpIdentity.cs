@@ -44,6 +44,5 @@ namespace Z0
         
         public static GenericOpIdentity Empty 
             => new GenericOpIdentity(string.Empty);
-
     }
 }

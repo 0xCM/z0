@@ -51,10 +51,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public GenericApiMethod(IApiHost host, GenericOpIdentity id, MethodInfo method, NumericKind[] kinds)
         {
-            this.Kinds = kinds;
-            this.Host = host;
-            this.GenericId = id;
-            this.Method = method;
+            Kinds = kinds;
+            Host = host;
+            GenericId = id;
+            Method = method;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
             if(src.Identifier.Contains(IDI.AsmLocator))
                 return src;
             else
-                return Identify.Op(src.Identifier + IDI.AsmLocator);
+                return OpIdentityParser.parse(src.Identifier + IDI.AsmLocator);
         }            
     }
 }

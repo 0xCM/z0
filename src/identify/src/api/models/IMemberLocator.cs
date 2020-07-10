@@ -9,14 +9,6 @@ namespace Z0
     
     public interface IMemberLocator
     {
-        ApiMembers Hosted(IApiHost src);
-
-        ApiMembers Locate(IApiHost host);        
-
-        IEnumerable<ApiMember> Hosted<K>(IApiHost src, K kind, GenericPartition g)
-            where K : unmanaged, Enum;
-
-        IEnumerable<ApiMember> Located<K>(IApiHost src, K kind, GenericPartition g)
-            where K : unmanaged, Enum;
+        ApiMembers Locate(IApiHost src);
     }
 }

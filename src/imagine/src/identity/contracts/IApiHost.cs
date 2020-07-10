@@ -30,5 +30,7 @@ namespace Z0
     
         IEnumerable<MethodInfo> HostedMethods 
             => HostType.DeclaredMethods(false);
+        MethodInfo[] HostedMethodArray
+            => HostType.DeclaredMethods(false);
     }
 }

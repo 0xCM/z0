@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
 
     public readonly struct BinaryOpFactory
     {        
@@ -34,7 +33,7 @@ namespace Z0
             where T : unmanaged
         {
             var operand = Identities.Services.Diviner.Identify(typeof(T));
-            return Identify.Op(k.KindId, Numeric.kind<T>(),generic);            
+            return OpIdentityBuilder.build(k.KindId, Numeric.kind<T>(),generic);            
         }
 
         static OpIdentity identify<T>(string name)

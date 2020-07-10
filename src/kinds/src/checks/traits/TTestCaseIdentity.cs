@@ -52,7 +52,7 @@ namespace Z0
         string CaseName<W,T>(IFunc f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, Identify.Op<W,T>(name(f)), true);
+                => CaseName<W,T>(HostType, OpIdentityBuilder.build<W,T>(name(f)), true);
 
         string CaseName<W,T>([Caller] string label = null, bool generic = true)
             where W : unmanaged, ITypeWidth
@@ -83,7 +83,7 @@ namespace Z0
         string CaseName<W,T>(IFunc f, W w, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, Identify.Op<W,T>(name(f)), generic: generic);
+                => CaseName<W,T>(HostType, OpIdentityBuilder.build<W,T>(name(f)), generic: generic);
 
         /// <summary>
         /// Produces a case name for an identified operation match test

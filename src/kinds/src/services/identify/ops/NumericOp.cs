@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="k">The primal kind over which the identifier is deined</param>
         [MethodImpl(Inline)]   
         public static OpIdentity NumericOp(string opname, NumericKind k, bool generic = false)
-            => Op(opname, TypeWidth.None, k, generic);
+            => OpIdentityBuilder.build(opname, TypeWidth.None, k, generic);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_g{kind}{u | i | f}
@@ -97,7 +97,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity NumericOp<T>(string opname, NK<T> k, bool generic)
             where T : unmanaged
-                => Op(opname, TypeWidth.None, k, generic);       
+                => OpIdentityBuilder.build(opname, TypeWidth.None, k, generic);       
 
         /// <summary>
         /// Produces an identifier of the form {opname}_g{kind}{u | i | f}
@@ -108,7 +108,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity NumericOp<T>(string opname, bool generic = true)
             where T : unmanaged
-                => Op(opname, TypeWidth.None, nkind<T>(), generic);
+                => OpIdentityBuilder.build(opname, TypeWidth.None, nkind<T>(), generic);
 
         /// <summary>
         /// Defines kinded identifiers for numeric functions
@@ -138,7 +138,7 @@ namespace Z0
             }
             result.Append(IDI.ArgsClose);
 
-            return Identify.Op(result.ToString());
+            return OpIdentityParser.parse(result.ToString());
         }
 
         /// <summary>

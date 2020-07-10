@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="nk">The vector cell kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         public static OpIdentity vectorized(OpKindId k, TypeWidth w, NumericKind nk, bool generic)
-            =>  Op(vname(k), w, nk, generic);
+            =>  OpIdentityBuilder.build(vname(k), w, nk, generic);
 
         /// <summary>
         /// Produces an identifier for a kinded nongeneric vectorized operation
@@ -65,7 +65,7 @@ namespace Z0
         /// <typeparam name="T">The vector cell type</typeparam>
         public static OpIdentity vdirect<T>(OpKindId k, TypeWidth w, T t = default)
             where T : unmanaged
-                =>  Op(vname(k), w, nkind(t), false);
+                =>  OpIdentityBuilder.build(vname(k), w, nkind(t), false);
 
         /// <summary>
         /// Produces an identifier for a kinded nongeneric vectorized operation
@@ -77,7 +77,7 @@ namespace Z0
         public static OpIdentity vdirect<W,T>(OpKindId k, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeWidth
-                =>  Op(vname(k), w.TypeWidth, nkind(t), false);
+                =>  OpIdentityBuilder.build(vname(k), w.TypeWidth, nkind(t), false);
 
         /// <summary>
         /// Produces an identifier for a kinded generic vectorized operation
@@ -89,7 +89,7 @@ namespace Z0
         public static OpIdentity vgeneric<W,T>(OpKindId k, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeWidth
-                =>  Op(vname(k), w.TypeWidth, nkind(t), true);    
+                => OpIdentityBuilder.build(vname(k), w.TypeWidth, nkind(t), true);    
 
         /// <summary>
         /// Produces an identifier for a kinded numeric structural function
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="t">A cell type representative</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         public static OpIdentity sfunc(OpKindId k, TypeWidth w, NumericKind nk, bool generic = true)
-            => Op(name(k), w, nk, generic);
+            => OpIdentityBuilder.build(name(k), w, nk, generic);
 
         /// <summary>
         /// Produces an identifier for a kinded structural function of segmented type
@@ -126,7 +126,7 @@ namespace Z0
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         public static OpIdentity sfunc<T>(OpKindId k, TypeWidth w, T t = default, bool generic = true)
             where T : unmanaged
-                => Op(name(k), w, nkind(t), generic);
+                => OpIdentityBuilder.build(name(k), w, nkind(t), generic);
 
         /// <summary>
         /// Produces an identifier for a kinded structural function of segmented type
@@ -140,7 +140,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(OpKindId k, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => Op(name(k), w.TypeWidth, nkind(t), generic);
+                => OpIdentityBuilder.build(name(k), w.TypeWidth, nkind(t), generic);
 
         /// <summary>
         /// Produces an identifier for a kinded vectorized structural function
@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="nk">The cell numeric kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         public static OpIdentity vsfunc(OpKindId k, TypeWidth w, NumericKind nk, bool generic = true)
-            => Op(vname(k), w, nk, generic);
+            => OpIdentityBuilder.build(vname(k), w, nk, generic);
 
         /// <summary>
         /// Produces an identifier for a kinded vectorized structural function
@@ -162,7 +162,7 @@ namespace Z0
         /// <typeparam name="T">The vector cell type</typeparam>
         public static OpIdentity vsfunc<T>(OpKindId k, TypeWidth w, T t = default, bool generic = true)
             where T : unmanaged
-                => Op(vname(k), w, nkind(t), generic);
+                => OpIdentityBuilder.build(vname(k), w, nkind(t), generic);
 
         /// <summary>
         /// Produces an identifier for a kinded vectorized structural function
@@ -176,6 +176,6 @@ namespace Z0
         public static OpIdentity vsfunc<W,T>(OpKindId k, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => Op(vname(k), w.TypeWidth, nkind(t), generic);
+                => OpIdentityBuilder.build(vname(k), w.TypeWidth, nkind(t), generic);
     }
 }

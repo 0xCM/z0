@@ -62,7 +62,6 @@ namespace Z0
             => $"{arg1} {kind.Format()} {arg2}"; 
  
 
-
         [MethodImpl(Inline)]
         public static string Format(this BitLogicKind kind)
             => kind.ToString().ToLower();

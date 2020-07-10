@@ -17,5 +17,14 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> NonGeneric(this IEnumerable<MethodInfo> src)
             => src.Where(t => !t.ContainsGenericParameters && !t.IsConstructedGenericMethod);
+
+
+        /// <summary>
+        /// Selects the non-generic methods from a stream
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static MethodInfo[] NonGeneric(this MethodInfo[] src)
+            => src.Where(t => !t.ContainsGenericParameters && !t.IsConstructedGenericMethod);
+
     }
 }

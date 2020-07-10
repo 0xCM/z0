@@ -23,7 +23,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => Identify.Op(opname, (TypeWidth)TypeNats.value<W>(), NumericKinds.kind<T>(), generic);
+                => OpIdentityBuilder.build(opname, (TypeWidth)TypeNats.value<W>(), NumericKinds.kind<T>(), generic);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity sfunc<T>(string opname, Vec128Kind<T> k)
             where T : unmanaged
-                => Identify.Op(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => OpIdentityBuilder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -55,6 +55,6 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity sfunc<T>(string opname, Vec256Kind<T> k)
             where T : unmanaged
-                => Identify.Op(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);        
+                => OpIdentityBuilder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);        
     }
 }

@@ -27,7 +27,7 @@ namespace Z0
             
         public DynamicDelegate<UnaryOp<Vector128<T>>> inject(byte imm8, OpKindId kind)
             => Dynop.EmbedVUnaryOpImm<T>(K.vk128<T>(), 
-                Identify.Op(name(kind), TypeWidth.W128, typeof(T).NumericKind(), true), gApiMethod(K.vk128<T>(), name(kind)),imm8);
+                OpIdentityBuilder.build(name(kind), TypeWidth.W128, typeof(T).NumericKind(), true), gApiMethod(K.vk128<T>(), name(kind)),imm8);
 
         static Type ApiG => typeof(gvec);
 

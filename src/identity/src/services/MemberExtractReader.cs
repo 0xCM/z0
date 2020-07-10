@@ -14,7 +14,6 @@ namespace Z0
 
     public readonly struct MemberExtractReader : IMemberExtractReader
     {
-
         static ApiIndex IndexApi(IEnumerable<ApiMember> src)
         {
             var pairs = src.Select(h => (h.Id, h));
@@ -55,7 +54,7 @@ namespace Z0
         ExtractedCode[] CreateExtracts(IApiHost host, ExtractRecord[] records)
         {
             var data = new ExtractedCode[records.Length];
-            var index = IndexApi(MemberLocator.Service.Hosted(host));
+            var index = IndexApi(MemberLocator.locate(host));
             Span<ExtractedCode> extracts = data;
             for(var i = 0; i<records.Length; i++)
             {

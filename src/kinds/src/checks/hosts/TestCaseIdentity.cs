@@ -67,6 +67,6 @@ namespace Z0
         public static string name<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{Identify.Owner(host)}/{host.Name}{PathSep}{Identify.Op(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
+                => $"{Identify.Owner(host)}/{host.Name}{PathSep}{OpIdentityBuilder.build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
     }
 }

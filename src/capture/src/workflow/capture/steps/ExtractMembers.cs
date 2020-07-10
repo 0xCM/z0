@@ -15,6 +15,9 @@ namespace Z0.Asm
     {
         public ICaptureWorkflow Workflow {get;}
 
+        static MemberLocator Locator => Identities.Services.ApiLocator;
+
+
         public ICaptureContext Context 
             => Workflow.Context;
 
@@ -24,8 +27,7 @@ namespace Z0.Asm
 
         static ApiMember[] locate(IApiHost host)
         {            
-            var locator = Identities.Services.ApiLocator;
-            var located = locator.Locate(host);
+            var located = ApiMemberJit.jit(host);
             return located;
         }
 

@@ -27,13 +27,29 @@ namespace Z0
         MemberLocator ApiLocator 
             => Svc.MemberLocator.Service;
 
-        [MethodImpl(Inline)]
-        IApiMemberQuery QueryHosted(IApiHost host)
-            => ApiMemberQuery.Create(ApiLocator.Hosted(host));
+        // [MethodImpl(Inline)]
+        // IApiMemberQuery QueryHosted(IApiHost host)
+        //     => ApiMemberQuery.Create(ApiLocator.Hosted(host));
 
+        // [MethodImpl(Inline)]
+        // IApiMemberQuery JitMembers(IApiHost host)
+        //     => ApiMemberQuery.Create(ApiLocator.Jit(host));
+
+        /// <summary>
+        /// Retrieves the members defined by an api host
+        /// </summary>
+        /// <param name="host">The host uri</param>
         [MethodImpl(Inline)]
-        IApiMemberQuery QueryLocated(IApiHost host)
-            => ApiMemberQuery.Create(ApiLocator.Locate(host));
+        ApiMembers JitHosted(IApiHost host)
+            => ApiMemberJit.jit(host);
+
+        /// <summary>
+        /// Retrieves the members defined by an api host
+        /// </summary>
+        /// <param name="host">The host uri</param>
+        [MethodImpl(Inline)]
+        ApiMembers JitApi(IApiSet api, ApiHostUri host)
+            => api.FindHost(host).MapRequired(host => JitHosted(host));        
 
         [MethodImpl(Inline)]
         IMemberExtractReader ExtractReader(IApiSet api)
@@ -45,14 +61,6 @@ namespace Z0
         /// <param name="host">The host uri</param>
         [MethodImpl(Inline)]
         ApiMembers HostedMembers(IApiHost host)
-            => ApiLocator.Hosted(host);
-
-        /// <summary>
-        /// Retrieves the members defined by an api host
-        /// </summary>
-        /// <param name="host">The host uri</param>
-        [MethodImpl(Inline)]
-        ApiMembers LocatedMembers(IApiHost host)
             => ApiLocator.Locate(host);
 
         /// <summary>
@@ -62,13 +70,5 @@ namespace Z0
         [MethodImpl(Inline)]
         ApiMembers HostedMembers(IApiSet api, ApiHostUri host)
             => api.FindHost(host).MapRequired(host => HostedMembers(host));
-
-        /// <summary>
-        /// Retrieves the members defined by an api host
-        /// </summary>
-        /// <param name="host">The host uri</param>
-        [MethodImpl(Inline)]
-        ApiMembers LocatedMembers(IApiSet api, ApiHostUri host)
-            => api.FindHost(host).MapRequired(host => LocatedMembers(host));        
     }
 }

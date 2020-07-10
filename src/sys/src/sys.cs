@@ -10,6 +10,12 @@ namespace Z0
     using static Part;
 
 
+    [ApiHost("x")]
+    public static partial class XTend
+    {
+
+    }
+
     [ApiHost("api")]
     public readonly partial struct sys
     {

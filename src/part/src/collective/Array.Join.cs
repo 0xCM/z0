@@ -12,6 +12,16 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
+        /// Defines an array-sepecific join operator
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <typeparam name="S"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        public static T[] SelectMany<S,T>(this S[] source, Func<S, IEnumerable<T>> selector)
+            => Enumerable.SelectMany(source,selector).ToArray();
+                    
+        /// <summary>
         /// Sequenteially condenses a sequence of arrays into a single array
         /// </summary>
         /// <param name="src">The many</param>
