@@ -17,6 +17,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public unsafe static ResMember define<T>(MemberInfo member, ReadOnlySpan<T> src)
             where T : unmanaged
-                => new ResMember(member, core.memref(recover<T,byte>(src)));
+                => new ResMember(member, z.memref(recover<T,byte>(src)));
     }
 }

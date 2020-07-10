@@ -175,7 +175,7 @@ namespace Z0
         /// <param name="src">The value to broadcast</param>
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<float> vbroadcast(W256 w, float src)
-            => BroadcastScalarToVector256(core.gptr(src));
+            => BroadcastScalarToVector256(z.gptr(src));
 
         /// <summary>
         /// __m256d _mm256_broadcast_sd (double const * mem_addr) VBROADCASTSD ymm, m64
@@ -184,7 +184,7 @@ namespace Z0
         /// <param name="src">The value to broadcast</param>
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<double> vbroadcast(W256 w, double src)
-            => BroadcastScalarToVector256(core.gptr(src));
+            => BroadcastScalarToVector256(z.gptr(src));
 
         /// <summary>
         /// __m128 _mm_broadcast_ss (float const * mem_addr) VBROADCASTSS xmm, m32
@@ -193,7 +193,7 @@ namespace Z0
         /// <param name="src">The value to broadcast</param>
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<float> vbroadcast(W128 w, float src)
-            => BroadcastScalarToVector128(core.gptr(src));
+            => BroadcastScalarToVector128(z.gptr(src));
 
         /// <summary>
         /// Broadcasts a 64-bit floating point value to the upper and lower cells of a 128-bit floating-point vector

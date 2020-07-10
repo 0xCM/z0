@@ -52,9 +52,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void addresses(ReadOnlySpan<string> src, Span<MemoryAddress> dst)
         {
-            ref readonly var r0 = ref core.first(src);
+            ref readonly var r0 = ref z.first(src);
             for(var i=0u; i<src.Length; i++)
-                core.seek(dst,i) = address(core.skip(r0,i));
+                z.seek(dst,i) = address(z.skip(r0,i));
         }
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
@@ -95,7 +95,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<T> view<T>(in MemRef src)
-            => CreateReadOnlySpan(ref @ref<T>(src.Address), (int)core.count<T>(src));
+            => CreateReadOnlySpan(ref @ref<T>(src.Address), (int)z.count<T>(src));
 
         [MethodImpl(Inline), Op]
         public static void refs(ReadOnlySpan<string> src, Span<StringRef> dst)

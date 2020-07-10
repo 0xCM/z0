@@ -8,7 +8,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Hydrates a T-cell from an S-reference after skipping a specified number of S-cells

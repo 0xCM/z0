@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         ///  Effects: movzx eax,byte ptr [rcx] => mov [rdx],al => eax,byte ptr [rdx+1] => mov [rdx],al => rax,[rcx+1]

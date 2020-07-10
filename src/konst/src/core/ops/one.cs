@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Returns generic 1 for a primal source type

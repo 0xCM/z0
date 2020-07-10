@@ -10,7 +10,7 @@ namespace Z0.Asm.Data
 
     using static Konst;
     using static Typed;
-    using static core;
+    using static z;
     
     public readonly struct OpCodeModel : ITextual
     {
@@ -37,7 +37,7 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline)]
         public OpCodeModel(string id, string cx, string ix)
         {            
-            Locations = core.v512<ulong>(memref(id), memref(cx), memref(ix), MemRef.Empty);
+            Locations = z.v512<ulong>(memref(id), memref(cx), memref(ix), MemRef.Empty);
         }  
 
         public string Format()

@@ -18,6 +18,6 @@ namespace Z0
         /// <typeparam name="T">The type of the referenced data</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe void* pvoid<T>(in T src)
-            => core.pvoid(src);    
+            => z.pvoid(src);    
     }
 }

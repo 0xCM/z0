@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static core;
+    using static z;
 
     using H = HexSymData;
 

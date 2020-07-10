@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static HexSpecs;
-    using static core;
+    using static z;
 
     public readonly struct HexByteParser : IHexParser<byte>
     {    

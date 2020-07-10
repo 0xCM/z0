@@ -79,7 +79,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => core.hash(Data);
+            get => z.hash(Data);
         }
 
         public override int GetHashCode()

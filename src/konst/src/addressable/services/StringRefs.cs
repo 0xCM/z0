@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static core;
+    using static z;
     
     [ApiHost]
     public readonly struct StringRefs
@@ -24,11 +24,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         static ulong lo(StringRef src)
-            => core.vcell(src.Location, 0);
+            => z.vcell(src.Location, 0);
 
         [MethodImpl(Inline), Op]
         static ulong hi(StringRef src)
-            => core.vcell(src.Location, 1);
+            => z.vcell(src.Location, 1);
 
         [MethodImpl(Inline), Op]
         public static unsafe StringRef create(string src)
@@ -54,7 +54,7 @@ namespace Z0
             
             for(var i=0u; i<count; i++)
             {
-                var s = core.skip(src,i).Text;
+                var s = z.skip(src,i).Text;
                 dst.Append(s);
                 if(i != count - 1)
                     dst.Append(delimiter);                    

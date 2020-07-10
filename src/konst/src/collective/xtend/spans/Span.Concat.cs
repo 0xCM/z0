@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Concat<T>(this ReadOnlySpan<T> head, ReadOnlySpan<T> tail)
         {
-            var dst = core.span<T>(head.Length + tail.Length);
+            var dst = z.span<T>(head.Length + tail.Length);
             head.CopyTo(dst);
             tail.CopyTo(dst, head.Length);
             return dst;
@@ -34,6 +34,6 @@ namespace Z0
         /// <typeparam name="T">The span element type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> Concat<T>(this Span<T> head, ReadOnlySpan<T> tail)
-            => core.@readonly(head).Concat(tail);
+            => z.@readonly(head).Concat(tail);
     }
 }

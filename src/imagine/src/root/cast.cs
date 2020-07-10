@@ -17,6 +17,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T cast<S,T>(in S src)
-            => ref core.cast<S,T>(src);            
+            => ref z.cast<S,T>(src);            
     }
 }

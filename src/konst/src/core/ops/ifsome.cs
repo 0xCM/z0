@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Invokes an action if the supplied value is not null

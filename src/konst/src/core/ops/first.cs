@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    partial struct core
+    partial struct z
     {        
         /// <summary>
         /// Returns a reference to the head of a readonly span

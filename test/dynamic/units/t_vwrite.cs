@@ -50,7 +50,7 @@ namespace Z0
             const string A = "abcdefghijklmnopqrstuvwxyz";
 
             var src = A;
-            var r = core.data(src);
+            var r = z.data(src);
             Claim.eq(A.Length, r.Length);
             
             for(var i=0; i<src.Length; i++)

@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] values<T>(Type src)
-            => core.map(search<T>(src),value<T>);        
+            => z.map(search<T>(src),value<T>);        
     }
 }

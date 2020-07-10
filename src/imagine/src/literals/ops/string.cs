@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string @string(FieldInfo f)
-            => core.constant<string>(f);
+            => z.constant<string>(f);
     }
 }

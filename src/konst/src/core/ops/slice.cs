@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.InteropServices.MemoryMarshal;
     
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Selects a segment [offset, length(src) - 1] from a source span src:ReadOnlySpan[T]

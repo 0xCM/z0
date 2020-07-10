@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core    
+    partial struct z    
     {
         [MethodImpl(Inline)]
         public static Lazy<T> defer<T>(Func<T> factory) 

@@ -13,7 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
 
     using static Konst;
-    using static core;
+    using static z;
 
     partial class math
     {

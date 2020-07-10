@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {            
         /// <summary>
         /// Calculates a hash code for structured content and returns the content along with the calculated hash

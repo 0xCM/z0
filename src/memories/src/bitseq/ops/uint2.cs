@@ -61,13 +61,13 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Bit test(uint2 src, byte pos)
-            => core.test(src,pos);
+            => z.test(src,pos);
 
         [MethodImpl(Inline), Op]
         public static uint2 set(uint2 src, byte pos, Bit state)
         {
             if(pos < uint2.Width)
-                return wrap(w2, core.set(src.data, pos, state));
+                return wrap(w2, z.set(src.data, pos, state));
             else
                 return src;
         }

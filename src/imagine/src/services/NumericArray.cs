@@ -128,7 +128,7 @@ namespace Z0
             var count = input.Length;
             var target = dst.ToSpan();
             for(var i=0; i<count; i++)
-                core.seek(target,(uint)i) = Cast.to<S,T>(core.skip(input,(uint)i));        
+                z.seek(target,(uint)i) = Cast.to<S,T>(z.skip(input,(uint)i));        
             return dst;
         }
 
@@ -147,7 +147,7 @@ namespace Z0
             var buffer = sys.alloc<T>(count);
             var dst = buffer.ToSpan();
             for(var i=0; i<count; i++)
-                core.seek(dst,(uint)i) = Cast.to<S,T>(core.skip(input,(uint)i));        
+                z.seek(dst,(uint)i) = Cast.to<S,T>(z.skip(input,(uint)i));        
             return buffer;
         }
     }

@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(string src)
-            => core.address(core.first(core.span(src)));
+            => z.address(z.first(z.span(src)));
     }
 }

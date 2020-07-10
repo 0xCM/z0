@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.InteropServices.MemoryMarshal;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Presents a generic value as a bytespan

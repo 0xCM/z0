@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Implements the canonical join operation that reduces the monadic depth by one level

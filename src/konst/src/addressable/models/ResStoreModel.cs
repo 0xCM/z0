@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static core;
+    using static z;
     public readonly struct ResStoreModel
     {    
         public static ResStoreModel Data => default;
@@ -142,7 +142,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static ref readonly byte head(ReadOnlySpan<byte> src)
-            => ref core.first(src);
+            => ref z.first(src);
        
         public ReadOnlySpan<byte> SegZ => new byte[1]{0};    
     }

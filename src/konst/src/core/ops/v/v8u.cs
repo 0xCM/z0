@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
         
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Presents a generic cpu vector as a cpu vector with components of type uint8

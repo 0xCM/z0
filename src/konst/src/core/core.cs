@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public partial struct core
+    public partial struct z
     {
         [MethodImpl(Inline)]        
         internal static Span<T> EmptySpan<T>()

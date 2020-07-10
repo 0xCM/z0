@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void map<S,T>(ReadOnlySpan<S> src, Func<S,T> f, Span<T> dst)
         {
-            var count = core.length(src,dst);
+            var count = z.length(src,dst);
             for(var i= 0; i<count; i++)
                 seek(dst,i) = f(skip(src,i));
         }
@@ -88,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void map<T>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, Func<T,T,T> f, Span<T> dst)
         {
-            var count = core.length(x,y);
+            var count = z.length(x,y);
             for(var i= 0; i<count; i++)
                 seek(dst,i) = f(skip(x,i), skip(y,i));
         }
@@ -105,7 +105,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void map<S,T,R>(ReadOnlySpan<S> x, ReadOnlySpan<T> y, Func<S,T,R> f, Span<R> dst)
         {
-            var count = core.length(x,y);
+            var count = z.length(x,y);
             for(var i=0; i<count; i++)            
                 seek(dst,i) = f(skip(x,i),skip(y,i));            
         }

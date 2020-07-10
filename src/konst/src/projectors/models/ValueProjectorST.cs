@@ -25,11 +25,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T map(object src)
-            => Delegate(core.unbox<S>(src));
+            => Delegate(z.unbox<S>(src));
 
         [MethodImpl(Inline)]
         public T map(ValueType src)
-            => Delegate(core.unbox<S>(src));
+            => Delegate(z.unbox<S>(src));
 
         [MethodImpl(Inline)]
         public ref T Project(in S src)

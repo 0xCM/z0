@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Defines the canonical option functor F:Option[A] -> Option[B] induced by a non-monadic dual f:A->B

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct core
+    partial struct z
     {        
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells

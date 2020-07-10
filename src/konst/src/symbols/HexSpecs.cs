@@ -19,9 +19,9 @@ namespace Z0
         public static ParseResult<ulong> ParseHex(string src)
         {            
             if(ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ulong value))
-                return core.parsed(src,value);
+                return z.parsed(src,value);
             else 
-                return core.unparsed<ulong>(src);
+                return z.unparsed<ulong>(src);
         }        
         
         /// <summary>

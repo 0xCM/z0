@@ -7,7 +7,7 @@ namespace Z0
 
     using NK = NumericKind;
     
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Converts a numeric source value to a boxed numeric value of specified kind

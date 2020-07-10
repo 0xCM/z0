@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Computs min(x.Length,y.Length)

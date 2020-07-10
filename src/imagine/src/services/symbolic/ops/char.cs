@@ -17,17 +17,17 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
             where N : unmanaged, ITypeNat         
-                => core.@as<S,char>(src.Value);
+                => z.@as<S,char>(src.Value);
 
         [MethodImpl(Inline)]
         public static char @char<S,T>(Symbol<S,T> src)
             where S : unmanaged
             where T : unmanaged
-                => core.@as<S,char>(src.Value);
+                => z.@as<S,char>(src.Value);
 
         [MethodImpl(Inline)]
         public static char @char<S>(Symbol<S> src)
             where S : unmanaged
-                => core.@as<S,char>(src.Value);
+                => z.@as<S,char>(src.Value);
     }
 }

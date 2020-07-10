@@ -18,10 +18,10 @@ namespace Z0
 
         public void tc_literal()
         {
-            var r0 = core.@ref(S0);
+            var r0 = z.@ref(S0);
             Claim.eq(r0.Text, S0);
 
-            var r1 = core.@ref(S1);
+            var r1 = z.@ref(S1);
             Claim.eq(r1.Text, S1);
         }
 
@@ -32,7 +32,7 @@ namespace Z0
             {
                 dst += i.ToString()[0];
             }
-            var r = core.@ref(dst);
+            var r = z.@ref(dst);
             Claim.eq(dst, r.Text);
         }
     }

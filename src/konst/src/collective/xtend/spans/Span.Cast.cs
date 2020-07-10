@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Cast<T>(this Span<byte> src)
             where T : struct
-                => core.recover<byte,T>(src);
+                => z.recover<byte,T>(src);
 
         /// <summary>
         /// Presents a u16 span as a T-span
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Cast<T>(this Span<ushort> src)
             where T : struct
-                => core.recover<ushort,T>(src);
+                => z.recover<ushort,T>(src);
 
         /// <summary>
         /// Presents a u32 span as a T-span
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Cast<T>(this Span<uint> src)
             where T : struct
-                => core.recover<uint,T>(src);
+                => z.recover<uint,T>(src);
 
         /// <summary>
         /// Presents a u64 span as a T-span
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Cast<T>(this Span<ulong> src)
             where T : struct
-                => core.recover<ulong,T>(src);
+                => z.recover<ulong,T>(src);
 
         /// <summary>
         /// Presents a span of one value-type as a span of another value-type
@@ -62,7 +62,7 @@ namespace Z0
         public static Span<T> Cast<S,T>(this Span<S> src)
             where S : struct
             where T : struct
-                => core.recover<S,T>(src);
+                => z.recover<S,T>(src);
 
         /// <summary>
         /// Presents a readonly span of one value-type as a span of another value-type
@@ -74,6 +74,6 @@ namespace Z0
         public static ReadOnlySpan<T> Cast<S,T>(this ReadOnlySpan<S> src)
             where S : struct
             where T : struct
-                => core.recover<S,T>(src);
+                => z.recover<S,T>(src);
     }
 }

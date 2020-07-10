@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
         
-    partial struct core
+    partial struct z
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> v256<T>(Vector128<T> a, Vector128<T> b)

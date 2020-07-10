@@ -8,7 +8,7 @@ namespace Z0
 
     using TC = System.TypeCode;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Uncoditionaly converts a boxed numeric value of one kind to a boxed numeric value of specified kind, if possible.

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {                
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ulong uint64<T>(T src)

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// This function exists to remediate, in certain situations, the compiler's blindly illogical 

@@ -39,7 +39,7 @@ namespace Z0.Asm
         public void CaptureParts(AsmArchiveConfig config, params PartId[] parts)
         {
             var dst = InitTarget(config, parts);      
-            core.iter(Catalogs(Context.ApiSet, parts), c => CapturePart(c,dst));
+            z.iter(Catalogs(Context.ApiSet, parts), c => CapturePart(c,dst));
         }
 
         public void CapturePart(IPartCatalog src, TCaptureArchive dst)
@@ -55,7 +55,7 @@ namespace Z0.Asm
         public void CaptureHosts(IPartCatalog src, TCaptureArchive dst)
         {
             var step = CaptureHostStep.create(Workflow);             
-            core.iter(src.Hosts, h => CaptureHost(step, h, dst));
+            z.iter(src.Hosts, h => CaptureHost(step, h, dst));
         }
 
         public void CaptureHost(CaptureHostStep step, IApiHost host, TCaptureArchive dst)

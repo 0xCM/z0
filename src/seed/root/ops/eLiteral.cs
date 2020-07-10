@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly T eSkip<E,T>(ReadOnlySpan<T> src, E field)
             where E : unmanaged, Enum
-                => ref core.skip(src, scalar<E,ushort>(field));                    
+                => ref z.skip(src, scalar<E,ushort>(field));                    
 
         /// <summary>
         /// Stores an enum value of any primal kind to a u64 target

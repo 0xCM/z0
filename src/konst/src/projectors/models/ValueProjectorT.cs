@@ -24,11 +24,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T Project(object src)
-            => ref core.unbox<T>(Delegate((ValueType)src));
+            => ref z.unbox<T>(Delegate((ValueType)src));
 
         [MethodImpl(Inline)]
         public ref T Project(ValueType src)
-            => ref core.unbox<T>(Delegate(src));
+            => ref z.unbox<T>(Delegate(src));
 
         ValueType IValueProjector.Project(ValueType src)
             => Delegate(src);

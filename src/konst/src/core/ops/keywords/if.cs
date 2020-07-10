@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Applies a function to a source if a predicate evaluated over the source is true, otherwise returns the source as-is

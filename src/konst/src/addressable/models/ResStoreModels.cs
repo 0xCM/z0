@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Konst;
-    using static core;
+    using static z;
     using static Typed;
     
     [ApiHost]
@@ -108,7 +108,7 @@ namespace Z0
             else if(n == 7)
                 return ref cell(n7,i);
             else
-                return ref core.first(Data.SegZ);
+                return ref z.first(Data.SegZ);
         }
 
         [MethodImpl(Inline)]
@@ -138,7 +138,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref readonly byte first<N>(N n)
             where N : unmanaged, ITypeNat
-                => ref core.first(span(n));        
+                => ref z.first(span(n));        
 
         [MethodImpl(Inline)]
         public ref readonly byte cell<N>(N n, int i)
@@ -150,7 +150,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {                
             var src = span<N>(n); 
-            var pSrc = gptr(core.first(src));
+            var pSrc = gptr(z.first(src));
             return new MemRef(pSrc, src.Length);
         }
 
@@ -171,7 +171,7 @@ namespace Z0
                         ref readonly var x = ref skip(data,j);
                         if(j == 0)
                         {
-                            var a = core.address(x);
+                            var a = z.address(x);
                             if(source.Address == a)
                                 seek(results,i) = a;
                         }

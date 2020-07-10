@@ -97,19 +97,19 @@ namespace Z0
         /// <param name="x4">The term at index 4</param>
         [MethodImpl(Inline), Op]
         public static S uint5(Bit x0, Bit x1 = default, Bit x2 = default, Bit x3 = default, Bit x4 = default)
-             => wrap5(core.or(
-                 core.sll((byte)x0, 0),
-                 core.sll((byte)x1, 1),
-                 core.sll((byte)x2, 2),
-                 core.sll((byte)x3, 3),
-                 core.sll((byte)x4, 4)
+             => wrap5(z.or(
+                 z.sll((byte)x0, 0),
+                 z.sll((byte)x1, 1),
+                 z.sll((byte)x2, 2),
+                 z.sll((byte)x3, 3),
+                 z.sll((byte)x4, 4)
                  ));
         
         [MethodImpl(Inline), Op]
         public static S add(S x, S y)
         {
-            var sum = core.add(x.data,y.data);
-            var result = core.gteq(sum, S.Count) ? core.sub(sum, S.Count) : sum;
+            var sum = z.add(x.data,y.data);
+            var result = z.gteq(sum, S.Count) ? z.sub(sum, S.Count) : sum;
             return new S(result, true);
         }
 
@@ -157,15 +157,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Bit test(S src, byte pos)
-            => core.test(src,pos);
+            => z.test(src,pos);
 
         [MethodImpl(Inline), Op]
         public static S set(S src, byte pos, Bit state)
-            => core.lt(pos, S.Width) ? new S(core.set(src.data, pos, state), false) : src;
+            => z.lt(pos, S.Width) ? new S(z.set(src.data, pos, state), false) : src;
         
         [MethodImpl(Inline)]
         public static bool eq(S x, S y)
-            => core.eq(x.data, y.data);
+            => z.eq(x.data, y.data);
 
         [MethodImpl(Inline)]
         internal static byte crop5(byte x) 

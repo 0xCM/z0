@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {        
         /// <summary>
         /// Presents a 128-bit S-cell vector as a 128-bit T-cell vector

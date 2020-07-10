@@ -94,7 +94,7 @@ namespace Z0
             => Base == src.Base && Offset == src.Offset;
 
         public override int GetHashCode()
-            => (int)core.hash(Base,Offset);
+            => (int)z.hash(Base,Offset);
 
         public override bool Equals(object obj)
             => obj is MemoryOffset a && Equals(a);                    

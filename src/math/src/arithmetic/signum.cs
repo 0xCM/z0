@@ -11,7 +11,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static sbyte sign(sbyte src)
-            => mul(core.@sbyte(src < 0),(sbyte)-1);
+            => mul(z.@sbyte(src < 0),(sbyte)-1);
         
         [MethodImpl(Inline), Op]
         public static SignKind signum(sbyte src)
@@ -19,7 +19,7 @@ namespace Z0
             
         [MethodImpl(Inline), Op]
         public static SignKind signum(byte src)
-            => (SignKind)core.@byte(src != 0);
+            => (SignKind)z.@byte(src != 0);
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(short src)
@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(ushort src)
-            => (SignKind)core.@byte(src != 0);
+            => (SignKind)z.@byte(src != 0);
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(int src)
@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(uint src)
-            => (SignKind)core.@byte(src != 0);
+            => (SignKind)z.@byte(src != 0);
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(long src)
@@ -43,6 +43,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(ulong src)
-            => (SignKind)core.@byte(src != 0);
+            => (SignKind)z.@byte(src != 0);
     }
 }

@@ -39,8 +39,8 @@ namespace Z0
             ref var dst64 = ref head64(ref dst);
             ref readonly var src64 = ref uint64(src);
             
-            core.seek(dst64, 0) = core.skip(src64, 0);
-            core.seek(dst64, 1) = core.skip(src64, 1);
+            z.seek(dst64, 0) = z.skip(src64, 0);
+            z.seek(dst64, 1) = z.skip(src64, 1);
             return dst;
         }
 
@@ -52,10 +52,10 @@ namespace Z0
             ref var dst64 = ref head64(ref dst);
             ref readonly var src64 = ref uint64(src);
 
-            core.seek(dst64, 0) = core.skip(src64, 0);
-            core.seek(dst64, 1) = core.skip(src64, 1);
-            core.seek(dst64, 2) = core.skip(src64, 2);
-            core.seek(dst64, 3) = core.skip(src64, 3);
+            z.seek(dst64, 0) = z.skip(src64, 0);
+            z.seek(dst64, 1) = z.skip(src64, 1);
+            z.seek(dst64, 2) = z.skip(src64, 2);
+            z.seek(dst64, 3) = z.skip(src64, 3);
             return dst;
         }
     }

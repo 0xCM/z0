@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static core;
+    using static z;
 
     partial struct LiteralFields
     {
@@ -30,7 +30,7 @@ namespace Z0
                     var segment = from(@base, offset, field);
                     if(segment.IsNonEmpty)
                     {
-                        core.append(dst,segment);
+                        z.append(dst,segment);
                         offset += segment.DataSize;
                     }
                 }

@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<sbyte> src)
             where T : struct
-                => core.recover<sbyte,T>(src);
+                => z.recover<sbyte,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<byte> src)
             where T : struct
-                => core.recover<byte,T>(src);
+                => z.recover<byte,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<short> src)
             where T : struct
-                => core.recover<short,T>(src);
+                => z.recover<short,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<ushort> src)
             where T : struct
-                => core.recover<ushort,T>(src);
+                => z.recover<ushort,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<uint> src)
             where T : struct
-                => core.recover<uint,T>(src);
+                => z.recover<uint,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span
@@ -88,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline), Recover, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<int> src)
             where T : struct
-                 => core.recover<int,T>(src);
+                 => z.recover<int,T>(src);
 
         /// <summary>
         /// Presents a source span as a T-span

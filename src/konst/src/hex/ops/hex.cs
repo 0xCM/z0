@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static core;
+    using static z;
     using static HexSpecs;
 
     partial class Hex
@@ -23,9 +23,9 @@ namespace Z0
             where C : unmanaged, ILetterCase
         {
             if(typeof(C) == typeof(LowerCased))
-                return core.recover<char,HexSym>(span(src.ToString(LC)));
+                return z.recover<char,HexSym>(span(src.ToString(LC)));
             else
-                return core.recover<char,HexSym>(span(src.ToString(UC)));
+                return z.recover<char,HexSym>(span(src.ToString(UC)));
         }
 
         [MethodImpl(Inline)]

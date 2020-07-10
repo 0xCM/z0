@@ -190,7 +190,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => core.hash(Location);
+            get => z.hash(Location);
         }
 
         public override int GetHashCode()

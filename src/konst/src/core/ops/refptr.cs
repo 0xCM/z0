@@ -13,7 +13,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Presents generic reference as a generic pointer

@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector256<ushort> v16u<T>(in Vector256<T> src)
             where T : unmanaged        
-                => ref core.@as<Vector256<T>,Vector256<ushort>>(src);
+                => ref z.@as<Vector256<T>,Vector256<ushort>>(src);
 
         /// <summary>
         /// VPMOVZXBW ymm, m128

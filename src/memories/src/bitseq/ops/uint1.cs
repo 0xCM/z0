@@ -131,21 +131,21 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static S inc(S x)
-            => !x.IsMax ? new S(core.add(x.data, 1), false) : S.Min;
+            => !x.IsMax ? new S(z.add(x.data, 1), false) : S.Min;
 
         [MethodImpl(Inline), Op]
         public static S dec(S x)
-            => !x.IsMin ? new S(core.sub(x.data, 1), false) : S.Max;
+            => !x.IsMin ? new S(z.sub(x.data, 1), false) : S.Max;
 
         [MethodImpl(Inline), Op]
         public static Bit test(S x)
-            => core.test(x.data, 0);
+            => z.test(x.data, 0);
 
         [MethodImpl(Inline), Op]
         public static S set(S src, byte pos, Bit state)
         {
             if(pos < S.Width)
-                return wrap1(core.set(src.data, pos, state));
+                return wrap1(z.set(src.data, pos, state));
             else 
                 return src;
         }

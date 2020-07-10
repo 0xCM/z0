@@ -148,13 +148,13 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Bit test(S src, byte pos)
-            => core.test(src,pos);
+            => z.test(src,pos);
 
         [MethodImpl(Inline), Op]
         public static S set(S src, byte pos, Bit state)
         {
             if(pos < S.Width)
-                return wrap7(core.set(src.data, pos, state));
+                return wrap7(z.set(src.data, pos, state));
             else
                 return src;
         }

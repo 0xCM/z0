@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core    
+    partial struct z    
     {
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each

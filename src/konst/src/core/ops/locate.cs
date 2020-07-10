@@ -7,7 +7,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress locate<T>(in T src)

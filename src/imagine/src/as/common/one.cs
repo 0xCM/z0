@@ -19,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T one<T>(T t = default)
             where T : unmanaged
-                => core.one<T>();
+                => z.one<T>();
     }
 }

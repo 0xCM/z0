@@ -9,7 +9,7 @@ namespace Z0
     
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Presents a source span as a T-span

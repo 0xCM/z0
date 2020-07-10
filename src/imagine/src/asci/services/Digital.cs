@@ -212,7 +212,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N1 count, ref byte dst)
         {
-            core.add(dst, 0) = (byte)digit(src,0);
+            z.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -224,8 +224,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N2 count, ref byte dst)
         {
-            core.add(dst, 1) = (byte)digit(src,1);
-            core.add(dst, 0) = (byte)digit(src,0);
+            z.add(dst, 1) = (byte)digit(src,1);
+            z.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -237,9 +237,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N3 count, ref byte dst)
         {
-            core.add(dst, 2) = (byte)digit(src,2);
-            core.add(dst, 1) = (byte)digit(src,1);
-            core.add(dst, 0) = (byte)digit(src,0);
+            z.add(dst, 2) = (byte)digit(src,2);
+            z.add(dst, 1) = (byte)digit(src,1);
+            z.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -251,10 +251,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N4 count, ref byte dst)
         {
-            core.add(dst, 3) = (byte)digit(src,3);
-            core.add(dst, 2) = (byte)digit(src,2);
-            core.add(dst, 1) = (byte)digit(src,1);
-            core.add(dst, 0) = (byte)digit(src,0);
+            z.add(dst, 3) = (byte)digit(src,3);
+            z.add(dst, 2) = (byte)digit(src,2);
+            z.add(dst, 1) = (byte)digit(src,1);
+            z.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -266,11 +266,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N5 count, ref byte dst)
         {
-            core.add(dst, 4) = (byte)digit(src,4);
-            core.add(dst, 3) = (byte)digit(src,3);
-            core.add(dst, 2) = (byte)digit(src,2);
-            core.add(dst, 1) = (byte)digit(src,1);
-            core.add(dst, 0) = (byte)digit(src,0);
+            z.add(dst, 4) = (byte)digit(src,4);
+            z.add(dst, 3) = (byte)digit(src,3);
+            z.add(dst, 2) = (byte)digit(src,2);
+            z.add(dst, 1) = (byte)digit(src,1);
+            z.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -282,12 +282,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N6 count, ref byte dst)
         {
-            core.add(dst, 5) = (byte)digit(src,5);
-            core.add(dst, 4) = (byte)digit(src,4);
-            core.add(dst, 3) = (byte)digit(src,3);
-            core.add(dst, 2) = (byte)digit(src,2);
-            core.add(dst, 1) = (byte)digit(src,1);
-            core.add(dst, 0) = (byte)digit(src,0);
+            z.add(dst, 5) = (byte)digit(src,5);
+            z.add(dst, 4) = (byte)digit(src,4);
+            z.add(dst, 3) = (byte)digit(src,3);
+            z.add(dst, 2) = (byte)digit(src,2);
+            z.add(dst, 1) = (byte)digit(src,1);
+            z.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -299,13 +299,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N7 count, ref byte dst)
         {
-            core.add(dst, 6) = (byte)digit(src,6);
-            core.add(dst, 5) = (byte)digit(src,5);
-            core.add(dst, 4) = (byte)digit(src,4);
-            core.add(dst, 3) = (byte)digit(src,3);
-            core.add(dst, 2) = (byte)digit(src,2);
-            core.add(dst, 1) = (byte)digit(src,1);
-            core.add(dst, 0) = (byte)digit(src,0);
+            z.add(dst, 6) = (byte)digit(src,6);
+            z.add(dst, 5) = (byte)digit(src,5);
+            z.add(dst, 4) = (byte)digit(src,4);
+            z.add(dst, 3) = (byte)digit(src,3);
+            z.add(dst, 2) = (byte)digit(src,2);
+            z.add(dst, 1) = (byte)digit(src,1);
+            z.add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>

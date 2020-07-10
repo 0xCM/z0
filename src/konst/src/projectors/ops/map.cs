@@ -14,12 +14,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public ref T map<T>(ValueProjector projector, object x)
             where T : struct
-                => ref core.unbox<T>(projector.Delegate((ValueType)x));        
+                => ref z.unbox<T>(projector.Delegate((ValueType)x));        
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T> f, in T x)
             where T : struct
-                => ref core.unbox<T>(f.Delegate(x));
+                => ref z.unbox<T>(f.Delegate(x));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T,T> f, in T x)
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T,T> f, ValueType x)
             where T : unmanaged
-                => ref f.Delegate(core.unbox<T>(x));
+                => ref f.Delegate(z.unbox<T>(x));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T,T> f, object x)
@@ -46,12 +46,12 @@ namespace Z0
         public static ref T map<S,T>(ProjectorProxy<S,T> proxy, object x)
             where S : struct
             where T : struct
-                => ref proxy.Project(core.unbox<S>(x));
+                => ref proxy.Project(z.unbox<S>(x));
 
         [MethodImpl(Inline)]
         public static ref T map<S,T>(ProjectorProxy<S,T> proxy, ValueType x)
             where S : struct
             where T : struct
-                => ref proxy.Project(core.unbox<S>(x));
+                => ref proxy.Project(z.unbox<S>(x));
     }
 }

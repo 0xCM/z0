@@ -18,7 +18,7 @@ namespace Z0
         NumericWidth Size 
         {
             [MethodImpl(Inline)] 
-            get => (NumericWidth)core.bitsize<T>();
+            get => (NumericWidth)z.bitsize<T>();
         }
         
         public bool IsEmpty 
@@ -36,7 +36,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)] 
-            get => core.hash(Offset);
+            get => z.hash(Offset);
         }
 
         public RelAddress<T> Zero 

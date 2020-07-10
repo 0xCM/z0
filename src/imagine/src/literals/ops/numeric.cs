@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static core;
+    using static z;
 
     partial struct LiteralFields
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] numeric<T>(Type src)
             where T : unmanaged
-                => core.map(search<T>(src),numeric<T>);
+                => z.map(search<T>(src),numeric<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public FieldValues<T> numeric<T>(Type[] types)

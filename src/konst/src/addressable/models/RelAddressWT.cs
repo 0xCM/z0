@@ -40,7 +40,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)] 
-            get => core.hash(Offset);
+            get => z.hash(Offset);
         }
 
         public bool IsNonEmpty  

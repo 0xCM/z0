@@ -26,7 +26,7 @@ namespace Z0
         public static unsafe Span<byte> load(in BinaryCode src, BufferToken dst)
         {
             @check(src,dst);
-            var source = core.span(src.Data);            
+            var source = z.span(src.Data);            
             var target = sys.clear(As.cover(dst.Address.Pointer<byte>(), dst.BufferSize));     
             return sys.copy(source,target);        
         }

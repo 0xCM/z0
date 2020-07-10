@@ -14,19 +14,19 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static uint bits(float src)
-            => core.@as<float,uint>(src);
+            => z.@as<float,uint>(src);
 
         [MethodImpl(Inline), Op]
         public static ulong bits(double src)
-            => core.@as<double,ulong>(src);
+            => z.@as<double,ulong>(src);
 
         [MethodImpl(Inline), Op]
         public static ulong lobits(decimal src)
-            => core.@as<decimal,ulong>(src);
+            => z.@as<decimal,ulong>(src);
 
         [MethodImpl(Inline), Op]
         public static ulong hibits(decimal src)
-            => core.skip(core.@as<decimal,ulong>(src), 1);
+            => z.skip(z.@as<decimal,ulong>(src), 1);
     }
 
 

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     using static Konst;
-    using static core;        
+    using static z;        
 
     public static class Cast
     {
@@ -100,7 +100,7 @@ namespace Z0
             else if(typeof(S) == typeof(double))
                 return to<T>(float64(src));
             else if(typeof(S) == typeof(char))
-                return core.numeric<T>(char16(src));
+                return z.numeric<T>(char16(src));
             else            
                 return no<S,T>();
         }

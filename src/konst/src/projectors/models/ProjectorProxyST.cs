@@ -40,6 +40,6 @@ namespace Z0
         }
 
         ValueType IValueProjector.Project(ValueType src)
-            => Project(core.unbox<S>(src));
+            => Project(z.unbox<S>(src));
     }
 }

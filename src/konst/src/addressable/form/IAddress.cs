@@ -17,7 +17,7 @@ namespace Z0
         T Location {get;}
         
         bool INullity.IsEmpty 
-            => Location.Equals(core.zero<T>());
+            => Location.Equals(z.zero<T>());
     }
 
     public interface IAddress<W,T> : IAddress<T>, ISized<W>

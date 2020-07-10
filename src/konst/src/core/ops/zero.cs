@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         [MethodImpl(Inline)]
         public static T zero<T>(T t = default)

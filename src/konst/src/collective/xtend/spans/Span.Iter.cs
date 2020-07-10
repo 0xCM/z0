@@ -14,6 +14,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static void Iter<T>(this Span<T> src, Action<T> f)
-            => core.iter(src,f); 
+            => z.iter(src,f); 
     }
 }

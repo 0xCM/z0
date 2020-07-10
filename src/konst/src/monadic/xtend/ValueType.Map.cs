@@ -22,7 +22,7 @@ namespace Z0
         public static T Map<S,T>(this S? src, Func<S,T> f)
             where S : struct
             where T : struct
-                => core.map(src,f);
+                => z.map(src,f);
 
         /// <summary>
         /// Projects a source value, if non-null, onto a target value; otherwise, returns value raised by a caller-supplied emitter
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Map<S,T>(this S? src, Func<S,T> some, Func<T> none)
             where S : struct
-                => core.map(src,some,none);
+                => z.map(src,some,none);
 
         [MethodImpl(Inline)]
         public static S MapValueOrDefault<T,S>(this T? x, Func<T,S> f, S @default = default(S))

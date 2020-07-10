@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result

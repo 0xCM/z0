@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Aplies an action to the sequence of integers min,min+1,...,max - 1

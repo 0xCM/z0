@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static core;
+    using static z;
     using static InvokeApi;
 
     public readonly struct InvokeApi
@@ -61,7 +61,7 @@ namespace Z0
         public void print_calls()
         {
 
-            var samples = core.span(Invoke8u, Invoke16u, Invoke16i, Invoke32u, Invoke64u);
+            var samples = z.span(Invoke8u, Invoke16u, Invoke16i, Invoke32u, Invoke64u);
             for(var i=0u; i<samples.Length; i++)
             {
                 ref readonly var sample = ref skip(samples,i);

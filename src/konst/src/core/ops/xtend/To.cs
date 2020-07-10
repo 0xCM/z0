@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline)]
         public static object To(this NumericKind dst, object src)
-            => core.rebox(src,dst);                            
+            => z.rebox(src,dst);                            
     }
 }

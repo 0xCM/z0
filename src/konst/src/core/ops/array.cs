@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {                
         /// <summary>
         /// Produces an array from a span

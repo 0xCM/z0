@@ -23,7 +23,7 @@ namespace Z0
         public static ref E literal<E,T>(in T tVal, E eRep = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => ref core.@as<T,E>(tVal);
+                => ref z.@as<T,E>(tVal);
 
         /// <summary>
         /// Reads a T-value from the value of an E-enum of primal T-kind
@@ -36,7 +36,7 @@ namespace Z0
         public static ref T scalar<E,T>(in E eVal, T tRep = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => ref core.@as<E,T>(eVal);
+                => ref z.@as<E,T>(eVal);
 
         /// <summary>
         /// Reads a T-value from an E-enum value of primal T-kind. 
@@ -50,7 +50,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            tVal = core.@as<E,T>(eVal);
+            tVal = z.@as<E,T>(eVal);
             return ref tVal;
         }
 
@@ -129,7 +129,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref long scalar<E>(in E eVal, out long tVal) 
             where E : unmanaged, Enum
-                => ref core.store(eVal, out tVal);
+                => ref z.store(eVal, out tVal);
 
         /// <summary>
         /// Reads a u64-value from an enum of primal u64-kind
@@ -140,7 +140,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref ulong scalar<E>(in E eVal, out ulong tVal) 
             where E : unmanaged, Enum
-                => ref core.store(eVal, out tVal);
+                => ref z.store(eVal, out tVal);
 
         /// <summary>
         /// Reads a c16-value from an enum of primal u16-kind
@@ -161,7 +161,7 @@ namespace Z0
             where E : unmanaged
         {
             dst = 0ul;
-            var eSize = core.size<E>();
+            var eSize = z.size<E>();
             if(eSize == 1)
                 store(w8, src, ref dst);
             else if(eSize == 2)
@@ -177,7 +177,7 @@ namespace Z0
         public static ref byte store<E>(W8 w, in E src, ref ulong dst) 
             where E : unmanaged
         {
-            ref var u8 = ref core.@as<E,byte>(src);
+            ref var u8 = ref z.@as<E,byte>(src);
             dst = u8;
             return ref u8;
         }
@@ -186,7 +186,7 @@ namespace Z0
         public static ref ushort store<E>(W16 w, in E src, ref ulong dst) 
             where E : unmanaged
         {
-            ref var tVal = ref core.@as<E,ushort>(src);
+            ref var tVal = ref z.@as<E,ushort>(src);
             dst = tVal;
             return ref tVal;
         }
@@ -195,7 +195,7 @@ namespace Z0
         public static ref uint store<E>(W32 w, in E src, ref ulong dst) 
             where E : unmanaged
         {
-            ref var tVal = ref core.@as<E,uint>(src);
+            ref var tVal = ref z.@as<E,uint>(src);
             dst = tVal;
             return ref tVal;
         }
@@ -204,7 +204,7 @@ namespace Z0
         public static ref ulong store<E>(W64 w, in E src, ref ulong dst) 
             where E : unmanaged
         {
-            ref var tVal = ref core.@as<E,ulong>(src);
+            ref var tVal = ref z.@as<E,ulong>(src);
             dst = tVal;
             return ref tVal;
         }
@@ -218,7 +218,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref char c16<E>(in E src, ref ulong dst) 
             where E : unmanaged, Enum
-                => ref core.@as<ushort,char>(store(w16, src, ref dst));
+                => ref z.@as<ushort,char>(store(w16, src, ref dst));
 
         /// <summary>
         /// Reads a u8 value from an enum of primal i8-kind, writes the value to a u64 target, and returns the extracted i8 value
@@ -230,7 +230,7 @@ namespace Z0
         public static ref sbyte i8<E>(in E src, ref ulong dst) 
             where E : unmanaged, Enum
         {
-            ref var tVal = ref core.@as<E,sbyte>(src);
+            ref var tVal = ref z.@as<E,sbyte>(src);
             dst = (byte)tVal;
             return ref tVal;
         }
@@ -246,7 +246,7 @@ namespace Z0
         public static ref short i16<E>(in E src, ref ulong dst) 
             where E : unmanaged, Enum
         {
-            ref var tVal = ref core.@as<E,short>(src);
+            ref var tVal = ref z.@as<E,short>(src);
             dst = (ushort)tVal;
             return ref tVal;
         }
@@ -262,7 +262,7 @@ namespace Z0
         public static ref int i32<E>(in E src, ref ulong dst) 
             where E : unmanaged, Enum
         {
-            ref var tVal = ref core.@as<E,int>(src);
+            ref var tVal = ref z.@as<E,int>(src);
             dst = (uint)tVal;
             return ref tVal;
         }
@@ -278,7 +278,7 @@ namespace Z0
         public static ref long i64<E>(in E src, ref ulong dst) 
             where E : unmanaged, Enum
         {
-            ref var tVal = ref core.@as<E,long>(src);
+            ref var tVal = ref z.@as<E,long>(src);
             dst = (ulong)tVal;
             return ref tVal;
         }
@@ -462,7 +462,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            dst = core.@as<E,T>(e);
+            dst = z.@as<E,T>(e);
             return ref dst;
         }
     }

@@ -17,6 +17,6 @@ namespace Z0
         /// <typeparam name="T">The value type, if the value existed</typeparam>
         [MethodImpl(Inline)]
         public static Option<T> none<T>()
-            => core.none<T>();
+            => z.none<T>();
     }
 }

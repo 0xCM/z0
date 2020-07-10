@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Covers a pointer-identified T-counted buffer with a span

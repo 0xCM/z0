@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {            
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint hash<T>(ReadOnlySpan<T> src)

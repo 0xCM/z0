@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
        /// <summary>
         /// Applies a unary operator to an input sequence and deposits the result to a caller-supplied target

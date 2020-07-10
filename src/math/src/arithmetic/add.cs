@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static core;
+    using static z;
 
     partial class math
     {
@@ -55,7 +55,7 @@ namespace Z0
         {
             var lo = x.Left + y.Left;
             var carry = x.Left > lo;
-            var hi = x.Right + y.Right + core.@uint(carry);
+            var hi = x.Right + y.Right + z.@uint(carry);
             return (lo,hi);
         }
 
@@ -71,7 +71,7 @@ namespace Z0
         {
             c = a + b;
             var carry = a > c;
-            seek(c, 1) = skip(in a, 1) + skip(in b, 1) + core.@uint(carry);
+            seek(c, 1) = skip(in a, 1) + skip(in b, 1) + z.@uint(carry);
         }
     }
 }

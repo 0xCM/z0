@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static Memories;
-    using static core;
+    using static z;
 
     readonly struct BoxedNumberConverter : IConversionProvider<BoxedNumberConverter,BoxedNumber>, IBiconverter<BoxedNumber>
     {
@@ -24,7 +24,7 @@ namespace Z0
         /// <typeparam name="T">The target numeric type</typeparam>
         [MethodImpl(Inline)]
         public T Convert<T>(BoxedNumber src) 
-            => (T)core.rebox(src.Boxed, NumericKinds.kind<T>());
+            => (T)z.rebox(src.Boxed, NumericKinds.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric

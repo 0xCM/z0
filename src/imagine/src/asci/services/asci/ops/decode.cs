@@ -50,20 +50,20 @@ namespace Z0
         public static ReadOnlySpan<char> decode(in asci8 src)
         {
             var decoded = vinflate(vbytes(w128, src.Storage));
-            return core.recover<char>(As.bytes(vlo(decoded)));            
+            return z.recover<char>(As.bytes(vlo(decoded)));            
         }
 
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
-            => core.recover<char>(As.bytes(vinflate(src.Storage)));
+            => z.recover<char>(As.bytes(vinflate(src.Storage)));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
         {            
             var lo = vinflate(src.Storage, n0);
             var hi = vinflate(src.Storage, n1);
-            return core.recover<char>(As.bytes(new Seg512(lo,hi)));
+            return z.recover<char>(As.bytes(new Seg512(lo,hi)));
         }
 
         [MethodImpl(Inline), Op]
@@ -74,7 +74,7 @@ namespace Z0
             var x1 = vinflate(x.Lo,n1);
             var x2 = vinflate(x.Hi,n0);
             var x3 = vinflate(x.Hi,n1);
-            return core.recover<char>(As.bytes(new Seg1024(x0,x1,x2,x3)));
+            return z.recover<char>(As.bytes(new Seg1024(x0,x1,x2,x3)));
         }
 
         [MethodImpl(Inline), Op]
@@ -109,7 +109,7 @@ namespace Z0
         static int decode(Vector256<ushort> data, ref char dst)
         {
             var bytes = bytespan(data);
-            var chars = core.recover<char>(bytes);
+            var chars = z.recover<char>(bytes);
             var count = 0;    
             for(var i=0; i<chars.Length; i++, count++)
             {

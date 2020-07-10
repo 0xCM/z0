@@ -25,10 +25,10 @@ namespace Z0
             if(s == null)
                 return true;
             
-            var data = core.span(s);
+            var data = z.span(s);
             for(var i=0u; i<data.Length; i++)
             {
-                ref readonly var c = ref core.skip(data,i);
+                ref readonly var c = ref z.skip(data,i);
                 if(!whitespace(c))
                     return false;
             }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static core;
+    using static z;
 
     partial class math
     {
@@ -54,7 +54,7 @@ namespace Z0
         {
             var lo = x.Left - y.Left;
             var borrow = x.Left < lo;
-            var hi = x.Right - y.Right - core.@uint(borrow);
+            var hi = x.Right - y.Right - z.@uint(borrow);
             return (lo,hi);
         }
 
@@ -70,7 +70,7 @@ namespace Z0
         {
             c = a - b;
             var borrow = a < c;
-            seek(c, 1) = skip(in a, 1) - skip(in b, 1) - core.@uint(borrow);
+            seek(c, 1) = skip(in a, 1) - skip(in b, 1) - z.@uint(borrow);
         }
     }
 }

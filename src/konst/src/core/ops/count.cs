@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {                
         /// <summary>
         /// Computes the whole number of T-cells identified by a reference

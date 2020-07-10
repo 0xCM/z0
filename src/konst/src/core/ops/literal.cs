@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {                                
         /// <summary>
         /// Envisions a u8 value as a value of an enum of like primal kind

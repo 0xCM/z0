@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The second span cell type</typeparam>
         [MethodImpl(Inline)]
         public static int length<S,T>(ReadOnlySpan<S> x, ReadOnlySpan<T> y)
-            => core.min(x.Length, y.Length);
+            => z.min(x.Length, y.Length);
 
 
     }

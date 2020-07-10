@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {                
         /// <summary>
         /// Reads a T-value from the value of an E-enum of primal T-kind
@@ -36,7 +36,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            tVal = core.@as<E,T>(eVal);
+            tVal = z.@as<E,T>(eVal);
             return ref tVal;
         }
 
@@ -115,7 +115,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref long scalar<E>(in E eVal, out long tVal) 
             where E : unmanaged, Enum
-                => ref core.store(eVal, out tVal);
+                => ref z.store(eVal, out tVal);
 
         /// <summary>
         /// Reads a u64-value from an enum of primal u64-kind
@@ -126,7 +126,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref ulong scalar<E>(in E eVal, out ulong tVal) 
             where E : unmanaged, Enum
-                => ref core.store(eVal, out tVal);
+                => ref z.store(eVal, out tVal);
 
         /// <summary>
         /// Reads a c16-value from an enum of primal u16-kind

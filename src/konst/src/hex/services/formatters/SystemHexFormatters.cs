@@ -153,6 +153,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static ref readonly F generalize<X,F>(in X src)
             where X : struct
-                => ref Unsafe.As<X,F>(ref core.edit(src));        
+                => ref Unsafe.As<X,F>(ref z.edit(src));        
     }
 }

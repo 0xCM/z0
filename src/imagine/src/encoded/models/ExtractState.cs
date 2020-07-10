@@ -46,7 +46,7 @@ namespace Z0
         {
             Id = opid;
             Offset = offset - 1;
-            Address = core.address((ulong)location - 1ul);
+            Address = z.address((ulong)location - 1ul);
             Captured = captured;
         }
 

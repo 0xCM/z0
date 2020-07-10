@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct core
+    partial struct z
     {
         [MethodImpl(Inline)]
         public static ref T cast<S,T>(in S src)

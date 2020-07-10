@@ -96,18 +96,18 @@ namespace Z0
         /// <param name="x3">The term at index 3</param>
         [MethodImpl(Inline), Op]
         public static S uint4(Bit x0, Bit x1 = default, Bit x2 = default, Bit x3 = default)
-             => wrap4(core.or(
-                 core.sll((byte)x0, 0),
-                 core.sll((byte)x1, 1),
-                 core.sll((byte)x2, 2),
-                 core.sll((byte)x3, 3)
+             => wrap4(z.or(
+                 z.sll((byte)x0, 0),
+                 z.sll((byte)x1, 1),
+                 z.sll((byte)x2, 2),
+                 z.sll((byte)x3, 3)
                  ));
                  
         [MethodImpl(Inline), Op]
         public static S add(S x, S y)
         {
-            var sum = core.add(x.data,y.data);
-            var result = core.gteq(sum, S.Count) ? core.sub(sum, S.Count) : sum;
+            var sum = z.add(x.data,y.data);
+            var result = z.gteq(sum, S.Count) ? z.sub(sum, S.Count) : sum;
             return new S(result, true);
         }
 
@@ -135,13 +135,13 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Bit test(S src, byte pos)
-            => core.test(src,pos);
+            => z.test(src,pos);
 
         [MethodImpl(Inline), Op]
         public static S set(S src, byte pos, Bit state)
         {
             if(pos < S.Width)
-                return wrap4(core.set(src.data, pos, state));
+                return wrap4(z.set(src.data, pos, state));
             else
                 return src;
         }

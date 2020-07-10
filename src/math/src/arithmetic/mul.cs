@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
 
     using static Konst;        
-    using static core;
+    using static z;
 
     partial class math
     {
@@ -60,7 +60,7 @@ namespace Z0
         public static unsafe void mul(ulong x, ulong y, out ulong lo, out ulong hi)
         {
            lo = 0ul;
-           hi = Bmi2.X64.MultiplyNoFlags(x,y, core.gptr(lo));
+           hi = Bmi2.X64.MultiplyNoFlags(x,y, z.gptr(lo));
         }
 
         [MethodImpl(Inline), Op]
@@ -80,7 +80,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe ref Pair<ulong> mul(in ConstPair<ulong> src, ref Pair<ulong> dst)  
         {               
-            dst.Right = Bmi2.X64.MultiplyNoFlags(src.Left, src.Right, core.gptr(dst.Left));
+            dst.Right = Bmi2.X64.MultiplyNoFlags(src.Left, src.Right, z.gptr(dst.Left));
             return ref dst;
         }
 

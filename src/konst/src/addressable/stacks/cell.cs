@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref MemStack64 src, int index, T t = default)
             where T : unmanaged
-                => ref core.add(head<T>(ref src), index);
+                => ref z.add(head<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref MemStack128 src, int index, T t = default)
             where T : unmanaged
-                => ref core.add(head<T>(ref src), index);
+                => ref z.add(head<T>(ref src), index);
             
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref MemStack256 src, int index, T t = default)
             where T : unmanaged
-                => ref core.add(head<T>(ref src), index);
+                => ref z.add(head<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref MemStack512 src, int index, T t = default)
             where T : unmanaged
-                => ref core.add(head<T>(ref src), index);
+                => ref z.add(head<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref MemStack1024 src, int index, T t = default)
             where T : unmanaged
-                => ref core.add(head<T>(ref src), index);
+                => ref z.add(head<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a index-identified character in a storage stack
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="index">The character index</param>
         [MethodImpl(Inline), Op]
         public static ref char cell(ref CharStack2 src, int index)
-            => ref core.add(head(ref src), index);
+            => ref z.add(head(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a index-identified character in a storage stack
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="index">The character index</param>
         [MethodImpl(Inline), Op]
         public static ref char cell(ref CharStack16 src, int index)
-            => ref core.add(head(ref src), index);
+            => ref z.add(head(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a index-identified character in a storage stack

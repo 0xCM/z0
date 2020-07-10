@@ -11,6 +11,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source string</param>
         public static string RemoveBlanks(this string src)
-            => src.RemoveAny(core.seq(Chars.Space, Chars.LineFeed, Chars.NL, Chars.Tab));
+            => src.RemoveAny(z.seq(Chars.Space, Chars.LineFeed, Chars.NL, Chars.Tab));
     }
 }

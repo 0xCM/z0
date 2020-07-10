@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static void Iteri<T>(this Span<T> src, Action<int,T> f)
-            => core.iteri(src,f);
+            => z.iteri(src,f);
     }
 }

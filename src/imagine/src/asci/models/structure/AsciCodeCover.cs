@@ -26,7 +26,7 @@ namespace Z0
         
         [MethodImpl(Inline), Op]
         public static ref readonly AsciCodeCover define(in byte src)
-            => ref core.view<byte,AsciCodeCover>(src);
+            => ref z.view<byte,AsciCodeCover>(src);
 
         [MethodImpl(Inline), Op]
         public static string format(AsciCodeCover src)

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
         
-    partial struct core
+    partial struct z
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong vhi<T>(Vector128<T> src)

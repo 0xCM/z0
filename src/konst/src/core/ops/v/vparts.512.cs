@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Defines a 512-bit vector by explicit component specification, from least -> most significant

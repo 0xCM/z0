@@ -11,14 +11,14 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static core;
+    using static z;
 
     partial struct TextDocParser
     {   
         public static ParseResult<T> parse<T>(string data, Func<TextDoc,ParseResult<T>> pfx)
         {
-            using var stream = core.stream(data);            
-            using var reader = core.reader(stream);
+            using var stream = z.stream(data);            
+            using var reader = z.reader(stream);
             return from doc in parse(reader)
                 from content in pfx(doc)
                 select content;                

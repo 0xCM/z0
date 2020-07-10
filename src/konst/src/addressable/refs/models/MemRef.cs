@@ -88,7 +88,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public int Count<T>()
-            => (int)(DataSize/core.size<T>());
+            => (int)(DataSize/z.size<T>());
 
         [MethodImpl(Inline)]
         public string Format()
@@ -96,15 +96,15 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load()
-            => core.view<byte>(this);
+            => z.view<byte>(this);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Load<T>()
-            => core.view<T>(this);
+            => z.view<T>(this);
 
         [MethodImpl(Inline)]
         public uint Hash()
-            => core.hash(Lo, Hi);
+            => z.hash(Lo, Hi);
         
         [MethodImpl(Inline)]
         public bool Equals(MemRef src)

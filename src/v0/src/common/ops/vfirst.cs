@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vfirst<T>(in Vector128<T> src)        
             where T : unmanaged
-                => ref core.@as<Vector128<T>,T>(src);
+                => ref z.@as<Vector128<T>,T>(src);
 
         /// <summary>
         /// Returns a reference to the leading cell of the data source
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vfirst<T>(in Vector256<T> src)        
             where T : unmanaged
-                => ref core.@as<Vector256<T>,T>(src);
+                => ref z.@as<Vector256<T>,T>(src);
 
         /// <summary>
         /// Returns a reference to the leading cell of the data source
@@ -40,6 +40,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vfirst<T>(in Vector512<T> src)        
             where T : unmanaged
-                => ref core.@as<Vector512<T>,T>(src);
+                => ref z.@as<Vector512<T>,T>(src);
     }
 }

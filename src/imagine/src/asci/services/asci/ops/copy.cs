@@ -21,7 +21,7 @@ namespace Z0
                 
                 for(var j=0u; j<data.Length; j++)
                 {
-                    ref readonly var c = ref core.skip(data,j);
+                    ref readonly var c = ref z.skip(data,j);
                     if(!whitespace(c))
                         count++;
                 }
@@ -31,15 +31,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci2 src, ref byte dst)  
-            => core.cast<byte,ushort>(dst) = src.Storage;
+            => z.cast<byte,ushort>(dst) = src.Storage;
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci4 src, ref byte dst)  
-            => core.cast<byte,uint>(dst) = src.Storage;
+            => z.cast<byte,uint>(dst) = src.Storage;
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci8 src, ref byte dst)  
-            => core.cast<byte,ulong>(dst) = src.Storage;
+            => z.cast<byte,ulong>(dst) = src.Storage;
             
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci16 src, ref byte dst)

@@ -7,7 +7,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {            
         [MethodImpl(Inline)]
         public static sbyte min(sbyte a, sbyte b)

@@ -13,18 +13,18 @@ namespace Z0
     {        
         [MethodImpl(Inline)]
         public static ref readonly ushort read(in char src)        
-            => ref core.read<ushort>(src);
+            => ref z.read<ushort>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly ushort read(in char src, int offset)        
-            => ref core.read<ushort>(src, offset);
+            => ref z.read<ushort>(src, offset);
 
         [MethodImpl(Inline)]
         public static ref ushort write(ref char src)
-            => ref core.write<ushort>(ref src);
+            => ref z.write<ushort>(ref src);
 
         [MethodImpl(Inline)]
         public static ref ushort write(ref char src, int offset)        
-            => ref core.write<ushort>(ref src, offset);
+            => ref z.write<ushort>(ref src, offset);
     }
 }

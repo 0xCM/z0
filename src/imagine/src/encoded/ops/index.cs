@@ -15,9 +15,9 @@ namespace Z0
         [Op]
         public static EncodedIndexBuilder indexer()
             => new EncodedIndexBuilder(
-                CodeAddress : core.dict<MemoryAddress,MemberCode>(),
-                UriAddress : core.dict<MemoryAddress,OpUri>(),
-                CodeUri: core.dict<OpUri,MemberCode>());
+                CodeAddress : z.dict<MemoryAddress,MemberCode>(),
+                UriAddress : z.dict<MemoryAddress,OpUri>(),
+                CodeUri: z.dict<OpUri,MemberCode>());
 
         [MethodImpl(Inline), Op]
         public static IdentifiedCodeIndex index(ApiHostUri host, IdentifiedCode[] code)                    

@@ -14,17 +14,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> recover<T>(Span<byte> src)
             where T : struct
-                => core.recover<T>(src);
+                => z.recover<T>(src);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<byte> src)
             where T : struct
-                => core.recover<T>(src);
+                => z.recover<T>(src);
 
         [MethodImpl(Inline)]        
         public static ReadOnlySpan<T> recover<S,T>(ReadOnlySpan<S> src)                
             where S : struct
             where T : struct
-                => core.recover<S,T>(src);
+                => z.recover<S,T>(src);
     }
 }

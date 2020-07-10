@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static core;
+    using static z;
     using static Typed;
 
     public static class SpanTake
@@ -25,7 +25,7 @@ namespace Z0
             if(src.Length == 0)
                 return default;
 
-            var tsize = core.size<T>();
+            var tsize = z.size<T>();
             var srclen = src.Length;
             if(srclen >= tsize)
                 return read<T>(src);
@@ -33,9 +33,9 @@ namespace Z0
             {
                 var remaining = tsize - src.Length;
                 var storage = default(T);
-                ref var dst = ref core.@as<T,byte>(storage);
+                ref var dst = ref z.@as<T,byte>(storage);
                 for(var i=0u; i<src.Length; i++)
-                    core.seek(dst,i) = core.skip(src,i);
+                    z.seek(dst,i) = z.skip(src,i);
                 return storage;
             }
         }
@@ -80,8 +80,8 @@ namespace Z0
             where T : unmanaged
         {
             var storage = 0u;
-            ref var dst = ref core.@as<uint,byte>(storage);
-            ref readonly var src8 = ref core.first(w8, src);
+            ref var dst = ref z.@as<uint,byte>(storage);
+            ref readonly var src8 = ref z.first(w8, src);
             seek(dst,0) = skip(src8,0);
             seek(dst,1) = skip(src8,1);
             seek(dst,2) = skip(src8,2);

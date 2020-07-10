@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Option;
     
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Evaluates a function within a try block and returns the value of the computation if 

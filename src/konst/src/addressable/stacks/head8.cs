@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Stacked;
-    using static core;
+    using static z;
 
     partial class Stacks
     {

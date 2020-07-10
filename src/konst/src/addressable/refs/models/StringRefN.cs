@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static core;
+    using static z;
 
     public readonly struct StringRefs<N>
         where N : unmanaged, ITypeNat
@@ -17,18 +17,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public StringRefs(StringRef[] src)
-            => Refs = core.insist(src, default(N));
+            => Refs = z.insist(src, default(N));
 
         [MethodImpl(Inline)]
         public ref readonly StringRef Ref<I>(I i = default)
             where I : unmanaged, ITypeNat
         {
-            var idx = core.value(i);
+            var idx = z.value(i);
             insist(idx < Count);
             return ref Refs[idx];
         }        
 
         public uint Count
-            => (uint)core.value<N>();
+            => (uint)z.value<N>();
     }
 }

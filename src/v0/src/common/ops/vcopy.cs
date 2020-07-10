@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             var seglen = vcount<T>(w);
-            var blocks = core.length(src,dst)/seglen;
+            var blocks = z.length(src,dst)/seglen;
             for(var i=0; i<blocks; i++)
             {
                 var offset = i*seglen;

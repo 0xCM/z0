@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static Typed;
 
-    partial struct core
+    partial struct z
     {            
         /// <summary>
         /// Writes a source to a target
@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T store<S,T>(in S src, out T dst) 
         {
-            dst = core.@as<S,T>(src);
+            dst = z.@as<S,T>(src);
             return ref dst;
         }
 
@@ -84,7 +84,7 @@ namespace Z0
         public static ref byte store<T>(W8 w, in T src, ref byte dst) 
             where T : unmanaged
         {
-            ref var cell = ref core.@as<T,byte>(src);
+            ref var cell = ref z.@as<T,byte>(src);
             dst = cell;
             return ref cell;
         }
@@ -93,7 +93,7 @@ namespace Z0
         public static ref byte store<T>(W8 w, in T src, ref ushort dst) 
             where T : unmanaged
         {
-            ref var cell = ref core.@as<T,byte>(src);
+            ref var cell = ref z.@as<T,byte>(src);
             dst = cell;
             return ref cell;
         }
@@ -102,7 +102,7 @@ namespace Z0
         public static ref ushort store<T>(W16 w, in T src, ref ushort dst) 
             where T : unmanaged
         {
-            ref var cell = ref core.@as<T,ushort>(src);
+            ref var cell = ref z.@as<T,ushort>(src);
             dst = cell;
             return ref cell;
         }
@@ -111,7 +111,7 @@ namespace Z0
         public static ref byte store<T>(W8 w, in T src, ref uint dst) 
             where T : unmanaged
         {
-            ref var cell = ref core.@as<T,byte>(src);
+            ref var cell = ref z.@as<T,byte>(src);
             dst = cell;
             return ref cell;
         }
@@ -120,7 +120,7 @@ namespace Z0
         public static ref ushort store<T>(W16 w, in T src, ref uint dst) 
             where T : unmanaged
         {
-            ref var cell = ref core.@as<T,ushort>(src);
+            ref var cell = ref z.@as<T,ushort>(src);
             dst = cell;
             return ref cell;
         }
@@ -129,7 +129,7 @@ namespace Z0
         public static ref uint store<T>(W32 w, in T src, ref uint dst) 
             where T : unmanaged
         {
-            ref var cell = ref core.@as<T,uint>(src);
+            ref var cell = ref z.@as<T,uint>(src);
             dst = cell;
             return ref cell;
         }
@@ -138,7 +138,7 @@ namespace Z0
         public static ref byte store<T>(W8 w, in T src, ref ulong dst) 
             where T : unmanaged
         {
-            ref var cell = ref core.@as<T,byte>(src);
+            ref var cell = ref z.@as<T,byte>(src);
             dst = cell;
             return ref cell;
         }
@@ -147,7 +147,7 @@ namespace Z0
         public static ref ushort store<T>(W16 w, in T src, ref ulong dst) 
             where T : unmanaged
         {
-            ref var cell = ref core.@as<T,ushort>(src);
+            ref var cell = ref z.@as<T,ushort>(src);
             dst = cell;
             return ref cell;
         }
@@ -156,7 +156,7 @@ namespace Z0
         public static ref uint store<T>(W32 w, in T src, ref ulong dst) 
             where T : unmanaged
         {
-            ref var cell = ref core.@as<T,uint>(src);
+            ref var cell = ref z.@as<T,uint>(src);
             dst = cell;
             return ref cell;
         }
@@ -165,7 +165,7 @@ namespace Z0
         public static ref ulong store<T>(W64 w, in T src, ref ulong dst) 
             where T : unmanaged
         {
-            ref var cell = ref core.@as<T,ulong>(src);
+            ref var cell = ref z.@as<T,ulong>(src);
             dst = cell;
             return ref cell;
         }
@@ -182,14 +182,14 @@ namespace Z0
             var i = 0u;
             var e = sys.enumerator(src);
             while(sys.next(e) && i < dst.Length)
-                core.seek(dst,i) = sys.current(e);
+                z.seek(dst,i) = sys.current(e);
             return dst;
         }    
 
         [Op]
         public static void store(in StringRef src, ref char dst, uint offset = 0)
         {
-            var c = core.data(src);
+            var c = z.data(src);
             var k = c.Length;
             for(uint i=0, o = offset; i<k; i++, o++)
                 seek(dst,o) = skip(c,i);

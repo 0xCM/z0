@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static core;
+    using static z;
 
     partial struct LiteralFields
     {

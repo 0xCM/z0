@@ -12,7 +12,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static core;
+    using static z;
 
     public static class text
     {
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline)]
         public static string ifempty(string test, string replace)
-            => core.ifempty(test,replace);
+            => z.ifempty(test,replace);
 
         /// <summary>
         /// If the test string is null, returns the empty string; otherwise, returns the test string
@@ -693,7 +693,7 @@ namespace Z0
             var count = fields.Length;
             for(byte i=0; i<count; i++)
             {
-                dst.Append(core.skip(fields, i));
+                dst.Append(z.skip(fields, i));
                 if(i != count - 1)
                 {
                     dst.Append(delimiter);
@@ -712,7 +712,7 @@ namespace Z0
         public static string concat(ReadOnlySpan<string> src, ReadOnlySpan<byte> widths, char delimiter = FieldDelimiter)
         {
             var dst = text.build();
-            var count = core.length(src,widths);
+            var count = z.length(src,widths);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var field = ref skip(src,i);

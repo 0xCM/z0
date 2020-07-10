@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {                
         /// <summary>
         /// Reveals the character data identified by a string reference

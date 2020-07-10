@@ -15,7 +15,7 @@ namespace Z0
         public static uint avg(uint a, uint b)
         {
             var sum = a + b;
-            var carry = core.@uint(math.lt(sum,  a));
+            var carry = z.@uint(math.lt(sum,  a));
             var result = (sum >> 1) | (carry << 31);
             return result;
         }
@@ -23,7 +23,7 @@ namespace Z0
         public static ulong avg(ulong a, ulong b)
         {
             var sum = a + b;
-            var carry = core.@ulong(math.lt(sum,  a));
+            var carry = z.@ulong(math.lt(sum,  a));
             var result = (sum >> 1) | (carry << 63);
             return result;
         }

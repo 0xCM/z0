@@ -17,10 +17,10 @@ namespace Z0
     {
         void Eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => core.iter(lhs, rhs, (a,b) => NumEq(a,b, caller,file,line));
+                => z.iter(lhs, rhs, (a,b) => NumEq(a,b, caller,file,line));
 
         void Eq<T>(Span<T> lhs, Span<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged             
-                => core.iter(lhs,rhs, (a,b) => NumEq(a,b, caller,file,line));        
+                => z.iter(lhs,rhs, (a,b) => NumEq(a,b, caller,file,line));        
     }
 }

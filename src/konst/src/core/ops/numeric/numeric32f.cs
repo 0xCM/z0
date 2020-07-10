@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static Konst;
-    using static core;
+    using static z;
     
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Unconditionally converts the source value to a value of parametric numeric type

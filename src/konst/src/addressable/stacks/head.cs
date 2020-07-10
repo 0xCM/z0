@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T head<T>(ref MemStack64 src, T t = default)
             where T : unmanaged
-                => ref core.@as<ulong,T>(head64(ref src));
+                => ref z.@as<ulong,T>(head64(ref src));
 
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T head<T>(ref MemStack128 src, T t = default)
             where T : unmanaged
-                => ref core.@as<ulong,T>(head64(ref src));
+                => ref z.@as<ulong,T>(head64(ref src));
 
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T head<T>(ref MemStack256 src, T t = default)
             where T : unmanaged
-                => ref core.@as<ulong,T>(head64(ref src));
+                => ref z.@as<ulong,T>(head64(ref src));
 
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T head<T>(ref MemStack512 src, T t = default)
             where T : unmanaged
-                => ref core.@as<ulong,T>(head64(ref src));
+                => ref z.@as<ulong,T>(head64(ref src));
 
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T head<T>(ref MemStack1024 src, T t = default)
             where T : unmanaged
-                => ref core.@as<ulong,T>(head64(ref src));
+                => ref z.@as<ulong,T>(head64(ref src));
 
         /// <summary>
         /// Retrieves a reference to the leading character storage cell

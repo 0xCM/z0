@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static core;
+    using static z;
 
     using api = StringRefs;
 
@@ -42,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator StringRef(string src)
-            => core.@ref(src);
+            => z.@ref(src);
 
         /// <summary>
         /// The length of the represented string
@@ -56,7 +56,7 @@ namespace Z0
         public unsafe string Text
         {
             [MethodImpl(Inline)]
-            get => core.@string(this);            
+            get => z.@string(this);            
         }
 
         public MemoryAddress Address
@@ -77,7 +77,7 @@ namespace Z0
         public ReadOnlySpan<char> Data
         {
             [MethodImpl(Inline)]
-            get => core.data(this);
+            get => z.data(this);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
         ReadOnlySpan<char> IConstSpan<StringRef,char>.Data
         {
             [MethodImpl(Inline)]
-            get => core.data(this);
+            get => z.data(this);
         }
 
         public bool IsEmpty

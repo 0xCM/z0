@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static char[] chars(Type src)
-            => core.map(search<char>(src), @char);
+            => z.map(search<char>(src), @char);
     }
 }

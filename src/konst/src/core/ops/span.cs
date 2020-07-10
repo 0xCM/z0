@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct core
+    partial struct z
     {
         /// <summary>
         /// Allocates storage for a specified number of T-cells
