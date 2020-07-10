@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />  
     <ProjectReference Include="$(BitCore)" />  
+    <ProjectReference Include="$(Symbolic)" />  
   </ItemGroup>
 
 </Project>
