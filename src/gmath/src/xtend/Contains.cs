@@ -11,7 +11,6 @@ namespace Z0
 
     partial class XTend
     {
-
         /// <summary>
         /// Determines whether an interval contains a specified point
         /// </summary>
@@ -21,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool Contains<T>(this Interval<T> src, T point)
             where T : unmanaged
-                => Algorithms.contains(src,point);
+                => gmath.contains(src,point);
 
         /// <summary>
         /// Determines whether any elements of the source match the target
