@@ -26,14 +26,6 @@ namespace Z0
                 sys.@throw(new Exception($"Application invaraiant failed: {msg}"));
         }
 
-        // [MethodImpl(Inline)]
-        // public static T insist<T>(T src)
-        //     where T : class
-        // {
-        //     insist(src != null);
-        //     return src;
-        // }
-
         [MethodImpl(Inline)]
         public static ulong insist<N>(ulong src, N n = default)
             where N : unmanaged, ITypeNat
@@ -54,5 +46,48 @@ namespace Z0
             insist(src.Length,n);
             return src;
         }
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static T insist<T>(T src, Func<T,bool> f)
+        {
+            insist(f(src));
+            return src;
+        }
+
+        [MethodImpl(Inline)]
+        public static T insist<T>(T src)
+            where T : class
+        {
+            insist(src != null);
+            return src;
+        }
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static T insist<T>(T? src)
+            where T : struct
+        {
+            insist(src.HasValue);
+            return src.Value;
+        }
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static T insist<T>(Option<T> src)
+        {
+            insist(src.IsSome());
+            return src.Value;
+        }        
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static T insist<T>(T lhs, T rhs)
+            where T : IEquatable<T>            
+        {
+            if(z.nullnot(lhs) && z.nullnot(rhs) && lhs.Equals(rhs))
+                return lhs;
+            else
+                insist(false, $"{lhs} != {rhs}");
+            
+            return default;
+        }
+
     }
 }

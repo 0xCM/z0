@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Typed;
 
     using H = Hex3;
     using K = Hex3Kind;

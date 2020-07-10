@@ -18,17 +18,6 @@ namespace Z0
             =>  ref DefaultMethod<ulong>.Empty;           
     }
 
-    public readonly struct DefaultType
-    {
-        public static ref readonly Type Empty 
-        {
-            [MethodImpl(Inline)]
-            get => ref typeof(Default<ulong>).GetNestedTypes(BF_NonPublic)[0];
-        }             
-
-        readonly struct Default<T> { }   
-    }
-
     readonly struct DefaultMethod<T>
         where T : unmanaged
     {

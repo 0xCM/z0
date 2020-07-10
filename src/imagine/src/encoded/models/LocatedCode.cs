@@ -80,8 +80,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public LocatedCode(MemoryAddress src, byte[] data)
         {
-            Address = Demands.insist(src, x => x.IsNonEmpty);
-            Encoded = new BinaryCode(Demands.insist(data));
+            Address = z.insist(src, x => x.IsNonEmpty);
+            Encoded = new BinaryCode(z.insist(data));
         }
 
         [MethodImpl(Inline)]

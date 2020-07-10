@@ -9,7 +9,6 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static Konst;    
-    using static Memories;
 
     public static partial class TypedLogicSpec
     {
@@ -114,7 +113,7 @@ namespace Z0.Logix
             where T : unmanaged             
             where N : unmanaged, ITypeNat
         {
-            Demands.insist<N>(variables.Length);
+            z.insist<N>(variables.Length);
             return new VariedExpr<N,T>(baseExpr, variables);
         }
 

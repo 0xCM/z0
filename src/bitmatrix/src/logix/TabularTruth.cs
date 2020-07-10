@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.IO;
     
-    using static Konst;    
-    using static Memories;
+    using static Typed;
 
     [ApiHost]
     public readonly struct TabularTruth : IApiHost<TabularTruth>

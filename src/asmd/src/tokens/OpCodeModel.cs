@@ -9,7 +9,6 @@ namespace Z0.Asm.Data
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Typed;
     using static z;
     
     public readonly struct OpCodeModel : ITextual

@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Typed;
 
     public readonly struct QString : ITextual
     {
