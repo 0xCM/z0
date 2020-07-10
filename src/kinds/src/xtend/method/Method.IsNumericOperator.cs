@@ -22,25 +22,12 @@ namespace Z0
             => (m.HasVoidReturn() || NumericKinds.test(m.ReturnType)) 
              && m.ParameterTypes().All(t => NumericKinds.test(t));
 
+
         /// <summary>
         /// Determines whether a method is a numeric operator with a specified arity
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsNumericOperator(this MethodInfo m, int? arity = null)
-            => m.IsOperator()  && m.IsNumeric() && (arity != null ? m.ArityValue() == arity : true);        
-
-        /// <summary>
-        /// Queries the stream for methods that are recognized as numeric operators
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        public static IEnumerable<MethodInfo> NumericOperators(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsNumericOperator());
-
-        /// <summary>
-        /// Selects numeric operators with a specifed arity from the source stream
-        /// </summary>
-        /// <param name="src">The methods to filter</param>
-        public static IEnumerable<MethodInfo> NumericOperators(this IEnumerable<MethodInfo> src, int arity)
-            => src.Where(x => x.IsNumericOperator(arity));
+            => m.IsOperator()  && m.IsNumeric() && (arity != null ? m.ArityValue() == arity : true);
     }
 }

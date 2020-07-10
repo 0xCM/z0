@@ -16,13 +16,6 @@ namespace Z0
 
     partial class XTend
     {
-        /// <summary>
-        /// Computes the primal types identified by a specified kind
-        /// </summary>
-        /// <param name="k">The primal kind</param>
-        public static ISet<Type> DistinctTypes(this NumericKind k)
-            => Identify.types(k);
-
         [MethodImpl(Inline)]
         public static Option<NumericIndicator> NumericIndicator(this Type t)
         {
@@ -31,12 +24,5 @@ namespace Z0
             var i = t.NumericKind().Indicator();
             return i != 0 ? Option.some(i) : Option.none<NumericIndicator>();
         }           
-
-        /// <summary>
-        /// Enumerates the distinct numeric kinds represented by the (bitfield) source kind
-        /// </summary>
-        /// <param name="k">The kind to evaluate</param>
-        public static ISet<NumericKind> DistinctKinds(this NumericKind k)  
-            => Identify.kinds(k);    
     }
 }

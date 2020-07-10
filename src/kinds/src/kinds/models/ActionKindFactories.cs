@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     partial class Kinds
     {
         public static UnaryActionClass action(A1 rep) 

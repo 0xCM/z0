@@ -16,6 +16,9 @@
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(Fixed)" />
+    <ProjectReference Include="$(GVec)" />
 
 
   </ItemGroup>

@@ -22,18 +22,11 @@ namespace Z0
                      : (VectorType.test(src.ReturnType,width) || src.ParameterTypes().Any(t => VectorType.test(t,width)));
 
         /// <summary>
-        /// Determines whether a method returns an intrinsic vector
-        /// </summary>
-        /// <param name="src">The method to test</param>
-        bool ReturnsVector(MethodInfo src)
-            => src.ReturnType.IsVector();
-
-        /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
         /// </summary>
         /// <param name="src">The method to test</param>
         bool IsVectorized(MethodInfo src)        
-            => ReturnsVector(src) || src.ParameterTypes().Any(VectorType.test);
+            => src.ReturnType.IsVector() || src.ParameterTypes().Any(VectorType.test);
 
         /// <summary>
         /// Determines whether a method has at least one 128-bit intrinsic vector parameter 

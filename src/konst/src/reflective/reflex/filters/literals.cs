@@ -28,5 +28,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Span<FieldInfo> literals(Type src, Span<FieldInfo> dst)
             => literals(Reflex.fields(src), dst);    
+
+        [MethodImpl(Inline), Op]
+        public static bool ConstructedGeneric(Type src)
+            => src.IsConstructedGenericType;
     }
 }

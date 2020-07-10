@@ -8,6 +8,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
     
     partial class XTend
     {
@@ -16,7 +19,9 @@ namespace Z0
         /// nongeneric, a generic type definition or some other variant, an empty result is returned
         /// </summary>
         /// <param name="src">The method to examine</param>
-        public static IEnumerable<Type> GenericArguments(this MethodInfo src)
-            => src.IsConstructedGenericMethod ? src.GetGenericArguments() : new Type[]{};
+        public static Type[] GenericArguments(this MethodInfo src)
+            => src.IsConstructedGenericMethod 
+            ? src.GetGenericArguments() 
+            : sys.empty<Type>();
     }
 }
