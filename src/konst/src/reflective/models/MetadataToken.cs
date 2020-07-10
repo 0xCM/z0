@@ -88,7 +88,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator MetadataToken(ParameterInfo src)
             => From(src);
-
         
         [MethodImpl(Inline)]
         internal MetadataToken(Type src)

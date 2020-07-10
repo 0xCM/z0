@@ -11,21 +11,20 @@ namespace Z0
     
     public readonly struct MetadataTokenPair
     {
+        public readonly MetadataToken Subject;
+
+        public readonly MetadataToken Owner;
+
         [MethodImpl(Inline)]
         public static implicit operator Pair<MetadataToken>(MetadataTokenPair src)
             => (src.Subject, src.Owner);
-
         
         [MethodImpl(Inline)]
-        public MetadataTokenPair(MetadataToken Subject, MetadataToken Owner)
+        public MetadataTokenPair(MetadataToken subject, MetadataToken owner)
         {
-            this.Subject = Subject;
-            this.Owner = Owner;
+            Subject = subject;
+            Owner = owner;
         }
-
-        public MetadataToken Subject {get;}
-
-        public MetadataToken Owner {get;}
 
         public MetadataPair<MetadataToken> Generalized
         {

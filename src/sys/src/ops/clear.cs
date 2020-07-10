@@ -11,7 +11,7 @@ namespace Z0
     
     partial struct sys
     {
-        [MethodImpl(Options), Opaque(ClearSpan), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(ClearSpan), Closures(Closure)]
         public static ref readonly Span<T> clear<T>(in Span<T> src)
         {
             src.Clear();

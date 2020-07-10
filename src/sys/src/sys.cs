@@ -23,6 +23,8 @@ namespace Z0
 
         const string EmptyString = "";
 
-        const MethodImplOptions Options = MethodImplOptions.NoInlining;                    
+        const MethodImplOptions NotInline = MethodImplOptions.NoInlining;                    
+
+        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;                    
     }
 }

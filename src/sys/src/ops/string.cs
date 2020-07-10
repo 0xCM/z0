@@ -17,15 +17,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Options), Opaque(CreateString), Closures(AllNumeric)]
+        [MethodImpl(NotInline), Opaque(CreateString), Closures(AllNumeric)]
         public static string @string<T>(T src)
             => src?.ToString() ?? EmptyString;
 
-        [MethodImpl(Options), Opaque(CharPointerToString)]
+        [MethodImpl(NotInline), Opaque(CharPointerToString)]
         public static unsafe string @string(char* pSrc)
             => new string(pSrc);
         
-        [MethodImpl(Options), Opaque(CharSpanToString)]
+        [MethodImpl(NotInline), Opaque(CharSpanToString)]
         public static string @string(ReadOnlySpan<char> src)
             => src.ToString();
     }

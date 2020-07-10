@@ -20,20 +20,20 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source items</param>
         /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Options), Opaque(ParameterArray), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(ParameterArray), Closures(Closure)]
         public static T[] array<T>(params T[] src)
             => src;
 
-        [MethodImpl(Options), Opaque(SpanToArray), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(SpanToArray), Closures(Closure)]
         public static T[] array<T>(Span<T> src)
             => src.ToArray();
 
-        [MethodImpl(Options), Opaque(ListToArray), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(ListToArray), Closures(Closure)]
         public static T[] array<T>(List<T> src)
             => src.ToArray();
 
 
-        [MethodImpl(Options), Opaque(EnumerableToArray), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(EnumerableToArray), Closures(Closure)]
         public static T[] array<T>(IEnumerable<T> src)
             => src.ToArray();
     }

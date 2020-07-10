@@ -11,11 +11,11 @@ namespace Z0
     
     partial struct sys
     {
-        [MethodImpl(Options), Opaque(GetGenericTypeCode), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(GetGenericTypeCode), Closures(Closure)]
         public static TypeCode typecode<T>()
             => Type.GetTypeCode(typeof(T));
 
-        [MethodImpl(Options), Opaque(GetTypeCode)]
+        [MethodImpl(NotInline), Opaque(GetTypeCode)]
         public static TypeCode typecode(Type src)
             => Type.GetTypeCode(src);
     }

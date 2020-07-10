@@ -8,17 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static ReflectionFlags;        
-    using static OpacityKind;
-    
-    partial struct sys
+    using static Konst;
+
+    partial struct Reflex
     {
-        /// <summary>
         /// Selects all instance/static and public/non-public fields declared or inherited by a type
         /// </summary>
         /// <param name="src">The type to examine</param>
-        [MethodImpl(Options), Opaque(GetTypeFields)]
-        public static FieldInfo[] fields(Type src)
-            => src.GetFields(BF_All);            
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<PropertyInfo> properties(Type src)
+            => src.GetProperties(BF);            
     }
 }

@@ -12,23 +12,19 @@ namespace Z0
     public readonly struct MetadataPair<T>
         where T : struct
     {
+        public readonly T Subject;
+
+        public readonly T Owner;
+
         [MethodImpl(Inline)]
         public static implicit operator MetadataPair<T>(in ConstPair<T> src)
             => new MetadataPair<T>(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator MetadataPair<T>((T Subject, T Owner) src)
-            => new MetadataPair<T>(src.Subject, src.Owner);
         
         [MethodImpl(Inline)]
-        public MetadataPair(in T Subject, in T Owner)
+        public MetadataPair(in T subject, in T owner)
         {
-            this.Subject = Subject;
-            this.Owner = Owner;
-        }
-        
-        public T Subject {get;}
-
-        public T Owner {get;}
+            Subject = subject;
+            Owner = owner;
+        }    
     }
 }

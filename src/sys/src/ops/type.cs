@@ -14,11 +14,11 @@ namespace Z0
 
     partial struct sys
     {                
-        [MethodImpl(Options), Opaque(O.GetGenericType), Closures(AllNumeric)]                
+        [MethodImpl(NotInline), Opaque(O.GetGenericType), Closures(AllNumeric)]                
         public static Type type<T>()
             => typeof(T);
 
-        [MethodImpl(Options), Opaque(O.GetInstanceType)]
+        [MethodImpl(NotInline), Opaque(O.GetInstanceType)]
         public static Type type(object src)
             => src?.GetType() ?? typeof(void);
     }

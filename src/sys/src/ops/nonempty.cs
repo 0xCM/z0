@@ -16,7 +16,7 @@ namespace Z0
         /// Tests whether the source string is nonempty
         /// </summary>
         /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Options), Opaque(EmptyStringTest)]
+        [MethodImpl(NotInline), Opaque(EmptyStringTest)]
         public static bool nonempty(string src)
             => !string.IsNullOrWhiteSpace(src);
     }

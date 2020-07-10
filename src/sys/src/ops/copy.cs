@@ -15,15 +15,15 @@ namespace Z0
 
     partial struct sys
     {
-        [MethodImpl(Options), Opaque(O.CopyBlock)]
+        [MethodImpl(NotInline), Opaque(O.CopyBlock)]
         public static void copy(in byte src, ref byte dst, uint count)
             => CopyBlock(ref dst, ref AsRef(src), count);
 
-        [MethodImpl(Options), Opaque(O.CopyBlock)]
+        [MethodImpl(NotInline), Opaque(O.CopyBlock)]
         public static unsafe void copy(byte* pSrc, byte* pDst, uint count)
             => CopyBlock(pDst, pSrc, count);
 
-        [MethodImpl(Options), Opaque(O.CopyBlock)]
+        [MethodImpl(NotInline), Opaque(O.CopyBlock)]
         public static unsafe void copy<T>(T* pSrc, T* pDst, uint count)
             where T : unmanaged
                 => CopyBlock(pDst, pSrc, count* (uint)SizeOf<T>());
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="pDst">The target</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Options), Opaque(O.CopyCellToVoidPointer)]
+        [MethodImpl(NotInline), Opaque(O.CopyCellToVoidPointer)]
         public static unsafe void copy<T>(in T src, void* pDst)
             => Copy(pDst, ref AsRef(src));   
 
@@ -44,12 +44,12 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="pDst">The target</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Options), Opaque(O.CopyCellToGenericPointer)]
+        [MethodImpl(NotInline), Opaque(O.CopyCellToGenericPointer)]
         public static unsafe void copy<T>(in T src, T* pDst)
             where T : unmanaged
                 => Copy(pDst, ref AsRef(src));   
 
-        [MethodImpl(Options), Opaque(CopySpan), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(CopySpan), Closures(Closure)]
         public static ref readonly Span<T> copy<T>(ReadOnlySpan<T> src, in Span<T> dst)
         {
             src.CopyTo(dst);

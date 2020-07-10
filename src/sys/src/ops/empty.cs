@@ -16,7 +16,7 @@ namespace Z0
         /// Tests whether the source string is empty
         /// </summary>
         /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Options), Opaque(EmptyStringTest)]
+        [MethodImpl(NotInline), Opaque(EmptyStringTest)]
         public static bool empty(string src)
             => string.IsNullOrWhiteSpace(src);
 
@@ -24,7 +24,7 @@ namespace Z0
         /// Returns an empty array
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Options), Opaque(GetEmptyArray), Closures(AllNumeric)]
+        [MethodImpl(NotInline), Opaque(GetEmptyArray), Closures(AllNumeric)]
         public static T[] empty<T>()
             => Array.Empty<T>();
     }

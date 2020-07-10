@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static PrimalKindBitFieldSpecs;
-    using static As;
+    using static PrimalBitFieldSpec;
+    using static z;
     using static Konst;
 
     [ApiHost]
@@ -95,8 +95,16 @@ namespace Z0
             => ref skip(Positions, (byte)i);
 
         public static LiteralBitField<byte,SegId,SegPos,SegWidth,SegMask> Definition
-            => LiteralBitFields.specify(default(byte), default(SegId), default(SegPos), default(SegWidth), default(SegMask));
+            => specify(default(byte), default(SegId), default(SegPos), default(SegWidth), default(SegMask));
 
+        [MethodImpl(Inline)]
+        public static LiteralBitField<T,I,P,W,M> specify<T,I,P,W,M>(T t = default, I id = default, P pos = default, W width = default, M mask = default)
+            where T : unmanaged
+            where I : unmanaged, Enum
+            where P : unmanaged, Enum
+            where W : unmanaged, Enum
+            where M : unmanaged, Enum
+                => default;
 
         [MethodImpl(Inline)]
         public PrimalKindBitField(PrimalKind src)

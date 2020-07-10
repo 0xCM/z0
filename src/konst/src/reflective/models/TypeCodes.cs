@@ -9,12 +9,14 @@ namespace Z0
  
     using static Konst;
 
+    using TC = System.TypeCode;
+
     [ApiHost]
     public readonly struct TypeCodes
     {
         [MethodImpl(Inline), Op]
-        public static TypeCodes init()
-            => new TypeCodes(0); 
+        public static ref readonly TypeCodes init()
+            => ref Parts.Konst.Resolved.Codes;
 
         [MethodImpl(Inline), Op]
         public static TypeIndex index(in TypeCodes src)
@@ -34,6 +36,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly Type type(in TypeIndex src, TypeCode tc)
             => ref src[tc];        
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public Type type<T>()
+            => type_u<T>();        
 
         public ref readonly Type this[TypeCode tc]
         {
@@ -190,5 +196,68 @@ namespace Z0
                 }; 
             }       
         }                            
+
+
+        [MethodImpl(Inline)]
+        Type type_u<T>()
+        {
+            if(typeof(T) == typeof(byte))
+                return indexed(TC.Byte);
+            else if(typeof(T) == typeof(ushort))
+                return indexed(TC.UInt16);
+            else if(typeof(T) == typeof(uint))
+                return indexed(TC.UInt32);
+            else if(typeof(T) == typeof(ulong))
+                return indexed(TC.UInt64);
+            else
+                return type_i<T>();
+        }
+
+        [MethodImpl(Inline)]
+        Type type_i<T>()
+        {
+            if(typeof(T) == typeof(sbyte))
+                return indexed(TC.SByte);
+            else if(typeof(T) == typeof(short))
+                return indexed(TC.Int16);
+            else if(typeof(T) == typeof(int))
+                return indexed(TC.Int32);
+            else if(typeof(T) == typeof(long))
+                return indexed(TC.Int64);
+            else
+                return type_f<T>();
+        }
+
+        [MethodImpl(Inline)]
+        Type type_f<T>()
+        {
+            if(typeof(T) == typeof(float))
+                return indexed(TC.Single);
+            else if(typeof(T) == typeof(double))
+                return indexed(TC.Double);
+            else if(typeof(T) == typeof(char))
+                return indexed(TC.Char);
+            else if(typeof(T) == typeof(string))
+                return indexed(TC.String);
+            else
+                return type_x<T>();
+        }
+
+        [MethodImpl(Inline)]
+        Type type_x<T>()
+        {
+            if(typeof(T) == typeof(decimal))
+                return indexed(TC.Decimal);
+            else if(typeof(T) == typeof(DateTime))
+                return indexed(TC.DateTime);
+            else if(typeof(T) == typeof(object))
+                return indexed(TC.Object);
+            else
+                return indexed(0);
+        }
+
+        [MethodImpl(Inline)]
+        Type indexed(TC code)
+            => Types[(uint)code];    
     }
 }

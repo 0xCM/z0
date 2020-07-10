@@ -12,31 +12,31 @@ namespace Z0
 
     partial class BitFields
     {        
-        [MethodImpl(Inline)]
-        public static string format<F>(F entry)
-            where F : IBitFieldIndexEntry
-                => $"{entry.FieldWidth.GetType().Name}[{entry.FieldIndex}] = {entry.FieldName}";        
-
-        public static string Format<W>(BitFieldIndexEntry<W> src)
-            where W : unmanaged, Enum
-                => $"{src.FieldWidth.GetType().Name}[{src.FieldIndex}] = {src.FieldName}";
-                
-        [MethodImpl(Inline)]
-        public static string format<T>(BitFieldSegment<T> src)
-            where T : unmanaged
-            => $"{src.Name}({src.Width}:{src.StartPos}..{src.EndPos})";
-        
-        public static string[] format(in BitFieldModel src)
-            => BitFieldFormatters.Service.FormatLines(src);
-
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<BitFieldSegment> src)
             => format<BitFieldSegment,byte>(src);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static string format<T>(in BitFieldSegment<T> src)
+            where T : unmanaged
+                => $"{src.Name}({src.Width}:{src.StartPos}..{src.EndPos})";
 
         [MethodImpl(Inline)]
         public static string format<T>(ReadOnlySpan<BitFieldSegment<T>> src)
             where T : unmanaged
                 => format<BitFieldSegment<T>,T>(src);
+
+        [MethodImpl(Inline)]
+        public static string format<F>(F entry)
+            where F : unmanaged, IBitFieldIndexEntry<F>
+                => $"{entry.FieldWidth.GetType().Name}[{entry.FieldIndex}] = {entry.FieldName}";        
+
+        public static string[] format(in BitFieldModel src)
+            => BitFieldFormatters.Service.FormatLines(src);
+
+        public static string Format<W>(in BitFieldIndexEntry<W> src)
+            where W : unmanaged, Enum
+                => $"{src.FieldWidth.GetType().Name}[{src.FieldIndex}] = {src.FieldName}";
 
         /// <summary>
         /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
@@ -56,7 +56,6 @@ namespace Z0
             var bits = formatter.Format(data,config);
             return text.concat(name, Chars.Colon, bits);
         }
-
 
         /// <summary>
         /// Computes the canonical format for a contiguous field segment sequence
@@ -84,6 +83,5 @@ namespace Z0
         static string Format<T>(IBitFieldSegment<T> src)
             where T : unmanaged
                 => $"{src.Name}({src.Width}:{src.StartPos}..{src.EndPos})";
-
     }
 }

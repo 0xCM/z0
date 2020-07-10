@@ -9,15 +9,14 @@ namespace Z0
  
     using static Konst;
 
-
-    public struct AssemblyMetadata : IReflected<AssemblyMetadata>
+    public struct ModuleMetadata
     {
-        public MetadataToken Id {get;}
+        public readonly MetadataToken Id;
 
         [MethodImpl(Inline)]
-        public AssemblyMetadata(MetadataToken id)
+        public ModuleMetadata(MetadataToken id)
         {
             Id = id;
-        }
+        }        
     }        
 }

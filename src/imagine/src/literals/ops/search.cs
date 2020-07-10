@@ -9,12 +9,17 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static z;
 
     partial struct LiteralFields
     {
         [MethodImpl(Inline), Op]
         public static FieldInfo[] search(Type src)
-            => literals(sys.fields(src));
+        {
+            var fields = src.Fields();
+            
+            return fields.Literals();
+        }
         
         [MethodImpl(Inline), Op]
         public static FieldInfo[] search(Type src, Type match)

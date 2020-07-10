@@ -11,11 +11,11 @@ namespace Z0
 
     partial struct sys
     {
-        [MethodImpl(Options), Opaque(O.Equals)]
+        [MethodImpl(NotInline), Opaque(O.Equals)]
         public static bool equals(object lhs, object rhs)
             => object.Equals(lhs,rhs);
 
-        [MethodImpl(Options), Opaque(O.Equals), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(O.Equals), Closures(Closure)]
         public static bool equals<T>(T lhs, T rhs)
             where T : struct
                 => lhs.Equals(rhs);

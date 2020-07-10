@@ -6,22 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
 
-    public readonly struct MetadataNamePair
+    [ApiHost]
+    public readonly partial struct Reflex
     {
-        [MethodImpl(Inline)]
-        public MetadataNamePair(asci64 Subject, asci64 Owner)
-        {
-            this.Subject = Subject;
-            this.Owner = Owner;
-        }
-
-        public asci64 Subject {get;}
-
-        public asci64 Owner {get;}
-
+        const BindingFlags BF = ReflectionFlags.BF_All;       
     }
-
 }

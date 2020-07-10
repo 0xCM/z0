@@ -14,12 +14,12 @@ namespace Z0
 
     partial struct sys
     {        
-        [MethodImpl(Options), Opaque(O.GetFieldConstant), Closures(AllNumeric)]
+        [MethodImpl(NotInline), Opaque(O.GetFieldConstant), Closures(AllNumeric)]
         public static T constant<T>(FieldInfo f)
             => (T)f.GetRawConstantValue();                
 
 
-        [MethodImpl(Options), Opaque(O.GetFieldConstant)]
+        [MethodImpl(NotInline), Opaque(O.GetFieldConstant)]
         public static object constant(FieldInfo src)
             => src.GetRawConstantValue();
     }

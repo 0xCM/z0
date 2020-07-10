@@ -5,17 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static ReflectionFlags;
-    
-    partial class XTend
+    using static Konst;
+
+    partial struct Reflex
     {
         /// <summary>
         /// Selects all instance/static and public/non-public fields declared or inherited by a type
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static FieldInfo[] Fields(this Type src)
-            => src.GetFields(BF_All);
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<FieldInfo> fields(Type src)
+            => src.GetFields(BF);            
     }
 }

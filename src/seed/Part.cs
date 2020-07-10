@@ -12,8 +12,7 @@ namespace Z0.Parts
 {        
     public sealed class Seed : Part<Seed>
     {
-        static readonly TypeCodes Codes = TypeCodes.init();
 
-        //Refs.boxed(Codes) 
+
     }
 }

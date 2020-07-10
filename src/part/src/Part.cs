@@ -102,8 +102,6 @@ namespace Z0
             }   
             return dst.Slice(0, (int)count).ToArray();
         }        
-
-
     }
     
     

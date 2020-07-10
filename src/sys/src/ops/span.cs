@@ -13,7 +13,7 @@ namespace Z0
     
     partial struct sys
     {
-        [MethodImpl(Options), Opaque(StringToCharSpan)]
+        [MethodImpl(NotInline), Opaque(StringToCharSpan)]
         public static ReadOnlySpan<char> span(string src)
             => src;
 
@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The cell allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Options), Opaque(AllocSpan), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(AllocSpan), Closures(Closure)]
         public static Span<T> span<T>(int count)
             => alloc<T>(count);
 
@@ -31,11 +31,11 @@ namespace Z0
         /// </summary>
         /// <param name="count">The cell allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Options), Opaque(AllocSpan), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(AllocSpan), Closures(Closure)]
         public static Span<T> span<T>(uint count)
             => alloc<T>(count);
 
-        [MethodImpl(Options), Opaque(EnumerableToSpan), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(EnumerableToSpan), Closures(Closure)]
         public static Span<T> span<T>(IEnumerable<T> src)
             => src.ToArray();
     }

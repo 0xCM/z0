@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Defines a parameter reference partition that aligns with .net core system capabilities
     /// </summary>

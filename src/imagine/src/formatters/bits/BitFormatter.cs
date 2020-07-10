@@ -16,6 +16,21 @@ namespace Z0
     {
         public static BitFormatter Service => default;
 
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static BitFormatter<T> create<T>()
+            where T : struct
+                => default;
+
+        [MethodImpl(Inline)]
+        public static string format<T>(T src)
+            where T : struct
+                => create<T>().Format(src);
+
+        [MethodImpl(Inline)]
+        public static string format<T>(T src, in BitFormatConfig config)
+            where T : struct
+                => create<T>().Format(src, config);
+
         [MethodImpl(Inline)]
         public static BitFormatConfig configure(bool tlz = false)
             => configure(tlz:tlz, specifier:false, blockWidth:null, blocksep:null, rowWidth:null, maxbits:null,zpad:null);
@@ -51,20 +66,7 @@ namespace Z0
                 return string.Empty;
         }
 
-        [MethodImpl(Inline)]
-        public static string format<T>(T src)
-            where T : struct
-                => create<T>().Format(src);
 
-        [MethodImpl(Inline)]
-        public static string format<T>(T src, BitFormatConfig config)
-            where T : struct
-                => create<T>().Format(src, config);
-
-        [MethodImpl(Inline)]
-        public static BitFormatter<T> create<T>()
-            where T : struct
-                => new BitFormatter<T>();
 
         [MethodImpl(Inline), Op]
         public void Format(byte src, int maxbits, Span<char> dst, ref int k)

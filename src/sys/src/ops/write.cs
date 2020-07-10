@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct sys
     {
-        [MethodImpl(Options), Opaque(O.Write), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(O.Write), Closures(Closure)]
         public static void write<T>(in T src, ref byte dst)
             => WriteUnaligned(ref dst, src);
     }

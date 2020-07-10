@@ -9,12 +9,15 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static z;
 
-    partial struct LiteralFields
+    partial struct Reflex
     {
-        public static FieldInfo[] literals(FieldInfo[] src)
-            => src.Where(x => x.IsLiteral);
-
+        /// <summary>
+        /// Returns true if the source field is a literal, false otherwise
+        /// </summary>
+        /// <param name="src">The field to test</param>
+        [MethodImpl(Inline), Op]
+        public static bool IsLiteral(FieldInfo src)
+            => src.IsLiteral;
     }
 }

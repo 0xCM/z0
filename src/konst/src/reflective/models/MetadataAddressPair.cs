@@ -3,20 +3,23 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
 
-    public struct TypeMetadata : IReflected<TypeMetadata>
-    {        
+    public readonly struct MetadataAddressPair
+    {
+        public readonly MemoryAddress Subject;
+
+        public readonly MemoryAddress Owner;
+
         [MethodImpl(Inline)]
-        public TypeMetadata(MetadataToken id)
+        public MetadataAddressPair(MemoryAddress subject, MemoryAddress owner)
         {
-            Id = id;
-        }
-        
-        public MetadataToken Id {get;}
+            Subject = subject;
+            Owner = owner;
+        }        
     }
 }

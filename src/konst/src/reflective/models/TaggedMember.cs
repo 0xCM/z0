@@ -10,22 +10,6 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TaggedMember
-    {
-        /// <summary>
-        /// Defines a tagged member
-        /// </summary>
-        /// <param name="m">The member</param>
-        /// <param name="t">The tag</param>
-        /// <typeparam name="M">The member type</typeparam>
-        /// <typeparam name="T">The tag type</typeparam>
-        [MethodImpl(Inline)]
-        public static TaggedMember<M,T> define<M,T>(M m, T t)
-            where M : MemberInfo
-            where T : Attribute
-                => (m,t);
-    }
-
     /// <summary>
     /// Pairs a member attribute value with its target
     /// </summary>
@@ -36,12 +20,12 @@ namespace Z0
         /// <summary>
         /// The target member
         /// </summary>
-        public M Member {get;}
+        public readonly M Member;
 
         /// <summary>
         /// The tag value
         /// </summary>
-        public A Tag {get;}
+        public readonly A Tag;
 
         [MethodImpl(Inline)]
         public static implicit operator TaggedMember<M,A>((M member, A tag) src)

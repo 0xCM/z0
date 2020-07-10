@@ -82,6 +82,10 @@ namespace Z0
 
         GetTypeFields,
 
+        GetTypeProperties,
+
+        GetTypeMethods,
+
         GetEnumerator,
 
        MoveNext,

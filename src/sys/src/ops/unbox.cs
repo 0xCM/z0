@@ -13,12 +13,12 @@ namespace Z0
 
     partial struct sys
     {
-        [MethodImpl(Options), Opaque(O.UnboxObject), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(O.UnboxObject), Closures(Closure)]
         public static ref T unbox<T>(object src)
             where T : struct
                 => ref Unbox<T>(src);
 
-        [MethodImpl(Options), Opaque(O.UnboxEnum), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(O.UnboxEnum), Closures(Closure)]
         public static ref T unbox<T>(Enum src)
             where T : unmanaged
                 => ref Unbox<T>(src);

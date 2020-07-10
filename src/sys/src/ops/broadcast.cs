@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Options), Opaque(FillSpan), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(FillSpan), Closures(Closure)]
         public static void broadcast<T>(T src, Span<T> dst)
             => dst.Fill(src);
 
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The leading target cell</param>
         /// <param name="length">The byte-measured segment length</param>
-        [MethodImpl(Options), Opaque(InitRefBlock)]
+        [MethodImpl(NotInline), Opaque(InitRefBlock)]
         public static ref byte broadcast(byte src, ref byte dst, uint length)
         {
             InitBlock(ref dst, src, length);

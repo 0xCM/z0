@@ -36,4 +36,10 @@ namespace Z0
         /// </summary>
         T Width {get;}        
     }
+
+    public interface IBitFieldSegment<F,T> : IBitFieldSegment<T>, IIdentified<StringRef>
+        where F : unmanaged, IBitFieldSegment<F,T>
+    {
+
+    }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct PrimalKindBitFieldSpecs
+    public readonly struct PrimalBitFieldSpec
     {
         public const byte TotalWidth = (byte)SegWidth.KindId + (byte)SegWidth.Width + (byte)SegWidth.Sign;
 

@@ -14,39 +14,60 @@ namespace Z0
     /// comprise a partition over a value of parametric type
     /// </summary>
     /// <typeparam name="T">The value type relative to which the segment is defined</typeparam>
-    public readonly struct BitFieldSegment<T> : IBitFieldSegment<T>
+    public readonly struct BitFieldSegment<T> : IBitFieldSegment<BitFieldSegment<T>,T>
         where T : unmanaged
     {
         /// <summary>
-        /// A unique name that can be used as an alternate segment identifier
+        /// Specifies the segment identifier
         /// </summary>
-        public string Name {get;}
+        public readonly StringRef Id;
 
         /// <summary>
-        /// The first index of the segment, relative to the source field
-        /// </summary>
-        public T StartPos {get;}
-
-        /// <summary>
-        /// The last index of the segment, relative to the source field
-        /// </summary>
-        public T EndPos {get;}
-
-        /// <summary>
-        /// The number of bits in the segment
+        /// The segment bit count
         /// </summary>
         /// <remarks>
         /// gmath.add(gmath.sub(startpos, endpos), one<T>())
         /// </remarks>
-        public T Width {get;}
+        public readonly T Width;
+
+        /// <summary>
+        /// The inclusive left/right segment index boundaries
+        /// </summary>
+        public readonly ConstPair<T> Boundary;
 
         [MethodImpl(Inline)]
-        public BitFieldSegment(string name, T first, T last, T width)
+        public BitFieldSegment(in StringRef id, T width, in ConstPair<T> boundary)
         {
-            Name = name;
-            StartPos = first;
-            EndPos = last;
+            Id = id;
             Width = width;
+            Boundary = boundary;
         }
+
+        public string Name 
+        {
+            [MethodImpl(Inline)]
+            get => Id;
+        }
+
+        T IBitFieldSegment<T>.Width  
+        {
+            [MethodImpl(Inline)]
+            get => Width;
+        }
+
+        public T StartPos 
+        {
+           [MethodImpl(Inline)]
+           get => Boundary.Left;
+        }
+
+        public T EndPos 
+        {
+            [MethodImpl(Inline)]
+            get => Boundary.Right;
+        }
+
+        StringRef IIdentified<StringRef>.Id
+            => Id;
     }    
 }

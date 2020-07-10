@@ -9,12 +9,14 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static z;
 
-    partial struct LiteralFields
+    partial struct Reflex
     {
-        public static FieldInfo[] literals(FieldInfo[] src)
-            => src.Where(x => x.IsLiteral);
-
+        /// Selects all instance/static and public/non-public fields declared or inherited by a type
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<MethodInfo> methods(Type src)
+            => src.GetMethods(BF);            
     }
 }

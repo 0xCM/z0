@@ -11,11 +11,11 @@ namespace Z0
     
     partial struct sys
     {
-        [MethodImpl(Options), Opaque(GetTypeHandle)]
+        [MethodImpl(NotInline), Opaque(GetTypeHandle)]
         public static IntPtr handle(Type src) 
             => src.TypeHandle.Value;
 
-        [MethodImpl(Options), Opaque(GetGenericTypeHandle), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(GetGenericTypeHandle), Closures(Closure)]
         public static IntPtr handle<T>() 
             => typeof(T).TypeHandle.Value;
     }

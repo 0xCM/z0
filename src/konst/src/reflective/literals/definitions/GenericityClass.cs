@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using T = GenericTargetKind;
     using S = GenericStateKind;
@@ -69,6 +68,5 @@ namespace Z0
         /// Designates a closed generic method
         /// </summary>
         ClosedMethod = T.Method | S.Closed
-
     }
 }

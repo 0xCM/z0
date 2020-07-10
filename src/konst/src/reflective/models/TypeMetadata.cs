@@ -9,16 +9,14 @@ namespace Z0
  
     using static Konst;
 
+    public struct TypeMetadata
+    {   
+        public readonly MetadataToken Id;
 
-    public struct FieldMetadata : IReflected<FieldMetadata>
-    {
-
-        public MetadataToken Id {get;}
-    
         [MethodImpl(Inline)]
-        public FieldMetadata(MetadataToken id)
+        public TypeMetadata(MetadataToken id)
         {
             Id = id;
-        }    
+        }       
     }
 }

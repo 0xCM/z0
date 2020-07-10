@@ -15,36 +15,57 @@ namespace Z0
     public readonly struct BitFieldSegment : IBitFieldSegment<byte>
     {
         /// <summary>
-        /// A unique name that identifies the segment
+        /// Specifies the segment identifier
         /// </summary>
-        public string Name {get;}
+        public readonly StringRef Id;
 
         /// <summary>
-        /// The first index of the segment, relative to the source field
+        /// The segment bit count
         /// </summary>
-        public byte StartPos {get;}
+        /// <remarks>
+        /// gmath.add(gmath.sub(startpos, endpos), one<T>())
+        /// </remarks>
+        public readonly byte Width;
 
         /// <summary>
-        /// The last index of the segment, relative to the source field
+        /// The inclusive left/right segment index boundaries
         /// </summary>
-        public byte EndPos {get;}
-
-        /// <summary>
-        /// The number of bits in the segment
-        /// </summary>
-        public byte Width {get;}
+        public readonly ConstPair<byte> Boundary;
+        
+        [MethodImpl(Inline)]
+        public static implicit operator BitFieldSegment<byte>(in BitFieldSegment src)
+            => BitFields.segment<byte>(src.Name, src.Width, src.Boundary);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitFieldSegment<byte>(BitFieldSegment src)
-            => new BitFieldSegment<byte>(src.Name, src.StartPos, src.EndPos, src.Width);
-
-        [MethodImpl(Inline)]
-        public BitFieldSegment(string name, byte startpos, byte endpos, byte width)
+        public BitFieldSegment(in StringRef id, byte width, in ConstPair<byte> boundary)
         {
-            Name = name;
-            StartPos = startpos;
-            EndPos = endpos;
+            Id = id;
             Width = width;
+            Boundary = boundary;
+        }
+
+        public string Name 
+        {
+            [MethodImpl(Inline)]
+            get => Id;
+        }
+
+        public byte StartPos 
+        {
+           [MethodImpl(Inline)]
+           get => Boundary.Left;
+        }
+
+        public byte EndPos 
+        {
+            [MethodImpl(Inline)]
+            get => Boundary.Right;
+        }
+
+        byte IBitFieldSegment<byte>.Width  
+        {
+            [MethodImpl(Inline)]
+            get => Width;
         }
     }
 }

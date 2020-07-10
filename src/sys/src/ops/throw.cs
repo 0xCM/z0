@@ -13,15 +13,15 @@ namespace Z0
 
     partial struct sys
     {        
-        [MethodImpl(Options), Opaque(Throw)]
+        [MethodImpl(NotInline), Opaque(Throw)]
         public static void @throw(string msg)
             => throw new Exception(msg);
 
-        [MethodImpl(Options), Opaque(Throw)]
+        [MethodImpl(NotInline), Opaque(Throw)]
         public static void @throw(Exception e)
             => throw e;
 
-        [MethodImpl(Options), Opaque(Throw)]
+        [MethodImpl(NotInline), Opaque(Throw)]
         public static T @throw<T>(Exception e)
             => throw e;
 

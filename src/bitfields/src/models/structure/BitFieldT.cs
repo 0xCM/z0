@@ -29,8 +29,8 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitField(in BitFieldSpec spec)
         {
-            this.Spec = spec;
-            this.Segs = spec.Segments;            
+            Spec = spec;
+            Segs = spec.Segments;            
         }
 
         /// <summary>

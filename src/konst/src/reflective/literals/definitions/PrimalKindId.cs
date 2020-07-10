@@ -3,12 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System;
-    using System.Runtime.CompilerServices;
- 
-    using static Konst;
-    
+{    
     using TC = System.TypeCode;
 
     /// <summary>
@@ -94,20 +89,5 @@ namespace Z0
 
         // 18
         String = TC.String
-    }
-
-    partial class XTend
-    {
-        [MethodImpl(Inline)]
-        public static PrimalKindId ToKind(this TypeCode src)
-            => (PrimalKindId)src;
-
-       [MethodImpl(Inline)]
-        public static TypeCode ToTypeCode(this PrimalKindId src)
-            => (TypeCode)src;
-
- 
-        public static string Format(this PrimalKindId src)
-                => $"{src}";            
     }
 }

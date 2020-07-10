@@ -17,12 +17,12 @@ namespace Z0
         /// </summary>
         /// <param name="count">The cell allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Options), Opaque(Alloc), Closures(AllNumeric)]
+        [MethodImpl(NotInline), Opaque(Alloc), Closures(AllNumeric)]
         public static T[] alloc<T>(int count)
             => new T[count];
 
 
-        [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(Alloc), Closures(Closure)]
         public static T[] alloc<T>(ulong count)
             => new T[count];
 
@@ -30,7 +30,7 @@ namespace Z0
         /// Allocates a specified number of bytes
         /// </summary>
         /// <param name="count">The number of bytes to allocate</param>
-        [MethodImpl(Options),  Opaque(Alloc)]
+        [MethodImpl(NotInline),  Opaque(Alloc)]
         public static byte[] alloc(int count)
             => new byte[count];
     }

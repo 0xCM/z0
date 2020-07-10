@@ -12,6 +12,12 @@ namespace Z0
     /// </summary>
     public readonly struct ValueMember
     {    
+        MemberInfo Member { get; }
+
+        bool IsField { get; }
+
+        FieldInfo BackingField { get; }
+
         public static implicit operator ValueMember(PropertyInfo Member) 
             => new ValueMember(Member);
 
@@ -39,12 +45,7 @@ namespace Z0
             BackingField = field;
         }
 
-        MemberInfo Member { get; }
-
-        bool IsField { get; }
-
-        FieldInfo BackingField { get; }
-
+ 
         public object GetValue(object o)
         {
             var objType = o.GetType();

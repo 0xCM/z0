@@ -14,15 +14,15 @@ namespace Z0
 
     partial struct sys
     {
-        [MethodImpl(Options), Opaque(GetEnumerator), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(GetEnumerator), Closures(Closure)]
         public static IEnumerator<T> enumerator<T>(IEnumerable<T> src)
             => src.GetEnumerator();
 
-        [MethodImpl(Options), Opaque(MoveNext), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(MoveNext), Closures(Closure)]
         public static bool next<T>(IEnumerator<T> src)
             => src.MoveNext();
 
-        [MethodImpl(Options), Opaque(Current), Closures(Closure)]
+        [MethodImpl(NotInline), Opaque(Current), Closures(Closure)]
         public static T current<T>(IEnumerator<T> src)
             => src.Current;
     }
