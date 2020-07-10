@@ -96,7 +96,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public void Fill(T src)
-            => sys.broadcast(src, Cells);
+            => sys.fill(src, Cells);
         
         [MethodImpl(Inline)]
         public void CopyTo(in ArraySpan<T> dst)

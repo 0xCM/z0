@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static OpacityKind;
-    using static Part;
-
     partial struct sys
     {
         /// <summary>
@@ -17,21 +14,20 @@ namespace Z0
         /// </summary>
         /// <param name="count">The cell allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(NotInline), Opaque(Alloc), Closures(AllNumeric)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] alloc<T>(int count)
-            => new T[count];
+            => xsys.alloc<T>(count);
 
-
-        [MethodImpl(NotInline), Opaque(Alloc), Closures(Closure)]
+        [MethodImpl(Options)]
         public static T[] alloc<T>(ulong count)
-            => new T[count];
+            => xsys.alloc<T>((int)count);
 
         /// <summary>
         /// Allocates a specified number of bytes
         /// </summary>
         /// <param name="count">The number of bytes to allocate</param>
-        [MethodImpl(NotInline),  Opaque(Alloc)]
+        [MethodImpl(Options),  Op]
         public static byte[] alloc(int count)
-            => new byte[count];
+            => xsys.alloc(count);
     }
 }

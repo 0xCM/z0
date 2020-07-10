@@ -6,26 +6,23 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-            
-    using static Part;
-    using static OpacityKind;
-    
+                
     partial struct sys
     {
         /// <summary>
         /// Tests whether the source string is empty
         /// </summary>
         /// <param name="src">The string to evaluate</param>
-        [MethodImpl(NotInline), Opaque(EmptyStringTest)]
+        [MethodImpl(Options), Op]
         public static bool empty(string src)
-            => string.IsNullOrWhiteSpace(src);
+            => xsys.empty(src);
 
         /// <summary>
         /// Returns an empty array
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(NotInline), Opaque(GetEmptyArray), Closures(AllNumeric)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] empty<T>()
-            => Array.Empty<T>();
+            => xsys.empty<T>();
     }
 }

@@ -7,11 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using static OpacityKind;
-    using static Part;
     
     partial struct sys
     {
@@ -20,21 +15,20 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source items</param>
         /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(NotInline), Opaque(ParameterArray), Closures(Closure)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] array<T>(params T[] src)
-            => src;
+            => xsys.array(src);
 
-        [MethodImpl(NotInline), Opaque(SpanToArray), Closures(Closure)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] array<T>(Span<T> src)
-            => src.ToArray();
+            => xsys.array(src);
 
-        [MethodImpl(NotInline), Opaque(ListToArray), Closures(Closure)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] array<T>(List<T> src)
-            => src.ToArray();
+            => xsys.array(src);
 
-
-        [MethodImpl(NotInline), Opaque(EnumerableToArray), Closures(Closure)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] array<T>(IEnumerable<T> src)
-            => src.ToArray();
+            => xsys.array(src);
     }
 }

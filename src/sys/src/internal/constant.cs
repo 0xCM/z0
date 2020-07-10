@@ -8,15 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
             
+    using O = OpacityKind;
 
-    partial struct sys
+    partial struct xsys
     {        
-        [MethodImpl(Options), Op, Closures(Closure)]
-        public static T constant<T>(FieldInfo src)
-            => xsys.constant<T>(src);
+        [MethodImpl(Options), Opaque(O.GetFieldConstant), Closures(Closure)]
+        public static T constant<T>(FieldInfo f)
+            => (T)f.GetRawConstantValue();                
 
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(O.GetFieldConstant)]
         public static object constant(FieldInfo src)
-            => xsys.constant(src);
+            => src.GetRawConstantValue();
     }
 }

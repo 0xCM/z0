@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     partial struct z
     {
@@ -15,6 +18,6 @@ namespace Z0
             a.CopyTo(dst,0);
             b.CopyTo(dst, a.Length);
             return dst;
-        }            
+        }               
     }
 }

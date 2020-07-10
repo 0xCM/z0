@@ -7,14 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static System.Runtime.CompilerServices.Unsafe;
-
-    using O = OpacityKind;
-
     partial struct sys
     {
-        [MethodImpl(NotInline), Opaque(O.Write), Closures(Closure)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static void write<T>(in T src, ref byte dst)
-            => WriteUnaligned(ref dst, src);
+            => xsys.write(src, ref dst);
     }
 }

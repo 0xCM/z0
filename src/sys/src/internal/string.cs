@@ -6,24 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    partial struct sys
+            
+    using static OpacityKind;
+    
+    partial struct xsys
     {
-        /// <summary>
-        /// Projects the source onto its textual representation
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Options), Op, Closures(Closure)]
+        [MethodImpl(Options), Opaque(CreateString), Closures(Closure)]
         public static string @string<T>(T src)
-            => xsys.@string(src);
+            => src?.ToString() ?? EmptyString;
 
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(CharPointerToString)]
         public static unsafe string @string(char* pSrc)
-            => xsys.@string(pSrc);
+            => new string(pSrc);
         
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(CharSpanToString)]
         public static string @string(ReadOnlySpan<char> src)
-            => xsys.@string(src);
+            => src.ToString();
     }
 }

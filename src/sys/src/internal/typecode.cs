@@ -7,14 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    partial struct sys
+    using static OpacityKind;
+    
+    partial struct xsys
     {
-        [MethodImpl(Options), Op, Closures(Closure)]
+        [MethodImpl(Options), Opaque(GetGenericTypeCode), Closures(Closure)]
         public static TypeCode typecode<T>()
-            => xsys.typecode<T>();
+            => Type.GetTypeCode(typeof(T));
 
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(GetTypeCode)]
         public static TypeCode typecode(Type src)
-            => xsys.typecode(src);
+            => Type.GetTypeCode(src);
     }
 }

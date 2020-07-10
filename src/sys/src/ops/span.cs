@@ -8,35 +8,29 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Collections.Generic;
-
-    using static OpacityKind;
     
     partial struct sys
     {
-        [MethodImpl(NotInline), Opaque(StringToCharSpan)]
-        public static ReadOnlySpan<char> span(string src)
-            => src;
-
         /// <summary>
         /// Allocates storage for a specified number of T-cells
         /// </summary>
         /// <param name="count">The cell allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(NotInline), Opaque(AllocSpan), Closures(Closure)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static Span<T> span<T>(int count)
-            => alloc<T>(count);
+            => xsys.span<T>(count);
 
         /// <summary>
         /// Allocates storage for a specified number of T-cells
         /// </summary>
         /// <param name="count">The cell allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(NotInline), Opaque(AllocSpan), Closures(Closure)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static Span<T> span<T>(uint count)
-            => alloc<T>(count);
+            => xsys.span<T>((int)count);
 
-        [MethodImpl(NotInline), Opaque(EnumerableToSpan), Closures(Closure)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static Span<T> span<T>(IEnumerable<T> src)
-            => src.ToArray();
+            => xsys.span(src);
     }
 }

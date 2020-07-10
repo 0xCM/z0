@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+            
+    using static OpacityKind;
     
-    partial struct sys
+    partial struct xsys
     {
-        /// <summary>
-        /// Tests whether the source string is nonempty
-        /// </summary>
-        /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(EmptyStringTest)]
         public static bool nonempty(string src)
-            => xsys.nonempty(src);
+            => !string.IsNullOrWhiteSpace(src);
     }
 }

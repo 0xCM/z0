@@ -9,18 +9,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    partial struct sys
+    using static OpacityKind;
+
+    partial struct xsys
     {
-        [MethodImpl(Options), Op, Closures(Closure)]
+        [MethodImpl(Options), Opaque(GetEnumerator), Closures(Closure)]
         public static IEnumerator<T> enumerator<T>(IEnumerable<T> src)
-            => xsys.enumerator(src);
+            => src.GetEnumerator();
 
-        [MethodImpl(Options), Op, Closures(Closure)]
+        [MethodImpl(Options), Opaque(MoveNext), Closures(Closure)]
         public static bool next<T>(IEnumerator<T> src)
-            => xsys.next(src);
+            => src.MoveNext();
 
-        [MethodImpl(Options), Op, Closures(Closure)]
+        [MethodImpl(Options), Opaque(Current), Closures(Closure)]
         public static T current<T>(IEnumerator<T> src)
-            => xsys.current(src);
+            => src.Current;
     }
 }

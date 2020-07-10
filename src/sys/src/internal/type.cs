@@ -6,15 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+            
+    using static Part;
 
-    partial struct sys
+    using O = OpacityKind;
+
+    partial struct xsys
     {                
-        [MethodImpl(Options), Op, Closures(Closure)]                
+        [MethodImpl(Options), Opaque(O.GetGenericType), Closures(Closure)]                
         public static Type type<T>()
-            => xsys.type<T>();
+            => typeof(T);
 
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(O.GetInstanceType)]
         public static Type type(object src)
-            => xsys.type(src);
+            => src?.GetType() ?? typeof(void);
     }
 }

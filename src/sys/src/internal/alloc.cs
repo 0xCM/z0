@@ -7,14 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    partial struct sys
-    {
-        [MethodImpl(Options), Op, Closures(Closure)]
-        public static TypeCode typecode<T>()
-            => xsys.typecode<T>();
+    using static OpacityKind;
 
-        [MethodImpl(Options), Op]
-        public static TypeCode typecode(Type src)
-            => xsys.typecode(src);
+    partial struct xsys
+    {
+        [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
+        public static T[] alloc<T>(int count)
+            => new T[count];
+
+        [MethodImpl(Options),  Opaque(Alloc)]
+        public static byte[] alloc(int count)
+            => new byte[count];
     }
 }

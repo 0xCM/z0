@@ -7,15 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static OpacityKind;
-    
     partial struct sys
     {
-        [MethodImpl(NotInline), Opaque(ClearSpan), Closures(Closure)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static ref readonly Span<T> clear<T>(in Span<T> src)
-        {
-            src.Clear();
-            return ref src;
-        }
+            => ref xsys.clear(src);
     }
 }

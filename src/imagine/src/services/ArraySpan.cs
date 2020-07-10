@@ -146,12 +146,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void fill<T>(T src, in ArraySpan<T> dst)
             where T : struct
-                => sys.broadcast(src, span(dst));
+                => sys.fill(src, span(dst));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void copy<T>(in ArraySpan<T> src, in ArraySpan<T> dst)
             where T : struct
-                => sys.copy(head(src), pvoid(dst));
+                => z.copy(head(src), pvoid(dst));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(in ArraySpan<T> src, int offset)

@@ -7,14 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    partial struct sys
+    using static OpacityKind;
+    
+    partial struct xsys
     {
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(GetTypeHandle)]
         public static IntPtr handle(Type src) 
-            => xsys.handle(src);
+            => src.TypeHandle.Value;
 
-        [MethodImpl(Options), Op, Closures(Closure)]
+        [MethodImpl(Options), Opaque(GetGenericTypeHandle), Closures(Closure)]
         public static IntPtr handle<T>() 
-            => xsys.handle<T>();
+            => typeof(T).TypeHandle.Value;
     }
 }

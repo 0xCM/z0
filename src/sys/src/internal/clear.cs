@@ -6,15 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    partial struct sys
+        
+    using static OpacityKind;
+
+    partial struct xsys
     {
-        /// <summary>
-        /// Tests whether the source string is nonempty
-        /// </summary>
-        /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Options), Op]
-        public static bool nonempty(string src)
-            => xsys.nonempty(src);
+        [MethodImpl(Options), Opaque(ClearSpan), Closures(Closure)]
+        public static ref readonly Span<T> clear<T>(in Span<T> src)
+        {
+            src.Clear();
+            return ref src;
+        }        
     }
 }

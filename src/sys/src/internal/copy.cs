@@ -6,24 +6,33 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+        
+    using static System.Runtime.CompilerServices.Unsafe;
+    
+    using static OpacityKind;
 
-    partial struct sys
+    using O = OpacityKind;
+
+    partial struct xsys
     {
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(O.CopyBlock)]
         public static void copy(in byte src, ref byte dst, uint count)
-            => xsys.copy(src,ref dst,count);
+            => CopyBlock(ref dst, ref AsRef(src), count);
 
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(O.CopyBlock)]
         public static unsafe void copy(byte* pSrc, byte* pDst, uint count)
-            => xsys.copy(pSrc,pDst,count);
+            => CopyBlock(pDst, pSrc, count);
 
-        [MethodImpl(Options), Op, Closures(Closure)]
+        [MethodImpl(Options), Opaque(O.CopyBlock), Closures(Closure)]
         public static unsafe void copy<T>(T* pSrc, T* pDst, uint count)
             where T : unmanaged
-                => xsys.copy(pSrc,pDst,count);
+                => CopyBlock(pDst, pSrc, count* (uint)SizeOf<T>());
 
-        [MethodImpl(Options), Op, Closures(Closure)]
+        [MethodImpl(Options), Opaque(CopySpan), Closures(Closure)]
         public static ref readonly Span<T> copy<T>(ReadOnlySpan<T> src, in Span<T> dst)
-            => ref xsys.copy(src,dst);
+        {
+            src.CopyTo(dst);
+            return ref dst;
+        }
     }
 }

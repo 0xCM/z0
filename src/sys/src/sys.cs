@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
 
 
-    [ApiHost("x")]
     public static partial class XTend
     {
 
@@ -23,8 +22,18 @@ namespace Z0
 
         const string EmptyString = "";
 
-        const MethodImplOptions NotInline = MethodImplOptions.NoInlining;                    
+        const MethodImplOptions Options = MethodImplOptions.AggressiveInlining;                    
+    }
 
-        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;                    
+    [ApiHost("xsys")]
+    readonly partial struct xsys
+    {
+
+        const NumericKind Closure = Integers;
+
+        const string EmptyString = "";
+
+        const MethodImplOptions Options = MethodImplOptions.NoInlining;                    
+                        
     }
 }

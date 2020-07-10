@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    partial struct sys
+        
+    using static System.Runtime.CompilerServices.Unsafe;
+
+    using O = OpacityKind;
+
+    partial struct xsys
     {
-        /// <summary>
-        /// Tests whether the source string is nonempty
-        /// </summary>
-        /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Options), Op]
-        public static bool nonempty(string src)
-            => xsys.nonempty(src);
+        [MethodImpl(Options), Opaque(O.Write), Closures(Closure)]
+        public static void write<T>(in T src, ref byte dst)
+            => WriteUnaligned(ref dst, src);
     }
 }

@@ -6,19 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+            
+    using static OpacityKind;
 
-    partial struct sys
+    partial struct xsys
     {        
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(Throw)]
         public static void @throw(string msg)
-            => xsys.@throw(msg);
+            => throw new Exception(msg);
 
-        [MethodImpl(Options), Op]
+        [MethodImpl(Options), Opaque(Throw)]
         public static void @throw(Exception e)
-            => xsys.@throw(e);
+            => throw e;
 
-        [MethodImpl(Options), Op, Closures(Closure)]
+        [MethodImpl(Options), Opaque(Throw), Closures(Closure)]
         public static T @throw<T>(Exception e)
-            => xsys.@throw<T>(e);
+            => throw e;
     }
 }
