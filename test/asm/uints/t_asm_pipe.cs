@@ -78,7 +78,7 @@ namespace Z0.Asm
             var archive = Archives.Services.EncodedHexArchive(capture.CodeDir);
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();
-            var builder = Archives.Services.IndexBuilder(ApiSet.Create(Api), Identities.Services.ApiLocator);            
+            var builder = new ApiIndexBuilder(ApiSet.Create(Api), Identities.Services.ApiLocator);
             check_unary_ops(direct);        
             check_unary_ops(generic);        
         }

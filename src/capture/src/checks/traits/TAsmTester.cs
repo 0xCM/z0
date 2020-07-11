@@ -32,12 +32,12 @@ namespace Z0.Asm
         ICaptureCore ICaptureServiceProxy.CaptureService 
             => Context.CaptureCore;        
 
-        TCaptureArchive CaptureArchive(PartId part)
+        TPartCaptureArchive CaptureArchive(PartId part)
             => Archives.CaptureArchive(
                 (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
                 FolderName.Define("capture"));
 
-        TCaptureArchive CaptureArchive(FolderPath root)
+        TPartCaptureArchive CaptureArchive(FolderPath root)
             => Archives.CaptureArchive(root, null, null);
 
         FilePath AsmFilePath<T>(PartId part) 

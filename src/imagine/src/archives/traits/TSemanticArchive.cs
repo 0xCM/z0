@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    public interface TSemanticArchive : TArchive
+    public interface TSemanticArchive : TPartFileArchive
     {
         FolderName SemanticFolder 
             => FolderName.Define("semantic");
@@ -19,7 +19,7 @@ namespace Z0
             => PartDir(part);
 
         FolderPath SemanticDir(ApiHostUri host)
-            => ExeSubDir(SemanticFolder) + HostPart(host);
+            => ExeSubDir(SemanticFolder) + HostPartLocation(host);
 
         FileName SemanticFileName(ApiHostUri host, FileExtension ext) 
             => LegalFileName(host,ext);

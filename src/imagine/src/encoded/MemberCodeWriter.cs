@@ -21,7 +21,7 @@ namespace Z0
         readonly StreamWriter StreamOut;
 
         [MethodImpl(Inline)]
-        internal MemberCodeWriter(FilePath path)
+        public MemberCodeWriter(FilePath path)
         {
             TargetPath = path;
             StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);

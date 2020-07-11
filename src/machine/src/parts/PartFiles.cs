@@ -66,7 +66,6 @@ namespace Z0
         public Dictionary<PartId,PartFile[]> ParseFiles(params PartId[] parts)
             => SelectFiles(PartFileKind.Parsed, ParseFilePaths, parts);
         
-
         public Dictionary<PartId,PartFile[]> HexFiles(params PartId[] parts)
             => SelectFiles(PartFileKind.Hex, HexFilePaths, parts);
 
@@ -78,7 +77,7 @@ namespace Z0
             var partSet = parts.ToHashSet();
 
             var files = (from f in src
-                        let part = ParsePartId(f)
+                        let part = f.Owner
                         where part != PartId.None && partSet.Contains(part)
                         let pf = DefinePartFile(part, kind, f)
                         group pf by pf.Part).ToDictionary(x => x.Key, y => y.ToArray());
@@ -86,19 +85,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        TCaptureArchive CaptureArchive(FolderPath root)
+        TPartCaptureArchive CaptureArchive(FolderPath root)
             => DataSource.CaptureArchive(root, null, null);
 
         static PartFile DefinePartFile(PartId part, PartFileKind kind, FilePath path)
             => new PartFile(part, kind,path);
 
-        static PartId ParsePartId(FilePath src)
-        {
-            var components = src.FileName.Name.SplitClean(Chars.Dot);
-            if(components.Length != 0)
-                return Enums.Parse(components[0], PartId.None);   
-            else
-                return PartId.None;
-        }
+
+        // static PartId ParsePartId(FilePath src)
+        // {
+        //     var components = src.FileName.Name.SplitClean(Chars.Dot);
+        //     if(components.Length != 0)
+        //         return Enums.Parse(components[0], PartId.None);   
+        //     else
+        //         return PartId.None;
+        // }
     }
 }

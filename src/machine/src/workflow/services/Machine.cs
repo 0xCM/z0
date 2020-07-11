@@ -21,11 +21,11 @@ namespace Z0.Machine
 
         public IAppMsgSink Sink {get;}
 
-        IMachineFiles Files {get;}
+        IMachineFileArchive Files {get;}
 
         EncodedIndexBuilder IndexBuilder {get;}            
 
-        TCaptureArchive Archive 
+        TPartCaptureArchive Archive 
             => Context.Archive;
 
         Machine(IMachineContext context)

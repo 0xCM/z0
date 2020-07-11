@@ -13,7 +13,10 @@ namespace Z0
     /// A host-specific capture archive
     /// </summary>
     public readonly struct HostCaptureArchive : THostCaptureArchive
-    {                                        
+    {                      
+        public static THostCaptureArchive Create(FolderPath root, ApiHostUri host)
+            => new HostCaptureArchive(root, host);
+
         public ApiHostUri Host {get;}
 
         public FolderPath ArchiveRoot {get;}
@@ -24,7 +27,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal HostCaptureArchive(FolderPath root, ApiHostUri host)
+        public HostCaptureArchive(FolderPath root, ApiHostUri host)
         {
             Host = host;
             ArchiveRoot = root;

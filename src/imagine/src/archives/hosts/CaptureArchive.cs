@@ -9,8 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct CaptureArchive : TCaptureArchive
+    public readonly struct CaptureArchiveService : TPartCaptureArchive
     {        
+        public static TPartCaptureArchive create(FolderPath root, FolderName area, FolderName subject)
+            => new CaptureArchiveService(root ?? Env.Current.LogDir, area ?? FolderName.Empty, subject ?? FolderName.Empty);        
+
         public FolderPath ArchiveRoot {get;}
 
         public FolderName AreaName {get;}
@@ -18,7 +21,7 @@ namespace Z0
         public FolderName SubjectName {get;}
 
         [MethodImpl(Inline)]
-        internal CaptureArchive(FolderPath root, FolderName area, FolderName subject)
+        internal CaptureArchiveService(FolderPath root, FolderName area, FolderName subject)
         {
             ArchiveRoot = root.Create();
             AreaName = area;

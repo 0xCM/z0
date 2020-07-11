@@ -66,16 +66,8 @@ namespace Z0.Asm
         /// <summary>
         /// The primary capture archive, predicated on the context-specified root path
         /// </summary>
-        TCaptureArchive RootCaptureArchive 
+        TPartCaptureArchive RootCaptureArchive 
             => Archives.Services.CaptureArchive(CaptureRoot);
-
-        /// <summary>
-        /// A root archive descendant narrowed by area/subject
-        /// </summary>
-        /// <param name="area">Root stratification</param>
-        /// <param name="subject">Area stratification</param>
-        TCaptureArchive CaptureArchive(FolderName area, FolderName subject) 
-            => RootCaptureArchive.Narrow(area,subject);
 
         /// <summary>
         /// The default asm formatting configuration

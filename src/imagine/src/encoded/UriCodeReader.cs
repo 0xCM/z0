@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
+    
     public readonly struct UriCodeReader : IMemberCodeReader
     {
         public static IMemberCodeReader Service => default(UriCodeReader);

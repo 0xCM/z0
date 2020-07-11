@@ -99,13 +99,13 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        TCaptureArchive CaptureArchive(PartId part)
+        TPartCaptureArchive CaptureArchive(PartId part)
             => DataSource.CaptureArchive(
                 (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
                 FolderName.Define("capture"));
 
         [MethodImpl(Inline)]
-        TCaptureArchive CaptureArchive(FolderPath root)
+        TPartCaptureArchive CaptureArchive(FolderPath root)
             => DataSource.CaptureArchive(root, null, null);
 
         [MethodImpl(Inline)]

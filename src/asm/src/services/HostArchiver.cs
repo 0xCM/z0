@@ -32,7 +32,7 @@ namespace Z0.Asm
             Host = host;
             ArchiveRoot = root;
             AsmFormatter = formatter;
-            HostArchive = Archives.Services.HostCapture(root, host);
+            HostArchive = HostCaptureArchive.Create(root, host);
             CilFormatter =  AsmCore.Services.CilFormatter();
         }
         

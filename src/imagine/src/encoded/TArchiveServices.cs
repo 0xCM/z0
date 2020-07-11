@@ -9,16 +9,16 @@ namespace Z0
     
     using static Konst;
 
-    public interface TArchives
-    {        
-        TAppPaths Paths
+    public interface TArchiveServices
+    {
+        TAppPaths AppPathDefault
             => AppPaths.Default;
 
         FolderPath LogRoot 
-            => Paths.LogRoot;
+            => AppPathDefault.LogRoot;
 
         FolderPath CaptureRoot
-            => Paths.CaptureRoot;
+            => AppPathDefault.CaptureRoot;
 
         TSemanticArchive Semantic 
             => SemanticArchive.Service;
@@ -39,15 +39,7 @@ namespace Z0
             => new MemberCodeWriter(dst);        
 
         [MethodImpl(Inline)]
-        ApiIndexBuilder IndexBuilder(IApiSet api, IMemberLocator locator)
-            => new ApiIndexBuilder(api,locator);
-
-        [MethodImpl(Inline)]
-        TCaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
-            => new CaptureArchive(root ?? LogRoot, area ?? FolderName.Empty, subject ?? FolderName.Empty);
-        
-        [MethodImpl(Inline)]
-        THostCaptureArchive HostCapture(FolderPath root, ApiHostUri host) 
-            => new HostCaptureArchive(root ?? LogRoot, host);    
+        TPartCaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
+            => CaptureArchiveService.create(root ?? LogRoot, area ?? FolderName.Empty, subject ?? FolderName.Empty);    
     }
 }

@@ -9,9 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
-    using static Memories;
-
     public readonly struct EncodedHexReader : IEncodedHexReader
     {
         public static IEncodedHexReader Service => default(EncodedHexReader);
@@ -34,7 +31,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                report(e);
+                term.error(e);
                 return default;
             }
         }

@@ -16,6 +16,8 @@ namespace Z0
 
         public static FileExtension Xml =>  FileExtension.Define("xml", "Xml file");
 
+        public static FileExtension Json =>  FileExtension.Define("json", "JSON file");
+
         public static FileExtension Exe =>  FileExtension.Define("exe", "Application executable");
 
         public static FileExtension Txt =>  FileExtension.Define("txt", "Plaintext");
@@ -28,6 +30,13 @@ namespace Z0
 
         public static FileExtension StdOut =>  FileExtension.Define("stdout", "Standard output stream");
 
-        public static FileExtension ErrOut =>  FileExtension.Define("errors", "Error output stream");        
+        public static FileExtension ErrOut =>  FileExtension.Define("errors", "Error output stream");   
+
+        public static FileExtension Extract => FileExtension.Define("x.csv", "Raw x86 disassembly");
+
+        public static FileExtension Parsed => FileExtension.Define("p.csv", "Parsed x86 disassembly");
+    
+        public static FileExtension Unparsed => FileExtension.Define("u.csv", "Unparseable x86 disassembly");
+
     }
 }

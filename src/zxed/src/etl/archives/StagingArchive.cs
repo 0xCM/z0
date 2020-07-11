@@ -10,7 +10,7 @@ namespace Z0.Xed
     using System.Collections.Generic;
     using System.Linq;
     
-    public readonly struct StagingArchive : TArchive
+    public readonly struct StagingArchive : TPartFileArchive
     {
         public static StagingArchive Create(FolderPath root)
             => new StagingArchive(root);

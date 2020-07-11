@@ -38,13 +38,6 @@ namespace Z0
         public static FilePath operator + (FilePath a, FileExtension b)
             => new FilePath(Path.Join(a.Name, b.Name));
 
-        // public static FilePath operator + (FilePath a, FileExt b)
-        //     => new FilePath(Path.Join(a.Name, b.Name));
-
-        // public FilePath ChangeExtension<A>(FileExt<A> ext)
-        //     where A : unmanaged, IAsciSequence
-        //         => FolderPath + FileName.Define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Format()));
-
         public static FilePath operator + (FilePath a, FilePath b)
             => new FilePath(Path.Join(a.Name, b.Name));
 
@@ -125,8 +118,6 @@ namespace Z0
             => Name.EndsWith(substring, NoCase);
 
         public FilePath ChangeExtension(FileExtension ext)
-            => FolderPath + FileName.Define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Name));                
-
-
+            => FolderPath + FileName.Define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Name));
     }
 }

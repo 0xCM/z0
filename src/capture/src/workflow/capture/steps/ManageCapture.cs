@@ -22,7 +22,7 @@ namespace Z0.Asm
         internal ManageCaptureStep(ICaptureWorkflow workflow)
             => Workflow = workflow;
         
-        static TCaptureArchive InitTarget(AsmArchiveConfig config, params PartId[] parts) 
+        static TPartCaptureArchive InitTarget(AsmArchiveConfig config, params PartId[] parts) 
         {
             var archive = Archives.Services.CaptureArchive(config.ArchiveRoot);
             archive.Clear(parts);
@@ -64,7 +64,7 @@ namespace Z0.Asm
             step.CaptureHosts(hosts,dst);
         }
 
-        public void CaptureParts(IPartCatalog[] src, TCaptureArchive dst)
+        public void CaptureParts(IPartCatalog[] src, TPartCaptureArchive dst)
         {
             for(var i=0; i<src.Length; i++)
             {
@@ -72,7 +72,7 @@ namespace Z0.Asm
             }
         }
         
-        public void CapturePart(IPartCatalog src, TCaptureArchive dst)
+        public void CapturePart(IPartCatalog src, TPartCaptureArchive dst)
         {
             if(src.HasApiHostContent)
             {
@@ -82,13 +82,13 @@ namespace Z0.Asm
             }
         }
 
-        public void CaptureHosts(IPartCatalog src, TCaptureArchive dst)
+        public void CaptureHosts(IPartCatalog src, TPartCaptureArchive dst)
         {
             var step = CaptureHostStep.create(Workflow);             
             z.iter(src.Hosts, h => CaptureHost(step, h, dst));
         }
 
-        public void CaptureHost(CaptureHostStep step, IApiHost host, TCaptureArchive dst)
+        public void CaptureHost(CaptureHostStep step, IApiHost host, TPartCaptureArchive dst)
         {                
             Context.Raise(new CapturingHost(host.Uri));
             step.Execute(host, dst);

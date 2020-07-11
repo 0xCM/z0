@@ -18,10 +18,10 @@ namespace Z0
         readonly IMemberLocator Locator;
                 
         [MethodImpl(Inline)]
-        internal ApiIndexBuilder(IApiSet api, IMemberLocator locator)
+        public ApiIndexBuilder(IApiSet api, IMemberLocator locator)
         {
-            this.ApiSet = api;
-            this.Locator = locator;        
+            ApiSet = api;
+            Locator = locator;        
         }
         
         public static ApiIndex IndexApi(IEnumerable<ApiMember> src)
@@ -54,11 +54,11 @@ namespace Z0
 
         public static ApiCodeIndex create(IMemberLocator locator, IApiSet api, ApiHostUri host, FolderPath root)
         {
-            var indexer =  Services.IndexBuilder(api,locator);
+            var indexer =  new ApiIndexBuilder(api,locator);
             var members = locator.Locate(api.FindHost(host).Require());
             var apiIndex = IndexApi(members);
             var archive =  Services.CaptureArchive(root);
-            var paths = archive.HostArchive(host);
+            var paths =   HostCaptureArchive.Create(root, host);
             var code = EncodedHexReader.Service.Read(paths.HexPath);
             var opIndex =  UriHexQuery.Service.CreateIndex(code);
             return indexer.CreateIndex(apiIndex, opIndex);            

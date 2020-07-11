@@ -17,7 +17,7 @@ namespace Z0.Asm
 
     public interface ICaptureHostStep
     {
-        void Execute(IApiHost host, TCaptureArchive dst);
+        void Execute(IApiHost host, TPartCaptureArchive dst);
     }
 
     public interface IDecodeStep
@@ -34,11 +34,11 @@ namespace Z0.Asm
 
     public interface IManageCaptureStep
     {
-        void CaptureHost(CaptureHostStep step, IApiHost host, TCaptureArchive dst);
+        void CaptureHost(CaptureHostStep step, IApiHost host, TPartCaptureArchive dst);
 
         void CaptureParts(AsmArchiveConfig config, params PartId[] parts);
         
-        void CapturePart(IPartCatalog src, TCaptureArchive dst);
+        void CapturePart(IPartCatalog src, TPartCaptureArchive dst);
     }    
 
     public interface IReportExtractsStep 

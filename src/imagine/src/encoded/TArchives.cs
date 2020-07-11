@@ -2,10 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machine
+namespace Z0
 {
-    public interface IMachine : IServiceAllocation<IMachineContext>, IMachineEventClient
-    {
-        void Run();
+    using System;
+    using System.Runtime.CompilerServices;
+    
+    using static Konst;
+
+
+    public interface TArchives : TArchiveServices
+    {        
+
+
     }
 }

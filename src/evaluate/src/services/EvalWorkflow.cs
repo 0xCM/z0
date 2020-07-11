@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         readonly byte BufferCount;
 
-        readonly TCaptureArchive CodeArchive;
+        readonly TPartCaptureArchive CodeArchive;
 
         readonly IApiSet ApiSet;
                 
@@ -37,7 +37,7 @@ namespace Z0.Asm
                 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dst = CodeArchive.HostArchive(host.Uri);
+            var dst = HostCaptureArchive.Create(CodeArchive.ArchiveRoot, host.Uri);
             if(dst.HexPath.Exists)
             {
                 var code = ApiIndexBuilder.create(Identities.Services.ApiLocator, ApiSet, host.Uri, CodeArchive.ArchiveRoot);

@@ -14,7 +14,7 @@ namespace Z0.Asm
     public abstract class t_asm<U> : UnitTest<U,CheckVectors,TCheckVectors>
         where U : t_asm<U>
     {     
-        protected TCaptureArchive TargetArchive 
+        protected TPartCaptureArchive TargetArchive 
             => Archives.Services.CaptureArchive(UnitDataDir);
         
         protected StreamWriter FileStreamWriter([Caller] string caller = null)

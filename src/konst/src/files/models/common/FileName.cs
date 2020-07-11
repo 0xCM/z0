@@ -76,7 +76,6 @@ namespace Z0
         public static FileName operator + (FileName name, FileExtension ext)
             => FileName.Define($"{name.Name}.{ext.Name}");
 
-
         public FileName()
         {
 

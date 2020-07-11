@@ -4,29 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Konst;
-
     /// <summary>
     /// Defines filename facilites common to all archives
     /// </summary>
-    public interface TArchiveFileNames : TArchiveExtensions
+    public interface TPartFileNames : TPartFileExtensions
     {
-        [MethodImpl(Inline)]
         FileName LegalFileName(OpIdentity id, FileExtension ext)
             => id.ToFileName(ext);
 
-        [MethodImpl(Inline)]
         FileName LegalFileName(PartId part, OpIdentity id, FileExtension ext)
             => FileName.Define(string.Concat(part.Format(), Chars.Dot, LegalFileName(id,ext)));
 
-        [MethodImpl(Inline)]
         FileName LegalFileName(ApiHostUri host, OpIdentity id, FileExtension ext)
             => FileName.Define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name, Chars.Dot, LegalFileName(id,ext)));
 
-        [MethodImpl(Inline)]
         FileName LegalFileName(ApiHostUri host, FileExtension ext)
             => FileName.Define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
@@ -38,5 +29,11 @@ namespace Z0
 
         FileName HexFileName(OpIdentity id) 
             => LegalFileName(id, Hex);       
+
+        FileName CilFileName(OpIdentity id) 
+            => LegalFileName(id, Il);
+
+        FileName ParseFileName(ApiHostUri host)
+            => LegalFileName(host, Parsed);
     }
 }

@@ -29,7 +29,7 @@ namespace Z0.Asm
         AppErrorEvent Error(Exception e)
             => e;
 
-        public void CaptureHosts(ApiHost[] hosts, TCaptureArchive dst)
+        public void CaptureHosts(ApiHost[] hosts, TPartCaptureArchive dst)
         {
             var extracts = Workflow.ExtractMembers.ExtractMembers(hosts);
             if(extracts.Length == 0)
@@ -43,9 +43,9 @@ namespace Z0.Asm
             }
         }
 
-        void Store(ApiHostUri host, ExtractedCode[] extracts, TCaptureArchive dst)
+        void Store(ApiHostUri host, ExtractedCode[] extracts, TPartCaptureArchive dst)
         {
-            var paths = dst.HostArchive(host);
+            var paths = HostCaptureArchive.Create(dst.ArchiveRoot, host);
             var extractRpt = Workflow.ReportExtracts.CreateExtractReport(host, extracts);
             Workflow.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
 
@@ -67,11 +67,11 @@ namespace Z0.Asm
             }
         }
         
-        public void Execute(IApiHost host, TCaptureArchive dst)
+        public void Execute(IApiHost host, TPartCaptureArchive dst)
         {
             try
             {
-                var paths = dst.HostArchive(host.Uri);
+                var paths = HostCaptureArchive.Create(dst.ArchiveRoot, host.Uri);
                 if(host.PartId.IsNone())
                     return;
 

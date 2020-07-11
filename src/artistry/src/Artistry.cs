@@ -33,17 +33,14 @@ namespace Z0
 
         IResolvedApi Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
-
-        IAsmContext CreateAsmContext()
-            => AsmContext.Create(Context);
-        
+       
         IArtistryContext CreateArtistryContext(IAsmContext root, PartId[] code)
             => ArtistryContext.Create(root, code);
 
         public override void RunShell(params string[] args)
         {            
             var parts = PartIdParser.Service.ParseValid(args);  
-            var context = CreateArtistryContext(CreateAsmContext(), parts);  
+            var context = CreateArtistryContext(AsmContext.Create(Context), parts);  
             new Art(context).Display();
         }
 

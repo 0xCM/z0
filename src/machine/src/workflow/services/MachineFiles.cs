@@ -8,9 +8,8 @@ namespace Z0.Machine
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
-    public readonly struct MachineFiles : IMachineFiles
+    public readonly struct MachineFiles : IMachineFileArchive
     {            
         [MethodImpl(Inline)]
         public static MachineFiles Service(IMachineContext context)
@@ -20,11 +19,15 @@ namespace Z0.Machine
         public MachineFiles(IMachineContext context)
         {
             this.Context = context;
-            this.Archive = context.Archive;
+            this.CaptureArchive = context.Archive;
         }
 
         public IMachineContext Context {get;}
         
-        public TCaptureArchive Archive {get;}
+        public TPartCaptureArchive CaptureArchive {get;}
     }
+
+
+
+
 }

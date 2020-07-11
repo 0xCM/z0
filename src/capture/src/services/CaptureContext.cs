@@ -26,14 +26,14 @@ namespace Z0.Asm
 
         public ICaptureBroker Broker {get;}
 
-        public TCaptureArchive Archive {get;}
+        public TPartCaptureArchive Archive {get;}
 
         public IAppMsgSink MsgSink {get;}
 
         int step;
 
         public CaptureContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
-            ICaptureBroker broker, TCaptureArchive archive)
+            ICaptureBroker broker, TPartCaptureArchive archive)
         {
             ApiSet = context.Api;
             Extractor = Capture.Services.HostExtractor(Extracts.DefaultBufferLength);

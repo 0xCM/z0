@@ -12,6 +12,15 @@ namespace Z0
     using static Konst;
     using static IDI;
     
+    public interface TIdentityParser : IInfallibleParser<OpIdentity>
+    {
+        OpIdentity IInfallibleParser<OpIdentity>.Parse(string text)
+            => OpIdentityParser.parse(text);
+        
+        OpIdentity INullary<OpIdentity>.Zero 
+            => OpIdentity.Empty;
+    }    
+    
     public readonly struct OpIdentityParser : TIdentityParser
     {
         public static OpIdentityParser Service => default(OpIdentityParser);

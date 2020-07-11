@@ -12,24 +12,19 @@ namespace Z0
     /// <summary>
     /// Characterizes a file-system repository for anticipated file kinds
     /// </summary>
-    public interface TArchive : 
-        IService,
-        TPathServices,
-        TArchiveExtensions, 
-        TArchiveFolders, 
-        TArchiveFileNames         
+    public interface TPartFileArchive : TPartFilePaths
     {
         /// <summary>
         /// The path to which all archive path arithmetic is relative
         /// </summary>
         FolderPath ArchiveRoot 
             => Env.Current.LogDir;
-
+            
         /// <summary>
         /// A folder name of the form PartFolder(part):{TestPartition | AppPartition} as determined by the identifier of the entry process  
         /// </summary>
         FolderName RootPartition 
-            => Part.isTest(Part.ExecutingPart) ? TestPartition : AppPartition;
+            => Part.isTest(Part.ExecutingPart) ? TestFolderName : AppFolderName;
 
         /// <summary>
         /// Defines a path that determines the root directory for process-specific archives 
@@ -42,8 +37,17 @@ namespace Z0
         /// Defines a process-specific path of the form {ExeRoot}/{ExeFolder} where 
         /// ExeFolder := PartFolder(part:PartId) and {part} is the identifier of the entry process
         /// </summary>
-        FolderPath ExeDir 
-            => ExeRoot + ExeFolder;
+        FolderPath PartExeDir 
+            => ExeRoot + PartExeFolderName;
+
+
+        [MethodImpl(Inline)]
+        FolderPath PartDataDir(FolderName folder)            
+            => (PartExeDir + DataFolderName) + folder;
+
+        [MethodImpl(Inline)]
+        FolderPath PartDataDir(Type t)            
+            => PartDataDir(TypeFolderName(t));
 
         /// <summary>
         /// Defines a path of the form {ExeDir}/{folder}
@@ -51,15 +55,7 @@ namespace Z0
         /// <param name="folder">The source folder</param>
         [MethodImpl(Inline)]
         FolderPath ExeSubDir(FolderName folder)
-            => ExeDir + folder;                
-
-        [MethodImpl(Inline)]
-        FolderPath ExeDataDir(FolderName folder)            
-            => (ExeDir + DataPartition) + folder;
-
-        [MethodImpl(Inline)]
-        FolderPath ExeDataDir(Type t)            
-            => ExeDataDir(TypeFolder(t));
+            => PartExeDir + folder;                
 
         /// <summary>
         /// Defines a path of the form {ExeRoot}/{ExeDir}/{part:Folder}
@@ -67,6 +63,6 @@ namespace Z0
         /// <param name="part">The source part</param>
         [MethodImpl(Inline)]
         FolderPath PartDir(PartId part)
-            => ExeSubDir(PartFolder(part));
+            => ExeSubDir(PartFolderName(part));
     }
 }

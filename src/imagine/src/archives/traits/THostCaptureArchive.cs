@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    public interface THostCaptureArchive : TCaptureArchive
+    public interface THostCaptureArchive : TPartCaptureArchive
     {
         ApiHostUri Host {get;}
 

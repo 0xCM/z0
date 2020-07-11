@@ -9,8 +9,23 @@ namespace Z0
     
     using static Konst;
 
-    public interface IPartArchive
+    public readonly struct PartFileArchive
     {
+        readonly TPartCaptureArchive Archive; 
+
+        public PartFileArchive(FolderPath root)
+        {
+            Archive =  Archives.Services.CaptureArchive(root, null, null);
+        }
         
+        public FilePath[] ParseFiles
+            => Archive.ParseFiles.Array();
+
+        public FilePath[] AsmFiles
+            => Archive.AsmFiles.Array();
+
+        public FilePath[] HexFiles
+            => Archive.HexFiles.Array();
+       
     }
 }

@@ -54,7 +54,7 @@ namespace Z0.Machine
         
         void LoadAsmDocs()
         {
-            Root.iter(Files.Archive.AsmFiles,LoadAsmDoc);
+            Root.iter(Files.CaptureArchive.AsmFiles,LoadAsmDoc);
             Notify(new CpuEvent("Loaded asm docs", $"{AsmDocs.Count}"));
         }
 

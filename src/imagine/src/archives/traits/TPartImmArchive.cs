@@ -6,33 +6,27 @@ namespace Z0
 {        
     using System.Linq;
 
-    public interface TImmArchive : TArchive
+    public interface TPartImmArchive : TPartImmFilePaths, TPartFileArchive
     {        
-        /// <summary>
-        /// The imm root folder name
-        /// </summary>
-        FolderName ImmRootFolder 
-            => FolderName.Define("imm", "Immediate embedding emission root");
-
         /// <summary>
         /// The imm root directory path
         /// </summary>
         FolderPath ImmRootDir 
-            => (ArchiveRoot + ImmRootFolder).Create();
+            => ImmRootDirPath(ArchiveRoot);
 
         /// <summary>
         /// Defines the path of an imm part directory
         /// </summary>
         /// <param name="part">The owning part</param>
         FolderPath ImmDir(PartId part)
-            => ImmRootDir + PartFolder(part);
+            => ImmRootDirPath(ArchiveRoot) + PartFolderName(part);
 
         /// <summary>
         /// Defines the path of an imm host directory
         /// </summary>
         /// <param name="part">The owning part</param>
         FolderPath ImmDir(ApiHostUri host)
-            => ImmDir(host.Owner) + HostFolder(host);
+            => ImmDir(host.Owner) + HostFolderName(host);
 
         /// <summary>
         /// Nonrecursively enumerates directory paths owned by a specified part

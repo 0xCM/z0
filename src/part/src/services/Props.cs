@@ -10,7 +10,6 @@ namespace Z0
     
     partial struct Part
     {
-
         /// <summary>
         /// Retrieves the part identifier, if any, of the entry assembly
         /// </summary>

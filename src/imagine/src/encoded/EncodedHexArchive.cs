@@ -20,7 +20,7 @@ namespace Z0
         public FolderPath ArchiveRoot {get;}            
         
         [MethodImpl(Inline)]
-        internal EncodedHexArchive(FolderPath root)
+        public EncodedHexArchive(FolderPath root)
             => ArchiveRoot = root;
 
         public IEnumerable<IdentifiedCode> Read(ApiHostUri host)

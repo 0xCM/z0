@@ -30,7 +30,7 @@ namespace Z0.Asm
         /// Creates a default capture worklfow
         /// </summary>
         /// <param name="archive">The archive to target</param>
-        ICaptureWorkflow CaptureWorkflow(TCaptureArchive archive)
+        ICaptureWorkflow CaptureWorkflow(TPartCaptureArchive archive)
             => new CaptureWorkflow(Context, AsmDecoder(), Formatter(), Capture.Services.AsmWriterFactory, archive);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0.Asm
         /// <param name="decoder">The decoder to use</param>
         /// <param name="formatter">The formatter to use</param>
         /// <param name="archive">The archive to target</param>
-        ICaptureWorkflow CaptureWorkflow(IAsmFunctionDecoder decoder, IAsmFormatter formatter, TCaptureArchive archive)
+        ICaptureWorkflow CaptureWorkflow(IAsmFunctionDecoder decoder, IAsmFormatter formatter, TPartCaptureArchive archive)
             => new CaptureWorkflow(Context, decoder, formatter, Capture.Services.AsmWriterFactory, archive);
 
         /// <summary>
