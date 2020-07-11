@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst; 
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Encapsulates metrics that characterize a grid of natural rectangular dimensions
@@ -33,7 +33,7 @@ namespace Z0
         public int RowCount
         {
             [MethodImpl(Inline)]
-            get => nati<M>();
+            get => (int)value<M>();
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         public int ColCount
         {
             [MethodImpl(Inline)]
-            get => nati<N>();
+            get => (int)value<N>();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         public int CellWidth
         {
             [MethodImpl(Inline)]
-            get => bitsize<T>();
+            get => (int)bitsize<T>();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         public int BlockWidth
         {
             [MethodImpl(Inline)]
-            get => bitsize<T>();
+            get => (int)bitsize<T>();
         }
 
         /// <summary>

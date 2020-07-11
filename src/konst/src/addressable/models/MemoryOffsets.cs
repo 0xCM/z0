@@ -72,6 +72,12 @@ namespace Z0
             get => ref z.skip(Content,(uint)index);
         }
 
+        public ref readonly MemoryOffset this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref z.skip(Content,(uint)index);
+        }
+
         public int Length
         {
             [MethodImpl(Inline)]
