@@ -262,7 +262,6 @@ namespace Z0
         protected void Trace(object msg, [Caller] string caller = null)
             => Queue.Trace(msg, GetType(), caller);
 
-
         protected void Trace(string title, object msg, AppMsgColor color, [Caller] string caller = null)
             => Queue.Trace(title, msg, color, GetType(), caller);
 
@@ -271,6 +270,10 @@ namespace Z0
 
         protected void Trace(IAppMsg msg)
             => Queue.Trace(msg);
+
+        protected void Trace(ITextual msg)
+            => Notify(msg.Format());
+
 
         protected void Trace<T>(Span<T> src, [Caller] string caller = null)
             => Trace(src.Format(),caller);

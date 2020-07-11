@@ -17,6 +17,9 @@ namespace Z0
         new F Content 
             => (F)this;
 
+        F INullary<F>.Zero 
+            => default;
+
         object IAppEvent.Content
             => Content;                
     }
