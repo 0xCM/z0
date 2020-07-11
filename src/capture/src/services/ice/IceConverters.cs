@@ -104,8 +104,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline)]
-        public Code Thaw(Iced.Code src)
-            => (Code)src;
+        public OpCodeId Thaw(Iced.Code src)
+            => (OpCodeId)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure

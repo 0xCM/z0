@@ -3,12 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-        
+{                
     public interface TPartCaptureArchive : TPartFilePaths, TPartFileArchive, TPartImmArchive 
     {
         FolderPath ExtractDir 

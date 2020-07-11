@@ -4,10 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Machine
 {
-    using System;
-
     [ApiHost]
-    public partial class CpuStorage : IApiHost<CpuStorage>
+    public partial class CpuStorage
     {        
 
     }

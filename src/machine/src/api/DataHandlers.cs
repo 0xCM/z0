@@ -10,7 +10,7 @@ namespace Z0.Machine
     using static Konst;
 
     [ApiHost]
-    public readonly struct DataHandlers : IApiHost<DataHandlers>
+    public readonly struct DataHandlers
     {
         [MethodImpl(Inline)]
         public static DataHandler<T> Create<T>(DataReceiver<T> receiver)

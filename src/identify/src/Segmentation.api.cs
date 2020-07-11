@@ -24,6 +24,16 @@ namespace Z0
                 return Option.none<SegmentedIdentity>();
         }
 
+        /// <summary>
+        /// Extracts an index-identified segmented identity part from an operation identity
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        /// <param name="partidx">The 0-based part index</param>
+        public static Option<SegmentedIdentity> identify(OpIdentity src, int partidx)
+            => from p in Z0.Identify.Part(src, partidx)
+                from s in identify(p)
+                select s;
+
         [MethodImpl(Inline)]
         public static SegmentedIdentity identify(TypeIndicator indicator, TypeWidth wk, NumericKind segkind)
             => new SegmentedIdentity(indicator, (FixedWidth)wk, segkind);
