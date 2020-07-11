@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     
-    using static Tabular;
     using static Konst;
 
     using F = ExtractField;

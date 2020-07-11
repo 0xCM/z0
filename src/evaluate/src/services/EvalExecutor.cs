@@ -265,7 +265,7 @@ namespace Z0
         static int seq
         {
             [MethodImpl(Inline)]
-            get => increment(ref _checkseq);
+            get => atomic(ref _checkseq);
         }
     }
 }

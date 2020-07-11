@@ -10,8 +10,6 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Memories;
-
     using static gmath;
 
     [ApiHost]
@@ -242,7 +240,7 @@ namespace Z0
         {            
             if(xs.Length != ys.Length)
                 return false;
-            return Algorithms.identical(ref head(xs), ref head(ys), xs.Length);
+            return Algorithms.identical(ref z.first(xs), ref z.first(ys), (uint)xs.Length);
         }
 
         /// <summary>
@@ -257,56 +255,56 @@ namespace Z0
         {
             if(xs.Length != ys.Length)
                 return false;
-            return Algorithms.identical(ref edit(in head(xs)), ref edit(in head(ys)), xs.Length);
+            return Algorithms.identical(ref z.edit(in z.first(xs)), ref z.edit(in z.first(ys)), (uint)xs.Length);
         }        
 
         /// <summary>
         ///  Adapted from corefx repo
         /// </summary>
         [Op, Closures(UnsignedInts)]
-        public static bit identical<T>(ref T first, ref T second, int length)
+        public static bit identical<T>(ref T first, ref T second, uint length)
             where T : unmanaged
         {
             if (Unsafe.AreSame(ref first, ref second))
                 return true;
 
-            IntPtr offset = (IntPtr)0; 
+            var offset = 0; 
             T x;
             T y;
             while (length >= 8)
             {
                 length -= 8;
                 
-                x = offset<T>(ref first, offset + 0);
-                y = offset<T>(ref second, offset + 0);
+                x = z.add<T>(first, offset + 0);
+                y = z.add<T>(second, offset + 0);
                 if(neq(x, y))
                     return false;                
-                x = offset<T>(ref first, offset + 1);
-                y = offset<T>(ref second, offset + 1);
+                x = z.add<T>(first, offset + 1);
+                y = z.add<T>(second, offset + 1);
                 if(neq(x, y))
                     return false;
-                x = offset<T>(ref first, offset + 2);
-                y = offset<T>(ref second, offset + 2);
+                x = z.add<T>(first, offset + 2);
+                y = z.add<T>(second, offset + 2);
                 if(neq(x, y))
                     return false;
-                x = offset<T>(ref first, offset + 3);
-                y = offset<T>(ref second, offset + 3);
+                x = z.add<T>(first, offset + 3);
+                y = z.add<T>(second, offset + 3);
                 if(neq(x, y))
                     return false;
-                x = offset<T>(ref first, offset + 4);
-                y = offset<T>(ref second, offset + 4);
+                x = z.add<T>(first, offset + 4);
+                y = z.add<T>(second, offset + 4);
                 if(neq(x, y))
                     return false;
-                x = offset<T>(ref first, offset + 5);
-                y = offset<T>(ref second, offset + 5);
+                x = z.add<T>(first, offset + 5);
+                y = z.add<T>(second, offset + 5);
                 if(neq(x, y))
                     return false;
-                x = offset<T>(ref first, offset + 6);
-                y = offset<T>(ref second, offset + 6);
+                x = z.add<T>(first, offset + 6);
+                y = z.add<T>(second, offset + 6);
                 if(neq(x, y))
                     return false;
-                x = offset<T>(ref first, offset + 7);
-                y = offset<T>(ref second, offset + 7);
+                x = z.add<T>(first, offset + 7);
+                y = z.add<T>(second, offset + 7);
                 if(neq(x, y))
                     return false;
 
@@ -317,20 +315,20 @@ namespace Z0
             {
                 length -= 4;
 
-                x = offset<T>(ref first, offset);
-                y = offset<T>(ref second, offset);
+                x = z.add<T>(first, offset);
+                y = z.add<T>(second, offset);
                 if(gmath.neq(x, y))
                     return false;
-                x = offset<T>(ref first, offset + 1);
-                y = offset<T>(ref second, offset + 1);
+                x = z.add<T>(first, offset + 1);
+                y = z.add<T>(second, offset + 1);
                 if(gmath.neq(x, y))
                     return false;
-                x = offset<T>(ref first, offset + 2);
-                y = offset<T>(ref second, offset + 2);
+                x = z.add<T>(first, offset + 2);
+                y = z.add<T>(second, offset + 2);
                 if(gmath.neq(x, y))
                     return false;
-                x = offset<T>(ref first, offset + 3);
-                y = offset<T>(ref second, offset + 3);
+                x = z.add<T>(first, offset + 3);
+                y = z.add<T>(second, offset + 3);
                 if(gmath.neq(x, y))
                     return false;
 
@@ -339,8 +337,8 @@ namespace Z0
 
             while (length > 0)
             {
-                x = offset<T>(ref first, offset);
-                y = offset<T>(ref second, offset);
+                x = z.add<T>(first, offset);
+                y = z.add<T>(second, offset);
                 if(gmath.neq(x, y))
                     return false;
                 offset += 1;

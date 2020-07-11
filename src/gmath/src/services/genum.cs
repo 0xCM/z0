@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst; 
-    using static Memories;
+    using static z;
     using static Enums;
 
     public class genum
@@ -54,7 +54,7 @@ namespace Z0
             where E : unmanaged, Enum
             where S : unmanaged
             where T : unmanaged
-                => convert<S,T>(gmath.sll(scalar<E,S>(src), count));     
+                => numeric<S,T>(gmath.sll(scalar<E,S>(src), count));     
 
         /// <summary>
         /// Converts a source enume value src:E to a parametrically-identified numeric type S,
@@ -75,7 +75,7 @@ namespace Z0
             where C : unmanaged, Enum
             where S : unmanaged
             where T : unmanaged
-                => convert<S,T>(gmath.sll(scalar<E,S>(src), scalar<C,byte>(count)));     
+                => numeric<S,T>(gmath.sll(scalar<E,S>(src), scalar<C,byte>(count)));     
 
 
         [MethodImpl(Inline)]

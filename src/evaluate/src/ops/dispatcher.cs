@@ -10,9 +10,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static BufferSeqId;
-
-    using Z0.Asm;
 
     partial struct Evaluate
     {

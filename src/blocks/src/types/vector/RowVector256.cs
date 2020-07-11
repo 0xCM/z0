@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;    
         
     using static Konst;
-    using static Memories;
 
     public readonly ref struct RowVector256<T>
         where T : unmanaged

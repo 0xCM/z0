@@ -48,7 +48,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public CorrelationToken Correlate()
-            => CorrelationToken.From(increment(ref step));
+            => CorrelationToken.From(atomic(ref step));
 
         [MethodImpl(Inline)]
         public ref readonly E Raise<E>(in E e)

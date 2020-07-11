@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Dynamic)" />
 
   </ItemGroup>

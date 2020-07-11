@@ -123,7 +123,7 @@ namespace Z0.Machine
         
         void ParseReport(FilePath src)
         {
-            ApiServices.ParseReportParser.Parse(src)
+            ParseReportParser.Service.Parse(src)
                     .OnFailure(fail => term.error(fail.Reason))
                     .OnSuccess(value => Broker.Raise(LoadedParseReport.Create(value, src)));
         }

@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Konst;    
-    using static Memories;
     
     public readonly struct ParsedExtract : IParsedExtract<ParsedExtract,LocatedCode>
     {
@@ -66,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsedExtract(ExtractedCode extracted, int seq, ExtractTermCode term, LocatedCode parsed)
         {
-            insist(extracted.Address,parsed.Address);           
+            z.insist(extracted.Address,parsed.Address);           
             Extracted = extracted;
             Sequence = seq;
             TermCode = term;

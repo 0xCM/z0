@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public struct RowVector<N,T>  
         where N : unmanaged, ITypeNat
@@ -20,12 +20,14 @@ namespace Z0
         /// <summary>
         /// The vector's dimension
         /// </summary>
-        public static int Dim => nati<N>();     
+        public static int Dim 
+            => (int)value<N>();     
 
         /// <summary>
         /// The zero vector
         /// </summary>
-        public static RowVector<N,T> Zero => new RowVector<N,T>(new T[Dim]);
+        public static RowVector<N,T> Zero 
+            => new RowVector<N,T>(new T[Dim]);
          
         [MethodImpl(Inline)]   
         public static implicit operator RowVector<T>(RowVector<N,T> src)

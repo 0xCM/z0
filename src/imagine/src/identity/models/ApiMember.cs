@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Describes a reified api member wich may be of hosted or located state
@@ -38,7 +37,7 @@ namespace Z0
             Id = uri.OpId;
             OpUri = uri;
             KindId = kindId;
-            Method = insist(method);
+            Method = z.insist(method);
             Address = MemoryAddress.Empty;
             HostUri = OpUri.Host;
         }
@@ -49,7 +48,7 @@ namespace Z0
             Id = uri.OpId;
             OpUri = uri;
             KindId = kindId;
-            Method = insist(method);
+            Method = z.insist(method);
             Address = address;
             HostUri = OpUri.Host;
         }        

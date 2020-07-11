@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Memories;
 
     readonly struct AppMsgLog : IAppMsgLog
     {   
@@ -33,8 +32,8 @@ namespace Z0
 
         public void Deposit(IEnumerable<IAppMsg> src)
         {
-            insist(src !=  null, $"Null enumerables are bad");
-            insist(!src.Any(m => m == null),"Null messages are bad");
+            z.insist(src !=  null, $"Null enumerables are bad");
+            z.insist(!src.Any(m => m == null),"Null messages are bad");
 
             var errors = (from m in src where m.IsError select m.Format()).Array();        
             if(errors.Length != 0)

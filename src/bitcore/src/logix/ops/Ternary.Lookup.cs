@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;    
-    using static TernaryBitLogic;
     using static LogicSig;
     using static BitLogix;
 

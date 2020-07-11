@@ -4,23 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public readonly struct ParseReportParser : IParseReportParser, IReportParser<MemberParseRecord>
     {
         public static ParseReportParser Service => default;
 
         public ParseResult<MemberParseReport> Parse(FilePath src)
         {
-            // var attempts = src.ReadLines().Skip(1).Select(MemberParseRecord.Parse);
-            // var failed = attempts.Where(r => !r.Succeeded);
-            // var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
-            // if(failed.Length != 0 && success.Length == 0)
-            //     return ParseResult.Fail<MemberParseReport>(src.Name, failed[0].Reason);            
-
-            // if(failed.Length != 0)
-            //     term.warn($"Not all records from {src} parsed successfully");
-
             var result = ParseRecords(src);
             if(result.Succeeded && (result.Value.Length != 0))
             {

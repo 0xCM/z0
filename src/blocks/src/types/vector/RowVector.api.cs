@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;        
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines the vector api surface
@@ -99,7 +99,7 @@ namespace Z0
         public static IEnumerable<T> range<N,T>(T first, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.range(first,convert<T>(n.NatValue));
+                => gmath.range(first, numeric<T>(n.NatValue));
 
         public static RowVector<N,T> increasing<N,T>(N length = default, T first = default)
             where N : unmanaged, ITypeNat
@@ -128,7 +128,7 @@ namespace Z0
         public static Block256<N,T> blockalloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Block256<N,T>.Load(Blocks.square<T>(n256, nati(n)));
+                => Block256<N,T>.Load(Blocks.square<T>(n256, (int)value(n)));
         
         /// <summary>
         /// Allocates a block vector optionally filled with a specified value

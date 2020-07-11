@@ -75,7 +75,7 @@ namespace Z0.Machine
             var hexline = buffer.Slice(0,count).ToString();
             term.print(hexline);
             var seq = 0;
-            var parsed = Asm.Data.AsmParsers.ParseLine(Case01,ref seq);
+            var parsed = AsmParsers.ParseLine(Case01,ref seq);
             if(parsed)
                 term.print($"{parsed.Value.Statement.ToString()}");
             else

@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Expressive)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Identity)" />
+    <ProjectReference Include="$(Fixed)" />
   </ItemGroup>
 
 </Project>

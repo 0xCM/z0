@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Konst; using static Memories;
-
+    using static Konst; 
+    using static z;
+    
     partial class gfp
     {
         [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]

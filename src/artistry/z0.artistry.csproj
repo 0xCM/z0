@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Capture)" />
   </ItemGroup>
   

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// A basic statistical accumulator that accrues information over an arbitrary number of input sequences
@@ -37,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Collector Create<T>(T seed = default)
             where T : unmanaged
-                => new Collector(convert<T,double>(seed));
+                => new Collector(z.numeric<T,double>(seed));
 
         [MethodImpl(Inline)]
         public static Collector operator +(Collector a, byte value)
@@ -444,8 +443,8 @@ namespace Z0
                 return;
 
             ref readonly var data = ref Arrays.head(src);
-            for(var i=0; i<count; i++)
-                Collect(skip(in data, i));
+            for(var i=0u; i<count; i++)
+                Collect(z.skip(in data, i));
         }
 
         /// <summary>
@@ -458,9 +457,9 @@ namespace Z0
             where T : unmanaged
         {
             var count = src.Length;
-            ref readonly var data = ref head(src);
-            for(var i=0; i<count; i++)
-                Collect(skip(in data, i));
+            ref readonly var data = ref z.first(src);
+            for(var i=0u; i<count; i++)
+                Collect(z.skip(in data, i));
         }
 
         /// <summary>
@@ -473,9 +472,9 @@ namespace Z0
             where T : unmanaged
         {
             var count = src.Length;
-            ref readonly var data = ref head(src);
-            for(var i=0; i<count; i++)
-                Collect(skip(in data, i));
+            ref readonly var data = ref z.first(src);
+            for(var i=0u; i<count; i++)
+                Collect(z.skip(in data, i));
         }
 
 
@@ -523,13 +522,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                Merge(int8(src));
+                Merge(z.int8(src));
             else if(typeof(T) == typeof(short))
-                Merge(int16(src));
+                Merge(z.int16(src));
             else if(typeof(T) == typeof(int))
-                Merge(int32(src));
+                Merge(z.int32(src));
             else 
-                Merge(int64(src));
+                Merge(z.int64(src));
         }
 
         [MethodImpl(Inline)]
@@ -537,13 +536,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                Merge(uint8(src));
+                Merge(z.uint8(src));
             else if(typeof(T) == typeof(ushort))
-                Merge(uint16(src));
+                Merge(z.uint16(src));
             else if(typeof(T) == typeof(uint))
-                Merge(uint32(src));
+                Merge(z.uint32(src));
             else 
-                Merge(uint64(src));
+                Merge(z.uint64(src));
         }
 
         [MethodImpl(Inline)]
@@ -551,9 +550,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                Merge(float32(src));
+                Merge(z.float32(src));
             else if(typeof(T) == typeof(double))
-                Merge(float64(src));
+                Merge(z.float64(src));
             else
                 throw Unsupported.define<T>();
         }

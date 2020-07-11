@@ -12,7 +12,6 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitSpans)" />
-    <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(MetaReader)" />
     <ProjectReference Include="$(Machine)" />
     <ProjectReference Include="$(Asm)" />

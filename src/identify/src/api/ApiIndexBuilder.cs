@@ -13,7 +13,6 @@ namespace Z0
 
     public readonly struct ApiIndexBuilder 
     {
-
         public static ApiCodeIndex create(IMemberLocator locator, IApiSet api, ApiHostUri uri, FilePath src)
         {
             var code = EncodedHexReader.Service.Read(src).ToArray();

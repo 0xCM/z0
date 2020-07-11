@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static Konst;
-    using static Memories;
+    using static z;
 
     public readonly ref struct Block256<N,T>
         where N : unmanaged, ITypeNat
@@ -30,7 +30,7 @@ namespace Z0
         /// <summary>
         /// Specifies the length of the vector, i.e. its component count
         /// </summary>
-        public static int Length => nati<N>();     
+        public static int Length => (int)value<N>();     
 
         /// <summary>
         /// Vec => Slice

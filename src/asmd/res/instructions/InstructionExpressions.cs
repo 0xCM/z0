@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
 {
-
     public readonly struct InstructionExpressions
     {
         public const string JaRel8 = "JA rel8";

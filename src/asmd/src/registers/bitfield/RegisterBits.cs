@@ -108,7 +108,6 @@ namespace Z0.Asm
         public static IEnumerable<RegisterKind> V512
             => SymbolKinds.Where(r => width(r) == W.W512);       
 
-
         [MethodImpl(Inline)]
         public static void split(RegisterKind src, out RegisterCode c, out RegisterClass k, out RegisterWidth w)
         {

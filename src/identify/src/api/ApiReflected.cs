@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     public readonly struct ApiReflected : IApiReflected
     {
         public static IApiReflected Service => default(ApiReflected);

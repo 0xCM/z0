@@ -26,7 +26,7 @@ namespace Z0
             id += IDI.Generic;
 
             var args = src.GetParameters();
-            var argtypes = src.ParameterTypes(true).ToArray();
+            var argtypes = src.ParameterTypes(true);
             var last = string.Empty;
             for(var i=0; i<argtypes.Length; i++)
             {

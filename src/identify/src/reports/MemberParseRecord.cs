@@ -96,19 +96,6 @@ namespace Z0
             }
         }
 
-        // public static R From(in ParsedMember extract, int seq)
-        //     => new R
-        //         (
-        //             Seq : seq,
-        //             SourceSequence: extract.Sequence,
-        //             Address : extract.Address,
-        //             Length : extract.Encoded.Length,
-        //             TermCode: extract.TermCode,
-        //             Uri : extract.OpUri,
-        //             OpSig : extract.Method.Signature().Format(),
-        //             Data : extract.Encoded
-        //         );
-
         public MemberParseRecord(
             int Seq, 
             int SourceSequence, 

@@ -11,7 +11,6 @@ namespace Z0.Asm.Data
     using static Konst;
     using static V0;
     using static Root;
-    using static Typed;
 
     partial struct Encoding
     {            

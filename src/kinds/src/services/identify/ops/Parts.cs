@@ -12,13 +12,23 @@ namespace Z0
 
     partial class Identify
     {
+        /// <summary>
+        /// Extracts an index-identified segmented identity part from an operation identity
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        /// <param name="partidx">The 0-based part index</param>
+        public static Option<SegmentedIdentity> segmented(OpIdentity src, int partidx)
+            => from p in Z0.Identify.Part(src, partidx)
+                from s in SegmentedIdentity.identify(p)
+                select s;
+
         public static Option<IdentityPart> Part(OpIdentity src, int partidx)
         {
             var parts = Parts(src).ToArray();
             if(partidx <= parts.Length - 1)
                 return parts[partidx];
             else
-                return Option.none<IdentityPart>();
+                return z.none<IdentityPart>();
         }
 
         public static IEnumerable<IdentityPart> Parts(OpIdentity src)

@@ -6,7 +6,6 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static Root;

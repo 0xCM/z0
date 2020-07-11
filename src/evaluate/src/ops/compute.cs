@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static BufferSeqId;
-
     partial struct Evaluate
     {
         public static ref readonly UnaryEvaluations<T> compute<T>(in UnaryEvalContext<T> exchange, Action<Exception> error)

@@ -100,6 +100,5 @@ namespace Z0
         public static YeaOrNea yn<E>(E src) 
             where E : unmanaged, Enum
                 => src.IsSome() ? Y : N;
-
     }
 }

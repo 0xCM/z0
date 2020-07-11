@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;    
         
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Defines a vector over cells of unmanaged type

@@ -64,7 +64,7 @@ namespace Z0
         static IEnumerable<string> args(MethodInfo method)
         {
             var args = method.GetParameters();
-            var argtypes = method.ParameterTypes(true).ToArray();
+            var argtypes = method.ParameterTypes(true);
             for(var i=0; i<argtypes.Length; i++)
             {                                
                 var argtext = Identity.identify(args[i]);

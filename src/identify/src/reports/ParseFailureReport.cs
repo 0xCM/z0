@@ -28,7 +28,8 @@ namespace Z0
 
         public ApiHostUri ApiHost {get;}
 
-        public override string ReportName => $"ParseFailure report for {ApiHost.Format()}";
+        public override string ReportName 
+            => $"ParseFailure report for {ApiHost.Format()}";
 
         public static Report Create(ApiHostUri host, ExtractParseFailure[] failures)
         {
