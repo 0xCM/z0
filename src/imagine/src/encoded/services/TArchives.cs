@@ -9,6 +9,12 @@ namespace Z0
     
     using static Konst;
 
+    public interface TArchives : TArchiveServices
+    {        
+
+
+    }
+    
     public interface TArchiveServices
     {
         TAppPaths AppPathDefault

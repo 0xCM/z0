@@ -19,7 +19,6 @@ namespace Z0
         static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
 
-        
         public static OpIndex<T> index<T>(IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
         {
             var items = src.ToArray();
@@ -28,8 +27,7 @@ namespace Z0
                              where g.Count() > 1
                              select g.Key).ToHashSet();
             
-            var HashTable = new Dictionary<OpIdentity, T>();            
-
+            var HashTable = new Dictionary<OpIdentity,T>();            
             
             if(duplicates.Count() != 0)
             {

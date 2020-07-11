@@ -13,24 +13,80 @@ namespace Z0
 
     public readonly struct EncodedHexArchive : IEncodedHexArchive
     {
-        [MethodImpl(Inline)]
-        public static IEncodedHexArchive Service(FolderPath root)
-            => new EncodedHexArchive(root);
-
         public FolderPath ArchiveRoot {get;}            
         
         [MethodImpl(Inline)]
         public EncodedHexArchive(FolderPath root)
             => ArchiveRoot = root;
 
+        public static FilePath[] files(FolderPath root, PartId owner) 
+            => root.Files(owner, FileExtensions.Hex, true).Array();
+
+        public static FilePath[] files(FolderPath root)
+            => root.Files(FileExtensions.Hex, true).Array();
+
+        public static IdentifiedCode[] read(FilePath src)
+            => EncodedHexReader.Service.Read(src).Where(x => x.IsNonEmpty).Array();
+
+        public static IdentifiedCode[] read(FolderPath root, ApiHostUri host)
+        {
+            var hfn = ApiHostUri.HostFileName(host.Owner, host.Name, FileExtensions.Hex);
+            var path = files(root).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
+            return read(path);
+        }
+
+        public static IdentifiedCodeIndex index(FilePath src)
+        {
+            var uri = ApiHostUri.Parse(src.FileName).ValueOrDefault(ApiHostUri.Empty);   
+            var dst = Root.list<IdentifiedCode>();
+            if(uri.IsNonEmpty)
+            {
+                foreach(var item in read(src))
+                    if(item.IsNonEmpty)
+                        dst.Add(item);
+            }
+            
+            return Encoded.index(uri, dst.Array());
+        }
+
+        public static IEnumerable<IdentifiedCodeIndex> indices(FolderPath root)
+        {
+            foreach(var file in files(root))
+            {                    
+                var idx = index(file);
+                if(idx.IsNonEmpty)
+                    yield return idx;
+            }
+        }
+        
+        public static IEnumerable<IdentifiedCodeIndex> indices(FolderPath root, params PartId[] owners)     
+        {
+            if(owners.Length != 0)
+            {
+                foreach(var owner in owners)            
+                foreach(var file in files(root, owner))
+                {
+                    var idx = index(file);
+                    if(idx.IsNonEmpty)
+                        yield return idx;
+                }
+            }  
+            else
+            {
+                foreach(var file in files(root))
+                {                    
+                    var idx = index(file);
+                    if(idx.IsNonEmpty)
+                        yield return idx;
+                }
+            }          
+        }
+
         public IEnumerable<IdentifiedCode> Read(ApiHostUri host)
         {
             var hfn = ApiHostUri.HostFileName(host.Owner, host.Name, FileExtensions.Hex);
             var path = Files(host.Owner).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
-
-            foreach(var item in Read(path))   
-                if(item.IsNonEmpty)
-                    yield return item;
+            return read(ArchiveRoot,host);
         }
 
         public IEnumerable<FilePath> Files() 
@@ -39,6 +95,8 @@ namespace Z0
         public IEnumerable<FilePath> Files(PartId owner) 
             => ArchiveRoot.Files(owner, FileExtensions.Hex, true);
 
+
+
         public IEnumerable<IdentifiedCodeIndex> ReadIndices(params PartId[] owners)     
         {
             if(owners.Length != 0)
@@ -46,35 +104,25 @@ namespace Z0
                 foreach(var owner in owners)            
                 foreach(var file in Files(owner))
                 {
-                    var index = ReadIndex(file);
-                    if(index)
-                        yield return index.Value;
+                    var idx = index(file);
+                    if(idx.IsNonEmpty)
+                        yield return idx;
                 }
             }  
             else
             {
                 foreach(var file in Files())
                 {                    
-                    var index = ReadIndex(file);
-                    if(index)
-                        yield return index.Value;
+                    var idx = index(file);
+                    if(idx.IsNonEmpty)
+                        yield return idx;
                 }
             }          
         }
 
-        public Option<IdentifiedCodeIndex> ReadIndex(FilePath file)
-        {
-            var uri = ApiHostUri.Parse(file.FileName).ValueOrDefault(ApiHostUri.Empty);                
-            if(uri.IsNonEmpty)
-            {
-                var dst = Root.list<IdentifiedCode>();
-                foreach(var item in Read(file))
-                    if(item.IsNonEmpty)
-                        dst.Add(item);
-                return Encoded.index(uri, dst.ToArray());            
-            }
-            return Option.none<IdentifiedCodeIndex>();
-        }
+
+        public IdentifiedCodeIndex ReadIndex(FilePath file)
+            => index(file);
 
         public IEnumerable<IdentifiedCode> Read()
             => Read(_ => true);

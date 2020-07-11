@@ -39,7 +39,7 @@ namespace Z0
         LoadUriCodeContract = LoadUriCode | (Contract << AspectOffset),
 
         /// <summary>
-        /// <see cref="EncodedHexArchive.Service(FolderPath)"/>
+        /// <see cref="Archives.hex(FolderPath)"/>
         /// </summary>
         LoadUriCodeServiceFactory = LoadUriCode | (Factory << AspectOffset),
     }

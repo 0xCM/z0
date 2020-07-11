@@ -16,7 +16,7 @@ namespace Z0
         public readonly IdentifiedCode[] Code;
 
         [MethodImpl(Inline)]
-        internal IdentifiedCodeIndex(ApiHostUri host, IdentifiedCode[] code)
+        public IdentifiedCodeIndex(ApiHostUri host, IdentifiedCode[] code)
         {
             Root.insist(host.IsNonEmpty);
             Host = host;
@@ -30,7 +30,19 @@ namespace Z0
             Code = code;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Host.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Host.IsNonEmpty && Code != null && Code.Length != 0;
+        }
+
         public static IdentifiedCodeIndex Empty 
-            => new IdentifiedCodeIndex(Array.Empty<IdentifiedCode>());
+            => new IdentifiedCodeIndex(sys.empty<IdentifiedCode>());
     }
 }

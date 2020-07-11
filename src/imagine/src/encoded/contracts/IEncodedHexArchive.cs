@@ -54,6 +54,6 @@ namespace Z0
         /// Reads the code defined by a specified file
         /// </summary>
         /// <param name="src">The source path</param>
-        Option<IdentifiedCodeIndex> ReadIndex(FilePath src);
+        IdentifiedCodeIndex ReadIndex(FilePath src);
     }    
 }

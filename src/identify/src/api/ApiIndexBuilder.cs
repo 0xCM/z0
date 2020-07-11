@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ApiIndexBuilder : IApiIndexBuilder
+    public readonly struct ApiIndexBuilder 
     {
         readonly IApiSet ApiSet;
 
@@ -23,7 +23,7 @@ namespace Z0
             ApiSet = api;
             Locator = locator;        
         }
-        
+
         public static ApiIndex IndexApi(IEnumerable<ApiMember> src)
         {
             var pairs = src.Select(h => (h.Id, h));
@@ -38,17 +38,8 @@ namespace Z0
             var members = Locator.Locate(host);
             var codeIndex =  UriHexQuery.Service.CreateIndex(code);
             var memberIndex = ApiIndexBuilder.IndexApi(members);
-            return CreateIndex(memberIndex, codeIndex);
-        }
-
-        public ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<IdentifiedCode> code)
-        {
-            var apicode = from pair in members.Intersect(code).Enumerated
-                          let l = pair.Item1
-                          let r = pair.Item2
-                          select new ApiCode(r.left, r.right);                                      
-            return new ApiCodeIndex(apicode.Select(c => (c.Id, c)).ToOpIndex());
-        }
+            return ApiCodeIndex.create(memberIndex, codeIndex);
+        }        
 
         static TArchives Services => Archives.Services;
 
@@ -61,7 +52,7 @@ namespace Z0
             var paths =   HostCaptureArchive.Create(root, host);
             var code = EncodedHexReader.Service.Read(paths.HexPath);
             var opIndex =  UriHexQuery.Service.CreateIndex(code);
-            return indexer.CreateIndex(apiIndex, opIndex);            
+            return ApiCodeIndex.create(apiIndex, opIndex);            
         }                
     }
 }

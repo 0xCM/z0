@@ -17,12 +17,21 @@ namespace Z0
     /// </summary>
     public readonly struct ApiCodeIndex 
     {
+        public static ApiCodeIndex create(ApiIndex members, OpIndex<IdentifiedCode> code)
+        {
+            var apicode = from pair in members.Intersect(code).Enumerated
+                          let l = pair.Item1
+                          let r = pair.Item2
+                          select new ApiCode(r.left, r.right);              
+            return new ApiCodeIndex(OpIndex.create(apicode.Select(c => (c.Id, c))));
+        }
+
         readonly IReadOnlyDictionary<OpIdentity,ApiCode> Hashtable;
 
         [MethodImpl(Inline)]
         public ApiCodeIndex(in OpIndex<ApiCode> code)
         {
-            this.Hashtable = code.Enumerated.ToDictionary(); 
+            Hashtable = code.Enumerated.ToDictionary(); 
         }
 
         public ApiCode this[OpIdentity id]

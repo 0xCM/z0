@@ -13,11 +13,11 @@ namespace Z0
     /// <summary>
     /// Identifies a member defined by executable code (derived from the method implementation)
     /// </summary>    
-    public readonly struct ApiCode : IIdentifiedCode<ApiCode,IdentifiedCode>
+    public readonly struct ApiCode : IIdentifiedCode<ApiCode,MemberCode>
     {
         public ApiMember Member {get;}
 
-        public IdentifiedCode Encoded {get;}
+        public MemberCode Encoded {get;}
 
         public OpUri OpUri 
         {
@@ -63,14 +63,14 @@ namespace Z0
         public ApiCode(ApiMember member, IdentifiedCode code)
         {
             Member = member;
-            Encoded = code;
+            Encoded = new MemberCode(member.OpUri, new LocatedCode(member.Address, code.Encoded));
         }
 
         [MethodImpl(Inline)]
         public ApiCode(ApiMember member, BinaryCode code)
         {
             Member = member;
-            Encoded = new IdentifiedCode(member.OpUri, code);
+            Encoded = new MemberCode(member.OpUri, new LocatedCode(member.Address, code));
         }
 
         public OpKindId KindId
