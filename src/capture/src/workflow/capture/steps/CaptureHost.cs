@@ -31,6 +31,8 @@ namespace Z0.Asm
 
         public void CaptureHosts(ApiHost[] hosts, TPartCaptureArchive dst)
         {
+            Context.Raise(new CapturingHosts(hosts));
+            
             var extracts = Workflow.ExtractMembers.ExtractMembers(hosts);
             if(extracts.Length == 0)
                 return;

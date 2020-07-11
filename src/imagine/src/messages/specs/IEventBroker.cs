@@ -11,6 +11,8 @@ namespace Z0
     /// </summary>
     public interface IEventBroker
     {
+        AppStatusEvent Status => default;
+
         /// <summary>
         /// Registers a target sink to which events will be routed
         /// </summary>
@@ -45,5 +47,10 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         ref readonly E Raise<E>(in E e)
             where E : IAppEvent;
+    }
+
+    public interface IPersistentBroker : IEventBroker, IServiceAllocation
+    {
+        FilePath TargetPath {get;}
     }
 }

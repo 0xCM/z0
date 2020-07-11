@@ -19,14 +19,16 @@ namespace Z0
         
         readonly TAppEnv AppEnv;
 
-        FilePath DefaultTarget => AppEnv.AppPaths.AppStandardOutPath;
+        FilePath DefaultTarget 
+            => AppEnv.AppPaths.TestStandardPath;
 
-        FilePath ErrorTarget => AppEnv.AppPaths.TestErrorPath;
+        FilePath ErrorTarget 
+            => AppEnv.AppPaths.TestErrorPath;
                 
         [MethodImpl(Inline)]
         AppMsgLog(TAppEnv env)
         {
-            this.AppEnv = env;
+            AppEnv = env;
         }
 
         public void Deposit(IEnumerable<IAppMsg> src)
@@ -34,15 +36,11 @@ namespace Z0
             insist(src !=  null, $"Null enumerables are bad");
             insist(!src.Any(m => m == null),"Null messages are bad");
 
-            var errors = (from m in src
-                            where m.IsError
-                            select m.Format()).ToArray();
-            
+            var errors = (from m in src where m.IsError select m.Format()).Array();        
             if(errors.Length != 0)
                 ErrorTarget.Append(errors);
                                 
-            var standard = Formattable.items(src.Where(m => !m.IsError)).ToArray();
-
+            var standard = Formattable.items(src.Where(m => !m.IsError)).Array();
             if(standard.Length != 0)
                 DefaultTarget.Append(standard);
         }

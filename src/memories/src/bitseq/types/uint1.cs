@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static BitSeqD;
+    using static SmallInts;
 
     using S = uint1;
     using K = BitSeq1;
@@ -18,7 +18,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level single and thus has domain {0,1}
     /// </summary>
-    public readonly struct uint1 : IBitSeq<S,W,K,T>
+    public readonly struct uint1 : ISmallInt<S,W,K,T>
     {
         internal readonly byte data;
 

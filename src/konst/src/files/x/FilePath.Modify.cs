@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;    
     using System.IO;
 
     partial class XTend
@@ -81,6 +77,5 @@ namespace Z0
                 Directory.CreateDirectory(dst.Name);
             return dst;
         }
-
     }
 }

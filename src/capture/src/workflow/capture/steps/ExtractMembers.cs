@@ -22,30 +22,27 @@ namespace Z0.Asm
         internal ExtractMembersStep(ICaptureWorkflow workflow)
             => Workflow = workflow;
 
-        public static ApiMember[] locate(IApiHost host)
-        {            
-            var located = ApiMemberJit.jit(host);
-            return located;
-        }
+        public static ApiMember[] jit(IApiHost host)
+            => ApiMemberJit.jit(host);
 
-        public static ApiMember[] locate(ApiHost[] host)
-        {            
-            var located = ApiMemberJit.jit(host);
-            return located;
-        }
-
-        static MemberExtractor Extractor
-            => MemberExtraction.service(Extracts.DefaultBufferLength);    
+        public static ApiMember[] jit(ApiHost[] hosts, IEventBroker broker)
+            => ApiMemberJit.jit(hosts, broker);
         
         public static ExtractedCode[] extract(ICaptureContext context, IApiHost host)
         {            
-            var members = locate(host);
+            var members = jit(host);
             context.Raise(new MembersLocated(host.Uri, members));            
             return Extractor.Extract(members);
         }
 
-        public static ExtractedCode[] extract(ICaptureContext context, ApiHost[] hosts)
-            => Extractor.Extract(locate(hosts));
+        public static ExtractedCode[] extract(ICaptureContext context, ApiHost[] hosts, IEventBroker broker)
+        {
+            var members = jit(hosts, broker);
+            context.Raise(new JittedMembers(hosts,members));
+            var code = Extractor.Extract(members);
+            return code;
+
+        }
 
         public ExtractedCode[] ExtractMembers(IApiHost host)
         {
@@ -62,12 +59,15 @@ namespace Z0.Asm
             return extracted;
         }
 
+        void OnStatus(IAppEvent e)
+            => Context.Raise(e);
+        
         public ExtractedCode[] ExtractMembers(ApiHost[] hosts)
         {
             var extracted = sys.empty<ExtractedCode>();            
             try
             {
-                extracted = extract(Context,hosts); 
+                extracted = extract(Context,hosts, Context.Broker); 
             }
             catch(Exception e)
             {
@@ -75,5 +75,8 @@ namespace Z0.Asm
             }
             return extracted;
         }
+
+        static MemberExtractor Extractor
+            => MemberExtraction.service(Extracts.DefaultBufferLength);    
     }
 }

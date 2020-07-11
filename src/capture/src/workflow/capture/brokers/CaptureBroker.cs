@@ -5,15 +5,23 @@
 namespace Z0.Asm
 {    
     sealed class CaptureBroker : EventBroker<CaptureBroker,ICaptureBroker>, ICaptureBroker
-    {
-        public static ICaptureBroker Service 
-            => new CaptureBroker();           
+    {   
+        CaptureBroker(FilePath target)
+            : base(target)
+        {
+
+        }
+
+        public static ICaptureBroker Allocate(FilePath target)
+            => new CaptureBroker(target);           
     }
     
-    public interface ICaptureBroker : IEventBroker, IImmEmissionBroker
-    {
+    public interface ICaptureBroker : IPersistentBroker, IImmEmissionBroker
+    {        
         AppErrorEvent Error => AppErrorEvent.Empty;
 
+        CapturingHosts CapturingHosts => default;
+        
         ExtractReportCreated ExtractReportCreated => ExtractReportCreated.Empty;
 
         WorkflowError WorkflowError => WorkflowError.Empty;

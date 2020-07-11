@@ -34,7 +34,7 @@ namespace Z0.Asm
 
         internal ImmEmissionWorkflow(IAsmContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
         {
-            Broker = ImmEmissionBroker.New;
+            Broker = ImmEmissionBroker.Allocate(context.AppPaths.AppStandardOutPath);
             Context = context;
             Sink = sink;
             Formatter = formatter;
@@ -46,6 +46,11 @@ namespace Z0.Asm
             ConnectReceivers(Broker);
         }
 
+        public void Dispose()
+        {
+            Broker.Dispose();
+        }
+        
         bool Append = true;
 
         IWorkflow<IImmEmissionBroker> Flow 

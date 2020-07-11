@@ -32,7 +32,7 @@ namespace Z0.Machine
         {
             Sink = context.AppMsgSink;
             Context = context;
-            Broker = new EventBroker();
+            Broker = new EventBroker(context.AsmContext.AppPaths.AppStandardOutPath);
             Files = MachineFiles.Service(context);            
             IndexBuilder = Encoded.indexer();
             (this as IMachineEventClient).Connect();            
@@ -199,7 +199,7 @@ namespace Z0.Machine
 
         public void Dispose()
         {
-
+ 
         }
 
         public static void Run(IMachineContext context)

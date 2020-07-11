@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
-    using static BitSeq;
+    using static z;
 
-    partial class BitSeqD
+    partial class SmallInts
     {
         [MethodImpl(Inline), Op]
         public static uint2 add(uint2 x, uint2 y)
@@ -84,11 +83,8 @@ namespace Z0
         internal static byte reduce2(byte x) 
             => (byte)(x % uint2.Count);
 
-
         [MethodImpl(Inline)]
         internal static uint2 wrap2(int src) 
             => new uint2((byte)src, false);
-
-
     }
 }

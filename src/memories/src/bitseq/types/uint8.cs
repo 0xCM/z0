@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     using static Konst;
-    using static BitSeqD;
-    using static BitSeq;
+    using static SmallInts;
 
     using S = octet;
     using W = W8;
@@ -20,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level octet and thus is an integer in the range [0,255]
     /// </summary>
-    public readonly struct octet : IBitSeq<S,W,K,T>
+    public readonly struct octet : ISmallInt<S,W,K,T>
     {
         internal readonly byte data;
 
@@ -223,7 +222,7 @@ namespace Z0
         public Bit this[byte pos]
         {
             [MethodImpl(Inline)]
-            get => BitSeqD.test(this, pos);                    
+            get => SmallInts.test(this, pos);                    
         }
 
         public K Kind

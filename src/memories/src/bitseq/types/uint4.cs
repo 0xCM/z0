@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static BitSeqD;
-    using static BitSeq;
+    using static SmallInts;
 
     using S = uint4;
     using W = W4;
@@ -20,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level quartet and thus is an integer in the range [0,15]
     /// </summary>
-    public readonly struct uint4 : IBitSeq<S,W,K,T>
+    public readonly struct uint4 : ISmallInt<S,W,K,T>
     {
         internal readonly byte data;
 
@@ -250,7 +249,7 @@ namespace Z0
         public Bit this[byte pos]
         {
             [MethodImpl(Inline)]
-            get => BitSeqD.test(this, pos);
+            get => SmallInts.test(this, pos);
         }
 
         public K Kind

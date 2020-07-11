@@ -18,8 +18,7 @@ namespace Z0
         Bench,
 
         App,
-
-        Data,
+        
     }
 
     class EnvConfig
@@ -108,25 +107,13 @@ namespace Z0
 
             protected object locker = new object();
             
-            protected TestLogger(LogArea Area)
+            protected TestLogger(LogArea area)
             {
-                this.Area = Area;
+                Area = area;
             }
 
             FilePath LogPath
                 => Paths.Timestamped(Area,Area.ToString().ToLower());
-
-            public void Write(IAppMsg src)
-            {
-                lock(locker)
-                    LogPath.AppendLine(src.ToString());
-            }
-
-            public void Write(IEnumerable<IAppMsg> src)
-            {
-                lock(locker)
-                    LogPath.Append(Formattable.items(src).ToArray());
-            }
 
             void Emit<R>(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)
                 where R : ITabular

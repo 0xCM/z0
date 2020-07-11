@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static BitSeqD;
-    using static BitSeq;
+    using static SmallInts;
 
     using S = uint3;
     using K = BitSeq3;
@@ -21,7 +20,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level triad and thus has domain {000,001,010,011,100,101,110,111}
     /// </summary>
-    public readonly struct uint3 : IBitSeq<S,W,K,T>
+    public readonly struct uint3 : ISmallInt<S,W,K,T>
     {
         internal readonly byte data;
 
@@ -308,7 +307,7 @@ namespace Z0
         public Bit this[byte pos]
         {
             [MethodImpl(Inline)]
-            get => BitSeqD.test(this, pos);            
+            get => SmallInts.test(this, pos);            
         }
 
         public K Kind

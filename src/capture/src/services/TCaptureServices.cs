@@ -27,13 +27,6 @@ namespace Z0.Asm
             => MemberExtraction.service(bufferlen);
 
         /// <summary>
-        /// Creates a default capture worklfow
-        /// </summary>
-        /// <param name="archive">The archive to target</param>
-        ICaptureWorkflow CaptureWorkflow(TPartCaptureArchive archive)
-            => new CaptureWorkflow(Context, AsmDecoder(), Formatter(), Capture.Services.AsmWriterFactory, archive);
-
-        /// <summary>
         /// Creates a capture workflow predicated on caller-supplied services
         /// </summary>
         /// <param name="decoder">The decoder to use</param>

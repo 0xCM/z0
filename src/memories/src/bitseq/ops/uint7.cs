@@ -8,12 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
-    using static BitSeq;
 
     using S = uint7;
 
-    partial class BitSeqD
+    partial class SmallInts
     {
         /// <summary>
         /// Creates a 7-bit unsigned integer, equal to zero or one, according to whether the source is respectively false or true

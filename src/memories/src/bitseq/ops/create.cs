@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
 
-    partial struct BitSeq
+    partial class SmallInts
     {
         [MethodImpl(Inline)]
         internal static uint2 wrap(W2 w, int src) 

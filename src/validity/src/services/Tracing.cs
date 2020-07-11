@@ -21,9 +21,6 @@ namespace Z0
         public static IAppMsg TraceMsg(object title, object msg, Type host, string caller, AppMsgColor color)
             => AppMsg.Colorize(string.Concat(TracePrefix(title, host, caller), Chars.Pipe, Chars.Space, msg), color);
 
-        public static IAppMsg TraceMsg(object title, object msg, Type host, string caller, AppMsgKind kind)
-            => AppMsg.NoCaller(string.Concat(TracePrefix(title, host, caller), Chars.Pipe, Chars.Space, msg), kind);
-
         public static IAppMsg TraceMsg(object msg, Type host, string caller, AppMsgColor color)
             => TraceMsg(string.Empty, msg, host, caller, color);
 
@@ -37,9 +34,6 @@ namespace Z0
             => dst.Trace(TraceMsg(title, msg, host, caller, color));
 
         public static void Trace(this IAppMsgQueue dst, string title, string msg, Type host, [Caller] string caller = null)
-            => dst.Trace(TraceMsg(title, msg, host, caller, AppMsgColor.Magenta));        
-
-        public static void Error(this IAppMsgQueue dst, object msg, Type host, [Caller] string caller = null)
-            => dst.Trace(TraceMsg("Danger!", msg, host, caller, AppMsgKind.Error));        
+            => dst.Trace(TraceMsg(title, msg, host, caller, AppMsgColor.Magenta));          
     }
 }

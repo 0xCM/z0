@@ -212,11 +212,14 @@ namespace Z0
         FolderPath TestErrorOut 
             => TestLogRoot + ErrorOutFolder;
 
-        /// <summary>
-        /// The application-specific error stream log path
-        /// </summary>
         FilePath TestErrorPath 
             => TestErrorOut + AppErrorOutName;
+
+        FolderPath TestStandardOutDir 
+            => TestLogRoot + StandardOutFolder;
+
+        FilePath TestStandardPath 
+            => TestStandardOutDir + AppStandardOutName;
 
         /// <summary>
         /// The directory into which structured data describing test results are deposited

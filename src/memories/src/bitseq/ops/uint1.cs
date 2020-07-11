@@ -8,12 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
-    using static BitSeq;
 
     using S = uint1;
 
-    partial class BitSeqD
+    partial class SmallInts
     {
         [MethodImpl(Inline), Op]    
         public static S uint1(bool src)

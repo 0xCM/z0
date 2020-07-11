@@ -6,6 +6,9 @@ namespace Z0.Asm
 {
     public interface ICaptureClient : IBrokerClient<ICaptureBroker>
     {
+        void OnEvent(AppStatusEvent e) 
+            => Sink.Deposit(e);
+
         void OnEvent(AppErrorEvent e) 
             => Sink.Deposit(e);
 
@@ -57,17 +60,18 @@ namespace Z0.Asm
         void OnEvent(ExtractedMembers e) 
             => Sink.Deposit(e);            
 
+        void OnEvent(CapturingHosts e) 
+            => Sink.Deposit(e);            
+
         void Connect()
         {
+            Broker.Status.Subscribe(Broker,OnEvent);
             Broker.Error.Subscribe(Broker,OnEvent);
             Broker.CapturingPart.Subscribe(Broker, OnEvent);
-            Broker.CapturedPart.Subscribe(Broker, OnEvent);
-            
+            Broker.CapturedPart.Subscribe(Broker, OnEvent);            
             Broker.CapturingHost.Subscribe(Broker, OnEvent);
             Broker.CapturedHost.Subscribe(Broker, OnEvent);
-
             Broker.WorkflowError.Subscribe(Broker,OnEvent);
-
             Broker.MembersLocated.Subscribe(Broker,OnEvent);
             Broker.ExtractReportCreated.Subscribe(Broker,OnEvent);
             Broker.ExtractReportSaved.Subscribe(Broker,OnEvent);
@@ -79,6 +83,7 @@ namespace Z0.Asm
             Broker.MatchedEmissions.Subscribe(Broker, OnEvent);
             Broker.ClearedDirectory.Subscribe(Broker, OnEvent);
             Broker.ExtractedMembers.Subscribe(Broker, OnEvent); 
+            Broker.CapturingHosts.Subscribe(Broker, OnEvent); 
         }        
     }
 }

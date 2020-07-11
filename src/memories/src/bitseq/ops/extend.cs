@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct BitSeq
+    partial class SmallInts
     {
         /// <summary>
         /// Promotes a <see cref='uint2'/> to a <see cref='Z0.uint3'/>, as indicated by the <see cref='W3'/> selector 

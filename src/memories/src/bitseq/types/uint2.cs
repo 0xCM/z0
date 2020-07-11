@@ -9,8 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using static BitSeqD;
-    using static BitSeq;
+    using static SmallInts;
 
     using S = uint2;
     using W = W2;
@@ -21,7 +20,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level duet and thus has domain {00,01,10,11}
     /// </summary>
-    public readonly struct uint2 : IBitSeq<S,W,K,T>
+    public readonly struct uint2 : ISmallInt<S,W,K,T>
     {    
         internal readonly byte data;
 
@@ -349,7 +348,7 @@ namespace Z0
         public Bit this[byte pos]
         {
             [MethodImpl(Inline)]
-            get => BitSeqD.test(this, pos);            
+            get => SmallInts.test(this, pos);            
         }
 
         public K Kind

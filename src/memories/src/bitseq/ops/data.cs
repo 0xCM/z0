@@ -12,7 +12,7 @@ namespace Z0
 
     using D = BitSeqData;
 
-    partial struct BitSeq
+    partial class SmallInts
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<uint1> data(W1 w)

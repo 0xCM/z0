@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
 
     using Z0.Asm;
-
-    using static Konst; 
-    using static Root;
     
     public class CaptureHost : ICaptureHost
     {               
@@ -61,6 +57,7 @@ namespace Z0
         public void Dispose()
         {
             term.print($"Commpleted capture workflow");
+            CaptureWorkflow.Dispose();
         }
         
         public void Execute(params PartId[] parts)
@@ -75,10 +72,10 @@ namespace Z0
                 CheckExec(parts);
         }
 
-        public void Execute2(params PartId[] parts)
+        public void Consolidate(params PartId[] parts)
         {
             if(Settings.EmitPrimaryArtifacts)
-                EmitPrimary2(parts);
+                EmitConsolidated(parts);
 
             if(Settings.EmitImmArtifacts)
                 EmitImm(parts);
@@ -99,9 +96,9 @@ namespace Z0
             CaptureWorkflow.Run(WorkflowConfig, parts);
         }
 
-        void EmitPrimary2(params PartId[] parts)
+        void EmitConsolidated(params PartId[] parts)
         {
-            CaptureWorkflow.Run2(WorkflowConfig, parts);
+            CaptureWorkflow.RunConsoidated(WorkflowConfig, parts);
         }
 
         void CheckExec(params PartId[] parts)
@@ -136,8 +133,8 @@ namespace Z0
         void CollectAsmStats(ApiHostUri host, ReadOnlySpan<AsmFunction> functions)
         {
             var count = 0ul;
-            for(var i = 0; i<functions.Length; i++)
-                count += (ulong)skip(functions,i).InstructionCount;
+            for(var i = 0u; i<functions.Length; i++)
+                count += (ulong)z.skip(functions,i).InstructionCount;
             
             Sink.CountedInstructions(host, count);                   
         }

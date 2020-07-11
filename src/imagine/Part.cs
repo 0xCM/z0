@@ -13,6 +13,6 @@ namespace Z0.Parts
     public sealed class Imagine : Part<Imagine> 
     {
         public override PartId[] Needs  
-            => parts(PartId.Konst, PartId.Math);
+            => parts(PartId.Konst);
     }
 }

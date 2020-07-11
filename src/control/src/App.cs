@@ -28,18 +28,17 @@ namespace Z0
             host.Execute(parts);
         }
 
-        void RunCapture2(params PartId[] parts)
-        {
-            using var host = new CaptureHost(ContextFactory.CreateAsmContext(Context), Context.AppPaths.CaptureRoot);
-            host.Execute2(parts);
-        }
-
         public override void RunShell(params string[] args)
         {            
             var parts = PartIdParser.parse(args);
-            term.magenta($"Capturing {parts.Describe()}");            
-            //RunCapture(parts);   
-            RunCapture2(parts);
+            if(parts.Length != 0)
+                term.magenta($"Capturing {parts.Describe()}");            
+            else
+                term.magenta($"Capturing the known knowns"); 
+
+            var context = ContextFactory.CreateAsmContext(Context);
+            using var host = new CaptureHost(context, context.AppPaths.CaptureRoot);
+            host.Consolidate(parts);
         }
 
         public static void Main(params string[] args)

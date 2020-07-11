@@ -11,7 +11,7 @@ namespace Z0
 
     using S = uint6;
 
-    partial class BitSeqD
+    partial class SmallInts
     {
         /// <summary>
         /// Creates a 6-bit unsigned integer, equal to zero or one, if the source value is respectively false or true
@@ -102,7 +102,6 @@ namespace Z0
                  ((uint)x4 << 4) | 
                  ((uint)x5 << 5)
                 ));
-
         
         [MethodImpl(Inline), Op]
         public static S add(S x, S y)

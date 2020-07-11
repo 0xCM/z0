@@ -75,7 +75,6 @@ namespace Z0
             return true;
         }
 
-
         void Run(Type host, IUnitTest unit)
         {
             var results = new List<TestCaseRecord>();
@@ -107,7 +106,6 @@ namespace Z0
             {
                 PostTestResults(results);
             }
-
         }
 
         public void Run(Type host, string[] filters)

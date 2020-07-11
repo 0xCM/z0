@@ -47,7 +47,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public AsmOperandInfo Operand(MemoryAddress @base, Instruction src, int index)
-            => AsmOperandInfo.Define(index, 
+            => new AsmOperandInfo(index, 
                 OperandKind(src,index),
                 ImmInfo(src,index),
                 MemInfo(src,index),

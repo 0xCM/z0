@@ -15,8 +15,10 @@ namespace Z0
     /// <summary>
     /// Correlates operation identifiers and coded members
     /// </summary>
+    [ApiHost]
     public readonly struct ApiCodeIndex 
     {
+        [Op]
         public static ApiCodeIndex create(ApiIndex members, OpIndex<IdentifiedCode> code)
         {
             var apicode = from pair in members.Intersect(code).Enumerated

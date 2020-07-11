@@ -8,17 +8,34 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.IO;
 
     using static Konst;
 
-    public class EventBroker : IEventBroker
+    public class EventBroker : IPersistentBroker
     {
         readonly Dictionary<Type,ISink> Subscriptions;
+        
+        public FilePath TargetPath {get;}
+
+        readonly StreamWriter OutStream;
+
+        object locker;
 
         [MethodImpl(Inline)]
-        public EventBroker()
+        public EventBroker(FilePath target)
         {
+            TargetPath = target ?? FilePath.Empty;
             Subscriptions = new Dictionary<Type,ISink>();
+            if(!TargetPath.IsNonEmpty)
+                OutStream = TargetPath.Writer();
+            locker = new object();
+        }
+
+        public void Dispose()
+        {
+            if(OutStream != null)
+                OutStream.Dispose();
         }
 
         Outcome Subscribe<S,E>(S sink, E model)
@@ -40,10 +57,21 @@ namespace Z0
         Outcome IEventBroker.Subscribe<S,E>(S sink, E model)
             => Subscribe(sink,model);
 
+        void Emit(IAppEvent e)
+        {
+            if(OutStream != null)
+                lock(locker)
+                    OutStream.WriteLine(e.Format());
+        }
+        
         ref readonly E IEventBroker.Raise<E>(in E e)
         {                
+            Emit(e);
+            
             if(Subscriptions.TryGetValue(e.GetType(), out var sink))
                 ((IAppEventSink<E>)sink).Deposit(e);
+            else
+                term.print(e, e.Flair);
             return ref e;
         }
 

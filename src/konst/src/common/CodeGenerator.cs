@@ -99,7 +99,7 @@ namespace Z0
             => dst.AppendLine(src);
 
         public static void lines(IEnumerable<string> src, StringBuilder dst)
-            => Root.iter(src,l => line(l,dst));
+            => z.iter(src,l => line(l,dst));
 
         public static string assign(object dst, object src)
             => text.concat(dst, Space, Chars.Eq, Space, src);

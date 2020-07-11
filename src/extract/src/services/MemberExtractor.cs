@@ -43,8 +43,7 @@ namespace Z0
         public ExtractedCode[] Extract(IApiHost src)
             => MemberExtraction.extract(ApiMemberJit.jit(src), Buffer);
 
-        public ExtractedCode[] Extract(ApiHost[] src)
-            => MemberExtraction.extract(ApiMemberJit.jit(src), Buffer);
-
+        public ExtractedCode[] Extract(ApiHost[] src, IEventBroker broker)
+            => MemberExtraction.extract(ApiMemberJit.jit(src,broker), Buffer);
     }
 }

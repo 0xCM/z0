@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface ICaptureWorkflow
+    public interface ICaptureWorkflow : IServiceAllocation
     {
         ICaptureBroker Broker {get;}
 
@@ -37,8 +37,8 @@ namespace Z0.Asm
         void Run(AsmArchiveConfig config, params PartId[] parts)
             => ManageCapture.CaptureParts(config, parts);        
 
-        void Run2(AsmArchiveConfig config, params PartId[] parts)
-            => ManageCapture.CaptureParts2(config, parts);        
+        void RunConsoidated(AsmArchiveConfig config, params PartId[] parts)
+            => ManageCapture.Consolidated(config, parts);        
 
     }
 }

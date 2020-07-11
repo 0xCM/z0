@@ -15,30 +15,33 @@ namespace Z0
         
         public T Payload {get;}
 
-        public CorrelationToken Correlation {get;}
+        public CorrelationToken Correlation 
+            => default;
         
+        public AppMsgColor Flair {get;}
+
         [MethodImpl(Inline)]
         public static implicit operator AppEvent(AppEvent<T> src)
             => new AppEvent(src.Description, src.Payload, src.Correlation);
 
         [MethodImpl(Inline)]
-        public AppEvent(string name, T data, CorrelationToken? ct = null)
+        public AppEvent(string name, T data, AppMsgColor flair)
         {
             Description = name;
             Payload = data;
-            Correlation = ct ?? CorrelationToken.Empty;
+            Flair = flair;
         }
         
         public AppEvent<T> Zero 
             => Empty;
 
         public string Format()
-            => string.Concat(Payload, CharText.Colon, CharText.Space, Payload);
+            => Description;
 
         public override string ToString()
             => Format();
 
         public static AppEvent<T> Empty 
-            => new AppEvent<T>(string.Empty, default(T));
+            => new AppEvent<T>(string.Empty, default(T), AppMsgColor.Gray);
     }
 }

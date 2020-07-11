@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    public delegate void OnStatus(IAppMsg status);
 
     public interface IAppMsg : ITextual
     {

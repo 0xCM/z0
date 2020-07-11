@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public partial class BitSeqD
+    public partial class SmallInts
     {
         /// <summary>
         /// (a,b) -> [ab]

@@ -10,21 +10,26 @@ public enum PartId : ulong
 {
     None = 0,
 
-    Sys = 1,
+    Part = 1,
 
+    Sys = 2,
 
-    Konst = 20,
+    Konst = 5,
 
-    Models = 21,
+    Math = 7,     
 
-    Part = 22,
+    Expressive = 10,
 
-    Seed = 23,     
+    Imagine = 12,
+
+    Seed = 17,     
+
+    Memories = 23,
+
+    Kinds = 28, 
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Expressive = 50,
     
     Canonical = 63, 
     
@@ -56,8 +61,6 @@ public enum PartId : ulong
     BitCore = 110, 
 
     BitMatrix = 111,
-
-    Math = 112,     
     
     GMath = 113, 
 
@@ -91,8 +94,6 @@ public enum PartId : ulong
 
     Spans = 131,
     
-    Imagine = 132,
-
     Nats = 133, 
 
     Mkl = 134, 
@@ -144,8 +145,7 @@ public enum PartId : ulong
     Symbolic = 157, 
     
     Identify = 158, 
-    
-    Kinds = 159, 
+
                    
     Apps = 160,     
     
@@ -159,7 +159,6 @@ public enum PartId : ulong
 
     ZXed = 165,
 
-    Memories = 166,
     
     Text = 167,
 

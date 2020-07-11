@@ -13,52 +13,47 @@ namespace Z0.Asm
     /// Describes an operand in the context of an assembly instruction
     /// </summary>
     public readonly struct AsmOperandInfo 
-    {
-        [MethodImpl(Inline)]
-        public static AsmOperandInfo Define(int index, OpKind kind, in AsmImmInfo imminfo, in AsmMemInfo memory, 
-            in Register register, AsmBranchInfo branch)
-                => new AsmOperandInfo(index, kind, imminfo, memory, register, branch);
-                
-        [MethodImpl(Inline)]
-        public AsmOperandInfo(int index, OpKind kind, in AsmImmInfo imminfo, in AsmMemInfo memory, 
-            in Register register, AsmBranchInfo branch)
-        {
-            this.Index = (byte)index;
-            this.Kind = kind;
-            this.ImmInfo = imminfo;
-            this.Memory = memory;
-            this.Register = register;
-            this.Branch = branch;
-        }
-        
+    {                        
         /// <summary>
         /// The 0-based operand position
         /// </summary>
-        public byte Index {get;}
+        public readonly byte Index;
 
         /// <summary>
         /// Classifies the operand
         /// </summary>
-        public OpKind Kind {get;}
+        public readonly OpKind Kind;
 
         /// <summary>
         /// Operand immediate info, if applicable
         /// </summary>
-        public AsmImmInfo ImmInfo {get;}
+        public readonly AsmImmInfo ImmInfo;
 
         /// <summary>
         /// Operand memory info, if applicable
         /// </summary>
-        public AsmMemInfo Memory {get;}
+        public readonly AsmMemInfo Memory;
         
         /// <summary>
         /// Operand register info, if applicable
         /// </summary>
-        public Register Register {get;}
+        public readonly Register Register;
 
         /// <summary>
         /// Instruction branching info, if applicable
         /// </summary>
-        public AsmBranchInfo Branch {get;}
+        public readonly AsmBranchInfo Branch;
+
+        [MethodImpl(Inline)]
+        public AsmOperandInfo(int index, OpKind kind, in AsmImmInfo imminfo, in AsmMemInfo memory, 
+            in Register register, AsmBranchInfo branch)
+        {
+            Index = (byte)index;
+            Kind = kind;
+            ImmInfo = imminfo;
+            Memory = memory;
+            Register = register;
+            Branch = branch;
+        }
     }
 }

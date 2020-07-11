@@ -23,8 +23,8 @@ namespace Z0
         public static ApiMembers members(IApiHost src)
             => ApiMemberJit.jit(src);
 
-        public static ApiMembers members(ApiHost[] src)
-            => ApiMemberJit.jit(src);
+        public static ApiMembers members(ApiHost[] src, IEventBroker broker)
+            => ApiMemberJit.jit(src, broker);
 
         /// <summary>
         /// Extracts encoded content for all operations defined by a host

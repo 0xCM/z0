@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct BitSeq
+    partial class SmallInts
     {
         static BitFormatConfig FormatConfig2 
             => BitFormatter.limited(uint2.Width, uint2.Width);
@@ -17,6 +17,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(uint2 src)
             => BitFormatter.format(src.data, FormatConfig2);
-
     }
 }

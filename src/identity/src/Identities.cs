@@ -30,8 +30,8 @@ namespace Z0
         ApiMembers JitHosted(IApiHost host)
             => ApiMemberJit.jit(host);
 
-        ApiMembers JitHosted(ApiHost[] hosts)
-            => ApiMemberJit.jit(hosts);
+        ApiMembers JitHosted(ApiHost[] hosts, IEventBroker broker)
+            => ApiMemberJit.jit(hosts, broker);
 
         /// <summary>
         /// Retrieves the members defined by an api host

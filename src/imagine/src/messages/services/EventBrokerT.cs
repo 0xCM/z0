@@ -5,9 +5,13 @@
 namespace Z0
 {
     public class EventBroker<F,E> : EventBroker
-        where F : EventBroker<F,E>, E, new()
+        where F : EventBroker<F,E>, E
         where E : IEventBroker
     {        
-        public static E New => new F();
+        protected EventBroker(FilePath target)
+            : base(target)
+        {
+
+        }   
     }
 }

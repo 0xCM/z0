@@ -11,6 +11,8 @@ namespace Z0
 
     public readonly struct AppEvent : ITextual<AppEvent>, IAppEvent<AppEvent>
     {
+        public static AppEvent<T> Create<T>(string description, T content, AppMsgColor flair = AppMsgColor.Magenta)
+            => new AppEvent<T>(description, content, flair);
         public string Description {get;}
         
         public object Content {get;}
@@ -55,6 +57,4 @@ namespace Z0
 
         interface IEmptyPayload {}
     }
-
-
 }

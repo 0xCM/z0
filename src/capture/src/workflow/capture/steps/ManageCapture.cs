@@ -29,12 +29,12 @@ namespace Z0.Asm
             return archive;
         }
         
-        IEnumerable<IPartCatalog> Catalogs(IApiSet src, params PartId[] parts)
+        IPartCatalog[] Catalogs(IApiSet src, params PartId[] parts)
         {
+            var dst = z.list<IPartCatalog>();
             if(parts.Length == 0)
-            {
-                foreach(var c in src.Catalogs)
-                    yield return c;
+            {                
+                dst.AddRange(src.Catalogs);
             }
             else
             {
@@ -43,9 +43,10 @@ namespace Z0.Asm
                     var id = parts[i];
                     var catalog = src.Catalogs.Where(c => c.PartId == id && c.ApiHostCount != 0).FirstOrDefault();
                     if(catalog != null)
-                        yield return catalog;
+                        dst.Add(catalog);
                 }
             }
+            return dst.Array();
         }
         
         public void CaptureParts(AsmArchiveConfig config, params PartId[] parts)
@@ -55,11 +56,11 @@ namespace Z0.Asm
             CaptureParts(catalogs, dst);
         }
 
-        public void CaptureParts2(AsmArchiveConfig config, params PartId[] parts)
+        public void Consolidated(AsmArchiveConfig config, params PartId[] parts)
         {
             var dst = InitTarget(config, parts);      
             var catalogs = Catalogs(Context.ApiSet, parts).Array();
-            var hosts = catalogs.SelectMany(c => c.Hosts).Array();
+            var hosts = catalogs.SelectMany(c => c.Hosts).OrderBy(x => x.PartId).ThenBy(x => x.Uri).ToArray();
             var step = CaptureHostStep.create(Workflow); 
             step.CaptureHosts(hosts,dst);
         }

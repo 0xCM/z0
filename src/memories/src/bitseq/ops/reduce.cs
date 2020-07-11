@@ -6,26 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
-    
-    readonly struct BitStream<T> : IStreamSource<T>
-        where T : ISmallInt
-    {
-        readonly IEnumerable<T> Source;
+
+    using S4 = uint4;
+    using S5 = uint5;
+
+    partial class SmallInts
+    {   
+        [MethodImpl(Inline)]
+        public static byte reduce(N4 n, byte x)
+            => (byte)(x % S4.Count);
 
         [MethodImpl(Inline)]
-        public BitStream(IEnumerable<T> source)
-        {
-            Source = source;
-        }
-
-        [MethodImpl(Inline)]
-        public IEnumerable<T> Next()
-        {
-            yield return default;
-        }    
+        public static byte reduce(N5 n, byte x)
+            => (byte)(x % S5.Count);        
     }
+
 }

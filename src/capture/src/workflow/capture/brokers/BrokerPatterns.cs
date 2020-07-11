@@ -22,11 +22,6 @@ namespace Z0.Asm
         AnalyzingExtractReport AnalyzingExtractReport => AnalyzingExtractReport.Empty;
     }
 
-    sealed class BrokerPattern : EventBroker, IEventBrokerPattern
-    {
-        
-    }
-
     public interface IBrokerClientPattern : IBrokerClient<IEventBrokerPattern>
     {
         void OnEvent(MembersLocated e) 

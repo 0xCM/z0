@@ -42,7 +42,6 @@ namespace Z0.Asm
         public bool IsMem(OpKind src)            
             => IsMemDirect(src) || IsMem64(src) || IsSegEs(src) || IsSegBase(src);
 
-
         [MethodImpl(Inline), Op]
         public InstructionMemory InxsMemory(Instruction src, int index)
             => InstructionMemory.From(src,index);
@@ -77,6 +76,7 @@ namespace Z0.Asm
         /// Specifies the segmented identity of a specified memory size
         /// </summary>
         /// <param name="src">The source value</param>
+        [Op]
         public SegmentedIdentity Identify(MemorySize src)
             => src switch {
                     MemorySize.UInt8 => NumericKind.U8,
