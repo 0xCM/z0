@@ -73,7 +73,7 @@ namespace Z0
         public static TableSpan<M,N,T> CheckedTransfer(Span<T> src)
         {
             
-            insist(src.Length >= CellCount, $"length(src) = {src.Length} < {CellCount} = SpanLength");
+            reason(src.Length >= CellCount, $"length(src) = {src.Length} < {CellCount} = SpanLength");
             return new TableSpan<M,N,T>(src);
         }
 
@@ -86,14 +86,14 @@ namespace Z0
         [MethodImpl(Inline)]        
         internal TableSpan(Span<T> src)
         {
-            insist(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src;
         }
 
         [MethodImpl(Inline)]        
         internal TableSpan(T[] src)
         {
-            insist(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src;
         }
 
@@ -107,7 +107,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal TableSpan(ReadOnlySpan<T> src)
         {
-            insist(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src.ToArray();
         }
 
@@ -188,7 +188,7 @@ namespace Z0
 
         public ref NatSpan<M,T> Col(int col, ref NatSpan<M,T> dst)
         {
-            insist(col >= 0 && col < ColCount, $"The column index {col} is out of range");
+            reason(col >= 0 && col < ColCount, $"The column index {col} is out of range");
 
             for(var row = 0; row < ColLength; row++)
                 dst[row] = data[row*RowLenth + col];
@@ -198,7 +198,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatSpan<N,T> Row(int row)
         {
-            insist(row >= 0 && row < RowCount, $"The row index {row} is out of range");            
+            reason(row >= 0 && row < RowCount, $"The row index {row} is out of range");            
             return data.Slice(row * RowLenth, RowLenth);
         }
 

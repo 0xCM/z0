@@ -16,7 +16,7 @@ namespace Z0
             try
             {
                 var parser = Parsers.hex(true);
-                var uri = OpUriParser.Service.Parse(src.TakeBefore(Chars.Space).Trim()).ToOption().Require();
+                var uri = OpUriParser.Service.Parse(src.TakeBefore(Chars.Space).Trim()).Require();
                 var bytes = src.TakeAfter(Chars.Space)
                                      .SplitClean(HexSpecs.DataDelimiter)
                                      .Select(parser.Succeed)

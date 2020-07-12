@@ -11,6 +11,10 @@ namespace Z0
 
     public static class AppEvents
     {
+        [MethodImpl(Inline)]
+        public static AppErrorEvent error(object content)
+            => new AppErrorEvent(AppMsg.NoCaller(content, AppMsgKind.Error));
+            
         /// <summary>
         /// Creates an even sink predicated on a receiver
         /// </summary>

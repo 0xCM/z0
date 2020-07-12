@@ -37,6 +37,5 @@ namespace Z0
         public static FileExtension Parsed => FileExtension.Define("p.csv", "Parsed x86 disassembly");
     
         public static FileExtension Unparsed => FileExtension.Define("u.csv", "Unparseable x86 disassembly");
-
     }
 }

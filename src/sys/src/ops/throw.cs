@@ -20,5 +20,9 @@ namespace Z0
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T @throw<T>(Exception e)
             => proxy.@throw<T>(e);
+
+        [MethodImpl(Options), Op]
+        public static void @throw(object msg)
+            => proxy.@throw($"{msg}");
     }
 }

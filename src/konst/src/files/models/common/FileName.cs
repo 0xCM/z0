@@ -9,16 +9,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Defines a file name along with the extension in isolation 
     /// and without ascribing additional path content
     /// </summary>
     public class FileName : PathComponent<FileName>
-    {                
-        public static bool IsSome(FileName src)
-            => !string.IsNullOrEmpty(src?.Name);
-        
+    {                        
         [MethodImpl(Inline)]
         public static FileName Define(string name)
             => new FileName(name);
@@ -51,14 +49,15 @@ namespace Z0
             ? FileExtension.Define(Path.GetExtension(Name)) 
             : FileExtension.Empty;
 
-
         /// <summary>
         /// Renames the file (in the model, not on disk)
         /// </summary>
-        /// <param name="newName">The new file name</param>
+        /// <param name="name">The new file name</param>
         [MethodImpl(Inline)]
-        public FileName WithNewName(string newName)
-            => Path.HasExtension(newName) ? FileName.Define(newName) : FileName.Define(newName, Ext.Name);
+        public FileName WithNewName(string name)
+            => Path.HasExtension(name) 
+            ? FileName.Define(name) 
+            : FileName.Define(name, Ext.Name);
 
         public static FileName Timestamped(FileName src)
         {
@@ -140,18 +139,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public FileName ChangeExtension(FileExtension ext)
             => Define(Path.GetFileNameWithoutExtension(Name), ext);
-
-
-        /// <summary>
-        /// The file extension, if any
-        /// </summary>
-        Option<FileExtension> ExtOption
-            => Ext.IsNonEmpty ? Option.some(Ext) : Option.none<FileExtension>();
-
-        public FileName WithOwner(PartId part)
-            => new FileName(
-                    string.Concat(part.Format(), Chars.Dot, Path.GetFileNameWithoutExtension(Name)), 
-                    ExtOption.MapValueOrElse(x => x.Name, () => string.Empty)
-                    );
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
             where I : unmanaged, ITypeNat
         {
             var idx = z.value(i);
-            insist(idx < Count);
+            insist(idx < Count, $"{idx} < {Count}");
             return ref Refs[idx];
         }        
 

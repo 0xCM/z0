@@ -9,13 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    partial class Root
+    partial struct z
     {
-        [MethodImpl(Inline), Op]
-        public static void insist(bool invariant)
-        {
-            if(!invariant)
-                sys.@throw($"Application invaraiant failed");
-        }
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Type type<T>()
+            => sys.type<T>();
     }
 }

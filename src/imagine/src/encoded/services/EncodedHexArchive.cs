@@ -11,14 +11,23 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct EncodedHexArchive : IEncodedHexArchive
+    public readonly struct EncodedHexArchive : IEncodedHexArchive, IAppEventSink
     {
         public FolderPath ArchiveRoot {get;}            
+
+        IAppEventSink Sink => this;
         
         [MethodImpl(Inline)]
         public EncodedHexArchive(FolderPath root)
-            => ArchiveRoot = root;
+        {
+            ArchiveRoot = root;
+        }
 
+        void IAppEventSink.Deposit(IAppEvent e)
+        {
+            term.print(e);
+        }
+        
         public static FilePath[] files(FolderPath root, PartId owner) 
             => root.Files(owner, FileExtensions.Hex, true).Array();
 
@@ -35,45 +44,41 @@ namespace Z0
             return read(path);
         }
 
-        public static IdentifiedCodeIndex index(FilePath src)
+        public static IdentifiedCodeIndex index(FilePath src, IAppEventSink status)
         {
-            try
+            var uri = ApiHostUri.Parse(src.FileName);
+            if(uri.Failed || uri.Value.IsEmpty)
             {
-                var uri = ApiHostUri.Parse(src.FileName).ValueOrDefault(ApiHostUri.Empty);   
-                var dst = Root.list<IdentifiedCode>();
-                if(uri.IsNonEmpty)
-                {
-                    foreach(var item in read(src))
-                        if(item.IsNonEmpty)
-                            dst.Add(item);
-                }
-                return Encoded.index(uri, dst.Array());
+                status.Deposit(AppEvents.error(uri.Reason));
+                return IdentifiedCodeIndex.Empty;
             }
-            catch(Exception e)
-            {   
-                term.error(e);
-            }
-            return IdentifiedCodeIndex.Empty;            
-        }
 
-        public static IEnumerable<IdentifiedCodeIndex> indices(FolderPath root)
+            var dst = z.list<IdentifiedCode>();                
+            foreach(var item in read(src))
+                if(item.IsNonEmpty)
+                    dst.Add(item);
+            
+            return Encoded.index(uri.Value, dst.Array());                        
+        }
+        
+        static IEnumerable<IdentifiedCodeIndex> indices(FolderPath root, IAppEventSink status)
         {
             foreach(var file in files(root))
             {                    
-                var idx = index(file);
+                var idx = index(file, status);
                 if(idx.IsNonEmpty)
                     yield return idx;
             }
         }
         
-        public static IEnumerable<IdentifiedCodeIndex> indices(FolderPath root, params PartId[] owners)     
+        static IEnumerable<IdentifiedCodeIndex> indices(FolderPath root, IAppEventSink status, params PartId[] owners)     
         {
             if(owners.Length != 0)
             {
                 foreach(var owner in owners)            
                 foreach(var file in files(root, owner))
                 {
-                    var idx = index(file);
+                    var idx = index(file, status);
                     if(idx.IsNonEmpty)
                         yield return idx;
                 }
@@ -82,7 +87,7 @@ namespace Z0
             {
                 foreach(var file in files(root))
                 {                    
-                    var idx = index(file);
+                    var idx = index(file, status);
                     if(idx.IsNonEmpty)
                         yield return idx;
                 }
@@ -102,8 +107,6 @@ namespace Z0
         public IEnumerable<FilePath> Files(PartId owner) 
             => ArchiveRoot.Files(owner, FileExtensions.Hex, true);
 
-
-
         public IEnumerable<IdentifiedCodeIndex> ReadIndices(params PartId[] owners)     
         {
             if(owners.Length != 0)
@@ -111,7 +114,7 @@ namespace Z0
                 foreach(var owner in owners)            
                 foreach(var file in Files(owner))
                 {
-                    var idx = index(file);
+                    var idx = index(file, Sink);
                     if(idx.IsNonEmpty)
                         yield return idx;
                 }
@@ -120,16 +123,15 @@ namespace Z0
             {
                 foreach(var file in Files())
                 {                    
-                    var idx = index(file);
+                    var idx = index(file, Sink);
                     if(idx.IsNonEmpty)
                         yield return idx;
                 }
             }          
         }
 
-
         public IdentifiedCodeIndex ReadIndex(FilePath file)
-            => index(file);
+            => index(file, Sink);
 
         public IEnumerable<IdentifiedCode> Read()
             => Read(_ => true);

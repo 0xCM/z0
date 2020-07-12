@@ -41,7 +41,6 @@ namespace Z0.Asm
                 var instructions = decoder.Decode(parsed); 
                 var bits = new Z0.ParsedOperation(src.Address, src, parsed)               ;
             }
-
         }
 
         public Option<CapturedMemory> Capture(MemoryAddress src)        

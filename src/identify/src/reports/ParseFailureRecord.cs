@@ -54,10 +54,13 @@ namespace Z0
             var address = z.address(Parsers.hex().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();            
             var term = Enums.Parse<ExtractTermCode>(fields[3]).ValueOrDefault();
-            var uri = OpUriParser.Service.ParseDefault(fields[4]);
-            var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed).ToArray();
-            var extract = new LocatedCode(address,data);
-            return new R(seq,address,len,term,uri,extract);
+            var uri = OpUriParser.Service.Parse(fields[4]);
+            if(uri.Failed)
+                sys.@throw($"{uri.Reason}");
+
+            var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed);
+            var extract = new LocatedCode(address, data);
+            return new R(seq, address, len, term, uri.Value, extract);
         }
 
         public ParseFailureRecord(int Sequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, LocatedCode Data)

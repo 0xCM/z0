@@ -67,9 +67,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsedOperation(MemoryAddress src, LocatedCode raw, LocatedCode parsed)
         {
-            //Address = insist(src, x => x.IsNonEmpty);
-            insist(src.Equals(raw.Address));
-            insist(src.Equals(parsed.Address));
+            z.insist(src, raw.Address);
+            z.insist(src, parsed.Address);
             Input = raw;
             ParseResult = parsed;
         }
@@ -77,7 +76,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsedOperation(LocatedCode src, LocatedCode parsed)
         {
-            Demands.insist(src.Address, parsed.Address);
+            z.insist(src.Address, parsed.Address);
             Input = src;
             ParseResult = parsed;
         }
@@ -85,7 +84,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsedOperation(MemoryAddress src, byte[] raw, byte[] parsed)
         {
-            //Address = insist(src, x => x.IsNonEmpty);
             Input = new LocatedCode(src, raw);
             ParseResult = new LocatedCode(src, parsed);
         }

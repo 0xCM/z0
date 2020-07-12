@@ -67,6 +67,10 @@ namespace Z0
             Reason = reason != null ? Option.some(reason) : Option.none<object>();
         }        
 
+        [MethodImpl(Inline)]
+        public ParseResult<S,T> WithReason(object reason)
+            => new ParseResult<S,T>(Source, Value, reason);
+
         /// <summary>
         /// Invokes an action if the value exists
         /// </summary>
@@ -127,7 +131,7 @@ namespace Z0
             if(Succeeded)
                 return Value;
             else    
-                throw new Exception($"{Source} could not be parsed {Reason}");
+                throw new Exception($"{Source} unparsed:{Reason}");
         }
 
         /// <summary>

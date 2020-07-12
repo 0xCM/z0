@@ -23,9 +23,10 @@ namespace Z0
     public class Terminal : ITerminal
     {
         [MethodImpl(Inline)]
-        public static Terminal Get() => TheOnly;
+        public static Terminal Get() 
+            => JustTheOne;
         
-        static readonly Terminal TheOnly = new Terminal();
+        static readonly Terminal JustTheOne = new Terminal();
         
         readonly object TermLock;
 
@@ -41,8 +42,12 @@ namespace Z0
              ErrLock = new object();             
              StdLock = new object();
              Console.OutputEncoding = new UnicodeEncoding();      
-             Console.CancelKeyPress += OnCancelKeyPressed;        
+             Console.CancelKeyPress += OnCancelKeyPressed;  
+             ErrorLogPath.Delete();      
         }
+
+        FilePath ErrorLogPath
+            => AppEnv.Default.AppPaths.AppErrorOutPath.CreateParentIfMissing();
 
         /// <summary>
         /// Specfifies the handler to invoke when the user enters a cancellation
@@ -179,9 +184,6 @@ namespace Z0
             }
         }
 
-
-        FilePath ErrorLogPath
-            => AppEnv.Default.AppPaths.AppErrorOutPath.CreateParentIfMissing();
         
         void Log(IAppMsg msg)
         {

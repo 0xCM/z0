@@ -90,6 +90,6 @@ namespace Z0.Asm
         /// <param name="formatter">The formatter to use</param>
         /// <param name="dst">The archive target</param>
         HostArchiver HostArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
-            => new HostArchiver(host, formatter, insist(dst));
+            => new HostArchiver(host, formatter, z.insist(dst));
     }
 }

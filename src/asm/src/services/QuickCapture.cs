@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Option<CapturedCode> Capture(MethodInfo src)
         {
-            var id = insist(src).Identify();
+            var id = z.insist(src).Identify();
             return Service.Capture(id,src);
         }
 

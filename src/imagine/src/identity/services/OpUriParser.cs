@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static UriDelimiters;
+    using static z;
 
     public readonly struct OpUriParser : ITextParser<OpUri>
     {        
@@ -17,33 +18,24 @@ namespace Z0
                ? (OpUriScheme)result 
                : OpUriScheme.None;
 
-        public OpUri ParseDefault(string text, OpUri failed = default)
-            => Parse(text).ValueOrDefault(failed);            
-
         public ParseResult<OpUri> Parse(string text)
         {
             var parts = text.SplitClean(EOS);
             var msg = string.Empty;
             if(parts.Length != 2)
-                msg = $"Splitting on {EOS} produced {parts.Length} pieces";
-            else
-            {
-                var scheme = ParseScheme(parts[0]);
-                var rest = parts[1];
-                var pathText = rest.TakeBefore(QueryMarker);
-                var path = ApiHostUri.Parse(pathText);
-                if(!path.Succeeded)
-                    msg = $"Failed to parse {pathText} as an api host path";
-                else
-                {
-                    var id = OpIdentityParser.parse(rest.TakeAfter(Fragment));
-                    var group = rest.Between(QueryMarker,Fragment);
-                    var uri = OpUri.Define(scheme, path.Value, group, id);
-                    return ParseResult.Success(text,uri);
-                }                
-            }
-                        
-            return ParseResult.Fail<OpUri>(msg);
+                return unparsed<OpUri>(text, $"Splitting on {EOS} produced {parts.Length} pieces");
+
+            var scheme = ParseScheme(parts[0]);
+            var rest = parts[1];
+            var pathText = rest.TakeBefore(QueryMarker);
+            var path = ApiHostUri.Parse(pathText);
+            if(path.Failed)
+                return ParseResult.Fail<OpUri>(text, path.Reason);
+
+            var id = OpIdentityParser.parse(rest.TakeAfter(Fragment));
+            var group = rest.Between(QueryMarker,Fragment);
+            var uri = OpUri.Define(scheme, path.Value, group, id);
+            return parsed(text, uri);
         }               
     }
 }

@@ -9,85 +9,78 @@ namespace Z0
 
     using static Konst;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;    
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     partial struct z
     {
-
         [MethodImpl(Inline), Op]
-        public static void insist(bool invariant)
+        static void require(bool invariant, string msg, string caller, string file, int? line)
         {
             if(!invariant)
-                sys.@throw($"Application invaraiant failed");
+                sys.@throw(new Exception($"{msg}: See line {line} in {file}"));
         }
 
         [MethodImpl(Inline), Op]
-        public static void insist(bool invariant, string msg)
+        public static void insist(bool invariant, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            if(!invariant)
-                sys.@throw(new Exception($"Application invaraiant failed: {msg}"));
+            require(invariant, msg, caller, file, line);
         }
 
         [MethodImpl(Inline)]
-        public static ulong insist<N>(ulong src, N n = default)
+        public static ulong insist<N>(ulong src, N n = default, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat
         {
-            insist(value<N>() == src, $"The source value {src} does not match the required natural value {value<N>()}");   
+            require(value<N>() == src,  $"The source value {src} does not match the required natural value {value<N>()}", caller, file, line);
             return src;     
         }
 
         [MethodImpl(Inline)]
-        public static int insist<N>(int src, N n = default)
+        public static int insist<N>(int src, N n = default, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat            
-                => (int)insist<N>((ulong)src);
+                => (int)insist<N>((ulong)src, n, caller, file, line);
 
         [MethodImpl(Inline)]
-        public static T[] insist<N,T>(T[] src, N n = default)
+        public static T[] insist<N,T>(T[] src, N n = default, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat
         {
-            insist(src.Length,n);
+            insist(src.Length, n, caller, file, line);
             return src;
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T insist<T>(T src, Func<T,bool> f)
+        public static T insist<T>(T src, Func<T,bool> f, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            insist(f(src));
+            require(f(src), $"Predicate evaluation over {src} failed", caller, file, line);
             return src;
         }
 
         [MethodImpl(Inline)]
-        public static T insist<T>(T src)
+        public static T insist<T>(T src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : class
         {
-            insist(src != null);
+            require(src != null, $"The {type<T>()}-kinded value was null", caller, file, line);
+            return src;
+        }
+
+        [MethodImpl(Inline)]
+        public static string insist(string src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        {
+            insist(text.nonempty(src), $"The source text was empty", caller, file, line);
             return src;
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T insist<T>(T? src)
-            where T : struct
-        {
-            insist(src.HasValue);
-            return src.Value;
-        }
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T insist<T>(Option<T> src)
-        {
-            insist(src.IsSome());
-            return src.Value;
-        }        
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T insist<T>(T lhs, T rhs)
+        public static T insist<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : IEquatable<T>            
         {
             if(z.nullnot(lhs) && z.nullnot(rhs) && lhs.Equals(rhs))
                 return lhs;
             else
-                insist(false, $"{lhs} != {rhs}");
+                insist(false, $"{lhs} != {rhs}", caller, file, line);
             
             return default;
         }
-
     }
 }

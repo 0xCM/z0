@@ -32,7 +32,7 @@ namespace Z0
 
         public void Deposit(IEnumerable<IAppMsg> src)
         {
-            z.insist(src !=  null, $"Null enumerables are bad");
+            z.insist(src);
             z.insist(!src.Any(m => m == null),"Null messages are bad");
 
             var errors = (from m in src where m.IsError select m.Format()).Array();        

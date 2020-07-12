@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         public T Value {get;}
 
-        public Option<object> Reason {get;}
+        public object Reason {get;}
 
         public bool Failed 
         {
@@ -69,11 +69,15 @@ namespace Z0
         [MethodImpl(Inline)]
         ParseResult(string source, T value, object reason)
         {
-            this.Source = source;
-            this.Succeeded = true;
-            this.Value = value;
-            this.Reason = reason;
+            Source = source;
+            Succeeded = true;
+            Value = value;
+            Reason = reason ?? EmpyString;
         }        
+
+        [MethodImpl(Inline)]
+        public ParseResult<T> WithReason(object reason)
+            => new ParseResult<T>(Source, Value, reason);
 
         /// <summary>
         /// Invokes an action if the value exists
@@ -201,7 +205,7 @@ namespace Z0
             if(Succeeded)
                 return Value;
             else    
-                throw new Exception($"{Source} could not be parsed {Reason}");
+                throw new Exception($"{Source} unparsed:{Reason}");
         }
 
         [MethodImpl(Inline)]

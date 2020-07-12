@@ -49,7 +49,7 @@ namespace Z0
 
         public void Deposit(IAppMsg msg)
         {
-            z.insist(msg != null, $"Depositing null messages to the queue is bad");
+            z.insist(msg);
             lock(lockobj)
                 Messages.Add(msg);
             

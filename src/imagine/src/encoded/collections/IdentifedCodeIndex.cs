@@ -18,15 +18,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public IdentifiedCodeIndex(ApiHostUri host, IdentifiedCode[] code)
         {
-            Root.insist(host.IsNonEmpty);
+            z.insist(host.IsNonEmpty, $"Empty host uri");
             Host = host;
-            Code = code;
-        }
-
-        [MethodImpl(Inline)]
-        IdentifiedCodeIndex(IdentifiedCode[] code)
-        {            
-            Host = ApiHostUri.Empty;
             Code = code;
         }
 
@@ -40,6 +33,13 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Host.IsNonEmpty && Code != null && Code.Length != 0;
+        }
+
+        [MethodImpl(Inline)]
+        IdentifiedCodeIndex(IdentifiedCode[] code)
+        {            
+            Host = ApiHostUri.Empty;
+            Code = code;
         }
 
         public static IdentifiedCodeIndex Empty 

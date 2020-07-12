@@ -64,7 +64,7 @@ namespace Z0
         public static void error(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var dst = text.build();
-            dst.AppendLine($"Failure ocuurred at {caller} {file} {line}");
+            dst.AppendLine($"Failure trapped by {caller} at {file} {line}");
             dst.AppendLine(e?.ToString() ?? string.Empty);
             var msg = AppMsg.NoCaller($"{dst.ToString()}", AppMsgKind.Error);            
             T.WriteMessage(msg);

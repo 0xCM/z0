@@ -63,7 +63,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BinaryCode(byte[] bytes)
-            => Encoded = Root.insist(bytes);
+            => Encoded = z.insist(bytes);
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(Span<byte> src)

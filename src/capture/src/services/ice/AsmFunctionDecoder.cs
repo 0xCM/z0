@@ -84,7 +84,7 @@ namespace Z0.Asm
         {
             try
             {   
-                insist(code.IsNonEmpty);
+                z.insist(code.IsNonEmpty, $"The block supplied for decoding was empty");
                 var decoded = new Iced.InstructionList();
                 var reader = new Iced.ByteArrayCodeReader(code.Encoded);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);

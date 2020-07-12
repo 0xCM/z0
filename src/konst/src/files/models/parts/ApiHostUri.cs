@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static IdentityShare;
+    using static z;
 
     public readonly struct ApiHostUri : IUri<ApiHostUri>, INullary<ApiHostUri>
     {        
@@ -30,30 +31,45 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Owner == 0  && text.blank(Name);
+            get => text.blank(Name);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Owner != 0 && !text.blank(Name);
+            get => text.nonempty(Name);
         }
 
         ApiHostUri INullary<ApiHostUri>.Zero 
             => Empty;
         
+        public static ParseResult<ApiHostUri> Parse(FileName src)
+        {   
+            var input = src.WithoutExtension.Name.Replace(Chars.Dot, UriDelimiters.PathSep);
+            return Parse(input);
+        }
+
         [MethodImpl(Inline)]
         public static ParseResult<ApiHostUri> Parse(string src)
         {
-            var parts = src.Split(UriDelimiters.PathSep);
-            if(parts.Length == 2 && Enum.TryParse(parts[0], true, out PartId owner))
-            {
-                var host = parts[1];
-                if(!text.blank(host))
-                    return ParseResult.Success(src, Define(owner, host));
-            }
+            var failure = unparsed<ApiHostUri>(src);
+            if(text.blank(src))
+                return failure;
+
+            var parts = src.SplitClean(UriDelimiters.PathSep);
+            var count = parts.Length;
+            if(count != 2)
+                return failure.WithReason(text.concat("Component count ", count," != ", 2));
             
-            return ParseResult.Fail<ApiHostUri>(src);
+            Enum.TryParse(parts[0], true, out PartId owner);
+            if(owner == 0)
+                return failure.WithReason("Invalid part");
+        
+            var host = parts[1];
+            if(text.blank(host))
+                return failure.WithReason("Host unspecified");
+
+            return parsed(src, Define(owner, host));            
         }
 
         [MethodImpl(Inline)]
@@ -65,8 +81,6 @@ namespace Z0
             return new ApiHostUri(owner, name);
         }
 
-        public static ParseResult<ApiHostUri> Parse(FileName src)
-            => Parse(src.WithoutExtension.Name.Replace(Chars.Dot, UriDelimiters.PathSep));
 
         [MethodImpl(Inline)]
         public static ApiHostUri FromHost<H>()
@@ -88,9 +102,10 @@ namespace Z0
         internal ApiHostUri(PartId owner, string name)
         {
             Owner = owner;
-            Name = name;
+            Name = insist(name);
             UriText = owner != 0 ? $"{Owner.Format()}{UriDelimiters.PathSep}{Name}" : name;
         } 
+
         public string Format()
             => UriText;
 
@@ -111,7 +126,15 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        [MethodImpl(Inline)]
+        ApiHostUri(string name)
+        {
+            Owner = PartId.None;
+            Name = EmptyString;
+            UriText = EmptyString;
+        } 
+        
         public static ApiHostUri Empty 
-            => new ApiHostUri(PartId.None, string.Empty);
+            => new ApiHostUri(EmptyString);
     }
 }
