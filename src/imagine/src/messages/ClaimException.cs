@@ -20,7 +20,7 @@ namespace Z0
         ClaimException(ClaimKind kind, IAppMsg msg) 
             : base(msg)
             { 
-                this.OpKind = kind;
+                OpKind = kind;
             }
          
         public ClaimKind OpKind {get;}         

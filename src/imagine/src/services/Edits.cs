@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly struct Edits : IApiHost<Edits>
+    public readonly struct Edits
     {
         /// <summary>
         /// Presents a readonly reference as mutable reference

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static System.Runtime.CompilerServices.Unsafe;
 
     partial struct z
     {        

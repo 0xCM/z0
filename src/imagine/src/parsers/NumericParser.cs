@@ -11,7 +11,7 @@ namespace Z0
     using static NumericCast;
 
     [ApiHost("parser")]
-    public class NumericParser  : IApiHost<NumericParser>
+    public class NumericParser
     {
         /// <summary>
         /// Parses a transposition in canonical form (i j), if possible; otherwise returns the empty transposition
