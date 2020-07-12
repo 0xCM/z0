@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="dst">The target</param>
         /// <typeparam name="T">The data source type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void unpack<T>(T src, Span<Bit> dst)
+        public static void unpack<T>(T src, Span<BitState> dst)
             where T : struct
         {
             var count = size<T>();

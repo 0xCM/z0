@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static Bit test(sbyte src, byte pos)
-            => (Bit)((unsign(src) >> pos) & 1);
+        public static BitState test(sbyte src, byte pos)
+            => (BitState)((unsign(src) >> pos) & 1);
 
         /// <summary>
         /// Determines the state of an index-identified bit
@@ -27,8 +27,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static Bit test(byte src, byte pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState test(byte src, byte pos)
+            => (BitState)((src >> pos) & 1);
 
         /// <summary>
         /// Determines the state of an index-identified bit
@@ -36,8 +36,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static Bit test(short src, byte pos)
-            => (Bit)((unsign(src) >> pos) & 1);
+        public static BitState test(short src, byte pos)
+            => (BitState)((unsign(src) >> pos) & 1);
 
         /// <summary>
         /// Determines the state of an index-identified bit
@@ -45,8 +45,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static Bit test(ushort src, byte pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState test(ushort src, byte pos)
+            => (BitState)((src >> pos) & 1);
 
         /// <summary>
         /// Determines the state of an index-identified bit
@@ -54,8 +54,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static Bit test(int src, byte pos)
-            => (Bit)((unsign(src) >> pos) & 1);
+        public static BitState test(int src, byte pos)
+            => (BitState)((unsign(src) >> pos) & 1);
 
         /// <summary>
         /// Determines the state of an index-identified bit
@@ -63,8 +63,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static Bit test(uint src, byte pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState test(uint src, byte pos)
+            => (BitState)((src >> pos) & 1);
 
         /// <summary>
         /// Determines the state of an index-identified bit
@@ -72,8 +72,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static Bit test(long src, byte pos)
-            => (Bit)((unsign(src) >> pos) & 1);
+        public static BitState test(long src, byte pos)
+            => (BitState)((unsign(src) >> pos) & 1);
 
         /// <summary>
         /// Determines the state of an index-identified bit
@@ -81,8 +81,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static Bit test(ulong src, byte pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState test(ulong src, byte pos)
+            => (BitState)((src >> pos) & 1);
 
         /// <summary>
         /// Determines the state of an index-identified bit
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Bit test(float src, byte pos)
+        public static unsafe BitState test(float src, byte pos)
             => test(As<float,uint>(ref AsRef<float>(&src)),pos);
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Bit test(double src, byte pos)
+        public static unsafe BitState test(double src, byte pos)
             => test(As<double,ulong>(ref AsRef<double>(&src)),pos);
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Bit test(decimal src, byte pos)
+        public static unsafe BitState test(decimal src, byte pos)
         {
             ref var lo = ref As<decimal,ulong>(ref Unsafe.AsRef<decimal>(&src));
             ref var hi = ref Add(ref lo, 1);

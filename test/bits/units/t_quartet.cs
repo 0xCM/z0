@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static SmallInts;
+    using static Bit;
     public class t_quartet : UnitTest<t_quartet>
     {
         public void add_4u_check()
@@ -89,12 +89,12 @@ namespace Z0
             var z1 = (byte)5;
             Claim.eq(y1,z1);
 
-            var x2 = uint4(Bit.On,Bit.Off,Bit.On,Bit.On);
+            var x2 = uint4(BitState.On,BitState.Off,BitState.On,BitState.On);
             byte y2 = x2;
             var z2 = (byte)0b1101;
             Claim.eq(y2,z2);
 
-            var x3 = uint4(Bit.On, Bit.Off, Bit.On, Bit.On);
+            var x3 = uint4(BitState.On, BitState.Off, BitState.On, BitState.On);
             byte y3 = x3;
             var z3 = (byte)0b1101;
             Claim.eq(y3,z3);

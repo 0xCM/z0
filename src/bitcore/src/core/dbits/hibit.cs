@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Bit msb(byte src)
+        public static BitState msb(byte src)
             => As.testbit(src,7);
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Bit msb(sbyte src)
+        public static BitState msb(sbyte src)
             => As.testbit(src,7);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Bit msb(ushort src)
+        public static BitState msb(ushort src)
             => As.testbit(src,15);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Bit msb(short src)
+        public static BitState msb(short src)
             => As.testbit(src,15);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Bit msb(uint src)
+        public static BitState msb(uint src)
             => As.testbit(src,31);
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Bit msb(int src)
+        public static BitState msb(int src)
             => As.testbit(src,31);
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Bit msb(ulong src)
+        public static BitState msb(ulong src)
             => As.testbit(src,63);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static Bit msb(long src)
+        public static BitState msb(long src)
             => As.testbit(src,63);
     }
 }

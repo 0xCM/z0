@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     partial class FormatBits
     {
         public static string format(sbyte src, BitFormatConfig config)

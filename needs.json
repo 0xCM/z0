@@ -1,96 +1,96 @@
 {
   "format": 1,
   "restore": {
-    "J:\\dev\\projects\\z0\\native\\libm\\z0.libm.csproj": {},
-    "J:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj": {},
-    "J:\\dev\\projects\\z0\\native\\mkl\\test\\z0.mkl.test.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\artistry\\z0.artistry.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\canonical\\z0.canonical.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\codes\\z0.codes.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\control\\z0.control.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\gen\\z0.gen.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\math\\z0.math.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\part\\z0.part.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj": {},
-    "J:\\dev\\projects\\z0\\src\\zxed\\z0.zxed.csproj": {},
-    "J:\\dev\\projects\\z0\\test\\asmd\\z0.asmd.test.csproj": {},
-    "J:\\dev\\projects\\z0\\test\\asm\\z0.asm.test.csproj": {},
-    "J:\\dev\\projects\\z0\\test\\bits\\z0.bits.test.csproj": {},
-    "J:\\dev\\projects\\z0\\test\\dynamic\\z0.dynamic.test.csproj": {},
-    "J:\\dev\\projects\\z0\\test\\gvec\\z0.gvec.test.csproj": {},
-    "J:\\dev\\projects\\z0\\test\\identity\\z0.identity.test.csproj": {},
-    "J:\\dev\\projects\\z0\\test\\logix\\z0.logix.test.csproj": {},
-    "J:\\dev\\projects\\z0\\test\\machines\\z0.machines.test.csproj": {},
-    "J:\\dev\\projects\\z0\\test\\math\\z0.math.test.csproj": {},
-    "J:\\dev\\projects\\z0\\test\\symbolic\\z0.symbolic.test.csproj": {}
+    "j:\\dev\\projects\\z0\\native\\libm\\z0.libm.csproj": {},
+    "j:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj": {},
+    "j:\\dev\\projects\\z0\\native\\mkl\\test\\z0.mkl.test.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\artistry\\z0.artistry.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\canonical\\z0.canonical.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\codes\\z0.codes.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\control\\z0.control.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\gen\\z0.gen.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\math\\z0.math.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\part\\z0.part.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj": {},
+    "j:\\dev\\projects\\z0\\src\\zxed\\z0.zxed.csproj": {},
+    "j:\\dev\\projects\\z0\\test\\asmd\\z0.asmd.test.csproj": {},
+    "j:\\dev\\projects\\z0\\test\\asm\\z0.asm.test.csproj": {},
+    "j:\\dev\\projects\\z0\\test\\bits\\z0.bits.test.csproj": {},
+    "j:\\dev\\projects\\z0\\test\\dynamic\\z0.dynamic.test.csproj": {},
+    "j:\\dev\\projects\\z0\\test\\gvec\\z0.gvec.test.csproj": {},
+    "j:\\dev\\projects\\z0\\test\\identity\\z0.identity.test.csproj": {},
+    "j:\\dev\\projects\\z0\\test\\logix\\z0.logix.test.csproj": {},
+    "j:\\dev\\projects\\z0\\test\\machines\\z0.machines.test.csproj": {},
+    "j:\\dev\\projects\\z0\\test\\math\\z0.math.test.csproj": {},
+    "j:\\dev\\projects\\z0\\test\\symbolic\\z0.symbolic.test.csproj": {}
   },
   "projects": {
-    "J:\\dev\\projects\\z0\\native\\libm\\z0.libm.csproj": {
+    "j:\\dev\\projects\\z0\\native\\libm\\z0.libm.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\native\\libm\\z0.libm.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\native\\libm\\z0.libm.csproj",
         "projectName": "z0.libm",
-        "projectPath": "J:\\dev\\projects\\z0\\native\\libm\\z0.libm.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\native\\libm\\z0.libm.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.libm\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.libm\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -110,8 +110,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -157,14 +157,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj": {
+    "j:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj",
         "projectName": "z0.mkl",
-        "projectPath": "J:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.mkl\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.mkl\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -184,23 +184,23 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj"
+              "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj"
+              "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj"
+              "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
+              "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj"
+              "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj"
               }
             }
           }
@@ -246,14 +246,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\native\\mkl\\test\\z0.mkl.test.csproj": {
+    "j:\\dev\\projects\\z0\\native\\mkl\\test\\z0.mkl.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\native\\mkl\\test\\z0.mkl.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\native\\mkl\\test\\z0.mkl.test.csproj",
         "projectName": "z0.mkl.test",
-        "projectPath": "J:\\dev\\projects\\z0\\native\\mkl\\test\\z0.mkl.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\native\\mkl\\test\\z0.mkl.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.mkl.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.mkl.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -273,11 +273,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj"
+              "j:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\native\\mkl\\src\\z0.mkl.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               }
             }
           }
@@ -327,14 +327,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+    "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj",
         "projectName": "z0.apps",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.apps\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.apps\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -354,11 +354,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj"
+              "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -404,14 +404,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {
+    "j:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj",
         "projectName": "z0.archives",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.archives\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.archives\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -431,11 +431,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj"
+              "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -481,14 +481,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\artistry\\z0.artistry.csproj": {
+    "j:\\dev\\projects\\z0\\src\\artistry\\z0.artistry.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\artistry\\z0.artistry.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\artistry\\z0.artistry.csproj",
         "projectName": "art",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\artistry\\z0.artistry.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\artistry\\z0.artistry.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.artistry\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.artistry\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -508,20 +508,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
+              "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj"
+              "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
+              "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -571,14 +568,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj": {
+    "j:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj",
         "projectName": "z0.asmd",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.asmd\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.asmd\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -598,26 +595,26 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj"
+              "j:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj"
+              "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj"
+              "j:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj"
+              "j:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj"
               }
             }
           }
@@ -663,14 +660,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
+    "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj",
         "projectName": "z0.asm",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.asm\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.asm\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -690,32 +687,29 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj"
+              "j:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
+              "j:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
               }
             }
           }
@@ -761,14 +755,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj",
         "projectName": "z0.bitcore",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bitcore\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bitcore\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -788,14 +782,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj"
+              "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -841,14 +835,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj",
         "projectName": "z0.bitfields",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bitfields\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bitfields\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -868,11 +862,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -918,14 +912,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj",
         "projectName": "z0.bitgrids",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bitgrids\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bitgrids\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -945,17 +939,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj"
+              "j:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -1001,14 +995,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj",
         "projectName": "z0.bitmasks",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bitmasks\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bitmasks\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1028,8 +1022,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -1075,14 +1069,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj",
         "projectName": "z0.bitmatrix",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bitmatrix\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bitmatrix\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1102,29 +1096,29 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj"
+              "j:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj"
+              "j:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj"
+              "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj"
+              "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -1170,14 +1164,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj",
         "projectName": "z0.bitpack",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bitpack\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bitpack\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1197,14 +1191,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj"
+              "j:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj"
               }
             }
           }
@@ -1250,14 +1244,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj",
         "projectName": "z0.bitspans",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bitspans\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bitspans\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1277,20 +1271,20 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
+              "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -1336,14 +1330,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj",
         "projectName": "z0.bitstrings",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bitstrings\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bitstrings\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1363,14 +1357,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj"
+              "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj"
               }
             }
           }
@@ -1416,14 +1410,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj",
         "projectName": "z0.bitsvc",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bitsvc\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bitsvc\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1443,14 +1437,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -1496,14 +1490,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj",
         "projectName": "z0.bits",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bits\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bits\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1523,41 +1517,41 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitfields\\z0.bitfields.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitmatrix\\z0.bitmatrix.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitpack\\z0.bitpack.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitsvc\\z0.bitsvc.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj"
+              "j:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj"
               }
             }
           }
@@ -1603,14 +1597,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
+    "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj",
         "projectName": "z0.bitvectors",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bitvectors\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bitvectors\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1630,20 +1624,20 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
+              "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj"
+              "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -1689,14 +1683,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj": {
+    "j:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj",
         "projectName": "z0.blocked",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.blocked\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.blocked\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1716,8 +1710,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj"
+              "j:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj"
               }
             }
           }
@@ -1763,14 +1757,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
+    "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj",
         "projectName": "z0.blocks",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.blocks\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.blocks\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1790,20 +1784,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj"
+              "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj"
+              "j:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj"
               }
             }
           }
@@ -1849,14 +1840,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\canonical\\z0.canonical.csproj": {
+    "j:\\dev\\projects\\z0\\src\\canonical\\z0.canonical.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\canonical\\z0.canonical.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\canonical\\z0.canonical.csproj",
         "projectName": "z0.canonical",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\canonical\\z0.canonical.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\canonical\\z0.canonical.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.canonical\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.canonical\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1876,11 +1867,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj"
               }
             }
           }
@@ -1926,14 +1914,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
+    "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj",
         "projectName": "z0.capture",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.capture\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.capture\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1953,29 +1941,26 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj"
+              "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
+              "j:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj"
+              "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
+              "j:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj"
+              "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj"
+              "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -2031,14 +2016,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj": {
+    "j:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj",
         "projectName": "z0.cil",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.cil\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.cil\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2058,11 +2043,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj"
+              "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj"
               }
             }
           }
@@ -2114,14 +2099,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj": {
+    "j:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj",
         "projectName": "z0.circuits",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.circuits\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.circuits\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2141,20 +2126,20 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
               }
             }
           }
@@ -2200,14 +2185,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\codes\\z0.codes.csproj": {
+    "j:\\dev\\projects\\z0\\src\\codes\\z0.codes.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\codes\\z0.codes.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\codes\\z0.codes.csproj",
         "projectName": "codes",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\codes\\z0.codes.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\codes\\z0.codes.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.codes\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.codes\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2227,20 +2212,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
+              "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj"
+              "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
+              "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -2290,14 +2272,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\control\\z0.control.csproj": {
+    "j:\\dev\\projects\\z0\\src\\control\\z0.control.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\control\\z0.control.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\control\\z0.control.csproj",
         "projectName": "z0",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\control\\z0.control.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\control\\z0.control.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.control\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.control\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2317,11 +2299,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
+              "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
+              "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
               }
             }
           }
@@ -2371,14 +2353,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj": {
+    "j:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj",
         "projectName": "datasets",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\datasets\\z0.datasets.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.datasets\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.datasets\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2398,17 +2380,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
+              "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
+              "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
+              "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -2458,14 +2440,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj": {
+    "j:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj",
         "projectName": "z0.dvec",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.dvec\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.dvec\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2485,23 +2467,23 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj"
+              "j:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
               }
             }
           }
@@ -2547,14 +2529,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
+    "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj",
         "projectName": "z0.dynamic",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.dynamic\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.dynamic\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2574,17 +2556,20 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj"
+              "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj"
+              "j:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj"
+              "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -2630,14 +2615,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj": {
+    "j:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj",
         "projectName": "z0.evaluate",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\evaluate\\z0.evaluate.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.evaluate\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.evaluate\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2657,17 +2642,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
+              "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj"
+              "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -2713,14 +2695,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj": {
+    "j:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj",
         "projectName": "z0.expressive",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\expressive\\z0.expressive.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.expressive\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.expressive\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2740,8 +2722,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
+              "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
               }
             }
           }
@@ -2787,14 +2769,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj": {
+    "j:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj",
         "projectName": "z0.extract",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\extract\\z0.extract.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.extract\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.extract\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2814,14 +2796,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj"
+              "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
+              "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -2867,14 +2849,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj": {
+    "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj",
         "projectName": "z0.fixed",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.fixed\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.fixed\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2894,11 +2876,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
+              "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -2944,14 +2926,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj": {
+    "j:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj",
         "projectName": "z0.fvec",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.fvec\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.fvec\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2971,11 +2953,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
               }
             }
           }
@@ -3021,14 +3003,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\gen\\z0.gen.csproj": {
+    "j:\\dev\\projects\\z0\\src\\gen\\z0.gen.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\gen\\z0.gen.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\gen\\z0.gen.csproj",
         "projectName": "generate",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\gen\\z0.gen.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\gen\\z0.gen.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.gen\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.gen\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3048,35 +3030,32 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
+              "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj"
+              "j:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\asmd\\z0.asmd.csproj"
+              "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitspans\\z0.bitspans.csproj"
+              "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
+              "j:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj"
+              "j:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -3126,14 +3105,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
+    "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj",
         "projectName": "z0.gmath",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.gmath\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.gmath\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3153,11 +3132,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\math\\z0.math.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\math\\z0.math.csproj"
+              "j:\\dev\\projects\\z0\\src\\math\\z0.math.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\math\\z0.math.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -3203,14 +3185,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+    "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj",
         "projectName": "z0.gvec",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.gvec\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.gvec\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3230,26 +3212,26 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitstrings\\z0.bitstrings.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\dvec\\z0.dvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\fvec\\z0.fvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj"
+              "j:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
               }
             }
           }
@@ -3295,14 +3277,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
+    "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj",
         "projectName": "z0.identify",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.identify\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.identify\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3322,17 +3304,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
+              "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj"
+              "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj"
+              "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj"
               }
             }
           }
@@ -3378,14 +3360,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {
+    "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj",
         "projectName": "z0.identity",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.identity\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.identity\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3405,14 +3387,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj"
+              "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj"
+              "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -3458,14 +3440,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
+    "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj",
         "projectName": "z0.imagine",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.imagine\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.imagine\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3485,17 +3467,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
+              "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\math\\z0.math.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\math\\z0.math.csproj"
+              "j:\\dev\\projects\\z0\\src\\part\\z0.part.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\part\\z0.part.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\part\\z0.part.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\part\\z0.part.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj"
+              "j:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj"
               }
             }
           }
@@ -3541,14 +3520,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
+    "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj",
         "projectName": "z0.kinds",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.kinds\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.kinds\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3568,8 +3547,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -3615,14 +3597,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
+    "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj",
         "projectName": "z0.konst",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.konst\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.konst\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3642,11 +3624,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\part\\z0.part.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\part\\z0.part.csproj"
+              "j:\\dev\\projects\\z0\\src\\part\\z0.part.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\part\\z0.part.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj"
+              "j:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj"
               }
             }
           }
@@ -3692,14 +3674,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj": {
+    "j:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj",
         "projectName": "z0.logix",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.logix\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.logix\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3719,26 +3701,26 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitgrids\\z0.bitgrids.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj"
+              "j:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj"
+              "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -3784,14 +3766,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj": {
+    "j:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj",
         "projectName": "z0.lsquare",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\lsquare\\z0.lsquare.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.lsquare\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.lsquare\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3811,8 +3793,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               }
             }
           }
@@ -3858,14 +3840,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj": {
+    "j:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj",
         "projectName": "z0.machines",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.machines\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.machines\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3885,23 +3867,23 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitvectors\\z0.bitvectors.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
+              "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj"
+              "j:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj"
               }
             }
           }
@@ -3953,14 +3935,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj": {
+    "j:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj",
         "projectName": "machine",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.machine\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.machine\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3980,20 +3962,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
+              "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\archives\\z0.archives.csproj"
+              "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
+              "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -4043,14 +4022,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {
+    "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj",
         "projectName": "z0.mathsvc",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.mathsvc\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.mathsvc\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4070,14 +4049,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
+              "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj"
+              "j:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj"
               }
             }
           }
@@ -4123,14 +4102,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\math\\z0.math.csproj": {
+    "j:\\dev\\projects\\z0\\src\\math\\z0.math.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\math\\z0.math.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\math\\z0.math.csproj",
         "projectName": "z0.math",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\math\\z0.math.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\math\\z0.math.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.math\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.math\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4150,8 +4129,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
+              "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
               }
             }
           }
@@ -4197,14 +4176,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
+    "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj",
         "projectName": "z0.matrix",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.matrix\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.matrix\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4224,11 +4203,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj"
+              "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -4274,14 +4253,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj": {
+    "j:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj",
         "projectName": "z0.memories",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.memories\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.memories\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4301,8 +4280,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj"
+              "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj"
               }
             }
           }
@@ -4348,14 +4327,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj": {
+    "j:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj",
         "projectName": "z0.metareader",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\metareader\\z0.metareader.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.metareader\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.metareader\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4375,8 +4354,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -4422,14 +4401,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj": {
+    "j:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj",
         "projectName": "z0.nats",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.nats\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.nats\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4449,11 +4428,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
+              "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -4499,14 +4478,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
+    "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj",
         "projectName": "z0.numeric",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\numeric\\z0.numeric.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.numeric\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.numeric\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4526,11 +4505,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
+              "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -4576,14 +4555,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\part\\z0.part.csproj": {
+    "j:\\dev\\projects\\z0\\src\\part\\z0.part.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\part\\z0.part.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\part\\z0.part.csproj",
         "projectName": "z0.part",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\part\\z0.part.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\part\\z0.part.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.part\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.part\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4646,14 +4625,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+    "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj",
         "projectName": "z0.polyrand",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.polyrand\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.polyrand\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4673,11 +4652,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
+              "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -4723,14 +4702,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+    "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj",
         "projectName": "z0.seed",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.seed\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.seed\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4750,14 +4729,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\memories\\z0.memories.csproj"
+              "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj"
               }
             }
           }
@@ -4803,14 +4776,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj": {
+    "j:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj",
         "projectName": "z0.stats",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\stats\\z0.stats.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.stats\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.stats\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4830,20 +4803,20 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
+              "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj"
+              "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj"
+              "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\matrix\\z0.matrix.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
+              "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -4889,14 +4862,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj": {
+    "j:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj",
         "projectName": "z0.structured",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.structured\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.structured\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4916,11 +4889,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
+              "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -4966,14 +4939,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
+    "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj",
         "projectName": "z0.symbolic",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.symbolic\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.symbolic\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4993,8 +4966,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -5040,14 +5013,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj": {
+    "j:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj",
         "projectName": "z0.sys",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\sys\\z0.sys.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.sys\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.sys\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5067,8 +5040,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\part\\z0.part.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\part\\z0.part.csproj"
+              "j:\\dev\\projects\\z0\\src\\part\\z0.part.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\part\\z0.part.csproj"
               }
             }
           }
@@ -5114,14 +5087,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj": {
+    "j:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj",
         "projectName": "z0.tokens",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.tokens\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.tokens\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5141,11 +5114,20 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj"
+              "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
+              "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
               }
             }
           }
@@ -5174,6 +5156,10 @@
               "version": "[3.0.1, 3.0.1]"
             },
             {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Ref",
               "version": "[3.0.0, 3.0.0]"
             },
@@ -5191,14 +5177,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj": {
+    "j:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj",
         "projectName": "z0.v0",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\v0\\z0.v0.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.v0\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.v0\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5218,8 +5204,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj"
+              "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj"
               }
             }
           }
@@ -5265,14 +5251,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+    "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj",
         "projectName": "z0.validity",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.validity\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.validity\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5292,23 +5278,32 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
+              "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj"
+              "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
+              "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gmath\\z0.gmath.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj"
+              "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\kinds\\z0.kinds.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\structured\\z0.structured.csproj"
               }
             }
           }
@@ -5354,14 +5349,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj": {
+    "j:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj",
         "projectName": "z0.vbits",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\vbits\\z0.vbits.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.vbits\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.vbits\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5381,14 +5376,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -5434,14 +5429,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj": {
+    "j:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj",
         "projectName": "z0.vcheck",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.vcheck\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.vcheck\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5461,17 +5456,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
+              "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
               }
             }
           }
@@ -5517,14 +5512,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj": {
+    "j:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj",
         "projectName": "z0.vdata",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\vdata\\z0.vdata.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.vdata\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.vdata\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5544,11 +5539,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
+              "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj"
               }
             }
           }
@@ -5594,14 +5589,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
+    "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj",
         "projectName": "z0.vectors",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\vectors\\z0.vectors.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.vectors\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.vectors\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5621,14 +5616,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitmasks\\z0.bitmasks.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj"
+              "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\blocks\\z0.blocks.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\fixed\\z0.fixed.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -5674,14 +5672,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj": {
+    "j:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj",
         "projectName": "z0.vsvc",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\vsvc\\z0.vsvc.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.vsvc\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.vsvc\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5701,20 +5699,20 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+              "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
+              "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj"
+              "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -5760,14 +5758,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\src\\zxed\\z0.zxed.csproj": {
+    "j:\\dev\\projects\\z0\\src\\zxed\\z0.zxed.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\src\\zxed\\z0.zxed.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\src\\zxed\\z0.zxed.csproj",
         "projectName": "zxed",
-        "projectPath": "J:\\dev\\projects\\z0\\src\\zxed\\z0.zxed.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\src\\zxed\\z0.zxed.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.zxed\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.zxed\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5787,14 +5785,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
+              "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
+              "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
               }
             }
           }
@@ -5844,14 +5842,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\test\\asmd\\z0.asmd.test.csproj": {
+    "j:\\dev\\projects\\z0\\test\\asmd\\z0.asmd.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\test\\asmd\\z0.asmd.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\test\\asmd\\z0.asmd.test.csproj",
         "projectName": "z0.asmd.test",
-        "projectPath": "J:\\dev\\projects\\z0\\test\\asmd\\z0.asmd.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\test\\asmd\\z0.asmd.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.asmd.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.asmd.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5871,14 +5869,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
+              "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj"
+              "j:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\cil\\z0.cil.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               }
             }
           }
@@ -5928,14 +5929,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\test\\asm\\z0.asm.test.csproj": {
+    "j:\\dev\\projects\\z0\\test\\asm\\z0.asm.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\test\\asm\\z0.asm.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\test\\asm\\z0.asm.test.csproj",
         "projectName": "z0.asm.test",
-        "projectPath": "J:\\dev\\projects\\z0\\test\\asm\\z0.asm.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\test\\asm\\z0.asm.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.asm.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.asm.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5955,26 +5956,26 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
+              "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\asm\\z0.asm.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj"
+              "j:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\blocked\\z0.blocked.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
+              "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\capture\\z0.capture.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
+              "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
+              "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\gvec\\z0.gvec.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj"
+              "j:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\machine\\z0.machine.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               }
             }
           }
@@ -6024,14 +6025,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\test\\bits\\z0.bits.test.csproj": {
+    "j:\\dev\\projects\\z0\\test\\bits\\z0.bits.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\test\\bits\\z0.bits.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\test\\bits\\z0.bits.test.csproj",
         "projectName": "z0.bits.test",
-        "projectPath": "J:\\dev\\projects\\z0\\test\\bits\\z0.bits.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\test\\bits\\z0.bits.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.bits.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.bits.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6051,11 +6052,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj"
+              "j:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               }
             }
           }
@@ -6105,14 +6106,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\test\\dynamic\\z0.dynamic.test.csproj": {
+    "j:\\dev\\projects\\z0\\test\\dynamic\\z0.dynamic.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\test\\dynamic\\z0.dynamic.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\test\\dynamic\\z0.dynamic.test.csproj",
         "projectName": "z0.dynamic.test",
-        "projectPath": "J:\\dev\\projects\\z0\\test\\dynamic\\z0.dynamic.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\test\\dynamic\\z0.dynamic.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.dynamic.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.dynamic.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6132,14 +6133,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
+              "j:\\dev\\projects\\z0\\src\\canonical\\z0.canonical.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\canonical\\z0.canonical.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\dynamic\\z0.dynamic.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              },
+              "j:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj"
               }
             }
           }
@@ -6189,14 +6193,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\test\\gvec\\z0.gvec.test.csproj": {
+    "j:\\dev\\projects\\z0\\test\\gvec\\z0.gvec.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\test\\gvec\\z0.gvec.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\test\\gvec\\z0.gvec.test.csproj",
         "projectName": "z0.gvec.test",
-        "projectPath": "J:\\dev\\projects\\z0\\test\\gvec\\z0.gvec.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\test\\gvec\\z0.gvec.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.gvec.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.gvec.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6216,17 +6220,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj"
+              "j:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\bits\\z0.bits.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj"
+              "j:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\circuits\\z0.circuits.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj"
+              "j:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\vcheck\\z0.vcheck.csproj"
               }
             }
           }
@@ -6276,14 +6280,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\test\\identity\\z0.identity.test.csproj": {
+    "j:\\dev\\projects\\z0\\test\\identity\\z0.identity.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\test\\identity\\z0.identity.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\test\\identity\\z0.identity.test.csproj",
         "projectName": "z0.identity.test",
-        "projectPath": "J:\\dev\\projects\\z0\\test\\identity\\z0.identity.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\test\\identity\\z0.identity.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.identity.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.identity.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6303,11 +6307,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj"
+              "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\identity\\z0.identity.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               }
             }
           }
@@ -6357,14 +6361,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\test\\logix\\z0.logix.test.csproj": {
+    "j:\\dev\\projects\\z0\\test\\logix\\z0.logix.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\test\\logix\\z0.logix.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\test\\logix\\z0.logix.test.csproj",
         "projectName": "z0.logix.test",
-        "projectPath": "J:\\dev\\projects\\z0\\test\\logix\\z0.logix.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\test\\logix\\z0.logix.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.logix.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.logix.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6384,11 +6388,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj"
+              "j:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\logix\\z0.logix.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               }
             }
           }
@@ -6438,14 +6442,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\test\\machines\\z0.machines.test.csproj": {
+    "j:\\dev\\projects\\z0\\test\\machines\\z0.machines.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\test\\machines\\z0.machines.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\test\\machines\\z0.machines.test.csproj",
         "projectName": "z0.machines.test",
-        "projectPath": "J:\\dev\\projects\\z0\\test\\machines\\z0.machines.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\test\\machines\\z0.machines.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.machines.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.machines.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6465,11 +6469,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj"
+              "j:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\machines\\z0.machines.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               }
             }
           }
@@ -6519,14 +6523,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\test\\math\\z0.math.test.csproj": {
+    "j:\\dev\\projects\\z0\\test\\math\\z0.math.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\test\\math\\z0.math.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\test\\math\\z0.math.test.csproj",
         "projectName": "z0.math.test",
-        "projectPath": "J:\\dev\\projects\\z0\\test\\math\\z0.math.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\test\\math\\z0.math.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.math.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.math.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6546,14 +6550,14 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj"
+              "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\mathsvc\\z0.mathsvc.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj"
+              "j:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\nats\\z0.nats.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               }
             }
           }
@@ -6603,14 +6607,14 @@
         }
       }
     },
-    "J:\\dev\\projects\\z0\\test\\symbolic\\z0.symbolic.test.csproj": {
+    "j:\\dev\\projects\\z0\\test\\symbolic\\z0.symbolic.test.csproj": {
       "version": "1.0.41",
       "restore": {
-        "projectUniqueName": "J:\\dev\\projects\\z0\\test\\symbolic\\z0.symbolic.test.csproj",
+        "projectUniqueName": "j:\\dev\\projects\\z0\\test\\symbolic\\z0.symbolic.test.csproj",
         "projectName": "z0.symbolic.test",
-        "projectPath": "J:\\dev\\projects\\z0\\test\\symbolic\\z0.symbolic.test.csproj",
+        "projectPath": "j:\\dev\\projects\\z0\\test\\symbolic\\z0.symbolic.test.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
-        "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.symbolic.test\\",
+        "outputPath": "j:\\dev\\projects\\z0\\bin\\obj\\z0.symbolic.test\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6630,11 +6634,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj"
+              "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\symbolic\\z0.symbolic.csproj"
               },
-              "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
+              "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj": {
+                "projectPath": "j:\\dev\\projects\\z0\\src\\validity\\z0.validity.csproj"
               }
             }
           }

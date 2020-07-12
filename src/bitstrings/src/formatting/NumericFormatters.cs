@@ -49,7 +49,7 @@ namespace Z0
             else if(typeof(T) == typeof(int))
                 return get<I32Formatter, int>().As<T>();
             else if(typeof(T) == typeof(long))
-                return get<I64Formatter, long>().As<T>();
+                return get<I64Formatter,long>().As<T>();
             else    
                 return get_f<T>();
         }
@@ -115,7 +115,6 @@ namespace Z0
                      
         readonly struct U8Formatter : INumericFormatter<U8Formatter, byte>
         {
-
             [MethodImpl(Inline)]
             public string Format(byte src, NumericBaseKind @base)
                 => @base switch{
@@ -131,7 +130,6 @@ namespace Z0
 
         readonly struct I8Formatter : INumericFormatter<I8Formatter, sbyte>
         {
-
             [MethodImpl(Inline)]
             public string Format(sbyte src, NumericBaseKind @base)
                 => @base switch{

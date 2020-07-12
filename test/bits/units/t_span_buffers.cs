@@ -35,7 +35,7 @@ namespace Z0
             Claim.yea(stack.Pop() != 0);
             Claim.yea(stack.Pop() == 0);
             Claim.yea(stack.Pop() != 0);            
-            stack.Push(Bit.On);
+            stack.Push(BitState.On);
             Claim.yea(stack.Pop() != 0);
         }
 

@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines literals that correspond to potential bit states
     /// </summary>
-    public enum Bit : byte
+    public enum BitState : byte
     {        
         /// <summary>
         /// The bit, it is off

@@ -14,7 +14,7 @@ namespace Z0
     using NK = EnumTypeCode;
 
     [ApiHost]
-    public readonly struct MultiFormatter : IApiHost<MultiFormatter>
+    public readonly struct MultiFormatter
     {
         public static MultiFormatter Service => default(MultiFormatter);
 

@@ -12,15 +12,15 @@ namespace Z0
     partial struct As
     {
         /// <summary>
-        /// Converts a <see cref='bool' /> to a <see cref='Bit' />
+        /// Converts a <see cref='bool' /> to a <see cref='BitState' />
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Bit bit(bool src)
-            => (Bit) @byte(src);
+        public static unsafe BitState bit(bool src)
+            => (BitState) @byte(src);
 
         [MethodImpl(Inline), TestBit]
-        public static unsafe bool @bool(Bit src)
+        public static unsafe bool @bool(BitState src)
         {
             var dst = false;
             var pSrc = (byte*)&src;

@@ -12,47 +12,47 @@ namespace Z0
     partial struct As
     {
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(sbyte src, int pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState testbit(sbyte src, int pos)
+            => (BitState)((src >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(byte src, int pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState testbit(byte src, int pos)
+            => (BitState)((src >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(short src, int pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState testbit(short src, int pos)
+            => (BitState)((src >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(ushort src, int pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState testbit(ushort src, int pos)
+            => (BitState)((src >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(int src, int pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState testbit(int src, int pos)
+            => (BitState)((src >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(uint src, int pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState testbit(uint src, int pos)
+            => (BitState)((src >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(long src, int pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState testbit(long src, int pos)
+            => (BitState)((src >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(ulong src, int pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState testbit(ulong src, int pos)
+            => (BitState)((src >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(float src, int pos)
-            => (Bit)((As.uint32(src) >> pos) & 1);
+        public static BitState testbit(float src, int pos)
+            => (BitState)((As.uint32(src) >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(double src, int pos)
-            => (Bit)((As.uint64(src) >> pos) & 1);
+        public static BitState testbit(double src, int pos)
+            => (BitState)((As.uint64(src) >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
-        public static Bit testbit(char src, int pos)
-            => (Bit)((src >> pos) & 1);
+        public static BitState testbit(char src, int pos)
+            => (BitState)((src >> pos) & 1);
     }
 }

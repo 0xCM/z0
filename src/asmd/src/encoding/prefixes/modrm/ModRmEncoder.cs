@@ -39,9 +39,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static int fill(Span<ModRmEncoding> dst)
         {
-            var rm = SmallInts.data(w3);
-            var reg = SmallInts.data(w3);
-            var mod = SmallInts.data(w2);
+            var rm = Bit.data(w3);
+            var reg = Bit.data(w3);
+            var mod = Bit.data(w2);
             var i = 0;
             for(var a=0; a<rm.Length; a++)
             for(var b=0; b<reg.Length; b++)

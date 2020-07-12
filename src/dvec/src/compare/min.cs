@@ -80,8 +80,8 @@ namespace Z0
         [MethodImpl(Inline), Min]
         public static Vector128<long> vmin(Vector128<long> x, Vector128<long> y)
         {
-            var xL = V0d.vinsert(x,default, Bit.Off);
-            var yL = V0d.vinsert(y,default, Bit.Off);
+            var xL = V0d.vinsert(x,default, BitState.Off);
+            var yL = V0d.vinsert(y,default, BitState.Off);
             return V0d.vlo(vmin(xL,yL));
         }
 
