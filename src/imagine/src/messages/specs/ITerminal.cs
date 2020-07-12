@@ -15,7 +15,7 @@ namespace Z0
          
         void WriteLine();
 
-        void WriteLine(object src, AppMsgKind kind);        
+        void WriteLine(object src);        
 
         void WriteLine(string src, AppMsgColor kind);        
 

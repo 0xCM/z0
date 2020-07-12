@@ -41,7 +41,7 @@ namespace Z0
         public static ApiHost from(PartId id, Type t)
         {
             var attrib = t.Tag<ApiHostAttribute>();
-            var name =  text.ifempty(attrib.MapValueOrDefault(a => a.HostName, t.Name),t.Name).ToLower();
+            var name =  text.ifblank(attrib.MapValueOrDefault(a => a.HostName, t.Name),t.Name).ToLower();
             var kind = attrib.MapValueOrDefault(a => a.HostKind, ApiHostKind.DirectAndGeneric);
             var uri = ApiHostUri.Define(id, name);
             return new ApiHost(name, kind, id, uri, t);

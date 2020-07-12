@@ -30,13 +30,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Owner == 0  && text.empty(Name);
+            get => Owner == 0  && text.blank(Name);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Owner != 0 && !text.empty(Name);
+            get => Owner != 0 && !text.blank(Name);
         }
 
         ApiHostUri INullary<ApiHostUri>.Zero 
@@ -49,7 +49,7 @@ namespace Z0
             if(parts.Length == 2 && Enum.TryParse(parts[0], true, out PartId owner))
             {
                 var host = parts[1];
-                if(!text.empty(host))
+                if(!text.blank(host))
                     return ParseResult.Success(src, Define(owner, host));
             }
             
@@ -60,7 +60,7 @@ namespace Z0
         public static ApiHostUri FromHost(Type host)
         {
             var tag = host.Tag<ApiHostAttribute>();
-            var name = z.ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
+            var name = z.ifblank(tag.MapValueOrDefault(x => x.HostName), host.Name);
             var owner = host.Assembly.Id();
             return new ApiHostUri(owner, name);
         }

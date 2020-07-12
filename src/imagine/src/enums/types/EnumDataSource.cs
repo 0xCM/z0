@@ -55,7 +55,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (File?.IsEmpty ?? true) && text.empty(EnumName) && BaseType == 0 && text.empty(Description);
+            get => (File?.IsEmpty ?? true) && text.blank(EnumName) && BaseType == 0 && text.blank(Description);
         }
 
         public bool IsNonEmpty

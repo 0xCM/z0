@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// A container of messages which isnt't realy a queue but is more-or-less thread-safe

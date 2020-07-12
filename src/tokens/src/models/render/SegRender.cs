@@ -13,7 +13,7 @@ namespace Z0.Asm
     partial struct SemanticRender
     {        
         static string RenderSegKind(string symbol)
-            => text.empty(symbol) ? EmptyString : text.concat("seg:", Chars.LBracket, symbol, Chars.RBracket);
+            => text.blank(symbol) ? EmptyString : text.concat("seg:", Chars.LBracket, symbol, Chars.RBracket);
         
         static string RenderSegKind(OpKind src)
             => RenderSegKind(src switch {

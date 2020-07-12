@@ -4,13 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    public interface IHubClient : IDataEventSink
+    public interface IEventHubSink : ISink
     {
-        EventHub Hub {get;}
-
-        // void IDataEventSink.Deposit(IDataEvent e) 
-        //     => Sink.Deposit(e);
-        
-        void Connect();
+       void Deposit(IAppEvent e);
     }
 }

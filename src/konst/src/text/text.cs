@@ -53,21 +53,21 @@ namespace Z0
             => sys.nonempty(src);
 
         /// <summary>
-        /// Tests whether the source string is empty
+        /// Tests whether the source string is blank := {null | empty}
         /// </summary>
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline)]
-        public static bool empty(string src)
-            => sys.empty(src);
+        public static bool blank(string src)
+            => sys.blank(src);
 
         /// <summary>
-        /// A string-specific coalescing operation
+        /// Returns the replacement text if the source text is blank := {null | empty}
         /// </summary>
         /// <param name="test">The subject string</param>
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline)]
-        public static string ifempty(string test, string replace)
-            => z.ifempty(test,replace);
+        public static string ifblank(string test, string replace)
+            => z.ifblank(test,replace);
 
         /// <summary>
         /// If the test string is null, returns the empty string; otherwise, returns the test string
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline)]
         public static string denullify(string test)
-            => empty(test) ? EmptyString : test;
+            => blank(test) ? EmptyString : test;
 
         /// <summary>
         /// Extracts a substring
@@ -430,7 +430,7 @@ namespace Z0
         /// <param name="right">The right boundary</param>
         public static bool fenced(string src, char left, char right)
         {
-            if(empty(src))
+            if(blank(src))
                 return false;
             
             var x = src.Trim();
@@ -485,7 +485,7 @@ namespace Z0
         /// <param name="src">The putative fenced content</param>
         public static string unfence(string src, char left, char right)
         {
-            if(empty(src))
+            if(blank(src))
                 return string.Empty;
 
             if(!fenced(src,left,right))
@@ -519,7 +519,7 @@ namespace Z0
         /// <param name="chars">The leading characters to remove</param>
         [MethodImpl(Inline)]
         public static string ltrim(string src, params char[] chars)
-            => empty(src) ? string.Empty : src.TrimStart(chars);
+            => blank(src) ? string.Empty : src.TrimStart(chars);
 
         /// <summary>
         /// Trims trailing characters when matched
@@ -528,7 +528,7 @@ namespace Z0
         /// <param name="chars">The leading characters to remove</param>
         [MethodImpl(Inline)]
         public static string rtrim(string src, params char[] chars)
-            => empty(src) ? string.Empty : src.TrimEnd(chars);
+            => blank(src) ? string.Empty : src.TrimEnd(chars);
 
         /// <summary>
         /// Produces "..." where count has the default value of 3
@@ -592,11 +592,11 @@ namespace Z0
         /// Returns the substring [0,chars-1]
         /// </summary>
         public static string left(string src, int chars)
-            => empty(src) ? src : src.Substring(0, src.Length < chars ? src.Length : chars);
+            => blank(src) ? src : src.Substring(0, src.Length < chars ? src.Length : chars);
 
         public static string right(string src, int chars)
         {
-            if (empty(src))
+            if (blank(src))
                 return src;
 
             var len = src.Length < chars ? src.Length : chars;

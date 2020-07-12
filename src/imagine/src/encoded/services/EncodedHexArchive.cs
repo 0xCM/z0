@@ -37,16 +37,23 @@ namespace Z0
 
         public static IdentifiedCodeIndex index(FilePath src)
         {
-            var uri = ApiHostUri.Parse(src.FileName).ValueOrDefault(ApiHostUri.Empty);   
-            var dst = Root.list<IdentifiedCode>();
-            if(uri.IsNonEmpty)
+            try
             {
-                foreach(var item in read(src))
-                    if(item.IsNonEmpty)
-                        dst.Add(item);
+                var uri = ApiHostUri.Parse(src.FileName).ValueOrDefault(ApiHostUri.Empty);   
+                var dst = Root.list<IdentifiedCode>();
+                if(uri.IsNonEmpty)
+                {
+                    foreach(var item in read(src))
+                        if(item.IsNonEmpty)
+                            dst.Add(item);
+                }
+                return Encoded.index(uri, dst.Array());
             }
-            
-            return Encoded.index(uri, dst.Array());
+            catch(Exception e)
+            {   
+                term.error(e);
+            }
+            return IdentifiedCodeIndex.Empty;            
         }
 
         public static IEnumerable<IdentifiedCodeIndex> indices(FolderPath root)

@@ -51,7 +51,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Sequence == 0 && text.empty(Identifier) && Value == 0;
+            get => Sequence == 0 && text.blank(Identifier) && Value == 0;
         }
 
         public string DelimitedText(char delimiter)

@@ -33,13 +33,13 @@ namespace Z0
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => sys.empty(Body);
+            get => sys.blank(Body);
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => !sys.empty(Body);
+            get => !sys.blank(Body);
         }
 
         [MethodImpl(Inline)]

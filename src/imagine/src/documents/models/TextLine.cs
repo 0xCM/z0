@@ -51,13 +51,13 @@ namespace Z0
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => !text.empty(LineText);
+            get => !text.blank(LineText);
         }
 
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => text.empty(LineText);
+            get => text.blank(LineText);
         }
 
         public bool IsBlank 

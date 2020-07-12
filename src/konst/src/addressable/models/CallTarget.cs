@@ -36,7 +36,7 @@ namespace Z0
         }       
 
         public string Format()
-            => text.concat(Base.Format(), Chars.Colon, Chars.Space, z.ifempty(Id, "target"));
+            => text.concat(Base.Format(), Chars.Colon, Chars.Space, z.ifblank(Id, "target"));
         
         public override string ToString()
             => Format();

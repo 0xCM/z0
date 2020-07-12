@@ -37,13 +37,13 @@ namespace Z0.Asm
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => text.empty(Body);
+            get => text.blank(Body);
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => !text.empty(Body);
+            get => !text.blank(Body);
         }
 
         [MethodImpl(Inline)]

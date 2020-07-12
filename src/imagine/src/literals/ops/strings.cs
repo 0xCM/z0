@@ -28,7 +28,7 @@ namespace Z0
                 ref readonly var field = ref fields[j];
                 var content = @string(field) ?? EmptyString;
                 seek(dst,j) = content;
-                if(!text.empty(content))
+                if(!text.blank(content))
                     offset += from(@base, offset, field).DataSize;
             }
             return buffer;

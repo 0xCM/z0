@@ -15,6 +15,8 @@ namespace Z0
     /// </summary>
     public class AppMsg : IAppMsg
     {
+        public readonly AppMsgData Data;
+
         public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsg(content, kind, (AppMsgColor)kind, caller, FilePath.Define(file), line);
 
@@ -44,59 +46,56 @@ namespace Z0
 
         AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, FilePath file, int? line, bool displayed = false)
         {
-            this.Content = content ?? string.Empty;
-            this.Kind = kind;
-            this.Color = color;
-            this.Caller =  caller ?? string.Empty;
-            this.CallerFile = file;
-            this.FileLine = line;
-            this.Displayed = displayed;    
+            Data = new AppMsgData(content,kind,color,caller,file,line,displayed);
+            // Content = content ?? string.Empty;
+            // Kind = kind;
+            // Color = color;
+            // Caller =  caller ?? string.Empty;
+            // CallerFile = file;
+            // FileLine = line;
+            // Displayed = displayed;    
         }
 
         /// <summary>
         /// The message body
         /// </summary>
-        public object Content {get;}
+        public object Content => Data.Content;
 
         /// <summary>
         /// The message classification
         /// </summary>
-        public AppMsgKind Kind {get;}
+        public AppMsgKind Kind => Data.Kind;
 
         /// <summary>
         /// The message foreground color when rendered for display
         /// </summary>
-        public AppMsgColor Color {get;}
+        public AppMsgColor Color => Data.Color;
 
         /// <summary>
         /// The name of the member that originated the message
         /// </summary>
-        public string Caller {get;}
+        public string Caller => Data.Caller;
 
         /// <summary>
         /// The path to the source file in which the message originated
         /// </summary>
-        public FilePath CallerFile {get;}
+        public FilePath CallerFile => Data.CallerFile;
 
         /// <summary>
         /// The source file line number on which the message originated
         /// </summary>
-        public int? FileLine {get;}
+        public int? FileLine => Data.FileLine;
 
         /// <summary>
         /// Specifies whether the message has been emitted to an output device, such as the terminal
         /// </summary>
-        public bool Displayed {get;}
+        public bool Displayed => Data.Displayed;
 
         public bool IsEmpty
-            => Content == null || (Content is string s && string.IsNullOrWhiteSpace(s));
+            => Content == null || (Content is string s && text.blank(s));
 
-        /// <summary>
-        /// Prepends the message body with specified content
-        /// </summary>
-        /// <param name="prefix">The prefix conent</param>
-        public AppMsg WithPrependedContent(object prefix)    
-            => new AppMsg($"{prefix}{Content}", Kind, Color, Caller, CallerFile, FileLine);
+        public AppMsg AsError()    
+            => new AppMsg(Content, AppMsgKind.Error, Color, Caller, CallerFile, FileLine, Displayed);
         
         /// <summary>
         /// Sets the display state to true

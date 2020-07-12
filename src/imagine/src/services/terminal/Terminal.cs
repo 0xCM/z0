@@ -22,13 +22,19 @@ namespace Z0
         
         static readonly Terminal TheOnly = new Terminal();
         
-        readonly object locker;
+        readonly object TermLock;
+
+        readonly object ErrLock;
+
+        readonly object StdLock;
      
         Option<Action> TerminationHandler;
 
         Terminal()
         {
-             locker = new object();
+             TermLock = new object();
+             ErrLock = new object();             
+             StdLock = new object();
              Console.OutputEncoding = new UnicodeEncoding();      
              Console.CancelKeyPress += OnCancelKeyPressed;        
         }
@@ -46,18 +52,10 @@ namespace Z0
 
         public void WriteLine()
         {
-            lock(locker)
+            lock(TermLock)
                 Console.WriteLine();
         }
                                     
-        public void WriteLine(object src, AppMsgKind kind)
-        {
-            if(kind == AppMsgKind.Error) 
-                WriteError(src);
-            else
-                WriteLine(src, (AppMsgColor)kind);
-        }
-
         /// <summary>
         /// Writes a single character to the console
         /// </summary>
@@ -77,7 +75,7 @@ namespace Z0
         public void WriteLines<F>(params F[] src)
             where F : ITextual
         {
-            lock(locker)            
+            lock(TermLock)            
             {
                 foreach(var item in src)
                     Console.WriteLine(item.Format());
@@ -87,7 +85,7 @@ namespace Z0
         public void WriteLine<F>(F src, AppMsgColor color)
             where F : ITextual
         {
-            lock(locker)            
+            lock(TermLock)            
             {
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = (ConsoleColor)color;
@@ -99,7 +97,7 @@ namespace Z0
         public void WriteLines<F>(AppMsgColor color, params F[] src)
             where F : ITextual
         {
-            lock(locker)            
+            lock(TermLock)            
             {
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = (ConsoleColor)color;
@@ -111,7 +109,7 @@ namespace Z0
 
         public void WriteMessages(IEnumerable<IAppMsg> messages)
         {
-            lock(locker)            
+            lock(TermLock)            
             {
                 var current = Console.ForegroundColor;
                 foreach(var msg in messages)
@@ -144,7 +142,7 @@ namespace Z0
 
         void WriteLine(object src, AppMsgColor color)
         {
-            lock(locker)
+            lock(TermLock)
             {
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = (ConsoleColor)color;                
@@ -153,21 +151,10 @@ namespace Z0
             }
         }
 
-        void WriteError(object src)
-        {
-            lock(locker)
-            {
-                var current = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Error.Write(src);
-                Console.Error.Write(Chars.Eol);
-                Console.ForegroundColor = current;
-            }
-        }
 
         void WriteWarning(object src)
         {
-            lock(locker)
+            lock(TermLock)
             {
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -178,7 +165,7 @@ namespace Z0
 
         void Write(object src, ConsoleColor color)
         {
-            lock(locker)
+            lock(TermLock)
             {
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = color;
@@ -187,12 +174,49 @@ namespace Z0
             }
         }
 
-        public void Error(Exception e)
-            => WriteError((object)e);
-
-        public void Error(string description)
-            => WriteError((object)description);
+        void Log(IAppMsg msg)
+        {
+            var dst = AppEnv.Default.AppPaths.AppErrorOutPath;
+            var rendered = msg.Format();
+            lock(ErrLock)
+            {
+                dst.AppendLine(rendered);
+            }
+        }
         
+        public void WriteError(IAppMsg src)
+        {
+            lock(TermLock)
+            {                
+                var current = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Error.Write(src);
+                Console.Error.Write(Chars.Eol);
+                Console.ForegroundColor = current;    
+            }  
+
+            Log(src);          
+        }
+
+        // void WriteError(Exception src)
+        // {
+        //     lock(TermLock)
+        //     {                
+        //         var current = Console.ForegroundColor;
+        //         Console.ForegroundColor = ConsoleColor.Red;
+        //         Console.Error.Write(src);
+        //         Console.Error.Write(Chars.Eol);
+        //         Console.ForegroundColor = current;    
+        //     }            
+        // }
+
+        public void WriteLine(object sr)
+            => WriteLine(sr, AppMsgColor.Green);
+
+
+        // public void Error(Exception e)
+        //     => WriteError(e);
+
         public void Warn(string description)
             => WriteWarning((object)description);
         

@@ -12,12 +12,12 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// A string-specific coalescing operation
+        /// Returns the replacement text if the source text is blank := {null | empty}
         /// </summary>
         /// <param name="test">The subject string</param>
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline)]
-        public static string ifempty(string test, string replace)
-            => string.IsNullOrWhiteSpace(test) ? replace ?? string.Empty : test;
+        public static string ifblank(string test, string replace)
+            => sys.blank(test) ? replace ?? EmptyString : test;
     }
 }

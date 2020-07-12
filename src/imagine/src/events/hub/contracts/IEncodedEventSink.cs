@@ -4,24 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    public interface IHubEventSink : ISink
+    public interface IEncodedEventSink : ISink
     {
-       void Deposit(IAppEvent e);
-    }
-
-    public interface IDataEventSink : ISink
-    {
-       void Deposit(IDataEvent e);        
+       void Deposit(IEncodedEvent e);        
     }
 
     /// <summary>
     /// Characterizes an event-parametric application event sink
     /// </summary>
     /// <typeparam name="E">The event type</typeparam>
-    public interface IHubEventSink<E> : IHubEventSink, IDataSink<E>
+    public interface IEncodedEventSink<E> : IEventHubSink, IDataSink<E>
         where E : struct, IAppEvent
     {
-        void IHubEventSink.Deposit(IAppEvent e)
+        void IEventHubSink.Deposit(IAppEvent e)
             => Deposit((E)e);
     }
 }

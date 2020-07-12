@@ -20,8 +20,5 @@ namespace Z0
 
         public static T ThrowNotEqualNoCaller<T>(T lhs, T rhs)
             => throw NotEqual(lhs,rhs,null,null,null);        
-
-        public static void ThrowNotEqual<T>(T lhs, T rhs, AppMsg msg)
-            => throw AppException.Define(msg.WithPrependedContent($"Equality failure, {lhs} != {rhs}:"));
     }
 }

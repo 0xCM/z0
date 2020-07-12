@@ -10,7 +10,7 @@ namespace Z0
     partial struct sys
     {
         /// <summary>
-        /// Tests whether the source string is nonempty
+        /// Tests whether the source string is non-blank where blank := {null | whitespace}
         /// </summary>
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Options), Op]

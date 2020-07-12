@@ -12,7 +12,7 @@ namespace Z0
     partial struct proxy
     {
         [MethodImpl(Options), Opaque(EmptyStringTest)]
-        public static bool empty(string src)
+        public static bool blank(string src)
             => string.IsNullOrWhiteSpace(src);
 
         [MethodImpl(Options), Opaque(GetEmptyArray), Closures(Closure)]

@@ -31,7 +31,7 @@ namespace Z0
         }        
          
         public bool IsEmpty 
-            => text.empty(StepName) && Timestamp == DateTime.MinValue && Correlation.IsEmpty;        
+            => text.blank(StepName) && Timestamp == DateTime.MinValue && Correlation.IsEmpty;        
 
         public string Description
             => StepName;

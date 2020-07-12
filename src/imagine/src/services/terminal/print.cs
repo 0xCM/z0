@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="content">The message to print</param>    
         public static void print(object content)
-            => T.WriteLine(content, AppMsgKind.Info);
+            => T.WriteLine(content);
 
         /// <summary>
         /// Writes formattables to the console in a contiguous block

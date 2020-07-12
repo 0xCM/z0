@@ -57,7 +57,7 @@ namespace Z0
 
                     counter++;
                     
-                    if(text.empty(data))
+                    if(text.blank(data))
                         continue;
                                         
                     // skip comments                    

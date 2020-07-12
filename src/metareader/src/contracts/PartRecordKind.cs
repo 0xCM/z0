@@ -22,6 +22,8 @@ namespace Z0
 
         MethodDefinition = 7,
 
-        FieldRva = 8
+        FieldRva = 8,
+
+        PeHeader = 9,
     }
 }

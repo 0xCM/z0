@@ -63,10 +63,11 @@ namespace Z0
         /// <param name="title">The name/context of the error</param>
         public static void error(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            var msg = string.Empty.Build();
-            msg.AppendLine($"Failure ocuurred at {caller} {file} {line}");
-            msg.AppendLine(e?.ToString() ?? string.Empty);
-            T.WriteMessage(AppMsg.NoCaller($"{msg.ToString()}", AppMsgKind.Error));
+            var dst = text.build();
+            dst.AppendLine($"Failure ocuurred at {caller} {file} {line}");
+            dst.AppendLine(e?.ToString() ?? string.Empty);
+            var msg = AppMsg.NoCaller($"{dst.ToString()}", AppMsgKind.Error);            
+            T.WriteMessage(msg);
         }
 
         /// <summary>

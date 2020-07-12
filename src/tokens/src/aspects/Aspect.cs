@@ -55,7 +55,7 @@ namespace Z0.Asm
             => Empty;
 
         public bool IsEmpty 
-            => text.empty(Name) && text.empty(Description) && Null.Is(Source) && Null.Is(Value);
+            => text.blank(Name) && text.blank(Description) && Null.Is(Source) && Null.Is(Value);
 
         public bool IsNonEmpty 
             => !IsEmpty;

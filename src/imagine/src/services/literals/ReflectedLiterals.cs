@@ -73,7 +73,7 @@ namespace Z0
             if(src.MultiLiteral)
             {
                 var content = text.unbracket(src.Text);
-                if(!text.empty(content))
+                if(!text.blank(content))
                 {
                     var components = content.SplitClean(Chars.Pipe);
                     var count = components.Length;

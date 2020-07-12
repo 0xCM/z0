@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct HubClientExample : IHubClientExample
     {
         [MethodImpl(Inline), Op]
-        public static EventHub create(DataEventReceiver receiver)
+        public static EventHub create(EncodedEventReceiver receiver)
         {
             var hub = EventHubs.hub();
             var client = new HubClientExample(hub, EventHubs.relay(receiver));
@@ -21,7 +21,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static EventHub create(IDataEventSink sink)
+        public static EventHub create(IEncodedEventSink sink)
         {
             var hub = EventHubs.hub();
             var client = new HubClientExample(hub, sink);            
@@ -30,17 +30,17 @@ namespace Z0
 
         public EventHub Hub {get;}
 
-        public IDataEventSink Sink {get;}
+        public IEncodedEventSink Sink {get;}
 
-        public void Deposit(IDataEvent e)
+        public void Deposit(IEncodedEvent e)
             => Sink.Deposit(e);
 
         [MethodImpl(Inline)]
-        public HubClientExample(EventHub hub, IDataEventSink sink)
+        public HubClientExample(EventHub hub, IEncodedEventSink sink)
         {
             Hub = hub;
             Sink = sink;
-            (this as IHubClient).Connect();
+            (this as IEncodedEventClient).Connect();
         }
     }
 
@@ -49,36 +49,8 @@ namespace Z0
         public static IExampleEvents Examples 
             => default(ExampleEvents);
     }
-
-    public interface IDataEvent : IAppEvent
-    {
-        StringRef Id {get;}
-
-        BinaryCode Data {get;}    
-
-        string ITextual.Format()
-        {
-            var dst = text.build();
-            dst.Append(Id);
-            dst.Append(Chars.Space);
-            dst.Append(Chars.Pipe);
-            dst.AppendLine(Data.Format());
-            return dst.ToString();
-        }    
-    }
-
-    /// <summary>
-    /// Characterizes a reified application event
-    /// </summary>
-    /// <typeparam name="F">The reification type</typeparam>
-    public interface IDataEvent<F> : IDataEvent, IAppEvent<F>
-        where F : struct, IDataEvent<F>
-    {
-
-
-    }
-
-    public readonly struct ExampleEvent1 : IDataEvent<ExampleEvent1>
+    
+    public readonly struct ExampleEvent1 : IEncodedEvent<ExampleEvent1>
     {
         [MethodImpl(Inline)]
         public ExampleEvent1 Define(StringRef id, BinaryCode data)
@@ -96,7 +68,7 @@ namespace Z0
         }        
     }    
 
-    public readonly struct ExampleEvent2 : IDataEvent<ExampleEvent2>
+    public readonly struct ExampleEvent2 : IEncodedEvent<ExampleEvent2>
     {
         [MethodImpl(Inline)]
         public ExampleEvent2 Define(StringRef id, BinaryCode data)
@@ -112,10 +84,9 @@ namespace Z0
             Id = id;
             Data = data;
         }
-
     }    
 
-    public readonly struct ExampleEvent3 : IDataEvent<ExampleEvent3>
+    public readonly struct ExampleEvent3 : IEncodedEvent<ExampleEvent3>
     {
         [MethodImpl(Inline)]
         public ExampleEvent3 Define(StringRef id, BinaryCode data)
@@ -142,7 +113,7 @@ namespace Z0
         ExampleEvent3 Event3 => default;            
     }
 
-    public interface IHubClientExample : IExampleEvents, IHubClient, IDataEventSink
+    public interface IHubClientExample : IExampleEvents, IEncodedEventClient, IEncodedEventSink
     {
         void OnEvent(in ExampleEvent1 e) 
             => Deposit(e);
@@ -153,7 +124,7 @@ namespace Z0
         void OnEvent(in ExampleEvent3 e) 
             => Deposit(e);
 
-        void IHubClient.Connect()
+        void IEncodedEventClient.Connect()
         {
             Hub.Subscribe(Event1, OnEvent);
             Hub.Subscribe(Event2, OnEvent);

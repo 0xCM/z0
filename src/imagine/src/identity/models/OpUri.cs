@@ -50,7 +50,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]            
-            get => Scheme == 0 && Host.IsEmpty && text.empty(GroupName) && OpId.IsEmpty;
+            get => Scheme == 0 && Host.IsEmpty && text.blank(GroupName) && OpId.IsEmpty;
         }
         
         public bool IsComplete

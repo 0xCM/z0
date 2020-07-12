@@ -63,7 +63,9 @@ namespace Z0
             => File.AppendAllText(dst.Name, src);
 
         public static void AppendLine(this FilePath dst, string src)
-            => dst.Append(new string[]{src});
+        {
+            File.AppendAllLines(dst.Name, z.array(src));
+        }
 
         static FilePath reifyParent(FilePath src)
         {

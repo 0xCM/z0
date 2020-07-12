@@ -3,15 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-
-    [ApiHost]
-    public readonly partial struct tokens
+{    
+    public interface IEncodedEventClient : IEncodedEventSink
     {
-        public static void emit()
-        {
-            term.print("Not yet");
-        }
-    }
+        EventHub Hub {get;}
 
+        // void IDataEventSink.Deposit(IDataEvent e) 
+        //     => Sink.Deposit(e);
+        
+        void Connect();
+    }
 }

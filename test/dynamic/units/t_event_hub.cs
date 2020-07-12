@@ -35,7 +35,7 @@ namespace Z0
             hub.Broadcast(examples.Event2.Define(E2, d2));
             hub.Broadcast(examples.Event3.Define(E3, d3));
 
-            void Receiver(IDataEvent e)
+            void Receiver(IEncodedEvent e)
             {
                 switch(e.Id)
                 {

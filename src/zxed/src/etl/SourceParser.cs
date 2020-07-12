@@ -140,7 +140,7 @@ namespace Z0.Xed
             => src.Text.StartsWith("#");
 
         bool IsEmpty(TextRow src)
-            => text.empty(src.Text);
+            => text.blank(src.Text);
 
         bool Contains(TextRow src, string substring)
             => src.Text.ContainsAny(substring);
