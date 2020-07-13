@@ -53,7 +53,7 @@ namespace Z0.Asm
         
         bool Append = true;
 
-        IWorkflow<IImmEmissionBroker> Flow 
+        IImmEmissionWorkflow Flow 
             => this;
         
         void ConnectReceivers(IImmEmissionBroker relay)

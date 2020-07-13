@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    
+    using static Konst;
+
     public interface IReport
     {
         string[] HeaderLabels {get;}
@@ -13,18 +13,20 @@ namespace Z0
         string ReportName {get;}
 
         int RecordCount {get;}
-
     }
         
     public readonly struct EmptyReport : IReport
     {
         public string[] HeaderLabels 
-            => new string[]{};
+            => sys.empty<string>();
 
-        public string ReportName => string.Empty;
+        public string ReportName 
+            => EmptyString;
 
-        public int RecordCount => 0;
+        public int RecordCount 
+            => 0;
 
-        public ITabular[] Records => new ITabular[]{};
+        public ITabular[] Records 
+            => sys.empty<ITabular>();
     }
 }

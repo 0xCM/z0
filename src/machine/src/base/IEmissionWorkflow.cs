@@ -6,14 +6,15 @@ namespace Z0
 {
     public interface IEmissionWorkflow : IAppEventSink
     {
-
         IAppContext Context {get;}
         
         FolderPath TargetDir {get;}
 
-        AppMsgColor StartFlair => AppMsgColor.Blue;
+        AppMsgColor StartFlair 
+            => AppMsgColor.Blue;
 
 
-        AppMsgColor EndFlair => AppMsgColor.Cyan;        
+        AppMsgColor EndFlair 
+            => AppMsgColor.Cyan;        
     }
 }

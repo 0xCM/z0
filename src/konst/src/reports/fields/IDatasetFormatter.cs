@@ -5,12 +5,43 @@
 namespace Z0
 {        
     using System;
+    using System.Runtime.CompilerServices;
 
     using System.Text;
 
     using static Konst;
-    using static z;
     using static Dataset;
+
+    public readonly struct DatasetSink<S,R>
+        where S : unmanaged, Enum
+        where R : struct
+    {                                                        
+        readonly IDatasetFormatter<S> Target;
+                
+        readonly DatasetRelay<S,R> Relay;
+        
+        [MethodImpl(Inline)]
+        public DatasetSink(IDatasetFormatter<S> dst, DatasetRelay<S,R> relay)
+        {
+            Target = dst;            
+            Relay = relay;
+        }
+
+        [MethodImpl(Inline)]
+        public void Deposit(in R src)
+        {
+            Relay(src, Target);
+        }
+
+        [MethodImpl(Inline)]
+        public string Render()
+            => Target.Format(); 
+    }    
+    
+    public delegate void DatasetRelay<S,R>(in R src, IDatasetFormatter<S> dst)
+        where S : unmanaged, Enum
+        where R : struct;
+
 
     public interface IDatasetFormatter : ITextual
     {
@@ -32,7 +63,6 @@ namespace Z0
                 State.Clear();
             return result;
         }            
-
 
         void Reset() 
             => State.Clear();        
@@ -102,5 +132,6 @@ namespace Z0
             State.Append(text.rspace(delimiter));            
             State.Append(render(content).PadRight(width(f)));
         }
+
     }
 }

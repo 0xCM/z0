@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public readonly struct DataEmitters
     {
@@ -16,5 +13,4 @@ namespace Z0
             where D : unmanaged, Enum
                 => wf.Deposit(AppEvents.create($"{dk}_ran", $"Emitted {count} {dk} {part.Format()} records", wf.EndFlair));
     }
-
 }

@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    public interface IImmEmissionWorkflow : IWorkflow<IImmEmissionBroker>, IServiceAllocation
+    public interface IImmEmissionWorkflow : IAppMsgReceiver, IServiceAllocation
     {
         void EmitLiteral(byte[] imm8, params PartId[] parts);
 

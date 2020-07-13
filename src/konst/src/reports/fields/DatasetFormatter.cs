@@ -13,10 +13,7 @@ namespace Z0
 
     public readonly struct DatasetFormatter<F> : IDatasetFormatter<F>
         where F : unmanaged, Enum
-    {        
-        public static IDatasetFormatter<F> Default 
-            => new DatasetFormatter<F>(text.build());
-                                                
+    {                                                        
         public StringBuilder State {get;}
 
         readonly char Delimiter;
@@ -33,5 +30,8 @@ namespace Z0
 
         public override string ToString()
             => State.ToString();
+
+        public static IDatasetFormatter<F> Default 
+            => new DatasetFormatter<F>(text.build());
     }
 }

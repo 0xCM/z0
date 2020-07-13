@@ -8,10 +8,8 @@ namespace Z0
     using System.Linq;
 
     using Z0.Asm;
-    using Z0.Machine;
 
-    using static Konst;
-    using static Memories;
+    using static z;
 
     using P = Z0.Parts;
     
@@ -32,7 +30,7 @@ namespace Z0
         }
 
         bool StartCpu {get;} 
-            = false;
+            = true;
 
         IResolvedApi Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
@@ -43,18 +41,17 @@ namespace Z0
         IMachineContext CreateMachineContext(IAsmContext root, PartId[] code)
             => MachineContext.Create(root, code);
 
-        static void RunCpu(IMachineContext context)
-            => Cpu.alloc(context).Run();
-
         public override void RunShell(params string[] args)
         {            
             var parts = PartIdParser.Service.ParseValid(args);  
             var context = CreateMachineContext(CreateAsmContext(), parts);  
-            
-            if(StartCpu)            
-                RunCpu(context);
-            else
-                AppDataEmitter.Service.Generate(Context);
+            var dataEmitter = AppDataEmitter.Service;
+            var fileProcessor = new PartFileProcessor(context);
+
+            // if(StartCpu)            
+            //     RunCpu(context);
+            // else
+            //     emitter.Emit(Context);
         }
 
         public static void Main(params string[] args)

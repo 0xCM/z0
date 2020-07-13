@@ -38,7 +38,7 @@ namespace Z0.Asm
                 
         public void capture_known_resources()
         {
-            var svc = AccessorCapture.Service(Context);
+            var svc = new AccessorCapture(Context);
             var accessors = span(svc.CaptureKnown(CasePath(FileExtensions.Asm)));
             svc.CollectAddresses(accessors,CasePath(FileExtensions.Csv));
         }

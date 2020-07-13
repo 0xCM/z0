@@ -13,8 +13,7 @@ namespace Z0.Asm
         }
 
         public static ImmEmissionBroker Allocate(FilePath target)
-            => new ImmEmissionBroker(target);           
-        
+            => new ImmEmissionBroker(target);                   
     }    
 
     public interface IImmEmissionBroker : IPersistentBroker
