@@ -31,7 +31,7 @@ namespace Z0
         
     }
 
-    public interface IPartRecord<F,P,K> : ITabular<F,P>
+    public interface IPartRecord<F,P,K> : ITabular<F,P>, IPartRecord<K>
         where P : struct, IPartRecord<F,P,K>
         where K : unmanaged, IPartRecordSpec
         where F : unmanaged, Enum

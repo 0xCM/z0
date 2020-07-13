@@ -10,9 +10,6 @@ namespace Z0
 
     public interface IPartReader : IServiceAllocation
     {        
-        ReadOnlySpan<R> Read<R>()
-            where R : struct, IPartRecord;
-                                
         ReadOnlySpan<StringValueRecord> ReadStrings();
 
         ReadOnlySpan<StringValueRecord> ReadUserStrings();

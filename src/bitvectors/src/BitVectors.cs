@@ -10,12 +10,12 @@ namespace Z0
     using static Konst;
 
     [ApiHost("api")]
-    public partial class BitVector : IApiHost<BitVector>
+    public partial class BitVector
     {           
         [MethodImpl(Inline)]
-        internal static Span<byte> bytes<T>(T src)
+        internal static Span<byte> bytes<T>(in T src)
             where T : struct
-                => Bytes.from(src);
+                => z.bytes(src);
     }
 
     public static partial class XTend

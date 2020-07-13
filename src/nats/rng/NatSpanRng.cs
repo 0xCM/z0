@@ -22,10 +22,10 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<N,T> NatSpan<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
+        public static NatSpan<N,T> NatSpan<N,T>(this IPolyrand random, Interval<T> domain, N n = default, Func<T,bool> filter = null)
             where T : unmanaged  
             where N : unmanaged, ITypeNat
-                => Z0.NatSpan.load(random.Span<T>((int)value(n), domain, filter),n);                                    
+                => TypeNats.span(random.Span<T>((int)value(n), domain, filter), n);                                    
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values
@@ -41,7 +41,7 @@ namespace Z0
             where T : unmanaged  
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Z0.TableSpan.load<M, N, T>(random.Span<T>((int)NatCalc.mul(rows, cols)), rows, cols);
+                => Z0.TableSpan.load<M,N,T>(random.Span<T>((int)NatCalc.mul(rows, cols)), rows, cols);
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values that
@@ -59,6 +59,6 @@ namespace Z0
             where T : unmanaged  
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Z0.TableSpan.load<M,N,T>(random.Span((int)NatCalc.mul(rows, cols), domain), rows, cols);
+                => Z0.TableSpan.load<M,N,T>(random.Span<T>((int)NatCalc.mul(rows, cols), domain), rows, cols);
     }
 }

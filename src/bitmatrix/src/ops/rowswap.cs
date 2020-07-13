@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;    
+    using static Konst;
 
     partial class BitMatrix
     {        
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="i">A row index</param>
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
-        public static void rowswap(in BitMatrix16 A, int i, int j)
+        public static void rowswap(in BitMatrix16 A, uint i, uint j)
             => A.Content.Swap(i,j);        
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="i">A row index</param>
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
-        public static void rowswap(in BitMatrix32 A, int i, int j)
+        public static void rowswap(in BitMatrix32 A, uint i, uint j)
             => A.Content.Swap(i,j);        
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="i">A row index</param>
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
-        public static void rowswap(in BitMatrix64 A, int i, int j)
+        public static void rowswap(in BitMatrix64 A, uint i, uint j)
             => A.Content.Swap(i,j);        
     }
 }

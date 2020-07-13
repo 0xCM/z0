@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst; 
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// A data structure that covers and arbitrary number of 256-bit blocks of packed bits
@@ -24,12 +24,13 @@ namespace Z0
         /// <summary>
         /// The actual number of bits that are represented by the vector
         /// </summary>
-        public readonly int BitCount;
+        public readonly uint BitCount;
         
         /// <summary>
         /// The maximum number of bits that can be placed a single segment segment
         /// </summary>
-        public static int CellWidth => bitsize<T>();
+        public static uint CellWidth 
+            => bitsize<T>();
 
         [MethodImpl(Inline)]
         public static implicit operator BitBlock<T>(Span<T> src)
@@ -76,18 +77,18 @@ namespace Z0
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        internal BitBlock(T src, int bitcount)
+        internal BitBlock(T src, uint bitcount)
         {            
-            this.data = Blocks.alloc<T>(n256);
-            this.data.Head = src;
-            this.BitCount = bitcount;
+            data = Blocks.alloc<T>(n256);
+            data.Head = src;
+            BitCount = bitcount;
         }
 
         [MethodImpl(Inline)]
-        internal BitBlock(Span<T> src, int n)
+        internal BitBlock(Span<T> src, uint n)
         {            
-            this.data = Blocks.safeload(n256,src);
-            this.BitCount = n;
+            data = Blocks.safeload(n256, src);
+            BitCount = n;
         }
 
         /// <summary>
@@ -143,7 +144,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public readonly BitString ToBitString()
-            => data.ToBitString(BitCount);
+            => data.ToBitString((int)BitCount);
 
         /// <summary>
         /// Counts the enabled bits

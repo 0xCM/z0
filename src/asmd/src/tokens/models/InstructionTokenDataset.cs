@@ -25,7 +25,7 @@ namespace Z0.Asm
         public readonly byte[] ValueEncoding;
     
         [MethodImpl(Inline), Op]
-        public static int EncodeDefinitions(string[] src, byte[] dst)
+        public static uint EncodeDefinitions(string[] src, byte[] dst)
             => asci.encode(src, dst, EncodingDelimiter);   
         
         [MethodImpl(Inline)]

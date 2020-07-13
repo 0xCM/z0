@@ -47,7 +47,7 @@ namespace Z0.Asm
                 {
                     ref readonly var f = ref src[i];
                     if(f.IsNonEmpty)
-                        writer.Write(f.Code);
+                        writer.WriterLine(f.Code);
                 }
                 return dst;
             }

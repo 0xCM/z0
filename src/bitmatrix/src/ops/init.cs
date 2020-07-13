@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst; 
+    using static z;
 
     partial class BitMatrix
     {        
@@ -21,12 +22,12 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var matrix = alloc<N,T>();
-            var srcCellCount = BitBlock<N,T>.CellCount;
-            var srcBitCount = nati<N>();
+            var srcCellCount = BitBlock<N,T>.NeededCells;
+            var srcBitCount = value<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
-            for(var i=0; i<srcBitCount; i++)
-                memory.copy(in src, ref seek(ref dst, i*srcCellCount), srcCellCount);
+            for(var i=0u; i<srcBitCount; i++)
+                memory.copy(src, ref seek(dst, i*srcCellCount), (int)srcCellCount);
             return matrix;
         }
 
@@ -41,12 +42,12 @@ namespace Z0
             where M : unmanaged, ITypeNat
         {
             var matrix = alloc<M,N,T>();
-            var srcCellCount = BitBlock<N,T>.CellCount;
-            var srcBitCount = nati<N>();
+            var srcCellCount = BitBlock<N,T>.NeededCells;
+            var srcBitCount = value<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
-            for(var i=0; i< srcBitCount; i++)
-                memory.copy(in src, ref seek(ref dst, i*srcCellCount), srcCellCount);
+            for(var i=0u; i< srcBitCount; i++)
+                memory.copy(src, ref seek(dst, i*srcCellCount), (int)srcCellCount);
             return matrix;
         }
 

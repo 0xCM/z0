@@ -32,6 +32,10 @@ namespace Z0
         public static StreamWriter Writer(this FilePath dst)
             => new StreamWriter(dst.CreateParentIfMissing().Name, false);
 
+        public static PartFileWriter<T> Writer<T>(this FilePath dst)
+            where T : ITextual
+                => new PartFileWriter<T>(dst);
+
         [MethodImpl(Inline)]
         public static BinaryWriter BinaryWriter(this FilePath dst)
             => new BinaryWriter(File.Open(dst.CreateParentIfMissing().Name, FileMode.Create));

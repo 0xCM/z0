@@ -86,11 +86,11 @@ namespace Z0
         {
             var dst = Spans.alloc<string>(src.Length + 1);
             var formatter = Formatter;
-            Root.head(dst) = formatter.HeaderText;
-            for(var i=1; i<dst.Length; i++)
+            z.first(dst) = formatter.HeaderText;
+            for(var i=1u; i<dst.Length; i++)
             {
-                format(Root.skip(src,i - 1), formatter,false);
-                Root.seek(dst,i) = formatter.Render();
+                format(z.skip(src, i - 1), formatter, false);
+                z.seek(dst,i) = formatter.Render();
             }
             return dst;
         }
@@ -98,6 +98,8 @@ namespace Z0
         public static IDatasetFormatter<F> Formatter 
             => DatasetFormatter<F>.Default;
     }
+    
+    
     public class MethodBodyInfo
     {
         public string Name {get;set;}
@@ -189,11 +191,6 @@ namespace Z0
         public void Dispose()
             => State.Dispose();
                 
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<R> Read<R>()
-            where R : struct, IPartRecord
-                => read<R>(State);
-
         public ReadOnlySpan<StringValueRecord> ReadStrings()
             => strings(State);
 

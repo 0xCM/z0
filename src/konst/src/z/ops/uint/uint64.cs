@@ -56,6 +56,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong uint64(double src)
             => (ulong)((long)src);
-
     }
 }

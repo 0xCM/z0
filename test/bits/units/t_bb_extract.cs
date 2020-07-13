@@ -145,7 +145,7 @@ namespace Z0
             var bvz = BitBlocks.single(z,40);
             var xSrc =  BitConvert.bytes(z);
             Span<ushort> ySrc = xSrc.AsUInt16();
-            Claim.eq(ySrc.Length*2, xSrc.Length);
+            Claim.eq(ySrc.Length*4, xSrc.Length);
 
             var bvx = BitBlocks.load(xSrc.Slice(0,5).ToArray());
             var bvy = BitBlocks.load(ySrc.Slice(0,2).ToArray());            

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitBlocks
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitBlock<T> load<T>(Span<T> src, int n)
             where T : unmanaged
-                => new BitBlock<T>(src, n);
+                => new BitBlock<T>(src, (uint)n);
 
         /// <summary>
         /// Loads a bitblock from an array
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitBlock<T> load<T>(params T[] src)
             where T : unmanaged
-                => new BitBlock<T>(src, bitsize<T>()*src.Length);
+                => new BitBlock<T>(src, bitsize<T>()*(uint)src.Length);
 
         /// <summary>
         /// Loads a natural bitcell container from a span

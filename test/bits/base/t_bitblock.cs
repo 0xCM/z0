@@ -120,8 +120,8 @@ namespace Z0
             int n = nati<N>();
             var rep = default(N);
             var segcount = BitCalcs.mincells<T>(value<N>());
-            Claim.eq(BitBlock<N,T>.CellCount, segcount);
-            var totalcap = BitBlock<N,T>.BitCapacity;
+            Claim.eq(BitBlock<N,T>.NeededCells, segcount);
+            var totalcap = BitBlock<N,T>.RequiredWidth;
             var segcap = bitsize<T>();
             Claim.eq(BitBlock<N,T>.CellWidth, segcap);
 
@@ -162,10 +162,11 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {            
-            var len = (int)(Mod8.div((uint)n.NatValue) + (Mod8.mod((uint)n.NatValue) != 0 ? 1 : 0));            
-            var src = Random.Span<byte>(len);
-
+            //var size = (int)(Mod8.div((uint)n.NatValue) + (Mod8.mod((uint)n.NatValue) != 0 ? 1 : 0));            
+            var size = BitBlock<N,byte>.NeededCells;
+            var src = Random.Span<byte>((int)size);
             var bc = BitBlocks.load<N,T>(src);
+            
             var pc1 = bc.Pop();
 
             var bs = BitString.scalars(src);

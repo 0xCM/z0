@@ -14,7 +14,7 @@ namespace Z0
     using Z0.CilSpecs;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     using DnLib = dnlib.DotNet.Emit;
     using Dn = dnlib.DotNet;
@@ -65,15 +65,15 @@ namespace Z0
         public bool IsEmpty
             => ModuleDefIndex.Count == 0;
             
-        void IndexClrMethod(MethodInfo m)
+        void IndexClrMethod(MethodInfo src)
         {
-            Require(MethodIndex.TryAdd(m.MetadataToken, m));
+            insist(MethodIndex.TryAdd(src.MetadataToken, src), $"Attempt to include {src} in the index failed");
         }
         
-        void IndexClrType(Type t)
+        void IndexClrType(Type src)
         {
-            Require(TypeIndex.TryAdd(t.MetadataToken, t));            
-            iter(t.DeclaredMethods(),IndexClrMethod);
+            insist(TypeIndex.TryAdd(src.MetadataToken, src), $"Attempt to include {src} in the index failed");            
+            iter(src.DeclaredMethods(),IndexClrMethod);
         }
 
         void IndexClrModule(Module mod)
@@ -122,21 +122,21 @@ namespace Z0
             return Option.none<CilFunction>();                        
         }
 
-        void IndexMethodDef(Dn.MethodDef md)
+        void IndexMethodDef(Dn.MethodDef src)
         {            
-            Require(MethodDefIndex.TryAdd((int)md.MDToken.Raw, md));
+            insist(MethodDefIndex.TryAdd((int)src.MDToken.Raw, src), $"Attempt to include {src} in the index failed");
         }
 
-        void IndexTypeDef(Dn.TypeDef t)
+        void IndexTypeDef(Dn.TypeDef src)
         {
-            Require(TypeDefIndex.TryAdd((int)t.MDToken.Raw, t));
-            iter(t.Methods,IndexMethodDef);
+            insist(TypeDefIndex.TryAdd((int)src.MDToken.Raw, src), $"Attempt to include {src} in the index failed");
+            iter(src.Methods,IndexMethodDef);
         }
 
-        Dn.ModuleDefMD AddModuleDef(Dn.ModuleDefMD mod)
+        Dn.ModuleDefMD AddModuleDef(Dn.ModuleDefMD src)
         {
-            Require(ModuleDefIndex.TryAdd((int)mod.MDToken.Raw, mod));
-            return mod;
+            insist(ModuleDefIndex.TryAdd((int)src.MDToken.Raw, src), $"Attempt to include {src} in the index failed");
+            return src;
         }
 
         void IndexModuleDef(Module mod)

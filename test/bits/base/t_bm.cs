@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public abstract class t_bm<X> : t_bitgrids_base<X>
         where X : t_bm<X>, new()
@@ -27,8 +27,8 @@ namespace Z0
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrixA.and(A,B).Content;
                 var C2 = and(A.Content, B.Content);
-                ClaimNumeric.eq(A.Order, nati<N>());
-                ClaimNumeric.eq(B.Order, nati<N>());                
+                ClaimNumeric.eq((ulong)A.Order, value<N>());
+                ClaimNumeric.eq((ulong)B.Order, value<N>());                
                 ClaimNumeric.Eq(C1,C2);
             }
         }
@@ -73,8 +73,8 @@ namespace Z0
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrixA.xor(A, B).Content;
                 var C2 = xor(A.Content, B.Content);
-                ClaimNumeric.eq(A.Order, nati<N>());
-                ClaimNumeric.eq(B.Order, nati<N>());                
+                ClaimNumeric.eq((ulong)A.Order, value<N>());
+                ClaimNumeric.eq((ulong)B.Order, value<N>());                
                 ClaimNumeric.Eq(C1,C2);
             }
         }

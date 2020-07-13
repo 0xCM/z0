@@ -59,9 +59,9 @@ namespace Z0
         /// <param name="A">The source/target matrix</param>
         public static ref readonly BitMatrix32 permute(in NatPerm<N32> perm, in BitMatrix32 A)
         {
-            for(var row = 0; row < perm.Length; row++)
-                if(perm[row] != row)
-                    rowswap(A, row, perm[row]);
+            for(var row = 0u; row < perm.Length; row++)
+                if(perm[(int)row] != row)
+                    rowswap(A, row, (uint)perm[(int)row]);
             return ref A;
         }
 

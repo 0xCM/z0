@@ -8,12 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Defines pseudorandom number generator
     /// </summary>
     public struct XOrShift128 : IRngPointSource<uint>
     {        
+        uint a;
+
+        uint b;
+
+        uint c;
+
+        uint d;
+
         public XOrShift128(uint a, uint b, uint c, uint d)
         {
             this.a = a;
@@ -24,20 +33,12 @@ namespace Z0
 
         public XOrShift128(ReadOnlySpan<uint> state)
         {
-            Require(state.Length >= 4);
-            this.a = state[0];
-            this.b = state[1];            
-            this.c = state[2];
-            this.d = state[3];
+            insist(state.Length >= 4, $"The source length {state.Length} >= 4");
+            a = state[0];
+            b = state[1];            
+            c = state[2];
+            d = state[3];
         }
-
-        uint a;
-
-        uint b;
-
-        uint c;
-
-        uint d;
 
         public RngKind RngKind 
             => RngKind.XOrShift128;

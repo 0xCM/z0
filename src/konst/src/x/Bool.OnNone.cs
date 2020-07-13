@@ -6,11 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+    using System.Reflection;
+
     using static Konst;
 
     partial class XTend
     {
+        public static FilePath PartPath(this IPart part)
+            => FilePath.Define(part.Owner.Location);
 
         [MethodImpl(Inline)]
         public static void OnNone(this bool x, Action f)

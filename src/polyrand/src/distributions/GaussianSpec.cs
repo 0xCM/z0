@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static NumericCast;    
+    using static z;
 
 
     /// <summary>
@@ -60,7 +61,7 @@ namespace Z0
             get
             {
                 var sig = convert<T,double>(StdDev);
-                Require(sig != 0);
+                insist(sig != 0, $"The invariant k := (sigma == 0) failed");
 
                 return convert<T>(sig*sig);
             }            
@@ -72,7 +73,7 @@ namespace Z0
             get
             {
                 var sig = convert<T,double>(StdDev);
-                Require(sig != 0);
+                insist(sig != 0, $"The invariant k := (sigma == 0) failed");
 
                 var prec = MathUtil.recip(sig*sig);
                 return convert<T>(prec);

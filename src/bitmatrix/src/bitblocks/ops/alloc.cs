@@ -23,7 +23,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var block = new BitBlock<N,T>(new T[BitBlock<N,T>.CellCount], true);
+            var block = new BitBlock<N,T>(new T[BitBlock<N,T>.NeededCells], true);
             block.Data.Fill(t);
             return block;
         }

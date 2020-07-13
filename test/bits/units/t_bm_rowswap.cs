@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
     
     public class t_bm_rowswap : t_bm<t_bm_rowswap>
     {        
@@ -69,7 +68,7 @@ namespace Z0
             for(var sample=0; sample < RepCount; sample++)
             {
                 (var i, var j) = Random.NextPair(0,n);
-                BitMatrix.rowswap(A,i,j);
+                BitMatrix.rowswap(A,(uint)i,(uint)j);
 
                 var tmp = a[i];
                 a[i] = a[j];

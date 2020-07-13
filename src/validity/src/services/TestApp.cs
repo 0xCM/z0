@@ -317,6 +317,33 @@ namespace Z0
             return clock;
         }
 
+        IEnumerable<IAppMsg> CreateErrorMessages(Exception e, MethodInfo method)
+        {
+            var casename = OpUriBuilder.TestCase(method);            
+            if(e is TargetInvocationException i)
+            {
+                foreach(var m in CreateErrorMessages(e.InnerException, method))
+                    yield return m;
+            } 
+            else if(e.InnerException is ClaimException claim)
+                yield return claim.Message;            
+            else if(e.InnerException is AppException app)
+                yield return app.Message;
+            else if(e.InnerException != null)               
+                yield return AppMsg.NoCaller($"{e}", AppMsgKind.Error);
+            else
+            {
+                var reason = e.Message;
+                var title = text.concat("fail".PadRight(10), Space, FieldDelimiter, Space, casename.PadRight(48), Space, FieldDelimiter, Space, reason);
+                var content = text.build();
+                content.AppendLine(title);
+                content.AppendLine(e.StackTrace);                
+                var payload = content.ToString();
+
+                yield return AppMsg.NoCaller(payload, AppMsgKind.Error);                                          
+            }
+         }
+        
         Duration ExecCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> cases)
         {
             var exectime = Duration.Zero;
@@ -347,15 +374,14 @@ namespace Z0
             {                
                 clock.Stop();
                 collected.AddRange(unit.Dequeue());                
-                collected.AddRange(CreateErrorMessages(casename, e));             
+                collected.AddRange(CreateErrorMessages(e, method));
+                //collected.AddRange(CreateErrorMessages(casename, e));
                 cases.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
             }
             finally
-            {     
-                
+            {                     
                 Log.Deposit(collected);                
-                Root.iter(collected.Where(m => !m.Displayed), term.print);       
-
+                Root.iter(collected.Where(m => !m.Displayed), term.print);
             }
 
             return exectime;

@@ -70,10 +70,10 @@ namespace Z0
         /// </summary>
         /// <param name="rows">The grid row count</param>
         /// <param name="cols">The grid col count</param>
-        /// <param name="cw">The storage cell width</param>
+        /// <param name="width">The storage cell width</param>
         [MethodImpl(Inline), Op]
-        public static int tablecells(ulong rows, ulong cols, int cw)
-            => GridCells.count(rows,cols,cw);
+        public static int tablecells(ulong rows, ulong cols, int width)
+            => GridCells.count(rows, cols, width);
 
         /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate

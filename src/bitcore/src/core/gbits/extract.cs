@@ -36,7 +36,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void extract<T>(T a, byte first, byte last, Span<byte> dst, int offset)
             where T : unmanaged
-                => Bytes.from(gbits.extract(a,first,last)).Slice(0, GridCells.minbytes(last - first + 1)).CopyTo(dst,offset);
+        {
+            var seg = gbits.extract(a, first, last);
+            var cells = GridCells.minbytes(last - first + 1);
+            var src = z.bytes<T>(seg).Slice(0,cells);
+            src.CopyTo(dst,offset);
+        }   
 
         /// <summary>
         /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive position range

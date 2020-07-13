@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
 
     partial class XTend
     {
@@ -17,6 +16,6 @@ namespace Z0
         public static BitString ToBitString<N,T>(this BitBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitString.scalars(src.Data, src.Width); 
+                => BitString.scalars(src.Data, (int)src.Width); 
     }
 }

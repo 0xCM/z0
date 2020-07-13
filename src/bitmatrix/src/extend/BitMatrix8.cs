@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public static void RowSwap(this BitMatrix8 A, int i, int j)
-            => A.Data.Swap(i,j);
+            => A.Data.Swap((uint)i,(uint)j);
 
         [MethodImpl(Inline)]
         public static BitMatrix8 ToPrimalBits(this ulong src, N8 n = default)

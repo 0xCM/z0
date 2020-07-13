@@ -22,15 +22,6 @@ namespace Z0
         /// </summary>
         public const uint N = 64;
 
-        /// <summary>
-        /// Defines the 64x64 identity bitmatrix
-        /// </summary>
-        public static BitMatrix64 Identity => BitMatrix.identity(n64);
-
-        /// <summary>
-        /// Defines the 64x64 zero bitmatrix
-        /// </summary>
-        public static BitMatrix64 Zero => new BitMatrix64(new ulong[N]);
 
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix<ulong>(in BitMatrix64 src)
@@ -161,7 +152,7 @@ namespace Z0
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public void RowSwap(int i, int j)
-            => Data.Swap(i,j);
+            => Data.Swap((uint)i,(uint)j);
 
         public BitMatrix64 Transpose()
         {
@@ -187,5 +178,17 @@ namespace Z0
         
         public override string ToString()
             => throw new NotSupportedException();       
+
+        /// <summary>
+        /// Defines the 64x64 identity bitmatrix
+        /// </summary>
+        public static BitMatrix64 Identity 
+            => BitMatrix.identity(n64);
+
+        /// <summary>
+        /// Defines the 64x64 zero bitmatrix
+        /// </summary>
+        public static BitMatrix64 Zero 
+            => new BitMatrix64(new ulong[N]);
     }
 }

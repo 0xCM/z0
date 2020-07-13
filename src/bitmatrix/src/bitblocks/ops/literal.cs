@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class BitBlocks
     {
@@ -23,14 +22,14 @@ namespace Z0
         public static BitBlock<N,T> single<N,T>(T src, N n = default)        
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitBlock<N, T>(src);
+                => new BitBlock<N,T>(src);
 
         /// <summary>
         /// Creates a bitblock over a single cell
         /// </summary>
         /// <param name="src">The source segment</param>
         [MethodImpl(Inline)]
-        public static BitBlock<T> single<T>(T src, int bitcount)
+        public static BitBlock<T> single<T>(T src, uint bitcount)
             where T : unmanaged
                 => new BitBlock<T>(src, bitcount);
     }

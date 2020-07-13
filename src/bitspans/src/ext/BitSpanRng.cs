@@ -22,6 +22,14 @@ namespace Z0
             => Z0.BitSpans.load(random.BitStream32().Take(length).ToArray());
 
         /// <summary>
+        /// Produces a random bitspan of specified length
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitSpan BitSpan(this IPolyrand random, uint length)
+            => Z0.BitSpans.load(random.BitStream32().Take(length).ToArray());
+
+        /// <summary>
         /// Produces a bitspan with randomized length
         /// </summary>
         /// <param name="random">The random source</param>

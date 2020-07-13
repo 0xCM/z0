@@ -304,7 +304,7 @@ namespace Z0
             var ops = 0;
             var composite = default(T);
             var clock = counter();
-            var packed = Random.Span(RepCount,t);
+            var packed = Random.Span<T>(RepCount);
 
             for(var cycle = 0; cycle < CycleCount; cycle++)
             {

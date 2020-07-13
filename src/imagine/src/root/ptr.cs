@@ -4,6 +4,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using static System.Runtime.CompilerServices.Unsafe;
 
     using static Konst;
 
@@ -12,11 +13,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* ptr<T>(ref T src)
             where T : unmanaged
-                => As.refptr(ref src);
+                => (T*)AsPointer(ref src); 
+
+        public static unsafe T* refptr<T>(ref T src)
+            where T : unmanaged
+                => (T*)AsPointer(ref src); 
 
         [MethodImpl(Inline)]
         public static unsafe T* constptr<T>(in T src)
             where T : unmanaged
-                => As.gptr(src);
+                => refptr(ref edit(src));
     }
 }

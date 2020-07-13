@@ -90,6 +90,15 @@ namespace Z0
         }        
 
         /// <summary>
+        /// Queries/Manipulates an index-identified bit
+        /// </summary>
+        public ref bit this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref z.seek(Head, index);
+        }        
+
+        /// <summary>
         /// Packs a segment selection of at most 8 bits
         /// </summary>
         public byte this[int offset, int count, byte t]

@@ -1,0 +1,41 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{        
+    using static z;
+
+    public interface IOperand : ISized
+    {
+        /// <summary>
+        /// The operand sort
+        /// </summary>
+        AsmOperandKind OpKind {get;}
+    }
+
+    public interface IOperand<T> : IOperand
+    {
+        /// <summary>
+        /// The operand value
+        /// </summary>
+        T Content {get;}   
+
+        uint ISized.Width 
+            => bitsize<T>();
+    }
+
+    public interface IOperand<W,T> : IOperand<T>
+        where W : unmanaged, IDataWidth
+    {
+        
+    }
+
+    public interface IOperand<F,W,T> : IOperand<W,T>
+        where F : unmanaged, IOperand<F,W,T>
+        where W : unmanaged, IDataWidth
+        where T : unmanaged
+    {
+        new W Width => default(W);
+    }                
+}

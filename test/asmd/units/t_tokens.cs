@@ -32,17 +32,17 @@ namespace Z0.Asm.Data
             return symbol.Value.ToString();
         }
         
-        public void symbolic_digits()
-        {
-            var symbols = octet.Symbols;
-            var dstPath = CasePath($"octets");
-            using var writer = dstPath.Writer();
-            for(var i=0; i<symbols.Count; i++)
-            {
-                ref readonly var s = ref symbols[i];
-                writer.WriteLine(Format(s.Simplified));
-            }            
+        // public void symbolic_digits()
+        // {
+        //     var symbols = octet.Symbols;
+        //     var dstPath = CasePath($"octets");
+        //     using var writer = dstPath.Writer();
+        //     for(var i=0; i<symbols.Count; i++)
+        //     {
+        //         ref readonly var s = ref symbols[i];
+        //         writer.WriteLine(Format(s.Simplified));
+        //     }            
            
-        }
+        // }
     }
 }

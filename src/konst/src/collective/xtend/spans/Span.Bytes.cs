@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<byte> Bytes<T>(this Span<T> src, int offset, int ? length = null)
             where T : struct
-                => z.bytes(src,offset,length);
+                => z.bytes(src, offset,length);
 
         /// <summary>
         /// Reimagines a span of generic values as a span of bytes
@@ -33,18 +33,6 @@ namespace Z0
         public static Span<byte> Bytes<T>(this Span<T> src)
             where T : struct
                 => z.bytes(src);
-
-        /// <summary>
-        /// Presents selected span content as a readonly span of bytes
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The source offset</param>
-        /// <param name="length">The source length</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> Bytes<T>(this ReadOnlySpan<T> src, int offset, int ? length = null)
-            where T : struct
-                => z.bytes(src,offset,length);
 
         /// <summary>
         /// Reimagines a readonly span of generic values as a span of readonly bytes

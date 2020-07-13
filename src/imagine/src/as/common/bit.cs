@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe BitState bit(bool src)
+        public static unsafe BitState bitstate(bool src)
             => (BitState) @byte(src);
 
         [MethodImpl(Inline), TestBit]

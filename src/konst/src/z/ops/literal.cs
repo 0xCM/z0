@@ -11,6 +11,15 @@ namespace Z0
 
     partial struct z
     {                                
+        [MethodImpl(Inline), Op]
+        public static BinaryLiteral literal(Base2 @base2, string name, object value, string text)
+            => new BinaryLiteral(name,value,text);
+
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static BinaryLiteral<T> literal<T>(Base2 @base2, string name, T value, string text)
+            where T : unmanaged
+                => new BinaryLiteral<T>(name, value, text);
+
         /// <summary>
         /// Envisions a u8 value as a value of an enum of like primal kind
         /// </summary>

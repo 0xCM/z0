@@ -176,7 +176,7 @@ namespace Z0
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public void RowSwap(int i, int j)
-            => Data.Swap(i,j);
+            => Data.Swap((uint)i,(uint)j);
 
         public readonly BitMatrix16 Transpose()
         {

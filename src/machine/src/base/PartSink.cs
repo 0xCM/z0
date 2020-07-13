@@ -1,0 +1,54 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.IO;
+
+    using static Konst;
+
+    public readonly struct PartSink : IAppEventSink<AppEvent<BinaryCode>>, IServiceAllocation
+    {
+        readonly FilePath Standard;
+
+        readonly FilePath ErrorPath;
+
+        readonly PartFileWriter<BinaryCode> Writer;
+
+        readonly object Locker;
+
+        public PartSink(IAppContext context)
+            : this(context.AppPaths.AppStandardOutPath, context.AppPaths.AppErrorOutPath)
+        {
+
+        }        
+
+        public PartSink(FilePath standard, FilePath error)
+        {
+            Standard = standard;
+            ErrorPath = error;
+            Writer = standard.Writer<BinaryCode>();
+            Locker = new object();
+        }
+
+        public void Deposit(IAppEvent e)
+        {
+            lock(Locker)
+                Writer.WriterLine(e.Description);            
+        }
+
+        public void Deposit(AppEvent<BinaryCode> e)
+        {
+            lock(Locker)
+                Writer.WriterLine(e.Payload);
+        }
+
+        public void Dispose()
+        {
+            Writer.Dispose();
+        }
+    }
+}

@@ -68,14 +68,14 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitBlock<T> from<T>(BitString src)
             where T : unmanaged
-                => load<T>(src.ToPackedBytes(), src.Length);
+                => load<T>(src.ToPackedBytes(), (uint)src.Length);
 
         /// <summary>
         /// Creates a bitvector from a span of bytes
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="n">The bitvector length</param>
-        static BitBlock<T> load<T>(Span<byte> src, int n)
+        static BitBlock<T> load<T>(Span<byte> src, uint n)
             where T : unmanaged
         {
             var q = Math.DivRem(src.Length, size<T>(), out int r);

@@ -4,22 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static PartRecords;
 
     public readonly struct PartRecordSpecs
     {
-        public static StringValueRecord Strings => default;
+        public StringValueRecord Strings => default;
         
-        public static BlobRecord Blobs => default;
+        public BlobRecord Blobs => default;
         
-        public static ConstantRecord Constants => default;
+        public ConstantRecord Constants => default;
 
-        public static FieldRecord Fields => default;
+        public FieldRecord Fields => default;
 
-        public static LiteralRecord Literals => default;
+        public LiteralRecord Literals => default;
 
-        public static FieldRvaRecord FieldRva => default;
+        public FieldRvaRecord FieldRva => default;
     }
 }

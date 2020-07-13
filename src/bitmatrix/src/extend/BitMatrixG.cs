@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst;
 
     public static class BitMatrixGx
     {   
@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void RowSwap<T>(this BitMatrix<T> A, int i, int j)
             where T : unmanaged
-            => A.Content.Swap(i,j);
+            => A.Content.Swap((uint)i,(uint)j);
 
         [MethodImpl(Inline)]
         public static void Update<T>(this BitMatrix<T> dst, BitMatrix<T> src)

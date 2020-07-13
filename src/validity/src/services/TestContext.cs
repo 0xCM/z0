@@ -251,11 +251,7 @@ namespace Z0
         protected void Trace(ITextual msg)
             => Notify(msg.Format());
 
-
-        // protected void Trace<T>(Span<T> src, [Caller] string caller = null)
-        //     => Trace(src.Format(),caller);
-
-        /// <summary>
+       /// <summary>
         /// Allocates and optionally starts a system counter
         /// </summary>
         [MethodImpl(Inline)]   
@@ -276,8 +272,6 @@ namespace Z0
         /// <param name="sw">A running/stopped stopwatch</param>
         [MethodImpl(Inline)]   
         public Duration snapshot(Stopwatch sw)     
-            => Duration.Define(sw.ElapsedTicks);                
-
-
+            => Duration.Define(sw.ElapsedTicks);
     }
 }

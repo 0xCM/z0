@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static As;
+    using static z;
 
     public static class PolyFill
     {
@@ -26,21 +26,7 @@ namespace Z0
             var it = random.Stream<T>(domain, filter).Take(count).GetEnumerator();
             var counter = 0;
             while(it.MoveNext())
-                add(dst, counter++) = it.Current;
-        }
-
-        /// <summary>
-        /// Fills a caller-allocated target with a specified number of values from a source
-        /// </summary>
-        /// <param name="src">The random source</param>
-        /// <param name="count">The number of values to send to the target</param>
-        /// <param name="dst">A reference to the target location</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static void Fill<T>(this IRngPointSource<T> src, int count, ref T dst)
-            where T : unmanaged
-        {
-            for(var i=0; i<count; i++)
-                add(dst, i) = src.Next();
+                seek(dst, counter++) = it.Current;
         }
                 
         /// <summary>
@@ -56,7 +42,7 @@ namespace Z0
             var it = random.Stream<T>().Take(count).GetEnumerator();
             var counter = 0;
             while(it.MoveNext())
-                add(dst, counter++) = it.Current;
+                seek(dst, counter++) = it.Current;
         }
     }
 }

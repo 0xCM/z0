@@ -7,7 +7,7 @@ namespace Z0
     using System;
     
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_bitspan_ops : t_bitcore<t_bitspan_ops>
     {
@@ -169,9 +169,9 @@ namespace Z0
         void bsand_check<T>(T t = default)
             where T : unmanaged
         {            
-            var n = bitsize(t);
+            var n = bitsize<T>();
 
-            for(var rep = 0; rep <= RepCount; rep++)
+            for(var rep = 0u; rep <= RepCount; rep++)
             {
                 var x = Random.BitSpan(n);
                 var y = Random.BitSpan(n);
@@ -226,17 +226,17 @@ namespace Z0
             var format = bitspan.Format();
 
             Claim.eq(length, bitspan.Length);
-            for(int i=0, j = length - 1; i< length; i++, j--)
+            for(uint i=0, j = length - 1; i< length; i++, j--)
             {
                 if(gmath.even(i))
                 {
                     Claim.Require(bitspan[i]);
-                    ClaimPrimalSeq.eq(bit.One, format[j]);
+                    ClaimPrimalSeq.eq(bit.One, format[(int)j]);
                 }
                 else
                 {
                     Claim.nea(bitspan[i]);
-                    ClaimPrimalSeq.eq(bit.Zero, format[j]);
+                    ClaimPrimalSeq.eq(bit.Zero, format[(int)j]);
                 }
             }            
         }
@@ -260,7 +260,7 @@ namespace Z0
         {
             void check()
             {
-                Span<byte> bytes = stackalloc byte[size(t)];
+                Span<byte> bytes = stackalloc byte[(int)size(t)];
                 for(var i=0; i < RepCount; i++)
                 {
                     var src = Random.Single(t);                

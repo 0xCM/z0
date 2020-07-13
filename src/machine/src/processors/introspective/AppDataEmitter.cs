@@ -9,9 +9,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-    using static Root;
-
     public readonly struct AppDataEmitter 
     {
         public static AppDataEmitter Service => default(AppDataEmitter);
@@ -35,7 +32,7 @@ namespace Z0
 
         void EmitMetadata(IAppContext app)
         {   
-            var service = MetadataEmitter.Service();
+            var service = MetadataEmitter.Service(app);
             service.Emit();
         }
 

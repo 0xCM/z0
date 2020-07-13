@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitSpans
     {
@@ -16,21 +16,21 @@ namespace Z0
         public static string format(in BitSpan src, BitFormatConfig? fmt = null)
         {
             var options = fmt ?? BitFormatter.configure();
-            var bitcount = src.Length;
+            var bitcount = (uint)src.Length;
             var blocked = options.BlockWidth != 0;
-            var blocks = blocked ? src.Length / options.BlockWidth : 0;                        
+            var blocks = (uint)(blocked ? src.Length / options.BlockWidth : 0);                        
             bitcount += blocks; // space for block separators
 
-            Span<char> buffer = stackalloc char[bitcount];
-            ref var dst = ref head(buffer);
+            Span<char> buffer = stackalloc char[(int)bitcount];
+            ref var dst = ref first(buffer);
             
             var digits = 0;
-            for(int i = 0, j=bitcount-1; i < bitcount; i++, j--)
+            for(uint i = 0, j=bitcount-1; i < bitcount; i++, j--)
             {
                 if(blocked && digits % options.BlockWidth == 0)
-                    seek(ref dst, j--) = options.BlockSep;
+                    seek(dst, j--) = options.BlockSep;
 
-                seek(ref dst, j) = src[i].ToChar();
+                seek(dst, j) = src[i].ToChar();
                 digits++;
             }
             

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
     
     using static Konst;
 
@@ -23,7 +22,7 @@ namespace Z0
     {
         object locker;
 
-         static TestLogPaths Paths 
+        static TestLogPaths Paths 
             => TestLogPaths.The;
 
         internal TestLog()       

@@ -9,9 +9,8 @@ namespace Z0.RefOps
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static As;
-    using static Root;
-    
+    using static z;
+
     public readonly struct CopyOps
     {
         /// <summary>
@@ -24,7 +23,7 @@ namespace Z0.RefOps
         [MethodImpl(Inline)]   
         public static void copy<S,T>(ref S src, Span<T> dst)
             where T : unmanaged
-                => sys.write<S>(src, ref @as<T,byte>(ref first(dst)));
+                => sys.write<S>(src, ref @as<T,byte>(first(dst)));
 
         /// <summary>
         /// Copies a contiguous segments of bytes from one location to another
@@ -66,7 +65,7 @@ namespace Z0.RefOps
         /// <param name="count">The number of values to copy</param>
         [MethodImpl(Inline), Op]
         public static unsafe void copy(byte* pSrc, Span<byte> dst, int offset, int count)
-            => copy(pSrc, (byte*)refptr(ref seek(dst, offset)) , count);
+            => copy(pSrc, (byte*)refptr(ref seek(dst, (uint)offset)) , count);
 
  
          /// <summary>
@@ -78,13 +77,13 @@ namespace Z0.RefOps
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ByteSize copy<S,T>(in S src, ref T dst, int srcCount, int dstOffset = 0)
+        public static uint copy<S,T>(in S src, ref T dst, int srcCount, int dstOffset = 0)
             where S: unmanaged
             where T :unmanaged
         {
-            ref var input = ref @as<S,byte>(ref Root.edit(src));
-            ref var target = ref @as<T,byte>(ref add(dst, dstOffset));
-            var dstSize =  srcCount*size<S>();
+            ref var input = ref @as<S,byte>(edit(src));
+            ref var target = ref @as<T,byte>(add(dst, dstOffset));
+            var dstSize =  (uint)srcCount*size<S>();
             sys.copy(input, ref target, (uint)dstSize);
             return dstSize;
         }

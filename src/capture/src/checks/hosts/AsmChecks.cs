@@ -39,7 +39,7 @@ namespace Z0.Asm
         TPartCaptureArchive CodeArchive 
             => Me.CaptureArchive(Part.ExecutingPart);
 
-        protected IMemberCodeWriter HexWriter([Caller] string caller = null)
+        protected IFileStreamWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
             return Archives.Services.MemberCodeWriter(dstPath);
