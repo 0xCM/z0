@@ -34,9 +34,6 @@ namespace Z0.Asm
         public static string Definition(InstructionTokenKind token)
             => InstructionTokenInfo.Definitions[(int)token];
 
-        public static OpCodeTokens OpCodeTokens
-            => load(LiteralFields.stringrefs(typeof(OpCodeTokenValues)), alloc<OpCodeToken>(OpCodeTokenValues.Count));
-
         [MethodImpl(Inline)]
         public static OpCodeDataset dataset()
         {
@@ -78,10 +75,6 @@ namespace Z0.Asm
             }
             return new OpCodeTokens(dst);            
         }
-
-        [Op]
-        public static unsafe OpCodeTokens tokens()
-            => load(LiteralFields.stringrefs(typeof(OpCodeTokenValues)), alloc<OpCodeToken>(OpCodeTokenValues.Count));
 
         [Op]
         public void Partition(in OpCodePartitoner processor, in OpCodePartition handler, ReadOnlySpan<OpCodeRecord> src)

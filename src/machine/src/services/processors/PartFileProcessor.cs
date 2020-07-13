@@ -26,7 +26,7 @@ namespace Z0
 
         int ProcessedCount;
 
-        readonly MachineFiles Files;
+        readonly PartFiles Files;
 
         public static CpuBuffers buffers(int size)
             => new CpuBuffers(size);
@@ -36,7 +36,7 @@ namespace Z0
         {
             AsmDocs = new List<AsmSourceDoc>(100);
             Context = context;
-            Files = MachineFiles.Service(context);
+            Files = PartFiles.create(context.AsmContext);        
             Buffers = buffers(DefaultBufferSize);
             ProcessedCount = 0;
         }
@@ -55,7 +55,7 @@ namespace Z0
         
         void LoadAsmDocs()
         {
-            z.iter(Files.CaptureArchive.AsmFiles,LoadAsmDoc);
+            z.iter(Files.AsmFiles,LoadAsmDoc);
             Notify(new PartFileEvent("Loaded asm docs", $"{AsmDocs.Count}"));
         }
 

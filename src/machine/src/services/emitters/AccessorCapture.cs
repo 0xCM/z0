@@ -36,11 +36,17 @@ namespace Z0
         FolderPath AsmDst
             => ResBytesDir + FolderName.Define("asm");
                 
+        /// <summary>
+        /// The path to the captured x86 resource assembly
+        /// </summary>
+        FilePath ResBytes
+            => FilePath.Define(@"J:\dev\projects\z0-logs\res\bytes\bin\Debug\netcoreapp3.0\z0.res.bytes.dll");
+
         public void CaptureResBytes()
         {
             var root = Context.AppPaths.LogRoot;
-            var src = Context.AppPaths.ResBytes;            
-            Demands.insist(src.Exists);
+            var src = ResBytes;
+            z.insist(src);
 
             var csvDst = ResBytesDir + src.FileName.ChangeExtension(FileExtensions.Csv);            
             term.magenta($"resbytes:{src} -> {csvDst}");

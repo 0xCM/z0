@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum PartFileKind : byte
+    public enum PartFileClass : byte
     {
         None = 0,
 

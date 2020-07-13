@@ -9,30 +9,26 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ApiParseFile  : IFileKind<ApiParseFile,PartFileKind>
+    public readonly struct ParsedFileKind  : IFileKind<PartFileClass>
     {
         public const string ExtensionName = "p.csv";
 
-        public const PartFileKind Classifier = PartFileKind.Parsed;
-
-        [MethodImpl(Inline)]
-        public static implicit operator FileKind<PartFileKind>(ApiParseFile src)
-            => FileKinds.define(Classifier, ExtensionName);
+        public const PartFileClass FileKind = PartFileClass.Parsed;
         
         [MethodImpl(Inline)]
-        public static implicit operator FileKind(ApiParseFile src)
-            => FileKinds.define(Classifier,ExtensionName);
+        public static implicit operator PartFileKind(ParsedFileKind src)
+            => PartFileKinds.define(FileKind,ExtensionName);
 
-        public PartFileKind Kind 
+        public PartFileClass Classifier 
         {
             [MethodImpl(Inline)]
-            get => Classifier;
+            get => FileKind;
         }
 
-        public StringRef Ext 
+         public FileExt Ext 
         {
             [MethodImpl(Inline)]
             get => ExtensionName;
-        }
+        }   
     }
 }

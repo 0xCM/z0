@@ -55,19 +55,17 @@ namespace Z0
             term.magenta("Emitting resbytes");
             EmitResources(app);
             
-            term.magenta("Capturing emissions");
-            CaptureEmissions(app);            
-            
-        }
-        
-        static void Gen2(IAppContext app)
-        {
+            // term.magenta("Capturing emissions");
+            // CaptureEmissions(app);            
+
             term.magenta("Emitting enum datasets");
             EmitEnumDatasets(app);
 
             term.magenta("Emitting literal fields");
             new LiteralFieldEmitter(app).Emit();                        
+
         }
+        
         
         public static CodeResourceIndex Load(IAppContext app)
             => Resources.code(Assembly.LoadFrom(app.AppPaths.ResBytes.Name));

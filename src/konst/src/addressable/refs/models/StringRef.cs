@@ -11,8 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = StringRefs;
-
     /// <summary>
     /// A string?
     /// </summary>
@@ -22,11 +20,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public StringRef(in MemRef src)
-            => Location = api.location(src);
+            => Location = StringRefs.location(src);
 
         [MethodImpl(Inline)]
-        public StringRef(MemoryAddress address, int length)
-            => Location = api.location(address, length);
+        public StringRef(MemoryAddress address, uint length, uint user = 0)
+            => Location = StringRefs.pack(address, length, user);
 
         [MethodImpl(Inline)]
         internal StringRef(Vector128<ulong> data)
@@ -50,9 +48,14 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => (int)Hi/Scale;
+            get => (int)StringRefs.length(Location);
         }
 
+        public uint User
+        {
+            [MethodImpl(Inline)]
+            get => StringRefs.user(Location);
+        }
         public unsafe string Text
         {
             [MethodImpl(Inline)]
@@ -62,7 +65,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Lo;
+            get =>StringRefs.address(Location);
         }
 
         public ref readonly char this[int index]
@@ -78,16 +81,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => z.data(this);
-        }
-
-        /// <summary>
-        /// Specifies the segment byte count
-        /// </summary>
-        /// <typeparam name="T">The cell type</typeparam>
-        public uint DataSize 
-        {
-            [MethodImpl(Inline)]
-            get => (uint)Hi;
         }
 
         /// <summary>
@@ -139,13 +132,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => vcell(Location,0);
         }
-
-        ulong Hi
-        {
-            [MethodImpl(Inline)]
-            get => vcell(Location,1);
-        }
-
-        const byte Scale = 2;
+    
    }
 }

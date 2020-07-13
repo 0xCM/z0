@@ -6,17 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
-    using static z;
+ 
+    public readonly struct PartFileKind
+    {        
+        public readonly PartFileClass Class;
+        
+        public readonly FileExt Ext;
 
-    partial struct LiteralFields
-    {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static FieldValues<T> from<T>(Type src)
-            where T : unmanaged
-                => search<T>(src).Select(f => (f,sys.constant<T>(f)));
-
+        [MethodImpl(Inline)]
+        public PartFileKind(PartFileClass @class, FileExt ext)
+        {
+            Class = @class;
+            Ext = ext;
+        }
     }
 }

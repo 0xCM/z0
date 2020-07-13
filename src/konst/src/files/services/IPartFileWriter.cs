@@ -23,8 +23,7 @@ namespace Z0
 
         void WriterLine(string src);
 
-        void WriteLines(string[] src);
-    
+        void WriteLines(string[] src);    
     }
 
     /// <summary>

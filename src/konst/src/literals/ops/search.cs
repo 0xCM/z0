@@ -15,11 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static FieldInfo[] search(Type src)
-        {
-            var fields = src.Fields();
-            
-            return fields.Literals();
-        }
+            => src.Fields().Literals();
         
         [MethodImpl(Inline), Op]
         public static FieldInfo[] search(Type src, Type match)

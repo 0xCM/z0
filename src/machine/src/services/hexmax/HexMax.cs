@@ -65,55 +65,6 @@ namespace Z0
             }
         }
 
-        const ulong P00_Base = 0x7ff9ae3f0bd0;
-
-        const ushort P10_Call_Offset = 0x2b7;
-        
-        const ulong P10_Call_Site = P00_Base + P10_Call_Offset;
-
-        const ulong P10_Call_Target = 0x7ff9ad47d670;
-
-        // ~~        
-
-        const ulong P10_Base = 0x7ff9ae3f0f20;
-
-        const ushort P20_Call_Offset = 0x2bc; // 700
-        
-        const ulong P20_Call_Site = P10_Base + P20_Call_Offset;
-
-        const ulong P20_Call_Target = 0x7ff9ad47d678;
-        
-
-        const ulong P20_Base = 0x7ff9ae3f1280;
-
-        const ushort P30_Call_Offset = 0x2c1;
-
-        const ulong P30_Call_Site = P20_Base + P30_Call_Offset;
-
-        const ulong P30_Call_Target = 0x7ff9ad47d680;
-
-        const ulong P30_Base = 0x7ff9ae3f15e0;
-
-        const ulong Process20_Call_Delta = P20_Base - P20_Call_Site; //164
-
-        const ulong Process30_Invocation_Delta = P30_Call_Site - P30_Call_Target; //16,203,457
-
-        const ulong Process30_Call_Offset = P30_Base - P30_Call_Target; //16,203,616
-
-        const ulong Process30_Call_Delta = P30_Base - P30_Call_Site; //159
-
-        const ulong P10_To_P20_Divergence = P10_Call_Site - P10_Call_Target; //16,201,751
-
-        const ulong Process20_Call_Divergence = P20_Base - P20_Call_Target; //16,202,760
-
-        const ulong Process20_Invocation_Delta = P20_Call_Site - P20_Call_Target; //16,202,596
-
-        const ulong Process30_Call_Offset_Delta = Process30_Call_Offset - Process20_Call_Divergence; //856
-
-        const ulong Process20_Call_Offset_Delta = Process20_Call_Divergence - P10_To_P20_Call_Offset; //856
-
-        const ulong P10_To_P20_Call_Offset = P10_Base - P10_Call_Target; //16,201,904
-
         [Op]
         public void Process(X10 a, X1F b, Hex8Kind code)
         {

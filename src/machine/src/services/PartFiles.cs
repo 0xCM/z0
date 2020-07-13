@@ -12,31 +12,16 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-
-    public readonly struct MachineFiles
-    {            
-        public IMachineContext Context {get;}
-        
-        public TPartCaptureArchive CaptureArchive {get;}
-       
-        [MethodImpl(Inline)]
-        public static MachineFiles Service(IMachineContext context)
-            => new MachineFiles(context);
-
-        [MethodImpl(Inline)]
-        public MachineFiles(IMachineContext context)
-        {
-            Context = context;
-            CaptureArchive = context.Archive;
-        }
-    } 
     
     public readonly struct PartFiles
     {
+        public static PartFiles create(IAsmContext context)
+            => new PartFiles(context);
+
         public static MemberParseRecord[] parsed(IAsmContext context, PartId part)
         {
-            var pfs = PartFiles.Service(context);
-            var files = PartFiles.Service(context).ParseFileIndex(part);
+            var pfs = PartFiles.create(context);
+            var files = pfs.ParseFileIndex(part);
             var parser = ParseReportParser.Service;
             if(files.TryGetValue(part, out var partFiles))
             {
@@ -45,32 +30,43 @@ namespace Z0
                     var path = partFiles[j].Path;
                     var records = parser.ParseRecords(path);
                     if(records)
-                    {
                         return records.Value;
-                    }
                 }                    
             }       
             return sys.empty<MemberParseRecord>();
         }
 
-        public static PartFiles Service(IAsmContext context)
-            => new PartFiles(context);
+        public FilePath[] List<K>(params PartId[] parts)
+            where K : IFileKind
+        {
+            if(typeof(K) == typeof(AsmFileKind))
+                return PartAsmFiles(parts);            
+            else if(typeof(K) == typeof(HexFileKind))
+                return PartHexFiles(parts);            
+            else if(typeof(K) == typeof(ParsedFileKind))
+                return PartParseFiles(parts);            
+            else 
+                return sys.empty<FilePath>();
+        }
 
         readonly IAsmContext Context;
 
         readonly TArchives DataSource; 
 
-        readonly PartFileKinds FileKinds;
-
         readonly TAppPaths AppPaths;
+
+        readonly object[] Collected;
 
         internal PartFiles(IAsmContext context)
         {
             Context = context;
             DataSource = Archives.Services;            
-            FileKinds = PartFileKinds.Service();
             AppPaths = Context.AppPaths.ForApp(PartId.Control);
+            Collected = sys.alloc<object>(4);
         }
+        
+        public FolderPath ArchiveRoot 
+            => AppPaths.AppCaptureRoot;
         
         public FilePath[] ParseFiles
             => CaptureArchive(AppPaths.AppCaptureRoot).ParseFiles;
@@ -81,8 +77,8 @@ namespace Z0
         public FilePath[] HexFiles
             => CaptureArchive(AppPaths.AppCaptureRoot).HexFiles;
 
-        public FilePath[] PartParseFiles(PartId[] parts, PartId part)
-            => CaptureArchive(AppPaths.AppCaptureRoot).PartParseFilePaths(parts,part);
+        public FilePath[] PartParseFiles(PartId[] parts)
+            => CaptureArchive(AppPaths.AppCaptureRoot).ParseFilePaths(parts);
 
         public FilePath[] PartAsmFiles(params PartId[] parts)
             => CaptureArchive(AppPaths.AppCaptureRoot).AsmFilePaths(parts);
@@ -91,15 +87,15 @@ namespace Z0
             => CaptureArchive(AppPaths.AppCaptureRoot).HexFilePaths(parts);
 
         public Dictionary<PartId,PartFile[]> ParseFileIndex(params PartId[] parts)
-            => SelectFiles(PartFileKind.Parsed, ParseFiles, parts);
+            => SelectFiles(PartFileClass.Parsed, ParseFiles, parts);
         
         public Dictionary<PartId,PartFile[]> HexFileIndex(params PartId[] parts)
-            => SelectFiles(PartFileKind.Hex, HexFiles, parts);
+            => SelectFiles(PartFileClass.Hex, HexFiles, parts);
 
         public Dictionary<PartId,PartFile[]> AsmFileIndex(params PartId[] parts)
-            => SelectFiles(PartFileKind.Asm, AsmFiles, parts);
+            => SelectFiles(PartFileClass.Asm, AsmFiles, parts);
         
-        Dictionary<PartId,PartFile[]> SelectFiles(PartFileKind kind, IEnumerable<FilePath> src, params PartId[] parts)
+        Dictionary<PartId,PartFile[]> SelectFiles(PartFileClass kind, IEnumerable<FilePath> src, params PartId[] parts)
         {
             var partSet = parts.ToHashSet();
 

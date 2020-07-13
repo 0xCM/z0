@@ -85,16 +85,6 @@ namespace Z0.Asm.Data
             }
         }
 
-        public void op_code_tokens()
-        {
-            var opcodes = OpCodeServices.OpCodeTokens;
-            using var dst = CaseWriter("OpCodesTokens", FileExtensions.Csv);
-            for(var i=0; i<opcodes.Length; i++)
-            {
-                dst.WriteLine(opcodes[i].Format());
-            }
-        }
-
         public void opcode_reccords()
         {            
             var data = OpCodeServices.dataset();

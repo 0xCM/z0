@@ -11,18 +11,22 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct DecodedHost : IProcessedEvent<DecodedHost>
+    public readonly struct Unaddressed : IProcessedEvent<Unaddressed>
     {
-        public readonly HostInstructions Instructions;
+        public readonly OpUri Uri;
+        public readonly LocatedCode Code;
 
         [MethodImpl(Inline)]
-        public DecodedHost(HostInstructions inxs)
-            => Instructions = inxs;
+        public Unaddressed(OpUri uri, LocatedCode code)
+        {
+            Uri = uri;
+            Code = code;
+        }
 
         public AppMsgColor Flair 
-            => AppMsgColor.Cyan;
+            => AppMsgColor.Red;
                 
         public string Description
-            => $"{Instructions.TotalCount}  {Instructions.Host} instructions decoded";
+            => $"The location for {Uri} code is unknown";
     }        
 }

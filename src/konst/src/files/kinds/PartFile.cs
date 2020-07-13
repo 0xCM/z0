@@ -13,12 +13,12 @@ namespace Z0
     {        
         public readonly PartId Part;
 
-        public readonly PartFileKind Kind;
+        public readonly PartFileClass Kind;
 
         public readonly FilePath Path;
 
         [MethodImpl(Inline)]
-        public PartFile(PartId part, PartFileKind kind, FilePath path)
+        public PartFile(PartId part, PartFileClass kind, FilePath path)
         {
             Part = part;
             Kind = kind;

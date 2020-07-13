@@ -11,7 +11,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static MachineEvents;
 
 
     public class TheMachine : IMachine
@@ -26,15 +25,12 @@ namespace Z0
 
         EncodedIndexBuilder IndexBuilder {get;}            
 
-        TPartCaptureArchive Archive 
-            => Context.Archive;
-
         TheMachine(IMachineContext context)
         {
             Sink = context.AppMsgSink;
             Context = context;
             Broker = new EventBroker(context.AsmContext.AppPaths.AppStandardOutPath);
-            Files = PartFiles.Service(context.AsmContext);            
+            Files = PartFiles.create(context.AsmContext);            
             IndexBuilder = Encoded.indexer();
             (this as IMachineEventClient).Connect();            
         }
@@ -111,23 +107,8 @@ namespace Z0
                 workflow.Render(e.Instructions);
         }
 
-        public void Run()
-        {
-            ParseReports();
-        }
 
-        void ParseReports()
-        {
-            Root.iter(Files.ParseFiles, ParseReport);
-            Broker.Raise(new IndexedEncoded(IndexBuilder.Freeze()));
-        }
         
-        void ParseReport(FilePath src)
-        {
-            ParseReportParser.Service.Parse(src)
-                    .OnFailure(fail => term.error(fail.Reason))
-                    .OnSuccess(value => Broker.Raise(new LoadedParseReport(value, src)));
-        }
 
         void DecodeParts(EncodedIndex src)
         {
@@ -193,14 +174,33 @@ namespace Z0
             Root.iter(report.Records, Index);            
         }
 
-        void Index(MemberParseRecord record)
+        void Index(MemberParseRecord src)
         {
-            IndexBuilder.Include(MemberCode.Define(record.Uri, record.Data));
+            if(src.Address.IsEmpty)
+                Broker.Raise(new Unaddressed(src.Uri, src.Data));
+            else
+                IndexBuilder.Include(MemberCode.Define(src.Uri, src.Data));
         }
 
-        public void Dispose()
+
+        void ParseReport(FilePath src)
         {
- 
+            var report = ParseReportParser.Service.Parse(src);
+
+            report
+                    .OnFailure(fail => term.error(fail.Reason))
+                    .OnSuccess(value => Broker.Raise(new LoadedParseReport(value, src)));
+        }
+
+        void ParseReports()
+        {
+            Root.iter(Files.ParseFiles, ParseReport);
+            Broker.Raise(new IndexedEncoded(IndexBuilder.Freeze()));
+        }
+
+        public void Run()
+        {
+            ParseReports();
         }
 
         public static void Run(IMachineContext context)
@@ -215,5 +215,11 @@ namespace Z0
                 term.error(e);
             }
         }
+
+        public void Dispose()
+        {
+ 
+        }
+
     }
 }

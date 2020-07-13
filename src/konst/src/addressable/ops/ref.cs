@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using System.Runtime.Intrinsics;
-    
     using static Konst;
     using static z;
     
@@ -24,6 +22,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe StringRef @ref(string src)
-            => new StringRef((ulong)pchar(src), src.Length);
+            => new StringRef((ulong)pchar(src), (uint)src.Length);
     }
 }

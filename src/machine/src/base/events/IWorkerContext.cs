@@ -7,17 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Konst;    
 
-    public readonly struct MachineEventFactory : IMachineEvents
+    public interface IWorkerContext
     {
+        IEncodedEventSink Sink {get;}
+    }
 
-
-        public static MachineEventFactory Service => default(MachineEventFactory);
+    public readonly struct WorkerContext
+    {
+        public IEncodedEventSink Sink {get;}        
 
         [MethodImpl(Inline)]
-        public E Create<E>(ReadOnlySpan<byte> content, E model = default)
-            where E : struct, IProcessedEvent<E>
-                => model.Define(content);
+        public WorkerContext(IEncodedEventSink sink)
+        {
+            Sink = sink;
+        }        
     }
 }

@@ -20,7 +20,8 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static T[] empty<T>() => sys.empty<T>();
+        public static T[] empty<T>()
+             => sys.empty<T>();
 
         /// <summary>
         /// Returns a reference to the location of the first element
@@ -110,6 +111,7 @@ namespace Z0
         /// <typeparam name="T">The array element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T[] clear<T>(T[] dst)
+            where T : struct
         {
             if(dst != null)
                 Array.Fill(dst, default(T));
@@ -125,7 +127,7 @@ namespace Z0
         [Op, Closures(Integers)]
         public static T[] replicate<T>(T value, int count)
         {
-            var dst = alloc<T>((int)count);
+            var dst = alloc<T>(count);
             for(var idx = 0U; idx < count; idx ++)
                 dst[idx] = value;
             return dst;            
@@ -148,63 +150,11 @@ namespace Z0
             => Array.Copy(src,dst, src.Length);
 
         /// <summary>
-        /// Concatentates two byte arrays
-        /// </summary>
-        /// <param name="first">The first array of bytes</param>
-        /// <param name="second">The second array of bytes</param>
-        /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
-        [MethodImpl(Inline), Op]
-        public static byte[] concat(byte[] first, byte[] second)
-        {
-            byte[] ret = new byte[first.Length + second.Length];
-            Buffer.BlockCopy(first, 0, ret, 0, first.Length);
-            Buffer.BlockCopy(second, 0, ret, first.Length, second.Length);
-            return ret;
-        }
-
-        /// <summary>
-        /// Concatenates a sequence of parameter arrays
-        /// </summary>
-        /// <param name="src">The source arrays</param>
-        public static T[] concat<T>(params T[][] src)
-        {
-            var totalLen = src.Sum(x => x.Length);
-            var dst = new T[totalLen];
-            var idx = 0;
-            for(var i=0; i< src.Length; i++)
-            {
-                var arr = src[i];
-                var len = arr.Length;
-                for(var j = 0; j<len; j++)
-                    dst[idx++] = arr[j];            
-            }        
-
-            return dst;
-        }
-
-        /// <summary>
         /// Concatenates a sequence of arrays
         /// </summary>
         /// <param name="src">The source arrays</param>
         public static T[] concat<T>(IEnumerable<T[]> src)
             => concat(src.ToArray());   
-
-        /// <summary>
-        /// Concatentates a parameter array of byte arrays
-        /// </summary>
-        /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
-        [Op]
-        public static byte[] concat(params byte[][] src)
-        {
-            byte[] ret = new byte[src.Sum(x => x.Length)];
-            int offset = 0;
-            foreach (byte[] data in src)
-            {
-                Buffer.BlockCopy(data, 0, ret, offset, data.Length);
-                offset += data.Length;
-            }
-            return ret;
-        }
 
         /// <summary>
         /// Concatenates a sequence of byte arrays
@@ -242,6 +192,72 @@ namespace Z0
             for(var i=0; i< indices.Length; i++)
                 dst[i] = src[indices[i]];
             return dst;
-        }            
+        }     
+
+        /// <summary>
+        /// Concatentates two arrays
+        /// </summary>
+        /// <param name="left">The first array</param>
+        /// <param name="right">The second array</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static T[] concat<T>(T[] left, T[] right)
+        {
+            var length = left.Length + right.Length;
+            var dst = alloc<T>(length);
+            left.CopyTo(dst,0);
+            right.CopyTo(dst, left.Length);
+            return dst;
+        }   
+
+        /// <summary>
+        /// Concatentates two byte arrays
+        /// </summary>
+        /// <param name="left">The first array</param>
+        /// <param name="right">The second array</param>
+        /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
+        [MethodImpl(Inline)]
+        public static byte[] concat(byte[] left, byte[] right)
+        {
+            var ret = alloc<byte>(left.Length + right.Length);
+            Buffer.BlockCopy(left, 0, ret, 0, left.Length);
+            Buffer.BlockCopy(right, 0, ret, left.Length, right.Length);
+            return ret;
+        }
+
+        /// <summary>
+        /// Concatenates a sequence of parameter arrays
+        /// </summary>
+        /// <param name="src">The source arrays</param>
+        public static T[] concat<T>(params T[][] src)
+        {
+            var totalLen = src.Sum(x => x.Length);
+            var dst = new T[totalLen];
+            var idx = 0;
+            for(var i=0; i< src.Length; i++)
+            {
+                var arr = src[i];
+                var len = arr.Length;
+                for(var j = 0; j<len; j++)
+                    dst[idx++] = arr[j];            
+            }        
+            return dst;
+        }
+
+        /// <summary>
+        /// Concatentates a parameter array of byte arrays
+        /// </summary>
+        /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
+        [Op]
+        public static byte[] concat(params byte[][] src)
+         {
+            byte[] ret = new byte[src.Sum(x => x.Length)];
+            int offset = 0;
+            foreach (byte[] data in src)
+            {
+                Buffer.BlockCopy(data, 0, ret, offset, data.Length);
+                offset += data.Length;
+            }
+            return ret;
+        }
     }
 }

@@ -35,4 +35,6 @@ namespace Z0
     {
         void Deposit(in A src);
     }
+
+
 }

@@ -31,5 +31,9 @@ namespace Z0
         public static unsafe void copy<T>(in T src, T* pDst)
             where T : unmanaged
                 => Unsafe.Copy(pDst, ref Unsafe.AsRef(src));   
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void copy<T>(T[] src, T[] dst)
+            => Array.Copy(src,dst, src.Length);
     }
 }

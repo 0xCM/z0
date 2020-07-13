@@ -18,6 +18,7 @@ namespace Z0
         /// <typeparam name="T">The array element type</typeparam>
         [MethodImpl(Inline)]
         public static T[] Clear<T>(this T[] src)
-            => Arrays.clear(src);
+            where T : struct
+                => Arrays.clear(src);
     }
 }

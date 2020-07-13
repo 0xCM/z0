@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static Konst;
-    using static HexLevel;
     using static Typed;
     using static V0;
     using static V0d;

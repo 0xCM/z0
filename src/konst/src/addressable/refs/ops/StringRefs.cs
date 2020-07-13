@@ -31,11 +31,11 @@ namespace Z0
             => z.vcell(src.Location, 1);
 
         [MethodImpl(Inline), Op]
-        public static unsafe StringRef create(string src)
-            => new StringRef((ulong)pchar(src), src.Length);
+        public static unsafe StringRef create(string src, uint user = 0)
+            => new StringRef((ulong)pchar(src), (uint)src.Length, user);
 
         [MethodImpl(Inline)]
-        public StringRef from(MemoryAddress address, int length)
+        public StringRef from(MemoryAddress address, uint length)
             => new StringRef(address, length); 
 
         [MethodImpl(Inline), Op]
@@ -71,7 +71,6 @@ namespace Z0
                 seek(dst,i) = skip(src,i);
         }
 
-
         [Op]
         public static void materialize(ReadOnlySpan<StringRef> src, Span<char> dst, char? delimiter = null)
         {
@@ -92,8 +91,58 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        internal static Vector128<ulong> location(MemoryAddress address, int length)
-            => vparts(N128.N, address, (ulong)(length*scale<char>()));
+        internal static void unpack(ulong src, out uint length, out uint user)
+        {
+            length = (uint)src;
+            user  = (uint)(src >> 32);
+        }            
+
+        [MethodImpl(Inline), Op]
+        internal static MemoryAddress address(Vector128<ulong> src)
+            => vcell(src,0);
+
+        [MethodImpl(Inline), Op]
+        internal static void unpack(Vector128<ulong> src, out uint length, out uint user)
+            => unpack(vcell(src,1), out length, out user);
+
+        [MethodImpl(Inline), Op]
+        internal static uint user(Vector128<ulong> src)
+        {
+            unpack(vcell(src,1), out _, out var user);
+            return user;
+        }
+
+        [MethodImpl(Inline), Op]
+        internal static uint length(Vector128<ulong> src)
+        {
+            unpack(vcell(src,1), out var size, out var _);
+            return size/scale<char>();
+        }
+
+        [MethodImpl(Inline), Op]
+        internal static void unpack(Vector128<ulong> src, out MemoryAddress a, out uint length, out uint user)
+        {
+            a = address(src);
+            unpack(src, out length, out user);
+        }
+
+        [MethodImpl(Inline), Op]
+        internal static ref Vector128<ulong> pack(MemoryAddress address, uint length, uint user, out Vector128<ulong> dst)
+        {
+            dst = pack(address, length, user);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        static ref ulong pack(uint length, uint user, out ulong dst)
+        {
+            dst = (ulong)length | ((ulong)user << 32);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        internal static Vector128<ulong> pack(MemoryAddress address, uint length, uint user)
+            => vparts(N128.N, address, pack(length*scale<char>(), user, out var dst));
  
         [MethodImpl(Inline), Op]
         internal static Vector128<ulong> location(MemRef src)

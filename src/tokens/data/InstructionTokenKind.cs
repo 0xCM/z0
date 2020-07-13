@@ -6,7 +6,6 @@ namespace Z0.Tokens
 {
     using static Limits;
     using static DataWidth;
-    //using static RegisterKind;
 
     public enum InstructionTokenKind : byte
     {

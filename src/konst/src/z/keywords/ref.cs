@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The source string</param>
         [MethodImpl(Inline), Op]
         public static unsafe StringRef @ref(string src)
-            => new StringRef((ulong)pchar(src), src.Length);
+            => new StringRef((ulong)pchar(src), (uint)src.Length);
 
         /// <summary>
         /// Captures a parametric reference to cell content beginning at a specified address
@@ -59,7 +59,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe Ref<T> @ref<T>(MemoryAddress src, uint count)
             => new Ref<T>(@ref((void*)src, size<T>(count)));
-
 
         /// <summary>
         /// Captures an untyped sized reference

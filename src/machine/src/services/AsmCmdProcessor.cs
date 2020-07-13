@@ -74,8 +74,8 @@ namespace Z0.Asm
         
         public CommandRecordSets<Mnemonic> Process(params PartId[] parts)
         {
-            var pfs = PartFiles.Service(Context);
-            var files = PartFiles.Service(Context).ParseFileIndex(parts);
+            var pfs = PartFiles.create(Context);
+            var files = PartFiles.create(Context).ParseFileIndex(parts);
             var parser = ParseReportParser.Service;
             var processor = this;
 

@@ -8,20 +8,12 @@ namespace Z0
 
     public interface IFileKind
     {
-        StringRef Ext {get;}        
+        FileExt Ext {get;}        
     }
 
     public interface IFileKind<E> : IFileKind
         where E : unmanaged, Enum
     {
-        E Kind {get;}
-
-    }
-
-    public interface IFileKind<F,E> : IFileKind<E>
-        where E : unmanaged, Enum
-        where F : unmanaged, IFileKind<F,E>
-    {
-
+        E Classifier {get;}
     }
 }

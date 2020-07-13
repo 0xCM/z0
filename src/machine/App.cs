@@ -43,10 +43,21 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {            
+            var known = KnownParts.Where(r => r.Id != 0).Array();
             var parts = PartIdParser.Service.ParseValid(args);  
-            var context = CreateMachineContext(CreateAsmContext(), parts);  
+            var asmctx = CreateAsmContext();
+            var context = CreateMachineContext(asmctx, parts);  
             var dataEmitter = AppDataEmitter.Service;
             var fileProcessor = new PartFileProcessor(context);
+            var api = ApiComposition.Assemble(known);
+            var files = new PartFiles(asmctx);
+
+            //TheMachine.Run(context);
+
+            var emitter = AppDataEmitter.Service;                        
+            emitter.Emit(Context);
+
+                        
 
             // if(StartCpu)            
             //     RunCpu(context);
