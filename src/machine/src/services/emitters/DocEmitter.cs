@@ -86,7 +86,7 @@ namespace Z0
             {     
                 var k = kind(components[0][0]);
                 var name = components[1];
-                var summary = text.enclosed(value, "<summary>", "</summary>").RemoveAny((char)AsciControl.CR, (char)AsciControl.NL).Trim();
+                var summary = text.content(value, "<summary>", "</summary>").RemoveAny((char)AsciControl.CR, (char)AsciControl.NL).Trim();
                 return ParseResult.Success(key, new MemberDocs(k, name, summary));                    
             }
             else

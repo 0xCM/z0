@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Specifies application message origination details
     /// </summary>
-    public readonly struct AppMsgSource
+    public readonly struct AppMsgSource : ITextual
     {                
         /// <summary>
         /// Specifies the emitting executable part
@@ -36,23 +36,38 @@ namespace Z0
         public readonly uint Line;
 
         [MethodImpl(Inline)]
-        public AppMsgSource(PartId part, string caller, FilePath file, uint line)
+        public AppMsgSource(PartId part, string caller, string file, int? line)
         {
             Part = part;
             Caller = caller;
-            File = file;
-            Line = line;
-        }
-
-        [MethodImpl(Inline)]
-        public AppMsgSource(PartId part, string caller, FilePath file, int? line)
-        {
-            Part = part;
-            Caller = caller;
-            File = file;
+            File = FilePath.Define(file ?? EmptyString);
             Line = (uint)(line ?? 0);
         }
-        public static AppMsgSource Empty 
-            => new AppMsgSource(0, EmptyString, FilePath.Empty, 0);
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => (File is null) ? true : text.blank(Caller) || File.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => (File is null) ? false : (text.nonempty(Caller) || File.IsNonEmpty);
+        }
+
+        public string Format()
+        {
+            if(Part != 0)
+                return $"{Part.Format()}/{File.FileName}/{Caller}?line = {Line} | {File}";
+            else
+                return $"{File.FileName}/{Caller}?line = {Line} | {File}";
+        }
+        
+        public override string ToString()
+            => Format();
+
+        public static AppMsgSource Empty         
+            => new AppMsgSource(0, EmptyString, EmptyString, 0);
     }
 }

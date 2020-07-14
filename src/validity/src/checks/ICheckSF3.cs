@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static Structured;
 
     readonly struct CheckTernaryOpSF<T> : ICheckSF<T,T,T,T>
@@ -65,9 +65,10 @@ namespace Z0
                 => ExcludeZero ? Random.NonZ<T2>() : Random.Next<T2>();
 
             clock.Start();
+
             try
             {
-                for(var i=0; i<RepCount; i++)
+                for(var i=0u; i<RepCount; i++)
                 {
                     var x = next_x();
                     var y = next_y();
@@ -96,23 +97,24 @@ namespace Z0
             var clock = counter();
 
             var inA = (ExcludeZero ? Random.NonZeroSpan<T0>(count) : Random.Span<T0>(count)).ReadOnly();
-            ref readonly var inATarget = ref head(inA);            
+            ref readonly var inATarget = ref first(inA);            
             
             var inB = (ExcludeZero ? Random.NonZeroSpan<T1>(count) : Random.Span<T1>(count)).ReadOnly();
-            ref readonly var inBTarget = ref head(inB);
+            ref readonly var inBTarget = ref first(inB);
 
             var inC = (ExcludeZero ? Random.NonZeroSpan<T2>(count) : Random.Span<T2>(count)).ReadOnly();
-            ref readonly var inCTarget = ref head(inC);
+            ref readonly var inCTarget = ref first(inC);
 
             var dst = Spans.alloc<R>(count);
-            ref var target = ref head(dst);
+            ref var target = ref first(dst);
             
             clock.Start();
+
             try
             {                
                 apply(g, inA, inB, inC, dst);
-                for(var i=0; i<count; i++)
-                    Eq(f.Invoke(skip(in inATarget, i), skip(in inBTarget, i), skip(in inCTarget, i)), skip(in target, i));
+                for(var i=0u; i<count; i++)
+                    Eq(f.Invoke(skip(inATarget, i), skip(inBTarget, i), skip(inCTarget, i)), skip(target, i));
             }
             catch(Exception e)
             {

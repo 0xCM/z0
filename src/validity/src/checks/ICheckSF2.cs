@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
     using static Structured;
 
     readonly struct CheckBinaryOpSF<T> : ICheckSF<T,T,T>
@@ -91,20 +90,21 @@ namespace Z0
             var clock = counter();
 
             var lhs = (ExcludeZero ? Random.NonZeroSpan<T0>(count) : Random.Span<T0>(count)).ReadOnly();
-            ref readonly var leftIn = ref head(lhs);            
+            ref readonly var leftIn = ref z.first(lhs);            
             
             var rhs = (ExcludeZero ? Random.NonZeroSpan<T1>(count) : Random.Span<T1>(count)).ReadOnly();
-            ref readonly var rightIn = ref head(rhs);
+            ref readonly var rightIn = ref z.first(rhs);
             
-            var dst = Spans.alloc<R>(count);
-            ref var target = ref head(dst);
+            var dst = z.span<R>(count);
+            ref var target = ref z.first(dst);
             
             clock.Start();
+            
             try
             {                
                 apply(g, lhs, rhs, dst);
-                for(var i=0; i<count; i++)
-                    Eq(f.Invoke(skip(in leftIn, i), skip(in rightIn, i)), skip(in target, i));
+                for(var i=0u; i<count; i++)
+                    Eq(f.Invoke(z.skip(leftIn, i), z.skip(rightIn, i)), z.skip(target, i));
             }
             catch(Exception e)
             {

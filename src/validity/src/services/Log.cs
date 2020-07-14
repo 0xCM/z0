@@ -42,21 +42,24 @@ namespace Z0
     {
         public static TestLogPaths The => default;
 
+
+        static FileExtension LogExt => FileExtensions.Log;
+        
         public FilePath LogPath(LogArea area, string basename, FileExtension ext = null)
-            => Settings.LogDir(area) + FileName.Define($"{basename}.{ext ?? DefaultExtension}");
+            => Settings.LogDir(area) + FileName.Define(basename, ext ?? LogExt);
 
         public FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext = null)
-            => Settings.LogDir(area, subdir) + FileName.Define($"{basename}.{ext ?? DefaultExtension}");
+            => Settings.LogDir(area, subdir) + FileName.Define(basename, ext ?? LogExt);
 
         public FilePath Timestamped(LogArea area, string basename, FileExtension ext = null)
-            => Settings.LogDir(area) + FileName.Define($"{basename}.{LogDate}.{ext ?? DefaultExtension}");
+            => Settings.LogDir(area) + FileName.Define($"{basename}.{LogDate}", ext ?? LogExt);
 
         public FilePath UniqueLogPath(LogArea area, string basename, FileExtension ext = null)
         {
             var first = new DateTime(2019,1,1);
             var current = Time.now();
             var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(area, basename, ext, elapsed);
+            return LogPath(area, basename, ext ?? LogExt, elapsed);
         }
 
         public FilePath UniqueLogPath(LogArea area, FolderName subdir, string basename, FileExtension ext = null)
@@ -64,24 +67,21 @@ namespace Z0
             var first = new DateTime(2019,1,1);
             var current = Time.now();
             var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(area, subdir, basename, ext, elapsed);
+            return LogPath(area, subdir, basename, ext ?? LogExt, elapsed);
         }
-
+        
         static FilePath LogPath(LogArea area, string basename, FileExtension ext, long timestamp)
-            => LogDir(area) + FileName.Define($"{basename}.{timestamp}.{ext ?? DefaultExtension}");
+            => LogDir(area) + FileName.Define($"{basename}.{timestamp}", ext);
 
         static FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext, long timestamp)
-            => LogDir(area, subdir) + FileName.Define($"{basename}.{timestamp}.{ext ?? DefaultExtension}");
+            => LogDir(area, subdir) + FileName.Define($"{basename}.{timestamp}.{ext}", ext);
    
         static EnvConfig Settings
             => new EnvConfig();
 
         static long LogDate
             => Date.Today.ToDateKey();
-
-        static FileExtension DefaultExtension
-            => FileExtension.Define("log");
-
+        
         static FolderPath LogDir(LogArea target)        
             => Settings.LogDir(target);
 
@@ -113,7 +113,7 @@ namespace Z0
             }
 
             FilePath LogPath
-                => Paths.Timestamped(Area,Area.ToString().ToLower());
+                => Paths.Timestamped(Area, Area.ToString().ToLower());
 
             void Emit<R>(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)
                 where R : ITabular

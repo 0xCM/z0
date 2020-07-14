@@ -98,6 +98,16 @@ namespace Z0
         public const char LBrace = Chars.LBrace;
 
         /// <summary>
+        /// The ':' character
+        /// </summary>
+        public const char Colon = Chars.Colon;
+
+        /// <summary>
+        /// The ':' character
+        /// </summary>
+        public const char Semicolon = Chars.Semicolon;
+
+        /// <summary>
         /// Indicates that emitted content should overwrite whatever file content may exist
         /// </summary>
         public const FileWriteMode Overwrite = FileWriteMode.Overwrite;

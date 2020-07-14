@@ -17,7 +17,6 @@ namespace Z0
         public static bool blank(string src)
             => proxy.blank(src);
         
-
         /// <summary>
         /// Returns an empty array
         /// </summary>

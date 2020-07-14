@@ -46,8 +46,8 @@ namespace Z0
             => Kind == AppMsgKind.Error;
     }
     
-    public interface IAppMsg<C> : IAppMsg
+    public interface IAppMsg<C> : IAppMsg 
     {
-        new C Content {get; }
+        new C Content {get;}
     }
 }

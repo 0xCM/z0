@@ -166,7 +166,7 @@ namespace Z0
         public bool LeftUnbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == K.LeftOpen &&  Left.Equals(minval<T>());
+            get => Kind == K.LeftOpen && Left.Equals(minval<T>());
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Z0
         public bool RightUnbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == K.RightOpen &&  Right.Equals(maxval<T>());
+            get => Kind == K.RightOpen && Right.Equals(maxval<T>());
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Z0
         public bool Unbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == K.Open &&  Left.Equals(minval<T>()) && Right.Equals(maxval<T>());
+            get => Kind == K.Open && Left.Equals(minval<T>()) && Right.Equals(maxval<T>());
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Left.Equals(default) && Right.Equals(default) && Closed;
+            get => Left.Equals(Right);
         }
 
         /// <summary>

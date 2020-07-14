@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     partial class Structured
     {
@@ -30,11 +30,10 @@ namespace Z0
             where F : IFunc<T,bit>
         {
             var count = dst.Length;
-            ref readonly var input = ref head(src);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in input, i));
+            ref readonly var input = ref first(src);
+            ref var target = ref first(dst);
+            for(var i=0u; i<count; i++)
+                seek(target, i) = f.Invoke(skip(in input, i));
             return dst;
         }
 
@@ -44,14 +43,12 @@ namespace Z0
             where F : IBinaryOp<T>
         {        
             var count = lhs.Length;
-            var dst = span(alloc<T>(count));
-            
-            ref readonly var lSrc = ref head(lhs);
-            ref readonly var rSrc = ref head(rhs);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in lSrc, i), skip(in rSrc, i));
+            var dst = span<T>(count);            
+            ref readonly var lSrc = ref first(lhs);
+            ref readonly var rSrc = ref first(rhs);
+            ref var target = ref first(dst);
+            for(var i=0u; i<count; i++)
+                seek(target, i) = f.Invoke(skip(lSrc, i), skip(rSrc, i));
             return dst;
         }
 
@@ -66,12 +63,11 @@ namespace Z0
             where F : IFunc<T,T,bit>
         {
             var count = dst.Length;
-            ref readonly var lSrc = ref head(lhs);
-            ref readonly var rSrc = ref head(rhs);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in lSrc, i), skip(in rSrc, i));
+            ref readonly var lSrc = ref first(lhs);
+            ref readonly var rSrc = ref first(rhs);
+            ref var target = ref first(dst);
+            for(var i=0u; i<count; i++)
+                seek(target, i) = f.Invoke(skip(lSrc, i), skip(rSrc, i));            
             return dst;
         }
 
@@ -80,13 +76,12 @@ namespace Z0
             where F : IFunc<T0,T1,T2,T3>
         {
             var count = dst.Length;
-            ref readonly var a = ref head(A);
-            ref readonly var b = ref head(B);
-            ref readonly var c = ref head(C);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in a, i), skip(in b, i), skip(in c, i));
+            ref readonly var a = ref first(A);
+            ref readonly var b = ref first(B);
+            ref readonly var c = ref first(C);
+            ref var target = ref first(dst);
+            for(var i=0u; i<count; i++)
+                seek(target, i) = f.Invoke(skip(a, i), skip(b, i), skip(c, i));            
             return dst;
         }        
 
@@ -95,12 +90,11 @@ namespace Z0
             where F : IFunc<T0,T1,T2>
         {
             var count = dst.Length;
-            ref readonly var lSrc = ref head(lhs);
-            ref readonly var rSrc = ref head(rhs);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in lSrc, i), skip(in rSrc, i));
+            ref readonly var lSrc = ref first(lhs);
+            ref readonly var rSrc = ref first(rhs);
+            ref var target = ref first(dst);
+            for(var i=0u; i<count; i++)
+                seek(target, i) = f.Invoke(skip(lSrc, i), skip(rSrc, i));            
             return dst;
         }        
 
@@ -109,11 +103,10 @@ namespace Z0
             where F : IFunc<T1,T2>
         {
             var count = dst.Length;
-            ref readonly var input = ref head(src);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in input, i));
+            ref readonly var input = ref first(src);
+            ref var target = ref first(dst);
+            for(var i=0u; i<count; i++)
+                seek(target, i) = f.Invoke(skip(input, i));            
             return dst;
         }
     }

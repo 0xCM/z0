@@ -6,12 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using static Konst;
     
@@ -34,8 +28,8 @@ namespace Z0
         public static OpIdentity build(string opname, TypeWidth tw, NumericKind k,  bool generic)
         {
             var w = (FixedWidth)tw;
-            var g = generic ? $"{IDI.Generic}" : string.Empty;
-            if(generic && k == NumericKind.None)
+            var g = generic ? $"{IDI.Generic}" : EmptyString;
+            if(generic && k == 0)
                 return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, IDI.Generic));
             else if(w.IsSome())
                 return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}"));

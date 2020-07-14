@@ -42,45 +42,14 @@ namespace Z0
         public readonly bool Displayed;
 
         [MethodImpl(Inline)]
-        public static implicit operator AppMsgData(AppMsg src)
-            => new AppMsgData(src.Content, src.Kind, src.Color, src.Caller, src.CallerFile, src.FileLine, src.Displayed);
-
-        [MethodImpl(Inline)]
-        public static implicit operator AppMsg(AppMsgData src)
-            => AppMsg.Define(src);
-
-        [MethodImpl(Inline)]
-        public AppMsgData(object content, AppMsgKind kind, AppMsgColor color, string caller, FilePath file, int? line, bool displayed)
-        {
-            Content = (content is string s ? (text.blank(s) ? EmptyString  : s) : (content ?? EmptyString));
-            Template = EmptyString;
-            Kind = kind;
-            Color = color;
-            Displayed = displayed;    
-            Source = new AppMsgSource(PartId.None, caller, file, line);
-        }
-
-        [MethodImpl(Inline)]
         public AppMsgData(object content, string template, AppMsgKind kind, AppMsgColor color, bool displayed, AppMsgSource source)
         {
-            Content = (content is string s ? (text.blank(s) ? EmptyString  : s) : (content ?? EmptyString));
+            Content = text.clean(content);
             Template = template;
             Kind = kind;
             Color = color;
             Displayed = displayed;    
             Source = source;
-        }
-
-        [MethodImpl(Inline)]
-        AppMsgData(string content)
-            : this()
-        {
-            Content = content;
-            Template = EmptyString;
-            Kind = default;
-            Color = default;
-            Displayed = default;
-            Source = AppMsgSource.Empty;
         }
 
         /// <summary>
@@ -113,20 +82,16 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content is null || Content is string s && sys.blank(s);
+            get => Content is null || (Content is string s && text.blank(s));
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => IsNonEmptyString(Content) || (Content != null);
+            get => text.nonempty(Content) || (Content != null);
         }
-
+        
         public static AppMsgData Empty 
-            => new AppMsgData(EmptyString);
-
-        [MethodImpl(Inline)]
-        static bool IsNonEmptyString(object o) 
-            => o is string s ? sys.nonempty(s) : false;
+            => new AppMsgData(EmptyString, EmptyString, default, default, false, AppMsgSource.Empty);
     }
 }

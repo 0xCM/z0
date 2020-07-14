@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Konst; 
-    using static Memories;
     using static MSvcHosts;
 
     partial class MSvc
@@ -16,76 +15,76 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Add<T> add<T>(T t = default)
             where T : unmanaged        
-                => default(Add<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Sub<T> sub<T>(T t = default)
             where T : unmanaged        
-                => default(Sub<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Mul<T> mul<T>(T t = default)
             where T : unmanaged        
-                => default(Mul<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Div<T> div<T>(T t = default)
             where T : unmanaged        
-                => default(Div<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static ModOp<T> mod<T>(T t = default)
             where T : unmanaged        
-                => default(ModOp<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static ModMul<T> modmul<T>(T t = default)
             where T : unmanaged        
-                => default(ModMul<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Even<T> even<T>(T t = default)
             where T : unmanaged        
-                => default(Even<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Odd<T> odd<T>(T t = default)
             where T : unmanaged        
-                => default(Odd<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Clamp<T> clamp<T>(T t = default)
             where T : unmanaged        
-                => default(Clamp<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Square<T> square<T>(T t = default)
             where T : unmanaged        
-                => default(Square<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Negate<T> negate<T>(T t = default)
             where T : unmanaged        
-                => default(Negate<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Dec<T> dec<T>(T t = default)
             where T : unmanaged        
-                => default(Dec<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Inc<T> inc<T>(T t = default)
             where T : unmanaged        
-                => default(Inc<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Abs<T> abs<T>(T t = default)
             where T : unmanaged        
-                => default(Abs<T>);
+                => default;
 
         [MethodImpl(Inline)]
         public static Dist<T> dist<T>(T t = default)
             where T : unmanaged        
-                => default(Dist<T>);                 
+                => default;
     }
 }

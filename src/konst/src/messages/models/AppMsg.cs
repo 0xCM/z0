@@ -24,125 +24,118 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static AppMsgSource Source(PartId part, string caller, string file, int? line)        
-            => new AppMsgSource(part, caller, FilePath.Define(file), line);
+            => new AppMsgSource(part, caller, file, line);
+
+        [MethodImpl(Inline)]
+        public static AppMsgSource Source(string caller, string file, int? line)        
+            => new AppMsgSource(PartId.None, caller, file, line);
 
         public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, kind, (AppMsgColor)kind, caller, FilePath.Define(file), line);
+            => new AppMsg(content, kind, (AppMsgColor)kind, caller, file, line);
 
         public static AppMsg NoCaller(object content, AppMsgKind? kind = null)
-            => new AppMsg(content, kind ?? AppMsgKind.Info, (AppMsgColor)(kind ?? AppMsgKind.Info), string.Empty, FilePath.Empty, null);
+            => new AppMsg(content, kind ?? AppMsgKind.Info, (AppMsgColor)(kind ?? AppMsgKind.Info), EmptyString, EmptyString, null);
 
         public static AppMsg SpecificCaller(object content, AppMsgKind kind, string caller, string file = null, int? line = null)
-            => new AppMsg(content, kind, (AppMsgColor)kind,  caller, FilePath.Define(file),line);
+            => new AppMsg(content, kind, (AppMsgColor)kind,  caller, file, line);
 
         public static AppMsg Colorize(object content, AppMsgColor color)
-            => new AppMsg(content, AppMsgKind.Info, color, string.Empty, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Info, color, string.Empty, EmptyString, null);
 
         public static AppMsg Info(object content)
-            => new AppMsg(content, AppMsgKind.Info, AppMsgColor.Green, string.Empty, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Info, AppMsgColor.Green, EmptyString, EmptyString, null);
 
         public static AppMsg Babble(object content)
-            => new AppMsg(content, AppMsgKind.Babble, AppMsgColor.Gray, string.Empty, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Babble, AppMsgColor.Gray, EmptyString, EmptyString, null);
 
         public static AppMsg Warn(object content)
-            => new AppMsg(content, AppMsgKind.Warning, AppMsgColor.Yellow, string.Empty, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Warning, AppMsgColor.Yellow, EmptyString, EmptyString, null);
 
         public static AppMsg Error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => NoCaller($"{content} {caller} {line} {file}", AppMsgKind.Error);
-        
-        public static AppMsg Define(AppMsgData src)
-            => new AppMsg(src.Content, src.Kind, src.Color, src.Caller, src.File, (int)src.Line, src.Displayed);
-        
-        public static AppMsg Empty
-            => new AppMsg(string.Empty, AppMsgKind.Info, AppMsgColor.Unspecified, string.Empty, FilePath.Empty, null);
-
-        internal AppMsg(AppMsgData content)
+                
+        [MethodImpl(Inline)]
+        public AppMsg(AppMsgData src)
         {
-            Data = content;
+            Data = src;
         }
         
-        AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, FilePath file, int? line, bool displayed = false)
+        AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, string file, int? line, bool displayed = false)
         {
-            Data = new AppMsgData(content,kind,color,caller,file,line,displayed);
-            // Content = content ?? string.Empty;
-            // Kind = kind;
-            // Color = color;
-            // Caller =  caller ?? string.Empty;
-            // CallerFile = file;
-            // FileLine = line;
-            // Displayed = displayed;    
+            Data = new AppMsgData(content, EmptyString, kind, color, displayed, Source(caller, file, line));
         }
 
         /// <summary>
         /// The message body
         /// </summary>
-        public object Content => Data.Content;
+        public object Content 
+            => Data.Content;
 
         /// <summary>
         /// The message classification
         /// </summary>
-        public AppMsgKind Kind => Data.Kind;
+        public AppMsgKind Kind 
+            => Data.Kind;
 
         /// <summary>
         /// The message foreground color when rendered for display
         /// </summary>
-        public AppMsgColor Color => Data.Color;
+        public AppMsgColor Color 
+            => Data.Color;
 
         /// <summary>
         /// The name of the member that originated the message
         /// </summary>
-        public string Caller => Data.Caller;
+        public string CallerName 
+            => Data.Caller;
 
         /// <summary>
         /// The path to the source file in which the message originated
         /// </summary>
-        public FilePath CallerFile => Data.File;
+        public FilePath CallerFile 
+            => Data.File;
 
         /// <summary>
         /// The source file line number on which the message originated
         /// </summary>
-        public int? FileLine => (int)Data.Line;
+        public int? FileLine 
+            => (int)Data.Line;
 
         /// <summary>
         /// Specifies whether the message has been emitted to an output device, such as the terminal
         /// </summary>
-        public bool Displayed => Data.Displayed;
+        public bool Displayed 
+            => Data.Displayed;
 
         public bool IsEmpty
-            => Content == null || (Content is string s && text.blank(s));
+            => Data.IsEmpty;
 
         public AppMsg AsError()    
-            => new AppMsg(Content, AppMsgKind.Error, Color, Caller, CallerFile, FileLine, Displayed);
+            => new AppMsg(Content, AppMsgKind.Error, Color, CallerName, CallerFile.Name, FileLine, Displayed);
         
         /// <summary>
         /// Sets the display state to true
         /// </summary>
         public IAppMsg AsDisplayed()
-            => new AppMsg(Content, Kind, Color, Caller, CallerFile, FileLine, true);
+            => new AppMsg(Content, Kind, Color, CallerName, CallerFile.Name, FileLine, true);
         
         public string Format()
         {
             if(IsEmpty)
-                return string.Empty;
-
-            var formatted = string.Empty;
-            
-            if(!string.IsNullOrWhiteSpace(Caller))
-                formatted += $"{Caller}(";
-
-            if(CallerFile.IsNonEmpty)
-                formatted += (Kind != AppMsgKind.Error) ? $"File: {CallerFile.FileName.Name}" : $"File: {CallerFile.Name}";                        
-
-            if(FileLine != null)
-                formatted += $", Line: {FileLine}";
-
-            if(!string.IsNullOrWhiteSpace(Caller))
-                formatted += ")";
-            
-            return string.IsNullOrWhiteSpace(formatted) ? $"{Content}" : $"{formatted.Trim()} | {Content}" ;
+                return EmptyString;
+            else
+            {
+                if(Data.Source.IsEmpty)
+                    return text.format(Data.Content);
+                else
+                    return text.concat(Data.Source.Format(), " | ", Data.Content);
+            }
         }
         
         public override string ToString()
             => Format();
+
+        public static AppMsg Empty
+            => new AppMsg(EmptyString, AppMsgKind.Info, AppMsgColor.Unspecified, EmptyString, EmptyString, null);
     }
 }

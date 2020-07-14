@@ -144,7 +144,12 @@ namespace Z0
             where T : unmanaged
         {
             var segcount = BitCalcs.mincells<T>((ulong)bitcount);
+
+            if(DiagnosticMode)
+                term.print($"Executing {caller()}: {bitcount} bits covered by {segcount} segments of kind {typeof(T).DisplayName()}");
+
             var src = Random.Span<T>(RepCount);
+                        
             for(var i=0; i<RepCount; i += segcount)
             {
                 var data = src.Slice(i, segcount);

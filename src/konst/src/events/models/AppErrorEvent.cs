@@ -19,7 +19,7 @@ namespace Z0
          
         [MethodImpl(Inline)]
         public AppErrorEvent(AppMsg description)
-            => Description = description;
+            => Description = description.Data;
 
         [MethodImpl(Inline)]
         public AppErrorEvent(AppMsgData description)
@@ -27,11 +27,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public AppErrorEvent(Exception e)
-            => Description = AppMsg.NoCaller(e,AppMsgKind.Error);
+            => Description = AppMsg.NoCaller(e,AppMsgKind.Error).Data;
 
         [MethodImpl(Inline)]
         public AppErrorEvent(string description)
-            => Description = AppMsg.NoCaller(description, AppMsgKind.Error);
+            => Description = AppMsg.NoCaller(description, AppMsgKind.Error).Data;
 
         public bool IsEmpty 
         {
@@ -52,7 +52,7 @@ namespace Z0
             => AppMsgColor.Red;
         
         public AppMsg Message
-            => Description;
+            => new AppMsg(Description);
 
         public string Format()
             => Message.Format();

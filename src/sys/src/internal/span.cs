@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Options), Opaque(AllocSpan), Closures(Closure)]
         public static Span<T> span<T>(int count)
-            => alloc<T>(count);
+            => new T[count];
 
         [MethodImpl(Options), Opaque(EnumerableToSpan), Closures(Closure)]
         public static Span<T> span<T>(IEnumerable<T> src)

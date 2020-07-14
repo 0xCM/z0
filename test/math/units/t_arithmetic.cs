@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static Memories;
@@ -17,6 +18,9 @@ namespace Z0
         public void add_check()
         {
             const string name = "add";
+
+            if(DiagnosticMode)            
+                term.print(text.concat("Executing", Space, name));
 
             add_check(S.binary(math.add, name, z8));
             add_check(S.binary(math.add, name, z8i));
@@ -33,11 +37,17 @@ namespace Z0
         [MethodImpl(Inline)]
         void add_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
-        {
+        {            
+            if(DiagnosticMode)            
+                term.print(text.concat("Executing", Space, caller(), $"[{typeof(T).DisplayName()}]"));
+
             var g = MSvc.add(t);
             var validator = this.BinaryOpMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
+
+            if(DiagnosticMode)            
+                term.print(text.concat("Execututed", Space, caller(), $"[{typeof(T).DisplayName()}]"));
         }
         
         public void sub_check()

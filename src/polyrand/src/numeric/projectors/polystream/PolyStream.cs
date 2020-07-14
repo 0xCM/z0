@@ -48,7 +48,6 @@ namespace Z0
             return PolyStream.create(produce(), random.RngKind);
         }
 
-
         /// <summary>
         /// Creates a stream predicated on a specified source over which a filter is applied
         /// </summary>
@@ -62,6 +61,7 @@ namespace Z0
             var next = default(T);    
             var tries = 0;
             var tryMax = 10;
+            
             while(true)            
             {
                 next = src.Next<T>(domain);

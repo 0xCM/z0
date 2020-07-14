@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static Structured;
 
     readonly struct CheckUnaryOpSF<T> : ICheckSF<T,T>
@@ -71,17 +71,17 @@ namespace Z0
             var clock = counter();
 
             var lhs = (ExcludeZero ? Random.NonZeroSpan<T>(count) : Random.Span<T>(count)).ReadOnly();
-            ref readonly var leftIn = ref head(lhs);                        
+            ref readonly var leftIn = ref first(lhs);                        
             
-            var dst = Spans.alloc<R>(count);
-            ref var target = ref head(dst);
+            var dst = span<R>(count);
+            ref var target = ref first(dst);
             
             clock.Start();
             try
             {
                 apply(g, lhs, dst);
-                for(var i=0; i<count; i++)
-                    Eq(f.Invoke(skip(in leftIn, i)), skip(in target, i));
+                for(var i=0u; i<count; i++)
+                    Eq(f.Invoke(skip(leftIn, i)), skip(target, i));
             }
             catch(Exception e)
             {

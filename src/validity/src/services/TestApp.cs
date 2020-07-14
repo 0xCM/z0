@@ -20,7 +20,17 @@ namespace Z0
     public abstract class TestApp<A> : TestContext<A>
         where A : TestApp<A>, new()
     {
-        protected IAppMsgSink Log => this.MessageLog();
+        const bool InDiagnosticMode = false;
+        
+        public static void Run(params string[] args)
+        {
+            var app = new A();            
+            app.SetMode(InDiagnosticMode);            
+            app.RunTests();
+        }
+
+        protected IAppMsgSink Log 
+            => this.MessageLog();
         
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}
             = new ConcurrentQueue<TestCaseRecord>();
@@ -75,8 +85,61 @@ namespace Z0
             return true;
         }
 
+        Duration ExecCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> cases)
+        {
+
+            var exectime = Duration.Zero;
+            var casename = OpUriBuilder.TestCase(method);
+
+            var clock = counter(false);
+
+            var collected = new List<IAppMsg>();
+            try
+            {
+                if(DiagnosticMode)
+                    term.print($"Executing case {unit.HostType.Name}/{method.Name}");            
+
+                var tsStart = Time.now();
+                collected.Add(PreCase(casename, tsStart));
+
+                clock.Start();
+                method.Invoke(unit,null);                    
+                clock.Stop();
+
+                collected.AddRange(unit.Dequeue());
+                collected.Add(PostCase(casename, clock.Time, tsStart, Time.now()));
+                
+                var outcomes = unit.TakeOutcomes().ToArray();
+                if(outcomes.Length != 0)
+                    cases.WithItems(outcomes);
+                else
+                    cases.Add(TestCaseRecord.Define(casename, true, clock.Time));
+
+                if(DiagnosticMode)
+                    term.print($"Executed case {unit.HostType.Name}/{method.Name}");            
+
+            }
+            catch(Exception e)
+            {                
+                clock.Stop();
+                collected.AddRange(unit.Dequeue());                
+                collected.AddRange(CreateErrorMessages(e, method));
+                cases.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
+            }
+            finally
+            {                     
+                Log.Deposit(collected);                
+                Root.iter(collected.Where(m => !m.Displayed), term.print);
+            }
+
+            return exectime;
+        }            
+
         void Run(Type host, IUnitTest unit)
         {
+            if(DiagnosticMode)
+                term.print($"Executing {host.DisplayName()} cases");
+
             var results = new List<TestCaseRecord>();
             try
             {
@@ -89,7 +152,7 @@ namespace Z0
                 else
                 {                    
                     Root.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));   
-                    PostBenchResult(unit.TakeBenchmarks().ToArray());
+                    PostBenchResult(unit.TakeBenchmarks().Array());
                 }
 
                 clock.Stop();
@@ -110,13 +173,17 @@ namespace Z0
 
         public void Run(Type host, string[] filters)
         {        
+            
             if(!HasAny(host,filters))
                 return;            
 
-            using var unit = host.Instantiate<IUnitTest>();
+            using var unit = host.Instantiate<IUnitTest>();  
 
             if(unit.Enabled)
+            {
+                unit.SetMode(DiagnosticMode);          
                 Run(host, unit);            
+            }
         }
 
         const int CasePad = (int)((ulong)TestCaseField.Case >> 32);
@@ -344,48 +411,6 @@ namespace Z0
             }
          }
         
-        Duration ExecCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> cases)
-        {
-            var exectime = Duration.Zero;
-            var casename = OpUriBuilder.TestCase(method);
-
-            var clock = counter(false);
-
-            var collected = new List<IAppMsg>();
-            try
-            {
-                var tsStart = Time.now();
-                collected.Add(PreCase(casename, tsStart));
-
-                clock.Start();
-                method.Invoke(unit,null);                    
-                clock.Stop();
-
-                collected.AddRange(unit.Dequeue());
-                collected.Add(PostCase(casename, clock.Time, tsStart, Time.now()));
-                
-                var outcomes = unit.TakeOutcomes().ToArray();
-                if(outcomes.Length != 0)
-                    cases.WithItems(outcomes);
-                else
-                    cases.Add(TestCaseRecord.Define(casename, true, clock.Time));
-            }
-            catch(Exception e)
-            {                
-                clock.Stop();
-                collected.AddRange(unit.Dequeue());                
-                collected.AddRange(CreateErrorMessages(e, method));
-                //collected.AddRange(CreateErrorMessages(casename, e));
-                cases.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
-            }
-            finally
-            {                     
-                Log.Deposit(collected);                
-                Root.iter(collected.Where(m => !m.Displayed), term.print);
-            }
-
-            return exectime;
-        }            
 
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
@@ -453,8 +478,5 @@ namespace Z0
                 Flush(e, TestLog.Create());
             }
         }
-
-        public static void Run(params string[] args)
-            => new A().RunTests();
     }
 }

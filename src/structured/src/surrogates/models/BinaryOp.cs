@@ -28,19 +28,20 @@ namespace Z0
             [MethodImpl(Inline)]
             internal BinaryOp(Z0.BinaryOp<T> f, OpIdentity id)            
             {
-                this.F = f;
-                this.Id = id;
+                F = f;
+                Id = id;
             }
 
             [MethodImpl(Inline)]
             internal BinaryOp(Z0.BinaryOp<T> f, string name)            
             {
-                this.F = f;
-                this.Id = Identify.sfunc<T>(name);
+                F = f;
+                Id = Identify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => F(a, b);
+            public T Invoke(T a, T b) 
+                => F(a, b);
 
             public Z0.BinaryOp<T> Subject
             {

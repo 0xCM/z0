@@ -45,7 +45,7 @@ namespace Z0
         /// The empty identifier
         /// </summary>
         public static OpIdentity Empty 
-            => Set(string.Empty);
+            => Set(EmptyString);
 
         /// <summary>
         /// Creates a moniker directly from source text

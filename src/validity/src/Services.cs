@@ -9,13 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public static class Validity
-    {
-
-
-    }
-
-    public static class ServiceFactory
+    public static partial class XTend
     {
         [MethodImpl(Inline)]
         public static ICheckSF<T,T> UnaryOpMatch<T>(this ITestContext context, T t = default)

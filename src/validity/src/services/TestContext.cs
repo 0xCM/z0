@@ -19,7 +19,15 @@ namespace Z0
 
     public abstract class TestContext
     {
-        protected IResolvedApi Api => _Api.Value;
+        public bool DiagnosticMode {get; private set;}
+
+        public void SetMode(bool diagnostic)
+        {
+            DiagnosticMode = diagnostic;
+        }
+        
+        protected IResolvedApi Api 
+            => _Api.Value;
 
         static IResolvedApi ComposeApi()
             => ApiComposition.Assemble(Parted.index());
@@ -121,7 +129,7 @@ namespace Z0
         
         public virtual bool Enabled 
             => true;
-
+        
         protected virtual bool TraceDetailEnabled
             => false;
 

@@ -10,6 +10,14 @@ namespace Z0
 
     public static partial class PolySpan
     {
+        public static Span<T> create<T>(IPolyrand random, int length, Interval<T> domain, Func<T,bool> filter = null)
+            where T : unmanaged
+        {
+            var dst = span<T>(length);
+            random.Fill(domain, length, ref first(dst), filter);
+            return dst;
+        }
+
         /// <summary>
         /// Produces a span of random values
         /// </summary>
@@ -20,11 +28,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> Span<T>(this IPolyrand random, int length, Interval<T> domain)
             where T : unmanaged
-        {
-            var dst = span(sys.alloc<T>(length));
-            random.Fill(domain, length, ref first(dst), null);
-            return dst;
-        }
+                => create<T>(random, length, domain);
 
         /// <summary>
         /// Produces a span of random values
@@ -35,7 +39,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static Span<T> Span<T>(this IPolyrand random, int length)
             where T : unmanaged
-                => random.Span<T>(length);
+                => create<T>(random, length, Interval<T>.Full);
 
         /// <summary>
         /// Produces a span of random values constraint to a specified domain
@@ -46,7 +50,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> Span<T>(this IPolyrand random, int length, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => random.Span<T>(length, domain, filter);
+                => create<T>(random, length, domain, filter);
 
         /// <summary>
         /// Produces a span of random values constraint to a specified domain
@@ -57,7 +61,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> Span<T>(this IPolyrand random, int length, T min, T max, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Span<T>(length,(min,max), filter);
+                => create<T>(random, length, (min, max), filter);
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values
@@ -68,7 +72,7 @@ namespace Z0
         public static Span<T> Span<N,T>(this IPolyrand src, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat        
-                => src.Span<T>((int)value(n));
+                => create<T>(src, (int)value(n), Interval<T>.Full);
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values over a specified domain
@@ -79,7 +83,7 @@ namespace Z0
         public static Span<T> Span<N,T>(this IPolyrand src, T min, T max, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat        
-                => src.Span<T>((int)value(n), min, max);
+                => create<T>(src, (int)value(n), (min, max));
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values over a specified domain
@@ -90,18 +94,6 @@ namespace Z0
         public static Span<T> Span<N,T>(this IPolyrand src, Interval<T> domain, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat        
-                => src.Span<T>((int)value(n), domain);
-
-        /// <summary>
-        /// Allocates and produces a readonly span populated with random values
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="length">The length of the produced data</param>
-        /// <param name="domain">An optional domain to which values are constrained</param>
-        /// <param name="filter">An optional filter that refines the domain</param>
-        /// <typeparam name="T">The primal random value type</typeparam>
-        public static ReadOnlySpan<T> ReadOnlySpan<T>(this IPolyrand random, int length, Interval<T> domain)
-            where T : unmanaged
-                => random.Span<T>(length, domain);                
+                => create<T>(src, (int)value(n), domain);
     }
 }
