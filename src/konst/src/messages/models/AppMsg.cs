@@ -5,17 +5,26 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-    
+
     /// <summary>
     /// Defines a message that encapsulates application diagnstic/status/error message content
     /// </summary>
     public class AppMsg : IAppMsg
     {
         public readonly AppMsgData Data;
+
+        [MethodImpl(Inline)]
+        public static AppMsgSource Source(PartId part, string caller, string file, int? line)        
+            => new AppMsgSource(part, caller, FilePath.Define(file), line);
 
         public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsg(content, kind, (AppMsgColor)kind, caller, FilePath.Define(file), line);
@@ -42,11 +51,16 @@ namespace Z0
             => NoCaller($"{content} {caller} {line} {file}", AppMsgKind.Error);
         
         public static AppMsg Define(AppMsgData src)
-            => new AppMsg(src.Content, src.Kind, src.Color, src.Caller, src.CallerFile, src.FileLine, src.Displayed);
+            => new AppMsg(src.Content, src.Kind, src.Color, src.Caller, src.File, (int)src.Line, src.Displayed);
         
         public static AppMsg Empty
             => new AppMsg(string.Empty, AppMsgKind.Info, AppMsgColor.Unspecified, string.Empty, FilePath.Empty, null);
 
+        internal AppMsg(AppMsgData content)
+        {
+            Data = content;
+        }
+        
         AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, FilePath file, int? line, bool displayed = false)
         {
             Data = new AppMsgData(content,kind,color,caller,file,line,displayed);
@@ -82,12 +96,12 @@ namespace Z0
         /// <summary>
         /// The path to the source file in which the message originated
         /// </summary>
-        public FilePath CallerFile => Data.CallerFile;
+        public FilePath CallerFile => Data.File;
 
         /// <summary>
         /// The source file line number on which the message originated
         /// </summary>
-        public int? FileLine => Data.FileLine;
+        public int? FileLine => (int)Data.Line;
 
         /// <summary>
         /// Specifies whether the message has been emitted to an output device, such as the terminal

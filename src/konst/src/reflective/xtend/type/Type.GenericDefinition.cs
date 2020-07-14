@@ -6,11 +6,23 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Konst;
+    using static ReflectionFlags;
+    using static z;
 
     partial class XTend
     {
+        /// <summary>
+        /// Retrieves the values of a type's public instance properties
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <param name="o">The type instance</param>
+        public static IReadOnlyDictionary<string, object> GetPropertyValues(this Type t, object o)
+            => dict(map(MemberPropertyCache.Lookup(o), p => (p.Name, p.GetValue(o))));
 
         /// <summary>
         /// For a generic type or reference to a generic type, retrieves the generic type definition; otherwise, returns none

@@ -16,8 +16,7 @@ namespace Z0
     [ApiHost]
     public partial struct HexMax
     {
-        Vector128<byte> State;
-        
+        Vector128<byte> State;        
 
         [MethodImpl(Inline), Op]
         public void Process(ReadOnlySpan<Hex8Kind> src)

@@ -15,8 +15,6 @@ namespace Z0
     /// </summary>
     public readonly struct CorrelationToken : IIdentifiedType<CorrelationToken>
     {
-        public static CorrelationToken Empty => new CorrelationToken("");
-
         /// <summary>
         /// The key that identifies the value
         /// </summary>
@@ -32,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static CorrelationToken New()
-            => new CorrelationToken(Guid.NewGuid().ToString());
+            => new CorrelationToken(Guid.NewGuid());
 
         [MethodImpl(Inline)]
         public static bool operator==(CorrelationToken a, CorrelationToken b)
@@ -43,9 +41,21 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        CorrelationToken(string value)
+        public CorrelationToken(string value)
         {
-            this.Identifier = value;
+            Identifier = value;
+        }
+
+        [MethodImpl(Inline)]
+        public CorrelationToken(Guid value)
+        {
+            Identifier = value.ToString();
+        }
+
+        [MethodImpl(Inline)]
+        public CorrelationToken(object value)
+        {
+            Identifier = text.format(value);
         }
 
         public bool IsEmpty 
@@ -67,5 +77,8 @@ namespace Z0
 
         public override bool Equals(object obj)
             => equals(this, obj);
+
+        public static CorrelationToken Empty 
+            => new CorrelationToken("");
     }
 }

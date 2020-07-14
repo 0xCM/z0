@@ -477,7 +477,22 @@ namespace Z0
         /// <param name="second">THe second character to match</param>
         public static (int first, int second) indices(string src, string first, string second)
             => (src.IndexOf(first), src.IndexOf(second));
+    
+        /// <summary>
+        /// Functional equivalalent of <see cref="string.Join(string, object[])"/>
+        /// </summary>
+        /// <param name="values">The values to be rendered as text</param>
+        /// <param name="sep">The item delimiter</param>
+        public static string join<T>(string sep, IEnumerable<T> values)
+            => string.Join(sep, values);
 
+        /// <summary>
+        /// Functional equivalalent of <see cref="string.Join(char, object[])"/>
+        /// </summary>
+        /// <param name="values">The values to be rendered as text</param>
+        /// <param name="sep">The item delimiter</param>
+        public static string join<T>(char sep, IEnumerable<T> values)
+            => string.Join(sep, values);
 
         /// <summary>
         /// If fenced with specified left and right characters, extracts the enclosed content; otherwise, returns the content unmolested
@@ -586,7 +601,7 @@ namespace Z0
         /// </summary>
         /// <param name="rest">The formattables to be rendered and concatenated</param>
         public static string format(object first, params object[] rest)
-            => first.ToString() + concat(rest.Select(x => x.ToString()));
+            => (first?.ToString() ?? EmptyString) + concat(rest.Select(x => x.ToString()));
         
         /// <summary>
         /// Returns the substring [0,chars-1]

@@ -45,4 +45,9 @@ namespace Z0
         bool IsError 
             => Kind == AppMsgKind.Error;
     }
+    
+    public interface IAppMsg<C> : IAppMsg
+    {
+        new C Content {get; }
+    }
 }

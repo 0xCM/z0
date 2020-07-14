@@ -17,6 +17,11 @@ namespace Z0
         public readonly object Content;
 
         /// <summary>
+        /// Defines a content render pattern, if applicable
+        /// </summary>
+        public readonly string Template;
+
+        /// <summary>
         /// The message classification
         /// </summary>
         public readonly AppMsgKind Kind;
@@ -27,19 +32,9 @@ namespace Z0
         public readonly AppMsgColor Color;
 
         /// <summary>
-        /// The name of the member that originated the message
+        /// Specifies the emitting executable part
         /// </summary>
-        public readonly string Caller;
-
-        /// <summary>
-        /// The path to the source file in which the message originated
-        /// </summary>
-        public readonly FilePath CallerFile;
-
-        /// <summary>
-        /// The source file line number on which the message originated
-        /// </summary>
-        public readonly int? FileLine;
+        public readonly AppMsgSource Source;
 
         /// <summary>
         /// Specifies whether the message has been emitted to an output device, such as the terminal
@@ -58,12 +53,22 @@ namespace Z0
         public AppMsgData(object content, AppMsgKind kind, AppMsgColor color, string caller, FilePath file, int? line, bool displayed)
         {
             Content = (content is string s ? (text.blank(s) ? EmptyString  : s) : (content ?? EmptyString));
+            Template = EmptyString;
             Kind = kind;
             Color = color;
-            Caller =  caller ?? EmptyString;
-            CallerFile = file ?? FilePath.Empty;
-            FileLine = line;
             Displayed = displayed;    
+            Source = new AppMsgSource(PartId.None, caller, file, line);
+        }
+
+        [MethodImpl(Inline)]
+        public AppMsgData(object content, string template, AppMsgKind kind, AppMsgColor color, bool displayed, AppMsgSource source)
+        {
+            Content = (content is string s ? (text.blank(s) ? EmptyString  : s) : (content ?? EmptyString));
+            Template = template;
+            Kind = kind;
+            Color = color;
+            Displayed = displayed;    
+            Source = source;
         }
 
         [MethodImpl(Inline)]
@@ -71,7 +76,38 @@ namespace Z0
             : this()
         {
             Content = content;
-            CallerFile = FilePath.Empty;
+            Template = EmptyString;
+            Kind = default;
+            Color = default;
+            Displayed = default;
+            Source = AppMsgSource.Empty;
+        }
+
+        /// <summary>
+        /// The name of the member that originated the message
+        /// </summary>
+        public string Caller 
+        {
+            [MethodImpl(Inline)]
+            get => Source.Caller;
+        }
+        
+        /// <summary>
+        /// The path to the source file in which the message originated
+        /// </summary>
+        public FilePath File 
+        {
+            [MethodImpl(Inline)]
+            get => Source.File;
+        }
+
+        /// <summary>
+        /// The source file line number on which the message originated
+        /// </summary>
+        public uint Line 
+        {
+            [MethodImpl(Inline)]
+            get => Source.Line;
         }
 
         public bool IsEmpty
@@ -88,7 +124,6 @@ namespace Z0
 
         public static AppMsgData Empty 
             => new AppMsgData(EmptyString);
-
 
         [MethodImpl(Inline)]
         static bool IsNonEmptyString(object o) 

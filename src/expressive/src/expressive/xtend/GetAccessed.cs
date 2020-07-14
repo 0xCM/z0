@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="M">The member type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
         public static string GetValueMemberName<T,M>(this Expression<Func<T,M>> selector)
-            => selector.GetValueMember().Name;
+            => selector.GetDataMember().Name;
 
         /// <summary>
         /// Extracts property info from a member expression, if possbile, and otherwise returns null

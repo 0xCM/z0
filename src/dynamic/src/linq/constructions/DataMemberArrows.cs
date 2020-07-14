@@ -10,21 +10,20 @@ namespace Z0.Dynamics
     using System.Linq;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Defines a collection of directed member associations
     /// </summary>
     /// <typeparam name="S">The source type</typeparam>
     /// <typeparam name="T">The target type</typeparam>
-    public sealed class MemberAssociations<S,T> : IEnumerable<MemberAssociation>
+    public sealed class DataMemberArrows<S,T> : IEnumerable<DataMemberArrow>
     {
-        HashSet<MemberAssociation> Associations { get; }
+        HashSet<DataMemberArrow> Associations { get; }
 
-        public MemberAssociations(IEnumerable<MemberAssociation> associations)
+        public DataMemberArrows(IEnumerable<DataMemberArrow> associations)
             => Associations = associations.ToHashSet();
 
-        public IEnumerator<MemberAssociation> GetEnumerator()
+        public IEnumerator<DataMemberArrow> GetEnumerator()
             => Associations.GetEnumerator();
         
         IEnumerator IEnumerable.GetEnumerator()

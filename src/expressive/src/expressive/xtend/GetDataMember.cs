@@ -22,12 +22,12 @@ namespace Z0
             => XQuery.member(selector);
 
         /// <summary>
-        /// Extracts the <see cref="ValueMember"/> for the member referenced by a an expression delegate
+        /// Extracts the <see cref="DataMember"/> for the member referenced by a an expression delegate
         /// </summary>
         /// <typeparam name="T">The member selector</typeparam>
         /// <typeparam name="M">The member type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
-        public static ValueMember GetValueMember<T,M>(this Expression<Func<T,M>> selector)
+        public static DataMember GetDataMember<T,M>(this Expression<Func<T,M>> selector)
         {
             var property = selector.GetProperty();
             if (property != null)
