@@ -61,7 +61,7 @@ namespace Z0
                 => measured(src,gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count - 1)));
 
         /// <summary>
-        /// Partitions an interval predicated on partition count
+        /// Partitions an interval predicated on a specified partition count
         /// </summary>
         /// <param name="src">The source interval</param>
         /// <param name="count">The number of partitions</param>
@@ -71,7 +71,7 @@ namespace Z0
                 => width(src,gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count)));
 
         /// <summary>
-        /// Partiions an invterval predicated on partition width
+        /// Partitions an interval predicated on a specified partition width
         /// </summary>
         /// <param name="src">The source interval</param>
         /// <param name="width">The partition width</param>

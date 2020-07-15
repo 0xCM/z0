@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Represents one or more occurrence of a value within an interval
@@ -17,25 +18,25 @@ namespace Z0
     public struct Bin<T>
         where T : unmanaged
     {
-        int Counter;
+        internal int Counter;
 
-        public readonly Interval<T> Domain;
+        public readonly ClosedInterval<T> Domain;
 
         [MethodImpl(Inline)]
-        public static Bin<T> operator ++(Bin<T> src)
+        public static Bin<T> operator ++(in Bin<T> src)
             => src.Increment();
 
         [MethodImpl(Inline)]
-        public Bin(in Interval<T> domain, int count = 0)
+        public Bin(in ClosedInterval<T> domain, uint count = 0)
         {
             Domain = domain;
-            Counter = count;
+            Counter = (int)count;
         }
 
-        public int Count 
+        public uint Count 
         {
             [MethodImpl(Inline)]
-            get => Counter;
+            get => (uint)Counter;
         }
 
         public string Format()
@@ -43,10 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Bin<T> Increment()
-        {
-            Interlocked.Increment(ref Counter);
-            return this;
-        }
+            => Intervals.next(this);
 
         public override string ToString()
             => Format();
