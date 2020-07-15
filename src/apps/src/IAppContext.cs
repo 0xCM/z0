@@ -15,6 +15,11 @@ namespace Z0
     {        
         IAppMsgQueue MessageQueue {get;}
                 
+        S Service<S>()                
+            => default;
+        
+        S LoadSettings<S>(FileName name)
+            => default;
         Action<IAppMsg> MessageRelay 
             => (e => {});
 

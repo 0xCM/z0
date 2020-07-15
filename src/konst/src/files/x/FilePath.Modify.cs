@@ -6,6 +6,8 @@ namespace Z0
 {
     using System.IO;
 
+    using static Konst;
+
     partial class XTend
     {
         /// <summary>
@@ -13,37 +15,31 @@ namespace Z0
         /// </summary>
         /// <param name="src">The file path</param>
         public static string ReadText(this FilePath src)
-            => src.Exists ? File.ReadAllText(src.Name) : string.Empty;
+            => FileSystem.ReadText(src);
 
         /// <summary>
         /// Reads the line-partitioned content of a text file
         /// </summary>
         /// <param name="src">The file path</param>
         public static string[] ReadLines(this FilePath src)
-            => src.Exists ? File.ReadAllLines(src.FullPath) : sys.empty<string>();
+            => FileSystem.ReadLines(src);
 
         /// <summary>
         /// Reads the full content of a file into a byte array
         /// </summary>
         /// <param name="src">The file path</param>
         public static byte[] ReadBytes(this FilePath src)
-            => src.Exists ? File.ReadAllBytes(src.FullPath) : sys.empty<byte>();
+            => FileSystem.ReadBytes(src);
 
         /// <summary>
         /// Deletes the file if it exists
         /// </summary>
         /// <param name="src">The path to the file</param>
         public static void Delete(this FilePath src)
-        {
-            if(src.Exists)
-                File.Delete(src.FullPath);
-        }
+            => FileSystem.delete(src);
 
         public static FilePath CreateParentIfMissing(this FilePath src)
-        {
-            reify(src.FolderPath);
-            return src;
-        }
+            => FileSystem.CreateParent(src);
 
         public static void Append(this FilePath dst, params string[] src)
         {
@@ -69,15 +65,8 @@ namespace Z0
 
         static FilePath reifyParent(FilePath src)
         {
-            reify(src.FolderPath);
+            FileSystem.create(src.FolderPath);
             return src;
-        }
-
-        static FolderPath reify(FolderPath dst)
-        {   
-            if(!Directory.Exists(dst.Name)) 
-                Directory.CreateDirectory(dst.Name);
-            return dst;
         }
     }
 }

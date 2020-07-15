@@ -23,6 +23,10 @@ namespace Z0
         public readonly AppMsgData Data;
 
         [MethodImpl(Inline)]
+        public static AppMsg<C> Parametric<C>(string template, C content, AppMsgKind kind = AppMsgKind.Info, AppMsgColor color = AppMsgColor.Green)
+            => new AppMsg<C>(new AppMsgData(content, template, kind, color, false, AppMsgSource.Empty));
+
+        [MethodImpl(Inline)]
         public static AppMsgSource Source(PartId part, string caller, string file, int? line)        
             => new AppMsgSource(part, caller, file, line);
 

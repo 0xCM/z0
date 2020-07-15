@@ -18,6 +18,14 @@ namespace Z0
     public partial class FolderPath : IPathComponent<FolderPath>
     {        
         /// <summary>
+        /// Expects that the source is prametrized by one or more variables identified by $(VarName)
+        /// </summary>
+        /// <param name="src"></param>
+        /// <returns></returns>
+        public static FolderPath Parametric(string src)
+            => FolderPath.Define(src);
+        
+        /// <summary>
         /// The full path name
         /// </summary>
         public string Name {get;}
@@ -132,6 +140,12 @@ namespace Z0
         public FilePath[] Files(FileExtension ext)
             => Exists.IfSome(() => Directory.GetFiles(Name, ext.SearchPattern).Map(FilePath.Define), FilePath.None);
 
+        public FilePath[] Files(string pattern, SearchOption options)
+            =>  Directory.EnumerateFiles(Name, pattern, options).Select(x => FilePath.Define(pattern)).Array();
+        
+        public FilePath[] Files(FileName name)
+            => Exists.IfSome(() => Directory.GetFiles(Name, $"{name}").Map(FilePath.Define), FilePath.None);
+
         /// <summary>
         /// Nonrecursively enumerates part-owned folder files
         /// </summary>
@@ -155,6 +169,15 @@ namespace Z0
         /// <param name="recursive">Whether to enumerate recursively</param>
         public IEnumerable<FilePath> Files(FileExtension ext, bool recursive)        
             => recursive ? Recurse(ext) : Files(ext);
+
+        /// <summary>
+        /// Enumerates files in the folder, with optional recursion, that match a specified extension
+        /// </summary>
+        /// <param name="ext">The extension to match</param>
+        /// <param name="recursive">Whether to enumerate recursively</param>
+        public IEnumerable<FilePath> Files(FileName name, bool recursive)        
+            => recursive ? Recurse(name) : Files(name);
+
 
         /// <summary>
         /// Nonrecursively enumerates folder files owned by a specified part
@@ -199,6 +222,12 @@ namespace Z0
                from f in d.Files(ext)
                 where f.OwnedBy(owner)
                select f;
+
+
+        IEnumerable<FilePath> Recurse(FileName name)        
+            => from d in (One).Union(SubDirs)
+               from f in d.Files(name)
+                  select f;
 
         [MethodImpl(Inline)]
         public bool Equals(FolderPath src)

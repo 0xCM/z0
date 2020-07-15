@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     
     partial class FolderPath
-    {
+    {        
         /// <summary>
         /// Consigns the folder and its contents to oblivion
         /// </summary>
