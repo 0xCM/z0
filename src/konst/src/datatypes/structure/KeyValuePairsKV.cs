@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">The key type</typeparam>
     /// <typeparam name="V">The value type</typeparam>
-    public readonly struct HashTable<K,V> : IHashTable<K,V>
+    public readonly struct KeyValuePairs<K,V> : IKeyValuePairs<K,V>
     {        
         public K[] Keys {get;}
 
@@ -73,7 +73,7 @@ namespace Z0
         public bool TryGetKeys(V value, out K[] keys)
             => IndexedValues.TryGetValue(value, out keys);
 
-        HashTable(int i)
+        KeyValuePairs(int i)
         {
             KeyedValues = new Dictionary<K,V>();
             ValueSet = new HashSet<V>();
@@ -82,7 +82,7 @@ namespace Z0
             Values = Array.Empty<V>();
         }
         
-        public HashTable(IReadOnlyDictionary<K,V> data)
+        public KeyValuePairs(IReadOnlyDictionary<K,V> data)
         {
             KeyedValues = data;
             Keys = data.Keys.ToArray();
@@ -92,7 +92,7 @@ namespace Z0
             IndexedValues = valueIndex;
         }
 
-        public HashTable(Dictionary<K,V> data)
+        public KeyValuePairs(Dictionary<K,V> data)
         {
             KeyedValues = data;
             Keys = data.Keys.ToArray();
@@ -116,7 +116,7 @@ namespace Z0
         /// <summary>
         /// A hashtable that hashes nothing
         /// </summary>
-        public static HashTable<K,V> Empty 
-            => new HashTable<K,V>(0);
+        public static KeyValuePairs<K,V> Empty 
+            => new KeyValuePairs<K,V>(0);
     }
 }

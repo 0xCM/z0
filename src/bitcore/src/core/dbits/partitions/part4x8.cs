@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Konst;
-    using static As;
+    using static z;
        
     partial class Bits
     { 
-
         /// <summary>
         /// Partitions a 32-bit source value into 4 segments of width 8
         /// </summary>

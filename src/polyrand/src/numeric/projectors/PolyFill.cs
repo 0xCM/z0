@@ -44,5 +44,7 @@ namespace Z0
             while(it.MoveNext())
                 seek(dst, counter++) = it.Current;
         }
+
+
     }
 }

@@ -18,11 +18,11 @@ namespace Z0
         /// <param name="cols">The grid col count</param>
         /// <param name="w">The storage cell width</param>
         [MethodImpl(Inline), Op]
-        public static int count(ulong rows, ulong cols, int w)
+        public static uint count(uint rows, uint cols, uint w)
         {
-            var sz = (int)bytes(rows, cols);
-            var segbytes = w / 8;
-            var segs = sz/segbytes + (sz % segbytes != 0 ? 1 : 0);            
+            var sz = (uint)bytes(rows, cols);
+            var segbytes = w / 8u;
+            var segs = sz/segbytes + (sz % segbytes != 0u ? 1u : 0u);            
             return segs;
         }
     }

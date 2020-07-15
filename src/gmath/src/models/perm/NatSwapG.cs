@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a transposition in the context of a permutation of natural length
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSwap<N,T> operator ++(in NatSwap<N,T> src)
         {
-            ref var dst = ref refs.edit(in src);
+            ref var dst = ref edit(src);
             dst.i++;
             dst.j++;
             return dst;
@@ -101,7 +101,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSwap<N,T> operator --(in NatSwap<N,T> src)
         {
-            ref var dst = ref refs.edit(in src);
+            ref var dst = ref edit(src);
             if(src.i != 0)
                 dst.i--;
             if(src.j != 0)
@@ -127,8 +127,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatSwap((T i, T j) src)
         {
-            this.i = convert<T,uint>(src.i);
-            this.j = convert<T,uint>(src.j);
+            this.i = Cast.to<T,uint>(src.i);
+            this.j = Cast.to<T,uint>(src.j);
         }
 
         [MethodImpl(Inline)]
@@ -159,8 +159,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Deconstruct(out T i, out T j)
         {
-            i = convert<T>(this.i.State);
-            j = convert<T>(this.j.State);
+            i = Cast.to<T>(this.i.State);
+            j = Cast.to<T>(this.j.State);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="j">The second term index</param>
         [MethodImpl(Inline)]
         public (T i, T j) ToTuple()
-            => (convert<T>(i.State), convert<T>(j.State));
+            => (Cast.to<T>(i.State), Cast.to<T>(j.State));
 
         /// <summary>
         /// Creates a copy

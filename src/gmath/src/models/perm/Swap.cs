@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a transposition, i.e. a specification for a two-element position exchange
@@ -49,12 +49,12 @@ namespace Z0
             where T : unmanaged
         {
             var len = swaps.Length;
-            ref var srcmem = ref head(src);
+            ref var srcmem = ref first(src);
             ref var swapmem = ref Arrays.head(swaps);
-            for(var k = 0; k < len; k++)
+            for(var k = 0u; k < len; k++)
             {
                 (var i, var j) = skip(in swapmem, k);
-                refs.swap(ref seek(ref srcmem, i), ref seek(ref srcmem, j));
+                z.refswap(ref seek(srcmem, i), ref seek(srcmem, j));
             }
             return src;
         }
@@ -108,7 +108,7 @@ namespace Z0
             if(indices.Length != 2)
                 return Empty;
 
-            var result = Try(() => (Int32.Parse(indices[0]), Int32.Parse(indices[1])));
+            var result = Option.Try(() => (Int32.Parse(indices[0]), Int32.Parse(indices[1])));
             if(result.IsSome())
                 return result.Value();
             else

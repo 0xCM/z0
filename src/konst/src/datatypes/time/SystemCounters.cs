@@ -16,32 +16,53 @@ namespace Z0
     /// <summary>
     /// Defines counter api surface
     /// </summary>
-    [SuppressUnmanagedCodeSecurity]
-    public static unsafe class SystemCounters
+    [ApiHost]
+    public readonly struct SystemCounters
     {
-        public static readonly long CounterFrequency;
+        readonly long Frequency;
+        
+        [MethodImpl(Inline), Op]
+        public static SystemCounters init()
+        {   
+            var f = 0L;        
+            QueryPerformanceFrequency(ref f); 
+            return new SystemCounters(f);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static SystemCounter counter(bool start = false)
+        {
+            var counter = default(SystemCounter);
+            if(start)
+                counter.Start();
+            return counter;
+        }        
+
+        [MethodImpl(Inline)]
+        SystemCounters(long frequency)
+            => Frequency = frequency; 
         
         /// <summary>
         /// Returns the difference between the current Counter value and a prior counter value
         /// </summary>
-        [MethodImpl(Inline)]
-        public static long CounterDelta(in long prior)
+        [MethodImpl(Inline), Op]
+        public static long delta(in long prior)
             => Counter - prior;
 
         /// <summary>
         /// Converts a counter value to milliseconds
         /// </summary>
         /// <param name="count">The count value to convert</param>
-        [MethodImpl(Inline)]
-        public static double CounterMs(in long count)
-            => ((double)count)/((double) CounterFrequency);
+        [MethodImpl(Inline), Op]
+        public double ms(in long count)
+            => ((double)count)/((double) Frequency);
 
         /// <summary>
         /// Gets the current value of the counter
         /// </summary>
         public static long Counter
         {            
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get
             {
                 var count = 0L;
@@ -50,7 +71,7 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref long GetCount(ref long count)
         {
             QueryPerformanceCounter(ref count);
@@ -62,7 +83,7 @@ namespace Z0
         /// </summary>
         public static ulong ThreadCpuCycles 
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get
             {
                 var cycles = 0ul;
@@ -70,11 +91,6 @@ namespace Z0
                     return 0ul;
                 return cycles;
             }
-        }
-
-        static SystemCounters()
-        {
-            QueryPerformanceFrequency(ref CounterFrequency);
         }
         
         [DllImport(Kernel32)]

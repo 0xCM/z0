@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
 
     partial class BitGrid
     {
@@ -506,13 +505,13 @@ namespace Z0
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The segment type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
-        public static BitGrid<T> init<T>(int m, int n, T d = default)
+        public static BitGrid<T> init<T>(uint m, uint n, T d = default)
             where T : unmanaged
         {            
             var w = W256.W;
             var blocks = Z0.Blocks.alloc<T>(w, BitCalcs.tableblocks<T>(w, m, n));
             Z0.Blocks.broadcast(d, blocks);
-            return new BitGrid<T>(blocks,m,n);            
+            return new BitGrid<T>(blocks,(int)m,(int)n);            
         }
 
         /// <summary>

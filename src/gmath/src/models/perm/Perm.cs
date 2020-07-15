@@ -290,7 +290,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm Swap(int i, int j)
         {
-            refs.swap(ref terms[i], ref terms[j]);
+            z.refswap(ref terms[i], ref terms[j]);
             return this;
         }
 
@@ -300,7 +300,7 @@ namespace Z0
         public Perm Swap(params (int i, int j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                refs.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                z.refswap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 
@@ -310,7 +310,7 @@ namespace Z0
         public Perm Apply(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                refs.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                z.refswap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 

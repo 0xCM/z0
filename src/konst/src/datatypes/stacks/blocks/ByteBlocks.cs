@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;    
     using static z;
 
-
     [ApiHost]
     public readonly partial struct ByteBlocks : IApiHost<ByteBlocks>
     {

@@ -68,7 +68,7 @@ namespace Z0
         {
             var grid = BG.alloc(m,n,t);
             var segments = BitCalcs.tablecells(m,n,t);
-            random.Fill(segments, ref grid.Head);
+            random.Fill((int)segments, ref grid.Head);
             return grid;
         }
 
@@ -510,9 +510,9 @@ namespace Z0
         /// <param name="n">The grid col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid<T> BitGrid<T>(this IPolyrand random, int m, int n, T t = default)
+        public static BitGrid<T> BitGrid<T>(this IPolyrand random, uint m, uint n, T t = default)
             where T : unmanaged
-                => random.Fill(Z0.BitGrid.alloc<T>(m,n));
+                => random.Fill(Z0.BitGrid.alloc<T>((int)m,(int)n));
 
         /// <summary>
         /// Fills a caller-supplied generic bitgrid from a random source
@@ -570,7 +570,7 @@ namespace Z0
         public static BitBlock<N,T> BitBlock<N,T>(this IPolyrand random)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BS.load<N,T>(random.Stream<T>().ToSpan(BitCalcs.tablecells<N,N1,T>()));
+                => BS.load<N,T>(random.Stream<T>().ToSpan((int)BitCalcs.tablecells<N,N1,T>()));
 
         /// <summary>
         /// Produces a bitblock over a specified number of bits

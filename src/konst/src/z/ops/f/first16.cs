@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    partial struct As
+    partial struct z
     {
         /// <summary>
         /// Presents the span head as a reference to an unsigned 16-bit integer

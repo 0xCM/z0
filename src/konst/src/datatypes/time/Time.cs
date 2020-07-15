@@ -11,13 +11,13 @@ namespace Z0
 
     using static Konst;
 
-
-    public static class Time
+    [ApiHost]
+    public readonly partial struct Time
     {
         /// <summary>
         /// Right now
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]   
         public static DateTime now()
             => DateTime.Now;
 
@@ -25,15 +25,15 @@ namespace Z0
         /// Creates a new stopwatch and optionally start it
         /// </summary>
         /// <param name="start">Whether to start the new stopwatch</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op]   
         public static Stopwatch stopwatch(bool start = true) 
             => start ? Stopwatch.StartNew() : new Stopwatch();
 
         /// <summary>
         /// Allocates and optionally starts a system counter
         /// </summary>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op]   
         public static SystemCounter counter(bool start = false) 
-            => SystemCounter.Create(start);
+            => SystemCounters.counter(start);
     }
 }

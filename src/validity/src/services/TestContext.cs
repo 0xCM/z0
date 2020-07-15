@@ -259,12 +259,12 @@ namespace Z0
         protected void Trace(ITextual msg)
             => Notify(msg.Format());
 
-       /// <summary>
+        /// <summary> 
         /// Allocates and optionally starts a system counter
         /// </summary>
         [MethodImpl(Inline)]   
         public SystemCounter counter(bool start = false) 
-            => SystemCounter.Create(start);
+            => SystemCounters.counter(start);
 
         /// <summary>
         /// Creates a new stopwatch and optionally start it

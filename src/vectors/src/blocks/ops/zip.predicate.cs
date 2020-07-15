@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     using static Konst;
+    using static z;
 
     partial class SBlock
     {
@@ -17,9 +18,9 @@ namespace Z0
             where F : IBinaryPred128<T>
         {
             var blocks = a.BlockCount;            
-            ref var result = ref refs.head(dst);
-            for(var block = 0; block < blocks; block++)
-                refs.seek(ref result, block) = f.Invoke(a.LoadVector(block), b.LoadVector(block));
+            ref var result = ref first(dst);
+            for(var block = 0; block<blocks; block++)
+                seek(result, block) = f.Invoke(a.LoadVector(block), b.LoadVector(block));
             return dst;
         }
 
@@ -29,9 +30,9 @@ namespace Z0
             where F : IBinaryPred256<T>
         {
             var blocks = a.BlockCount;            
-            ref var result = ref refs.head(dst);
-            for(var block = 0; block < blocks; block++)
-                refs.seek(ref result, block) = f.Invoke(a.LoadVector(block), b.LoadVector(block));
+            ref var result = ref first(dst);
+            for(var block = 0; block<blocks; block++)
+                seek(result, block) = f.Invoke(a.LoadVector(block), b.LoadVector(block));
             return dst;
         }         
     }

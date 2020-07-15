@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="rows">The number of grid rows</param>
         /// <param name="cols">The number of grid columns</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        protected void gbg_bitread_check<T>(int rows, int cols)
+        protected void gbg_bitread_check<T>(uint rows, uint cols)
             where T : unmanaged
         {
             for(var i = 0; i < RepCount; i++)
@@ -100,7 +100,7 @@ namespace Z0
             }
         }
 
-        protected void bg_bitread_bench<T>(int M, int N, SystemCounter counter = default)
+        protected void bg_bitread_bench<T>(uint M, uint N, SystemCounter counter = default)
             where T : unmanaged
         {
             var last = bit.Off;
@@ -157,7 +157,6 @@ namespace Z0
             ReportBenchmark($"gbg_bitwrite_{Identify.numeric<T>()}", CycleCount*M*N, counter);
         }
 
-
         protected void bg_and_check<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged,ITypeNat
             where N : unmanaged,ITypeNat
@@ -167,8 +166,8 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq(gz.BlockCount, BitCalcs.tableblocks(n256,m,n,t));            
-            Claim.eq(gz.CellCount, BitCalcs.tablecells(m,n,t));
+            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks(n256,m,n,t));            
+            Claim.eq((uint)gz.CellCount, BitCalcs.tablecells(m,n,t));
             
             BitGrid.and(gx,gy,gz);
             
@@ -186,8 +185,8 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq(gz.BlockCount, BitCalcs.tableblocks(n256,m,n,t));            
-            Claim.eq(gz.CellCount, BitCalcs.tablecells(m,n,t));
+            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks(n256,m,n,t));            
+            Claim.eq((uint)gz.CellCount, BitCalcs.tablecells(m,n,t));
             
             BitGrid.xor(gx,gy,gz);
             
@@ -195,15 +194,15 @@ namespace Z0
                 Claim.veq(gvec.vxor(gx[block], gy[block]), gz[block]);   
         }
 
-        protected void bg_and_check<T>(int m, int n, T t = default)
+        protected void bg_and_check<T>(uint m, uint n, T t = default)
             where T : unmanaged
         {
             var gx = Random.BitGrid(m,n,t);
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq(gz.BlockCount, BitCalcs.tableblocks<T>(n256,m,n));            
-            Claim.eq(gz.CellCount, BitCalcs.tablecells<T>(m,n));
+            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks<T>(n256,m,n));            
+            Claim.eq((uint)gz.CellCount, BitCalcs.tablecells<T>(m,n));
             
             BitGrid.and(gx,gy,gz);
             
@@ -212,15 +211,15 @@ namespace Z0
 
         }
 
-        protected void bg_xor_check<T>(int m, int n, T t = default)
+        protected void bg_xor_check<T>(uint m, uint n, T t = default)
             where T : unmanaged
         {
             var gx = Random.BitGrid(m,n,t);
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq(gz.BlockCount, BitCalcs.tableblocks<T>(n256,m,n));            
-            Claim.eq(gz.CellCount, BitCalcs.tablecells<T>(m,n));
+            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks<T>(n256,m,n));            
+            Claim.eq((uint)gz.CellCount, BitCalcs.tablecells<T>(m,n));
             
             BitGrid.xor(gx,gy,gz);
             

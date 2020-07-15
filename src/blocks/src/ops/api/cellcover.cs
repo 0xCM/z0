@@ -19,11 +19,11 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int cellcover<T>(W8 w, int cellcount)
+        public static ulong cellcover<T>(W8 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / length<T>(w);
-            return cellcount % length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)length<T>(w);
+            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -34,11 +34,11 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int cellcover<T>(W16 w, int cellcount)
+        public static ulong cellcover<T>(W16 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / length<T>(w);
-            return cellcount % length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)length<T>(w);
+            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -49,11 +49,11 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int cellcover<T>(W32 w, int cellcount)
+        public static ulong cellcover<T>(W32 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / length<T>(w);
-            return cellcount % length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)length<T>(w);
+            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1ul;
         } 
 
         /// <summary>
@@ -64,11 +64,11 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int cellcover<T>(W64 w, int cellcount)
+        public static ulong cellcover<T>(W64 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / length<T>(w);
-            return cellcount % length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)length<T>(w);
+            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -79,11 +79,11 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int cellcover<T>(W128 w, int cellcount)
+        public static ulong cellcover<T>(W128 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / length<T>(w);
-            return cellcount % length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)length<T>(w);
+            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -94,11 +94,11 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int cellcover<T>(W256 w, int cellcount)
+        public static ulong cellcover<T>(W256 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / length<T>(w);
-            return cellcount % length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)length<T>(w);
+            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -109,11 +109,11 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int cellcover<T>(W512 w, int cellcount)
+        public static ulong cellcover<T>(W512 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / length<T>(w);
-            return cellcount % length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)length<T>(w);
+            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>

@@ -117,7 +117,6 @@ namespace Z0
             return load<N,T>(components);
         }
 
-
         /// <summary>
         /// Allocates a block vector of natural length
         /// </summary>
@@ -128,7 +127,7 @@ namespace Z0
         public static Block256<N,T> blockalloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Block256<N,T>.Load(Blocks.square<T>(n256, (int)value(n)));
+                => Block256<N,T>.Load(Blocks.square<T>(n256, value(n)));
         
         /// <summary>
         /// Allocates a block vector optionally filled with a specified value
@@ -140,7 +139,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RowVector256<T> blockalloc<T>(int length)               
             where T : unmanaged
-                => Blocks.cellalloc<T>(n256,length);
+                => Blocks.cellalloc<T>(n256,(ulong)length);
 
         /// <summary>
         /// Loads a vector of natural length from a span that may not be aligned (Allocating if unaligned)
@@ -159,7 +158,7 @@ namespace Z0
         public static Block256<N,T> blockload<N,T>(Block256<T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Block256<N, T>.Load(src);
+                => Block256<N,T>.Load(src);
 
         [MethodImpl(Inline)]
         public static Block256<N,T> blockload<N,T>(NatSpan<N,T> src)

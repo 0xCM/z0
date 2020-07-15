@@ -9,11 +9,8 @@ namespace Z0
         
     using static Konst;        
 
-    using K = Kinds;
-
     partial class Blocks
     {
-
         /// <summary>
         /// Allocates a single 256-bit block over cells of parametric kind
         /// </summary>

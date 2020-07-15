@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var dst = cellalloc<T>(w128,src.CellCount);
+            var dst = cellalloc<T>(w128,(ulong)src.CellCount);
             for(var i=0; i< src.CellCount; i++)
                 dst[i] = Cast.to<S,T>(src[i]);
             return dst;
@@ -40,7 +40,7 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var dst = cellalloc<T>(w256,src.CellCount);
+            var dst = cellalloc<T>(w256,(ulong)src.CellCount);
             for(var i=0; i< src.CellCount; i++)
                 dst[i] = Cast.to<S,T>(src[i]);
             return dst;
@@ -57,7 +57,7 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var dst = cellalloc<T>(w512,src.CellCount);
+            var dst = cellalloc<T>(w512,(ulong)src.CellCount);
             for(var i=0; i< src.CellCount; i++)
                 dst[i] = Cast.to<S,T>(src[i]);
             return dst;

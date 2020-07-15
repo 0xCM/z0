@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface IHashTable<K,V> : IReadOnlyDictionary<K,V>
+    public interface IKeyValuePairs<K,V> : IReadOnlyDictionary<K,V>
     {
         new K[] Keys {get;}
 

@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="n">The square tabular order</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8k)]
-        public static Block8<T> square<T>(W8 w, int n)
+        public static Block8<T> square<T>(W8 w, ulong n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  n*n));
 
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="n">The square tabular order</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8k)]
-        public static Block16<T> square<T>(W16 w, int n)
+        public static Block16<T> square<T>(W16 w, ulong n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  n*n));
 
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="n">The square tabular order</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8k)]
-        public static Block32<T> square<T>(W32 w, int n)
+        public static Block32<T> square<T>(W32 w, ulong n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  n*n));
 
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="n">The square tabular order</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8k)]
-        public static Block64<T> square<T>(W64 w, int n)
+        public static Block64<T> square<T>(W64 w, ulong n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  n*n));
 
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="n">The square tabular order</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8k)]
-        public static Block128<T> square<T>(W128 w, int n)
+        public static Block128<T> square<T>(W128 w, ulong n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  n*n));
 
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="n">The square tabular order</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8k)]
-        public static Block256<T> square<T>(W256 w, int n)
+        public static Block256<T> square<T>(W256 w, ulong n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  n*n));
     }

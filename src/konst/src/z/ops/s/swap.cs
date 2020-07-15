@@ -26,6 +26,20 @@ namespace Z0
         }
 
         /// <summary>
+        /// The canonical swap function
+        /// </summary>
+        /// <param name="lhs">The left value</param>
+        /// <param name="rhs">The right value</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static void refswap<T>(ref T lhs, ref T rhs)
+        {
+            var temp = lhs;
+            lhs = rhs;
+            rhs = temp;
+        }
+
+        /// <summary>
         /// Exchanges operand targets
         /// </summary>
         /// <param name="pLhs"></param>

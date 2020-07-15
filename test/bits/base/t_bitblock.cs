@@ -119,7 +119,7 @@ namespace Z0
         {
             int n = nati<N>();
             var rep = default(N);
-            var segcount = BitCalcs.mincells<T>(value<N>());
+            var segcount = (int)BitCalcs.mincells<T>(value<N>());
             Claim.eq(BitBlock<N,T>.NeededCells, segcount);
             var totalcap = BitBlock<N,T>.RequiredWidth;
             var segcap = bitsize<T>();
@@ -143,7 +143,7 @@ namespace Z0
         protected void bb_create_check<T>(int bitcount)
             where T : unmanaged
         {
-            var segcount = BitCalcs.mincells<T>((ulong)bitcount);
+            var segcount = (int)BitCalcs.mincells<T>((ulong)bitcount);
 
             if(DiagnosticMode)
                 term.print($"Executing {caller()}: {bitcount} bits covered by {segcount} segments of kind {typeof(T).DisplayName()}");

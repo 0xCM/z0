@@ -42,30 +42,30 @@ namespace Z0
             => src.StoreSize % k.Width() == 0;
 
         [MethodImpl(Inline)]
-        public static int remainder(in GridMetrics src, W128 w)
+        public static uint remainder(in GridMetrics src, W128 w)
             => src.StoreSize % 16;
 
         [MethodImpl(Inline)]
-        public static int coverage(in GridMetrics src, W128 w)
+        public static uint coverage(in GridMetrics src, W128 w)
         { 
             var r = remainder(src,w);
             return r != 0 ? r + 1 : r;
         }
 
         [MethodImpl(Inline)]
-        public static int remainder(in GridMetrics src, W256 w)
+        public static uint remainder(in GridMetrics src, W256 w)
             => src.StoreSize % 32;
 
         [MethodImpl(Inline)]
-        public static int coverage(in GridMetrics src, W256 w)
+        public static uint coverage(in GridMetrics src, W256 w)
         { 
             var r = remainder(src,w);
             return r != 0 ? r + 1 : r;
         }
 
         [MethodImpl(Inline)]
-        public static int points(in GridMetrics src)
-            => src.RowCount*src.ColCount;
+        public static uint points(in GridMetrics src)
+            => (uint)(src.RowCount*src.ColCount);
 
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate
@@ -112,17 +112,17 @@ namespace Z0
         /// <summary>
         /// The number of segment-aligned storage segments
         /// </summary>
-        public readonly int CellCount;         
+        public readonly uint CellCount;         
 
         /// <summary>
         /// The number of segment-aligned bits required for storage
         /// </summary>
-        public readonly int StoreWidth;
+        public readonly uint StoreWidth;
 
         /// <summary>
         /// The number of segment-aligned bytes bits required for storage
         /// </summary>
-        public readonly int StoreSize;
+        public readonly uint StoreSize;
          
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate

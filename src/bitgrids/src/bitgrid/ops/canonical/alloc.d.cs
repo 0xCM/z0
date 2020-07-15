@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static z;
     using static Konst;
 
     partial class BitGrid
@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocksize = n256;
-            var blocks = BitCalcs.tableblocks<T>(blocksize, nati(m),nati(n));
+            var blocks = BitCalcs.tableblocks<T>(blocksize, (uint)value(m), (uint)value(n));
             var data = Z0.Blocks.alloc<T>(blocksize, blocks);             
             return new BitGrid<M, N, T>(data);
         }

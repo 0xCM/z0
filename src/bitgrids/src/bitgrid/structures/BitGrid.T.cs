@@ -41,9 +41,9 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitGrid(Block256<T> data, int rows, int cols)
         {
-            this.Data = data;
-            this.RowCount = rows;
-            this.ColCount = cols;
+            Data = data;
+            RowCount = rows;
+            ColCount = cols;
         }
 
         public Block256<T> Content
@@ -64,7 +64,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.tablecells<T>((ulong)RowCount, (ulong)ColCount);
+            get => (int)(BitCalcs.tablecells<T>((uint)RowCount, (uint)ColCount));
         }
 
         /// <summary>

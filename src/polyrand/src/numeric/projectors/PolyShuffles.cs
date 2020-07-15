@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static refs;
+    using static z;
 
     public static class PolyShuffles
     {
@@ -20,8 +20,8 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         public static Span<T> Shuffle<T>(this IPolyrand random, Span<T> src)
         {
-            for (int i = 0; i < src.Length; i++)
-                swap(ref src[i], ref src[i + random.Next(0, src.Length - i)]);
+            for (var i = 0u; i < src.Length; i++)
+                refswap(ref seek(src,i), ref seek(src,(uint)(i + random.Next(0, src.Length - i))));
             return src;
         }
 
@@ -33,8 +33,8 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         public static T[] Shuffle<T>(this IPolyrand random, T[] src)
         {
-            for (int i = 0; i < src.Length; i++)
-                swap(ref src[i], ref src[i + random.Next(0,src.Length - i)]);
+            for (var i = 0u; i < src.Length; i++)
+                refswap(ref src[i], ref src[i + random.Next(0,src.Length - i)]);
             return src;
         }
 

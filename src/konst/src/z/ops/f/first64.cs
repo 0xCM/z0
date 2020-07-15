@@ -11,35 +11,35 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    partial struct As
+    partial struct z
     {
         /// <summary>
-        /// Presents the bytespan head as a reference to an unsigned 32-bit integer
+        /// Presents the span head as a reference to an unsigned 64-bit integer
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref uint first32<T>(Span<T> src)
+        public static ref ulong first64<T>(Span<T> src)
             where T : unmanaged
-                => ref As<T,uint>(ref GetReference(src));
+                => ref first(src.AsUInt64());
 
         /// <summary>
-        /// Presents the span head as a readonly reference to an unsigned 32-bit integer
+        /// Presents the span head as a readonly reference to an unsigned 64-bit integer
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly uint first32<T>(ReadOnlySpan<T> src)
+        public static ref readonly ulong first64<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => ref As<T,uint>(ref GetReference(src));
- 
+                => ref As<T,ulong>(ref GetReference(src));
+
         /// <summary>
-        /// Presents the span head as a reference to a signed 32-bit integer
+        /// Presents the span head as a reference to a signed 64-bit integer
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op]
-        public static ref readonly int first32i(ReadOnlySpan<byte> src)
-            => ref first(src.AsInt32());
+        public static ref readonly long first64i(ReadOnlySpan<byte> src)
+            => ref first(src.AsInt64());                
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines a K-V hashtable manipulation api
     /// </summary>
-    public readonly struct HashTable
+    public readonly struct KeyValuePairs
     {
         /// <summary>
         /// Creates a hashtable from a dictionary
@@ -25,8 +25,8 @@ namespace Z0
         /// <typeparam name="K">The key type</typeparam>
         /// <typeparam name="V">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static HashTable<K,V> Create<K,V>(IReadOnlyDictionary<K,V> src)
-            => new HashTable<K,V>(src);
+        public static KeyValuePairs<K,V> Create<K,V>(IReadOnlyDictionary<K,V> src)
+            => new KeyValuePairs<K,V>(src);
 
         IReadOnlyDictionary<object,object> Data {get;}                
 
@@ -35,10 +35,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The kvp sequence, hopefully</param>
         [MethodImpl(Inline)]
-        internal static HashTable Create(IEnumerable src)        
-            => new HashTable(src);
+        internal static KeyValuePairs Create(IEnumerable src)        
+            => new KeyValuePairs(src);
         
-        HashTable(IEnumerable src)
+        KeyValuePairs(IEnumerable src)
         {
             var enumerator = src.GetEnumerator();
             var isFirst = true;

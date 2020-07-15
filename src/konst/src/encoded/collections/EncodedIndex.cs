@@ -13,17 +13,17 @@ namespace Z0
 
     public readonly struct EncodedIndex : IEncodedIndex
     {
-        readonly HashTable<MemoryAddress,MemberCode> MemoryTable;
+        readonly KeyValuePairs<MemoryAddress,MemberCode> MemoryTable;
         
-        readonly HashTable<MemoryAddress,OpUri> MemoryUri; 
+        readonly KeyValuePairs<MemoryAddress,OpUri> MemoryUri; 
 
         readonly Dictionary<ApiHostUri,MemberCode[]> HostCode;
 
         public PartId[] Parts {get;}
 
         public EncodedIndex(PartId[] parts, 
-            HashTable<MemoryAddress,MemberCode> members, 
-            HashTable<MemoryAddress,OpUri> memuri, 
+            KeyValuePairs<MemoryAddress,MemberCode> members, 
+            KeyValuePairs<MemoryAddress,OpUri> memuri, 
             Dictionary<ApiHostUri,MemberCode[]> hostcode
             )
         {
@@ -109,8 +109,8 @@ namespace Z0
 
         EncodedIndex(int i)
         {
-            MemoryTable = HashTable<MemoryAddress,MemberCode>.Empty;
-            MemoryUri = HashTable<MemoryAddress,OpUri>.Empty;
+            MemoryTable = KeyValuePairs<MemoryAddress,MemberCode>.Empty;
+            MemoryUri = KeyValuePairs<MemoryAddress,OpUri>.Empty;
             HostCode = new Dictionary<ApiHostUri, MemberCode[]>();
             Parts = sys.empty<PartId>();
         }

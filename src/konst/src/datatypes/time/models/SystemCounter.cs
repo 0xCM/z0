@@ -14,20 +14,11 @@ namespace Z0
     /// </summary>
     public struct SystemCounter
     {
-        long total;
+        internal long Total;
 
-        long started;
+        internal long Started;
 
-        bool running;
-
-        [MethodImpl(Inline)]
-        public static SystemCounter Create(bool start = false)
-        {
-            var counter = default(SystemCounter);
-            if(start)
-                counter.Start();
-            return counter;
-        }        
+        internal bool Running;
 
         [MethodImpl(Inline)]
         public static implicit operator long(SystemCounter counter)
@@ -59,18 +50,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Start()
         {
-            running = true;
-            SystemCounters.GetCount(ref started);
+            Running = true;
+            SystemCounters.GetCount(ref Started);
         }
 
         [MethodImpl(Inline)]
         public Duration Stop()
         {
-            running = false;
+            Running = false;
             var stopped = 0L;
             SystemCounters.GetCount(ref stopped);
-            total += (stopped - started);
-            return total;
+            Total += (stopped - Started);
+            return Total;
         }
 
         [MethodImpl(Inline)]
@@ -78,7 +69,7 @@ namespace Z0
         {
             var current = 0L;
             SystemCounters.GetCount(ref current);
-            return total + (current - started);                
+            return Total + (current - Started);                
         }
 
         /// <summary>
@@ -87,7 +78,7 @@ namespace Z0
         public readonly Duration Elapsed
         {
             [MethodImpl(Inline)]
-            get => running ? Measure() : total;
+            get => Running ? Measure() : Total;
         }
 
         /// <summary>
@@ -96,8 +87,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Reset()
         {
-            total = 0;
-            started = 0;
+            Total = 0;
+            Started = 0;
         }
 
         /// <summary>
@@ -106,7 +97,7 @@ namespace Z0
         public readonly long Count
         {
             [MethodImpl(Inline)]
-            get => total;
+            get => Total;
         }
 
         /// <summary>

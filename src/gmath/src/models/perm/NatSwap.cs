@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;    
+    using static z;    
     
     /// <summary>
     /// Defines a transposition in the context of a permutation of natural length
@@ -61,7 +61,7 @@ namespace Z0
             if(indices.Length != 2)
                 return Empty;
 
-            var result = Try(() => (Int32.Parse(indices[0]), Int32.Parse(indices[1])));
+            var result = Option.Try(() => (Int32.Parse(indices[0]), Int32.Parse(indices[1])));
             if(result.IsSome())
                 return result.Value();
             else
@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSwap<N> operator ++(in NatSwap<N> src)
         {
-            ref var dst = ref refs.edit(in src);
+            ref var dst = ref edit(src);
             dst.i++;
             dst.j++;
             return dst;
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSwap<N> operator --(in NatSwap<N> src)
         {
-            ref var dst = ref refs.edit(in src);
+            ref var dst = ref edit(src);
             if(src.i != 0)
                 dst.i--;
             if(src.j != 0)
@@ -161,7 +161,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public (T i, T j) ToTuple<T>()
             where T : unmanaged
-                => (convert<T>(i), convert<T>(j));
+                => (Cast.to<T>(i), Cast.to<T>(j));
 
         /// <summary>
         /// Creates a copy

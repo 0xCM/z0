@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]   
         SystemCounter counter(bool start = false)
-            => SystemCounter.Create(start);
+            => SystemCounters.counter(start);
 
         /// <summary>
         /// Creates a new stopwatch and optionally start it

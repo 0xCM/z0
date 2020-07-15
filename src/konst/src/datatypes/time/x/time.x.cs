@@ -50,14 +50,6 @@ namespace Z0
             return format;
         }
 
-        /// <summary>
-        /// Determines whether a supplied type is either a Date or Nullable Date
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsDate(this Type t)
-            => t == typeof(Date);
-
         public static IEnumerable<DateRange> Partition(this DateRange Period, int MaxLen)
             => from dates in Period.GetDates().Partition(MaxLen)
                let min = dates.First()

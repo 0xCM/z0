@@ -14,8 +14,8 @@ namespace Z0
     {
         public static EncodedIndex freeze(in EncodedIndexBuilder builder)
         {
-            var memtable = HashTable.Create(builder.CodeAddress);
-            var memuri = HashTable.Create(builder.UriAddress);  
+            var memtable = KeyValuePairs.Create(builder.CodeAddress);
+            var memuri = KeyValuePairs.Create(builder.UriAddress);  
             var hc = memtable.Values.Select(x => (x.OpUri.Host, x))
                                          .GroupBy(g => g.Host)
                                          .Select(x => (x.Key, x.Select(y => y.x).ToArray()))

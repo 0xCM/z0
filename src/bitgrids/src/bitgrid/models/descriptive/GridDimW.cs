@@ -61,7 +61,7 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.tablebits<M,N>();
+            get => (int)BitCalcs.tablebits<M,N>();
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.tablecells<M,N,T>();
+            get => (int)BitCalcs.tablecells<M,N,T>();
         }
 
         /// <summary>

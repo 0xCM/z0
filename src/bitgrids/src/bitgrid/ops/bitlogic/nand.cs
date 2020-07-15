@@ -140,7 +140,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var blocks = BitCalcs.tableblocks<M,N,T>(W256.W);
+            var blocks = (int)BitCalcs.tableblocks<M,N,T>(W256.W);
             for(var i=0; i<blocks; i++)
                 gz[i] = gvec.vnand(x[i],y[i]);
             return ref gz;

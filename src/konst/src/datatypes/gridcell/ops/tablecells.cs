@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="cols">The grid col count</param>
         /// <param name="w">The storage cell width</param>
         [MethodImpl(Inline), Op]
-        public static int tablecells(ulong rows, ulong cols, int w)
+        public static uint tablecells(uint rows, uint cols, uint w)
             => count(rows,cols,w);
 
         /// <summary>
@@ -30,15 +30,10 @@ namespace Z0
         /// <param name="cols">The number of columns in the grid</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static int tablecells<T>(int rows, int cols)
+        public static uint tablecells<T>(uint rows, uint cols)
             where T : unmanaged
-                => tablecells((ulong)rows, (ulong)cols, (int)bitsize<T>());
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static int tablecells<T>(ulong rows, ulong cols)
-            where T : unmanaged
-                => tablecells(rows,  cols, (int)bitsize<T>());
-
+                => tablecells(rows, cols, bitsize<T>());
+    
         /// <summary>
         /// Computes the number of segments required cover a grid as characterized by parametric type information
         /// </summary>
@@ -49,10 +44,10 @@ namespace Z0
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static int tablecells<M,N,T>(M m = default, N n = default, T t = default)
+        public static uint tablecells<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => tablecells(value(m), value(n), (int)bitsize<T>());
+                => tablecells((uint)value(m), (uint)value(n), bitsize<T>());
     }
 }

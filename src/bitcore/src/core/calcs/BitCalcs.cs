@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
-    using static As;
+    using static z;
 
     partial class BitCalcs
     {
@@ -44,15 +43,15 @@ namespace Z0
         /// <param name="bc">The number of bits for which storage is required</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static int mincells<T>(ulong bc)
+        public static ulong mincells<T>(ulong bc)
             where T : unmanaged
         {
-            if(bitsize<T>() >= (int)bc)
+            if(bitsize<T>() >= bc)
                 return 1;
 
-            var q = (int)bc / bitsize<T>();
-            var r = (int)bc % bitsize<T>();
-            return q + (r != 0 ? 1 : 0);
+            var q = bc / (uint)bitsize<T>();
+            var r = bc % (uint)bitsize<T>();
+            return q + (r != 0u ? 1u : 0u);
         }
 
         /// <summary>
@@ -72,7 +71,7 @@ namespace Z0
         /// <param name="cols">The grid col count</param>
         /// <param name="width">The storage cell width</param>
         [MethodImpl(Inline), Op]
-        public static int tablecells(ulong rows, ulong cols, int width)
+        public static uint tablecells(uint rows, uint cols, uint width)
             => GridCells.count(rows, cols, width);
 
         /// <summary>
@@ -131,12 +130,7 @@ namespace Z0
         /// <param name="cols">The number of columns in the grid</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static int tablecells<T>(int rows, int cols)
-            where T : unmanaged
-                => tablecells((ulong)rows, (ulong)cols, bitsize<T>());
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static int tablecells<T>(ulong rows, ulong cols)
+        public static ulong tablecells<T>(uint rows, uint cols)
             where T : unmanaged
                 => tablecells(rows,  cols, bitsize<T>());
 
@@ -148,10 +142,9 @@ namespace Z0
         /// <param name="cols">The col count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static int tableblocks<T>(N256 w, int rows, int cols)
+        public static ulong tableblocks<T>(N256 w, uint rows, uint cols)
             where T : unmanaged
-                => Blocks.cellcover<T>(w, tablecells<T>((ulong)rows,(ulong)cols));
-
+                => Blocks.cellcover<T>(w, tablecells<T>(rows,cols));
 
         /// <summary>
         /// Computes the number of bits covered by a rectangular region and predicated on natural dimensions
@@ -159,10 +152,10 @@ namespace Z0
         /// <param name="rows">The grid row count</param>
         /// <param name="cols">The grid col count</param>
         [MethodImpl(Inline)]
-        public static int tablebits<M,N>(M m = default, N n = default)
+        public static ulong tablebits<M,N>(M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => (int)NatCalc.mul(m,n);         
+                => NatCalc.mul(m,n);         
 
         /// <summary>
         /// Computes the number of segments required cover a grid as characterized by parametric type information
@@ -174,11 +167,11 @@ namespace Z0
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static int tablecells<M,N,T>(M m = default, N n = default, T t = default)
+        public static ulong tablecells<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => tablecells(value(m), value(n), bitsize<T>());
+                => tablecells((uint)value(m), (uint)value(n), bitsize<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions
@@ -191,10 +184,10 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int tableblocks<M,N,T>(N256 w, M m = default, N n = default, T t = default)
+        public static ulong tableblocks<M,N,T>(N256 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Blocks.cellcover<T>(w, tablecells<T>(value(m), value(n)));        
+                => Blocks.cellcover<T>(w, tablecells<T>((uint)value(m), (uint)value(n)));        
     }
 }

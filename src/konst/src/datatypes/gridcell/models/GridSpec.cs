@@ -32,17 +32,17 @@ namespace Z0
         /// <summary>
         /// The the toal number of allocated storage cells
         /// </summary>
-        public readonly int CellCount;
+        public readonly uint CellCount;
 
         /// <summary>
         /// The the toal number of segment-aligned bits allocated for storage
         /// </summary>
-        public readonly int StoreWidth;
+        public readonly uint StoreWidth;
 
         /// <summary>
         /// The the toal number of segment-aligned bytes allocated for storage
         /// </summary>
-        public readonly int StoreSize;
+        public readonly uint StoreSize;
 
         [MethodImpl(Inline)]
         public static bool operator ==(GridSpec a, GridSpec b)
@@ -53,7 +53,7 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public GridSpec(ushort rows, ushort cols, ushort wCell, int zStore, int wStore, int cells)
+        public GridSpec(ushort rows, ushort cols, ushort wCell, uint zStore, uint wStore, uint cells)
         {
             RowCount = rows;
             ColCount = cols;

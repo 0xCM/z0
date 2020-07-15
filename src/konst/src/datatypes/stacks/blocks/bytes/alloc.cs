@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;    
 
-
     readonly partial struct ByteBlocks
     {
         [MethodImpl(Inline), Op]

@@ -18,6 +18,28 @@ namespace Z0
     public readonly struct DateRange : ITimeInterval<Date>
     {
         /// <summary>
+        /// The inclusive lower bound
+        /// </summary>
+        public readonly Date Min;
+
+        /// <summary>
+        /// The inclusive upper bound
+        /// </summary>
+        public readonly Date Max;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DateRange"/> type
+        /// </summary>
+        /// <param name="min">The inclusive lower bound of the period</param>
+        /// <param name="max">The inclusive upper bound of the period</param>
+        [MethodImpl(Inline)]
+        public DateRange(Date min, Date max)
+        {
+            Min = min;
+            Max = max;
+        }
+
+        /// <summary>
         /// Converts a <see cref="DateRange"/> value to a <see cref="TimeInterval{DateTime}"/> value
         /// </summary>
         /// <param name="x">The source range</param>
@@ -76,29 +98,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DateRange((Date Min, Date Max) x)
             => new DateRange(x.Min, x.Max);
-        
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DateRange"/> type
-        /// </summary>
-        /// <param name="min">The inclusive lower bound of the period</param>
-        /// <param name="max">The inclusive upper bound of the period</param>
-        [MethodImpl(Inline)]
-        public DateRange(Date min, Date max)
-        {
-            this.Min = min;
-            this.Max = max;
-        }
-
-        /// <summary>
-        /// The inclusive lower bound
-        /// </summary>
-        public Date Min { get; }
-
-        /// <summary>
-        /// The inclusive upper bound
-        /// </summary>
-        public Date Max { get; }
-
+         
         /// <summary>
         /// Determines whether the test value is within the range
         /// </summary>
@@ -186,12 +186,6 @@ namespace Z0
         public int TotalDays 
             => Max.DaysSince(Min);
 
-        bool ITimeInterval.LeftInclusive
-            => true;
-
-        bool ITimeInterval.RightInclusive
-            => true;
-
         public Option<DateRange> Intersect(DateRange src)
         {
             var dates = GetDates().Intersect(src.GetDates()).ToList();
@@ -209,17 +203,11 @@ namespace Z0
             get => Min == Max;
         }
 
-        object ITimeInterval.Min
-        {
-            [MethodImpl(Inline)]
-            get => Min;
-        }
+        Date ITimeInterval<Date>.Min 
+            => Min;
 
-        object ITimeInterval.Max
-        {
-            [MethodImpl(Inline)]
-            get => Max;
-        }
+        Date ITimeInterval<Date>.Max 
+            => Max;
 
         public override string ToString()
             => $"[{Min.ToIsoString()},{Max.ToIsoString()}]";

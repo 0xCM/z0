@@ -48,25 +48,25 @@ namespace Z0
         /// <summary>
         /// The bit width of a storage cell
         /// </summary>
-        public int CellWidth
+        public uint CellWidth
         {
             [MethodImpl(Inline)]
-            get => (int)bitsize<T>();
+            get => bitsize<T>();
         }
 
         /// <summary>
         /// The bit width of a storage block
         /// </summary>
-        public int BlockWidth
+        public uint BlockWidth
         {
             [MethodImpl(Inline)]
-            get => (int)bitsize<T>();
+            get => bitsize<T>();
         }
 
         /// <summary>
         /// The number of cells required cover a grid
         /// </summary>
-        public int CellCount
+        public uint CellCount
         {
             [MethodImpl(Inline)]
             get => GridCells.tablecells<M,N,T>();

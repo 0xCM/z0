@@ -21,9 +21,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static GridSpec grid(ushort rows, ushort cols, ushort segwidth)    
         {
-            var bytes = GridCells.tablesize(rows, cols);
+            var bytes = (uint)GridCells.tablesize(rows, cols);
             var bits = bytes*8;
-            var segs = GridCells.tablecells((ulong)rows, (ulong)cols, (int)segwidth);            
+            var segs = GridCells.tablecells(rows, cols, segwidth);            
             return new GridSpec(rows, cols, segwidth, bytes, bits, segs);        
         }
 

@@ -33,8 +33,8 @@ namespace Z0
 
         }
 
-        public GridStats(ushort RowCount, ushort ColCount,  ushort SegWidth, int PointCount, 
-            int StorageSegs, int StorageBits, int StorageBytes, int Vec128Count, int Vec128Remainder, int Vec256Count, int Vec256Remainder)
+        public GridStats(ushort RowCount, ushort ColCount,  ushort SegWidth, uint PointCount, 
+            uint StorageSegs, uint StorageBits, uint StorageBytes, uint Vec128Count, uint Vec128Remainder, uint Vec256Count, uint Vec256Remainder)
         {
             this.Name = $"{RowCount}x{ColCount}";
             this.RowCount = RowCount;
@@ -70,41 +70,41 @@ namespace Z0
         /// <summary>
         /// The number of points covered by the grid
         /// </summary>
-        public int PointCount {get;}
+        public uint PointCount {get;}
 
         /// <summary>
         /// The number of segment-aligned segments required for storage
         /// </summary>
-        public int SorageSegs {get;}
+        public uint SorageSegs {get;}
 
         /// <summary>
         /// The number of segment-aligned bits required for storage
         /// </summary>
-        public int StorageBits {get;}
+        public uint StorageBits {get;}
 
         /// <summary>
         /// The number of segment-aligned bytes bits required for storage
         /// </summary>
-        public int StorageBytes {get;}
+        public uint StorageBytes {get;}
             
         /// <summary>
         /// The number of whole 128-bit vectors required for storage
         /// </summary>
-        public int Vec128Count {get;}
+        public uint Vec128Count {get;}
 
         /// <summary>
         /// The number bytes that do not fit into a whole number of 128-bit vectors
         /// </summary>
-        public int Vec128Remainder  {get;}
+        public uint Vec128Remainder  {get;}
         
         /// <summary>
         /// The number of whole 256-bit vectors required for storage
         /// </summary>
-        public int Vec256Count {get;}
+        public uint Vec256Count {get;}
             
         /// <summary>
         /// The number bytes that do not fit into a whole number of 256-bit vectors
         /// </summary>
-        public int Vec256Remainder {get;}            
+        public uint Vec256Remainder {get;}            
     }
 }

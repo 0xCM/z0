@@ -17,17 +17,27 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="count">The number of 8-bit segments to skip</param>
         /// <typeparam name="T">The (arbitrary) source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte seek8<T>(in T src, uint count)
             => ref add(@as<T,byte>(edit(src)), (int)count);
 
-       /// <summary>
+        /// <summary>
+        /// Adds an offset to a reference, measured in bytes
+        /// </summary>
+        /// <param name="src">The soruce reference</param>
+        /// <param name="count">The number of bytes to add</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T seek8g<T>(in T src, uint count)
+            => ref Unsafe.AddByteOffset(ref edit(src), (IntPtr)count);
+
+        /// <summary>
         /// Adds an offset to the head of a span, measured relative to 8-bit segments, and returns the resulting reference
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="count">The number of 8-bit segments to skip</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte seek8<T>(Span<T> src, uint count)
             => ref add(@as<T,byte>(first(src)), (int)count);
     }

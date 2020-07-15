@@ -12,21 +12,24 @@ namespace Z0
 
     partial class BitGrid
     {
-        /// <summary>
-        /// Allocates a zero-filled generic bitgrid
-        /// </summary>
-        /// <param name="m">The number of grid rows</param>
-        /// <param name="n">The number of grid columns</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The segment type</typeparam>
+        [Alloc, Closures(UnsignedInts)]
+        public static BitGrid<T> alloc<T>(uint m, uint n, T t = default)
+            where T : unmanaged
+        {            
+            var blocksize = W256.W;
+            var blocks = BitCalcs.tableblocks<T>(blocksize,(uint)m,(uint)n);
+            var data = Z0.Blocks.alloc<T>(blocksize, blocks); 
+            return new BitGrid<T>(data,(int)m,(int)n);            
+        }
+
         [Alloc, Closures(UnsignedInts)]
         public static BitGrid<T> alloc<T>(int m, int n, T t = default)
             where T : unmanaged
         {            
             var blocksize = W256.W;
-            var blocks = BitCalcs.tableblocks<T>(blocksize,m,n);
+            var blocks = BitCalcs.tableblocks<T>(blocksize,(uint)m,(uint)n);
             var data = Z0.Blocks.alloc<T>(blocksize, blocks); 
-            return new BitGrid<T>(data,m,n);            
+            return new BitGrid<T>(data,(int)m,(int)n);            
         }
 
         /// <summary>
