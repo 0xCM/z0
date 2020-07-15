@@ -4,28 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
-
-    public static partial class XTend
-    {
-
-
-    }
-
     class App : AppShell<App,IAppContext>
     {                
         public App()
             : base(ContextFactory.CreateAppContext())
         {
 
-        }
-
-
-        void RunCapture(params PartId[] parts)
-        {
-            using var host = new CaptureHost(ContextFactory.CreateAsmContext(Context), Context.AppPaths.CaptureRoot);
-            host.Execute(parts);
         }
 
         public override void RunShell(params string[] args)
@@ -44,4 +28,6 @@ namespace Z0
         public static void Main(params string[] args)
             => Launch(args);
     }
+
+    public static partial class XTend { }
 }

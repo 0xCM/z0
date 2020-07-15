@@ -23,7 +23,7 @@ namespace Z0
         public void test_1()
         {
             var examples = ExampleEvents.Examples;
-            var hub = HubClientExample.create(Receiver);
+            var hub = HubClientExample.create(EventHubs.relay(x => Receiver(x)));
             
             var d1 = code(0,2,4,8);
             
@@ -35,7 +35,7 @@ namespace Z0
             hub.Broadcast(examples.Event2.Define(E2, d2));
             hub.Broadcast(examples.Event3.Define(E3, d3));
 
-            void Receiver(IEncodedEvent e)
+            void Receiver(IDataEvent e)
             {
                 switch(e.Id)
                 {

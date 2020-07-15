@@ -3,8 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    public interface IEncodedEvent : IAppEvent
+{    
+    using System.Security;
+
+    public interface IDataEvent : IAppEvent
     {
         StringRef Id {get;}
 
@@ -25,10 +27,16 @@ namespace Z0
     /// Characterizes a reified application event
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IEncodedEvent<F> : IEncodedEvent, IAppEvent<F>
-        where F : struct, IEncodedEvent<F>
+    public interface IDataEvent<F> : IDataEvent, IAppEvent<F>
+        where F : struct, IDataEvent<F>
     {
 
+    }    
 
-    }
+    [SuppressUnmanagedCodeSecurity]
+    public delegate void EventReceiver(IDataEvent e);
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate void EventReceiver<E>(in E e)
+        where E : struct, IDataEvent;
 }

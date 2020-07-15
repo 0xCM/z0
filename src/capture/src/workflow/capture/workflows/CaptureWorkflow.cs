@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-        
+    
     public readonly struct CaptureWorkflow : ICaptureWorkflow
     {
         public ICaptureContext Context {get;}

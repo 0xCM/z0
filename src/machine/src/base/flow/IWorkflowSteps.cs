@@ -3,9 +3,20 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface IEventHubSink : ISink
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    public interface IWorkflowSteps
     {
-       void Deposit(IAppEvent e);
+
+
     }
+
+    public interface IWorkflowSteps<S> : IWorkflowSteps
+        where S : struct, IWorkflowSteps
+    {
+
+        
+    }    
 }

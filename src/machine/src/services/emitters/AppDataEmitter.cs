@@ -11,17 +11,17 @@ namespace Z0
 
     public readonly struct AppDataEmitter 
     {
-        public static AppDataEmitter Service => default;
+        public static AppDataEmitter Service 
+            => default;
+
+        static AppDataEmitterSteps Steps 
+            => default;
 
         static void EmitDocs(IAppContext app)
-        {   
-            Commented.collect();
-        }
+            => Commented.collect();
 
-        static void EmitResources(IAppContext app)
-        {   
-            HostCodeResources.Service(app).Emit();
-        }
+        static void EmitResBytes(IAppContext app)
+            => Steps.EmitResBytes.Configure(app).Run();
 
         static void CaptureEmissions(IAppContext app)
         {
@@ -31,17 +31,12 @@ namespace Z0
         }
 
         static void EmitMetadata(IAppContext app)
-        {   
-            var service = MetadataEmitter.Service(app);
-            service.Emit();
-        }
+            => MetadataEmitter.Service(app).Emit();
 
         static void EmitEnumDatasets(IAppContext app)
-        {
-            EnumDatasetEmitter.Service(app).Emit();
-        }
+            => EnumDatasetEmitter.Service(app).Emit();
 
-        static void Gen(IAppContext app)
+        static void All(IAppContext app)
         {
             term.magenta("Emitting bitmask data");
             ReflectedLiterals.emit(typeof(BitMasks), app.AppPaths);
@@ -53,27 +48,22 @@ namespace Z0
             EmitDocs(app);
 
             term.magenta("Emitting resbytes");
-            EmitResources(app);
+            EmitResBytes(app);
             
-            // term.magenta("Capturing emissions");
-            // CaptureEmissions(app);            
+            term.magenta("Capturing emissions");
+            CaptureEmissions(app);            
 
             term.magenta("Emitting enum datasets");
             EmitEnumDatasets(app);
 
             term.magenta("Emitting literal fields");
             new LiteralFieldEmitter(app).Emit();                        
-
         }
-        
-        
+                
         public static CodeResourceIndex Load(IAppContext app)
             => Resources.code(Assembly.LoadFrom(app.AppPaths.ResBytes.Name));
         
         public void Emit(IAppContext app)
-        {     
-            
-            Gen(app);
-        }
+            => EmitResBytes(app);
     }
 }

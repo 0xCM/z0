@@ -92,19 +92,13 @@ namespace Z0
         }
 
         void EmitPrimary(params PartId[] parts)
-        {
-            CaptureWorkflow.Run(WorkflowConfig, parts);
-        }
+            => CaptureWorkflow.Run(WorkflowConfig, parts);
 
         void EmitConsolidated(params PartId[] parts)
-        {
-            CaptureWorkflow.RunConsoidated(WorkflowConfig, parts);
-        }
+            => CaptureWorkflow.RunConsoidated(WorkflowConfig, parts);
 
         void CheckExec(params PartId[] parts)
-        {            
-            Context.CreateEvalWorkflow(WorkflowConfig, EvalBufferSize).Execute(parts);
-        }
+            => Context.CreateEvalWorkflow(WorkflowConfig, EvalBufferSize).Execute(parts);
 
         public void OnEvent(FunctionsDecoded e)
         {

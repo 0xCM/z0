@@ -3,14 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface IEncodedEventClient : IEncodedEventSink
+{
+    public interface IWorkflowStep
     {
-        EventHub Hub {get;}
+        void Run();        
+    }
+    
+    public interface IWorkflowStep<S> : IWorkflowStep
+        where S : struct, IWorkflowStep<S>
+    {
 
-        // void IDataEventSink.Deposit(IDataEvent e) 
-        //     => Sink.Deposit(e);
-        
-        void Connect();
     }
 }

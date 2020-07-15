@@ -39,6 +39,5 @@ namespace Z0.Asm
 
         void RunConsoidated(AsmArchiveConfig config, params PartId[] parts)
             => ManageCapture.Consolidated(config, parts);        
-
     }
 }

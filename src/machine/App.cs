@@ -28,41 +28,24 @@ namespace Z0
             : base(CreateAppContext())
         {
         }
-
-        bool StartCpu {get;} 
-            = true;
-
-        IResolvedApi Api 
-            => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
-
-        IAsmContext CreateAsmContext()
-            => AsmContext.Create(Context);
         
-        IMachineContext CreateMachineContext(IAsmContext root, PartId[] code)
-            => MachineContext.Create(root, code);
+        void Prepare(params string[] args)
+        {
+            var known = KnownParts.Where(r => r.Id != 0).Array();
+            var parts = PartIdParser.Service.ParseValid(args);              
+            var root =  AsmContext.Create(Context);
+            var context = MachineContext.Create(root, parts);
+            var dataEmitter = AppDataEmitter.Service;
+            var fileProcessor = new PartFileProcessor(context);
+            var api = ApiComposition.Assemble(known);                        
+            var files = new PartFiles(root);
+        }
 
         public override void RunShell(params string[] args)
         {            
-            var known = KnownParts.Where(r => r.Id != 0).Array();
-            var parts = PartIdParser.Service.ParseValid(args);  
-            var asmctx = CreateAsmContext();
-            var context = CreateMachineContext(asmctx, parts);  
-            var dataEmitter = AppDataEmitter.Service;
-            var fileProcessor = new PartFileProcessor(context);
-            var api = ApiComposition.Assemble(known);
-            var files = new PartFiles(asmctx);
-
-            //TheMachine.Run(context);
-
-            var emitter = AppDataEmitter.Service;                        
-            emitter.Emit(Context);
-
-                        
-
-            // if(StartCpu)            
-            //     RunCpu(context);
-            // else
-            //     emitter.Emit(Context);
+            using var workflows = MachineWorkflows.create(Context);
+            workflows.Run();
+            //AppDataEmitter.Service.Emit(Context);
         }
 
         public static void Main(params string[] args)

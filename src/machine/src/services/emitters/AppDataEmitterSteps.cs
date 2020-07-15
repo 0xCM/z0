@@ -3,13 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface IEventHub
-    {
-        ref readonly E Broadcast<E>(in E e)
-            where E : struct, IAppEvent;
+{
+    using System;
+    using System.Reflection;
 
-        Outcome Subscribe<E>(E e, HubEventReceiver<E> receiver)
-            where E : struct, IAppEvent;
+    using Z0.Asm;
+
+    public readonly struct AppDataEmitterSteps : IWorkflowSteps<AppDataEmitterSteps>
+    {
+        public EmitResBytes EmitResBytes => default;
     }
 }
