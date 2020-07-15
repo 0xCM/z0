@@ -42,43 +42,6 @@ namespace Z0
         public static bool signed(EnumScalarKind @base)
             => (@base & EnumScalarKind.SignMask) != 0;
 
-        /// <summary>
-        /// Determines the integral type refined by a value-identified enum type
-        /// </summary>
-        /// <param name="value">The enum value</typeparam>
-        [MethodImpl(Inline)]
-        public static EnumScalarKind @base(Enum value)
-            => @base(value.GetType().GetEnumUnderlyingType().NumericKind());
-
-        /// <summary>
-        /// Determines the integral type refined by a specified enum type
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static EnumScalarKind @base(Type et)
-            => @base(et.NumericKind());
-        
-        /// <summary>
-        /// Determines the integral type refined by a parametrically-identified enum type
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static EnumScalarKind @base<E>()
-            where E : unmanaged, Enum
-             => @base(typeof(E).GetEnumUnderlyingType().NumericKind()); 
-
-        public static EnumScalarKind @base(NumericKind src)
-             => src switch{
-                NK.U8 => BK.U8,
-                NK.I8 => BK.I8,
-                NK.U16 => BK.U16,
-                NK.I16 => BK.I16,
-                NK.U32 => BK.U32,
-                NK.I32 => BK.I32,
-                NK.I64 => BK.I64,
-                NK.U64 => BK.U64,                
-                _ => EnumScalarKind.None,
-            };
 
         public static unsafe ulong untype<E>(E src)
             where E : unmanaged, Enum
@@ -270,13 +233,6 @@ namespace Z0
             return index;
         }
 
-        /// <summary>
-        /// Gets the names of the (unique) enumeration literals
-        /// </summary>
-        /// <param name="e">An enum type representative</param>
-        /// <typeparam name="E">The enum type</typeparam>
-         public static string[] names<F>()
-            where F : unmanaged, Enum
-                => literals<F>().Map(f => f.ToString());
+ 
    }
 }

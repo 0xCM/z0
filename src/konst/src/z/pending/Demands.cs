@@ -27,6 +27,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T insist<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : IEquatable<T>            
-                => z.insist(lhs, rhs, caller, file, line);                  
+                => z.insist(lhs, rhs, true, caller, file, line);                  
     }
 }

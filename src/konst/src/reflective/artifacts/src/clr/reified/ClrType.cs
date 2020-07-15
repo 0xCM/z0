@@ -21,6 +21,13 @@ namespace Z0
             get => this;
         }
 
+        public string Identifier
+
+        {
+            [MethodImpl(Inline)]
+            get => Subject.Name;
+        }
+
         [MethodImpl(Inline)]
         public static ClrType From(Type src)
             => new ClrType(src);

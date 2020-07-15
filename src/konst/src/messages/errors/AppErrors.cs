@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using System.Runtime.Serialization;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Reflection;
 
@@ -17,8 +17,29 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     
+    
+    [ApiHost]
     public static partial class AppErrors
-    {        
+    {           
+        const string Delimiter = " | ";
+                
+
+        [MethodImpl(NotInline)]
+        public static string NotEqual<T>(T lhs, T rhs)
+             => string.Concat($"The operands are not equal", Delimiter, $"{lhs} != {rhs}");
+
+        [MethodImpl(NotInline)]
+        public static string NotEqual<T>(T lhs, T rhs, string caller, string file, int? line)
+             => string.Concat(NotEqual(lhs,rhs), Delimiter, AppMsg.Source(caller,file,line));
+
+        [MethodImpl(NotInline)]
+        public static string NotTrue<T>(T src)
+            => string.Concat("Predicate evaluation failed", Delimiter, src);
+
+        [MethodImpl(NotInline)]
+        public static string NotTrue<T>(T src, string caller, string file, int? line)
+             => string.Concat(NotTrue(src), Delimiter, AppMsg.Source(caller,file,line));
+
         const string Unknown = "???";
         
         const int UnknownInt = -1;

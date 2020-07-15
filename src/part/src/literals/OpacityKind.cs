@@ -98,5 +98,7 @@ namespace Z0
 
       GetEnumValues,       
 
+      FormatCharSpan,
+
     }
 }

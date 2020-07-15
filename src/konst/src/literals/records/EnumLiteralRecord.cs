@@ -27,6 +27,35 @@ namespace Z0
 
     public readonly struct EnumLiteralRecord : IRecord<EnumLiteralRecordField, EnumLiteralRecord>
     {
+        public static Span<EnumLiteralRecord> ParseEnumLiterals(TextDoc src)
+        {
+            var rc = src.RowCount;
+            var dst = z.alloc<EnumLiteralRecord>(rc);
+            for(var i=0; i<rc; i++)
+            {
+                ref readonly var row = ref src[i];
+                if(row.CellCount >= 3)
+                {
+                    var data = row[2];
+                    var result = HexByteParser.Service.ParseData(data);
+                    if(result.Succeeded)
+                    {
+                        var bytes = z.span(result.Value);
+                        var storage = 0ul;
+                        ref var store = ref z.@as<ulong,byte>(storage);
+                        var count = z.min(bytes.Length,8);
+                        for(var j=0u; j<count; j++)
+                            z.seek(store,j) = z.skip(bytes,j);
+
+                        dst[i] = new EnumLiteralRecord(i, row[0], row[1], 0, storage);
+                    }
+                }
+                else
+                    dst[i] = EnumLiteralRecord.Empty;
+            }
+            return dst;
+        }
+
         public readonly int Sequence;
 
         public readonly string Identifier;

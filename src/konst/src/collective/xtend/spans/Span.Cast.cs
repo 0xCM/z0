@@ -53,6 +53,66 @@ namespace Z0
                 => z.recover<ulong,T>(src);
 
         /// <summary>
+        /// Presents a c16 span as a T-span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The Target type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> Cast<T>(this Span<char> src)
+            where T : struct
+                => z.recover<char,T>(src);
+
+        /// <summary>
+        /// Presents a u8 span as a T-span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The Target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> Cast<T>(this ReadOnlySpan<byte> src)
+            where T : struct
+                => z.recover<byte,T>(src);
+
+        /// <summary>
+        /// Presents a u16 span as a T-span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The Target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> Cast<T>(this ReadOnlySpan<ushort> src)
+            where T : struct
+                => z.recover<ushort,T>(src);
+
+        /// <summary>
+        /// Presents a u32 span as a T-span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The Target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> Cast<T>(this ReadOnlySpan<uint> src)
+            where T : struct
+                => z.recover<uint,T>(src);
+
+        /// <summary>
+        /// Presents a u64 span as a T-span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The Target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> Cast<T>(this ReadOnlySpan<ulong> src)
+            where T : struct
+                => z.recover<ulong,T>(src);
+
+        /// <summary>
+        /// Presents a c16 span as a T-span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The Target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> Cast<T>(this ReadOnlySpan<char> src)
+            where T : struct
+                => z.recover<char,T>(src);
+
+        /// <summary>
         /// Presents a span of one value-type as a span of another value-type
         /// </summary>
         /// <param name="src">The source span</param>

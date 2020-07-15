@@ -54,8 +54,7 @@ namespace Z0
             for(var i=1u; i<count; i++)
                 seek(dst,i) = skip(src,i);
             
-            ValueIndex.create(buffer);
-            return ValueIndex.create(buffer);
+            return Indexed.values(buffer);
         }
 
         /// <summary>

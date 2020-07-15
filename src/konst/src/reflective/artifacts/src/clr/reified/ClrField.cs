@@ -16,6 +16,13 @@ namespace Z0
     {   
         public FieldInfo Data {get;}
 
+        public string Identifier
+
+        {
+            [MethodImpl(Inline)]
+            get => Data.Name;
+        }
+
         [MethodImpl(Inline)]
         public static bool operator ==(ClrField<T> lhs, ClrField<T> rhs)
             => lhs.Equals(rhs);

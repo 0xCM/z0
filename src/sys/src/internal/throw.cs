@@ -19,6 +19,14 @@ namespace Z0
         public static void @throw(Exception e)
             => throw e;
 
+        [MethodImpl(Options), Opaque(Throw)]
+        public static void @throw(object e)
+            => throw new Exception($"e");
+
+        [MethodImpl(Options), Opaque(Throw)]
+        public static void @throw(Func<string> f)
+            => throw new Exception(f());
+
         [MethodImpl(Options), Opaque(Throw), Closures(Closure)]
         public static T @throw<T>(Exception e)
             => throw e;

@@ -21,6 +21,13 @@ namespace Z0
             get => ClrType.From(Subject);
         }
 
+        public string Identifier
+
+        {
+            [MethodImpl(Inline)]
+            get => Subject.Name;
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator ClrType(ClrStruct src)
             => src.Generalized;

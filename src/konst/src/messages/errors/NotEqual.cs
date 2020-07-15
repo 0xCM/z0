@@ -12,13 +12,10 @@ namespace Z0
     
     partial class AppErrors
     {        
-        public static AppException NotEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.NotEqual(lhs,rhs,caller,file,line));
-
         public static void ThrowNotEqual<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw NotEqual(lhs,rhs,caller,file,line);
+            => throw new Exception(NotEqual(lhs,rhs,caller,file,line));
 
         public static T ThrowNotEqualNoCaller<T>(T lhs, T rhs)
-            => throw NotEqual(lhs,rhs,null,null,null);        
+            => throw new Exception(NotEqual(lhs,rhs));
     }
 }

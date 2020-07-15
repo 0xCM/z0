@@ -7,4 +7,4 @@ robocopy "%ZLogs%\apps\xed" K:\z0\archives\xed /MIR /log:"%ZLogs%\etl\xed-archiv
 robocopy "%ZLogs%\res" K:\z0\archives\res /MIR /log:"%ZLogs%\etl\res-archive.log" /tee /TS /BYTES /V
 robocopy "%ZLogs%\etl" K:\z0\archives\etl /MIR /log:"%ZLogs%\etl\etl-archive.log" /tee /TS /BYTES /V
 
-J:\tools\git\bin\bash.exe J:\dev\projects\z0\archive.sh
+REM J:\tools\git\bin\bash.exe J:\dev\projects\z0\archive.sh

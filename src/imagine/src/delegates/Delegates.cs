@@ -21,19 +21,27 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         [MethodImpl(Inline), Op]
-        public static Action action(MethodInfo src, object host = null)
+        public static Action action(MethodInfo src, object host)
             => from<Action>(src, host);
 
         /// <summary>
-        /// Infers a delegate type compatible with the signature of a specified methods
+        /// Creates an action delegate from a method
+        /// </summary>
+        /// <param name="src">The source method</param>
+        [MethodImpl(Inline), Op]
+        public static Action action(MethodInfo src)
+            => from<Action>(src);
+
+        /// <summary>
+        /// Infers a delegate type compatible with the signature of a specified method
         /// </summary>
         /// <param name="src">The source method</param>
         public static Type type(MethodInfo src)
         {
-            var args = src.ParameterTypes().ToArray();
+            var args = src.ParameterTypes();
             return src.IsAction()
                 ? Expression.GetActionType(args)
-                : Expression.GetFuncType(z.concat(args, sys.array(src.ReturnType)));
+                : Expression.GetFuncType(z.concat(args, z.array(src.ReturnType)));
         }
     }
 }

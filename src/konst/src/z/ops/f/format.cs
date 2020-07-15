@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface IClrArtifact
-    {        
-        
-    }
+    using static Konst;
 
-    public interface IClrArtifact<T> : IClrArtifact
-    {
-        T Subject {get;}    
+    partial struct z
+    {        
+        [MethodImpl(Inline), Op]
+        public static string format(ReadOnlySpan<char> src)
+            => sys.format(src);
     }
 }

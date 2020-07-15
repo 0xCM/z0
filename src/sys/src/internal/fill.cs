@@ -13,6 +13,10 @@ namespace Z0
 
     partial struct proxy
     {
+        [MethodImpl(Options), Opaque(FormatCharSpan)]
+        public static string format(ReadOnlySpan<char> src)
+            => src.ToString();
+
         [MethodImpl(Options), Opaque(FillSpan), Closures(Closure)]
         public static void fill<T>(T src, Span<T> dst)
             => dst.Fill(src);

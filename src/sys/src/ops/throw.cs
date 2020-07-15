@@ -17,12 +17,16 @@ namespace Z0
         public static void @throw(Exception e)
             => proxy.@throw(e);
 
+        [MethodImpl(Options), Op]
+        public static void @throw(Func<string> f)
+            => proxy.@throw(f);
+
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T @throw<T>(Exception e)
             => proxy.@throw<T>(e);
 
         [MethodImpl(Options), Op]
         public static void @throw(object msg)
-            => proxy.@throw($"{msg}");
+            => proxy.@throw(msg);
     }
 }

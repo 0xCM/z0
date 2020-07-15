@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    public interface IClrArtifact
-    {        
-        
-    }
+    using static Konst;
 
-    public interface IClrArtifact<T> : IClrArtifact
+    partial struct Reflex
     {
-        T Subject {get;}    
+        [MethodImpl(Inline), Op]
+        public static MethodInfo method(Delegate src)
+            => src.Method;    
     }
 }

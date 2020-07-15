@@ -24,6 +24,6 @@ namespace Z0
         
         [MethodImpl(Options), Op]
         public static string @string(ReadOnlySpan<char> src)
-            => proxy.@string(src);
+            => proxy.format(src);
     }
 }

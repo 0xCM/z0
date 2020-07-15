@@ -17,6 +17,13 @@ namespace Z0
     {
         public Type Subject => typeof(T);
 
+        public string Identifier
+
+        {
+            [MethodImpl(Inline)]
+            get => Subject.Name;
+        }
+
         public ClrEnum Untyped 
         {
             [MethodImpl(Inline)]

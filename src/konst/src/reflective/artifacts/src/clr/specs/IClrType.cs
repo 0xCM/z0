@@ -23,9 +23,11 @@ namespace Z0
     {
         ClrTypeKind Kind {get;}
 
-        string IArtifactModel.Identifier
-            => Subject.Name;
-        
+        string Identifier {get;}        
+
+        string Declarer 
+            => Identifier;
+
         /// <summary>
         /// Indicates whether the model is empty and thus models nothing
         /// </summary>

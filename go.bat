@@ -1,3 +1,3 @@
 call build.bat
-call unbuild.bat
+z0
 call deposit.bat

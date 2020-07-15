@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
 
@@ -19,8 +20,12 @@ namespace Z0
         static void require(bool invariant, string msg, string caller, string file, int? line)
         {
             if(!invariant)
-                sys.@throw(new Exception($"{msg}: See line {line} in {file}"));
+                sys.@throw($"{msg}: Line {line} in {file}");
         }
+
+        [MethodImpl(Inline), Op]
+        static void require(bool invariant, Func<string> f, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => require(invariant, f(), caller, file, line);
 
         [MethodImpl(Inline), Op]
         public static void insist(bool invariant, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -55,10 +60,25 @@ namespace Z0
             return src;
         }
 
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T insist<T>(T src, Func<T,bool> f, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static T insist<T>(T src, Func<T,bool> f, bool locate, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            require(f(src), $"Predicate evaluation over {src} failed", caller, file, line);
+            require(f(src), () => AppErrors.NotTrue(src, caller, file, line));
+            return src;
+        }
+
+        [MethodImpl(Inline)]
+        public static T[] insist<T>(T[] src, bool locate, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        {
+            require(src != null, () => AppErrors.NullArg(caller, file, line));
+            return src;
+        }
+
+        [MethodImpl(Inline)]
+        public static IEnumerable<T> insist<T>(IEnumerable<T> src, bool locate, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        {
+            require(src != null, () => AppErrors.NullArg(caller, file, line));
             return src;
         }
 
@@ -66,10 +86,10 @@ namespace Z0
         public static T insist<T>(T src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : class
         {
-            require(src != null, $"The {type<T>()}-kinded value was null", caller, file, line);
+            require(src != null, () => AppErrors.NullArg(caller, file, line));
             return src;
         }
-
+ 
         [MethodImpl(Inline)]
         public static FilePath insist(FilePath src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
@@ -84,14 +104,15 @@ namespace Z0
             return src;
         }
 
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T insist<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static T insist<T>(T lhs, T rhs, bool locate, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : IEquatable<T>            
         {
             if(z.nullnot(lhs) && z.nullnot(rhs) && lhs.Equals(rhs))
                 return lhs;
             else
-                insist(false, $"{lhs} != {rhs}", caller, file, line);
+                require(false, $"{lhs} != {rhs}", caller, file, line);
             
             return default;
         }

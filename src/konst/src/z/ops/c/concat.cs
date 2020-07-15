@@ -36,13 +36,5 @@ namespace Z0
         /// <param name="src">The source arrays</param>
         public static T[] concat<T>(params T[][] src)
             => Arrays.concat(src);
-
-        /// <summary>
-        /// Concatentates a parameter array of byte arrays
-        /// </summary>
-        /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
-        [Op]
-        public static byte[] concat(params byte[][] src)
-             => Arrays.concat(src);
     }
 }

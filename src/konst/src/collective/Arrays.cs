@@ -16,57 +16,11 @@ namespace Z0
     public static class Arrays
     {            
         /// <summary>
-        /// Returns an empty array
-        /// </summary>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
-        public static T[] empty<T>()
-             => sys.empty<T>();
-
-        /// <summary>
-        /// Returns a reference to the location of the first element
-        /// </summary>
-        /// <param name="src">The source array</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
-        public static unsafe ref T head<T>(T[] src)
-            => ref MemoryMarshal.GetReference<T>(src);
-
-        /// <summary>
-        /// Adds an offset to the head of an array, measured relative to the reference type
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="bytes">The number of elements to advance</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
-        public static ref readonly T skip<T>(T[] src, int count)
-            => ref z.skip(in head<T>(src), (uint)count);
-
-        /// <summary>
-        /// Adds an offset to the head of an array, measured relative to the reference type
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="bytes">The number of elements to advance</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
-        public static ref T seek<T>(T[] src, int count)
-            => ref z.seek(head<T>(src), count);
-
-        /// <summary>
-        /// Tests whether an array is empty
-        /// </summary>
-        /// <param name="src">The array to test</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
-        public static bool empty<T>(T[] src)
-            =>  src == null || src.Length == 0;
-
-        /// <summary>
         /// Allocates a new array
         /// </summary>
         /// <param name="length">The array length</param>
         /// <typeparam name="T">The element type</typeparam>
-        [Op, Closures(Integers)]
+        [Op, Closures(UInt8k)]
         public static T[] alloc<T>(int length)
             => new T[length];
 
@@ -76,18 +30,64 @@ namespace Z0
         /// <param name="length">The array length</param>
         /// <param name="src">The value with which to populate the array</param>
         /// <typeparam name="T">The element type</typeparam>
-        [Op, Closures(Integers)]
+        [Op, Closures(UInt8k)]
         public static T[] alloc<T>(int length, T src)
         {
             var dst = alloc<T>(length);
             return fill(dst,src);
         }            
 
-        [Op, Closures(Integers)]
+        /// <summary>
+        /// Returns an empty array
+        /// </summary>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static T[] empty<T>()
+             => sys.empty<T>();
+
+        /// <summary>
+        /// Returns a reference to the location of the first element
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static unsafe ref T head<T>(T[] src)
+            => ref MemoryMarshal.GetReference<T>(src);
+
+        /// <summary>
+        /// Adds an offset to the head of an array, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static ref readonly T skip<T>(T[] src, int count)
+            => ref z.skip(in head<T>(src), (uint)count);
+
+        /// <summary>
+        /// Adds an offset to the head of an array, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static ref T seek<T>(T[] src, int count)
+            => ref z.seek(head<T>(src), count);
+
+        /// <summary>
+        /// Tests whether an array is empty
+        /// </summary>
+        /// <param name="src">The array to test</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static bool empty<T>(T[] src)
+            =>  src == null || src.Length == 0;
+
+        [Op, Closures(UInt8k)]
         public static T[] from<T>(IEnumerable<T> src)
             => src.ToArray();
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static T[] from<T>(params T[] src)
             => src;
 
@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="dst">The target array</param>
         /// <param name="dst">The source value</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static T[] fill<T>(T[] dst, T src)
         {
             Array.Fill(dst, src);
@@ -109,7 +109,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The source array</param>
         /// <typeparam name="T">The array element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static T[] clear<T>(T[] dst)
             where T : struct
         {
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="value">The value to replicate</param>
         /// <param name="count">The number of replicants</param>
         /// <typeparam name="T">The replicant type</typeparam>
-        [Op, Closures(Integers)]
+        [Op, Closures(UInt8k)]
         public static T[] replicate<T>(T value, int count)
         {
             var dst = alloc<T>(count);
@@ -138,14 +138,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source array</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static T[] reverse<T>(T[] src)
         {
             Array.Reverse(src);
             return src;        
         }
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static void copy<T>(T[] src, T[] dst)
             => Array.Copy(src,dst, src.Length);
 
@@ -156,25 +156,53 @@ namespace Z0
         public static T[] concat<T>(IEnumerable<T[]> src)
             => concat(src.ToArray());   
 
+
+        [MethodImpl(Inline), Op]
+        public static void copy(in byte src, uint count, ref byte dst, ref uint index)
+        {
+            for(var j=0u; j<count; j++)
+                z.seek(dst, index++) = z.skip(src, j);
+        }
+        
         /// <summary>
-        /// Concatenates a sequence of byte arrays
+        /// Concatenates an array sequence
         /// </summary>
         /// <param name="src">The source arrays</param>
-        /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
         [Op]
-        public static byte[] concat(IEnumerable<byte[]> src)
-        {
-            byte[] ret = new byte[src.Sum(x => x.Length)];
-            int offset = 0;
-            foreach (byte[] data in src)
+        public static void concat(byte[][] src, byte[] dst)
+        {            
+            ref var target = ref z.first(z.span(dst));
+            var k = 0u;
+
+            var members = z.span(src);
+            var terms = members.Length;
+            for(uint i=0u; i<terms; i++)
             {
-                Buffer.BlockCopy(data, 0, ret, offset, data.Length);
-                offset += data.Length;
+                var term = z.span(z.skip(members,i));
+                copy(z.first(term), (uint)term.Length, ref target, ref k);
             }
-            return ret;
         }
 
-        [Op, Closures(Integers)]
+        /// <summary>
+        /// Concatenates an array sequence
+        /// </summary>
+        /// <param name="src">The source arrays</param>
+        [Op]
+        public static byte[] concat(byte[][] src)
+        {            
+            var members = z.span(src);
+            var terms = members.Length;
+            var items = 0;
+            
+            for(var i=0; i<terms; i++)
+                items += members[i].Length;
+
+            var dst = alloc<byte>(items);
+            concat(src,dst);
+            return dst;
+        }
+
+        [Op, Closures(UInt8k)]
         public static IEnumerable<T> singletons<T>(params IEnumerable<T>[] src)
             where T : unmanaged
                 => src.SelectMany(x => x);
@@ -185,7 +213,7 @@ namespace Z0
         /// <param name="src">The source array</param>
         /// <param name="indices">The indices that define the values to be extracted from the source</param>
         /// <typeparam name="T">The element type</typeparam>
-        [Op, Closures(Integers)]
+        [Op, Closures(UInt8k)]
         public static T[] indexed<T>(T[] src, int[] indices)
         {
             var dst = new T[indices.Length];
@@ -243,21 +271,5 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Concatentates a parameter array of byte arrays
-        /// </summary>
-        /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
-        [Op]
-        public static byte[] concat(params byte[][] src)
-         {
-            byte[] ret = new byte[src.Sum(x => x.Length)];
-            int offset = 0;
-            foreach (byte[] data in src)
-            {
-                Buffer.BlockCopy(data, 0, ret, offset, data.Length);
-                offset += data.Length;
-            }
-            return ret;
-        }
     }
 }

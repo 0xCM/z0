@@ -16,6 +16,13 @@ namespace Z0
     {   
         public PropertyInfo Data {get;}
 
+        public string Identifier
+
+        {
+            [MethodImpl(Inline)]
+            get => Data.Name;
+        }
+
         [MethodImpl(Inline)]
         public static bool operator ==(ClrProperty<T> lhs, ClrProperty<T> rhs)
             => lhs.Equals(rhs);

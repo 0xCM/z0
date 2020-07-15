@@ -17,7 +17,13 @@ namespace Z0
     /// </summary>
     public readonly struct Seq<T> : IDeferred<Seq<T>,T>
     {
-        public IEnumerable<T> Content {get;}
+        public readonly IEnumerable<T> Source;
+        
+        public readonly IEnumerable<T> Content
+        {
+            [MethodImpl(Inline)]   
+            get => Source;
+        }
 
         [MethodImpl(Inline)]   
         public static Seq<T> operator + (Seq<T> lhs, Seq<T> rhs)
@@ -32,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]   
         public Seq(IEnumerable<T> src)
-            => Content = src;
+            => Source = src;
 
         [MethodImpl(Inline)]
         public Seq<T> WithContent(IEnumerable<T> src)
@@ -42,22 +48,22 @@ namespace Z0
             => new Seq<T>(Content.Concat(rhs.Content));
 
         public Seq<Y> Select<Y>(Func<T,Y> selector)       
-             => define(from x in Content select selector(x));
+             => from(from x in Content select selector(x));
 
         public Seq<Z> SelectMany<Y,Z>(Func<T,Seq<Y>> lift, Func<T,Y,Z> project)
-            => define(from x in Content
+            => from(from x in Content
                           from y in lift(x).Content
                           select project(x, y));
 
         public Seq<Y> SelectMany<Y>(Func<T,Seq<Y>> lift)
-            => define(from x in Content
+            => from(from x in Content
                           from y in lift(x).Content
                           select y);
 
         public Seq<T> Where(Func<T,bool> predicate)
-            => define(from x in Content where predicate(x) select x);
+            => from(from x in Content where predicate(x) select x);
 
         public static Seq<T> Empty 
-            => new Seq<T>(Array.Empty<T>());
+            => new Seq<T>(sys.empty<T>());
     }
 }

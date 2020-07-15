@@ -10,19 +10,23 @@ namespace Z0
 
     using static Konst;
 
-    
     partial struct Reflex
     {
-        /// <summary>
-        /// Selects all instance/static and public/non-public fields declared or inherited by a type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        [MethodImpl(Inline), Op]
-        public static Indexed<FieldInfo> fields(Type src)
-            => src.GetFields(BF);
 
         [MethodImpl(Inline), Op]
-        public static Indexed<object> attributes(Type src)
-            => src.GetCustomAttributes(false); 
+        public static string name(FieldInfo src)
+            => src.Name;
+
+        [MethodImpl(Inline), Op]
+        public static string name(MethodInfo src)
+            => src.Name;
+
+        [MethodImpl(Inline), Op]
+        public static string name(Type src)
+            => src.Name;
+
+        [MethodImpl(Inline), Op]
+        public static string name(PropertyInfo src)
+            => src.Name;
     }
 }

@@ -15,5 +15,9 @@ namespace Z0
         public static ReadOnlySpan<char> chars<E>(ReadOnlySpan<E> src)
             where E : unmanaged, Enum
                 => recover<E,char>(src);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> chars(string src)
+                => src;
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to adjudicate</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static bool empty<T>(in T src)
             where T : struct
         {            
