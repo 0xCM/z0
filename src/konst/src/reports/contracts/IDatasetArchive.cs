@@ -21,7 +21,6 @@ namespace Z0
             => (from p in DatasetPaths().Where(p => p.FileName == name)
                 select Dataset(p)).FirstOrDefault(); 
               
-
         ParseResult<TextDoc> Dataset(string name)
             => Dataset(ArchiveRoot + FileName.Define(name, FileExtensions.Csv));
 

@@ -23,7 +23,6 @@ namespace Z0
         where F : unmanaged, Enum
         where R : IRecord
     {
-        
-        
+                
     }
 }

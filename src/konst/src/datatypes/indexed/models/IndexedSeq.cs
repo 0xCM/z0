@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Reifies a canonical indexed sequence container
     /// </summary>
-    public readonly struct IndexedSeq<T> : IIndexedSeq<IndexedSeq<T>,T>
+    public readonly struct IndexedSeq<T> : IIndex<IndexedSeq<T>,T>
     {        
         readonly T[] Data;
 

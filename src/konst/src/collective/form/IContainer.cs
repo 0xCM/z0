@@ -110,7 +110,6 @@ namespace Z0
         /// <param name="rhs">The right value supplied to the concatenation operator</param>
         F Concat(F rhs);
     }
-
     
     public interface IMaterialied<T> : IFinite, IContented<T>, IIndex<T> 
     {
@@ -127,30 +126,14 @@ namespace Z0
         /// <param name="src"></param>
         F Redefine(T src);
     }
-
-    public interface IReversible<T>
-    {
-
-    }
     
     /// <summary>
     /// Characterizes a reversible structure
     /// </summary>
     /// <typeparam name="S">The structure type</typeparam>
-    public interface IReversible<F,T> : IReversible<T>
+    public interface IReversible<F,T>
         where F : IReversible<F,T>, new()
     {
         F Reverse();
     }    
-
-    /// <summary>
-    /// Characterizes a reifed finite indexed sequence
-    /// </summary>
-    /// <typeparam name="S">The reifying type</typeparam>
-    /// <typeparam name="T">The sequence element type</typeparam>
-    public interface IIndexedSeq<F,T> : INonEmptyIndex<T>, IReversible<F,T> 
-        where F : IIndexedSeq<F,T>, new()
-    {
-
-    }
 }

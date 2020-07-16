@@ -13,7 +13,7 @@ namespace Z0
     using static ValueIndex;
     using static z;
     
-    public readonly struct ValueIndex<T> : IIndexedSeq<ValueIndex<T>,T>
+    public readonly struct ValueIndex<T> : IIndex<ValueIndex<T>,T>
         where T : struct
     {
         public readonly T[] Data;

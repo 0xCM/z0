@@ -66,5 +66,17 @@ namespace Z0
 
         T[] IContented<T[]>.Content 
             => Data;
+
+        public ref T Head 
+            => ref this[0];
+
+        public ref T Tail
+             => ref this[Length - 1];
+
+        public Indexed<T> Reverse()
+        {
+            Array.Reverse(Data);
+            return this;
+        }
     }
 }

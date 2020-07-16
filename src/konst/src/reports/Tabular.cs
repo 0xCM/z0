@@ -23,12 +23,6 @@ namespace Z0
             where R : ITabular
                 => default;
 
-        // [MethodImpl(Inline)]
-        // public static Tabular<F,R> Proxy<F,R>(R record, Func<R,char,string> formatter)
-        //     where F : unmanaged, Enum
-        //     where R : ITabular
-        //         => new Tabular<F,R>(record,formatter);
-
         /// <summary>
         /// Derives format configuration data from a type
         /// </summary>

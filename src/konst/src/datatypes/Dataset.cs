@@ -76,7 +76,6 @@ namespace Z0
             else
                 return content.ToString();
         }    
-
     }
 
     public readonly struct Dataset<F>
@@ -109,6 +108,18 @@ namespace Z0
         public C[] Content
         {
             get => Data;
+        }
+
+        public ref C Head 
+            => ref Data[0];
+
+        public ref C Tail 
+            => ref Data[Length - 1];
+
+        public Dataset<F, C> Reverse()
+        {
+            Array.Reverse(Data);
+            return this;
         }
     }
 }

@@ -6,11 +6,7 @@ namespace Z0
 {        
     using System;
 
-    public readonly struct PublicationArchive : IPublicationArchive
-    {
-        public static IPublicationArchive Default => default;
-    }    
-    
+
     public interface IPublicationArchive : IDatasetArchive
     {
         FolderName IDatasetArchive.RootFolder 

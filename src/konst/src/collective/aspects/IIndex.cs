@@ -45,17 +45,30 @@ namespace Z0
             => ref this[index];
     }
    
-    public interface IIndex<F,T> : IIndex<T>, IReified<F>, INullary<F,T>
+    public interface INonEmptyIndex<T> : IIndex<T>
+    {
+        ref T Head 
+            => ref this[0];
+
+        ref T Tail 
+            => ref this[Length - 1];
+    }
+
+    /// <summary>
+    /// Characterizes a reifed finite nonempty index
+    /// </summary>
+    /// <typeparam name="S">The reifying type</typeparam>
+    /// <typeparam name="T">The sequence element type</typeparam>
+    public interface IIndex<F,T> : IIndex<T>, IReified<F>, INullary<F,T>, INonEmptyIndex<T>, IReversible<F,T> 
         where F : IIndex<F,T>, new()
     {
         bool INullity.IsEmpty 
             => Content?.Length == 0;
-    }
 
-    public interface INonEmptyIndex<T> : IIndex<T>
-    {
-        ref T Head {get;}
-
-        ref T Tail {get;}
-    }
+        F IReversible<F,T>.Reverse()
+        {
+            Array.Reverse(Content);
+            return (F)this;
+        }
+    }    
 }
