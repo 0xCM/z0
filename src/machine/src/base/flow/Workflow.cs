@@ -14,25 +14,35 @@ namespace Z0
     {     
         readonly IAppContext Context;
         
+        readonly EventReceiver Receiver;
+
+        readonly FilePath ErrorLogPath;
+                
+        readonly StreamWriter StatusLog;
+
+        readonly Action Connector;
+
+        readonly Action Executor;
+
         readonly EventHub Hub;
 
         readonly HubRelay Relay;
 
-        readonly Action Runner;
-                
-        readonly StreamWriter StatusLog;
-
-        readonly FilePath ErrorLogPath;
+        readonly HubClient client;
 
         [MethodImpl(Inline)]
-        public Workflow(IAppContext context, EventReceiver receiver, Action runner)
+        public Workflow(IAppContext context, EventReceiver receiver, Action connect, Action exec)
+            : this()
         {
             Context = context;
+            Receiver = receiver;
             ErrorLogPath = context.AppPaths.AppErrorOutPath;
             StatusLog = context.AppPaths.AppStandardOutPath.Writer();
+            Connector = connect;
+            Executor = exec;
             Hub = EventHubs.hub();
             Relay = new HubRelay(receiver);
-            Runner = runner;
+            client = EventHubs.client(Hub, this, connect, exec);
         }
 
         [MethodImpl(Inline)]
@@ -50,6 +60,6 @@ namespace Z0
         }
 
         public void Run()
-            => Runner();
+            => Executor();
     }        
 }

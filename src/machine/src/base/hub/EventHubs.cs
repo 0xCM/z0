@@ -17,8 +17,8 @@ namespace Z0
             => new EventHub(capacity);    
 
         [MethodImpl(Inline), Op]
-        public static HubClient client(IEventHub hub, IDataSink sink, Action connector)
-            => new HubClient(hub, sink, connector);
+        public static HubClient client(IEventHub hub, IDataSink sink, Action connect, Action exec)
+            => new HubClient(hub, sink, connect, exec);
 
         [MethodImpl(Inline)]
         public static HubRelay relay(EventReceiver receiver)

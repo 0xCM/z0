@@ -210,21 +210,4 @@ namespace Z0.MetaCore
         public override string ToString()
             => FormatValue();
     }
-
-    /// <summary>
-    /// Base type for keyed value objects
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <typeparam name="TKey"></typeparam>
-    public abstract class DataObject<T,TKey> : DataObject<T>
-        where T : DataObject<T>
-    {
-        public TKey Key { get; }
-
-        public DataObject(TKey Key)
-            => this.Key = Key;
-
-        public override sealed Option<K> GetKey<K>()
-            => (K)(object)Key;
-    }
 }

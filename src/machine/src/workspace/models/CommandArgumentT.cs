@@ -6,13 +6,13 @@ namespace Z0.MetaCore
 {
     using System;
     
-    public readonly struct CommandArgument
+    public readonly struct CommandArgument<T>
     {
         public readonly string Name;
 
-        public readonly object Value;
+        public readonly T Value;
 
-        public CommandArgument(string name, object value)
+        public CommandArgument(string name, T value)
         {
             Name = name;
             Value = value;
@@ -23,11 +23,5 @@ namespace Z0.MetaCore
         
         public override string ToString()
             => Format();
-        
-        public bool IsBit 
-            => Value is bool;
-
-        public T GetValue<T>() 
-            => (T)Value;
     }
 }

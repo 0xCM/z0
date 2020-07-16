@@ -12,8 +12,8 @@ namespace Z0
     public readonly struct Workflows
     {
         [MethodImpl(Inline)]
-        public static Workflow<T> create<T>(IAppContext context, EventReceiver receiver, Action runner)
+        public static Workflow<T> create<T>(IAppContext context, EventReceiver receiver, Action connect, Action exec)
             where T : struct
-                => new Workflow<T>(context, receiver, runner);                           
+                => new Workflow<T>(context, receiver, connect, exec);                           
     }
 }

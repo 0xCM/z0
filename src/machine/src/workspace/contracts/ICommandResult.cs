@@ -40,29 +40,4 @@ namespace Z0.MetaCore
         /// </summary>
         CorrelationToken? CorrelationToken { get; }
     }
-
-    /// <summary>
-    /// Defines contract for command results, generic with respect to specification
-    /// </summary>
-    public interface ICommandResult<out TSpec> : ICommandResult
-        where TSpec : CommandSpec<TSpec>, new()
-    {
-        /// <summary>
-        /// The value computed by the command when executed, if successful
-        /// </summary>
-        new TSpec Spec { get; }
-
-    }
-
-    /// <summary>
-    /// Defines contract for command results, generic with respect to specification and payload
-    /// </summary>
-    public interface ICommandResult<out TSpec, out TPayload> : ICommandResult<TSpec>
-        where TSpec : CommandSpec<TSpec, TPayload>, new()
-    {
-        /// <summary>
-        /// The value computed by the command when executed, if successful
-        /// </summary>
-        new TPayload Payload { get; }
-    }
 }

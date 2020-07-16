@@ -13,22 +13,24 @@ namespace Z0.MetaCore
         where R : ProcessComandResponse<R,C>
         where C : IProcessCommand
     {
+        public ProcessMessage Content {get;}
+
+        public C Command { get; }
+
         public static implicit operator ProcessCommandResponseAdapter(ProcessComandResponse<R,C> response)
             => new ProcessCommandResponseAdapter(new ProcessCommandAdapter(response.Command), response);
             
         protected ProcessComandResponse(C command, ProcessMessage content)
         {
-            this.Command = command;
-            this.Content = content ?? ProcessMessage.Empty(command.CommandName);
+            Command = command;
+            Content = content ?? ProcessMessage.Empty(command.CommandName);
         }
 
         protected ProcessComandResponse(C command, IMessage content)
         {
-            this.Command = command;
-            this.Content = content as ProcessMessage ?? ProcessMessage.Empty(command.CommandName);
+            Command = command;
+            Content = content as ProcessMessage ?? ProcessMessage.Empty(command.CommandName);
         }
-
-        public ProcessMessage Content {get;}
 
         Guid IMessage.MessageId
             => Content.MessageId;
@@ -40,9 +42,6 @@ namespace Z0.MetaCore
         string IMessage.ToCanonicalForm()
             => Content.ToCanonicalForm();
 
-        public C Command { get; }
-
-
         IProcessCommand IProcessResponseMessge.Command
             => Command;
 
@@ -51,7 +50,6 @@ namespace Z0.MetaCore
 
         R IProcessResponseMessage<R, C>.Response
             => (R)this;
-
 
         object IMessage.Body
             => Content;
@@ -70,18 +68,5 @@ namespace Z0.MetaCore
 
         string IMessagePacket.Label
             => Content.Type;
-    }
-
-    public abstract class ProcessCommandResponse<c> : ProcessComandResponse<ProcessCommandResponse<c>, c>
-        where c : IProcessCommand
-    {       
-        public ProcessCommandResponse(c command, IProcessResponseMessge adapted_response)
-            : base(command, adapted_response)
-        {
-            this.adapted_response = adapted_response;
-            
-        }
-
-        IProcessResponseMessge adapted_response { get; }
     }
 }

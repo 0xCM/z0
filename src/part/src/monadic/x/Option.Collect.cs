@@ -139,6 +139,9 @@ namespace Z0
             return o.Any() ? o.First() : Option.none<T>();
         }
 
+        public static Option<T> TryGetFirst<T>(this T[] src)
+            => src.Length != 0 ? src[0] : Option.none<T>();
+            
         /// <summary>
         /// Removes an element from the queue if one exists
         /// </summary>

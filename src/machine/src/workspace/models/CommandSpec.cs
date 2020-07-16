@@ -19,27 +19,47 @@ namespace Z0.MetaCore
     /// <summary>
     /// Represents a typed command specification
     /// </summary>
-    public class CommandSpec<TSpec> : CommandArgumentSet<TSpec>, ICommandSpec<TSpec>
-        where TSpec : CommandSpec<TSpec>, new()
+    public class CommandSpec<S> : CommandArgumentSet<S>, ICommandSpec<S>
+        where S : CommandSpec<S>, new()
     {
+        public CommandName CommandName { get; set; }
+
+        public string CommandDescription { get; set; }
+
+        public string SpecName { get; set; }
+
+        bool Expanded { get; set; }
+
+        public CommandSpec()
+        {
+            CommandName = Descriptor.CommandName;
+            CommandDescription = Descriptor.CommandDescription;
+            SpecName = $"{CommandName}: {DateTime.Now.ToLexicalString()}";
+        }
+
+        public CommandSpec(CommandName name)
+            : this()
+        {
+            CommandName = name.IsEmpty ? Descriptor.CommandName : name;
+            CommandDescription = Descriptor.CommandDescription;
+        }
+        
         protected static IAppMsg Describe<C>(C content, string template, [Caller] string caller = null, [File] string file = null, [Line] int?  line = null)
             => z.message(content, template,  AppMsgKind.Info, AppMsgColor.Green, caller, file, line);
 
         static IReadOnlyDictionary<string, PropertyInfo> argprops
-            = typeof(TSpec).GetProperties().Select(p => (p.Name, p)).ToDictionary();
+            = typeof(S).GetProperties().Select(p => (p.Name, p)).ToDictionary();
 
         public static readonly CommandSpecDescriptor Descriptor
-            = CommandSpecDescriptor.FromSpecType(typeof(TSpec));
-
-        public static readonly TSpec Empty = new TSpec();
+            = CommandSpecDescriptor.FromSpecType(typeof(S));
         
-        public static TSpec Expand(ICommandSpec src)
+        public static S Expand(ICommandSpec src)
         {
-            if ((src as TSpec)?.Expanded ?? false)
-                return src as TSpec;
+            if ((src as S)?.Expanded ?? false)
+                return src as S;
 
             var args = src.Arguments;
-            var expansion = new TSpec
+            var expansion = new S
             {
                 CommandName = src.CommandName,
                 Expanded = true,
@@ -75,14 +95,13 @@ namespace Z0.MetaCore
                 : NormalizedCommandName;
         }
 
-
-        public static TSpec Create(IEnumerable<CommandArgument> args)
+        public static S Create(IEnumerable<CommandArgument> args)
         {
-            if (typeof(TSpec) == typeof(CommandArguments))
-                return (z.cast<TSpec>(new CommandArguments(args)));
+            if (typeof(S) == typeof(CommandArguments))
+                return (z.cast<S>(new CommandArguments(args)));
             else
             {
-                var _args = new TSpec();
+                var _args = new S();
                 _args.CommandName = Descriptor.CommandName;
                 foreach (var arg in args)
                 {
@@ -93,28 +112,6 @@ namespace Z0.MetaCore
                 return _args;
             }
         }
-
-        public CommandSpec()
-        {
-            this.CommandName = Descriptor.CommandName;
-            this.CommandDescription = Descriptor.CommandDescription;
-            this.SpecName = $"{CommandName}: {DateTime.Now.ToLexicalString()}";
-        }
-
-        public CommandSpec(CommandName CommandName)
-            : this()
-        {
-            this.CommandName = CommandName.IsEmpty ? Descriptor.CommandName : CommandName;
-            this.CommandDescription = Descriptor.CommandDescription;
-        }
-        
-        public CommandName CommandName { get; set; }
-
-        public string CommandDescription { get; set; }
-
-        public string SpecName { get; set; }
-
-        bool Expanded { get; set; }
 
         public bool IsEmpty 
             => ReferenceEquals(this, Empty);
@@ -128,14 +125,12 @@ namespace Z0.MetaCore
         public CommandSpecDescriptor Describe()
             => Descriptor;
 
-
         public virtual string CommandArea
             => CommandName.Id.Split('/').FirstOrDefault() ?? CommandName;
 
         public virtual string CommandAction
             => CommandName.Id.Split('/').LastOrDefault() ?? CommandName;
         
-
         public Option<CommandArgument> this[string argname]
         {
             get
@@ -159,7 +154,7 @@ namespace Z0.MetaCore
         ICommandSpec ICommandSpec.ExpandVariables()
             => Expand(this);
 
-        TSpec ICommandSpec<TSpec>.ExpandVariables()
+        S ICommandSpec<S>.ExpandVariables()
             => Expand(this);
 
         public virtual IAppMsg DescribeIntent()
@@ -175,13 +170,15 @@ namespace Z0.MetaCore
 
         public override string ToString()
             => SpecName;
+ 
+         public static S Empty 
+            => new S();
     }
 
-    public abstract class CommandSpec<TSpec,TPayload> : CommandSpec<TSpec>, ICommandSpec<TSpec,TPayload>
-        where TSpec : CommandSpec<TSpec,TPayload>, new()
+    public abstract class CommandSpec<S,P> : CommandSpec<S>, ICommandSpec<S,P>
+        where S : CommandSpec<S,P>, new()
     {
         public CommandSpec()
         { }
-
     }
 }

@@ -47,25 +47,27 @@ namespace Z0.MetaCore
         /// Replaces script variables with values from the execution context which
         /// is typically resolved using the local machine's environment variables
         /// </summary>
-        /// <returns></returns>
         ICommandSpec ExpandVariables();
 
         /// <summary>
         /// The message that describes the command upon commencement of execution
         /// </summary>
-        IAppMsg DescribeIntent();
-        
+        IAppMsg DescribeIntent();        
     }
 
-    public interface ICommandSpec<TSpec> : ICommandSpec
-        where TSpec : CommandSpec<TSpec>, new()
+    public interface ICommandSpec<S> : ICommandSpec
+        where S : CommandSpec<S>, new()
     {
-        new TSpec ExpandVariables();
-
+        new S ExpandVariables();
     }
 
-    public interface ICommandSpec<TSpec,TPayload> : ICommandSpec<TSpec>
-        where TSpec : CommandSpec<TSpec,TPayload>, new()
+    /// <summary>
+    /// Characterizes a reified payload-parametric command specification
+    /// </summary>
+    /// <typeparam name="S">The reifying type</typeparam>
+    /// <typeparam name="P">The payload type</typeparam>
+    public interface ICommandSpec<S,P> : ICommandSpec<S>
+        where S : CommandSpec<S,P>, new()
     {
     }
 }
