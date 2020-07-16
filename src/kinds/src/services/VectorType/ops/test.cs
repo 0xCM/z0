@@ -12,7 +12,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static Memories;
 
     partial class VectorType
     {

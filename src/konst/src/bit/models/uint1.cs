@@ -181,6 +181,10 @@ namespace Z0
             => uint1(src);
 
         [MethodImpl(Inline)]    
+        public static implicit operator S(bool src)
+            => uint1(src);
+
+        [MethodImpl(Inline)]    
         public static S @bool(bool x)
             => uint1(x);
 

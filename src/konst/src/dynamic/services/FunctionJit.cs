@@ -20,7 +20,15 @@ namespace Z0
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
             var location = (MemoryAddress)src.MethodHandle.GetFunctionPointer();
-            return (src, location, size);            
+            return  new LocatedMethod(OpIdentity.Empty, src, location, size);            
+        }
+
+        [MethodImpl(Inline)]
+        public static LocatedMethod jit(IdentifiedMethod src)
+        {
+            RuntimeHelpers.PrepareMethod(src.Method.MethodHandle);
+            var location = (MemoryAddress)src.Method.MethodHandle.GetFunctionPointer();
+            return new LocatedMethod(src.Id, src.Method, location);            
         }
 
         /// <summary>

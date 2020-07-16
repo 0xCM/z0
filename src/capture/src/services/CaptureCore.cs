@@ -17,18 +17,6 @@ namespace Z0.Asm
         public static ICaptureCore Service 
             => default(CaptureCore);  
 
-        [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedOperation bits, ExtractTermCode term)
-            => new CapturedCode(id, null, src, bits.ParseInput, bits.Encoded, term);
-
-        [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, Delegate src, Z0.ParsedOperation bits, ExtractTermCode term)
-            => new CapturedCode(id, src, src.Method, bits.ParseInput, bits.Encoded, term);
-
-        [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, Delegate src, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
-            => new CapturedCode(id, src, src.Method, extracted, parsed, term);
-
         public Option<ParsedOperation> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
             try
@@ -126,15 +114,27 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
+        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedOperation bits, ExtractTermCode term)
+            => new CapturedCode(id, null, src, bits.ParseInput, bits.Encoded, term);
+
+        [MethodImpl(Inline)]
+        static CapturedCode DefineMember(OpIdentity id, Delegate src, Z0.ParsedOperation bits, ExtractTermCode term)
+            => new CapturedCode(id, src, src.Method, bits.ParseInput, bits.Encoded, term);
+
+        [MethodImpl(Inline)]
+        static CapturedCode DefineMember(OpIdentity id, Delegate src, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
+            => new CapturedCode(id, src, src.Method, extracted, parsed, term);
+
+        [MethodImpl(Inline)]
+        static CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
             => capture(exchange, id, (byte*)Unsafe.AsPointer(ref src));
 
         [MethodImpl(Inline)]
-        CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)        
+        static CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)        
             => capture(exchange, id, src.ToPointer<byte>());
 
         [MethodImpl(Inline)]
-        CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, byte* pSrc)
+        static CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, byte* pSrc)
         {
             var limit = exchange.BufferLength - 1;
             var start = (long)pSrc;

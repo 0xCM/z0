@@ -11,9 +11,8 @@ namespace Z0
     using Z0.Dynamics.Operators;
 
     using static Konst;
-    using static Root;
     using static XPress;
-    using static As;
+    using static z;
 
     [ApiHost]
     public readonly struct LinqDynamic
@@ -35,13 +34,13 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return new Xor<T>(generic<T>(Ops8u.Xor));
             else if(typeof(T) == typeof(ushort))
-                return new Xor<T>(generic<T>(Ops8u.Xor));
+                return new Xor<T>(generic<T>(Ops16u.Xor));
             else if(typeof(T) == typeof(uint))
-                return new Xor<T>(generic<T>(Ops8u.Xor));
+                return new Xor<T>(generic<T>(Ops32u.Xor));
             else if(typeof(T) == typeof(ulong))
-                return new Xor<T>(generic<T>(Ops8u.Xor));
+                return new Xor<T>(generic<T>(Ops64u.Xor));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
             
         [MethodImpl(Inline), Op, Closures(AllNumeric)]

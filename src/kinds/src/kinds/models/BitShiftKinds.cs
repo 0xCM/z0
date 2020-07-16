@@ -36,6 +36,5 @@ namespace Z0
         public readonly struct Rotl<T> : IBitShiftKind<Rotl,T> {}
 
         public readonly struct Rotr<T> : IBitShiftKind<Rotr,T> {}
-
     }
 }

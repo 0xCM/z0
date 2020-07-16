@@ -8,6 +8,8 @@ namespace Z0.Asm
     using System.Linq;        
     using System.Reflection;
 
+    using LD = LinqDynamic;
+
     public sealed class t_method_capture : t_asm<t_method_capture>
     {
         public override bool Enabled => true;
@@ -72,10 +74,26 @@ namespace Z0.Asm
         public void capture_dynamic_delegates()
         {
             using var dst = CaseWriter(FileExtensions.Asm);
-
             var f = LinqDynamic.xor<uint>();
             var id = Identity.identify(f.Method);
-            AsmCheck.WriteAsm(AsmCheck.Capture(id,f.Method).Require(),dst);        
+            var capture = CaptureAlt.capture(new IdentifiedMethod(id, f.Method));
+            AsmCheck.WriteAsm(capture, dst);            
+        }
+
+        public void capture_dynamic_delegate_batch()
+        {
+            using var dst = CaseWriter(FileExtensions.Asm);
+            var methods = z.array(
+                LD.xor<byte>().Method, LD.xor<ushort>().Method, LD.xor<uint>().Method, LD.xor<ulong>().Method
+                );
+            var identified = z.alloc<IdentifiedMethod>(methods.Length);
+            for(var i=0; i<identified.Length; i++)
+                identified[i] = new IdentifiedMethod(Identity.identify(methods[i]), methods[i]);
+            var buffer = sys.alloc<byte>(Pow2.T14);
+
+            var capture = CaptureAlt.capture(identified, buffer);
+            AsmCheck.WriteAsm(capture, dst);
+            
         }
 
         public void capture_delegates()

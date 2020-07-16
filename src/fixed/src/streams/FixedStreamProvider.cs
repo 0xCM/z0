@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
 
     class FixedStreamProvider<F,W,T> : IFixedStreamProvider<F,W,T>

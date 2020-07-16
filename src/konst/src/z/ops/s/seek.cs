@@ -24,6 +24,10 @@ namespace Z0
         public static ref T seek<S,T>(in S src, uint count)
             => ref Add(ref As<S,T>(ref edit(src)), (int)count);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T seek<T>(Span<byte> src, uint count)
+            =>  ref seek<byte,T>(skip(src,count*size<T>()), 1);
+
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
         /// </summary>
@@ -37,7 +41,7 @@ namespace Z0
         /// width[T]=32: mov rax,[rcx] => movsxd rdx,edx => lea rax,[rax+rdx*4]
         /// width[T]=64: mov rax,[rcx] => movsxd rdx,edx => lea rax,[rax+rdx*8]
         /// </remarks>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(Span<T> src, uint offset)
             => ref add(first(src), offset);            
 
@@ -67,23 +71,6 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="offset">The T-measured offset count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        /// <remarks>
-        /// Effects
-        /// width[T]=8:  movsxd rax,edx => add rax,rcx
-        /// width[T]=16: movsxd rax,edx => lea rax,[rcx+rax*2]
-        /// width[T]=32: movsxd rax,edx => lea rax,[rcx+rax*4]
-        /// width[T]=64: movsxd rax,edx => lea rax,[rcx+rax*8]
-        /// </remarks>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref T seek<T>(in T src, uint offset)
-            => ref Add(ref edit(src), (int)offset);
-
-        /// <summary>
-        /// Returns a reference to a T-measured offset-identified cell
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="offset">The T-measured offset count</param>
-        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(in T src, byte offset)
             => ref Add(ref edit(src), (int)offset);
@@ -104,8 +91,33 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="offset">The T-measured offset count</param>
         /// <typeparam name="T">The cell type</typeparam>
+        /// <remarks>
+        /// Effects
+        /// width[T]=8:  movsxd rax,edx => add rax,rcx
+        /// width[T]=16: movsxd rax,edx => lea rax,[rcx+rax*2]
+        /// width[T]=32: movsxd rax,edx => lea rax,[rcx+rax*4]
+        /// width[T]=64: movsxd rax,edx => lea rax,[rcx+rax*8]
+        /// </remarks>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T seek<T>(in T src, uint offset)
+            => ref Add(ref edit(src), (int)offset);
+
+        /// <summary>
+        /// Returns a reference to a T-measured offset-identified cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(in T src, int offset)
             => ref Add(ref edit(src), offset);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T regress<T>(in T src, byte offset)
+            => ref Add(ref edit(src), -offset);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T regress<T>(in T src, ushort offset)
+            => ref Add(ref edit(src), -offset);
     }
 }

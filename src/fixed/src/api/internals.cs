@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using K = Kinds;
 
@@ -51,7 +51,7 @@ namespace Z0
         internal static unsafe void deposit<S,F>(in S src, int count, ref F dst, int offset)
             where S : struct
             where F : struct
-                => store(src, size<S>() * count, ref Unsafe.Add(ref Unsafe.As<F,byte>(ref dst), size<S>() * offset));
+                => store(src, (int)(size<S>() * count), ref Unsafe.Add(ref Unsafe.As<F,byte>(ref dst), (int)(size<S>() * offset)));
 
         [MethodImpl(Inline)]
         internal static unsafe void store<S,T>(in S src, int bytecount, ref T dst)

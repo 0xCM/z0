@@ -66,6 +66,5 @@ namespace Z0.Dynamics.Operators
 
         internal static Expression<Func<byte,byte,byte>> OrX
             => f<byte>(Or);
-
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [ApiHost]
-    public partial class Kinds : IApiHost<Kinds>
+    public partial class Kinds
     {
 
 

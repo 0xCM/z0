@@ -14,9 +14,11 @@ namespace Z0
 
     public readonly struct LocatedMethod : ITextual, IComparable<LocatedMethod>
     {
+        public OpIdentity Id {get;}
+
         public MethodInfo Method {get;}
 
-        public MemoryAddress Location {get;}
+        public MemoryAddress Address {get;}
 
         public ByteSize Size {get;}
 
@@ -29,29 +31,26 @@ namespace Z0
         public MemRef MemRef
         {
             [MethodImpl(Inline)]
-            get => new MemRef(Location, Size.IsEmpty ? 0 : (int)Size);
+            get => new MemRef(Address, Size.IsEmpty ? 0 : (int)Size);
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator LocatedMethod((MethodInfo method, MemoryAddress location, int? size) src)
-            => new LocatedMethod(src.method, src.location, src.size);
 
         [MethodImpl(Inline)]
         public static implicit operator MemRef(LocatedMethod src)
             => src.MemRef;
 
         [MethodImpl(Inline)]
-        public LocatedMethod(MethodInfo method, MemoryAddress location, ByteSize? size = null)
+        public LocatedMethod(OpIdentity id, MethodInfo method, MemoryAddress location, ByteSize? size = null)
         {
+            Id = id;
             Method = method;
-            Location = location;
+            Address = location;
             Size = size ?? ByteSize.Empty;
         }
 
         public string Format()
         {
             var name = Method.DisplayName();
-            var address = Location.Format();
+            var address = Address.Format();
             var size = HasKnownSize ? text.bracket(Size) : EmptyString;
             return text.concat(name,size, Space, Chars.Eq, Space, address);
         }
@@ -61,6 +60,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int CompareTo(LocatedMethod src)
-            => Location.CompareTo(src.Location);
+            => Address.CompareTo(src.Address);
     }
 }

@@ -14,10 +14,10 @@ namespace Z0.Dynamics.Operators
         static Y Cast(X value)
             => (Y)(object)value;
 
-        static XFunc<X, Y> Converter()
+        static XFunc<X,Y> Converter()
             => f((X x) => (Y)Convert.ChangeType(x,typeof(Y)));
 
-        static readonly Func<X, Y> _OP
+        static readonly Func<X,Y> _OP
             = Converter().Fx.Compile();
 
         public static Y Apply(X x)

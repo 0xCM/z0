@@ -16,7 +16,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static MemSlots from(Type src)
-            => FunctionJit.jit(src).Map(m => new MemSlot(m.Location, m.Size));
+            => FunctionJit.jit(src).Map(m => new MemSlot(m.Address, m.Size));
 
         [MethodImpl(Inline)]
         public static MemSlots<E> from<E>(Type src)

@@ -68,7 +68,7 @@ namespace Z0.Asm
             }
         }
 
-        void check_math()
+        public void check_math()
         {
             var dSrc = ApiHostUri.FromHost(typeof(math));
             var gSrc = ApiHostUri.FromHost(typeof(gmath));

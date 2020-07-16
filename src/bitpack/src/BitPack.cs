@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     [ApiHost("api")]
-    public partial class BitPack : IApiHost<BitPack>
+    public partial class BitPack
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }

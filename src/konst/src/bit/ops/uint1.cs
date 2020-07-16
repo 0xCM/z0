@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
+    using static z;
+    
     using S = uint1;
 
     partial class Bit

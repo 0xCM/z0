@@ -70,7 +70,6 @@ namespace Z0.Asm
             Claim.eq(f(10,5,5), M.TernaryAdd(10,5,5));        
         }
 
-
         public void check_blocks()
         {
             var methods = typeof(Blocked).DeclaredMethods().Tagged<OpAttribute>().WithName("add");

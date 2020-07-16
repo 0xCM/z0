@@ -12,10 +12,10 @@ namespace Z0.Dynamics.Operators
 
     public static class Subtract<T>
     {
-        static readonly Func<T, T, T> _OP
+        static readonly Func<T,T,T> _OP
             = Construct();
 
-        static Func<T, T, T> Construct()
+        static Func<T,T,T> Construct()
         {
 
             switch (sys.typecode<T>())
@@ -38,13 +38,10 @@ namespace Z0.Dynamics.Operators
 
     public static class SubtractChecked<T>
     {
-        static readonly Func<T, T, T> _OP
+        static readonly Func<T,T,T> _OP
             = lambda<T, T, T>(Expression.SubtractChecked).Compile();
 
         public static T Apply(T x, T y)
             => _OP(x, y);
     }
-
-
-
 }

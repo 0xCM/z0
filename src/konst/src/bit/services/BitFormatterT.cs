@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
+    using static z;
+    
     /// <summary>
     /// Configurable bit data type formatter
     /// </summary>
@@ -18,7 +20,7 @@ namespace Z0
         public string Format(ReadOnlySpan<byte> src, in BitFormatConfig config)
         {            
             var bits = src.Length*8;
-            Span<char> dst = stackalloc char[bits];
+            var dst = span<char>(bits);
             dst.Fill(zero);
 
             BitFormatter.Service.Format(src, config.MaxBitCount,dst);

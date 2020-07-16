@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    
+    using static z;
+
     [ApiHost]
     public readonly struct BitFormatter : IBitFormatter
     {
@@ -50,7 +51,6 @@ namespace Z0
             char? blocksep = null, int? rowWidth = null, int? maxbits = null, int? zpad = null)
                 => new BitFormatConfig(tlz, specifier, blockWidth, blocksep, rowWidth, maxbits,zpad);
 
-
         public static string format(object src, TypeCode type)
         {
             if(type == TypeCode.Byte || type == TypeCode.SByte)
@@ -63,6 +63,15 @@ namespace Z0
                 return create<ulong>().Format((ulong)z.rebox(src, NumericKind.U64));
             else
                 return EmptyString;
+        }
+        
+        public static ReadOnlySpan<char> chars(byte[] src)
+        {   
+            var dst = span<char>(src.Length*8);
+            var input = span(src);
+            var config = BitFormatConfig.Default;
+            Service.Format(src, dst.Length, dst);
+            return dst;
         }
 
         [MethodImpl(Inline), Op]
@@ -90,6 +99,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Format(ReadOnlySpan<byte> src, int maxbits, Span<char> dst)
-            => Format(z.first(src), src.Length, maxbits, dst);
+            => Format(first(src), src.Length, maxbits, dst);
     }    
 }

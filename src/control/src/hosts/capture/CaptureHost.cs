@@ -40,7 +40,7 @@ namespace Z0
         {                    
             Context = context;
             Sink = context;
-            EvalBufferSize = Pow2.T14;
+            EvalBufferSize = Pow2.T16;
             WorkflowConfig = new AsmArchiveConfig(root);
             Settings = CaptureConfig.From(context.Settings);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;

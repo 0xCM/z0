@@ -12,6 +12,7 @@ namespace Z0
     using K = BinaryOpClass;
     using Test = TestBinaryDynamic;
     
+    
     public interface ITestBinaryDynamic : TTestOperatorMatch, TCheckDynamic
     {        
         [MethodImpl(Inline)]

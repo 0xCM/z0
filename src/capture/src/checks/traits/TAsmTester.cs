@@ -53,7 +53,13 @@ namespace Z0.Asm
         {
             var asm = Decoder.Decode(capture).Require();
             var formatted = Formatter.FormatFunction(asm);
-            dst.WriteLine(formatted);            
+            dst.Write(formatted);            
+        }
+
+        void WriteAsm(CapturedCode[] src, StreamWriter dst)
+        {
+            for(var i=0; i<src.Length; i++)
+                WriteAsm(src[i], dst);
         }
 
         void WriteAsm(AsmFunction f, StreamWriter dst)
