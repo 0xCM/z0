@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(AllNumeric)]
+        [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static Block64<T> alloc<T>(W64 w)
             where T : unmanaged        
                 => alloc<T>(w,1);
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(AllNumeric)]
+        [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static Block128<T> alloc<T>(W128 w)
             where T : unmanaged        
                 => alloc<T>(w,1);
@@ -72,11 +72,10 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(AllNumeric)]
+        [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static Block256<T> alloc<T>(W256 w)
             where T : unmanaged        
                 => alloc<T>(w,1);
-
 
         /// <summary>
         /// Allocates a single 512-bit block
@@ -84,7 +83,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Alloc, Closures(AllNumeric)]
+        [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static Block512<T> alloc<T>(W512 w)
             where T : unmanaged        
                 => alloc<T>(w,1);
@@ -128,7 +127,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(AllNumeric)]
+        [Alloc, Closures(UnsignedInts)]
         public static Block64<T> alloc<T>(W64 w, ulong count, T t = default)
             where T : unmanaged        
                 => new Block64<T>(new T[count * (ulong)length<T>(w)]);
@@ -139,7 +138,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(AllNumeric)]
+        [Alloc, Closures(UnsignedInts)]
         public static Block128<T> alloc<T>(W128 w, ulong count, T t = default)
             where T : unmanaged        
                 => new Block128<T>(new T[count * (ulong)length<T>(w)]);
@@ -150,7 +149,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(AllNumeric)]
+        [Alloc, Closures(UnsignedInts)]
         public static Block256<T> alloc<T>(W256 w, ulong count, T t = default)
             where T : unmanaged        
                 => new Block256<T>(new T[count * (ulong)length<T>(w)]);
@@ -161,7 +160,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(AllNumeric)]
+        [Alloc, Closures(UnsignedInts)]
         public static Block512<T> alloc<T>(W512 w, ulong blocks, T t = default)
             where T : unmanaged        
                 => new Block512<T>(new T[blocks * (ulong)length<T>(w)]);
@@ -205,7 +204,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(AllNumeric)]
+        [Alloc, Closures(UnsignedInts)]
         public static Block64<T> alloc<T>(W64 w, long count, T t = default)
             where T : unmanaged        
                 => new Block64<T>(new T[count * length<T>(w)]);
@@ -216,7 +215,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(AllNumeric)]
+        [Alloc, Closures(UnsignedInts)]
         public static Block128<T> alloc<T>(W128 w, long count, T t = default)
             where T : unmanaged        
                 => new Block128<T>(new T[count * length<T>(w)]);
@@ -225,12 +224,12 @@ namespace Z0
         /// Allocates a specified number of 256-bit blocks
         /// </summary>
         /// <param name="w">The block width selector</param>
-        /// <param name="count">The block allocation count</param>
+        /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(AllNumeric)]
-        public static Block256<T> alloc<T>(W256 w, long count, T t = default)
+        [Alloc, Closures(UnsignedInts)]
+        public static Block256<T> alloc<T>(W256 w, long blocks, T t = default)
             where T : unmanaged        
-                => new Block256<T>(new T[count * length<T>(w)]);
+                => new Block256<T>(new T[blocks * length<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 512-bit blocks
@@ -238,7 +237,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Alloc, Closures(AllNumeric)]
+        [Alloc, Closures(UnsignedInts)]
         public static Block512<T> alloc<T>(W512 w, long blocks, T t = default)
             where T : unmanaged        
                 => new Block512<T>(new T[blocks * length<T>(w)]);

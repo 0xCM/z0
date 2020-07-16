@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
+
     using static Konst;
 
     partial struct z
@@ -19,9 +21,10 @@ namespace Z0
         public static unsafe byte @byte(bool src)
             => (*((byte*)(&src))); 
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe byte @byte<T>(T src)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref byte @byte<T>(in T src)
             where T : unmanaged             
-                => *((byte*)(&src));
+                => ref As<T,byte>(ref edit(src));        
+                //=> *((byte*)(&src));
     }
 }

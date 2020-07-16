@@ -4,26 +4,43 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static V0;
-    using static V0d;
-    using static Typed;
+    using System;
+    using System.Runtime.CompilerServices;    
+    using System.Runtime.InteropServices;
+
+    using static Konst;    
+
+    public readonly struct FunctionPointers
+    {
+        [MethodImpl(Inline)]
+        public static FunctionPointer<D> pointer<D>(D f)
+            where D : Delegate
+                => new FunctionPointer<D>(f, Marshal.GetFunctionPointerForDelegate<D>(f));
     
+
+    }    
+    public readonly struct FunctionPointer<D>
+        where D : Delegate
+    {
+        public readonly D F;
+
+        public readonly MemoryAddress Address;
+        
+        [MethodImpl(Inline)]
+        public FunctionPointer(D f, MemoryAddress address)
+        {
+            F = f;
+            Address = address;
+        }
+
+    }
+
     public class t_vsign : t_dynamic<t_vsign>
     {
         public void check_vsign_8i()
         {
-            var x = V0.vincrements<sbyte>(w128);
-            var y = vnegate(x);
-            var z = vzero<sbyte>(w128);
-            var a = vsign(x);
-            var b = vsign(y);
-            var c = vsign(z);
-
-            // Trace("x", x.ToString());
-            // Trace("vsign(x)", a.ToString());
-
-            // Trace("vnegate(x)", y.ToString());
-            // Trace("vsign(vnegate(x))", b.ToString());
+            var fp = FunctionPointers.pointer<BinaryOp<uint>>(math.add);
+            term.print(fp.Address);
 
         }
     }

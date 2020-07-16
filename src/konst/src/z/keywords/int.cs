@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe short @int(bool src)
+        public static unsafe int @int(bool src)
             => (*((byte*)(&src))); 
 
         /// <summary>

@@ -17,6 +17,15 @@ namespace Z0
         public static ushort uint16<T>(T src)
             => As<T,ushort>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ushort? uint16<T>(T? src)
+            where T : unmanaged
+                => As<T?, ushort?>(ref src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref ushort uint16<T>(ref T src)
+            => ref As<T,ushort>(ref src);                
+
         [MethodImpl(Inline), Op]
         public static ushort uint16(sbyte src)        
             => (ushort)src;

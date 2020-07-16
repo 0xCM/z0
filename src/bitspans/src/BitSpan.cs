@@ -7,28 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Konst;
+    using static z;
     using static BitSpans;
-
-    public readonly ref struct BitSpan8
-    {
-        public static BitSpan8 Empty => default;
-        
-        internal readonly Span<byte> Data;
-
-        [MethodImpl(Inline)]
-        public BitSpan8(Span<byte> src)
-        {
-            Data = src;
-        }
-    }
 
     /// <summary>
     /// Defines an anti-succinct data structure for bit representation
     /// </summary>
     public readonly ref partial struct BitSpan
     {
-        internal readonly Span<bit> bits;
+        internal readonly Span<bit> Data;
 
         [MethodImpl(Inline)]
         public static BitSpan operator +(in BitSpan head, in BitSpan tail)
@@ -60,24 +48,24 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitSpan(Span<bit> bits)
-            => this.bits = bits;
+            => this.Data = bits;
         
         public Span<bit> Bits
         {
             [MethodImpl(Inline)]
-            get => bits;
+            get => Data;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => bits.Length;
+            get => Data.Length;
         }
 
         ref bit Head
         {
             [MethodImpl(Inline)]
-            get => ref head(bits);
+            get => ref first(Data);
         }
 
         /// <summary>
@@ -86,7 +74,7 @@ namespace Z0
         public ref bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(ref Head, index);
+            get => ref seek(Head, index);
         }        
 
         /// <summary>
@@ -95,7 +83,7 @@ namespace Z0
         public ref bit this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref z.seek(Head, index);
+            get => ref seek(Head, index);
         }        
 
         /// <summary>
@@ -135,7 +123,7 @@ namespace Z0
         }        
 
         internal Span<uint> Bit32
-            => bits.Cast<bit,uint>();
+            => recover<bit,uint>(Data);
 
         [MethodImpl(Inline)]
         public string Format(BitFormatConfig? fmt = null)

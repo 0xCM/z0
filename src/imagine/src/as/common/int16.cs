@@ -20,9 +20,6 @@ namespace Z0
         public static ref short int16<T>(ref T src)
             => ref As<T,short>(ref src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static short? int16<T>(T? src)
-            where T : unmanaged
-                => As<T?, short?>(ref src);
+
     }
 }

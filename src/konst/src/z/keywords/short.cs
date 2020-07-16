@@ -19,7 +19,6 @@ namespace Z0
         public static unsafe short @short(bool src)
             => (*((byte*)(&src))); 
 
-
         [MethodImpl(Inline), Op, Closures(Numeric16x32x64k)]
         public static unsafe short @short<T>(T src)
             where T : unmanaged             

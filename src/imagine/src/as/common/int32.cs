@@ -21,13 +21,7 @@ namespace Z0
             => ref As<T,int>(ref src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static int? int32<T>(T? src)
-            where T : unmanaged
-                => As<T?,int?>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool bool8<T>(T src)
             => As<T,bool>(ref src);        
-
     }
 }

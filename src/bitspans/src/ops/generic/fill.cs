@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
+    
     using SB = SpannedBits;
 
     partial class BitSpans
@@ -43,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return ref SB.fill(convert<T,byte>(src),dst);
+                return ref SB.fill(Cast.to<T,byte>(src),dst);
             else if(typeof(T) == typeof(short))
-                return ref SB.fill(convert<T,ushort>(src),dst);
+                return ref SB.fill(Cast.to<T,ushort>(src),dst);
             else if(typeof(T) == typeof(int))
-                return ref SB.fill(convert<T,uint>(src),dst);
+                return ref SB.fill(Cast.to<T,uint>(src),dst);
             else if(typeof(T) == typeof(long))
-                return ref SB.fill(convert<T,ulong>(src),dst);
+                return ref SB.fill(Cast.to<T,ulong>(src),dst);
             else
                 throw Unsupported.define<T>();            
         }

@@ -24,15 +24,5 @@ namespace Z0
         public static double? float64<T>(T? src)
             where T : unmanaged
                 => As<T?, double?>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<double> float64<T>(Span<T> src)
-            where T : struct
-                => cast<T,double>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<double> float64<T>(ReadOnlySpan<T> src)
-            where T : struct
-                => cast<T,double>(src);                
     }
 }

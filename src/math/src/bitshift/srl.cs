@@ -95,8 +95,8 @@ namespace Z0
             => offset < 64 
               ?  ConstPair.define((x.Right >> offset), (x.Left >> offset) | ((x.Right << 1) << 63 - offset))
               : offset < 128 
-              ? ConstPair.define(z.z64, x.Left >> (offset - 64)) 
-              : ConstPair.zero(z.z64);
+              ? ConstPair.define(z64, x.Left >> (offset - 64)) 
+              : ConstPair.zero(z64);
 
 
         [MethodImpl(Inline), Srl]

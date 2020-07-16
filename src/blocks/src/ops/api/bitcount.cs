@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     using static Konst;        
+    using static z;
 
     partial class Blocks
     {
@@ -17,7 +18,7 @@ namespace Z0
         /// <param name="cellcount">The number of allocated cells</param>
         /// <param name="cellwidth">The bit-width of a cell</param>
         [MethodImpl(Inline), Op]
-        public static int bitcount(int cellcount, int cellwidth)
+        public static uint bitcount(uint cellcount, uint cellwidth)
             => cellcount * cellwidth;
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace Z0
         /// <param name="cellcount">The number of allocated cells</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int bitcount<T>(int cellcount)
-            => bitcount(cellcount, Unsafe.SizeOf<T>()*8);
+        public static uint bitcount<T>(uint cellcount)
+            => bitcount(cellcount, z.bitsize<T>()*8);
     }
 }

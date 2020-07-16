@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Typed;
-    using static Root;
+    using static z;
+    using static Konst;
 
     partial class SpannedBits
     {
@@ -26,7 +26,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked,z8);
+            return BitPack.pack(unpacked,Konst.z8);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked,z16);
+            return BitPack.pack(unpacked, z16);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked,z8i);
+            return BitPack.pack(unpacked, z8i);
         }
 
         [MethodImpl(Inline)]
@@ -97,7 +97,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked,z16i);
+            return BitPack.pack(unpacked, z16i);
         }
 
         [MethodImpl(Inline)]

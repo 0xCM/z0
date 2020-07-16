@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using SB = SpannedBits;
 
     partial class BitSpans
@@ -54,7 +54,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return convert<T>(SB.extract(src, n64, offset));
             else
-                throw Unsupported.define<T>();            
+                throw no<T>();            
         }
     }
 }

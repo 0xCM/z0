@@ -11,8 +11,10 @@ namespace Z0.Asm
         public void asci_render()
         {
             var src = Random.Bytes(8).ToSpan();
+            var bs = src.ToBitSpan();
+            Claim.eq(64,bs.Length);
+            var expect = bs.Format();
             var actual = asci.render(Konst.base2, src).Reverse().ToString();
-            var expect = src.ToBitSpan().Format();
             ClaimPrimal.eq(expect,actual);
 
         }

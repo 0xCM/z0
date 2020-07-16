@@ -7,17 +7,16 @@ namespace Z0
     using System;
     using System.Linq;
     
-    using static Root;
+    using static z;
  
     using Z0.Asm.Data;
 
     public class t_memstore : t_asmd<t_memstore>
-    {
-        
+    {        
         public void read_ref_1()
         {
             var src = array(3u,5u,6u,7u);        
-            var r = Refs.from(src);
+            var r = Segments.from(src);
             var z = r.As<uint>();
             
             Claim.eq(16, r.DataSize);
@@ -53,7 +52,7 @@ namespace Z0
             var dstB = MemStores.Service.load(src);
             Claim.eq(count, dstB.Length);
 
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
                 ref readonly var a = ref skip(dstA,i);
                 ref readonly var b = ref skip(dstB,i);
@@ -104,7 +103,7 @@ namespace Z0
             var svc = ResStoreModels.Service;
             var store = svc.store();
             var sources = store.Sources;
-            for(var i=0; i<sources.Length; i++)
+            for(var i=0u; i<sources.Length; i++)
                 Process(skip(sources,i), store);
         }
     }

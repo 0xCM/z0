@@ -19,8 +19,8 @@ namespace Z0
         public static BitSpan concat(in BitSpan head, in BitSpan tail)
         {
             Span<bit> dst = new bit[head.Length + tail.Length];
-            head.bits.CopyTo(dst);
-            tail.bits.CopyTo(dst, head.Length);
+            head.Data.CopyTo(dst);
+            tail.Data.CopyTo(dst, head.Length);
             return BitSpans.load(dst);
         }
     }

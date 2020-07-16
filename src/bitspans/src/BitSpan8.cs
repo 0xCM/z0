@@ -7,14 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static z;
     using static Konst;
 
-    partial class Memories
+    public readonly ref struct BitSpan8
     {
+        public static BitSpan8 Empty => default;
+        
+        internal readonly Span<byte> Data;
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
-        public static short? int16<T>(T? src)
-            where T : unmanaged
-                => As.int16(src);
+        [MethodImpl(Inline)]
+        public BitSpan8(Span<byte> src)
+        {
+            Data = src;
+        }
     }
 }

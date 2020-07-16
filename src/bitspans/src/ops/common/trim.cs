@@ -36,7 +36,7 @@ namespace Z0
         {
             var msbpos = msb(src);
             if(msbpos != 0 && msbpos != src.Length - 1)
-                return BitSpans.load(src.bits.Slice(0, msbpos + 1));
+                return BitSpans.load(src.Data.Slice(0, msbpos + 1));
             else
                 return src;            
         }         

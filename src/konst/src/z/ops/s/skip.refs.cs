@@ -13,16 +13,6 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// Skips a specified number of 8-bit source segments and returns a reference to the located cell
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="count">The number of 8-bit segments to skip</param>
-        /// <typeparam name="T">The (arbitrary) source type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref byte skip8<T>(in T src, uint count)
-            => ref Add(ref edit<T,byte>(src), (int)count);
-
-        /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
         /// </summary>
         /// <param name="src">The source reference</param>
@@ -61,37 +51,15 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(in T src, ulong count)
             => ref Add(ref edit(in src), (int)count); 
- 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip<T>(ReadOnlySpan<T> src, byte count)
-            => ref skip(in first(src), count);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip<T>(ReadOnlySpan<T> src, ushort count)
-            => ref skip(in first(src), count);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip<T>(ReadOnlySpan<T> src, uint count)
-            => ref skip(in first(src), count);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip<T>(ReadOnlySpan<T> src, ulong count)
-            => ref skip(in first(src), count);
-    
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip<T>(Span<T> src, byte count)
-            => ref skip(in first(src), count);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip<T>(Span<T> src, ushort count)
-            => ref skip(in first(src), count);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip<T>(Span<T> src, uint count)
-            => ref skip(in first(src), count);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip<T>(Span<T> src, ulong count)
-            => ref skip(in first(src), count);                        
+        /// <summary>
+        /// Skips a specified number of source elements and returns a readonly reference to the result
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The number of elements to skip</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(in T src, long count)
+            => ref Add(ref edit(in src), (int)count); 
     }
 }

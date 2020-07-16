@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.CompilerServices;    
+    using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Konst;    
 
-    partial class Memories
+    [ApiHost]
+    public readonly struct NewApi
     {
-
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static uint? uint32<T>(T? src)
-            where T : unmanaged
-                => As.uint32(src);
+        public static MemoryAddress ptr<T>(T[] src, int index)
+            => Marshal.UnsafeAddrOfPinnedArrayElement(src,index);
     }
 }

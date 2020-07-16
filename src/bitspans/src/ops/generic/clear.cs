@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan clear(in BitSpan src)
         {
-            src.bits.Clear();
+            src.Data.Clear();
             return ref src;
         }
 
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan clear(in BitSpan src, int i0, int i1)
         {
-            src.bits.Slice(i0, i0 - i1 + 1).Clear();
+            src.Data.Slice(i0, i0 - i1 + 1).Clear();
             return ref src;
         }         
     }

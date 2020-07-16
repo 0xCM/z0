@@ -4,28 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
 
     [ApiHost("api")]
-    public partial class BitSpans : IApiHost<BitSpans>
+    public partial class BitSpans
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
+        const NumericKind Closure = Konst.UnsignedInts;
     }
     
     [ApiHost("direct")]
-    public partial class SpannedBits : IApiHost<SpannedBits>
+    public partial class SpannedBits
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
+        const NumericKind Closure = Konst.UnsignedInts;
     }
+    
 
     public static partial class XTend
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
 
     }
 }

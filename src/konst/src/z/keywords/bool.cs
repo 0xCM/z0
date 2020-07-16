@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
+
     using static Konst;
 
     partial struct z
@@ -20,5 +22,9 @@ namespace Z0
             *pDst = *pSrc;
             return dst;
         }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref bool @bool<T>(in T src)
+            => ref As<T,bool>(ref edit(src));        
     }
 }

@@ -17,6 +17,15 @@ namespace Z0
         public static long int64<T>(T src)
             => As<T,long>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        public static long? int64<T>(T? src)
+            where T : unmanaged
+                => As<T?, long?>(ref src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref long int64<T>(ref T src)
+            => ref As<T,long>(ref src);                
+
         [MethodImpl(Inline), Op]
         public static long to64i(sbyte src)        
             => (long)src;

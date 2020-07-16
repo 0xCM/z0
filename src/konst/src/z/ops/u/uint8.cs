@@ -17,6 +17,11 @@ namespace Z0
         public static byte uint8<T>(T src)
             => As<T,byte>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static byte? uint8<T>(T? src)
+            where T : unmanaged
+                => As<T?, byte?>(ref src);
+
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static ref byte uint8<T>(ref T src)
             => ref As<T,byte>(ref src);

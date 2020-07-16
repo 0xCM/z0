@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitGrid
     {        
@@ -60,7 +60,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitGrid64<N4,N16,ulong> transpose(BitGrid64<N16,N4,ulong> A)
-            => BitGrid.cells(n64,n4,n16, 
+            => BitGrid.create(n64,n4,n16, 
                 (ulong)A.Col(0) << 0  | 
                 (ulong)A.Col(1) << 16 | 
                 (ulong)A.Col(2) << 32 | 

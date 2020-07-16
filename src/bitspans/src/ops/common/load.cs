@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitSpans
     {
-
         [MethodImpl(Inline), Op]
         public static BitSpan8 init(Span<byte> src)
             => new BitSpan8(src);
@@ -40,7 +39,7 @@ namespace Z0
         /// <param name="count">The number of bits to load</param>
         [MethodImpl(Inline), Op]
         public static BitSpan load(ref bit bits, int count)        
-            => new BitSpan(MemoryMarshal.CreateSpan(ref bits,count));                                   
+            => new BitSpan(cover(bits,count));                                   
 
         /// <summary>
         /// Creates a bitspan from an arbitrary number of packed bytes
@@ -48,14 +47,16 @@ namespace Z0
         /// <param name="packed">The packed data source</param>
         [Op]
         internal static BitSpan load(ReadOnlySpan<byte> packed)
-        {            
-            const int blocklen = 8;
+        {               
+            var srcbits = 8*packed.Length;
+            var dstbits = 32*srcbits;
+            var blocks = dstbits/256 + (dstbits % 256 == 0 ? 0 : 1);        
+            var dst = Blocks.alloc<uint>(n256,blocks);
 
-            var blockcount = packed.Length;
-            var unpacked = Blocks.alloc(n256, blockcount, z32);
-            for(var block=0; block < blockcount; block++)
-                BitPack.unpack(packed, unpacked,block);
-            return load(unpacked.As<bit>());
+            for(var block=0; block<blocks; block++)
+                BitPack.unpack(packed, dst, block);
+
+            return load(dst.As<bit>());            
         }
 
         /// <summary>

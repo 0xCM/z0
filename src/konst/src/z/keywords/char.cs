@@ -19,7 +19,7 @@ namespace Z0
         public static char @char(bool src)
             => (char)(u8(src) + 48);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static char @char<E>(in E src) 
             where E : unmanaged
                 => @as<E,char>(src);

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class SpannedBits
     {
@@ -22,7 +22,7 @@ namespace Z0
             ref var target = ref Stacks.head<uint>(ref storage);
 
             BitPack.unpack(src, ref tmp); 
-            distribute(in tmp, 0, ref target);
+            distribute(tmp, 0, ref target);
             return BitSpans.load(Stacks.span<uint>(ref storage).Cast<bit>());
         }
 
@@ -36,8 +36,8 @@ namespace Z0
             ref var target = ref Stacks.head<uint>(ref storage);            
             
             BitPack.unpack(src, ref tmp); 
-            distribute(in tmp, 0, ref target);
-            distribute(in tmp, 1, ref target);
+            distribute(tmp, 0, ref target);
+            distribute(tmp, 1, ref target);
             return BitSpans.load(Stacks.span<uint>(ref storage).Cast<bit>());
         }
 
@@ -51,10 +51,10 @@ namespace Z0
             ref var target = ref Stacks.head<uint>(ref storage);            
             
             BitPack.unpack(src, ref tmp); 
-            distribute(in tmp, 0, ref target);
-            distribute(in tmp, 1, ref target);
-            distribute(in tmp, 2, ref target);
-            distribute(in tmp, 3, ref target);
+            distribute(tmp, 0, ref target);
+            distribute(tmp, 1, ref target);
+            distribute(tmp, 2, ref target);
+            distribute(tmp, 3, ref target);
             return BitSpans.load(Stacks.span<uint>(ref storage).Cast<bit>());
         }
 
@@ -65,17 +65,17 @@ namespace Z0
             ref var tmp = ref Stacks.head<byte>(ref buffer);
 
             Span<uint> storage = new uint[64];
-            ref var target = ref head(storage);
+            ref var target = ref first(storage);
 
             BitPack.unpack(src, ref tmp); 
-            distribute(in tmp, 0, ref target);
-            distribute(in tmp, 1, ref target);
-            distribute(in tmp, 2, ref target);
-            distribute(in tmp, 3, ref target);
-            distribute(in tmp, 4, ref target);
-            distribute(in tmp, 5, ref target);
-            distribute(in tmp, 6, ref target);
-            distribute(in tmp, 7, ref target);
+            distribute(tmp, 0, ref target);
+            distribute(tmp, 1, ref target);
+            distribute(tmp, 2, ref target);
+            distribute(tmp, 3, ref target);
+            distribute(tmp, 4, ref target);
+            distribute(tmp, 5, ref target);
+            distribute(tmp, 6, ref target);
+            distribute(tmp, 7, ref target);
             return BitSpans.load(storage.Cast<bit>());
         }             
     }

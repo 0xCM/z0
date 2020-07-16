@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitSpans
     {
@@ -21,7 +21,7 @@ namespace Z0
         public static T bitslice<T>(in BitSpan src, int offset)
             where T : unmanaged
         {            
-            Span<bit> dst = new bit[bitsize<T>()];
+            var dst = span<bit>(bitsize<T>());
             var len = math.min(dst.Length, src.Length - offset);
             Copier.copy(src.Bits, offset, len, dst);
             return BitPack.pack<T>(dst);
@@ -36,7 +36,7 @@ namespace Z0
         public static T bitslice<T>(in BitSpan src)
             where T : unmanaged
         {            
-            Span<bit> dst = new bit[bitsize<T>()];
+            var dst = span<bit>(bitsize<T>());
             var len = math.min(dst.Length, src.Length);
             Copier.copy(src.Bits, 0, len, dst);
             return BitPack.pack<T>(dst);
@@ -53,7 +53,7 @@ namespace Z0
         public static T bitslice<T>(in BitSpan src, int offset, int count)
             where T : unmanaged
         {            
-            Span<bit> dst = new bit[bitsize<T>()];
+            var dst = span<bit>(bitsize<T>());
             var len = math.min(count, src.Length - offset);
             Copier.copy(src.Bits, offset, len, dst);
             return BitPack.pack<T>(dst);

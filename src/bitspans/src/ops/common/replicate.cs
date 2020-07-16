@@ -19,19 +19,19 @@ namespace Z0
         public static ref readonly BitSpan replicate(in BitSpan src, in BitSpan dst)
         {
             if(src.Length == dst.Length)
-                src.bits.CopyTo(dst.bits);
+                src.Data.CopyTo(dst.Data);
             else if (src.Length < dst.Length)
             {
                 var q = dst.Length / src.Length;
                 var r = dst.Length % src.Length;
                 for(var i=0; i<q; i++)                
-                    src.bits.CopyTo(dst.bits, i*src.Length);                
-                src.bits.Slice(0,r).CopyTo(dst.bits, q*src.Length);
+                    src.Data.CopyTo(dst.Data, i*src.Length);                
+                src.Data.Slice(0,r).CopyTo(dst.Data, q*src.Length);
             }
             else
             {
-                dst.bits.Clear();
-                src.bits.Slice(0,dst.Length).CopyTo(dst.bits);
+                dst.Data.Clear();
+                src.Data.Slice(0,dst.Length).CopyTo(dst.Data);
             }
             return ref dst;
         }
@@ -46,7 +46,7 @@ namespace Z0
         {
             Span<bit> data = new bit[src.Length * count];
             for(var i=0; i<count; i++)
-                src.bits.CopyTo(data, i*src.Length);
+                src.Data.CopyTo(data, i*src.Length);
             return load(data);                
         }        
     }

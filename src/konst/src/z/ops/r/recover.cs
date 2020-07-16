@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+    using static System.Runtime.InteropServices.MemoryMarshal;
+
     using static Konst;
 
     partial struct z
@@ -252,11 +253,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<T> recover<S,T>(Span<S> src)
-            => cover(@as<S,T>(first(src)), size<T>()/size<S>());
+        {
+            var datasize = src.Length * size<S>();
+            return CreateSpan(ref @as<S,T>(first(src)), (int)(datasize/size<T>()));
+        }
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> recover<S,T>(ReadOnlySpan<S> src)
-            => cover(@as<S,T>(edit(first(src))), size<T>()/size<S>());
+        {
+            var datasize = src.Length * size<S>();
+            return CreateReadOnlySpan(ref @as<S,T>(first(src)), (int)(datasize/size<T>()));
+        }
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> recover<S,T>(ReadOnlySpan<S> src, out ReadOnlySpan<S> rem)
@@ -285,7 +292,5 @@ namespace Z0
             rem = r != 0 ? slice(src,q) : EmptySpan<S>();
             return dst;
         }            
-
-
     }
 }

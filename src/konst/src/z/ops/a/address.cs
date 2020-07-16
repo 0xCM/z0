@@ -11,10 +11,10 @@ namespace Z0
 
     partial struct z
     {
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress address(IntPtr src)
-            => new MemoryAddress((ulong)src.ToInt64());
-        
+        /// <summary>
+        /// Presents a uint64 as an address
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(ulong src)
             => new MemoryAddress(src);
@@ -27,21 +27,31 @@ namespace Z0
         public static MemoryAddress address(Ref src)
             => src.Location;
 
+        /// <summary>
+        /// Returns the address of the first character in the source string
+        /// </summary>
+        /// <param name="src">The source string</param>
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address(string src)
             => address(pchar(src));
 
         /// <summary>
-        /// Defines an address predicated on the leading source cell
+        /// Determines the address of a reference
         /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe MemoryAddress address(byte[] src)
-            => address<byte>(in src[0]);
-
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress address<T>(in T src)
             => new MemoryAddress(pvoid(src));
+
+        /// <summary>
+        /// Determines the address of the leading source cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op]
+        public static unsafe MemoryAddress address<T>(T[] src)
+            => address<T>(in src[0]);
 
         [MethodImpl(Inline), Op]
         public unsafe static MemoryAddress address(void* p)
