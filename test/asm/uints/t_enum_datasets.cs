@@ -36,8 +36,8 @@ namespace Z0.Asm
             where T : unmanaged
         {
             var dst = text.build();
-            dst.Delimit(F.Token, src.Token);
-            dst.Delimit(F.Index, src.Index);
+            dst.Delimit(F.Token, src.Id);
+            dst.Delimit(F.Index, src.Position);
             dst.Delimit(F.Name, src.Name);
             dst.Delimit(F.Scalar, src.Scalar);
 

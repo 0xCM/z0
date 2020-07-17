@@ -5,25 +5,38 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
-    public enum xed_iclass_enum_t
+    public enum xed_iclass_enum_t : ushort
     {
         XED_ICLASS_INVALID,
+
         XED_ICLASS_AAA,
+
         XED_ICLASS_AAD,
+
         XED_ICLASS_AAM,
+
         XED_ICLASS_AAS,
+
         XED_ICLASS_ADC,
+
         XED_ICLASS_ADCX,
+
         XED_ICLASS_ADC_LOCK,
+
         XED_ICLASS_ADD,
+
         XED_ICLASS_ADDPD,
+
         XED_ICLASS_ADDPS,
+
         XED_ICLASS_ADDSD,
+
         XED_ICLASS_ADDSS,
+
         XED_ICLASS_ADDSUBPD,
+
         XED_ICLASS_ADDSUBPS,
+
         XED_ICLASS_ADD_LOCK,
         XED_ICLASS_ADOX,
         XED_ICLASS_AESDEC,

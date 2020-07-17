@@ -4,27 +4,41 @@
 // License     : Apache
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
-{
-    using System;
-    
-    public enum xed_iform_enum_t
+{    
+    public enum xed_iform_enum_t : ushort
     {
         XED_IFORM_INVALID=0, 
+        
         XED_IFORM_AAA=1, 
+        
         XED_IFORM_AAD_IMMb=2, 
+        
         XED_IFORM_AAM_IMMb=3, 
+        
         XED_IFORM_AAS=4, 
+        
         XED_IFORM_ADC_AL_IMMb=5, 
+        
         XED_IFORM_ADC_GPR8_GPR8_10=6, 
+                
         XED_IFORM_ADC_GPR8_GPR8_12=7, 
+        
         XED_IFORM_ADC_GPR8_IMMb_80r2=8, 
+        
         XED_IFORM_ADC_GPR8_IMMb_82r2=9, 
+        
         XED_IFORM_ADC_GPR8_MEMb=10, 
+        
         XED_IFORM_ADC_GPRv_GPRv_11=11, 
+        
         XED_IFORM_ADC_GPRv_GPRv_13=12, 
+        
         XED_IFORM_ADC_GPRv_IMMb=13, 
+        
         XED_IFORM_ADC_GPRv_IMMz=14, 
+        
         XED_IFORM_ADC_GPRv_MEMv=15, 
+        
         XED_IFORM_ADC_MEMb_GPR8=16, 
         XED_IFORM_ADC_MEMb_IMMb_80r2=17, 
         XED_IFORM_ADC_MEMb_IMMb_82r2=18, 

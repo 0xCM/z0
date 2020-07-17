@@ -5,9 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
-    public enum xed_machine_mode_enum_t
+    public enum xed_machine_mode_enum_t : byte
     {
         XED_MACHINE_MODE_INVALID,
         XED_MACHINE_MODE_LONG_64, ///< 64b operating mode

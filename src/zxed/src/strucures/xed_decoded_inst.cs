@@ -15,8 +15,10 @@ namespace Z0.Xed
     /// operands with derived information from decode and also valid
     /// #xed_inst_t pointer which describes the operand templates and the
     /// operand order.  See @ref DEC for API documentation.
+    [ApiHost]
     public struct xed_decoded_inst_t
     {
+        [MethodImpl(Inline)]
         public static xed_decoded_inst_t init(byte? size = null)
             => new xed_decoded_inst_t(size ?? XED_ENCODE_ORDER_MAX_OPERANDS);
 
@@ -40,13 +42,13 @@ namespace Z0.Xed
 
         public byte[] _enc
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => _enc_data;
         }
 
         public byte[] _dec
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => _dec_data;
         }
 
@@ -60,6 +62,7 @@ namespace Z0.Xed
 
         public xed_encoder_vars_t ev;
         
+        [MethodImpl(Inline), Op]
         xed_decoded_inst_t(xed_uint8_t size) 
         {
             _n_operand_order = size;
@@ -75,24 +78,24 @@ namespace Z0.Xed
 
         public xed_uint8_t HasModRm
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => _operands.has_modrm;
         }
 
         public xed_uint8_t Rm
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => _operands.rm;
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             set => _operands.rm = value;
         }
 
         public xed_chip_enum_t Chip
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => _operands.chip;
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             set => _operands.chip = value;
         }
     }

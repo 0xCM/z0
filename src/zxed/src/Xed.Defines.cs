@@ -5,8 +5,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
     partial class Xed
     {
         public const byte XED_ILD_HASMODRM_FALSE = 0;

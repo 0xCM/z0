@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct Indexed<T> : IIndex<Indexed<T>,T>
+    public readonly struct Indexed<T> : IIndex<T>
     {
         public readonly T[] Data;
         
@@ -31,6 +32,23 @@ namespace Z0
             get => z.address(Data);
         }
 
+        [MethodImpl(Inline)]
+        public bool Search(Func<T,bool> predicate, out T found)
+        {
+            var view = View;
+            for(var i=0; i<view.Length; i++)
+            {
+                ref readonly var candidate = ref skip(view,i);
+                if(predicate(candidate))
+                {
+                    found = candidate;
+                    return true;
+                }
+            }
+            found = default;
+            return false;
+        }
+        
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Indexed<T> src)
             => src.Edit;
@@ -63,9 +81,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (int)Data.Length;
         }
-
-        T[] IContented<T[]>.Content 
-            => Data;
 
         public ref T Head 
             => ref this[0];

@@ -17,18 +17,9 @@ namespace Z0
         /// </summary>
         /// <param name="e">An enum type representative</param>
         /// <typeparam name="E">The enum type</typeparam>
-         [MethodImpl(NotInline)]
+         [MethodImpl(Inline), Op]
          public static string[] names<E>()
             where E : unmanaged, Enum
-                => literals<E>().Map(f => f.ToString());
-        
-        [MethodImpl(NotInline)]
-        public static Z0.EnumNames<E> names2<E>()                   
-            where E : unmanaged, Enum
-                => new Z0.EnumNames<E>(System.Enum.GetNames(typeof(E)));
-
-        [MethodImpl(NotInline), Op]
-        public static Z0.EnumNames names(Type src)                   
-            => new Z0.EnumNames(src, System.Enum.GetNames(src));
+                => Enum.GetNames(typeof(E));
     }
 }

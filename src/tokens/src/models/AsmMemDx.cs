@@ -28,7 +28,7 @@ namespace Z0.Asm
         
         [MethodImpl(Inline)]
         public static AsmMemDx From(ulong value, int size)
-            => new AsmMemDx(value,  Enums.definedOrElse((DataSize)size, DataSize.None));
+            => new AsmMemDx(value,  Enums.undefined((DataSize)size, DataSize.None));
 
         public bool IsEmpty 
         { 

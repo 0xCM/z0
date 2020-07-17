@@ -14,7 +14,7 @@ namespace Z0.Asm
     /// <summary>
     /// Groups a sequence of located instructions
     /// </summary>         
-    public readonly struct MemberInstructions : INullary<MemberInstructions,LocatedInstruction[]>, IIndex<LocatedInstruction>
+    public readonly struct MemberInstructions : INullary<MemberInstructions,LocatedInstruction[]>, IContentedIndex<LocatedInstruction>
     {
         public OpUri OpUri {get;}
     

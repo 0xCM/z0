@@ -5,31 +5,50 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
-    public enum xed_isa_set_enum_t
+    public enum xed_isa_set_enum_t : byte
     {
         XED_ISA_SET_INVALID,
+     
         XED_ISA_SET_3DNOW,
+     
         XED_ISA_SET_ADOX_ADCX,
+     
         XED_ISA_SET_AES,
+     
         XED_ISA_SET_AMD,
+     
         XED_ISA_SET_AVX,
+     
         XED_ISA_SET_AVX2,
+     
         XED_ISA_SET_AVX2GATHER,
+     
         XED_ISA_SET_AVX512BW_128,
+     
         XED_ISA_SET_AVX512BW_128N,
+     
         XED_ISA_SET_AVX512BW_256,
+     
         XED_ISA_SET_AVX512BW_512,
+     
         XED_ISA_SET_AVX512BW_KOP,
+     
         XED_ISA_SET_AVX512CD_128,
+     
         XED_ISA_SET_AVX512CD_256,
+     
         XED_ISA_SET_AVX512CD_512,
+     
         XED_ISA_SET_AVX512DQ_128,
+     
         XED_ISA_SET_AVX512DQ_128N,
+     
         XED_ISA_SET_AVX512DQ_256,
+     
         XED_ISA_SET_AVX512DQ_512,
+     
         XED_ISA_SET_AVX512DQ_KOP,
+     
         XED_ISA_SET_AVX512DQ_SCALAR,
         XED_ISA_SET_AVX512ER_512,
         XED_ISA_SET_AVX512ER_SCALAR,

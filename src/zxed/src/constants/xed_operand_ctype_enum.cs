@@ -5,9 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
-    public enum xed_operand_ctype_enum_t
+    public enum xed_operand_ctype_enum_t : byte
     {
         XED_OPERAND_CTYPE_INVALID,
         XED_OPERAND_CTYPE_XED_BITS_T,
@@ -21,5 +19,4 @@ namespace Z0.Xed
         XED_OPERAND_CTYPE_XED_UINT8_T,
         XED_OPERAND_CTYPE_LAST
     }
-
 }

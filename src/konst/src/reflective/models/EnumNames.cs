@@ -9,30 +9,34 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static z;
 
+    [ApiHost]
     public readonly struct EnumNames
-    {        
-        public readonly Type Enum;
+    {   
+        [MethodImpl(Inline)]
+        public static Z0.EnumNames<E> get<E>()                   
+            where E : unmanaged, Enum
+                => new Z0.EnumNames<E>(Enum.GetNames(typeof(E)));    
+        public readonly Type EnumType;
         
         public readonly string[] Names;
 
         [MethodImpl(Inline)]
         public EnumNames(Type type, string[] src)
-        {
-            Enum = type;
+        {            
+            EnumType = type;
             Names = src;
         }
-    }
-    
-    public readonly struct EnumNames<E>
-        where E : unmanaged, Enum
-    {
+
+        public string this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => Names[index];
+        }
+
         [MethodImpl(Inline)]
-        public EnumNames(string[] src)
-        {
-            Names = src;
-        }
-        
-        public readonly string[] Names;
+        public string Name(uint index)
+            => this[index];
     }
 }

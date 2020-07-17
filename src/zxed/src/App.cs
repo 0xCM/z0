@@ -31,7 +31,7 @@ namespace Z0
 
         void Parse(FilePath src)
         {
-            var data = SourceParser.Service.LoadSource(src);
+            var data = XedSourceParser.Service.LoadSource(src);
             if(data.IsNonEmpty)
                 term.print($"Parsed {data.Rows.Length} rows from {src}");
             else
@@ -43,7 +43,7 @@ namespace Z0
             var parts = PartIdParser.Service.ParseValid(args);  
 
             
-            var etl = EtlWorkflow.Service(Context);
+            var etl = XedEtlWorkflow.Service(Context);
             etl.Run();
                                     
         }

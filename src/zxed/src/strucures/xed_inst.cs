@@ -5,8 +5,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
     /// @ingroup DEC
     /// constant information about a decoded instruction form, including
     /// the pointer to the constant operand properties #xed_operand_t for this

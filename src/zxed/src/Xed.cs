@@ -7,6 +7,7 @@ namespace Z0.Xed
 {
     using System;
 
+    [ApiHost]
     public partial class Xed
     {
 

@@ -3,17 +3,17 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
     
-    public readonly struct StagingArchive : TPartFileArchive
+    public readonly struct XedStagingArchive : TPartFileArchive
     {
-        public static StagingArchive Create(FolderPath root)
-            => new StagingArchive(root);
+        public static XedStagingArchive Create(FolderPath root)
+            => new XedStagingArchive(root);
 
         public FolderPath ArchiveRoot {get;}
 
@@ -29,7 +29,7 @@ namespace Z0.Xed
         public FolderPath FunctionDir 
             => ArchiveRoot + FunctionFolder;
         
-        public StagingArchive(FolderPath root)
+        public XedStagingArchive(FolderPath root)
         {
             ArchiveRoot = root;
         }
@@ -39,7 +39,7 @@ namespace Z0.Xed
 
         public int FileCount => Files.Count();
 
-        public void Deposit(ReadOnlySpan<InstructionData> src, FileName name)
+        public void Deposit(ReadOnlySpan<XedInstructionData> src, FileName name)
         {
             var path = InstructionDir + name;
             using var writer = path.Writer();
@@ -53,7 +53,7 @@ namespace Z0.Xed
             }
         }
 
-        public void Deposit(FunctionData[] src, FileName name)
+        public void Deposit(XedFunctionData[] src, FileName name)
         {
             var path = FunctionDir + name;
             using var writer = path.Writer();

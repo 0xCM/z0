@@ -26,14 +26,14 @@ namespace Z0
         /// </summary>
         public ushort Capacity {get;}
 
-        public MetadataToken SegDomain {get;}
+        public ArtifactIdentity SegDomain {get;}
 
-        public MetadataToken SymDomain {get;}
+        public ArtifactIdentity SymDomain {get;}
 
         public S[] Symbols {get;}
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, MetadataToken segdomain,  MetadataToken symdomain, params S[] symbols)
+        public SymbolSpec(ushort symwidth, ushort segwidth, ArtifactIdentity segdomain,  ArtifactIdentity symdomain, params S[] symbols)
         {
             SymWidth = symwidth;
             SegWidth = segwidth;
@@ -44,7 +44,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, MetadataToken symdomain, params S[] symbols)
+        public SymbolSpec(ushort symwidth, ArtifactIdentity symdomain, params S[] symbols)
         {
             SymWidth = symwidth;
             SegWidth = (ushort)bitsize<S>();

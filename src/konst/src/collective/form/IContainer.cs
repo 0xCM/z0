@@ -111,7 +111,7 @@ namespace Z0
         F Concat(F rhs);
     }
     
-    public interface IMaterialied<T> : IFinite, IContented<T>, IIndex<T> 
+    public interface IMaterialied<T> : IFinite, IContented<T>, IContentedIndex<T> 
     {
 
     }

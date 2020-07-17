@@ -11,22 +11,22 @@ namespace Z0
         /// <summary>
         /// Specifies the declaration order of the enum literal
         /// </summary>
-        int Index {get;}        
+        uint Position {get;}        
 
         /// <summary>
         /// Specifies the literal identifier
         /// </summary>
-        string Identifier {get;}
+        string Name {get;}
 
         /// <summary>
         /// The literal value in an unfortunate box
         /// </summary>
-        Enum LiteralValue {get;}        
+        variant ScalarValue {get;}        
     
         NumericKind DataType {get;}
 
         string ITextual.Format()
-            => $"{Index.ToString().PadLeft(2, '0')} {LiteralValue}:{Identifier}";        
+            => $"{Position.ToString().PadLeft(2, '0')} {ScalarValue}:{Name}";        
     }
 
     /// <summary>
@@ -49,10 +49,7 @@ namespace Z0
         /// <summary>
         /// The literal value
         /// </summary>
-        new E LiteralValue {get;}  
-
-        Enum IEnumLiteral.LiteralValue 
-            => LiteralValue;      
+        E LiteralValue {get;}  
     }
 
     /// <summary>

@@ -3,19 +3,19 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
 
-    public readonly struct SourceArchive : TPartFileArchive
+    public readonly struct XedSourceArchive : TPartFileArchive
     {
-        public static SourceArchive Create(FolderPath root)
-            => new SourceArchive(root);
+        public static XedSourceArchive Create(FolderPath root)
+            => new XedSourceArchive(root);
 
-        public SourceArchive(FolderPath root)
+        public XedSourceArchive(FolderPath root)
         {
             this.ArchiveRoot = root;
         }
@@ -41,7 +41,7 @@ namespace Z0.Xed
         }
 
         bool DefinesInstructions(FilePath file)
-            => ContainsMarker(file, SourceMarkers.INSTRUCTION_SEQ);
+            => ContainsMarker(file, XedSourceMarkers.INSTRUCTION_SEQ);
 
         bool DefinesFunctions(FilePath file)
         {
@@ -50,8 +50,8 @@ namespace Z0.Xed
             {
                 var line = reader.ReadLine();
                 if(
-                    line.Contains(SourceMarkers.FUNC_MARKER) && 
-                    !line.Contains(SourceMarkers.INSTRUCTION_SEQ)
+                    line.Contains(XedSourceMarkers.FUNC_MARKER) && 
+                    !line.Contains(XedSourceMarkers.INSTRUCTION_SEQ)
                     )
                     return true;
             }

@@ -4,12 +4,11 @@
 // License     : Apache
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
-{
- 
+{ 
     /// <summary>
     /// Literals corresponds to the identifiers defined in xed-operand-types.txt
     /// </summary>
-    public enum xed_operand_type
+    public enum xed_operand_type : byte
     {
         i1, //INT    1
         

@@ -5,9 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
-    public enum xed_iformfl_enum_t
+    public enum xed_iformfl_enum_t : ushort
     {
         XED_IFORMFL_AAA_FIRST=1, 
         XED_IFORMFL_AAA_LAST=1, 

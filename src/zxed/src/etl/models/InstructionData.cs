@@ -3,26 +3,26 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static SourceMarkers;
+    using M = XedSourceMarkers;
 
     /// <summary>
     /// Defines a container over the data found in an instruction resource file for a single instruction
     /// </summary>
-    public readonly struct InstructionData
+    public readonly struct XedInstructionData
     {
         public readonly TextRow[] Rows {get;}
 
-        public static InstructionData Empty 
-            => new InstructionData(Array.Empty<TextRow>());
+        public static XedInstructionData Empty 
+            => new XedInstructionData(Array.Empty<TextRow>());
         
         [MethodImpl(Inline)]
-        internal InstructionData(params TextRow[] rows)
+        internal XedInstructionData(params TextRow[] rows)
         {
             Rows = rows;
         }
@@ -49,24 +49,24 @@ namespace Z0.Xed
             => Rows.Length;
 
         public string Class 
-            => this.ExtractProp(ICLASS);
+            => this.ExtractProp(M.ICLASS);
 
         public string Category
-            => this.ExtractProp(CATEGORY);
+            => this.ExtractProp(M.CATEGORY);
 
         public string Extension
-            => this.ExtractProp(EXTENSION);
+            => this.ExtractProp(M.EXTENSION);
 
         public string IsaSet
-            => this.ExtractProp(ISA_SET);
+            => this.ExtractProp(M.ISA_SET);
 
         public string AttributeText
-            => this.ExtractProp(ATTRIBUTES);
+            => this.ExtractProp(M.ATTRIBUTES);
 
         public string RealOpCode
-            => this.ExtractProp(REAL_OPCODE);
+            => this.ExtractProp(M.REAL_OPCODE);
 
-        public InstructionPattern[] Patterns
+        public XedPattern[] Patterns
             => this.ExtractPatterns();
 
         [MethodImpl(Inline)]
@@ -75,7 +75,7 @@ namespace Z0.Xed
 
         [MethodImpl(Inline)]
         internal string ExtractProp(TextRow src)
-            => src.Text.RightOf(PROP_DELIMITER).Trim(); 
+            => src.Text.RightOf(M.PROP_DELIMITER).Trim(); 
 
         [MethodImpl(Inline)]
         internal string ExtractProp(int index)

@@ -3,13 +3,13 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
 
     using static Konst;
 
-    public enum PatternField : uint
+    public enum XedPatternField : uint
     {
         Class = 0 | 20u << WidthOffset,
 

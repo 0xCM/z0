@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
 
     public struct xed_operand_storage_t
     {

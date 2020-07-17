@@ -43,7 +43,7 @@ namespace Z0
             => new ClientContext(CreateAsmContext(CreateAppContext()));
     }
 
-    readonly struct SelectedParts : IIndex<IPart>
+    readonly struct SelectedParts : IContentedIndex<IPart>
     {
         public static SelectedParts Selected 
             => default;

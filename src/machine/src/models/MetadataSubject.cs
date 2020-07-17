@@ -11,9 +11,9 @@ namespace Z0
 
     public struct MetadataSubject
     {        
-        public MetadataToken Id;
+        public ArtifactIdentity Id;
 
-        public MetadataToken OwnerId;
+        public ArtifactIdentity OwnerId;
 
         public asci64 Name;
 
@@ -24,7 +24,7 @@ namespace Z0
         public MemoryAddress OwnerAddress;
 
         [MethodImpl(Inline)]
-        public MetadataSubject(MetadataToken Id, MetadataToken OwnerId, asci64 Name, asci64 OwnerName, MemoryAddress Address, MemoryAddress OwnerAddress)
+        public MetadataSubject(ArtifactIdentity Id, ArtifactIdentity OwnerId, asci64 Name, asci64 OwnerName, MemoryAddress Address, MemoryAddress OwnerAddress)
         {
             this.Id = Id;
             this.OwnerId = OwnerId;

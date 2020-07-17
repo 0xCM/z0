@@ -11,7 +11,7 @@ namespace Z0
 
     using P = Z0.Parts;
 
-    readonly struct SelectedParts : IIndex<IPart>
+    readonly struct SelectedParts : IContentedIndex<IPart>
     {
         public static SelectedParts Selected => default(SelectedParts);
         

@@ -17,19 +17,35 @@ namespace Z0
     }
 
     /// <summary>
+    /// Signature for a key function, also called in index function, that computes a K-value for any V-value
+    /// </summary>
+    /// <param name="src"></param>
+    /// <typeparam name="K">The key type</typeparam>
+    /// <typeparam name="V">The value type</typeparam>
+    public delegate K KeyFunction<K,V>(in V src);
+
+    /// <summary>
+    /// Signature for an injective key function that satisifies kf(v1) = kf(v2) => v1 = v2
+    /// </summary>
+    /// <param name="src"></param>
+    /// <typeparam name="K">The key type</typeparam>
+    /// <typeparam name="V">The value type</typeparam>
+    public delegate K KeyInjection<K,V>(in V src);
+
+    /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
     /// </summary>
-    public readonly struct KeyedValue<K,V> 
+    public struct KeyedValue<K,V> 
     {
         /// <summary>
         /// The key that identifies the value
         /// </summary>
-        public readonly K Key;
+        public K Key;
 
         /// <summary>
         /// The value identified by the key
         /// </summary>
-        public readonly V Value;
+        public V Value;
 
         [MethodImpl(Inline)]
         public static implicit operator KeyedValue<K,V>((K key, V value) src)

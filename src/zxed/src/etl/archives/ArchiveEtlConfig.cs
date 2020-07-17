@@ -10,7 +10,7 @@ namespace Z0
     using xed_ext = Z0.Xed.xed_extension_enum_t;
     using xed_cat = Z0.Xed.xed_category_enum_t;
 
-    readonly struct AsmArchiveConfig
+    readonly struct XedArchiveConfig
     {
         public FolderPath SourceRoot 
             => FolderPath.Define(@"K:\z0\archives\sources\xed");
@@ -39,7 +39,22 @@ namespace Z0
         public FileExtension DataFileExt 
             => FileExtensions.Csv;
 
-        public xed_ext[] Extensions => new xed_ext[]{
+
+        public xed_ext[] Extensions 
+        {
+            [Op]
+            get => ExtensionData;
+        }
+
+
+        public xed_cat[] Categories
+        {
+            [Op]
+            get => CategoryData;
+        }
+
+
+       static xed_ext[] ExtensionData => new xed_ext[]{
             xed_ext.XED_EXTENSION_BASE,             
             xed_ext.XED_EXTENSION_AVX, 
             xed_ext.XED_EXTENSION_AVX2,            
@@ -49,7 +64,7 @@ namespace Z0
             xed_ext.XED_EXTENSION_SSE2,            
         };
 
-        public xed_cat[] Categories => new xed_cat[]{
+       static xed_cat[] CategoryData => new xed_cat[]{
             xed_cat.XED_CATEGORY_BINARY,
             xed_cat.XED_CATEGORY_SHIFT,
             xed_cat.XED_CATEGORY_BITBYTE,
@@ -57,5 +72,6 @@ namespace Z0
             xed_cat.XED_CATEGORY_UNCOND_BR,
             xed_cat.XED_CATEGORY_LOGICAL,
         };
+
     }
 }

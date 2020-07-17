@@ -15,5 +15,11 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T[] Array<T>(this IEnumerable<T> src)
             => proxy.array(src);
+
+
+        [MethodImpl(Inline)]
+        public static T[] Array<T>(this T[] src)
+            => src;
+
     }
 }

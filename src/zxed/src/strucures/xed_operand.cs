@@ -10,6 +10,7 @@ namespace Z0.Xed
 
     using static Konst;
 
+    [ApiHost]
     public struct xed_operand_t
     {
         public xed_uint8_t         _name; // xed_operand_enum_t
@@ -37,30 +38,30 @@ namespace Z0.Xed
         // value for some constant immmed
         public xed_uint32_t u_imm 
         {
-             [MethodImpl(Inline)]
+             [MethodImpl(Inline), Op]
              get => (xed_uint32_t)_u;
 
-             [MethodImpl(Inline)]
+             [MethodImpl(Inline), Op]
              set => _u = (uint)value;
         }  
         
         // for nt_lookup_fn's
         public xed_nonterminal_enum_t u_nt 
         { 
-             [MethodImpl(Inline)]
+             [MethodImpl(Inline), Op]
              get => (xed_nonterminal_enum_t)_u;
 
-             [MethodImpl(Inline)]
+             [MethodImpl(Inline), Op]
              set => _u = (uint)value;
         }   
         
         // register name
         public xed_reg_enum_t u_reg 
         {
-             [MethodImpl(Inline)]
+             [MethodImpl(Inline), Op]
              get => (xed_reg_enum_t)_u;
 
-             [MethodImpl(Inline)]
+             [MethodImpl(Inline), Op]
              set => _u = (uint)value;
         }                
     }

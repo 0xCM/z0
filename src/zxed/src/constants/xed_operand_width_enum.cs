@@ -5,9 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
-    public enum xed_operand_width_enum_t
+    public enum xed_operand_width_enum_t : byte
     {
         XED_OPERAND_WIDTH_INVALID,
         XED_OPERAND_WIDTH_ASZ,

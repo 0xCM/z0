@@ -3,11 +3,11 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
 
-    class SourceMarkers
+    class XedSourceMarkers
     {        
         public static string FuncHeader(string name)
             => $"{name}()::";

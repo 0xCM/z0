@@ -9,8 +9,8 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static z;
 
-    
     partial struct Reflex
     {
         /// <summary>
@@ -22,7 +22,7 @@ namespace Z0
             => src.GetFields(BF);
 
         [MethodImpl(Inline), Op]
-        public static Indexed<object> attributes(Type src)
-            => src.GetCustomAttributes(false); 
+        public static Indexed<FieldInfo> fields<T>()
+            => typeof(T).GetFields(BF);
     }
 }

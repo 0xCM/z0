@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmFunctionList : IEquatable<AsmFunctionList>, IIndex<AsmFunction>
+    public readonly struct AsmFunctionList : IEquatable<AsmFunctionList>, IContentedIndex<AsmFunction>
     {                        
         public AsmFunction[] Content {get;}
 

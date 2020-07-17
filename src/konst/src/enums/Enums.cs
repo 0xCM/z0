@@ -13,7 +13,6 @@ namespace Z0
     using static z;
 
     using NK = NumericKind;
-    using BK = EnumScalarKind;
 
     [ApiHost]
     public partial class Enums
@@ -33,29 +32,6 @@ namespace Z0
             var exp = (byte)(@base & EnumScalarKind.WidthMask);
             return (TypeWidth)Pow2.pow(exp);
         }
-
-        /// <summary>
-        /// Determines whether an enum base kind is signed
-        /// </summary>
-        /// <param name="base">An integral type refined by an enum</param>
-        [MethodImpl(Inline)]
-        public static bool signed(EnumScalarKind @base)
-            => (@base & EnumScalarKind.SignMask) != 0;
-
-
-        public static unsafe ulong untype<E>(E src)
-            where E : unmanaged, Enum
-            => typeof(E).GetEnumUnderlyingType().NumericKind() switch {
-                NK.U8 => (ulong)e8u(src),
-                NK.I8 => (ulong)e8i(src),
-                NK.U16 => (ulong)e16u(src),
-                NK.I16 => (ulong)e16i(src),
-                NK.U32 => (ulong)e32u(src),
-                NK.I32 => (ulong)e32i(src),
-                NK.I64 => (ulong)e64i(src),
-                NK.U64 => e64u(src),
-                _ => 0ul,               
-            };
                    
         /// <summary>
         /// Determines an enumeration's underlying kind
@@ -78,12 +54,6 @@ namespace Z0
             where T : unmanaged
                 => EnumValue.scalar<E,T>(e);
 
-        public static unsafe variant scalar(Enum src)
-        {
-            var kind = src.GetType().GetEnumUnderlyingType().NumericKind();             
-            var converted = (ulong)rebox(src,NumericKind.U64);
-            return Variant.define(converted, kind);
-        }
 
         /// <summary>
         /// Reads a generic enum member from a generic value
@@ -118,17 +88,6 @@ namespace Z0
             where V : unmanaged
                 => (EnumLiterals<E,V>)ValueCache.GetOrAdd(typeof(E), _ => LiteralSequence<E,V>());
 
-        /// <summary>
-        /// Determines whether an enum has a specified integral value
-        /// </summary>
-        /// <param name="v">The test value</param>
-        /// <typeparam name="E">The enum source type</typeparam>
-        /// <typeparam name="V">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static bool defined<E,V>(V v)
-            where E : unmanaged, Enum
-            where V : unmanaged
-                => Enum.IsDefined(typeof(E), v);
 
         /// <summary>
         /// Defines an E-V parametric enum value given an E-parametric literal an a value:V
@@ -142,17 +101,6 @@ namespace Z0
             where E : unmanaged, Enum
             where V : unmanaged
                 => new EnumLiteral<E,V>(literal,value);
-
-        /// <summary>
-        /// Determines whether an enum value is valid
-        /// </summary>
-        /// <param name="v">The test value</param>
-        /// <typeparam name="E">The enum source type</typeparam>
-        /// <typeparam name="V">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static bool defined<E>(E e)
-            where E : unmanaged, Enum
-                => Enum.IsDefined(typeof(E), e);
 
         public static IEnumerable<BinaryLiteral<T>> BinaryLiterals<E,T>()
             where E : unmanaged, Enum
@@ -181,42 +129,14 @@ namespace Z0
             where E : unmanaged, Enum
                 => (E[])LiteralCache.GetOrAdd(typeof(E), _ => CreateLiteralArray<E>());
 
-        /// <summary>
-        /// Gets the literals defined by an enumeration
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        public static Enum[] literals(Type @enum)
-        {
-            var i = CreateIndex(@enum);
-            var dst = new Enum[i.Length];
-            for(var j = 0; j<dst.Length; j++)
-                dst[j] = i[j].LiteralValue;
-            return dst;    
-        }
-
         public static ReadOnlySpan<E> literals<E>(int crop)
             where E : unmanaged, Enum
         {
-            var literals = span(Enums.literals<E>());
+            var literals = span(literals<E>());
             var count = literals.Length - crop;
             return literals.Slice(0,count);            
         }
 
-        [MethodImpl(Inline)]
-        public static E definedOrElse<E>(E e, E alt)
-            where E : unmanaged, Enum
-                => defined<E>(e) ? e : alt;
-
-        /// <summary>
-        /// Determines whether an enum defines a name-identified literal
-        /// </summary>
-        /// <param name="name">The test name</param>
-        /// <typeparam name="E">The enum source type</typeparam>
-        [MethodImpl(Inline)]
-        public static bool defined<E>(string name)
-            where E : unmanaged, Enum
-                => Enum.IsDefined(typeof(E), name);
-        
         /// <summary>
         /// Constructs a arbitrarily deduplicated value-to-member index
         /// </summary>
@@ -232,7 +152,5 @@ namespace Z0
                 index.TryAdd(pair.NumericValue, pair.LiteralValue);
             return index;
         }
-
- 
    }
 }

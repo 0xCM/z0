@@ -18,13 +18,13 @@ namespace Z0
 
         public ushort Capacity {get;}
 
-        public MetadataToken SegDomain {get;}
+        public ArtifactIdentity SegDomain {get;}
 
-        public MetadataToken SymDomain {get;}
+        public ArtifactIdentity SymDomain {get;}
 
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, MetadataToken segdomain, MetadataToken symdomain)
+        public SymbolSpec(ushort symwidth, ushort segwidth, ArtifactIdentity segdomain, ArtifactIdentity symdomain)
         {
             SymWidth = symwidth;
             SegWidth = segwidth;

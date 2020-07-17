@@ -5,9 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
-    public enum xed_encoder_operand_type_t
+    public enum xed_encoder_operand_type_t : byte
     {
         XED_ENCODER_OPERAND_TYPE_INVALID,
         XED_ENCODER_OPERAND_TYPE_BRDISP,

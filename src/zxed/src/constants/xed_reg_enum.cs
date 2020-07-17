@@ -5,33 +5,54 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
-    public enum xed_reg_enum_t
+    public enum xed_reg_enum_t : ushort
     {
         XED_REG_INVALID,
+
         XED_REG_BNDCFGU,
+
         XED_REG_BNDSTATUS,
+
         XED_REG_BND0,
+
         XED_REG_BND1,
+
         XED_REG_BND2,
+
         XED_REG_BND3,
+
         XED_REG_CR0,
+
         XED_REG_CR1,
+
         XED_REG_CR2,
+
         XED_REG_CR3,
+
         XED_REG_CR4,
+
         XED_REG_CR5,
+
         XED_REG_CR6,
+
         XED_REG_CR7,
+
         XED_REG_CR8,
+
         XED_REG_CR9,
+
         XED_REG_CR10,
+
         XED_REG_CR11,
+
         XED_REG_CR12,
+
         XED_REG_CR13,
+
         XED_REG_CR14,
+
         XED_REG_CR15,
+
         XED_REG_DR0,
         XED_REG_DR1,
         XED_REG_DR2,

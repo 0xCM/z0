@@ -3,7 +3,7 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
 
     using System;
@@ -11,10 +11,10 @@ namespace Z0.Xed
     
     using static Konst;
 
-    using F = InstructionField;
-    using R = InstructionRecord;
+    using F = XedInstructionField;
+    using R = XedInstructionRecord;
 
-    public enum InstructionField : uint
+    public enum XedInstructionField : uint
     {
         Sequence = 0 | 16 << WidthOffset,
         
@@ -29,10 +29,10 @@ namespace Z0.Xed
         Reg = 5 | 8 << WidthOffset,
     }
     
-    public readonly struct InstructionRecord : IRecord<F,R>
+    public readonly struct XedInstructionRecord : IRecord<F,R>
     {
-        public static InstructionRecord Empty 
-            => new InstructionRecord(0, asci.Null, asci.Null, asci.Null, asci.Null, asci.Null);
+        public static XedInstructionRecord Empty 
+            => new XedInstructionRecord(0, asci.Null, asci.Null, asci.Null, asci.Null, asci.Null);
 
         public readonly int Sequence;
         
@@ -47,7 +47,7 @@ namespace Z0.Xed
         public readonly asci8 Reg;
     
         [MethodImpl(Inline)]
-        public InstructionRecord(int Sequence, asci16 Mnemonic, asci16 Extension, asci8 BaseCode, asci4 Mod, asci8 Reg)
+        public XedInstructionRecord(int Sequence, asci16 Mnemonic, asci16 Extension, asci8 BaseCode, asci4 Mod, asci8 Reg)
         {
             this.Sequence = Sequence;
             this.Mnemonic = Mnemonic;

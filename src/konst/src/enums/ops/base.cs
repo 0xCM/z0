@@ -39,7 +39,6 @@ namespace Z0
         public static EnumScalarKind @base(Type et)
             => @base(et.NumericKind());
         
-
         [Op]
         public static EnumScalarKind @base(NumericKind src)
              => src switch{

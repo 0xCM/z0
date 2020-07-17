@@ -14,76 +14,77 @@ namespace Z0.Xed
     /// <summary>
     /// C# doesn't support native bitfields
     /// </summary>
+    [ApiHost]
     public readonly struct xed_flag_set
     {
         readonly uint state;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static implicit operator xed_flag_set(xed_uint32_t src)    
             => new xed_flag_set(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static implicit operator xed_flag_set(uint src)    
             => new xed_flag_set(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public xed_flag_set(xed_uint32_t src)    
             => state = src;        
 
         public xed_uint32_t must_be_1
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => BitReader.bit(n0, state);
         }
 
         public xed_uint32_t cf
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => BitReader.bit(n1, state);
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             set => BitWriter.write(n1, state, value);
         }
 
         public xed_uint32_t pf
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => BitReader.bit(n2, state);
         }
 
         public xed_uint32_t zf
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => BitReader.bit(n3, state);
         }
 
         public xed_uint32_t sf
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => BitReader.bit(n4, state);
         }
 
         public xed_uint32_t tf
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => BitReader.bit(n5, state);
         }
 
         public xed_uint32_t _if
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => BitReader.bit(n6, state);
         }
 
         public xed_uint32_t df
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => BitReader.bit(n7, state);
         }
 
         public xed_uint32_t of
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => BitReader.bit(n8, state);
         }
         /*

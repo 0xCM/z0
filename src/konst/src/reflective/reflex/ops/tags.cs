@@ -20,18 +20,13 @@ namespace Z0
         /// <typeparam name="M">The member type</typeparam>
         /// <typeparam name="T">The tag type</typeparam>
         [MethodImpl(Inline)]
-        public static TaggedMember<M,T> tags<M,T>(M m, T t)
+        public static TaggedMember<M,T> tagged<M,T>(M m, T t)
             where M : MemberInfo
             where T : Attribute
                 => (m,t);
 
         public static TaggedMembers<MethodInfo,A> tags<A>(Type src)
             where A : Attribute
-                => src.DeclaredMethods().Where(m => m.Tagged<A>()).Select(x => tag(x, x.Tag<A>().Require()));
-
-        static TaggedMember<M,A> tag<M,A>(M member, A tag)
-            where M : MemberInfo
-            where A : Attribute
-                => (member,tag);            
+                => src.DeclaredMethods().Where(m => m.Tagged<A>()).Select(x => tagged(x, x.Tag<A>().Require()));            
     }
 }

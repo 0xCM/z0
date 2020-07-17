@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// <summary>
     /// Collects a sequence of operation instuction sequences from host-defined members
     /// </summary>         
-    public readonly struct HostInstructions : IIndex<MemberInstructions>
+    public readonly struct HostInstructions : IContentedIndex<MemberInstructions>
     {
         /// <summary>
         /// The decoded instructions

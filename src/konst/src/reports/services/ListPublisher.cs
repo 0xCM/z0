@@ -13,16 +13,9 @@ namespace Z0
     using FW = DataFieldWidths;
     
     public readonly struct ListPublisher : IListPublisher
-    {
-        public static ListPublisher Service => default(ListPublisher);        
-        
+    {        
         IPublicationArchive Archive => Publications.Archive;
-
-        public void Publish()
-        {
-
-        }
-        
+   
         const string SpacePipe = " | ";
 
         public void PublishList<E>(Dictionary<string,E> src, string name)
@@ -54,7 +47,7 @@ namespace Z0
             for(var i=0; i<literals.Length; i++)
             {
                 var literal = literals[i];
-                writer.WriteLine(FormatSequential(literal.Index, literal.LiteralValue));
+                writer.WriteLine(FormatSequential((int)literal.Position, literal.LiteralValue));
             }
         }
 

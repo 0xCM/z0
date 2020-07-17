@@ -11,14 +11,14 @@ namespace Z0
 
     public readonly struct UserMetadata
     {
-        public static UserMetadata Empty => new UserMetadata(MetadataToken.Empty, Array.Empty<byte>());
+        public static UserMetadata Empty => new UserMetadata(ArtifactIdentity.Empty, Array.Empty<byte>());
 
-        public MetadataToken Token {get;}
+        public ArtifactIdentity Token {get;}
         
         public byte[] Content {get;}
 
         [MethodImpl(Inline)]
-        public UserMetadata(MetadataToken token, byte[] src)
+        public UserMetadata(ArtifactIdentity token, byte[] src)
         {
             Token = token;
             Content = src;

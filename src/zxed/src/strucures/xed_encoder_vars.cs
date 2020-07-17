@@ -5,8 +5,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
     public struct xed_encoder_vars_t
     {
         /// _iforms is a dynamically generated structure containing the values of

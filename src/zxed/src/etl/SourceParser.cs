@@ -3,23 +3,23 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
+    
     using static Root;
-    using static SourceMarkers;
+    using static XedSourceMarkers;
 
-    readonly struct SourceParser
+    readonly struct XedSourceParser
     {
-        public static SourceParser Service => default;
+        public static XedSourceParser Service => default;
 
         public SourceFileData LoadSource(FilePath src)
             => TextDocParser.parse(src,TextDocFormat.Unstructured)
                     .MapValueOrDefault(c => SourceFileData.Define(src, c.RowData), SourceFileData.Empty);
 
-        public InstructionData ParseInstruction(SourceFileData src, in int idxStart, ref int idxterm)
+        public XedInstructionData ParseInstruction(SourceFileData src, in int idxStart, ref int idxterm)
         {
             var rows = list<TextRow>();
             var parsing = false;
@@ -42,12 +42,12 @@ namespace Z0.Xed
                     rows.Add(row);                                
 
             }
-            return new InstructionData(rows.ToArray());
+            return new XedInstructionData(rows.ToArray());
         }
 
-        InstructionData[] ParseSequence(SourceFileData data, int idx)
+        XedInstructionData[] ParseSequence(SourceFileData data, int idx)
         {
-            var dst = list<InstructionData>();            
+            var dst = list<XedInstructionData>();            
             for(var i=0; i<data.RowCount; i++)
             {
                 var parsed = ParseInstruction(data, ++i, ref i);
@@ -57,7 +57,7 @@ namespace Z0.Xed
             return dst.ToArray();
         }
 
-        public InstructionData[] ParseInstructions(FilePath src)
+        public XedInstructionData[] ParseInstructions(FilePath src)
         {
             var data = LoadSource(src);
             for(var i=0; i<data.RowCount; i++)
@@ -65,7 +65,7 @@ namespace Z0.Xed
                 if(data[i].Text.ContainsAny(INSTRUCTION_SEQ))  
                     return ParseSequence(data, i);
             }
-            return Root.array<InstructionData>();
+            return Root.array<XedInstructionData>();
         }
 
         static void Advance(ref int rowidx)
@@ -74,7 +74,7 @@ namespace Z0.Xed
         static void Retreat(ref int rowidx)
             => --rowidx;
 
-        FunctionData ParseFunction(SourceFileData data, ref int rowidx)
+        XedFunctionData ParseFunction(SourceFileData data, ref int rowidx)
         {
             var title = data[rowidx].Text.LeftOf(FUNC_MARKER);
             var body = list<string>();
@@ -113,12 +113,12 @@ namespace Z0.Xed
             var parts = title.SplitClean(Chars.Space);
             var rt = parts.Length == 2 ? parts[0] : string.Empty;
             var name = parts.Length == 1 ? parts[0] : (parts.Length == 2 ? parts[1] : string.Empty);
-            return new FunctionData(data.Source.FileName, name, rt, body.ToArray());
+            return new XedFunctionData(data.Source.FileName, name, rt, body.ToArray());
         }
 
-        public FunctionData[] ParseFunctions(FilePath src)
+        public XedFunctionData[] ParseFunctions(FilePath src)
         {
-            var dst = list<FunctionData>();
+            var dst = list<XedFunctionData>();
             var data = LoadSource(src);
             for(var i=0; i<data.RowCount; i++)
             {

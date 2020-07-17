@@ -14,11 +14,11 @@ namespace Z0
 
     public readonly struct LiteralRecord : IRecord<F,T>
     {        
-        public int Sequence => Index;
+        public int Sequence => (int)Index;
         
         public readonly string TypeName;
 
-        public readonly int Index;
+        public readonly uint Index;
 
         public readonly string Name;
 
@@ -28,7 +28,7 @@ namespace Z0
 
         public readonly string Description;
 
-        public LiteralRecord(string TypeName, int Index, string Name, string Hex, string BitString, string Description = null)
+        public LiteralRecord(string TypeName, uint Index, string Name, string Hex, string BitString, string Description = null)
         {
             this.TypeName = TypeName;
             this.Index = Index;

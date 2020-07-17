@@ -9,29 +9,30 @@ namespace Z0.Xed
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     using static xed_operand_mode;
 
+    [ApiHost]
     public struct xed_encoder
     {
         xed_decoded_inst_t State;
 
         xed_operand_storage_t Operands
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => State._operands;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static xed_encoder Init(in xed_decoded_inst_t state)
             => new xed_encoder(state);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static xed_encoder Init()
             => new xed_encoder(default(xed_decoded_inst_t));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         xed_encoder(in xed_decoded_inst_t state)
         {
             State = state;
@@ -40,7 +41,7 @@ namespace Z0.Xed
         /// <summary>
         /// mode64   NOREX=0  NEEDREX=1 REXW[w] REXB[b] REXX[x] REXR[r] -> 0b0100 wrxb
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         Option<byte> Test1()        
             => (Operands.mode == mode64 && !Operands.norex && Operands.needrex) 
                 ? some((byte)1) 
@@ -49,7 +50,7 @@ namespace Z0.Xed
         /// <summary>
         /// mode64   NOREX=0  REX=1     REXW[w] REXB[b] REXX[x] REXR[r] -> 0b0100 wrxb
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         Option<byte> Test2()
             => (Operands.mode == mode64 && !Operands.norex && Operands.rex) 
                 ? some((byte)2) 
@@ -58,7 +59,7 @@ namespace Z0.Xed
         /// <summary>
         /// mode64   NOREX=0            REXW[w]=1 REXB[b] REXX[x] REXR[r] -> 0b0100 wrxb
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         Option<byte> Test3()
             => (Operands.mode == mode64 && !Operands.norex && Operands.rexw) 
                 ? some((byte)3) 
@@ -67,7 +68,7 @@ namespace Z0.Xed
         /// <summary>
         /// mode64   NOREX=0            REXW[w] REXB[b]=1 REXX[x] REXR[r] -> 0b0100 wrxb
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         Option<byte> Test4()
             => (Operands.mode == mode64 && !Operands.norex && Operands.rexb) 
                 ? some((byte)4) 
@@ -76,7 +77,7 @@ namespace Z0.Xed
         /// <summary>
         /// mode64   NOREX=0            REXW[w] REXB[b] REXX[x]=1 REXR[r] -> 0b0100 wrxb
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         Option<byte> Test5()
             => (Operands.mode == mode64 && !Operands.norex && Operands.rexx) 
                 ? some((byte)5) 
@@ -85,7 +86,7 @@ namespace Z0.Xed
         /// <summary>
         /// mode64   NOREX=0            REXW[w] REXB[b] REXX[x]=1 REXR[r] -> 0b0100 wrxb
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         Option<byte> Test6()
             => (Operands.mode == mode64 && !Operands.norex && Operands.rexr) 
                 ? some((byte)6) 
@@ -95,6 +96,7 @@ namespace Z0.Xed
             => new Func<Option<byte>>[]{Test1, Test2, Test3, Test4, Test5, Test6};
 
         // See xed-encoder-3.c xed_encode_nonterminal_REX_PREFIX_ENC_BIND
+        [Op]
         public void rex_prefix_enc()
         {
             var tests = Tests;

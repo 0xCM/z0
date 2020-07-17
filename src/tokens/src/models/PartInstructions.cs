@@ -14,7 +14,7 @@ namespace Z0.Asm
     /// <summary>
     /// Collects sequences instructions from part-defined api hosts
     /// </summary>         
-    public readonly struct PartInstructions: IIndex<HostInstructions>
+    public readonly struct PartInstructions: IContentedIndex<HostInstructions>
     {
         /// <summary>
         /// The decoded instructions

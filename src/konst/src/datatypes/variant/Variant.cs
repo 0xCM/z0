@@ -14,12 +14,12 @@ namespace Z0
     using NK = NumericKind;
 
     [ApiHost]
-    public readonly struct Variant
+    public readonly partial struct Variant
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static variant from<T>(T src)
             where T : unmanaged
-                => from(store(Cast.to<T,ulong>(src), nk<T>()));
+                => from(store(z.convert<T,ulong>(src), nk<T>()));
 
         [MethodImpl(Inline), Op]
         public static variant define(ulong src, NumericKind dst)
@@ -41,46 +41,6 @@ namespace Z0
         public static T extract<T>(variant src)
             where T : unmanaged
                 => vcell(vector<T>(src), 0);
-
-        [MethodImpl(Inline), Op]
-        public static variant from(sbyte src)
-            => from(store(src, NK.I8));
-
-        [MethodImpl(Inline), Op]
-        public static variant from(byte src)
-            => from(store(src, NK.U8));
-
-        [MethodImpl(Inline), Op]
-        public static variant from(short src)
-            => from(store(src, NK.I16));
-
-        [MethodImpl(Inline), Op]
-        public static variant from(ushort src)
-            => from(store(src, NK.U16));
-
-        [MethodImpl(Inline), Op]
-        public static variant from(int src)
-            => from(store(src, NK.I32));
-
-        [MethodImpl(Inline), Op]
-        public static variant from(uint src)
-            => from(store(src, NK.U32));
-
-        [MethodImpl(Inline), Op]
-        public static variant from(long src)
-            => from(store(src, NK.I64));
-
-        [MethodImpl(Inline), Op]
-        public static variant from(ulong src)
-            => from(store(src, NK.U64));
-
-        [MethodImpl(Inline), Op]
-        public static variant from(float src)
-            => from(store(src, NK.F32));
-
-        [MethodImpl(Inline), Op]
-        public static variant from(double src)
-            => from(store(src, NK.F64));
 
         [MethodImpl(Inline)]
         static variant from(Vector128<ulong> src)

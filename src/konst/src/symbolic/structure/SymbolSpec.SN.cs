@@ -30,7 +30,7 @@ namespace Z0
         /// <summary>
         /// The storage cell type identifier
         /// </summary>
-        public MetadataToken SegDomain {get;}
+        public ArtifactIdentity SegDomain {get;}
 
         /// <summary>
         /// The number of bits occupied by a symbol
@@ -50,7 +50,7 @@ namespace Z0
             get => (ushort)(SegWidth/SymWidth);
         }
 
-        public MetadataToken SymDomain
+        public ArtifactIdentity SymDomain
         {
             [MethodImpl(Inline)]
             get => typeof(S);
@@ -63,7 +63,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort segwidth, MetadataToken segdomain, params S[] symbols)
+        public SymbolSpec(ushort segwidth, ArtifactIdentity segdomain, params S[] symbols)
         {
             SegDomain = segdomain;
             SegWidth = segwidth;

@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using TC = System.TypeCode;
+    using NK = NumericKind;
+    
 
     partial struct z
     {
@@ -18,38 +19,37 @@ namespace Z0
         /// <param name="dst">The target kind</param>
         [Op]
         public static object rebox(object src, NumericKind dst)
-        {
-            var tc = Type.GetTypeCode(src?.GetType());
-            switch(tc)
+        {            
+            switch(dst)
             {
-                case TC.SByte:
+                case NK.I8:
                     return box((sbyte)src, dst);
 
-                case TC.Byte:
+                case NK.U8:
                     return box((byte)src, dst);
 
-                case TC.Int16:
+                case NK.I16:
                     return box((short)src, dst);
 
-                case TC.UInt16:
+                case NK.U16:
                     return box((ushort)src, dst);
                 
-                case TC.Int32:
+                case NK.I32:
                     return box((int)src, dst);
 
-                case TC.UInt32:
+                case NK.U32:
                     return box((uint)src, dst);
 
-                case TC.Int64:
+                case NK.I64:
                     return box((long)src, dst);
 
-                case TC.UInt64:
+                case NK.U64:
                     return box((ulong)src, dst);
 
-                case TC.Single:
+                case NK.F32:
                     return box((float)src, dst);
 
-                case TC.Double:
+                case NK.F64:
                     return box((double)src, dst);
             }
             return src;

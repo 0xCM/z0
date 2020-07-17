@@ -13,7 +13,7 @@ namespace Z0
     using static ValueIndex;
     using static z;
     
-    public readonly struct ValueIndex<T> : IIndex<ValueIndex<T>,T>
+    public readonly struct ValueIndex<T> : IIndex<T>
         where T : struct
     {
         public readonly T[] Data;
@@ -87,6 +87,12 @@ namespace Z0
         }
 
         public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Lookup(index);
+        }
+
+        public ref T this[int index]
         {
             [MethodImpl(Inline)]
             get => ref Lookup(index);

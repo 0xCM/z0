@@ -6,7 +6,7 @@ namespace Z0
 {    
     public interface IReflected
     {
-        MetadataToken Id {get;}
+        ArtifactIdentity Id {get;}
     }
 
     public interface IReflected<F> : IReflected

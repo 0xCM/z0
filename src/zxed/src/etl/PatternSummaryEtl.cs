@@ -3,30 +3,30 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
 
     using static Konst;
     using static Root;
-    using static SourceMarkers;
+    using static XedSourceMarkers;
     using static As;
 
-    using R = PatternSummary;
-    using F = PatternField;
+    using R = XedPatternSummary;
+    using F = XedPatternField;
 
     static class PatternSummaryEtl
     {
-        public static InstructionPattern[] ExtractPatterns(this InstructionData src)
+        public static XedPattern[] ExtractPatterns(this XedInstructionData src)
         {
-            var patterns = list<InstructionPattern>();
+            var patterns = list<XedPattern>();
             for(var i=0; i<src.RowCount; i++)
             {
                 if(src.IsProp(i,PATTERN) && i != (src.RowCount - 1))
                 {
                     if(src.IsProp(i + 1, OPERANDS))
                     {
-                        patterns.Add(new InstructionPattern(
+                        patterns.Add(new XedPattern(
                             src.Class, 
                             src.Category, 
                             src.Extension, 
@@ -40,7 +40,7 @@ namespace Z0.Xed
             return patterns.ToArray();
         }
 
-        public static string ExtractProp(this InstructionData src, string name)
+        public static string ExtractProp(this XedInstructionData src, string name)
         {
             for(var i=0; i<src.RowCount; i++)
             {
@@ -56,7 +56,7 @@ namespace Z0.Xed
             return string.Empty;
         }
 
-        public static string BaseCodeText(this InstructionPattern src)
+        public static string BaseCodeText(this XedPattern src)
         {
             var dst = text.build();
             var count = src.Parts.Length;
@@ -71,7 +71,7 @@ namespace Z0.Xed
             return dst.ToString();
         }   
 
-        public static BinaryCode BaseCode(this InstructionPattern src)
+        public static BinaryCode BaseCode(this XedPattern src)
         {
             var dst = 0ul;
             var pos = 0u;
@@ -90,13 +90,13 @@ namespace Z0.Xed
 
         const char RightFence = Chars.RBracket;
         
-        public static string Mod(this InstructionPattern src)
+        public static string Mod(this XedPattern src)
             => src.Parts.TryFind(x => x.StartsWith(MOD)).MapValueOrDefault(x => x.Unfence(LeftFence, RightFence), string.Empty);
 
-        public static string Reg(this InstructionPattern src)
+        public static string Reg(this XedPattern src)
             => src.Parts.TryFind(x => x.StartsWith(REG)).MapValueOrDefault(x => x.Unfence(LeftFence, RightFence), string.Empty);
 
-        public static PatternSummary Summary(this InstructionPattern src)
+        public static XedPatternSummary Summary(this XedPattern src)
         {
             var modidx = src.Parts.TryFind(x => x.StartsWith(MODIDX)).MapValueOrDefault(x => x.RightOf(ASSIGN).Trim(), string.Empty);
             return new R(
@@ -111,7 +111,7 @@ namespace Z0.Xed
                 Operands: src.OperandText);
         }
 
-        public static string FormatPattern(this InstructionPattern src, char delimiter)
+        public static string FormatPattern(this XedPattern src, char delimiter)
         {
             var dst =DataFields.formatter<F>(delimiter);
             dst.Delimit(F.Class, src.Class);
@@ -126,7 +126,7 @@ namespace Z0.Xed
             return dst.Format();
         }
 
-        public static string FormatRow(this PatternSummary src, char delimiter)
+        public static string FormatRow(this XedPatternSummary src, char delimiter)
         {
             var dst = DataFields.formatter<F>(delimiter);
             dst.Delimit(F.Class, src.Class);

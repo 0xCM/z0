@@ -46,7 +46,7 @@ namespace Z0
 
                 var bs = @base == NumericBaseKind.Base2 ? MultiFormatter.Service.FormatEnum(literal.LiteralValue, n2, bitmax) : string.Empty;
                 var hex = MultiFormatter.Service.FormatEnum(literal.LiteralValue, n16, hmax);
-                dst[i] = new LiteralRecord(declarer, literal.Index, literal.Identifier, hex, bs, description);
+                dst[i] = new LiteralRecord(declarer, literal.Position, literal.Name, hex, bs, description);
             }
 
             return dst;
