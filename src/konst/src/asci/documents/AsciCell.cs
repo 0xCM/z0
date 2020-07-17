@@ -34,8 +34,19 @@ namespace Z0
             get => Data[index];
         }
 
-        [MethodImpl(Inline)]
-        public string Format()
-            => Data.Format();
+        /// <summary>
+        /// Specifies the number of symbols covered by the cell
+        /// </summary>
+        public uint Width
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        public ReadOnlySpan<AsciSymbol> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.Data;
+        }
     }
 }

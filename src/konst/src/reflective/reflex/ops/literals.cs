@@ -29,23 +29,23 @@ namespace Z0
         public static Span<FieldInfo> literals(Type src, Span<FieldInfo> dst)
             => literals(fields(src), dst);    
 
-        public static EnumLiterals literals(ClrEnum src)
-        {
-            var @base = src.BaseType.Metadata;
-            var fields = span(@base.LiteralFields());
-            var count = fields.Length;
-            var nk = @base.NumericKind();
-            var indices = sys.alloc<EnumLiteral>(count);
-            var dst = span(indices);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var field = ref skip(fields,i);
-                var constval = field.GetRawConstantValue();
-                var value = Variant.define(field.GetRawConstantValue(), nk);
-                seek(dst, i) = new EnumLiteral(field, nk, i, field.Name, value);
-            }
-            return indices.ToIndex();
-        }
+        // public static EnumLiterals literals(ClrEnum src)
+        // {
+        //     var @base = src.BaseType.Metadata;
+        //     var fields = span(@base.LiteralFields());
+        //     var count = fields.Length;
+        //     var nk = @base.NumericKind();
+        //     var indices = sys.alloc<EnumLiteral>(count);
+        //     var dst = span(indices);
+        //     for(var i=0u; i<count; i++)
+        //     {
+        //         ref readonly var field = ref skip(fields,i);
+        //         var constval = field.GetRawConstantValue();
+        //         var value = Variant.define(field.GetRawConstantValue(), nk);
+        //         seek(dst, i) = new EnumLiteral(field, nk, i, field.Name, value);
+        //     }
+        //     return indices.ToIndex();
+        // }
 
     }
 }

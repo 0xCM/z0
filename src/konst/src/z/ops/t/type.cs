@@ -14,5 +14,9 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Type type<T>()
             => sys.type<T>();
+
+        [MethodImpl(Inline), Op]
+        public static Type type(NumericKind nk)
+            => NumericKinds.type(nk);
     }
 }

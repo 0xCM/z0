@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-
     public struct xed_operand_storage_t
     {
         public xed_uint8_t agen;
@@ -176,7 +175,7 @@ namespace Z0.Xed
         
         public xed_uint8_t bcast;
         
-        public xed_uint8_t chip;
+        public xed_chip_enum_t chip;
         
         public xed_uint8_t need_memdisp;
         

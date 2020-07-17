@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Linq;
 
     using static Konst;
 
@@ -15,6 +16,9 @@ namespace Z0
     /// </summary>
     public readonly struct EnumLiterals : IConstIndex<EnumLiteral>
     {
+        public static EnumLiterals Empty 
+            => new EnumLiterals(sys.empty<EnumLiteral>());
+
         readonly EnumLiteral[] Data;
 
         [MethodImpl(Inline)]
@@ -50,7 +54,7 @@ namespace Z0
         }
 
         public variant[] Values 
-            => Data.Select(x => x.ScalarValue);
+            => Data.Select(x => x.Value);
 
         public F[] Convert<F>()
             where F : unmanaged, Enum
@@ -62,8 +66,11 @@ namespace Z0
                 dst[i] = (F)(object)src[i];
             return dst;
         }
-                
+
+        public EnumLiterals Append(EnumLiterals more)               
+            => new EnumLiterals(Data.Concat(more.Data).ToArray());
+
         public IEnumerable<NamedValue<variant>> NamedValues
-            => from i in Data select NamedValue.define(i.Name, i.ScalarValue);
+            => from i in Data select NamedValue.define(i.Name, i.Value);
     }
 }

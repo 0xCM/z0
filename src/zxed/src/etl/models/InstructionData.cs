@@ -19,7 +19,7 @@ namespace Z0
         public readonly TextRow[] Rows {get;}
 
         public static XedInstructionData Empty 
-            => new XedInstructionData(Array.Empty<TextRow>());
+            => new XedInstructionData(sys.empty<TextRow>());
         
         [MethodImpl(Inline)]
         internal XedInstructionData(params TextRow[] rows)

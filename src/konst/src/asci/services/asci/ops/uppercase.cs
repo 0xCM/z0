@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source character</param>
         [MethodImpl(Inline), Op]
         public static char uppercase(char src)
-             => AsciTest.letter(LowerCase, src)  ? uppercase((AsciLetterLoCode)src) : src;
+             => AsciTest.letter(LowerCase, src) ? uppercase((AsciLetterLoCode)src) : src;
 
         [MethodImpl(Inline), Op]
         public static char uppercase(AsciLetterLoCode src)

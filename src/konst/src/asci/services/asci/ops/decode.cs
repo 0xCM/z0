@@ -103,23 +103,6 @@ namespace Z0
             decode(src.Hi, ref seek(dst, 32));
         }
 
-        [MethodImpl(Inline)]
-        static int decode(Vector256<ushort> data, ref char dst)
-        {
-            var bytes = z.bytes(data);
-            var chars = z.recover<char>(bytes);
-            var count = 0;    
-            for(var i=0u; i<chars.Length; i++, count++)
-            {
-                ref readonly var c = ref skip(chars,i);
-                if((AsciCharCode)c != AsciCharCode.Null)
-                    seek(dst,i) = c;
-                else
-                    break;
-            }
-            return count;
-        }
-
         readonly struct Seg512
         {
             readonly Vector256<ushort> Lo;

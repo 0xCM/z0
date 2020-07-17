@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Reflection;
 
     using Z0.Xed;
     
@@ -40,10 +41,15 @@ namespace Z0
 
         void TestCases()
         {
-            var codes = Enums.literals<AsciLetterLo>();
-            var dst = text.build();
-            z.iter(codes, c => dst.Append(c.ToSymbol().Format()));
-            term.print(dst.ToString());
+            
+            var  index = Enums.index(Assembly.GetExecutingAssembly());
+            using var writer = Context.AppPaths.AppStandardOutPath.Writer();
+            for(var i=0; i<index.Length; i++)
+            {
+                var literal = index[i];
+                writer.WriteLine($"{literal.Position} {literal.TypeHandle}  {literal.Id}  {literal.Name} {literal.Value}");
+            }
+
         }
         public override void RunShell(params string[] args)
         {            

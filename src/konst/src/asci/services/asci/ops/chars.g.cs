@@ -45,6 +45,5 @@ namespace Z0
             else
                 return ReadOnlySpan<char>.Empty;
         }
-
    }
 }

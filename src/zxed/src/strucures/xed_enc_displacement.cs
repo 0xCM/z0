@@ -5,8 +5,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
     public struct xed_enc_displacement_t
     {
         public xed_int64_t    displacement; 

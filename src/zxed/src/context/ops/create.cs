@@ -15,40 +15,10 @@ namespace Z0
     using Xed;
 
     partial struct XedContext
-    {        
-        readonly XedContextData Data;
-
+    {                        
         public static XedContext create()
-        {            
-            var index = types();            
-            index.Search(t => t.Name == nameof(XedContextData), out var ctx);            
-            var fields = Reflex.fields(ctx);
-            
-            var nameBuffer = sys.alloc<EnumNames>(4);
-            var _names = span(nameBuffer);
-
-            index.Search(x => x.Name == nameof(xed_category_enum_t), out var e0);
-            seek(_names,0) = names(e0);
-            
-            index.Search(x => x.Name == nameof(xed_extension_enum_t), out var e1);
-            seek(_names,1) = names(e1);
-
-            index.Search(x => x.Name == nameof(xed_flag_enum_t), out var e2);            
-            seek(_names,2) = names(e2);
-            
-            index.Search(x => x.Name == nameof(xed_iclass_enum_t), out var e3);            
-            seek(_names,3) = names(e3);
-
-            return new XedContext(data(ctx, index,fields, nameBuffer));            
-        }
-
-        [MethodImpl(Inline), Op]
-        public static XedContextData data(Type t, ClrTypes index, Indexed<FieldInfo> fields, EnumNames[] names)
-            => new XedContextData(t, index, fields, names);
+            => new XedContext(data());            
         
-        [MethodImpl(Inline), Op]
-        public static EnumNames names(Type src)                   
-            => new EnumNames(src, System.Enum.GetNames(src));        
 
         [MethodImpl(Inline), Op]
         public static ClrTypes types()
@@ -57,12 +27,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ClrTypes types(Assembly a)
             => Reflex.index(a);
-
-        [MethodImpl(Inline)]
-        XedContext(in XedContextData data)
-            : this()
-        {
-            Data = data;
-        }
     }
 }

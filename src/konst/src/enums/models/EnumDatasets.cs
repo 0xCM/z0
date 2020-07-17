@@ -58,15 +58,15 @@ namespace Z0.Asm
             return dst.ToString();
         }
 
-        public void emit(Type @enum, FilePath dst)
-        {
-            using var writer = dst.Writer();
-            writer.WriteLine(header<F>());
+        // public void emit(Type @enum, FilePath dst)
+        // {
+        //     using var writer = dst.Writer();
+        //     writer.WriteLine(header<F>());
             
-            var dataset = Enums.dataset(@enum);
-            for(var i=0; i<dataset.EntryCount; i++)
-                writer.WriteLine(format(dataset[i]));
-        }        
+        //     var dataset = Enums.dataset(@enum);
+        //     for(var i=0; i<dataset.EntryCount; i++)
+        //         writer.WriteLine(format(dataset[i]));
+        // }        
 
         public void emit<E,T>(FilePath dst)
             where E : unmanaged, Enum

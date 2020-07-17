@@ -9,6 +9,7 @@ namespace Z0.Xed
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static math;
 
     [ApiHost]
     public struct xed_uint8_t
@@ -53,20 +54,19 @@ namespace Z0.Xed
 
         [MethodImpl(Inline), Op]
         public static xed_uint8_t operator <<(xed_uint8_t src, int shift)
-            => (byte)(src.data << shift);
+            => sll(src.data, (byte)shift);
         
         [MethodImpl(Inline), Op]
         public static xed_uint8_t operator >>(xed_uint8_t src, int shift)
-            => (byte)(src.data >> shift);
+            => srl(src.data, (byte)shift);
 
         [MethodImpl(Inline), Op]
         public static xed_uint8_t operator &(xed_uint8_t x, xed_uint8_t y)
-            => (byte)(x & y);
+            => and(x.data, y.data);
 
         [MethodImpl(Inline), Op]
         public static xed_uint8_t operator|(xed_uint8_t x, xed_uint8_t y)
-            => (byte)(x | y);
-
+            => or(x.data, y.data);
 
         [MethodImpl(Inline), Op]
         public static implicit operator byte(xed_uint8_t src)
@@ -78,7 +78,7 @@ namespace Z0.Xed
 
         [MethodImpl(Inline), Op]
         public static implicit operator xed_uint32_t(xed_uint8_t src)
-            => new xed_uint32_t(src);
+            => new xed_uint32_t(src.data);
 
         [MethodImpl(Inline), Op]
         public static implicit operator xed_uint8_t(byte src)
@@ -86,7 +86,7 @@ namespace Z0.Xed
 
         [MethodImpl(Inline), Op]
         public static implicit operator xed_uint8_t(bool src)
-            => src ? true : false;
+            => new xed_uint8_t(z.@byte(src));
 
         [MethodImpl(Inline), Op]
         public static bool operator true(xed_uint8_t src)

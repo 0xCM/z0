@@ -15,6 +15,19 @@ namespace Z0
     [ApiHost]
     public readonly partial struct XedContext
     {                
-                
+        readonly XedContextData[] Data;
+
+        public ref readonly XedContextData ContextData
+        {
+            [MethodImpl(Inline), Op]
+            get => ref Data[0];
+        }
+
+        [MethodImpl(Inline)]
+        XedContext(in XedContextData data)
+            : this()
+        {
+            Data = new XedContextData[1]{data};
+        }
     }
 }

@@ -16,84 +16,81 @@ namespace Z0.Xed
     [ApiHost]
     public struct xed_encoder
     {
-        xed_decoded_inst_t State;
+        xed_decoded_inst_t[] Storage;
 
-        xed_operand_storage_t Operands
+        ref xed_decoded_inst_t State
         {
             [MethodImpl(Inline), Op]
-            get => State._operands;
+            get => ref Storage[0];
+        }
+        
+        ref xed_operand_storage_t Operands
+        {
+            [MethodImpl(Inline), Op]
+            get => ref State._operands;
         }
 
-        [MethodImpl(Inline), Op]
         public static xed_encoder Init(in xed_decoded_inst_t state)
             => new xed_encoder(state);
 
-        [MethodImpl(Inline), Op]
         public static xed_encoder Init()
             => new xed_encoder(default(xed_decoded_inst_t));
 
-        [MethodImpl(Inline), Op]
         xed_encoder(in xed_decoded_inst_t state)
-        {
-            State = state;
-        }
+            => Storage = new xed_decoded_inst_t[1]{state};
+
+        [MethodImpl(Inline), Op]
+        public static byte? nullz(byte src)
+            => src != 0 ? src : (byte?)null;
+
+        [MethodImpl(Inline), Op]
+        public static byte? eval(bool state)
+            => nullz(z.@byte(state));
 
         /// <summary>
         /// mode64   NOREX=0  NEEDREX=1 REXW[w] REXB[b] REXX[x] REXR[r] -> 0b0100 wrxb
         /// </summary>
         [MethodImpl(Inline), Op]
-        Option<byte> Test1()        
-            => (Operands.mode == mode64 && !Operands.norex && Operands.needrex) 
-                ? some((byte)1) 
-                : none<byte>();        
+        byte? Test1()        
+            => eval(Operands.mode == mode64 && !Operands.norex && Operands.needrex);
 
         /// <summary>
         /// mode64   NOREX=0  REX=1     REXW[w] REXB[b] REXX[x] REXR[r] -> 0b0100 wrxb
         /// </summary>
         [MethodImpl(Inline), Op]
-        Option<byte> Test2()
-            => (Operands.mode == mode64 && !Operands.norex && Operands.rex) 
-                ? some((byte)2) 
-                : none<byte>();
+        byte? Test2()
+            => eval(Operands.mode == mode64 && !Operands.norex && Operands.rex);
 
         /// <summary>
         /// mode64   NOREX=0            REXW[w]=1 REXB[b] REXX[x] REXR[r] -> 0b0100 wrxb
         /// </summary>
         [MethodImpl(Inline), Op]
-        Option<byte> Test3()
-            => (Operands.mode == mode64 && !Operands.norex && Operands.rexw) 
-                ? some((byte)3) 
-                : none<byte>();
+        byte? Test3()
+            => eval(Operands.mode == mode64 && !Operands.norex && Operands.rexw);
         
         /// <summary>
         /// mode64   NOREX=0            REXW[w] REXB[b]=1 REXX[x] REXR[r] -> 0b0100 wrxb
         /// </summary>
         [MethodImpl(Inline), Op]
-        Option<byte> Test4()
-            => (Operands.mode == mode64 && !Operands.norex && Operands.rexb) 
-                ? some((byte)4) 
-                : none<byte>();
+        byte? Test4()
+            => eval(Operands.mode == mode64 && !Operands.norex && Operands.rexb);
 
         /// <summary>
         /// mode64   NOREX=0            REXW[w] REXB[b] REXX[x]=1 REXR[r] -> 0b0100 wrxb
         /// </summary>
         [MethodImpl(Inline), Op]
-        Option<byte> Test5()
-            => (Operands.mode == mode64 && !Operands.norex && Operands.rexx) 
-                ? some((byte)5) 
-                : none<byte>();
+        byte? Test5()
+            => eval(Operands.mode == mode64 && !Operands.norex && Operands.rexx);
 
         /// <summary>
         /// mode64   NOREX=0            REXW[w] REXB[b] REXX[x]=1 REXR[r] -> 0b0100 wrxb
         /// </summary>
         [MethodImpl(Inline), Op]
-        Option<byte> Test6()
-            => (Operands.mode == mode64 && !Operands.norex && Operands.rexr) 
-                ? some((byte)6) 
-                : none<byte>();
+        byte? Test6()
+            => eval(Operands.mode == mode64 && !Operands.norex && Operands.rexr);
 
-        readonly Func<Option<byte>>[] Tests
-            => new Func<Option<byte>>[]{Test1, Test2, Test3, Test4, Test5, Test6};
+        readonly Func<byte?>[] Tests
+            => new Func<byte?>[]{Test1, Test2, Test3, Test4, Test5, Test6};
 
         // See xed-encoder-3.c xed_encode_nonterminal_REX_PREFIX_ENC_BIND
         [Op]
@@ -103,7 +100,7 @@ namespace Z0.Xed
             for(var i=0; i<tests.Length; i++)
             {
                 var test = tests[i]();
-                if(test)
+                if(test.HasValue)
                 {
                     State.ev._iforms.x_REX_PREFIX_ENC = test.Value;                
                     break;

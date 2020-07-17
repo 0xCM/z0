@@ -19,5 +19,13 @@ namespace Z0
         public static NK<T> nk<T>()
             where T : unmanaged
                 => NumericKinds.kind<T>();
+
+        /// <summary>
+        /// Determines the source types's numeric kind classifier
+        /// </summary>
+        /// <param name="t">The type to classify</param>
+        [MethodImpl(Inline), Op]
+        public static NumericKind nk(Type t)
+            => NumericKinds.kind(t);
     }
 }

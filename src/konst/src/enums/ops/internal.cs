@@ -23,21 +23,6 @@ namespace Z0
         static ConcurrentDictionary<Type,object> ValueCache {get;}
             = new ConcurrentDictionary<Type,object>();
 
-        static EnumLiterals<E> CreateIndex<E>()
-            where E : unmanaged, Enum
-        {
-            var type = Enums.@base<E>();
-            var fields = typeof(E).LiteralFields().ToArray();
-            var indices = new List<EnumLiteral<E>>(fields.Length);
-            for(var i=0u; i< fields.Length; i++)
-            {
-                var field = fields[i];
-                var value = (E)field.GetRawConstantValue();
-                indices.Add(new EnumLiteral<E>(field, type, i, field.Name, value, string.Empty, UserMetadata.Empty));
-            }
-            return indices.ToIndex();
-        }
-
 
         /// <summary>
         /// Gets the literals defined by an enumeration together with their integral values

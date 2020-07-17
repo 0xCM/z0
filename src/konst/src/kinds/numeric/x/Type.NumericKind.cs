@@ -8,16 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static NumericKinds;
 
-    partial class Enums
+    partial class XTend
     {
         /// <summary>
-        /// Gets the literals defined by an enumeration
+        /// Determines the numeric kind of a type
         /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline), Op]
-        public static variant[] scalars(Type src) 
-            => index(src).Values;
+        /// <param name="src">The type to examine</param>
+        public static NumericKind NumericKind(this Type src)
+            => kind(src);
     }
 }

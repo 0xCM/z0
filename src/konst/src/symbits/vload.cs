@@ -83,11 +83,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe Vector512<byte> vload(W512 w, in byte src)
-            => (vload(n256, in src), vload(n256, Unsafe.Add(ref edit(src), 32)));
+            => (vload(n256, in src), vload(n256, add(src, 32)));
 
         [MethodImpl(Inline)]
         public static unsafe Vector512<ushort> vload(W512 w, in ushort src)
-            => (vload(n256, in src), vload(n256, Unsafe.Add(ref edit(src), 16)));
-
+            => (vload(n256, in src), vload(n256, add(src, 16)));
     }
 }

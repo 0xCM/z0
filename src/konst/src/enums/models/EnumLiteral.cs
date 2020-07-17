@@ -13,65 +13,53 @@ namespace Z0
     /// <summary>
     /// Defines a boxed enumeration literal as the triple (index,identifier,value)
     /// </summary>
-    public readonly struct EnumLiteral : IEnumLiteral<EnumLiteral>
-    {
+    public readonly struct EnumLiteral
+    {        
         /// <summary>
-        /// The compiler-emitted field that defines the literal
+        /// THe literal's surrogate identifier
         /// </summary>
-        public FieldInfo BackingField {get;}
+        public readonly ArtifactIdentity Id;
 
         /// <summary>
-        /// The literal declaration order, unique within the declaring enum
+        /// The name of the declaring type
         /// </summary>
-        public uint Position {get;}
+        public readonly StringRef TypeName;
 
         /// <summary>
-        /// The literal identifier, unique within the declaring enum
+        /// The handle of the declaring type
         /// </summary>
-        public string Name {get;}
-
-        /// <summary>
-        /// The literal value
-        /// </summary>
-        public variant ScalarValue {get;}
+        public readonly MemoryAddress TypeHandle;
 
         /// <summary>
         /// The enum's numeric data type
         /// </summary>
-        public NumericKind DataType {get;}
+        public readonly EnumScalarKind DataType;
 
         /// <summary>
-        /// The metadata token that identifies the backing field
+        /// The literal declaration order, unique within the declaring enum
         /// </summary>
-        public ArtifactIdentity Id 
-        {
-            [MethodImpl(Inline)]
-            get => BackingField.MetadataToken;
-        }
+        public readonly uint Position;
+
+        /// <summary>
+        /// The literal identifier, unique within the declaring enum
+        /// </summary>
+        public readonly StringRef Name;
+
+        /// <summary>
+        /// The literal value
+        /// </summary>
+        public readonly variant Value;
 
         [MethodImpl(Inline)]
-        public EnumLiteral(FieldInfo field, NumericKind kind, uint index, string identifier, variant value)
-        {
-            BackingField = field;
-            Name = identifier;
+        public EnumLiteral(FieldInfo field, EnumScalarKind kind, uint index, StringRef name, variant value)
+        {            
+            Id = field.MetadataToken;
+            TypeName = field.DeclaringType.Name;
+            TypeHandle = field.DeclaringType.TypeHandle.Value;
+            Name = name;
             DataType = kind;
             Position = index;
-            ScalarValue = value;
+            Value = value;
         }           
-
-        [MethodImpl(Inline)]
-        public bool Equals(EnumLiteral src)
-            => Position == src.Position 
-            && Name == src.Name 
-            && ScalarValue.Equals(src.ScalarValue);
-
-        public override bool Equals(object src)
-            => src is EnumLiteral x && Equals(x);
-
-        public override int GetHashCode()
-            => (int)Position;
-        
-        public override string ToString()
-            => (this as IEnumLiteral).Format();            
     }
 }

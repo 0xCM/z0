@@ -88,7 +88,6 @@ namespace Z0
             where V : unmanaged
                 => (EnumLiterals<E,V>)ValueCache.GetOrAdd(typeof(E), _ => LiteralSequence<E,V>());
 
-
         /// <summary>
         /// Defines an E-V parametric enum value given an E-parametric literal an a value:V
         /// </summary>
@@ -109,15 +108,6 @@ namespace Z0
                    where f.Tagged<BinaryLiteralAttribute>()
                    let a = f.Tag<BinaryLiteralAttribute>().Require()
                    select z.literal(base2, f.Name, scalar<E,T>((E)f.GetValue(null)), a.Text);
-
-        /// <summary>
-        /// Gets the declaration-order indices for each named literal
-        /// </summary>
-        /// <param name="peek">If true, extracts the content directly, bypassing any caching</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        public static EnumLiterals<E> index<E>()
-            where E : unmanaged, Enum
-                => (EnumLiterals<E>)IndexCache.GetOrAdd(typeof(E), _ => CreateIndex<E>());
 
         /// <summary>
         /// Gets the literals defined by an enumeration

@@ -49,6 +49,12 @@ namespace Z0
             get => ref Data[0];
         }        
 
+        public uint Count
+        {
+            [MethodImpl(Inline), Op] 
+            get => (uint)Length;
+        }
+        
         public int Length 
         { 
             [MethodImpl(Inline), Op] 

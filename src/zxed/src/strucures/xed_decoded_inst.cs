@@ -10,6 +10,7 @@ namespace Z0.Xed
 
     using static Konst;
     using static Xed;
+    using static z;
 
     /// The main container for instructions. After decode, it holds an array of
     /// operands with derived information from decode and also valid
@@ -22,13 +23,19 @@ namespace Z0.Xed
         public static xed_decoded_inst_t init(byte? size = null)
             => new xed_decoded_inst_t(size ?? XED_ENCODE_ORDER_MAX_OPERANDS);
 
+        readonly xed_operand_storage_t[] data;
+
         /// The _operands are storage for information discovered during
         /// decoding. They are also used by encode.  The accessors for these
         /// operands all have the form xed3_operand_{get,set}_*(). They should
         /// be considered internal and subject to change over time. It is
         /// preferred that you use xed_decoded_inst_*() or the
         /// xed_operand_values_*() functions when available.
-        public xed_operand_storage_t _operands;
+        public ref xed_operand_storage_t _operands 
+        {
+            [MethodImpl(Inline), Op]
+            get => ref data[0];
+        }
 
         //public fixed byte _operand_order[XED_ENCODE_ORDER_MAX_OPERANDS];
         readonly byte[] _operand_order;
@@ -62,41 +69,35 @@ namespace Z0.Xed
 
         public xed_encoder_vars_t ev;
         
-        [MethodImpl(Inline), Op]
         xed_decoded_inst_t(xed_uint8_t size) 
         {
             _n_operand_order = size;
-            _operand_order = Root.alloc<byte>(_n_operand_order);
-            _enc_data = Root.array<byte>();
-            _dec_data = Root.array<byte>();
+            _operand_order = z.alloc<byte>(_n_operand_order);
+            _enc_data = sys.empty<byte>();
+            _dec_data = sys.empty<byte>();
             _decoded_length = default;
             _inst = default;
             ev = default;
             user_data = default;
-            _operands = default;
+            data = new xed_operand_storage_t[1]{default};
         }
 
-        public xed_uint8_t HasModRm
+        public ref xed_uint8_t HasModRm
         {
             [MethodImpl(Inline), Op]
-            get => _operands.has_modrm;
+            get => ref _operands.has_modrm;
         }
 
-        public xed_uint8_t Rm
+        public ref xed_uint8_t Rm
         {
             [MethodImpl(Inline), Op]
-            get => _operands.rm;
-            [MethodImpl(Inline), Op]
-            set => _operands.rm = value;
+            get => ref _operands.rm;        
         }
 
-        public xed_chip_enum_t Chip
+        public ref xed_chip_enum_t Chip
         {
             [MethodImpl(Inline), Op]
-            get => _operands.chip;
-
-            [MethodImpl(Inline), Op]
-            set => _operands.chip = value;
+            get => ref _operands.chip;
         }
     }
 }
