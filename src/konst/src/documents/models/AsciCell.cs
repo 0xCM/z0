@@ -12,30 +12,30 @@ namespace Z0
     /// <summary>
     /// Defines a text segment in the context of a line in a file
     /// </summary>
-    public readonly struct TextCell
+    public readonly struct AsciCell
     {        
         public readonly uint Row;
 
         public readonly uint Col;
 
-        public readonly string Content;
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(TextCell src)
-            => src.Content;
+        public readonly AsciSymbols Data;
                 
         [MethodImpl(Inline)]
-        internal TextCell(uint row, uint col, string content)
+        internal AsciCell(uint row, uint col, AsciSymbols data)
         {
             Row = row;
             Col = col;
-            Content = content;
+            Data = data;
         }    
 
-        public char this[int index]    
+        public char this[uint index]    
         {
             [MethodImpl(Inline)]
-            get => Content[index];
+            get => Data[index];
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Data.Format();
     }
 }

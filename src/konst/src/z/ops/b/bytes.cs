@@ -102,6 +102,5 @@ namespace Z0
         public static ReadOnlySpan<byte> bytes<T>(ReadOnlySpan<T> src, int offset)
             where T : struct
                 => bytes(slice(src,offset)); 
-
     }
 }

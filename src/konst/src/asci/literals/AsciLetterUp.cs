@@ -4,161 +4,155 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using LC = AsciLetterCode;
-
     /// <summary>
-    /// Defines asci codes corresponding to the letters A,..Z
+    /// Defines symbols corresponding to the letters A,..Z
     /// </summary>
-    public enum AsciLetterUpCode : byte
+    public enum AsciLetterUp : ushort
     {
         /// <summary>
-        /// Asci null
+        /// The 'A' symbol
         /// </summary>
-        Null = 0,
+        A = 'A',
+        
+        /// <summary>
+        /// The 'B' symbol
+        /// </summary>
+        B = 'B',
+        
+        /// <summary>
+        /// The 'C' symbol
+        /// </summary>
+        C = 'C',
+        
+        /// <summary>
+        /// The 'D' symbol
+        /// </summary>
+        D = 'D',
+        
+        /// <summary>
+        /// The 'E' symbol
+        /// </summary>
+        E = 'E',
+        
+        /// <summary>
+        /// The 'F' symbol
+        /// </summary>
+        F = 'F',
+        
+        /// <summary>
+        /// The 'G' symbol
+        /// </summary>
+        G = 'G',
+        
+        /// <summary>
+        /// The 'H' symbol
+        /// </summary>
+        H = 'H',
+        
+        /// <summary>
+        /// The 'I' symbol
+        /// </summary>
+        I = 'I',
+        
+        /// <summary>
+        /// The 'J' symbol
+        /// </summary>
+        J = 'J',
 
         /// <summary>
-        /// The 'A' symbol code 65
+        /// The 'K' symbol
         /// </summary>
-        A = LC.A,
-        
-        /// <summary>
-        /// The 'B' symbol code 66
-        /// </summary>
-        B = LC.B,
-        
-        /// <summary>
-        /// The 'C' symbol code 67
-        /// </summary>
-        C = LC.C,
-        
-        /// <summary>
-        /// The 'D' symbol code 68
-        /// </summary>
-        D = LC.D,
-        
-        /// <summary>
-        /// The 'E' symbol code 69
-        /// </summary>
-        E = LC.E,
-        
-        /// <summary>
-        /// The 'F' symbol code 70
-        /// </summary>
-        F = LC.F,
-        
-        /// <summary>
-        /// The 'G' symbol code 71
-        /// </summary>
-        G = LC.G,
-        
-        /// <summary>
-        /// The 'H' symbol code 72
-        /// </summary>
-        H = LC.H,
-        
-        /// <summary>
-        /// The 'I' symbol code 73
-        /// </summary>
-        I = LC.I,
-        
-        /// <summary>
-        /// The 'J' symbol code 74
-        /// </summary>
-        J = LC.J,
+        K = 'K',
 
         /// <summary>
-        /// The 'K' symbol code 75
+        /// The 'L' symbol
         /// </summary>
-        K = LC.K,
+        L = 'L',
+        
+        /// <summary>
+        /// The 'M' symbol
+        /// </summary>
+        M = 'M',
+        
+        /// <summary>
+        /// The 'N' symbol
+        /// </summary>
+        N = 'N',
+        
+        /// <summary>
+        /// The 'O' symbol
+        /// </summary>
+        O = 'O',
+        
+        /// <summary>
+        /// The 'P' symbol
+        /// </summary>
+        P = 'P',
+        
+        /// <summary>
+        /// The 'Q' symbol
+        /// </summary>
+        Q = 'Q',
+        
+        /// <summary>
+        /// The 'R' symbol
+        /// </summary>
+        R = 'R',
+        
+        /// <summary>
+        /// The 'S' symbol
+        /// </summary>
+        S = 'S',
+        
+        /// <summary>
+        /// The 'T' symbol
+        /// </summary>
+        T = 'T',
+        
+        /// <summary>
+        /// The 'U' symbol
+        /// </summary>
+        U = 'U',
+        
+        /// <summary>
+        /// The 'V' symbol
+        /// </summary>
+        V = 'V',
 
         /// <summary>
-        /// The 'L' symbol code 76
+        /// The 'W' symbol
         /// </summary>
-        L = LC.L,
-        
-        /// <summary>
-        /// The 'M' symbol code 77
-        /// </summary>
-        M = LC.M,
-        
-        /// <summary>
-        /// The 'N' symbol code 78
-        /// </summary>
-        N = LC.N,
-        
-        /// <summary>
-        /// The 'O' symbol code 79
-        /// </summary>
-        O = LC.O,
-        
-        /// <summary>
-        /// The 'P' symbol code 80
-        /// </summary>
-        P = LC.P,
-        
-        /// <summary>
-        /// The 'Q' symbol code 81
-        /// </summary>
-        Q = LC.Q,
-        
-        /// <summary>
-        /// The 'R' symbol code 82
-        /// </summary>
-        R = LC.R,
-        
-        /// <summary>
-        /// The 'S' symbol code 83
-        /// </summary>
-        S = LC.S,
-        
-        /// <summary>
-        /// The 'T' symbol code 84
-        /// </summary>
-        T = LC.T,
-        
-        /// <summary>
-        /// The 'U' symbol code 85
-        /// </summary>
-        U = LC.U,
-        
-        /// <summary>
-        /// The 'V' symbol code 86
-        /// </summary>
-        V = LC.V,
+        W = 'W',
 
         /// <summary>
-        /// The 'W' symbol code 87
+        /// The 'X' symbol
         /// </summary>
-        W = LC.W,
+        X = 'X',
 
         /// <summary>
-        /// The 'X' symbol code 88
+        /// The 'Y' symbol
         /// </summary>
-        X = LC.X,
+        Y = 'Y',
 
         /// <summary>
-        /// The 'Y' symbol code 89
+        /// The 'Z' symbol
         /// </summary>
-        Y = LC.Y,
+        Z = 'Z',
 
         /// <summary>
-        /// The 'Z' symbol code 90
-        /// </summary>
-        Z = LC.Z,
-
-        /// <summary>
-        /// The first declared code, 65
+        /// The first declared symbol
         /// </summary>
         First = A,
 
         /// <summary>
-        /// The last declared code, 90
+        /// The last declared symbol
         /// </summary>
         Last = Z,
 
         /// <summary>
-        /// The code declaration count, 26
+        /// The symbol declaration count
         /// </summary>
-        Count = Last - First + 1        
+        Count = Last - First + 1
+         
     }
 }

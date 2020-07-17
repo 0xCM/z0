@@ -19,8 +19,8 @@ namespace Z0
             => ref Parts.Konst.Resolved.Codes;
 
         [MethodImpl(Inline), Op]
-        public static TypeIndex index(in TypeCodes src)
-            => new TypeIndex(src.Types);
+        public static TypeCodeIndex index(in TypeCodes src)
+            => new TypeCodeIndex(src.Types);
 
         [MethodImpl(Inline), Op]
         public static unsafe TypeCode lookup(in TypeCodes src, byte index)        
@@ -34,7 +34,7 @@ namespace Z0
             => ref src[tc];
 
         [MethodImpl(Inline), Op]
-        public static ref readonly Type type(in TypeIndex src, TypeCode tc)
+        public static ref readonly Type type(in TypeCodeIndex src, TypeCode tc)
             => ref src[tc];        
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]

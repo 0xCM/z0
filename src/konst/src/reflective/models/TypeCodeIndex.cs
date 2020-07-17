@@ -9,12 +9,12 @@ namespace Z0
  
     using static Konst;
     
-    public readonly struct TypeIndex
+    public readonly struct TypeCodeIndex
     {        
         readonly Type[] PrimalTypes;
 
         [MethodImpl(Inline)]
-        public TypeIndex(Type[] src)
+        public TypeCodeIndex(Type[] src)
             => PrimalTypes = src;
 
         public ref readonly Type this[TypeCode code]

@@ -111,6 +111,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         /// <param name="startidx">The index of the first character</param>
         /// <param name="length">The substring length</param>
+        [MethodImpl(Inline)]
         public static string slice(string src, int startidx, int length)
             => denullify(src).Substring(startidx, length);        
 

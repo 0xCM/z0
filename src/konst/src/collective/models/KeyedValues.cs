@@ -22,6 +22,44 @@ namespace Z0
         
         readonly KeyFunction<K,V> KeyFunction;
 
+        [MethodImpl(Inline)]
+        public KeyedValues(V[] src, KeyFunction<K,V> kf, KeyedValue<K,V>[] dst)
+        {
+            Pairs = dst;
+            KeyFunction = kf;
+
+            var edit = Edit;
+            var values = span(src);
+            var count = src.Length;
+            for(var i= 0u; i<count; i++)
+            {   
+                ref readonly var value = ref skip(values,i);
+                var key = kf(value);
+
+                seek(edit,i) = kvp(key,value);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        public KeyedValues(KeyFunction<K,V> kf, ReadOnlySpan<V> src)
+        {
+            KeyFunction = kf;
+            Pairs = sys.alloc<KeyedValue<K,V>>(src.Length);
+            var edit = span(Pairs);
+            for(var i=0u; i<src.Length; i++)
+            {
+                ref readonly var value = ref skip(src,i);
+                var key = kf(value);
+                seek(edit,i) = kvp(key,value);
+            }
+        }
+
+        public KeyedValues(KeyFunction<K,V> kf, uint capacity)
+        {
+            KeyFunction = kf;
+            Pairs = sys.alloc<KeyedValue<K,V>>(capacity);
+        }
+
         public ReadOnlySpan<KeyedValue<K,V>> View
         {
             [MethodImpl(Inline)]
@@ -56,6 +94,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public ref V Search(in K key)
+        {
+            var view = Edit;
+            ref var start = ref first(Edit);
+            ref var found = ref start.Value;
+            for(var i=0; i<view.Length; i++)
+            {
+                ref readonly var candidate = ref skip(view,i);
+                if(key.Equals(candidate))
+                {  
+                    found = candidate.Value;
+                    break;
+        
+                }
+            }
+            return ref found;
+        }
+
+        [MethodImpl(Inline)]
         public bool Search(Func<V,bool> predicate, out V found)
         {
             var view = View;
@@ -72,26 +129,6 @@ namespace Z0
             return false;
         }
         
-
-        [MethodImpl(Inline)]
-        public KeyedValues(V[] src, KeyFunction<K,V> kf, KeyedValue<K,V>[] dst)
-        {
-            Pairs = dst;
-            KeyFunction = kf;
-
-            var edit = Edit;
-            var values = span(src);
-            var count = src.Length;
-            for(var i= 0u; i<count; i++)
-            {   
-                ref readonly var value = ref skip(values,i);
-                var key = kf(value);
-
-                seek(edit,i) = kvp(key,value);
-
-            }
-        }
-
         public ref KeyedValue<K,V> this[uint index]
         {
             [MethodImpl(Inline)]
@@ -104,6 +141,12 @@ namespace Z0
             get => ref Pair((uint)index);
         }
 
+        public ref V this[in K key]
+        {
+            [MethodImpl(Inline)]
+            get => ref Search(key);
+        }
+        
         [MethodImpl(Inline)]
         public ref K Key(uint index)
             => ref Pairs[index].Key;

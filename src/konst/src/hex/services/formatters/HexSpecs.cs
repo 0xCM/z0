@@ -85,8 +85,6 @@ namespace Z0
         /// <param name="src">The source string</param>
         [MethodImpl(Inline)]
         public static string ClearSpecs(string src)
-            => src.Remove("0x").RemoveAny('h');
-        
-
+            => src.Remove("0x").RemoveAny('h');        
     }
 }

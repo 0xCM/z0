@@ -8,8 +8,6 @@ namespace Z0
 
     public enum AsciMathCode : byte
     {        
-        Null = 0,
-
         /// <summary>
         /// The '!' character code 33
         /// </summary>

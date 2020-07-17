@@ -15,7 +15,8 @@ namespace Z0
     {
         public Type Metadata {get;}
                 
-        public ClrTypeKind Kind => default;
+        public ClrTypeKind Kind 
+            => default;
         
         [MethodImpl(Inline)]
         public ClrType(Type src)

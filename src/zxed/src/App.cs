@@ -38,13 +38,18 @@ namespace Z0
                 term.warn($"No content was parsed from {src}");
         }
 
+        void TestCases()
+        {
+            var codes = Enums.literals<AsciLetterLo>();
+            var dst = text.build();
+            z.iter(codes, c => dst.Append(c.ToSymbol().Format()));
+            term.print(dst.ToString());
+        }
         public override void RunShell(params string[] args)
         {            
-            var parts = PartIdParser.Service.ParseValid(args);  
+              TestCases();        
 
-            
-            var etl = XedEtlWorkflow.Service(Context);
-            etl.Run();
+            //XedEtlWorkflow.Service(Context).Run();
                                     
         }
 

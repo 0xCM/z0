@@ -94,6 +94,46 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> slice<T>(Span<T> src, uint offset, uint length)
-            => CreateSpan(ref seek(first(src), offset), (int)length);            
+            => CreateSpan(ref seek(first(src), offset), (int)length);      
+
+        /// <summary>
+        /// Extracts a substring beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="offset">The index of the first character</param>
+        /// <param name="length">The substring length</param>
+        [MethodImpl(Inline)]
+        public static string slice(string src, int offset)
+            => src.Substring(offset);        
+
+        /// <summary>
+        /// Extracts a substring beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="offset">The index of the first character</param>
+        /// <param name="length">The substring length</param>
+        [MethodImpl(Inline), Op]
+        public static string slice(string src, uint offset)
+            => src.Substring((int)offset);        
+
+        /// <summary>
+        /// Extracts a substring of specified length beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="offset">The index of the first character</param>
+        /// <param name="length">The substring length</param>
+        [MethodImpl(Inline), Op]
+        public static string slice(string src, uint offset, uint length)
+            => src.Substring((int)offset, (int)length);        
+
+        /// <summary>
+        /// Extracts a substring of specified length beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="offset">The index of the first character</param>
+        /// <param name="length">The substring length</param>
+        [MethodImpl(Inline)]
+        public static string slice(string src, int offset, int length)
+            => src.Substring(offset, length);        
     }
 }

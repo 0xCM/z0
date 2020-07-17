@@ -11,8 +11,6 @@ namespace Z0
     /// </summary>
     public enum AsciDigitCode : byte
     {
-        None = 0,
-        
         /// <summary>
         /// Specifies the asci code for the digit '0'
         /// </summary>

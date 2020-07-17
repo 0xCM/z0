@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
         public static int first(in asci4 src, byte match)
-            => search(@byte(ref edit(src)), src.Capacity, match);
+            => search(@byte(edit(src)), src.Capacity, match);
 
         /// <summary>
         /// Returns the index of the first source element that matches a specified value
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
         public static int first(in asci8 src, byte match)
-            => search(@byte(ref edit(src)), src.Capacity, match);
+            => search(@byte(edit(src)), src.Capacity, match);
 
         /// <summary>
         /// Returns the index of the first source element that matches a specified value
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
         public static int first(in asci16 src, byte match)
-            => search(@byte(ref edit(src)), src.Capacity, match);
+            => search(@byte(edit(src)), src.Capacity, match);
 
         /// <summary>
         /// Returns the index of the first source element that matches a specified value
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
         public static int first(in asci32 src, byte match)
-            => search(@byte(ref edit(src)), src.Capacity, match);
+            => search(@byte(edit(src)), src.Capacity, match);
 
         /// <summary>
         /// Returns the index of the first source element that matches a specified value
@@ -55,6 +55,6 @@ namespace Z0
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
         public static int first(in asci64 src, byte match)
-            => search(@byte(ref edit(src)), src.Capacity, match);
+            => search(@byte(edit(src)), src.Capacity, match);
     }
 }

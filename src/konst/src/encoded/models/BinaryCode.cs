@@ -95,7 +95,7 @@ namespace Z0
                 return Encoded.SequenceEqual(src.Encoded);
             else
                 return false;
-        }
+        }        
         
         public string Format()
             => Encoded.FormatHexBytes();

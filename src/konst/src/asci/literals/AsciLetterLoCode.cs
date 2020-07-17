@@ -12,11 +12,6 @@ namespace Z0
     public enum AsciLetterLoCode : byte
     {
         /// <summary>
-        /// Asci null
-        /// </summary>
-        Null = 0,
-
-        /// <summary>
         /// The 'a' symbol code 97
         /// </summary>
         a = LC.a,

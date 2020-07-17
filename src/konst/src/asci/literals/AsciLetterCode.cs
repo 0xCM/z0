@@ -9,11 +9,6 @@ namespace Z0
     public enum AsciLetterCode : byte
     {
         /// <summary>
-        /// The '\0' symbol code 0
-        /// </summary>
-        Null = 0,
-
-        /// <summary>
         /// The 'A' symbol code 65
         /// </summary>
         A = (byte)LSym.A,

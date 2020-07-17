@@ -5,159 +5,148 @@
 namespace Z0
 {    
     /// <summary>
-    /// Defines symbols corresponding to the letters A,..Z
+    /// Defines symbols corresponding to the letters a,...z
     /// </summary>
-    public enum AsciLetterUp : ushort
+    public enum AsciLetterLo : ushort
     {
         /// <summary>
-        /// The letter with no symbol
+        /// The 'a' symbol
         /// </summary>
-        Null = '\0',
-
-        /// <summary>
-        /// The 'A' symbol
-        /// </summary>
-        A = 'A',
+        a = 'a',
         
         /// <summary>
-        /// The 'B' symbol
+        /// The 'b' symbol
         /// </summary>
-        B = 'B',
+        b = 'b',
         
         /// <summary>
-        /// The 'C' symbol
+        /// The 'c' symbol
         /// </summary>
-        C = 'C',
+        c = 'c',
         
         /// <summary>
-        /// The 'D' symbol
+        /// The 'd' symbol
         /// </summary>
-        D = 'D',
+        d = 'd',
         
         /// <summary>
-        /// The 'E' symbol
+        /// The 'e' symbol
         /// </summary>
-        E = 'E',
+        e = 'e',
         
         /// <summary>
-        /// The 'F' symbol
+        /// The 'f' symbol
         /// </summary>
-        F = 'F',
+        f = 'f',
         
         /// <summary>
-        /// The 'G' symbol
+        /// The 'g' symbol
         /// </summary>
-        G = 'G',
+        g = 'g',
         
         /// <summary>
-        /// The 'H' symbol
+        /// The 'h' symbol
         /// </summary>
-        H = 'H',
+        h = 'h',
         
         /// <summary>
-        /// The 'I' symbol
+        /// The 'i' symbol
         /// </summary>
-        I = 'I',
+        i = 'i',
         
         /// <summary>
-        /// The 'J' symbol
+        /// The 'j' symbol
         /// </summary>
-        J = 'J',
-
-        /// <summary>
-        /// The 'K' symbol
-        /// </summary>
-        K = 'K',
-
-        /// <summary>
-        /// The 'L' symbol
-        /// </summary>
-        L = 'L',
+        j = 'j',
         
         /// <summary>
-        /// The 'M' symbol
+        /// The 'k' symbol
         /// </summary>
-        M = 'M',
+        k = 'k',
         
         /// <summary>
-        /// The 'N' symbol
+        /// The 'l' symbol
         /// </summary>
-        N = 'N',
+        l = 'l',
         
         /// <summary>
-        /// The 'O' symbol
+        /// The 'm' symbol
         /// </summary>
-        O = 'O',
+        m = 'm',
         
         /// <summary>
-        /// The 'P' symbol
+        /// The 'n' symbol
         /// </summary>
-        P = 'P',
+        n = 'n',
         
         /// <summary>
-        /// The 'Q' symbol
+        /// The 'o' symbol
         /// </summary>
-        Q = 'Q',
+        o = 'o',
         
         /// <summary>
-        /// The 'R' symbol
+        /// The 'p' symbol
         /// </summary>
-        R = 'R',
+        p = 'p',
         
         /// <summary>
-        /// The 'S' symbol
+        /// The 'q' symbol
         /// </summary>
-        S = 'S',
+        q = 'q',
         
         /// <summary>
-        /// The 'T' symbol
+        /// The 'r' symbol
         /// </summary>
-        T = 'T',
+        r = 'r',
         
         /// <summary>
-        /// The 'U' symbol
+        /// The 's' symbol
         /// </summary>
-        U = 'U',
+        s = 's',
         
         /// <summary>
-        /// The 'V' symbol
+        /// The 't' symbol
         /// </summary>
-        V = 'V',
-
+        t = 't',
+        
         /// <summary>
-        /// The 'W' symbol
+        /// The 'u' symbol
         /// </summary>
-        W = 'W',
-
+        u = 'u',
+        
         /// <summary>
-        /// The 'X' symbol
+        /// The 'v' symbol
         /// </summary>
-        X = 'X',
-
+        v = 'v',
+        
         /// <summary>
-        /// The 'Y' symbol
+        /// The 'w' symbol
         /// </summary>
-        Y = 'Y',
-
+        w = 'w',
+        
         /// <summary>
-        /// The 'Z' symbol
+        /// The 'x' symbol
         /// </summary>
-        Z = 'Z',
+        x = 'x',
+        
+        /// <summary>
+        /// The 'y' symbol
+        /// </summary>
+        y = 'y',
+        
+        /// <summary>
+        /// The 'z' symbol
+        /// </summary>
+        z = 'z',
 
         /// <summary>
         /// The first declared symbol
         /// </summary>
-        First = A,
+        First = a,
 
         /// <summary>
         /// The last declared symbol
         /// </summary>
-        Last = Z,
-
-        /// <summary>
-        /// The symbol declaration count
-        /// </summary>
-        Count = Last - First + 1
-         
+        Last = b,
     }
 }

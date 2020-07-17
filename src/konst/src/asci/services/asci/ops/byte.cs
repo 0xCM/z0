@@ -8,31 +8,56 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
  
     partial struct asci
     {
+        /// <summary>
+        /// Presents the leading source cell as a byte reference
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte @byte(ref asci2 src)
-            => ref z.@as<asci2,byte>(src);
+        public static ref byte @byte(in asci2 src)
+            => ref @as<asci2,byte>(src);
 
+        /// <summary>
+        /// Presents the leading source cell as a byte reference
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte @byte(ref asci4 src)
-            => ref z.@as<asci4,byte>(src);
+        public static ref byte @byte(in asci4 src)
+            => ref @as<asci4,byte>(src);
 
+        /// <summary>
+        /// Presents the leading source cell as a byte reference
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte @byte(ref asci8 src)
-            => ref z.@as<asci8,byte>(src);
+        public static ref byte @byte(in asci8 src)
+            => ref @as<asci8,byte>(src);
 
+        /// <summary>
+        /// Presents the leading source cell as a byte reference
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte @byte(ref asci16 src)
-            => ref z.@as<asci16,byte>(src);
+        public static ref byte @byte(in asci16 src)
+            => ref @as<asci16,byte>(src);
 
+        /// <summary>
+        /// Presents the leading source cell as a byte reference
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte @byte(ref asci32 src)
-            => ref z.@as<asci32,byte>(src);
+        public static ref byte @byte(in asci32 src)
+            => ref @as<asci32,byte>(src);
 
+        /// <summary>
+        /// Presents the leading source cell as a byte reference
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte @byte(ref asci64 src)
-            => ref z.@as<asci64,byte>(src);
+        public static ref byte @byte(in asci64 src)
+            => ref @as<asci64,byte>(src);
     }
 }

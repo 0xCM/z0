@@ -15,8 +15,6 @@ namespace Z0
     [ApiHost]
     public readonly partial struct XedContext
     {                
-
-
-        
+                
     }
 }

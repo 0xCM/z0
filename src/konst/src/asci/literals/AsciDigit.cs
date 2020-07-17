@@ -6,8 +6,6 @@ namespace Z0
 {    
     public enum AsciDigit : ushort
     {
-        Null = 0,
-
         /// <summary>
         /// Specifies '0', asci code 48
         /// </summary>

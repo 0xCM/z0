@@ -52,7 +52,6 @@ namespace Z0
             return z.recover<char>(z.bytes(vlo(decoded)));            
         }
 
-
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
             => z.recover<char>(z.bytes(vinflate(src.Storage)));

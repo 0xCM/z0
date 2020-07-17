@@ -17,7 +17,7 @@ namespace Z0
         public readonly TextRow[] Rows;
 
         [MethodImpl(Inline), Op]
-        public static SourceFileData Define(FilePath src, params TextRow[] lines)
+        public static SourceFileData Define(FilePath src, TextRow[] lines)
             => new SourceFileData(src,lines);
 
         [MethodImpl(Inline), Op]
@@ -51,8 +51,7 @@ namespace Z0
         public static SourceFileData Empty 
         {
             [MethodImpl(Inline), Op]
-            get => Define(FilePath.Empty, sys.empty<TextRow>());
+            get => new SourceFileData(FilePath.Empty, sys.empty<TextRow>());
         }
-
     }
 }

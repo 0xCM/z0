@@ -8,8 +8,6 @@ namespace Z0
 
     public enum AsciPairCode : byte
     {
-        Null = 0,
-        
         /// <summary>
         /// The '"' character code 34
         /// </summary>

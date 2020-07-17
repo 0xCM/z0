@@ -22,6 +22,14 @@ namespace Z0
             => ref AsRef(src);
 
         /// <summary>
+        /// Are you sure you want to do this?
+        /// </summary>
+        /// <param name="src">The immutable, and possibly interned string that were are going to modify</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref char edit(string src)
+            => ref @ref(pchar(src));
+
+        /// <summary>
         /// Covers the content of a readonly span with an editable span
         /// </summary>
         /// <param name="src">The memory source</param>

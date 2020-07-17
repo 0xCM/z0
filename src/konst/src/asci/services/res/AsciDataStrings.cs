@@ -11,57 +11,24 @@ namespace Z0
     using static Konst;
     using static AsciKonst;
 
+    [ApiHost]
     public readonly struct AsciDataStrings
-    {
-        public static AsciDataStrings Service => default;
-        
-        string S000
-            => "00000000000000000000000000000000 !\"#$%&0()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[0]^_`abcdefghijklmnopqrstuvwxyz{|}~0";
-
-        public ReadOnlySpan<char> C000
-            => S000;
-
-        static string LettersLoString
-            => "abcdefghijklmnopqrstuvwxyz";
-
-        static string LettersUpString
-            => "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-        public static ReadOnlySpan<char> LettersLo
-            => LettersLoString;
-
-        public static ReadOnlySpan<char> LettersUp
-            => LettersUpString;
-
-        string S001
-            => "0123456789ABCDEF";
-
-        public ReadOnlySpan<char> C001
-            => S001;
-
-        const int TextResCount = 2;
-
-        const byte DDD = Pow2.T07;
-
-        public static ReadOnlySpan<byte> B001 
-            => new byte[16]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-
-        const int ByteResCount = 2;
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<byte> charbytes(N0 index)
+    {        
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> charbytes(N0 index)
             => CharBytes;        
 
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<byte> bytes(byte offset, byte count)
-            => CharBytes.Slice(offset, count);        
+
+        [MethodImpl(Inline), Op]
+        public string @string(sbyte offset, sbyte count)
+            => slice(AsciCharString, offset, count);
 
         /// <summary>
         /// Returns the acsci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
         /// </summary>
         /// <param name="offset">The zero-based offset</param>
         /// <param name="count">Tne number of codes to select</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)
             => recover<AsciCharCode>(AsciKonst.CodeBytes.Slice(offset,count));
 
@@ -70,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The zero-based offset</param>
         /// <param name="count">Tne number of characters to select</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public ReadOnlySpan<char> chars(sbyte offset, sbyte count)
             => Spans.cast<char>(CharBytes).Slice(offset, count);
             
@@ -79,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The zero-based offset</param>
         /// <param name="count">Tne number of characters to select</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public ReadOnlySpan<AsciChar> symbols(sbyte offset, sbyte count)
             => recover<char,AsciChar>(chars(offset,count));
 
@@ -88,36 +55,36 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The zero-based offset</param>
         /// <param name="count">Tne number of characters to select</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public ReadOnlySpan<ushort> scalars(sbyte offset, sbyte count)
             => recover<char,ushort>(chars(offset,count));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public ReadOnlySpan<char> Text(N0 index)
-            => C000;
+            => AsciChars;
 
         ReadOnlySpan<int> ByteResourcLength
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => new int[2]{CharBytes.Length, B001.Length};
         }
 
         ReadOnlySpan<int> TextResourcLength
         {
-            [MethodImpl(Inline)]
-            get => new int[2]{C000.Length, C001.Length};
+            [MethodImpl(Inline), Op]
+            get => new int[2]{AsciChars.Length, C001.Length};
         }
 
         ReadOnlySpan<MemoryAddress> ByteResources
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => new MemoryAddress[2]{address(first(CharBytes)), address(first(B001))};
         }
 
         ReadOnlySpan<MemoryAddress> TextResources
         {
-            [MethodImpl(Inline)]
-            get => new MemoryAddress[2]{address(first(C000)), address(first(C001))};
+            [MethodImpl(Inline), Op]
+            get => new MemoryAddress[2]{address(first(AsciChars)), address(first(C001))};
         }
 
         ReadOnlySpan<ResIdentity<byte>> ByteResInfo
@@ -135,13 +102,72 @@ namespace Z0
         ReadOnlySpan<ResIdentity<char>> TextResInfo
             => new ResIdentity<char>[TextResCount]{
                 Resources.identify<char>(
-                    name: nameof(S000), 
-                    location: address(first(C000)),
-                    length: S000.Length),
+                    name: nameof(AsciCharString), 
+                    location: address(first(AsciChars)),
+                    length: AsciCharString.Length),
                 Resources.identify<char>(
                     name: nameof(S001), 
                     location: address(first(C001)),
                     length: S001.Length),
                 };            
+
+
+        public static AsciDataStrings Service 
+            => default;
+
+        string AsciCharString
+        {
+            [Op]
+            get => "00000000000000000000000000000000 !\"#$%&0()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[0]^_`abcdefghijklmnopqrstuvwxyz{|}~0";
+        }
+
+        public ReadOnlySpan<char> AsciChars
+        {
+            [MethodImpl(Inline)]
+            get => AsciCharString;
+        }
+
+        static string LoLetterData
+        {
+            [Op]
+            get => "abcdefghijklmnopqrstuvwxyz";
+        }
+
+        static string UpLetterData
+        {
+            [Op]
+            get => "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        }
+
+        public static ReadOnlySpan<char> LettersLo
+        {
+            [Op]
+            get => LoLetterData;
+        }
+
+        public static ReadOnlySpan<char> LettersUp
+        {         
+            [Op]
+            get => UpLetterData;
+        }
+
+        string S001
+        {
+            [Op]
+            get => "0123456789ABCDEF";
+        }
+
+        public ReadOnlySpan<char> C001
+        {
+            [Op]
+            get => S001;
+        }
+
+        const int TextResCount = 2;
+
+        const int ByteResCount = 2;
+
+        public static ReadOnlySpan<byte> B001 
+            => new byte[16]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     }
 }

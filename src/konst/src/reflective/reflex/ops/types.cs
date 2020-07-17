@@ -17,15 +17,10 @@ namespace Z0
         public static ArtifactIdentity identity(in Type src)
             => src.MetadataToken;
 
+
         [MethodImpl(Inline), Op]
-        public static KeyedValues<ArtifactIdentity,Type> TypeIndex(Assembly src)
-        {
-            var types = src.GetTypes();
-            var count = types.Length;
-            var dst = sys.alloc<KeyedValue<ArtifactIdentity,Type>>(count);
-            var index = new KeyedValues<ArtifactIdentity,Type>(types, identity, dst);
-            return index;
-        }
+        public static ReadOnlySpan<Type> types(Assembly src)
+            => src.GetTypes();
 
         [MethodImpl(Inline), Op]
         public static Type type(in Indexed<Type>  src, ArtifactIdentity id)       

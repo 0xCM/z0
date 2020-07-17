@@ -7,9 +7,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
     
     using static Konst;
-    using System.Reflection;
+    using static z;
 
     using Xed;
 
@@ -17,40 +18,45 @@ namespace Z0
     {        
         readonly XedContextData Data;
 
-        [MethodImpl(Inline), Op]
         public static XedContext create()
         {            
             var index = types();            
             index.Search(t => t.Name == nameof(XedContextData), out var ctx);            
             var fields = Reflex.fields(ctx);
             
+            var nameBuffer = sys.alloc<EnumNames>(4);
+            var _names = span(nameBuffer);
+
             index.Search(x => x.Name == nameof(xed_category_enum_t), out var e0);
-            var n0 = names(e0);
+            seek(_names,0) = names(e0);
             
             index.Search(x => x.Name == nameof(xed_extension_enum_t), out var e1);
-            var n1 = names(e1);
+            seek(_names,1) = names(e1);
 
             index.Search(x => x.Name == nameof(xed_flag_enum_t), out var e2);            
-            var n2 = names(e2);
+            seek(_names,2) = names(e2);
             
             index.Search(x => x.Name == nameof(xed_iclass_enum_t), out var e3);            
-            var n3 = names(e3);
+            seek(_names,3) = names(e3);
 
-            var data = new XedContextData(ctx, index, fields, n0, n0, n2, n3);
-            return new XedContext(data);            
+            return new XedContext(data(ctx, index,fields, nameBuffer));            
         }
 
         [MethodImpl(Inline), Op]
-        public static Z0.EnumNames names(Type src)                   
-            => new Z0.EnumNames(src, System.Enum.GetNames(src));        
+        public static XedContextData data(Type t, ClrTypes index, Indexed<FieldInfo> fields, EnumNames[] names)
+            => new XedContextData(t, index, fields, names);
+        
+        [MethodImpl(Inline), Op]
+        public static EnumNames names(Type src)                   
+            => new EnumNames(src, System.Enum.GetNames(src));        
 
         [MethodImpl(Inline), Op]
-        public static KeyedValues<ArtifactIdentity,Type> types()
+        public static ClrTypes types()
             => types(Assembly.GetExecutingAssembly());
 
         [MethodImpl(Inline), Op]
-        public static KeyedValues<ArtifactIdentity,Type> types(Assembly a)
-            => Reflex.TypeIndex(a);
+        public static ClrTypes types(Assembly a)
+            => Reflex.index(a);
 
         [MethodImpl(Inline)]
         XedContext(in XedContextData data)
