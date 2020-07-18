@@ -9,8 +9,10 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
     using System.IO;
+    using System.Linq;
 
     using static Konst;
+    using static z;
 
     public readonly struct ResExtractor
     {
@@ -72,5 +74,16 @@ namespace Z0
         
         public string[] ResourceNames
             => Source.GetManifestResourceNames();
+        
+        public AppResource Extract(Func<string,bool> match)
+        {
+            var name = ResourceNames.FirstOrDefault(match);
+            if(text.blank(name))
+                return AppResource.Empty;
+
+            using var stream = Source.GetManifestResourceStream(name);
+            using var reader = new StreamReader(stream);
+            return new AppResource(name, reader.ReadToEnd());                    
+        }
     }
 }

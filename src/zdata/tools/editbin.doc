@@ -1,0 +1,30 @@
+Microsoft (R) COFF/PE Editor Version 14.26.28806.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+usage: EDITBIN [options] [files]
+
+   options:
+
+      /ALLOWBIND[:NO]
+      /ALLOWISOLATION[:NO]
+      /APPCONTAINER[:NO]
+      /BIND[:PATH=path]
+      /DYNAMICBASE[:NO]
+      /ERRORREPORT:{NONE|PROMPT|QUEUE|SEND}
+      /GUARD:{CF|NO}
+      /HEAP:reserve[,commit]
+      /HIGHENTROPYVA[:NO]
+      /INTEGRITYCHECK[:NO]
+      /LARGEADDRESSAWARE[:NO]
+      /NOLOGO
+      /NXCOMPAT[:NO]
+      /REBASE[:[BASE=address][,BASEFILE][,DOWN]]
+      /RELEASE
+      /SECTION:name[=newname][,[[!]{CDEIKOMPRSUW}][A{1248PTSX}]]
+      /STACK:reserve[,commit]
+      /SUBSYSTEM:{BOOT_APPLICATION|CONSOLE|EFI_APPLICATION|
+                  EFI_BOOT_SERVICE_DRIVER|EFI_ROM|EFI_RUNTIME_DRIVER|
+                  NATIVE|POSIX|WINDOWS|WINDOWSCE}[,#[.##]]
+      /SWAPRUN:{[!]CD|[!]NET}
+      /TSAWARE[:NO]
+      /VERSION:#[.#]

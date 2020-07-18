@@ -11,6 +11,6 @@ namespace Z0
 
     public interface IAppResource<T> : IAppResource
     {
-        T Data {get;}
+        T Content {get;}
     }
 }

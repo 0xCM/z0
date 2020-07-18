@@ -45,6 +45,12 @@ namespace Z0
             => FolderName.Define("res");
 
         /// <summary>
+        /// The name of an application resource folder
+        /// </summary>
+        FolderName ExportFolder
+            => FolderName.Define("exports");
+
+        /// <summary>
         /// The name of the folder into which test results are deposited
         /// </summary>
         FolderName TestResultFolder 
@@ -97,6 +103,12 @@ namespace Z0
         /// </summary>
         FolderPath ResourceRoot 
             => LogRoot + ResoureFolder;
+
+        /// <summary>
+        /// The path to the root application resource directory
+        /// </summary>
+        FolderPath ExportRoot 
+            => LogRoot + ExportFolder;
 
         /// <summary>
         /// The global capture archive root directory

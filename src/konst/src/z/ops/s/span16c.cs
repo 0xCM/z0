@@ -18,9 +18,9 @@ namespace Z0
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<char> span16c<T>(ref T src)
+        public static Span<char> span16c<T>(in T src)
             where T : struct
-                => recover<char>(AsBytes(CreateSpan(ref src, 1)));
+                => recover<char>(AsBytes(CreateSpan(ref edit(src), 1)));
 
         /// <summary>
         /// Creates a u16 span from a T-cell reference

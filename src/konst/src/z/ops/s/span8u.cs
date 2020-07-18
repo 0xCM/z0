@@ -17,9 +17,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<byte> span8u<T>(ref T src)
+        [MethodImpl(Inline), Op]
+        public static Span<byte> span8u<T>(in T src)
             where T : struct
-                => AsBytes(CreateSpan(ref src, 1));
+                => AsBytes(CreateSpan(ref edit(src), 1));
     }
 }

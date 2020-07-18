@@ -70,8 +70,8 @@ namespace Z0
             where S: unmanaged
             where T :unmanaged
         {
-            ref var input =  ref uint8(ref edit(skip(src,(uint)start)));
-            ref var target = ref uint8(ref seek(dst,(uint)offset));
+            ref var input =  ref u8(skip(src, (uint)start));
+            ref var target = ref u8(seek(dst, (uint)offset));
             var bytecount =  (uint)(count*size<S>());
             sys.copy(input, ref target, bytecount);
             return bytecount;

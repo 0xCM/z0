@@ -33,7 +33,19 @@ namespace Z0
         void RunApp(params PartId[] src)
         {
 
-            //CodeRunner.Service(CreateAsmContext()).Run();
+            var list = IntrinsicsList.read();
+            var export = Context.AppPaths.ExportRoot;
+            var alg = (export + FolderName.Define("algorithms")) +FileName.Define("intel.pas");
+            using var writer = alg.Writer();
+            for(var i=0; i< list.Length; i++)
+            {
+                ref readonly var current = ref list[i];
+                writer.WriteLine($"# {current.name}");
+                writer.WriteLine(text.PageBreak);
+                writer.WriteLine(current.operation.Content);
+            }
+            //z.iter(list.Take(20), x => term.print(x.Format()));
+         
         }
 
         public override void RunShell(params string[] args)

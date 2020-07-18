@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target</param>
         /// <typeparam name="T">The data source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void unpack<T>(T src, Span<BitState> dst)
             where T : struct
         {

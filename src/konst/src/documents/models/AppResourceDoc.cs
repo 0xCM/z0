@@ -12,36 +12,39 @@ namespace Z0
     public readonly struct AppResourceDoc : IAppResource<TextDoc>
     {
         public string Name {get;}
-
-        public TextDoc Data {get;}        
-
+        
+        public TextDoc Content {get;}        
+        
+        public static AppResourceDoc Empty 
+            => new AppResourceDoc(EmptyString, TextDoc.Empty);
+             
         [MethodImpl(Inline)]
         public static implicit operator AppResource<TextDoc>(AppResourceDoc src)
-            => new AppResource<TextDoc>(src.Name,src.Data);
+            => new AppResource<TextDoc>(src.Name,src.Content);
 
         [MethodImpl(Inline)]
         public AppResourceDoc(string name, TextDoc doc)
         {
-            this.Name = name;
-            this.Data = doc;
+            Name = name;
+            Content = doc;
         }
 
         public TextRow[] Rows
         {
             [MethodImpl(Inline)]
-            get => Data.RowData;
+            get => Content.RowData;
         }
         
         public ref readonly TextRow this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Data.RowData[index];
+            get => ref Content.RowData[index];
         }
 
         public int RowCount
         {
             [MethodImpl(Inline)]
-            get => Data.RowCount;
+            get => Content.RowCount;
         }
 
         public int CharCount(char exclude)        
@@ -70,7 +73,7 @@ namespace Z0
         public string Format()
         {
             var dst = text.build();
-            z.iter(Data.RowData, d => dst.AppendLine(d.Text));
+            z.iter(Content.RowData, d => dst.AppendLine(d.Text));
             return dst.ToString();
         }
 

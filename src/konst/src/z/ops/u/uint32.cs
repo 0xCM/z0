@@ -13,23 +13,37 @@ namespace Z0
 
     partial struct z
     {                
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        /// <summary>
+        /// Converts a parametric source to a <see cref='uint'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint uint32<T>(T src)
             => As<T,uint>(ref src);
 
+        /// <summary>
+        /// Converts a nullable parametric source to a nullable <see cref='uint'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint? uint32<T>(T? src)
             where T : unmanaged
                 => As<T?, uint?>(ref src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref uint uint32<T>(ref T src)
-            => ref As<T,uint>(ref src);                
-
+        /// <summary>
+        /// Converts a <see cref='sbyte'/> to a <see cref='uint'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static uint uint32(sbyte src)        
             => (uint)src;
 
+        /// <summary>
+        /// Converts a <see cref='byte'/> to a <see cref='uint'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static uint uint32(byte src)        
             => (uint)src;

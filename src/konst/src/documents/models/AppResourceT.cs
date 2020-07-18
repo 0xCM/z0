@@ -11,15 +11,15 @@ namespace Z0
 
     public readonly struct AppResource<T> : IAppResource<T>
     {
+        public string Name {get;}
+
+        public T Content {get;}        
+        
         [MethodImpl(Inline)]
         public AppResource(string name, T data)
         {
-            this.Name = name;
-            this.Data = data;
+            Name = name;
+            Content = data;
         }
-
-        public string Name {get;}
-
-        public T Data {get;}        
     }
 }

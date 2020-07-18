@@ -42,6 +42,7 @@ namespace Z0
             var storage = Stacks.char2();
             ref var dst = ref storage.C0;
             
+            
             seek(dst,0) = (char)skip(codes, (byte)(0xF & src));
             seek(dst,1) = (char)skip(codes, (byte)((src >> 4) & 0xF));
             return Stacks.span(ref storage);

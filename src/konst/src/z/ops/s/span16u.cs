@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<ushort> span16u<T>(ref T src)
+        public static Span<ushort> span16u<T>(in T src)
             where T : struct
-                => recover<ushort>(AsBytes(CreateSpan(ref src, 1)));
+                => recover<ushort>(AsBytes(CreateSpan(ref edit(src), 1)));
     }
 }

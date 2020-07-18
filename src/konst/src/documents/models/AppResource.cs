@@ -9,31 +9,42 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct AppResource : IAppResource<string[]>
+    public readonly struct AppResource : IAppResource<string>
     {
+        public readonly string Name;
+
+        public readonly string Content;
+
         [MethodImpl(Inline)]
-        public static implicit operator AppResource<string[]>(AppResource src)
-            => new AppResource<string[]>(src.Name,src.Data);
+        public static implicit operator AppResource<string>(AppResource src)
+            => new AppResource<string>(src.Name,src.Content);
         
         [MethodImpl(Inline)]
-        public AppResource(string name, params string[] data)
+        public AppResource(string name, string data)
         {
-            this.Name = name;
-            this.Data = data;
+            Name = name;
+            Content = data;
         }
 
-        public string Name {get;}
-
-        public string[] Data {get;}        
-
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.blank(Content);
+        }
         public string Format()
-        {
-            var dst = text.build();
-            z.iter(Data, d => dst.AppendLine(d));
-            return dst.ToString();
-        }
+            => Content;
 
         public override string ToString()
             => Format();
+
+        string IAppResource.Name
+            => Name;
+
+        string IAppResource<string>.Content 
+            => Content;
+
+        public static AppResource Empty 
+            => new AppResource(EmptyString, EmptyString);
+
     }
 }

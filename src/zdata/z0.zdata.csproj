@@ -16,6 +16,13 @@
    <ItemGroup>
     <EmbeddedResource Include="syntax/**/*.csv" /> 
     <EmbeddedResource Include="xml/**/*.xml" /> 
+    <EmbeddedResource Include="xed/**/*.txt" /> 
+    <EmbeddedResource Include="instructions/**/*.csv" /> 
+    <EmbeddedResource Include="algorithms/**/*.pas" /> 
+    <EmbeddedResource Include="definitions/**/*.csv" /> 
+    <EmbeddedResource Include="notes/**/*.csv" /> 
+    <EmbeddedResource Include="amd/**/*.csv" /> 
+    <EmbeddedResource Include="tools/**/*.doc" /> 
   </ItemGroup>
 
 </Project>
