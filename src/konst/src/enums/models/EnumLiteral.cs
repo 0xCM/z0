@@ -10,56 +10,68 @@ namespace Z0
 
     using static Konst;
 
+    public enum EnumLiteralField : uint
+    {
+        Id = 0 | 10 << WidthOffset,
+
+        TypeHandle = 1 | 16 << WidthOffset,
+
+        TypeId = 2 | 10 << WidthOffset,
+
+        TypeName = 3 | 30 << WidthOffset,
+
+        DataType = 4 | 16 << WidthOffset,
+
+        Position = 5 | 10 << WidthOffset,
+
+        Name = 6 | 30 << WidthOffset,
+
+        Value = 7 | 8 << WidthOffset,
+    }
+    
     /// <summary>
     /// Defines a boxed enumeration literal as the triple (index,identifier,value)
     /// </summary>
-    public readonly struct EnumLiteral
+    public struct EnumLiteral
     {        
         /// <summary>
-        /// THe literal's surrogate identifier
+        /// The literal's surrogate identifier
         /// </summary>
-        public readonly ArtifactIdentity Id;
-
-        /// <summary>
-        /// The name of the declaring type
-        /// </summary>
-        public readonly StringRef TypeName;
+        public ArtifactIdentity Id;
 
         /// <summary>
         /// The handle of the declaring type
         /// </summary>
-        public readonly MemoryAddress TypeHandle;
+        public MemoryAddress TypeHandle;
 
+        /// <summary>
+        /// The types's surrogate identifier
+        /// </summary>
+        public ArtifactIdentity TypeId;
+
+        /// <summary>
+        /// The name of the declaring type
+        /// </summary>
+        public StringRef TypeName;
+        
         /// <summary>
         /// The enum's numeric data type
         /// </summary>
-        public readonly EnumScalarKind DataType;
+        public EnumScalarKind DataType;
 
         /// <summary>
         /// The literal declaration order, unique within the declaring enum
         /// </summary>
-        public readonly uint Position;
+        public uint Position;
 
         /// <summary>
         /// The literal identifier, unique within the declaring enum
         /// </summary>
-        public readonly StringRef Name;
+        public StringRef Name;
 
         /// <summary>
         /// The literal value
         /// </summary>
-        public readonly variant Value;
-
-        [MethodImpl(Inline)]
-        public EnumLiteral(FieldInfo field, EnumScalarKind kind, uint index, StringRef name, variant value)
-        {            
-            Id = field.MetadataToken;
-            TypeName = field.DeclaringType.Name;
-            TypeHandle = field.DeclaringType.TypeHandle.Value;
-            Name = name;
-            DataType = kind;
-            Position = index;
-            Value = value;
-        }           
+        public variant Value;
     }
 }

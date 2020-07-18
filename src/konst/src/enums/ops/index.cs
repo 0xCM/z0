@@ -29,26 +29,35 @@ namespace Z0
         }
         
         [MethodImpl(Inline), Op]
-        public static EnumLiterals index(Type @enum)
+        public static EnumLiterals index(Type src)
         {
-            var ut = @enum.GetEnumUnderlyingType();
+            var ut = src.GetEnumUnderlyingType();
             var nk = ut.NumericKind();
-            var ek = Enums.@base(nk);
-            var type = Enums.@base(@enum);
-            var fields = span(@enum.LiteralFields());
-            var count = fields.Length;
+            
+            var fields = span(src.LiteralFields());
+            var count = fields.Length;            
             var buffer = sys.alloc<EnumLiteral>(count);
-            var dst = span(buffer);
+            var index = span(buffer);
+            
             for(var i=0u; i<fields.Length; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                var scalar = Variant.define(field.GetRawConstantValue(), nk);
-                seek(dst,i) = new EnumLiteral(field, ek, i, field.Name, scalar);
+                var dst = new EnumLiteral();
+                dst.Id = field.MetadataToken;
+                dst.TypeName = src.Name;
+                dst.TypeHandle = src.TypeHandle.Value;
+                dst.TypeId = src.MetadataToken;
+                dst.DataType = Enums.@base(nk);
+                dst.Name = field.Name;
+                dst.Position = i;
+                dst.Value = Variant.define(field.GetRawConstantValue(), nk);
+                seek(index,i) = dst;
             }
 
             return new EnumLiterals(buffer);
         }
 
+        
         /// <summary>
         /// Gets the declaration-order indices for each named literal
         /// </summary>

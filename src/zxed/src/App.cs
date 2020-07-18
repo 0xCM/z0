@@ -42,12 +42,12 @@ namespace Z0
         void TestCases()
         {
             
-            var  index = Enums.index(Assembly.GetExecutingAssembly());
+            var  index = Enums.index(typeof(xed_category_enum_t));
             using var writer = Context.AppPaths.AppStandardOutPath.Writer();
             for(var i=0; i<index.Length; i++)
             {
                 var literal = index[i];
-                writer.WriteLine($"{literal.Position} {literal.TypeHandle}  {literal.Id}  {literal.Name} {literal.Value}");
+                writer.WriteLine($"{literal.TypeHandle} {literal.Id} {literal.Position} {literal.TypeName} {literal.Name} {literal.Value}");
             }
 
         }
