@@ -23,7 +23,7 @@ namespace Z0
     [ApiHost]
     public readonly struct XedEtlWorkflow
     {
-        public static XedEtlWorkflow Service(IAppContext context)
+        public static XedEtlWorkflow create(IAppContext context)
             => new XedEtlWorkflow(context);
 
         public FolderPath SourceRoot {get;}

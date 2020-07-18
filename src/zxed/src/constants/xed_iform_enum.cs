@@ -6317,7 +6317,5 @@ namespace Z0.Xed
         XED_IFORM_XSTORE=6291, 
         XED_IFORM_XTEST=6292, 
         XED_IFORM_LAST
-
     }
-
 }

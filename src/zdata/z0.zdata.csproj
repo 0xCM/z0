@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Imagine)" />
+    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(Identify)" />
+  </ItemGroup>  
+
+   <ItemGroup>
+    <EmbeddedResource Include="syntax/**/*.csv" /> 
+    <EmbeddedResource Include="xml/**/*.xml" /> 
+  </ItemGroup>
+
+</Project>
