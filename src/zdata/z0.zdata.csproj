@@ -14,15 +14,15 @@
   </ItemGroup>  
 
    <ItemGroup>
-    <EmbeddedResource Include="syntax/**/*.csv" /> 
-    <EmbeddedResource Include="xml/**/*.xml" /> 
-    <EmbeddedResource Include="xed/**/*.txt" /> 
-    <EmbeddedResource Include="instructions/**/*.csv" /> 
-    <EmbeddedResource Include="algorithms/**/*.pas" /> 
-    <EmbeddedResource Include="definitions/**/*.csv" /> 
-    <EmbeddedResource Include="notes/**/*.csv" /> 
-    <EmbeddedResource Include="amd/**/*.csv" /> 
-    <EmbeddedResource Include="tools/**/*.doc" /> 
+    <EmbeddedResource Include="content/algorithms/**/*.pas" /> 
+    <EmbeddedResource Include="content/syntax/**/*.csv" /> 
+    <EmbeddedResource Include="content/xml/**/*.xml" /> 
+    <EmbeddedResource Include="content/xed/**/*.txt" /> 
+    <EmbeddedResource Include="content/instructions/**/*.csv" /> 
+    <EmbeddedResource Include="content/definitions/**/*.csv" /> 
+    <EmbeddedResource Include="content/notes/**/*.csv" /> 
+    <EmbeddedResource Include="content/amd/**/*.csv" /> 
+    <EmbeddedResource Include="content/tools/**/*.doc" /> 
   </ItemGroup>
 
 </Project>

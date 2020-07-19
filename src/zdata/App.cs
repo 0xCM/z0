@@ -6,12 +6,13 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.IO;
     
-    using Z0.Asm;
-
     using static Konst;
 
     using P = Z0.Parts;
+
+    using M = IntrinsicsDocument;
     
     class App : AppShell<App,IAppContext>
     {                
@@ -30,22 +31,54 @@ namespace Z0
         {
         }
 
+
+        static string FunctionLabel(M.intrinsic src)
+            => src.name.StartsWith("_mm512") ? "_mm512"  : 
+               src.name.StartsWith("_mm256") ? "_mm256" : 
+               (src.name.StartsWith("_mm_") || src.name.StartsWith("_MM_")) ? "_mm" : 
+               src.name.StartsWith("_bnd") ? "_bnd" : 
+               src.name.StartsWith("_cast") ? "_cast" : 
+               src.name.StartsWith("_cvt") ? "_cvt" : 
+               "_unknown";
+
         void RunApp(params PartId[] src)
         {
-
             var list = IntrinsicsList.read();
             var export = Context.AppPaths.ExportRoot;
-            var alg = (export + FolderName.Define("algorithms")) +FileName.Define("intel.pas");
-            using var writer = alg.Writer();
+            var dir = export + FolderName.Define("algorithms");
+            dir.Clear();
+
+            var writers = z.dict<string,StreamWriter>();
             for(var i=0; i< list.Length; i++)
             {
                 ref readonly var current = ref list[i];
-                writer.WriteLine($"# {current.name}");
+                var inxcount = current.instructions.Count;
+                var instruction = current.instructions.ToArray().TryGetFirst().ValueOrDefault(M.instruction.Empty);
+                var identifier = text.ifblank(instruction.name, current.name);
+                var label = text.concat("# ", 
+                    current.instructions.Count != 0 
+                  ? text.concat(identifier, Space, Chars.Dash, Space, current.name) 
+                  : identifier);
+                  
+                var filename = 
+                    current.instructions.Count != 0 
+                    ? FileName.Define($"{identifier[0]}", "pas") 
+                    : FileName.Define(FunctionLabel(current), "pas");
+
+                var writer = default(StreamWriter);
+                if(!writers.TryGetValue(filename.Name, out writer))
+                {   
+                    writer = (dir + filename).Writer();
+                    writers.Add(filename.Name, writer);
+                }
+                
+                writer.WriteLine(label);
                 writer.WriteLine(text.PageBreak);
-                writer.WriteLine(current.operation.Content);
+                var content = (current.operation.Content ?? EmptyString).Trim();
+                writer.WriteLine(content);
+                writer.WriteLine(text.PageBreak);
             }
-            //z.iter(list.Take(20), x => term.print(x.Format()));
-         
+            z.iter(writers.Values, w => w.Dispose());         
         }
 
         public override void RunShell(params string[] args)

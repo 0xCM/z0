@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Text;
 
+    using static Konst;
     using static z;
 
     public struct IntrinsicsDocument
@@ -77,8 +77,16 @@ namespace Z0
         /// <summary>
         /// [instruction name="ADCX" form="r32, r32" xed="ADCX_GPR32d_GPR32d"
         /// </summary>
-        public struct Instruction
+        public struct instruction
         {
+            public static instruction Empty => new instruction(EmptyString, EmptyString, EmptyString);
+
+            public instruction(string name, string form, string xed)
+            {
+                this.name = name;
+                this.form = form;
+                this.xed = xed;
+            }
             public string name;
 
             public string form;            
@@ -107,7 +115,7 @@ namespace Z0
                 x.content = content;
                 x.types = list<InstructionType>();
                 x.parameters = list<Parameter>();
-                x.instructions = list<Instruction>();
+                x.instructions = list<instruction>();
                 return x;
             }
             
@@ -131,7 +139,7 @@ namespace Z0
 
             public Operation operation;
 
-            public List<Instruction> instructions;        
+            public List<instruction> instructions;        
 
             public string Format()
             {

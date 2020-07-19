@@ -142,24 +142,13 @@ namespace Z0
             dst.Add(x);
         }
 
-        static void read(XmlReader reader, List<Instruction> dst)
+        static void read(XmlReader reader, List<instruction> dst)
         {
-            var x = default(Instruction);
-            x.name = reader[nameof(Instruction.name)];
-            x.form = reader[nameof(Instruction.form)];
-            x.xed = reader[nameof(Instruction.xed)];            
+            var x = default(instruction);
+            x.name = reader[nameof(instruction.name)];
+            x.form = reader[nameof(instruction.form)];
+            x.xed = reader[nameof(instruction.xed)];            
             dst.Add(x);
         }
-    }
-
-    public static partial class XTend
-    {
-
-        public static bool ElementMatch(this XmlReader src, string name)
-            => src.NodeType == XmlNodeType.Element && src.Name == name;
-
-       public static bool IsElementNode(this XmlReader src)
-            => src.NodeType == XmlNodeType.Element;
-
     }
 }
