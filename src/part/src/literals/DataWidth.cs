@@ -90,6 +90,21 @@ namespace Z0
         /// </summary>
         W16 = 16,
 
+        W17 = 17,
+
+        W18 = 18,
+
+        W19 = 19,
+        W20 = 20,
+
+        W21 = 21,
+
+        W22 = 22,
+
+        W23 = 23,
+        W24 = 24,
+
+
         /// <summary>
         /// Indicates a bit-width of 32
         /// </summary>

@@ -42,7 +42,7 @@ namespace Z0
         /// <summary>
         /// Covers grid content with a span that defines cells of width := {1 | 2}
         /// </summary>
-        public Span<T> Cells { [MethodImpl(Inline)] get => Data.AsBytes().Cast<T>();}
+        public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Cast<T>();}
 
         /// <summary>
         /// Yields a mutable reference to the grid's leading storage cell

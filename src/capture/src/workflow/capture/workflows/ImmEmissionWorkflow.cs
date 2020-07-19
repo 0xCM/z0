@@ -110,7 +110,7 @@ namespace Z0.Asm
         Imm8R[] RefinedValues(MethodInfo src)
             => RefiningParameter(src).RefinedImmValues();
 
-        void EmitDirectRefinements(in CaptureExchange exchange, IApiHost host, IHostArchiver dst)
+        void EmitDirectRefinements(in CaptureExchange exchange, ApiHost host, IHostArchiver dst)
         {            
             var archive = Archive(host);
             var groups = ApiCollector.ImmDirect(host, ImmRefinementKind.Refined);
@@ -157,8 +157,10 @@ namespace Z0.Asm
             }
         }
 
-        IEnumerable<IApiHost> Hosts(params PartId[] parts)
-            => ApiSet.DefinedHosts(parts);
+        IEnumerable<ApiHost> Hosts(params PartId[] parts)
+            => from h in ApiSet.DefinedHosts(parts)
+                where h is ApiHost
+                select (ApiHost)h;
 
         HostArchiver Archive(IApiHost host)
             => AsmCore.Services.HostArchiver(host.Uri, Formatter, CodeArchive.ArchiveRoot);
@@ -217,7 +219,7 @@ namespace Z0.Asm
             }        
         }
 
-        void EmitGenericRefinements(in CaptureExchange exchange, IApiHost host, IHostArchiver dst)
+        void EmitGenericRefinements(in CaptureExchange exchange, ApiHost host, IHostArchiver dst)
         {            
             var specs = ApiCollector.ImmGeneric(host, ImmRefinementKind.Refined);
             foreach(var f in specs)

@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The known types that reify contracted operation services, potentially generic
         /// </summary>
-        Type[] FunFactories {get;}
+        Type[] ServiceTypes {get;}
 
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
@@ -41,6 +41,11 @@ namespace Z0
         /// The known direct api hosts
         /// </summary>
         ApiHost[] DirectHosts {get;}
+
+        /// <summary>
+        /// The attribute-identified data types
+        /// </summary>
+        ApiDataType[] DataTypes {get;}
 
         /// <summary>
         /// Specifies whether the catalog contains content from an identifid assembly
@@ -70,7 +75,7 @@ namespace Z0
         /// Specifies the number of service hosts described by the catalog
         /// </summary>
         int HostCount 
-            => FunFactories.Length;
+            => ServiceTypes.Length;
 
         /// <summary>
         /// Specifies whether the catalog describes any service hosts

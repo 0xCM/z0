@@ -20,7 +20,7 @@ namespace Z0
     /// Defines logical operations over 1, 2 or 3 bits
     /// </summary>
     [ApiHost]
-    public readonly partial struct BitLogix : IApiHost<BitLogix>, IBitLogix
+    public readonly partial struct BitLogix : IBitLogix
     {        
         public static BitLogix Service => default(BitLogix);
         

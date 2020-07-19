@@ -11,12 +11,12 @@ namespace Z0.Asm
 
     public readonly struct JittedMembers : IAppEvent<JittedMembers>
     {            
-        public readonly ApiHost[] Hosts;
+        public readonly IApiHost[] Hosts;
 
         public readonly ApiMember[] Members;
 
         [MethodImpl(Inline)]
-        public JittedMembers(ApiHost[] hosts, ApiMember[] members)
+        public JittedMembers(IApiHost[] hosts, ApiMember[] members)
         {
             Hosts = hosts;
             Members = members;

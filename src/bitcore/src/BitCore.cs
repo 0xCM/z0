@@ -27,6 +27,7 @@ namespace Z0
 
     }
 
+    [ApiHost]
     public partial class BitLogixOps
     {
 

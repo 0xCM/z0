@@ -85,7 +85,6 @@ namespace Z0
         public static S uint7(ulong src)        
             => new S((byte)((byte)src & S.MaxVal));
 
-
         /// <summary>
         /// Constructs a uint7 value from a sequence of bits ranging from low to high
         /// </summary>

@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
         [MethodImpl(Inline), Op]
-        public static byte Read(ulong src, N0 n)    
+        public static byte read(ulong src, N0 n)    
             => skip8(src,n);
                     
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
         [MethodImpl(Inline), Op]
-        public static byte Read(ulong src, N1 n)    
+        public static byte read(ulong src, N1 n)    
             => skip8(src,n);
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
         [MethodImpl(Inline), Op]
-        public static byte Read(ulong src, N2 n)    
+        public static byte read(ulong src, N2 n)    
             => skip8(src,n);
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
         [MethodImpl(Inline), Op]
-        public static byte Read(ulong src, N3 n)    
+        public static byte read(ulong src, N3 n)    
             => skip8(src,n);
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
         [MethodImpl(Inline), Op]
-        public static byte Read(ulong src, N4 n)    
+        public static byte read(ulong src, N4 n)    
             => skip8(src,n);
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
         [MethodImpl(Inline), Op]
-        public static byte Read(ulong src, N5 n)    
+        public static byte read(ulong src, N5 n)    
             => skip8(src,n);
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
         [MethodImpl(Inline), Op]
-        public static byte Read(ulong src, N6 n)    
+        public static byte read(ulong src, N6 n)    
             => skip8(src,n);
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
         [MethodImpl(Inline), Op]
-        public static byte Read(ulong src, N7 n)    
+        public static byte read(ulong src, N7 n)    
             => skip8(src,n);
     }
 }

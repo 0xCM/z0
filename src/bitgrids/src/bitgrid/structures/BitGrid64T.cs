@@ -30,7 +30,7 @@ namespace Z0
 
         public int CellCount { [MethodImpl(Inline)] get => 8/size<T>(); }
 
-        public Span<T> Cells { [MethodImpl(Inline)] get => Data.AsBytes().Cast<T>(); }
+        public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Cast<T>(); }
 
         public ref T Head { [MethodImpl(Inline)] get => ref head(Cells); }
 

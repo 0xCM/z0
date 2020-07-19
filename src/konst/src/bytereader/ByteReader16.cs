@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
         [MethodImpl(Inline), Op]
-        public static byte Read(ushort src, N0 n)    
+        public static byte read(ushort src, N0 n)    
             => skip8(src,n);
                     
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
         [MethodImpl(Inline), Op]
-        public static byte Read(ushort src, N1 n)    
+        public static byte read(ushort src, N1 n)    
             => skip8(src,n);
     }
 }

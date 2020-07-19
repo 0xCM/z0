@@ -40,7 +40,7 @@ namespace Z0.Asm
             Target = MemoryAddress.Empty;
             var bytes = Root.span(src.Encoded.Data);            
             var count = (byte)(bytes.Length - 1); //op code takes up one byte
-            var offset = ByteReader.Read(bytes.Slice(1));
+            var offset = ByteReader.read(bytes.Slice(1));
             Target = src.NextIp + offset;            
         }        
     }

@@ -5,9 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public readonly struct ApiReflected : IApiReflected
+    using static Konst;
+    
+    public static partial class XTend
     {
-        public static IApiReflected Service => default(ApiReflected);
-    }    
+        [MethodImpl(Inline)]
+        public static unsafe Span<byte> Bytes(this double src)
+            => ByteReader.ReadAll(src);
+    }
 }

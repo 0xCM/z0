@@ -37,7 +37,7 @@ namespace Z0
 
             Bits.unpack16x1(src,buffer16x8);
 
-            var bytes = BitConvert.bytes(src);
+            var bytes = z.bytes(src);
             Claim.eq(2, bytes.Length);
             
             Claim.Eq(srcPop, bytes.PopCount());

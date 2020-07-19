@@ -19,200 +19,35 @@
 | D     | Offset        | NA        | NA        | NA        |
 | M     | ModRM:r/m (r) | NA        | NA        | NA        |
 
-# Operation
------------------------------------------------------------------------------------------------------------------------
-IF near jump
-    IF 64-bit Mode
-            THEN
-                    IF near relative jump
-                        THEN
-                            tempRIP ← RIP + DEST; (* RIP is instruction following JMP instruction*)
-                        ELSE (* Near absolute jump *)
-                            tempRIP ← DEST;
-                    FI;
-            ELSE
-                    IF near relative jump
-                        THEN
-                            tempEIP ← EIP + DEST; (* EIP is instruction following JMP instruction*)
-                        ELSE (* Near absolute jump *)
-                            tempEIP ← DEST;
-                    FI;
-    FI;
-    IF (IA32_EFER.LMA = 0 or target mode = Compatibility mode)
-    and tempEIP outside code segment limit
-            THEN #GP(0); FI
-    IF 64-bit mode and tempRIP is not canonical
-            THEN #GP(0);
-    FI;
-    IF OperandSize = 32
-                THEN
-                    EIP ← tempEIP;
-                ELSE
-                    IF OperandSize = 16
-                            THEN (* OperandSize = 16 *)
-                                    EIP ← tempEIP AND 0000FFFFH;
-                                ELSE (* OperandSize = 64)
-                                    RIP ← tempRIP;
-                    FI;
-        FI;
-FI;
-IF far jump and (PE = 0 or (PE = 1 AND VM = 1)) (* Real-address or virtual-8086 mode *)
-        THEN
-                tempEIP ← DEST(Offset); (* DEST is ptr16:32 or [m16:32] *)
-                IF tempEIP is beyond code segment limit
-                    THEN #GP(0); FI;
-                CS ← DEST(segment selector); (* DEST is ptr16:32 or [m16:32] *)
-                IF OperandSize = 32
-                        THEN
-                            EIP ← tempEIP; (* DEST is ptr16:32 or [m16:32] *)
-                        ELSE (* OperandSize = 16 *)
-                            EIP ← tempEIP AND 0000FFFFH; (* Clear upper 16 bits *)
-                FI;
-FI;
-IF far jump and (PE = 1 and VM = 0)
-(* IA-32e mode or protected mode, not virtual-8086 mode *)
-        THEN
-                IF effective address in the CS, DS, ES, FS, GS, or SS segment is illegal
-            or segment selector in target operand NULL
-                            THEN #GP(0); FI;
-                IF segment selector index not within descriptor table limits
-                    THEN #GP(new selector); FI;
-            Read type and access rights of segment descriptor;
-            IF (EFER.LMA = 0)
-                    THEN
-                            IF segment type is not a conforming or nonconforming code
-                            segment, call gate, task gate, or TSS
-                                    THEN #GP(segment selector); FI;
-                    ELSE
-                            IF segment type is not a conforming or nonconforming code segment
-                            call gate
-                                    THEN #GP(segment selector); FI;
-            FI;
-            Depending on type and access rights:
-                    GO TO CONFORMING-CODE-SEGMENT;
-                    GO TO NONCONFORMING-CODE-SEGMENT;
-                    GO TO CALL-GATE;
-                    GO TO TASK-GATE;
-                    GO TO TASK-STATE-SEGMENT;
-        ELSE
-                #GP(segment selector);
-FI;
-CONFORMING-CODE-SEGMENT:
-    IF L-Bit = 1 and D-BIT = 1 and IA32_EFER.LMA = 1
-            THEN GP(new code segment selector); FI;
-        IF DPL > CPL
-            THEN #GP(segment selector); FI;
-        IF segment not present
-            THEN #NP(segment selector); FI;
-    tempEIP ← DEST(Offset);
-    IF OperandSize = 16
-                THEN tempEIP ← tempEIP AND 0000FFFFH;
-    FI;
-    IF (IA32_EFER.LMA = 0 or target mode = Compatibility mode) and
-    tempEIP outside code segment limit
-            THEN #GP(0); FI
-    IF tempEIP is non-canonical
-            THEN #GP(0); FI;
-    CS ← DEST[segment selector]; (* Segment descriptor information also loaded *)
-    CS(RPL) ← CPL
-    EIP ← tempEIP;
-END;
-NONCONFORMING-CODE-SEGMENT:
-    IF L-Bit = 1 and D-BIT = 1 and IA32_EFER.LMA = 1
-            THEN GP(new code segment selector); FI;
-    IF (RPL > CPL) OR (DPL ≠ CPL)
-            THEN #GP(code segment selector); FI;
-    IF segment not present
-            THEN #NP(segment selector); FI;
-    tempEIP ← DEST(Offset);
-    IF OperandSize = 16
-                THEN tempEIP ← tempEIP AND 0000FFFFH; FI;
-    IF (IA32_EFER.LMA = 0 OR target mode = Compatibility mode)
-    and tempEIP outside code segment limit
-            THEN #GP(0); FI
-    IF tempEIP is non-canonical THEN #GP(0); FI;
-    CS ← DEST[segment selector]; (* Segment descriptor information also loaded *)
-    CS(RPL) ← CPL;
-    EIP ← tempEIP;
-END;
-CALL-GATE:
-    IF call gate DPL < CPL
-    or call gate DPL < call gate segment-selector RPL
-                    THEN #GP(call gate selector); FI;
-    IF call gate not present
-            THEN #NP(call gate selector); FI;
-    IF call gate code-segment selector is NULL
-            THEN #GP(0); FI;
-    IF call gate code-segment selector index outside descriptor table limits
-            THEN #GP(code segment selector); FI;
-    Read code segment descriptor;
-    IF code-segment segment descriptor does not indicate a code segment
-    or code-segment segment descriptor is conforming and DPL > CPL
-    or code-segment segment descriptor is non-conforming and DPL ≠ CPL
-                    THEN #GP(code segment selector); FI;
-    IF IA32_EFER.LMA = 1 and (code-segment descriptor is not a 64-bit code segment
-    or code-segment segment descriptor has both L-Bit and D-bit set)
-                    THEN #GP(code segment selector); FI;
-    IF code segment is not present
-            THEN #NP(code-segment selector); FI;
-        tempEIP ← DEST(Offset);
-        IF GateSize = 16
-                THEN tempEIP ← tempEIP AND 0000FFFFH; FI;
-    IF (IA32_EFER.LMA = 0 OR target mode = Compatibility mode) AND tempEIP
-    outside code segment limit
-            THEN #GP(0); FI
-    CS ← DEST[SegmentSelector); (* Segment descriptor information also loaded *)
-    CS(RPL) ← CPL;
-    EIP ← tempEIP;
-END;
-TASK-GATE:
-    IF task gate DPL < CPL
-    or task gate DPL < task gate segment-selector RPL
-            THEN #GP(task gate selector); FI;
-    IF task gate not present
-            THEN #NP(gate selector); FI;
-    Read the TSS segment selector in the task-gate descriptor;
-    IF TSS segment selector local/global bit is set to local
-    or index not within GDT limits
-    or descriptor is not a TSS segment
-    or TSS descriptor specifies that the TSS is busy
-            THEN #GP(TSS selector); FI;
-        IF TSS not present
-            THEN #NP(TSS selector); FI;
-        SWITCH-TASKS to TSS;
-        IF EIP not within code segment limit
-            THEN #GP(0); FI;
-END;
-TASK-STATE-SEGMENT:
-    IF TSS DPL < CPL
-    or TSS DPL < TSS segment-selector RPL
-    or TSS descriptor indicates TSS not available
-            THEN #GP(TSS selector); FI;
-    IF TSS is not present
-            THEN #NP(TSS selector); FI;
-    SWITCH-TASKS to TSS;
-    IF EIP not within code segment limit
-            THEN #GP(0); FI;
-END;
 
 # Description
 ------------------------------------------------------------------------------------------------------------------------
 
-Transfers program control to a different point in the instruction stream without recording return information. The destination (target) operand specifies the address of the instruction being jumped to. This operand can be an immediate value, a general-purpose register, or a memory location.
+Transfers program control to a different point in the instruction stream without recording return information. 
+The destination (target) operand specifies the address of the instruction being jumped to. This operand can be 
+an immediate value, a general-purpose register, or a memory location.
 
 This instruction can be used to execute four different types of jumps:
 
-Near jump—A jump to an instruction within the current code segment (the segment currently pointed to by the CS register), sometimes referred to as an intrasegment jump.
-Short jump—A near jump where the jump range is limited to –128 to +127 from the current EIP value.
-Far jump—A jump to an instruction located in a different segment than the current code segment but at the same privilege level, sometimes referred to as an intersegment jump.
-Task switch—A jump to an instruction located in a different task.
-A task switch can only be executed in protected mode (see Chapter 7, in the Intel® 64 and IA-32 Architectures Software Developer’s Manual, Volume 3A, for information on performing task switches with the JMP instruction).
+Near jump—A jump to an instruction within the current code segment (the segment currently pointed to by the CS register), 
+sometimes referred to as an intrasegment jump. Short jump—A near jump where the jump range is limited to –128 to +127 from the 
+current EIP value. Far jump—A jump to an instruction located in a different segment than the current code segment but at the 
+same privilege level, sometimes referred to as an intersegment jump. Task switch—A jump to an instruction located in a different task.
 
-Near and Short Jumps. When executing a near jump, the processor jumps to the address (within the current code segment) that is specified with the target operand. The target operand specifies either an absolute offset (that is an offset from the base of the code segment) or a relative offset (a signed displacement relative to the current
+A task switch can only be executed in protected mode (see Chapter 7, in the Intel® 64 and IA-32 Architectures Software Developer’s 
+Manual, Volume 3A, for information on performing task switches with the JMP instruction).
 
-value of the instruction pointer in the EIP register). A near jump to a relative offset of 8-bits (rel8) is referred to as a short jump. The CS register is not changed on near and short jumps.
+Near and Short Jumps. When executing a near jump, the processor jumps to the address (within the current code segment) that is 
+specified with the target operand. The target operand specifies either an absolute offset (that is an offset from the base of 
+the code segment) or a relative offset (a signed displacement relative to the current
 
-An absolute offset is specified indirectly in a general-purpose register or a memory location (r/m16 or r/m32). The operand-size attribute determines the size of the target operand (16 or 32 bits). Absolute offsets are loaded directly into the EIP register. If the operand-size attribute is 16, the upper two bytes of the EIP register are cleared, resulting in a maximum instruction pointer size of 16 bits.
+value of the instruction pointer in the EIP register). A near jump to a relative offset of 8-bits (rel8) is referred to as 
+a short jump. The CS register is not changed on near and short jumps.
+
+An absolute offset is specified indirectly in a general-purpose register or a memory location (r/m16 or r/m32). The operand-size 
+attribute determines the size of the target operand (16 or 32 bits). Absolute offsets are loaded directly into the EIP register. 
+If the operand-size attribute is 16, the upper two bytes of the EIP register are cleared, resulting in a maximum instruction 
+pointer size of 16 bits.
 
 A relative offset (rel8, rel16, or rel32) is generally specified as a label in assembly code, but at the machine code level, it is encoded as a signed 8-, 16-, or 32-bit immediate value. This value is added to the value in the EIP register. (Here, the EIP register contains the address of the instruction following the JMP instruction). When using relative offsets, the opcode (for short vs. near jumps) and the operand-size attribute (for near relative jumps) determines the size of the target operand (8, 16, or 32 bits).
 

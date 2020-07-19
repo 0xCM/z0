@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
 
-    /// <summary>
-    /// Alternate identity indidators for use in source code identifier production
-    /// </summary>
-    public readonly struct LegalIdentifier
+    using static Konst;
+    
+    public static partial class XTend
     {
-                        
+        [MethodImpl(Inline)]
+        public static unsafe Span<byte> Bytes(this ushort src)
+            => ByteReader.ReadAll(src);
     }
 }

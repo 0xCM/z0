@@ -23,6 +23,16 @@ namespace Z0
                 select spec.DistinctKinds().ToArray()).ValueOrElse(() => sys.empty<NumericKind>());     
 
         /// <summary>
+        /// Computes a types's numeric closures, predicated on available metadata
+        /// </summary>
+        /// <param name="t">The source type</param>
+        public static NumericKind[] numeric(Type t)
+            => (from tag in t.Tag<ClosuresAttribute>()
+                where tag.Kind == TypeClosureKind.Numeric
+                let spec = (NumericKind)tag.Spec
+                select spec.DistinctKinds().ToArray()).ValueOrElse(() => sys.empty<NumericKind>());     
+
+        /// <summary>
         /// Computes a method's natural closures, predicated on available metadata
         /// </summary>
         /// <param name="m">The source method</param>

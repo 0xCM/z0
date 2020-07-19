@@ -23,7 +23,7 @@ namespace Z0
         public static ApiMembers members(IApiHost src)
             => ApiMemberJit.jit(src);
 
-        public static ApiMembers members(ApiHost[] src, IEventBroker broker)
+        public static ApiMembers members(IApiHost[] src, IEventBroker broker)
             => ApiMemberJit.jit(src, broker);
 
         /// <summary>

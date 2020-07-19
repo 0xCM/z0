@@ -29,9 +29,9 @@ namespace Z0.Asm
         AppErrorEvent Error(Exception e)
             => e;
 
-        public void CaptureHosts(ApiHost[] hosts, TPartCaptureArchive dst)
+        public void Capture(IApiHost[] hosts, TPartCaptureArchive dst)
         {
-            Context.Raise(new CapturingHosts(hosts));
+            Context.Raise(new CapturingHosts(hosts));            
             
             var extracts = Workflow.ExtractMembers.ExtractMembers(hosts);
             if(extracts.Length == 0)

@@ -13,10 +13,10 @@ namespace Z0.Asm
     {          
         const string MessageTemplate = "Capturing data for $(HostCount) api hosts";
         
-        public readonly ApiHost[] Hosts;
+        public readonly IApiHost[] Hosts;
 
         [MethodImpl(Inline)]
-        public CapturingHosts(ApiHost[] hosts)
+        public CapturingHosts(IApiHost[] hosts)
             => Hosts = hosts;
 
         public readonly int HostCount

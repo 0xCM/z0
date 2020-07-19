@@ -22,7 +22,7 @@ namespace Z0
             return all.OrderBy(x => x.Address);
         }
         
-        public static ApiMembers jit(ApiHost[] src, IEventBroker broker)
+        public static ApiMembers jit(IApiHost[] src, IEventBroker broker)
         {
             void OnProgress(IAppEvent broker)
                 => term.print(broker);
@@ -37,13 +37,13 @@ namespace Z0
             where K : unmanaged, Enum
                 => g.IsGeneric() ? JitLocatedGeneric(src, kind) : JitLocatedDirect(src, kind);
 
-        static ApiMember[] JitDirectMembers(ApiHost[] src, IEventBroker broker)
+        static ApiMember[] JitDirectMembers(IApiHost[] src, IEventBroker broker)
             => DefineMembers(JitDirect(src, broker), broker);
 
-        static ApiMember[] JitGenericMembers(ApiHost[] src, IEventBroker broker)
+        static ApiMember[] JitGenericMembers(IApiHost[] src, IEventBroker broker)
             => DefineMembers(JitGeneric(src, broker), broker);
 
-        static HostedMethod[] JitDirect(ApiHost[] src, IEventBroker broker)
+        static HostedMethod[] JitDirect(IApiHost[] src, IEventBroker broker)
         {   
             var methods = DirectMethods(src, broker);            
             var located = methods.Select(m => m.WithLocation(Root.address(Jit(m.Method))));  
@@ -51,7 +51,7 @@ namespace Z0
             return located;
         }
 
-        static HostedMethod[] JitGeneric(ApiHost[] src, IEventBroker broker)
+        static HostedMethod[] JitGeneric(IApiHost[] src, IEventBroker broker)
         {   
             var methods = GenericMethods(src, broker);            
             var closed = methods.SelectMany(m => (from t in ClosureQuery.numeric(m.Method) select new HostedMethod(m.Host, m.Method.MakeGenericMethod(t))));
@@ -79,20 +79,20 @@ namespace Z0
 
         static ApiMember[] JitLocatedDirect(IApiHost src)
             =>  from m in DirectMethods(src)
-                let kid = m.KindId()
-                let id = Diviner.Identify(m)
-                let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Name, id)
-                let address = Root.address(Jit(m))
-                select new ApiMember(uri, m, kid, address);
+                let kid = m.Method.KindId()
+                let id = Diviner.Identify(m.Method)
+                let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Method.Name, id)
+                let address = Root.address(Jit(m.Method))
+                select new ApiMember(uri, m.Method, kid, address);
 
         static ApiMember[] JitLocatedGeneric(IApiHost src)
             =>  (from m in GenericMethods(src)
-                let kid = m.KindId()
-                from t in ClosureQuery.numeric(m)
-                let reified = m.MakeGenericMethod(t)
+                let kid = m.Method.KindId()
+                from t in ClosureQuery.numeric(m.Method)
+                let reified = m.Method.MakeGenericMethod(t)
                 let address = Root.address(Jit(reified))
                 let id = Diviner.Identify(reified)
-                let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Name, id)
+                let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Method.Name, id)
                 select new ApiMember(uri, reified, kid, address)).Array();
 
         static ApiMember[] JitLocatedDirect<K>(IApiHost src, K kind)
@@ -128,19 +128,23 @@ namespace Z0
                 let uri = OpUri.Define(OpUriScheme.Type, src.Uri, m.Name, id)
                 select new ApiMember(uri, reified, m.KindId())).Array();
 
-        static MethodInfo[] GenericMethods(IApiHost src)
-            => from m in src.HostType.DeclaredMethods().OpenGeneric(1)
-                where m.Tagged<OpAttribute>() 
-                && m.Tagged<ClosuresAttribute>() 
-                && !m.AcceptsImmediate()
-                select m;
+        // static MethodInfo[] GenericMethods(IApiHost src)
+        //     => from m in src.HostType.DeclaredMethods().OpenGeneric(1)
+        //         where m.Tagged<OpAttribute>() 
+        //         && m.Tagged<ClosuresAttribute>() 
+        //         && !m.AcceptsImmediate()
+        //         select m;
 
-        static MethodInfo[] DirectMethods(IApiHost src)
-            => from m in src.HostType.DeclaredMethods().NonGeneric()
-            where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
-            select m;
+        // static MethodInfo[] DirectMethods(IApiHost src)
+        //     => from m in src.HostType.DeclaredMethods().NonGeneric() where m.Tagged<OpAttribute>() && !m.AcceptsImmediate() select m;
 
-        static HostedMethod[] DirectMethods(ApiHost[] src, IEventBroker broker)
+        static HostedMethod[] DirectMethods(IApiHost host)
+            => host.HostType.DeclaredMethods().NonGeneric().Where(IsDirectApiMember).Select(m => new HostedMethod(host.Uri, m));
+
+        static HostedMethod[] GenericMethods(IApiHost host)
+            => host.HostType.DeclaredMethods().OpenGeneric(1).Where(IsGenericApiMember).Select(m => new HostedMethod(host.Uri, m));
+
+        static HostedMethod[] DirectMethods(IApiHost[] src, IEventBroker broker)
         {
             var dst = z.list<HostedMethod>();
             foreach(var host in src)
@@ -152,7 +156,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        static HostedMethod[] GenericMethods(ApiHost[] src, IEventBroker broker)
+        static HostedMethod[] GenericMethods(IApiHost[] src, IEventBroker broker)
         {
             var dst = z.list<HostedMethod>();
             foreach(var host in src)
@@ -163,13 +167,6 @@ namespace Z0
             }
             return dst.ToArray();
         }
-
-        static HostedMethod[] DirectMethods(ApiHost host)
-            => host.HostType.DeclaredMethods().NonGeneric().Where(IsDirectApiMember).Select(m => new HostedMethod(host.Uri, m));
-
-        static HostedMethod[] GenericMethods(ApiHost host)
-            => host.HostType.DeclaredMethods().OpenGeneric(1).Where(IsGenericApiMember).Select(m => new HostedMethod(host.Uri, m));
-
             
         static bool IsDirectApiMember(MethodInfo src)
             => src.Tagged<OpAttribute>() && !src.AcceptsImmediate();

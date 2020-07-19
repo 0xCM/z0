@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Characterizes, in dependency injection vernacular, composition roots
     /// </summary>
-    public interface IResolvedApi : IApiReflected
+    public interface IResolvedApi : TApiReflected
     {
         /// <summary>
         /// The resolved assemblies that comprise the composition

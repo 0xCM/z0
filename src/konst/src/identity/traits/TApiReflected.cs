@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Reflection;
 
     using static Konst;
 
-    public interface IApiReflected
+    public interface TApiReflected
     {
         /// <summary>
         /// Creates a (possibly empy) api catalog for a specified part
@@ -20,17 +19,13 @@ namespace Z0
             => ApiHosts.catalog(src);
 
         /// <summary>
-        /// Instantiates the api hosts found in a specified assembly
+        /// Searches an assembly for attribute-identified data types
         /// </summary>
         /// <param name="src">The assembly to search</param>
-        IApiHost[] Hosts(Assembly src)
-            => ApiHosts.from(src); 
+        ApiDataType[] DataTypes(Assembly src)
+            => ApiHosts.ApiDataTypes(src);
 
-        /// <summary>
-        /// Searches an assembly for api host types
-        /// </summary>
-        /// <param name="src">The assembly to search</param>
-        Type[] HostTypes(Assembly src)
-            => ApiHosts.types(src);
+        ApiHost[] Hosts(Assembly src)
+            => ApiHosts.Hosts(src); 
     }
 }

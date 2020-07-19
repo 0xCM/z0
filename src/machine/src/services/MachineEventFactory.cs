@@ -11,8 +11,6 @@ namespace Z0
 
     public readonly struct MachineEventFactory : IMachineEvents
     {
-
-
         public static MachineEventFactory Service => default(MachineEventFactory);
 
         [MethodImpl(Inline)]

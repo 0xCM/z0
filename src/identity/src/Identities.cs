@@ -30,7 +30,7 @@ namespace Z0
         ApiMembers JitHosted(IApiHost host)
             => ApiMemberJit.jit(host);
 
-        ApiMembers JitHosted(ApiHost[] hosts, IEventBroker broker)
+        ApiMembers JitHosted(IApiHost[] hosts, IEventBroker broker)
             => ApiMemberJit.jit(hosts, broker);
 
         /// <summary>

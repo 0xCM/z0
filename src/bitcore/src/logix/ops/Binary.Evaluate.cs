@@ -91,6 +91,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
+        [Op]
         public static bit eval(BLK kind, bit a, bit b)
         {
             switch(kind)

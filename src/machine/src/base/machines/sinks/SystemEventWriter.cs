@@ -36,7 +36,7 @@ namespace Z0
             => Pulse(e.Identity.EventKind, e.Identity.ServerId, e.Identity.AgentId, e.Identity.Timestamp);
 
         void IAgentEventSink.AgentTransitioned(AgentTransition data)        
-            => AgentTransitioned(2, data.Agent.ServerId, data.Agent.AgentId, data.Timestamp, BitConvert.bytes(data).ToArray());               
+            => AgentTransitioned(2, data.Agent.ServerId, data.Agent.AgentId, data.Timestamp, z.bytes(data).ToArray());               
     }
 
     public sealed class AgentTransitioned : TraceEventAdapter<AgentTransitioned,AgentTransition>

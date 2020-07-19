@@ -90,7 +90,7 @@ namespace Z0
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => Data.AsBytes().Cast<T>();
+            get => Data.Bytes().Cast<T>();
         }
 
         /// <summary>

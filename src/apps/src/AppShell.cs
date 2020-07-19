@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
 
     public abstract class AppShell<A,C> : Shell<A,C>, IAppShell<A>
         where A : AppShell<A,C>, new()

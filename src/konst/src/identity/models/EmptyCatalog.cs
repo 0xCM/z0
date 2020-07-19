@@ -19,18 +19,20 @@ namespace Z0
             => Assembly.GetEntryAssembly();
 
         public ApiHost[] Hosts 
-            => Array.Empty<ApiHost>();
+            => sys.empty<ApiHost>();
 
         public ApiHost[] GenericHosts 
-            => Array.Empty<ApiHost>();
+            => sys.empty<ApiHost>();
 
         public ApiHost[] DirectHosts 
-            => Array.Empty<ApiHost>();
+            => sys.empty<ApiHost>();
 
         public BinaryResources Resources 
             => BinaryResources.Empty;
 
-        public Type[] FunFactories 
+        public ApiDataType[] DataTypes
+            => sys.empty<ApiDataType>();
+        public Type[] ServiceTypes 
             => Array.Empty<Type>();
     }
 }

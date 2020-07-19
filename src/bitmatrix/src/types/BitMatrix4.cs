@@ -97,7 +97,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get =>  BitConvert.bytes(Data);
+            get =>  z.bytes(Data);
         }
 
         public BitEdit<ushort> Content

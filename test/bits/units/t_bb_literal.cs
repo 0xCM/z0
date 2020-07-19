@@ -8,19 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_bb_literal : t_bitblock<t_bb_literal>
     {
         public void bb_literal_40x64()
         {
             var n = n40;      
-            ulong z = 0b01011_00010_01110_11010_00111_00101_01110_10110;     
-            var bvz = BitBlocks.single(z,n);
-            Span<byte> xSrc =  BitConvert.bytes(z);
+            ulong x = 0b01011_00010_01110_11010_00111_00101_01110_10110;     
+            var bvz = BitBlocks.single(x,n);
+            Span<byte> xSrc =  bytes(x);
             var bvx = BitBlocks.load(xSrc.Slice(0,5).ToArray());
-            Claim.eq(gbits.pop(z), bvz.Pop());
-            Claim.Eq(gbits.pop(z), bvx.Pop());
+            Claim.eq(gbits.pop(x), bvz.Pop());
+            Claim.Eq(gbits.pop(x), bvx.Pop());
 
             for(var i=0; i<n; i++)
                 Claim.Eq(bvz[i], bvx[i]);

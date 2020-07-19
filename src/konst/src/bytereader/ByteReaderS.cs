@@ -10,178 +10,69 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost("bytereader.spanned")]
-    readonly struct ByteReaderS : IApiHost<ByteReaderS>
+    [ApiHost]
+    readonly struct ByteReaderS
     {
         [MethodImpl(Inline)]
-        public static T Read<T>(ReadOnlySpan<byte> src)
+        public static T read<T>(ReadOnlySpan<byte> src)
         {
             if(typeof(T) == typeof(byte))
-                return  generic<T>(Read1(src));
+                return generic<T>(read(src, n1));
             else if(typeof(T) == typeof(ushort))
-                return  generic<T>(Read2(src));
+                return generic<T>(read(src, n2));
             else if(typeof(T) == typeof(uint))
-                return  generic<T>(Read4(src));
+                return generic<T>(read(src, n4));
             else if(typeof(T) == typeof(ulong))
-                return  generic<T>(Read8(src));
+                return generic<T>(read(src, n8));
             else
                 return default;
         }
-
-        [MethodImpl(Inline), Op]
-        public static ulong U64(ReadOnlySpan<byte> src)
-        {
-            var count = min(8, src.Length);
-            if(count == 0)
-                return 0;
-
-            var dst = 0ul;
-            for(var i=0u; i<count; i++)
-                seek8(dst, i) = skip(src,i);            
-            
-            return dst;
-        }
         
         [MethodImpl(Inline), Op]
-        public static ulong Read(ReadOnlySpan<byte> src, byte count)
+        public static ulong read(ReadOnlySpan<byte> src, N1 n)
+            => first(src);
+
+        [MethodImpl(Inline), Op]
+        public static ulong read(ReadOnlySpan<byte> src, N2 n)
+            => first(recover<byte,ushort>(slice(src,2)));
+
+        [MethodImpl(Inline), Op]
+        public static ulong read(ReadOnlySpan<byte> src, N3 n)
+            => first(recover<byte,uint24>(slice(src,3)));
+
+        [MethodImpl(Inline), Op]
+        public static ulong read(ReadOnlySpan<byte> src, N4 n)
+            => first(recover<byte,uint>(slice(src,4)));
+
+        [MethodImpl(Inline), Op]
+        public static ulong read(ReadOnlySpan<byte> src, N5 n)
         {
-            if(count == 1)
-                return Read1(src);
-            else if(count == 2)
-                return Read2(src);
-            else if(count == 3)
-                return Read3(src);
-            else if(count == 4)
-                return Read4(src);
-            else if(count == 5)
-                return Read5(src);
-            else if(count == 6)
-                return Read6(src);
-            else if(count == 7)
-                return Read7(src);
-            else if(count == 8)
-                return Read8(src);
-            else
-                return 0;
+            var dst = 0ul;
+            seek32(dst, 0) = (uint)read(src,n4);
+            seek32(dst, 1) = skip(src, 4);
+            return dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ulong Read1(ReadOnlySpan<byte> src)
+        public static ulong read(ReadOnlySpan<byte> src, N6 n)
         {
             var dst = 0ul;
-            seek8(dst, 0) = skip(src,0);
+            seek32(dst, 0) = (uint)read(src, n4);
+            seek32(dst, 1) = (uint)read(src, n2);
             return dst;        
         }
 
         [MethodImpl(Inline), Op]
-        public static ulong Read2(ReadOnlySpan<byte> src)
+        public static ulong read(ReadOnlySpan<byte> src, N7 n)
         {
             var dst = 0ul;
-            var i = 0u;
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
+            seek32(dst, 0) = (uint)read(src, n4);
+            seek32(dst, 1) = (uint)read(src, n3);
             return dst;        
         }
 
         [MethodImpl(Inline), Op]
-        public static ulong Read3(ReadOnlySpan<byte> src)
-        {
-            var dst = 0ul;
-            var i = 0u;
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            return dst;        
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ulong Read4(ReadOnlySpan<byte> src)
-        {
-            var dst = 0ul;
-            var i = 0u;
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            return dst;        
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ulong Read5(ReadOnlySpan<byte> src)
-        {
-            var dst = 0ul;
-            var i = 0u;
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            return dst;        
-        }
-
-
-        [MethodImpl(Inline), Op]
-        public static ulong Read6(ReadOnlySpan<byte> src)
-        {
-            var dst = 0ul;
-            var i = 0u;
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            return dst;        
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ulong Read7(ReadOnlySpan<byte> src)
-        {
-            var dst = 0ul;
-            var i = 0u;
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            return dst;        
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ulong Read8(ReadOnlySpan<byte> src)
-        {
-            var dst = 0ul;
-            var i = 0u;
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
-            return dst;        
-        }
-
-        [MethodImpl(Inline), Op]
-        static ulong Read8_NoInc(ReadOnlySpan<byte> src)
-        {
-            var dst = 0ul;
-            seek8(dst, 0) = skip(src,0);            
-            seek8(dst, 1) = skip(src,1);            
-            seek8(dst, 2) = skip(src,2);            
-            seek8(dst, 3) = skip(src,3);            
-            seek8(dst, 4) = skip(src,4);            
-            seek8(dst, 5) = skip(src,5);            
-            seek8(dst, 6) = skip(src,6);            
-            seek8(dst, 7) = skip(src,7);    
-            return dst;        
-        }
-
-        [MethodImpl(Inline)]
-        static int min(int a, int b)
-            => a <= b ? a : b;
+        public static ulong read(ReadOnlySpan<byte> src, N8 n)
+            => first(recover<byte,ulong>(src));
     }
 }

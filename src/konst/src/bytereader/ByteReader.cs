@@ -12,40 +12,35 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly partial struct ByteReader : IApiHost<ByteReader>
+    public readonly partial struct ByteReader
     {
         /// <summary>
-        /// Reads an unmanaged generic value from a bytespan beginning at a specified offset and deposits the result in a caller-supplied target
+        /// Reads at most size[T] bytes as determined by the length of the data source
         /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The source span offset</param>
-        /// <param name="dst">The target reference</param>
-        /// <typeparam name="T">The source type</typeparam>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The unsigned numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref T Read<T>(Span<byte> src, uint offset, ref T dst)
-            where T : struct
-        {            
-            dst = Unsafe.ReadUnaligned<T>(ref seek(first(src), offset));
-            return ref dst;
+        public static T read<T>(ReadOnlySpan<byte> src)
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(read(first(src), (byte)src.Length));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(read(first(src), (byte)src.Length));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(read(first(src), (byte)src.Length));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(read(first(src), (byte)src.Length));
+            else
+                return default;
         }
-
-        /// <summary>
-        /// Reads a single cell into a span of bytes
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<byte> Read<T>(in T src)
-            where T : struct
-                => MemoryMarshal.CreateSpan(ref Edits.edit8(ref Edits.edit(src)), (int)size<T>()); 
 
         /// <summary>
         /// Reads at most 8 bytes from the data source, as determined by source length
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read(ReadOnlySpan<byte> src)
-            => Read(first(src), (byte)src.Length);
+        public static ulong read(ReadOnlySpan<byte> src)
+            => read(first(src), (byte)src.Length);
 
         /// <summary>
         /// Reads up to 8 bytes from a data source reference, as determined by a specified {count} of bytes,
@@ -54,24 +49,24 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="count">The number of bytes to read</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read(in byte src, byte count)
+        public static ulong read(in byte src, byte count)
         {
             if(count == 1)
-                return Read1(src);
+                return Read1(src, n1);
             else if(count == 2)
-                return Read2(src);
+                return Read2(src, n2);
             else if(count == 3)
-                return Read3(src);
+                return Read3(src, n3);
             else if(count == 4)
-                return Read4(src);
+                return Read4(src, n4);
             else if(count == 5)
-                return Read5(src);
+                return Read5(src, n5);
             else if(count == 6)
-                return Read6(src);
+                return Read6(src, n6);
             else if(count == 7)
-                return Read7(src);
+                return Read7(src, n7);
             else if(count == 8)
-                return Read8(src);
+                return Read8(src, n8);
             else
                 return 0;
         }
@@ -81,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read1(in byte src)
+        public static ulong Read1(in byte src, N1 n)
         {
             var dst = 0ul;
             seek8(dst, 0) = skip(src,0);
@@ -93,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read2(in byte src)
+        public static ulong Read2(in byte src, N2 n)
         {
             var dst = 0ul;
             var i = 0u;
@@ -107,7 +102,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read3(in byte src)
+        public static ulong Read3(in byte src, N3 n)
         {
             var dst = 0ul;
             var i = 0u;
@@ -122,7 +117,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read4(in byte src)
+        public static ulong Read4(in byte src, N4 n)
         {
             var dst = 0ul;
             var i = 0u;
@@ -138,7 +133,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read5(in byte src)
+        public static ulong Read5(in byte src, N5 n)
         {
             var dst = 0ul;
             var i = 0u;
@@ -155,7 +150,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read6(in byte src)
+        public static ulong Read6(in byte src, N6 n)
         {
             var dst = 0ul;
             var i = 0u;
@@ -173,7 +168,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read7(in byte src)
+        public static ulong Read7(in byte src, N7 n)
         {
             var dst = 0ul;
             var i = 0u;
@@ -192,7 +187,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read8(in byte src)
+        public static ulong Read8(in byte src, N8 n)
         {
             var dst = 0ul;
             var i = 0u;
@@ -204,22 +199,6 @@ namespace Z0
             seek8(dst, i++) = skip(src,i);
             seek8(dst, i++) = skip(src,i);
             seek8(dst, i++) = skip(src,i);
-            return dst;        
-        }
-
-        [MethodImpl(Inline), Op]
-        static ulong Read8_NoInc(in byte src)
-        {
-            var dst = 0ul;
-            var i = 0u;
-            seek8(dst, 0) = skip(src, 0);
-            seek8(dst, 1) = skip(src, 1);
-            seek8(dst, 2) = skip(src, 2);
-            seek8(dst, 3) = skip(src, 3);
-            seek8(dst, 4) = skip(src, 4);
-            seek8(dst, 5) = skip(src, 5);
-            seek8(dst, 6) = skip(src, 6);
-            seek8(dst, 7) = skip(src, 7);
             return dst;        
         }
     }

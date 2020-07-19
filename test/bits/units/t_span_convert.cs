@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var y = BitConvert.bytes(x);
+            var y = z.bytes(x);
             VerifySpanBytesToValue(y,x);
 
             var valSize = Unsafe.SizeOf<T>();
@@ -35,7 +35,7 @@ namespace Z0
             for(int i = 0, offset = 0; i< values.Length; i++, offset += valSize)
             {
                 var value = values[i];
-                var valBytes = BitConvert.bytes(value);
+                var valBytes = z.bytes(value);
                 valBytes.CopyTo(bytes, offset);            
             }
             

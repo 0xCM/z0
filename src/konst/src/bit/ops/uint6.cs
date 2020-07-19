@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
         /// <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
         [MethodImpl(Inline), Op]
-        public static S uint6(bit x0, bit x1 = default, bit x2 = default, bit x3 = default, bit x4 = default, bit x5 = default)
+        public static S uint6(BitState x0, BitState x1 = default, BitState x2 = default, BitState x3 = default, BitState x4 = default, BitState x5 = default)
              => wrap6((byte)(
                  ((uint)x0 << 0) | 
                  ((uint)x1 << 1) | 

@@ -15,10 +15,10 @@ namespace Z0
         IEnumerable<GenericApiMethod> CollectGeneric(S src);
     }
 
-    public interface IApiCollector : IApiCollector<IApiHost>, IApiCollector<Assembly>
+    public interface IApiCollector : IApiCollector<ApiHost>, IApiCollector<ApiDataType>, IApiCollector<Assembly>
     {
-        IEnumerable<DirectApiGroup> ImmDirect(IApiHost host, ImmRefinementKind refinment);
+        IEnumerable<DirectApiGroup> ImmDirect(ApiHost host, ImmRefinementKind refinment);
 
-        IEnumerable<GenericApiMethod> ImmGeneric(IApiHost host, ImmRefinementKind refinment); 
+        IEnumerable<GenericApiMethod> ImmGeneric(ApiHost host, ImmRefinementKind refinment); 
     } 
 }

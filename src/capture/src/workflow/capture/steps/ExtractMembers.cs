@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
 
@@ -25,7 +23,7 @@ namespace Z0.Asm
         public static ApiMember[] jit(IApiHost host)
             => ApiMemberJit.jit(host);
 
-        public static ApiMember[] jit(ApiHost[] hosts, IEventBroker broker)
+        public static ApiMember[] jit(IApiHost[] hosts, IEventBroker broker)
             => ApiMemberJit.jit(hosts, broker);
         
         public static ExtractedCode[] extract(ICaptureContext context, IApiHost host)
@@ -35,13 +33,12 @@ namespace Z0.Asm
             return Extractor.Extract(members);
         }
 
-        public static ExtractedCode[] extract(ICaptureContext context, ApiHost[] hosts, IEventBroker broker)
+        public static ExtractedCode[] extract(ICaptureContext context, IApiHost[] hosts, IEventBroker broker)
         {
             var members = jit(hosts, broker);
-            context.Raise(new JittedMembers(hosts,members));
+            context.Raise(new JittedMembers(hosts, members));
             var code = Extractor.Extract(members);
             return code;
-
         }
 
         public ExtractedCode[] ExtractMembers(IApiHost host)
@@ -62,7 +59,7 @@ namespace Z0.Asm
         void OnStatus(IAppEvent e)
             => Context.Raise(e);
         
-        public ExtractedCode[] ExtractMembers(ApiHost[] hosts)
+        public ExtractedCode[] ExtractMembers(IApiHost[] hosts)
         {
             var extracted = sys.empty<ExtractedCode>();            
             try

@@ -20,22 +20,31 @@ namespace Z0
         public Assembly Owner {get;}
 
         /// <summary>
-        /// The api hosts known to the catalog
+        /// The data types defined by the assembly
+        /// </summary>
+        public ApiDataType[] DataTypes {get;}
+
+        /// <summary>
+        /// The data types defined by the assembly
         /// </summary>
         public ApiHost[] Hosts {get;}
 
-        public Type[] FunFactories {get;}
+        /// <summary>
+        /// The api service types types defined by the assembly
+        /// </summary>
+        public Type[] ServiceTypes {get;}
 
         public ApiHost[] GenericHosts {get;}
 
         public ApiHost[] DirectHosts {get;}
 
-        public ApiCatalog(PartId PartId, Assembly Owner, ApiHost[] Hosts, Type[] FunFactories, ApiHost[] GenericHosts, ApiHost[] DirectHosts)
+        public ApiCatalog(PartId PartId, Assembly Owner, ApiDataType[] DataTypes, ApiHost[] Hosts, Type[] ServiceTypes, ApiHost[] GenericHosts, ApiHost[] DirectHosts)
         {
             this.PartId = PartId;
             this.Owner = Owner;
             this.Hosts = Hosts;
-            this.FunFactories = FunFactories;
+            this.DataTypes = DataTypes;
+            this.ServiceTypes = ServiceTypes;
             this.GenericHosts = GenericHosts;
             this.DirectHosts = DirectHosts;
         }

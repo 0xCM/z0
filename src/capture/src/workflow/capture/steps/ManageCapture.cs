@@ -60,8 +60,10 @@ namespace Z0.Asm
         {
             var dst = InitTarget(config, parts);      
             var catalogs = Catalogs(Context.ApiSet, parts).Array();
-            var hosts = catalogs.SelectMany(c => c.Hosts).OrderBy(x => x.PartId).ThenBy(x => x.Uri).Array();
-            CaptureHostStep.create(Workflow).CaptureHosts(hosts,dst);
+            var a = catalogs.SelectMany(c => c.DataTypes).Cast<IApiHost>();
+            var b = catalogs.SelectMany(c => c.Hosts).Cast<IApiHost>();
+            var c = a.Union(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
+            CaptureHostStep.create(Workflow).Capture(c, dst);
         }
 
         public void CaptureParts(IPartCatalog[] src, TPartCaptureArchive dst)
