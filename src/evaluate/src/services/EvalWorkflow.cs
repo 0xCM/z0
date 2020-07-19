@@ -55,7 +55,7 @@ namespace Z0.Asm
         {
             using var buffers = Buffers.sequence(BufferSize, BufferCount);
             
-            foreach(var host in catalog.Hosts)
+            foreach(var host in catalog.OperationHosts)
                 ExecuteHost(buffers.Tokenize(), host);
         }
         

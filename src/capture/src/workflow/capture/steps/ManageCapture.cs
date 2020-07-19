@@ -41,7 +41,7 @@ namespace Z0.Asm
                 for(var i=0; i<parts.Length; i++)                
                 {
                     var id = parts[i];
-                    var catalog = src.Catalogs.Where(c => c.PartId == id && c.ApiHostCount != 0).FirstOrDefault();
+                    var catalog = src.Catalogs.Where(c => c.PartId == id && c.IsNonEmpty).FirstOrDefault();
                     if(catalog != null)
                         dst.Add(catalog);
                 }
@@ -60,9 +60,9 @@ namespace Z0.Asm
         {
             var dst = InitTarget(config, parts);      
             var catalogs = Catalogs(Context.ApiSet, parts).Array();
-            var a = catalogs.SelectMany(c => c.DataTypes).Cast<IApiHost>();
-            var b = catalogs.SelectMany(c => c.Hosts).Cast<IApiHost>();
-            var c = a.Union(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
+            var a = catalogs.SelectMany(c => c.DataTypeHosts).Cast<IApiHost>();
+            var b = catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>();
+            var c = a.Concat(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
             CaptureHostStep.create(Workflow).Capture(c, dst);
         }
 
@@ -76,7 +76,7 @@ namespace Z0.Asm
         
         public void CapturePart(IPartCatalog src, TPartCaptureArchive dst)
         {
-            if(src.HasApiHostContent)
+            if(src.IsNonEmpty)
             {
                 Context.Raise(new CapturingPart(src.PartId));
                 CaptureHosts(src,dst);
@@ -87,7 +87,7 @@ namespace Z0.Asm
         public void CaptureHosts(IPartCatalog src, TPartCaptureArchive dst)
         {
             var step = CaptureHostStep.create(Workflow);             
-            z.iter(src.Hosts, h => CaptureHost(step, h, dst));
+            z.iter(src.OperationHosts, h => CaptureHost(step, h, dst));
         }
 
         public void CaptureHost(CaptureHostStep step, IApiHost host, TPartCaptureArchive dst)

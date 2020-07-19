@@ -12,33 +12,39 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ApiQuery : IService<IPartCatalog>
+    public readonly struct ApiQuery
     {
+        [MethodImpl(Inline)]
+        public static ApiQuery create(IPartCatalog src)
+            => new ApiQuery(src);
+
         public IPartCatalog Context {get;}
 
         [MethodImpl(Inline)]
-        public static ApiQuery Over(IPartCatalog src)
-            => new ApiQuery(src);
-
-        [MethodImpl(Inline)]
-        ApiQuery(IPartCatalog src)
+        internal ApiQuery(IPartCatalog src)
         {
-            this.Context = src;
+            Context = src;
         }
 
+        public IEnumerable<MethodInfo> Vectorized<T>(W128 w, bool generic)
+            where T : unmanaged
+                => from host in Context.ApiHosts
+                    from m in host.HostedMethods.VectorizedDirect<T>(w)                    
+                    where m.IsGenericMethod == generic
+                    select m;
         public IEnumerable<MethodInfo> Generic
-            => from host in Context.GenericHosts
+            => from host in Context.ApiHosts
                 from m in host.HostedMethods.OpenGeneric()
                 select m;
 
         public IEnumerable<MethodInfo> Direct
-            => from host in Context.DirectHosts
+            => from host in Context.ApiHosts
                 from m in host.HostedMethods.NonGeneric()
                 select m;
 
         public IEnumerable<MethodInfo> Vectorized<T>(W256 w, bool generic)
             where T : unmanaged
-                => from host in (generic ? Context.GenericHosts : Context.DirectHosts)
+                => from host in Context.ApiHosts
                     from m in host.HostedMethods.VectorizedDirect<T>(w)
                     where m.IsGenericMethod == generic
                     select m;
@@ -86,12 +92,5 @@ namespace Z0
 
         public IEnumerable<MethodInfo> VectorizedDirect(W512 w, string name)
             => Direct.VectorizedDirect(w, name);
-
-        public IEnumerable<MethodInfo> Vectorized<T>(W128 w, bool generic)
-            where T : unmanaged
-                => from host in (generic ? Context.GenericHosts : Context.DirectHosts)
-                    from m in host.HostedMethods.VectorizedDirect<T>(w)                    
-                    where m.IsGenericMethod == generic
-                    select m;
     }
 }

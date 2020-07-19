@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Characterizes the api set exposed by a part
@@ -15,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The known types that reify contracted operation services, potentially generic
         /// </summary>
-        Type[] ServiceTypes {get;}
+        Type[] ServiceHostTypes {get;}
 
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
@@ -28,25 +30,21 @@ namespace Z0
         Assembly Owner {get;}
 
         /// <summary>
-        /// The api hosts known to the catalog
+        /// The data type hosts
         /// </summary>
-        ApiHost[] Hosts {get;}
+        ApiDataType[] DataTypeHosts {get;}
+
+        /// <summary>
+        /// The operation hosts
+        /// </summary>
+        ApiHost[] OperationHosts {get;}
         
         /// <summary>
-        /// The known generic api hosts
+        /// The api hosts known to the catalog, including both operation and data type hosts
         /// </summary>
-        ApiHost[] GenericHosts {get;}
-
-        /// <summary>
-        /// The known direct api hosts
-        /// </summary>
-        ApiHost[] DirectHosts {get;}
-
-        /// <summary>
-        /// The attribute-identified data types
-        /// </summary>
-        ApiDataType[] DataTypes {get;}
-
+        IEnumerable<IApiHost> ApiHosts 
+            => DataTypeHosts.Cast<IApiHost>().Concat(OperationHosts.Cast<IApiHost>());
+        
         /// <summary>
         /// Specifies whether the catalog contains content from an identifid assembly
         /// </summary>
@@ -54,33 +52,9 @@ namespace Z0
             => PartId != 0;
 
         /// <summary>
-        /// Specifies the number of api hosts described by the catalog
-        /// </summary>
-        int ApiHostCount 
-            => Hosts.Length;
-
-        /// <summary>
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
-        bool HasApiHostContent 
-            => ApiHostCount != 0;
-
-        /// <summary>
-        /// The name of the catalog, which should be unique with respect to known catalogs
-        /// </summary>
-        string CatalogName
-            => PartId.Format();        
-
-        /// <summary>
-        /// Specifies the number of service hosts described by the catalog
-        /// </summary>
-        int HostCount 
-            => ServiceTypes.Length;
-
-        /// <summary>
-        /// Specifies whether the catalog describes any service hosts
-        /// </summary>
         bool IsNonEmpty 
-            => HostCount != 0;
+            => (OperationHosts.Length + DataTypeHosts.Length) != 0;
     }    
 }

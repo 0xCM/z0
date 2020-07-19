@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public readonly struct ApiCatalog : IPartCatalog
     {
@@ -22,31 +24,25 @@ namespace Z0
         /// <summary>
         /// The data types defined by the assembly
         /// </summary>
-        public ApiDataType[] DataTypes {get;}
+        public ApiDataType[] DataTypeHosts {get;}
 
         /// <summary>
         /// The data types defined by the assembly
         /// </summary>
-        public ApiHost[] Hosts {get;}
+        public ApiHost[] OperationHosts {get;}
 
         /// <summary>
         /// The api service types types defined by the assembly
         /// </summary>
-        public Type[] ServiceTypes {get;}
+        public Type[] ServiceHostTypes {get;}
 
-        public ApiHost[] GenericHosts {get;}
-
-        public ApiHost[] DirectHosts {get;}
-
-        public ApiCatalog(PartId PartId, Assembly Owner, ApiDataType[] DataTypes, ApiHost[] Hosts, Type[] ServiceTypes, ApiHost[] GenericHosts, ApiHost[] DirectHosts)
+        public ApiCatalog(IPart part, ApiDataType[] DataTypeHosts, ApiHost[] OperationHosts, Type[] ServiceHostTypes)
         {
-            this.PartId = PartId;
-            this.Owner = Owner;
-            this.Hosts = Hosts;
-            this.DataTypes = DataTypes;
-            this.ServiceTypes = ServiceTypes;
-            this.GenericHosts = GenericHosts;
-            this.DirectHosts = DirectHosts;
+            this.PartId = part.Id;
+            this.Owner = part.Owner;
+            this.DataTypeHosts = DataTypeHosts;
+            this.OperationHosts = OperationHosts;
+            this.ServiceHostTypes = ServiceHostTypes;
         }
     }
 }

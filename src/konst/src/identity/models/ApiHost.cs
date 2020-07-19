@@ -5,28 +5,23 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
-    using static IdentityShare;
 
     /// <summary>
     /// Identifies/describes a type that declares a formalized api set
     /// </summary>
     public readonly struct ApiHost : IIdentification<ApiHost>, IApiHost
     {        
-        public string Name {get;}
-
-        public ApiHostKind HostKind {get;}
-
         public PartId PartId {get;}
 
-        public ApiHostUri Uri {get;}
-        
         public Type HostType {get;}
+
+        public string Name {get;}
+
+        public ApiHostUri Uri {get;}
     
         [MethodImpl(Inline)]
         public static implicit operator ApiHostUri(ApiHost src)
@@ -40,24 +35,18 @@ namespace Z0
         public static bool operator!=(ApiHost a, ApiHost b)
             => !a.Equals(b);
 
-        public ApiHost(string name, ApiHostKind kind, PartId part, ApiHostUri uri, Type type)
+        [MethodImpl(Inline)]
+        public ApiHost(Type type, string name, PartId part, ApiHostUri uri)
         {
             Name = name;
-            HostKind = kind;
             PartId = part;
             Uri = uri;
             HostType = type;
         }
-                                  
-        public IEnumerable<MethodInfo> HostedMethods
-            => HostType.DeclaredMethods(false);
 
-        public bool IsEmtpy 
-        {
-            [MethodImpl(Inline)]
-            get => PartId == PartId.None && HostType == typeof(void);
-        }
-
+         public MethodInfo[] HostedMethods 
+            => HostType.DeclaredMethods();
+                                 
         [MethodImpl(Inline)]
         public string Format()
             => Uri.Format();
@@ -67,19 +56,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(ApiHost src)
-            => equals(this, src);
+            => src.HostType.Equals(HostType);
 
         [MethodImpl(Inline)]
-        public int CompareTo(ApiHost other)
-            => compare(this, other);
+        public int CompareTo(ApiHost src)
+            => ((long)src.HostType.TypeHandle.Value).CompareTo((long)HostType.TypeHandle.Value);
 
         public override int GetHashCode()
-            => hash(this);
+            => HostType.GetHashCode();
 
-        public override bool Equals(object obj)
-            => equals(this, obj);
-
-        public static ApiHost Empty 
-            => new ApiHost(EmptyString, 0, 0, ApiHostUri.Empty, typeof(void));
+        public override bool Equals(object src)
+            => src is ApiHost t && Equals(t);
     }
 }

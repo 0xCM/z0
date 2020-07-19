@@ -38,7 +38,7 @@ namespace Z0
             Random = random;
             Settings = settings ?? AppSettings.Load(AppPaths.AppConfigPath);
             MessageQueue = queue;
-            Api = ApiSet.Create(composition);
+            Api = ApiSet.create(composition);
         }
 
         internal AppContext(TAppPaths paths, IResolvedApi composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
@@ -48,7 +48,7 @@ namespace Z0
             Random = random;
             Settings = settings ?? AppSettings.Load(AppPaths.AppConfigPath);
             MessageQueue = queue;
-            Api = ApiSet.Create(composition);
+            Api = ApiSet.create(composition);
         }
 
         internal AppContext(IApiSet api, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)

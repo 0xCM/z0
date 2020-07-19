@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     
-
     /// <summary>
     /// Marks a type as an api data type
     /// </summary>
@@ -14,6 +13,7 @@ namespace Z0
     public class ApiDataTypeAttribute : Attribute
     {
         public string Name {get;}
+        
         public ApiDataTypeAttribute()
         {
             Name = string.Empty;

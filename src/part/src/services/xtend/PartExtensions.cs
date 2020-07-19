@@ -24,15 +24,6 @@ namespace Z0
         /// <param name="sep">The separator, if any</param>
         static string Concat(this IEnumerable<string> src, string sep = null)
             => string.Join(sep ?? string.Empty, src);
-
-
-        [MethodImpl(Inline)]
-        public static bool DefinesDirectOps(this ApiHostKind src)
-            => (src & ApiHostKind.Direct) != 0;
-
-        [MethodImpl(Inline)]
-        public static bool DefinesGenericOps(this ApiHostKind src)
-            => (src & ApiHostKind.Generic) != 0;                
             
         [MethodImpl(Inline)]
         public static string Format(this PartId id)
@@ -46,10 +37,4 @@ namespace Z0
         public static PartId Id(this Assembly src)
             => Part.id(src);
     }
-
-    partial class XTend
-    {
-    }    
-
-
 }

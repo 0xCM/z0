@@ -5,46 +5,46 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+
+
     using static Konst;
 
     public readonly struct ApiDataType : IApiHost
     {
-        public string Name {get;}
-
         public PartId PartId {get;}
+
+        public Type HostType {get;}
+
+        public string Name {get;}
 
         public ApiHostUri Uri {get;}
         
-        public Type HostType {get;}
-
         [MethodImpl(Inline)]
         public static implicit operator ApiHostUri(ApiDataType src)
-            => src.Uri;
-            
-        public ApiDataType(string name, PartId part, ApiHostUri uri, Type type)
+            => src.Uri;            
+        
+        [MethodImpl(Inline)]
+        public static bool operator==(ApiDataType a, ApiDataType b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(ApiDataType a, ApiDataType b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public ApiDataType(Type type, string name, PartId part, ApiHostUri uri)
         {
+            HostType = type;
             Name = name;
             PartId = part;
             Uri = uri;
-            HostType = type;
         }
 
-        public MethodInfo[] HostedMethods
-        {
-            [MethodImpl(Inline)]
-            get => HostType.DeclaredMethods(false);
-        }
-
-        public bool IsEmtpy 
-        {
-            [MethodImpl(Inline)]
-            get => HostType == typeof(void);
-        }
-
+        public MethodInfo[] HostedMethods 
+            => HostType.DeclaredMethods();
+            
         [MethodImpl(Inline)]
         public string Format()
             => Uri.Format();

@@ -28,9 +28,13 @@ namespace Z0
         PartId PartId 
             => HostType.Assembly.Id();
     
-        IEnumerable<MethodInfo> HostedMethods 
-            => HostType.DeclaredMethods(false);
-        MethodInfo[] HostedMethodArray
-            => HostType.DeclaredMethods(false);
+        MethodInfo[] HostedMethods 
+            => HostType.DeclaredMethods();
+            
+        bool IsEmtpy 
+            => HostType == typeof(void);
+
+        bool IsNonEmtpy 
+            => HostType != typeof(void);
     }
 }

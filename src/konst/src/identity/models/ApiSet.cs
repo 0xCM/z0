@@ -4,15 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     public readonly struct ApiSet : IApiSet
     {
-        public static IApiSet Create(IResolvedApi resolved)
+        public static IApiSet create(IResolvedApi resolved)
             => new ApiSet(resolved);
 
         public IResolvedApi Composition {get;}
@@ -28,10 +26,8 @@ namespace Z0
         internal ApiSet(IResolvedApi api)
         {
             Composition = api;
-            Catalogs = api.Catalogs.Array();    
-            Hosts = (from owner in Catalogs.SelectMany(c => c.Hosts).GroupBy(x => x.PartId)
-                from  host in owner
-                select host as IApiHost).Array();     
+            Catalogs = api.Catalogs;    
+            Hosts = Catalogs.SelectMany(c => c.ApiHosts);
             Parts = api.Resolved;       
             PartIdentities = api.Resolved.Map(p => p.Id);            
         }

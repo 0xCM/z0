@@ -11,21 +11,13 @@ namespace Z0
 
     public interface TApiReflected
     {
-        /// <summary>
-        /// Creates a (possibly empy) api catalog for a specified part
-        /// </summary>
-        /// <param name="src">The source part</param>
         IPartCatalog Catalog(IPart src)
             => ApiHosts.catalog(src);
 
-        /// <summary>
-        /// Searches an assembly for attribute-identified data types
-        /// </summary>
-        /// <param name="src">The assembly to search</param>
-        ApiDataType[] DataTypes(Assembly src)
-            => ApiHosts.ApiDataTypes(src);
+        ApiDataType[] DataTypeHosts(Assembly src)
+            => ApiHosts.DataTypeHosts(src);
 
-        ApiHost[] Hosts(Assembly src)
-            => ApiHosts.Hosts(src); 
+        ApiHost[] OperationHosts(Assembly src)
+            => ApiHosts.OperationHosts(src); 
     }
 }
