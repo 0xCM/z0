@@ -14,6 +14,8 @@ namespace Z0
     using static IntrinsicsDocument;    
     using static z;
 
+    // See: https://github.com/zbjornson/iop
+    // https://github.com/zwegner/x86-sat
     /// <summary>
     /// [intrinsics_list version="3.5.3" date="06/30/2020">]
     /// </summary>

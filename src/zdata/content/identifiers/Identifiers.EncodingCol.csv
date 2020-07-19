@@ -1,6 +1,6 @@
-# Encoding Syntax
+# EncodingCol
 ----------------------------------------------------------------------------------------------------------------------
-| Identifier | Syntax    | Meaning                                                                                 |
+| Identifier | Value    | Description
 | VEXᛁvvvv   | VEX.vvvv  | The VEX bit field specifying a source or destination register (in 1’s complement form). |
 | rm_field   | rm_field  | The ModR/M r/m field and any REX.B                                                      |
 | reg_field  | reg_field | The ModR/M reg field and any REX.R                                                      |

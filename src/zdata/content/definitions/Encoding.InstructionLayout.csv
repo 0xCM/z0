@@ -2,10 +2,8 @@
 
 Instruction = [ Prefix(1..n) | OpCode | ModRM | SIB | Displacement | Immediate]
 
-
 ModRM = [Mod:[7 6] | ROC:[5 4 3] | RM:[2 1 0] ]
 SIB = [Scale:[7 6] | Index:[5 4 3] | Base:[2 1 0]
-
 
 ----------------------------
 | FiedSeg |   |   |   |   |

@@ -1,0 +1,19 @@
+# LegacyPrefix
+-----------------------------------------------------------------------------------------------
+| Identifier | Value | Description  
+| LOCK       | F0    | Forces atomic read-modify-write instructions
+| REPNE      | F2    |                                                            
+| REPNZ      | F2    |                                                            
+| REP        | F3    | Repeats a string operation (INS, MOVS, OUTS, LODS,and STOS)
+| REPE       | F3    | Repeats a compare-string or scan-string operation (CMPSx and SCASx)
+| BND        | F2    |
+| CS         | 2E    | Forces use of the current CS segment
+| SS         | 36    | Forces use of the current SS segment
+| DS         | 3E    | Forces use of the current DS segment
+| ES         | 26    | Forces use of the current ES segment
+| FS         | 64    | Forces use of the current FS segment
+| GS         | 65    | Forces use of the current GS segment
+| JccB       | 2E    | jcc branch taken
+| JccNB      | 3E    | jcc branch not taken
+| OpSize     | 66    | Changes the default operand size of a memory or register operand
+| AddrSize   | 67    | Changes the default address size of a memory operand

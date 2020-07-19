@@ -1,0 +1,9 @@
+# Mode64Col
+------------------------------------------------------------------------------------------------------------------
+| Identifier | Value  | Description
+| Yea        | V      | Valid
+| Nea        | I      | Invalid
+| NE         | N.E.   | Indicates an instruction syntax is not encodable in 64-bit mode
+| NP         | N.P.   | Indicates the REX prefix does not affect the legacy instruction in 64-bit mode
+| NI         | N.I.   | Indicates the opcode is treated as a new instruction in 64-bit mode
+| NS         | N.S.   | Not supported

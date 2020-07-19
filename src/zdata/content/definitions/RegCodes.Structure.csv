@@ -1,0 +1,8 @@
+# RegCode
+------------------------------------------------------
+| Name       | Type           | Description
+| Register   | token          | Register identifier
+| Size       | integer:base10 | Register bit-width
+| RexB       | token          | Rex.B indicator
+| FieldCode  | integer:base2  | A 3-bit identifier
+| Mode64Only | bool           | Specifies whether applicable only to 64-bit mode

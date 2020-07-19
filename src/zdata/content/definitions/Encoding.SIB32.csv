@@ -35,14 +35,12 @@
 | [EDI*8]     |    | 111   | F8      | F9      | FA      | FB      | FC      | FD      | FE      | FF      |
 
 # Notes
----------------------------------
-The [*] nomenclature means a disp32 with no base if the MOD is 00B. 
-Otherwise, [*] means disp8 or disp32 + [EBP].  This provides the following address modes:
+------------------------------------------------------------------------------------------------------------
+The [*] nomenclature means a disp32 with no base if the MOD is 00B. Otherwise, [*] means disp8 or disp32 + [EBP].  
 
----------------------------------
+# This provides the following address modes:
+------------------------------------------------------------------------------------------------------------
 | MOD bits | Effective Address               |
 | 00       | [scaled index] + disp32         |
 | 01       | [scaled index] + disp8 + [EBP]  |
 | 10       | [scaled index] + disp32 + [EBP] |
-
-972 - 636 - 5727

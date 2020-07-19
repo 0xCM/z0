@@ -1,0 +1,44 @@
+# Algorithm Syntax
+------------------------------------------------------------------------------------------------------------------------------------------------
+| Syntax                | Meaning                                                                                                              |
+| (* ... *)             | Comment                                                                                                              |
+| IF, THEN, ELSE and FI | IF statement declaration/enclosure                                                                                   |
+| DO and OD             | DO statement declaration/enclosure                                                                                   |
+| CASE... OF            | Case statement declaration/branches                                                                                  |
+| RegisterName          | Register Content                                                                                                     |
+| [RegisterName]        | Content of address specified in register                                                                             |
+|                       | ES:[DI] indicates the contents of the location whose ES segment relative address is in register DI.                  |
+|                       | [SI] indicates the contents of the address contained in register SI relative to the SI register’s                    |
+|                       | default segment (DS) or the overridden segment.                                                                      |
+| (E)AB                 | Parentheses around the “E” in a general-purpose register name, such as (E)SI, indicates that the offset is read      |
+|                       | from the SI register if the address-size attribute is 16, from the ESI register if the address-size attribute is 32. |
+|                       | Parentheses around the “R” in a general-purpose register name, (R)SI, in the presence of a 64-bit register           |
+|                       | definition such as (R)SI, indicates that the offset is read from the 64-bit RSI register if the address-size         |
+|                       | attribute is 64                                                                                                      |
+| [MemoryOperand]       | Brackets are used for memory operands where they mean that the contents of the memory location is a                  |
+|                       | segment-relative offset. For example, [SRC] indicates that the content of the source operand is a segment-           |
+|                       | relative offset.                                                                                                     |
+| A ← B                 | The value of B is assigned to A.                                                                                     |
+| = (equal)             | Compares two values for equality; A = B is TRUE if the value of A is equal to B; otherwise it is FALSE.              |
+| ≠ (not equal)         | Compares two values for inequality                                                                                   |
+| > (greater than)      |                                                                                                                      |
+| < (less than)         |                                                                                                                      |
+| ≥ (greater or equal)  |                                                                                                                      |
+| ≤ (less or equal)     |                                                                                                                      |
+| « COUNT               | The destination operand should be shifted left by the number of bits indicated by the count operand.                 |
+| » COUNT               | The destination operand should be shifted  right by the number of bits indicated by the count operand.               |
+           
+# MAXVL
+----------------------------------------------
+| XCR0 Component                     | MAXVL |
+| XCR0.SSE                           | 128   |
+| XCR0.AVX                           | 256   |
+| XCR0.{ZMM_Hi256, Hi16_ZMM, OPMASK} | 512   |
+
+# Table 3.2: Range of Bit Positions Specified by Bit Offset Operands
+---------------------------------------------------------------------
+| Operand Size | Immediate BitOffset | Register BitOffset |
+| 16           | 0 to 15             | − 2^15 to 2^15 − 1 |
+| 32           | 0 to 31             | − 2^31 to 2^31 − 1 |
+| 64           | 0 to 63             | − 2^63 to 2^63 − 1 |
+
