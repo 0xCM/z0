@@ -9,7 +9,6 @@ namespace Z0
     using System.Xml;
     using System.IO;
     using System.Collections.Generic;
-    using System.Text;
  
     using static Konst;
     using static IntrinsicsDocument;    
@@ -26,6 +25,11 @@ namespace Z0
             var svc = ResExtractor.Service();
             var doc = svc.Extract(x => x.Contains("intel-intrinsics.xml"));
             return read(doc);            
+        }
+        
+        public static FolderName folder(FileExtension kind)
+        {
+            return FolderName.Define("algorithms");            
         }
         
         static XmlReader readxml(string src)
@@ -87,7 +91,6 @@ namespace Z0
                         case ParameterElement:
                             read(reader, entries[i].parameters);    
                         break;                                        
-
                     }                    
                 }
             }
@@ -98,9 +101,7 @@ namespace Z0
 
         static void read(XmlReader reader, ref Operation dst)
         {
-
             dst.Content = reader.ReadInnerXml();
-            //term.print(dst.Content);             
         }
 
         static void read(XmlReader reader, ref CpuId dst)
@@ -115,7 +116,7 @@ namespace Z0
 
         static void read(XmlReader reader, ref Description dst)
         {
-            dst.Content = reader.Value;
+            dst.Content = reader.ReadInnerXml();
         }
 
         static void read(XmlReader reader, ref Return dst)
@@ -144,9 +145,19 @@ namespace Z0
 
         static void read(XmlReader reader, List<instruction> dst)
         {
-            var x = default(instruction);
+            var x = instruction.Empty;
+            // if(reader.HasAttributes)
+            // {
+            //     for(var i=0; i<reader.AttributeCount; i++)
+            //     {
+            //         reader.MoveToAttribute(i);
+            //         var a = text.concat(reader.Name, " = ", reader.Value);
+            //         x.attributes.Add(a);
+            //     }
+            // }
+            
             x.name = reader[nameof(instruction.name)];
-            x.form = reader[nameof(instruction.form)];
+            x.form = reader[nameof(instruction.form)];            
             x.xed = reader[nameof(instruction.xed)];            
             dst.Add(x);
         }

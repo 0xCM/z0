@@ -13,8 +13,9 @@ namespace Z0
     readonly struct XedArchiveConfig
     {
         public FolderPath SourceRoot 
-            => FolderPath.Define(@"K:\z0\archives\sources\xed");
-
+            =>  ((Env.Current.DevDir + FolderName.Define("data")) + FolderName.Define("incoming")) + FolderName.Define("xed");
+            //FolderPath.Define(@"K:\z0\archives\sources\xed");
+            
         public FolderPath TargetRoot
             => (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define("xed");
 

@@ -86,12 +86,16 @@ namespace Z0
                 this.name = name;
                 this.form = form;
                 this.xed = xed;
+                this.attributes = new List<string>();
             }
+
             public string name;
 
             public string form;            
             
-            public string xed;            
+            public string xed;         
+
+            public List<string> attributes;   
         }
 
         public struct Operation
@@ -141,11 +145,13 @@ namespace Z0
 
             public List<instruction> instructions;        
 
-            public string Format()
+            public string identifier
             {
-                var dst = text.build();
-                dst.AppendLine(operation.Content);
-                return dst.ToString();
+                get
+                {
+                    var instruction = instructions.ToArray().TryGetFirst().ValueOrDefault(IntrinsicsDocument.instruction.Empty);
+                    return text.ifblank(instruction.name, name);
+                }
             }
         }   
 
