@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level sextet and thus is an integer in the range [0,63]
     /// </summary>
-    public readonly struct uint7 : IBitSequence<S,W,K,T>
+    public readonly struct uint7 : IUnsigned<S,W,K,T>
     {
         internal readonly byte data;
 

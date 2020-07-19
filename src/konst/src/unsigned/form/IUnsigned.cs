@@ -6,7 +6,7 @@ namespace Z0
 {        
     using System;
 
-    public interface IBitSequence : ITextual, IHashed
+    public interface IUnsigned : ITextual, IHashed
     {
         bool IsZero {get;}
 
@@ -14,29 +14,29 @@ namespace Z0
             => !IsZero;
     }
 
-    public interface IBitSequence<S> : IBitSequence, IEquatable<S>    
-        where S : unmanaged, IBitSequence<S>
+    public interface IUnsigned<S> : IUnsigned, IEquatable<S>    
+        where S : unmanaged, IUnsigned<S>
     {
         
     }    
 
-    public interface IBitSequence<S,T> : IBitSequence<S>, INullary<S,T>
-        where S : unmanaged, IBitSequence<S,T>
+    public interface IUnsigned<S,T> : IUnsigned<S>, INullary<S,T>
+        where S : unmanaged, IUnsigned<S,T>
         where T : unmanaged         
     {
         T Value {get;}
     }    
 
-    public interface IBitSequence<S,W,T> : IBitSequence<S,T> 
-        where S : unmanaged, IBitSequence<S,W,T>
+    public interface IUnsigned<S,W,T> : IUnsigned<S,T> 
+        where S : unmanaged, IUnsigned<S,W,T>
         where W : unmanaged, IDataWidth
         where T : unmanaged         
     {
         
     }
 
-    public interface IBitSequence<F,W,K,T> : IBitSequence<F,W,T>
-        where F : unmanaged, IBitSequence<F,W,K,T>
+    public interface IUnsigned<F,W,K,T> : IUnsigned<F,W,T>
+        where F : unmanaged, IUnsigned<F,W,K,T>
         where W : unmanaged, IDataWidth
         where K : unmanaged, Enum
         where T : unmanaged         

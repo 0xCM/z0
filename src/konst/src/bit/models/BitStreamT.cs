@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     
     readonly struct BitStream<T> : IStreamSource<T>
-        where T : IBitSequence
+        where T : IUnsigned
     {
         readonly IEnumerable<T> Source;
 

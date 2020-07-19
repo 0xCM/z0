@@ -65,6 +65,6 @@ namespace Z0
         }
         
         public static ApiMember Empty 
-            => new ApiMember(OpUri.Empty, EmptyMethod, 0, 0);
+            => new ApiMember(OpUri.Empty, EmptyVessels.EmptyMethod, 0, 0);
     }        
 }

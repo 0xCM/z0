@@ -8,161 +8,160 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
     
-    using S = uint1;
+    using U = uint1;
 
     partial class Bit
     {
         [MethodImpl(Inline), Op]    
-        public static S uint1(bool src)
-            => new S(z.bitstate(src));
+        public static U uint1(bool src)
+            => new U(z.bitstate(src));
 
         /// <summary>
         /// Creates a 1-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static S uint1(byte src)
-            => new S(src);
+        public static U uint1(byte src)
+            => new U(src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static S uint1(sbyte src)
-            => new S(src);
+        public static U uint1(sbyte src)
+            => new U(src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static S uint1(ushort src)
-            => new S(src);
+        public static U uint1(ushort src)
+            => new U(src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static S uint1(short src)
-            => new S(src);
+        public static U uint1(short src)
+            => new U(src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static S uint1(int src)
-            => new S(src);
+        public static U uint1(int src)
+            => new U(src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static S uint1(uint src)
-            => new S(src);
+        public static U uint1(uint src)
+            => new U(src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static S uint1(long src)
-            => new S((byte)src);
+        public static U uint1(long src)
+            => new U((byte)src);
 
         /// <summary>
         /// Creates a 4-bit usigned integer from the least 4 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static S uint1(ulong src)        
-            => new S((byte)((byte)src & S.MaxVal));
+        public static U uint1(ulong src)        
+            => new U((byte)((byte)src & U.MaxVal));
 
         [MethodImpl(Inline), Op]
-        public static S add(S x, S y)
+        public static U add(U x, U y)
         {
             var sum = x.data + y.data;
-            return wrap1((sum >= S.Count) ? (byte)sum - (byte)S.Count: sum);
+            return wrap1((sum >= U.Count) ? (byte)sum - (byte)U.Count: sum);
         }
 
         [MethodImpl(Inline), Op]
-        public static S sub(S x, S y)
+        public static U sub(U x, U y)
         {
             var diff = (int)x - (int)y;
-            return wrap1(diff < 0 ? (byte)(diff + S.Count) : (byte)diff);
+            return wrap1(diff < 0 ? (byte)(diff + U.Count) : (byte)diff);
         }
 
         [MethodImpl(Inline), Op]
-        public static S mul(S lhs, S rhs)
+        public static U mul(U lhs, U rhs)
             => reduce4((byte)(lhs.data * rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static S div (S lhs, S rhs) 
+        public static U div (U lhs, U rhs) 
             => wrap1((byte)(lhs.data / rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static S mod (S lhs, S rhs)
+        public static U mod (U lhs, U rhs)
             => wrap1((byte)(lhs.data % rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static S or(S lhs, S rhs)
+        public static U or(U lhs, U rhs)
             => wrap1((byte)(lhs.data | rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static S and(S lhs, S rhs)
+        public static U and(U lhs, U rhs)
             => wrap1((byte)(lhs.data & rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static S xor(S lhs, S rhs)
+        public static U xor(U lhs, U rhs)
             => wrap1((byte)(lhs.data ^ rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static S srl(S lhs, byte rhs)
+        public static U srl(U lhs, byte rhs)
             => uint1((byte)(lhs.data >> rhs));
 
         [MethodImpl(Inline), Op]
-        public static S sll(S lhs, byte rhs)
+        public static U sll(U lhs, byte rhs)
             => uint1((byte)(lhs.data << rhs));
 
         [MethodImpl(Inline), Op]
-        public static S inc(S x)
-            => !x.IsMax ? new S(z.add(x.data, 1), false) : S.Min;
+        public static U inc(U x)
+            => !x.IsMax ? new U(z.add(x.data, 1), false) : U.Min;
 
         [MethodImpl(Inline), Op]
-        public static S dec(S x)
-            => !x.IsMin ? new S(z.sub(x.data, 1), false) : S.Max;
+        public static U dec(U x)
+            => !x.IsMin ? new U(z.sub(x.data, 1), false) : U.Max;
 
         [MethodImpl(Inline), Op]
-        public static BitState test(S x)
+        public static BitState test(U x)
             => z.test(x.data, 0);
 
         [MethodImpl(Inline), Op]
-        public static S set(S src, byte pos, BitState state)
+        public static U set(U src, byte pos, BitState state)
         {
-            if(pos < S.Width)
+            if(pos < U.Width)
                 return wrap1(z.set(src.data, pos, state));
             else 
                 return src;
         }
         
         [MethodImpl(Inline), Op]
-        public static bool eq(S x, S y)
+        public static bool eq(U x, U y)
             => x.data == y.data;
 
         [MethodImpl(Inline)]
         internal static byte crop1(byte x) 
-            => (byte)(S.MaxVal & x);
+            => (byte)(U.MaxVal & x);
 
         [MethodImpl(Inline), Op]
         internal static byte reduce1(byte x) 
-            => (byte)(x % S.Count);
+            => (byte)(x % U.Count);
 
         [MethodImpl(Inline)]
-        internal static S wrap1(int src) 
-            => new S((byte)src, false);
+        internal static U wrap1(int src) 
+            => new U((byte)src, false);
     }
 }

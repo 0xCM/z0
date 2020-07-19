@@ -10,31 +10,30 @@ namespace Z0
     using static Konst;
     using static Bit;
 
-    using S = uint3;
-    using K = BitSeq3;
-    using W = W3;
+    using S = uint4;
+    using W = W4;
+    using K = BitSeq4;
     using T = System.Byte;
-
-    using N = N3;
+    using N = N4;
 
     /// <summary>
-    /// Represents the value of a type-level triad and thus has domain {000,001,010,011,100,101,110,111}
+    /// Represents the value of a type-level quartet and thus is an integer in the range [0,15]
     /// </summary>
-    public readonly struct uint3 : IBitSequence<S,W,K,T>
+    public readonly struct uint4 : IUnsigned<S,W,K,T>
     {
         internal readonly byte data;
 
         public const byte MinVal = 0;
 
-        public const byte MaxVal = 7;
-
-        public const int Width = 3;        
+        public const byte MaxVal = 0xF;
 
         public const byte Count = (byte)MaxVal + 1;
 
-        public static N N => default;
+        public const byte Width = 4;        
 
         public static W W => default;
+
+        public static N N => default;
 
         /// <summary>
         /// Specifies the minimum <see cref='S'/> value
@@ -72,22 +71,13 @@ namespace Z0
             get => new S(1,true);
         }
 
-
         [MethodImpl(Inline)]
         public static implicit operator octet(S src)
-            => src.data;
+            => new octet(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator uint5(S src)
             => new uint5(src.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint4(S src)
-            => new uint4(src.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint6(S src)
-            => new uint6(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator S(octet src)
@@ -102,7 +92,7 @@ namespace Z0
             => (K)src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 8-bit integer
+        /// Converts a 4-bit integer to an unsigned 8-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -110,7 +100,7 @@ namespace Z0
             => (byte)src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 16-bit integer
+        /// Converts a 4-bit integer to an unsigned 16-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -118,7 +108,7 @@ namespace Z0
             => (ushort)src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 32-bit integer
+        /// Converts a 4-bit integer to an unsigned 32-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -126,7 +116,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 63-bit integer
+        /// Converts a 4-bit integer to an unsigned 64-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -134,7 +124,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to a signed 32-bit integer
+        /// Converts a 4-bit integer to a signed 32-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -142,32 +132,32 @@ namespace Z0
             => (int)src.data;
 
         /// <summary>
-        /// Creates a 3-bit integer from the least four bits of the source operand
+        /// Creates a 4-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static explicit operator S(byte src)
-            => uint3(src);
+            => uint4(src);
 
         /// <summary>
-        /// Creates a 3-bit integer from the least four bits of the source operand
+        /// Creates a 4-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static implicit operator S(uint src)
-            => uint3(src);
+            => uint4(src);
 
         /// <summary>
-        /// Creates a 3-bit integer from the least four bits of the source operand
+        /// Creates a 4-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static explicit operator S(ulong src)
-            => uint3(src);
+            => uint4(src);
 
         [MethodImpl(Inline)]    
         public static S @bool(bool x)
-            => uint3(x);
+            => x ? One : Zero;
 
         [MethodImpl(Inline)]    
         public static bool operator true(S x)
@@ -187,39 +177,39 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static S operator * (S lhs, S rhs)
-            => mul(lhs,rhs);
+            => reduce4((byte)(lhs.data * rhs.data));
 
         [MethodImpl(Inline)]
         public static S operator / (S lhs, S rhs) 
-            => div(lhs,rhs);
+            => wrap4((byte)(lhs.data / rhs.data));
 
         [MethodImpl(Inline)]
         public static S operator % (S lhs, S rhs)
-            => mod(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static S operator &(S lhs, S rhs)
-            => and(lhs,rhs);
+            => wrap4((byte)(lhs.data % rhs.data));
 
         [MethodImpl(Inline)]
         public static S operator |(S lhs, S rhs)
-            => or(lhs,rhs);
+            => wrap4((byte)(lhs.data | rhs.data));
+
+        [MethodImpl(Inline)]
+        public static S operator &(S lhs, S rhs)
+            => wrap4((byte)(lhs.data & rhs.data));
 
         [MethodImpl(Inline)]
         public static S operator ^(S lhs, S rhs)
-            => xor(lhs,rhs);
+            => wrap4((byte)((byte)(lhs.data & rhs.data) & MaxVal));
 
         [MethodImpl(Inline)]
-        public static S operator >>(S lhs, int count)
-            => srl(lhs, (byte)count);
+        public static S operator >>(S lhs, int rhs)
+            => uint4(lhs.data >> rhs);
 
         [MethodImpl(Inline)]
-        public static S operator <<(S lhs, int count)
-            => sll(lhs, (byte)count);
+        public static S operator <<(S lhs, int rhs)
+            => uint4(lhs.data << rhs);
 
         [MethodImpl(Inline)]
         public static S operator ~(S src)
-            => wrap3(~src.data & MaxVal);
+            => wrap4((byte)(~src.data & MaxVal));
 
         [MethodImpl(Inline)]
         public static S operator ++(S x)
@@ -253,61 +243,13 @@ namespace Z0
         public static S operator >= (S lhs, S rhs) 
             => @bool(lhs.data >= rhs.data);
 
-        [MethodImpl(Inline)]
-        internal uint3(octet src)
-            => data = (byte)(src & MaxVal);
-
-        [MethodImpl(Inline)]
-        internal uint3(byte src)
-            => data = (byte)(src & MaxVal);
-
-        [MethodImpl(Inline)]
-        internal uint3(byte src, bool @unchecked)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint3(sbyte src)
-            => data = (byte)((uint)src & MaxVal);
-
-        [MethodImpl(Inline)]
-        internal uint3(short src)
-            => data = (byte)((uint)src & MaxVal);
-
-        [MethodImpl(Inline)]
-        internal uint3(ushort src)
-            => data = (byte)(src & MaxVal);
-
-        [MethodImpl(Inline)]    
-        internal uint3(int x)
-            => data = (byte)((uint)x & MaxVal);
-        
-        [MethodImpl(Inline)]
-        internal uint3(uint src)
-            => data = (byte)(src & MaxVal);
-
-        [MethodImpl(Inline)]
-        internal uint3(long src)
-            => data = (byte)((uint)src & MaxVal);
-
-        [MethodImpl(Inline)]
-        internal uint3(uint src, bool safe)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint3(K src)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint3(BitState src)
-            => data = (byte)src;
-
         /// <summary>
-        /// Queries an index-dentified bit
+        /// Queries an index-identifed bit
         /// </summary>
         public BitState this[byte pos]
         {
             [MethodImpl(Inline)]
-            get => Bit.test(this, pos);            
+            get => Bit.test(this, pos);
         }
 
         public K Kind
@@ -352,14 +294,30 @@ namespace Z0
             get => data == MinVal;
         }
 
+        [MethodImpl(Inline)]
+        internal uint4(octet src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal uint4(byte src)
+            => data = crop4(src);
+
+        [MethodImpl(Inline)]
+        internal uint4(byte src, bool @unchecked)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint4(K src)
+            => data = (byte)src;
+
         /// <summary>
         /// Renders the source value as as hexadecimal string
         /// </summary>
         [MethodImpl(Inline)]
         public string Format()
              => format(this);
- 
-        public override string ToString()
+
+         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
@@ -368,6 +326,7 @@ namespace Z0
 
         public override bool Equals(object rhs)
             => rhs is S x && Equals(x);
+       
         public uint Hash
         {
             [MethodImpl(Inline)]
@@ -375,6 +334,6 @@ namespace Z0
         }
 
         public override int GetHashCode()
-            => (int)Hash;
-   }
+            => (int)Hash; 
+    }
 }

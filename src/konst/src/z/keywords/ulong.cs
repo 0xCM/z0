@@ -39,15 +39,5 @@ namespace Z0
         public static unsafe ulong @ulong<T>(T src)
             where T : unmanaged             
                 => *((ulong*)(&src));
-    
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T unbox<T>(object src)
-            where T : struct
-                => ref sys.unbox<T>(src);
-
-        [MethodImpl(Inline)]
-        public static ref T unbox<T>(Enum src)
-            where T : unmanaged, Enum
-                => ref sys.unbox<T>(src);
     }
 }

@@ -8,31 +8,50 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+
     using static Bit;
 
-    using S = uint4;
-    using W = W4;
-    using K = BitSeq4;
+    using S = uint2;
+    using W = W2;
+    using K = BitSeq2;
     using T = System.Byte;
-    using N = N4;
+    using N = N2;
 
     /// <summary>
-    /// Represents the value of a type-level quartet and thus is an integer in the range [0,15]
+    /// Represents the value of a type-level duet and thus has domain {00,01,10,11}
     /// </summary>
-    public readonly struct uint4 : IBitSequence<S,W,K,T>
-    {
+    public readonly struct uint2 : IUnsigned<S,W,K,T>
+    {    
         internal readonly byte data;
 
+        /// <summary>
+        /// Specifies the inclusive lower bound of the <see cref='S'/> data type as a literal value
+        /// </summary>
         public const byte MinVal = 0;
 
-        public const byte MaxVal = 0xF;
+        /// <summary>
+        /// Specifies the inclusive upper bound of the <see cref='S'/> data type as a literal value
+        /// </summary>
+        public const byte MaxVal = 3;
 
-        public const byte Count = (byte)MaxVal + 1;
+        /// <summary>
+        /// Specifies the bit-width of the <see cref='S'/> data type
+        /// </summary>
+        public const byte Width = 2;        
 
-        public const byte Width = 4;        
+        /// <summary>
+        /// Specifies the count of unique values representable by a <see cref='S'/>
+        /// </summary>
+        public const uint Count = MaxVal + 1;
 
+        /// <summary>
+        /// Specifies a <see cref='S'/> bitwidth <see ref='W'/> representative
+        /// </summary>
         public static W W => default;
 
+        /// <summary>
+        /// Specifies the <see cref='S'/> bit-width as a natural number
+        /// </summary>
         public static N N => default;
 
         /// <summary>
@@ -72,16 +91,28 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator octet(S src)
-            => new octet(src.data);
+        public static implicit operator S(octet src)
+            => new S(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint3(S src)
+            => new uint3(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint4(S src)
+            => new uint4(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator uint5(S src)
             => new uint5(src.data);
 
         [MethodImpl(Inline)]
-        public static implicit operator S(octet src)
-            => new S(src);
+        public static implicit operator uint6(S src)
+            => new uint6(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator octet(S src)
+            => new octet(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator S(K src)
@@ -91,8 +122,28 @@ namespace Z0
         public static implicit operator K(S src)
             => (K)src.data;
 
+        [MethodImpl(Inline)]
+        public static implicit operator S(Hex2Kind src) 
+            => (byte)src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator S(X00 src) 
+            => (byte)src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator S(X01 src) 
+            => (byte)src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator S(X02 src) 
+            => (byte)src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator S(X03 src) 
+            => (byte)src;
+
         /// <summary>
-        /// Converts a 4-bit integer to an unsigned 8-bit integer
+        /// Implicitly promotes a <see cref='S'> value to a <see cref='byte'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -100,7 +151,7 @@ namespace Z0
             => (byte)src.data;
 
         /// <summary>
-        /// Converts a 4-bit integer to an unsigned 16-bit integer
+        /// Implicitly promotes a <see cref='S'> value to a <see cref='ushort'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -108,7 +159,7 @@ namespace Z0
             => (ushort)src.data;
 
         /// <summary>
-        /// Converts a 4-bit integer to an unsigned 32-bit integer
+        /// Implicitly promotes a <see cref='S'> value to a <see cref='uint'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -116,7 +167,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 4-bit integer to an unsigned 64-bit integer
+        /// Implicitly promotes a <see cref='S'> value to a <see cref='ulong'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -124,7 +175,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 4-bit integer to a signed 32-bit integer
+        /// Implicitly promotes a <see cref='S'> value to a <see cref='int'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -132,32 +183,32 @@ namespace Z0
             => (int)src.data;
 
         /// <summary>
-        /// Creates a 4-bit integer from the least four bits of the source operand
+        /// Converts a <see cref='byte'> value to a <see cref='S'/> value, truncating as necessary
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static explicit operator S(byte src)
-            => uint4(src);
+            => create(W,src);
 
         /// <summary>
-        /// Creates a 4-bit integer from the least four bits of the source operand
+        /// Creates a 3-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static implicit operator S(uint src)
-            => uint4(src);
+            => create(W,src);
 
         /// <summary>
-        /// Creates a 4-bit integer from the least four bits of the source operand
+        /// Creates a 3-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static explicit operator S(ulong src)
-            => uint4(src);
+            => create(W,src);
 
         [MethodImpl(Inline)]    
-        public static S @bool(bool x)
-            => x ? One : Zero;
+        public static S @bool(bool src)
+            => create(W,src);
 
         [MethodImpl(Inline)]    
         public static bool operator true(S x)
@@ -177,39 +228,39 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static S operator * (S lhs, S rhs)
-            => reduce4((byte)(lhs.data * rhs.data));
+            => mul(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static S operator / (S lhs, S rhs) 
-            => wrap4((byte)(lhs.data / rhs.data));
+            => div(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static S operator % (S lhs, S rhs)
-            => wrap4((byte)(lhs.data % rhs.data));
-
-        [MethodImpl(Inline)]
-        public static S operator |(S lhs, S rhs)
-            => wrap4((byte)(lhs.data | rhs.data));
+            => mod(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static S operator &(S lhs, S rhs)
-            => wrap4((byte)(lhs.data & rhs.data));
+            => and(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static S operator |(S lhs, S rhs)
+            => or(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static S operator ^(S lhs, S rhs)
-            => wrap4((byte)((byte)(lhs.data & rhs.data) & MaxVal));
+            => xor(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static S operator >>(S lhs, int rhs)
-            => uint4(lhs.data >> rhs);
+        public static S operator >>(S lhs, int count)
+            => srl(lhs, (byte)count);
 
         [MethodImpl(Inline)]
-        public static S operator <<(S lhs, int rhs)
-            => uint4(lhs.data << rhs);
+        public static S operator <<(S lhs, int count)
+            => sll(lhs, (byte)count);
 
         [MethodImpl(Inline)]
         public static S operator ~(S src)
-            => wrap4((byte)(~src.data & MaxVal));
+            => wrap2(~src.data & MaxVal);
 
         [MethodImpl(Inline)]
         public static S operator ++(S x)
@@ -243,13 +294,61 @@ namespace Z0
         public static S operator >= (S lhs, S rhs) 
             => @bool(lhs.data >= rhs.data);
 
+        [MethodImpl(Inline)]
+        internal uint2(octet src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal uint2(byte src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal uint2(byte src, bool @unchecked)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint2(sbyte src)
+            => data = (byte)((byte)src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal uint2(short src)
+            => data = (byte)((byte)src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal uint2(ushort src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]    
+        internal uint2(int x)
+            => data = (byte)((byte)x & MaxVal);
+        
+        [MethodImpl(Inline)]
+        internal uint2(uint src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal uint2(long src)
+            => data = (byte)((byte)src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal uint2(uint src, bool safe)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint2(K src)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint2(BitState src)
+            => data = (byte)src;
+
         /// <summary>
-        /// Queries an index-identifed bit
+        /// Queries an index-identified bit
         /// </summary>
         public BitState this[byte pos]
         {
             [MethodImpl(Inline)]
-            get => Bit.test(this, pos);
+            get => Bit.test(this, pos);            
         }
 
         public K Kind
@@ -294,22 +393,6 @@ namespace Z0
             get => data == MinVal;
         }
 
-        [MethodImpl(Inline)]
-        internal uint4(octet src)
-            => data = (byte)(src & MaxVal);
-
-        [MethodImpl(Inline)]
-        internal uint4(byte src)
-            => data = crop4(src);
-
-        [MethodImpl(Inline)]
-        internal uint4(byte src, bool @unchecked)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint4(K src)
-            => data = (byte)src;
-
         /// <summary>
         /// Renders the source value as as hexadecimal string
         /// </summary>
@@ -317,7 +400,7 @@ namespace Z0
         public string Format()
              => format(this);
 
-         public override string ToString()
+        public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
@@ -334,6 +417,6 @@ namespace Z0
         }
 
         public override int GetHashCode()
-            => (int)Hash; 
-    }
+            => (int)Hash;
+   }
 }

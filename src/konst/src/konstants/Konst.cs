@@ -26,11 +26,6 @@ namespace Z0
         public static Type EmptyType => typeof(void);
         
         /// <summary>
-        /// A method considered to be empty
-        /// </summary>
-        public static MethodInfo EmptyMethod => DefaultMethod.Empty;
-
-        /// <summary>
         /// Uppercase letter classifier accessor
         /// </summary>
         public static UpperCased UpperCase => default;

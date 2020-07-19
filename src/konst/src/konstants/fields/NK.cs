@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// Specifies unsigned integral types of widths <see cref='NumericWidths'/>
         /// </summary>
-         public const NK UnsignedInts = NK.UnsignedInts;
+        public const NK UnsignedInts = NK.UnsignedInts;
 
         /// <summary>
         /// Specifies signed integral types of widths <see cref='NumericWidths'/>

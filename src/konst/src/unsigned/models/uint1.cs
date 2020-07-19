@@ -10,30 +10,27 @@ namespace Z0
     using static Konst;
     using static Bit;
 
-    using S = uint6;
-    using W = W6;
-    using K = BitSeq6;
+    using S = uint1;
+    using K = BitSeq1;
+    using W = W1;
     using T = System.Byte;
-    using N = N6;
 
     /// <summary>
-    /// Represents the value of a type-level sextet and thus is an integer in the range [0,63]
+    /// Represents the value of a type-level single and thus has domain {0,1}
     /// </summary>
-    public readonly struct uint6 : IBitSequence<S,W,K,T>
+    public readonly struct uint1 : IUnsigned<S,W,K,T>
     {
         internal readonly byte data;
 
         public const byte MinVal = 0;
 
-        public const byte MaxVal = 63;
+        public const byte MaxVal = 1;
 
-        public const byte Count = MaxVal + 1;
+        public const uint Count = MaxVal + 1;
 
-        public const byte Width = 6;        
+        public const byte Width = 1;        
 
-        public static W W => default;
-
-        public static N N => default;
+        public static W W => default;        
 
         /// <summary>
         /// Specifies the minimum <see cref='S'/> value
@@ -72,31 +69,63 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static implicit operator uint2(S src)
+            => new uint2(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint3(S src)
+            => new uint3(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint4(S src)
+            => new uint4(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint5(S src)
+            => new uint5(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint6(S src)
+            => new uint6(src.data);
+
+        [MethodImpl(Inline)]
         public static implicit operator octet(S src)
-            => src.data;
+            => new octet(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator S(octet src)
             => new S(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator S(K src)
+        public static implicit operator S(BitState src)
             => new S(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator K(S src)
-            => (K)src.data;
+        public static implicit operator bool(S src)
+            => src.data == 1;
+
+        [MethodImpl(Inline)]
+        public static implicit operator S(bit src)
+            => new S((uint)src);
 
         /// <summary>
-        /// Converts a 5-bit integer to an unsigned 8-bit integer
+        /// Converts a 1-bit integer to an unsigned 8-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static implicit operator byte(S src)
             => (byte)src.data;
 
+        [MethodImpl(Inline)]
+        public static implicit operator S(X00 src) 
+            => (byte)src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator S(X01 src) 
+        => (byte)src;
+
         /// <summary>
-        /// Converts a 5-bit integer to an unsigned 16-bit integer
+        /// Converts a 1-bit integer to an unsigned 16-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -104,7 +133,7 @@ namespace Z0
             => (ushort)src.data;
 
         /// <summary>
-        /// Converts a 5-bit integer to an unsigned 32-bit integer
+        /// Converts a 1-bit integer to an unsigned 32-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -112,7 +141,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 5-bit integer to an unsigned 65-bit integer
+        /// Converts a 1-bit integer to an unsigned 61-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -120,7 +149,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 5-bit integer to a signed 32-bit integer
+        /// Converts a 1-bit integer to a signed 32-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -128,32 +157,36 @@ namespace Z0
             => (int)src.data;
 
         /// <summary>
-        /// Creates a 5-bit integer from the least four bits of the source operand
+        /// Creates a 1-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static explicit operator S(byte src)
-            => uint6(src);
+            => uint1(src);
 
         /// <summary>
-        /// Creates a 5-bit integer from the least four bits of the source operand
+        /// Creates a 1-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static implicit operator S(uint src)
-            => uint6(src);
+            => uint1(src);
 
         /// <summary>
-        /// Creates a 5-bit integer from the least four bits of the source operand
+        /// Creates a 1-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static explicit operator S(ulong src)
-            => uint6(src);
+            => uint1(src);
+
+        [MethodImpl(Inline)]    
+        public static implicit operator S(bool src)
+            => uint1(src);
 
         [MethodImpl(Inline)]    
         public static S @bool(bool x)
-            => uint6(x);
+            => uint1(x);
 
         [MethodImpl(Inline)]    
         public static bool operator true(S x)
@@ -205,7 +238,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static S operator ~(S src)
-            => wrap6((byte)(~src.data & MaxVal));
+            => wrap1(~src.data & MaxVal);
 
         [MethodImpl(Inline)]
         public static S operator ++(S x)
@@ -240,62 +273,49 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
-        internal uint6(octet src)
+        internal uint1(octet src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint6(byte src)
+        internal uint1(byte src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint6(byte src, bool @unchecked)
+        internal uint1(byte src, bool @unchecked)
             => data = (byte)src;
-        
+
         [MethodImpl(Inline)]
-        internal uint6(sbyte src)
+        internal uint1(sbyte src)
             => data = (byte)((uint)src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint6(short src)
+        internal uint1(short src)
             => data = (byte)((uint)src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint6(ushort src)
+        internal uint1(ushort src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]    
-        internal uint6(int x)
+        internal uint1(int x)
             => data = (byte)((uint)x & MaxVal);
         
         [MethodImpl(Inline)]
-        internal uint6(uint src)
+        internal uint1(uint src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint6(long src)
+        internal uint1(long src)
             => data = (byte)((uint)src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint6(uint src, bool safe)
+        internal uint1(uint src, bool safe)
             => data = (byte)src;
 
         [MethodImpl(Inline)]
-        internal uint6(K src)
+        internal uint1(BitState src)
             => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint6(BitState src)
-            => data = (byte)src;
-
-        /// <summary>
-        /// Queries and manipulates a bit identified by its 0-based index
-        /// </summary>
-        public BitState this[byte pos]
-        {
-            [MethodImpl(Inline)]
-            get => Bit.test(this, pos);            
-        }
-
+        
         public K Kind
         {
             [MethodImpl(Inline)]
@@ -307,7 +327,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data;
         }
- 
+
         public bool IsZero
         {
             [MethodImpl(Inline)]
@@ -338,20 +358,12 @@ namespace Z0
             get => data == MinVal;
         }
 
-        [MethodImpl(Inline)]
-        public string Format(N2 b)
-            => BitFormatter.format(data,Width);
-
-        [MethodImpl(Inline)]
-        public string Format(N16 b)
-            => data.FormatHex(false, false);
-
+        /// <summary>
+        /// Renders the source value as as hexadecimal string
+        /// </summary>
         [MethodImpl(Inline)]
         public string Format()
-             => format(this);
-
-        public override string ToString()
-            => Format();
+            => data == 0 ? "0" : "1";
 
         [MethodImpl(Inline)]
         public bool Equals(S rhs)

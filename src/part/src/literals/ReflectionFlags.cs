@@ -58,7 +58,9 @@ namespace Z0
         ///  All declared non-public instance members
         /// </summary>
         public const BindingFlags BF_NonPublicInstance = FlattenHierarchy | NonPublic | Instance;
-                    
+
+        public const BindingFlags BF_World = BF_NonPublicStatic | BF_NonPublicInstance | BF_PublicInstance | BF_PublicStatic;
+        
         /// <summary>
         ///  All members, declared or inherited
         /// </summary>

@@ -41,7 +41,6 @@ namespace Z0
             get => VesselType.GetNestedTypes()[0];
         }
 
-
         public static Type EmptyClass
         {
             [MethodImpl(Inline)]
@@ -52,6 +51,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => VesselType.GetNestedTypes()[2];
+        }
+
+        public static MethodInfo EmptyMethod
+        {
+            [MethodImpl(Inline)]
+            get => VesselType.GetMethods(BF_All)[0];
         }
 
         [MethodImpl(Inline)]
