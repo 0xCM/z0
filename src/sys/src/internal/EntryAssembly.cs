@@ -8,23 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-
-    [ApiHost]
-    public readonly partial struct Reflex
+    using static OpacityKind;
+    
+    partial struct proxy
     {
-        const BindingFlags BF = ReflectionFlags.BF_All;       
-
         public static Assembly EntryAssembly 
         {
-            [MethodImpl(Inline), Op]
-            get => sys.EntryAssembly;
+            [MethodImpl(Options), Opaque(GetEntryAssembly)]
+            get => Assembly.GetEntryAssembly();
         }
 
         public static Assembly ThisAssembly
         {
-            [MethodImpl(Inline), Op]
-            get => sys.ThisAssembly;
+            [MethodImpl(Options), Opaque(GetCallingAssembly)]
+            get => Assembly.GetCallingAssembly();
         }
     }
 }

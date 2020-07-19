@@ -8,12 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-
-    partial struct Reflex
+    partial struct sys
     {
-        [MethodImpl(Inline), Op]
-        public static ClrAssembly assembly(Assembly src)
-            => new ClrAssembly(src);
+        public static Assembly EntryAssembly 
+        {
+            [MethodImpl(Options), Op]
+            get => proxy.EntryAssembly;
+        }
+
+        public static Assembly ThisAssembly
+        {
+            [MethodImpl(Options), Op]
+            get => proxy.ThisAssembly;
+        }
     }
 }

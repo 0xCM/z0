@@ -13,7 +13,7 @@ namespace Z0
     public interface ITypeIdentityProvider : IIdentityProvider<Type,TypeIdentity>
     {        
         IEnumerable<Type> Identifiable 
-            => z.seq<Type>();
+            => z.stream<Type>();
 
         bool CanIdentify(Type src)
             => Identifiable.Contains(src);
@@ -34,7 +34,7 @@ namespace Z0
         TypeIdentity Identity();
         
         IEnumerable<Type> ITypeIdentityProvider.Identifiable
-            => z.seq(typeof(S));
+            => z.stream(typeof(S));
 
         TypeIdentity IIdentityProvider<Type,TypeIdentity>.Identify(Type src)
             => Identity();

@@ -64,6 +64,6 @@ namespace Z0
             => Resources.code(Assembly.LoadFrom(app.AppPaths.ResBytes.Name));
         
         public void Emit(IAppContext app)
-            => EmitResBytes(app);
+            => All(app);
     }
 }

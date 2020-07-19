@@ -33,7 +33,7 @@ namespace Z0
         /// Models of the types nested within the subject, if any
         /// </summary>
         IEnumerable<IClrType> NestedTypes 
-            => z.seq<IClrType>();
+            => z.stream<IClrType>();
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
             => Metadata;
         
         new IEnumerable<T> NestedTypes
-            => z.seq<T>();
+            => z.stream<T>();
 
         IEnumerable<IClrType> IClrType.NestedTypes
             => NestedTypes.Cast<IClrType>();

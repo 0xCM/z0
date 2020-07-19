@@ -33,8 +33,7 @@ namespace Z0
         /// <param name="src">The items included in the stream</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IEnumerable<T> stream<T>(params T[] src)
-            where T : struct
-                => src;
+            => src;
 
         /// <summary>
         /// Procduces a nonempty finite value stream
@@ -44,7 +43,6 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IEnumerable<T> stream<T>(T head, params T[] tail)
-            where T : struct
         {
             var count = tail.Length + 1;
             var buffer = alloc<T>(count);            
@@ -54,7 +52,7 @@ namespace Z0
             for(var i=1u; i<count; i++)
                 seek(dst,i) = skip(src,i);
             
-            return Indexed.values(buffer);
+            return buffer;
         }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IEnumerable<T> stream<T>(T head, IEnumerable<T> tail)
-            => seq(head).Concat(tail);
+            => stream(head).Concat(tail);
 
         /// <summary>
         /// Procduces an output stream by concatenating three input streams

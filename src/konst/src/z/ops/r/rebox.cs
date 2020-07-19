@@ -20,7 +20,8 @@ namespace Z0
         [Op]
         public static object rebox(object src, NumericKind dst)
         {            
-            switch(dst)
+            var _nk = src.GetType().NumericKind();
+            switch(_nk)
             {
                 case NK.I8:
                     return box((sbyte)src, dst);

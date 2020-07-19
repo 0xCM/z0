@@ -147,8 +147,7 @@ public enum PartId : ulong
     Symbolic = 157, 
     
     Identify = 158, 
-
-                   
+                  
     Apps = 160,     
     
     Numeric = 161,  
@@ -160,7 +159,6 @@ public enum PartId : ulong
     VCheck = 164,
 
     ZXed = 165,
-
     
     Text = 167,
 
@@ -178,7 +176,6 @@ public enum PartId : ulong
     Dynamo = 302,
 
     Collections = 303,
-
     
     Floor = 305,
 

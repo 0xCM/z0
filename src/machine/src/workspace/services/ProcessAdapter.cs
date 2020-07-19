@@ -174,7 +174,7 @@ namespace Z0.MetaCore
         public CorrelationToken Transmit(IMessage command)
         {
             var token = CorrelationToken.New();
-            messages.Enqueue(z.stream(command, z.seq(new Message("",$"echo command {token} completed"))));
+            messages.Enqueue(z.stream(command, z.stream(new Message("",$"echo command {token} completed"))));
             return token;
         }
 

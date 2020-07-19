@@ -18,7 +18,6 @@ namespace Z0.Asm
             Context = context;
         }
 
-
         static void emit(FieldRef[] fields, FilePath path)
         {            
             const string Sep = "| ";

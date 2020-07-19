@@ -14,12 +14,12 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// An indespensable combinator that produces a stream from a parameter array
+        /// Produces an indexed sequence from a parameter array
         /// </summary>
         /// <param name="src">The source items</param>
         /// <typeparam name="T">The item type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<T> seq<T>(params T[] src)
+        public static IndexedSeq<T> seq<T>(params T[] src)
             => src;
     }
 }

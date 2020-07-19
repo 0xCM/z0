@@ -154,7 +154,7 @@ namespace Z0.MetaCore
             => _CorrelationToken;
 
         public IEnumerable<IAppMsg> InnerMessages
-            => z.seq<IAppMsg>();
+            => z.stream<IAppMsg>();
 
         object IAppMsg.Content 
             => _Content;

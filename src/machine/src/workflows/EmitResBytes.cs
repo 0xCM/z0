@@ -15,6 +15,12 @@ namespace Z0
     
     public readonly struct EmitResBytes : IWorkflowStep<EmitResBytes>
     {
+        public static WorkflowIdentity Identity
+        {
+            [MethodImpl(Inline)]
+            get => Workflows.identify(PartId.Machine, nameof(EmitResBytes));
+        }
+        
         const string ProjectName = "bytes";
 
         readonly IEncodedHexArchive Source;

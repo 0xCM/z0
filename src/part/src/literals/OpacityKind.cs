@@ -100,5 +100,8 @@ namespace Z0
 
       FormatCharSpan,
 
+      GetEntryAssembly,
+
+      GetCallingAssembly,
     }
 }

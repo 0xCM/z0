@@ -17,7 +17,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to examine</param>
         /// <param name="predicate">The predicate to match</param>
-        public static IEnumerable<ParameterInfo> Parameters(this MethodInfo src, Func<ParameterInfo,bool> predicate)
+        public static ParameterInfo[] Parameters(this MethodInfo src)
+            => src.GetParameters();
+
+        /// <summary>
+        /// Selects the method parameters that satisfy a predicate
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        /// <param name="predicate">The predicate to match</param>
+        public static ParameterInfo[] Parameters(this MethodInfo src, Func<ParameterInfo,bool> predicate)
             => src.GetParameters().Where(predicate);
 
         /// <summary>

@@ -9,4 +9,6 @@ msbuild /? > msbuild.doc
 nuget > nuget.doc
 dotnet help > dotnet.doc
 copy /? > copy.doc
+git --help > git-help.doc
+git help -a > git-help-a.doc
 echo ON

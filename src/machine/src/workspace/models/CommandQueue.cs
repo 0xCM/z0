@@ -118,7 +118,7 @@ namespace Z0.MetaCore
                     .Select(x => x.Map(y => CommandSubmission.Create(y.Spec, y.SubmissionId, y.CommandJson, y.CorrelationToken, y.EnqueuedTime)));
 
         Option<CommandSubmission<S>> ICommandQueue<S>.Enqueue(S command, SystemNode target, CorrelationToken? ct)
-            => from submissions in ExecStore.Submit(z.seq(command), target, ct)
+            => from submissions in ExecStore.Submit(z.stream(command), target, ct)
                 select submissions.SingleOrDefault();
     }
 }

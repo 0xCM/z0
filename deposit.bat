@@ -9,4 +9,3 @@ robocopy "%ZLogs%\exports" K:\z0\archives\exports /MIR /log:"%ZLogs%\etl\exports
 
 robocopy "%ZLogs%\etl" K:\z0\archives\etl /MIR /log:"%ZLogs%\etl\etl-archive.log" /tee /TS /BYTES /V
 copy "%ZDev%\version" /A  K:\z0\archives /Y
-REM J:\tools\git\bin\bash.exe J:\dev\projects\z0\archive.sh
