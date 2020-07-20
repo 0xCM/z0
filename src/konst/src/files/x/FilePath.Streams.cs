@@ -16,11 +16,9 @@ namespace Z0
         /// Creates a reader initialized with the source file; caller-disposal required
         /// </summary>
         /// <param name="src">The file path</param>
-        [MethodImpl(Inline)]
         public static StreamReader Reader(this FilePath src)
             => new StreamReader(src.Name);
 
-        [MethodImpl(Inline)]
         public static StreamWriter Writer(this FilePath dst, FileWriteMode mode)
             => new StreamWriter(dst.CreateParentIfMissing().Name, mode == FileWriteMode.Append);
 
@@ -28,7 +26,6 @@ namespace Z0
         /// Creates an overwriting and caller-disposed stream writer that targets a specified path
         /// </summary>
         /// <param name="dst">The file path</param>
-        [MethodImpl(Inline)]
         public static StreamWriter Writer(this FilePath dst)
             => new StreamWriter(dst.CreateParentIfMissing().Name, false);
 
@@ -36,7 +33,6 @@ namespace Z0
             where T : ITextual
                 => new PartFileWriter<T>(dst);
 
-        [MethodImpl(Inline)]
         public static BinaryWriter BinaryWriter(this FilePath dst)
             => new BinaryWriter(File.Open(dst.CreateParentIfMissing().Name, FileMode.Create));
     }

@@ -33,6 +33,10 @@ namespace Z0
 
         // \\?\, \\.\, \??\
         public const int DevicePrefixLength = 4;
+
+        public const byte DirectorySeparator = 0x5c;
+
+        public const byte DirectorySeparatorAlt = 0x2f;
     }
 
     partial struct Windows
@@ -41,12 +45,23 @@ namespace Z0
         [ApiHost]
         public static partial class PathInternal
         {
+            [Op, MethodImpl(Options)]
+            public static bool IsDirectorySeparator(byte c)
+                => c == DirectorySeparator || c == DirectorySeparatorAlt;
+
+            [Op]
+            public static bool EndsInDirectorySeparator(ReadOnlySpan<byte> path)
+            {
+                var last = path.Length - 1;
+                return last >= 0 ? IsDirectorySeparator(path[last]) : false;
+            }
+
             /// <summary>
             /// True if the given character is a directory separator.
             /// </summary>
             [Op, MethodImpl(Options)]
             public static bool IsDirectorySeparator(char c)
-                => c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
+                => c == DirectorySeparator || c == DirectorySeparatorAlt;
 
             [Op]
             public static bool EndsInDirectorySeparator(ReadOnlySpan<char> path)

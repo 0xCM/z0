@@ -8,18 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
- 
-    public readonly struct PartFileKind
-    {        
-        public readonly PartFileClass Class;
-        
-        public readonly FileExt Ext;
 
-        [MethodImpl(Inline)]
-        public PartFileKind(PartFileClass @class, FileExt ext)
-        {
-            Class = @class;
-            Ext = ext;
-        }
+    partial struct z
+    {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe char* p16c<T>(in T src)
+            where T : unmanaged
+                => refptr<T,char>(ref edit(src));
     }
 }

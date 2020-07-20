@@ -9,26 +9,26 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct CilFileKind  : IFileKind<PartFileClass>
+    public readonly struct CilFileKind
     {
         public const string ExtensionName = "cil";
 
         public const PartFileClass FileKind = PartFileClass.Cil;
 
+        public PartFileClass Classifier 
+            => FileKind;
+
+        public string Ext 
+            => ExtensionName;
+
+        public string Format()
+            => ExtensionName;
+
+        public override string ToString()
+            => ExtensionName;
+
         [MethodImpl(Inline)]
         public static implicit operator PartFileKind(CilFileKind src)
-            => PartFileKinds.define(FileKind,ExtensionName);
-
-        public PartFileClass Classifier 
-        {
-            [MethodImpl(Inline)]
-            get => FileKind;
-        }
-
-        public FileExt Ext 
-        {
-            [MethodImpl(Inline)]
-            get => ExtensionName;
-        }    
+            => new PartFileKind(FileKind, ExtensionName);
     }
 }

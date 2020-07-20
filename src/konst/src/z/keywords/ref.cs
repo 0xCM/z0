@@ -22,6 +22,14 @@ namespace Z0
             => new StringRef((ulong)pchar(src), (uint)src.Length);
 
         /// <summary>
+        /// Creates a reference to a string that includes 32 bits of arbitrary data
+        /// </summary>
+        /// <param name="src">The source string</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe StringRef @ref(string src, uint user)
+            => new StringRef((ulong)pchar(src), (uint)src.Length, user);
+
+        /// <summary>
         /// Creates a character reference from a <see cref='StringRef'/?
         /// </summary>
         /// <param name="src">The source reference</param>

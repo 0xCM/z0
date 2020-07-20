@@ -66,6 +66,7 @@ namespace Z0
                     dst.Append(src[i]);
 
             }
+            
             return dst.ToString();
         }
 
@@ -83,7 +84,6 @@ namespace Z0
 
             writer.WriteLine(names);
             Root.iter(delimited, writer.WriteLine);
-
         }
 
         public void OnEvent(DecodedMachine e)
@@ -106,9 +106,6 @@ namespace Z0
             if(SemanticFormatEnabled)
                 workflow.Render(e.Instructions);
         }
-
-
-        
 
         void DecodeParts(EncodedIndex src)
         {
@@ -182,14 +179,11 @@ namespace Z0
                 IndexBuilder.Include(MemberCode.Define(src.Uri, src.Data));
         }
 
-
         void ParseReport(FilePath src)
         {
             var report = ParseReportParser.Service.Parse(src);
-
-            report
-                    .OnFailure(fail => term.error(fail.Reason))
-                    .OnSuccess(value => Broker.Raise(new LoadedParseReport(value, src)));
+            report.OnFailure(fail => term.error(fail.Reason))
+                  .OnSuccess(value => Broker.Raise(new LoadedParseReport(value, src)));
         }
 
         void ParseReports()
@@ -220,6 +214,5 @@ namespace Z0
         {
  
         }
-
     }
 }

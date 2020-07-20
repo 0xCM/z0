@@ -15,6 +15,13 @@ namespace Z0
     
     public readonly struct PartFiles
     {
+        readonly TAppPaths AppPaths;
+
+        [MethodImpl(Inline)]
+        internal PartFiles(IAsmContext context)
+            => AppPaths = context.AppPaths.ForApp(PartId.Control);            
+
+        [MethodImpl(Inline)]
         public static PartFiles create(IAsmContext context)
             => new PartFiles(context);
 
@@ -33,37 +40,32 @@ namespace Z0
                         return records.Value;
                 }                    
             }       
+            
             return sys.empty<MemberParseRecord>();
         }
 
-        public FilePath[] List<K>(params PartId[] parts)
-            where K : IFileKind
+        [MethodImpl(Inline)]
+        public static FilePath[] List<K>(FolderPath root, params PartId[] parts)
+            where K : unmanaged
         {
             if(typeof(K) == typeof(AsmFileKind))
-                return PartAsmFiles(parts);            
+                return AsmPaths(root, parts);            
             else if(typeof(K) == typeof(HexFileKind))
-                return PartHexFiles(parts);            
+                return HexPaths(root, parts);            
             else if(typeof(K) == typeof(ParsedFileKind))
-                return PartParseFiles(parts);            
+                return ParsePaths(root, parts);            
             else 
                 return sys.empty<FilePath>();
         }
 
-        readonly IAsmContext Context;
+        public static FilePath[] AsmPaths(FolderPath root, params PartId[] parts)
+            => CaptureArchive(root).AsmFilePaths(parts);
 
-        readonly TArchives DataSource; 
+        public static FilePath[] HexPaths(FolderPath root, params PartId[] parts)
+            => CaptureArchive(root).HexFilePaths(parts);
 
-        readonly TAppPaths AppPaths;
-
-        readonly object[] Collected;
-
-        internal PartFiles(IAsmContext context)
-        {
-            Context = context;
-            DataSource = Archives.Services;            
-            AppPaths = Context.AppPaths.ForApp(PartId.Control);
-            Collected = sys.alloc<object>(4);
-        }
+        public static FilePath[] ParsePaths(FolderPath root, PartId[] parts)
+            => CaptureArchive(root).ParseFilePaths(parts);
         
         public FolderPath ArchiveRoot 
             => AppPaths.AppCaptureRoot;
@@ -77,15 +79,6 @@ namespace Z0
         public FilePath[] HexFiles
             => CaptureArchive(AppPaths.AppCaptureRoot).HexFiles;
 
-        public FilePath[] PartParseFiles(PartId[] parts)
-            => CaptureArchive(AppPaths.AppCaptureRoot).ParseFilePaths(parts);
-
-        public FilePath[] PartAsmFiles(params PartId[] parts)
-            => CaptureArchive(AppPaths.AppCaptureRoot).AsmFilePaths(parts);
-
-        public FilePath[] PartHexFiles(params PartId[] parts)
-            => CaptureArchive(AppPaths.AppCaptureRoot).HexFilePaths(parts);
-
         public Dictionary<PartId,PartFile[]> ParseFileIndex(params PartId[] parts)
             => SelectFiles(PartFileClass.Parsed, ParseFiles, parts);
         
@@ -95,7 +88,7 @@ namespace Z0
         public Dictionary<PartId,PartFile[]> AsmFileIndex(params PartId[] parts)
             => SelectFiles(PartFileClass.Asm, AsmFiles, parts);
         
-        Dictionary<PartId,PartFile[]> SelectFiles(PartFileClass kind, IEnumerable<FilePath> src, params PartId[] parts)
+        static Dictionary<PartId,PartFile[]> SelectFiles(PartFileClass kind, IEnumerable<FilePath> src, params PartId[] parts)
         {
             var partSet = parts.ToHashSet();
 
@@ -107,8 +100,11 @@ namespace Z0
             return files;
         }
 
+        static TArchives ArchiveServices 
+            => Archives.Services;
+
         [MethodImpl(Inline)]
-        TPartCaptureArchive CaptureArchive(FolderPath root)
-            => DataSource.CaptureArchive(root, null, null);
+        static TPartCaptureArchive CaptureArchive(FolderPath root)
+            => ArchiveServices.CaptureArchive(root, null, null);
     }
 }

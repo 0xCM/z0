@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address(string src)
             => address(pchar(src));
-
+            
         /// <summary>
         /// Determines the address of a reference
         /// </summary>

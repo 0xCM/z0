@@ -5,15 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IFileKind
-    {
-        FileExt Ext {get;}        
-    }
+    using static Konst;
 
-    public interface IFileKind<E> : IFileKind
-        where E : unmanaged, Enum
+    partial struct z
     {
-        E Classifier {get;}
+        [MethodImpl(Inline), Op]
+        public static string interned(string src)
+            => string.IsInterned(src);
     }
 }

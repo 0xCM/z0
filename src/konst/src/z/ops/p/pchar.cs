@@ -18,5 +18,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe char* pchar(string src) 
             => gptr(first(span(src)));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe char* pchar2(string src)
+            => gptr(@as<string,char>(src));            
     }
 }
