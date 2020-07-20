@@ -76,11 +76,10 @@ namespace Z0
         public static ApiHostUri FromHost(Type host)
         {
             var tag = host.Tag<ApiHostAttribute>();
-            var name = z.ifblank(tag.MapValueOrDefault(x => x.HostName), host.Name);
+            var name = ifblank(tag.MapValueOrDefault(x => x.HostName), host.Name);
             var owner = host.Assembly.Id();
             return new ApiHostUri(owner, name);
         }
-
 
         [MethodImpl(Inline)]
         public static ApiHostUri FromHost<H>()

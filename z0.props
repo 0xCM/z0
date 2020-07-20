@@ -4,7 +4,7 @@
 
     <LogDir>$(ZLogs)\</LogDir>
     <ResLibDir>$(LogDir)res\bin\lib\netcoreapp3.0\</ResLibDir>
-    <ResBytesLib>z0.res.bytes</ResBytesLib>          
+    <ResBytesLib>z0.res</ResBytesLib>          
 
   </PropertyGroup>
 

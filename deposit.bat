@@ -7,5 +7,7 @@ robocopy "%ZLogs%\apps\xed" K:\z0\archives\xed /MIR /log:"%ZLogs%\etl\xed-archiv
 robocopy "%ZLogs%\res" K:\z0\archives\res /MIR /log:"%ZLogs%\etl\res-archive.log" /tee /TS /BYTES /V
 robocopy "%ZLogs%\exports" K:\z0\archives\exports /MIR /log:"%ZLogs%\etl\exports-archive.log" /tee /TS /BYTES /V
 
+robocopy "%ZLogs%\apps\machine\resbytes" "%ZLogs%\res\asm" /MIR /log:"%ZLogs%\etl\machine-res.log" /tee /TS /BYTES /V
+
 robocopy "%ZLogs%\etl" K:\z0\archives\etl /MIR /log:"%ZLogs%\etl\etl-archive.log" /tee /TS /BYTES /V
 copy "%ZDev%\version" /A  K:\z0\archives /Y
