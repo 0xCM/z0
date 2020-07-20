@@ -25,7 +25,7 @@ namespace Z0
 
         const string EmptyString = "";
 
-        const MethodImplOptions Options = MethodImplOptions.AggressiveInlining;                    
+        internal const MethodImplOptions Options = MethodImplOptions.AggressiveInlining;                    
     }
 
     [ApiHost]
