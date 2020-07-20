@@ -13,6 +13,9 @@
 
   <Import Project="$(Src)symbols.props"/>  
   <Import Project="$(Native)symbols.props"/>
+  <Import Project=".props/version.props"/>    
+  <Import Project=".props/options.props"/>    
+  <Import Project=".props/locations.props"/>    
 
   <Import Project="z0.props"/>    
 

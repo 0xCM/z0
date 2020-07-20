@@ -1,6 +1,13 @@
 <Project>
 
   <PropertyGroup>
+    <IntermediateBuildDir>$(BuildRootDir)obj\$(MSBuildProjectName)\</IntermediateBuildDir>
+    <BaseIntermediateOutputPath>$(IntermediateBuildDir)</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(IntermediateBuildDir)</IntermediateOutputPath>
+    <LibBuildDir>$(BuildRootDir)lib\</LibBuildDir>            
+    <DocumentationFile>$(LibBuildDir)$(MsBuildProjectName).xml</DocumentationFile>
+    <OutputDir>$(LibBuildDir)</OutputDir>
+    <OutputPath>$(LibBuildDir)</OutputPath>    
   </PropertyGroup>
 
 </Project>
