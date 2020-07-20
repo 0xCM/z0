@@ -9,7 +9,6 @@ namespace Z0
     
     using static Konst;
     using static z;
-    using static SymBits;
 
     using H = HexSymData;
     using C = AsciCharCode;

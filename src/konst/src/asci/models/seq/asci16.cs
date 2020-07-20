@@ -180,7 +180,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public asci16(ReadOnlySpan<byte> src)
-            => Storage = SymBits.vload(w, first(src));
+            => Storage = z.vload(w, first(src));
 
         static N n => default;
 

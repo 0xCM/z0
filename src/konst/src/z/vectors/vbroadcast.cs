@@ -202,5 +202,13 @@ namespace Z0
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<double> vbroadcast(W128 w, double src)
             => Vector128.Create(src);             
+
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector512<byte> vbroadcast(W512 w, byte src)
+            => (BroadcastScalarToVector256(&src),BroadcastScalarToVector256(&src));
+
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector512<ushort> vbroadcast(W512 w, ushort src)
+            => (BroadcastScalarToVector256(&src),BroadcastScalarToVector256(&src));            
     }
 }

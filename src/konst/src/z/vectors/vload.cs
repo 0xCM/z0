@@ -13,10 +13,22 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
 
     using static Konst;
-    using static z;
 
-    partial class SymBits
-    {        
+    partial struct z
+    {
+
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vbytes(W128 w, ulong lo)
+            => Vector128.CreateScalarUnsafe(lo).As<ulong,byte>();
+
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vbytes(W128 w, ulong lo, ulong hi)
+            => Vector128.Create(lo,hi).As<ulong,byte>();
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vbytes(W256 w, ulong x0, ulong x1, ulong x2, ulong x3)
+            => Vector256.Create(x0,x1,x2,x3).As<ulong,byte>();
+
         [MethodImpl(Inline)]
         public static unsafe Vector128<sbyte> vload(W128 w, in sbyte src)
             => LoadDquVector128(gptr(src));            
@@ -88,5 +100,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector512<ushort> vload(W512 w, in ushort src)
             => (vload(n256, in src), vload(n256, add(src, 16)));
+
     }
 }

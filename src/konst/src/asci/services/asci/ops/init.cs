@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static SymBits;
     using static z;
 
     partial struct asci
@@ -32,15 +31,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static asci8 init(N8 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci8(z.vlo(SymBits.vbroadcast(w128, (byte)fill)));
+            => new asci8(z.vlo(z.vbroadcast(w128, (byte)fill)));
 
         [MethodImpl(Inline), Op]
         public static asci16 init(N16 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci16(SymBits.vbroadcast(w128, (byte)fill));
+            => new asci16(z.vbroadcast(w128, (byte)fill));
 
         [MethodImpl(Inline), Op]
         public static asci32 init(N32 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci32(SymBits.vbroadcast(w256, (byte)fill));
+            => new asci32(z.vbroadcast(w256, (byte)fill));
 
         [MethodImpl(Inline)]
         public static asci2 init(N2 n, ReadOnlySpan<AsciCharCode> src)
@@ -68,7 +67,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static asci64 init(N64 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci64(vbroadcast(w512, (byte)fill));
+            => new asci64(z.vbroadcast(w512, (byte)fill));
 
         [MethodImpl(Inline), Op]
         public static asci2 init(N2 n, ReadOnlySpan<byte> src)

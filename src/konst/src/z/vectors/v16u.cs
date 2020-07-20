@@ -31,5 +31,10 @@ namespace Z0
         public static Vector256<ushort> v16u<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsUInt16();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref Vector256<ushort> v16u<T>(in Vector256<T> src)
+            where T : unmanaged        
+                => ref z.@as<Vector256<T>,Vector256<ushort>>(src);
     }
 }

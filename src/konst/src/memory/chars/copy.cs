@@ -57,16 +57,16 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref CharBlock16 copy(ReadOnlySpan<char> src, ref CharBlock16 dst)
         {
-            var vSrc = SymBits.vload(w128, first(recover<char,byte>(src)));
-            SymBits.vstore(vSrc, ref u8(dst));
+            var vSrc = z.vload(w128, first(recover<char,byte>(src)));
+            z.vstore(vSrc, ref u8(dst));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
         public static ref CharBlock32 copy(ReadOnlySpan<char> src, ref CharBlock32 dst)
         {
-            var vSrc = SymBits.vload(w256, u8(dst));
-            SymBits.vstore(vSrc, ref u8(dst));
+            var vSrc = z.vload(w256, u8(dst));
+            z.vstore(vSrc, ref u8(dst));
             return ref dst;
         }
     }

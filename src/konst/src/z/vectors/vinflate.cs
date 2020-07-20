@@ -14,17 +14,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class SymBits
+    partial struct z
     {        
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(W128 w, in byte src)
-            => ConvertToVector256Int16(vload(w, src)).AsUInt16();
+            => ConvertToVector256Int16(z.vload(w, src)).AsUInt16();
 
         [MethodImpl(Inline), Op]
         public static Vector512<ushort> vinflate(W256 w, in byte src)
         {
-           var lo = vinflate(vload(w128, src));
-           var hi = vinflate(vload(w128, add(src,16)));
+           var lo = vinflate(z.vload(w128, src));
+           var hi = vinflate(z.vload(w128, add(src,16)));
            return v512(lo,hi);
         }
 

@@ -193,7 +193,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public asci32(ReadOnlySpan<byte> src)
         {
-            Storage = SymBits.vload(w, first(src));
+            Storage = z.vload(w, first(src));
         }
 
         static N n => default;

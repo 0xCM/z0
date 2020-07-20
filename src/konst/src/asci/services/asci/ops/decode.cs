@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static SymBits;
 
     partial struct asci
     {
@@ -48,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci8 src)
         {
-            var decoded = vinflate(vbytes(w128, src.Storage));
+            var decoded = vinflate(z.vbytes(w128, src.Storage));
             return z.recover<char>(z.bytes(vlo(decoded)));            
         }
 
@@ -78,15 +77,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void decode(in asci8 src, ref char dst)
         {
-            var decoded = vinflate(vbytes(w128, src.Storage));
-            SymBits.vstore(decoded.GetLower(), ref @as<char,ushort>(dst));
+            var decoded = vinflate(z.vbytes(w128, src.Storage));
+            z.vstore(decoded.GetLower(), ref @as<char,ushort>(dst));
         }
 
         [MethodImpl(Inline), Op]
         public static void decode(in asci16 src, ref char dst)
         {
            var decoded = vinflate(src.Storage);
-           SymBits.vstore(decoded, ref @as<char,ushort>(dst));
+           z.vstore(decoded, ref @as<char,ushort>(dst));
         }
 
         [MethodImpl(Inline), Op]

@@ -49,24 +49,24 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref CellBlock16 copy(ReadOnlySpan<byte> src, ref CellBlock16 dst)
         {
-            var vSrc = SymBits.vload(w128, first(src));
-            SymBits.vstore(vSrc, ref u8(dst));
+            var vSrc = z.vload(w128, first(src));
+            z.vstore(vSrc, ref u8(dst));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
         public static ref CellBlock32 copy(ReadOnlySpan<byte> src, ref CellBlock32 dst)
         {
-            var vSrc = SymBits.vload(w256, first(src));
-            SymBits.vstore(vSrc, ref u8(dst));
+            var vSrc = z.vload(w256, first(src));
+            z.vstore(vSrc, ref u8(dst));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
         public static ref CellBlock64 copy(ReadOnlySpan<byte> src, ref CellBlock64 dst)
         {
-            var vSrc = SymBits.vload(w512, first(src));
-            SymBits.vstore(vSrc, ref u8(dst));
+            var vSrc = z.vload(w512, first(src));
+            z.vstore(vSrc, ref u8(dst));
             return ref dst;
         }
 

@@ -1,7 +1,19 @@
 <Project>
 
-  <Import Project="z0.props"/>
-  <Import Project="$(Src)symbols.props"/>
+  <PropertyGroup>
+    <TopDir>$(MSBuildThisFileDirectory)</TopDir>    
+    <Src>$(TopDir)src/</Src>
+    <Test>$(TopDir)test/</Test>
+    <Native>$(TopDir)native/</Native>
+    <SrcDir>$(TopDir)src/</SrcDir>
+    <TestDir>$(TopDir)test/</TestDir>
+    <NativeDir>$(TopDir)native/</NativeDir>    
+    <BuildRootDir>$(TopDir)bin\</BuildRootDir>    
+  </PropertyGroup>
+
+  <Import Project="$(Src)symbols.props"/>  
   <Import Project="$(Native)symbols.props"/>
-  
+
+  <Import Project="z0.props"/>    
+
 </Project>

@@ -43,26 +43,26 @@ namespace Z0
             
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci16 src, ref byte dst)
-            => SymBits.vstore(src.Storage, ref dst);            
+            => z.vstore(src.Storage, ref dst);            
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci32 src, ref byte dst)
-            => SymBits.vstore(src.Storage, ref dst);            
+            => z.vstore(src.Storage, ref dst);            
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci64 src, ref byte dst)
-            => SymBits.vstore(src.Storage, ref dst);            
+            => z.vstore(src.Storage, ref dst);            
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci16 src, Span<byte> dst)
-            => SymBits.vstore(src.Storage, dst);            
+            => z.vstore(src.Storage, dst);            
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci32 src, Span<byte> dst)
-            => SymBits.vstore(src.Storage, dst);            
+            => z.vstore(src.Storage, dst);            
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci64 src, Span<byte> dst)
-            => SymBits.vstore(src.Storage, dst);
+            => z.vstore(src.Storage, dst);
     }
 }

@@ -6,14 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Konst;        
 
-    partial struct Symbolic
-    {        
-                    
-        [MethodImpl(Inline), Op]
-        public static ref readonly ushort read(in char src, int offset)        
-            => ref z.read<ushort>(src, offset);
+    public readonly struct CodePack
+    {   
+        readonly Vector256<byte> Data;
+
+        public CodePack(byte[] src)
+        {
+            Data = default;
+        }
     }
 }

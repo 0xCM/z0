@@ -95,10 +95,10 @@ namespace Z0
         public static Span<byte> digits(Perm4L src, Span<byte> dst)
         {
             var scalar = (byte)src;
-            seek(dst,0) = SymBits.extract(scalar, 0, 1);
-            seek(dst,1) = SymBits.extract(scalar, 2, 3);
-            seek(dst,2) = SymBits.extract(scalar, 4, 5);
-            seek(dst,3) = SymBits.extract(scalar, 6, 7);
+            seek(dst,0) = z.extract(scalar, 0, 1);
+            seek(dst,1) = z.extract(scalar, 2, 3);
+            seek(dst,2) = z.extract(scalar, 4, 5);
+            seek(dst,3) = z.extract(scalar, 6, 7);
             return dst;
         }
 
@@ -110,10 +110,10 @@ namespace Z0
         public static ref readonly NatSpan<N4,byte> digits(Perm4L src, in NatSpan<N4,byte> dst)
         {
             var scalar = (byte)src;
-            dst[0] = SymBits.extract(scalar, 0, 1);
-            dst[1] = SymBits.extract(scalar, 2, 3);
-            dst[2] = SymBits.extract(scalar, 4, 5);
-            dst[3] = SymBits.extract(scalar, 6, 7);
+            dst[0] = z.extract(scalar, 0, 1);
+            dst[1] = z.extract(scalar, 2, 3);
+            dst[2] = z.extract(scalar, 4, 5);
+            dst[3] = z.extract(scalar, 6, 7);
             return ref dst;
         }
         
@@ -143,14 +143,14 @@ namespace Z0
         {
             //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
             var scalar = (uint)src;
-            seek(dst,0) = (OctalDigit)SymBits.extract(scalar, 0, 2);
-            seek(dst,1) = (OctalDigit)SymBits.extract(scalar, 3, 5);
-            seek(dst,2) = (OctalDigit)SymBits.extract(scalar, 6, 8);
-            seek(dst,3) = (OctalDigit)SymBits.extract(scalar, 9, 11);
-            seek(dst,4) = (OctalDigit)SymBits.extract(scalar, 12, 14);
-            seek(dst,5) = (OctalDigit)SymBits.extract(scalar, 15, 17);
-            seek(dst,6) = (OctalDigit)SymBits.extract(scalar, 18, 20);
-            seek(dst,7) = (OctalDigit)SymBits.extract(scalar, 21, 23);
+            seek(dst,0) = (OctalDigit)z.extract(scalar, 0, 2);
+            seek(dst,1) = (OctalDigit)z.extract(scalar, 3, 5);
+            seek(dst,2) = (OctalDigit)z.extract(scalar, 6, 8);
+            seek(dst,3) = (OctalDigit)z.extract(scalar, 9, 11);
+            seek(dst,4) = (OctalDigit)z.extract(scalar, 12, 14);
+            seek(dst,5) = (OctalDigit)z.extract(scalar, 15, 17);
+            seek(dst,6) = (OctalDigit)z.extract(scalar, 18, 20);
+            seek(dst,7) = (OctalDigit)z.extract(scalar, 21, 23);
             return dst;
         }
 
@@ -163,14 +163,14 @@ namespace Z0
         {
             //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
             var scalar = (uint)src;
-            dst[0] = (OctalDigit)SymBits.extract(scalar, 0, 2);
-            dst[1] = (OctalDigit)SymBits.extract(scalar, 3, 5);
-            dst[2] = (OctalDigit)SymBits.extract(scalar, 6, 8);
-            dst[3] = (OctalDigit)SymBits.extract(scalar, 9, 11);
-            dst[4] = (OctalDigit)SymBits.extract(scalar, 12, 14);
-            dst[5] = (OctalDigit)SymBits.extract(scalar, 15, 17);
-            dst[6] = (OctalDigit)SymBits.extract(scalar, 18, 20);
-            dst[7] = (OctalDigit)SymBits.extract(scalar, 21, 23);
+            dst[0] = (OctalDigit)z.extract(scalar, 0, 2);
+            dst[1] = (OctalDigit)z.extract(scalar, 3, 5);
+            dst[2] = (OctalDigit)z.extract(scalar, 6, 8);
+            dst[3] = (OctalDigit)z.extract(scalar, 9, 11);
+            dst[4] = (OctalDigit)z.extract(scalar, 12, 14);
+            dst[5] = (OctalDigit)z.extract(scalar, 15, 17);
+            dst[6] = (OctalDigit)z.extract(scalar, 18, 20);
+            dst[7] = (OctalDigit)z.extract(scalar, 21, 23);
             return ref dst;
         }
 
@@ -190,22 +190,22 @@ namespace Z0
         public static Span<HexDigit> digits(Perm16L src, Span<X> dst)
         {
             var scalar = (ulong)src;
-            seek(dst,0) = (X)SymBits.extract(scalar, 0, 3);
-            seek(dst,1) = (X)SymBits.extract(scalar, 4, 7);
-            seek(dst,2) = (X)SymBits.extract(scalar, 8, 11);
-            seek(dst,3) = (X)SymBits.extract(scalar, 12, 15);
-            seek(dst,4) = (X)SymBits.extract(scalar, 16, 19);
-            seek(dst,5) = (X)SymBits.extract(scalar, 20, 23);
-            seek(dst,6) = (X)SymBits.extract(scalar, 24, 27);
-            seek(dst,7) = (X)SymBits.extract(scalar, 28, 31);
-            seek(dst,8) = (X)SymBits.extract(scalar, 32, 35);
-            seek(dst,9) = (X)SymBits.extract(scalar, 36, 39);
-            seek(dst,10) = (X)SymBits.extract(scalar, 40, 43);
-            seek(dst,11) = (X)SymBits.extract(scalar, 44, 47);
-            seek(dst,12) = (X)SymBits.extract(scalar, 48, 53);
-            seek(dst,13) = (X)SymBits.extract(scalar, 52, 55);
-            seek(dst,14) = (X)SymBits.extract(scalar, 56, 59);
-            seek(dst,15) = (X)SymBits.extract(scalar, 60, 63);
+            seek(dst,0) = (X)z.extract(scalar, 0, 3);
+            seek(dst,1) = (X)z.extract(scalar, 4, 7);
+            seek(dst,2) = (X)z.extract(scalar, 8, 11);
+            seek(dst,3) = (X)z.extract(scalar, 12, 15);
+            seek(dst,4) = (X)z.extract(scalar, 16, 19);
+            seek(dst,5) = (X)z.extract(scalar, 20, 23);
+            seek(dst,6) = (X)z.extract(scalar, 24, 27);
+            seek(dst,7) = (X)z.extract(scalar, 28, 31);
+            seek(dst,8) = (X)z.extract(scalar, 32, 35);
+            seek(dst,9) = (X)z.extract(scalar, 36, 39);
+            seek(dst,10) = (X)z.extract(scalar, 40, 43);
+            seek(dst,11) = (X)z.extract(scalar, 44, 47);
+            seek(dst,12) = (X)z.extract(scalar, 48, 53);
+            seek(dst,13) = (X)z.extract(scalar, 52, 55);
+            seek(dst,14) = (X)z.extract(scalar, 56, 59);
+            seek(dst,15) = (X)z.extract(scalar, 60, 63);
             return dst;
         }        
 
@@ -217,22 +217,22 @@ namespace Z0
         public static ref readonly NatSpan<N16,X> digits(Perm16L src, in NatSpan<N16,X> dst)
         {
             var scalar = (ulong)src;
-            dst[0] = (X)SymBits.extract(scalar, 0, 3);
-            dst[1] = (X)SymBits.extract(scalar, 4, 7);
-            dst[2] = (X)SymBits.extract(scalar, 8, 11);
-            dst[3] = (X)SymBits.extract(scalar, 12, 15);
-            dst[4] = (X)SymBits.extract(scalar, 16, 19);
-            dst[5] = (X)SymBits.extract(scalar, 20, 23);
-            dst[6] = (X)SymBits.extract(scalar, 24, 27);
-            dst[7] = (X)SymBits.extract(scalar, 28, 31);
-            dst[8] = (X)SymBits.extract(scalar, 32, 35);
-            dst[9] = (X)SymBits.extract(scalar, 36, 39);
-            dst[10] = (X)SymBits.extract(scalar, 40, 43);
-            dst[11] = (X)SymBits.extract(scalar, 44, 47);
-            dst[12] = (X)SymBits.extract(scalar, 48, 53);
-            dst[13] = (X)SymBits.extract(scalar, 52, 55);
-            dst[14] = (X)SymBits.extract(scalar, 56, 59);
-            dst[15] = (X)SymBits.extract(scalar, 60, 63);
+            dst[0] = (X)z.extract(scalar, 0, 3);
+            dst[1] = (X)z.extract(scalar, 4, 7);
+            dst[2] = (X)z.extract(scalar, 8, 11);
+            dst[3] = (X)z.extract(scalar, 12, 15);
+            dst[4] = (X)z.extract(scalar, 16, 19);
+            dst[5] = (X)z.extract(scalar, 20, 23);
+            dst[6] = (X)z.extract(scalar, 24, 27);
+            dst[7] = (X)z.extract(scalar, 28, 31);
+            dst[8] = (X)z.extract(scalar, 32, 35);
+            dst[9] = (X)z.extract(scalar, 36, 39);
+            dst[10] = (X)z.extract(scalar, 40, 43);
+            dst[11] = (X)z.extract(scalar, 44, 47);
+            dst[12] = (X)z.extract(scalar, 48, 53);
+            dst[13] = (X)z.extract(scalar, 52, 55);
+            dst[14] = (X)z.extract(scalar, 56, 59);
+            dst[15] = (X)z.extract(scalar, 60, 63);
             return ref dst;
         }
 

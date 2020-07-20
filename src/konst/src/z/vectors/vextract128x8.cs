@@ -13,9 +13,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
 
     using static Konst;
-    using static Typed;
 
-    partial class SymBits
+    partial struct z
     {                            
         [MethodImpl(Inline)]
         public static byte vextract<N>(Vector128<byte> src, N n = default)
