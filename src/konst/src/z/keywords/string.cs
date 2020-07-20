@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string @string(in StringRef src)                
-            => sys.@string(data(src));
+            => sys.@string(cover(src));
     }
 }

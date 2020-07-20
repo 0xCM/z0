@@ -56,6 +56,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => StringRefs.user(Location);
         }
+        
         public unsafe string Text
         {
             [MethodImpl(Inline)]
@@ -65,7 +66,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get =>StringRefs.address(Location);
+            get => StringRefs.address(Location);
         }
 
         public ref readonly char this[int index]
@@ -80,7 +81,7 @@ namespace Z0
         public ReadOnlySpan<char> Data
         {
             [MethodImpl(Inline)]
-            get => z.data(this);
+            get => z.cover(this);
         }
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace Z0
         ReadOnlySpan<char> IConstSpan<StringRef,char>.Data
         {
             [MethodImpl(Inline)]
-            get => z.data(this);
+            get => z.cover(this);
         }
 
         public bool IsEmpty
@@ -126,12 +127,5 @@ namespace Z0
 
         public override string ToString()
             => Text;
-
-        ulong Lo
-        {
-            [MethodImpl(Inline)]
-            get => vcell(Location,0);
-        }
-    
    }
 }

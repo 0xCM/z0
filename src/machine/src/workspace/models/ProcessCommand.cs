@@ -123,8 +123,8 @@ namespace Z0.MetaCore
             => content.ToCanonicalForm();        
     }
 
-    public abstract class ProcessCommand<c, r> : ProcessCommand<c>
-        where c : ProcessCommand<c, r>, new()
+    public abstract class ProcessCommand<c,r> : ProcessCommand<c>
+        where c : ProcessCommand<c,r>, new()
         where r : IProcessResponseMessge
     {
         protected static PromptInputSyntax DefineSyntax()

@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-
+    
     /// <summary>
     /// Characterizes a container over discrete/enumerable content which need not be finite
     /// </summary>

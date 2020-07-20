@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.IO;
 
     using static Konst;
     using static z;
@@ -17,47 +13,33 @@ namespace Z0
     partial class text
     {
         /// <summary>
-        /// Materializes the constructed string
-        /// </summary>
-        /// <param name="src">The source string</param>
-        public static string format(StringBuilder src)
-            => src.ToString();
-
-        /// <summary>
         /// Formats a custom-formattable elements
         /// </summary>
         /// <param name="src">The source element</param>
         /// <typeparam name="T">The element type</typeparam>
+        
+        [MethodImpl(Inline)]
         public static string format<T>(T src)
-            where T : ITextual
-                => denullify(src?.Format());
+            where T : struct, ITextual
+                => src.Format();
 
         /// <summary>
         /// Produces a sequence of formatted strings given a sequence of custom-formattable elements
         /// </summary>
         /// <param name="src">The source element</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IEnumerable<string> format<T>(IEnumerable<T> src)
-            where T : ITextual
+        public static string[] format<T>(params T[] src)
+            where T : struct, ITextual
                 => src.Select(x => x.Format());
 
-        public static string format<T>(IEnumerable<T> src, string delimiter = null)
-            where T : ITextual
-        {
-            var dst = build();
-            var count = 0;
-            var sep = denullify(delimiter);
-            
-            void append(T item)
-            {
-                if(count != 0)
-                    dst.Append(sep);
-                 dst.Append(item.Format());   
-            }
-
-            return format(dst);
-        }
-
+        /// <summary>
+        /// Formats the pair of strings represented by repsective character spans
+        /// </summary>
+        /// <param name="a">The leading content</param>
+        /// <param name="b">The trailing content</param>
+        [MethodImpl(Inline), Op]
+        public static string format(ReadOnlySpan<char> a, ReadOnlySpan<char> b)
+            => string.Concat(a,b);
 
         /// <summary>
         /// Formats and concatenates an arbitrary number of elements

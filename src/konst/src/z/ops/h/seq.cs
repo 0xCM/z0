@@ -13,13 +13,6 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Produces an indexed sequence from a parameter array
-        /// </summary>
-        /// <param name="src">The source items</param>
-        /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline)]
-        public static IndexedSeq<T> seq<T>(params T[] src)
-            => src;
+
     }
 }

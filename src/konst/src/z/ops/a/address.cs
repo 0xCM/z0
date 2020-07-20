@@ -20,6 +20,14 @@ namespace Z0
             => new MemoryAddress(src);
 
         /// <summary>
+        /// Extracts the address captured by a <see cref='StringRef'/>
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        public static ref ulong address(in StringRef src)
+            => ref @as<StringRef,ulong>(src);
+
+        /// <summary>
         /// Defines an address predicated on the leading source cell
         /// </summary>
         /// <param name="src">The data source</param>

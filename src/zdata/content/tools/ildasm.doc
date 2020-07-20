@@ -55,3 +55,5 @@ Option key is '-' or '/', options are recognized by first 3 characters
 
 Example:  ildasm /tok /byt myfile.exe /out=myfile.il
 
+ildasm /BYTES /TOKENS /SOURCE /LINENUM /NOBAR /TYPELIST /HEADERS /STATS /CLASSLIST /METADATA=MDHEADER /METADATA=HEX /METADATA=SCHEMA /METADATA=HEAPS /METADATA=RAW z0.sys.dll /out=z0.sys.il
+

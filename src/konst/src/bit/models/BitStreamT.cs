@@ -10,22 +10,27 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
+    using static z;
     
-    readonly struct BitStream<T> : IStreamSource<T>
-        where T : IUnsigned
+    public readonly struct BitStream<T> : IStreamSource<BitState>
+        where T : struct
     {
         readonly IEnumerable<T> Source;
+
+        readonly BitState[] Buffer;
 
         [MethodImpl(Inline)]
         public BitStream(IEnumerable<T> source)
         {
             Source = source;
+            Buffer = sys.alloc<BitState>(size<T>()*8);
         }
 
-        [MethodImpl(Inline)]
-        public IEnumerable<T> Next()
+        public IEnumerable<BitState> Next()
         {
-            yield return default;
-        }    
+            foreach(var cell in Source)
+            foreach(var state in bitstates(cell, Buffer))
+                yield return state;
+        }
     }
 }

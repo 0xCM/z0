@@ -5,10 +5,6 @@
 namespace Z0.MetaCore
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Konst;
 
     /// <summary>
     /// Applied to a command specification to identify and describe it

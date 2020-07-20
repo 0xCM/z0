@@ -40,7 +40,6 @@ namespace Z0
             => Empty;        
 
         public AppMsgColor Flair 
-            => AppMsgColor.Green;
- 
+            => AppMsgColor.Green; 
     }
 }

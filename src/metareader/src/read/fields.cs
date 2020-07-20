@@ -16,7 +16,6 @@ namespace Z0
     using static ReaderInternals;
 
     using M = PartRecords;
-
     
     partial class PartReader
     {        

@@ -14,6 +14,7 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [ApiHost]
     public static partial class text
     {
         public const string PageBreak = "--------------------------------------------------------------------------------------------------------------";

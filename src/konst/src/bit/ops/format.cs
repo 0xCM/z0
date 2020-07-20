@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class Bit
-    {
+    {        
         static BitFormatConfig FormatConfig2 
             => BitFormatter.limited(uint2.Width, uint2.Width);
         

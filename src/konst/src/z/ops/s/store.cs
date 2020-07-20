@@ -188,7 +188,7 @@ namespace Z0
         [Op]
         public static void store(in StringRef src, ref char dst, uint offset = 0)
         {
-            var c = z.data(src);
+            var c = z.cover(src);
             var k = c.Length;
             for(uint i=0, o = offset; i<k; i++, o++)
                 seek(dst,o) = skip(c,i);

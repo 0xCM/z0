@@ -52,22 +52,6 @@ namespace Z0
         public static string concat(params object[] src)    
             => string.Concat(src);
 
-        public static string concat(string sep, ReadOnlySpan<string> src)
-        {
-            var dst = build();
-            var lastix = src.Length - 1;
-            for(var i=0; i<src.Length; i++)        
-            {
-                dst.Append(src[i]);
-                if(i != lastix)
-                    dst.Append(sep);
-            }
-            return dst.ToString();
-        }
-
-        public static string concat(string sep, Span<string> src)
-            => concat(sep, (ReadOnlySpan<string>)src);
-
         /// <summary>
         /// Concatentates a sequence of strings, padding each to a specified width and interspersed with a specified delimiter
         /// </summary>

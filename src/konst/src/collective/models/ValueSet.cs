@@ -14,18 +14,25 @@ namespace Z0
     /// <summary>
     /// Contains a finite set of values
     /// </summary>
-    public readonly struct ValueSet<T> : IDeferredSet<ValueSet<T>,T>, IEquatable<ValueSet<T>>
+    public readonly struct ValueSet<T> : IValueSet<ValueSet<T>,T>, IEquatable<ValueSet<T>>
         where T : struct
     {
         internal readonly HashSet<T> Data;
 
         [MethodImpl(Inline)]   
         public ValueSet(IEnumerable<T> src)
-            => Data = hashset(src);
+            => Data = z.hashset(src);
 
         [MethodImpl(Inline)]   
         public ValueSet(HashSet<T> src)
             => Data = src;
+
+        [MethodImpl(Inline)]   
+        public ValueSet(T[] src)
+            => Data = z.hashset(src);
+
+        public IEnumerable<T> Next()
+            => Data;
 
         [MethodImpl(Inline)]
         public static implicit operator ValueSet<T>(HashSet<T> src)
@@ -37,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ValueSet<T> operator -(ValueSet<T> a, ValueSet<T> b)
-            => a.Difference(b);
+            => a.Difference(b,false);
 
         [MethodImpl(Inline)]
         public static ValueSet<T> operator *(ValueSet<T> a, ValueSet<T> b)
@@ -74,10 +81,6 @@ namespace Z0
         public static bool operator !=(ValueSet<T> a, ValueSet<T> b)
             => !a.Equals(b);
 
-        [MethodImpl(Inline)]   
-        public ValueSet<T> WithContent(IEnumerable<T> src)
-            => new ValueSet<T>(src);
-
         public int Count 
         {
             [MethodImpl(Inline)]
@@ -107,7 +110,7 @@ namespace Z0
         /// <param name="rhs">The candidate superset</param>
         /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
         [MethodImpl(Inline)]   
-        public bool IsSubset(ValueSet<T> rhs, bool proper = true)
+        public bool IsSubset(in ValueSet<T> rhs, bool proper = true)
             => proper ? Data.IsProperSubsetOf(rhs.Data) : Data.IsSubsetOf(rhs.Data);
 
         /// <summary>
@@ -116,49 +119,47 @@ namespace Z0
         /// <param name="rhs">The candidate subset</param>
         /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
         [MethodImpl(Inline)]   
-        public bool IsSuperset(ValueSet<T> rhs, bool proper = true)
+        public bool IsSuperset(in ValueSet<T> rhs, bool proper)
             => proper ? Data.IsProperSupersetOf(rhs.Data) : Data.IsSubsetOf(rhs.Data);
 
         /// <summary>
         /// Calculates the union between the current set and a specified set and returns a new set that embodies this result
         /// </summary>
-        /// <param name="rhs">The set with which to union/param>
+        /// <param name="src">The set with which to union/param>
         [MethodImpl(Inline)]   
-        public ValueSet<T> Union(ValueSet<T> rhs)
-        {
-            var result = hashset(Data);
-            result.UnionWith(rhs.Data);
-            return result;
+        public ValueSet<T> Union(in ValueSet<T> src)
+        {            
+            Data.UnionWith(src.Data);
+            return this;
         }
 
         /// <summary>
         /// Calculates the intersection between the current set and a specified set and
         /// returns a new set that embodies this result
         /// </summary>
-        /// <param name="rhs">The set with which to intersect</param>
+        /// <param name="src">The set with which to intersect</param>
         [MethodImpl(Inline)]   
-        public ValueSet<T> Intersect(ValueSet<T> rhs)
+        public ValueSet<T> Intersect(in ValueSet<T> src)
         {
-            var result = hashset(Data);
-            result.IntersectWith(rhs.Data);
-            return result;
+            Data.IntersectWith(src.Data);
+            return this;
         }
 
         /// <summary>
         /// Calculates the set difference, or symmetric difference, between the current set and a specified set 
         /// and returns a new set that embodies this result
         /// </summary>
-        /// <param name="rhs">The set that should be differenced</param>
+        /// <param name="src">The set that should be differenced</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Symmetric_difference</remarks>
         [MethodImpl(Inline)]   
-        public ValueSet<T> Difference(ValueSet<T> rhs, bool symmetric = false)
+        public ValueSet<T> Difference(ValueSet<T> src, bool symmetric)
         {
-            var result = hashset(Data);
             if(symmetric)
-                result.SymmetricExceptWith(rhs.Data);
+                Data.SymmetricExceptWith(src.Data);
             else
-                result.ExceptWith(rhs.Data);
-            return result;
+                Data.ExceptWith(src.Data);
+            
+            return this;
         }
     
         /// <summary>
@@ -166,7 +167,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The set to compare</param>
         [MethodImpl(Inline)]   
-        public bool Intersects(ValueSet<T> rhs)
+        public bool Intersects(in ValueSet<T> rhs)
             => Data.Overlaps(rhs.Data);
 
         static IEqualityComparer<HashSet<T>> Comparer 
@@ -181,9 +182,23 @@ namespace Z0
 
         public override int GetHashCode()
             => Data.GetHashCode();
-        
-        [MethodImpl(Inline)]   
-        static HashSet<T> hashset(IEnumerable<T> members)
-            => new HashSet<T>(members);
+
+        bool IValueSet<ValueSet<T>,T>.Contains(in T candidate)
+            => Contains(candidate);
+
+        ValueSet<T> IValueSet<ValueSet<T>,T>.Union(in ValueSet<T> rhs)
+            => Union(rhs);
+
+        ValueSet<T> IValueSet<ValueSet<T>,T>.Intersect(in ValueSet<T> rhs)
+            => Intersect(rhs);
+
+        ValueSet<T> IValueSet<ValueSet<T>,T>.Difference(in ValueSet<T> rhs, bool symmetric)
+            => Difference(rhs,symmetric);
+
+        bool IValueSet<ValueSet<T>,T>.IsSubset(in ValueSet<T> rhs, bool proper)
+            => IsSubset(rhs,proper);
+ 
+        bool IValueSet<ValueSet<T>,T>.IsSuperset(in ValueSet<T> rhs, bool proper)
+            => IsSuperset(rhs,proper);
     }
 }

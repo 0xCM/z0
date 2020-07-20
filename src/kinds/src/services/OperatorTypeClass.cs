@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct OperatorTypeClass
+    public readonly struct OperatorTypeClass : ITextual
     {
         /// <summary>
         /// The operator operand type
@@ -50,13 +50,15 @@ namespace Z0
             get => !IsEmpty;
         }
 
-        public override string ToString()
+        public string Format()
             => IsEmpty 
             ? string.Empty 
             : OperandType.DisplayName()
                          .Replicate(OperatorClass.ArityValue() + 1)
                          .Intersperse(AsciArrow)
                          .Concat();        
+        public override string ToString()
+            => Format();
         
         public static OperatorTypeClass Empty 
             => new OperatorTypeClass(typeof(void), 0);

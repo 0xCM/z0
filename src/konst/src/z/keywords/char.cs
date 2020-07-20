@@ -20,8 +20,8 @@ namespace Z0
             => (char)(u8(src) + 48);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static char @char<E>(in E src) 
+        public static ref char @char<E>(in E src) 
             where E : unmanaged
-                => @as<E,char>(src);
+                => ref @as<E,char>(src);
     }
 }

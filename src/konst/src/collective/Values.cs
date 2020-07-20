@@ -14,15 +14,6 @@ namespace Z0
     public readonly struct Values
     {
         /// <summary>
-        /// Creates an indexed sequence from a stream
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        public static ValueSet<T> from<T>(IEnumerable<T> src)
-            where T : struct
-                => new ValueSet<T>(src); 
-
-        /// <summary>
         /// Calculates the union between the source set and a target set and returns the target
         /// </summary>
         /// <param name="src">The set with which to union/param>
@@ -33,6 +24,7 @@ namespace Z0
             return ref dst;
         }
 
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static bool contains<T>(in ValueSet<T> src, in T test)
             where T : struct
                 => src.Data.Contains(test);
