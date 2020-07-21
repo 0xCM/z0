@@ -8,13 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Avx2;
-
     using static Konst;
-    using static Typed;
-
-    using static V0;
 
     partial struct V0d
     {                    
@@ -24,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vlo(Vector128<ulong> src)
-            => vscalar(n128,src.GetElement(0));
+            => z.vlo(src);
 
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
@@ -34,7 +28,7 @@ namespace Z0
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vlo(Vector256<sbyte> src)
-            => ExtractVector128(src, 0);
+            => z.vlo(src);
 
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
@@ -44,7 +38,7 @@ namespace Z0
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vlo(Vector256<byte> src)
-            => ExtractVector128(src, 0);
+            => z.vlo(src);
 
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
@@ -54,7 +48,7 @@ namespace Z0
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vlo(Vector256<short> src)
-            => ExtractVector128(src, 0);
+            => z.vlo(src);
 
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
@@ -63,7 +57,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vlo(Vector256<ushort> src)
-            => ExtractVector128(src, 0);
+            => z.vlo(src);
 
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
@@ -72,7 +66,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vlo(Vector256<int> src)
-            => ExtractVector128(src, 0);
+            => z.vlo(src);
 
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
@@ -81,7 +75,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vlo(Vector256<uint> src)
-            => ExtractVector128(src, 0);
+            => z.vlo(src);
 
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
@@ -90,7 +84,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<long> vlo(Vector256<long> src)
-            => ExtractVector128(src, 0);
+            => z.vlo(src);
 
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
@@ -99,7 +93,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vlo(Vector256<ulong> src)
-            => ExtractVector128(src, 0);
+            => z.vlo(src);
 
         /// <summary>
         /// _m128 _mm256_extractf128_ps (__m256 a, const int imm8)VEXTRACTF128 xmm/m128, ymm, imm8
@@ -107,7 +101,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<float> vlo(Vector256<float> src)
-            => ExtractVector128(src, 0);
+            => z.vlo(src);
 
         /// <summary>
         /// __m128d _mm256_extractf128_pd (__m256d a, const int imm8)VEXTRACTF128 xmm/m128, ymm, imm8
@@ -115,7 +109,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<double> vlo(Vector256<double> src)
-            => ExtractVector128(src, 0);
+            => z.vlo(src);
 
         /// <summary>
         /// Extracts the lower 128-bit lane from the source vector to scalar targets
@@ -125,10 +119,7 @@ namespace Z0
         /// <param name="x1">Receiver for the hi part of the exracted lane</param>
         [MethodImpl(Inline), Op]
         public static void vlo(Vector256<ulong> src, out ulong x0, out ulong x1)
-        {
-            x0 = src.GetElement(0);
-            x1 = src.GetElement(1);
-        }
+            => z.vlo(src, out x0, out x1);
 
         /// <summary>
         /// Extracts the lower 128-bit lane from the source vector to scalar targets
@@ -138,7 +129,7 @@ namespace Z0
         /// <param name="x1">Receiver for the hi part of the exracted lane</param>
         [MethodImpl(Inline), Op]
         public static void vlo(Vector256<byte> src, out ulong x0, out ulong x1)
-            => vlo(v64u(src), out x0, out x1);
+            => z.vlo(src, out x0, out x1);
 
         /// <summary>
         /// Extracts the lower 128-bit lane from the source vector to a pair
@@ -147,10 +138,6 @@ namespace Z0
         /// <param name="dst">Receiver for the lo part of the exracted lane</param>
         [MethodImpl(Inline)]
         public static ref Pair<ulong> vlo(Vector256<ulong> src, ref Pair<ulong> dst)
-        {            
-            dst.Left = src.GetElement(0);
-            dst.Right = src.GetElement(1);
-            return ref dst;
-        } 
+            => ref z.vlo(src, ref dst);
     }
 }

@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Stacked;
+    using static z;
 
     partial class Stacks
     {
@@ -21,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T head<T>(ref BitBlock64 src, T t = default)
             where T : unmanaged
-                => ref z.@as<ulong,T>(z.u64(src));
+                => ref @as<ulong,T>(u64(src));
 
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -32,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T head<T>(ref BitBlock128 src, T t = default)
             where T : unmanaged
-                => ref z.@as<ulong,T>(z.u64(src));
+                => ref @as<ulong,T>(u64(src));
 
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -43,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T head<T>(ref BitBlock256 src, T t = default)
             where T : unmanaged
-                => ref z.@as<ulong,T>(z.u64(src));
+                => ref @as<ulong,T>(u64(src));
 
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -54,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T head<T>(ref BitBlock512 src, T t = default)
             where T : unmanaged
-                => ref z.@as<ulong,T>(z.u64(src));
+                => ref @as<ulong,T>(u64(src));
 
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -65,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T head<T>(ref BitStack1024 src, T t = default)
             where T : unmanaged
-                => ref z.@as<ulong,T>(z.u64(src));
+                => ref @as<ulong,T>(u64(src));
 
         /// <summary>
         /// Retrieves a reference to the leading character storage cell
@@ -81,7 +82,7 @@ namespace Z0
         /// <param name="src">The character storage source</param>
         [MethodImpl(Inline), Op]
         public static ref char head(ref CharStack4 src)
-            => ref z.c16(src);
+            => ref c16(src);
 
         /// <summary>
         /// Retrieves a reference to the leading character storage cell
@@ -89,7 +90,7 @@ namespace Z0
         /// <param name="src">The character storage source</param>
         [MethodImpl(Inline), Op]
         public static ref char head(ref CharStack8 src)
-            => ref z.c16(src);
+            => ref c16(src);
 
         /// <summary>
         /// Retrieves a reference to the leading character storage cell
@@ -97,7 +98,7 @@ namespace Z0
         /// <param name="src">The character storage source</param>
         [MethodImpl(Inline), Op]
         public static ref char head(ref CharStack16 src)
-            => ref z.c16(src);
+            => ref c16(src);
 
         /// <summary>
         /// Retrieves a reference to the leading character storage cell
@@ -105,7 +106,7 @@ namespace Z0
         /// <param name="src">The character storage source</param>
         [MethodImpl(Inline), Op]
         public static ref char head(ref CharStack32 src)
-            => ref z.c16(src);
+            => ref c16(src);
 
         /// <summary>
         /// Retrieves a reference to the leading character storage cell
@@ -113,6 +114,6 @@ namespace Z0
         /// <param name="src">The character storage source</param>
         [MethodImpl(Inline), Op]
         public static ref char head(ref CharStack64 src)
-            => ref z.c16(src);
+            => ref c16(src);
     }
 }

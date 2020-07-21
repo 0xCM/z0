@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Root;
+    using static Typed;
     using static V0;
     using static V0d;
  
@@ -54,7 +54,7 @@ namespace Z0
         void vbitblend_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var count = w/bitsize<T>();
+            var count = w/z.bitsize<T>();
             for(var sample=0; sample<RepCount; sample++)
             {
 
@@ -89,7 +89,7 @@ namespace Z0
         void vbitblend_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var count = w/bitsize<T>();            
+            var count = w/z.bitsize<T>();            
             for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector(w,t);

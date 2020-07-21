@@ -54,7 +54,7 @@ namespace Z0
             where E : unmanaged, Enum
             where S : unmanaged
             where T : unmanaged
-                => numeric<S,T>(gmath.sll(scalar<E,S>(src), count));     
+                => convert<S,T>(gmath.sll(scalar<E,S>(src), count));     
 
         /// <summary>
         /// Converts a source enume value src:E to a parametrically-identified numeric type S,
@@ -75,7 +75,7 @@ namespace Z0
             where C : unmanaged, Enum
             where S : unmanaged
             where T : unmanaged
-                => numeric<S,T>(gmath.sll(scalar<E,S>(src), scalar<C,byte>(count)));     
+                => convert<S,T>(gmath.sll(scalar<E,S>(src), scalar<C,byte>(count)));     
 
 
         [MethodImpl(Inline)]

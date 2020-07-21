@@ -9,11 +9,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
     
     public class t_vgather : t_inx<t_vgather>
     {
         const int BufferSize = 1024*8;
+
+        public override bool Enabled 
+            => true;
+
+        [MethodImpl(Inline)]
+        static Interval<T> bounds<T>(uint n)
+            where T : unmanaged
+                => (zero<T>(), convert<T>(n));        
 
         public void vgather_check()
         {
@@ -23,75 +31,68 @@ namespace Z0
 
         void vgather_check(W128 w)
         {
-            vgather_check(w,z8);
-            vgather_check(w,z8i);
-            vgather_check(w,z16);
-            vgather_check(w,z16i);
-            vgather_check(w,z32);
-            vgather_check(w,z32i);
-            vgather_check(w,z64);
-            vgather_check(w,z64i);
+            vgather_check(w, z8);
+            vgather_check(w, z8i);
+            vgather_check(w, z16);
+            vgather_check(w, z16i);
+            vgather_check(w, z32);
+            vgather_check(w, z32i);
+            vgather_check(w, z64);
+            vgather_check(w, z64i);
         }
 
         void vgather_check(W256 w)
         {
-            vgather_check(w,z8);
-            vgather_check(w,z8i);
-            vgather_check(w,z16);
-            vgather_check(w,z16i);
-            vgather_check(w,z32);
-            vgather_check(w,z32i);
-            vgather_check(w,z64);
-            vgather_check(w,z64i);
+            vgather_check(w, z8);
+            vgather_check(w, z8i);
+            vgather_check(w, z16);
+            vgather_check(w, z16i);
+            vgather_check(w, z32);
+            vgather_check(w, z32i);
+            vgather_check(w, z64);
+            vgather_check(w, z64i);
         }
 
-        void vgather_check<T>(W128 w, T t = default)
+        void vgather_check<T>(W128 w)
             where T : unmanaged
         {
-            void check()
+            var cells = BufferSize/size<T>();
+            var domain = bounds<T>(cells);
+            
+            var data = gmath.increments(span<T>(cells));
+            ref readonly var src = ref first(data);
+
+            for(var i = 0; i<RepCount; i++)
             {
-                var N = BufferSize/size<T>();
-                var d = bounds(N,t);
-                
-                var data = gmath.increments(Spans.alloc<T>(N));
-                ref readonly var src = ref head(data);
-
-                for(var rep = 0; rep < RepCount; rep++)
-                {
-                    var vidx = Random.CpuVector(w,d);            
-                    var x = gvec.vgather(in src, vidx);
-                    Claim.veq(vidx,x);
-                }
+                var vidx = Random.CpuVector(w,domain);            
+                var x = gvec.vgather(src, vidx);
+                Claim.veq(vidx,x);
             }
-
-            CheckAction(check, CaseName("vgather", w, t));
         }
 
-        void vgather_check<T>(W256 w, T t = default)
+        void vgather_check<T>(W256 w)
             where T : unmanaged
         {
-            void check()
+            var count = BufferSize/size<T>();
+            var domain = bounds<T>(count);
+            
+            var data = gmath.increments(span<T>(count));
+            ref readonly var src = ref first(data);
+
+            for(var i = 0; i<RepCount; i++)
             {
-                var N = BufferSize/size<T>();
-                var d = bounds(N,t);
-                
-                var data = gmath.increments(Spans.alloc<T>(N));
-                ref readonly var src = ref head(data);
-
-                for(var rep = 0; rep < RepCount; rep++)
-                {
-                    var vidx = Random.CpuVector(w,d);            
-                    var x = gvec.vgather(in src, vidx);
-                    Claim.veq(vidx,x);
-                }
+                var vidx = Random.CpuVector(w,domain);            
+                var x = gvec.vgather(src, vidx);
+                Claim.veq(vidx,x);
             }
-
-            CheckAction(check, CaseName("vgather", w, t));
         }
 
-        [MethodImpl(Inline)]
-        static Interval<T> bounds<T>(int n, T t = default)
+        void vgather_check<T>(W128 w, T t)
             where T : unmanaged
-                => (zero(t), convert<T>(n));        
+                => CheckAction(() => vgather_check<T>(w), CaseName("vgather", w, t));
+        
+        void vgather_check<T>(W256 w, T t)
+            where T : unmanaged
+                => CheckAction(() => vgather_check<T>(w), CaseName("vgather", w, t));
     }
 }

@@ -15,7 +15,6 @@ namespace Z0
     using static Konst; 
     using static Typed;    
     using static V0;
-    using static V0d;
 
     partial class dvec
     {
@@ -27,7 +26,37 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vpackus(Vector128<short> x, Vector128<short> y)
-            => PackUnsignedSaturate(x,y);        
+            => z.vpackus(x,y);
+
+        /// <summary>
+        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128 
+        /// (4x32w,4x32w) -> 8x16w
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<ushort> vpackus(Vector128<int> x, Vector128<int> y)
+            => z.vpackus(x,y);
+
+        /// <summary>
+        /// __m256i _mm256_packus_epi16 (__m256i a, __m256i b)VPACKUSWB ymm, ymm, ymm/m256
+        /// (16x8w,16x8w) -> 32x8w
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<byte> vpackus(Vector256<short> x, Vector256<short> y)
+            => z.vpackus(x,y);
+
+        /// <summary>
+        /// __m256i _mm256_packus_epi32 (__m256i a, __m256i b)VPACKUSDW ymm, ymm, ymm/m256
+        /// (8x32w,8x32w) -> 16x16w
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<ushort> vpackus(Vector256<int> x, Vector256<int> y)
+            => z.vpackus(x,y);
 
         /// <summary>
         ///  __m128i _mm_packus_epi16 (__m128i a, __m128i b)PACKUSWB xmm, xmm/m128
@@ -39,21 +68,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vpackus(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var mask = vbroadcast(n128, (ushort)(byte.MaxValue));
-            var v1 = v16i(vand(x,mask));
-            var v2 = v16i(vand(y,mask));
+            var mask = z.vbroadcast(n128, (ushort)(byte.MaxValue));
+            var v1 = z.v16i(z.vand(x,mask));
+            var v2 = z.v16i(z.vand(y,mask));
             return PackUnsignedSaturate(v1,v2);         
         }
-
-        /// <summary>
-        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128 
-        /// (4x32w,4x32w) -> 8x16w
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vpackus(Vector128<int> x, Vector128<int> y)
-            => PackUnsignedSaturate(x,y);
 
         /// <summary>
         ///__m128i _mm_packus_epi32 (__m128i a, __m128i b) PACKUSDW xmm, xmm/m128 
@@ -65,21 +84,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vpackus(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = vbroadcast(n128, (uint)(ushort.MaxValue));
-            var z0 = v32i(vand(x,mask));
-            var z1 = v32i(vand(y,mask));
+            var mask = z.vbroadcast(n128, (uint)(ushort.MaxValue));
+            var z0 = z.v32i(z.vand(x,mask));
+            var z1 = z.v32i(z.vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
         }
-
-        /// <summary>
-        /// __m256i _mm256_packus_epi16 (__m256i a, __m256i b)VPACKUSWB ymm, ymm, ymm/m256
-        /// (16x8w,16x8w) -> 32x8w
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<byte> vpackus(Vector256<short> x, Vector256<short> y)
-            => PackUnsignedSaturate(x,y);
 
         /// <summary>
         /// __m256i _mm256_packus_epi16 (__m256i a, __m256i b) VPACKUSWB ymm, ymm, ymm/m256
@@ -90,21 +99,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vpackus(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var mask = vbroadcast(n256, (ushort)(byte.MaxValue));
-            var v1 = v16i(vand(x,mask));
-            var v2 = v16i(vand(y,mask));
+            var mask = z.vbroadcast(n256, (ushort)(byte.MaxValue));
+            var v1 = z.v16i(z.vand(x,mask));
+            var v2 = z.v16i(z.vand(y,mask));
             return PackUnsignedSaturate(v1,v2);         
         }
-
-        /// <summary>
-        /// __m256i _mm256_packus_epi32 (__m256i a, __m256i b)VPACKUSDW ymm, ymm, ymm/m256
-        /// (8x32w,8x32w) -> 16x16w
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vpackus(Vector256<int> x, Vector256<int> y)
-            => PackUnsignedSaturate(x,y);
 
         /// <summary>
         /// __m256i _mm256_packus_epi32 (__m256i a, __m256i b) VPACKUSDW ymm, ymm, ymm/m256
@@ -117,8 +116,8 @@ namespace Z0
         public static Vector256<ushort> vpackus(Vector256<uint> x, Vector256<uint> y)
         {
             var mask = vbroadcast<uint>(n256, (uint)(ushort.MaxValue));
-            var z0 = v32i(V0d.vand(x,mask));
-            var z1 = v32i(V0d.vand(y,mask));
+            var z0 = z.v32i(z.vand(x,mask));
+            var z1 = z.v32i(z.vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
         }
 
@@ -133,7 +132,7 @@ namespace Z0
         {
             var v1 = V0d.vshuf16x8(x, VData.packusLo(n256,n32,n16));
             var v2 = V0d.vshuf16x8(y, VData.packusHi(n256,n32,n16));
-            return v16u(vor(v1,v2));
+            return z.v16u(vor(v1,v2));
         }
    }
 }

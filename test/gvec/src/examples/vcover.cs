@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Widths;
-    using static V0;
+    using static z;
+    
     partial class vexamples
     {
-        public void vcover_basecase()
+        public void vcover()
         {            
             var x1 = vparts(4,8);
             var y1 = vparts(w128,4,4,4,4, 4,4,4,4, 8,8,8,8, 8,8,8,8);
@@ -50,7 +50,6 @@ namespace Z0
                  7, 7, 7, 7, 8, 8, 8, 8);
             dvec.vcover(x6, out Vector256<byte> z6);
             Claim.veq(y6,z6);
-
         }
     }
 }

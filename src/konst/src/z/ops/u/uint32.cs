@@ -79,6 +79,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint uint32(double src)
             => (uint)((long)src);
-
     }
 }

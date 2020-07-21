@@ -153,7 +153,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, Interval<T> domain)        
             where T : unmanaged
-                => random.Blocks<T>(w,domain,1).LoadVector();
+                => random.Blocks<T>(w, domain, 1).LoadVector();
 
         /// <summary>
         /// Produces a stream of 256-bit cpu vectors over random T-cells, each bound to a specified common domain

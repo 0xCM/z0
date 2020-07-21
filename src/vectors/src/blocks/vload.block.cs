@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class Vectors
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vload<T>(in Block128<T> src)
             where T : unmanaged
                 => V0.vload(w128,src.Data);
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vload<T>(in Block256<T> src)
             where T : unmanaged
                 => V0.vload(w256,src.Data);
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector512<T> vload<T>(in Block512<T> src)
             where T : unmanaged
                 => V0.vload(w512,src.Data);
@@ -49,10 +49,10 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vload<T>(in Block128<T> src, int block)            
             where T : unmanaged      
-                => V0.vload(in src.BlockRef(block), out Vector128<T> x);
+                => V0.vload(src.BlockRef(block), out Vector128<T> x);
 
         /// <summary>
         /// Loads a block-identified 256-bit vector
@@ -60,10 +60,10 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vload<T>(in Block256<T> src, int block)            
             where T : unmanaged      
-                => vload(in src.BlockRef(block), out Vector256<T> x);
+                => V0.vload(src.BlockRef(block), out Vector256<T> x);
 
         /// <summary>
         /// Loads a block-identified 512-bit vector
@@ -71,9 +71,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector512<T> vload<T>(in Block512<T> src, int block)            
             where T : unmanaged      
-                => V0.vload(in src.BlockRef(block), out Vector512<T> x);
+                => V0.vload(src.BlockRef(block), out Vector512<T> x);
     }
 }

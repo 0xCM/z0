@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static NumericCast;
+    using static z;
     
     public static class PolyPower
     {
@@ -19,9 +19,9 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T Pow2<T>(this IPolyrand random, T t = default)
+        public static T Power<T>(this IPolyrand random, T t = default)
             where T : unmanaged
-                => convert<ulong,T>(Z0.Pow2.pow(random.Pow2Exp(t)));
+                => convert<ulong,T>(Z0.Pow2.pow(random.Log2(t)));
 
         /// <summary>
         /// Produces a random power of 2 with specified min/max exponent values
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="maxexp">The max exponent value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T Pow2<T>(this IPolyrand random, int minexp, int maxexp)
+        public static T Power<T>(this IPolyrand random, int minexp, int maxexp)
             where T : unmanaged
         {
             var exp = random.Next((byte)minexp, (byte)(maxexp + 1));
@@ -47,8 +47,8 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static int Pow2Exp<T>(this IPolyrand random, T t = default)
+        public static int Log2<T>(this IPolyrand random, T t = default)
             where T : unmanaged
-                => random.Single(0,  BitSize.measure<T>());
+                => random.One(0,  BitSize.measure<T>());
     }
 }

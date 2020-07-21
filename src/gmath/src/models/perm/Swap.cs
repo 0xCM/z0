@@ -14,8 +14,8 @@ namespace Z0
     /// Defines a transposition, i.e. a specification for a two-element position exchange
     /// Typically denoted by an ordered pair of space-delimited indices (i j)
     /// </summary>
-    [ApiHost]
-    public struct Swap : IApiHost<Swap>
+    [ApiDataType]
+    public struct Swap 
     {
         /// <summary>
         /// The monodial zero
@@ -36,28 +36,6 @@ namespace Z0
         /// The second index
         /// </summary>
         public int j;
-
-        /// <summary>
-        /// Applies a sequence of transpositions to source span elements
-        /// </summary>
-        /// <param name="src">The source and target span</param>
-        /// <param name="i">The first index</param>
-        /// <param name="j">The second index</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> apply<T>(Span<T> src, params Swap[] swaps)           
-            where T : unmanaged
-        {
-            var len = swaps.Length;
-            ref var srcmem = ref first(src);
-            ref var swapmem = ref Arrays.head(swaps);
-            for(var k = 0u; k < len; k++)
-            {
-                (var i, var j) = skip(in swapmem, k);
-                z.refswap(ref seek(srcmem, i), ref seek(srcmem, j));
-            }
-            return src;
-        }
 
         /// <summary>
         /// Effects (i j) -> ((i + 1) (j+ 1))
@@ -115,7 +93,6 @@ namespace Z0
                 return Empty;
         }
 
-
         [MethodImpl(Inline)]
         public static implicit operator Swap((int i, int j) src)
             => new Swap(src);
@@ -127,25 +104,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Swap operator ++(Swap src)
             => inc(ref src);
-        // {
-        //     ref var dst = ref edit(in src);
-        //     dst.i++;
-        //     dst.j++;
-        //     return dst;
-        // }
-
 
         [MethodImpl(Inline)]
         public static Swap operator --(Swap src)
             => dec(ref src);
-        // {
-        //     ref var dst = ref edit(in src);
-        //     if(src.i != 0)
-        //         dst.i--;
-        //     if(src.j != 0)
-        //         --dst.j;
-        //     return dst;
-        // }
 
         [MethodImpl(Inline)]
         public static bool operator ==(Swap lhs, Swap rhs)

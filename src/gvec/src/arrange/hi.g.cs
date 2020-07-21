@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static Konst;
-    using static Typed;
-    using static V0;
-    using static V0d;
+    using static z;
 
     partial class gvec
     {        
@@ -23,17 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => vgeneric<T>(vscalar(w128, vcell(v64u(src),1)));
-
-        /// <summary>
-        /// Extracts hi 128-bit lane of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="pos">The index of the lane to extract</param>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector128<T> vhi<T>(Vector256<T> src)
-            where T : unmanaged
-                => vhi_u(src);
+                => generic<T>(z.vscalar(w128, vcell(v64u(src),1)));
 
         /// <summary>
         /// Extracts the hi 128-bit lane of the source vector to scalar targets
@@ -42,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vhi<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
-                => vhi(v64u(src), out x0, out x1);
+                => z.vhi(v64u(src), out x0, out x1);
 
         /// <summary>
         /// Extracts the hi 128-bit lane of the source vector to a pair
@@ -51,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Closures(AllNumeric)]
         public static ref Pair<ulong> vhi<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged
-                => ref vhi(v64u(src), ref dst);
+                => ref z.vhi(v64u(src), ref dst);
 
         /// <summary>
         /// Extracts the upper 256-bits from the source vector
@@ -71,18 +59,28 @@ namespace Z0
             where T : unmanaged
                 => src.Hi;       
 
+        /// <summary>
+        /// Extracts hi 128-bit lane of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="pos">The index of the lane to extract</param>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Vector128<T> vhi<T>(Vector256<T> src)
+            where T : unmanaged
+                => vhi_u(src);
+
         [MethodImpl(Inline)]
         static Vector128<T> vhi_u<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(vhi(v8u(src)));
+                return generic<T>(z.vhi(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(vhi(v16u(src)));
+                return generic<T>(z.vhi(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(vhi(v32u(src)));
+                return generic<T>(z.vhi(v32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(vhi(v64u(src)));
+                return generic<T>(z.vhi(v64u(src)));
             else
                 return vhi_i(src);
         }
@@ -92,13 +90,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(vhi(v8i(src)));
+                return generic<T>(z.vhi(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(vhi(v16i(src)));
+                return generic<T>(z.vhi(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(vhi(v32i(src)));
+                return generic<T>(z.vhi(v32i(src)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(vhi(v64i(src)));
+                return generic<T>(z.vhi(v64i(src)));
             else
                 return vhi_f(src);
         }
@@ -108,9 +106,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(vhi(v32f(src)));
+                return generic<T>(z.vhi(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(vhi(v64f(src)));
+                return generic<T>(z.vhi(v64f(src)));
             else 
                 throw no<T>();
         }

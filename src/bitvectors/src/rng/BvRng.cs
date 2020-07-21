@@ -141,7 +141,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static IRngStream<T> stream<T>(IEnumerable<T> src, RngKind rng)
             where T : unmanaged
-                =>  PolyStream.create(src,rng);
+                =>  PolyStreams.create(src,rng);
  
         /// <summary>
         /// Produces a generic bitvector

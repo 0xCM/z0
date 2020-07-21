@@ -96,7 +96,7 @@ namespace Z0
 
             for(var rep = 0; rep < RepCount; rep++)
             {
-                var src = Random.Single(z64);
+                var src = Random.One(z64);
                 BitPack.unpack<ulong>(src, dst);
                 for(var i=0; i< dst.Length; i++)
                     Claim.eq((uint)bit.test(src,i), dst[i]);

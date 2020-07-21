@@ -16,15 +16,16 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => gvec.vhi(x);            
+            public Vector128<T> Invoke(Vector128<T> x) 
+                => gvec.vhi(x);            
         }
 
         public readonly struct Hi256<T> : IReducer256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector256<T> x) => gvec.vhi(x);
-           
+            public Vector128<T> Invoke(Vector256<T> x) 
+                => gvec.vhi(x);           
         }
     }
 }

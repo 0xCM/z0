@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
-    using static dvec;
+    using static z;
 
     partial class vexamples
     {
@@ -26,8 +25,8 @@ namespace Z0
             for(var i=0; i<data64.Length; i++)
                 data64[i] = (ulong)i;
 
-            ref var src32 = ref head(data32);
-            ref var src64 = ref head(data64);
+            ref var src32 = ref first(data32);
+            ref var src64 = ref first(data64);
 
             var v256Actual = vgather(n128, in src32, VGather4x64uIndex);
             var v256Expect = Vectors.vparts(n128,0, 63, 127, 255);
@@ -104,7 +103,7 @@ namespace Z0
             Span<uint> data = new uint[Pow2.T09];
             for(var i=0; i<data.Length; i++)
                 data[i] = (uint)i;
-            ref var src = ref head(data);                
+            ref var src = ref first(data);                
 
             //[0,3,7,15,31,63,127,255]
             var v256idx = Vectors.vparts(n256,Pow2.T00 - 1, Pow2.T02 - 1, Pow2.T03 - 1, Pow2.T04 - 1, Pow2.T05 - 1, Pow2.T06 - 1, Pow2.T07 - 1, Pow2.T08 - 1);
@@ -117,7 +116,7 @@ namespace Z0
             Claim.veq(v512Expect,v512Actual);
         }
 
-        public void vgather_128x32u_blocks()
+        public void vgather_blocks()
         {                
             const int BlockLength = 4;
             const int CellCount = 512;
@@ -183,7 +182,6 @@ namespace Z0
             0x7f,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
             0xff,0x00,0x00,0x00,0x00,0x00,0x00,0x00
         };
-
  
         //[0, 7, 15, 31, 63, 127, 255, 511]
         static ReadOnlySpan<byte> VGather256x32x512IndexData => new byte[]{
@@ -196,7 +194,6 @@ namespace Z0
             0xff,0x00,0x00,0x00,
             0xff,0x01,0x00,0x00
         };
-
         
         //[0, 4, 8, 12, 16, 20, 24, 28]
         static ReadOnlySpan<byte> VGather256x32x4IndexData => new byte[]{
@@ -209,6 +206,5 @@ namespace Z0
             24,0x00,0x00,0x00,
             28,0x01,0x00,0x00
         };
-
     }
 }

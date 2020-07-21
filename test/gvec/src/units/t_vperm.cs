@@ -53,8 +53,7 @@ namespace Z0
             Claim.eq($"{Perm4L.DCBA}", Perm4L.DCBA.Format());           
             Claim.eq($"ABCDEFGH", PermLits.Perm8Identity.Format());   
             Claim.eq($"HGFEDCBA", PermLits.Perm8Reversed.Format());  
-            Claim.eq($"0123456789ABCDEF", PermLits.Perm16Identity.Format());
-                    
+            Claim.eq($"0123456789ABCDEF", PermLits.Perm16Identity.Format());                   
         }
 
         public void perm4_digits()
@@ -250,7 +249,7 @@ namespace Z0
 
         void perm4x64_mapformat()
         {
-            var pmaps = Permute.Exhaust(n4);
+            var pmaps = Permute.symbols(n4);
             Root.iter(pmaps, m => Trace(m.perm.ToString(), m.format));
         }
 

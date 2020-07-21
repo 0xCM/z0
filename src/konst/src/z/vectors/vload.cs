@@ -16,7 +16,6 @@ namespace Z0
 
     partial struct z
     {
-
         [MethodImpl(Inline)]
         public static Vector128<byte> vbytes(W128 w, ulong lo)
             => Vector128.CreateScalarUnsafe(lo).As<ulong,byte>();

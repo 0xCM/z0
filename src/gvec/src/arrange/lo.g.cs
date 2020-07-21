@@ -20,7 +20,43 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vlo<T>(Vector128<T> src)
             where T : unmanaged
-                =>  As.generic<T>(vzerohi(As.v64u(src)));
+                => z.generic<T>(vzerohi(z.v64u(src)));
+
+        /// <summary>
+        /// Extracts the lo 128-bit lane of the source vector to scalar targets
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static void vlo<T>(Vector256<T> src, out ulong x0, out ulong x1)
+            where T : unmanaged
+                => z.vlo(v64u(src), out x0, out x1);
+
+        /// <summary>
+        /// Extracts the lo 128-bit lane of the source vector to a pair
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Closures(AllNumeric)]
+        public static ref Pair<ulong> vlo<T>(Vector256<T> src, ref Pair<ulong> dst)
+            where T : unmanaged        
+                => ref z.vlo(v64u(src), ref dst);
+
+        /// <summary>
+        /// Extracts the lower 256-bits from the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Vector256<T> vlo<T>(Vector512<T> src)
+            where T : unmanaged
+                => src.Lo;       
+
+        /// <summary>
+        /// Extracts the lower 256-bits from the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Closures(AllNumeric)]
+        public static Vector512<T> vlo<T>(Vector1024<T> src)
+            where T : unmanaged
+                => src.Lo;       
 
         /// <summary>
         /// Extracts the lo 128-bit lane of the source vector
@@ -44,80 +80,45 @@ namespace Z0
                 return vlo_f(src);
         }
 
-        /// <summary>
-        /// Extracts the lo 128-bit lane of the source vector to scalar targets
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static void vlo<T>(Vector256<T> src, out ulong x0, out ulong x1)
-            where T : unmanaged
-                => V0d.vlo(v64u(src), out x0, out x1);
-
-        /// <summary>
-        /// Extracts the lo 128-bit lane of the source vector to a pair
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Closures(AllNumeric)]
-        public static ref Pair<ulong> vlo<T>(Vector256<T> src, ref Pair<ulong> dst)
-            where T : unmanaged        
-                => ref V0d.vlo(v64u(src), ref dst);
-
-        /// <summary>
-        /// Extracts the lower 256-bits from the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector256<T> vlo<T>(Vector512<T> src)
-            where T : unmanaged
-                => src.Lo;       
-
-        /// <summary>
-        /// Extracts the lower 256-bits from the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Closures(AllNumeric)]
-        public static Vector512<T> vlo<T>(Vector1024<T> src)
-            where T : unmanaged
-                => src.Lo;       
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vlo_i<T>(Vector256<T> src)
+        static Vector128<T> vlo_i<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.generic<T>(V0d.vlo(v8i(src)));
+                return z.generic<T>(z.vlo(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return As.generic<T>(V0d.vlo(v16i(src)));
+                return z.generic<T>(z.vlo(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return As.generic<T>(V0d.vlo(v32i(src)));
+                return z.generic<T>(z.vlo(v32i(src)));
             else
-                return As.generic<T>(V0d.vlo(v64i(src)));
+                return z.generic<T>(z.vlo(v64i(src)));
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vlo_u<T>(Vector256<T> src)
+        static Vector128<T> vlo_u<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.generic<T>(V0d.vlo(v8u(src)));
+                return z.generic<T>(z.vlo(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return As.generic<T>(V0d.vlo(v16u(src)));
+                return z.generic<T>(z.vlo(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return As.generic<T>(V0d.vlo(v32u(src)));
+                return z.generic<T>(z.vlo(v32u(src)));
             else 
-                return As.generic<T>(V0d.vlo(v64u(src)));
+                return z.generic<T>(z.vlo(v64u(src)));
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vlo_f<T>(Vector256<T> src)
+        static Vector128<T> vlo_f<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return As.generic<T>(V0d.vlo(v32f(src)));
+                return z.generic<T>(z.vlo(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return As.generic<T>(V0d.vlo(v64f(src)));
+                return z.generic<T>(z.vlo(v64f(src)));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

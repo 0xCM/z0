@@ -44,14 +44,12 @@ namespace Z0
                 if(i == penultimate)
                     m[i] = Pow2.pow(last);
                 else
-                    m[i] = Random.Pow2<ulong>(i + 1, penultimate);            
+                    m[i] = Random.Power<ulong>(i + 1, penultimate);            
             }
             var g = BitMatrix.graph(m);
 
             Claim.eq(64,g.VertexCount);
             Claim.eq(63,g.EdgeCount);       
         }
-
     }
-
 }

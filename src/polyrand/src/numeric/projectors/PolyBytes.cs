@@ -66,7 +66,7 @@ namespace Z0
                             yield return bytes[i];
                 }
             }
-            return PolyStream.create(produce(), random.RngKind);
+            return PolyStreams.create(produce(), random.RngKind);
         }
     }
 }

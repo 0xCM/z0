@@ -7,13 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-
-    using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Avx;    
-    using static System.Runtime.Intrinsics.X86.Avx2;    
      
     using static Konst; 
-    using static V0;
 
     partial struct V0d
     {
@@ -28,7 +23,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vmaplo(Vector128<sbyte> src, N128 w, short t = default)
-            => ConvertToVector128Int16(src);
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
@@ -39,8 +34,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmaplo(Vector128<sbyte> src, N128 w, ushort t =  default)
-            => v16u(ConvertToVector128Int16(src));
-
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi32 (__m128i a) VPMOVSXBD ymm, xmm/m128
@@ -50,7 +44,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmaplo(Vector128<sbyte> src, N256 w, int t = default)
-            => ConvertToVector256Int32(src);
+            => z.vmaplo(src, w, t);
 
         // ~ 128x8u -> X
         // ~ ------------------------------------------------------------------
@@ -64,8 +58,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vmaplo(Vector128<byte> src, N128 w, short t = default)
-            => ConvertToVector128Int16(src);
-
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
@@ -76,7 +69,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmaplo(Vector128<byte> src, N128 w, ushort t = default)
-            => v16u(ConvertToVector128Int16(src));
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
@@ -86,7 +79,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vmaplo(Vector128<byte> src, N256 w, uint t = default)
-            => v32u(ConvertToVector256Int32(src));
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
@@ -96,8 +89,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmaplo(Vector128<byte> src, N256 w, int t = default)
-            => ConvertToVector256Int32(src);
-
+            => z.vmaplo(src, w, t);
 
         // ~ 128x16i -> X
         // ~ ------------------------------------------------------------------
@@ -109,8 +101,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vmaplo(Vector128<short> src, N128 w, int t = default)
-            => ConvertToVector128Int32(src);
-
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
@@ -120,8 +111,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmaplo(Vector128<short> src, N256 w, long t = default)
-            => ConvertToVector256Int64(src);
-
+            => z.vmaplo(src, w, t);
 
         // ~ 128x16u -> X
         // ~ ------------------------------------------------------------------
@@ -133,7 +123,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vmaplo(Vector128<ushort> src, N128 w, uint t = default)
-            => v32u(ConvertToVector128Int32(src));
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
@@ -142,7 +132,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmaplo(Vector128<ushort> src, N256 w, long t = default)
-            => ConvertToVector256Int64(src);
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
@@ -151,7 +141,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmaplo(Vector128<ushort> src, N256 w, ulong t = default)
-            => v64u(ConvertToVector256Int64(src));
+            => z.vmaplo(src, w, t);
 
         // ~ 128x32u -> X
         // ~ ------------------------------------------------------------------
@@ -165,8 +155,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<long> vmaplo(Vector128<uint> src, N128 w, long t = default)
-            => ConvertToVector128Int64(src);
-
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
@@ -177,8 +166,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vmaplo(Vector128<uint> src, N128 w, ulong t = default)
-            => v64u(ConvertToVector128Int64(src));
-
+            => z.vmaplo(src, w, t);
 
         // ~ 256x8i -> X
         // ~ ------------------------------------------------------------------
@@ -191,7 +179,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vmaplo(Vector256<sbyte> src, N256 w, short t = default)
-            => ConvertToVector256Int16(vlo(src));
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
@@ -201,7 +189,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vmaphi(Vector256<sbyte> src, N256 w, short t = default)
-            => ConvertToVector256Int16(vhi(src));
+            => z.vmaplo(src, w, t);
 
         // ~ 256x8u -> X
         // ~ ------------------------------------------------------------------
@@ -214,7 +202,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vmaplo(Vector256<byte> src, N256 w, ushort t = default)
-            => v16u(ConvertToVector256Int16(vlo(src)));
+            => z.vmaplo(src, w, t);
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -224,7 +212,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vmaplo(Vector256<byte> src, N256 w, short t = default)
-            => ConvertToVector256Int16(vlo(src));
+            => z.vmaplo(src, w, t);
 
         // ~ 256x16i -> X
         // ~ ------------------------------------------------------------------
@@ -237,7 +225,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmaplo(Vector256<short> src, N256 w, int t = default)
-            => ConvertToVector256Int32(vlo(src));
+            => z.vmaplo(src, w, t);
 
         // ~ 256x16u -> X
         // ~ ------------------------------------------------------------------
@@ -250,8 +238,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vmaplo(Vector256<ushort> src, N256 w, uint t = default)
-            => v32u(ConvertToVector256Int32(vlo(src)));
-
+            => z.vmaplo(src, w, t);
 
         // ~ 256x32i -> X
         // ~ ------------------------------------------------------------------
@@ -264,7 +251,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmaplo(Vector256<int> src, N256 w, long t = default)
-            => ConvertToVector256Int64(vlo(src));
+            => z.vmaplo(src, w, t);
 
         // ~ 256x32u -> X
         // ~ ------------------------------------------------------------------
@@ -277,7 +264,6 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmaplo(Vector256<uint> src, N256 w, ulong t = default)
-            => v64u(ConvertToVector256Int64(vlo(src)));
-
+            => z.vmaplo(src, w, t);
     }
 }

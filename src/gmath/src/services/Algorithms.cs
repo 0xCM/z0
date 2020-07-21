@@ -22,7 +22,7 @@ namespace Z0
             var min = src.Left;
             var max = src.Right;
             var current = min;
-            var count = z.numeric<T,int>(src.Length()) + 1;
+            var count = z.convert<T,int>(src.Length()) + 1;
             Span<T> increments = sys.alloc<T>(count);
             var index = 0u;
             while(lteq(current,max) && index < increments.Length)

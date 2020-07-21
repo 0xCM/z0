@@ -27,10 +27,9 @@ namespace Z0
         public static unsafe int @int(float src)
             => (*((int*)(&src))); 
 
-
         [MethodImpl(Inline), Op, Closures(Numeric32x64k)]
         public static unsafe int @int<T>(T src)
             where T : unmanaged             
-                => *((int*)(&src));
+                => *((int*)(&src));         
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Blocks;
 
-    partial class XBlocks    
+    partial class XTend    
     {
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static ref T BlockRef<T>(this in Block8<T> src, int index)
             where T : unmanaged
                 => ref reference(src,index);
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UInt8x16k)]
         public static ref T BlockRef<T>(this in Block16<T> src, int index)
             where T : unmanaged
                 => ref reference(src,index);
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UInt8x16x32k)]
         public static ref T BlockRef<T>(this in Block32<T> src, int index)
             where T : unmanaged
                 => ref reference(src,index);
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T BlockRef<T>(this in Block64<T> src, int index)
             where T : unmanaged
                 => ref reference(src,index);
@@ -62,10 +62,10 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T BlockRef<T>(this in Block128<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength);  
+                => ref z.add(src.Head, index*src.BlockLength);  
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -73,10 +73,10 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T BlockRef<T>(this in Block256<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength);  
+                => ref z.add(src.Head, index*src.BlockLength);  
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -84,9 +84,9 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T BlockRef<T>(this in Block512<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength);  
+                => ref z.add(src.Head, index*src.BlockLength);  
     }
 }

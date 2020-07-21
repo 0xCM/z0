@@ -9,21 +9,27 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static HexConst;
-    using static As;
-    using static Root;
     using static V0;
     using static V0d;
     using static Typed;
     
     partial class vexamples
     {        
-        static ReadOnlySpan<byte> perm_add_data 
+        public static ReadOnlySpan<byte> AddPattern 
             => new byte[32]{0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16};
+
+        //Identity
+        public static ReadOnlySpan<byte> IdentityPattern  
+            => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
+
+        //Reversal
+        public static ReadOnlySpan<byte> ReversalPattern  
+            => new byte[16]{F,E,D,C,B,A,9,8,7,6,5,4,3,2,1,0};
 
         /// <summary>
         /// Encodes a permutation on 16 unsigned shorts as a permutation on 32 bytes
         /// </summary>
-        static Vector256<byte> ToShuffleSpec(
+        public static Vector256<byte> vshuffle_spec_parts(
             ushort x0, ushort x1, ushort x2, ushort x3, ushort x4, ushort x5, ushort x6, ushort x7,
             ushort x8, ushort x9, ushort xA, ushort xB, ushort xC, ushort xD, ushort xE, ushort xF)
         {
@@ -84,19 +90,19 @@ namespace Z0
         /// <summary>
         /// Encodes a 256x16u component-oriented shuffle as an equivalent 256x8u component-oriented shuffle
         /// </summary>
-        static Vector256<byte> ToShuffleSpec(Vector256<ushort> src)
-            => ToShuffleSpec(
+        public static Vector256<byte> vshuffle_spec_1(Vector256<ushort> src)
+            => vshuffle_spec_parts(
                 vcell(src,0), vcell(src,1), vcell(src,2),vcell(src,3), 
                 vcell(src,4), vcell(src,5), vcell(src,6), vcell(src,7),
                 vcell(src,8), vcell(src,9), vcell(src,10), vcell(src,11), 
                 vcell(src,12), vcell(src,13), vcell(src,14), vcell(src,15)
                 );
 
-        static Vector256<byte> ToShuffleSpec2(Vector256<ushort> src)
+        public static Vector256<byte> vshuffle_spec_2(Vector256<ushort> src)
             => dvec.vcompact(src, gvec.vinc(w256, As.uint16(16)),n256,z8);
 
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
-            => V0.v16u(V0d.vshuf32x8(V0.v8u(a), ToShuffleSpec(spec)));
+            => V0.v16u(V0d.vshuf32x8(V0.v8u(a), vshuffle_spec_1(spec)));
 
         public void vshuf16x16()
         {
@@ -120,12 +126,12 @@ namespace Z0
         {
             var w = w128;
             var x0 = vincrements<byte>(w);
-            var x0Spec = vload(w, in head(Pattern1));
+            var x0Spec = vload(w, z.first(IdentityPattern));
             var x0Dst = V0d.vshuf16x8(x0,x0Spec);
             Claim.veq(x0Spec,x0Dst);
 
             var x1 = vincrements<byte>(w);
-            var x1Spec = vload(w, in head(Pattern2));
+            var x1Spec = vload(w, z.first(ReversalPattern));
             var x1Dst = V0d.vshuf16x8(x1,x1Spec);
             Claim.veq(x1Spec,x1Dst);
 
@@ -163,7 +169,7 @@ namespace Z0
             var expect = VData.vdecrements<byte>(n128);
             Claim.veq(expect, dst);
 
-            var identity = ShuffleIdentityMask();
+            var identity = videntity_shuffle();
             for(var i=0; i<CycleCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
@@ -172,77 +178,7 @@ namespace Z0
             }
         }
 
-        public void vperm4x16()
-        {
-            var id = vparts(w128,0,1,2,3,6,7,8,9);
-            Claim.veq(V0d.vperm4x16(vparts(w128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), vparts(w128,0,3,2,1,6,9,8,7));
-        }
-
-        public void vperm4x32_128x32u_example1()
-        {
-            var trace = false;
-            var pSrc = Random.EnumValues<Perm4L>(x => (byte)x > 5);
-            
-            for(var i=0; i<CycleCount; i++)
-            {
-                var v1 = Random.CpuVector<uint>(n128); 
-                var v1s = v1.ToSpan();
-                var p = pSrc.First();
-                
-                // Disassemble the spec
-                var p0 = Bits.gather((byte)p, (byte)0b11);                
-                var p1 = Bits.gather((byte)p, (byte)0b1100);
-                var p2 = Bits.gather((byte)p, (byte)0b110000);
-                var p3 = Bits.gather((byte)p, (byte)0b11000000);
-                
-                // Reassemble the spec
-                Perm4L q = (Perm4L)(p0 | p1 << 2 | p2 << 4 | p3 << 6);
-                
-                // Same?
-                Claim.Eq(p,q);
-
-                // Permute vector via api
-                var v2 = V0d.vperm4x32(v1,p);
-
-                // Permute vector manually
-                var v3 = V0.vparts(w128, v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
-
-                // Same?
-                Claim.veq(v3,v2);
-
-                if(trace)
-                {
-                    base.Trace("v1", v1.FormatHex());                
-                    base.Trace("p", p.Format());
-                    base.Trace("perm(v1,p)", v2.FormatHex());
-                }                                
-            }
-        }
-
-        public void vperm4x32_128x32u_example2()
-        {
-            var n = n128;
-            var src = vparts(w128, 1,2,3,4);
-            var spec = Perm4L.ABCD;
-            var y = vparts(w128, 4,3,2,1);
-            var x = vperm4x32(src, Perm4L.ABCD);
-            Claim.veq(x, src);
-
-            y = V0.vparts(w128,4,3,2,1);
-            spec = Perm4L.DCBA;
-            x = vperm4x32(src,spec);
-            Claim.veq(x, y); 
-
-            y = vparts(w128,4u,3u,2u,1u);
-            spec = Perm4L.DCBA;
-            x = vperm4x32(src,spec);
-            Claim.veq(x, y); 
-
-            Claim.veq(vperm4x32(vparts(w128, 0,1,2,3), Perm4L.ADCB), vparts(w128, 0,3,2,1));
-            Claim.veq(vperm4x32(vparts(w128, 0,1,2,3), Perm4L.DBCA), vparts(w128, 3,1,2,0));
-        }
-
-        static Vector256<byte> ShuffleIdentityMask()
+        public static Vector256<byte> videntity_shuffle()
         {
             Block256<byte> mask = Blocks.cellalloc<byte>(n256,1);
 
@@ -258,12 +194,6 @@ namespace Z0
             return mask.LoadVector();
         }
 
-        //Identity
-        static ReadOnlySpan<byte> Pattern1  
-            => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
-
-        //Reversal
-        static ReadOnlySpan<byte> Pattern2  
-            => new byte[16]{F,E,D,C,B,A,9,8,7,6,5,4,3,2,1,0};
+ 
     }
 }

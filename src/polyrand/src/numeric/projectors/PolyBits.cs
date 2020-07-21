@@ -40,6 +40,5 @@ namespace Z0
                     yield return Cast.to<byte,T>((byte)As.testbit(data,i));
             }
         }
-
     }
 }

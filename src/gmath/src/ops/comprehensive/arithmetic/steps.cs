@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0u; i<count; i++)
-                z.seek(dst,i) = add(first, mul(z.numeric<T>(i),step));
+                z.seek(dst,i) = add(first, mul(z.convert<T>(i),step));
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]

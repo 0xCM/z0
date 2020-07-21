@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_masks : t_bitcore<t_masks>
     {                    
@@ -95,10 +95,10 @@ namespace Z0
             where T : unmanaged
         {
             var mincount = 1;
-            var maxcount = bitsize<T>();
+            var maxcount = (int)bitsize<T>();
             for(var i=0; i< RepCount; i++)
             {
-                var count = Random.Single(mincount,maxcount);
+                var count = Random.One(mincount,maxcount);
                 var mask = BitMask.hi(count,t);                
                 var pop = gbits.pop(mask);
                 if(pop != count)

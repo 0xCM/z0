@@ -9,24 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst; 
-    using static As;
-    using static In;
-    using static Typed;
-
-    public static class XME
-    {
-        public static string FormatPerm2x128<T>(this Vector512<T> src, Perm2x4 p0, Perm2x4 p1)
-            where T : unmanaged
-        {
-            var sfk = SequenceFormatKind.List;  
-            var sep = Chars.Comma;         
-            var pad = 2;         
-            var sym0 = p0.Symbols().ToString();
-            var sym1 = p1.Symbols().ToString();
-            var description = $"{src.Format()} |> {sym0}{sym1} = {gvec.vperm2x128(src, p0, p1).Format()}";
-            return description;             
-        }
-    }
+    using static z;
 
     partial class gvec
     {
@@ -55,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vgather(w, in uint8(in src), v8u(vidx)));
+                return generic<T>(dvec.vgather(w, u8(src), v8u(vidx)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vgather(w, in uint16(in src), v16u(vidx)));
+                return generic<T>(dvec.vgather(w, u16(src), v16u(vidx)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vgather(w, in uint32(in src), v32u(vidx)));
+                return generic<T>(dvec.vgather(w, u32(src), v32u(vidx)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vgather(w, in uint64(in src), v64u(vidx)));
+                return generic<T>(dvec.vgather(w, u64(src), v64u(vidx)));
             else 
                 return vgather_i(w,src,vidx);
         }
@@ -71,15 +54,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vgather(w, in int8(in src), v8i(vidx)));
+                return generic<T>(dvec.vgather(w, i8(src), v8i(vidx)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vgather(w, in int16(in src), v16i(vidx)));
+                return generic<T>(dvec.vgather(w, i16(src), v16i(vidx)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vgather(w, in int32(in src), v32i(vidx)));
+                return generic<T>(dvec.vgather(w, i32(src), v32i(vidx)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vgather(w, in int64(in src), v64i(vidx)));
+                return generic<T>(dvec.vgather(w, i64(src), v64i(vidx)));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -87,13 +70,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vgather(w, in uint8(in src), v8u(vidx)));
+                return generic<T>(dvec.vgather(w, u8(src), v8u(vidx)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vgather(w, in uint16(in src), v16u(vidx)));
+                return generic<T>(dvec.vgather(w, u16(src), v16u(vidx)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vgather(w, in uint32(in src), v32u(vidx)));
+                return generic<T>(dvec.vgather(w, u32(src), v32u(vidx)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vgather(w, in uint64(in src), v64u(vidx)));
+                return generic<T>(dvec.vgather(w, u64(src), v64u(vidx)));
             else 
                 return vgather_i(w,src,vidx);
         }
@@ -103,15 +86,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vgather(w, in int8(in src), v8i(vidx)));
+                return generic<T>(dvec.vgather(w, i8(src), v8i(vidx)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vgather(w, in int16(in src), v16i(vidx)));
+                return generic<T>(dvec.vgather(w, i16(src), v16i(vidx)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vgather(w, in int32(in src), v32i(vidx)));
+                return generic<T>(dvec.vgather(w, i32(src), v32i(vidx)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vgather(w, in int64(in src), v64i(vidx)));
+                return generic<T>(dvec.vgather(w, i64(src), v64i(vidx)));
             else 
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

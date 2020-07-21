@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;    
     using static System.Runtime.Intrinsics.X86.Avx2;    
     
-    using static Memories;    
+    using static z;    
 
     public partial class dvec
     {
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vmax(Vector128<ulong> x, Vector128<ulong> y)
-            => V0d.vselect(vgt(x,y),x,y);
+            => z.vselect(vgt(x,y),x,y);
 
         /// <summary>
         /// Computes the maximum values of corresponding components
@@ -91,7 +91,7 @@ namespace Z0
         {
             var xL = vinsert(x,default,0);
             var yL = vinsert(y,default,0);
-            return V0d.vlo(vmax(xL,yL));
+            return z.vlo(vmax(xL,yL));
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vmax(Vector256<ulong> x, Vector256<ulong> y)
-            => V0d.vselect(vgt(x,y),x,y);
+            => z.vselect(vgt(x,y),x,y);
 
         /// <summary>
         /// Computes the maximum values of corresponding components

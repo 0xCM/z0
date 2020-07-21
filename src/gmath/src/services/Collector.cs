@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Collector Create<T>(T seed = default)
             where T : unmanaged
-                => new Collector(z.numeric<T,double>(seed));
+                => new Collector(z.convert<T,double>(seed));
 
         [MethodImpl(Inline)]
         public static Collector operator +(Collector a, byte value)

@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
     /// </summary>
     [ApiHost]
-    public readonly struct Perm : IApiHost<Perm>
+    public readonly struct Perm
     {        
         const NumericKind Closure = UnsignedInts;
 
@@ -37,6 +37,28 @@ namespace Z0
             for(var i=0u; i<p.Length; i++)
                 seek(dst,i) = skip(src,(uint)p[i]);                
             return ref dst;
+        }
+
+        /// <summary>
+        /// Applies a sequence of transpositions to source span elements
+        /// </summary>
+        /// <param name="src">The source and target span</param>
+        /// <param name="i">The first index</param>
+        /// <param name="j">The second index</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Span<T> apply<T>(Span<T> src, params Swap[] swaps)           
+            where T : unmanaged
+        {
+            var len = swaps.Length;
+            ref var srcmem = ref first(src);
+            ref var swapmem = ref Arrays.head(swaps);
+            for(var k = 0u; k < len; k++)
+            {
+                (var i, var j) = skip(in swapmem, k);
+                z.refswap(ref seek(srcmem, i), ref seek(srcmem, j));
+            }
+            return src;
         }
 
         [MethodImpl(Inline)]

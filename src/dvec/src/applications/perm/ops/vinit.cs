@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class Permute
     {
@@ -30,11 +30,11 @@ namespace Z0
             => new Perm32(V0.vload(w, src.Terms));
 
         [MethodImpl(Inline), Op]
-        public static Perm16 vinit(Vector128<byte> data)
+        public static Perm16 vspec(Vector128<byte> data)
             => new Perm16(dvec.vand(data, V0d.vbroadcast(w128, BitMasks.Msb8x8x3)));
                 
         [MethodImpl(Inline), Op]
-        public static Perm32 vinit(Vector256<byte> data)
+        public static Perm32 vspec(Vector256<byte> data)
             => new Perm32(dvec.vand(data, Vectors.vbroadcast(w256, BitMasks.Msb8x8x3)));
     }
 }

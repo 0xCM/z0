@@ -9,11 +9,10 @@ namespace Z0
 
     using static HexConst;
     using static Vectors;
-    using static Typed;
 
     partial class vexamples
     {     
-        public void vduplicate_example()
+        public void vduplicate()
         {
             var n = n256;
             var width = n32;

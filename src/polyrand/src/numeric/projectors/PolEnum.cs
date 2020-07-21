@@ -39,7 +39,7 @@ namespace Z0
                 }            
             }
 
-            return PolyStream.create(produce(), random.RngKind);
+            return PolyStreams.create(produce(), random.RngKind);
         }
 
         /// <summary>
@@ -62,8 +62,7 @@ namespace Z0
                     yield return Enum.Parse<E>(names[stream.Next()]);
             }
 
-            return PolyStream.create(produce(), random.RngKind);
+            return PolyStreams.create(produce(), random.RngKind);
         } 
     }
-
 }

@@ -23,6 +23,19 @@ namespace Z0
             => API.natural(src);
 
         /// <summary>
+        /// Shuffles bitstring content as determined by a permutation
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="p">The permutation to apply</param>
+        public static BitString Permute(this BitString src, Perm p)
+        {
+            var dst = BitString.alloc(p.Length);
+            for(var i = 0; i < p.Length; i++)
+                dst[i] = src[p[i]];
+            return dst;
+        }
+
+        /// <summary>
         /// Constructs the canonical literal representation of a natural permutation on 4 symbols
         /// </summary>
         /// <param name="src">The natural permutation</param>

@@ -14,11 +14,11 @@ namespace Z0
         /// <summary>
         /// Presents a generic reference as an uint32 pointer
         /// </summary>
-        /// <param name="r">The memory reference</param>
+        /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The source reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe uint* p32u<T>(in T r)
+        public static unsafe uint* p32u<T>(in T src)
             where T : unmanaged
-                => refptr<T,uint>(ref edit(r));
+                => refptr<T,uint>(ref edit(src));
     }
 }

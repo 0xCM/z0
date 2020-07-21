@@ -14,11 +14,11 @@ namespace Z0
         /// <summary>
         /// Presents a generic reference as a ushort pointer
         /// </summary>
-        /// <param name="r">The memory reference</param>
+        /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The source reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe ushort* p16u<T>(in T r)
+        public static unsafe ushort* p16u<T>(in T src)
             where T : unmanaged
-                => refptr<T,ushort>(ref edit(r));
+                => refptr<T,ushort>(ref edit(src));
     }
 }

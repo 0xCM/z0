@@ -9,10 +9,12 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static Memories;
+    using static z;
 
     public class t_vblendp : t_permute<t_vblendp>
     {
+        public override bool Enabled => true;
+
         bool EmitInfo
             => false;
 
@@ -65,15 +67,14 @@ namespace Z0
             var maskspec = MaskSpecs.msb(n2,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), max(default(NK<ulong>)));
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), z.maxval<ulong>());
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,0,5,2,7,4,1,6,3);
             Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Notify(descrition);
-            
+                Notify(descrition);            
         }
 
         /// <summary>

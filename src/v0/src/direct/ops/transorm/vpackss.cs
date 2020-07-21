@@ -8,13 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
 
-    using System.Runtime.Intrinsics.X86;
-
-    using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst;
-    using static V0;
 
     partial struct V0d
     {
@@ -25,7 +20,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vpackss(Vector128<short> x, Vector128<short> y)
-            => PackSignedSaturate(x,y);
+            => z.vpackss(x,y);
 
         /// <summary>
         ///  __m128i _mm_packs_epi16 (__m128i a, __m128i b)PACKSSWB xmm, xmm/m128
@@ -34,7 +29,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vpackss(Vector128<ushort> x, Vector128<ushort> y)
-            => PackSignedSaturate(v16i(x),v16i(y));
+            => z.vpackss(x,y);
 
         /// <summary>
         /// __m128i _mm_packs_epi32 (__m128i a, __m128i b)PACKSSDW xmm, xmm/m128
@@ -43,7 +38,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vpackss(Vector128<int> x, Vector128<int> y)
-            => PackSignedSaturate(x,y);
+            => z.vpackss(x,y);
 
         /// <summary>
         /// __m128i _mm_packs_epi32 (__m128i a, __m128i b)PACKSSDW xmm, xmm/m128
@@ -52,7 +47,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vpackss(Vector128<uint> x, Vector128<uint> y)
-            => PackSignedSaturate(v32i(x), v32i(y));
+            => z.vpackss(x,y);
 
         /// <summary>
         /// __m256i _mm256_packs_epi16 (__m256i a, __m256i b)VPACKSSWB ymm, ymm, ymm/m256
@@ -61,7 +56,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vpackss(Vector256<short> x, Vector256<short> y)
-            => PackSignedSaturate(x,y);
+            => z.vpackss(x,y);
 
         /// <summary>
         /// __m256i _mm256_packs_epi16 (__m256i a, __m256i b)VPACKSSWB ymm, ymm, ymm/m256
@@ -70,7 +65,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vpackss(Vector256<ushort> x, Vector256<ushort> y)
-            => PackSignedSaturate(v16i(x),v16i(y));
+            => z.vpackss(x,y);
 
         /// <summary>
         /// __m256i _mm256_packs_epi32 (__m256i a, __m256i b)VPACKSSDW ymm, ymm, ymm/m256
@@ -79,7 +74,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vpackss(Vector256<int> x, Vector256<int> y)
-            =>  PackSignedSaturate(x,y);
+            => z.vpackss(x,y);
 
         /// <summary>
         /// __m256i _mm256_packs_epi32 (__m256i a, __m256i b)VPACKSSDW ymm, ymm, ymm/m256
@@ -88,6 +83,6 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vpackss(Vector256<uint> x, Vector256<uint> y)
-            => PackSignedSaturate(v32i(x), v32i(y));
+            => z.vpackss(x,y);
     }
 }

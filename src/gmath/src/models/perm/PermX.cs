@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Konst;
-    using static Memories;
-    using API = Swap;
 
     partial class XTend
     {
@@ -64,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Swap<T>(this Span<T> src, params Swap[] swaps)           
             where T : unmanaged
-                => API.apply(src,swaps);
+                => Perm.apply(src,swaps);
 
         /// <summary>
         /// Formats the terms of a permutation

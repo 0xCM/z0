@@ -99,7 +99,7 @@ namespace Z0
         public static IEnumerable<T> range<N,T>(T first, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.range(first, numeric<T>(n.NatValue));
+                => gmath.range(first, convert<T>(n.NatValue));
 
         public static RowVector<N,T> increasing<N,T>(N length = default, T first = default)
             where N : unmanaged, ITypeNat

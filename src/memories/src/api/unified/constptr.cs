@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe T* constptr<T>(in T src)
             where T : unmanaged
-                => ptr(ref edit(in src));
+                => z.gptr(src);
 
         /// <summary>
         /// Presents a readonly reference as a generic pointer displaced by an element offset
@@ -31,6 +31,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe T* constptr<T>(in T src, int offset)
             where T : unmanaged
-                => ptr(ref edit(in skip(in src, offset)));
+                => z.gptr(src,offset);
     }
 }

@@ -322,7 +322,7 @@ namespace Z0
         void check_increments<T>(T first = default)
             where T : unmanaged
         {
-            var count = Random.Next(21, 256);
+            var count = Random.Next(21u, 256u);
             Span<T> data = new T[count];
             ref var src = ref head(data);
             gmath.increments(first, count, ref src);

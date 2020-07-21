@@ -7,14 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-
-    using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Avx;    
-    using static System.Runtime.Intrinsics.X86.Avx2;    
      
     using static Konst; 
-    using static V0;    
-
+    
     partial struct V0d
     {
         /// <summary>
@@ -26,7 +21,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vmaphi(Vector128<sbyte> src, N128 w, NK<short> k)
-            => ConvertToVector128Int16(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
@@ -38,7 +33,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmaphi(Vector128<sbyte> src, N128 w, NK<ushort> k)
-            => v16u(ConvertToVector128Int16(V0d.vhi(src)));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi32 (__m128i a) VPMOVSXBD ymm, xmm/m128
@@ -49,7 +44,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmaphi(Vector128<sbyte> src, N256 w, NK<int> k)
-            => ConvertToVector256Int32(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
@@ -61,7 +56,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vmaphi(Vector128<byte> src, N128 w, NK<short> k)
-            =>  ConvertToVector128Int16(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
@@ -73,7 +68,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmaphi(Vector128<byte> src, N128 w, NK<ushort> k)
-            => v16u(ConvertToVector128Int16(V0d.vhi(src)));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
@@ -84,7 +79,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vmaphi(Vector128<byte> src, N256 w, NK<uint> k)
-            => v32u(ConvertToVector256Int32(V0d.vhi(src)));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
@@ -95,7 +90,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmaphi(Vector128<byte> src, N256 w, NK<int> k)
-            => ConvertToVector256Int32(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m128i _mm_cvtepi16_epi32 (__m128i a) PMOVSXWD xmm, xmm/m64
@@ -105,7 +100,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vmaphi(Vector128<short> src, N128 w, NK<int> k)
-            => ConvertToVector128Int32(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
@@ -116,7 +111,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmaphi(Vector128<short> src, N256 w, NK<long> k)
-            => ConvertToVector256Int64(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m128i _mm_cvtepu16_epi32 (__m128i a)PMOVZXWD xmm, xmm/m64
@@ -126,7 +121,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vmaphi(Vector128<ushort> src, N128 w, NK<uint> k)
-            => v32u(ConvertToVector128Int32(V0d.vhi(src)));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
@@ -136,7 +131,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmaphi(Vector128<ushort> src, N256 w, NK<long> k)
-            => ConvertToVector256Int64(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
@@ -146,7 +141,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmaphi(Vector128<ushort> src, N256 w, NK<ulong> k)
-            => v64u(ConvertToVector256Int64(V0d.vhi(src)));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
@@ -158,7 +153,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<long> vmaphi(Vector128<uint> src, N128 w, NK<long> k)
-            => ConvertToVector128Int64(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
@@ -170,7 +165,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vmaphi(Vector128<uint> src, N128 w, NK<ulong> k)
-            => v64u(ConvertToVector128Int64(V0d.vhi(src)));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -181,7 +176,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vmaphi(Vector256<byte> src, N256 w, NK<ushort> k)
-            => v16u(ConvertToVector256Int16(V0d.vhi(src)));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -192,7 +187,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vmaphi(Vector256<byte> src, N256 w, NK<short> k)
-            => ConvertToVector256Int16(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
@@ -203,7 +198,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmaphi(Vector256<short> src, N256 w, NK<int> k)
-            => ConvertToVector256Int32(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
@@ -214,7 +209,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vmaphi(Vector256<ushort> src, N256 w, NK<uint> k)
-            => v32u(ConvertToVector256Int32(V0d.vhi(src)));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
@@ -225,7 +220,7 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmaphi(Vector256<int> src, N256 w, NK<long> k)
-            => ConvertToVector256Int64(V0d.vhi(src));
+            => z.vmaphi(src,w,k);
 
         /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
@@ -236,6 +231,6 @@ namespace Z0
         /// <param name="k">The target cell kind selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmaphi(Vector256<uint> src, N256 w, NK<ulong> k)
-            => v64u(ConvertToVector256Int64(V0d.vhi(src)));
+             => z.vmaphi(src,w,k);
     }
 }

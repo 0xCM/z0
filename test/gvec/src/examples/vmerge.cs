@@ -10,26 +10,7 @@ namespace Z0
 
     partial class vexamples
     {
-        public void vmergehi_256x32u()
-        {
-            /*
-            [ 0,  1,  2,  3,  4,  5,  6,  7]
-            [ 8,  9, 10, 11, 12, 13, 14, 15]
-            [ 4, 12,  5, 13,  6, 14,  7, 15]
-            */
-            
-            var w = n256;
-            var t = z32;
-            var count = V0.vcount(w,t);
-
-            var x = gvec.vinc(w,t);
-            var y = gvec.vinc(w, (x.LastCell() + 1));
-            var z = dvec.vmergelo(x,y);
-            var fmt = $"({x.Format()},{y.Format()}) -> {z.Format()}";
-        }
-        
-
-        public void vmerge_example()
+        public void vmerge_128()
         {
             var a = vparts(n128, 0u,1,2,3);
             var b = vparts(n128, 4u,5,6,7);
@@ -45,47 +26,62 @@ namespace Z0
             var z3 = v8u(dvec.vmergehi(v16u(x1),v16u(y1)));                            
         }
 
-        public void vunpack_lo_8()
+        public void vmerge_lo()
         {
+            /*
+            [ 0,  1,  2,  3,  4,  5,  6,  7]
+            [ 8,  9, 10, 11, 12, 13, 14, 15]
+            [ 4, 12,  5, 13,  6, 14,  7, 15]
+            */
+            
+            var w = n256;
+            var t = z32;
+            var count = V0.vcount(w,t);
+            var x = gvec.vinc(w,t);
+            var y = gvec.vinc(w, (x.LastCell() + 1));
+            var z = dvec.vmergelo(x,y);
+            var fmt = $"({x.Format()},{y.Format()}) -> {z.Format()}";
+        }
+        
+        public void vmerge_256()
+        {
+            var w = n256;
+            var t = z8;
+            var x = gvec.vinc(w,t);
+            var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
+            var z = dvec.vmerge(x,y);
+            Notify($"vmerge_256");
+            Notify(x.Format());
+            Notify(y.Format());
+            Notify(z.Format());
+        }
 
-            void report()
-            {
-                var x = V0.vincrements<byte>(n128);
-                var y = V0d.vadd(x, V0d.vbroadcast(n128, (byte)16));
+        public void vmerge_hi()
+        {
+            var w = n256;
+            var t = z8;
+            var x = gvec.vinc(w,t);
+            var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
+            var z = dvec.vmergehi(x,y);
+            Notify($"vmerge_hi");
+            Notify(x.Format());
+            Notify(y.Format());
+            Notify(z.Format());
+        }
 
-                var lo = gvec.vmergelo(x,y);
-                var hi = gvec.vmergehi(x,y);
+        public void vmerge_hilo()
+        {
+            var x = V0.vincrements<byte>(n128);
+            var y = V0d.vadd(x, V0d.vbroadcast(n128, (byte)16));
 
-                Notify(x.Format());
-                Notify(y.Format());
-                Notify(lo.Format());
-                Notify(hi.Format());
-            }
+            var lo = gvec.vmergelo(x,y);
+            var hi = gvec.vmergehi(x,y);
 
-            void merge_hi()
-            {
-                var w = n256;
-                var t = z8;
-                var x = gvec.vinc(w,t);
-                var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
-                var z = dvec.vmergehi(x,y);
-                Notify($"mergehi");
-                Notify(x.Format());
-                Notify(y.Format());
-                Notify(z.Format());
-            }
-
-            void merge()
-            {
-                var w = n256;
-                var t = z8;
-                var x = gvec.vinc(w,t);
-                var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
-                var z = dvec.vmerge(x,y);
-                Notify(x.Format());
-                Notify(y.Format());
-                Notify(z.Format());
-            }
+            Notify($"vmerge_hilo");
+            Notify(x.Format());
+            Notify(y.Format());
+            Notify(lo.Format());
+            Notify(hi.Format());
         }
     }
 }
