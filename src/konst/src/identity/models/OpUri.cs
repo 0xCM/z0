@@ -87,10 +87,6 @@ namespace Z0
             => new OpUri(scheme, host, group, opid);
 
         [MethodImpl(Inline)]
-        public static OpUri hex(ApiHostUri host, string group)        
-            => new OpUri(OpUriScheme.Hex, host, group, OpIdentity.Empty);
-
-        [MethodImpl(Inline)]
         public static OpUri hex(ApiHostUri host, string group, OpIdentity opid)        
             => new OpUri(OpUriScheme.Hex, host, group, opid);
 
@@ -121,6 +117,7 @@ namespace Z0
                 ? QueryText(scheme, host.Owner, host.Name, group) 
                 : FullUriText(scheme, host.Owner, host.Name, GroupName, opid);
         }
+
 
         [MethodImpl(Inline)]
         public string Format()

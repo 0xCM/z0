@@ -42,7 +42,7 @@ namespace Z0.Asm
             ApiSet = api;
             CodeArchive = Archives.Services.CaptureArchive(root);
             ImmSpecializer = Capture.Services.ImmSpecializer(decoder);
-            ApiCollector =  Identities.Services.ApiCollector;
+            ApiCollector =  Identities.Services.Collector;
             ConnectReceivers(Broker);
         }
 

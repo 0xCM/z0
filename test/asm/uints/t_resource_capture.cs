@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Linq;
 
-    using Z0.Asm.Data;
 
     using static Root;
 
@@ -16,7 +15,6 @@ namespace Z0.Asm
         public void define_resources()
         {
         }
-
         
         public void mask_capture()
         {
@@ -36,12 +34,12 @@ namespace Z0.Asm
             }    
         }
                 
-        public void capture_known_resources()
-        {
-            var svc = new AccessorCapture(Context);
-            var accessors = span(svc.CaptureKnown(CasePath(FileExtensions.Asm)));
-            svc.CollectAddresses(accessors,CasePath(FileExtensions.Csv));
-        }
+        // public void capture_known_resources()
+        // {
+        //     var svc = new AccessorCapture(Context);
+        //     var accessors = span(svc.CaptureKnown(CasePath(FileExtensions.Asm)));
+        //     svc.SaveCatalog(accessors,CasePath(FileExtensions.Csv));
+        // }
 
     }
 }

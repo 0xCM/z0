@@ -2,24 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    public readonly struct CapturedAccessor
+    
+    partial class Identity
     {
-        public readonly ResourceAccessor Accessor;
-
-        public readonly AsmFunctionCode Code;        
-        
+        /// <summary>
+        /// Divines the bit-width of a specified type, if possible
+        /// </summary>
+        /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
-        public CapturedAccessor(in ResourceAccessor accessor, in AsmFunctionCode code)
-        {
-            Accessor = accessor;
-            Code = code;
-        }    
+        public static TypeWidth BitWidth(Type t)
+            => Widths.divine(t);
     }
 }

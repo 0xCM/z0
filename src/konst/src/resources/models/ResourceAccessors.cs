@@ -24,9 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ResourceAccessors(ResourceAccessor[] accessors)
-        {
-            Accessors = accessors;
-        }
+            => Accessors = accessors;
 
         public ReadOnlySpan<ResourceAccessor> Data
         {

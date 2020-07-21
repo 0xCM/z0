@@ -12,13 +12,16 @@ namespace Z0
 
     public readonly struct ResourceAccessor
     {
-        public readonly ResourceFormat Format;
+        public readonly ApiHostUri Host;
         
         public readonly MethodInfo Member;
 
+        public readonly ResourceFormat Format;
+        
         [MethodImpl(Inline)]
-        public ResourceAccessor(MethodInfo member, ResourceFormat format)
+        public ResourceAccessor(ApiHostUri host, MethodInfo member, ResourceFormat format)
         {
+            Host = host;
             Member = member;
             Format = format;;
         }       
@@ -26,7 +29,22 @@ namespace Z0
         public Type DeclaringType
         {
             [MethodImpl(Inline)]
-            get => Member.DeclaringType;
+            get => Member?.DeclaringType ?? EmptyVessels.EmptyType;
         }
+ 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Member == null || EmptyVessels.IsEmpty(Member) || Host.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
+        
+        public static ResourceAccessor Empty
+            => new ResourceAccessor(ApiHostUri.Empty, EmptyVessels.EmptyMethod, 0);
     }
 }

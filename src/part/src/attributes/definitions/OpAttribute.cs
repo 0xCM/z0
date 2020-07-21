@@ -11,19 +11,19 @@ namespace Z0
     /// </summary>
     public class OpAttribute : Attribute
     {
-        public string Group {get;}
+        public string GroupName {get;}
 
         public OpAttribute()
         {
-            Group = "";
+            GroupName = "";
         }
 
         public OpAttribute(string group)
         {
-            Group = group;          
+            GroupName = group;          
         }
 
         public override string ToString()
-            => Group;
+            => GroupName;
     }  
 }

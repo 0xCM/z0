@@ -14,24 +14,22 @@ namespace Z0
 
     public readonly struct MemberExtractReader : IMemberExtractReader
     {
+        readonly IApiSet ApiSet;
+
+        [MethodImpl(Inline)]
+        internal MemberExtractReader(IApiSet api)
+            => ApiSet = api;
+
+        [MethodImpl(Inline)]
+        public static IMemberExtractReader create(IApiSet api)
+            => new MemberExtractReader(api);
+
         static ApiIndex IndexApi(IEnumerable<ApiMember> src)
         {
             var pairs = src.Select(h => (h.Id, h));
             var opindex = Identify.index(pairs,true);
             return new ApiIndex(opindex.HashTable, opindex.Duplicates);                
         }            
-
-        readonly IApiSet ApiSet;
-
-        [MethodImpl(Inline)]
-        public static IMemberExtractReader Create(IApiSet api)
-            => new MemberExtractReader(api);
-
-        [MethodImpl(Inline)]
-        internal MemberExtractReader(IApiSet api)
-        {
-            ApiSet = api;
-        }
 
         public ExtractedCode[] Read(FilePath src)
         {

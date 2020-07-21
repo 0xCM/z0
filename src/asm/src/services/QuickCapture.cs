@@ -48,6 +48,13 @@ namespace Z0
             return Service.Capture(id,src);
         }
 
+        [MethodImpl(Inline)]
+        public Option<CapturedCode> Capture(ApiHostUri hos, MethodInfo src)
+        {
+            var id = z.insist(src).Identify();
+            return Service.Capture(id,src);
+        }
+
         public void Dispose()
         {
             Buffer.Dispose();

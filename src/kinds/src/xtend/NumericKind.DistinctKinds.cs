@@ -15,7 +15,7 @@ namespace Z0
         /// Enumerates the distinct numeric kinds represented by the (bitfield) source kind
         /// </summary>
         /// <param name="k">The kind to evaluate</param>
-        public static ISet<NumericKind> DistinctKinds(this NumericKind k)  
-            => Identify.kinds(k);    
+        public static HashSet<NumericKind> DistinctKinds(this NumericKind k)  
+            => Identify.kindset(k);    
     }
 }

@@ -13,15 +13,16 @@ namespace Z0
     partial class Identity
     {
         /// <summary>
-        /// Defines the identity of a generic method
+        /// Assigns host-independent api member identity to a generic method; if the
+        /// source method is nongeneric, returns <see cref='GenericOpIdentity.Empty' />
         /// </summary>
         /// <param name="src">The source method</param>
-        public static GenericOpIdentity generic(MethodInfo src)            
+        public static GenericOpIdentity GenericIdentity(MethodInfo src)            
         {
             if(!src.IsGenericMethod)
                 return GenericOpIdentity.Empty;
                         
-            var id = Identify.Name(src);
+            var id = Identify.ApiMemberName(src);
             id += IDI.PartSep; 
             id += IDI.Generic;
 
@@ -34,16 +35,16 @@ namespace Z0
                 if(i != 0 && last.IsNotBlank())
                     id += IDI.PartSep;
 
-                last = string.Empty;                    
+                last = EmptyString;
 
-                if(args[i].IsParametric())
-                    last = Identity.identify(args[i]);
+                if(args[i].IsTypeParametric())
+                    last = Identity.ParameterTypeIdentity(args[i]);
                 else if(argtype.IsOpenGeneric())
                 {
                     if(argtype.IsVector())
-                        last = text.concat(IDI.Vector, divine(argtype).FormatValue());
+                        last = text.concat(IDI.Vector, BitWidth(argtype).FormatValue());
                     else if(argtype.IsBlocked())
-                        last = text.concat(IDI.Block, divine(argtype).FormatValue());
+                        last = text.concat(IDI.Block, BitWidth(argtype).FormatValue());
                     else if(SpanTypes.IsSystemSpan(argtype))
                         last = SpanTypes.kind(argtype).Format();
                 }

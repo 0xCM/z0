@@ -12,8 +12,12 @@ namespace Z0
 
     partial class XTend
     {
+        /// <summary>
+        /// Determines whether a parameter's type is of some generic kind
+        /// </summary>
+        /// <param name="src">The source parameter</param>
         [MethodImpl(Inline)]
-        public static bool IsParametric(this ParameterInfo src)
+        public static bool IsTypeParametric(this ParameterInfo src)
             => src.ParameterType.IsGenericParameter 
             || src.ParameterType.IsGenericMethodParameter 
             || src.ParameterType.IsGenericTypeParameter;

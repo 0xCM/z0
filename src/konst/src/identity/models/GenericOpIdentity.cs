@@ -26,9 +26,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         GenericOpIdentity(string src)
-            => this.Identifier = src ?? string.Empty;
+            => Identifier = src ?? EmptyString;
  
-        IIdentifedOp<GenericOpIdentity> Identified => this;
 
         public override int GetHashCode()
             => Identified.HashCode;
@@ -39,8 +38,11 @@ namespace Z0
         public override string ToString()
             => Identified.Format();
 
-        public Func<string, GenericOpIdentity> Factory 
-            => Define;
+        // public Func<string, GenericOpIdentity> Factory 
+        //     => Define;
+
+        IIdentifedOp<GenericOpIdentity> Identified 
+            => this;
         
         public static GenericOpIdentity Empty 
             => new GenericOpIdentity(string.Empty);

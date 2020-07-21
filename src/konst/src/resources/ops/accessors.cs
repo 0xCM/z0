@@ -8,14 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static Konst;
     using static z;
 
     partial struct Resources
     {
-
         /// <summary>
         /// Queries the source type for ByteSpan property getters
         /// </summary>
@@ -27,13 +25,13 @@ namespace Z0
                   .Select(p => p.GetGetMethod(true))                  
                   .Where(m  => m != null)
                   .Concrete()
-                  .Select(x => new ResourceAccessor(x, FormatType(x.ReturnType)));
+                  .Select(x => new ResourceAccessor(ApiHostUri.FromHost(src), x, FormatType(x.ReturnType)));
      
         /// <summary>
         /// Queries the source types for ByteSpan property getters
         /// </summary>
         /// <param name="src">The types to query</param>
-        public static ResourceAccessors accessors(IEnumerable<Type> src)        
+        public static ResourceAccessors accessors(Type[] src)        
             => src.Where(t => !t.IsInterface).SelectMany(accessors).ToArray();
         
         /// <summary>
@@ -47,7 +45,7 @@ namespace Z0
         /// Queries the source assemblies for ByteSpan property getters
         /// </summary>
         /// <param name="src">The assemblies to query</param>
-        public static ResourceAccessors accessors(IEnumerable<Assembly> src)
+        public static ResourceAccessors accessors(Assembly[] src)
             => accessors(src.SelectMany(x => x.GetTypes()));
             
         static Type[] AccessorTypes => new Type[]{

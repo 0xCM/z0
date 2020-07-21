@@ -28,6 +28,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public GenericOpIdentity GenericIdentity(MethodInfo src)
-            => Identity.generic(src);
+            => Identity.GenericIdentity(src);
     }
 }

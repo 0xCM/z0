@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="label">The root name</param>
         string CaseName<C>(Type host, string label)
             where C : unmanaged
-                => text.concat(Identify.Owner(host), PathSep, host.Name, PathSep, label, '_', Identify.numeric<C>());
+                => text.concat(Identify.OwningPartText(host), PathSep, host.Name, PathSep, label, '_', Identify.numeric<C>());
 
         string CaseName<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth

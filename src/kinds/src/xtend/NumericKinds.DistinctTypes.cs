@@ -12,12 +12,10 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// Computes the primal types identified by a specified kind
+        /// Specifies the primal types identified by a specified kind
         /// </summary>
         /// <param name="k">The primal kind</param>
-        public static ISet<Type> DistinctTypes(this NumericKind k)
-            => Identify.types(k);
-
-
+        public static HashSet<Type> DistinctTypes(this NumericKind k)
+            => Identify.typeset(k);
     }
 }

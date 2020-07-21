@@ -51,7 +51,7 @@ namespace Z0
             where F : IFunc<T0,T1,T2,R>
             where G : IFunc<T0,T1,T2,R>
         {
-            var casename = Identify.TestCase(Context.HostType, g);
+            var casename = Identify.TestCaseText(Context.HostType, g);
             var succeeded = true;       
             var clock = counter();
 

@@ -6,12 +6,10 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
  
     using static Konst;
     
-    public static partial class Identity
+    partial class Identity
     {
         /// <summary>
         /// Raises an error if the source method is any flavor of generic
@@ -23,19 +21,14 @@ namespace Z0
                 throw AppErrors.GenericMethod(src);
         }
 
-        static OpIdentity nongeneric(MethodInfo src)
+        /// <summary>
+        /// Raises an error if the source method is not a constructed generic method
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        static void RequireConstructed(MethodInfo src)
         {
-            RequireNonGeneric(src);
-            var id = string.Empty;
-            
-            id += Identify.Name(src);
-            id += IDI.PartSep;
-            id += FormatArgs(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, args(src));
-
-            return OpIdentityParser.parse(id);
+            if(!src.IsConstructedGenericMethod)
+                throw AppErrors.NonGenericMethod(src);
         }        
-
-        static string FormatArgs(object open, object close, char sep, IEnumerable<string> args)
-            => text.concat(open, string.Join(sep,args), close);
     }
 }

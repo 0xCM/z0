@@ -28,5 +28,17 @@ namespace Z0.Asm
             Function = f;
             Code = code;
         }       
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => (Function == null || Function.IsEmpty) && Code.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => (Function != null && Function.IsNonEmpty) && Code.IsNonEmpty;
+        }
     }
 }

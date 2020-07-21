@@ -255,7 +255,7 @@ namespace Z0
         {
             get 
             {
-                var owner = Identify.Owner(GetType());
+                var owner = Identify.OwningPartText(GetType());
                 var hostname = GetType().Name;
                 var opname = "action";         
                 return $"{owner}/{hostname}/{opname}";
@@ -347,7 +347,7 @@ namespace Z0
 
         static string TestCaseName(IExplicitTest unit)
         {
-            var owner = Identify.Owner(unit.GetType());
+            var owner = Identify.OwningPartText(unit.GetType());
             var hostname = unit.GetType().Name;
             var opname = "explicit";
             return $"{owner}/{hostname}/{opname}";

@@ -21,7 +21,6 @@ namespace Z0
         public static bool IsNatSpan(Type t)
             => t.GenericDefinition2() == typeof(NatSpan<,>) && t.IsClosedGeneric();
 
-
         public TypeIdentity DivineIdentity(Type arg)
             => TryDivine(arg).ValueOrElse(() => TypeIdentity.Define(arg.DisplayName()));
 
@@ -86,11 +85,11 @@ namespace Z0
 
         static Option<TypeIdentity> SegmentedId(Type t)
             =>  from i in SegIndicator(t)
-                let segwidth = Identity.divine(t)
+                let segwidth = Identity.BitWidth(t)
                 where segwidth.IsSome()
                 let segfmt = segwidth.FormatValue()
                 let arg = t.GetGenericArguments().Single()
-                let argwidth = Identity.divine(arg)
+                let argwidth = Identity.BitWidth(arg)
                 where argwidth.IsSome()
                 let argfmt = argwidth.FormatValue()
                 let nk = arg.NumericKind()
@@ -148,7 +147,6 @@ namespace Z0
         }
 
         
-
         static readonly ITypeIdentityProvider DefaultProvider
             = new FunctionalProvider(DoDivination);
 

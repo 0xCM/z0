@@ -53,6 +53,12 @@ namespace Z0
             get => VesselType.GetNestedTypes()[2];
         }
 
+        public static Type EmptyType
+        {
+            [MethodImpl(Inline)]
+            get => EmptyClass;
+        }
+
         public static MethodInfo EmptyMethod
         {
             [MethodImpl(Inline)]
@@ -74,5 +80,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsNonEmpty(Type src)
             => EmptyStruct.MetadataToken != src.MetadataToken;
+
+
+        [MethodImpl(Inline)]
+        public static bool IsEmpty(MethodInfo src)
+            => EmptyMethod.MetadataToken == src.MetadataToken;
     }
 }

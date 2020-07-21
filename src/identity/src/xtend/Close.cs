@@ -14,6 +14,6 @@ namespace Z0
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
         public static IEnumerable<ClosedApiMethod> Close(this GenericApiMethod op)
-             => Identity.close(op);
+             => Identity.Closures(op);
     }
 }

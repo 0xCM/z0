@@ -8,12 +8,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
 
     /// <summary>
     /// Defines factory methods that produce context-free services that require no *unsupplied* state to operate 
     /// </summary>
-    public interface TAsmCore : IIdentities, TArchives, TDynops
+    public interface TAsmCore : TIdentities, TArchives, TDynops
     {         
         /// <summary>
         /// Writer factory accessor

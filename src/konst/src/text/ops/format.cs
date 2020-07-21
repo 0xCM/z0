@@ -42,10 +42,11 @@ namespace Z0
             => string.Concat(a,b);
 
         /// <summary>
-        /// Formats and concatenates an arbitrary number of elements
+        /// Formats anything
         /// </summary>
         /// <param name="rest">The formattables to be rendered and concatenated</param>
-        public static string format(object first, params object[] rest)
-            => (first?.ToString() ?? EmptyString) + concat(rest.Select(x => x.ToString()));        
+        [MethodImpl(Inline), Op]
+        public static string format(object first)
+            =>  first is ITextual t ? t.Format() : first?.ToString() ?? EmptyString;
     }
 }

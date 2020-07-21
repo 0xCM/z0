@@ -9,6 +9,9 @@ namespace Z0
     
     using static Konst;
 
+    /// <summary>
+    /// Specifies host-independent api member identity
+    /// </summary>
     public readonly struct OpIdentity : IIdentifedOp<OpIdentity>
     {            
         /// <summary>
