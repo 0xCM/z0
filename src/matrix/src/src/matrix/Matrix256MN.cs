@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a blocked primal matrix of natural dimensions
@@ -26,12 +26,12 @@ namespace Z0
         /// <summary>
         /// The number of matrix rows
         /// </summary>
-        public static int Rows => nati<M>();
+        public static int Rows => (int)value<M>();
 
         /// <summary>
         /// The number of matrix colums
         /// </summary>
-        public static int Cols => nati<N>();
+        public static int Cols => (int)value<N>();
 
         /// <summary>
         /// The total number of matrix cells
@@ -220,7 +220,6 @@ namespace Z0
         public Matrix256<M,N,U> Convert<U>()
             where U : unmanaged
                => new Matrix256<M,N,U>(Blocks.convert<T,U>(data));
-
 
         /// <summary>
         /// Converts the entries of the matrix to a specified type and

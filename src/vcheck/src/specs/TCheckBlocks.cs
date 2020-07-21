@@ -41,7 +41,7 @@ namespace Z0
         void eq<T>(Block256<T> xb, Block256<T> yb, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            for(var i = 0; i< Blocks.length(xb,yb); i++)
+            for(var i = 0; i< z.length(xb,yb); i++)
                 if(!gmath.eq(xb[i],yb[i]))
                     throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
@@ -58,7 +58,7 @@ namespace Z0
         void eq<T>(Block512<T> xb, Block512<T> yb, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            for(var i = 0; i< Blocks.length(xb,yb); i++)
+            for(var i = 0; i< z.length(xb,yb); i++)
                 if(!gmath.eq(xb[i],yb[i]))
                     throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }         

@@ -22,8 +22,8 @@ namespace Z0
         public static ulong cellcover<T>(W8 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / (ulong)length<T>(w);
-            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)z.blocklength<T>(w);
+            return cellcount % (ulong)z.blocklength<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace Z0
         public static ulong cellcover<T>(W16 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / (ulong)length<T>(w);
-            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)z.blocklength<T>(w);
+            return cellcount % (ulong)z.blocklength<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace Z0
         public static ulong cellcover<T>(W32 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / (ulong)length<T>(w);
-            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1ul;
+            var blockcount = cellcount / (ulong)z.blocklength<T>(w);
+            return cellcount % (ulong)z.blocklength<T>(w) == 0 ? blockcount : blockcount + 1ul;
         } 
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace Z0
         public static ulong cellcover<T>(W64 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / (ulong)length<T>(w);
-            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)z.blocklength<T>(w);
+            return cellcount % (ulong)z.blocklength<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -82,8 +82,8 @@ namespace Z0
         public static ulong cellcover<T>(W128 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / (ulong)length<T>(w);
-            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)z.blocklength<T>(w);
+            return cellcount % (ulong)z.blocklength<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -97,8 +97,8 @@ namespace Z0
         public static ulong cellcover<T>(W256 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / (ulong)length<T>(w);
-            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)z.blocklength<T>(w);
+            return cellcount % (ulong)z.blocklength<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -112,8 +112,8 @@ namespace Z0
         public static ulong cellcover<T>(W512 w, ulong cellcount)
             where T : unmanaged        
         {
-            var blockcount = cellcount / (ulong)length<T>(w);
-            return cellcount % (ulong)length<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)z.blocklength<T>(w);
+            return cellcount % (ulong)z.blocklength<T>(w) == 0 ? blockcount : blockcount + 1;
         } 
 
         /// <summary>
@@ -134,9 +134,9 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged        
         {            
-            var cellblocks = length<W,T>();
-            var blockcount = cellblocks/cellsize<T>();
-            return blockcount + cellblocks % cellsize<T>() == 0 ? 0 : 1;
+            var cellblocks = z.blocklength<W,T>();
+            var blockcount = cellblocks/Unsafe.SizeOf<T>();
+            return blockcount + cellblocks % Unsafe.SizeOf<T>() == 0 ? 0 : 1;
         }
     }
 }

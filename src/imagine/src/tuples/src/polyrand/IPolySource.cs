@@ -31,5 +31,16 @@ namespace Z0
         T Next<T>(Interval<T> domain)
             where T : unmanaged
                 => Next(domain.Left, domain.Right);
+
+        /// <summary>
+        /// Retrieves the next point from the source, bound within a specified interval
+        /// </summary>
+        /// <param name="src">The random source</param>
+        /// <param name="domain">The domain of the random variable</param>
+        /// <typeparam name="T">The point type</typeparam>
+        [MethodImpl(Inline)]
+        T Next<T>(ClosedInterval<T> domain)
+            where T : unmanaged
+                => Next(domain.Left, domain.Right);
     }    
 }

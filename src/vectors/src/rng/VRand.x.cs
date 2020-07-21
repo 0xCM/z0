@@ -76,7 +76,6 @@ namespace Z0
             where T : unmanaged
                 => VRand.emitter(w,random,t);
 
-
         /// <summary>
         /// Produces a stream of 128-bit cpu vectors over random T-cells
         /// </summary>

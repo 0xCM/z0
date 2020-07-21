@@ -70,7 +70,7 @@ namespace Z0
         public static Matrix256<N,T> blockalloc<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Blocks.rectangle<T>(n256, value(n), value(n)); 
+                => Cells.rectangle<T>(n256, value(n), value(n)); 
 
         /// <summary>
         /// Allocates a blocked matrix of natual dimensions
@@ -86,7 +86,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Blocks.rectangle<T>(n256, value(m), value(n)); 
+                => Cells.rectangle<T>(n256, value(m), value(n)); 
 
         /// <summary>
         /// Allocates a matrix of natual dimensions
@@ -283,7 +283,7 @@ namespace Z0
                 return default;
 
             var parser = NumericParser.create<T>();
-            var dst =  Matrix.blockload<M,N,T>(Blocks.rectangle<T>(n256, value<M>(), value<N>()));
+            var dst =  Matrix.blockload<M,N,T>(Cells.rectangle<T>(n256, value<M>(), value<N>()));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];

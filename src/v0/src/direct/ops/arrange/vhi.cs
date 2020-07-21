@@ -17,64 +17,40 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vhi(Vector128<sbyte> src)
-            => z.vhi(src);
+        public static Vector128<sbyte> vshi(Vector128<sbyte> src)
+            => z.vshi(src);
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vhi(Vector128<byte> src)
-            => z.vhi(src);
+        public static Vector128<byte> vshi(Vector128<byte> src)
+            => z.vshi(src);
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vhi(Vector128<short> src)
-            => z.vhi(src);
+        public static Vector128<short> vshi(Vector128<short> src)
+            => z.vshi(src);
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vhi(Vector128<ushort> src)
-            => z.vhi(src);
+        public static Vector128<ushort> vshi(Vector128<ushort> src)
+            => z.vshi(src);
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> vhi(Vector128<int> src)
-            => z.vhi(src);
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vhi(Vector128<uint> src)
-            => z.vhi(src);
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<long> vhi(Vector128<long> src)
-            => z.vhi(src);
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vhi(Vector128<ulong> src)
-            => z.vhi(src);
+        public static Vector128<uint> vshi(Vector128<uint> src)
+            => z.vshi(src);
 
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8

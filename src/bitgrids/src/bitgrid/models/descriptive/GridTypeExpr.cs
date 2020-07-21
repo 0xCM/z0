@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst; 
-    using static Typed;
-    using static Root;
+    using static z;
     
     [ApiHost]
     public readonly struct GridTypeExpr
@@ -51,73 +50,73 @@ namespace Z0
         /// <summary>
         /// Specifies the bit width block as determined by W
         /// </summary>
-        public asci8 BlockWidth 
+        public uint BlockWidth 
         {
             [MethodImpl(Inline)]
-            get => $"{default(W).NatValue}";
+            get => (uint)default(W).NatValue;
         }
 
         /// <summary>
         /// Specifies the M-identified number of rows in the grid
         /// </summary>
-        public asci8 RowCount         
+        public uint RowCount         
         {
             [MethodImpl(Inline)]
-            get=> $"{default(M).NatValue}";
+            get=> (uint)default(M).NatValue;
         }
 
         /// <summary>
         /// Specifies the number of N-columns in the grid
         /// </summary>
-        public asci8 ColCount 
+        public uint ColCount 
         {
             [MethodImpl(Inline)]
-            get => $"{default(N).NatValue}";
+            get => (uint)default(N).NatValue;
         }
 
         /// <summary>
         /// Specifies the bit width of a T-cell
         /// </summary>
-        public asci8 CellWidth 
+        public uint CellWidth 
         {
             [MethodImpl(Inline)]
-            get => $"{bitsize<T>()}";
+            get => bitsize<T>();
         }
 
-        public asci8 BitCount        
+        public uint BitCount        
         {
             [MethodImpl(Inline)]
-            get => $"{BitCalcs.tablebits<M,N>()}";
+            get => (uint)NatCalc.mul<M,N>();
         }
     
-        public asci8 CellCount
+        public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => $"{BitCalcs.tablecells<M,N,T>()}";
+            get => (uint)BitCalcs.tablecells<M,N,T>();
         }
 
-        public asci8 BytCount
+        public uint BytCount
         {
             [MethodImpl(Inline)]
-            get => $"{GridCells.tablesize<M,N>()}";
+            get => (uint)GridCells.tablesize<M,N>();
         }
 
         /// <summary>
         /// Specifies the aligned number of W-blocks required to cover M*N bits
         /// </summary>
-        public asci8 BlockCount
+        public uint BlockCount
         {
             [MethodImpl(Inline)]
-            get => $"{Blocks.cellcover<W,M,N,T>()}";
+            get => (uint)Cells.cellcover<W,M,N,T>();
         }
 
         /// <summary>
         /// Specifies the number of cells covered by a block
         /// </summary>
-        public asci8 BlockLength
+        public uint BlockLength
         {
             [MethodImpl(Inline)]
-            get => $"{Blocks.length<W,T>()}";
+            get => (uint)z.blocklength<W,T>();
         }
     }
 }

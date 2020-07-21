@@ -32,9 +32,9 @@ namespace Z0
             where T : unmanaged
                 => create(forever(src,min,max), src.RngKind);
 
-        public static IRngStream<T> create<T>(IPolyrand src, Interval<T> domain)
+        public static IRngStream<T> create<T>(IPolyrand src, ClosedInterval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
-                => create(forever(src, domain), src.RngKind);
+                => create(forever(src, domain, filter), src.RngKind);
 
         /// <summary>
         /// Produces a stream of values from the random source
@@ -43,20 +43,21 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IRngStream<T> create<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter)
+        public static IRngStream<T> create<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
-                => create(points(src, domain, filter), src.RngKind);
+                => create(forever(src, domain, filter), src.RngKind);
 
-        static IEnumerable<T> points<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter = null)
+        static IEnumerable<T> forever<T>(IPolyrand src, ClosedInterval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => filter != null ? filtered(src,domain, filter) : forever(src,domain);        
+                => filter != null 
+                ? some(src, Interval.closed(domain.Left, domain.Right), filter) 
+                : forever(src, domain);        
 
-        static IEnumerable<T> forever<T>(IPolyrand src)
+        static IEnumerable<T> forever<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-        {
-            while(true)
-                yield return src.Next<T>();
-        }
+                => filter != null 
+                ? some(src, domain, filter) 
+                : forever(src, domain);        
 
         static IEnumerable<T> forever<T>(IPolyrand src, T min, T max)
             where T : unmanaged
@@ -65,7 +66,18 @@ namespace Z0
                 yield return src.Next<T>(min, max);
         }
 
+        static IEnumerable<T> forever<T>(IPolyrand src)
+            where T : unmanaged
+        {
+            while(true)
+                yield return src.Next<T>();
+        }
+
         static IEnumerable<T> forever<T>(IPolyrand src, Interval<T> domain)
+            where T : unmanaged
+                => domain.IsEmpty ? forever<T>(src) : forever(src, domain.Left, domain.Right);
+
+        static IEnumerable<T> forever<T>(IPolyrand src, ClosedInterval<T> domain)
             where T : unmanaged
                 => domain.IsEmpty ? forever<T>(src) : forever(src, domain.Left, domain.Right);
 
@@ -76,7 +88,7 @@ namespace Z0
         /// <param name="domain">The source domain</param>
         /// <param name="filter">The filter predicate</param>
         /// <typeparam name="T">The production type</typeparam>
-        static IEnumerable<T> filtered<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter)
+        static IEnumerable<T> some<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
         {
             var next = default(T);    

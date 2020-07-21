@@ -14,7 +14,7 @@ namespace Z0
     using static dvec;
 
     [ApiHost]
-    public readonly struct VCompact : IApiHost<VCompact>
+    public readonly struct VCompact
     {
         /// <summary>
         /// 16x16i -> 16x8u

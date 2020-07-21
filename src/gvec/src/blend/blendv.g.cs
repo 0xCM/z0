@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> valt<T>(W256 w, T a, T b)
             where T : unmanaged
-                => gvec.vblend(V0.vbroadcast(w,a), V0.vbroadcast(w,b), V0p.vblendspec<T>(w,false));
+                => gvec.vblend(z.vbroadcast(w,a), z.vbroadcast(w,b), V0p.vblendspec<T>(w,false));
 
         /// <summary>
         /// 
@@ -101,7 +101,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dvec.vblendv(v64f(x), v64f(y), v64f(spec)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -129,7 +129,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dvec.vblendv(v64f(x), v64f(y), v64f(spec)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

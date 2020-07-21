@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
         public static int blockcount<T>(W8 w, int cells)
             where T : unmanaged
-                => cells/length<T>(w);
+                => cells/blocklength<T>(w);
 
         /// <summary>
         /// Computes the whole number of blocks that cover a specified count of T-cells
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
         public static int blockcount<T>(W16 w, int cells)
             where T : unmanaged
-                => cells/length<T>(w);
+                => cells/blocklength<T>(w);
 
         /// <summary>
         /// Computes the whole number of blocks that cover a specified count of T-cells
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
         public static int blockcount<T>(W32 w, int cells)
             where T : unmanaged
-                => cells/length<T>(w);
+                => cells/blocklength<T>(w);
 
         /// <summary>
         /// Computes the whole number of blocks that cover a specified count of T-cells
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W64 w, int cells)
             where T : unmanaged
-                => cells/length<T>(w);
+                => cells/blocklength<T>(w);
 
         /// <summary>
         /// Computes the whole number of blocks that cover a specified count of T-cells
@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W128 w, int cells)
             where T : unmanaged
-                => cells/length<T>(w);
+                => cells/blocklength<T>(w);
 
         /// <summary>
         /// Computes the whole number of blocks that cover a specified count of T-cells
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W256 w, int cells)
             where T : unmanaged
-                => cells/length<T>(w);
+                => cells/blocklength<T>(w);
 
         /// <summary>
         /// Computes the whole number of blocks that cover a specified count of T-cells
@@ -86,7 +86,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W512 w, int cells)
             where T : unmanaged
-                => cells/length<T>(w);
+                => cells/blocklength<T>(w);
 
         /// <summary>
         /// Computes the whole number of blocks that cover a specified count of T-cells
@@ -100,8 +100,8 @@ namespace Z0
         public static int blockcount<T>(W8 w, int length, out int uncovered)
             where T : unmanaged   
         {       
-            uncovered = length % length<T>(w);
-            return length/length<T>(w);
+            uncovered = length % blocklength<T>(w);
+            return length/blocklength<T>(w);
         }
 
         /// <summary>
@@ -116,8 +116,8 @@ namespace Z0
         public static int blockcount<T>(W16 w, int length, out int uncovered)
             where T : unmanaged   
         {       
-            uncovered = length % length<T>(w);
-            return length/length<T>(w);
+            uncovered = length % blocklength<T>(w);
+            return length/blocklength<T>(w);
         }
 
         /// <summary>
@@ -132,8 +132,8 @@ namespace Z0
         public static int blockcount<T>(W32 w, int length, out int uncovered)
             where T : unmanaged   
         {       
-            uncovered = length % length<T>(w);
-            return length/length<T>(w);
+            uncovered = length % blocklength<T>(w);
+            return length/blocklength<T>(w);
         }
 
         /// <summary>
@@ -148,8 +148,8 @@ namespace Z0
         public static int blockcount<T>(W64 w, int length, out int uncovered)
             where T : unmanaged   
         {       
-            uncovered = length % length<T>(w);
-            return length/length<T>(w);
+            uncovered = length % blocklength<T>(w);
+            return length/blocklength<T>(w);
         }
 
         /// <summary>
@@ -164,8 +164,8 @@ namespace Z0
         public static int blockcount<T>(W128 w, int length, out int uncovered)
             where T : unmanaged          
         {       
-            uncovered = length % length<T>(w);
-            return length/length<T>(w);
+            uncovered = length % blocklength<T>(w);
+            return length/blocklength<T>(w);
         }
 
         /// <summary>
@@ -180,8 +180,8 @@ namespace Z0
         public static int blockcount<T>(W256 w, int length, out int uncovered)
             where T : unmanaged          
         {       
-            uncovered = length % length<T>(w);
-            return length/length<T>(w);
+            uncovered = length % blocklength<T>(w);
+            return length/blocklength<T>(w);
         }
 
         /// <summary>
@@ -196,8 +196,8 @@ namespace Z0
         public static int blockcount<T>(W512 w, int length, out int uncovered)
             where T : unmanaged          
         {       
-            uncovered = length % length<T>(w);
-            return length/length<T>(w);
+            uncovered = length % blocklength<T>(w);
+            return length/blocklength<T>(w);
         }
 
         /// <summary>

@@ -97,7 +97,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => Blocks.length<W,T>();
+            get => Blocks.blocklength<W,T>();
         }
 
         /// <summary>

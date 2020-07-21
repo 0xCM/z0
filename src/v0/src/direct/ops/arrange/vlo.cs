@@ -13,14 +13,6 @@ namespace Z0
     partial struct V0d
     {                    
         /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vlo(Vector128<ulong> src)
-            => z.vlo(src);
-
-        /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
         /// Extracts the lo 128-bit lane of the source vector
         /// </summary>

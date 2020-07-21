@@ -25,8 +25,8 @@ namespace Z0
 
         public void vgather_check()
         {
-            vgather_check(w128);
-            vgather_check(w256);
+            //vgather_check(w128);
+            //vgather_check(w256);
         }
 
         void vgather_check(W128 w)

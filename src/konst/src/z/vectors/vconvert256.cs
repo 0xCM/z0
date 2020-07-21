@@ -119,7 +119,7 @@ namespace Z0
             (var lo, var hi) = vconvert(src, n512, z16);            
             (var x0, var x1) = vconvert(lo, n512, t);
             (var x2, var x3) = vconvert(hi, n512, t);
-            return (x0,x1,x2,x3);
+            return (x0, x1, x2, x3);
         }
 
         /// <summary>

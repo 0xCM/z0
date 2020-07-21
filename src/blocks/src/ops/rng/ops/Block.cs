@@ -11,6 +11,7 @@ namespace Z0
 
     partial class RandomBlocks
     {         
+
         /// <summary>
         /// Allocates and fills a single 16-bit block
         /// </summary>

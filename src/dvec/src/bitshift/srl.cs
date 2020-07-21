@@ -200,7 +200,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => As.generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
+                => As.generic<T>(z.vbroadcast<byte>(w, BitMask.lsb8f(d)));
 
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
@@ -212,6 +212,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => As.generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
+                => As.generic<T>(z.vbroadcast<byte>(w, BitMask.lsb8f(d)));
     }
 }

@@ -19,14 +19,7 @@ namespace Z0
     {
 
     }
-
     
-    [ApiHost]
-    public partial class BitCalcs : IApiHost<BitCalcs>
-    {
-
-    }
-
     [ApiHost]
     public partial class BitLogixOps
     {

@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static asci8 init(N8 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci8(z.vlo(z.vbroadcast(w128, (byte)fill)));
+            => new asci8(z.vlo64(z.vbroadcast(w128, (byte)fill)));
 
         [MethodImpl(Inline), Op]
         public static asci16 init(N16 n, AsciCharCode fill = AsciCharCode.Space)

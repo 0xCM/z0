@@ -21,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> HiBlock<T>(this in Block128<T> src, int block)
             where T : unmanaged
-                => src.Slice(block * src.BlockLength + Blocks.length<T>(w64), Blocks.length<T>(w64));
+                => src.Slice(block * src.BlockLength + Blocks.blocklength<T>(w64), Blocks.blocklength<T>(w64));
     }
 }

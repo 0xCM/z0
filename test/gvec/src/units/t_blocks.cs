@@ -41,16 +41,16 @@ namespace Z0
         public void db_blocklen_128()
         {
             N128 n = default;
-            Claim.eq(16, Blocks.length<sbyte>(n));
-            Claim.eq(16, Blocks.length<byte>(n));
-            Claim.eq(8, Blocks.length<short>(n));
-            Claim.eq(8, Blocks.length<ushort>(n));
-            Claim.eq(4, Blocks.length<int>(n));
-            Claim.eq(4, Blocks.length<uint>(n));
-            Claim.eq(2, Blocks.length<long>(n));
-            Claim.eq(2, Blocks.length<ulong>(n));
-            Claim.eq(4, Blocks.length<float>(n));
-            Claim.eq(2, Blocks.length<double>(n));                
+            Claim.eq(16, Blocks.blocklength<sbyte>(n));
+            Claim.eq(16, Blocks.blocklength<byte>(n));
+            Claim.eq(8, Blocks.blocklength<short>(n));
+            Claim.eq(8, Blocks.blocklength<ushort>(n));
+            Claim.eq(4, Blocks.blocklength<int>(n));
+            Claim.eq(4, Blocks.blocklength<uint>(n));
+            Claim.eq(2, Blocks.blocklength<long>(n));
+            Claim.eq(2, Blocks.blocklength<ulong>(n));
+            Claim.eq(4, Blocks.blocklength<float>(n));
+            Claim.eq(2, Blocks.blocklength<double>(n));                
             Claim.eq(8, Blocks.cellblocks<int>(n,2));
             Claim.eq(4, Blocks.cellblocks<long>(n, 2));
             Claim.eq(32, Blocks.cellblocks<byte>(n, 2));
@@ -61,16 +61,16 @@ namespace Z0
         public void db_blocklen_256()
         {
             N256 n = default;
-            Claim.eq(32, Blocks.length<sbyte>(n));
-            Claim.eq(32, Blocks.length<byte>(n));
-            Claim.eq(16, Blocks.length<short>(n));
-            Claim.eq(16, Blocks.length<ushort>(n));
-            Claim.eq(8, Blocks.length<int>(n));
-            Claim.eq(8, Blocks.length<uint>(n));
-            Claim.eq(4, Blocks.length<long>(n));
-            Claim.eq(4, Blocks.length<ulong>(n));
-            Claim.eq(8, Blocks.length<float>(n));
-            Claim.eq(4, Blocks.length<double>(n));                
+            Claim.eq(32, Blocks.blocklength<sbyte>(n));
+            Claim.eq(32, Blocks.blocklength<byte>(n));
+            Claim.eq(16, Blocks.blocklength<short>(n));
+            Claim.eq(16, Blocks.blocklength<ushort>(n));
+            Claim.eq(8, Blocks.blocklength<int>(n));
+            Claim.eq(8, Blocks.blocklength<uint>(n));
+            Claim.eq(4, Blocks.blocklength<long>(n));
+            Claim.eq(4, Blocks.blocklength<ulong>(n));
+            Claim.eq(8, Blocks.blocklength<float>(n));
+            Claim.eq(4, Blocks.blocklength<double>(n));                
 
         }
 

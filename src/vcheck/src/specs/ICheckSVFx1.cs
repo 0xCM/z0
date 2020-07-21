@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static Kinds;
 
     readonly struct CheckSVF<T> : ICheckSVF<T>
@@ -55,7 +55,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j< cells; j++)
                         Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
@@ -111,7 +111,7 @@ namespace Z0
                 {
                     var x = Random.CpuVector(w,t);
                     var z = f.Invoke(x);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j< cells; j++)
                         Eq(f.Invoke(vcell(x,j)), vcell(z,j));
                 }
             }
@@ -139,7 +139,7 @@ namespace Z0
                 {
                     var x = Random.CpuVector(w,t);
                     var z = f.Invoke(x);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j< cells; j++)
                         Eq(f.Invoke(vcell(x,j)), vcell(z,j));
                 }
             }
@@ -167,7 +167,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j< cells; j++)
                         Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
@@ -195,7 +195,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j< cells; j++)
                         Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
@@ -225,7 +225,7 @@ namespace Z0
                     var c = Random.CpuVector(w,t);
 
                     var z = f.Invoke(a,b,c);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j< cells; j++)
                         Eq(f.Invoke(vcell(a,j),vcell(b,j),vcell(c,j)), vcell(z,j));
                 }
             }
@@ -255,7 +255,7 @@ namespace Z0
                     var c = Random.CpuVector(w,t);
 
                     var z = f.Invoke(a,b,c);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j< cells; j++)
                         Eq(f.Invoke(vcell(a,j),vcell(b,j),vcell(c,j)), vcell(z,j));
                 }
             }
@@ -267,7 +267,7 @@ namespace Z0
             where F : IShiftOp128D<T>
         {
             var t = default(T);
-            var bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
+            ClosedInterval<byte> bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
 
             void run()
             {
@@ -277,7 +277,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j< cells; j++)
                         Eq(f.Invoke(vcell(x,j), offset), vcell(z,j));
                 }
             }
@@ -289,7 +289,7 @@ namespace Z0
             where F : IShiftOp256D<T>
         {
             var t = default(T);
-            var bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
+            ClosedInterval<byte> bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
 
             void run()
             {
@@ -299,7 +299,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j< cells; j++)
                         Eq(f.Invoke(vcell(x,j), offset), vcell(z,j));
                 }
             }

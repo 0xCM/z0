@@ -17,70 +17,6 @@ namespace Z0
     partial struct z
     {                            
         /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vhi(Vector128<sbyte> src)
-            =>  z.v8i(z.vscalar(w128, z.v64u(src).GetElement(1)));
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<byte> vhi(Vector128<byte> src)
-            => z.v8u(z.vscalar(w128, z.vcell(z.v64u(src), 1)));
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<short> vhi(Vector128<short> src)
-            => z.v16i(z.vscalar(w128, z.vcell(z.v64u(src), 1)));
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vhi(Vector128<ushort> src)
-            => z.v16u(z.vscalar(w128, z.vcell(z.v64u(src), 1)));
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<int> vhi(Vector128<int> src)
-            => z.v32i(z.vscalar(w128, z.vcell(z.v64u(src), 1)));
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vhi(Vector128<uint> src)
-            => z.v32u(z.vscalar(w128, z.vcell(z.v64u(src), 1)));
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<long> vhi(Vector128<long> src)
-            => z.vscalar(w128, z.vcell(src,1));
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vhi(Vector128<ulong> src)
-            => z.vscalar(w128, src.GetElement(1));
-
-        /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
         /// Extracts the hi 128-bit lane of the source vector
         /// </summary>
@@ -160,6 +96,14 @@ namespace Z0
         public static Vector128<long> vhi(Vector256<long> src)
             => ExtractVector128(src, 1);
 
+        [MethodImpl(Inline), Op]
+        public static Vector128<float> vhi(Vector256<float> src)
+            => ExtractVector128(src, 1);
+
+        [MethodImpl(Inline), Op]
+        public static Vector128<double> vhi(Vector256<double> src)
+            => ExtractVector128(src, 1);
+
         /// <summary>
         /// Extracts the upper 128-bit lane from the source vector to scalar targets
         /// </summary>
@@ -182,7 +126,11 @@ namespace Z0
         /// <param name="x1">Receiver for the hi part of the exracted lane</param>
         [MethodImpl(Inline), Op]
         public static void vhi(Vector256<byte> src, out ulong x0, out ulong x1)
-            => vhi(z.v64u(src), out x0, out x1);
+        {
+            var x = z.vhi(src);
+            x0 = x.GetElement(0);
+            x1 = x.GetElement(1);
+        }
 
         /// <summary>
         /// Extracts the upper 128-bit lane from the source vector to a pair

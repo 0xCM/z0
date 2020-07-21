@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public class VLut : IApiHost<VLut>
+    public class VLut
     {        
         [MethodImpl(Inline), Init]
         public static VLut16 init(Vector128<byte> src) 
@@ -27,15 +27,15 @@ namespace Z0
 
         [MethodImpl(Inline), Init]
         public static VLut32 init(Vector256<byte> src) 
-            => VLut32.Define(src);
+            => VLut32.define(src);
 
         [MethodImpl(Inline), Init]
         public static VLut32 init(ReadOnlySpan<byte> src, N32 n) 
-            => VLut32.Define(src);
+            => VLut32.define(src);
 
         [MethodImpl(Inline), Init]
         public static VLut32 init(in Block256<byte> src) 
-            => VLut32.Define(src);
+            => VLut32.define(src);
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> select(in VLut16 lut, Vector128<byte> items) 

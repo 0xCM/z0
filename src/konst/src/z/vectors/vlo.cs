@@ -16,14 +16,6 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vlo(Vector128<ulong> src)
-            => vscalar(n128,src.GetElement(0));
-
-        /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
         /// Extracts the lo 128-bit lane of the source vector
         /// </summary>
@@ -112,7 +104,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<double> vlo(Vector256<double> src)
-            => vlo(src);
+            => ExtractVector128(src, 0);
 
         /// <summary>
         /// Extracts the lower 128-bit lane from the source vector to scalar targets
@@ -135,7 +127,10 @@ namespace Z0
         /// <param name="x1">Receiver for the hi part of the exracted lane</param>
         [MethodImpl(Inline), Op]
         public static void vlo(Vector256<byte> src, out ulong x0, out ulong x1)
-            => vlo(v64u(src), out x0, out x1);
+        {
+            x0 = src.GetElement(0);
+            x1 = src.GetElement(1);
+        }
 
         /// <summary>
         /// Extracts the lower 128-bit lane from the source vector to a pair

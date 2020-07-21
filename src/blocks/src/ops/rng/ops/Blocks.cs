@@ -245,7 +245,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Block256<T> Blocks<T>(this IPolyrand random, W256 w, int count = 1)
             where T : unmanaged       
-                => random.Stream<T>().ToSpan(B.cellblocks<T>(w,count)).Blocked(w);       
+                => random.Stream<T>().ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
         /// <summary>
         /// Allocates and fills specified number of 256-bit blocks

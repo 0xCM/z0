@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     partial struct V0
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vload<T>(W128 w, Span<T> src)
             where T : unmanaged
-                => vload(w, in head(src));
+                => z.vload(w,src);
 
         /// <summary>
         /// Loads a 128-bit vector from the first 128 bits of the source
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vload<T>(W128 w, ReadOnlySpan<T> src)
             where T : unmanaged
-                => vload(w, in head(src));
+                => z.vload(w,src);
 
         /// <summary>
         /// Loads a 256-bit vector from the first 256 bits of the source
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vload<T>(W256 w, Span<T> src)
             where T : unmanaged
-                => vload(w, in head(src));
+                 => z.vload(w, src);
 
         /// <summary>
         /// Loads a 512-bit vector from the first 512 bits of the source
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<T> vload<T>(W512 w, Span<T> src)
             where T : unmanaged
-                => V0.vload(w, in head(src));
+                => z.vload(w, src);
 
         /// <summary>
         /// Loads a 128-bit vector beginning at a specified source cell offset
@@ -62,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vload<T>(W128 w, Span<T> src, int offset)
             where T : unmanaged            
-                => vload(w, in seek(src, offset));
+                => z.vload(w, src, offset);
 
         /// <summary>
         /// Loads a 256-bit vector beginning at a specified source cell offset
@@ -73,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vload<T>(W256 w, Span<T> src, int offset)
             where T : unmanaged            
-                => vload(w, in seek(src, offset));
+                => z.vload(w,src, offset);
 
         /// <summary>
         /// Loads a 256-bit vector beginning at a specified source cell offset
@@ -84,7 +84,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<T> vload<T>(N512 w, Span<T> src, int offset)
             where T : unmanaged            
-                => vload(w, in seek(src, offset));
+                => z.vload(w, src, offset);
          
         /// <summary>
         /// Loads a 256-bit vector from the first 256 bits of the source
@@ -94,7 +94,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vload<T>(N256 w, ReadOnlySpan<T> src)
             where T : unmanaged
-                => vload(w, in head(src));
+                => z.vload(w, src);
 
         /// <summary>
         /// Loads a 256-bit vector from the first 256 bits of the source
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<T> vload<T>(N512 w, ReadOnlySpan<T> src)
             where T : unmanaged
-                => vload(w, in head(src));
+                => z.vload(w, src);
 
         /// <summary>
         /// Loads a 128-bit vector beginning at a specified source cell offset
@@ -115,7 +115,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vload<T>(N128 w, ReadOnlySpan<T> src, int offset)
             where T : unmanaged            
-                => vload(w, in skip(src, offset));
+                => z.vload(w, src, offset);
 
         /// <summary>
         /// Loads a 256-bit vector beginning at a specified source cell offset
@@ -126,7 +126,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vload<T>(N256 w, ReadOnlySpan<T> src, int offset)
             where T : unmanaged            
-                => vload(w, in skip(src, offset));
+                => z.vload(w, src, offset);
 
         /// <summary>
         /// Loads a 512-bit vector beginning at a specified source cell offset
@@ -137,6 +137,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<T> vload<T>(N512 w, ReadOnlySpan<T> src, int offset)
             where T : unmanaged            
-                => vload(w, in skip(src, offset));                 
+                 => z.vload(w, src, offset);
     }
 }

@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static As;
-    using static Typed;
-    using static V0;
+    using static z;
     using static Konst;
 
     partial class dvec
@@ -37,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<uint> vpart30x8x3Mask(uint src) 
-            => V0.vparts(m0, m1, m2, m3, m4,0,0,0);
+            => z.vparts(m0, m1, m2, m3, m4,0,0,0);
 
         // The components are now in the following order, from lo to hi:
         // 0, 5, 1, 6, 2, 7, 3, 8, 4, 9
@@ -46,16 +44,16 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<ushort> vpart30x8x3Assemble(Vector256<ushort> y)
             => vparts(w256,
-                V0.vcell(y,0), // 0
-                V0.vcell(y,2), // 1
-                V0.vcell(y,4), // 2
-                V0.vcell(y,6), // 3
-                V0.vcell(y,8), // 4
-                V0.vcell(y,1), // 5
-                V0.vcell(y,3), // 6
-                V0.vcell(y,5), // 7
-                V0.vcell(y,7), // 8
-                V0.vcell(y,9), // 9
+                vcell(y,0), // 0
+                vcell(y,2), // 1
+                vcell(y,4), // 2
+                vcell(y,6), // 3
+                vcell(y,8), // 4
+                vcell(y,1), // 5
+                vcell(y,3), // 6
+                vcell(y,5), // 7
+                vcell(y,7), // 8
+                vcell(y,9), // 9
                 0,0,0,0,0,0);
 
         /// <summary>
@@ -72,7 +70,7 @@ namespace Z0
             var m = vpart30x8x3Mask(src);
             var shifts = vparts(0, 3, 6, 9, 12, 0, 0, 0); 
             var x = vbroadcast(w256, uint32(lo | hi << 16));            
-            var y = V0.v16u(dvec.vsrlv(vand(x,m), shifts));
+            var y = v16u(dvec.vsrlv(vand(x,m), shifts));
             var z = vpart30x8x3Assemble(y);
             return z;
         }

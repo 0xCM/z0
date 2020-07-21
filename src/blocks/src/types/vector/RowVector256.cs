@@ -96,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector256<U> Convert<U>()
             where U : unmanaged
-              => new RowVector256<U>(Blocks.convert<T,U>(data));
+              => new RowVector256<U>(Cells.convert<T,U>(data));
 
         public RowVector256<T> Replicate()
             => new RowVector256<T>(data.Replicate());

@@ -9,17 +9,15 @@ namespace Z0
     using System.Runtime.Intrinsics;    
 
     using static Konst;
-    using static Memories;
-    using static VCompact;
-    using static Vectors;
+    using static z;
 
     [ApiHost]
-    public readonly struct VSym : IApiHost<VSym>
+    public readonly struct VSym
     {
-        [MethodImpl(Inline), Op]
-        public static ref byte write(ref AsciCharCode src)
-            => ref Unsafe.As<AsciCharCode,byte>(ref edit(src));        
-            
+        [MethodImpl(Inline)]
+        static Vector128<byte> vcompact(Vector256<ushort> src, W8 w)            
+            => dvec.vpackus(vlo(src), vhi(src));
+
         /// <summary>
         /// Converts 16 source characters to 16 asci codes
         /// </summary>
@@ -31,8 +29,8 @@ namespace Z0
         public static void encode(in char src, int offset, N16 count, ref AsciCharCode dst)
         {            
             ref readonly var input = ref Symbolic.read(src,offset);
-            ref var target = ref write(ref dst);
-            V0.vsave(vcompact(V0.vload(w256,input), w8), ref target);        
+            ref var target = ref asci.write(ref dst);
+            V0.vsave(vcompact(V0.vload(w256, input), w8), ref target);        
         }
     }
 }

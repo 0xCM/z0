@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellblocks<T>(W8 n, int blocks)
             where T : unmanaged        
-                => blocks * length<T>(n);
+                => blocks * z.blocklength<T>(n);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellblocks<T>(W16 n, int blocks)
             where T : unmanaged        
-                => blocks * length<T>(n);
+                => blocks * z.blocklength<T>(n);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellblocks<T>(W32 n, int blocks)
             where T : unmanaged        
-                => blocks * length<T>(n);
+                => blocks * z.blocklength<T>(n);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellblocks<T>(W64 n, int blocks)
             where T : unmanaged        
-                => blocks * length<T>(n);
+                => blocks * z.blocklength<T>(n);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellblocks<T>(W128 n, int blocks)
             where T : unmanaged        
-                => blocks * length<T>(n);
+                => blocks * z.blocklength<T>(n);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellblocks<T>(W256 n, int blocks)
             where T : unmanaged        
-                => blocks * length<T>(n);
+                => blocks * z.blocklength<T>(n);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -72,6 +72,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellblocks<T>(W512 n, int blocks)
             where T : unmanaged        
-                => blocks * length<T>(n);
+                => blocks * z.blocklength<T>(n);
     }
 }

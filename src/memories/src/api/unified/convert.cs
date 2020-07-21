@@ -21,7 +21,7 @@ namespace Z0
         public static T convert<S,T>(S src)
             where T : unmanaged
             where S : unmanaged
-                => Cast.to<S,T>(src);
+                => z.convert<S,T>(src);
 
         /// <summary>
         /// If possible, applies the conversion byte -> T
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(byte src, T t = default)
             where T : unmanaged
-                => Cast.to<T>(src);
+                => z.convert<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion sbyte -> T
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(sbyte src, T t = default)
             where T : unmanaged
-                => Cast.to<T>(src);
+                => z.convert<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion ushort -> T
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(ushort src, T t = default)
             where T : unmanaged
-                => Cast.to<T>(src);
+                => z.convert<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion short -> T
@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(short src, T t = default)
             where T : unmanaged
-                => Cast.to<T>(src);
+                => z.convert<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion int -> T
@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(int src, T t = default)
             where T : unmanaged
-                => Cast.to<T>(src);
+                => z.convert<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion uint -> T
@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(uint src, T t = default)
             where T : unmanaged
-                => Cast.to<T>(src);
+                => z.convert<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion long -> T
@@ -91,7 +91,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(long src, T t = default)
             where T : unmanaged
-                => Cast.to<T>(src);
+                => z.convert<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion ulong -> T
@@ -101,7 +101,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(ulong src, T t = default)
             where T : unmanaged
-                => Cast.to<T>(src);
+                => z.convert<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion float -> T
@@ -111,7 +111,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(float src, T t = default)
             where T : unmanaged
-                => Cast.to<T>(src);
+                => z.convert<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion double -> T
@@ -121,6 +121,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(double src, T t = default)
             where T : unmanaged
-                => Cast.to<T>(src);
+                => z.convert<T>(src);
     }
 }

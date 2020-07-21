@@ -13,8 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
 
     using static Konst; 
-    using static Typed;    
-    using static V0;
+    using static z;    
 
     partial class dvec
     {
@@ -115,7 +114,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vpackus(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = vbroadcast<uint>(n256, (uint)(ushort.MaxValue));
+            var mask = z.vbroadcast<uint>(n256, (uint)(ushort.MaxValue));
             var z0 = z.v32i(z.vand(x,mask));
             var z1 = z.v32i(z.vand(y,mask));
             return PackUnsignedSaturate(z0, z1);

@@ -11,6 +11,10 @@ namespace Z0
     
     partial struct asci
     {        
+        [MethodImpl(Inline), Op]
+        public static ref byte write(ref AsciCharCode src)
+            => ref Unsafe.As<AsciCharCode,byte>(ref z.edit(src));        
+
         /// <summary>
         /// Tests whether a character is deignated as whitespace
         /// </summary>

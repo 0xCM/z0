@@ -9,28 +9,17 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static As;
-
+    using static z;
+    
     partial class gvec
     {
-        /// <summary>
-        /// Permutes 4 64-bit source vector segments
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="spec">The perm spec</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector256<T> vperm4x64<T>(Vector256<T> x, [Imm] byte spec)
-            where T : unmanaged
-                => vperm4x64_u(x,spec);
-
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4L spec)
             where T : unmanaged
-                => vperm4x64_u(x, (byte)spec);
+                => vperm4x64_u(x, spec);
 
         [MethodImpl(Inline)]
-        static Vector256<T> vperm4x64_u<T>(Vector256<T> x, byte spec)
+        static Vector256<T> vperm4x64_u<T>(Vector256<T> x, Perm4L spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -46,7 +35,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vperm4x64_i<T>(Vector256<T> x, byte spec)
+        static Vector256<T> vperm4x64_i<T>(Vector256<T> x, Perm4L spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -62,7 +51,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vperm4x64_f<T>(Vector256<T> x, byte spec)
+        static Vector256<T> vperm4x64_f<T>(Vector256<T> x, Perm4L spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

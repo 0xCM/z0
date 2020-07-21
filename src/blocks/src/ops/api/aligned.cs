@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W8 w, int count)
             where T : unmanaged        
-                => count % length<T>(w) == 0;
+                => count % blocklength<T>(w) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 16-bit segments
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W16 w, int count)
             where T : unmanaged        
-                => count % length<T>(w) == 0;
+                => count % blocklength<T>(w) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 32-bit segments
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W32 w, int count)
             where T : unmanaged        
-                => count % length<T>(w) == 0;
+                => count % blocklength<T>(w) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 64-bit segments
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W64 w, int count)
             where T : unmanaged        
-                => count % length<T>(w) == 0;
+                => count % blocklength<T>(w) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 128-bit segments
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W128 w, int count)
             where T : unmanaged        
-                => count % length<T>(w) == 0;
+                => count % blocklength<T>(w) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 256-bit segments
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W256 w, int count)
             where T : unmanaged        
-                => count % length<T>(w) == 0;
+                => count % blocklength<T>(w) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 512-bit segments
@@ -79,6 +79,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool aligned<T>(W512 w, int count)
             where T : unmanaged        
-                => count % length<T>(w) == 0;
+                => count % blocklength<T>(w) == 0;
     }
 }

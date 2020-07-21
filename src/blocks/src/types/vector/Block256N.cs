@@ -163,7 +163,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block256<N,U> Convert<U>()
             where U : unmanaged
-               => new Block256<N,U>(Blocks.convert<T,U>(data));
+               => new Block256<N,U>(Cells.convert<T,U>(data));
 
         [MethodImpl(Inline)]
         public string Format()

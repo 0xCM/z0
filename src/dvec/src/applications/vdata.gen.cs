@@ -28,7 +28,7 @@ namespace Z0
             where T : unmanaged
         {            
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
                 seek(ref mem, i) = gmath.even(i) ? a : b;
@@ -47,7 +47,7 @@ namespace Z0
         {
             var current = first;
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -70,7 +70,7 @@ namespace Z0
         {
             var current = first;
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -93,7 +93,7 @@ namespace Z0
         {
             var current = first;
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -115,7 +115,7 @@ namespace Z0
         {
             var current = first;
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -130,7 +130,7 @@ namespace Z0
         {
             var current = first;
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -146,7 +146,7 @@ namespace Z0
         {
             var current = first;
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -168,7 +168,7 @@ namespace Z0
         {
             var current = first;
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
@@ -189,7 +189,7 @@ namespace Z0
         {
             var current = first;
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
@@ -205,7 +205,7 @@ namespace Z0
         {
             var current = first;
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
@@ -221,7 +221,7 @@ namespace Z0
         {
             var current = first;
             var data = Blocks.alloc<T>(n);
-            var len = Blocks.length<T>(n);
+            var len = Blocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {

@@ -97,7 +97,7 @@ namespace Z0
         [Alloc, Closures(UInt8k)]
         public static Block8<T> alloc<T>(W8 w, ulong count, T t = default)
             where T : unmanaged        
-                => new Block8<T>(new T[count * (ulong)length<T>(w)]);
+                => new Block8<T>(new T[count * (ulong)blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 16-bit blocks, filled with an optional pattern
@@ -108,7 +108,7 @@ namespace Z0
         [Alloc, Closures(UInt8x16k)]
         public static Block16<T> alloc<T>(W16 w, ulong count, T t = default)
             where T : unmanaged        
-                => new Block16<T>(new T[count * (ulong)length<T>(w)]);
+                => new Block16<T>(new T[count * (ulong)blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 32-bit blocks, filled with an optional pattern
@@ -119,7 +119,7 @@ namespace Z0
         [Alloc, Closures(UInt8x16x32k)]
         public static Block32<T> alloc<T>(W32 w, ulong count, T t = default)
             where T : unmanaged        
-                => new Block32<T>(new T[count * (ulong)length<T>(w)]);
+                => new Block32<T>(new T[count * (ulong)blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 64-bit blocks, filled with an optional pattern
@@ -130,7 +130,7 @@ namespace Z0
         [Alloc, Closures(UnsignedInts)]
         public static Block64<T> alloc<T>(W64 w, ulong count, T t = default)
             where T : unmanaged        
-                => new Block64<T>(new T[count * (ulong)length<T>(w)]);
+                => new Block64<T>(new T[count * (ulong)blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 128-bit blocks
@@ -141,7 +141,7 @@ namespace Z0
         [Alloc, Closures(UnsignedInts)]
         public static Block128<T> alloc<T>(W128 w, ulong count, T t = default)
             where T : unmanaged        
-                => new Block128<T>(new T[count * (ulong)length<T>(w)]);
+                => new Block128<T>(new T[count * (ulong)blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 256-bit blocks
@@ -152,7 +152,7 @@ namespace Z0
         [Alloc, Closures(UnsignedInts)]
         public static Block256<T> alloc<T>(W256 w, ulong count, T t = default)
             where T : unmanaged        
-                => new Block256<T>(new T[count * (ulong)length<T>(w)]);
+                => new Block256<T>(new T[count * (ulong)blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 512-bit blocks
@@ -163,7 +163,7 @@ namespace Z0
         [Alloc, Closures(UnsignedInts)]
         public static Block512<T> alloc<T>(W512 w, ulong blocks, T t = default)
             where T : unmanaged        
-                => new Block512<T>(new T[blocks * (ulong)length<T>(w)]);
+                => new Block512<T>(new T[blocks * (ulong)blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 8-bit blocks, filled with an optional pattern
@@ -174,7 +174,7 @@ namespace Z0
         [Alloc, Closures(UInt8k)]
         public static Block8<T> alloc<T>(W8 w, long count, T t = default)
             where T : unmanaged        
-                => new Block8<T>(new T[count * length<T>(w)]);
+                => new Block8<T>(new T[count * blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 16-bit blocks, filled with an optional pattern
@@ -185,7 +185,7 @@ namespace Z0
         [Alloc, Closures(UInt8x16k)]
         public static Block16<T> alloc<T>(W16 w, long count, T t = default)
             where T : unmanaged        
-                => new Block16<T>(new T[count * length<T>(w)]);
+                => new Block16<T>(new T[count * blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 32-bit blocks, filled with an optional pattern
@@ -196,7 +196,7 @@ namespace Z0
         [Alloc, Closures(UInt8x16x32k)]
         public static Block32<T> alloc<T>(W32 w, long count, T t = default)
             where T : unmanaged        
-                => new Block32<T>(new T[count * length<T>(w)]);
+                => new Block32<T>(new T[count * blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 64-bit blocks, filled with an optional pattern
@@ -207,7 +207,7 @@ namespace Z0
         [Alloc, Closures(UnsignedInts)]
         public static Block64<T> alloc<T>(W64 w, long count, T t = default)
             where T : unmanaged        
-                => new Block64<T>(new T[count * length<T>(w)]);
+                => new Block64<T>(new T[count * blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 128-bit blocks
@@ -218,7 +218,7 @@ namespace Z0
         [Alloc, Closures(UnsignedInts)]
         public static Block128<T> alloc<T>(W128 w, long count, T t = default)
             where T : unmanaged        
-                => new Block128<T>(new T[count * length<T>(w)]);
+                => new Block128<T>(new T[count * blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 256-bit blocks
@@ -229,7 +229,7 @@ namespace Z0
         [Alloc, Closures(UnsignedInts)]
         public static Block256<T> alloc<T>(W256 w, long blocks, T t = default)
             where T : unmanaged        
-                => new Block256<T>(new T[blocks * length<T>(w)]);
+                => new Block256<T>(new T[blocks * blocklength<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 512-bit blocks
@@ -240,6 +240,6 @@ namespace Z0
         [Alloc, Closures(UnsignedInts)]
         public static Block512<T> alloc<T>(W512 w, long blocks, T t = default)
             where T : unmanaged        
-                => new Block512<T>(new T[blocks * length<T>(w)]);
+                => new Block512<T>(new T[blocks * blocklength<T>(w)]);
     }
 }

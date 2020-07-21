@@ -8,6 +8,7 @@ namespace Z0
 
     using static Konst;
 
+
     public static class PolyStream
     {
         /// <summary>
@@ -51,5 +52,8 @@ namespace Z0
         public static IRngStream<T> Stream<T>(this IPolyrand src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => PolyStreams.create(src, domain, filter);                            
+
+
+
     }
 }
