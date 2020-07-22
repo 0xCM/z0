@@ -8,6 +8,10 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static z;
 
     /// <summary>
     /// Defines a shared context for a set of agents
@@ -16,6 +20,7 @@ namespace Z0
     {
         public IAgentEventSink EventLog {get;}
 
+        [MethodImpl(Inline)]
         public AgentContext(IAgentEventSink sink)
         {
             EventLog = sink;

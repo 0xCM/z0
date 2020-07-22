@@ -3,9 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface IUnitTest : ITestContext 
+{
+    public interface IPulseEventReceiver : IAgentEventSink<PulseEvent>
     {
-        void SetMode(bool diagnostic);
-    }    
+        
+    }
 }

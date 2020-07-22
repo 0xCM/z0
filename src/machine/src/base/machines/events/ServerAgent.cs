@@ -11,8 +11,8 @@ namespace Z0
     /// </summary>
     public class ServerAgent : SystemAgent
     {        
-        public static ServerAgent Define(AgentContext Context, ServerConfig Config)
-            => new ServerAgent(Context, Config);
+        public static ServerAgent create(AgentContext context, ServerConfig config)
+            => new ServerAgent(context, config);
 
         ServerConfig Config {get;}
 
@@ -22,7 +22,7 @@ namespace Z0
             : base(Context, (Config.ServerId, 0u))
         {
             this.Config = Config;
-            var hearbeat = PulseEmitter.Define(Context, 
+            var hearbeat = PulseEmitter.define(Context, 
                 ServiceIdentityPool.NextAgentId(ServerId), 
                 new PulseEmitterConfig(new TimeSpan(0,0,1)));            
             this.Worker = ServerProcess.Define(Context, ServerId, Config.CoreNumber, new ISystemAgent[]{hearbeat});

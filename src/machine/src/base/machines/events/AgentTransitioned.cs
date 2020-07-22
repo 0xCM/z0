@@ -3,9 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface IUnitTest : ITestContext 
+{
+    using System;
+
+    public sealed class AgentTransitioned : TraceEventAdapter<AgentTransitioned,AgentTransition>
     {
-        void SetMode(bool diagnostic);
-    }    
+
+    }
+
+    public sealed class PulseAdapter : TraceEventAdapter<PulseAdapter>
+    {
+
+
+    }
 }

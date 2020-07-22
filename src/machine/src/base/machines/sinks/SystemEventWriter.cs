@@ -38,15 +38,4 @@ namespace Z0
         void IAgentEventSink.AgentTransitioned(AgentTransition data)        
             => AgentTransitioned(2, data.Agent.ServerId, data.Agent.AgentId, data.Timestamp, z.bytes(data).ToArray());               
     }
-
-    public sealed class AgentTransitioned : TraceEventAdapter<AgentTransitioned,AgentTransition>
-    {
-
-    }
-
-    public sealed class PulseAdapter : TraceEventAdapter<PulseAdapter>
-    {
-
-
-    }
 }

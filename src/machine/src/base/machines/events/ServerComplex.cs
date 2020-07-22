@@ -71,7 +71,7 @@ namespace Z0
             var configs = sconfig.ToArray();
             Servers = new ServerAgent[configs.Length];
             for(var i=0; i<configs.Length; i++)
-                Servers[i] = ServerAgent.Define(Context, configs[i]);
+                Servers[i] = ServerAgent.create(Context, configs[i]);
          
             EventSink = sink;
         }

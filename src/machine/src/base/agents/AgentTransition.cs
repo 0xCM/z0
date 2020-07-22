@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Specifies a transition that occurred 
@@ -27,15 +28,15 @@ namespace Z0
         /// <summary>
         /// Specifies the state of the agent before the transition
         /// </summary>
-        public readonly AgentState SourceState;
+        public readonly AgentStatus SourceState;
 
         /// <summary>
         /// Specifies the state of the agent ater the transition
         /// </summary>
-        public readonly AgentState TargetState;
+        public readonly AgentStatus TargetState;
 
         [MethodImpl(Inline)]
-        public AgentTransition(AgentIdentity id, ulong timestamp, AgentState src, AgentState dst)
+        public AgentTransition(AgentIdentity id, ulong timestamp, AgentStatus src, AgentStatus dst)
         {
             Agent = id;
             Timestamp = timestamp;

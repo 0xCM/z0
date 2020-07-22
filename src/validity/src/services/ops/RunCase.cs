@@ -8,10 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Collections.Concurrent;
 
     using static Konst;
-    using static Root;
 
     partial class TestApp<A>
     {
@@ -40,9 +38,16 @@ namespace Z0
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
+                {
                     cases.WithItems(outcomes);
+                    CaseLog.Deposit(outcomes);
+                }
                 else
-                    cases.Add(TestCaseRecord.Define(casename, true, clock.Time));
+                {
+                    var success = TestCaseRecord.Define(casename, true, clock.Time);
+                    cases.Add(success);
+                    CaseLog.Deposit(success);
+                }
 
                 if(DiagnosticMode)
                     term.print($"Executed case {unit.HostType.Name}/{method.Name}");            

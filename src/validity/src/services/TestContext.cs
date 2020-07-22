@@ -21,17 +21,10 @@ namespace Z0
     {
         public bool DiagnosticMode {get; private set;}
 
-        public CaseLog CaseLog {get; protected set;}
-
         public void SetMode(bool diagnostic)
         {
             DiagnosticMode = diagnostic;
         }
-
-         public void SetLog(CaseLog log)       
-         {
-             CaseLog = log;
-         }
         
          protected IResolvedApi Api 
             => _Api.Value;

@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
+    using static z;
 
     using F = TestCaseField;
     using R = TestCaseRecord;
@@ -47,10 +48,10 @@ namespace Z0
         
         TestCaseRecord(string name, bool succeeded, Duration duration)
         {
-            this.Case = name;
-            this.Status = succeeded ? TestCaseStatus.Passed : TestCaseStatus.Failed;
-            this.Duration = duration;
-            this.Executed = DateTime.Now;
+            Case = name;
+            Status = succeeded ? TestCaseStatus.Passed : TestCaseStatus.Failed;
+            Duration = duration;
+            Executed = now();
         }
 
         public string DelimitedText(char delimiter)

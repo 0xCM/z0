@@ -11,13 +11,13 @@ namespace Z0
     /// <summary>
     /// Defines base system agent abstraction
     /// </summary>    
-    public abstract class SystemAgent : ISystemAgent<AgentContext>
+    public abstract class SystemAgent : ISystemAgent
     {
         public AgentContext Context {get;}
 
         public event OnAgentTransition StateChanged;
 
-        AgentState _State;
+        AgentStatus _State;
 
         /// <summary>
         /// Identifies the server to which the agent belongs
@@ -44,22 +44,13 @@ namespace Z0
             AgentId = id.AgentId;
             Context = context;
             context.Register(this);
-            State = AgentState.Created;
+            State = AgentStatus.Created;
         }
-
-        public bool IsServer
-            => AgentId == 0;
-        
-        public bool IsServerProcess
-            => AgentId == 1;
-
-        public bool IsComplex
-            => AgentId == UInt32.MaxValue;
-            
+           
         /// <summary>
         /// Specifies the current agent status
         /// </summary>
-        public AgentState State 
+        public AgentStatus State 
         {
             get => _State;
             
@@ -78,45 +69,45 @@ namespace Z0
 
         void DoRun()
         {
-            State = AgentState.Running;
+            State = AgentStatus.Running;
             OnRun();
         }
 
         void DoStop()
         {
-            State = AgentState.Stopping;
+            State = AgentStatus.Stopping;
             OnStop();
-            State = AgentState.Stopped;
+            State = AgentStatus.Stopped;
         }
 
         void DoStart()
         {
-            if(State == AgentState.Running)
+            if(State == AgentStatus.Running)
                 return;
 
-            State = AgentState.Starting;
+            State = AgentStatus.Starting;
             OnStart();
-            State = AgentState.Started;
+            State = AgentStatus.Started;
             DoRun();
         }
 
         void DoTerminate()
         {            
-            if(State == AgentState.Running)
+            if(State == AgentStatus.Running)
                 Stop().Wait();
 
-            State = AgentState.Terminating;
+            State = AgentStatus.Terminating;
             OnTerminate();
-            State = AgentState.Terminated;
+            State = AgentStatus.Terminated;
         }
 
         void DoConfigure(dynamic config)
         {
-            if(State == AgentState.Created || State == AgentState.Stopped)
+            if(State == AgentStatus.Created || State == AgentStatus.Stopped)
             {
-                State = AgentState.Configuring;
+                State = AgentStatus.Configuring;
                 OnConfigure(config);
-                State = AgentState.Configured;
+                State = AgentStatus.Configured;
             }
         }
 
@@ -151,20 +142,35 @@ namespace Z0
         public virtual void Dispose() 
             => Terminate().Wait();            
 
-        protected virtual void OnConfigure(dynamic config) {}
+        protected virtual void OnConfigure(dynamic config) 
+        {
 
-        protected virtual void OnRun() {}
+        }
 
-        protected virtual void OnStop() {}
+        protected virtual void OnRun() 
+        {
+
+        }
+
+        protected virtual void OnStop() 
+        {
+
+        }
 
         /// <summary>
         /// May be specialized to perform service-specific initialization/precondition operations
         /// </summary>
-        protected virtual void OnStart(){}
+        protected virtual void OnStart()
+        {
+
+        }
 
         /// <summary>
         /// May be specialized to perform service-specific cleanup/postcondition operations
         /// </summary>
-        protected virtual void OnTerminate(){}
+        protected virtual void OnTerminate()
+        {
+
+        }
     }
 }

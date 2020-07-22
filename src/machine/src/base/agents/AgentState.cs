@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Defines canonical states in the lifecycle of an agent
     /// </summary>
-    public enum AgentState : uint
+    public enum AgentStatus : uint
     {        
         /// <summary>
         /// The agent state after instantiation. If configuration data is available,
@@ -64,6 +64,5 @@ namespace Z0
         Terminated = T09,
 
         Error = uint.MaxValue
-
     }
 }

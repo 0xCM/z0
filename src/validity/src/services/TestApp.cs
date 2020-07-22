@@ -21,6 +21,8 @@ namespace Z0
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
+        protected readonly CaseLog CaseLog;
+        
         protected TestApp()
         {
             CaseLog = CaseLog.create(AppPaths.CaseLogPath);

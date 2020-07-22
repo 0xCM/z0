@@ -18,7 +18,7 @@ namespace Z0
             => e.PayloadByName(selector.GetAccessedProperty().Name);
 
         public static EventIdentity EventIdentity(this TraceEvent data)         
-                => Z0.EventIdentity.Define(
+                => Z0.EventIdentity.define(
                 data.Payload<uint>("ServerId"), 
                 data.Payload<uint>("AgentId"), 
                 data.Payload<ulong>("Timestamp"),

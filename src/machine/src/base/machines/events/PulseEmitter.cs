@@ -13,23 +13,19 @@ namespace Z0
     /// </summary>
     public class PulseEmitter : EventEmitter<PulseEvent>
     {        
-        public static PulseEmitter Define(AgentContext Context, AgentIdentity Identity, PulseEmitterConfig Config)  
-        {
-            return new PulseEmitter(Context, Identity, Config);
-        }
+        public static PulseEmitter define(AgentContext context, AgentIdentity identity, PulseEmitterConfig config)  
+            => new PulseEmitter(context, identity, config);
 
-        PulseEmitter(AgentContext Context, AgentIdentity Identity, PulseEmitterConfig Config)  
-            : base(Context,Identity)      
+        PulseEmitter(AgentContext context, AgentIdentity identity, PulseEmitterConfig config)  
+            : base(context,identity)      
         {
-            this.Timer = new Timer(Config.Frequency.TotalMilliseconds);
-            this.Timer.AutoReset = true;
-            this.Timer.Elapsed += OnPulse;
+            Timer = new Timer(config.Frequency.TotalMilliseconds);
+            Timer.AutoReset = true;
+            Timer.Elapsed += OnPulse;
         }
         
         void OnPulse(object sender, ElapsedEventArgs args)
-        {
-            Context.EventLog.Receive(PulseEvent.Define(ServerId, AgentId, ServerTimestamp.Timestamp()));      
-        }
+            => Context.EventLog.Receive(PulseEvent.Define(ServerId, AgentId, ServerTimestamp.Timestamp()));      
 
         Timer Timer {get;}
         

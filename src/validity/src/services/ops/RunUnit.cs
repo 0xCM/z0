@@ -28,7 +28,7 @@ namespace Z0
                     ExecExplicit(et, host.Name,results);
                 else
                 {                    
-                    z.iter(FindTests(host), t =>  execTime += RunCase(unit, t, results));   
+                    z.iter(FindTests(host), t =>  execTime += RunCase(unit, t, results));                    
                     PostBenchResult(unit.TakeBenchmarks().Array());
                 }
 
@@ -57,7 +57,6 @@ namespace Z0
             if(unit.Enabled)
             {
                 unit.SetMode(DiagnosticMode);
-                unit.SetLog(CaseLog);          
                 RunUnit(host, unit);            
             }
         }

@@ -14,25 +14,6 @@ namespace Z0
     public readonly struct EventIdentity
     {
         /// <summary>
-        /// Constructs an event identity from a (kind,server,agent,time) tuple
-        /// </summary>
-        /// <param name="loc">The location of occurence</param>
-        /// <param name="time">The time of occurrence</param>
-        /// <param name="kind">The kind of event that occurred</param>
-        [MethodImpl(Inline)]
-        public static EventIdentity Define(uint server, uint agent, ulong time, ulong kind)
-            => new EventIdentity(server, agent, time, kind);
-
-        [MethodImpl(Inline)]
-        public EventIdentity(uint ServerId, uint AgentId, ulong Timestamp, ulong Kind)
-        {
-            this.ServerId = ServerId;
-            this.AgentId = AgentId;
-            this.Timestamp = Timestamp;
-            this.EventKind = Kind;
-        }
-
-        /// <summary>
         /// The originating server
         /// </summary>
         public readonly uint ServerId;
@@ -51,6 +32,25 @@ namespace Z0
         /// The event classifier/discriminator
         /// </summary>        
         public readonly ulong EventKind;
+
+        /// <summary>
+        /// Constructs an event identity from a (kind,server,agent,time) tuple
+        /// </summary>
+        /// <param name="loc">The location of occurence</param>
+        /// <param name="time">The time of occurrence</param>
+        /// <param name="kind">The kind of event that occurred</param>
+        [MethodImpl(Inline)]
+        public static EventIdentity define(uint server, uint agent, ulong time, ulong kind)
+            => new EventIdentity(server, agent, time, kind);
+
+        [MethodImpl(Inline)]
+        public EventIdentity(uint server, uint agent, ulong ts, ulong kind)
+        {
+            ServerId = server;
+            AgentId = agent;
+            Timestamp = ts;
+            EventKind = kind;
+        }
 
         public ulong Location
         {
