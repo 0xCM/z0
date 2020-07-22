@@ -4,5 +4,5 @@ call unbuild.bat
 call emit.bat
 call respack.bat
 call deposit.bat
-call commit.sh
+REM call commit.bat
 echo on
