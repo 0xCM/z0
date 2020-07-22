@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static z;
+    using static Konst;
     
     /// <summary>
     /// Configurable bit data type formatter
@@ -15,38 +16,15 @@ namespace Z0
     public readonly struct BitFormatter<T> : IBitFormatter<T>
         where T : struct
     {                                  
-        const char zero = Chars.D0;
-
+        [MethodImpl(Inline)]
         public string Format(ReadOnlySpan<byte> src, in BitFormatConfig config)
-        {            
-            var bits = src.Length*8;
-            var dst = span<char>(bits);
-            dst.Fill(zero);
-
-            BitFormatter.Service.Format(src, config.MaxBitCount,dst);
-            
-            dst.Reverse();
-            
-            var bs = new string(dst);                
-            
-            if(config.TrimLeadingZeros)
-                bs = bs.TrimStart(zero);
-            
-            if(config.ZPad != 0)
-                bs = bs.PadLeft(config.ZPad, zero);
-            
-            if(config.BlockWidth != 0)
-                bs = string.Join(config.BlockSep, bs.Partition(config.BlockWidth));
-            
-            return config.SpecifierPrefix ? "0b" + bs : bs;
-        }
+            => BitFormatter.format(src,config);
         
+        [MethodImpl(Inline)]
         public string Format(T src, in BitFormatConfig config)
-        {
-            var bytes = z.bytes(src);
-            return Format(bytes,config);
-        }
+            => BitFormatter.format(z.bytes(src), config);
 
+        [MethodImpl(Inline)]
         public string Format(T src)
             => Format(src, BitFormatter.configure());
     }

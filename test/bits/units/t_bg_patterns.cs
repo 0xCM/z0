@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
     
-    public class t_bg_patterns : t_bg<t_bg_patterns>
+    public class t_bg_patterns : t_bitgrids<t_bg_patterns>
     {        
         void stripes_12x12()
             => BitGrid.export(GridPatterns.stripes(n256,n12,n12,z16));

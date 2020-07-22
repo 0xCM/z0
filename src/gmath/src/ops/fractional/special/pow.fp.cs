@@ -12,7 +12,7 @@ namespace Z0
     
     partial class gfp
     {
-        [MethodImpl(Inline), Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T pow<T>(T b, uint exp)
             where T : unmanaged
         {
@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.pow(float64(b), exp));
             else            
-               throw Unsupported.define<T>();            
+               throw no<T>();            
         }
     }
 }

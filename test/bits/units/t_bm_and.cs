@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public class t_bm_and : t_bm<t_bm_and>
+    public class t_bm_and : t_bitmatrix<t_bm_and>
     {
         public void bm_and_n64x64x64()
             => bm_and_check<N64,ulong>();

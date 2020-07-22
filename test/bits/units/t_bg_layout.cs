@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
     
-    public class t_bg_layout : t_bg<t_bg_layout>
+    public class t_bg_layout : t_bitgrids<t_bg_layout>
     {        
         public void bg_layout_21x32x32()
         {

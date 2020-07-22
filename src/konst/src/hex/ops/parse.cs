@@ -17,17 +17,17 @@ namespace Z0
         {            
             if(isNumber(src))
             {
-                dst = z.sub((byte)src, MinScalarCode);
+                dst = Bytes.sub((byte)src, MinScalarCode);
                 return true;
             }
             else if(isUpper(src))
             {
-                dst = z.add(z.sub((byte)src, MinCharCodeU), unsigned(0xA));
+                dst = Bytes.add(Bytes.sub((byte)src, MinCharCodeU), unsigned(0xA));
                 return true;
             }
             else if(isLower(src))
             {
-                dst = z.add(z.sub((byte)src,  MinCharCodeL), unsigned(0xA));
+                dst = Bytes.add(Bytes.sub((byte)src,  MinCharCodeL), unsigned(0xA));
                 return true;
             }
             else

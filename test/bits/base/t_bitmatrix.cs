@@ -10,8 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public abstract class t_bm<X> : t_bitgrids_base<X>
-        where X : t_bm<X>, new()
+    public abstract class t_bitmatrix<X> : t_bitgrids_base<X>
+        where X : t_bitmatrix<X>, new()
     {
         protected override int RepCount => Pow2.T04;
 

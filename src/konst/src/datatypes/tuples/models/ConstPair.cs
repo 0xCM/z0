@@ -60,13 +60,13 @@ namespace Z0
             right = Right;
         }
 
-        T IPair<ConstPair<T>, T>.Left 
+        T IPair<ConstPair<T>,T>.Left 
         {
             [MethodImpl(Inline)]
             get => Left;
         }
 
-        T IPair<ConstPair<T>, T>.Right 
+        T IPair<ConstPair<T>,T>.Right 
         {
             [MethodImpl(Inline)]
             get => Right;

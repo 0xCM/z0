@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public class t_bg_permute : t_bg<t_bg_permute>
+    public class t_bg_permute : t_bitgrids<t_bg_permute>
     {                
         public void bg_permute_32x5()
         {

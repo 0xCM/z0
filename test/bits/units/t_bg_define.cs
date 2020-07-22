@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
     
-    public class t_bg_define : t_bg<t_bg_define>
+    public class t_bg_define : t_bitgrids<t_bg_define>
     {        
         public void bg_define_3x5x8()
             => nbg_define_check(n3, n5, z8);

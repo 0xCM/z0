@@ -13,7 +13,7 @@ namespace Z0
     using static Konst;    
     using static z;
 
-    partial class dvec
+    partial struct z
     {
         /// <summary>
         /// Computes the caryless 16-bit product of two 8-bit operands
@@ -156,4 +156,30 @@ namespace Z0
             return prod;
         }
     }
+
+    /// <summary>
+    /// Defines a mask that specifies the left/right vector components from which a carry-less product will be formed
+    /// </summary>
+    public enum ClMulMask : byte
+    {
+        /// <summary>
+        /// For a product P = XY, multiply the lo(X) and lo(Y)
+        /// </summary>
+        X00 = 0x00,
+
+        /// <summary>
+        /// For a product P = XY, multiply the lo(X) and hi(Y)
+        /// </summary>
+        X01 = 0x01,
+
+        /// <summary>
+        /// For a product P = XY, multiply the hi(X) and lo(Y)
+        /// </summary>
+        X10 = 0x10,
+
+        /// <summary>
+        /// For a product P = XY, multiply the hi(X) and hi(Y)
+        /// </summary>
+        X11 = 0x11,
+    }    
 }

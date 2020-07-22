@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
-    public abstract class t_bitblock<X> : t_bitgrids_base<X>
-        where X : t_bitblock<X>, new()
+    public abstract class t_bitspans<X> : t_bitgrids_base<X>
+        where X : t_bitspans<X>, new()
     {
         protected void bitblock_disable_check<T>(BitSize n)
             where T : unmanaged
@@ -93,31 +93,12 @@ namespace Z0
             }
         }
 
-        protected void bitspan_from_bitstring_check<T>()
-            where T : unmanaged
-        {
-            for(var i=0; i< RepCount; i++)            
-            {
-                var bs = Random.BitString(5,233);
-                var bc = BitBlocks.from<T>(bs);
-                Claim.eq(bs.Length, bc.BitCount);
-                for(var j=0; j<bs.Length; j++)
-                {                
-                    if(bc[j] != bs[j])
-                    {
-                        Trace("bs", bs.Format());
-                        Trace("bc", bc.Format());
-                    }
-                    Claim.Eq(bc[j],bs[j]);
-                }
-            }
-        }
 
-        protected void bitspan_create_check<N,T>(N _ = default, T t = default)
+        protected void check_bitblock_range<N,T>(N _ = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            int n = nati<N>();
+            int n = (int)value<N>();
             var rep = default(N);
             var segcount = (int)BitCalcs.mincells<T>(value<N>());
             Claim.eq(BitBlock<N,T>.NeededCells, segcount);
@@ -140,7 +121,7 @@ namespace Z0
             }
         }
 
-        protected void bb_create_check<T>(int bitcount)
+        protected void check_bitblock_create<T>(int bitcount)
             where T : unmanaged
         {
             var segcount = (int)BitCalcs.mincells<T>((ulong)bitcount);

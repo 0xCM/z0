@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    public class t_bm_xor : t_bm<t_bm_xor>
+    public class t_bm_xor : t_bitmatrix<t_bm_xor>
     {        
         public void bm_xor_g8x8x8()
             => bm_xor_check<byte>();

@@ -7,10 +7,10 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
-    public abstract class t_bg<X> : t_bitgrids_base<X>
-        where X : t_bg<X>, new()
+    public abstract class t_bitgrids<X> : t_bitgrids_base<X>
+        where X : t_bitgrids<X>, new()
     {
         protected override int RepCount => Pow2.T04;
 
@@ -21,8 +21,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var rows = nati(m);
-            var cols = nati(n);
+            var rows = (int)value(m);
+            var cols = (int)value(n);
             var points = rows*cols;
             var bytes = points/8 + (points % 8 != 0 ? 1 : 0);
             var bits = bytes*8;
@@ -42,63 +42,6 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Verifies correct function of the natural bitgrid bitstring conversion
-        /// </summary>
-        /// <param name="m">The row count representative</param>
-        /// <param name="n">The column count representative</param>
-        /// <param name="zero">The cell representative</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The storage cell type</typeparam>
-        protected void nbg_bitstring_check<M,N,T>(M m = default, N n = default, T zero = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            for(var sample = 0; sample < RepCount; sample++)
-            {
-                var bg = BitGrid.alloc(m,n,zero);
-                var bs = Random.BitString((int)NatCalc.mul(m,n));
-
-                for(var i=0; i<bs.Length; i++)
-                    bg.SetBit(i, bs[i]);
-                
-                Claim.eq(bg.ToBitString(), bs);        
-            }
-        }
-
-        /// <summary>
-        /// Verifies correct function of the generic bitgrid read operation
-        /// </summary>
-        /// <param name="rows">The number of grid rows</param>
-        /// <param name="cols">The number of grid columns</param>
-        /// <typeparam name="T">The grid cell type</typeparam>
-        protected void gbg_bitread_check<T>(uint rows, uint cols)
-            where T : unmanaged
-        {
-            for(var i = 0; i < RepCount; i++)
-            {
-                var src = Random.BitGrid<T>(rows,cols);
-                var dstA = BitGrid.alloc<T>(rows,cols);
-                var dstB = BitGrid.alloc<T>(rows,cols);                
-
-                var bitpos = 0;
-                for(var row = 0; row < rows; row++)
-                for(var col = 0; col < cols; col++, bitpos++)
-                {
-                    var b1 = BitGrid.readbit(src.ColCount, in src.Head, row, col);
-                    var b2 = BitGrid.readbit(in src.Head, bitpos);
-                    Claim.Require(b1 == b2);
-
-                    dstA[row,col] = b1;
-                    dstB.SetBit(bitpos, b2);                    
-                }
-                var bsA = dstA.ToBitString();
-                var bsB = dstB.ToBitString();
-                Claim.eq(bsA, bsB);
-            }
-        }
 
         protected void bg_bitread_bench<T>(uint M, uint N, SystemCounter counter = default)
             where T : unmanaged
@@ -122,8 +65,8 @@ namespace Z0
             where T : unmanaged
         {
             var last = bit.Off;
-            int M = bitsize<T>();
-            int N = bitsize<T>();
+            int M = (int)bitsize<T>();
+            int N = (int)bitsize<T>();
             for(var i = 0; i<CycleCount; i++)
             {
                 var src = Random.BitMatrix<T>();

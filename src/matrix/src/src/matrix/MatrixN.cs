@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a primal square matrix of natural order
@@ -24,12 +24,12 @@ namespace Z0
         /// <summary>
         /// The square matrix dimension
         /// </summary>
-        public static int Order => nati<N>();
+        public static int Order => (int)value<N>();
         
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static int Cells => nati<N>() * nati<N>();
+        public static int Cells => (int)NatCalc.mul<N,N>();
 
         [MethodImpl(Inline)]
         public static implicit operator Matrix<N,T>(Matrix<N,N,T> src)

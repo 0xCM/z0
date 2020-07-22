@@ -9,7 +9,7 @@ namespace Z0
     
     using static Konst;
 
-    partial class Linear
+    public readonly struct BlockVectorOps
     {
         /// <summary>
         /// Computes lhs[i] := lhs[i] & rhs[i] for i = 0...N-1

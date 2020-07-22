@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static Memories;
     
-    public class t_bm_equality : t_bm<t_bm_equality>
+    public class t_bm_equality : t_bitmatrix<t_bm_equality>
     {
         static bool are_equal(in BitMatrix8 A, in BitMatrix8 B)
         {

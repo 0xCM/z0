@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public class t_bb_pop : t_bitblock<t_bb_pop>
+    public class t_bb_pop : t_bitspans<t_bb_pop>
     {
         public void gbb_pop_64()
         {

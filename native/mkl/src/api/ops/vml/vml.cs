@@ -238,7 +238,7 @@ namespace Z0.Mkl
             where M : unmanaged, ITypeNat
 
         {
-            VmlImport.vsFmod(Matrix256<M,N,float>.Cells, ref head(A), ref head(B), ref head(X));
+            VmlImport.vsFmod(Matrix256<M,N,float>.Capacity, ref head(A), ref head(B), ref head(X));
             return ref X;
         }
 
@@ -254,7 +254,7 @@ namespace Z0.Mkl
             where M : unmanaged, ITypeNat
 
         {
-            VmlImport.vdFmod(Matrix256<M,N,float>.Cells, ref head(lhs), ref head(rhs), ref head(dst));
+            VmlImport.vdFmod(Matrix256<M,N,float>.Capacity, ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
         }
 
@@ -585,7 +585,7 @@ namespace Z0.Mkl
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            VmlImport.vsRound(Matrix256<M,N,float>.Cells, ref head(A), ref head(A));
+            VmlImport.vsRound(Matrix256<M,N,float>.Capacity, ref head(A), ref head(A));
             return ref A;
         }
 
@@ -599,7 +599,7 @@ namespace Z0.Mkl
             where N : unmanaged, ITypeNat
         {
 
-            VmlImport.vdRound(Matrix256<M,N,double>.Cells, ref head(A), ref head(A));
+            VmlImport.vdRound(Matrix256<M,N,double>.Capacity, ref head(A), ref head(A));
             return ref A;
         }
 
@@ -636,7 +636,7 @@ namespace Z0.Mkl
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            VmlImport.vdTrunc(Matrix256<M,N,double>.Cells, ref head(A), ref head(A));
+            VmlImport.vdTrunc(Matrix256<M,N,double>.Capacity, ref head(A), ref head(A));
             return ref A;
         }
 
@@ -649,7 +649,7 @@ namespace Z0.Mkl
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            VmlImport.vsTrunc(Matrix256<M,N,float>.Cells, ref head(A), ref head(A));
+            VmlImport.vsTrunc(Matrix256<M,N,float>.Capacity, ref head(A), ref head(A));
             return ref A;
         }
 

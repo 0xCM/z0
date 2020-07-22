@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    public class t_bm_extract : t_bm<t_bm_extract>
+    public class t_bm_extract : t_bitmatrix<t_bm_extract>
     {    
         public void bm_extract_n9x9x16()
             => bm_extract_check(Random.BitMatrix<N9,N9,ushort>());

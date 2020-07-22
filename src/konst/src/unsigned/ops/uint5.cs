@@ -95,19 +95,19 @@ namespace Z0
         /// <param name="x4">The term at index 4</param>
         [MethodImpl(Inline), Op]
         public static S uint5(BitState x0, BitState x1 = default, BitState x2 = default, BitState x3 = default, BitState x4 = default)
-             => wrap5(z.or(
-                 z.sll((byte)x0, 0),
-                 z.sll((byte)x1, 1),
-                 z.sll((byte)x2, 2),
-                 z.sll((byte)x3, 3),
-                 z.sll((byte)x4, 4)
+             => wrap5(Bytes.or(
+                 Bytes.sll((byte)x0, 0),
+                 Bytes.sll((byte)x1, 1),
+                 Bytes.sll((byte)x2, 2),
+                 Bytes.sll((byte)x3, 3),
+                 Bytes.sll((byte)x4, 4)
                  ));
         
         [MethodImpl(Inline), Op]
         public static S add(S x, S y)
         {
-            var sum = z.add(x.data,y.data);
-            var result = z.gteq(sum, S.Count) ? z.sub(sum, S.Count) : sum;
+            var d = (byte)(x.data + y.data);
+            var result = Bytes.gteq(d, S.Count) ? Bytes.sub(d, S.Count) : d;
             return new S(result, true);
         }
 
@@ -159,11 +159,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static S set(S src, byte pos, BitState state)
-            => z.lt(pos, S.Width) ? new S(z.set(src.data, pos, state), false) : src;
+            => Bytes.lt(pos, S.Width) ? new S(z.set(src.data, pos, state), false) : src;
         
         [MethodImpl(Inline)]
         public static bool eq(S x, S y)
-            => z.eq(x.data, y.data);
+            => Bytes.eq(x.data, y.data);
 
         [MethodImpl(Inline)]
         internal static byte crop5(byte x) 

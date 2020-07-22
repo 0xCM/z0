@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
 
-    public class t_bb_dot : t_bitblock<t_bb_dot>
+    public class t_bb_dot : t_bitspans<t_bb_dot>
     {
         public void gbb_dot_10x32()
             => bitblock_dot_check<uint>(10);

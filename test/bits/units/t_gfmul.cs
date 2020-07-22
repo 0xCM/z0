@@ -46,23 +46,35 @@ namespace Z0
                 {0b111, 0b101, 0b010, 0b001, 0b110, 0b100, 0b011}
             };
 
-            var actual = Gf8.products();
+            var actual = new byte[7,7];
+            Gf8.products(ref actual[0,0]);
 
-            var description = text.build();
+            //var actual = Gf8.products();
+
+            for(byte i=0; i<7; i++)
+            for(byte j=0; j<7; j++)
+                Claim.Eq(expect[i,j], actual[i,j]);
+        }
+
+        public static string format8x8x3(byte[,] src)
+        {
+            var dst = text.build();
+            var config = BitFormatter.limited(3);
             for(var i=0; i<7; i++)
             {
                 for(var j=0; j<7; j++)
                 {                    
-                    description.Append(expect[i,j].ToBitString().Truncate(3).Format());
-                    if(j != 6)
-                        description.Append(Chars.Pipe);
-                }
-                description.AppendLine();
-            }
+                    ref readonly var cell = ref src[i,j];
+                    var cellFmt = BitFormatter.format(cell, config);
 
-            for(var i=0; i<7; i++)
-            for(var j=0; j<7; j++)
-                Claim.Eq(expect[i,j], actual[i,j]);
+                    dst.Append(cellFmt);                    
+                    
+                    if(j != 6)
+                        dst.Append(Chars.Pipe);
+                }
+                dst.AppendLine();
+            }
+            return dst.ToString();
         }
 
         public void gfpoly()

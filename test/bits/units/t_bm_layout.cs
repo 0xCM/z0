@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    public class t_bm_layout : t_bm<t_bm_layout>
+    public class t_bm_layout : t_bitmatrix<t_bm_layout>
     {
         public void bm_cellcount()
         {

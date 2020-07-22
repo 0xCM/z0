@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static NumericCast;
+    using static z;
     using static BitMasks;
-    using static Typed;
 
     partial class BitMask
     {                
@@ -44,7 +43,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T central<T>(N8 f, N2 d, T t = default)
             where T : unmanaged
         {
@@ -67,7 +66,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T central<T>(N8 f, N4 d, T t = default)
             where T : unmanaged
         {
@@ -90,7 +89,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T central<T>(N8 f, N6 d, T t = default)
             where T : unmanaged
         {

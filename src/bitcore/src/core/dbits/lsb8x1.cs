@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Konst;
-       
+    using static z;   
+
     partial class Bits
     {
          /// <summary>
@@ -19,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static T lsb8x1<T>(T src)
             where T : unmanaged
-                => Cast.to<ulong,T>(scatter(Cast.to<T,ulong>(src), BitMasks.Lsb64x8x1));
+                => convert<ulong,T>(scatter(convert<T,ulong>(src), BitMasks.Lsb64x8x1));
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    public class t_bm_cnonimpl : t_bm<t_bm_cnonimpl>
+    public class t_bm_cnonimpl : t_bitmatrix<t_bm_cnonimpl>
     {                
         public void bm_not_32x32x32()
         {

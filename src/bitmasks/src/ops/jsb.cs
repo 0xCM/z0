@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>JSB := msb | lsb (8x1)</remarks>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T jsb<T>(N8 f, N1 d, T t = default)
             where T : unmanaged
         {
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>JSB := msb | lsb (8x2)</remarks>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T jsb<T>(N8 f, N2 d, T t = default)
             where T : unmanaged
         {
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>JSB := msb | lsb (8x3)</remarks>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T jsb<T>(N8 f, N3 d, T t = default)
             where T : unmanaged
         {
@@ -90,7 +90,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T mask<T>(JsbMask<N8,N1,T> spec)
             where T : unmanaged
                 => jsb(spec.f,spec.d,spec.t);
@@ -100,7 +100,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T mask<T>(JsbMask<N8,N2,T> spec)
             where T : unmanaged
                 => jsb(spec.f,spec.d,spec.t);
@@ -110,7 +110,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T mask<T>(JsbMask<N8,N3,T> spec)
             where T : unmanaged
                 => jsb(spec.f,spec.d,spec.t);

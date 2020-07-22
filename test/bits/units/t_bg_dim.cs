@@ -9,9 +9,8 @@ namespace Z0
     using System.Linq;
     
     using static Konst;
-    using static Memories;
     
-    public class t_bg_dim : t_bg<t_bg_dim>
+    public class t_bg_dim : t_bitgrids<t_bg_dim>
     {        
         public void nbg_describe_dim()
         {

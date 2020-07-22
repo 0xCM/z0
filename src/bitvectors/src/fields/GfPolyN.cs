@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Represents a base-2 polynomial of degree N. The represented polynomial is of the form
@@ -18,27 +19,30 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        readonly T data;
+        readonly ulong Data;
 
-        static readonly int degree = (int)new N().NatValue;
+        public static byte degree => (byte)value<N>();
 
-        public static readonly GfPoly<N,T> Zero = default;
+        public static GfPoly<N,T> Zero => default;
         
         public static implicit operator T(GfPoly<N,T> src)
-            => src.data;
+            => convert<T>(src.Data);
 
         public GfPoly(params byte[] exponents)
         {
-            var components = default(T);
-            for(var i=0; i< exponents.Length; i++)
-                components = gmath.or(components, gmath.pow2<T>(exponents[i]));
-            data = components;
+            var result = 0ul;
+            var count = exponents.Length;
+
+            for(var i=0; i<count; i++)
+                result |= Pow2.pow(exponents[i]);            
+            
+            Data = result;
         }
 
         [MethodImpl(Inline)]
-        public GfPoly(T data)
+        public GfPoly(T src)
         {
-            this.data = data;
+            Data = convert<T,ulong>(src);;
         }
 
         /// <summary>
@@ -47,7 +51,7 @@ namespace Z0
         public bit this[byte i]
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit(data,i);
+            get => gbits.testbit(Data,i);
         }
 
         /// <summary>
@@ -56,13 +60,13 @@ namespace Z0
         public T Scalar
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => convert<T>(Data);
         }
 
         /// <summary>
         /// The degree (N) of the polynomial
         /// </summary>
-        public int Degree
+        public byte Degree
         {
             [MethodImpl(Inline)]
             get => degree;
@@ -74,7 +78,7 @@ namespace Z0
         public bool Nonzero
         {
             [MethodImpl(Inline)]
-            get => !gmath.nonz(data);
+            get => Data != 0;
         }
 
         /// <summary>
@@ -82,11 +86,12 @@ namespace Z0
         /// </summary>
         public string Format(char? variable = null)
         {
-            var bs = BitString.scalar(data);
+            var bs = BitString.scalar(Data);
             var terms = new List<string>();
             
             for(var i=0; i<bs.Length; i++)
-                if(bs[i]) terms.Add($"{variable ?? 'x'}^{i}");
+                if(bs[i]) 
+                    terms.Add($"{variable ?? 'x'}^{i}");
             
             var sb = text.build();
             terms.Reverse();
@@ -95,11 +100,11 @@ namespace Z0
 
         public GfPoly<N,U> As<U>()
             where U: unmanaged
-                => Unsafe.As<GfPoly<N,T>, GfPoly<N,U>>(ref Unsafe.AsRef(in this));
+                => @as<GfPoly<N,T>, GfPoly<N,U>>(this);
 
         public GfPoly<M,U> As<M,U>()
             where M : unmanaged, ITypeNat
             where U: unmanaged
-                => Unsafe.As<GfPoly<N,T>, GfPoly<M,U>>(ref Unsafe.AsRef(in this));
+                => @as<GfPoly<N,T>, GfPoly<M,U>>(this);
     }
 }

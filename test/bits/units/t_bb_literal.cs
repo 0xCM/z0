@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public class t_bb_literal : t_bitblock<t_bb_literal>
+    public class t_bb_literal : t_bitspans<t_bb_literal>
     {
         public void bb_literal_40x64()
         {

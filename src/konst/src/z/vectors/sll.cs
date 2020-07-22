@@ -14,7 +14,7 @@ namespace Z0
     using static Konst;
     using static z;    
     
-    partial class dvec
+    partial struct z
     {           
         /// <summary>
         /// Defines the unfortunately missing _mm_slli_epi8 that shifts each vector component leftward by a common number of bits
@@ -116,9 +116,9 @@ namespace Z0
         [MethodImpl(Inline), Sll]
         public static Vector256<byte> vsll(Vector256<byte> src, [Imm] byte count)
         {
-            var y = v8u(dvec.vsll(v64u(src), count));
+            var y = v8u(vsll(v64u(src), count));
             var m = vmsb(n256, n8, (byte)(8 - count),z8);
-            return dvec.vand(y,m);
+            return vand(y,m);
         }
 
         /// <summary>

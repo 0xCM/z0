@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Konst; 
-    using static Memories;
+    using static z;
 
     partial class gfp
     {
-        [MethodImpl(Inline), ModMul, Closures(Floats)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T modmul<T>(T a, T b, T m)
             where T : unmanaged
         {
@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.modmul(float64(a), float64(b), float64(m)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

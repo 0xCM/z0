@@ -10,7 +10,6 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static Memories;
 
     public abstract class t_bitgrids_base<U> : t_bitcore<U>
         where U : t_bitgrids_base<U>, new()

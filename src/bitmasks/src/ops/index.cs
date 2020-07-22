@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
+    using static z;
     using static BitMasks;
-    using static Typed;
 
     partial class BitMask
     {           

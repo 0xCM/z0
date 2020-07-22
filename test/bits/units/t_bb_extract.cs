@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static Konst;
 
-    public class t_bb_extract : t_bitblock<t_bb_extract>
+    public class t_bb_extract : t_bitspans<t_bb_extract>
     {
         public void bb_extract_64()
         {

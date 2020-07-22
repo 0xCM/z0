@@ -9,7 +9,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines the matrix api surface

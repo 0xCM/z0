@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a blocked primal matrix of natural dimensions
@@ -26,17 +26,17 @@ namespace Z0
         /// <summary>
         /// The number of rows in the structure
         /// </summary>
-        public static int Rows => nati<M>();
+        public static int Rows => (int)value<M>();
 
         /// <summary>
         /// The number of columns in the structure
         /// </summary>
-        public static int Cols => nati<N>();
+        public static int Cols => (int)value<N>();
 
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static int Cells => Rows * Cols;
+        public static int Cells => (int)NatCalc.mul<M,N>();
 
         [MethodImpl(Inline)]
         public static bool operator == (Matrix<M,N,T> lhs, Matrix<M,N,T> rhs) 

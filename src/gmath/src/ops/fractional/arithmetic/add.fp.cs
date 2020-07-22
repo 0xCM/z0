@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Add, Closures(Floats)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T add<T>(T a, T b)
             where T : unmanaged
         {

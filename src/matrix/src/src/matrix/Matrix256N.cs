@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a primal square matrix of natural order
@@ -24,12 +24,14 @@ namespace Z0
         /// <summary>
         /// The square matrix dimension
         /// </summary>
-        public static int Order => (int)value<N>();
+        public static int Order 
+            => (int)value<N>();
 
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static int CellCount => (int)NatCalc.square<N>();
+        public static int CellCount 
+            => (int)NatCalc.square<N>();
 
         [MethodImpl(Inline)]
         public static implicit operator Matrix256<N,T>(Block256<T> src)

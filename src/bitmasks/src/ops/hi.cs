@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="n">The number of bits to enable</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T hi<T>(int n, T t = default)
             where T : unmanaged
             => convert<T>(lo64(n) << (bitsize<T>() - n));

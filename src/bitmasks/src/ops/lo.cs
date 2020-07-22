@@ -7,12 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.Intrinsics.X86.Bmi1;
-    using static System.Runtime.Intrinsics.X86.Bmi1.X64;
-
     using static Konst;
-    using static NumericCast;
-    using static As;
+    using static z;
     
     partial class BitMask
     {           
@@ -22,12 +18,12 @@ namespace Z0
         /// <typeparam name="N">The enabled bit count type</typeparam>
         [MethodImpl(Inline),Op]
         public static ulong lo64(int n)
-            => blsmsk(Pow2.pow(n));
+            => lomask(Pow2.pow(n));
 
         /// <summary>
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
         /// </summary>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T lo<T>(int n, T t = default)
             where T : unmanaged
                 => convert<ulong,T>(lo64(n));
@@ -54,62 +50,5 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => convert<ulong,T>(lo(n));
-
-        /// <summary>
-        /// Logically equivalent to the composite operation (src-1) ^ src that enables the 
-        /// lower bits of the source up to and including the least set bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        static T blsmsk<T>(T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(blsmsk(uint8(src)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(blsmsk(uint16(src)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(blsmsk(uint32(src)));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(blsmsk(uint64(src)));
-            else            
-                throw no<T>();
-        }           
-
-        /// <summary>
-        /// unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32
-        /// Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        static byte blsmsk(byte src)
-            => (byte)GetMaskUpToLowestSetBit(src);
-
-        /// <summary>
-        /// unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32
-        /// Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        static ushort blsmsk(ushort src)
-            => (ushort)GetMaskUpToLowestSetBit(src);
-
-        /// <summary>
-        /// unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32
-        /// Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        static uint blsmsk(uint src)
-            => GetMaskUpToLowestSetBit(src);
-
-        /// <summary>
-        /// unsigned __int64 _blsmsk_u64 (unsigned __int64 a) BLSMSK reg, reg/m6
-        /// Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        static ulong blsmsk(ulong src)
-            => GetMaskUpToLowestSetBit(src);
     }
 }

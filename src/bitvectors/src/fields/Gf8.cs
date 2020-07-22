@@ -7,18 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst;
+    using static z;
 
-    public static class Gf8
+    public readonly struct Gf8
     {
         const byte Reducer = 0b1011;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte clmul(byte a, byte b)
         {
-            var p = dvec.clmul(a,b);
-            p ^= dvec.clmul((byte)(p >> 3), Reducer);
-            p ^= dvec.clmul((byte)(p >> 3), Reducer);
+            var p = z.clmul(a,b);
+            p ^= z.clmul((byte)(p >> 3), Reducer);
+            p ^= z.clmul((byte)(p >> 3), Reducer);
             return (byte)p;
         }
 
@@ -27,16 +28,19 @@ namespace Z0
         /// </summary>
         /// <param name="min">The minimum operand value</param>
         /// <param name="max">The maximum operand value</param>
+        [MethodImpl(Inline), Op]
         public static void products(byte min, byte max, ref byte dst)
         {
-            var width = max - min + 1;
-            var cells = width*width;            
-            var index = 0;
+            byte index = 0;
             for(byte i=min; i<= max; i++)
             for(byte j=min; j<= max; j++)
-                Unsafe.Add(ref dst,index++) = clmul(i,j);
+                add(dst, index++) = clmul(i,j);
         }
-        
+
+        [MethodImpl(Inline), Op]
+        public static void products(ref byte dst)
+            => products(1, (byte)0b111, ref dst);
+
         /// <summary>
         /// Creates a complete multiplication table
         /// </summary>
@@ -52,8 +56,6 @@ namespace Z0
         public static string FormatTable<N,T>(Matrix256<N,T> src)
             where T : unmanaged
             where N: unmanaged, ITypeNat
-                => src.Format(render:x => BitString.scalar(x).Format());            
-
+                => src.Format(render:x => BitString.scalar(x).Format());
     }
-
 }

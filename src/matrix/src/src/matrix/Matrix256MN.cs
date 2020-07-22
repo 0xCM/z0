@@ -26,17 +26,20 @@ namespace Z0
         /// <summary>
         /// The number of matrix rows
         /// </summary>
-        public static int Rows => (int)value<M>();
+        public static int Rows 
+            => (int)value<M>();
 
         /// <summary>
         /// The number of matrix colums
         /// </summary>
-        public static int Cols => (int)value<N>();
+        public static int Cols 
+            => (int)value<N>();
 
         /// <summary>
         /// The total number of matrix cells
         /// </summary>
-        public static int Cells => Rows*Cols;
+        public static int Capacity 
+            => (int)NatCalc.mul<M,N>();
 
         public static implicit operator Matrix256<M,N,T>(in Block256<T> src)
             => new Matrix256<M,N,T>(src);
@@ -58,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256(in Block256<T> src)
         {
-            Demands.insist(src.CellCount >= Cells);
+            Demands.insist(Capacity  >= src.CellCount);
             data = src;
         }
 

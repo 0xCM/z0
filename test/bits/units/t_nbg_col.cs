@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
     
-    public class t_nbg_col : t_bg<t_nbg_col>
+    public class t_nbg_col : t_bitgrids<t_nbg_col>
     {        
         void nbg_col_256x32x8()
         {

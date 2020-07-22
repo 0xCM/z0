@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static Memories;
     
-    public class t_bg_xor : t_bg<t_bg_xor>
+    public class t_bg_xor : t_bitgrids<t_bg_xor>
     {        
         public void nbg_xor_8x8x8()
             => bg_xor_check(n8,n8,z8);

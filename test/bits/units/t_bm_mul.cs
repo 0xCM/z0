@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    public class t_bm_mul : t_bm<t_bm_mul>
+    public class t_bm_mul : t_bitmatrix<t_bm_mul>
     {
         static BitMatrix8 bmm(BitMatrix8 A, BitMatrix8 B)
         {

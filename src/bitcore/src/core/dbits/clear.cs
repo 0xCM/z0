@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Konst;
-    
+    using static z;
+
      partial class Bits
      {                
           /// <summary>
@@ -20,7 +21,7 @@ namespace Z0
           [MethodImpl(Inline), Op]
           public static byte clear(byte src, byte index, byte count)
           {
-               var mask = (uint)ushort.MaxValue ^ ((uint)BitMask.lo64(count - 1) << index);
+               var mask = (uint)Max16u ^ ((uint)lo64(count - 1) << index);
                return (byte)(mask & src);
           }
 
@@ -33,7 +34,7 @@ namespace Z0
           [MethodImpl(Inline), Op]
           public static sbyte clear(sbyte src, byte index, byte count)
           {
-               var mask = (int)ushort.MaxValue ^ ((int)BitMask.lo64(count - 1) << index);
+               var mask = (int)Max16u ^ ((int)lo64(count - 1) << index);
                return (sbyte)(mask & (int)src);
           }
 
@@ -46,7 +47,7 @@ namespace Z0
           [MethodImpl(Inline), Op]
           public static ushort clear(ushort src, byte index, byte count)
           {
-               var mask = (uint)ushort.MaxValue ^ ((uint)BitMask.lo64(count - 1) << index);
+               var mask = (uint)Max16u ^ ((uint)lo64(count - 1) << index);
                return (ushort)(mask & src);
           }
 
@@ -59,7 +60,7 @@ namespace Z0
           [MethodImpl(Inline), Op]
           public static short clear(short src, byte index, byte count)
           {
-               var mask = (int)ushort.MaxValue ^ ((int)BitMask.lo64(count - 1) << index);
+               var mask = (int)Max16u ^ ((int)lo64(count - 1) << index);
                return (short)(mask & src);
           }
 
@@ -72,7 +73,7 @@ namespace Z0
           [MethodImpl(Inline), Op]
           public static uint clear(uint src, byte index, byte count)
           {
-               var mask = uint.MaxValue ^ ((uint)BitMask.lo64(count - 1) << index);
+               var mask = Max32u ^ ((uint)lo64(count - 1) << index);
                return mask & src;
           }
 
@@ -105,10 +106,8 @@ namespace Z0
           [MethodImpl(Inline), Op]
           public static ulong clear(ulong src, byte index, byte count)
           {
-               var mask = ulong.MaxValue ^ (BitMask.lo64(count - 1) << index);
+               var mask = Max64u ^ (lo64(count - 1) << index);
                return mask & src;
           }
-
-
     }
 }

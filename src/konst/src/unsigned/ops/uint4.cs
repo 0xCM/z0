@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     using S = uint4;
-    
+
     partial class Bit
     {
         /// <summary>
@@ -94,18 +94,18 @@ namespace Z0
         /// <param name="x3">The term at index 3</param>
         [MethodImpl(Inline), Op]
         public static S uint4(BitState x0, BitState x1 = default, BitState x2 = default, BitState x3 = default)
-             => wrap4(z.or(
-                 z.sll((byte)x0, 0),
-                 z.sll((byte)x1, 1),
-                 z.sll((byte)x2, 2),
-                 z.sll((byte)x3, 3)
+             => wrap4(Bytes.or(
+                 Bytes.sll((byte)x0, 0),
+                 Bytes.sll((byte)x1, 1),
+                 Bytes.sll((byte)x2, 2),
+                 Bytes.sll((byte)x3, 3)
                  ));
                  
         [MethodImpl(Inline), Op]
         public static S add(S x, S y)
         {
-            var sum = z.add(x.data,y.data);
-            var result = z.gteq(sum, S.Count) ? z.sub(sum, S.Count) : sum;
+            var d = (byte)(x.data +y.data);
+            var result = Bytes.gteq(d, S.Count) ? Bytes.sub(d, S.Count) : d;
             return new S(result, true);
         }
 

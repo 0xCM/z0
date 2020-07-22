@@ -12,8 +12,7 @@ namespace Z0
 
     public class t_blocks : t_inx<t_blocks>
     {                
-
-        public  void CellSize()
+        public  void check_cellsize()
         {
             Claim.eq(1, Blocks.cellsize<sbyte>());
             Claim.eq(1, Blocks.cellsize<byte>());
@@ -38,7 +37,7 @@ namespace Z0
         }
 
 
-        public void db_blocklen_128()
+        public void check_blocklength_128()
         {
             N128 n = default;
             Claim.eq(16, Blocks.blocklength<sbyte>(n));
@@ -58,7 +57,7 @@ namespace Z0
 
         }
 
-        public void db_blocklen_256()
+        public void check_blocklength_256()
         {
             N256 n = default;
             Claim.eq(32, Blocks.blocklength<sbyte>(n));
@@ -71,11 +70,10 @@ namespace Z0
             Claim.eq(4, Blocks.blocklength<ulong>(n));
             Claim.eq(8, Blocks.blocklength<float>(n));
             Claim.eq(4, Blocks.blocklength<double>(n));                
-
         }
 
 
-        public void BlockSlice()
+        public void check_block_slice()
         {
             var x = Blocks.safeload(n128, span<int>(1,2,3,4,5,6,7,8));
 
@@ -89,15 +87,15 @@ namespace Z0
             Claim.Eq(block2, Blocks.parts(n128,5,6,7,8));
 
         }
-        public void Load1()
+
+        public void check_safeload()
         {
             var x = Blocks.safeload(n128, span<int>(1,2,3,4,5,6,7,8));
             Claim.eq(x.BlockCount,2);
-            Claim.eq(x, Blocks.parts(n128,1,2,3,4,5,6,7,8));
-            
+            Claim.eq(x, Blocks.parts(n128,1,2,3,4,5,6,7,8));            
         }
 
-        public void alloc_blocks()
+        public void check_block_alloc()
         {
 
             var w = w128;

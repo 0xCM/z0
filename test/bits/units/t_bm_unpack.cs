@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    public class t_bm_unpack : t_bm<t_bm_unpack>
+    public class t_bm_unpack : t_bitmatrix<t_bm_unpack>
     {
         public void bm_unpack_8x8x8()
         {

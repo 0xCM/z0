@@ -15,7 +15,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial class dvec
+    partial struct z
     {         
         /// <summary>
         /// Shifts each each component rightward by a specified bitcount
@@ -127,7 +127,7 @@ namespace Z0
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
             var m = vlsb(n256, n8, (byte)(8 - count),z8);
-            return dvec.vand(y,m);
+            return z.vand(y,m);
         } 
 
         /// <summary>
@@ -190,6 +190,10 @@ namespace Z0
         public static Vector256<ulong> vsrl(Vector256<ulong> src, [Imm] byte count)
             => ShiftRightLogical(src, count); 
 
+        [MethodImpl(Inline),Op]
+        static byte lsb8f(byte density)
+            => (byte)(Max8u >> (8 - density));
+
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
         /// </summary>
@@ -200,7 +204,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(z.vbroadcast<byte>(w, BitMask.lsb8f(d)));
+                => generic<T>(z.vbroadcast<byte>(w, lsb8f(d)));
 
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
@@ -212,6 +216,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(z.vbroadcast<byte>(w, BitMask.lsb8f(d)));
+                => generic<T>(z.vbroadcast<byte>(w, lsb8f(d)));
     }
 }

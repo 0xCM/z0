@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    public class t_bm_transpose : t_bm<t_bm_transpose>
+    public class t_bm_transpose : t_bitmatrix<t_bm_transpose>
     {
         public void bm_transpose_8x8x8_v2()
         {

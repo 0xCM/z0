@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Memories;
     
-    public class t_bg_transpose : t_bg<t_bg_transpose>
+    public class t_bg_transpose : t_bitgrids<t_bg_transpose>
     {        
         public void bg_transpose_256x16x16()
         {            

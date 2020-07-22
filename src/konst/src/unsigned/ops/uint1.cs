@@ -129,11 +129,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static U inc(U x)
-            => !x.IsMax ? new U(z.add(x.data, 1), false) : U.Min;
+            => !x.IsMax ? new U(Bytes.add(x.data, 1), false) : U.Min;
 
         [MethodImpl(Inline), Op]
         public static U dec(U x)
-            => !x.IsMin ? new U(z.sub(x.data, 1), false) : U.Max;
+            => !x.IsMin ? new U(Bytes.sub(x.data, 1), false) : U.Max;
 
         [MethodImpl(Inline), Op]
         public static BitState test(U x)

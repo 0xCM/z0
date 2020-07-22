@@ -9,7 +9,7 @@ namespace Z0
     using static Konst;
     using static z;
     
-    public class t_bg_and : t_bg<t_bg_and>
+    public class t_bg_and : t_bitgrids<t_bg_and>
     {        
         public void bg_and_n8x8x8()
             => bg_and_check(n8,n8,z8);

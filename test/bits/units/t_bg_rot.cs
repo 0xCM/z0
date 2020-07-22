@@ -11,7 +11,7 @@ namespace Z0
     using static Memories;
     using static Vectors;
     
-    public class t_bg_rot : t_bg<t_bg_rot>
+    public class t_bg_rot : t_bitgrids<t_bg_rot>
     {        
 
         public void bg_rot_basecases()

@@ -44,5 +44,17 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T add<T>(in T src, uint count)
             => ref Add(ref edit(src), (int)count);            
+
+        [MethodImpl(Inline)]
+        public static ref T add<T>(in T src, byte count)
+            => ref Add(ref edit(src), (int)count);                        
+
+        [MethodImpl(Inline)]
+        public static ref T add<T>(in T src, ushort count)
+            => ref Add(ref edit(src), (int)count);                        
+
+        [MethodImpl(Inline)]
+        public static ref T add<T>(in T src, ulong count)
+            => ref Add(ref edit(src), (int)count);                        
     }
 }

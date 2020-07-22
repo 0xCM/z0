@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static Memories;
     
-    public class t_bg_row : t_bg<t_bg_row>
+    public class t_bg_row : t_bitgrids<t_bg_row>
     {        
         void bg_row_128x32x4()
         {

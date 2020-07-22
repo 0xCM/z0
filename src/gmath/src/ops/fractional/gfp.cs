@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
+    using static Konst; 
+
     [ApiHost]
     public static partial class gfp
     {
-
+        const NumericKind Closure = Floats;
     }
 
 }

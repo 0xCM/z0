@@ -23,6 +23,5 @@ namespace Z0
         public static void to<T>(in T src, Span<byte> dst)
             where T : struct
                 => first(z.recover<byte,T>(dst)) = src;
-
     }
 }

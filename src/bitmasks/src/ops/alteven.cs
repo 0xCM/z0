@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
+    using static z;
 
     partial class BitMask
     {                
@@ -16,7 +16,7 @@ namespace Z0
         /// Defines an alternating bit pattern 10 10...10
         /// </summary>
         /// <typeparam name="T">The primal unsigned type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T alteven<T>()
             where T : unmanaged
         {
