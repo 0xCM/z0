@@ -1,4 +1,4 @@
-git add -A | git-log.sh
+git add -A | $ZDev/git-log.sh
 git commit -am "."  | git-log.sh
 git push | git-log.sh
 
