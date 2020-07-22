@@ -1,5 +1,7 @@
 echo off
 call build.bat
-z0
+call unbuild.bat
+call emit.bat
+call respack.bat
 call deposit.bat
 echo on
