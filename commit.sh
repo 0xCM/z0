@@ -1,4 +1,4 @@
-git add -A --progress XYZ &> git-add.log
+git add -A &> git-add.log
 git commit -am "."
 git push
 
