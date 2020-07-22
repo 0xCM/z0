@@ -21,6 +21,17 @@ namespace Z0
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
+        protected TestApp()
+        {
+            CaseLog = CaseLog.create(AppPaths.CaseLogPath);
+            OnDispose += HandleDispose;
+        }
+
+        void HandleDispose()
+        {
+            CaseLog.Dispose();
+        }
+
         protected IAppMsgSink Log 
             => this.MessageLog();
         

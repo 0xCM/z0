@@ -12,7 +12,8 @@ namespace Z0
     {
         public static void Run(params string[] args)
         {
-            var app = new A();            
+            var app = new A();     
+                   
             app.SetMode(InDiagnosticMode);            
             app.RunTests();
         }

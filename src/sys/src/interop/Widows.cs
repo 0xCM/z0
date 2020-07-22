@@ -7,6 +7,7 @@ namespace Z0
 {
     public readonly partial struct Windows
     {
+
         readonly struct Libraries
         {
             internal const string Advapi32 = "advapi32.dll";

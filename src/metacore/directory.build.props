@@ -23,6 +23,7 @@
     <Command>$(SlnRoot)command/z0.command.csproj</Command>
     <Commands>$(SlnRoot)commands/z0.commands.csproj</Commands>
     <Processes>$(SlnRoot)processes/z0.processes.csproj</Processes>
+    <Services>$(SlnRoot)services/z0.services.csproj</Services>
 
   </PropertyGroup>
 

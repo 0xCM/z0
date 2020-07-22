@@ -26,6 +26,7 @@ namespace Z0.Asm
         public t_asm_pipe()
         {
             SinkLog = CaseWriter("sink_log");
+            OnDispose += HandleDispose;
         }
         
         void Receiver(in Instruction src)
@@ -33,7 +34,7 @@ namespace Z0.Asm
             SinkLog.WriteLine(text.concat(((MemoryAddress)src.IP).Format(), Space,  src.Mnemonic.ToString().PadRight(12), ++Counter));
         }
         
-        protected override void OnDispose()
+        void HandleDispose()
         {
             SinkLog.Dispose();
         }

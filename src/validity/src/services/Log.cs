@@ -89,7 +89,6 @@ namespace Z0
             => Settings.LogDir(target, subject);
     }
 
-
     static class Log
     {        
         static TestLogPaths Paths 

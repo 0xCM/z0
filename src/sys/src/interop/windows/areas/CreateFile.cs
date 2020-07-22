@@ -15,7 +15,6 @@ namespace Z0
     {
         partial struct Kernel32
         {            
-
             /// <summary>
             /// WARNING: This method does not implicitly handle long paths. Use CreateFile.
             /// </summary>

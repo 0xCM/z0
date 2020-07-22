@@ -165,6 +165,12 @@ namespace Z0
             => FileName.Define($"{AppName}.stdout", FileExtensions.Log);
 
         /// <summary>
+        /// The executing application's standard out log filename
+        /// </summary>
+        FileName CaseLogName
+            => FileName.Define($"{AppName}.cases", FileExtensions.Csv);
+
+        /// <summary>
         /// The executing application's error log filename
         /// </summary>
         FileName AppErrorOutName 
@@ -233,17 +239,15 @@ namespace Z0
         FilePath TestStandardPath 
             => TestStandardOutDir + AppStandardOutName;
 
+        FilePath CaseLogPath
+            => TestStandardOutDir + CaseLogName;
+
         /// <summary>
         /// The directory into which structured data describing test results are deposited
         /// </summary>
         FolderPath TestResults 
             => TestLogRoot + TestResultFolder;
 
-        /// <summary>
-        /// The application-specific test result file path
-        /// </summary>
-        FilePath TestResultPath
-            => TestResults + AppDataFileName;
 
         /// <summary>
         /// The name of the root bench partition

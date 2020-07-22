@@ -7,7 +7,6 @@ namespace Z0
 {
     partial struct Windows
     {
-
         // As defined in winerror.h and https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes
         public readonly struct Errors
         {

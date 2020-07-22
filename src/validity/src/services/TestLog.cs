@@ -15,7 +15,7 @@ namespace Z0
         public static TestLog<TestCaseField, TestCaseRecord> Create()
             => new TestLog<TestCaseField, TestCaseRecord>();
     }
-    
+        
     public class TestLog<F,R> : IAppMsgContext
         where F : unmanaged, Enum
         where R : ITabular
@@ -32,10 +32,10 @@ namespace Z0
         
         const LogArea Area = LogArea.Test;
 
-        FilePath LogPath
+        public FilePath Target
             => Paths.Timestamped(Area, Area.ToString().ToLower());
 
-        public static FilePath ComputePath(FolderName subdir, string basename, bool create, FileExtension ext)
+        static FilePath ComputePath(FolderName subdir, string basename, bool create, FileExtension ext)
             => create 
                 ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename,ext) : Paths.UniqueLogPath(Area, subdir, basename,ext)) 
                 : (subdir.IsEmpty ?  Paths.LogPath(Area, basename, ext) : Paths.LogPath(Area, subdir, basename, ext)) ;
@@ -77,7 +77,7 @@ namespace Z0
         public void Deposit(IAppMsg src)
         {
             lock(locker)
-                LogPath.AppendLine(src.ToString());
+                Target.AppendLine(src.ToString());
         }
     }
 }

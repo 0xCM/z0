@@ -56,7 +56,8 @@ namespace Z0
             using var unit = host.Instantiate<IUnitTest>();  
             if(unit.Enabled)
             {
-                unit.SetMode(DiagnosticMode);          
+                unit.SetMode(DiagnosticMode);
+                unit.SetLog(CaseLog);          
                 RunUnit(host, unit);            
             }
         }

@@ -7,5 +7,7 @@ namespace Z0
     public interface IUnitTest : ITestContext 
     {
         void SetMode(bool diagnostic);
+
+        void SetLog(CaseLog log);
     }    
 }

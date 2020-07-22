@@ -21,12 +21,19 @@ namespace Z0
     {
         public bool DiagnosticMode {get; private set;}
 
+        public CaseLog CaseLog {get; protected set;}
+
         public void SetMode(bool diagnostic)
         {
             DiagnosticMode = diagnostic;
         }
+
+         public void SetLog(CaseLog log)       
+         {
+             CaseLog = log;
+         }
         
-        protected IResolvedApi Api 
+         protected IResolvedApi Api 
             => _Api.Value;
 
         static IResolvedApi ComposeApi()
@@ -62,8 +69,16 @@ namespace Z0
             Next += x => {};
             Queue = AppMsgExchange.Create();
             Queue.Next += Relay;
+            OnDispose += () => {};
         }
-        
+
+        public void Dispose()
+        {            
+            OnDispose();
+        }
+
+        protected event Action OnDispose;
+
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
             => Queue.Deposit(msg);
 
@@ -175,10 +190,6 @@ namespace Z0
         protected string caller([Caller] string caller = null)
             => caller;
 
-        public virtual void Dispose()
-            => OnDispose();
-
-        protected virtual void OnDispose() { }
 
         protected TTestCaseIdentity CaseIdentityService 
             => Context;
