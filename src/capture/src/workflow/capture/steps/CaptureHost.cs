@@ -47,7 +47,7 @@ namespace Z0.Asm
 
         void Store(ApiHostUri host, ExtractedCode[] extracts, TPartCaptureArchive dst)
         {
-            var paths = HostCaptureArchive.Create(dst.ArchiveRoot, host);
+            var paths = HostCaptureArchive.create(dst.ArchiveRoot, host);
             var extractRpt = Workflow.ReportExtracts.CreateExtractReport(host, extracts);
             Workflow.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
 
@@ -73,7 +73,7 @@ namespace Z0.Asm
         {
             try
             {
-                var paths = HostCaptureArchive.Create(dst.ArchiveRoot, host.Uri);
+                var paths = HostCaptureArchive.create(dst.ArchiveRoot, host.Uri);
                 if(host.PartId.IsNone())
                     return;
 

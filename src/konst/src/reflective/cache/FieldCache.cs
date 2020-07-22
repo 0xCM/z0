@@ -13,17 +13,17 @@ namespace Z0
     using static ReflectionFlags;
     using static Konst;
 
-    public readonly struct MemberPropertyCache
+    public readonly struct FieldCache
     {
-        static ConcurrentDictionary<Type, PropertyInfo[]> Index
-            = new ConcurrentDictionary<Type, PropertyInfo[]>();
+        static readonly ConcurrentDictionary<Type, FieldInfo[]> Index
+            = new ConcurrentDictionary<Type, FieldInfo[]>();
 
         [MethodImpl(Inline)]
-        public static PropertyInfo[] Lookup(Type t, Func<Type, PropertyInfo[]> f)
+        public static FieldInfo[] Lookup(Type t, Func<Type, FieldInfo[]> f)
             => Index.GetOrAdd(t,f);
 
         [MethodImpl(Inline)]
-        public static IReadOnlyList<PropertyInfo> Lookup(object o)
-            => o == null ? sys.empty<PropertyInfo>() : Lookup(o.GetType(), t => t.GetProperties(BF_PublicInstance));
+        public static IReadOnlyList<FieldInfo> Lookup(object o)
+            => o == null ? sys.empty<FieldInfo>() : Lookup(o.GetType(), t => t.GetFields(BF_PublicInstance));
     }
 }

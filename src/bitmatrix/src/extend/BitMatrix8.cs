@@ -76,7 +76,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static ulong Pack(this BitMatrix8 A)
-            => BitConvert.ToUInt64(A.Data);
+            => Unsigned.u64(A.Data);
 
         /// <summary>
         /// Transposes a copy of the source matrix

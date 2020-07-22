@@ -676,4 +676,28 @@ namespace Z0
         public TypeIdentity Identity()
             => TypeIdentity.Define("1u");
     }
+
+    /// <summary>
+    /// Conversion provider for the bit data type
+    /// </summary>
+    readonly struct BitDataTypeConverter : IConversionProvider<BitDataTypeConverter, bit>, IBiconverter<bit>
+    {
+        public BitDataTypeConverter Converter => default;
+
+        [MethodImpl(Inline)]
+        public T Convert<T>(bit src)
+            => BitConversionOps.from<T>(src);
+
+        [MethodImpl(Inline)]
+        public bit Convert<T>(T src) 
+            => BitConversionOps.to<T>(src);
+
+        [MethodImpl(Inline)]
+        public Option<object> ConvertFromTarget(object incoming, Type dst)
+            => BitConversionOps.FromTarget(incoming,dst);
+
+        [MethodImpl(Inline)]
+        public Option<object> ConvertToTarget(object incoming)
+            => BitConversionOps.ToTarget(incoming);
+    }
 }

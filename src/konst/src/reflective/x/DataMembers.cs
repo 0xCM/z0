@@ -6,18 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
-    using static Part;
+    using static ReflectionFlags;
+    using static Konst;
 
     partial class XTend
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T[] Array<T>(this IEnumerable<T> src)
-            => proxy.array(src);
-
-        [MethodImpl(Inline)]
-        public static T[] Array<T>(this T[] src)
-            => src;
+        public static DataMember[] DataMembers(this Type src)
+            => DataMemberCache.Lookup(src);
     }
 }

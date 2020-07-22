@@ -12,11 +12,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using NK = NumericKind;
-
     [ApiHost]
     public partial class Enums
     {
+        [MethodImpl(Inline)]
+        public static Refinement<V,T> refine<V,T>(V src, T t = default)
+            where V : unmanaged, Enum
+            where T : unmanaged
+                => new Refinement<V,T>(src);            
+
         [MethodImpl(Inline)]
         public static E zero<E>()
             where E : unmanaged, Enum

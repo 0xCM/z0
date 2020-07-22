@@ -37,7 +37,7 @@ namespace Z0.Asm
                 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dst = HostCaptureArchive.Create(CodeArchive.ArchiveRoot, host.Uri);
+            var dst = HostCaptureArchive.create(CodeArchive.ArchiveRoot, host.Uri);
             if(dst.HexPath.Exists)
             {
                 var code = ApiIndexBuilder.create(Identities.Services.Locator, ApiSet, host.Uri, CodeArchive.ArchiveRoot);

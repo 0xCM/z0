@@ -240,7 +240,7 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(float src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.Base2 => BitConvert.ToUInt64(src).FormatBits(),
+                    NumericBaseKind.Base2 => Unsigned.u64(src).FormatBits(),
                     NumericBaseKind.Base16 => src.FormatHex(false),
                     _ => src.ToString()
                 };
@@ -255,7 +255,7 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(double src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.Base2 => BitConvert.ToUInt64(src).FormatBits(),
+                    NumericBaseKind.Base2 => Unsigned.u64(src).FormatBits(),
                     NumericBaseKind.Base16 => src.FormatHex(false),
                     _ => src.ToString()
                 };

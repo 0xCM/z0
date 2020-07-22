@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(BitMatrix8 src)
-            => BitConvert.ToUInt64(src.Data);
+            => Unsigned.u64(src.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitMatrix8(ulong src)
