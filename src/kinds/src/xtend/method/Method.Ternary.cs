@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Reflection;
     
     partial class XTend
@@ -30,8 +27,7 @@ namespace Z0
         /// Selects ternary operators from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> TernaryOperators(this IEnumerable<MethodInfo> src)
+        public static MethodInfo[] TernaryOperators(this MethodInfo[] src)
             => src.Where(x => x.IsTernaryOperator());
-
     }
 }

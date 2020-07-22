@@ -9,11 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static HexConst;
-    using static V0;
-    using static V0d;
-    using static Typed;
-    
-    partial class vexamples
+    using static z;
+
+    partial class t_vexamples
     {        
         public static ReadOnlySpan<byte> AddPattern 
             => new byte[32]{0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16};
@@ -108,8 +106,8 @@ namespace Z0
         {
             var w = n256;
             var x = gvec.vinc(w,z16);            
-            var reverse = vdecrements<ushort>(w);
-            var identity = vincrements<ushort>(w);
+            var reverse = V0.vdecrements<ushort>(w);
+            var identity = V0.vincrements<ushort>(w);
             var pairswap = vparts(w256,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);
@@ -125,27 +123,27 @@ namespace Z0
         public void vshuf16x8_128x8u()
         {
             var w = w128;
-            var x0 = vincrements<byte>(w);
+            var x0 = V0.vincrements<byte>(w);
             var x0Spec = vload(w, z.first(IdentityPattern));
             var x0Dst = V0d.vshuf16x8(x0,x0Spec);
             Claim.veq(x0Spec,x0Dst);
 
-            var x1 = vincrements<byte>(w);
+            var x1 = V0.vincrements<byte>(w);
             var x1Spec = vload(w, z.first(ReversalPattern));
             var x1Dst = V0d.vshuf16x8(x1,x1Spec);
             Claim.veq(x1Spec,x1Dst);
 
-            var x2 = vincrements<byte>(w);
+            var x2 = V0.vincrements<byte>(w);
             var x2Spec = VData.vrotl(n128, n8);
             var x2Dst = V0d.vshuf16x8(x2,x2Spec);
             Claim.veq(x2Spec,x2Dst);
 
-            var x3 = vincrements<byte>(w);
+            var x3 = V0.vincrements<byte>(w);
             var x3Spec = VData.vrotr(n128, n8);
             var x3Dst = V0d.vshuf16x8(x3,x3Spec);
             Claim.veq(x3Spec,x3Dst);
 
-            var x4 = vincrements<byte>(w);
+            var x4 = V0.vincrements<byte>(w);
             var x4Spec1 = VData.vrotl(n128, n8);
             var x4Spec2 = VData.vrotr(n128, n8);
             var x4Dst = V0d.vshuf16x8(V0d.vshuf16x8(x4,x4Spec1), x4Spec2);
@@ -193,7 +191,5 @@ namespace Z0
 
             return mask.LoadVector();
         }
-
- 
     }
 }

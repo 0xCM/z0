@@ -12,22 +12,21 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static Konst; 
-    using static Typed;    
-    using static V0;
+    using static z;
 
     partial struct V0d
     {
         [MethodImpl(Inline), TestZ]
         public static bit testz(ulong a, ulong b)
-            => TestZ(vbroadcast(w128,a), vbroadcast(w128,b));
+            => z.testz(a,b);
 
         [MethodImpl(Inline), TestZ]
         public static bit testc(ulong a, ulong b)
-            => TestC(vbroadcast(w128,a), vbroadcast(w128,b));
+            => z.testc(a,b);
 
         [MethodImpl(Inline), TestZ]
         public static bit testc(ulong a)
-            => TestC(vbroadcast(w128,a), vones<ulong>(w128));
+            => z.testc(a);
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128

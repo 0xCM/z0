@@ -12,7 +12,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst;
-    using static z;
 
     partial struct z
     {        
@@ -24,7 +23,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(Vector128<byte> src, W16 w)
-            => z.vconvert(src, w256, z16);
+            => vconvert(src, w256, z16);
 
         /// <summary>
         /// 8x16i -> 8x32i
@@ -34,7 +33,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vinflate(Vector128<short> src, W32 w)
-            => z.vconvert(src, w256, z32i);
+            => vconvert(src, w256, z32i);
 
         /// <summary>
         /// 4x32u -> 4x64u
@@ -44,7 +43,7 @@ namespace Z0
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vinflate(Vector128<uint> src, W64 w)
-            => z.vconvert(src, w256, z64);
+            => vconvert(src, w256, z64);
         
         /// <summary>
         /// 4x32w -> 4x64w
@@ -53,7 +52,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vinflate(Vector128<int> src, W64 w)
-            => z.vconvert(src, w256, z64i);
+            => vconvert(src, w256, z64i);
  
         /// <summary>
         /// 16x8u -> 16x32u
@@ -63,7 +62,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate(Vector128<byte> src, W32 w)
-            => z.vconvert(src, w512, z32);        
+            => vconvert(src, w512, z32);        
 
         /// <summary>
         /// 8x16u -> 8x32u
@@ -74,7 +73,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vinflate(Vector128<ushort> src, W32 w)
-            => z.vconvert(src, w256, z32);
+            => vconvert(src, w256, z32);
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(W128 w, in byte src)

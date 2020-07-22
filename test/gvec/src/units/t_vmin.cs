@@ -7,7 +7,6 @@ namespace Z0
     using System;
     
     using static Konst;
-    using static Memories;
 
     public class t_vmin : t_inx<t_vmin>
     {

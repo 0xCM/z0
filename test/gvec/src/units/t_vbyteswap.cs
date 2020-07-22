@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Memories;
 
     public class t_vbyteswap : t_inx<t_vbyteswap>
     {   

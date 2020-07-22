@@ -17,7 +17,14 @@ namespace Z0
         /// compiler-generated artifacts are excluded
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static MethodInfo[] DeclaredMethods(this Type src, bool nonspecial = true)
+        public static MethodInfo[] DeclaredMethods(this Type src)
             => src.GetMethods(BF_Declared);
+
+        /// <summary>
+        /// Selects the public/non-public static/instance methods declared by a type that have a specific name
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static MethodInfo[] DeclaredMethods(this Type src, string name)
+            => src.DeclaredMethods().Where(m => m.Name == name);
     }
 }

@@ -10,19 +10,12 @@ namespace Z0
     using static Konst;
     using static Root;
 
-    public abstract class t_vectors<U> : UnitTest<U,CheckVectors,TCheckVectors>
-        where U : t_vectors<U>,new()
-    {
-
-    }
-
     public class t_cell_type : t_vectors<t_cell_type>
     {    
         public void check_cell_types()
         {
             iter(VectorType.Types128, t => check_cell_type(t,n128));
-            iter(VectorType.Types256, t => check_cell_type(t,n256));
-            
+            iter(VectorType.Types256, t => check_cell_type(t,n256));            
         }
         
         void check_cell_type(Type tVector, N128 w)

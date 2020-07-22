@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static V0;
-    using static V0d;
+    using static z;
 
     public class t_vreverse : t_inx<t_vreverse>
     {
@@ -80,9 +79,9 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = vzero(w,t);
-                for(var j = 0; j < n; j++)
-                    expect = vcell(vcell(input,(n - 1) - j),j,expect);
+                var expect = V0.vzero(w,t);
+                for(byte j = 0; j < n; j++)
+                    expect = vcell(V0.vcell(input,(n - 1) - j),j,expect);
 
                 Claim.veq(expect,output);
             }
@@ -101,9 +100,9 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = vzero(w,t);
-                for(var j = 0; j < n; j++)
-                    expect = vcell(vcell(input,(n - 1) - j),j,expect);
+                var expect = V0.vzero(w,t);
+                for(byte j = 0; j < n; j++)
+                    expect = vcell(V0.vcell(input,(n - 1) - j),j,expect);
 
                 Claim.veq(expect,output);
             }

@@ -12,8 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static Konst; 
-    using static Typed;    
-    using static V0;
+    using static z;
     
     partial struct V0d
     {

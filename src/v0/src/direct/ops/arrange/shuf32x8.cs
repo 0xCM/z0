@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
         
     using static Konst; 
-    using static Typed;
-    using static V0;
-    using static V0d;
+    using static z;
 
     partial struct V0d
     {        

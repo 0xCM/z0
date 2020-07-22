@@ -22,75 +22,73 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal ApiQuery(IPartCatalog src)
-        {
-            Context = src;
-        }
+            => Context = src;
 
-        public IEnumerable<MethodInfo> Vectorized<T>(W128 w, bool generic)
+        public MethodInfo[] Vectorized<T>(W128 w, bool generic)
             where T : unmanaged
-                => from host in Context.ApiHosts
+                => (from host in Context.ApiHosts
                     from m in host.HostedMethods.VectorizedDirect<T>(w)                    
                     where m.IsGenericMethod == generic
-                    select m;
-        public IEnumerable<MethodInfo> Generic
-            => from host in Context.ApiHosts
+                    select m).Array();
+        public MethodInfo[] Generic
+            => (from host in Context.ApiHosts
                 from m in host.HostedMethods.OpenGeneric()
-                select m;
+                select m).Array();
 
-        public IEnumerable<MethodInfo> Direct
-            => from host in Context.ApiHosts
+        public MethodInfo[] Direct
+            => (from host in Context.ApiHosts
                 from m in host.HostedMethods.NonGeneric()
-                select m;
+                select m).Array();
 
-        public IEnumerable<MethodInfo> Vectorized<T>(W256 w, bool generic)
+        public MethodInfo[] Vectorized<T>(W256 w, bool generic)
             where T : unmanaged
-                => from host in Context.ApiHosts
+                => (from host in Context.ApiHosts
                     from m in host.HostedMethods.VectorizedDirect<T>(w)
                     where m.IsGenericMethod == generic
-                    select m;
+                    select m).Array();
 
-        public IEnumerable<MethodInfo> Vectorized<T>(W128 w, bool generic, string name)
+        public MethodInfo[] Vectorized<T>(W128 w, bool generic, string name)
             where T : unmanaged
                 => Vectorized<T>(w, generic).WithName(name);
 
-        public IEnumerable<MethodInfo> Vectorized<T>(W256 w, bool generic, string name)
+        public MethodInfo[] Vectorized<T>(W256 w, bool generic, string name)
             where T : unmanaged
                 => Vectorized<T>(w, generic).WithName(name);
 
-        public IEnumerable<MethodInfo> VectorizedGeneric(W128 w)
+        public MethodInfo[] VectorizedGeneric(W128 w)
             => Generic.VectorizedGeneric(w);
                 
-        public IEnumerable<MethodInfo> VectorizedGeneric(W256 w)
+        public MethodInfo[] VectorizedGeneric(W256 w)
             => Generic.VectorizedGeneric(w);
 
-        public IEnumerable<MethodInfo> VectorizedGeneric(W512 w)
+        public MethodInfo[] VectorizedGeneric(W512 w)
             => Generic.VectorizedGeneric(w);
 
-        public IEnumerable<MethodInfo> VectorizedGeneric(W128 w, string name)
+        public MethodInfo[] VectorizedGeneric(W128 w, string name)
             => Generic.VectorizedGeneric(w,name);
 
-        public IEnumerable<MethodInfo> VectorizedGeneric(W256 w, string name)
+        public MethodInfo[] VectorizedGeneric(W256 w, string name)
             => Generic.VectorizedGeneric(w,name);
 
-        public IEnumerable<MethodInfo> VectorizedGeneric(W512 w, string name)
+        public MethodInfo[] VectorizedGeneric(W512 w, string name)
             => Generic.VectorizedGeneric(w,name);
 
-        public IEnumerable<MethodInfo> VectorizedDirect(W128 w)
+        public MethodInfo[] VectorizedDirect(W128 w)
             => Direct.VectorizedDirect(w);
 
-        public IEnumerable<MethodInfo> VectorizedDirect(W256 w)
+        public MethodInfo[] VectorizedDirect(W256 w)
             => Direct.VectorizedDirect(w);
 
-        public IEnumerable<MethodInfo> VectorizedDirect(W512 w)
+        public MethodInfo[] VectorizedDirect(W512 w)
             => Direct.VectorizedDirect(w);
 
-        public IEnumerable<MethodInfo> VectorizedDirect(W128 w, string name)
+        public MethodInfo[] VectorizedDirect(W128 w, string name)
             => Direct.VectorizedDirect(w, name);
 
-        public IEnumerable<MethodInfo> VectorizedDirect(W256 w, string name)
+        public MethodInfo[] VectorizedDirect(W256 w, string name)
             => Direct.VectorizedDirect(w, name);
 
-        public IEnumerable<MethodInfo> VectorizedDirect(W512 w, string name)
+        public MethodInfo[] VectorizedDirect(W512 w, string name)
             => Direct.VectorizedDirect(w, name);
     }
 }

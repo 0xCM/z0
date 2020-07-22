@@ -17,6 +17,5 @@ namespace Z0
             Claim.eq((ushort)2,V0d.vmove(src, w16, n2, n0));
             Claim.eq((ushort)1,V0d.vmove(src, w16, n1, n0));
         }
-
     }
 }

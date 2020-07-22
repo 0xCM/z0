@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
 
     public class t_vcnonimpl : t_inx<t_vcnonimpl>

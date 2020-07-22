@@ -7,11 +7,10 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
 
-    public class t_half_adder : UnitTest<t_half_adder>
+    public class t_bv_half_adder : UnitTest<t_bv_half_adder>
     {
-        void test1()
+        public void create()
         {
             var circuit = Circuits.half<byte>();
             BitVector8 a = 0b11010110;

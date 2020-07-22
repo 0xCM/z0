@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static AsciLetterLoCode;
 
+    using C = AsciLetterLoCode;
+
     public readonly struct AsciKonst
     {
         public const byte LetterCount = 26;

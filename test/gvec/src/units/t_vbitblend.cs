@@ -13,10 +13,9 @@ namespace Z0
     using static V0;
     using static V0d;
  
-
     public class t_vbitblend : t_inx<t_vbitblend>
     {                
-        public void vbitblend_basecases()
+        public void bitblend_basecases()
         {
             var n = n256;
             var mask = vbroadcast(n, BitMask.msb(n2,n1,z8));
@@ -27,7 +26,7 @@ namespace Z0
 
         }
 
-        public void vbitblend_128x8u()
+        public void bitblend_128x8u()
             => vbitblend_check<byte>(n128);
 
         public void vbitblend_128x16u()

@@ -9,7 +9,7 @@ namespace Z0
     
     using static z;
     
-    partial class vexamples
+    partial class t_vexamples
     {
         public void vcover()
         {            

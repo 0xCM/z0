@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_full_adder : UnitTest<t_full_adder>
     {

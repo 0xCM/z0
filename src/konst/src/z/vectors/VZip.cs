@@ -11,8 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public readonly struct VZip
+    partial struct z
     {
         /// <summary>
         /// (8x16i,8x16i) -> 16x8i

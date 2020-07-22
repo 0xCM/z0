@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static HexConst;
-    using static Vectors;
+    using static z;
 
-    partial class vexamples
+    partial class t_vexamples
     {     
         public void vduplicate()
         {

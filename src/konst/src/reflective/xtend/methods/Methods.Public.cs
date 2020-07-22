@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
     
     public static partial class Reflective
@@ -15,7 +13,7 @@ namespace Z0
         /// Selects the public methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Public(this IEnumerable<MethodInfo> src)
+        public static MethodInfo[] Public(this MethodInfo[] src)
             => src.Where(t => t.IsPublic);
     }
 }

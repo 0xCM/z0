@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The methods to examine</param>
         /// <param name="t">The parameter type to match</param>
-        public static IEnumerable<MethodInfo> WithParameterType(this IEnumerable<MethodInfo> src, Type t)
+        public static MethodInfo[] WithParameterType(this MethodInfo[] src, Type t)
             => src.Where(m => m.GetParameters().Any(p => p.ParameterType == t));
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The methods to examine</param>
         /// <typeparam name="T">The parameter type to match</param>
-        public static IEnumerable<MethodInfo> WithParameterType<T>(this IEnumerable<MethodInfo> src)
+        public static MethodInfo[] WithParameterType<T>(this MethodInfo[] src)
             => src.Where(m => m.GetParameters().Any(p => p.ParameterType == typeof(T)));
 
         /// <summary>
@@ -32,9 +32,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The methods to examine</param>
         /// <param name="t">The parameter type to match</param>
-        public static IEnumerable<MethodInfo> WithParameterTypes(this IEnumerable<MethodInfo> src, params Type[] types)
+        public static MethodInfo[] WithParameterTypes(this MethodInfo[] src, params Type[] types)
             => from m in src
                 where m.ParameterTypes(true).Intersect(types).Count() == types.Length
                 select m;
+
     }
 }

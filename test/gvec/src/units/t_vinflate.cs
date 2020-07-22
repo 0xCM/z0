@@ -5,8 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
 
@@ -30,13 +31,14 @@ namespace Z0
         public void vinflate_128x8u_128x16u()
         {
             var v128x8u = gvec.vinc(default(Vector128<byte>));
-            var v256x16u =  dvec.vinflate(v128x8u, n256, z16);
+            var v256x16u =  z.vinflate(v128x8u, n256, z16);
             var v128x16u_a = vlo(v256x16u);
             var v128x16u_b = vhi(v256x16u);
 
             for(byte i=0; i<8; i++)
                 Claim.eq(vcell(v128x8u, i), vcell(v128x16u_a,i));
         }
+
 
         public void vinflate_256x8_1024x32()
         {
@@ -51,15 +53,14 @@ namespace Z0
             var u8inc = gvec.vinc<byte>(w,0);
             
             var c8 = dvec.vcompact(a0, b0, c0, d0, n256, z8);        
-            var c16 = dvec.vcompact(a0, b0, n256, z16);
-            //var v1024x32u = z.vinflate(c8, n1024, z32);
-            
-            // Claim.veq(u16inc, c16);
-            // Claim.veq(u8inc, c8);
-            // Claim.veq(a0, v1024x32u.A);
-            // Claim.veq(b0, v1024x32u.B);
-            // Claim.veq(c0, v1024x32u.C);
-            // Claim.veq(d0, v1024x32u.D);
+            var c16 = dvec.vcompact(a0, b0, n256, z16);                        
+            var v1024x32u = z.vinflate(c8, n1024, z32);        
+            Claim.veq(u16inc, c16);
+            Claim.veq(u8inc, c8);
+            Claim.veq(a0, v1024x32u.A);
+            Claim.veq(b0, v1024x32u.B);
+            Claim.veq(c0, v1024x32u.C);
+            Claim.veq(d0, v1024x32u.D);
         }
     }
 }

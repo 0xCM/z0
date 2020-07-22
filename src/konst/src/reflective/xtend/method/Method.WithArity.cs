@@ -15,7 +15,7 @@ namespace Z0
         /// Selects functions from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> WithArity(this IEnumerable<MethodInfo> src, int arity)
+        public static MethodInfo[] WithArity(this MethodInfo[] src, int arity)
             => src.Where(m => m.HasArityValue(arity));
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The methods to examine</param>
         /// <param name="t">The parameter type to match</param>
-        public static IEnumerable<MethodInfo> WithParameterCount(this IEnumerable<MethodInfo> src, int count)
+        public static MethodInfo[] WithParameterCount(this MethodInfo[] src, int count)
             => from m in src
                 where m.GetParameters().Length == count
                 select m;

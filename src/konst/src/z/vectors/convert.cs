@@ -8,6 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
 
+    using static System.Runtime.Intrinsics.X86.Sse41;
+    using static System.Runtime.Intrinsics.X86.Avx;
+
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse.X64;
     using static System.Runtime.Intrinsics.X86.Avx2;    
@@ -19,6 +22,18 @@ namespace Z0
 
     partial struct z
     {
+        [MethodImpl(Inline), TestZ]
+        public static bit testz(ulong a, ulong b)
+            => TestZ(z.vbroadcast(w128,a), vbroadcast(w128,b));
+
+        [MethodImpl(Inline), TestZ]
+        public static bit testc(ulong a, ulong b)
+            => TestC(z.vbroadcast(w128,a), vbroadcast(w128,b));
+
+        [MethodImpl(Inline), TestZ]
+        public static bit testc(ulong a)
+            => TestC(z.vbroadcast(w128,a), vones<ulong>(w128));
+
         // ~ Scalar conversions
 
         /// <summary>

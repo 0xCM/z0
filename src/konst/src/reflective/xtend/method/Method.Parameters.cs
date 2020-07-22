@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to examine</param>
         /// <param name="predicate">The predicate to match</param>
-        public static IEnumerable<MethodInfo> WithParameter(this IEnumerable<MethodInfo> src, Func<ParameterInfo,bool> predicate)
+        public static MethodInfo[] WithParameter(this MethodInfo[] src, Func<ParameterInfo,bool> predicate)
             => from m in src
                 where m.Parameters(predicate).Count() != 0
                 select m;                

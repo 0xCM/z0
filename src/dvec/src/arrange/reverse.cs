@@ -62,11 +62,11 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vreverse(Vector128<uint> src)
-            => V0d.vperm4x32(src, Perm4L.DCBA);
+            => z.vperm4x32(src, Perm4L.DCBA);
 
         [MethodImpl(Inline), Op]
         public static Vector128<long> vreverse(Vector128<long> src)
-            => V0d.vswaphl(src);
+            => vswaphl(src);
 
         /// <summary>
         /// Reverses the source vector components

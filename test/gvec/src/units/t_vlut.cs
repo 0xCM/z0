@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_vlut : t_inx<t_vlut>
     {     
@@ -35,7 +35,6 @@ namespace Z0
             var content = gvec.vinc<byte>(w, 64);
             var selected =  VLut.select(lut,content); //dvec.vshuf32x8(items, table);
             Claim.veq(content, selected);
-
         }
     }
 }

@@ -7,8 +7,8 @@ namespace Z0
     /// <summary>
     /// Collects random examples
     /// </summary>
-    public sealed partial class vexamples : t_inx<vexamples>
+    public sealed partial class t_vexamples : t_inx<t_vexamples>
     {
-
+        public override bool Enabled => true;
     }
 }

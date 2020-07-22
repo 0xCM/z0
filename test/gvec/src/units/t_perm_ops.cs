@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     
     using static Konst;
-    using static Memories;
+    using static z;
  
     public sealed class t_perm_ops : t_permute<t_perm_ops>
     {
@@ -91,7 +91,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var permA = NatPerm<N>.Identity;
-            var length = nati<N>();
+            var length = (int)value<N>();
             Claim.eq(length, permA.Length);
             Claim.eq(length, permA.Terms.Length);
 

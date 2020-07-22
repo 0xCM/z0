@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class vexamples
+    partial class t_vexamples
     {
         public void vgather_128()
         {

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static V0;
+    using static z;
     using static HexConst;
 
     public class t_vmaskstore : t_inx<t_vmaskstore>
@@ -71,7 +71,7 @@ namespace Z0
             stored = storage.LoadVector();
 
 
-            for(var i=0; i< count; i++)
+            for(byte i=0; i< count; i++)
                 if(gmath.odd(i)) 
                     Claim.eq(vcell(x,i), storage[i]);
                 else
@@ -84,7 +84,7 @@ namespace Z0
             stored = storage.LoadVector();
 
 
-            for(var i=0; i< count; i++)
+            for(byte i=0; i< count; i++)
                 if(gmath.even(i)) 
                     Claim.eq(vcell(x,i), storage[i]);
                 else

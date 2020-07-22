@@ -7,7 +7,6 @@ namespace Z0
     using System;
     
     using static Konst;
-    using static Memories;
 
     public class t_vnot : t_inx<t_vnot>
     {

@@ -12,7 +12,7 @@ namespace Z0
 
     public class t_vcompact : t_inx<t_vcompact>
     {
-        public void vcompact_128_outline()
+        public void vcompact_128()
         {
             var n = n128;
             var a = gvec.vinc<uint>(n,0);

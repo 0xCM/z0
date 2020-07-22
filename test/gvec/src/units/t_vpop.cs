@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_vpop : t_inx<t_vpop>
     {
@@ -48,7 +48,7 @@ namespace Z0
                 var vlen = vcount(w,t);
                 var expect = 0u;
 
-                for(var i=0; i<vlen; i++)
+                for(byte i=0; i<vlen; i++)
                     expect += f.Invoke(vcell(x0,i),vcell(x1,i),vcell(x2,i));
 
                 var result = f.Invoke(x0,x1,x2);
@@ -73,7 +73,7 @@ namespace Z0
                 var vlen = vcount(w,t);
                 var expect = 0u;
 
-                for(var i=0; i<vlen; i++)
+                for(byte i=0; i<vlen; i++)
                     expect += f.Invoke(vcell(x0,i),vcell(x1,i), vcell(x2,i));
 
                 var result = f.Invoke(x0,x1,x2);

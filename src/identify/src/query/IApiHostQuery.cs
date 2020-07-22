@@ -19,19 +19,19 @@ namespace Z0
         /// <summary>
         /// All hosted methods
         /// </summary>
-        IEnumerable<MethodInfo> Hosted 
+        MethodInfo[] Hosted 
             => Host.HostedMethods;
 
         /// <summary>
         /// All hosted generic methods
         /// </summary>
-        IEnumerable<MethodInfo> Generic
+        MethodInfo[] Generic
             => Hosted.OpenGeneric();
                
         /// <summary>
         /// All hosted non-generic methods
         /// </summary>
-        IEnumerable<MethodInfo> Direct
+        MethodInfo[] Direct
             => Hosted.NonGeneric();
 
         /// <summary>
@@ -39,41 +39,41 @@ namespace Z0
         /// </summary>
         /// <param name="k">The kind classifier</param>
         /// <typeparam name="K">The kind type</typeparam>
-        IEnumerable<MethodInfo> OfKind<K>(K k)
+        MethodInfo[] OfKind<K>(K k)
             where K : unmanaged, Enum
-                => from m in Hosted.Tagged(typeof(OpKindAttribute))
+                => (from m in Hosted.Tagged(typeof(OpKindAttribute))
                 let a = m.Tag<OpKindAttribute>().Require()
                 where a.KindId.ToString() == k.ToString()
-                    select m;
+                    select m).Array();
 
         /// <summary>
         /// Queries the host for genric operations of specified kind
         /// </summary>
         /// <param name="k">The kind classifier</param>
         /// <typeparam name="K">The kind type</typeparam>
-        IEnumerable<MethodInfo> OfKind<K>(K k, GenericPartition g)
+        MethodInfo[] OfKind<K>(K k, GenericPartition g)
             where K : unmanaged, Enum
-                => OfKind(k).MemberOf(g);
+                => OfKind(k).MemberOf(g).Array();
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specifed generic partition
         /// </summary>
         /// <param name="g">The generic partition</param>
-        IEnumerable<MethodInfo> UnaryOps(GenericPartition g = default)
+        MethodInfo[] UnaryOps(GenericPartition g = default)
             => Hosted.MemberOf(g).UnaryOperators();
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specifed generic partition
         /// </summary>
         /// <param name="g">The generic partition</param>
-        IEnumerable<MethodInfo> BinaryOps(GenericPartition g = default)
+        MethodInfo[] BinaryOps(GenericPartition g = default)
             => Hosted.MemberOf(g).BinaryOperators();
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specifed generic partition
         /// </summary>
         /// <param name="g">The generic partition</param>
-        IEnumerable<MethodInfo> TernaryOps(GenericPartition g = default)
+        MethodInfo[] TernaryOps(GenericPartition g = default)
             => Hosted.MemberOf(g).TernaryOperators();
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width</param>
         /// <param name="generic">Whether generic or non-generc methods should be selected</param>
-        IEnumerable<MethodInfo> Vectorized(W128 w, GenericPartition g = default)
+        MethodInfo[] Vectorized(W128 w, GenericPartition g = default)
             => g.IsGeneric() ? Hosted.VectorizedGeneric(w) : Hosted.VectorizedDirect(w);
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width</param>
         /// <param name="generic">Whether generic or non-generc methods should be selected</param>
-        IEnumerable<MethodInfo> Vectorized(W256 w, GenericPartition g = default)
+        MethodInfo[] Vectorized(W256 w, GenericPartition g = default)
             => g.IsGeneric() ? Hosted.VectorizedGeneric(w) : Hosted.VectorizedDirect(w);
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic parition to consider</param>
-        IEnumerable<MethodInfo> Vectorized(W128 w, string name, GenericPartition g = default)
+        MethodInfo[] Vectorized(W128 w, string name, GenericPartition g = default)
             => Hosted.Vectorized(w,name,g);
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic parition to consider</param>
-        IEnumerable<MethodInfo> Vectorized(W256 w, string name, GenericPartition g = default)
+        MethodInfo[] Vectorized(W256 w, string name, GenericPartition g = default)
             => Hosted.Vectorized(w,name,g);
 
         /// <summary>
@@ -116,14 +116,14 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic parition to consider</param>
-        IEnumerable<MethodInfo> Vectorized(W512 w, string name, GenericPartition g = default)
+        MethodInfo[] Vectorized(W512 w, string name, GenericPartition g = default)
             => Hosted.Vectorized(w,name,g);
 
-        IEnumerable<MethodInfo> OfKind<K>(W128 w, K kind, GenericPartition g = default)
+        MethodInfo[] OfKind<K>(W128 w, K kind, GenericPartition g = default)
             where K : unmanaged, Enum
                 => OfKind(kind,g).VectorizedDirect(w);
 
-        IEnumerable<MethodInfo> OfKind<K>(W256 w, K kind, GenericPartition g = default)
+        MethodInfo[] OfKind<K>(W256 w, K kind, GenericPartition g = default)
             where K : unmanaged, Enum
                 => OfKind(kind,g).VectorizedDirect(w);
 
@@ -132,7 +132,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The width to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        IEnumerable<MethodInfo> Vectorized<T>(W128 w)
+        MethodInfo[] Vectorized<T>(W128 w)
             where T : unmanaged
                 => Hosted.VectorizedDirect<T>(w);
 
@@ -141,7 +141,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The width to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        IEnumerable<MethodInfo> Vectorized<T>(W256 w)
+        MethodInfo[] Vectorized<T>(W256 w)
             where T : unmanaged
                 => Hosted.VectorizedDirect<T>(w);
 
@@ -150,7 +150,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The width to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        IEnumerable<MethodInfo> Vectorized<T>(W512 w)
+        MethodInfo[] Vectorized<T>(W512 w)
             where T : unmanaged
                 => Hosted.VectorizedDirect<T>(w);
 
@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        IEnumerable<MethodInfo> Vectorized<T>(W128 w, string name)
+        MethodInfo[] Vectorized<T>(W128 w, string name)
             where T : unmanaged
                 => Vectorized<T>(w).WithName(name);
 
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        IEnumerable<MethodInfo> Vectorized<T>(W256 w, string name)
+        MethodInfo[] Vectorized<T>(W256 w, string name)
             where T : unmanaged
                 => Vectorized<T>(w).WithName(name);
 
@@ -180,7 +180,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        IEnumerable<MethodInfo> Vectorized<T>(W512 w, string name)
+        MethodInfo[] Vectorized<T>(W512 w, string name)
             where T : unmanaged
                 => Vectorized<T>(w).WithName(name);
     }

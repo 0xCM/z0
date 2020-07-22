@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W128 w)
+        public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W128 w)
             => src.OpenGeneric().Where(m => m.IsVectorized(w));
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W256 w)
+        public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W256 w)
             => src.OpenGeneric().Where(m => m.IsVectorized(w));
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W512 w)
+        public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W512 w)
             => src.OpenGeneric().Where(m => m.IsVectorized(w));
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W128 w, string name)
+        public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W128 w, string name)
             => src.OpenGeneric().WithName(name).Where(m => m.IsVectorized(w));
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W256 w, string name)
+        public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W256 w, string name)
             => src.OpenGeneric().WithName(name).Where(m => m.IsVectorized(w));
 
         /// <summary>
@@ -56,8 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W512 w, string name)
+        public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W512 w, string name)
             => src.OpenGeneric().WithName(name).Where(m => m.IsVectorized(w));
-
     }
 }

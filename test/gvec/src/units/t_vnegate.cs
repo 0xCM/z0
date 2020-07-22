@@ -7,11 +7,9 @@ namespace Z0
     using System;
     
     using static Konst;
-    using static Memories;
 
     public class t_vnegate : t_inx<t_vnegate>
     {
-
         public void vnegate_check()
         {
             vnegate_check(n128);

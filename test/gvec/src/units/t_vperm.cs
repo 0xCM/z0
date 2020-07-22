@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Vectors;
+    using static z;
 
     public class t_vperm : t_permute<t_vperm>
     {
@@ -87,16 +87,16 @@ namespace Z0
             var xs = x.ToSpan();
             Claim.veq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
-            var xABCD = V0d.vpermlo4x16(x, Perm4L.ABCD);
+            var xABCD = z.vpermlo4x16(x, Perm4L.ABCD);
             Claim.veq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            var xDCBA = V0d.vpermlo4x16(x, Perm4L.DCBA);
+            var xDCBA = z.vpermlo4x16(x, Perm4L.DCBA);
             Claim.veq(xDCBA, Vector128.Create(xs[D], xs[C], xs[B], xs[A], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            var xACBD = V0d.vpermlo4x16(x, Perm4L.ACBD);
+            var xACBD = z.vpermlo4x16(x, Perm4L.ACBD);
             Claim.veq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            Claim.veq(V0d.vpermlo4x16(vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vparts(n128, 0,3,2,1,6,7,8,9));           
+            Claim.veq(z.vpermlo4x16(vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vparts(n128, 0,3,2,1,6,7,8,9));           
         }
 
         public void vpermhi_4x16_outline()
@@ -133,7 +133,7 @@ namespace Z0
             var v = V0.vdecrements<uint>(n);
             Claim.veq(vparts(n,3,2,1,0),v);
 
-            Claim.veq(v, V0d.vperm4x32(u, Perm4L.DCBA));
+            Claim.veq(v, z.vperm4x32(u, Perm4L.DCBA));
             Claim.veq(u, V0d.vperm4x32(v, Perm4L.DCBA));
         }
 
@@ -142,27 +142,27 @@ namespace Z0
             var w = W128.W;
             var x = vparts(w,0,1,2,3,4,5,6,7);
                         
-            var a0 = V0d.vpermlo4x16(x, Perm4L.DCBA);
+            var a0 = z.vpermlo4x16(x, Perm4L.DCBA);
             var a1 = vparts(w,3,2,1,0,4,5,6,7);
             Claim.veq(a0,a1);
 
-            var b0 = V0d.vpermhi4x16(x, Perm4L.DCBA);
+            var b0 = z.vpermhi4x16(x, Perm4L.DCBA);
             var b1 = vparts(w,0,1,2,3,7,6,5,4);
             Claim.veq(b0,b1);
 
-            var c0 = V0d.vperm4x16(x,Perm4L.DCBA,Perm4L.DCBA);
+            var c0 = z.vperm4x16(x,Perm4L.DCBA,Perm4L.DCBA);
             var c1 = vparts(w,3,2,1,0,7,6,5,4);
             Claim.veq(c0,c1);
 
-            var d0 = V0d.vpermlo4x16(x, Perm4L.BADC);
+            var d0 = z.vpermlo4x16(x, Perm4L.BADC);
             var d1 = vparts(w,1,0,3,2,4,5,6,7);            
             Claim.veq(d0,d1);
 
-            var e0 = V0d.vpermhi4x16(x, Perm4L.BADC);
+            var e0 = z.vpermhi4x16(x, Perm4L.BADC);
             var e1 = vparts(w,0,1,2,3,5,4,7,6);
             Claim.veq(e0,e1);
 
-            var f0 = V0d.vperm4x16(x, Perm4L.BADC, Perm4L.BADC);
+            var f0 = z.vperm4x16(x, Perm4L.BADC, Perm4L.BADC);
             var f1 = vparts(w,1,0,3,2,5,4,7,6);
             Claim.veq(f0,f1);
         }
@@ -280,8 +280,8 @@ namespace Z0
         public static Vector256<byte> vswaphl(Vector256<byte> x)
         {
             Vector256<byte> y = default;
-            y = dvec.vinsert(V0d.vhi(x), y, 0);
-            y = dvec.vinsert(V0d.vlo(x), y, 1);
+            y = dvec.vinsert(vhi(x), y, 0);
+            y = dvec.vinsert(vlo(x), y, 1);
             return y;
         }
 
@@ -331,9 +331,9 @@ namespace Z0
             var pformat_actual = p.FormatMap();
             Claim.eq(pformat_epect, pformat_actual);
 
-            var vIn = vparts(0,1,2,3);
-            var vExpect = vparts(3,2,1,0);
-            var vActual = V0d.vperm4x32(vIn,p);
+            var vIn = vparts(w128, 0,1,2,3);
+            var vExpect = vparts(w128, 3,2,1,0);
+            var vActual = vperm4x32(vIn,p);
             Claim.veq(vExpect, vActual);                                
         }        
 
@@ -346,7 +346,6 @@ namespace Z0
                 Claim.Require(Symbolic.literal(perm, i, out symbol));
                 Claim.Eq(expect[i], symbol);
             }
-
         }
 
         const Perm4L A = Perm4L.A;

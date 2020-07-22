@@ -75,13 +75,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return V0d.vnonz(v8i(src));
+                return z.vnonz(v8i(src));
             else if(typeof(T) == typeof(short))
-                return V0d.vnonz(v16i(src));
+                return z.vnonz(v16i(src));
             else if(typeof(T) == typeof(int))
-                return V0d.vnonz(v32i(src));
+                return z.vnonz(v32i(src));
             else 
-                return V0d.vnonz(v64i(src));
+                return z.vnonz(v64i(src));
         }
 
         [MethodImpl(Inline)]
@@ -89,13 +89,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return V0d.vnonz(v8u(src));
+                return z.vnonz(v8u(src));
             else if(typeof(T) == typeof(ushort))
-                return V0d.vnonz(v16u(src));
+                return z.vnonz(v16u(src));
             else if(typeof(T) == typeof(uint))
-                return V0d.vnonz(v32u(src));
+                return z.vnonz(v32u(src));
             else 
-                return V0d.vnonz(v64u(src));
+                return z.vnonz(v64u(src));
         }
 
         [MethodImpl(Inline)]
@@ -103,9 +103,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return V0d.vnonz(v32f(src));
+                return z.vnonz(v32f(src));
             else if(typeof(T) == typeof(double))
-                return V0d.vnonz(v64f(src));
+                return z.vnonz(v64f(src));
             else 
                 throw no<T>();
         }
@@ -115,13 +115,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return V0d.vnonz(v8i(src));
+                return z.vnonz(v8i(src));
             else if(typeof(T) == typeof(short))
-                return V0d.vnonz(v16i(src));
+                return z.vnonz(v16i(src));
             else if(typeof(T) == typeof(int))
-                return V0d.vnonz(v32i(src));
+                return z.vnonz(v32i(src));
             else 
-                return V0d.vnonz(v64i(src));
+                return z.vnonz(v64i(src));
         }
 
         [MethodImpl(Inline)]
@@ -129,13 +129,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return V0d.vnonz(v8u(src));
+                return z.vnonz(v8u(src));
             else if(typeof(T) == typeof(ushort))
-                return V0d.vnonz(v16u(src));
+                return z.vnonz(v16u(src));
             else if(typeof(T) == typeof(uint))
-                return V0d.vnonz(v32u(src));
+                return z.vnonz(v32u(src));
             else 
-                return V0d.vnonz(v64u(src));
+                return z.vnonz(v64u(src));
         }
 
         [MethodImpl(Inline)]
@@ -143,9 +143,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return V0d.vnonz(v32f(src));
+                return z.vnonz(v32f(src));
             else if(typeof(T) == typeof(double))
-                return V0d.vnonz(v64f(src));
+                return z.vnonz(v64f(src));
             else 
                 throw no<T>();
         }

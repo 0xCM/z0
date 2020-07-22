@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Reflection;
     
     partial class XTend
@@ -30,7 +27,7 @@ namespace Z0
         /// Selects binary operators from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> BinaryOperators(this IEnumerable<MethodInfo> src)
+        public static MethodInfo[] BinaryOperators(this MethodInfo[] src)
             => src.Where(x => x.IsBinaryOperator());
     }
 }

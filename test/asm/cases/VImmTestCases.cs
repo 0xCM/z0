@@ -21,8 +21,7 @@ namespace Z0
         public static VMethodSearch Search => default(VMethodSearch);
                 
         public static MethodInfo vbroadcast<W>(this VMethodSearch search, Type tCell, W w = default)
-            where W : unmanaged, ITypeWidth
-        
+            where W : unmanaged, ITypeWidth        
             => typeof(V0d).DeclaredMethods()
                     .WithName(nameof(V0d.vbroadcast))
                     .WithParameterTypes(w.GetType(), tCell)
@@ -37,13 +36,14 @@ namespace Z0
 
     static class VImmTestCases
     {           
-        public static IEnumerable<MethodInfo> V128UnaryShifts 
+        public static MethodInfo[] V128UnaryShifts 
             => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_128");
 
-        public static IEnumerable<MethodInfo> V256UnaryShifts 
+        public static MethodInfo[] V256UnaryShifts 
             => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_256");
 
-        public static IApiHostQuery<dvec> Query => ApiHostQuery.Over<dvec>();
+        public static IApiHostQuery<dvec> Query 
+            => ApiHostQuery.Over<dvec>();
 
         [MethodImpl(Inline)]
         public static Vector128<short> vsll_128x16i(Vector128<short> src, [Imm] byte count)

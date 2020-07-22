@@ -8,7 +8,7 @@ namespace Z0
     
     using static Vectors;
 
-    partial class vexamples
+    partial class t_vexamples
     {
         public void vmerge_128()
         {

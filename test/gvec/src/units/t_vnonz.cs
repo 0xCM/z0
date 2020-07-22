@@ -7,7 +7,7 @@ namespace Z0
     using System;
     
     using static Konst;
-    using static As;
+    using static z;
 
     public class t_vnonz : t_inx<t_vnonz>
     {

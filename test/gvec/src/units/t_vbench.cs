@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_vbench : t_inx<t_vbench>
     {        
@@ -17,7 +17,7 @@ namespace Z0
         protected override int RepCount => Pow2.T10;
 
         public override bool Enabled 
-            => false;
+            => true;
 
         public void bitpack_bench()
         {
@@ -310,8 +310,8 @@ namespace Z0
             {
                 clock.Start();
                 var bs =  BitSpans.load(packed);
-                for(var j=0; j < bs.Length; j+= n, ops++)
-                    gmath.or(composite, BitSpans.extract<T>(bs,j));
+                for(var j=0u; j < bs.Length; j+= n, ops++)
+                    gmath.or(composite, BitSpans.extract<T>(bs,(int)j));
                 clock.Stop();
                 
                 Random.SpanFill(packed);
@@ -362,13 +362,13 @@ namespace Z0
             var total = 0u;
             var opcount = 0;
             Span<ulong> samples = stackalloc ulong[RepCount];
-            ref readonly var src = ref head(samples);
+            ref readonly var src = ref first(samples);
             for(var cycle = 0; cycle < CycleCount; cycle++)
             {
-                Random.Fill(RepCount, ref head(samples));
+                Random.Fill(RepCount, ref first(samples));
                 counter.Start();
                 for(var i=0; i< RepCount; i++)
-                    total += Bits.pop(skip(in head(samples), i));
+                    total += Bits.pop(skip(first(samples), i));
                 counter.Stop();
                 opcount += RepCount;
             }

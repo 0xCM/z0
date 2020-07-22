@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source strean</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W128 w, bool generic = false)
+        public static MethodInfo[] Vectorized(this MethodInfo[] src, W128 w, bool generic = false)
                 => generic ? src.VectorizedGeneric(w) : src.VectorizedDirect(w);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source strean</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W256 w, bool generic = false)
+        public static MethodInfo[] Vectorized(this MethodInfo[] src, W256 w, bool generic = false)
             => generic ? src.VectorizedGeneric(w) : src.VectorizedDirect(w);
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The source strean</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W512 w, bool generic = false)
+        public static MethodInfo[] Vectorized(this MethodInfo[] src, W512 w, bool generic = false)
             => generic ? src.VectorizedGeneric(w) : src.VectorizedDirect(w);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic partition to which the considered members belong</param>
-        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W128 w, string name, bool generic = false)
+        public static MethodInfo[] Vectorized(this MethodInfo[] src, W128 w, string name, bool generic = false)
             => src.Vectorized(w,generic).WithName(name);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic partition to which the considered members belong</param>
-        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W256 w, string name, bool generic = false)
+        public static MethodInfo[] Vectorized(this MethodInfo[] src, W256 w, string name, bool generic = false)
                 => src.Vectorized(w,generic).WithName(name);
 
         /// <summary>
@@ -65,8 +65,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="name">The name to match</param>
         /// <param name="generic">The generic partition to which the considered members belong</param>
-        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W512 w, string name, bool generic = false)
+        public static MethodInfo[] Vectorized(this MethodInfo[] src, W512 w, string name, bool generic = false)
             => src.Vectorized(w,generic).WithName(name);
-
     }
 }

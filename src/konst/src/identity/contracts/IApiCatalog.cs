@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -42,8 +41,8 @@ namespace Z0
         /// <summary>
         /// The api hosts known to the catalog, including both operation and data type hosts
         /// </summary>
-        IEnumerable<IApiHost> ApiHosts 
-            => DataTypeHosts.Cast<IApiHost>().Concat(OperationHosts.Cast<IApiHost>());
+        IApiHost[] ApiHosts 
+            => DataTypeHosts.Cast<IApiHost>().Concat(OperationHosts.Cast<IApiHost>()).Array();
         
         /// <summary>
         /// Specifies whether the catalog contains content from an identifid assembly
