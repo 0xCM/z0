@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
         
     public static class nonzero
     {
@@ -22,7 +21,6 @@ namespace Z0
         public static nonzero<T> create<T>(T value)
             where T : unmanaged
                 => new nonzero<T>(value);
-
     }
 
     public readonly struct nonzero<T>  : INonZero<nonzero<T>,T>, IEquatable<T>
@@ -41,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public nonzero(T value)
         {
-            this.Value = gmath.zclear(value);
+            Value = gmath.zclear(value);
         }
 
         [MethodImpl(Inline)]

@@ -16,15 +16,15 @@ namespace Z0
     public class DivisorIndex<T> 
         where T : unmanaged
     {
-        public DivisorIndex(Interval<T> Range, IReadOnlyList<DivisorList<T>> Lists)
-        {
-            this.Range = Range;
-            this.Lookup = Lists.ToDictionary(x => x.Dividend, x => x);
-        }
-
         public Interval<T> Range {get;}        
 
         IReadOnlyDictionary<T,DivisorList<T>> Lookup {get;}
+
+        public DivisorIndex(Interval<T> range, IReadOnlyList<DivisorList<T>> lists)
+        {
+            Range = range;
+            Lookup = lists.ToDictionary(x => x.Dividend, x => x);
+        }
 
         public DivisorList<T> this[T dividend]
             => Lookup[dividend];

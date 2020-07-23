@@ -49,7 +49,7 @@ namespace Z0
             var uri = ApiHostUri.Parse(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
-                status.Deposit(AppEvents.error(uri.Reason));
+                status.Deposit(Events.error(uri.Reason));
                 return IdentifiedCodeIndex.Empty;
             }
 

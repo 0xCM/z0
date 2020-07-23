@@ -12,11 +12,11 @@ namespace Z0
     public readonly ref struct RowVector256<T>
         where T : unmanaged
     {
-        readonly Block256<T> data;
+        public readonly Block256<T> Data;
 
         [MethodImpl(Inline)]
         public RowVector256(in Block256<T> src)
-            => this.data = src;
+            => this.Data = src;
 
         [MethodImpl(Inline)]
         public static implicit operator RowVector256<T>(in Block256<T> src)
@@ -24,11 +24,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Block256<T>(in RowVector256<T> src)
-            =>  src.data;
+            =>  src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in RowVector256<T> src)
-            =>  src.data;
+            =>  src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in RowVector256<T> src)
@@ -50,41 +50,36 @@ namespace Z0
         public ref T this[int i]
         {
             [MethodImpl(Inline)]
-            get => ref data[i];            
+            get => ref Data[i];            
         }
 
         public int Count
         {
             [MethodImpl(Inline)]
-            get => data.CellCount;            
+            get => Data.CellCount;            
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => data.CellCount;
+            get => Data.CellCount;
         }
 
         public Span<T> Unblocked
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
-        public Block256<T> Data
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
 
         [MethodImpl(Inline)]
         public RowVector256<U> As<U>()
             where U : unmanaged
-                => data.As<U>();
+                => Data.As<U>();
                 
         [MethodImpl(Inline)]
         public string Format()
-            => data.Data.Format();    
+            => Data.Data.Format();    
 
         [MethodImpl(Inline)]
         public ref RowVector256<T> CopyTo(ref RowVector256<T> dst)
@@ -96,10 +91,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector256<U> Convert<U>()
             where U : unmanaged
-              => new RowVector256<U>(Cells.convert<T,U>(data));
+              => new RowVector256<U>(Blocks.convert<T,U>(Data));
 
         public RowVector256<T> Replicate()
-            => new RowVector256<T>(data.Replicate());
+            => new RowVector256<T>(Data.Replicate());
 
         public bool Equals(RowVector256<T> rhs)
         {

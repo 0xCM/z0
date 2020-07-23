@@ -24,7 +24,7 @@ namespace Z0
         public static RowVector256<T> VectorBlock<T>(this IPolyrand random, int len, Interval<T>? domain = null)
             where T : unmanaged
         {
-            var dst = Z0.RowVector.blockalloc<T>(len);
+            var dst = Z0.RowVectors.blockalloc<T>(len);
             if(domain != null)
                 random.Fill(domain.Value, len, ref dst[0]);
             else
@@ -59,7 +59,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = Z0.RowVector.blockalloc<N, T>();
+            var dst = Z0.RowVectors.blockalloc<N, T>();
             random.Fill(domain, ref dst);
             return dst;
         }
@@ -91,7 +91,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = Z0.RowVector.blockalloc<N, T>();
+            var dst = Z0.RowVectors.blockalloc<N, T>();
             random.Fill(ref dst);
             return dst;
         }
@@ -124,7 +124,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => random.Fill<T>(nati<N>(), ref vector.Unsized[0]);
 
-
         /// <summary>
         /// Produces a generic vector
         /// </summary>
@@ -134,7 +133,7 @@ namespace Z0
         public static RowVector<T> Vector<T>(this IPolyrand random, int len, Interval<T>? domain = null)
             where T : unmanaged
         {
-            var dst = Z0.RowVector.alloc<T>(len);
+            var dst = Z0.RowVectors.alloc<T>(len);
             if(domain != null)
                 random.Fill(domain.Value, len, ref dst[0]);
             else
@@ -154,7 +153,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = Z0.RowVector.alloc<N,T>();
+            var dst = Z0.RowVectors.alloc<N,T>();
             random.Fill(domain, ref dst);
             return dst;
         }
@@ -170,7 +169,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = Z0.RowVector.alloc<N,T>();
+            var dst = Z0.RowVectors.alloc<N,T>();
             random.Fill(Interval.closed(min,max), ref dst);
             return dst;
         }
@@ -186,7 +185,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = Z0.RowVector.alloc<N,T>();
+            var dst = Z0.RowVectors.alloc<N,T>();
             random.Fill(ref dst);
             return dst;
         }
@@ -282,7 +281,7 @@ namespace Z0
         {
             var len = src.Length;
             Demands.insist(len == max.Length);
-            var dst = Z0.RowVector.blockalloc<T>(len);
+            var dst = Z0.RowVectors.blockalloc<T>(len);
             for(var i=0; i<dst.Length; i++)
                 dst[i] = gmath.squeeze(src[i],max[i]);
             return dst;

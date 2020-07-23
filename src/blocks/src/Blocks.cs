@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    
+    using System.Runtime.CompilerServices;    
+        
     using static Konst;
-
      
     [ApiHost("api")]
-    public static partial class Blocks
+    static partial class Blockings
     {
-        const NumericKind Closure = UInt8x64k;
+        const NumericKind Closure = UInt8x64k;         
     }
 
     public static partial class XBlocks    

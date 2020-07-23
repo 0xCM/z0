@@ -25,16 +25,16 @@ namespace Z0.Mkl
             switch(spec.DistKind)
             {
                 case DistributionKind.Uniform:
-                    sampler = rng.UniformSampler<T>(UniformSpec.from(spec));
+                    sampler = rng.UniformSampler<T>(Distributions.uniform(spec));
                     break;
                 case DistributionKind.UniformBits:
-                    sampler = rng.UniformBitsSampler<T>(UniformBitsSpec.From(spec));
+                    sampler = rng.UniformBitsSampler<T>(Distributions.uniformbits(spec));
                     break;
                 case DistributionKind.Bernoulli:
-                    sampler = rng.BernoulliSampler<T>(DistributionSpec.bernoulli(spec));                    
+                    sampler = rng.BernoulliSampler<T>(Distributions.bernoulli(spec));                    
                     break;
                 case DistributionKind.Gaussian:
-                    sampler = rng.GaussianSampler<T>(GaussianSpec.From(spec));                    
+                    sampler = rng.GaussianSampler<T>(Distributions.gaussian(spec));                    
                     break;
                 default:
                     throw Unsupported.define<T>();
@@ -53,7 +53,7 @@ namespace Z0.Mkl
         public static IRngSampler<T> UniformSampler<T>(this MklRng rng, UniformSpec<T>? spec = null)
             where T : unmanaged
         {
-            var _spec = spec ?? UniformSpec.define<T>(minval<T>(), maxval<T>());
+            var _spec = spec ?? Distributions.uniform<T>(minval<T>(), maxval<T>());
             var sampler = default(IRngSampler<T>);
             if(typeof(T) == typeof(int))
                 sampler = samplers.uniform(rng, _spec.ToInt32()) as IRngSampler<T>;
@@ -77,7 +77,7 @@ namespace Z0.Mkl
             where T : unmanaged
         {
             var sampler = default(IRngSampler<T>);
-            var _spec = spec ?? UniformBitsSpec.Define<T>();
+            var _spec = spec ?? Distributions.uniformbits<T>();
             if(typeof(T) == typeof(uint))
                 sampler = samplers.bits(rng, _spec.ToUInt32()) as IRngSampler<T>;
             else if(typeof(T) == typeof(ulong))

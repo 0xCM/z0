@@ -13,6 +13,17 @@ namespace Z0
     partial class BitGrid
     {
         /// <summary>
+        /// Fills a target block with replicated cell data
+        /// </summary>
+        /// <param name="data">The data used to fill the block</param>
+        /// <param name="dst">The target block</param>
+        /// <typeparam name="T">The cell type</typeparam>        
+        [MethodImpl(Inline),Op, Closures(AllNumeric)]
+        public static void broadcast<T>(T data, in Block256<T> dst)
+            where T : unmanaged        
+                => dst.Fill(data); 
+
+        /// <summary>
         /// Creates a dynamically-sized grid of natural dimensions filled with specified data
         /// </summary>
         /// <typeparam name="M">The row count type</typeparam>
@@ -26,7 +37,7 @@ namespace Z0
         {
             var blocksize = n256;
             var blocks = Blocks.alloc<T>(blocksize, BitCalcs.tableblocks(blocksize, m,n,d));
-            Blocks.broadcast(d, blocks);
+            broadcast(d, blocks);
             return new BitGrid<M,N,T>(blocks);
         }
 
@@ -44,7 +55,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged  
-                => new BitGrid16<M, N, T>(gvec.broadcast<T,ushort>(d));
+                => new BitGrid16<M,N,T>(gvec.broadcast<T,ushort>(d));
 
         /// <summary>
         /// Initializes a 32-bit grid of natural dimensions
@@ -60,7 +71,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new BitGrid32<M, N, T>(gvec.broadcast<T,uint>(d));
+                => new BitGrid32<M,N,T>(gvec.broadcast<T,uint>(d));
 
         /// <summary>
         /// Initializes a 64-bit grid of natural dimensions
@@ -76,7 +87,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new BitGrid64<M, N, T>(gvec.broadcast<T,ulong>(d));
+                => new BitGrid64<M,N,T>(gvec.broadcast<T,ulong>(d));
 
         /// <summary>
         /// Initializes a 128-bit grid of natural dimensions
@@ -92,7 +103,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new BitGrid128<M, N, T>(Vectors.vbroadcast(n128, d));
+                => new BitGrid128<M,N,T>(Vectors.vbroadcast(n128, d));
 
         /// <summary>
         /// Initializes a 256-bit grid of natural dimensions
@@ -109,7 +120,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged            
                 => new BitGrid256<M,N,T>(Vectors.vbroadcast(n256, d));
-
-
     }
 }

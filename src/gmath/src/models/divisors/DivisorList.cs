@@ -29,7 +29,6 @@ namespace Z0
         /// </summary>
         public IReadOnlyList<T> Divisors {get;}
 
-
         public bool IsPrime 
             => Divisors.Count == 0;
 

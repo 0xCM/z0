@@ -18,32 +18,23 @@ namespace Z0
     public readonly ref struct Block32<T>
         where T : unmanaged
     {
-        readonly Span<T> data;
+        public readonly Span<T> Data;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block32<T> src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in Block32<T> src)
-            => src.data;
+            => src.Data;
                     
         [MethodImpl(Inline)]
         public Block32(Span<T> src)
-            => this.data = src;
+            => this.Data = src;
 
         [MethodImpl(Inline)]
         public Block32(params T[] src)
-            => this.data = src;
-
-        /// <summary>
-        /// The backing storage
-        /// </summary>
-        public Span<T> Data
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
+            => this.Data = src;
 
         /// <summary>
         /// The leading storage cell
@@ -51,13 +42,13 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref first(data);
+            get => ref first(Data);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => data.IsEmpty;
+            get => Data.IsEmpty;
         }
 
         /// <summary>
@@ -66,7 +57,7 @@ namespace Z0
         public int CellCount 
         {
             [MethodImpl(Inline)]
-            get => data.Length;
+            get => Data.Length;
         }
 
         /// <summary>
@@ -120,7 +111,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.Bytes();
+            get => Data.Bytes();
         }
 
         /// <summary>
@@ -138,7 +129,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)    
-            => slice(data, block * BlockLength,BlockLength);
+            => slice(Data, block * BlockLength,BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
@@ -150,7 +141,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Fill(T src)
-            => data.Fill(src);
+            => Data.Fill(src);
 
         /// <summary>
         /// Zero-fills all blocked cells
@@ -165,7 +156,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void CopyTo(Span<T> dst)
-            => data.CopyTo(dst);
+            => Data.CopyTo(dst);
 
         /// <summary>
         /// Reinterprets the storage cell type
@@ -174,14 +165,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block32<S> As<S>()                
             where S : unmanaged
-                => new Block32<S>(z.recover<T,S>(data));                    
+                => new Block32<S>(z.recover<T,S>(Data));                    
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()
-            => data.GetEnumerator();
+            => Data.GetEnumerator();
 
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();
+            => ref Data.GetPinnableReference();
    }
 }

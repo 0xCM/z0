@@ -1,2 +1,3 @@
-export ProjectId=$(dirname $0)
+export ProjectId=polyrand
 export ScriptDir=$ZDev/src/.scripts
+z0 $ProjectId

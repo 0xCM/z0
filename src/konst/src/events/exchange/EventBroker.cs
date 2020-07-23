@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Outcome Subscribe<E>(Action<E> receiver, E model = default)
             where E : IAppEvent                 
-                => Subscribe(AppEvents.sink(receiver), model);
+                => Subscribe(Events.sink(receiver), model);
 
         [MethodImpl(Inline)]
         Outcome IEventBroker.Subscribe<S,E>(S sink, E model)
@@ -77,7 +77,7 @@ namespace Z0
 
         public Outcome Subscribe(Action<IAppEvent> receiver, IAppEvent model)
         {
-            if(Subscriptions.TryAdd(model.GetType(), AppEvents.sink(receiver)))
+            if(Subscriptions.TryAdd(model.GetType(), Events.sink(receiver)))
                 return true;
             else
                 return (false, AppMsg.Warn($"Key for {model.GetType()} was previously added"));            

@@ -57,7 +57,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = Z0.RowVector.blockalloc<N,T>();
+            var dst = Z0.RowVectors.blockalloc<N,T>();
             random.MarkovSpan(dst.Unsized);
             return dst;
         }
@@ -85,7 +85,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var n = value<N>();
-            var data = Cells.rectangle<T>(n256, n, n);
+            var data = Blocks.rectangle<T>(n256, n, n);
             for(var row=0u; row < n; row++)
                 random.MarkovSpan<T>(data.Slice((int)(row*n), (int)n));
             return Z0.Matrix.blockload<N,T>(data);

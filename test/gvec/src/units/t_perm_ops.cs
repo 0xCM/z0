@@ -71,7 +71,7 @@ namespace Z0
             var pbs_actual = BitString.scalar((byte)p);            
             Claim.eq(pbs_expect, pbs_actual);
             
-            var p_assembled = Symbolic.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
+            var p_assembled = Permutary.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
             Claim.Eq(p, p_assembled);            
             
             var pformat_actual = p.FormatMap();

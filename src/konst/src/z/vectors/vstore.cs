@@ -10,11 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
  
     using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Sse3;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst;
 

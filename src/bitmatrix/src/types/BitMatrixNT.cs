@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst; 
-    using static As;
-    using static Root;
+    using static z;
 
     /// <summary>
     /// Defines a square bitmatrix of natural order over a primal type
@@ -39,7 +38,7 @@ namespace Z0
         public static int CellWidth
         {
             [MethodImpl(Inline)]
-            get => bitsize<T>();
+            get => (int)bitsize<T>();
         }
 
         /// <summary>
@@ -48,7 +47,7 @@ namespace Z0
         public static int RowCellCount
         {
             [MethodImpl(Inline)]
-            get =>  BitCalcs.mincells((ulong)bitsize<T>(),value<N>()); 
+            get =>  GridCells.mincells((ulong)bitsize<T>(),value<N>()); 
         }
 
         public static int TotalCellCount
@@ -92,7 +91,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref head(Data);
+            get => ref first(Data);
         }
 
         public bit this[int row, int col]

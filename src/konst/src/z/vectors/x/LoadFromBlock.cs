@@ -117,6 +117,17 @@ namespace Z0
                 => z.vload(src,block);
 
         /// <summary>
+        /// Loads a 256-bit vector from an index-identified block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> LoadVector<T>(this in Block256<T> src, uint block)            
+            where T : unmanaged            
+                => z.vload(src,(int)block);
+
+        /// <summary>
         /// Loads 512-bit vector from an index-identified block
         /// </summary>
         /// <param name="src">The source span</param>

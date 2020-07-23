@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Outcome Subscribe(this IAppEvent e, IEventBroker broker, Action<IAppEvent> receiver)
-            => AppEvents.subscribe(e, broker, receiver);
+            => Z0.Events.subscribe(e, broker, receiver);
 
         /// <summary>
         /// Registers an event receiver to which brokered events will be relayed
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Outcome Subscribe<E>(this E e, IEventBroker broker, Action<E> receiver)
             where E : IAppEvent
-                => AppEvents.subscribe(e, broker, receiver);
+                => Z0.Events.subscribe(e, broker, receiver);
 
         public static ref readonly E Deposit<E>(this IAppMsgSink dst, in E src)      
             where E : IAppEvent

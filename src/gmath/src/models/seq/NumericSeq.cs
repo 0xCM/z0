@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a data structure for sparse/partial sequence representation
@@ -77,7 +77,7 @@ namespace Z0
         public ref NumericSeqTerm<T> this[int idx]
         {
             [MethodImpl(Inline)]
-            get => ref seek(terms, idx);
+            get => ref seek(terms, (uint)idx);
         }
 
         /// <summary>

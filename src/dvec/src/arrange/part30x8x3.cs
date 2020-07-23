@@ -69,10 +69,10 @@ namespace Z0
             var hi = uint16(BitMasks.Lsb16x16x15 & (a >> 15));            
             var m = vpart30x8x3Mask(src);
             var shifts = vparts(0, 3, 6, 9, 12, 0, 0, 0); 
-            var x = vbroadcast(w256, uint32(lo | hi << 16));            
-            var y = v16u(dvec.vsrlv(vand(x,m), shifts));
-            var z = vpart30x8x3Assemble(y);
-            return z;
+            var q = z.vbroadcast(w256, uint32(lo | hi << 16));            
+            var r = v16u(vsrlv(z.vand(q,m), shifts));
+            var s = vpart30x8x3Assemble(r);
+            return s;
         }
     }
 }

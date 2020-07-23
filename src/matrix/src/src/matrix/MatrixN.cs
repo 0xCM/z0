@@ -127,7 +127,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector<N,T> Row(int row)
         {            
-            var alloc = RowVector.alloc<N,T>();
+            var alloc = RowVectors.alloc<N,T>();
             return GetRow(row, ref alloc);
         }
 
@@ -179,7 +179,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector<N,T> Col(int col)
         {
-            var alloc = RowVector.alloc<N,T>();
+            var alloc = RowVectors.alloc<N,T>();
             return GetCol(col, ref alloc);
         }
 

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     partial struct GridCells
     {
@@ -25,6 +26,5 @@ namespace Z0
             var r = cells%w; 
             return d + (r != 0 ? 1u : 0u);
         }
-
     }
 }

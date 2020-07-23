@@ -42,8 +42,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public NumericSeqTerm(int index, T value)
         {
-            this.Index = index;
-            this.Value = value;
+            Index = index;
+            Value = value;
         }
         
         /// <summary>

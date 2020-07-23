@@ -23,7 +23,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var dst = RowVector.blockalloc<N,T>();
+            var dst = RowVectors.blockalloc<N,T>();
             and<T>(lhs.Data, rhs.Data, dst);
             return dst;
         }
@@ -65,7 +65,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            Blocked.sub(x.Data,y.Data,z.Data);
+            Blocked.sub(x.Data, y.Data, z.Data);
             return ref z;
         }
     }

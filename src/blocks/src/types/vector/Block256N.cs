@@ -15,9 +15,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged    
     {
-        readonly Block256<T> data;
-
-        static readonly N NatRep = new N();
+        public readonly Block256<T> Data;
 
         [MethodImpl(Inline)]
         public static Block256<N,T> Load(Span<T> src)
@@ -40,7 +38,7 @@ namespace Z0
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
         public static implicit operator NatSpan<N,T>(Block256<N,T> src)
-            => RowVector.natspan<N,T>(src.data);
+            => RowVectors.natspan<N,T>(src.Data);
 
         /// <summary>
         /// Slice => Vec
@@ -54,7 +52,7 @@ namespace Z0
 
         [MethodImpl(Inline)]   
         public static implicit operator Block256<T>(Block256<N,T> src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]   
         public static implicit operator RowVector256<T>(Block256<N,T> src)
@@ -62,7 +60,7 @@ namespace Z0
 
         [MethodImpl(Inline)]   
         public static implicit operator Block256<N,T>(T[] src)
-            => new Block256<N, T>(src);
+            => new Block256<N,T>(src);
 
         [MethodImpl(Inline)]
         public static bool operator == (Block256<N,T> lhs, in Block256<N,T> rhs) 
@@ -79,36 +77,31 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Block256(Span<T> src)
         {
-            data = Blocks.safeload(n256, src);
+            Data = Blocks.safeload(n256, src);
         }
 
         [MethodImpl(Inline)]
         internal Block256(Block256<T> src)
         {
             Root.insist(src.CellCount >= Length);
-            data = src;
+            Data = src;
         }
 
         [MethodImpl(Inline)]
         internal Block256(NatSpan<N,T> src)
         {
-            data = RowVector.safeload(n256,src);
+            Data = RowVectors.safeload(n256,src);
         }
                     
         public ref T this[int index] 
-            => ref data[index];
+            => ref Data[index];
 
         public Span<T> Unsized
         {
             [MethodImpl(Inline)]
-            get => data.Data;
+            get => Data.Data;
         }
  
-        public Block256<T> Data
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
 
         [MethodImpl(Inline)]
         public Block256<N,U> As<U>()
@@ -142,7 +135,7 @@ namespace Z0
         public Block256<N,U> Map<U>(Func<T,U> f)
             where U:unmanaged
         {
-            var dst = RowVector.blockalloc<N,U>();
+            var dst = RowVectors.blockalloc<N,U>();
             return Map(f, ref dst);
         }
 
@@ -156,24 +149,24 @@ namespace Z0
             where U:unmanaged
         {
             for(var i=0; i < Length; i++)
-                dst[i] = f(data[i]);
+                dst[i] = f(Data[i]);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
         public Block256<N,U> Convert<U>()
             where U : unmanaged
-               => new Block256<N,U>(Cells.convert<T,U>(data));
+               => new Block256<N,U>(Blocks.convert<T,U>(Data));
 
         [MethodImpl(Inline)]
         public string Format()
-            => data.Format();    
+            => Data.Format();    
 
         public Block256<N,T> Replicate()
-            => new Block256<N,T>(data.Replicate());
+            => new Block256<N,T>(Data.Replicate());
 
         public RowVector256<T> Denaturalize()
-            => data;
+            => Data;
 
         public override bool Equals(object other)
             => throw new NotSupportedException();

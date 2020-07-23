@@ -10,9 +10,9 @@ namespace Z0
     using Z0.Machines;
 
     using static Fsm1Spec;
-    using static Fsm1Spec.States;
-    using static Fsm1Spec.Events;
-    using static Fsm1Spec.Outputs;
+    using static Fsm1Spec.StateKinds;
+    using static Fsm1Spec.EventKinds;
+    using static Fsm1Spec.OutputKinds;
 
     public abstract class FsmSpec<E,S,O>
     {
@@ -24,25 +24,25 @@ namespace Z0
 
     }
 
-    public class Fsm1Spec : FsmSpec<Events,States,Outputs>
+    public class Fsm1Spec : FsmSpec<EventKinds,StateKinds,OutputKinds>
     {
-        public enum States : byte
+        public enum StateKinds : byte
         {
             S0, S1, S2, S3, S4, S5
         }
 
-        public enum Events: byte
+        public enum EventKinds: byte
         {
             E1 , E2, E3, E4, E5, E6, E7
         }
 
-        public enum Outputs : byte
+        public enum OutputKinds : byte
         {            
             O0, O1, O2, O3, O4, O5, O6, O7, O8, O9, O10
         }
 
 
-        public override IEnumerable<OutputRule<Events,States,Outputs>> OutputRules
+        public override IEnumerable<OutputRule<EventKinds,StateKinds,OutputKinds>> OutputRules
         {
             get
             {
@@ -54,7 +54,7 @@ namespace Z0
             }
         }
 
-        public override IEnumerable<TransitionRule<Events,States>> TransRules
+        public override IEnumerable<TransitionRule<EventKinds,StateKinds>> TransRules
         {
             get
             {
@@ -64,7 +64,6 @@ namespace Z0
                 yield return (E1, S3, S4);
                 yield return (E1, S4, S5);
             }
-        }
-        
+        }       
     }
 }

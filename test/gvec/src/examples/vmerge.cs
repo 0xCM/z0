@@ -16,14 +16,14 @@ namespace Z0
             var b = vparts(n128, 4u,5,6,7);
             var c = vparts(n128, 8u,9,10,11);
             var d = vparts(n128, 12u,13,14,15);
-            var x0 = dvec.vmergelo(v8u(a), v8u(b));
-            var y0 = dvec.vmergelo(v8u(c), v8u(d));
-            var z0 = v8u(dvec.vmergelo(v16u(x0),v16u(y0)));
-            var z1 = v8u(dvec.vmergehi(v16u(x0),v16u(y0)));
-            var x1 = dvec.vmergehi(v8u(a), v8u(b));
-            var y1 = dvec.vmergehi(v8u(c), v8u(d));
-            var z2 = v8u(dvec.vmergelo(v16u(x1),v16u(y1)));
-            var z3 = v8u(dvec.vmergehi(v16u(x1),v16u(y1)));                            
+            var x0 = z.vmergelo(v8u(a), v8u(b));
+            var y0 = z.vmergelo(v8u(c), v8u(d));
+            var z0 = v8u(z.vmergelo(v16u(x0),v16u(y0)));
+            var z1 = v8u(z.vmergehi(v16u(x0),v16u(y0)));
+            var x1 = z.vmergehi(v8u(a), v8u(b));
+            var y1 = z.vmergehi(v8u(c), v8u(d));
+            var z2 = v8u(z.vmergelo(v16u(x1),v16u(y1)));
+            var z3 = v8u(z.vmergehi(v16u(x1),v16u(y1)));                            
         }
 
         public void vmerge_lo()
@@ -39,8 +39,8 @@ namespace Z0
             var count = V0.vcount(w,t);
             var x = gvec.vinc(w,t);
             var y = gvec.vinc(w, (x.LastCell() + 1));
-            var z = dvec.vmergelo(x,y);
-            var fmt = $"({x.Format()},{y.Format()}) -> {z.Format()}";
+            var _z = z.vmergelo(x,y);
+            var fmt = $"({x.Format()},{y.Format()}) -> {_z.Format()}";
         }
         
         public void vmerge_256()
@@ -49,11 +49,11 @@ namespace Z0
             var t = z8;
             var x = gvec.vinc(w,t);
             var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
-            var z = dvec.vmerge(x,y);
+            var _z = z.vmerge(x,y);
             Notify($"vmerge_256");
             Notify(x.Format());
             Notify(y.Format());
-            Notify(z.Format());
+            Notify(_z.Format());
         }
 
         public void vmerge_hi()
@@ -62,17 +62,17 @@ namespace Z0
             var t = z8;
             var x = gvec.vinc(w,t);
             var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
-            var z = dvec.vmergehi(x,y);
+            var _z = z.vmergehi(x,y);
             Notify($"vmerge_hi");
             Notify(x.Format());
             Notify(y.Format());
-            Notify(z.Format());
+            Notify(_z.Format());
         }
 
         public void vmerge_hilo()
         {
             var x = V0.vinc<byte>(n128);
-            var y = V0d.vadd(x, V0d.vbroadcast(n128, (byte)16));
+            var y = z.vadd(x, V0d.vbroadcast(n128, (byte)16));
 
             var lo = gvec.vmergelo(x,y);
             var hi = gvec.vmergehi(x,y);

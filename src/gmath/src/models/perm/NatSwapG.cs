@@ -30,7 +30,7 @@ namespace Z0
         /// <summary>
         /// The monodial zero
         /// </summary>
-        public static readonly NatSwap<N,T> Zero = default;
+        public static NatSwap<N,T> Zero => default;
 
         /// <summary>
         /// Creates a chain of transpositions, that includes the initial transposition

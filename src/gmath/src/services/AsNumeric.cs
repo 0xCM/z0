@@ -12,110 +12,10 @@ namespace Z0
     
     partial class AsNumeric
     {                
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static sbyte as8i<S>(S src)
-            where S : unmanaged
-                => present<S,sbyte>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static byte as8u<S>(S src)
-            where S : unmanaged
-                => present<S,byte>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static short as16i<S>(S src)
-            where S : unmanaged
-                => present<S,short>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ushort as16u<S>(S src)
-            where S : unmanaged
-                => present<S,ushort>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int as32i<S>(S src)
-            where S : unmanaged
-                => present<S,int>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static uint as32u<S>(S src)
-            where S : unmanaged
-                => present<S,uint>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static long as64i<S>(S src)
-            where S : unmanaged
-                => present<S,long>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ulong as64u<S>(S src)
-            where S : unmanaged
-                => present<S,ulong>(src);        
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static float as32f<S>(S src)
-            where S : unmanaged
-                => present<S,float>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static double as64f<S>(S src)
-            where S : unmanaged
-                => present<S,double>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref sbyte as8i<S>(ref S src)
-            where S : unmanaged
-                => ref present<S,sbyte>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref byte as8u<S>(ref S src)
-            where S : unmanaged
-                => ref present<S,byte>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref short as16i<S>(ref S src)
-            where S : unmanaged
-                => ref present<S,short>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref ushort as16u<S>(ref S src)
-            where S : unmanaged
-                => ref present<S,ushort>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref int as32i<S>(ref S src)
-            where S : unmanaged
-                => ref present<S,int>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref uint as32u<S>(ref S src)
-            where S : unmanaged
-                => ref present<S,uint>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref long as64i<S>(ref S src)
-            where S : unmanaged
-                => ref present<S,long>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref ulong as64u<S>(ref S src)
-            where S : unmanaged
-                => ref present<S,ulong>(ref src);        
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref float as32f<S>(ref S src)
-            where S : unmanaged
-                => ref present<S,float>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref double as64f<S>(ref S src)
-            where S : unmanaged
-                => ref present<S,double>(ref src);
-
         [MethodImpl(Inline)]
         public static R presenter<R,S,T>()
             where T : unmanaged
-            where R : unmanaged, IAsNumeric<R,S,T>
+            where R : unmanaged, IAs<R,S,T>
                 => presenter_u<R,S,T>();            
 
         [MethodImpl(Inline)]
@@ -176,7 +76,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static R presenter_u<R,S,T>()
             where T : unmanaged
-            where R : unmanaged, IAsNumeric<R,S,T>
+            where R : unmanaged, IAs<R,S,T>
         {
             if(typeof(T) == typeof(byte))            
                 return generalize<AsU8<S>,R>(U8<S>());
@@ -193,7 +93,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static R presenter_i<R,S,T>()
             where T : unmanaged
-            where R : unmanaged, IAsNumeric<R,S,T>
+            where R : unmanaged, IAs<R,S,T>
         {
             if(typeof(T) == typeof(sbyte))            
                 return generalize<AsI8<S>,R>(I8<S>());
@@ -210,7 +110,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static R presenter_f<R,S,T>()
             where T : unmanaged
-            where R : unmanaged, IAsNumeric<R,S,T>
+            where R : unmanaged, IAs<R,S,T>
         {
             if(typeof(T) == typeof(byte))            
                 return generalize<AsF32<S>,R>(F32<S>());
@@ -312,9 +212,9 @@ namespace Z0
 
     }
 
-    public readonly struct AsNumeric<R,S,T> : IAsNumeric<S,T>
+    public readonly struct AsNumeric<R,S,T> : IAs<S,T>
         where T : unmanaged
-        where R : unmanaged, IAsNumeric<S,T>
+        where R : unmanaged, IAs<S,T>
     {
         [MethodImpl(Inline)]
         public static implicit operator R(AsNumeric<R,S,T> src)
@@ -337,7 +237,7 @@ namespace Z0
             => ref Reification.As(ref src);
     }
 
-    public readonly struct AsU8<S> : IAsNumeric<AsU8<S>,S,byte>
+    public readonly struct AsU8<S> : IAs<AsU8<S>,S,byte>
     {                
         [MethodImpl(Inline)]
         public byte As(S src)
@@ -348,7 +248,7 @@ namespace Z0
             => ref Unsafe.As<S,byte>(ref src);
     }
 
-    public readonly struct AsU16<S> : IAsNumeric<AsU16<S>,S,ushort>
+    public readonly struct AsU16<S> : IAs<AsU16<S>,S,ushort>
     {        
         [MethodImpl(Inline)]
         public ushort As(S src)
@@ -359,7 +259,7 @@ namespace Z0
             => ref Unsafe.As<S,ushort>(ref src);            
     }
 
-    public readonly struct AsU32<S> : IAsNumeric<AsU32<S>,S,uint>
+    public readonly struct AsU32<S> : IAs<AsU32<S>,S,uint>
     {        
         [MethodImpl(Inline)]
         public uint As(S src)
@@ -370,7 +270,7 @@ namespace Z0
             => ref Unsafe.As<S,uint>(ref src);            
     }
 
-    public readonly struct AsU64<S> : IAsNumeric<AsU64<S>,S,ulong>
+    public readonly struct AsU64<S> : IAs<AsU64<S>,S,ulong>
     {        
         [MethodImpl(Inline)]
         public ulong As(S src)
@@ -381,7 +281,7 @@ namespace Z0
             => ref Unsafe.As<S,ulong>(ref src);            
     }
 
-    public readonly struct AsI8<S> : IAsNumeric<AsI8<S>,S,sbyte>
+    public readonly struct AsI8<S> : IAs<AsI8<S>,S,sbyte>
     {        
         [MethodImpl(Inline)]
         public sbyte As(S src)
@@ -392,7 +292,7 @@ namespace Z0
             => ref Unsafe.As<S,sbyte>(ref src);            
     }
 
-    public readonly struct AsI16<S> : IAsNumeric<AsI16<S>,S,short>
+    public readonly struct AsI16<S> : IAs<AsI16<S>,S,short>
     {        
         [MethodImpl(Inline)]
         public short As(S src)
@@ -403,7 +303,7 @@ namespace Z0
             => ref Unsafe.As<S,short>(ref src);            
     }
 
-    public readonly struct AsI32<S> : IAsNumeric<AsI32<S>,S,int>
+    public readonly struct AsI32<S> : IAs<AsI32<S>,S,int>
     {        
         [MethodImpl(Inline)]
         public int As(S src)
@@ -414,7 +314,7 @@ namespace Z0
             => ref Unsafe.As<S,int>(ref src);            
     }
 
-    public readonly struct AsI64<S> : IAsNumeric<AsI64<S>,S,long>
+    public readonly struct AsI64<S> : IAs<AsI64<S>,S,long>
     {        
         [MethodImpl(Inline)]
         public long As(S src)
@@ -425,7 +325,7 @@ namespace Z0
             => ref Unsafe.As<S,long>(ref src);            
     }
 
-    public readonly struct AsF32<S> : IAsNumeric<AsF32<S>,S,float>
+    public readonly struct AsF32<S> : IAs<AsF32<S>,S,float>
     {        
         [MethodImpl(Inline)]
         public float As(S src)
@@ -436,7 +336,7 @@ namespace Z0
             => ref Unsafe.As<S,float>(ref src);            
     }
 
-    public readonly struct AsF64<S> : IAsNumeric<AsF64<S>,S,double>
+    public readonly struct AsF64<S> : IAs<AsF64<S>,S,double>
     {        
         [MethodImpl(Inline)]
         public double As(S src)

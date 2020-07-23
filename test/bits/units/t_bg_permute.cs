@@ -14,12 +14,11 @@ namespace Z0
             Claim.eq(p.Length,32);
             
             var g = SubGrid.init(p);
-
-
         }
+        
         public void bg_permute_16x4()
         {
-            var identity = Symbolic.identity(n16);
+            var identity = Permutary.identity(n16);
             var iterms = identity.Literals();
             var g1 = identity.ToBitGrid();
             var iperm = identity.ToNatural();            
@@ -30,7 +29,7 @@ namespace Z0
 
         public void bg_permute_8x3()
         {
-            var id = Symbolic.identity(n8);
+            var id = Permutary.identity(n8);
             var idterms = id.Literals();
             var g1 = id.ToSubGrid();
             var iperm = id.ToNatural();
@@ -41,7 +40,7 @@ namespace Z0
         public void perm_8x32_digits()
         {
             var symbols = NatSpan.parts(n8, Perm8L.B, Perm8L.A, Perm8L.D, Perm8L.C, Perm8L.F, Perm8L.E, Perm8L.H, Perm8L.G);
-            var spec = Symbolic.assemble(symbols[0], symbols[1], symbols[2], symbols[3], symbols[4], symbols[5], symbols[6], symbols[7]);
+            var spec = Permutary.assemble(symbols[0], symbols[1], symbols[2], symbols[3], symbols[4], symbols[5], symbols[6], symbols[7]);
             
             //[o1, o0, o3, o2, o5, o4, o7, o6]
             var digits = spec.ToDigits();
@@ -52,13 +51,13 @@ namespace Z0
 
         public void bg_perm_8x32_bits()
         {
-            var p1 = Symbolic.identity(n8);
+            var p1 = Permutary.identity(n8);
             var v1 = BitVector24.FromEnum(p1);
             var p1F = p1.ToBitString(24).Format(3);            
             var v1F = v1.Format(3);
             ClaimPrimalSeq.eq(p1F, v1F);
             
-            var p2 = Symbolic.reversed(n8);
+            var p2 = Permutary.reversed(n8);
             var p2F = p2.ToBitString(24).Format(3);
             var v2 = BitVector24.FromEnum(p2);
             var v2F = v2.Format(3);

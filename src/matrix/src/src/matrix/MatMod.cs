@@ -85,7 +85,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             //var x = new uint[v.Length];
-            var x = RowVector.alloc<N,uint>();
+            var x = RowVectors.alloc<N,uint>();
 
             for(var i = 0; i < u.Length; ++i) 
             for(int j = 0; j < v.Length; j++)
@@ -109,7 +109,7 @@ namespace Z0
             //var x = new ulong[v.Length];
             var rc = A.RowCount;
             var cc = A.ColCount;
-            var temp = RowVector.alloc<N,ulong>();
+            var temp = RowVectors.alloc<N,ulong>();
             for(var i = 0; i < rc;  ++i) 
             for(var j = 0; j < cc; j++)
                 temp[i] = fma(A[i,j], v[j], temp[i], m);
@@ -155,7 +155,7 @@ namespace Z0
             var rc = C.RowCount;
             var cc = C.ColCount;
             var W = Matrix.alloc<N,uint>();
-            var v = RowVector.alloc<N,uint>();
+            var v = RowVectors.alloc<N,uint>();
 
             for (var i = 0; i < cc;  ++i) 
             {
@@ -189,7 +189,7 @@ namespace Z0
             var cc = C.ColCount;
             
             var W = Matrix.alloc<N,ulong>();
-            var v = RowVector.alloc<N,ulong>();
+            var v = RowVectors.alloc<N,ulong>();
 
             for (var i = 0; i < cc;  ++i) 
             {
@@ -220,7 +220,7 @@ namespace Z0
         {
             int r = C.RowCount;
             int c = B.ColCount;
-            var V = RowVector.alloc<N,double>();
+            var V = RowVectors.alloc<N,double>();
             var W = Matrix.alloc<N,double>();
             for (var i = 0; i < c;  ++i) 
             {

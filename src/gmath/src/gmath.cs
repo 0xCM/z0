@@ -22,11 +22,6 @@ namespace Z0
 
     }
 
-    [ApiHost]
-    public partial class num : IApiHost<num>
-    {
-
-    }
 
     public static partial class XTend
     {

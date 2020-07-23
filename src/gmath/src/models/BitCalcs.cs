@@ -14,101 +14,6 @@ namespace Z0
     public readonly struct BitCalcs
     {
         /// <summary>
-        /// Computes the minimum numbet of bytes required to hold a specified number of bits
-        /// </summary>
-        /// <param name="bc">The number of bits for which storage is required</param>
-        [MethodImpl(Inline), Op]
-        public static int minbytes(int bc)
-            => bc / 8 + (bc % 8 == 0 ? 0 : 1);  
-
-        /// <summary>
-        /// Computes the minimum number of cells required to store a specified number of bits
-        /// </summary>
-        /// <param name="w">The cell width</param>
-        /// <param name="n">The bit count/number of matrix columns</param>
-        [MethodImpl(Inline), Op]
-        public static int mincells(ulong w, ulong n)
-        {
-            // if a single cell covers a column then there's no need for computation
-            if(w >= n)
-                return 1;
-
-            var q = n / w;
-            var r = n % w;
-            return (int)(r == 0 ? q : q + 1);
-        }
-
-        /// <summary>
-        /// Computes the minimum number of cells required to store data of a given bit width
-        /// </summary>
-        /// <param name="bc">The number of bits for which storage is required</param>
-        /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ulong mincells<T>(ulong bc)
-            where T : unmanaged
-        {
-            if(bitsize<T>() >= bc)
-                return 1;
-
-            var q = bc / (uint)bitsize<T>();
-            var r = bc % (uint)bitsize<T>();
-            return q + (r != 0u ? 1u : 0u);
-        }
-
-        /// <summary>
-        /// Computes the number of packed cells required to cover a rectangular area
-        /// </summary>
-        /// <param name="rows">The grid row count</param>
-        /// <param name="cols">The grid col count</param>
-        /// <param name="cw">The storage cell width</param>
-        [MethodImpl(Inline), Op]
-        public static uint aligned(uint rows, uint cols, uint w)
-            => GridCells.aligned(rows,cols,w);
-
-        /// <summary>
-        /// Computes the number of packed cells required to cover a rectangular area
-        /// </summary>
-        /// <param name="rows">The grid row count</param>
-        /// <param name="cols">The grid col count</param>
-        /// <param name="width">The storage cell width</param>
-        [MethodImpl(Inline), Op]
-        public static uint tablecells(uint rows, uint cols, uint width)
-            => GridCells.count(rows, cols, width);
-
-        /// <summary>
-        /// Computes the 0-based linear index determined by column width and a row/col coordinate
-        /// </summary>
-        /// <param name="colwidth">The bit-width of a grid column</param>
-        /// <param name="row">The 0-based row index</param>
-        /// <param name="col">The 0-based col index</param>
-        [MethodImpl(Inline), Op]
-        public static int linear(int colwidth, int row, int col)
-            => row*colwidth + col;
-
-        /// <summary>
-        /// Computes the 0-based linear index determined by a row/col coordinate and natural column width
-        /// </summary>
-        /// <param name="row">The grid row</param>
-        /// <param name="col">The grid columns</param>
-        /// <typeparam name="N">The grid column type</typeparam>
-        [MethodImpl(Inline)]
-        public static int linear<N>(int row, int col, N n = default)
-            where N : unmanaged, ITypeNat
-                => row * (int)value<N>() + col;
-
-        /// <summary>
-        /// Computes the number of bytes required to cover a grid, predicated on row/col counts
-        /// </summary>
-        /// <param name="rows">The number of grid rows</param>
-        /// <param name="cols">The number of grid columns</param>
-        [MethodImpl(Inline), Op]
-        public static int tablesize(int rows, int cols)
-        {
-            var points = rows*cols;
-            return (points >> 3) + (points % 8 != 0 ? 1 : 0);
-        }
-
-        /// <summary>
         /// Computes the number of bytes required to cover a grid, predicated on row/col counts
         /// </summary>
         /// <param name="rows">The number of grid rows</param>
@@ -123,6 +28,15 @@ namespace Z0
             return gmath.add(gmath.srl(points, 3), rem);
         }
 
+        [MethodImpl(Inline), Op]
+        public static ulong tablesize(ulong rows, ulong cols)
+        {
+            var points = rows*cols;
+            var mod = math.mod(points, 8ul);
+            var rem = math.nonz(mod) ? 1ul : 0ul;
+            return math.add(math.srl(points, 3), rem);
+        }
+
         /// <summary>
         /// Computes the number of cells required to cover a rectangular region predicated on the 
         /// parametric cell type and supplied row/col dimensions
@@ -133,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong tablecells<T>(uint rows, uint cols)
             where T : unmanaged
-                => tablecells(rows,  cols, bitsize<T>());
+                => GridCells.count(rows,  cols, bitsize<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols
@@ -145,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong tableblocks<T>(N256 w, uint rows, uint cols)
             where T : unmanaged
-                => Cells.cellcover<T>(w, tablecells<T>(rows,cols));
+                => Blocks.cellcover<T>(w, tablecells<T>(rows,cols));
 
         /// <summary>
         /// Computes the number of bits covered by a rectangular region and predicated on natural dimensions
@@ -172,7 +86,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => tablecells((uint)value(m), (uint)value(n), bitsize<T>());
+                => GridCells.count((uint)value(m), (uint)value(n), bitsize<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions
@@ -189,6 +103,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Cells.cellcover<T>(w, tablecells<T>((uint)value(m), (uint)value(n)));        
+                => Blocks.cellcover<T>(w, tablecells<T>((uint)value(m), (uint)value(n)));        
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System;
 
     [ApiHost("api")]
-    public partial class Blocked : IApiHost<Blocked>
+    public partial class Blocked
     {
 
     }

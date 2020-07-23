@@ -12,11 +12,10 @@ namespace Z0
 
     using Z0.Machines;
 
-    using static Fsm1Spec.States;
+    using static Fsm1Spec.StateKinds;
     
     public class Fsm1Test : UnitTest<Fsm1Test>
     {
-
         public void Run()
         {
             var spec = new Fsm1Spec();

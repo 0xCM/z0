@@ -91,7 +91,7 @@ namespace Z0
             if(row < 0 || row >= Rows)
                 throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
             
-            return RowVector.blockload<N,T>(data.Slice(row * Cols, Cols));
+            return RowVectors.blockload<N,T>(data.Slice(row * Cols, Cols));
         }
 
         [MethodImpl(Inline)]
@@ -117,7 +117,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block256<M,T> GetCol(int col)
         {
-            var alloc = RowVector.blockalloc<M,T>();
+            var alloc = RowVectors.blockalloc<M,T>();
             return GetCol(col, ref alloc);
         }
 

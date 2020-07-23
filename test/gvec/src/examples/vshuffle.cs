@@ -158,7 +158,7 @@ namespace Z0
         public void vshuf16x8()
         {
             var src = V0.vinc<byte>(n128);
-            var perm = Permute.natural(Symbolic.reversed(n16));
+            var perm = Permute.natural(Permutary.reversed(n16));
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i],j);
 

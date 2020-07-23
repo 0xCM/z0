@@ -107,7 +107,7 @@ namespace Z0
             var a0 = gvec.vinc(ws,1u);
             var a1 = gvec.vinc(ws,a0.LastCell() + 1);
             var b0 = dvec.vmul(a0,a1);
-            var b1 = dvec.vmul(dvec.vswaphl(a0), dvec.vswaphl(a1));
+            var b1 = dvec.vmul(z.vswaphl(a0), z.vswaphl(a1));
             Trace("x", a0.Format());
             Trace("y", a1.Format());
             Trace("lo", b0.Format());
@@ -121,7 +121,7 @@ namespace Z0
                 var x1 = math.mul64(vcell(x,1), vcell(y,1));
                 var x2 = math.mul64(vcell(x,2), vcell(y,2));
                 var x3 = math.mul64(vcell(x,3), vcell(y,3));
-                var expect = Vectors.vparts(wt, x0,x1,x2,x3);
+                var expect = z.vparts(wt, x0,x1,x2,x3);
                 var actual = dvec.vmul(x,y);
 
                 Claim.veq(expect,actual);

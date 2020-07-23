@@ -12,53 +12,53 @@ namespace Z0
     [ApiHost("numeric.array")]
     public readonly struct NumericArray
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] to<T>(byte[] src, T[] dst)
             where T : unmanaged
                 => to<byte,T>(src, dst);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] to<T>(sbyte[] src, T[] dst)
             where T : unmanaged
                 => to<sbyte,T>(src, dst);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] to<T>(short[] src, T[] dst)
             where T : unmanaged
                 => to<short,T>(src, dst);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] to<T>(ushort[] src, T[] dst)
             where T : unmanaged
                 => to<ushort,T>(src, dst);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] to<T>(int[] src, T[] dst)
             where T : unmanaged
                 => to<int,T>(src, dst);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] to<T>(uint[] src, T[] dst)
             where T : unmanaged
                 => to<uint,T>(src, dst);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] to<T>(long[] src, T[] dst)
             where T : unmanaged
                 => to<long,T>(src, dst);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] to<T>(ulong[] src, T[] dst)
             where T : unmanaged
                 => to<ulong,T>(src, dst);
 
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] to<T>(float[] src, T[] dst)
             where T : unmanaged
                 => to<float,T>(src, dst);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] to<T>(double[] src, T[] dst)
             where T : unmanaged
                 => to<double,T>(src, dst);

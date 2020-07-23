@@ -85,12 +85,12 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var v4 = RowVector.blockalloc<N,T>();
+            var v4 = RowVectors.blockalloc<N,T>();
             for(var i=0; i< CycleCount; i++)            
             {
                 var v1 = Random.VectorBlock<N,T>();
                 var v2 = Random.VectorBlock<N,T>();
-                var v3 = RowVector.blockload(add(v1.Unsized,v2.Unsized), n);
+                var v3 = RowVectors.blockload(add(v1.Unsized,v2.Unsized), n);
                 BlockVectorOps.add(ref v1, v2);
                 Claim.Require(v3 == v1);
             }
@@ -103,7 +103,7 @@ namespace Z0
             var opcount = CycleCount*RoundCount;
             var sw = stopwatch(false);
             var opname = $"vblock_add_{n}x{bitsize<T>()}";
-            var dst = RowVector.blockalloc<N,T>();
+            var dst = RowVectors.blockalloc<N,T>();
             for(var i=0; i<opcount; i++)
             {
                 var v1 = Random.VectorBlock<N,T>();

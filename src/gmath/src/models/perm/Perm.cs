@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
+    using static z;
 
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
@@ -32,11 +32,12 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="p">The permutation to apply</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly Span<T> apply<T>(Perm p, ReadOnlySpan<T> src, in Span<T> dst)
-        {            
-            for(var i=0u; i<p.Length; i++)
-                seek(dst,i) = skip(src,(uint)p[i]);                
-            return ref dst;
+        public static void apply<T>(Perm p, ReadOnlySpan<T> src, Span<T> dst)
+        {   
+            var terms = span(p.terms);                     
+            var count = terms.Length;
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = skip(src,(uint)skip(terms,i));                
         }
 
         /// <summary>
@@ -63,7 +64,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<T> apply<T>(Perm p, ReadOnlySpan<T> src)
-            => apply(p,src, sys.alloc<T>(src.Length));
+        {
+            var dst = sys.alloc<T>(src.Length);
+            apply(p,src, dst);
+            return dst;
+        }
 
         /// <summary>
         /// Creates a generic permutation by application of a sequence of transpositions to the identity permutation

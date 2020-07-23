@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1

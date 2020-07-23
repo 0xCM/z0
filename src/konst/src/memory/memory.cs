@@ -27,6 +27,13 @@ namespace Z0
             where T :unmanaged  
                 => sys.copy(z.view<S,byte>(src), ref edit<T,byte>(add(dst, dstOffset)), (uint)srcCount);
 
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static void copy<T>(in T src, uint count, ref T dst, ref uint index)
+        {
+            for(var j=0u; j<count; j++)
+                z.seek(dst, index++) = z.skip(src, j);
+        }
+        
         /// <summary>
         /// Copies a contiguous segments of values to a span
         /// </summary>

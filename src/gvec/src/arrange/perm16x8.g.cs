@@ -40,13 +40,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(V0d.vperm16x8(v8u(src), spec));
+                return vgeneric<T>(z.vperm16x8(v8u(src), spec));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(V0d.vperm16x8(v16u(src), spec));
+                return vgeneric<T>(z.vperm16x8(v16u(src), spec));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(V0d.vperm16x8(v32u(src), spec));
+                return vgeneric<T>(z.vperm16x8(v32u(src), spec));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(V0d.vperm16x8(v64u(src), spec));
+                return vgeneric<T>(z.vperm16x8(v64u(src), spec));
             else
                 return vperm16x8_i(src,spec);
         }
@@ -56,13 +56,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(V0d.vperm16x8(v8i(src), spec));
+                return vgeneric<T>(z.vperm16x8(v8i(src), spec));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(V0d.vperm16x8(v16i(src), spec));
+                return vgeneric<T>(z.vperm16x8(v16i(src), spec));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(V0d.vperm16x8(v32i(src), spec));
+                return vgeneric<T>(z.vperm16x8(v32i(src), spec));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(V0d.vperm16x8(v64i(src), spec));
+                return vgeneric<T>(z.vperm16x8(v64i(src), spec));
             else
                 throw no<T>();
         }
@@ -72,13 +72,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(V0d.vperm16x8(v8u(src), spec));
+                return vgeneric<T>(z.vperm16x8(v8u(src), spec));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(V0d.vperm16x8(v16u(src), spec));
+                return vgeneric<T>(z.vperm16x8(v16u(src), spec));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(V0d.vperm16x8(v32u(src), spec));
+                return vgeneric<T>(z.vperm16x8(v32u(src), spec));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(V0d.vperm16x8(v64u(src), spec));
+                return vgeneric<T>(z.vperm16x8(v64u(src), spec));
             else
                 return vperm16x8_i(src,spec);
         }
@@ -88,13 +88,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(V0d.vperm16x8(v8i(src), spec));
+                return vgeneric<T>(z.vperm16x8(v8i(src), spec));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(V0d.vperm16x8(v16i(src), spec));
+                return vgeneric<T>(z.vperm16x8(v16i(src), spec));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(V0d.vperm16x8(v32i(src), spec));
+                return vgeneric<T>(z.vperm16x8(v32i(src), spec));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(V0d.vperm16x8(v64i(src), spec));
+                return vgeneric<T>(z.vperm16x8(v64i(src), spec));
             else
                 throw no<T>();
         }

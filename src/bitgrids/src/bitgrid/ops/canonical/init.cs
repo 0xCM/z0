@@ -510,7 +510,7 @@ namespace Z0
         {            
             var w = W256.W;
             var blocks = Z0.Blocks.alloc<T>(w, BitCalcs.tableblocks<T>(w, m, n));
-            Z0.Blocks.broadcast(d, blocks);
+            broadcast(d, blocks);
             return new BitGrid<T>(blocks,(int)m,(int)n);            
         }
 

@@ -258,9 +258,9 @@ namespace Z0.Mkl.Test
             where N : unmanaged, ITypeNat
         {
             var A = Matrix.blockalloc<M,N,double>();
-            var x = RowVector.blockalloc<N,double>();
-            var y = RowVector.blockalloc<M,double>();
-            var z = RowVector.blockalloc<M,double>();
+            var x = RowVectors.blockalloc<N,double>();
+            var y = RowVectors.blockalloc<M,double>();
+            var z = RowVectors.blockalloc<M,double>();
             var sw = stopwatch(false);
 
             for(var i=0; i<cycles; i++)

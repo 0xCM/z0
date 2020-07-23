@@ -29,6 +29,17 @@ namespace Z0
         /// <param name="col">The grid columns</param>
         /// <typeparam name="N">The grid column type</typeparam>
         [MethodImpl(Inline)]
+        public static int linear<N>(int row, int col, N n = default)
+            where N : unmanaged, ITypeNat
+                => row * (int)value<N>() + col;
+
+        /// <summary>
+        /// Computes the 0-based linear index determined by a row/col coordinate and natural column width
+        /// </summary>
+        /// <param name="row">The grid row</param>
+        /// <param name="col">The grid columns</param>
+        /// <typeparam name="N">The grid column type</typeparam>
+        [MethodImpl(Inline)]
         public static uint linear<W>(uint row, uint col, W w = default)
             where W : unmanaged, IDataWidth
                 => (uint)row * (uint)Widths.data(w) + col;

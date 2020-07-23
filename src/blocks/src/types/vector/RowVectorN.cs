@@ -105,7 +105,7 @@ namespace Z0
         public RowVector<N,U> Map<U>(Func<T,U> f)
             where U:unmanaged
         {
-            var dst = RowVector.alloc<N,U>();
+            var dst = RowVectors.alloc<N,U>();
             return Map(f, ref dst);
         }
 

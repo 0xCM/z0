@@ -9,8 +9,9 @@ namespace Z0
 
     using static Konst;
 
+
     [ApiHost]
-    public readonly struct AppEvents
+    public readonly struct Events
     {
         /// <summary>
         /// Creates an informational event

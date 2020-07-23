@@ -12,7 +12,7 @@ namespace Z0.Mkl.Test
         {
             var lhs = RVec<float>();
             var rhs = RVec<float>();
-            var dst1 = RowVector.blockalloc<float>(lhs.Length);
+            var dst1 = RowVectors.blockalloc<float>(lhs.Length);
             mkl.mul(lhs,rhs, ref dst1);
             
             var dst2 = lhs.Replicate();
@@ -24,7 +24,7 @@ namespace Z0.Mkl.Test
         {
             var lhs = Random.VectorBlock<N256,double>();
             var rhs = Random.VectorBlock<N256,double>();
-            var dst1 = RowVector.blockalloc<N256,double>();
+            var dst1 = RowVectors.blockalloc<N256,double>();
             mkl.mul(lhs,rhs, ref dst1);
             
             var dst2 = lhs.Replicate();
@@ -36,7 +36,7 @@ namespace Z0.Mkl.Test
         {
             var lhs1 = RVec<double>(samples);
             var rhs1 = RVec<double>(samples);
-            var dst1 = RowVector.blockalloc<double>(samples);
+            var dst1 = RowVectors.blockalloc<double>(samples);
 
 
             var sw1 = stopwatch();

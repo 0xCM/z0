@@ -161,7 +161,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public (T i, T j) ToTuple<T>()
             where T : unmanaged
-                => (Cast.to<T>(i), Cast.to<T>(j));
+                => (z.convert<T>(i), z.convert<T>(j));
 
         /// <summary>
         /// Creates a copy

@@ -12,6 +12,10 @@ namespace Z0
     public readonly struct BrokerClient<E> : IBrokerClient<E>
         where E : IEventBroker
     {
+        public E Broker {get;}
+
+        public IAppMsgSink Sink {get;}        
+     
         [MethodImpl(Inline)]
         public static IBrokerClient<E> Create(E broker, IAppMsgSink sink)
             => new BrokerClient<E>(broker,sink);
@@ -19,12 +23,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BrokerClient(E broker, IAppMsgSink sink)
         {
-            this.Broker = broker;
+            Broker = broker;
             Sink = sink;
-        }
-        
-        public E Broker {get;}
-
-        public IAppMsgSink Sink {get;}
+        }        
     }
 }

@@ -65,7 +65,7 @@ namespace Z0
             //     _ => $"Executing an unkinded step"
             // };
 
-            dst.Deposit(AppEvents.create($"{status}", info, StartFlair));
+            dst.Deposit(Events.create($"{status}", info, StartFlair));
         }
         
         const AppMsgColor StartFlair = AppMsgColor.Blue;
@@ -85,34 +85,34 @@ namespace Z0
             => FileName.Define($"{rk.ToString().ToLower()}", mk.Ext());
         
         public static void Emitting(this MK mk, IAppEventSink dst)
-            => dst.Deposit(AppEvents.create($"{mk}_running", $"Emitting {mk} data files", StartFlair));
+            => dst.Deposit(Events.create($"{mk}_running", $"Emitting {mk} data files", StartFlair));
 
         public static void Emitting(this MK mk, FilePath path, IAppEventSink dst)
-            => dst.Deposit(AppEvents.create($"{mk}_running", $"{mk}: {path}", StartFlair));
+            => dst.Deposit(Events.create($"{mk}_running", $"{mk}: {path}", StartFlair));
 
         public static void Emitted(this MK mk, IAppEventSink dst)
-            => dst.Deposit(AppEvents.create($"{mk}_ran", $"Completed {mk} emission", EndFlair));
+            => dst.Deposit(Events.create($"{mk}_ran", $"Completed {mk} emission", EndFlair));
 
         public static void Emitting(this PartRecordKind rk,  FilePath path, IAppEventSink dst)
-            => dst.Deposit(AppEvents.create($"{rk}_running", $"{rk}: {path}", StartFlair));
+            => dst.Deposit(Events.create($"{rk}_running", $"{rk}: {path}", StartFlair));
 
         public static void Emitted(this PartRecordKind rk, PartId part, IAppEventSink dst)
-            => dst.Deposit(AppEvents.create($"{rk}_ran", $"Emitted {rk} {part.Format()} records", EndFlair));
+            => dst.Deposit(Events.create($"{rk}_ran", $"Emitted {rk} {part.Format()} records", EndFlair));
 
         public static void Running(this FolderPath path, IAppEventSink dst)        
-            => dst.Deposit(AppEvents.create("prepare", $"Preparing archive {path}", StartFlair));
+            => dst.Deposit(Events.create("prepare", $"Preparing archive {path}", StartFlair));
 
         public static void Ran(this FolderPath path, IAppEventSink dst)        
-            => dst.Deposit(AppEvents.create("prepared", $"Prepared archive {path}", EndFlair));
+            => dst.Deposit(Events.create("prepared", $"Prepared archive {path}", EndFlair));
 
         public static void Ran(this MK mk, PartId part, FilePath path, IAppEventSink dst)
-            => dst.Deposit(AppEvents.create($"{mk}_{part}", $"Emitted {mk} {part.Format()} records to {path}", EndFlair));
+            => dst.Deposit(Events.create($"{mk}_{part}", $"Emitted {mk} {part.Format()} records to {path}", EndFlair));
 
         public static void Ran(this PartRecordKind rk, IAppEventSink dst)
-            => dst.Deposit(AppEvents.create($"{rk}_ran", $"Completed {rk} emission", EndFlair));
+            => dst.Deposit(Events.create($"{rk}_ran", $"Completed {rk} emission", EndFlair));
 
         public static void Ran(this MK mk, IAppEventSink dst)
-            => dst.Deposit(AppEvents.create($"{mk}_ran", $"Completed {mk} emission", EndFlair));
+            => dst.Deposit(Events.create($"{mk}_ran", $"Completed {mk} emission", EndFlair));
     }
 
     public readonly struct MetadataEmitter : IMetadataEmitters

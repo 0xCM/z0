@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Describes an indivual term of a permutation p: the point of evaluation i and its image p(i)
