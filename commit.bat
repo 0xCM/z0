@@ -1,2 +1,2 @@
-J:\tools\git\bin\bash.exe J:\dev\projects\z0\commit.sh
+call "J:\tools\git\bin\bash.exe" "J:\dev\projects\z0\commit.sh"
 

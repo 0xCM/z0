@@ -16,11 +16,11 @@ namespace Z0
         [MethodImpl(Inline)]
         static ulong left<T>(in ClosedInterval<T> src)
             where T : unmanaged
-                => uint64(src.Left);
+                => uint64(src.Min);
 
         [MethodImpl(Inline)]
         static ulong right<T>(in ClosedInterval<T> src)
             where T : unmanaged
-                => uint64(src.Right);
+                => uint64(src.Max);
     }
 }

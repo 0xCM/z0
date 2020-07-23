@@ -42,7 +42,7 @@ namespace Z0
             }
         }
 
-        unsafe void Process(in MemRef src, in MemStore store)
+        unsafe void Process(in SegRef src, in MemoryStore store)
         {
             var reader = PointedReader.create(src.Address.Pointer<byte>(), (int)src.DataSize);
             var dstA = Spans.alloc<byte>(src.DataSize);            

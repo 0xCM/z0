@@ -28,14 +28,14 @@ namespace Z0
             get => Size.IsNonZero;
         }
 
-        public MemRef MemRef
+        public SegRef MemRef
         {
             [MethodImpl(Inline)]
-            get => new MemRef(Address, Size.IsEmpty ? 0 : (int)Size);
+            get => new SegRef(Address, Size.IsEmpty ? 0 : (int)Size);
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator MemRef(LocatedMethod src)
+        public static implicit operator SegRef(LocatedMethod src)
             => src.MemRef;
 
         [MethodImpl(Inline)]

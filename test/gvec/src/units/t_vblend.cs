@@ -135,10 +135,10 @@ namespace Z0
             var w = w32;
             var left =  vparts(n,0,1,2,3);
             var right = vparts(n,4,5,6,7);
-            Claim.veq(vparts(n,0,5,2,7), V0d.vblend(left,right,Blend4x32.LRLR));
-            Claim.veq(vparts(n,4,1,6,3), V0d.vblend(left,right,Blend4x32.RLRL));
-            Claim.veq(vparts(n,0,1,6,7), V0d.vblend(left,right,Blend4x32.LLRR));
-            Claim.veq(vparts(n,4,5,2,3), V0d.vblend(left,right,Blend4x32.RRLL));
+            Claim.veq(vparts(n,0,5,2,7), z.vblend(left,right,Blend4x32.LRLR));
+            Claim.veq(vparts(n,4,1,6,3), z.vblend(left,right,Blend4x32.RLRL));
+            Claim.veq(vparts(n,0,1,6,7), z.vblend(left,right,Blend4x32.LLRR));
+            Claim.veq(vparts(n,4,5,2,3), z.vblend(left,right,Blend4x32.RRLL));
         }
 
         public void vblend_8x32_basecases()

@@ -9,7 +9,7 @@ namespace Z0
  
     using static Konst;
     using static z;
-    
+        
     [ApiHost]
     public unsafe readonly struct ResStoreModels 
     {
@@ -18,22 +18,22 @@ namespace Z0
         internal static ResStoreModel Data 
             => ResStoreModel.Data;
         
-        public MemRef[] Refs 
+        public SegRef[] Refs 
         {
             [MethodImpl(Inline)]
             get => Data.provided();
         }
         
         [MethodImpl(Inline), Op]
-        public MemStore store()
-            => MemStore.Create(Refs);
+        public MemoryStore store()
+            => MemoryStore.Create(Refs);
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> leads()
             => Data.leads();
 
         [Op]
-        public ReadOnlySpan<MemoryAddress> locations(in MemStore store)
+        public ReadOnlySpan<MemoryAddress> locations(in MemoryStore store)
         {
             var sources = store.Sources;
             var results = sys.alloc<MemoryAddress>(sources.Length);
@@ -65,7 +65,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline), Op]
-        public MemRef memref(byte n)
+        public SegRef memref(byte n)
         {
             if(n == 0)
                 return memref(n0);
@@ -145,16 +145,16 @@ namespace Z0
                 => ref skip(span(n),(uint)i);    
 
         [MethodImpl(Inline)]
-        public unsafe MemRef memref<N>(N n = default)
+        public unsafe SegRef memref<N>(N n = default)
             where N : unmanaged, ITypeNat
         {                
             var src = span<N>(n); 
             var pSrc = gptr(z.first(src));
-            return new MemRef(pSrc, src.Length);
+            return new SegRef(pSrc, src.Length);
         }
 
         [Op]
-        static void locations(in MemStore store, Span<MemoryAddress> results)
+        static void locations(in MemoryStore store, Span<MemoryAddress> results)
         {
             var sources = store.Sources;
             for(var i=0u; i<sources.Length; i++)

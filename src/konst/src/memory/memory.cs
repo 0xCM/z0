@@ -13,6 +13,15 @@ namespace Z0
     [ApiHost]
     public static unsafe class memory
     {
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static unsafe Span<T> edit<T>(MemoryAddress src, uint count)
+            => z.cover(src.Ref<T>(), count);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static unsafe Span<byte> edit(MemoryAddress src, ByteSize size)
+            => z.cover(src.Ref<byte>(), size);
+                    
         /// <summary>
         /// Copies a specified number of source values to the target and returns the count of copied bytes
         /// </summary>

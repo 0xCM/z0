@@ -36,7 +36,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public OpCodeModel(string id, string cx, string ix)
         {            
-            Locations = z.v512<ulong>(memref(id), memref(cx), memref(ix), MemRef.Empty);
+            Locations = z.v512<ulong>(memref(id), memref(cx), memref(ix), SegRef.Empty);
         }  
 
         public string Format()

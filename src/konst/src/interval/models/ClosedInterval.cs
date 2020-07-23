@@ -21,18 +21,18 @@ namespace Z0
         /// <summary>
         /// The left endpoint
         /// </summary>
-        public readonly T Left;
+        public readonly T Min;
 
         /// <summary>
         /// The right endpoint
         /// </summary>
-        public readonly T Right;
+        public readonly T Max;
 
         [MethodImpl(Inline)]
-        public ClosedInterval(T left, T right)
+        public ClosedInterval(T min, T max)
         {
-            Left = left;
-            Right = right;
+            Min = min;
+            Max = max;
         }
 
         [MethodImpl(Inline)]
@@ -41,7 +41,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator (T left, T right)(ClosedInterval<T> x)
-            => (x.Left, x.Right);
+            => (x.Min, x.Max);
 
         [MethodImpl(Inline)]
         public static implicit operator ConstPair<T>(ClosedInterval<T> x)
@@ -54,7 +54,7 @@ namespace Z0
         public ConstPair<T> Pair
         {
             [MethodImpl(Inline)]
-            get => new ConstPair<T>(Left, Right);
+            get => new ConstPair<T>(Min, Max);
         }
 
         public ulong Width
@@ -69,7 +69,7 @@ namespace Z0
         public bool Degenerate
         {
             [MethodImpl(Inline)]
-            get => Left.Equals(Right);
+            get => Min.Equals(Max);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Left.Equals(Right);
+            get => Min.Equals(Max);
         }
         
         [MethodImpl(Inline)]
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ClosedInterval<U> Convert<U>()
             where U : unmanaged, IComparable<U>, IEquatable<U>
-                => new ClosedInterval<U>(Cast.to<T,U>(Left), Cast.to<T,U>(Right));
+                => new ClosedInterval<U>(Cast.to<T,U>(Min), Cast.to<T,U>(Max));
 
         /// <summary>
         /// Creates a view of the data in the inverval as seen through the
@@ -102,13 +102,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public ClosedInterval<U> As<U>()
             where U : unmanaged, IComparable<U>, IEquatable<U>
-                => new ClosedInterval<U>(In.generic<T,U>(Left), In.generic<T,U>(Right));
+                => new ClosedInterval<U>(In.generic<T,U>(Min), In.generic<T,U>(Max));
 
         [MethodImpl(Inline)]
         public void Deconstruct(out T left, out T right)
         {
-            left = Left;
-            right = Right;
+            left = Min;
+            right = Max;
         }
 
         [MethodImpl(Inline)]
@@ -117,7 +117,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.concat(Chars.LBracket, Left, Chars.Comma, Right, Chars.RBracket);
+            => text.concat(Chars.LBracket, Min, Chars.Comma, Max, Chars.RBracket);
 
         [MethodImpl(Inline)]
         public string Format(TupleFormat style)
@@ -125,7 +125,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(ClosedInterval<T> src)
-            => Left.Equals(src.Left) && Right.Equals(src.Right);
+            => Min.Equals(src.Min) && Max.Equals(src.Max);
 
         public override string ToString()
             => Format();        
@@ -133,20 +133,20 @@ namespace Z0
         ulong LeftU64
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,ulong>(Left);
+            get => Cast.to<T,ulong>(Min);
         }
 
         ulong RightU64
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,ulong>(Right);
+            get => Cast.to<T,ulong>(Max);
         }
 
-        T IInterval<T>.Left 
-            => Left;
+        T IInterval<T>.Left
+            => Min;
 
-        T IInterval<T>.Right 
-            => Right;
+        T IInterval<T>.Right
+            => Max;
 
         bool IInterval.LeftClosed 
             => true;

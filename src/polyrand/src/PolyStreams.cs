@@ -50,7 +50,7 @@ namespace Z0
         static IEnumerable<T> forever<T>(IPolyrand src, ClosedInterval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => filter != null 
-                ? some(src, Interval.closed(domain.Left, domain.Right), filter) 
+                ? some(src, Interval.closed(domain.Min, domain.Max), filter) 
                 : forever(src, domain);        
 
         static IEnumerable<T> forever<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter)
@@ -79,7 +79,7 @@ namespace Z0
 
         static IEnumerable<T> forever<T>(IPolyrand src, ClosedInterval<T> domain)
             where T : unmanaged
-                => domain.IsEmpty ? forever<T>(src) : forever(src, domain.Left, domain.Right);
+                => domain.IsEmpty ? forever<T>(src) : forever(src, domain.Min, domain.Max);
 
         /// <summary>
         /// Creates a stream predicated on a specified source over which a filter is applied

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> view<T>(in MemRef src)
+        public static ReadOnlySpan<T> view<T>(in SegRef src)
             => cover(src.Address.Ref<T>(), count<T>(src));
 
         /// <summary>

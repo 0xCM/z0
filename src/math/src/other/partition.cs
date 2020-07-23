@@ -21,7 +21,7 @@ namespace Z0
         public static ulong[] partition(in ClosedInterval<ulong> src, ulong width)
         {
             var dst = z.alloc<ulong>((int)(math.div(src.Width, width) + 1));
-            partition(src.Left,src.Right, width, dst);
+            partition(src.Min,src.Max, width, dst);
             return dst;
         }
 

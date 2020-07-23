@@ -12,7 +12,7 @@ namespace Z0
     partial class Root
     {
         [MethodImpl(Inline), Op]
-        public static Span<byte> replicate(MemRef src)
+        public static Span<byte> replicate(SegRef src)
         {
             Span<byte> dst = sys.alloc<byte>(src.DataSize);            
             copy(src, dst);

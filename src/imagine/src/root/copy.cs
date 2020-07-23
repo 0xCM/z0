@@ -12,7 +12,7 @@ namespace Z0
     partial class Root
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe void copy<T>(MemRef src, Span<T> dst)
+        public static unsafe void copy<T>(SegRef src, Span<T> dst)
             where T : unmanaged
         {
             var reader = PointedReader.create<T>(src);

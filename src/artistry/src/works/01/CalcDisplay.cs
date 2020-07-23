@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Displays;
-    using static Root;
+    using static z;
+    using static Konst;
 
     using M = CalcManaged;
     using N = CalcNative;
@@ -60,8 +61,8 @@ namespace Z0
             var y = As.uint8(4);
 
             ref var mulRef = ref mul.Address.Ref<byte>();
-            for(var i=0; i<size; i++)
-                seek(ref mulRef, i) = skip(divCode,i);
+            for(var i=0u; i<size; i++)
+                seek(mulRef, i) = skip(divCode,i);
 
             var z1 = CalcSlots.mul(x,y);
             term.print(Displays.describe(K.mul(), x,y, z1));
@@ -69,7 +70,7 @@ namespace Z0
 
             ref var divRef = ref div.Address.Ref<byte>();
             for(var i=0; i<size; i++)
-                seek(ref divRef, i) = skip(mulCode,i);
+                seek(divRef, i) = skip(mulCode,i);
 
             var z2 = CalcSlots.div(x,y);
             term.print(Displays.describe(K.div(), x,y, z2));

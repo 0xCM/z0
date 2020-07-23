@@ -15,14 +15,14 @@ namespace Z0
     {
         public readonly asci32 Name;
 
-        public readonly MemRef Reference;
+        public readonly SegRef Reference;
 
         [MethodImpl(Inline)]
         public static implicit operator ResIdentity(ResIdentity<T> src)
             => new ResIdentity(src.Name,src.Reference, primal<T>());
 
         [MethodImpl(Inline)]
-        public ResIdentity(in asci32 name, in MemRef memref)
+        public ResIdentity(in asci32 name, in SegRef memref)
         {
             Name = name;
             Reference = memref;            

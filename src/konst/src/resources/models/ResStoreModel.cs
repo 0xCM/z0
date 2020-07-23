@@ -16,11 +16,11 @@ namespace Z0
         public const int SegCount = 8;
 
         [MethodImpl(Inline)]
-        public MemRef[] provided()
+        public SegRef[] provided()
         {
-            var buffer = new MemRef[SegCount];
+            var buffer = new SegRef[SegCount];
 
-            Span<MemRef> dst = buffer;
+            Span<SegRef> dst = buffer;
             var i=0u;
             seek(dst,i++) = memref(Seg00);
             seek(dst,i++) = memref(Seg01);

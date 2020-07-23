@@ -14,29 +14,25 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmFunctionGroup
     {        
-        [MethodImpl(Inline)]
-        public static AsmFunctionGroup Define(OpIdentity id, AsmFunction[] members)
-        {            
-            Demands.reason(members.Length != 0, $"{id}: Empty groups are disallowed");            
-            return new AsmFunctionGroup(id, members);
-        }
-        
-        [MethodImpl(Inline)]
-        public static AsmFunctionGroup Define(GenericOpIdentity id, AsmFunction[] members)
-            => Define(id.Generialize(), members);
-
-        [MethodImpl(Inline)]
-        AsmFunctionGroup(OpIdentity id, AsmFunction[] members)
-        {
-            this.Id = id;
-            this.Members = members;            
-        }
-
         public readonly OpIdentity Id;
 
         public readonly AsmFunction[] Members;
+    
+        [MethodImpl(Inline)]
+        public AsmFunctionGroup(OpIdentity id, AsmFunction[] members)
+        {
+            Id = id;
+            Members = members;            
+        }
 
-        public override string ToString() 
-            => Id;
+        [MethodImpl(Inline)]
+        public AsmFunctionGroup(GenericOpIdentity id, AsmFunction[] members)
+        {
+            Id = id.Generialize();
+            Members = members;            
+        }
+
+        public string Format() 
+            => Id.Identifier;
     }
 }

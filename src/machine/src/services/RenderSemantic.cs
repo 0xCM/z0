@@ -101,7 +101,7 @@ namespace Z0
             Buffer.Add(id);
             Buffer.Add(SectionSep);
 
-            var offseq = OffsetSeq.Zero;
+            var offseq = OffsetSequence.Zero;
             var offaddr = src.OffsetAddress;
 
             for(ushort i=0; i<src.TotalCount; i++)
@@ -173,7 +173,7 @@ namespace Z0
         
             return string.Empty;
         }
-        void RenderInstruction(LocatedInstruction src, MemoryOffset offaddr,  OffsetSeq offseq)
+        void RenderInstruction(LocatedInstruction src, MemoryOffset offaddr,  OffsetSequence offseq)
         {
             var id = src.OpId;
             var @base = src.BaseAddress;
@@ -216,7 +216,7 @@ namespace Z0
         string DelimitInstruction(string location)
             => text.concat(location, ColSep, InsxDelimiter);
 
-        string LineLocation(Instruction src, MemoryOffset offaddr, OffsetSeq offseq)
+        string LineLocation(Instruction src, MemoryOffset offaddr, OffsetSequence offseq)
             => text.concat(
                 render.RenderAddress(src, AddressPad), 
                 text.concat(
@@ -225,7 +225,7 @@ namespace Z0
                 offseq.Format(InstructionCountPad)
                 ); 
 
-        string InstructionHeader(LocatedInstruction src, MemoryOffset offaddr, OffsetSeq offseq)
+        string InstructionHeader(LocatedInstruction src, MemoryOffset offaddr, OffsetSequence offseq)
         {
             var left = LineLocation(src.Instruction, offaddr, offseq);
             var right = text.concat(src.FormattedInstruction, LeftImply, src.InstructionCode, HeaderSep, Format(src.Encoded));

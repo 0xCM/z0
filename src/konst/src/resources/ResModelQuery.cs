@@ -16,16 +16,16 @@ namespace Z0
         internal ResModelQuery(ResStoreModels models)
         {
             Refs = models.Refs;
-            Storage = MemStore.Create(Refs);
+            Storage = MemoryStore.Create(Refs);
             Stores = MemStores.Service;
             Models = models;
         }        
                 
         readonly ResStoreModels Models;
         
-        readonly MemRef[] Refs;                
+        readonly SegRef[] Refs;                
         
-        readonly MemStore Storage;
+        readonly MemoryStore Storage;
 
         readonly MemStores Stores;
 
@@ -222,11 +222,11 @@ namespace Z0
             => Stores.load(Refs, 7);
 
         [MethodImpl(Inline)]
-        public ref readonly byte cell_d(MemStoreIndex n, int i)
+        public ref readonly byte cell_d(MemorySlot n, int i)
             => ref Models.cell(n,i);
 
         [MethodImpl(Inline)]
-        public ref readonly byte cell(MemStoreIndex n, int i)
+        public ref readonly byte cell(MemorySlot n, int i)
             => ref Stores.cell(Refs, n,i);
 
         [MethodImpl(Inline)]
@@ -243,11 +243,11 @@ namespace Z0
             => sib_d<N1>(n, i, scale, offset);
 
         [MethodImpl(Inline)]
-        public ulong sib_d(MemStoreIndex n, int i, byte scale, ushort offset)
+        public ulong sib_d(MemorySlot n, int i, byte scale, ushort offset)
             => ((ulong)scale)*Models.cell(n, i) + (ulong)offset;
 
         [MethodImpl(Inline)]
-        public ulong sib(MemStoreIndex n, int i, byte scale, ushort offset)
+        public ulong sib(MemorySlot n, int i, byte scale, ushort offset)
             => Stores.sib(Refs, n,i,scale,offset);
     }
 }

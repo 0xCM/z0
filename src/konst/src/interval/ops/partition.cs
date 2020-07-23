@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged
         {            
             var dst = list<T>();
-            dst.Add(src.Left);
+            dst.Add(src.Min);
             
             var next = left(src) + uint64(width);
             
@@ -32,7 +32,7 @@ namespace Z0
                 next = next + uint64(width);
             }
 
-            dst.Add(src.Right);
+            dst.Add(src.Max);
             return dst.Array();
         }
     }

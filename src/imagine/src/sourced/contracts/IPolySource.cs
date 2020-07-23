@@ -41,6 +41,6 @@ namespace Z0
         [MethodImpl(Inline)]
         T Next<T>(ClosedInterval<T> domain)
             where T : unmanaged
-                => Next(domain.Left, domain.Right);
+                => Next(domain.Min, domain.Max);
     }    
 }

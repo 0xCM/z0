@@ -13,12 +13,12 @@ namespace Z0
     {
         public asci32 Name {get;}
 
-        public MemRef Reference {get;}
+        public SegRef Reference {get;}
         
         public PrimalKind DataType {get;}
         
         [MethodImpl(Inline)]
-        public ResIdentity(asci32 name, MemRef memref, PrimalKind type)
+        public ResIdentity(asci32 name, SegRef memref, PrimalKind type)
         {
             Name = name;
             Reference = memref;

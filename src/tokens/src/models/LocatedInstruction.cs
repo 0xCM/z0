@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         public MemberCode Encoded {get;}
 
-        public OffsetSeq OffsetSeq {get;}
+        public OffsetSequence OffsetSeq {get;}
 
         public Instruction Instruction {get;}
 
@@ -62,13 +62,13 @@ namespace Z0.Asm
             => Instruction.ByteLength;
 
         [MethodImpl(Inline)]
-        public static LocatedInstruction One(MemoryAddress @base, OffsetSeq offseq, Instruction inxs, MemberCode encoded)
+        public static LocatedInstruction One(MemoryAddress @base, OffsetSequence offseq, Instruction inxs, MemberCode encoded)
             => new LocatedInstruction(@base,offseq,inxs,encoded);
 
         public static LocatedInstruction[] Many(MemberCode code, Instruction[] src)
         {            
             var @base = code.Address;
-            var offseq = OffsetSeq.Zero;
+            var offseq = OffsetSequence.Zero;
             var count = src.Length;
             var dst = new LocatedInstruction[count];
             
@@ -85,7 +85,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public LocatedInstruction(MemoryAddress @base, OffsetSeq offseq, Instruction inxs, MemberCode encoded)
+        public LocatedInstruction(MemoryAddress @base, OffsetSequence offseq, Instruction inxs, MemberCode encoded)
         {
             BaseAddress = @base;
             OffsetSeq = offseq;

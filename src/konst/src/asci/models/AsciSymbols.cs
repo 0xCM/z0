@@ -40,7 +40,7 @@ namespace Z0
         public Ref Ref
         {
             [MethodImpl(Inline), Op] 
-            get => Addressable.@ref(First, Size);
+            get => SegRefs.@ref(First, Size);
         }
 
         public ref AsciSymbol First

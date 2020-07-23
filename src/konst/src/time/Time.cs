@@ -65,15 +65,15 @@ namespace Z0
 
         public static Date[] partition(in ClosedInterval<Date> src, uint width)
         {
-            var points = z.list<Date>(new Date[]{src.Left});
-            var last = src.Left;
+            var points = z.list<Date>(new Date[]{src.Min});
+            var last = src.Min;
             var finished = false;
             while (!finished)
             {
                 var next = last.AddDays((int)width);
-                if (next >= src.Right)
+                if (next >= src.Max)
                 {
-                    points.Add(src.Right);
+                    points.Add(src.Max);
                     finished = true;
                 }
                 else

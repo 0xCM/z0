@@ -26,7 +26,7 @@ namespace Z0
             => new PointedReader(pSrc, length);
 
         [MethodImpl(Inline)]
-        public static PointedReader<T> create<T>(MemRef src)
+        public static PointedReader<T> create<T>(SegRef src)
             where T : unmanaged
                 => create(src.Address.Pointer<T>(), (int)src.DataSize);
         

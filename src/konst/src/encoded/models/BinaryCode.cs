@@ -35,7 +35,7 @@ namespace Z0
         public Ref Ref
         {
             [MethodImpl(Inline)] 
-            get => Addressable.@ref(in this[0], (uint)Encoded.Length);
+            get => SegRefs.@ref(in this[0], (uint)Encoded.Length);
         }
         public int Length 
         { 

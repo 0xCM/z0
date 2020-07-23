@@ -14,10 +14,10 @@ namespace Z0
     {
         public readonly MemberInfo Member;
 
-        public readonly MemRef Reference;
+        public readonly SegRef Reference;
         
         [MethodImpl(Inline)]
-        public ResMember(MemberInfo member, in MemRef memref)
+        public ResMember(MemberInfo member, in SegRef memref)
         {
             Member = member;
             Reference = memref;
