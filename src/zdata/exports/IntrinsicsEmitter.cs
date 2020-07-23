@@ -80,12 +80,15 @@ namespace Z0
 
         public void Emit()
         {
+            
             var list = IntrinsicsList.read();
             var export = Context.AppPaths.ExportRoot;
             var kind = FileExtension.Define("md");
             var folder = IntrinsicsList.folder(kind);
             var dir = export + folder;
             dir.Clear();
+
+            term.print($"Emitting intrinsics algorithms");
 
             var pagewidth = (uint)text.PageBreak.Length;
             var writers = z.dict<string,StreamWriter>();
@@ -154,6 +157,8 @@ namespace Z0
                 writer.WriteLine(text.PageBreak);
             }
             
+            term.print($"Emitted {list.Length} intrinsics algorithms");
+
             z.iter(writers.Values, w => w.Dispose());         
         }
     }
