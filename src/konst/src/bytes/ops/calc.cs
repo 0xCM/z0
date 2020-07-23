@@ -7,7 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.Intrinsics.X86.Bmi1;
+    using static System.Runtime.Intrinsics.X86.Bmi1.X64;
+
     using static Konst;
+    using static memory;
 
     partial struct Bytes
     {
@@ -63,20 +67,16 @@ namespace Z0
         public static bool eq(byte a, byte b)
             => a == b;
 
-        [MethodImpl(Inline), Op]
-        public static byte xor(byte a, byte b)
-            => (byte)(a ^ b);
+        [MethodImpl(Inline), TestZ]
+        public static bool testz(in byte A, in byte B)
+            => z.testz(read8(A), read8(B));
 
-        [MethodImpl(Inline), Op]
-        public static byte or(byte a, byte b, byte c)
-            => (byte)(a | b | c);
+        [MethodImpl(Inline), TestC]
+        public static bool testc(in byte A, in byte B)
+            => z.testc(read8(A),read8(B));
 
-        [MethodImpl(Inline), Op]
-        public static byte or(byte a, byte b, byte c, byte d)
-            => (byte)(a | b | c | d);
-
-        [MethodImpl(Inline), Op]
-        public static byte or(byte a, byte b, byte c, byte d, byte e)
-            => (byte)(a | b | c | d | e);         
+        [MethodImpl(Inline), TestC]
+        public static bool testc(in byte A)
+            => z.testc(read8(A));                       
     }
 }

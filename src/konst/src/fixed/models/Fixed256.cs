@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst;
-    using static V0;
+    using static z;
 
     using F = Fixed256;
     

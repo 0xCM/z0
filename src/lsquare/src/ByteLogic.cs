@@ -9,10 +9,9 @@ namespace Z0
     
     using static Konst;
     using static memory;
-    using static V0d;
 
     [ApiHost]
-    public class ByteLogic : IApiHost<ByteLogic>
+    public class ByteLogic
     {
         [MethodImpl(Inline), Not]
         public static void not(in byte A, ref byte Z)
@@ -68,14 +67,14 @@ namespace Z0
 
         [MethodImpl(Inline), TestZ]
         public static bit testz(in byte A, in byte B)
-            => V0d.testz(read64(A), read64(B));
+            => z.testz(read64(A), read64(B));
 
         [MethodImpl(Inline), TestC]
         public static bit testc(in byte A, in byte B)
-            => V0d.testc(read64(A),read64(B));
+            => z.testc(read64(A),read64(B));
 
         [MethodImpl(Inline), TestC]
         public static bit testc(in byte A)
-            => V0d.testc(read64(A));        
+            => z.testc(read64(A));        
     }
 }

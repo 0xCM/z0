@@ -71,7 +71,7 @@ namespace Z0
 
         public void vmerge_hilo()
         {
-            var x = V0.vincrements<byte>(n128);
+            var x = V0.vinc<byte>(n128);
             var y = V0d.vadd(x, V0d.vbroadcast(n128, (byte)16));
 
             var lo = gvec.vmergelo(x,y);

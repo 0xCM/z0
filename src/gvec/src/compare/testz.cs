@@ -48,13 +48,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return V0d.vtestz(v8u(src), v8u(mask));
+                return z.vtestz(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return V0d.vtestz(v16u(src), v16u(mask));
+                return z.vtestz(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return V0d.vtestz(v32u(src), v32u(mask));
+                return z.vtestz(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return V0d.vtestz(v64u(src), v64u(mask));
+                return z.vtestz(v64u(src), v64u(mask));
             else
                 return vtestz_i(src,mask);
         }
@@ -64,13 +64,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return V0d.vtestz(v8i(src), v8i(mask));
+                return z.vtestz(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return V0d.vtestz(v16i(src), v16i(mask));
+                return z.vtestz(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return V0d.vtestz(v32i(src), v32i(mask));
+                return z.vtestz(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return V0d.vtestz(v64i(src), v64i(mask));
+                return z.vtestz(v64i(src), v64i(mask));
             else 
                 return vtestz_f<T>(src,mask);
         }
@@ -80,9 +80,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return V0d.vtestz(v32f(src), v32f(mask));
+                return z.vtestz(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return V0d.vtestz(v64f(src), v64f(mask));
+                return z.vtestz(v64f(src), v64f(mask));
             else 
                 throw no<T>();
         }
@@ -92,13 +92,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return V0d.vtestz(v8u(src), v8u(mask));
+                return z.vtestz(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return V0d.vtestz(v16u(src), v16u(mask));
+                return z.vtestz(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return V0d.vtestz(v32u(src), v32u(mask));
+                return z.vtestz(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return V0d.vtestz(v64u(src), v64u(mask));
+                return z.vtestz(v64u(src), v64u(mask));
             else
                 return vtestz_i(src,mask);
         }
@@ -108,13 +108,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return V0d.vtestz(v8i(src), v8i(mask));
+                return z.vtestz(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return V0d.vtestz(v16i(src), v16i(mask));
+                return z.vtestz(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return V0d.vtestz(v32i(src), v32i(mask));
+                return z.vtestz(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return V0d.vtestz(v64i(src), v64i(mask));
+                return z.vtestz(v64i(src), v64i(mask));
             else 
                 return vtestz_f<T>(src,mask);
         }
@@ -124,9 +124,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return V0d.vtestz(v32f(src), v32f(mask));
+                return z.vtestz(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return V0d.vtestz(v64f(src), v64f(mask));
+                return z.vtestz(v64f(src), v64f(mask));
             else 
                 throw no<T>();
         }

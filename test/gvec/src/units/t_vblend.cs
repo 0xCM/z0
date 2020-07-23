@@ -38,10 +38,10 @@ namespace Z0
         {
             var w = n128;
             var alt = (uint)BitMasks.Msb16x8x1 << 16; 
-            dvec.vcover(V0.v16u(V0d.vbroadcast(w,alt)), out Vector128<byte> spec);
-            var x = gvec.vinc(w,z16);
-            var y = gvec.vdec(w,Max16u);
-            var z = gvec.vblend(x,y,spec);
+            z.vcover(V0.v16u(V0d.vbroadcast(w,alt)), out Vector128<byte> spec);
+            var a = gvec.vinc(w,z16);
+            var b = gvec.vdec(w,Max16u);
+            var c = gvec.vblend(a,b,spec);
         }
 
         public void vblend_256x16u_outline()
@@ -49,10 +49,10 @@ namespace Z0
             var w = n256;
             var altOdd = (uint)BitMasks.Msb16x8x1 << 16; 
             var altEven = (uint)BitMasks.Msb16x8x1;
-            dvec.vcover(V0.v16u(Vectors.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
-            var x = gvec.vinc(w,z16);
-            var y = gvec.vdec(w,Max16u);
-            var z = gvec.vblend(x,y,spec);
+            z.vcover(V0.v16u(Vectors.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
+            var a = gvec.vinc(w,z16);
+            var b = gvec.vdec(w,Max16u);
+            var c = gvec.vblend(a,b,spec);
         }
 
         public void valignr_examples()
@@ -147,10 +147,10 @@ namespace Z0
             var w = w32;    
             var left =  vparts(0,1,2,3,4,5,6,7);
             var right = vparts(8,9,A,B,C,D,E,F);            
-            Claim.veq(vparts(0,9,2,B,4,D,6,F),V0d.vblend(left,right, Blend8x32.LRLRLRLR));
-            Claim.veq(vparts(8,1,A,3,C,5,E,7),V0d.vblend(left,right, Blend8x32.RLRLRLRL));
-            Claim.veq(vparts(0,1,A,B,4,5,E,F),V0d.vblend(left,right, Blend8x32.LLRRLLRR));
-            Claim.veq(vparts(8,9,2,3,C,D,6,7),V0d.vblend(left,right, Blend8x32.RRLLRRLL));
+            Claim.veq(vparts(0,9,2,B,4,D,6,F), z.vblend(left,right, Blend8x32.LRLRLRLR));
+            Claim.veq(vparts(8,1,A,3,C,5,E,7), z.vblend(left,right, Blend8x32.RLRLRLRL));
+            Claim.veq(vparts(0,1,A,B,4,5,E,F), z.vblend(left,right, Blend8x32.LLRRLLRR));
+            Claim.veq(vparts(8,9,2,3,C,D,6,7), z.vblend(left,right, Blend8x32.RRLLRRLL));
             
             var lrpattern = V0.v32u(vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(var i=0; i < 8; i++)
@@ -158,7 +158,7 @@ namespace Z0
             
             var zero = Vectors.vzero<uint>(n);            
             var ones = gvec.vones<uint>(n);
-            Claim.veq(lrpattern, V0d.vblend(zero, ones, Blend8x32.LRLRLRLR));            
+            Claim.veq(lrpattern, z.vblend(zero, ones, Blend8x32.LRLRLRLR));            
         }
 
         public void vblend_32x8_256x32u_basecase()
@@ -168,8 +168,8 @@ namespace Z0
             var y = vparts(8,9,A,B,C,D,E,F);
             var e = vparts(0,9,2,B,4,D,6,F);
             var o = vparts(8,1,A,3,C,5,E,7);
-            var mEven = V0p.vblendspec(n,false,n32);
-            var mOdd = V0p.vblendspec(n,true,n32);
+            var mEven = z.vblendspec(n,false,n32);
+            var mOdd = z.vblendspec(n,true,n32);
             Claim.veq(e,gvec.vblend(x,y,mEven));
             Claim.veq(o,gvec.vblend(x,y,mOdd));
         }
@@ -181,8 +181,8 @@ namespace Z0
             var y = vparts(n,4,5,6,7);
             var e = vparts(n,0,5,2,7);
             var o = vparts(n,4,1,6,3);
-            var mEven = V0p.vblendspec(n,false,n64);
-            var mOdd = V0p.vblendspec(n,true,n64);
+            var mEven = z.vblendspec(n,false,n64);
+            var mOdd = z.vblendspec(n,true,n64);
             Claim.veq(e,gvec.vblend(x,y,mEven));
             Claim.veq(o,gvec.vblend(x,y,mOdd));
         }
@@ -203,7 +203,7 @@ namespace Z0
                 var y = ys.LoadVector();
                 Claim.veq(y,Vectors.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 
-                var m = V0p.vblendspec(n256,false,n64);
+                var m = z.vblendspec(n256,false,n64);
                 var es = Blocks.alloc<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)
                     es[i] = gmath.odd(i) ? ys[i] : xs[i];

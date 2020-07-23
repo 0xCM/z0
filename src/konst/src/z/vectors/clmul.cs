@@ -9,12 +9,15 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
+    using static System.Runtime.Intrinsics.X86.Sse41;
+    using static System.Runtime.Intrinsics.X86.Avx;
  
     using static Konst;    
     using static z;
 
     partial struct z
     {
+
         /// <summary>
         /// Computes the caryless 16-bit product of two 8-bit operands
         /// </summary>

@@ -9,19 +9,19 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Typed;
+    using static z;
      
     partial class VData
     {
         [MethodImpl(Inline)]
         public static Vector128<T> vunits<T>(N128 w, T t = default)
             where T : unmanaged
-                => V0p.vunits<T>(w);
+                => z.vunits<T>(w);
 
         [MethodImpl(Inline)]
         public static Vector256<T> vunits<T>(N256 w, T t = default)
             where T : unmanaged
-                => V0p.vunits<T>(w);
+                => z.vunits<T>(w);
 
         [MethodImpl(Inline)]
         public static Vector128<T> vunits<T>(Vec128Kind<T> kind)

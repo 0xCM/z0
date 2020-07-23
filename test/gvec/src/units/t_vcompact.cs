@@ -21,11 +21,11 @@ namespace Z0
             var d = gvec.vinc<uint>(n,12);
             Vector512<uint> v512 = (a,b,c,d);
             var abActual = dvec.vcompact(a,b,n128,z16);
-            var abExpect = V0.vincrements<ushort>(n);
+            var abExpect = V0.vinc<ushort>(n);
             Claim.veq(abExpect, abActual);
 
             var abcdActual = dvec.vcompact(a,b,c,d, n128, z8);
-            var abcdExpect = V0.vincrements<byte>(n);
+            var abcdExpect = V0.vinc<byte>(n);
             Claim.veq(abcdExpect, abcdActual);        
         }
         

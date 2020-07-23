@@ -39,10 +39,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> select(in VLut16 lut, Vector128<byte> items) 
-            => V0d.vshuf16x8(items, lut.Mask);
+            => z.vshuf16x8(items, lut.Mask);
 
         [MethodImpl(Inline), Op]
         public static Vector256<byte> select(in VLut32 lut, Vector256<byte> items) 
-            => V0d.vshuf32x8(items, lut.Mask);
+            => z.vshuf32x8(items, lut.Mask);
     }
 }

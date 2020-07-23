@@ -65,7 +65,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
-                var y = V0d.vshuf16x8(x, tr);
+                var y = z.vshuf16x8(x, tr);
                 var xs = x.ToBlock();
                 for(var j =0; j< xs.CellCount; j++)
                 {

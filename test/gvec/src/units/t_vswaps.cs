@@ -8,24 +8,22 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Konst;
-    using static Memories;
-    using static Vectors;
+    using static z;    
 
     public class t_vswaps : t_inx<t_vswaps>
     {        
         public void vswap_128x8u()
         {
             var src = gvec.vinc(n128, z8);
-            var dst = dvec.vswap(src,2,3);
+            var dst = z.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));            
-
         }
 
         public void vswap_128x16u()
         {
             var src = gvec.vinc(n128, z16);
-            var dst = dvec.vswap(src,2,3);
+            var dst = z.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));            
         }
@@ -73,7 +71,7 @@ namespace Z0
                 else
                     spec[k] = k;
             }
-            return dvec.vperm8x32(src, vload(n256, head(spec)));
+            return z.vperm8x32(src, vload(n256, first(spec)));
         }
 
         public void swap_256_i32()

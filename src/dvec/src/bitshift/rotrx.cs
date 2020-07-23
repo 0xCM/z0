@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="count">The count selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N8 count)
-            => V0d.vshuf16x8(src, VData.vrotl(n128, count));   
+            => z.vshuf16x8(src, VData.vrotl(n128, count));   
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 16 bits
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="count">The count selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N16 count)
-            => V0d.vshuf16x8(src, VData.vrotl(n128, count));
+            => z.vshuf16x8(src, VData.vrotl(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 24 bits
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="count">The count selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N24 count)
-            => V0d.vshuf16x8(src, VData.vrotl(n128, count));
+            => z.vshuf16x8(src, VData.vrotl(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 32 bits
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="count">The count selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N32 count)
-            => V0d.vshuf16x8(src, VData.vrotl(n128, count));
+            => z.vshuf16x8(src, VData.vrotl(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 8 bits
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="count">The count selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N8 count)
-            => V0d.vshuf16x8(src, VData.vrotr(n128, count));
+            => z.vshuf16x8(src, VData.vrotr(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 16 bits
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="count">The count selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N16 count)
-            => V0d.vshuf16x8(src, VData.vrotr(n128, count));
+            => z.vshuf16x8(src, VData.vrotr(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 24 bits
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="count">The count selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N24 count)
-            => V0d.vshuf16x8(src, VData.vrotr(n128, count));
+            => z.vshuf16x8(src, VData.vrotr(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 32 bits
@@ -101,6 +101,6 @@ namespace Z0
         /// <param name="count">The count selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N32 count)
-            => V0d.vshuf16x8(src, VData.vrotr(n128, count));
+            => z.vshuf16x8(src, VData.vrotr(n128, count));
     }
 }

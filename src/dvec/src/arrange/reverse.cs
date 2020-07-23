@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vreverse(Vector128<byte> src)
-            => V0d.vshuf16x8(src, V0.vdecrements<byte>(w128));
+            => z.vshuf16x8(src, z.vdec<byte>(w128));
 
         /// <summary>
         /// Reverses the source vector components
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vreverse(Vector128<sbyte> src)
-            => V0d.vshuf16x8(src, V0.vdecrements<sbyte>(w128));
+            => z.vshuf16x8(src, z.vdec<sbyte>(w128));
 
         /// <summary>
         /// Reverses the source vector components
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vreverse(Vector128<int> src)
-            => V0d.vperm4x32(src, Perm4L.DCBA);
+            => z.vperm4x32(src, Perm4L.DCBA);
 
         /// <summary>
         /// Reverses the source vector components
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vreverse(Vector256<byte> src)
-            => V0d.vshuf32x8(src, V0p.vdecrements<byte>(n256));
+            => z.vshuf32x8(src, z.vdec<byte>(n256));
 
         /// <summary>
         /// Reverses the source vector components
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vreverse(Vector256<sbyte> src)
-            => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => z.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vreverse(Vector256<short> src)
-            => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => z.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vreverse(Vector256<ushort> src)
-            => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => z.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vreverse(Vector256<int> src)
-            => vperm8x32(src,MRev256u32);
+            => z.vperm8x32(src,MRev256u32);
 
         /// <summary>
         /// Reverses the source vector components
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vreverse(Vector256<uint> src)
-            => vperm8x32(src,MRev256u32);
+            => z.vperm8x32(src,MRev256u32);
 
         /// <summary>
         /// Reverses the source vector components
@@ -130,7 +130,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vreverse(Vector256<long> src)
-            => V0d.vperm4x64(src,Perm4L.DCBA); 
+            => z.vperm4x64(src,Perm4L.DCBA); 
 
         /// <summary>
         /// Reverses the source vector components
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vreverse(Vector256<ulong> src)
-            => V0d.vperm4x64(src,Perm4L.DCBA);
+            => z.vperm4x64(src,Perm4L.DCBA);
 
         static Vector256<uint> MRev256u32 
             => v32u(V0.vload(n256,MRev256u32Data));

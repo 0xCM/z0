@@ -129,8 +129,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector256<ushort> vpackus_alt(Vector256<uint> x, Vector256<uint> y)
         {
-            var v1 = V0d.vshuf16x8(x, VData.packusLo(n256,n32,n16));
-            var v2 = V0d.vshuf16x8(y, VData.packusHi(n256,n32,n16));
+            var v1 = z.vshuf16x8(x, VData.packusLo(n256,n32,n16));
+            var v2 = z.vshuf16x8(y, VData.packusHi(n256,n32,n16));
             return z.v16u(vor(v1,v2));
         }
    }

@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return testc(w, 16, 4, a);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -47,7 +47,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return testc(w, 16, 4, in A, in B);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

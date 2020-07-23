@@ -83,7 +83,7 @@ namespace Z0
             const byte C = 0b10;
             const byte D = 0b11;
 
-            var x = V0.vincrements<ushort>(n128);
+            var x = V0.vinc<ushort>(n128);
             var xs = x.ToSpan();
             Claim.veq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
@@ -106,7 +106,7 @@ namespace Z0
             const byte C = 0b10;
             const byte D = 0b11;
 
-            var x = V0.vincrements<ushort>(n128);
+            var x = V0.vinc<ushort>(n128);
             var xs = x.ToSpan();
             Claim.veq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
 
@@ -127,10 +127,10 @@ namespace Z0
         {
             var n = n128;
 
-            var u = V0.vincrements<uint>(n);
+            var u = V0.vinc<uint>(n);
             Claim.veq(vparts(n,0,1,2,3), u);
 
-            var v = V0.vdecrements<uint>(n);
+            var v = V0.vdec<uint>(n);
             Claim.veq(vparts(n,3,2,1,0),v);
 
             Claim.veq(v, z.vperm4x32(u, Perm4L.DCBA));
@@ -209,19 +209,19 @@ namespace Z0
         static Vector128<T> vswapspec<T>(N128 n, params Swap[] swaps)
             where T : unmanaged  
         {
-            var src = V0.vincrements<T>(n).ToSpan();
+            var src = V0.vinc<T>(n).ToSpan();
             var dst = src.Swap(swaps);
             return Vectors.vload(n, in refs.head(src));
         }
 
         [MethodImpl(Inline)]
         public static Vector128<byte> vswap(Vector128<byte> src, params Swap[] swaps)
-            => V0d.vshuf16x8(src, vswapspec<byte>(n128, swaps));
+            => z.vshuf16x8(src, vswapspec<byte>(n128, swaps));
 
         public void perm_swaps()
         {            
             
-            var src = V0.vincrements<byte>(n128);
+            var src = V0.vinc<byte>(n128);
 
             Swap s = (0,1);
             var x1 = vswap(src, s);
@@ -300,7 +300,7 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var src = V0.vincrements<ulong>(n256);
+                var src = V0.vinc<ulong>(n256);
                 var x = V0d.vperm4x64(src, Perm4L.BADC);
                 var srcs = src.ToSpan();
                 var y = Vector256.Create(srcs[1], srcs[0], srcs[3], srcs[2]);
@@ -310,10 +310,10 @@ namespace Z0
 
         public void vperm_256u8_outline()
         {
-            var x = V0.vincrements<byte>(n256);
-            var y = VData.vdecrements<byte>(n256);
-            var z = dvec.vreverse(V0d.vshuf32x8(x,y));
-            Claim.veq(x,z);
+            var a = V0.vinc<byte>(n256);
+            var b = VData.vdecrements<byte>(n256);
+            var c = dvec.vreverse(z.vshuf32x8(a,b));
+            Claim.veq(a,c);
         }
 
         public void vperm4_reverse()

@@ -34,7 +34,7 @@ namespace Z0
                 // [0, 1, 2, 3, 4, 5, 6, 7] |> DABC = [6, 7, 0, 1, 2, 3, 4, 5] - rotate right
                 var p0 = Perm2x4.DA;
                 var p1 = Perm2x4.BC;
-                var src = V0.vincrements<ulong>(w512);
+                var src = V0.vinc<ulong>(w512);
                 var expect = Vectors.vparts(w512,6, 7, 0, 1, 2, 3, 4, 5);
                 var actual = gvec.vperm2x128(src, p0, p1);
                 Claim.eq(actual,expect);
