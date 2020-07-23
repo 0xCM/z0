@@ -12,8 +12,9 @@ namespace Z0
 
     partial class text
     {    
+        [Op, Closures(AllNumeric)]
         public static string delimit<T>(T[] src, string delimiter)
-            where T : ITextual
+            where T : unmanaged
         {
             var count = src.Length;
             var input = span(src);
@@ -21,8 +22,8 @@ namespace Z0
             var dst = span(buffer);
             var b = span(delimiter);
 
-            for(var i=0u; i< count; i++)
-                seek(dst,i) = format(span(skip(input,i).Format()),b);
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = format(span(skip(input,i).ToString()),b);
 
             return string.Concat(buffer);                   
         }

@@ -18,6 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="values">The values to be rendered as text</param>
         /// <param name="sep">The item delimiter</param>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static string join<T>(string sep, IEnumerable<T> values)
             => string.Join(sep, values);
 
@@ -26,6 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="values">The values to be rendered as text</param>
         /// <param name="sep">The item delimiter</param>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static string join<T>(char sep, IEnumerable<T> values)
             => string.Join(sep, values);
     }

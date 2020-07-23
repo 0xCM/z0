@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.IO;
 
     using static Konst;
     using static z;
@@ -22,16 +18,18 @@ namespace Z0
         /// <param name="src">The text to analyze</param>
         /// <param name="left">The left boundary</param>
         /// <param name="right">The right boundary</param>
+        [MethodImpl(Inline), Op]
         public static bool fenced(string src, char left, char right)
         {
-            if(blank(src))
-                return false;
+            var result = false;
+            if(nonempty(src))
+            {        
+                var x = span(src.Trim());
+                var length = x.Length;
+                result = first(x) == left && skip(x,length - 1) == right;
+            }
             
-            var x = src.Trim();
-            var length = x.Length;
-            return 
-                x[0] == left 
-             && x[length - 1] == right;
+            return result;
         }
     }
 }

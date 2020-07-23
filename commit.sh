@@ -1,12 +1,6 @@
-export CreateLog=$ZDev/git-log-create.sh
-export AppendLog=$ZDev/git-log-append.sh
-export ArchiveDir=/k/z0/archives
+export GitLog=$ZDev/git-log-append.sh
 
-git add -A | $AppendLog
-git commit -am "."  | $AppendLog
-git push | $AppendLog
-
-cd $ArchiveDir
-git add -A | $AppendLog
-git commit -am "."  | $AppendLog
-cd $ZDev
+git add -A | $GitLog
+git commit -am "."  | $GitLog
+git push | $GitLog
+ 

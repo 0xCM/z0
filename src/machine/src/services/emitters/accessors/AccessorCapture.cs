@@ -20,6 +20,9 @@ namespace Z0
 
         IAccessorCapture This => this;
 
+        FolderPath ResIndexDir
+            => This.Context.AppPaths.ResIndexDir;
+        
         FolderPath ResBytesDir
             => This.ResBytesDir;
 
@@ -34,6 +37,7 @@ namespace Z0
         {
             Context = context;            
             Context.AppPaths.AppDataRoot.Clear();
+            ResIndexDir.Clear();
             ResBytesDir.Clear();
             ResBytesUncompiled.Clear();
         }                            

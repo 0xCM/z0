@@ -1,0 +1,14 @@
+<Project Sdk='Microsoft.NET.Sdk'>
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+
+   <ItemGroup>
+    <EmbeddedResource Include="asm/**/*.asm" /> 
+    <EmbeddedResource Include="docs/**/*.csv" /> 
+    <EmbeddedResource Include="index/**/*.csv" /> 
+    <EmbeddedResource Include="metadata/**/*.csv" /> 
+  </ItemGroup>
+
+</Project>

@@ -14,22 +14,19 @@ namespace Z0
     partial class text
     {
         /// <summary>
-        /// Formats the content with a space on either side
+        /// Tests whether the source string is nonempty
         /// </summary>
-        /// <param name="content">The source content</param>
+        /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline), Op]
-        public static string spaced(object content)
-            => $" {content} ";
-
-        [MethodImpl(Inline), Op]
-        public static string spaced(char c)
-            => concat(Space, c, Space);
+        public static bool nonempty(string src)
+            => sys.nonempty(src);
 
         /// <summary>
-        /// Separates each item with a space
+        /// Test whether the source is a nonempty string
         /// </summary>
+        /// <param name="src">The object to evaluate</param>
         [MethodImpl(Inline), Op]
-        public static string spaced(IEnumerable<object> items)
-            => string.Join(Chars.Space, items);
+        public static bool nonempty(object src) 
+            => src is string s ? sys.nonempty(s) : false;
     }
 }

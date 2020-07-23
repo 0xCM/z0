@@ -81,6 +81,12 @@ namespace Z0
             => FileName.Define("config.json");
 
         /// <summary>
+        /// The name of a folder that contains one or more resource index files
+        /// </summary>
+        FolderName ResIndexFolder
+            => FolderName.Define("index");
+
+        /// <summary>
         /// The global application log root
         /// </summary>
         FolderPath LogRoot 
@@ -104,6 +110,12 @@ namespace Z0
         FolderPath ResourceRoot 
             => LogRoot + ResoureFolder;
 
+        /// <summary>
+        /// The path to the resource index directory
+        /// </summary>
+        FolderPath ResIndexDir
+            => ResourceRoot + ResIndexFolder;
+            
         /// <summary>
         /// The path to the root application resource directory
         /// </summary>

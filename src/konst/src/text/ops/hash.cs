@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -14,22 +13,19 @@ namespace Z0
     partial class text
     {
         /// <summary>
-        /// Formats the content with a space on either side
+        /// Returns a system-provided hash code for a specified character span
         /// </summary>
-        /// <param name="content">The source content</param>
+        /// <param name="src">The data soruce</param>
         [MethodImpl(Inline), Op]
-        public static string spaced(object content)
-            => $" {content} ";
-
-        [MethodImpl(Inline), Op]
-        public static string spaced(char c)
-            => concat(Space, c, Space);
+        public static int syshash(ReadOnlySpan<char> src)
+            => string.GetHashCode(src);
 
         /// <summary>
-        /// Separates each item with a space
+        /// Returns a hash code predicated on the address of the leading character
         /// </summary>
+        /// <param name="src">The data soruce</param>
         [MethodImpl(Inline), Op]
-        public static string spaced(IEnumerable<object> items)
-            => string.Join(Chars.Space, items);
+        public static uint hash(ReadOnlySpan<char> src)
+            => z.hash(address(first(src)));
     }
 }

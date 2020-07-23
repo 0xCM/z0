@@ -49,7 +49,7 @@ namespace Z0
             foreach(var index in indices)
                 emit(index, Target);
 
-            emit(new ResourceProject(ProjectName), Target);
+            //emit(new ResourceProject(ProjectName), Target);
         }
 
         static void emit(IEncodedHexArchive source, FolderPath target, params PartId[] src)        
@@ -60,7 +60,7 @@ namespace Z0
             foreach(var index in indices)
                 emit(index, target);
 
-            emit(new ResourceProject(ProjectName), target);
+            //emit(new ResourceProject(ProjectName), target);
         }
 
         static void emit(IdentifiedCodeIndex src, FolderPath dst)
@@ -89,8 +89,8 @@ namespace Z0
             term.print($"Emitted {resources.Count} resource definitions to {path}");
         }
 
-        static void emit(ResourceProject project, FolderPath dst)
-            => (dst + project.FileName).Ovewrite(project.Definition);
+        // static void emit(ResourceProject project, FolderPath dst)
+        //     => (dst + project.FileName).Ovewrite(project.Definition);
 
         static string render(BinaryResourceSpec src, int level = 2)
             => text.concat("public static ReadOnlySpan<byte> ", 

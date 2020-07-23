@@ -13,26 +13,6 @@ namespace Z0
     partial class text
     {
         /// <summary>
-        /// Formats a custom-formattable elements
-        /// </summary>
-        /// <param name="src">The source element</param>
-        /// <typeparam name="T">The element type</typeparam>
-        
-        [MethodImpl(Inline)]
-        public static string format<T>(T src)
-            where T : struct, ITextual
-                => src.Format();
-
-        /// <summary>
-        /// Produces a sequence of formatted strings given a sequence of custom-formattable elements
-        /// </summary>
-        /// <param name="src">The source element</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static string[] format<T>(params T[] src)
-            where T : struct, ITextual
-                => src.Select(x => x.Format());
-
-        /// <summary>
         /// Formats the pair of strings represented by repsective character spans
         /// </summary>
         /// <param name="a">The leading content</param>
@@ -40,6 +20,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<char> a, ReadOnlySpan<char> b)
             => string.Concat(a,b);
+
+        /// <summary>
+        /// Formats a pattern using an arbitrary kind/number of arguments
+        /// </summary>
+        /// <param name="pattern">The source pattern</param>
+        /// <param name="args">The pattern arguments</param>
+        [MethodImpl(Inline), Op]
+        public static string format(string pattern, params object[] args)
+            => string.Format(pattern, args);
 
         /// <summary>
         /// Formats anything

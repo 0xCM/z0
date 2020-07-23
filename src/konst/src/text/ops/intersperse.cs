@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.IO;
 
     using static Konst;
     using static z;
@@ -21,16 +17,38 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source string</param>
         /// <param name="c">The character to intersperse</param>
+        [Op]
         public static string intersperse(string src, char c)
-            => src.Intersperse(c);
+        {
+            var dst = build();
+            
+            var input = span(src);
+            var count = input.Length;
+            for(var i=0u; i< count; i++)
+            {
+                dst.Append(skip(input,i));
+                dst.Append(c);
+            }
+
+            return dst.ToString();
+        }
         
         /// <summary>
         /// Creates a new string by weaving a substring between each character in the source
         /// </summary>
         /// <param name="src">The source string</param>
         /// <param name="sep">The value to intersperse</param>
+        [Op]
         public static string intersperse(string src, string sep)
-            => src.Intersperse(sep);
+        {
+            var dst = build();
+            foreach(var item in src)
+            {
+                dst.Append(item);
+                dst.Append(sep);
+            }
+            return dst.ToString();
+        }
             
         /// <summary>
         /// Intersperses the source strings with a delimiter followed by a space, i.e.,

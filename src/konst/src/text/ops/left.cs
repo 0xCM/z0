@@ -6,21 +6,21 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Text;
+    using System.IO;
 
     using static Konst;
+    using static z;
 
-    partial class XTend
+    partial class text
     {
-        public static void Lines(this StringBuilder dst, IEnumerable<string> src)
-        {
-            foreach(var line in src)
-                dst.AppendLine(line);            
-        }
-
-        public static void Lines<F>(this StringBuilder src, IEnumerable<F> items)
-            where F : ITextual
-                => src.Lines(text.format(items));
+        /// <summary>
+        /// Returns the substring [0,chars-1]
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static string left(string src, int chars)
+            => blank(src) ? src : src.Substring(0, src.Length < chars ? src.Length : chars);
     }
 }

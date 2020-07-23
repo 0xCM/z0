@@ -5781,7 +5781,7 @@
       "version": "1.0.41",
       "restore": {
         "projectUniqueName": "J:\\dev\\projects\\z0\\src\\zdata\\z0.zdata.csproj",
-        "projectName": "z0.zdata",
+        "projectName": "zdata",
         "projectPath": "J:\\dev\\projects\\z0\\src\\zdata\\z0.zdata.csproj",
         "packagesPath": "J:\\cache\\nuget\\cache",
         "outputPath": "J:\\dev\\projects\\z0\\bin\\obj\\z0.zdata\\",

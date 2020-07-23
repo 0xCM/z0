@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly struct ProcessBrokers : IApiHost<ProcessBrokers>
+    public readonly struct ProcessBrokers
     {
         [MethodImpl(Inline), Op]
         public static BitBroker<HostHandlerKind,HostInstructions> host(HostHandlerKind kind = default)

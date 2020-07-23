@@ -26,7 +26,7 @@ namespace Z0
     
     partial struct AccessorCapture
     {
-        public void SaveCatalog(ReadOnlySpan<CapturedAccessor> src, FilePath csvdst)
+        public void SaveResIndex(ReadOnlySpan<CapturedAccessor> src, FilePath csvdst)
         {
             const ulong Cut = 0x55005500550;            
             const string Sep = SpacePipe;

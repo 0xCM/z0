@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    
     public readonly struct MessageTemplate<T>
     {
         public readonly string Pattern;

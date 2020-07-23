@@ -12,9 +12,9 @@ namespace Z0
         public void CaptureResBytes()
         {            
             var resfile = z.insist(ResBytesCompiled);
-            var captured = Capture(resfile, ResBytesUncompiled);            
-            var csvfile = ResBytesDir + resfile.FileName.ChangeExtension(FileExtensions.Csv);            
-            SaveCatalog(captured, csvfile);
+            var captured = Capture(resfile, ResBytesUncompiled);                        
+            var csvfile = ResIndexDir + FileName.Define("z0.res.bytes", FileExtensions.Csv);
+            SaveResIndex(captured, csvfile);
         }
     }
 }
