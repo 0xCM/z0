@@ -6,23 +6,24 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
+    using static z;
 
-    public readonly struct Workflows
-    {
-        [MethodImpl(Inline)]
-        public static WorkflowIdentity identify<T>()
-            where T : struct
-                => WorkflowIdentity.define<T>();
+    [ApiHost]
+    public partial struct Workflows
+    {        
+        readonly IAppContext Context;
 
-        [MethodImpl(Inline)]
-        public static WorkflowIdentity identify(PartId part, string host)
-            => WorkflowIdentity.define(part,host);
+        readonly WorkflowIdentity[] Known;
 
+        long Correlation;
+                
         [MethodImpl(Inline)]
-        public static Workflow<T> create<T>(IAppContext context, EventReceiver receiver, Action connect, Action exec)
-            where T : struct
-                => new Workflow<T>(context, receiver, connect, exec);                           
+        public static T worker<T>()
+            where T : struct, IWorkflowWorker<T>
+                => default;        
+        public static MachineWorkflows machine(IAppContext context)
+            => new MachineWorkflows(context);
     }
 }

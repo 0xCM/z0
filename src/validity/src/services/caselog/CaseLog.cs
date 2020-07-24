@@ -11,6 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
     
+
     public readonly struct CaseLog : ICaseLog
     {
         public static ReadOnlySpan<string> rows<R>(params R[] src)
@@ -38,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static void deposit(ReadOnlySpan<string> rows, StreamWriter dst)
-            => deposit(rows, Sink<string>.from(dst));
+            => deposit(rows, Streams.sink<string>(dst));
 
         [MethodImpl(Inline)]
         public static void deposit<R>(R[] src, StreamWriter dst)

@@ -1,3 +1,41 @@
 [master e6bd25bd2] .
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 .logs/git-log.log
+[master 0f0c91b7a] .
+ 61 files changed, 1345 insertions(+), 231 deletions(-)
+ delete mode 100644 git-log.log
+ create mode 100644 src/konst/src/text/ops/equals.cs
+ create mode 100644 src/konst/src/text/ops/format.g.cs
+ create mode 100644 src/konst/src/text/ops/hash.cs
+ create mode 100644 src/konst/src/text/ops/left.cs
+ create mode 100644 src/konst/src/text/ops/nonempty.cs
+ create mode 100644 src/konst/src/text/ops/remove.cs
+ create mode 100644 src/konst/src/text/ops/segment.cs
+ create mode 100644 src/konst/src/text/ops/slice.cs
+ create mode 100644 src/konst/src/text/ops/stream.cs
+ rename src/machine/src/{workflows => base}/MessageTemplate.cs (99%)
+ create mode 100644 src/machine/src/base/project/Literals.cs
+ create mode 100644 src/machine/src/base/project/Projects.cs
+ create mode 100644 src/machine/src/base/project/form/IProjectElement.cs
+ create mode 100644 src/machine/src/base/project/form/IProjectItem.cs
+ create mode 100644 src/machine/src/base/project/form/IProjectProperty.cs
+ create mode 100644 src/machine/src/base/project/generized/ItemGroup.cs
+ create mode 100644 src/machine/src/base/project/generized/ProjectItem.cs
+ create mode 100644 src/machine/src/base/project/generized/ProjectItemT.cs
+ create mode 100644 src/machine/src/base/project/generized/ProjectProperty.cs
+ create mode 100644 src/machine/src/base/project/generized/ProjectPropertyT.cs
+ create mode 100644 src/machine/src/base/project/generized/PropertyGroup.cs
+ create mode 100644 src/machine/src/base/project/models/EmbeddedResource.cs
+ create mode 100644 src/machine/src/base/project/models/OutputType.cs
+ create mode 100644 src/machine/src/base/project/models/OutputTypes.cs
+ create mode 100644 src/machine/src/base/project/models/Project.cs
+ create mode 100644 src/machine/src/base/project/models/ProjectModel.cs
+ create mode 100644 src/machine/src/base/project/models/Property.cs
+ create mode 100644 src/machine/src/base/project/models/Sdk.cs
+ create mode 100644 src/machine/src/base/project/models/TargetFramework.cs
+ create mode 100644 src/machine/src/base/project/models/TargetFrameworks.cs
+ create mode 100644 src/machine/src/base/project/models/Version.cs
+ create mode 100644 src/machine/src/base/project/ops/generic.cs
+ create mode 100644 src/machine/src/base/project/templates/ResBytes.xml
+ rename src/machine/src/services/emitters/accessors/ops/{SaveCatalog.cs => SaveResIndex.cs} (96%)
+ rename src/machine/src/services/{emitters => processors}/ProcessBrokers.cs (94%)

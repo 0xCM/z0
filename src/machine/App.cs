@@ -43,7 +43,7 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {            
-            using var workflows = MachineWorkflows.create(Context);
+            using var workflows = Workflows.machine(Context);
             workflows.Run();
             //AppDataEmitter.Service.Emit(Context);
         }

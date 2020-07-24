@@ -8,11 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.IO;
 
     using static Konst;
 
-    public static class Streams
-    {    
+    [ApiHost]
+    public readonly partial struct Streams
+    {           
         /// <summary>
         /// Constructs a nonempty stream
         /// </summary>
@@ -61,6 +63,5 @@ namespace Z0
         /// <typeparam name="T">The streamed element type</typeparam>
         public static IEnumerable<T> join<T>(params IEnumerable<T>[] src)
             => src.SelectMany(x => x);
-
     }
 }

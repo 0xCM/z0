@@ -22,7 +22,10 @@ namespace Z0
             where T : unmanaged
                 => chars_u(value, dst, offset);
 
-
+        /// <summary>
+        /// Computes the 2-character hex representation of a byte
+        /// </summary>
+        /// <param name="src">The byte value</param>
         [MethodImpl(Inline), Op]
         public static void chars(byte value, out char d0, out char d1)
         {
@@ -41,8 +44,7 @@ namespace Z0
             ref readonly var codes = ref first(UpperDigits);
             var storage = Stacks.char2();
             ref var dst = ref storage.C0;
-            
-            
+                        
             seek(dst,0) = (char)skip(codes, (byte)(0xF & src));
             seek(dst,1) = (char)skip(codes, (byte)((src >> 4) & 0xF));
             return Stacks.span(ref storage);
@@ -177,7 +179,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(Hex4Kind kind)
             => chars(text(n4), kind);
-
 
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> chars_u<T>(T value)

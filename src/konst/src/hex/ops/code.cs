@@ -13,19 +13,19 @@ namespace Z0
     partial class Hex
     {
         /// <summary>
-        /// Returns the hex character code for a number in the interval [0,15]
+        /// Returns the hex character code for a <see cref='uint4'/> value
         /// </summary>
-        /// <param name="n">The value to be hex-encoded</param>
+        /// <param name="src">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
-        public static byte code(UpperCased upper, byte n)
-            => skip(in first(UpperDigits), (byte)(n & 0xf));
+        public static HexCodeUp code(UpperCased upper, uint4 src)
+            => (HexCodeUp)skip(first(UpperDigits), src);
 
         /// <summary>
-        /// Returns the hex character code for a number in the interval [0,15]
+        /// Returns the hex character code for a <see cref='uint4'/> value
         /// </summary>
-        /// <param name="n">The value to be hex-encoded</param>
+        /// <param name="src">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
-        public static byte code(LowerCased lower, byte n)
-            => skip(in first(LowerDigits), (byte)(n & 0xf));
+        public static HexCodeLo code(LowerCased lower, uint4 src)
+            => (HexCodeLo)skip(first(LowerDigits), src);
     }
 }

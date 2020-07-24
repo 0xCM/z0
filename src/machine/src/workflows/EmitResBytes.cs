@@ -18,7 +18,7 @@ namespace Z0
         public static WorkflowIdentity Identity
         {
             [MethodImpl(Inline)]
-            get => Workflows.identify(PartId.Machine, nameof(EmitResBytes));
+            get => WorkflowIdentity.define<EmitResBytes>(PartId.Machine);
         }
         
         const string ProjectName = "bytes";

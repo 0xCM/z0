@@ -42,22 +42,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public CorrelationToken(string value)
-        {
-            Identifier = value;
-        }
+            => Identifier = value;
 
         [MethodImpl(Inline)]
         public CorrelationToken(Guid value)
-        {
-            Identifier = value.ToString();
-        }
+            => Identifier = value.ToString();
 
         [MethodImpl(Inline)]
         public CorrelationToken(object value)
-        {
-            Identifier = text.format(value);
-        }
-
+            => Identifier = text.format(value);
+        
         public bool IsEmpty 
             => string.IsNullOrWhiteSpace(Identifier);
          

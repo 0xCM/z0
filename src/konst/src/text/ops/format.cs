@@ -22,6 +22,15 @@ namespace Z0
             => string.Concat(a,b);
 
         /// <summary>
+        /// Formats the pair of strings represented by repsective character spans
+        /// </summary>
+        /// <param name="a">The leading content</param>
+        /// <param name="b">The trailing content</param>
+        [MethodImpl(Inline), Op]
+        public static string format(ReadOnlySpan<char> a)
+            => a.ToString();
+
+        /// <summary>
         /// Formats a pattern using an arbitrary kind/number of arguments
         /// </summary>
         /// <param name="pattern">The source pattern</param>

@@ -6,15 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    
+    using static Konst;
+    using static z;
 
-    public static partial class XTend
+    partial struct Workflows
     {
-        
+        [MethodImpl(Inline)]
+        public CorrelationToken<ulong> correlate()
+            => new CorrelationToken<ulong>((ulong)z.atomic(ref Correlation));
     }
-
-    public static partial class Flow
-    {
-        
-    }
-
 }

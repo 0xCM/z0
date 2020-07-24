@@ -11,27 +11,19 @@ namespace Z0
     using static Konst;
     using static z;
 
+    /// <summary>
+    /// Defines a receiver-predicated sink
+    /// </summary>
     public readonly struct Sink<T> : ISink<T>
     {
-        [MethodImpl(Inline)]
-        public static Sink<T> from(StreamWriter dst)
-        {
-            void Target(in T src) => dst.WriteLine(src);
-            return new Sink<T>(Target);
-        }
-
         readonly Receiver<T> Target;
         
         [MethodImpl(Inline)]
         public Sink(Receiver<T> dst)
-        {
-            Target = dst;
-        }
+            => Target = dst;
         
         [MethodImpl(Inline)]
         public void Deposit(T src)
-        {
-            Target(src);
-        }
+            => Target(src);
     }    
 }

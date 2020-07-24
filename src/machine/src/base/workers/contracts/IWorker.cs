@@ -11,7 +11,11 @@ namespace Z0
 
     public interface IWorker
     {
-        void Process(IOperands args, IWorkState state) {}
+        void Process(IOperands args, IWorkState state) 
+        {
+
+            
+        }
     }
 
     public interface IWorker<C>: IWorker
