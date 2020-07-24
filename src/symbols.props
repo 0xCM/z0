@@ -3,6 +3,8 @@
   <PropertyGroup>
     <Part>$(Src)part/z0.part.csproj</Part>
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
+    <Domain>$(Src)domain/z0.domain.csproj</Domain>
+
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
     
     <Expressive>$(Src)expressive/z0.expressive.csproj</Expressive>

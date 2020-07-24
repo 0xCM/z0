@@ -9,7 +9,11 @@
     <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Domain)" />
+  
   </ItemGroup>  
+
+   <ItemGroup>
+    <EmbeddedResource Include="domain/asm/datadriven/data/**/*.csv" /> 
+  </ItemGroup>
 
 </Project>

@@ -13,6 +13,8 @@ public enum PartId : ulong
     Part = 1,
 
     Sys = 2,
+    
+    Domain = 3,
 
     Konst = 5,
 
@@ -160,8 +162,6 @@ public enum PartId : ulong
 
     ZXed = 165,
     
-    Text = 167,
-
     Tokens = 168,
 
     V0 = 200,

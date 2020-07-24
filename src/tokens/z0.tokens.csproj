@@ -13,9 +13,6 @@
     <ProjectReference Include="$(Identify)" />
   </ItemGroup>  
 
-   <ItemGroup>
-    <EmbeddedResource Include="res/**/*.csv" /> 
-  </ItemGroup>
 
 
 </Project>

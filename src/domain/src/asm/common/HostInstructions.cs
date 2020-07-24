@@ -63,6 +63,6 @@ namespace Z0.Asm
         }
 
         public static HostInstructions Empty 
-            => new HostInstructions(ApiHostUri.Empty, Root.array<MemberInstructions>());
+            => new HostInstructions(ApiHostUri.Empty, sys.empty<MemberInstructions>());
     }
 }

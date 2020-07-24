@@ -11,6 +11,7 @@ namespace Z0.Asm
     using System.Linq;
     
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Defines an *unbased* sequence of instructions
@@ -25,7 +26,7 @@ namespace Z0.Asm
         public BinaryCode Encoded {get;}
 
         public static AsmInstructions Empty 
-            => Create(Root.array<Instruction>(), BinaryCode.Empty);
+            => Create(array<Instruction>(), BinaryCode.Empty);
         
         [MethodImpl(Inline)]
         public static AsmInstructions Create(Instruction[] src, BinaryCode data)

@@ -1,0 +1,9 @@
+export ProjectId=domain
+export Needs="part sys konst"
+export ScriptDir=$ZDev/src/.scripts
+export AddCmd=$ScriptDir/add-project.sh
+export RemoveCmd=$ScriptDir/remove-project.sh
+export BuildCmd=$ScriptDir/build-project.sh
+export BuildLoggedCmd=$ScriptDir/build-logged.sh
+export CleanCmd=$ScriptDir/clean-project.sh
+export UnbuildCmd="z0 $Needs"

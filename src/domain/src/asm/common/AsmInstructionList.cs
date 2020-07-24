@@ -17,7 +17,7 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmInstructionList : IReadOnlyList<Instruction>
     {        
-        public static AsmInstructionList Empty = new AsmInstructionList(Root.array<Instruction>(), LocatedCode.Empty);
+        public static AsmInstructionList Empty = new AsmInstructionList(z.array<Instruction>(), LocatedCode.Empty);
 
         readonly Instruction[] Source;
 
@@ -34,8 +34,8 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         AsmInstructionList(Instruction[] instructions, LocatedCode data)
         {
-            this.Source = instructions;
-            this.Encoded = data;
+            Source = instructions;
+            Encoded = data;
         }
 
         Instruction IReadOnlyList<Instruction>.this[int index]  

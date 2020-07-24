@@ -1,5 +1,9 @@
+
 set Archive="K:\z0\archives"
 set ResDst="%ArchiveDir%\res"
+set DevRoot=%ZDev%
+set DevBin="%DevRoot%\bin"
+
 
 set CaptureSrc="%ZLogs%\apps\control\capture"
 set CaptureDst="K:\z0\archives\res\capture"
@@ -10,11 +14,6 @@ set ZDataSrc="%ZDev%\src\zdata\content"
 set ZDataDst="K:\z0\archives\zdata"
 set ZDataLog="%ZLogs%\etl\zdata-archive.log"
 robocopy %ZDataSrc% %ZDataDst% /log:%ZDataLog% /tee /TS /BYTES /V /MIR 
-
-set AlgSrc="%ZLogs%\exports\algorithms"
-set AlgDst="K:\z0\archives\res\algorithms"
-set AlgLog="%ZLogs%\etl\algorithms-archive.log"
-robocopy %AlgSrc% %AlgDst% /log:%AlgLog% /tee /TS /BYTES /V /MIR 
 
 set ResBytesSrc="%ZLogs%\res\bytes"
 set ResBytesDst="K:\z0\archives\res\bytes"
@@ -60,6 +59,7 @@ set EtlLogSrc="%ZLogs%\etl"
 set EtlLogDst="K:\z0\archives\.logs"
 set EltLogLog="%ZLogs%\etl\etl-archive.log"
 robocopy %EtlLogSrc% %EtlLogDst% /log:%EltLogLog% /tee /TS /BYTES /V /MIR
+
 
 set VerSrc="%ZDev%\version"
 set VerDst="K:\z0\archives"
