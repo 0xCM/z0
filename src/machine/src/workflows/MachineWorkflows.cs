@@ -15,7 +15,7 @@ namespace Z0
         public static MachineWorkflows alloc(IAppContext context)
             => new MachineWorkflows(context);
         
-        readonly WorkflowIdentity[] Known;
+        readonly ActorIdentity[] Known;
         
         readonly EventBroker Broker;
 
@@ -25,16 +25,13 @@ namespace Z0
         {
             Broker = new EventBroker(context.AppPaths.AppStandardOutPath);
             Context = context;
-            Known = array(
-                WorkflowIdentity.define<MachineWorkflows>(PartId.Machine),                
-                EmitResBytes.Identity
-                );
+            Known = sys.empty<ActorIdentity>();
         }
         
         public void Run(params string[] args)
         {
             CaptureHost.Service(Context).Run(args);
-            AppDataEmitter.Service(Context).Run(args);
+            EmissionWorkflow.Service(Context).Run(args);
         }
 
         public void Dispose()

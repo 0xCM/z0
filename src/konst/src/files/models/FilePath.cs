@@ -119,5 +119,10 @@ namespace Z0
 
         public FilePath ChangeExtension(FileExtension ext)
             => FolderPath + FileName.Define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Name));
+
+        public FileInfo Info
+        {
+            get => new FileInfo(Name);
+        }
     }
 }

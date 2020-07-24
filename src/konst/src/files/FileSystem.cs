@@ -11,6 +11,7 @@ namespace Z0
 
     public readonly partial struct FileSystem
     {
+        
         public static string SearchPattern(params FileExtension[] extensions)
             => text.join(";*.", extensions.Select(e => e.Name));
     

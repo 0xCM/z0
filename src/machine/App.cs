@@ -50,12 +50,31 @@ namespace Z0
             var files = new PartFiles(root);
         }
 
-        public override void RunShell(params string[] args)
-        {            
+        void ReadRes()
+        {
+            var map = MemoryFile.resbytes();
+            var @base = map.BaseAddress;
+            var data = map.Read(@base, 16);
+            var info = map.FileInfo;
+            term.print(info.Length);
+
+            term.print(@base);
+            term.print(data.Length);
+            term.print(new BinaryCode(data.ToArray()));
+        }
+        
+        void RunWorkflows(params string[] args)
+        {
             term.print($"Commencing machine worklfow sequence");
             using var workflows = Workflows.machine(Context);
             workflows.Run(args);
             term.print($"Completed machine worklfow sequence");
+
+        }
+        public override void RunShell(params string[] args)
+        {            
+            
+            ReadRes();
         }
 
         public static void Main(params string[] args)

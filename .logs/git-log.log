@@ -75,3 +75,24 @@
  create mode 100644 src/machine/src/base/flow/ops/status.cs
  create mode 100644 src/machine/src/base/flow/ops/workflow.cs
  create mode 100644 src/part/src/interfaces/IDataType.cs
+[master 9360bb0f1] .
+ 42 files changed, 824 insertions(+), 985 deletions(-)
+ delete mode 100644 emit.bat
+ delete mode 100644 needs.bat
+ delete mode 100644 src/konst/src/literals/services/fields/ops/format.cs
+ create mode 100644 src/machine/src/base/PartTypes.cs
+ delete mode 100644 src/machine/src/base/project/templates/ResBytes.xml
+ create mode 100644 src/machine/src/capture/CaptureConfig.cs
+ create mode 100644 src/machine/src/capture/CaptureHost.cs
+ create mode 100644 src/machine/src/capture/CaptureMessages.cs
+ create mode 100644 src/machine/src/projects/ResBytes.xml
+ rewrite src/machine/src/services/emitters/AppDataEmitter.cs (65%)
+ delete mode 100644 src/machine/src/services/emitters/AppDataEmitterSteps.cs
+ rewrite src/machine/src/services/emitters/LiteralFieldEmitter.cs (73%)
+ rename src/machine/src/{workflows/IAccessorCapture.cs => services/emitters/accessors/AccessorCapture.cs} (51%)
+ create mode 100644 src/machine/src/services/emitters/workers/EmitDocs.cs
+ rename src/machine/src/{base/flow => workflows}/MachineWorkflows.cs (72%)
+ delete mode 100644 src/zdata/content/algorithms/call.pas
+ delete mode 100644 src/zdata/content/algorithms/jcc.pas
+ delete mode 100644 src/zdata/content/algorithms/jmp.pas
+ delete mode 100644 unbuild.bat
