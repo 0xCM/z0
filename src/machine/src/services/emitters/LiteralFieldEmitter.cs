@@ -5,95 +5,183 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
+
     using System.Linq;
 
     using static z;
+    using static Konst;
+
+    using PK = PrimalKindId;    
 
     public readonly struct LiteralFieldEmitter
     {
         readonly IAppContext Context;
 
+        FolderPath Target 
+            => Context.AppPaths.AppDataRoot + FolderName.Define("literals");
+
+        KnownParts Parts
+            => KnownParts.Service;
+
         public LiteralFieldEmitter(IAppContext context)
+            => Context = context;
+
+        public void Run()
         {
-            Context = context;
-        }
-
-        static void emit(FieldRef[] fields, FilePath path)
-        {            
-            const string Sep = "| ";
-
-            var src = span(fields);            
-            var dst = list<string>();
-            using var writer = path.Writer();
-            
-            for(var i=0u; i<src.Length; i++)
+            Target.Clear();            
+            var parts = span(Parts.Known.Map(part => PartTypes.from(part)));
+            foreach(var part in parts)
             {
-                if(i == 0)
-                {
-                    var header = text.concat(
-                            "Field Addresss".PadRight(16), Sep,
-                            "Field Width".PadRight(16), Sep,
-                            "Declaring Type".PadRight(36), Sep, 
-                            "Field Name".PadRight(36), Sep, 
-                            "Value".PadRight(48), Sep);
-                    writer.WriteLine(header);
-
-                }
                 try
                 {
-                    ref readonly var field = ref skip(src,i);
-                    var datatype = field.KindId;
-                    if(datatype == PrimalKindId.String || datatype == PrimalKindId.C16)
-                        continue;
-
-                    var declarer = field.Metadata.DeclaringType;                
-                    var data = field.Reference.Load();
-                    var content = LiteralFields.format(field);
-
-                    var dtName = declarer.IsEnum 
-                        ? text.concat(declarer.Name, Chars.Colon, datatype.Format()) 
-                        : datatype.Format();
-
-
-                    var line = text.concat(
-                        field.Address.Format().PadRight(16), Sep, 
-                        field.Width.Count.ToString().PadRight(16), Sep,
-                        declarer.Name.PadRight(36), Sep, 
-                        field.Metadata.Name.PadRight(36), Sep,
-                        content.PadRight(48), Sep
-                        );
-                    
-                    writer.WriteLine(line);
+                    Emit(part);
                 }
                 catch(Exception e)
                 {
-                    term.error(e);
-                }
-            }        
-        }
-        
-        FolderPath EmissionRoot
-            => Context.AppPaths.AppDataRoot + FolderName.Define("literals");
-    
-        public void Emit()
-        {
-            EmissionRoot.Clear();
-            
-            var src = KnownParts.Service.Known;
-            var parts = from part in  KnownParts.Service.Known
-                        let types = part.Owner.Types()
-                        orderby part.Id
-                        select (part.Id, types);
-
-            foreach(var part in parts)
-            {
-                var fields = LiteralFields.refs(part.types);
-                if(fields.Length != 0)
-                {
-                    var datapath = EmissionRoot + FileName.Define(part.Id.Format(), FileExtensions.Csv);
-                    emit(fields, datapath);                                     
+                   term.error(e);
                 }
             }
+        }
+
+        const string Sep = "| ";
+
+        [Op]
+        unsafe static FieldRef from(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
+        {
+            var data = LiteralFields.value(src);
+            var type = src.FieldType;
+
+            var datatype = Primitive.kind(type);
+            if(data is string s)
+            {                                
+                var content = z.span(s);
+                var size = s.Length*2;
+                var segment = memref(pvoid(first(content)), size);
+                return new FieldRef(src, segment);
+            }
+            else if(type.IsEnum)
+            {
+                var nk = type.GetEnumUnderlyingType().NumericKind();
+                var size = nk.Width()/8;
+                var segment = memref(@base + offset, size);
+                return new FieldRef(src, segment);
+            }
+            else if(type.IsPrimalNumeric())
+            {
+                var nk = type.NumericKind();
+                var size = nk.Width()/8;
+                var segment = memref(@base + offset, size);
+                return new FieldRef(src, segment);
+            }
+            else if(type.IsChar())
+                return new FieldRef(src, memref(@base + offset, 2));
+            else if(type.IsDecimal())
+                return new FieldRef(src, memref(@base + offset, 16));                
+            return FieldRef.Empty;
+        }
+
+        [Op]
+        public static FieldRef[] refs(params Type[] src)
+        {
+            var dst = list<FieldRef>();
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+            {
+                var type = src[i];
+                var fields = LiteralFields.search(type);
+                var @base = address(type);
+                var offset = MemoryAddress.Empty;
+                for(var j=0u; j<fields.Length; j++)
+                {
+                    var field = fields[j];
+                    var segment = from(@base, offset, field);
+                    if(segment.IsNonEmpty)
+                    {
+                        z.append(dst,segment);
+                        offset += segment.DataSize;
+                    }
+                }
+            }
+            return dst.Array();
+        }
+
+        [Op]
+        static FieldRef[] refs(Assembly src)
+            => refs(src.Types());
+
+        static string format(in FieldRef src)
+        {       
+            var datatype = src.KindId;
+            var data = src.Field.GetRawConstantValue();            
+            if(src.Field.FieldType.IsEnum)
+                return data.ToString();
+
+            return datatype switch {
+                PK.String => cast<string>(data),
+                PK.C16 => cast<char>(data).ToString(),
+                PK.I8 => hex(cast<sbyte>(data)),
+                PK.U8 => hex(cast<byte>(data)),
+                PK.I16 => hex(cast<short>(data)),
+                PK.U16 => hex(cast<ushort>(data)),
+                PK.I32 => hex(cast<int>(data)),
+                PK.U32 => hex(cast<uint>(data)),
+                PK.I64 => hex(cast<long>(data)),
+                PK.U64 => hex(cast<ulong>(data)),
+                PK.F32 => hex(cast<float>(data)),
+                PK.F64 => hex(cast<double>(data)),
+                PK.F128 => hex(cast<decimal>(data)),
+                PK.U1 => cast<bool>(data).ToString(),
+                _ =>  $"{datatype} unrecognized"
+            };
+        }
+
+        [MethodImpl(Inline)]
+        static string hex<T>(T src)
+            where T : unmanaged
+                => Hex.format(src, false, false);        
+
+        static string FormatHeader()
+            => text.concat(
+                "FieldAddresss".PadRight(16), Sep,
+                "FieldWidth".PadRight(16), Sep,
+                "DeclaringType".PadRight(36), Sep, 
+                "FieldName".PadRight(36), Sep, 
+                "Value".PadRight(48), Sep
+                );
+
+        static string FormatLine(FieldRef src)
+        {
+            var content = format(src).PadRight(48);
+            var address = src.Address.Format().PadRight(16);
+            var width = src.Width.Count.ToString().PadRight(16);
+            var type = src.Field.DeclaringType.Name.PadRight(36);
+            var field = src.Field.Name.PadRight(36);
+            var line = text.concat(address, Sep, width, Sep,type, Sep, field, Sep, content, Sep);
+            return line;
+        }
+
+        static void Emit(FieldRef[] src, FilePath dst)
+        {            
+            var input = span(src);            
+            var count = input.Length;
+
+            using var writer = dst.Writer();            
+            writer.WriteLine(FormatHeader());
+
+            for(var i=0u; i<count; i++)
+            { 
+                ref readonly var field = ref skip(input,i);
+                writer.WriteLine(FormatLine(field));
+            }        
+        }
+                
+        void Emit(PartTypes src)
+        {
+            var fields = LiteralFields.refs(src.Types);
+            if(fields.Length != 0)
+                Emit(fields, Target + FileName.Define(src.Part.Format(), FileExtensions.Csv));
         }
     }
 }

@@ -41,26 +41,13 @@ namespace Z0
             Target = dst;
         }
         
-        public void Run()        
+        public void Run(params string[] args)        
         {
             var indices = Source.ReadIndices().ToArray();
             term.print($"Loaded {indices.Length} encoded hex files");
 
             foreach(var index in indices)
                 emit(index, Target);
-
-            //emit(new ResourceProject(ProjectName), Target);
-        }
-
-        static void emit(IEncodedHexArchive source, FolderPath target, params PartId[] src)        
-        {
-            var indices = source.ReadIndices(src).ToArray();
-            term.print($"Loaded {indices.Length} encoded hex files for {src}");
-
-            foreach(var index in indices)
-                emit(index, target);
-
-            //emit(new ResourceProject(ProjectName), target);
         }
 
         static void emit(IdentifiedCodeIndex src, FolderPath dst)
@@ -88,9 +75,6 @@ namespace Z0
             CloseFileNamespace(writer);
             term.print($"Emitted {resources.Count} resource definitions to {path}");
         }
-
-        // static void emit(ResourceProject project, FolderPath dst)
-        //     => (dst + project.FileName).Ovewrite(project.Definition);
 
         static string render(BinaryResourceSpec src, int level = 2)
             => text.concat("public static ReadOnlySpan<byte> ", 

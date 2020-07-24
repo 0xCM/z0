@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface IWorkflowStep
     {
-        void Run();        
+        void Run(params string[] args);        
     }
     
     public interface IWorkflowStep<S> : IWorkflowStep

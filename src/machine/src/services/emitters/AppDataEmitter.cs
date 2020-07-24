@@ -9,61 +9,78 @@ namespace Z0
 
     using Z0.Asm;
 
-    public readonly struct AppDataEmitter 
+    public readonly partial struct AppDataEmitter 
     {
-        public static AppDataEmitter Service 
-            => default;
-
-        static AppDataEmitterSteps Steps 
-            => default;
-
-        static void EmitDocs(IAppContext app)
-            => Commented.collect();
-
-        static void EmitResBytes(IAppContext app)
-            => Steps.EmitResBytes.Configure(app).Run();
-
-        static void CaptureEmissions(IAppContext app)
+        readonly IAppContext Context;
+        
+        public AppDataEmitter(IAppContext context)
         {
-            var suite = ContextFactory.CreateClientContext(app);
+            Context = context;
+        }
+        
+        public static AppDataEmitter Service(IAppContext context) 
+            => new AppDataEmitter(context);
+
+        void ExecEmitDocs()
+        {
+            new EmitDocs(this).Run();
+        }
+
+        void EmitResBytes()
+        {
+            term.magenta("Emitting resbytes");
+            var step = new EmitResBytes();
+            step.Configure(Context).Run();
+        }
+
+        void CaptureEmissions()
+        {
+            term.magenta("Capturing emissions");
+            var suite = ContextFactory.CreateClientContext(Context);
             var ac = new AccessorCapture(suite.AsmContext);
             ac.CaptureResBytes();        
         }
 
-        static void EmitMetadata(IAppContext app)
-            => MetadataEmitter.Service(app).Emit();
+        void EmitMetadata()
+        {
+            term.magenta("Emitting metadata");                 
+            MetadataEmitter.Service(Context).Emit();
+            term.magenta("Emitted metadata");                 
+        }
 
-        static void EmitEnumDatasets(IAppContext app)
-            => EnumDatasetEmitter.Service(app).Emit();
+        void EmitEnumDatasets()
+        {
+            term.magenta("Emitting enum datasets");
+            EnumDatasetEmitter.Service(Context).Emit();
+            term.magenta("Emitted enum datasets");
+        }
+        
+        void EmitLiterals()
+        {
+            term.magenta("Emitting literal fields");
+            new LiteralFieldEmitter(Context).Run();                        
+            term.magenta("Emitted literal fields");
+        }
 
-        static void All(IAppContext app)
+        void EmitBitMasks()
         {
             term.magenta("Emitting bitmask data");
-            ReflectedLiterals.emit(typeof(BitMasks), app.AppPaths);
-
-            term.magenta("Emitting metadata");
-            EmitMetadata(app);
-            
-            term.magenta("Emitting documentation");
-            EmitDocs(app);
-
-            term.magenta("Emitting resbytes");
-            EmitResBytes(app);
-            
-            term.magenta("Capturing emissions");
-            CaptureEmissions(app);            
-
-            term.magenta("Emitting enum datasets");
-            EmitEnumDatasets(app);
-
-            term.magenta("Emitting literal fields");
-            new LiteralFieldEmitter(app).Emit();                        
+            ReflectedLiterals.emit(typeof(BitMasks), Context.AppPaths);
+            term.magenta("Emitted bitmask data");
         }
-                
-        public static CodeResourceIndex Load(IAppContext app)
-            => Resources.code(Assembly.LoadFrom(app.AppPaths.ResBytes.Name));
+                        
+        public CodeResourceIndex Load()
+            => Resources.code(Assembly.LoadFrom(Context.AppPaths.ResBytes.Name));
         
-        public void Emit(IAppContext app)
-            => All(app);
+        public void Run(params string[] args)
+        {
+            EmitBitMasks();
+            EmitMetadata();        
+            ExecEmitDocs();
+            EmitResBytes();            
+            CaptureEmissions();            
+            EmitEnumDatasets();
+            EmitLiterals();
+        }
     }
 }

@@ -24,6 +24,6 @@ namespace Z0
             where T : struct, IWorkflowWorker<T>
                 => default;        
         public static MachineWorkflows machine(IAppContext context)
-            => new MachineWorkflows(context);
+            => MachineWorkflows.alloc(context);
     }
 }

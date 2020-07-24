@@ -1,1 +1,0 @@
-call z0.exe

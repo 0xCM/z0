@@ -11,26 +11,27 @@ namespace Z0
 
     using static Konst;
     
-    public readonly partial struct AccessorCapture : IAccessorCapture
+    public readonly partial struct AccessorCapture
     {
         readonly IAsmContext Context;
         
-        IAppContext IContextual<IAppContext>.Context 
-            => Context.ContextRoot;
-
-        IAccessorCapture This => this;
-
-        FolderPath ResIndexDir
-            => This.Context.AppPaths.ResIndexDir;
+        public FolderPath ResIndexDir
+            => Context.AppPaths.ResIndexDir;
         
-        FolderPath ResBytesDir
-            => This.ResBytesDir;
+        public FolderPath ResBytesDir
+            => Context.AppPaths.AppDataRoot + FolderName.Define("resbytes");
 
-        FilePath ResBytesCompiled
-            => This.ResBytesCompiled;
+        /// <summary>
+        /// The x86 resource assembly output path - which was created by disassembling most of z0
+        /// </summary>
+        public FilePath ResBytesCompiled
+            => FilePath.Define(@"J:\dev\projects\z0-logs\res\bin\lib\netcoreapp3.0\z0.res.dll");
 
-        FolderPath ResBytesUncompiled
-            => This.ResBytesUncompiled;
+        /// <summary>
+        /// The target directory that receives data obtained by disassembling the resource disassembly file <see cref='ResBytesCompiled'/>
+        /// </summary>
+        public FolderPath ResBytesUncompiled
+            => ResBytesDir + FolderName.Define("asm");
 
         [MethodImpl(Inline)]
         public AccessorCapture(IAsmContext context)

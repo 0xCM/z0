@@ -12,7 +12,6 @@ namespace Z0
     
     using static z;
     
-    [ApiDataType]
     public readonly struct CorrelationToken<T> : IDataType<CorrelationToken<T>>
         where T : unmanaged
     {

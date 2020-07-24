@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
 
@@ -120,5 +121,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint hash(decimal x, decimal y)
             => hash(@ulong(x) ,@ulong(y));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint hash<T>(Vector128<T> src)
+            where T : unmanaged
+        {
+            var v = v64u(src);
+            return hash(vcell(v,0), vcell(v,1));
+        }
     }
 }

@@ -1,5 +1,12 @@
 {
-    "Flag1": "True",
-    "Flag2": "True",
-    "Setting1" : "34"
+    "EmitPrimaryArtifacts": "True",
+    "CheckExecution": "True",
+    "EmitImmArtifacts" : "True",
+    "DuplicateCheck": "True",
+    "HandleExtractsParsed": "True",
+    "CollectAsmStats": "True",
+    "MatchEmissions": "True",
+    "HandleHostReportSaved": "False",
+    "HandleExtractReportCreated": "False",
+    "HandleParseReportCreated": "False"
 }

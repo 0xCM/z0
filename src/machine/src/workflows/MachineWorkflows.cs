@@ -12,26 +12,32 @@ namespace Z0
         
     public readonly partial struct MachineWorkflows : IWorkflowStep<MachineWorkflows>, IWorkflowSteps<MachineWorkflows>, IDisposable
     {        
+        public static MachineWorkflows alloc(IAppContext context)
+            => new MachineWorkflows(context);
+        
         readonly WorkflowIdentity[] Known;
         
         readonly EventBroker Broker;
 
         readonly IAppContext Context;
 
-        internal MachineWorkflows(IAppContext context)
+        MachineWorkflows(IAppContext context)
         {
             Broker = new EventBroker(context.AppPaths.AppStandardOutPath);
             Context = context;
-            Known = z.array(
+            Known = array(
                 WorkflowIdentity.define<MachineWorkflows>(PartId.Machine),                
                 EmitResBytes.Identity
                 );
         }
         
+        public void Run(params string[] args)
+        {
+            CaptureHost.Service(Context).Run(args);
+            AppDataEmitter.Service(Context).Run(args);
+        }
+
         public void Dispose()
             => Broker.Dispose();
-
-        public void Run()
-            => AppDataEmitter.Service.Emit(Context);
     }
 }

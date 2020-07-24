@@ -19,7 +19,6 @@ namespace Z0
         public static XedContext create()
             => new XedContext(data());            
         
-
         [MethodImpl(Inline), Op]
         public static ClrTypes types()
             => types(Assembly.GetExecutingAssembly());

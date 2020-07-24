@@ -16,7 +16,6 @@ namespace Z0.Xed
     /// operands with derived information from decode and also valid
     /// #xed_inst_t pointer which describes the operand templates and the
     /// operand order.  See @ref DEC for API documentation.
-    [ApiHost]
     public struct xed_decoded_inst_t
     {
         [MethodImpl(Inline)]

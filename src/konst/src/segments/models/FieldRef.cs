@@ -15,43 +15,50 @@ namespace Z0
     /// </summary>
     public readonly struct FieldRef : INullity
     {                    
-        public SegRef Reference {get;}
+        public readonly SegRef Segment;
 
-        public FieldInfo Metadata {get;}
+        public readonly FieldInfo Field;
 
         [MethodImpl(Inline)]
         public static implicit operator FieldRef((FieldInfo field, SegRef location) src)
-            => new FieldRef(src.field, src.location);
+            => new FieldRef(src.location, src.field);
 
         [MethodImpl(Inline)]
-        public FieldRef(FieldInfo field, in SegRef location)
+        public FieldRef(FieldInfo field, in SegRef seg)
         {
-            Metadata = field;
-            Reference = location;        
+            Segment = seg;        
+            Field = field;
         }
 
-        public MemoryRange Segment
+        [MethodImpl(Inline)]
+        public FieldRef(in SegRef seg, FieldInfo field)
+        {
+            Segment = seg;        
+            Field = field;
+        }
+
+        public MemoryRange Range
         {
             [MethodImpl(Inline)]
-            get => Reference.Range;
+            get => Segment.Range;
         }
         
         public string FieldName
         {
             [MethodImpl(Inline)]
-            get => Metadata.Name;
+            get => Field.Name;
         }
 
         public object ReflectedValue
         {
             [MethodImpl(Inline)]
-            get => Metadata.GetRawConstantValue();
+            get => Field.GetRawConstantValue();
         }
         
         public Type DeclaringType
         {
             [MethodImpl(Inline)]
-            get => Metadata.DeclaringType;
+            get => Field.DeclaringType;
         }
 
         /// <summary>
@@ -60,7 +67,7 @@ namespace Z0
         public uint DataSize
         {
             [MethodImpl(Inline)]
-            get => Reference.DataSize;
+            get => Segment.DataSize;
         }
 
         /// <summary>
@@ -69,13 +76,13 @@ namespace Z0
         public BitSize Width
         {
             [MethodImpl(Inline)]
-            get => Reference.DataSize;
+            get => Segment.DataSize;
         }
 
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Reference.Address;
+            get => Segment.Address;
         }
 
         /// <summary>
@@ -188,7 +195,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public StringRef ToStringRef()
-            => new StringRef(Reference);
+            => new StringRef(Segment);
             
         /// <summary>
         /// Presents the leading source cell as a reference to an enum value of parametric kind
@@ -212,22 +219,22 @@ namespace Z0
         public PrimalKindId KindId
         {
             [MethodImpl(Inline)]
-            get => (PrimalKindId)Type.GetTypeCode(Metadata.FieldType);
+            get => (PrimalKindId)Type.GetTypeCode(Field.FieldType);
         }
         
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Reference.IsEmpty;
+            get => Segment.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !Reference.IsEmpty;
+            get => !Segment.IsEmpty;
         }
 
         public static FieldRef Empty 
-            => new FieldRef(null, SegRef.Empty);
+            => new FieldRef(EmptyVessels.EmptyField, SegRef.Empty);
     }
 }

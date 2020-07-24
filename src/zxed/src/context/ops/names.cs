@@ -16,8 +16,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static EnumNames names(Type src)                   
-            => new EnumNames(src, System.Enum.GetNames(src));        
-
-
+            => new EnumNames(src, System.Enum.GetNames(src));
     }
 }

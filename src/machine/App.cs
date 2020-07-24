@@ -13,6 +13,16 @@ namespace Z0
 
     using P = Z0.Parts;
     
+    public readonly struct PartSelection : IContentedIndex<IPart>
+    {
+        public static PartSelection Selected => default(PartSelection);
+        
+        IPart[] IContented<IPart[]>.Content
+            => new IPart[]{
+                P.GMath.Resolved,  
+               };
+    }    
+    
     class App : AppShell<App,IAppContext>
     {                
         static IAppContext CreateAppContext()
@@ -25,7 +35,7 @@ namespace Z0
         }
         
         public App()
-            : base(CreateAppContext())
+            : base(ContextFactory.CreateAppContext())
         {
         }
         
@@ -35,7 +45,6 @@ namespace Z0
             var parts = PartIdParser.Service.ParseValid(args);              
             var root =  AsmContext.Create(Context);
             var context = MachineContext.Create(root, parts);
-            var dataEmitter = AppDataEmitter.Service;
             var fileProcessor = new PartFileProcessor(context);
             var api = ApiComposition.Assemble(known);                        
             var files = new PartFiles(root);
@@ -43,9 +52,10 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {            
+            term.print($"Commencing machine worklfow sequence");
             using var workflows = Workflows.machine(Context);
-            workflows.Run();
-            //AppDataEmitter.Service.Emit(Context);
+            workflows.Run(args);
+            term.print($"Completed machine worklfow sequence");
         }
 
         public static void Main(params string[] args)

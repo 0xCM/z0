@@ -42,7 +42,6 @@ namespace Z0
             return dst.Array();
         }
 
-
         [Op]
         unsafe static FieldRef from(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
         {

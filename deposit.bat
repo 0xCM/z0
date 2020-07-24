@@ -1,54 +1,66 @@
+set Archive="K:\z0\archives"
+set ResDst="%ArchiveDir%\res"
+
 set CaptureSrc="%ZLogs%\apps\control\capture"
-set CaptureDst=K:\z0\archives\capture
+set CaptureDst="K:\z0\archives\res\capture"
 set CaptureLog="%ZLogs%\etl\capture-archive.log"
+robocopy %CaptureSrc% %CaptureDst% /log:%CaptureLog% /tee /TS /BYTES /V /MIR 
 
 set ZDataSrc="%ZDev%\src\zdata\content"
-set ZDataDst=K:\z0\archives\zdata
+set ZDataDst="K:\z0\archives\zdata"
 set ZDataLog="%ZLogs%\etl\zdata-archive.log"
+robocopy %ZDataSrc% %ZDataDst% /log:%ZDataLog% /tee /TS /BYTES /V /MIR 
+
+set AlgSrc="%ZLogs%\exports\algorithms"
+set AlgDst="K:\z0\archives\res\algorithms"
+set AlgLog="%ZLogs%\etl\algorithms-archive.log"
+robocopy %AlgSrc% %AlgDst% /log:%AlgLog% /tee /TS /BYTES /V /MIR 
 
 set ResBytesSrc="%ZLogs%\res\bytes"
-set ResBytesDst=K:\z0\archives\res\bytes
+set ResBytesDst="K:\z0\archives\res\bytes"
 set ResBytesLog="%ZLogs%\etl\res-bytes-archive.log"
+robocopy %ResBytesSrc% %ResBytesDst% /log:%ResBytesLog% /tee /TS /BYTES /V /MIR 
+
+set ResIdxSrc="%ZLogs%\res\index"
+set ResIdxDst="K:\z0\archives\res\index"
+set ResIdxLog="%ZLogs%\etl\res-index-archive.log"
+robocopy %ResIdxSrc% %ResIdxDst% /log:%ResIdxLog% /tee /TS /BYTES /V /MIR 
+
+set RecapSrc="%ZLogs%\apps\machine\resbytes\asm"
+set RecapDst="K:\z0\archives\res\recapture"
+set RecapLog="%ZLogs%\etl\res-recapture-archive.log"
+robocopy %RecapSrc% %RecapDst% /log:%RecapLog% /tee /TS /BYTES /V /MIR 
 
 set ResDocsSrc="%ZLogs%\res\docs"
-set ResDocsDst=K:\z0\archives\res\docs
+set ResDocsDst="K:\z0\archives\res\docs"
 set ResDocsLog="%ZLogs%\etl\res-docs-archive.log"
+robocopy %ResDocsSrc% %ResDocsDst% /log:%ResDocsLog% /tee /TS /BYTES /V /MIR 
 
-set ResMetaSrc="%ZLogs%\res\meta"
-set ResMetaDst=K:\z0\archives\res\meta
-set ResMetaLog="%ZLogs%\etl\res-meta-archive.log"
+set ResMetaSrc="%ZLogs%\res\metadata"
+set ResMetaDst="K:\z0\archives\res\metadata"
+set ResMetaLog="%ZLogs%\etl\res-metadata-archive.log"
+robocopy %ResMetaSrc% %ResMetaDst% /log:%ResMetaLog% /tee /TS /BYTES /V /MIR 
 
 set ResLitSrc="%ZLogs%\apps\machine\literals"
-set ResLitDst=K:\z0\archives\res\literals
+set ResLitDst="K:\z0\archives\res\literals"
 set ResLitLog="%ZLogs%\etl\literal-archive.log"
+robocopy %ResLitSrc% %ResLitDst% /log:%ResLitLog% /tee /TS /BYTES /V /MIR
 
 set XedSrc="%ZLogs%\apps\xed"
 set XedDst="K:\z0\archives\xed"
 set XedLog="%ZLogs%\etl\xed-archive.log"
+robocopy %XedSrc% %XedDst% /log:%XedLog% /tee /TS /BYTES /V /MIR
 
 set TestLogSrc="%ZLogs%\test"
 set TestLogDst="K:\z0\archives\test"
 set TestLogLog="%ZLogs%\etl\test-archive.log"
-
-set ExportSrc="%ZLogs%\exports"
-set ExportDst="K:\z0\archives\exports"
-set ExportLog="%ZLogs%\etl\exports-archive.log"
+robocopy %TestLogSrc% %TestLogDst% /log:%TestLogLog% /tee /TS /BYTES /V /MIR 
 
 set EtlLogSrc="%ZLogs%\etl"
 set EtlLogDst="K:\z0\archives\.logs"
 set EltLogLog="%ZLogs%\etl\etl-archive.log"
-
-robocopy %CaptureSrc% %CaptureDst% /log:%CaptureLog% /tee /TS /BYTES /V /MIR 
-robocopy %ZDataSrc% %ZDataDst% /log:%ZDataLog% /tee /TS /BYTES /V /MIR 
-robocopy %XedSrc% %XedDst% /log:%XedLog% /tee /TS /BYTES /V /MIR
-robocopy %ResBytesSrc% %ResBytesDst% /log:%ResBytesLog% /tee /TS /BYTES /V /MIR 
-robocopy %ResDocsSrc% %ResDocsDst% /log:%ResDocsLog% /tee /TS /BYTES /V /MIR 
-robocopy %ResMetaSrc% %ResMetaDst% /log:%ResMetaLog% /tee /TS /BYTES /V /MIR 
-robocopy %ResLitSrc% %ResLitDst% /log:%ResLitLog% /tee /TS /BYTES /V /MIR
-robocopy %TestLogSrc% %TestLogDst% /log:%TestLogLog% /tee /TS /BYTES /V /MIR 
-robocopy %ExportSrc% %ExportDst% /log:%ExportLog% /tee /TS /BYTES /V /MIR 
 robocopy %EtlLogSrc% %EtlLogDst% /log:%EltLogLog% /tee /TS /BYTES /V /MIR
 
 set VerSrc="%ZDev%\version"
-set VerDst=K:\z0\archives
+set VerDst="K:\z0\archives"
 copy %VerSrc% /A %VerDst% /Y

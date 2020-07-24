@@ -39,3 +39,39 @@
  create mode 100644 src/machine/src/base/project/templates/ResBytes.xml
  rename src/machine/src/services/emitters/accessors/ops/{SaveCatalog.cs => SaveResIndex.cs} (96%)
  rename src/machine/src/services/{emitters => processors}/ProcessBrokers.cs (94%)
+[master cfcb2af42] .
+ 44 files changed, 1057 insertions(+), 146 deletions(-)
+ create mode 100644 src/konst/src/datatypes/CorrelationToken.cs
+ rename src/konst/src/sourced/{ => intefaces}/ISink.cs (100%)
+ rename src/{validity/src/services/caselog => konst/src/sourced/models}/Sink.cs (67%)
+ rename src/konst/src/{sourced => streams}/Streams.api.cs (96%)
+ create mode 100644 src/konst/src/streams/ops/sink.cs
+ rename src/{machine/src/base/flow/Flow.cs => konst/src/structures/Structures.cs} (59%)
+ create mode 100644 src/konst/src/structures/ops/empty.cs
+ create mode 100644 src/konst/src/structures/ops/eq.cs
+ create mode 100644 src/konst/src/structures/ops/format.cs
+ create mode 100644 src/konst/src/structures/ops/neq.cs
+ create mode 100644 src/konst/src/structures/ops/nonempty.cs
+ create mode 100644 src/konst/src/unsigned/ops/srl.cs
+ rename src/machine/src/{services => base/flow}/MachineWorkflows.cs (63%)
+ delete mode 100644 src/machine/src/base/flow/WorkflowIdentity.cs
+ rewrite src/machine/src/base/flow/Workflows.cs (62%)
+ rename src/machine/src/base/flow/{ => contracts}/IWorkflowStep.cs (100%)
+ rename src/machine/src/base/flow/{ => contracts}/IWorkflowSteps.cs (100%)
+ create mode 100644 src/machine/src/base/flow/contracts/IWorkflowWorker.cs
+ create mode 100644 src/machine/src/base/flow/models/StepExecuted.cs
+ create mode 100644 src/machine/src/base/flow/models/StepExecuting.cs
+ create mode 100644 src/machine/src/base/flow/models/Workflow.cs
+ create mode 100644 src/machine/src/base/flow/models/WorkflowIdentity.cs
+ create mode 100644 src/machine/src/base/flow/models/WorkflowIdentityT.cs
+ create mode 100644 src/machine/src/base/flow/models/WorkflowStatus.cs
+ rename src/machine/src/base/flow/{Workflow.cs => models/WorkflowT.cs} (100%)
+ create mode 100644 src/machine/src/base/flow/models/WorkflowWorker.cs
+ create mode 100644 src/machine/src/base/flow/ops/correlate.cs
+ create mode 100644 src/machine/src/base/flow/ops/executed.cs
+ create mode 100644 src/machine/src/base/flow/ops/executing.cs
+ create mode 100644 src/machine/src/base/flow/ops/identify.cs
+ create mode 100644 src/machine/src/base/flow/ops/init.cs
+ create mode 100644 src/machine/src/base/flow/ops/status.cs
+ create mode 100644 src/machine/src/base/flow/ops/workflow.cs
+ create mode 100644 src/part/src/interfaces/IDataType.cs

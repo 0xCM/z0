@@ -10,7 +10,6 @@ namespace Z0.Xed
 
     using static Konst;
 
-    [ApiHost]
     public struct xed_operand_t
     {
         public xed_uint8_t         _name; // xed_operand_enum_t

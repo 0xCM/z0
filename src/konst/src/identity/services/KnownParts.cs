@@ -19,7 +19,7 @@ namespace Z0
         IPartResolver Resolver 
             => PartResolver.Service;
 
-        public IEnumerable<IPart> Known
+        public IPart[] Known
             => PartResolver.Service.Resolve(ComponentPaths);
 
         public FilePath[] ComponentPaths

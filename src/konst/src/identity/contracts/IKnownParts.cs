@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-
     public interface IKnownParts
     {
-        IEnumerable<IPart> Known {get;}
+        IPart[] Known {get;}
 
         FilePath[] ComponentPaths {get;}
 
