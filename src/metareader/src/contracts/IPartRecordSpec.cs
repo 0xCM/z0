@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     
-
-
     public interface IPartRecordSpec : ITextual
     {
         PartRecordKind RecordType {get;}   

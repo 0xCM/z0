@@ -11,18 +11,14 @@ namespace Z0.MS
     {
         internal static class TokenTypeIds
         {
-
             internal const int RowIdBitCount = 24;
+
             internal const uint RIDMask = (1 << RowIdBitCount) - 1;
-
-
 
             internal static bool IsValidRowId(uint rowId)
             {
                 return (rowId & ~RIDMask) == 0;
             }
-
-
         }                
     }
 }

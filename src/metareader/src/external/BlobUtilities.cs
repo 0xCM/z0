@@ -45,7 +45,6 @@ namespace Z0.MS
             return result;
         }
 
-
         public static void WriteUTF8(this byte[] buffer, int start, char* charPtr, int charCount, int byteCount, bool allowUnpairedSurrogates)
         {
             Debug.Assert(byteCount >= charCount);

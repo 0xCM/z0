@@ -1,0 +1,11 @@
+# IMAGE_DEBUG_DIRECTORY
+---------------------------------------------------------------------------------------------------------------
+| Offset | Size | Field            | Description                                                                                                                   |
+| 0      | 4    | Characteristics  | Reserved, must be zero.                                                                                                       |
+| 4      | 4    | TimeDateStamp    | The time and date that the debug data was created.                                                                            |
+| 8      | 2    | MajorVersion     | The major version number of the debug data format.                                                                            |
+| 10     | 2    | MinorVersion     | The minor version number of the debug data format.                                                                            |
+| 12     | 4    | Type             | The format of debugging information. This field enables support of multiple debuggers. For more information, see Debug Type . |
+| 16     | 4    | SizeOfData       | The size of the debug data (not including the debug directory itself).                                                        |
+| 20     | 4    | AddressOfRawData | The address of the debug data when loaded, relative to the image base.                                                        |
+| 24     | 4    | PointerToRawData | The file pointer to the debug data.                                                                                           |

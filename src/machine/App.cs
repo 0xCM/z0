@@ -74,7 +74,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {            
             
-            ReadRes();
+            RunWorkflows();
         }
 
         public static void Main(params string[] args)
