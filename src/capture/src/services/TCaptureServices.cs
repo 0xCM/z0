@@ -41,10 +41,11 @@ namespace Z0.Asm
         /// <param name="sink">The event message sink</param>
         /// <param name="api">The api set available to the workflow</param>
         /// <param name="dst">The emission output directory</param>
-        IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, FolderPath dst)        
-            => new ImmEmissionWorkflow(Context, sink, Formatter(), AsmDecoder(), api, dst);
+        IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, Arrow<ArchiveConfig> config)        
+            => new ImmEmissionWorkflow(Context, sink, Formatter(), AsmDecoder(), api, config.Dst.ArchiveRoot);
 
-        IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
-            => new ImmEmissionWorkflow(Context, sink, formatter, decoder, api, dst);
+        IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, 
+            IAsmFunctionDecoder decoder, Arrow<ArchiveConfig> config)        
+                => new ImmEmissionWorkflow(Context, sink, formatter, decoder, api, config.Dst.ArchiveRoot);
     }
 }

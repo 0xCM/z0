@@ -30,7 +30,9 @@ namespace Z0
         
         public void Run(params string[] args)
         {
-            CaptureHost.Service(Context).Run(args);
+            var config = PartFileArchives.configure(Context,args);
+
+            CaptureHost.Service(Context, config).Run(args);
             EmissionWorkflow.Service(Context).Run(args);
         }
 

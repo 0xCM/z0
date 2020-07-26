@@ -102,8 +102,8 @@ namespace Z0.Asm
         AsmWriterFactory WriterFactory 
             => CaptureServices.AsmWriterFactory;
         
-        IEvalWorkflow CreateEvalWorkflow(AsmArchiveConfig config, uint buffersize)
-            => Evaluate.workflow(Apps.context(Api, Random, Settings, AppMsgExchange.Create(ContextRoot)), Random, config.ArchiveRoot, buffersize);
+        IEvalWorkflow CreateEvalWorkflow(Arrow<ArchiveConfig> config, uint buffersize)
+            => Evaluate.workflow(Apps.context(Api, Random, Settings, AppMsgExchange.Create(ContextRoot)), Random, config.Dst.ArchiveRoot, buffersize);
 
         /// <summary>
         /// The context writer factory

@@ -47,5 +47,9 @@ namespace Z0
         [MethodImpl(Inline)]
         TPartCaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
             => CaptureArchiveService.create(root ?? LogRoot, area ?? FolderName.Empty, subject ?? FolderName.Empty);    
+
+        [MethodImpl(Inline)]
+        TPartCaptureArchive CaptureArchive(ArchiveConfig config)
+            => CaptureArchiveService.create(config.ArchiveRoot, FolderName.Empty, FolderName.Empty);                
     }
 }

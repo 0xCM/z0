@@ -2,27 +2,25 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
-{
+namespace Z0
+{        
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    /// <summary>
-    /// Defines common asm workfow configuration settings
-    /// </summary>
-    public readonly struct AsmArchiveConfig
+    public readonly struct CaptureArchiveConfig
     {
+        public readonly FolderPath ArchiveRoot;
+
         [MethodImpl(Inline)]
-        public AsmArchiveConfig(FolderPath root)
+        public CaptureArchiveConfig(FolderPath root)
         {
             ArchiveRoot = root;
-        }
+        }        
 
-        /// <summary>
-        /// Specifies the root emisson folder, bwlow which all data will be written
-        /// </summary>
-        public FolderPath ArchiveRoot {get;}
+        [MethodImpl(Inline)]
+        public static implicit operator ArchiveConfig(CaptureArchiveConfig src)
+            => new ArchiveConfig(src.ArchiveRoot);        
     }
 }

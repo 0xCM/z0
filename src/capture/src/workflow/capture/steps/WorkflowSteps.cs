@@ -36,7 +36,7 @@ namespace Z0.Asm
     {
         void CaptureHost(CaptureHostStep step, IApiHost host, TPartCaptureArchive dst);
 
-        void CaptureParts(AsmArchiveConfig config, params PartId[] parts);
+        void CaptureParts(Arrow<ArchiveConfig> config, params PartId[] parts);
         
         void CapturePart(IPartCatalog src, TPartCaptureArchive dst);
     }    

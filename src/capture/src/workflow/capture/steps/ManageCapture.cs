@@ -22,9 +22,9 @@ namespace Z0.Asm
         internal ManageCaptureStep(ICaptureWorkflow workflow)
             => Workflow = workflow;
         
-        static TPartCaptureArchive InitTarget(AsmArchiveConfig config, params PartId[] parts) 
+        static TPartCaptureArchive InitTarget(Arrow<ArchiveConfig> config, params PartId[] parts) 
         {
-            var archive = Archives.Services.CaptureArchive(config.ArchiveRoot);
+            var archive = Archives.Services.CaptureArchive(config.Dst.ArchiveRoot);
             archive.Clear(parts);
             return archive;
         }
@@ -49,14 +49,14 @@ namespace Z0.Asm
             return dst.Array();
         }
         
-        public void CaptureParts(AsmArchiveConfig config, params PartId[] parts)
+        public void CaptureParts(Arrow<ArchiveConfig> config, params PartId[] parts)
         {
             var dst = InitTarget(config, parts);      
             var catalogs = Catalogs(Context.ApiSet, parts).Array();
             CaptureParts(catalogs, dst);
         }
 
-        public void Consolidated(AsmArchiveConfig config, params PartId[] parts)
+        public void Consolidated(Arrow<ArchiveConfig> config, params PartId[] parts)
         {
             var dst = InitTarget(config, parts);      
             var catalogs = Catalogs(Context.ApiSet, parts).Array();

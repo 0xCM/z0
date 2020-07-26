@@ -11,8 +11,6 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Identify)" />
-    <Reference Include="System.Resources.ResourceManager" />
-
   </ItemGroup>  
 
 </Project>

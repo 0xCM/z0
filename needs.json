@@ -614,9 +614,6 @@
               },
               "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
                 "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
-              },
-              "J:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\tokens\\z0.tokens.csproj"
               }
             }
           }
@@ -4457,8 +4454,20 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj": {
-                "projectPath": "J:\\dev\\projects\\z0\\src\\seed\\z0.seed.csproj"
+              "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj": {
+                "projectPath": "J:\\dev\\projects\\z0\\src\\apps\\z0.apps.csproj"
+              },
+              "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj": {
+                "projectPath": "J:\\dev\\projects\\z0\\src\\identify\\z0.identify.csproj"
+              },
+              "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj": {
+                "projectPath": "J:\\dev\\projects\\z0\\src\\imagine\\z0.imagine.csproj"
+              },
+              "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
+                "projectPath": "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
+              },
+              "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj": {
+                "projectPath": "J:\\dev\\projects\\z0\\src\\polyrand\\z0.polyrand.csproj"
               }
             }
           }
@@ -4484,6 +4493,10 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
               "version": "[3.0.1, 3.0.1]"
             },
             {

@@ -34,10 +34,10 @@ namespace Z0.Asm
         IMatchEmissions MatchEmissions
             => new MatchEmissionsStep(this);
         
-        void Run(AsmArchiveConfig config, params PartId[] parts)
+        void Run(Arrow<ArchiveConfig> config, params PartId[] parts)
             => ManageCapture.CaptureParts(config, parts);        
 
-        void RunConsoidated(AsmArchiveConfig config, params PartId[] parts)
+        void RunConsoidated(Arrow<ArchiveConfig> config, params PartId[] parts)
             => ManageCapture.Consolidated(config, parts);        
     }
 }
