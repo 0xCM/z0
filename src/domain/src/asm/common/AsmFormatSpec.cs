@@ -16,13 +16,13 @@ namespace Z0.Asm
             => Create(EmitFunctionTimestamp : true);
 
         public static AsmFormatSpec DefaultStreamFormat 
-            => Create(EmitSectionDelimiter : true, EmitLocation : false);
+            => Create(EmitSectionDelimiter : true, EmitBaseAddress : true);
 
         public static AsmFormatSpec Create(
            bool EmitCaptureTermCode = true, 
            bool EmitFileHeader = true, 
            bool EmitFunctionHeaderEncoding = true,
-           bool EmitLocation = true,
+           bool EmitBaseAddress = true,
            bool EmitFunctionHeader = true,
            bool EmitFunctionTimestamp = false,
            bool EmitSectionDelimiter = false,
@@ -34,7 +34,7 @@ namespace Z0.Asm
                EmitCaptureTermCode, 
                EmitFileHeader, 
                EmitFunctionHeaderEncoding, 
-               EmitLocation, 
+               EmitBaseAddress, 
                EmitFunctionHeader, 
                EmitFunctionTimestamp,
                EmitSectionDelimiter,
@@ -60,12 +60,12 @@ namespace Z0.Asm
            this.EmitCaptureTermCode = EmitCaptureTermCode;
            this.EmitFileHeader = EmitFileHeader;
            this.EmitFunctionHeaderEncoding = EmitFunctionHeaderEncoding;
-           this.EmitLocation = EmitLocation;
+           this.EmitBaseAddress = EmitLocation;
            this.EmitFunctionHeader = EmitFunctionHeader;
            this.EmitFunctionTimestamp = EmitFunctionTimestamp;
            this.EmitSectionDelimiter = EmitSectionDelimiter;
            this.InstructionPad = InstructionPad;
-           this.ShowLineAddresses = ShowLineAddresses;
+           this.EmitLineAddresses = ShowLineAddresses;
            this.FieldDelimiter = string.Concat(Chars.Space, FieldDelimiter, FieldDelimiter, Chars.Space);
            this.SectionDelimiter  = new string(Chars.Dash, 120);
            this.HeaderEncodingFormat = HexFormatConfig.Define();
@@ -77,7 +77,7 @@ namespace Z0.Asm
 
         public readonly bool EmitFunctionHeaderEncoding;
 
-        public readonly bool EmitLocation;
+        public readonly bool EmitBaseAddress;
 
         public readonly bool EmitFunctionHeader;
 
@@ -87,7 +87,7 @@ namespace Z0.Asm
 
         public readonly int InstructionPad;
 
-        public readonly bool ShowLineAddresses;
+        public readonly bool EmitLineAddresses;
 
         public readonly string FieldDelimiter;
 

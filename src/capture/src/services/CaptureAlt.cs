@@ -85,12 +85,12 @@ namespace Z0
             var code = Unsafe.Read<byte>(pSrc++);
             buffer[offset++] = code;
             location = pSrc;
-            return new ExtractState(id, offset, location, code);
+            return new ExtractState((uint)offset, location, code);
         }
 
         [MethodImpl(Inline)]
         static CaptureOutcome Complete(in ExtractState state, ExtractTermCode tc, MemoryAddress start, MemoryAddress end, int delta)
-            => CaptureOutcome.Define(state, (start, (ulong)(end + delta)), tc);
+            => CaptureOutcome.define(state, (start, (ulong)(end + delta)), tc);
 
         static CapturedOperation SummarizeParse(Span<byte> buffer, in ExtractState state, OpIdentity id, ExtractTermCode tc, MemoryAddress start, MemoryAddress end, int delta)
         {

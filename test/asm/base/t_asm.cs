@@ -40,11 +40,6 @@ namespace Z0.Asm
         protected BufferSeqId Main 
             => BufferSeqId.Main;
 
-        protected BufferSeqId Left 
-            => BufferSeqId.Left;
-
-        protected BufferSeqId Right 
-            => BufferSeqId.Right;
 
         protected IMemberCodeWriter HexWriter([Caller] string caller = null)
         {            

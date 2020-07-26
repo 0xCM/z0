@@ -149,7 +149,7 @@ namespace Z0.Asm
             else
                 lines.Add(comment(src.Code.OpUri.OpId));
 
-            if(config.EmitLocation)
+            if(config.EmitBaseAddress)
                 lines.Add(comment(text.concat("Base", text.spaced(Chars.Eq), src.Code.Address)));
                 
             if(config.EmitCaptureTermCode)

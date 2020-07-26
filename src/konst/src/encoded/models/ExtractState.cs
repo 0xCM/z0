@@ -12,22 +12,17 @@ namespace Z0
     /// <summary>
     /// Defines the state of the routine capture workflow at a given step
     /// </summary>
-    public readonly struct ExtractState : ITextual, IAddressable64, IIdentified<OpIdentity>
+    public readonly struct ExtractState
     {
-        /// <summary>
-        /// The operation identifier
-        /// </summary>
-        public OpIdentity Id {get;}
-
         /// <summary>
         /// The memory address from which the state payload was extracted
         /// </summary>
-        public MemoryAddress Address {get;}
+        public readonly MemoryAddress Address;
 
         /// <summary>
         /// The zero-based and monotonically-increasing state index
         /// </summary>
-        public readonly int Offset;
+        public readonly uint Index;
 
         /// <summary>
         /// The captured data
@@ -35,29 +30,34 @@ namespace Z0
         public readonly byte Captured;
 
         /// <summary>
+        /// The extraction termination code, if any
+        /// </summary>
+        public readonly ExtractTermCode TermCode;
+
+        /// <summary>
         /// Initializes a capture state
         /// </summary>
         /// <param name="id">The exraction subject identifier</param>
-        /// <param name="offset">A zero-based and capture-relative index that identifes a state in the context of a capture workflow</param>
+        /// <param name="index">A zero-based and capture-relative index that identifes a state in the context of a capture workflow</param>
         /// <param name="location">The memory location from which data was extracted</param>
         /// <param name="captured">The extracted data</param>
         [MethodImpl(Inline)]
-        public ExtractState(OpIdentity opid, int offset, long location, byte captured)
+        public ExtractState(uint index, long location, byte captured, ExtractTermCode term = default)
         {
-            Id = opid;
-            Offset = offset - 1;
+            Index = index - 1u;
             Address = z.address((ulong)location - 1ul);
             Captured = captured;
+            TermCode = term;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Offset == 0 && Address == 0 && Captured == 0;
+            get => Index == 0 && Address == 0 && Captured == 0;
         }
 
         public string Format()
-            => text.concat(Id.ToString(), Chars.Space, Offset.FormatAsmHex(4), Chars.Space, Address.Format(), Chars.Space, Captured.FormatHex());
+            => text.concat(Index.FormatAsmHex(4), Space, Address.Format(), Space, Captured.FormatHex());
 
         public override string ToString() 
             => Format();
@@ -66,6 +66,6 @@ namespace Z0
         /// The empty state
         /// </summary>
         public static ExtractState Empty 
-            => new ExtractState(OpIdentity.Empty, 0,0,0);
+            => new ExtractState(0,0,0);
     }
 }

@@ -4,7 +4,6 @@ set ResDst="%ArchiveDir%\res"
 set DevRoot=%ZDev%
 set DevBin="%DevRoot%\bin"
 
-
 set CaptureSrc="%ZLogs%\apps\control\capture"
 set CaptureDst="K:\z0\archives\res\capture"
 set CaptureLog="%ZLogs%\etl\capture-archive.log"

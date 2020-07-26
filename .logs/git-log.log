@@ -380,3 +380,16 @@
  create mode 100644 src/metareader/src/models/registers/parts/VectorRegisterArea.cs
  create mode 100644 src/metareader/src/models/x/DebugOnly.cs
  create mode 100644 src/metareader/src/res/Strings.resx
+[master 42eb1695b] .
+ 28 files changed, 669 insertions(+), 53 deletions(-)
+ create mode 100644 src/apps/src/PartFileArchives.cs
+ rename src/{tokens/src => asmd/src/dsl/instructions/models}/IInstructionSink.cs (100%)
+ rename src/{tokens/src => asmd/src/dsl/instructions/models}/InstructionSink.cs (100%)
+ create mode 100644 src/konst/src/partfiles/config/ArchiveConfig.cs
+ rename src/{asm/src/services => konst/src/partfiles/config}/AsmArchiveConfig.cs (81%)
+ create mode 100644 src/konst/src/partfiles/config/CaptureArchiveConfig.cs
+ create mode 100644 src/konst/src/partfiles/config/DllArchiveConfig.cs
+ create mode 100644 src/part/src/models/AppArgs.cs
+ create mode 100644 src/zdata/content/help/msbuild.csv
+ create mode 100644 wf/il.bat
+ create mode 100644 wf/il.sh

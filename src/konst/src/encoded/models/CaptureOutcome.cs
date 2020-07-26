@@ -12,13 +12,8 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a native capture operation
     /// </summary>
-    public readonly struct CaptureOutcome : IIdentified<OpIdentity>
+    public readonly struct CaptureOutcome //: IIdentified<OpIdentity>
     {
-        /// <summary>
-        /// The identity of the capture subject
-        /// </summary>
-        public OpIdentity Id {get;}
-
         /// <summary>
         /// The final state in the capture process
         /// </summary>
@@ -35,35 +30,42 @@ namespace Z0
         public readonly ExtractTermCode TermCode;
 
         [MethodImpl(Inline)]
-        public static CaptureOutcome Define(in ExtractState state, ulong start, ulong end, ExtractTermCode cc)
-            => new CaptureOutcome(state, (start, end), cc);
-
-        [MethodImpl(Inline)]
-        public static CaptureOutcome Define(in ExtractState state, MemoryRange source, ExtractTermCode cc)
+        public static CaptureOutcome define(in ExtractState state, MemoryRange source, ExtractTermCode cc)
             => new CaptureOutcome(state, source, cc);
 
         [MethodImpl(Inline)]
         public CaptureOutcome(in ExtractState state, MemoryRange range, ExtractTermCode cc)
         {   
-            Id = state.Id;
             State = state;
             Range = range;
             TermCode = cc;
         }         
 
         public ulong Start
-            => Range.Start;
+        {
+            [MethodImpl(Inline)]
+            get => Range.Start;
+        }
 
         public ulong End
-            => Range.End;
+        {
+            [MethodImpl(Inline)]
+            get => Range.End;
+        }
 
         public int ByteCount
-            => (int)Range.Length;
+        {
+            [MethodImpl(Inline)]
+            get => (int)Range.Length;
+        }
 
         public bool IsEmpty
-            => End - Start == 0 && TermCode == ExtractTermCode.None;        
+        {
+            [MethodImpl(Inline)]
+            get => End - Start == 0 && TermCode == ExtractTermCode.None;        
+        }
 
         public static CaptureOutcome Empty 
-            => Define(ExtractState.Empty, 0,0, ExtractTermCode.None);
+            => new CaptureOutcome(ExtractState.Empty, MemoryRange.Empty, 0);
     }
 }

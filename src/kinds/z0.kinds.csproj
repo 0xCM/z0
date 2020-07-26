@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <!-- <ProjectReference Include="$(Memories)" /> -->
+    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
 
 </Project>

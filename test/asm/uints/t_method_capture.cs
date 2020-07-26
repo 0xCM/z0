@@ -93,6 +93,8 @@ namespace Z0.Asm
 
             var capture = CaptureAlt.capture(identified, buffer);
             AsmCheck.WriteAsm(capture, dst);
+
+            
             
         }
 

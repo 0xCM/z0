@@ -164,12 +164,12 @@ namespace Z0.Asm
             var code = Unsafe.Read<byte>(pSrc++);
             exchange[offset++] = code;
             location = (long)pSrc;
-            return new ExtractState(id, offset, location, code);
+            return new ExtractState((uint)offset, location, code);
         }
 
         [MethodImpl(Inline)]
         static CaptureOutcome Complete(in ExtractState state, ExtractTermCode tc, long start, long end, int delta)
-            => CaptureOutcome.Define(state, ((ulong)start, (ulong)(end + delta)), tc);
+            => CaptureOutcome.define(state, ((ulong)start, (ulong)(end + delta)), tc);
 
         [MethodImpl(Inline)]
         static CapturedOperation SummarizeParse(in CaptureExchange exchange, in ExtractState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
