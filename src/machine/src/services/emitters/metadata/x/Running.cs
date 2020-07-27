@@ -4,13 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IWorkflowWorker : IWorkflowActor
-    {
-        
-    }
+    using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IWorkflowWorker<F> : IWorkflowWorker, IWorkflowActor<F>
-        where F : struct, IWorkflowWorker<F>
+    using static Konst;
+
+    partial class XTend
     {
+        public static void Running(this FolderPath path, IAppEventSink dst)        
+            => MetadataEmitters.running(path, dst);
     }
 }

@@ -10,31 +10,35 @@ namespace Z0
     using static Konst;
     using static PartRecords;
     using static z;
-
-    public readonly struct StringDataEmitter : IDataEmitter
+    
+    public readonly ref struct EmitBlobRecords
     {
-        readonly IMetadataWorkflow Wf;
+        readonly IWfPartEmission Wf;
+
+        readonly IPart[] Parts;
         
         [MethodImpl(Inline)]
-        public StringDataEmitter(IMetadataWorkflow wf)
+        public EmitBlobRecords(IWfPartEmission wf, IPart[] parts)
         {
             Wf = wf;
+            Parts = parts;
+            StepKind.Emitting(Wf);            
         }
 
-        public MetadataEmissionKind StepKind 
-            => MetadataEmissionKind.Strings;        
+        public EmissionDataType StepKind 
+            => EmissionDataType.Blob;        
 
         public PartRecordKind DataKind
-            => PartRecordKind.String;                
+            => PartRecordKind.Blob;                
 
-        public ReadOnlySpan<StringValueRecord> Read(IPart part)
+        public ReadOnlySpan<BlobRecord> Read(IPart part)
         {
             var srcPath = Wf.PartPath(part);              
             using var reader = PartReader.open(srcPath);
-            return reader.ReadStrings();        
+            return reader.ReadBlobs();        
         }
-        
-        public void Emit(IPart part)
+                
+        void Emit(IPart part)
         {
             var id = part.Id;
             var dstPath = Wf.TargetPath(id, StepKind);
@@ -43,10 +47,10 @@ namespace Z0
 
             var data = Read(part);
             var count = data.Length;            
-            var target = PartRecords.formatter(Wf.DataTypes.Strings);
-            target.EmitHeader();
+            var target = Wf.Sink(default(BlobField));
+
             for(var i=0u; i<count; i++)
-                PartRecords.format(skip(data,i), target);
+                target.Deposit(skip(data,i));
 
             using var writer = dstPath.Writer();
             writer.Write(target.Render());
@@ -54,13 +58,15 @@ namespace Z0
             DataEmitters.emitted(Wf, DataKind, id, count);
         }
         
-        public void Emit(IPart[] parts)
+        public void Run()
         {
-            StepKind.Emitting(Wf);
-
-            foreach(var part in parts)
+            foreach(var part in Parts)
                 Emit(part);
 
+        }
+
+        public void Dispose()
+        {
             StepKind.Emitted(Wf);
         }
     }

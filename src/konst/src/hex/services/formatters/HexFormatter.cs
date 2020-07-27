@@ -9,21 +9,15 @@ namespace Z0
     
     using static Konst;
     
-    public readonly struct HexFormatter<T> : IHexFormatter<T>
+    public readonly struct HexFormatter<T> : ISpanFormatter<T,HexSeqFormatConfig,HexFormatConfig>
         where T : unmanaged
     {
-        static HexFormatConfig DefaultConfig 
-            => HexFormatConfig.Define();
-
-        static HexSeqFormatConfig DefaultSeqConfig 
-            => HexSeqFormatConfig.Define(DefaultConfig);
-
         readonly ISystemHexFormatter<T> BaseFormatter;
         
         [MethodImpl(Inline)]
         internal HexFormatter(ISystemHexFormatter<T> formatter)
             => BaseFormatter = formatter;
-        
+
         [MethodImpl(Inline)]
         public string FormatItem(T src)
             => FormatItem(src, DefaultConfig);
@@ -74,11 +68,17 @@ namespace Z0
                         
             return result.ToString();
         }
-        
+
         public string Format(ReadOnlySpan<T> src)
             => Format(src, DefaultSeqConfig);
 
         public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src)
             => FormatItems(src, DefaultSeqConfig);
+        
+        static HexFormatConfig DefaultConfig 
+            => HexFormat.configure();
+
+        static HexSeqFormatConfig DefaultSeqConfig 
+            => HexSeqFormatConfig.Define(DefaultConfig);    
     }
 }

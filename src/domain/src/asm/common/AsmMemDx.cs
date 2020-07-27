@@ -64,7 +64,7 @@ namespace Z0.Asm
         }
 
         HexFormatConfig HexSpec 
-            => HexFormatConfig.Define(zpad:false, specifier:false);
+            => HexFormat.configure(zpad:false, specifier:false);
 
         public string Format()
             => (Size switch{

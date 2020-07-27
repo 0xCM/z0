@@ -25,6 +25,5 @@ namespace Z0
             Delimiter = delimiter;
             HexFormat = hex;
         }           
-
     }
 }

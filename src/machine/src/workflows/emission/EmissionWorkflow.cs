@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using Z0.Asm;
-
     public readonly partial struct EmissionWorkflow : IWorkflowControl<EmissionWorkflow>
     {
         readonly IAppContext Context;
@@ -44,7 +42,7 @@ namespace Z0
         void EmitMetadata()
         {
             term.magenta("Emitting metadata");                 
-            MetadataEmitter.Service(Context).Emit();
+            MetadataEmitter.create(Context).Emit();
             term.magenta("Emitted metadata");                 
         }
 

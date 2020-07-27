@@ -4,25 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum MetadataEmissionKind : byte
+    public enum WfStatusKind : byte
     {
         None = 0,
 
-        Il,
+        RunningWorkflow,
 
-        x64,
-
-        Pe,
-
-        Konst,
-
-        Blob,
-
-        Strings,
-
-        Rva,
-
-        Field,
+        RanWorkflow
     }
-
 }

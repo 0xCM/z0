@@ -17,6 +17,7 @@
    <ItemGroup>
     <EmbeddedResource Include="content/algorithms/**/*.pas" /> 
     <EmbeddedResource Include="content/definitions/**/*.csv" /> 
+    <EmbeddedResource Include="content/help/**/*.csv" /> 
     <EmbeddedResource Include="content/identifiers/**/*.csv" /> 
     <EmbeddedResource Include="content/instructions/**/*.csv" /> 
     <EmbeddedResource Include="content/syntax/**/*.csv" /> 

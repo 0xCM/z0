@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IHexLineFormatter
-    {
-        string[] FormatHexLines(byte[] data, HexLineConfig config);
+    public interface IWfMetadatEmission : IWfPartEmission
+    {        
 
-        string[] FormatHexLines(byte[] data)
-            => FormatHexLines(data, HexLineConfig.Default);
     }
 }

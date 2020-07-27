@@ -68,7 +68,7 @@ namespace Z0.Asm
            this.EmitLineAddresses = ShowLineAddresses;
            this.FieldDelimiter = string.Concat(Chars.Space, FieldDelimiter, FieldDelimiter, Chars.Space);
            this.SectionDelimiter  = new string(Chars.Dash, 120);
-           this.HeaderEncodingFormat = HexFormatConfig.Define();
+           this.HeaderEncodingFormat = HexFormat.configure();
        }
 
         public readonly bool EmitCaptureTermCode;

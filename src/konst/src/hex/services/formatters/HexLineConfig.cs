@@ -11,23 +11,21 @@ namespace Z0
 
     public readonly struct HexLineConfig
     {
+        /// <summary>
+        /// The maximum byte-count per line
+        /// </summary>
         public readonly int BytesPerLine;
 
+        /// <summary>
+        /// Specifies whether offset labels should be emitted
+        /// </summary>
         public readonly bool LineLabels;
-
-        public static HexLineConfig Default => new HexLineConfig(4,true);
             
         [MethodImpl(Inline)]
         public HexLineConfig(int linebytes, bool linelabels)
         {
-            this.BytesPerLine = linebytes;
-            this.LineLabels = linelabels;
-        }
-
-        public HexLineConfig WithBytesPerLine(int count)
-            => new HexLineConfig(count,LineLabels);
-
-        public HexLineConfig WithLineLabels(bool labels)
-            => new HexLineConfig(BytesPerLine,labels);
+            BytesPerLine = linebytes;
+            LineLabels = linelabels;
+        } 
     }
 }

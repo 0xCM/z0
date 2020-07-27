@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IWorkflowWorker : IWorkflowActor
+    public enum WfKind : uint
     {
-        
-    }
+        None = 0,
 
-    public interface IWorkflowWorker<F> : IWorkflowWorker, IWorkflowActor<F>
-        where F : struct, IWorkflowWorker<F>
-    {
+        MetadataEmission
     }
 }

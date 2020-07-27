@@ -9,18 +9,18 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct CilDataEmitter : IDataEmitter
+    public readonly struct EmitCilRecords
     {
-        readonly IMetadataWorkflow Workflow;
+        readonly IWfPartEmission Wf;
 
         [MethodImpl(Inline)]
-        public CilDataEmitter(IMetadataWorkflow wf)
+        public EmitCilRecords(IWfPartEmission wf)
         {
-            Workflow = wf;
+             Wf = wf;
         }
 
-        public MetadataEmissionKind StepKind 
-            => MetadataEmissionKind.Il;        
+        public EmissionDataType StepKind 
+            => EmissionDataType.Il;        
 
         public PartRecordKind DataKind
             => PartRecordKind.None;
@@ -29,13 +29,13 @@ namespace Z0
         
         public void Emit(IPart[] parts)
         {
-            StepKind.Emitting(Workflow);
+            StepKind.Emitting(Wf);
 
             foreach(var part in parts)
             {
                 var id = part.Id;
-                var path = Workflow.TargetPath(id, StepKind);
-                StepKind.Emitting(path,Workflow);
+                var path = Wf.TargetPath(id, StepKind);
+                StepKind.Emitting(path,Wf);
 
                 var assembly = part.Owner;                
                 var methods = PartReader.methods(FilePath.Define(assembly.Location));
@@ -49,10 +49,10 @@ namespace Z0
                     writer.WriteLine(text.concat(FieldDelimiter, method.Name.PadRight(50), FieldDelimiter, method.Rva.Format().PadRight(12), FieldDelimiter, method.Cil.Format()));
                 }
 
-                DataEmitters.emitted(Workflow, DataKind, id, count);
+                DataEmitters.emitted(Wf, DataKind, id, count);
             }                         
 
-            StepKind.Emitted(Workflow);
+            StepKind.Emitted(Wf);
         }             
     }
 }

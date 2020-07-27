@@ -4,13 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IWorkflowWorker : IWorkflowActor
+    public enum EmissionDataType : byte
     {
-        
-    }
+        None = 0,
 
-    public interface IWorkflowWorker<F> : IWorkflowWorker, IWorkflowActor<F>
-        where F : struct, IWorkflowWorker<F>
-    {
+        Il,
+
+        x64,
+
+        Pe,
+
+        Konst,
+
+        Blob,
+
+        Strings,
+
+        Rva,
+
+        Field,
+
+        HexLine
     }
 }

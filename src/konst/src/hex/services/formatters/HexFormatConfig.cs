@@ -47,26 +47,20 @@ namespace Z0
         /// <summary>
         /// The hex format string as determined by configuration
         /// </summary>
-        public string FormatCode => $"{CaseFormatChar}";
+        public string FormatCode 
+            => $"{CaseFormatChar}";
 
         /// <summary>
         /// Specifies the default configuration for hex data emission
         /// </summary>
         public static HexFormatConfig HexData 
-            => Define(true, false, false, false, Space);
+            => new HexFormatConfig(true, false, false, false, Space);
         
         /// <summary>
         /// The default configuration for array initialization content
         /// </summary>
         public static HexFormatConfig ArrayContent 
-            => Define(true, true, false, true, Chars.Comma);
-
-        public static HexFormatConfig HexMem 
-            => Define(zpad: false, specifier:true, uppercase:false, prespec:true);
-
-        [MethodImpl(Inline)]
-        public static HexFormatConfig Define(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
-            => new HexFormatConfig(zpad,specifier,uppercase,prespec, delimiter ?? Chars.Comma);
+            => new HexFormatConfig(true, true, false, true, Chars.Comma);
 
         [MethodImpl(Inline)]
         public static implicit operator HexSeqFormatConfig(in HexFormatConfig src)

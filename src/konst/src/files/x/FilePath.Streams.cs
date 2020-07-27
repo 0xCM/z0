@@ -35,5 +35,11 @@ namespace Z0
 
         public static BinaryWriter BinaryWriter(this FilePath dst)
             => new BinaryWriter(File.Open(dst.CreateParentIfMissing().Name, FileMode.Create));
+
+        public static BinaryReader BinaryReader(this Stream src)
+            => new BinaryReader(src);
+
+        public static BinaryReader BinaryReader(this StreamReader src)
+            => new BinaryReader(src.BaseStream);            
     }
 }

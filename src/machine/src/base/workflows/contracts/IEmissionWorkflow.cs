@@ -13,8 +13,17 @@ namespace Z0
         AppMsgColor StartFlair 
             => AppMsgColor.Blue;
 
-
         AppMsgColor EndFlair 
             => AppMsgColor.Cyan;        
+
+
+        FilePath TargetPath(PartId part, EmissionDataType kind)
+            => TargetDir + FileName.Define(part.Format(), kind.Ext());
+
+        FilePath PartPath(IPart part)
+            => part.PartPath();
+
+        IPartReader Reader(FilePath src)
+            => PartReader.open(src);
     }
 }

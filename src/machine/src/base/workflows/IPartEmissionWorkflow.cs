@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IHexFormatter<T> : ISpanFormatter<T,HexSeqFormatConfig,HexFormatConfig>
-        where T : struct
-         
+    public interface IWfPartEmission : IEmissionWorkflow
     {        
-
-        
-    }    
+        PartRecordSpecs DataTypes
+            => default;
+    }        
 }

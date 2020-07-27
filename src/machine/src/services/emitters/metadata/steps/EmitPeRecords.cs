@@ -9,33 +9,33 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct PeDataEmitter : IDataEmitter
+    public readonly struct EmitPeRecords
     {
-        readonly IMetadataWorkflow Workflow;
+        readonly IWfPartEmission Wf;
         
         [MethodImpl(Inline)]
-        public PeDataEmitter(IMetadataWorkflow wf)
+        public EmitPeRecords(IWfPartEmission wf)
         {
-            Workflow = wf;
+            Wf = wf;
         }
 
-        public MetadataEmissionKind StepKind 
-            => MetadataEmissionKind.Pe;        
+        public EmissionDataType StepKind 
+            => EmissionDataType.Pe;        
 
         public PartRecordKind DataKind
             => PartRecordKind.PeHeader;
         
         public void Emit(IPart[] parts)
         {
-            StepKind.Emitting(Workflow);
+            StepKind.Emitting(Wf);
 
             foreach(var part in parts)
             {
                 var id = part.Id;
-                var path = Workflow.TargetPath(id, StepKind);
+                var path = Wf.TargetPath(id, StepKind);
                 var assembly = part.Owner;                
                 
-                DataKind.Emitting(path,Workflow);
+                DataKind.Emitting(path,Wf);
 
                 var data = PartReader.headers(FilePath.Define(assembly.Location));
                 var rendered = HeaderInfo.render(data);
@@ -45,10 +45,10 @@ namespace Z0
                 for(var i=0; i<count; i++)
                     writer.WriteLine(Root.skip(rendered,i));
 
-                DataEmitters.emitted(Workflow, DataKind, id, count);
+                DataEmitters.emitted(Wf, DataKind, id, count);
             }  
 
-            StepKind.Emitted(Workflow);                          
+            StepKind.Emitted(Wf);                          
         }
     }
 }
