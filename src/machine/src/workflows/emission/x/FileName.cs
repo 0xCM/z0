@@ -11,13 +11,13 @@ namespace Z0
 
     partial class XTend
     {
-        public static FileName FileName(this EmissionDataType mk, PartRecordKind rk)
-            => MetadataEmitters.filename(mk, rk);        
+        public static FileName FileName(this EmissionDataType type, PartRecordKind kind)
+            => PartDataEmitters.filename(type, kind);        
 
         public static FileExtension Ext(this EmissionDataType mk)
-            => MetadataEmitters.ext(mk);
+            => PartDataEmitters.ext(mk);
 
         public static void Status(this WfKind kind, WfStatusKind status, IAppEventSink dst)
-            => MetadataEmitters.status(kind, status, dst);                            
+            => PartDataEmitters.status(kind, status, dst);                            
     }
 }

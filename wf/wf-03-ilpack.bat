@@ -1,5 +1,5 @@
 set SrcDir=%ZDev%\bin\lib\netcoreapp3.0
-set DstDir=%ZLogs%\builds\il
+set DstDir=%StageIl%
 set Options="/NOBAR /BYTES /TOKENS /RAWEH /SOURCE /LINENUM /NOBAR /TYPELIST /HEADERS /STATS /CLASSLIST /METADATA=MDHEADER /METADATA=HEX /METADATA=SCHEMA /METADATA=HEAPS /METADATA=RAW /METADATA=UNREX"
 
 set SrcDllName=z0.sys.dll

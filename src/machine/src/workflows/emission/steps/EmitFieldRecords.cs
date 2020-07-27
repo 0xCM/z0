@@ -18,17 +18,20 @@ namespace Z0
         
         readonly FieldRecord Spec;
 
+        readonly FolderPath TargetDir;
+
+        readonly EmissionDataType DataType;
+
         [MethodImpl(Inline)]
         public EmitFieldRecords(IWfPartEmission wf, FieldRecord spec, IPart[] parts)
         {
             Wf = wf;
             Parts = parts;
             Spec = spec;
+            TargetDir = wf.TargetDir;
+            DataType = EmissionDataType.Field;
             DataType.Emitting(Wf);
         }
-
-        public EmissionDataType DataType 
-            => EmissionDataType.Field;        
 
         public void Run()
         {  
@@ -40,13 +43,13 @@ namespace Z0
             => PartReader.open(FilePath.Define(src));
 
         FilePath TargetPath(PartId part, PartRecordKind rk)
-            => Wf.TargetDir +  DataType.FileName(rk);
+            => TargetDir +  DataType.FileName(rk);
 
         void Emit(IPart part)
         {
-            var rk = PartRecordKind.Field;
+            var rk = Wf.DataTypes.FieldRva;
             var id = part.Id;
-            var path = TargetPath(id, rk);
+            var path = TargetPath(id, rk.Kind);
             DataType.Emitting(path, Wf);
 
             var assembly = part.Owner;                
@@ -59,8 +62,7 @@ namespace Z0
             Root.iter(src, record => record.Format(formatter));
             path.Ovewrite(formatter.Render());                
 
-            rk.Emitted(id, Wf);
-
+            rk.Kind.Emitted(id, Wf);
         }
 
 

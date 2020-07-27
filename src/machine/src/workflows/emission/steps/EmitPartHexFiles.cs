@@ -9,28 +9,28 @@ namespace Z0
 
     using static Konst;
         
-    public readonly ref struct EmitHexFiles
+    public readonly ref struct EmitPartHexFiles
     {    
+        public readonly EmissionDataType DataType;
+
         readonly IWfPartEmission Wf;
 
         readonly IPart[] Parts;
         
         [MethodImpl(Inline)]
-        public EmitHexFiles(IWfPartEmission wf, IPart[] parts)
+        public EmitPartHexFiles(IWfPartEmission wf, IPart[] parts)
         {
             Wf = wf;
             Parts = parts;
+            DataType = EmissionDataType.PartDat;
             DataType.Emitting(Wf);
         }
-
-        public EmissionDataType DataType 
-            => EmissionDataType.HexLine;        
 
         public void Run()
         {  
              foreach(var part in Parts)
              {
-                using var step = new EmitHexFile(Wf, part);
+                using var step = new EmitHexLineFile(Wf, part);
                 step.Run();
              }
         }

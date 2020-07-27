@@ -1,4 +1,5 @@
 set SlnName="z0.res.sln"
-set SrcDir="%ZLogs%/res"
+set Archive="K:\z0\archives"
+set SrcDir="%Archive%/res"
 set SlnPath="%SrcDir%/%SlnName%"
 call dotnet.exe build %SlnPath%

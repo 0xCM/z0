@@ -12,6 +12,6 @@ namespace Z0
     partial class XTend
     {
         public static void Running(this FolderPath path, IAppEventSink dst)        
-            => MetadataEmitters.running(path, dst);
+            => PartDataEmitters.running(path, dst);
     }
 }

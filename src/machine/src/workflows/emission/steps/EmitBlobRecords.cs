@@ -46,8 +46,8 @@ namespace Z0
             DataKind.Emitting(dstPath, Wf);
 
             var data = Read(part);
-            var count = data.Length;            
-            var target = Wf.Sink(default(BlobField));
+            var count = data.Length;     
+            var target = PartRecords.sink(Wf.DataTypes.Blobs);
 
             for(var i=0u; i<count; i++)
                 target.Deposit(skip(data,i));

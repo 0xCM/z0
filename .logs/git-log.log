@@ -396,3 +396,49 @@
 [master 0a0d878a1] .
  16 files changed, 179 insertions(+), 203 deletions(-)
  rewrite src/control/z0.control.csproj (80%)
+[master f1f2552f0] .
+ 61 files changed, 1037 insertions(+), 505 deletions(-)
+ create mode 100644 .logs/il-capture.log
+ create mode 100644 directory.build.rsp
+ delete mode 100644 go.bat
+ create mode 100644 src/konst/src/hex/services/formatters/HexDataFormatter.cs
+ create mode 100644 src/konst/src/hex/services/formatters/HexDataFormatterT.cs
+ create mode 100644 src/konst/src/hex/services/formatters/HexFormatters.cs
+ delete mode 100644 src/konst/src/hex/services/formatters/HexLineFormatter.cs
+ rename src/machine/src/{services/emitters/metadata/MetadataEmissionKind.cs => base/workflows/EmissionDataType.cs} (87%)
+ rename src/machine/src/{workflows/contracts => base/workflows}/IMachineWorkflow.cs (100%)
+ create mode 100644 src/machine/src/base/workflows/IPartEmissionWorkflow.cs
+ rename src/{konst/src/hex/contracts/IHexLineFormatter.cs => machine/src/base/workflows/WfKind.cs} (53%)
+ create mode 100644 src/machine/src/base/workflows/WfStatus.cs
+ delete mode 100644 src/machine/src/contracts/IMetadataEmitters.cs
+ rename src/{konst/src/hex/contracts/IHexFormatter.cs => machine/src/contracts/IWfMetadataEmission.cs} (63%)
+ create mode 100644 src/machine/src/services/emitters/MetadataEmitters.cs
+ rewrite src/machine/src/services/emitters/metadata/MetadataEmitter.cs (66%)
+ rename src/machine/src/services/emitters/metadata/steps/{BlobDataEmitter.cs => EmitBlobRecords.cs} (60%)
+ rename src/machine/src/services/emitters/metadata/steps/{CilDataEmitter.cs => EmitCilRecords.cs} (73%)
+ rename src/machine/src/services/emitters/metadata/steps/{ConstantEmitter.cs => EmitConstantRecords.cs} (86%)
+ create mode 100644 src/machine/src/services/emitters/metadata/steps/EmitFieldRecords.cs
+ create mode 100644 src/machine/src/services/emitters/metadata/steps/EmitHexFile.cs
+ create mode 100644 src/machine/src/services/emitters/metadata/steps/EmitHexFiles.cs
+ create mode 100644 src/machine/src/services/emitters/metadata/steps/EmitHexLines.cs
+ rename src/machine/src/services/emitters/metadata/steps/{PeDataEmitter.cs => EmitPeRecords.cs} (65%)
+ rename src/machine/src/services/emitters/metadata/steps/{StringDataEmitter.cs => EmitStringRecords.cs} (76%)
+ create mode 100644 src/machine/src/services/emitters/metadata/x/Deposit.cs
+ create mode 100644 src/machine/src/services/emitters/metadata/x/Emitted.cs
+ create mode 100644 src/machine/src/services/emitters/metadata/x/Emitting.cs
+ create mode 100644 src/machine/src/services/emitters/metadata/x/FileName.cs
+ create mode 100644 src/machine/src/services/emitters/metadata/x/Ran.cs
+ create mode 100644 src/machine/src/services/emitters/metadata/x/Running.cs
+ delete mode 100644 src/machine/src/workflows/contracts/IMetadataWorkflow.cs
+ create mode 100644 src/zdata/content/help/msbuild-switches.csv
+ create mode 100644 wf.bat
+ delete mode 100644 wf/il.bat
+ delete mode 100644 wf/il.sh
+ create mode 100644 wf/wf-agg.bat
+ create mode 100644 wf/wf-build.bat
+ rename deposit.bat => wf/wf-deposit.bat (100%)
+ create mode 100644 wf/wf-il.bat
+ create mode 100644 wf/wf-ilpack.bat
+ create mode 100644 wf/wf-needs.bat
+ rename respack.bat => wf/wf-respack.bat (100%)
+ create mode 100644 wf/wf-stage.bat

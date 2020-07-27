@@ -14,12 +14,6 @@ namespace Z0
 
     partial struct AccessorCapture
     {
-        // public CapturedAccessor[] Capture(FilePath src, FilePath dst)        
-        // {
-        //     var assembly = Assembly.LoadFrom(src.Name);  
-        //     return CaptureAsm(host, Resources.accessors(assembly), dst);
-        // }
-
         public CapturedAccessor[] Capture(FilePath respath, FolderPath asmdir)        
         {
             var resdll = Assembly.LoadFrom(respath.Name);  

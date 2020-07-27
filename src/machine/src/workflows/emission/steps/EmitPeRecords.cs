@@ -35,7 +35,7 @@ namespace Z0
                 var path = Wf.TargetPath(id, StepKind);
                 var assembly = part.Owner;                
                 
-                DataKind.Emitting(path,Wf);
+                PartDataEmitters.emitting(DataKind, path, Wf);
 
                 var data = PartReader.headers(FilePath.Define(assembly.Location));
                 var rendered = HeaderInfo.render(data);

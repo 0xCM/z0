@@ -24,6 +24,6 @@ namespace Z0
 
         Field,
 
-        HexLine
+        PartDat
     }
 }

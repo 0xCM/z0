@@ -11,13 +11,13 @@ namespace Z0
 
     partial class XTend
     {
-        public static void Emitting(this EmissionDataType dt, IAppEventSink dst)
-            => MetadataEmitters.emitting(dt, dst);
+        public static void Emitting(this EmissionDataType type, IAppEventSink dst)
+            => PartDataEmitters.emitting(type, dst);
 
-        public static void Emitting(this EmissionDataType dt, FilePath path, IAppEventSink dst)
-            => MetadataEmitters.emitting(dt, path, dst);
+        public static void Emitting(this EmissionDataType type, FilePath path, IAppEventSink dst)
+            => PartDataEmitters.emitting(type, path, dst);
 
         public static void Emitting(this PartRecordKind dt,  FilePath path, IAppEventSink dst)
-            => MetadataEmitters.emitting(dt, path, dst);
+            => PartDataEmitters.emitting(dt, path, dst);
     }
 }

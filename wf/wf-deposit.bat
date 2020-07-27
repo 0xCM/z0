@@ -3,6 +3,12 @@ set Archive="K:\z0\archives"
 set ResDst="%ArchiveDir%\res"
 set DevRoot=%ZDev%
 set DevBin="%DevRoot%\bin"
+set BuildStage="%ZLogs%\builds"
+
+set Src=%BuildStage%\dat
+set Dst=%Archive%\dat
+set Log="%ZLogs%\etl\dat-archive.log"
+robocopy %Src% %Dst% /log:%Log% /tee /TS /BYTES /V /MIR 
 
 set CaptureSrc="%ZLogs%\apps\control\capture"
 set CaptureDst="K:\z0\archives\res\capture"

@@ -76,7 +76,7 @@ namespace Z0
             EmitMetadata();        
             ExecEmitDocs();
             EmitBytes();            
-            CaptureEmissions();            
+            //CaptureEmissions();            
             EmitEnumDatasets();
             EmitLiterals();
         }

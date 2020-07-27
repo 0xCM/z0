@@ -12,9 +12,9 @@ namespace Z0
     partial class XTend
     {
         public static void Ran(this FolderPath path, IAppEventSink dst)        
-            => MetadataEmitters.ran(path, dst);
+            => PartDataEmitters.ran(path, dst);
 
         public static void Ran(this PartRecordKind rk, IAppEventSink dst)
-            => MetadataEmitters.ran(rk, dst);
+            => PartDataEmitters.ran(rk, dst);
     }
 }

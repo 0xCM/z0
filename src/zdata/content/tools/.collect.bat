@@ -20,4 +20,5 @@ rmdir /? > rmdir.doc
 call /? > call.doc
 cd /? > cd.doc
 call .schtasks.bat
+set /? > set.doc
 echo ON

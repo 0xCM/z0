@@ -73,7 +73,7 @@ namespace Z0
             new EmitConstantRecords(this).Emit(Parts);
             
             {
-                using var emitter = new EmitHexFiles(this, Parts);
+                using var emitter = new EmitPartHexFiles(this, Parts);
                 emitter.Run();
             }
             
@@ -91,36 +91,39 @@ namespace Z0
                 using var emitter = new EmitFieldRecords(this, Wf.DataTypes.Fields, Parts);
                 emitter.Run();
             }
-
-            Emit(Wf.DataTypes.FieldRva).Ran(this);            
+            
+            {
+                using var emitter = new EmitFieldRecords(this, Wf.DataTypes.Fields, Parts);
+            }
+         
             
             WfKind.Status(MES.RanWorkflow, this);
         }
         
-        PartRecordKind Emit(FieldRvaRecord spec, MK mk = MK.Rva)
-        {
-            var rk = spec.Kind;
+        // PartRecordKind Emit(FieldRvaRecord spec, MK mk = MK.Rva)
+        // {
+        //     var rk = spec.Kind;
 
-            mk.Emitting(this);
+        //     mk.Emitting(this);
 
-            foreach(var part in Parts)
-            {
-                var id = part.Id;
-                var path = TargetPath(id, rk, mk);                
-                rk.Emitting(path,this);
+        //     foreach(var part in Parts)
+        //     {
+        //         var id = part.Id;
+        //         var path = TargetPath(id, rk, mk);                
+        //         rk.Emitting(path, this);
 
-                var assembly = part.Owner;                
-                using var reader = Reader(assembly.Location);
-                var src = reader.ReadFieldRva();
-                var formatter = PartRecords.formatter(spec);
+        //         var assembly = part.Owner;                
+        //         using var reader = Reader(assembly.Location);
+        //         var src = reader.ReadFieldRva();
+        //         var formatter = PartRecords.formatter(spec);
 
-                formatter.EmitHeader();
-                Root.iter(src, record => record.Format(formatter));
-                path.Ovewrite(formatter.Render()); 
+        //         formatter.EmitHeader();
+        //         Root.iter(src, record => record.Format(formatter));
+        //         path.Ovewrite(formatter.Render()); 
 
-                rk.Emitted(id, this);
-            }
-            return rk;
-        }
+        //         rk.Emitted(id, this);
+        //     }
+        //     return rk;
+        // }
     }
 }

@@ -6,7 +6,6 @@
 
 
    <ItemGroup>
-    <EmbeddedResource Include="algorithms/**/*.md" /> 
     <EmbeddedResource Include="bytes/src/**/*.cs" /> 
     <EmbeddedResource Include="capture/asm/**/*.asm" /> 
     <EmbeddedResource Include="capture/code/**/*.hex" /> 

@@ -35,8 +35,8 @@ namespace Z0
             Wf = wf;
             Part = part;        
             Formatter = HexFormatters.data();
-            DataType = EmissionDataType.HexLine;
-            TargetPath = Wf.TargetPath(part.Id, DataType);
+            DataType = EmissionDataType.PartDat;
+            TargetPath = wf.PartDatDir + FileName.Define(part.Id.Format(), "dat");
             Buffer = sys.alloc<byte>(32);
             Offset = 0;
             LineCount = 0;
@@ -65,8 +65,7 @@ namespace Z0
 
                 Buffer.Clear();
                 k = Read(reader);
-            }
-        
+            }        
         }
 
         public void Dispose()

@@ -10,20 +10,23 @@ namespace Z0
         
         FolderPath TargetDir {get;}
 
-        AppMsgColor StartFlair 
-            => AppMsgColor.Blue;
-
         AppMsgColor EndFlair 
             => AppMsgColor.Cyan;        
-
 
         FilePath TargetPath(PartId part, EmissionDataType kind)
             => TargetDir + FileName.Define(part.Format(), kind.Ext());
 
         FilePath PartPath(IPart part)
             => part.PartPath();
+        
+        FolderPath BuildPubRoot
+            => Context.AppPaths.LogRoot + FolderName.Define("builds");
 
-        IPartReader Reader(FilePath src)
-            => PartReader.open(src);
+        FolderPath PartIlDir
+            => BuildPubRoot + FolderName.Define("il");
+
+        FolderPath PartDatDir
+            => BuildPubRoot + FolderName.Define("dat");
+
     }
 }

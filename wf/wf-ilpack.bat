@@ -1,3 +1,4 @@
-set Cmd=wf\wf-il.bat
+call wf\wf-vars.cmd
+set Cmd="%Wf%/wf-03-ilpack.bat"
 call %Cmd%
 
