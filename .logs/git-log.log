@@ -487,3 +487,16 @@
  delete mode 100644 wf/wf-stage.bat
  create mode 100644 wf/wf-vars.cmd
  create mode 100644 wf/wf.bat
+[master 3f940538f] .
+ 36 files changed, 712 insertions(+), 531 deletions(-)
+ rename src/machine/src/base/workflows/contracts/{IDataEmitter.cs => IWorkflow.cs} (60%)
+ rename src/machine/src/workflows/{emission/steps/EmitHexLines.cs => capabilities/HexLineEmitter.cs} (89%)
+ rewrite src/machine/src/workflows/emission/steps/EmitCilRecords.cs (75%)
+ create mode 100644 src/machine/src/workflows/emission/steps/EmitPartCil.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/EmitPartStrings.cs
+ rewrite src/machine/src/workflows/emission/steps/EmitStringRecords.cs (63%)
+ delete mode 100644 src/metareader/src/records/FieldRva.cs
+ create mode 100644 src/metareader/src/records/FieldRvaRecord.cs
+ create mode 100644 src/metareader/src/records/MethodBodyInfo.cs
+ create mode 100644 src/zdata/content/help/ilasm.csv
+ create mode 100644 src/zdata/content/help/ildasm.csv

@@ -9,6 +9,8 @@ namespace Z0
     using System;
     using System.Collections.Immutable;
 
+    using Z0.Image;
+
     partial struct ClrDataModel
     {
         /// <summary>

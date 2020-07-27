@@ -9,12 +9,12 @@ namespace Z0
     using System;
     using System.Collections.Immutable;
 
-    using static PeFile;
+    using Z0.Image;
+
     using static MsD;
 
     partial struct ClrDataModel
-    {
-        
+    {        
         /// <summary>
         /// Provides information about loaded modules in a <see cref="DataTarget"/>.
         /// </summary>

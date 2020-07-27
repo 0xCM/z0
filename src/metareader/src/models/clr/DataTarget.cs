@@ -11,11 +11,11 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
 
-    using static PeFile;
+    using Z0.Image;
+
     using static MsD;
 
     partial struct ClrDataModel

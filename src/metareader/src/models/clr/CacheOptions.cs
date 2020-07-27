@@ -7,8 +7,7 @@
 namespace Z0
 {
     using System;
-    using static PeFile;
-    
+        
     partial struct ClrDataModel
     {
         public sealed class CacheOptions

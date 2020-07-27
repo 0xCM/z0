@@ -11,8 +11,6 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Text;
 
-    using static PeFile;
-    
     partial struct ClrDataModel
     {
         internal static class ValueReader

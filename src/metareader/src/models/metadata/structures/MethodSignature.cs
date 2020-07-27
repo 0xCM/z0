@@ -10,9 +10,10 @@ namespace Z0
     using System.Collections.Immutable;
     using System.Text;
 
+    using Z0.Image;
+
     public readonly partial struct MdR
     {        
-
         /// <summary>
         /// Represents the signature characteristics specified by the leading byte of signature blobs.
         /// </summary>
