@@ -23,12 +23,12 @@ namespace Z0
         readonly EmissionDataType DataType;
 
         [MethodImpl(Inline)]
-        public EmitFieldRecords(IWfPartEmission wf, FieldRecord spec, IPart[] parts)
+        public EmitFieldRecords(IWfPartEmission wf, IPart[] parts, FolderPath dst)
         {
             Wf = wf;
             Parts = parts;
-            Spec = spec;
-            TargetDir = wf.TargetDir;
+            Spec = wf.DataTypes.Fields;
+            TargetDir = dst;
             DataType = EmissionDataType.Field;
             DataType.Emitting(Wf);
         }
@@ -42,14 +42,14 @@ namespace Z0
         static IPartReader Reader(string src)
             => PartReader.open(FilePath.Define(src));
 
-        FilePath TargetPath(PartId part, PartRecordKind rk)
-            => TargetDir +  DataType.FileName(rk);
+        FilePath TargetPath(PartId part)
+            => TargetDir +  FileName.Define(part.Format(), "fields.csv");
 
         void Emit(IPart part)
         {
             var rk = Wf.DataTypes.FieldRva;
             var id = part.Id;
-            var path = TargetPath(id, rk.Kind);
+            var path = TargetPath(id);
             DataType.Emitting(path, Wf);
 
             var assembly = part.Owner;                

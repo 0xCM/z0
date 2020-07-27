@@ -442,3 +442,48 @@
  create mode 100644 wf/wf-needs.bat
  rename respack.bat => wf/wf-respack.bat (100%)
  create mode 100644 wf/wf-stage.bat
+[master 7b71c51bf] .
+ 56 files changed, 745 insertions(+), 479 deletions(-)
+ delete mode 100644 src/machine/src/services/emitters/MetadataEmitters.cs
+ delete mode 100644 src/machine/src/services/emitters/metadata/x/Deposit.cs
+ delete mode 100644 src/machine/src/workflows/emission/EmitProjectDocs/Worker.cs
+ delete mode 100644 src/machine/src/workflows/emission/EmitProjectDocs/ops/collect.cs
+ delete mode 100644 src/machine/src/workflows/emission/EmitProjectDocs/ops/format.cs
+ delete mode 100644 src/machine/src/workflows/emission/EmitProjectDocs/ops/parse.cs
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/MetadataEmitter.cs (72%)
+ create mode 100644 src/machine/src/workflows/emission/PartDataEmitters.cs
+ rename src/machine/src/workflows/emission/{ => steps}/EmitAsciTables.cs (100%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/steps/EmitBlobRecords.cs (94%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/steps/EmitCilRecords.cs (100%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/steps/EmitConstantRecords.cs (100%)
+ rename src/machine/src/workflows/emission/{ => steps}/EmitEnumData.cs (100%)
+ rename src/machine/src/workflows/emission/{ => steps}/EmitFieldLiterals.cs (100%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/steps/EmitFieldRecords.cs (82%)
+ create mode 100644 src/machine/src/workflows/emission/steps/EmitFieldRva.cs
+ rename src/machine/src/{services/emitters/metadata/steps/EmitHexFile.cs => workflows/emission/steps/EmitHexLineFile.cs} (62%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/steps/EmitHexLines.cs (92%)
+ rename src/machine/src/{services/emitters/metadata/steps/EmitHexFiles.cs => workflows/emission/steps/EmitPartHexFiles.cs} (74%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/steps/EmitPeRecords.cs (95%)
+ create mode 100644 src/machine/src/workflows/emission/steps/EmitProjectDocs.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/EmitProjectDocs/collect.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/EmitProjectDocs/format.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/EmitProjectDocs/parse.cs
+ rename src/machine/src/workflows/emission/{ => steps}/EmitResBytes.cs (100%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/steps/EmitStringRecords.cs (100%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/x/Emitted.cs (83%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/x/Emitting.cs (56%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/x/FileName.cs (67%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/x/Ran.cs (84%)
+ rename src/machine/src/{services/emitters/metadata => workflows/emission}/x/Running.cs (89%)
+ create mode 100644 src/zdata/content/tools/set.doc
+ rename wf/{wf-needs.bat => wf-01-needs.bat} (87%)
+ create mode 100644 wf/wf-02-build.bat
+ rename wf/{wf-il.bat => wf-03-ilpack.bat} (96%)
+ create mode 100644 wf/wf-04-stage.bat
+ create mode 100644 wf/wf-10-respack.bat
+ delete mode 100644 wf/wf-agg.bat
+ delete mode 100644 wf/wf-build.bat
+ delete mode 100644 wf/wf-respack.bat
+ delete mode 100644 wf/wf-stage.bat
+ create mode 100644 wf/wf-vars.cmd
+ create mode 100644 wf/wf.bat

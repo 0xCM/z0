@@ -11,7 +11,7 @@ namespace Z0
 
     using F = PartRecords.LiteralField;
     using W = PartRecords.LiteralFieldWidth;
-    using R = PartRecords.LiteralRecord;
+    using R = PartRecords.LiteralFieldRecord;
 
     partial class PartRecords
     {
@@ -26,7 +26,6 @@ namespace Z0
             Offset = 3,
 
             Value = 4,
-
         }
 
         public enum LiteralFieldWidth : ushort
@@ -43,10 +42,10 @@ namespace Z0
 
         }
 
-        public static RecordFormatter<F,W> formatter(LiteralRecord spec)
+        public static RecordFormatter<F,W> formatter(LiteralFieldRecord spec)
             => Tabular.Formatter<F,W>();
 
-        public static ref readonly RecordFormatter<F,W> format(in LiteralRecord src, in RecordFormatter<F,W> dst, bool eol = true)
+        public static ref readonly RecordFormatter<F,W> format(in LiteralFieldRecord src, in RecordFormatter<F,W> dst, bool eol = true)
         {            
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.HeapSize, hex(src.HeapSize));
@@ -58,9 +57,8 @@ namespace Z0
             return ref dst;
         }        
 
-        public readonly struct LiteralRecord : IPartRecord<F,R>
+        public readonly struct LiteralFieldRecord : IPartRecord<F,R>
         {
-
             public int Sequence {get;}
 
             public int HeapSize {get;}
@@ -75,7 +73,7 @@ namespace Z0
                 => PartRecordKind.Literal;
 
             [MethodImpl(Inline)]
-            public LiteralRecord(int Sequence, int HeapSize, int Offset, string Value)
+            public LiteralFieldRecord(int Sequence, int HeapSize, int Offset, string Value)
             {
                 this.Sequence = Sequence;
                 this.HeapSize = HeapSize;

@@ -11,6 +11,7 @@ namespace Z0
     {
 
     }
+    
     public interface IWorkflowControl<F> : IWorkflowControl, IWorkflowActor<F>
         where F : struct, IWorkflowControl<F>
     {

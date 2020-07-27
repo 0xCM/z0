@@ -8,7 +8,7 @@ namespace Z0
     
     using static PartRecords;
 
-    public interface IPartReader : IServiceAllocation
+    public interface IPartReader : IDisposable
     {        
         ReadOnlySpan<StringValueRecord> ReadStrings();
 

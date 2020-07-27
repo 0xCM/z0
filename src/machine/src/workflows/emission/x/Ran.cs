@@ -13,8 +13,5 @@ namespace Z0
     {
         public static void Ran(this FolderPath path, IAppEventSink dst)        
             => PartDataEmitters.ran(path, dst);
-
-        public static void Ran(this PartRecordKind rk, IAppEventSink dst)
-            => PartDataEmitters.ran(rk, dst);
     }
 }

@@ -16,8 +16,6 @@ namespace Z0
 
         public FieldRecord Fields => default;
 
-        public LiteralRecord Literals => default;
-
         public FieldRvaRecord FieldRva => default;
     }
 }

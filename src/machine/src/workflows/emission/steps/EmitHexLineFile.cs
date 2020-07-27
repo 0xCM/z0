@@ -11,7 +11,7 @@ namespace Z0
     
     public readonly ref struct EmitHexLineFile
     {
-        readonly IWfPartEmission Wf;
+        readonly IEmissionWorkflow Wf;
 
         readonly IPart Part;
 
@@ -20,11 +20,11 @@ namespace Z0
         readonly EmissionDataType DataType;
 
         [MethodImpl(Inline)]
-        public EmitHexLineFile(IWfPartEmission wf, IPart part)
+        public EmitHexLineFile(IEmissionWorkflow wf, IPart part, FilePath dst)
         {
             Wf = wf;
             Part = part;
-            TargetPath = wf.PartDatDir + FileName.Define(part.Format(), FileExtension.Define("dat"));
+            TargetPath = dst;
             DataType = EmissionDataType.PartDat;
             DataType.Emitting(Wf);
         }
@@ -32,7 +32,8 @@ namespace Z0
 
         public void Run()
         {
-            using var emitter = new EmitHexLines(Wf, Part);
+            var dst = Wf.PartDatDir + FileName.Define(Part.Id.Format(), "dat");
+            using var emitter = new HexLineEmitter(Wf, Part, dst);
             emitter.Run();
         }
 

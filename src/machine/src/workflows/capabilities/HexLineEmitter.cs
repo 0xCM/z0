@@ -11,9 +11,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public ref struct EmitHexLines
+    public ref struct HexLineEmitter
     {
-        readonly IWfPartEmission Wf;
+        readonly IWorkflow Wf;
         
         readonly HexDataFormatter Formatter;
         
@@ -30,13 +30,13 @@ namespace Z0
         readonly Span<byte> Buffer;
 
         [MethodImpl(Inline)]
-        public EmitHexLines(IWfPartEmission wf, IPart part)
+        public HexLineEmitter(IWorkflow wf, IPart part, FilePath dst)
         {
             Wf = wf;
             Part = part;        
             Formatter = HexFormatters.data();
             DataType = EmissionDataType.PartDat;
-            TargetPath = wf.PartDatDir + FileName.Define(part.Id.Format(), "dat");
+            TargetPath = dst;
             Buffer = sys.alloc<byte>(32);
             Offset = 0;
             LineCount = 0;

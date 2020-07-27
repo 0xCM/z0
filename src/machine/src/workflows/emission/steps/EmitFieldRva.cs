@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Konst;
-    using static PartRecords;
         
     public readonly ref struct EmitFieldRvaRecords
     {
@@ -22,18 +22,18 @@ namespace Z0
 
         readonly EmissionDataType DataType;
 
-        public EmitFieldRvaRecords(IWfPartEmission wf, IPart[] parts)
+        public EmitFieldRvaRecords(IWfPartEmission wf, IPart[] parts, FolderPath dst)
         {
             Wf = wf;
             Parts = parts;
-            Spec = new PartRecordSpecs().FieldRva;
-            TargetDir = wf.TargetDir;
+            Spec = wf.DataTypes.FieldRva;
+            TargetDir = dst;
             DataType = EmissionDataType.Rva;
             DataType.Emitting(wf);
         }
 
         FilePath TargetPath(PartId part)
-            => TargetDir +  DataType.FileName(Spec.Kind);
+            => TargetDir +  FileName.Define(part.Format(), "rva.csv");
 
         IPartReader Reader(string src)
             => PartReader.open(FilePath.Define(src));
@@ -44,10 +44,11 @@ namespace Z0
             var path = TargetPath(id);                
             
             Spec.Kind.Emitting(path,Wf);
+            
             var assembly = part.Owner;                
             using var reader = Reader(assembly.Location);
             var src = reader.ReadFieldRva();
-            var formatter = PartRecords.formatter(Spec);
+            var formatter = FieldRvaRecord.formatter(Spec);
 
             formatter.EmitHeader();
             Root.iter(src, record => record.Format(formatter));

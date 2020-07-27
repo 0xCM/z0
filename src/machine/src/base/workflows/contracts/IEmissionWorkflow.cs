@@ -4,14 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IEmissionWorkflow : IAppEventSink
-    {
-        IAppContext Context {get;}
-        
+    public interface IEmissionWorkflow : IWorkflow
+    {        
         FolderPath TargetDir {get;}
-
-        AppMsgColor EndFlair 
-            => AppMsgColor.Cyan;        
 
         FilePath TargetPath(PartId part, EmissionDataType kind)
             => TargetDir + FileName.Define(part.Format(), kind.Ext());
@@ -22,11 +17,7 @@ namespace Z0
         FolderPath BuildPubRoot
             => Context.AppPaths.LogRoot + FolderName.Define("builds");
 
-        FolderPath PartIlDir
-            => BuildPubRoot + FolderName.Define("il");
-
         FolderPath PartDatDir
             => BuildPubRoot + FolderName.Define("dat");
-
     }
 }

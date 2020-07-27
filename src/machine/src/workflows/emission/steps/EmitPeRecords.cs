@@ -9,46 +9,47 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct EmitPeRecords
+    public readonly ref struct EmitPeRecords
     {
         readonly IWfPartEmission Wf;
         
-        [MethodImpl(Inline)]
-        public EmitPeRecords(IWfPartEmission wf)
+        readonly EmissionDataType DataType;
+
+        readonly IPart[] Parts;
+        
+        readonly FilePath TargetPath;
+        
+        [MethodImpl(Inline)]        
+        public EmitPeRecords(IWfPartEmission wf, IPart[] src, FilePath dst)
         {
             Wf = wf;
+            Parts = src;
+            TargetPath = dst;
+            DataType = EmissionDataType.Pe;
+            DataType.Emitting(Wf);
         }
 
-        public EmissionDataType StepKind 
-            => EmissionDataType.Pe;        
-
-        public PartRecordKind DataKind
-            => PartRecordKind.PeHeader;
-        
-        public void Emit(IPart[] parts)
+        public void Run()
         {
-            StepKind.Emitting(Wf);
+            using var writer = TargetPath.Writer();
 
-            foreach(var part in parts)
+            foreach(var part in Parts)
             {
                 var id = part.Id;
-                var path = Wf.TargetPath(id, StepKind);
-                var assembly = part.Owner;                
-                
-                PartDataEmitters.emitting(DataKind, path, Wf);
-
+                var path = Wf.TargetPath(id, DataType);
+                var assembly = part.Owner;                                
                 var data = PartReader.headers(FilePath.Define(assembly.Location));
                 var rendered = HeaderInfo.render(data);
                 var count = rendered.Length;
                 
-                using var writer = path.Writer();
                 for(var i=0; i<count; i++)
                     writer.WriteLine(Root.skip(rendered,i));
-
-                DataEmitters.emitted(Wf, DataKind, id, count);
             }  
+        }
 
-            StepKind.Emitted(Wf);                          
+        public void Dispose()
+        {
+            DataType.Emitted(Wf);
         }
     }
 }

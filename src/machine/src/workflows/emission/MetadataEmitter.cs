@@ -23,6 +23,7 @@ namespace Z0
 
         public IAppContext Context {get;}
         
+        readonly FolderPath ResRoot;
         readonly IPart[] Parts;
 
         readonly PartSink Sink;
@@ -33,7 +34,8 @@ namespace Z0
         public MetadataEmitter(IAppContext context)
         {            
             Context = context;
-            TargetDir = AppPaths.Default.ResourceRoot + FolderName.Define("metadata");
+            ResRoot = AppPaths.Default.ResourceRoot;
+            TargetDir = ResRoot + FolderName.Define("metadata");
             Parts = KnownParts.Service.Known.ToArray();
             Sink = new PartSink(context);
         }
@@ -68,62 +70,41 @@ namespace Z0
             
             PrepareTarget();            
             
-            new EmitPeRecords(this).Emit(Parts);
-            new EmitCilRecords(this).Emit(Parts);
             new EmitConstantRecords(this).Emit(Parts);
+
+            {
+                using var emitter = new EmitPeRecords(this, Parts, ResRoot + FileName.Define("z0", "pe.csv"));
+                emitter.Run();
+            }
             
+            {
+                using var emitter = new EmitCilRecords(this, Parts,  ResRoot + FolderName.Define("il"));
+                emitter.Run();
+            }
+
             {
                 using var emitter = new EmitPartHexFiles(this, Parts);
                 emitter.Run();
             }
             
             {
-                using var emitter = new EmitStringRecords(this, Parts);
+                using var emitter = new EmitStringRecords(this, Parts, ResRoot + FolderName.Define("strings"));
                 emitter.Run();
             }
 
             {
-                using var emitter = new EmitBlobRecords(this, Parts);
+                using var emitter = new EmitBlobRecords(this, Parts, Wf.TargetDir);
                 emitter.Run();
             }
         
             {
-                using var emitter = new EmitFieldRecords(this, Wf.DataTypes.Fields, Parts);
+                using var emitter = new EmitFieldRecords(this, Parts, Wf.TargetDir);
                 emitter.Run();
             }
             
-            {
-                using var emitter = new EmitFieldRecords(this, Wf.DataTypes.Fields, Parts);
-            }
-         
             
             WfKind.Status(MES.RanWorkflow, this);
         }
         
-        // PartRecordKind Emit(FieldRvaRecord spec, MK mk = MK.Rva)
-        // {
-        //     var rk = spec.Kind;
-
-        //     mk.Emitting(this);
-
-        //     foreach(var part in Parts)
-        //     {
-        //         var id = part.Id;
-        //         var path = TargetPath(id, rk, mk);                
-        //         rk.Emitting(path, this);
-
-        //         var assembly = part.Owner;                
-        //         using var reader = Reader(assembly.Location);
-        //         var src = reader.ReadFieldRva();
-        //         var formatter = PartRecords.formatter(spec);
-
-        //         formatter.EmitHeader();
-        //         Root.iter(src, record => record.Format(formatter));
-        //         path.Ovewrite(formatter.Render()); 
-
-        //         rk.Emitted(id, this);
-        //     }
-        //     return rk;
-        // }
     }
 }

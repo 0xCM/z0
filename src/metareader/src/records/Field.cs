@@ -19,7 +19,7 @@ namespace Z0
 
         Name,
 
-        SigCode, 
+        Signature, 
 
         Attributes,
     }
@@ -30,14 +30,13 @@ namespace Z0
 
         Name = 60,
 
-        SigCode = 30,                       
+        Signature = 30,                       
 
         Attributes = 10,
     }
 
     partial class PartRecords
     {
-
         public static RecordFormatter<F,W> formatter(FieldRecord spec)
             => Tabular.Formatter<F,W>();
 
@@ -45,32 +44,29 @@ namespace Z0
         {            
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Name, src.Name);
-            dst.Delimit(F.SigCode, src.SigCode);
+            dst.Delimit(F.Signature, src.Signature);
             dst.Delimit(F.Attributes, src.Attributes);
             if(eol)
                 dst.EmitEol();
             return ref dst;
         }        
 
-        public readonly struct FieldRecord : IPartRecord<F,R>
+        public readonly struct FieldRecord
         {
             public int Sequence {get;}
 
             public string Name {get;}
             
-            public BinaryCode SigCode {get;}
+            public BinaryCode Signature {get;}
 
             public string Attributes {get;}
 
-            public PartRecordKind Kind 
-                => PartRecordKind.Field;
-
             [MethodImpl(Inline)]
-            public FieldRecord(int Sequence, LiteralRecord Name, BlobRecord SigCode, string Attributes)
+            public FieldRecord(int Sequence, LiteralFieldRecord Name, BlobRecord SigCode, string Attributes)
             {
                 this.Sequence = Sequence;
                 this.Name = Name.Value;
-                this.SigCode = SigCode.Value;
+                this.Signature = SigCode.Value;
                 this.Attributes = Attributes;
             }            
 

@@ -11,7 +11,6 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Konst;    
-    using static PartRecords;
     
     partial class PartReader
     {        
@@ -33,6 +32,7 @@ namespace Z0
             {
                 values.Add(new StringValueRecord(
                     Sequence: i++,
+                    StringSource.System,
                     HeapSize:size, 
                     Offset: reader.GetHeapOffset(handle), 
                     Value: reader.GetString(handle))
@@ -59,6 +59,7 @@ namespace Z0
             {                
                 values.Add(new StringValueRecord(
                     Sequence: i++,
+                    StringSource.User,
                     HeapSize: size, 
                     Offset: reader.GetHeapOffset(handle), 
                     Value: reader.GetUserString(handle)

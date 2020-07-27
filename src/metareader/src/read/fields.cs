@@ -33,18 +33,18 @@ namespace Z0
             
             for(var i=0; i<count; i++)
             {
-                ref readonly var handle = ref Root.skip(handles,i);
+                ref readonly var handle = ref z.skip(handles,i);
                 var entry = reader.GetFieldDefinition(handle);
-
+                var td = reader.GetTypeDefinition(entry.GetDeclaringType());
+                var tName = reader.GetString(td.Name);
+            
                 var sig = signature(state, entry, i);
-                dst[i] = new FieldRvaRecord(
-                    Sequence: i, 
-                    Signature: sig, 
-                    Rva: (uint)entry.GetRelativeVirtualAddress()
-                );                    
+                var name = reader.GetString(entry.Name);
+                var va = entry.GetRelativeVirtualAddress();
+                dst[i] = new FieldRvaRecord(tName, name, sig, (uint)va);                    
             }
             
-            return dst;
+            return dst.OrderBy(x => x.Rva);
         }
 
         internal static Pairings<string,Address32> methods(in ReaderState state)
@@ -62,15 +62,15 @@ namespace Z0
             return methods;
         }
 
-        internal static M.LiteralRecord record(in ReaderState state, StringHandle handle, int seq)
+        internal static M.LiteralFieldRecord record(in ReaderState state, StringHandle handle, int seq)
         {
             var value = state.Reader.GetString(handle);
             var offset = state.Reader.GetHeapOffset(handle);
             var size = state.Reader.GetHeapSize(HeapIndex.String);
-            return new M.LiteralRecord(seq, size, offset, value);                    
+            return new M.LiteralFieldRecord(seq, size, offset, value);                    
         }
 
-        internal static M.LiteralRecord name(in ReaderState state, FieldDefinition entry, int seq)
+        internal static M.LiteralFieldRecord name(in ReaderState state, FieldDefinition entry, int seq)
             => record(state, entry.Name, seq);
         
         internal static string format(FieldAttributes src)

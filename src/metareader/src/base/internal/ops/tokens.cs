@@ -9,6 +9,21 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
+    public readonly struct HandleInfo
+    {
+        public static HandleInfo Empty => new HandleInfo(0, 0);
+        
+        public HandleInfo(int token, TableIndex src)
+        {
+            Token = token;
+            Source = src;
+        }
+        
+        public readonly int Token;
+
+        public readonly TableIndex Source;
+    }
+
     partial struct ReaderInternals
     {        
         internal static TableIndex? index(Handle handle)
@@ -19,6 +34,18 @@ namespace Z0
                 return null;
         }        
         
+        public static HandleInfo? describe(in ReaderState state, Handle handle)
+        {
+            if(!handle.IsNil)
+            {
+                var table = index(handle);
+                var token = state.Reader.GetToken(handle);
+                if (table != null)
+                    return new HandleInfo(token, table.Value);
+            }
+
+            return null;
+        }
         internal static string token(in ReaderState state, Handle handle, bool displayTable = true)
         {
             if (handle.IsNil)
@@ -32,7 +59,6 @@ namespace Z0
             else
                 return tokenFmt;
         }
-
         
         internal static int HeapCount 
             => MetadataTokens.HeapCount;
@@ -110,35 +136,5 @@ namespace Z0
         
         internal static TypeSpecificationHandle TypeSpecificationHandle(int rowNumber) 
             => MetadataTokens.TypeSpecificationHandle(rowNumber);
-
-        // internal static AssemblyFileHandle AssemblyFileHandle(int rowNumber) => MetadataTokens.
-        // internal static AssemblyReferenceHandle AssemblyReferenceHandle(int rowNumber) => MetadataTokens.
-        // internal static CustomAttributeHandle CustomAttributeHandle(int rowNumber) => MetadataTokens.
-        // internal static CustomDebugInformationHandle CustomDebugInformationHandle(int rowNumber) => MetadataTokens.
-        // internal static DeclarativeSecurityAttributeHandle DeclarativeSecurityAttributeHandle(int rowNumber) => MetadataTokens.
-        // internal static DocumentHandle DocumentHandle(int rowNumber) => MetadataTokens.
-        // internal static DocumentNameBlobHandle DocumentNameBlobHandle(int offset) => MetadataTokens.
-        // internal static EventDefinitionHandle EventDefinitionHandle(int rowNumber) => MetadataTokens.
-        // internal static ExportedTypeHandle ExportedTypeHandle(int rowNumber) => MetadataTokens.
-        // internal static GenericParameterConstraintHandle GenericParameterConstraintHandle(int rowNumber) => MetadataTokens.
-        // internal static GenericParameterHandle GenericParameterHandle(int rowNumber) => MetadataTokens.
-        // internal static GuidHandle GuidHandle(int offset) => MetadataTokens.
-        // internal static EntityHandle Handle(TableIndex tableIndex, int rowNumber) => MetadataTokens.
-        // internal static ImportScopeHandle ImportScopeHandle(int rowNumber) => MetadataTokens.
-        // internal static InterfaceImplementationHandle InterfaceImplementationHandle(int rowNumber) => MetadataTokens.
-        // internal static LocalConstantHandle LocalConstantHandle(int rowNumber) => MetadataTokens.
-        // internal static LocalScopeHandle LocalScopeHandle(int rowNumber) => MetadataTokens.
-        // internal static LocalVariableHandle LocalVariableHandle(int rowNumber) => MetadataTokens.
-        // internal static ManifestResourceHandle ManifestResourceHandle(int rowNumber) => MetadataTokens.
-        // internal static MemberReferenceHandle MemberReferenceHandle(int rowNumber) => MetadataTokens.
-        // internal static MethodDebugInformationHandle MethodDebugInformationHandle(int rowNumber) => MetadataTokens.
-        // internal static MethodImplementationHandle MethodImplementationHandle(int rowNumber) => MetadataTokens.
-        // internal static MethodSpecificationHandle MethodSpecificationHandle(int rowNumber) => MetadataTokens.
-        // internal static ModuleReferenceHandle ModuleReferenceHandle(int rowNumber) => MetadataTokens.
-        // internal static ParameterHandle ParameterHandle(int rowNumber) => MetadataTokens.
-        // internal static PropertyDefinitionHandle PropertyDefinitionHandle(int rowNumber) => MetadataTokens.
-        // internal static StandaloneSignatureHandle StandaloneSignatureHandle(int rowNumber) => MetadataTokens.
-        // internal static bool TryGetHeapIndex(HandleKind type, out HeapIndex index) => MetadataTokens.
-        // internal static bool TryGetTableIndex(HandleKind type, out TableIndex index) => MetadataTokens.
     }
 }

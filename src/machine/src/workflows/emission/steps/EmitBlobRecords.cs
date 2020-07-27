@@ -16,17 +16,20 @@ namespace Z0
         readonly IWfPartEmission Wf;
 
         readonly IPart[] Parts;
+
+        readonly FolderPath TargetDir;
+
+        readonly EmissionDataType DataType;
         
         [MethodImpl(Inline)]
-        public EmitBlobRecords(IWfPartEmission wf, IPart[] parts)
+        public EmitBlobRecords(IWfPartEmission wf, IPart[] parts, FolderPath dst)
         {
             Wf = wf;
             Parts = parts;
-            StepKind.Emitting(Wf);            
+            TargetDir = dst;
+            DataType = EmissionDataType.Blob;
+            DataType.Emitting(Wf);            
         }
-
-        public EmissionDataType StepKind 
-            => EmissionDataType.Blob;        
 
         public PartRecordKind DataKind
             => PartRecordKind.Blob;                
@@ -41,7 +44,7 @@ namespace Z0
         void Emit(IPart part)
         {
             var id = part.Id;
-            var dstPath = Wf.TargetPath(id, StepKind);
+            var dstPath =  TargetDir + FileName.Define(id.Format(), "blob.csv");
 
             DataKind.Emitting(dstPath, Wf);
 
@@ -67,7 +70,7 @@ namespace Z0
 
         public void Dispose()
         {
-            StepKind.Emitted(Wf);
+            DataType.Emitted(Wf);
         }
     }
 }

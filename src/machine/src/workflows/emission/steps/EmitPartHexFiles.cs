@@ -30,7 +30,8 @@ namespace Z0
         {  
              foreach(var part in Parts)
              {
-                using var step = new EmitHexLineFile(Wf, part);
+                var dst = Wf.PartDatDir + FileName.Define(part.Format(), FileExtension.Define("dat"));
+                using var step = new EmitHexLineFile(Wf, part, dst);
                 step.Run();
              }
         }

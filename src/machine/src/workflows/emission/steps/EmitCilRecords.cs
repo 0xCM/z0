@@ -9,50 +9,39 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct EmitCilRecords
+    public readonly ref struct EmitCilRecords
     {
         readonly IWfPartEmission Wf;
 
+        readonly EmissionDataType DataType;
+
+        readonly FolderPath TargetDir;
+
+        readonly IPart[] Parts;
+
         [MethodImpl(Inline)]
-        public EmitCilRecords(IWfPartEmission wf)
+        public EmitCilRecords(IWfPartEmission wf, IPart[] parts, FolderPath dst)
         {
              Wf = wf;
+             Parts = parts;
+             DataType = EmissionDataType.Il;
+             TargetDir = dst;
+             DataType.Emitting(wf);
         }
 
-        public EmissionDataType StepKind 
-            => EmissionDataType.Il;        
-
-        public PartRecordKind DataKind
-            => PartRecordKind.None;
-
-        const string FieldDelimiter = "| ";
-        
-        public void Emit(IPart[] parts)
+        public void Run()
         {
-            StepKind.Emitting(Wf);
-
-            foreach(var part in parts)
+            foreach(var part in Parts)
             {
-                var id = part.Id;
-                var path = Wf.TargetPath(id, StepKind);
-                StepKind.Emitting(path,Wf);
+                using var emitter = new EmiPartCil(Wf, part, TargetDir + FileName.Define(part.Id.Format(), "il.csv"));
+                emitter.Run();
+            }                                     
 
-                var assembly = part.Owner;                
-                var methods = PartReader.methods(FilePath.Define(assembly.Location));
-                var count = methods.Length;
-                
-                using var writer = path.Writer();                
-                writer.WriteLine(text.concat(FieldDelimiter, "Method".PadRight(50), FieldDelimiter, "Rva".PadRight(12), FieldDelimiter, "Il"));
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var method = ref Root.skip(methods,i);
-                    writer.WriteLine(text.concat(FieldDelimiter, method.Name.PadRight(50), FieldDelimiter, method.Rva.Format().PadRight(12), FieldDelimiter, method.Cil.Format()));
-                }
+        }
 
-                DataEmitters.emitted(Wf, DataKind, id, count);
-            }                         
-
-            StepKind.Emitted(Wf);
-        }             
+        public void Dispose()
+        {
+            DataType.Emitted(Wf);
+        }            
     }
 }

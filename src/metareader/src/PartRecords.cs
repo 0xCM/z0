@@ -11,18 +11,6 @@ namespace Z0
     
     public partial class PartRecords
     {
-        public static StringValueRecord Strings => default;
-        
-        public static BlobRecord Blobs => default;
-        
-        public static ConstantRecord Constants => default;
-
-        public static FieldRecord Fields => default;
-
-        public static LiteralRecord Literals => default;
-
-        public static FieldRvaRecord FieldRva => default;
-
         [MethodImpl(Inline)]
         public static ReadOnlySpan<string> labels<K>(K k) 
             where K : unmanaged, IPartRecordSpec

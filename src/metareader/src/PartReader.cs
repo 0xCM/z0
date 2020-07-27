@@ -34,7 +34,6 @@ namespace Z0
         GlobalPointerTable = 6 | (16 << WidthOffset),
 
         GlobalPointerTableSize = 7 | (8 << WidthOffset)
-
     }
     
     public readonly struct HeaderInfo
@@ -56,7 +55,7 @@ namespace Z0
         public readonly ByteSize GlobalPointerTableSize;
 
         public HeaderInfo(FileName FileName, string Section, MemoryAddress Address, ByteSize Size, MemoryAddress EntryPoint, 
-                MemoryAddress CodeBase, MemoryAddress GlobalPointerTable, ByteSize GlobalPointerTableSize)
+            MemoryAddress CodeBase, MemoryAddress GlobalPointerTable, ByteSize GlobalPointerTableSize)
         {
             this.FileName = FileName;
             this.Section = Section;
@@ -99,18 +98,12 @@ namespace Z0
             => DatasetFormatter<F>.Default;
     }
     
-    
-    public class MethodBodyInfo
-    {
-        public string Name {get;set;}
-        public Address32 Rva {get;set;}
-
-        public BinaryCode Cil {get;set;}
-    }
-    
+        
     [ApiHost]
     public partial class PartReader : IPartReader
     {
+       readonly ReaderState State;
+
         [MethodImpl(Inline)]
         public static IPartReader open(FilePath src)
         {
@@ -128,7 +121,6 @@ namespace Z0
             var headers = reader.PEHeaders;
 
             var sections = headers.SectionHeaders;
-
 
             foreach(var section in sections)
             {                
@@ -149,40 +141,31 @@ namespace Z0
         public static ReadOnlySpan<MethodBodyInfo> methods(FilePath src)
         {
             var dst = Root.list<MethodBodyInfo>();
-            using var stream = File.OpenRead(src.Name);
-            using var pexe = new PEReader(stream);
             
-            var reader = pexe.GetMetadataReader();
+            using var stream = File.OpenRead(src.Name);
+            using var pe = new PEReader(stream);
+            
+            var reader = pe.GetMetadataReader();
             foreach(var handle in reader.TypeDefinitions)
             {
-                 var definitions = Root.map(reader.GetTypeDefinition(handle).GetMethods(), 
-                    m => reader.GetMethodDefinition(m));
+                 var definitions = z.map(reader.GetTypeDefinition(handle).GetMethods(), m => reader.GetMethodDefinition(m));
                 
-                 foreach(var md in definitions)
+                 foreach(var definition in definitions)
                  {
-                    var rva = md.RelativeVirtualAddress;
+                    var rva = definition.RelativeVirtualAddress;
                     if(rva != 0)
                     {
-                        var body = pexe.GetMethodBody(rva);
-
-                        var info = new MethodBodyInfo{
-                            Name = reader.GetString(md.Name),
-                            Rva = (uint)rva,
-                            Cil = body.GetILBytes()
-                            };
-                        dst.Add(info);
+                        var body = pe.GetMethodBody(rva);
+                        var sig = reader.GetBlobBytes(definition.Signature);   
+                        var name = reader.GetString(definition.Name);                 
+                        var il = body.GetILBytes();
+                        dst.Add(new MethodBodyInfo{Sig = sig, Name = name, Rva = (uint)rva, Cil = il});
                     }
-
                  }            
             }
             
             return dst.ToArray();
         }
-
-        static MetadataRootBuilder build()
-            => new MetadataRootBuilder(new MetadataBuilder());
-
-        readonly ReaderState State;
 
         [MethodImpl(Inline)]
         PartReader(ReaderState src)

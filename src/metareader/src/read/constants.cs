@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;    
-    using static PartRecords;
     using static ReaderInternals;
         
     partial class PartReader
@@ -19,12 +17,15 @@ namespace Z0
             var dst = Spans.alloc<ConstantRecord>(count);
             for(var i=1; i<= count; i++)
             {
-                var entry = reader.GetConstant(ConstantHandle(i));
-                Root.seek(dst,i - 1) = new ConstantRecord(
+                var k = ConstantHandle(i);
+                var entry = reader.GetConstant(k);
+                var parent = describe(state, entry.Parent);
+                var blob = reader.GetBlobBytes(entry.Value);
+                z.seek(dst,(uint)i - 1) = new ConstantRecord(
                     Sequence: i,
-                    Parent: token(state, entry.Parent),
-                    Type: entry.TypeCode,
-                    data: record(state, entry.Value,i)
+                    Parent: parent ?? HandleInfo.Empty,
+                    type: entry.TypeCode,
+                    value: blob
                 );
             }
 
