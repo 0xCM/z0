@@ -18,23 +18,32 @@ namespace Z0
 
         readonly HexFormatConfig DataConfig;
 
+        readonly MemoryAddress BaseAddress;
+
         [MethodImpl(Inline)]
-        public HexDataFormatter(HexLineConfig config)
+        public HexDataFormatter(HexLineConfig config, MemoryAddress? @base = null)
         {
             LineConfig = config;
+            BaseAddress = @base ?? MemoryAddress.Empty;
             LabelConfig = HexFormat.configure(zpad:true, specifier: true, uppercase: false, prespec:false);
             DataConfig = HexFormatConfig.HexData;
         }
 
-        public string FormatLine(ReadOnlySpan<byte> data, uint offset)
+        public string FormatLine(ReadOnlySpan<byte> data, ulong offset, char delimiter = Chars.Space)
         {
             var line = string.Empty.Build();            
             var count = data.Length;
-
+            var _offset = BaseAddress + offset;
+            
             if(LineConfig.LineLabels)
             {
-                line.Append(offset.FormatHex(LabelConfig));
-                line.Append(Chars.Space);
+                line.Append(_offset.Format());
+
+                if(delimiter != Space)
+                    line.Append(Space);
+                line.Append(delimiter);                
+                if(delimiter != Space)
+                    line.Append(Space);
             }
 
             for(var i=0u; i<count; i++)

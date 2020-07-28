@@ -6,6 +6,22 @@ namespace Z0
 {    
     using System;
     using System.Runtime.CompilerServices;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.IO;
+
+    partial class XTend
+    {
+        public static MemoryAddress BaseAddress(this IPart src)
+        {
+            var match =  Path.GetFileNameWithoutExtension(src.Owner.Location);
+            var process = Process.GetCurrentProcess();
+            var modules = process.Modules.Cast<ProcessModule>().Array();
+            var module = modules.Where(m => Path.GetFileNameWithoutExtension(m.FileName) == match).First();
+            return module.BaseAddress;
+        }
+    }
 
     partial struct EmissionWorkflow
     {

@@ -47,27 +47,31 @@ namespace Z0
             var rows = new List<TextRow>();
             var counter = 1u;
             var fmt = format ?? TextDocFormat.Structured;
+            var comment = fmt.CommentPrefix;
+            var rowsep = fmt.RowSeparator;
             Option<TextDocHeader> docheader = default;
             try
             {
                 while(!reader.EndOfStream)
                 {
-                    var data = reader.ReadLine().Trim(Chars.Space);
-                    var line = new TextDocLine(counter, data);                    
+                    var data = reader.ReadLine().Trim();
 
                     counter++;
-                    
+
+                    // Nothing to see here
                     if(text.blank(data))
                         continue;
-                                        
-                    // skip comments                    
-                    if(line[0] == fmt.CommentPrefix)
-                        continue;
+
+                    var line = new TextDocLine(counter, data);                                                                                
+                    var lead = line[0];                    
+
+                    // skip comments
+                    if(lead == comment)
+                        continue;                    
 
                     // skip row separators
-                    if(line.LineText.StartsWith(fmt.RowSeparator))
+                    if(line.LineText.StartsWith(rowsep))
                         continue;
-
 
                     if(fmt.HasDataHeader && docheader.IsNone() && rows.Count == 0)
                         docheader = header(line,fmt).ValueOrDefault(TextDocHeader.Empty);   

@@ -10,15 +10,13 @@ namespace Z0
     public readonly partial struct EmissionWorkflow : IWorkflowControl<EmissionWorkflow>
     {
         readonly IAppContext Context;
-        
-        public EmissionWorkflow(IAppContext context)
+        readonly bool Recapture;
+        public EmissionWorkflow(IAppContext context, bool recapture = false)
         {
             Context = context;
+            Recapture = recapture;
         }
         
-        public static EmissionWorkflow Service(IAppContext context) 
-            => new EmissionWorkflow(context);
-
         void ExecEmitDocs()
         {
             new EmitProjectDocs(this).Run();
@@ -42,7 +40,7 @@ namespace Z0
         void EmitMetadata()
         {
             term.magenta("Emitting metadata");                 
-            MetadataEmitter.create(Context).Emit();
+            new MetadataEmitter(Context).Emit();
             term.magenta("Emitted metadata");                 
         }
 
@@ -76,7 +74,8 @@ namespace Z0
             EmitMetadata();        
             ExecEmitDocs();
             EmitBytes();            
-            //CaptureEmissions();            
+            if(Recapture)
+                CaptureEmissions();            
             EmitEnumDatasets();
             EmitLiterals();
         }

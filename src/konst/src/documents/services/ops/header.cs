@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Linq;
 
     using static Konst;
@@ -15,8 +16,32 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source line</param>
         /// <param name="spec">The text format</param>
-        /// <param name="observer">An observer to witness interesting events</param>
         public static Option<TextDocHeader> header(TextDocLine src, in TextDocFormat spec)
-            => new TextDocHeader(src.Split(spec).Select(x => x.Trim()).Where(x => x != string.Empty).ToArray());
+        {
+            try
+            {
+                var parts = src.Split(spec);
+                var count = parts.Length;
+                var dst = z.list<string>();
+                
+                if(parts.Length != 0)
+                {
+                    for(var i=0; i<count; i++)
+                    {
+                        var part = parts[i].Trim();
+                        if(text.nonempty(part))
+                            dst.Add(part);                
+                    }
+                }
+            
+            if(dst.Count != 0)
+                return new TextDocHeader(dst.ToArray());
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+            return z.none<TextDocHeader>();
+        }
     }
 }

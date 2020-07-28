@@ -1,0 +1,9 @@
+# 3-bit Segment Register fields
+-------------------------------
+| reg | Selected |
+| 000 | ES       |
+| 001 | CS       |
+| 010 | SS       |
+| 011 | DS       |
+| 100 | FS       |
+| 101 | GS       |

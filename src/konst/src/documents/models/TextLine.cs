@@ -45,13 +45,10 @@ namespace Z0
             get => LineText[charidx];
         }
 
-        public bool StartsWith(char c)
-            => IsNonEmpty && LineText[c] == c;
-
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => !text.blank(LineText);
+            get => text.nonempty(LineText);
         }
 
         public bool IsEmpty 
@@ -60,17 +57,9 @@ namespace Z0
             get => text.blank(LineText);
         }
 
-        public bool IsBlank 
-        {
-            [MethodImpl(Inline)]
-            get => LineText.Length != 0 && IsEmpty;
-        }
-
-        [MethodImpl(Inline)]
         public string[] Split(in TextDocFormat spec)
-            => StartsWith(spec.Delimiter)  
-            ? LineText.Substring(1).SplitClean(spec.Delimiter)  
-            : LineText.SplitClean(spec.Delimiter);
+            => IsNonEmpty ? LineText.SplitClean(spec.Delimiter) : sys.empty<string>();
+            
 
         public override string ToString() 
             =>  $"{LineNumber.ToString().PadLeft(10, '0')}:{LineText}";

@@ -79,8 +79,6 @@ namespace Z0
         /// </summary>
         public struct instruction
         {
-            public static instruction Empty => new instruction(EmptyString, EmptyString, EmptyString);
-
             public instruction(string name, string form, string xed)
             {
                 this.name = name;
@@ -96,6 +94,10 @@ namespace Z0
             public string xed;         
 
             public List<string> attributes;   
+
+            public static instruction Empty 
+                => new instruction(EmptyString, EmptyString, EmptyString);
+
         }
 
         public struct Operation

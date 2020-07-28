@@ -903,3 +903,31 @@
  create mode 100644 src/metareader/src/services/ClrDataAddress.cs
  create mode 100644 src/metareader/src/services/LiveDataReader.cs
  create mode 100644 src/metareader/src/services/x/MsD.cs
+[master 8bebfcb1f] .
+ 40 files changed, 513 insertions(+), 152 deletions(-)
+ create mode 100644 src/konst/src/z/keywords/delegate.cs
+ rename src/metareader/src/image/{structure => docs}/COFF_HEADER.csv (100%)
+ rename src/metareader/src/image/{fields => docs}/COFF_HEADER_FIELDS.csv (100%)
+ rename src/metareader/src/image/{structure => docs}/COFF_SYMBOL_TABLE.csv (100%)
+ rename src/metareader/src/image/{fields => docs}/Characteristics.CSV (100%)
+ rename src/metareader/src/image/{structure => docs}/IMAGE_DEBUG_DIRECTORY.csv (100%)
+ rename src/metareader/src/image/{fields => docs}/IMAGE_DLLCHARACTERISTICS.csv (100%)
+ rename src/metareader/src/image/{fields => docs}/IMAGE_FILE_MACHINE.csv (100%)
+ rename src/metareader/src/image/{fields => docs}/IMAGE_REL_AMD64.csv (100%)
+ rename src/metareader/src/image/{structure => docs}/IMAGE_RESOURCE_DATA_ENTRY.csv (100%)
+ rename src/metareader/src/image/{structure => docs}/IMAGE_RESOURCE_DIRECTORY.csv (100%)
+ rename src/metareader/src/image/{structure => docs}/IMAGE_RESOURCE_DIRECTORY_ENTRY.csv (100%)
+ rename src/metareader/src/image/{fields => docs}/IMAGE_SCN.csv (100%)
+ rename src/metareader/src/image/{structure => docs}/IMAGE_SECTION_HEADER.csv (100%)
+ rename src/metareader/src/image/{fields => docs}/IMAGE_SUBSYSTEM.csv (100%)
+ rename src/metareader/src/image/{fields => docs}/IMAGE_SYM_CLASS.csv (100%)
+ rename src/metareader/src/image/{fields => docs}/IMAGE_SYM_TYPE.csv (100%)
+ rename src/metareader/src/image/{structure => docs}/MAGE_LOAD_CONFIG_DIRECTORY.csv (100%)
+ rename src/metareader/src/image/{structure => docs}/OptionalHeaderDataDirectories.csv (100%)
+ rename src/metareader/src/image/{structure => docs}/RESOURCE_TABLE.csv (100%)
+ rename src/metareader/src/image/{structure => docs}/SPECIAL.csv (100%)
+ rename src/metareader/src/image/{structure => docs}/TLS.csv (100%)
+ delete mode 100644 src/metareader/src/image/ops/A8.cs
+ delete mode 100644 src/metareader/src/models/clr/contracts/IXCLRDataMethodInstanceVTable.cs
+ create mode 100644 src/metareader/src/models/dac/IXCLRDataMethodInstanceVTable.cs
+ create mode 100644 src/metareader/src/models/dac/SosPrototypes.cs

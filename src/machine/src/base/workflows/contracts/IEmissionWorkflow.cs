@@ -14,10 +14,10 @@ namespace Z0
         FilePath PartPath(IPart part)
             => part.PartPath();
         
-        FolderPath BuildPubRoot
+        FolderPath BuildStage
             => Context.AppPaths.LogRoot + FolderName.Define("builds");
 
         FolderPath PartDatDir
-            => BuildPubRoot + FolderName.Define("dat");
+            => BuildStage + FolderName.Define("dat");
     }
 }

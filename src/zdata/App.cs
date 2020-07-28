@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static Konst;
     using P = Z0.Parts;
 
     class App : AppShell<App,IAppContext>
@@ -25,6 +26,27 @@ namespace Z0
         void RunApp(params PartId[] src)
         {
             InstrinsicsEmitter.create(Context).Emit();
+
+            
+            term.print(text.concat("ContentForm".PadRight(20), SpacePipe, "Kind".PadRight(12), SpacePipe,  "Name".PadRight(60), SpacePipe, "Count"));
+            z.iter(ZDat.Structured, Describe);     
+            z.iter(ZDat.Content, Describe);       
+        }
+
+        void Describe(Paired<StructuredKind,AppResourceDoc> src)
+        {
+            const string Form = "Structured";
+            var res = src.Right;
+            var count = res.Rows.Length;
+            term.print($"{Form.PadRight(20)} | {src.Left.Format().PadRight(12)} | {src.Right.Name.PadRight(60)} | {count} ");
+        }
+
+        void Describe(Paired<ContentKind,AppResource> src)
+        {
+            const string Form = "Unstructured";
+            var res = src.Right;
+            var length = res.Content.Length;
+            term.print($"{Form.PadRight(20)} | {src.Left.Format().PadRight(12)} | {src.Right.Name.PadRight(60)} | {length} ");                        
         }
 
         public override void RunShell(params string[] args)

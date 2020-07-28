@@ -1,0 +1,11 @@
+# AsmTRegBits64_reg_NoModRm - Encoding of reg Field When Mod/RM w Field is Not Present in Instruction; 64-bit mode
+-------------------------------------------------------------------------------------------------------------------------------
+| reg | Register Selected for 16-Bit Data Ops | Register Selected for 32-Bit Data Ops | Register Selected for 64-Bit Data Ops |
+| 000 | AX                                    | EAX                                   | RAX                                   |
+| 001 | CX                                    | ECX                                   | RCX                                   |
+| 010 | DX                                    | EDX                                   | RDX                                   |
+| 011 | BX                                    | EBX                                   | RBX                                   |
+| 100 | SP                                    | ESP                                   | RSP                                   |
+| 101 | BP                                    | EBP                                   | RBP                                   |
+| 110 | SI                                    | ESI                                   | RSI                                   |
+| 111 | DI                                    | EDI                                   | RDI                                   |

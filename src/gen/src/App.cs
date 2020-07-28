@@ -15,8 +15,6 @@ namespace Z0
     {
         public static SelectedParts Selected => default(SelectedParts);
         
-
-
         IPart[] IContented<IPart[]>.Content
             => new IPart[]{
                 P.GMath.Resolved,  
@@ -50,7 +48,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {                        
             var parts = PartIdParser.Service.ParseValid(args);  
-            var emitter = EmissionWorkflow.Service(Context);
+            var emitter = new EmissionWorkflow(Context);
             emitter.Run();
         }
 

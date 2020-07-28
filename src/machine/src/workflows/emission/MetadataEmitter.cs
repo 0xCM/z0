@@ -9,16 +9,12 @@ namespace Z0
     using System.Linq;
 
     using static Konst;     
-    using static PartRecords;
 
     using MK = EmissionDataType;
     using MES = WfStatusKind;
     
     public readonly struct MetadataEmitter : IWfMetadatEmission
     {
-        public static MetadataEmitter create(IAppContext context)
-            => new MetadataEmitter(context);
-        
         public FolderPath TargetDir {get;}
 
         public IAppContext Context {get;}
@@ -83,7 +79,7 @@ namespace Z0
             }
 
             {
-                using var emitter = new EmitPartHexFiles(this, Parts);
+                using var emitter = new EmitDataFiles(this, Parts);
                 emitter.Run();
             }
             
@@ -101,10 +97,8 @@ namespace Z0
                 using var emitter = new EmitFieldRecords(this, Parts, Wf.TargetDir);
                 emitter.Run();
             }
-            
-            
+                        
             WfKind.Status(MES.RanWorkflow, this);
-        }
-        
+        }        
     }
 }

@@ -25,21 +25,30 @@ namespace Z0
         
         int LineCount;
 
-        uint Offset;
+        readonly MemoryAddress BaseAddress;
+
+        ulong Offset;
 
         readonly Span<byte> Buffer;
 
+        bool EmitHeader;
+
+        char LabelDelimiter;
+
         [MethodImpl(Inline)]
-        public HexLineEmitter(IWorkflow wf, IPart part, FilePath dst)
+        public HexLineEmitter(IWorkflow wf, IPart part, MemoryAddress @base, FilePath dst)
         {
             Wf = wf;
             Part = part;        
-            Formatter = HexFormatters.data();
+            BaseAddress = @base;
+            Formatter = HexFormatters.data(BaseAddress);
             DataType = EmissionDataType.PartDat;
             TargetPath = dst;
             Buffer = sys.alloc<byte>(32);
             Offset = 0;
             LineCount = 0;
+            EmitHeader = true;
+            LabelDelimiter = Chars.Pipe;
             DataType.Emitting(TargetPath, Wf);
         }
 
@@ -55,10 +64,13 @@ namespace Z0
             using var stream = src.Reader();
             using var reader = stream.BinaryReader();
             using var dst = TargetPath.Writer();
+            if(EmitHeader)
+                dst.WriteLine(text.concat($"Address".PadRight(12), SpacePipe, "Data"));
+
             var k = Read(reader);
             while(k != 0)
             {
-                dst.WriteLine(Formatter.FormatLine(Buffer, Offset));
+                dst.WriteLine(Formatter.FormatLine(Buffer, Offset, LabelDelimiter));
                 
                 Offset += k;
                 LineCount++;
@@ -71,6 +83,12 @@ namespace Z0
         public void Dispose()
         {
             DataEmitters.emitted(Wf, DataType, Part.Id, LineCount);
+        }
+
+        public MemoryAddress OffsetAddress
+        {
+            [MethodImpl(Inline)]
+            get => Offset + BaseAddress;
         }
     }
 }

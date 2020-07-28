@@ -1,0 +1,23 @@
+# IMAGE_LOAD_CONFIG_DIRECTORY
+# Description
+---------------------------------------------------------------------------------------------------------------
+The load configuration structure (IMAGE_LOAD_CONFIG_DIRECTORY) was formerly used in very limited cases in the 
+Windows NT operating system itself to describe various features too difficult or too large to describe in the 
+file header or optional header of the image. Current versions of the Microsoft linker and Windows XP and later 
+versions of Windows use a new version of this structure for 32-bit x86-based systems that include reserved SEH 
+technology. This provides a list of safe structured exception handlers that the operating system uses during 
+exception dispatching. If the handler address resides in an image's VA range and is marked as reserved SEH-aware 
+(that is, IMAGE_DLLCHARACTERISTICS_NO_SEH is clear in the DllCharacteristics field of the optional header, 
+as described earlier), then the handler must be in the list of known safe handlers for that image. Otherwise, 
+the operating system terminates the application. This helps prevent the "x86 exception handler hijacking" 
+exploit that has been used in the past to take control of the operating system.
+
+The Microsoft linker automatically provides a default load configuration structure to include the reserved 
+SEH data. If the user code already provides a load configuration structure, it must include the new reserved
+SEH fields. Otherwise, the linker cannot include the reserved SEH data and the image is not marked as containing 
+reserved SEH.
+
+The data directory entry for a pre-reserved SEH load configuration structure must specify a particular 
+size of the load configuration structure because the operating system loader always expects it to be a 
+certain value. In that regard, the size is really only a version check. For compatibility with Windows 
+XP and earlier versions of Windows, the size must be 64 for x86 images.

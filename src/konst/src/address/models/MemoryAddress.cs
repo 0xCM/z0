@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable64
+    public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable
     {
         [MethodImpl(Inline)]
         public static MemoryAddress from(Ref src)
@@ -35,7 +35,7 @@ namespace Z0
         public string Identifier 
             => Location.ToString("x") + HexSpecs.PostSpec;
 
-        MemoryAddress IAddressable64.Address 
+        MemoryAddress IAddressable.Address 
         {
             [MethodImpl(Inline)]
             get => this;

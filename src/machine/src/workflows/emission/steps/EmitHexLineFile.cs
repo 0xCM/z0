@@ -9,37 +9,48 @@ namespace Z0
 
     using static Konst;
     
-    public readonly ref struct EmitHexLineFile
+    public ref struct EmitHexLineFile
     {
         readonly IEmissionWorkflow Wf;
 
         readonly IPart Part;
 
+        readonly MemoryAddress Base;
+
         readonly FilePath TargetPath;
 
         readonly EmissionDataType DataType;
 
+        MemoryAddress Offset;
+
         [MethodImpl(Inline)]
-        public EmitHexLineFile(IEmissionWorkflow wf, IPart part, FilePath dst)
+        public EmitHexLineFile(IEmissionWorkflow wf, IPart part, MemoryAddress @base, FilePath dst)
         {
             Wf = wf;
             Part = part;
             TargetPath = dst;
             DataType = EmissionDataType.PartDat;
+            Base = @base;
             DataType.Emitting(Wf);
+            Offset = default;
         }
 
-
         public void Run()
-        {
-            var dst = Wf.PartDatDir + FileName.Define(Part.Id.Format(), "dat");
-            using var emitter = new HexLineEmitter(Wf, Part, dst);
+        {            
+            using var emitter = new HexLineEmitter(Wf, Part, Base, TargetPath);
             emitter.Run();
+            Offset = emitter.OffsetAddress;
         }
 
         public void Dispose()
         {
             DataType.Emitted(Wf);
+        }
+
+        public MemoryAddress OffsetAddress
+        {
+            [MethodImpl(Inline)]
+            get => Offset;
         }
     }
 }

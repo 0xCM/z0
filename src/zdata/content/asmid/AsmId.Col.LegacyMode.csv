@@ -1,0 +1,7 @@
+# AsmIdColLegacyMode
+-------------------------------------
+| Identifier | Value | Description   |
+| Yea        | V     | Supported     |
+| Nea        | I     | Not supported |
+| NE         | N.E.  | Not encodable |
+

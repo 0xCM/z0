@@ -19,71 +19,100 @@ namespace Z0
         readonly Assembly Source;
 
         [MethodImpl(Inline)]
+        public ResExtractor(Assembly src)
+            => Source = src;
+
+        [MethodImpl(Inline)]
         public static ResExtractor Service(Assembly src = null)
             => new ResExtractor(src ?? Assembly.GetCallingAssembly());
         
-        [MethodImpl(Inline)]
-        public ResExtractor(Assembly src)
-        {
-            Source = src;
-        }
-
-        public Option<string> ExtractText(string name)
-        {
-            try
-            {
-                using var stream = Source.GetManifestResourceStream(name);
-                using var reader = new StreamReader(stream);
-                return reader.ReadToEnd();
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return Option.none<string>();
-            }
-        }
-
-        public Option<string[]> ExtractTextLines(string name)
-        {
-            try
-            {
-                var dst = z.list<string>();
-                using var stream = Source.GetManifestResourceStream(name);
-                using var reader = new StreamReader(stream);
-                while(!reader.EndOfStream)
-                    dst.Add(reader.ReadLine());
-                return dst.ToArray();
-                
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return Option.none<string[]>();
-            }
-        }
-
-        public ParseResult<AppResourceDoc> ExtractDocument(string name)
-        {
-            using var stream = Source.GetManifestResourceStream(name);
-            using var reader = new StreamReader(stream);
-            return TextDocParser.parse(reader).TryMap(doc => new AppResourceDoc(name,doc));            
-        }
-
         public ParseResult<AppResourceDoc> ExtractDocument(FileName name)
             => ExtractDocument(name.Name);
         
         public string[] ResourceNames
-            => Source.GetManifestResourceNames();
+            => Source.GetManifestResourceNames();        
         
+        public string MatchName(string match)
+            => ResourceNames.Where(n => n.ToLower().Contains(match.ToLower())).FirstOrDefault(EmptyString);
+        
+        public ParseResult<AppResourceDoc> ExtractDocument(string name)
+        {
+            try
+            {
+                using var stream = Source.GetManifestResourceStream(name);
+                using var reader = new StreamReader(stream);
+                return TextDocParser.parse(reader).TryMap(doc => new AppResourceDoc(name,doc));            
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+            
+            return z.unparsed<AppResourceDoc>(name);
+        }
+
+        public AppResourceDoc MatcDocument(string doc)
+        {
+            try
+            {
+                var name = MatchName(doc);
+                if(text.nonempty(name))
+                {
+                    using var stream = Source.GetManifestResourceStream(name);
+                    using var reader = new StreamReader(stream);
+                    var result = TextDocParser.parse(reader).TryMap(doc => new AppResourceDoc(name,doc));   
+                    if(result.Succeeded)         
+                        return result.Value;
+
+                }
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+            
+            return AppResourceDoc.Empty;
+        }
+
+        public AppResource Extract(string name)
+        {
+            try
+            {
+                var match = MatchName(name);
+                if(text.nonempty(match))
+                {
+                    using var stream = Source.GetManifestResourceStream(name);
+                    using var reader = new StreamReader(stream);
+                    return new AppResource(name, reader.ReadToEnd());                                    
+                }
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+
+            return AppResource.Empty;
+        }
+
         public AppResource Extract(Func<string,bool> match)
         {
-            var name = ResourceNames.FirstOrDefault(match);
-            if(text.blank(name))
-                return AppResource.Empty;
+            try
+            {
+                var name = ResourceNames.FirstOrDefault(match);
+                if(text.nonempty(name))
+                {
+                    using var stream = Source.GetManifestResourceStream(name);
+                    using var reader = new StreamReader(stream);
+                    return new AppResource(name, reader.ReadToEnd());
+                }
 
-            using var stream = Source.GetManifestResourceStream(name);
-            using var reader = new StreamReader(stream);
-            return new AppResource(name, reader.ReadToEnd());                    
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+
+            return AppResource.Empty;
         }
     }
 }

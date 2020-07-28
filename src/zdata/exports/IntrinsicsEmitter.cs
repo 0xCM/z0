@@ -33,7 +33,8 @@ namespace Z0
             name.StartsWith("_cvt") ? "_cvt" : 
             "_unknown";
         
-        static string[] TechLables => new string[]{"AVX-512","AVX","AMX", "SVML", "AVX2"};
+        static string[] TechLables 
+            => new string[]{"AVX-512","AVX","AMX", "SVML", "AVX2"};
         
         public static FileName filename(M.intrinsic src, FileExtension kind)
         {

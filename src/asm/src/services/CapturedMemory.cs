@@ -9,7 +9,7 @@ namespace Z0.Asm
     
     using static Konst;
 
-    public readonly struct CapturedMemory  : ILocatedCode<CapturedMemory, Z0.ParsedOperation>
+    public readonly struct CapturedMemory : ILocatedCode<CapturedMemory, Z0.ParsedOperation>
     {
         public Z0.ParsedOperation Encoded {get;}
 

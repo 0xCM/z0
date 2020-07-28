@@ -51,8 +51,7 @@ namespace Z0
             while (reader.Read() && i < entries.Length - 1)
             {   
                 if(reader.NodeType == XmlNodeType.Element)
-                {
-                
+                {                
                     switch(reader.Name)
                     {
                         case IntrinsicElement:
@@ -148,16 +147,6 @@ namespace Z0
         static void read(XmlReader reader, List<instruction> dst)
         {
             var x = instruction.Empty;
-            // if(reader.HasAttributes)
-            // {
-            //     for(var i=0; i<reader.AttributeCount; i++)
-            //     {
-            //         reader.MoveToAttribute(i);
-            //         var a = text.concat(reader.Name, " = ", reader.Value);
-            //         x.attributes.Add(a);
-            //     }
-            // }
-            
             x.name = reader[nameof(instruction.name)];
             x.form = reader[nameof(instruction.form)];            
             x.xed = reader[nameof(instruction.xed)];            

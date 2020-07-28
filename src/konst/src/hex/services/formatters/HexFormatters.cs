@@ -23,7 +23,7 @@ namespace Z0
                 => new HexDataFormatter<T>(HexFormatConfig.HexData);
     
         [MethodImpl(Inline), Op]
-        public static HexDataFormatter data(int bpl = 20, bool labels = true)
-            => new HexDataFormatter(new HexLineConfig(bpl, labels));
+        public static HexDataFormatter data(MemoryAddress? @base = null, int bpl = 20, bool labels = true)
+            => new HexDataFormatter(new HexLineConfig(bpl, labels), @base);
     }
 }

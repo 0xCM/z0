@@ -21,18 +21,21 @@ namespace Z0
 
         readonly IAppContext Context;
 
+        readonly bool CaptureArtifacts;
         MachineWorkflows(IAppContext context)
         {
             Broker = new EventBroker(context.AppPaths.AppStandardOutPath);
             Context = context;
             Known = sys.empty<ActorIdentity>();
+            CaptureArtifacts = false;
         }
         
         public void Run(params string[] args)
         {
             var config = PartFileArchives.configure(Context,args);
-            //CaptureHost.Service(Context, config).Run(args);
-            EmissionWorkflow.Service(Context).Run(args);
+            if(CaptureArtifacts)
+                CaptureHost.Service(Context, config).Run(args);            
+            new EmissionWorkflow(Context).Run();
         }
 
         public void Dispose()

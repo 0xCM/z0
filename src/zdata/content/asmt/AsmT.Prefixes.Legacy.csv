@@ -1,0 +1,20 @@
+# AsmTLegacyPrefixes - Intel Vol2A
+-----------------------------------------------------------------------------------------------
+| Prefix   | Code | Group | Class              | Description                                                                                                                                |
+| LOCK     | F0   | 1     | Lock               | Causes certain kinds of memory read-modify-write instructions to occur atomically                                                          |
+| REPNE    | F2   | 1     | Repeat             |                                                                                                                                            |
+| REPNZ    | F2   | 1     | Repeat             |                                                                                                                                            |
+| REP      | F3   | 1     | Repeat             | Repeats a string operation (INS, MOVS, OUTS, LODS,and STOS) until the rCX register equals 0.                                               |
+| REPE     | F3   | 1     | Repeat             | Repeats a compare-string or scan-string operation (CMPSx and SCASx) until the rCX register equals 0 or the zero flag (ZF) is cleared to 0. |
+| REPE     | F3   | 1     | Repeat             | Repeats a compare-string or scan-string operation (CMPSx and SCASx) until the rCX register equals 0 or the zero flag (ZF) is set to 1      |
+| BND      | F2   | 1     | Bnd                |                                                                                                                                            |
+| CS       | 2E   | 2     | SegOverride        | Forces use of the current CS segment for memory operands.                                                                                  |
+| SS       | 36   | 2     | SegOverride        | Forces use of the current SS segment for memory operands.                                                                                  |
+| DS       | 3E   | 2     | SegOverride        | Forces use of the current DS segment for memory operands.                                                                                  |
+| ES       | 26   | 2     | SegOverride        | Forces use of the current ES segment for memory operands.                                                                                  |
+| FS       | 64   | 2     | SegOverride        | Forces use of the current FS segment for memory operands.                                                                                  |
+| GS       | 65   | 2     | SegOverride        | Forces use of the current GS segment for memory operands.                                                                                  |
+| JccB     | 2E   | 2     | BranchHint         | jcc branch taken                                                                                                                           |
+| JccNB    | 3E   | 2     | BranchHint         | jcc branch not taken                                                                                                                       |
+| OpSize   | 66   | 3     | OverrideOpSize     | Changes the default operand size of a memory or register operand, as shown in Table 1-2 on page 8. (AMD)                                   |
+| AddrSize | 67   | 4     | OverridAddressSize | Changes the default address size of a memory operand, as shown in Table 1-3 on page 9. (AMD)                                               |

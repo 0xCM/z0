@@ -1,0 +1,11 @@
+# AsmSynOcTReg
+-------------------------------------------------------------------------------------------------------------------
+| Symbol | Bit Count | Meaning                                                                                    |
+| reg    | 3         | General-register specifier (see Table B-4 or B-5)                                          |
+| w      | 1         | Specifies if data is byte or full-sized, where full-sized is 16 or 32 bits (see Table B-6) |
+| s      | 1         | Specifies sign extension of an immediate field (see Table B-7)                             |
+| sreg2  | 2         | Segment register specifier for CS, SS, DS, ES (see Table B-8)                              |
+| sreg3  | 3         | Segment register specifier for CS, SS, DS, ES, FS, GS (see Table B-8)                      |
+| eee    | 3         | Specifies a special-purpose (control or debug) register (see Table B-9)                    |
+| tttn   | 4         | For conditional instructions, specifies a condition asserted or negated (see Table B-12)   |
+| d      | 1         | Specifies direction of data operation (see Table B-11)1                                    |

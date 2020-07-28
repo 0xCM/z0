@@ -72,5 +72,10 @@ namespace Z0
         /// Application error log
         /// </summary>
         ErrLog = x0c,
+
+        /// <summary>
+        /// Line-oriented hex data where each line is prefixed with an absolute/relative offset
+        /// </summary>       
+        Dat = x0d,
     }   
 }
