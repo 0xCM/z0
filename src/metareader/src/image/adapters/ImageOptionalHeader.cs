@@ -4,11 +4,9 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Image
 {
     using System;
-
-    using Z0.Image;
 
     /// <summary>
     /// A wrapper over IMAGE_OPTIONAL_HEADER.  See https://msdn.microsoft.com/en-us/library/windows/desktop/ms680339(v=vs.85).aspx.
@@ -95,28 +93,38 @@ namespace Z0
         public uint Win32VersionValue 
             => _optional.Win32VersionValue;
 
-        public uint SizeOfImage => _optional.SizeOfImage;
+        public uint SizeOfImage 
+            => _optional.SizeOfImage;
 
-        public uint SizeOfHeaders => _optional.SizeOfHeaders;
+        public uint SizeOfHeaders 
+            => _optional.SizeOfHeaders;
 
-        public uint CheckSum => _optional.CheckSum;
+        public uint CheckSum 
+            => _optional.CheckSum;
 
-        public ushort Subsystem => _optional.Subsystem;
+        public ushort Subsystem 
+            => _optional.Subsystem;
 
         public ushort DllCharacteristics 
             => _optional.DllCharacteristics;
 
-        public ulong SizeOfStackReserve => OptionalSpecific.SizeOfStackReserve;
+        public ulong SizeOfStackReserve 
+            => OptionalSpecific.SizeOfStackReserve;
 
-        public ulong SizeOfStackCommit => OptionalSpecific.SizeOfStackCommit;
+        public ulong SizeOfStackCommit 
+            => OptionalSpecific.SizeOfStackCommit;
 
-        public ulong SizeOfHeapReserve => OptionalSpecific.SizeOfHeapReserve;
+        public ulong SizeOfHeapReserve 
+            => OptionalSpecific.SizeOfHeapReserve;
 
-        public ulong SizeOfHeapCommit => OptionalSpecific.SizeOfHeapCommit;
+        public ulong SizeOfHeapCommit 
+            => OptionalSpecific.SizeOfHeapCommit;
 
-        public uint LoaderFlags => OptionalSpecific.LoaderFlags;
+        public uint LoaderFlags 
+            => OptionalSpecific.LoaderFlags;
 
-        public uint NumberOfRvaAndSizes => OptionalSpecific.NumberOfRvaAndSizes;
+        public uint NumberOfRvaAndSizes 
+            => OptionalSpecific.NumberOfRvaAndSizes;
 
         public IMAGE_DATA_DIRECTORY ExportDirectory 
             => _directories.Value[0];

@@ -24,8 +24,8 @@ namespace Z0
 
         void RunApp(params PartId[] src)
         {
-            var id = MdR.@event(8) ;
-            term.print(MdR.format(id));
+            var id = ClrQueries.@event(8) ;
+            term.print(ClrQueries.format(id));
         }
 
         public override void RunShell(params string[] args)

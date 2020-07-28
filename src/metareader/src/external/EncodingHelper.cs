@@ -52,7 +52,6 @@ namespace Z0.MS
     internal static unsafe class EncodingHelper
     {
 
-
         // Size of pooled buffers. Input larger than that is prefixed or given to us on a
         // platform that doesn't have unsafe Encoding.GetString, will cause us to
         // allocate and throw away a temporary buffer. The vast majority of metadata strings

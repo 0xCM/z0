@@ -1,4 +1,4 @@
-# STORAGE_CLASS
+# IMAGE_SYM_CLASS
 ---------------------------------------------------------------------------------------------------------------
 | Constant                         | Value     | Description/interpretation of the Value field                                                                                                                                                                                                                                                                                  |
 | IMAGE_SYM_CLASS_END_OF_FUNCTION  | -1 (0xFF) | A special symbol that represents the end of function, for debugging purposes.                                                                                                                                                                                                                                                  |

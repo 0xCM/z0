@@ -22,7 +22,7 @@ namespace Z0.Image
         /// <summary>
         /// Gets the version of this module
         /// </summary>
-        public VersionInfo VersionInfo { get; }
+        public DllVersion VersionInfo { get; }
 
         /// <summary>
         /// Gets comments to supplement the file version
@@ -38,7 +38,7 @@ namespace Z0.Image
             VersionInfo = GetVersionInfo(dataAsString);
         }
 
-        private static VersionInfo GetVersionInfo(ReadOnlySpan<char> dataAsString)
+        private static DllVersion GetVersionInfo(ReadOnlySpan<char> dataAsString)
         {
             ReadOnlySpan<char> fileVersionKey = "VS_VERSION_INFO".AsSpan();
             int fileVersionIndex = dataAsString.IndexOf(fileVersionKey);
@@ -53,7 +53,7 @@ namespace Z0.Image
             int patch = MemoryMarshal.Read<ushort>(asBytes.Slice(16));
             int revision = MemoryMarshal.Read<ushort>(asBytes.Slice(18));
 
-            return new VersionInfo(major, minor, revision, patch);
+            return new DllVersion(major, minor, revision, patch);
         }
 
         private static string GetDataString(ReadOnlySpan<char> dataAsString, ReadOnlySpan<char> fileVersionKey)

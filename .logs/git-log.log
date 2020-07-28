@@ -500,3 +500,176 @@
  create mode 100644 src/metareader/src/records/MethodBodyInfo.cs
  create mode 100644 src/zdata/content/help/ilasm.csv
  create mode 100644 src/zdata/content/help/ildasm.csv
+[master 3c6dd71f8] .
+ 180 files changed, 5610 insertions(+), 5133 deletions(-)
+ create mode 100644 src/metareader/src/image/A10.cs
+ create mode 100644 src/metareader/src/image/A11.cs
+ create mode 100644 src/metareader/src/image/A14.cs
+ create mode 100644 src/metareader/src/image/adapters/CorHeader.cs
+ create mode 100644 src/metareader/src/image/adapters/DebugMetadataHeader.cs
+ create mode 100644 src/metareader/src/image/adapters/ILToNativeMap.cs
+ create mode 100644 src/metareader/src/image/adapters/ImageFIleHeader.cs
+ create mode 100644 src/metareader/src/image/adapters/ImageOptionalHeader.cs
+ create mode 100644 src/metareader/src/image/adapters/PEImage.cs
+ create mode 100644 src/metareader/src/image/adapters/PeFileVerion.cs
+ create mode 100644 src/metareader/src/image/adapters/ResourceEntry.cs
+ create mode 100644 src/metareader/src/image/adapters/SectionHeader.cs
+ create mode 100644 src/metareader/src/image/fields/AssemblyFlags.cs
+ create mode 100644 src/metareader/src/image/fields/AssemblyHashAlgorithm.cs
+ create mode 100644 src/metareader/src/image/fields/COMIMAGE_FLAGS.cs
+ create mode 100644 src/metareader/src/image/fields/COR20Constants.cs
+ create mode 100644 src/metareader/src/image/fields/Characterisitics.cs
+ create mode 100644 src/metareader/src/image/fields/Characteristics.CSV
+ create mode 100644 src/metareader/src/image/fields/ConstantTypeCode.cs
+ create mode 100644 src/metareader/src/image/fields/CorElementType.cs
+ create mode 100644 src/metareader/src/image/fields/CorFlags.cs
+ rename src/metareader/src/{models/pe/PeFile.cs => image/fields/CustomAttributeNamedArgumentKind.cs} (72%)
+ create mode 100644 src/metareader/src/image/fields/DEBUG_CLASS_QUALIFIER.cs
+ create mode 100644 src/metareader/src/image/fields/DEBUG_FORMAT.cs
+ create mode 100644 src/metareader/src/image/fields/DebugAttach.cs
+ create mode 100644 src/metareader/src/image/fields/DebugDirectoryEntryType.cs
+ create mode 100644 src/metareader/src/image/fields/DebugEnd.cs
+ rename src/metareader/src/{models/pe/literals/DebugEnd.cs => image/fields/DebugModuleName.cs} (61%)
+ create mode 100644 src/metareader/src/image/fields/DeclarativeSecurityAction.cs
+ create mode 100644 src/metareader/src/image/fields/DllCharacteristics.cs
+ create mode 100644 src/metareader/src/image/fields/EditAndContinueOperation.cs
+ create mode 100644 src/metareader/src/image/fields/FunctionPointerAttributes.cs
+ create mode 100644 src/metareader/src/image/fields/HandleKind.cs
+ create mode 100644 src/metareader/src/image/fields/HandleType.cs
+ create mode 100644 src/metareader/src/image/fields/HeapHandleType.cs
+ create mode 100644 src/metareader/src/image/fields/HeapIndex.cs
+ create mode 100644 src/metareader/src/image/fields/HeapSizes.cs
+ create mode 100644 src/metareader/src/image/fields/ILOpCode.cs
+ create mode 100644 src/metareader/src/image/fields/IMAGE_DEBUG_TYPE.cs
+ create mode 100644 src/metareader/src/image/fields/IMAGE_FILE.cs
+ create mode 100644 src/metareader/src/image/fields/IMAGE_FILE_MACHINE.cs
+ create mode 100644 src/metareader/src/image/fields/IMAGE_FILE_MACHINE.csv
+ rename src/metareader/src/{models/pe/literals/Relocations-x64.csv => image/fields/IMAGE_REL_AMD64.csv} (100%)
+ create mode 100644 src/metareader/src/image/fields/IMAGE_SCN.cs
+ rename src/metareader/src/{models/pe/literals/SectionCharacteristics.csv => image/fields/IMAGE_SCN.csv} (100%)
+ rename src/metareader/src/{models/pe/literals/STORAGE_CLASS.csv => image/fields/IMAGE_SYM_CLASS.csv} (100%)
+ rename src/metareader/src/{models/pe/literals/TYPES.csv => image/fields/IMAGE_SYM_TYPE.csv} (100%)
+ create mode 100644 src/metareader/src/image/fields/ImportDefinitionKind.cs
+ create mode 100644 src/metareader/src/image/fields/LocalVariableAttributes.cs
+ create mode 100644 src/metareader/src/image/fields/MEM.cs
+ create mode 100644 src/metareader/src/image/fields/Machine.cs
+ create mode 100644 src/metareader/src/image/fields/ManifestResourceAttributes.cs
+ create mode 100644 src/metareader/src/image/fields/MemberReferenceKind.cs
+ create mode 100644 src/metareader/src/image/fields/MetadataStreamConstants.cs
+ create mode 100644 src/metareader/src/image/fields/MetadataStreamKind.cs
+ create mode 100644 src/metareader/src/image/fields/MethodBodyAttributes.cs
+ create mode 100644 src/metareader/src/image/fields/MethodImportAttributes.cs
+ create mode 100644 src/metareader/src/image/fields/MethodSemanticsAttributes.cs
+ create mode 100644 src/metareader/src/image/fields/PAGE.cs
+ create mode 100644 src/metareader/src/image/fields/PEMagic.cs
+ create mode 100644 src/metareader/src/image/fields/PEStreamOptions.cs
+ create mode 100644 src/metareader/src/image/fields/PSS_CAPTURE_FLAGS.cs
+ create mode 100644 src/metareader/src/image/fields/PrimitiveSerializationTypeCode.cs
+ create mode 100644 src/metareader/src/image/fields/PrimitiveTypeCode.cs
+ create mode 100644 src/metareader/src/image/fields/SectionCharacteristics.cs
+ create mode 100644 src/metareader/src/image/fields/SerializationTypeCode.cs
+ create mode 100644 src/metareader/src/image/fields/SignatureAttributes.cs
+ create mode 100644 src/metareader/src/image/fields/SignatureCallingConvention.cs
+ create mode 100644 src/metareader/src/image/fields/SignatureKind.cs
+ create mode 100644 src/metareader/src/image/fields/SignatureTypeCode.cs
+ create mode 100644 src/metareader/src/image/fields/SignatureTypeKind.cs
+ create mode 100644 src/metareader/src/image/fields/StringHandleType.cs
+ create mode 100644 src/metareader/src/image/fields/StringKind.cs
+ create mode 100644 src/metareader/src/image/fields/Subsystem.cs
+ create mode 100644 src/metareader/src/image/fields/TableIndex.cs
+ create mode 100644 src/metareader/src/image/fields/TableMask.cs
+ create mode 100644 src/metareader/src/image/fields/TokenTypeIds.cs
+ create mode 100644 src/metareader/src/image/ops/A0.cs
+ create mode 100644 src/metareader/src/image/ops/A1.cs
+ create mode 100644 src/metareader/src/image/ops/A2.cs
+ create mode 100644 src/metareader/src/image/ops/A3.cs
+ create mode 100644 src/metareader/src/image/ops/A4.cs
+ create mode 100644 src/metareader/src/image/ops/A5.cs
+ create mode 100644 src/metareader/src/image/ops/A6.cs
+ create mode 100644 src/metareader/src/image/ops/A7.cs
+ create mode 100644 src/metareader/src/image/ops/A8.cs
+ copy src/metareader/src/{models/metadata/Handles.cs => image/ops/GetConstantTypeCode.cs} (58%)
+ create mode 100644 src/metareader/src/image/ops/ImageOps.cs
+ rename src/metareader/src/{models/pe/segments => image/structure}/COFF_HEADER.csv (93%)
+ create mode 100644 src/metareader/src/image/structure/COFF_HEADER_FIELDS.csv
+ create mode 100644 src/metareader/src/image/structure/CV_INFO_PDB70.cs
+ create mode 100644 src/metareader/src/image/structure/DEBUG_MODULE_PARAMETERS.cs
+ create mode 100644 src/metareader/src/image/structure/IMAGE_COR20_HEADER.cs
+ rename src/metareader/src/{models/pe/literals/DebugModuleName.cs => image/structure/IMAGE_COR20_HEADER_ENTRYPOINT.cs} (58%)
+ create mode 100644 src/metareader/src/image/structure/IMAGE_COR_ILMETHOD.cs
+ rename src/metareader/src/{models/pe/segments => image/structure}/IMAGE_DATA_DIRECTORY.cs (61%)
+ create mode 100644 src/metareader/src/image/structure/IMAGE_DEBUG_DIRECTORY.cs
+ rename src/metareader/src/{models/pe/segments => image/structure}/IMAGE_DEBUG_DIRECTORY.csv (100%)
+ create mode 100644 src/metareader/src/image/structure/IMAGE_FILE_HEADER.cs
+ create mode 100644 src/metareader/src/image/structure/IMAGE_OPTIONAL_HEADER64.cs
+ create mode 100644 src/metareader/src/image/structure/IMAGE_OPTIONAL_HEADER_AGNOSTIC.cs
+ create mode 100644 src/metareader/src/image/structure/IMAGE_OPTIONAL_HEADER_SPECIFIC.cs
+ create mode 100644 src/metareader/src/image/structure/IMAGE_RESOURCE_DATA_ENTRY.cs
+ rename src/metareader/src/{models/pe/segments => image/structure}/IMAGE_RESOURCE_DATA_ENTRY.csv (100%)
+ create mode 100644 src/metareader/src/image/structure/IMAGE_RESOURCE_DIRECTORY.cs
+ rename src/metareader/src/{models/pe/segments => image/structure}/IMAGE_RESOURCE_DIRECTORY.csv (100%)
+ create mode 100644 src/metareader/src/image/structure/IMAGE_RESOURCE_DIRECTORY_ENTRY.cs
+ rename src/metareader/src/{models/pe/segments => image/structure}/IMAGE_RESOURCE_DIRECTORY_ENTRY.csv (100%)
+ create mode 100644 src/metareader/src/image/structure/IMAGE_SECTION_HEADER.cs
+ rename src/metareader/src/{models/pe/segments => image/structure}/IMAGE_SECTION_HEADER.csv (100%)
+ rename src/metareader/src/{models/pe/segments => image/structure}/MAGE_LOAD_CONFIG_DIRECTORY.csv (100%)
+ create mode 100644 src/metareader/src/image/structure/MEMORY_BASIC_INFORMATION64.cs
+ create mode 100644 src/metareader/src/image/structure/PdbInfo.cs
+ rename src/metareader/src/{models/pe/segments => image/structure}/RESOURCE_TABLE.csv (100%)
+ rename src/metareader/src/{models/pe/segments => image/structure}/SPECIAL.csv (100%)
+ rename src/metareader/src/{models/pe/segments => image/structure}/TLS.csv (100%)
+ rename src/metareader/src/{models/metadata/literals => image/x}/Extensions.cs (99%)
+ create mode 100644 src/metareader/src/image/x/LiteralExtensions.cs
+ delete mode 100644 src/metareader/src/models/clr/ILToNativeMap.cs
+ create mode 100644 src/metareader/src/models/clr/StringCache.cs
+ delete mode 100644 src/metareader/src/models/common/PSS_CAPTURE_FLAGS.cs
+ rewrite src/metareader/src/models/metadata/Handles.cs (61%)
+ delete mode 100644 src/metareader/src/models/metadata/debug/DebugMetadataHeader.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/Characterisitics.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/ConstantTypeCode.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/DllCharacteristics.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/Flags.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/HandleType.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/IlOpCode.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/Literals.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/Pe.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/SignatureAttributes.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/SignatureTypeCode.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/StringHandleType.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/TableIndex.cs
+ delete mode 100644 src/metareader/src/models/metadata/literals/TokenTypeIds.cs
+ delete mode 100644 src/metareader/src/models/pdb/PdbInfo.cs
+ delete mode 100644 src/metareader/src/models/pe/PEImage.cs
+ delete mode 100644 src/metareader/src/models/pe/adapters/CorHeader.cs
+ delete mode 100644 src/metareader/src/models/pe/adapters/FileVersionInfo.cs
+ delete mode 100644 src/metareader/src/models/pe/adapters/ImageFIleHeader.cs
+ delete mode 100644 src/metareader/src/models/pe/adapters/ImageOptionalHeader.cs
+ delete mode 100644 src/metareader/src/models/pe/adapters/ResourceEntry.cs
+ delete mode 100644 src/metareader/src/models/pe/adapters/SectionHeader.cs
+ delete mode 100644 src/metareader/src/models/pe/literals/COMIMAGE_FLAGS.cs
+ delete mode 100644 src/metareader/src/models/pe/literals/DEBUG_CLASS_QUALIFIER.cs
+ delete mode 100644 src/metareader/src/models/pe/literals/DEBUG_FORMAT.cs
+ delete mode 100644 src/metareader/src/models/pe/literals/IMAGE_FILE.cs
+ delete mode 100644 src/metareader/src/models/pe/literals/IMAGE_FILE_MACHINE.cs
+ delete mode 100644 src/metareader/src/models/pe/literals/IMAGE_SCN.cs
+ delete mode 100644 src/metareader/src/models/pe/literals/ImageDebugType.cs
+ delete mode 100644 src/metareader/src/models/pe/literals/MEM.cs
+ delete mode 100644 src/metareader/src/models/pe/literals/PAGE.cs
+ delete mode 100644 src/metareader/src/models/pe/literals/StringCache.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/CV_INFO_PDB70.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/DEBUG_MODULE_PARAMETERS.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_COR20_HEADER.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_COR20_HEADER_ENTRYPOINT.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_COR_ILMETHOD.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_DATA_DIRECTORY.c
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_DEBUG_DIRECTORY.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_FILE_HEADER.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_OPTIONAL_HEADER64.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_OPTIONAL_HEADER_AGNOSTIC.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_OPTIONAL_HEADER_SPECIFIC.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_RESOURCE_DATA_ENTRY.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_RESOURCE_DIRECTORY.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_RESOURCE_DIRECTORY_ENTRY.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_SECTION_HEADER.cs
+ delete mode 100644 src/metareader/src/models/pe/segments/MEMORY_BASIC_INFORMATION64.cs
+ create mode 100644 src/zdata/content/peformat/COFF.Header.csv

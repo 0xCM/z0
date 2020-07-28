@@ -7,7 +7,6 @@
 namespace Z0.Image
 {
     using System;
-    using System.Runtime.InteropServices;
     
     /// <summary>
     /// A wrapper over the IMAGE_SECTION_HEADER structure.

@@ -3,7 +3,7 @@
 // License     : MIT via .Net Foundation
 // Extracted from System.Reflection.MetadataReader library code
 //-----------------------------------------------------------------------------
-namespace Z0.MS
+namespace Z0
 {
     using System;
     using System.Threading;
