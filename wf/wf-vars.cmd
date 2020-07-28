@@ -3,10 +3,9 @@ set Dev=%ZDev%
 set Wf="%Dev%/wf"
 set Stage=%ZLogs%
 set SdkAppVer=netcoreapp3.0
-set WfLogRoot="%Stage%\etl"
 
 set DevBuildRoot="%Dev%\bin"
-set StageBuildRoot="%StageStage%\builds"
+set StageBuildRoot="%Stage%\builds"
 set PubBuildRoot="%Pub%\builds"
 
 set DevLib="%DevBuildRoot%\lib\%SdkAppVer%"

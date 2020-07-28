@@ -42,7 +42,8 @@ namespace Z0
             /// </summary>
             public IDataReader DataReader { get; }
 
-            public CacheOptions CacheOptions { get; } = new CacheOptions();
+            public CacheOptions CacheOptions { get; } 
+                = new CacheOptions();
 
             /// <summary>
             /// Gets or sets instance to manage the symbol path(s).
@@ -193,7 +194,8 @@ namespace Z0
             /// <summary>
             /// Gets a set of helper functions that are consistently implemented across all platforms.
             /// </summary>
-            public static WindowsFunctions PlatformFunctions { get; } = new WindowsFunctions();
+            public static WindowsFunctions PlatformFunctions { get; } 
+                = new WindowsFunctions();
 
             #if Enabled
 

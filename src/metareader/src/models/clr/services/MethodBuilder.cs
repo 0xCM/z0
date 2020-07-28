@@ -12,11 +12,11 @@ namespace Z0.MS
 
     internal class MethodBuilder : IMethodData, IDisposable
     {
-        private MethodDescData _mdData;
+        MethodDescData _mdData;
         
-        private CodeHeaderData _codeHeaderData;
+        CodeHeaderData _codeHeaderData;
         
-        private IMethodHelpers? _helpers;
+        IMethodHelpers? _helpers;
 
         public bool Init(SOSDac sos, ulong mt, int i, IMethodHelpers helpers)
         {
@@ -42,12 +42,15 @@ namespace Z0.MS
         }
 
         public Dac.ObjectPool<MethodBuilder>? Owner { get; set; }
-        public IMethodHelpers Helpers => _helpers!;
+        
+        public IMethodHelpers Helpers 
+            => _helpers!;
 
         public int Token    
             => (int)_mdData.MDToken;
 
         public ulong MethodDesc { get; private set; }
+        
         public MethodCompilationType CompilationType 
             => (MethodCompilationType)_codeHeaderData.JITType;
 

@@ -12,14 +12,14 @@ namespace Z0
 
     partial struct z
     {               
-
+        /// <summary>
+        /// Forms a delagate from a function pointer
+        /// </summary>
+        /// <param name="pFunc"></param>
+        /// <typeparam name="D">The target delegate type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe decimal @decimal<T>(T src)
-            where T : unmanaged             
-                => *((decimal*)(&src));
-
-        [MethodImpl(Inline), Op]
-        public static unsafe decimal @decimal(bool on)
-            => *((byte*)(&on));
+        public static D @delegate<D>(IntPtr pFunc)
+            where D : Delegate
+                => Marshal.GetDelegateForFunctionPointer<D>(pFunc);
     }
 }

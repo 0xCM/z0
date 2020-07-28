@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
@@ -51,6 +52,10 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress address<T>(in T src)
             => new MemoryAddress(pvoid(src));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe MemoryAddress address<T>(T[] src, int index)
+            =>  pvoid(in src[index]);
 
         /// <summary>
         /// Determines the address of the leading source cell

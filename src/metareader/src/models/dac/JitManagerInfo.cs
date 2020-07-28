@@ -13,7 +13,9 @@ namespace Z0.Dac
     public readonly struct JitManagerInfo
     {
         public readonly ClrDataAddress Address;
+        
         public readonly CodeHeapType Type;
+        
         public readonly ClrDataAddress HeapList;
     }
 }

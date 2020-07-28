@@ -59,9 +59,11 @@ namespace Z0
                 }
             }
 
-            private bool IsMultiDimensional => Type.StaticSize > (uint)(3 * IntPtr.Size);
+            private bool IsMultiDimensional 
+                => Type.StaticSize > (uint)(3 * IntPtr.Size);
 
-            private int MultiDimensionalRank => (int)((Type.StaticSize - (uint)(3 * IntPtr.Size)) / (2 * sizeof(int)));
+            private int MultiDimensionalRank 
+                => (int)((Type.StaticSize - (uint)(3 * IntPtr.Size)) / (2 * sizeof(int)));
 
             public ClrArray(ulong address, ClrType type)
             {

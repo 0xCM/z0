@@ -46,12 +46,8 @@ namespace Z0
             }
 
             [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-            private delegate int GetILAddressMapDelegate(
-                IntPtr self,
-                uint mapLen,
-                out uint mapNeeded,
-                [Out][MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)]
-                ILToNativeMap[]? map);
+            private delegate int GetILAddressMapDelegate(IntPtr self, uint mapLen, out uint mapNeeded, 
+                [Out][MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] ILToNativeMap[]? map);
         }
     }
 }

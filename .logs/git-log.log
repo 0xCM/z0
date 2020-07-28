@@ -673,3 +673,233 @@
  delete mode 100644 src/metareader/src/models/pe/segments/IMAGE_SECTION_HEADER.cs
  delete mode 100644 src/metareader/src/models/pe/segments/MEMORY_BASIC_INFORMATION64.cs
  create mode 100644 src/zdata/content/peformat/COFF.Header.csv
+[master 8c0a1968d] .
+ 245 files changed, 16464 insertions(+), 3725 deletions(-)
+ create mode 100644 src/metareader/src/com/CallableCOMWrapper.cs
+ create mode 100644 src/metareader/src/com/ComCallableWrapper.cs
+ rename src/metareader/src/{models/clr => com}/ComInterfaceData.cs (98%)
+ rename src/metareader/src/{models/clr => com}/ICcwData.cs (99%)
+ create mode 100644 src/metareader/src/com/IObjectData.cs
+ create mode 100644 src/metareader/src/com/IRcwData.cs
+ rename src/metareader/src/{image/ops/A1.cs => com/IUnknownVTable.cs} (56%)
+ create mode 100644 src/metareader/src/com/RcwData.cs
+ create mode 100644 src/metareader/src/com/RefCountedFreeLibrary.cs
+ rename src/metareader/src/{models/clr => com}/RuntimeCallableWrapper.cs (84%)
+ rename src/metareader/src/{image/x/Extensions.cs => common/ClrModelQueries.cs} (51%)
+ create mode 100644 src/metareader/src/common/ClrSigParser.cs
+ create mode 100644 src/metareader/src/common/IDataReader.cs
+ rename src/metareader/src/{models => }/common/IMemoryReader.cs (97%)
+ create mode 100644 src/metareader/src/common/ReadVirtualStream.cs
+ create mode 100644 src/metareader/src/common/literals/ClrElementType.cs
+ create mode 100644 src/metareader/src/common/literals/ClrHandleKind.cs
+ create mode 100644 src/metareader/src/common/literals/ClrRootKind.cs
+ create mode 100644 src/metareader/src/common/literals/MethodCompilationType.cs
+ create mode 100644 src/metareader/src/common/models/ClrGenericParameter.cs
+ create mode 100644 src/metareader/src/common/models/CodeHeaderData.cs
+ create mode 100644 src/metareader/src/common/models/HotColdRegions.cs
+ create mode 100644 src/metareader/src/common/models/ILInfo.cs
+ rename src/metareader/src/{image/adapters => common/models}/ILToNativeMap.cs (98%)
+ create mode 100644 src/metareader/src/common/models/IMetadataImportVTable.cs
+ create mode 100644 src/metareader/src/common/models/MemoryRegionInfo.cs
+ create mode 100644 src/metareader/src/common/models/MethodDescData.cs
+ create mode 100644 src/metareader/src/common/models/RejitData.cs
+ rename src/metareader/src/{ => common}/models/VersionInfo.cs (91%)
+ create mode 100644 src/metareader/src/common/os/MEMORY_BASIC_INFORMATION.cs
+ create mode 100644 src/metareader/src/common/os/NativeMethods.cs
+ create mode 100644 src/metareader/src/common/os/PSS_CAPTURE_FLAGS.cs
+ create mode 100644 src/metareader/src/common/os/PSS_QUERY_INFORMATION_CLASS.cs
+ rename src/metareader/src/{models/clr => common/os}/SafeWin32Handle.cs (90%)
+ rename src/metareader/src/{image/ops/A2.cs => common/os/ThreadAccess.cs} (68%)
+ create mode 100644 src/metareader/src/common/os/WindowsFunctions.cs
+ create mode 100644 src/metareader/src/common/os/WindowsNativeMathods.cs
+ rename src/metareader/src/{models/clr/ClrRootKind.cs => common/os/ZWin.cs} (66%)
+ create mode 100644 src/metareader/src/common/x/Extensions.cs
+ delete mode 100644 src/metareader/src/image/A10.cs
+ delete mode 100644 src/metareader/src/image/A11.cs
+ delete mode 100644 src/metareader/src/image/A14.cs
+ create mode 100644 src/metareader/src/image/IBinaryLocator.cs
+ create mode 100644 src/metareader/src/image/PeImage.cs
+ create mode 100644 src/metareader/src/image/PeImageHeader.cs
+ create mode 100644 src/metareader/src/image/PeImageOffsets.cs
+ create mode 100644 src/metareader/src/image/PeImageReader.cs
+ create mode 100644 src/metareader/src/image/SourceStream.cs
+ create mode 100644 src/metareader/src/image/adapters/DllVersion.cs
+ rename src/metareader/src/image/adapters/{PEImage.cs => PEImageReader.cs} (96%)
+ rename src/metareader/src/image/{structure => fields}/COFF_HEADER_FIELDS.csv (100%)
+ create mode 100644 src/metareader/src/image/fields/IMAGE_DLLCHARACTERISTICS.csv
+ create mode 100644 src/metareader/src/image/fields/IMAGE_SUBSYSTEM.csv
+ delete mode 100644 src/metareader/src/image/ops/A5.cs
+ delete mode 100644 src/metareader/src/image/ops/A6.cs
+ delete mode 100644 src/metareader/src/image/ops/A7.cs
+ delete mode 100644 src/metareader/src/image/ops/GetConstantTypeCode.cs
+ delete mode 100644 src/metareader/src/image/ops/ImageOps.cs
+ create mode 100644 src/metareader/src/image/structure/COFF_SYMBOL_TABLE.csv
+ create mode 100644 src/metareader/src/image/structure/OptionalHeaderDataDirectories.csv
+ delete mode 100644 src/metareader/src/image/x/LiteralExtensions.cs
+ delete mode 100644 src/metareader/src/models/clr/CallableCOMWrapper.cs
+ delete mode 100644 src/metareader/src/models/clr/ClrElementType.cs
+ delete mode 100644 src/metareader/src/models/clr/ClrElementTypeExtenions.cs
+ delete mode 100644 src/metareader/src/models/clr/ClrGenericParameter.cs
+ delete mode 100644 src/metareader/src/models/clr/ClrHeap.cs
+ delete mode 100644 src/metareader/src/models/clr/ClrRootKind_.cs
+ delete mode 100644 src/metareader/src/models/clr/HotColdRegions.cs
+ delete mode 100644 src/metareader/src/models/clr/IBinaryLocator.cs
+ delete mode 100644 src/metareader/src/models/clr/IDataReader.cs
+ delete mode 100644 src/metareader/src/models/clr/ILInfo.cs
+ delete mode 100644 src/metareader/src/models/clr/MemoryReader.cs
+ delete mode 100644 src/metareader/src/models/clr/MemoryRegionInfo.cs
+ delete mode 100644 src/metareader/src/models/clr/MetadataImport.cs
+ delete mode 100644 src/metareader/src/models/clr/MethodCompilationType.cs
+ delete mode 100644 src/metareader/src/models/clr/RefCountedFreeLibrary.cs
+ delete mode 100644 src/metareader/src/models/clr/StringCache.cs
+ delete mode 100644 src/metareader/src/models/clr/WindowsFunctions.cs
+ rename src/metareader/src/models/clr/{ => abstractions}/COMHelper.cs (100%)
+ rename src/metareader/src/models/clr/{ => abstractions}/ClrField.cs (100%)
+ create mode 100644 src/metareader/src/models/clr/abstractions/ClrHandle.cs
+ create mode 100644 src/metareader/src/models/clr/abstractions/ClrHeap.cs
+ rename src/metareader/src/models/clr/{ => abstractions}/ClrInstanceField.cs (97%)
+ rename src/metareader/src/models/clr/{ => abstractions}/ClrMethod.cs (99%)
+ rename src/metareader/src/models/clr/{ => abstractions}/ClrModule.cs (96%)
+ rename src/metareader/src/models/clr/{ => abstractions}/ClrRuntime.cs (57%)
+ create mode 100644 src/metareader/src/models/clr/abstractions/ClrSegment.cs
+ rename src/metareader/src/models/clr/{ => abstractions}/ClrStackFrame.cs (100%)
+ rename src/metareader/src/models/clr/{ => abstractions}/ClrStaticField.cs (88%)
+ rename src/metareader/src/models/clr/{ => abstractions}/ClrThread.cs (99%)
+ rename src/metareader/src/models/clr/{ => abstractions}/ClrType.cs (98%)
+ rename src/metareader/src/models/clr/{ => abstractions}/ManagedWorkItem.cs (97%)
+ rename src/metareader/src/models/clr/{ => contracts}/IAddressableTypedEntity.cs (100%)
+ create mode 100644 src/metareader/src/models/clr/contracts/IClrObjectHelpers.cs
+ rename src/metareader/src/models/clr/{ => contracts}/IClrRoot.cs (99%)
+ rename src/metareader/src/models/clr/{ => contracts}/IExceptionHelpers.cs (100%)
+ create mode 100644 src/metareader/src/models/clr/contracts/IRuntimeHelpers.cs
+ create mode 100644 src/metareader/src/models/clr/contracts/ITypeData.cs
+ rename src/metareader/src/models/clr/{IClrObjectHelpers.cs => contracts/ITypeFactory.cs} (84%)
+ create mode 100644 src/metareader/src/models/clr/contracts/ITypeHelpers.cs
+ create mode 100644 src/metareader/src/models/clr/contracts/IXCLRDataMethodInstanceVTable.cs
+ rename src/metareader/src/models/clr/{ => literals}/ClrFlavor.cs (100%)
+ rename src/metareader/src/models/clr/{ => literals}/ClrStackFrameKind.cs (100%)
+ rename src/metareader/src/models/clr/{ => literals}/GCMode.cs (100%)
+ create mode 100644 src/metareader/src/models/clr/literals/StringCache.cs
+ rename src/metareader/src/models/clr/{ => models}/CacheOptions.cs (73%)
+ rename src/metareader/src/models/clr/{ => models}/ClrAppDomain.cs (98%)
+ rename src/metareader/src/models/clr/{ => models}/ClrArray.cs (96%)
+ create mode 100644 src/metareader/src/models/clr/models/ClrDataMethod.cs
+ create mode 100644 src/metareader/src/models/clr/models/ClrEnum.cs
+ rename src/metareader/src/models/clr/{ => models}/ClrException.cs (95%)
+ create mode 100644 src/metareader/src/models/clr/models/ClrFinalizerRoot.cs
+ rename src/metareader/src/models/clr/{ => models}/ClrInfo.cs (98%)
+ rename src/metareader/src/models/clr/{ => models}/ClrInterface.cs (100%)
+ rename src/metareader/src/models/clr/{ => models}/ClrObject.cs (98%)
+ rename src/metareader/src/models/clr/{ => models}/ClrStackRoot.cs (100%)
+ rename src/metareader/src/models/clr/{ => models}/ClrValueType.cs (95%)
+ rename src/metareader/src/models/clr/{ => models}/GCDesc.cs (95%)
+ rename src/metareader/src/models/clr/{ => models}/ModuleInfo.cs (98%)
+ create mode 100644 src/metareader/src/models/clr/realizations/ClrmdHeap.cs
+ rename src/metareader/src/{image/ops/A4.cs => models/clr/realizations/contracts/IFieldData.cs} (58%)
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IFieldHelpers.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IHeapBuilder.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IHeapHelpers.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IMethodData.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IMethodHelpers.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IModuleData.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IModuleHelpers.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IThreadData.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/models/AllocationContext.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/models/FinalizerQueueSegment.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/models/HeapWalkStep.cs
+ create mode 100644 src/metareader/src/models/clr/services/AppDomainBuilder.cs
+ create mode 100644 src/metareader/src/models/clr/services/CcwBuilder.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClmdArrayType.cs
+ rename src/metareader/src/models/clr/{ => services}/ClrInfoProvider.cs (97%)
+ create mode 100644 src/metareader/src/models/clr/services/ClrMdModule.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrMdSegment.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrmdAppDomain.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrmdConstructedType.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrmdField.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrmdMethod.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrmdPrimitiveType.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrmdRuntime.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrmdStackFrame.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrmdStaticField.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrmdThread.cs
+ create mode 100644 src/metareader/src/models/clr/services/ClrmdType.cs
+ create mode 100644 src/metareader/src/models/clr/services/FieldBuilder.cs
+ create mode 100644 src/metareader/src/models/clr/services/HeapBuilder.cs
+ create mode 100644 src/metareader/src/models/clr/services/HeapHelpers.cs
+ create mode 100644 src/metareader/src/models/clr/services/MemoryReader.cs
+ rename src/metareader/src/models/clr/{MetadataImport.3.cs => services/MetadataImport.cs} (99%)
+ create mode 100644 src/metareader/src/models/clr/services/MethodBuilder.cs
+ create mode 100644 src/metareader/src/models/clr/services/ModuleBuilder.cs
+ create mode 100644 src/metareader/src/models/clr/services/ObjectPool.cs
+ create mode 100644 src/metareader/src/models/clr/services/RcwBuilder.cs
+ create mode 100644 src/metareader/src/models/clr/services/SymbolServer.cs
+ create mode 100644 src/metareader/src/models/clr/services/ThreadBuilder.cs
+ create mode 100644 src/metareader/src/models/clr/services/TypeBuilder.cs
+ rename src/metareader/src/models/clr/{ => services}/ValueReader.cs (99%)
+ rewrite src/metareader/src/models/common/Command.cs (91%)
+ rewrite src/metareader/src/models/common/CommandOptions.cs (94%)
+ delete mode 100644 src/metareader/src/models/common/DacLibrary.cs
+ delete mode 100644 src/metareader/src/models/common/ReadVirtualStream.cs
+ delete mode 100644 src/metareader/src/models/common/VersionInfo.cs
+ create mode 100644 src/metareader/src/models/dac/AppDomainStoreData.cs
+ create mode 100644 src/metareader/src/models/dac/AssemblyData.cs
+ create mode 100644 src/metareader/src/models/dac/COMCallableIUnknown.cs
+ create mode 100644 src/metareader/src/models/dac/COMInterfacePointerData.cs
+ create mode 100644 src/metareader/src/models/dac/CcwData.cs
+ create mode 100644 src/metareader/src/models/dac/ClrDataAddress.cs
+ create mode 100644 src/metareader/src/models/dac/ClrDataModule.cs
+ create mode 100644 src/metareader/src/models/dac/ClrDataProcess.cs
+ create mode 100644 src/metareader/src/models/dac/ClrDataTask.cs
+ create mode 100644 src/metareader/src/models/dac/ClrDiagnosticsException.cs
+ create mode 100644 src/metareader/src/models/dac/ClrStackWalk.cs
+ create mode 100644 src/metareader/src/models/dac/CommonMethodTables.cs
+ create mode 100644 src/metareader/src/models/dac/Dac.cs
+ create mode 100644 src/metareader/src/models/dac/DacDataTargetWrapper.cs
+ rename src/metareader/src/models/{clr => dac}/DacInfo.cs (97%)
+ create mode 100644 src/metareader/src/models/dac/DacLibrary.cs
+ create mode 100644 src/metareader/src/models/dac/DacRequrests.cs
+ rename src/metareader/src/models/{clr => dac}/DataTarget.cs (99%)
+ create mode 100644 src/metareader/src/models/dac/DomainLocalModuleData.cs
+ create mode 100644 src/metareader/src/models/dac/ExtendedModuleData.cs
+ create mode 100644 src/metareader/src/models/dac/FieldData.cs
+ create mode 100644 src/metareader/src/models/dac/GCInfo.cs
+ create mode 100644 src/metareader/src/models/dac/GenerationData.cs
+ create mode 100644 src/metareader/src/models/dac/HandleData.cs
+ create mode 100644 src/metareader/src/models/dac/HeapDetails.cs
+ create mode 100644 src/metareader/src/models/dac/ISOSDacVTable.cs
+ create mode 100644 src/metareader/src/models/dac/ISegmentBuilder.cs
+ create mode 100644 src/metareader/src/models/dac/IXCLRDataStackWalkVTable.cs
+ create mode 100644 src/metareader/src/models/dac/IXCLRProcessVTable.cs
+ create mode 100644 src/metareader/src/models/dac/JitCodeHeapInfo.cs
+ create mode 100644 src/metareader/src/models/dac/JitManagerInfo.cs
+ create mode 100644 src/metareader/src/models/dac/MethodTableData.cs
+ create mode 100644 src/metareader/src/models/dac/ModuleData.cs
+ create mode 100644 src/metareader/src/models/dac/SOSDac6.cs
+ create mode 100644 src/metareader/src/models/dac/SOSHandleEnum.cs
+ create mode 100644 src/metareader/src/models/dac/SOSStackRefEnum.cs
+ create mode 100644 src/metareader/src/models/dac/SegmentBuilder.cs
+ create mode 100644 src/metareader/src/models/dac/SegmentData.cs
+ create mode 100644 src/metareader/src/models/dac/StackRefData.cs
+ create mode 100644 src/metareader/src/models/dac/SyncBlockData.cs
+ create mode 100644 src/metareader/src/models/dac/ThreadData.cs
+ create mode 100644 src/metareader/src/models/dac/ThreadLocalModuleData.cs
+ create mode 100644 src/metareader/src/models/dac/ThreadPoolData.cs
+ create mode 100644 src/metareader/src/models/dac/ThreadStoreData.cs
+ create mode 100644 src/metareader/src/models/dac/V45ObjectData.cs
+ create mode 100644 src/metareader/src/models/dac/V4FieldInfo.cs
+ create mode 100644 src/metareader/src/models/dac/VTableBuilder.cs
+ create mode 100644 src/metareader/src/models/dac/WorkRequestData.cs
+ create mode 100644 src/metareader/src/models/metadata/Architecture.cs
+ rename src/metareader/src/{image/ops/A3.cs => models/metadata/MdR.cs} (66%)
+ rewrite src/metareader/src/models/registers/Registers.cs (95%)
+ create mode 100644 src/metareader/src/models/registers/parts/Amd64Context.cs
+ create mode 100644 src/metareader/src/models/registers/parts/Float80.cs
+ rewrite src/metareader/src/models/registers/parts/M128A.cs (68%)
+ create mode 100644 src/metareader/src/models/registers/parts/RegisterType.cs
+ rewrite src/metareader/src/models/registers/parts/VectorRegisterArea.cs (70%)
+ create mode 100644 src/metareader/src/models/registers/parts/X86Context.cs
+ create mode 100644 src/metareader/src/models/registers/parts/Xmm.cs
+ rename src/metareader/src/models/x/{DebugOnly.cs => AsPointer.cs} (78%)
+ create mode 100644 src/metareader/src/services/ClrDataAddress.cs
+ create mode 100644 src/metareader/src/services/LiveDataReader.cs
+ create mode 100644 src/metareader/src/services/x/MsD.cs

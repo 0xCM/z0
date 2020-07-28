@@ -40,120 +40,119 @@ namespace Z0.Dac
             _library = lib;
         }
 
-        private DacGetIntPtr? _getHandleEnum;
+        DacGetIntPtr? _getHandleEnum;
         
-        private GetHandleEnumForTypesDelegate? _getHandleEnumForTypes;
+        GetHandleEnumForTypesDelegate? _getHandleEnumForTypes;
         
-        private DacGetIntPtrWithArg? _getStackRefEnum;
+        DacGetIntPtrWithArg? _getStackRefEnum;
         
-        private DacGetThreadData? _getThreadData;
+        DacGetThreadData? _getThreadData;
         
-        private DacGetHeapDetailsWithArg? _getGCHeapDetails;
+        DacGetHeapDetailsWithArg? _getGCHeapDetails;
         
-        private DacGetHeapDetails? _getGCHeapStaticData;
+        DacGetHeapDetails? _getGCHeapStaticData;
         
-        private DacGetAddrArray? _getGCHeapList;
+        DacGetAddrArray? _getGCHeapList;
         
-        private DacGetAddrArray? _getAppDomainList;
+        DacGetAddrArray? _getAppDomainList;
         
-        private DacGetAddrArrayWithArg? _getAssemblyList;
+        DacGetAddrArrayWithArg? _getAssemblyList;
         
-        private DacGetAddrArrayWithArg? _getModuleList;
+        DacGetAddrArrayWithArg? _getModuleList;
         
-        private DacGetAssemblyData? _getAssemblyData;
+        DacGetAssemblyData? _getAssemblyData;
         
-        private DacGetADStoreData? _getAppDomainStoreData;
+        DacGetADStoreData? _getAppDomainStoreData;
         
-        private DacGetMTData? _getMethodTableData;
+        DacGetMTData? _getMethodTableData;
         
-        private DacGetAddrWithArg? _getMTForEEClass;
+        DacGetAddrWithArg? _getMTForEEClass;
         
-        private DacGetGCInfoData? _getGCHeapData;
+        DacGetGCInfoData? _getGCHeapData;
         
-        private DacGetCommonMethodTables? _getCommonMethodTables;
+        DacGetCommonMethodTables? _getCommonMethodTables;
         
-        private DacGetCharArrayWithArg? _getMethodTableName;
+        DacGetCharArrayWithArg? _getMethodTableName;
         
-        private DacGetByteArrayWithArg? _getJitHelperFunctionName;
+        DacGetByteArrayWithArg? _getJitHelperFunctionName;
         
-        private DacGetCharArrayWithArg? _getPEFileName;
+        DacGetCharArrayWithArg? _getPEFileName;
         
-        private DacGetCharArrayWithArg? _getAppDomainName;
+        DacGetCharArrayWithArg? _getAppDomainName;
         
-        private DacGetCharArrayWithArg? _getAssemblyName;
+        DacGetCharArrayWithArg? _getAssemblyName;
         
-        private DacGetCharArrayWithArg? _getAppBase;
+        DacGetCharArrayWithArg? _getAppBase;
         
-        private DacGetCharArrayWithArg? _getConfigFile;
+        DacGetCharArrayWithArg? _getConfigFile;
         
-        private DacGetModuleData? _getModuleData;
+        DacGetModuleData? _getModuleData;
         
-        private DacGetSegmentData? _getSegmentData;
+        DacGetSegmentData? _getSegmentData;
         
-        private DacGetAppDomainData? _getAppDomainData;
+        DacGetAppDomainData? _getAppDomainData;
         
-        private DacGetJitManagers? _getJitManagers;
+        DacGetJitManagers? _getJitManagers;
         
-        private DacTraverseLoaderHeap? _traverseLoaderHeap;
+        DacTraverseLoaderHeap? _traverseLoaderHeap;
         
-        private DacTraverseStubHeap? _traverseStubHeap;
+        DacTraverseStubHeap? _traverseStubHeap;
         
-        private DacTraverseModuleMap? _traverseModuleMap;
+        DacTraverseModuleMap? _traverseModuleMap;
         
-        private DacGetFieldInfo? _getFieldInfo;
+        DacGetFieldInfo? _getFieldInfo;
         
-        private DacGetFieldData? _getFieldData;
+        DacGetFieldData? _getFieldData;
         
-        private DacGetObjectData? _getObjectData;
+        DacGetObjectData? _getObjectData;
         
-        private DacGetCCWData? _getCCWData;
+        DacGetCCWData? _getCCWData;
         
-        private DacGetRCWData? _getRCWData;
+        DacGetRCWData? _getRCWData;
         
-        private DacGetCharArrayWithArg? _getFrameName;
+        DacGetCharArrayWithArg? _getFrameName;
         
-        private DacGetAddrWithArg? _getMethodDescPtrFromFrame;
+        DacGetAddrWithArg? _getMethodDescPtrFromFrame;
         
-        private DacGetAddrWithArg? _getMethodDescPtrFromIP;
+        DacGetAddrWithArg? _getMethodDescPtrFromIP;
         
-        private DacGetCodeHeaderData? _getCodeHeaderData;
+        DacGetCodeHeaderData? _getCodeHeaderData;
         
-        private DacGetSyncBlockData? _getSyncBlock;
+        DacGetSyncBlockData? _getSyncBlock;
         
-        private DacGetThreadPoolData? _getThreadPoolData;
+        DacGetThreadPoolData? _getThreadPoolData;
         
-        private DacGetWorkRequestData? _getWorkRequestData;
+        DacGetWorkRequestData? _getWorkRequestData;
         
-        private DacGetDomainLocalModuleDataFromAppDomain? _getDomainLocalModuleDataFromAppDomain;
+        DacGetDomainLocalModuleDataFromAppDomain? _getDomainLocalModuleDataFromAppDomain;
         
-        private DacGetLocalModuleData? _getDomainLocalModuleDataFromModule;
+        DacGetLocalModuleData? _getDomainLocalModuleDataFromModule;
         
-        private DacGetCodeHeaps? _getCodeHeaps;
+        DacGetCodeHeaps? _getCodeHeaps;
         
-        private DacGetCOMPointers? _getCCWInterfaces;
+        DacGetCOMPointers? _getCCWInterfaces;
         
-        private DacGetCOMPointers? _getRCWInterfaces;
+        DacGetCOMPointers? _getRCWInterfaces;
         
-        private DacGetAddrWithArgs? _getILForModule;
+        DacGetAddrWithArgs? _getILForModule;
         
-        private DacGetThreadLocalModuleData? _getThreadLocalModuleData;
+        DacGetThreadLocalModuleData? _getThreadLocalModuleData;
         
-        private DacGetAddrWithArgs? _getMethodTableSlot;
+        DacGetAddrWithArgs? _getMethodTableSlot;
         
-        private DacGetCharArrayWithArg? _getMethodDescName;
+        DacGetCharArrayWithArg? _getMethodDescName;
         
-        private DacGetThreadFromThinLock? _getThreadFromThinlockId;
+        DacGetThreadFromThinLock? _getThreadFromThinlockId;
         
-        private DacGetUInt? _getTlsIndex;
+        DacGetUInt? _getTlsIndex;
         
-        private DacGetThreadStoreData? _getThreadStoreData;
+        DacGetThreadStoreData? _getThreadStoreData;
         
-        private GetMethodDescDataDelegate? _getMethodDescData;
+        GetMethodDescDataDelegate? _getMethodDescData;
         
-        private GetModuleDelegate? _getModule;
+        GetModuleDelegate? _getModule;
         
-        private GetMethodDescFromTokenDelegate? _getMethodDescFromToken;
-
+        GetMethodDescFromTokenDelegate? _getMethodDescFromToken;
 
         public RejitData[] GetRejitData(ulong md, ulong ip = 0)
         {

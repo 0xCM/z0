@@ -37,6 +37,12 @@ namespace Z0
             return captured;
         }
 
+        public static CapturedCode capture(LocatedMethod located, Span<byte> buffer)
+        {                        
+            var summary = capture(buffer, located.Id, located.Address);
+            return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
+        }
+
         public static CapturedCode capture(IdentifiedMethod src, Span<byte> buffer)
         {            
             var located = FunctionJit.jit(src.Method);
