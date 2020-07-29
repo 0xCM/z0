@@ -18,7 +18,6 @@ namespace Z0
             sb.Append($"{content}".PadRight((int)pad));
         }
 
-
         public static void Delimit<T>(this StringBuilder sb, T content, Padding pad, char delimiter = Chars.Pipe)
             where T : ITextual             
         {

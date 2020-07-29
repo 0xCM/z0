@@ -6,19 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
-    using static z;
-
+    
     partial struct Arrays
-    {
-        [MethodImpl(Inline), Op]
-        public static void copy(in byte src, uint count, ref byte dst, ref uint index)
-        {
-            for(var j=0u; j<count; j++)
-                z.seek(dst, index++) = z.skip(src, j);
-        }
+    {            
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static T[] from<T>(IEnumerable<T> src)
+            => src.Array();
 
-
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static T[] from<T>(params T[] src)
+            => src;
     }
 }

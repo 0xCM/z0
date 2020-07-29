@@ -115,20 +115,20 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool empty(in BinaryLiteral src)
-            => sys.blank(src.Name) && sys.blank(src.Text) && src.Data is null;
+            => text.blank(src.Name) && text.blank(src.Text) && src.Data is null;
 
         [MethodImpl(Inline)]
         public static bool empty<T>(in BinaryLiteral<T> src)
             where T : unmanaged
-                => sys.blank(src.Name) && sys.blank(src.Text) && src.Data.Equals(default);
+                => text.blank(src.Name) && text.blank(src.Text) && src.Data.Equals(default);
         
         [MethodImpl(Inline)]
         public static bool nonempty(in BinaryLiteral src)
-            => !sys.blank(src.Name) && !sys.blank(src.Text) && src.Data != null;
+            => !text.blank(src.Name) && !sys.blank(src.Text) && src.Data != null;
 
         [MethodImpl(Inline)]
         public static bool nonempty<T>(in BinaryLiteral<T> src)
             where T : unmanaged
-                => !sys.blank(src.Name) && !sys.blank(src.Text) && !src.Data.Equals(default);
+                => !text.blank(src.Name) && !text.blank(src.Text) && !src.Data.Equals(default);
     }
 }

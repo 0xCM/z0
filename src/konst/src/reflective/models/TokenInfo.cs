@@ -36,7 +36,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => sys.blank(Identifier) || sys.blank(Value);
+            get => text.blank(Identifier) || text.blank(Value);
         }
 
         public string Format()

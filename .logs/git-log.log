@@ -1121,3 +1121,467 @@
  rename src/zdata/{content/instructions => info}/sub.csv (100%)
  rename src/zdata/{content/instructions => info}/test.csv (100%)
  rename src/zdata/{content/instructions => info}/xor.csv (100%)
+[master 02c8fadb1] .
+ 491 files changed, 213824 insertions(+), 43171 deletions(-)
+ delete mode 100644 native/headers/msvc/allocators
+ delete mode 100644 native/headers/msvc/any
+ delete mode 100644 native/headers/msvc/arm64intr.h
+ delete mode 100644 native/headers/msvc/array
+ delete mode 100644 native/headers/msvc/cassert
+ delete mode 100644 native/headers/msvc/cerrno
+ delete mode 100644 native/headers/msvc/ciso646
+ delete mode 100644 native/headers/msvc/climits
+ delete mode 100644 native/headers/msvc/cmath
+ delete mode 100644 native/headers/msvc/comip.h
+ delete mode 100644 native/headers/msvc/compare
+ delete mode 100644 native/headers/msvc/cvt/xtest
+ delete mode 100644 native/headers/msvc/experimental/coroutine
+ delete mode 100644 native/headers/msvc/experimental/filesystem
+ delete mode 100644 native/headers/msvc/experimental/xutility
+ delete mode 100644 native/headers/msvc/forward_list
+ delete mode 100644 native/headers/msvc/hash_map
+ delete mode 100644 native/headers/msvc/limits.h
+ delete mode 100644 native/headers/msvc/list
+ delete mode 100644 native/headers/msvc/pplawait.h
+ delete mode 100644 native/headers/msvc/queue
+ delete mode 100644 native/headers/msvc/stack
+ delete mode 100644 native/headers/msvc/stdexcpt.h
+ delete mode 100644 native/headers/msvc/string_view
+ delete mode 100644 native/headers/msvc/typeinfo.h
+ delete mode 100644 native/headers/msvc/xcall_once.h
+ delete mode 100644 native/headers/msvc/xhash
+ delete mode 100644 native/headers/msvc/xmemory
+ delete mode 100644 native/headers/msvc/xmemory0
+ delete mode 100644 native/headers/msvc/xtgmath.h
+ delete mode 100644 native/headers/msvc/xtree
+ delete mode 100644 native/headers/msvc/xutility
+ rename native/headers/{msvc => msvs}/CodeAnalysis/Warnings.h (100%)
+ rename native/headers/{msvc => msvs}/CodeAnalysis/sourceannotations.h (100%)
+ rename native/headers/{msvc => msvs}/Manifest/PerMonitorHighDPIAware.manifest (100%)
+ rename native/headers/{msvc => msvs}/Manifest/dpiaware.manifest (100%)
+ create mode 100644 native/headers/msvs/__msvc_all_public_headers.hpp
+ create mode 100644 native/headers/msvs/__msvc_system_error_abi.hpp
+ rename native/headers/{msvc => msvs}/agents.h (99%)
+ rename native/headers/{msvc => msvs}/agile.h (100%)
+ rename native/headers/{msvc => msvs}/algorithm (57%)
+ rename native/headers/{msvc => msvs}/ammintrin.h (95%)
+ rename native/headers/{msvc => msvs}/amp.h (99%)
+ rename native/headers/{msvc => msvs}/amp_graphics.h (99%)
+ rename native/headers/{msvc => msvs}/amp_math.h (100%)
+ rename native/headers/{msvc => msvs}/amp_short_vectors.h (100%)
+ rename native/headers/{msvc => msvs}/amprt.h (100%)
+ rename native/headers/{msvc => msvs}/amprt_exceptions.h (100%)
+ create mode 100644 native/headers/msvs/any
+ rename native/headers/{msvc => msvs}/arm64_neon.h (76%)
+ create mode 100644 native/headers/msvs/arm64intr.h
+ rename native/headers/{msvc => msvs}/arm_neon.h (99%)
+ rename native/headers/{msvc => msvs}/armintr.h (100%)
+ create mode 100644 native/headers/msvs/array
+ rename native/headers/{msvc => msvs}/atomic (84%)
+ create mode 100644 native/headers/msvs/bit
+ rename native/headers/{msvc => msvs}/bitset (75%)
+ create mode 100644 native/headers/msvs/cassert
+ rename native/headers/{msvc => msvs}/ccomplex (72%)
+ rename native/headers/{msvc => msvs}/cctype (84%)
+ create mode 100644 native/headers/msvs/cerrno
+ rename native/headers/{msvc => msvs}/cfenv (84%)
+ rename native/headers/{msvc => msvs}/cfguard.h (87%)
+ rename native/headers/{msvc => msvs}/cfloat (51%)
+ rename native/headers/{msvc => msvs}/charconv (71%)
+ rename native/headers/{msvc => msvs}/chrono (59%)
+ rename native/headers/{msvc => msvs}/cinttypes (78%)
+ create mode 100644 native/headers/msvs/ciso646
+ rename native/headers/{msvc => msvs}/cliext/adapter (99%)
+ rename native/headers/{msvc => msvs}/cliext/algorithm (99%)
+ rename native/headers/{msvc => msvs}/cliext/deque (99%)
+ rename native/headers/{msvc => msvs}/cliext/functional (99%)
+ rename native/headers/{msvc => msvs}/cliext/hash_map (99%)
+ rename native/headers/{msvc => msvs}/cliext/hash_set (99%)
+ rename native/headers/{msvc => msvs}/cliext/iterator (99%)
+ rename native/headers/{msvc => msvs}/cliext/list (99%)
+ rename native/headers/{msvc => msvs}/cliext/map (99%)
+ rename native/headers/{msvc => msvs}/cliext/memory (99%)
+ rename native/headers/{msvc => msvs}/cliext/numeric (97%)
+ rename native/headers/{msvc => msvs}/cliext/queue (99%)
+ rename native/headers/{msvc => msvs}/cliext/set (99%)
+ rename native/headers/{msvc => msvs}/cliext/stack (98%)
+ rename native/headers/{msvc => msvs}/cliext/utility (98%)
+ rename native/headers/{msvc => msvs}/cliext/vector (99%)
+ rename native/headers/{msvc => msvs}/cliext/xhash (99%)
+ rename native/headers/{msvc => msvs}/cliext/xtree (99%)
+ rename native/headers/{msvc => msvs}/cliext/xutility (98%)
+ create mode 100644 native/headers/msvs/climits
+ rename native/headers/{msvc => msvs}/clocale (74%)
+ create mode 100644 native/headers/msvs/cmath
+ rename native/headers/{msvc => msvs}/codecvt (55%)
+ rename native/headers/{msvc => msvs}/collection.h (99%)
+ rename native/headers/{msvc => msvs}/comdef.h (100%)
+ rename native/headers/{msvc => msvs}/comdefsp.h (100%)
+ create mode 100644 native/headers/msvs/comip.h
+ create mode 100644 native/headers/msvs/compare
+ rename native/headers/{msvc => msvs}/complex (65%)
+ rename native/headers/{msvc => msvs}/comutil.h (99%)
+ create mode 100644 native/headers/msvs/concepts
+ rename native/headers/{msvc => msvs}/concrt.h (99%)
+ rename native/headers/{msvc => msvs}/concrtrm.h (100%)
+ rename native/headers/{msvc => msvs}/concurrencysal.h (100%)
+ rename native/headers/{msvc => msvs}/concurrent_priority_queue.h (100%)
+ rename native/headers/{msvc => msvs}/concurrent_queue.h (100%)
+ rename native/headers/{msvc => msvs}/concurrent_unordered_map.h (99%)
+ rename native/headers/{msvc => msvs}/concurrent_unordered_set.h (100%)
+ rename native/headers/{msvc => msvs}/concurrent_vector.h (100%)
+ rename native/headers/{msvc => msvs}/condition_variable (89%)
+ rename native/headers/{msvc => msvs}/crtdefs.h (50%)
+ rename native/headers/{msvc => msvs}/crtversion.h (81%)
+ rename native/headers/{msvc => msvs}/csetjmp (73%)
+ rename native/headers/{msvc => msvs}/csignal (77%)
+ rename native/headers/{msvc => msvs}/cstdalign (77%)
+ rename native/headers/{msvc => msvs}/cstdarg (72%)
+ rename native/headers/{msvc => msvs}/cstdbool (74%)
+ rename native/headers/{msvc => msvs}/cstddef (94%)
+ rename native/headers/{msvc => msvs}/cstdint (92%)
+ rename native/headers/{msvc => msvs}/cstdio (89%)
+ rename native/headers/{msvc => msvs}/cstdlib (77%)
+ rename native/headers/{msvc => msvs}/cstring (85%)
+ rename native/headers/{msvc => msvs}/ctgmath (72%)
+ rename native/headers/{msvc => msvs}/ctime (81%)
+ rename native/headers/{msvc => msvs}/cuchar (76%)
+ rename native/headers/{msvc => msvs}/cvt/8859_1 (84%)
+ rename native/headers/{msvc => msvs}/cvt/8859_10 (89%)
+ rename native/headers/{msvc => msvs}/cvt/8859_13 (89%)
+ rename native/headers/{msvc => msvs}/cvt/8859_14 (87%)
+ rename native/headers/{msvc => msvs}/cvt/8859_15 (86%)
+ rename native/headers/{msvc => msvs}/cvt/8859_16 (88%)
+ rename native/headers/{msvc => msvs}/cvt/8859_2 (89%)
+ rename native/headers/{msvc => msvs}/cvt/8859_3 (88%)
+ rename native/headers/{msvc => msvs}/cvt/8859_4 (89%)
+ rename native/headers/{msvc => msvs}/cvt/8859_5 (90%)
+ rename native/headers/{msvc => msvs}/cvt/8859_6 (89%)
+ rename native/headers/{msvc => msvs}/cvt/8859_7 (90%)
+ rename native/headers/{msvc => msvs}/cvt/8859_8 (89%)
+ rename native/headers/{msvc => msvs}/cvt/8859_9 (86%)
+ rename native/headers/{msvc => msvs}/cvt/baltic (91%)
+ rename native/headers/{msvc => msvs}/cvt/big5 (99%)
+ rename native/headers/{msvc => msvs}/cvt/cp037 (94%)
+ rename native/headers/{msvc => msvs}/cvt/cp1006 (90%)
+ rename native/headers/{msvc => msvs}/cvt/cp1026 (94%)
+ rename native/headers/{msvc => msvs}/cvt/cp1250 (91%)
+ rename native/headers/{msvc => msvs}/cvt/cp1251 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp1252 (90%)
+ rename native/headers/{msvc => msvs}/cvt/cp1253 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp1254 (90%)
+ rename native/headers/{msvc => msvs}/cvt/cp1255 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp1256 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp1257 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp1258 (90%)
+ rename native/headers/{msvc => msvs}/cvt/cp424 (93%)
+ rename native/headers/{msvc => msvs}/cvt/cp437 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp500 (94%)
+ rename native/headers/{msvc => msvs}/cvt/cp737 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp775 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp850 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp852 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp855 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp856 (90%)
+ rename native/headers/{msvc => msvs}/cvt/cp857 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp860 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp861 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp862 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp863 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp864 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp865 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp866 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp869 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp874 (92%)
+ rename native/headers/{msvc => msvs}/cvt/cp875 (94%)
+ rename native/headers/{msvc => msvs}/cvt/cp932 (99%)
+ rename native/headers/{msvc => msvs}/cvt/cp936 (99%)
+ rename native/headers/{msvc => msvs}/cvt/cp949 (99%)
+ rename native/headers/{msvc => msvs}/cvt/cp950 (99%)
+ rename native/headers/{msvc => msvs}/cvt/cyrillic (92%)
+ rename native/headers/{msvc => msvs}/cvt/ebcdic (80%)
+ rename native/headers/{msvc => msvs}/cvt/euc (99%)
+ rename native/headers/{msvc => msvs}/cvt/euc_0208 (69%)
+ rename native/headers/{msvc => msvs}/cvt/gb12345 (99%)
+ rename native/headers/{msvc => msvs}/cvt/gb2312 (99%)
+ rename native/headers/{msvc => msvs}/cvt/greek (92%)
+ rename native/headers/{msvc => msvs}/cvt/iceland (92%)
+ rename native/headers/{msvc => msvs}/cvt/jis (99%)
+ rename native/headers/{msvc => msvs}/cvt/jis0201 (93%)
+ rename native/headers/{msvc => msvs}/cvt/jis_0208 (77%)
+ rename native/headers/{msvc => msvs}/cvt/ksc5601 (99%)
+ rename native/headers/{msvc => msvs}/cvt/latin2 (92%)
+ rename native/headers/{msvc => msvs}/cvt/one_one (78%)
+ rename native/headers/{msvc => msvs}/cvt/roman (92%)
+ rename native/headers/{msvc => msvs}/cvt/sjis (99%)
+ rename native/headers/{msvc => msvs}/cvt/sjis_0208 (63%)
+ rename native/headers/{msvc => msvs}/cvt/turkish (92%)
+ rename native/headers/{msvc => msvs}/cvt/utf16 (66%)
+ rename native/headers/{msvc => msvs}/cvt/utf8 (74%)
+ rename native/headers/{msvc => msvs}/cvt/utf8_utf16 (72%)
+ rename native/headers/{msvc => msvs}/cvt/wbuffer (83%)
+ rename native/headers/{msvc => msvs}/cvt/wstring (76%)
+ rename native/headers/{msvc => msvs}/cvt/xjis (80%)
+ rename native/headers/{msvc => msvs}/cvt/xone_byte (58%)
+ rename native/headers/{msvc => msvs}/cvt/xtwo_byte (68%)
+ rename native/headers/{msvc => msvs}/cwchar (89%)
+ rename native/headers/{msvc => msvs}/cwctype (87%)
+ rename native/headers/{msvc => msvs}/delayhlp.cpp (99%)
+ rename native/headers/{msvc => msvs}/delayimp.h (98%)
+ rename native/headers/{msvc => msvs}/deque (69%)
+ rename native/headers/{msvc => msvs}/dloadsup.h (98%)
+ rename native/headers/{msvc => msvs}/dvec.h (99%)
+ rename native/headers/{msvc => msvs}/eh.h (80%)
+ rename native/headers/{msvc => msvs}/ehdata.h (99%)
+ rename native/headers/{msvc => msvs}/ehdata4.h (99%)
+ rename native/headers/{msvc => msvs}/ehdata4_export.h (82%)
+ rename native/headers/{msvc => msvs}/ehdata_forceinclude.h (97%)
+ rename native/headers/{msvc => msvs}/ehdata_values.h (54%)
+ rename native/headers/{msvc => msvs}/emmintrin.h (100%)
+ rename native/headers/{msvc => msvs}/exception (71%)
+ rename native/headers/{msvc => msvs}/excpt.h (94%)
+ rename native/headers/{msvc => msvs}/execution (91%)
+ create mode 100644 native/headers/msvs/experimental/coroutine
+ rename native/headers/{msvc => msvs}/experimental/deque (67%)
+ create mode 100644 native/headers/msvs/experimental/filesystem
+ rename native/headers/{msvc => msvs}/experimental/forward_list (61%)
+ rename native/headers/{msvc => msvs}/experimental/generator (76%)
+ rename native/headers/{msvc => msvs}/experimental/list (61%)
+ rename native/headers/{msvc => msvs}/experimental/map (65%)
+ rename native/headers/{msvc => msvs}/experimental/resumable (92%)
+ rename native/headers/{msvc => msvs}/experimental/set (66%)
+ rename native/headers/{msvc => msvs}/experimental/string (65%)
+ rename native/headers/{msvc => msvs}/experimental/unordered_map (65%)
+ rename native/headers/{msvc => msvs}/experimental/unordered_set (65%)
+ rename native/headers/{msvc => msvs}/experimental/vector (67%)
+ rename native/headers/{msvc => msvs}/filesystem (77%)
+ create mode 100644 native/headers/msvs/forward_list
+ rename native/headers/{msvc => msvs}/fstream (63%)
+ rename native/headers/{msvc => msvs}/functional (63%)
+ rename native/headers/{msvc => msvs}/future (61%)
+ rename native/headers/{msvc => msvs}/fvec.h (99%)
+ rename native/headers/{msvc => msvs}/gcroot.h (100%)
+ create mode 100644 native/headers/msvs/hash_map
+ rename native/headers/{msvc => msvs}/hash_set (55%)
+ rename native/headers/{msvc => msvs}/immintrin.h (98%)
+ rename native/headers/{msvc => msvs}/initializer_list (66%)
+ rename native/headers/{msvc => msvs}/internal_concurrent_hash.h (99%)
+ rename native/headers/{msvc => msvs}/internal_split_ordered_list.h (99%)
+ rename native/headers/{msvc => msvs}/intrin.h (97%)
+ rename native/headers/{msvc => msvs}/intrin0.h (91%)
+ rename native/headers/{msvc => msvs}/invkprxy.h (100%)
+ rename native/headers/{msvc => msvs}/iomanip (75%)
+ rename native/headers/{msvc => msvs}/ios (85%)
+ rename native/headers/{msvc => msvs}/iosfwd (87%)
+ rename native/headers/{msvc => msvs}/iostream (90%)
+ rename native/headers/{msvc => msvs}/isa_availability.h (98%)
+ rename native/headers/{msvc => msvs}/iso646.h (64%)
+ rename native/headers/{msvc => msvs}/istream (79%)
+ rename native/headers/{msvc => msvs}/iterator (61%)
+ rename native/headers/{msvc => msvs}/ivec.h (99%)
+ rename native/headers/{msvc => msvs}/limits (56%)
+ create mode 100644 native/headers/msvs/limits.h
+ create mode 100644 native/headers/msvs/list
+ rename native/headers/{msvc => msvs}/listing.inc (100%)
+ rename native/headers/{msvc => msvs}/locale (72%)
+ rename native/headers/{msvc => msvs}/map (51%)
+ rename native/headers/{msvc => msvs}/memory (61%)
+ rename native/headers/{msvc => msvs}/memory_resource (83%)
+ rename native/headers/{msvc => msvs}/mm3dnow.h (93%)
+ rename native/headers/{msvc => msvs}/mmintrin.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/all.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/appdomain.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/auto_gcroot.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/auto_handle.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/com/ptr.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/event.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/gcroot.h (97%)
+ rename native/headers/{msvc => msvs}/msclr/lock.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/marshal.h (72%)
+ rename native/headers/{msvc => msvs}/msclr/marshal_atl.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/marshal_cppstd.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/marshal_windows.h (100%)
+ rename native/headers/{msvc => msvs}/msclr/safebool.h (100%)
+ rename native/headers/{msvc => msvs}/mutex (81%)
+ rename native/headers/{msvc => msvs}/new (85%)
+ rename native/headers/{msvc => msvs}/nmmintrin.h (98%)
+ create mode 100644 native/headers/msvs/numbers
+ rename native/headers/{msvc => msvs}/numeric (55%)
+ rename native/headers/{msvc => msvs}/omp.h (100%)
+ rename native/headers/{msvc => msvs}/optional (53%)
+ rename native/headers/{msvc => msvs}/ostream (78%)
+ rename native/headers/{msvc => msvs}/pgobootrun.h (100%)
+ rename native/headers/{msvc => msvs}/pmmintrin.h (100%)
+ rename native/headers/{msvc => msvs}/ppl.h (100%)
+ create mode 100644 native/headers/msvs/pplawait.h
+ rename native/headers/{msvc => msvs}/pplcancellation_token.h (100%)
+ rename native/headers/{msvc => msvs}/pplinterface.h (100%)
+ rename native/headers/{msvc => msvs}/ppltasks.h (99%)
+ rename native/headers/{msvc => msvs}/ppltaskscheduler.h (100%)
+ rename native/headers/{msvc => msvs}/pplwin.h (97%)
+ create mode 100644 native/headers/msvs/queue
+ rename native/headers/{msvc => msvs}/random (76%)
+ create mode 100644 native/headers/msvs/ranges
+ rename native/headers/{msvc => msvs}/ratio (95%)
+ rename native/headers/{msvc => msvs}/regex (72%)
+ rename native/headers/{msvc => msvs}/rtcapi.h (96%)
+ rename native/headers/{msvc => msvs}/rttidata.h (100%)
+ rename native/headers/{msvc => msvs}/sal.h (99%)
+ rename native/headers/{msvc => msvs}/scoped_allocator (82%)
+ rename native/headers/{msvc => msvs}/set (63%)
+ rename native/headers/{msvc => msvs}/setjmp.h (96%)
+ rename native/headers/{msvc => msvs}/setjmpex.h (100%)
+ rename native/headers/{msvc => msvs}/shared_mutex (79%)
+ rename native/headers/{msvc => msvs}/smmintrin.h (97%)
+ create mode 100644 native/headers/msvs/span
+ rename native/headers/{msvc => msvs}/srv.h (100%)
+ rename native/headers/{msvc => msvs}/sstream (68%)
+ create mode 100644 native/headers/msvs/stack
+ rename native/headers/{msvc => msvs}/stdarg.h (74%)
+ rename native/headers/{msvc => msvs}/stdbool.h (50%)
+ rename native/headers/{msvc => msvs}/stdexcept (68%)
+ rename native/headers/{msvc => msvs}/stdint.h (94%)
+ rename native/headers/{msvc => msvs}/streambuf (57%)
+ rename native/headers/{msvc => msvs}/string (79%)
+ create mode 100644 native/headers/msvs/string_view
+ rename native/headers/{msvc => msvs}/strstream (64%)
+ rename native/headers/{msvc => msvs}/system_error (55%)
+ rename native/headers/{msvc => msvs}/thread (62%)
+ rename native/headers/{msvc => msvs}/tmmintrin.h (100%)
+ rename native/headers/{msvc => msvs}/tuple (56%)
+ rename native/headers/{msvc => msvs}/type_traits (81%)
+ rename native/headers/{msvc => msvs}/typeindex (63%)
+ rename native/headers/{msvc => msvs}/typeinfo (57%)
+ rename native/headers/{msvc => msvs}/unordered_map (58%)
+ rename native/headers/{msvc => msvs}/unordered_set (61%)
+ rename native/headers/{msvc => msvs}/use_ansi.h (67%)
+ rename native/headers/{msvc => msvs}/utility (67%)
+ rename native/headers/{msvc => msvs}/vadefs.h (71%)
+ rename native/headers/{msvc => msvs}/valarray (53%)
+ rename native/headers/{msvc => msvs}/varargs.h (80%)
+ rename native/headers/{msvc => msvs}/variant (77%)
+ rename native/headers/{msvc => msvs}/vcclr.h (86%)
+ rename native/headers/{msvc => msvs}/vccorlib.h (100%)
+ rename native/headers/{msvc => msvs}/vcruntime.h (80%)
+ rename native/headers/{msvc => msvs}/vcruntime_exception.h (89%)
+ rename native/headers/{msvc => msvs}/vcruntime_new.h (74%)
+ rename native/headers/{msvc => msvs}/vcruntime_new_debug.h (81%)
+ rename native/headers/{msvc => msvs}/vcruntime_startup.h (89%)
+ rename native/headers/{msvc => msvs}/vcruntime_string.h (86%)
+ rename native/headers/{msvc => msvs}/vcruntime_typeinfo.h (94%)
+ rename native/headers/{msvc => msvs}/vector (73%)
+ create mode 100644 native/headers/msvs/version
+ rename native/headers/{msvc => msvs}/wmmintrin.h (97%)
+ rename native/headers/{msvc => msvs}/xatomic.h (67%)
+ rename native/headers/{msvc => msvs}/xbit_ops.h (89%)
+ create mode 100644 native/headers/msvs/xcall_once.h
+ rename native/headers/{msvc => msvs}/xcharconv.h (82%)
+ rename native/headers/{msvc => msvs}/xcharconv_ryu.h (56%)
+ create mode 100644 native/headers/msvs/xcharconv_ryu_tables.h
+ rename native/headers/{msvc => msvs}/xerrc.h (96%)
+ rename native/headers/{msvc => msvs}/xfacet (87%)
+ rename native/headers/{msvc => msvs}/xfilesystem_abi.h (91%)
+ create mode 100644 native/headers/msvs/xhash
+ rename native/headers/{msvc => msvs}/xiosbase (70%)
+ rename native/headers/{msvc => msvs}/xkeycheck.h (90%)
+ rename native/headers/{msvc => msvs}/xlocale (53%)
+ rename native/headers/{msvc => msvs}/xlocbuf (79%)
+ rename native/headers/{msvc => msvs}/xlocinfo (56%)
+ rename native/headers/{msvc => msvs}/xlocinfo.h (65%)
+ rename native/headers/{msvc => msvs}/xlocmes (82%)
+ rename native/headers/{msvc => msvs}/xlocmon (80%)
+ rename native/headers/{msvc => msvs}/xlocnum (89%)
+ rename native/headers/{msvc => msvs}/xloctime (90%)
+ create mode 100644 native/headers/msvs/xmemory
+ rename native/headers/{msvc => msvs}/xmmintrin.h (99%)
+ rename native/headers/{msvc => msvs}/xnode_handle.h (73%)
+ rename native/headers/{msvc => msvs}/xpolymorphic_allocator.h (62%)
+ rename native/headers/{msvc => msvs}/xsmf_control.h (91%)
+ rename native/headers/{msvc => msvs}/xstddef (64%)
+ rename native/headers/{msvc => msvs}/xstring (56%)
+ rename native/headers/{msvc/thr => msvs}/xthreads.h (75%)
+ rename native/headers/{msvc/thr => msvs}/xtimec.h (71%)
+ rename native/headers/{msvc => msvs}/xtr1common (65%)
+ create mode 100644 native/headers/msvs/xtree
+ create mode 100644 native/headers/msvs/xutility
+ rename native/headers/{msvc => msvs}/xxamp.h (100%)
+ rename native/headers/{msvc => msvs}/xxamp_inl.h (100%)
+ rename native/headers/{msvc => msvs}/ymath.h (74%)
+ rename native/headers/{msvc => msvs}/yvals.h (78%)
+ rename native/headers/{msvc => msvs}/yvals_core.h (50%)
+ rename native/headers/{msvc => msvs}/zmmintrin.h (73%)
+ create mode 100644 native/headers/windows/debug/dbgeng.h
+ create mode 100644 native/headers/windows/debug/dbghelp.h
+ create mode 100644 native/headers/windows/debug/engextcpp.cpp
+ create mode 100644 native/headers/windows/debug/engextcpp.hpp
+ create mode 100644 native/headers/windows/debug/extsfns.h
+ create mode 100644 native/headers/windows/debug/wdbgexts.h
+ create mode 100644 native/headers/windows/um/CorError.h
+ create mode 100644 native/headers/windows/um/CorHdr.h
+ create mode 100644 native/headers/windows/um/CorSym.idl
+ create mode 100644 native/headers/windows/um/ICeeFileGen.h
+ create mode 100644 native/headers/windows/um/IVEHandler.idl
+ create mode 100644 native/headers/windows/um/StrongName.h
+ create mode 100644 native/headers/windows/um/VerError.h
+ create mode 100644 native/headers/windows/um/alink.h
+ create mode 100644 native/headers/windows/um/asmparse.grammar
+ create mode 100644 native/headers/windows/um/clrdata.h
+ create mode 100644 native/headers/windows/um/clrdata.idl
+ create mode 100644 native/headers/windows/um/cor.h
+ create mode 100644 native/headers/windows/um/cordebug.h
+ create mode 100644 native/headers/windows/um/cordebug.idl
+ create mode 100644 native/headers/windows/um/corhlpr.cpp
+ create mode 100644 native/headers/windows/um/corhlpr.h
+ create mode 100644 native/headers/windows/um/corprof.h
+ create mode 100644 native/headers/windows/um/corprof.idl
+ create mode 100644 native/headers/windows/um/corpub.h
+ create mode 100644 native/headers/windows/um/corpub.idl
+ create mode 100644 native/headers/windows/um/corsym.h
+ create mode 100644 native/headers/windows/um/fusion.h
+ create mode 100644 native/headers/windows/um/gchost.h
+ create mode 100644 native/headers/windows/um/gchost.idl
+ create mode 100644 native/headers/windows/um/isolation.h
+ create mode 100644 native/headers/windows/um/ivalidator.h
+ create mode 100644 native/headers/windows/um/ivalidator.idl
+ create mode 100644 native/headers/windows/um/ivehandler.h
+ create mode 100644 native/headers/windows/um/metahost.h
+ create mode 100644 native/headers/windows/um/mscoree.h
+ create mode 100644 native/headers/windows/um/opcode.def
+ create mode 100644 native/headers/windows/um/openum.h
+ create mode 100644 native/headers/windows/um/tlbref.h
+ create mode 100644 native/headers/windows/um/tlbref.idl
+ create mode 100644 src/machine/src/base/workflows/DataEmission.cs
+ delete mode 100644 src/machine/src/base/workflows/models/DataEmitters.cs
+ rename src/machine/src/workflows/emission/{steps => models}/LocatedImage.cs (85%)
+ create mode 100644 src/machine/src/workflows/emission/models/LocatedImageFIeld.cs
+ rename src/machine/src/workflows/emission/{steps => models}/LocatedImageT.cs (100%)
+ rename src/machine/src/workflows/emission/{steps => models}/LocatedImages.cs (100%)
+ rename src/machine/src/workflows/emission/{steps/LocatedPartImage.cs => models/LocatedPart.cs} (54%)
+ delete mode 100644 src/machine/src/workflows/emission/steps/LocatedDependency.cs
+ delete mode 100644 src/machine/src/workflows/emission/steps/LocatedPart.cs
+ create mode 100644 src/metareader/src/common/ACCESS_MASK.cs
+ create mode 100644 src/metareader/src/common/FILETIME.cs
+ create mode 100644 src/metareader/src/common/HResult.cs
+ create mode 100644 src/metareader/src/common/ICONDIRENTRY.cs
+ rename src/metareader/src/{image/fields/PEMagic.cs => common/LIST_ENTRY.cs} (70%)
+ create mode 100644 src/metareader/src/common/MSCorEE.cs
+ create mode 100644 src/metareader/src/common/NTSTATUS.cs
+ create mode 100644 src/metareader/src/common/SYSTEMTIME.cs
+ create mode 100644 src/metareader/src/common/Win32ErrorCode.cs
+ create mode 100644 src/metareader/src/common/literals/FileAccess.cs
+ create mode 100644 src/metareader/src/common/literals/FileAttribute.cs
+ create mode 100644 src/metareader/src/common/literals/FileSystemFlags.cs
+ delete mode 100644 src/metareader/src/image/fields/Characterisitics.cs
+ create mode 100644 src/metareader/src/image/fields/CharacteristicsType.cs
+ rewrite src/metareader/src/image/fields/DllCharacteristics.cs (63%)
+ create mode 100644 src/metareader/src/image/fields/MagicType.cs
+ create mode 100644 src/metareader/src/image/fields/SubsystemType.cs
+ delete mode 100644 src/metareader/src/image/ops/A0.cs
+ create mode 100644 src/metareader/src/image/ops/ImageHlp.cs
+ create mode 100644 src/metareader/src/image/structure/IMAGE_NT_HEADERS.cs
+ create mode 100644 src/metareader/src/image/structure/IMAGE_OPTIONAL_HEADER.cs
+ create mode 100644 src/metareader/src/image/structure/IMAGE_OPTIONAL_HEADER_DIRECTORIES.cs
+ create mode 100644 src/metareader/src/image/structure/LOADED_IMAGE.cs
+ create mode 100644 src/zdata/content/help/msvs.dll.csv
+ create mode 100644 src/zdata/content/help/msvs.headers.csv
+ create mode 100644 src/zdata/content/help/msvs.tools.csv

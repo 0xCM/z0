@@ -34,14 +34,6 @@ namespace Z0
             => src is string s ? (blank(s) ? EmptyString  : s) : (src ?? EmptyString);
         
         /// <summary>
-        /// Tests whether the source string is blank := {null | empty}
-        /// </summary>
-        /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Inline), Op]
-        public static bool blank(string src)
-            => sys.blank(src);
-
-        /// <summary>
         /// Returns the replacement text if the source text is blank := {null | empty}
         /// </summary>
         /// <param name="test">The subject string</param>
@@ -49,15 +41,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string ifblank(string test, string replace)
             => z.ifblank(test,replace);
-
-        /// <summary>
-        /// If the test string is null, returns the empty string; otherwise, returns the test string
-        /// </summary>
-        /// <param name="test">The subject string</param>
-        /// <param name="replace">The replacement value if blank</param>
-        [MethodImpl(Inline), Op]
-        public static string denullify(string test)
-            => blank(test) ? EmptyString : test;
 
         /// <summary>
         /// Splits the string, removing empty entries
@@ -72,6 +55,10 @@ namespace Z0
         public static int compare(string a, string b)
             => a.CompareTo(b);
                 
+        /// <summary>
+        /// Appends each source items to a target stream, appending an EOL after each
+        /// </summary>
+        /// <param name="content"></param>
         [Op]
         public static string lines(params string[] content)
         {

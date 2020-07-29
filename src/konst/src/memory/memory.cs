@@ -13,6 +13,12 @@ namespace Z0
     [ApiHost]
     public static unsafe class memory
     {
+        [MethodImpl(Inline), Op]
+        public static void copy(in byte src, uint count, ref byte dst, ref uint index)
+        {
+            for(var j=0u; j<count; j++)
+                z.seek(dst, index++) = z.skip(src, j);
+        }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> edit<T>(MemoryAddress src, uint count)

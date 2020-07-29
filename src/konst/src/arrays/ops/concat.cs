@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;    
     using System.Linq;
 
     using static Konst;
@@ -19,6 +18,7 @@ namespace Z0
         /// Concatenates a sequence of arrays
         /// </summary>
         /// <param name="src">The source arrays</param>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] concat<T>(IEnumerable<T[]> src)
             => concat(src.ToArray());   
         
@@ -37,7 +37,7 @@ namespace Z0
             for(uint i=0u; i<terms; i++)
             {
                 var term = span(z.skip(members,i));
-                copy(first(term), (uint)term.Length, ref target, ref k);
+                memory.copy(first(term), (uint)term.Length, ref target, ref k);
             }
         }
 
@@ -45,7 +45,7 @@ namespace Z0
         /// Concatenates an array sequence
         /// </summary>
         /// <param name="src">The source arrays</param>
-        [Op]
+        [MethodImpl(Inline), Op]
         public static byte[] concat(byte[][] src)
         {            
             var members = span(src);
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="left">The first array</param>
         /// <param name="right">The second array</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] concat<T>(T[] left, T[] right)
         {
             var length = left.Length + right.Length;
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="left">The first array</param>
         /// <param name="right">The second array</param>
         /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static byte[] concat(byte[] left, byte[] right)
         {
             var ret = alloc<byte>(left.Length + right.Length);
@@ -95,7 +95,7 @@ namespace Z0
         /// Concatenates a sequence of parameter arrays
         /// </summary>
         /// <param name="src">The source arrays</param>
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [Op, Closures(UnsignedInts)]
         public static T[] concat<T>(params T[][] src)
         {
             var totalLen = src.Sum(x => x.Length);
