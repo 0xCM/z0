@@ -1,0 +1,474 @@
+# MSVS Tools
+---------------------------------------------------------------------------------
+| Path
+| J:\tools\msvs\Common7\IDE\Blend.exe
+| J:\tools\msvs\Common7\IDE\DDConfigCA.exe
+| J:\tools\msvs\Common7\IDE\devenv.exe
+| J:\tools\msvs\Common7\IDE\FeedbackCollector.exe
+| J:\tools\msvs\Common7\IDE\Microsoft.VisualStudio.Web.Host.exe
+| J:\tools\msvs\Common7\IDE\mspdbsrv.exe
+| J:\tools\msvs\Common7\IDE\MSTest.exe
+| J:\tools\msvs\Common7\IDE\PerfWatson2.exe
+| J:\tools\msvs\Common7\IDE\Publicize.exe
+| J:\tools\msvs\Common7\IDE\QTAgent.exe
+| J:\tools\msvs\Common7\IDE\QTAgent32.exe
+| J:\tools\msvs\Common7\IDE\QTAgent32_35.exe
+| J:\tools\msvs\Common7\IDE\QTAgent32_40.exe
+| J:\tools\msvs\Common7\IDE\QTAgent_35.exe
+| J:\tools\msvs\Common7\IDE\QTAgent_40.exe
+| J:\tools\msvs\Common7\IDE\QTDCAgent.exe
+| J:\tools\msvs\Common7\IDE\QTDCAgent32.exe
+| J:\tools\msvs\Common7\IDE\StorePID.exe
+| J:\tools\msvs\Common7\IDE\T4VSHostProcess.exe
+| J:\tools\msvs\Common7\IDE\TextTransform.exe
+| J:\tools\msvs\Common7\IDE\UserControlTestContainer.exe
+| J:\tools\msvs\Common7\IDE\vb7to8.exe
+| J:\tools\msvs\Common7\IDE\VcxprojReader.exe
+| J:\tools\msvs\Common7\IDE\VsDebugWERHelper.exe
+| J:\tools\msvs\Common7\IDE\vsdiag_regwcf.exe
+| J:\tools\msvs\Common7\IDE\VSFinalizer.exe
+| J:\tools\msvs\Common7\IDE\VsGa.exe
+| J:\tools\msvs\Common7\IDE\VSHiveStub.exe
+| J:\tools\msvs\Common7\IDE\vshost-clr2.exe
+| J:\tools\msvs\Common7\IDE\vshost.exe
+| J:\tools\msvs\Common7\IDE\vshost32-clr2.exe
+| J:\tools\msvs\Common7\IDE\vshost32.exe
+| J:\tools\msvs\Common7\IDE\VSInitializer.exe
+| J:\tools\msvs\Common7\IDE\VSIXInstaller.exe
+| J:\tools\msvs\Common7\IDE\VSLaunchBrowser.exe
+| J:\tools\msvs\Common7\IDE\vsn.exe
+| J:\tools\msvs\Common7\IDE\VsRegEdit.exe
+| J:\tools\msvs\Common7\IDE\VSTestConfig.exe
+| J:\tools\msvs\Common7\IDE\VSWebHandler.exe
+| J:\tools\msvs\Common7\IDE\VSWebLauncher.exe
+| J:\tools\msvs\Common7\IDE\WcfSvcHost.exe
+| J:\tools\msvs\Common7\IDE\WcfTestClient.exe
+| J:\tools\msvs\Common7\IDE\XDesProc.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmcldeps.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\CMake\Linux\shellexec.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja\ninja.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsc.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsi.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsiAnyCpu.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\IntelliTrace\IntelliTrace.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\IntelliTrace\ProcessSnapshotCleanup.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\IntelliTrace\TDEnvCleanup.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\Linux\Linux\shellexec.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\ManagedLanguages\VBCSharp\LanguageServices\DesktopHost\InteractiveHost32.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\ManagedLanguages\VBCSharp\LanguageServices\DesktopHost\InteractiveHost64.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\MDD\Debugger\vscode\OpenDebugAD7.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\NuGet\NuGet.Build.Tasks.Console.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\NuGet\Plugins\CredentialProvider.Microsoft\CredentialProvider.Microsoft.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\ProjectServices\PSHOST.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\BuildNotificationApp.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\EndTask.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\TF.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\TFSBuild.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\TfsDeleteProject.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\TFSSecurity.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\vsDiffMerge.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\witadmin.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\cmd\git.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\blocked-file-util.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\corpus2array.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-askyesno.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-credential-helper-selector.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-credential-store.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-credential-wincred.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-fast-import.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-http-fetch.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-http-push.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-receive-pack.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-remote-http.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-remote-https.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-sh-i18n--envsubst.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git-upload-pack.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\i686-w64-mingw32-deflatehd.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\i686-w64-mingw32-inflatehd.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\proxy-lookup.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\libexec\git-core\git-askpass.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\libexec\git-core\git-credential-manager.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\libexec\git-core\GitHub.Authentication.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\share\git\git-wrapper.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\awk.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\b2sum.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\basename.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\basenc.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\cat.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\chattr.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\cmp.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\comm.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\cp.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\cut.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\dash.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\date.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\diff.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\diff3.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\dirname.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\echo.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\env.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\expr.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\false.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\find.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\gencat.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\getfacl.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\getopt.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\grep.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\head.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\ls.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\lsattr.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\mkdir.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\mktemp.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\mv.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\pathchk.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\printf.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\pwd.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\readlink.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\rebase.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\rm.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\rmdir.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\sdiff.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\sed.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\sh.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\sort.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\ssh-add.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\ssh-agent.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\ssh.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\tail.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\test.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\touch.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\tr.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\true.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\uname.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\uniq.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\wc.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\bin\xargs.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\libexec\getprocaddr32.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\usr\libexec\getprocaddr64.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\Terminal\ServiceHub\winpty-agent.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Microsoft\Windows.Forms\WinFormsSurface\WinFormsSurface.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Platform\Debugger\VsDebugConsole.exe
+| J:\tools\msvs\Common7\IDE\CommonExtensions\Platform\DiagnosticsHub\VsStandardCollector.exe
+| J:\tools\msvs\Common7\IDE\Extensions\hioig1kb.nl4\TokenService\Microsoft.Asal.TokenService.exe
+| J:\tools\msvs\Common7\IDE\Extensions\kvmquii2.aaf\Microsoft.VisualStudio.EtwListener.exe
+| J:\tools\msvs\Common7\IDE\Extensions\kvmquii2.aaf\NanoUtilities\KillProcess.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\ADLAWebHandler.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\ASALocalRun\SA.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\CosmosLangSvc\LocalRunHelper.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\CosmosLangSvc\ScopeRuntime.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\U-SQLSDK\LocalRunHelper.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\U-SQLSDK\LocalRunServer.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\U-SQLSDK\LocalVertexHost.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\U-SQLSDK\MetaDataExecutor.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\U-SQLSDK\Microsoft.Analytics.LocalRunServer.DebugProxy.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\U-SQLSDK\PackageDeploymentTool.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\ADL Tools\2.4.6000.0\U-SQLSDK\ScopeRuntime.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Graphics\Debugger\EnableGraphicsTools.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Graphics\Debugger\VsGraphicsDesktopEngine.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\IntelliCode\CLI\intellicode.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\IntelliCode\CLI\Extractors\CPlusPlus\CppCustomModelExtractorDriver.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\IntelliCode\CLI\Extractors\csharp\Extractor.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\LiveShare\Agent\vsls-agent.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\LiveShare\Agent\winpty-agent.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\LiveShare\Agent\winpty-debugserver.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\LiveShare\External\ElectronCallingApp\node_modules\electron\dist\electron.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\NodeJsTools\NodeJsTools\Microsoft.NodejsTools.PressAnyKey.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Pex\Microsoft.Pex.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Pex\Microsoft.Pex.x86.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Core\Microsoft.PythonTools.Analyzer.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Core\Microsoft.PythonTools.Attacher.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Core\Microsoft.PythonTools.AttacherX86.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Core\Microsoft.PythonTools.RunElevated.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Core\debugpy\_vendored\pydevd\pydevd_attach_to_process\inject_dll_amd64.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Core\debugpy\_vendored\pydevd\pydevd_attach_to_process\inject_dll_x86.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\python.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\pythonw.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Uninstall-Miniconda3.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\_conda.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\distutils\command\wininst-10.0-amd64.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\distutils\command\wininst-10.0.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\distutils\command\wininst-14.0-amd64.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\distutils\command\wininst-14.0.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\distutils\command\wininst-6.0.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\distutils\command\wininst-7.1.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\distutils\command\wininst-8.0.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\distutils\command\wininst-9.0-amd64.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\distutils\command\wininst-9.0.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\conda\shell\cli-32.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\conda\shell\cli-64.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\pip\_vendor\distlib\t32.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\pip\_vendor\distlib\t64.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\pip\_vendor\distlib\w32.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\pip\_vendor\distlib\w64.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\pythonwin\Pythonwin.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\setuptools\cli-32.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\setuptools\cli-64.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\setuptools\cli.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\setuptools\gui-32.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\setuptools\gui-64.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\setuptools\gui.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Lib\site-packages\win32\pythonservice.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\bsdcat.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\bsdcpio.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\bsdtar.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\lz4.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\lzmainfo.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\openssl.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\runxmlconf.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\sqlite3.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\unxz.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\xmlcatalog.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\xmllint.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\xz.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\xz_static.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\bin\zstd.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\libexec\lzo\examples\lzopack.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\libexec\lzo\examples\lzotest.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\libexec\lzo\examples\simple.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Library\libexec\lzo\examples\testmini.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\2to3.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\chardetect.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\conda-env.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\conda.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\cph.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\easy_install.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\idle.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\menuinst.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\pip.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\pydoc.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\tqdm.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Python\Miniconda\Miniconda3-x64\Scripts\wheel.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\dacunpack.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\140\dacunpack.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\140\sqlpackage.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150\dacunpack.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150\sqlpackage.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\VsGraphics\vsgraphics.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Web Tools\ProjectSystem\VSIISExeLauncher.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Windows Azure Tools\Common\Microsoft.VisualStudio.EtwListener.exe
+| J:\tools\msvs\Common7\IDE\Extensions\Microsoft\Windows Azure Tools\v2.9\Debugger\WindowsAzureDebugger.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\datacollector.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\QTAgent.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\QTAgent32.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\QTAgent32_35.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\QTAgent32_40.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\QTAgent_35.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\QTAgent_40.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\QTDCAgent.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\QTDCAgent32.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\SettingsMigrator.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\testhost.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\testhost.x86.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\vstest.console.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\Extensions\V1\VSTestVideoRecorder.exe
+| J:\tools\msvs\Common7\IDE\Extensions\TestPlatform\Extensions\VideoRecorder\VSTestVideoRecorder.exe
+| J:\tools\msvs\Common7\IDE\Extensions\zkaemjb2.lop\lib\knockout-mapping\build\tools\curl.exe
+| J:\tools\msvs\Common7\IDE\PrivateAssemblies\CheckHyperVHost.exe
+| J:\tools\msvs\Common7\IDE\PrivateAssemblies\ScriptedSandbox32.exe
+| J:\tools\msvs\Common7\IDE\PrivateAssemblies\ScriptedSandbox64.exe
+| J:\tools\msvs\Common7\IDE\PrivateAssemblies\DataCollectors\VSTestVideoRecorder.exe
+| J:\tools\msvs\Common7\IDE\Remote Debugger\Appx\AppxDebugSysTray.exe
+| J:\tools\msvs\Common7\IDE\Remote Debugger\x64\msvsmon.exe
+| J:\tools\msvs\Common7\IDE\Remote Debugger\x64\VsDebugLaunchNotify.exe
+| J:\tools\msvs\Common7\IDE\Remote Debugger\x64\VsDebugWERHelper.exe
+| J:\tools\msvs\Common7\IDE\Remote Debugger\x64\VsGraphicsRemoteEngine.exe
+| J:\tools\msvs\Common7\IDE\Remote Debugger\x86\msvsmon.exe
+| J:\tools\msvs\Common7\IDE\Remote Debugger\x86\VsDebugLaunchNotify.exe
+| J:\tools\msvs\Common7\IDE\Remote Debugger\x86\VsDebugWERHelper.exe
+| J:\tools\msvs\Common7\IDE\Remote Debugger\x86\VsGraphicsRemoteEngine.exe
+| J:\tools\msvs\Common7\IDE\Remote Debugger\x86\TTDIndexerX64\TraceIndexer.exe
+| J:\tools\msvs\Common7\IDE\SurfaceProcess\Wpf\Core\x64\WpfSurface.exe
+| J:\tools\msvs\Common7\IDE\SurfaceProcess\Wpf\Core\x86\WpfSurface.exe
+| J:\tools\msvs\Common7\IDE\SurfaceProcess\Wpf\Framework\x64\WpfSurface.exe
+| J:\tools\msvs\Common7\IDE\SurfaceProcess\Wpf\Framework\x86\WpfSurface.exe
+| J:\tools\msvs\Common7\IDE\VC\Linux\bin\ConnectionManagerExe\ConnectionManager.exe
+| J:\tools\msvs\Common7\IDE\VC\Linux\bin\gdb\8.1\aarch64-linux-gnu-gdb.exe
+| J:\tools\msvs\Common7\IDE\VC\Linux\bin\gdb\8.1\arm-linux-gnueabihf-gdb.exe
+| J:\tools\msvs\Common7\IDE\VC\Linux\bin\gdb\8.1\i686-linux-gnu-gdb.exe
+| J:\tools\msvs\Common7\IDE\VC\Linux\bin\gdb\8.1\mips-linux-gnu-gdb.exe
+| J:\tools\msvs\Common7\IDE\VC\Linux\bin\gdb\8.1\x86_64-linux-gnu-gdb.exe
+| J:\tools\msvs\Common7\IDE\VC\Linux\bin\rsync\rsync.exe
+| J:\tools\msvs\Common7\IDE\VC\vcpackages\isense_model_extractor.exe
+| J:\tools\msvs\Common7\IDE\VC\vcpackages\vcpkgsrv.exe
+| J:\tools\msvs\Common7\IDE\Xml\Microsoft.XslDebugger.Host.exe
+| J:\tools\msvs\Common7\Packages\Debugger\VsDebugLaunchNotify.exe
+| J:\tools\msvs\Common7\Packages\Debugger\TTDIndexerX64\TraceIndexer.exe
+| J:\tools\msvs\Common7\ServiceHub\controller\Microsoft.ServiceHub.Controller.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.AnyCPU\ServiceHub.Host.CLR.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.AnyCPU\ServiceHub.LiveUnitTesting.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.AnyCPU\ServiceHub.RoslynCodeAnalysisService.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.AnyCPU\ServiceHub.TestWindowStoreHost.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.x64\ServiceHub.DataWarehouseHost.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.x64\ServiceHub.Host.CLR.x64.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.x86\ServiceHub.DataWarehouseHost.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.x86\ServiceHub.Host.CLR.x86.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.x86\ServiceHub.IdentityHost.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.x86\ServiceHub.RoslynCodeAnalysisService32.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.x86\ServiceHub.SettingsHost.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.x86\ServiceHub.ThreadedWaitDialog.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.CLR.x86\ServiceHub.VSDetouredHost.exe
+| J:\tools\msvs\Common7\ServiceHub\Hosts\ServiceHub.Host.Node.x86\ServiceHub.Host.Node.x86.exe
+| J:\tools\msvs\Common7\Tools\errlook.exe
+| J:\tools\msvs\Common7\Tools\guidgen.exe
+| J:\tools\msvs\Common7\Tools\makehm.exe
+| J:\tools\msvs\Common7\Tools\spyxx.exe
+| J:\tools\msvs\Common7\Tools\spyxx_amd64.exe
+| J:\tools\msvs\CoreCon\Binaries\Phone Tools\Debugger\target\x64\msvsmon.exe
+| J:\tools\msvs\CoreCon\Binaries\Phone Tools\Debugger\target\x64\VSDebugLaunchNotify.exe
+| J:\tools\msvs\Microsoft Azure Tools\Visual Studio 16.0\2.9\RemoteDebuggerConnector\Connector\Microsoft.VisualStudio.WindowsAzure.RemoteDebugger.Connector.exe
+| J:\tools\msvs\Microsoft Azure Tools\Visual Studio 16.0\2.9\VsDiagnostics\WindowsAzureDiagnosticsAgent.exe
+| J:\tools\msvs\Microsoft Azure Tools\Visual Studio 16.0\2.9\VsDiagnostics\WindowsAzureDiagnosticsStartup.exe
+| J:\tools\msvs\MSBuild\Current\Bin\MSBuild.exe
+| J:\tools\msvs\MSBuild\Current\Bin\MSBuildTaskHost.exe
+| J:\tools\msvs\MSBuild\Current\Bin\Tracker.exe
+| J:\tools\msvs\MSBuild\Current\Bin\amd64\MSBuild.exe
+| J:\tools\msvs\MSBuild\Current\Bin\amd64\MSBuildTaskHost.exe
+| J:\tools\msvs\MSBuild\Current\Bin\amd64\Tracker.exe
+| J:\tools\msvs\MSBuild\Current\Bin\Roslyn\csc.exe
+| J:\tools\msvs\MSBuild\Current\Bin\Roslyn\csi.exe
+| J:\tools\msvs\MSBuild\Current\Bin\Roslyn\vbc.exe
+| J:\tools\msvs\MSBuild\Current\Bin\Roslyn\VBCSCompiler.exe
+| J:\tools\msvs\MSBuild\Microsoft\VisualStudio\NodeJs\node.exe
+| J:\tools\msvs\MSBuild\Microsoft\VisualStudio\NodeJs\node_modules\npm\node_modules\term-size\vendor\windows\term-size.exe
+| J:\tools\msvs\MSBuild\Microsoft\VisualStudio\NodeJs\win-x64\node.exe
+| J:\tools\msvs\MSBuild\Microsoft\VisualStudio\v16.0\Fakes\fakes.exe
+| J:\tools\msvs\MSBuild\Microsoft\VisualStudio\v16.0\Fakes\fakes.x86.exe
+| J:\tools\msvs\MSBuild\Microsoft\VisualStudio\v16.0\Fakes\net35\fakes.v2.exe
+| J:\tools\msvs\MSBuild\Microsoft\VisualStudio\v16.0\Fakes\net35\fakes.v2.x86.exe
+| J:\tools\msvs\MSBuild\Microsoft\VisualStudio\v16.0\TeamTest\Publicize.exe
+| J:\tools\msvs\MSBuild\Sdks\Microsoft.Docker.Sdk\tools\utils\KillProcess.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\SDK\bin\rc.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\bscmake.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\cl.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\cvtres.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\dumpbin.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\editbin.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\lib.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\link.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\ml64.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\mspdbcmf.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\mspdbsrv.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\nmake.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\pgocvt.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\pgomgr.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\pgosweep.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\undname.exe
+| J:\tools\msvs\SDK\ScopeCppSDK\vc15\VC\bin\XDCmake.exe
+| J:\tools\msvs\Team Tools\DiagnosticsHub\Collector\VSDiagnostics.exe
+| J:\tools\msvs\Team Tools\DiagnosticsHub\Collector\Agents\TTD\TTD.exe
+| J:\tools\msvs\Team Tools\DiagnosticsHub\Collector\Agents\TTD\TTDInject.exe
+| J:\tools\msvs\Team Tools\DiagnosticsHub\Collector\Agents\TTD\wow64\TTD.exe
+| J:\tools\msvs\Team Tools\DiagnosticsHub\Collector\Agents\TTD\wow64\TTDInject.exe
+| J:\tools\msvs\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe
+| J:\tools\msvs\Team Tools\Dynamic Code Coverage Tools\amd64\CodeCoverage.exe
+| J:\tools\msvs\Team Tools\Performance Tools\vsinstr.exe
+| J:\tools\msvs\Team Tools\Performance Tools\vsinstr.legacy.exe
+| J:\tools\msvs\Team Tools\Performance Tools\VSPerfReport.exe
+| J:\tools\msvs\Team Tools\Performance Tools\Setups\vs_profiler_x64_enu.exe
+| J:\tools\msvs\Team Tools\Performance Tools\Setups\vs_profiler_x86_enu.exe
+| J:\tools\msvs\Team Tools\Performance Tools\x64\vsinstr.exe
+| J:\tools\msvs\Team Tools\Performance Tools\x64\vsinstr.legacy.exe
+| J:\tools\msvs\Team Tools\Static Analysis Tools\FxCop\FxCopCmd.exe
+| J:\tools\msvs\VC\Redist\MSVC\14.26.28720\vcredist_x64.exe
+| J:\tools\msvs\VC\Redist\MSVC\14.26.28720\vcredist_x86.exe
+| J:\tools\msvs\VC\Redist\MSVC\14.26.28720\vc_redist.x64.exe
+| J:\tools\msvs\VC\Redist\MSVC\14.26.28720\vc_redist.x86.exe
+| J:\tools\msvs\VC\Redist\MSVC\v142\vcredist_x64.exe
+| J:\tools\msvs\VC\Redist\MSVC\v142\vcredist_x86.exe
+| J:\tools\msvs\VC\Redist\MSVC\v142\vc_redist.x64.exe
+| J:\tools\msvs\VC\Redist\MSVC\v142\vc_redist.x86.exe
+| J:\tools\msvs\VC\Tools\Llvm\bin\clang-format.exe
+| J:\tools\msvs\VC\Tools\Llvm\bin\clang-tidy.exe
+| J:\tools\msvs\VC\Tools\Llvm\x64\bin\clang-format.exe
+| J:\tools\msvs\VC\Tools\Llvm\x64\bin\clang-tidy.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\bscmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\cl.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\cvtres.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\dumpbin.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\editbin.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\lib.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\link.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\ml64.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\mspdbcmf.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\mspdbsrv.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\nmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\pgocvt.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\pgomgr.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\pgosweep.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\undname.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\vcperf.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\vctip.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x64\xdcmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\bscmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\cl.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\cvtres.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\dumpbin.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\editbin.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\lib.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\link.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\ml.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\mspdbcmf.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\mspdbsrv.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\nmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\pgocvt.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\pgomgr.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\undname.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\vctip.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx64\x86\xdcmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\bscmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\cl.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\cvtres.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\dumpbin.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\editbin.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\ifc.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\lib.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\link.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\ml64.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\mspdbcmf.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\mspdbsrv.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\nmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\pgocvt.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\pgomgr.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\undname.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\vctip.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x64\xdcmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\bscmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\cl.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\cvtres.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\dumpbin.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\editbin.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\ifc.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\lib.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\link.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\ml.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\mspdbcmf.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\mspdbsrv.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\nmake.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\pgocvt.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\pgomgr.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\pgosweep.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\undname.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\vcperf.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\vctip.exe
+| J:\tools\msvs\VC\Tools\MSVC\14.26.28801\bin\Hostx86\x86\xdcmake.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Redistributables\vs160_piaredist.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Redistributables\VSSDKTestHost.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\CreateExpInstance.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\CreatePkgDef.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\ImageLibraryViewer.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\ManifestFromResources.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\ManifestToCode.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\RegRiched20.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\vsct.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\vsdconfigtool.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\VsixColorCompiler.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\VsixColorEditor.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\VsixPublisher.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\Bin\VsixUtil.exe
+| J:\tools\msvs\VSSDK\VisualStudioIntegration\Tools\DSLTools\DslProjectsMigrationTool.exe

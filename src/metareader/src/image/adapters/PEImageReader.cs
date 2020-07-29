@@ -153,7 +153,7 @@ namespace Z0.Image
         /// <summary>
         /// Gets the timestamp that this PE image is indexed under.
         /// </summary>
-        public int IndexTimeStamp 
+        public uint IndexTimeStamp 
             => Header?.TimeDateStamp ?? 0;
 
         /// <summary>

@@ -7,7 +7,6 @@
 namespace Z0.Image
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static PeLiterals;

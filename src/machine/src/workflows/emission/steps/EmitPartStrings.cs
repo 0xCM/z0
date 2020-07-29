@@ -88,7 +88,7 @@ namespace Z0
 
         public void Dispose()
         {
-            DataEmitters.emitted(Wf, DataKind, Part.Id, (int)Count);
+            DataEmission.emitted(Wf, DataKind, Part.Id, (int)Count);
          }
     }
 }

@@ -82,7 +82,7 @@ namespace Z0
 
         public void Dispose()
         {
-            DataEmitters.emitted(Wf, DataType, Part.Id, LineCount);
+            DataEmission.emitted(Wf, DataType, Part.Id, LineCount);
         }
 
         public MemoryAddress OffsetAddress

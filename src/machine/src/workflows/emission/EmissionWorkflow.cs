@@ -7,14 +7,17 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    public readonly partial struct EmissionWorkflow : IWorkflowControl<EmissionWorkflow>
+    public ref partial struct EmissionWorkflow 
     {
         readonly IAppContext Context;
+        
         readonly bool Recapture;
+        
         public EmissionWorkflow(IAppContext context, bool recapture = false)
         {
             Context = context;
             Recapture = recapture;
+            term.magenta("Beginning emission workflow");
         }
         
         void ExecEmitDocs()
@@ -79,5 +82,13 @@ namespace Z0
             EmitEnumDatasets();
             EmitLiterals();
         }
+ 
+        public void Dispose()
+        {
+
+            term.magenta("Completed emission workflow");
+
+        }
+
     }
 }

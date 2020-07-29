@@ -4,7 +4,7 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Image
+namespace Z0.MS
 {
     using System;
 

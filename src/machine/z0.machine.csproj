@@ -16,7 +16,7 @@
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Dynamic)" />    
     <ProjectReference Include="$(GVec)" />
-    <ProjectReference Include="$(Stats)" />
+    <ProjectReference Include="$(Stats)" />    
     <ProjectReference Include="$(ZData)" />
   </ItemGroup>
 

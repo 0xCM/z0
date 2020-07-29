@@ -12,6 +12,14 @@ namespace Z0
     using static Konst;
     using static z;
 
+    /// <summary>
+    /// Defines a text formatting pattern
+    /// </summary>
+    public readonly struct FormatPattern
+    {
+
+    }
+    
     public readonly ref struct EmitDataFiles
     {    
         public readonly EmissionDataType DataType;
@@ -34,43 +42,54 @@ namespace Z0
             DataType = EmissionDataType.PartDat;
             Wf.PartDatDir.Clear();
             DataType.Emitting(Wf);
-            PartSummaryPath = wf.BuildStage + FileName.Define("dat.summary", FileExtensions.Csv);
-            ImageSummaryPath = wf.BuildStage + FileName.Define("images.summary", FileExtensions.Csv);
+            PartSummaryPath = wf.BuildStage + FileName.Define("machine.images.parts", FileExtensions.Csv);
+            ImageSummaryPath = wf.BuildStage + FileName.Define("machine.images", FileExtensions.Csv);
             var process = Process.GetCurrentProcess();
-            Images = process.Modules.Cast<ProcessModule>().Map(LocatedImage.from).OrderBy(x => x.BaseAddress);
+            Images = process.Modules.Cast<ProcessModule>().Map(image).OrderBy(x => x.BaseAddress);
+        }
+
+        public static LocatedImage image(ProcessModule src)
+        {
+            var path = FilePath.Define(src.FileName);
+            var part = DataEmission.part(path);
+            var entry = (MemoryAddress)src.EntryPointAddress;
+            var @base = src.BaseAddress;
+            var size = (uint)src.ModuleMemorySize;
+            return new LocatedImage(path, part, entry, @base, size);
         }
 
         FilePath TargetPath(IPart part)
             => Wf.PartDatDir + FileName.Define(part.Format(), FileExtension.Define("csv"));
-
+            
         public static void Summarize(LocatedImages src, FilePath dst)
-        {
+        {            
+            var system = ZDat.SystemImages;
             var count = src.Count;
             var images = src.View;
-            var header = text.concat(
-                "Name".PadRight(60), SpacePipe, 
-                "EntryAddress".PadRight(16), SpacePipe, 
-                "BaseAddress".PadRight(16), SpacePipe, 
-                "EndAddress".PadRight(16), SpacePipe, 
-                "Size".PadRight(20), SpacePipe,
-                "Gap"
-                );            
+            var fields = DataEmission.fields<LocatedImageField>();
+            var header = DataEmission.header(fields);
 
             var rows = text.build();
             rows.AppendLine(header);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var image = ref z.skip(images, i);
-                rows.Append(image.Name.PadRight(60));
+                var name = image.Name;
+                var match = system.First((in SystemImageRecord r) => r.Name == name);
+                var symbolic = match.IsSome() ? match.Value.Identifier : image.Name.Replace("z0.", EmptyString);
+
+                rows.Append(symbolic.PadRight(fields[0].Width));
                 rows.Append(SpacePipe);
-                rows.Append(image.EntryAddress.Format().PadRight(16));
+                rows.Append(image.PartId == 0 ? EmptyString.PadRight(fields[1].Width) : image.PartId.Format().PadRight(fields[1].Width));
                 rows.Append(SpacePipe);
-                rows.Append(image.BaseAddress.Format().PadRight(16));
+                rows.Append(image.EntryAddress.Format().PadRight(fields[2].Width));
                 rows.Append(SpacePipe);
-                rows.Append(image.EndAddress.Format().PadRight(16));
+                rows.Append(image.BaseAddress.Format().PadRight(fields[3].Width));
                 rows.Append(SpacePipe);
-                rows.Append(image.Size.ToString("#,#").PadRight(20));                
-                dst.Append(SpacePipe);
+                rows.Append(image.EndAddress.Format().PadRight(fields[4].Width));
+                rows.Append(SpacePipe);
+                rows.Append(image.Size.Format().PadRight(fields[5].Width));                
+                rows.Append(SpacePipe);
 
                 if(i == 0)
                     rows.Append(0.ToString());
@@ -87,49 +106,7 @@ namespace Z0
             using var writer = dst.Writer();
             writer.Write(rows.ToString());
         }
-        
-        void Summarize(Span<LocatedPart> src)        
-        {
-            var dst = text.build();
-            var ordered = src.ToEnumerable().OrderBy(x  => x.StartAddress).Array();
-            var count = ordered.Length;
-            var header = text.concat(
-                "Part".PadRight(20), SpacePipe, 
-                "StartAddress".PadRight(16), SpacePipe, 
-                "EndAddress".PadRight(16), SpacePipe, 
-                "Size".PadRight(12), SpacePipe,
-                "Gap".PadRight(8)
-                );            
-            dst.AppendLine(header);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var part = ref ordered[i];
-                dst.Append(part.Id.Format().PadRight(20));
-                dst.Append(SpacePipe);
-                dst.Append(part.StartAddress.Format().PadRight(16));
-                dst.Append(SpacePipe);
-                dst.Append(part.EndAddress.Format().PadRight(16));
-                dst.Append(SpacePipe);
-                dst.Append(part.Segment.Length.ToString("#,#").PadRight(12));
-                dst.Append(SpacePipe);
-
-                if(i == 0)
-                    dst.Append(0.ToString());
-                else
-                {
-                    ref readonly var prior = ref ordered[i - 1];
-                    var gap = (ulong)(part.StartAddress - prior.EndAddress);
-                    dst.Append(gap.ToString("#,#"));
-                }
-
-                dst.Append(Eol); 
-
-            }
-
-            using var writer = PartSummaryPath.Writer();
-            writer.Write(dst.ToString());
-        }
-        
+                
         public void Run()
         {  
              var index = z.span<LocatedPart>(Parts.Length);
@@ -141,17 +118,33 @@ namespace Z0
                 using var step = new EmitHexLineFile(Wf, part, @base, TargetPath(part));
                 step.Run();
 
-                z.seek(index,i) = new LocatedPart(part, @base, step.OffsetAddress);
+                z.seek(index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
 
              }
             
-            Summarize(index);
             Summarize(Images, ImageSummaryPath);
         }
 
         public void Dispose()
         {
             DataType.Emitted(Wf);                          
+        }
+    }
+
+    partial class XTend
+    {
+        public static T? First<T>(this ReadOnlySpan<T> src, ValuePredicate<T> predicate)
+            where T : struct
+        {
+            var count = src.Length;
+            ref readonly var start = ref z.first(src);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var candidate = ref z.skip(start,i);
+                if(predicate(candidate))
+                    return candidate;
+            }
+            return null;
         }
     }
 }

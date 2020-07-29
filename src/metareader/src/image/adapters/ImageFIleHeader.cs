@@ -45,7 +45,7 @@ namespace Z0.Image
         /// <summary>
         /// Gets the low 32 bits of the time stamp of the image. This represents the date and time the image was created by the linker. The value is represented in the number of seconds elapsed since midnight (00:00:00), January 1, 1970, Universal Coordinated Time, according to the system clock.
         /// </summary>
-        public int TimeDateStamp 
+        public uint TimeDateStamp 
             => data.TimeDateStamp;
 
         /// <summary>

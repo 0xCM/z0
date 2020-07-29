@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static PartRecords;
     using static z;
 
     public readonly struct EmitConstantRecords
@@ -51,7 +50,7 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(target.Render());
 
-            DataEmitters.emitted(Wf, DataKind, id, count);
+            DataEmission.emitted(Wf, DataKind, id, count);
         }
         
         public void Emit(IPart[] parts)

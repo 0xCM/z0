@@ -6,9 +6,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Image
 {
-    using System;
-    using System.Runtime.InteropServices;
-
     public enum IMAGE_FILE_MACHINE : uint
     {
         UNKNOWN = 0,

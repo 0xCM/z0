@@ -58,7 +58,7 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(target.Render());
 
-            DataEmitters.emitted(Wf, DataKind, id, count);
+            DataEmission.emitted(Wf, DataKind, id, count);
         }
         
         public void Run()

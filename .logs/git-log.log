@@ -931,3 +931,193 @@
  delete mode 100644 src/metareader/src/models/clr/contracts/IXCLRDataMethodInstanceVTable.cs
  create mode 100644 src/metareader/src/models/dac/IXCLRDataMethodInstanceVTable.cs
  create mode 100644 src/metareader/src/models/dac/SosPrototypes.cs
+[master c82e55ad4] .
+ 217 files changed, 2163 insertions(+), 793 deletions(-)
+ create mode 100644 .markdownlint.json
+ create mode 100644 src/konst/src/address/form/IAddressable.cs
+ delete mode 100644 src/konst/src/address/form/IAddressable64.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/EmitDataFiles.cs
+ delete mode 100644 src/machine/src/workflows/emission/steps/EmitPartHexFiles.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/LocatedDependency.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/LocatedImage.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/LocatedImageT.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/LocatedImages.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/LocatedPart.cs
+ create mode 100644 src/machine/src/workflows/emission/steps/LocatedPartImage.cs
+ create mode 100644 src/zdata/api/ContentKind.cs
+ create mode 100644 src/zdata/api/StructuredKind.cs
+ create mode 100644 src/zdata/api/ZDat.cs
+ create mode 100644 src/zdata/catalog.csv
+ rename src/zdata/content/{algorithms => asmalg}/A.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/B.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/C.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/D.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/E.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/F.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/H.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/I.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/K.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/L.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/M.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/O.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/P.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/R.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/S.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/T.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/U.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/V.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/W.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/X.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/_AMX.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/_AVX-512-KNC.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/_AVX-512.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/_AVX.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/_AVX2.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/_Other.md (100%)
+ rename src/zdata/content/{algorithms => asmalg}/_SVML.md (100%)
+ rename src/zdata/content/{identifiers/Identifiers.EncodingCol.csv => asmid/AsmId.Col.Encoding.csv} (69%)
+ rename src/zdata/content/{identifiers/Identifiers.InstructionCol.csv => asmid/AsmId.Col.Inxs.csv} (99%)
+ rename src/zdata/content/{identifiers/Identifiers.LegacyModeCol.csv => asmid/AsmId.Col.LegacyMode.csv} (90%)
+ rename src/zdata/content/{identifiers/Identifiers.Mode64Col.csv => asmid/AsmId.Col.Mode64.csv} (90%)
+ rename src/zdata/content/{identifiers/Identifiers.OpcodeColNoVex.csv => asmid/AsmId.Col.Oc.NoVex.csv} (98%)
+ rename src/zdata/content/{syntax/Syntax.OpCodes.VEX.csv => asmid/AsmId.Col.Oc.Vex.csv} (97%)
+ rename src/zdata/content/{identifiers/Identifiers.EFlagCC.csv => asmid/AsmId.EFlagCC.csv} (90%)
+ rename src/zdata/content/{identifiers/Identifiers.LegacyPrefix.csv => asmid/AsmId.LegacyPrefix.csv} (97%)
+ create mode 100644 src/zdata/content/asminxs/adc.csv
+ create mode 100644 src/zdata/content/asminxs/adcx.csv
+ create mode 100644 src/zdata/content/asminxs/and.csv
+ create mode 100644 src/zdata/content/asminxs/call.csv
+ create mode 100644 src/zdata/content/asminxs/cmp.csv
+ create mode 100644 src/zdata/content/asminxs/jcc.csv
+ create mode 100644 src/zdata/content/asminxs/jmp.csv
+ create mode 100644 src/zdata/content/asminxs/lea.csv
+ create mode 100644 src/zdata/content/asminxs/mov.csv
+ create mode 100644 src/zdata/content/asminxs/movsq.csv
+ create mode 100644 src/zdata/content/asminxs/movsx.csv
+ create mode 100644 src/zdata/content/asminxs/movzx.csv
+ create mode 100644 src/zdata/content/asminxs/or.csv
+ create mode 100644 src/zdata/content/asminxs/pmovzx.csv
+ create mode 100644 src/zdata/content/asminxs/popf.csv
+ create mode 100644 src/zdata/content/asminxs/pushf.csv
+ create mode 100644 src/zdata/content/asminxs/setcc.csv
+ create mode 100644 src/zdata/content/asminxs/sub.csv
+ create mode 100644 src/zdata/content/asminxs/test.csv
+ create mode 100644 src/zdata/content/asminxs/xor.csv
+ create mode 100644 src/zdata/content/asmsyn/AsmSyn.Alg.Exprs.csv
+ rename src/zdata/content/{syntax/Syntax.Algorithms.Functions.csv => asmsyn/AsmSyn.Alg.Fx.csv} (99%)
+ create mode 100644 src/zdata/content/asmsyn/AsmSyn.Alg.Id.csv
+ rename src/zdata/content/{syntax/Syntax.OCT.AddressingMethod.csv => asmsyn/AsmSyn.OcT.AddressingMethods.csv} (99%)
+ rename src/zdata/content/{syntax/Syntax.OTC.OperandTypeCodes.csv => asmsyn/AsmSyn.OcT.OperandTypeCodes.csv} (99%)
+ rename src/zdata/content/{syntax/Syntax.OTC.Parametric.csv => asmsyn/AsmSyn.OcT.Parametric.csv} (71%)
+ rename src/zdata/content/{syntax/Syntax.OTC.InstructionEncodings.csv => asmsyn/AsmSyn.OcT.Reg.csv} (97%)
+ rename src/zdata/content/{syntax/Syntax.OTC.RegisterCodes.csv => asmsyn/AsmSyn.OcT.RegCodes.csv} (99%)
+ rename src/zdata/content/{syntax/Syntax.OTC.Superscripts.csv => asmsyn/AsmSyn.OcT.SuperScripts.csv} (99%)
+ rename src/zdata/content/{definitions/Encoding.ModRM32.csv => asmt/AsmT.Addressing.ModRm32.csv} (67%)
+ rename src/zdata/content/{definitions/Encoding.ModRM32x64.Rex.B.csv => asmt/AsmT.Addressing.ModRm32x64.csv} (96%)
+ rename src/zdata/content/{definitions/Encoding.SIB32.csv => asmt/AsmT.Addressing.SIB32.csv} (85%)
+ rename src/zdata/content/{definitions/EFlags.ConditionCodes.Alt.csv => asmt/AsmT.EFlags.Alt.CC.csv} (89%)
+ rename src/zdata/content/{definitions/EFlags.ConditionStates.Alt.csv => asmt/AsmT.EFlags.Alt.CStates.csv} (76%)
+ create mode 100644 src/zdata/content/asmt/AsmT.EFlags.Alt.CT.csv
+ rename src/zdata/content/{definitions/EFlags.Bits.csv => asmt/AsmT.EFlags.Bits.csv} (99%)
+ create mode 100644 src/zdata/content/asmt/AsmT.EFlags.CExpr.csv
+ rename src/zdata/content/{definitions/EFlags.ConditionStates.csv => asmt/AsmT.EFlags.CState.csv} (69%)
+ rename src/zdata/content/{definitions/EFlags.ConditionTests.csv => asmt/AsmT.EFlags.CTest.csv} (92%)
+ create mode 100644 src/zdata/content/asmt/AsmT.EFlags.CrossRef.Notation.csv
+ rename src/zdata/content/{definitions/EFlags.CrossRef.csv => asmt/AsmT.EFlags.XRef.csv} (85%)
+ rename src/zdata/content/{definitions/Encoding.EffectiveSize.csv => asmt/AsmT.EffOpSize.csv} (83%)
+ rename src/zdata/content/{definitions/OpCodes.Definitions.csv => asmt/AsmT.OpCodes.csv} (100%)
+ create mode 100644 src/zdata/content/asmt/AsmT.OperandOffset.csv
+ rename src/zdata/content/{definitions/Encoding.LegacyPrefixes.csv => asmt/AsmT.Prefixes.Legacy.csv} (88%)
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.128.reg.ModRm.csv
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.16.reg.ModRm.csv
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.16.reg.csv
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.256.reg.ModRm.csv
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.32.reg.csv
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.64.reg.ModRm.csv
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.64.reg.NoModRm.csv
+ rename src/zdata/content/{definitions/RegCodes.Structure.csv => asmt/AsmT.Reg.Bits.Def.csv} (90%)
+ rename src/zdata/content/{definitions/RegCodes.Data.csv => asmt/AsmT.Reg.Bits.Gp.csv} (97%)
+ rename src/zdata/content/{definitions/Encoding.RexPrefix.csv => asmt/AsmT.Reg.Bits.RexPrefix.csv} (92%)
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.SegReg.2.csv
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.SegReg.3.csv
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.mmx.reg.ModRm.csv
+ rename src/zdata/content/{definitions/Encoding.ModRM32x64.Rex.R.csv => asmt/AsmT.Reg.Bits.reg.ModRm.csv} (95%)
+ rename src/zdata/content/{definitions/Encoding.ModRM.rm.csv => asmt/AsmT.Reg.Bits.rm.csv} (96%)
+ rename src/zdata/content/{definitions/Encoding.VEX.vvvv.csv => asmt/AsmT.Reg.Bits.vvvv.vex.csv} (92%)
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.x86.reg.ModRm.csv
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.x86.reg.NoModRm.csv
+ create mode 100644 src/zdata/content/asmt/AsmT.Reg.Bits.x86.reg.csv
+ rename src/zdata/content/{definitions/Register.Layout.GP.csv => asmt/AsmT.Reg.Layout.gp.csv} (81%)
+ rename src/zdata/content/{definitions/SegReg.Bits.csv => asmt/AsmT.Reg.Layout.seg.csv} (64%)
+ rename src/zdata/content/{definitions/Register.Layout.Vec.csv => asmt/AsmT.Reg.Layout.v.csv} (88%)
+ rename src/zdata/content/{definitions/SegReg.Selection.csv => asmt/AsmT.SegReg.Selection.csv} (100%)
+ rename src/zdata/content/{definitions/Truth.csv => asmt/BinaryBitLogic.csv} (100%)
+ delete mode 100644 src/zdata/content/definitions/EFlags.ConditionTests.Alt.csv
+ delete mode 100644 src/zdata/content/definitions/Encoding.InstructionLayout.csv
+ delete mode 100644 src/zdata/content/definitions/Encoding.ModRM.reg.csv
+ delete mode 100644 src/zdata/content/definitions/Encoding.RegFields.csv
+ create mode 100644 src/zdata/content/env/SystemImages.csv
+ rename src/zdata/content/help/{msbuild.csv => msbuild.common.csv} (77%)
+ create mode 100644 src/zdata/content/help/msbuild.compile.csv
+ create mode 100644 src/zdata/content/help/msbuild.embedded-resource.csv
+ create mode 100644 src/zdata/content/help/msbuild.project-reference.csv
+ create mode 100644 src/zdata/content/help/msbuild.reference.csv
+ rename src/zdata/content/help/{msbuild-switches.csv => msbuild.switches.csv} (100%)
+ create mode 100644 src/zdata/content/help/msbuild.well-known.csv
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/COFF_HEADER.csv (89%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/COFF_HEADER_FIELDS.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/COFF_SYMBOL_TABLE.csv (66%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/Characteristics.CSV (96%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_DEBUG_DIRECTORY.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_DLLCHARACTERISTICS.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_FILE_MACHINE.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_REL_AMD64.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_RESOURCE_DATA_ENTRY.csv (79%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_RESOURCE_DIRECTORY.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_RESOURCE_DIRECTORY_ENTRY.csv (55%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_SCN.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_SECTION_HEADER.csv (84%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_SUBSYSTEM.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_SYM_CLASS.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/IMAGE_SYM_TYPE.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/MAGE_LOAD_CONFIG_DIRECTORY.csv (84%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/OptionalHeaderDataDirectories.csv (75%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/RESOURCE_TABLE.csv (72%)
+ rename src/{metareader/src/image/docs => zdata/content/peformat}/SPECIAL.csv (100%)
+ create mode 100644 src/zdata/content/peformat/TLS.csv
+ rename src/zdata/content/{ => resx}/Strings.resx (100%)
+ delete mode 100644 src/zdata/content/syntax/Syntax.Algorithms.Identifierws.csv
+ delete mode 100644 src/zdata/content/syntax/Syntax.Algoriths.Expressions.csv
+ create mode 100644 src/zdata/info/COFF_HEADER.csv
+ create mode 100644 src/zdata/info/COFF_SYMBOL_TABLE.csv
+ create mode 100644 src/zdata/info/Encoding.Notes.csv
+ create mode 100644 src/zdata/info/IMAGE_RESOURCE_DIRECTORY_ENTRY.csv
+ create mode 100644 src/zdata/info/IMAGE_SECTION_HEADER.csv
+ create mode 100644 src/zdata/info/MAGE_LOAD_CONFIG_DIRECTORY.csv
+ create mode 100644 src/zdata/info/OptionalHeaderDataDirectories.1.csv
+ create mode 100644 src/zdata/info/OptionalHeaderDataDirectories.csv
+ create mode 100644 src/zdata/info/RESOURCE_TABLE.csv
+ rename src/zdata/{content/syntax => info}/Syntax.OTC.Combined.csv (100%)
+ rename src/zdata/{content/syntax => info}/Syntax.OTC.Eflags.csv (100%)
+ rename src/zdata/{content/syntax => info}/Syntax.OpCodeTables.csv (100%)
+ rename src/{metareader/src/image/docs => zdata/info}/TLS.csv (50%)
+ rename src/zdata/{content/instructions => info}/adc.csv (100%)
+ rename src/zdata/{content/instructions => info}/adcx.csv (100%)
+ rename src/zdata/{content/instructions => info}/and.csv (100%)
+ rename src/zdata/{content/instructions => info}/call.csv (100%)
+ rename src/zdata/{content/instructions => info}/cmp.csv (100%)
+ rename src/zdata/{content/instructions => info}/jcc.csv (100%)
+ rename src/zdata/{content/instructions => info}/jmp.csv (100%)
+ rename src/zdata/{content/instructions => info}/lea.csv (100%)
+ rename src/zdata/{content/instructions => info}/mov.csv (100%)
+ rename src/zdata/{content/instructions => info}/movsq.csv (100%)
+ rename src/zdata/{content/instructions => info}/movsx.csv (100%)
+ rename src/zdata/{content/instructions => info}/movzx.csv (100%)
+ rename src/zdata/{content/instructions => info}/or.csv (100%)
+ rename src/zdata/{content/instructions => info}/pmovzx.csv (100%)
+ rename src/zdata/{content/instructions => info}/popf.csv (100%)
+ rename src/zdata/{content/instructions => info}/pushf.csv (100%)
+ rename src/zdata/{content/instructions => info}/setcc.csv (100%)
+ rename src/zdata/{content/instructions => info}/sub.csv (100%)
+ rename src/zdata/{content/instructions => info}/test.csv (100%)
+ rename src/zdata/{content/instructions => info}/xor.csv (100%)

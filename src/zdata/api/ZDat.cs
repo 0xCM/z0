@@ -8,6 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
+    public readonly struct SystemImageRecord
+    {
+        public readonly string Name;
+
+        public readonly string Identifier;        
+        
+        public SystemImageRecord(string name, string identifier)
+        {
+            Name = name;
+            Identifier = identifier;
+        }
+    }
+
     public readonly struct ZDat
     {
         /// <summary>
@@ -27,6 +40,26 @@ namespace Z0
         /// </summary>
         public static StructuredKind[] StructuredClasses
             => Enums.literals<StructuredKind>().Where(x => x != 0).OrderBy(x => x.Format());
+
+        public static ReadOnlySpan<SystemImageRecord> SystemImages
+        {
+            get
+            {
+                var doc = structured(nameof(SystemImages));
+                if(doc.RowCount != 0)
+                {
+                    var dst = sys.alloc<SystemImageRecord>(doc.RowCount);
+                    for(var i=0; i<doc.RowCount; i++)
+                    {
+                        ref readonly var row = ref doc[i];
+                        if(row.CellCount >= 2)
+                            dst[i] = new SystemImageRecord(row[0], row[1]);                        
+                    }
+                    return dst;
+                }
+                return sys.empty<SystemImageRecord>();
+            }
+        }
 
         /// <summary>
         /// Enumerates all content

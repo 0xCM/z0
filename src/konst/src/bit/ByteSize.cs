@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Specifies data size in bytes
     /// </summary>
-    public readonly struct ByteSize
+    public readonly struct ByteSize : ITextual
     {
         /// <summary>
         /// Specifies a byte count
@@ -97,9 +97,14 @@ namespace Z0
             get => Count/8;
         }
 
+        public string Format(string pattern)
+            => Count.ToString(pattern);
+
+        public string Format()
+            => Format("#,#");
 
         public override string ToString()
-            => Count.ToString();
+            => Format();
 
         public override int GetHashCode()
             => Count.GetHashCode();

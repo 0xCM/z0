@@ -14,7 +14,7 @@ call %Cmd%
 set Cmd="%Wf%/wf-04-stage.bat"
 call %Cmd%
 
-call z0.exe
+REM call z0.exe
 
 call machine.exe
 
@@ -24,6 +24,9 @@ set Cmd="%Wf%/wf-10-respack.bat"
 call %Cmd%
 
 set Cmd="wf\wf-deposit.bat"
+call %Cmd%
+
+set Cmd="commit.bat"
 call %Cmd%
 
 echo on

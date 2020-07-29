@@ -53,7 +53,7 @@ namespace Z0
 
         public void Dispose()
         {
-            DataEmitters.emitted(Wf, PartRecordKind.None, Part.Id, (int)RecordCount);
+            DataEmission.emitted(Wf, PartRecordKind.None, Part.Id, (int)RecordCount);
         }
     }
 }

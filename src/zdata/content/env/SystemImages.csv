@@ -1,4 +1,4 @@
-| Name                                     | Id                |
+| Name                                     | Identifier |
 | Microsoft.Diagnostics.FastSerialization  | core.diag.serial  |
 | Microsoft.Diagnostics.Tracing.TraceEvent | core.diag.etrace  |
 | System.Diagnostics.Debug                 | core.diag.debug   |

@@ -8,7 +8,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    
     using Z0.Image;
+    using Z0.MS;
 
     using static Konst;
     using static MdR;
@@ -183,7 +185,6 @@ namespace Z0
 
             return false;
         }
-
 
         /// <summary>
         /// Get a long form of the specified branch op-code.

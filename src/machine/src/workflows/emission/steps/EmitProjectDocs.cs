@@ -8,7 +8,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    public readonly partial struct EmitProjectDocs
+    public readonly ref partial struct EmitProjectDocs
     {
         readonly EmissionWorkflow Workflow;
 

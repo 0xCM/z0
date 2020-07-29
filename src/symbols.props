@@ -6,7 +6,8 @@
     <Domain>$(Src)domain/z0.domain.csproj</Domain>
 
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
-    
+
+    <ZData>$(Src)zdata/z0.zdata.csproj</ZData>    
     <Expressive>$(Src)expressive/z0.expressive.csproj</Expressive>
     <Imagine>$(Src)imagine/z0.imagine.csproj</Imagine>
     <Tokens>$(Src)tokens/z0.tokens.csproj</Tokens>
