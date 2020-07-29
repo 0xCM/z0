@@ -9,7 +9,7 @@ namespace Z0.Dac
     using System;
     using System.Collections.Generic;
 
-    internal sealed class ObjectPool<T>
+    public sealed class ObjectPool<T>
         where T : new()
     {
         private readonly Queue<T> _bag = new Queue<T>();

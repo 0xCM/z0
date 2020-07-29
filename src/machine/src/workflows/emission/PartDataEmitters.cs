@@ -48,6 +48,7 @@ namespace Z0
             dst.Delimit(BlobField.Value, src.Value);
             dst.EmitEol();            
         }
+        
         const AppMsgColor StartFlair = AppMsgColor.Blue;
 
         const AppMsgColor EndFlair = AppMsgColor.Cyan;

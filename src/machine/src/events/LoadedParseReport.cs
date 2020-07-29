@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct LoadedParseReport : IProcessedEvent<LoadedParseReport>
+    public readonly struct LoadedParseReport : IAppEvent<LoadedParseReport>
     {
         public readonly MemberParseReport Report;
         

@@ -9,8 +9,6 @@ namespace Z0.MS
     using System;
     using System.Collections.Immutable;
 
-    using static ClrDataModel;
-
     /// <summary>
     /// Helper for COM Callable Wrapper objects.  (CCWs are CLR objects exposed to native code as COM
     /// objects).

@@ -13,7 +13,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct DecodedMachine : IProcessedEvent<DecodedMachine>
+    public readonly struct DecodedMachine : IAppEvent<DecodedMachine>
     {
         public readonly EncodedIndex Index;
 

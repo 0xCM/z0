@@ -9,7 +9,7 @@ namespace Z0.MS
     using System;
     using System.Buffers;
 
-    internal sealed class MemoryReader : IDisposable
+    public sealed class MemoryReader : IDisposable
     {
         private ulong _currPageStart;
         
@@ -17,9 +17,9 @@ namespace Z0.MS
         
         private readonly byte[] _data;
         
-        private readonly MsD.IMemoryReader _dataReader;
+        private readonly IMemoryReader _dataReader;
 
-        public MemoryReader(MsD.IMemoryReader dataReader, int cacheSize)
+        public MemoryReader(IMemoryReader dataReader, int cacheSize)
         {
             _data = ArrayPool<byte>.Shared.Rent(cacheSize);
             _dataReader = dataReader;

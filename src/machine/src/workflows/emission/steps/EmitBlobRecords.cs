@@ -13,7 +13,7 @@ namespace Z0
     
     public readonly ref struct EmitBlobRecords
     {
-        readonly IWfPartEmission Wf;
+        readonly IEmissionWorkflow Wf;
 
         readonly IPart[] Parts;
 
@@ -22,7 +22,7 @@ namespace Z0
         readonly EmissionDataType DataType;
         
         [MethodImpl(Inline)]
-        public EmitBlobRecords(IWfPartEmission wf, IPart[] parts, FolderPath dst)
+        public EmitBlobRecords(IEmissionWorkflow wf, IPart[] parts, FolderPath dst)
         {
             Wf = wf;
             Parts = parts;
@@ -50,7 +50,7 @@ namespace Z0
 
             var data = Read(part);
             var count = data.Length;     
-            var target = PartRecords.sink(Wf.DataTypes.Blobs);
+            var target = PartRecords.sink(PartRecordSpecs.Blobs);
 
             for(var i=0u; i<count; i++)
                 target.Deposit(skip(data,i));
@@ -58,7 +58,7 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(target.Render());
 
-            DataEmission.emitted(Wf, DataKind, id, count);
+            TableEmission.emitted(Wf, DataKind, id, count);
         }
         
         public void Run()

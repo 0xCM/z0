@@ -9,7 +9,6 @@ namespace Z0.Asm
     using System.Linq;
     using System.Collections.Generic;
 
-
     using static Konst;
 
     public readonly struct InstructionHandlers

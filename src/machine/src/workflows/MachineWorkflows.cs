@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
         
-    public readonly partial struct MachineWorkflows : IWorkflowStep<MachineWorkflows>, IWorkflowSteps<MachineWorkflows>, IDisposable
+    public readonly partial struct MachineWorkflows : IDisposable
     {        
         public static MachineWorkflows alloc(IAppContext context)
             => new MachineWorkflows(context);
@@ -35,7 +35,7 @@ namespace Z0
         {
             var config = PartFileArchives.configure(Context,args);
             if(CaptureArtifacts)
-                CaptureHost.Service(Context, config).Run(args);            
+                CaptureHost.ceate(Context, config).Run(args);            
             using var wf = new EmissionWorkflow(Context);
             wf.Run();
         }

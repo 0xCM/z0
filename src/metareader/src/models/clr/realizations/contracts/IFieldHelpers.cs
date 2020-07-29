@@ -16,7 +16,9 @@ namespace Z0.MS
     public interface IFieldHelpers
     {
         ITypeFactory Factory { get; }
+        
         IDataReader DataReader { get; }
+        
         bool ReadProperties(ClrType parentType, int token, out string? name, out FieldAttributes attributes, out ClrSigParser sigParser);
         
         ulong GetStaticFieldAddress(ClrStaticField field, ClrAppDomain? appDomain);

@@ -11,9 +11,6 @@ namespace Z0
 
     partial class XTend
     {
-        public static FileName FileName(this EmissionDataType type, PartRecordKind kind)
-            => PartDataEmitters.filename(type, kind);        
-
         public static FileExtension Ext(this EmissionDataType mk)
             => PartDataEmitters.ext(mk);
 

@@ -8,153 +8,153 @@ namespace Z0
 {
     using System;
 
-    using static MsD;
+    using Z0.MS;
     
-    partial struct ClrDataModel
+    using static ClrDataModel;
+
+    /// <summary>
+    /// Represents an instance of a type which inherits from <see cref="ValueType"/>.
+    /// </summary>
+    public struct ClrValueType : IAddressableTypedEntity
     {
+        private IDataReader DataReader 
+            => GetTypeOrThrow().ClrObjectHelpers.DataReader;
+        
+        private readonly bool _interior;
+
         /// <summary>
-        /// Represents an instance of a type which inherits from <see cref="ValueType"/>.
+        /// Gets the address of the object.
         /// </summary>
-        public struct ClrValueType : IAddressableTypedEntity
+        public ulong Address { get; }
+
+        /// <summary>
+        /// Gets the type of the object.
+        /// </summary>
+        public ClrType Type { get; }
+
+        internal ClrValueType(ulong address, ClrType type, bool interior)
         {
-            private IDataReader DataReader 
-                => GetTypeOrThrow().ClrObjectHelpers.DataReader;
-            
-            private readonly bool _interior;
+            Address = address;
+            Type = type;
+            _interior = interior;
 
-            /// <summary>
-            /// Gets the address of the object.
-            /// </summary>
-            public ulong Address { get; }
+            DebugOnly.Assert(type.IsValueType);
+        }
 
-            /// <summary>
-            /// Gets the type of the object.
-            /// </summary>
-            public ClrType Type { get; }
+        /// <summary>
+        /// Gets the given object reference field from this ClrObject.
+        /// </summary>
+        /// <param name="fieldName">The name of the field to retrieve.</param>
+        /// <returns>A ClrObject of the given field.</returns>
+        /// <exception cref="ArgumentException">
+        /// The given field does not exist in the object.
+        /// -or-
+        /// The given field was not an object reference.
+        /// </exception>
+        public ClrObject GetObjectField(string fieldName)
+        {
+            ClrInstanceField field = Type.GetFieldByName(fieldName);
+            if (field is null)
+                throw new ArgumentException($"Type '{Type.Name}' does not contain a field named '{fieldName}'");
 
-            internal ClrValueType(ulong address, ClrType type, bool interior)
-            {
-                Address = address;
-                Type = type;
-                _interior = interior;
+            if (!field.IsObjectReference)
+                throw new ArgumentException($"Field '{Type.Name}.{fieldName}' is not an object reference.");
 
-                DebugOnly.Assert(type.IsValueType);
-            }
+            ClrHeap heap = Type.Heap;
 
-            /// <summary>
-            /// Gets the given object reference field from this ClrObject.
-            /// </summary>
-            /// <param name="fieldName">The name of the field to retrieve.</param>
-            /// <returns>A ClrObject of the given field.</returns>
-            /// <exception cref="ArgumentException">
-            /// The given field does not exist in the object.
-            /// -or-
-            /// The given field was not an object reference.
-            /// </exception>
-            public ClrObject GetObjectField(string fieldName)
-            {
-                ClrInstanceField field = Type.GetFieldByName(fieldName);
-                if (field is null)
-                    throw new ArgumentException($"Type '{Type.Name}' does not contain a field named '{fieldName}'");
+            ulong addr = field.GetAddress(Address, _interior);
+            if (!DataReader.ReadPointer(addr, out ulong obj))
+                throw new MemoryReadException(addr);
 
-                if (!field.IsObjectReference)
-                    throw new ArgumentException($"Field '{Type.Name}.{fieldName}' is not an object reference.");
+            return heap.GetObject(obj);
+        }
 
-                ClrHeap heap = Type.Heap;
+        /// <summary>
+        /// Gets the value of a primitive field.  This will throw an InvalidCastException if the type parameter
+        /// does not match the field's type.
+        /// </summary>
+        /// <typeparam name="T">The type of the field itself.</typeparam>
+        /// <param name="fieldName">The name of the field.</param>
+        /// <returns>The value of this field.</returns>
+        public T GetField<T>(string fieldName)
+            where T : unmanaged
+        {
+            ClrInstanceField field = Type.GetFieldByName(fieldName);
+            if (field is null)
+                throw new ArgumentException($"Type '{Type.Name}' does not contain a field named '{fieldName}'");
 
-                ulong addr = field.GetAddress(Address, _interior);
-                if (!DataReader.ReadPointer(addr, out ulong obj))
-                    throw new MemoryReadException(addr);
+            object value = field.Read<T>(Address, _interior);
+            return (T)value;
+        }
 
-                return heap.GetObject(obj);
-            }
+        /// <summary>
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        public ClrValueType GetValueTypeField(string fieldName)
+        {
+            ClrInstanceField? field = Type.GetFieldByName(fieldName);
+            if (field is null)
+                throw new ArgumentException($"Type '{Type.Name}' does not contain a field named '{fieldName}'");
 
-            /// <summary>
-            /// Gets the value of a primitive field.  This will throw an InvalidCastException if the type parameter
-            /// does not match the field's type.
-            /// </summary>
-            /// <typeparam name="T">The type of the field itself.</typeparam>
-            /// <param name="fieldName">The name of the field.</param>
-            /// <returns>The value of this field.</returns>
-            public T GetField<T>(string fieldName)
-                where T : unmanaged
-            {
-                ClrInstanceField field = Type.GetFieldByName(fieldName);
-                if (field is null)
-                    throw new ArgumentException($"Type '{Type.Name}' does not contain a field named '{fieldName}'");
+            if (!field.IsValueType)
+                throw new ArgumentException($"Field '{Type.Name}.{fieldName}' is not a ValueClass.");
 
-                object value = field.Read<T>(Address, _interior);
-                return (T)value;
-            }
+            if (field.Type is null)
+                throw new Exception("Field does not have an associated class.");
 
-            /// <summary>
-            /// </summary>
-            /// <param name="fieldName"></param>
-            /// <returns></returns>
-            public ClrValueType GetValueTypeField(string fieldName)
-            {
-                ClrInstanceField? field = Type.GetFieldByName(fieldName);
-                if (field is null)
-                    throw new ArgumentException($"Type '{Type.Name}' does not contain a field named '{fieldName}'");
+            ulong addr = field.GetAddress(Address, _interior);
+            return new ClrValueType(addr, field.Type, true);
+        }
 
-                if (!field.IsValueType)
-                    throw new ArgumentException($"Field '{Type.Name}.{fieldName}' is not a ValueClass.");
+        /// <summary>
+        /// Gets a string field from the object.  Note that the type must match exactly, as this method
+        /// will not do type coercion.
+        /// </summary>
+        /// <param name="fieldName">The name of the field to get the value for.</param>
+        /// <param name="maxLength">The maximum length of the string returned.  Warning: If the DataTarget
+        /// being inspected has corrupted or an inconsistent heap state, the length of a string may be
+        /// incorrect, leading to OutOfMemory and other failures.</param>
+        /// <returns>The value of the given field.</returns>
+        /// <exception cref="ArgumentException">No field matches the given name.</exception>
+        /// <exception cref="InvalidOperationException">The field is not a string.</exception>
+        /// <exception cref="MemoryReadException">There was an error reading the value of this field out of the data target.</exception>
+        public string GetStringField(string fieldName, int maxLength = 4096)
+        {
+            ulong address = GetFieldAddress(fieldName, ClrElementType.String, "string");
+            if (!DataReader.ReadPointer(address, out ulong str))
+                throw new MemoryReadException(address);
 
-                if (field.Type is null)
-                    throw new Exception("Field does not have an associated class.");
+            if (str == 0)
+                return null;
 
-                ulong addr = field.GetAddress(Address, _interior);
-                return new ClrValueType(addr, field.Type, true);
-            }
+            ClrObject obj = new ClrObject(str, Type.Heap.StringType);
+            return obj.AsString(maxLength);
+        }
 
-            /// <summary>
-            /// Gets a string field from the object.  Note that the type must match exactly, as this method
-            /// will not do type coercion.
-            /// </summary>
-            /// <param name="fieldName">The name of the field to get the value for.</param>
-            /// <param name="maxLength">The maximum length of the string returned.  Warning: If the DataTarget
-            /// being inspected has corrupted or an inconsistent heap state, the length of a string may be
-            /// incorrect, leading to OutOfMemory and other failures.</param>
-            /// <returns>The value of the given field.</returns>
-            /// <exception cref="ArgumentException">No field matches the given name.</exception>
-            /// <exception cref="InvalidOperationException">The field is not a string.</exception>
-            /// <exception cref="MemoryReadException">There was an error reading the value of this field out of the data target.</exception>
-            public string GetStringField(string fieldName, int maxLength = 4096)
-            {
-                ulong address = GetFieldAddress(fieldName, ClrElementType.String, "string");
-                if (!DataReader.ReadPointer(address, out ulong str))
-                    throw new MemoryReadException(address);
+        private ulong GetFieldAddress(string fieldName, ClrElementType element, string typeName)
+        {
+            ClrInstanceField? field = Type.GetFieldByName(fieldName);
+            if (field is null)
+                throw new ArgumentException($"Type '{Type.Name}' does not contain a field named '{fieldName}'");
 
-                if (str == 0)
-                    return null;
+            if (field.ElementType != element)
+                throw new InvalidOperationException($"Field '{Type.Name}.{fieldName}' is not of type '{typeName}'.");
 
-                ClrObject obj = new ClrObject(str, Type.Heap.StringType);
-                return obj.AsString(maxLength);
-            }
+            ulong address = field.GetAddress(Address, _interior);
+            return address;
+        }
 
-            private ulong GetFieldAddress(string fieldName, ClrElementType element, string typeName)
-            {
-                ClrInstanceField? field = Type.GetFieldByName(fieldName);
-                if (field is null)
-                    throw new ArgumentException($"Type '{Type.Name}' does not contain a field named '{fieldName}'");
+        public bool Equals(IAddressableTypedEntity? other)
+            => other != null && Address == other.Address && Type == other.Type;
 
-                if (field.ElementType != element)
-                    throw new InvalidOperationException($"Field '{Type.Name}.{fieldName}' is not of type '{typeName}'.");
+        private ClrType GetTypeOrThrow()
+        {
+            if (Type is null)
+                throw new InvalidOperationException($"Unknown type of value at {Address:x}.");
 
-                ulong address = field.GetAddress(Address, _interior);
-                return address;
-            }
-
-            public bool Equals(IAddressableTypedEntity? other)
-                => other != null && Address == other.Address && Type == other.Type;
-
-            private ClrType GetTypeOrThrow()
-            {
-                if (Type is null)
-                    throw new InvalidOperationException($"Unknown type of value at {Address:x}.");
-
-                return Type;
-            }
+            return Type;
         }
     }
+
 }

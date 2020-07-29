@@ -9,11 +9,10 @@ namespace Z0.MS
     using System;
     using System.Collections.Generic;
 
-    using static ClrDataModel;
-
     public interface IHeapHelpers
     {
         IDataReader DataReader { get; }
+        
         ITypeFactory Factory { get; }
 
         IEnumerable<(ulong, ulong)> EnumerateDependentHandleLinks();

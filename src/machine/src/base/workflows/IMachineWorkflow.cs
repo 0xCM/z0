@@ -6,7 +6,7 @@ namespace Z0
 {
     using Z0.Asm;
         
-    public interface IMachineWorkflow : IMachineService
+    public interface IMachineWorkflow : IService
     {    
         void Process(PartInstructions src);
 

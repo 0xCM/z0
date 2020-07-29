@@ -7,10 +7,12 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Win)" />
     <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Identify)" />
+
   </ItemGroup>  
 
 </Project>

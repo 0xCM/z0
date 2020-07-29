@@ -9,6 +9,8 @@ namespace Z0.Dac
     using System;
     using System.Runtime.InteropServices;
 
+    using Z0.MS;
+
     using static ClrDataModel;
 
     public sealed class DacLibrary : IDisposable

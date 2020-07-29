@@ -13,7 +13,6 @@ namespace Z0
     using Z0.MS;
 
     using static Konst;
-    using static MdR;
 
     [ApiHost]
     public static class ClrQueries

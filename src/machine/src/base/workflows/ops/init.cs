@@ -12,15 +12,6 @@ namespace Z0
 
     partial struct Workflows
     {        
-        public static Workflows init(IAppContext context)
-            => new Workflows(context);
-
-        Workflows(IAppContext context)
-        {
-            Context = context;
-            Correlation = 0;
-            Known = sys.empty<ActorIdentity>();
-        }
+     
     }
-
 }

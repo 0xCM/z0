@@ -11,12 +11,12 @@ namespace Z0.MS
 
     using Z0.Dac;    
 
-    using static ClrDataModel;    
-
     internal class CcwBuilder : ICcwData
     {
         private CcwData _ccwData;
+
         private readonly SOSDac _sos;
+
         private readonly RuntimeBuilder _builder;
 
         public CcwBuilder(SOSDac sos, RuntimeBuilder builder)

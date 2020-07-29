@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct IndexedEncoded : IProcessedEvent<IndexedEncoded>
+    public readonly struct IndexedEncoded : IAppEvent<IndexedEncoded>
     {
         public readonly EncodedIndex Index;
 

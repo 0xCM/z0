@@ -9,11 +9,10 @@ namespace Z0
     using System;
     using System.Collections.Immutable;
     
-    partial struct ClrDataModel
+    using static ClrDataModel;
+    
+    public interface IExceptionHelpers
     {
-        public interface IExceptionHelpers
-        {
-            ImmutableArray<ClrStackFrame> GetExceptionStackTrace(ClrThread thread, ClrObject obj);
-        }
+        ImmutableArray<ClrStackFrame> GetExceptionStackTrace(ClrThread thread, ClrObject obj);
     }
 }

@@ -11,8 +11,6 @@ namespace Z0.MS
     using System.Collections.Generic;
     using System.Collections.Immutable;
 
-    using Z0.Dac;
-
     using static ClrDataModel;
 
     public interface IRuntimeHelpers : IDisposable

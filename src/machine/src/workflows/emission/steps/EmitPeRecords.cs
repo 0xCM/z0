@@ -11,7 +11,7 @@ namespace Z0
     
     public readonly ref struct EmitPeRecords
     {
-        readonly IWfPartEmission Wf;
+        readonly IEmissionWorkflow Wf;
         
         readonly EmissionDataType DataType;
 
@@ -20,7 +20,7 @@ namespace Z0
         readonly FilePath TargetPath;
         
         [MethodImpl(Inline)]        
-        public EmitPeRecords(IWfPartEmission wf, IPart[] src, FilePath dst)
+        public EmitPeRecords(IEmissionWorkflow wf, IPart[] src, FilePath dst)
         {
             Wf = wf;
             Parts = src;

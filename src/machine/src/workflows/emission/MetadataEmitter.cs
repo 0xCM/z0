@@ -13,7 +13,7 @@ namespace Z0
     using MK = EmissionDataType;
     using MES = WfStatusKind;
     
-    public readonly struct MetadataEmitter : IWfMetadatEmission
+    public readonly struct MetadataEmitter : IEmissionWorkflow
     {
         public FolderPath TargetDir {get;}
 
@@ -42,21 +42,21 @@ namespace Z0
             Sink.Deposit(src);
         }
 
-        IWfMetadatEmission Wf 
+        IEmissionWorkflow Wf 
             => this;
 
         IPartReader Reader(string src)
             => PartReader.open(FilePath.Define(src));
 
         FilePath TargetPath(PartId part, PartRecordKind rk, MK mk)
-            => TargetDir +  mk.FileName(rk);
+            => TargetDir +  PartDataEmitters.filename(mk, rk);
 
         FolderPath PrepareTarget()
         {            
             var target = TargetDir;
-            target.Running(this);
+            PartDataEmitters.running(target,this);
             target.Create().Clear();
-            target.Ran(this);            
+            PartDataEmitters.ran(target, this);            
             return target;
         }
         

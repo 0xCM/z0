@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly ref struct EmitStringRecords
     {
-        readonly IWfPartEmission Wf;
+        readonly IEmissionWorkflow Wf;
 
         readonly IPart[] Parts;
         
@@ -21,13 +21,13 @@ namespace Z0
         readonly EmissionDataType DataType;
         
         [MethodImpl(Inline)]
-        public EmitStringRecords(IWfPartEmission wf, IPart[] parts, FolderPath dst)
+        public EmitStringRecords(IEmissionWorkflow wf, IPart[] parts, FolderPath dst)
         {
             Wf = wf;
             Parts = parts;
             TargetDir = dst;
             DataType = EmissionDataType.Strings;
-            DataType.Emitting(Wf);
+            PartDataEmitters.emitting(DataType,Wf);
         }
         
         public void Run()
@@ -43,7 +43,7 @@ namespace Z0
 
         public void Dispose()
         {
-            DataType.Emitted(Wf);
+            PartDataEmitters.emitted(DataType,Wf);
         }
     }
 }

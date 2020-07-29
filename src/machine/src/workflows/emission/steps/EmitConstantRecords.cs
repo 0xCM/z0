@@ -12,10 +12,10 @@ namespace Z0
 
     public readonly struct EmitConstantRecords
     {
-        readonly IWfPartEmission Wf;
+        readonly IEmissionWorkflow Wf;
         
         [MethodImpl(Inline)]
-        public EmitConstantRecords(IWfPartEmission wf)
+        public EmitConstantRecords(IEmissionWorkflow wf)
         {
             Wf = wf;
         }
@@ -38,11 +38,11 @@ namespace Z0
             var id = part.Id;
             var dstPath = Wf.TargetPath(id, StepKind);
 
-            DataKind.Emitting(dstPath, Wf);
+            PartDataEmitters.emitting(DataKind,dstPath, Wf);
 
             var data = Read(part);
             var count = data.Length;            
-            var target = PartRecords.formatter(Wf.DataTypes.Constants);
+            var target = PartRecords.formatter(PartRecordSpecs.Constants);
             target.EmitHeader();
             for(var i=0u; i<count; i++)
                 PartRecords.format(skip(data,i), target);
@@ -50,17 +50,17 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(target.Render());
 
-            DataEmission.emitted(Wf, DataKind, id, count);
+            TableEmission.emitted(Wf, DataKind, id, count);
         }
         
         public void Emit(IPart[] parts)
         {
-            StepKind.Emitting(Wf);
+            PartDataEmitters.emitting(StepKind, Wf);
 
             foreach(var part in parts)
                 Emit(part);
-
-            StepKind.Emitted(Wf);
+            
+            PartDataEmitters.emitted(StepKind, Wf);
         }
     }
 }

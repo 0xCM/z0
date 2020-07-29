@@ -14,7 +14,6 @@ namespace Z0
 
     public readonly struct ParsedRecordParser
     {
-
         public MemberParseRecord[] parse(FilePath path)
         {
             var rows = path.ReadLines();

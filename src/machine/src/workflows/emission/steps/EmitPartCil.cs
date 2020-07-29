@@ -12,7 +12,7 @@ namespace Z0
         
     public ref struct EmiPartCil
     {
-        readonly IWfPartEmission Wf;
+        readonly IEmissionWorkflow Wf;
 
         readonly IPart Part;
 
@@ -23,7 +23,7 @@ namespace Z0
         uint RecordCount;
         
         [MethodImpl(Inline)]
-        public EmiPartCil(IWfPartEmission wf, IPart part, FilePath dst)
+        public EmiPartCil(IEmissionWorkflow wf, IPart part, FilePath dst)
         {
              Wf = wf;
              Part = part;
@@ -53,7 +53,7 @@ namespace Z0
 
         public void Dispose()
         {
-            DataEmission.emitted(Wf, PartRecordKind.None, Part.Id, (int)RecordCount);
+            TableEmission.emitted(Wf, PartRecordKind.None, Part.Id, (int)RecordCount);
         }
     }
 }

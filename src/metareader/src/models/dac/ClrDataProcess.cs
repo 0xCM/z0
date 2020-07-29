@@ -11,6 +11,8 @@ namespace Z0.Dac
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
+    using Z0.MS;
+
     using static ClrDataModel;
 
     /// <summary>

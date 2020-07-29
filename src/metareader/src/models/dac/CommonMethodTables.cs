@@ -4,12 +4,10 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dac
+namespace Z0.MS
 {
     using System;
     using System.Runtime.InteropServices;
-
-    using static ClrDataModel;
 
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct CommonMethodTables

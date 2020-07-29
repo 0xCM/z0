@@ -171,6 +171,8 @@ public enum PartId : ulong
 
     ResBytes = 200,
 
+    Win = 201,
+
     SystemTest = 201,
 
     // ~ 300

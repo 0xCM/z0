@@ -11,8 +11,6 @@ namespace Z0.MS
 
     using Z0.Dac;    
 
-    using static ClrDataModel;    
-
     internal class RcwBuilder : IRcwData
     {
         private RcwData _rcwData;

@@ -17,8 +17,6 @@ namespace Z0
     using Z0.Image;
     using Z0.MS;
 
-    using static MsD;
-
     partial struct ClrDataModel
     {                
         /// <summary>

@@ -29,7 +29,6 @@ namespace Z0
         static void OnStep(Vector128<byte> src) 
         {
 
-        }
-        
+        }        
     }
 }

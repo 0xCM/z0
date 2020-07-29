@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct IndexedInstructions : IProcessedEvent<IndexedInstructions>
+    public readonly struct IndexedInstructions : IAppEvent<IndexedInstructions>
     {
         public readonly LocatedInstructions Index;
 

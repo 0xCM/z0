@@ -7,11 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Konst;
     
-    public readonly struct Unaddressed : IProcessedEvent<Unaddressed>
+    public readonly struct Unaddressed : IAppEvent<Unaddressed>
     {
         public readonly OpUri Uri;
         public readonly LocatedCode Code;

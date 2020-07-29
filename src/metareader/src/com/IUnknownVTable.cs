@@ -8,6 +8,8 @@ namespace Z0
 {
     using System;
 
+    using Z0.MS;
+
     /// <summary>
     /// The basic VTable for an IUnknown interface.
     /// </summary>
@@ -19,5 +21,4 @@ namespace Z0
         
         public IntPtr Release;
     }
-
 }

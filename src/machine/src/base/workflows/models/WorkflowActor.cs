@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WorkflowActor<T> : IWorkflowWorker<WorkflowActor<T>>
+    public readonly struct WorkflowActor<T> : IWorkflowActor<WorkflowActor<T>>
     {
         public readonly Type Host;
 

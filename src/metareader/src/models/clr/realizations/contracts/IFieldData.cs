@@ -13,8 +13,11 @@ namespace Z0.MS
         IFieldHelpers Helpers { get; }
 
         ClrElementType ElementType { get; }
+        
         int Token { get; }
+        
         int Offset { get; }
+        
         ulong TypeMethodTable { get; }
     }
 }

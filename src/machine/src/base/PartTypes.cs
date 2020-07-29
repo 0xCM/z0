@@ -29,5 +29,5 @@ namespace Z0.Asm
             Types = types;
         }
     }
-    
+   
 }

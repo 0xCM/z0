@@ -7,9 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using Z0.Clr;
 
     using static Konst;
     using static z;
+
 
     partial struct Reflex
     {

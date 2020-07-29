@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct MemoryExtractor : IMemoryExtractor
     {
-        public readonly IMemoryReader Reader;
+        public readonly MemoryReaderService Reader;
 
         readonly byte[] Buffer;
 
@@ -23,7 +23,7 @@ namespace Z0
         public MemoryExtractor(byte[] buffer)
         {
             Buffer = buffer;
-            Reader =  MemoryReader.Service;
+            Reader =  MemoryReaderService.Service;
         }
 
         [MethodImpl(Inline)]

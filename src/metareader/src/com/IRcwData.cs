@@ -4,12 +4,10 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.MS
 {
     using System;
     using System.Collections.Immutable;
-
-    using static ClrDataModel;
 
     public interface IRcwData
     {

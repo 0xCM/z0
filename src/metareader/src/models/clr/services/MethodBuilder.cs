@@ -10,7 +10,7 @@ namespace Z0.MS
 
     using Z0.Dac;    
 
-    internal class MethodBuilder : IMethodData, IDisposable
+    public class MethodBuilder : IMethodData, IDisposable
     {
         MethodDescData _mdData;
         

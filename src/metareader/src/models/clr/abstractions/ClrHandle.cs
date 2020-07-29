@@ -8,87 +8,89 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
+
+    using Z0.MS;
     
-    partial struct ClrDataModel
+    using static ClrDataModel;
+
+    /// <summary>
+    /// Represents a CLR handle in the target process.
+    /// </summary>
+    public abstract class ClrHandle : IClrRoot
     {
         /// <summary>
-        /// Represents a CLR handle in the target process.
+        /// Gets the address of the handle itself.  That is, *ulong == Object.
         /// </summary>
-        public abstract class ClrHandle : IClrRoot
+        public abstract ulong Address { get; }
+
+        /// <summary>
+        /// Gets the Object the handle roots.
+        /// </summary>
+        public abstract ClrObject Object { get; }
+
+        /// <summary>
+        /// Gets the type of handle.
+        /// </summary>
+        public abstract ClrHandleKind HandleKind { get; }
+
+        /// <summary>
+        /// If this handle is a RefCount handle, this returns the reference count.
+        /// RefCount handles with a RefCount > 0 are strong.
+        /// </summary>
+        public abstract uint ReferenceCount { get; }
+
+        /// <summary>
+        /// Gets the dependent handle target if this is a dependent handle.
+        /// </summary>
+        public abstract ClrObject Dependent { get; }
+
+        /// <summary>
+        /// Gets the AppDomain the handle resides in.
+        /// </summary>
+        public abstract ClrAppDomain AppDomain { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the handle is strong (roots the object).
+        /// </summary>
+        public bool IsStrong
         {
-            /// <summary>
-            /// Gets the address of the handle itself.  That is, *ulong == Object.
-            /// </summary>
-            public abstract ulong Address { get; }
-
-            /// <summary>
-            /// Gets the Object the handle roots.
-            /// </summary>
-            public abstract ClrObject Object { get; }
-
-            /// <summary>
-            /// Gets the type of handle.
-            /// </summary>
-            public abstract ClrHandleKind HandleKind { get; }
-
-            /// <summary>
-            /// If this handle is a RefCount handle, this returns the reference count.
-            /// RefCount handles with a RefCount > 0 are strong.
-            /// </summary>
-            public abstract uint ReferenceCount { get; }
-
-            /// <summary>
-            /// Gets the dependent handle target if this is a dependent handle.
-            /// </summary>
-            public abstract ClrObject Dependent { get; }
-
-            /// <summary>
-            /// Gets the AppDomain the handle resides in.
-            /// </summary>
-            public abstract ClrAppDomain AppDomain { get; }
-
-            /// <summary>
-            /// Gets a value indicating whether the handle is strong (roots the object).
-            /// </summary>
-            public bool IsStrong
+            get
             {
-                get
+                switch (HandleKind)
                 {
-                    switch (HandleKind)
-                    {
-                        case ClrHandleKind.RefCounted:
-                            return ReferenceCount > 0;
+                    case ClrHandleKind.RefCounted:
+                        return ReferenceCount > 0;
 
-                        case ClrHandleKind.WeakLong:
-                        case ClrHandleKind.WeakShort:
-                        case ClrHandleKind.Dependent:
-                        case ClrHandleKind.WeakWinRT:
-                            return false;
+                    case ClrHandleKind.WeakLong:
+                    case ClrHandleKind.WeakShort:
+                    case ClrHandleKind.Dependent:
+                    case ClrHandleKind.WeakWinRT:
+                        return false;
 
-                        default:
-                            return true;
-                    }
+                    default:
+                        return true;
                 }
             }
+        }
 
-            public ClrRootKind RootKind 
-                => IsStrong ? (ClrRootKind)HandleKind : ClrRootKind.None;
+        public ClrRootKind RootKind 
+            => IsStrong ? (ClrRootKind)HandleKind : ClrRootKind.None;
 
-            public bool IsInterior 
-                => false;
+        public bool IsInterior 
+            => false;
 
-            /// <summary>
-            /// Gets a value indicating whether the handle pins the object (doesn't allow the GC to
-            /// relocate it).
-            /// </summary>
-            public bool IsPinned 
-                => HandleKind == ClrHandleKind.AsyncPinned || HandleKind == ClrHandleKind.Pinned;
+        /// <summary>
+        /// Gets a value indicating whether the handle pins the object (doesn't allow the GC to
+        /// relocate it).
+        /// </summary>
+        public bool IsPinned 
+            => HandleKind == ClrHandleKind.AsyncPinned || HandleKind == ClrHandleKind.Pinned;
 
-            /// <summary>
-            /// ToString override.
-            /// </summary>
-            public override string ToString() 
-                => $"{HandleKind.GetName()} @{Address:x12} -> {Object}";
-        }        
-    }
+        /// <summary>
+        /// ToString override.
+        /// </summary>
+        public override string ToString() 
+            => $"{HandleKind.GetName()} @{Address:x12} -> {Object}";
+    }        
+ 
 }

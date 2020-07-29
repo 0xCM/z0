@@ -12,7 +12,7 @@ namespace Z0
         
     public readonly ref struct EmitFieldRecords
     {    
-        readonly IWfPartEmission Wf;
+        readonly IEmissionWorkflow Wf;
 
         readonly IPart[] Parts;
         
@@ -23,11 +23,11 @@ namespace Z0
         readonly EmissionDataType DataType;
 
         [MethodImpl(Inline)]
-        public EmitFieldRecords(IWfPartEmission wf, IPart[] parts, FolderPath dst)
+        public EmitFieldRecords(IEmissionWorkflow wf, IPart[] parts, FolderPath dst)
         {
             Wf = wf;
             Parts = parts;
-            Spec = wf.DataTypes.Fields;
+            Spec = PartRecordSpecs.Fields;
             TargetDir = dst;
             DataType = EmissionDataType.Field;
             DataType.Emitting(Wf);
@@ -47,7 +47,7 @@ namespace Z0
 
         void Emit(IPart part)
         {
-            var rk = Wf.DataTypes.FieldRva;
+            var rk = PartRecordSpecs.FieldRva;
             var id = part.Id;
             var path = TargetPath(id);
             DataType.Emitting(path, Wf);

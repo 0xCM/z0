@@ -1585,3 +1585,18 @@
  create mode 100644 src/zdata/content/help/msvs.dll.csv
  create mode 100644 src/zdata/content/help/msvs.headers.csv
  create mode 100644 src/zdata/content/help/msvs.tools.csv
+[master 592fd1ecf] .
+ 20 files changed, 801 insertions(+), 207 deletions(-)
+ create mode 100644 src/konst/src/arrays/Arrays.cs
+ create mode 100644 src/konst/src/arrays/ops/alloc.cs
+ create mode 100644 src/konst/src/arrays/ops/clear.cs
+ rename src/konst/src/{collective => }/arrays/ops/concat.cs (91%)
+ create mode 100644 src/konst/src/arrays/ops/empty.cs
+ create mode 100644 src/konst/src/arrays/ops/fill.cs
+ create mode 100644 src/konst/src/arrays/ops/from.cs
+ create mode 100644 src/konst/src/arrays/ops/head.cs
+ create mode 100644 src/konst/src/arrays/ops/replicate.cs
+ create mode 100644 src/konst/src/arrays/ops/skip.cs
+ delete mode 100644 src/konst/src/collective/Arrays.cs
+ rename src/konst/src/{collective/arrays/ops/copy.cs => text/ops/blank.cs} (58%)
+ create mode 100644 src/konst/src/text/ops/denullify.cs

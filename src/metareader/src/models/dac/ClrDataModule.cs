@@ -10,9 +10,8 @@ namespace Z0.Dac
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static ClrDataModel;
-    using static MsD;
-
+    using Z0.MS;
+    
     public sealed unsafe class ClrDataModule : CallableCOMWrapper
     {
         private const uint DACDATAMODULEPRIV_REQUEST_GET_MODULEDATA = 0xf0000001;

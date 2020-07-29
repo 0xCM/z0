@@ -27,7 +27,7 @@ namespace Z0
         public static LocatedCode extract(MemoryAddress src, byte[] buffer)
         {
             Span<byte> target = buffer;
-            var length = MemoryReader.Service.Read(src, target);            
+            var length = MemoryReaderService.Service.Read(src, target);            
             return new LocatedCode(src, sys.array(target.Slice(0,length)));
         }
     }

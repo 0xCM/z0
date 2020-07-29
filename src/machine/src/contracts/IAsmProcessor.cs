@@ -8,7 +8,7 @@ namespace Z0
     
     using Z0.Asm;
 
-    public interface IAsmProcessor<T> : IMachineService, IDataProcessor<T>
+    public interface IAsmProcessor<T> : IService, IDataProcessor<T>
     {
 
     }

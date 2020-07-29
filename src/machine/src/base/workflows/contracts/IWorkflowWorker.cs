@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IWorkflowWorker : IWorkflowActor
-    {
-        
-    }
 
-    public interface IWorkflowWorker<F> : IWorkflowWorker, IWorkflowActor<F>
+    public interface IWorkflowWorker<F> : IWorkflowActor, IWorkflowActor<F>
         where F : struct, IWorkflowWorker<F>
     {
     }

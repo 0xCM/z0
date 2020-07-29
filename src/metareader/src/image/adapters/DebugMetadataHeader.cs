@@ -9,7 +9,7 @@ namespace Z0.Image
     using System;
     using System.Collections.Immutable;
 
-    using static MdR;
+    using MS;
 
     public sealed class DebugMetadataHeader
     {

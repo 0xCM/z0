@@ -9,8 +9,6 @@ namespace Z0.Dac
     using System;
     using System.Runtime.InteropServices;
 
-    using static ClrDataModel;
-
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct COMInterfacePointerData
     {

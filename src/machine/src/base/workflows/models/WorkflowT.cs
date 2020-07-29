@@ -10,7 +10,7 @@ namespace Z0
     
     using static Konst;
     
-    public readonly struct Workflow<T> : IDisposable, IWorkflowSteps<Workflow<T>>, IDataSink
+    public readonly struct Workflow<T> : IDisposable, IDataSink
     {     
         readonly IAppContext Context;
         

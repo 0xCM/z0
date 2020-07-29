@@ -24,7 +24,7 @@ namespace Z0
     {    
         public readonly EmissionDataType DataType;
 
-        readonly IWfPartEmission Wf;
+        readonly IEmissionWorkflow Wf;
 
         readonly IPart[] Parts;
 
@@ -35,7 +35,7 @@ namespace Z0
         readonly FilePath ImageSummaryPath;
 
         [MethodImpl(Inline)]
-        public EmitDataFiles(IWfPartEmission wf, IPart[] parts)
+        public EmitDataFiles(IEmissionWorkflow wf, IPart[] parts)
         {
             Wf = wf;
             Parts = parts;
@@ -51,7 +51,7 @@ namespace Z0
         public static LocatedImage image(ProcessModule src)
         {
             var path = FilePath.Define(src.FileName);
-            var part = DataEmission.part(path);
+            var part = TableEmission.part(path);
             var entry = (MemoryAddress)src.EntryPointAddress;
             var @base = src.BaseAddress;
             var size = (uint)src.ModuleMemorySize;
@@ -66,8 +66,8 @@ namespace Z0
             var system = ZDat.SystemImages;
             var count = src.Count;
             var images = src.View;
-            var fields = DataEmission.fields<LocatedImageField>();
-            var header = DataEmission.header(fields);
+            var fields = TableEmission.fields<LocatedImageField>();
+            var header = TableEmission.header(fields);
 
             var rows = text.build();
             rows.AppendLine(header);

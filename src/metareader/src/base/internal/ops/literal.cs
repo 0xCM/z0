@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
-
+    
     partial struct ReaderInternals
     {
         internal static string literal(in ReaderState state, NamespaceDefinitionHandle handle, int seq)
@@ -58,5 +58,4 @@ namespace Z0
                 return string.Format("{0} (#{1:x}/{2:x})", value, offset, generationOffset);            
         }
     }
-
 }

@@ -7,6 +7,8 @@
 namespace Z0
 {
     using System;
+    
+    using Z0.MS;
         
     partial struct ClrDataModel
     {

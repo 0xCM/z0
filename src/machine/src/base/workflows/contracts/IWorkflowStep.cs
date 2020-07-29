@@ -8,10 +8,5 @@ namespace Z0
     {
         void Run(params string[] args);        
     }
-    
-    public interface IWorkflowStep<S> : IWorkflowStep
-        where S : struct, IWorkflowStep<S>
-    {
 
-    }
 }

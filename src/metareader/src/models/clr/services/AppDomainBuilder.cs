@@ -7,13 +7,10 @@
 namespace Z0.MS
 {
     using System;
-    using System.Collections.Immutable;
 
     using Z0.Dac;    
-
-    using static ClrDataModel;    
     
-    internal class AppDomainBuilder : IAppDomainData
+    public class AppDomainBuilder : IAppDomainData
     {
         private readonly SOSDac _sos;
 

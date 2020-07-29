@@ -9,7 +9,6 @@ namespace Z0
         void OnEvent(AppErrorEvent e) 
             => Sink.Deposit(e);
 
-
         void OnEvent(LoadedParseReport e) 
             => Sink.Deposit(e);
 

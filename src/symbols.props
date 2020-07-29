@@ -12,6 +12,10 @@
     <Imagine>$(Src)imagine/z0.imagine.csproj</Imagine>
     <Tokens>$(Src)tokens/z0.tokens.csproj</Tokens>
     <V0>$(Src)v0/z0.v0.csproj</V0>
+
+    <Win>$(Src)win/z0.win.csproj</Win>
+
+
     <Text>$(Src)text/z0.text.csproj</Text>
     <Memories>$(Src)memories/z0.memories.csproj</Memories>
     <Seed>$(Src)seed/z0.seed.csproj</Seed>    

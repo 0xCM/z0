@@ -15,7 +15,7 @@ namespace Z0
     
     partial struct EmissionWorkflow
     {
-        public readonly struct EmitResBytes : IWorkflowWorker<EmitResBytes>
+        public readonly struct EmitResBytes : IWorkflowActor<EmitResBytes>
         {            
             const string ProjectName = "bytes";
 

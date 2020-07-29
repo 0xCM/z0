@@ -10,7 +10,7 @@ namespace Z0
     
     public class CaptureHost : ICaptureHost
     {            
-        public static CaptureHost Service(IAppContext context, Arrow<ArchiveConfig> config)   
+        public static CaptureHost ceate(IAppContext context, Arrow<ArchiveConfig> config)   
             => new CaptureHost(ContextFactory.CreateAsmContext(context), config);
 
         public void Run(params string[] args)

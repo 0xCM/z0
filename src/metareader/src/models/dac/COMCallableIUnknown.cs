@@ -11,8 +11,6 @@ namespace Z0.Dac
     using System.Threading;
     using System.Collections.Generic;
 
-    using static ClrDataModel;
-
     /// <summary>
     /// A class that allows you to build a custom IUnknown based interface to pass as a COM object.
     /// This class is public to allow others to use this code and not duplicate it, but it is not
@@ -24,6 +22,7 @@ namespace Z0.Dac
         private int _refCount;
 
         private readonly Dictionary<Guid, IntPtr> _interfaces = new Dictionary<Guid, IntPtr>();
+        
         private readonly List<Delegate> _delegates = new List<Delegate>();
 
         /// <summary>

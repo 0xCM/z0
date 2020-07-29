@@ -9,122 +9,123 @@ namespace Z0
     using System;
     using System.IO;
 
-    partial struct ClrDataModel
+    using Z0.MS;
+    
+    using static ClrDataModel;
+
+    /// <summary>
+    /// Represents information about a single CLR in a process.
+    /// </summary>
+    public sealed class ClrInfo
     {
-        /// <summary>
-        /// Represents information about a single CLR in a process.
-        /// </summary>
-        public sealed class ClrInfo
+        public DataTarget DataTarget { get; }
+
+        internal ClrInfo(DataTarget dt, ClrFlavor flavor, ModuleInfo module, DacInfo dacInfo, string dacLocation)
         {
-            public DataTarget DataTarget { get; }
+            DataTarget = dt ?? throw new ArgumentNullException(nameof(dt));
+            Flavor = flavor;
+            DacInfo = dacInfo ?? throw new ArgumentNullException(nameof(dacInfo));
+            ModuleInfo = module ?? throw new ArgumentNullException(nameof(module));
+            LocalMatchingDac = dacLocation;
+        }
 
-            internal ClrInfo(DataTarget dt, ClrFlavor flavor, ModuleInfo module, DacInfo dacInfo, string dacLocation)
+        /// <summary>
+        /// Gets the version number of this runtime.
+        /// </summary>
+        public VersionInfo Version => ModuleInfo.Version;
+
+        /// <summary>
+        /// Gets the type of CLR this module represents.
+        /// </summary>
+        public ClrFlavor Flavor { get; }
+
+        /// <summary>
+        /// Gets module information about the DAC needed create a <see cref="ClrRuntime"/> instance for this runtime.
+        /// </summary>
+        public DacInfo DacInfo { get; }
+
+        /// <summary>
+        /// Gets module information about the ClrInstance.
+        /// </summary>
+        public ModuleInfo ModuleInfo { get; }
+
+        /// <summary>
+        /// Gets the location of the local DAC on your machine which matches this version of Clr, or <see langword="null"/>
+        /// if one could not be found.
+        /// </summary>
+        public string LocalMatchingDac { get; }
+
+        /// <summary>
+        /// To string.
+        /// </summary>
+        /// <returns>A version string for this CLR.</returns>
+        public override string ToString() => Version.ToString();
+
+        /// <summary>
+        /// Creates a runtime from the given DAC file on disk.
+        /// </summary>
+        /// <param name="dacFilename">A full path to the matching DAC dll for this process.</param>
+        /// <param name="ignoreMismatch">Whether or not to ignore mismatches between. </param>
+        /// <returns></returns>
+        public ClrRuntime CreateRuntime(string dacFilename, bool ignoreMismatch = false)
+        {
+            if (string.IsNullOrEmpty(dacFilename))
+                throw new ArgumentNullException(nameof(dacFilename));
+
+            if (!File.Exists(dacFilename))
+                throw new FileNotFoundException(dacFilename);
+
+            if (!ignoreMismatch)
             {
-                DataTarget = dt ?? throw new ArgumentNullException(nameof(dt));
-                Flavor = flavor;
-                DacInfo = dacInfo ?? throw new ArgumentNullException(nameof(dacInfo));
-                ModuleInfo = module ?? throw new ArgumentNullException(nameof(module));
-                LocalMatchingDac = dacLocation;
+                DataTarget.PlatformFunctions.GetFileVersion(dacFilename, out int major, out int minor, out int revision, out int patch);
+                if (major != Version.Major || minor != Version.Minor || revision != Version.Revision || patch != Version.Patch)
+                    throw new InvalidOperationException($"Mismatched dac. Dac version: {major}.{minor}.{revision}.{patch}, expected: {Version}.");
             }
 
-            /// <summary>
-            /// Gets the version number of this runtime.
-            /// </summary>
-            public VersionInfo Version => ModuleInfo.Version;
+            return ConstructRuntime(dacFilename);
+        }
 
-            /// <summary>
-            /// Gets the type of CLR this module represents.
-            /// </summary>
-            public ClrFlavor Flavor { get; }
+        public ClrRuntime CreateRuntime()
+        {
+            string? dac = LocalMatchingDac;
+            if (dac != null && !File.Exists(dac))
+                dac = null;
 
-            /// <summary>
-            /// Gets module information about the DAC needed create a <see cref="ClrRuntime"/> instance for this runtime.
-            /// </summary>
-            public DacInfo DacInfo { get; }
+            if (DacInfo.FileName != null)
+                dac ??= DataTarget.BinaryLocator.FindBinary(DacInfo.FileName, DacInfo.TimeStamp, DacInfo.FileSize, checkProperties: false);
 
-            /// <summary>
-            /// Gets module information about the ClrInstance.
-            /// </summary>
-            public ModuleInfo ModuleInfo { get; }
+            if (!File.Exists(dac))
+                throw new FileNotFoundException("Could not find matching DAC for this runtime.", DacInfo.FileName);
 
-            /// <summary>
-            /// Gets the location of the local DAC on your machine which matches this version of Clr, or <see langword="null"/>
-            /// if one could not be found.
-            /// </summary>
-            public string LocalMatchingDac { get; }
+            if (IntPtr.Size != DataTarget.DataReader.PointerSize)
+                throw new InvalidOperationException("Mismatched architecture between this process and the dac.");
 
-            /// <summary>
-            /// To string.
-            /// </summary>
-            /// <returns>A version string for this CLR.</returns>
-            public override string ToString() => Version.ToString();
+            return ConstructRuntime(dac!);
+        }
 
-            /// <summary>
-            /// Creates a runtime from the given DAC file on disk.
-            /// </summary>
-            /// <param name="dacFilename">A full path to the matching DAC dll for this process.</param>
-            /// <param name="ignoreMismatch">Whether or not to ignore mismatches between. </param>
-            /// <returns></returns>
-            public ClrRuntime CreateRuntime(string dacFilename, bool ignoreMismatch = false)
-            {
-                if (string.IsNullOrEmpty(dacFilename))
-                    throw new ArgumentNullException(nameof(dacFilename));
+        #pragma warning disable CA2000 // Dispose objects before losing scope
+        private ClrRuntime ConstructRuntime(string dac)
+        {
+            #if Enabled
 
-                if (!File.Exists(dacFilename))
-                    throw new FileNotFoundException(dacFilename);
+            if (IntPtr.Size != DataTarget.DataReader.PointerSize)
+                throw new InvalidOperationException("Mismatched architecture between this process and the dac.");
 
-                if (!ignoreMismatch)
-                {
-                    DataTarget.PlatformFunctions.GetFileVersion(dacFilename, out int major, out int minor, out int revision, out int patch);
-                    if (major != Version.Major || minor != Version.Minor || revision != Version.Revision || patch != Version.Patch)
-                        throw new InvalidOperationException($"Mismatched dac. Dac version: {major}.{minor}.{revision}.{patch}, expected: {Version}.");
-                }
+            DacLibrary dacLibrary = new DacLibrary(DataTarget, dac);
+            DacInterface.SOSDac? sos = dacLibrary.SOSDacInterface;
+            if (sos is null)
+                throw new InvalidOperationException($"Could not create a ISOSDac pointer from this dac library: {dac}");
 
-                return ConstructRuntime(dacFilename);
-            }
-
-            public ClrRuntime CreateRuntime()
-            {
-                string? dac = LocalMatchingDac;
-                if (dac != null && !File.Exists(dac))
-                    dac = null;
-
-                if (DacInfo.FileName != null)
-                    dac ??= DataTarget.BinaryLocator.FindBinary(DacInfo.FileName, DacInfo.TimeStamp, DacInfo.FileSize, checkProperties: false);
-
-                if (!File.Exists(dac))
-                    throw new FileNotFoundException("Could not find matching DAC for this runtime.", DacInfo.FileName);
-
-                if (IntPtr.Size != DataTarget.DataReader.PointerSize)
-                    throw new InvalidOperationException("Mismatched architecture between this process and the dac.");
-
-                return ConstructRuntime(dac!);
-            }
-
-            #pragma warning disable CA2000 // Dispose objects before losing scope
-            private ClrRuntime ConstructRuntime(string dac)
-            {
-                #if Enabled
-
-                if (IntPtr.Size != DataTarget.DataReader.PointerSize)
-                    throw new InvalidOperationException("Mismatched architecture between this process and the dac.");
-
-                DacLibrary dacLibrary = new DacLibrary(DataTarget, dac);
-                DacInterface.SOSDac? sos = dacLibrary.SOSDacInterface;
-                if (sos is null)
-                    throw new InvalidOperationException($"Could not create a ISOSDac pointer from this dac library: {dac}");
-
-                var factory = new RuntimeBuilder(this, dacLibrary, sos);
-                if (Flavor == ClrFlavor.Core)
-                    return factory.GetOrCreateRuntime();
-
-                if (Version.Major < 4 || (Version.Major == 4 && Version.Minor == 5 && Version.Patch < 10000))
-                    throw new NotSupportedException($"CLR version '{Version}' is not supported by ClrMD.  For Desktop CLR, only CLR 4.6 and beyond are supported.");
-
+            var factory = new RuntimeBuilder(this, dacLibrary, sos);
+            if (Flavor == ClrFlavor.Core)
                 return factory.GetOrCreateRuntime();
-                #endif
-                throw new NotImplementedException();
-            }
+
+            if (Version.Major < 4 || (Version.Major == 4 && Version.Minor == 5 && Version.Patch < 10000))
+                throw new NotSupportedException($"CLR version '{Version}' is not supported by ClrMD.  For Desktop CLR, only CLR 4.6 and beyond are supported.");
+
+            return factory.GetOrCreateRuntime();
+            #endif
+            throw new NotImplementedException();
         }
     }
 }

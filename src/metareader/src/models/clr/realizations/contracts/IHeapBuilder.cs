@@ -12,7 +12,7 @@ namespace Z0.MS
     {
         IHeapHelpers HeapHelpers { get; }
 
-        public bool IsServer { get; }
+        bool IsServer { get; }
 
         int LogicalHeapCount { get; }
 

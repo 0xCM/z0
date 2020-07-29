@@ -11,7 +11,7 @@ namespace Z0
     
     public readonly ref struct EmitCilRecords
     {
-        readonly IWfPartEmission Wf;
+        readonly IEmissionWorkflow Wf;
 
         readonly EmissionDataType DataType;
 
@@ -20,13 +20,13 @@ namespace Z0
         readonly IPart[] Parts;
 
         [MethodImpl(Inline)]
-        public EmitCilRecords(IWfPartEmission wf, IPart[] parts, FolderPath dst)
+        public EmitCilRecords(IEmissionWorkflow wf, IPart[] parts, FolderPath dst)
         {
              Wf = wf;
              Parts = parts;
              DataType = EmissionDataType.Il;
              TargetDir = dst;
-             DataType.Emitting(wf);
+                PartDataEmitters.emitting(DataType, Wf);
         }
 
         public void Run()
@@ -41,7 +41,7 @@ namespace Z0
 
         public void Dispose()
         {
-            DataType.Emitted(Wf);
+            PartDataEmitters.emitted(DataType, Wf);
         }            
     }
 }

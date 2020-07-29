@@ -44,7 +44,7 @@ namespace Z0
         public static ExtractedCode extract(in ApiMember src, Span<byte> buffer)
         {
             var address = src.Address;      
-            var reader = MemoryReader.Service;
+            var reader = MemoryReaderService.Service;
             var length = reader.Read(address, buffer);
             var extracted = sys.array(buffer.Slice(0,length));
             return new ExtractedCode(src, new LocatedCode(address, extracted));
@@ -57,7 +57,7 @@ namespace Z0
             var dst = sys.alloc<ExtractedCode>(count);
             var target = span(dst);
             var source = span(src);
-            var reader = MemoryReader.Service;
+            var reader = MemoryReaderService.Service;
             for(var i=0; i<count; i++)
                 seek(target,i) = extract(skip(source,i), sys.clear(buffer));
             return dst;

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct DecodedPart : IProcessedEvent<DecodedPart>
+    public readonly struct DecodedPart : IAppEvent<DecodedPart>
     {
         public readonly PartInstructions Instructions;
 

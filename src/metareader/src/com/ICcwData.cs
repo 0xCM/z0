@@ -4,28 +4,25 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.MS
 {
     using System;
     using System.Collections.Immutable;
 
-    partial struct ClrDataModel
+    public interface ICcwData
     {
-        public interface ICcwData
-        {
-            ulong Address { get; }
+        ulong Address { get; }
 
-            ulong IUnknown { get; }
+        ulong IUnknown { get; }
 
-            ulong Object { get; }
+        ulong Object { get; }
 
-            ulong Handle { get; }
+        ulong Handle { get; }
 
-            int RefCount { get; }
+        int RefCount { get; }
 
-            int JupiterRefCount { get; }
+        int JupiterRefCount { get; }
 
-            ImmutableArray<ComInterfaceData> GetInterfaces();
-        }
+        ImmutableArray<ComInterfaceData> GetInterfaces();
     }
 }

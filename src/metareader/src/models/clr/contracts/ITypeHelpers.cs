@@ -8,8 +8,6 @@ namespace Z0.MS
 {
     using System;
 
-    using static ClrDataModel;
-
     public interface ITypeHelpers
     {
         IDataReader DataReader { get; }

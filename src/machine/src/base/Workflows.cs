@@ -19,10 +19,6 @@ namespace Z0
 
         long Correlation;
                 
-        [MethodImpl(Inline)]
-        public static T worker<T>()
-            where T : struct, IWorkflowWorker<T>
-                => default;        
         public static MachineWorkflows machine(IAppContext context)
             => MachineWorkflows.alloc(context);
     }

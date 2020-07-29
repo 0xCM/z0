@@ -11,12 +11,10 @@ namespace Z0
 
     using Z0.MS;
 
-    using static ClrDataModel;
-
     /// <summary>
     /// An interface for reading data out of the target process.
     /// </summary>
-    public interface IDataReader : IDisposable, MsD.IMemoryReader
+    public interface IDataReader : IDisposable, IMemoryReader
     {
         /// <summary>
         /// Gets a value indicating whether this data reader is safe to use in parallel from multiple threads.

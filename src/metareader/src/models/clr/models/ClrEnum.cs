@@ -13,6 +13,8 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.InteropServices;
 
+    using Z0.MS;
+    
     partial struct ClrDataModel
     {
         public sealed class ClrEnum

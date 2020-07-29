@@ -13,7 +13,7 @@ namespace Z0
 
     public ref struct EmitPartStrings
     {
-        readonly IWfPartEmission Wf;
+        readonly IEmissionWorkflow Wf;
 
         readonly IPart Part;
         
@@ -24,7 +24,7 @@ namespace Z0
         public uint Count;
         
         [MethodImpl(Inline)]
-        public EmitPartStrings(IWfPartEmission wf, IPart part, FilePath dst)
+        public EmitPartStrings(IEmissionWorkflow wf, IPart part, FilePath dst)
         {
             Wf = wf;
             Part = part;
@@ -53,14 +53,14 @@ namespace Z0
 
         void Emit(ReadOnlySpan<StringValueRecord> src, StreamWriter writer)
         {
-            var target = PartRecords.formatter(Wf.DataTypes.Strings);
+            var target = PartRecords.formatter(PartRecordSpecs.Strings);
             for(var i=0u; i<src.Length; i++)
                 PartRecords.format(skip(src,i), target);
             writer.Write(target.Render());            
         }
         public void Run()
         {
-            var target = PartRecords.formatter(Wf.DataTypes.Strings);
+            var target = PartRecords.formatter(PartRecordSpecs.Strings);
             
             using var writer = TargetPath.Writer();
             target.EmitHeader();            
@@ -88,7 +88,7 @@ namespace Z0
 
         public void Dispose()
         {
-            DataEmission.emitted(Wf, DataKind, Part.Id, (int)Count);
+            TableEmission.emitted(Wf, DataKind, Part.Id, (int)Count);
          }
     }
 }

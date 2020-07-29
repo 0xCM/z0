@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    public ref partial struct EmissionWorkflow 
+    public ref partial struct EmissionWorkflow  
     {
         readonly IAppContext Context;
         
@@ -85,10 +85,7 @@ namespace Z0
  
         public void Dispose()
         {
-
             term.magenta("Completed emission workflow");
-
         }
-
     }
 }

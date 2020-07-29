@@ -9,7 +9,7 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static ClrDataModel;
+    using Z0.MS;
     
     public unsafe class CallableCOMWrapper : COMHelper, IDisposable
     {
