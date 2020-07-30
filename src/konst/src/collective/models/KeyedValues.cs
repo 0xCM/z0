@@ -4,19 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Konst;
     using static z;
 
+    public readonly struct KeyedValues
+    {
+        public static KeyedValues<K,V> from<K,V>(Dictionary<K,V> src)
+            => new KeyedValues<K,V>(src.Select(x => KeyedValue.define(x.Key, x.Value)).Array());        
+    }
+    
     /// <summary>
     /// Defines a T-value index together with a comanion K-index ,
     /// where each K-value i is either obtained directly from the caller or by 
     /// invoking a caller-supplied index function f:T -> K that computes a uniqe K-value for each T-value
     /// </summary>
     public readonly struct KeyedValues<K,V> : IIndex<KeyedValue<K,V>>
-        where K : unmanaged, IEquatable<K>
     {
         public readonly KeyedValue<K,V>[] Pairs;        
         
@@ -35,9 +42,15 @@ namespace Z0
             {   
                 ref readonly var value = ref skip(values,i);
                 var key = kf(value);
-
                 seek(edit,i) = kvp(key,value);
             }
+        }
+
+        [MethodImpl(Inline)]
+        public KeyedValues(KeyedValue<K,V>[] dst)
+        {
+            Pairs = dst;
+            KeyFunction = (in V key) => default(K);
         }
 
         [MethodImpl(Inline)]
@@ -106,7 +119,6 @@ namespace Z0
                 {  
                     found = candidate.Value;
                     break;
-        
                 }
             }
             return ref found;

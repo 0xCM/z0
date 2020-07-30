@@ -1966,3 +1966,125 @@
  rename src/{metareader/src/common => win/src/os}/Win32ErrorCode.cs (100%)
  rename src/{metareader/src/common => win/src}/os/WindowsFunctions.cs (97%)
  rename src/{metareader/src/common => win/src}/os/WindowsNativeMathods.cs (97%)
+[master 106ab681e] .
+ 189 files changed, 2647 insertions(+), 2607 deletions(-)
+ create mode 100644 src/asm/src/services/InstructionFilter.cs
+ rename src/asm/src/services/{AsmTriggers.cs => InstructionTests.cs} (53%)
+ rename src/{machine/src/services => capture/src/services/pipes}/AsmPipeRunner.cs (78%)
+ rename src/{machine/src/models => capture/src/services/pipes}/InstructionHandlers.cs (97%)
+ create mode 100644 src/domain/id.sh
+ rename src/{machine/src/models => domain/src/asm/common}/LocatedInstructions.cs (100%)
+ rename src/{machine/src/models => domain/src/asm/query}/CallInfo.cs (95%)
+ rename src/{machine/src/models => domain/src/asm/query}/MovHandler.cs (77%)
+ rewrite src/identity/src/traits/TIdentities.cs (64%)
+ delete mode 100644 src/konst/src/asci/ops/empty.cs
+ rename src/konst/src/calls/{ => form}/AsmOperandKind.cs (100%)
+ rename src/konst/src/calls/{ => form}/ICallInfo.cs (100%)
+ rename src/konst/src/calls/{ => form}/IOperand.cs (100%)
+ rename src/konst/src/calls/{ => form}/IOperands.cs (100%)
+ rename src/konst/src/calls/{ => models}/CallClient.cs (100%)
+ rename src/konst/src/calls/{ => models}/CallTarget.cs (100%)
+ rename src/konst/src/calls/{ => models}/Invocation.cs (92%)
+ rename src/konst/src/calls/{ => models}/Operands.cs (92%)
+ rename src/{dvec/src/apigroups/VSym.cs => konst/src/symbolic/ops/encode.cs} (59%)
+ rename src/konst/src/{symbolic => text}/ops/count.cs (50%)
+ create mode 100644 src/konst/src/text/ops/empty.cs
+ rename src/konst/src/{asci/ops/whitespace.cs => text/ops/tests.cs} (78%)
+ copy src/{v0/src/common/ops => konst/src/z/vectors/generic}/vsave.cs (71%)
+ rename src/{v0/src/common/ops => konst/src/z/vectors/generic}/vsave.span.cs (91%)
+ rename src/{v0/src/direct/ops/persist => konst/src/z/vectors}/vsave.cs (99%)
+ rename src/{vectors/src/xtend => konst/src/z/vectors/x}/StoreToRef.cs (92%)
+ rename src/{v0/src/common/xtend => konst/src/z/vectors/x}/StoreToSpan.cs (92%)
+ create mode 100644 src/machine/src/base/project/models/BuildVersions.cs
+ create mode 100644 src/machine/src/base/project/models/ProjectVersion.cs
+ rename src/{sys/src/models => part/src/args}/ArgInvariantKind.cs (100%)
+ rename src/{sys/src/models => part/src/args}/ArgPos.cs (100%)
+ rename src/{sys/src/models => part/src/args}/ArgPosIndicator.cs (100%)
+ rename src/{sys/src/models => part/src/args}/ArgValidity.cs (98%)
+ rename src/{sys/src/models => part/src/args}/ArgValidityState.cs (98%)
+ rename src/{sys/src/models => part/src/args}/ArgValidityStatus.cs (100%)
+ rename src/{sys/src/interop/strings/StringExtensions.cs => part/src/args/Args.cs} (77%)
+ create mode 100644 src/part/src/models/ArrowST.cs
+ delete mode 100644 src/sys/src/interop/Widows.cs
+ delete mode 100644 src/sys/src/interop/literals/Errors.cs
+ delete mode 100644 src/sys/src/interop/structures/BOOL.cs
+ delete mode 100644 src/sys/src/interop/structures/CreatFileExParams.cs
+ delete mode 100644 src/sys/src/interop/structures/HResult.cs
+ delete mode 100644 src/sys/src/interop/structures/LongFileTime.cs
+ delete mode 100644 src/sys/src/interop/structures/MemoryInfo.cs
+ delete mode 100644 src/sys/src/interop/structures/OBJECT_ATTRIBUTES.cs
+ delete mode 100644 src/sys/src/interop/structures/PROCESS_MEMORY_COUNTERS.cs
+ delete mode 100644 src/sys/src/interop/structures/PageOptions.cs
+ delete mode 100644 src/sys/src/interop/structures/ProcessorArchitecture.cs
+ delete mode 100644 src/sys/src/interop/structures/SHELLEXECUTEINFO.cs
+ delete mode 100644 src/sys/src/interop/structures/SYSTEM_INFO.cs
+ delete mode 100644 src/sys/src/interop/structures/UNICODE_STRING.cs
+ delete mode 100644 src/sys/src/interop/windows/Kernel32.cs
+ delete mode 100644 src/sys/src/interop/windows/PathInternal.cs
+ delete mode 100644 src/sys/src/interop/windows/SR.Data.cs
+ delete mode 100644 src/sys/src/interop/windows/SR.cs
+ delete mode 100644 src/sys/src/interop/windows/Shell32.cs
+ delete mode 100644 src/sys/src/interop/windows/Win32Marshal.cs
+ delete mode 100644 src/sys/src/interop/windows/areas/CreateFileMapping.cs
+ delete mode 100644 src/sys/src/interop/windows/areas/FileSystem.cs
+ delete mode 100644 src/sys/src/interop/windows/areas/FlushViewOfFile.cs
+ delete mode 100644 src/sys/src/interop/windows/areas/OpenFIleMapping.cs
+ delete mode 100644 src/sys/src/interop/windows/areas/SetFilePointer.cs
+ delete mode 100644 src/sys/src/interop/windows/areas/VirtualQuery.cs
+ delete mode 100644 src/sys/src/interop/windows/areas/WriteFile.cs
+ rename src/sys/src/{props => ops}/EntryAssembly.cs (100%)
+ rename src/sys/src/{internal => proxy}/EntryAssembly.cs (100%)
+ rename src/sys/src/{internal => proxy}/EnumNames.cs (100%)
+ rename src/sys/src/{internal => proxy}/EnumValues.cs (100%)
+ rename src/sys/src/{internal => proxy}/alloc.cs (100%)
+ rename src/sys/src/{internal => proxy}/array.cs (99%)
+ rename src/sys/src/{internal => proxy}/clear.cs (100%)
+ rename src/sys/src/{internal => proxy}/constant.cs (100%)
+ rename src/sys/src/{internal => proxy}/copy.cs (100%)
+ rename src/sys/src/{internal => proxy}/empty.cs (100%)
+ rename src/sys/src/{internal => proxy}/enumerator.cs (100%)
+ rename src/sys/src/{internal => proxy}/equals.cs (100%)
+ rename src/sys/src/{internal => proxy}/fill.cs (100%)
+ rename src/sys/src/{internal => proxy}/list.cs (100%)
+ rename src/sys/src/{internal => proxy}/nonempty.cs (100%)
+ rename src/sys/src/{internal => proxy}/span.cs (100%)
+ rename src/sys/src/{internal => proxy}/string.cs (100%)
+ rename src/sys/src/{internal => proxy}/throw.cs (100%)
+ rename src/sys/src/{internal => proxy}/type.cs (100%)
+ rename src/sys/src/{internal => proxy}/typecode.cs (100%)
+ rename src/sys/src/{internal => proxy}/typehandle.cs (100%)
+ rename src/sys/src/{internal => proxy}/unbox.cs (100%)
+ rename src/sys/src/{internal => proxy}/write.cs (100%)
+ rewrite src/v0/src/common/ops/vsave.cs (91%)
+ rename src/{sys/src/interop/windows/areas/GetSystemInfo.cs => win/src/os/windows/Kernel32.cs} (61%)
+ create mode 100644 src/win/src/os/windows/LongFileTime.cs
+ create mode 100644 src/win/src/os/windows/PathUtilities.cs
+ create mode 100644 src/win/src/os/windows/SR.Data.cs
+ create mode 100644 src/win/src/os/windows/SR.cs
+ rename src/{sys/src/interop => win/src/os}/windows/SafeLibraryHandle.cs (95%)
+ create mode 100644 src/win/src/os/windows/Shell32.cs
+ create mode 100644 src/win/src/os/windows/Widows.cs
+ create mode 100644 src/win/src/os/windows/WinErrorCodes.cs
+ create mode 100644 src/win/src/os/windows/WinErrors.cs
+ create mode 100644 src/win/src/os/windows/apishape/BOOL.cs
+ create mode 100644 src/win/src/os/windows/apishape/CreatFileExParams.cs
+ create mode 100644 src/win/src/os/windows/apishape/FileMapOptions.cs
+ rename src/{sys/src/interop/literals => win/src/os/windows/apishape}/FileTypes.cs (54%)
+ rename src/{sys/src/interop/literals => win/src/os/windows/apishape}/FormatConstants.cs (100%)
+ rename src/{sys/src/interop/structures => win/src/os/windows/apishape}/MemOptions.cs (55%)
+ rename src/{sys/src/interop/structures => win/src/os/windows/apishape}/NtModuleInfo.cs (56%)
+ create mode 100644 src/win/src/os/windows/apishape/OBJECT_ATTRIBUTES.cs
+ create mode 100644 src/win/src/os/windows/apishape/PROCESS_MEMORY_COUNTERS.cs
+ rename src/{sys/src/interop/structures/FileMapOptions.cs => win/src/os/windows/apishape/PageOptions.cs} (51%)
+ rename src/{sys/src/interop/windows/areas/ShellExecute.cs => win/src/os/windows/apishape/ProcessorArchitecture.cs} (53%)
+ create mode 100644 src/win/src/os/windows/apishape/SHELLEXECUTEINFO.cs
+ create mode 100644 src/win/src/os/windows/apishape/SYSTEM_INFO.cs
+ create mode 100644 src/win/src/os/windows/apishape/UNICODE_STRING.cs
+ rename src/{sys/src/interop => win/src/os}/windows/areas/CreateFile.cs (81%)
+ rename src/{sys/src/interop => win/src/os}/windows/areas/FIleModules.cs (61%)
+ create mode 100644 src/win/src/os/windows/areas/FileSystem.cs
+ rename src/{sys/src/interop => win/src/os}/windows/areas/FormatMessage.cs (91%)
+ rename src/{sys/src/interop/windows/areas/MapViewOfFile.cs => win/src/os/windows/areas/MemoryMaps.cs} (59%)
+ create mode 100644 src/win/src/os/windows/areas/PathLiterals.cs
+ rename src/{sys/src/interop => win/src/os}/windows/areas/VirtualAlloc.cs (78%)
+ delete mode 100644 test/asmd/units/t_tokens.cs

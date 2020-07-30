@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {                
+    using System;
     public interface TPartCaptureArchive : TPartFilePaths, TPartFileArchive, TPartImmArchive 
     {
         FolderPath ExtractDir 
@@ -87,6 +88,28 @@ namespace Z0
         FilePath[] HexFilePaths(params PartId[] parts)
             => PartFilePaths(CodeDir, parts);
 
+        void OnFileDeleted(FilePath src)
+        {
+
+        }
+        
+        void ClearPartFiles(PartId part, Action<FilePath> handler)
+        {
+            var archive = PartCaptureArchive.from(this);    
+            archive.Clear(part, handler);
+        }
+        
+        void ClearPartFiles(PartId part)
+        {
+            ClearPartFiles(part, OnFileDeleted);
+            
+            // z.iter(ExtractDir.Files(part, Extract), f => f.Delete());
+            // z.iter(ParsedDir.Files(part, Parsed), f => f.Delete());
+            // z.iter(AsmDir.Files(part, Asm), f => f.Delete());
+            // z.iter(CodeDir.Files(part, Hex), f => f.Delete());
+            // z.iter(UnparsedDir.Files(part, Unparsed), f => f.Delete());
+        }
+
         /// <summary>
         /// Obliterates all content in archive-owned directories, returning the obliteration subjects upon completion
         /// </summary>
@@ -107,11 +130,8 @@ namespace Z0
                 for(var i=0; i<parts.Length; i++)
                 {
                     var part = parts[i];
-                    z.iter(ExtractDir.Files(part, Extract), f => f.Delete());
-                    z.iter(ParsedDir.Files(part, Parsed), f => f.Delete());
-                    z.iter(AsmDir.Files(part, Asm), f => f.Delete());
-                    z.iter(CodeDir.Files(part, Hex), f => f.Delete());
-                    z.iter(UnparsedDir.Files(part, Unparsed), f => f.Delete());
+                    ClearPartFiles(part);
+
                 }
                 return sys.empty<FolderPath>();
             }

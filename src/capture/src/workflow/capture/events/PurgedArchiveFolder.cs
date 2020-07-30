@@ -15,9 +15,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public ClearedDirectory(FolderPath path)
-        {
-            Path = path;
-        }            
+            => Path = path;
         
         public string Description
             => $"Purged content in {Path}";

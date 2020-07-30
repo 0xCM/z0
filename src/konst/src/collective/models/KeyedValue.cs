@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct KeyedValue
     {
         [MethodImpl(Inline)]
-        public static KeyedValue<K,V> Define<K,V>(K key, V value)
+        public static KeyedValue<K,V> define<K,V>(K key, V value)
             => new KeyedValue<K,V>(key, value);
     }
 

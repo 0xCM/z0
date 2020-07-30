@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.IO;
 
     using static Konst;
@@ -35,8 +36,18 @@ namespace Z0
         /// Deletes the file if it exists
         /// </summary>
         /// <param name="src">The path to the file</param>
-        public static void Delete(this FilePath src)
-            => FileSystem.delete(src);
+        public static Option<FilePath> Delete(this FilePath src)
+        {
+            try
+            {
+                FileSystem.delete(src);
+                return src;
+            }
+            catch(Exception)
+            {
+                return z.none<FilePath>();
+            }
+        }
 
         public static FilePath CreateParentIfMissing(this FilePath src)
             => FileSystem.CreateParent(src);

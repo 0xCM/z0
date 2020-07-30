@@ -46,12 +46,14 @@ namespace Z0.Asm
 
         CapturedHost CapturedHost => CapturedHost.Empty;
 
-        HexCodeSaved HexSaved => HexCodeSaved.Empty;  
+        HexCodeSaved HexSaved => default;
 
         ExtractParseFailed ExtractParseFailed => ExtractParseFailed.Empty;
 
         ExtractsParsed ExtractsParsed => ExtractsParsed.Empty;            
         
-        ParseReportEmitted ParseReportCreated => ParseReportEmitted.Empty;                      
+        ParseReportEmitted ParseReportCreated => ParseReportEmitted.Empty;   
+
+        ClearedPartFiles ClearedPartFiles => default;                   
     }
 }

@@ -53,7 +53,7 @@ namespace Z0
             => Duplicates;
 
         IEnumerable<KeyedValue<OpIdentity,ApiMember>> KeyedValues
-            => Data.Select(x => KeyedValue.Define(x.Key, x.Value));
+            => Data.Select(x => KeyedValue.define(x.Key, x.Value));
 
         public IEnumerator<KeyedValue<OpIdentity, ApiMember>> GetEnumerator()
             => KeyedValues.GetEnumerator();

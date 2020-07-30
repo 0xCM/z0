@@ -63,6 +63,9 @@ namespace Z0.Asm
         void OnEvent(CapturingHosts e) 
             => Sink.Deposit(e);            
 
+        void OnEvent(ClearedPartFiles e)
+            => Sink.Deposit(e);
+
         void Connect()
         {
             Broker.Status.Subscribe(Broker,OnEvent);
@@ -76,6 +79,7 @@ namespace Z0.Asm
             Broker.ExtractReportCreated.Subscribe(Broker,OnEvent);
             Broker.ExtractReportSaved.Subscribe(Broker,OnEvent);
             Broker.ParseReportCreated.Subscribe(Broker, OnEvent);
+            Broker.ClearedPartFiles.Subscribe(Broker, OnEvent);
             Broker.FunctionsDecoded.Subscribe(Broker, OnEvent);
             Broker.HexSaved.Subscribe(Broker,OnEvent);
             Broker.ExtractsParsed.Subscribe(Broker,OnEvent);

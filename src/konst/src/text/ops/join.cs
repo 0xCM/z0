@@ -22,6 +22,20 @@ namespace Z0
         public static string join<T>(string sep, IEnumerable<T> values)
             => string.Join(sep, values);
 
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static string join<T>(string sep, ReadOnlySpan<T> values)
+        {
+            var dst = build();
+            var count = values.Length;
+            for(var i=0u; i<count; i++)
+            {
+                dst.Append(skip(values,i));
+                if(i != count - 1)
+                    dst.Append(sep);
+            }
+            return dst.ToString();
+        }
+
         /// <summary>
         /// Functional equivalalent of <see cref="string.Join(char, object[])"/>
         /// </summary>

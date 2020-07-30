@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static Konst;
 
@@ -22,11 +21,11 @@ namespace Z0.Asm
         internal ManageCaptureStep(ICaptureWorkflow workflow)
             => Workflow = workflow;
         
-        static TPartCaptureArchive InitTarget(Arrow<ArchiveConfig> config, params PartId[] parts) 
+        void Clear(Arrow<ArchiveConfig> config, params PartId[] parts) 
         {
-            var archive = Archives.Services.CaptureArchive(config.Dst.ArchiveRoot);
-            archive.Clear(parts);
-            return archive;
+            using var step = new ClearCaptureArchives(config, parts);
+            step.Run();
+            Context.Raise(new ClearedPartFiles(step.Removed));
         }
         
         IPartCatalog[] Catalogs(IApiSet src, params PartId[] parts)
@@ -51,14 +50,18 @@ namespace Z0.Asm
         
         public void CaptureParts(Arrow<ArchiveConfig> config, params PartId[] parts)
         {
-            var dst = InitTarget(config, parts);      
+            Clear(config, parts);  
+
+            var dst = Archives.Services.CaptureArchive(config.Dst.ArchiveRoot);    
             var catalogs = Catalogs(Context.ApiSet, parts).Array();
             CaptureParts(catalogs, dst);
         }
 
         public void Consolidated(Arrow<ArchiveConfig> config, params PartId[] parts)
         {
-            var dst = InitTarget(config, parts);      
+            var dst = Archives.Services.CaptureArchive(config.Dst.ArchiveRoot);    
+            Clear(config, parts);      
+
             var catalogs = Catalogs(Context.ApiSet, parts).Array();
             var a = catalogs.SelectMany(c => c.DataTypeHosts).Cast<IApiHost>();
             var b = catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>();
