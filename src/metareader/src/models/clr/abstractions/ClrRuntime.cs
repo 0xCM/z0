@@ -135,5 +135,4 @@ namespace Z0
         /// <param name="disposing">Whether Dispose() was called or not.</param>
         protected abstract void Dispose(bool disposing);
     }                
-
 }

@@ -11,8 +11,6 @@ namespace Z0.MS
     using System.Collections.Generic;
     using System.Collections.Immutable;
 
-    using static ClrDataModel;
-
     public interface IRuntimeHelpers : IDisposable
     {
         ITypeFactory Factory { get; }

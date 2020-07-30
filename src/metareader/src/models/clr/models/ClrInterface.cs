@@ -83,5 +83,4 @@ namespace Z0
 
         public static bool operator !=(ClrInterface left, ClrInterface right) => !(left == right);
     }
-
 }

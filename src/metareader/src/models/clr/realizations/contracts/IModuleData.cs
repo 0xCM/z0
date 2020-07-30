@@ -8,7 +8,6 @@ namespace Z0.MS
 {
     using System;
 
-
     public interface IModuleData
     {
         IModuleHelpers Helpers { get; }

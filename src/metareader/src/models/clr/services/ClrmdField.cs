@@ -15,13 +15,13 @@ namespace Z0.MS
 
     public class ClrmdField : ClrInstanceField
     {
-        private readonly IFieldHelpers _helpers;
+        readonly IFieldHelpers _helpers;
         
-        private string? _name;
+        string? _name;
         
-        private ClrType? _type;
+        ClrType? _type;
         
-        private FieldAttributes _attributes = FieldAttributes.ReservedMask;
+        FieldAttributes _attributes = FieldAttributes.ReservedMask;
 
         public override ClrElementType ElementType { get; }
 

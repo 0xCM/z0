@@ -4,14 +4,10 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.MS
 {
     using System;
     using System.Collections.Immutable;
-
-    using Z0.MS;
-
-    using static ClrDataModel;
 
     /// <summary>
     /// A wrapper for exception objects which help with common tasks for exception objects.
@@ -74,7 +70,8 @@ namespace Z0
         /// <summary>
         /// Gets the HRESULT associated with this exception (or S_OK if there isn't one).
         /// </summary>
-        public int HResult => _object.GetField<int>("_HResult");
+        public int HResult 
+            => _object.GetField<int>("_HResult");
 
         /// <summary>
         /// Gets the StackTrace for this exception.  Note that this may be empty or partial depending
@@ -85,5 +82,4 @@ namespace Z0
         public ImmutableArray<ClrStackFrame> StackTrace 
             => _helpers.GetExceptionStackTrace(Thread, _object);
     }                
-
 }

@@ -4,15 +4,11 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.MS
 {
     using System;
     using System.Runtime.InteropServices;
-
-    using Z0.MS;
     
-    using static ClrDataModel;
-
     /// <summary>
     /// Represents a CLR handle in the target process.
     /// </summary>
@@ -92,5 +88,4 @@ namespace Z0
         public override string ToString() 
             => $"{HandleKind.GetName()} @{Address:x12} -> {Object}";
     }        
- 
 }

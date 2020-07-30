@@ -13,7 +13,6 @@ namespace Z0.Dac
 
     using Z0.MS;
 
-
     public sealed unsafe class ClrStackWalk : CallableCOMWrapper
     {
         private static readonly Guid IID_IXCLRDataStackWalk = new Guid("E59D8D22-ADA7-49a2-89B5-A415AFCFC95F");

@@ -7,28 +7,14 @@
 namespace Z0.Dac
 {
     using System;
-    using Microsoft.Win32.SafeHandles;
-    using System.Collections.Immutable;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using System.Linq;
-    using System.Diagnostics;
-    using System.Buffers;
-    using System.Text;
-    using System.IO;
-    using System.Collections.Generic;
-
-    using Z0.Image;
-
-    using static ClrDataModel;
-    using static MsD;
-
     public sealed unsafe class SOSStackRefEnum : CallableCOMWrapper
     {
-        private static readonly Guid IID_ISOSStackRefEnum = new Guid("8FA642BD-9F10-4799-9AA3-512AE78C77EE");
+        static readonly Guid IID_ISOSStackRefEnum = new Guid("8FA642BD-9F10-4799-9AA3-512AE78C77EE");
 
-        private readonly Next _next;
+        readonly Next _next;
 
         public SOSStackRefEnum(DacLibrary library, IntPtr pUnk)
             : base(library?.OwningLibrary, IID_ISOSStackRefEnum, pUnk)
@@ -47,20 +33,6 @@ namespace Z0.Dac
         }
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int Next(
-            IntPtr self,
-            int count,
-            [Out][MarshalAs(UnmanagedType.LPArray)]
-            StackRefData[] stackRefs,
-            out int pNeeded);
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    internal readonly struct ISOSStackRefEnumVTable
-    {
-        private readonly IntPtr Skip;
-        private readonly IntPtr Reset;
-        private readonly IntPtr GetCount;
-        public readonly IntPtr Next;
+        public delegate int Next(IntPtr self,int count, [Out][MarshalAs(UnmanagedType.LPArray)] StackRefData[] stackRefs, out int pNeeded);
     }
 }

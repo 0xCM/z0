@@ -13,7 +13,11 @@ namespace Z0
 
     /// <summary>
     /// An interface for reading data out of the target process.
-    /// </summary>
+    /// </summary>    
+    /// <remarks>
+    /// The <see cref='IProcessDataReader'/> interface is a clone of this interface that
+    /// enumerates <see cref='ModuleDescription'> values in lieu of <see cref='ModuleInfo'/> objects
+    /// </remarks>
     public interface IDataReader : IDisposable, IMemoryReader
     {
         /// <summary>

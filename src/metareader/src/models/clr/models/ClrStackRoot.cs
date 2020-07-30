@@ -4,22 +4,24 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.MS
 {
     using System;
     using System.Text;
 
-    using Z0.MS;
-
-    using static ClrDataModel;
-
     public struct ClrStackRoot : IClrRoot
     {
         public ulong Address { get; }
+
         public ClrObject Object { get; }
+
         public ClrStackFrame StackFrame { get; }
-        public ClrRootKind RootKind => ClrRootKind.Stack;
+
+        public ClrRootKind RootKind 
+            => ClrRootKind.Stack;
+
         public bool IsInterior { get; }
+
         public bool IsPinned { get; }
 
         public ClrStackRoot(ulong address, ClrObject obj, ClrStackFrame stackFrame, bool interior, bool pinned)
@@ -43,6 +45,5 @@ namespace Z0
             builder.Append($" @{Address:x12} -> {Object}");
             return builder.ToString();
         }
-    }        
-
+    }
 }

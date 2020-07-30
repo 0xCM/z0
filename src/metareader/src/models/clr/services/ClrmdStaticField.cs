@@ -9,8 +9,6 @@ namespace Z0.MS
     using System;
     using System.Reflection;
 
-    using static ClrDataModel;    
-
     public class ClrmdStaticField : ClrStaticField
     {
         private ulong _address = ulong.MaxValue - 1;

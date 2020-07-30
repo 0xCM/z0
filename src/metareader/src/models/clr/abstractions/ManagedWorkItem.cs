@@ -6,8 +6,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.MS
 {
-    using static ClrDataModel;
-
     /// <summary>
     /// A managed threadpool object.
     /// </summary>

@@ -9,8 +9,6 @@ namespace Z0.MS
     using System;
     using System.Collections.Generic;
 
-    using static ClrDataModel;    
-
     public interface IThreadData
     {
         IThreadHelpers Helpers { get; }
@@ -35,17 +33,4 @@ namespace Z0.MS
     
         ulong StackLimit { get; }
     }    
-    
-    public interface IThreadHelpers
-    {
-        IDataReader DataReader { get; }
-    
-        ITypeFactory Factory { get; }
-    
-        IExceptionHelpers ExceptionHelpers { get; }
-
-        IEnumerable<ClrStackRoot> EnumerateStackRoots(ClrThread thread);
-    
-        IEnumerable<ClrStackFrame> EnumerateStackTrace(ClrThread thread, bool includeContext);
-    }   
 }

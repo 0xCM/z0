@@ -10,8 +10,6 @@ namespace Z0.MS
 
     using Z0.Dac;    
 
-    using static ClrDataModel;    
-
     internal class ThreadBuilder : IThreadData
     {
         private readonly SOSDac _sos;

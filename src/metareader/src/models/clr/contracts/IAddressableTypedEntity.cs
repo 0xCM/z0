@@ -8,8 +8,6 @@ namespace Z0.MS
 {
     using System;
 
-    using static ClrDataModel;
-
     /// <summary>
     /// Represents an addressable entity (class or struct) with associated type.
     /// <para>Allows locating field values by known names.</para>

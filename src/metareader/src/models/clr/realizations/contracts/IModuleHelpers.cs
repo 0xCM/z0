@@ -9,8 +9,6 @@ namespace Z0.MS
     using System;
     using System.Collections.Generic;
 
-    using static ClrDataModel;    
-
     public interface IModuleHelpers
     {
         ITypeFactory Factory { get; }

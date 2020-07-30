@@ -10,8 +10,6 @@ namespace Z0
 
     using Z0.MS;
     
-    using static ClrDataModel;
-
     /// <summary>
     /// Represents an instance of a type which inherits from <see cref="ValueType"/>.
     /// </summary>
@@ -156,5 +154,4 @@ namespace Z0
             return Type;
         }
     }
-
 }

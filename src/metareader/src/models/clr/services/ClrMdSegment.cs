@@ -12,7 +12,6 @@ namespace Z0.MS
 
     using Z0.Dac;    
 
-    using static ClrDataModel;    
 
     public class ClrmdSegment : ClrSegment
     {
@@ -75,5 +74,4 @@ namespace Z0.MS
         public override ulong FirstObject 
             => Gen2Start < End ? Gen2Start : 0;
     }    
-
 }

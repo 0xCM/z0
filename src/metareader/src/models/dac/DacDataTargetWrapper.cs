@@ -18,9 +18,7 @@ namespace Z0.Dac
     using Z0.Image;
     using Z0.MS;
 
-    using static ClrDataModel;
-
-    internal unsafe class DacDataTargetWrapper : COMCallableIUnknown
+    public unsafe class DacDataTargetWrapper : COMCallableIUnknown
     {
         public const ulong MagicCallbackConstant = 0x43;
 

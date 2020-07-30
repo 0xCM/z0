@@ -10,8 +10,6 @@ namespace Z0
     using System.Buffers;
     using System.Runtime.InteropServices;
     using System.Text;
-
-    using static MsD;
     
     partial struct ClrDataModel
     {

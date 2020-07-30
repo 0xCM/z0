@@ -14,15 +14,6 @@ namespace Z0
 
     using static ClrDataModel;
 
-    public class MemoryReadException : Exception
-    {
-        public MemoryReadException(ulong address)
-                : base(address.ToString())
-        {
-
-        }
-    }
-
     /// <summary>
     /// Represents an object in the target process.
     /// </summary>

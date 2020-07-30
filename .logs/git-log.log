@@ -1600,3 +1600,210 @@
  delete mode 100644 src/konst/src/collective/Arrays.cs
  rename src/konst/src/{collective/arrays/ops/copy.cs => text/ops/blank.cs} (58%)
  create mode 100644 src/konst/src/text/ops/denullify.cs
+[master 259669086] .
+ 326 files changed, 5356 insertions(+), 5916 deletions(-)
+ delete mode 100644 src/imagine/src/locate/IMemoryReader.cs
+ rename src/imagine/src/locate/{MemoryReader.cs => MemoryReaderService.cs} (85%)
+ rename src/konst/src/{clr => reflective/artifacts/src/clr/form}/IClrArtifact.cs (95%)
+ rename src/konst/src/{clr => reflective/artifacts/src/clr/form}/IClrAssembly.cs (94%)
+ rename src/konst/src/{clr => reflective/artifacts/src/clr/form}/IClrClass.cs (95%)
+ rename src/konst/src/{clr => reflective/artifacts/src/clr/form}/IClrDelegate.cs (95%)
+ rename src/konst/src/{clr => reflective/artifacts/src/clr/form}/IClrEnum.cs (98%)
+ rename src/konst/src/{clr => reflective/artifacts/src/clr/form}/IClrMethod.cs (100%)
+ rename src/konst/src/{clr => reflective/artifacts/src/clr/form}/IClrStruct.cs (98%)
+ rename src/konst/src/{clr => reflective/artifacts/src/clr/form}/IClrType.cs (99%)
+ rename src/machine/src/base/workflows/{DataEmission.cs => TableEmission.cs} (73%)
+ rename src/machine/src/{workflows/emission/x/Ran.cs => base/workflows/attributes/FixedTableAttribute.cs} (53%)
+ rename src/machine/src/{workflows/emission/x/Running.cs => base/workflows/attributes/TableAttribute.cs} (52%)
+ rename src/machine/src/base/workflows/{ => contracts}/IPartEmissionWorkflow.cs (100%)
+ delete mode 100644 src/machine/src/base/workflows/contracts/IWorkflowSteps.cs
+ rename src/machine/src/{contracts/IMachineService.cs => base/workflows/contracts/IWorkflowWorker.cs} (67%)
+ rename src/machine/src/base/workflows/{ops/control.cs => models/TableColumn.cs} (54%)
+ delete mode 100644 src/machine/src/base/workflows/ops/correlate.cs
+ delete mode 100644 src/machine/src/base/workflows/ops/executed.cs
+ delete mode 100644 src/machine/src/base/workflows/ops/executing.cs
+ delete mode 100644 src/machine/src/base/workflows/ops/identify.cs
+ delete mode 100644 src/machine/src/base/workflows/ops/status.cs
+ delete mode 100644 src/machine/src/base/workflows/ops/workflow.cs
+ delete mode 100644 src/machine/src/contracts/IProcessedEvent.cs
+ delete mode 100644 src/machine/src/contracts/IWfMetadataEmission.cs
+ delete mode 100644 src/machine/src/models/HostCodeResource.cs
+ delete mode 100644 src/machine/src/services/MachineEventFactory.cs
+ delete mode 100644 src/machine/src/services/MachineEvents.cs
+ delete mode 100644 src/machine/src/services/States.cs
+ rename src/machine/src/{services/emitters/accessors/ops => workflows/emission/steps}/CaptureResBytes.cs (100%)
+ rewrite src/machine/src/workflows/emission/steps/EmitFieldLiterals.cs (88%)
+ delete mode 100644 src/machine/src/workflows/emission/steps/EmitFieldRva.cs
+ rename src/machine/src/workflows/emission/steps/{EmitProjectDocs/collect.cs => EmitProjectDocs.cs} (53%)
+ delete mode 100644 src/machine/src/workflows/emission/steps/EmitProjectDocs/format.cs
+ delete mode 100644 src/machine/src/workflows/emission/steps/EmitProjectDocs/parse.cs
+ rename src/machine/src/workflows/{capabilities => emission/steps}/HexLineEmitter.cs (97%)
+ rewrite src/metareader/src/com/ComInterfaceData.cs (65%)
+ rewrite src/metareader/src/com/RuntimeCallableWrapper.cs (85%)
+ rewrite src/metareader/src/common/IMemoryReader.cs (89%)
+ delete mode 100644 src/metareader/src/common/literals/FileAccess.cs
+ delete mode 100644 src/metareader/src/common/os/MEMORY_BASIC_INFORMATION.cs
+ delete mode 100644 src/metareader/src/common/os/PSS_CAPTURE_FLAGS.cs
+ delete mode 100644 src/metareader/src/common/os/PSS_QUERY_INFORMATION_CLASS.cs
+ rewrite src/metareader/src/models/clr/abstractions/COMHelper.cs (78%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrField.cs (91%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrHandle.cs (84%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrHeap.cs (92%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrInstanceField.cs (80%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrMethod.cs (92%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrModule.cs (92%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrRuntime.cs (92%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrSegment.cs (92%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrStaticField.cs (79%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrThread.cs (93%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrType.cs (95%)
+ rewrite src/metareader/src/models/clr/contracts/IAddressableTypedEntity.cs (90%)
+ rewrite src/metareader/src/models/clr/contracts/IClrRoot.cs (81%)
+ rewrite src/metareader/src/models/clr/contracts/ITypeFactory.cs (78%)
+ delete mode 100644 src/metareader/src/models/clr/literals/ClrFlavor.cs
+ delete mode 100644 src/metareader/src/models/clr/literals/ClrStackFrameKind.cs
+ delete mode 100644 src/metareader/src/models/clr/literals/GCMode.cs
+ rewrite src/metareader/src/models/clr/models/ClrAppDomain.cs (81%)
+ rewrite src/metareader/src/models/clr/models/ClrArray.cs (89%)
+ rewrite src/metareader/src/models/clr/models/ClrDataMethod.cs (74%)
+ rewrite src/metareader/src/models/clr/models/ClrException.cs (85%)
+ rewrite src/metareader/src/models/clr/models/ClrFinalizerRoot.cs (70%)
+ rewrite src/metareader/src/models/clr/models/ClrInfo.cs (89%)
+ rewrite src/metareader/src/models/clr/models/ClrInterface.cs (85%)
+ rewrite src/metareader/src/models/clr/models/ClrObject.cs (96%)
+ rewrite src/metareader/src/models/clr/models/ClrStackRoot.cs (76%)
+ rewrite src/metareader/src/models/clr/models/ClrValueType.cs (93%)
+ rewrite src/metareader/src/models/clr/models/GCDesc.cs (81%)
+ rewrite src/metareader/src/models/clr/models/ModuleInfo.cs (79%)
+ rewrite src/metareader/src/models/clr/services/MetadataImport.cs (91%)
+ rename src/metareader/src/models/dac/{SosPrototypes.cs => ComStruct.cs} (99%)
+ rewrite src/metareader/src/models/dac/DacInfo.cs (74%)
+ delete mode 100644 src/metareader/src/models/dac/DacRequrests.cs
+ rewrite src/metareader/src/models/metadata/Handles.cs (72%)
+ delete mode 100644 src/metareader/src/models/metadata/structures/ArrayShape.cs
+ delete mode 100644 src/metareader/src/models/metadata/structures/MethodSignature.cs
+ create mode 100644 src/win/Part.cs
+ create mode 100644 src/win/add.sh
+ create mode 100644 src/win/build-log.sh
+ create mode 100644 src/win/build.sh
+ create mode 100644 src/win/clean.sh
+ create mode 100644 src/win/directory.build.props
+ create mode 100644 src/win/id.sh
+ create mode 100644 src/win/remove.sh
+ rename src/{metareader/src/models/dac/ClrDataAddress.cs => win/src/clr/AppDomainData.cs} (91%)
+ rename src/{metareader/src/models/dac => win/src/clr}/AppDomainStoreData.cs (92%)
+ rename src/{metareader/src/models/metadata => win/src/clr}/Architecture.cs (100%)
+ rename src/{metareader/src/services => win/src/clr}/ClrDataAddress.cs (100%)
+ create mode 100644 src/win/src/clr/ClrDiagnosticExceptionKind.cs
+ rename src/{metareader/src/common/literals => win/src/clr}/ClrElementType.cs (100%)
+ create mode 100644 src/win/src/clr/ClrFlavor.cs
+ create mode 100644 src/win/src/clr/ClrStackFrameKind.cs
+ create mode 100644 src/win/src/clr/GCMode.cs
+ rename src/{metareader/src/common/models => win/src/clr}/HotColdRegions.cs (100%)
+ rename src/{metareader/src/common/models => win/src/clr}/ILInfo.cs (100%)
+ rename src/{metareader/src/common/models => win/src/clr}/ILToNativeMap.cs (100%)
+ rename src/{metareader/src/common/models => win/src/clr}/IMetadataImportVTable.cs (100%)
+ rename src/{metareader/src/com => win/src/clr}/IObjectData.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/clr}/IXCLRDataMethodInstanceVTable.cs (95%)
+ rename src/{metareader/src/models/dac => win/src/clr}/IXCLRDataStackWalkVTable.cs (91%)
+ rename src/{metareader/src/models/dac => win/src/clr}/IXCLRProcessVTable.cs (98%)
+ rename src/{metareader/src/common/literals => win/src/clr}/MethodCompilationType.cs (100%)
+ rename src/{metareader/src/common/models => win/src/clr}/VersionInfo.cs (97%)
+ rename src/{metareader/src/models/dac => win/src/com}/CcwData.cs (90%)
+ create mode 100644 src/win/src/dac/DacRequrests.cs
+ rename src/{metareader/src/image/fields => win/src/dac}/DebugAttach.cs (95%)
+ rename src/{metareader/src/image/fields => win/src/dac}/DebugDirectoryEntryType.cs (96%)
+ rename src/{metareader/src/image/fields => win/src/dac}/DebugEnd.cs (88%)
+ rename src/{metareader/src/image/fields => win/src/dac}/DebugModuleName.cs (96%)
+ rename src/{metareader/src/image/fields => win/src/dac}/DeclarativeSecurityAction.cs (97%)
+ create mode 100644 src/win/src/image/ArrayShape.cs
+ rename src/{metareader/src/image/fields => win/src/image}/HeapHandleType.cs (100%)
+ rename src/{metareader => win}/src/image/PeImageOffsets.cs (61%)
+ rename src/{metareader => win}/src/image/fields/AssemblyFlags.cs (100%)
+ rename src/{metareader => win}/src/image/fields/AssemblyHashAlgorithm.cs (100%)
+ rename src/{metareader => win}/src/image/fields/COMIMAGE_FLAGS.cs (99%)
+ rename src/{metareader => win}/src/image/fields/COR20Constants.cs (100%)
+ rename src/{metareader => win}/src/image/fields/CharacteristicsType.cs (100%)
+ rename src/{metareader => win}/src/image/fields/ConstantTypeCode.cs (97%)
+ rename src/{metareader => win}/src/image/fields/CorElementType.cs (100%)
+ rename src/{metareader => win}/src/image/fields/CorFlags.cs (100%)
+ rename src/{metareader => win}/src/image/fields/CustomAttributeNamedArgumentKind.cs (100%)
+ rename src/{metareader => win}/src/image/fields/DEBUG_CLASS_QUALIFIER.cs (100%)
+ rename src/{metareader => win}/src/image/fields/DEBUG_FORMAT.cs (100%)
+ rename src/{metareader => win}/src/image/fields/DllCharacteristics.cs (100%)
+ rename src/{metareader => win}/src/image/fields/EditAndContinueOperation.cs (100%)
+ rename src/{metareader => win}/src/image/fields/FunctionPointerAttributes.cs (100%)
+ rename src/{metareader => win}/src/image/fields/HandleKind.cs (100%)
+ rename src/{metareader => win}/src/image/fields/HandleType.cs (100%)
+ rename src/{metareader => win}/src/image/fields/HeapIndex.cs (100%)
+ rename src/{metareader => win}/src/image/fields/HeapSizes.cs (96%)
+ rename src/{metareader => win}/src/image/fields/ILOpCode.cs (100%)
+ rename src/{metareader => win}/src/image/fields/IMAGE_DEBUG_TYPE.cs (100%)
+ rename src/{metareader => win}/src/image/fields/IMAGE_FILE.cs (100%)
+ rename src/{metareader => win}/src/image/fields/IMAGE_FILE_MACHINE.cs (100%)
+ rename src/{metareader => win}/src/image/fields/IMAGE_SCN.cs (100%)
+ rename src/{metareader => win}/src/image/fields/ImportDefinitionKind.cs (100%)
+ rename src/{metareader => win}/src/image/fields/LocalVariableAttributes.cs (100%)
+ rename src/{metareader => win}/src/image/fields/MEM.cs (100%)
+ rename src/{metareader => win}/src/image/fields/Machine.cs (100%)
+ rename src/{metareader => win}/src/image/fields/MagicType.cs (100%)
+ rename src/{metareader => win}/src/image/fields/ManifestResourceAttributes.cs (100%)
+ rename src/{metareader => win}/src/image/fields/MemberReferenceKind.cs (100%)
+ rename src/{metareader => win}/src/image/fields/MetadataStreamConstants.cs (100%)
+ rename src/{metareader => win}/src/image/fields/MetadataStreamKind.cs (100%)
+ rename src/{metareader => win}/src/image/fields/MethodBodyAttributes.cs (100%)
+ rename src/{metareader => win}/src/image/fields/MethodImportAttributes.cs (100%)
+ rename src/{metareader => win}/src/image/fields/MethodSemanticsAttributes.cs (100%)
+ rename src/{metareader => win}/src/image/fields/PAGE.cs (100%)
+ rename src/{metareader => win}/src/image/fields/PEStreamOptions.cs (100%)
+ rename src/{metareader => win}/src/image/fields/PrimitiveSerializationTypeCode.cs (100%)
+ rename src/{metareader => win}/src/image/fields/PrimitiveTypeCode.cs (98%)
+ rename src/{metareader => win}/src/image/fields/SectionCharacteristics.cs (100%)
+ rename src/{metareader => win}/src/image/fields/SerializationTypeCode.cs (100%)
+ rename src/{metareader => win}/src/image/fields/SignatureAttributes.cs (100%)
+ rename src/{metareader => win}/src/image/fields/SignatureCallingConvention.cs (100%)
+ rename src/{metareader => win}/src/image/fields/SignatureKind.cs (100%)
+ rename src/{metareader => win}/src/image/fields/SignatureTypeCode.cs (100%)
+ rename src/{metareader => win}/src/image/fields/SignatureTypeKind.cs (100%)
+ rename src/{metareader => win}/src/image/fields/StringHandleType.cs (98%)
+ rename src/{metareader => win}/src/image/fields/StringKind.cs (96%)
+ rename src/{metareader => win}/src/image/fields/Subsystem.cs (100%)
+ rename src/{metareader => win}/src/image/fields/SubsystemType.cs (100%)
+ rename src/{metareader => win}/src/image/fields/TableIndex.cs (100%)
+ rename src/{metareader => win}/src/image/fields/TableMask.cs (99%)
+ rename src/{metareader => win}/src/image/fields/TokenTypeIds.cs (100%)
+ rename src/{metareader => win}/src/image/structure/CV_INFO_PDB70.cs (100%)
+ rename src/{metareader => win}/src/image/structure/DEBUG_MODULE_PARAMETERS.cs (100%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_COR20_HEADER.cs (100%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_COR20_HEADER_ENTRYPOINT.cs (98%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_COR_ILMETHOD.cs (99%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_DATA_DIRECTORY.cs (100%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_DEBUG_DIRECTORY.cs (100%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_FILE_HEADER.cs (100%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_NT_HEADERS.cs (93%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_OPTIONAL_HEADER.cs (99%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_OPTIONAL_HEADER64.cs (100%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_OPTIONAL_HEADER_AGNOSTIC.cs (100%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_OPTIONAL_HEADER_DIRECTORIES.cs (100%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_OPTIONAL_HEADER_SPECIFIC.cs (100%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_RESOURCE_DATA_ENTRY.cs (99%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_RESOURCE_DIRECTORY.cs (100%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_RESOURCE_DIRECTORY_ENTRY.cs (97%)
+ rename src/{metareader => win}/src/image/structure/IMAGE_SECTION_HEADER.cs (100%)
+ rename src/{metareader => win}/src/image/structure/LOADED_IMAGE.cs (100%)
+ rename src/{metareader => win}/src/image/structure/MEMORY_BASIC_INFORMATION64.cs (100%)
+ create mode 100644 src/win/src/image/structure/MethodSignature.cs
+ rename src/{metareader => win}/src/image/structure/PdbInfo.cs (100%)
+ rename src/{metareader/src/image => win/src/image/structure}/PeImageHeader.cs (98%)
+ rename src/{metareader/src/common => win/src/os}/ACCESS_MASK.cs (100%)
+ rename src/{metareader/src/common => win/src/os}/FILETIME.cs (96%)
+ rename src/{metareader/src/common/literals => win/src/os}/FileAttribute.cs (100%)
+ rename src/{metareader/src/common/literals => win/src/os}/FileSystemFlags.cs (100%)
+ rename src/{metareader/src/common => win/src/os}/ICONDIRENTRY.cs (100%)
+ rename src/{metareader/src/common => win/src/os}/LIST_ENTRY.cs (100%)
+ create mode 100644 src/win/src/os/MEMORY_BASIC_INFORMATION.cs
+ rename src/{metareader/src/common => win/src/os}/NTSTATUS.cs (100%)
+ rename src/{metareader/src/image/fields => win/src/os}/PSS_CAPTURE_FLAGS.cs (98%)
+ create mode 100644 src/win/src/os/PSS_QUERY_INFORMATION_CLASS.cs
+ rename src/{metareader/src/common => win/src/os}/SYSTEMTIME.cs (100%)
+ create mode 100644 src/win/z0.win.csproj

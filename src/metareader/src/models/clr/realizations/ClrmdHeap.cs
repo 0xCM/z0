@@ -12,8 +12,6 @@ namespace Z0.MS
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static ClrDataModel;
-
     sealed class ClrmdHeap : ClrHeap
     {
         private const int MaxGen2ObjectSize = 85000;

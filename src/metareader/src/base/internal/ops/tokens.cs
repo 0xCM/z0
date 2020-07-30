@@ -9,21 +9,6 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    public readonly struct HandleInfo
-    {
-        public static HandleInfo Empty => new HandleInfo(0, 0);
-        
-        public HandleInfo(int token, TableIndex src)
-        {
-            Token = token;
-            Source = src;
-        }
-        
-        public readonly int Token;
-
-        public readonly TableIndex Source;
-    }
-
     partial struct ReaderInternals
     {        
         internal static TableIndex? index(Handle handle)

@@ -12,8 +12,6 @@ namespace Z0.MS
     using System.Collections.Immutable;
     using System.Linq;
 
-    using static ClrDataModel;    
-
     public class ClrmdPrimitiveType : ClrType
     {
         public ClrmdPrimitiveType(ITypeHelpers helpers, ClrModule module, ClrHeap heap, ClrElementType type)

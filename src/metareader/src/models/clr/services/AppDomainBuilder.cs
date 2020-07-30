@@ -4,11 +4,12 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.MS
+namespace Z0.Dac
 {
     using System;
 
     using Z0.Dac;    
+    using Z0.MS;
     
     public class AppDomainBuilder : IAppDomainData
     {

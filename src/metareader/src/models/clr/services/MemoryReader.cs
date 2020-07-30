@@ -11,13 +11,13 @@ namespace Z0.MS
 
     public sealed class MemoryReader : IDisposable
     {
-        private ulong _currPageStart;
+        ulong _currPageStart;
         
-        private int _currPageSize;
+        int _currPageSize;
         
-        private readonly byte[] _data;
+        readonly byte[] _data;
         
-        private readonly IMemoryReader _dataReader;
+        readonly IMemoryReader _dataReader;
 
         public MemoryReader(IMemoryReader dataReader, int cacheSize)
         {

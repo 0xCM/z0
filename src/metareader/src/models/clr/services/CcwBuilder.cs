@@ -11,13 +11,13 @@ namespace Z0.MS
 
     using Z0.Dac;    
 
-    internal class CcwBuilder : ICcwData
+    class CcwBuilder : ICcwData
     {
-        private CcwData _ccwData;
+        CcwData _ccwData;
 
-        private readonly SOSDac _sos;
+        readonly SOSDac _sos;
 
-        private readonly RuntimeBuilder _builder;
+        readonly RuntimeBuilder _builder;
 
         public CcwBuilder(SOSDac sos, RuntimeBuilder builder)
         {

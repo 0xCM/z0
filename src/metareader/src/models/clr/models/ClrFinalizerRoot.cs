@@ -4,12 +4,9 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.MS
 {
     using System;
-
-    using Z0.MS;
-    using static ClrDataModel;
 
     /// <summary>
     /// Represents a root that comes from the finalizer queue.
@@ -20,7 +17,8 @@ namespace Z0
         
         public ClrObject Object { get; }
         
-        public ClrRootKind RootKind => ClrRootKind.FinalizerQueue;
+        public ClrRootKind RootKind 
+            => ClrRootKind.FinalizerQueue;
         
         public bool IsInterior => false;
         
@@ -32,6 +30,7 @@ namespace Z0
             Object = obj;
         }
 
-        public override string ToString() => $"finalization root @{Address:x12} -> {Object}";
+        public override string ToString() 
+            => $"finalization root @{Address:x12} -> {Object}";
     }
 }

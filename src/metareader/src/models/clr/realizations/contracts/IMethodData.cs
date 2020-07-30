@@ -7,28 +7,6 @@
 namespace Z0.MS
 {
     using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    public interface IAppDomainData
-    {
-        IAppDomainHelpers Helpers { get; }
-
-        string? Name { get; }
-
-        int Id { get; }
-
-        ulong Address { get; }
-    }
-    
-    public interface IAppDomainHelpers
-    {
-        string? GetConfigFile(ClrAppDomain domain);
-
-        string? GetApplicationBase(ClrAppDomain domain);
-
-        IEnumerable<ClrModule> EnumerateModules(ClrAppDomain domain);
-    }
 
     public interface IMethodData
     {

@@ -4,17 +4,15 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dac
+namespace Z0.MS
 {
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using Z0.MS;
-
-    using static ClrDataModel;
-
+    using Z0.Dac;
+    
     /// <summary>
     /// This is an undocumented, untested, and unsupported interface.  Do not use.
     /// </summary>
@@ -45,7 +43,8 @@ namespace Z0.Dac
             _library = library;
         }
 
-        private ref readonly IXCLRDataProcessVtable VTable => ref Unsafe.AsRef<IXCLRDataProcessVtable>(_vtable);
+        private ref readonly IXCLRDataProcessVtable VTable 
+            => ref Unsafe.AsRef<IXCLRDataProcessVtable>(_vtable);
 
         public ClrDataProcess(DacLibrary library, CallableCOMWrapper toClone) : base(toClone)
         {

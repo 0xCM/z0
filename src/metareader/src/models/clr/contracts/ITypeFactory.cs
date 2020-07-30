@@ -10,8 +10,6 @@ namespace Z0
     using System.Collections.Immutable;
 
     using Z0.MS;
-
-    using static ClrDataModel;
     
     public interface ITypeFactory : IDisposable
     {

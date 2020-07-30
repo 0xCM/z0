@@ -4,16 +4,17 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.MS
+namespace Z0.Dac
 {
     using System;
 
-    using Z0.Dac;    
-
-    internal class FieldBuilder : IFieldData, IDisposable
+    using Z0.MS;
+    
+    public class FieldBuilder : IFieldData, IDisposable
     {
-        private IFieldHelpers? _helpers;
-        private FieldData _fieldData;
+        IFieldHelpers? _helpers;
+        
+        FieldData _fieldData;
 
         public IFieldHelpers Helpers => _helpers!;
 

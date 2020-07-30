@@ -11,8 +11,6 @@ namespace Z0.Dac
 
     using Z0.MS;
 
-    using static ClrDataModel;
-
     public sealed class DacLibrary : IDisposable
     {
         private bool _disposed;

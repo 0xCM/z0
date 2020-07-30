@@ -11,9 +11,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using Z0.MS;
-    
-    using static ClrDataModel;
-    
+        
     /// <summary>
     /// A representation of a type in the target process.
     /// </summary>

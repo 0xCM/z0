@@ -8,8 +8,6 @@ namespace Z0
 {
     using System;
 
-    using static ClrDataModel;
-
     /// <summary>
     /// Represents an array in the target process.
     /// </summary>

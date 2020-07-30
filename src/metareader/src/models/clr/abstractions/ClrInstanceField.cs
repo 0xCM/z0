@@ -45,5 +45,4 @@ namespace Z0
         /// <returns>The value of the field.</returns>
         public abstract ulong GetAddress(ulong objRef, bool interior);
     }       
-
 }

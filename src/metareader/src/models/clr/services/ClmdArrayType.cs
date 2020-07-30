@@ -8,6 +8,8 @@ namespace Z0.MS
 {
     using System;
 
+    using Z0.Dac;
+    
     using static ClrDataModel;
 
     public sealed class ClrmdArrayType : ClrmdType

@@ -13,8 +13,6 @@ namespace Z0.MS
     using System.Linq;
     using System.Reflection;
 
-    using static ClrDataModel;
-
     public class ClrmdType : ClrType
     {
         protected ITypeHelpers Helpers {get;}
@@ -22,21 +20,21 @@ namespace Z0.MS
         protected IDataReader DataReader 
             => Helpers.DataReader;
 
-        private string? _name;
+        string? _name;
         
-        private TypeAttributes _attributes;
+        TypeAttributes _attributes;
         
-        private ulong _loaderAllocatorHandle = ulong.MaxValue - 1;
+        ulong _loaderAllocatorHandle = ulong.MaxValue - 1;
 
-        private ImmutableArray<ClrMethod> _methods;
+        ImmutableArray<ClrMethod> _methods;
         
-        private ImmutableArray<ClrInstanceField> _fields;
+        ImmutableArray<ClrInstanceField> _fields;
         
-        private ImmutableArray<ClrStaticField> _statics;
+        ImmutableArray<ClrStaticField> _statics;
 
-        private ClrElementType _elementType;
+        ClrElementType _elementType;
         
-        private GCDesc _gcDesc;
+        GCDesc _gcDesc;
 
         public override string? Name
         {

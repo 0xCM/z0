@@ -9,8 +9,10 @@ namespace Z0.MS
     using System;
     using System.Collections.Immutable;
 
+    using Z0.Dac;
+
     /// <summary>
-    /// Represents the DAC dll.
+    /// Represents the DAC dll
     /// </summary>
     public class DacInfo : ModuleInfo
     {
@@ -42,6 +44,15 @@ namespace Z0.MS
             PlatformAgnosticFileName = agnosticName;
             TargetArchitecture = targetArch;
         }
-    }
 
+        public ModuleDescription ModuleDescription
+        {
+            get => new ModuleDescription(ImageBase, FileSize, TimeStamp, FileName, Version);
+        }
+        
+        public DacLibInfo DacDescription
+        {
+            get => new DacLibInfo(PlatformAgnosticFileName, TargetArchitecture, ModuleDescription);
+        }
+    }
 }

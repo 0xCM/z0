@@ -7,7 +7,6 @@ namespace Z0
 {
     using System;
     using System.Threading;
-    using System.Reflection;
 
     /// <summary>
     /// Generic implementation of object pooling pattern with predefined pool size limit. The main

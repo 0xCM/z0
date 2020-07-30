@@ -27,9 +27,11 @@ namespace Z0.MS
 
         public override ClrObject Object { get; }
 
-        public override ClrHandleKind HandleKind => ClrHandleKind.Dependent;
+        public override ClrHandleKind HandleKind 
+            => ClrHandleKind.Dependent;
 
-        public override uint ReferenceCount => uint.MaxValue;
+        public override uint ReferenceCount 
+            => uint.MaxValue;
 
         public override ClrObject Dependent { get; }
 
@@ -43,7 +45,7 @@ namespace Z0.MS
             Dependent = dependent;
         }
     }
-
+    
     public sealed class ClrmdHandle : ClrHandle
     {
         public override ulong Address { get; }
@@ -99,17 +101,17 @@ namespace Z0.MS
     internal sealed unsafe class RuntimeBuilder : IRuntimeHelpers, ITypeFactory, ITypeHelpers, 
         IModuleHelpers, IMethodHelpers, IClrObjectHelpers, IFieldHelpers, IAppDomainHelpers, IThreadHelpers, IExceptionHelpers, IHeapHelpers
     {
-        private bool _disposed;
+        bool _disposed;
         
-        private readonly ClrInfo _clrInfo;
+        readonly ClrInfo _clrInfo;
         
-        private readonly DacLibrary _library;
+        readonly DacLibrary _library;
         
-        private readonly ClrDataProcess _dac;
+        readonly ClrDataProcess _dac;
         
-        private readonly SOSDac _sos;
+        readonly SOSDac _sos;
         
-        private readonly CacheOptions _options;
+        readonly CacheOptions _options;
         
         private readonly SOSDac6? _sos6;
         

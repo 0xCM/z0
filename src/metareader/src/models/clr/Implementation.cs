@@ -7,10 +7,11 @@
 namespace Z0
 {
     using System.Threading.Tasks;
+    using Z0.MS;
 
     partial struct ClrDataModel
     {
-        readonly struct Implementation
+        public struct Implementation
         {
             public readonly struct SymbolServerLocator : IBinaryLocator
             {

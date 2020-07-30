@@ -5,9 +5,7 @@
 // License    :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.MS
-{
-    using System;
-    
+{    
     /// <summary>
     /// A representation of a field in the target process.
     /// </summary>

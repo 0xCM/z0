@@ -12,8 +12,6 @@ namespace Z0.MS
     using System.Linq;
     using System.Text;
 
-    using static ClrDataModel;    
-
     public class ClrmdConstructedType : ClrType
     {
         private readonly int _ranks;

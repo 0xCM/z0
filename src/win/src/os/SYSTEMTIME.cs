@@ -7,8 +7,6 @@
 namespace Z0.MS
 {
     using System;
-    using System.Diagnostics;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Specifies a date and time, using individual members for the month, day, year, weekday, hour, minute, second, and millisecond.

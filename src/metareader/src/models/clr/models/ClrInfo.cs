@@ -10,17 +10,20 @@ namespace Z0
     using System.IO;
 
     using Z0.MS;
+    using Z0.Dac;
     
-    using static ClrDataModel;
-
     /// <summary>
     /// Represents information about a single CLR in a process.
     /// </summary>
+    /// <remarks>
+    /// The <see cref='ClrDescription'/> encodes the structural content of this type
+    /// </remarks>
+    
     public sealed class ClrInfo
     {
         public DataTarget DataTarget { get; }
 
-        internal ClrInfo(DataTarget dt, ClrFlavor flavor, ModuleInfo module, DacInfo dacInfo, string dacLocation)
+        public ClrInfo(DataTarget dt, ClrFlavor flavor, ModuleInfo module, DacInfo dacInfo, string dacLocation)
         {
             DataTarget = dt ?? throw new ArgumentNullException(nameof(dt));
             Flavor = flavor;
@@ -32,7 +35,8 @@ namespace Z0
         /// <summary>
         /// Gets the version number of this runtime.
         /// </summary>
-        public VersionInfo Version => ModuleInfo.Version;
+        public VersionInfo Version 
+            => ModuleInfo.Version;
 
         /// <summary>
         /// Gets the type of CLR this module represents.
@@ -55,11 +59,17 @@ namespace Z0
         /// </summary>
         public string LocalMatchingDac { get; }
 
+        public ClrDescription Description
+        {
+            get => new ClrDescription(DataTarget, Flavor, DacInfo.ModuleDescription, DacInfo.DacDescription, LocalMatchingDac);
+        }
+
         /// <summary>
         /// To string.
         /// </summary>
         /// <returns>A version string for this CLR.</returns>
-        public override string ToString() => Version.ToString();
+        public override string ToString() 
+            => Version.ToString();
 
         /// <summary>
         /// Creates a runtime from the given DAC file on disk.

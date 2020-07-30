@@ -11,8 +11,6 @@ namespace Z0.MS
 
     using Z0.Dac;    
 
-    using static ClrDataModel;    
-
     public class ClrmdAppDomain : ClrAppDomain
     {
         private readonly IAppDomainHelpers _helpers;
@@ -68,5 +66,4 @@ namespace Z0.MS
             Modules = _helpers.EnumerateModules(this).ToImmutableArray();
         }
     }
-
 }

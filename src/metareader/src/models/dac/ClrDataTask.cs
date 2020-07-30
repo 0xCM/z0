@@ -13,7 +13,6 @@ namespace Z0.Dac
 
     using Z0.MS;
 
-
     internal unsafe class ClrDataTask : CallableCOMWrapper
     {
         private static readonly Guid IID_IXCLRDataTask = new Guid("A5B0BEEA-EC62-4618-8012-A24FFC23934C");

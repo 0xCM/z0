@@ -6,13 +6,11 @@
 namespace Z0.MS
 {
     using System;
-    using System.Collections.Immutable;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static Konst;
 
     internal static class StringUtils
     {
