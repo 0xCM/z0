@@ -73,7 +73,8 @@ namespace Z0.Asm
 
         public MemoryAddress IPRelativeMemoryAddress {get; private set;}
 
-        public bool IsEmpty => CalcEmpty();
+        public bool IsEmpty 
+            => CalcEmpty();
 
         bool CalcEmpty()
         {
@@ -91,29 +92,14 @@ namespace Z0.Asm
             return empty;
         }
 
-        static AsmQuery query => AsmQuery.Direct;
+        static AsmQuery query 
+            => AsmQuery.Direct;
 
         static Register GetMemoryBase(Instruction src, int index)
-        {
-            switch(query.OperandKind(src,index))
-            {
-                case Memory:
-                    return src.MemoryBase;
-                default:
-                    return Register.None;
-            }
-        }
+            => query.OperandKind(src,index) == Memory ? src.MemoryBase : Register.None;
 
         static Register GetMemoryIndex(Instruction src, int index)
-        {
-            switch(query.OperandKind(src,index))
-            {
-                case Memory:
-                    return src.MemoryBase;
-                default:
-                    return Register.None;
-            }
-        }
+            => query.OperandKind(src, index) == Memory ? src.MemoryIndex : Register.None;
 
         static MemorySize GetMemorySize(Instruction src, int index)
         {
@@ -134,37 +120,13 @@ namespace Z0.Asm
         }
 
         static AsmMemScale GetMemoryIndexScale(Instruction src, int index)
-        {
-            switch(query.OperandKind(src,index))
-            {
-                case Memory:
-                    return src.MemoryIndexScale;
-                default:
-                    return AsmMemScale.Empty;
-            }
-        }
+            => query.OperandKind(src,index) == Memory ? src.MemoryIndexScale : AsmMemScale.Empty;
 
         static uint GetMemoryDisplacement(Instruction src, int index)
-        {
-            switch(query.OperandKind(src,index))
-            {
-                case Memory:
-                    return src.MemoryDisplacement;
-                default:
-                    return 0;
-            }
-        }
+            => query.OperandKind(src,index) == Memory ? src.MemoryDisplacement : 0;
 
         static int GetMemoryDisplSize(Instruction src, int index)
-        {
-            switch(query.OperandKind(src,index))
-            {
-                case Memory:
-                    return src.MemoryDisplSize;
-                default:
-                    return 0;
-            }
-        }
+            => query.OperandKind(src,index) == Memory ? src.MemoryDisplSize : 0;
 
         static Register GetMemorySegment(Instruction src, int index)
         {

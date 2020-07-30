@@ -14,21 +14,22 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct SignExensionKind
     {
-        public static SignExensionKind None => default(SignExensionKind);
+        public readonly NumericWidth SourceWidth;
+
+        public readonly NumericWidth TargetWidth;        
+
+        [MethodImpl(Inline)]
+        public SignExensionKind(NumericWidth src, NumericWidth dst)
+        {
+            SourceWidth = src;
+            TargetWidth = dst;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator SignExensionKind((NumericWidth src, NumericWidth dst) x)
             => new SignExensionKind(x.src, x.dst);
         
-        [MethodImpl(Inline)]
-        public SignExensionKind(NumericWidth src, NumericWidth dst)
-        {
-            this.SourceWidth = src;
-            this.TargetWidth = dst;
-        }
-
-        public readonly NumericWidth SourceWidth;
-
-        public readonly NumericWidth TargetWidth;
+        public static SignExensionKind None 
+            => default(SignExensionKind);
     }
 }

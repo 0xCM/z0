@@ -9,7 +9,7 @@ namespace Z0.Asm
     
     using static Konst;
     
-    public readonly struct InstructionSink : IInstructionSink
+    public readonly struct InstructionSink
     {
         readonly InstructionHandler Receiver;
 

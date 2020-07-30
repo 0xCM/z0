@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
 
-
     class App : AppShell<App,IAppContext>
     {                
         public App()
@@ -15,7 +14,6 @@ namespace Z0
         {
 
         }
-
         
         public override void RunShell(params string[] args)
         {            

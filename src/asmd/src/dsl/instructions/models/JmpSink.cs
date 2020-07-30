@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
     
-    public readonly struct JmpSink : IInstructionHSink<JmpSink, Jmp>
+    public readonly struct JmpSink
     {
         public const Mnemonic Id = Mnemonic.Jmp;
 

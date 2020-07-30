@@ -12,6 +12,9 @@ namespace Z0.Asm
     [SuppressUnmanagedCodeSecurity]
     public delegate void InstructionHandler(in Instruction src);    
 
+    [SuppressUnmanagedCodeSecurity]
+    public delegate bool InstructionTest(in Instruction src);
+
     public class Instruction : IInstructionInfo
     {
         /// <summary>

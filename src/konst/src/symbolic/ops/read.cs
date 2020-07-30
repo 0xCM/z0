@@ -11,9 +11,8 @@ namespace Z0
 
     partial struct Symbolic
     {        
-                    
         [MethodImpl(Inline), Op]
-        public static ref readonly ushort read(in char src, int offset)        
+        public static ref readonly ushort read(in char src, int offset)                
             => ref z.read<ushort>(src, offset);
     }
 }

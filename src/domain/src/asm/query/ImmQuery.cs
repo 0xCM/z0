@@ -14,7 +14,8 @@ namespace Z0.Asm
 
     partial struct AsmQuery : TSemanticQuery
     {
-        public NumericWidth ImmWidth(OpKind src)
+        [Op]
+        public static  NumericWidth immwidth(OpKind src)
         {
             if(src == Immediate8 || src == Immediate8_2nd)
                 return W.W8;
@@ -28,9 +29,10 @@ namespace Z0.Asm
                 return 0;
         }
 
-        public ulong ExtractImm(Instruction src, int index) 
+        [Op]
+        public static ulong imm(Instruction src, int index) 
         {
-			switch (OperandKind(src,index)) {
+			switch (kind(src,index)) {
 			case OpKind.Immediate8:			return src.Immediate8;
 			case OpKind.Immediate8_2nd:		return src.Immediate8_2nd;
 			case OpKind.Immediate16:		return src.Immediate16;
@@ -45,31 +47,10 @@ namespace Z0.Asm
 			}
 		}
 
-        [MethodImpl(Inline), Op]
-        public bool IsSignedImm(OpKind src)
-            => src == OpKind.Immediate8to16  
-            || src == OpKind.Immediate8to32  
-            || src == OpKind.Immediate8to64  
-            || src == OpKind.Immediate32to64;
-
-        [MethodImpl(Inline), Op]
-        public bool IsDirectImm(OpKind src)
-            => src == OpKind.Immediate8
-            || src == OpKind.Immediate16
-            || src == OpKind.Immediate32
-            || src == OpKind.Immediate64;
-
-        [MethodImpl(Inline), Op]
-        public bool IsSpecialImm(OpKind src)
-            => src == OpKind.Immediate8_2nd;
-
-        [MethodImpl(Inline), Op]
-        public bool IsImm(OpKind src)
-            => IsSignedImm(src) || IsDirectImm(src) || IsSpecialImm(src);
-
-        public AsmImmInfo ImmInfo(Instruction src, int index) 
+        [Op]
+        public static AsmImmInfo imminfo(Instruction src, int index) 
         {                        
-			switch (OperandKind(src,index)) 
+			switch (kind(src,index)) 
             {
                 case OpKind.Immediate8:			
                     return AsmImmInfo.Define((byte)src.Immediate8, true); 
@@ -93,5 +74,48 @@ namespace Z0.Asm
             
             return AsmImmInfo.Empty;
 		}        
+
+        [MethodImpl(Inline), Op]
+        public static bool signedImm(OpKind src)
+            => src == OpKind.Immediate8to16  
+            || src == OpKind.Immediate8to32  
+            || src == OpKind.Immediate8to64  
+            || src == OpKind.Immediate32to64;
+
+        [MethodImpl(Inline), Op]
+        public static bool directImm(OpKind src)
+            => src == OpKind.Immediate8
+            || src == OpKind.Immediate16
+            || src == OpKind.Immediate32
+            || src == OpKind.Immediate64;
+
+        [MethodImpl(Inline), Op]
+        public static bool specialImm(OpKind src)
+            => src == OpKind.Immediate8_2nd;
+
+        [MethodImpl(Inline), Op]
+        public static bool isImm(OpKind src)
+            => signedImm(src) || directImm(src) || specialImm(src);
+
+        public NumericWidth ImmWidth(OpKind src)
+            => immwidth(src);
+        
+        public ulong ExtractImm(Instruction src, int index) 
+            => imm(src,index);
+		
+        public bool IsSignedImm(OpKind src)
+            => signedImm(src);
+
+        public bool IsDirectImm(OpKind src)
+            => directImm(src);
+            
+        public bool IsSpecialImm(OpKind src)
+            => specialImm(src);
+
+        public bool IsImm(OpKind src)
+            => isImm(src);
+
+        public AsmImmInfo ImmInfo(Instruction src, int index) 
+            => imminfo(src,index);
     }
 }

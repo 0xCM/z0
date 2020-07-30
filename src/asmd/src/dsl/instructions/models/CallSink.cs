@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
     
-    public readonly struct CallSink : IInstructionHSink<CallSink,Call>
+    public readonly struct CallSink
     {
         public const Mnemonic Id = Mnemonic.Call;
 
@@ -20,7 +20,7 @@ namespace Z0.Asm.Dsl
             => new InstructionSink(Id, src.Deposit);
 
         [MethodImpl(Inline)]
-        internal CallSink(InstructionHandler dst)
+        public CallSink(InstructionHandler dst)
             => Receiver = dst;
         
         [MethodImpl(Inline)]

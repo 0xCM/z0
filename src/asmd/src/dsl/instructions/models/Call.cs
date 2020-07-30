@@ -13,7 +13,7 @@ namespace Z0.Asm.Dsl
     /// Represents the <see cref='Mnemonic.Call'/> instruction
     /// </summary>
     [ApiHost]
-    public readonly struct Call : IInstructionModel<Call>
+    public readonly struct Call
     {
         public Mnemonic Mnemonic => Mnemonic.Call;
 

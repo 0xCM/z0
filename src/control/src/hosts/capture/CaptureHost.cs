@@ -7,7 +7,8 @@ namespace Z0
     using System;
 
     using Z0.Asm;
-    
+    using static z;
+
     public class CaptureHost : ICaptureHost
     {               
         public IAppMsgSink Sink {get;}
@@ -127,7 +128,7 @@ namespace Z0
         {
             var count = 0ul;
             for(var i = 0u; i<functions.Length; i++)
-                count += (ulong)z.skip(functions,i).InstructionCount;
+                count += (ulong)skip(functions,i).InstructionCount;
             
             Sink.CountedInstructions(host, count);                   
         }

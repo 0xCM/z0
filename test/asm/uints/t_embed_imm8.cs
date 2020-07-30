@@ -10,11 +10,8 @@ namespace Z0.Asm
     using System.Linq;
     using System.IO;
 
-
     using static Konst;
-    using static V0;
-    using static Typed;
-    using static Root;
+    using static z;
 
     using K = Kinds;
 
@@ -54,7 +51,6 @@ namespace Z0.Asm
             using var dst = AsmCaseWriter();
 
             check_blend_imm(dst);            
-
         }
 
         byte[] Immediates => new byte[]{1,2,3,4};

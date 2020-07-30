@@ -22,6 +22,10 @@ namespace Z0
         public static uint uint32<T>(T src)
             => As<T,uint>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref uint uint32<T>(ref T src)
+            => ref As<T,uint>(ref src);
+
         /// <summary>
         /// Converts a nullable parametric source to a nullable <see cref='uint'/>
         /// </summary>

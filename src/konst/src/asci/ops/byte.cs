@@ -13,6 +13,14 @@ namespace Z0
     partial struct asci
     {
         /// <summary>
+        /// Presents the input  as a byte
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static ref byte @byte(in AsciCharCode src)
+            => ref @as<AsciCharCode,byte>(src);
+
+        /// <summary>
         /// Presents the leading source cell as a byte reference
         /// </summary>
         /// <param name="src">The data source</param>

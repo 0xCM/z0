@@ -10,7 +10,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     public readonly struct AsmInstructionFlow : IAsmInstructionFlow
     {        
@@ -53,7 +53,7 @@ namespace Z0.Asm
             var dst = buffer.ToSpan();
             var src = DataSource.ToReadOnlySpan();
             
-            for(var i=0; i<SourceCount; i++)
+            for(var i=0u; i<SourceCount; i++)
             {
                 ref readonly var item = ref skip(src,i);
                 

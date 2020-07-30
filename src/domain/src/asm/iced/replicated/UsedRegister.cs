@@ -12,27 +12,28 @@ namespace Z0.Asm
         /// <summary>
         /// Register
         /// </summary>
-        public Register Register {get;}
+        public readonly Register Register;
 
         /// <summary>
         /// Register access
         /// </summary>
-        public OpAccess Access {get;}
+        public readonly OpAccess Access;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="register">Register</param>
+        /// <param name="reg">Register</param>
         /// <param name="access">Register access</param>
-        public UsedRegister(Register register, OpAccess access) 
+        public UsedRegister(Register reg, OpAccess access) 
         {
-            this.Register = register;
-            this.Access = access;
+            Register = reg;
+            Access = access;
         }
 
         /// <summary>
         /// ToString()
         /// </summary>
-        public override string ToString() => Register.ToString() + ":" + Access.ToString();
+        public override string ToString() 
+            => Register.ToString() + ":" + Access.ToString();
     }
 }

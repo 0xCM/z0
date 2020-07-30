@@ -10,13 +10,17 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using FT = IAsmFunctionTrigger;
     using IT = IInstructionTrigger;
 
     public readonly struct AsmTriggerSet : IAsmTriggerSet, INullary<AsmTriggerSet>
     {
+        readonly IT[] ITriggers;
+
+        readonly FT[] FTriggers;
+
         public static AsmTriggerSet Empty 
             => Define(array<FT>(), array<IT>());
                     
@@ -35,10 +39,6 @@ namespace Z0.Asm
             ITriggers = iTriggers;
         }
         
-        readonly IT[] ITriggers;
-
-        readonly FT[] FTriggers;
-
         public bool IsEmpty 
             => ITriggers.Length == 0 && FTriggers.Length == 0;
         
@@ -48,7 +48,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         void FireOnMatch(IT trigger, in AsmInstructionList list)
         {
-            var src = list.Data.ToReadOnlySpan();
+            var src = span(list.Data);
             for(var i=0; i<src.Length; i++)
                 trigger.FireOnMatch(skip(src,i));
         }
@@ -60,7 +60,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public void FireOnMatch(in AsmInstructionList list)
         {
-            var src = ITriggers.ToReadOnlySpan();
+            var src = span(ITriggers);
             for(var i=0; i<src.Length; i++)
                 FireOnMatch(skip(src,i), list);
         }
@@ -68,8 +68,9 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public void FireOnMatch(in AsmFunction f)
         {
-            var src = FTriggers.ToReadOnlySpan();
-            for(var i=0; i<src.Length; i++)
+            var src = span(FTriggers);
+            var count = src.Length;
+            for(var i=0; i<count; i++)
                 FireOnMatch(skip(src,i), f);                                
         }
     }

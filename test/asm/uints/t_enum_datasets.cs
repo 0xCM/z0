@@ -18,7 +18,6 @@ namespace Z0.Asm
         public t_enum_datasets()
         {
             UnitDataDir.Clear();   
-
         }
         
         public string header<F>(char delimiter = Chars.Pipe)

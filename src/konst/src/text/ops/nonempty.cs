@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline), Op]
         public static bool nonempty(string src)
-            => sys.nonempty(src);
+            => !string.IsNullOrEmpty(src);
 
         /// <summary>
         /// Test whether the source is a nonempty string

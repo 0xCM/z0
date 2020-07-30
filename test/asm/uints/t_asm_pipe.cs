@@ -9,6 +9,7 @@ namespace Z0.Asm
     using System.Linq;
     using System.Collections.Generic;
     using System.IO;
+    using Z0.Asm.Dsl;
 
     using D = Dsl;
 
@@ -19,38 +20,37 @@ namespace Z0.Asm
 
     public class t_asm_pipe : t_asm<t_asm_pipe>
     {
-        readonly StreamWriter SinkLog;
-
-        int Counter;
+ 
         
         public t_asm_pipe()
         {
-            SinkLog = CaseWriter("sink_log");
             OnDispose += HandleDispose;
         }
-        
-        void Receiver(in Instruction src)
-        {
-            SinkLog.WriteLine(text.concat(((MemoryAddress)src.IP).Format(), Space,  src.Mnemonic.ToString().PadRight(12), ++Counter));
-        }
-        
+            
         void HandleDispose()
         {
-            SinkLog.Dispose();
+ 
         }
         
-        InstructionSink CallSink()
-            => D.Call.sink(Receiver);
-
-        public void RunPipe()
-        {            
-            var parts = z.array(PartId.DVec, PartId.GVec);
-            Trace($"Running pipe for parts {parts.Format()}");
-            var runner = AsmPipeRunner.Create(AppPaths, AsmCheck.Archives, CasePath("AsmPipeLog"));
-            runner.Include(CallSink());
+        public void RunPipe(FilePath dst)
+        {   
+            var pipelog = dst.ChangeExtension(FileExtension.Define($"pipe.{dst.Ext}"));         
+            using var log = dst.Writer();
             
-            var handled = runner.RunPipe(parts);
-            Trace($"Collected data for {handled.Count} instruction classes");            
+            var counter = 0;
+
+            void CallHandler(in Instruction src)
+            {
+                var ip = (MemoryAddress)src.IP;
+                var mnemonic = src.Mnemonic.ToString().PadRight(12);
+                var row = text.concat(ip.Format(), Space,  mnemonic, ++counter);
+                log.WriteLine(row);
+            }
+
+            var parts = z.array(PartId.DVec, PartId.GVec);            
+            var runner = AsmPipeRunner.Create(pipelog);
+            runner.Include(Call.sink(CallHandler));            
+            var handled = runner.RunPipe(parts);                     
         }
 
         void check_unary_ops(IdentifiedCode[] src)
@@ -90,7 +90,6 @@ namespace Z0.Asm
 
         TxN<sbyte,byte,short,ushort,int,uint> T;
         
-
         [MethodImpl(Inline), Op]
         public static FixedTest init(ref ulong src)
         {

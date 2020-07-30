@@ -13,15 +13,17 @@ namespace Z0.Asm
     partial struct AsmQuery : TSemanticQuery
     {
         [MethodImpl(Inline), Op]
-        public bool IsCall(Instruction src)
+        public static bool isCall(Instruction src)
             => src.Mnemonic == Mnemonic.Call;
+
+        public bool IsCall(Instruction src)
+            => isCall(src);
         
         /// <summary>
         /// Determines whether the classified operand is a 16-bit, 32-bit or 64-bit near branch
         /// Assessed respectively via the NearBranch16, NearBranch32 and NearBranch64 instruction attributes
         /// </summary>
         /// <param name="src">The operand classification</param>
-        [MethodImpl(Inline), Op]
         public bool IsNearBranch(OpKind src)        
             => src == OpKind.NearBranch16
             || src == OpKind.NearBranch32
@@ -32,7 +34,6 @@ namespace Z0.Asm
         /// Assessed respectively via the FarBranch32 and FarBranch64 instruction attributes
         /// </summary>
         /// <param name="src">The operand classification</param>
-        [MethodImpl(Inline), Op]
         public bool IsFarBranch(OpKind src)        
             => src == OpKind.FarBranch16
             || src == OpKind.FarBranch32;
@@ -41,13 +42,12 @@ namespace Z0.Asm
         /// Determines whether a classified operand is associated with a branching instruction
         /// </summary>
         /// <param name="src">The operand classification</param>
-        [MethodImpl(Inline), Op]
         public bool IsBranch(OpKind src)
             => IsNearBranch(src) || IsFarBranch(src);
 
         public AsmBranchTarget BranchTarget(Instruction src, int index)
         {
-            var k = OperandKind(src, index);
+            var k = kind(src, index);
             switch(k)
             {
                 case NearBranch16:
@@ -66,6 +66,5 @@ namespace Z0.Asm
 
         public AsmBranchInfo BranchInfo(MemoryAddress @base, Instruction src, int index)
             => AsmBranchInfo.Define(@base, src, BranchTarget(src,index));        
-
     }  
 }

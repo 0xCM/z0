@@ -9,10 +9,13 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static z;
     
     partial struct z
     {   
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> vcompact(Vector256<ushort> src, W8 w)            
+            => vpackus(vlo(src), vhi(src));
+
         // ~ 16i -> X
         // ~ ------------------------------------------------------------------
 

@@ -12,10 +12,9 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Represents the <see cref='Mnemonic.Jmp'/> instruction
     /// </summary>
-    public readonly struct Jmp : IInstructionModel<Jmp>
+    public readonly struct Jmp
     {
         public Mnemonic Mnemonic => Mnemonic.Jmp;
-
 
         [MethodImpl(Inline), Op]
         public static JmpSink sink(InstructionHandler receiver)

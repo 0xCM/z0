@@ -16,7 +16,7 @@ namespace Z0.Asm
     partial struct AsmQuery : TSemanticQuery
     {
         [MethodImpl(Inline), Op]
-        public bool IsSegBase(OpKind src)
+        public static bool isSegBase(OpKind src)
             => src == OpKind.MemorySegDI
             || src == OpKind.MemorySegEDI
             || src == OpKind.MemorySegESI
@@ -24,60 +24,11 @@ namespace Z0.Asm
             || src == OpKind.MemorySegRSI
             || src == OpKind.MemorySegSI;
 
-        [MethodImpl(Inline), Op]
-        public bool IsSegEs(OpKind src)            
-            => src == OpKind.MemoryESDI
-            || src == OpKind.MemoryESEDI
-            || src == OpKind.MemoryESRDI;
-
-        [MethodImpl(Inline), Op]
-        public bool IsMem64(OpKind src)
-            => src == OpKind.Memory64;
-
-        [MethodImpl(Inline), Op]
-        public bool IsMemDirect(OpKind src)
-            => src == OpKind.Memory;         
-        
-        [MethodImpl(Inline), Op]
-        public bool IsMem(OpKind src)            
-            => IsMemDirect(src) || IsMem64(src) || IsSegEs(src) || IsSegBase(src);
-
-        [MethodImpl(Inline), Op]
-        public InstructionMemory InxsMemory(Instruction src, int index)
-            => InstructionMemory.From(src,index);
-
-        [MethodImpl(Inline), Op]
-        public bool HasInxsMemory(Instruction src, int index)
-            => InstructionMemory.Has(src,index);
-
-        [Op]
-        public AsmMemInfo MemInfo(Instruction src, int index)
-        {            
-            var k = OperandKind(src, index);        
-
-            if(IsMem(k))
-            {
-                var isDirect = IsMemDirect(k);
-                var isSegBase = IsSegBase(k);
-
-                var info = new AsmMemInfo();
-                var sz = src.MemorySize;
-                var memdirect = IsMemDirect(k) ? AsmMemDirect.From(src) : AsmMemDirect.Empty;
-                var prefix = (isDirect || isSegBase) ? src.SegmentPrefix : Register.None;
-                var segreg = (isDirect || isSegBase) ? src.MemorySegment : Register.None;
-                var mem64 = IsMem64(k) ? src.MemoryAddress64 : 0;
-                return new AsmMemInfo(segreg, prefix, memdirect, mem64, sz);
-            }
-
-            return AsmMemInfo.Empty;
-        } 
-
         /// <summary>
         /// Specifies the segmented identity of a specified memory size
         /// </summary>
         /// <param name="src">The source value</param>
-        [Op]
-        public SegmentedIdentity Identify(MemorySize src)
+        public static SegmentedIdentity identify(MemorySize src)
             => src switch {
                     MemorySize.UInt8 => NumericKind.U8,
                     MemorySize.UInt16 => NumericKind.U16,
@@ -112,5 +63,56 @@ namespace Z0.Asm
                     MemorySize.Unknown => SegmentedIdentity.Empty,
                     _ => SegmentedIdentity.from(src.ToString())
             };
+ 
+        public bool IsSegBase(OpKind src)
+            => isSegBase(src);
+
+        public bool IsSegEs(OpKind src)            
+            => src == OpKind.MemoryESDI
+            || src == OpKind.MemoryESEDI
+            || src == OpKind.MemoryESRDI;
+
+        public bool IsMem64(OpKind src)
+            => src == OpKind.Memory64;
+
+        public bool IsMemDirect(OpKind src)
+            => src == OpKind.Memory;         
+        
+        public bool IsMem(OpKind src)            
+            => IsMemDirect(src) || IsMem64(src) || IsSegEs(src) || IsSegBase(src);
+
+        public InstructionMemory InxsMemory(Instruction src, int index)
+            => InstructionMemory.From(src,index);
+
+        public bool HasInxsMemory(Instruction src, int index)
+            => InstructionMemory.Has(src,index);
+            
+        public AsmMemInfo MemInfo(Instruction src, int index)
+        {            
+            var k = OperandKind(src, index);        
+
+            if(IsMem(k))
+            {
+                var isDirect = IsMemDirect(k);
+                var isSegBase = IsSegBase(k);
+
+                var info = new AsmMemInfo();
+                var sz = src.MemorySize;
+                var memdirect = IsMemDirect(k) ? AsmMemDirect.From(src) : AsmMemDirect.Empty;
+                var prefix = (isDirect || isSegBase) ? src.SegmentPrefix : Register.None;
+                var segreg = (isDirect || isSegBase) ? src.MemorySegment : Register.None;
+                var mem64 = IsMem64(k) ? src.MemoryAddress64 : 0;
+                return new AsmMemInfo(segreg, prefix, memdirect, mem64, sz);
+            }
+
+            return AsmMemInfo.Empty;
+        } 
+ 
+        /// <summary>
+        /// Specifies the segmented identity of a specified memory size
+        /// </summary>
+        /// <param name="src">The source value</param>
+        public SegmentedIdentity Identify(MemorySize src)
+            => identify(src);
     }
 }

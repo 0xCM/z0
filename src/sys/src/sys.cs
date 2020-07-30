@@ -23,6 +23,8 @@ namespace Z0
     {
         const NumericKind Closure = Integers;
 
+        public static Type ProxyType => typeof(proxy);
+        
         const string EmptyString = "";
 
         internal const MethodImplOptions Options = MethodImplOptions.AggressiveInlining;                    

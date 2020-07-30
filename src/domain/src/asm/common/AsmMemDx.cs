@@ -15,20 +15,23 @@ namespace Z0.Asm
         /// <summary>
         /// The size of the displacement in bytes
         /// </summary>
-        public DataSize Size {get;}
+        public readonly DataSize Size;
 
         /// <summary>
         /// The displacement value
         /// </summary>
-        public ulong Value {get;}
-
-        [MethodImpl(Inline)]
-        public static AsmMemDx Create(ulong value, DataSize size)
-            => new AsmMemDx(value, size);
+        public readonly ulong Value;
         
         [MethodImpl(Inline)]
         public static AsmMemDx From(ulong value, int size)
             => new AsmMemDx(value,  Enums.undefined((DataSize)size, DataSize.None));
+
+        [MethodImpl(Inline)]
+        public AsmMemDx(ulong value, DataSize size)
+        {
+            Value = value;
+            Size = size;
+        }
 
         public bool IsEmpty 
         { 
@@ -47,21 +50,9 @@ namespace Z0.Asm
             [MethodImpl(Inline)] 
             get => Value != 0;
         }
-
+        
         public AsmMemDx Zero 
             => Empty;
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmMemDx((ulong value, int size) src)
-            => From(src.value, src.size);
-
-
-        [MethodImpl(Inline)]
-        public AsmMemDx(ulong value, DataSize size)
-        {
-            Value = value;
-            Size = size;
-        }
 
         HexFormatConfig HexSpec 
             => HexFormat.configure(zpad:false, specifier:false);
@@ -76,6 +67,11 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmMemDx((ulong value, int size) src)
+            => From(src.value, src.size);
 
         public static AsmMemDx Empty 
             => default;

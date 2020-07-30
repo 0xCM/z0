@@ -19,9 +19,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public EncodedHexArchive(FolderPath root)
-        {
-            ArchiveRoot = root;
-        }
+            => ArchiveRoot = root;
 
         void IAppEventSink.Deposit(IAppEvent e)
         {

@@ -22,6 +22,10 @@ namespace Z0
         public static ulong uint64<T>(T src)
             => As<T,ulong>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref ulong uint64<T>(ref T src)
+            => ref As<T,ulong>(ref src);
+
         /// <summary>
         /// Converts a nullable parametric source to a nullable <see cref='ulong'/>
         /// </summary>

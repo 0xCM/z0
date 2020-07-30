@@ -24,7 +24,6 @@ namespace Z0.Asm
     public interface IInstructionHSink<F,M> : IInstructionSink<M>
         where F : struct, IInstructionHSink<F,M>
         where M : unmanaged, IInstructionModel
-
     {
 
     }

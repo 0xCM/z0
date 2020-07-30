@@ -9,27 +9,6 @@ namespace Z0.Asm
     /// </summary>
     public struct UsedMemory 
     {
-        public UsedMemory(
-            string Formatted, 
-            Register Segment, 
-            Register Base, 
-            Register Index, 
-            int Scale, 
-            ulong Displacement, 
-            MemorySize MemorySize,
-            OpAccess Access
-            )
-        {
-            this.Formatted = Formatted;
-            this.Segment = Segment;
-            this.Base = Base;
-            this.Index = Index;
-            this.Scale = Scale;
-            this.Displacement = Displacement;
-            this.MemorySize = MemorySize;
-            this.Access = Access;
-        }
-
         /// <summary>
         /// Captures the result of the ToString() method at the time of replication
         /// </summary>
@@ -70,5 +49,17 @@ namespace Z0.Asm
         /// </summary>
         public readonly OpAccess Access;
 
+        public UsedMemory(string Formatted, Register Segment, Register Base, Register Index, 
+            int Scale, ulong Displacement, MemorySize MemorySize, OpAccess Access)
+        {
+            this.Formatted = Formatted;
+            this.Segment = Segment;
+            this.Base = Base;
+            this.Index = Index;
+            this.Scale = Scale;
+            this.Displacement = Displacement;
+            this.MemorySize = MemorySize;
+            this.Access = Access;
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace Z0.Asm
         {
             var description = text.build();
             var absolute = @base + (MemoryAddress)src.Offset;  
-            description.Append(text.concat(label(src.Offset), src.AsmContent.PadRight(config.InstructionPad, blank)));
+            description.Append(text.concat(label(src.Offset), src.Formatted.PadRight(config.InstructionPad, blank)));
             description.Append(comment(render(src.Spec, config)));
             description.Append(text.concat(config.FieldDelimiter,"encoded", text.bracket(src.Encoded.Length.ToString())));
             description.Append(text.embrace(src.Encoded.FormatHexBytes(blank, true, false)));
@@ -119,6 +119,7 @@ namespace Z0.Asm
         {            
             var config = cfg ?? AsmFormatSpec.Default;
             var dst = text.build();
+            
 
             if(config.EmitSectionDelimiter)
                 dst.AppendLine(config.SectionDelimiter);

@@ -10,14 +10,25 @@ namespace Z0.Asm
     using static Konst;
 
     public readonly struct AsmMemDirect : INullity
-    {
-        public static AsmMemDirect Empty => new AsmMemDirect(Register.None, AsmMemScale.Empty, AsmMemDx.Empty);
+    {        
+        public readonly Register Base;
+
+        public readonly AsmMemScale Scale;
+
+        public readonly AsmMemDx Dx;
         
-        public Register Base {get;}
+        [MethodImpl(Inline)]
+        public static AsmMemDirect From(Instruction src)
+            => new AsmMemDirect(src.MemoryBase, src.MemoryIndexScale,
+                    AsmMemDx.From(src.MemoryDisplacement, src.MemoryDisplSize));
 
-        public AsmMemScale Scale {get;}        
-
-        public AsmMemDx Dx {get;}               
+        [MethodImpl(Inline)]
+        public AsmMemDirect(Register register, AsmMemScale scale, AsmMemDx dx)
+        {
+            Base = register;
+            Dx = dx;
+            Scale = scale;
+        }       
 
         public bool IsEmpty
         {
@@ -25,17 +36,7 @@ namespace Z0.Asm
             get => Base == 0 && Scale.IsEmpty && Dx.IsEmpty;
         }
 
-        [MethodImpl(Inline)]
-        public static AsmMemDirect From(Instruction src)
-            => new AsmMemDirect(src.MemoryBase, src.MemoryIndexScale,
-                    AsmMemDx.From(src.MemoryDisplacement, src.MemoryDisplSize));
-
-        [MethodImpl(Inline)]
-        AsmMemDirect(Register register, AsmMemScale scale, AsmMemDx dx)
-        {
-            this.Base = register;
-            this.Dx = dx;
-            this.Scale = scale;
-        }       
+        public static AsmMemDirect Empty 
+            => new AsmMemDirect(Register.None, AsmMemScale.Empty, AsmMemDx.Empty);
     }
 }

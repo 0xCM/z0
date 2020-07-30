@@ -13,20 +13,16 @@ namespace Z0
     {
         public static Arrow<ArchiveConfig> configure(IAppContext context, params string[] args)
         {
-            // z0 math /outdir:"dlakdf" /indir:"xyx"
             var parsed = AppArgs.parse(args);            
-
             var inarg = parsed.Data.TryGetFirst(x => x.Name == "indir").ValueOrDefault(AppArg.Empty);
             var indir = FilePath.Define(context.GetType().Assembly.Location).FolderPath;
             if(inarg.IsNonEmpty)
                 indir = FolderPath.Define(inarg.Value);
-
             var outarg = parsed.Data.TryGetFirst(x => x.Name == "outdir").ValueOrDefault(AppArg.Empty);
             var outdir = context.AppPaths.AppCaptureRoot;
             if(outarg.IsNonEmpty)
                 outdir = FolderPath.Define(outarg.Value);
-
-            return Arrows.connect(new ArchiveConfig(indir), new ArchiveConfig(outdir));
+            return Arrows.link(new ArchiveConfig(indir), new ArchiveConfig(outdir));
         }
     }
 }

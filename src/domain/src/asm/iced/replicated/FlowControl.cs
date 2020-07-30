@@ -7,7 +7,8 @@ namespace Z0.Asm
 	/// <summary>
 	/// Flow control
 	/// </summary>
-	public enum FlowControl {
+	public enum FlowControl 
+	{
 		/// <summary>
 		/// The next instruction that will be executed is the next instruction in the instruction stream
 		/// </summary>

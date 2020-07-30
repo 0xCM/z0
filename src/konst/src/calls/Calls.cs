@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
 
@@ -30,7 +29,30 @@ namespace Z0
             => new CallTarget(id, @base);            
 
         [MethodImpl(Inline), Op]
+        public static Invocation call(string id, MemoryAddress src, ushort callsite, MemoryAddress dst, string actualId, MemoryAddress actual = default)
+            => new Invocation(client(id, src), callsite, target(dst), target(actualId, actual));        
+
+        [MethodImpl(Inline), Op]
         public static Invocation call(MemoryAddress src, ushort callsite, MemoryAddress dst, MemoryAddress actual = default)
             => new Invocation(client(src), callsite, target(dst), target(actual));
+
+        /// <summary>
+        /// Computes the call-site offset relative to the base address of the client
+        /// </summary>
+        /// <param name="src">The invocation</param>
+        [MethodImpl(Inline), Op]
+        public static MemoryAddress offset(Invocation src)
+            => src.Client.Base + src.CallSite;
+ 
+        public static string format(Invocation src)
+        {
+            var site = Calls.offset(src);
+            var target =  src.CalledTarget.Base;
+            var offset = (site - target).Location;
+            var delta = (src.ActualTaget.Base - site).Location;
+            var actual = src.ActualTaget.Id;
+            var client_field = text.concat(src.Client.Id, text.embrace(site.Format()));                
+            return $"{client_field} | {target} | {offset} | {actual} | {delta}";
+        }        
     }
 }

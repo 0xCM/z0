@@ -16,8 +16,15 @@ namespace Z0
         T Dst {get;}
     }
 
-    public interface IArrow<F,T> : IArrow<T>
-        where F : unmanaged, IArrow<F,T>
+    public interface IArrow<S,T> : IArrow
+    {
+        S Src {get;}
+
+        T Dst {get;}
+    }
+    
+    public interface IArrow<F,S,T> : IArrow<S,T>
+        where F : IArrow<F,S,T>
     {
 
     }

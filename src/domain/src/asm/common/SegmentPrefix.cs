@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     public readonly struct SegmentPrefix : INullity
     {
-        public Register Register {get;}
+        public readonly Register Register;
 
         public bool IsEmpty 
             => Register == Register.None;
@@ -36,7 +36,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        internal SegmentPrefix(Register src)
+        public SegmentPrefix(Register src)
         {
             Register = src;
         }        

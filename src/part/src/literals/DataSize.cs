@@ -113,5 +113,31 @@ namespace Z0
         /// Indicates a width of 20 bytes
         /// </summary>
         y20 = 20,         
+
+        /// <summary>
+        /// Indicates a width of 21 bytes
+        /// </summary>
+        y21 = 21,         
+
+        /// <summary>
+        /// Indicates a width of 22 bytes
+        /// </summary>
+        y22 = 22,         
+
+        /// <summary>
+        /// Indicates a width of 23 bytes
+        /// </summary>
+        y23 = 23,         
+
+        /// <summary>
+        /// Indicates a width of 24 bytes
+        /// </summary>
+        y24 = 24,         
+
+        /// <summary>
+        /// Indicates a width of 24 bytes
+        /// </summary>
+        y25 = 25,         
+
     }
 }

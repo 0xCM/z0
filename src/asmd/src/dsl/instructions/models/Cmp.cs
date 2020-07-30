@@ -13,7 +13,7 @@ namespace Z0.Asm.Dsl
     /// Represents the <see cref='Mnemonic.Cmp'/> instruction
     /// </summary>
     [ApiHost]
-    public readonly struct Cmp : IInstructionModel<Cmp>
+    public readonly struct Cmp
     {
         public Mnemonic Mnemonic => Mnemonic.Cmp;        
         

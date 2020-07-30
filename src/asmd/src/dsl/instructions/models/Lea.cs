@@ -12,7 +12,7 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Represents the <see cref='Mnemonic.Lea'/> instruction
     /// </summary>
-    public readonly struct Lea : IInstructionModel<Lea>
+    public readonly struct Lea
     {
         public Mnemonic Mnemonic => Mnemonic.Lea;
     }

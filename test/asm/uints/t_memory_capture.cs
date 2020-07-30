@@ -15,7 +15,7 @@ namespace Z0.Asm
         {
             var patterns = EncodingPatterns.Default;
             if(patterns.TryPartialMatch(EncodingPatternKind.CALL32_INTR, AsChar_Span8u_Input, out var selected))
-                Claim.eq(AsChar_Span8u_Output,selected);
+                Claim.eq(AsChar_Span8u_Output, selected);
             else
                 Claim.Fail();
         }
@@ -23,8 +23,7 @@ namespace Z0.Asm
 
         public void check_decoder()
         {
-            DecodeHostBits(Context.Api.Hosts.Map(h => h.Uri));
-                       
+            DecodeHostBits(Context.Api.Hosts.Map(h => h.Uri));                       
         }
 
         public static ReadOnlySpan<byte> AsChar_Span8u_Input 

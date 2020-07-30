@@ -37,6 +37,5 @@ namespace Z0.Asm
         string RenderAspects<T>(object src)
             where T : class
                 => Service.RenderAspects<T>(src);
-
     }
 }

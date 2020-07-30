@@ -1,0 +1,23 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{        
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    /// <summary>
+    /// Defines an operand index
+    /// </summary>
+    public readonly struct Operands : IOperands
+    {
+        public IOperand[] Args {get;}
+
+        [MethodImpl(Inline)]
+        public Operands(params IOperand[] args)
+            => Args = args;
+    }
+}

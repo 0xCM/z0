@@ -32,14 +32,6 @@ namespace Z0.Asm
                 hexout.Write(captured.HostedBits);
                 asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
             }    
-        }
-                
-        // public void capture_known_resources()
-        // {
-        //     var svc = new AccessorCapture(Context);
-        //     var accessors = span(svc.CaptureKnown(CasePath(FileExtensions.Asm)));
-        //     svc.SaveCatalog(accessors,CasePath(FileExtensions.Csv));
-        // }
-
+        }                
     }
 }

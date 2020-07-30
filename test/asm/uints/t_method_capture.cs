@@ -13,7 +13,6 @@ namespace Z0.Asm
     public sealed class t_method_capture : t_asm<t_method_capture>
     {
         public override bool Enabled => true;
-
     
         public void parse_address_segment()
         {
@@ -59,8 +58,7 @@ namespace Z0.Asm
         }
         
         public void capture_direct()
-        {
-            
+        {            
             using var dst = CaseWriter(FileExtensions.Asm);
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
                 AsmCheck.Capture(m.Identify(), m).OnSome(capture => AsmCheck.WriteAsm(capture, dst));                
@@ -92,10 +90,7 @@ namespace Z0.Asm
             var buffer = sys.alloc<byte>(Pow2.T14);
 
             var capture = CaptureAlt.capture(identified, buffer);
-            AsmCheck.WriteAsm(capture, dst);
-
-            
-            
+            AsmCheck.WriteAsm(capture, dst);                
         }
 
         public void capture_delegates()

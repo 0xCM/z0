@@ -1807,3 +1807,162 @@
  create mode 100644 src/win/src/os/PSS_QUERY_INFORMATION_CLASS.cs
  rename src/{metareader/src/common => win/src/os}/SYSTEMTIME.cs (100%)
  create mode 100644 src/win/z0.win.csproj
+[master 1e26e8508] .
+ 216 files changed, 4932 insertions(+), 1979 deletions(-)
+ delete mode 100644 src/metareader/src/common/os/NativeMethods.cs
+ delete mode 100644 src/metareader/src/common/os/SafeWin32Handle.cs
+ rename src/metareader/src/models/clr/{models => abstractions}/ClrAppDomain.cs (99%)
+ rewrite src/metareader/src/models/clr/abstractions/ClrStackFrame.cs (81%)
+ delete mode 100644 src/metareader/src/models/clr/literals/StringCache.cs
+ create mode 100644 src/metareader/src/models/clr/literals/ThreadState.cs
+ create mode 100644 src/metareader/src/models/clr/literals/TlsThreadType.cs
+ delete mode 100644 src/metareader/src/models/clr/models/CacheOptions.cs
+ rewrite src/metareader/src/models/clr/models/ClrEnum.cs (81%)
+ rename src/metareader/src/{common/os/ZWin.cs => models/clr/models/MemoryReadException.cs} (66%)
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IAppDomainData.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IAppDomainHelpers.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/contracts/IThreadHelpers.cs
+ create mode 100644 src/metareader/src/models/clr/realizations/models/FieldModel.cs
+ delete mode 100644 src/metareader/src/models/clr/services/ClrInfoProvider.cs
+ rename src/metareader/src/models/{clr/models => dac}/ClrDataMethod.cs (100%)
+ rewrite src/metareader/src/models/dac/ClrDataModule.cs (71%)
+ create mode 100644 src/metareader/src/models/dac/ClrInfoProvider.cs
+ rewrite src/metareader/src/models/dac/DataTarget.cs (91%)
+ rename src/metareader/src/models/dac/{Dac.cs => SOSDac.cs} (99%)
+ delete mode 100644 src/metareader/src/models/metadata/readers/descriptions/FieldPtrTableInfo.cs
+ delete mode 100644 src/metareader/src/models/metadata/readers/descriptions/FieldRvaTable.cs
+ delete mode 100644 src/metareader/src/models/metadata/readers/descriptions/MethodTableInfo.cs
+ delete mode 100644 src/metareader/src/models/metadata/readers/descriptions/ModuleTableInfo.cs
+ rewrite src/metareader/src/services/LiveDataReader.cs (88%)
+ rename src/{metareader/src/common => win/src/clr}/ClrModelQueries.cs (100%)
+ rename src/{metareader/src/common => win/src/clr}/ClrSigParser.cs (99%)
+ rename src/{metareader/src/models/clr/models => win/src/clr}/GCDesc.cs (98%)
+ rename src/{metareader/src/image => win/src/clr/contracts}/IBinaryLocator.cs (99%)
+ rename src/{metareader/src/common => win/src/clr/contracts}/IMemoryReader.cs (99%)
+ create mode 100644 src/win/src/clr/contracts/IProcessDataReader.cs
+ rename src/win/src/clr/{ => models}/AppDomainData.cs (100%)
+ rename src/win/src/clr/{ => models}/AppDomainStoreData.cs (100%)
+ rename src/win/src/clr/{ => models}/Architecture.cs (100%)
+ rename src/win/src/clr/{ => models}/ClrDataAddress.cs (100%)
+ create mode 100644 src/win/src/clr/models/ClrDescription.cs
+ rename src/win/src/clr/{ => models}/ClrDiagnosticExceptionKind.cs (100%)
+ rename src/win/src/clr/{ => models}/ClrElementType.cs (100%)
+ rename src/win/src/clr/{ => models}/ClrFlavor.cs (100%)
+ rename src/{metareader/src/common => win/src/clr}/models/ClrGenericParameter.cs (96%)
+ rename src/{metareader/src/common/literals => win/src/clr/models}/ClrHandleKind.cs (100%)
+ rename src/{metareader/src/common/literals => win/src/clr/models}/ClrRootKind.cs (100%)
+ rename src/win/src/clr/{ => models}/ClrStackFrameKind.cs (100%)
+ rename src/{metareader/src/common => win/src/clr}/models/CodeHeaderData.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/clr/models}/ExtendedModuleData.cs (93%)
+ rename src/{metareader/src/models/dac => win/src/clr/models}/FieldData.cs (88%)
+ rename src/win/src/clr/{ => models}/GCMode.cs (100%)
+ create mode 100644 src/win/src/clr/models/HandleInfo.cs
+ rename src/win/src/clr/{ => models}/HotColdRegions.cs (100%)
+ rename src/win/src/clr/{ => models}/ILInfo.cs (100%)
+ rename src/win/src/clr/{ => models}/ILToNativeMap.cs (100%)
+ rename src/win/src/clr/{ => models}/IMetadataImportVTable.cs (100%)
+ rename src/win/src/clr/{ => models}/IObjectData.cs (100%)
+ rename src/win/src/clr/{ => models}/IXCLRDataMethodInstanceVTable.cs (100%)
+ rename src/win/src/clr/{ => models}/IXCLRDataStackWalkVTable.cs (100%)
+ rename src/win/src/clr/{ => models}/IXCLRProcessVTable.cs (100%)
+ rename src/{metareader/src/common => win/src/clr}/models/MemoryRegionInfo.cs (100%)
+ rename src/win/src/clr/{ => models}/MethodCompilationType.cs (100%)
+ rename src/{metareader/src/common => win/src/clr}/models/MethodDescData.cs (100%)
+ rename src/{metareader/src/common => win/src/clr}/models/RejitData.cs (74%)
+ rename src/win/src/clr/{ => models}/VersionInfo.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/com}/COMCallableIUnknown.cs (77%)
+ rename src/{metareader/src/models/clr/abstractions => win/src/com}/COMHelper.cs (65%)
+ rename src/{metareader => win}/src/com/CallableCOMWrapper.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/com}/ComStruct.cs (98%)
+ rename src/{metareader/src/common => win/src/com}/HResult.cs (100%)
+ create mode 100644 src/win/src/com/ICOMCallableIUnknown.cs
+ create mode 100644 src/win/src/com/IRefCountedFreeLibrary.cs
+ rename src/{metareader => win}/src/com/IUnknownVTable.cs (96%)
+ rename src/{metareader => win}/src/com/RefCountedFreeLibrary.cs (85%)
+ rename src/{metareader/src/models/dac => win/src/com}/VTableBuilder.cs (93%)
+ create mode 100644 src/win/src/dac/DacDataTargetWrapper.cs
+ create mode 100644 src/win/src/dac/DacLibInfo.cs
+ rename src/{metareader/src/models => win/src}/dac/DomainLocalModuleData.cs (95%)
+ create mode 100644 src/win/src/dac/ModuleDescription.cs
+ create mode 100644 src/win/src/dac/ProcessDataTargets.cs
+ create mode 100644 src/win/src/dac/ZDac.cs
+ create mode 100644 src/win/src/dac/ZDacLib.cs
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/AssemblyData.cs (91%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/COMInterfacePointerData.cs (99%)
+ rename src/win/src/{com => dac/apidata}/CcwData.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/CommonMethodTables.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/GCInfo.cs (95%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/GenerationData.cs (95%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/HandleData.cs (96%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/HeapDetails.cs (98%)
+ create mode 100644 src/win/src/dac/apidata/IClrDataModuleVTable.cs
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/ISOSDacVTable.cs (99%)
+ create mode 100644 src/win/src/dac/apidata/ISOSHandleEnumVTable.cs
+ create mode 100644 src/win/src/dac/apidata/ISOSStackRefEnumVTable.cs
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/JitCodeHeapInfo.cs (96%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/JitManagerInfo.cs (100%)
+ create mode 100644 src/win/src/dac/apidata/MethodTableCollectibleData.cs
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/MethodTableData.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/ModuleData.cs (97%)
+ create mode 100644 src/win/src/dac/apidata/Platform.cs
+ rename src/{metareader/src/com => win/src/dac/apidata}/RcwData.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/SegmentData.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/StackRefData.cs (96%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/SyncBlockData.cs (96%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/ThreadData.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/ThreadLocalModuleData.cs (96%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/ThreadPoolData.cs (86%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/ThreadStoreData.cs (99%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/V45ObjectData.cs (100%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/V4FieldInfo.cs (89%)
+ rename src/{metareader/src/models/dac => win/src/dac/apidata}/WorkRequestData.cs (77%)
+ rename src/{metareader/src/models/dac => win/src/dac/contracts}/ISegmentBuilder.cs (99%)
+ rename src/{metareader/src/models/metadata/readers/descriptions/FieldRvaRecord.cs => win/src/dac/literals/CodeHeapType.cs} (69%)
+ rename src/win/src/dac/{ => literals}/DacRequrests.cs (99%)
+ rename src/win/src/dac/{ => literals}/DebugAttach.cs (95%)
+ rename src/win/src/dac/{ => literals}/DebugDirectoryEntryType.cs (96%)
+ rename src/win/src/dac/{ => literals}/DebugEnd.cs (96%)
+ rename src/win/src/dac/{ => literals}/DebugModuleName.cs (88%)
+ rename src/win/src/dac/{ => literals}/DeclarativeSecurityAction.cs (97%)
+ create mode 100644 src/win/src/dac/literals/StringCache.cs
+ rename src/{metareader/src/models/clr/realizations => win/src/dac}/models/AllocationContext.cs (86%)
+ rename src/{metareader/src/models/clr/realizations => win/src/dac}/models/FinalizerQueueSegment.cs (83%)
+ rename src/{metareader/src/models/clr/realizations => win/src/dac}/models/HeapWalkStep.cs (100%)
+ create mode 100644 src/win/src/dac/replicated/ClrDataMethod.cs
+ create mode 100644 src/win/src/dac/replicated/ClrDataProcess.cs
+ create mode 100644 src/win/src/dac/replicated/MetadataImport.cs
+ create mode 100644 src/win/src/dac/services/CacheOptions.cs
+ create mode 100644 src/win/src/dac/services/ClrInfoOps.cs
+ create mode 100644 src/win/src/dac/services/DacTargetDelegates.cs
+ create mode 100644 src/win/src/dac/services/ProcessDataTarget.cs
+ rename src/{metareader/src/image/ops => win/src/image}/ImageHlp.cs (83%)
+ create mode 100644 src/win/src/image/Images.cs
+ create mode 100644 src/win/src/image/adapters/ArrayShape.cs
+ rename src/{metareader => win}/src/image/adapters/CorHeader.cs (98%)
+ rename src/win/src/image/{ArrayShape.cs => adapters/CustomAttributeNamedArgument.cs} (62%)
+ rename src/{metareader => win}/src/image/adapters/DebugMetadataHeader.cs (100%)
+ rename src/{metareader => win}/src/image/adapters/DllVersion.cs (100%)
+ create mode 100644 src/win/src/image/adapters/FieldPtrTableInfo.cs
+ create mode 100644 src/win/src/image/adapters/FieldRvaTable.cs
+ rename src/{metareader/src/models/metadata => win/src/image/adapters}/Handles.cs (79%)
+ rename src/win/src/image/{ => adapters}/HeapHandleType.cs (100%)
+ rename src/{metareader => win}/src/image/adapters/ImageFIleHeader.cs (95%)
+ rename src/{metareader => win}/src/image/adapters/ImageOptionalHeader.cs (86%)
+ create mode 100644 src/win/src/image/adapters/MethodTableInfo.cs
+ create mode 100644 src/win/src/image/adapters/ModuleTableInfo.cs
+ rename src/{metareader/src/image/adapters/PEImageReader.cs => win/src/image/adapters/PEImage.cs} (95%)
+ rename src/{metareader => win}/src/image/adapters/PeFileVerion.cs (91%)
+ rename src/{metareader => win}/src/image/adapters/ResourceEntry.cs (97%)
+ rename src/{metareader => win}/src/image/adapters/SectionHeader.cs (96%)
+ create mode 100644 src/win/src/image/fields/PeLiterals.cs
+ rename src/win/src/image/{ => services}/PeImageOffsets.cs (76%)
+ rename src/{metareader/src/image => win/src/image/services}/PeImageReader.cs (94%)
+ create mode 100644 src/win/src/image/services/PeReaderEvents.cs
+ rename src/{metareader/src/image => win/src/image/services}/SourceStream.cs (100%)
+ rename src/{metareader/src/image => win/src/image/structure}/PeImage.cs (97%)
+ create mode 100644 src/win/src/os/NativeMethods.cs
+ create mode 100644 src/win/src/os/SafeWin32Handle.cs
+ rename src/{metareader/src/common => win/src}/os/ThreadAccess.cs (67%)
+ rename src/{metareader/src/common => win/src/os}/Win32ErrorCode.cs (100%)
+ rename src/{metareader/src/common => win/src}/os/WindowsFunctions.cs (97%)
+ rename src/{metareader/src/common => win/src}/os/WindowsNativeMathods.cs (97%)

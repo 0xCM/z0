@@ -12,7 +12,7 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Represents the <see cref='Mnemonic.Movzx'/> instruction
     /// </summary>
-    public readonly struct Movzx : IInstructionModel<Movzx>
+    public readonly struct Movzx
     {
         public Mnemonic Mnemonic => Mnemonic.Movzx;        
 
