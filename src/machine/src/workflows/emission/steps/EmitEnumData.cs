@@ -5,65 +5,65 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
+    using System.Runtime.CompilerServices;    
+    
+    using static Konst;
 
-    partial struct EmissionWorkflow
+    public readonly ref struct EmitEnumData
     {
-        public readonly struct EmitEnumData : IWorkflowWorker<EmitEnumData>
+        readonly IAppContext Context;
+        
+        [MethodImpl(Inline)]
+        public EmitEnumData(IAppContext context)
         {
-            readonly IAppContext Context;
-
-            public EmitEnumData(IAppContext context)
-                => Context = context;
-            
-            public static EmitEnumData Service(IAppContext context)
-                => new EmitEnumData(context);
-
-            FolderPath DatasetRoot 
-                => Context.AppPaths.AppDataRoot + FolderName.Define("enums");
-            
-            FilePath path<E>() 
-                where E : unmanaged, Enum
-                    => DatasetRoot + FileName.Define($"{typeof(E).Name}", FileExtensions.Csv);
-            
-            FilePath path(Type @enum) 
-                    => DatasetRoot + FileName.Define($"{@enum.Name}", FileExtensions.Csv);
-
-            FolderPath dir(PartId part)
-                => DatasetRoot + FolderName.Define(part.Format());
-            FilePath path(PartId part, Type @enum) 
-                    => dir(part) + FileName.Define($"{@enum.Name}", FileExtensions.Csv);
-
-            // void emit(PartId part, Type[] enums)
-            // {
-            //     dir(part).Clear();
-
-            //     foreach(var e in enums)
-            //     {
-            //         var dst = path(part, e);
-            //         if(e.Fields().Length != 0)
-            //         {
-            //             term.print($"Emitting {e.Name} dataset to {dst}");            
-            //             EnumDatasets.Service.emit(e, dst);                
-            //         }
-            //     }
-            // }
-
-            public void Emit()
-            {            
-                DatasetRoot.Clear();
-                
-                var src = KnownParts.Service.Known;
-                var parts = from part in  KnownParts.Service.Known
-                            let enums = part.Owner.Enums()
-                            orderby part.Id
-                            select (part.Id, enums);
-                    
-                // foreach(var part in parts)
-                // {
-                //     emit(part.Id, part.enums);
-                // }                                                        
-            }    
+            Context = context;
+            Context.Running(nameof(EmitEnumData));    
         }
-    }
+        
+        FolderPath DatasetRoot 
+            => Context.AppPaths.AppDataRoot;
+                        
+        public void Run()
+        {            
+            DatasetRoot.Clear();
+                        
+            var src = from part in  KnownParts.Service.Known
+                       let enums = part.Owner.Enums()
+                        orderby part.Id
+                        select KeyedValues.@from(part.Id, enums);
+
+            var dst = z.list<EnumLiteralRecord>();
+            for(var i=0; i<src.Length; i++)
+            {
+                var x = src[i];
+                for(var j=0u; j<x.Length; j++)
+                {
+                    var y = x[j];
+                    (var part, var type) = y;
+                    var records = EnumLiteralRecords.from(part,type);
+                    for(var k = 0; k<records.Length; k++)
+                        dst.Add(records[k]);
+                }                
+            }
+
+            var m = dst.ToArray();
+            Array.Sort(m);
+            
+            var path = DatasetRoot + FileName.Define("EnumSummary",FileExtensions.Csv);
+            using var writer = path.Writer();
+            for(var i=0; i<m.Length; i++)
+            {
+                var row = m[i].Format();
+                writer.WriteLine(row);
+            }
+
+            Context.Deposit(new EmittedEnumSummary(path, (uint)m.Length));
+        }    
+
+        public void Dispose()
+        {
+            Context.Ran(nameof(EmitEnumData));    
+        }
+
+    }    
 }

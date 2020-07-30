@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    partial struct Workflows
-    {        
-     
+    partial struct Primitive
+    {
+        [MethodImpl(Inline)]
+        public static bool test(Type src)
+            => kind(src) != 0;            
     }
 }

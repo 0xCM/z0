@@ -8,10 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
+
+    using static PrimalBitFieldSpec;
+
     partial struct Primitive
     {
-        [MethodImpl(Inline)]
-        public static bool test(Type src)
-            => kind(src) != 0;            
+        [MethodImpl(Inline), Op]
+        public static PrimalKind view(PrimalKind src, SegPos offset)
+            => (PrimalKind)((byte)src >> (byte)offset);        
     }
 }

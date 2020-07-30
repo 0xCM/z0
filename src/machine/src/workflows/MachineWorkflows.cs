@@ -12,9 +12,6 @@ namespace Z0
         
     public readonly partial struct MachineWorkflows : IDisposable
     {        
-        public static MachineWorkflows alloc(IAppContext context)
-            => new MachineWorkflows(context);
-        
         readonly ActorIdentity[] Known;
         
         readonly EventBroker Broker;
@@ -23,24 +20,31 @@ namespace Z0
 
         readonly bool CaptureArtifacts;
         
-        MachineWorkflows(IAppContext context)
+        readonly string[] Args;
+
+        internal MachineWorkflows(IAppContext context, params string[] args)
         {
+            Args = args ?? sys.empty<string>();
             Broker = new EventBroker(context.AppPaths.AppStandardOutPath);
             Context = context;
             Known = sys.empty<ActorIdentity>();
             CaptureArtifacts = true;
+            term.print($"Running machine worklfows");
         }
         
-        public void Run(params string[] args)
+        public void Run()
         {
-            var config = PartFileArchives.configure(Context,args);
-            if(CaptureArtifacts)
-                CaptureHost.ceate(Context, config).Run(args);            
-            using var wf = new EmissionWorkflow(Context);
-            wf.Run();
+            using var capture = CaptureHost.ceate(Context, Args);
+            capture.Run();            
+            
+            using var emission = new EmissionWorkflow(Context, Args);
+            emission.Run();
         }
 
         public void Dispose()
-            => Broker.Dispose();
+        {
+            Broker.Dispose();
+            term.print($"Ran machine worklfows");
+        }
     }
 }

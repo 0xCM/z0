@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.Clr;
-
+    using static ComponentModels;
     using static Konst;
 
     partial struct Reflex

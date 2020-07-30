@@ -46,6 +46,5 @@ namespace Z0
         public static FieldFormatter<F> formatter<F>(char delimiter = FieldDelimiter) 
             where F : unmanaged, Enum
                 => new FieldFormatter<F>(text.build(), delimiter);        
-
     }
 }

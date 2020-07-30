@@ -11,36 +11,34 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct StepExecuting
+    public readonly struct StepExecuting : IAppEvent<StepExecuting>
     {        
-        public readonly ulong Workflow;
+        const string Pattern = "{0} step beginning at {1}";
 
-        public readonly ArtifactIdentity Worker;
-
-        public readonly StringRef StepName;
+        public readonly StringRef Worker;
 
         public readonly ulong Correlation;        
 
         public readonly Timestamp Timestamp;            
 
         [MethodImpl(Inline)]
-        public StepExecuting(ulong wfid, ArtifactIdentity worker, string step, ulong ct, Timestamp ts)
+        public StepExecuting(string worker, ulong ct = 0)
         {
-            Workflow = wfid;
             Worker = worker;
-            StepName = step;
-            Correlation = ct;
-            Timestamp = ts;
-        }
-
-        [MethodImpl(Inline)]
-        public StepExecuting(ulong workflow, ArtifactIdentity worker, string step, ulong ct)
-        {
-            Workflow = workflow;
-            Worker = worker;
-            StepName = step;
             Correlation = ct;
             Timestamp = now();
         }
+        public string Format()
+        {
+            return text.format(Pattern, Worker.Format(), Timestamp.Format());
+        }        
+
+        public string Description
+        {
+            get => Format();
+        }
+
+        public override string ToString()
+            => Format();
     }
 }

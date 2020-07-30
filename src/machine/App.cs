@@ -65,10 +65,9 @@ namespace Z0
         
         void RunWorkflows(params string[] args)
         {
-            term.print($"Commencing machine worklfow sequence");
-            using var workflows = Workflows.machine(Context);
-            workflows.Run(args);
-            term.print($"Completed machine worklfow sequence");
+            using var wf = Workflows.create(Context, args);
+            using var machine = wf.Machine();
+            machine.Run();
 
         }
         public override void RunShell(params string[] args)

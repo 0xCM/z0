@@ -9,11 +9,6 @@ namespace Z0
 
     using static Konst;
     
-    public static class Messages
-    {
-        
-    }
-
     partial class XTend
     {
         public static IAppMsgLog MessageLog(this TAppEnv env)

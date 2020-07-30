@@ -9,8 +9,14 @@ namespace Z0
 
     using static Option;
 
-    public static class AgentX
+    partial class XTend
     {
+        public static void Running(this IAppContext context, string worker)
+            => context.Deposit(new StepExecuting(worker));
+
+        public static void Ran(this IAppContext context, string worker)
+            => context.Deposit(new StepExecuted(worker));            
+
         /// <summary>
         /// Searches a context for an active agent wth a specified identity
         /// </summary>

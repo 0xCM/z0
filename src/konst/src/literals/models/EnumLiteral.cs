@@ -6,28 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
-
-    public enum EnumLiteralField : uint
-    {
-        Id = 0 | 10 << WidthOffset,
-
-        TypeHandle = 1 | 16 << WidthOffset,
-
-        TypeId = 2 | 10 << WidthOffset,
-
-        TypeName = 3 | 30 << WidthOffset,
-
-        DataType = 4 | 16 << WidthOffset,
-
-        Position = 5 | 10 << WidthOffset,
-
-        Name = 6 | 30 << WidthOffset,
-
-        Value = 7 | 8 << WidthOffset,
-    }
     
     /// <summary>
     /// Defines a boxed enumeration literal as the triple (index,identifier,value)

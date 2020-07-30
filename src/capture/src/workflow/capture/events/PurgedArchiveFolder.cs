@@ -11,6 +11,8 @@ namespace Z0.Asm
     
     public readonly struct ClearedDirectory : IAppEvent<ClearedDirectory>
     {
+        const string MessagePattern = "Purged content in {0}";        
+        
         public readonly FolderPath Path;
 
         [MethodImpl(Inline)]
@@ -18,7 +20,7 @@ namespace Z0.Asm
             => Path = path;
         
         public string Description
-            => $"Purged content in {Path}";
+            => text.format(MessagePattern, Path);
 
         public ClearedDirectory Zero 
             => Empty; 

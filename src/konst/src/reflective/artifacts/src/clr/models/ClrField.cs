@@ -9,7 +9,7 @@ namespace Z0.Clr
     using System.Runtime.CompilerServices;
     
     using static Konst;
-        
+    
     public readonly struct ClrField
     {   
         public FieldInfo Metadata {get;}

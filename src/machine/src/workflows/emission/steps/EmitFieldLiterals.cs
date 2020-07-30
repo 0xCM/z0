@@ -16,7 +16,7 @@ namespace Z0
 
     using PK = PrimalKindId;    
 
-    public readonly struct EmitFieldLiterals
+    public readonly ref struct EmitFieldLiterals
     {
         readonly IAppContext Context;
 

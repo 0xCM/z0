@@ -14,16 +14,14 @@ namespace Z0
         where M : MemberInfo
         where A : Attribute
     {
+        public readonly TaggedMembers<M,A>[] Data;
+
         [MethodImpl(Inline)]
         public static implicit operator TaggedMembers<M,A>(TaggedMember<M,A>[] src)
             => new TaggedMembers<M,A>(src);
 
         [MethodImpl(Inline)]
         public TaggedMembers(params TaggedMembers<M,A>[] src)
-        {
-            Data = src;
-        }
-
-        public TaggedMembers<M,A>[] Data {get;}
+            => Data = src;
     }
 }

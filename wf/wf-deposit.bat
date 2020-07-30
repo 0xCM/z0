@@ -10,7 +10,7 @@ set Dst=%Archive%\dat
 set Log="%ZLogs%\etl\dat-archive.log"
 robocopy %Src% %Dst% /log:%Log% /tee /TS /BYTES /V /MIR 
 
-set CaptureSrc="%ZLogs%\apps\control\capture"
+set CaptureSrc="%ZLogs%\apps\machine\capture"
 set CaptureDst="K:\z0\archives\res\capture"
 set CaptureLog="%ZLogs%\etl\capture-archive.log"
 robocopy %CaptureSrc% %CaptureDst% /log:%CaptureLog% /tee /TS /BYTES /V /MIR 

@@ -10,18 +10,23 @@ namespace Z0
     
     public class CaptureHost : ICaptureHost
     {            
-        public static CaptureHost ceate(IAppContext context, Arrow<ArchiveConfig> config)   
-            => new CaptureHost(ContextFactory.CreateAsmContext(context), config);
+        public static CaptureHost ceate(IAppContext context, params string[] args)   
+            => new CaptureHost(ContextFactory.CreateAsmContext(context), PartFileArchives.configure(context, args), args);
 
-        public void Run(params string[] args)
-        {
-            var parts = PartIdParser.parse(args);
-            if(parts.Length != 0)
-                term.magenta($"Capturing {parts.Describe()}");            
-            else
-                term.magenta($"Capturing the known knowns"); 
+        // public static CaptureHost ceate(IAppContext context, Arrow<ArchiveConfig> config, params string[] args)   
+        //     => new CaptureHost(ContextFactory.CreateAsmContext(context), config, args);
+        
+        public void Run()
+        {            
+            var parts = PartIdParser.parse(Args);
+            if(parts.Length == 0)
+                parts = KnownParts.Service.Known.Select(x => x.Id);            
+            var msg = text.format("Capturing {0}", parts.Describe());
+            term.magenta(msg);            
             Consolidate(parts);
         }
+        
+        readonly string[] Args;
         
         public IAppMsgSink Sink {get;}
 
@@ -49,8 +54,9 @@ namespace Z0
 
         readonly uint EvalBufferSize;
         
-        internal CaptureHost(IAsmContext context, Arrow<ArchiveConfig> config)
+        internal CaptureHost(IAsmContext context, Arrow<ArchiveConfig> config, params string[] args)
         {                    
+            Args = args ?? sys.empty<string>();
             Context = context;
             Sink = context;
             EvalBufferSize = Pow2.T16;

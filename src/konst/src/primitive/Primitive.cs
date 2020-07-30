@@ -9,15 +9,22 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static PrimalBitFieldSpec;
 
     using PK = PrimalKind;
         
     [ApiHost]
     public readonly partial struct Primitive
     {        
+        public static LiteralBitField<byte,SegId,SegPos,SegWidth,SegMask> LiteralBits
+        {
+            [MethodImpl(Inline), Op]
+            get => LiteralBitfields.define(default(byte), default(SegId), default(SegPos), default(SegWidth), default(SegMask));
+        }
+
         static ReadOnlySpan<PrimalKind> Kinds
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             get => recover<PrimalKind>(PrimalKindData);
         }
 

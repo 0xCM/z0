@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -14,13 +13,14 @@ namespace Z0
     [ApiHost]
     public readonly struct EnumNames
     {   
+        public readonly Type EnumType;
+        
+        public readonly string[] Names;
+
         [MethodImpl(Inline)]
         public static Z0.EnumNames<E> get<E>()                   
             where E : unmanaged, Enum
                 => new Z0.EnumNames<E>(Enum.GetNames(typeof(E)));    
-        public readonly Type EnumType;
-        
-        public readonly string[] Names;
 
         [MethodImpl(Inline)]
         public EnumNames(Type type, string[] src)

@@ -15,11 +15,10 @@ namespace Z0
     {
         public void primal_kind()
         {
-            var f = PrimalKindBitField.create(PrimalKind.I16);
-            var width = PrimalKindBitField.width(f);
+            var f = Primitive.bitfield(PrimalKind.I16);
+            var width = Primitive.width(f);
             Claim.Eq(width, TypeWidth.W16);            
         }
-
 
         static void asci_format_16()
         {

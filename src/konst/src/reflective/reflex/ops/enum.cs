@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using Z0.Clr;
+    using static TypeModels;
     
     using static Konst;
 
@@ -22,6 +23,5 @@ namespace Z0
         public static ClrEnum<T> @enum<T>()
             where T : unmanaged, Enum
                 => new ClrEnum<T>(typeof(T));
-
     }
 }

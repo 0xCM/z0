@@ -16,6 +16,9 @@ namespace Z0
     {
         public static KeyedValues<K,V> from<K,V>(Dictionary<K,V> src)
             => new KeyedValues<K,V>(src.Select(x => KeyedValue.define(x.Key, x.Value)).Array());        
+
+        public static KeyedValues<K,V> from<K,V>(K key, V[] values)
+            => new KeyedValues<K,V>(values.Select(value => KeyedValue.define(key, value)).Array());
     }
     
     /// <summary>

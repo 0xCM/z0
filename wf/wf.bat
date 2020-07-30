@@ -14,8 +14,6 @@ call %Cmd%
 set Cmd="%Wf%/wf-04-stage.bat"
 call %Cmd%
 
-REM call z0.exe
-
 call machine.exe
 
 call zdata.exe

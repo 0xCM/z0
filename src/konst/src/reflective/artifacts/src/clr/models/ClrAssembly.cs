@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Clr
+namespace Z0
 {
     using System;
     using System.Reflection;
@@ -10,24 +10,25 @@ namespace Z0.Clr
     
     using static Konst;
 
-    public readonly struct ClrAssembly
+    partial struct ComponentModels
     {
-        public Assembly Metadata {get;}
-    
-        public ArtifactIdentity Identifier
+        public readonly struct ClrAssembly
         {
+            public Assembly Metadata {get;}
+        
+            public ArtifactIdentity Identifier
+            {
+                [MethodImpl(Inline)]
+                get => new ArtifactIdentity(Metadata);
+            }
+
             [MethodImpl(Inline)]
-            get => new ArtifactIdentity(Metadata);
+            public ClrAssembly(Assembly src)
+                => Metadata = src;
+
+            [MethodImpl(Inline)]
+            public static implicit operator Assembly(ClrAssembly src)
+                => src.Metadata;
         }
-
-        [MethodImpl(Inline)]
-        public ClrAssembly(Assembly src)
-        {
-            Metadata = src;
-        }        
-
-        [MethodImpl(Inline)]
-        public static implicit operator Assembly(ClrAssembly src)
-            => src.Metadata;
     }
 }

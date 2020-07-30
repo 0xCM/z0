@@ -32,7 +32,6 @@ namespace Z0
 
         public void Delimit(F f, object content)
         {            
-            //Target.Append(text.spaced(Delimiter));            
             Target.Append(Delimiter);
             Target.Append(Space);            
             Target.Append(Render(content).PadRight(Tabular.Width(f)));
@@ -41,7 +40,6 @@ namespace Z0
         public void Delimit<T>(F f, T content)
             where T : ITextual
         {
-            //Target.Append(text.spaced(Delimiter));            
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append(Render(content).PadRight(Tabular.Width(f)));

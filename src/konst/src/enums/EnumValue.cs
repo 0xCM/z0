@@ -267,7 +267,6 @@ namespace Z0
             return ref tVal;
         }
 
-
         /// <summary>
         /// Reads an i64 value from an enum of primal i64-kind, writes the value to a u64 target, and returns the extracted i64 value
         /// </summary>

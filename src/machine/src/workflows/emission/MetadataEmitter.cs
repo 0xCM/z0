@@ -20,6 +20,7 @@ namespace Z0
         public IAppContext Context {get;}
         
         readonly FolderPath ResRoot;
+        
         readonly IPart[] Parts;
 
         readonly PartSink Sink;

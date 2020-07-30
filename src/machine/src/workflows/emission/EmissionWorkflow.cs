@@ -5,18 +5,24 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;    
     using System.Reflection;
+    
+    using static Konst;
 
     public ref partial struct EmissionWorkflow  
     {
         readonly IAppContext Context;
         
         readonly bool Recapture;
-        
-        public EmissionWorkflow(IAppContext context, bool recapture = false)
+
+        readonly string[] Args;
+
+        public EmissionWorkflow(IAppContext context, params string[] args)
         {
+            Args = args;
             Context = context;
-            Recapture = recapture;
+            Recapture = false;
             term.magenta("Beginning emission workflow");
         }
         
@@ -27,9 +33,8 @@ namespace Z0
 
         void EmitBytes()
         {
-            term.magenta("Emitting resbytes");
-            var step = new EmitResBytes();
-            step.Configure(Context).Run();
+            using var step = EmitResBytes.create(Context);
+            step.Run();
         }
 
         void CaptureEmissions()
@@ -50,7 +55,7 @@ namespace Z0
         void EmitEnumDatasets()
         {
             term.magenta("Emitting enum datasets");
-            EmitEnumData.Service(Context).Emit();
+            using var wf = new EmitEnumData(Context);
             term.magenta("Emitted enum datasets");
         }
         

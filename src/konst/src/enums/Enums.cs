@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static EnumTypeCode typecode<E>()
             where E : unmanaged, Enum
-                => (EnumTypeCode)default(E).GetTypeCode();
+                => Primitive.ecode<E>();
 
         /// <summary>
         /// Reads a generic numeric value from a generic enum. 
@@ -57,7 +57,6 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
                 => EnumValue.scalar<E,T>(e);
-
 
         /// <summary>
         /// Reads a generic enum member from a generic value
