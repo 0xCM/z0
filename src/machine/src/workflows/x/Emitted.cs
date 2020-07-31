@@ -6,10 +6,10 @@ namespace Z0
 {
     partial class XTend
     {
-        public static void Emitted(this EmissionDataType mk, IAppEventSink dst)
+        public static void Emitted(this EmissionDataType mk, IAppContext dst)
             => PartDataEmitters.emitting(mk, dst);
 
-        public static void Emitted(this PartRecordKind rk, PartId part, IAppEventSink dst)
+        public static void Emitted(this PartRecordKind rk, PartId part, IAppContext dst)
             => PartDataEmitters.emitted(rk, part, dst);
     }
 }

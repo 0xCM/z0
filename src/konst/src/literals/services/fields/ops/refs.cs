@@ -12,36 +12,7 @@ namespace Z0
     using static z;
 
     partial struct LiteralFields
-    {
-        [Op]
-        public static FieldRef[] refs(Assembly src)
-            => refs(src.Types());
-        
-        [Op]
-        public static FieldRef[] refs(params Type[] src)
-        {
-            var dst = list<FieldRef>();
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-            {
-                var type = src[i];
-                var fields = search(type);
-                var @base = address(type);
-                var offset = MemoryAddress.Empty;
-                for(var j=0u; j<fields.Length; j++)
-                {
-                    var field = fields[j];
-                    var segment = from(@base, offset, field);
-                    if(segment.IsNonEmpty)
-                    {
-                        z.append(dst,segment);
-                        offset += segment.DataSize;
-                    }
-                }
-            }
-            return dst.Array();
-        }
-
+    {        
         [Op]
         unsafe static FieldRef from(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
         {

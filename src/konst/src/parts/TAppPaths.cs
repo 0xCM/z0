@@ -159,6 +159,18 @@ namespace Z0
             => LogRoot + TestLogFolder;
 
         /// <summary>
+        /// The build staging directory
+        /// </summary>
+        FolderPath BuildStage
+            => LogRoot + FolderName.Define("builds");        
+
+        // /// <summary>
+        // /// The build publication directory
+        // /// </summary>
+        // FolderPath BuildPub
+        //     => ArchiveRoot + FolderName.Define("builds");        
+
+        /// <summary>
         /// The directory into into which standard out stream emissions are deposited
         /// </summary>
         FolderPath AppStandardOut 

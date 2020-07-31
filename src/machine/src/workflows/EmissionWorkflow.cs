@@ -1,0 +1,102 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;    
+    using System.Reflection;
+    
+    using static Konst;
+
+    public ref partial struct EmissionWorkflow  
+    {
+        public readonly IAppContext Context;
+        
+        readonly bool Recapture;
+
+        readonly string[] Args;
+
+        public EmissionWorkflow(IAppContext context, params string[] args)
+        {
+            Args = args;
+            Context = context;
+            Recapture = false;
+            Context.Running(nameof(EmissionWorkflow));
+        }
+        
+        void ExecEmitDocs()
+        {
+            new EmitProjectDocs(this).Run();
+        }
+
+        void EmitBytes()
+        {
+            using var step = EmitResBytes.create(Context);
+            step.Run();
+        }
+
+        void CaptureEmissions()
+        {
+            term.magenta("Capturing emissions");
+            var suite = ContextFactory.CreateClientContext(Context);
+            var ac = new AccessorCapture(suite.AsmContext);
+            ac.CaptureResBytes();        
+        }
+
+        void EmitMetadata()
+        {
+            term.magenta("Emitting metadata");                 
+            new MetadataEmitter(Context).Emit();
+            term.magenta("Emitted metadata");                 
+        }
+
+        void EmitEnumDatasets()
+        {
+            using var wf = new EmitEnumData(Context);
+            wf.Run();
+
+        }
+        
+        void EmitLiterals()
+        {
+            using var step = new EmitFieldLiterals(Context);
+            step.Run();
+
+        }
+
+        void EmitCatalog()
+        {
+            using var step = new EmitContentCatalog(Context, Context.AppPaths.ResIndexDir + FileName.Define("catalog", FileExtensions.Csv));
+            step.Run();
+        }
+
+        void EmitBitMasks()
+        {
+            term.magenta("Emitting bitmask data");
+            ReflectedLiterals.emit(typeof(BitMasks), Context.AppPaths);
+            term.magenta("Emitted bitmask data");
+        }
+                        
+        public CodeResourceIndex Load()
+            => Resources.code(Assembly.LoadFrom(Context.AppPaths.ResBytes.Name));
+        
+        public void Run(params string[] args)
+        {
+            EmitBitMasks();
+            EmitMetadata();        
+            ExecEmitDocs();
+            EmitBytes();            
+            //CaptureEmissions();            
+            EmitEnumDatasets();
+            EmitLiterals();
+            EmitCatalog();
+        }
+ 
+        public void Dispose()
+        {
+            Context.Ran(nameof(EmissionWorkflow));
+        }
+    }
+}

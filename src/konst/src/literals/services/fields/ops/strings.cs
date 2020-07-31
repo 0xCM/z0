@@ -13,25 +13,5 @@ namespace Z0
 
     partial struct LiteralFields
     {
-        [Op]
-        public static string[] strings(Type src)
-        {
-            var fields = stringlits(src);
-            var @base = address(src);
-            var count = fields.Length;
-            var offset = MemoryAddress.Empty;  
-            var buffer = sys.alloc<string>(count);  
-            var dst = span(buffer);
-
-            for(var j=0u; j<count; j++)
-            {
-                ref readonly var field = ref fields[j];
-                var content = @string(field) ?? EmptyString;
-                seek(dst,j) = content;
-                if(!text.blank(content))
-                    offset += from(@base, offset, field).DataSize;
-            }
-            return buffer;
-        }
     }
 }

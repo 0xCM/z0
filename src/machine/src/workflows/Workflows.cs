@@ -32,18 +32,16 @@ namespace Z0
             Args = args;
             Known = known;
             Correlation =  0;
-            Context.Running(nameof(Workflows));
+            Context.Controlling(nameof(Workflows));
         }
         
         [MethodImpl(Inline), Op]
         public MachineWorkflows Machine()
-        {
-            return new MachineWorkflows(Context, Args);
-        }
+            => new MachineWorkflows(Context, Args);
 
         public void Dispose()
         {
-            Context.Ran(nameof(Workflows));
+            Context.Controlled(nameof(Workflows));
         }
     }
 }

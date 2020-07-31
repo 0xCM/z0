@@ -28,8 +28,8 @@ namespace Z0
             Broker = new EventBroker(context.AppPaths.AppStandardOutPath);
             Context = context;
             Known = sys.empty<ActorIdentity>();
-            CaptureArtifacts = true;
-            Context.Running(nameof(MachineWorkflow));         
+            CaptureArtifacts = false;
+            Context.Controlling(nameof(MachineWorkflow));         
         }
         
         public void Run()
@@ -47,7 +47,7 @@ namespace Z0
         public void Dispose()
         {
             Broker.Dispose();
-            Context.Ran(nameof(MachineWorkflow));
+            Context.Controlled(nameof(MachineWorkflow));
         }
     }
 }

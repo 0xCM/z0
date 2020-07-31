@@ -14,7 +14,7 @@ namespace Z0
         public static FileExtension Ext(this EmissionDataType mk)
             => PartDataEmitters.ext(mk);
 
-        public static void Status(this WfKind kind, WfStatusKind status, IAppEventSink dst)
-            => PartDataEmitters.status(kind, status, dst);                            
+        public static void Status(this WfKind kind, WfStatusKind status, IAppContext dst)
+            => PartDataEmitters.status(kind, status, dst);
     }
 }

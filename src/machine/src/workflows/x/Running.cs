@@ -15,6 +15,12 @@ namespace Z0
         public static void Running(this IAppContext context, string worker)
             => context.Deposit(new StepExecuting(worker));
 
+        public static void Controlling(this IAppContext context, string controller)
+            => context.Deposit(new StepExecuting(controller, "Workflow control"));
+
+        public static void Controlled(this IAppContext context, string controller)
+            => context.Deposit(new StepExecuted(controller, "Workflow control"));
+
         public static void Running(this IAppContext context, string worker, string detail)
             => context.Deposit(new StepExecuting(worker, detail));
 
