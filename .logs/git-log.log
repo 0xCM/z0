@@ -2093,3 +2093,47 @@
  create mode 100644 src/capture/src/workflow/capture/events/ClearedPartFiles.cs
  create mode 100644 src/capture/src/workflow/capture/steps/ClearArchives.cs
  create mode 100644 src/konst/src/partfiles/PartFileArchive.cs
+[master d6475357c] .
+ 84 files changed, 1252 insertions(+), 628 deletions(-)
+ rename src/konst/src/{reflective/models => bitfield}/LiteralBitField.cs (100%)
+ create mode 100644 src/konst/src/bitfield/LiteralBitfields.cs
+ delete mode 100644 src/konst/src/bitfield/PrimalKindBitField.cs
+ create mode 100644 src/konst/src/dataset/TableFormatter.cs
+ rename src/konst/src/enums/{models => }/EnumInfoET.cs (100%)
+ create mode 100644 src/konst/src/enums/ops/unbox.cs
+ create mode 100644 src/konst/src/literals/EnumLiteralField.cs
+ create mode 100644 src/konst/src/literals/EnumLiteralRecord.cs
+ create mode 100644 src/konst/src/literals/EnumLiteralRecords.cs
+ rename src/konst/src/{reflective/models => literals}/EnumNames.cs (97%)
+ rename src/konst/src/{reflective/models => literals}/EnumNamesE.cs (96%)
+ delete mode 100644 src/konst/src/literals/models/EnumLiteralRecord.cs
+ rename src/konst/src/{reflective/services => primitive}/TypeCodes.cs (100%)
+ rename src/konst/src/{reflective/models => primitive/kinds}/EnumScalarKind.cs (100%)
+ rename src/konst/src/{reflective/models => primitive/kinds}/EnumTypeCode.cs (100%)
+ rename src/konst/src/{reflective/models => primitive/kinds}/PrimalKind.cs (100%)
+ rename src/konst/src/{reflective/models => primitive/kinds}/PrimalKindId.cs (100%)
+ rename src/konst/src/{reflective/models => primitive/kinds}/PrimalLiteralKind.cs (100%)
+ rename src/konst/src/{reflective/models => primitive/kinds}/PrimalNumericKind.cs (100%)
+ rename src/konst/src/{bitfield => primitive/models}/PrimalBitFieldSpec.cs (99%)
+ create mode 100644 src/konst/src/primitive/models/PrimalKindBitField.cs
+ rename src/konst/src/{reflective => primitive}/models/TypeCodeIndex.cs (100%)
+ create mode 100644 src/konst/src/primitive/ops/bitfield.cs
+ create mode 100644 src/konst/src/primitive/ops/code.cs
+ create mode 100644 src/konst/src/primitive/ops/ecode.cs
+ create mode 100644 src/konst/src/primitive/ops/filter.cs
+ create mode 100644 src/konst/src/primitive/ops/id.cs
+ rename src/{machine/src/base/workflows/ops/init.cs => konst/src/primitive/ops/index.cs} (61%)
+ rename src/konst/src/primitive/{ => ops}/kind.cs (100%)
+ rename src/konst/src/primitive/{ => ops}/literal.cs (100%)
+ create mode 100644 src/konst/src/primitive/ops/select.cs
+ create mode 100644 src/konst/src/primitive/ops/sign.cs
+ rename src/konst/src/primitive/{ => ops}/test.cs (99%)
+ create mode 100644 src/konst/src/primitive/ops/view.cs
+ create mode 100644 src/konst/src/primitive/ops/width.cs
+ create mode 100644 src/konst/src/reflective/artifacts/TypeModels.cs
+ rename src/konst/src/text/ops/{format.g.cs => format.cs} (58%)
+ rename src/machine/src/base/workflows/{ => contracts}/IMachineWorkflow.cs (100%)
+ create mode 100644 src/machine/src/workflows/emission/events/EmittedEnumSummary.cs
+ create mode 100644 src/machine/src/workflows/emission/events/EmittedHostBytes.cs
+ rewrite src/machine/src/workflows/emission/steps/EmitEnumData.cs (88%)
+ rewrite src/machine/src/workflows/emission/steps/EmitResBytes.cs (86%)

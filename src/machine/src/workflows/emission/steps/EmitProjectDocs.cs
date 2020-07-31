@@ -27,6 +27,11 @@ namespace Z0
             term.magenta("Emitted project documentation");
         }
 
+        public void Dispose()
+        {
+
+        }
+        
         const string Sep = "| ";
 
         static string format(ProjectDocRecord src)

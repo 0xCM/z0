@@ -25,28 +25,25 @@ namespace Z0
 
         void RunApp(params PartId[] src)
         {
-            InstrinsicsEmitter.create(Context).Emit();
-
-            
+            InstrinsicsEmitter.create(Context).Emit();            
             term.print(text.concat("ContentForm".PadRight(20), SpacePipe, "Kind".PadRight(12), SpacePipe,  "Name".PadRight(60), SpacePipe, "Count"));
-            z.iter(ZDat.Structured, Describe);     
-            z.iter(ZDat.Content, Describe);       
+            z.iter(zdat.Content, Describe);       
+            z.iter(zdat.Structured, Describe);     
         }
 
         void Describe(Paired<StructuredKind,AppResourceDoc> src)
         {
-            const string Form = "Structured";
-            var res = src.Right;
-            var count = res.Rows.Length;
-            term.print($"{Form.PadRight(20)} | {src.Left.Format().PadRight(12)} | {src.Right.Name.PadRight(60)} | {count} ");
+            (var k, var doc) = src;
+            var info = new ContentInfo((ContentKind)k, (uint)doc.RowCount, doc.Name,true);
+            term.print(info.Format());
+
         }
 
         void Describe(Paired<ContentKind,AppResource> src)
         {
-            const string Form = "Unstructured";
-            var res = src.Right;
-            var length = res.Content.Length;
-            term.print($"{Form.PadRight(20)} | {src.Left.Format().PadRight(12)} | {src.Right.Name.PadRight(60)} | {length} ");                        
+            (var k, var doc) = src;
+            var info = new ContentInfo(k, (uint)doc.Content.Length, doc.Name, false);
+            term.print(info.Format());
         }
 
         public override void RunShell(params string[] args)
@@ -58,6 +55,7 @@ namespace Z0
         public static void Main(params string[] args)
             => Launch(args);
     }
+
 
     public static partial class XTend
     {

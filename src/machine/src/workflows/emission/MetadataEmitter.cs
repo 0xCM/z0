@@ -80,7 +80,7 @@ namespace Z0
             }
 
             {
-                using var emitter = new EmitDataFiles(this, Parts);
+                using var emitter = new EmitImageContent(this, Parts);
                 emitter.Run();
             }
             

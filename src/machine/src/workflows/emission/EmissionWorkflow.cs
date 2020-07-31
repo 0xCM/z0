@@ -66,6 +66,12 @@ namespace Z0
             term.magenta("Emitted literal fields");
         }
 
+        void EmitCatalog()
+        {
+            using var step = new EmitContentCatalog(Context, Context.AppPaths.ResIndexDir + FileName.Define("catalog", FileExtensions.Csv));
+            step.Run();
+        }
+
         void EmitBitMasks()
         {
             term.magenta("Emitting bitmask data");
@@ -82,10 +88,12 @@ namespace Z0
             EmitMetadata();        
             ExecEmitDocs();
             EmitBytes();            
-            if(Recapture)
-                CaptureEmissions();            
+            //CaptureEmissions();            
             EmitEnumDatasets();
             EmitLiterals();
+            EmitCatalog();
+
+
         }
  
         public void Dispose()

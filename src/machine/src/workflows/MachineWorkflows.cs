@@ -29,13 +29,16 @@ namespace Z0
             Context = context;
             Known = sys.empty<ActorIdentity>();
             CaptureArtifacts = true;
-            term.print($"Running machine worklfows");
+            Context.Running(nameof(MachineWorkflow));         
         }
         
         public void Run()
         {
-            using var capture = CaptureHost.ceate(Context, Args);
-            capture.Run();            
+            if(CaptureArtifacts)
+            {
+                using var capture = new CaptureWorkflowHost(Context, Args);
+                capture.Run();            
+            }
             
             using var emission = new EmissionWorkflow(Context, Args);
             emission.Run();
@@ -44,7 +47,7 @@ namespace Z0
         public void Dispose()
         {
             Broker.Dispose();
-            term.print($"Ran machine worklfows");
+            Context.Ran(nameof(MachineWorkflow));
         }
     }
 }

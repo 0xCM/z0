@@ -27,7 +27,9 @@ namespace Z0
             => KnownParts.Service;
 
         public EmitFieldLiterals(IAppContext context)
-            => Context = context;
+        {
+            Context = context;
+        }
 
         public void Run()
         {

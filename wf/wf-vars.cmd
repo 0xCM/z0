@@ -17,4 +17,5 @@ set StageObj="%StageBuildRoot%\obj"
 set StageIl="%Stage%\builds\il"
 set PubIl="%Pub%\il"
 
+set _NT_SYMBOL_PATH=srv*J:/assets/symbols*https://msdl.microsoft.com/download/symbols
 

@@ -21,4 +21,7 @@ call /? > call.doc
 cd /? > cd.doc
 call .schtasks.bat
 set /? > set.doc
+symchk /? > symchk.doc
+kd /? > kd.doc
+cdb /? cdb.doc
 echo ON
