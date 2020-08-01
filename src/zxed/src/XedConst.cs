@@ -28,6 +28,5 @@ namespace Z0.Xed
         [Op]
         public static string Name(xed_iclass_enum_t src)
             => src.ToString().Remove("XED_ICLASS_");
-
     }
 }

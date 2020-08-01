@@ -9,25 +9,25 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct EmittedEnumSummary : IAppEvent<EmittedEnumSummary>
+    public readonly struct EmittedEnumSummary : IWorkflowEvent<EmittedEnumSummary>
     {
-        const string Pattern = "{0} Emitted summary data file for {1} enum literals to {2}";
+        const string Pattern = "{0}: Emitted summary data file for {1} enum literals to {2}";
+
+        public readonly WfEventId Id;
 
         public readonly FilePath TargetPath;
 
         public readonly uint RecordCount;
 
-        public readonly Timestamp Timestamp;
-
         [MethodImpl(Inline)]
-        public EmittedEnumSummary(FilePath target, uint count)
+        public EmittedEnumSummary(FilePath target, uint count, CorrelationToken? ct = null)
         {
+            Id = WfEventId.define(nameof(EmittedEnumSummary), ct ?? CorrelationToken.create(), z.now());
             TargetPath = target;
             RecordCount = count;
-            Timestamp = z.now();
         }        
         public string Format()
-            => text.format(Pattern, Timestamp, RecordCount, TargetPath);
+            => text.format(Pattern, Id, RecordCount, TargetPath);
 
         public string Description
             => Format();

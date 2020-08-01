@@ -13,12 +13,15 @@ namespace Z0
 
     public readonly ref struct EmitProjectDocs
     {
-        readonly EmissionWorkflow Workflow;
+        readonly Wf Workflow;
 
-        public EmitProjectDocs(EmissionWorkflow wf)
+        readonly CorrelationToken Correlation;
+
+        public EmitProjectDocs(Wf wf, CorrelationToken? ct = null)
         {
             Workflow = wf;
-            Workflow.Context.Running(nameof(EmitProjectDocs));
+            Correlation = ct ?? CorrelationToken.create();
+            Workflow.Running(nameof(EmitProjectDocs), Correlation);
         }
         
         public void Run()
@@ -28,7 +31,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Workflow.Context.Ran(nameof(EmitProjectDocs));
+            Workflow.Ran(nameof(EmitProjectDocs), Correlation);
         }
         
         const string Sep = "| ";

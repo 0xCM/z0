@@ -7,7 +7,9 @@ namespace Z0
     partial class XTend
     {
         public static void Emitted(this EmissionDataType mk, IAppContext dst)
-            => PartDataEmitters.emitting(mk, dst);
+        {            
+            PartDataEmitters.emitting(mk, dst);
+        }
 
         public static void Emitted(this PartRecordKind rk, PartId part, IAppContext dst)
             => PartDataEmitters.emitted(rk, part, dst);

@@ -9,9 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct IndexedEncoded : IAppEvent<IndexedEncoded>
+    public readonly struct IndexedEncoded : IWorkflowEvent<IndexedEncoded>
     {
         const string Pattern = "{0}: {1} entries created in the code index"; 
+        
         public readonly EncodedIndex Index;
 
         public readonly Timestamp Timestamp;
@@ -22,11 +23,14 @@ namespace Z0
             Index = index;
             Timestamp = z.now();
         }
-        
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => text.format(Pattern, Timestamp, Index.EntryCount);       
         public AppMsgColor Flair 
             => AppMsgColor.Cyan;
                          
         public string Description
-            => text.format(Pattern, Timestamp, Index.EntryCount);
+            => Format(); 
     }        
 }

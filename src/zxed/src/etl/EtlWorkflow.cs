@@ -187,9 +187,9 @@ namespace Z0
             var summaries = PublishSummary(patterns);  
             var functions = ExtractFunctions();                      
 
-            // SaveExtensions(summaries);
-            // SaveCategories(summaries);
-            // SaveMnemonics(summaries);
+            SaveExtensions(summaries);
+            SaveCategories(summaries);
+            SaveMnemonics(summaries);
             SaveFunctions(functions);
         }
 

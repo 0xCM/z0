@@ -12,6 +12,8 @@ namespace Z0
 
     public readonly struct Timestamp : ITextual, IComparable<Timestamp>, IEquatable<Timestamp>
     {
+        const string Pattern = "yyyyMMdd.HH.mm.ss.ffff";
+        
         readonly ulong Ticks;
 
         [MethodImpl(Inline)]
@@ -48,7 +50,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => new DateTime((long)Ticks).ToLexicalString();
+            => new DateTime((long)Ticks).ToString(Pattern);
 
         [MethodImpl(Inline)]
         public override string ToString()
@@ -61,7 +63,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public override bool Equals(object src)
             => src is Timestamp x && Equals(x);
-
 
         [MethodImpl(Inline)]        
         public int CompareTo(Timestamp src)

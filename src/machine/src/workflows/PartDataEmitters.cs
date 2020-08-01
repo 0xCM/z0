@@ -11,7 +11,6 @@ namespace Z0
 
     using static PartRecords;
     using DataType = EmissionDataType;
-    using WfSink = IAppEventSink;
 
     [ApiHost]
     public readonly struct PartDataEmitters

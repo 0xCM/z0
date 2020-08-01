@@ -12,19 +12,22 @@ namespace Z0
 
     public readonly ref struct EmitConstantRecords
     {
-        readonly IAppContext Wf;
+        readonly Wf Wf;
 
         readonly FolderPath TargetDir;
 
         readonly IPart[] Parts;
+
+        readonly CorrelationToken Correlation;
         
         [MethodImpl(Inline)]
-        public EmitConstantRecords(IAppContext wf, IPart[] parts)
+        public EmitConstantRecords(Wf wf, IPart[] parts, CorrelationToken? ct = null)
         {
             Wf = wf;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("constants");
             Parts = parts;
-            Wf.Running(nameof(EmitConstantRecords));
+            Correlation = ct ?? CorrelationToken.create();
+            Wf.Running(nameof(EmitConstantRecords), Correlation);
         }
 
         public EmissionDataType StepKind 
@@ -43,7 +46,7 @@ namespace Z0
         {
             var id = part.Id;
             var dstPath = TargetDir + FileName.Define(part.Id.Format(), FileExtensions.Csv);
-            PartDataEmitters.emitting(DataKind, dstPath, Wf);
+            var ct = Wf.Running(nameof(EmitConstantRecords), dstPath);
 
             var data = Read(part);
             var count = data.Length;            
@@ -55,23 +58,22 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(target.Render());
 
-            TableEmission.emitted(Wf, DataKind, id, count);
+            Wf.Ran(nameof(EmitConstantRecords), new {Id = id, Count = count}, ct);
         }
         
         public void Run()
         {
-            PartDataEmitters.emitting(StepKind, Wf);
+            var ct = Wf.Running(nameof(EmitConstantRecords));
 
             foreach(var part in Parts)
                 Emit(part);
             
-            PartDataEmitters.emitted(StepKind, Wf);
+            Wf.Ran(nameof(EmitConstantRecords), ct);
         }
 
         public void Dispose()
         {
-            Wf.Ran(nameof(EmitConstantRecords));
-
+            Wf.Ran(nameof(EmitConstantRecords), Correlation);
         }
     }
 }

@@ -13,15 +13,14 @@ namespace Z0
 
     using P = Z0.Parts;
     
-    public readonly struct PartSelection : IContentedIndex<IPart>
-    {
-        public static PartSelection Selected => default(PartSelection);
-        
-        IPart[] IContented<IPart[]>.Content
-            => new IPart[]{
-                P.GMath.Resolved,  
-               };
-    }    
+    // public readonly struct PartSelection : IContentedIndex<IPart>
+    // {
+                
+    //     IPart[] IContented<IPart[]>.Content
+    //         => new IPart[]{
+    //             P.GMath.Resolved,  
+    //            };
+    // }    
     
     class App : AppShell<App,IAppContext>
     {                
@@ -65,10 +64,7 @@ namespace Z0
         
         void RunWorkflows(params string[] args)
         {
-            var path = WorkflowContext.ConfigPath(Context);
-            var config = MachineWorkflowConfig.load(path);
-            Context.Deposit(new LoadedWorkflowConfig(path,config));
-            
+            var config = WorkflowConfig.load(Context);            
             var context = WorkflowContext.create(Context, config);
             using var wf = Workflows.create(context, args);
             using var machine = wf.Machine();

@@ -9,25 +9,26 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct EmittedHostBytes : IAppEvent<EmittedHostBytes>
+    public readonly struct EmittedHostBytes : IWorkflowEvent<EmittedHostBytes>
     {
         const string Pattern = "{0}: Emitted {1} x86 code accessors for {2} api";
+
+        public readonly WfEventId Id;
 
         public readonly ApiHostUri Host;
 
         public readonly ushort AccessorCount;
 
-        public readonly Timestamp Timestamp;
-
         [MethodImpl(Inline)]
-        public EmittedHostBytes(ApiHostUri host, ushort count)
+        public EmittedHostBytes(ApiHostUri host, ushort count, CorrelationToken? ct = null)
         {
+            Id = WfEventId.define(nameof(EmittedHostBytes), ct ?? CorrelationToken.create(), z.now());
             Host= host;
             AccessorCount = count;
-            Timestamp = z.now();
         }        
+        
         public string Format()
-            => text.format(Pattern, Timestamp, AccessorCount, Host.Format());
+            => text.format(Pattern, Id, AccessorCount, Host.Format());
 
         public string Description
             => Format();

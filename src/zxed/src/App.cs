@@ -7,12 +7,14 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
     using Z0.Xed;
     
     using static Memories;
  
     using P = Z0.Parts;
+    
     
     class App : AppShell<App,IAppContext>
     {                
@@ -39,23 +41,22 @@ namespace Z0
                 term.warn($"No content was parsed from {src}");
         }
 
-        void TestCases()
-        {
+        // void TestCases()
+        // {
             
-            var  index = Enums.index(typeof(xed_category_enum_t));
-            using var writer = Context.AppPaths.AppStandardOutPath.Writer();
-            for(var i=0; i<index.Length; i++)
-            {
-                var literal = index[i];
-                writer.WriteLine($"{literal.TypeHandle} {literal.Id} {literal.Position} {literal.TypeName} {literal.Name} {literal.Value}");
-            }
+        //     var  index = Enums.index(typeof(xed_category_enum_t));
+        //     using var writer = Context.AppPaths.AppStandardOutPath.Writer();
+        //     for(var i=0; i<index.Length; i++)
+        //     {
+        //         var src = index[i];
+        //         writer.WriteLine($"{src.TypeHandle} {src.Id} {src.Position} {src.TypeName} {src.Name} {src.Value}");
+        //     }
 
-        }
+        // }
         public override void RunShell(params string[] args)
         {            
-              TestCases();        
 
-            //XedEtlWorkflow.Service(Context).Run();
+            XedEtlWorkflow.create(Context).Run();
                                     
         }
 

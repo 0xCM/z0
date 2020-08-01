@@ -13,6 +13,8 @@
     <Tokens>$(Src)tokens/z0.tokens.csproj</Tokens>
     <V0>$(Src)v0/z0.v0.csproj</V0>
 
+    <Flow>$(Src)flow/z0.flow.csproj</Flow>
+
     <Win>$(Src)win/z0.win.csproj</Win>
 
 

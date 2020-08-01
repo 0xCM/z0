@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct Unaddressed : IAppEvent<Unaddressed>
+    public readonly struct Unaddressed : IWorkflowEvent<Unaddressed>
     {
         public readonly OpUri Uri;
         public readonly LocatedCode Code;

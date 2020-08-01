@@ -18,6 +18,8 @@
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Stats)" />    
     <ProjectReference Include="$(ZData)" />
+    <ProjectReference Include="$(Flow)" />
+
   </ItemGroup>
   
   <ItemGroup>

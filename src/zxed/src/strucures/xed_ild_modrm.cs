@@ -5,10 +5,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
+    using System;
 
     partial class Xed
     {
-        xed_uint8_t[] has_modrm_map_0x0 = new xed_uint8_t[256]{
+        ReadOnlySpan<byte> has_modrm_map_0x0 => new byte[256]{
         /*opcode 0x0*/ XED_ILD_HASMODRM_TRUE,
         /*opcode 0x1*/ XED_ILD_HASMODRM_TRUE,
         /*opcode 0x2*/ XED_ILD_HASMODRM_TRUE,
@@ -525,7 +526,5 @@ namespace Z0.Xed
         /*opcode 0xfe*/ XED_ILD_HASMODRM_TRUE,
         /*opcode 0xff*/ XED_ILD_HASMODRM_TRUE,
         };
-
     }
-
 }

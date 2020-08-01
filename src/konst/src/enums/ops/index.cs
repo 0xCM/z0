@@ -17,45 +17,6 @@ namespace Z0
 
     partial class Enums
     {
-        public static EnumLiterals index(Assembly src)
-        {
-            var enums = src.GetTypes().Where(t => t.IsEnum);
-            var dst = EnumLiterals.Empty;
-            for(var i=0; i<enums.Length; i++)
-            {
-                dst = dst.Append(index(enums[i]));
-            }
-            return dst;
-        }
-        
-        [MethodImpl(Inline), Op]
-        public static EnumLiterals index(Type src)
-        {
-            var ut = src.GetEnumUnderlyingType();
-            var nk = ut.NumericKind();
-            
-            var fields = span(src.LiteralFields());
-            var count = fields.Length;            
-            var buffer = sys.alloc<EnumLiteral>(count);
-            var index = span(buffer);
-            
-            for(var i=0u; i<fields.Length; i++)
-            {
-                ref readonly var field = ref skip(fields,i);
-                var dst = new EnumLiteral();
-                dst.Id = field.MetadataToken;
-                dst.TypeName = src.Name;
-                dst.TypeHandle = src.TypeHandle.Value;
-                dst.TypeId = src.MetadataToken;
-                dst.DataType = Enums.@base(nk);
-                dst.Name = field.Name;
-                dst.Position = i;
-                dst.Value = Variant.define(field.GetRawConstantValue(), nk);
-                seek(index,i) = dst;
-            }
-
-            return new EnumLiterals(buffer);
-        }
 
         
         /// <summary>

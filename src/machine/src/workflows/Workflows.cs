@@ -13,35 +13,35 @@ namespace Z0
     [ApiHost]
     public ref struct Workflows
     {        
-        readonly MachineContext Context;
+        readonly Wf Context;
         
         readonly ActorIdentity[] Known;
 
         readonly string[] Args;
         
-        long Correlation;
+        readonly CorrelationToken Correlation;
 
         [MethodImpl(Inline), Op]
-        public static Workflows create(MachineContext context, params string[] args)
+        public static Workflows create(Wf context, params string[] args)
             => new Workflows(context, args);
 
         [MethodImpl(Inline)]
-        Workflows(MachineContext context, string[] args, params ActorIdentity[] known)     
+        Workflows(Wf context, string[] args, params ActorIdentity[] known)     
         {
             Context = context;
             Args = args;
             Known = known;
-            Correlation =  0;
-            Context.ContextRoot.Controlling(nameof(Workflows));
+            Correlation =  CorrelationToken.define(1ul);
+            Context.Running(nameof(Workflows), Correlation);
         }
         
         [MethodImpl(Inline), Op]
         public MachineWorkflows Machine()
-            => new MachineWorkflows(Context, Args);
+            => new MachineWorkflows(Context, Correlation, Args);
 
         public void Dispose()
         {
-            Context.ContextRoot.Controlled(nameof(Workflows));
+            Context.Ran(nameof(Workflows), Correlation);
         }
     }
 }

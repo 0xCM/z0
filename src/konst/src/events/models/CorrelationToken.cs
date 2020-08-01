@@ -8,29 +8,25 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static IdentityShare;
     
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
     /// </summary>
-    public readonly struct CorrelationToken : IIdentifiedType<CorrelationToken>
+    public readonly struct CorrelationToken : ITextual, IComparable<CorrelationToken>, IEquatable<CorrelationToken>
     {
-        /// <summary>
-        /// The key that identifies the value
-        /// </summary>
-        public string Identifier {get;}
+        public readonly ulong Value;
 
         [MethodImpl(Inline)]
-        public static CorrelationToken From(string value)
+        public static CorrelationToken define(ulong value)
             => new CorrelationToken(value);
 
         [MethodImpl(Inline)]
-        public static CorrelationToken From<T>(T value)
-            => new CorrelationToken(value.ToString());
+        public static CorrelationToken define<T>(T value)
+            => new CorrelationToken(z.convert<T,ulong>(value));
 
         [MethodImpl(Inline)]
-        public static CorrelationToken New()
-            => new CorrelationToken(Guid.NewGuid());
+        public static CorrelationToken create()
+            => new CorrelationToken((ulong)z.now().Ticks);
 
         [MethodImpl(Inline)]
         public static bool operator==(CorrelationToken a, CorrelationToken b)
@@ -41,38 +37,36 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public CorrelationToken(string value)
-            => Identifier = value;
-
-        [MethodImpl(Inline)]
-        public CorrelationToken(Guid value)
-            => Identifier = value.ToString();
-
-        [MethodImpl(Inline)]
-        public CorrelationToken(object value)
-            => Identifier = text.format(value);
+        public CorrelationToken(ulong value)
+            => Value = value;
         
         public bool IsEmpty 
-            => string.IsNullOrWhiteSpace(Identifier);
+        {
+            [MethodImpl(Inline)]
+            get => Value == 0;
+        }
          
         [MethodImpl(Inline)]
         public bool Equals(CorrelationToken src)
-            => equals(this, src);
-
+            => Value == src.Value;
+       
         [MethodImpl(Inline)]
         public int CompareTo(CorrelationToken other)
-            => compare(this, other);        
+            => Value.CompareTo(other.Value);
 
         public override string ToString()
-            => Identifier;
+            => Value.ToString();
  
         public override int GetHashCode()
-            => hash(this);
+            => (int)z.hash(Value);
 
-        public override bool Equals(object obj)
-            => equals(this, obj);
+        public override bool Equals(object src)
+            => src is CorrelationToken t && Equals(t);
 
+        public string Format()
+            => Value.ToString();
+        
         public static CorrelationToken Empty 
-            => new CorrelationToken("");
+            => default;
     }
 }

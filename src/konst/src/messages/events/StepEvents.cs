@@ -11,7 +11,7 @@ namespace Z0
     public static class StepEvents
     {
         public static StepStart<T> Started<T>(T data, CorrelationToken? ct = null, [Caller] string caller = null, DateTime? timestamp = null)
-            => new StepStart<T>(caller, data, ct ?? CorrelationToken.New(), timestamp ?? Time.now());
+            => new StepStart<T>(caller, data, ct ?? CorrelationToken.create(), timestamp ?? Time.now());
 
         public static StepEnd<T> Ended<T>(T data, CorrelationToken? ct = null,  [Caller] string caller = null, DateTime? timestamp = null)
             => new StepEnd<T>(caller, data, ct ?? CorrelationToken.Empty, timestamp ?? Time.now());

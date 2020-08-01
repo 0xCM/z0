@@ -26,7 +26,7 @@ namespace Z0
             => new EnumLiterals(src);
         
         [MethodImpl(Inline)]
-        internal EnumLiterals(EnumLiteral[] src) 
+        public EnumLiterals(EnumLiteral[] src) 
             => Data = src;
         
         public EnumLiteral[] Content

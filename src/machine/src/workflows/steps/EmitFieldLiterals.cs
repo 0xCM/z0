@@ -20,7 +20,7 @@ namespace Z0
     {
         const string StartMsg = "Emitting literal field values to {0}";
         
-        readonly IAppContext Context;
+        readonly Wf Context;
 
         FolderPath Target 
             => Context.AppPaths.ResourceRoot + FolderName.Define("fields");
@@ -28,7 +28,7 @@ namespace Z0
         KnownParts Parts
             => KnownParts.Service;
 
-        public EmitFieldLiterals(IAppContext context)
+        public EmitFieldLiterals(Wf context)
         {
             Context = context;
             Context.Running(nameof(EmitFieldLiterals), text.format(StartMsg, Target.Name));

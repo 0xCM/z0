@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct PartFileEvent : IAppEvent<PartFileEvent>
+    public readonly struct PartFileEvent : IWorkflowEvent<PartFileEvent>
     {
         const string Pattern = "{0}: {1} - {2}";
         
