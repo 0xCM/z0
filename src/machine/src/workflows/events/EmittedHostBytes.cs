@@ -11,20 +11,23 @@ namespace Z0
 
     public readonly struct EmittedHostBytes : IAppEvent<EmittedHostBytes>
     {
-        const string Pattern = "Emitted {0} x86 code accessors for {1} api";
+        const string Pattern = "{0}: Emitted {1} x86 code accessors for {2} api";
 
         public readonly ApiHostUri Host;
 
         public readonly ushort AccessorCount;
+
+        public readonly Timestamp Timestamp;
 
         [MethodImpl(Inline)]
         public EmittedHostBytes(ApiHostUri host, ushort count)
         {
             Host= host;
             AccessorCount = count;
+            Timestamp = z.now();
         }        
         public string Format()
-            => text.format(Pattern, AccessorCount, Host.Format());
+            => text.format(Pattern, Timestamp, AccessorCount, Host.Format());
 
         public string Description
             => Format();

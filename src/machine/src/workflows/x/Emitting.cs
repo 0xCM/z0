@@ -12,10 +12,10 @@ namespace Z0
     partial class XTend
     {
         public static void Emitting(this EmissionDataType type, IAppContext dst)
-            => PartDataEmitters.emitting(type, dst);
+            => dst.Deposit(new StepExecuting(type.ToString()));
 
         public static void Emitting(this EmissionDataType type, FilePath path, IAppContext dst)
-            => PartDataEmitters.emitting(type, path, dst);
+            => dst.Deposit(new StepExecuting(type.ToString(), path.Name));
 
         public static void Emitting(this PartRecordKind dt,  FilePath path, IAppContext dst)
             => PartDataEmitters.emitting(dt, path, dst);

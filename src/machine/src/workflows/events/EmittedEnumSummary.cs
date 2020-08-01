@@ -20,11 +20,11 @@ namespace Z0
         public readonly Timestamp Timestamp;
 
         [MethodImpl(Inline)]
-        public EmittedEnumSummary(FilePath target, uint count, Timestamp? ts = null)
+        public EmittedEnumSummary(FilePath target, uint count)
         {
             TargetPath = target;
             RecordCount = count;
-            Timestamp = ts ?? z.now();
+            Timestamp = z.now();
         }        
         public string Format()
             => text.format(Pattern, Timestamp, RecordCount, TargetPath);

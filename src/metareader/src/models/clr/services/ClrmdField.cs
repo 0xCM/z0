@@ -11,8 +11,6 @@ namespace Z0.MS
     using System.Diagnostics;
     using System.Reflection;
 
-    using static ClrDataModel;
-
     public class ClrmdField : ClrInstanceField
     {
         readonly IFieldHelpers _helpers;

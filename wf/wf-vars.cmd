@@ -1,20 +1,25 @@
-set Pub="c:/Dev/pub"
-set Dev=%ZDev%
-set Wf="%Dev%/wf"
-set Stage=%ZLogs%
 set SdkAppVer=netcoreapp3.0
 
-set DevBuildRoot="%Dev%\bin"
-set StageBuildRoot="%Stage%\builds"
-set PubBuildRoot="%Pub%\builds"
+set Dev=%ZDev%
+set Stage=%ZLogs%
+set Assets="j:/assets"
 
-set DevLib="%DevBuildRoot%\lib\%SdkAppVer%"
-set DevObj="%DevBuildRoot%\obj"
+set Wf="%Dev%/wf"
+set ToolDir="%Assets%/tools/exe"
+set LibDir="%Assets%/tools/lib"
+set IncDir="%Assets%/tools/specs/headers"
 
-set StageLib="%StageBuildRoot%\bin"
-set StageObj="%StageBuildRoot%\obj"
+set DevBuild="%Dev%\bin"
+set DevLib="%DevBuild%\lib\%SdkAppVer%"
+set DevObj="%DevBuild%\obj"
 
-set StageIl="%Stage%\builds\il"
+set StgBuild="%Stage%\builds"
+set StgLib="%StgBuild%\bin"
+set StgObj="%StgBuild%\obj"
+set StgIl="%StgBuild%\il"
+
+set Pub="c:/Dev/pub"
+set PubBuild="%Pub%\builds"
 set PubIl="%Pub%\il"
 
 set _NT_SYMBOL_PATH=srv*J:/assets/symbols*https://msdl.microsoft.com/download/symbols

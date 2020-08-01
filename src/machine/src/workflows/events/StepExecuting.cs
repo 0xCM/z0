@@ -23,7 +23,7 @@ namespace Z0
 
         public readonly string Detail;
 
-        public AppMsgColor Flair  => AppMsgColor.Magenta;
+        public AppMsgColor Flair => AppMsgColor.Magenta;
 
         [MethodImpl(Inline)]
         public StepExecuting(string worker, ulong ct = 0)

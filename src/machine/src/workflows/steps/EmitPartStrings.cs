@@ -77,12 +77,6 @@ namespace Z0
                         
             writer.Write(target.Render());            
 
-            // for(var i=0u; i<count; i++)
-            //     PartRecords.format(skip(data,i), target);
-            
-            // using var writer = TargetPath.Writer();
-            // writer.Write(target.Render());
-
             Count += (uint)j;
             
         }

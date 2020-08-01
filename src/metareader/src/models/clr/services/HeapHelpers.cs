@@ -19,8 +19,6 @@ namespace Z0.MS
 
     using Z0.Dac;    
 
-    using static ClrDataModel;    
-
     public sealed class ClrmdDependentHandle : ClrHandle
     {
         public override ulong Address { get; }

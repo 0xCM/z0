@@ -11,10 +11,14 @@ namespace Z0
     
     public readonly struct PartFileEvent : IAppEvent<PartFileEvent>
     {
-        public string Label {get;}
-
-        public string Content {get;}        
+        const string Pattern = "{0}: {1} - {2}";
         
+        public readonly string Label;
+
+        public readonly string Content;
+
+        public readonly Timestamp Timestamp;
+
         [MethodImpl(Inline)]
         public static implicit operator PartFileEvent((string label, object content) src)
             => new PartFileEvent(src.label, src.content?.ToString() ?? string.Empty);
@@ -24,10 +28,11 @@ namespace Z0
         {
             Label = label;
             Content = content;
+            Timestamp = z.now();
         }
 
         public string Description
-             => $"{Label}: {Content}";
+             => text.format(Pattern, Timestamp, Label,Content);
     
         public PartFileEvent Zero 
             => Empty;                

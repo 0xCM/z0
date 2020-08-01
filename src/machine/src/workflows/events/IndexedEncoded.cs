@@ -11,16 +11,22 @@ namespace Z0
 
     public readonly struct IndexedEncoded : IAppEvent<IndexedEncoded>
     {
+        const string Pattern = "{0}: {1} entries created in the code index"; 
         public readonly EncodedIndex Index;
+
+        public readonly Timestamp Timestamp;
 
         [MethodImpl(Inline)]
         public IndexedEncoded(EncodedIndex index)
-            => Index = index;
+        {
+            Index = index;
+            Timestamp = z.now();
+        }
         
         public AppMsgColor Flair 
             => AppMsgColor.Cyan;
                          
         public string Description
-            => $"{Index.EntryCount} entries created in the code index";
+            => text.format(Pattern, Timestamp, Index.EntryCount);
     }        
 }

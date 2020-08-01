@@ -23,6 +23,6 @@ namespace Z0
         }
                         
         public string Description
-            => text.concat($"Loaded  {Report.RecordCount} {Report.ReportName} records from {ReportPath}");
+            => text.concat($"Loaded {Report.RecordCount} {Report.ReportName} records from {ReportPath}");
     }        
 }
