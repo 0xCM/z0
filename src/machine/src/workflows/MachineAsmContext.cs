@@ -12,13 +12,13 @@ namespace Z0
 
     using static Konst;
 
-    readonly struct MachineContext : IMachineContext
+    readonly struct MachineAsmContext : IMachineContext
     {
         public IAsmContext AsmContext {get;}
 
         [MethodImpl(Inline)]
         public static IMachineContext Create(IAsmContext src, PartId[] code)
-            => new MachineContext(src,code);
+            => new MachineAsmContext(src,code);
 
         public PartId[] Parts {get;}
         
@@ -34,7 +34,7 @@ namespace Z0
             => AsmContext.Formatter;
         
         [MethodImpl(Inline)]
-        internal MachineContext(IAsmContext src, PartId[] parts)
+        internal MachineAsmContext(IAsmContext src, PartId[] parts)
         {                        
             AsmContext = src;
             Parts = parts.Length == 0 ? Enums.index<PartId>().Where(x => x.LiteralValue != PartId.None).Map(x => x.LiteralValue) : parts;

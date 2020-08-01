@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;    
     using System.Linq;
     using System.Text;
+    using System.Reflection;
 
     using static Konst;
 
@@ -20,6 +21,13 @@ namespace Z0
         public static IAppSettings Empty => new AppSettings(new KeyValuePair<string,string>[]{});
         
         public static IAppSettings Load(FilePath src)
+        {
+            var dst = new Dictionary<string,string>();
+            absorb(src, dst);
+            return new AppSettings(dst.Select(kvp => (kvp.Key, kvp.Value)));            
+        }
+
+        public static void absorb(FilePath src, Dictionary<string,string> dst)
         {
             var settings = new Dictionary<string,string>();
             var ignore = new char[]{Chars.Quote, Chars.Comma};
@@ -33,23 +41,37 @@ namespace Z0
                     {
                         var key = parts[0].Trim();
                         var value = parts[1].Trim();
-                        settings.TryAdd(key,value);
+                        dst.TryAdd(key,value);
                     }
                 }
             }
+        }
 
-            return new AppSettings(settings.Select(kvp => (kvp.Key, kvp.Value)));            
+        public static T load<T>(FilePath src)
+            where T : struct
+        {
+            var kvp = new Dictionary<string,string>();
+            var dst = new T();
+            var fields = typeof(T).GetFields(BindingFlags.Instance).Select(x => (x.Name, x)).ToDictionary();
+            AppSettings.absorb(src, kvp);
+            foreach(var key in kvp.Keys)
+            {
+                if(fields.TryGetValue(key, out FieldInfo f))
+                {
+                    var dstType = f.FieldType;
+                    Option.Try(() => Convert.ChangeType(kvp[key], dstType)).OnSome(value => f.SetValue(dst,value));                
+                }
+            }
+            return dst;
         }
 
         internal AppSettings(IEnumerable<(string,string)> pairs)
-        {
-            this.Pairs = pairs.Select(pair => new KeyValuePair<string, string>(pair.Item1, pair.Item2)).ToArray();
-        }
+            => Pairs = pairs.Select(pair => new KeyValuePair<string, string>(pair.Item1, pair.Item2)).ToArray();
+
 
         internal AppSettings(IEnumerable<KeyValuePair<string,string>> pairs)
-        {
-            this.Pairs = pairs.ToArray();
-        }
+            => Pairs = pairs.ToArray();
+
 
         IEnumerable<KeyValuePair<string,string>> Pairs {get;}
                         

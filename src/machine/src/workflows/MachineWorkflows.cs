@@ -16,38 +16,41 @@ namespace Z0
         
         readonly EventBroker Broker;
 
-        readonly IAppContext Context;
+        readonly MachineContext Context;
 
         readonly bool CaptureArtifacts;
+
+        MachineWorkflowConfig Config
+            => Context.ContextData;        
         
         readonly string[] Args;
 
-        internal MachineWorkflows(IAppContext context, params string[] args)
+        internal MachineWorkflows(MachineContext context, params string[] args)
         {
             Args = args ?? sys.empty<string>();
             Broker = new EventBroker(context.AppPaths.AppStandardOutPath);
             Context = context;
             Known = sys.empty<ActorIdentity>();
             CaptureArtifacts = false;
-            Context.Controlling(nameof(MachineWorkflow));         
+            Context.ContextRoot.Controlling(nameof(MachineWorkflow));         
         }
         
         public void Run()
         {
-            if(CaptureArtifacts)
+            if(Config.EnableCapture)
             {
-                using var capture = new CaptureWorkflowHost(Context, Args);
+                using var capture = new CaptureWorkflowHost(Context.ContextRoot, Args);
                 capture.Run();            
             }
             
-            using var emission = new EmissionWorkflow(Context, Args);
+            using var emission = new EmissionWorkflow(Context.ContextRoot, Args);
             emission.Run();
         }
 
         public void Dispose()
         {
             Broker.Dispose();
-            Context.Controlled(nameof(MachineWorkflow));
+            Context.ContextRoot.Controlled(nameof(MachineWorkflow));
         }
     }
 }

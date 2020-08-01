@@ -6,15 +6,37 @@ namespace Z0
 {
     using System;
 
-    public class MachineConfig : IAppSettings<MachineConfig>
+    public struct MachineWorkflowConfig
     {
-        public override string ToString()
-            => ((IAppSettingsProvider)this).Format();
-
-        public bool Flag1 {get; set;}
-
-        public bool Flag2 {get; set;}
-
-        public int Setting1 {get; set;}
+        public static MachineWorkflowConfig load(FilePath src)
+        {
+            var config = AppSettings.load<MachineWorkflowConfig>(src);
+            return config;
+        }
+        
+        public bool EnableCapture;
     }
+    
+    public struct CaptureWorkflowConfig
+    {
+        public bool EmitPrimaryArtifacts;
+
+        public bool EmitImmArtifacts;
+
+        public bool CheckExecution;
+
+        public bool DuplicateCheck;
+
+        public bool HandleExtractsParsed;
+
+        public bool CollectAsmStats;
+
+        public bool MatchEmissions;
+
+        public bool HandleExtractReportSaved;
+
+        public bool HandleExtractReportCreated;
+
+        public bool HandleParseReportCreated;
+     }
 }

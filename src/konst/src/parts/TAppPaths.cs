@@ -105,6 +105,12 @@ namespace Z0
             => DevRoot + DataFolder;
 
         /// <summary>
+        /// The path to the directory that contains runtime configuration data
+        /// </summary>
+        FolderPath ConfigRoot
+            => DevRoot + FolderName.Define(".settings");
+
+        /// <summary>
         /// The path to the root application resource directory
         /// </summary>
         FolderPath ResourceRoot 

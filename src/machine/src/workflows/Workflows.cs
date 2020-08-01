@@ -13,8 +13,8 @@ namespace Z0
     [ApiHost]
     public ref struct Workflows
     {        
-        readonly IAppContext Context;
-
+        readonly MachineContext Context;
+        
         readonly ActorIdentity[] Known;
 
         readonly string[] Args;
@@ -22,17 +22,17 @@ namespace Z0
         long Correlation;
 
         [MethodImpl(Inline), Op]
-        public static Workflows create(IAppContext context, params string[] args)
+        public static Workflows create(MachineContext context, params string[] args)
             => new Workflows(context, args);
 
         [MethodImpl(Inline)]
-        Workflows(IAppContext context, string[] args, params ActorIdentity[] known)     
+        Workflows(MachineContext context, string[] args, params ActorIdentity[] known)     
         {
             Context = context;
             Args = args;
             Known = known;
             Correlation =  0;
-            Context.Controlling(nameof(Workflows));
+            Context.ContextRoot.Controlling(nameof(Workflows));
         }
         
         [MethodImpl(Inline), Op]
@@ -41,7 +41,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Context.Controlled(nameof(Workflows));
+            Context.ContextRoot.Controlled(nameof(Workflows));
         }
     }
 }

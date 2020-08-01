@@ -44,7 +44,7 @@ namespace Z0
             var known = KnownParts.Where(r => r.Id != 0).Array();
             var parts = PartIdParser.Service.ParseValid(args);              
             var root =  AsmContext.Create(Context);
-            var context = MachineContext.Create(root, parts);
+            var context = MachineAsmContext.Create(root, parts);
             var fileProcessor = new PartFileProcessor(context);
             var api = ApiComposition.Assemble(known);                        
             var files = new PartFiles(root);
@@ -65,11 +65,16 @@ namespace Z0
         
         void RunWorkflows(params string[] args)
         {
-            using var wf = Workflows.create(Context, args);
+            var path = WorkflowContext.ConfigPath(Context);
+            var config = MachineWorkflowConfig.load(path);
+            Context.Deposit(new LoadedWorkflowConfig(path,config));
+            
+            var context = WorkflowContext.create(Context, config);
+            using var wf = Workflows.create(context, args);
             using var machine = wf.Machine();
             machine.Run();
-
         }
+        
         public override void RunShell(params string[] args)
         {                        
             RunWorkflows();
