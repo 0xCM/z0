@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {    
-    sealed class CaptureBroker : EventBroker<CaptureBroker,ICaptureBroker>, ICaptureBroker
+    public sealed class CaptureBroker : WfBroker, ICaptureBroker
     {   
         CaptureBroker(FilePath target)
             : base(target)
@@ -12,13 +12,15 @@ namespace Z0.Asm
 
         }
 
-        public static ICaptureBroker Allocate(FilePath target)
+        public static ICaptureBroker create(FilePath target)
             => new CaptureBroker(target);           
     }
     
-    public interface ICaptureBroker : IPersistentBroker, IImmEmissionBroker
+    public interface ICaptureBroker : IImmEmissionBroker
     {        
-        AppErrorEvent Error => AppErrorEvent.Empty;
+        WfError Error => default;
+
+        WfStatus Status => default;
 
         CapturingHosts CapturingHosts => default;
         

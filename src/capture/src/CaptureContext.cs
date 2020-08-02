@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class CaptureContext : ICaptureContext
     { 
@@ -24,7 +24,7 @@ namespace Z0.Asm
 
         public AsmWriterFactory WriterFactory {get;}
 
-        public ICaptureBroker Broker {get;}
+        public ICaptureBroker CaptureBroker {get;}
 
         public TPartCaptureArchive Archive {get;}
 
@@ -41,7 +41,7 @@ namespace Z0.Asm
             Decoder = decoder;
             Formatter = formatter;
             WriterFactory = wf;
-            Broker = broker;
+            CaptureBroker = broker;
             Archive = archive;
             MsgSink = context;
         }
@@ -51,8 +51,8 @@ namespace Z0.Asm
             => CorrelationToken.define(atomic(ref step));
 
         [MethodImpl(Inline)]
-        public ref readonly E Raise<E>(in E e)
+        public void Raise<E>(E e)
             where E : IAppEvent
-                => ref Broker.Raise(e);
+                => CaptureBroker.Raise(e);
     }
 }

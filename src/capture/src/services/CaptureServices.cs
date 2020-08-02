@@ -14,7 +14,7 @@ namespace Z0.Asm
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static TCaptureServices Service(IAsmContext context) 
+        public static TCaptureServices create(IAsmContext context) 
             => new CaptureServices(context);
 
         [MethodImpl(Inline)]

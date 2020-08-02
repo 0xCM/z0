@@ -4,12 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface ICaptureClient : IBrokerClient<ICaptureBroker>
+
+    public interface ICaptureHost : ICaptureClient//, IWfBrokerClient<WfBroker>
     {
-        void OnEvent(AppStatusEvent e) 
+        
+    }    
+    
+    public interface ICaptureClient : IWfBrokerClient<ICaptureBroker>
+    {
+        void OnEvent(WfStatus e) 
             => Sink.Deposit(e);
 
-        void OnEvent(AppErrorEvent e) 
+        void OnEvent(WfError e) 
             => Sink.Deposit(e);
 
         void OnEvent(CapturingPart e) 

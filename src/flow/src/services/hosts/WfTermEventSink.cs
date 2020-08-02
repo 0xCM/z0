@@ -34,6 +34,10 @@ namespace Z0
         {
             term.print(e);
         }
+        public void Deposit(IAppEvent e)
+        {
+            term.print(e);
+        }
 
         public void Deposit(string message, AppMsgColor? color = null)
         {

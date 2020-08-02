@@ -11,15 +11,17 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-
-    public class WfBroker : IDisposable
+    
+    public class WfBroker : IWfBroker
     {
         readonly Dictionary<Type,ISink> Subscriptions;
 
-        readonly Dictionary<ulong, Receiver<IWfEvent>> Receivers;
+        readonly Dictionary<ulong, Receiver<IAppEvent>> Receivers;
         
         public FilePath TargetPath {get;}
 
+        public IWfEventSink Sink {get;}
+        
         readonly StreamWriter OutStream;
 
         object locker;
@@ -27,9 +29,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfBroker(FilePath target)
         {
+            Sink = new WfTermEventSink();
             TargetPath = target ?? FilePath.Empty;
             Subscriptions = new Dictionary<Type,ISink>();
-            Receivers = new Dictionary<ulong, Receiver<IWfEvent>>();
+            Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
             if(!TargetPath.IsNonEmpty)
                 OutStream = TargetPath.Writer();
             locker = new object();
@@ -41,7 +44,18 @@ namespace Z0
                 OutStream.Dispose();
         }
 
-        Outcome Subscribe<S,E>(S sink, E model)
+        public void raise<E>(in E e)
+            where E : IAppEvent
+        {                
+            Emit(e);
+            
+            if(Subscriptions.TryGetValue(e.GetType(), out var sink))
+                ((IAppMsgSink)sink).Deposit(e);
+            else
+                term.print(e, e.Flair);
+        }
+
+        public Outcome Subscribe<S,E>(S sink, E model)
             where E : IAppEvent
             where S : ISink
         {
@@ -53,13 +67,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Outcome Subscribe<E>(Action<E> receiver, E model = default)
-            where E : IWfEvent
+            where E : IAppEvent
                 => Subscribe(Events.sink(receiver), model);
 
-        public void Receive(ulong session, Action<IWfEvent> receiver)
-        {
-            Receivers.TryAdd(session,new Receiver<IWfEvent>((in IWfEvent e) => receiver(e)));
-        }
+        // public void Receive(ulong session, Action<IWfEvent> receiver)
+        // {
+        //     Receivers.TryAdd(session,new Receiver<IWfEvent>((in IWfEvent e) => receiver(e)));
+        // }
+
+        // public void Receive(ulong session, Action<IAppEvent> receiver)
+        // {
+        //     //Receivers.TryAdd(session,new Receiver<IAppEvent>((in IAppEvent e) => receiver(e)));
+        // }
+
 
         public void Cancel(ulong session)
         {
@@ -74,18 +94,31 @@ namespace Z0
                 lock(locker)
                     OutStream.WriteLine(e.Format());
         }
-        
+
+        void Emit(IAppEvent e)
+        {
+            z.iter(Receivers.Values, r => r(e));
+            if(OutStream != null)
+                lock(locker)
+                    OutStream.WriteLine(e.Format());
+        }
+
         public void Raise(IWfEvent e)
         {
             Emit(e);
         }
 
-        Outcome Subscribe(Action<IWfEvent> receiver, IWfEvent model)
+        public void Raise(IAppEvent e)
         {
-            if(Subscriptions.TryAdd(model.GetType(), Events.sink(receiver)))
-                return true;
-            else
-                return (false, AppMsg.Warn($"Key for {model.GetType()} was previously added"));            
+            Emit(e);
         }
+
+        // public Outcome Subscribe(Action<IWfEvent> receiver, IWfEvent model)
+        // {
+        //     if(Subscriptions.TryAdd(model.GetType(), Events.sink(receiver)))
+        //         return true;
+        //     else
+        //         return (false, AppMsg.Warn($"Key for {model.GetType()} was previously added"));            
+        // }
     }
 }

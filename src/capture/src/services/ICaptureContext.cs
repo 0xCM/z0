@@ -20,13 +20,13 @@ namespace Z0.Asm
 
         AsmWriterFactory WriterFactory {get;}
 
-        ICaptureBroker Broker {get;}
+        ICaptureBroker CaptureBroker {get;}
 
         TPartCaptureArchive Archive {get;}
 
         IAppMsgSink MsgSink {get;}
 
-        ref readonly E Raise<E>(in E e)
+        void Raise<E>(E e)
             where E : IAppEvent;
 
         CorrelationToken Correlate();                    

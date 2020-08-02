@@ -46,8 +46,7 @@ namespace Z0
         {
             var id = part.Id;
             var dstPath = TargetDir + FileName.Define(part.Id.Format(), FileExtensions.Csv);
-            var ct = Wf.Running(nameof(EmitConstantRecords), dstPath);
-
+            var ct = Wf.Running(nameof(EmitConstantRecords), dstPath.Name);
             var data = Read(part);
             var count = data.Length;            
             var target = PartRecords.formatter(PartRecordSpecs.Constants);

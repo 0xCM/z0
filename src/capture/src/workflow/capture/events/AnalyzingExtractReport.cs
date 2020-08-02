@@ -11,10 +11,12 @@ namespace Z0.Asm
 
     using E = AnalyzingExtractReport;
 
-    public readonly struct AnalyzingExtractReport : IAppEvent<E>
+    public readonly struct AnalyzingExtractReport : IWfEvent<E>
     {                    
         const string Pattern = "";
-        
+
+        public WfEventId Id  => WfEventId.define(nameof(AnalyzingExtractReport));
+
         [MethodImpl(Inline)]
         internal AnalyzingExtractReport(FilePath src)
             => Path = src;

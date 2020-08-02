@@ -10,8 +10,10 @@ namespace Z0.Asm
     using static Konst;
     using E = MatchedCapturedEmissions;
 
-    public readonly struct MatchedCapturedEmissions : IAppEvent<E>
+    public readonly struct MatchedCapturedEmissions : IWfEvent<E>
     {
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public readonly ApiHostUri Host;
         
         public readonly int Count;

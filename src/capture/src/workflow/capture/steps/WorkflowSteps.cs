@@ -48,11 +48,6 @@ namespace Z0.Asm
         void SaveExtractReport(ExtractReport src, FilePath dst);
     }    
 
-    public interface IExtractMembers
-    {
-        ExtractedCode[] ExtractMembers(IApiHost host);
-    }    
-
     public interface IMatchAddresses
     {
         void Run(ApiHostUri host, ExtractedCode[] extracted, AsmFunction[] decoded);

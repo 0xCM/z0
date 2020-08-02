@@ -87,54 +87,6 @@ namespace Z0
 
         FilePath[] HexFilePaths(params PartId[] parts)
             => PartFilePaths(CodeDir, parts);
-
-        void OnFileDeleted(FilePath src)
-        {
-
-        }
         
-        void ClearPartFiles(PartId part, Action<FilePath> handler)
-        {
-            var archive = PartCaptureArchive.from(this);    
-            archive.Clear(part, handler);
-        }
-        
-        void ClearPartFiles(PartId part)
-        {
-            ClearPartFiles(part, OnFileDeleted);
-            
-            // z.iter(ExtractDir.Files(part, Extract), f => f.Delete());
-            // z.iter(ParsedDir.Files(part, Parsed), f => f.Delete());
-            // z.iter(AsmDir.Files(part, Asm), f => f.Delete());
-            // z.iter(CodeDir.Files(part, Hex), f => f.Delete());
-            // z.iter(UnparsedDir.Files(part, Unparsed), f => f.Delete());
-        }
-
-        /// <summary>
-        /// Obliterates all content in archive-owned directories, returning the obliteration subjects upon completion
-        /// </summary>
-        FolderPath[] Clear(params PartId[] parts)
-        {
-            if(parts.Length == 0)
-            {
-                var dst = z.list<FolderPath>();
-                dst.Add(ExtractDir.Clear());
-                dst.Add(ParsedDir.Clear());
-                dst.Add(AsmDir.Clear());
-                dst.Add(CodeDir.Clear());
-                dst.Add(UnparsedDir.Clear());
-                return dst.ToArray();
-            }
-            else
-            {
-                for(var i=0; i<parts.Length; i++)
-                {
-                    var part = parts[i];
-                    ClearPartFiles(part);
-
-                }
-                return sys.empty<FolderPath>();
-            }
-        }                
     }
 }

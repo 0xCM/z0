@@ -53,10 +53,6 @@ namespace Z0
             where E : IAppEvent                 
                 => Subscribe(Events.sink(receiver), model);
 
-        [MethodImpl(Inline)]
-        Outcome IEventBroker.Subscribe<S,E>(S sink, E model)
-            => Subscribe(sink,model);
-
         void Emit(IAppEvent e)
         {
             if(OutStream != null)

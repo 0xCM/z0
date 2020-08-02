@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct HexCodeSaved : IAppEvent<HexCodeSaved>
+    public readonly struct HexCodeSaved : IWfEvent<HexCodeSaved>
     {
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public readonly ApiHostUri Host;
         
         public readonly IdentifiedCode[] Code;

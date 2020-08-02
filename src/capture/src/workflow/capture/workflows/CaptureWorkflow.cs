@@ -16,9 +16,9 @@ namespace Z0.Asm
         public ICaptureBroker Broker {get;}
         
         [MethodImpl(Inline)]
-        internal CaptureWorkflow(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, TPartCaptureArchive archive)
+        public CaptureWorkflow(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, TPartCaptureArchive archive)
         {
-            Broker = CaptureBroker.Allocate(context.AppPaths.AppStandardOutPath);
+            Broker = CaptureBroker.create(context.AppPaths.AppStandardOutPath);
             Context = new CaptureContext(context, decoder, formatter, writerfactory, Broker, archive);
         }
 

@@ -13,17 +13,11 @@ namespace Z0.Asm
         IMatchAddresses MatchAddresses 
             => new MatchAddressesStep(this);
 
-        ManageCaptureStep ManageCapture
-            => new ManageCaptureStep(this);
-
         IReportExtractsStep ReportExtracts
             => new EmitExtractReportStep(this);
 
         IEmitParsedReportStep ReportParsed
             => new EmitParsedReportStep(this);
-
-        ExtractMembersStep ExtractMembers
-            => new ExtractMembersStep(this);
 
         IDecodeStep DecodeParsed
             => new DecodedParsedStep(this);
@@ -34,10 +28,5 @@ namespace Z0.Asm
         IMatchEmissions MatchEmissions
             => new MatchEmissionsStep(this);
         
-        void Run(PartWfConfig config)
-            => ManageCapture.CaptureParts(config);        
-
-        void RunConsoidated(PartWfConfig config)
-            => ManageCapture.Consolidated(config);        
     }
 }

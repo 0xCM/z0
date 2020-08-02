@@ -9,10 +9,12 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct CapturingHosts : IAppEvent<CapturingHosts>
+    public readonly struct CapturingHosts : IWfEvent<CapturingHosts>
     {              
         const string MessageTemplate = "Capturing data for $(HostCount) api hosts";
         
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public readonly IApiHost[] Hosts;
 
         [MethodImpl(Inline)]

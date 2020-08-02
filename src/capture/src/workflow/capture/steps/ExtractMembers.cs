@@ -9,36 +9,41 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct ExtractMembersStep : IExtractMembers
+    public readonly ref struct ExtractMembersStep
     {
-        public ICaptureWorkflow Workflow {get;}
+        public static ExtractMembersStep create(CaptureState state)
+            => new ExtractMembersStep(state);
+                
+        readonly CaptureState State;
+        
+        ICaptureWorkflow CWf 
+             => State.CWf;
 
         public ICaptureContext Context 
-            => Workflow.Context;
+            => CWf.Context;
 
+        public void Dispose()
+        {
+
+        }
+        
         [MethodImpl(Inline)]
-        internal ExtractMembersStep(ICaptureWorkflow workflow)
-            => Workflow = workflow;
+        internal ExtractMembersStep(CaptureState state)
+        {
+            State = state;
+        }
 
-        public static ApiMember[] jit(IApiHost host)
+        ApiMember[] jit(IApiHost host)
             => ApiMemberJit.jit(host);
 
-        public static ApiMember[] jit(IApiHost[] hosts, IEventBroker broker)
-            => ApiMemberJit.jit(hosts, broker);
+        ApiMember[] jit(IApiHost[] hosts)
+            => ApiMemberJit.jit(hosts, State.AppEventSink);
         
-        public static ExtractedCode[] extract(ICaptureContext context, IApiHost host)
+        ExtractedCode[] extract(ICaptureContext context, IApiHost host)
         {            
             var members = jit(host);
             context.Raise(new MembersLocated(host.Uri, members));            
             return Extractor.Extract(members);
-        }
-
-        public static ExtractedCode[] extract(ICaptureContext context, IApiHost[] hosts, IEventBroker broker)
-        {
-            var members = jit(hosts, broker);
-            context.Raise(new JittedMembers(hosts, members));
-            var code = Extractor.Extract(members);
-            return code;
         }
 
         public ExtractedCode[] ExtractMembers(IApiHost host)
@@ -55,22 +60,21 @@ namespace Z0.Asm
             }
             return extracted;
         }
-
-        void OnStatus(IAppEvent e)
-            => Context.Raise(e);
         
         public ExtractedCode[] ExtractMembers(IApiHost[] hosts)
         {
             var extracted = sys.empty<ExtractedCode>();            
             try
             {
-                extracted = extract(Context,hosts, Context.Broker); 
+                var members = jit(hosts);
+                State.Raise(new JittedMembers(hosts, members));
+                return Extractor.Extract(members);
             }
             catch(Exception e)
             {
                 Context.Raise(new WorkflowError($"Extract failure", e));
-            }
-            return extracted;
+                return sys.empty<ExtractedCode>();
+            }            
         }
 
         static MemberExtractor Extractor

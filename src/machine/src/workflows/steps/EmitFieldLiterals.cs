@@ -28,10 +28,10 @@ namespace Z0
         KnownParts Parts
             => KnownParts.Service;
 
-        public EmitFieldLiterals(WfContext context)
+        public EmitFieldLiterals(WfContext context, CorrelationToken? ct = null)
         {
             Context = context;
-            Context.Running(nameof(EmitFieldLiterals), text.format(StartMsg, Target.Name));
+            Context.Running(nameof(EmitFieldLiterals));
         }
 
         public void Run()

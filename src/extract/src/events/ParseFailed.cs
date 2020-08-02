@@ -11,8 +11,10 @@ namespace Z0
 
     using E = ExtractParseFailed;
 
-    public readonly struct ExtractParseFailed : IAppEvent<E>
+    public readonly struct ExtractParseFailed : IWfEvent<E>
     {
+        public WfEventId Id => WfEventId.define(nameof(ExtractParseFailed));
+        
         [MethodImpl(Inline)]
         public static E create(ExtractParseFailure data)
             => new E(data);

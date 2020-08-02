@@ -120,7 +120,7 @@ namespace Z0.Asm
 
         public void read_library()
         {
-            var exchange = CaptureServices.Service(Context).CaptureExchange;
+            var exchange = CaptureServices.create(Context).CaptureExchange;
             var ops  = exchange.Service;
 
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();

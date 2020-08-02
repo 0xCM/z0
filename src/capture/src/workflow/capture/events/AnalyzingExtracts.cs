@@ -11,9 +11,11 @@ namespace Z0.Asm
 
     using E = AnalyzingExtracts;
 
-    public readonly struct AnalyzingExtracts : IAppEvent<E>
+    public readonly struct AnalyzingExtracts : IWfEvent<E>
     {        
         const string Pattern = "";
+
+        public WfEventId Id  => WfEventId.define("Placeholder");
 
         public ExtractedCode[] Extracts {get;}
         

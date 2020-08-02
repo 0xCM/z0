@@ -9,9 +9,11 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct CapturingPart : IAppEvent<CapturingPart>
+    public readonly struct CapturingPart : IWfEvent<CapturingPart>
     {            
         const string Pattern = "";
+
+        public WfEventId Id  => WfEventId.define("Placeholder");
 
         public readonly PartId Part;
 

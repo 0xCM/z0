@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Identity)" />
+    <ProjectReference Include="$(Flow)" />
   </ItemGroup>
 
 </Project>

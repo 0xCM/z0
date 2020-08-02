@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
     
-    public readonly struct FunctionsDecoded : IAppEvent<FunctionsDecoded>
+    public readonly struct FunctionsDecoded : IWfEvent<FunctionsDecoded>
     {
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public readonly ApiHostUri Host;
         
         public readonly AsmFunction[] Functions;

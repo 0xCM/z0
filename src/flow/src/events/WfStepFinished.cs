@@ -13,9 +13,9 @@ namespace Z0
 
     public readonly struct WfStepFinished : IWfEvent<WfStepFinished>
     {
-        const string DefaultPattern = "{0}: executing";
+        const string DefaultPattern = "{0}: Completed";
 
-        const string DetailPattern = "{0}: {1}";
+        const string DetailPattern = "{0}: Completed - {1}";
 
         public readonly WfEventId Id {get;}
 

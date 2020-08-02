@@ -26,7 +26,7 @@ namespace Z0
             Correlation = ct ?? CorrelationToken.create();
             Target =  Wf.AppPaths.ResIndexDir + FileName.Define("catalog", FileExtensions.Csv);
             Count = new uint[1]{0};
-            Wf.Running(nameof(EmitContentCatalog), $"Emitting content catalog to {Target}", Correlation);
+            Wf.Running(nameof(EmitContentCatalog), Correlation);
         }
 
         public void Run()

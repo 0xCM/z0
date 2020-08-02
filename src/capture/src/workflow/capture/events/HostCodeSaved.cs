@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct UriCodeSaved : IAppEvent<UriCodeSaved>
+    public readonly struct UriCodeSaved : IWfEvent<UriCodeSaved>
     {
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public readonly ApiHostUri Host;
         
         public readonly MemberCode[] Code;

@@ -8,28 +8,26 @@ namespace Z0
 
     using Z0.Asm;
     
-    public class CaptureWorkflowHost : ICaptureHost
+    public class CaptureHost : ICaptureHost, IDisposable
     {            
-        public CaptureWorkflowHost(WfContext wf, params string[] args)
-            : this(wf, PartWf.configure(wf, args), args)
-        {
-
-        }
-        
         public void Run()
-        {            
-            var parts = PartIdParser.parse(Args);
-            if(parts.Length == 0)
-                parts = KnownParts.Service.Known.Select(x => x.Id);            
-            var msg = text.format("Capturing {0}", parts.Describe());
-            Context.Running(nameof(CaptureWorkflowHost), msg);
-            term.magenta(msg);            
+        {   
+            Wf.Running(nameof(CaptureHost), Ct);         
+            (this as ICaptureClient).Connect();             
+            var parts = Config.Parts.Length == 0? Wf.ContextRoot.PartIdentities : Config.Parts;                
+            Wf.Raise(new CapturingParts(parts, Ct));
             Consolidate(parts);
         }
         
+        readonly CorrelationToken Ct;
+
+        readonly WfContext Wf;
+
+        readonly ICaptureWorkflow CWf;
+
         readonly string[] Args;
         
-        public IAppMsgSink Sink {get;}
+        public IWfEventSink Sink {get;}
 
         public ICaptureBroker Broker {get;}
 
@@ -55,32 +53,37 @@ namespace Z0
 
         readonly uint EvalBufferSize;
         
-        internal CaptureWorkflowHost(WfContext wf, PartWfConfig config, params string[] args)
-        {                    
-            Args = args ?? sys.empty<string>();
-            Context = ContextFactory.CreateAsmContext(wf.ContextRoot);
+        internal CaptureHost(WfContext wf, IAsmContext asm, ICaptureWorkflow cwf, ICaptureBroker broker, PartWfConfig config, CorrelationToken ct)
+        {                            
+            Wf = wf;                
+            Ct = ct;
+            CWf = cwf;
             Sink = wf.Sink;
+            Broker = broker;
+            Context = asm;
+
+            Wf.Status("Initializing capture host", ct);
+            Args = config.Args;
             EvalBufferSize = Pow2.T16;
             Config = config;
             Settings = CaptureConfig.From(wf.ContextRoot.Settings);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = Context.CaptureServices.Formatter(FormatConfig);            
-            Services = CaptureServices.Service(Context);            
+            Services = CaptureServices.create(Context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
             UriBitsReader = Capture.Services.EncodedHexReader;
             CaptureWorkflow = Services.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(config.Target));
-            Broker = CaptureWorkflow.Broker;
             ImmWorkflow = Services.ImmEmissionWorkflow(Sink, Context.Api, Formatter, Decoder, config);            
-            (this as ICaptureClient).Connect();            
+            Wf.Status("Completed host initialization sequence", ct);                       
         }
 
         public void Dispose()
         {
-             Context.Ran(nameof(CaptureWorkflowHost));
-             CaptureWorkflow.Dispose();
+            Wf.Ran(nameof(CaptureHost), Ct);
+            CaptureWorkflow.Dispose();
         }
         
-        public void Execute(params PartId[] parts)
+        void Execute(params PartId[] parts)
         {
             if(Settings.EmitImmArtifacts)
                 EmitImm(parts);
@@ -92,10 +95,13 @@ namespace Z0
                 CheckExec(parts);
         }
 
-        public void Consolidate(params PartId[] parts)
+        void Consolidate(params PartId[] parts)
         {
             if(Settings.EmitPrimaryArtifacts)
-                EmitConsolidated(parts);
+            {
+                var wf = ManageCaptureStep.create(CWf, Config, Ct);
+                wf.Consolidate();                
+            }
 
             if(Settings.EmitImmArtifacts)
                 EmitImm(parts);
@@ -111,10 +117,10 @@ namespace Z0
         }
 
         void EmitPrimary(params PartId[] parts)
-            => CaptureWorkflow.Run(Config);
-
-        void EmitConsolidated(params PartId[] parts)
-            => CaptureWorkflow.RunConsoidated(Config);
+        {
+            var wf = ManageCaptureStep.create(CWf, Config);            
+            wf.Run();
+        }
 
         void CheckExec(params PartId[] parts)
             => Context.CreateEvalWorkflow(Config, EvalBufferSize).Execute(parts);

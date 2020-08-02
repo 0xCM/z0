@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct EmittedEmbeddedImm : IAppEvent<EmittedEmbeddedImm>
+    public readonly struct EmittedEmbeddedImm : IWfEvent<EmittedEmbeddedImm>
     {
+        public WfEventId Id  => WfEventId.define(nameof(EmittedEmbeddedImm));
+
         public readonly ApiHostUri Host;
 
         public readonly bool Generic;

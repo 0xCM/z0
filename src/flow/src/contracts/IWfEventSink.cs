@@ -9,7 +9,7 @@ namespace Z0
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IWfEventSink : ISink<IWfEvent>,  IAppMsgSink, IDisposable
+    public interface IWfEventSink : ISink<IWfEvent>, IAppEventSink, IAppMsgSink, IDisposable
     {
         void Deposit<E>(in E @event)
             where E : IWfEvent;

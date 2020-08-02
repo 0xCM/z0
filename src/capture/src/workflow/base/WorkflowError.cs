@@ -11,8 +11,10 @@ namespace Z0.Asm
     
     using E = WorkflowError;
 
-    public readonly struct WorkflowError : IAppError<E>
+    public readonly struct WorkflowError : IWfEvent<E>
     {
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public string Description {get;}        
 
         [MethodImpl(Inline)]

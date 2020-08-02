@@ -16,7 +16,7 @@ namespace Z0
     {
         public FolderPath TargetDir {get;}
 
-        readonly CorrelationToken? Correlation;
+        readonly CorrelationToken Correlation;
 
         public readonly WfContext Wf;
         

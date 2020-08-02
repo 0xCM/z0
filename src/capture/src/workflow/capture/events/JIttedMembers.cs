@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct JittedMembers : IAppEvent<JittedMembers>
+    public readonly struct JittedMembers : IWfEvent<JittedMembers>
     {            
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public readonly IApiHost[] Hosts;
 
         public readonly ApiMember[] Members;

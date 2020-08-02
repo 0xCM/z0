@@ -10,8 +10,10 @@ namespace Z0.Asm
     using static Konst;
     using E = ExtractsParsed;
 
-    public readonly struct ExtractsParsed : IAppEvent<E>
+    public readonly struct ExtractsParsed : IWfEvent<E>
     {   
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public readonly ApiHostUri Host;
         
         public readonly ParsedExtract[] Members;

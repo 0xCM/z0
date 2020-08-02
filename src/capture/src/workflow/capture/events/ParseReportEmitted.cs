@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct ParseReportEmitted : IAppEvent<ParseReportEmitted>
+    public readonly struct ParseReportEmitted : IWfEvent<ParseReportEmitted>
     {
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public readonly MemberParseReport Report;
 
         public readonly FilePath TargetPath;

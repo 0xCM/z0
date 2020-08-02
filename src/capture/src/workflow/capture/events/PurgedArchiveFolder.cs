@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
     
-    public readonly struct ClearedDirectory : IAppEvent<ClearedDirectory>
+    public readonly struct ClearedDirectory : IWfEvent<ClearedDirectory>
     {
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         const string MessagePattern = "Purged content in {0}";        
         
         public readonly FolderPath Path;

@@ -12,8 +12,10 @@ namespace Z0.Asm
     
     using E = ImmInjectionFailed;
 
-    public readonly struct ImmInjectionFailed : IAppError<E>
+    public readonly struct ImmInjectionFailed : IWfEvent<E>
     {
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         [MethodImpl(Inline)]
         public static E Define(MethodInfo method)
             => new E(method);

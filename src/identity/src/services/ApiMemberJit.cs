@@ -22,14 +22,11 @@ namespace Z0
             return all.OrderBy(x => x.Address);
         }
         
-        public static ApiMembers jit(IApiHost[] src, IEventBroker broker)
+        public static ApiMembers jit(IApiHost[] src, IAppEventSink sink)
         {
-            void OnProgress(IAppEvent broker)
-                => term.print(broker);
-
-            var datatypes = JitDirect(src.Where(h => h is ApiDataType).Cast<ApiDataType>(), broker);
-            var direct = JitDirectMembers(src, broker);
-            var generic = JitGenericMembers(src, broker);
+            var datatypes = JitDirect(src.Where(h => h is ApiDataType).Cast<ApiDataType>(), sink);
+            var direct = JitDirectMembers(src, sink);
+            var generic = JitGenericMembers(src, sink);
             var all = datatypes.Concat(direct).Concat(generic).Array(); 
             return all.OrderBy(x => x.Address);
         }
@@ -38,10 +35,10 @@ namespace Z0
             where K : unmanaged, Enum
                 => g.IsGeneric() ? JitLocatedGeneric(src, kind) : JitLocatedDirect(src, kind);
 
-        static ApiMember[] JitDirectMembers(IApiHost[] src, IEventBroker broker)
-            => DefineMembers(JitDirect(src, broker), broker);
+        static ApiMember[] JitDirectMembers(IApiHost[] src, IAppEventSink sink)
+            => DefineMembers(JitDirect(src, sink), sink);
 
-        static ApiMember[] JitDirect(ApiDataType[] src, IEventBroker broker)
+        static ApiMember[] JitDirect(ApiDataType[] src, IAppEventSink sink)
         {
             var dst = z.list<ApiMember>();
 
@@ -53,33 +50,33 @@ namespace Z0
                 var methods = host.HostType.WorldMethods().Unignored().NonGeneric().Select(m => new HostedMethod(host.Uri, m));
                 var located = methods.Select(m => m.WithLocation(Root.address(Jit(m.Method))));  
                 Array.Sort(located);
-                var members = DefineMembers(located,broker);
+                var members = DefineMembers(located, sink);
                 dst.AddRange(members);                
             }
             return dst.ToArray();
         }
 
-        static ApiMember[] JitGenericMembers(IApiHost[] src, IEventBroker broker)
-            => DefineMembers(JitGeneric(src, broker), broker);
+        static ApiMember[] JitGenericMembers(IApiHost[] src, IAppEventSink sink)
+            => DefineMembers(JitGeneric(src, sink), sink);
 
-        static HostedMethod[] JitDirect(IApiHost[] src, IEventBroker broker)
+        static HostedMethod[] JitDirect(IApiHost[] src, IAppEventSink sink)
         {   
-            var methods = DirectMethods(src, broker);            
+            var methods = DirectMethods(src, sink);            
             var located = methods.Select(m => m.WithLocation(Root.address(Jit(m.Method))));  
             Array.Sort(located);
             return located;
         }
 
-        static HostedMethod[] JitGeneric(IApiHost[] src, IEventBroker broker)
+        static HostedMethod[] JitGeneric(IApiHost[] src, IAppEventSink sink)
         {   
-            var methods = GenericMethods(src, broker);            
+            var methods = GenericMethods(src, sink);            
             var closed = methods.SelectMany(m => (from t in ClosureQuery.numeric(m.Method) select new HostedMethod(m.Host, m.Method.MakeGenericMethod(t))));
             var located = closed.Select(m => m.WithLocation(Root.address(Jit(m.Method))));
             Array.Sort(located);
             return located;
         }
 
-        static ApiMember[] DefineMembers(HostedMethod[] located, IEventBroker broker)
+        static ApiMember[] DefineMembers(HostedMethod[] located, IAppEventSink sink)
         {               
             var dst = sys.alloc<ApiMember>(located.Length);
 
@@ -95,7 +92,7 @@ namespace Z0
 
             return dst;                    
         }
-
+        
         static ApiMember[] JitLocatedDirect(IApiHost src)
             =>  from m in DirectMethods(src)
                 let kid = m.Method.KindId()
@@ -166,25 +163,25 @@ namespace Z0
         static HostedMethod[] DirectMethods(ApiDataType host)
             => host.HostType.DeclaredMethods().NonGeneric().Select(m => new HostedMethod(host.Uri, m));
 
-        static HostedMethod[] DirectMethods(IApiHost[] src, IEventBroker broker)
+        static HostedMethod[] DirectMethods(IApiHost[] src, IAppEventSink broker)
         {
             var dst = z.list<HostedMethod>();
             foreach(var host in src)
             {
                 var methods = DirectMethods(host);
-                broker.Raise(AppStatusEvent.create($"{methods.Length} {host.Uri} direct  methods were jitted"));
+                broker.Deposit(AppStatusEvent.create($"{methods.Length} {host.Uri} direct  methods were jitted"));
                 dst.AddRange(methods);
             }
             return dst.ToArray();
         }
 
-        static HostedMethod[] GenericMethods(IApiHost[] src, IEventBroker broker)
+        static HostedMethod[] GenericMethods(IApiHost[] src, IAppEventSink broker)
         {
             var dst = z.list<HostedMethod>();
             foreach(var host in src)
             {
                 var methods = GenericMethods(host);
-                broker.Raise(AppStatusEvent.create($"{methods.Length} {host.Uri} generic methods were jitted"));                
+                broker.Deposit(AppStatusEvent.create($"{methods.Length} {host.Uri} generic methods were jitted"));                
                 dst.AddRange(methods);
             }
             return dst.ToArray();

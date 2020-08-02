@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct WfStepRunning : IWfEvent<WfStepRunning>
     {        
-        const string DefaultPattern = "{0}: executing";
+        const string DefaultPattern = "{0}: Running";
 
         const string DetailPattern = "{0}: {1}";
 

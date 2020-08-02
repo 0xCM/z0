@@ -18,12 +18,15 @@ namespace Z0
 
         public readonly ArchiveConfig Target;
 
-        public readonly IPart[] Parts;        
+        public readonly PartId[] Parts;        
+
+        public readonly string[] Args;
         
         [MethodImpl(Inline)]
-        public PartWfConfig(WfContext context, ArchiveConfig src, ArchiveConfig dst, IPart[] parts)
+        public PartWfConfig(WfContext context, string[] args, ArchiveConfig src, ArchiveConfig dst, PartId[] parts)
         {
             Context = context;
+            Args = args;
             Source = src;
             Target = dst;
             Parts = parts;

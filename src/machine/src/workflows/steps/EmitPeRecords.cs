@@ -26,7 +26,7 @@ namespace Z0
             Parts = src;
             TargetPath = wf.AppPaths.ResourceRoot + FileName.Define("z0", "pe.csv");
             DataType = EmissionDataType.Pe;
-            Wf.Running(nameof(EmitPeRecords), TargetPath.Name);
+            Wf.Running(nameof(EmitPeRecords));
         }
 
         public void Run()

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {    
-    public sealed class ImmEmissionBroker : EventBroker<ImmEmissionBroker,IImmEmissionBroker>, IImmEmissionBroker
+    public sealed class ImmEmissionBroker : WfBroker, IImmEmissionBroker
     {        
         ImmEmissionBroker(FilePath target)
             : base(target)
@@ -12,16 +12,16 @@ namespace Z0.Asm
 
         }
 
-        public static ImmEmissionBroker Allocate(FilePath target)
+        public static ImmEmissionBroker create(FilePath target)
             => new ImmEmissionBroker(target);                   
     }    
 
-    public interface IImmEmissionBroker : IPersistentBroker
+    public interface IImmEmissionBroker : IWfBroker
     {
         EmittedEmbeddedImm EmittedEmbeddedImm => EmittedEmbeddedImm.Empty;
 
         FileEmissionFailed HostFileEmissionFailed => FileEmissionFailed.Empty;
 
         ImmInjectionFailed ImmInjectionFailed => ImmInjectionFailed.Empty;
-    }
+    }    
 }

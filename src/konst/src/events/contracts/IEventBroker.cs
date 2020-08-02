@@ -11,19 +11,6 @@ namespace Z0
     /// </summary>
     public interface IEventBroker
     {
-        AppStatusEvent Status => default;
-
-        /// <summary>
-        /// Registers a target sink to which events will be routed
-        /// </summary>
-        /// <param name="sink">The target sink</param>
-        /// <param name="model">An event representative</param>
-        /// <typeparam name="S">The sink type</typeparam>
-        /// <typeparam name="E">The event type</typeparam>
-        Outcome Subscribe<S,E>(S sink, E model = default)
-            where E : IAppEvent
-            where S : IAppEventSink<E>;
-
         /// <summary>
         /// Registers an Event-parametric receiver to invoke upon occurrence of the parametrically-identified event
         /// </summary>

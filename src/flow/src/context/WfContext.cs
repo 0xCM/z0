@@ -28,9 +28,8 @@ namespace Z0
 
         public CorrelationToken Correlation {get;}
         
-        public IPart[] Parts 
-            => ContextRoot.Parts;
-        
+        public WfBroker Broker {get;}
+                
         [MethodImpl(Inline)]
         public WfContext(IAppContext root, WfConfig config, IWfEventSink sink)
         {
@@ -40,6 +39,7 @@ namespace Z0
             ContextData = config;
             CtProvider = 1;       
             Correlation = CorrelationToken.define(CtProvider);
+            Broker = new WfBroker(root.AppPaths.AppDataRoot + FileName.Define("brokered", FileExtensions.Csv));
             Sink.Deposit(new OpeningWfContext(typeof(WfContext), Correlation));
         }
 
@@ -78,6 +78,11 @@ namespace Z0
             return ct;
         }
 
+        public void Running(string worker, CorrelationToken ct)
+        {
+            Raise(new WfStepRunning(worker, ct));
+        }
+
         public void Status(string msg, CorrelationToken? ct = null)
         {   
             Raise(new WfStatus(msg,ct));            
@@ -90,20 +95,12 @@ namespace Z0
             return correlation;
         }
 
-        public CorrelationToken Running<T>(string worker, T detail, CorrelationToken? ct = null)
-            where T : ITextual
-        {
-            var correlation = ct ?? CorrelationToken.define((ulong)z.atomic(ref CtProvider));
-            Raise(new WfStepRunning(worker, detail.Format(), correlation));
-            return correlation;
-        }
-
-        public CorrelationToken Running(string worker, object detail, CorrelationToken? ct = null)
-        {
-            var correlation = ct ?? CorrelationToken.define((ulong)z.atomic(ref CtProvider));
-            Raise(new WfStepRunning(worker, (detail ?? EmptyString).ToString(), correlation));
-            return correlation;
-        }
+        // public CorrelationToken Running(string worker, object detail, CorrelationToken? ct = null)
+        // {
+        //     var correlation = ct ?? CorrelationToken.define((ulong)z.atomic(ref CtProvider));
+        //     Raise(new WfStepRunning(worker, (detail ?? EmptyString).ToString(), correlation));
+        //     return correlation;
+        // }
 
         public void Ran(string worker, CorrelationToken? ct = null)
         {

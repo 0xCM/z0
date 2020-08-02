@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
         
-    public readonly struct ExtractReportSaved : IAppEvent<ExtractReportSaved>
+    public readonly struct ExtractReportSaved : IWfEvent<ExtractReportSaved>
     {        
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public readonly ApiHostUri Host;        
 
         public readonly Type ReportType;

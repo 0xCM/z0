@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct FileEmissionFailed : IAppEvent<FileEmissionFailed>
+    public readonly struct FileEmissionFailed : IWfEvent<FileEmissionFailed>
     {
+        public WfEventId Id  => WfEventId.define("Placeholder");
+
         public readonly ApiHostUri Host;
 
         public readonly bool Generic;

@@ -12,14 +12,43 @@ namespace Z0.Asm
 
     public class ManageCaptureStep : IManageCaptureStep
     {
-        public ICaptureWorkflow Workflow {get;}
+        public static ManageCaptureStep create(ICaptureWorkflow wf, PartWfConfig config, CorrelationToken? ct = null)
+            => new ManageCaptureStep(wf, config, ct);
 
-        public ICaptureContext Context 
-            => Workflow.Context;
+        readonly CorrelationToken Ct;
+
+        public CaptureState State;
+        
+        public ICaptureWorkflow CWf {get;}
+
+        public PartWfConfig Config;
+
+        readonly WfContext Wf;
+        
+        ICaptureContext Context 
+            => CWf.Context;
+
+        public void Status(string msg)
+        {
+            Wf.Status(msg, Ct);
+        }
+
+        public WfEventId Raise<E>(in E @event)
+            where E : IWfEvent
+        {
+            Wf.Sink.Deposit(@event);
+            return @event.Id;
+        }
 
         [MethodImpl(Inline)]
-        internal ManageCaptureStep(ICaptureWorkflow workflow)
-            => Workflow = workflow;
+        internal ManageCaptureStep(ICaptureWorkflow cwf, PartWfConfig config, CorrelationToken? ct)
+        {
+            State = new CaptureState(cwf, config, ct);
+            Ct = ct ?? CorrelationToken.create();
+            CWf = cwf;
+            Wf = config.Context;
+            Config = config;
+        }
         
         void Clear(PartWfConfig config) 
         {
@@ -33,49 +62,47 @@ namespace Z0.Asm
                 term.error(e);
             }
         }
-        
-        IPartCatalog[] Catalogs(IApiSet src, PartWfConfig config)
+
+        IPartCatalog[] Catalogs(IApiSet src)
         {
-            var dst = z.list<IPartCatalog>();
-            var parts = config.Parts;
-            for(var i=0; i<parts.Length; i++)                
-            {
-                var id = parts[i].Id;
-                var catalog = src.Catalogs.Where(c => c.PartId == id && c.IsNonEmpty).FirstOrDefault();
-                if(catalog != null)
-                    dst.Add(catalog);
-            }
-            return dst.Array();
+            return src.Catalogs;
         }
-        
+
+        public void Run()
+        {
+            Clear(Config);  
+
+            var dst = Archives.Services.CaptureArchive(Config.Target.ArchiveRoot);    
+            var catalogs = Catalogs(Context.ApiSet).Array();
+            CaptureParts(catalogs, dst);
+        }
+
         public void CaptureParts(PartWfConfig config)
         {
             Clear(config);  
 
             var dst = Archives.Services.CaptureArchive(config.Target.ArchiveRoot);    
-            var catalogs = Catalogs(Context.ApiSet, config).Array();
+            var catalogs = Catalogs(Context.ApiSet).Array();
             CaptureParts(catalogs, dst);
         }
 
-        public void Consolidated(PartWfConfig config)
+        public void Consolidate()
         {
-            var catalogs = Catalogs(Context.ApiSet, config).Array();
-
-            Clear(config);
+            var catalogs = Catalogs(Context.ApiSet).Array();
+            Raise(new RunningConsolidated(catalogs.Length));
+            
+            Clear(Config);
 
             try
             {
-                term.print($"Executing consolidated workflow over {catalogs.Length} catalogs: {config.Source} -> {config.Target}");      
-
                 var a = catalogs.SelectMany(c => c.DataTypeHosts).Cast<IApiHost>();
                 var b = catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>();
                 var hosts = a.Concat(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
-                
-                term.print($"Consolidated {hosts.Length} hosts");      
-                
-                var dst = Archives.Services.CaptureArchive(config.Target.ArchiveRoot); 
 
-                using var step = CaptureHostStep.create(Workflow);
+                Status($"Consolidated {hosts.Length} hosts");    
+                
+                var dst = Archives.Services.CaptureArchive(Config.Target.ArchiveRoot); 
+                using var step = CaptureHostStep.create(State);
                 step.Capture(hosts, dst);
 
             }
@@ -84,7 +111,7 @@ namespace Z0.Asm
                 term.error(e);
             }
         }
-
+        
         public void CaptureParts(IPartCatalog[] src, TPartCaptureArchive dst)
         {
             for(var i=0; i<src.Length; i++)
@@ -105,7 +132,7 @@ namespace Z0.Asm
 
         public void CaptureHosts(IPartCatalog src, TPartCaptureArchive dst)
         {
-            var step = CaptureHostStep.create(Workflow);             
+            var step = CaptureHostStep.create(State);             
             z.iter(src.OperationHosts, h => CaptureHost(step, h, dst));
         }
 
