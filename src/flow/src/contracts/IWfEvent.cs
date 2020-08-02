@@ -3,12 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    public interface IAppMsgReceiver
-    {
-        IAppMsgSink Sink {get;}
-    }
-    
+{    
     public interface IWfEvent : IAppEvent
     {
         WfEventId Id {get;}

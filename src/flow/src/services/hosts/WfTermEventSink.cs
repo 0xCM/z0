@@ -12,11 +12,16 @@ namespace Z0
     /// <summary>
     /// Reifies a workflow event receiver that emits received events to the terminal
     /// </summary>
-    public readonly struct WfTermEventSink : IWfEventSink<WfTermEventSink>
+    public readonly struct WfTermEventSink : IWfEventSink<WfTermEventSink>, IMultiSink
     {
         public static WfTermEventSink create()
             => default;
                 
+        WfTermEventSink(int i)
+        {
+
+        }
+        
         [MethodImpl(Inline)]
         public void Deposit<E>(in E e)
             where E : IWfEvent

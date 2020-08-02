@@ -16,7 +16,7 @@ namespace Z0
 
         readonly ulong SessionId;
 
-        public IWfEventSink Sink {get;}
+        public IMultiSink Sink {get;}
 
         public IAppContext ContextRoot {get;}
         
@@ -25,7 +25,7 @@ namespace Z0
         public CorrelationToken Correlation {get;}
 
         [MethodImpl(Inline)]
-        public WfContext(IAppContext root, T config, IWfEventSink sink)
+        public WfContext(IAppContext root, T config, IMultiSink sink)
         {
             SessionId = (ulong)now().Ticks;
             ContextRoot = root;

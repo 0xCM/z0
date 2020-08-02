@@ -11,7 +11,8 @@ namespace Z0.Asm
 
     public readonly struct EmittedEmbeddedImm : IWfEvent<EmittedEmbeddedImm>
     {
-        public WfEventId Id  => WfEventId.define(nameof(EmittedEmbeddedImm));
+        public WfEventId Id 
+            => WfEventId.define(nameof(EmittedEmbeddedImm));
 
         public readonly ApiHostUri Host;
 

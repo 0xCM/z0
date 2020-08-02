@@ -61,15 +61,16 @@ namespace Z0
             get => Timestamp.Hashed;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Ignore]
         int IComparable<WfEventId>.CompareTo(WfEventId src)
             => CompareTo(src);
 
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Ignore]
         bool IEquatable<WfEventId>.Equals(WfEventId src)
             => Equals(src);
         
+        [MethodImpl(Inline), Ignore]
         string ITextual.Format()
             => Format();
 
@@ -82,13 +83,16 @@ namespace Z0
         CorrelationToken ICorrelated.Correlation
             => Correlation;
         
-
+        [MethodImpl(Inline), Ignore]
         public override int GetHashCode()
             => (int)Hashed;
+
+        [MethodImpl(Inline), Ignore]
         
         public override bool Equals(object src)
             => src is WfEventId i && Equals(i);
 
+        [MethodImpl(Inline), Ignore]
         public override string ToString()
             => Format();
     }

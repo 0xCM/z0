@@ -39,6 +39,7 @@ namespace Z0
         public static void run(IAppContext context, params string[] args)
         {
             var receiver = Flow.TermReceiver;
+            //using var receiver = Flow.log(context);
             using var wf = WfContext.create(context, Flow.config(context, receiver), receiver);
             using var control = new WfControl(wf, args);
             control.Run();
@@ -80,8 +81,8 @@ namespace Z0
             Wf.Ran(nameof(WfControl), Ct);
         }
 
-        bool CaptureArtifacts => true;
+        bool CaptureArtifacts => false;
         
-        bool EmitDatasets => false;
+        bool EmitDatasets => true;
     }
 }

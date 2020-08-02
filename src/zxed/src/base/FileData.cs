@@ -9,18 +9,18 @@ namespace Z0
     
     using static Konst;
 
-    [ApiHost]
+    [ApiDataType]
     public readonly struct SourceFileData
     {
         public readonly FilePath Source;
         
         public readonly TextRow[] Rows;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static SourceFileData Define(FilePath src, TextRow[] lines)
             => new SourceFileData(src,lines);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         internal SourceFileData(FilePath src, TextRow[] lines)
         {
             Source = src;
@@ -29,13 +29,13 @@ namespace Z0
 
         public ref readonly TextRow this[int i] 
         { 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             get => ref Rows[i];
         }
 
         public bool IsEmpty 
         { 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             get => (Rows?.Length ?? 0) == 0;
         }
 
@@ -50,7 +50,7 @@ namespace Z0
 
         public static SourceFileData Empty 
         {
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             get => new SourceFileData(FilePath.Empty, sys.empty<TextRow>());
         }
     }

@@ -3691,3 +3691,17 @@
  create mode 100644 src/zxed/src/etl/events/ParsedInstructions.cs
  create mode 100644 src/zxed/src/etl/events/ParsingInstructions.cs
  create mode 100644 src/zxed/src/etl/events/WfEvents.cs
+[master 26c2a2e26] .
+ 75 files changed, 1466 insertions(+), 658 deletions(-)
+ rename src/capture/src/{services => }/CaptureContext.cs (89%)
+ create mode 100644 src/capture/src/CaptureState.cs
+ create mode 100644 src/capture/src/services/ApiMemberCollect.cs
+ create mode 100644 src/capture/src/workflow/capture/events/RunningConsolidated.cs
+ rewrite src/control/src/hosts/capture/CaptureHost.cs (97%)
+ rewrite src/flow/src/context/WfContextT.cs (65%)
+ create mode 100644 src/flow/src/contracts/IWfBroker.cs
+ rename src/{capture/src/workflow/capture/ICaptureHost.cs => flow/src/contracts/IWfBrokerClient.cs} (50%)
+ create mode 100644 src/flow/src/events/AppErrorEvent.cs
+ rename src/flow/src/events/{WfStepRunning.1.cs => WfStatus.cs} (100%)
+ copy src/{control/src/hosts/capture => machine/src/workflows}/CaptureHost.cs (62%)
+ create mode 100644 src/machine/src/workflows/events/CapturingParts.cs

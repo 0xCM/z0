@@ -13,14 +13,14 @@ namespace Z0
     public struct WfContext : IWfContext<WfConfig>
     {
         [MethodImpl(Inline)]
-        public static WfContext create(IAppContext root, WfConfig config, IWfEventSink sink)
+        public static WfContext create(IAppContext root, WfConfig config, IMultiSink sink)
             => new WfContext(root, config, sink);
 
         long CtProvider;
 
         readonly ulong SessionId;
 
-        public IWfEventSink Sink {get;}
+        public IMultiSink Sink {get;}
         
         public IAppContext ContextRoot {get;}
         
@@ -31,7 +31,7 @@ namespace Z0
         public WfBroker Broker {get;}
                 
         [MethodImpl(Inline)]
-        public WfContext(IAppContext root, WfConfig config, IWfEventSink sink)
+        public WfContext(IAppContext root, WfConfig config, IMultiSink sink)
         {
             SessionId = (ulong)now().Ticks;
             Sink = sink;

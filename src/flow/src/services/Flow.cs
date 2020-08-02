@@ -13,18 +13,29 @@ namespace Z0
 
     public readonly struct Flow
     {
-        public static WfTermEventSink TermReceiver 
+        public static IMultiSink TermReceiver 
             => WfTermEventSink.create();
 
         public static FilePath ConfigPath(IAppContext context)
         {
-            var filename = FileName.Define(Assembly.GetEntryAssembly().GetSimpleName(), FileExtensions.Json);
+            var assname = Assembly.GetEntryAssembly().GetSimpleName();
+            var filename = FileName.Define(assname, FileExtensions.Json);
             var src = context.AppPaths.ConfigRoot + filename;
             return src;
         }
 
+        public static IMultiSink log(IAppContext context)
+            => new WfEventLog(
+                    context.AppPaths.AppStandardOutPath.ChangeExtension(FileExtensions.Csv), 
+                    context.AppPaths.AppErrorOutPath.ChangeExtension(FileExtensions.Csv), 
+                    multisink(WfTermEventSink.create())
+                    );
+        
+        [MethodImpl(Inline)]
+        public static IMultiSink multisink(IAppEventSink sink)
+            => new MultiSink(sink);        
 
-        public static WfConfig config(IAppContext context, IWfEventSink sink)
+        public static WfConfig config(IAppContext context, IMultiSink sink)
         {
             var path = Flow.ConfigPath(context);
             var ct = CorrelationToken.create();

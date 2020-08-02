@@ -27,7 +27,7 @@ namespace Z0
 
         readonly string[] Args;
         
-        public IWfEventSink Sink {get;}
+        public IMultiSink Sink {get;}
 
         public ICaptureBroker Broker {get;}
 
@@ -155,14 +155,14 @@ namespace Z0
             for(var i = 0u; i<functions.Length; i++)
                 count += (ulong)z.skip(functions,i).InstructionCount;
             
-            Sink.CountedInstructions(host, count);                   
+            //Sink.CountedInstructions(host, count);                   
         }
              
         void CheckDuplicates(ApiHostUri host, ReadOnlySpan<ApiMember> src)
         {
             var index = ApiMemberOps.Service.CreateIndex(src);
-            foreach(var key in index.DuplicateKeys)
-                Sink.DuplicateWarning(host,key);
+            // foreach(var key in index.DuplicateKeys)
+            //     Sink.DuplicateWarning(host,key);
         }
     }
 }

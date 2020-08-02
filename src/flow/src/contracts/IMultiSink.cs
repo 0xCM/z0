@@ -3,18 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{    
     using System;
-    using System.Runtime.CompilerServices;
-
-    public interface IWfBrokerClient
+    
+    public interface IMultiSink : ISink<IWfEvent> , ISink<IAppEvent>, IDisposable
     {
-        IMultiSink Sink {get;}
-    }
-
-    public interface IWfBrokerClient<E> : IWfBrokerClient
-        where E : IWfBroker
-    {
-        E Broker {get;}
+                
     }
 }

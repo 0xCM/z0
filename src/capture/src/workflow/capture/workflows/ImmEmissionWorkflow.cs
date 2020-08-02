@@ -18,7 +18,7 @@ namespace Z0.Asm
 
         readonly IAsmContext Context;
 
-        public IAppMsgSink Sink {get;}
+        public IMultiSink Sink {get;}
 
         readonly IApiSet ApiSet;
 
@@ -32,7 +32,7 @@ namespace Z0.Asm
 
         readonly IImmSpecializer ImmSpecializer;
 
-        internal ImmEmissionWorkflow(IAsmContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
+        internal ImmEmissionWorkflow(IAsmContext context, IMultiSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
         {
             Broker = ImmEmissionBroker.create(context.AppPaths.AppStandardOutPath);
             Context = context;
@@ -65,22 +65,17 @@ namespace Z0.Asm
 
         void OnEvent(EmittedEmbeddedImm e)
         {
-            Sink.NotifyConsole(e.Format(), e.Flair);                
-            //Flow.Report(e);
+            Sink.Deposit(e);
         }
 
         void OnEvent(FileEmissionFailed e)
         {
-            Sink.NotifyConsole(e.Format(), e.Flair);                
-
-            //Flow.Report(e);
+            Sink.Deposit(e);
         }
 
         void OnEvent(ImmInjectionFailed e)
         {
-            Sink.NotifyConsole(e.Format(), e.Flair);                
-
-            //Flow.Report(e);
+            Sink.Deposit(e);
         }
 
         public void ClearArchive(params PartId[] parts)
