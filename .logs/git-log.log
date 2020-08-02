@@ -3705,3 +3705,8 @@
  rename src/flow/src/events/{WfStepRunning.1.cs => WfStatus.cs} (100%)
  copy src/{control/src/hosts/capture => machine/src/workflows}/CaptureHost.cs (62%)
  create mode 100644 src/machine/src/workflows/events/CapturingParts.cs
+[master 3d286bd68] .
+ 21 files changed, 204 insertions(+), 53 deletions(-)
+ create mode 100644 src/flow/src/contracts/IMultiSink.cs
+ create mode 100644 src/flow/src/services/hosts/WfEventLog.cs
+ create mode 100644 src/flow/src/services/hosts/WfEventRelay.cs

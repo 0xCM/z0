@@ -11,21 +11,24 @@ namespace Z0.Asm
 
     public readonly struct ExtractedMembers : IWfEvent<ExtractedMembers>
     {            
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        const string Pattern = "{0}: {1} {2}";
+
+        public WfEventId Id {get;}
 
         public readonly ApiHostUri Host;
 
         public readonly int MemberCount;
 
         [MethodImpl(Inline)]
-        public ExtractedMembers(ApiHostUri host, int count)
+        public ExtractedMembers(ApiHostUri host, int count, CorrelationToken? ct = null)
         {
+            Id = WfEventId.define(nameof(ExtractedMembers), ct);
             Host = host;
             MemberCount = count;
         }
 
         public string Format()
-            => $"{MemberCount} {Host.Format()} members extracted";
+            => text.format(Pattern, Id, MemberCount, Host.Format());
 
         public ExtractedMembers Zero
             => Empty;

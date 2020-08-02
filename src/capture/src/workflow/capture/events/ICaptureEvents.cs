@@ -4,20 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {    
-    public sealed class CaptureBroker : WfBroker, ICaptureBroker
-    {   
-        CaptureBroker(FilePath target)
-            : base(target)
-        {
-
-        }
-
-        public static ICaptureBroker create(FilePath target)
-            => new CaptureBroker(target);           
-    }
-    
-    public interface ICaptureBroker : IImmEmissionBroker
+    public interface ICaptureBroker : IImmBroker, ICaptureEvents
     {        
+
+    }
+
+    public interface ICaptureEvents
+    {
         WfError Error => default;
 
         WfStatus Status => default;
@@ -58,4 +51,5 @@ namespace Z0.Asm
 
         ClearedPartFiles ClearedPartFiles => default;                   
     }
+ 
 }

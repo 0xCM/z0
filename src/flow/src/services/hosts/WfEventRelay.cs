@@ -25,11 +25,12 @@ namespace Z0
         public MultiSink(IAppEventSink sink)        
         {
             Sink = sink;
+            Sink.Deposit(new WorkerInitialized(nameof(MultiSink)));
         }
         
         public void Dispose()
         {
-        
+            Sink.Deposit(new WfStepFinished(nameof(MultiSink)));
         }
     }
 }

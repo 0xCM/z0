@@ -70,17 +70,6 @@ namespace Z0
             where E : IAppEvent
                 => Subscribe(Events.sink(receiver), model);
 
-        // public void Receive(ulong session, Action<IWfEvent> receiver)
-        // {
-        //     Receivers.TryAdd(session,new Receiver<IWfEvent>((in IWfEvent e) => receiver(e)));
-        // }
-
-        // public void Receive(ulong session, Action<IAppEvent> receiver)
-        // {
-        //     //Receivers.TryAdd(session,new Receiver<IAppEvent>((in IAppEvent e) => receiver(e)));
-        // }
-
-
         public void Cancel(ulong session)
         {
             lock(locker)

@@ -38,9 +38,9 @@ namespace Z0
 
         public static void run(IAppContext context, params string[] args)
         {
-            var receiver = Flow.TermReceiver;
             //using var receiver = Flow.log(context);
-            using var wf = WfContext.create(context, Flow.config(context, receiver), receiver);
+            var receiver = Flow.TermReceiver;
+            using var wf = WfContext.create(context, Flow.LoadConfig(context, receiver), receiver);
             using var control = new WfControl(wf, args);
             control.Run();
         }

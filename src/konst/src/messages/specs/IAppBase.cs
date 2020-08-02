@@ -4,15 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    /// <summary>
-    /// Characterizes a context that provides access to application configuration data
-    /// </summary>
-    public interface TAppEnv : IContext
+    using System;
+    using System.Reflection;
+
+    public interface IAppBase : IContext
     {
+        string AppName 
+            => Assembly.GetEntryAssembly().GetSimpleName(); 
+
         TAppPaths AppPaths             
             => Z0.AppPaths.Default;
 
         IAppSettings Settings 
             => AppSettings.Load(AppPaths.AppConfigPath);
+
+    }
+
+    public interface IAppBase<F> : IAppBase
+        where F : IAppBase<F>
+    {
+
     }
 }

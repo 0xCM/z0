@@ -53,7 +53,7 @@ namespace Z0
 
         readonly uint EvalBufferSize;
         
-        internal CaptureHost(WfContext wf, IAsmContext asm, ICaptureWorkflow cwf, ICaptureBroker broker, PartWfConfig config, CorrelationToken ct)
+        public CaptureHost(WfContext wf, IAsmContext asm, ICaptureWorkflow cwf, ICaptureBroker broker, PartWfConfig config, CorrelationToken ct)
         {                            
             Wf = wf;                
             Ct = ct;

@@ -36,6 +36,8 @@ namespace Z0
      
         Option<Action> TerminationHandler;
 
+        readonly FilePath ErrorLogPath;
+        
         Terminal()
         {
              TermLock = new object();
@@ -43,11 +45,8 @@ namespace Z0
              StdLock = new object();
              Console.OutputEncoding = new UnicodeEncoding();      
              Console.CancelKeyPress += OnCancelKeyPressed;  
-             ErrorLogPath.Delete();      
+             ErrorLogPath = AppBase.Default.AppPaths.AppErrorOutPath.CreateParentIfMissing();
         }
-
-        FilePath ErrorLogPath
-            => AppEnv.Default.AppPaths.AppErrorOutPath.CreateParentIfMissing();
 
         /// <summary>
         /// Specfifies the handler to invoke when the user enters a cancellation
@@ -161,7 +160,6 @@ namespace Z0
             }
         }
 
-
         void WriteWarning(object src)
         {
             lock(TermLock)
@@ -185,13 +183,11 @@ namespace Z0
         }
 
         
-        void Log(IAppMsg msg)
+        void SaveError(IAppMsg src)
         {
-            var rendered = msg.Format();
+            var rendered = src.Format();
             lock(ErrLock)
-            {
                 ErrorLogPath.AppendLine(rendered);
-            }
         }
         
         public void WriteError(IAppMsg src)
@@ -205,7 +201,7 @@ namespace Z0
                 Console.ForegroundColor = current;    
             }  
 
-            Log(src);          
+            SaveError(src);          
         }
 
         public void WriteLine(object sr)

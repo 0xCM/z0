@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface IApiSet
+    public interface IApiSet : IAppBase
     {
         IPart[] Parts {get;}   
 

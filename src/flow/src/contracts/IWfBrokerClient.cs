@@ -10,11 +10,16 @@ namespace Z0
     public interface IWfBrokerClient
     {
         IMultiSink Sink {get;}
+
+        IWfBroker Broker {get;}
     }
 
     public interface IWfBrokerClient<E> : IWfBrokerClient
         where E : IWfBroker
     {
-        E Broker {get;}
+        new E Broker {get;}
+
+        IWfBroker IWfBrokerClient.Broker 
+            => Broker;
     }
 }

@@ -10,10 +10,10 @@ namespace Z0
 
     public class AgentControl : AgentControl<IAgentControl,IAgentContext>, IAgentControl
     {
-        public static IAgentControl FromContext(TAppEnv Context)
-            => new AgentControl(Context);
+        public static IAgentControl FromContext(IAppBase context)
+            => new AgentControl(context);
         
-        public AgentControl(TAppEnv Context)
+        public AgentControl(IAppBase Context)
             : base(Context)
         {
 

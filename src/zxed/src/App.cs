@@ -40,7 +40,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {            
             var sink = Flow.TermReceiver;
-            var config = new XedEtlConfig(Context, Flow.config(Context,sink));
+            var config = new XedEtlConfig(Context, Flow.LoadConfig(Context,sink));
             using var context = new WfContext<XedEtlConfig>(Context, config, sink);
             using var wf = new XedEtl(context);
             wf.Run();                                        

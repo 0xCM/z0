@@ -53,7 +53,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Timestamp, Correlation, Name.Format());       
+            => text.format(Pattern, Timestamp, Correlation, Name.Format()).PadRight(64);       
 
         public uint Hashed
         {        

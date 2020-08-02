@@ -4,19 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {    
-    public sealed class ImmEmissionBroker : WfBroker, IImmEmissionBroker
+    public sealed class ImmBroker : WfBroker, IImmBroker
     {        
-        ImmEmissionBroker(FilePath target)
+        ImmBroker(FilePath target)
             : base(target)
         {
 
         }
 
-        public static ImmEmissionBroker create(FilePath target)
-            => new ImmEmissionBroker(target);                   
+        public static ImmBroker create(FilePath target)
+            => new ImmBroker(target);                   
     }    
 
-    public interface IImmEmissionBroker : IWfBroker
+    public interface IImmBroker : IWfBroker
     {
         EmittedEmbeddedImm EmittedEmbeddedImm => EmittedEmbeddedImm.Empty;
 

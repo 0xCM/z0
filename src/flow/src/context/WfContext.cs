@@ -78,6 +78,13 @@ namespace Z0
             return ct;
         }
 
+        public CorrelationToken Running(string worker, string detail, CorrelationToken? ct = null)
+        {
+            var correlation = ct ?? CorrelationToken.define((ulong)z.atomic(ref CtProvider));
+            Raise(new WfStepRunning(worker, detail, correlation));
+            return correlation;
+        }
+
         public void Running(string worker, CorrelationToken ct)
         {
             Raise(new WfStepRunning(worker, ct));
@@ -87,37 +94,25 @@ namespace Z0
         {   
             Raise(new WfStatus(msg,ct));            
         }
-        
-        public CorrelationToken Running(string worker, string detail, CorrelationToken? ct = null)
+
+        public void Initialized(string worker, CorrelationToken? ct = null)
         {
-            var correlation = ct ?? CorrelationToken.define((ulong)z.atomic(ref CtProvider));
-            Raise(new WfStepRunning(worker, detail, correlation));
-            return correlation;
+            Raise(new WorkerInitialized(worker, ct));
         }
-
-        // public CorrelationToken Running(string worker, object detail, CorrelationToken? ct = null)
-        // {
-        //     var correlation = ct ?? CorrelationToken.define((ulong)z.atomic(ref CtProvider));
-        //     Raise(new WfStepRunning(worker, (detail ?? EmptyString).ToString(), correlation));
-        //     return correlation;
-        // }
-
+        
         public void Ran(string worker, CorrelationToken? ct = null)
         {
-            var correlation = CorrelationToken.define((ulong)z.atomic(ref CtProvider));         
-            Raise(new WfStepFinished(worker, correlation));            
+            Raise(new WfStepFinished(worker, ct));            
         }
 
         public void Ran(string worker, string detail, CorrelationToken? ct = null)
         {
-            var correlation = CorrelationToken.define((ulong)z.atomic(ref CtProvider));            
-            Raise(new WfStepFinished(worker, detail, correlation));
+            Raise(new WfStepFinished(worker, detail, ct));
         }
 
         public void Ran(string worker, object detail, CorrelationToken? ct = null)
         {
-            var correlation = CorrelationToken.define((ulong)z.atomic(ref CtProvider));            
-            Raise(new WfStepFinished(worker, (detail ?? EmptyString).ToString(), correlation));
+            Raise(new WfStepFinished(worker, (detail ?? EmptyString).ToString(), ct));
         }
     }
 }

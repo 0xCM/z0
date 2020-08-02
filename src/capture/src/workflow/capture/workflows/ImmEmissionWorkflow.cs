@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     public class ImmEmissionWorkflow : IImmEmissionWorkflow
     {                        
-        public IImmEmissionBroker Broker {get;} 
+        public IImmBroker Broker {get;} 
 
         readonly IAsmContext Context;
 
@@ -34,7 +34,7 @@ namespace Z0.Asm
 
         internal ImmEmissionWorkflow(IAsmContext context, IMultiSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
         {
-            Broker = ImmEmissionBroker.create(context.AppPaths.AppStandardOutPath);
+            Broker = ImmBroker.create(context.AppPaths.AppStandardOutPath);
             Context = context;
             Sink = sink;
             Formatter = formatter;
@@ -56,7 +56,7 @@ namespace Z0.Asm
         IImmEmissionWorkflow Flow 
             => this;
         
-        void ConnectReceivers(IImmEmissionBroker relay)
+        void ConnectReceivers(IImmBroker relay)
         {
             relay.EmittedEmbeddedImm.Subscribe(relay, OnEvent);          
             relay.HostFileEmissionFailed.Subscribe(relay, OnEvent);

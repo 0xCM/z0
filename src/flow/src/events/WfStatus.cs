@@ -17,24 +17,28 @@ namespace Z0
 
         public WfEventId Id {get;}
 
+        public AppMsgColor Flair {get;}
+
         public readonly string Message;
 
         [MethodImpl(Inline)]
         public WfStatus(string msg, CorrelationToken? ct = null)
         {
             Id = WfEventId.define(msg, ct ?? CorrelationToken.create(), now());
+            Flair =  AppMsgColor.Green;
             Message = msg;
         }
 
-        public AppMsgColor Flair 
-            => AppMsgColor.Magenta;
+        [MethodImpl(Inline)]
+        public WfStatus(string msg, AppMsgColor flair, CorrelationToken? ct = null)
+        {
+            Id = WfEventId.define(msg, ct ?? CorrelationToken.create(), now());
+            Flair = flair;
+            Message = msg;
+        }
 
         [MethodImpl(Inline)]
         public string Format()
             => text.format(Pattern, Id, Message);
-
-
-        public override string ToString()
-            => Format();
     }
 }

@@ -24,12 +24,6 @@ namespace Z0.Asm
         ICaptureCore CaptureCore  
             => CaptureServices.CaptureCore;
 
-        TAppPaths TAppEnv.AppPaths
-             => ContextRoot.AppPaths;
-
-        IAppSettings TAppEnv.Settings 
-            => ContextRoot.Settings;
-
         IPolyrand IPolyrandProvider.Random 
             => ContextRoot.Random;
 

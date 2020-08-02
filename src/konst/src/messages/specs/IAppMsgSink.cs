@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface IAppMsgSink : ISink<IAppMsg>, TAppEnv
+    public interface IAppMsgSink : ISink<IAppMsg>, IAppBase
     {
         void Deposit(IEnumerable<IAppMsg> msg)
             => z.iter(msg, Deposit);        

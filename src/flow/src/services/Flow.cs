@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
     using System.Reflection;
 
     using static Konst;
@@ -25,17 +24,16 @@ namespace Z0
         }
 
         public static IMultiSink log(IAppContext context)
-            => new WfEventLog(
-                    context.AppPaths.AppStandardOutPath.ChangeExtension(FileExtensions.Csv), 
-                    context.AppPaths.AppErrorOutPath.ChangeExtension(FileExtensions.Csv), 
-                    multisink(WfTermEventSink.create())
-                    );
+        {
+            var termsink = WfTermEventSink.create();
+            return new WfEventLog(
+                    context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".stdout", FileExtensions.Csv), 
+                    context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".errout", FileExtensions.Csv), 
+                    termsink);
+        }
         
-        [MethodImpl(Inline)]
-        public static IMultiSink multisink(IAppEventSink sink)
-            => new MultiSink(sink);        
 
-        public static WfConfig config(IAppContext context, IMultiSink sink)
+        public static WfConfig LoadConfig(IAppContext context, IMultiSink sink)
         {
             var path = Flow.ConfigPath(context);
             var ct = CorrelationToken.create();

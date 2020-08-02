@@ -9,4 +9,10 @@ namespace Z0
         void Print(IAppMsg message)
             => Terminal.Get().WriteMessage(message);
     }
+
+    public readonly struct MessagePrinter : IMessagePrinter
+    {
+
+        
+    }
 }

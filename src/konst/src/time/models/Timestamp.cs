@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct Timestamp : ITextual, IComparable<Timestamp>, IEquatable<Timestamp>
     {
-        const string Pattern = "yyyyMMdd.HH.mm.ss.ffff";
+        const string Pattern = "yyMMdd.HH.mm.ss.ffff";
         
         readonly ulong Ticks;
 

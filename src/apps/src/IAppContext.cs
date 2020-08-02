@@ -7,21 +7,17 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>
-    public interface IAppContext : TAppEnv, IAppMsgQueue, IPolyrandProvider, IApiSet, IAppMsgContext
+    public interface IAppContext : IAppMsgQueue, IPolyrandProvider, IApiSet, IAppMsgContext, IAppBase
     {        
         IAppMsgQueue MessageQueue {get;}
-                
-        S Service<S>()                
-            => default;
         
-        S LoadSettings<S>(FileName name)
-            => default;
         Action<IAppMsg> MessageRelay 
-            => (e => {});
+            => (e => term.print(e));
 
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
             => MessageQueue.Deposit(msg);

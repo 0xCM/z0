@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
-    public interface ICaptureHost : ICaptureClient//, IWfBrokerClient<WfBroker>
-    {
-        
-    }    
-    
     public interface ICaptureClient : IWfBrokerClient<ICaptureBroker>
     {
         void OnEvent(WfStatus e) 
