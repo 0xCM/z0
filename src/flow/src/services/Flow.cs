@@ -5,46 +5,29 @@
 namespace Z0
 {
     using System;
+    using System.Text;
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
     using static Konst;
 
-    public readonly struct Flow
+    [ApiHost]
+    public readonly partial struct Flow
     {
-        public static IMultiSink TermReceiver 
-            => WfTermEventSink.create();
+        public const string IdMarker = "{0} | ";
 
+        public static string AppName 
+        {
+            [MethodImpl(Inline), Op]
+            get => Assembly.GetEntryAssembly().GetSimpleName();
+        }
+        
         public static FilePath ConfigPath(IAppContext context)
         {
             var assname = Assembly.GetEntryAssembly().GetSimpleName();
             var filename = FileName.Define(assname, FileExtensions.Json);
             var src = context.AppPaths.ConfigRoot + filename;
             return src;
-        }
-
-        public static IMultiSink log(IAppContext context)
-        {
-            var termsink = WfTermEventSink.create();
-            return new WfEventLog(
-                    context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".stdout", FileExtensions.Csv), 
-                    context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".errout", FileExtensions.Csv), 
-                    termsink);
-        }
-        
-
-        public static WfConfig LoadConfig(IAppContext context, IMultiSink sink)
-        {
-            var path = Flow.ConfigPath(context);
-            var ct = CorrelationToken.create();
-            sink.Deposit(new LoadingWfConfig(WfEventId.define(nameof(LoadingWfConfig), ct),path));
-
-            var dst = z.dict<string,string>();
-            AppSettings.absorb(path,dst);
-            var config = new WfConfig(dst);
-                        
-            sink.Deposit(new LoadedWfConfig(WfEventId.define(nameof(LoadedWfConfig), ct), path, config));            
-            return config;
         }
     }
 }

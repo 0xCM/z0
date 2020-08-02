@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static PartRecords;
         
     public readonly ref struct EmitFieldRecords
     {    
@@ -16,7 +15,7 @@ namespace Z0
 
         readonly IPart[] Parts;
         
-        readonly FieldRecord Spec;
+        readonly ImgFieldRecord Spec;
 
         readonly FolderPath TargetDir;
 
@@ -39,8 +38,8 @@ namespace Z0
                 Emit(part);            
         }
         
-        static IPartReader Reader(string src)
-            => PartReader.open(FilePath.Define(src));
+        static IImgMetadataReader Reader(string src)
+            => ImgMetadataReader.open(FilePath.Define(src));
 
         FilePath TargetPath(PartId part)
             => TargetDir +  FileName.Define(part.Format(), "fields.csv");
@@ -53,17 +52,17 @@ namespace Z0
 
             Wf.Emitting(rk.ToString(), path);
 
-
             var assembly = part.Owner;                
             using var reader = Reader(assembly.Location);
             var src = reader.ReadFields();
 
             var formatter = PartRecords.formatter(Spec);
             formatter.EmitHeader();
+            foreach(var record in src)
+                PartRecords.format(record, formatter);
 
-            Root.iter(src, record => record.Format(formatter));
+            //Root.iter(src, record => record.Format(formatter));
             path.Ovewrite(formatter.Render());                
-
             Wf.Emitted(rk.ToString(), (uint)src.Length, path);
         }
 

@@ -14,6 +14,8 @@ namespace Z0.Asm
 
     public class ImmEmissionWorkflow : IImmEmissionWorkflow
     {                        
+        public CorrelationToken Ct {get;}
+
         public IImmBroker Broker {get;} 
 
         readonly IAsmContext Context;
@@ -32,9 +34,10 @@ namespace Z0.Asm
 
         readonly IImmSpecializer ImmSpecializer;
 
-        internal ImmEmissionWorkflow(IAsmContext context, IMultiSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
+        internal ImmEmissionWorkflow(IAsmContext context, IMultiSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
         {
-            Broker = ImmBroker.create(context.AppPaths.AppStandardOutPath);
+            Ct = ct ?? CorrelationToken.create();
+            Broker = ImmBroker.create(context.AppPaths.AppStandardOutPath, ct);
             Context = context;
             Sink = sink;
             Formatter = formatter;

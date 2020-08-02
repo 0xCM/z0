@@ -12,27 +12,27 @@ namespace Z0
 
     using static Konst;    
     
-    partial class PartReader
+    partial class ImgMetadataReader
     {        
         [MethodImpl(Inline)]
         internal static ReadOnlySpan<R> empty<R>()
             => ReadOnlySpan<R>.Empty;
 
-        internal static ReadOnlySpan<StringValueRecord> strings(in ReaderState state)
+        internal static ReadOnlySpan<ImgStringRecord> strings(in ReaderState state)
         {
             var reader = state.Reader;
             int size = reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
-                return empty<StringValueRecord>();
+                return empty<ImgStringRecord>();
 
-            var values = new List<StringValueRecord>();
+            var values = new List<ImgStringRecord>();
             var handle = MetadataTokens.StringHandle(0);
             var i=0;
             do
             {
-                values.Add(new StringValueRecord(
+                values.Add(new ImgStringRecord(
                     Sequence: i++,
-                    StringSource.System,
+                    ImgStringSource.System,
                     HeapSize:size, 
                     Offset: reader.GetHeapOffset(handle), 
                     Value: reader.GetString(handle))
@@ -45,21 +45,21 @@ namespace Z0
             return values.ToArray();            
         }
 
-        internal static ReadOnlySpan<StringValueRecord> ustrings(in ReaderState state)
+        internal static ReadOnlySpan<ImgStringRecord> ustrings(in ReaderState state)
         {
             var reader = state.Reader;
             int size = reader.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
-                return empty<StringValueRecord>();
+                return empty<ImgStringRecord>();
 
-            var values = new List<StringValueRecord>();
+            var values = new List<ImgStringRecord>();
             var handle = MetadataTokens.UserStringHandle(0);
             var i=0;
             do
             {                
-                values.Add(new StringValueRecord(
+                values.Add(new ImgStringRecord(
                     Sequence: i++,
-                    StringSource.User,
+                    ImgStringSource.User,
                     HeapSize: size, 
                     Offset: reader.GetHeapOffset(handle), 
                     Value: reader.GetUserString(handle)

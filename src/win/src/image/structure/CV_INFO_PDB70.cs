@@ -9,6 +9,7 @@ namespace Z0.Image
     using System;
     using System.Runtime.InteropServices;
 
+    [Record]
     public unsafe struct CV_INFO_PDB70
     {
         public const int PDB70CvSignature = 0x53445352; // RSDS in ascii

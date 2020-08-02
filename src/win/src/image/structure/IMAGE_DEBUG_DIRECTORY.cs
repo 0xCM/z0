@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Image
 {
+    [Record]
     public struct IMAGE_DEBUG_DIRECTORY
     {
         public int Characteristics;

@@ -8,12 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
 
     public readonly struct EmittingDataset : IWfEvent<EmittingDataset>
-    {
-        const string EventName = nameof(EmittingDataset) + "{0}";
-        
-        const string Pattern = "{0}: Emitting {1} dataset to {2}";
+    {        
+        const string Pattern = IdMarker +  "Emitting {1} dataset to {2}";
 
         public WfEventId Id {get;}
 
@@ -36,7 +35,6 @@ namespace Z0
             DataType = type;
             TargetPath = target.Name;
         }        
-
         public string Format()
             => text.format(Pattern, Id, DataType, TargetPath);
         

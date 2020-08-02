@@ -14,14 +14,16 @@ namespace Z0
 
         TypeAddress = 16,
 
-        Index = 5,
-
-        Name = 30,
-
         NameAddress = 16,
+
+        TypeName = 30,
 
         DataType = 10,
 
-        ScalarValue = 10,
+        Index = 10,
+
+        ScalarValue = 16,
+
+        Name = 30,
     }
 }

@@ -42,7 +42,6 @@ namespace Z0
         where S : unmanaged, Enum
         where R : struct;
 
-
     public interface IDatasetFormatter : ITextual
     {
         StringBuilder State {get;}
@@ -91,21 +90,7 @@ namespace Z0
         int Width(F field)
             => width(field);            
 
-        void IDatasetFormatter.EmitHeader(bool eol)
-        {
-            var header = header<F>();    
-            for(var i=0; i<header.Fields.Length; i++)
-                Delimit(header.Fields[i], header.Labels[i]);
-            if(eol)
-                State.Append(Eol);
-        }
         void Append(F f, object content)   
-        {
-            State.Append(render(content).PadRight(width(f)));
-        }
-
-        void Append<T>(F f, T content)
-            where T : ITextual
         {
             State.Append(render(content).PadRight(width(f)));
         }
@@ -115,6 +100,28 @@ namespace Z0
             State.Append(text.rspace(Delimiter));            
             State.Append(render(content).PadRight(width(f)));
         }
+
+        void IDatasetFormatter.EmitHeader(bool eol)
+        {
+            var header = header<F>();    
+            for(var i=0; i<header.Fields.Length; i++)
+            {   
+                if(i == 0)
+                    Append(header.Fields[i], header.Labels[i]);
+                else
+                    Delimit(header.Fields[i], header.Labels[i]);
+            }
+
+            if(eol)
+                State.Append(Eol);
+        }
+
+        void Append<T>(F f, T content)
+            where T : ITextual
+        {
+            State.Append(render(content).PadRight(width(f)));
+        }
+
 
         void Delimit<T>(F f, T content)
             where T : ITextual

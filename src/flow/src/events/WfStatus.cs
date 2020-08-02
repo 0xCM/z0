@@ -9,11 +9,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Konst;
+    using static Flow;
     using static z;
 
     public readonly struct WfStatus : IWfEvent<WfStatus>
     {        
-        const string Pattern = "{0}: {1}";
+        const string Pattern = IdMarker + "{1}";
 
         public WfEventId Id {get;}
 
@@ -24,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStatus(string msg, CorrelationToken? ct = null)
         {
-            Id = WfEventId.define(msg, ct ?? CorrelationToken.create(), now());
+            Id = wfid(msg, ct);
             Flair =  AppMsgColor.Green;
             Message = msg;
         }
@@ -32,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStatus(string msg, AppMsgColor flair, CorrelationToken? ct = null)
         {
-            Id = WfEventId.define(msg, ct ?? CorrelationToken.create(), now());
+            Id = wfid(msg, ct);
             Flair = flair;
             Message = msg;
         }

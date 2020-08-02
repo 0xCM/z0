@@ -34,11 +34,12 @@ namespace Z0
             dst.Append(F.PartId, src.PartId);
             dst.Delimit(F.TypeId, src.TypeId);
             dst.Delimit(F.TypeAddress, src.TypeAddress);
-            dst.Delimit(F.Index, src.Index);
-            dst.Delimit(F.Name, src.Name);
             dst.Delimit(F.NameAddress, src.NameAddress);
+            dst.Delimit(F.TypeName, src.TypeName);
             dst.Delimit(F.DataType, src.DataType);                
+            dst.Delimit(F.Index, src.Index);
             dst.Delimit(F.ScalarValue, src.ScalarValue);                
+            dst.Delimit(F.Name, src.Name);
             dst.EmitEol();
         }
 

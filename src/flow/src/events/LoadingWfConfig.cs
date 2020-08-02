@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
 
     public readonly struct LoadingWfConfig : IWfEvent<LoadingWfConfig>
     {
-        const string Pattern = "{0}: Loading workflow configuration from {1}";
+        const string Pattern = IdMarker + "Loading workflow configuration from {1}";
         
         public WfEventId Id {get;}
 
@@ -20,8 +21,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public LoadingWfConfig(WfEventId id, FilePath src)
         {
-            ConfigPath = src;
             Id = id;
+            ConfigPath = src;
         }
 
         [MethodImpl(Inline)]

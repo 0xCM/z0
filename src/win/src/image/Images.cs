@@ -11,6 +11,9 @@ namespace Z0.Image
 
     public readonly struct Images
     {
+        public static SourceStream source(Stream src, bool virt = false)
+            => SourceStream.create(src,virt);
+        
         public static PEImage adapter(string path)
         {
             var reader = new StreamReader(path);

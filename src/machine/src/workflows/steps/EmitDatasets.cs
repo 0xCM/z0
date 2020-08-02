@@ -20,13 +20,13 @@ namespace Z0
 
         readonly string[] Args;
 
-        public EmitDatasets(WfContext context, params string[] args)
+        public EmitDatasets(WfContext context, CorrelationToken ct, params string[] args)
         {
             Args = args;
+            Correlation = ct;
             Context = context;
             Recapture = false;
-            Correlation = CorrelationToken.create();
-            Context.Running(nameof(EmitDatasets), Correlation);
+            Context.Initialized(nameof(EmitDatasets), Correlation);
         }
         
         void ExecEmitDocs()
@@ -43,7 +43,7 @@ namespace Z0
 
         void CaptureEmissions()
         {
-            var capture = ContextFactory.WfCapture(Context);
+            var capture = ContextFactory.WfCapture(Context, Correlation);
             using var step = new AccessorCapture(capture);
             step.CaptureResBytes();        
         }
@@ -62,20 +62,20 @@ namespace Z0
         
         void EmitLiterals()
         {
-            using var step = new EmitFieldLiterals(Context);
+            using var step = new EmitFieldLiterals(Context, Correlation);
             step.Run();
 
         }
 
         void EmitCatalog()
         {
-            using var step = new EmitContentCatalog(Context);
+            using var step = new EmitContentCatalog(Context, Correlation);
             step.Run();
         }
 
         void EmitBitMasks()
         {
-            using var step = new EmitBitMasks(Context);
+            using var step = new EmitBitMasks(Context, Correlation);
             step.Run();
         }
                         
@@ -96,7 +96,7 @@ namespace Z0
  
         public void Dispose()
         {
-            Context.Ran(nameof(EmitDatasets), Correlation);
+            Context.Finished(nameof(EmitDatasets), Correlation);
         }
     }
 }

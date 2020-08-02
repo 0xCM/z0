@@ -11,6 +11,7 @@ namespace Z0.Image
     /// <summary>
     /// Represents the PE header format.
     /// </summary>
+    [Record]
     public struct IMAGE_NT_HEADERS
     {
         /// <summary>

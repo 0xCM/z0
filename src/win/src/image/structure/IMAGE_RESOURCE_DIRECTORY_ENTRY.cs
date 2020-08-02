@@ -23,7 +23,7 @@ namespace Z0.Image
     /// set to indicate this.  Otherwise the high bit is clear and the offset
     /// field points to a resource data entry.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [Record, StructLayout(LayoutKind.Sequential)]
     public readonly struct IMAGE_RESOURCE_DIRECTORY_ENTRY
     {
         private readonly int _nameOffsetAndFlag;

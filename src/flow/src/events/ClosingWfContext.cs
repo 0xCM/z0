@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
 
     public readonly struct ClosingWfContext : IWfEvent<ClosingWfContext>
     {
-        const string Pattern = "{0}: Closing workflow context {1}";
+        const string Pattern = IdMarker + "Closing workflow context {1}";
         
         public WfEventId Id {get;}
 
@@ -21,7 +22,7 @@ namespace Z0
         public ClosingWfContext(Type type, CorrelationToken? ct = null)
         {
             ContextType = type;
-            Id = WfEventId.define(nameof(ClosingWfContext), ct);
+            Id = wfid(nameof(ClosingWfContext), ct);
         }
 
         [MethodImpl(Inline)]

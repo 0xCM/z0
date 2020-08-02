@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Image
 {
+    [Record]
     public readonly struct PeImageHeader
     {        
         public readonly IMAGE_FILE_MACHINE Machine;

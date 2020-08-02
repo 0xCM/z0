@@ -9,7 +9,7 @@ namespace Z0.Image
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    [Record, StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct IMAGE_OPTIONAL_HEADER64
     {
         public ushort Magic;

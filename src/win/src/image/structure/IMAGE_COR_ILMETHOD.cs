@@ -9,7 +9,7 @@ namespace Z0.Image
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [Record, StructLayout(LayoutKind.Sequential)]
     public struct IMAGE_COR_ILMETHOD
     {
         public uint FlagsSizeStack;

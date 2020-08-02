@@ -3710,3 +3710,44 @@
  create mode 100644 src/flow/src/contracts/IMultiSink.cs
  create mode 100644 src/flow/src/services/hosts/WfEventLog.cs
  create mode 100644 src/flow/src/services/hosts/WfEventRelay.cs
+[master b337b8e8a] .
+ 66 files changed, 334 insertions(+), 180 deletions(-)
+ rename src/{control/src/hosts/capture => capture/src}/CaptureConfig.cs (100%)
+ rename src/{machine/src/workflows => capture/src}/CaptureHost.cs (97%)
+ rename src/capture/src/{workflow/capture => }/events/AnalyzingExtractReport.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/AnalyzingExtracts.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/CapturedHost.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/CapturedPart.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/CapturingHost.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/CapturingHosts.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/CapturingPart.cs (100%)
+ rename src/{machine/src/workflows => capture/src}/events/CapturingParts.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/ClearedPartFiles.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/EmittedEmbeddedImm.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/ExtractReportCreated.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/ExtractReportSaved.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/ExtractedMembers.cs (72%)
+ rename src/capture/src/{workflow/capture => }/events/ExtractsParsed.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/FileEmissionFailed.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/FunctionsDecoded.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/HexCodeSaved.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/HostCodeSaved.cs (100%)
+ create mode 100644 src/capture/src/events/ICaptureEvents.cs
+ rename src/capture/src/{workflow/capture => }/events/ImmInjectionFailed.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/JIttedMembers.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/MatchedEmissions.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/MembersExtracted.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/MembersLocated.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/ParseReportEmitted.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/PurgedArchiveFolder.cs (100%)
+ rename src/capture/src/{workflow/capture => }/events/RunningConsolidated.cs (100%)
+ rename src/capture/src/workflow/capture/{brokers => events}/BrokerPatterns.cs (100%)
+ create mode 100644 src/capture/src/workflow/capture/events/CaptureBroker.cs
+ create mode 100644 src/capture/src/workflow/capture/events/CaptureClient.cs
+ rename src/capture/src/workflow/capture/{brokers/CaptureClient.cs => events/ICaptureClient.cs} (96%)
+ rename src/capture/src/workflow/capture/{brokers/CaptureBroker.cs => events/ICaptureEvents.cs} (82%)
+ rename src/capture/src/workflow/capture/{brokers/ImmEmissionBroker.cs => events/ImmBroker.cs.cs} (65%)
+ create mode 100644 src/control/src/hosts/capture/Controller.cs
+ create mode 100644 src/flow/src/events/WorkerInitialized.cs
+ rename src/konst/src/{parts/TAppEnv.cs => messages/specs/IAppBase.cs} (60%)
+ delete mode 100644 src/machine/src/workflows/context/CaptureConfig.cs

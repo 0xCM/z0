@@ -33,12 +33,12 @@ namespace Z0
         public EmissionDataType StepKind 
             => EmissionDataType.Konst;        
 
-        public PartRecordKind DataKind
-            => PartRecordKind.Constant;
+        public ImgRecordKind DataKind
+            => ImgRecordKind.Constant;
                 
-        public ReadOnlySpan<ConstantRecord> Read(IPart part)
+        public ReadOnlySpan<ImgConstantRecord> Read(IPart part)
         {
-            using var reader = PartReader.open(part.PartPath());
+            using var reader = ImgMetadataReader.open(part.PartPath());
             return reader.ReadConstants();        
         }
         

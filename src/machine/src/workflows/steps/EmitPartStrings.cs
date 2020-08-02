@@ -34,24 +34,24 @@ namespace Z0
             Wf.Running(nameof(EmitPartStrings));
         }
 
-        public PartRecordKind DataKind
-            => PartRecordKind.String;                
+        public ImgRecordKind DataKind
+            => ImgRecordKind.String;                
 
-        ReadOnlySpan<StringValueRecord> UserStrings(IPart part)
+        ReadOnlySpan<ImgStringRecord> UserStrings(IPart part)
         {
             var srcPath = part.PartPath();
-            using var reader = PartReader.open(srcPath);
+            using var reader = ImgMetadataReader.open(srcPath);
             return reader.ReadUserStrings();        
         }
 
-        ReadOnlySpan<StringValueRecord> SysStrings(IPart part)
+        ReadOnlySpan<ImgStringRecord> SysStrings(IPart part)
         {
             var srcPath = part.PartPath();
-            using var reader = PartReader.open(srcPath);
+            using var reader = ImgMetadataReader.open(srcPath);
             return reader.ReadStrings();        
         }
 
-        void Emit(ReadOnlySpan<StringValueRecord> src, StreamWriter writer)
+        void Emit(ReadOnlySpan<ImgStringRecord> src, StreamWriter writer)
         {
             var target = PartRecords.formatter(PartRecordSpecs.Strings);
             for(var i=0u; i<src.Length; i++)

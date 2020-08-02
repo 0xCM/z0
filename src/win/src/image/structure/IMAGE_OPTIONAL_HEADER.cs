@@ -19,7 +19,8 @@ namespace Z0.Image
     /// </para>
     /// <para>The number of directories is not fixed. Check the NumberOfRvaAndSizes member before looking for a specific directory.</para>
     /// </remarks>
-    public unsafe partial struct IMAGE_OPTIONAL_HEADER
+    [Record]
+    public unsafe struct IMAGE_OPTIONAL_HEADER
     {
         /// <summary>
         /// The state of the image file.

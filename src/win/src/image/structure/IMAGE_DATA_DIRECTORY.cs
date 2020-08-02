@@ -15,7 +15,7 @@ namespace Z0.Image
     /// <remarks>
     /// See remarks on MSDN: https://msdn.microsoft.com/en-us/library/windows/desktop/ms680305(v=vs.85).aspx.
     /// </remarks>
-    [StructLayout(LayoutKind.Sequential)]
+    [Record, StructLayout(LayoutKind.Sequential)]
     public struct IMAGE_DATA_DIRECTORY
     {
         /// <summary>

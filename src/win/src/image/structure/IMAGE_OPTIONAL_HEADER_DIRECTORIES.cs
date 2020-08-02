@@ -13,7 +13,7 @@ namespace Z0.Image
     /// Describes a fixed array of 16 <see cref="IMAGE_DATA_DIRECTORY"/> structures,
     /// where the array is *not* allocated on the heap.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [Record, StructLayout(LayoutKind.Sequential)]
     public struct IMAGE_OPTIONAL_HEADER_DIRECTORIES
     {
         public IMAGE_DATA_DIRECTORY ExportTable;

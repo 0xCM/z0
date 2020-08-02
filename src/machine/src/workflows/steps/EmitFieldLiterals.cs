@@ -13,27 +13,36 @@ namespace Z0
 
     using static z;
     using static Konst;
+    using static Flow;
 
     using PK = PrimalKindId;    
 
     public readonly ref struct EmitFieldLiterals
-    {
-        const string StartMsg = "Emitting literal field values to {0}";
-        
-        readonly WfContext Context;
+    {        
+        readonly WfContext Wf;
+
+        readonly CorrelationToken Ct;
 
         FolderPath Target 
-            => Context.AppPaths.ResourceRoot + FolderName.Define("fields");
+            => Wf.AppPaths.ResourceRoot + FolderName.Define("fields");
 
         KnownParts Parts
             => KnownParts.Service;
 
         public EmitFieldLiterals(WfContext context, CorrelationToken? ct = null)
         {
-            Context = context;
-            Context.Running(nameof(EmitFieldLiterals));
+            Ct = correlate(ct);
+            Wf = context;
+            Wf.Initialized(nameof(EmitFieldLiterals), Ct);
         }
 
+        void Emit(PartTypes src)
+        {
+            var fields = refs(src.Types);
+            if(fields.Length != 0)
+                Emit(fields, Target + FileName.Define(src.Part.Format(), FileExtensions.Csv));
+        }
+        
         public void Run()
         {
             Target.Clear();            
@@ -53,7 +62,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Context.Ran(nameof(EmitFieldLiterals));
+            Wf.Ran(nameof(EmitFieldLiterals), Ct);
         }
         
         const string Sep = "| ";
@@ -190,8 +199,9 @@ namespace Z0
             return line;
         }
 
-        static void Emit(FieldRef[] src, FilePath dst)
+        void Emit(FieldRef[] src, FilePath dst)
         {            
+            Wf.Running(nameof(EmitFieldLiterals), dst.Name, Ct);           
             var input = span(src);            
             var count = input.Length;
 
@@ -203,13 +213,8 @@ namespace Z0
                 ref readonly var field = ref skip(input,i);
                 writer.WriteLine(FormatLine(field));
             }        
-        }
 
-        void Emit(PartTypes src)
-        {
-            var fields = refs(src.Types);
-            if(fields.Length != 0)
-                Emit(fields, Target + FileName.Define(src.Part.Format(), FileExtensions.Csv));
+            Wf.Ran(nameof(EmitFieldLiterals), dst.Name, Ct);           
         }
     }
 }

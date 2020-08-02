@@ -9,12 +9,15 @@ namespace Z0
     using System.IO;
 
     using static Konst;
+    using static Flow;
     using static z;
 
     public ref struct HexLineEmitter
     {
         readonly WfContext Wf;
-        
+
+        readonly CorrelationToken Ct;
+
         readonly HexDataFormatter Formatter;
         
         readonly IPart Part;
@@ -36,20 +39,21 @@ namespace Z0
         char LabelDelimiter;
 
         [MethodImpl(Inline)]
-        public HexLineEmitter(WfContext wf, IPart part, MemoryAddress @base, FilePath dst)
+        public HexLineEmitter(WfContext wf, IPart part, MemoryAddress @base, FilePath dst, CorrelationToken? ct = null)
         {
             Wf = wf;
+            Ct = correlate(ct);
             Part = part;        
             BaseAddress = @base;
             Formatter = HexFormatters.data(BaseAddress);
-            DataType = "PartData";
+            DataType = "ImgHex";
             TargetPath = dst;
             Buffer = sys.alloc<byte>(32);
             Offset = 0;
             LineCount = 0;
             EmitHeader = true;
             LabelDelimiter = Chars.Pipe;
-            Wf.Running(nameof(HexLineEmitter));
+            Wf.Initialized(nameof(HexLineEmitter), Ct);
         }
 
         uint Read(BinaryReader reader)

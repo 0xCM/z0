@@ -11,17 +11,20 @@ namespace Z0
     using System.Xml;
     using System.IO;
 
+    using static Konst;
+    using static Flow;
+
     public readonly ref struct EmitProjectDocs
     {
         readonly WfContext Workflow;
 
-        readonly CorrelationToken Correlation;
+        readonly CorrelationToken Ct;
 
         public EmitProjectDocs(WfContext wf, CorrelationToken? ct = null)
         {
             Workflow = wf;
-            Correlation = ct ?? CorrelationToken.create();
-            Workflow.Running(nameof(EmitProjectDocs), Correlation);
+            Ct = correlate(ct);
+            Workflow.Running(nameof(EmitProjectDocs), Ct);
         }
         
         public void Run()
@@ -31,7 +34,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Workflow.Ran(nameof(EmitProjectDocs), Correlation);
+            Workflow.Ran(nameof(EmitProjectDocs), Ct);
         }
         
         const string Sep = "| ";
@@ -49,7 +52,6 @@ namespace Z0
                 'F' => DocTargetKind.Field,
                 _ => DocTargetKind.None,
             };                    
-
 
         public static Dictionary<PartId, Dictionary<string,string>> collect()
         {
@@ -73,8 +75,7 @@ namespace Z0
                     {
                         var line = format(member.Value);                        
                         writer.WriteLine(line);
-                    }
-                                
+                    }                                
                 }
             }
             return src;
@@ -109,7 +110,6 @@ namespace Z0
 
             return dst;
         }            
-
 
         public static Dictionary<string,string> parse(string src)
         {

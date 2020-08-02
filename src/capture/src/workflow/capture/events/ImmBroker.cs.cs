@@ -6,14 +6,14 @@ namespace Z0.Asm
 {    
     public sealed class ImmBroker : WfBroker, IImmBroker
     {        
-        ImmBroker(FilePath target)
+        ImmBroker(FilePath target, CorrelationToken? ct)
             : base(target)
         {
 
         }
 
-        public static ImmBroker create(FilePath target)
-            => new ImmBroker(target);                   
+        public static ImmBroker create(FilePath target, CorrelationToken? ct = null)
+            => new ImmBroker(target, ct);                   
     }    
 
     public interface IImmBroker : IWfBroker

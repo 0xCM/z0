@@ -12,8 +12,8 @@ namespace Z0.Asm
 
     public class ManageCaptureStep : IManageCaptureStep
     {
-        public static ManageCaptureStep create(ICaptureWorkflow wf, PartWfConfig config, CorrelationToken? ct = null)
-            => new ManageCaptureStep(wf, config, ct);
+        public static ManageCaptureStep create(ICaptureWorkflow wf, PartWfConfig config, WfTermEventSink sink, CorrelationToken? ct = null)
+            => new ManageCaptureStep(wf, config, sink, ct);
 
         readonly CorrelationToken Ct;
 
@@ -23,6 +23,8 @@ namespace Z0.Asm
 
         public PartWfConfig Config;
 
+        public WfTermEventSink TermSink {get;}
+        
         readonly WfContext Wf;
         
         ICaptureContext Context 
@@ -36,14 +38,15 @@ namespace Z0.Asm
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent
         {
-            Wf.Sink.Deposit(@event);
+            Wf.TermSink.Deposit(@event);
             return @event.Id;
         }
 
         [MethodImpl(Inline)]
-        internal ManageCaptureStep(ICaptureWorkflow cwf, PartWfConfig config, CorrelationToken? ct)
+        internal ManageCaptureStep(ICaptureWorkflow cwf, PartWfConfig config, WfTermEventSink sink, CorrelationToken? ct)
         {
-            State = new CaptureState(cwf, config, ct);
+            TermSink = sink;
+            State = new CaptureState(cwf, config, sink, ct);
             Ct = ct ?? CorrelationToken.create();
             CWf = cwf;
             Wf = config.Context;

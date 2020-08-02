@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
 
     using Z0.Asm;
 
@@ -27,9 +28,12 @@ namespace Z0
     {
         public IAsmContext AsmContext {get;}
 
+        public CorrelationToken Ct {get;}
+
         [MethodImpl(Inline)]
-        public WfCapture(IAsmContext asm)
+        public WfCapture(IAsmContext asm, CorrelationToken? ct = null)
         {
+            Ct = correlate(ct);
             AsmContext = asm;            
         }
     }

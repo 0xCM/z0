@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Defines classifiers for structured content
     /// </summary>
-    public enum StructuredKind : byte
+    public enum StructureKind : byte
     {
         None = 0,
 

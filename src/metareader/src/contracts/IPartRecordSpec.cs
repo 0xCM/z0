@@ -8,7 +8,7 @@ namespace Z0
     
     public interface IPartRecordSpec : ITextual
     {
-        PartRecordKind RecordType {get;}   
+        ImgRecordKind RecordType {get;}   
 
         byte FieldCount
             => 0;
@@ -24,11 +24,5 @@ namespace Z0
 
         string ITextual.Format() 
             => RecordType.ToString();
-    }
-
-    public interface IPartRecordSpec<R> : IPartRecordSpec
-        where R : unmanaged, IPartRecordSpec<R>
-    {
-        
     }
 }

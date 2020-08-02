@@ -8,30 +8,34 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
     
     public ref struct EmitHexLineFile
     {
         readonly WfContext Wf;
 
+        readonly CorrelationToken Ct;
+        
         readonly IPart Part;
 
         readonly MemoryAddress Base;
 
         readonly FilePath TargetPath;
 
-        readonly EmissionDataType DataType;
+        readonly string DataType;
 
         MemoryAddress Offset;
 
         [MethodImpl(Inline)]
-        public EmitHexLineFile(WfContext wf, IPart part, MemoryAddress @base, FilePath dst)
+        public EmitHexLineFile(WfContext wf, IPart part, MemoryAddress @base, FilePath dst, CorrelationToken? ct = null)
         {
+            Ct = correlate(ct);
             Wf = wf;
             Part = part;
             TargetPath = dst;
-            DataType = EmissionDataType.PartDat;
+            DataType = "HexLine";
             Base = @base;
-            Wf.Running(nameof(EmitHexLineFile));
+            Wf.Initialized(nameof(EmitHexLineFile), Ct);
             Offset = default;
         }
 
@@ -44,7 +48,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Ran(nameof(EmitHexLineFile));
+            Wf.Finished(nameof(EmitHexLineFile), Ct);
         }
 
         public MemoryAddress OffsetAddress

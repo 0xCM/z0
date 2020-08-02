@@ -17,6 +17,8 @@ namespace Z0
 
         public readonly MemoryAddress TypeAddress;
 
+        public readonly string TypeName;
+
         public readonly ushort Index;
 
         public readonly string Name;
@@ -34,10 +36,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public EnumLiteralRecord(PartId part, ArtifactIdentity type,  MemoryAddress address, ushort index, string name, MemoryAddress nameaddress, EnumScalarKind primal, ulong value)
+        public EnumLiteralRecord(PartId part, Type type,  MemoryAddress address, ushort index, string name, MemoryAddress nameaddress, EnumScalarKind primal, ulong value)
         {
             PartId =  part;
             TypeId = type;
+            TypeName = type.Name;
             TypeAddress = address;
             Index = index;
             Name = name;

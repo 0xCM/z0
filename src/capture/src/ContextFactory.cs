@@ -22,8 +22,8 @@ namespace Z0
             => AsmContext.Create(app);
 
         [MethodImpl(Inline),Op]
-        public static IWfCapture WfCapture(WfContext wf)
-            => new WfCapture(CreateAsmContext(wf.ContextRoot));
+        public static IWfCapture WfCapture(WfContext wf, CorrelationToken? ct = null)
+            => new WfCapture(CreateAsmContext(wf.ContextRoot), ct);
 
         public static IAppContext CreateAppContext()
             => AppContext.Create(AppPaths.Default, 

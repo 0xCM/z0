@@ -8,6 +8,7 @@ namespace Z0.Image
 {
     using System;
 
+    [Record]
     public struct PeImage    
     {        
         public PeImageHeader Header;

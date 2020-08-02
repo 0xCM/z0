@@ -31,10 +31,10 @@ namespace Z0
             z.iter(zdat.Structured, Describe);     
         }
 
-        void Describe(Paired<StructuredKind,AppResourceDoc> src)
+        void Describe(Paired<StructureKind,AppResourceDoc> src)
         {
             (var k, var doc) = src;
-            var info = new ContentInfo((ContentKind)k, (uint)doc.RowCount, doc.Name,true);
+            var info = new ContentLibEntry((ContentKind)k, k, (uint)doc.RowCount, doc.Name);
             term.print(info.Format());
 
         }
@@ -42,7 +42,7 @@ namespace Z0
         void Describe(Paired<ContentKind,AppResource> src)
         {
             (var k, var doc) = src;
-            var info = new ContentInfo(k, (uint)doc.Content.Length, doc.Name, false);
+            var info = new ContentLibEntry(k, StructureKind.None, (uint)doc.Content.Length, doc.Name);
             term.print(info.Format());
         }
 

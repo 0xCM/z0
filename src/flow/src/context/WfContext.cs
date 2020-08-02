@@ -8,45 +8,48 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Konst;
+    using static Flow;
     using static z;
     
     public struct WfContext : IWfContext<WfConfig>
     {
         [MethodImpl(Inline)]
-        public static WfContext create(IAppContext root, WfConfig config, IMultiSink sink)
-            => new WfContext(root, config, sink);
+        public static WfContext create(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink)
+            => new WfContext(root, ct, config, sink);
 
         long CtProvider;
 
         readonly ulong SessionId;
 
-        public IMultiSink Sink {get;}
+        public WfTermEventSink TermSink {get;}
         
         public IAppContext ContextRoot {get;}
         
         public WfConfig ContextData {get;}
 
-        public CorrelationToken Correlation {get;}
+        public CorrelationToken Ct {get;}
         
         public WfBroker Broker {get;}
                 
         [MethodImpl(Inline)]
-        public WfContext(IAppContext root, WfConfig config, IMultiSink sink)
+        public WfContext(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink)
         {
-            SessionId = (ulong)now().Ticks;
-            Sink = sink;
+            Ct = ct;
             ContextRoot = root;
             ContextData = config;
+            TermSink = sink;
+            SessionId = (ulong)now().Ticks;
             CtProvider = 1;       
-            Correlation = CorrelationToken.define(CtProvider);
-            Broker = new WfBroker(root.AppPaths.AppDataRoot + FileName.Define("brokered", FileExtensions.Csv));
-            Sink.Deposit(new OpeningWfContext(typeof(WfContext), Correlation));
+            Broker = new WfBroker(root.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
+            TermSink.Deposit(new OpeningWfContext(typeof(WfContext), Ct));
         }
 
 
         public void Dispose()
         {
-            Sink.Deposit(new ClosingWfContext(typeof(WfContext), Correlation));
+            TermSink.Deposit(new ClosingWfContext(typeof(WfContext), Ct));
+            TermSink.Dispose();
+            Broker.Dispose();
         }
                 
         public TAppPaths AppPaths
@@ -58,18 +61,18 @@ namespace Z0
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent
         {
-            Sink.Deposit(@event);
+            TermSink.Deposit(@event);
             return @event.Id;
         }
 
-        public void Emitting(string type, FilePath dst)
-            => Raise(new EmittingDataset(WfEventId.define(nameof(EmittingDataset)), type, dst));
+        public void Emitting(string type, FilePath dst, CorrelationToken? ct = null)
+            => Raise(new EmittingDataset(WfEventId.define(nameof(EmittingDataset), ct), type, dst));
 
-        public void Emitting(string type, FolderPath dst)
-            => Raise(new EmittingDataset(WfEventId.define(nameof(EmittingDataset)), type, dst));
+        public void Emitting(string type, FolderPath dst, CorrelationToken? ct = null)
+            => Raise(new EmittingDataset(WfEventId.define(nameof(EmittingDataset), ct), type, dst));
 
-        public void Emitted(string type, uint count, FilePath dst)
-            => Raise(new DatasetEmitted(type, count, dst));
+        public void Emitted(string type, uint count, FilePath dst, CorrelationToken? ct = null)
+            => Raise(new DatasetEmitted(WfEventId.define(nameof(EmittingDataset), ct), type, count, dst));
 
         public CorrelationToken Running(string worker)
         {
@@ -93,6 +96,16 @@ namespace Z0
         public void Status(string msg, CorrelationToken? ct = null)
         {   
             Raise(new WfStatus(msg,ct));            
+        }
+
+        public void Created(string worker, CorrelationToken? ct = null)
+        {   
+            Raise(new WorkerCreated(worker,ct));            
+        }
+
+        public void Finished(string worker, CorrelationToken? ct = null)
+        {   
+            Raise(new WorkerFinished(worker,ct));            
         }
 
         public void Initialized(string worker, CorrelationToken? ct = null)

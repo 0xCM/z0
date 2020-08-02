@@ -18,8 +18,10 @@ namespace Z0.Asm
 
         public CorrelationToken Ct {get;}
         
-        public CaptureState(ICaptureWorkflow cwf, PartWfConfig config, CorrelationToken? ct = null)        
+        public WfTermEventSink TermSink {get;}
+        public CaptureState(ICaptureWorkflow cwf, PartWfConfig config, WfTermEventSink sink, CorrelationToken? ct = null)        
         {
+            TermSink = sink;
             CWf = cwf;
             Config = config;
             Ct = ct ?? CorrelationToken.create();
@@ -42,13 +44,13 @@ namespace Z0.Asm
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent
         {
-            Wf.Sink.Deposit(@event);
+            Wf.TermSink.Deposit(@event);
             return @event.Id;
         }
 
         public void Raise(IAppEvent e)
         {
-            Wf.Sink.Deposit(e);
+            Wf.TermSink.Deposit(e);
         }
     }
 }

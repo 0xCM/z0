@@ -9,7 +9,7 @@ namespace Z0.Image
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [Record, StructLayout(LayoutKind.Sequential)]
     public struct MEMORY_BASIC_INFORMATION64
     {
         public ulong BaseAddress;

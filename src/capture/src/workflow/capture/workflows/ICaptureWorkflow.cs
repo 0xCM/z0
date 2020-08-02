@@ -26,7 +26,6 @@ namespace Z0.Asm
             => new ParseMembersStep(this);
 
         IMatchEmissions MatchEmissions
-            => new MatchEmissionsStep(this);
-        
+            => new MatchEmissionsStep(this);       
     }
 }

@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Image
 {
+    [Record]
     public struct IMAGE_OPTIONAL_HEADER_SPECIFIC
     {
         public ulong SizeOfStackReserve;

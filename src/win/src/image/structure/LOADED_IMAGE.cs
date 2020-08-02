@@ -15,7 +15,8 @@ namespace Z0.Image
     /// <summary>
     /// Contains information about the loaded image.
     /// </summary>
-    public unsafe partial struct LOADED_IMAGE
+    [Record]
+    public unsafe struct LOADED_IMAGE
     {
         /// <summary>
         /// The file name of the mapped file.

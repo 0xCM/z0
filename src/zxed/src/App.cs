@@ -11,6 +11,8 @@ namespace Z0
  
     using P = Z0.Parts;
     
+
+    using static Flow;    
     
     class App : AppShell<App,IAppContext>
     {                
@@ -39,8 +41,8 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {            
-            var sink = Flow.TermReceiver;
-            var config = new XedEtlConfig(Context, Flow.LoadConfig(Context,sink));
+            var sink = termsink();
+            var config = new XedEtlConfig(Context, wfconfig(Context,sink));
             using var context = new WfContext<XedEtlConfig>(Context, config, sink);
             using var wf = new XedEtl(context);
             wf.Run();                                        

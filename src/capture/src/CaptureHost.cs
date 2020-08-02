@@ -17,8 +17,11 @@ namespace Z0
             var parts = Config.Parts.Length == 0? Wf.ContextRoot.PartIdentities : Config.Parts;                
             Wf.Raise(new CapturingParts(parts, Ct));
             Consolidate(parts);
+            Wf.Ran(nameof(CaptureHost), Ct);
         }
-        
+
+
+
         readonly CorrelationToken Ct;
 
         readonly WfContext Wf;
@@ -29,6 +32,8 @@ namespace Z0
         
         public IMultiSink Sink {get;}
 
+        public WfTermEventSink TermSink {get;}
+        
         public ICaptureBroker Broker {get;}
 
         readonly IAsmContext Context;
@@ -53,16 +58,24 @@ namespace Z0
 
         readonly uint EvalBufferSize;
         
+        /// <summary>
+        /// Creates a capture workflow predicated on caller-supplied services
+        /// </summary>
+        /// <param name="decoder">The decoder to use</param>
+        /// <param name="formatter">The formatter to use</param>
+        /// <param name="archive">The archive to target</param>
+        static ICaptureWorkflow Cwf(IAsmContext asm, WfContext wf, IAsmFunctionDecoder decoder, IAsmFormatter formatter, TPartCaptureArchive archive)
+            => new CaptureWorkflow(asm, wf, decoder, formatter, Capture.Services.AsmWriterFactory, archive);
+
         public CaptureHost(WfContext wf, IAsmContext asm, ICaptureWorkflow cwf, ICaptureBroker broker, PartWfConfig config, CorrelationToken ct)
         {                            
             Wf = wf;                
             Ct = ct;
             CWf = cwf;
-            Sink = wf.Sink;
+            Sink = wf.TermSink;
+            TermSink = wf.TermSink;
             Broker = broker;
             Context = asm;
-
-            Wf.Status("Initializing capture host", ct);
             Args = config.Args;
             EvalBufferSize = Pow2.T16;
             Config = config;
@@ -72,9 +85,8 @@ namespace Z0
             Services = CaptureServices.create(Context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
             UriBitsReader = Capture.Services.EncodedHexReader;
-            CaptureWorkflow = Services.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(config.Target));
-            ImmWorkflow = Services.ImmEmissionWorkflow(Sink, Context.Api, Formatter, Decoder, config);            
-            Wf.Status("Completed host initialization sequence", ct);                       
+            CaptureWorkflow = Cwf(asm, wf, Decoder, Formatter, Capture.Services.CaptureArchive(config.Target));
+            ImmWorkflow = Services.ImmEmissionWorkflow(Sink, Context.Api, Formatter, Decoder, config, Ct);            
         }
 
         public void Dispose()
@@ -99,7 +111,7 @@ namespace Z0
         {
             if(Settings.EmitPrimaryArtifacts)
             {
-                var wf = ManageCaptureStep.create(CWf, Config, Ct);
+                var wf = ManageCaptureStep.create(CWf, Config, TermSink, Ct);
                 wf.Consolidate();                
             }
 
@@ -118,7 +130,7 @@ namespace Z0
 
         void EmitPrimary(params PartId[] parts)
         {
-            var wf = ManageCaptureStep.create(CWf, Config);            
+            var wf = ManageCaptureStep.create(CWf, Config, TermSink, Ct);            
             wf.Run();
         }
 

@@ -92,17 +92,8 @@ namespace Z0.Asm
         /// </summary>
         IImmSpecializer ImmServices 
             => CaptureServices.ImmSpecializer(Decoder);
-
-        AsmWriterFactory WriterFactory 
-            => CaptureServices.AsmWriterFactory;
         
         IEvalWorkflow CreateEvalWorkflow(PartWfConfig config, uint buffersize)
-            => Evaluate.workflow(Apps.context(Api, Random, Settings, AppMsgExchange.Create(ContextRoot)), Random, config.Target.ArchiveRoot, buffersize);
-
-        /// <summary>
-        /// The context writer factory
-        /// </summary>
-        IAsmFunctionWriter Writer(FilePath dst)
-            => WriterFactory(dst, Formatter); 
+            => Evaluate.workflow(Apps.context(Api, Random, Settings, AppMsgExchange.Create(ContextRoot)), Random, config.Target.ArchiveRoot, buffersize); 
     }   
 }

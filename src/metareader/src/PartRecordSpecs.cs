@@ -8,14 +8,14 @@ namespace Z0
 
     public readonly struct PartRecordSpecs
     {
-        public static StringValueRecord Strings => default;
+        public static ImgStringRecord Strings => default;
         
-        public static BlobRecord Blobs => default;
+        public static ImgBlobRecord Blobs => default;
         
-        public static ConstantRecord Constants => default;
+        public static ImgConstantRecord Constants => default;
 
-        public static FieldRecord Fields => default;
+        public static ImgFieldRecord Fields => default;
 
-        public static FieldRvaRecord FieldRva => default;
+        public static ImgFieldRva FieldRva => default;
     }
 }

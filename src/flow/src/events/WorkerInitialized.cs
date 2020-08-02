@@ -9,20 +9,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Konst;
+    using static Flow;
     using static z;
 
     public readonly struct WorkerInitialized : IWfEvent<WorkerInitialized>
     {        
-        const string Pattern = "{0}: Initialized";
+        const string Pattern = IdMarker + "Initialized";
         
         public WfEventId Id {get;}
         
         [MethodImpl(Inline)]
         public WorkerInitialized(string worker, CorrelationToken? ct = null)
         {
-            Id = WfEventId.define(worker, ct ?? CorrelationToken.create(), now());        
+            Id = wfid(worker, ct);
         }
-
         public AppMsgColor Flair 
             => AppMsgColor.Magenta;
 

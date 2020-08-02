@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
+    
     using static Konst;
+    using static Flow;
 
     using static z;
 
@@ -22,24 +24,27 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly IMultiSink Sink;
+        readonly IMultiSink LogSink;
         
+        readonly WfTermEventSink TermSink;
+
         readonly WfConfig Config;
         
         readonly WfContext Wf;
 
         readonly TAppPaths Paths;
 
-        public Controller(IAppContext context, string[] args)
+        public Controller(IAppContext context, CorrelationToken ct, string[] args)
         {
-            Args = args;
             Context = context;
+            Args = args;
+            Ct = ct;
+            TermSink = termsink(Ct);
             Paths = context.AppPaths;
             Asm = ContextFactory.CreateAsmContext(context);                           
-            Ct = CorrelationToken.define(1);
-            Sink = Flow.log(context);
-            Config = Flow.LoadConfig(context, Sink);            
-            Wf = WfContext.create(context, Config, Sink);            
+            LogSink = wflog(context);
+            Config = wfconfig(context, LogSink);            
+            Wf = wfctx(context, Ct, Config, TermSink);            
             Wf.Initialized(nameof(Controller), Ct);          
         }
 
@@ -48,9 +53,10 @@ namespace Z0
             Wf.Running(nameof(Controller), Ct);
             var config = PartConfig(Wf, Args);
             var cwf = capture(Asm, Paths.AppCaptureRoot);
-            var brokerLog = Paths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv);
-            var broker = CaptureBroker.create(brokerLog);
-            using var host = new CaptureHost(Wf, Asm, cwf, broker, config, Ct);
+            var data = Paths.AppDataRoot + FolderName.Define("data");
+            var brokerLog = (data + FileName.Define("broker", FileExtensions.Csv)).CreateParentIfMissing();
+            var cBroker = CaptureBroker.create(brokerLog, Ct);
+            using var host = new CaptureHost(Wf, Asm, cwf, cBroker, config, Ct);
             host.Run();
         }
 
@@ -69,7 +75,7 @@ namespace Z0
             return new PartWfConfig(wf, args, src, dst, parsed);                    
         }
 
-        static ICaptureWorkflow capture(IAsmContext context, FolderPath dst)
+        ICaptureWorkflow capture(IAsmContext context, FolderPath dst)
         {
             var services = CaptureServices.create(context);
             var spec = AsmFormatSpec.DefaultStreamFormat;
@@ -77,7 +83,7 @@ namespace Z0
             var decoder = services.AsmDecoder(spec);
             var writer = Capture.Services.AsmWriterFactory;
             var archive = services.CaptureArchive(dst);
-            return new CaptureWorkflow(context, decoder, formatter, writer, archive);
+            return new CaptureWorkflow(context, Wf, decoder, formatter, writer, archive);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
     
-    public interface IImmEmissionWorkflow : IServiceAllocation
+    public interface IImmEmissionWorkflow : IAppBase, IServiceAllocation
     {
         void EmitLiteral(byte[] imm8, params PartId[] parts);
 
@@ -15,24 +15,24 @@ namespace Z0.Asm
         void ClearArchive(params PartId[] parts);        
     }
 
-    public interface ICaptureHostStep
+    public interface ICaptureHostStep : IAppBase
     {
         void Execute(IApiHost host, TPartCaptureArchive dst);
     }
 
-    public interface IDecodeStep
+    public interface IDecodeStep : IAppBase
     {
         AsmFunction[] DecodeParsed(ApiHostUri host, ParsedExtract[] parsed);
 
         void SaveDecoded(AsmFunction[] src, FilePath dst);
     }    
 
-    public interface IMatchEmissions
+    public interface IMatchEmissions : IAppBase
     {
         void MatchEmissions(ApiHostUri host, ReadOnlySpan<IdentifiedCode> srcA, FilePath srcB);
     }    
 
-    public interface IManageCaptureStep
+    public interface IManageCaptureStep : IAppBase
     {
         void CaptureHost(CaptureHostStep step, IApiHost host, TPartCaptureArchive dst);
 
@@ -41,7 +41,7 @@ namespace Z0.Asm
         void CapturePart(IPartCatalog src, TPartCaptureArchive dst);
     }    
 
-    public interface IReportExtractsStep 
+    public interface IReportExtractsStep : IAppBase
     {
         ExtractReport CreateExtractReport(ApiHostUri host, ExtractedCode[] src);
         

@@ -27,21 +27,20 @@ namespace Z0
         /// <summary>
         /// Returns supported content kinds
         /// </summary>
-        public static StructuredKind[] StructuredClasses
-            => Enums.literals<StructuredKind>().Where(x => x != 0).OrderBy(x => x.Format());
+        public static StructureKind[] StructuredClasses
+            => Enums.literals<StructureKind>().Where(x => x != 0).OrderBy(x => x.Format());
         
-
-        public static IEnumerable<ContentInfo> Catalog
+        public static IEnumerable<ContentLibEntry> Catalog
         {
             get
             {
                 foreach(var (k,r) in Content)
                 {
-                   yield return new ContentInfo((ContentKind)k,(uint)r.Content.Length, r.Name, true);
+                   yield return new ContentLibEntry((ContentKind)k, StructureKind.None, (uint)r.Content.Length, r.Name);
 
                 }
                foreach(var (k,r) in Structured)                 
-                   yield return new ContentInfo((ContentKind)k,(uint)r.RowCount, r.Name, true);
+                   yield return new ContentLibEntry((ContentKind)k, k, (uint)r.RowCount, r.Name);
             }
         }
 
@@ -81,7 +80,7 @@ namespace Z0
         /// <summary>
         /// Enumerates all structureded content
         /// </summary>
-        public static IEnumerable<Paired<StructuredKind,AppResourceDoc>> Structured
+        public static IEnumerable<Paired<StructureKind,AppResourceDoc>> Structured
         {
             get
             {
@@ -121,18 +120,18 @@ namespace Z0
         /// Enumerates embedded documents with matching kind
         /// </summary>
         /// <param name="kind">The kind to match</param>
-        public static IEnumerable<AppResourceDoc> match(StructuredKind kind)
+        public static IEnumerable<AppResourceDoc> match(StructureKind kind)
         {
             var svc = Extractor;
             var names = svc.ResourceNames;
             var matches = kind switch {
-                StructuredKind.AsmId => names.Where(name => name.Contains(".asmid.")),
-                StructuredKind.AsmInxs => names.Where(name => name.Contains(".asminxs.")),
-                StructuredKind.AsmSyn => names.Where(name => name.Contains(".asmsyn.")),
-                StructuredKind.AsmT => names.Where(name => name.Contains(".asmt.")),
-                StructuredKind.Env => names.Where(name => name.Contains(".env.")),
-                StructuredKind.Help => names.Where(name => name.Contains(".help.")),
-                StructuredKind.PeFormat => names.Where(name => name.Contains(".peformat.")),
+                StructureKind.AsmId => names.Where(name => name.Contains(".asmid.")),
+                StructureKind.AsmInxs => names.Where(name => name.Contains(".asminxs.")),
+                StructureKind.AsmSyn => names.Where(name => name.Contains(".asmsyn.")),
+                StructureKind.AsmT => names.Where(name => name.Contains(".asmt.")),
+                StructureKind.Env => names.Where(name => name.Contains(".env.")),
+                StructureKind.Help => names.Where(name => name.Contains(".help.")),
+                StructureKind.PeFormat => names.Where(name => name.Contains(".peformat.")),
                     _ => sys.empty<string>(),
             };
             
@@ -181,7 +180,7 @@ namespace Z0
         public static string Format(this ContentKind src)
             => src.ToString().ToLower();
 
-        public static string Format(this StructuredKind src)
+        public static string Format(this StructureKind src)
             => src.ToString().ToLower();
     }
 }

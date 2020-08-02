@@ -33,7 +33,7 @@ namespace Z0
         {
             foreach(var part in Parts)
             {
-                using var emitter = new EmiPartCil(Wf, part, TargetDir + FileName.Define(part.Id.Format(), "il.csv"));
+                using var emitter = new EmitMethodCil(Wf, part, TargetDir + FileName.Define(part.Id.Format(), "il.csv"));
                 emitter.Run();
             }                                     
 

@@ -17,6 +17,7 @@ namespace Z0.Image
     /// This structure allows fast lookup by either name or number, but for any
     /// given resource entry only one form of lookup is supported, not both.
     /// </summary>
+    [Record]
     public struct IMAGE_RESOURCE_DIRECTORY
     {
         public int Characteristics;

@@ -26,25 +26,10 @@ namespace Z0.Asm
         IMemberExtractor ICaptureServices.HostExtractor(int bufferlen)
             => MemberExtraction.service(bufferlen);
 
-        /// <summary>
-        /// Creates a capture workflow predicated on caller-supplied services
-        /// </summary>
-        /// <param name="decoder">The decoder to use</param>
-        /// <param name="formatter">The formatter to use</param>
-        /// <param name="archive">The archive to target</param>
-        ICaptureWorkflow CaptureWorkflow(IAsmFunctionDecoder decoder, IAsmFormatter formatter, TPartCaptureArchive archive)
-            => new CaptureWorkflow(Context, decoder, formatter, Capture.Services.AsmWriterFactory, archive);
+        // IImmEmissionWorkflow ImmEmissionWorkflow(IMultiSink sink, IApiSet api, PartWfConfig config)        
+        //     => new ImmEmissionWorkflow(Context, sink, Formatter(), AsmDecoder(), api, config.Target.ArchiveRoot);
 
-        /// <summary>
-        /// Creates an imm emission workflow using default decoding and formatting servcies
-        /// </summary>
-        /// <param name="sink">The event message sink</param>
-        /// <param name="api">The api set available to the workflow</param>
-        /// <param name="dst">The emission output directory</param>
-        IImmEmissionWorkflow ImmEmissionWorkflow(IMultiSink sink, IApiSet api, PartWfConfig config)        
-            => new ImmEmissionWorkflow(Context, sink, Formatter(), AsmDecoder(), api, config.Target.ArchiveRoot);
-
-        IImmEmissionWorkflow ImmEmissionWorkflow(IMultiSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, PartWfConfig config)        
-            => new ImmEmissionWorkflow(Context, sink, formatter, decoder, api, config.Target.ArchiveRoot);
+        IImmEmissionWorkflow ImmEmissionWorkflow(IMultiSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, PartWfConfig config, CorrelationToken? ct = null)        
+            => new ImmEmissionWorkflow(Context, sink, formatter, decoder, api, config.Target.ArchiveRoot, ct);
     }
 }

@@ -30,6 +30,7 @@ namespace Z0.MS
     /// Because the system time can be adjusted either forward or backward, do not compare system time readings to determine elapsed time.
     /// Instead, use one of the methods described in Windows Time.
     /// </remarks>
+    [Record]
     public struct SYSTEMTIME
     {
         /// <summary>

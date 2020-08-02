@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
+
     using static Konst;
+    using static Flow;
 
     using static z;
 
@@ -25,34 +27,33 @@ namespace Z0
         
         readonly CorrelationToken Ct;
 
-        static ICaptureWorkflow capture(IAsmContext context, FolderPath target)
+        static ICaptureWorkflow capture(IAsmContext asm, WfContext wf, FolderPath target)
         {
-            var services = CaptureServices.create(context);
+            var services = CaptureServices.create(asm);
             var spec = AsmFormatSpec.DefaultStreamFormat;
             var formatter = services.Formatter(spec);
             var decoder = services.AsmDecoder(spec);
             var writer = Capture.Services.AsmWriterFactory;
             var archive = services.CaptureArchive(target);
-            return new CaptureWorkflow(context, decoder, formatter, writer, archive);
+            return new CaptureWorkflow(asm, wf, decoder, formatter, writer, archive);
         }
 
-        public static void run(IAppContext context, params string[] args)
+        public static WfControl create(IAppContext context, CorrelationToken? ct, params string[] args)
         {
-            //using var receiver = Flow.log(context);
-            var receiver = Flow.TermReceiver;
-            using var wf = WfContext.create(context, Flow.LoadConfig(context, receiver), receiver);
-            using var control = new WfControl(wf, args);
-            control.Run();
+            var _ct = correlate(ct);
+            var receiver = termsink(_ct);
+            var wf = wfctx(context, _ct, wfconfig(context, receiver), receiver);
+            return new WfControl(wf, _ct, args);
         }
 
         [MethodImpl(Inline)]
-        WfControl(WfContext wf, string[] args, params ActorIdentity[] known)     
+        WfControl(WfContext wf, CorrelationToken ct, string[] args, params ActorIdentity[] known)     
         {
             Context = wf.ContextRoot;
             Wf = wf;
             Args = args;
             Known = known;
-            Ct =  CorrelationToken.define(1ul);
+            Ct =  ct;
         }
 
         public void Run()
@@ -62,16 +63,16 @@ namespace Z0
             if(CaptureArtifacts)
             {
                 var asm = ContextFactory.CreateAsmContext(Context);
-                var cwf = capture(asm, Context.AppPaths.AppCaptureRoot);
+                var cwf = capture(asm, Wf, Context.AppPaths.AppCaptureRoot);
                 var broker = CaptureBroker.create(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv));
-                var config = PartWf.configure(Wf, Args);
+                var config = wfconfig(Wf, Args);
                 using var host = new CaptureHost(Wf, asm, cwf, broker, config, Ct);
                 host.Run();
             }
 
             if(EmitDatasets)
             {
-                using var emission = new EmitDatasets(Wf, Args);
+                using var emission = new EmitDatasets(Wf, Ct, Args);
                 emission.Run();
             }                    
         }

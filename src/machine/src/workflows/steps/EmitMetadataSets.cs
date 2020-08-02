@@ -16,7 +16,7 @@ namespace Z0
     {
         public FolderPath TargetDir {get;}
 
-        readonly CorrelationToken Correlation;
+        readonly CorrelationToken Ct;
 
         public readonly WfContext Wf;
         
@@ -32,12 +32,12 @@ namespace Z0
         public EmitMetadataSets(WfContext context, CorrelationToken? ct = null)
         {            
             Wf = context;
-            Correlation = ct ?? CorrelationToken.create();
+            Ct = ct ?? CorrelationToken.create();
             ResRoot = AppPaths.Default.ResourceRoot;
             TargetDir = ResRoot + FolderName.Define("metadata");
             Parts = KnownParts.Service.Known.ToArray();
             Sink = new PartSink(context.ContextRoot);
-            Wf.Running(nameof(EmitMetadataSets), Correlation);
+            Wf.Created(nameof(EmitMetadataSets), Ct);
         }
 
         public void Deposit(IAppEvent src)
@@ -46,10 +46,10 @@ namespace Z0
             Sink.Deposit(src);
         }
 
-        IPartReader Reader(string src)
-            => PartReader.open(FilePath.Define(src));
+        IImgMetadataReader Reader(string src)
+            => ImgMetadataReader.open(FilePath.Define(src));
 
-        FilePath TargetPath(PartId part, PartRecordKind rk, MK mk)
+        FilePath TargetPath(PartId part, ImgRecordKind rk, MK mk)
             => TargetDir +  PartDataEmitters.filename(mk, rk);
 
         FolderPath PrepareTarget()
@@ -63,7 +63,7 @@ namespace Z0
         
         public void Run()
         {
-            var ct = Wf.Running(nameof(EmitMetadataSets));
+            Wf.Running(nameof(EmitMetadataSets), Ct);
             
             PrepareTarget();            
             
@@ -93,7 +93,7 @@ namespace Z0
             }
 
             {
-                using var emitter = new EmitBlobRecords(Wf, Parts);
+                using var emitter = new EmitBlobRecords(Wf, Ct, Parts);
                 emitter.Run();
             }
         
@@ -102,12 +102,12 @@ namespace Z0
                 emitter.Run();
             }
                         
-            Wf.Ran(nameof(EmitMetadataSets),ct);
+            Wf.Ran(nameof(EmitMetadataSets), Ct);
         }        
 
         public void Dispose()
         {
-            Wf.Ran(nameof(EmitMetadataSets), Correlation);
+            Wf.Finished(nameof(EmitMetadataSets), Ct);
         }
     }
 }

@@ -11,15 +11,12 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Konst;    
-    using static PartRecords;
     using static Root;
     using static ReaderInternals;
-
-    using M = PartRecords;
     
-    partial class PartReader
+    partial class ImgMetadataReader
     {        
-        internal static ReadOnlySpan<FieldRvaRecord> fieldrva(in ReaderState state)        
+        internal static ReadOnlySpan<ImgFieldRva> fieldrva(in ReaderState state)        
         {                
             var reader = state.Reader;                
             var offset = reader.GetTableMetadataOffset(System.Reflection.Metadata.Ecma335.TableIndex.FieldRva);
@@ -29,7 +26,7 @@ namespace Z0
             var rvaCount = FieldRvaCount(state);
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = sys.alloc<FieldRvaRecord>(count);
+            var dst = sys.alloc<ImgFieldRva>(count);
             
             for(var i=0; i<count; i++)
             {
@@ -41,7 +38,7 @@ namespace Z0
                 var sig = signature(state, entry, i);
                 var name = reader.GetString(entry.Name);
                 var va = entry.GetRelativeVirtualAddress();
-                dst[i] = new FieldRvaRecord(tName, name, sig, (uint)va);                    
+                dst[i] = new ImgFieldRva(tName, name, sig, (uint)va);                    
             }
             
             return dst.OrderBy(x => x.Rva);
@@ -62,29 +59,29 @@ namespace Z0
             return methods;
         }
 
-        internal static M.LiteralFieldRecord record(in ReaderState state, StringHandle handle, int seq)
+        internal static ImgLiteralFieldRecord record(in ReaderState state, StringHandle handle, int seq)
         {
             var value = state.Reader.GetString(handle);
             var offset = state.Reader.GetHeapOffset(handle);
             var size = state.Reader.GetHeapSize(HeapIndex.String);
-            return new M.LiteralFieldRecord(seq, size, offset, value);                    
+            return new ImgLiteralFieldRecord(seq, size, offset, value);                    
         }
 
-        internal static M.LiteralFieldRecord name(in ReaderState state, FieldDefinition entry, int seq)
+        internal static ImgLiteralFieldRecord name(in ReaderState state, FieldDefinition entry, int seq)
             => record(state, entry.Name, seq);
         
         internal static string format(FieldAttributes src)
             => src.ToString();
 
-        internal static BlobRecord signature(in ReaderState state, FieldDefinition entry, int seq)
+        internal static ImgBlobRecord signature(in ReaderState state, FieldDefinition entry, int seq)
             => record(state, entry.Signature, seq);
 
-        internal static ReadOnlySpan<FieldRecord> fields(in ReaderState state)
+        internal static ReadOnlySpan<ImgFieldRecord> fields(in ReaderState state)
         {
             var reader = state.Reader;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = Spans.alloc<FieldRecord>(count);
+            var dst = Spans.alloc<ImgFieldRecord>(count);
             
             for(var i=0; i<count; i++)
             {
@@ -92,7 +89,7 @@ namespace Z0
                 var entry = reader.GetFieldDefinition(handle);
                 int offset = entry.GetOffset();
 
-                seek(dst,i) = new FieldRecord(
+                seek(dst,i) = new ImgFieldRecord(
                     Sequence: i,
                     Name: name(state, entry, i),
                     SigCode: signature(state, entry, i),

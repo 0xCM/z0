@@ -21,27 +21,28 @@ namespace Z0
         public FilePath TargetPath {get;}
 
         public IWfEventSink Sink {get;}
-        
-        readonly StreamWriter OutStream;
 
         object locker;
 
+        CorrelationToken Ct;
+        
         [MethodImpl(Inline)]
-        public WfBroker(FilePath target)
+        public WfBroker(FilePath target, CorrelationToken? ct = null)
         {
-            Sink = new WfTermEventSink();
-            TargetPath = target ?? FilePath.Empty;
+            Ct = ct ?? CorrelationToken.create();
+            var @base = AppBase.Default;
+            var paths = @base.AppPaths;
+            Sink = WfTermEventSink.create(Ct);
+            TargetPath = target ?? (paths.AppCaptureRoot + FileName.Define($"{@base.AppName}.broker", FileExtensions.Csv));
             Subscriptions = new Dictionary<Type,ISink>();
             Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
-            if(!TargetPath.IsNonEmpty)
-                OutStream = TargetPath.Writer();
-            locker = new object();
+            locker = new object();                    
+            Sink.Deposit(new WorkerInitialized(nameof(WfBroker), Ct));
         }
 
         public void Dispose()
-        {
-            if(OutStream != null)
-                OutStream.Dispose();
+        {            
+            Sink.Deposit(new WfStepFinished(nameof(WfBroker), Ct));
         }
 
         public void raise<E>(in E e)
@@ -79,17 +80,11 @@ namespace Z0
         void Emit(IWfEvent e)
         {
             z.iter(Receivers.Values, r => r(e));
-            if(OutStream != null)
-                lock(locker)
-                    OutStream.WriteLine(e.Format());
         }
 
         void Emit(IAppEvent e)
         {
             z.iter(Receivers.Values, r => r(e));
-            if(OutStream != null)
-                lock(locker)
-                    OutStream.WriteLine(e.Format());
         }
 
         public void Raise(IWfEvent e)
@@ -101,13 +96,5 @@ namespace Z0
         {
             Emit(e);
         }
-
-        // public Outcome Subscribe(Action<IWfEvent> receiver, IWfEvent model)
-        // {
-        //     if(Subscriptions.TryAdd(model.GetType(), Events.sink(receiver)))
-        //         return true;
-        //     else
-        //         return (false, AppMsg.Warn($"Key for {model.GetType()} was previously added"));            
-        // }
     }
 }

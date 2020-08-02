@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    public interface ICaptureContext : IContext
+    public interface ICaptureContext : IAppBase
     {
         IApiSet ApiSet {get;}
 

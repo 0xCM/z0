@@ -15,16 +15,24 @@ namespace Z0.Asm
 
         public ICaptureBroker Broker {get;}
         
+        public CorrelationToken Ct {get;}
+        
+        public WfContext Wf {get;}
+        
         [MethodImpl(Inline)]
-        public CaptureWorkflow(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, TPartCaptureArchive archive)
+        public CaptureWorkflow(IAsmContext asm, WfContext wf, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, TPartCaptureArchive archive, CorrelationToken? ct = null)
         {
-            Broker = CaptureBroker.create(context.AppPaths.AppStandardOutPath);
-            Context = new CaptureContext(context, decoder, formatter, writerfactory, Broker, archive);
+            Ct = ct ?? CorrelationToken.create();
+            Wf = wf;
+            Broker = CaptureBroker.create(asm.AppPaths.AppCaptureRoot + FileName.Define("workflow", FileExtensions.Csv));
+            Context = new CaptureContext(asm, decoder, formatter, writerfactory, Broker, archive, Ct);
+            Wf.Initialized(nameof(CaptureWorkflow), Ct);
         }
 
         public void Dispose()
-        {
+        {                            
             Broker.Dispose();
+            Wf.Ran(nameof(CaptureWorkflow), Ct);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Z0.Image
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit)]
+    [Record, StructLayout(LayoutKind.Explicit)]
     public struct IMAGE_COR20_HEADER_ENTRYPOINT
     {
         [FieldOffset(0)]

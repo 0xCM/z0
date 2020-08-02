@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+    using F = PeHeaderField;
+
     public readonly ref struct EmitPeRecords
     {
         readonly WfContext Wf;
@@ -31,19 +32,35 @@ namespace Z0
 
         public void Run()
         {
+            var formatter = DatasetFormatter<F>.Default;            
             using var writer = TargetPath.Writer();
+            writer.WriteLine(formatter.HeaderText);
 
             foreach(var part in Parts)
             {
                 var id = part.Id;
                 var assembly = part.Owner;                                
-                var data = PartReader.headers(FilePath.Define(assembly.Location));
-                var rendered = HeaderInfo.render(data);
-                var count = rendered.Length;
+                var records = ImgMetadataReader.headers(FilePath.Define(assembly.Location));
+                var count = records.Length;
                 
                 for(var i=0; i<count; i++)
-                    writer.WriteLine(Root.skip(rendered,i));
+                {
+                    format(z.skip(records,i), formatter);
+                    writer.WriteLine(formatter.Render());
+                }                    
             }  
+        }
+
+        public static void format(in PeHeaderRecord src, IDatasetFormatter<F> dst)
+        {
+            dst.Append(F.FileName, src.FileName);
+            dst.Delimit(F.Section, src.Section);
+            dst.Delimit(F.Address, src.Address);
+            dst.Delimit(F.Size, src.Size);
+            dst.Delimit(F.EntryPoint, src.EntryPoint);
+            dst.Delimit(F.CodeBase, src.CodeBase);
+            dst.Delimit(F.Gpt, src.GlobalPointerTable);
+            dst.Delimit(F.GptSize, src.GlobalPointerTableSize);
         }
 
         public void Dispose()

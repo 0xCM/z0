@@ -24,6 +24,7 @@ namespace Z0.Image
         public readonly uint DataDirectoryOffset;
 
         public readonly uint ImageDataDirectoryOffset;        
+        
         public static PeImageOffsets FromHeaderIndex(int pos)
             => new PeImageOffsets(pos);
 

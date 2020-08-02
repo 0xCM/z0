@@ -20,23 +20,23 @@ namespace Z0
         readonly FolderPath TargetDir;
 
         readonly EmissionDataType DataType;
+
+        readonly CorrelationToken Ct;
         
         [MethodImpl(Inline)]
-        public EmitBlobRecords(WfContext wf, IPart[] parts)
+        public EmitBlobRecords(WfContext wf, CorrelationToken ct, IPart[] parts)
         {
             Wf = wf;
+            Ct = ct;
             Parts = parts;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("blobs");
             DataType = EmissionDataType.Blob;
-            Wf.Running(nameof(EmitBlobRecords));
+            Wf.Created(nameof(EmitBlobRecords), ct);
         }
 
-        public PartRecordKind DataKind
-            => PartRecordKind.Blob;                
-
-        public ReadOnlySpan<BlobRecord> Read(IPart part)
+        public ReadOnlySpan<ImgBlobRecord> Read(IPart part)
         {
-            using var reader = PartReader.open(part.PartPath());
+            using var reader = ImgMetadataReader.open(part.PartPath());
             return reader.ReadBlobs();        
         }
                 
@@ -69,7 +69,7 @@ namespace Z0
 
         public void Dispose()
         {
-             Wf.Ran(nameof(EmitBlobRecords));            
-       }
+            Wf.Finished(nameof(EmitBlobRecords), Ct);            
+        }
     }
 }

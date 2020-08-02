@@ -14,30 +14,30 @@ namespace Z0
     using static Konst;    
     using static PartRecords;
         
-    partial class PartReader
+    partial class ImgMetadataReader
     {        
-        internal static BlobRecord record(in ReaderState state, BlobHandle handle, int seq)
+        internal static ImgBlobRecord record(in ReaderState state, BlobHandle handle, int seq)
         {
             var offset = state.Reader.GetHeapOffset(handle);            
             var value = state.Reader.GetBlobBytes(handle) ?? Root.array<byte>();
             var size = state.Reader.GetHeapSize(HeapIndex.Blob);
-            return new BlobRecord(seq, size,offset,value);                    
+            return new ImgBlobRecord(seq, size,offset,value);                    
         }
 
-        internal static ReadOnlySpan<BlobRecord> blobs(in ReaderState state)
+        internal static ReadOnlySpan<ImgBlobRecord> blobs(in ReaderState state)
         {
             var reader = state.Reader;
             int size = reader.GetHeapSize(HeapIndex.Blob);
             if (size == 0)
-                return Span<BlobRecord>.Empty;
+                return Span<ImgBlobRecord>.Empty;
 
             var handle = MetadataTokens.BlobHandle(0);
             var i=0;
-            var values = new List<BlobRecord>();
+            var values = new List<ImgBlobRecord>();
             do
             {
                 var value = reader.GetBlobBytes(handle);
-                values.Add(new BlobRecord(
+                values.Add(new ImgBlobRecord(
                     Sequence: i++,
                     HeapSize: size, 
                     Offset: reader.GetHeapOffset(handle), 

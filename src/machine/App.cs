@@ -54,7 +54,11 @@ namespace Z0
         }
         
         public override void RunShell(params string[] args)
-            => WfControl.run(Context,args);
+        {
+            var ct = CorrelationToken.define(1);
+            using var control = WfControl.create(Context, ct, args);
+            control.Run();
+        }
 
         public static void Main(params string[] args)
             => Launch(args);

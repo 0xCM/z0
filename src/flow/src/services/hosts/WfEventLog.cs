@@ -27,9 +27,9 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         [MethodImpl(Inline)]
-        internal WfEventLog(FilePath std, FilePath err, IMultiSink relay)
+        internal WfEventLog(FilePath std, FilePath err, IMultiSink relay, CorrelationToken? ct = null)
         {
-            Ct = CorrelationToken.define(1);
+            Ct = ct ?? CorrelationToken.create();
             StdLock = new object();
             ErrLock = new object();
             StdTarget = std.Writer();
@@ -60,8 +60,8 @@ namespace Z0
             Deposit(new WfStatus(src.Format(), src.Flair, Ct));            
          }
 
-        public void Dispose()
-        {            
+         public void Dispose()
+         {            
             StdTarget.Flush();
             StdTarget.Dispose();
 

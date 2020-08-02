@@ -14,6 +14,7 @@ namespace Z0.Image
     /// decoding code point values within the resource data.  Typically for new
     /// applications the code page would be the unicode code page.
     /// </summary>
+    [Record]
     public struct IMAGE_RESOURCE_DATA_ENTRY
     {
         public int RvaToData;
