@@ -10,8 +10,8 @@ namespace Z0
     
     public class CaptureWorkflowHost : ICaptureHost
     {            
-        public CaptureWorkflowHost(IAppContext context, params string[] args)
-            : this(ContextFactory.CreateAsmContext(context), PartFileArchives.configure(context, args), args)
+        public CaptureWorkflowHost(WfContext wf, params string[] args)
+            : this(wf, PartWf.configure(wf, args), args)
         {
 
         }
@@ -37,7 +37,7 @@ namespace Z0
 
         readonly CaptureConfig Settings;
 
-        readonly Arrow<ArchiveConfig> Config;
+        readonly PartWfConfig Config;
 
         readonly IAsmFormatter Formatter;
 
@@ -55,22 +55,22 @@ namespace Z0
 
         readonly uint EvalBufferSize;
         
-        internal CaptureWorkflowHost(IAsmContext context, Arrow<ArchiveConfig> config, params string[] args)
+        internal CaptureWorkflowHost(WfContext wf, PartWfConfig config, params string[] args)
         {                    
             Args = args ?? sys.empty<string>();
-            Context = context;
-            Sink = context;
+            Context = ContextFactory.CreateAsmContext(wf.ContextRoot);
+            Sink = wf.Sink;
             EvalBufferSize = Pow2.T16;
             Config = config;
-            Settings = CaptureConfig.From(context.Settings);            
+            Settings = CaptureConfig.From(wf.ContextRoot.Settings);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
-            Formatter = context.CaptureServices.Formatter(FormatConfig);            
-            Services = CaptureServices.Service(context);            
+            Formatter = Context.CaptureServices.Formatter(FormatConfig);            
+            Services = CaptureServices.Service(Context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
             UriBitsReader = Capture.Services.EncodedHexReader;
-            CaptureWorkflow = Services.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(config.Dst));
+            CaptureWorkflow = Services.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(config.Target));
             Broker = CaptureWorkflow.Broker;
-            ImmWorkflow = Services.ImmEmissionWorkflow(Sink, context.Api, Formatter, Decoder, config);            
+            ImmWorkflow = Services.ImmEmissionWorkflow(Sink, Context.Api, Formatter, Decoder, config);            
             (this as ICaptureClient).Connect();            
         }
 
@@ -111,10 +111,10 @@ namespace Z0
         }
 
         void EmitPrimary(params PartId[] parts)
-            => CaptureWorkflow.Run(Config, parts);
+            => CaptureWorkflow.Run(Config);
 
         void EmitConsolidated(params PartId[] parts)
-            => CaptureWorkflow.RunConsoidated(Config, parts);
+            => CaptureWorkflow.RunConsoidated(Config);
 
         void CheckExec(params PartId[] parts)
             => Context.CreateEvalWorkflow(Config, EvalBufferSize).Execute(parts);

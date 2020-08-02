@@ -22,7 +22,7 @@ namespace Z0.Asm
             Members = functions;
         }
         
-        public string Description
+        public string Format()
             => $"{Members.Length} {Host} members located";
 
         public MembersLocated Zero 

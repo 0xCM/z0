@@ -46,6 +46,15 @@ namespace Z0
         public static AppMsg Colorize(object content, AppMsgColor color)
             => new AppMsg(content, AppMsgKind.Info, color, string.Empty, EmptyString, null);
 
+        /// <summary>
+        /// Creates a colorized message with a specified displayed flag
+        /// </summary>
+        /// <param name="content">The message body</param>
+        /// <param name="color">The message color</param>
+        /// <param name="displayed">Whether to enable the displaye flag</param>
+        public static AppMsg Colorize(object content, AppMsgColor color, bool displayed)
+            => new AppMsg(content, AppMsgKind.Info, color, string.Empty, EmptyString, null, displayed);
+
         public static AppMsg Info(object content)
             => new AppMsg(content, AppMsgKind.Info, AppMsgColor.Green, EmptyString, EmptyString, null);
 
@@ -60,14 +69,11 @@ namespace Z0
                 
         [MethodImpl(Inline)]
         public AppMsg(AppMsgData src)
-        {
-            Data = src;
-        }
+            => Data = src;
         
+        [MethodImpl(Inline)]
         AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, string file, int? line, bool displayed = false)
-        {
-            Data = new AppMsgData(content, EmptyString, kind, color, displayed, Source(caller, file, line));
-        }
+            => new AppMsgData(content, EmptyString, kind, color, displayed, Source(caller, file, line));
 
         /// <summary>
         /// The message body

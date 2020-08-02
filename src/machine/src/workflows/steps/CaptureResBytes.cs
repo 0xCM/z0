@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Konst;
 
     partial struct AccessorCapture
@@ -25,7 +23,7 @@ namespace Z0
         }
     }
 
-    public readonly struct CaptureResBytes : IWorkflowWorker<CaptureResBytes>
+    public readonly ref struct CaptureResBytes
     {
         readonly AccessorCapture Workflow;
 

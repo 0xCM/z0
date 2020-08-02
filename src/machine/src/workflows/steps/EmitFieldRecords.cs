@@ -12,7 +12,7 @@ namespace Z0
         
     public readonly ref struct EmitFieldRecords
     {    
-        readonly IAppContext Wf;
+        readonly WfContext Wf;
 
         readonly IPart[] Parts;
         
@@ -23,14 +23,14 @@ namespace Z0
         readonly EmissionDataType DataType;
 
         [MethodImpl(Inline)]
-        public EmitFieldRecords(IAppContext wf, IPart[] parts)
+        public EmitFieldRecords(WfContext wf, IPart[] parts)
         {
             Wf = wf;
             Parts = parts;
             Spec = PartRecordSpecs.Fields;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("fields");
             DataType = EmissionDataType.Field;
-            DataType.Emitting(Wf);
+            Wf.Running(nameof(EmitFieldRecords));
         }
 
         public void Run()
@@ -50,7 +50,9 @@ namespace Z0
             var rk = PartRecordSpecs.FieldRva;
             var id = part.Id;
             var path = TargetPath(id);
-            DataType.Emitting(path, Wf);
+
+            Wf.Emitting(rk.ToString(), path);
+
 
             var assembly = part.Owner;                
             using var reader = Reader(assembly.Location);
@@ -62,13 +64,13 @@ namespace Z0
             Root.iter(src, record => record.Format(formatter));
             path.Ovewrite(formatter.Render());                
 
-            rk.Kind.Emitted(id, Wf);
+            Wf.Emitted(rk.ToString(), (uint)src.Length, path);
         }
 
 
         public void Dispose()
         {
-            DataType.Emitted(Wf);                          
+            Wf.Ran(nameof(EmitFieldRecords));
         }
     }
 }

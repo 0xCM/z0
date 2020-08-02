@@ -11,13 +11,15 @@ namespace Z0.Asm
 
     public readonly struct CapturedPart : IAppEvent<CapturedPart>
     {            
+        const string Pattern = "";
+
         public readonly PartId Part;
 
         [MethodImpl(Inline)]
         public CapturedPart(PartId part)
             => Part = part;
 
-        public string Description
+        public string Format() 
             => $"{Part.Format()} capture completed";
 
         public CapturedPart Zero

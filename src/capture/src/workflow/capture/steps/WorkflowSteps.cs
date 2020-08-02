@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-
+    
     public interface IImmEmissionWorkflow : IAppMsgReceiver, IServiceAllocation
     {
         void EmitLiteral(byte[] imm8, params PartId[] parts);
@@ -36,7 +36,7 @@ namespace Z0.Asm
     {
         void CaptureHost(CaptureHostStep step, IApiHost host, TPartCaptureArchive dst);
 
-        void CaptureParts(Arrow<ArchiveConfig> config, params PartId[] parts);
+        void CaptureParts(PartWfConfig config);
         
         void CapturePart(IPartCatalog src, TPartCaptureArchive dst);
     }    

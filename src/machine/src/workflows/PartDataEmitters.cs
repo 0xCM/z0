@@ -15,6 +15,15 @@ namespace Z0
     [ApiHost]
     public readonly struct PartDataEmitters
     {
+        /// <summary>
+        /// Creates an informational event
+        /// </summary>
+        /// <param name="id">The event identifier</param>
+        /// <param name="description">The event description</param>
+        [MethodImpl(Inline), Op]
+        public static AppEvent create(StringRef id, string description, AppMsgColor flair = AppMsgColor.Blue)
+            => new AppEvent(id,description,flair);
+
         [MethodImpl(Inline), Op]
         public static string format(DateTime src)
             => src.ToLexicalString();
@@ -35,7 +44,7 @@ namespace Z0
         {            
             var ts = format(z.now());
             var info = text.concat(ts, Space, FieldDelimiter, Space, format(kind), Space, FieldDelimiter, Space, format(status));
-            var ev = Events.create($"{status}", info, StartFlair);
+            var ev = create($"{status}", info, StartFlair);
             dst.Deposit(ev);
         }
 
@@ -69,33 +78,33 @@ namespace Z0
             => FileName.Define($"{rk.ToString().ToLower()}", type.Ext());
         
         public static void emitting(DataType type, IAppContext dst)
-            => dst.Deposit(Events.create($"{type}_running", $"Emitting {type} data files", StartFlair));
+            => dst.Deposit(create($"{type}_running", $"Emitting {type} data files", StartFlair));
 
         public static void emitting(DataType type, FilePath path, IAppContext dst)
-            => dst.Deposit(Events.create($"{type}_running", $"{type}: {path}", StartFlair));
+            => dst.Deposit(create($"{type}_running", $"{type}: {path}", StartFlair));
 
         public static void emitted(DataType type, IAppContext dst)
-            => dst.Deposit(Events.create($"{type}_ran", $"Completed {type} emission", EndFlair));
+            => dst.Deposit(create($"{type}_ran", $"Completed {type} emission", EndFlair));
 
         public static void emitting(PartRecordKind rk,  FilePath path, IAppContext dst)
-            => dst.Deposit(Events.create($"{rk}_running", $"{rk}: {path}", StartFlair));
+            => dst.Deposit(create($"{rk}_running", $"{rk}: {path}", StartFlair));
 
         public static void emitted(PartRecordKind rk, PartId part, IAppContext dst)
-            => dst.Deposit(Events.create($"{rk}_ran", $"Emitted {rk} {part.Format()} records", EndFlair));
+            => dst.Deposit(create($"{rk}_ran", $"Emitted {rk} {part.Format()} records", EndFlair));
 
         public static void running(FolderPath path, IAppContext dst)        
-            => dst.Deposit(Events.create("prepare", $"Preparing archive {path}", StartFlair));
+            => dst.Deposit(create("prepare", $"Preparing archive {path}", StartFlair));
 
         public static void ran(FolderPath path, IAppContext dst)        
-            => dst.Deposit(Events.create("prepared", $"Prepared archive {path}", EndFlair));
+            => dst.Deposit(create("prepared", $"Prepared archive {path}", EndFlair));
 
         public static void ran(DataType type, PartId part, FilePath path, IAppContext dst)
-            => dst.Deposit(Events.create($"{type}_{part}", $"Emitted {type} {part.Format()} records to {path}", EndFlair));
+            => dst.Deposit(create($"{type}_{part}", $"Emitted {type} {part.Format()} records to {path}", EndFlair));
 
         public static void ran(PartRecordKind rk, IAppContext dst)
-            => dst.Deposit(Events.create($"{rk}_ran", $"Completed {rk} emission", EndFlair));
+            => dst.Deposit(create($"{rk}_ran", $"Completed {rk} emission", EndFlair));
 
         public static void ran(DataType type, IAppContext dst)
-            => dst.Deposit(Events.create($"{type}_ran", $"Completed {type} emission", EndFlair));
+            => dst.Deposit(create($"{type}_ran", $"Completed {type} emission", EndFlair));
     }
 }

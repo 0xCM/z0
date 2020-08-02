@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly ref struct EmitConstantRecords
     {
-        readonly Wf Wf;
+        readonly WfContext Wf;
 
         readonly FolderPath TargetDir;
 
@@ -21,7 +21,7 @@ namespace Z0
         readonly CorrelationToken Correlation;
         
         [MethodImpl(Inline)]
-        public EmitConstantRecords(Wf wf, IPart[] parts, CorrelationToken? ct = null)
+        public EmitConstantRecords(WfContext wf, IPart[] parts, CorrelationToken? ct = null)
         {
             Wf = wf;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("constants");

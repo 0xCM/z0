@@ -12,7 +12,7 @@ namespace Z0.Asm
     public readonly struct WorkflowEvent
     {
         [MethodImpl(Inline)]
-        public static WorkflowEvent<E> Create<E>(E body, string description)
+        public static WorkflowEvent<E> create<E>(E body, string description)
             where E : struct, INullary<E>
                 => new WorkflowEvent<E>(body, description);
     }
@@ -30,6 +30,9 @@ namespace Z0.Asm
             Body = body;
             Description = description ?? EmptyString;
         }
+
+        public string Format()
+            => Description;
 
         public WorkflowEvent<E> Zero 
             => new WorkflowEvent<E>(default(E).Zero);

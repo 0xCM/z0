@@ -65,17 +65,22 @@ namespace Z0.Asm
 
         void OnEvent(EmittedEmbeddedImm e)
         {
-            Flow.Report(e);
+            Sink.NotifyConsole(e.Format(), e.Flair);                
+            //Flow.Report(e);
         }
 
         void OnEvent(FileEmissionFailed e)
         {
-            Flow.Report(e);
+            Sink.NotifyConsole(e.Format(), e.Flair);                
+
+            //Flow.Report(e);
         }
 
         void OnEvent(ImmInjectionFailed e)
         {
-            Flow.Report(e);
+            Sink.NotifyConsole(e.Format(), e.Flair);                
+
+            //Flow.Report(e);
         }
 
         public void ClearArchive(params PartId[] parts)

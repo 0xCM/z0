@@ -27,6 +27,9 @@ namespace Z0.Asm
         public WorkflowError(Exception e)
             => Description = e.ToString();
 
+        public string Format()
+            => Description;
+        
         public E Zero 
             => Empty;
 

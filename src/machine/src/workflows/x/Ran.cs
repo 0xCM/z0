@@ -12,16 +12,12 @@ namespace Z0
     partial class XTend
     {
         public static void Ran(this IAppContext context, string worker)
-            => context.Deposit(new StepExecuted(worker));            
+            => context.Deposit(new WfStepFinished(worker));            
 
         public static void Ran(this IAppContext context, string worker, string detail)
-            => context.Deposit(new StepExecuted(worker, detail));                        
+            => context.Deposit(new WfStepFinished(worker, detail));                        
 
         public static void Ran(this IAsmContext context, string worker)
-            => context.Deposit(new StepExecuted(worker));            
-
-        public static void Ran(this IAsmContext context, string worker, string detail)
-            => context.Deposit(new StepExecuted(worker, detail));                        
-
+            => context.Deposit(new WfStepFinished(worker));
     }
 }

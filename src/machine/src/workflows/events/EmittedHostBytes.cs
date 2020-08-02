@@ -9,11 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct EmittedHostBytes : IWorkflowEvent<EmittedHostBytes>
+    public readonly struct EmittedHostBytes : IWfEvent<EmittedHostBytes>
     {
         const string Pattern = "{0}: Emitted {1} x86 code accessors for {2} api";
 
-        public readonly WfEventId Id;
+        public WfEventId Id {get;}
 
         public readonly ApiHostUri Host;
 
@@ -28,12 +28,6 @@ namespace Z0
         }        
         
         public string Format()
-            => text.format(Pattern, Id, AccessorCount, Host.Format());
-
-        public string Description
-            => Format();
-        
-        public override string ToString()
-            => Format();
+            => text.format(Pattern, Id, AccessorCount, Host.Format());        
     }
 }

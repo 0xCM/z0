@@ -13,6 +13,7 @@
     <ProjectReference Include="$(Cil)" />    
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(Flow)" />
   </ItemGroup>
 
   <ItemGroup>

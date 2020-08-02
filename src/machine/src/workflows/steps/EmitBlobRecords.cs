@@ -13,7 +13,7 @@ namespace Z0
     
     public readonly ref struct EmitBlobRecords
     {
-        readonly IAppContext Wf;
+        readonly WfContext Wf;
 
         readonly IPart[] Parts;
 
@@ -22,13 +22,13 @@ namespace Z0
         readonly EmissionDataType DataType;
         
         [MethodImpl(Inline)]
-        public EmitBlobRecords(IAppContext wf, IPart[] parts)
+        public EmitBlobRecords(WfContext wf, IPart[] parts)
         {
             Wf = wf;
             Parts = parts;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("blobs");
             DataType = EmissionDataType.Blob;
-            DataType.Emitting(Wf);            
+            Wf.Running(nameof(EmitBlobRecords));
         }
 
         public PartRecordKind DataKind
@@ -45,7 +45,7 @@ namespace Z0
             var id = part.Id;
             var dstPath =  TargetDir + FileName.Define(id.Format(), "blob.csv");
 
-            DataKind.Emitting(dstPath, Wf);
+            Wf.Emitting($"{DataType}", dstPath);            
 
             var data = Read(part);
             var count = data.Length;     
@@ -57,7 +57,8 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(target.Render());
 
-            TableEmission.emitted(Wf, DataKind, id, count);
+            Wf.Emitted(DataType.ToString(), (uint)count, dstPath);            
+            
         }
         
         public void Run()
@@ -68,7 +69,7 @@ namespace Z0
 
         public void Dispose()
         {
-            DataType.Emitted(Wf);
-        }
+             Wf.Ran(nameof(EmitBlobRecords));            
+       }
     }
 }

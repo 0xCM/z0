@@ -50,12 +50,8 @@ namespace Z0
             var created = false;
             try
             {
-                term.inform($"Creating shell");
-                using var shell = new S() as IShell;                            
-
+                using var shell = new S() as IShell;
                 created = true;
-
-                term.inform($"Executing shell");
                 shell.Execute(args);
             }
             catch(Exception e)

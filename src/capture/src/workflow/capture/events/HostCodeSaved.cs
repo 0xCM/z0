@@ -25,7 +25,7 @@ namespace Z0.Asm
             Target = dst;
         }
         
-        public string Description
+        public string Format()
             => $"{Code.Length} {Host} functions saved to {Target}";
             
         public UriCodeSaved Zero 

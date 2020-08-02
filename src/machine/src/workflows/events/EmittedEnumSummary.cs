@@ -9,11 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct EmittedEnumSummary : IWorkflowEvent<EmittedEnumSummary>
+    public readonly struct EmittedEnumSummary : IWfEvent<EmittedEnumSummary>
     {
         const string Pattern = "{0}: Emitted summary data file for {1} enum literals to {2}";
 
-        public readonly WfEventId Id;
+        public WfEventId Id {get;}
 
         public readonly FilePath TargetPath;
 
@@ -28,11 +28,5 @@ namespace Z0
         }        
         public string Format()
             => text.format(Pattern, Id, RecordCount, TargetPath);
-
-        public string Description
-            => Format();
-        
-        public override string ToString()
-            => Format();
     }
 }

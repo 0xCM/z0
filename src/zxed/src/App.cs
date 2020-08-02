@@ -5,13 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-
-    using Z0.Xed;
     
-    using static Memories;
+    using static Konst;
+    using static z;
  
     using P = Z0.Parts;
     
@@ -20,7 +16,7 @@ namespace Z0
     {                
         static IAppContext CreateAppContext()
         {
-            var resolved = ApiComposition.Assemble(seq(P.GMath.Resolved));
+            var resolved = ApiComposition.Assemble(array(P.GMath.Resolved));
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
@@ -41,23 +37,13 @@ namespace Z0
                 term.warn($"No content was parsed from {src}");
         }
 
-        // void TestCases()
-        // {
-            
-        //     var  index = Enums.index(typeof(xed_category_enum_t));
-        //     using var writer = Context.AppPaths.AppStandardOutPath.Writer();
-        //     for(var i=0; i<index.Length; i++)
-        //     {
-        //         var src = index[i];
-        //         writer.WriteLine($"{src.TypeHandle} {src.Id} {src.Position} {src.TypeName} {src.Name} {src.Value}");
-        //     }
-
-        // }
         public override void RunShell(params string[] args)
         {            
-
-            XedEtlWorkflow.create(Context).Run();
-                                    
+            var sink = Flow.TermReceiver;
+            var config = new XedEtlConfig(Context, Flow.config(Context,sink));
+            using var context = new WfContext<XedEtlConfig>(Context, config, sink);
+            using var wf = new XedEtl(context);
+            wf.Run();                                        
         }
 
         public static void Main(params string[] args)

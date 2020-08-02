@@ -11,21 +11,30 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct DecodedPart : IWorkflowEvent<DecodedPart>
+    public readonly struct DecodedPart : IWfEvent<DecodedPart>
     {
+        const string Pattern = "{0}: {1} {2} instructions decoded";
+
+        public WfEventId Id {get;}
+
         public readonly PartInstructions Instructions;
 
         [MethodImpl(Inline)]
         public DecodedPart(PartInstructions src)
-            => Instructions = src;
+        {
+            Id = WfEventId.define(nameof(DecodedPart));
+            Instructions = src;
+        }
                 
         public PartId Part 
             => Instructions.Part;
 
+        public int TotalCount
+            => Instructions.TotalCount;
+        
         public AppMsgColor Flair 
             => AppMsgColor.Cyan;
-                
-        public string Description
-            => $"{Instructions.TotalCount}  {Instructions.Part} instructions decoded";
+        public string Format()
+            => text.format(Pattern, Id, TotalCount, Part);
     }        
 }

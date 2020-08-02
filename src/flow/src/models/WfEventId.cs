@@ -11,7 +11,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WfEventId : IComparable<WfEventId>, IEquatable<WfEventId>, ITextual
+    [ApiDataType]
+    public readonly struct WfEventId : IComparable<WfEventId>, IEquatable<WfEventId>, INamed<WfEventId>, ICorrelated<WfEventId>, IChronic<WfEventId>
     {
         [MethodImpl(Inline)]
         public static WfEventId define(string name, CorrelationToken? ct = null, Timestamp? ts = null)
@@ -50,10 +51,44 @@ namespace Z0
         public int CompareTo(WfEventId src)
             => Timestamp.CompareTo(src.Timestamp);
         
+        [MethodImpl(Inline)]
         public string Format()
             => text.format(Pattern, Timestamp, Correlation, Name.Format());       
 
+        public uint Hashed
+        {        
+            [MethodImpl(Inline)]
+            get => Timestamp.Hashed;
+        }
+
+        [MethodImpl(Inline)]
+        int IComparable<WfEventId>.CompareTo(WfEventId src)
+            => CompareTo(src);
+
+
+        [MethodImpl(Inline)]
+        bool IEquatable<WfEventId>.Equals(WfEventId src)
+            => Equals(src);
         
+        string ITextual.Format()
+            => Format();
+
+        StringRef INamed.Name   
+            => Name;
+
+        Timestamp IChronic.Timestamp
+            => Timestamp;
+
+        CorrelationToken ICorrelated.Correlation
+            => Correlation;
+        
+
+        public override int GetHashCode()
+            => (int)Hashed;
+        
+        public override bool Equals(object src)
+            => src is WfEventId i && Equals(i);
+
         public override string ToString()
             => Format();
     }

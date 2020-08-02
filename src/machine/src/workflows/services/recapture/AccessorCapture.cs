@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
     
-    public readonly partial struct AccessorCapture
+    public readonly ref partial struct AccessorCapture
     {
         readonly IAsmContext Context;
         
@@ -34,13 +34,18 @@ namespace Z0
             => ResBytesDir + FolderName.Define("asm");
 
         [MethodImpl(Inline)]
-        public AccessorCapture(IAsmContext context)
+        public AccessorCapture(IWfCapture context)
         {
-            Context = context;            
+            Context = context.AsmContext;            
             Context.AppPaths.AppDataRoot.Clear();
             ResIndexDir.Clear();
             ResBytesDir.Clear();
             ResBytesUncompiled.Clear();
         }                            
+
+        public void Dispose()
+        {
+
+        }
     }
 }

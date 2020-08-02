@@ -12,16 +12,7 @@ namespace Z0
     using static z;
 
     using P = Z0.Parts;
-    
-    // public readonly struct PartSelection : IContentedIndex<IPart>
-    // {
-                
-    //     IPart[] IContented<IPart[]>.Content
-    //         => new IPart[]{
-    //             P.GMath.Resolved,  
-    //            };
-    // }    
-    
+        
     class App : AppShell<App,IAppContext>
     {                
         static IAppContext CreateAppContext()
@@ -62,19 +53,8 @@ namespace Z0
             term.print(new BinaryCode(data.ToArray()));
         }
         
-        void RunWorkflows(params string[] args)
-        {
-            var config = WorkflowConfig.load(Context);            
-            var context = WorkflowContext.create(Context, config);
-            using var wf = Workflows.create(context, args);
-            using var machine = wf.Machine();
-            machine.Run();
-        }
-        
         public override void RunShell(params string[] args)
-        {                        
-            RunWorkflows();
-        }
+            => WfControl.run(Context,args);
 
         public static void Main(params string[] args)
             => Launch(args);

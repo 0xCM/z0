@@ -22,7 +22,7 @@ namespace Z0.Asm
             TargetPath = path;
         }
 
-        public string Description
+        public string Format()
             => $"{Report.RecordCount} {Report.ApiHost} {Report.ReportName} records saved to {TargetPath}";
         
         public ParseReportEmitted Zero 

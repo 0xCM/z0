@@ -8,17 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static Konst;
-    using Z0.Asm;
 
     using F = EnumLiteralField;
+
     public readonly ref struct EmitEnumData
     {
-        readonly Wf Context;
+        readonly WfContext Context;
 
         readonly CorrelationToken Correlation;
         
         [MethodImpl(Inline)]
-        public EmitEnumData(Wf context, CorrelationToken? ct = null)
+        public EmitEnumData(WfContext context, CorrelationToken? ct = null)
         {
             Context = context;
             Correlation = ct ?? CorrelationToken.create();

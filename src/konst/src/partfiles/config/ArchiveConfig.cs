@@ -15,9 +15,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ArchiveConfig(FolderPath root)
-        {
-            ArchiveRoot = root;
-        }        
+            => ArchiveRoot = root;
 
         public string Format()
             => ArchiveRoot.Name;

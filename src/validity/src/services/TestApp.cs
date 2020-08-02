@@ -17,25 +17,26 @@ namespace Z0
         where A : TestApp<A>, new()
     {
         const bool InDiagnosticMode = false;
-        
+
+        protected readonly IAppMsgSink Log;
+
+        protected readonly CaseLog CaseLog;
+
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
-        protected readonly CaseLog CaseLog;
         
         protected TestApp()
         {
-            CaseLog = CaseLog.create(AppPaths.CaseLogPath);
             OnDispose += HandleDispose;
+            CaseLog = CaseLog.create(AppPaths.CaseLogPath);
+            Log = AppMsgLog.create(AppPaths.TestStandardPath, AppPaths.TestErrorPath);
         }
 
         void HandleDispose()
         {
             CaseLog.Dispose();
         }
-
-        protected IAppMsgSink Log 
-            => this.MessageLog();
         
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}
             = new ConcurrentQueue<TestCaseRecord>();

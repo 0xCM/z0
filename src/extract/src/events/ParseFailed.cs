@@ -14,14 +14,12 @@ namespace Z0
     public readonly struct ExtractParseFailed : IAppEvent<E>
     {
         [MethodImpl(Inline)]
-        public static E Define(ExtractParseFailure data)
+        public static E create(ExtractParseFailure data)
             => new E(data);
         
         [MethodImpl(Inline)]
         public ExtractParseFailed(ExtractParseFailure data)
-        {
-            Data = data;
-        }
+            => Data = data;
         
         public ExtractParseFailure Data {get;}
         
@@ -33,7 +31,7 @@ namespace Z0
 
         const string Delimiter = " | ";
 
-        public string Description
+        public string Format()
             => text.label(Title, 
                 text.concat(
                     text.assign(TermLabel, Data.TermCode), Delimiter, 
@@ -44,6 +42,5 @@ namespace Z0
 
         public static E Empty 
             => new E(ExtractParseFailure.Empty);
-
     }    
 }

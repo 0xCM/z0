@@ -6,13 +6,10 @@
     <AssemblyName>z0</AssemblyName>
   </PropertyGroup>
 
-
   <ItemGroup>
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Capture)" />
-
-
-
+    <ProjectReference Include="$(Flow)" />
   </ItemGroup>
 
 </Project>

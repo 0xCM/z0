@@ -19,7 +19,7 @@ namespace Z0
 
         readonly CaptureConfig Settings;
 
-        readonly Arrow<ArchiveConfig> Config;
+        readonly PartWfConfig Config;
 
         readonly IAsmFormatter Formatter;
 
@@ -37,7 +37,7 @@ namespace Z0
 
         readonly uint EvalBufferSize;
         
-        internal CaptureHost(IAsmContext context, Arrow<ArchiveConfig> config)
+        internal CaptureHost(IAsmContext context, PartWfConfig config)
         {                    
             Context = context;
             Sink = context;
@@ -49,7 +49,7 @@ namespace Z0
             Services = CaptureServices.Service(context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
             UriBitsReader = Capture.Services.EncodedHexReader;
-            CaptureWorkflow = Services.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(config.Dst));
+            CaptureWorkflow = Services.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(config.Target));
             Broker = CaptureWorkflow.Broker;
             ImmWorkflow = Services.ImmEmissionWorkflow(Sink, context.Api, Formatter, Decoder, config);            
             (this as ICaptureClient).Connect();            
@@ -73,16 +73,16 @@ namespace Z0
                 CheckExec(parts);
         }
 
-        public void Consolidate(params PartId[] parts)
+        public void Consolidate()
         {
             if(Settings.EmitPrimaryArtifacts)
-                EmitConsolidated(parts);
+                EmitConsolidated();
 
             if(Settings.EmitImmArtifacts)
-                EmitImm(parts);
+                EmitImm(Config.Parts.Select(x => x.Id));
 
             if(Settings.CheckExecution)
-                CheckExec(parts);
+                CheckExec(Config.Parts.Select(x => x.Id));
         }
 
         void EmitImm(params PartId[] parts)
@@ -92,10 +92,10 @@ namespace Z0
         }
 
         void EmitPrimary(params PartId[] parts)
-            => CaptureWorkflow.Run(Config, parts);
+            => CaptureWorkflow.Run(Config);
 
-        void EmitConsolidated(params PartId[] parts)
-            => CaptureWorkflow.RunConsoidated(Config, parts);
+        void EmitConsolidated()
+            => CaptureWorkflow.RunConsoidated(Config);
 
         void CheckExec(params PartId[] parts)
             => Context.CreateEvalWorkflow(Config, EvalBufferSize).Execute(parts);

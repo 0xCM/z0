@@ -5,18 +5,62 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum xed_operand_element_type_enum_t : byte
     {
+
+        /// <summary>
+        /// None
+        /// </summary>
         XED_OPERAND_ELEMENT_TYPE_INVALID,
-        XED_OPERAND_ELEMENT_TYPE_UINT, ///< Unsigned integer
-        XED_OPERAND_ELEMENT_TYPE_INT, ///< Signed integer
-        XED_OPERAND_ELEMENT_TYPE_SINGLE, ///< 32b FP single precision
-        XED_OPERAND_ELEMENT_TYPE_DOUBLE, ///< 64b FP double precision
-        XED_OPERAND_ELEMENT_TYPE_LONGDOUBLE, ///< 80b FP x87
-        XED_OPERAND_ELEMENT_TYPE_LONGBCD, ///< 80b decimal BCD
-        XED_OPERAND_ELEMENT_TYPE_STRUCT, ///< a structure of various fields
-        XED_OPERAND_ELEMENT_TYPE_VARIABLE, ///< depends on other fields in the instruction
-        XED_OPERAND_ELEMENT_TYPE_FLOAT16, ///< 16b floating point
+    
+        /// <summary>
+        /// Unsigned integer
+        /// </summary>
+        XED_OPERAND_ELEMENT_TYPE_UINT, 
+        
+        /// <summary>
+        /// Signed integer
+        /// </summary>
+        XED_OPERAND_ELEMENT_TYPE_INT, 
+        
+        /// <summary>
+        /// 32b FP single precision
+        /// </summary>
+        XED_OPERAND_ELEMENT_TYPE_SINGLE, 
+        
+        /// <summary>
+        /// 64b FP double precision
+        /// </summary>
+        XED_OPERAND_ELEMENT_TYPE_DOUBLE, 
+        
+        /// <summary>
+        /// 80b FP x87
+        /// </summary>
+        XED_OPERAND_ELEMENT_TYPE_LONGDOUBLE, 
+        
+        /// <summary>
+        /// 80b decimal BCD
+        /// </summary>
+        XED_OPERAND_ELEMENT_TYPE_LONGBCD, 
+        
+        /// <summary>
+        ///  a structure of various fields
+        /// </summary>
+        XED_OPERAND_ELEMENT_TYPE_STRUCT, 
+        
+        /// <summary>
+        /// depends on other fields in the instruction
+        /// </summary>
+        XED_OPERAND_ELEMENT_TYPE_VARIABLE,
+        
+        /// <summary>
+        /// 16b floating point
+        /// </summary>
+        XED_OPERAND_ELEMENT_TYPE_FLOAT16, 
+        
         XED_OPERAND_ELEMENT_TYPE_LAST
     }
 }

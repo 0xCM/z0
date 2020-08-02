@@ -12,7 +12,7 @@ namespace Z0
         
     public ref struct EmiPartCil
     {
-        readonly IAppContext Wf;
+        readonly WfContext Wf;
 
         readonly IPart Part;
 
@@ -23,14 +23,15 @@ namespace Z0
         uint RecordCount;
         
         [MethodImpl(Inline)]
-        public EmiPartCil(IAppContext wf, IPart part, FilePath dst)
+        public EmiPartCil(WfContext wf, IPart part, FilePath dst)
         {
              Wf = wf;
              Part = part;
              TargetPath = dst;
              DataType = EmissionDataType.Il;
-             EmissionDataType.Il.Emitting(dst,Wf);
              RecordCount = 0;
+
+             Wf.Running(nameof(EmiPartCil));
         }
         
         const string FieldDelimiter = "| ";
@@ -52,8 +53,8 @@ namespace Z0
         }             
 
         public void Dispose()
-        {
-            TableEmission.emitted(Wf, PartRecordKind.None, Part.Id, (int)RecordCount);
+        { 
+            Wf.Emitted("PartCil", RecordCount, TargetPath);
         }
     }
 }

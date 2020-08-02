@@ -28,8 +28,11 @@ namespace Z0.Asm
             Generic = generic;
             TargetFile = dst;
         }
-                    
-        public string Description
+
+        public AppMsgColor Flair
+            => AppMsgColor.Red;                    
+        
+        public string Format()
             => $"{Host} emission failure" + (Generic ? " (generic)" : string.Empty) + TargetFile.FullPath;
         
         public FileEmissionFailed Zero 

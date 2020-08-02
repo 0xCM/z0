@@ -19,7 +19,7 @@ namespace Z0.Asm
             Report = report;
         }
 
-        public string Description
+        public string Format()
             => $"{Report.RecordCount} records created for {Report.ReportName}";
 
         public ExtractReportCreated Zero 

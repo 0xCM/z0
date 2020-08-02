@@ -9,14 +9,20 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct Unaddressed : IWorkflowEvent<Unaddressed>
+    public readonly struct Unaddressed : IWfEvent<Unaddressed>
     {
+        const string Pattern = "{0}: The location for {1} code is unknown";
+        
+        public WfEventId Id {get;}
+
         public readonly OpUri Uri;
+
         public readonly LocatedCode Code;
 
         [MethodImpl(Inline)]
         public Unaddressed(OpUri uri, LocatedCode code)
         {
+            Id = WfEventId.define(nameof(Unaddressed));
             Uri = uri;
             Code = code;
         }
@@ -24,7 +30,7 @@ namespace Z0
         public AppMsgColor Flair 
             => AppMsgColor.Red;
                 
-        public string Description
-            => $"The location for {Uri} code is unknown";
+        public string Format()
+            => text.format(Pattern, Id, Uri);
     }        
 }

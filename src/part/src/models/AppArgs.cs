@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public readonly struct AppArg
     {        
@@ -47,12 +48,14 @@ namespace Z0
 
         public readonly string Value;
 
-        public bool IsEmpty => string.IsNullOrWhiteSpace(Value);
+        public bool IsEmpty 
+            => string.IsNullOrWhiteSpace(Value);
 
-        public bool IsNonEmpty => !IsEmpty;
+        public bool IsNonEmpty 
+            => !IsEmpty;
+        
         public static AppArg Empty 
             => new AppArg(string.Empty, string.Empty);
-
     }
     
     public readonly struct AppArgs
@@ -76,11 +79,24 @@ namespace Z0
             }
             return Empty;
         }
+        
         public readonly AppArg[] Data;
 
         public AppArgs(AppArg[] src)
+            => Data = src;
+
+        public AppArg this[string name]
         {
-            Data = src;
+            get
+            {
+                for(var i=0; i<Data.Length; i++)
+                {
+                    ref readonly var arg = ref Data[i];
+                    if(string.Equals(arg.Name, name, StringComparison.InvariantCultureIgnoreCase))
+                        return arg;
+                }
+                return AppArg.Empty;
+            }
         }
     }
     

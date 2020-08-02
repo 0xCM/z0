@@ -108,9 +108,6 @@ namespace Z0
         public void Emit(FilePath dst) 
             => Queue.Emit(dst);        
         
-        void IAppMsgSink.NotifyConsole(object content, AppMsgColor color)
-            => Queue.NotifyConsole(AppMsg.Colorize(content, color));            
-
         /// <summary>
         /// The number of elements to be selected from some sort of stream
         /// </summary>

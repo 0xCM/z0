@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
 
     public readonly struct CapturingHosts : IAppEvent<CapturingHosts>
-    {          
+    {              
         const string MessageTemplate = "Capturing data for $(HostCount) api hosts";
         
         public readonly IApiHost[] Hosts;
@@ -22,7 +22,7 @@ namespace Z0.Asm
         public readonly int HostCount
             => Hosts.Length;
         
-        public string Description
+        public string Format() 
             => $"Capturing data for {HostCount} api hosts";                
     }    
 }

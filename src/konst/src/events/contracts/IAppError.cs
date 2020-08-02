@@ -14,9 +14,6 @@ namespace Z0
 
         bool IAppEvent.IsError 
             => true;
-
-        IAppMsg IAppEvent.Message 
-            => AppMsg.NoCaller(Format(), AppMsgKind.Error);
     }
 
     /// <summary>

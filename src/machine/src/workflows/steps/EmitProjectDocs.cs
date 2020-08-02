@@ -13,11 +13,11 @@ namespace Z0
 
     public readonly ref struct EmitProjectDocs
     {
-        readonly Wf Workflow;
+        readonly WfContext Workflow;
 
         readonly CorrelationToken Correlation;
 
-        public EmitProjectDocs(Wf wf, CorrelationToken? ct = null)
+        public EmitProjectDocs(WfContext wf, CorrelationToken? ct = null)
         {
             Workflow = wf;
             Correlation = ct ?? CorrelationToken.create();

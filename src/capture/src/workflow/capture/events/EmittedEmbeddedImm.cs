@@ -43,18 +43,15 @@ namespace Z0.Asm
             TargetFile = dst;
         }
                     
-        public string Description
+        public string Format()
         {
-            get
-            {                    
-                var description = 
-                    (ImmSource == ImmRefinementKind.Unrefined && Refinement != null)
-                    ? $"Emitted {Host}{(Generic ? " generic" : string.Empty)} literal imm specializations to {TargetFile}"
-                    : $"Emitted {Host}{(Generic ? " generic" : string.Empty)} imm {Refinement.DisplayName()} refinements to {TargetFile}";
-                return description;
-            }
+            var description = 
+                (ImmSource == ImmRefinementKind.Unrefined && Refinement != null)
+                ? $"Emitted {Host}{(Generic ? " generic" : string.Empty)} literal imm specializations to {TargetFile}"
+                : $"Emitted {Host}{(Generic ? " generic" : string.Empty)} imm {Refinement.DisplayName()} refinements to {TargetFile}";
+            return description;            
         }
-        
+
         public EmittedEmbeddedImm Zero 
             => Empty;
 

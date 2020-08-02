@@ -28,7 +28,7 @@ namespace Z0.Asm
             TargetPath = target;
         }
 
-        public string Description 
+        public string Format()
             => $"{RecordCount} {ReportType.DisplayName()} records saved to {TargetPath}";
 
         public ExtractReportSaved Zero 

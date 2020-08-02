@@ -32,7 +32,7 @@ namespace Z0.Asm
                 var result = Parser.Parse(extracts);
                 
                 for(var i = 0; i<result.Failed.Length; i++)
-                    Context.Raise(ExtractParseFailed.Define(result.Failed[i]));
+                    Context.Raise(ExtractParseFailed.create(result.Failed[i]));
 
                 var report = ParseFailureReport.Create(host, result.Failed);
                 report.Save(Context.Archive.UnparsedPath(host));

@@ -16,7 +16,7 @@ namespace Z0
     {    
         public readonly EmissionDataType DataType;
 
-        readonly IAppContext Wf;
+        readonly WfContext Wf;
 
         readonly IPart[] Parts;
 
@@ -29,13 +29,13 @@ namespace Z0
         readonly FilePath ImageSummaryPath;
 
         [MethodImpl(Inline)]
-        public EmitImageContent(IAppContext wf, IPart[] parts)
+        public EmitImageContent(WfContext wf, IPart[] parts)
         {
             Wf = wf;
             Parts = parts;
             DataType = EmissionDataType.PartDat;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("images");
-            DataType.Emitting(Wf);
+            Wf.Running(nameof(EmitImageContent));
             PartSummaryPath = wf.AppPaths.BuildStage + FileName.Define("machine.images.parts", FileExtensions.Csv);
             ImageSummaryPath = wf.AppPaths.BuildStage + FileName.Define("machine.images", FileExtensions.Csv);
             var process = Process.GetCurrentProcess();
@@ -121,8 +121,8 @@ namespace Z0
 
         public void Dispose()
         {
-            DataType.Emitted(Wf);                          
-        }
+             Wf.Ran(nameof(EmitImageContent));
+       }
     }
 
     partial class XTend

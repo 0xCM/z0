@@ -8,20 +8,12 @@ namespace Z0
     /// Characterizes a correlated message, accompanied by arbitrary content, 
     /// that describes an occurrence of something interesting
     /// </summary>
-    public interface IAppEvent : ICorrelated, ITextual
+    public interface IAppEvent : ICorrelated, ITextual, IChronic
     {
-        string Description {get;}
-
-        bool IsError 
-            => false;
-
         AppMsgColor Flair 
             => AppMsgColor.Blue;
 
-        string ITextual.Format()        
-            => Description;
-
-        IAppMsg Message 
-            => AppMsg.Colorize(Format(), Flair);
+        bool IsError 
+            => Flair == AppMsgColor.Red;
     }
 }

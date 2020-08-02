@@ -22,7 +22,7 @@ namespace Z0.Asm
             Functions = functions;
         }
         
-        public string Description
+        public string Format()
             => $"{Functions.Length} {Host} functions decoded";
         
         public FunctionsDecoded Zero 

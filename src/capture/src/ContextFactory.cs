@@ -22,8 +22,8 @@ namespace Z0
             => AsmContext.Create(app);
 
         [MethodImpl(Inline),Op]
-        public static IClientContext CreateClientContext(IAppContext app)
-            => new ClientContext(CreateAsmContext(app));
+        public static IWfCapture WfCapture(WfContext wf)
+            => new WfCapture(CreateAsmContext(wf.ContextRoot));
 
         public static IAppContext CreateAppContext()
             => AppContext.Create(AppPaths.Default, 
@@ -39,8 +39,8 @@ namespace Z0
         public static IAsmContext CreateAsmContext()
             => AsmContext.Create(CreateAppContext());
         
-        public static IClientContext CreateClientContext()
-            => new ClientContext(CreateAsmContext(CreateAppContext()));
+        public static IWfCapture CreateClientContext()
+            => new WfCapture(CreateAsmContext(CreateAppContext()));
     }
 
     readonly struct SelectedParts : IContentedIndex<IPart>

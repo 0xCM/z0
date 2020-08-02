@@ -23,7 +23,7 @@ namespace Z0.Asm
             Members = members;
         }
         
-        public string Description
+        public string Format()
             => $"{Members.Length} {Host} members parsed";
         
         public ExtractsParsed Zero 

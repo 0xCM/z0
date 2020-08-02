@@ -13,6 +13,8 @@ namespace Z0.Asm
 
     public readonly struct AnalyzingExtracts : IAppEvent<E>
     {        
+        const string Pattern = "";
+
         public ExtractedCode[] Extracts {get;}
         
         [MethodImpl(Inline)]
@@ -21,7 +23,7 @@ namespace Z0.Asm
             Extracts = extracts;
         }
 
-        public string Description 
+        public string Format() 
             => $"Analyzing extract report {Extracts.Length} member extracts";
 
         public AnalyzingExtracts Zero 

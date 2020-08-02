@@ -16,6 +16,14 @@ namespace Z0
             => T.WriteLine();
 
         /// <summary>
+        /// Writes a colorized message to the console
+        /// </summary>
+        /// <param name="message">The message text</param>
+        /// <param name="color">The emission color</param>
+        public static void print(string message, AppMsgColor color)
+            => T.WriteLine(message, color);
+        
+        /// <summary>
         /// Writes a single messages to the terminal
         /// </summary>
         /// <param name="msg">The message to print</param>    

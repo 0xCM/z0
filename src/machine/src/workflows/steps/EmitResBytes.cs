@@ -21,27 +21,27 @@ namespace Z0
 
         readonly FolderPath Target;
         
-        readonly IAppContext Context;
+        readonly WfContext Wf;
 
-        readonly string[] Args;
+        readonly CorrelationToken Correlation;
         
         [MethodImpl(Inline)]
-        public static EmitResBytes create(IAppContext context, params string[] args)
-            => new EmitResBytes(context);
+        public static EmitResBytes create(WfContext context, CorrelationToken? ct = null)
+            => new EmitResBytes(context, ct);
 
-        internal EmitResBytes(IAppContext context, params string[] args)
+        internal EmitResBytes(WfContext context, CorrelationToken? ct = null)
         {
-            Args = args;
-            Context = context;
+            Wf = context;
+            Correlation = ct ?? CorrelationToken.create();
             Source = Archives.Services.EncodedHexArchive(context.AppPaths.AppCaptureRoot);            
             Target = context.AppPaths.ResourceRoot + FolderName.Define(ProjectName);
-            Context.Notify(text.format("Running {0} workflow {1} -> {2}", nameof(EmitResBytes), Source.ArchiveRoot, Target));
+            Wf.Running(text.format("Running {0} workflow {1} -> {2}", nameof(EmitResBytes), Source.ArchiveRoot, Target));
         }
         
         public void Run()        
         {
             var indices = Source.ReadIndices().ToArray();
-            Context.Notify($"Loaded {indices.Length} encoded hex files");
+            Wf.Status($"Loaded {indices.Length} encoded hex files");
 
             foreach(var index in indices)
                 emit(index, Target);
@@ -49,7 +49,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Context.Notify(text.format("Ran {0} workflow", nameof(EmitResBytes)));
+            Wf.Status(text.format("Ran {0} workflow", nameof(EmitResBytes)));
         }
 
         void emit(IdentifiedCodeIndex src, FolderPath dst)
@@ -75,8 +75,7 @@ namespace Z0
             }
             CloseTypeDeclaration(writer);
             CloseFileNamespace(writer);
-            Context.Deposit(new EmittedHostBytes(src.Host, (ushort)resources.Count));
-            //Context.Notify($"Emitted {resources.Count} resource definitions to {path}");
+            Wf.Raise(new EmittedHostBytes(src.Host, (ushort)resources.Count));
         }
 
         static string render(BinaryResourceSpec src, int level = 2)

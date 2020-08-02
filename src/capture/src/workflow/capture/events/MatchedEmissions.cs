@@ -30,7 +30,7 @@ namespace Z0.Asm
             TargetPath = path;              
         }
         
-        public string Description
+        public string Format()
             => $"{Count} {Host} members in memory were matched with emissions written to {TargetPath}";
         
         public E Zero 

@@ -13,13 +13,15 @@ namespace Z0.Asm
 
     public readonly struct AnalyzingExtractReport : IAppEvent<E>
     {                    
+        const string Pattern = "";
+        
         [MethodImpl(Inline)]
         internal AnalyzingExtractReport(FilePath src)
             => Path = src;
 
         public FilePath Path {get;}
 
-        public string Description 
+        public string Format() 
             => $"Analyzing extract report {Path}";
 
         public E Zero 

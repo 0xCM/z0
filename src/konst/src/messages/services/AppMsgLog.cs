@@ -11,23 +11,20 @@ namespace Z0
 
     using static Konst;
 
-    readonly struct AppMsgLog : IAppMsgLog
-    {   
-        public static IAppMsgLog Create(TAppEnv env)         
-            => new AppMsgLog(env);
+    public readonly struct AppMsgLog : IAppMsgLog
+    {           
+        public static IAppMsgLog create(FilePath std, FilePath err)         
+            => new AppMsgLog(std, err);
+
+        readonly FilePath DefaultTarget;
         
-        readonly TAppEnv AppEnv;
+        readonly FilePath ErrorTarget;
 
-        FilePath DefaultTarget 
-            => AppEnv.AppPaths.TestStandardPath;
-
-        FilePath ErrorTarget 
-            => AppEnv.AppPaths.TestErrorPath;
-                
         [MethodImpl(Inline)]
-        AppMsgLog(TAppEnv env)
+        internal AppMsgLog(FilePath std, FilePath err)
         {
-            AppEnv = env;
+            DefaultTarget = std;
+            ErrorTarget = err;
         }
 
         public void Deposit(IEnumerable<IAppMsg> src)

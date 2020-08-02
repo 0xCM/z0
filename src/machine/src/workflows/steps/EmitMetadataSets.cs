@@ -11,13 +11,14 @@ namespace Z0
     using static Konst;     
 
     using MK = EmissionDataType;
-    using MES = WfStatusKind;
     
     public readonly ref struct EmitMetadataSets
     {
         public FolderPath TargetDir {get;}
 
-        public readonly Wf Context;
+        readonly CorrelationToken? Correlation;
+
+        public readonly WfContext Wf;
         
         readonly FolderPath ResRoot;
         
@@ -28,14 +29,15 @@ namespace Z0
         public WfKind WfKind
             => WfKind.MetadataEmission;
         
-        public EmitMetadataSets(Wf context)
+        public EmitMetadataSets(WfContext context, CorrelationToken? ct = null)
         {            
-            Context = context;
+            Wf = context;
+            Correlation = ct ?? CorrelationToken.create();
             ResRoot = AppPaths.Default.ResourceRoot;
             TargetDir = ResRoot + FolderName.Define("metadata");
             Parts = KnownParts.Service.Known.ToArray();
             Sink = new PartSink(context.ContextRoot);
-            Context.Running(nameof(EmitMetadataSets));
+            Wf.Running(nameof(EmitMetadataSets), Correlation);
         }
 
         public void Deposit(IAppEvent src)
@@ -53,59 +55,59 @@ namespace Z0
         FolderPath PrepareTarget()
         {            
             var target = TargetDir;
-            PartDataEmitters.running(target,Context.ContextRoot);
+            PartDataEmitters.running(target,Wf.ContextRoot);
             target.Create().Clear();
-            PartDataEmitters.ran(target, Context.ContextRoot);            
+            PartDataEmitters.ran(target, Wf.ContextRoot);            
             return target;
         }
         
         public void Run()
         {
-            var ct = Context.Running(nameof(EmitMetadataSets));
+            var ct = Wf.Running(nameof(EmitMetadataSets));
             
             PrepareTarget();            
             
             {
-                using var emitter = new EmitConstantRecords(Context, Parts);
+                using var emitter = new EmitConstantRecords(Wf, Parts);
                 emitter.Run();
             }
 
             {
-                using var emitter = new EmitPeRecords(Context.ContextRoot, Parts);
+                using var emitter = new EmitPeRecords(Wf, Parts);
                 emitter.Run();
             }
             
             {
-                using var emitter = new EmitCilRecords(Context.ContextRoot, Parts);
+                using var emitter = new EmitCilRecords(Wf, Parts);
                 emitter.Run();
             }
 
             {
-                using var emitter = new EmitImageContent(Context.ContextRoot, Parts);
+                using var emitter = new EmitImageContent(Wf, Parts);
                 emitter.Run();
             }
             
             {
-                using var emitter = new EmitStringRecords(Context.ContextRoot, Parts);
+                using var emitter = new EmitStringRecords(Wf, Parts);
                 emitter.Run();
             }
 
             {
-                using var emitter = new EmitBlobRecords(Context.ContextRoot, Parts);
+                using var emitter = new EmitBlobRecords(Wf, Parts);
                 emitter.Run();
             }
         
             {
-                using var emitter = new EmitFieldRecords(Context.ContextRoot, Parts);
+                using var emitter = new EmitFieldRecords(Wf, Parts);
                 emitter.Run();
             }
                         
-            Context.Ran(nameof(EmitMetadataSets),ct);
+            Wf.Ran(nameof(EmitMetadataSets),ct);
         }        
 
         public void Dispose()
         {
-            Context.Ran(nameof(EmitMetadataSets));
+            Wf.Ran(nameof(EmitMetadataSets), Correlation);
         }
     }
 }

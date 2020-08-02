@@ -11,7 +11,7 @@ namespace Z0
     
     public readonly ref struct EmitCilRecords
     {
-        readonly IAppContext Wf;
+        readonly WfContext Wf;
 
         readonly EmissionDataType DataType;
 
@@ -20,7 +20,7 @@ namespace Z0
         readonly IPart[] Parts;
 
         [MethodImpl(Inline)]
-        public EmitCilRecords(IAppContext wf, IPart[] parts)
+        public EmitCilRecords(WfContext wf, IPart[] parts)
         {
             Wf = wf;
             Parts = parts;

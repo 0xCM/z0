@@ -11,19 +11,22 @@ namespace Z0
     
     public readonly ref struct EmitContentCatalog
     {
-        readonly IAppContext Wf;
+        readonly WfContext Wf;
 
         readonly FilePath Target;
         
         readonly uint[] Count;
 
+        public readonly CorrelationToken Correlation;
+        
         [MethodImpl(Inline)]
-        public EmitContentCatalog(IAppContext wf, FilePath target)
+        public EmitContentCatalog(WfContext wf, CorrelationToken? ct = null)
         {
             Wf = wf;
-            Target = target;
+            Correlation = ct ?? CorrelationToken.create();
+            Target =  Wf.AppPaths.ResIndexDir + FileName.Define("catalog", FileExtensions.Csv);
             Count = new uint[1]{0};
-            Wf.Running(nameof(EmitContentCatalog), $"Emitting content catalog to {Target}");
+            Wf.Running(nameof(EmitContentCatalog), $"Emitting content catalog to {Target}", Correlation);
         }
 
         public void Run()
@@ -37,7 +40,7 @@ namespace Z0
 
         public void Dispose()        
         {
-            Wf.Ran(nameof(EmitContentCatalog), $"Wrote {Count[0]} entries to {Target}");
+            Wf.Ran(nameof(EmitContentCatalog), $"Wrote {Count[0]} entries to {Target}", Correlation);
         }
     }
 }

@@ -13,22 +13,22 @@ namespace Z0
     partial class XTend
     {
         public static void Running(this IAppContext context, string worker)
-            => context.Deposit(new StepExecuting(worker));
+            => context.Deposit(new WfStepRunning(worker));
 
         public static void Controlling(this IAppContext context, string controller)
-            => context.Deposit(new StepExecuting(controller, "Workflow control"));
+            => context.Deposit(new WfStepRunning(controller, "Workflow control"));
 
         public static void Controlled(this IAppContext context, string controller)
-            => context.Deposit(new StepExecuted(controller, "Workflow control"));
+            => context.Deposit(new WfStepFinished(controller, "Workflow control"));
 
         public static void Running(this IAppContext context, string worker, string detail)
-            => context.Deposit(new StepExecuting(worker, detail));
+            => context.Deposit(new WfStepRunning(worker, detail));
 
         public static void Running(this IAsmContext context, string worker)
-            => context.Deposit(new StepExecuting(worker));
+            => context.Deposit(new WfStepRunning(worker));
 
         public static void Running(this IAsmContext context, string worker, string detail)
-            => context.Deposit(new StepExecuting(worker, detail));
+            => context.Deposit(new WfStepRunning(worker, detail));
 
         /// <summary>
         /// Searches a context for an active agent wth a specified identity

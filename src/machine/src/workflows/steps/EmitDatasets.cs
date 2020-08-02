@@ -12,7 +12,7 @@ namespace Z0
 
     public ref partial struct EmitDatasets  
     {
-        public readonly Wf Context;
+        public readonly WfContext Context;
 
         readonly CorrelationToken Correlation;
         
@@ -20,7 +20,7 @@ namespace Z0
 
         readonly string[] Args;
 
-        public EmitDatasets(Wf context, params string[] args)
+        public EmitDatasets(WfContext context, params string[] args)
         {
             Args = args;
             Context = context;
@@ -37,21 +37,20 @@ namespace Z0
 
         void EmitBytes()
         {
-            using var step = EmitResBytes.create(Context.ContextRoot);
+            using var step = EmitResBytes.create(Context, Correlation);
             step.Run();
         }
 
         void CaptureEmissions()
         {
-            term.magenta("Capturing emissions");
-            var suite = ContextFactory.CreateClientContext(Context.ContextRoot);
-            var ac = new AccessorCapture(suite.AsmContext);
-            ac.CaptureResBytes();        
+            var capture = ContextFactory.WfCapture(Context);
+            using var step = new AccessorCapture(capture);
+            step.CaptureResBytes();        
         }
 
         void EmitMetadata()
         {
-            using var step = new EmitMetadataSets(Context);
+            using var step = new EmitMetadataSets(Context, Correlation);
             step.Run();
         }
 
@@ -70,15 +69,14 @@ namespace Z0
 
         void EmitCatalog()
         {
-            using var step = new EmitContentCatalog(Context.ContextRoot, Context.AppPaths.ResIndexDir + FileName.Define("catalog", FileExtensions.Csv));
+            using var step = new EmitContentCatalog(Context);
             step.Run();
         }
 
         void EmitBitMasks()
         {
-            term.magenta("Emitting bitmask data");
-            ReflectedLiterals.emit(typeof(BitMasks), Context.AppPaths);
-            term.magenta("Emitted bitmask data");
+            using var step = new EmitBitMasks(Context);
+            step.Run();
         }
                         
         public CodeResourceIndex Load()

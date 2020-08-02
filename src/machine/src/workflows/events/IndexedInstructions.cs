@@ -9,18 +9,25 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct IndexedInstructions : IWorkflowEvent<IndexedInstructions>
+    public readonly struct IndexedInstructions : IWfEvent<IndexedInstructions>
     {
+        const string Pattern = "{0}: Created located instruction index with {1} entries";
+        
+        public WfEventId Id {get;}
+
         public readonly LocatedInstructions Index;
 
         [MethodImpl(Inline)]
-        public IndexedInstructions(LocatedInstructions index)
-            => Index = index;
+        public IndexedInstructions(LocatedInstructions src)
+        {
+            Id = WfEventId.define(nameof(DecodedPart));
+            Index = src;
+        }
         
         public AppMsgColor Flair 
             => AppMsgColor.Cyan;
                          
-        public string Description
-            => $"Created located instruction index with {Index.Indexed.Length} entries";
+        public string Format()
+            => text.format(Pattern, Id, Index.Indexed.Length);        
     }        
 }

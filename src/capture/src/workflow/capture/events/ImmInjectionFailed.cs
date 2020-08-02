@@ -24,11 +24,11 @@ namespace Z0.Asm
         
         public MethodInfo Method {get;}
         
-        public string Description
+        public string Format()
             => $"Imm injection failure for {Method.Name}";
         
-        public E Zero 
-            => Empty;
+        public AppMsgColor Flair
+            => AppMsgColor.Red;                    
 
         public static ImmInjectionFailed Empty 
             => new ImmInjectionFailed(typeof(object).GetMethod(nameof(object.GetHashCode)));           

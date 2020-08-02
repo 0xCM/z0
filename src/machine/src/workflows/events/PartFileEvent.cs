@@ -9,10 +9,12 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct PartFileEvent : IWorkflowEvent<PartFileEvent>
+    public readonly struct PartFileEvent : IWfEvent<PartFileEvent>
     {
         const string Pattern = "{0}: {1} - {2}";
-        
+
+        public WfEventId Id {get;}
+
         public readonly string Label;
 
         public readonly string Content;
@@ -21,17 +23,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator PartFileEvent((string label, object content) src)
-            => new PartFileEvent(src.label, src.content?.ToString() ?? string.Empty);
+            => new PartFileEvent(src.label, src.content?.ToString() ?? EmptyString);
 
         [MethodImpl(Inline)]
         public PartFileEvent(string label, string content)
         {
+            Id = WfEventId.define(nameof(PartFileEvent));
             Label = label;
             Content = content;
             Timestamp = z.now();
         }
 
-        public string Description
+        public string Format()
              => text.format(Pattern, Timestamp, Label,Content);
     
         public PartFileEvent Zero 

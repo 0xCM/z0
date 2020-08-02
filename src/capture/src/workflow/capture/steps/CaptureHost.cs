@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct CaptureHostStep : ICaptureHostStep
+    public readonly struct CaptureHostStep : ICaptureHostStep, IDisposable
     {
         public ICaptureWorkflow Workflow {get;}
 
@@ -29,6 +29,10 @@ namespace Z0.Asm
         AppErrorEvent Error(Exception e)
             => e;
 
+        public void Dispose()
+        {
+            
+        }
         public void Capture(IApiHost[] hosts, TPartCaptureArchive dst)
         {
             Context.Raise(new CapturingHosts(hosts));            

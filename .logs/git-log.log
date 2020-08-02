@@ -3160,3 +3160,83 @@
  rename src/{machine/src => metacore/integrate}/workspace/tools/mklink.cs (100%)
  rename src/{machine/src => metacore/integrate}/workspace/tools/robocopy.cs (100%)
  rename src/{machine/src => metacore/integrate}/workspace/x/Submit.cs (100%)
+[master 1bea2ae91] .
+ 112 files changed, 1426 insertions(+), 669 deletions(-)
+ rename src/{gen => flow}/.vscode/launch.json (100%)
+ rename src/{gen => flow}/.vscode/tasks.json (100%)
+ rename src/{gen => flow}/Part.cs (70%)
+ rename src/{gen => flow}/add.sh (100%)
+ rename src/{gen => flow}/build.sh (100%)
+ rename src/{gen => flow}/clean.sh (100%)
+ rename src/{gen => flow}/directory.build.props (100%)
+ create mode 100644 src/flow/id.sh
+ rename src/{gen => flow}/remove.sh (100%)
+ create mode 100644 src/flow/src/contracts/ITableFormatter.cs
+ rename src/{machine/src/workflows => flow/src}/contracts/IWorkflowContext.cs (100%)
+ rename src/{machine/src/workflows/contracts/IWorkflowStep.cs => flow/src/contracts/IWorkflowEvent.cs} (57%)
+ rename src/{machine/src/workflows => flow/src}/events/EmittedDataset.cs (92%)
+ rename src/{machine/src/workflows => flow/src}/events/LoadedWorkflowConfig.cs (79%)
+ rename src/{machine/src/workflows => flow/src}/events/StepExecuted.cs (50%)
+ create mode 100644 src/flow/src/events/StepExecuting.cs
+ create mode 100644 src/flow/src/events/WorkflowBroker.cs
+ rename src/{konst/src/literals => flow/src/models}/EnumLiteralField.cs (88%)
+ create mode 100644 src/flow/src/models/EnumLiteralRecord.cs
+ rename src/{konst/src/literals => flow/src/models}/EnumLiteralRecords.cs (52%)
+ rename src/{konst/src/dataset => flow/src/models}/TableFormatter.cs (74%)
+ create mode 100644 src/flow/src/models/Wf.cs
+ create mode 100644 src/flow/src/models/WfEventId.cs
+ create mode 100644 src/flow/src/models/WfT.cs
+ create mode 100644 src/flow/src/models/WorkflowConfig.cs
+ rename src/{machine/src/infrastructure => flow/src/models}/WorkflowContext.cs (79%)
+ create mode 100644 src/flow/src/models/WorkflowContextT.cs
+ create mode 100644 src/flow/src/services/TableFormatter.cs
+ create mode 100644 src/flow/z0.flow.csproj
+ delete mode 100644 src/gen/build-log.sh
+ delete mode 100644 src/gen/id.sh
+ delete mode 100644 src/gen/run.sh
+ delete mode 100644 src/gen/z0.gen.csproj
+ delete mode 100644 src/konst/src/literals/EnumLiteralRecord.cs
+ create mode 100644 src/machine/.vscode/launch.json
+ create mode 100644 src/machine/.vscode/tasks.json
+ rename src/{gen/src => machine/src/services}/generators/BinaryKinds.g.cs (100%)
+ rename src/{gen/src => machine/src/services}/generators/HexCode.g.cs (100%)
+ rename src/{gen/src => machine/src/services}/generators/HexMachineGen.cs (100%)
+ rename src/{gen/src/generators/BitSets => machine/src/services/generators/bitsets}/BitSetGenerator.cs (100%)
+ rename src/{gen/src/generators/BitSets => machine/src/services/generators/bitsets}/Duet.cs (100%)
+ rename src/{gen/src/generators/BitSets => machine/src/services/generators/bitsets}/Octet.cs (100%)
+ rename src/{gen/src/generators/BitSets => machine/src/services/generators/bitsets}/Quartet.cs (100%)
+ rename src/{gen/src/generators/BitSets => machine/src/services/generators/bitsets}/Quintet.cs (100%)
+ rename src/{gen/src/generators/BitSets => machine/src/services/generators/bitsets}/Triad.cs (100%)
+ delete mode 100644 src/machine/src/workflows/MachineContext.cs
+ rename src/machine/src/workflows/{config => context}/CaptureConfig.cs (100%)
+ rename src/machine/src/workflows/{ => context}/MachineAsmContext.cs (100%)
+ rename src/machine/src/workflows/{config => context}/MachineConfig.cs (100%)
+ delete mode 100644 src/machine/src/workflows/contracts/IWorkflow.cs
+ delete mode 100644 src/machine/src/workflows/events/StepExecuting.cs
+ rename src/machine/src/{ => workflows}/models/CapturedAccessor.cs (100%)
+ rename src/machine/src/workflows/{events => models}/EmissionDataType.cs (100%)
+ create mode 100644 src/machine/src/workflows/models/EnumDescription.cs
+ rename src/machine/src/{ => workflows}/models/LocatedImage.cs (100%)
+ rename src/machine/src/{ => workflows}/models/LocatedImageFIeld.cs (100%)
+ rename src/machine/src/{ => workflows}/models/LocatedImageT.cs (100%)
+ rename src/machine/src/{ => workflows}/models/LocatedImages.cs (100%)
+ rename src/machine/src/{ => workflows}/models/LocatedPart.cs (100%)
+ rename src/machine/src/{ => workflows}/models/MessageTemplate.cs (100%)
+ rename src/machine/src/{ => workflows}/models/MetadataIndex.cs (100%)
+ rename src/machine/src/{ => workflows}/models/MetadataSubject.cs (100%)
+ rename src/machine/src/{ => workflows}/models/PartTypes.cs (100%)
+ rename src/machine/src/{ => workflows}/models/ProjectDocRecord.cs (100%)
+ rename src/machine/src/workflows/{EmissionWorkflow.cs => steps/EmitDatasets.cs} (69%)
+ rename src/machine/src/workflows/{MetadataEmitter.cs => steps/EmitMetadataSets.cs} (72%)
+ rename src/zdata/{info/Syntax.OTC.Combined.csv => content/asmsyn/AsmSyn.OcT.Combined.csv} (92%)
+ create mode 100644 src/zdata/content/help/datetime.format.csv
+ delete mode 100644 src/zdata/info/COFF_HEADER.csv
+ delete mode 100644 src/zdata/info/COFF_SYMBOL_TABLE.csv
+ delete mode 100644 src/zdata/info/IMAGE_RESOURCE_DIRECTORY_ENTRY.csv
+ delete mode 100644 src/zdata/info/IMAGE_SECTION_HEADER.csv
+ delete mode 100644 src/zdata/info/MAGE_LOAD_CONFIG_DIRECTORY.csv
+ delete mode 100644 src/zdata/info/OptionalHeaderDataDirectories.1.csv
+ delete mode 100644 src/zdata/info/OptionalHeaderDataDirectories.csv
+ create mode 100644 src/zdata/info/PeNotes.md
+ delete mode 100644 src/zdata/info/RESOURCE_TABLE.csv
+ rename src/{gen => zxed}/src/App.cs (51%)

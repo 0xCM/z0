@@ -22,7 +22,7 @@ namespace Z0.Asm
             MemberCount = count;
         }
 
-        public string Description
+        public string Format()
             => $"{MemberCount} {Host.Format()} members extracted";
 
         public ExtractedMembers Zero

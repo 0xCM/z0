@@ -56,9 +56,9 @@ namespace Z0
             where E : unmanaged, Enum
                 => header(fields<E>(), delimiter);
 
-        public static void emitted<F,D>(F wf, D dk, PartId part, int count)
-            where F : IAppContext
-            where D : unmanaged, Enum
-                => wf.Deposit(Events.create($"{dk}_ran", $"Emitted {count} {dk} {part.Format()} records", AppMsgColor.Cyan));
+        // public static void emitted<F,D>(F wf, D dk, PartId part, int count)
+        //     where F : IAppContext
+        //     where D : unmanaged, Enum
+        //         => wf.Deposit(Events.create($"{dk}_ran", $"Emitted {count} {dk} {part.Format()} records", AppMsgColor.Cyan));
     }
 }

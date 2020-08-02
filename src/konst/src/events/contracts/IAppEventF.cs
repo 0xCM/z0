@@ -8,12 +8,9 @@ namespace Z0
     /// Characterizes a reified application event
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IAppEvent<F> : IAppEvent, INullary<F>
+    public interface IAppEvent<F> : IAppEvent, INullary<F>, ICorrelated<F>, IChronic<F>
         where F : struct, IAppEvent<F>
     {
-        string IAppEvent.Description
-            => typeof(F).Name;
-
         F INullary<F>.Zero 
             => default;
     }

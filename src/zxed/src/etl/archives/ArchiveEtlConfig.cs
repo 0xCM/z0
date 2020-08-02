@@ -10,14 +10,20 @@ namespace Z0
     using xed_ext = Z0.Xed.xed_extension_enum_t;
     using xed_cat = Z0.Xed.xed_category_enum_t;
 
-    readonly struct XedArchiveConfig
+    public readonly struct XedEtlConfig
     {
-        public FolderPath SourceRoot 
-            =>  ((Env.Current.DevDir + FolderName.Define("data")) + FolderName.Define("incoming")) + FolderName.Define("xed");
-            //FolderPath.Define(@"K:\z0\archives\sources\xed");
-            
-        public FolderPath TargetRoot
-            => (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define("xed");
+        public XedEtlConfig(IAppContext context, WfConfig settings)
+        {
+            Settings = settings;            
+            SourceRoot = context.AppPaths.DevRoot + FolderName.Define("data") + FolderName.Define("sources") + FolderName.Define("xed");
+            TargetRoot = context.AppPaths.BuildStage + FolderName.Define("xed");
+        }
+        
+        public readonly WfConfig Settings;
+        
+        public readonly FolderPath SourceRoot;
+
+        public readonly FolderPath TargetRoot;
 
         public FolderName StageFolder 
             => FolderName.Define("extracts");
@@ -73,6 +79,5 @@ namespace Z0
             xed_cat.XED_CATEGORY_UNCOND_BR,
             xed_cat.XED_CATEGORY_LOGICAL,
         };
-
     }
 }

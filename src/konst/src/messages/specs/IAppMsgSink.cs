@@ -12,14 +12,8 @@ namespace Z0
         void Deposit(IEnumerable<IAppMsg> msg)
             => z.iter(msg, Deposit);        
 
-        void Notify(IAppMsg msg)
-            => Deposit(msg);
-
         void Notify(string msg, AppMsgKind? kind = null)
             => Deposit(AppMsg.NoCaller(msg, kind));
-
-        void Displayed(IAppMsg msg)
-            => Deposit(msg.AsDisplayed());
 
         void NotifyConsole(IAppMsg msg)
         {
@@ -28,10 +22,14 @@ namespace Z0
             else
                 term.print(msg, msg.Color);
             
-            Displayed(msg);
+            Deposit(msg.AsDisplayed());
         }
 
-        void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
-            => NotifyConsole(AppMsg.Colorize(content, color));
+        void NotifyConsole(string body, AppMsgColor color)
+        {
+            var msg = AppMsg.Colorize(body, color, true);            
+            term.print(msg);
+            Deposit(msg);            
+        }
     }
 }

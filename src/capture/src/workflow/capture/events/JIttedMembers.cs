@@ -22,7 +22,7 @@ namespace Z0.Asm
             Members = members;
         }
 
-        public string Description
+        public string Format()
             => $"Jitted {Members.Length} members from {Hosts.Length} api hosts";
     }    
 }

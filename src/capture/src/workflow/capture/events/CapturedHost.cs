@@ -11,13 +11,15 @@ namespace Z0.Asm
 
     public readonly struct CapturedHost : IAppEvent<CapturedHost>
     {            
+        const string Pattern = "";
+
         public readonly ApiHostUri Host;
 
         [MethodImpl(Inline)]
         public CapturedHost(ApiHostUri host)
             => Host = host;
 
-        public string Description
+        public string Format() 
             => $"{Host.Format()} host capture step completed";
 
         public CapturedHost Zero

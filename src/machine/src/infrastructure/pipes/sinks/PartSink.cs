@@ -31,7 +31,7 @@ namespace Z0
         public void Deposit(IAppEvent e)
         {
             lock(Locker)
-                Writer.WriterLine(e.Description);            
+                Writer.WriterLine(e.Format());            
         }
 
         public void Deposit(AppEvent<BinaryCode> e)

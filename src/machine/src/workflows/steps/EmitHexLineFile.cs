@@ -11,7 +11,7 @@ namespace Z0
     
     public ref struct EmitHexLineFile
     {
-        readonly IAppContext Wf;
+        readonly WfContext Wf;
 
         readonly IPart Part;
 
@@ -24,14 +24,14 @@ namespace Z0
         MemoryAddress Offset;
 
         [MethodImpl(Inline)]
-        public EmitHexLineFile(IAppContext wf, IPart part, MemoryAddress @base, FilePath dst)
+        public EmitHexLineFile(WfContext wf, IPart part, MemoryAddress @base, FilePath dst)
         {
             Wf = wf;
             Part = part;
             TargetPath = dst;
             DataType = EmissionDataType.PartDat;
             Base = @base;
-            DataType.Emitting(Wf);
+            Wf.Running(nameof(EmitHexLineFile));
             Offset = default;
         }
 
@@ -44,7 +44,7 @@ namespace Z0
 
         public void Dispose()
         {
-            DataType.Emitted(Wf);
+            Wf.Ran(nameof(EmitHexLineFile));
         }
 
         public MemoryAddress OffsetAddress

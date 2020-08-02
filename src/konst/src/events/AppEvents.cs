@@ -9,19 +9,9 @@ namespace Z0
 
     using static Konst;
 
-
     [ApiHost]
     public readonly struct Events
     {
-        /// <summary>
-        /// Creates an informational event
-        /// </summary>
-        /// <param name="id">The event identifier</param>
-        /// <param name="description">The event description</param>
-        [MethodImpl(Inline), Op]
-        public static AppEvent create(StringRef id, string description, AppMsgColor flair = AppMsgColor.Blue)
-            => new AppEvent(id,description,flair);
-
         /// <summary>
         /// Creates an error event
         /// </summary>

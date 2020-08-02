@@ -11,13 +11,6 @@ namespace Z0
     
     partial class XTend
     {
-        public static IAppMsgLog MessageLog(this TAppEnv env)
-            => AppMsgLog.Create(env);        
-
-        [MethodImpl(Inline)]
-        public static Outcome Subscribe(this IAppEvent e, IEventBroker broker, Action<IAppEvent> receiver)
-            => Z0.Events.subscribe(e, broker, receiver);
-
         /// <summary>
         /// Registers an event receiver to which brokered events will be relayed
         /// </summary>
@@ -33,7 +26,7 @@ namespace Z0
         public static ref readonly E Deposit<E>(this IAppMsgSink dst, in E src)      
             where E : IAppEvent
         {
-            dst.NotifyConsole(src.Message);
+            dst.NotifyConsole(src.Format(), src.Flair);
             return ref src;
         }
     }

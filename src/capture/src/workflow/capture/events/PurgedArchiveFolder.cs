@@ -19,7 +19,7 @@ namespace Z0.Asm
         public ClearedDirectory(FolderPath path)
             => Path = path;
         
-        public string Description
+        public string Format()
             => text.format(MessagePattern, Path);
 
         public ClearedDirectory Zero 

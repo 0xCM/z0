@@ -13,21 +13,6 @@ namespace Z0
         C Content {get;}
     }
 
-    public interface INamedContent<C> : IContented<C>, INamed
-    {
-
-    }
-
-    public interface IDescribedContent<C> : IContented<C>, IDescribed
-    {
-
-    }
-
-    public interface ILabeledContent<C> : IContented<C>, ILabeled
-    {
-
-    }
-
     /// <summary>
     /// Characterizes reified container
     /// </summary>

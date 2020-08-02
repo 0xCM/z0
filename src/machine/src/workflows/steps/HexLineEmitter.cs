@@ -13,7 +13,7 @@ namespace Z0
 
     public ref struct HexLineEmitter
     {
-        readonly IAppContext Wf;
+        readonly WfContext Wf;
         
         readonly HexDataFormatter Formatter;
         
@@ -21,7 +21,7 @@ namespace Z0
 
         readonly FilePath TargetPath;
         
-        readonly EmissionDataType DataType;
+        readonly string DataType;
         
         int LineCount;
 
@@ -36,20 +36,20 @@ namespace Z0
         char LabelDelimiter;
 
         [MethodImpl(Inline)]
-        public HexLineEmitter(IAppContext wf, IPart part, MemoryAddress @base, FilePath dst)
+        public HexLineEmitter(WfContext wf, IPart part, MemoryAddress @base, FilePath dst)
         {
             Wf = wf;
             Part = part;        
             BaseAddress = @base;
             Formatter = HexFormatters.data(BaseAddress);
-            DataType = EmissionDataType.PartDat;
+            DataType = "PartData";
             TargetPath = dst;
             Buffer = sys.alloc<byte>(32);
             Offset = 0;
             LineCount = 0;
             EmitHeader = true;
             LabelDelimiter = Chars.Pipe;
-            DataType.Emitting(TargetPath, Wf);
+            Wf.Running(nameof(HexLineEmitter));
         }
 
         uint Read(BinaryReader reader)
@@ -82,7 +82,7 @@ namespace Z0
 
         public void Dispose()
         {
-            TableEmission.emitted(Wf, DataType, Part.Id, LineCount);
+            Wf.Emitted(DataType, (uint)LineCount, TargetPath);
         }
 
         public MemoryAddress OffsetAddress

@@ -48,9 +48,4 @@ namespace Z0
         ref readonly E Raise<E>(in E e)
             where E : IAppEvent;
     }
-
-    public interface IPersistentBroker : IEventBroker, IServiceAllocation
-    {
-        FilePath TargetPath {get;}
-    }
 }

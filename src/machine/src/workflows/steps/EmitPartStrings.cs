@@ -13,7 +13,7 @@ namespace Z0
 
     public ref struct EmitPartStrings
     {
-        readonly IAppContext Wf;
+        readonly WfContext Wf;
 
         readonly IPart Part;
         
@@ -24,14 +24,14 @@ namespace Z0
         public uint Count;
         
         [MethodImpl(Inline)]
-        public EmitPartStrings(IAppContext wf, IPart part, FilePath dst)
+        public EmitPartStrings(WfContext wf, IPart part, FilePath dst)
         {
             Wf = wf;
             Part = part;
             DataType = EmissionDataType.Strings;
             TargetPath = dst;
             Count = 0;
-            DataType.Emitting(TargetPath, wf);
+            Wf.Running(nameof(EmitPartStrings));
         }
 
         public PartRecordKind DataKind
@@ -83,7 +83,7 @@ namespace Z0
 
         public void Dispose()
         {
-            TableEmission.emitted(Wf, DataKind, Part.Id, (int)Count);
-         }
+            Wf.Ran(nameof(EmitPartStrings));        
+        }
     }
 }

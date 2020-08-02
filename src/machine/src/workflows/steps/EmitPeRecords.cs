@@ -11,7 +11,7 @@ namespace Z0
     
     public readonly ref struct EmitPeRecords
     {
-        readonly IAppContext Wf;
+        readonly WfContext Wf;
         
         readonly EmissionDataType DataType;
 
@@ -20,7 +20,7 @@ namespace Z0
         readonly FilePath TargetPath;
         
         [MethodImpl(Inline)]        
-        public EmitPeRecords(IAppContext wf, IPart[] src)
+        public EmitPeRecords(WfContext wf, IPart[] src)
         {
             Wf = wf;
             Parts = src;

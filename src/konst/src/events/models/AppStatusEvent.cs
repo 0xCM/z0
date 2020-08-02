@@ -9,10 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct AppStatusEvent : ITextual, IAppEvent<AppStatusEvent>
+    public readonly struct AppStatusEvent : IAppEvent<AppStatusEvent>
     {
         [MethodImpl(Inline)]
-        public static AppStatusEvent Create(string description, AppMsgColor flair = AppMsgColor.Magenta)
+        public static AppStatusEvent create(string description, AppMsgColor flair = AppMsgColor.Magenta)
             => new AppStatusEvent(description, flair);        
         
         public string Description {get;}
@@ -20,9 +20,9 @@ namespace Z0
         public AppMsgColor Flair {get;}
                 
         [MethodImpl(Inline)]
-        public AppStatusEvent(string name, AppMsgColor flair)
+        public AppStatusEvent(string description, AppMsgColor flair)
         {
-            Description = name;
+            Description = description;
             Flair = flair;            
         }
         public string Format()

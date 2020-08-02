@@ -13,30 +13,34 @@ namespace Z0.Asm
     using static z;
 
     public readonly ref struct ClearCaptureArchives 
-    {
-        readonly Arrow<ArchiveConfig>  Config;
+    {        
+        readonly WfContext Context;
+        
+        readonly PartWfConfig Config;
 
-        readonly ReadOnlySpan<PartId> Parts;
-
+        ReadOnlySpan<IPart> Parts 
+            => Config.Parts;
+        
         readonly Dictionary<PartId,FilePath[]> Deleted; 
 
-        public ClearCaptureArchives(Arrow<ArchiveConfig> config, params PartId[] parts)
+        public ClearCaptureArchives(PartWfConfig config)
         {
             Config = config;
-            Parts = parts;
+            Context = config.Context;
             Deleted = new Dictionary<PartId, FilePath[]>();
+            term.print($"Clearing target archive {config.Target.ArchiveRoot}");
         }
 
         public void Run()
         {
             var count = Parts.Length;
-            var archive = Archives.Services.CaptureArchive(Config.Dst.ArchiveRoot);
+            var archive = Archives.Services.CaptureArchive(Config.Target.ArchiveRoot);
             var files = list<FilePath>();       
             for(var i=0u; i<count; i++)
             {
                 var part = skip(Parts,i);
-                archive.ClearPartFiles(part, file => files.Add(file));
-                Deleted.Add(part, files.ToArray());
+                archive.ClearPartFiles(part.Id, file => files.Add(file));
+                Deleted.Add(part.Id, files.ToArray());
             }                        
         }
 
@@ -45,7 +49,8 @@ namespace Z0.Asm
         
         public void Dispose()
         {
-
+            term.print($"Cleared {Removed.Count} files from target archive {Config.Target.ArchiveRoot}");
+            Context.Raise(new ClearedPartFiles(Removed));
         }
     }
 }

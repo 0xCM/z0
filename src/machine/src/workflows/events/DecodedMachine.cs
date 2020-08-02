@@ -13,25 +13,22 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct DecodedMachine : IWorkflowEvent<DecodedMachine>
+    public readonly struct DecodedMachine : IWfEvent<DecodedMachine>
     {
-        const string Pattern = "[{0}, {1}]: {2} instructions decoded from {3} functions provided by {4} hosts across {5} parts";
+        const string Pattern = "{0}: {1} instructions decoded from {2} functions provided by {3} hosts across {4} parts";
         
+        public WfEventId Id {get;}
+
         public readonly EncodedIndex Index;
 
         public readonly PartInstructions[] PartInstructions;        
-
-        public readonly Timestamp Timestamp;
-
-        public readonly CorrelationToken Correlation;
         
         [MethodImpl(Inline)]        
         public DecodedMachine(EncodedIndex index, PartInstructions[] inxs, CorrelationToken? ct = null)
         {
+            Id = WfEventId.define(nameof(DecodedHost), ct);
             Index = index;
             PartInstructions = inxs;
-            Timestamp = z.now();
-            Correlation = ct ?? CorrelationToken.create();
         }
         
         public AppMsgColor Flair 
@@ -44,11 +41,6 @@ namespace Z0
             => PartInstructions.Sum(x => x.TotalCount);                    
         
         public string Format()
-            => text.format(Pattern,Timestamp, Correlation, TotalCount, Index.EntryCount, Index.Hosts.Length, Index.Parts.Length);
-        
-        public string Description
-            => Format();
-
-            //$"{TotalCount} instructions decoded from {Index.EntryCount} functions provided by {Index.Hosts.Length} hosts across {Index.Parts.Length} parts";
+            => text.format(Pattern, Id, TotalCount, Index.EntryCount, Index.Hosts.Length, Index.Parts.Length);                    
     }        
 }
