@@ -3947,3 +3947,25 @@
  rename src/win/src/os/{windows/apishape => records}/UNICODE_STRING.cs (94%)
  rename src/win/src/os/{windows => services}/PathUtilities.cs (100%)
  rename src/zdata/models/{ContentInfo.cs => ContentLibEntry.cs} (70%)
+[master 0ca4bff1b] .
+ 73 files changed, 715 insertions(+), 483 deletions(-)
+ rename src/capture/src/{workflow/capture => }/events/ICaptureClient.cs (100%)
+ delete mode 100644 src/capture/src/workflow/capture/events/ICaptureEvents.cs
+ create mode 100644 src/capture/src/workflow/capture/steps/CaptureHosts.cs
+ rewrite src/domain/src/asm/common/AsmFlowInfo.cs (65%)
+ delete mode 100644 src/machine/src/workflows/models/EnumDescription.cs
+ delete mode 100644 src/machine/src/workflows/models/LocatedImages.cs
+ delete mode 100644 src/machine/src/workflows/models/MetadataIndex.cs
+ delete mode 100644 src/machine/src/workflows/models/MetadataSubject.cs
+ rename src/{machine/src/workflows => zdata}/models/LocatedImage.cs (100%)
+ rename src/{machine/src/workflows => zdata}/models/LocatedImageFIeld.cs (83%)
+ rename src/{machine/src/workflows => zdata}/models/LocatedImageT.cs (100%)
+ create mode 100644 src/zdata/models/LocatedImages.cs
+ rename src/{machine/src/workflows => zdata}/models/LocatedPart.cs (100%)
+ rename src/{machine/src/workflows => zdata}/models/PartTypes.cs (100%)
+ create mode 100644 src/zdata/models/ProcessImageField.cs
+ create mode 100644 src/zdata/models/ProcessImageSummary.cs
+ rename src/{machine/src/workflows => zdata}/models/ProjectDocRecord.cs (100%)
+ rename wf/{deposit.bat => archive.bat} (63%)
+ rename wf/{wf-deposit.bat => wf-archive.bat} (100%)
+ delete mode 100644 wf/wf-win.bat
