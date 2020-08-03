@@ -11,7 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiDataType]
     public readonly struct WfEventId : IComparable<WfEventId>, IEquatable<WfEventId>, INamed<WfEventId>, ICorrelated<WfEventId>, IChronic<WfEventId>
     {
         [MethodImpl(Inline)]
