@@ -11,11 +11,23 @@ namespace Z0
     
     using static Konst;
     using static Flow;
+    using static EmitBitMasksStep;    
     using static z;
-
+    
     using NBI = NumericBaseIndicator;
 
-    public ref partial struct EmitBitMasks 
+    [Step(WfStepId.EmitBitMasks, true)]
+    public readonly struct EmitBitMasksStep
+    {
+        public const string WorkerName = nameof(EmitBitMasks);
+
+        public const string RunningPattern = "Emitting bitmasks to {0}";
+
+        public const string RanPattern = "Emitted {0} bitmasks to {1}";        
+    }
+
+    [Step(WfStepId.EmitBitMasks)]
+    public ref struct EmitBitMasks 
     {
         readonly WfContext Wf;
 
@@ -24,36 +36,42 @@ namespace Z0
         readonly FilePath TargetPath;
         
         [MethodImpl(Inline)]
-        public EmitBitMasks(WfContext context, CorrelationToken? ct = null)
+        public EmitBitMasks(WfContext context, CorrelationToken ct)
         {
             Wf = context;
-            Ct = correlate(ct);
+            Ct = ct;
             TargetPath = Wf.IndexRoot + FileName.Define("bitmasks", FileExtensions.Csv);;
-            Wf.Initialized(nameof(EmitBitMasks), Ct);
+            Wf.Created(WorkerName, Ct);
         }
 
         public void Run()
         {
-            Wf.Running(nameof(EmitBitMasks), Ct);
-            emit(typeof(BitMasks));
+            Wf.Running(WorkerName, text.format(RunningPattern, TargetPath), Ct);
+            var count = emit(typeof(BitMasks));
+            Wf.Ran(WorkerName, text.format(RanPattern, count, TargetPath), Ct);
         }
         
         public void Dispose()
         {
-            Wf.Finished(nameof(EmitBitMasks), Ct);
+            Wf.Finished(WorkerName, Ct);
         }
 
-        void emit(Type src)
+        uint emit(Type src)
         {
+            
             var literals = span(find(src));
+            var count = literals.Length;
             var formatter = NumericLiteralFormatter.Service;            
             using var writer = TargetPath.Writer();
             writer.WriteLine(formatter.HeaderText);
-            for(var i=0u; i <literals.Length; i++)
+            
+            for(var i=0u; i <count; i++)
             {
                 ref readonly var literal = ref skip(literals,i);
                 writer.WriteLine(formatter.Format(literal));                
             }            
+            
+            return (uint)count;
         }
 
         static NumericLiteral[] find(Type src)

@@ -24,7 +24,7 @@ namespace Z0
         public const ushort Col1Width = 180;    
     }
     
-    partial struct AccessorCapture
+    partial struct RecaptureAccessors
     {
         public void SaveResIndex(ReadOnlySpan<CapturedAccessor> src, FilePath csvdst)
         {

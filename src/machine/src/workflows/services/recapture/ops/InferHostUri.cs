@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct AccessorCapture
+    partial struct RecaptureAccessors
     {
         static ApiHostUri InferHostUri(Type src)
         {

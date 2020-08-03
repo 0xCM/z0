@@ -6,7 +6,7 @@ namespace Z0
 {
     using Z0.Asm;
 
-    partial struct AccessorCapture
+    partial struct RecaptureAccessors
     {
         Option<AsmFunctionCode> CreatFunction(CapturedCode capture)
         {

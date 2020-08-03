@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
 
+    [Event]
     public readonly struct OpeningWfContext : IWfEvent<OpeningWfContext>
     {
         const string Pattern = IdMarker + "Opening workflow context {1}";

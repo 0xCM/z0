@@ -6,84 +6,78 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static Konst;
+    using static EmitPartStringsStep;
     using static z;
-
+    
     public ref struct EmitPartStrings
     {
+        /// <summary>
+        /// Indicates the number of records emitted after running
+        /// </summary>
+        public uint EmissionCount;
+
         readonly WfContext Wf;
+        
+        readonly CorrelationToken Ct;
 
         readonly IPart Part;
         
-        readonly FilePath TargetPath;
-        
-        readonly EmissionDataType DataType;
+        readonly bool UserStrings;
 
-        public uint Count;
-        
+        readonly FilePath TargetPath;
+                
         [MethodImpl(Inline)]
-        public EmitPartStrings(WfContext wf, IPart part, FilePath dst)
+        public EmitPartStrings(WfContext wf, IPart part, bool user, FilePath dst, CorrelationToken ct)
         {
             Wf = wf;
             Part = part;
-            DataType = EmissionDataType.Strings;
+            Ct = ct;            
             TargetPath = dst;
-            Count = 0;
-            Wf.Running(nameof(EmitPartStrings));
+            UserStrings = user;
+            EmissionCount = 0;
+            Wf.Created(WorkerName, Ct);
+        }
+        
+        public void Run()
+        {
+            Wf.Emitting(WorkerName, DataType, TargetPath, Ct);
+
+            var data = ReadData();            
+            EmissionCount = (uint)data.Length;
+
+            var target = PartRecords.formatter(PartRecordSpecs.Strings);        
+            using var writer = TargetPath.Writer();
+            target.EmitHeader();            
+            
+            for(var i=0u; i<EmissionCount; i++)
+                PartRecords.format(skip(data,i), target);                        
+            writer.Write(target.Render());
+            
+            Wf.Emitted(WorkerName, DataType, EmissionCount, TargetPath, Ct);
         }
 
-        public ImgRecordKind DataKind
-            => ImgRecordKind.String;                
+        public void Dispose()
+        {
+            Wf.Finished(WorkerName, Ct);        
+        }
 
-        ReadOnlySpan<ImgStringRecord> UserStrings(IPart part)
+        ReadOnlySpan<ImgStringRecord> ReadData()
+            => UserStrings ? ReadUserStrings(Part) : ReadSystemStrings(Part);            
+
+        ReadOnlySpan<ImgStringRecord> ReadUserStrings(IPart part)
         {
             var srcPath = part.PartPath();
             using var reader = ImgMetadataReader.open(srcPath);
             return reader.ReadUserStrings();        
         }
 
-        ReadOnlySpan<ImgStringRecord> SysStrings(IPart part)
+        ReadOnlySpan<ImgStringRecord> ReadSystemStrings(IPart part)
         {
             var srcPath = part.PartPath();
             using var reader = ImgMetadataReader.open(srcPath);
             return reader.ReadStrings();        
-        }
-
-        void Emit(ReadOnlySpan<ImgStringRecord> src, StreamWriter writer)
-        {
-            var target = PartRecords.formatter(PartRecordSpecs.Strings);
-            for(var i=0u; i<src.Length; i++)
-                PartRecords.format(skip(src,i), target);
-            writer.Write(target.Render());            
-        }
-        
-        public void Run()
-        {
-            var target = PartRecords.formatter(PartRecordSpecs.Strings);
-            
-            using var writer = TargetPath.Writer();
-            target.EmitHeader();            
-            var j = 0;
-
-            var data = SysStrings(Part);
-            for(var i=0u; i<data.Length; i++, j++)
-                PartRecords.format(skip(data,i), target);
-
-            data = UserStrings(Part);
-            for(var i=0u; i<data.Length; i++, j++)
-                PartRecords.format(skip(data,i), target);
-                        
-            writer.Write(target.Render());            
-
-            Count += (uint)j;
-            
-        }
-
-        public void Dispose()
-        {
-            Wf.Ran(nameof(EmitPartStrings));        
         }
     }
 }

@@ -11,6 +11,11 @@ namespace Z0.Asm
     using static Konst;
     using static Flow;
 
+    public readonly struct CaptureHostsStep
+    {
+        public const string WorkerName = nameof(CaptureHosts);
+    }
+
     public readonly ref struct CaptureHosts
     {
         public CaptureState Wf {get;}
@@ -30,7 +35,7 @@ namespace Z0.Asm
             Hosts= hosts;
             Ct = ct;
             Target = dst;
-            Wf.Initialized(nameof(CaptureHosts), Ct);
+            Wf.Created(nameof(CaptureHosts), Ct);
         }
 
         public void Run()

@@ -8,9 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static EmitPeHeadersStep;
+
     using F = PeHeaderField;
 
-    public readonly ref struct EmitPeRecords
+    [Step(WfStepId.EmitPeHeaders)]
+    public readonly struct EmitPeHeadersStep
+    {
+        public const string WorkerName = nameof(EmitPeHeaders);
+    }
+    
+    [Step(WfStepId.EmitPeHeaders)]
+    public readonly ref struct EmitPeHeaders
     {
         readonly WfContext Wf;
         
@@ -20,18 +29,25 @@ namespace Z0
         
         readonly FilePath TargetPath;
         
+        readonly CorrelationToken Ct;
+
         [MethodImpl(Inline)]        
-        public EmitPeRecords(WfContext wf, IPart[] src)
+        public EmitPeHeaders(WfContext wf, IPart[] src, CorrelationToken ct)
         {
             Wf = wf;
+            Ct = ct;
             Parts = src;
             TargetPath = wf.AppPaths.ResourceRoot + FileName.Define("z0", "pe.csv");
             DataType = EmissionDataType.Pe;
-            Wf.Running(nameof(EmitPeRecords));
+            Wf.Created(WorkerName, Ct);
         }
 
         public void Run()
         {
+            var pCount = Parts.Length;
+            var total = 0u;
+            Wf.RunningT(WorkerName,new {PartCount = pCount}, Ct);
+
             var formatter = DatasetFormatter<F>.Default;            
             using var writer = TargetPath.Writer();
             writer.WriteLine(formatter.HeaderText);
@@ -41,17 +57,20 @@ namespace Z0
                 var id = part.Id;
                 var assembly = part.Owner;                                
                 var records = ImgMetadataReader.headers(FilePath.Define(assembly.Location));
-                var count = records.Length;
+                var count = (uint)records.Length;
                 
                 for(var i=0; i<count; i++)
                 {
                     format(z.skip(records,i), formatter);
                     writer.WriteLine(formatter.Render());
-                }                    
+                } 
+                total += count;
             }  
+
+            Wf.RanT(WorkerName, new {PartCount = pCount, TotalRecordCount = total}, Ct);
         }
 
-        public static void format(in PeHeaderRecord src, IDatasetFormatter<F> dst)
+        static void format(in PeHeaderRecord src, IDatasetFormatter<F> dst)
         {
             dst.Append(F.FileName, src.FileName);
             dst.Delimit(F.Section, src.Section);
@@ -65,7 +84,7 @@ namespace Z0
 
         public void Dispose()
         {
-             Wf.Ran(nameof(EmitPeRecords));
+            Wf.Finished(nameof(EmitPeHeaders), Ct);
         }
     }
 }

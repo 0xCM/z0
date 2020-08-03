@@ -22,76 +22,51 @@ namespace Z0
         /// <summary>
         /// The event data type name
         /// </summary>
-        public readonly StringRef Name;
+        public string Name {get;}
 
         /// <summary>
         /// The time at which the event was raised
         /// </summary>
-        public readonly Timestamp Timestamp;
+        public Timestamp Ts {get;}
 
         /// <summary>
         /// Relates the event to other events in the workflow
         /// </summary>
-        public readonly CorrelationToken Correlation;
+        public CorrelationToken Ct {get;}
 
         [MethodImpl(Inline)]
         public WfEventId(string name, CorrelationToken ct, Timestamp ts)
         {
             Name = name;
-            Correlation = ct;
-            Timestamp = ts;
+            Ct = ct;
+            Ts = ts;
         }        
 
         [MethodImpl(Inline)]
         public bool Equals(WfEventId src)
-            => Name.Address == src.Name.Address && Correlation == src.Correlation && Timestamp == src.Timestamp;
+            => Name == src.Name && Ct == src.Ct && Ts == src.Ts;
         
         [MethodImpl(Inline)]
         public int CompareTo(WfEventId src)
-            => Timestamp.CompareTo(src.Timestamp);
+            => Ts.CompareTo(src.Ts);
         
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Timestamp, Correlation, Name.Format()).PadRight(64);       
+            => text.format(Pattern, Ts, Ct, Name).PadRight(64);       
 
         public uint Hashed
         {        
             [MethodImpl(Inline)]
-            get => Timestamp.Hashed;
+            get => Ts.Hashed;
         }
-
-        [MethodImpl(Inline), Ignore]
-        int IComparable<WfEventId>.CompareTo(WfEventId src)
-            => CompareTo(src);
-
-
-        [MethodImpl(Inline), Ignore]
-        bool IEquatable<WfEventId>.Equals(WfEventId src)
-            => Equals(src);
         
-        [MethodImpl(Inline), Ignore]
-        string ITextual.Format()
-            => Format();
-
-        StringRef INamed.Name   
-            => Name;
-
-        Timestamp IChronic.Timestamp
-            => Timestamp;
-
-        CorrelationToken ICorrelated.Correlation
-            => Correlation;
-        
-        [MethodImpl(Inline), Ignore]
         public override int GetHashCode()
             => (int)Hashed;
 
-        [MethodImpl(Inline), Ignore]
         
         public override bool Equals(object src)
             => src is WfEventId i && Equals(i);
 
-        [MethodImpl(Inline), Ignore]
         public override string ToString()
             => Format();
     }

@@ -20,7 +20,7 @@ namespace Z0.XedWf
 
         [MethodImpl(Inline), Op]
         public static E.ParsedInstructions ParsedInstructions(FilePath src, int count, in WfEventId running)
-            => new E.ParsedInstructions(id(nameof(E.ParsingInstructions), running.Correlation), src, (uint)count);
+            => new E.ParsedInstructions(id(nameof(E.ParsingInstructions), running.Ct), src, (uint)count);
 
         [MethodImpl(Inline), Op]
         public static WfEventId id(string name, CorrelationToken? ct = null)

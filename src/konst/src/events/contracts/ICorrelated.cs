@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface ICorrelated
     {
-        CorrelationToken Correlation 
+        CorrelationToken Ct 
             => CorrelationToken.create();
     }
 

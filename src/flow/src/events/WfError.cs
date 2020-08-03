@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
             
+    [Event]
     public readonly struct WfError : IWfEvent<WfError>
     {                
         public WfEventId Id {get;}

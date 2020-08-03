@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.IO;
     
-    partial struct AccessorCapture
+    partial struct RecaptureAccessors
     {
         void WriteAsm(CapturedCode capture, StreamWriter dst)
         {

@@ -13,9 +13,37 @@ namespace Z0
 
     [ApiHost]
     public readonly partial struct Flow
-    {
-        public const string IdMarker = "{0} | ";
+    {        
+        /// <summary>
+        /// Defines the default field delimiter
+        /// </summary>
+        public const string FieldSep = " | ";
 
+        /// <summary>
+        /// Defines the default content separator
+        /// </summary>
+        public const string ContentSep = ": ";
+
+        /// <summary>
+        /// Defines the default file extension part separator
+        /// </summary>
+        public const string ExtPartSep = ".";
+
+        /// <summary>
+        /// Defines the default extension for structured data
+        /// </summary>
+        public const string DataFileExt = "csv";
+
+        public const string Plural = "s";
+
+        public const string IdMarker = Slot0 + FieldSep;
+
+        public const string ContentMarker = ContentSep + Slot0;
+
+        [MethodImpl(Inline)]
+        public static WfStatus<T> status<T>(string worker, T body, CorrelationToken ct)
+            => new WfStatus<T>(worker, body, ct);
+        
         public static string AppName 
         {
             [MethodImpl(Inline), Op]

@@ -14,5 +14,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static WfEventId wfid(string name, CorrelationToken? ct = null, Timestamp? ts = null)
             => new WfEventId(name, ct ?? CorrelationToken.create(), ts ?? z.now());       
+
+        [MethodImpl(Inline), Op]
+        public static WfEventId wfid(string name, CorrelationToken ct)
+            => new WfEventId(name, ct, z.now());       
     }
 }

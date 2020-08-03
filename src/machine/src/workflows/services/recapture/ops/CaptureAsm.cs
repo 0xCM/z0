@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
     
-    partial struct AccessorCapture
+    partial struct RecaptureAccessors
     {
         public CapturedAccessor[] CaptureAsm(ApiHostUri host, ReadOnlySpan<ResourceAccessor> src, FilePath dst)
         {            

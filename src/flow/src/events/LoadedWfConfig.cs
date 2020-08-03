@@ -9,13 +9,25 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static LoadedWfConfigEvent;
 
+    [Event(true)]
+    public readonly struct LoadedWfConfigEvent
+    {   
+        public const string EventName = nameof(LoadedWfConfig);
+
+        public const string Pattern = IdMarker + "Comleted workflow load from {1}";
+
+        public const AppMsgColor DefaultFlair = AppMsgColor.Cyan;
+    }
+    
+    [Event]
     public readonly struct LoadedWfConfig : IWfEvent<LoadedWfConfig>
-    {
-        const string Pattern = IdMarker + "Comleted workflow load from {1}";
-        
+    {        
         public WfEventId Id {get;}
-
+        
+        public AppMsgColor Flair {get;}
+        
         public readonly FilePath ConfigPath;
 
         public readonly WfConfig ConfigData;
@@ -24,6 +36,7 @@ namespace Z0
         public LoadedWfConfig(WfEventId id, FilePath src, WfConfig data)
         {
             Id = id;
+            Flair = DefaultFlair;
             ConfigPath = src;
             ConfigData = data;
         }

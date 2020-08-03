@@ -13,28 +13,38 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static EmitProjectDocsStep;
 
+    [Step(WfStepId.EmitProjectDocs, true)]
+    public readonly struct EmitProjectDocsStep
+    {
+        public const string WorkerName = nameof(EmitProjectDocs);
+    }
+    
+    [Step(WfStepId.EmitProjectDocs)]
     public readonly ref struct EmitProjectDocs
     {
-        readonly WfContext Workflow;
+        readonly WfContext Wf;
 
         readonly CorrelationToken Ct;
 
-        public EmitProjectDocs(WfContext wf, CorrelationToken? ct = null)
+        public EmitProjectDocs(WfContext wf, CorrelationToken ct)
         {
-            Workflow = wf;
-            Ct = correlate(ct);
-            Workflow.Running(nameof(EmitProjectDocs), Ct);
+            Wf = wf;
+            Ct = ct;
+            Wf.Created(WorkerName, Ct);
         }
         
         public void Run()
         {
+            Wf.Running(WorkerName, Ct);
             collect();
+            Wf.Ran(WorkerName, Ct);
         }
 
         public void Dispose()
         {
-            Workflow.Ran(nameof(EmitProjectDocs), Ct);
+            Wf.Finished(WorkerName, Ct);
         }
         
         const string Sep = "| ";
@@ -53,7 +63,7 @@ namespace Z0
                 _ => DocTargetKind.None,
             };                    
 
-        public static Dictionary<PartId, Dictionary<string,string>> collect()
+        Dictionary<PartId, Dictionary<string,string>> collect()
         {
             var docs = AppPaths.Default.ResourceRoot + FolderName.Define("docs");
             docs.Clear();
@@ -81,10 +91,8 @@ namespace Z0
             return src;
         }
 
-        public static Dictionary<PartId, Dictionary<string,string>> collect(FilePath[] paths)        
+        Dictionary<PartId, Dictionary<string,string>> collect(FilePath[] paths)        
         {
-            term.print($"Examining {paths.Length} documentation files");
-
             var dst = new Dictionary<PartId, Dictionary<string,string>>();
             foreach(var path in paths)
             {
@@ -99,19 +107,16 @@ namespace Z0
                         if(parsed.Count != 0)
                         {
                             dst[id] = parsed;
-                            term.print($"Parsed {dst[id].Count} entries from {xmlfile}");
+                            Wf.Status(WorkerName, $"Parsed {dst[id].Count} entries from {xmlfile}", Ct);
                         }
                     }
                 }
-
-            }
-
-            term.print($"Collected documentation for {dst.Count} parts");
+            }            
 
             return dst;
         }            
 
-        public static Dictionary<string,string> parse(string src)
+        static Dictionary<string,string> parse(string src)
         {
             var index = new Dictionary<string, string>();
             using var xmlReader = XmlReader.Create(new StringReader(src));

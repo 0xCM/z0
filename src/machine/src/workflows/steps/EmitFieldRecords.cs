@@ -8,10 +8,25 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-        
-    public readonly ref struct EmitFieldRecords
+    using static Flow;
+    using static EmitFieldMetadataStep;
+
+    [Step(WfStepId.EmitFieldMetadata, true)]
+    public readonly struct EmitFieldMetadataStep
+    {
+        public const string WorkerName = nameof(EmitFieldMetadata);
+
+        public const string DataType = "FieldMetadata";
+
+        public const string DatasetName = "FieldMetadata";
+    }
+
+    [Step(WfStepId.EmitFieldMetadata)]
+    public readonly ref struct EmitFieldMetadata
     {    
         readonly WfContext Wf;
+
+        readonly CorrelationToken Ct;
 
         readonly IPart[] Parts;
         
@@ -19,23 +34,36 @@ namespace Z0
 
         readonly FolderPath TargetDir;
 
-        readonly EmissionDataType DataType;
-
         [MethodImpl(Inline)]
-        public EmitFieldRecords(WfContext wf, IPart[] parts)
+        public EmitFieldMetadata(WfContext wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
+            Ct = ct;
             Parts = parts;
             Spec = PartRecordSpecs.Fields;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("fields");
-            DataType = EmissionDataType.Field;
-            Wf.Running(nameof(EmitFieldRecords));
+            Wf.Created(WorkerName, Ct);
         }
 
         public void Run()
         {  
+            var count = 0u;
+            var partCount = Parts.Length;
+            Wf.RunningT(WorkerName, new {PartCount = partCount}, Ct);
+            
             foreach(var part in Parts)
-                Emit(part);            
+            {
+                try
+                {                
+                    count += Emit(part);            
+                }
+                catch(Exception e)
+                {
+                    Wf.Error(e,Ct);
+                }
+            }
+
+            Wf.RanT(WorkerName, new {PartCount = partCount, RecordCount = count}, Ct);
         }
         
         static IImgMetadataReader Reader(string src)
@@ -44,32 +72,33 @@ namespace Z0
         FilePath TargetPath(PartId part)
             => TargetDir +  FileName.Define(part.Format(), "fields.csv");
 
-        void Emit(IPart part)
+        uint Emit(IPart part)
         {
             var rk = PartRecordSpecs.FieldRva;
             var id = part.Id;
             var path = TargetPath(id);
 
-            Wf.Emitting(rk.ToString(), path);
+            Wf.Emitting(WorkerName, DatasetName, path, Ct);
 
             var assembly = part.Owner;                
             using var reader = Reader(assembly.Location);
             var src = reader.ReadFields();
+            var count = src.Length;              
 
             var formatter = PartRecords.formatter(Spec);
             formatter.EmitHeader();
             foreach(var record in src)
                 PartRecords.format(record, formatter);
 
-            //Root.iter(src, record => record.Format(formatter));
-            path.Ovewrite(formatter.Render());                
-            Wf.Emitted(rk.ToString(), (uint)src.Length, path);
+            path.Ovewrite(formatter.Render());  
+            Wf.Emitted(WorkerName, DatasetName, (uint)src.Length, path, Ct);
+            return (uint)count;
         }
 
 
         public void Dispose()
         {
-            Wf.Ran(nameof(EmitFieldRecords));
+            Wf.Finished(WorkerName, Ct);
         }
     }
 }

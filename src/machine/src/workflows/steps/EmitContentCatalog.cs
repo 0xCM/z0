@@ -9,34 +9,47 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static EmitContentCatalogStep;
     
     using F = ContentLibField;
 
-    public readonly ref struct EmitContentCatalog
+    [Step(WfStepId.EmitContentCatalog, true)]
+    public readonly struct EmitContentCatalogStep
     {
+        public const string WorkerName = nameof(EmitContentCatalog);
+
+        public const string DatasetName = "ContentCatalog";
+    }
+    
+    [Step(WfStepId.EmitContentCatalog)]
+    public ref struct EmitContentCatalog
+    {
+        public readonly FilePath TargetPath;
+        
+        public uint EmissionCount;
+
         readonly WfContext Wf;
 
-        readonly FilePath Target;
-        
-        readonly uint[] Count;
-
-        public readonly CorrelationToken Ct;
+        readonly CorrelationToken Ct;
         
         [MethodImpl(Inline)]
-        public EmitContentCatalog(WfContext wf, CorrelationToken? ct = null)
+        public EmitContentCatalog(WfContext wf, CorrelationToken ct)
         {
             Wf = wf;
-            Ct = correlate(ct);
-            Target =  Wf.IndexRoot + FileName.Define("catalog", FileExtensions.Csv);
-            Count = new uint[1]{0};
-            Wf.Running(nameof(EmitContentCatalog), Ct);
+            Ct = ct;
+            TargetPath =  Wf.IndexRoot + FileName.Define("catalog", FileExtensions.Csv);
+            EmissionCount = 0;
+            Wf.Created(WorkerName, Ct);
         }
 
         public void Run()
         {
+            Wf.Emitting(WorkerName, DatasetName, TargetPath, Ct);
             var entries = z.span(zdat.Catalog.Array());
+            EmissionCount = (uint)entries.Length;
+
             var f = formatter<ContentLibField>();
-            for(var i=0u; i<entries.Length; i++)
+            for(var i=0u; i<EmissionCount; i++)
             {
                 ref readonly var entry = ref z.skip(entries, i);
                 f.Append(F.Kind, entry.Kind);
@@ -46,16 +59,15 @@ namespace Z0
                 f.EmitEol();
             }
             
-            using var dst = Target.Writer();
+            using var dst = TargetPath.Writer();
             dst.Write(f.Format());
-            // for(var i=0; i<entries.Length; i++)
-            //     dst.Write(entries[i].Format());
-            Count[0] = (uint)entries.Length;
+
+            Wf.Emitted(WorkerName, DatasetName, EmissionCount, TargetPath, Ct);
         }
 
         public void Dispose()        
         {
-            Wf.Ran(nameof(EmitContentCatalog), $"Wrote {Count[0]} entries to {Target}", Ct);
+            Wf.Finished(WorkerName, Ct);
         }
     }
 }

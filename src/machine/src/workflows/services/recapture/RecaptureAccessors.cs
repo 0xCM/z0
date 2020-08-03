@@ -11,7 +11,13 @@ namespace Z0
 
     using static Konst;
     
-    public readonly ref partial struct AccessorCapture
+    public readonly struct RecaptureAccessorsStep
+    {
+        public const string WorkerName = nameof(RecaptureAccessorsStep);
+    }
+    
+    
+    public readonly ref partial struct RecaptureAccessors
     {
         readonly IAsmContext Context;
         
@@ -34,7 +40,7 @@ namespace Z0
             => ResBytesDir + FolderName.Define("asm");
 
         [MethodImpl(Inline)]
-        public AccessorCapture(IWfCapture context)
+        public RecaptureAccessors(IWfCapture context)
         {
             Context = context.AsmContext;            
             Context.AppPaths.AppDataRoot.Clear();

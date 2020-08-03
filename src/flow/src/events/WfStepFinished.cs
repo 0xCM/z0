@@ -10,14 +10,21 @@ namespace Z0
         
     using static Konst;
     using static Flow;
-    using static z;
+    using static WfStepFinishedEvent;
 
+    [Event(true)]
+    public readonly struct WfStepFinishedEvent
+    {
+        public const string DefaultPattern = IdMarker + "Completed";
+
+        public const string DetailPattern = IdMarker + "Completed" + ContentMarker;
+
+        public const AppMsgColor DefaultFlair = AppMsgColor.Cyan;
+    }
+
+    [Event]
     public readonly struct WfStepFinished : IWfEvent<WfStepFinished>
     {
-        const string DefaultPattern = IdMarker + "Completed";
-
-        const string DetailPattern = IdMarker + "Completed - {1}";
-
         public readonly WfEventId Id {get;}
 
         public readonly string Detail;
@@ -29,7 +36,7 @@ namespace Z0
         {
             Id = wfid(worker, ct);
             Detail = EmptyString;
-            Flair = AppMsgColor.Cyan;
+            Flair = DefaultFlair;
         }
 
         [MethodImpl(Inline)]
@@ -37,7 +44,7 @@ namespace Z0
         {
             Id = wfid(worker, ct);
             Detail = detail;
-            Flair = AppMsgColor.Cyan;
+            Flair = DefaultFlair;
         }
 
         [MethodImpl(Inline)]
@@ -45,11 +52,6 @@ namespace Z0
             => text.nonempty(Detail) 
             ? text.format(DetailPattern, Id, Detail)
             : text.format(DefaultPattern, Id);        
-        
-        public string Description
-            => Format();
-
-        public override string ToString()
-            => Format();
+     
     }
 }

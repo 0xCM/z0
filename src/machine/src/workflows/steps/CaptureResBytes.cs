@@ -9,28 +9,22 @@ namespace Z0
 
     using static Konst;
 
-    partial struct AccessorCapture
+    public readonly struct CaptureResBytesStep
     {
-        /// <summary>
-        /// All of your resbytes belong to us
-        /// </summary>
-        public void CaptureResBytes()
-        {            
-            var resfile = z.insist(ResBytesCompiled);
-            var captured = Capture(resfile, ResBytesUncompiled);                        
-            var csvfile = ResIndexDir + FileName.Define("z0.res.bytes", FileExtensions.Csv);
-            SaveResIndex(captured, csvfile);
-        }
+        public const string Worker = nameof(CaptureResBytes);
     }
-
+    
     public readonly ref struct CaptureResBytes
     {
-        readonly AccessorCapture Workflow;
+        readonly RecaptureAccessors Workflow;
 
+        readonly CorrelationToken Ct;
+        
         [MethodImpl(Inline)]
-        public CaptureResBytes(AccessorCapture workflow)
+        public CaptureResBytes(RecaptureAccessors workflow, CorrelationToken ct)
         {
             Workflow = workflow;
+            Ct = ct;
         }
         
         /// <summary>

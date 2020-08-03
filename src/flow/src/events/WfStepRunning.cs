@@ -5,19 +5,26 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
         
     using static Konst;
     using static Flow;
-    using static z;
+    using static WfStepRunningEvent;
 
+    public readonly struct WfStepRunningEvent
+    {
+        public const string EventName = nameof(WfStepRunning);
+
+        public const string DefaultPattern = IdMarker + "Running";
+
+        public const string DetailPattern = IdMarker + "{1}";
+
+        public const AppMsgColor DefaultFlair = AppMsgColor.Magenta;
+    }
+
+    [Event]
     public readonly struct WfStepRunning : IWfEvent<WfStepRunning>
     {        
-        const string DefaultPattern = IdMarker + "Running";
-
-        const string DetailPattern = IdMarker + "{1}";
-
         public WfEventId Id {get;}
 
         public AppMsgColor Flair {get;}
@@ -29,7 +36,7 @@ namespace Z0
         {
             Id = wfid(worker, ct);
             Detail = EmptyString;
-            Flair = AppMsgColor.Magenta;
+            Flair = DefaultFlair;
         }
 
         [MethodImpl(Inline)]
@@ -37,7 +44,7 @@ namespace Z0
         {
             Id = wfid(worker, ct);
             Detail = detail;
-            Flair = AppMsgColor.Magenta;
+            Flair = DefaultFlair;
         }
 
         [MethodImpl(Inline)]

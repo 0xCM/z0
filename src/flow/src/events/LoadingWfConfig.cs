@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
 
+    [Event]
     public readonly struct LoadingWfConfig : IWfEvent<LoadingWfConfig>
     {
         const string Pattern = IdMarker + "Loading workflow configuration from {1}";

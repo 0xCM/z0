@@ -23,10 +23,9 @@ namespace Z0
             return new PartWfConfig(context, args, src, dst, parsed);                    
         }
 
-        public static WfConfig wfconfig(IAppContext context, IMultiSink sink)
+        public static WfConfig wfconfig(IAppContext context, IMultiSink sink, CorrelationToken ct)
         {
             var path = Flow.ConfigPath(context);
-            var ct = CorrelationToken.create();
             sink.Deposit(new LoadingWfConfig(WfEventId.define(nameof(LoadingWfConfig), ct),path));
 
             var dst = z.dict<string,string>();

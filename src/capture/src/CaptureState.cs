@@ -9,6 +9,7 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Konst;
+    using static Flow;
 
     public readonly struct CaptureState
     {
@@ -18,6 +19,7 @@ namespace Z0.Asm
 
         readonly CorrelationToken Ct {get;}
         
+        [MethodImpl(Inline)]
         public CaptureState(ICaptureWorkflow cwf, PartWfConfig config, CorrelationToken? ct = null)        
         {
             CWf = cwf;
@@ -25,14 +27,9 @@ namespace Z0.Asm
             Ct = ct ?? CorrelationToken.create();
         }
 
-        public void Initialized(string worker, CorrelationToken? ct = null)
+        public void Created(string worker, CorrelationToken ct)
         {
-            Raise(new WorkerInitialized(worker, ct));
-        }
-
-        public void Finished(string worker, CorrelationToken? ct = null)
-        {   
-            Raise(new WorkerFinished(worker,ct));            
+            Raise(new WorkerCreated(worker, ct));
         }
 
         public void Running(string worker, CorrelationToken ct)
@@ -40,9 +37,14 @@ namespace Z0.Asm
             Raise(new WfStepRunning(worker, ct));
         }
 
-        public void Ran(string worker, CorrelationToken? ct = null)
+        public void Ran(string worker, CorrelationToken ct)
         {
             Raise(new WfStepFinished(worker, ct));            
+        }
+
+        public void Finished(string worker, CorrelationToken ct)
+        {   
+            Raise(new WorkerFinished(worker, ct));            
         }
 
         public IAppEventSink AppEventSink 

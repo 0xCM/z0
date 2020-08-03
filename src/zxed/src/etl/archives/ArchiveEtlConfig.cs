@@ -46,7 +46,6 @@ namespace Z0
         public FileExtension DataFileExt 
             => FileExtensions.Csv;
 
-
         public xed_ext[] Extensions 
         {
             [Op]

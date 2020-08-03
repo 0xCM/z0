@@ -25,9 +25,12 @@ namespace Z0
             return AppContext.Create(resolved, random, settings, exchange);
         }
         
+        public CorrelationToken Ct {get;}
+        
         public App()
             : base(CreateAppContext())
         {
+            Ct = correlate(1);
         }
 
         void Parse(FilePath src)
@@ -42,7 +45,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {            
             var sink = termsink();
-            var config = new XedEtlConfig(Context, wfconfig(Context,sink));
+            var config = new XedEtlConfig(Context, wfconfig(Context, sink, Ct));
             using var context = new WfContext<XedEtlConfig>(Context, config, sink);
             using var wf = new XedEtl(context);
             wf.Run();                                        

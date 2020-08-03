@@ -12,6 +12,7 @@ namespace Z0
     using static Flow;
     using static z;
 
+    [Event]
     public readonly struct WorkerInitialized : IWfEvent<WorkerInitialized>
     {        
         const string Pattern = IdMarker + "Initialized";

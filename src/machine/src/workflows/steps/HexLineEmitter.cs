@@ -1,98 +1,99 @@
-//-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
-//-----------------------------------------------------------------------------
-namespace Z0
-{
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
+// //-----------------------------------------------------------------------------
+// // Copyright   :  (c) Chris Moore, 2020
+// // License     :  MIT
+// //-----------------------------------------------------------------------------
+// namespace Z0
+// {
+//     using System;
+//     using System.Runtime.CompilerServices;
+//     using System.IO;
 
-    using static Konst;
-    using static Flow;
-    using static z;
+//     using static Konst;
+//     using static Flow;
 
-    public ref struct HexLineEmitter
-    {
-        readonly WfContext Wf;
+//     using static z;
+    
+//     public ref struct EmitHexLines
+//     {
+//         readonly WfContext Wf;
 
-        readonly CorrelationToken Ct;
+//         readonly CorrelationToken Ct;
 
-        readonly HexDataFormatter Formatter;
+//         readonly HexDataFormatter Formatter;
         
-        readonly IPart Part;
+//         readonly IPart Part;
 
-        readonly FilePath TargetPath;
+//         readonly FilePath TargetPath;
         
-        readonly string DataType;
+//         readonly string DataType;
         
-        int LineCount;
+//         int LineCount;
 
-        readonly MemoryAddress BaseAddress;
+//         readonly MemoryAddress BaseAddress;
 
-        ulong Offset;
+//         ulong Offset;
 
-        readonly Span<byte> Buffer;
+//         readonly Span<byte> Buffer;
 
-        bool EmitHeader;
+//         bool EmitHeader;
 
-        char LabelDelimiter;
+//         char LabelDelimiter;
 
-        [MethodImpl(Inline)]
-        public HexLineEmitter(WfContext wf, IPart part, MemoryAddress @base, FilePath dst, CorrelationToken? ct = null)
-        {
-            Wf = wf;
-            Ct = correlate(ct);
-            Part = part;        
-            BaseAddress = @base;
-            Formatter = HexFormatters.data(BaseAddress);
-            DataType = "ImgHex";
-            TargetPath = dst;
-            Buffer = sys.alloc<byte>(32);
-            Offset = 0;
-            LineCount = 0;
-            EmitHeader = true;
-            LabelDelimiter = Chars.Pipe;
-            Wf.Initialized(nameof(HexLineEmitter), Ct);
-        }
+//         [MethodImpl(Inline)]
+//         public EmitHexLines(WfContext wf, IPart part, MemoryAddress @base, FilePath dst, CorrelationToken? ct = null)
+//         {
+//             Wf = wf;
+//             Ct = correlate(ct);
+//             Part = part;        
+//             BaseAddress = @base;
+//             Formatter = HexFormatters.data(BaseAddress);
+//             DataType = "ImgHex";
+//             TargetPath = dst;
+//             Buffer = sys.alloc<byte>(32);
+//             Offset = 0;
+//             LineCount = 0;
+//             EmitHeader = true;
+//             LabelDelimiter = Chars.Pipe;
+//             Wf.Initialized(nameof(EmitHexLines), Ct);
+//         }
 
-        uint Read(BinaryReader reader)
-        {
-            Buffer.Clear();
-            return (uint)reader.Read(Buffer);
-        }
+//         uint Read(BinaryReader reader)
+//         {
+//             Buffer.Clear();
+//             return (uint)reader.Read(Buffer);
+//         }
         
-        public void Run()
-        {
-            var src = FilePath.Define(Part.Owner.Location);            
-            using var stream = src.Reader();
-            using var reader = stream.BinaryReader();
-            using var dst = TargetPath.Writer();
-            if(EmitHeader)
-                dst.WriteLine(text.concat($"Address".PadRight(12), SpacePipe, "Data"));
+//         public void Run()
+//         {
+//             var src = FilePath.Define(Part.Owner.Location);            
+//             using var stream = src.Reader();
+//             using var reader = stream.BinaryReader();
+//             using var dst = TargetPath.Writer();
+//             if(EmitHeader)
+//                 dst.WriteLine(text.concat($"Address".PadRight(12), SpacePipe, "Data"));
 
-            var k = Read(reader);
-            while(k != 0)
-            {
-                dst.WriteLine(Formatter.FormatLine(Buffer, Offset, LabelDelimiter));
+//             var k = Read(reader);
+//             while(k != 0)
+//             {
+//                 dst.WriteLine(Formatter.FormatLine(Buffer, Offset, LabelDelimiter));
                 
-                Offset += k;
-                LineCount++;
+//                 Offset += k;
+//                 LineCount++;
 
-                Buffer.Clear();
-                k = Read(reader);
-            }        
-        }
+//                 Buffer.Clear();
+//                 k = Read(reader);
+//             }        
+//         }
 
-        public void Dispose()
-        {
-            Wf.Emitted(DataType, (uint)LineCount, TargetPath);
-        }
+//         public void Dispose()
+//         {
+//             Wf.Emitted(DataType, (uint)LineCount, TargetPath);
+//         }
 
-        public MemoryAddress OffsetAddress
-        {
-            [MethodImpl(Inline)]
-            get => Offset + BaseAddress;
-        }
-    }
-}
+//         public MemoryAddress OffsetAddress
+//         {
+//             [MethodImpl(Inline)]
+//             get => Offset + BaseAddress;
+//         }
+//     }
+// }

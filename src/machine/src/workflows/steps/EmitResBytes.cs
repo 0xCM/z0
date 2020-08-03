@@ -13,6 +13,7 @@ namespace Z0
     using static Konst;
     using static z;
     
+    [Step(WfStepId.EmitResBytes)]
     public readonly ref struct EmitResBytes
     {            
         const string ProjectName = "bytes";

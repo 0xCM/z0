@@ -9,36 +9,48 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static EmittingDatasetEvent;
 
+    [Event(true)]
+    public readonly struct EmittingDatasetEvent
+    {
+        public const string EventName = nameof(EmittingDataset);
+
+        /// <summary>
+        /// Defines the literal "{0} | {1} | {2} | {3}"
+        /// </summary>
+        public const string Pattern = IdMarker + PS1x3;
+    }
+
+    [Event]
     public readonly struct EmittingDataset : IWfEvent<EmittingDataset>
     {        
-        const string Pattern = IdMarker +  "Emitting {1} dataset to {2}";
-
         public WfEventId Id {get;}
+        
+        public string WorkerName {get;}
 
-        public readonly StringRef DataType;
+        public string DatasetName {get;}
 
         public readonly string TargetPath;
 
         [MethodImpl(Inline)]
-        public EmittingDataset(WfEventId id, string type, FilePath target)
+        public EmittingDataset(string worker, string dsname, FilePath target, CorrelationToken ct)
         {
-            Id = id;
-            DataType = type;
+            WorkerName = worker;
+            Id = wfid(EventName,ct);
+            DatasetName = dsname;
             TargetPath = target.Name;
         }        
 
         [MethodImpl(Inline)]
-        public EmittingDataset(WfEventId id, string type, FolderPath target)
+        public EmittingDataset(string worker, string dsname, FolderPath target, CorrelationToken ct)
         {
-            Id = id;
-            DataType = type;
+            WorkerName = worker;
+            Id = wfid(EventName,ct);
+            DatasetName = dsname;
             TargetPath = target.Name;
         }        
         public string Format()
-            => text.format(Pattern, Id, DataType, TargetPath);
-        
-        public override string ToString()
-            => Format();
+            => text.format(Pattern, Id, WorkerName, DatasetName, TargetPath);               
     }
 }

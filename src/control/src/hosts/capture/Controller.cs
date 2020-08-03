@@ -43,7 +43,7 @@ namespace Z0
             Paths = context.AppPaths;
             Asm = ContextFactory.CreateAsmContext(context);                           
             LogSink = wflog(context);
-            Config = wfconfig(context, LogSink);            
+            Config = wfconfig(context, LogSink, Ct);            
             Wf = wfctx(context, Ct, Config, TermSink);            
             Wf.Initialized(nameof(Controller), Ct);          
         }

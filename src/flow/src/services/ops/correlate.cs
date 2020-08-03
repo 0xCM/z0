@@ -14,5 +14,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static CorrelationToken correlate(CorrelationToken? ct = null)
             => ct ?? CorrelationToken.create();        
+
+        [MethodImpl(Inline), Op]
+        public static CorrelationToken correlate(ulong value)
+            => CorrelationToken.define(value);
     }
 }

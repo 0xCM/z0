@@ -39,12 +39,11 @@ namespace Z0
             return new CaptureWorkflow(asm, wf, decoder, formatter, writer, archive);
         }
 
-        public static WfControl create(IAppContext context, CorrelationToken? ct, params string[] args)
+        public static WfControl create(IAppContext context, CorrelationToken ct, params string[] args)
         {
-            var _ct = correlate(ct);
-            var receiver = termsink(_ct);
-            var wf = wfctx(context, _ct, wfconfig(context, receiver), receiver);
-            return new WfControl(wf, _ct, args);
+            var receiver = termsink(ct);
+            var wf = wfctx(context, ct, wfconfig(context, receiver, ct), receiver);
+            return new WfControl(wf, ct, args);
         }
 
         [MethodImpl(Inline)]

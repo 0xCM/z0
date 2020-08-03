@@ -8,30 +8,40 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static PartRecords;
+    using static EmitBlobsStep;
+    using static Flow;
     using static z;
-    
-    public readonly ref struct EmitBlobRecords
+
+    [Step(WfStepId.EmitBlobs, true)]
+    public readonly struct EmitBlobsStep
     {
+        public const string WorkerName = nameof(EmitBlobs);        
+
+        public const string DatasetName = "Metablobs";
+    }    
+
+    [Step(WfStepId.EmitBlobs)]
+    public ref struct EmitBlobs
+    {
+        public uint EmissionCount;
+
+        public readonly FolderPath TargetDir;
+
         readonly WfContext Wf;
 
-        readonly IPart[] Parts;
-
-        readonly FolderPath TargetDir;
-
-        readonly EmissionDataType DataType;
-
         readonly CorrelationToken Ct;
+
+        readonly IPart[] Parts;
         
         [MethodImpl(Inline)]
-        public EmitBlobRecords(WfContext wf, CorrelationToken ct, IPart[] parts)
+        public EmitBlobs(WfContext wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
             Parts = parts;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("blobs");
-            DataType = EmissionDataType.Blob;
-            Wf.Created(nameof(EmitBlobRecords), ct);
+            EmissionCount = 0;
+            Wf.Created(WorkerName, ct);
         }
 
         public ReadOnlySpan<ImgBlobRecord> Read(IPart part)
@@ -45,10 +55,10 @@ namespace Z0
             var id = part.Id;
             var dstPath =  TargetDir + FileName.Define(id.Format(), "blob.csv");
 
-            Wf.Emitting($"{DataType}", dstPath);            
+            Wf.Emitting(WorkerName, DatasetName, dstPath, Ct);            
 
             var data = Read(part);
-            var count = data.Length;     
+            var count = (uint)data.Length;     
             var target = PartRecords.sink(PartRecordSpecs.Blobs);
 
             for(var i=0u; i<count; i++)
@@ -57,19 +67,25 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(target.Render());
 
-            Wf.Emitted(DataType.ToString(), (uint)count, dstPath);            
-            
+            Wf.Emitted(WorkerName, DatasetName, count, dstPath, Ct);                        
+
+            EmissionCount += count;
         }
         
         public void Run()
         {
+            Wf.RunningT(WorkerName, new {DatasetName, TargetDir}, Ct);
+            
             foreach(var part in Parts)
                 Emit(part);
+
+            Wf.RanT(WorkerName, new {DatasetName, EmissionCount, TargetDir}, Ct);
+
         }
 
         public void Dispose()
         {
-            Wf.Finished(nameof(EmitBlobRecords), Ct);            
+            Wf.Finished(WorkerName, Ct);            
         }
     }
 }

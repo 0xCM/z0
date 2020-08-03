@@ -8,13 +8,19 @@ namespace Z0
     {
         WfEventId Id {get;}
 
-        CorrelationToken ICorrelated.Correlation 
-            => Id.Correlation;
+        CorrelationToken ICorrelated.Ct 
+            => Id.Ct;
     }
 
     public interface IWfEvent<F> : IWfEvent, IAppEvent<F>
         where F : struct, IWfEvent<F>
     {
 
+    }
+
+    public interface IWfEvent<F,T> : IWfEvent<F>
+        where F : struct, IWfEvent<F,T>
+    {
+        T Payload {get;}
     }
 }

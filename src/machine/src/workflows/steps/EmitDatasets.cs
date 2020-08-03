@@ -9,12 +9,19 @@ namespace Z0
     using System.Reflection;
     
     using static Konst;
+    using static Flow;
+    using static EmitDatasetsStep;
 
+    public readonly struct EmitDatasetsStep
+    {
+        public const string WorkerName = nameof(EmitDatasets);
+    }
+    
     public ref partial struct EmitDatasets  
     {
-        public readonly WfContext Context;
+        public readonly WfContext Wf;
 
-        readonly CorrelationToken Correlation;
+        readonly CorrelationToken Ct;
         
         readonly bool Recapture;
 
@@ -23,72 +30,79 @@ namespace Z0
         public EmitDatasets(WfContext context, CorrelationToken ct, params string[] args)
         {
             Args = args;
-            Correlation = ct;
-            Context = context;
+            Ct = ct;
+            Wf = context;
             Recapture = false;
-            Context.Initialized(nameof(EmitDatasets), Correlation);
+            Wf.Initialized(WorkerName, Ct);
         }
         
-        void ExecEmitDocs()
+        void Run(EmitProjectDocsStep kind)
         {
-            using var step = new EmitProjectDocs(Context, Correlation);
-            step.Run();
+            try
+            {
+                using var step = new EmitProjectDocs(Wf, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
         }
 
         void EmitBytes()
         {
-            using var step = EmitResBytes.create(Context, Correlation);
+            using var step = EmitResBytes.create(Wf, Ct);
             step.Run();
         }
 
         void CaptureEmissions()
         {
-            var capture = ContextFactory.WfCapture(Context, Correlation);
-            using var step = new AccessorCapture(capture);
+            var capture = ContextFactory.WfCapture(Wf, Ct);
+            using var step = new RecaptureAccessors(capture);
             step.CaptureResBytes();        
         }
 
         void EmitMetadata()
         {
-            using var step = new EmitMetadataSets(Context, Correlation);
+            using var step = new EmitClrMetadataSets(Wf, Ct);
             step.Run();
         }
 
         void EmitEnumDatasets()
         {
-            using var step = new EmitEnumData(Context, Correlation);
+            using var step = new EmitEnumData(Wf, Ct);
             step.Run();
         }
         
         void EmitLiterals()
         {
-            using var step = new EmitFieldLiterals(Context, Correlation);
+            using var step = new EmitFieldLiterals(Wf, Ct);
             step.Run();
 
         }
 
         void EmitCatalog()
         {
-            using var step = new EmitContentCatalog(Context, Correlation);
+            using var step = new EmitContentCatalog(Wf, Ct);
             step.Run();
         }
 
         void EmitBitMasks()
         {
-            using var step = new EmitBitMasks(Context, Correlation);
+            using var step = new EmitBitMasks(Wf, Ct);
             step.Run();
         }
                         
         public CodeResourceIndex Load()
-            => Resources.code(Assembly.LoadFrom(Context.AppPaths.ResBytes.Name));
+            => Resources.code(Assembly.LoadFrom(Wf.AppPaths.ResBytes.Name));
         
         public void Run(params string[] args)
         {
             EmitBitMasks();
             EmitMetadata();        
-            ExecEmitDocs();
+            Run(default(EmitProjectDocsStep));
             EmitBytes();            
-            //CaptureEmissions();            
+            CaptureEmissions();            
             EmitEnumDatasets();
             EmitLiterals();
             EmitCatalog();
@@ -96,7 +110,7 @@ namespace Z0
  
         public void Dispose()
         {
-            Context.Finished(nameof(EmitDatasets), Correlation);
+            Wf.Finished(nameof(EmitDatasets), Ct);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Z0.Asm
         {
             Wf = state;
             Ct = correlate(ct);
-            Wf.Initialized(nameof(ExtractMembersStep), Ct);
+            Wf.Created(nameof(ExtractMembersStep), Ct);
         }
 
         public void Dispose()

@@ -11,13 +11,19 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static EmitImageContentStep;
+
     using static z;
     
+    [Step(WfStepId.EmitImageContent, true)]
+    public readonly struct EmitImageContentStep
+    {
+        public const string WorkerName = nameof(EmitImageContent);
+    }    
     
+    [Step(WfStepId.EmitImageContent)]
     public readonly ref struct EmitImageContent
     {    
-        public readonly EmissionDataType DataType;
-
         readonly WfContext Wf;
 
         readonly CorrelationToken Ct;
@@ -28,26 +34,22 @@ namespace Z0
         
         readonly FolderPath TargetDir;
         
-        readonly FilePath PartSummaryPath;
-
         readonly FilePath ImageSummaryPath;
 
         [MethodImpl(Inline)]
-        public EmitImageContent(WfContext wf, IPart[] parts, CorrelationToken? ct = null)
+        public EmitImageContent(WfContext wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
-            Ct = correlate(ct);
+            Ct = ct;
             Parts = parts;
-            DataType = EmissionDataType.PartDat;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("images");
-            PartSummaryPath = Wf.IndexRoot + FileName.Define("machine.images.parts", FileExtensions.Csv);
             ImageSummaryPath = Wf.IndexRoot + FileName.Define("machine.images", FileExtensions.Csv);
             var process = Process.GetCurrentProcess();
             Images = process.Modules.Cast<ProcessModule>().Map(image).OrderBy(x => x.BaseAddress);
-            Wf.Created(nameof(EmitImageContent), Ct);
+            Wf.Created(WorkerName, Ct);
         }
 
-        public static LocatedImage image(ProcessModule src)
+        static LocatedImage image(ProcessModule src)
         {
             var path = FilePath.Define(src.FileName);
             var part = TableEmission.part(path);
@@ -60,8 +62,7 @@ namespace Z0
         FilePath TargetPath(IPart part)
             => TargetDir + FileName.Define(part.Format(), FileExtension.Define("csv"));
             
-
-        public static void Summarize(LocatedImages src, FilePath dst)
+        static void Summarize(LocatedImages src, FilePath dst)
         {            
             var system = zdat.SystemImages;
             var count = src.Count;
@@ -120,25 +121,29 @@ namespace Z0
                 
         public void Run()
         {  
+             Wf.Running(WorkerName, Ct);
+
              var index = z.span<LocatedPart>(Parts.Length);
              var source = z.span(Parts);
              for(var i=0u; i< Parts.Length; i++)
              {
                 ref readonly var part = ref z.skip(source, i);
                 var @base = part.BaseAddress();                 
-                using var step = new EmitHexLineFile(Wf, part, @base, TargetPath(part), Ct);
+             
+                using var step = new EmitPeImage(Wf, part, @base, TargetPath(part), Ct);
                 step.Run();
-
+             
                 z.seek(index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
-
              }
             
             Summarize(Images, ImageSummaryPath);
+
+            Wf.Ran(WorkerName, Ct);
         }
 
         public void Dispose()
         {
-             Wf.Finished(nameof(EmitImageContent), Ct);
+             Wf.Finished(WorkerName, Ct);
         }
     }
 }

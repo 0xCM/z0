@@ -10,6 +10,13 @@ namespace Z0
     using static Konst;
     using static Flow;
 
+    [Event(true)]
+    public readonly struct ClosingWfContextEvent
+    {
+        public const string EventName = nameof(ClosingWfContext);
+    }
+    
+    [Event]
     public readonly struct ClosingWfContext : IWfEvent<ClosingWfContext>
     {
         const string Pattern = IdMarker + "Closing workflow context {1}";
