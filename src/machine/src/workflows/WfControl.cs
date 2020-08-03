@@ -91,7 +91,7 @@ namespace Z0
 
         bool CaptureArtifacts => false;
         
-        bool EmitDatasets => false;
+        bool EmitDatasets => true;
 
         bool RunMachine => true;
     }
