@@ -9,26 +9,29 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Konst;
+    using static Flow;
 
     public readonly struct CaptureHostStep : ICaptureHostStep, IDisposable
     {
-        public CaptureState State {get;}
+        public CaptureState Wf {get;}
         
         public ICaptureWorkflow CWf {get;}
 
+        public CorrelationToken Ct {get;}
 
         [MethodImpl(Inline)]
-        public static CaptureHostStep create(CaptureState state)
-            => new CaptureHostStep(state);
+        public static CaptureHostStep create(CaptureState state, CorrelationToken? ct = null)
+            => new CaptureHostStep(state, ct);
 
         public ICaptureContext Context 
             => CWf.Context;
         
         [MethodImpl(Inline)]
-        internal CaptureHostStep(CaptureState state)
+        internal CaptureHostStep(CaptureState state, CorrelationToken? ct = null)
         {
-            State = state;
-            CWf = state.CWf;
+            Ct = correlate(ct);
+            Wf = state;
+            CWf = state.CWf;            
         }
 
 
@@ -36,49 +39,7 @@ namespace Z0.Asm
         {
             
         }
-        
-        public void Capture(IApiHost[] hosts, TPartCaptureArchive dst)
-        {
-            State.Raise(new CapturingHosts(hosts));            
-            
-            using var step = ExtractMembersStep.create(State);
-            var extracts = step.ExtractMembers(hosts);            
-            //var extracts = CWf.ExtractMembers.ExtractMembers(hosts);
-            if(extracts.Length == 0)
-                return;
-
-            var grouped = extracts.GroupBy(x => x.Member.HostUri).Select(x => (x.Key, x.Array())).Array();
-            foreach(var g in grouped)
-            {
-                var host = g.Key;
-                Store(g.Key, g.Item2, dst);
-            }
-        }
-
-        void Store(ApiHostUri host, ExtractedCode[] extracts, TPartCaptureArchive dst)
-        {
-            var paths = HostCaptureArchive.create(dst.ArchiveRoot, host);
-            var extractRpt = CWf.ReportExtracts.CreateExtractReport(host, extracts);
-            CWf.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
-
-            var parsed = CWf.ParseMembers.Parse(host, extracts);
-            if(parsed.Length == 0)
-                State.Status($"No {host} members were parsed");
-
-            if(parsed.Length != 0)
-            {                        
-                CWf.ReportParsed.Emit(host, parsed, paths.ParsedPath);
-                CWf.ParseMembers.SaveHex(host, parsed, paths.HexPath);
-
-                var decoded = CWf.DecodeParsed.DecodeParsed(host,parsed);
-                if(decoded.Length != 0)
-                {
-                    CWf.DecodeParsed.SaveDecoded(decoded, paths.AsmPath);
-                    CWf.MatchAddresses.Run(host, extracts, decoded);
-                }
-            }
-        }
-        
+                
         public void Execute(IApiHost host, TPartCaptureArchive dst)
         {
             try
@@ -87,7 +48,7 @@ namespace Z0.Asm
                 if(host.PartId.IsNone())
                     return;
 
-                using var xStep = ExtractMembersStep.create(State);
+                using var xStep = new ExtractMembersStep(Wf, Ct);
                 var extracts = xStep.ExtractMembers(host);
                 //var extracts = CWf.ExtractMembers.ExtractMembers(host);
 
@@ -99,7 +60,7 @@ namespace Z0.Asm
 
                 var parsed = CWf.ParseMembers.Parse(host.Uri, extracts);
                 if(parsed.Length == 0)
-                    State.Status($"No {host.Uri} members were parsed");
+                    Wf.Status($"No {host.Uri} members were parsed");
                     
                 if(parsed.Length != 0)
                 {                        
@@ -116,7 +77,7 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                State.Raise(new AppErrorEvent(e));
+                Wf.Raise(new AppErrorEvent(e));
             }
         }      
     }

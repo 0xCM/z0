@@ -26,9 +26,6 @@ namespace Z0.Asm
         IMemberExtractor ICaptureServices.HostExtractor(int bufferlen)
             => MemberExtraction.service(bufferlen);
 
-        // IImmEmissionWorkflow ImmEmissionWorkflow(IMultiSink sink, IApiSet api, PartWfConfig config)        
-        //     => new ImmEmissionWorkflow(Context, sink, Formatter(), AsmDecoder(), api, config.Target.ArchiveRoot);
-
         IImmEmissionWorkflow ImmEmissionWorkflow(IMultiSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, PartWfConfig config, CorrelationToken? ct = null)        
             => new ImmEmissionWorkflow(Context, sink, formatter, decoder, api, config.Target.ArchiveRoot, ct);
     }

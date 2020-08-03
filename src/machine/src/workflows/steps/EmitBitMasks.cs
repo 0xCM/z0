@@ -19,13 +19,16 @@ namespace Z0
     {
         readonly WfContext Wf;
 
-        readonly CorrelationToken Ct;
+        readonly CorrelationToken Ct;        
+        
+        readonly FilePath TargetPath;
         
         [MethodImpl(Inline)]
         public EmitBitMasks(WfContext context, CorrelationToken? ct = null)
         {
             Wf = context;
             Ct = correlate(ct);
+            TargetPath = Wf.IndexRoot + FileName.Define("bitmasks", FileExtensions.Csv);;
             Wf.Initialized(nameof(EmitBitMasks), Ct);
         }
 
@@ -42,10 +45,9 @@ namespace Z0
 
         void emit(Type src)
         {
-            var dst = Wf.AppPaths.ResourceRoot + FolderName.Define("index") + FileName.Define("Bitmasks", FileExtensions.Csv);
             var literals = span(find(src));
             var formatter = NumericLiteralFormatter.Service;            
-            using var writer = dst.Writer();
+            using var writer = TargetPath.Writer();
             writer.WriteLine(formatter.HeaderText);
             for(var i=0u; i <literals.Length; i++)
             {

@@ -8,27 +8,27 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static Konst;
+    using static Flow;
 
     using F = EnumLiteralField;
 
     public readonly ref struct EmitEnumData
     {
-        readonly WfContext Context;
+        readonly WfContext Wf;
 
-        readonly CorrelationToken Correlation;
+        readonly CorrelationToken Ct;
+
+        readonly FilePath TargetPath;
         
         [MethodImpl(Inline)]
         public EmitEnumData(WfContext context, CorrelationToken? ct = null)
         {
-            Context = context;
-            Correlation = ct ?? CorrelationToken.create();
-            Context.Running(nameof(EmitEnumData));    
+            Wf = context;
+            Ct = correlate(ct);
+            TargetPath = Wf.IndexRoot + FileName.Define("enums",FileExtensions.Csv);
+            Wf.Created(nameof(EmitEnumData), Ct);    
         }
         
-        FolderPath DatasetRoot 
-            => Context.AppPaths.ResourceRoot + FolderName.Define("enums");
-
-
         public void format(in EnumLiteralRecord src, TableFormatter<EnumLiteralField> dst)
         {
             dst.Append(F.PartId, src.PartId);
@@ -44,10 +44,7 @@ namespace Z0
         }
 
         public void Run()
-        {            
-
-            DatasetRoot.Clear();
-                        
+        {                                    
             var src = from part in  KnownParts.Service.Known
                        let enums = part.Owner.Enums()
                         orderby part.Id
@@ -70,21 +67,20 @@ namespace Z0
             var m = dst.ToArray();
             Array.Sort(m);
             
-            var path = DatasetRoot + FileName.Define("EnumSummary",FileExtensions.Csv);
             var formatter = TableFormatters.create<EnumLiteralField>();
             formatter.EmitHeader();
             for(var i=0; i<m.Length; i++)
                 format(m[i],formatter);
 
-            using var writer = path.Writer();
+            using var writer = TargetPath.Writer();
             writer.Write(formatter.Format());
 
-            Context.Raise(new EmittedEnumSummary(path, (uint)m.Length));
+            Wf.Raise(new EmittedEnumSummary(TargetPath, (uint)m.Length, Ct));
         }    
 
         public void Dispose()
         {
-            Context.Ran(nameof(EmitEnumData), Correlation);    
+            Wf.Finished(nameof(EmitEnumData), Ct);    
         }
     }    
 }

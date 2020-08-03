@@ -54,7 +54,7 @@ namespace Z0.Asm
             => new AsmImmInfo(W64, value, direct, sek);
 
         [MethodImpl(Inline)]
-        internal AsmImmInfo(NumericWidth size, ulong value, bool direct, SignExensionKind? sek = null)
+        public AsmImmInfo(NumericWidth size, ulong value, bool direct, SignExensionKind? sek = null)
         {
             Width = size;
             Value = value;
@@ -64,7 +64,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        internal AsmImmInfo(NumericWidth size, long value, bool direct, SignExensionKind? sek = null)
+        public AsmImmInfo(NumericWidth size, long value, bool direct, SignExensionKind? sek = null)
         {
             Width = size;
             Value = (ulong)value;

@@ -8,40 +8,39 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
 
     public readonly ref struct ExtractMembersStep
     {
-        public static ExtractMembersStep create(CaptureState state)
-            => new ExtractMembersStep(state);
-                
-        readonly CaptureState State;
+        readonly CorrelationToken Ct;
+
+        readonly CaptureState Wf;
         
         ICaptureWorkflow CWf 
-             => State.CWf;
+             => Wf.CWf;
 
         public ICaptureContext Context 
             => CWf.Context;
+        
+        [MethodImpl(Inline)]
+        public ExtractMembersStep(CaptureState state, CorrelationToken? ct = null)
+        {
+            Wf = state;
+            Ct = correlate(ct);
+            Wf.Initialized(nameof(ExtractMembersStep), Ct);
+        }
 
         public void Dispose()
         {
-
+            Wf.Finished(nameof(ExtractMembersStep), Ct);
         }
-        
-        [MethodImpl(Inline)]
-        internal ExtractMembersStep(CaptureState state)
-        {
-            State = state;
-        }
-
-        ApiMember[] jit(IApiHost host)
-            => ApiMemberJit.jit(host);
 
         ApiMember[] jit(IApiHost[] hosts)
-            => ApiMemberJit.jit(hosts, State.AppEventSink);
+            => ApiMemberJit.jit(hosts, Wf.AppEventSink);
         
-        ExtractedCode[] extract(ICaptureContext context, IApiHost host)
+        ExtractedCode[] Extract(ICaptureContext context, IApiHost host)
         {            
-            var members = jit(host);
+            var members = ApiMemberJit.jit(host);
             context.Raise(new MembersLocated(host.Uri, members));            
             return Extractor.Extract(members);
         }
@@ -51,12 +50,12 @@ namespace Z0.Asm
             var extracted = sys.empty<ExtractedCode>();            
             try
             {
-                extracted = extract(Context,host); 
+                extracted = Extract(Context,host); 
                 Context.Raise(new ExtractedMembers(host.Uri, extracted.Length));
             }
             catch(Exception e)
             {
-                Context.Raise(new WorkflowError($"{host.Uri} extract failure", e));
+                Wf.Raise(new WorkflowError($"{host.Uri} extract failure", e));
             }
             return extracted;
         }
@@ -66,8 +65,8 @@ namespace Z0.Asm
             var extracted = sys.empty<ExtractedCode>();            
             try
             {
-                var members = jit(hosts);
-                State.Raise(new JittedMembers(hosts, members));
+                var members = ApiMemberJit.jit(hosts, Wf.WfEventSink);
+                Wf.Raise(new JittedMembers(hosts, members));
                 return Extractor.Extract(members);
             }
             catch(Exception e)

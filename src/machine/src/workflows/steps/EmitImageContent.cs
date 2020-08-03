@@ -10,13 +10,17 @@ namespace Z0
     using System.Diagnostics;
 
     using static Konst;
+    using static Flow;
     using static z;
+    
     
     public readonly ref struct EmitImageContent
     {    
         public readonly EmissionDataType DataType;
 
         readonly WfContext Wf;
+
+        readonly CorrelationToken Ct;
 
         readonly IPart[] Parts;
 
@@ -29,17 +33,18 @@ namespace Z0
         readonly FilePath ImageSummaryPath;
 
         [MethodImpl(Inline)]
-        public EmitImageContent(WfContext wf, IPart[] parts)
+        public EmitImageContent(WfContext wf, IPart[] parts, CorrelationToken? ct = null)
         {
             Wf = wf;
+            Ct = correlate(ct);
             Parts = parts;
             DataType = EmissionDataType.PartDat;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("images");
-            Wf.Running(nameof(EmitImageContent));
-            PartSummaryPath = wf.AppPaths.BuildStage + FileName.Define("machine.images.parts", FileExtensions.Csv);
-            ImageSummaryPath = wf.AppPaths.BuildStage + FileName.Define("machine.images", FileExtensions.Csv);
+            PartSummaryPath = Wf.IndexRoot + FileName.Define("machine.images.parts", FileExtensions.Csv);
+            ImageSummaryPath = Wf.IndexRoot + FileName.Define("machine.images", FileExtensions.Csv);
             var process = Process.GetCurrentProcess();
             Images = process.Modules.Cast<ProcessModule>().Map(image).OrderBy(x => x.BaseAddress);
+            Wf.Created(nameof(EmitImageContent), Ct);
         }
 
         public static LocatedImage image(ProcessModule src)
@@ -55,6 +60,7 @@ namespace Z0
         FilePath TargetPath(IPart part)
             => TargetDir + FileName.Define(part.Format(), FileExtension.Define("csv"));
             
+
         public static void Summarize(LocatedImages src, FilePath dst)
         {            
             var system = zdat.SystemImages;
@@ -62,15 +68,25 @@ namespace Z0
             var images = src.View;
             var fields = TableEmission.fields<LocatedImageField>();
             var header = TableEmission.header(fields);
+            var summaries = span<ProcessImageSummary>(count);
 
             var rows = text.build();
             rows.AppendLine(header);
             for(var i=0u; i<count; i++)
             {
-                ref readonly var image = ref z.skip(images, i);
+                ref readonly var image = ref skip(images, i);
+                ref var summary = ref seek(summaries,i);
+
                 var name = image.Name;
                 var match = system.First((in SystemImageSymbol r) => r.Name == name);
                 var symbolic = match.IsSome() ? match.Value.Identifier : image.Name.Replace("z0.", EmptyString);
+
+                summary.ImageId = symbolic;
+                summary.PartId = image.PartId;
+                summary.EntryAddress = image.EndAddress;
+                summary.BaseAddress = image.BaseAddress;
+                summary.EndAddress = image.EndAddress;
+                summary.Size = image.Size;
 
                 rows.Append(symbolic.PadRight(fields[0].Width));
                 rows.Append(SpacePipe);
@@ -91,6 +107,7 @@ namespace Z0
                 {
                     ref readonly var prior = ref skip(images, i - 1);
                     var gap = (ulong)(image.BaseAddress - prior.EndAddress);
+                    summary.Gap = gap;
                     rows.Append(gap.ToString("#,#"));
                 }
 
@@ -107,9 +124,9 @@ namespace Z0
              var source = z.span(Parts);
              for(var i=0u; i< Parts.Length; i++)
              {
-                ref readonly var part = ref z.skip(source,i);
+                ref readonly var part = ref z.skip(source, i);
                 var @base = part.BaseAddress();                 
-                using var step = new EmitHexLineFile(Wf, part, @base, TargetPath(part));
+                using var step = new EmitHexLineFile(Wf, part, @base, TargetPath(part), Ct);
                 step.Run();
 
                 z.seek(index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
@@ -121,24 +138,7 @@ namespace Z0
 
         public void Dispose()
         {
-             Wf.Ran(nameof(EmitImageContent));
-       }
-    }
-
-    partial class XTend
-    {
-        public static T? First<T>(this ReadOnlySpan<T> src, ValuePredicate<T> predicate)
-            where T : struct
-        {
-            var count = src.Length;
-            ref readonly var start = ref z.first(src);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var candidate = ref z.skip(start,i);
-                if(predicate(candidate))
-                    return candidate;
-            }
-            return null;
+             Wf.Finished(nameof(EmitImageContent), Ct);
         }
     }
 }

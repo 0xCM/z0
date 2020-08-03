@@ -12,7 +12,7 @@ namespace Z0.Asm
     public readonly struct AsmBranchTarget : INullity, INullary<AsmBranchTarget>, ITextual
     {
         [MethodImpl(Inline)]
-        public static AsmBranchTarget Define(BranchTargetKind kind, BranchTargetSize size, MemoryAddress address, ushort selector = 0)
+        public static AsmBranchTarget define(BranchTargetKind kind, BranchTargetSize size, MemoryAddress address, ushort selector = 0)
             => new AsmBranchTarget(kind,size,address,selector);
 
         /// <summary>

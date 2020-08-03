@@ -21,7 +21,7 @@ call zdata.exe
 set Cmd="%Wf%/wf-10-respack.bat"
 call %Cmd%
 
-set Cmd="wf\wf-deposit.bat"
+set Cmd="wf\wf-archive.bat"
 call %Cmd%
 
 set Cmd="commit.bat"

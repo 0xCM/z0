@@ -9,6 +9,7 @@ namespace Z0.Asm
     using System.Reflection;
 
     using static Konst;
+    using static Flow;
     
     using E = ImmInjectionFailed;
 

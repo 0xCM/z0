@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    
     using F = ContentLibField;
 
     public readonly ref struct EmitContentCatalog
@@ -26,7 +27,7 @@ namespace Z0
         {
             Wf = wf;
             Ct = correlate(ct);
-            Target =  Wf.AppPaths.ResIndexDir + FileName.Define("catalog", FileExtensions.Csv);
+            Target =  Wf.IndexRoot + FileName.Define("catalog", FileExtensions.Csv);
             Count = new uint[1]{0};
             Wf.Running(nameof(EmitContentCatalog), Ct);
         }

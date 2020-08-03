@@ -9,64 +9,35 @@ namespace Z0
     using System.Linq;
 
     using static Konst;     
-
-    using MK = EmissionDataType;
+    using static Flow;
     
     public readonly ref struct EmitMetadataSets
     {
-        public FolderPath TargetDir {get;}
+        public readonly WfContext Wf;
 
         readonly CorrelationToken Ct;
-
-        public readonly WfContext Wf;
         
-        readonly FolderPath ResRoot;
+        readonly FolderPath TargetRoot;
         
         readonly IPart[] Parts;
 
         readonly PartSink Sink;
 
-        public WfKind WfKind
-            => WfKind.MetadataEmission;
         
         public EmitMetadataSets(WfContext context, CorrelationToken? ct = null)
         {            
             Wf = context;
-            Ct = ct ?? CorrelationToken.create();
-            ResRoot = AppPaths.Default.ResourceRoot;
-            TargetDir = ResRoot + FolderName.Define("metadata");
+            Ct = correlate(ct);
+            TargetRoot = AppPaths.Default.ResourceRoot;
             Parts = KnownParts.Service.Known.ToArray();
             Sink = new PartSink(context.ContextRoot);
             Wf.Created(nameof(EmitMetadataSets), Ct);
-        }
-
-        public void Deposit(IAppEvent src)
-        {
-            term.print(src);
-            Sink.Deposit(src);
-        }
-
-        IImgMetadataReader Reader(string src)
-            => ImgMetadataReader.open(FilePath.Define(src));
-
-        FilePath TargetPath(PartId part, ImgRecordKind rk, MK mk)
-            => TargetDir +  PartDataEmitters.filename(mk, rk);
-
-        FolderPath PrepareTarget()
-        {            
-            var target = TargetDir;
-            PartDataEmitters.running(target,Wf.ContextRoot);
-            target.Create().Clear();
-            PartDataEmitters.ran(target, Wf.ContextRoot);            
-            return target;
         }
         
         public void Run()
         {
             Wf.Running(nameof(EmitMetadataSets), Ct);
-            
-            PrepareTarget();            
-            
+                                    
             {
                 using var emitter = new EmitConstantRecords(Wf, Parts);
                 emitter.Run();

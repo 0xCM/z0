@@ -13,10 +13,6 @@ namespace Z0
     
     public struct WfContext : IWfContext<WfConfig>
     {
-        [MethodImpl(Inline)]
-        public static WfContext create(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink)
-            => new WfContext(root, ct, config, sink);
-
         long CtProvider;
 
         readonly ulong SessionId;
@@ -43,6 +39,9 @@ namespace Z0
             Broker = new WfBroker(root.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
             TermSink.Deposit(new OpeningWfContext(typeof(WfContext), Ct));
         }
+
+        public FolderPath IndexRoot 
+            => ContextRoot.AppPaths.ResourceRoot + FolderName.Define("index");
 
 
         public void Dispose()

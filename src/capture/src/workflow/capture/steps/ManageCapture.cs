@@ -46,7 +46,7 @@ namespace Z0.Asm
         internal ManageCaptureStep(ICaptureWorkflow cwf, PartWfConfig config, WfTermEventSink sink, CorrelationToken? ct)
         {
             TermSink = sink;
-            State = new CaptureState(cwf, config, sink, ct);
+            State = new CaptureState(cwf, config, ct);
             Ct = ct ?? CorrelationToken.create();
             CWf = cwf;
             Wf = config.Context;
@@ -105,8 +105,10 @@ namespace Z0.Asm
                 Status($"Consolidated {hosts.Length} hosts");    
                 
                 var dst = Archives.Services.CaptureArchive(Config.Target.ArchiveRoot); 
-                using var step = CaptureHostStep.create(State);
-                step.Capture(hosts, dst);
+                using var step = new CaptureHosts(State, hosts, dst, Ct);
+                step.Run();
+                // using var step = CaptureHostStep.create(State);
+                // step.Capture(hosts, dst);
 
             }
             catch(Exception e)

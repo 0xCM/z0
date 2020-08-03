@@ -19,9 +19,7 @@ namespace Z0
             Consolidate(parts);
             Wf.Ran(nameof(CaptureHost), Ct);
         }
-
-
-
+        
         readonly CorrelationToken Ct;
 
         readonly WfContext Wf;

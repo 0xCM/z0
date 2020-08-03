@@ -14,6 +14,10 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmBranchInfo : INullity, INullary<AsmBranchInfo>, IRender
     {        
+        [MethodImpl(Inline)]
+        public static AsmBranchInfo define(MemoryAddress @base, Instruction inxs, AsmBranchTarget target)
+            => new AsmBranchInfo(inxs, @base, inxs.IP, target, Offset(inxs.IP, inxs.ByteLength, target.TargetAddress));
+
         public Instruction Instruction {get;}
         
         public MemoryAddress Base {get;}
@@ -46,12 +50,9 @@ namespace Z0.Asm
         static uint Offset(MemoryAddress src, int inxsSize, MemoryAddress dst)
             => (uint)(dst - (src + inxsSize));
 
-        [MethodImpl(Inline)]
-        public static AsmBranchInfo Define(MemoryAddress @base, Instruction inxs, AsmBranchTarget target)
-            => new AsmBranchInfo(inxs, @base, inxs.IP, target, Offset(inxs.IP, inxs.ByteLength, target.TargetAddress));
 
         [MethodImpl(Inline)]
-        AsmBranchInfo(Instruction inxs, MemoryAddress @base, MemoryAddress src, AsmBranchTarget target, uint offset)
+        public AsmBranchInfo(Instruction inxs, MemoryAddress @base, MemoryAddress src, AsmBranchTarget target, uint offset)
         {            
             Instruction = inxs;
             Base = @base;

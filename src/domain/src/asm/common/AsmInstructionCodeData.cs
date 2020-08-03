@@ -20,12 +20,6 @@ namespace Z0.Asm
             this.Data = src;
         }
         
-        public ReadOnlySpan<char> Content
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }    
-
         public string Format()
             => Data;        
 

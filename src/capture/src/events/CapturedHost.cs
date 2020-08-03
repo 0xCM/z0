@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
 
     public readonly struct CapturedHost : IWfEvent<CapturedHost>
     {            
@@ -18,7 +19,7 @@ namespace Z0.Asm
         public readonly ApiHostUri Host;
 
         [MethodImpl(Inline)]
-        public CapturedHost(ApiHostUri host)
+        public CapturedHost(ApiHostUri host, CorrelationToken? ct = null)
             => Host = host;
 
         public string Format() 

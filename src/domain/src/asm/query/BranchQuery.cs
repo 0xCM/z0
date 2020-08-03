@@ -51,20 +51,20 @@ namespace Z0.Asm
             switch(k)
             {
                 case NearBranch16:
-                    return AsmBranchTarget.Define(BranchTargetKind.Near, BranchTargetSize.Branch16, src.NearBranch16);
+                    return AsmBranchTarget.define(BranchTargetKind.Near, BranchTargetSize.Branch16, src.NearBranch16);
                 case NearBranch32:
-                    return AsmBranchTarget.Define(BranchTargetKind.Near, BranchTargetSize.Branch32, src.NearBranch32);
+                    return AsmBranchTarget.define(BranchTargetKind.Near, BranchTargetSize.Branch32, src.NearBranch32);
                 case NearBranch64:
-                    return AsmBranchTarget.Define(BranchTargetKind.Near, BranchTargetSize.Branch64, src.NearBranch64);
+                    return AsmBranchTarget.define(BranchTargetKind.Near, BranchTargetSize.Branch64, src.NearBranch64);
                 case FarBranch16:
-                    return AsmBranchTarget.Define(BranchTargetKind.Far, BranchTargetSize.Branch16, src.FarBranch16, src.FarBranchSelector);
+                    return AsmBranchTarget.define(BranchTargetKind.Far, BranchTargetSize.Branch16, src.FarBranch16, src.FarBranchSelector);
                 case FarBranch32:
-                    return AsmBranchTarget.Define(BranchTargetKind.Far, BranchTargetSize.Branch32, src.FarBranch32, src.FarBranchSelector);
+                    return AsmBranchTarget.define(BranchTargetKind.Far, BranchTargetSize.Branch32, src.FarBranch32, src.FarBranchSelector);
             }
             return AsmBranchTarget.Empty;
         }
 
         public AsmBranchInfo BranchInfo(MemoryAddress @base, Instruction src, int index)
-            => AsmBranchInfo.Define(@base, src, BranchTarget(src,index));        
+            => AsmBranchInfo.define(@base, src, BranchTarget(src,index));        
     }  
 }

@@ -46,7 +46,7 @@ namespace Z0.Asm
         public bool Include(InstructionSink sink)
             => Handlers.Include(sink);
 
-        public void Flow(params AsmFunction[]  src)
+        public void Flow(params AsmFunction[] src)
         {
             var count = src.Length;
             ref readonly var f = ref first(span(src));

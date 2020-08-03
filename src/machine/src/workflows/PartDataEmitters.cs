@@ -63,14 +63,5 @@ namespace Z0
             else
                 return FileExtension.Define($"{ExtX(type)}.{FileExtensions.Csv}");
         }
-
-        public static FileName filename(DataType type, ImgRecordKind rk)
-            => FileName.Define($"{rk.ToString().ToLower()}", type.Ext());
-        
-        public static void running(FolderPath path, IAppContext dst)        
-            => dst.Deposit(create("prepare", $"Preparing archive {path}", StartFlair));
-
-        public static void ran(FolderPath path, IAppContext dst)        
-            => dst.Deposit(create("prepared", $"Prepared archive {path}", EndFlair));
     }
 }

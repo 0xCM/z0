@@ -144,16 +144,6 @@ namespace Z0
                 let uri = OpUri.Define(OpUriScheme.Type, src.Uri, m.Name, id)
                 select new ApiMember(uri, reified, m.KindId())).Array();
 
-        // static MethodInfo[] GenericMethods(IApiHost src)
-        //     => from m in src.HostType.DeclaredMethods().OpenGeneric(1)
-        //         where m.Tagged<OpAttribute>() 
-        //         && m.Tagged<ClosuresAttribute>() 
-        //         && !m.AcceptsImmediate()
-        //         select m;
-
-        // static MethodInfo[] DirectMethods(IApiHost src)
-        //     => from m in src.HostType.DeclaredMethods().NonGeneric() where m.Tagged<OpAttribute>() && !m.AcceptsImmediate() select m;
-
         static HostedMethod[] DirectMethods(IApiHost host)
             => host.HostType.DeclaredMethods().NonGeneric().Where(IsDirectApiMember).Select(m => new HostedMethod(host.Uri, m));
 

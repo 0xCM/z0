@@ -18,8 +18,6 @@ namespace Z0
 
         IAsmFunctionDecoder Decoder {get;}
 
-        IAsmFormatter Formatter {get;}
-
         FolderPath TargetRoot 
             => AsmContext.AppPaths.AppDataRoot;
     }

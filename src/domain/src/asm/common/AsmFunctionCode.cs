@@ -12,7 +12,7 @@ namespace Z0.Asm
     public readonly struct AsmFunctionCode
     {
         public static AsmFunctionCode Empty 
-            => new AsmFunctionCode(AsmFunction.Empty, CapturedCode.Empty);
+            => default;
         
         public AsmFunction Function {get;}
 

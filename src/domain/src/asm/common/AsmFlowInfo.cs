@@ -6,38 +6,38 @@ namespace Z0.Asm
 {        
     public struct AsmFlowInfo
     {
-        public OpCodeId Code {get; set;}
+        public OpCodeId Code;
 
-        public ConditionCode ConditionCode {get; set;}
+        public ConditionCode ConditionCode;
 
-        public bool IsStackInstruction {get; set;} 
+        public bool IsStackInstruction; 
                 
-        public FlowControl FlowControl {get; set;}
+        public FlowControl FlowControl;
         
-        public bool IsJccShortOrNear {get; set;}
+        public bool IsJccShortOrNear;
         
-        public bool IsJccNear {get; set;}
+        public bool IsJccNear;
         
-        public bool IsJccShort {get; set;}
+        public bool IsJccShort;
         
-        public bool IsJmpShort {get; set;}
+        public bool IsJmpShort;
         
-        public bool IsJmpNear {get; set;}
+        public bool IsJmpNear;
         
-        public bool IsJmpShortOrNear {get; set;}
+        public bool IsJmpShortOrNear;
         
-        public bool IsJmpFar {get; set;}
+        public bool IsJmpFar;
         
-        public bool IsCallNear {get; set;}
+        public bool IsCallNear;
         
-        public bool IsCallFar {get; set;}
+        public bool IsCallFar;
         
-        public bool IsJmpNearIndirect {get; set;}
+        public bool IsJmpNearIndirect;
         
-        public bool IsJmpFarIndirect {get; set;}
+        public bool IsJmpFarIndirect;
         
-        public bool IsCallNearIndirect {get; set;}
+        public bool IsCallNearIndirect;
         
-        public bool IsCallFarIndirect {get; set;}
+        public bool IsCallFarIndirect;
     }
 }

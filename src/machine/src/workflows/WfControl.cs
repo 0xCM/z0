@@ -21,6 +21,7 @@ namespace Z0
 
         readonly WfContext Wf;
         
+        readonly IAsmContext Asm;
         readonly ActorIdentity[] Known;
 
         readonly string[] Args;
@@ -54,6 +55,7 @@ namespace Z0
             Args = args;
             Known = known;
             Ct =  ct;
+            Asm = ContextFactory.CreateAsmContext(Context);
         }
 
         public void Run()
@@ -62,11 +64,11 @@ namespace Z0
 
             if(CaptureArtifacts)
             {
-                var asm = ContextFactory.CreateAsmContext(Context);
-                var cwf = capture(asm, Wf, Context.AppPaths.AppCaptureRoot);
+             
+                var cwf = capture(Asm, Wf, Context.AppPaths.AppCaptureRoot);
                 var broker = CaptureBroker.create(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv));
                 var config = wfconfig(Wf, Args);
-                using var host = new CaptureHost(Wf, asm, cwf, broker, config, Ct);
+                using var host = new CaptureHost(Wf, Asm, cwf, broker, config, Ct);
                 host.Run();
             }
 
@@ -74,7 +76,12 @@ namespace Z0
             {
                 using var emission = new EmitDatasets(Wf, Ct, Args);
                 emission.Run();
-            }                    
+            } 
+
+            if(RunMachine)                   
+            {
+                //var ctx = MachineAsmContext.Create(Asm,)
+            }
         }
 
         public void Dispose()
@@ -84,6 +91,8 @@ namespace Z0
 
         bool CaptureArtifacts => false;
         
-        bool EmitDatasets => true;
+        bool EmitDatasets => false;
+
+        bool RunMachine => true;
     }
 }
