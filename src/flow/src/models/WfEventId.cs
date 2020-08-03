@@ -17,7 +17,7 @@ namespace Z0
         public static WfEventId define(string name, CorrelationToken? ct = null, Timestamp? ts = null)
             => new WfEventId(name, ct ?? CorrelationToken.create(), ts ?? now());
 
-        const string Pattern = "[{0}:{1}/{2}]";        
+        const string Pattern = "{0} | {1} | {2}";        
 
         /// <summary>
         /// The event data type name

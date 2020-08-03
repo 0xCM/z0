@@ -11,20 +11,31 @@ namespace Z0
 
     using static CodeGenerator;
     using static Konst;
+    using static EmitResBytesStep;
     using static z;
-    
+
+    public readonly struct EmitResBytesStep
+    {
+        public const string WorkerName = nameof(EmitResBytes);
+    }
+
     [Step(WfStepId.EmitResBytes)]
     public readonly ref struct EmitResBytes
     {            
         const string ProjectName = "bytes";
 
-        readonly IEncodedHexArchive Source;
+        readonly IEncodedHexArchive Archive;
 
-        readonly FolderPath Target;
-        
+        public readonly FolderPath SourceDir;
+
+        public readonly FolderPath TargetDir;
+                
         readonly WfContext Wf;
 
-        readonly CorrelationToken Correlation;
+        readonly CorrelationToken Ct;
+
+        IWfEventSink Sink 
+            => Wf.Broker.Sink;        
         
         [MethodImpl(Inline)]
         public static EmitResBytes create(WfContext context, CorrelationToken? ct = null)
@@ -33,30 +44,42 @@ namespace Z0
         internal EmitResBytes(WfContext context, CorrelationToken? ct = null)
         {
             Wf = context;
-            Correlation = ct ?? CorrelationToken.create();
-            Source = Archives.Services.EncodedHexArchive(context.AppPaths.AppCaptureRoot);            
-            Target = context.AppPaths.ResourceRoot + FolderName.Define(ProjectName);
-            Wf.Running(text.format("Running {0} workflow {1} -> {2}", nameof(EmitResBytes), Source.ArchiveRoot, Target));
+            Ct = ct ?? CorrelationToken.create();
+            SourceDir = context.AppPaths.AppCaptureRoot;
+            TargetDir = context.AppPaths.ResourceRoot + FolderName.Define(ProjectName);
+            Archive = Archives.Services.EncodedHexArchive(SourceDir);            
+            Wf.Created(WorkerName,Ct);
         }
         
         public void Run()        
         {
-            var indices = Source.ReadIndices().ToArray();
-            Wf.Status($"Loaded {indices.Length} encoded hex files");
-
+            Wf.RunningT(WorkerName, new {SourceDir, TargetDir}, Ct);
+            
+            var indices = CodeReader.identified(SourceDir, Sink);
+            
             foreach(var index in indices)
-                emit(index, Target);
+            {
+                Wf.Status(WorkerName, $"Loaded {index.Code.Length} {index.Host} code blocks", Ct);
+                try
+                {
+                    Emit(index, TargetDir);
+                }
+                catch(Exception e)
+                {
+                    Wf.Error(e, Ct);
+                }
+            }
         }
 
         public void Dispose()
         {
-            Wf.Status(text.format("Ran {0} workflow", nameof(EmitResBytes)));
+            Wf.Finished(WorkerName, Ct);
         }
 
-        void emit(IdentifiedCodeIndex src, FolderPath dst)
+        void Emit(IdentifiedCodeIndex src, FolderPath dst)
         {
             var path = (dst + FolderName.Define("src")) + src.Host.FileName(FileExtensions.Cs);            
-            var resources = specify(src);
+            var resources = DefineResources(src);
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, src.Host.Name);
             var members = new HashSet<string>();
             using var writer = path.Writer();
@@ -69,17 +92,18 @@ namespace Z0
                 ref readonly var res = ref resources[i];
                 if(!members.Contains(res.Identifier))
                 {
-                    EmitMember(writer, render(res));
+                    EmitMember(writer, Render(res));
                     members.Add(res.Identifier);
                 }
                 
             }
             CloseTypeDeclaration(writer);
             CloseFileNamespace(writer);
-            Wf.Raise(new EmittedHostBytes(src.Host, (ushort)resources.Count));
+            
+            Wf.Raise(new EmittedHostBytes(src.Host, (ushort)resources.Count, Ct));
         }
 
-        static string render(BinaryResourceSpec src, int level = 2)
+        static string Render(BinaryResourceSpec src, int level = 2)
             => text.concat("public static ReadOnlySpan<byte> ", 
             src.Identifier, 
             Space,
@@ -92,29 +116,29 @@ namespace Z0
             Chars.Semicolon
             );
 
-        static HostResources specify(IdentifiedCodeIndex src)
+        static HostResources DefineResources(IdentifiedCodeIndex src)
         {                        
             var count = src.Code.Length;
             var res = alloc<BinaryResourceSpec>(count);
             for(var i=0; i<count; i++)
             {
-                res[i] = specify(src.Code[i]);
+                res[i] = DefineResource(src.Code[i]);
             }            
             return new HostResources(src.Host,res);
         }
 
-        static HostResources specify(IEncodedHexArchive archive, ApiHostUri host)
+        HostResources DefineResources(IEncodedHexArchive archive, ApiHostUri host)
         {            
             var code = archive.Read(host).ToArray();
             var res = alloc<BinaryResourceSpec>(code.Length);
             for(var i=0; i<code.Length; i++)
             {
-                res[i] = specify(code[i]);
+                res[i] = DefineResource(code[i]);
             }            
             return new HostResources(host,res);
         }
 
-        static BinaryResourceSpec specify(IdentifiedCode src)
+        static BinaryResourceSpec DefineResource(IdentifiedCode src)
             => new BinaryResourceSpec(src.Id.ToPropertyName(), src.Encoded);
     }
 

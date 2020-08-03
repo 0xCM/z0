@@ -3975,3 +3975,38 @@
  3 files changed, 5 insertions(+), 1 deletion(-)
 [master fb050d615] .
  2 files changed, 2 insertions(+), 1 deletion(-)
+[master 53e0bafe6] .
+ 82 files changed, 1722 insertions(+), 836 deletions(-)
+ delete mode 100644 machina.csv
+ create mode 100644 machine.csv
+ create mode 100644 src/flow/src/config/EventAttribute.cs
+ create mode 100644 src/flow/src/config/StepAttribute.cs
+ create mode 100644 src/flow/src/config/WfStepId.cs
+ delete mode 100644 src/flow/src/events/DatasetEmitted.cs
+ create mode 100644 src/flow/src/events/EmittedDataset.cs
+ create mode 100644 src/flow/src/events/WfStatusT.cs
+ create mode 100644 src/flow/src/events/WfStepFinishedT.cs
+ create mode 100644 src/flow/src/events/WfStepRunningT.cs
+ create mode 100644 src/flow/src/services/ops/PipeSlots.cs
+ create mode 100644 src/flow/src/services/ops/SpaceSlots.cs
+ create mode 100644 src/flow/src/services/ops/format.cs
+ create mode 100644 src/flow/src/services/ops/slot.cs
+ create mode 100644 src/flow/src/services/ops/wferror.cs
+ rename src/machine/src/workflows/context/{MachineConfig.cs => CaptureWorkflowConfig.cs} (71%)
+ create mode 100644 src/machine/src/workflows/context/MachineWorkflowConfig.cs
+ rename src/machine/src/workflows/services/recapture/{AccessorCapture.cs => RecaptureAccessors.cs} (85%)
+ create mode 100644 src/machine/src/workflows/steps/EmitCilDatasets.cs
+ create mode 100644 src/machine/src/workflows/steps/EmitCilDatasetsStep.cs
+ delete mode 100644 src/machine/src/workflows/steps/EmitCilRecords.cs
+ create mode 100644 src/machine/src/workflows/steps/EmitClrMetadataSets.cs
+ create mode 100644 src/machine/src/workflows/steps/EmitConstantDatasets.cs
+ delete mode 100644 src/machine/src/workflows/steps/EmitConstantRecords.cs
+ delete mode 100644 src/machine/src/workflows/steps/EmitHexLineFile.cs
+ delete mode 100644 src/machine/src/workflows/steps/EmitMetadataSets.cs
+ delete mode 100644 src/machine/src/workflows/steps/EmitMethodCil.cs
+ create mode 100644 src/machine/src/workflows/steps/EmitPartStringsStep.cs
+ rename src/machine/src/workflows/steps/{EmitPeRecords.cs => EmitPeHeaders.cs} (68%)
+ copy src/machine/src/workflows/steps/{HexLineEmitter.cs => EmitPeImage.cs} (61%)
+ create mode 100644 src/machine/src/workflows/steps/EmitPeImageStep.cs
+ create mode 100644 src/machine/src/workflows/steps/EmitStringRecordsStep.cs
+ rewrite src/machine/src/workflows/steps/HexLineEmitter.cs (97%)

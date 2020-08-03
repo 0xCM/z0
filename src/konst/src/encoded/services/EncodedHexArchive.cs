@@ -15,12 +15,14 @@ namespace Z0
     {
         public FolderPath ArchiveRoot {get;}            
 
-        IAppEventSink Sink => this;
-        
+        TermEventSink Sink {get;}
+
         [MethodImpl(Inline)]
         public EncodedHexArchive(FolderPath root)
-            => ArchiveRoot = root;
-
+        {
+            ArchiveRoot = root;
+            Sink = TermEventSink.create();
+        }        
         void IAppEventSink.Deposit(IAppEvent e)
         {
             term.print(e);
@@ -41,7 +43,7 @@ namespace Z0
             var path = files(root).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
             return read(path);
         }
-
+        
         public static IdentifiedCodeIndex index(FilePath src, IAppEventSink status)
         {
             var uri = ApiHostUri.Parse(src.FileName);
