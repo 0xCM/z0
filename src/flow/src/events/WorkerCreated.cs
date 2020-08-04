@@ -10,37 +10,32 @@ namespace Z0
         
     using static Konst;
     using static Flow;
-    using static WorkerCreatedEvent;
-
-    [Event(true)]
-    public readonly struct WorkerCreatedEvent
-    {
-        public const string EventName = nameof(WorkerCreated);
-        
-        public const string Pattern = IdMarker + "Created";
-
-        public const AppMsgColor DefaultFlair = AppMsgColor.Magenta;
-    }
 
     [Event]
     public readonly struct WorkerCreated : IWfEvent<WorkerCreated>
     {        
+        public const string EventName = nameof(WorkerCreated);
+
+        public const AppMsgColor DefaultFlair = AppMsgColor.Magenta;
+
+        public const string EventMsg = IdMarker + "Created";
+
         public WfEventId Id {get;}
 
         public AppMsgColor Flair {get;}
 
-        public string WorkerName {get;}
+        public string ActorName {get;}
         
         [MethodImpl(Inline)]
         public WorkerCreated(string worker, CorrelationToken ct, AppMsgColor flair = DefaultFlair)
         {
-            WorkerName = worker;
-            Id = wfid(worker, ct);
+            Id = wfid(EventName, ct);
+            ActorName = worker;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Id);
+            => text.format(PSx2, Id, ActorName);
     }
 }

@@ -15,7 +15,7 @@ namespace Z0.Asm
     {
         readonly CorrelationToken Ct;
 
-        readonly CaptureState Wf;
+        readonly WfState Wf;
         
         ICaptureWorkflow CWf 
              => Wf.CWf;
@@ -24,7 +24,7 @@ namespace Z0.Asm
             => CWf.Context;
         
         [MethodImpl(Inline)]
-        public ExtractMembers(CaptureState state, CorrelationToken ct)
+        public ExtractMembers(WfState state, CorrelationToken ct)
         {
             Wf = state;
             Ct = ct;

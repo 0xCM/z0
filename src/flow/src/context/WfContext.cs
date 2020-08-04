@@ -15,41 +15,53 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public struct WfContext : IWfContext<WfConfig>
-    {
+    public struct WfContext : IWfContext<WfSettings>
+    {        
+        public const string ActorName = nameof(WfContext);
+        
+        public IAppContext ContextRoot {get;}
+        
+        public WfSettings Config {get;}
+
+        public IPart[] Parts {get;}
+
+        public WfTermEventSink TermSink {get;}
+                        
+        public WfBroker Broker {get;}
+                
+        public FolderPath IndexRoot {get;}
+        
+        public FolderPath ResourceRoot {get;}
+        
+        public FilePath LogPath {get;}
+
+        readonly CorrelationToken Ct;
+
         long CtProvider;
 
         readonly ulong SessionId;
 
-        public WfTermEventSink TermSink {get;}
-        
-        public IAppContext ContextRoot {get;}
-        
-        public WfConfig ContextData {get;}
-
-        public CorrelationToken Ct {get;}
-        
-        public WfBroker Broker {get;}
-                
         [MethodImpl(Inline)]
-        public WfContext(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink)
+        public WfContext(IAppContext root, CorrelationToken ct, WfSettings config, WfTermEventSink sink)
         {
             Ct = ct;
             ContextRoot = root;
-            ContextData = config;
+            Config = config;
             TermSink = sink;
             SessionId = (ulong)now().Ticks;
             CtProvider = 1;       
-            Broker = new WfBroker(root.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
-            TermSink.Deposit(new OpeningWfContext(typeof(WfContext), Ct));
+            Parts = new IPart[0]{};
+            ResourceRoot = ContextRoot.AppPaths.ResourceRoot;
+            IndexRoot =  ResourceRoot + FolderName.Define("index");
+            LogPath = root.AppPaths.AppDataRoot + FileName.Define("workflow", FileExtensions.Csv);
+            Broker = new WfBroker(LogPath, Ct);
+            TermSink.Deposit(new OpeningWfContext(ActorName, typeof(WfContext).Name, Ct));
         }
 
-        public FolderPath IndexRoot 
-            => ContextRoot.AppPaths.ResourceRoot + FolderName.Define("index");
 
         public void Dispose()
         {
-            TermSink.Deposit(new ClosingWfContext(typeof(WfContext), Ct));
+            TermSink.Deposit(new ClosingWfContext(ActorName, typeof(WfContext).Name, Ct));
             TermSink.Dispose();
             Broker.Dispose();
         }
@@ -74,7 +86,7 @@ namespace Z0
             var where = text.format(CallerPattern, caller, line, file);
             var what = e.ToString();
             var msg = AppMsg.NoCaller(text.format(Pattern, where, what), AppMsgKind.Error);
-            Raise(wferror(msg,ct));
+            Raise(error(msg,ct));
         }
         
         public void Error(string worker, Exception e, CorrelationToken ct)
@@ -156,6 +168,5 @@ namespace Z0
         {
             Raise(new WfError(worker, body, ct));
         }
-
     }
 }

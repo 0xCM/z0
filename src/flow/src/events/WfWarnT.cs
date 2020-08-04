@@ -5,38 +5,37 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static Flow;
-
-    public readonly struct WfStepRunning<T> : IWfEvent<WfStepRunning<T>, T>
-    {
-        public const string EventName = nameof(WfStepRunning<T>);
+            
+    [Event]
+    public readonly struct WfWarn<T> : IWfEvent<WfWarn<T>, T>
+    {   
+        public const string EventName = nameof(WfWarn<T>);             
         
         public WfEventId Id {get;}
         
         public string ActorName {get;}
-        
-        public T Body {get;}
 
+        public T Body {get;}        
+        
         public AppMsgColor Flair {get;}
 
         public AppMsg Description {get;}
-
+        
         [MethodImpl(Inline)]
-        public WfStepRunning(string worker, T body, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
+        public WfWarn(string actor, T body, CorrelationToken ct)
         {
             Id = wfid(EventName, ct);
-            ActorName = worker;
             Body = body;
-            Flair = flair;
-            Description = AppMsg.Colorize(Body,Flair);
-        }
-
-        [MethodImpl(Inline)]
+            ActorName = actor;
+            Flair = AppMsgColor.Yellow;
+            Description = AppMsg.NoCaller(body, AppMsgKind.Warning);
+        }            
+        
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);          
-    }   
+            => text.format(PSx3, Id, ActorName, Description);            
+    }
 }

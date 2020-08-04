@@ -18,7 +18,8 @@ namespace Z0.Asm
 
         public WfEventId Id {get;}
 
-        public string WorkerName {get;}
+        public string ActorName {get;}
+
         public readonly ApiHostUri Host;
 
         public readonly uint Count;
@@ -27,12 +28,12 @@ namespace Z0.Asm
         public CountedInstructions(string worker, ApiHostUri host, uint count, CorrelationToken ct)
         {
             Id = wfid(nameof(CountedInstructions), ct);
-            WorkerName = worker;
+            ActorName = worker;
             Count = count;
             Host = host;
         }
         public string Format() 
-            => text.format(Pattern, Id, WorkerName, Host, Count);
+            => text.format(Pattern, Id, ActorName, Host, Count);
     }    
 
 }

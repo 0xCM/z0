@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source strean</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        bool IsVectorized(MethodInfo src, W128 w, GenericPartition g = default)
+        bool IsVectorized(MethodInfo src, W128 w, GenericState g = default)
             => IsVectorized(src,w) && src.IsMemberOf(g);
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="src">The source strean</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        bool IsVectorized(MethodInfo src, W256 w, GenericPartition g = default)
+        bool IsVectorized(MethodInfo src, W256 w, GenericState g = default)
             => IsVectorized(src, w) && src.IsMemberOf(g);
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="src">The source strean</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        bool IsVectorized(MethodInfo src, W512 w, GenericPartition g = default)
+        bool IsVectorized(MethodInfo src, W512 w, GenericState g = default)
             => src.IsVectorized(w) && src.IsMemberOf(g);
     }
 }

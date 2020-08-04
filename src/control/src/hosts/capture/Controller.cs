@@ -26,7 +26,7 @@ namespace Z0
         
         readonly WfTermEventSink TermSink;
 
-        readonly WfConfig Config;
+        readonly WfSettings Config;
         
         readonly WfContext Wf;
 
@@ -40,8 +40,8 @@ namespace Z0
             TermSink = termsink(Ct);
             Paths = context.AppPaths;
             Asm = ContextFactory.asm(context);                           
-            Config = wfconfig(context, wflog(context, Ct), Ct);            
-            Wf = wfctx(context, Ct, Config, TermSink);                        
+            Config = settings(context, Ct);
+            Wf = Flow.context(context, Ct, Config, TermSink);                        
         }
 
         public void Run()
@@ -62,14 +62,14 @@ namespace Z0
             Wf.Ran(nameof(Controller), Ct);
         }
 
-        static PartWfConfig PartConfig(WfContext wf, string[] args)
+        static WfConfig PartConfig(WfContext wf, string[] args)
         {
             var parsed = AppArgs.parse(args).Data.Select(arg => PartIdParser.single(arg.Value));
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.AppPaths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
             var dst = new ArchiveConfig(dstpath);
-            return new PartWfConfig(wf, args, src, dst, parsed);                    
+            return new WfConfig(args, src, dst, parsed);                    
         }
 
         ICaptureWorkflow capture(IAsmContext context, FolderPath dst)

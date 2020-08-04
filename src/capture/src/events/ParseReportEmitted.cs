@@ -12,27 +12,26 @@ namespace Z0.Asm
 
     public readonly struct ParseReportEmitted : IWfEvent<ParseReportEmitted>
     {
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        const string Pattern = PSx6;
+        
+        public WfEventId Id {get;}
 
-        public readonly MemberParseReport Report;
+        public string ActorName {get;}
 
-        public readonly FilePath TargetPath;
+        public readonly MemberParseReport Source;
+
+        public readonly FilePath Target;        
         
         [MethodImpl(Inline)]
-        public ParseReportEmitted(MemberParseReport report, FilePath path)
+        public ParseReportEmitted(string worker, MemberParseReport src, FilePath dst, CorrelationToken ct)
         {
-            Report = report;
-            TargetPath = path;
+            Id = wfid(nameof(ParseReportEmitted), ct);        
+            ActorName = worker;
+            Source = src;
+            Target = dst;        
         }
 
         public string Format()
-            => $"{Report.RecordCount} {Report.ApiHost} {Report.ReportName} records saved to {TargetPath}";
-        
-        public ParseReportEmitted Zero 
-            => Empty;
-
-        public static ParseReportEmitted Empty 
-            => new ParseReportEmitted(MemberParseReport.Empty, FilePath.Empty);
+            => text.format(PSx6, Id, ActorName, Source.RecordCount, Source.ApiHost, Source.ReportName, Target);
     }        
-
 }

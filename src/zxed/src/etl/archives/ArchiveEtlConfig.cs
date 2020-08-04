@@ -12,14 +12,14 @@ namespace Z0
 
     public readonly struct XedEtlConfig
     {
-        public XedEtlConfig(IAppContext context, WfConfig settings)
+        public XedEtlConfig(IAppContext context, WfSettings settings)
         {
             Settings = settings;            
             SourceRoot = context.AppPaths.DevRoot + FolderName.Define("data") + FolderName.Define("sources") + FolderName.Define("xed");
             TargetRoot = context.AppPaths.BuildStage + FolderName.Define("xed");
         }
         
-        public readonly WfConfig Settings;
+        public readonly WfSettings Settings;
         
         public readonly FolderPath SourceRoot;
 

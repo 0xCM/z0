@@ -131,7 +131,7 @@ namespace Z0
                 var hcs = hcSets[i];
                 var decoded = Decode(hcs);
                 dst.Add(decoded);
-                Broker.Raise(new DecodedHost(decoded));
+                Broker.Raise(new DecodedHost(WorkerName, decoded, Ct));
             }  
 
             var inxs = PartInstructions.Create(pcs.Part, dst.Array());

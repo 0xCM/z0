@@ -11,8 +11,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     public readonly struct ClosureKinds
-    {
-        /// <summary>
+    {            
+        /// <summary>        
         /// Computes a method's numeric closures, predicated on available metadata
         /// </summary>
         /// <param name="m">The source method</param>

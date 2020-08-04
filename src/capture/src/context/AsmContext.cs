@@ -24,6 +24,8 @@ namespace Z0.Asm
                 
         public ICaptureServices CaptureServices {get;}
 
+        public IPolyrand Random {get;}
+        
         [MethodImpl(Inline)]
         void Relay(IAppMsg msg)
             => Next(msg);
@@ -36,6 +38,7 @@ namespace Z0.Asm
             Next = root.MessageRelay;
             root.MessageQueue.Next += Relay;      
             CaptureServices = Capture.Services;
+            Random = root.Random;
         }
        
         public void Deposit(IAppMsg msg)

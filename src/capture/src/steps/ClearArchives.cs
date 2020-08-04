@@ -16,16 +16,16 @@ namespace Z0.Asm
     {        
         readonly WfContext Wf;
         
-        readonly PartWfConfig Config;
+        readonly WfConfig Config;
         
         readonly CorrelationToken Ct;
 
-        public ClearCaptureArchives(PartWfConfig config, CorrelationToken? ct = null)
+        public ClearCaptureArchives(WfContext wf, WfConfig config, CorrelationToken ct)
         {
+            Wf = wf;
             Config = config;
-            Ct = ct ?? CorrelationToken.create();
-            Wf = config.Context;
-            Wf.Running(nameof(ClearCaptureArchives), Ct);            
+            Ct = ct;            
+            Wf.Created(nameof(ClearCaptureArchives), Ct);            
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0.Asm
        
         public void Dispose()
         {         
-            Wf.Ran(nameof(ClearCaptureArchives), Ct);
+            Wf.Finished(nameof(ClearCaptureArchives), Ct);
         }
     }
 }

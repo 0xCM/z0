@@ -40,7 +40,7 @@ namespace Z0
 
         readonly CaptureConfig Settings;
 
-        readonly PartWfConfig Config;
+        readonly WfConfig Config;
 
         readonly IAsmFormatter Formatter;
 
@@ -58,7 +58,7 @@ namespace Z0
 
         readonly uint EvalBufferSize;
         
-        public CaptureHost(WfContext wf, IAsmContext asm, ICaptureWorkflow cwf, ICaptureBroker broker, PartWfConfig config, CorrelationToken ct)
+        public CaptureHost(WfContext wf, IAsmContext asm, ICaptureWorkflow cwf, ICaptureBroker broker, WfConfig config, CorrelationToken ct)
         {                            
             static ICaptureWorkflow Cwf(IAsmContext asm, WfContext wf, IAsmFunctionDecoder decoder, IAsmFormatter formatter, TPartCaptureArchive archive)
                 => new CaptureWorkflow(asm, wf, decoder, formatter, Capture.Services.AsmWriterFactory, archive);
@@ -93,7 +93,7 @@ namespace Z0
         {
             if(Settings.EmitPrimaryArtifacts)
             {
-                var wf = ManagePartCapture.create(CWf, Config, TermSink, Ct);
+                var wf = ManagePartCapture.create(Wf, Config, CWf, Ct);
                 wf.Consolidate();                
             }
 
@@ -101,7 +101,7 @@ namespace Z0
                 EmitImm(parts);
 
             if(Settings.CheckExecution)
-                CheckExec(parts);
+                ExecuteCode(parts);
         }
 
         void EmitImm(params PartId[] parts)
@@ -112,12 +112,18 @@ namespace Z0
 
         void EmitPrimary(params PartId[] parts)
         {
-            var wf = ManagePartCapture.create(CWf, Config, TermSink, Ct);            
+            var wf = ManagePartCapture.create(Wf, Config, CWf, Ct);
             wf.Run();
         }
 
-        void CheckExec(params PartId[] parts)
-            => Context.CreateEvalWorkflow(Config, EvalBufferSize).Execute(parts);
+        void ExecuteCode(params PartId[] parts)
+        {
+            var app = Context.ContextRoot;
+            var exchange = AppMsgExchange.Create(app.MessageQueue);
+            var archiveRoot = app.AppPaths.AppCaptureRoot;            
+            var evwf = Evaluate.workflow(app, app.Random, archiveRoot, Pow2.T14); 
+            evwf.Execute(parts);
+        }
 
         public void OnEvent(FunctionsDecoded e)
         {

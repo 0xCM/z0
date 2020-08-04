@@ -24,27 +24,9 @@ namespace Z0.Asm
         ICaptureCore CaptureCore  
             => CaptureServices.CaptureCore;
 
-        IPolyrand IPolyrandProvider.Random 
-            => ContextRoot.Random;
-
         IAppMsgQueue MessageQueue 
             => ContextRoot.MessageQueue;
-
-        Action<IAppMsg> MessageRelay
-            => ContextRoot.MessageRelay;
-
-        /// <summary>
-        /// The capture archive root
-        /// </summary>
-        FolderPath CaptureRoot 
-            => ContextRoot.AppPaths.CaptureRoot;
-
-        /// <summary>
-        /// The hosts known to the context
-        /// </summary>
-        IApiHost[] Hosts 
-            => Api.Hosts;
-
+ 
         /// <summary>
         /// The api collection known to the context
         /// </summary>
@@ -56,12 +38,6 @@ namespace Z0.Asm
         /// </summary>
         int DefaultBufferLength 
             => Pow2.T14;
-
-        /// <summary>
-        /// The primary capture archive, predicated on the context-specified root path
-        /// </summary>
-        TPartCaptureArchive RootCaptureArchive 
-            => Archives.Services.CaptureArchive(CaptureRoot);
 
         /// <summary>
         /// The default asm formatting configuration
@@ -79,21 +55,6 @@ namespace Z0.Asm
         /// The context decoder
         /// </summary>
         IAsmFunctionDecoder Decoder 
-            => CaptureServices.AsmDecoder(AsmFormat);
-
-        /// <summary>
-        /// Provides access to dynamic operator production facilities
-        /// </summary>
-        IDynexus Dynamic 
-            => CaptureServices.Dynexus;
-
-        /// <summary>
-        /// Provides access to immeditate specialization services
-        /// </summary>
-        IImmSpecializer ImmServices 
-            => CaptureServices.ImmSpecializer(Decoder);
-        
-        IEvalWorkflow CreateEvalWorkflow(PartWfConfig config, uint buffersize)
-            => Evaluate.workflow(Apps.context(Api, Random, Settings, AppMsgExchange.Create(ContextRoot)), Random, config.Target.ArchiveRoot, buffersize); 
+            => CaptureServices.AsmDecoder(AsmFormat);    
     }   
 }

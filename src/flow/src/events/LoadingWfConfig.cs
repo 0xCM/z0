@@ -13,21 +13,33 @@ namespace Z0
     [Event]
     public readonly struct LoadingWfConfig : IWfEvent<LoadingWfConfig>
     {
-        const string Pattern = IdMarker + "Loading workflow configuration from {1}";
+        public const string EventName = nameof(LoadingWfConfig);
+
+        public const string Pattern = "Loading workflow configuration | {0}";
+        
+        public const AppMsgColor DefaultFlair = AppMsgColor.Magenta;
         
         public WfEventId Id {get;}
 
-        public readonly FilePath ConfigPath;
+        public string ActorName {get;}
+        
+        public FilePath Body {get;}
+        
+        public AppMsgColor Flair {get;}
+        
+        public AppMsg Description {get;}
 
         [MethodImpl(Inline)]
-        public LoadingWfConfig(WfEventId id, FilePath src)
+        public LoadingWfConfig(string worker, FilePath body, CorrelationToken ct, AppMsgColor flair = DefaultFlair)
         {
-            Id = id;
-            ConfigPath = src;
+            Id = wfid(EventName, ct);
+            ActorName = worker;
+            Body = body;
+            Flair = flair;
+            Description = AppMsg.Colorize(text.format(Pattern, Body), Flair);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Id, ConfigPath);        
-    }
+            => text.format(PSx3, Id, ActorName, Description);            }
 }

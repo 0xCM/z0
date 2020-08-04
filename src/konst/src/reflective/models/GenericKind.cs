@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum GenericStateKind : byte
+    public enum GenericKind : byte
     {
         /// <summary>
         /// Indicates subject is nongeneric

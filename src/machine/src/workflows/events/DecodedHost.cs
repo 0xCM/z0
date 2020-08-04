@@ -12,28 +12,34 @@ namespace Z0
     using static Konst;
     using static Flow;
     
-    public readonly struct DecodedHost : IWfEvent<DecodedHost>
+    public readonly struct DecodedHost : IWfEvent<DecodedHost, HostInstructions>
     {
-        const string Pattern = "{0}: {1} {2} instructions decoded";
-
+        public const string EventName = nameof(DecodedHost);
+        
         public WfEventId Id {get;}
 
-        public readonly HostInstructions Instructions;
+        public string WorkerName {get;}
+        
+        public HostInstructions Instructions {get;}
 
+        public AppMsgColor Flair {get;}
+
+        public AppMsg Description {get;}
+        
         [MethodImpl(Inline)]
-        public DecodedHost(HostInstructions inxs)
+        public DecodedHost(string worker, HostInstructions inxs, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
-            Id = WfEventId.define(nameof(DecodedHost));
+            Id = WfEventId.define(EventName, ct);
+            WorkerName = worker;
             Instructions = inxs;            
+            Flair = flair;
+            Description = AppMsg.Colorize($"Decoded {Instructions.TotalCount} instructions for {Instructions.Host}", Flair);
         }
 
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;
-
-        public int TotalCount 
-            => Instructions.TotalCount;
+        public HostInstructions Body
+            => Instructions;        
 
         public string Format()
-            => text.format(Pattern, Id, TotalCount, Instructions.Host);
+            => text.format(PSx3, Id, WorkerName, Description);
     }        
 }

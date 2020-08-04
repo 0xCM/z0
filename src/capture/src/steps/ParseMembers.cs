@@ -12,7 +12,7 @@ namespace Z0.Asm
     [Step(WfStepId.ParseMembers)]
     public readonly struct ParseMembers
     {
-        public CaptureState Wf {get;}
+        public WfState Wf {get;}
 
         readonly IExtractParser Parser;
 
@@ -20,7 +20,7 @@ namespace Z0.Asm
             => Wf.CWf.Context;
                     
         [MethodImpl(Inline)]
-        internal ParseMembers(CaptureState state, CorrelationToken ct)
+        internal ParseMembers(WfState state, CorrelationToken ct)
         {
             Wf = state;
             Parser = Extracts.Services.ExtractParser(Extracts.DefaultBufferLength);

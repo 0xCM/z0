@@ -38,7 +38,7 @@ namespace Z0
         public XedEtl(WfContext<XedEtlConfig> context)
         {
             Context = context;
-            Config = context.ContextData;
+            Config = context.Config;
             Src = XedSourceArchive.Create(Config.SourceRoot);            
             Dst = XedStagingArchive.Create(Config.StageRoot);
             Pub = TableArchive.Service(Config.PublicationRoot);            

@@ -16,18 +16,18 @@ namespace Z0.Asm
     [Step(WfStepId.CaptureHostApi)]
     public readonly ref struct CaptureHostApi
     {
-        public CaptureState Wf {get;}
+        public WfState Wf {get;}
         
         public ICaptureWorkflow CWf {get;}
 
         public CorrelationToken Ct {get;}
 
         [MethodImpl(Inline)]
-        public static CaptureHostApi create(CaptureState state, CorrelationToken ct)
+        public static CaptureHostApi create(WfState state, CorrelationToken ct)
             => new CaptureHostApi(state, ct);
         
         [MethodImpl(Inline)]
-        internal CaptureHostApi(CaptureState state, CorrelationToken ct)
+        internal CaptureHostApi(WfState state, CorrelationToken ct)
         {
             Ct = ct;
             Wf = state;
@@ -63,14 +63,17 @@ namespace Z0.Asm
                 if(parsed.Length == 0)
                     Wf.Status(WorkerName, $"No {host.Uri} members were parsed", Ct);                    
                 else
-                {                        
-                    CWf.ReportParsed.Emit(host.Uri, parsed, paths.ParsedPath);
+                {            
+                    using var _emit = new EmitParsedReport(Wf, host.Uri, parsed, paths.ParsedPath, Ct);            
+                    _emit.Run();
                     _parsed.SaveHex(host.Uri, parsed, paths.HexPath);
 
-                    var decoded = CWf.DecodeParsed.Run(host.Uri,parsed);
+                    using var decode = new DecodeParsed(Wf, CWf.Context, Ct);
+                    var decoded = decode.Run(host.Uri,parsed);
                     if(decoded.Length != 0)
                     {
-                        CWf.DecodeParsed.SaveDecoded(decoded, paths.AsmPath);
+
+                        decode.SaveDecoded(decoded, paths.AsmPath);
                         CWf.MatchAddresses.Run(host.Uri, extracts, decoded);
                     }
                 }

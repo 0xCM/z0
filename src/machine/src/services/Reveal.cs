@@ -38,7 +38,45 @@ namespace Z0
             Formatter = Services.Formatter(format);
             Decoder = Services.AsmDecoder(format);
         }
-                
+
+        public ReadOnlySpan<AsmFunctionCode> capture(FolderPath root)
+        {
+            var assemblies = span(Root.Composition.Assemblies);
+            var dst = list<AsmFunctionCode>();
+            var count = assemblies.Length;
+            for(var i=0; i<count; i++)
+            {
+                var ass = skip(assemblies,i);
+                var dataTypes = span(ass.Types().Tagged<ApiDataTypeAttribute>());
+                var apiHosts = span(ass.Types().Tagged<ApiHostAttribute>());                
+                var dtCount = dataTypes.Length;
+                var apiHostCount = apiHosts.Length;
+
+                for(var j=0u; j<dtCount; j++)
+                {
+                    var type = skip(dataTypes,j);
+                    var uri = Flow.uri(type);
+                    var methods = type.Methods().Concrete().NonGeneric().Unignored();
+                    var mCount = methods.Length;                    
+                    
+                    for(var k=0u; k<mCount; k++)
+                    {
+                        var method = skip(methods,k);
+                    }
+                }
+
+                for(var j=0u; j<apiHostCount; j++)
+                {
+                    var host = skip(apiHosts, j);
+                    var uri = Flow.uri(host);
+                    var methods = host.DeclaredMethods().NonGeneric().Concrete();
+                    var mCount = methods.Length;
+                }
+                        
+            }
+            return dst.ToArray();
+        }                
+
         public ReadOnlySpan<AsmFunctionCode> Show(ApiHostUri host, ReadOnlySpan<MethodInfo> src, FilePath dst)
         {            
             var count = src.Length;

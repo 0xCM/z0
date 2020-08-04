@@ -11,17 +11,22 @@ namespace Z0.Asm
     using static Flow;
 
     [Step(WfStepId.DecodeParsed)]
-    public readonly struct DecodeParsed
+    public readonly ref struct DecodeParsed
     {            
-        public ICaptureWorkflow Workflow {get;}
+        public WfState Wf {get;}
 
-        public ICaptureContext Context 
-            => Workflow.Context;
+        readonly CorrelationToken Ct;
+
+        ICaptureContext Capture {get;}
         
+
         [MethodImpl(Inline)]
-        internal DecodeParsed(ICaptureWorkflow workfow)
+        internal DecodeParsed(WfState wf, ICaptureContext capture, CorrelationToken ct)
         {
-            Workflow = workfow;
+            Wf = wf;
+            Ct = ct;
+            Capture = capture;
+            Wf.Created(nameof(DecodeParsed), Ct);
         }
 
         public AsmFunction[] Run(ApiHostUri host, ParsedExtract[] src)
@@ -32,14 +37,14 @@ namespace Z0.Asm
                 for(var i=0; i<src.Length; i++)
                 {
                     var member = src[i];
-                    var decoded = Context.Decoder.Decode(member);
+                    var decoded = Capture.Decoder.Decode(member);
                     if(!decoded)
                         HandleUndecoded(member);
                     
                     dst[i] = decoded ? decoded.Value : AsmFunction.Empty;                
                 }
 
-                Context.Raise(new FunctionsDecoded(host, dst));
+                Capture.Raise(new FunctionsDecoded(host, dst));
                 return dst;
             }
             catch(Exception e)
@@ -51,7 +56,7 @@ namespace Z0.Asm
 
         public void SaveDecoded(AsmFunction[] src, FilePath dst)
         {
-            using var writer = Context.WriterFactory(dst, Context.Formatter);                
+            using var writer = Capture.WriterFactory(dst, Capture.Formatter);                
             writer.WriteAsm(src);
         }
 
@@ -59,5 +64,10 @@ namespace Z0.Asm
         {
             term.error($"Could not decode {member.Id}");
         }        
+
+        public void Dispose()
+        {
+            Wf.Finished(nameof(DecodeParsed), Ct);
+        }
     }
 }

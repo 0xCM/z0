@@ -9,20 +9,14 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static EmittedHostBytesEvent;
 
-    public readonly struct EmittedHostBytesEvent
+    public readonly struct EmittedHostBytes : IWfEvent<EmittedHostBytes>
     {
         public const string EventName = nameof(EmittedHostBytes);
 
-        public const string Pattern = IdMarker + "{1} | {2} | {3}";
-    }
-    
-    public readonly struct EmittedHostBytes : IWfEvent<EmittedHostBytes>
-    {
         public WfEventId Id {get;}
 
-        public string WorkerName {get;}
+        public string ActorName {get;}
         
         public ApiHostUri Host {get;}
 
@@ -33,11 +27,11 @@ namespace Z0
         {
             Id = wfid(nameof(EmittedHostBytes), ct);
             Host= host;
-            WorkerName = worker;
+            ActorName = worker;
             AccessorCount = count;
         }                
         
         public string Format()
-            => text.format(Pattern, Id, WorkerName, Host.Format(), AccessorCount);        
+            => text.format(PSx4, Id, ActorName, Host.Format(), AccessorCount);        
     }
 }

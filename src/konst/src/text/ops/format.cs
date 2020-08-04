@@ -96,6 +96,45 @@ namespace Z0
                             );
 
         /// <summary>
+        /// Formats a pattern using 4 parametric arguments
+        /// </summary>
+        /// <param name="pattern">The source pattern</param>
+        /// <param name="arg0">The first pattern argument</param>
+        /// <param name="arg1">The second pattern argument</param>
+        /// <param name="arg2">The third pattern argument</param>
+        /// <typeparam name="A">The first argument type</typeparam>
+        /// <typeparam name="B">The second argument type</typeparam>
+        /// <typeparam name="C">The third argument type</typeparam>
+        [MethodImpl(Inline)]
+        public static string format<A,B,C,D>(string pattern, A arg0, B arg1, C arg2, D arg3)
+            => string.Format(pattern, 
+                            arg0 is ITextual t0 ? t0.Format() : $"{arg0}", 
+                            arg1 is ITextual t1 ? t1.Format() : $"{arg1}",
+                            arg2 is ITextual t2 ? t2.Format() : $"{arg2}",
+                            arg3 is ITextual t3 ? t3.Format() : $"{arg3}"
+                            );
+
+        /// <summary>
+        /// Formats a pattern using 5 parametric arguments
+        /// </summary>
+        /// <param name="pattern">The source pattern</param>
+        /// <param name="arg0">The first pattern argument</param>
+        /// <param name="arg1">The second pattern argument</param>
+        /// <param name="arg2">The third pattern argument</param>
+        /// <typeparam name="A">The first argument type</typeparam>
+        /// <typeparam name="B">The second argument type</typeparam>
+        /// <typeparam name="C">The third argument type</typeparam>
+        [MethodImpl(Inline)]
+        public static string format<A,B,C,D,E>(string pattern, A arg0, B arg1, C arg2, D arg3, E arg4)
+            => string.Format(pattern, 
+                            arg0 is ITextual t0 ? t0.Format() : $"{arg0}", 
+                            arg1 is ITextual t1 ? t1.Format() : $"{arg1}",
+                            arg2 is ITextual t2 ? t2.Format() : $"{arg2}",
+                            arg3 is ITextual t3 ? t3.Format() : $"{arg3}",
+                            arg4 is ITextual t4 ? t4.Format() : $"{arg4}"
+                            );
+
+        /// <summary>
         /// Formats a <see cref='ITextual'/>
         /// </summary>
         /// <param name="src">The source element</param>

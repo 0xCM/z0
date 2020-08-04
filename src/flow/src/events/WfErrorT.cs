@@ -11,50 +11,50 @@ namespace Z0
     using static Flow;
             
     [Event]
-    public readonly struct WfError : IWfEvent<WfError, string>
+    public readonly struct WfError<T> : IWfEvent<WfError<T>, T>
     {                
-        public const string EventName = nameof(WfError);
-        
+        public const string EventName = nameof(WfError<T>);
+
         public WfEventId Id {get;}
         
         public string ActorName {get;}
+        
+        public readonly T Body {get;}
 
-        public string Body {get;}
-        
         public AppMsgColor Flair {get;}
-        
+
         public AppMsg Description {get;}
         
         [MethodImpl(Inline)]
-        public WfError(AppMsg description, CorrelationToken ct)
+        public WfError(string actor, T body, AppMsg description, CorrelationToken ct)
         {
             Id = wfid(EventName, ct);
-            Body = EmptyString;
-            ActorName = EmptyString;
-            Flair = AppMsgColor.Red;
+            ActorName = actor;
+            Body = body;
+            Flair =  AppMsgColor.Red;
             Description = description;
         }
 
         [MethodImpl(Inline)]
-        public WfError(string worker, Exception e, CorrelationToken ct)
+        public WfError(string worker, T body, Exception e, CorrelationToken ct)
         {
             Id = wfid(EventName, ct);
-            Body = e.ToString();
             ActorName = worker;
-            Flair = AppMsgColor.Red;
-            Description = AppMsg.NoCaller(Body, AppMsgKind.Error);
+            Body = body;
+            Flair =  AppMsgColor.Red;
+            Description = AppMsg.NoCaller(text.format(PSx2, body, e), AppMsgKind.Error);
         }
 
         [MethodImpl(Inline)]
-        public WfError(string worker, object body, CorrelationToken ct)
+        public WfError(string worker, T body, CorrelationToken ct)
         {
             Id = wfid(EventName, ct);
             ActorName = worker;
-            Body = $"{body}";
-            Flair = AppMsgColor.Red;
+            Body = body;
+            Flair =  AppMsgColor.Red;
             Description = AppMsg.NoCaller(Body, AppMsgKind.Error);
         }
-                
+              
         public string Format()
             => text.format(PSx3, Id, ActorName, Description);
     }

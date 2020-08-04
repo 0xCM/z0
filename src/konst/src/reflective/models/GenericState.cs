@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct GenericPartition
+    public readonly struct GenericState
     {   
         public readonly byte State;
 
@@ -18,43 +18,43 @@ namespace Z0
         public const byte Generic = 1;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(GenericPartition g1, GenericPartition g2)
+        public static bool operator ==(GenericState g1, GenericState g2)
             => g1.State == g2.State;
 
         [MethodImpl(Inline)]
-        public static bool operator !=(GenericPartition g1, GenericPartition g2)
+        public static bool operator !=(GenericState g1, GenericState g2)
             => g1.State != g2.State;
 
         [MethodImpl(Inline)]
-        public static implicit operator bool(GenericPartition src)
+        public static implicit operator bool(GenericState src)
             => src.State != 0;
 
         [MethodImpl(Inline)]
-        public static implicit operator GenericPartition(byte src)
-            => new GenericPartition(src);
+        public static implicit operator GenericState(byte src)
+            => new GenericState(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(GenericPartition src)
+        public static implicit operator byte(GenericState src)
             => src.State;
 
         [MethodImpl(Inline)]
-        public static implicit operator GenericPartition(bool src)
-            => new GenericPartition(src ? (byte)1 : (byte)0);
+        public static implicit operator GenericState(bool src)
+            => new GenericState(src ? (byte)1 : (byte)0);
 
         [MethodImpl(Inline)]
-        public GenericPartition(byte state)
+        public GenericState(byte state)
         {
             State = state;
         }
 
         [MethodImpl(Inline)]
         public bool IsGeneric()
-            => State == GenericPartition.Generic;
+            => State == GenericState.Generic;
 
         public override int GetHashCode()
             => State.GetHashCode();
         
         public override bool Equals(object src)
-            => src is GenericPartition p && p.State == State;
+            => src is GenericState p && p.State == State;
     }
 }

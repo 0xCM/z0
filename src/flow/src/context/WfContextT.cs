@@ -12,6 +12,8 @@ namespace Z0
 
     public struct WfContext<T> : IWfContext<T>
     {
+        public const string WorkerName = nameof(WfContext<T>);
+        
         long CtProvider;
 
         readonly ulong SessionId;
@@ -20,7 +22,7 @@ namespace Z0
 
         public IAppContext ContextRoot {get;}
         
-        public T ContextData {get;}
+        public T Config {get;}
         
         public CorrelationToken Correlation {get;}
 
@@ -29,17 +31,16 @@ namespace Z0
         {
             SessionId = (ulong)now().Ticks;
             ContextRoot = root;
-            ContextData = config;
+            Config = config;
             CtProvider = 1;
             Sink = sink;
             Correlation = CorrelationToken.define(CtProvider);
-            Sink.Deposit(new OpeningWfContext(typeof(WfContext<T>), Correlation));
-
+            Sink.Deposit(new OpeningWfContext(WorkerName, typeof(WfContext<T>).Name, Correlation));
         }
 
         public void Dispose()
         {
-            Sink.Deposit(new ClosingWfContext(typeof(WfContext<T>), Correlation));
+            Sink.Deposit(new ClosingWfContext(WorkerName, typeof(WfContext<T>).Name, Correlation));
         }
         
         public WfEventId Raise<E>(in E @event)

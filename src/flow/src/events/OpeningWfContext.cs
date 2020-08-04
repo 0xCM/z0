@@ -13,21 +13,34 @@ namespace Z0
     [Event]
     public readonly struct OpeningWfContext : IWfEvent<OpeningWfContext>
     {
-        const string Pattern = IdMarker + "Opening workflow context {1}";
+        public const string EventName = nameof(OpeningWfContext);
+
+        public const string Pattern = "Opening workflow context | {0}";
         
+        public const AppMsgColor DefaultFlair = AppMsgColor.Magenta;
+
         public WfEventId Id {get;}
 
-        public readonly Type ContextType;
+        public string ActorName {get;}
+        
+        public string Body {get;}
+
+        public AppMsgColor Flair {get;}
+        
+        public AppMsg Description {get;}
 
         [MethodImpl(Inline)]
-        public OpeningWfContext(Type type, CorrelationToken? ct = null)
+        public OpeningWfContext(string worker, string type, CorrelationToken ct, AppMsgColor flair = DefaultFlair)
         {
-            ContextType = type;
-            Id = wfid(nameof(OpeningWfContext), ct);
+            Id = wfid(EventName, ct);
+            ActorName = worker;
+            Body = type;
+            Flair = flair;
+            Description = AppMsg.Colorize(text.format(Pattern, Body), Flair);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Id, ContextType.Name);        
+            => text.format(PSx3, Id, ActorName, Description);        
     }
 }

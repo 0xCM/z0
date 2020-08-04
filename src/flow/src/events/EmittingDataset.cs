@@ -9,48 +9,37 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static EmittingDatasetEvent;
-
-    [Event(true)]
-    public readonly struct EmittingDatasetEvent
-    {
-        public const string EventName = nameof(EmittingDataset);
-
-        /// <summary>
-        /// Defines the literal "{0} | {1} | {2} | {3}"
-        /// </summary>
-        public const string Pattern = IdMarker + PS1x3;
-    }
 
     [Event]
     public readonly struct EmittingDataset : IWfEvent<EmittingDataset>
     {        
+        public const string EventName = nameof(EmittingDataset);
+
         public WfEventId Id {get;}
         
-        public string WorkerName {get;}
+        public string ActorName {get;}
 
         public string DatasetName {get;}
 
-        public readonly string TargetPath;
+        public string TargetPath {get;}
 
         [MethodImpl(Inline)]
         public EmittingDataset(string worker, string dsname, FilePath target, CorrelationToken ct)
         {
-            WorkerName = worker;
+            ActorName = worker;
             Id = wfid(EventName,ct);
             DatasetName = dsname;
-            TargetPath = target.Name;
-        }        
+            TargetPath = target.Name;        }        
 
         [MethodImpl(Inline)]
         public EmittingDataset(string worker, string dsname, FolderPath target, CorrelationToken ct)
         {
-            WorkerName = worker;
+            ActorName = worker;
             Id = wfid(EventName,ct);
             DatasetName = dsname;
             TargetPath = target.Name;
         }        
         public string Format()
-            => text.format(Pattern, Id, WorkerName, DatasetName, TargetPath);               
+            => text.format(PSx4, Id, ActorName, DatasetName, TargetPath);               
     }
 }

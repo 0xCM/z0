@@ -14,76 +14,83 @@ namespace Z0.Asm
 
     public class ManagePartCapture
     {
-        public static ManagePartCapture create(ICaptureWorkflow wf, PartWfConfig config, WfTermEventSink sink, CorrelationToken? ct = null)
-            => new ManagePartCapture(wf, config, sink, ct);
+        public static ManagePartCapture create(WfContext wf, WfConfig config, ICaptureWorkflow cwf,  CorrelationToken ct)
+            => new ManagePartCapture(wf, config, cwf, ct);
+
+        readonly WfContext Wf;
+
+        public WfConfig Config;
 
         readonly CorrelationToken Ct;
 
-        readonly CaptureState State;
-        
-        public ICaptureWorkflow CWf {get;}
+        readonly WfState State;
 
-        public PartWfConfig Config;
+        readonly ICaptureContext Context;        
+        
+        readonly ICaptureWorkflow CWf;                
 
-        public WfTermEventSink TermSink {get;}
+        readonly IApiSet Api;
         
-        readonly WfContext Wf;
+        readonly IPartCatalog[] Catalogs;        
         
-        readonly TPartCaptureArchive TargetArchive;
-        
-        ICaptureContext Context 
-            => CWf.Context;
+        readonly uint CatalogCount;
 
+        readonly IApiHost[] Hosts;
+
+        readonly uint HostCount;
+        
         [MethodImpl(Inline)]
-        internal ManagePartCapture(ICaptureWorkflow cwf, PartWfConfig config, WfTermEventSink sink, CorrelationToken? ct)
+        internal ManagePartCapture(WfContext wf, WfConfig config, ICaptureWorkflow cwf, CorrelationToken ct)
         {
-            TermSink = sink;
-            State = new CaptureState(cwf, config, ct);
-            Ct = ct ?? CorrelationToken.create();
+            Wf = wf;
             CWf = cwf;
-            Wf = config.Context;
             Config = config;
-            TargetArchive = Archives.Services.CaptureArchive(Config.Target.ArchiveRoot);    
+            Ct = ct;
+            State = new WfState(CWf, Wf, Config, Ct);
+            Context = CWf.Context;
+            Api = Context.ApiSet;
+            Catalogs = Api.Catalogs;
+            CatalogCount = (uint)Catalogs.Length;
+            
+            var a = Catalogs.SelectMany(c => c.DataTypeHosts).Cast<IApiHost>();
+            var b = Catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>();
+            Hosts = a.Concat(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
+            HostCount = (uint)Hosts.Length;
         }
         
         public void Run()
         {
             Clear(Config);  
-
-            var dst = Archives.Services.CaptureArchive(Config.Target.ArchiveRoot);    
-            var catalogs = Catalogs(Context.ApiSet).Array();
-            CaptureParts(catalogs, dst);
+            CaptureParts(Archives.Services.CaptureArchive(Config.Target.ArchiveRoot));
         }
 
-        IPartCatalog[] Catalogs(IApiSet src)
-            => src.Catalogs;
-
-
-        void CaptureParts(PartWfConfig config)
+        void CaptureParts(TPartCaptureArchive dst)
         {
-            Clear(config);  
-
-            var dst = Archives.Services.CaptureArchive(config.Target.ArchiveRoot);    
-            var catalogs = Catalogs(Context.ApiSet).Array();
-            CaptureParts(catalogs, dst);
+            var count = Catalogs.Length;
+            for(var i=0; i<count; i++)
+            {
+                CapturePart(Catalogs[i], dst);
+            }
         }
+
+        // void CaptureParts(WfConfig config)
+        // {
+        //     Clear(config);  
+
+        //     var dst = Archives.Services.CaptureArchive(config.Target.ArchiveRoot);    
+        //     CaptureParts(dst);
+        // }
 
         public void Consolidate()
         {
-            var catalogs = Catalogs(Context.ApiSet).Array();
-            Wf.Raise(new RunningConsolidated(WorkerName, catalogs.Length, Ct));
+            Wf.Raise(new RunningConsolidated(WorkerName, Catalogs.Length, Ct));
             
             Clear(Config);
 
             try
             {
-                var a = catalogs.SelectMany(c => c.DataTypeHosts).Cast<IApiHost>();
-                var b = catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>();
-                var hosts = a.Concat(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
-
-                Wf.Status(WorkerName, $"Consolidated {hosts.Length} hosts", Ct);                    
                 var dst = Archives.Services.CaptureArchive(Config.Target.ArchiveRoot); 
-                using var step = new CaptureHosts(State, hosts, dst, Ct);
+                using var step = new CaptureHosts(State, Hosts, dst, Ct);
                 step.Run();
 
             }
@@ -92,16 +99,7 @@ namespace Z0.Asm
                 Wf.Error(WorkerName, e, Ct);
            }
         }
-        
-        void CaptureParts(IPartCatalog[] src, TPartCaptureArchive dst)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                CapturePart(src[i], dst);
-            }
-        }
-        
+                
         void CapturePart(IPartCatalog src, TPartCaptureArchive dst)
         {
             if(src.IsNonEmpty)
@@ -131,11 +129,11 @@ namespace Z0.Asm
             Context.Raise(new CapturedHost(host.Uri));
         }
 
-        void Clear(PartWfConfig config) 
+        void Clear(WfConfig config) 
         {
             try
             {
-                using var step = new ClearCaptureArchives(config);
+                using var step = new ClearCaptureArchives(Wf, config, Ct);
                 step.Run();
             }
             catch(Exception e)

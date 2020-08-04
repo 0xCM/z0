@@ -12,7 +12,7 @@ namespace Z0
     partial struct Flow    
     {
         [MethodImpl(Inline), Op]
-        public static WfContext wfctx(IAppContext root, in CorrelationToken ct, in WfConfig config, in WfTermEventSink sink)
-            => new WfContext(root, ct, config, sink);       
+        public static WfError error(AppMsg msg, CorrelationToken ct)
+            => new WfError(msg, ct);
     }
 }

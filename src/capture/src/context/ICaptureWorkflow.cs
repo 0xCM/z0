@@ -15,11 +15,5 @@ namespace Z0.Asm
 
         EmitExtractReport ReportExtracts
             => new EmitExtractReport(this);
-
-        EmitParsedReportStep ReportParsed
-            => new EmitParsedReportStep(this);
-
-        DecodeParsed DecodeParsed
-            => new DecodeParsed(this);
     }
 }

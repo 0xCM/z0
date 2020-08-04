@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         public WfEventId Id {get;}
 
-        public string WorkerName {get;}
+        public string ActorName {get;}
 
         public ExtractedCode[] Extracts {get;}
         
@@ -27,11 +27,11 @@ namespace Z0.Asm
         internal AnalyzingExtracts(string worker, ExtractedCode[] extracts, CorrelationToken ct)
         {
             Id = wfid(nameof(AnalyzingExtracts), ct);
-            WorkerName = worker;
+            ActorName = worker;
             Extracts = extracts;
         }
 
         public string Format() 
-            => text.format(Pattern, Id, WorkerName, ExtractCount);
+            => text.format(Pattern, Id, ActorName, ExtractCount);
     }
 }

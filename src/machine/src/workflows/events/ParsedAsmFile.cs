@@ -16,7 +16,7 @@ namespace Z0
         
         public WfEventId Id {get;}
 
-        public string WorkerName {get;}
+        public string ActorName {get;}
 
         public FilePath SourcePath {get;}
 
@@ -26,7 +26,7 @@ namespace Z0
         public ParsedAsmFile(string worker, uint lines, FilePath src, CorrelationToken ct)
         {
             Id = WfEventId.define(nameof(ParsedAsmFile), ct);
-            WorkerName = worker;
+            ActorName = worker;
             LineCount = lines;
             SourcePath = src;
         }
@@ -36,6 +36,6 @@ namespace Z0
         
         [MethodImpl(Inline)]        
         public string Format()
-            => text.format(Pattern, Id, WorkerName, LineCount, SourcePath);               
+            => text.format(Pattern, Id, ActorName, LineCount, SourcePath);               
     }        
 }

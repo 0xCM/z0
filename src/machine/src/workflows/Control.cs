@@ -50,7 +50,7 @@ namespace Z0
         public static Control create(IAppContext context, CorrelationToken ct, params string[] args)
         {
             var receiver = termsink(ct);
-            var wf = wfctx(context, ct, wfconfig(context, receiver, ct), receiver);
+            var wf = Flow.context(context, ct, settings(context, ct), receiver);
             return new Control(wf, ct, args);
         }
 
@@ -88,7 +88,7 @@ namespace Z0
             {             
                 var cwf = capture(Asm, Wf, Context.AppPaths.AppCaptureRoot);
                 var broker = CaptureBroker.create(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
-                var config = wfconfig(Wf, Args);
+                var config = configure(Wf, Args);
                 using var host = new CaptureHost(Wf, Asm, cwf, broker, config, Ct);
                 host.Run();
             }

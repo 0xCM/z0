@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines classifiers that correspond to the basic CLR types
     /// </summary>
-    public enum ClrTypeKind : uint
+    public enum ClrTypeKind : byte
     {
         None = 0,
 
@@ -15,10 +15,10 @@ namespace Z0
 
         Struct = 2,
 
-        Delegate = 3,
+        Delegate = 4,
 
-        Enum = 4,
+        Enum = 8,
 
-        Interface = 5
+        Interface = 16
     }
 }

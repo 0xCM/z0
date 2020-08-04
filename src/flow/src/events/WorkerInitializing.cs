@@ -15,24 +15,25 @@ namespace Z0
     [Event]
     public readonly struct WorkerInitializing : IWfEvent<WorkerInitializing>
     {        
-        const string Pattern = PSx2;
-        
+        public const string EventName = nameof(WorkerInitializing);
+
         public WfEventId Id {get;}
         
-        public string WorkerName {get;}
+        public string ActorName {get;}
         
+        public AppMsgColor Flair {get;}
+
         [MethodImpl(Inline)]
-        public WorkerInitializing(string worker, CorrelationToken ct)
+        public WorkerInitializing(string worker, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
         {
-            Id = wfid(nameof(WorkerInitializing), ct);
-            WorkerName = worker;
+            Id = wfid(EventName, ct);
+            ActorName = worker;
+            Flair = flair;
         }
-        
-        public AppMsgColor Flair 
-            => AppMsgColor.Magenta;
+    
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Id, WorkerName);
+            => text.format(PSx2, Id, ActorName);
     }
 }

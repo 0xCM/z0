@@ -12,27 +12,27 @@ namespace Z0
 
     public readonly struct IndexedEncoded : IWfEvent<IndexedEncoded>
     {
-        const string Pattern = SS1x3;
-        
+        public const string EventName = nameof(IndexedEncoded);
+                
         public WfEventId Id {get;}
 
-        public string WorkerName {get;}
+        public string ActorName {get;}
 
         public readonly EncodedIndex Index;
+        
+        public AppMsgColor Flair 
+            => AppMsgColor.Cyan;                                 
 
         [MethodImpl(Inline)]
         public IndexedEncoded(string worker, EncodedIndex index, CorrelationToken ct)
         {
-            Id = wfid(nameof(IndexedEncoded), ct);
+            Id = wfid(EventName, ct);
             Index = index;
-            WorkerName = worker;
+            ActorName = worker;
         }
-
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;                                 
         
         [MethodImpl(Inline)]        
         public string Format()
-            => text.format(Pattern, Id, WorkerName, Index.EntryCount);               
+            => text.format(SSx3, Id, ActorName, Index.EntryCount);               
     }        
 }

@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="src">The source strean</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        public static bool IsVectorized(this MethodInfo src, W128 w, GenericPartition g = default)
+        public static bool IsVectorized(this MethodInfo src, W128 w, GenericState g = default)
             => RC.IsVectorized(src, w, g);
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="src">The source strean</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        public static bool IsVectorized(this MethodInfo src, W256 w, GenericPartition g = default)
+        public static bool IsVectorized(this MethodInfo src, W256 w, GenericState g = default)
             => RC.IsVectorized(src, w, g);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source strean</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        public static bool IsVectorized(this MethodInfo src, W512 w, GenericPartition g = default)
+        public static bool IsVectorized(this MethodInfo src, W512 w, GenericState g = default)
             => RC.IsVectorized(src, w, g);
    }
 }

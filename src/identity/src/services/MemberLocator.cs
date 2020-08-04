@@ -32,7 +32,7 @@ namespace Z0
                   where K : unmanaged, Enum
                         => HostedGeneric(src,kind).Concat(HostedDirect(src,kind)).OrderBy(x => x.Method.MetadataToken);
 
-            static IEnumerable<ApiMember> Hosted<K>(IApiHost src, K kind, GenericPartition g)
+            static IEnumerable<ApiMember> Hosted<K>(IApiHost src, K kind, GenericState g)
                   where K : unmanaged, Enum
                         => g.IsGeneric() ? HostedGeneric(src,kind) : HostedDirect(src, kind);
 

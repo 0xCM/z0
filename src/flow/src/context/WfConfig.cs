@@ -10,22 +10,19 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct PartWfConfig
+    public readonly struct WfConfig
     {    
-        public readonly WfContext Context;
-        
-        public readonly ArchiveConfig Source;
-
-        public readonly ArchiveConfig Target;
+        public readonly string[] Args;
 
         public readonly PartId[] Parts;        
 
-        public readonly string[] Args;
+        public readonly ArchiveConfig Source;
+
+        public readonly ArchiveConfig Target;
         
         [MethodImpl(Inline)]
-        public PartWfConfig(WfContext context, string[] args, ArchiveConfig src, ArchiveConfig dst, PartId[] parts)
+        public WfConfig(string[] args, ArchiveConfig src, ArchiveConfig dst, PartId[] parts)
         {
-            Context = context;
             Args = args;
             Source = src;
             Target = dst;

@@ -9,40 +9,39 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static LoadedWfConfigEvent;
-
-    [Event(true)]
-    public readonly struct LoadedWfConfigEvent
-    {   
-        public const string EventName = nameof(LoadedWfConfig);
-
-        public const string Pattern = IdMarker + "Comleted workflow load from {1}";
-
-        public const AppMsgColor DefaultFlair = AppMsgColor.Cyan;
-    }
     
     [Event]
     public readonly struct LoadedWfConfig : IWfEvent<LoadedWfConfig>
     {        
+        public const string EventName = nameof(LoadedWfConfig);
+
+        public const AppMsgColor DefaultFlair = AppMsgColor.Cyan;
+
         public WfEventId Id {get;}
+        
+        public string ActorName {get;}
         
         public AppMsgColor Flair {get;}
         
         public readonly FilePath ConfigPath;
 
-        public readonly WfConfig ConfigData;
+        public readonly WfSettings ConfigData;
+
+        public AppMsg Description {get;}
 
         [MethodImpl(Inline)]
-        public LoadedWfConfig(WfEventId id, FilePath src, WfConfig data)
+        public LoadedWfConfig(string actor, FilePath src, WfSettings data, CorrelationToken ct)
         {
-            Id = id;
+            Id = wfid(EventName, ct);
+            ActorName = actor;
             Flair = DefaultFlair;
             ConfigPath = src;
             ConfigData = data;
+            Description = AppMsg.NoCaller(new {SourcePath = src}, AppMsgKind.Info);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Id, ConfigPath);        
+            => text.format(PSx3, Id, ActorName, Description);        
     }
 }

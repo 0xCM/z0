@@ -20,7 +20,7 @@ namespace Z0.Asm
     [Step(WfStepId.CaptureHosts)]
     public readonly ref struct CaptureHosts
     {
-        public CaptureState Wf {get;}
+        public WfState Wf {get;}
 
         public ICaptureWorkflow CWf 
             => Wf.CWf;
@@ -31,7 +31,7 @@ namespace Z0.Asm
 
         public TPartCaptureArchive Target {get;}
 
-        public CaptureHosts(CaptureState state, IApiHost[] hosts,  TPartCaptureArchive dst, CorrelationToken ct)
+        public CaptureHosts(WfState state, IApiHost[] hosts,  TPartCaptureArchive dst, CorrelationToken ct)
         {
             Wf = state;
             Hosts= hosts;
@@ -63,20 +63,24 @@ namespace Z0.Asm
             var extractRpt = CWf.ReportExtracts.CreateExtractReport(host, extracts);
             CWf.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
 
-            var _parsed = new ParseMembers(Wf, Ct);
-            var parsed = _parsed.Parse(host, extracts);
+            var parser = new ParseMembers(Wf, Ct);
+            var parsed = parser.Parse(host, extracts);
             if(parsed.Length == 0)
                 Wf.Status(WorkerName, $"No {host} members were parsed", Ct);
             else
             {                        
-                CWf.ReportParsed.Emit(host, parsed, paths.ParsedPath);
-                _parsed.SaveHex(host, parsed, paths.HexPath);
 
-                var decoded = CWf.DecodeParsed.Run(host,parsed);
-                if(decoded.Length != 0)
+                using var _emit = new EmitParsedReport(Wf, host, parsed, paths.ParsedPath, Ct);            
+                _emit.Run();
+                _emit.Run();
+                parser.SaveHex(host, parsed, paths.HexPath);
+
+                using var decode = new DecodeParsed(Wf, CWf.Context, Ct);
+                var functions = decode.Run(host,parsed);
+                if(functions.Length != 0)
                 {
-                    CWf.DecodeParsed.SaveDecoded(decoded, paths.AsmPath);
-                    CWf.MatchAddresses.Run(host, extracts, decoded);
+                    decode.SaveDecoded(functions, paths.AsmPath);
+                    CWf.MatchAddresses.Run(host, extracts, functions);
                 }
             }
         }

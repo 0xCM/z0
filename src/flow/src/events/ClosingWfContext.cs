@@ -9,31 +9,36 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-
-    [Event(true)]
-    public readonly struct ClosingWfContextEvent
-    {
-        public const string EventName = nameof(ClosingWfContext);
-    }
     
     [Event]
-    public readonly struct ClosingWfContext : IWfEvent<ClosingWfContext>
+    public readonly struct ClosingWfContext : IWfEvent<ClosingWfContext, string>
     {
-        const string Pattern = IdMarker + "Closing workflow context {1}";
-        
+        public const string EventName = nameof(ClosingWfContext);
+
+        public const string EventMsg = "Closing workflow context | {0}";
+                
         public WfEventId Id {get;}
 
-        public readonly Type ContextType;
+        public string ActorName {get;}
+        
+        public string Body {get;}
+
+        public AppMsgColor Flair {get;}
+        
+        public AppMsg Description {get;}
 
         [MethodImpl(Inline)]
-        public ClosingWfContext(Type type, CorrelationToken? ct = null)
+        public ClosingWfContext(string worker, string type, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Blue)
         {
-            ContextType = type;
-            Id = wfid(nameof(ClosingWfContext), ct);
+            Id = wfid(EventName, ct);
+            Body = type;
+            ActorName = worker;
+            Flair = flair;
+            Description = AppMsg.Colorize(text.format(EventMsg, Body), Flair);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Id, ContextType.Name);        
+            => text.format(PSx3, Id, ActorName, Description);        
     }
 }

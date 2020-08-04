@@ -4117,3 +4117,48 @@
  delete mode 100644 src/machines/id.sh
  delete mode 100644 src/machines/remove.sh
  delete mode 100644 src/machines/z0.machines.csproj
+[master c4b0e7958] .
+ 70 files changed, 632 insertions(+), 695 deletions(-)
+ create mode 100644 .settings/machine.steps.json
+ create mode 100644 src/flow/src/events/WorkerInitializing.cs
+ rename src/flow/src/services/{hosts => }/TableFormatter.cs (100%)
+ rename src/flow/src/services/{hosts => }/TableFormatters.cs (100%)
+ rename src/flow/src/services/{hosts => }/WfBroker.cs (79%)
+ rename src/flow/src/services/{hosts => }/WfEventLog.cs (100%)
+ rename src/flow/src/services/{hosts => }/WfTermEventSink.cs (82%)
+ delete mode 100644 src/flow/src/services/hosts/MultiSink.cs
+ rename src/{machine/src/workflows/services/recapture/ops/InferHostUri.cs => flow/src/services/ops/uri.cs} (79%)
+ delete mode 100644 src/machine/src/infrastructure/FixedTableAttribute.cs
+ delete mode 100644 src/machine/src/infrastructure/WfStatus.cs
+ delete mode 100644 src/machine/src/infrastructure/WorkflowActor.cs
+ delete mode 100644 src/machine/src/infrastructure/WorkflowStatus.cs
+ delete mode 100644 src/machine/src/services/CaptureMessages.cs
+ create mode 100644 src/machine/src/services/Reveal.cs
+ rename src/machine/src/{workflows => }/services/recapture/RecaptureAccessors.cs (100%)
+ rename src/machine/src/{workflows => }/services/recapture/ops/Capture.cs (95%)
+ rename src/machine/src/{workflows => }/services/recapture/ops/CaptureAsm.cs (94%)
+ rename src/machine/src/{workflows => }/services/recapture/ops/CaptureKnown.cs (100%)
+ rename src/machine/src/{workflows => }/services/recapture/ops/CreateFunction.cs (100%)
+ rename src/machine/src/{workflows => }/services/recapture/ops/SaveResIndex.cs (100%)
+ rename src/machine/src/{workflows => }/services/recapture/ops/WriteAsm.cs (100%)
+ rename src/machine/src/workflows/{steps/WfControlStep.cs => ControlStep.cs} (82%)
+ create mode 100644 src/machine/src/workflows/WorkflowSteps.cs
+ delete mode 100644 src/machine/src/workflows/context/CaptureWorkflowConfig.cs
+ rename src/machine/src/workflows/{contracts => context}/IAsmProcessor.cs (67%)
+ rename src/machine/src/workflows/{contracts => context}/IMachine.cs (81%)
+ rename src/machine/src/workflows/{events/IMachineEventClient.cs => context/IMachineClient.cs} (75%)
+ delete mode 100644 src/machine/src/workflows/context/MachineAsmContext.cs
+ delete mode 100644 src/machine/src/workflows/context/MachineWorkflowConfig.cs
+ delete mode 100644 src/machine/src/workflows/contracts/IJmpProcessor.cs
+ delete mode 100644 src/machine/src/workflows/contracts/IMachineContext.cs
+ delete mode 100644 src/machine/src/workflows/contracts/IWorkflowActor.cs
+ delete mode 100644 src/machine/src/workflows/contracts/IWorkflowWorker.cs
+ delete mode 100644 src/machine/src/workflows/events/IMachineEvents.cs
+ create mode 100644 src/machine/src/workflows/events/ParsedAsmFile.cs
+ delete mode 100644 src/machine/src/workflows/models/EmissionDataType.cs
+ rename src/machine/src/workflows/{contracts/IWorkflowControl.cs => steps/EmitPeHeadersStep.cs} (60%)
+ create mode 100644 src/machine/src/workflows/steps/ParseAsmFiles.cs
+ delete mode 100644 src/machine/src/workflows/steps/RunMachineStep.cs
+ rename src/machine/src/workflows/steps/{RunMachine.cs => RunProcessors.cs} (77%)
+ rename src/machine/src/{infrastructure/WfKind.cs => workflows/steps/RunProcessorsStep.cs} (62%)
+ delete mode 100644 src/machine/src/workflows/x/Running.cs

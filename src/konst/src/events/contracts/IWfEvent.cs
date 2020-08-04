@@ -8,6 +8,8 @@ namespace Z0
     {
         WfEventId Id {get;}
 
+        string ActorName => string.Empty;
+
         CorrelationToken ICorrelated.Ct 
             => Id.Ct;
     }
@@ -21,6 +23,6 @@ namespace Z0
     public interface IWfEvent<F,T> : IWfEvent<F>
         where F : struct, IWfEvent<F,T>
     {
-        T Payload {get;}
+        T Body {get;}
     }
 }

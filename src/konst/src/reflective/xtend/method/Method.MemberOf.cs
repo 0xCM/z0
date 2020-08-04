@@ -15,7 +15,7 @@ namespace Z0
         /// For the generic methods in a stream, selects their respective definitions
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static MethodInfo[] MemberOf(this MethodInfo[] src, GenericPartition g)
+        public static MethodInfo[] MemberOf(this MethodInfo[] src, GenericState g)
             => (g.IsGeneric() ? src.OpenGeneric().Union(src.ClosedGeneric()) : src.NonGeneric()).Array();
     }
 }

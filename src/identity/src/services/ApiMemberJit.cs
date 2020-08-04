@@ -31,7 +31,7 @@ namespace Z0
             return all.OrderBy(x => x.Address);
         }
 
-        public static ApiMembers jit<K>(IApiHost src, K kind, GenericPartition g)
+        public static ApiMembers jit<K>(IApiHost src, K kind, GenericState g)
             where K : unmanaged, Enum
                 => g.IsGeneric() ? JitLocatedGeneric(src, kind) : JitLocatedDirect(src, kind);
 

@@ -11,7 +11,7 @@ namespace Z0
     using static Flow;
     
     public readonly struct Unaddressed : IWfEvent<Unaddressed>
-    {
+    {        
         const string Pattern = IdMarker + "The location for {1} code is unknown";
         
         public WfEventId Id {get;}

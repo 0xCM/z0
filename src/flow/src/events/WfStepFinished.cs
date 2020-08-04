@@ -10,47 +10,44 @@ namespace Z0
         
     using static Konst;
     using static Flow;
-    using static WfStepFinishedEvent;
-
-    [Event(true)]
-    public readonly struct WfStepFinishedEvent
-    {
-        public const string DefaultPattern = IdMarker + "Completed";
-
-        public const string DetailPattern = IdMarker + "Completed" + ContentMarker;
-
-        public const AppMsgColor DefaultFlair = AppMsgColor.Cyan;
-    }
 
     [Event]
-    public readonly struct WfStepFinished : IWfEvent<WfStepFinished>
+    public readonly struct WfStepFinished : IWfEvent<WfStepFinished, string>
     {
+        public const string EventName = nameof(WfStepFinished);
+
         public readonly WfEventId Id {get;}
 
-        public readonly string Detail;
+        public string ActorName {get;}
+
+        public string Body {get;}
 
         public AppMsgColor Flair {get;}
 
+        public AppMsg Description {get;}
+
         [MethodImpl(Inline)]
-        public WfStepFinished(string worker, CorrelationToken? ct = null)
+        public WfStepFinished(string worker, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
-            Id = wfid(worker, ct);
-            Detail = EmptyString;
-            Flair = DefaultFlair;
+            Id = wfid(EventName, ct);
+            ActorName = worker;
+            Body = "Step Finished";
+            Flair = flair;
+            Description = AppMsg.Colorize(Body, Flair);
         }
 
         [MethodImpl(Inline)]
-        public WfStepFinished(string worker, string detail, CorrelationToken? ct = null)
+        public WfStepFinished(string worker, string body, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
-            Id = wfid(worker, ct);
-            Detail = detail;
-            Flair = DefaultFlair;
+            Id = wfid(worker, ct);            
+            ActorName = worker;
+            Body = body;
+            Flair = flair;
+            Description = AppMsg.Colorize(Body, Flair);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.nonempty(Detail) 
-            ? text.format(DetailPattern, Id, Detail)
-            : text.format(DefaultPattern, Id);            
+            => text.format(PSx3, Id, ActorName, Description);
     }
 }

@@ -44,6 +44,11 @@ namespace Z0
         public const string Slot5 = "{5}";
 
         /// <summary>
+        /// Defines the literal "{6}"
+        /// </summary>
+        public const string Slot6 = "{6}";
+
+        /// <summary>
         /// Retrieves the <see cref='Slot0' /> literal
         /// </summary>
         /// <param name="n">The slot selector</param>

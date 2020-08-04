@@ -16,19 +16,19 @@ namespace Z0.Asm
 
         public WfEventId Id {get;}
 
-        public string WorkerName {get;}
+        public string ActorName {get;}
         
         public readonly int Count;
 
         [MethodImpl(Inline)]
         public RunningConsolidated(string worker, int count, CorrelationToken? ct = null)
         {
-            WorkerName = worker;
+            ActorName = worker;
             Count = count;
             Id = WfEventId.define(nameof(RunningConsolidated), ct);
         }
 
         public string Format() 
-            => text.format(Pattern, Id, WorkerName, Count);
+            => text.format(Pattern, Id, ActorName, Count);
     }    
 }

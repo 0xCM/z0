@@ -12,7 +12,7 @@ namespace Z0
     {
         public CapturedAccessor[] CaptureKnown(ApiHostUri host, FilePath asmdst)
         {
-            var assemblies = Context.Api.Composition.Assemblies;
+            var assemblies = Context.ContextRoot.Composition.Assemblies;
             return CaptureAsm(host, Resources.accessors(assemblies), asmdst);
         }                
     }

@@ -10,31 +10,33 @@ namespace Z0
     using static Konst;
     using static Flow;
     using static z;
-
     [Event]
-    public readonly struct WfStatus<T> : IWfEvent<WfStatus<T>>
+    public readonly struct WfStatus<T> : IWfEvent<WfStatus<T>, T>
     {        
-        const string Pattern = IdMarker + "{1} | {2}";
+        public const string EventName = nameof(WfStatus<T>);
 
         public WfEventId Id {get;}
 
+        public string ActorName {get;}        
+
+        public T Body {get;}
+
         public AppMsgColor Flair {get;}
 
-        public string WorkerName {get;}
-        
-        public T Body {get;}
+        public AppMsg Description {get;}
 
         [MethodImpl(Inline)]
         public WfStatus(string worker, T body, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Blue)
         {
-            Id = wfid(nameof(WfStatus), ct);
+            Id = wfid(EventName, ct);
+            ActorName = worker;
             Flair =  flair;
-            WorkerName = worker;
             Body = body;
+            Description = AppMsg.Colorize(Body, Flair);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Id, WorkerName, Body);
+            => text.format(PSx3, Id, ActorName, Description);
     }
 }

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using GS = GenericStateKind;
+    using GS = GenericKind;
 
     partial class XTend
     {  
-        public static GenericStateKind GenericState(this MethodInfo src, bool effective)
+        public static GenericKind GenericState(this MethodInfo src, bool effective)
             =>   src.IsOpenGeneric() ? GS.Open 
                : src.IsClosedGeneric() ? GS.Closed 
                : src.IsGenericMethodDefinition ? GS.Definition 

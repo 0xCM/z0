@@ -42,9 +42,6 @@ namespace Z0
         public static MethodInfo[] V256UnaryShifts 
             => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_256");
 
-        public static IApiHostQuery<dvec> Query 
-            => ApiHostQuery.Over<dvec>();
-
         [MethodImpl(Inline)]
         public static Vector128<short> vsll_128x16i(Vector128<short> src, [Imm] byte count)
             => ShiftLeftLogical(src, (byte)count);

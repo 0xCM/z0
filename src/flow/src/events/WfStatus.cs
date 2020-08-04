@@ -13,29 +13,34 @@ namespace Z0
     using static z;
     
     [Event]
-    public readonly struct WfStatus : IWfEvent<WfStatus>
+    public readonly struct WfStatus : IWfEvent<WfStatus, string>
     {        
-        const string Pattern = IdMarker + "{1} | {2}";
+        public const string EventName = nameof(WfStatus);
+        
+        const string Pattern = PSx3;
 
         public WfEventId Id {get;}
+    
+        public string ActorName {get;}
 
+        public string Body {get;}
+        
         public AppMsgColor Flair {get;}
 
-        public readonly string Message;
-
-        public string WorkerName {get;}
+        public AppMsg Description {get;}
  
         [MethodImpl(Inline)]
-        public WfStatus(string worker, string msg, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Blue)
+        public WfStatus(string worker, string body, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Blue)
         {
             Id = wfid(nameof(WfStatus), ct);
+            ActorName = worker;
+            Body = body;
             Flair =  flair;
-            Message = msg;
-            WorkerName = worker;
+            Description = AppMsg.Colorize(Body, Flair);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Id, WorkerName, Message);
+            => text.format(Pattern, Id, ActorName, Description);
     }
 }

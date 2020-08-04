@@ -36,7 +36,7 @@ namespace Z0.Asm
             ICaptureBroker broker, TPartCaptureArchive archive, CorrelationToken ct)
         {
             Ct = ct;
-            ApiSet = context.Api;
+            ApiSet = context.ContextRoot;
             Extractor = Capture.Services.HostExtractor(Extracts.DefaultBufferLength);
             Parser = Extracts.Services.ExtractParser(Extracts.DefaultBufferLength);
             Decoder = decoder;

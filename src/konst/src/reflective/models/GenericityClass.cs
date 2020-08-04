@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using T = GenericTargetKind;
-    using S = GenericStateKind;
+    using T = ParametricTargetKind;
+    using S = GenericKind;
 
     [Flags]
     public enum GenericityClass : byte

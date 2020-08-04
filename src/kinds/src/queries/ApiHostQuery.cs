@@ -6,32 +6,45 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
 
     using static Konst;
 
-    public interface IApiHostQuery : IService
+    /// <summary>
+    /// Defines api queries over a specific host
+    /// </summary>
+    public readonly struct ApiHostQuery
     {
-        IApiHost Host {get;}
+        /// <summary>
+        /// The host to interrogate
+        /// </summary>
+        public IApiHost Source {get;}
+
+        [MethodImpl(Inline)]
+        public static ApiHostQuery Create(IApiHost host)
+            => new ApiHostQuery(host);
+        
+        [MethodImpl(Inline)]
+        public ApiHostQuery(IApiHost host)
+            => Source = host;
 
         /// <summary>
         /// All hosted methods
         /// </summary>
-        MethodInfo[] Hosted 
-            => Host.HostedMethods;
+        public MethodInfo[] Hosted 
+            => Source.HostedMethods;
 
         /// <summary>
         /// All hosted generic methods
         /// </summary>
-        MethodInfo[] Generic
+        public MethodInfo[] Generic
             => Hosted.OpenGeneric();
                
         /// <summary>
         /// All hosted non-generic methods
         /// </summary>
-        MethodInfo[] Direct
+        public MethodInfo[] Direct
             => Hosted.NonGeneric();
 
         /// <summary>
@@ -39,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The kind classifier</param>
         /// <typeparam name="K">The kind type</typeparam>
-        MethodInfo[] OfKind<K>(K k)
+        public MethodInfo[] OfKind<K>(K k)
             where K : unmanaged, Enum
                 => (from m in Hosted.Tagged(typeof(OpKindAttribute))
                 let a = m.Tag<OpKindAttribute>().Require()
@@ -51,7 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The kind classifier</param>
         /// <typeparam name="K">The kind type</typeparam>
-        MethodInfo[] OfKind<K>(K k, GenericPartition g)
+        public MethodInfo[] OfKind<K>(K k, GenericState g)
             where K : unmanaged, Enum
                 => OfKind(k).MemberOf(g).Array();
 
@@ -59,21 +72,21 @@ namespace Z0
         /// Queries the host for binary operators belonging to a specifed generic partition
         /// </summary>
         /// <param name="g">The generic partition</param>
-        MethodInfo[] UnaryOps(GenericPartition g = default)
+        public MethodInfo[] UnaryOps(GenericState g = default)
             => Hosted.MemberOf(g).UnaryOperators();
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specifed generic partition
         /// </summary>
         /// <param name="g">The generic partition</param>
-        MethodInfo[] BinaryOps(GenericPartition g = default)
+        public MethodInfo[] BinaryOps(GenericState g = default)
             => Hosted.MemberOf(g).BinaryOperators();
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specifed generic partition
         /// </summary>
         /// <param name="g">The generic partition</param>
-        MethodInfo[] TernaryOps(GenericPartition g = default)
+        public MethodInfo[] TernaryOps(GenericState g = default)
             => Hosted.MemberOf(g).TernaryOperators();
 
         /// <summary>
@@ -81,7 +94,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width</param>
         /// <param name="generic">Whether generic or non-generc methods should be selected</param>
-        MethodInfo[] Vectorized(W128 w, GenericPartition g = default)
+        public MethodInfo[] Vectorized(W128 w, GenericState g = default)
             => g.IsGeneric() ? Hosted.VectorizedGeneric(w) : Hosted.VectorizedDirect(w);
 
         /// <summary>
@@ -89,7 +102,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width</param>
         /// <param name="generic">Whether generic or non-generc methods should be selected</param>
-        MethodInfo[] Vectorized(W256 w, GenericPartition g = default)
+        public MethodInfo[] Vectorized(W256 w, GenericState g = default)
             => g.IsGeneric() ? Hosted.VectorizedGeneric(w) : Hosted.VectorizedDirect(w);
 
         /// <summary>
@@ -98,7 +111,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic parition to consider</param>
-        MethodInfo[] Vectorized(W128 w, string name, GenericPartition g = default)
+        public MethodInfo[] Vectorized(W128 w, string name, GenericState g = default)
             => Hosted.Vectorized(w,name,g);
 
         /// <summary>
@@ -107,7 +120,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic parition to consider</param>
-        MethodInfo[] Vectorized(W256 w, string name, GenericPartition g = default)
+        public MethodInfo[] Vectorized(W256 w, string name, GenericState g = default)
             => Hosted.Vectorized(w,name,g);
 
         /// <summary>
@@ -116,14 +129,14 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic parition to consider</param>
-        MethodInfo[] Vectorized(W512 w, string name, GenericPartition g = default)
+        public MethodInfo[] Vectorized(W512 w, string name, GenericState g = default)
             => Hosted.Vectorized(w,name,g);
 
-        MethodInfo[] OfKind<K>(W128 w, K kind, GenericPartition g = default)
+        public MethodInfo[] OfKind<K>(W128 w, K kind, GenericState g = default)
             where K : unmanaged, Enum
                 => OfKind(kind,g).VectorizedDirect(w);
 
-        MethodInfo[] OfKind<K>(W256 w, K kind, GenericPartition g = default)
+        public MethodInfo[] OfKind<K>(W256 w, K kind, GenericState g = default)
             where K : unmanaged, Enum
                 => OfKind(kind,g).VectorizedDirect(w);
 
@@ -132,7 +145,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The width to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        MethodInfo[] Vectorized<T>(W128 w)
+        public MethodInfo[] Vectorized<T>(W128 w)
             where T : unmanaged
                 => Hosted.VectorizedDirect<T>(w);
 
@@ -141,7 +154,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The width to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        MethodInfo[] Vectorized<T>(W256 w)
+        public MethodInfo[] Vectorized<T>(W256 w)
             where T : unmanaged
                 => Hosted.VectorizedDirect<T>(w);
 
@@ -150,7 +163,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The width to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        MethodInfo[] Vectorized<T>(W512 w)
+        public MethodInfo[] Vectorized<T>(W512 w)
             where T : unmanaged
                 => Hosted.VectorizedDirect<T>(w);
 
@@ -160,7 +173,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        MethodInfo[] Vectorized<T>(W128 w, string name)
+        public MethodInfo[] Vectorized<T>(W128 w, string name)
             where T : unmanaged
                 => Vectorized<T>(w).WithName(name);
 
@@ -170,7 +183,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        MethodInfo[] Vectorized<T>(W256 w, string name)
+        public MethodInfo[] Vectorized<T>(W256 w, string name)
             where T : unmanaged
                 => Vectorized<T>(w).WithName(name);
 
@@ -180,19 +193,8 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        MethodInfo[] Vectorized<T>(W512 w, string name)
+        public MethodInfo[] Vectorized<T>(W512 w, string name)
             where T : unmanaged
-                => Vectorized<T>(w).WithName(name);
-    }
-
-    public interface IApiHostQuery<H> : IApiHostQuery
-        where H : IApiHost<H>, new()
-    {
-        /// <summary>
-        /// The interrogation subject
-        /// </summary>
-        new H Host  => new H();
-
-        IApiHost IApiHostQuery.Host => Host;
+                => Vectorized<T>(w).WithName(name);            
     }
 }

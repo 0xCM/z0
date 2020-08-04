@@ -10,26 +10,34 @@ namespace Z0
         
     using static Konst;
     using static Flow;
-    using static WfStepFinishedEvent;
 
+    [Event]
     public readonly struct WfStepFinished<T> : IWfEvent<WfStepFinished<T>, T>
     {
+        public const string EventName = nameof(WfStepFinished<T>);
+
         public WfEventId Id {get;}
-        
-        public T Payload {get;}
+                        
+        public string ActorName {get;}
+
+        public T Body {get;}
 
         public AppMsgColor Flair {get;}
 
+        public AppMsg Description {get;}
+
         [MethodImpl(Inline)]
-        public WfStepFinished(string worker, T detail, CorrelationToken ct)
+        public WfStepFinished(string worker, T body, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
-            Id = wfid(worker, ct);
-            Payload = detail;
-            Flair = DefaultFlair;
+            Id = wfid(EventName, ct);
+            ActorName = worker;
+            Body = body;
+            Flair = flair;
+            Description = AppMsg.Colorize(Body, Flair);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(DetailPattern, Id, Payload);          
+            => text.format(PSx3, Id, ActorName, Description);          
     }   
 }

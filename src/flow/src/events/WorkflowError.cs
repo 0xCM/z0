@@ -12,25 +12,27 @@ namespace Z0
 
     public readonly struct WorkflowError : IWfEvent<WorkflowError>
     {
+        public const string EventName = nameof(WorkflowError);
+        
         public WfEventId Id {get;}
 
-        public string WorkerName {get;}
+        public string ActorName {get;}
         
         public string Description {get;}        
 
         [MethodImpl(Inline)]
         public WorkflowError(string worker, string description, Exception e, CorrelationToken ct)
         {
-            Id = wfid(nameof(WorkflowError));
-            WorkerName = worker;
+            Id = wfid(EventName, ct);
+            ActorName = worker;
             Description = $"{description}{e}";
         }
 
         [MethodImpl(Inline)]
         public WorkflowError(string worker, Exception e, CorrelationToken ct)
         {
-            Id = wfid(nameof(WorkflowError), ct);
-            WorkerName = worker;
+            Id = wfid(EventName, ct);
+            ActorName = worker;
             Description = $"{e}";
         }
 

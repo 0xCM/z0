@@ -12,37 +12,43 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ApiQuery
+    /// <summary>
+    /// Defines api queries over a specific catalog
+    /// </summary>
+    public readonly struct ApiCatalogQuery
     {
-        [MethodImpl(Inline)]
-        public static ApiQuery create(IPartCatalog src)
-            => new ApiQuery(src);
+        /// <summary>
+        /// The catalog to interrogate
+        /// </summary>
+        public IPartCatalog Source {get;}
 
-        public IPartCatalog Context {get;}
+        [MethodImpl(Inline)]
+        public static ApiCatalogQuery create(IPartCatalog src)
+            => new ApiCatalogQuery(src);
 
         [MethodImpl(Inline)]
-        internal ApiQuery(IPartCatalog src)
-            => Context = src;
+        public ApiCatalogQuery(IPartCatalog src)
+            => Source = src;
 
         public MethodInfo[] Vectorized<T>(W128 w, bool generic)
             where T : unmanaged
-                => (from host in Context.ApiHosts
+                => (from host in Source.ApiHosts
                     from m in host.HostedMethods.VectorizedDirect<T>(w)                    
                     where m.IsGenericMethod == generic
                     select m).Array();
         public MethodInfo[] Generic
-            => (from host in Context.ApiHosts
+            => (from host in Source.ApiHosts
                 from m in host.HostedMethods.OpenGeneric()
                 select m).Array();
 
         public MethodInfo[] Direct
-            => (from host in Context.ApiHosts
+            => (from host in Source.ApiHosts
                 from m in host.HostedMethods.NonGeneric()
                 select m).Array();
 
         public MethodInfo[] Vectorized<T>(W256 w, bool generic)
             where T : unmanaged
-                => (from host in Context.ApiHosts
+                => (from host in Source.ApiHosts
                     from m in host.HostedMethods.VectorizedDirect<T>(w)
                     where m.IsGenericMethod == generic
                     select m).Array();

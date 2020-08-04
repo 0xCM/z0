@@ -8,34 +8,56 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    public readonly ref struct EmitParsedReportStep
+    using static Flow;
+    using static EmitParsedReportStep;
+    
+    public readonly ref struct EmitParsedReport
     {
-        public ICaptureWorkflow Workflow {get;}
+        readonly WfState Wf ;        
 
-        public ICaptureContext Context 
-            => Workflow.Context;
+        readonly CorrelationToken Ct;
 
+        readonly ApiHostUri Host;
+
+        readonly ParsedExtract[] Source;
+
+        readonly FilePath Target;
+        
         [MethodImpl(Inline)]
-        internal EmitParsedReportStep(ICaptureWorkflow workflow)
+        internal EmitParsedReport(WfState wf, ApiHostUri host, ParsedExtract[] src, FilePath dst, CorrelationToken ct)
         {
-            Workflow = workflow;
+            Wf = wf;
+            Ct = ct;
+            Host = host;
+            Source = src;
+            Target = dst;
+            Wf.Created(WorkerName, Ct);
         }
 
-        public void Emit(ApiHostUri host, ParsedExtract[] src, FilePath dst)
+        public void Run()
         {
-            var context = Context;
-            var report = MemberParseReport.Create(host, src);                    
-            var saved = report.Save(dst);
-            if(saved)
-                Context.Raise(new ParseReportEmitted(report, dst));
-            else
-                term.error($"Report emission failed");
+            Wf.Running(WorkerName, Ct);
+
+            try
+            {
+                var report = MemberParseReport.Create(Host, Source);                    
+                var saved = report.Save(Target);
+                if(saved)
+                    Wf.Raise(new ParseReportEmitted(WorkerName, report, Target, Ct));
+                else
+                    Wf.Error(WorkerName, "Report emission failed", Ct);
+            }
+            catch(Exception e)
+            {
+                Wf.Error(WorkerName, e, Ct);
+            }
+
+            Wf.Ran(WorkerName, Ct);
         }
 
         public void Dispose()
         {
-
+            Wf.Finished(WorkerName, Ct);
         }
     }
 }
