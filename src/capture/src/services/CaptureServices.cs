@@ -18,7 +18,10 @@ namespace Z0.Asm
             => new CaptureServices(context);
 
         [MethodImpl(Inline)]
-        internal CaptureServices(IAsmContext context) 
+        public CaptureServices(IAsmContext context) 
             => Context = context;
+
+        public ICaptureCore CaptureCore
+            => Asm.CaptureCore.Service;
     }
 }

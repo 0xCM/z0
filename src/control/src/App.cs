@@ -7,7 +7,7 @@ namespace Z0
     class App : AppShell<App,IAppContext>
     {                
         public App()
-            : base(ContextFactory.CreateAppContext())
+            : base(ContextFactory.app())
         {
         }
         

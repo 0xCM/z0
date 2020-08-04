@@ -25,11 +25,25 @@ namespace Z0
         object locker;
 
         CorrelationToken Ct;
-        
+
         [MethodImpl(Inline)]
-        public WfBroker(FilePath target, CorrelationToken? ct = null)
+        public WfBroker(CorrelationToken ct)
         {
-            Ct = ct ?? CorrelationToken.create();
+            Ct = ct;
+            var @base = AppBase.Default;
+            var paths = @base.AppPaths;
+            Sink = WfTermEventSink.create(Ct);
+            TargetPath = paths.AppCaptureRoot + FileName.Define($"{@base.AppName}.broker", FileExtensions.Csv);
+            Subscriptions = new Dictionary<Type,ISink>();
+            Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
+            locker = new object();                    
+            Sink.Deposit(new WorkerInitialized(nameof(WfBroker), Ct));
+        }
+
+        [MethodImpl(Inline)]
+        public WfBroker(FilePath target, CorrelationToken ct)
+        {
+            Ct = ct;
             var @base = AppBase.Default;
             var paths = @base.AppPaths;
             Sink = WfTermEventSink.create(Ct);
@@ -45,17 +59,6 @@ namespace Z0
             Sink.Deposit(new WfStepFinished(nameof(WfBroker), Ct));
         }
 
-        public void raise<E>(in E e)
-            where E : IAppEvent
-        {                
-            Emit(e);
-            
-            if(Subscriptions.TryGetValue(e.GetType(), out var sink))
-                ((IAppMsgSink)sink).Deposit(e);
-            else
-                term.print(e, e.Flair);
-        }
-
         public Outcome Subscribe<S,E>(S sink, E model)
             where E : IAppEvent
             where S : ISink
@@ -67,9 +70,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        static EventRelay<E> relay<E>(Action<E> receiver)
+            where E : IAppEvent
+                => new EventRelay<E>(receiver);
+
+        [MethodImpl(Inline)]
         public Outcome Subscribe<E>(Action<E> receiver, E model = default)
             where E : IAppEvent
-                => Subscribe(Events.sink(receiver), model);
+                => Subscribe(
+                    relay(receiver), model);
 
         public void Cancel(ulong session)
         {
@@ -95,6 +104,16 @@ namespace Z0
         public void Raise(IAppEvent e)
         {
             Emit(e);
+        }
+
+        public void Deposit(IWfEvent e)
+        {
+            Sink.Deposit(e);
+        }
+
+        public void Deposit(IAppEvent e)
+        {
+            term.print(e);
         }
     }
 }

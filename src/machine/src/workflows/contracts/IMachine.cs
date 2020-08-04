@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IMachine : IServiceAllocation<IMachineContext>, IMachineEventClient
+    using System;
+    
+    public interface IMachine : IMachineEventClient, IDisposable
     {
         void Run();
     }

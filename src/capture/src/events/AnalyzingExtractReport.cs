@@ -16,11 +16,13 @@ namespace Z0.Asm
     {                    
         const string Pattern = "";
 
-        public WfEventId Id  => WfEventId.define(nameof(AnalyzingExtractReport));
+        public WfEventId Id => WfEventId.define(nameof(AnalyzingExtractReport));
 
         [MethodImpl(Inline)]
         internal AnalyzingExtractReport(FilePath src)
-            => Path = src;
+        {
+            Path = src;
+        }
 
         public FilePath Path {get;}
 

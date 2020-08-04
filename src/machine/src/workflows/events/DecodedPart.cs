@@ -10,10 +10,11 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
+    using static Flow;
     
     public readonly struct DecodedPart : IWfEvent<DecodedPart>
     {
-        const string Pattern = "{0}: {1} {2} instructions decoded";
+        const string Pattern =  IdMarker +"{1} {2} instructions decoded";
 
         public WfEventId Id {get;}
 

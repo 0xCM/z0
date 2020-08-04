@@ -57,7 +57,7 @@ namespace Z0
 
          public void Deposit(IAppEvent src)
          {
-            Deposit(new WfStatus(src.Format(), src.Flair, Ct));            
+            Deposit(new WfStatus("anonymous", src.Format(), Ct, src.Flair));            
          }
 
          public void Dispose()
@@ -68,7 +68,7 @@ namespace Z0
             ErrTarget.Flush();
             ErrTarget.Dispose();
 
-            RelayTarget.Deposit(new WfStepFinished(nameof(WfEventLog)));
+            RelayTarget.Deposit(new WfStepFinished(nameof(WfEventLog), Ct));
             RelayTarget.Dispose();
         }
    }

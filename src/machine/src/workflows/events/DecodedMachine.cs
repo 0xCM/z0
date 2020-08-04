@@ -12,6 +12,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
+    using static Flow;
 
     public readonly struct DecodedMachine : IWfEvent<DecodedMachine>
     {

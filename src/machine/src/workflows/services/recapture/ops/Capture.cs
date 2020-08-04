@@ -12,7 +12,7 @@ namespace Z0
 
     using static z;
 
-    partial struct RecaptureAccessors
+    partial struct Recapture
     {
         /// <summary>
         /// All of your resbytes belong to us

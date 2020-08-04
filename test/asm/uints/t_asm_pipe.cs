@@ -7,11 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.IO;
     using Z0.Asm.Dsl;
-
-    using D = Dsl;
 
     using static Konst;
     using static Root;
@@ -19,9 +15,7 @@ namespace Z0.Asm
     using K = Kinds;
 
     public class t_asm_pipe : t_asm<t_asm_pipe>
-    {
- 
-        
+    {        
         public t_asm_pipe()
         {
             OnDispose += HandleDispose;
@@ -48,7 +42,7 @@ namespace Z0.Asm
             }
 
             var parts = z.array(PartId.DVec, PartId.GVec);            
-            var runner = AsmPipeRunner.Create(pipelog);
+            var runner = AsmPipeRunner.create(pipelog);
             runner.Include(Call.sink(CallHandler));            
             var handled = runner.RunPipe(parts);                     
         }

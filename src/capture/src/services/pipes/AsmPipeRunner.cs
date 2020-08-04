@@ -16,7 +16,7 @@ namespace Z0.Asm
     public readonly struct AsmPipeRunner
     {
         [MethodImpl(Inline)]
-        public static AsmPipeRunner Create(FilePath logpath)
+        public static AsmPipeRunner create(FilePath logpath)
             => new AsmPipeRunner(logpath);
         
         public FilePath LogPath {get;}
@@ -60,7 +60,6 @@ namespace Z0.Asm
             ref readonly var inxs = ref src.Inxs[0];
             for(var i=0; i<count; i++)
                 Flow(skip(inxs,i));
-
         }
         
         public void Flow(in Instruction src)
@@ -98,12 +97,11 @@ namespace Z0.Asm
 
         void RunPipe(ReadOnlySpan<IdentifiedCode> src, StreamWriter log)
         {
-            var decoder = UriHexDecoder.Service;
             var t1 = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, Handlers.OnVinserti128);
             var t2 = AsmMnemonicTrigger.Define(Mnemonic.Vmovupd, Handlers.OnVmovupd);
             var t3 = AsmMnemonicTrigger.Define(Mnemonic.Call, Handlers.OnCall);
             var triggers = AsmTriggerSet.Define(t1,t2,t3);
-            var decoded = decoder.Decode(src).Map(ToList);
+            var decoded = UriHexDecoder.decode(src).Map(ToList);
             var flow = AsmInstructionFlow.Create(decoded, triggers);
             var pipe = AsmInstructionPipe.From(Pipe); 
             var results = flow.Push(pipe);

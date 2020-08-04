@@ -11,12 +11,8 @@ namespace Z0
     using static Konst;
     using static Flow;
     using static EmitDatasetsStep;
-
-    public readonly struct EmitDatasetsStep
-    {
-        public const string WorkerName = nameof(EmitDatasets);
-    }
     
+    [Step(WfStepId.EmitDatasets)]
     public ref partial struct EmitDatasets  
     {
         public readonly WfContext Wf;
@@ -49,63 +45,60 @@ namespace Z0
             }
         }
 
-        void EmitBytes()
+        void Run(EmitResBytesStep kind)
         {
             using var step = EmitResBytes.create(Wf, Ct);
             step.Run();
         }
-
-        void CaptureEmissions()
+        
+        void Run(RecaptureStep kind)
         {
-            var capture = ContextFactory.WfCapture(Wf, Ct);
-            using var step = new RecaptureAccessors(capture);
+            var resources = Resources.code(Assembly.LoadFrom(Wf.AppPaths.ResBytes.Name));
+            var capture = ContextFactory.wf(Wf, Ct);
+            using var step = new Recapture(capture);
             step.CaptureResBytes();        
         }
 
-        void EmitMetadata()
+        void Run(EmitMetadataSetsStep kind)
         {
-            using var step = new EmitClrMetadataSets(Wf, Ct);
+            using var step = new EmitMetadataSets(Wf, Ct);
             step.Run();
         }
 
-        void EmitEnumDatasets()
+        void Run(EmitEnumCatalogStep kind)
         {
-            using var step = new EmitEnumData(Wf, Ct);
+            using var step = new EmitEnumCatalog(Wf, Ct);
             step.Run();
         }
         
-        void EmitLiterals()
+        void Run(EmitFieldLiteralsStep kind)
         {
             using var step = new EmitFieldLiterals(Wf, Ct);
             step.Run();
-
         }
 
-        void EmitCatalog()
+        void Run(EmitContentCatalogStep kind)
         {
             using var step = new EmitContentCatalog(Wf, Ct);
             step.Run();
         }
 
-        void EmitBitMasks()
+        void Run(EmitBitMasksStep kind)
         {
             using var step = new EmitBitMasks(Wf, Ct);
             step.Run();
         }
                         
-        public CodeResourceIndex Load()
-            => Resources.code(Assembly.LoadFrom(Wf.AppPaths.ResBytes.Name));
         
-        public void Run(params string[] args)
+        public void Run()
         {
-            EmitBitMasks();
-            EmitMetadata();        
+            Run(default(EmitMetadataSetsStep));        
+            Run(default(EmitBitMasksStep));
             Run(default(EmitProjectDocsStep));
-            EmitBytes();            
-            CaptureEmissions();            
-            EmitEnumDatasets();
-            EmitLiterals();
-            EmitCatalog();
+            Run(default(EmitResBytesStep));            
+            Run(default(EmitEnumCatalogStep));
+            Run(default(EmitFieldLiteralsStep));
+            Run(default(EmitContentCatalogStep));
         }
  
         public void Dispose()

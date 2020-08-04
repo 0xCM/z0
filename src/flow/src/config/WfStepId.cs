@@ -14,11 +14,11 @@ namespace Z0
 
         EmitProjectDocs,
 
-        EmitClrMetadataSets,
+        EmitMetadataSets,
         
-        EmitEnumDatasets,
+        EmitEnumCatalog,
 
-        EmitLiteralDatasets,
+        EmitFieldLiterals,
 
         EmitResCatalog,
 
@@ -41,9 +41,25 @@ namespace Z0
         
         EmitImageContent,
 
-        EmitFieldLiterals,
+        EmitLiteralDatasets,
 
 
         EmitPeHeaders,
+
+        AnalyzeCalls,
+
+        MatchEmissions,
+
+        EmitDatasets,
+
+        CaptureHosts,
+
+        ClearCaptureArchives,
+
+        ParseMembers,
+
+        DecodeParsed,
+
+        CaptureHostApi,
     }
 }

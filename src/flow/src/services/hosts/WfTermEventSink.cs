@@ -26,10 +26,11 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        public void Deposit<E>(in E e)
+        public ref readonly E Deposit<E>(in E e)
             where E : IWfEvent
         {
             term.print(e.Format(), e.Flair);            
+            return ref e;
         }
 
         [MethodImpl(Inline)]

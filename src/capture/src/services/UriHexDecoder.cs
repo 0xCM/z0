@@ -7,17 +7,15 @@ namespace Z0.Asm
     using System;
     
     using static Konst;
-    using static Root;
+    using static z;
     
-    public readonly struct UriHexDecoder : TUriHexDecoder
+    public readonly struct UriHexDecoder
     {        
-        public static IUriHexDecoder Service => default(UriHexDecoder);
-
         public static int decode(ReadOnlySpan<IdentifiedCode> src, Span<AsmInstructions> dst)
         {
             var decoder = Capture.Services.AsmDecoder();
             var count = src.Length;
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
                  seek(dst,i) = decoder.Decode(skip(src,i)).ValueOrDefault(AsmInstructions.Empty);
             return count;
         }
@@ -25,7 +23,7 @@ namespace Z0.Asm
         public static AsmInstructions[] decode(ReadOnlySpan<IdentifiedCode> src)
         {
             var count = src.Length;
-            var dst = Root.alloc<AsmInstructions>(count);
+            var dst = alloc<AsmInstructions>(count);
             decode(src, dst);
             return dst;
         }
@@ -33,7 +31,7 @@ namespace Z0.Asm
         public static AsmInstructions[] decode(params IdentifiedCode[] src)
         {
             var count = src.Length;
-            var dst = Root.alloc<AsmInstructions>(count);
+            var dst = alloc<AsmInstructions>(count);
             decode(src, dst);
             return dst;
         }

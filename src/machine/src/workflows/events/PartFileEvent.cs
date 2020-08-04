@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
     
     public readonly struct PartFileEvent : IWfEvent<PartFileEvent>
     {
-        const string Pattern = "{0}: {1} - {2}";
+        const string Pattern = IdMarker + "{1} | {2}";
 
         public WfEventId Id {get;}
 

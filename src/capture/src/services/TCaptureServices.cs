@@ -7,15 +7,9 @@ namespace Z0.Asm
     public interface TCaptureServices : TAsmCore, ICaptureServices
     {
         IAsmContext Context {get;}        
-        
-        ICaptureCore ICaptureServices.CaptureCore 
-            => new CaptureCore();
-        
+                
         CaptureExchange CaptureExchange
             => Asm.CaptureExchange.Create(Context);        
-
-        IAsmFunctionDecoder ICaptureServices.DefaultFunctionDecoder
-            => AsmFunctionDecoder.Default;
 
         IImmSpecializer ICaptureServices.ImmSpecializer(IAsmFunctionDecoder decoder)
             => new ImmSpecializer(decoder);        

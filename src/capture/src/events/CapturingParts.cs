@@ -14,22 +14,22 @@ namespace Z0
     
     public readonly struct CapturingParts : IWfEvent<CapturingParts>
     {
-        const string Pattern = "{0}: Capturing {1}";
+        const string Pattern = PSx2;
 
         public WfEventId Id {get;}
 
         public readonly PartId[] Parts;
 
+        public AppMsgColor Flair {get;}
+
         [MethodImpl(Inline)]
-        public CapturingParts(PartId[] parts, CorrelationToken? ct = null)
+        public CapturingParts(PartId[] parts, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
             Id = WfEventId.define(nameof(CapturingParts), ct);
+            Flair = flair;
             Parts = parts;            
         }
-
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;
-
+        
         public string Format()
             => text.format(Pattern, Id, Parts.Format());
     }        

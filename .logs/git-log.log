@@ -4010,3 +4010,7 @@
  create mode 100644 src/machine/src/workflows/steps/EmitPeImageStep.cs
  create mode 100644 src/machine/src/workflows/steps/EmitStringRecordsStep.cs
  rewrite src/machine/src/workflows/steps/HexLineEmitter.cs (97%)
+[master b659995ba] .
+ 8 files changed, 246 insertions(+), 34 deletions(-)
+ create mode 100644 src/konst/src/events/TermEventSink.cs
+ create mode 100644 src/machine/src/workflows/services/CodeReader.cs

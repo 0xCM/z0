@@ -41,7 +41,7 @@ namespace Z0
             Ct = ct;
             TermSink = termsink(Ct);
             Paths = context.AppPaths;
-            Asm = ContextFactory.CreateAsmContext(context);                           
+            Asm = ContextFactory.asm(context);                           
             LogSink = wflog(context);
             Config = wfconfig(context, LogSink, Ct);            
             Wf = wfctx(context, Ct, Config, TermSink);            

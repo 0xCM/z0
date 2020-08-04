@@ -8,7 +8,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    partial struct RecaptureAccessors
+    partial struct Recapture
     {
         public CapturedAccessor[] CaptureKnown(ApiHostUri host, FilePath asmdst)
         {

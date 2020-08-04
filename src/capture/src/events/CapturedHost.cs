@@ -24,11 +24,5 @@ namespace Z0.Asm
 
         public string Format() 
             => $"{Host.Format()} host capture step completed";
-
-        public CapturedHost Zero
-            => Empty;
-        
-        public static CapturedHost Empty 
-            => new CapturedHost(ApiHostUri.Empty);
     }    
 }

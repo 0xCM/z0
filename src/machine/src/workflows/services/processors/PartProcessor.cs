@@ -27,7 +27,7 @@ namespace Z0
     
     public readonly struct PartProcessor : IPartProcessor
     {
-        public IMachineContext Context {get;}
+        public WfContext Wf {get;}
 
         readonly BitBroker<PartHandlerKind,PartInstructions> broker;
 
@@ -35,9 +35,9 @@ namespace Z0
             => broker;
 
         [MethodImpl(Inline)]
-        internal PartProcessor(IMachineContext context)
+        internal PartProcessor(WfContext wf)
         {
-            Context = context;   
+            Wf = wf;   
             broker = DataBrokers.broker64<PartHandlerKind,PartInstructions>();
             (this as IDataProcessor).Connect();
         }
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Process(PartInstructions src)
         {
-            var pHost = Processors.Host(Context);
+            var pHost = Processors.Host(Wf);
             for(var i=0; i<src.Length; i++)
                 pHost.Process(src[i]);
         }

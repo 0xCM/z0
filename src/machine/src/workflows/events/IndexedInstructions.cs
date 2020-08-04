@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
 
     public readonly struct IndexedInstructions : IWfEvent<IndexedInstructions>
     {
-        const string Pattern = "{0}: Created located instruction index with {1} entries";
+        const string Pattern = IdMarker + "Created located instruction index with {1} entries";
         
         public WfEventId Id {get;}
 

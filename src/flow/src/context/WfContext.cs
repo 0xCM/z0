@@ -78,6 +78,16 @@ namespace Z0
             Raise(wferror(msg,ct));
         }
         
+        public void Error(string worker, Exception e, CorrelationToken ct)
+        {
+            Raise(new WfError(worker, e, ct));
+        }
+
+        public void Error<T>(string worker, T body, CorrelationToken ct)
+        {
+            Raise(new WfError(worker, body, ct));
+        }
+
         public void Emitting(string worker, string dsname, FilePath dst, CorrelationToken ct)
         {
             Raise(new EmittingDataset(worker, dsname, dst, ct));
@@ -95,11 +105,9 @@ namespace Z0
             return ct;
         }
 
-        public CorrelationToken Running(string worker, string detail, CorrelationToken? ct = null)
+        public void Running(string worker, string detail, CorrelationToken ct)
         {
-            var correlation = ct ?? CorrelationToken.define((ulong)z.atomic(ref CtProvider));
-            Raise(new WfStepRunning(worker, detail, correlation));
-            return correlation;
+            Raise(new WfStepRunning(worker, detail, ct));
         }
 
         public void Running(string worker, CorrelationToken ct)
@@ -107,9 +115,9 @@ namespace Z0
             Raise(new WfStepRunning(worker, ct));
         }
 
-        public void Status(string msg, CorrelationToken? ct = null)
+        public void Status(string worker, string msg, CorrelationToken ct)
         {   
-            Raise(new WfStatus(msg,ct));            
+            Raise(new WfStatus(worker, msg, ct));            
         }
 
         public void Status<T>(string worker, T body, CorrelationToken ct)
@@ -117,9 +125,9 @@ namespace Z0
             Raise(status(worker, body, ct));
         }
 
-        public void Created(string worker, CorrelationToken? ct = null)
+        public void Created(string worker, CorrelationToken ct)
         {   
-            Raise(new WorkerCreated(worker, correlate(ct)));            
+            Raise(new WorkerCreated(worker, ct));            
         }
 
         public void Finished(string worker, CorrelationToken ct)

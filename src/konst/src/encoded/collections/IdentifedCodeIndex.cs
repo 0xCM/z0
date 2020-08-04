@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        IdentifiedCodeIndex(IdentifiedCode[] code)
+        public IdentifiedCodeIndex(IdentifiedCode[] code)
         {            
             Host = ApiHostUri.Empty;
             Code = code;

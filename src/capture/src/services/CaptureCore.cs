@@ -14,9 +14,29 @@ namespace Z0.Asm
     
     public unsafe readonly struct CaptureCore : ICaptureCore
     {      
-        public static ICaptureCore Service 
-            => default(CaptureCore);  
+        public static CaptureCore Service => default;
+        
+        [MethodImpl(Inline)]
+        static IntPtr jit(MethodInfo src)
+        {
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return src.MethodHandle.GetFunctionPointer();
+        }
 
+        [MethodImpl(Inline)]
+        static IntPtr jit(Delegate src)
+        {   
+            RuntimeHelpers.PrepareDelegate(src);
+            return src.Method.MethodHandle.GetFunctionPointer();
+        }    
+
+        [MethodImpl(Inline)]
+        static DynamicPointer jit(DynamicDelegate src)
+        {   
+            RuntimeHelpers.PrepareDelegate(src.DynamicOp);
+            return DynamicPointer.From(src);
+        }                
+        
         public Option<ParsedOperation> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
             try
@@ -37,7 +57,7 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = Jitter.jit(src);
+                var pSrc = jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;            
                 var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode); 
@@ -55,7 +75,7 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = Jitter.jit(src).Handle;
+                var pSrc = jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
                 var captured = new CapturedCode(id, src.DynamicOp, src.SourceMethod, summary.Encoded.ParseInput, summary.Encoded.ParseResult, outcome.TermCode);                
@@ -87,7 +107,7 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = Jitter.jit(src);
+                var pSrc = jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode);  

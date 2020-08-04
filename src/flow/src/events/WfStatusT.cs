@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStatus(string worker, T body, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Blue)
         {
-            Id = wfid(nameof(WfStatus),  ct);
+            Id = wfid(nameof(WfStatus), ct);
             Flair =  flair;
             WorkerName = worker;
             Body = body;

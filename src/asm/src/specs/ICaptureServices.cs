@@ -6,6 +6,8 @@ namespace Z0.Asm
 {        
     public interface ICaptureServices : TAsmCore
     {
+        ICaptureCore CaptureCore {get;}
+        
         IImmSpecializer ImmSpecializer(IAsmFunctionDecoder decoder);        
 
         /// <summary>
@@ -20,9 +22,5 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="bufferlen">The desired buffer length</param>
         IMemberExtractor HostExtractor(int bufferlen);
-
-        IAsmFunctionDecoder DefaultFunctionDecoder {get;}
-
-        ICaptureCore CaptureCore {get;}        
     }
 }

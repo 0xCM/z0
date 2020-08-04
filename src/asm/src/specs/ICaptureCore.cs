@@ -10,7 +10,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines supported x86-encoding capture operations
     /// </summary>
-    public interface ICaptureCore : IService
+    public interface ICaptureCore
     {
         /// <summary>
         /// Captures jitted x86 encoded assembly for nongeneric methods

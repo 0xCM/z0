@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
     
     public readonly struct Unaddressed : IWfEvent<Unaddressed>
     {
-        const string Pattern = "{0}: The location for {1} code is unknown";
+        const string Pattern = IdMarker + "The location for {1} code is unknown";
         
         public WfEventId Id {get;}
 

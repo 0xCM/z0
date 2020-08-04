@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface IWfBroker : IAppBase, IDisposable
+    public interface IWfBroker : IAppBase, IDisposable, IMultiSink
     {
         Outcome Subscribe<E>(Action<E> receiver, E model = default)
             where E : IAppEvent;        

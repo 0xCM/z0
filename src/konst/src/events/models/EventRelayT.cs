@@ -18,9 +18,9 @@ namespace Z0
         readonly Action<E> Receiver;
 
         [MethodImpl(Inline)]
-        internal EventRelay(Action<E> receiver)
+        public EventRelay(Action<E> receiver)
         {
-            this.Receiver = receiver;
+            Receiver = receiver;
         }
         
         [MethodImpl(Inline)]

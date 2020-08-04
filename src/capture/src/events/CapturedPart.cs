@@ -20,15 +20,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public CapturedPart(PartId part)
-            => Part = part;
+        {
+            Part = part;
+        }
 
         public string Format() 
             => $"{Part.Format()} capture completed";
-
-        public CapturedPart Zero
-            => Empty;
-        
-        public static CapturedPart Empty 
-            => new CapturedPart(0);
     }    
 }

@@ -18,46 +18,36 @@ namespace Z0
         /// Creates a nonparametric process state
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static WorkState state(object initial)
-            => new WorkState(initial);
-
-        /// <summary>
-        /// Creates a nongeneric processor
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static Worker processor()
-            => default;
+        public static WorkState<T> state<T>(T s0)
+            => new WorkState<T>(s0);
 
         /// <summary>
         /// Creates an asm processor
         /// </summary>
         /// <param name="context">The process context</param>
         [MethodImpl(Inline), Op]
-        public static IAsmProcessor Asm(IMachineContext context)
+        public static IAsmProcessor Asm(WfContext wf)
         {
-            var processor = new AsmProcessor(context) as IAsmProcessor;
+            var processor = new AsmProcessor(wf) as IAsmProcessor;
             processor.Connect();
             return processor;
         }
 
         [MethodImpl(Inline), Op]
-        public static IHostProcessor Host(IMachineContext context)
-            => new HostProcessor(context);
+        public static IHostProcessor Host(WfContext wf)
+            => new HostProcessor(wf);
 
         [MethodImpl(Inline), Op]
-        public static IPartProcessor part(IMachineContext context)
-            => new PartProcessor(context);
+        public static IPartProcessor part(WfContext wf)
+            => new PartProcessor(wf);
 
-        [MethodImpl(Inline), Op]
-        public static PartFileProcessor PartFiles(IMachineContext context)
-            => new PartFileProcessor(context);
         
         /// <summary>
         /// Creates a jmp processor
         /// </summary>
         /// <param name="context">The process context</param>
         [MethodImpl(Inline), Op]
-        public static IDataProcessor<LocatedInstruction> jmp(IMachineContext context)
+        public static IDataProcessor<LocatedInstruction> jmp(WfContext context)
             => new JmpProcessor(context);
 
         /// <summary>

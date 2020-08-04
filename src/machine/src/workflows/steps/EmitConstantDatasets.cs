@@ -11,14 +11,6 @@ namespace Z0
     using static Flow;
     using static EmitConstantDatasetsStep;
     using static z;
-
-    [Step(WfStepId.EmitConstantDatasets, true)]
-    public readonly struct EmitConstantDatasetsStep
-    {
-        public const string WorkerName = nameof(EmitConstantDatasets);
-
-        public const WfStepId StepId = WfStepId.EmitConstantDatasets;
-    }
     
     [Step(WfStepId.EmitConstantDatasets)]
     public readonly ref struct EmitConstantDatasets
@@ -60,7 +52,6 @@ namespace Z0
             Wf.Ran(WorkerName, Ct);
         }
 
-
         ReadOnlySpan<ImgConstantRecord> Read(IPart part)
         {
             using var reader = ImgMetadataReader.open(part.PartPath());
@@ -70,8 +61,9 @@ namespace Z0
         void Emit(IPart part)
         {
             var id = part.Id;
-            var dstPath = TargetDir + FileName.Define(part.Id.Format(), FileExtensions.Csv);
-            var ct = Wf.Running(nameof(EmitConstantDatasets), dstPath.Name);
+            var dstPath = TargetDir + FileName.Define(id.Format(), DataFileExt);
+            Wf.Running(WorkerName, dstPath.Name, Ct);
+            
             var data = Read(part);
             var count = data.Length;            
             var dst = PartRecords.formatter(PartRecordSpecs.Constants);
@@ -83,13 +75,12 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(dst.Render());
 
-            Wf.RanT(WorkerName, new {Id = id, Count = count}, ct);
+            Wf.RanT(WorkerName, new {PartId = id, Count = count}, Ct);
         }
 
         public void Dispose()
         {
             Wf.Finished(WorkerName, Ct);
         }
-
     }
 }

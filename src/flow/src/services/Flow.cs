@@ -40,10 +40,6 @@ namespace Z0
 
         public const string ContentMarker = ContentSep + Slot0;
 
-        [MethodImpl(Inline)]
-        public static WfStatus<T> status<T>(string worker, T body, CorrelationToken ct)
-            => new WfStatus<T>(worker, body, ct);
-        
         public static string AppName 
         {
             [MethodImpl(Inline), Op]

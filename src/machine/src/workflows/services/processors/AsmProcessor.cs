@@ -13,14 +13,14 @@ namespace Z0
 
     public struct AsmProcessor : IAsmProcessor
     {
-        public IMachineContext Context {get;}
+        public WfContext Wf {get;}
 
         public IDataBroker<Mnemonic,LocatedInstruction> Broker {get;}
         
         [MethodImpl(Inline)]
-        internal AsmProcessor(IMachineContext context)
+        internal AsmProcessor(WfContext context)
         {
-            Context = context;
+            Wf = context;
             Broker = DataBrokers.broker<Mnemonic,LocatedInstruction>((int)Mnemonic.LAST);
         }
 

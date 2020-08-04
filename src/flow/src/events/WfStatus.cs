@@ -11,11 +11,11 @@ namespace Z0
     using static Konst;
     using static Flow;
     using static z;
-
+    
     [Event]
     public readonly struct WfStatus : IWfEvent<WfStatus>
     {        
-        const string Pattern = IdMarker + "{1}";
+        const string Pattern = IdMarker + "{1} | {2}";
 
         public WfEventId Id {get;}
 
@@ -23,24 +23,19 @@ namespace Z0
 
         public readonly string Message;
 
+        public string WorkerName {get;}
+ 
         [MethodImpl(Inline)]
-        public WfStatus(string msg, CorrelationToken? ct = null)
+        public WfStatus(string worker, string msg, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Blue)
         {
-            Id = wfid(msg, ct);
-            Flair =  AppMsgColor.Green;
+            Id = wfid(nameof(WfStatus), ct);
+            Flair =  flair;
             Message = msg;
-        }
-
-        [MethodImpl(Inline)]
-        public WfStatus(string msg, AppMsgColor flair, CorrelationToken? ct = null)
-        {
-            Id = wfid(msg, ct);
-            Flair = flair;
-            Message = msg;
+            WorkerName = worker;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Id, Message);
+            => text.format(Pattern, Id, WorkerName, Message);
     }
 }

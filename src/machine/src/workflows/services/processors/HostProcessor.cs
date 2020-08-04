@@ -13,14 +13,14 @@ namespace Z0
 
     public readonly struct HostProcessor : IHostProcessor
     {
-        public IMachineContext Context {get;}
+        public WfContext Wf {get;}
 
         public IDataBroker<HostHandlerKind,HostInstructions> Broker {get;}
 
         [MethodImpl(Inline)]
-        internal HostProcessor(IMachineContext context)
+        internal HostProcessor(WfContext context)
         {
-            Context = context;   
+            Wf = context;   
             Broker = DataBrokers.broker64<HostHandlerKind,HostInstructions>();
             (this as IDataProcessor).Connect();
         }
@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         void ProcessJmp(HostInstructions src)
         {
-            var pJmp = Processors.jmp(Context);
+            var pJmp = Processors.jmp(Wf);
             for(var j=0; j<src.Length; j++)
             {
                 ref readonly var member = ref src[j];
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Process(HostInstructions src)
         {
-            var processor = Processors.Asm(Context);
+            var processor = Processors.Asm(Wf);
             for(var j=0; j<src.Length; j++)
             {
                 ref readonly var member = ref src[j];

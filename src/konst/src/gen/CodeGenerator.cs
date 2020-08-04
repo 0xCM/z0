@@ -18,6 +18,20 @@ namespace Z0
 
     public class CodeGenerator : ICodeGenerator
     {
+        public static string property(BinaryResourceSpec src, int level = 2)
+            => text.concat("public static ReadOnlySpan<byte> ", 
+            src.Identifier, 
+            Space,
+            " => ", 
+            Space,
+            $"new byte[{src.Encoded.Length}]",
+            LBrace, 
+            src.Encoded.Format(HexFormatConfig.ArrayContent), 
+            RBrace,
+            Chars.Semicolon
+            );
+
+
         public static string FileHeader 
             => text.lines(HeaderLine1, HeaderLine2, HeaderLine3, HeaderLine4);
 

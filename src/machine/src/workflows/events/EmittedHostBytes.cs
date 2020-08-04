@@ -15,26 +15,29 @@ namespace Z0
     {
         public const string EventName = nameof(EmittedHostBytes);
 
-        public const string Pattern = IdMarker + "Emitted {1} x86 code accessors for {2} api";
+        public const string Pattern = IdMarker + "{1} | {2} | {3}";
     }
     
     public readonly struct EmittedHostBytes : IWfEvent<EmittedHostBytes>
     {
         public WfEventId Id {get;}
 
-        public readonly ApiHostUri Host;
+        public string WorkerName {get;}
+        
+        public ApiHostUri Host {get;}
 
-        public readonly ushort AccessorCount;
+        public ushort AccessorCount {get;}
 
         [MethodImpl(Inline)]
-        public EmittedHostBytes(ApiHostUri host, ushort count, CorrelationToken ct)
+        public EmittedHostBytes(string worker, ApiHostUri host, ushort count, CorrelationToken ct)
         {
             Id = wfid(nameof(EmittedHostBytes), ct);
             Host= host;
+            WorkerName = worker;
             AccessorCount = count;
-        }        
+        }                
         
         public string Format()
-            => text.format(Pattern, Id, AccessorCount, Host.Format());        
+            => text.format(Pattern, Id, WorkerName, Host.Format(), AccessorCount);        
     }
 }

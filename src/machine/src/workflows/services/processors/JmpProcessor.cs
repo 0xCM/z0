@@ -16,7 +16,7 @@ namespace Z0
     {
         readonly BitBroker<JmpKind,LocatedInstruction> broker;
         
-        public IMachineContext Context {get;}
+        public WfContext Context {get;}
         
         [MethodImpl(Inline)]
         public void Connect()
@@ -28,9 +28,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal JmpProcessor(IMachineContext context, bool connect = true) 
+        internal JmpProcessor(WfContext wf, bool connect = true) 
         {
-            Context = context;
+            Context = wf;
             broker = ProcessBrokers.jmp();
             if(connect)
                 Connect();

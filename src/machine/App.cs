@@ -25,21 +25,10 @@ namespace Z0
         }
         
         public App()
-            : base(ContextFactory.CreateAppContext())
+            : base(ContextFactory.app())
         {
         }
         
-        void Prepare(params string[] args)
-        {
-            var known = KnownParts.Where(r => r.Id != 0).Array();
-            var parts = PartIdParser.Service.ParseValid(args);              
-            var root =  AsmContext.Create(Context);
-            var context = MachineAsmContext.Create(root, parts);
-            var fileProcessor = new PartFileProcessor(context);
-            var api = ApiComposition.Assemble(known);                        
-            var files = new PartFiles(root);
-        }
-
         void ReadRes()
         {
             var map = MemoryFile.resbytes();
@@ -56,7 +45,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {
             var ct = CorrelationToken.define(1);
-            using var control = WfControl.create(Context, ct, args);
+            using var control = Control.create(Context, ct, args);
             control.Run();
         }
 

@@ -20,29 +20,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfError(AppMsg description, CorrelationToken? ct = null)
         {
+            Id = wfid(nameof(WfError), ct);
             Description = description.Data;
-            Id = wfid(nameof(WfError), ct);
         }
 
         [MethodImpl(Inline)]
-        public WfError(AppMsgData description, CorrelationToken? ct = null)
+        public WfError(string worker, Exception e, CorrelationToken ct)
         {
-            Description = description;
             Id = wfid(nameof(WfError), ct);
+            Description = AppMsg.NoCaller(e, AppMsgKind.Error).Data;
         }
 
         [MethodImpl(Inline)]
-        public WfError(Exception e, CorrelationToken? ct = null)
+        public WfError(string worker, object content, CorrelationToken ct)
         {
-            Description = AppMsg.NoCaller(e,AppMsgKind.Error).Data;
             Id = wfid(nameof(WfError), ct);
-        }
-
-        [MethodImpl(Inline)]
-        public WfError(string description, CorrelationToken? ct = null)
-        {
-            Description = AppMsg.NoCaller(description, AppMsgKind.Error).Data;
-            Id = wfid(nameof(WfError), ct);
+            Description = AppMsg.NoCaller(content, AppMsgKind.Error).Data;
         }
 
         public bool IsEmpty 
@@ -57,9 +50,6 @@ namespace Z0
             get => Description.IsNonEmpty;
         }
         
-        public WfError Zero 
-            => Empty;
-        
         public AppMsgColor Flair 
             => AppMsgColor.Red;
         
@@ -67,12 +57,6 @@ namespace Z0
             => new AppMsg(Description);
 
         public string Format()
-            => Message.Format();
-
-        public override string ToString()
-            => Format();
-            
-        public static WfError Empty 
-            => new WfError(AppMsgData.Empty);
+            => Message.Format();            
     }
 }

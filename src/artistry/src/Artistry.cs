@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     using P = Z0.Parts;
 
@@ -18,7 +18,7 @@ namespace Z0
     {                
         static IAppContext CreateAppContext()
         {
-            var resolved = ApiComposition.Assemble(seq(P.GMath.Resolved));
+            var resolved = ApiComposition.Assemble(array(P.GMath.Resolved));
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
@@ -40,7 +40,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {            
             var parts = PartIdParser.Service.ParseValid(args);  
-            var context = CreateArtistryContext(AsmContext.Create(Context), parts);  
+            var context = CreateArtistryContext(AsmContext.create(Context), parts);  
             new Art(context).Display();
         }
 

@@ -10,30 +10,28 @@ namespace Z0.Asm
     using static Konst;
     using static Flow;
 
-    using E = AnalyzingExtracts;
-
-
-    public readonly struct AnalyzingExtracts : IWfEvent<E>
+    public readonly struct AnalyzingExtracts : IWfEvent<AnalyzingExtracts>
     {        
-        const string Pattern = "";
+        const string Pattern = PSx3;
 
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        public WfEventId Id {get;}
+
+        public string WorkerName {get;}
 
         public ExtractedCode[] Extracts {get;}
         
+        public uint ExtractCount 
+            => (uint)Extracts.Length;
+
         [MethodImpl(Inline)]
-        internal AnalyzingExtracts(ExtractedCode[] extracts)
+        internal AnalyzingExtracts(string worker, ExtractedCode[] extracts, CorrelationToken ct)
         {
+            Id = wfid(nameof(AnalyzingExtracts), ct);
+            WorkerName = worker;
             Extracts = extracts;
         }
 
         public string Format() 
-            => $"Analyzing extract report {Extracts.Length} member extracts";
-
-        public AnalyzingExtracts Zero 
-            => Empty;        
-
-        public static E Empty 
-            => new E(Array.Empty<ExtractedCode>());
+            => text.format(Pattern, Id, WorkerName, ExtractCount);
     }
 }

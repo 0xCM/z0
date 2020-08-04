@@ -12,14 +12,6 @@ namespace Z0
     using static EmitContentCatalogStep;
     
     using F = ContentLibField;
-
-    [Step(WfStepId.EmitContentCatalog, true)]
-    public readonly struct EmitContentCatalogStep
-    {
-        public const string WorkerName = nameof(EmitContentCatalog);
-
-        public const string DatasetName = "ContentCatalog";
-    }
     
     [Step(WfStepId.EmitContentCatalog)]
     public ref struct EmitContentCatalog

@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
 
     public readonly struct IndexedEncoded : IWfEvent<IndexedEncoded>
     {
-        const string Pattern = "{0}: {1} entries created in the code index"; 
+        const string Pattern = IdMarker + "{1} entries created in the code index"; 
         
         public WfEventId Id {get;}
 
