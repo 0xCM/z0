@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using Z0.Asm;
 
@@ -14,6 +15,7 @@ namespace Z0
     
     partial struct Recapture
     {
+
         public CapturedAccessor[] CaptureAsm(ApiHostUri host, ReadOnlySpan<ResourceAccessor> src, FilePath dst)
         {            
             var srcount = src.Length;
@@ -22,12 +24,11 @@ namespace Z0
             var target = span(captured);
             
             using var writer = dst.Writer();
-            using var quick = QuickCapture.Alloc(Context);
+            using var quick = QuickCapture.create(Context);
                         
             for(var i=0u; i<srcount; i++)
             {
                 ref readonly var accessor = ref skip(src,i);
-
                 var code = quick.Capture(accessor.Member).ValueOrDefault(CapturedCode.Empty);
                 seek(codes, i) = code;
                 

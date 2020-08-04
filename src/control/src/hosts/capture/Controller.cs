@@ -23,8 +23,6 @@ namespace Z0
         readonly string[] Args;
 
         readonly CorrelationToken Ct;
-
-        readonly IMultiSink LogSink;
         
         readonly WfTermEventSink TermSink;
 
@@ -42,10 +40,8 @@ namespace Z0
             TermSink = termsink(Ct);
             Paths = context.AppPaths;
             Asm = ContextFactory.asm(context);                           
-            LogSink = wflog(context);
-            Config = wfconfig(context, LogSink, Ct);            
-            Wf = wfctx(context, Ct, Config, TermSink);            
-            Wf.Initialized(nameof(Controller), Ct);          
+            Config = wfconfig(context, wflog(context, Ct), Ct);            
+            Wf = wfctx(context, Ct, Config, TermSink);                        
         }
 
         public void Run()
@@ -56,6 +52,7 @@ namespace Z0
             var data = Paths.AppDataRoot + FolderName.Define("data");
             var brokerLog = (data + FileName.Define("broker", FileExtensions.Csv)).CreateParentIfMissing();
             var cBroker = CaptureBroker.create(brokerLog, Ct);
+            
             using var host = new CaptureHost(Wf, Asm, cwf, cBroker, config, Ct);
             host.Run();
         }

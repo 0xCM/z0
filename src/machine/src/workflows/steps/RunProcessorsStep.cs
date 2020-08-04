@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum WfStatusKind : byte
+    [Step(WfStepId.RunProcessors, true)]
+    public readonly struct RunProcessorsStep
     {
-        None = 0,
-
-        RunningWorkflow,
-
-        RanWorkflow
+        public const string WorkerName = nameof(RunProcessors);
     }
 }

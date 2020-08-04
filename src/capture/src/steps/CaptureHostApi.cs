@@ -51,7 +51,6 @@ namespace Z0.Asm
 
                 using var xStep = new ExtractMembers(Wf, Ct);
                 var extracts = xStep.Extract(host);
-                //var extracts = CWf.ExtractMembers.ExtractMembers(host);
 
                 if(extracts.Length == 0)
                     return;
@@ -59,14 +58,14 @@ namespace Z0.Asm
                 var extractRpt = CWf.ReportExtracts.CreateExtractReport(host.Uri, extracts);
                 CWf.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
 
-                var parsed = CWf.ParseMembers.Parse(host.Uri, extracts);
+                var _parsed = new ParseMembers(Wf, Ct);
+                var parsed = _parsed.Parse(host.Uri, extracts);
                 if(parsed.Length == 0)
-                    Wf.Status(WorkerName, $"No {host.Uri} members were parsed", Ct);
-                    
-                if(parsed.Length != 0)
+                    Wf.Status(WorkerName, $"No {host.Uri} members were parsed", Ct);                    
+                else
                 {                        
                     CWf.ReportParsed.Emit(host.Uri, parsed, paths.ParsedPath);
-                    CWf.ParseMembers.SaveHex(host.Uri, parsed, paths.HexPath);
+                    _parsed.SaveHex(host.Uri, parsed, paths.HexPath);
 
                     var decoded = CWf.DecodeParsed.Run(host.Uri,parsed);
                     if(decoded.Length != 0)

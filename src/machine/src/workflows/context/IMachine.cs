@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     
-    public readonly struct WfControlStep
+    public interface IMachine : IMachineClient, IDisposable
     {
-        public const string WorkerName = nameof(Control);
-    }    
+        void Run();
+    }
 }

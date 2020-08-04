@@ -49,7 +49,7 @@ namespace Z0.Asm
         public void capture_quick()
         {
             using var dst = CaseWriter(FileExtensions.Asm);
-            using var quick = QuickCapture.Alloc(Context);
+            using var quick = QuickCapture.create(Context);
             foreach(var m in typeof(dvec).DeclaredMethods().Public().Static().NonGeneric())
             {
                 var code = quick.Capture(m);

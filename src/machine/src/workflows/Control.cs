@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static WfControlStep;
+    using static ControlStep;
 
     using static z;
     
@@ -31,6 +31,10 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         readonly bool RunProcessPartFilesStep;
+
+        WorkflowSteps Steps => default;
+
+        WorkflowStepConfig StepConfig;
 
         static ICaptureWorkflow capture(IAsmContext asm, WfContext wf, FolderPath target)
         {
@@ -60,6 +64,22 @@ namespace Z0
             Ct =  ct;
             Asm = ContextFactory.asm(Context);
             RunProcessPartFilesStep = true;
+            StepConfig = WorkflowStepConfig.Load(wf);
+
+        }
+
+        public void Run()
+        {
+            Wf.Running(WorkerName, Ct);
+            Run(default(RunProcessorsStep));
+            Run(default(CaptureHostStep));
+            Run(default(EmitDatasetsStep));
+            Run(default(ProcessPartFilesStep));
+        }
+
+        public void Dispose()
+        {
+            Wf.Finished(WorkerName, Ct);
         }
 
         void Run(CaptureHostStep kind)
@@ -74,25 +94,44 @@ namespace Z0
             }
         }
         
-        public void Run()
+        void Run(EmitDatasetsStep kind)
         {
-            Wf.Running(WorkerName, Ct);
-            Run(default(CaptureHostStep));
-
             if(EmitDatasets)
             {
-                using var emission = new EmitDatasets(Wf, Ct, Args);
-                emission.Run();
-            } 
+                Wf.RunningT(WorkerName, kind, Ct);
+                try
+                {
+                    using var emission = new EmitDatasets(Wf, Ct, Args);
+                    emission.Run();
+                }
+                catch(Exception e)
+                {
+                    Wf.Error(e, Ct);
+                }
 
-            if(RunProcessPartFilesStep)                   
-            {
-                Run(default(ProcessPartFilesStep));
+                Wf.RanT(WorkerName, kind, Ct);
             }
         }
 
+        void Run(RunProcessorsStep kind)
+        {
+            Wf.RunningT(WorkerName, kind, Ct);
+            try
+            {
+                using var step = RunProcessors.create(Wf, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
+
+            Wf.RanT(WorkerName, kind, Ct);
+        }
         void Run(ProcessPartFilesStep kind)
         {
+            Wf.RunningT(WorkerName, kind, Ct);
+            
             try
             {
                 var files = new PartFiles(Asm);
@@ -103,13 +142,11 @@ namespace Z0
             {
                 Wf.Error(e, Ct);
             }
+            
+            Wf.RanT(WorkerName, kind, Ct);
         }
         
-        public void Dispose()
-        {
-            Wf.Finished(WorkerName, Ct);
-        }
-
+ 
         bool CaptureArtifacts => false;
         
         bool EmitDatasets => true;

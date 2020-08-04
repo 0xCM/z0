@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
 
     using Z0.Asm;
 
@@ -24,7 +23,7 @@ namespace Z0
 
         readonly ICaptureServiceProxy Service;
         
-        public static QuickCapture Alloc(IAsmContext context)
+        public static QuickCapture create(IAsmContext context)
         {            
             var tokens = Buffers.sequence(context.DefaultBufferLength, 5, out var buffer).Tokenize();
             var exchange = CaptureExchangeProxy.Create(context.CaptureCore, tokens[BufferSeqId.Aux3]);

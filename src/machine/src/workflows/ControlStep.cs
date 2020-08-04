@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public readonly struct RunMachineStep
+    public readonly struct ControlStep
     {
-        public const string WorkerName = nameof(RunMachine);
-    }
-
+        public const string WorkerName = nameof(Control);
+    }    
 }

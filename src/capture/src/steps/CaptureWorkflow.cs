@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+        
     public readonly struct CaptureWorkflow : ICaptureWorkflow
     {
         public ICaptureContext Context {get;}
@@ -26,12 +26,12 @@ namespace Z0.Asm
             Wf = wf;
             Broker = CaptureBroker.create(asm.AppPaths.AppCaptureRoot + FileName.Define("workflow", FileExtensions.Csv), Ct);
             Context = new CaptureContext(asm, decoder, formatter, writerfactory, Broker, archive, Ct);
-            Wf.Initialized(nameof(CaptureWorkflow), Ct);
+            Wf.Created(nameof(CaptureWorkflow), Ct);
         }
 
         public void Dispose()
         {                            
-            Wf.Ran(nameof(CaptureWorkflow), Ct);
+            Wf.Finished(nameof(CaptureWorkflow), Ct);
             Broker.Dispose();
         }
     }

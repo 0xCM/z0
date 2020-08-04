@@ -11,20 +11,12 @@ namespace Z0
     using static EmitPeHeadersStep;
 
     using F = PeHeaderField;
-
-    [Step(WfStepId.EmitPeHeaders)]
-    public readonly struct EmitPeHeadersStep
-    {
-        public const string WorkerName = nameof(EmitPeHeaders);
-    }
     
     [Step(WfStepId.EmitPeHeaders)]
     public readonly ref struct EmitPeHeaders
     {
         readonly WfContext Wf;
         
-        readonly EmissionDataType DataType;
-
         readonly IPart[] Parts;
         
         readonly FilePath TargetPath;
@@ -38,7 +30,6 @@ namespace Z0
             Ct = ct;
             Parts = src;
             TargetPath = wf.AppPaths.ResourceRoot + FileName.Define("z0", "pe.csv");
-            DataType = EmissionDataType.Pe;
             Wf.Created(WorkerName, Ct);
         }
 

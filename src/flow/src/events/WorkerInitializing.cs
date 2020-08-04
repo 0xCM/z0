@@ -13,7 +13,7 @@ namespace Z0
     using static z;
 
     [Event]
-    public readonly struct WorkerInitialized : IWfEvent<WorkerInitialized>
+    public readonly struct WorkerInitializing : IWfEvent<WorkerInitializing>
     {        
         const string Pattern = PSx2;
         
@@ -22,11 +22,12 @@ namespace Z0
         public string WorkerName {get;}
         
         [MethodImpl(Inline)]
-        public WorkerInitialized(string worker, CorrelationToken ct)
+        public WorkerInitializing(string worker, CorrelationToken ct)
         {
-            Id = wfid(nameof(WorkerInitialized), ct);
+            Id = wfid(nameof(WorkerInitializing), ct);
             WorkerName = worker;
         }
+        
         public AppMsgColor Flair 
             => AppMsgColor.Magenta;
 

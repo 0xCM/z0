@@ -47,7 +47,6 @@ namespace Z0
         public FolderPath IndexRoot 
             => ContextRoot.AppPaths.ResourceRoot + FolderName.Define("index");
 
-
         public void Dispose()
         {
             TermSink.Deposit(new ClosingWfContext(typeof(WfContext), Ct));
@@ -83,11 +82,6 @@ namespace Z0
             Raise(new WfError(worker, e, ct));
         }
 
-        public void Error<T>(string worker, T body, CorrelationToken ct)
-        {
-            Raise(new WfError(worker, body, ct));
-        }
-
         public void Emitting(string worker, string dsname, FilePath dst, CorrelationToken ct)
         {
             Raise(new EmittingDataset(worker, dsname, dst, ct));
@@ -98,18 +92,11 @@ namespace Z0
             Raise(new EmittedDataset(worker, dsname, count,  dst, ct));
         }
 
-        public CorrelationToken Running(string worker)
-        {
-            var ct = CorrelationToken.define((ulong)z.atomic(ref CtProvider));
-            Raise(new WfStepRunning(worker, ct));
-            return ct;
-        }
-
         public void Running(string worker, string detail, CorrelationToken ct)
         {
             Raise(new WfStepRunning(worker, detail, ct));
         }
-
+        
         public void Running(string worker, CorrelationToken ct)
         {
             Raise(new WfStepRunning(worker, ct));
@@ -118,11 +105,6 @@ namespace Z0
         public void Status(string worker, string msg, CorrelationToken ct)
         {   
             Raise(new WfStatus(worker, msg, ct));            
-        }
-
-        public void Status<T>(string worker, T body, CorrelationToken ct)
-        {   
-            Raise(status(worker, body, ct));
         }
 
         public void Created(string worker, CorrelationToken ct)
@@ -135,24 +117,29 @@ namespace Z0
             Raise(new WorkerFinished(worker, ct));            
         }
 
-        public void Initialized(string worker, CorrelationToken? ct = null)
+        public void Initializing(string worker, CorrelationToken ct)
+        {
+            Raise(new WorkerInitializing(worker, ct));
+        }
+
+        public void Initialized(string worker, CorrelationToken ct)
         {
             Raise(new WorkerInitialized(worker, ct));
         }
         
-        public void Ran(string worker, CorrelationToken? ct = null)
+        public void Ran(string worker, CorrelationToken ct)
         {
             Raise(new WfStepFinished(worker, ct));            
         }
 
-        public void Ran(string worker, string detail, CorrelationToken? ct = null)
+        public void Ran(string worker, string detail, CorrelationToken ct)
         {
             Raise(new WfStepFinished(worker, detail, ct));
         }
 
-        public void Ran(string worker, object detail, CorrelationToken? ct = null)
-        {
-            Raise(new WfStepFinished(worker, (detail ?? EmptyString).ToString(), ct));
+        public void Status<T>(string worker, T body, CorrelationToken ct)
+        {   
+            Raise(status(worker, body, ct));
         }
 
         public void RunningT<T>(string worker, T detail, CorrelationToken ct)
@@ -164,5 +151,11 @@ namespace Z0
         {
             Raise(new WfStepFinished<T>(worker, detail, ct));
         }
+
+        public void Error<T>(string worker, T body, CorrelationToken ct)
+        {
+            Raise(new WfError(worker, body, ct));
+        }
+
     }
 }

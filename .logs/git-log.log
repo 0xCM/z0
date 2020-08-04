@@ -4014,3 +4014,106 @@
  8 files changed, 246 insertions(+), 34 deletions(-)
  create mode 100644 src/konst/src/events/TermEventSink.cs
  create mode 100644 src/machine/src/workflows/services/CodeReader.cs
+[master f9f349cf1] .
+ 174 files changed, 1251 insertions(+), 1515 deletions(-)
+ delete mode 100644 src/capture/src/AsmShell.cs
+ rename src/capture/src/{ => checks}/AsmTest.cs (100%)
+ rename src/capture/src/{ => context}/AsmContext.cs (96%)
+ rename src/capture/src/{workflow/capture/events => context}/CaptureBroker.cs (85%)
+ rename src/capture/src/{ => context}/CaptureConfig.cs (100%)
+ rename src/capture/src/{ => context}/CaptureContext.cs (100%)
+ rename src/capture/src/{ => context}/CaptureState.cs (87%)
+ rename src/capture/src/{ => context}/ContextFactory.cs (51%)
+ rename src/capture/src/{events => context}/ICaptureClient.cs (100%)
+ create mode 100644 src/capture/src/context/ICaptureEvents.cs
+ create mode 100644 src/capture/src/context/ICaptureWorkflow.cs
+ rename src/capture/src/{workflow/capture/events => context}/ImmBroker.cs.cs (87%)
+ rename src/capture/src/{ => context}/WfCapture.cs (89%)
+ create mode 100644 src/capture/src/events/CountedInstructions.cs
+ delete mode 100644 src/capture/src/events/ICaptureEvents.cs
+ delete mode 100644 src/capture/src/services/Jitter.cs
+ rename src/capture/src/services/{MemoryCaptureService.cs => MemoryCapture.cs} (88%)
+ delete mode 100644 src/capture/src/services/TUriHexDecoder.cs
+ rename src/capture/src/{ => steps}/CaptureHost.cs (75%)
+ rename src/capture/src/{workflow/capture/steps/CaptureHost.cs => steps/CaptureHostApi.cs} (73%)
+ create mode 100644 src/capture/src/steps/CaptureHostApiStep.cs
+ rename src/{konst/src/events/contracts/IPersistentBroker.cs => capture/src/steps/CaptureHostStep.cs} (69%)
+ rename src/capture/src/{workflow/capture => }/steps/CaptureHosts.cs (86%)
+ rename src/capture/src/{workflow/capture/workflows => steps}/CaptureWorkflow.cs (95%)
+ rename src/capture/src/{workflow/capture => }/steps/ClearArchives.cs (96%)
+ rename src/capture/src/{workflow/capture => }/steps/DecodeParsed.cs (88%)
+ rename src/capture/src/{workflow/capture => }/steps/EmitExtractReport.cs (88%)
+ rename src/capture/src/{workflow/capture => }/steps/EmitParsedReport.cs (86%)
+ rename src/capture/src/{workflow/capture => }/steps/ExtractMembers.cs (78%)
+ create mode 100644 src/capture/src/steps/ExtractMembersStep.cs
+ rename src/capture/src/{workflow/capture/workflows => steps}/ImmEmissionWorkflow.cs (99%)
+ rename src/capture/src/{workflow/capture/steps/ManageCapture.cs => steps/ManagePartCapture.cs} (67%)
+ create mode 100644 src/capture/src/steps/ManagePartCaptureStep.cs
+ rename src/capture/src/{workflow/capture => }/steps/MatchAddresses.cs (87%)
+ rename src/capture/src/{workflow/capture/steps/EmissionMatch.cs => steps/MatchEmissions.cs} (76%)
+ rename src/capture/src/{workflow/capture => }/steps/ParseMembers.cs (94%)
+ create mode 100644 src/capture/src/steps/WorkflowSteps.cs
+ delete mode 100644 src/capture/src/workflow/base/WorkflowError.cs
+ delete mode 100644 src/capture/src/workflow/capture/events/BrokerPatterns.cs
+ delete mode 100644 src/capture/src/workflow/capture/steps/WorkflowSteps.cs
+ delete mode 100644 src/capture/src/workflow/capture/workflows/ICaptureWorkflow.cs
+ create mode 100644 src/flow/src/events/WorkflowError.cs
+ rename src/{capture/src/workflow/base => flow/src/events}/WorkflowEvent.cs (57%)
+ rename src/{machine/src/workflows/x/FileName.cs => flow/src/services/ops/status.cs} (54%)
+ create mode 100644 src/flow/src/services/ops/wfevent.cs
+ rename src/flow/src/services/{ops => props}/PipeSlots.cs (94%)
+ rename src/flow/src/services/{ops => props}/SpaceSlots.cs (100%)
+ rewrite src/konst/src/events/AppEvents.cs (70%)
+ rename src/{machine/src/workflows/contracts/IMachineWorkflow.cs => konst/src/events/contracts/IEventBroker.cs} (58%)
+ rename src/{flow/src => konst/src/events}/contracts/IWfEvent.cs (100%)
+ rename src/{flow/src => konst/src/events}/contracts/IWfEventSink.cs (92%)
+ delete mode 100644 src/konst/src/events/exchange/EventBroker.cs
+ rename src/konst/src/events/{exchange => models}/AppMsgExchange.cs (100%)
+ rename src/konst/src/events/{exchange => models}/AppMsgQueue.cs (100%)
+ rename src/konst/src/events/{exchange => models}/BrokerClient.cs (92%)
+ rename src/konst/src/events/{exchange => models}/BrokeredMessage.cs (100%)
+ rename src/konst/src/events/{broker => models}/DataBrokerCT.cs (100%)
+ rename src/konst/src/events/{broker => models}/DataHandlerCT.cs (100%)
+ rename src/konst/src/events/{broker => models}/DataHandlerT.cs (100%)
+ rename src/konst/src/events/{broker => models}/DataReceiver.cs (100%)
+ rename src/konst/src/events/{broker => models}/IDataBroker.cs (100%)
+ rename src/konst/src/events/{broker => models}/IDataHandler.cs (100%)
+ rename src/konst/src/events/{broker => models}/IDataProcessor.cs (100%)
+ rename src/konst/src/events/{broker => models}/IndexFunction.cs (100%)
+ rename src/konst/src/events/{contracts => models}/Named.cs (100%)
+ rename src/konst/src/events/{ => models}/TermEventSink.cs (100%)
+ rename src/{flow/src => konst/src/events}/models/WfEventId.cs (100%)
+ delete mode 100644 src/konst/src/messages/xtend/Messages.cs
+ create mode 100644 src/machine/src/infrastructure/workers/models/WorkStateT.cs
+ rename src/machine/src/workflows/{WfControl.cs => Control.cs} (64%)
+ delete mode 100644 src/machine/src/workflows/PartDataEmitters.cs
+ rename src/machine/src/workflows/events/{EmittedEnumSummary.cs => EmittedEnumCatalog.cs} (64%)
+ rename src/machine/src/workflows/{contracts => events}/IMachineEventClient.cs (89%)
+ rename src/machine/src/workflows/{contracts => events}/IMachineEvents.cs (92%)
+ create mode 100644 src/machine/src/workflows/steps/AnalyzeCalls.cs
+ rename src/{machines/Part.cs => machine/src/workflows/steps/AnalyzeCallsStep.cs} (65%)
+ create mode 100644 src/machine/src/workflows/steps/EmitBitMasksStep.cs
+ create mode 100644 src/machine/src/workflows/steps/EmitConstantDatasetsStep.cs
+ create mode 100644 src/machine/src/workflows/steps/EmitContentCatalogStep.cs
+ create mode 100644 src/machine/src/workflows/steps/EmitDatasetsStep.cs
+ rename src/machine/src/workflows/steps/{EmitEnumData.cs => EmitEnumCatalog.cs} (87%)
+ create mode 100644 src/machine/src/workflows/steps/EmitEnumCatalogStep.cs
+ rename src/machine/src/workflows/steps/{EmitFieldLiterals.cs => EmitLiteralDatasets.cs} (95%)
+ rename src/machine/src/workflows/steps/{EmitClrMetadataSets.cs => EmitMetadataSets.cs} (90%)
+ rename src/{konst/src/events/exchange/EventBrokerT.cs => machine/src/workflows/steps/EmitMetadataSetsStep.cs} (50%)
+ delete mode 100644 src/machine/src/workflows/steps/HexLineEmitter.cs
+ rename src/machine/src/workflows/{MachineWorkflow.cs => steps/ProcessInstructions.cs} (77%)
+ create mode 100644 src/machine/src/workflows/steps/ProcessInstructionsStep.cs
+ rename src/machine/src/workflows/{services/processors/PartFileProcessor.cs => steps/ProcessPartFiles.cs} (58%)
+ rename src/machine/src/workflows/{Machine.cs => steps/RunMachine.cs} (64%)
+ create mode 100644 src/machine/src/workflows/steps/RunMachineStep.cs
+ rename src/{capture/src/workflow/capture/events/CaptureClient.cs => machine/src/workflows/steps/WfControlStep.cs} (65%)
+ delete mode 100644 src/machine/src/workflows/x/Ran.cs
+ delete mode 100644 src/machines/add.sh
+ delete mode 100644 src/machines/build-log.sh
+ delete mode 100644 src/machines/build.sh
+ delete mode 100644 src/machines/clean.sh
+ delete mode 100644 src/machines/directory.build.props
+ delete mode 100644 src/machines/id.sh
+ delete mode 100644 src/machines/remove.sh
+ delete mode 100644 src/machines/z0.machines.csproj

@@ -7,14 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface IWorkflowControl : IWorkflowActor
+    [Step(WfStepId.EmitPeHeaders)]
+    public readonly struct EmitPeHeadersStep
     {
-
-    }
-    
-    public interface IWorkflowControl<F> : IWorkflowControl, IWorkflowActor<F>
-        where F : struct, IWorkflowControl<F>
-    {
-
+        public const string WorkerName = nameof(EmitPeHeaders);
     }
 }

@@ -181,27 +181,41 @@ namespace Z0
                 Console.ForegroundColor = current;
             }
         }
-
-        
-        void SaveError(IAppMsg src)
-        {
-            var rendered = src.Format();
-            lock(ErrLock)
-                ErrorLogPath.AppendLine(rendered);
-        }
-        
+                
         public void WriteError(IAppMsg src)
         {
-            lock(TermLock)
-            {                
+            if(src == null)
+            {
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Error.Write(src);
-                Console.Error.Write(Chars.Eol);
-                Console.ForegroundColor = current;    
-            }  
+                Console.Error.WriteLine("Error message is null!");
+                Console.ForegroundColor = current;                    
+            }
+            else
+            {
+                var rendered = src.Format();
+                if(text.blank(rendered))
+                {
+                    var current = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Error.WriteLine("Error message is blank!");
+                    Console.ForegroundColor = current;    
+                }
+                else
+                {
+                    lock(TermLock)
+                    {                
+                        var current = Console.ForegroundColor;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Error.Write(src);
+                        Console.Error.Write(Chars.Eol);
+                        Console.ForegroundColor = current;    
+                    }  
 
-            SaveError(src);          
+                    lock(ErrLock)
+                        ErrorLogPath.AppendLine(rendered);
+                }
+            }              
         }
 
         public void WriteLine(object sr)

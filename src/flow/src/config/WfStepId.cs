@@ -61,5 +61,11 @@ namespace Z0
         DecodeParsed,
 
         CaptureHostApi,
+
+        RunProcessors,
+
+        ParseAsmFiles,
+
+        
     }
 }

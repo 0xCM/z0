@@ -14,15 +14,14 @@ namespace Z0
     /// </summary>
     public readonly struct WfTermEventSink : IWfEventSink<WfTermEventSink>, IMultiSink
     {
-        public static WfTermEventSink create(CorrelationToken? ct = null)
+        public static WfTermEventSink create(CorrelationToken ct)
             => new WfTermEventSink(ct);
 
         readonly CorrelationToken Ct;    
         
-        WfTermEventSink(CorrelationToken? ct)
+        public WfTermEventSink(CorrelationToken ct)
         {
-            Ct = ct ?? CorrelationToken.create();
-            Deposit(new WorkerInitialized(nameof(WfTermEventSink), Ct));
+            Ct = ct;
         }
         
         [MethodImpl(Inline)]
@@ -55,7 +54,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Deposit(new WfStepFinished(nameof(WfTermEventSink), Ct));
+            term.print(new WfStepFinished(nameof(WfTermEventSink), Ct));
         }
     }
 }

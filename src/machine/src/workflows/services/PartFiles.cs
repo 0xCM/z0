@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal PartFiles(IAsmContext context)
-            => AppPaths = context.AppPaths.ForApp(PartId.Control);            
+            => AppPaths = context.AppPaths.ForApp(Part.ExecutingPart);            
 
         [MethodImpl(Inline)]
         public static PartFiles create(IAsmContext context)
@@ -42,20 +42,6 @@ namespace Z0
             }       
             
             return sys.empty<MemberParseRecord>();
-        }
-
-        [MethodImpl(Inline)]
-        public static FilePath[] List<K>(FolderPath root, params PartId[] parts)
-            where K : unmanaged
-        {
-            if(typeof(K) == typeof(AsmFileKind))
-                return AsmPaths(root, parts);            
-            else if(typeof(K) == typeof(HexFileKind))
-                return HexPaths(root, parts);            
-            else if(typeof(K) == typeof(ParsedFileKind))
-                return ParsePaths(root, parts);            
-            else 
-                return sys.empty<FilePath>();
         }
 
         public static FilePath[] AsmPaths(FolderPath root, params PartId[] parts)

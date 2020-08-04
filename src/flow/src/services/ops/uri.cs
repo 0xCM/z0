@@ -5,10 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    partial struct Recapture
+    using static Konst;
+
+    partial struct Flow    
     {
-        static ApiHostUri InferHostUri(Type src)
+        public static ApiHostUri uri(Type src)
         {
             var typename = src.Name;
             var partName = typename.LeftOf('_');

@@ -4,8 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 { 
-    public interface IMachineEventClient : IMachineEvents, IWfBrokerClient
+    public interface IMachineClient : IWfBrokerClient
     {
+        WfError Error => default;
+        
+        LoadedParseReport LoadedParseReport => default;
+
+        IndexedEncoded IndexedCode => default;
+
+        DecodedHost DecodedHost => default;
+
+        DecodedPart DecodedPart => default;
+
+        DecodedMachine DecodedIndex => default;
+
         void OnEvent(WfError e) 
             => Sink.Deposit(e);
 

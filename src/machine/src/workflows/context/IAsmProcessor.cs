@@ -13,6 +13,29 @@ namespace Z0
 
     }
 
+    public interface IJmpProcessor : IAsmProcessor<JmpKind,LocatedInstruction>
+    {
+        void OnJA(LocatedInstruction inxs)
+        {
+            term.announce();
+        }
+
+        void OnJAE(LocatedInstruction inxs)
+        {
+            term.announce();            
+        }
+
+        void OnJB(LocatedInstruction inxs)
+        {
+            term.announce();            
+        }
+
+        void OnJBE(LocatedInstruction inxs)
+        {
+            term.announce();            
+        }
+    }
+    
     public interface IAsmProcessor<E,T> : IAsmProcessor<T>
         where E : unmanaged, Enum
     {

@@ -63,14 +63,14 @@ namespace Z0.Asm
             var extractRpt = CWf.ReportExtracts.CreateExtractReport(host, extracts);
             CWf.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
 
-            var parsed = CWf.ParseMembers.Parse(host, extracts);
+            var _parsed = new ParseMembers(Wf, Ct);
+            var parsed = _parsed.Parse(host, extracts);
             if(parsed.Length == 0)
                 Wf.Status(WorkerName, $"No {host} members were parsed", Ct);
-
-            if(parsed.Length != 0)
+            else
             {                        
                 CWf.ReportParsed.Emit(host, parsed, paths.ParsedPath);
-                CWf.ParseMembers.SaveHex(host, parsed, paths.HexPath);
+                _parsed.SaveHex(host, parsed, paths.HexPath);
 
                 var decoded = CWf.DecodeParsed.Run(host,parsed);
                 if(decoded.Length != 0)

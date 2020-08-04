@@ -10,22 +10,25 @@ namespace Z0
     using static Konst;
     using static Flow;
 
-    public readonly struct IndexedEncoded : IWfEvent<IndexedEncoded>
+    public readonly struct ParsedAsmFile : IWfEvent<ParsedAsmFile>
     {
-        const string Pattern = SS1x3;
+        const string Pattern = PSx4;
         
         public WfEventId Id {get;}
 
         public string WorkerName {get;}
 
-        public readonly EncodedIndex Index;
+        public FilePath SourcePath {get;}
+
+        public uint LineCount {get;}        
 
         [MethodImpl(Inline)]
-        public IndexedEncoded(string worker, EncodedIndex index, CorrelationToken ct)
+        public ParsedAsmFile(string worker, uint lines, FilePath src, CorrelationToken ct)
         {
-            Id = wfid(nameof(IndexedEncoded), ct);
-            Index = index;
+            Id = WfEventId.define(nameof(ParsedAsmFile), ct);
             WorkerName = worker;
+            LineCount = lines;
+            SourcePath = src;
         }
 
         public AppMsgColor Flair 
@@ -33,6 +36,6 @@ namespace Z0
         
         [MethodImpl(Inline)]        
         public string Format()
-            => text.format(Pattern, Id, WorkerName, Index.EntryCount);               
+            => text.format(Pattern, Id, WorkerName, LineCount, SourcePath);               
     }        
 }

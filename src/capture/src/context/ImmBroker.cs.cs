@@ -18,10 +18,10 @@ namespace Z0.Asm
 
     public interface IImmBroker : IWfBroker
     {
-        EmittedEmbeddedImm EmittedEmbeddedImm => EmittedEmbeddedImm.Empty;
+        EmittedEmbeddedImm EmittedEmbeddedImm => default;
 
-        FileEmissionFailed HostFileEmissionFailed => FileEmissionFailed.Empty;
+        FileEmissionFailed HostFileEmissionFailed => default;
 
-        ImmInjectionFailed ImmInjectionFailed => ImmInjectionFailed.Empty;
+        ImmInjectionFailed ImmInjectionFailed => default;
     }    
 }

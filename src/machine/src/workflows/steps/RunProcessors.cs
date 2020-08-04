@@ -10,13 +10,31 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static RunMachineStep;
-    using static z;
+    using static RunProcessorsStep;
+    using static z;    
     
-    public class RunMachine : IMachine
+    [Step(WfStepId.RunProcessors)]
+    public class RunProcessors : IMachine
     {
-        public static void create(WfContext wf, CorrelationToken ct)
-            => new RunMachine(wf, ct);
+        public static RunProcessors create(WfContext wf, CorrelationToken ct)
+        {
+            wf.Initializing(WorkerName, ct);
+            var step = default(RunProcessors);
+            try
+            {
+                step = new RunProcessors(wf, ct);
+                var client = step as IMachine;
+                client.Connect();
+            }
+            catch(Exception e)
+            {
+                wf.Error(WorkerName, e, ct);
+                throw;
+            }
+            
+            wf.Initialized(WorkerName, ct);
+            return step;        
+        }
 
         readonly WfContext Wf;
 
@@ -34,7 +52,7 @@ namespace Z0
 
         readonly FolderPath TargetDir;
         
-        internal RunMachine(WfContext wf, CorrelationToken ct)
+        RunProcessors(WfContext wf, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
@@ -43,8 +61,7 @@ namespace Z0
             Asm = ContextFactory.asm(wf.ContextRoot);
             Broker = new WfBroker(Ct);
             Files = PartFiles.create(Asm);            
-            IndexBuilder = Encoded.indexer();
-            (this as IMachineEventClient).Connect();            
+            IndexBuilder = Encoded.indexer();                  
         }
 
         public void OnEvent(LoadedParseReport e)
@@ -86,11 +103,8 @@ namespace Z0
             }
             catch(Exception error)
             {
-
                 Wf.Error(error,Ct);
             }
-
-
         }
 
         void DecodeParts(EncodedIndex src)
@@ -160,7 +174,7 @@ namespace Z0
         void Index(MemberParseRecord src)
         {
             if(src.Address.IsEmpty)
-                Broker.Raise(new Unaddressed(src.Uri, src.Data));
+                Wf.Raise(new Unaddressed(src.Uri, src.Data));
             else
                 IndexBuilder.Include(MemberCode.Define(src.Uri, src.Data));
         }
@@ -169,17 +183,28 @@ namespace Z0
         {
             var report = ParseReportParser.Service.Parse(src);
             report.OnFailure(fail => term.error(fail.Reason))
-                  .OnSuccess(value => Broker.Raise(new LoadedParseReport(value, src)));
+                  .OnSuccess(value => Wf.Raise(new LoadedParseReport(value, src)));
         }
 
         void ParseReports()
         {
-            Root.iter(Files.ParseFiles, ParseReport);
-            Broker.Raise(new IndexedEncoded(IndexBuilder.Freeze()));
+            var files = span(Files.ParseFiles);
+            var count = files.Length;
+            Wf.Status(WorkerName, $"Processing {count} parse files", Ct);
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var file = ref skip(files,i);
+                ParseReport(file);
+            }
+
+            var encoded = IndexBuilder.Freeze();
+            Wf.Raise(new IndexedEncoded(WorkerName, encoded, Ct));
         }
 
         public void Run()
         {
+            Wf.Running(WorkerName, Ct);
             try
             {            
                 ParseReports();
@@ -196,7 +221,7 @@ namespace Z0
         }
 
         public bool SemanticFormatEnabled {get;}
-            = false;
+            = true;
 
         IMultiSink IWfBrokerClient.Sink 
             => Wf.Broker;

@@ -12,17 +12,17 @@ namespace Z0.Asm
     [Step(WfStepId.ParseMembers)]
     public readonly struct ParseMembers
     {
-        public ICaptureWorkflow Workflow {get;}
+        public CaptureState Wf {get;}
 
         readonly IExtractParser Parser;
 
         public ICaptureContext Context 
-            => Workflow.Context;
+            => Wf.CWf.Context;
                     
         [MethodImpl(Inline)]
-        internal ParseMembers(ICaptureWorkflow workflow)
+        internal ParseMembers(CaptureState state, CorrelationToken ct)
         {
-            Workflow = workflow;
+            Wf = state;
             Parser = Extracts.Services.ExtractParser(Extracts.DefaultBufferLength);
         }
 

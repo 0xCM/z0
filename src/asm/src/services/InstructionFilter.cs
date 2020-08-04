@@ -14,14 +14,14 @@ namespace Z0.Asm
     {        
         readonly InstructionTest F;
 
-        readonly ISink<Instruction> Target;
+        readonly Action<Instruction> Target;
 
         [MethodImpl(Inline)]
-        public static InstructionFilter create(InstructionTest f, ISink<Instruction> dst)
+        public static InstructionFilter create(InstructionTest f, Action<Instruction> dst)
             => new InstructionFilter(f, dst);
 
         [MethodImpl(Inline)]
-        public InstructionFilter(InstructionTest f, ISink<Instruction> sink)
+        public InstructionFilter(InstructionTest f, Action<Instruction> sink)
         {
             F = f;
             Target = sink;
@@ -34,7 +34,7 @@ namespace Z0.Asm
             {
                 next = ref skip(next, i);
                 if(F(next))
-                    Target.Deposit(next);
+                    Target(next);
             }
         }
     }

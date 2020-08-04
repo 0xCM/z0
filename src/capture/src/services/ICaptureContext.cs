@@ -27,8 +27,6 @@ namespace Z0.Asm
         IAppMsgSink MsgSink {get;}
 
         void Raise<E>(E e)
-            where E : IAppEvent;
-
-        CorrelationToken Correlate();                    
+            where E : IAppEvent; 
     }
 }

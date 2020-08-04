@@ -21,8 +21,5 @@ namespace Z0.Asm
 
         DecodeParsed DecodeParsed
             => new DecodeParsed(this);
-
-        ParseMembers ParseMembers
-            => new ParseMembers(this);
     }
 }

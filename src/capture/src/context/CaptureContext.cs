@@ -32,12 +32,10 @@ namespace Z0.Asm
 
         public IAppMsgSink MsgSink {get;}
 
-        int step;
-
         public CaptureContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
-            ICaptureBroker broker, TPartCaptureArchive archive, CorrelationToken? ct = null)
+            ICaptureBroker broker, TPartCaptureArchive archive, CorrelationToken ct)
         {
-            Ct = ct ?? CorrelationToken.create();
+            Ct = ct;
             ApiSet = context.Api;
             Extractor = Capture.Services.HostExtractor(Extracts.DefaultBufferLength);
             Parser = Extracts.Services.ExtractParser(Extracts.DefaultBufferLength);
@@ -48,10 +46,6 @@ namespace Z0.Asm
             Archive = archive;
             MsgSink = context;
         }
-
-        [MethodImpl(Inline)]
-        public CorrelationToken Correlate()
-            => CorrelationToken.define(atomic(ref step));
 
         [MethodImpl(Inline)]
         public void Raise<E>(E e)

@@ -18,8 +18,6 @@ namespace Z0
 
         readonly Dictionary<ulong, Receiver<IAppEvent>> Receivers;
         
-        public FilePath TargetPath {get;}
-
         public IWfEventSink Sink {get;}
 
         object locker;
@@ -30,33 +28,25 @@ namespace Z0
         public WfBroker(CorrelationToken ct)
         {
             Ct = ct;
-            var @base = AppBase.Default;
-            var paths = @base.AppPaths;
             Sink = WfTermEventSink.create(Ct);
-            TargetPath = paths.AppCaptureRoot + FileName.Define($"{@base.AppName}.broker", FileExtensions.Csv);
             Subscriptions = new Dictionary<Type,ISink>();
             Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
-            locker = new object();                    
-            Sink.Deposit(new WorkerInitialized(nameof(WfBroker), Ct));
+            locker = new object();                             
         }
 
         [MethodImpl(Inline)]
         public WfBroker(FilePath target, CorrelationToken ct)
         {
             Ct = ct;
-            var @base = AppBase.Default;
-            var paths = @base.AppPaths;
             Sink = WfTermEventSink.create(Ct);
-            TargetPath = target ?? (paths.AppCaptureRoot + FileName.Define($"{@base.AppName}.broker", FileExtensions.Csv));
             Subscriptions = new Dictionary<Type,ISink>();
             Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
             locker = new object();                    
-            Sink.Deposit(new WorkerInitialized(nameof(WfBroker), Ct));
         }
 
         public void Dispose()
         {            
-            Sink.Deposit(new WfStepFinished(nameof(WfBroker), Ct));
+            
         }
 
         public Outcome Subscribe<S,E>(S sink, E model)

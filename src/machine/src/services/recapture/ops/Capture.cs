@@ -37,7 +37,7 @@ namespace Z0
             for(var i=0u; i<idxcount; i++)
             {
                 ref readonly var index = ref skip(indices,i);            
-                var host = InferHostUri(index.DeclaringType);                
+                var host = Flow.uri(index.DeclaringType);                
                 var asmpath = asmdir + host.FileName(FileExtensions.Asm);
                 var captured = CaptureAsm(host, index.Data, asmpath);
                 results.AddRange(captured);

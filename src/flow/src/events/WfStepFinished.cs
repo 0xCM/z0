@@ -51,7 +51,6 @@ namespace Z0
         public string Format()
             => text.nonempty(Detail) 
             ? text.format(DetailPattern, Id, Detail)
-            : text.format(DefaultPattern, Id);        
-     
+            : text.format(DefaultPattern, Id);            
     }
 }

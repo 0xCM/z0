@@ -27,9 +27,8 @@ namespace Z0
         readonly WfContext Wf;
 
         readonly CorrelationToken Ct;
-        readonly CpuBuffers Buffers;
 
-        readonly List<AsmSourceDoc> AsmDocs;
+        readonly CpuBuffers Buffers;
 
         int ProcessedCount;
 
@@ -41,7 +40,6 @@ namespace Z0
         [MethodImpl(Inline)]
         internal ProcessPartFiles(WfContext wf, IAsmContext asm, CorrelationToken ct)
         {
-            AsmDocs = new List<AsmSourceDoc>(100);
             Wf = wf;
             Ct = ct;
             Files = PartFiles.create(asm);        
@@ -49,34 +47,7 @@ namespace Z0
             ProcessedCount = 0;
             Wf.Created(WorkerName, Ct);
         }
-
-        void AddAsmDoc(FilePath src, TextDoc doc)
-        {
-            AsmDocs.Add(new AsmSourceDoc(src, doc, sys.empty<AsmStatementBlock>()));            
-        }
         
-        void LoadAsmDocs()
-        {
-            var files = z.span(Files.AsmFiles);
-            var count = files.Length;
-
-            Wf.Status(WorkerName, $"Parsing {count} asm files", Ct);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var path = ref z.skip(files,i);
-                var result = TextDocParser.parse(path, TextDocFormat.Unstructured);
-                if(result.Succeeded)
-                {
-                    var doc = result.Value;
-                    Wf.Status(WorkerName, new {doc.RowCount, Path = path}, Ct);                
-                }
-                else
-                {
-                    Wf.Error(WorkerName, $"The document {path} failed to parse", Ct);                
-                }
-            }            
-        }
-
         void RunTestCase()
         {
             const string Case01 = "002ch vmovdqu xmmword ptr [rcx],xmm0 ; VMOVDQU xmm2/m128, xmm1 || VEX.128.F3.0F.WIG 7F /r || encoded[4]{c5 fa 7f 01}";
@@ -98,8 +69,6 @@ namespace Z0
         {            
             try
             {
-                LoadAsmDocs();            
-
                 var steps = Buffers.Run().Slice(0, ProcessedCount);
                 var buffer = Buffers.Log();
                 var count = asci.render(steps, buffer);
@@ -110,11 +79,6 @@ namespace Z0
             {
                 Wf.Error(error, Ct);
             }
-        }
-
-        void Notify(PartFileEvent e)
-        {
-            term.print(e);
         }
 
         [Op, MethodImpl(Inline)]

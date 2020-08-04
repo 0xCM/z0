@@ -12,11 +12,11 @@ namespace Z0
 
     partial struct Flow    
     {
-        public static WfEventLog wflog(IAppContext context, CorrelationToken? ct = null)
+        public static WfEventLog wflog(IAppContext context, CorrelationToken ct)
         {
             return new WfEventLog(
-                    context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".stdout", FileExtensions.Csv), 
-                    context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".errout", FileExtensions.Csv), 
+                    context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".stdout2", FileExtensions.Csv), 
+                    context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".errout2", FileExtensions.Csv), 
                     termsink(ct));
         }        
     }
