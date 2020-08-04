@@ -8,6 +8,12 @@ namespace Z0
 
     public class StepAttribute : Attribute
     {
+        public StepAttribute(bool descriptor = false)
+        {
+            Id = default;
+            IsDescriptor = descriptor;
+        }
+
         public StepAttribute(WfStepId id)
         {
             Id = id;

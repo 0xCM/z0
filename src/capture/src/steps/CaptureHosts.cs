@@ -59,30 +59,8 @@ namespace Z0.Asm
 
         void Store(ApiHostUri host, ExtractedCode[] extracts, TPartCaptureArchive dst)
         {
-            var paths = HostCaptureArchive.create(dst.ArchiveRoot, host);
-            var extractRpt = CWf.ReportExtracts.CreateExtractReport(host, extracts);
-            CWf.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
-
-            var parser = new ParseMembers(Wf, Ct);
-            var parsed = parser.Parse(host, extracts);
-            if(parsed.Length == 0)
-                Wf.Status(WorkerName, $"No {host} members were parsed", Ct);
-            else
-            {                        
-
-                using var _emit = new EmitParsedReport(Wf, host, parsed, paths.ParsedPath, Ct);            
-                _emit.Run();
-                _emit.Run();
-                parser.SaveHex(host, parsed, paths.HexPath);
-
-                using var decode = new DecodeParsed(Wf, CWf.Context, Ct);
-                var functions = decode.Run(host,parsed);
-                if(functions.Length != 0)
-                {
-                    decode.SaveDecoded(functions, paths.AsmPath);
-                    CWf.MatchAddresses.Run(host, extracts, functions);
-                }
-            }
+            using var step = new EmitHostArtifacts(Wf, host, extracts, dst, Ct);
+            step.Run();
         }
 
         public void Dispose()

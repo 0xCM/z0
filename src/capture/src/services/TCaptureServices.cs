@@ -21,6 +21,6 @@ namespace Z0.Asm
             => MemberExtraction.service(bufferlen);
 
         IImmEmissionWorkflow ImmEmissionWorkflow(IMultiSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, WfConfig config, CorrelationToken? ct = null)        
-            => new ImmEmissionWorkflow(Context, sink, formatter, decoder, api, config.Target.ArchiveRoot, ct);
+            => new SpecializeImmediates(Context, sink, formatter, decoder, api, config.Target.ArchiveRoot, ct);
     }
 }

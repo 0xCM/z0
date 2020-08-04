@@ -4,11 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    [Step(true)]
-    public readonly struct EmitParsedReportStep
-    {
-        public const WfStepId StepId = WfStepId.EmitParsedReport;
+    using System;
 
-        public const string WorkerName = nameof(EmitParsedReport);
+    using static Konst;
+
+
+    [Step(true)]
+    public readonly struct SpecializeImmediatesStep
+    {
+        public const WfStepId StepId = WfStepId.SpecializeImmediates;
+
+        public const string WorkerName = nameof(SpecializeImmediates);
     }
 }

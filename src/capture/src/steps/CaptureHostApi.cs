@@ -45,38 +45,11 @@ namespace Z0.Asm
         {
             try
             {
-                var paths = HostCaptureArchive.create(dst.ArchiveRoot, host.Uri);
-                if(host.PartId.IsNone())
-                    return;
+                using var extract = new ExtractHostMembers(Wf, host, dst, Ct);
+                extract.Run();
 
-                using var xStep = new ExtractMembers(Wf, Ct);
-                var extracts = xStep.Extract(host);
-
-                if(extracts.Length == 0)
-                    return;
-                                
-                var extractRpt = CWf.ReportExtracts.CreateExtractReport(host.Uri, extracts);
-                CWf.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
-
-                var _parsed = new ParseMembers(Wf, Ct);
-                var parsed = _parsed.Parse(host.Uri, extracts);
-                if(parsed.Length == 0)
-                    Wf.Status(WorkerName, $"No {host.Uri} members were parsed", Ct);                    
-                else
-                {            
-                    using var _emit = new EmitParsedReport(Wf, host.Uri, parsed, paths.ParsedPath, Ct);            
-                    _emit.Run();
-                    _parsed.SaveHex(host.Uri, parsed, paths.HexPath);
-
-                    using var decode = new DecodeParsed(Wf, CWf.Context, Ct);
-                    var decoded = decode.Run(host.Uri,parsed);
-                    if(decoded.Length != 0)
-                    {
-
-                        decode.SaveDecoded(decoded, paths.AsmPath);
-                        CWf.MatchAddresses.Run(host.Uri, extracts, decoded);
-                    }
-                }
+                using var emit = new EmitHostArtifacts(Wf, host.Uri, extract.Extractions, dst, Ct);
+                emit.Run();            
             }
             catch(Exception e)
             {

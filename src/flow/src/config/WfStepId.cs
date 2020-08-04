@@ -24,6 +24,8 @@ namespace Z0
 
         EmitBitMasks,
 
+        EmitParsedReport,
+
         EmitFieldMetadata,
 
         EmitBlobs,
@@ -48,7 +50,11 @@ namespace Z0
 
         AnalyzeCalls,
 
+        ExtractMembers,
+
         MatchEmissions,
+
+        ManagePartCapture,
 
         EmitDatasets,
 
@@ -56,7 +62,7 @@ namespace Z0
 
         ClearCaptureArchives,
 
-        ParseMembers,
+        ExtractHostMembers,
 
         DecodeParsed,
 
@@ -66,6 +72,8 @@ namespace Z0
 
         ParseAsmFiles,
 
-        
+        SpecializeImmediates,
+
+        EmitHostArtifacts,       
     }
 }

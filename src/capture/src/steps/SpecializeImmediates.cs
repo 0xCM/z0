@@ -12,7 +12,8 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public class ImmEmissionWorkflow : IImmEmissionWorkflow
+    [Step]
+    public class SpecializeImmediates : IImmEmissionWorkflow
     {                        
         public CorrelationToken Ct {get;}
 
@@ -34,7 +35,7 @@ namespace Z0.Asm
 
         readonly IImmSpecializer ImmSpecializer;
 
-        internal ImmEmissionWorkflow(IAsmContext context, IMultiSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
+        internal SpecializeImmediates(IAsmContext context, IMultiSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
         {
             Ct = ct ?? CorrelationToken.create();
             Broker = ImmBroker.create(context.AppPaths.AppStandardOutPath, Ct);

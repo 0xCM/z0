@@ -4162,3 +4162,39 @@
  rename src/machine/src/workflows/steps/{RunMachine.cs => RunProcessors.cs} (77%)
  rename src/machine/src/{infrastructure/WfKind.cs => workflows/steps/RunProcessorsStep.cs} (62%)
  delete mode 100644 src/machine/src/workflows/x/Running.cs
+[master de11925f0] .
+ 103 files changed, 1191 insertions(+), 1075 deletions(-)
+ create mode 100644 capture.csv
+ rename src/capture/src/context/{CaptureState.cs => WfState.cs} (56%)
+ create mode 100644 src/capture/src/events/HostJitRecord.cs
+ create mode 100644 src/capture/src/steps/EmitParsedReportStep.cs
+ delete mode 100644 src/control/src/hosts/capture/CaptureHost.cs
+ rename src/flow/src/{config/PartWfConfig.cs => context/WfConfig.cs} (74%)
+ rename src/flow/src/{config/WfConfig.cs => context/WfSettings.cs} (84%)
+ create mode 100644 src/flow/src/events/WfErrorT.cs
+ create mode 100644 src/flow/src/events/WfWarnT.cs
+ create mode 100644 src/flow/src/services/FlowLiteralKind.cs
+ create mode 100644 src/flow/src/services/ops/configure.cs
+ rename src/flow/src/services/ops/{wfctx.cs => context.cs} (77%)
+ rename src/flow/src/services/ops/{wflog.cs => elog.cs} (89%)
+ rename src/flow/src/services/ops/{wferror.cs => error.cs} (85%)
+ create mode 100644 src/flow/src/services/ops/settings.cs
+ delete mode 100644 src/flow/src/services/ops/wfconfig.cs
+ rename src/identify/src/api/{models => }/ApiComposition.cs (100%)
+ rename src/identify/src/api/{models => }/IMemberLocator.cs (100%)
+ rename src/identify/src/{code => api}/IUriHexQuery.cs (100%)
+ rename src/identify/src/api/{models => }/NaturalNumericOp.cs (100%)
+ rename src/identify/src/{code => api}/UriHexQuery.cs (100%)
+ delete mode 100644 src/identify/src/query/ApiHostQuery.cs
+ delete mode 100644 src/identify/src/query/ApiMemberQuery.cs
+ delete mode 100644 src/identify/src/query/IApiMemberQuery.cs
+ rename src/{identify/src/query/ApiQuery.cs => kinds/src/queries/ApiCatalogQuery.cs} (82%)
+ rename src/{identify/src/query/IApiHostQuery.cs => kinds/src/queries/ApiHostQuery.cs} (78%)
+ create mode 100644 src/kinds/src/queries/ApiMemberQuery.cs
+ rename src/konst/src/{identity => encoded}/models/ApiMember.cs (100%)
+ rename src/{identify/src/api => konst/src/encoded}/models/ApiMembers.cs (100%)
+ rename src/konst/src/reflective/models/{ClrTypeKinds.cs => ClrTypeKind.cs} (80%)
+ rename src/konst/src/reflective/models/{GenericStateKind.cs => GenericKind.cs} (94%)
+ rename src/konst/src/reflective/models/{GenericPartition.cs => GenericState.cs} (58%)
+ delete mode 100644 src/konst/src/reflective/models/GenericTargetKind.cs
+ create mode 100644 src/konst/src/reflective/models/ParametricTargetKind.cs
