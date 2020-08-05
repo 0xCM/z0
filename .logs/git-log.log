@@ -4229,3 +4229,144 @@
  rename src/{flow => domain}/src/contracts/ITableFormatter.cs (100%)
  rename src/{flow => domain}/src/services/TableFormatter.cs (100%)
  rename src/{flow/src/services/TableFormatters.cs => domain/src/services/Tables.cs} (66%)
+[master a04108372] .
+ 206 files changed, 1966 insertions(+), 1447 deletions(-)
+ create mode 100644 src/domain/src/asm/AsmOpCodes.cs
+ create mode 100644 src/domain/src/asm/AsmOperandTest.cs
+ create mode 100644 src/domain/src/asm/AsmOperands.cs
+ rename src/{konst/src/dataset/ops/header.cs => domain/src/asm/AsmRender.cs} (63%)
+ create mode 100644 src/domain/src/asm/AsmState.cs
+ rename src/domain/src/asm/{expressions => common}/AsmFieldWidths.cs (99%)
+ rename src/domain/src/asm/common/{AsmMemDirect.cs => MemDirect.cs} (55%)
+ rename src/domain/src/asm/common/{AsmMemDx.cs => MemDx.cs} (75%)
+ rename src/domain/src/asm/common/{AsmMemInfo.cs => MemInfo.cs} (81%)
+ rename src/domain/src/asm/common/{AsmMemScale.cs => MemScale.cs} (68%)
+ rename src/domain/src/asm/common/{InstructionRecord.cs => OpCodeOffset.cs} (78%)
+ delete mode 100644 src/domain/src/asm/datadriven/driven/InstructionToken.Models.cs
+ rename src/{asmd/src/tokens/models => domain/src/asm/expressions}/OpCodePart.cs (79%)
+ rename src/domain/src/asm/{datadriven/driven => literals}/OperatingMode.cs (100%)
+ rename src/domain/src/asm/{expressions/CommandInfo.cs => models/AsmRecord.cs} (75%)
+ create mode 100644 src/domain/src/asm/models/AsmRecordField.cs
+ rename src/domain/src/asm/{expressions/AsmSourceDoc.cs => models/AsmSource.cs} (61%)
+ rename src/{asmd/src/tokens => domain/src/asm}/models/OpCodeSpec.cs (69%)
+ rename src/domain/src/asm/{literals => models}/SignExtensionKind.cs (98%)
+ rename src/domain/src/asm/{literals => models}/ZeroExtensionKind.cs (98%)
+ create mode 100644 src/domain/src/asm/ops/branch.cs
+ create mode 100644 src/domain/src/asm/ops/branchtarget.cs
+ create mode 100644 src/domain/src/asm/ops/identify.cs
+ create mode 100644 src/domain/src/asm/ops/membase.cs
+ create mode 100644 src/domain/src/asm/ops/memdx.cs
+ rename src/{konst/src/dataset/form/IDataset.cs => domain/src/asm/ops/memdxsize.cs} (55%)
+ rename src/{konst/src/reports/services/FieldRender.cs => domain/src/asm/ops/memidx.cs} (56%)
+ create mode 100644 src/domain/src/asm/ops/meminfo.cs
+ create mode 100644 src/domain/src/asm/ops/memscale.cs
+ create mode 100644 src/domain/src/asm/ops/memseg.cs
+ create mode 100644 src/domain/src/asm/ops/memsize.cs
+ create mode 100644 src/domain/src/asm/ops/offset.cs
+ create mode 100644 src/domain/src/asm/ops/register.cs
+ rename src/domain/src/asm/ops/{render.FarCallSummary.cs => render.cs} (76%)
+ create mode 100644 src/domain/src/asm/ops/segprefix.cs
+ create mode 100644 src/domain/src/asm/ops/target.cs
+ delete mode 100644 src/domain/src/asm/ops/testimm.cs
+ create mode 100644 src/domain/src/asm/ops/testsegbase.cs
+ rewrite src/domain/src/asm/query/AsmMemory.cs (65%)
+ rename src/domain/src/asm/{ops/render.FarCallCounts.cs => render/ops/FarCallCounts.cs} (68%)
+ rename src/domain/src/asm/{ops/render.AsmImmInfo.cs => render/ops/ImmInfo.cs} (83%)
+ create mode 100644 src/domain/src/asm/render/ops/MemDx.cs
+ create mode 100644 src/domain/src/asm/tokens/AsmTokenIndex.cs
+ rename src/domain/src/asm/{datadriven/driven/InstructionTokenKind.cs => tokens/AsmTokenKind.cs} (99%)
+ rename src/domain/src/asm/{datadriven/driven/OpCodeTokenKind.cs => tokens/code/AsmOpCodeToken.cs} (99%)
+ rename src/domain/src/asm/{datadriven/driven/OpCodeTokenValues.cs => tokens/code/AsmOpCodeTokens.cs} (89%)
+ create mode 100644 src/domain/src/asm/tokens/code/AsmTokenId.Index.cs
+ rename src/domain/src/asm/{datadriven/driven/InstructionToken.Id.cs => tokens/code/AsmTokenId.cs} (79%)
+ create mode 100644 src/domain/src/asm/tokens/code/AsmTokenIndex.cs
+ create mode 100644 src/domain/src/asm/tokens/code/AsmTokenMeaning.Index.cs
+ rename src/domain/src/asm/{datadriven/driven/InstructionToken.Meaning.cs => tokens/code/AsmTokenMeaning.cs} (94%)
+ create mode 100644 src/domain/src/asm/tokens/code/AsmTokenValues.Index.cs
+ rename src/domain/src/asm/{datadriven/driven/InstructionToken.Values.cs => tokens/code/AsmTokenValues.cs} (85%)
+ create mode 100644 src/domain/src/asm/tokens/code/AsmTokens.cs
+ rename src/domain/src/asm/{datadriven/data => tokens/tables}/Identifiers.64BitMode.csv (100%)
+ rename src/domain/src/asm/{datadriven/data => tokens/tables}/Identifiers.Encoding.csv (100%)
+ rename src/domain/src/asm/{datadriven/data => tokens/tables}/Identifiers.Instructions.csv (100%)
+ rename src/domain/src/asm/{datadriven/data => tokens/tables}/Identifiers.LegacyMode.csv (100%)
+ rename src/domain/src/asm/{datadriven/data => tokens/tables}/Identifiers.OpCodes.csv (100%)
+ rename src/domain/src/asm/{datadriven/data => tokens/tables}/OpCodeSpecs.csv (100%)
+ rename src/domain/src/asm/{datadriven/data => tokens/tables}/Syntax.OpCodes.VEX.csv (100%)
+ rename src/domain/src/{asm/render => contracts}/ISemanticRender.cs (77%)
+ rename src/{datasets => domain}/src/credits/Credits.cs (100%)
+ rename src/{datasets => domain}/src/credits/api/Content.cs (100%)
+ rename src/{datasets => domain}/src/credits/api/Document.cs (100%)
+ rename src/{datasets => domain}/src/credits/entities/ContentRef.cs (96%)
+ rename src/{datasets => domain}/src/credits/entities/DocRef.cs (97%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/Appendix.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/Chapter.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/ContentLevel.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/ContentNumber.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/ContentType.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/Division.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/Section.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/Topic.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/Vendor.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/Volume.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/components/VolumePart.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/specs/ContentField.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/specs/DocField.cs (100%)
+ rename src/{datasets => domain}/src/credits/literals/bitfields/specs/DocFieldDelimiter.cs (100%)
+ create mode 100644 src/konst/src/dataset/Archives.cs
+ rename src/konst/src/{reports => dataset}/DataFields.cs (88%)
+ create mode 100644 src/konst/src/dataset/FieldIndex.cs
+ create mode 100644 src/konst/src/dataset/Formatters.cs
+ rename src/konst/src/dataset/{ops/labels.cs => TableStore.cs} (70%)
+ rename src/konst/src/dataset/{form => contracts}/IDataFlow.cs (96%)
+ rename src/konst/src/dataset/{form => contracts}/IDataModel.cs (98%)
+ rename src/konst/src/{reports => dataset}/contracts/IDatasetArchive.cs (98%)
+ rename src/konst/src/{reports => dataset}/contracts/IDatasetFormatter.cs (99%)
+ rename src/konst/src/dataset/{form/IDataEntity.cs => contracts/IEntity.cs} (63%)
+ rename src/konst/src/{reports => dataset}/contracts/IFieldFormatter.cs (95%)
+ rename src/konst/src/{reports => dataset}/contracts/IPublicationArchive.cs (98%)
+ rename src/konst/src/{reports => dataset}/contracts/ITableArchive.cs (97%)
+ rename src/konst/src/{reports => dataset}/contracts/ITableStore.cs (98%)
+ rename src/konst/src/{reports => dataset}/contracts/IValueFormatter.cs (98%)
+ delete mode 100644 src/konst/src/dataset/form/IDataFields.cs
+ delete mode 100644 src/konst/src/dataset/models/DataFieldsF.cs
+ rename src/konst/src/{literals/models/LiteralRecord.cs => dataset/models/EnumLiteral.cs} (84%)
+ rename src/konst/src/{literals/models/LiteralTableField.cs => dataset/models/EnumLiteralField.cs} (95%)
+ create mode 100644 src/konst/src/dataset/models/Literal.cs
+ rename src/konst/src/{literals/models/LiteralFieldId.cs => dataset/models/LiteralFieldKind.cs} (96%)
+ rename src/konst/src/{literals => dataset}/models/NumericLiteral.cs (99%)
+ rename src/{domain/src/asm/datadriven/driven/InstructionTokens.cs => konst/src/dataset/models/NumericLiteralField.cs} (57%)
+ rename src/konst/src/{literals => dataset}/models/NumericLiteralT.cs (99%)
+ rename src/konst/src/{reports => dataset}/models/Publication.cs (97%)
+ delete mode 100644 src/konst/src/dataset/ops/formatter.cs
+ delete mode 100644 src/konst/src/dataset/ops/index.cs
+ delete mode 100644 src/konst/src/dataset/ops/render.cs
+ delete mode 100644 src/konst/src/dataset/ops/width.cs
+ rename src/konst/src/{reports => dataset}/services/FieldFormatterF.cs (93%)
+ create mode 100644 src/konst/src/dataset/services/FileTableStore.cs
+ rename src/konst/src/{reports => dataset}/services/ListPublisher.cs (95%)
+ rename src/konst/src/{literals => dataset}/services/LiteralRecords.cs (69%)
+ rename src/konst/src/{literals => dataset}/services/NumericLiteralFormatter.cs (81%)
+ rename src/konst/src/{reports/services/PublicationArchive.cs => dataset/services/Publications.cs} (80%)
+ rename src/konst/src/{literals => dataset}/services/ReflectedLiterals.cs (85%)
+ delete mode 100644 src/konst/src/dataset/services/TFieldRender.cs
+ rename src/konst/src/{reports => dataset}/services/TableArchive.cs (72%)
+ rename src/konst/src/{reports/services/TableStore.cs => dataset/services/TableStoreFR.cs} (98%)
+ rename src/konst/src/{reports => dataset}/services/ValueFormatter.cs (98%)
+ rename src/{zxed/src/base/table => konst/src/dataset/stringtable}/StringTable.cs (90%)
+ rename src/{zxed/src/base/table => konst/src/dataset/stringtable}/StringTableRow.cs (97%)
+ rename src/{zxed/src/base/table => konst/src/dataset/stringtable}/StringTableRows.cs (98%)
+ rename src/{zxed/src/base => konst/src/dataset/stringtable}/StringTables.cs (80%)
+ rename src/{zxed/src/base/table/TableHeaderCell.cs => konst/src/dataset/tables/HeaderCell.cs} (81%)
+ rename src/{zxed/src/base/table/DataGridRow.cs => konst/src/dataset/tables/Row.cs} (89%)
+ rename src/{zxed/src/base/table/DataGridRows.cs => konst/src/dataset/tables/Rows.cs} (69%)
+ rename src/{zxed/src/base/table/DataGrid.cs => konst/src/dataset/tables/Table.cs} (71%)
+ rename src/{zxed/src/base/table => konst/src/dataset/tables}/TableHeader.cs (75%)
+ rename src/{zxed/src/base/FileData.cs => konst/src/documents/models/TextFileRows.cs} (75%)
+ delete mode 100644 src/konst/src/literals/models/LiteralFieldWidth.cs
+ delete mode 100644 src/konst/src/literals/models/LiteralT.cs
+ rename src/konst/src/primitive/kinds/{PrimalLiteralKind.cs => LiteralKind.cs} (97%)
+ delete mode 100644 src/konst/src/reports/contracts/IRecordPublisher.cs
+ delete mode 100644 src/konst/src/reports/services/Publications.cs
+ delete mode 100644 src/konst/src/reports/services/RecordPublisher.cs
+ delete mode 100644 src/konst/src/reports/traits/TReferenceArchive.cs
+ create mode 100644 wf/pack-il.bat

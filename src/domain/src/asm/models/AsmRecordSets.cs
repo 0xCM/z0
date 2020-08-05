@@ -9,17 +9,17 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct CommandRecordSets<T>
+    public readonly struct AsmRecordSets<T>
     {
-        readonly CommandRecordSet<T>[] Data;
+        readonly AsmRecordSet<T>[] Data;
 
         [MethodImpl(Inline)]
-        public CommandRecordSets(params CommandRecordSet<T>[] src)
+        public AsmRecordSets(params AsmRecordSet<T>[] src)
         {
             Data = src;
         }
 
-        public CommandRecordSet<T>[] Content
+        public AsmRecordSet<T>[] Content
         {
             [MethodImpl(Inline)]
             get => Data;

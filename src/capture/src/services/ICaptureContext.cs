@@ -8,6 +8,8 @@ namespace Z0.Asm
 
     public interface ICaptureContext : IAppBase
     {
+        IAsmContext Asm{get;}
+        
         IApiSet ApiSet {get;}
 
         IMemberExtractor Extractor {get;}

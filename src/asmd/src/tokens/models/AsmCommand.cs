@@ -18,7 +18,7 @@ namespace Z0.Asm
 
         public AsmStatement Statement {get;}
 
-        public AsmOpCode OpCode {get;}
+        public string OpCode {get;}
 
         public InstructionCodeData Instruction {get;}
 
@@ -29,7 +29,7 @@ namespace Z0.Asm
         {
             Sequence = seq;
             Statement = statement;
-            OpCode = new AsmOpCode(opcode);
+            OpCode = opcode;
             Instruction = new InstructionCodeData(instruction);
             Encoded = encoded;
         }

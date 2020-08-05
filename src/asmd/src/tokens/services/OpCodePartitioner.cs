@@ -69,7 +69,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        void Process(in OpCodeExpression src, in OpCodePartition handler)
+        void Process(in AsmOpCode src, in OpCodePartition handler)
         {
             handler.Include(this, src);            
         }
@@ -95,8 +95,8 @@ namespace Z0.Asm
             => new CpuidExpression(src.CpuId);
 
         [MethodImpl(Inline)]
-        static OpCodeExpression OpCode(in OpCodeRecord src)
-            => new OpCodeExpression(src.OpCode);
+        static AsmOpCode OpCode(in OpCodeRecord src)
+            => new AsmOpCode(src.OpCode);
 
         [MethodImpl(Inline)]
         static InstructionExpression Instruction(in OpCodeRecord src)

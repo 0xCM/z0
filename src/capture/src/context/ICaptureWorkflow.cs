@@ -12,6 +12,5 @@ namespace Z0.Asm
 
         MatchAddresses MatchAddresses 
             => new MatchAddresses(this);
-
     }
 }

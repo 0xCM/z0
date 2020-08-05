@@ -6,13 +6,13 @@ namespace Z0.Asm
 {    
     public sealed class CaptureBroker : WfBroker, ICaptureBroker
     {   
-        CaptureBroker(FilePath target, CorrelationToken ct)
-            : base(target, ct)
+        CaptureBroker(CorrelationToken ct)
+            : base(ct)
         {
 
         }
 
         public static ICaptureBroker create(FilePath target, CorrelationToken ct)
-            => new CaptureBroker(target, ct);           
+            => new CaptureBroker(ct);           
     }
 }

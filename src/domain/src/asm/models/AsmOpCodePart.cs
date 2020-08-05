@@ -9,26 +9,15 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmOpCode
+    public readonly struct AsmOpCodePart
     {
-        readonly string Data;
-        
+        public readonly asci8 Data;
+
         [MethodImpl(Inline)]
-        public AsmOpCode(string src)
-        {
-            this.Data = src;
-        }
-        
-        public ReadOnlySpan<char> Content
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }    
+        public AsmOpCodePart(asci8 src)
+            => Data = src; 
 
         public string Format()
-            => Data;        
-
-        public override string ToString()
-            => Format();
+            => Data.Format();
     }
 }

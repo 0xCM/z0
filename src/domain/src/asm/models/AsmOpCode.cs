@@ -9,16 +9,16 @@ namespace Z0.Asm
 
     using static Konst;
     
-    public readonly struct OpCodeExpression
+    public readonly struct AsmOpCode
     {
         public readonly asci32 Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator OpCodeExpression(string src)
-            => AsmOpCodes.expression(src);
+        public static implicit operator AsmOpCode(string src)
+            => AsmOpCodes.from(src);
 
         [MethodImpl(Inline)]
-        public OpCodeExpression(asci32 src)
+        public AsmOpCode(asci32 src)
             => Value = src;
 
         public ReadOnlySpan<byte> Encoded
@@ -46,11 +46,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(OpCodeExpression src)
+        public bool Equals(AsmOpCode src)
             => src.Value.Equals(Value);
         
         public override bool Equals(object src)
-            => src is OpCodeExpression x && Equals(x);
+            => src is AsmOpCode x && Equals(x);
         
         public override int GetHashCode()
             => Value.GetHashCode();        
@@ -61,7 +61,7 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
-        public static OpCodeExpression Empty 
-            => new OpCodeExpression(asci32.Null);
+        public static AsmOpCode Empty 
+            => new AsmOpCode(asci32.Null);
     }
 }

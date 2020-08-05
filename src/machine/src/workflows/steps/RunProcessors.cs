@@ -186,6 +186,50 @@ namespace Z0
                   .OnSuccess(value => Wf.Raise(new LoadedParseReport(value, src)));
         }
 
+        void RandomProcessor()
+        {
+            // try
+            // {
+            //     var name = nameof(RandomProcessor);
+            //     Wf.Raise(new RunningProcessor(ActorName, name, Ct));
+                
+            //     var processor = ProcessAsm.create(State);
+            //     var parts = Wf.ContextRoot.Composition.Resolved.Select(p => p.Id);
+            //     Wf.Raise(new ProcessingParts(ActorName, name, parts, Ct));
+
+            //     var result = processor.Process(parts);
+            //     var sets = span(result.Content);
+            //     var count = result.Count;
+            //     for(var i=0; i<count; i++)
+            //     {
+            //         ref readonly var set = ref skip(sets,i);
+            //         Process(set);                        
+            //     }
+
+            //     Wf.Raise(new RanProcessor(ActorName, nameof(RandomProcessor), Ct));
+
+            // }
+            // catch(Exception e)
+            // {
+            //     Wf.Error(ActorName, e, Ct);
+            // }
+        }
+
+        void Process(in AsmRecordSet<Mnemonic> src)
+        {
+            var count = src.Count;
+            var records = span(src.Sequenced);
+
+            var path = ((Wf.AppPaths.AppDataRoot +  FolderName.Define("processed")) + FileName.Define(src.Key.ToString(), FileExtensions.Csv)).CreateParentIfMissing();
+            using var writer = path.Writer();
+            writer.WriteLine(AsmRecord.FormatHeader());
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var record = ref skip(records,i);
+                writer.WriteLine(record.Format());
+            }            
+        }
+
         void ParseReports()
         {
             var files = span(Files.ParseFiles);
@@ -207,6 +251,7 @@ namespace Z0
             Wf.Running(ActorName, Ct);
             try
             {            
+                RandomProcessor();
                 ParseReports();
             }
             catch(Exception e)

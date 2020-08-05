@@ -14,6 +14,8 @@ namespace Z0.Asm
     { 
         public CorrelationToken Ct {get;}
         
+        public IAsmContext Asm {get;}
+        
         public IApiSet ApiSet {get;}
 
         public IMemberExtractor Extractor {get;}
@@ -35,6 +37,7 @@ namespace Z0.Asm
         public CaptureContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
             ICaptureBroker broker, TPartCaptureArchive archive, CorrelationToken ct)
         {
+            Asm = context;
             Ct = ct;
             ApiSet = context.ContextRoot;
             Extractor = Capture.Services.HostExtractor(Extracts.DefaultBufferLength);

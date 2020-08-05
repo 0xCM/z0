@@ -30,18 +30,18 @@ namespace Z0.Asm
         }
 
 
-        void process_parsed()
-        {
-            var processor = AsmProcessors.Service.Parsed(Context);
-            var parts = Api.Resolved.Select(p => p.Id).ToArray();
-            var result = processor.Process(parts);
-            var sets = result.Content.ToReadOnlySpan();
-            var count = result.Count;
-            for(var i=0; i<count; i++)
-                Emit(skip(sets,i));                        
-        }
+        // void process_parsed()
+        // {
+        //     var processor = AsmProcessors.Service.Parsed(Context);
+        //     var parts = Api.Resolved.Select(p => p.Id).ToArray();
+        //     var result = processor.Process(parts);
+        //     var sets = result.Content.ToReadOnlySpan();
+        //     var count = result.Count;
+        //     for(var i=0; i<count; i++)
+        //         Emit(skip(sets,i));                        
+        // }
 
-        void Emit(in CommandRecordSet<Mnemonic> src)
+        void Emit(in AsmRecordSet<Mnemonic> src)
         {
             var count = src.Count;
             var records = src.Sequenced.ToReadOnlySpan();

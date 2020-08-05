@@ -11,12 +11,18 @@ namespace Z0
     
     using static Konst;
     using static Flow;
+    using static ControllerStep;
 
     using static z;
 
+    public readonly struct ControllerStep
+    {
+        public const string ActorName = nameof(Controller);        
+    }
+    
     readonly ref struct Controller
     {
-        readonly IAppContext Context;
+        readonly IAppContext ContextRoot;
 
         readonly IAsmContext Asm;
         
@@ -28,59 +34,47 @@ namespace Z0
 
         readonly WfSettings Config;
         
-        readonly WfContext Wf;
+        readonly WfContext WfContext;        
 
         readonly TAppPaths Paths;
 
+        public WfState Wf {get;}
+
         public Controller(IAppContext context, CorrelationToken ct, string[] args)
         {
-            Context = context;
+            ContextRoot = context;
             Args = args;
             Ct = ct;
             TermSink = termsink(Ct);
             Paths = context.AppPaths;
             Asm = ContextFactory.asm(context);                           
             Config = settings(context, Ct);
-            Wf = Flow.context(context, Ct, Config, TermSink);                        
+            WfContext = Flow.context(context, Ct, Config, TermSink);                        
+            Wf = new WfState(WfContext, Asm, args, Ct);
+            Wf.Created(ActorName, Ct);
         }
 
         public void Run()
         {
-            Wf.Running(nameof(Controller), Ct);
-            var config = PartConfig(Wf, Args);
-            var cwf = capture(Asm, Paths.AppCaptureRoot);
-            var data = Paths.AppDataRoot + FolderName.Define("data");
-            var brokerLog = (data + FileName.Define("broker", FileExtensions.Csv)).CreateParentIfMissing();
-            var cBroker = CaptureBroker.create(brokerLog, Ct);
-            
-            using var host = new CaptureHost(Wf, Asm, cwf, cBroker, config, Ct);
-            host.Run();
+            Wf.Running(ActorName, Ct);
+
+            try
+            {
+                using var host = new CaptureHost(Wf, Wf.Broker, Wf.Config, Ct);
+                host.Run();
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                //Wf.Error(ActorName, e,Ct);
+            }
+
+            Wf.Ran(ActorName, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Ran(nameof(Controller), Ct);
-        }
-
-        static WfConfig PartConfig(WfContext wf, string[] args)
-        {
-            var parsed = AppArgs.parse(args).Data.Select(arg => PartIdParser.single(arg.Value));
-            var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
-            var dstpath = wf.AppPaths.AppCaptureRoot;
-            var src = new ArchiveConfig(srcpath);
-            var dst = new ArchiveConfig(dstpath);
-            return new WfConfig(args, src, dst, parsed);                    
-        }
-
-        ICaptureWorkflow capture(IAsmContext context, FolderPath dst)
-        {
-            var services = CaptureServices.create(context);
-            var spec = AsmFormatSpec.DefaultStreamFormat;
-            var formatter = services.Formatter(spec);
-            var decoder = services.AsmDecoder(spec);
-            var writer = Capture.Services.AsmWriterFactory;
-            var archive = services.CaptureArchive(dst);
-            return new CaptureWorkflow(context, Wf, decoder, formatter, writer, archive);
+            WfContext.Finished(ActorName, Ct);
         }
     }
 }

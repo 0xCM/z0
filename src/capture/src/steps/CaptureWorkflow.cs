@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-        
+            
     public readonly struct CaptureWorkflow : ICaptureWorkflow
     {
         public ICaptureContext Context {get;}
@@ -20,9 +20,10 @@ namespace Z0.Asm
         public WfContext Wf {get;}
         
         [MethodImpl(Inline)]
-        public CaptureWorkflow(IAsmContext asm, WfContext wf, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, TPartCaptureArchive archive, CorrelationToken? ct = null)
+        public CaptureWorkflow(IAsmContext asm, WfContext wf, 
+            IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, TPartCaptureArchive archive, CorrelationToken ct)
         {
-            Ct = ct ?? CorrelationToken.create();
+            Ct = ct;
             Wf = wf;
             Broker = CaptureBroker.create(asm.AppPaths.AppCaptureRoot + FileName.Define("workflow", FileExtensions.Csv), Ct);
             Context = new CaptureContext(asm, decoder, formatter, writerfactory, Broker, archive, Ct);

@@ -20,11 +20,11 @@ namespace Z0
         public static AsmProcessors Service => default;
         
         public asci16 Process(ReadOnlySpan<CpuidFeature> src, CpuidProcessStep step)
-            => CpuidProcessor.Service.Process(src,step ?? OnStep);
+            => CpuidProcessor.Service.Process(src,step ?? OnStep);        
         
         [Op]
-        public AsmCmdProcessor Parsed(IAsmContext context)
-            => AsmCmdProcessor.Service(context);
+        public ProcessAsm Parsed(WfState wf)
+            => ProcessAsm.create(wf);
         
         static void OnStep(Vector128<byte> src) 
         {

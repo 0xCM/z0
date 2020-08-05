@@ -20,23 +20,25 @@ namespace Z0
     {        
         readonly IAppContext Context;
 
+        readonly TAppPaths Paths;
+
         readonly WfContext Wf;
+
+        readonly WfState State;
         
+        readonly WfSettings Config;
+
         readonly IAsmContext Asm;
 
         readonly ActorIdentity[] Known;
 
         readonly string[] Args;
         
-        readonly CorrelationToken Ct;
-
-        readonly bool RunProcessPartFilesStep;
-
-        WorkflowSteps Steps => default;
+        readonly CorrelationToken Ct;        
 
         WorkflowStepConfig StepConfig;
 
-        static ICaptureWorkflow capture(IAsmContext asm, WfContext wf, FolderPath target)
+        static ICaptureWorkflow capture(IAsmContext asm, WfContext wf, FolderPath target, CorrelationToken ct)
         {
             var services = CaptureServices.create(asm);
             var spec = AsmFormatSpec.DefaultStreamFormat;
@@ -44,29 +46,52 @@ namespace Z0
             var decoder = services.AsmDecoder(spec);
             var writer = Capture.Services.AsmWriterFactory;
             var archive = services.CaptureArchive(target);
-            return new CaptureWorkflow(asm, wf, decoder, formatter, writer, archive);
+            return new CaptureWorkflow(asm, wf, decoder, formatter, writer, archive, ct);
         }
 
         public static Control create(IAppContext context, CorrelationToken ct, params string[] args)
         {
             var receiver = termsink(ct);
             var wf = Flow.context(context, ct, settings(context, ct), receiver);
-            return new Control(wf, ct, args);
+            return new Control(context, ct, args);
         }
 
-        [MethodImpl(Inline)]
-        Control(WfContext wf, CorrelationToken ct, string[] args, params ActorIdentity[] known)     
+        static WfConfig PartConfig(WfContext wf, string[] args)
         {
-            Context = wf.ContextRoot;
-            Wf = wf;
-            Args = args;
-            Known = known;
-            Ct =  ct;
-            Asm = ContextFactory.asm(Context);
-            RunProcessPartFilesStep = true;
-            StepConfig = WorkflowStepConfig.Load(wf);
-
+            var parsed = AppArgs.parse(args).Data.Select(arg => PartIdParser.single(arg.Value));
+            var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
+            var dstpath = wf.AppPaths.AppCaptureRoot;
+            var src = new ArchiveConfig(srcpath);
+            var dst = new ArchiveConfig(dstpath);
+            return new WfConfig(args, src, dst, parsed);                    
         }
+
+        public Control(IAppContext context, CorrelationToken ct, string[] args, params ActorIdentity[] known)
+        {
+            Context = context;
+            Args = args;
+            Ct = ct;
+            Paths = context.AppPaths;
+            Asm = ContextFactory.asm(context);                           
+            Config = settings(context, Ct);
+            Wf = Flow.context(context, Ct, Config, Flow.termsink(ct));                        
+            State = new WfState(Wf, Asm, args, Ct);
+            StepConfig = WorkflowStepConfig.Load(Wf);
+            Known = known;
+        }
+
+        // [MethodImpl(Inline)]
+        // Control(WfContext wf, CorrelationToken ct, string[] args, params ActorIdentity[] known)     
+        // {
+        //     Context = wf.ContextRoot;
+        //     Wf = wf;
+        //     Args = args;
+        //     Known = known;
+        //     Ct =  ct;
+        //     Asm = ContextFactory.asm(Context);
+        //     RunProcessPartFilesStep = true;
+        //     StepConfig = WorkflowStepConfig.Load(wf);
+        // }
 
         public void Run()
         {
@@ -86,10 +111,10 @@ namespace Z0
         {
             if(CaptureArtifacts)
             {             
-                var cwf = capture(Asm, Wf, Context.AppPaths.AppCaptureRoot);
+                var cwf = capture(Asm, Wf, Context.AppPaths.AppCaptureRoot, Ct);
                 var broker = CaptureBroker.create(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
                 var config = configure(Wf, Args);
-                using var host = new CaptureHost(Wf, Asm, cwf, broker, config, Ct);
+                using var host = new CaptureHost(State, broker, config, Ct);
                 host.Run();
             }
         }
@@ -146,7 +171,6 @@ namespace Z0
             Wf.RanT(WorkerName, kind, Ct);
         }
         
- 
         bool CaptureArtifacts => false;
         
         bool EmitDatasets => true;

@@ -10,7 +10,7 @@ namespace Z0.Asm
     {
         AsmStatement Statement {get;}
 
-        AsmOpCode OpCode {get;}
+        string OpCode {get;}
 
         InstructionCodeData Instruction {get;}
 

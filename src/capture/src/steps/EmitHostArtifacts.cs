@@ -124,6 +124,7 @@ namespace Z0.Asm
             if(decoded.Length != 0)
             {
                 step.SaveDecoded(decoded, AsmPath);
+                
                 Wf.CWf.MatchAddresses.Run(Source, Extractions, decoded);
             }
         }

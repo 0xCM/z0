@@ -14,16 +14,16 @@ namespace Z0.Asm
 
     public class ManagePartCapture
     {
-        public static ManagePartCapture create(WfContext wf, WfConfig config, ICaptureWorkflow cwf,  CorrelationToken ct)
-            => new ManagePartCapture(wf, config, cwf, ct);
+        public static ManagePartCapture create(WfState state,  CorrelationToken ct)
+            => new ManagePartCapture(state, ct);
 
         readonly WfContext Wf;
+
+        readonly WfState State;
 
         public WfConfig Config;
 
         readonly CorrelationToken Ct;
-
-        readonly WfState State;
 
         readonly ICaptureContext Context;        
         
@@ -40,18 +40,16 @@ namespace Z0.Asm
         readonly uint HostCount;
         
         [MethodImpl(Inline)]
-        internal ManagePartCapture(WfContext wf, WfConfig config, ICaptureWorkflow cwf, CorrelationToken ct)
+        internal ManagePartCapture(WfState state, CorrelationToken ct)
         {
-            Wf = wf;
-            CWf = cwf;
-            Config = config;
+            State = state;
+            CWf = State.CWf;
+            Config = State.Config;
             Ct = ct;
-            State = new WfState(CWf, Wf, Config, Ct);
             Context = CWf.Context;
             Api = Context.ApiSet;
             Catalogs = Api.Catalogs;
-            CatalogCount = (uint)Catalogs.Length;
-            
+            CatalogCount = (uint)Catalogs.Length;            
             var a = Catalogs.SelectMany(c => c.DataTypeHosts).Cast<IApiHost>();
             var b = Catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>();
             Hosts = a.Concat(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();

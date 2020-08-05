@@ -12,23 +12,17 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a componentized opcode and carries opcode expression from whence they came
     /// </summary>
-    public readonly struct OpCodeSpec
+    public readonly struct AsmOpCodeParts
     {                
-        public readonly OpCodeExpression Expression;
+        public readonly AsmOpCode Expression;
 
-        public readonly OpCodePart[] Parts;
+        public readonly AsmOpCodePart[] Parts;
 
         [MethodImpl(Inline)]
-        public OpCodeSpec(OpCodeExpression expression, params OpCodePart[] parts)
+        public AsmOpCodeParts(AsmOpCode expression, params AsmOpCodePart[] parts)
         {
             Expression = expression;
             Parts = parts;
-        }        
-
-        public static OpCodeSpec Empty 
-        {
-            [MethodImpl(Inline)]
-            get => new OpCodeSpec (new OpCodeExpression(default));
-        }
+        }                    
     }
 }

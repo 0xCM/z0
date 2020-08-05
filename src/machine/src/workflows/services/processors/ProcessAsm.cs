@@ -10,17 +10,24 @@ namespace Z0.Asm
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using Z0.Asm.Data;
-
     using static Konst;
-    using static Root;
+    using static z;
+    using static ProcessAsmStep;
 
-    public readonly struct AsmCmdProcessor
+    public readonly struct ProcessAsmStep
+    {
+        public const string ActorName = nameof(ProcessAsm);
+    }
+    
+    public readonly struct ProcessAsm
     {                
+        [MethodImpl(Inline)]
+        public static ProcessAsm create(WfState wf) 
+            => new ProcessAsm(wf);
+
         readonly Dictionary<Mnemonic, ArrayBuilder<AsmRecord>> Index;
 
-        TArchives DataSource 
-            => Archives.Services;            
+        readonly WfState Wf;
 
         readonly int[] Sequence;
 
@@ -28,10 +35,13 @@ namespace Z0.Asm
 
         readonly IAsmContext Context;
 
-        readonly MnemonicParser MnemonicParse;
+        readonly MnemonicParser Parser;
 
         IAsmFunctionDecoder Decoder
             => Context.Decoder;
+
+        TArchives DataSource 
+            => Archives.Services;            
 
         [MethodImpl(Inline)]
         TPartCaptureArchive CaptureArchive(FolderPath root)
@@ -41,11 +51,6 @@ namespace Z0.Asm
         IEncodedHexArchive UriBitsArchive(FolderPath root)
             => DataSource.EncodedHexArchive(root);
 
-        [MethodImpl(Inline)]
-        TPartCaptureArchive CaptureArchive(PartId part)
-            => DataSource.CaptureArchive(
-                (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
-                FolderName.Define("capture"));
         int NextSequence
         {
             [MethodImpl(Inline)]
@@ -59,20 +64,17 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static AsmCmdProcessor Service(IAsmContext context) 
-            => new AsmCmdProcessor(context);
-
-        [MethodImpl(Inline)]
-        internal AsmCmdProcessor(IAsmContext context)
+        internal ProcessAsm(WfState wf)
         {
-            Context = context;
-            MnemonicParse = MnemonicParser.Create();
+            Wf = wf;
+            Context = wf.Asm;
+            Parser = MnemonicParser.Create();
             Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRecord>>();
             Sequence = sys.alloc<int>(1);
-            Offset = sys.alloc<uint>(1);
+            Offset = sys.alloc<uint>(1);            
         }
         
-        public CommandRecordSets<Mnemonic> Process(params PartId[] parts)
+        public AsmRecordSets<Mnemonic> Process(params PartId[] parts)
         {
             var pfs = PartFiles.create(Context);
             var files = PartFiles.create(Context).ParseFileIndex(parts);
@@ -96,7 +98,7 @@ namespace Z0.Asm
             return Processed();
         }
  
-        CommandRecordSets<Mnemonic> ProcessOpCodes(params PartId[] parts)
+        AsmRecordSets<Mnemonic> ProcessOpCodes(params PartId[] parts)
         {            
             var paths = Context.AppPaths.ForApp(PartId.Control);
             var capture = CaptureArchive(paths.AppCaptureRoot);
@@ -148,17 +150,17 @@ namespace Z0.Asm
                 Process(src.Data, instructions.Value);
         }
 
-        CommandRecordSets<Mnemonic> Processed()
+        AsmRecordSets<Mnemonic> Processed()
         {
             var keys = Index.Keys.ToArray();
             var count = keys.Length;
-            var sets = new CommandRecordSet<Mnemonic>[count];
+            var sets = new AsmRecordSet<Mnemonic>[count];
             for(var i=0; i<count; i++)
             {
                 var key = keys[i];
-                sets[i] = CommandRecords.Set(key, Index[key].Create());
+                sets[i] = AsmRecords.set(key, Index[key].Create());
             }
-            return CommandRecords.Sets(sets);
+            return AsmRecords.sets(sets);
         }
                
         void Process(in LocatedCode code, in AsmInstructionList asm)

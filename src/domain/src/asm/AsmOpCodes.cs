@@ -15,27 +15,27 @@ namespace Z0
     public readonly struct AsmOpCodes
     {
         [MethodImpl(Inline), Op]
-        public static OpCodePart part(asci8 src)
-            => new OpCodePart(src);
+        public static AsmOpCodePart part(asci8 src)
+            => new AsmOpCodePart(src);
 
         [MethodImpl(Inline), Op]
-        public static OpCodeExpression expression(asci32 src)
-            => new OpCodeExpression(src);
+        public static AsmOpCode from(asci32 src)
+            => new AsmOpCode(src);
 
         [MethodImpl(Inline), Op]
-        public static OpCodeExpression expression(char[] src)
+        public static AsmOpCode from(char[] src)
         {
             var dst = asci32.Null;
             asci.encode(src, out dst);
-            return expression(dst);
+            return from(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static OpCodeExpression expression(string src)
+        public static AsmOpCode from(string src)
         {
             var dst = asci32.Null;
             asci.encode(src, out dst);
-            return expression(dst);
+            return from(dst);
         }
     }
 }

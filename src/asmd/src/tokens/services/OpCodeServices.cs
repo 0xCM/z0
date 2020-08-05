@@ -20,19 +20,7 @@ namespace Z0.Asm
         public static OpCodeServices Service => default;
 
         public static TokenModel[] InstructionTokens
-            => AsmTokenIndex.Models; 
-
-        [MethodImpl(Inline), Op]
-        public static string Meaning(AsmTokenKind token)
-            => AsmTokenIndex.Meanings[(int)token];
-
-        [MethodImpl(Inline), Op]
-        public static string Identity(AsmTokenKind token)
-            => AsmTokenIndex.Identity[(int)token];
-
-        [MethodImpl(Inline), Op]
-        public static string Definition(AsmTokenKind token)
-            => AsmTokenIndex.Values[(int)token];
+            => AsmTokenIndex.create().Models; 
 
         [MethodImpl(Inline)]
         public static OpCodeDataset dataset()

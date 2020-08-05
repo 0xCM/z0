@@ -21,7 +21,7 @@ namespace Z0.Asm
         
         readonly Span<InstructionExpression> instructions;
 
-        readonly Span<OpCodeExpression> codes;
+        readonly Span<AsmOpCode> codes;
 
         readonly Span<MnemonicExpression> mnemonics;
 
@@ -36,7 +36,7 @@ namespace Z0.Asm
         {
             MnemonicSeq = new int[1];
             instructions = new InstructionExpression[count];
-            codes = new OpCodeExpression[count];
+            codes = new AsmOpCode[count];
             mnemonics = new MnemonicExpression[count];
             cpuid = new CpuidExpression[count];
             modes = new OperatingMode[count];
@@ -49,7 +49,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(in OpCodePartitoner ocp, in OpCodeExpression src)
+        public void Include(in OpCodePartitoner ocp, in AsmOpCode src)
         {
             OpCode(ocp.Sequence) = src;
         }
@@ -101,7 +101,7 @@ namespace Z0.Asm
             get => instructions;
         }
 
-        public ReadOnlySpan<OpCodeExpression> OpCodes
+        public ReadOnlySpan<AsmOpCode> OpCodes
         {
             [MethodImpl(Inline)]
             get => codes;
@@ -130,7 +130,7 @@ namespace Z0.Asm
             => ref seek(mnemonics, seq);
 
         [MethodImpl(Inline), Op]
-        ref OpCodeExpression OpCode(int seq)
+        ref AsmOpCode OpCode(int seq)
             => ref seek(codes, seq);
 
         [MethodImpl(Inline), Op]

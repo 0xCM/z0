@@ -54,10 +54,9 @@ namespace Z0
             ResourceRoot = ContextRoot.AppPaths.ResourceRoot;
             IndexRoot =  ResourceRoot + FolderName.Define("index");
             LogPath = root.AppPaths.AppDataRoot + FileName.Define("workflow", FileExtensions.Csv);
-            Broker = new WfBroker(LogPath, Ct);
+            Broker = new WfBroker(Ct);
             TermSink.Deposit(new OpeningWfContext(ActorName, typeof(WfContext).Name, Ct));
         }
-
 
         public void Dispose()
         {

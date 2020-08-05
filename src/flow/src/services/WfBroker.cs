@@ -34,16 +34,6 @@ namespace Z0
             locker = new object();                             
         }
 
-        [MethodImpl(Inline)]
-        public WfBroker(FilePath target, CorrelationToken ct)
-        {
-            Ct = ct;
-            Sink = WfTermEventSink.create(Ct);
-            Subscriptions = new Dictionary<Type,ISink>();
-            Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
-            locker = new object();                    
-        }
-
         public void Dispose()
         {            
             

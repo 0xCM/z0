@@ -14,26 +14,52 @@ namespace Z0.Asm
     public readonly struct WfState
     {
         public WfContext Wf {get;}
+
+        public IAppContext ContextRoot {get;}
         
+        public IAsmContext Asm {get;}
+
         public ICaptureWorkflow CWf {get;}
 
         public WfConfig Config {get;}
+        
+        public AsmFormatSpec FormatConfig {get;}
 
+        public AsmFormatter Formatter {get;}
+
+        public TCaptureServices Services{get;}
+
+        public IAsmFunctionDecoder Decoder {get;}
+        
         readonly CorrelationToken Ct {get;}
 
+        public ICaptureBroker Broker {get;}
+
         [MethodImpl(Inline)]
-        public WfState(ICaptureWorkflow cwf, WfContext wf, WfConfig config, CorrelationToken ct)        
+        public WfState(WfContext wf, IAsmContext asm, string[] args, CorrelationToken ct)        
         {
             Wf = wf;
-            CWf = cwf;
-            Config = config;
+            ContextRoot = wf.ContextRoot;
+            Asm = asm;            
             Ct = ct;
+            var parsed = AppArgs.parse(args).Data.Select(arg => PartIdParser.single(arg.Value)).ToArray();
+            var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
+            var dstpath = wf.AppPaths.AppCaptureRoot;
+            var src = new ArchiveConfig(srcpath);
+            var dst = new ArchiveConfig(dstpath);
+            Config = new WfConfig(args, src, dst, parsed);                    
+            Services = CaptureServices.create(Asm);            
+            FormatConfig = AsmFormatSpec.WithSectionDelimiter;
+            Formatter = Services.Formatter(FormatConfig);            
+            Decoder = Services.AsmDecoder(FormatConfig); 
+            CWf = new CaptureWorkflow(Asm, Wf, Decoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.Target), Ct);    
+            Broker = CaptureBroker.create(FilePath.Empty, ct);
         }
+
 
         public IAppEventSink AppEventSink 
             => CWf.Broker.Sink;
-        
-        
+                
         public IWfEventSink WfEventSink
             => Wf.Broker.Sink;
 

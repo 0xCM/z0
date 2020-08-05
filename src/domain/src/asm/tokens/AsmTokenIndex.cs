@@ -10,24 +10,28 @@ namespace Z0.Tokens
     using static Konst;
 
     [ApiHost]
-    public readonly partial struct AsmTokenIndex
+    public partial class AsmTokenIndex
     {
         const int TokenCount = (int)AsmTokenKind.TokenCount;
 
         [MethodImpl(Inline), Op]
-        public static string identifier(AsmTokenKind kind)
-            => AsmTokenIndex.Identity[(int)kind];            
+        public static AsmTokenIndex create()
+            => new AsmTokenIndex();
 
         [MethodImpl(Inline), Op]
-        public static string meaning(AsmTokenKind kind)
-            => AsmTokenIndex.Meanings[(int)kind];
+        public string identifier(AsmTokenKind kind)
+            => Identity[(int)kind];            
 
         [MethodImpl(Inline), Op]
-        public static string value(AsmTokenKind kind)
-            => AsmTokenIndex.Values[(int)kind];            
+        public string meaning(AsmTokenKind kind)
+            => Meanings[(int)kind];
 
         [MethodImpl(Inline), Op]
-        public static TokenModel model(AsmTokenKind kind)
-            => AsmTokenIndex.Models[(int)kind];
+        public string value(AsmTokenKind kind)
+            => Values[(int)kind];            
+
+        [MethodImpl(Inline), Op]
+        public TokenModel model(AsmTokenKind kind)
+            => Models[(int)kind];
     }        
 }

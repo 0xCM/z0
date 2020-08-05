@@ -9,32 +9,32 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct CommandRecords
+    public readonly struct AsmRecords
     {
-        [MethodImpl(Inline)]
-        public static CommandRecordSet<T> Set<T>(T key, AsmRecord[] src)
-            => new CommandRecordSet<T>(key,src);
-
-        [MethodImpl(Inline)]
-        public static CommandRecordSets<T> Sets<T>(CommandRecordSet<T>[] src)
-            => new CommandRecordSets<T>(src);
-
-        [MethodImpl(Inline)]
-        public static CommandRecords Records(AsmRecord[] src)
-            => new CommandRecords(src);
-        
         readonly AsmRecord[] Data;
-    
-        [MethodImpl(Inline)]
-        public static implicit operator CommandRecords(AsmRecord[] src)
-            => new CommandRecords(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmRecord[](CommandRecords src)
+        public static AsmRecordSet<T> set<T>(T key, AsmRecord[] src)
+            => new AsmRecordSet<T>(key,src);
+
+        [MethodImpl(Inline)]
+        public static AsmRecordSets<T> sets<T>(AsmRecordSet<T>[] src)
+            => new AsmRecordSets<T>(src);
+
+        [MethodImpl(Inline)]
+        public static AsmRecords from(AsmRecord[] src)
+            => new AsmRecords(src);
+            
+        [MethodImpl(Inline)]
+        public static implicit operator AsmRecords(AsmRecord[] src)
+            => new AsmRecords(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmRecord[](AsmRecords src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public CommandRecords(AsmRecord[] src)
+        public AsmRecords(AsmRecord[] src)
         {
             Data = src;
         }

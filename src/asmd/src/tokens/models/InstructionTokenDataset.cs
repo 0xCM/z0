@@ -29,8 +29,8 @@ namespace Z0.Asm
             => asci.encode(src, dst, EncodingDelimiter);   
         
         [MethodImpl(Inline)]
-        public static InstructionTokenDataset Create()
-            => new InstructionTokenDataset(0);
+        public static InstructionTokenDataset Create(AsmTokenIndex index)
+            => new InstructionTokenDataset(index);
 
         [MethodImpl(Inline), Op]
         public string Definition(AsmTokenKind id)
@@ -57,12 +57,12 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        InstructionTokenDataset(int i)
+        InstructionTokenDataset(AsmTokenIndex index)
         {
-            Models = AsmTokenIndex.Models;
-            Meanings = AsmTokenIndex.Meanings;
-            Identity = AsmTokenIndex.Identity;
-            Definitions = AsmTokenIndex.Values;
+            Models = index.Models;
+            Meanings = index.Meanings;
+            Identity = index.Identity;
+            Definitions = index.Values;
             ValueEncoding = new byte[Definitions.Map(x => x.Length).Sum() + Definitions.Length];        
             EncodeDefinitions(Definitions,ValueEncoding);
         }

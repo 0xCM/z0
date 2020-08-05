@@ -53,7 +53,7 @@ namespace Z0
             var msg = string.Empty.Build();
             msg.AppendLine($"Failure ocuurred at {caller} {file} {line}");
             msg.AppendLine(content?.ToString() ?? string.Empty);
-            T.WriteMessage(AppMsg.NoCaller($"{msg.ToString()}", AppMsgKind.Error));
+            T.WriteError(AppMsg.NoCaller($"{msg.ToString()}", AppMsgKind.Error));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Z0
             dst.AppendLine($"Failure trapped by {caller} at {file} {line}");
             dst.AppendLine(e?.ToString() ?? string.Empty);
             var msg = AppMsg.NoCaller($"{dst.ToString()}", AppMsgKind.Error);            
-            T.WriteMessage(msg);
+            T.WriteError(msg);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
             var msg = string.Empty.Build();
             msg.AppendLine($"{title}: Failure ocuurred at {caller} {file} {line}");
             msg.AppendLine(e?.ToString() ?? string.Empty);
-            T.WriteMessage(AppMsg.NoCaller($"{msg.ToString()}", AppMsgKind.Error));
+            T.WriteError(AppMsg.NoCaller($"{msg.ToString()}", AppMsgKind.Error));
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
             var msg = string.Empty.Build();
             msg.AppendLine($"{title}: Failure ocuurred at {caller} {file} {line}");
             msg.AppendLine(e?.ToString() ?? string.Empty);
-            T.WriteMessage(AppMsg.NoCaller($"{msg.ToString()}", AppMsgKind.Error));
+            T.WriteError(AppMsg.NoCaller($"{msg.ToString()}", AppMsgKind.Error));
         }
     }
 }

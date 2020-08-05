@@ -9,44 +9,42 @@ namespace Z0
     using Z0.Asm;
     
     using static CaptureHostStep;
-    
+
+
     public class CaptureHost : ICaptureClient, IDisposable
     {            
+        
         public void Run()
         {   
-            Wf.Running(nameof(CaptureHost), Ct);         
+            Wf.Running(ActorName, Ct);         
             (this as ICaptureClient).Connect();             
             var parts = Config.Parts.Length == 0? Wf.ContextRoot.PartIdentities : Config.Parts;                
             Wf.Raise(new CapturingParts(parts, Ct));
             Consolidate(parts);
-            Wf.Ran(nameof(CaptureHost), Ct);
+            Wf.Ran(ActorName, Ct);
         }
-        
-        readonly CorrelationToken Ct;
 
         readonly WfContext Wf;
 
-        readonly ICaptureWorkflow CWf;
+        readonly WfConfig Config;
 
-        readonly string[] Args;
-        
-        public IMultiSink Sink {get;}
-
-        public WfTermEventSink TermSink {get;}
-        
-        public ICaptureBroker Broker {get;}
+        readonly WfState State;
 
         readonly IAsmContext Context;
 
+        readonly CorrelationToken Ct;
+
+        readonly ICaptureWorkflow CWf;
+
+        public ICaptureBroker Broker {get;}
+
         readonly CaptureConfig Settings;
-
-        readonly WfConfig Config;
-
+        
+        public IMultiSink Sink {get;}
+        
         readonly IAsmFormatter Formatter;
 
         readonly IAsmFunctionDecoder Decoder;
-
-        readonly ICaptureWorkflow CaptureWorkflow;
 
         readonly IImmEmissionWorkflow ImmWorkflow;
 
@@ -58,50 +56,40 @@ namespace Z0
 
         readonly uint EvalBufferSize;
         
-        public CaptureHost(WfContext wf, IAsmContext asm, ICaptureWorkflow cwf, ICaptureBroker broker, WfConfig config, CorrelationToken ct)
+        public CaptureHost(WfState wf, ICaptureBroker broker, WfConfig config, CorrelationToken ct)
         {                            
-            static ICaptureWorkflow Cwf(IAsmContext asm, WfContext wf, IAsmFunctionDecoder decoder, IAsmFormatter formatter, TPartCaptureArchive archive)
-                => new CaptureWorkflow(asm, wf, decoder, formatter, Capture.Services.AsmWriterFactory, archive);
-
-            Wf = wf;                
+            State = wf;
             Ct = ct;
-            CWf = cwf;
-            Sink = wf.TermSink;
-            TermSink = wf.TermSink;
+            CWf = wf.CWf;
+            Sink = Wf.TermSink;
             Broker = broker;
-            Context = asm;
-            Args = config.Args;
+            Context = wf.Asm;
             EvalBufferSize = Pow2.T16;
             Config = config;
+            FormatConfig = wf.FormatConfig;
+            Formatter = wf.Formatter;
+            Services = wf.Services;
+            Decoder = wf.Decoder;
             Settings = CaptureConfig.From(wf.ContextRoot.Settings);            
-            FormatConfig = AsmFormatSpec.WithSectionDelimiter;
-            Formatter = Context.CaptureServices.Formatter(FormatConfig);            
-            Services = CaptureServices.create(Context);            
-            Decoder = Capture.Services.AsmDecoder(FormatConfig);
-            UriBitsReader = Capture.Services.EncodedHexReader;
-            CaptureWorkflow = Cwf(asm, wf, Decoder, Formatter, Capture.Services.CaptureArchive(config.Target));
-            ImmWorkflow = Services.ImmEmissionWorkflow(Sink, Context.Api, Formatter, Decoder, config, Ct);            
+            UriBitsReader = Services.EncodedHexReader;
+            ImmWorkflow = Services.ImmEmissionWorkflow(Sink, Context.Api, Formatter, Decoder, config, Ct);     
+
+            Wf.Created(ActorName, Ct);       
         }
 
         public void Dispose()
         {
-            Wf.Ran(nameof(CaptureHost), Ct);
-            CaptureWorkflow.Dispose();
+            Wf.Finished(nameof(CaptureHost), Ct);
         }
         
         void Consolidate(params PartId[] parts)
         {
-            if(Settings.EmitPrimaryArtifacts)
-            {
-                var wf = ManagePartCapture.create(Wf, Config, CWf, Ct);
-                wf.Consolidate();                
-            }
+            var wf = ManagePartCapture.create(State, Ct);
+            wf.Consolidate();                
 
-            if(Settings.EmitImmArtifacts)
-                EmitImm(parts);
+            EmitImm(parts);
 
-            if(Settings.CheckExecution)
-                ExecuteCode(parts);
+            ExecuteCode(parts);
         }
 
         void EmitImm(params PartId[] parts)
@@ -112,7 +100,7 @@ namespace Z0
 
         void EmitPrimary(params PartId[] parts)
         {
-            var wf = ManagePartCapture.create(Wf, Config, CWf, Ct);
+            var wf = ManagePartCapture.create(State, Ct);
             wf.Run();
         }
 
@@ -158,7 +146,7 @@ namespace Z0
             for(var i = 0u; i<functions.Length; i++)
                 count += (uint)z.skip(functions,i).InstructionCount;
             
-           Wf.Raise(new CountedInstructions(WorkerName, host, count, Ct));                   
+           Wf.Raise(new CountedInstructions(ActorName, host, count, Ct));                   
         }
              
         void CheckDuplicates(ApiHostUri host, ReadOnlySpan<ApiMember> src)
