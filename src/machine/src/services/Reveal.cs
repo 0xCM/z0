@@ -36,7 +36,7 @@ namespace Z0
             Services = CaptureServices.create(Asm);
             var format = AsmFormatSpec.DefaultStreamFormat;
             Formatter = Services.Formatter(format);
-            Decoder = Services.AsmDecoder(format);
+            Decoder = Services.FunctionDecoder(format);
         }
 
         public ReadOnlySpan<AsmFunctionCode> capture(FolderPath root)

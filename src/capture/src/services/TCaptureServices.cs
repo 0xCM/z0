@@ -14,7 +14,7 @@ namespace Z0.Asm
         IImmSpecializer ICaptureServices.ImmSpecializer(IAsmFunctionDecoder decoder)
             => new ImmSpecializer(decoder);        
 
-        IAsmFunctionDecoder ICaptureServices.AsmDecoder(in AsmFormatSpec? format)
+        IAsmFunctionDecoder ICaptureServices.FunctionDecoder(in AsmFormatSpec? format)
             => new AsmFunctionDecoder(format ?? AsmFormatSpec.Default);
 
         IMemberExtractor ICaptureServices.HostExtractor(int bufferlen)

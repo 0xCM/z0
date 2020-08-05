@@ -42,7 +42,7 @@ namespace Z0
         
         readonly IAsmFormatter Formatter;
 
-        readonly IAsmFunctionDecoder Decoder;
+        readonly IAsmFunctionDecoder FunctionDecoder;
 
         readonly IImmEmissionWorkflow ImmWorkflow;
 
@@ -68,10 +68,10 @@ namespace Z0
             FormatConfig = wf.FormatConfig;
             Formatter = wf.Formatter;
             Services = wf.Services;
-            Decoder = wf.Decoder;
+            FunctionDecoder = wf.FunctionDecoder;
             Settings = CaptureConfig.From(wf.ContextRoot.Settings);            
             UriBitsReader = Services.EncodedHexReader;
-            ImmWorkflow = Services.ImmEmissionWorkflow(Sink, Context.Api, Formatter, Decoder, config, Ct);     
+            ImmWorkflow = Services.ImmEmissionWorkflow(Sink, Context.Api, Formatter, FunctionDecoder, config, Ct);     
 
             Wf.Created(ActorName, Ct);       
         }

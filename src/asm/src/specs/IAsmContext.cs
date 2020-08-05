@@ -42,19 +42,19 @@ namespace Z0.Asm
         /// <summary>
         /// The default asm formatting configuration
         /// </summary>
-        AsmFormatSpec AsmFormat
+        AsmFormatSpec FormatConfig
             => AsmFormatSpec.DefaultStreamFormat;           
 
         /// <summary>
         /// The context formatter
         /// </summary>
         IAsmFormatter Formatter 
-            => CaptureServices.Formatter(AsmFormat);
+            => CaptureServices.Formatter(FormatConfig);
 
         /// <summary>
         /// The context decoder
         /// </summary>
-        IAsmFunctionDecoder Decoder 
-            => CaptureServices.AsmDecoder(AsmFormat);    
+        IAsmFunctionDecoder FunctionDecoder 
+            => CaptureServices.FunctionDecoder(FormatConfig);    
     }   
 }

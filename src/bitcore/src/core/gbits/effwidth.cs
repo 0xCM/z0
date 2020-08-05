@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {                
@@ -30,7 +30,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return Bits.effwidth(uint64(src));
             else            
-                throw Unsupported.define<T>();
+                throw no<T>();
         }           
     }
 }

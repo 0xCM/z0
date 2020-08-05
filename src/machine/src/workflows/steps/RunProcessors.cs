@@ -148,7 +148,7 @@ namespace Z0
                 => dst.Add(inxs);
             
             var hostaddr = MemoryAddress.Empty;
-            var decoder = Asm.Decoder;        
+            var decoder = Asm.FunctionDecoder;        
 
             for(var i=0; i<hcs.Length; i++)
             {

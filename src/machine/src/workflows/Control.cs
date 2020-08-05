@@ -43,7 +43,7 @@ namespace Z0
             var services = CaptureServices.create(asm);
             var spec = AsmFormatSpec.DefaultStreamFormat;
             var formatter = services.Formatter(spec);
-            var decoder = services.AsmDecoder(spec);
+            var decoder = services.FunctionDecoder(spec);
             var writer = Capture.Services.AsmWriterFactory;
             var archive = services.CaptureArchive(target);
             return new CaptureWorkflow(asm, wf, decoder, formatter, writer, archive, ct);

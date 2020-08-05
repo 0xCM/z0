@@ -38,7 +38,7 @@ namespace Z0.Asm
         readonly MnemonicParser Parser;
 
         IAsmFunctionDecoder Decoder
-            => Context.Decoder;
+            => Context.FunctionDecoder;
 
         TArchives DataSource 
             => Archives.Services;            

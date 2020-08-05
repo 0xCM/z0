@@ -15,7 +15,7 @@ namespace Z0.Asm
         ICheckCapture 
     {        
         IAsmFunctionDecoder Decoder 
-            => Context.Decoder; 
+            => Context.FunctionDecoder; 
 
         IAsmFormatter Formatter 
             => Context.Formatter;

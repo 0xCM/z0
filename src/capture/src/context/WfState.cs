@@ -29,7 +29,7 @@ namespace Z0.Asm
 
         public TCaptureServices Services{get;}
 
-        public IAsmFunctionDecoder Decoder {get;}
+        public IAsmFunctionDecoder FunctionDecoder {get;}
         
         readonly CorrelationToken Ct {get;}
 
@@ -51,8 +51,8 @@ namespace Z0.Asm
             Services = CaptureServices.create(Asm);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = Services.Formatter(FormatConfig);            
-            Decoder = Services.AsmDecoder(FormatConfig); 
-            CWf = new CaptureWorkflow(Asm, Wf, Decoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.Target), Ct);    
+            FunctionDecoder = Services.FunctionDecoder(FormatConfig); 
+            CWf = new CaptureWorkflow(Asm, Wf, FunctionDecoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.Target), Ct);    
             Broker = CaptureBroker.create(FilePath.Empty, ct);
         }
 

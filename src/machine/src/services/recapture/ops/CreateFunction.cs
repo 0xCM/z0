@@ -10,7 +10,7 @@ namespace Z0
     {
         Option<AsmFunctionCode> CreatFunction(CapturedCode capture)
         {
-            var decoded = Context.Decoder.Decode(capture);
+            var decoded = Context.FunctionDecoder.Decode(capture);
             if(decoded)
                 return new AsmFunctionCode(decoded.Value, capture);
             else

@@ -4389,3 +4389,63 @@
  create mode 100644 src/machine/src/workflows/events/RanProcessor.cs
  create mode 100644 src/machine/src/workflows/events/RunningProcessor.cs
  rename src/machine/src/workflows/services/processors/{AsmCmdProcessor.cs => ProcessAsm.cs} (84%)
+[master f5d1a86df] .
+ 98 files changed, 600 insertions(+), 605 deletions(-)
+ delete mode 100644 src/control/src/Parts.cs
+ rename src/control/src/hosts/{capture/Controller.cs => Control.cs} (87%)
+ rename src/flow/src/{contracts => }/IWfContext.cs (96%)
+ rename src/{machine/src/infrastructure/pipes/sinks => flow/src/events}/PartSink.cs (96%)
+ rename src/{machine/src/infrastructure => flow/src}/hub/contracts/IDataEvent.cs (100%)
+ rename src/{machine/src/infrastructure => flow/src}/hub/contracts/IEventHub.cs (100%)
+ rename src/{machine/src/infrastructure => flow/src}/hub/services/EventHub.cs (100%)
+ rename src/{machine/src/infrastructure => flow/src}/hub/services/EventHubs.cs (100%)
+ rename src/{machine/src/infrastructure => flow/src}/hub/services/EventWriter.cs (100%)
+ rename src/{machine/src/infrastructure => flow/src}/hub/services/HubClient.cs (100%)
+ rename src/{machine/src/infrastructure => flow/src}/hub/services/HubRelay.cs (100%)
+ rename src/konst/src/{messages/specs => app}/IAppBase.cs (99%)
+ delete mode 100644 src/konst/src/events/AppEvents.cs
+ create mode 100644 src/konst/src/events/Events.cs
+ rename src/konst/src/{messages/specs => events/contracts}/IAppMsg.cs (79%)
+ rename src/konst/src/{messages/specs => events/contracts}/IAppMsgContext.cs (100%)
+ rename src/konst/src/{messages/specs => events/contracts}/IAppMsgLog.cs (100%)
+ rename src/konst/src/{messages/specs => events/contracts}/IAppMsgQueue.cs (100%)
+ rename src/konst/src/{messages/specs => events/contracts}/IAppMsgSink.cs (75%)
+ rename src/konst/src/{messages/specs => events/contracts}/IAppMsgWriter.cs (100%)
+ rename src/konst/src/events/{models => contracts}/IDataBroker.cs (100%)
+ rename src/konst/src/events/{models => contracts}/IDataHandler.cs (100%)
+ rename src/konst/src/events/{models => contracts}/IDataProcessor.cs (100%)
+ delete mode 100644 src/konst/src/events/contracts/IEventBroker.cs
+ rename src/konst/src/{messages/specs => events/contracts}/IMessagePrinter.cs (100%)
+ rename src/{flow/src => konst/src/events}/contracts/IMultiSink.cs (90%)
+ rename src/konst/src/{messages/specs => events/contracts}/ITerminal.cs (100%)
+ rename src/{flow/src => konst/src/events}/contracts/IWfBroker.cs (100%)
+ rename src/{flow/src => konst/src/events}/contracts/IWfBrokerClient.cs (100%)
+ rename src/konst/src/{messages => events}/errors/AppErrors.cs (96%)
+ rename src/konst/src/{messages => events}/errors/InvariantFailure.cs (100%)
+ rename src/konst/src/{messages => events}/errors/NotEqual.cs (100%)
+ rename src/konst/src/{messages => events}/errors/NullArg.cs (95%)
+ rename src/konst/src/{messages => events}/errors/OutOfRange.cs (100%)
+ create mode 100644 src/konst/src/events/models/AppError.cs
+ delete mode 100644 src/konst/src/events/models/AppErrorEvent.cs
+ rename src/konst/src/{messages => events}/models/AppErrorMsg.cs (100%)
+ create mode 100644 src/konst/src/events/models/AppErrorT.cs
+ delete mode 100644 src/konst/src/events/models/AppEventIdentity.cs
+ rename src/konst/src/{messages => events}/models/AppMsg.cs (54%)
+ rename src/konst/src/{messages => events}/models/AppMsgData.cs (71%)
+ create mode 100644 src/konst/src/events/models/AppMsgDataT.cs
+ rename src/konst/src/{messages => events}/models/AppMsgSource.cs (76%)
+ rename src/konst/src/{messages => events/models}/ClaimException.cs (100%)
+ rename src/konst/src/{messages => events/models}/ClaimKind.cs (100%)
+ create mode 100644 src/konst/src/events/models/EventId.cs
+ delete mode 100644 src/konst/src/events/models/EventRelay.cs
+ rename src/konst/src/{messages => events}/models/Outcome.cs (100%)
+ rename src/konst/src/events/{models => services}/AppMsgExchange.cs (75%)
+ rename src/konst/src/{messages => events}/services/AppMsgLog.cs (100%)
+ rename src/konst/src/events/{models => services}/AppMsgQueue.cs (100%)
+ rename src/konst/src/events/{models => services}/DataBrokerCT.cs (100%)
+ rename src/konst/src/events/{models => services}/TermEventSink.cs (91%)
+ delete mode 100644 src/konst/src/messages/errors/CountMismatch.cs
+ delete mode 100644 src/konst/src/messages/errors/FeatureUnsupported.cs
+ delete mode 100644 src/konst/src/messages/models/AppMsgT.cs
+ delete mode 100644 src/konst/src/messages/specs/IAppMsgExchange.cs
+ delete mode 100644 src/konst/src/z/ops/m/message.cs

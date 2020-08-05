@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using Z0.Asm;
-    using Z0.Asm.Data;
 
     using static Konst;
     using static ProcessPartFilesStep;
@@ -53,7 +51,7 @@ namespace Z0
             const string Case01 = "002ch vmovdqu xmmword ptr [rcx],xmm0 ; VMOVDQU xmm2/m128, xmm1 || VEX.128.F3.0F.WIG 7F /r || encoded[4]{c5 fa 7f 01}";
 
             var data = 0xCE_38ul;
-            var command = Encoding.encode(data);
+            var command = AsmEncoder.encode(data);
             Dispatch(command);
 
             var seq = 0;
@@ -84,7 +82,7 @@ namespace Z0
         [Op, MethodImpl(Inline)]
         public void Run(ulong data)
         {
-            Dispatch(Encoding.encode(data));
+            Dispatch(AsmEncoder.encode(data));
         }
 
         [Op, MethodImpl(Inline)]

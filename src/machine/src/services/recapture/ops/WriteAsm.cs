@@ -11,7 +11,7 @@ namespace Z0
     {
         void WriteAsm(CapturedCode capture, StreamWriter dst)
         {
-            var asm = Context.Decoder.Decode(capture).Require();
+            var asm = Context.FunctionDecoder.Decode(capture).Require();
             var formatted = Context.Formatter.FormatFunction(asm);
             dst.Write(formatted);            
         }

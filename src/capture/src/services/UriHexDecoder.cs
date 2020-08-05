@@ -13,7 +13,7 @@ namespace Z0.Asm
     {        
         public static int decode(ReadOnlySpan<IdentifiedCode> src, Span<AsmInstructions> dst)
         {
-            var decoder = Capture.Services.AsmDecoder();
+            var decoder = Capture.Services.FunctionDecoder();
             var count = src.Length;
             for(var i=0u; i<count; i++)
                  seek(dst,i) = decoder.Decode(skip(src,i)).ValueOrDefault(AsmInstructions.Empty);

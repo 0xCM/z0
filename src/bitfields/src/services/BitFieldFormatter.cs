@@ -10,44 +10,52 @@ namespace Z0
 
     using static Konst;    
 
-    partial class BitFields
-    {        
+    public readonly struct BitFieldFormatter
+    {
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<BitFieldSegment> src)
-            => BitFieldFormatter.format(src);
+            => format<BitFieldSegment,byte>(src);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string format<T>(in BitFieldSegment<T> src)
             where T : unmanaged
-                => BitFieldFormatter.format(src);
+                => $"{src.Name}({src.Width}:{src.StartPos}..{src.EndPos})";
 
         [MethodImpl(Inline)]
         public static string format<T>(ReadOnlySpan<BitFieldSegment<T>> src)
             where T : unmanaged
-                => BitFieldFormatter.format(src);
+                => format<BitFieldSegment<T>,T>(src);
 
         [MethodImpl(Inline)]
-        public static string format<F>(F src)
+        public static string format<F>(F entry)
             where F : unmanaged, IBitFieldIndexEntry<F>
-                => BitFieldFormatter.format(src);
+                => $"{entry.FieldWidth.GetType().Name}[{entry.FieldIndex}] = {entry.FieldName}";        
 
         public static string[] format(in BitFieldModel src)
-            => BitFieldFormatter.format(src);
+            => BitFieldFormatters.Service.FormatLines(src);
 
         public static string format<W>(in BitFieldIndexEntry<W> src)
             where W : unmanaged, Enum
-                => BitFieldFormatter.format(src);
+                => $"{src.FieldWidth.GetType().Name}[{src.FieldIndex}] = {src.FieldName}";
 
         /// <summary>
         /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
         /// </summary>
         /// <param name="value">The field value</param>
-        /// <typeparam name="E">The field value type</typeparam>
+        /// <typeparam name="V">The field value type</typeparam>
         /// <typeparam name="T">The field data type</typeparam>
-        public static string format<E,T>(E src)
-            where E : unmanaged, Enum
+        public static string format<V,T>(V value)
+            where V : unmanaged, Enum
             where T : unmanaged
-                => BitFieldFormatter.format<E,T>(src);
+        {
+            var formatter = BitFormatter.create<T>();
+            var data = Enums.scalar<V,T>(value);
+            var limit = gbits.effwidth(data);
+            var config = BitFormatter.limited(limit);
+            var name = typeof(V).Name;
+            var bits = formatter.Format(data,config);
+            return text.concat(name, Chars.Colon, bits);
+        }
 
         /// <summary>
         /// Computes the canonical format for a contiguous field segment sequence
@@ -57,10 +65,24 @@ namespace Z0
         public static string format<S,T>(ReadOnlySpan<S> src)
             where T : unmanaged
             where S : IBitFieldSegment<T>
-                => BitFieldFormatter.format<S,T>(src);
+        {
+            var sep =$"{Chars.Comma}{Chars.Space}";
+            var formatted = new StringBuilder();
+            formatted.Append(Chars.LBracket);
+            for(var i=0; i< src.Length; i++)
+            {
+                formatted.Append(Format(src[(byte)i]));
+                if(i != src.Length - 1)
+                    formatted.Append(sep);
+            }
+
+            formatted.Append(Chars.RBracket);            
+            return formatted.ToString();
+        }
 
         static string Format<T>(IBitFieldSegment<T> src)
             where T : unmanaged
                 => $"{src.Name}({src.Width}:{src.StartPos}..{src.EndPos})";
+
     }
 }
