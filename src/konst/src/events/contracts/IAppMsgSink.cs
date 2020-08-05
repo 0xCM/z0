@@ -22,14 +22,7 @@ namespace Z0
             else
                 term.print(msg, msg.Color);
             
-            Deposit(msg.AsDisplayed());
-        }
-
-        void NotifyConsole(string body, AppMsgColor color)
-        {
-            var msg = AppMsg.Colorize(body, color, true);            
-            term.print(msg);
-            Deposit(msg);            
+            Deposit(msg);
         }
     }
 }

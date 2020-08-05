@@ -15,7 +15,7 @@ namespace Z0
     {
         public const string EventName = nameof(LoadingWfConfig);
 
-        public const string Pattern = "Loading workflow configuration | {0}";
+        public const string EventMsg = "Loading workflow configuration | {0}";
         
         public const AppMsgColor DefaultFlair = AppMsgColor.Magenta;
         
@@ -33,10 +33,10 @@ namespace Z0
         public LoadingWfConfig(string worker, FilePath body, CorrelationToken ct, AppMsgColor flair = DefaultFlair)
         {
             Id = wfid(EventName, ct);
-            ActorName = worker;
+            ActorName = worker ?? "anonymous";
             Body = body;
             Flair = flair;
-            Description = AppMsg.Colorize(text.format(Pattern, Body), Flair);
+            Description = AppMsg.Colorize(text.format(EventMsg, Body), Flair);
         }
 
         [MethodImpl(Inline)]

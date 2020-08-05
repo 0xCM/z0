@@ -95,5 +95,10 @@ namespace Z0
         {
             term.print(e);
         }
+
+        public void Deposit(IAppMsg e)
+        {
+            term.print(e);
+        }
     }
 }

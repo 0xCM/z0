@@ -10,6 +10,18 @@ namespace Z0
     public abstract class Shell<S> : IShell<S>
         where S : Shell<S>, new()
     {
+        protected IMultiSink Sink {get;}
+        
+        protected Shell(IMultiSink sink)
+        {
+            Sink = sink;
+        }
+
+        protected Shell()
+        {
+            Sink = TermEventSink.create(CorrelationToken.define(1));
+        }
+
         /// <summary>
         /// The default application path collection
         /// </summary>
@@ -76,7 +88,15 @@ namespace Z0
         public C Context {get;}
     
         protected Shell(C context)
-            => Context = context;
+            : base()
+        {
+            Context = context;
+        }
 
+        protected Shell(C context, IMultiSink sink)
+            : base(sink)
+        {
+            Context = context;
+        }
     }
 }

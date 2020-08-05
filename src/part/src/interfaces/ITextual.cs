@@ -23,8 +23,5 @@ namespace Z0
         where C : struct
     {
         string Format(C config);
-
-        string ITextual.Format()
-            => Format(default);
     }    
 }

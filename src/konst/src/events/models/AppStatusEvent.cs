@@ -9,24 +9,24 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct AppStatusEvent : IAppEvent<AppStatusEvent>
+    public readonly struct AppStatus : IAppEvent<AppStatus, string>
     {
         [MethodImpl(Inline)]
-        public static AppStatusEvent create(string description, AppMsgColor flair = AppMsgColor.Magenta)
-            => new AppStatusEvent(description, flair);        
+        public static AppStatus create(string data, AppMsgColor flair = AppMsgColor.Magenta)
+            => new AppStatus(data, flair);        
         
-        public string Description {get;}
+        public string Data {get;}
         
         public AppMsgColor Flair {get;}
                 
         [MethodImpl(Inline)]
-        public AppStatusEvent(string description, AppMsgColor flair)
+        public AppStatus(string data, AppMsgColor flair)
         {
-            Description = description;
+            Data = data;
             Flair = flair;            
         }
         public string Format()
-            => Description;
+            => Data;
 
         public override string ToString()
             => Format();

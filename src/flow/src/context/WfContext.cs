@@ -21,7 +21,7 @@ namespace Z0
         
         public IAppContext ContextRoot {get;}
         
-        public WfSettings Config {get;}
+        public WfSettings State {get;}
 
         public IPart[] Parts {get;}
 
@@ -46,7 +46,7 @@ namespace Z0
         {
             Ct = ct;
             ContextRoot = root;
-            Config = config;
+            State = config;
             TermSink = sink;
             SessionId = (ulong)now().Ticks;
             CtProvider = 1;       
@@ -90,7 +90,7 @@ namespace Z0
         
         public void Error(string worker, Exception e, CorrelationToken ct)
         {
-            Raise(new WfError(worker, e, ct));
+            Raise(new WfError<Exception>(worker, e, e, ct));
         }
 
         public void Emitting(string worker, string dsname, FilePath dst, CorrelationToken ct)

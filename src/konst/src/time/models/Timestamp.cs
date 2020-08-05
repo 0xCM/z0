@@ -12,13 +12,21 @@ namespace Z0
 
     public readonly struct Timestamp : ITextual, IComparable<Timestamp>, IEquatable<Timestamp>
     {
-        const string Pattern = "yyyyMMdd.HH.mm.ss.ffff";
-        
         readonly ulong Ticks;
+
+        const string Pattern = "yyyyMMdd.HH.mm.ss.ffff";
+
+        [MethodImpl(Inline)]
+        public static Timestamp create()
+            => new Timestamp((ulong)now().Ticks);        
 
         [MethodImpl(Inline)]
         public Timestamp(ulong ticks)
             => Ticks = ticks;        
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(Timestamp src)
+            => src.Ticks;
 
         [MethodImpl(Inline)]
         public static bool operator <(Timestamp a, Timestamp b)

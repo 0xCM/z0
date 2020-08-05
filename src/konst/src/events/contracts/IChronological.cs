@@ -8,7 +8,8 @@ namespace Z0
 
     public interface IChronic
     {
-        Timestamp Ts => DateTime.Now;
+        Timestamp Ts 
+            => DateTime.Now;
     }
 
     public interface IChronic<F> : IChronic

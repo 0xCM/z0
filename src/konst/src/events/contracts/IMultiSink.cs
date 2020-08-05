@@ -3,17 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{    
     using System;
-
-    public class AppMsg<T> : AppMsg, IAppMsg<T>
+    
+    public interface IMultiSink : ISink<IWfEvent> , ISink<IAppEvent>, ISink<IAppMsg>,  IDisposable
     {
-        public AppMsg(AppMsgData content)
-            : base(content)
-        { }
-
-
-        public new T Content 
-            => (T)base.Content;
+                
     }
 }

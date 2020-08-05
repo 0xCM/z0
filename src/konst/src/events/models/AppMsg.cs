@@ -20,19 +20,18 @@ namespace Z0
     /// </summary>
     public class AppMsg : IAppMsg
     {
-        public readonly AppMsgData Data;
+        public AppMsgData Data {get;}
 
         [MethodImpl(Inline)]
-        public static AppMsg<C> Parametric<C>(string template, C content, AppMsgKind kind = AppMsgKind.Info, AppMsgColor color = AppMsgColor.Green)
-            => new AppMsg<C>(new AppMsgData(content, template, kind, color, false, AppMsgSource.Empty));
-
-        [MethodImpl(Inline)]
-        public static AppMsgSource Source(PartId part, string caller, string file, int? line)        
+        public static AppMsgSource source(PartId part, string caller, string file, int? line)        
             => new AppMsgSource(part, caller, file, line);
 
         [MethodImpl(Inline)]
-        public static AppMsgSource Source(string caller, string file, int? line)        
+        public static AppMsgSource source(string caller, string file, int? line)        
             => new AppMsgSource(PartId.None, caller, file, line);
+
+        public static AppMsg define(object content, AppMsgKind kind, AppMsgColor color, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new AppMsg(content, kind, color, caller, file, line);
 
         public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsg(content, kind, (AppMsgColor)kind, caller, file, line);
@@ -40,20 +39,11 @@ namespace Z0
         public static AppMsg NoCaller(object content, AppMsgKind? kind = null)
             => new AppMsg(content, kind ?? AppMsgKind.Info, (AppMsgColor)(kind ?? AppMsgKind.Info), EmptyString, EmptyString, null);
 
-        public static AppMsg SpecificCaller(object content, AppMsgKind kind, string caller, string file = null, int? line = null)
-            => new AppMsg(content, kind, (AppMsgColor)kind,  caller, file, line);
-
         public static AppMsg Colorize(object content, AppMsgColor color)
             => new AppMsg(content, AppMsgKind.Info, color, string.Empty, EmptyString, null);
 
-        /// <summary>
-        /// Creates a colorized message with a specified displayed flag
-        /// </summary>
-        /// <param name="content">The message body</param>
-        /// <param name="color">The message color</param>
-        /// <param name="displayed">Whether to enable the displaye flag</param>
-        public static AppMsg Colorize(object content, AppMsgColor color, bool displayed)
-            => new AppMsg(content, AppMsgKind.Info, color, string.Empty, EmptyString, null, displayed);
+        public static AppMsg Colorize(object content, AppMsgColor color, AppMsgKind kind)
+            => new AppMsg(content, kind, color, EmptyString, EmptyString, null);
 
         public static AppMsg Info(object content)
             => new AppMsg(content, AppMsgKind.Info, AppMsgColor.Green, EmptyString, EmptyString, null);
@@ -73,8 +63,8 @@ namespace Z0
         
         [MethodImpl(Inline)]
         AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, string file, int? line, bool displayed = false)
-            => new AppMsgData(content, EmptyString, kind, color, displayed, Source(caller, file, line));
-
+            => AppMsgData.untyped(content,"{0}", kind, color, source(caller, file, line));
+        
         /// <summary>
         /// The message body
         /// </summary>
@@ -93,59 +83,16 @@ namespace Z0
         public AppMsgColor Color 
             => Data.Color;
 
-        /// <summary>
-        /// The name of the member that originated the message
-        /// </summary>
-        public string CallerName 
-            => Data.Caller;
-
-        /// <summary>
-        /// The path to the source file in which the message originated
-        /// </summary>
-        public FilePath CallerFile 
-            => Data.File;
-
-        /// <summary>
-        /// The source file line number on which the message originated
-        /// </summary>
-        public int? FileLine 
-            => (int)Data.Line;
-
-        /// <summary>
-        /// Specifies whether the message has been emitted to an output device, such as the terminal
-        /// </summary>
-        public bool Displayed 
-            => Data.Displayed;
-
         public bool IsEmpty
             => Data.IsEmpty;
 
-        public AppMsg AsError()    
-            => new AppMsg(Content, AppMsgKind.Error, Color, CallerName, CallerFile.Name, FileLine, Displayed);
-        
-        /// <summary>
-        /// Sets the display state to true
-        /// </summary>
-        public IAppMsg AsDisplayed()
-            => new AppMsg(Content, Kind, Color, CallerName, CallerFile.Name, FileLine, true);
-        
         public string Format()
-        {
-            if(IsEmpty)
-                return EmptyString;
-            else
-            {
-                if(Data.Source.IsEmpty)
-                    return text.format(Data.Content);
-                else
-                    return text.concat(Data.Source.Format(), " | ", Data.Content);
-            }
-        }
+            => Data.Format();
         
         public override string ToString()
             => Format();
 
         public static AppMsg Empty
-            => new AppMsg(EmptyString, AppMsgKind.Info, AppMsgColor.Unspecified, EmptyString, EmptyString, null);
+            => new AppMsg(AppMsgData.Empty);
     }
 }

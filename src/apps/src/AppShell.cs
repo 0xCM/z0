@@ -9,34 +9,43 @@ namespace Z0
     public abstract class AppShell<A,C> : Shell<A,C>, IAppShell<A>
         where A : AppShell<A,C>, new()
         where C : IAppContext
-    {
-        protected void Print(object content, AppMsgColor? color = null)
-            => Shelled.Print(content,color);
-            
+    {            
         public virtual IPart[] Resolved {get;}
-
-        protected IAppMsgQueue Messaging {get;}
 
         protected AppShell(C context)
             : base(context)
         {         
-            Messaging = context.MessageQueue;
+            
+        }
+
+        protected AppShell(C context, IMultiSink sink)
+            : base(context, sink)
+        {         
+            
         }
 
         public void Deposit(IAppMsg msg)
-            => Messaging.Deposit(msg);
+        {
+            
+            Sink.Deposit(msg);
+        }
 
-        protected IAppShell Shelled => this;
-                    
+        public void Raise<T>(T @event)
+            where T : IAppEvent
+        {
+            
+            Sink.Deposit(@event);
+        }
+
         protected override void OnDispose()
         {
             try
             {
-                Messaging.Emit(Shelled.AppLogPath);
+                Sink.Deposit(AppMsg.Info("Shell finished"));
+                Sink.Dispose();
             }
             catch(Exception e)
-            {
-                term.red($"Error occurred during application log emission to {Shelled.AppLogPath}");
+            {                
                 OnFatalError(e);
             }
         }        

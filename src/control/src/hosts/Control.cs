@@ -17,10 +17,10 @@ namespace Z0
 
     public readonly struct ControllerStep
     {
-        public const string ActorName = nameof(Controller);        
+        public const string ActorName = nameof(Control);        
     }
     
-    readonly ref struct Controller
+    readonly ref struct Control
     {
         readonly IAppContext ContextRoot;
 
@@ -40,7 +40,7 @@ namespace Z0
 
         public WfState Wf {get;}
 
-        public Controller(IAppContext context, CorrelationToken ct, string[] args)
+        public Control(IAppContext context, CorrelationToken ct, string[] args)
         {
             ContextRoot = context;
             Args = args;
@@ -65,8 +65,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.error(e);
-                //Wf.Error(ActorName, e,Ct);
+                Wf.Error(ActorName, e, Ct);
             }
 
             Wf.Ran(ActorName, Ct);

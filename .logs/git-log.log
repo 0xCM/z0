@@ -4370,3 +4370,22 @@
  delete mode 100644 src/konst/src/reports/services/RecordPublisher.cs
  delete mode 100644 src/konst/src/reports/traits/TReferenceArchive.cs
  create mode 100644 wf/pack-il.bat
+[master 6b9b89108] .
+ 47 files changed, 664 insertions(+), 438 deletions(-)
+ delete mode 100644 src/asmd/src/tokens/models/AsmOpCode.cs
+ delete mode 100644 src/asmd/src/tokens/models/CmdOpCode.cs
+ rewrite src/control/src/hosts/capture/Controller.cs (60%)
+ rename src/domain/src/asm/{expressions/OpCodeExpression.cs => models/AsmOpCode.cs} (77%)
+ rename src/domain/src/asm/{expressions/OpCodePart.cs => models/AsmOpCodePart.cs} (85%)
+ rename src/domain/src/asm/models/{OpCodeSpec.cs => AsmOpCodeParts.cs} (61%)
+ rename src/domain/src/asm/{expressions/CommandRecordSet.cs => models/AsmRecordSet.cs} (61%)
+ rename src/domain/src/asm/{expressions/CommandRecordSets.cs => models/AsmRecordSets.cs} (74%)
+ rename src/domain/src/asm/{expressions/CommandRecords.cs => models/AsmRecords.cs} (53%)
+ rename src/domain/src/asm/tokens/{code/AsmTokenId.Index.cs => index/Identity.cs} (90%)
+ rename src/domain/src/asm/tokens/{code/AsmTokenMeaning.Index.cs => index/Meanings.cs} (89%)
+ rename src/domain/src/asm/tokens/{code/AsmTokenIndex.cs => index/Models.cs} (90%)
+ rename src/domain/src/asm/tokens/{code/AsmTokenValues.Index.cs => index/Values.cs} (90%)
+ create mode 100644 src/machine/src/workflows/events/ProcessingParts.cs
+ create mode 100644 src/machine/src/workflows/events/RanProcessor.cs
+ create mode 100644 src/machine/src/workflows/events/RunningProcessor.cs
+ rename src/machine/src/workflows/services/processors/{AsmCmdProcessor.cs => ProcessAsm.cs} (84%)

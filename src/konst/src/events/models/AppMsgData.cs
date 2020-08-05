@@ -11,6 +11,14 @@ namespace Z0
 
     public readonly struct AppMsgData
     {    
+        [MethodImpl(Inline)]
+        public static AppMsgData<T> create<T>(T content, string template, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
+            => new AppMsgData<T>(content, template ?? "{0}", kind, color, source);
+
+        [MethodImpl(Inline)]
+        public static AppMsgData untyped(object content, string template, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
+            => new AppMsgData(content, template ?? "{0}", kind, color, source);
+
         /// <summary>
         /// The message payload
         /// </summary>
@@ -36,19 +44,13 @@ namespace Z0
         /// </summary>
         public readonly AppMsgSource Source;
 
-        /// <summary>
-        /// Specifies whether the message has been emitted to an output device, such as the terminal
-        /// </summary>
-        public readonly bool Displayed;
-
         [MethodImpl(Inline)]
-        public AppMsgData(object content, string template, AppMsgKind kind, AppMsgColor color, bool displayed, AppMsgSource source)
+        AppMsgData(object content, string template, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
         {
             Content = text.clean(content);
             Template = template;
             Kind = kind;
             Color = color;
-            Displayed = displayed;    
             Source = source;
         }
 
@@ -82,16 +84,19 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content is null || (Content is string s && text.blank(s));
+            get => (Content is string s ? text.blank(s) : Content is null);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Content) || (Content != null);
-        }
+            get => !IsEmpty;
+        }   
+
+        public string Format()
+            => text.format(Template ?? "{0}",  Content);     
         
         public static AppMsgData Empty 
-            => new AppMsgData(EmptyString, EmptyString, default, default, false, AppMsgSource.Empty);
+            => new AppMsgData(EmptyString, "{0}", 0, 0, AppMsgSource.Empty);
     }
 }

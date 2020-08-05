@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IBrokerClient
+    public interface IBrokerClient<E>
     {
         IAppMsgSink Sink {get;}
-    }
-
-    public interface IBrokerClient<E> : IBrokerClient
-    {
+ 
         E Broker {get;}        
     }
 }

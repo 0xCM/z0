@@ -55,10 +55,27 @@ namespace Z0
             RelayTarget.Deposit(src);
         }
 
-         public void Deposit(IAppEvent src)
-         {
+        public void Deposit(IAppEvent src)
+        {
             Deposit(new WfStatus("anonymous", src.Format(), Ct, src.Flair));            
-         }
+        }
+
+        public void Deposit(IAppMsg src)
+        {
+            var formatted = src.Format();
+            if(src.IsError)
+            {
+                lock(ErrLock)
+                    ErrTarget.WriteLine(formatted);
+            }
+            else
+            {
+                lock(StdLock)
+                    StdTarget.WriteLine(formatted);                    
+            }
+            
+            RelayTarget.Deposit(src);
+        }
 
          public void Dispose()
          {            

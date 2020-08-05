@@ -24,16 +24,6 @@ namespace Z0
         AppMsgColor Color {get;}        
 
         /// <summary>
-        /// Specifies whether the message has been displayed to an end-user
-        /// </summary>
-        bool Displayed {get;}        
-
-        /// <summary>
-        /// Transitions a message to the displayed state
-        /// </summary>
-        IAppMsg AsDisplayed();      
-
-        /// <summary>
         /// Specifies whether the message is vaccuous
         /// </summary>
         bool IsEmpty

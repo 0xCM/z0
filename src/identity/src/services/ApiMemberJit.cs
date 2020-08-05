@@ -159,7 +159,7 @@ namespace Z0
             foreach(var host in src)
             {
                 var methods = DirectMethods(host);
-                broker.Deposit(AppStatusEvent.create($"{methods.Length} {host.Uri} direct  methods were jitted"));
+                broker.Deposit(AppStatus.create($"{methods.Length} {host.Uri} direct  methods were jitted"));
                 dst.AddRange(methods);
             }
             return dst.ToArray();
@@ -171,7 +171,7 @@ namespace Z0
             foreach(var host in src)
             {
                 var methods = GenericMethods(host);
-                broker.Deposit(AppStatusEvent.create($"{methods.Length} {host.Uri} generic methods were jitted"));                
+                broker.Deposit(AppStatus.create($"{methods.Length} {host.Uri} generic methods were jitted"));                
                 dst.AddRange(methods);
             }
             return dst.ToArray();

@@ -77,7 +77,7 @@ namespace Z0
             finally
             {            
                 Log.Deposit(messages);                
-                Root.iter(messages.Where(m => !m.Displayed), term.print);
+                //Root.iter(messages.Where(m => !m.Displayed), term.print);
             }
 
             return clock;

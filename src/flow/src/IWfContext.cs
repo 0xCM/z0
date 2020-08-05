@@ -23,6 +23,6 @@ namespace Z0
     /// <typeparam name="T">The data type</typeparam>
     public interface IWfContext<T> : IWfContext
     {
-        T Config {get;}
+        T State {get;}
     }    
 }

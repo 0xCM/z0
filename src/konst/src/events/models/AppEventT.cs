@@ -9,21 +9,20 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct AppEvent<T> : IAppEvent<AppEvent<T>>
+    public readonly struct AppEvent<T> : IAppEvent<AppEvent<T>, T>
         where T : struct
     {
-        public readonly StringRef Id;
+        public EventId Id {get;}
         
-        public readonly T Payload;
+        public T Data {get;}
 
         public AppMsgColor Flair {get;}
 
-
         [MethodImpl(Inline)]
-        public AppEvent(StringRef id, T data, AppMsgColor flair = AppMsgColor.Blue)
+        public AppEvent(EventId id, T data, AppMsgColor flair = AppMsgColor.Blue)
         {
             Id = id;
-            Payload = data;
+            Data = data;
             Flair = flair;
         }
         
@@ -33,7 +32,7 @@ namespace Z0
             dst.Append(Id);
             dst.Append(Chars.Space);
             dst.Append(Chars.Pipe);
-            dst.AppendLine(z.bytes(Payload).Format());
+            dst.AppendLine(z.bytes(Data).Format());
             return dst.ToString();
         }    
 
@@ -42,6 +41,6 @@ namespace Z0
             => Format();
 
         public static AppEvent<T> Empty 
-            => new AppEvent<T>(string.Empty, default(T), AppMsgColor.Gray);
+            => default;
     }
 }

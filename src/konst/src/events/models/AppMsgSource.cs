@@ -10,11 +10,23 @@ namespace Z0
 
     using static Konst;
 
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     /// <summary>
     /// Specifies application message origination details
     /// </summary>
     public readonly struct AppMsgSource : ITextual
-    {                
+    {                        
+        [MethodImpl(Inline)]
+        public static AppMsgSource create(PartId part, string caller, string file, int? line)        
+            => new AppMsgSource(part, caller, file, line);
+
+        [MethodImpl(Inline)]
+        public static AppMsgSource create([Caller]string caller = null, [File]string file = null, [Line]int? line = null)        
+            => new AppMsgSource(PartId.None, caller, file, line);
+
         /// <summary>
         /// Specifies the emitting executable part
         /// </summary>

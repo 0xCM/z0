@@ -11,45 +11,41 @@ namespace Z0
     
     using static Konst;
 
-    public sealed class AppMsgExchange : IAppMsgExchange
+    public sealed class AppMsgExchange : IAppMsgQueue
     {
         readonly IAppMsgQueue Queue;
 
         /// <summary>
         /// Creates an exchange over an existing queue
         /// </summary>
-        public static IAppMsgExchange Create(IAppMsgQueue queue)
+        public static AppMsgExchange Create(IAppMsgQueue queue)
             => new AppMsgExchange(queue);
 
         /// <summary>
         /// Creates an exchange and underlying queue
         /// </summary>
-        public static IAppMsgExchange Create()
+        public static AppMsgExchange Create()
             => new AppMsgExchange(AppMsgQueue.Create());
 
         AppMsgExchange(IAppMsgQueue dst)
         {
-            void Relay(IAppMsg msg)
-                => Next(msg);
-
             Queue = dst;
             Queue.Next += Relay;
             Next = x => {};
         }
 
+        void Relay(IAppMsg src)
+        {
+            term.print(src);
+        }
+        
         public event Action<IAppMsg> Next;        
-
-        /// <summary>
-        /// Enqueues application messages
-        /// </summary>
-        /// <param name="msg">The messages to enqueue</param>
-        [MethodImpl(Inline)]
-        public void Deposit(IAppMsg msg)
-            => Queue.Deposit(msg);
         
         [MethodImpl(Inline)]
         public void Notify(string msg, AppMsgKind? severity = null)
-            => Queue.Notify(msg,severity);
+        {
+           Queue.Notify(msg, severity);
+        }
 
         public IReadOnlyList<IAppMsg> Dequeue()
             => Queue.Dequeue();
@@ -60,11 +56,14 @@ namespace Z0
         public IReadOnlyList<IAppMsg> Flush(Exception e)        
         {
             var messages = Queue.Flush(e);            
-            Terminal.Get().WriteMessages(messages);
+            z.iter(messages, msg => term.print(msg));
             return messages;
         }
 
         public void Flush(Exception e, IAppMsgSink target)
             => target.Deposit(Flush(e));
+
+        public void Deposit(IAppMsg msg)
+            => Queue.Deposit(msg);
     }
 }

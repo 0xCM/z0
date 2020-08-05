@@ -9,8 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct BrokerClient<E> : IBrokerClient<E>
-        where E : IEventBroker
+    public readonly struct BrokerClient<E> : IBrokerClient<E>     
     {
         public E Broker {get;}
 

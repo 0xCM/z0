@@ -22,7 +22,7 @@ namespace Z0
 
         public IAppContext ContextRoot {get;}
         
-        public T Config {get;}
+        public T State {get;}
         
         public CorrelationToken Correlation {get;}
 
@@ -31,7 +31,7 @@ namespace Z0
         {
             SessionId = (ulong)now().Ticks;
             ContextRoot = root;
-            Config = config;
+            State = config;
             CtProvider = 1;
             Sink = sink;
             Correlation = CorrelationToken.define(CtProvider);

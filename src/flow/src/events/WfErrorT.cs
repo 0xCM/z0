@@ -42,7 +42,7 @@ namespace Z0
             ActorName = worker;
             Body = body;
             Flair =  AppMsgColor.Red;
-            Description = AppMsg.NoCaller(text.format(PSx2, body, e), AppMsgKind.Error);
+            Description = AppMsg.Colorize(text.concat(body, e), ErrorColor, AppMsgKind.Error);
         }
 
         [MethodImpl(Inline)]
@@ -56,6 +56,6 @@ namespace Z0
         }
               
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);
+            => text.format(PSx3, Id, ActorName, Body);
     }
 }

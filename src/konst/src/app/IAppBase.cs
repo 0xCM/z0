@@ -17,7 +17,6 @@ namespace Z0
 
         IAppSettings Settings 
             => AppSettings.Load(AppPaths.AppConfigPath);
-
     }
 
     public interface IAppBase<F> : IAppBase

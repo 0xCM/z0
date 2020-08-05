@@ -19,8 +19,8 @@ namespace Z0
     {        
         public static IAppContext app()
             => AppContext.Create(AppPaths.Default, 
-                            ApiComposition.Assemble(SelectedParts.Known), 
-                            Polyrand.Pcg64(PolySeed64.Seed05));
+                ApiComposition.Assemble(SelectedParts.Known), 
+                Polyrand.Pcg64(PolySeed64.Seed05));
 
         [MethodImpl(Inline),Op]
         public static IAsmContext asm(IAppContext app)

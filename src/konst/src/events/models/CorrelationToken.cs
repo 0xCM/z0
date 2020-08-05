@@ -29,6 +29,10 @@ namespace Z0
             => new CorrelationToken((ulong)z.now().Ticks);
 
         [MethodImpl(Inline)]
+        public static implicit operator ulong (CorrelationToken src)
+            => src.Value;
+
+        [MethodImpl(Inline)]
         public static bool operator==(CorrelationToken a, CorrelationToken b)
             => a.Equals(b);
 

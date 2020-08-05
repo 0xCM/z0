@@ -4,22 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
+    using System;
+    using System.Security;
+
+    [SuppressUnmanagedCodeSecurity]
     public interface IWfEvent : IAppEvent
     {
         WfEventId Id {get;}
-
-        string ActorName => string.Empty;
-
-        CorrelationToken ICorrelated.Ct 
-            => Id.Ct;
     }
 
+    [SuppressUnmanagedCodeSecurity]
     public interface IWfEvent<F> : IWfEvent, IAppEvent<F>
         where F : struct, IWfEvent<F>
     {
 
     }
 
+    [SuppressUnmanagedCodeSecurity]
     public interface IWfEvent<F,T> : IWfEvent<F>
         where F : struct, IWfEvent<F,T>
     {

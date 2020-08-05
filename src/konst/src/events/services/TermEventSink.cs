@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Reifies a workflow event receiver that emits received events to the terminal
     /// </summary>
-    public readonly struct TermEventSink : IAppEventSink
+    public readonly struct TermEventSink : IMultiSink
     {
         const string Created  = "Created";
 
@@ -30,7 +30,6 @@ namespace Z0
         public TermEventSink(CorrelationToken ct)
         {
             Ct = ct;
-            Deposit(Created, Ct);
         }
         
         [MethodImpl(Inline)]
@@ -44,16 +43,20 @@ namespace Z0
         {
             term.print(e);
         }
-        
+
+        public void Deposit(IWfEvent e)
+        {
+            term.print(e);
+        }
+
         public void Deposit(IAppEvent e)
         {
             term.print(e);
         }
 
         public void Deposit<T>(T content, CorrelationToken ct, AppMsgKind kind = AppMsgKind.Info,  [Caller]string caller = null, [File] string file = null, [Line] int? line = null)
-        {
-            
-            var msg = AppMsg.Define(content, kind, caller, file,line);
+        {            
+            var msg = AppMsg.Define(content, kind, caller, file, line);
             term.print(msg);            
         }
 

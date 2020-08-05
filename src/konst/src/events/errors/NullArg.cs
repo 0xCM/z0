@@ -14,7 +14,7 @@ namespace Z0
     {        
         [MethodImpl(Inline)]
         public static string format(string caller, string file, int? line)
-            => text.concat(MsgText, " | ", AppMsg.Source(caller,file,line));
+            => text.concat(MsgText, " | ", AppMsg.source(caller,file,line));
                 
         public const string MsgText = "A null argument was provided";        
 

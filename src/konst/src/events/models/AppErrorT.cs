@@ -8,27 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    public readonly struct AppEvent : IAppEvent<AppEvent, string>
-    {
+            
+    public readonly struct AppError<T> : IAppEvent<AppError<T>, T>
+    {                
         public EventId Id {get;}
         
-        public string Data {get;}
-        
-        public AppMsgColor Flair {get;}        
+        public T Data {get;}       
+
+        public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public AppEvent(EventId id, string data, AppMsgColor flair)
+        public AppError(EventId id, T data)
         {
             Id = id;
             Data = data;
-            Flair = flair;
+            Flair = AppMsgColor.Red;
         }
-
+                
         public string Format()
-            => string.Concat(Id, CharText.Colon, CharText.Space, Data);
-
-        public override string ToString()
-            => Format();
+            => text.format("{0} | {1}", Id, Data);                    
     }
 }

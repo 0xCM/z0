@@ -44,12 +44,12 @@ namespace Z0
             return read(path);
         }
         
-        public static IdentifiedCodeIndex index(FilePath src, IAppEventSink status)
+        public static IdentifiedCodeIndex index(FilePath src, IMultiSink status)
         {
             var uri = ApiHostUri.Parse(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
-                status.Deposit(Events.error(uri.Reason));
+                status.Deposit(Events.error(nameof(EncodedHexArchive), uri.Reason));
                 return IdentifiedCodeIndex.Empty;
             }
 
@@ -61,39 +61,6 @@ namespace Z0
             return Encoded.index(uri.Value, dst.Array());                        
         }
         
-        static IEnumerable<IdentifiedCodeIndex> indices(FolderPath root, IAppEventSink status)
-        {
-            foreach(var file in files(root))
-            {                    
-                var idx = index(file, status);
-                if(idx.IsNonEmpty)
-                    yield return idx;
-            }
-        }
-        
-        static IEnumerable<IdentifiedCodeIndex> indices(FolderPath root, IAppEventSink status, params PartId[] owners)     
-        {
-            if(owners.Length != 0)
-            {
-                foreach(var owner in owners)            
-                foreach(var file in files(root, owner))
-                {
-                    var idx = index(file, status);
-                    if(idx.IsNonEmpty)
-                        yield return idx;
-                }
-            }  
-            else
-            {
-                foreach(var file in files(root))
-                {                    
-                    var idx = index(file, status);
-                    if(idx.IsNonEmpty)
-                        yield return idx;
-                }
-            }          
-        }
-
         public IEnumerable<IdentifiedCode> Read(ApiHostUri host)
         {
             var hfn = ApiHostUri.HostFileName(host.Owner, host.Name, FileExtensions.Hex);

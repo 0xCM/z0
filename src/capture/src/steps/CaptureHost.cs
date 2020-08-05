@@ -10,15 +10,13 @@ namespace Z0
     
     using static CaptureHostStep;
 
-
-    public class CaptureHost : ICaptureClient, IDisposable
-    {            
-        
+    public struct CaptureHost : ICaptureClient, IDisposable
+    {                    
         public void Run()
         {   
             Wf.Running(ActorName, Ct);         
             (this as ICaptureClient).Connect();             
-            var parts = Config.Parts.Length == 0? Wf.ContextRoot.PartIdentities : Config.Parts;                
+            var parts = Config.Parts.Length == 0 ? Wf.ContextRoot.PartIdentities : Config.Parts;                
             Wf.Raise(new CapturingParts(parts, Ct));
             Consolidate(parts);
             Wf.Ran(ActorName, Ct);
@@ -59,6 +57,7 @@ namespace Z0
         public CaptureHost(WfState wf, ICaptureBroker broker, WfConfig config, CorrelationToken ct)
         {                            
             State = wf;
+            Wf = State.Wf;
             Ct = ct;
             CWf = wf.CWf;
             Sink = Wf.TermSink;

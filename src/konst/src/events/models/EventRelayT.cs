@@ -26,5 +26,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Deposit(E e)
             => Receiver(e);
+
+        public void Deposit(IAppEvent e)
+        {
+            throw new NotImplementedException();
+        }    
     }
 }

@@ -16,7 +16,6 @@ namespace Z0
     public interface IAppEventSink<E> : IAppEventSink, ISink<E>
         where E : IAppEvent
     {
-        void IAppEventSink.Deposit(IAppEvent e)
-            => Deposit(e);
+
     }
 }
