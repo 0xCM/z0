@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct SemanticRender
     {
-       public string Render(in AsmImmInfo src)
+       public string Render(in ImmInfo src)
             => asm.render(src);
     }
 }

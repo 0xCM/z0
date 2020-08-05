@@ -13,19 +13,19 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline)]
         public static bool signedImm(OpKind src)
-            => asm.testimmSigned(src);
+            => AsmOperandTest.immsigned(src);
 
         [MethodImpl(Inline)]
         public static bool directImm(OpKind src)
-            => asm.testimmDirect(src);
+            => AsmOperandTest.immdirect(src);
 
         [MethodImpl(Inline)]
         public static bool specialImm(OpKind src)
-            => asm.testimmSpecial(src);
+            => AsmOperandTest.immspecial(src);
 
         [MethodImpl(Inline)]
         public static bool isImm(OpKind src)
-            => asm.testimm(src);
+            => AsmOperandTest.imm(src);
 
         [MethodImpl(Inline)]
         public NumericWidth ImmWidth(OpKind src)
@@ -49,10 +49,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public bool IsImm(OpKind src)
-            => asm.testimm(src);
+            => AsmOperandTest.imm(src);
 
         [MethodImpl(Inline)]
-        public AsmImmInfo ImmInfo(Instruction src, int index) 
+        public ImmInfo ImmInfo(Instruction src, int index) 
             => asm.imminfo(src,index);
     }
 }

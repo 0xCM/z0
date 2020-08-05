@@ -20,11 +20,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
-        public static PrimalLiteralKind literal(Type src)
+        public static LiteralKind literal(Type src)
         {
             var i = index(src);
             var test = (i > 2 && i <16) || i == 18;
-            return test ? (PrimalLiteralKind)z.skip(PrimalKindData,i) : PrimalLiteralKind.None;            
+            return test ? (LiteralKind)z.skip(PrimalKindData,i) : LiteralKind.None;            
         }
 
         [MethodImpl(Inline), Op]

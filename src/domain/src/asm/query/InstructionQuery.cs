@@ -39,7 +39,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public AsmOperandInfo operand(MemoryAddress @base, Instruction src, int index)
             => new AsmOperandInfo(index, asm.kind(src,index), ImmInfo(src,index),
-                MemInfo(src,index), RegisterInfo(src,index), BranchInfo(@base, src,index));
+                MemInfo(src,index), RegisterInfo(src,index), asm.branch(@base, src,index));
 
         [MethodImpl(Inline), Op]
         public AsmOperandInfo[] operands(MemoryAddress @base, Instruction src)

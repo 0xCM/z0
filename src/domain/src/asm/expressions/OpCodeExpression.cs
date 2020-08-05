@@ -15,19 +15,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator OpCodeExpression(string src)
-            => new OpCodeExpression(src);
-
-        [MethodImpl(Inline)]
-        public OpCodeExpression(string src)
-            => asci.encode(src, out Value);
+            => AsmOpCodes.expression(src);
 
         [MethodImpl(Inline)]
         public OpCodeExpression(asci32 src)
             => Value = src;
-
-        [MethodImpl(Inline)]
-        public OpCodeExpression(char[] src)
-            => asci.encode(src, out Value);
 
         public ReadOnlySpan<byte> Encoded
         {
@@ -41,9 +33,6 @@ namespace Z0.Asm
             get => asci.decode(Value);
         }
         
-        public OpCodeExpression Zero 
-            => Empty;
-
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
@@ -65,6 +54,7 @@ namespace Z0.Asm
         
         public override int GetHashCode()
             => Value.GetHashCode();        
+        
         public string Format()
             => Value.Format();
         

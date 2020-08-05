@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;    
 
-    public readonly struct TokenInfo
+    public readonly struct TokenModel
     {        
         public readonly int Index;
         
@@ -20,12 +20,12 @@ namespace Z0
         public readonly StringRef Description;
 
         [MethodImpl(Inline)]
-        public static TokenInfo Define<T>(T index, string id, string value, string description)
+        public static TokenModel Define<T>(T index, string id, string value, string description)
             where T : unmanaged, Enum
-                => new TokenInfo(EnumValue.e32i(index), id, value, description);        
+                => new TokenModel(EnumValue.e32i(index), id, value, description);        
 
         [MethodImpl(Inline)]
-        public TokenInfo(int index, string id, string value, string description)
+        public TokenModel(int index, string id, string value, string description)
         {
             Index = index;
             Identifier = id ?? EmptyString;
@@ -42,7 +42,7 @@ namespace Z0
         public string Format()
             => string.Concat(Identifier, " := ", Value, "; ", Description);
         
-        public static TokenInfo Empty 
-            => new TokenInfo(0, EmptyString, EmptyString, EmptyString);
+        public static TokenModel Empty 
+            => new TokenModel(0, EmptyString, EmptyString, EmptyString);
     }
 }

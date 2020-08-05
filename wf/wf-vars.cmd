@@ -14,9 +14,9 @@ set DevLib="%DevBuild%\lib\%SdkAppVer%"
 set DevObj="%DevBuild%\obj"
 
 set StageBuild="%Stage%\builds"
-set StageLib="%StgBuild%\bin"
-set StageObj="%StgBuild%\obj"
-set StageIl="%StgBuild%\il"
+set StageLib="%StageBuild%\bin"
+set StageObj="%StageBuild%\obj"
+set StageIl="%StageBuild%\il"
 
 set Pub="c:/Dev/pub"
 set PubBuild="%Pub%\builds"

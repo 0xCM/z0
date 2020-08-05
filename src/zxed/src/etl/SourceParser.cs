@@ -15,11 +15,11 @@ namespace Z0
     {
         public static XedSourceParser Service => default;
 
-        public SourceFileData LoadSource(FilePath src)
+        public TextFileRows LoadSource(FilePath src)
             => TextDocParser.parse(src,TextDocFormat.Unstructured)
-                    .MapValueOrDefault(c => SourceFileData.Define(src, c.RowData), SourceFileData.Empty);
+                    .MapValueOrDefault(c => TextFileRows.define(src, c.RowData), TextFileRows.Empty);
 
-        public XedInstructionData ParseInstruction(SourceFileData src, in int idxStart, ref int idxterm)
+        public XedInstructionData ParseInstruction(TextFileRows src, in int idxStart, ref int idxterm)
         {
             var rows = list<TextRow>();
             var parsing = false;
@@ -45,7 +45,7 @@ namespace Z0
             return new XedInstructionData(rows.ToArray());
         }
 
-        XedInstructionData[] ParseSequence(SourceFileData data, int idx)
+        XedInstructionData[] ParseSequence(TextFileRows data, int idx)
         {
             var dst = list<XedInstructionData>();            
             for(var i=0; i<data.RowCount; i++)
@@ -74,7 +74,7 @@ namespace Z0
         static void Retreat(ref int rowidx)
             => --rowidx;
 
-        XedFunctionData ParseFunction(SourceFileData data, ref int rowidx)
+        XedFunctionData ParseFunction(TextFileRows data, ref int rowidx)
         {
             var title = data[rowidx].Text.LeftOf(FUNC_MARKER);
             var body = list<string>();

@@ -83,14 +83,14 @@ namespace Z0.Asm
             emit<RegisterClass,byte>();
             emit<RegisterWidth,ushort>();
             emit<OperatingMode,byte>();
-            emit<InstructionTokenKind,byte>();
-            emit<OpCodeTokenKind,byte>();
+            emit<AsmTokenKind,byte>();
+            emit<AsmOpCodeToken,byte>();
         }
         
         public void enum_dataset_convert()
         {
             var path = CasePath(FileExtensions.Csv);
-            var enums = @readonly(Enums.describe<InstructionTokenKind,byte>());
+            var enums = @readonly(Enums.describe<AsmTokenKind,byte>());
             emit(enums,path);
         }
     }

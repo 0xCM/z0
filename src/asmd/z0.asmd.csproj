@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Flow)" />
+
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(Datasets)" />

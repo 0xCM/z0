@@ -17,7 +17,7 @@ namespace Z0.Asm
 
     public readonly struct AsmCmdProcessor
     {                
-        readonly Dictionary<Mnemonic, ArrayBuilder<CommandInfo>> Index;
+        readonly Dictionary<Mnemonic, ArrayBuilder<AsmRecord>> Index;
 
         TArchives DataSource 
             => Archives.Services;            
@@ -67,7 +67,7 @@ namespace Z0.Asm
         {
             Context = context;
             MnemonicParse = MnemonicParser.Create();
-            Index = new Dictionary<Mnemonic, ArrayBuilder<CommandInfo>>();
+            Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRecord>>();
             Sequence = sys.alloc<int>(1);
             Offset = sys.alloc<uint>(1);
         }
@@ -196,7 +196,7 @@ namespace Z0.Asm
 
             if(mnemonic != 0)
             {
-                var record = new CommandInfo(
+                var record = new AsmRecord(
                     Sequence: NextSequence,
                     Address: asm.IP,
                     LocalOffset: localOffset,

@@ -23,16 +23,6 @@ namespace Z0.Asm
 		/// </summary>
 		/// <param name="operand">Operand number, 0-4</param>
 		public Register RegisterInfo(Instruction src, int operand) 
-        {
-			switch (operand) 
-            {
-                case 0: return src.Op0Register;
-                case 1: return src.Op1Register;
-                case 2: return src.Op2Register;
-                case 3: return src.Op3Register;
-                case 4: return src.Op4Register;
-                default: return Register.None;				
-			}
-		}       
+            => asm.register(src,(byte)operand);
     }
 }

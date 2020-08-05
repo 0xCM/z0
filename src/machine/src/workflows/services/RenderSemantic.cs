@@ -68,7 +68,7 @@ namespace Z0
 
         const string Assign = " = ";
         
-        IAsmSemantic asm => AsmSemantic.Service;
+        IAsmSemantic Semantic => AsmSemantic.Service;
 
         SemanticRender render => SemanticRender.Service;
         
@@ -122,11 +122,8 @@ namespace Z0
 
         string RenderMemoryOperand(MemoryAddress @base, Instruction src, int i)
         {
-            var subject = asm.MemInfo(src, i);
-            var result = render.Render(subject);
-            //var diagnostic = render.RenderAspects<IInstructionMemory>(subject);
-
-            return result;
+            var subject = Semantic.MemInfo(src, i);
+            return render.Render(subject);            
         }
 
         [MethodImpl(Inline)]
@@ -135,17 +132,17 @@ namespace Z0
 
         string RenderOperand(MemoryAddress @base, Instruction src, int i)
         {            
-            var kind = asm.OperandKind(src, i);
+            var kind = Semantic.OperandKind(src, i);
             var desc = Format(kind);
 
-            if(asm.IsRegister(kind))
-                desc = render.Render(asm.RegisterInfo(src,i));
-            else if(asm.IsMem(kind))
+            if(Semantic.IsRegister(kind))
+                desc = render.Render(Semantic.RegisterInfo(src,i));
+            else if(Semantic.IsMem(kind))
                 desc = RenderMemoryOperand(@base, src, i);
-            else if (asm.IsBranch(kind))
-                desc = render.Render(asm.BranchInfo(@base, src, i));
-            else if(asm.IsImm(kind))
-                desc = render.Render(asm.ImmInfo(src, i));                
+            else if (Semantic.IsBranch(kind))
+                desc = render.Render(asm.branch(@base, src, i));
+            else if(Semantic.IsImm(kind))
+                desc = render.Render(Semantic.ImmInfo(src, i));                
             
             return desc;
         }
@@ -158,7 +155,7 @@ namespace Z0
 
         string FooterContent(LocatedInstruction src)
         {   
-            if(asm.IsCall(src.Instruction))
+            if(Semantic.IsCall(src.Instruction))
             {
                 var bytes = Root.span(src.Encoded.Data);
                 if(bytes.Length >= 5)
@@ -188,7 +185,7 @@ namespace Z0
             var summaries = Root.list<string>();
             for(var i =0; i<opcount; i++)               
             {
-                var kind = asm.OperandKind(inxs, i);
+                var kind = Semantic.OperandKind(inxs, i);
 
                 var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(Col0Pad);
                 var kindLabel = render.Render(kind).PadRight(OpKindPad);

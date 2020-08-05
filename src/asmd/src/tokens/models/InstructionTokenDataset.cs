@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     public readonly struct InstructionTokenDataset
     {
-        public readonly TokenInfo[] Models;
+        public readonly TokenModel[] Models;
 
         public readonly string[] Meanings;
 
@@ -33,19 +33,19 @@ namespace Z0.Asm
             => new InstructionTokenDataset(0);
 
         [MethodImpl(Inline), Op]
-        public string Definition(InstructionTokenKind id)
+        public string Definition(AsmTokenKind id)
             => Definitions[(int)id];
 
         [MethodImpl(Inline), Op]
-        public string Meaning(InstructionTokenKind id)
+        public string Meaning(AsmTokenKind id)
             => Meanings[(int)id];
 
         [MethodImpl(Inline), Op]
-        public ref readonly TokenInfo Token(InstructionTokenKind id)
+        public ref readonly TokenModel Token(AsmTokenKind id)
             => ref Models[(int)id];
 
         [MethodImpl(Inline), Op]
-        public string Identifier(InstructionTokenKind id)
+        public string Identifier(AsmTokenKind id)
             => Identity[(int)id];
 
         public const byte EncodingDelimiter = 0xFF;
@@ -59,10 +59,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         InstructionTokenDataset(int i)
         {
-            Models = InstructionTokenInfo.Models;
-            Meanings = InstructionTokenInfo.Meanings;
-            Identity = InstructionTokenInfo.Identity;
-            Definitions = InstructionTokenInfo.Definitions;
+            Models = AsmTokenIndex.Models;
+            Meanings = AsmTokenIndex.Meanings;
+            Identity = AsmTokenIndex.Identity;
+            Definitions = AsmTokenIndex.Values;
             ValueEncoding = new byte[Definitions.Map(x => x.Length).Sum() + Definitions.Length];        
             EncodeDefinitions(Definitions,ValueEncoding);
         }

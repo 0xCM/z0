@@ -22,7 +22,7 @@ namespace Z0
             => Data = (byte)src;
 
         [MethodImpl(Inline)]
-        public PrimalKindBitField(PrimalLiteralKind src)
+        public PrimalKindBitField(LiteralKind src)
             => Data = (byte)src;
 
         [MethodImpl(Inline)]

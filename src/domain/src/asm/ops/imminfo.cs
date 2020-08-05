@@ -17,7 +17,7 @@ namespace Z0
     partial struct asm
     {
         [Op]
-        public static AsmImmInfo imminfo(Instruction src, int index) 
+        public static ImmInfo imminfo(Instruction src, int index) 
         {                        
 			switch (kind(src,index)) 
             {
@@ -41,7 +41,7 @@ namespace Z0
                     return asm.imm((int)src.Immediate32to64, false, (W.W32, W.W64)); 				
 			}
             
-            return AsmImmInfo.Empty;
+            return ImmInfo.Empty;
 		}        
     }
 }

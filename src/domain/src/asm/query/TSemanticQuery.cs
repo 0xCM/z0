@@ -22,14 +22,14 @@ namespace Z0.Asm
             => Direct.Identify(src);
 
         AsmBranchInfo BranchInfo(MemoryAddress @base, Instruction src, int index)
-            => Direct.BranchInfo(@base, src,index);        
+            => asm.branch(@base, src,index);        
 
         /// <summary>
         /// Extracts immediate information, if applicable, from an instruction operand
         /// </summary>
         /// <param name="src">The source instruction</param>
         /// <param name="index">The operand index</param>
-        AsmImmInfo ImmInfo(Instruction src, int index)
+        ImmInfo ImmInfo(Instruction src, int index)
             => Direct.ImmInfo(src,index);
 
  		/// <summary>
@@ -129,21 +129,21 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         bool IsSpecialImm(OpKind src)
-            => Direct.IsSpecialImm(src);
+            => AsmOperandTest.immspecial(src);
         
         /// <summary>
         /// Determines whether the classified operand is an immediate of some sort
         /// </summary>
         /// <param name="src">The operand classifier</param>
         bool IsImm(OpKind src)
-            => Direct.IsImm(src);
+            => AsmOperandTest.imm(src);
 
         /// <summary>
         /// Tests whether the the source operand kind is a register kind
         /// </summary>
         /// <param name="src">The source kind to test</param>
         bool IsRegister(OpKind src)
-            => Direct.IsRegister(src);
+            => AsmOperandTest.register(src);
 
         /// <summary>
         /// Determines whether the classified operand is some sort of memory

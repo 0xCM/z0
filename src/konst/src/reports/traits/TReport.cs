@@ -14,10 +14,7 @@ namespace Z0
         where R : ITabular
     {
         R[] Records {get;}
-
-        FieldFormatter<F> Formatter 
-            => DataFields.formatter<F>();
-
+        
         string IReport.ReportName
             => typeof(R).DisplayName();        
 

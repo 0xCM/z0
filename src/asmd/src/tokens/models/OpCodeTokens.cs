@@ -28,7 +28,7 @@ namespace Z0.Asm
             get => ref Data[index];
         }
 
-        public ref readonly OpCodeToken this[OpCodeTokenKind index]
+        public ref readonly OpCodeToken this[AsmOpCodeToken index]
         {
             [MethodImpl(Inline)]
             get => ref Data[(byte)index];

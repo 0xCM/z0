@@ -11,22 +11,22 @@ namespace Z0.Asm
 
     public readonly struct CommandRecordSet<T>
     {        
-        readonly CommandInfo[] Data;
+        readonly AsmRecord[] Data;
     
         public T Key {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator CommandInfo[](CommandRecordSet<T> src)
+        public static implicit operator AsmRecord[](CommandRecordSet<T> src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public CommandRecordSet(T key, CommandInfo[] src)
+        public CommandRecordSet(T key, AsmRecord[] src)
         {
             Key = key;
             Data = src;
         }
 
-        public CommandInfo[] Sequenced
+        public AsmRecord[] Sequenced
         {
             [MethodImpl(Inline)]
             get => Data.OrderBy(x => x.Sequence);

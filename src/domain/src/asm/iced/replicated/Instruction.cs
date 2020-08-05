@@ -68,7 +68,7 @@ namespace Z0.Asm
         // Summary:
         //     Gets the index register scale value, valid values are *1, *2, *4, *8. Use this
         //     property if the operand has kind Iced.Intel.OpKind.Memory
-        public AsmMemScale MemoryIndexScale {get; set;}
+        public MemScale MemoryIndexScale {get; set;}
         //
         // Summary:
         //     Gets the memory operand's displacement. This should be sign extended to 64 bits
@@ -83,7 +83,7 @@ namespace Z0.Asm
         //     property if the operand has kind Iced.Intel.OpKind.Memory
         public int MemoryDisplSize {get; set;}
 
-        public AsmMemDx MemDx => AsmMemDx.From(MemoryDisplacement, MemoryDisplSize);
+        public MemDx MemDx => asm.memdx(MemoryDisplacement, MemoryDisplSize);
 
         //
         // Summary:

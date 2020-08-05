@@ -22,7 +22,7 @@ namespace Z0.Asm
         public string Render(MemorySize src)
             => Q.Identify(src).Format();
 
-        public string Render(AsmMemInfo src)        
+        public string Render(MemInfo src)        
         {
             var builder = text.build();
 

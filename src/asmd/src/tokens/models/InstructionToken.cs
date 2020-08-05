@@ -15,12 +15,12 @@ namespace Z0.Asm
     {        
         public readonly byte Index;
         
-        public readonly InstructionTokenKind Identifier;
+        public readonly AsmTokenKind Identifier;
 
         public readonly asci16 Value;
 
         [MethodImpl(Inline)]
-        public InstructionToken(byte index, InstructionTokenKind identifier, asci16 value)
+        public InstructionToken(byte index, AsmTokenKind identifier, asci16 value)
         {
             Index = index;
             Identifier = identifier;

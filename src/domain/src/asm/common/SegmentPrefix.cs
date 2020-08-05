@@ -22,22 +22,7 @@ namespace Z0.Asm
             => Register == Register.None;
 
         public static bool test(Instruction inxs, int index)     
-            => !from(inxs, index).IsEmpty;
-
-        public static SegmentPrefix from(Instruction inxs, int index) 
-        {
-            var kind = AsmQuery.Direct.OperandKind(inxs, index);
-            switch(kind)
-            {
-                case Memory:
-                case Memory64:
-                case MemorySegSI:
-                case MemorySegESI:
-                case MemorySegRSI:
-                    return new SegmentPrefix(inxs.MemorySegment);
-            }
-            return Empty;
-        }
+            => !asm.segprefix(inxs, index).IsEmpty;
 
         public static SegmentPrefix Empty 
             => new SegmentPrefix(Register.None);   

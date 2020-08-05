@@ -46,7 +46,7 @@ namespace Z0.Asm
             var count = src.Count;
             var records = src.Sequenced.ToReadOnlySpan();
             using var writer = CaseWriter($"{src.Key}");
-            writer.WriteLine(CommandInfo.FormatHeader());
+            writer.WriteLine(AsmRecord.FormatHeader());
             for(var i=0; i<count; i++)
             {
                 ref readonly var record = ref skip(records,i);

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     partial struct SemanticRender
     {
-        public string Render(AsmMemScale src)
+        public string Render(MemScale src)
         {
             if(src.IsNonEmpty)
                 return src.Value.ToString();

@@ -19,20 +19,20 @@ namespace Z0.Asm
     {                
         public static OpCodeServices Service => default;
 
-        public static TokenInfo[] InstructionTokens
-            => InstructionTokenInfo.Models; 
+        public static TokenModel[] InstructionTokens
+            => AsmTokenIndex.Models; 
 
         [MethodImpl(Inline), Op]
-        public static string Meaning(InstructionTokenKind token)
-            => InstructionTokenInfo.Meanings[(int)token];
+        public static string Meaning(AsmTokenKind token)
+            => AsmTokenIndex.Meanings[(int)token];
 
         [MethodImpl(Inline), Op]
-        public static string Identity(InstructionTokenKind token)
-            => InstructionTokenInfo.Identity[(int)token];
+        public static string Identity(AsmTokenKind token)
+            => AsmTokenIndex.Identity[(int)token];
 
         [MethodImpl(Inline), Op]
-        public static string Definition(InstructionTokenKind token)
-            => InstructionTokenInfo.Definitions[(int)token];
+        public static string Definition(AsmTokenKind token)
+            => AsmTokenIndex.Values[(int)token];
 
         [MethodImpl(Inline)]
         public static OpCodeDataset dataset()
@@ -71,7 +71,7 @@ namespace Z0.Asm
             {
                 ref readonly var field = ref skip(src,i);
                 var sref = field.ToStringRef();
-                seek(buffer, i) = new OpCodeToken(i, (OpCodeTokenKind)(i + 1), sref);
+                seek(buffer, i) = new OpCodeToken(i, (AsmOpCodeToken)(i + 1), sref);
             }
             return new OpCodeTokens(dst);            
         }

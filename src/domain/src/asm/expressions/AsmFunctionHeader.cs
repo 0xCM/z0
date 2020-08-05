@@ -13,14 +13,13 @@ namespace Z0.Asm
     {        
         public readonly OpUri Uri;
 
-        public string OpSig {get;}
+        public readonly string OpSig;
 
-        public string DataProp {get;}
+        public readonly string DataProp;
 
-        public MemoryAddress BaseAddress {get;}
+        public readonly MemoryAddress BaseAddress;
 
-        public ExtractTermCode TermCode {get;}
-
+        public readonly ExtractTermCode TermCode;
 
         [MethodImpl(Inline)]
         public AsmFunctionHeader(OpUri uri, string sig, string prop, MemoryAddress @base, ExtractTermCode term)
@@ -31,6 +30,5 @@ namespace Z0.Asm
             BaseAddress = @base;
             TermCode = term;
         }
-
     }
 }

@@ -11,6 +11,7 @@ namespace Z0
     using System.Linq;
 
     using Z0.XedWf;
+    using Z0.Data;
 
     using static z;
     using static Konst;
@@ -33,7 +34,7 @@ namespace Z0
 
         readonly XedStagingArchive Dst;
 
-        readonly ITableArchive Pub;
+        readonly TableArchive Pub;
                 
         public XedEtl(WfContext<XedEtlConfig> context)
         {

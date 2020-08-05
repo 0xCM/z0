@@ -35,10 +35,6 @@ namespace Z0
         
         void Process()
         {
-            var archive = ReferenceArchive.Service;
-            var ds = archive.Dataset("EnumTypes");
-            ds.OnSuccess(doc => term.print(doc.Content));
-            //Control.iter(archive.DatasetPaths(), ds => term.print(ds.FileName));
         }
 
         public override void RunShell(params string[] args)

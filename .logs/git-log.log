@@ -4206,3 +4206,26 @@
  delete mode 100644 src/capture/src/steps/ParseMembers.cs
  rename src/capture/src/steps/{ImmEmissionWorkflow.cs => SpecializeImmediates.cs} (97%)
  create mode 100644 src/capture/src/steps/SpecializeImmediatesStep.cs
+[master e93107fb0] .
+ 39 files changed, 703 insertions(+), 355 deletions(-)
+ rewrite src/capture/src/events/ExtractReportSaved.cs (60%)
+ rewrite src/capture/src/steps/EmitExtractReport.cs (63%)
+ create mode 100644 src/domain/src/asm/asm.cs
+ rename src/domain/src/asm/{stats => models}/FarCallCounts.cs (83%)
+ create mode 100644 src/domain/src/asm/models/FarCallCountsField.cs
+ rename src/domain/src/asm/{stats => models}/FarCallSummary.cs (55%)
+ create mode 100644 src/domain/src/asm/ops/counts.cs
+ create mode 100644 src/domain/src/asm/ops/farcalls.cs
+ create mode 100644 src/domain/src/asm/ops/imm.cs
+ create mode 100644 src/domain/src/asm/ops/imminfo.cs
+ create mode 100644 src/domain/src/asm/ops/immval.cs
+ create mode 100644 src/domain/src/asm/ops/immwidth.cs
+ create mode 100644 src/domain/src/asm/ops/kind.cs
+ create mode 100644 src/domain/src/asm/ops/render.AsmImmInfo.cs
+ create mode 100644 src/domain/src/asm/ops/render.FarCallCounts.cs
+ create mode 100644 src/domain/src/asm/ops/render.FarCallSummary.cs
+ create mode 100644 src/domain/src/asm/ops/testimm.cs
+ rewrite src/domain/src/asm/query/ImmQuery.cs (76%)
+ rename src/{flow => domain}/src/contracts/ITableFormatter.cs (100%)
+ rename src/{flow => domain}/src/services/TableFormatter.cs (100%)
+ rename src/{flow/src/services/TableFormatters.cs => domain/src/services/Tables.cs} (66%)

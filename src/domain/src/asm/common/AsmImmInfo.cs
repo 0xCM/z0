@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
-    public readonly struct AsmImmInfo : INullity
+    public readonly struct ImmInfo : INullity
     {
         public readonly NumericWidth Width;
 
@@ -25,7 +25,7 @@ namespace Z0.Asm
         public readonly SignExensionKind SignExension;
 
         [MethodImpl(Inline)]
-        public AsmImmInfo(NumericWidth size, ulong value, bool direct, SignExensionKind sek)
+        public ImmInfo(NumericWidth size, ulong value, bool direct, SignExensionKind sek)
         {
             Width = size;
             Value = value;
@@ -35,7 +35,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmImmInfo(NumericWidth size, ulong value, bool direct)
+        public ImmInfo(NumericWidth size, ulong value, bool direct)
         {
             Width = size;
             Value = value;
@@ -45,7 +45,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmImmInfo(NumericWidth size, long value, bool direct, SignExensionKind? sek = null)
+        public ImmInfo(NumericWidth size, long value, bool direct, SignExensionKind? sek = null)
         {
             Width = size;
             Value = (ulong)value;
@@ -66,7 +66,7 @@ namespace Z0.Asm
             get => !IsEmpty;
         }                
 
-        public static AsmImmInfo Empty 
+        public static ImmInfo Empty 
             => default;
     }
 }

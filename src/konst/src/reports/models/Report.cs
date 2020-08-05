@@ -66,9 +66,6 @@ namespace Z0
         public static Report<F,R> Empty 
             => new Report<F,R>();
 
-        public FieldFormatter<F> Formatter 
-            => DataFields.formatter<F>();
-
         public new TabularFormat<F> Format {get;}
 
         public Report(R[] records)

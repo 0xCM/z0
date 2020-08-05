@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The literal kind</param>
         [MethodImpl(Inline), Op]
-        public static PrimalKindBitField bitfield(PrimalLiteralKind src)
+        public static PrimalKindBitField bitfield(LiteralKind src)
             => new PrimalKindBitField(src);        
     }
 }

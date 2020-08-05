@@ -15,12 +15,12 @@ namespace Z0.Asm
     {        
         public readonly byte Index;
         
-        public readonly OpCodeTokenKind Identifier;
+        public readonly AsmOpCodeToken Identifier;
 
         public readonly StringRef Value;
 
         [MethodImpl(Inline)]
-        public OpCodeToken(byte index, OpCodeTokenKind identifier, StringRef value)
+        public OpCodeToken(byte index, AsmOpCodeToken identifier, StringRef value)
         {
             Index = index;
             Identifier = identifier;

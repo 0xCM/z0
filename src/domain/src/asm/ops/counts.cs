@@ -23,6 +23,7 @@ namespace Z0
                 src.FarCallTargets.Length, 
                 src.HostBases.Length, 
                 src.HostedReceivers.Length, 
-                src.UnhostedReceivers.Length);
+                src.UnhostedReceivers.Length
+                    );
     }
 }

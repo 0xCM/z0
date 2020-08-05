@@ -12,7 +12,7 @@ namespace Z0.Asm
     public readonly struct CommandRecords
     {
         [MethodImpl(Inline)]
-        public static CommandRecordSet<T> Set<T>(T key, CommandInfo[] src)
+        public static CommandRecordSet<T> Set<T>(T key, AsmRecord[] src)
             => new CommandRecordSet<T>(key,src);
 
         [MethodImpl(Inline)]
@@ -20,26 +20,26 @@ namespace Z0.Asm
             => new CommandRecordSets<T>(src);
 
         [MethodImpl(Inline)]
-        public static CommandRecords Records(CommandInfo[] src)
+        public static CommandRecords Records(AsmRecord[] src)
             => new CommandRecords(src);
         
-        readonly CommandInfo[] Data;
+        readonly AsmRecord[] Data;
     
         [MethodImpl(Inline)]
-        public static implicit operator CommandRecords(CommandInfo[] src)
+        public static implicit operator CommandRecords(AsmRecord[] src)
             => new CommandRecords(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CommandInfo[](CommandRecords src)
+        public static implicit operator AsmRecord[](CommandRecords src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public CommandRecords(CommandInfo[] src)
+        public CommandRecords(AsmRecord[] src)
         {
             Data = src;
         }
 
-        public CommandInfo[] Content
+        public AsmRecord[] Content
         {
             [MethodImpl(Inline)]
             get => Data;

@@ -27,12 +27,12 @@ namespace Z0.Asm
         /// <summary>
         /// Operand immediate info, if applicable
         /// </summary>
-        public readonly AsmImmInfo ImmInfo;
+        public readonly ImmInfo ImmInfo;
 
         /// <summary>
         /// Operand memory info, if applicable
         /// </summary>
-        public readonly AsmMemInfo Memory;
+        public readonly MemInfo Memory;
         
         /// <summary>
         /// Operand register info, if applicable
@@ -45,7 +45,7 @@ namespace Z0.Asm
         public readonly AsmBranchInfo Branch;
 
         [MethodImpl(Inline)]
-        public AsmOperandInfo(int index, OpKind kind, in AsmImmInfo imminfo, in AsmMemInfo memory, 
+        public AsmOperandInfo(int index, OpKind kind, in ImmInfo imminfo, in MemInfo memory, 
             in Register register, AsmBranchInfo branch)
         {
             Index = (byte)index;

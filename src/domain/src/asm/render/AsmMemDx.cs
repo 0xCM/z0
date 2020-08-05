@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     partial struct SemanticRender
     {
-        public string Render(AsmMemDx src)
+        public string Render(MemDx src)
             => src.Format();
     }
 }

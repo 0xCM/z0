@@ -11,15 +11,6 @@ namespace Z0
     
     public readonly struct FarCallCounts
     {
-        [MethodImpl(Inline)]
-        public FarCallCounts(int targets, int hosted, int hostedTargets, int unhostedTargets)
-        {
-            TargetsFar = targets;
-            HostedCount = hosted;
-            HostedReceivers = hostedTargets;
-            UnhostedReceivers = unhostedTargets;
-        }
-
         /// <summary>
         /// The distinct count of far-call target addresses
         /// </summary>
@@ -40,19 +31,13 @@ namespace Z0
         /// </summary>
         public readonly int UnhostedReceivers;
 
-        const char eol = Chars.Colon;
-
-        const Padding pad = Padding.R10;
-
-        const char sep = Chars.Pipe;
-
-        public string Format()
-        {            
-            var dst = text.build();
-            dst.Label(nameof(TargetsFar), eol, TargetsFar);
-            dst.DelimitLabel(nameof(HostedReceivers), eol, HostedReceivers, pad, sep);
-            dst.DelimitLabel(nameof(UnhostedReceivers), eol, UnhostedReceivers, pad, sep);
-            return dst.ToString();
+        [MethodImpl(Inline)]
+        public FarCallCounts(int targets, int hosted, int hostedTargets, int unhostedTargets)
+        {
+            TargetsFar = targets;
+            HostedCount = hosted;
+            HostedReceivers = hostedTargets;
+            UnhostedReceivers = unhostedTargets;
         }
     }
 }
