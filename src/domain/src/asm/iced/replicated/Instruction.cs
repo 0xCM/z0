@@ -15,7 +15,7 @@ namespace Z0.Asm
     [SuppressUnmanagedCodeSecurity]
     public delegate bool InstructionTest(in Instruction src);
 
-    public class Instruction : IInstructionInfo
+    public struct Instruction : IInstructionInfo
     {
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()

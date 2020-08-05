@@ -10,21 +10,22 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableFormatters
+    [ApiHost]
+    public readonly struct Tables
     {
         [MethodImpl(Inline)]
-        public static TableFormatter<F> create<F>()
+        public static TableFormatter<F> formatter<F>()
             where F : unmanaged, Enum
             => new TableFormatter<F>(new StringBuilder(), FieldDelimiter);
 
         [MethodImpl(Inline)]
-        public static TableFormatter<F> create<F>(char delimiter)
+        public static TableFormatter<F> formatter<F>(char delimiter)
             where F : unmanaged, Enum
             => new TableFormatter<F>(new StringBuilder(), delimiter);
 
         [MethodImpl(Inline)]
-        public static TableFormatter<F> create<F>(StringBuilder dst, char delimiter = FieldDelimiter)
+        public static TableFormatter<F> formatter<F>(StringBuilder dst, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
-                => new TableFormatter<F>(dst, delimiter);
-    }        
+                => new TableFormatter<F>(dst, delimiter);    
+    }
 }

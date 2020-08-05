@@ -14,11 +14,15 @@ namespace Z0.Asm
     {
         public readonly Register Register;
 
+        [MethodImpl(Inline)]
+        public SegmentPrefix(Register src)
+            => Register = src;
+
         public bool IsEmpty 
             => Register == Register.None;
 
         public static bool test(Instruction inxs, int index)     
-            => !from(inxs,index).IsEmpty;
+            => !from(inxs, index).IsEmpty;
 
         public static SegmentPrefix from(Instruction inxs, int index) 
         {
@@ -35,14 +39,7 @@ namespace Z0.Asm
             return Empty;
         }
 
-        [MethodImpl(Inline)]
-        public SegmentPrefix(Register src)
-        {
-            Register = src;
-        }        
-
         public static SegmentPrefix Empty 
             => new SegmentPrefix(Register.None);   
-
     }
 }

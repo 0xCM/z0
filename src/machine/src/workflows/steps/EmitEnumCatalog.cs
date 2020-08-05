@@ -69,7 +69,7 @@ namespace Z0
             var m = dst.ToArray();
             Array.Sort(m);
             
-            var formatter = TableFormatters.create<EnumLiteralField>();
+            var formatter = Tables.formatter<EnumLiteralField>();
             formatter.EmitHeader();
             for(var i=0; i<m.Length; i++)
                 format(m[i],formatter);

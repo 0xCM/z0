@@ -16,7 +16,7 @@ namespace Z0
         public static TableFormatter<F> formatter<F>(bool emitheader = true, F f = default)
             where F : unmanaged, Enum
         {
-            var formatter = TableFormatters.create<F>();
+            var formatter = Tables.formatter<F>();
             if(emitheader)
                 formatter.EmitHeader();
             return formatter;
@@ -25,7 +25,7 @@ namespace Z0
         public static TableFormatter<F> formatter<F>(StringBuilder dst, bool emitheader, char delimiter = FieldDelimiter, F f = default)
             where F : unmanaged, Enum
         {
-            var formatter = TableFormatters.create<F>(dst, delimiter);
+            var formatter = Tables.formatter<F>(dst, delimiter);
             if(emitheader)
                 formatter.EmitHeader();
             return formatter;
@@ -33,6 +33,6 @@ namespace Z0
 
         public static TableFormatter<F> formatter<F>(char delimiter, F f = default)
             where F : unmanaged, Enum
-                => TableFormatters.create<F>(delimiter);
+                => Tables.formatter<F>(delimiter);
     }
 }

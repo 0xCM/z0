@@ -4198,3 +4198,11 @@
  rename src/konst/src/reflective/models/{GenericPartition.cs => GenericState.cs} (58%)
  delete mode 100644 src/konst/src/reflective/models/GenericTargetKind.cs
  create mode 100644 src/konst/src/reflective/models/ParametricTargetKind.cs
+[master cc7583f38] .
+ 16 files changed, 294 insertions(+), 130 deletions(-)
+ create mode 100644 src/capture/src/steps/EmitHostArtifacts.cs
+ create mode 100644 src/capture/src/steps/ExtractHostMembers.cs
+ create mode 100644 src/capture/src/steps/ExtractHostMembersStep.cs
+ delete mode 100644 src/capture/src/steps/ParseMembers.cs
+ rename src/capture/src/steps/{ImmEmissionWorkflow.cs => SpecializeImmediates.cs} (97%)
+ create mode 100644 src/capture/src/steps/SpecializeImmediatesStep.cs

@@ -2,16 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
-{
-    public interface ICaptureWorkflow : IServiceAllocation
+namespace Z0
+{    
+    public enum FarCallCountsField : byte
     {
-        ICaptureBroker Broker {get;}
+        TargetsFar,
 
-        ICaptureContext Context {get;}
+        HostedCount,
 
-        MatchAddresses MatchAddresses 
-            => new MatchAddresses(this);
+        HostedReceivers,
 
+        UnhostedReceivers
     }
 }

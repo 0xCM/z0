@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -11,19 +11,6 @@ namespace Z0.Asm
 
     public readonly struct FarCallSummary
     {
-        [MethodImpl(Inline)]
-        public static FarCallSummary Define(MemoryAddress[] targets, MemoryAddress[] bases, MemoryAddress[] hosted, MemoryAddress[] unhosted)
-            => new FarCallSummary(targets, bases, hosted, unhosted);
-        
-        [MethodImpl(Inline)]
-        FarCallSummary(MemoryAddress[] targets, MemoryAddress[] bases, MemoryAddress[] hosted, MemoryAddress[] unhosted)
-        {
-            this.FarCallTargets = targets;
-            this.HostBases = bases;
-            this.HostedReceivers = hosted;
-            this.UnhostedReceivers = unhosted;
-        }
-        
         /// <summary>
         /// Far-classified call instruction operations
         /// </summary>
@@ -44,14 +31,13 @@ namespace Z0.Asm
         /// </summary>
         public readonly MemoryAddress[] UnhostedReceivers;
 
-        public FarCallCounts Counts
-            => FarCallCounts.Define(
-                FarCallTargets.Length, 
-                HostBases.Length, 
-                HostedReceivers.Length, 
-                UnhostedReceivers.Length);
-
-        public string Format()
-            => Counts.Format();
+        [MethodImpl(Inline)]
+        public FarCallSummary(MemoryAddress[] targets, MemoryAddress[] bases, MemoryAddress[] hosted, MemoryAddress[] unhosted)
+        {
+            FarCallTargets = targets;
+            HostBases = bases;
+            HostedReceivers = hosted;
+            UnhostedReceivers = unhosted;
+        }    
     }
 }

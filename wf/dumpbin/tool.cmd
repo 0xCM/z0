@@ -14,7 +14,6 @@ set Imports=imports
 set LineNumbers=linenumbers
 set LinkerMember=linkermember
 set LoadConfig=loadconfig
-set NoLogo=nologo
 set RawData=rawdata
 set Relocations=relocations
 set Summary=summary

@@ -18,7 +18,7 @@ namespace Z0
     {
         public static RunProcessors create(WfContext wf, CorrelationToken ct)
         {
-            wf.Initializing(WorkerName, ct);
+            wf.Initializing(ActorName, ct);
             var step = default(RunProcessors);
             try
             {
@@ -28,11 +28,11 @@ namespace Z0
             }
             catch(Exception e)
             {
-                wf.Error(WorkerName, e, ct);
+                wf.Error(ActorName, e, ct);
                 throw;
             }
             
-            wf.Initialized(WorkerName, ct);
+            wf.Initialized(ActorName, ct);
             return step;        
         }
 
@@ -57,7 +57,7 @@ namespace Z0
             Wf = wf;
             Ct = ct;
             Sink = wf.Broker.Sink;
-            TargetDir = Wf.AppPaths.AppDataRoot + FolderName.Define(WorkerName);
+            TargetDir = Wf.AppPaths.AppDataRoot + FolderName.Define(ActorName);
             Asm = ContextFactory.asm(wf.ContextRoot);
             Broker = new WfBroker(Ct);
             Files = PartFiles.create(Asm);            
@@ -131,11 +131,11 @@ namespace Z0
                 var hcs = hcSets[i];
                 var decoded = Decode(hcs);
                 dst.Add(decoded);
-                Broker.Raise(new DecodedHost(WorkerName, decoded, Ct));
+                Wf.Raise(new DecodedHost(ActorName, decoded, Ct));
             }  
 
-            var inxs = PartInstructions.Create(pcs.Part, dst.Array());
-            Broker.Raise(new DecodedPart(inxs));
+            var inxs = new PartInstructions(pcs.Part, dst.Array());
+            Wf.Raise(new DecodedPart(ActorName, inxs, Ct));
             return inxs;                        
         }
 
@@ -190,7 +190,7 @@ namespace Z0
         {
             var files = span(Files.ParseFiles);
             var count = files.Length;
-            Wf.Status(WorkerName, $"Processing {count} parse files", Ct);
+            Wf.Status(ActorName, $"Processing {count} parse files", Ct);
 
             for(var i=0; i<count; i++)
             {
@@ -199,12 +199,12 @@ namespace Z0
             }
 
             var encoded = IndexBuilder.Freeze();
-            Wf.Raise(new IndexedEncoded(WorkerName, encoded, Ct));
+            Wf.Raise(new IndexedEncoded(ActorName, encoded, Ct));
         }
 
         public void Run()
         {
-            Wf.Running(WorkerName, Ct);
+            Wf.Running(ActorName, Ct);
             try
             {            
                 ParseReports();
@@ -217,7 +217,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(ActorName, Ct);
         }
 
         public bool SemanticFormatEnabled {get;}

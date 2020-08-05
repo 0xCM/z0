@@ -8,59 +8,40 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static NumericWidth;
 
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
     public readonly struct AsmImmInfo : INullity
     {
-        public NumericWidth Width {get;}
+        public readonly NumericWidth Width;
 
-        public ulong Value {get;}
+        public readonly ulong Value;
 
-        public bool Signed {get;}
+        public readonly bool Signed;
 
-        public bool Direct {get;}
+        public readonly bool Direct;
 
-        public SignExensionKind SignExension {get;}
-
-        [MethodImpl(Inline)]
-        public static AsmImmInfo Define(byte value, bool direct, SignExensionKind? sek = null)
-            => new AsmImmInfo(W8, value, direct, sek);
+        public readonly SignExensionKind SignExension;
 
         [MethodImpl(Inline)]
-        public static AsmImmInfo Define(short value, bool direct, SignExensionKind? sek = null)
-            => new AsmImmInfo(W16, value, direct, sek);
-
-        [MethodImpl(Inline)]
-        public static AsmImmInfo Define(ushort value, bool direct, SignExensionKind? sek = null)
-            => new AsmImmInfo(W16, value, direct, sek);
-
-        [MethodImpl(Inline)]
-        public static AsmImmInfo Define(int value, bool direct, SignExensionKind? sek = null)
-            => new AsmImmInfo(W32, value, direct, sek);
-
-        [MethodImpl(Inline)]
-        public static AsmImmInfo Define(uint value, bool direct, SignExensionKind? sek = null)
-            => new AsmImmInfo(W32, value, direct, sek);
-
-        [MethodImpl(Inline)]
-        public static AsmImmInfo Define(long value, bool direct, SignExensionKind? sek = null)
-            => new AsmImmInfo(W64, value, direct, sek);
-
-        [MethodImpl(Inline)]
-        public static AsmImmInfo Define(ulong value, bool direct, SignExensionKind? sek = null)
-            => new AsmImmInfo(W64, value, direct, sek);
-
-        [MethodImpl(Inline)]
-        public AsmImmInfo(NumericWidth size, ulong value, bool direct, SignExensionKind? sek = null)
+        public AsmImmInfo(NumericWidth size, ulong value, bool direct, SignExensionKind sek)
         {
             Width = size;
             Value = value;
             Signed = false;
             Direct = direct;
-            SignExension = sek ?? SignExensionKind.None;
+            SignExension = sek;
+        }
+
+        [MethodImpl(Inline)]
+        public AsmImmInfo(NumericWidth size, ulong value, bool direct)
+        {
+            Width = size;
+            Value = value;
+            Signed = false;
+            Direct = direct;
+            SignExension = SignExensionKind.None;
         }
 
         [MethodImpl(Inline)]
@@ -87,6 +68,5 @@ namespace Z0.Asm
 
         public static AsmImmInfo Empty 
             => default;
-
     }
 }

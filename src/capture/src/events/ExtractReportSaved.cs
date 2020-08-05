@@ -12,35 +12,38 @@ namespace Z0.Asm
         
     public readonly struct ExtractReportSaved : IWfEvent<ExtractReportSaved>
     {        
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        public const string EventName = nameof(ExtractReportSaved);
 
-        public readonly ApiHostUri Host;        
+        public WfEventId Id {get;}
 
-        public readonly Type ReportType;
+        public string ActorName {get;}
 
-        public readonly int RecordCount;
+        public CorrelationToken Ct {get;}
 
-        public readonly FilePath TargetPath;
-        
+        public AppMsgColor Flair {get;}
+
+        public readonly ExtractReport Report;
+
+        public readonly uint RecordCount;
+
+        public readonly string ReportName;
+
+        public AppMsg Description {get;}
+
         [MethodImpl(Inline)]
-        public ExtractReportSaved(ApiHostUri host, Type type, int records, FilePath target)
+        public ExtractReportSaved(string actor, ExtractReport report, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
-            Host = host;
-            ReportType = type;
-            RecordCount = records;
-            TargetPath = target;
+            Report = report;
+            ActorName = actor;
+            Ct = ct;
+            ReportName = report.ReportName;
+            RecordCount = (uint)report.RecordCount;
+            Flair = flair;
+            Id = wfid(EventName, ct);
+            Description = AppMsg.Colorize(new {RecordCount, ReportName}, flair);
         }
-
+ 
         public string Format()
-            => $"{RecordCount} {ReportType.DisplayName()} records saved to {TargetPath}";
-
-        public ExtractReportSaved Zero 
-            => Empty;
-
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;
-
-        public static ExtractReportSaved Empty 
-            => new ExtractReportSaved(ApiHostUri.Empty, typeof(void), 0, FilePath.Empty);
+            => text.format(PSx3, Id, ActorName, Description);
     }
 }

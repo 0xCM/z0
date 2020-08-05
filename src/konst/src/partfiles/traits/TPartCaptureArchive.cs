@@ -44,8 +44,8 @@ namespace Z0
             => HexFilePath(ArchiveRoot, host);
 
         FilePath AsmPath(ApiHostUri host)
-            => AsmFilePath(ArchiveRoot, host);
-
+            => AsmDir +  FileName.Define(text.concat(host.Owner.Format(), ".", host.Name), FileExtensions.Asm);
+            
         FilePath ExtractPath(ApiHostUri host)
             => ExtractFilePath(ArchiveRoot, host);
 

@@ -38,7 +38,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public AsmOperandInfo operand(MemoryAddress @base, Instruction src, int index)
-            => new AsmOperandInfo(index, kind(src,index), ImmInfo(src,index),
+            => new AsmOperandInfo(index, asm.kind(src,index), ImmInfo(src,index),
                 MemInfo(src,index), RegisterInfo(src,index), BranchInfo(@base, src,index));
 
         [MethodImpl(Inline), Op]
@@ -136,7 +136,7 @@ namespace Z0.Asm
             => summarize(@base,src,encoded,content,offset);
 
 		public OpKind OperandKind(Instruction src, int operand) 
-            => kind(src,operand);
+            => asm.kind(src,operand);
 
 		public OpKind OperandKind<T>(T src, int operand) 
             where T : IInstructionInfo

@@ -2,21 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
+    
     public readonly struct FarCallCounts
     {
         [MethodImpl(Inline)]
-        public static FarCallCounts Define(int targets, int hosted, int hostedTargets, int unhostedTargets)
-            => new FarCallCounts(targets, hosted, hostedTargets, unhostedTargets);
-        
-        [MethodImpl(Inline)]
-        FarCallCounts(int targets, int hosted, int hostedTargets, int unhostedTargets)
+        public FarCallCounts(int targets, int hosted, int hostedTargets, int unhostedTargets)
         {
             TargetsFar = targets;
             HostedCount = hosted;

@@ -14,28 +14,34 @@ namespace Z0
     
     public readonly struct DecodedPart : IWfEvent<DecodedPart>
     {
-        const string Pattern =  IdMarker +"{1} {2} instructions decoded";
+        public const string EventName = nameof(DecodedPart);
 
         public WfEventId Id {get;}
+        
+        public string ActorName {get;}
 
-        public readonly PartInstructions Instructions;
+        public PartInstructions Instructions {get;}
+
+        public PartId PartId {get;}
+
+        public int TotalCount {get;}
+        public AppMsgColor Flair {get;}
+
+        public AppMsg Description {get;}
 
         [MethodImpl(Inline)]
-        public DecodedPart(PartInstructions src)
+        public DecodedPart(string actor, PartInstructions src, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
-            Id = WfEventId.define(nameof(DecodedPart));
+            Id = WfEventId.define(nameof(DecodedPart), ct);
+            ActorName = actor;
             Instructions = src;
+            PartId = Instructions.Part;
+            TotalCount = Instructions.TotalCount;
+            Flair = flair;
+            Description = AppMsg.Colorize(new {PartId, TotalCount}, Flair);
         }
                 
-        public PartId Part 
-            => Instructions.Part;
-
-        public int TotalCount
-            => Instructions.TotalCount;
-        
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;
         public string Format()
-            => text.format(Pattern, Id, TotalCount, Part);
+            => text.format(SSx3, Id, ActorName, Description);
     }        
 }

@@ -9,31 +9,59 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct EmitExtractReport
+    [Step]
+    public ref struct EmitExtractReport
     {
-        public ICaptureWorkflow Workflow {get;}
+        public const string ActorName = nameof(EmitExtractReport);
 
-        public ICaptureContext Context 
-            => Workflow.Context;
+        readonly CorrelationToken Ct;
+     
+        readonly WfState Wf;
         
+        readonly ApiHostUri Host;
+
+        readonly ExtractedCode[] Source;
+
+        readonly FilePath Target;
+
+        ExtractReport Artifact;
+
+        public ExtractReport Report 
+            => Artifact;
+
         [MethodImpl(Inline)]
-        internal EmitExtractReport(ICaptureWorkflow workflow)
+        public EmitExtractReport(WfState wf, ApiHostUri host, ExtractedCode[] data, FilePath dst, CorrelationToken ct)
         {
-            Workflow = workflow;
-        }
-        
-        public ExtractReport CreateExtractReport(ApiHostUri host, ExtractedCode[] src)
-        {
-            var report = ExtractReport.Create(host, src); 
-            Context.Raise(new ExtractReportCreated(report));                
-            return report;
+            Ct = ct;
+            Wf = wf;
+            Host = host;
+            Source = data;
+            Target = dst;
+            Artifact = default;
+            Wf.Created(ActorName, Ct);
         }
 
-        public void SaveExtractReport(ExtractReport src, FilePath dst)
+        public void Run()
         {
-            var context = Context;
-            src.Save(dst)
-                .OnSome(f => context.Raise(new ExtractReportSaved(src.ApiHost, src.GetType(), src.RecordCount, f)));
+            try
+            {
+                Artifact = ExtractReport.Create(Host, Source); 
+                Wf.Raise(new ExtractReportCreated(ActorName, Artifact, Ct));  
+                var result = Report.Save(Target);
+                if(result)
+                    Wf.Raise(new ExtractReportSaved(ActorName, Artifact, Ct));  
+                else
+                    Wf.Error(ActorName, "Unable to save extract report", Ct);
+            }
+            catch(Exception e)
+            {
+                Wf.Error(ActorName, e, Ct);
+            }
         }
+        
+        public void Dispose()
+        {
+            Wf.Finished(ActorName, Ct);
+        }    
     }
 }

@@ -4,9 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Step(WfStepId.RunProcessors, true)]
-    public readonly struct RunProcessorsStep
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    [ApiHost]
+    public readonly partial struct asm
     {
-        public const string ActorName = nameof(RunProcessors);
+
     }
 }

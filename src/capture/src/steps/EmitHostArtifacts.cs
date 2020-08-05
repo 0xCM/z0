@@ -24,8 +24,6 @@ namespace Z0.Asm
         public WfState Wf {get;}
 
         readonly CorrelationToken Ct;
-
-        //readonly IApiHost Source;
         
         readonly ExtractedCode[] Extractions;
 
@@ -36,6 +34,8 @@ namespace Z0.Asm
         readonly IExtractParser Parser;
 
         public ParsedExtract[] Parsed;
+
+        readonly FilePath ExtractPath;
 
         readonly FilePath ParsedPath;
 
@@ -50,9 +50,10 @@ namespace Z0.Asm
             Source = src;
             Target = HostCaptureArchive.create(dst.ArchiveRoot, Source);
             Extractions = extracts;
-            ParsedPath = Target.ParseFilePath(Source);
-            HexPath = Target.HexPath(Source);
-            AsmPath = Target.AsmPath(Source);
+            ExtractPath = Target.ExtractPath;
+            ParsedPath = Target.ParsedPath;
+            HexPath = Target.HexPath;
+            AsmPath = Target.AsmPath;
             Parsed = new ParsedExtract[0]{};
             Parser = Extracts.Services.ExtractParser(Extracts.DefaultBufferLength);
             Wf.Created(WorkerName, Ct);            
@@ -64,6 +65,7 @@ namespace Z0.Asm
             
             try
             {
+                SaveExtracts();
                 Parse();
                 SaveParseReport();
                 SaveHex();        
@@ -83,6 +85,12 @@ namespace Z0.Asm
             Wf.Finished(WorkerName, Ct);
         }
 
+        void SaveExtracts()
+        {            
+            using var step = new EmitExtractReport(Wf, Source, Extractions, ExtractPath, Ct);
+            step.Run();
+        }
+        
         void Parse()
         {
             var result = Parser.Parse(Extractions);                    
@@ -119,6 +127,5 @@ namespace Z0.Asm
                 Wf.CWf.MatchAddresses.Run(Source, Extractions, decoded);
             }
         }
-
     }
 }
