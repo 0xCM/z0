@@ -18,13 +18,13 @@ namespace Z0
 
         public string ActorName {get;}
 
-        public readonly EncodedIndex Index;
+        public readonly EncodedParts Index;
         
         public AppMsgColor Flair 
             => AppMsgColor.Cyan;                                 
 
         [MethodImpl(Inline)]
-        public IndexedEncoded(string worker, EncodedIndex index, CorrelationToken ct)
+        public IndexedEncoded(string worker, EncodedParts index, CorrelationToken ct)
         {
             Id = wfid(EventName, ct);
             Index = index;

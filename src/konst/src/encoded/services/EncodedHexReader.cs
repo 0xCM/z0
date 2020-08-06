@@ -27,7 +27,7 @@ namespace Z0
                 var uritext = formatted.TakeBefore(Chars.Space).Trim();
                 var uri = OpUriParser.Service.Parse(uritext);
                 var bytes = formatted.TakeAfter(Chars.Space).SplitClean(HexSpecs.DataDelimiter).Select(parser.Succeed);
-                return Encoded.identified(uri, bytes);                
+                return Encoded.define(uri, bytes);                
             }
             catch(Exception e)
             {

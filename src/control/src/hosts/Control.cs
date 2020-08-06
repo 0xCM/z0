@@ -36,7 +36,7 @@ namespace Z0
         
         readonly WfContext WfContext;        
 
-        readonly TAppPaths Paths;
+        readonly IAppPaths Paths;
 
         public WfState Wf {get;}
 

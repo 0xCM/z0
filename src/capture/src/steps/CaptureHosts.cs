@@ -29,9 +29,9 @@ namespace Z0.Asm
 
         public CorrelationToken Ct {get;}
 
-        public TPartCaptureArchive Target {get;}
+        public IPartCaptureArchive Target {get;}
 
-        public CaptureHosts(WfState state, IApiHost[] hosts,  TPartCaptureArchive dst, CorrelationToken ct)
+        public CaptureHosts(WfState state, IApiHost[] hosts,  IPartCaptureArchive dst, CorrelationToken ct)
         {
             Wf = state;
             Hosts= hosts;
@@ -57,7 +57,7 @@ namespace Z0.Asm
             }
         }
 
-        void Store(ApiHostUri host, ExtractedCode[] extracts, TPartCaptureArchive dst)
+        void Store(ApiHostUri host, ExtractedCode[] extracts, IPartCaptureArchive dst)
         {
             using var step = new EmitHostArtifacts(Wf, host, extracts, dst, Ct);
             step.Run();

@@ -14,9 +14,9 @@ namespace Z0.Asm
     /// </summary>
     public class AsmFunction
     {           
-        public static AsmFunction define(ParsedExtract encoding,  AsmInstructionList inxs)
+        public static AsmFunction define(ParsedExtraction encoding,  AsmInstructionList inxs)
         {         
-            var code = MemberCode.Define(encoding.OpUri, encoding.Encoded);  
+            var code = MemberCode.define(encoding.OpUri, encoding.Encoded);  
             var sig = encoding.Method.Signature().Format();          
             return new AsmFunction(encoding.OpUri, sig, code, encoding.TermCode, inxs);
         }

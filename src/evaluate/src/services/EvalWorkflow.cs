@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         readonly byte BufferCount;
 
-        readonly TPartCaptureArchive CodeArchive;
+        readonly IPartCaptureArchive CodeArchive;
 
         readonly IApiSet ApiSet;
                 

@@ -11,7 +11,14 @@ namespace Z0
 
     public static class PartialEncodingMatch
     {
-        public static int? TerminalIndex(ReadOnlySpan<byte> src, ReadOnlySpan<byte?> pattern, Span<byte> state)
+        public static bool TryPartialMatch(this EncodingPatterns patterns, EncodingPatternKind id, ReadOnlySpan<byte> input, out ReadOnlySpan<byte> selected)
+        {
+            var pattern = patterns.PartialPattern(id);
+            var offset = patterns.MatchOffset(id);
+            return TryMatch(offset, input, pattern, out selected);
+        }
+                
+        static int? TerminalIndex(ReadOnlySpan<byte> src, ReadOnlySpan<byte?> pattern, Span<byte> state)
         {            
             var pos = 0;
             var posMax = state.Length - 1;
@@ -40,7 +47,7 @@ namespace Z0
             return termidx;
         }
 
-        public static bool TryMatch(EncodingPatternOffset offset, ReadOnlySpan<byte> input, ReadOnlySpan<byte?> pattern,  out ReadOnlySpan<byte> selected)
+        static bool TryMatch(EncodingPatternOffset offset, ReadOnlySpan<byte> input, ReadOnlySpan<byte?> pattern,  out ReadOnlySpan<byte> selected)
         {
             selected = input;
             Span<byte> state = stackalloc byte[pattern.Length];
@@ -54,11 +61,6 @@ namespace Z0
             return false;
         }
 
-        public static bool TryPartialMatch(this EncodingPatterns patterns, EncodingPatternKind id, ReadOnlySpan<byte> input, out ReadOnlySpan<byte> selected)
-        {
-            var pattern = patterns.PartialPattern(id);
-            var offset = patterns.MatchOffset(id);
-            return TryMatch(offset, input, pattern, out selected);
-        }
+
     }
 }

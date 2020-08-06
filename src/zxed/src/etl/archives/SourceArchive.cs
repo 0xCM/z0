@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    public readonly struct XedSourceArchive : TPartFileArchive
+    public readonly struct XedSourceArchive : IPartFileArchive
     {
         public static XedSourceArchive Create(FolderPath root)
             => new XedSourceArchive(root);

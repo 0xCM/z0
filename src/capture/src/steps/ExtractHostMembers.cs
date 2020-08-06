@@ -25,7 +25,7 @@ namespace Z0.Asm
         public ExtractedCode[] Extractions;
                     
         [MethodImpl(Inline)]
-        internal ExtractHostMembers(WfState state, IApiHost host, TPartCaptureArchive dst, CorrelationToken ct)
+        internal ExtractHostMembers(WfState state, IApiHost host, IPartCaptureArchive dst, CorrelationToken ct)
         {
             Wf = state;
             Ct = ct;

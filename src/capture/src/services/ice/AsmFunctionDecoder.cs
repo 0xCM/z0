@@ -10,7 +10,6 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Konst;
-    using static Root;
     using static AsmCore;
 
     using Iced = Iced.Intel;
@@ -36,7 +35,7 @@ namespace Z0.Asm
                 let block = AsmInstructionBlock.Define(src.HostedBits, i, src.TermCode)
                 select Services.FunctionBuilder.BuildFunction(src.OpUri, src.Method.Signature().Format(), block);
 
-        public Option<AsmFunction> Decode(ParsedExtract src)
+        public Option<AsmFunction> Decode(ParsedExtraction src)
             =>  from i in Decode(src.Encoded) select AsmFunction.define(src,i);
 
         public Option<AsmInstructionList> Decode(LocatedCode src)        
@@ -45,7 +44,7 @@ namespace Z0.Asm
         public Option<AsmInstructions> Decode(IdentifiedCode src)        
             => Decode(src.Encoded, MemoryAddress.Empty);
 
-        public Option<AsmFunction> Decode(ParsedExtract src, Action<Asm.Instruction> f)
+        public Option<AsmFunction> Decode(ParsedExtraction src, Action<Asm.Instruction> f)
             => Decode(src.Encoded,f).TryMap(x => AsmFunction.define(src,x));
 
         public Option<AsmInstructionList> Decode(LocatedCode src, Action<Asm.Instruction> f)        

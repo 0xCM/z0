@@ -10,16 +10,16 @@ namespace Z0
 
     public interface IFunctionCil
     {
-        CilBody ExtractCil(DynamicMethod src)
+        CilCode ExtractCil(DynamicMethod src)
             => FunctionCil.extract(src);
 
-        CilBody ExtractCil(MethodInfo src)
+        CilCode ExtractCil(MethodInfo src)
             => FunctionCil.extract(src);
 
-        CilBody ExtractCil(DynamicDelegate src)
+        CilCode ExtractCil(DynamicDelegate src)
             => FunctionCil.extract(src);
 
-        CilBody ExtractCil<D>(DynamicDelegate<D> src)
+        CilCode ExtractCil<D>(DynamicDelegate<D> src)
             where D : Delegate
                 => FunctionCil.extract(src);
     }

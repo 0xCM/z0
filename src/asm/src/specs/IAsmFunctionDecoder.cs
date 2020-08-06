@@ -21,7 +21,7 @@ namespace Z0.Asm
         /// Decodes a fucntion for a parsed extract
         /// </summary>
         /// <param name="src">The source data</param>
-        Option<AsmFunction> Decode(ParsedExtract src);
+        Option<AsmFunction> Decode(ParsedExtraction src);
 
         /// <summary>
         /// Decodes an instruction list
@@ -31,7 +31,7 @@ namespace Z0.Asm
 
         Option<AsmInstructions> Decode(IdentifiedCode src);
 
-        Option<AsmFunction> Decode(ParsedExtract src, Action<Instruction> f);
+        Option<AsmFunction> Decode(ParsedExtraction src, Action<Instruction> f);
         
         Option<AsmInstructionList> Decode(LocatedCode src, Action<Instruction> f);                      
     }

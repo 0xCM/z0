@@ -29,7 +29,7 @@ namespace Z0.Asm
             Wf.Created(nameof(DecodeParsed), Ct);
         }
 
-        public AsmFunction[] Run(ApiHostUri host, ParsedExtract[] src)
+        public AsmFunction[] Run(ApiHostUri host, ParsedExtraction[] src)
         {   
             try
             {             
@@ -60,7 +60,7 @@ namespace Z0.Asm
             writer.WriteAsm(src);
         }
 
-        void HandleUndecoded(in ParsedExtract member)
+        void HandleUndecoded(in ParsedExtraction member)
         {
             term.error($"Could not decode {member.Id}");
         }        

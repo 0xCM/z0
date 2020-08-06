@@ -34,13 +34,13 @@ namespace Z0.Asm
         /// Decodes a fucntion for a parsed extract
         /// </summary>
         /// <param name="src">The source data</param>
-        public Option<AsmFunction> Decode(ParsedExtract src)
+        public Option<AsmFunction> Decode(ParsedExtraction src)
             => AsmDecoder.Decode(src);       
 
         public Option<AsmInstructions> Decode(IdentifiedCode src)
             => AsmDecoder.Decode(src);       
 
-        public Option<AsmFunction> Decode(ParsedExtract src, Action<Instruction> f)
+        public Option<AsmFunction> Decode(ParsedExtraction src, Action<Instruction> f)
             => AsmDecoder.Decode(src,f);       
         
         public Option<AsmInstructionList> Decode(LocatedCode src, Action<Instruction> f)                      

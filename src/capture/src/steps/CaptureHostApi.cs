@@ -41,7 +41,7 @@ namespace Z0.Asm
             Wf.Finished(WorkerName, Ct);
         }
                 
-        public void Execute(IApiHost host, TPartCaptureArchive dst)
+        public void Execute(IApiHost host, IPartCaptureArchive dst)
         {
             try
             {

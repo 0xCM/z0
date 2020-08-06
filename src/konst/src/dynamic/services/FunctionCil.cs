@@ -16,19 +16,19 @@ namespace Z0
         public static FunctionCil Service => default;
 
         [MethodImpl(Inline)]
-        public static CilBody extract(DynamicMethod src)
-            => CilBody.Define(src.Name, bytes(src), src.GetMethodImplementationFlags());
+        public static CilCode extract(DynamicMethod src)
+            => CilCode.define(src.Name, bytes(src), src.GetMethodImplementationFlags());
 
         [MethodImpl(Inline)]
-        public static CilBody extract(MethodInfo src)
-            => CilBody.Define(src.Name,src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
+        public static CilCode extract(MethodInfo src)
+            => CilCode.define(src.Name,src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
 
         [MethodImpl(Inline)]
-        public static CilBody extract(DynamicDelegate src)
+        public static CilCode extract(DynamicDelegate src)
             => extract(src.TargetMethod);
 
         [MethodImpl(Inline)]
-        public static CilBody extract<D>(DynamicDelegate<D> src)
+        public static CilCode extract<D>(DynamicDelegate<D> src)
             where D : Delegate
                 => extract(src.Untyped);
 

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a native capture operation
     /// </summary>
-    public readonly struct CaptureOutcome //: IIdentified<OpIdentity>
+    public readonly struct CaptureOutcome
     {
         /// <summary>
         /// The final state in the capture process

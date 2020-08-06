@@ -19,9 +19,9 @@ namespace Z0
     /// <typeparam name="V">The value type</typeparam>
     public readonly struct KeyValuePairs<K,V> : IKeyValuePairs<K,V>
     {        
-        public K[] Keys {get;}
+        public readonly K[] Keys;
 
-        public V[] Values {get;}
+        public readonly V[] Values;
 
         readonly IReadOnlyDictionary<K,V> KeyedValues;
 
@@ -112,6 +112,13 @@ namespace Z0
 
         IEnumerator IEnumerable.GetEnumerator()
             => KeyedValues.GetEnumerator();
+
+
+        K[] IKeyValuePairs<K,V>.Keys 
+            => Keys;
+
+        V[] IKeyValuePairs<K,V>.Values 
+            => Values;
 
         /// <summary>
         /// A hashtable that hashes nothing

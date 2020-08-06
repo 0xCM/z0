@@ -65,7 +65,7 @@ namespace Z0
             Broker.Dispose();
         }
                 
-        public TAppPaths AppPaths
+        public IAppPaths AppPaths
         {
             [MethodImpl(Inline)]
             get => ContextRoot.AppPaths;

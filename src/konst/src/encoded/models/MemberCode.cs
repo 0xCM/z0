@@ -25,11 +25,11 @@ namespace Z0
         public LocatedCode Encoded {get;}
 
         [MethodImpl(Inline)]
-        public static MemberCode Define(OpUri uri, LocatedCode data)
+        public static MemberCode define(OpUri uri, LocatedCode data)
             => new MemberCode(uri, data);
 
         [MethodImpl(Inline)]
-        public static MemberCode Define(OpUri uri, MemoryAddress address, BinaryCode encoded)
+        public static MemberCode define(OpUri uri, MemoryAddress address, BinaryCode encoded)
             => new MemberCode(uri, new LocatedCode(address,encoded));
             
         /// <summary>
@@ -132,6 +132,6 @@ namespace Z0
             => src is MemberCode x && Equals(x);        
 
         public static MemberCode Empty 
-            => Define(OpUri.Empty, LocatedCode.Empty);
+            => define(OpUri.Empty, LocatedCode.Empty);
     }
 }

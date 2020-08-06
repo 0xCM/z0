@@ -40,11 +40,11 @@ namespace Z0.Asm
         IAsmFunctionDecoder Decoder
             => Context.FunctionDecoder;
 
-        TArchives DataSource 
+        IArchiveServices DataSource 
             => Archives.Services;            
 
         [MethodImpl(Inline)]
-        TPartCaptureArchive CaptureArchive(FolderPath root)
+        IPartCaptureArchive CaptureArchive(FolderPath root)
             => DataSource.CaptureArchive(root, null, null);
 
         [MethodImpl(Inline)]

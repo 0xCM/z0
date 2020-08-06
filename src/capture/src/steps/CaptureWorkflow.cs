@@ -21,7 +21,7 @@ namespace Z0.Asm
         
         [MethodImpl(Inline)]
         public CaptureWorkflow(IAsmContext asm, WfContext wf, 
-            IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, TPartCaptureArchive archive, CorrelationToken ct)
+            IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, IPartCaptureArchive archive, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;

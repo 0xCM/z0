@@ -4449,3 +4449,102 @@
  delete mode 100644 src/konst/src/messages/models/AppMsgT.cs
  delete mode 100644 src/konst/src/messages/specs/IAppMsgExchange.cs
  delete mode 100644 src/konst/src/z/ops/m/message.cs
+[master deb99476e] .
+ 119 files changed, 348 insertions(+), 470 deletions(-)
+ rename src/asmd/{src/tokens/models => encoding}/AsmCommand.cs (94%)
+ rename src/asmd/{src/encoding/ops/isrex.cs => encoding/AsmDecoder.cs} (51%)
+ create mode 100644 src/asmd/encoding/AsmEncoder.cs
+ rename src/asmd/{src/expressions/services => encoding}/AsmFieldParser.cs (100%)
+ rename src/asmd/{src/expressions/services => encoding}/AsmFileParser.cs (100%)
+ rename src/asmd/{src/expressions/services => encoding}/AsmHeaderParser.cs (100%)
+ rename src/asmd/{src/expressions/services => encoding}/AsmParsers.cs (97%)
+ rename src/asmd/{src/expressions/services => encoding}/AsmStatementParser.cs (100%)
+ rename src/asmd/{src/expressions/services => encoding}/CommandInfoParser.cs (97%)
+ rename src/asmd/{src/expressions/services => encoding}/CommandParser.cs (100%)
+ rename src/asmd/{src/tokens/models => encoding}/EncodedCommand.cs (91%)
+ rename src/asmd/{src/expressions => encoding}/IAsmCommand.cs (100%)
+ rename src/asmd/{src/encoding/prefixes/modrm => encoding}/ModRmEncoder.cs (63%)
+ rename src/asmd/{src/tokens => encoding}/OpCodeModel.cs (100%)
+ rename src/asmd/{src/tokens/services => encoding}/OpCodeModels.cs (100%)
+ rename src/asmd/{src/tokens/services => encoding}/OpCodePartition.cs (100%)
+ rename src/asmd/{src/tokens/services => encoding}/OpCodeServices.cs (100%)
+ create mode 100644 src/asmd/encoding/RexEncoder.cs
+ rename src/asmd/{src/encoding/prefixes => encoding/literals}/PrefixKind.cs (100%)
+ rename src/asmd/{src/encoding => encoding/literals}/SegOverrideCode.cs (100%)
+ rename src/asmd/{src/encoding/prefixes => encoding}/modrm/ModRm.cs (100%)
+ rename src/asmd/{src/encoding/prefixes => encoding}/modrm/ModRmEncoding.cs (100%)
+ rename src/asmd/{src/encoding/ops/encoding.cs => encoding/ops/bytes.cs} (78%)
+ rename src/asmd/{src => }/encoding/ops/encode.cs (94%)
+ rename src/asmd/{src => }/encoding/ops/format.cs (83%)
+ create mode 100644 src/asmd/encoding/ops/isrex.cs
+ rename src/asmd/{src => }/encoding/ops/size.cs (82%)
+ rename src/asmd/{src/encoding/prefixes => encoding}/rex/RexFieldIndex.cs (100%)
+ rename src/asmd/{src/encoding/prefixes => encoding}/rex/RexFieldWidth.cs (100%)
+ rename src/asmd/{src/encoding/prefixes/rex/RexPrefix.cs => encoding/rex/RexPrefixBits.cs} (84%)
+ rename src/asmd/{src/encoding/prefixes => encoding}/rex/RexPrefixCode.cs (100%)
+ rename src/asmd/{src => }/patterns/AsmPatterns.cs (100%)
+ rename src/asmd/{src => }/patterns/definitions/cmp/cmp.cs (100%)
+ rename src/asmd/{src => }/patterns/definitions/cmp/cmp32.cs (100%)
+ rename src/asmd/{src => }/patterns/definitions/cmp/cmp64f.cs (100%)
+ rename src/asmd/{src => }/patterns/definitions/cmp/cmp64f_imm8.cs (100%)
+ rename src/asmd/{src => }/patterns/definitions/cmp/cmp64u.cs (100%)
+ rename src/asmd/{src => }/patterns/definitions/cmp/cmp64u_imm.cs (100%)
+ rename src/asmd/{src => }/patterns/definitions/cmp/cmp8i.cs (100%)
+ rename src/asmd/{src => }/patterns/definitions/cmp/cmp8i_imm.cs (100%)
+ rename src/asmd/{src => }/patterns/definitions/cmp/cmp8u.cs (100%)
+ rename src/asmd/{src => }/patterns/definitions/cmp/cmp8u_imm.cs (100%)
+ rename src/asmd/src/{tokens/services => }/OpCodePartitioner.cs (100%)
+ delete mode 100644 src/asmd/src/encoding/Encoding.cs
+ delete mode 100644 src/asmd/src/patterns/definitions/jcc.cs
+ create mode 100644 src/bitfields/src/services/BitFieldFormatter.cs
+ rename src/bitfields/src/{models/structure => services}/BitFieldFormatters.cs (100%)
+ delete mode 100644 src/datasets/Part.cs
+ delete mode 100644 src/datasets/add.sh
+ delete mode 100644 src/datasets/build-log.sh
+ delete mode 100644 src/datasets/build.sh
+ delete mode 100644 src/datasets/clean.sh
+ delete mode 100644 src/datasets/directory.build.props
+ delete mode 100644 src/datasets/id.sh
+ delete mode 100644 src/datasets/remove.sh
+ delete mode 100644 src/datasets/run.sh
+ delete mode 100644 src/datasets/src/App.cs
+ delete mode 100644 src/datasets/z0.datasets.csproj
+ rename src/{asmd/src/expressions => domain/src/parsers}/CpuidExpression.cs (100%)
+ rename src/{asmd/src/expressions => domain/src/parsers}/IEncodedCommand.cs (100%)
+ rename src/{asmd => domain}/src/registers/RegisterKind.cs (100%)
+ rename src/{asmd => domain}/src/registers/aspects/ArgSequence.cs (100%)
+ rename src/{asmd => domain}/src/registers/aspects/RegisterAspect.cs (100%)
+ rename src/{asmd => domain}/src/registers/aspects/RegisterAspectKind.cs (100%)
+ rename src/{asmd => domain}/src/registers/aspects/RegisterAspects.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/RegisterBits.cs (77%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/Gp16Kind.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/Gp32Kind.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/Gp64Kind.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/Gp8Kind.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/MaskRegKind.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/RegisterBitFields.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/RegisterClass.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/RegisterCode.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/RegisterWidth.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/SegRegKind.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/XmmRegKind.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/YmmRegKind.cs (100%)
+ rename src/{asmd => domain}/src/registers/bitfield/literals/ZmmRegKind.cs (100%)
+ rename src/{asmd => domain}/src/registers/flags/EFlagBits.cs (100%)
+ rename src/{asmd => domain}/src/registers/flags/FlagBit.cs (100%)
+ rename src/{asmd => domain}/src/registers/flags/FlagRegBits.cs (100%)
+ rename src/{asmd => domain}/src/registers/flags/FlagRegImpact.cs (100%)
+ rename src/{asmd => domain}/src/registers/flags/FlagRegKind.cs (100%)
+ rename src/{asmd => domain}/src/registers/flags/RFlagBits.cs (100%)
+ rename src/{asmd => domain}/src/registers/models/SegReg.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/AsmCommandGroup.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/EncodedOpCode.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/InstructionToken.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/InstructionTokenDataset.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/OpCodeDataset.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/OpCodeDescription.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/OpCodeIdentifier.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/OpCodeOperand.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/OpCodeRecord.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/OpCodeToken.cs (100%)
+ rename src/{asmd => domain}/src/tokens/models/OpCodeTokens.cs (97%)

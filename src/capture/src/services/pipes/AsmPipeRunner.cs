@@ -21,7 +21,7 @@ namespace Z0.Asm
         
         public FilePath LogPath {get;}
 
-        public TAppPaths AppPaths 
+        public IAppPaths AppPaths 
             => Z0.AppPaths.Default;        
 
         readonly InstructionHandlers Handlers;
@@ -117,11 +117,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        TPartCaptureArchive CaptureArchive(PartId part)
+        IPartCaptureArchive CaptureArchive(PartId part)
             => Capture.Services.CaptureArchive();
 
         [MethodImpl(Inline)]
-        TPartCaptureArchive CaptureArchive(FolderPath root)
+        IPartCaptureArchive CaptureArchive(FolderPath root)
             => Capture.Services.CaptureArchive(root, null, null);
 
         [MethodImpl(Inline)]

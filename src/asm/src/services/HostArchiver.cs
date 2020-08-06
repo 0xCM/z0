@@ -24,7 +24,7 @@ namespace Z0.Asm
 
         readonly ICilFunctionFormatter CilFormatter;
 
-        readonly THostCaptureArchive HostArchive;
+        readonly IHostCaptureArchive HostArchive;
 
         [MethodImpl(Inline)]
         internal HostArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath root)

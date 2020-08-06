@@ -30,7 +30,7 @@ namespace Z0.Asm
 
         public static void capture(MemoryAddress src, byte[] buffer)
         {
-            var extract = Extracts.extract(src, buffer);
+            var extract = Extractors.extract(src, buffer);
         }
 
         public static void parse(LocatedCode src, byte[] buffer)
@@ -44,7 +44,7 @@ namespace Z0.Asm
         }
 
         public Option<CapturedMemory> Capture(MemoryAddress src)        
-            => from raw in Option.some(Extracts.extract(src, ParseBuffer.Clear()))
+            => from raw in Option.some(Extractors.extract(src, ParseBuffer.Clear()))
                 from parsed in Parse(raw)
                 where parsed.IsNonEmpty
                 from instructions in Decoder.Decode(parsed)
@@ -56,7 +56,7 @@ namespace Z0.Asm
             => Extractor.Extract(src);
 
         public Option<LocatedCode> Parse(LocatedCode src)
-            => Extracts.parse(src, ParseBuffer.Clear());
+            => Extractors.parse(src, ParseBuffer.Clear());
 
         [MethodImpl(Inline)]
         public Option<AsmInstructionList> Decode(LocatedCode src)

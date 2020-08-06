@@ -20,12 +20,12 @@ namespace Z0
         
         public WfEventId Id {get;}
 
-        public readonly EncodedIndex Index;
+        public readonly EncodedParts Index;
 
         public readonly PartInstructions[] PartInstructions;        
         
         [MethodImpl(Inline)]        
-        public DecodedMachine(EncodedIndex index, PartInstructions[] inxs, CorrelationToken? ct = null)
+        public DecodedMachine(EncodedParts index, PartInstructions[] inxs, CorrelationToken? ct = null)
         {
             Id = WfEventId.define(nameof(DecodedHost), ct);
             Index = index;

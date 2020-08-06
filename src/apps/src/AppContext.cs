@@ -18,11 +18,11 @@ namespace Z0
 
         public IAppMsgQueue MessageQueue {get;}
 
-        public TAppPaths AppPaths {get;}
+        public IAppPaths AppPaths {get;}
 
         public event Action<IAppMsg> Next;
 
-        public static IAppContext Create(TAppPaths paths, IResolvedApi api, IPolyrand random)
+        public static IAppContext Create(IAppPaths paths, IResolvedApi api, IPolyrand random)
             => new AppContext(paths, api, random, AppSettings.Load(paths.AppConfigPath), AppMsgExchange.Create());
 
         public static IAppContext Create(IResolvedApi composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
@@ -41,7 +41,7 @@ namespace Z0
             Api = ApiSet.create(composition);
         }
 
-        internal AppContext(TAppPaths paths, IResolvedApi composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+        internal AppContext(IAppPaths paths, IResolvedApi composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
         {
             AppPaths = paths;
             Next = msg => {};

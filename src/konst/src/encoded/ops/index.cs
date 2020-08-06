@@ -13,8 +13,8 @@ namespace Z0
     partial struct Encoded
     {
         [Op]
-        public static EncodedIndexBuilder indexer()
-            => new EncodedIndexBuilder(
+        public static EncodedPartBuilder builder()
+            => new EncodedPartBuilder(
                 CodeAddress : z.dict<MemoryAddress,MemberCode>(),
                 UriAddress : z.dict<MemoryAddress,OpUri>(),
                 CodeUri: z.dict<OpUri,MemberCode>());
@@ -24,11 +24,11 @@ namespace Z0
             => new IdentifiedCodeIndex(host,code);
 
         [MethodImpl(Inline), Op]
-        public static PartCodeIndex index(PartId part, MemberCodeIndex[] src)
-            => new PartCodeIndex(part,src);
+        public static PartCode index(PartId part, EncodedMembers[] src)
+            => new PartCode(part,src);
 
         [MethodImpl(Inline), Op]
-        public static MemberCodeIndex index(ApiHostUri id, MemberCode[] code)
-            => new MemberCodeIndex(id,code);     
+        public static EncodedMembers index(ApiHostUri id, MemberCode[] code)
+            => new EncodedMembers(id,code);     
     }
 }

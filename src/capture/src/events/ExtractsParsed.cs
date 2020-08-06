@@ -18,10 +18,10 @@ namespace Z0.Asm
 
         public readonly ApiHostUri Host;
         
-        public readonly ParsedExtract[] Members;
+        public readonly ParsedExtraction[] Members;
 
         [MethodImpl(Inline)]
-        public ExtractsParsed(ApiHostUri host, ParsedExtract[] members)
+        public ExtractsParsed(ApiHostUri host, ParsedExtraction[] members)
         {
             Host = host;
             Members = members;
@@ -34,6 +34,6 @@ namespace Z0.Asm
             => Empty;
 
         public static ExtractsParsed Empty 
-            => new ExtractsParsed(ApiHostUri.Empty, Array.Empty<ParsedExtract>());
+            => new ExtractsParsed(ApiHostUri.Empty, Array.Empty<ParsedExtraction>());
     }    
 }

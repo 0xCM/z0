@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Encoded
     {
-       public static int include(in EncodedIndexBuilder builder, params MemberCode[] src)
+        public static int include(in EncodedPartBuilder builder, params MemberCode[] src)
         {
             var count = 0;
             for(var i=0; i<src.Length; i++)

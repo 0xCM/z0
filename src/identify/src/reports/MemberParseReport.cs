@@ -21,7 +21,7 @@ namespace Z0
         public static MemberParseReport Create(ApiHostUri host, params R[] records)
             => new MemberParseReport(host, records);
 
-        public static R Record(in ParsedExtract extract, int seq)
+        public static R Record(in ParsedExtraction extract, int seq)
             => new R
                 (
                     Seq : seq,
@@ -34,7 +34,7 @@ namespace Z0
                     Data : extract.Encoded
                 );
 
-        public static MemberParseReport Create(ApiHostUri host, ParsedExtract[] extracts)
+        public static MemberParseReport Create(ApiHostUri host, ParsedExtraction[] extracts)
         {
             var count = extracts.Length;
             var buffer = alloc<R>(count);            

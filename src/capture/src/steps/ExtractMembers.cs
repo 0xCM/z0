@@ -78,6 +78,6 @@ namespace Z0.Asm
         }
 
         static MemberExtractor Extractor
-            => MemberExtraction.service(Extracts.DefaultBufferLength);    
+            => MemberExtraction.service(Extractors.DefaultBufferLength);    
     }
 }

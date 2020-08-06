@@ -48,7 +48,7 @@ namespace Z0
 
         PartFiles Files {get;}
 
-        EncodedIndexBuilder IndexBuilder {get;}            
+        EncodedPartBuilder IndexBuilder {get;}            
 
         readonly FolderPath TargetDir;
         
@@ -61,7 +61,7 @@ namespace Z0
             Asm = ContextFactory.asm(wf.ContextRoot);
             Broker = new WfBroker(Ct);
             Files = PartFiles.create(Asm);            
-            IndexBuilder = Encoded.indexer();                  
+            IndexBuilder = Encoded.builder();                  
         }
 
         public void OnEvent(LoadedParseReport e)
@@ -107,7 +107,7 @@ namespace Z0
             }
         }
 
-        void DecodeParts(EncodedIndex src)
+        void DecodeParts(EncodedParts src)
         {
             var dst = Root.list<PartInstructions>();
             var parts = src.Parts;
@@ -122,7 +122,7 @@ namespace Z0
             Broker.Raise(new DecodedMachine(src, dst.Array()));
         }
 
-        PartInstructions DecodePart(PartCodeIndex pcs)
+        PartInstructions DecodePart(PartCode pcs)
         {
             var dst = list<HostInstructions>();
             var hcSets = pcs.Data;
@@ -139,7 +139,7 @@ namespace Z0
             return inxs;                        
         }
 
-        HostInstructions Decode(MemberCodeIndex hcs)
+        HostInstructions Decode(EncodedMembers hcs)
         {
             var inxs = Root.list<MemberInstructions>();    
             
@@ -176,7 +176,7 @@ namespace Z0
             if(src.Address.IsEmpty)
                 Wf.Raise(new Unaddressed(src.Uri, src.Data));
             else
-                IndexBuilder.Include(MemberCode.Define(src.Uri, src.Data));
+                IndexBuilder.Include(MemberCode.define(src.Uri, src.Data));
         }
 
         void ParseReport(FilePath src)

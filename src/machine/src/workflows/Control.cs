@@ -20,7 +20,7 @@ namespace Z0
     {        
         readonly IAppContext Context;
 
-        readonly TAppPaths Paths;
+        readonly IAppPaths Paths;
 
         readonly WfContext Wf;
 

@@ -14,7 +14,7 @@ namespace Z0.Asm
 
         IMemberExtractor Extractor {get;}
 
-        IExtractParser Parser {get;}
+        IExtractionParser Parser {get;}
 
         IAsmFunctionDecoder Decoder {get;}
 
@@ -24,7 +24,7 @@ namespace Z0.Asm
 
         ICaptureBroker CaptureBroker {get;}
 
-        TPartCaptureArchive Archive {get;}
+        IPartCaptureArchive Archive {get;}
 
         IAppMsgSink MsgSink {get;}
 

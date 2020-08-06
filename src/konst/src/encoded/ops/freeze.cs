@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Encoded
     {
-        public static EncodedIndex freeze(in EncodedIndexBuilder builder)
+        public static EncodedParts freeze(in EncodedPartBuilder builder)
         {
             var memtable = KeyValuePairs.Create(builder.CodeAddress);
             var memuri = KeyValuePairs.Create(builder.UriAddress);  
@@ -21,8 +21,7 @@ namespace Z0
                                          .Select(x => (x.Key, x.Select(y => y.x).ToArray()))
                                          .ToDictionary();
             var parts = hc.Keys.Select(x => x.Owner).Distinct().ToArray();
-
-            return new EncodedIndex(parts, memtable, memuri, hc); 
+            return new EncodedParts(parts, memtable, memuri, hc); 
         }
     }
 }

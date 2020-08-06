@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines factory methods that produce context-free services that require no *unsupplied* state to operate 
     /// </summary>
-    public interface TAsmCore : TIdentities, TArchives, TDynops
+    public interface TAsmCore : TIdentities, IArchiveServices, TDynops
     {         
         /// <summary>
         /// Writer factory accessor

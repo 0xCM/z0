@@ -36,7 +36,7 @@ namespace Z0.Asm
         public ref readonly BufferToken this[BufferSeqId index]
             => ref Buffers[index];
 
-        TPartCaptureArchive CodeArchive 
+        IPartCaptureArchive CodeArchive 
             => Me.CaptureArchive(Part.ExecutingPart);
 
         protected IFileStreamWriter HexWriter([Caller] string caller = null)

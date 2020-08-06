@@ -19,12 +19,12 @@ namespace Z0.Asm
 
         readonly ApiHostUri Host;
 
-        readonly ParsedExtract[] Source;
+        readonly ParsedExtraction[] Source;
 
         readonly FilePath Target;
         
         [MethodImpl(Inline)]
-        internal EmitParsedReport(WfState wf, ApiHostUri host, ParsedExtract[] src, FilePath dst, CorrelationToken ct)
+        internal EmitParsedReport(WfState wf, ApiHostUri host, ParsedExtraction[] src, FilePath dst, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

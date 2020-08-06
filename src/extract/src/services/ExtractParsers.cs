@@ -17,12 +17,12 @@ namespace Z0
             => new BytePatternParser<EncodingPatternKind>(EncodingPatterns.Default, buffer);
 
         [MethodImpl(Inline), Op]
-        public static IExtractParser member(byte[] buffer)
-            => new MemberExtractParser(buffer);
+        public static IExtractionParser member(byte[] buffer)
+            => new PatternExtractParser(buffer);
 
         [MethodImpl(Inline), Op]
-        public static IExtractParser member(ByteSize bufferlen)
-            => new MemberExtractParser(sys.alloc<byte>(bufferlen));  
+        public static IExtractionParser member(ByteSize bufferlen)
+            => new PatternExtractParser(sys.alloc<byte>(bufferlen));  
 
         [MethodImpl(Inline), Op]
         public static ParseResult<BinaryCode,LocatedCode> parse(in LocatedCode src, in BinaryCode buffer)

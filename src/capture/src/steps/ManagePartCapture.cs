@@ -62,7 +62,7 @@ namespace Z0.Asm
             CaptureParts(Archives.Services.CaptureArchive(Config.Target.ArchiveRoot));
         }
 
-        void CaptureParts(TPartCaptureArchive dst)
+        void CaptureParts(IPartCaptureArchive dst)
         {
             var count = Catalogs.Length;
             for(var i=0; i<count; i++)
@@ -98,7 +98,7 @@ namespace Z0.Asm
            }
         }
                 
-        void CapturePart(IPartCatalog src, TPartCaptureArchive dst)
+        void CapturePart(IPartCatalog src, IPartCaptureArchive dst)
         {
             if(src.IsNonEmpty)
             {
@@ -108,7 +108,7 @@ namespace Z0.Asm
             }
         }
 
-        void CaptureHosts(IPartCatalog src, TPartCaptureArchive dst)
+        void CaptureHosts(IPartCatalog src, IPartCaptureArchive dst)
         {
             var step = CaptureHostApi.create(State, Ct);   
             var hosts = span(src.OperationHosts);
@@ -120,7 +120,7 @@ namespace Z0.Asm
             } 
         }
 
-        void CaptureHost(CaptureHostApi step, IApiHost host, TPartCaptureArchive dst)
+        void CaptureHost(CaptureHostApi step, IApiHost host, IPartCaptureArchive dst)
         {                
             Context.Raise(new CapturingHost(host.Uri));
             step.Execute(host, dst);

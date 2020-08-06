@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         public IMemberExtractor Extractor {get;}
 
-        public IExtractParser Parser {get;}
+        public IExtractionParser Parser {get;}
 
         public IAsmFunctionDecoder Decoder {get;}
 
@@ -30,18 +30,18 @@ namespace Z0.Asm
 
         public ICaptureBroker CaptureBroker {get;}
 
-        public TPartCaptureArchive Archive {get;}
+        public IPartCaptureArchive Archive {get;}
 
         public IAppMsgSink MsgSink {get;}
 
         public CaptureContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
-            ICaptureBroker broker, TPartCaptureArchive archive, CorrelationToken ct)
+            ICaptureBroker broker, IPartCaptureArchive archive, CorrelationToken ct)
         {
             Asm = context;
             Ct = ct;
             ApiSet = context.ContextRoot;
-            Extractor = Capture.Services.HostExtractor(Extracts.DefaultBufferLength);
-            Parser = Extracts.Services.ExtractParser(Extracts.DefaultBufferLength);
+            Extractor = Capture.Services.HostExtractor(Extractors.DefaultBufferLength);
+            Parser = Extractors.Services.ExtractParser(Extractors.DefaultBufferLength);
             Decoder = decoder;
             Formatter = formatter;
             WriterFactory = wf;

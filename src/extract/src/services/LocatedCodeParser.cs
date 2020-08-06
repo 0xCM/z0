@@ -15,11 +15,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public LocatedCodeParser(byte[] buffer)
-        {
-            Buffer = buffer;
-        }
+            => Buffer = buffer;
 
         public Option<LocatedCode> Parse(LocatedCode src)
-            => Extracts.parse(src, Buffer);
+            => Extractors.parse(src, Buffer);
     }
 }

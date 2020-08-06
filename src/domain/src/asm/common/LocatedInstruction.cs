@@ -77,7 +77,7 @@ namespace Z0.Asm
                 var inxs = src[i];
                 var data = z.span(code.Encoded.Data);
                 var slice = data.Slice(offseq.Offset, inxs.ByteLength).ToArray();
-                var recoded = MemberCode.Define(code.OpUri, inxs.IP, slice);  
+                var recoded = MemberCode.define(code.OpUri, inxs.IP, slice);  
                 dst[i] = One(@base, offseq, inxs, recoded);
                 offseq = offseq.AccrueOffset(inxs.ByteLength);
             }

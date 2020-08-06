@@ -15,7 +15,7 @@ namespace Z0
     
     public readonly struct PartFiles
     {
-        readonly TAppPaths AppPaths;
+        readonly IAppPaths AppPaths;
 
         [MethodImpl(Inline)]
         internal PartFiles(IAsmContext context)
@@ -86,11 +86,11 @@ namespace Z0
             return files;
         }
 
-        static TArchives ArchiveServices 
+        static IArchiveServices ArchiveServices 
             => Archives.Services;
 
         [MethodImpl(Inline)]
-        static TPartCaptureArchive CaptureArchive(FolderPath root)
+        static IPartCaptureArchive CaptureArchive(FolderPath root)
             => ArchiveServices.CaptureArchive(root, null, null);
     }
 }

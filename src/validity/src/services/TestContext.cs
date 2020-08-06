@@ -156,7 +156,7 @@ namespace Z0
         protected TCheckEquatable ClaimEquatable 
             => CheckEquatable.Checker;
 
-        protected TAppPaths AppPaths 
+        protected IAppPaths AppPaths 
             => Context.AppPaths;
 
         protected PartId TestedPart

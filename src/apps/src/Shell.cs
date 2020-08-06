@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The default application path collection
         /// </summary>
-        protected static TAppPaths AppPaths 
+        protected static IAppPaths AppPaths 
             => Z0.AppPaths.Default;
 
         /// <summary>

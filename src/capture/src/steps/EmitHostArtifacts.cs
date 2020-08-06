@@ -11,13 +11,6 @@ namespace Z0.Asm
     using static Flow;
     using static EmitHostArtifactsStep;
 
-    public readonly struct EmitHostArtifactsStep
-    {
-        public const string WorkerName = nameof(EmitHostArtifactsStep);
-
-        public const WfStepId StepId = WfStepId.EmitHostArtifacts;
-    }
-
     [Step]
     public ref struct EmitHostArtifacts
     {
@@ -29,11 +22,11 @@ namespace Z0.Asm
 
         readonly ApiHostUri Source;
 
-        readonly THostCaptureArchive Target;       
+        readonly IHostCaptureArchive Target;       
 
-        readonly IExtractParser Parser;
+        readonly IExtractionParser Parser;
 
-        public ParsedExtract[] Parsed;
+        public ParsedExtraction[] Parsed;
 
         readonly FilePath ExtractPath;
 
@@ -43,7 +36,7 @@ namespace Z0.Asm
         
         readonly FilePath AsmPath;
 
-        public EmitHostArtifacts(WfState wf, ApiHostUri src, ExtractedCode[] extracts, TPartCaptureArchive dst, CorrelationToken ct)    
+        public EmitHostArtifacts(WfState wf, ApiHostUri src, ExtractedCode[] extracts, IPartCaptureArchive dst, CorrelationToken ct)    
         {
             Wf = wf;
             Ct = ct;
@@ -54,8 +47,8 @@ namespace Z0.Asm
             ParsedPath = Target.ParsedPath;
             HexPath = Target.HexPath;
             AsmPath = Target.AsmPath;
-            Parsed = new ParsedExtract[0]{};
-            Parser = Extracts.Services.ExtractParser(Extracts.DefaultBufferLength);
+            Parsed = new ParsedExtraction[0]{};
+            Parser = Extractors.Services.ExtractParser(Extractors.DefaultBufferLength);
             Wf.Created(WorkerName, Ct);            
         }
 
