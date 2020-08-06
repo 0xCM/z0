@@ -35,14 +35,13 @@ namespace Z0
         public Reveal(IAppContext root)
         {
             Root = root;
-            Asm = ContextFactory.asm(root);
+            Asm = WfBuilder.asm(root);
             Services = CaptureServices.create(Asm);
             var format = AsmFormatSpec.DefaultStreamFormat;
             Formatter = Services.Formatter(format);
             Decoder = Services.FunctionDecoder(format);
             Buffer = sys.alloc<byte>(Pow2.T16);
         }
-
         
         public ReadOnlySpan<AsmFunctionCode> FunctionCode(FolderPath root)
         {

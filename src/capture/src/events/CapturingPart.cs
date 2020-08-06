@@ -12,8 +12,6 @@ namespace Z0.Asm
 
     public readonly struct CapturingPart : IWfEvent<CapturingPart>
     {            
-        const string Pattern = "";
-
         public WfEventId Id  => WfEventId.define("Placeholder");
 
         public readonly PartId Part;
@@ -25,10 +23,7 @@ namespace Z0.Asm
         public string Format() 
             => $"{Part.Format()} part capture step starting";
 
-        public CapturingPart Zero
-            => Empty;
-        
         public static CapturingPart Empty 
-            => new CapturingPart(0);
+            => default;
     }    
 }

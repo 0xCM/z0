@@ -54,7 +54,7 @@ namespace Z0
         void Run(RecaptureStep kind)
         {
             var resources = Resources.code(Assembly.LoadFrom(Wf.AppPaths.ResBytes.Name));
-            var capture = ContextFactory.wf(Wf, Ct);
+            var capture = WfBuilder.wfc(Wf, Ct);
             using var step = new Recapture(capture);
             step.CaptureResBytes();        
         }

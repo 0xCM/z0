@@ -56,23 +56,13 @@ namespace Z0
             return new Control(context, ct, args);
         }
 
-        static WfConfig PartConfig(WfContext wf, string[] args)
-        {
-            var parsed = AppArgs.parse(args).Data.Select(arg => PartIdParser.single(arg.Value));
-            var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
-            var dstpath = wf.AppPaths.AppCaptureRoot;
-            var src = new ArchiveConfig(srcpath);
-            var dst = new ArchiveConfig(dstpath);
-            return new WfConfig(args, src, dst, parsed);                    
-        }
-
         public Control(IAppContext context, CorrelationToken ct, string[] args, params ActorIdentity[] known)
         {
             Context = context;
             Args = args;
             Ct = ct;
             Paths = context.AppPaths;
-            Asm = ContextFactory.asm(context);                           
+            Asm = WfBuilder.asm(context);                           
             Config = settings(context, Ct);
             Wf = Flow.context(context, Ct, Config, Flow.termsink(ct));                        
             State = new WfState(Wf, Asm, args, Ct);
@@ -83,7 +73,6 @@ namespace Z0
         public void Run()
         {
             Wf.Running(WorkerName, Ct);
-            Run(default(RunProcessorsStep));
             Run(default(CaptureHostStep));
             Run(default(EmitDatasetsStep));
             Run(default(ProcessPartFilesStep));
@@ -99,9 +88,9 @@ namespace Z0
             if(CaptureArtifacts)
             {             
                 var cwf = capture(Asm, Wf, Context.AppPaths.AppCaptureRoot, Ct);
-                var broker = CaptureBroker.create(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
+                var broker = WfBuilder.capture(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
                 var config = configure(Wf, Args);
-                using var host = new CaptureHost(State, broker, config, Ct);
+                using var host = new CaptureClient(State, broker, config, Ct);
                 host.Run();
             }
         }
@@ -158,10 +147,8 @@ namespace Z0
             Wf.RanT(WorkerName, kind, Ct);
         }
         
-        bool CaptureArtifacts => false;
+        bool CaptureArtifacts => true;
         
         bool EmitDatasets => true;
-
-        bool RunMachine => true;
     }
 }

@@ -18,12 +18,10 @@ namespace Z0.Asm
         public WfEventId Id  => WfEventId.define("Placeholder");
 
         [MethodImpl(Inline)]
-        public static E Define(MethodInfo method)
-            => new E(method);
-
-        [MethodImpl(Inline)]
-        internal ImmInjectionFailed(MethodInfo method)
-            => Method = method;
+        public ImmInjectionFailed(MethodInfo method)
+        {
+            Method = method;
+        }
         
         public MethodInfo Method {get;}
         
@@ -31,9 +29,9 @@ namespace Z0.Asm
             => $"Imm injection failure for {Method.Name}";
         
         public AppMsgColor Flair
-            => AppMsgColor.Red;                    
+            => AppMsgColor.Red;
 
         public static ImmInjectionFailed Empty 
-            => new ImmInjectionFailed(typeof(object).GetMethod(nameof(object.GetHashCode)));           
+            => default;
     }
 }

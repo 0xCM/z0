@@ -25,7 +25,7 @@ namespace Z0.Asm
         {
             Ct = ct;
             Wf = wf;
-            Broker = CaptureBroker.create(asm.AppPaths.AppCaptureRoot + FileName.Define("workflow", FileExtensions.Csv), Ct);
+            Broker = WfBuilder.capture(asm.AppPaths.AppCaptureRoot + FileName.Define("workflow", FileExtensions.Csv), Ct);
             Context = new CaptureContext(asm, decoder, formatter, writerfactory, Broker, archive, Ct);
             Wf.Created(nameof(CaptureWorkflow), Ct);
         }

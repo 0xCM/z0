@@ -4,17 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {    
-    public sealed class ImmBroker : WfBroker, IImmBroker
-    {        
-        ImmBroker(CorrelationToken ct)
-            : base(ct)
-        {
+    using System;
+    using System.Runtime.CompilerServices;
 
-        }
-
-        public static ImmBroker create(FilePath target, CorrelationToken ct)
-            => new ImmBroker(ct);                   
-    }    
+    using static Konst;
 
     public interface IImmBroker : IWfBroker
     {

@@ -13,26 +13,27 @@ namespace Z0.Asm
     using E = AnalyzingExtractReport;
 
     public readonly struct AnalyzingExtractReport : IWfEvent<E>
-    {                    
-        const string Pattern = "";
+    {                  
+        public const string EventName = nameof(AnalyzingExtractReport);
+        
+        public WfEventId Id {get;}
 
-        public WfEventId Id => WfEventId.define(nameof(AnalyzingExtractReport));
+        public string ActorName {get;}
+
+        public FilePath ReportPath {get;}
 
         [MethodImpl(Inline)]
-        internal AnalyzingExtractReport(FilePath src)
+        public AnalyzingExtractReport(string actor, FilePath src, CorrelationToken ct)
         {
-            Path = src;
+            Id = WfEventId.define(EventName, ct);
+            ActorName = actor;
+            ReportPath = src;
         }
 
-        public FilePath Path {get;}
-
+        public object Description
+            => new {ReportPath};
+        
         public string Format() 
-            => $"Analyzing extract report {Path}";
-
-        public E Zero 
-            => Empty;
-
-        public static E Empty 
-            => new E(FilePath.Empty);
+            => text.format(PSx3, Id, ActorName, Description);
     }
 }

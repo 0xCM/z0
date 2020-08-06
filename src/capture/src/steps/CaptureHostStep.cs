@@ -8,6 +8,6 @@ namespace Z0
 
     public readonly struct CaptureHostStep
     {
-        public const string ActorName = nameof(CaptureHost);
+        public const string ActorName = nameof(CaptureClient);
     }
 }

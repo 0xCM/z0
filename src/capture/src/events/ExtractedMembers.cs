@@ -12,8 +12,6 @@ namespace Z0.Asm
 
     public readonly struct ExtractedMembers : IWfEvent<ExtractedMembers>
     {            
-        const string Pattern = "{0}: {1} {2}";
-
         public WfEventId Id {get;}
 
         public readonly ApiHostUri Host;
@@ -29,7 +27,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => text.format(Pattern, Id, MemberCount, Host.Format());
+            => text.format(PSx3, Id, MemberCount, Host.Format());
 
         public ExtractedMembers Zero
             => Empty;

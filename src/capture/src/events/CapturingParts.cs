@@ -13,8 +13,7 @@ namespace Z0
     using static Flow;
     
     public readonly struct CapturingParts : IWfEvent<CapturingParts>
-    {
-        const string Pattern = PSx2;
+    {        
 
         public WfEventId Id {get;}
 
@@ -31,6 +30,6 @@ namespace Z0
         }
         
         public string Format()
-            => text.format(Pattern, Id, Parts.Format());
+            => text.format(PSx2, Id, Parts.Format());
     }        
 }

@@ -47,7 +47,8 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 var host = src[i];
-                var methods = host.HostType.WorldMethods().Unignored().NonGeneric().Select(m => new HostedMethod(host.Uri, m));
+                var methods = host.HostType.DeclaredMethods().Unignored().NonGeneric().Select(m => new HostedMethod(host.Uri, m));
+                //var methods = host.HostType.WorldMethods().Unignored().NonGeneric().Select(m => new HostedMethod(host.Uri, m));
                 var located = methods.Select(m => m.WithLocation(Root.address(Jit(m.Method))));  
                 Array.Sort(located);
                 var members = DefineMembers(located, sink);

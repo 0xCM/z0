@@ -29,13 +29,7 @@ namespace Z0.Asm
         }
         
         public string Format()
-            => $"{Code.Length} {Host} functions saved to {Target}";
-            
-        public UriCodeSaved Zero 
-            => Empty;            
-
-        public static UriCodeSaved Empty 
-            => new UriCodeSaved(ApiHostUri.Empty, Array.Empty<MemberCode>(), FilePath.Empty);
+            => $"{Code.Length} {Host} functions saved to {Target}";            
     }    
 
 }

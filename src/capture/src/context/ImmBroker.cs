@@ -9,13 +9,13 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public interface ICaptureWorkflow : IServiceAllocation
-    {
-        ICaptureBroker Broker {get;}
+    public sealed class ImmBroker : WfBroker, IImmBroker
+    {        
+        [MethodImpl(Inline)]
+        internal ImmBroker(CorrelationToken ct)
+            : base(ct)
+        {
 
-        ICaptureContext Context {get;}
-
-        MatchAddresses MatchAddresses 
-            => new MatchAddresses(this);
-    }
+        }
+    }    
 }

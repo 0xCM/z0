@@ -18,7 +18,7 @@ namespace Z0
         public CorrelationToken Ct {get;}         
                         
         public App()
-            : base(ContextFactory.app())
+            : base(WfBuilder.app())
         {
             Ct = CorrelationToken.define((byte)Part);   
             Raise(Events.status(ActorName, "Application created"));                     
@@ -29,8 +29,10 @@ namespace Z0
             Raise(Events.status(ActorName, text.format(PSx2,"Running shell", args.FormatList())));            
             try
             {
-                using var control = new Control(Context, Ct, args);
+                using var control = CaptureController.create(Context, Ct, args);
                 control.Run();
+                // using var control = new CaptureControl(Context, Ct, args);
+                // control.Run();
             }
             catch(Exception e)
             {

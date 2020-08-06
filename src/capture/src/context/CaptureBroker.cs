@@ -4,15 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {    
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    
     public sealed class CaptureBroker : WfBroker, ICaptureBroker
     {   
-        CaptureBroker(CorrelationToken ct)
+        [MethodImpl(Inline)]
+        internal CaptureBroker(CorrelationToken ct)
             : base(ct)
         {
 
         }
-
-        public static ICaptureBroker create(FilePath target, CorrelationToken ct)
-            => new CaptureBroker(ct);           
     }
 }

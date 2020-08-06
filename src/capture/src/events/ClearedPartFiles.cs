@@ -16,8 +16,6 @@ namespace Z0.Asm
     {            
         const string ItemPattern = "{0} file {1} Deleted";
         
-        const string Pattern = "{0}{1}{2}";
-
         public WfEventId Id {get;}
         
         public readonly KeyedValues<PartId,FilePath[]> Files;
@@ -54,6 +52,6 @@ namespace Z0.Asm
         }
         
         public string Format()                        
-            => text.format(Pattern, nameof(ClearedPartFiles), Eol, text.join(Eol, Descriptions));
+            => text.format(PSx3, nameof(ClearedPartFiles), Eol, text.join(Eol, Descriptions));
     }    
 }

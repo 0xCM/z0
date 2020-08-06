@@ -71,17 +71,9 @@ namespace Z0.Asm
             }
         }
 
-        // void CaptureParts(WfConfig config)
-        // {
-        //     Clear(config);  
-
-        //     var dst = Archives.Services.CaptureArchive(config.Target.ArchiveRoot);    
-        //     CaptureParts(dst);
-        // }
-
         public void Consolidate()
         {
-            Wf.Raise(new RunningConsolidated(WorkerName, Catalogs.Length, Ct));
+            Wf.Raise(new RunningConsolidated(WorkerName, (uint)Catalogs.Length, Ct));
             
             Clear(Config);
 

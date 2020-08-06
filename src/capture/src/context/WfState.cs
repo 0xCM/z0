@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static Flow;
-
+    
     public readonly struct WfState
     {
         public WfContext Wf {get;}
@@ -35,7 +35,6 @@ namespace Z0.Asm
 
         public ICaptureBroker Broker {get;}
 
-
         [MethodImpl(Inline)]
         public WfState(WfContext wf, IAsmContext asm, string[] args, CorrelationToken ct)        
         {
@@ -54,7 +53,7 @@ namespace Z0.Asm
             Formatter = Services.Formatter(FormatConfig);            
             FunctionDecoder = Services.FunctionDecoder(FormatConfig); 
             CWf = new CaptureWorkflow(Asm, Wf, FunctionDecoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.Target), Ct);    
-            Broker = CaptureBroker.create(FilePath.Empty, ct);
+            Broker = WfBuilder.capture(FilePath.Empty, ct);
         }
 
         public ICaptureContext CaptureContext 

@@ -2,20 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Flow;
 
-    public interface ICaptureWorkflow : IServiceAllocation
+    [ApiHost]
+    public readonly partial struct WfBuilder
     {
-        ICaptureBroker Broker {get;}
 
-        ICaptureContext Context {get;}
-
-        MatchAddresses MatchAddresses 
-            => new MatchAddresses(this);
     }
 }

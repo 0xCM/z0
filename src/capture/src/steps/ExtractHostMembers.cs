@@ -48,8 +48,8 @@ namespace Z0.Asm
             Wf.Running(WorkerName, Ct);
             try
             {
-                using var xStep = new ExtractMembers(Wf, Ct);
-                Extractions = xStep.Extract(Source);
+                using var step = new ExtractMembers(Wf, Ct);
+                Extractions = step.Extract(Source);
             }
             catch(Exception e)
             {

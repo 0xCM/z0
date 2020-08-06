@@ -11,17 +11,12 @@ namespace Z0
     
     using static Konst;
     using static Flow;
-    using static ControllerStep;
+    using static CaptureController;
 
     using static z;
-
-    public readonly struct ControllerStep
-    {
-        public const string ActorName = nameof(Control);        
-    }
     
-    readonly ref struct Control
-    {
+    public readonly ref struct CaptureControl
+    {        
         readonly IAppContext ContextRoot;
 
         readonly IAsmContext Asm;
@@ -40,14 +35,14 @@ namespace Z0
 
         public WfState Wf {get;}
 
-        public Control(IAppContext context, CorrelationToken ct, string[] args)
+        public CaptureControl(IAppContext context, CorrelationToken ct, string[] args)
         {
             ContextRoot = context;
             Args = args;
             Ct = ct;
             TermSink = termsink(Ct);
             Paths = context.AppPaths;
-            Asm = ContextFactory.asm(context);                           
+            Asm = WfBuilder.asm(context);                           
             Config = settings(context, Ct);
             WfContext = Flow.context(context, Ct, Config, TermSink);                        
             Wf = new WfState(WfContext, Asm, args, Ct);
@@ -60,7 +55,7 @@ namespace Z0
 
             try
             {
-                using var host = new CaptureHost(Wf, Wf.Broker, Wf.Config, Ct);
+                using var host = new CaptureClient(Wf, Wf.Broker, Wf.Config, Ct);
                 host.Run();
             }
             catch(Exception e)

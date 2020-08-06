@@ -28,7 +28,7 @@ namespace Z0.Asm
 
         public readonly string ReportName;
 
-        public AppMsg Description {get;}
+        public object Description {get;}
 
         public ExtractReport Body         
             => Report;
@@ -43,7 +43,7 @@ namespace Z0.Asm
             ReportName = report.ReportName;
             Flair = flair;
             Id = wfid(EventName, ct);
-            Description = AppMsg.Colorize(new {RecordCount, ReportName}, flair);
+            Description = new {RecordCount, ReportName};
         }
         
         public string Format()

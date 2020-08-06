@@ -30,10 +30,7 @@ namespace Z0.Asm
         public string Format()
             => $"{Members.Length} {Host} members parsed";
         
-        public ExtractsParsed Zero 
-            => Empty;
-
         public static ExtractsParsed Empty 
-            => new ExtractsParsed(ApiHostUri.Empty, Array.Empty<ParsedExtraction>());
+            => default;
     }    
 }

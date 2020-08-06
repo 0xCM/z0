@@ -63,6 +63,6 @@ namespace Z0.Asm
             => AppMsgColor.DarkMagenta;
 
         public static EmittedEmbeddedImm Empty 
-            => new EmittedEmbeddedImm(ApiHostUri.Empty, false, ImmRefinementKind.Unrefined, typeof(void), FilePath.Empty);
+            => default;
     }            
 }

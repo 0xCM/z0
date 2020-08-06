@@ -10,28 +10,30 @@ namespace Z0.Asm
     using static Konst;
     using static Flow;
 
-    public readonly struct ParseReportEmitted : IWfEvent<ParseReportEmitted>
-    {
-        const string Pattern = PSx6;
-        
+    public readonly struct EmittedParseReport : IWfEvent<EmittedParseReport>
+    {        
+        public const string EventName = nameof(EmittedParseReport);
+
         public WfEventId Id {get;}
 
         public string ActorName {get;}
 
-        public readonly MemberParseReport Source;
+        public readonly MemberParseReport Report;
 
         public readonly FilePath Target;        
         
         [MethodImpl(Inline)]
-        public ParseReportEmitted(string worker, MemberParseReport src, FilePath dst, CorrelationToken ct)
+        public EmittedParseReport(string actor, MemberParseReport report, FilePath dst, CorrelationToken ct)
         {
-            Id = wfid(nameof(ParseReportEmitted), ct);        
-            ActorName = worker;
-            Source = src;
+            Id = wfid(EventName, ct);        
+            ActorName = actor;
+            Report = report;
             Target = dst;        
         }
 
+        public object Description
+            => new {Report.RecordCount, Report.ApiHost, Report.ReportName, Target};
         public string Format()
-            => text.format(PSx6, Id, ActorName, Source.RecordCount, Source.ApiHost, Source.ReportName, Target);
+            => text.format(PSx3, Id, ActorName, Description);
     }        
 }

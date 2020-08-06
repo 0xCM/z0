@@ -12,8 +12,6 @@ namespace Z0.Asm
 
     public readonly struct AnalyzingExtracts : IWfEvent<AnalyzingExtracts>
     {        
-        const string Pattern = PSx3;
-
         public WfEventId Id {get;}
 
         public string ActorName {get;}
@@ -32,6 +30,6 @@ namespace Z0.Asm
         }
 
         public string Format() 
-            => text.format(Pattern, Id, ActorName, ExtractCount);
+            => text.format(PSx3, Id, ActorName, ExtractCount);
     }
 }

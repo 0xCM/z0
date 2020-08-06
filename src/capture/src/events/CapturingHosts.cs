@@ -14,6 +14,8 @@ namespace Z0.Asm
     {              
         const string Pattern = IdMarker + "Capturing data for {1} api hosts";
         
+        public const string EventName = nameof(CapturingHosts);
+        
         public WfEventId Id {get;}
 
         public readonly IApiHost[] Hosts;

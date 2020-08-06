@@ -30,7 +30,7 @@ namespace Z0.Asm
         void OnEvent(ExtractsParsed e) 
             => Sink.Deposit(e);
 
-        void OnEvent(ParseReportEmitted e) 
+        void OnEvent(EmittedParseReport e) 
             => Sink.Deposit(e);
 
         void OnEvent<T>(WfError<T> e) 

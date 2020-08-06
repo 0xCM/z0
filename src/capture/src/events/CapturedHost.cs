@@ -12,17 +12,24 @@ namespace Z0.Asm
 
     public readonly struct CapturedHost : IWfEvent<CapturedHost>
     {            
-        const string Pattern = "";
+        public const string EventName = nameof(CapturedHost);
+        
+        public WfEventId Id {get;}
 
-        public WfEventId Id  => WfEventId.define("Placeholder");
-
+        public string ActorName {get;}
         public readonly ApiHostUri Host;
 
         [MethodImpl(Inline)]
-        public CapturedHost(ApiHostUri host, CorrelationToken? ct = null)
-            => Host = host;
+        public CapturedHost(ApiHostUri host, CorrelationToken? ct = null, [CallerMemberName] string actor = null)
+        {
+            Host = host;
+            Id = WfEventId.define(EventName, ct);
+            ActorName = actor;
+        }
 
+        public object Description
+            => new {Host};
         public string Format() 
-            => $"{Host.Format()} host capture step completed";
+            => text.format(PSx3, Id, ActorName, Description);
     }    
 }

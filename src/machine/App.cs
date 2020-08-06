@@ -25,7 +25,7 @@ namespace Z0
         }
         
         public App()
-            : base(ContextFactory.app())
+            : base(WfBuilder.app())
         {
         }
         

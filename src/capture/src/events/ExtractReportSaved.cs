@@ -28,7 +28,7 @@ namespace Z0.Asm
 
         public readonly string ReportName;
 
-        public AppMsg Description {get;}
+        public object Description {get;}
 
         [MethodImpl(Inline)]
         public ExtractReportSaved(string actor, ExtractReport report, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
@@ -40,7 +40,7 @@ namespace Z0.Asm
             RecordCount = (uint)report.RecordCount;
             Flair = flair;
             Id = wfid(EventName, ct);
-            Description = AppMsg.Colorize(new {RecordCount, ReportName}, flair);
+            Description = new {RecordCount, ReportName};
         }
  
         public string Format()

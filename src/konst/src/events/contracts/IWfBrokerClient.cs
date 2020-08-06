@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IWfBrokerClient
+    using System;
+
+    public interface IWfBrokerClient : IDisposable
     {
         IMultiSink Sink {get;}
 

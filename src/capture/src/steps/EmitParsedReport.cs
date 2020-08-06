@@ -11,6 +11,7 @@ namespace Z0.Asm
     using static Flow;
     using static EmitParsedReportStep;
     
+    [Step]
     public readonly ref struct EmitParsedReport
     {
         readonly WfState Wf ;        
@@ -43,7 +44,7 @@ namespace Z0.Asm
                 var report = MemberParseReport.Create(Host, Source);                    
                 var saved = report.Save(Target);
                 if(saved)
-                    Wf.Raise(new ParseReportEmitted(WorkerName, report, Target, Ct));
+                    Wf.Raise(new EmittedParseReport(WorkerName, report, Target, Ct));
                 else
                     Wf.Error(WorkerName, "Report emission failed", Ct);
             }

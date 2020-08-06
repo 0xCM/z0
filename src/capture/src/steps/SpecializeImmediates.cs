@@ -38,7 +38,7 @@ namespace Z0.Asm
         internal SpecializeImmediates(IAsmContext context, IMultiSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
         {
             Ct = ct ?? CorrelationToken.create();
-            Broker = ImmBroker.create(context.AppPaths.AppStandardOutPath, Ct);
+            Broker = WfBuilder.imm(context.AppPaths.AppStandardOutPath, Ct);
             Context = context;
             Sink = sink;
             Formatter = formatter;

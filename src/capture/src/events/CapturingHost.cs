@@ -29,6 +29,6 @@ namespace Z0.Asm
             => Empty;
         
         public static CapturingHost Empty 
-            => new CapturingHost(ApiHostUri.Empty);
+            => default;
     }    
 }

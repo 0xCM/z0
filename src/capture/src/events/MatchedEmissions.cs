@@ -37,10 +37,7 @@ namespace Z0.Asm
         public string Format()
             => $"{Count} {Host} members in memory were matched with emissions written to {TargetPath}";
         
-        public E Zero 
-            => Empty;
-
         public static E Empty 
-            => new MatchedCapturedEmissions(ApiHostUri.Empty, 0, FilePath.Empty);
+            => default;
     }    
 }

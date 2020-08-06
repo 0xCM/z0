@@ -38,6 +38,6 @@ namespace Z0.Asm
             => AppMsgColor.Cyan;
 
         public static HexCodeSaved Empty 
-            => new HexCodeSaved(ApiHostUri.Empty, Array.Empty<IdentifiedCode>(), FilePath.Empty);
+            => default;
     }    
 }

@@ -35,6 +35,6 @@ namespace Z0.Asm
             => AppMsgColor.Magenta;            
 
         public static FunctionsDecoded Empty 
-            => new FunctionsDecoded(ApiHostUri.Empty, Array.Empty<AsmFunction>());
+            => default;
     }
 }

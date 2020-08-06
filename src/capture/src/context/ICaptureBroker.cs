@@ -3,19 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{
+{    
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public interface ICaptureWorkflow : IServiceAllocation
-    {
-        ICaptureBroker Broker {get;}
+    public interface ICaptureBroker : IImmBroker, ICaptureEvents
+    {        
 
-        ICaptureContext Context {get;}
-
-        MatchAddresses MatchAddresses 
-            => new MatchAddresses(this);
     }
 }

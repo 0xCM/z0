@@ -38,10 +38,7 @@ namespace Z0.Asm
         public string Format()
             => $"{Host} emission failure" + (Generic ? " (generic)" : string.Empty) + TargetFile.FullPath;
         
-        public FileEmissionFailed Zero 
-            => Empty;
-
         public static FileEmissionFailed Empty 
-            => new FileEmissionFailed(ApiHostUri.Empty,false, FilePath.Empty);
+            =>default;
     }            
 }

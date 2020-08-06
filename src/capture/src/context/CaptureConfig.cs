@@ -5,7 +5,10 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
+    using static Konst;
+  
     public class CaptureConfig : AppSettings<CaptureConfig>
     {
         public IAppSettingsProvider Ops => this;        

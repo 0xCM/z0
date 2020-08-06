@@ -12,20 +12,28 @@ namespace Z0.Asm
 
     public readonly struct JittedMembers : IWfEvent<JittedMembers>
     {            
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        public const string EventName = nameof(JittedMembers);
+        
+        public WfEventId Id {get;}
 
+        public string ActorName {get;}
+        
         public readonly IApiHost[] Hosts;
 
         public readonly ApiMember[] Members;
 
         [MethodImpl(Inline)]
-        public JittedMembers(IApiHost[] hosts, ApiMember[] members)
+        public JittedMembers(IApiHost[] hosts, ApiMember[] members, [CallerMemberName] string actor = null)
         {
+            Id = wfid(EventName);
+            ActorName = actor;
             Hosts = hosts;
             Members = members;
         }
 
+        public object Description
+            => new {MemberCount = Members.Length, HostCount = Hosts.Length};
         public string Format()
-            => $"Jitted {Members.Length} members from {Hosts.Length} api hosts";
+            => text.format(PSx3, Id, ActorName, Description);
     }    
 }

@@ -5,12 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
     
     using static CaptureHostStep;
 
-    public struct CaptureHost : ICaptureClient, IDisposable
+    public struct CaptureClient : ICaptureClient
     {                    
         public void Run()
         {   
@@ -54,7 +55,7 @@ namespace Z0
 
         readonly uint EvalBufferSize;
         
-        public CaptureHost(WfState wf, ICaptureBroker broker, WfConfig config, CorrelationToken ct)
+        public CaptureClient(WfState wf, ICaptureBroker broker, WfConfig config, CorrelationToken ct)
         {                            
             State = wf;
             Wf = State.Wf;
@@ -78,7 +79,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(nameof(CaptureHost), Ct);
+            Wf.Finished(nameof(CaptureClient), Ct);
         }
         
         void Consolidate(params PartId[] parts)

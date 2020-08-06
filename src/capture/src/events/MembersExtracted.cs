@@ -28,9 +28,6 @@ namespace Z0.Asm
         public string Format()
             => $"{Members.Length} {Host} members extracted";
 
-        public MembersExtracted Zero 
-            => Empty; 
-
         public static MembersExtracted Empty 
             => new MembersExtracted(ApiHostUri.Empty, Array.Empty<ExtractedCode>());
     }    

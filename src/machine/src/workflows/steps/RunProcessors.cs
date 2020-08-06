@@ -58,7 +58,7 @@ namespace Z0
             Ct = ct;
             Sink = wf.Broker.Sink;
             TargetDir = Wf.AppPaths.AppDataRoot + FolderName.Define(ActorName);
-            Asm = ContextFactory.asm(wf.ContextRoot);
+            Asm = WfBuilder.asm(wf.ContextRoot);
             Broker = new WfBroker(Ct);
             Files = PartFiles.create(Asm);            
             IndexBuilder = Encoded.builder();                  

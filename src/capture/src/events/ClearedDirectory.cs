@@ -12,23 +12,26 @@ namespace Z0.Asm
     
     public readonly struct ClearedDirectory : IWfEvent<ClearedDirectory>
     {
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        public const string EventName = nameof(ClearedDirectory);
 
-        const string MessagePattern = "Purged content in {0}";        
-        
+        public WfEventId Id {get;}
+
+        public string ActorName {get;}
+
         public readonly FolderPath Path;
 
         [MethodImpl(Inline)]
-        public ClearedDirectory(FolderPath path)
-            => Path = path;
+        public ClearedDirectory(string actor, FolderPath path, CorrelationToken ct)
+        {
+            Id = WfEventId.define(EventName, ct);
+            ActorName = actor;
+            Path = path;
+        }
         
-        public string Format()
-            => text.format(MessagePattern, Path);
+        public object Description 
+            => new {Path};
 
-        public ClearedDirectory Zero 
-            => Empty; 
-
-        public static ClearedDirectory Empty 
-            => new ClearedDirectory(FolderPath.Empty);
+        public string Format() 
+            => text.format(PSx3, Id, ActorName, Description);
     }    
 }

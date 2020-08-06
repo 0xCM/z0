@@ -14,8 +14,6 @@ namespace Z0.Asm
 
     public readonly struct CountedInstructions : IWfEvent<CountedInstructions>
     {            
-        const string Pattern = IdMarker + "{1} | {2} | {3}";
-
         public WfEventId Id {get;}
 
         public string ActorName {get;}
@@ -33,7 +31,7 @@ namespace Z0.Asm
             Host = host;
         }
         public string Format() 
-            => text.format(Pattern, Id, ActorName, Host, Count);
+            => text.format(PSx4, Id, ActorName, Host, Count);
     }    
 
 }

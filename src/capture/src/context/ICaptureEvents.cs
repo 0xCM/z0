@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {    
-    public interface ICaptureBroker : IImmBroker, ICaptureEvents
-    {        
+    using System;
+    using System.Runtime.CompilerServices;
 
-    }
+    using static Konst;
 
     public interface ICaptureEvents
     {
@@ -47,7 +47,7 @@ namespace Z0.Asm
 
         ExtractsParsed ExtractsParsed => default;
         
-        ParseReportEmitted ParseReportCreated => default;
+        EmittedParseReport ParseReportCreated => default;
 
         ClearedPartFiles ClearedPartFiles => default;                   
     }

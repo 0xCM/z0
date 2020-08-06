@@ -12,23 +12,26 @@ namespace Z0.Asm
 
     public readonly struct RunningConsolidated : IWfEvent<RunningConsolidated>
     {            
-        const string Pattern = IdMarker + "{1} | Running consolidated capture workflow over {2} catalogs";
+        public const string EventName = nameof(RunningConsolidated);
 
         public WfEventId Id {get;}
 
         public string ActorName {get;}
         
-        public readonly int Count;
+        public readonly uint CatalogCount;
 
         [MethodImpl(Inline)]
-        public RunningConsolidated(string worker, int count, CorrelationToken? ct = null)
+        public RunningConsolidated(string actor, uint count, CorrelationToken ct)
         {
-            ActorName = worker;
-            Count = count;
-            Id = WfEventId.define(nameof(RunningConsolidated), ct);
+            Id = WfEventId.define(EventName, ct);
+            ActorName = actor;
+            CatalogCount = count;
         }
-
+        
+        public object Description 
+            => new {CatalogCount};
+        
         public string Format() 
-            => text.format(Pattern, Id, ActorName, Count);
+            => text.format(PSx3, Id, ActorName, Description);
     }    
 }
