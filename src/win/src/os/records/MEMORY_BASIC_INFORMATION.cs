@@ -9,7 +9,7 @@ namespace Z0.MS
     using System;
     using System.Runtime.InteropServices;
 
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Table, StructLayout(LayoutKind.Sequential)]
     public struct MEMORY_BASIC_INFORMATION
     {
         public IntPtr Address;

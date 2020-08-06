@@ -8,7 +8,7 @@ namespace Z0.MS
     using System;
     using System.Runtime.InteropServices;
 
-    [Record]
+    [Table]
     public unsafe struct CREATEFILE2_EXTENDED_PARAMETERS
     {
         public uint dwSize;
@@ -23,5 +23,4 @@ namespace Z0.MS
         
         public IntPtr hTemplateFile;
     }
-
 }

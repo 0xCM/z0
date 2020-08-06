@@ -8,7 +8,7 @@ namespace Z0.MS
     using System;
     using System.Runtime.InteropServices;
 
-    [Record, StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    [Table, StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public unsafe struct SHELLEXECUTEINFO
     {
         public uint cbSize;

@@ -9,12 +9,34 @@ namespace Z0
     /// <summary>
     /// Identifies a structural type that be serialized as a record, of some sort
     /// </summary>
-    [AttributeUsage(AttributeTargets.Struct)]
-    public class RecordAttribute : Attribute
+    public class TableAttribute : Attribute
     {
-        public RecordAttribute()
+        public TableAttribute()
         {
-            
+            Descriptions = Array.Empty<string>();
         }                
+
+        public TableAttribute(params string[] descriptions)
+        {
+            Descriptions = descriptions;
+        }
+
+        public string[] Descriptions {get;}
     }
+
+    public class TableFieldAttribute : Attribute
+    {
+        public TableFieldAttribute()
+        {
+            Descriptions = Array.Empty<string>();
+        }                
+
+        public TableFieldAttribute(params string[] descriptions)
+        {
+            Descriptions = descriptions;
+        }
+
+        public string[] Descriptions {get;}        
+    }
+    
 }

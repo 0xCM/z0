@@ -8,7 +8,7 @@ namespace Z0.MS
     using System;
     using System.Runtime.InteropServices;
         
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Table, StructLayout(LayoutKind.Sequential)]
     public struct SECURITY_ATTRIBUTES
     {
         public uint nLength;

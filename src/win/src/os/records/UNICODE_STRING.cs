@@ -8,9 +8,8 @@ namespace Z0.MS
     using System;
     using System.Runtime.InteropServices;
 
-    // https://msdn.microsoft.com/en-us/library/windows/desktop/aa380518.aspx
-    // https://msdn.microsoft.com/en-us/library/windows/hardware/ff564879.aspx
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
+    [Table("https://msdn.microsoft.com/en-us/library/windows/desktop/aa380518.aspx")]
     public struct UNICODE_STRING
     {
         /// <summary>

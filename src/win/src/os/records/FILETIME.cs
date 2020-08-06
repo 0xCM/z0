@@ -17,7 +17,7 @@ namespace Z0.MS
     /// Xamarin.Android and Xamarin.iOS omit the type and it causes link failures.
     /// See https://github.com/dotnet/pinvoke/issues/232.
     /// </remarks>
-    [Record]
+    [Table]
     public struct FILETIME
     {
         /// <summary>

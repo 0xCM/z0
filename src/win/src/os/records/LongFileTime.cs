@@ -15,7 +15,7 @@ namespace Z0
     /// Do NOT use for FILETIME unless you are POSITIVE it will fall on an
     /// 8 byte boundary.
     /// </remarks>
-    [Record]
+    [Table]
     public struct LongFileTime
     {
         /// <summary>

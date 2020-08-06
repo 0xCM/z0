@@ -7,7 +7,7 @@ namespace Z0.MS
 {
     using System;
     
-    [Record]
+    [Table]
     public struct NtModuleInfo
     {
         public IntPtr BaseOfDll;

@@ -15,16 +15,13 @@ namespace Z0.Image
 
     public unsafe struct SourceStream : IDisposable
     {
-        public static SourceStream create(Stream src, bool virt = false)
-            => new SourceStream(src,virt);
-        
         public readonly Stream Stream;
         
         public readonly bool IsVirtual;
 
         int Offset;
 
-        SourceStream(Stream src, bool @virtual)
+        internal SourceStream(Stream src, bool @virtual)
         {
             Stream = src;
             IsVirtual = @virtual;

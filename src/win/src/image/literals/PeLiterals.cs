@@ -21,6 +21,6 @@ namespace Z0.Image
 
         public const byte ComDataDirectory = 14;
 
-        public const byte DebugDataDirectory = 6;
+        public const byte DebugDataDirectory = 6;   
     }
 }

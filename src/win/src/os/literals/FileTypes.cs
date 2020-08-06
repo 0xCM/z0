@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.MS
 {
+    [LiteralProvider]
     public readonly struct FileTypes
     {
         public const int FILE_TYPE_UNKNOWN = 0x0000;

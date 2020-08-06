@@ -11,19 +11,9 @@
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(Tables)" />
+
   </ItemGroup>  
 
-   <ItemGroup>
-    <EmbeddedResource Include="tables/asmalg/**/*.md" /> 
-    <EmbeddedResource Include="tables/asmid/**/*.csv" /> 
-    <EmbeddedResource Include="tables/asminxs/**/*.csv" /> 
-    <EmbeddedResource Include="tables/asmsyn/**/*.csv" /> 
-    <EmbeddedResource Include="tables/asmt/**/*.csv" />     
-    <EmbeddedResource Include="tables/env/**/*.csv" />     
-    <EmbeddedResource Include="tables/help/**/*.csv" /> 
-    <EmbeddedResource Include="tables/peformat/**/*.csv" /> 
-    <EmbeddedResource Include="tables/tools/**/*.doc" /> 
-    <EmbeddedResource Include="tables/xml/**/*.xml" /> 
-  </ItemGroup>
 
 </Project>

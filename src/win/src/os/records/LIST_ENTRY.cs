@@ -8,7 +8,7 @@ namespace Z0.MS
 {
     using System;
 
-    [Record]
+    [Table]
     public unsafe struct LIST_ENTRY
     {
         public LIST_ENTRY* Flink;

@@ -13,7 +13,8 @@ namespace Z0
     using Z0.Image;
 
     using static MS.HResult.FacilityCode;
-        
+    using OC = Z0.MS.CilOpCodeKind;
+
     partial class XTend
     {
        public static bool IsPrimitive(this ClrElementType src)

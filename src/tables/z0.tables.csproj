@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Part)" />
+  </ItemGroup>  
+
+   <ItemGroup>
+    <EmbeddedResource Include="data/asmalg/**/*.md" /> 
+    <EmbeddedResource Include="data/asmid/**/*.csv" /> 
+    <EmbeddedResource Include="data/asminxs/**/*.csv" /> 
+    <EmbeddedResource Include="data/asmsyn/**/*.csv" /> 
+    <EmbeddedResource Include="data/asmt/**/*.csv" />     
+    <EmbeddedResource Include="data/env/**/*.csv" />     
+    <EmbeddedResource Include="data/help/**/*.csv" /> 
+    <EmbeddedResource Include="data/peformat/**/*.csv" /> 
+    <EmbeddedResource Include="data/tools/**/*.doc" /> 
+    <EmbeddedResource Include="data/xml/**/*.xml" /> 
+  </ItemGroup>
+
+</Project>

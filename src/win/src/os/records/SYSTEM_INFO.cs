@@ -8,7 +8,8 @@ namespace Z0.MS
     using System;
     using System.Runtime.InteropServices;
 
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
+    [Table]
     public struct SYSTEM_INFO
     {
         public ushort wProcessorArchitecture;

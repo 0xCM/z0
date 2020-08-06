@@ -8,7 +8,7 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Table, StructLayout(LayoutKind.Sequential)]
     public struct PROCESS_MEMORY_COUNTERS
     {
         public uint cb;

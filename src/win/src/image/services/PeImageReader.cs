@@ -27,7 +27,7 @@ namespace Z0.Image
         {
             try
             {
-                using var source = SourceStream.create(src,@virtual);
+                using var source = Images.source(src,@virtual);
                 var dst = new PeImage();  
                 var reader = new PeImageReader(source, receiver);          
                 ref var image = ref reader.Read(source, ref dst);
@@ -124,10 +124,6 @@ namespace Z0.Image
             dst.NumberOfRvaAndSizes = Stream.Read<uint>();
         }
 
-        void Read(ref IMAGE_OPTIONAL_HEADER_AGNOSTIC dst)
-        {
-
-        }
 
         static IMAGE_DATA_DIRECTORY[] ReadDataDirectories(SourceStream src, uint offset)
         {

@@ -13,7 +13,7 @@ namespace Z0.MS
     /// The OBJECT_ATTRIBUTES structure specifies attributes that can be applied to objects or object handles by routines
     /// that create objects and/or return handles to objects.
     /// </summary>
-    [Record]
+    [Table]
     public unsafe struct OBJECT_ATTRIBUTES
     {
         public uint Length;
@@ -57,42 +57,4 @@ namespace Z0.MS
         }
     }
 
-    [Flags]
-    public enum ObjectAttributes : uint
-    {
-        // https://msdn.microsoft.com/en-us/library/windows/hardware/ff564586.aspx
-        // https://msdn.microsoft.com/en-us/library/windows/hardware/ff547804.aspx
-
-        /// <summary>
-        /// This handle can be inherited by child processes of the current process.
-        /// </summary>
-        OBJ_INHERIT = 0x00000002,
-
-        /// <summary>
-        /// This flag only applies to objects that are named within the object manager.
-        /// By default, such objects are deleted when all open handles to them are closed.
-        /// If this flag is specified, the object is not deleted when all open handles are closed.
-        /// </summary>
-        OBJ_PERMANENT = 0x00000010,
-
-        /// <summary>
-        /// Only a single handle can be open for this object.
-        /// </summary>
-        OBJ_EXCLUSIVE = 0x00000020,
-
-        /// <summary>
-        /// Lookups for this object should be case insensitive.
-        /// </summary>
-        OBJ_CASE_INSENSITIVE = 0x00000040,
-
-        /// <summary>
-        /// Create on existing object should open, not fail with STATUS_OBJECT_NAME_COLLISION.
-        /// </summary>
-        OBJ_OPENIF = 0x00000080,
-
-        /// <summary>
-        /// Open the symbolic link, not its target.
-        /// </summary>
-        OBJ_OPENLINK = 0x00000100,
-    }
 }

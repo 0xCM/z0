@@ -38,6 +38,8 @@ public enum PartId : ulong
     Run = 50,
 
     Data = 51,
+
+    Tables = 52,
     
     Canonical = 63, 
     

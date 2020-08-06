@@ -1,0 +1,78 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    unsafe partial struct Pointers
+    {
+        /// <summary>
+        /// Creates a <see cref='Ptr8'/> representation over a specifed source
+        /// </summary>
+        /// <param name="pSrc">The source pointer</param>
+        [MethodImpl(Inline), Op]
+        public static Ptr8 p8(byte* pSrc)
+            => new Ptr8(pSrc);
+
+        /// <summary>
+        /// Creates a <see cref='Ptr8'/> representation over a specifed source
+        /// </summary>
+        /// <param name="pSrc">The source pointer</param>
+        [MethodImpl(Inline), Op]
+        public static Ptr8 p8(void* pSrc)
+            => new Ptr8((byte*)pSrc);
+
+        /// <summary>
+        /// Creates a <see cref='Ptr8'/> representation over a specifed source
+        /// </summary>
+        /// <param name="pSrc">The source pointer</param>
+        [MethodImpl(Inline), Op]
+        public static Ptr8 p8(ushort* pSrc)
+            => new Ptr8((byte*)pSrc);
+
+        /// <summary>
+        /// Creates a <see cref='Ptr8'/> representation over a specifed source
+        /// </summary>
+        /// <param name="pSrc">The source pointer</param>
+        [MethodImpl(Inline), Op]
+        public static Ptr8 p8(uint* pSrc)
+            => new Ptr8((byte*)pSrc);
+
+        /// <summary>
+        /// Creates a <see cref='Ptr8'/> representation over a specifed source
+        /// </summary>
+        /// <param name="pSrc">The source pointer</param>
+        [MethodImpl(Inline), Op]
+        public static Ptr8 p8(ulong* pSrc)
+            => new Ptr8((byte*)pSrc);
+
+        /// <summary>
+        /// Presents a <see cref='Ptr16'/> representation as a <see cref='Ptr8'/> representation 
+        /// </summary>
+        /// <param name="source">The source representation</param>
+        [MethodImpl(Inline), Op]
+        public static ref Ptr8 p8(in Ptr16 src)
+            => ref z.@as<Ptr16,Ptr8>(src);
+
+        /// <summary>
+        /// Presents a <see cref='Ptr32'/> representation as a <see cref='Ptr8'/> representation 
+        /// </summary>
+        /// <param name="source">The source representation</param>
+        [MethodImpl(Inline), Op]
+        public static ref Ptr8 p8(in Ptr32 src)
+            => ref z.@as<Ptr32,Ptr8>(src);
+
+        /// <summary>
+        /// Presents a <see cref='Ptr64'/> representation as a <see cref='Ptr8'/> representation 
+        /// </summary>
+        /// <param name="source">The source representation</param>
+        [MethodImpl(Inline), Op]
+        public static ref Ptr8 p8(in Ptr64 src)
+            => ref z.@as<Ptr64,Ptr8>(src);
+    }
+}

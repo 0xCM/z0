@@ -53,56 +53,106 @@ namespace Z0.MS
         Ldnull = (ushort)20,
     
         Ldc_i4_m1 = (ushort)21,
-        Ldc_i4_0 = (ushort)22,
-        Ldc_i4_1 = (ushort)23,
-        Ldc_i4_2 = (ushort)24,
-        Ldc_i4_3 = (ushort)25,
-        Ldc_i4_4 = (ushort)26,
-        Ldc_i4_5 = (ushort)27,
-        Ldc_i4_6 = (ushort)28,
-        Ldc_i4_7 = (ushort)29,
-        Ldc_i4_8 = (ushort)30,
-        Ldc_i4_s = (ushort)31,
-        Ldc_i4 = (ushort)32,
-        Ldc_i8 = (ushort)33,
-        Ldc_r4 = (ushort)34,
-        Ldc_r8 = (ushort)35,
-        Dup = (ushort)37,
-        Pop = (ushort)38,
-        Jmp = (ushort)39,
-        Call = (ushort)40,
-        Calli = (ushort)41,
-        Ret = (ushort)42,
-        Br_s = (ushort)43,
-        Brfalse_s = (ushort)44,
-        Brtrue_s = (ushort)45,
-        Beq_s = (ushort)46,
-        Bge_s = (ushort)47,
-        Bgt_s = (ushort)48,
-        Ble_s = (ushort)49,
-        Blt_s = (ushort)50,
-        Bne_un_s = (ushort)51,
-        Bge_un_s = (ushort)52,
-        Bgt_un_s = (ushort)53,
-        Ble_un_s = (ushort)54,
-        Blt_un_s = (ushort)55,
-        Br = (ushort)56,
-        Brfalse = (ushort)57,
-        Brtrue = (ushort)58,
-        Beq = (ushort)59,
-        Bge = (ushort)60,
-        Bgt = (ushort)61,
-        Ble = (ushort)62,
-        Blt = (ushort)63,
-        Bne_un = (ushort)64,
-        Bge_un = (ushort)65,
-        Bgt_un = (ushort)66,
-        Ble_un = (ushort)67,
-        Blt_un = (ushort)68,
-        Switch = (ushort)69,
-        Ldind_i1 = (ushort)70,
-        Ldind_u1 = (ushort)71,
         
+        Ldc_i4_0 = (ushort)22,
+        
+        Ldc_i4_1 = (ushort)23,
+        
+        Ldc_i4_2 = (ushort)24,
+        
+        Ldc_i4_3 = (ushort)25,
+        
+        Ldc_i4_4 = (ushort)26,
+        
+        Ldc_i4_5 = (ushort)27,
+        
+        Ldc_i4_6 = (ushort)28,
+        
+        Ldc_i4_7 = (ushort)29,
+        
+        Ldc_i4_8 = (ushort)30,
+        
+        Ldc_i4_s = (ushort)31,
+        
+        Ldc_i4 = (ushort)32,
+        
+        Ldc_i8 = (ushort)33,
+        
+        Ldc_r4 = (ushort)34,
+        
+        Ldc_r8 = (ushort)35,
+        
+        Dup = (ushort)37,
+        
+        Pop = (ushort)38,
+        
+        Jmp = (ushort)39,
+        
+        Call = (ushort)40,
+        
+        Calli = (ushort)41,
+        
+        Ret = (ushort)42,
+        
+        Br_s = (ushort)43,
+        
+        Brfalse_s = (ushort)44,
+        
+        Brtrue_s = (ushort)45,
+        
+        Beq_s = (ushort)46,
+        
+        
+        Bge_s = (ushort)47,
+        
+        Bgt_s = (ushort)48,
+        
+        Ble_s = (ushort)49,
+        
+        Blt_s = (ushort)50,
+        
+        Bne_un_s = (ushort)51,
+        
+        Bge_un_s = (ushort)52,
+        
+        Bgt_un_s = (ushort)53,
+        
+        Ble_un_s = (ushort)54,
+        
+        Blt_un_s = (ushort)55,
+        
+        Br = (ushort)56,
+        
+        Brfalse = (ushort)57,
+        
+        Brtrue = (ushort)58,
+        
+        Beq = (ushort)59,
+        
+        Bge = (ushort)60,
+        
+        Bgt = (ushort)61,
+        
+        Ble = (ushort)62,
+        
+        Blt = (ushort)63,
+        
+        Bne_un = (ushort)64,
+        
+        Bge_un = (ushort)65,
+                
+        Bgt_un = (ushort)66,
+        
+        Ble_un = (ushort)67,
+        
+        Blt_un = (ushort)68,
+        
+        Switch = (ushort)69,
+        
+        Ldind_i1 = (ushort)70,
+        
+        Ldind_u1 = (ushort)71,
+                
         Ldind_i2 = (ushort)72,
         
         Ldind_u2 = (ushort)73,

@@ -12,7 +12,7 @@ namespace Z0.MS
     /// <summary>
     /// Represents an icon as stored in a '.ico' file.
     /// </summary>
-    [Record, StructLayout(LayoutKind.Sequential, Pack = 1)]
+    [Table, StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct ICONDIRENTRY
     {
         /// <summary>

@@ -1,0 +1,7 @@
+# MagicType - IMAGE_OPTIONAL_HEADER_32.Magic
+-----------------------------------------------------------------------------------------------------------------------
+| Value                               | Meaning                                                                                                                                                                       |
+| IMAGE_NT_OPTIONAL_HDR_MAGIC         | The file is an executable image. This value is defined as IMAGE_NT_OPTIONAL_HDR32_MAGIC in a 32-bit application and as IMAGE_NT_OPTIONAL_HDR64_MAGIC in a 64-bit application. |
+| IMAGE_NT_OPTIONAL_HDR32_MAGIC 0x10b | The file is an executable image.                                                                                                                                              |
+| IMAGE_NT_OPTIONAL_HDR64_MAGIC 0x20b | The file is an executable image.                                                                                                                                              |
+| IMAGE_ROM_OPTIONAL_HDR_MAGIC 0x107  | The file is a ROM image.                                                                                                                                                      |

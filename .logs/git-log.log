@@ -5175,3 +5175,172 @@
  delete mode 100644 src/zdata/content/xed/xsaves-isa.txt
  delete mode 100644 src/zdata/id.sh
  delete mode 100644 src/zdata/z0.zdata.csproj
+[master 953c7aa06] .
+ 246 files changed, 4923 insertions(+), 1176 deletions(-)
+ delete mode 100644 src/archives/Part.cs
+ delete mode 100644 src/archives/build.sh
+ delete mode 100644 src/archives/id.sh
+ delete mode 100644 src/archives/z0.archives.csproj
+ delete mode 100644 src/artistry/Part.cs
+ delete mode 100644 src/artistry/add.sh
+ delete mode 100644 src/artistry/build-log.sh
+ delete mode 100644 src/artistry/clean.sh
+ delete mode 100644 src/artistry/directory.build.props
+ delete mode 100644 src/artistry/id.sh
+ delete mode 100644 src/artistry/remove.sh
+ delete mode 100644 src/artistry/src/works/CapabilityKind.cs
+ delete mode 100644 src/codes/App.cs
+ delete mode 100644 src/codes/add.sh
+ delete mode 100644 src/codes/build-log.sh
+ delete mode 100644 src/codes/build.sh
+ delete mode 100644 src/codes/clean.sh
+ delete mode 100644 src/codes/config.json
+ delete mode 100644 src/codes/directory.build.props
+ delete mode 100644 src/codes/id.sh
+ delete mode 100644 src/codes/remove.sh
+ delete mode 100644 src/codes/run.sh
+ delete mode 100644 src/codes/src/CodeRunner.cs
+ delete mode 100644 src/codes/z0.codes.csproj
+ rename src/data/{models => services}/IntrinsicsDocument.cs (100%)
+ rename src/data/services/{zdat.cs => ZTables.cs} (82%)
+ rename src/{machine/src/workflows/services => domain/src/asm}/MnemonicParser.cs (100%)
+ rename src/{machine/src/infrastructure => domain/src/models}/ActorIdentity.cs (100%)
+ rename src/{machine/src/infrastructure => domain/src/models}/ActorIdentityT.cs (100%)
+ rename src/{data/tables => domain/src/models}/ContentKind.cs (100%)
+ rename src/{data => domain/src}/models/ContentLibEntry.cs (85%)
+ rename src/{flow => domain}/src/models/EnumLiteralField.cs (100%)
+ rename src/{flow => domain}/src/models/EnumLiteralRecord.cs (100%)
+ rename src/{data => domain/src}/models/LocatedImage.cs (100%)
+ rename src/{data => domain/src}/models/LocatedImageFIeld.cs (100%)
+ rename src/{data => domain/src}/models/LocatedImageT.cs (100%)
+ rename src/{data => domain/src}/models/LocatedImages.cs (54%)
+ rename src/{data => domain/src}/models/LocatedPart.cs (100%)
+ rename src/{data => domain/src}/models/PartTypes.cs (100%)
+ rename src/{data => domain/src}/models/ProcessImageField.cs (100%)
+ rename src/{data => domain/src}/models/ProcessImageSummary.cs (100%)
+ rename src/{data => domain/src}/models/ProjectDocRecord.cs (100%)
+ rename src/{data/tables => domain/src/models}/StructuredKind.cs (100%)
+ rename src/{data => domain/src}/models/SystemImageSymbol.cs (100%)
+ rename src/{flow/src/models => domain/src/services}/EnumLiteralRecords.cs (100%)
+ rename src/{machine/src/infrastructure/TableEmission.cs => domain/src/services/Tables.cs} (69%)
+ rename src/{machine/src/infrastructure => domain/src/tables}/TableAttribute.cs (100%)
+ rename src/{machine/src/infrastructure => domain/src/tables}/TableColumn.cs (100%)
+ rename src/domain/src/{services => tables}/TableFormatter.cs (100%)
+ rename src/flow/src/{hub => }/contracts/IDataEvent.cs (100%)
+ rename src/flow/src/{hub => }/contracts/IEventHub.cs (100%)
+ rename src/flow/src/{ => contracts}/IWfContext.cs (56%)
+ rename src/flow/src/events/{WorkflowError.cs => LoadingWfConfig.cs} (50%)
+ rename src/flow/src/events/{WfStepFinished.cs => WfStatus.cs} (53%)
+ delete mode 100644 src/flow/src/events/WorkflowEvent.cs
+ rename src/flow/src/{config => literals}/EventAttribute.cs (100%)
+ create mode 100644 src/flow/src/literals/Flairs.cs
+ rename src/flow/src/{services => literals}/FlowLiteralKind.cs (100%)
+ create mode 100644 src/flow/src/literals/FormatPatterns.cs
+ rename src/flow/src/{config => literals}/StepAttribute.cs (100%)
+ rename src/flow/src/{config => literals}/WfStepId.cs (100%)
+ rename src/{machine/src/workflows/services => flow/src/models}/MemoryFile.cs (100%)
+ rename src/flow/src/{events => services}/PartSink.cs (100%)
+ rename src/flow/src/{context => services}/WfConfig.cs (100%)
+ rename src/flow/src/{context => services}/WfContext.cs (70%)
+ rename src/flow/src/{context => services}/WfContextT.cs (100%)
+ rename src/flow/src/{context => services}/WfSettings.cs (100%)
+ rename src/flow/src/{hub/services => services/hosts}/EventHub.cs (100%)
+ rename src/flow/src/{hub/services => services/hosts}/EventHubs.cs (100%)
+ rename src/flow/src/{hub/services => services/hosts}/EventWriter.cs (100%)
+ rename src/flow/src/{hub/services => services/hosts}/HubClient.cs (100%)
+ rename src/flow/src/{hub/services => services/hosts}/HubRelay.cs (100%)
+ rename src/flow/src/services/{ => hosts}/WfBroker.cs (100%)
+ rename src/flow/src/services/{ => hosts}/WfEventLog.cs (96%)
+ rename src/flow/src/services/{ => hosts}/WfTermEventSink.cs (93%)
+ create mode 100644 src/flow/src/services/ops/running.cs
+ rename src/{artistry/src/services/Art.cs => flow/src/services/ops/status.cs} (51%)
+ create mode 100644 src/flow/src/services/props/Flairs.cs
+ create mode 100644 src/konst/src/dataset/contracts/IRowFormatter.cs
+ create mode 100644 src/konst/src/dataset/contracts/ITable.cs
+ rename src/konst/src/{literals => dataset}/models/EnumDatasetET.cs (100%)
+ rename src/konst/src/{literals => dataset}/models/EnumDatasetEntry.cs (100%)
+ rename src/konst/src/{literals => dataset}/models/EnumDatasetEntryET.cs (100%)
+ rename src/konst/src/{literals => dataset}/models/EnumDatasets.cs (100%)
+ rename src/{flow/src/services/ops/wfevent.cs => konst/src/dataset/ops/fields.cs} (60%)
+ create mode 100644 src/konst/src/dataset/tables/HeaderCellT.cs
+ create mode 100644 src/konst/src/dataset/tables/TableFT.cs
+ create mode 100644 src/konst/src/dataset/tables/TableHeaderF.cs
+ create mode 100644 src/konst/src/dataset/tables/TableHeaders.cs
+ rename src/konst/src/dataset/tables/{Row.cs => TableRow.cs} (91%)
+ rename src/konst/src/dataset/tables/{Rows.cs => TableRows.cs} (70%)
+ rename src/konst/src/{reports/models => dataset/tables}/TabularField.cs (100%)
+ rename src/konst/src/{reports/models => dataset/tables}/TabularFieldF.cs (100%)
+ rename src/konst/src/{reports/models => dataset/tables}/TabularFormat.cs (100%)
+ rename src/konst/src/{reports/models => dataset/tables}/TabularFormatF.cs (100%)
+ rename src/konst/src/literals/{services => }/BinaryLiterals.cs (100%)
+ rename src/konst/src/literals/{services/fields => }/LiteralFields.cs (100%)
+ rename src/konst/src/literals/{services => }/TypedLiterals.cs (100%)
+ rename src/konst/src/{enums => literals/form}/IEnum.cs (100%)
+ rename src/konst/src/{resources => literals}/models/EnumFieldValueE.cs (100%)
+ rename src/konst/src/{enums => literals/models}/EnumInfoET.cs (100%)
+ rename src/konst/src/literals/{ => models}/EnumNamesE.cs (94%)
+ rename src/konst/src/literals/services/fields/{ops => }/address.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/char.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/chars.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/emit.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/enums.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/from.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/index.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/literals.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/numeric.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/refs.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/search.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/string.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/stringlits.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/strings.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/value.cs (100%)
+ rename src/konst/src/literals/services/fields/{ops => }/values.cs (100%)
+ rewrite src/konst/src/resources/AsciResourceSet.cs (66%)
+ copy src/konst/src/resources/{AsciResourceSet.cs => ops/create.cs} (97%)
+ rename src/konst/src/resources/{AsciResource.cs => ops/define.cs} (83%)
+ rename src/{metareader/src/PartRecordFormat.cs => konst/src/resources/ops/encode.cs} (83%)
+ create mode 100644 src/konst/src/resources/ops/load.cs
+ create mode 100644 src/konst/src/resources/ops/member.cs
+ rename src/machine/src/workflows/{ControlStep.cs => Controller.cs} (88%)
+ delete mode 100644 src/machine/src/workflows/models/MessageTemplate.cs
+ rename src/{artistry/src/services/IDisplay.cs => metareader/src/PartRecords.cs} (82%)
+ rename src/metareader/src/{PartReader.cs => PeMetaReader.cs} (93%)
+ rename src/metareader/src/{common => contracts}/IDataReader.cs (100%)
+ delete mode 100644 src/metareader/src/contracts/IPartRecordSpec.cs
+ rename src/metareader/src/contracts/{IImgMetadataReader.cs => IPeMetaReader.cs} (91%)
+ rename src/metareader/src/{common => models/clr/models}/ReadVirtualStream.cs (99%)
+ rename src/{artistry => run}/.vscode/launch.json (100%)
+ rename src/{artistry => run}/.vscode/tasks.json (100%)
+ rename src/{codes => run}/Part.cs (78%)
+ rename src/{archives => run}/add.sh (100%)
+ rename src/{archives => run}/build-log.sh (100%)
+ rename src/{artistry => run}/build.sh (100%)
+ rename src/{archives => run}/clean.sh (100%)
+ rename src/{artistry => run}/config.json (100%)
+ rename src/{archives => run}/directory.build.props (100%)
+ create mode 100644 src/run/id.sh
+ rename src/{archives => run}/remove.sh (100%)
+ rename src/{artistry => run}/run.sh (100%)
+ rename src/{artistry/src/Artistry.cs => run/src/App.cs} (55%)
+ create mode 100644 src/run/src/models/BinaryOps.cs
+ create mode 100644 src/run/src/services/Art.cs
+ rename src/{artistry => run}/src/services/ArtistryContext.cs (100%)
+ rename src/{artistry/src/services/Displays.cs => run/src/services/Checks.cs} (50%)
+ rename src/{artistry => run}/src/services/IArtistryContext.cs (100%)
+ rename src/{artistry/src/works/01/CalcDisplay.cs => run/src/works/CalcDemo.cs} (53%)
+ rename src/{artistry/src/works/01 => run/src/works/calc}/CalcManaged.cs (100%)
+ rename src/{artistry/src/works/01 => run/src/works/calc}/CalcNative.cs (97%)
+ create mode 100644 src/run/src/works/calc/CalcOpIndex.cs
+ rename src/{artistry/src/works/01 => run/src/works/calc}/CalcSlots.cs (85%)
+ rename src/{artistry/src/works/01 => run/src/works/calc}/CalculatorCode.cs (100%)
+ rename src/{artistry/z0.artistry.csproj => run/z0.run.csproj} (73%)
+ rename src/{metareader/src/common => win/src/clr}/MSCorEE.cs (100%)
+ create mode 100644 src/win/src/clr/literals/CilKonst.cs
+ create mode 100644 src/win/src/clr/literals/CilOpCode.cs
+ create mode 100644 src/win/src/clr/literals/CilOpCodeField.cs
+ create mode 100644 src/win/src/clr/literals/CilOpCodeFlags.cs
+ create mode 100644 src/win/src/clr/literals/CilOpCodeKind.cs
+ rename src/{metareader/src/PartRecordSpecs.cs => win/src/image/ImageRecords.cs} (61%)
+ rename src/{metareader/src/services => win/src/image}/LiveDataReader.cs (80%)
+ create mode 100644 src/win/src/image/records/IImgStringField.cs
+ create mode 100644 src/win/src/image/records/PeHeaderField.cs

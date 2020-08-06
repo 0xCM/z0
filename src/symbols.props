@@ -5,6 +5,8 @@
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
     <Domain>$(Src)domain/z0.domain.csproj</Domain>
 
+    <Tables>$(Src)tables/z0.tables.csproj</Tables>    
+
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
 
     <Data>$(Src)data/z0.data.csproj</Data>    

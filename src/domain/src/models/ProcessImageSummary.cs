@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     
-    [Record]
     public struct ProcessImageSummary
     {
         public StringRef ImageId;

@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.MS
 {
+    [LiteralProvider]
     public class MemOptions
     {
         public const int MEM_COMMIT = 0x1000;
