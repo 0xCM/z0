@@ -47,7 +47,7 @@ namespace Z0
             var data = ReadData();            
             EmissionCount = (uint)data.Length;
 
-            var target = PartRecords.formatter(PartRecordSpecs.Strings);        
+            var target = PartRecords.formatter(ImageRecords.Strings);        
             using var writer = TargetPath.Writer();
             target.EmitHeader();            
             
@@ -69,14 +69,14 @@ namespace Z0
         ReadOnlySpan<ImgStringRecord> ReadUserStrings(IPart part)
         {
             var srcPath = part.PartPath();
-            using var reader = ImgMetadataReader.open(srcPath);
+            using var reader = PeMetaReader.open(srcPath);
             return reader.ReadUserStrings();        
         }
 
         ReadOnlySpan<ImgStringRecord> ReadSystemStrings(IPart part)
         {
             var srcPath = part.PartPath();
-            using var reader = ImgMetadataReader.open(srcPath);
+            using var reader = PeMetaReader.open(srcPath);
             return reader.ReadStrings();        
         }
     }

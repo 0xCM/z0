@@ -33,11 +33,14 @@ namespace Z0.Asm
         void OnEvent(ParseReportEmitted e) 
             => Sink.Deposit(e);
 
-        void OnEvent(HexCodeSaved e) 
+        void OnEvent<T>(WfError<T> e) 
             => Sink.Deposit(e);        
 
-        void OnEvent(WorkflowError e) 
-            => Sink.Deposit(e);
+        void OnEvent<T>(WfStatus<T> e) 
+            => Sink.Deposit(e);        
+
+        void OnEvent(HexCodeSaved e) 
+            => Sink.Deposit(e);        
 
         void OnEvent(ExtractReportCreated e) 
             => Sink.Deposit(e);
@@ -87,7 +90,7 @@ namespace Z0.Asm
             Broker.MatchedEmissions.Subscribe(Broker, OnEvent);
             Broker.ClearedDirectory.Subscribe(Broker, OnEvent);
             Broker.ExtractedMembers.Subscribe(Broker, OnEvent); 
-            Broker.CapturingHosts.Subscribe(Broker, OnEvent); 
+            Broker.CapturingHosts.Subscribe(Broker, OnEvent);         
         }        
     }
 }

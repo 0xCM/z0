@@ -14,11 +14,7 @@ namespace Z0
     [Event]
     public readonly struct WorkerCreated : IWfEvent<WorkerCreated>
     {        
-        public const string EventName = nameof(WorkerCreated);
-
-        public const AppMsgColor DefaultFlair = AppMsgColor.Magenta;
-
-        public const string EventMsg = IdMarker + "Created";
+        public const string EventName = nameof(WorkerCreated);        
 
         public WfEventId Id {get;}
 
@@ -27,7 +23,7 @@ namespace Z0
         public string ActorName {get;}
         
         [MethodImpl(Inline)]
-        public WorkerCreated(string worker, CorrelationToken ct, AppMsgColor flair = DefaultFlair)
+        public WorkerCreated(string worker, CorrelationToken ct, AppMsgColor flair = CreatedFlair)
         {
             Id = wfid(EventName, ct);
             ActorName = worker;

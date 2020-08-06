@@ -19,7 +19,7 @@ namespace Z0.Asm
         
         ExtractReportCreated ExtractReportCreated => default;
 
-        WorkflowError WorkflowError => default;
+        WfError WorkflowError => default;
 
         ExtractedMembers ExtractedMembers => default;
 

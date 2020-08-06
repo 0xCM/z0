@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
+    using Z0.Data;
+
     using static Konst;    
 
     public enum ImgMethodBodyField : uint
@@ -20,7 +22,7 @@ namespace Z0
         Cil,
     }
     
-    public struct ImgMethodBody
+    public struct ImgMethodBody : ITable<ImgMethodBodyField,ImgMethodBody>
     {
         public BinaryCode Sig;
 

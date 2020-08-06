@@ -6,14 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
 
     using static z;
     using static Konst;
 
     partial struct Resources
     {
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> read(in ResIdentity<byte> id)
+            => memory.view<byte>(id.Address, id.CellCount);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> read(in ResIdentity<char> id)
+            => memory.view<char>(id.Address, id.CellCount);             
+
         [MethodImpl(Inline), Op]
         static ReadOnlySpan<char> Symbols(ReadOnlySpan<byte> src)
             => Spans.cast<char>(src);
@@ -31,7 +37,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var address = ref skip(locations,(uint)i);
-                var data = Addressable.view<byte>(address, ResLength);
+                var data = memory.view<byte>(address, ResLength);
                 var content = Render(Symbols(data));
                 seek(dst, (uint)i) = TextResource.Define((ulong)address, address, content);            
             }

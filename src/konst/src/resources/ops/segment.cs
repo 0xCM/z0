@@ -17,6 +17,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> segment(in ResIdentity<byte> res, int i0, int i1)
-            => Addressable.view<byte>(res.Address, (i1 - i0 + 1)); 
+            => memory.view<byte>(res.Address, (i1 - i0 + 1)); 
     }
 }

@@ -26,7 +26,7 @@ namespace Z0
         public AppMsg Description {get;}
 
         [MethodImpl(Inline)]
-        public WfStepRunning(string worker, T body, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
+        public WfStepRunning(string worker, T body, CorrelationToken ct, AppMsgColor flair = RunningFlair)
         {
             Id = wfid(EventName, ct);
             ActorName = worker;

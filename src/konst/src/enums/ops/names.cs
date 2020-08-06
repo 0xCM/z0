@@ -17,9 +17,14 @@ namespace Z0
         /// </summary>
         /// <param name="e">An enum type representative</param>
         /// <typeparam name="E">The enum type</typeparam>
-         [MethodImpl(Inline), Op]
+         [MethodImpl(Inline)]
          public static string[] names<E>()
             where E : unmanaged, Enum
                 => Enum.GetNames(typeof(E));
+
+        [MethodImpl(Inline)]
+        public static EnumNames<E> NameIndex<E>(E e = default)                   
+            where E : unmanaged, Enum
+                => new EnumNames<E>(Enum.GetNames(typeof(E)));    
     }
 }

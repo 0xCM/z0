@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Data;
+
     using static Konst;
 
     public enum ImgFieldRecordField : ushort
@@ -20,7 +22,7 @@ namespace Z0
         Attributes,
     }
 
-    public readonly struct ImgFieldRecord
+    public readonly struct ImgFieldRecord : ITable<ImgFieldRecordField>
     {
         public int Sequence {get;}
 

@@ -70,18 +70,17 @@ namespace Z0
         public unsafe static MemoryAddress address(void* p)
             => address((ulong)p);            
 
-        /// <summary>
-        /// Defines an address predicated on the leading source cell
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline)]
-        public static unsafe MemoryAddress address<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => gptr(first(src));                
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress address<P>(P* pSrc)
             where P : unmanaged
                 => new MemoryAddress(pSrc);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static MemoryAddress address<T>(Span<T> src)
+            => Unsafe.As<T, ulong>(ref MemoryMarshal.GetReference(src));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe MemoryAddress address<T>(ReadOnlySpan<T> src)
+            => Unsafe.As<T, ulong>(ref MemoryMarshal.GetReference(src));
     }
 }

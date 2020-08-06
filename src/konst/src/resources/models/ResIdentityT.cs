@@ -10,8 +10,10 @@ namespace Z0
     using static z;
     using static Konst;
 
+    /// <summary>
+    /// Identifies a resource of parametric type along with a reference to the memory segment it occupies
+    /// </summary>
     public readonly struct ResIdentity<T>
-        where T : unmanaged
     {
         public readonly asci32 Name;
 

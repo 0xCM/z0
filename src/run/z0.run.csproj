@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>run</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Capture)" />
+  </ItemGroup>
+  
+</Project>

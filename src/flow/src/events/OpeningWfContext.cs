@@ -11,36 +11,31 @@ namespace Z0
     using static Flow;
 
     [Event]
-    public readonly struct OpeningWfContext : IWfEvent<OpeningWfContext>
+    public readonly struct OpeningWfContext : IWfEvent<OpeningWfContext, string>
     {
         public const string EventName = nameof(OpeningWfContext);
 
         public const string Pattern = "Opening workflow context | {0}";
         
-        public const AppMsgColor DefaultFlair = AppMsgColor.Magenta;
-
         public WfEventId Id {get;}
 
         public string ActorName {get;}
         
         public string Body {get;}
-
-        public AppMsgColor Flair {get;}
         
-        public AppMsg Description {get;}
-
+        public AppMsgColor Flair {get;}
+                
         [MethodImpl(Inline)]
-        public OpeningWfContext(string worker, string type, CorrelationToken ct, AppMsgColor flair = DefaultFlair)
+        public OpeningWfContext(string worker, string type, CorrelationToken ct, AppMsgColor flair = CreatedFlair)
         {
             Id = wfid(EventName, ct);
             ActorName = worker;
             Body = type;
-            Flair = flair;
-            Description = AppMsg.Colorize(text.format(Pattern, Body), Flair);
+            Flair = flair;            
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);        
+            => text.format(PSx3, Id, ActorName, Body);        
     }
 }

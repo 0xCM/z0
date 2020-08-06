@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         AppMsgData(object content, string template, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
         {
-            Content = text.clean(content);
+            Content = content;
             Template = template;
             Kind = kind;
             Color = color;

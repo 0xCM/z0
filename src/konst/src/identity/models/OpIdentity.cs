@@ -15,6 +15,18 @@ namespace Z0
     public readonly struct OpIdentity : IIdentifedOp<OpIdentity>
     {            
         /// <summary>
+        /// Creates a moniker directly from source text
+        /// </summary>
+        /// <param name="src">The source text</param>
+        [MethodImpl(Inline)]
+        public static OpIdentity set(string src)
+            => new OpIdentity(src);
+
+        [MethodImpl(Inline)]
+        public static OpIdentity define(string text, string name, string suffix, bool generic, bool imm, string[] components)
+            => new OpIdentity(text, name, suffix, generic, imm, components);
+
+        /// <summary>
         /// The operation identifier
         /// </summary>
         public string Identifier {get;}
@@ -48,19 +60,7 @@ namespace Z0
         /// The empty identifier
         /// </summary>
         public static OpIdentity Empty 
-            => Set(EmptyString);
-
-        /// <summary>
-        /// Creates a moniker directly from source text
-        /// </summary>
-        /// <param name="src">The source text</param>
-        [MethodImpl(Inline)]
-        public static OpIdentity Set(string src)
-            => new OpIdentity(src);
-
-        [MethodImpl(Inline)]
-        public static OpIdentity Define(string text, string name, string suffix, bool generic, bool imm, string[] components)
-            => new OpIdentity(text, name, suffix, generic, imm, components);
+            => set(EmptyString);
 
         [MethodImpl(Inline)]
         public static implicit operator string(OpIdentity src)

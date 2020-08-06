@@ -122,7 +122,6 @@ namespace Z0
             State.Append(render(content).PadRight(width(f)));
         }
 
-
         void Delimit<T>(F f, T content)
             where T : ITextual
         {            

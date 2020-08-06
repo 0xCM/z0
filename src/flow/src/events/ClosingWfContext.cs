@@ -25,20 +25,17 @@ namespace Z0
 
         public AppMsgColor Flair {get;}
         
-        public AppMsg Description {get;}
-
         [MethodImpl(Inline)]
-        public ClosingWfContext(string worker, string type, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Blue)
+        public ClosingWfContext(string actor, string type, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
         {
             Id = wfid(EventName, ct);
             Body = type;
-            ActorName = worker;
+            ActorName = actor;
             Flair = flair;
-            Description = AppMsg.Colorize(text.format(EventMsg, Body), Flair);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);        
+            => text.format(PSx3, Id, ActorName, Body);        
     }
 }

@@ -14,19 +14,6 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Flow
     {        
-
-        public const AppMsgColor ErrorColor = AppMsgColor.Red;
-
-        public const AppMsgColor CreatedColor = AppMsgColor.Gray;
-
-        public const AppMsgColor RunningColor = AppMsgColor.Magenta;
-
-        public const AppMsgColor RanColor = AppMsgColor.Cyan;
-
-        public const AppMsgColor FinishedColor = AppMsgColor.Gray;
-
-        public const AppMsgColor StatusColor = AppMsgColor.Blue;
-
         /// <summary>
         /// Defines the default field delimiter
         /// </summary>

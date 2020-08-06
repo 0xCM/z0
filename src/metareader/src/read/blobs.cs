@@ -14,7 +14,7 @@ namespace Z0
     using static Konst;    
     using static PartRecords;
         
-    partial class ImgMetadataReader
+    partial class PeMetaReader
     {        
         internal static ImgBlobRecord record(in ReaderState state, BlobHandle handle, int seq)
         {

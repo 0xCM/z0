@@ -11,7 +11,7 @@ namespace Z0
     using static z;
  
     [ApiHost]
-    public static unsafe class memory
+    public unsafe partial class memory
     {
         [MethodImpl(Inline), Op]
         public static void copy(in byte src, uint count, ref byte dst, ref uint index)

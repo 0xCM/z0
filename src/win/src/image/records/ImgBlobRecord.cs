@@ -7,9 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Data;
+    
     using static Konst;
 
-    public readonly struct ImgBlobRecord 
+    public readonly struct ImgBlobRecord : ITable<ImgBlobField, ImgBlobRecord>
     {
         public int Sequence {get;}
         

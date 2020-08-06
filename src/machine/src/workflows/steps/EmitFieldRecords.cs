@@ -40,7 +40,7 @@ namespace Z0
             Wf = wf;
             Ct = ct;
             Parts = parts;
-            Spec = PartRecordSpecs.Fields;
+            Spec = ImageRecords.Fields;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("fields");
             Wf.Created(WorkerName, Ct);
         }
@@ -66,15 +66,15 @@ namespace Z0
             Wf.RanT(WorkerName, new {PartCount = partCount, RecordCount = count}, Ct);
         }
         
-        static IImgMetadataReader Reader(string src)
-            => ImgMetadataReader.open(FilePath.Define(src));
+        static IPeMetaReader Reader(string src)
+            => PeMetaReader.open(FilePath.Define(src));
 
         FilePath TargetPath(PartId part)
             => TargetDir +  FileName.Define(part.Format(), "fields.csv");
 
         uint Emit(IPart part)
         {
-            var rk = PartRecordSpecs.FieldRva;
+            var rk = ImageRecords.FieldRva;
             var id = part.Id;
             var path = TargetPath(id);
 

@@ -52,7 +52,7 @@ namespace Z0
         static LocatedImage image(ProcessModule src)
         {
             var path = FilePath.Define(src.FileName);
-            var part = TableEmission.part(path);
+            var part = Tables.part(path);
             var entry = (MemoryAddress)src.EntryPointAddress;
             var @base = src.BaseAddress;
             var size = (uint)src.ModuleMemorySize;
@@ -64,11 +64,11 @@ namespace Z0
             
         static void Summarize(LocatedImages src, FilePath dst)
         {            
-            var system = zdat.SystemImages;
+            var system = ZTables.SystemImages;
             var count = src.Count;
             var images = src.View;
-            var fields = TableEmission.fields<LocatedImageField>();
-            var header = TableEmission.header(fields);
+            var fields = Tables.fields<LocatedImageField>();
+            var header = Tables.header(fields);
             var summaries = span<ProcessImageSummary>(count);
 
             var rows = text.build();

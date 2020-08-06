@@ -25,7 +25,6 @@ namespace Z0
         public static SegRef memref(Vector128<ulong> src)
             => new SegRef(src);
 
-
         [MethodImpl(Inline), Op]
         public unsafe static SegRef memref(ReadOnlySpan<byte> src)
             => memref((ulong)gptr(src), src.Length);

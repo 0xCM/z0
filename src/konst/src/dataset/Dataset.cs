@@ -9,9 +9,13 @@ namespace Z0.Data
     using System.Text;
 
     using static Konst;
+    using static z;
 
     public readonly struct Dataset
     {
+        public static DatasetHeader<F> header<F>()
+            where F : unmanaged, Enum
+                =>  default;       
         public void Publish<M,F,R>(M model, F rep, R[] src, char delimiter)
             where M : IDataModel
             where R : IRecord
@@ -29,11 +33,6 @@ namespace Z0.Data
         /// Defines a mask that, when applied, reveals the field position
         /// </summary>
         const ushort PosMask = 0xFFFF;
-
-        [MethodImpl(Inline)]
-        public static DatasetHeader<F> header<F>()
-            where F : unmanaged, Enum
-                => default;        
 
         [MethodImpl(Inline)]
         public static string[] labels<F>()

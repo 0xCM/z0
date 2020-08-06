@@ -15,9 +15,7 @@ namespace Z0
     [Event]
     public readonly struct WfStatus : IWfEvent<WfStatus, string>
     {        
-        public const string EventName = nameof(WfStatus);
-        
-        const string Pattern = PSx3;
+        public const string EventName = nameof(WfStatus);        
 
         public WfEventId Id {get;}
     
@@ -30,10 +28,10 @@ namespace Z0
         public AppMsg Description {get;}
  
         [MethodImpl(Inline)]
-        public WfStatus(string worker, string body, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Blue)
+        public WfStatus(string actor, string body, CorrelationToken ct, AppMsgColor flair = StatusFlair)
         {
-            Id = wfid(nameof(WfStatus), ct);
-            ActorName = worker;
+            Id = wfid(EventName, ct);
+            ActorName = actor;
             Body = body;
             Flair =  flair;
             Description = AppMsg.Colorize(Body, Flair);
@@ -41,6 +39,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Id, ActorName, Description);
+            => text.format(PSx3, Id, ActorName, Description);
     }
 }

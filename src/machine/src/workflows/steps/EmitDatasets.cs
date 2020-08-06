@@ -88,8 +88,7 @@ namespace Z0
             using var step = new EmitBitMasks(Wf, Ct);
             step.Run();
         }
-                        
-        
+                                
         public void Run()
         {
             Run(default(EmitMetadataSetsStep));        

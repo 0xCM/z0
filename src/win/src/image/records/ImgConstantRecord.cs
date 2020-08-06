@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
+    using Z0.Data;
+
     using static Konst;
 
     public enum ImgConstantField : ushort
@@ -23,7 +25,7 @@ namespace Z0
         Value = 4,
     }
 
-    public struct ImgConstantRecord
+    public struct ImgConstantRecord : ITable<ImgConstantField>
     {            
         public int Sequence;
 

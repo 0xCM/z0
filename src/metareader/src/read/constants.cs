@@ -8,7 +8,7 @@ namespace Z0
 
     using static ReaderInternals;
         
-    partial class ImgMetadataReader
+    partial class PeMetaReader
     {                
         internal static ReadOnlySpan<ImgConstantRecord> constants(in ReaderState state)
         {            

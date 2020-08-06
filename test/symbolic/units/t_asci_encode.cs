@@ -69,7 +69,7 @@ namespace Z0
 
         public void res_HexKind()
         {
-            var res = AsciResourceSet.create<Hex8Kind,asci4>();
+            var res = Resources.create<Hex8Kind,asci4>();
             for(var i=0; i<res.EntryCount; i++)
             {                
                 var expect = asci.encode(n4, text.concat('x', As.uint8(i).FormatHex(true, false)));

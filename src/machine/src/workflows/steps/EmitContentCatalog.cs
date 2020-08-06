@@ -37,7 +37,7 @@ namespace Z0
         public void Run()
         {
             Wf.Emitting(WorkerName, DatasetName, TargetPath, Ct);
-            var entries = z.span(zdat.Catalog.Array());
+            var entries = z.span(ZTables.Catalog.Array());
             EmissionCount = (uint)entries.Length;
 
             var f = formatter<ContentLibField>();

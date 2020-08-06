@@ -23,9 +23,8 @@ namespace Z0
         
         public AppMsgColor Flair {get;}
             
-
         [MethodImpl(Inline)]
-        public WorkerInitialized(string worker, CorrelationToken ct, AppMsgColor flair = AppMsgColor.DarkCyan)
+        public WorkerInitialized(string worker, CorrelationToken ct, AppMsgColor flair = InitializedFlair)
         {
             Id = wfid(EventName, ct);
             ActorName = worker;

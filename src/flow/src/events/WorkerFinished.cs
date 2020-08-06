@@ -15,8 +15,6 @@ namespace Z0
     {        
         public const string EventName = nameof(WorkerFinished);
 
-        public const AppMsgColor DefaultFlair = AppMsgColor.Cyan;
-
         public WfEventId Id {get;}
 
         public AppMsgColor Flair {get;}
@@ -24,7 +22,7 @@ namespace Z0
         public string ActorName {get;}
         
         [MethodImpl(Inline)]
-        public WorkerFinished(string worker, CorrelationToken ct, AppMsgColor flair = DefaultFlair)
+        public WorkerFinished(string worker, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
         {
             Id = wfid(EventName, ct);
             ActorName = worker;

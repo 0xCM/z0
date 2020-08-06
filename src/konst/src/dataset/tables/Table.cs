@@ -10,21 +10,22 @@ namespace Z0.Data
     using static Konst;
 
     public readonly struct Table<T>
+        where T : ITable
     {
         public readonly string Name;
         
         public readonly TableHeader Header;
 
-        public readonly Rows<T> Rows;
+        public readonly TableRows<T> Rows;
 
-        public Table(string name, TableHeader header, Row<T>[] data)
+        public Table(string name, TableHeader header, TableRow<T>[] data)
         {
             Name = name;
             Header = header;
             Rows = data;
         }
         
-        public ref Row<T> this[int index]
+        public ref TableRow<T> this[int index]
         {
             get => ref Rows[index];
         }

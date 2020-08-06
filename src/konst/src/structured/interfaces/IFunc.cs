@@ -20,7 +20,7 @@ namespace Z0
         /// The operation identity
         /// </summary>
         OpIdentity Id 
-            => OpIdentity.Set(Name);        
+            => OpIdentity.set(Name);        
     }
 
     /// <summary>

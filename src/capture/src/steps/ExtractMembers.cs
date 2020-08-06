@@ -16,13 +16,7 @@ namespace Z0.Asm
         readonly CorrelationToken Ct;
 
         readonly WfState Wf;
-        
-        ICaptureWorkflow CWf 
-             => Wf.CWf;
-
-        public ICaptureContext Context 
-            => CWf.Context;
-        
+                
         [MethodImpl(Inline)]
         public ExtractMembers(WfState state, CorrelationToken ct)
         {
@@ -51,12 +45,12 @@ namespace Z0.Asm
             var extracted = sys.empty<ExtractedCode>();            
             try
             {
-                extracted = Extract(Context,host); 
-                Context.Raise(new ExtractedMembers(host.Uri, extracted.Length));
+                extracted = Extract(Wf.CWf.Context ,host); 
+                Wf.Raise(new ExtractedMembers(host.Uri, extracted.Length));
             }
             catch(Exception e)
             {
-                Wf.Raise(new WorkflowError(WorkerName, $"{host.Uri} extract failure", e, Ct));
+                Wf.Error(WorkerName, e, Ct);
             }
             return extracted;
         }
@@ -72,7 +66,7 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Raise(new WorkflowError(WorkerName, $"Extract failure", e, Ct));
+                Wf.Error(WorkerName, e, Ct);
                 return sys.empty<ExtractedCode>();
             }            
         }

@@ -23,21 +23,18 @@ namespace Z0
         public T Body {get;}
 
         public AppMsgColor Flair {get;}
-
-        public AppMsg Description {get;}
-
+        
         [MethodImpl(Inline)]
-        public WfStepFinished(string worker, T body, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
+        public WfStepFinished(string worker, T body, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
         {
             Id = wfid(EventName, ct);
             ActorName = worker;
             Body = body;
-            Flair = flair;
-            Description = AppMsg.Colorize(Body, Flair);
+            Flair = flair;        
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);          
+            => text.format(PSx3, Id, ActorName, Body);          
     }   
 }

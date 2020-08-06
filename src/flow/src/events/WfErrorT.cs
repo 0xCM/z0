@@ -22,29 +22,7 @@ namespace Z0
         public readonly T Body {get;}
 
         public AppMsgColor Flair {get;}
-
-        public AppMsg Description {get;}
         
-        [MethodImpl(Inline)]
-        public WfError(string actor, T body, AppMsg description, CorrelationToken ct)
-        {
-            Id = wfid(EventName, ct);
-            ActorName = actor;
-            Body = body;
-            Flair =  AppMsgColor.Red;
-            Description = description;
-        }
-
-        [MethodImpl(Inline)]
-        public WfError(string worker, T body, Exception e, CorrelationToken ct)
-        {
-            Id = wfid(EventName, ct);
-            ActorName = worker;
-            Body = body;
-            Flair =  AppMsgColor.Red;
-            Description = AppMsg.Colorize(text.concat(body, e), ErrorColor, AppMsgKind.Error);
-        }
-
         [MethodImpl(Inline)]
         public WfError(string worker, T body, CorrelationToken ct)
         {
@@ -52,7 +30,6 @@ namespace Z0
             ActorName = worker;
             Body = body;
             Flair =  AppMsgColor.Red;
-            Description = AppMsg.NoCaller(Body, AppMsgKind.Error);
         }
               
         public string Format()

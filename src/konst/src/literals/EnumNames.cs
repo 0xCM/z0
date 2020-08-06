@@ -17,10 +17,6 @@ namespace Z0
         
         public readonly string[] Names;
 
-        [MethodImpl(Inline)]
-        public static Z0.EnumNames<E> get<E>()                   
-            where E : unmanaged, Enum
-                => new Z0.EnumNames<E>(Enum.GetNames(typeof(E)));    
 
         [MethodImpl(Inline)]
         public EnumNames(Type type, string[] src)

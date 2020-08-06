@@ -49,7 +49,7 @@ namespace Z0
             {
                 var id = part.Id;
                 var assembly = part.Owner;                                
-                var records = ImgMetadataReader.headers(FilePath.Define(assembly.Location));
+                var records = PeMetaReader.headers(FilePath.Define(assembly.Location));
                 var count = (uint)records.Length;
                 
                 for(var i=0; i<count; i++)

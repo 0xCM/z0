@@ -54,7 +54,7 @@ namespace Z0
 
         ReadOnlySpan<ImgConstantRecord> Read(IPart part)
         {
-            using var reader = ImgMetadataReader.open(part.PartPath());
+            using var reader = PeMetaReader.open(part.PartPath());
             return reader.ReadConstants();        
         }
         
@@ -66,7 +66,7 @@ namespace Z0
             
             var data = Read(part);
             var count = data.Length;            
-            var dst = PartRecords.formatter(PartRecordSpecs.Constants);
+            var dst = PartRecords.formatter(ImageRecords.Constants);
             
             dst.EmitHeader();
             for(var i=0u; i<count; i++)

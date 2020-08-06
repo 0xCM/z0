@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;    
     
-    partial class ImgMetadataReader
+    partial class PeMetaReader
     {        
         [MethodImpl(Inline)]
         internal static ReadOnlySpan<R> empty<R>()

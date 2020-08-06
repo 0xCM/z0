@@ -52,11 +52,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BenchmarkRecord((string opName, long opCount, SystemCounter clock) src)
-            => Capture(OpIdentity.Set(src.opName), src.opCount, src.clock);        
+            => Capture(OpIdentity.set(src.opName), src.opCount, src.clock);        
 
         [MethodImpl(Inline)]
         public static BenchmarkRecord Define(long count, Duration timing, string label)
-            => new BenchmarkRecord(OpIdentity.Set(label), count, timing);
+            => new BenchmarkRecord(OpIdentity.set(label), count, timing);
 
         [MethodImpl(Inline)]
         BenchmarkRecord(OpIdentity id, long opcount, Duration elapsed)
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BenchmarkRecord(long count, Duration timing, string Label)
         {
-            this.OpId = OpIdentity.Set(Label ?? "?");
+            this.OpId = OpIdentity.set(Label ?? "?");
             this.OpCount = count;
             this.Timing = timing;
         }            

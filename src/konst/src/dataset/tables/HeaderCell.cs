@@ -6,6 +6,7 @@ namespace Z0.Data
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
 
@@ -13,13 +14,16 @@ namespace Z0.Data
     {
         public readonly uint Index;        
 
-        public readonly string Label;
-        
+        public readonly string Name;
+
+        public readonly uint Width;
+
         [MethodImpl(Inline)]
-        public HeaderCell(uint index, string label)
+        public HeaderCell(uint index, string name, uint width)
         {
             Index = index;
-            Label = label;
+            Name = name;
+            Width = width;
         }
     }
 }

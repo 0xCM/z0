@@ -14,7 +14,7 @@ namespace Z0
     using static Root;
     using static ReaderInternals;
     
-    partial class ImgMetadataReader
+    partial class PeMetaReader
     {        
         internal static ReadOnlySpan<ImgFieldRva> fieldrva(in ReaderState state)        
         {                

@@ -11,7 +11,7 @@ namespace Z0
     using static Flow;
             
     [Event]
-    public readonly struct WfError : IWfEvent<WfError, string>
+    public readonly struct WfError : IWfEvent<WfError, object>
     {                
         public const string EventName = nameof(WfError);
         
@@ -19,43 +19,20 @@ namespace Z0
         
         public string ActorName {get;}
 
-        public string Body {get;}
+        public object Body {get;}
         
         public AppMsgColor Flair {get;}
-        
-        public AppMsg Description {get;}
-        
+                        
         [MethodImpl(Inline)]
-        public WfError(AppMsg description, CorrelationToken ct)
+        public WfError(string actor, object body, CorrelationToken ct)
         {
             Id = wfid(EventName, ct);
-            Body = EmptyString;
-            ActorName = EmptyString;
-            Flair = AppMsgColor.Red;
-            Description = description;
-        }
-
-        [MethodImpl(Inline)]
-        public WfError(string worker, Exception e, CorrelationToken ct)
-        {
-            Id = wfid(EventName, ct);
-            Body = e.ToString();
-            ActorName = worker;
-            Flair = AppMsgColor.Red;
-            Description = AppMsg.NoCaller(Body, AppMsgKind.Error);
-        }
-
-        [MethodImpl(Inline)]
-        public WfError(string worker, object body, CorrelationToken ct)
-        {
-            Id = wfid(EventName, ct);
-            ActorName = worker;
-            Body = $"{body}";
-            Flair = AppMsgColor.Red;
-            Description = AppMsg.NoCaller(Body, AppMsgKind.Error);
+            ActorName = actor;
+            Body = body;
+            Flair = AppMsgColor.Red;            
         }
                 
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);
+            => text.format(PSx3, Id, ActorName, Body);
     }
 }

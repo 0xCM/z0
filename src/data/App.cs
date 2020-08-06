@@ -4,6 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Linq;
+    using Z0.Asm;
+
     using static Konst;
     using P = Z0.Parts;
 
@@ -23,12 +27,13 @@ namespace Z0
         {
         }
 
+        
         void RunApp(params PartId[] src)
-        {
+        {            
             InstrinsicsEmitter.create(Context).Emit();            
             term.print(text.concat("ContentForm".PadRight(20), SpacePipe, "Kind".PadRight(12), SpacePipe,  "Name".PadRight(60), SpacePipe, "Count"));
-            z.iter(zdat.Content, Describe);       
-            z.iter(zdat.Structured, Describe);     
+            z.iter(ZTables.Content, Describe);       
+            z.iter(ZTables.Structured, Describe);     
         }
 
         void Describe(Paired<StructureKind,AppResourceDoc> src)
@@ -55,7 +60,6 @@ namespace Z0
         public static void Main(params string[] args)
             => Launch(args);
     }
-
 
     public static partial class XTend
     {

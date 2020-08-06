@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static ControlStep;
+    using static Controller;
 
     using static z;
     
@@ -79,19 +79,6 @@ namespace Z0
             StepConfig = WorkflowStepConfig.Load(Wf);
             Known = known;
         }
-
-        // [MethodImpl(Inline)]
-        // Control(WfContext wf, CorrelationToken ct, string[] args, params ActorIdentity[] known)     
-        // {
-        //     Context = wf.ContextRoot;
-        //     Wf = wf;
-        //     Args = args;
-        //     Known = known;
-        //     Ct =  ct;
-        //     Asm = ContextFactory.asm(Context);
-        //     RunProcessPartFilesStep = true;
-        //     StepConfig = WorkflowStepConfig.Load(wf);
-        // }
 
         public void Run()
         {

@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Data;
+
     using static Konst;
 
     public enum ImgRvaField : uint
@@ -18,7 +20,7 @@ namespace Z0
         Signature = 2 | (64 << WidthOffset),         
     }
 
-    public struct ImgFieldRva : IComparable<ImgFieldRva>
+    public struct ImgFieldRva : IComparable<ImgFieldRva>, ITable<ImgRvaField,ImgFieldRva>
     {
         public Address32 Rva;
 

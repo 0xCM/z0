@@ -5,45 +5,28 @@
 namespace Z0
 {
     using System;
-        
+
+    using Z0.Data;
+
     using static Konst;    
-
-    public enum PeHeaderField : uint
-    {
-        FileName = 0 | (26 << WidthOffset),
-
-        Section = 1 | (10 << WidthOffset),
-
-        Address = 2 | (16 << WidthOffset),
-
-        Size = 3 | (10 << WidthOffset),
-        
-        EntryPoint = 4 | (16 << WidthOffset),
-
-        CodeBase = 5 | (16 << WidthOffset),
-
-        Gpt = 6 | (16 << WidthOffset),
-
-        GptSize = 7 | (8 << WidthOffset)
-    }
     
-    public readonly struct PeHeaderRecord
+    public struct PeHeaderRecord : ITable<PeHeaderField,PeHeaderRecord>
     {
-        public readonly FileName FileName;
+        public FileName FileName;
 
-        public readonly string Section;
+        public string Section;
 
-        public readonly MemoryAddress Address;
+        public MemoryAddress Address;
 
-        public readonly ByteSize Size;
+        public ByteSize Size;
 
-        public readonly MemoryAddress EntryPoint;
+        public MemoryAddress EntryPoint;
 
-        public readonly MemoryAddress CodeBase;
+        public MemoryAddress CodeBase;
 
-        public readonly MemoryAddress GlobalPointerTable;
+        public MemoryAddress GlobalPointerTable;
 
-        public readonly ByteSize GlobalPointerTableSize;
+        public ByteSize GlobalPointerTableSize;
 
         public PeHeaderRecord(FileName FileName, string Section, MemoryAddress Address, ByteSize Size, MemoryAddress EntryPoint, 
             MemoryAddress CodeBase, MemoryAddress GlobalPointerTable, ByteSize GlobalPointerTableSize)

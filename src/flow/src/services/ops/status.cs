@@ -12,7 +12,11 @@ namespace Z0
     partial struct Flow    
     {
         [MethodImpl(Inline)]
-        public static WfStatus<T> status<T>(string worker, T body, CorrelationToken ct)
-            => new WfStatus<T>(worker, body, ct);
+        public static WfStatus<T> status<T>(string actor, T body, CorrelationToken ct)
+            => new WfStatus<T>(actor, body, ct);
+
+        [MethodImpl(Inline)]
+        public static void status<T>(IWfContext wf, string actor, T body, CorrelationToken ct)
+            => wf.Raise(status(actor, body, ct));
     }
 }

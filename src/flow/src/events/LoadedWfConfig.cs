@@ -15,11 +15,9 @@ namespace Z0
     {        
         public const string EventName = nameof(LoadedWfConfig);
 
-        public const AppMsgColor DefaultFlair = AppMsgColor.Cyan;
-
         public WfEventId Id {get;}
         
-        public string ActorName {get;}
+        public string ActorName {get;}        
         
         public AppMsgColor Flair {get;}
         
@@ -27,21 +25,18 @@ namespace Z0
 
         public readonly WfSettings ConfigData;
 
-        public AppMsg Description {get;}
-
         [MethodImpl(Inline)]
-        public LoadedWfConfig(string actor, FilePath src, WfSettings data, CorrelationToken ct)
+        public LoadedWfConfig(string actor, FilePath src, WfSettings data, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
         {
             Id = wfid(EventName, ct);
             ActorName = actor;
-            Flair = DefaultFlair;
+            Flair = flair;
             ConfigPath = src;
-            ConfigData = data;
-            Description = AppMsg.NoCaller(new {SourcePath = src}, AppMsgKind.Info);
+            ConfigData = data;            
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);        
+            => text.format(PSx4, Id, ActorName, ConfigPath, ConfigData);
     }
 }

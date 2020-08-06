@@ -7,25 +7,27 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Data;
+
     using static Konst;
         
-    public readonly struct ImgResourceRecord
+    public struct ImgResourceRecord 
     {
-        public long Offset {get;}
+        public long Offset;
 
-        public string Name {get;}
+        public string Name;
 
-        public string Attribute {get;}
+        public string Attribute;
 
-        public string Implementation {get;}
+        public string Data;
 
         [MethodImpl(Inline)]
-        internal ImgResourceRecord(string Name, string Attribute, long Offset, string Implementation)
+        internal ImgResourceRecord(string name, string attribute, long offset, string data)
         {
-            this.Name = Name;
-            this.Attribute = Attribute;
-            this.Offset = Offset;
-            this.Implementation = Implementation;
+            this.Name = name;
+            this.Attribute = attribute;
+            this.Offset = offset;
+            this.Data = data;
         }             
     }
 }

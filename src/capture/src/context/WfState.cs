@@ -35,6 +35,7 @@ namespace Z0.Asm
 
         public ICaptureBroker Broker {get;}
 
+
         [MethodImpl(Inline)]
         public WfState(WfContext wf, IAsmContext asm, string[] args, CorrelationToken ct)        
         {
@@ -56,6 +57,8 @@ namespace Z0.Asm
             Broker = CaptureBroker.create(FilePath.Empty, ct);
         }
 
+        public ICaptureContext CaptureContext 
+            => CWf.Context;
 
         public IAppEventSink AppEventSink 
             => CWf.Broker.Sink;

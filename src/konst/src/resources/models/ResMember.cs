@@ -10,6 +10,9 @@ namespace Z0
 
     using static Konst;
     
+    /// <summary>
+    /// Describes a member that defines a resource
+    /// </summary>
     public readonly struct ResMember : ITextual
     {
         public readonly MemberInfo Member;

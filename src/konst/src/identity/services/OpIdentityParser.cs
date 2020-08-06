@@ -34,7 +34,7 @@ namespace Z0
             var generic = src.TakeAfter(PartSep)[0] == IDI.Generic;
             var imm = suffix.Contains(IDI.Imm);
             var components = src.SplitClean(PartSep);
-            var id = OpIdentity.Define(src, name, suffix, generic, imm, components);
+            var id = OpIdentity.define(src, name, suffix, generic, imm, components);
             return id;
         }
         

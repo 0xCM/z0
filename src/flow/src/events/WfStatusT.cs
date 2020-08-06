@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
     using static z;
+
     [Event]
     public readonly struct WfStatus<T> : IWfEvent<WfStatus<T>, T>
     {        
@@ -23,20 +24,17 @@ namespace Z0
 
         public AppMsgColor Flair {get;}
 
-        public AppMsg Description {get;}
-
         [MethodImpl(Inline)]
-        public WfStatus(string worker, T body, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Blue)
+        public WfStatus(string actor, T body, CorrelationToken ct, AppMsgColor flair = StatusFlair)
         {
             Id = wfid(EventName, ct);
-            ActorName = worker;
+            ActorName = actor;
             Flair =  flair;
             Body = body;
-            Description = AppMsg.Colorize(Body, Flair);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);
+            => text.format(PSx3, Id, ActorName, Body);
     }
 }

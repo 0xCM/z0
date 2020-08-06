@@ -5,7 +5,7 @@
 namespace Z0.Data
 {        
     using System;
-
+    
     public interface IEntity<T> : ITextual, INullary<T>, IEquatable<T>
         where T : struct
     {

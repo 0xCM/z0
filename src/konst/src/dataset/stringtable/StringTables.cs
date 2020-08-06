@@ -19,14 +19,6 @@ namespace Z0
             => new StringTableRow(data);
 
         [MethodImpl(Inline), Op]
-        public static HeaderCell header(uint index, string label)
-            => new HeaderCell(index,label);
-
-        [MethodImpl(Inline), Op]
-        public static TableHeader header(HeaderCell[] data)
-            => data;
-
-        [MethodImpl(Inline), Op]
         public static StringTable table(string name, TableHeader header, StringTableRow[] rows)
             => new StringTable(name, header,rows);
     }

@@ -65,7 +65,7 @@ namespace Z0
 
             var id = part.Id;
             var assembly = part.Owner;                
-            var methods = ImgMetadataReader.methods(FilePath.Define(assembly.Location));
+            var methods = PeMetaReader.methods(FilePath.Define(assembly.Location));
             var count = (uint)methods.Length;
             
             using var writer = dst.Writer();       

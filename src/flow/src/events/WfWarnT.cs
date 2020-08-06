@@ -22,8 +22,6 @@ namespace Z0
         public T Body {get;}        
         
         public AppMsgColor Flair {get;}
-
-        public AppMsg Description {get;}
         
         [MethodImpl(Inline)]
         public WfWarn(string actor, T body, CorrelationToken ct)
@@ -32,10 +30,8 @@ namespace Z0
             Body = body;
             ActorName = actor;
             Flair = AppMsgColor.Yellow;
-            Description = AppMsg.NoCaller(body, AppMsgKind.Warning);
-        }            
-        
+        }                    
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);            
+            => text.format(PSx3, Id, ActorName, Body);            
     }
 }

@@ -46,7 +46,7 @@ namespace Z0
 
         public ReadOnlySpan<ImgBlobRecord> Read(IPart part)
         {
-            using var reader = ImgMetadataReader.open(part.PartPath());
+            using var reader = PeMetaReader.open(part.PartPath());
             return reader.ReadBlobs();        
         }
                 
@@ -59,7 +59,7 @@ namespace Z0
 
             var data = Read(part);
             var count = (uint)data.Length;     
-            var target = PartRecords.sink(PartRecordSpecs.Blobs);
+            var target = PartRecords.sink(ImageRecords.Blobs);
 
             for(var i=0u; i<count; i++)
                 target.Deposit(skip(data,i));

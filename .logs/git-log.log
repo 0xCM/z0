@@ -4712,3 +4712,466 @@
  rename src/konst/src/parts/{contracts => }/IConverter.cs (100%)
  rename src/konst/src/parts/{attributes => }/Purpose.cs (100%)
  rename src/konst/src/{partfiles/traits/TTestLogPaths.cs => validation/ITestLogPaths.cs} (90%)
+[master eaab0c2a1] .
+ 466 files changed, 217 insertions(+), 90256 deletions(-)
+ rename src/{zdata => data}/App.cs (100%)
+ rename src/{zdata => data}/Part.cs (81%)
+ rename src/{zdata => data}/add.sh (100%)
+ rename src/{zdata => data}/build-log.sh (100%)
+ rename src/{zdata => data}/build.sh (100%)
+ rename src/{zdata => data}/catalog.csv (100%)
+ rename src/{zdata => data}/clean.sh (100%)
+ rename src/{zdata => data}/directory.build.props (100%)
+ create mode 100644 src/data/id.sh
+ rename src/{zdata => data}/models/ContentLibEntry.cs (100%)
+ rename src/{zdata => data}/models/IntrinsicsDocument.cs (100%)
+ rename src/{zdata => data}/models/LocatedImage.cs (100%)
+ rename src/{zdata => data}/models/LocatedImageFIeld.cs (100%)
+ rename src/{zdata => data}/models/LocatedImageT.cs (100%)
+ rename src/{zdata => data}/models/LocatedImages.cs (100%)
+ rename src/{zdata => data}/models/LocatedPart.cs (100%)
+ rename src/{zdata => data}/models/PartTypes.cs (100%)
+ rename src/{zdata => data}/models/ProcessImageField.cs (100%)
+ rename src/{zdata => data}/models/ProcessImageSummary.cs (100%)
+ rename src/{zdata => data}/models/ProjectDocRecord.cs (100%)
+ rename src/{zdata => data}/models/SystemImageSymbol.cs (100%)
+ rename src/{zdata/info => data/notes}/Encoding.Notes.csv (100%)
+ rename src/{zdata/info => data/notes}/PeNotes.md (100%)
+ rename src/{zdata/info => data/notes}/Syntax.OTC.Eflags.csv (100%)
+ rename src/{zdata/info => data/notes}/Syntax.OpCodeTables.csv (100%)
+ rename src/{zdata/info => data/notes}/TLS.csv (100%)
+ rename src/{zdata/info => data/notes}/adc.csv (100%)
+ rename src/{zdata/info => data/notes}/adcx.csv (100%)
+ rename src/{zdata/info => data/notes}/and.csv (100%)
+ rename src/{zdata/info => data/notes}/call.csv (100%)
+ rename src/{zdata/info => data/notes}/cmp.csv (100%)
+ rename src/{zdata/info => data/notes}/jcc.csv (100%)
+ rename src/{zdata/info => data/notes}/jmp.csv (100%)
+ rename src/{zdata/info => data/notes}/lea.csv (100%)
+ rename src/{zdata/info => data/notes}/mov.csv (100%)
+ rename src/{zdata/info => data/notes}/movsq.csv (100%)
+ rename src/{zdata/info => data/notes}/movsx.csv (100%)
+ rename src/{zdata/info => data/notes}/movzx.csv (100%)
+ rename src/{zdata/info => data/notes}/or.csv (100%)
+ rename src/{zdata/info => data/notes}/pmovzx.csv (100%)
+ rename src/{zdata/info => data/notes}/popf.csv (100%)
+ rename src/{zdata/info => data/notes}/pushf.csv (100%)
+ rename src/{zdata/info => data/notes}/setcc.csv (100%)
+ rename src/{zdata/info => data/notes}/sub.csv (100%)
+ rename src/{zdata/info => data/notes}/test.csv (100%)
+ rename src/{zdata/info => data/notes}/xor.csv (100%)
+ rename src/{zdata => data}/remove.sh (100%)
+ rename src/{zdata => data}/run.sh (100%)
+ rename src/{zdata => data}/services/IntrinsicsDocReader.cs (100%)
+ rename src/{zdata => data}/services/IntrinsicsEmitter.cs (100%)
+ rename src/{zdata => data}/services/zdat.cs (100%)
+ rename src/{zdata/content => data/tables}/ContentKind.cs (100%)
+ rename src/{zdata/content => data/tables}/StructuredKind.cs (100%)
+ rename src/{zdata/content => data/tables}/asmalg/A.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/B.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/C.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/D.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/E.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/F.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/H.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/I.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/K.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/L.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/M.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/O.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/P.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/R.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/S.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/T.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/U.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/V.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/W.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/X.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/_AMX.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/_AVX-512-KNC.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/_AVX-512.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/_AVX.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/_AVX2.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/_Other.md (100%)
+ rename src/{zdata/content => data/tables}/asmalg/_SVML.md (100%)
+ rename src/{zdata/content => data/tables}/asmid/AsmId.Col.Encoding.csv (100%)
+ rename src/{zdata/content => data/tables}/asmid/AsmId.Col.Inxs.csv (100%)
+ rename src/{zdata/content => data/tables}/asmid/AsmId.Col.LegacyMode.csv (100%)
+ rename src/{zdata/content => data/tables}/asmid/AsmId.Col.Mode64.csv (100%)
+ rename src/{zdata/content => data/tables}/asmid/AsmId.Col.Oc.NoVex.csv (100%)
+ rename src/{zdata/content => data/tables}/asmid/AsmId.Col.Oc.Vex.csv (100%)
+ rename src/{zdata/content => data/tables}/asmid/AsmId.EFlagCC.csv (100%)
+ rename src/{zdata/content => data/tables}/asmid/AsmId.LegacyPrefix.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/adc.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/adcx.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/and.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/call.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/cmp.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/jcc.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/jmp.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/lea.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/mov.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/movsq.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/movsx.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/movzx.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/or.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/pmovzx.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/popf.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/pushf.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/setcc.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/sub.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/test.csv (100%)
+ rename src/{zdata/content => data/tables}/asminxs/xor.csv (100%)
+ rename src/{zdata/content => data/tables}/asmsyn/AsmSyn.Alg.Exprs.csv (100%)
+ rename src/{zdata/content => data/tables}/asmsyn/AsmSyn.Alg.Fx.csv (100%)
+ rename src/{zdata/content => data/tables}/asmsyn/AsmSyn.Alg.Id.csv (100%)
+ rename src/{zdata/content => data/tables}/asmsyn/AsmSyn.OcT.AddressingMethods.csv (100%)
+ rename src/{zdata/content => data/tables}/asmsyn/AsmSyn.OcT.Combined.csv (100%)
+ rename src/{zdata/content => data/tables}/asmsyn/AsmSyn.OcT.OperandTypeCodes.csv (100%)
+ rename src/{zdata/content => data/tables}/asmsyn/AsmSyn.OcT.Parametric.csv (100%)
+ rename src/{zdata/content => data/tables}/asmsyn/AsmSyn.OcT.Reg.csv (100%)
+ rename src/{zdata/content => data/tables}/asmsyn/AsmSyn.OcT.RegCodes.csv (100%)
+ rename src/{zdata/content => data/tables}/asmsyn/AsmSyn.OcT.SuperScripts.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Addressing.ModRm32.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Addressing.ModRm32x64.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Addressing.SIB32.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.EFlags.Alt.CC.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.EFlags.Alt.CStates.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.EFlags.Alt.CT.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.EFlags.Bits.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.EFlags.CExpr.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.EFlags.CState.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.EFlags.CTest.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.EFlags.CrossRef.Notation.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.EFlags.XRef.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.EffOpSize.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.OpCodes.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.OperandOffset.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Prefixes.Legacy.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.128.reg.ModRm.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.16.reg.ModRm.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.16.reg.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.256.reg.ModRm.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.32.reg.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.64.reg.ModRm.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.64.reg.NoModRm.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.Def.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.Gp.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.RexPrefix.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.SegReg.2.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.SegReg.3.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.mmx.reg.ModRm.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.reg.ModRm.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.rm.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.vvvv.vex.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.x86.reg.ModRm.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.x86.reg.NoModRm.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Bits.x86.reg.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Layout.gp.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Layout.seg.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.Reg.Layout.v.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/AsmT.SegReg.Selection.csv (100%)
+ rename src/{zdata/content => data/tables}/asmt/BinaryBitLogic.csv (100%)
+ rename src/{zdata/content => data/tables}/env/SystemImages.csv (100%)
+ rename src/{zdata/content => data/tables}/help/cl.options.csv (100%)
+ rename src/{zdata/content => data/tables}/help/datetime.format.csv (100%)
+ rename src/{zdata/content => data/tables}/help/ilasm.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msbuild.common.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msbuild.compile.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msbuild.cpp.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msbuild.embedded-resource.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msbuild.project-reference.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msbuild.reference.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msbuild.switches.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msbuild.well-known.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msil.opcodes.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msvs.dll.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msvs.headers.csv (100%)
+ rename src/{zdata/content => data/tables}/help/msvs.tools.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/COFF.Header.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/COFF_HEADER.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/COFF_HEADER_FIELDS.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/COFF_SYMBOL_TABLE.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/Characteristics.CSV (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_DEBUG_DIRECTORY.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_DLLCHARACTERISTICS.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_FILE_MACHINE.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_REL_AMD64.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_RESOURCE_DATA_ENTRY.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_RESOURCE_DIRECTORY.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_RESOURCE_DIRECTORY_ENTRY.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_SCN.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_SECTION_HEADER.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_SUBSYSTEM.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_SYM_CLASS.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/IMAGE_SYM_TYPE.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/MAGE_LOAD_CONFIG_DIRECTORY.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/OptionalHeaderDataDirectories.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/RESOURCE_TABLE.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/SPECIAL.csv (100%)
+ rename src/{zdata/content => data/tables}/peformat/TLS.csv (100%)
+ rename src/{zdata/content => data/tables}/resx/Strings.resx (100%)
+ rename src/{zdata/content => data/tables}/tools/.collect.bat (100%)
+ rename src/{zdata/content => data/tables}/tools/.schtasks.bat (100%)
+ rename src/{zdata/content => data/tables}/tools/7z.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/call.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/cd.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/cdb.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/cl.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/cmd.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/copy.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/csc.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/curl.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/dotnet.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/dumpbin.md (100%)
+ rename src/{zdata/content => data/tables}/tools/editbin.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/git-help-a.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/git-help.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/ilasm.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/ildasm.csv (100%)
+ rename src/{zdata/content => data/tables}/tools/ildasm.md (100%)
+ rename src/{zdata/content => data/tables}/tools/kd.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/mklink.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/msbuild.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/nuget.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/rmdir.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/robocopy.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/schtasks.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/set.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/setx.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/symchk.doc (100%)
+ rename src/{zdata/content => data/tables}/tools/tracker.doc (100%)
+ rename src/{zdata/content => data/tables}/xml/intel-intrinsics.xml (100%)
+ rename src/{zdata => data}/watch.sh (100%)
+ create mode 100644 src/data/z0.data.csproj
+ delete mode 100644 src/zdata/content/xed/4fmaps-512-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/4vnniw-512-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/adox-adcx-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/amd-3dnow-maps.txt
+ delete mode 100644 src/zdata/content/xed/amd-fma4-isa.txt
+ delete mode 100644 src/zdata/content/xed/amd-vpermil2-isa.txt
+ delete mode 100644 src/zdata/content/xed/amd-xop-dec.txt
+ delete mode 100644 src/zdata/content/xed/amd-xop-enc.txt
+ delete mode 100644 src/zdata/content/xed/amd-xop-isa.txt
+ delete mode 100644 src/zdata/content/xed/amd-xop-maps.txt
+ delete mode 100644 src/zdata/content/xed/asize-reg-table.xed.txt
+ delete mode 100644 src/zdata/content/xed/asize-rm-table.xed.txt
+ delete mode 100644 src/zdata/content/xed/avx-aes-isa.txt
+ delete mode 100644 src/zdata/content/xed/avx-chips.txt
+ delete mode 100644 src/zdata/content/xed/avx-fields.txt
+ delete mode 100644 src/zdata/content/xed/avx-fma-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/avx-imm-enc.txt
+ delete mode 100644 src/zdata/content/xed/avx-imm.txt
+ delete mode 100644 src/zdata/content/xed/avx-isa-supp.txt
+ delete mode 100644 src/zdata/content/xed/avx-isa.txt
+ delete mode 100644 src/zdata/content/xed/avx-movnt-store.txt
+ delete mode 100644 src/zdata/content/xed/avx-operand-width.txt
+ delete mode 100644 src/zdata/content/xed/avx-pclmul-isa.txt
+ delete mode 100644 src/zdata/content/xed/avx-pointer-width.txt
+ delete mode 100644 src/zdata/content/xed/avx-reg-table.txt
+ delete mode 100644 src/zdata/content/xed/avx-regs.txt
+ delete mode 100644 src/zdata/content/xed/avx-spine.txt
+ delete mode 100644 src/zdata/content/xed/avx-state-bits.txt
+ delete mode 100644 src/zdata/content/xed/avx-vex-enc.txt
+ delete mode 100644 src/zdata/content/xed/avx-vex.txt
+ delete mode 100644 src/zdata/content/xed/avx512-addressing-dec.txt
+ delete mode 100644 src/zdata/content/xed/avx512-addressing-enc.txt
+ delete mode 100644 src/zdata/content/xed/avx512-disp8-enc.txt
+ delete mode 100644 src/zdata/content/xed/avx512-disp8.txt
+ delete mode 100644 src/zdata/content/xed/avx512-evex-dec.txt
+ delete mode 100644 src/zdata/content/xed/avx512-evex-enc.txt
+ delete mode 100644 src/zdata/content/xed/avx512-fields.txt
+ delete mode 100644 src/zdata/content/xed/avx512-foundation-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/avx512-kregs.txt
+ delete mode 100644 src/zdata/content/xed/avx512-operand-widths.txt
+ delete mode 100644 src/zdata/content/xed/avx512-pointer-width.txt
+ delete mode 100644 src/zdata/content/xed/avx512-reg-table-mask.txt
+ delete mode 100644 src/zdata/content/xed/avx512-reg-tables-b3.txt
+ delete mode 100644 src/zdata/content/xed/avx512-reg-tables-n3.txt
+ delete mode 100644 src/zdata/content/xed/avx512-reg-tables-r3.txt
+ delete mode 100644 src/zdata/content/xed/avx512-regs.txt
+ delete mode 100644 src/zdata/content/xed/avx512-state-bits.txt
+ delete mode 100644 src/zdata/content/xed/avx512-strings.txt
+ delete mode 100644 src/zdata/content/xed/bdw-chips.txt
+ delete mode 100644 src/zdata/content/xed/bf16-element-types.txt
+ delete mode 100644 src/zdata/content/xed/bf16-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/bf16-opnd-widths.txt
+ delete mode 100644 src/zdata/content/xed/bitalg-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/bulk-tests.txt
+ delete mode 100644 src/zdata/content/xed/cet-fields.txt
+ delete mode 100644 src/zdata/content/xed/cet-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/cet-nop-remove.xed.txt
+ delete mode 100644 src/zdata/content/xed/cet-regs.txt
+ delete mode 100644 src/zdata/content/xed/cldemote-fields.txt
+ delete mode 100644 src/zdata/content/xed/cldemote-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/cldemote-nop-mod.xed.txt
+ delete mode 100644 src/zdata/content/xed/clflushopt.xed.txt
+ delete mode 100644 src/zdata/content/xed/clwb.xed.txt
+ delete mode 100644 src/zdata/content/xed/clx-chips.txt
+ delete mode 100644 src/zdata/content/xed/cnl-chips.txt
+ delete mode 100644 src/zdata/content/xed/cooper-lake-chips.txt
+ delete mode 100644 src/zdata/content/xed/cpuid-amd.xed.txt
+ delete mode 100644 src/zdata/content/xed/cpuid-sse.xed.txt
+ delete mode 100644 src/zdata/content/xed/cpuid-via-padlock.xed.txt
+ delete mode 100644 src/zdata/content/xed/cpuid.xed.txt
+ delete mode 100644 src/zdata/content/xed/enqcmd-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/files-amd.cfg
+ delete mode 100644 src/zdata/content/xed/files-avx-avx512.cfg
+ delete mode 100644 src/zdata/content/xed/files-sse.cfg
+ delete mode 100644 src/zdata/content/xed/files-via-padlock.cfg
+ delete mode 100644 src/zdata/content/xed/files-xmm.cfg
+ delete mode 100644 src/zdata/content/xed/files-xregs.cfg
+ delete mode 100644 src/zdata/content/xed/files.cfg
+ delete mode 100644 src/zdata/content/xed/fp16-element-type-enum.txt
+ delete mode 100644 src/zdata/content/xed/fp16-isa.txt
+ delete mode 100644 src/zdata/content/xed/fp16-operand-types.txt
+ delete mode 100644 src/zdata/content/xed/fsgsbase-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/fsgsbase-regs.xed.txt
+ delete mode 100644 src/zdata/content/xed/future-chips.txt
+ delete mode 100644 src/zdata/content/xed/gather-isa.txt
+ delete mode 100644 src/zdata/content/xed/gfni-evex-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/gfni-sse-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/gfni-vex-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/glm-chips.txt
+ delete mode 100644 src/zdata/content/xed/hsw-bmi-vex-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/hsw-chips.txt
+ delete mode 100644 src/zdata/content/xed/hsw-int256-isa.txt
+ delete mode 100644 src/zdata/content/xed/hsw-reg-table.txt
+ delete mode 100644 src/zdata/content/xed/hsw-state-bits.txt
+ delete mode 100644 src/zdata/content/xed/hsw-vshift-isa.txt
+ delete mode 100644 src/zdata/content/xed/icl-chips.txt
+ delete mode 100644 src/zdata/content/xed/ifma-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/intelpt-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/invpcid-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/ivb-chips.txt
+ delete mode 100644 src/zdata/content/xed/jkbr-isa.txt
+ delete mode 100644 src/zdata/content/xed/knc-evex-dec.txt
+ delete mode 100644 src/zdata/content/xed/knc-evex-enc-top.txt
+ delete mode 100644 src/zdata/content/xed/knc-evex-enc.txt
+ delete mode 100644 src/zdata/content/xed/knc-fields-no-avx512f.txt
+ delete mode 100644 src/zdata/content/xed/knc-fields-with-avx512f.txt
+ delete mode 100644 src/zdata/content/xed/knc-kregs.txt
+ delete mode 100644 src/zdata/content/xed/knc-nop-isa.txt
+ delete mode 100644 src/zdata/content/xed/knc-streaming-isa.txt
+ delete mode 100644 src/zdata/content/xed/knl-chips.txt
+ delete mode 100644 src/zdata/content/xed/knl-fixup.txt
+ delete mode 100644 src/zdata/content/xed/knl-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/knm-chips.txt
+ delete mode 100644 src/zdata/content/xed/knm-disp8-enc.txt
+ delete mode 100644 src/zdata/content/xed/knm-disp8.txt
+ delete mode 100644 src/zdata/content/xed/lrb2-addressing-dec.txt
+ delete mode 100644 src/zdata/content/xed/lrb2-addressing-enc.txt
+ delete mode 100644 src/zdata/content/xed/lrb2-chips.txt
+ delete mode 100644 src/zdata/content/xed/lrb2-converts.txt
+ delete mode 100644 src/zdata/content/xed/lrb2-evex-isa.txt
+ delete mode 100644 src/zdata/content/xed/lrb2-evex-reg-tables.txt
+ delete mode 100644 src/zdata/content/xed/lrb2-regs.txt
+ delete mode 100644 src/zdata/content/xed/lrb2-scalar-mask-isa.txt
+ delete mode 100644 src/zdata/content/xed/lrb2-strings.txt
+ delete mode 100644 src/zdata/content/xed/lzcnt-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/movdir-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/movnt-load-isa.txt
+ delete mode 100644 src/zdata/content/xed/mpx-fields.txt
+ delete mode 100644 src/zdata/content/xed/mpx-isa.txt
+ delete mode 100644 src/zdata/content/xed/mpx-reg-check-enc.txt
+ delete mode 100644 src/zdata/content/xed/mpx-reg-check.txt
+ delete mode 100644 src/zdata/content/xed/mpx-reg-tables.txt
+ delete mode 100644 src/zdata/content/xed/mpx-regs.txt
+ delete mode 100644 src/zdata/content/xed/oc2-extras.txt
+ delete mode 100644 src/zdata/content/xed/pconfig-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/pku-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/rdpid-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/rdrand-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/rdseed-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/rtm-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/serialize-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/sgx-enclv-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/sgx-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/sha-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/skl-chips.txt
+ delete mode 100644 src/zdata/content/xed/skx-chips.txt
+ delete mode 100644 src/zdata/content/xed/skx-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/skx-state-bits.txt
+ delete mode 100644 src/zdata/content/xed/smap-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/spr-chips.txt
+ delete mode 100644 src/zdata/content/xed/tgl-chips.txt
+ delete mode 100644 src/zdata/content/xed/tremont-chips.txt
+ delete mode 100644 src/zdata/content/xed/tsx-ldtrk-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/tzcnt-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/uisa-operand-widths.txt
+ delete mode 100644 src/zdata/content/xed/uisa-spine.txt
+ delete mode 100644 src/zdata/content/xed/uisa-splitter.txt
+ delete mode 100644 src/zdata/content/xed/uisa-state-bits.txt
+ delete mode 100644 src/zdata/content/xed/vaes-evex-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vaes-vex-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vbmi-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vbmi2-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vconflict-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vex-maps.txt
+ delete mode 100644 src/zdata/content/xed/via-padlock-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vmfunc-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vnni-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vp2intersect-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vpopcntdq-512-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vpopcntdq-vl-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/vsib-addressing-dec.txt
+ delete mode 100644 src/zdata/content/xed/vsib-addressing-enc.txt
+ delete mode 100644 src/zdata/content/xed/waitpkg-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/wbnoinvd-fields.txt
+ delete mode 100644 src/zdata/content/xed/wbnoinvd-isa.xed.txt
+ delete mode 100644 src/zdata/content/xed/xed-addr-width-enum.txt
+ delete mode 100644 src/zdata/content/xed/xed-addressing-modes-new.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-3dnow.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-base.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-chips.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-clzero.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-mcommit.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-monitorx.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-prefetch.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-rdpru.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-snp.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-sse4a.txt
+ delete mode 100644 src/zdata/content/xed/xed-amd-svm.txt
+ delete mode 100644 src/zdata/content/xed/xed-base-maps.txt
+ delete mode 100644 src/zdata/content/xed/xed-chips.txt
+ delete mode 100644 src/zdata/content/xed/xed-convert.txt
+ delete mode 100644 src/zdata/content/xed/xed-eASZ.txt
+ delete mode 100644 src/zdata/content/xed/xed-eOSZ.txt
+ delete mode 100644 src/zdata/content/xed/xed-error-enum.txt
+ delete mode 100644 src/zdata/content/xed/xed-exceptions.txt
+ delete mode 100644 src/zdata/content/xed/xed-fields.txt
+ delete mode 100644 src/zdata/content/xed/xed-flag-action-enum.txt
+ delete mode 100644 src/zdata/content/xed/xed-flag-enum.txt
+ delete mode 100644 src/zdata/content/xed/xed-gpr8-dec-reg-table.txt
+ delete mode 100644 src/zdata/content/xed/xed-gpr8-enc-reg-table.txt
+ delete mode 100644 src/zdata/content/xed/xed-ild-scanners.txt
+ delete mode 100644 src/zdata/content/xed/xed-immediates.txt
+ delete mode 100644 src/zdata/content/xed/xed-isa.txt
+ delete mode 100644 src/zdata/content/xed/xed-machine-modes-enum.txt
+ delete mode 100644 src/zdata/content/xed/xed-modrm-encode.txt
+ delete mode 100644 src/zdata/content/xed/xed-nops.txt
+ delete mode 100644 src/zdata/content/xed/xed-operand-action-enum.txt
+ delete mode 100644 src/zdata/content/xed/xed-operand-element-type-enum-base.txt
+ delete mode 100644 src/zdata/content/xed/xed-operand-types.txt
+ delete mode 100644 src/zdata/content/xed/xed-operand-visibility-enum.txt
+ delete mode 100644 src/zdata/content/xed/xed-operand-width.txt
+ delete mode 100644 src/zdata/content/xed/xed-pointer-width.txt
+ delete mode 100644 src/zdata/content/xed/xed-prefixes-encode.txt
+ delete mode 100644 src/zdata/content/xed/xed-prefixes.txt
+ delete mode 100644 src/zdata/content/xed/xed-reg-role.enum.txt
+ delete mode 100644 src/zdata/content/xed/xed-reg-tables-xmm.txt
+ delete mode 100644 src/zdata/content/xed/xed-reg-tables.txt
+ delete mode 100644 src/zdata/content/xed/xed-regs-enc.txt
+ delete mode 100644 src/zdata/content/xed/xed-regs-xmm.txt
+ delete mode 100644 src/zdata/content/xed/xed-regs.txt
+ delete mode 100644 src/zdata/content/xed/xed-spine.txt
+ delete mode 100644 src/zdata/content/xed/xed-state-bits.txt
+ delete mode 100644 src/zdata/content/xed/xed-syntax-enum.txt
+ delete mode 100644 src/zdata/content/xed/xed-via-chips.txt
+ delete mode 100644 src/zdata/content/xed/xed-via-operand-widths.txt
+ delete mode 100644 src/zdata/content/xed/xop-state-bits.txt
+ delete mode 100644 src/zdata/content/xed/xsavec-isa.txt
+ delete mode 100644 src/zdata/content/xed/xsaveopt-isa.txt
+ delete mode 100644 src/zdata/content/xed/xsaves-isa.txt
+ delete mode 100644 src/zdata/id.sh
+ delete mode 100644 src/zdata/z0.zdata.csproj

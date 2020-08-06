@@ -27,7 +27,6 @@ namespace Z0
             dst.Delimit(F.Offset, src.Offset);
             dst.Delimit(F.Value, src.Value);
             dst.EmitEol();            
-        }
-        
+        }       
     }
 }

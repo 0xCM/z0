@@ -9,12 +9,24 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Identifies a resource, its data type, and specifies the memory segment it occupies
+    /// </summary>
     public readonly struct ResIdentity
     {
+        /// <summary>
+        /// The resource name, relative to the enclosing type
+        /// </summary>
         public asci32 Name {get;}
 
+        /// <summary>
+        /// The sement of memory occupied by the resource
+        /// </summary>
         public SegRef Reference {get;}
         
+        /// <summary>
+        /// The resource data type
+        /// </summary>
         public PrimalKind DataType {get;}
         
         [MethodImpl(Inline)]
