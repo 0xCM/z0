@@ -40,6 +40,8 @@ public enum PartId : ulong
     /// </summary>    
     ZData = 50,
 
+    Data = 51,
+    
     Canonical = 63, 
     
     Bits = 70,

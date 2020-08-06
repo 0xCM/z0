@@ -7,7 +7,7 @@
 
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
 
-    <ZData>$(Src)zdata/z0.zdata.csproj</ZData>    
+    <Data>$(Src)data/z0.data.csproj</Data>    
     <Expressive>$(Src)expressive/z0.expressive.csproj</Expressive>
     <Imagine>$(Src)imagine/z0.imagine.csproj</Imagine>
     <Tokens>$(Src)tokens/z0.tokens.csproj</Tokens>
