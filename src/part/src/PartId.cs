@@ -31,6 +31,8 @@ public enum PartId : ulong
     Memories = 23,
 
     Kinds = 28, 
+    
+    Tools = 29,
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -40,6 +42,8 @@ public enum PartId : ulong
     Data = 51,
 
     Tables = 52,
+
+
     
     Canonical = 63, 
     
