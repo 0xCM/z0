@@ -24,7 +24,7 @@ namespace Z0
         
         public T State {get;}
         
-        public CorrelationToken Correlation {get;}
+        public CorrelationToken Ct {get;}
 
         [MethodImpl(Inline)]
         public WfContext(IAppContext root, T config, IMultiSink sink)
@@ -34,13 +34,13 @@ namespace Z0
             State = config;
             CtProvider = 1;
             Sink = sink;
-            Correlation = CorrelationToken.define(CtProvider);
-            Sink.Deposit(new OpeningWfContext(WorkerName, typeof(WfContext<T>).Name, Correlation));
+            Ct = CorrelationToken.define(CtProvider);
+            Sink.Deposit(new OpeningWfContext(WorkerName, typeof(WfContext<T>), Ct));
         }
 
         public void Dispose()
         {
-            Sink.Deposit(new ClosingWfContext(WorkerName, typeof(WfContext<T>).Name, Correlation));
+            Sink.Deposit(new ClosingWfContext(WorkerName, typeof(WfContext<T>), Ct));
         }
         
         public WfEventId Raise<E>(in E @event)

@@ -55,7 +55,7 @@ namespace Z0
             IndexRoot =  ResourceRoot + FolderName.Define("index");
             LogPath = root.AppPaths.AppDataRoot + FileName.Define("workflow", FileExtensions.Csv);
             Broker = new WfBroker(Ct);
-            TermSink.Deposit(new OpeningWfContext(ActorName, typeof(WfContext).Name, Ct));
+            TermSink.Deposit(new OpeningWfContext(ActorName, typeof(WfContext), Ct));
         }
 
         [MethodImpl(Inline)]
@@ -72,12 +72,12 @@ namespace Z0
             IndexRoot =  ResourceRoot + FolderName.Define("index");
             LogPath = root.AppPaths.AppDataRoot + FileName.Define("workflow", FileExtensions.Csv);
             Broker = new WfBroker(Ct);
-            TermSink.Deposit(new OpeningWfContext(ActorName, typeof(WfContext).Name, Ct));
+            TermSink.Deposit(new OpeningWfContext(ActorName, typeof(WfContext), Ct));
         }
 
         public void Dispose()
         {
-            TermSink.Deposit(new ClosingWfContext(ActorName, typeof(WfContext).Name, Ct));
+            TermSink.Deposit(new ClosingWfContext(ActorName, typeof(WfContext), Ct));
             TermSink.Dispose();
             Broker.Dispose();
         }
