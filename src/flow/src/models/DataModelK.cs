@@ -9,18 +9,21 @@ namespace Z0.Data
 
     using static Konst;
 
-    public readonly struct Publication<R>
-        where R : ITabular
+    public readonly struct DataModel<K> : IDataModel<DataModel<K>, K>
+        where K : unmanaged, Enum
     {
-        public readonly R[] Source {get;}
-
-        public FilePath Target {get;}
+        public readonly StringRef Name;
         
+        public readonly K Kind;
+
         [MethodImpl(Inline)]
-        public Publication(R[] src, FilePath dst)
+        public DataModel(string name, K kind)
         {
-            Source = src;
-            Target = dst;
+            Name = name;
+            Kind = kind;
         }
+
+        K IDataModel<DataModel<K>, K>.Kind 
+            => Kind;
     }
 }

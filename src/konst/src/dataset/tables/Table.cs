@@ -13,16 +13,11 @@ namespace Z0.Data
 
     public readonly struct Table : IDatasets
     {
-        [MethodImpl(Inline), Op]
-        public static TabularArchive archive(FolderPath root)
-            => new TabularArchive(root);
 
-        public static IDatasets Service => new Table(0);
-
-        Table(int i)
-        {
-            
-        }
+        [MethodImpl(Inline)]
+        public static TableHeader<F> header<F>(char delimiter = FieldDelimiter)
+            where F : unmanaged, Enum
+                => new TableHeader<F>(fields<F>());
 
         [MethodImpl(Inline)]
         public static TableFields<F> fields<F>()
@@ -33,6 +28,16 @@ namespace Z0.Data
         public static TableFormatter<F> formatter<F>(TableFields<F> fields, StringBuilder dst = null)
             where F : unmanaged, Enum
                 => new TableFormatter<F>(fields, dst);
+
+        public static IDatasets Service => new Table(0);
+
+        Table(int i)
+        {
+            
+        }
+
+
+
         
         [MethodImpl(Inline)]
         public static F[] literals<F>()
@@ -71,26 +76,6 @@ namespace Z0.Data
             where R : ITabular
                 => new Publication<R>(src,dst);  
 
-        public static void store<M,F,R>(M model, F rep, R[] src, char delimiter = FieldDelimiter)
-            where M : IDataModel
-            where R : ITable
-            where F : unmanaged, Enum
-        {
-            var dst = Table.Service.DatasetPath(model.Name);
-            var header = Tabular.Header<F>();
-            using var writer = dst.Writer();
-            writer.WriteLine(header.Render(delimiter));
-            for(var i=0; i<src.Length; i++)
-            {
-                var t = src[i];
-                var formatted = "";
-                writer.WriteLine(formatted);
-            }
-        }        
-
-        public static TableHeader<F> header<F>(char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
-                => new TableHeader<F>(fields<F>());
 
         public static void deposit<F,R>(R[] src, FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum

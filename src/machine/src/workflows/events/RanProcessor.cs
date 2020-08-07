@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
 
+    [Event]
     public readonly struct RanProcessor : IWfEvent<RanProcessor>
     {
         public const string EventName = nameof(RanProcessor);

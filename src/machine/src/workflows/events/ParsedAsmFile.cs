@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
 
+    [Event]
     public readonly struct ParsedAsmFile : IWfEvent<ParsedAsmFile>
     {
         const string Pattern = PSx4;

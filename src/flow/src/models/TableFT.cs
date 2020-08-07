@@ -2,25 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
-{        
+namespace Z0
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct DataModel<D> : IDataModel<DataModel<D>, D>
-        where D : unmanaged, Enum
+    using Z0.Data;
+
+    public readonly struct Table<F,T>
+        where F : unmanaged, Enum
+        where T : struct, ITable<F,T>
     {
-        public string Name {get;}
-        
-        public D Kind {get;}
+        public readonly T[] Data;
 
         [MethodImpl(Inline)]
-        public DataModel(string name, D kind)
-        {
-            Name = name;
-            Kind = kind;
-        }    
+        public Table(T[] data)
+            => Data = data;
     }
 }

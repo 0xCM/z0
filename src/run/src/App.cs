@@ -25,6 +25,8 @@ namespace Z0
 
         public CorrelationToken Ct {get;}         
 
+        WfState Wf;
+
         static IAppContext CreateAppContext()
         {
             var resolved = ApiComposition.Assemble(array(P.GMath.Resolved));
@@ -48,15 +50,22 @@ namespace Z0
             => RunnerContext.Create(root, code);
 
         public override void RunShell(params string[] args)
-        {            
-            
+        {                        
             Raise(status(ActorName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct));            
+
+            var parts = PartIdParser.Service.ParseValid(args); 
+            if(parts.Length == 0)
+                parts = Context.PartIdentities;
+            
+            var settings = Flow.settings(Context, Ct);
+            var config = Flow.configure(Context, parts, args);
+            var wfc = Flow.context(Context, parts, Ct, settings);
+            Wf = WfBuilder.state(wfc, WfBuilder.asm(Context), args);
 
             try
             {
-                var parts = PartIdParser.Service.ParseValid(args);  
-                var context = CreateArtistryContext(WfBuilder.asm(Context), parts);  
-                new Runner(context).Run();
+                using var runner = new Runner(Wf);
+                runner.Run();                
             }
             catch(Exception e)
             {
@@ -71,6 +80,7 @@ namespace Z0
 
         protected override void OnDispose()
         {
+            Wf.Dispose();
             Raise(status(ActorName, "Shell finished", Ct));
         }
     }

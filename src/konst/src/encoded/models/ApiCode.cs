@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Identifies a member defined by executable code (derived from the method implementation)
+    /// Pairs an api member with the executable code derived from that member
     /// </summary>    
     public readonly struct ApiCode : IIdentifiedCode<ApiCode,IdentifiedCode>
     {

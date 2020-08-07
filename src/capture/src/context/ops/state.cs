@@ -14,7 +14,7 @@ namespace Z0
     partial struct WfBuilder
     {
         [MethodImpl(Inline), Op]
-        public static WfCapture wfc(WfContext wf, CorrelationToken ct)
-            => new WfCapture(asm(wf.ContextRoot), ct);   
+        public static WfState state(WfContext wf, IAsmContext asm, string[] args)         
+            => new WfState(wf, asm, args, wf.Ct);
     }
 }

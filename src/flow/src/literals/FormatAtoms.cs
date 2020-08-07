@@ -8,10 +8,11 @@ namespace Z0
     using System.Text;
     
     using static Konst;
+    using static z;
 
     [LiteralProvider]
-    public readonly struct FormatPatterns
-    {
+    public readonly struct FormatAtoms
+    {     
         const string Space = " ";
 
         /// <summary>

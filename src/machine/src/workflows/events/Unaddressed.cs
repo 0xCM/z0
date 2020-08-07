@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
     
+    [Event]
     public readonly struct Unaddressed : IWfEvent<Unaddressed>
     {        
         const string Pattern = IdMarker + "The location for {1} code is unknown";

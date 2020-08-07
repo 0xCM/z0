@@ -33,7 +33,7 @@ namespace Z0.Asm
 
         public IAsmFunctionDecoder FunctionDecoder {get;}
         
-        readonly CorrelationToken Ct {get;}
+        public CorrelationToken Ct {get;}
 
         public ICaptureBroker CaptureBroker {get;}
 

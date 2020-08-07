@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
     
+    [Event]
     public readonly struct PartFileEvent : IWfEvent<PartFileEvent>
     {
         const string Pattern = IdMarker + "{1} | {2}";

@@ -23,10 +23,10 @@ namespace Z0
         
         public WfSettings State {get;}
 
-        public IPart[] Parts {get;}
-
         public WfTermEventSink TermSink {get;}
-                        
+
+        public PartId[] Parts;                        
+        
         public WfBroker Broker {get;}
                 
         public FolderPath IndexRoot {get;}
@@ -35,11 +35,28 @@ namespace Z0
         
         public FilePath LogPath {get;}
 
-        readonly CorrelationToken Ct;
+        public readonly CorrelationToken Ct;
 
         long CtProvider;
 
         readonly ulong SessionId;
+
+        [MethodImpl(Inline)]
+        public WfContext(IAppContext root, PartId[] parts, CorrelationToken ct, WfSettings config, WfTermEventSink sink)
+        {
+            Ct = ct;
+            ContextRoot = root;
+            State = config;
+            TermSink = sink;
+            SessionId = (ulong)now().Ticks;
+            CtProvider = 1;       
+            Parts = parts;
+            ResourceRoot = ContextRoot.AppPaths.ResourceRoot;
+            IndexRoot =  ResourceRoot + FolderName.Define("index");
+            LogPath = root.AppPaths.AppDataRoot + FileName.Define("workflow", FileExtensions.Csv);
+            Broker = new WfBroker(Ct);
+            TermSink.Deposit(new OpeningWfContext(ActorName, typeof(WfContext).Name, Ct));
+        }
 
         [MethodImpl(Inline)]
         public WfContext(IAppContext root, CorrelationToken ct, WfSettings config, WfTermEventSink sink)
@@ -49,8 +66,8 @@ namespace Z0
             State = config;
             TermSink = sink;
             SessionId = (ulong)now().Ticks;
+            Parts = new PartId[0]{};
             CtProvider = 1;       
-            Parts = new IPart[0]{};
             ResourceRoot = ContextRoot.AppPaths.ResourceRoot;
             IndexRoot =  ResourceRoot + FolderName.Define("index");
             LogPath = root.AppPaths.AppDataRoot + FileName.Define("workflow", FileExtensions.Csv);

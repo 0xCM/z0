@@ -12,6 +12,7 @@ namespace Z0
     using static Konst;
     using static Flow;
     
+    [Event]
     public readonly struct DecodedPart : IWfEvent<DecodedPart>
     {
         public const string EventName = nameof(DecodedPart);

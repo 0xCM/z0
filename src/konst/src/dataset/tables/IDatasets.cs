@@ -25,8 +25,5 @@ namespace Z0.Data
 
         FilePath DatasetPath(string dsname)
             => DatasetDir + FileName.Define(dsname, DataFileExt);
-
-        FilePath DatasetPath(IDataModel model)
-            => DatasetDir + FileName.Define(model.Name, DataFileExt);
     }
 }

@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using Z0.Asm;
-
+    using System.Text;
+    
     using static Konst;
 
-    partial struct WfBuilder
+    [LiteralProvider]
+    public readonly struct FormatLiterals
     {
-        [MethodImpl(Inline), Op]
-        public static WfCapture wfc(WfContext wf, CorrelationToken ct)
-            => new WfCapture(asm(wf.ContextRoot), ct);   
+
     }
+
 }

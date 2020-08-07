@@ -19,5 +19,14 @@ namespace Z0
             var dst = new ArchiveConfig(dstpath);
             return new WfConfig(args, src, dst, parsed);                    
         }
+
+        public static WfConfig configure(IAppContext context, PartId[] parts, params string[] args)
+        {
+            var srcpath = FilePath.Define(context.GetType().Assembly.Location).FolderPath;            
+            var src = new ArchiveConfig(srcpath);            
+            var dstpath = context.AppPaths.AppCaptureRoot;        
+            var dst = new ArchiveConfig(dstpath);
+            return new WfConfig(args, src, dst, parts);                    
+        }
     }
 }

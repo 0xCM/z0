@@ -23,7 +23,7 @@ namespace Z0.Data
         public readonly uint Count;
 
         [MethodImpl(Inline)]
-        internal TableFields(FieldInfo[] fields)
+        public TableFields(FieldInfo[] fields)
         {            
             Fields = fields;
             Count = (uint)Fields.Length;

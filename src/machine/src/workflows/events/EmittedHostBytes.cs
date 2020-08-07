@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
 
+    [Event]
     public readonly struct EmittedHostBytes : IWfEvent<EmittedHostBytes>
     {
         public const string EventName = nameof(EmittedHostBytes);

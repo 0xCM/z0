@@ -72,10 +72,10 @@ namespace Z0
         public void Run()
         {
             Wf.Running(WorkerName, Ct);
-            // Run(default(CaptureClientStep));
-            // Run(default(EmitDatasetsStep));
+            Run(default(CaptureClientStep));
+            Run(default(EmitDatasetsStep));
             //Run(default(ProcessPartFilesStep));
-            Run(default(RunProcessorsStep));
+            //Run(default(RunProcessorsStep));
         }
 
         public void Dispose()

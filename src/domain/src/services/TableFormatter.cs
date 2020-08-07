@@ -9,6 +9,8 @@ namespace Z0
     using System.Text;
     using System.Reflection;
 
+    using Z0.Data;
+
     using static Konst;
 
     public struct TableFormatter<F> : ITableFormatter<F>
@@ -39,21 +41,33 @@ namespace Z0
         public void EmitEol()
             => Target.Append(Eol);        
         
-        public void EmitHeader()
+        public string FormatHeader()
         {
+            var dst = text.build();
             for(var i=0; i<Fields.Length; i++)
             {
                 if(i != 0)
                 {
-                    Target.Append(Delimiter);
-                    Target.Append(Space);
+                    dst.Append(Delimiter);
+                    dst.Append(Space);
                 }
 
                 ref readonly var field = ref Fields[i];
-                Target.Append(field.Name.PadRight(width(field)));
+                dst.Append(field.Name.PadRight(width(field)));                
             }
-            
-            EmitEol();
+            dst.Append(Eol);
+            return dst.ToString();
+        }
+
+        public string FormatRow<T>(T row)
+            where T : struct, ITable<F,T>
+        {
+            return EmptyString;
+        }
+
+        public void EmitHeader()
+        {
+            Target.Append(FormatHeader());
         }
 
         public void Append(F f, object content)

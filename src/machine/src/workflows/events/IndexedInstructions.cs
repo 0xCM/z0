@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
 
+    [Event]
     public readonly struct IndexedInstructions : IWfEvent<IndexedInstructions>
     {
         const string Pattern = IdMarker + "Created located instruction index with {1} entries";

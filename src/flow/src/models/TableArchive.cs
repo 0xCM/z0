@@ -2,25 +2,25 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Data;
+
     using static Konst;
 
-    public readonly struct Publication<R>
-        where R : ITabular
+    public readonly struct TableArchive : ITableArchive
     {
-        public readonly R[] Source {get;}
 
-        public FilePath Target {get;}
-        
+
+        public FolderPath ArchiveRoot {get;}
+
         [MethodImpl(Inline)]
-        public Publication(R[] src, FilePath dst)
+        public TableArchive(FolderPath root)
         {
-            Source = src;
-            Target = dst;
+            ArchiveRoot = root;
         }
     }
 }

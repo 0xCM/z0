@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static WfStepCreated created(WfStepKind kind, string type, CorrelationToken ct, AppMsgColor flair = CreatedFlair)
+        public static WfStepCreated created<T>(WfStepKind kind, T type, CorrelationToken ct, AppMsgColor flair = CreatedFlair)
             => created(step(kind,type), ct, flair);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static void created(IWfContext wf, WfStepKind kind, string type, CorrelationToken ct, AppMsgColor flair = CreatedFlair)
+        public static void created<T>(IWfContext wf, WfStepKind kind, T type, CorrelationToken ct, AppMsgColor flair = CreatedFlair)
             => wf.Raise(created(kind,type,ct,flair));            
     }
 }

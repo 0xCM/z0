@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
+    using Z0.Asm;
 
     using static Konst;
     using static z;
@@ -20,16 +21,16 @@ namespace Z0
         FolderPath ToolDir
             => FolderPath.Define("J:/assets/tools");
         
-        readonly IRunnerContext Context;   
+        readonly WfState Wf;   
 
         readonly Span<string> Buffer;     
 
         byte offset;
 
         [MethodImpl(Inline)]
-        public Runner(IRunnerContext context)
+        public Runner(WfState wf)
         {
-            Context = context;
+            Wf = wf;
             Buffer = z.span<string>(256);
             offset = 0;
         }
@@ -44,13 +45,23 @@ namespace Z0
                 term.print(Buffer[i]);
         }
         
-        public void Run()
+        void ListDumpBin()
         {
             var tool = DumpBin.init(ToolDir, BuildStage + FolderName.Define(nameof(DumpBin)));
             var disasm  = tool.Output(DumpBin.Flag.Disasm);
             var files = ListedFiles.from(disasm);
             var formatted = ListedFiles.format(files);
             term.print(formatted);
+        }
+
+        public void Dispose()
+        {
+
+        }
+        public void Run()
+        {
+            using var step = new ListFormatPatterns(Wf, typeof(FormatAtoms));
+            step.Run();
         }
     }
 }

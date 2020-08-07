@@ -5850,3 +5850,9 @@
  rename src/run/src/services/{IArtistryContext.cs => IRunnerContext.cs} (89%)
  create mode 100644 src/run/src/services/Runner.cs
  rename wf/dumpbin/{run.bat => exec.bat} (63%)
+[master 7761dda76] .
+ 21 files changed, 420 insertions(+), 171 deletions(-)
+ rewrite machine.csv (95%)
+ create mode 100644 src/domain/src/asm/common/HostInstructionIndex.cs
+ create mode 100644 src/flow/src/services/ops/warn.cs
+ rewrite src/konst/src/encoded/ops/include.cs (61%)

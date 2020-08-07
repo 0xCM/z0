@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static Flow;
 
+    [Event]
     public readonly struct EmittedEnumCatalog : IWfEvent<EmittedEnumCatalog>
     {
         const string Pattern = IdMarker + "Emitted summary data file for {1} enum literals to {2}";
