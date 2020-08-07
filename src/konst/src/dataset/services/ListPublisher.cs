@@ -14,7 +14,7 @@ namespace Z0.Data
     
     public readonly struct ListPublisher : IListPublisher
     {        
-        IPublicationArchive Archive => Publications.Default;
+        IDatasets Archive => Table.Service;
    
         const string SpacePipe = " | ";
 

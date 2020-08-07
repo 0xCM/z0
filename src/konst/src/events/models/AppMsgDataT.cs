@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct AppMsgData<T>
+    public readonly struct AppMsgData<T> : ITextual
     {    
         /// <summary>
         /// The message payload
@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// Defines a content render pattern, if applicable
         /// </summary>
-        public readonly string Template;
+        public readonly string Pattern;
 
         /// <summary>
         /// The message classification
@@ -37,40 +37,16 @@ namespace Z0
         public readonly AppMsgSource Source;
 
         [MethodImpl(Inline)]
-        public AppMsgData(T content, string template, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
+        internal AppMsgData(T content, string pattern, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
         {
             Content = content;
-            Template = template;
+            Pattern = pattern;
             Kind = kind;
             Color = color;
             Source = source;
         }
-
-        /// <summary>
-        /// The name of the member that originated the message
-        /// </summary>
-        public string Caller 
-        {
-            [MethodImpl(Inline)]
-            get => Source.Caller;
-        }
         
-        /// <summary>
-        /// The path to the source file in which the message originated
-        /// </summary>
-        public FilePath File 
-        {
-            [MethodImpl(Inline)]
-            get => Source.File;
-        }
-
-        /// <summary>
-        /// The source file line number on which the message originated
-        /// </summary>
-        public uint Line 
-        {
-            [MethodImpl(Inline)]
-            get => Source.Line;
-        }
+        public string Format()
+            => text.format(Pattern, Content);
     }
 }

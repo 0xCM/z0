@@ -25,8 +25,6 @@ namespace Z0
 
         readonly CorrelationToken Ct;
         
-        readonly WfTermEventSink TermSink;
-
         readonly WfSettings Config;
         
         readonly WfContext WfContext;        
@@ -40,11 +38,10 @@ namespace Z0
             ContextRoot = context;
             Args = args;
             Ct = ct;
-            TermSink = termsink(Ct);
             Paths = context.AppPaths;
             Asm = WfBuilder.asm(context);                           
             Config = settings(context, Ct);
-            WfContext = Flow.context(context, Ct, Config, TermSink);                        
+            WfContext = Flow.context(context, Ct, Config);                        
             Wf = new WfState(WfContext, Asm, args, Ct);
             Wf.Created(ActorName, Ct);
         }

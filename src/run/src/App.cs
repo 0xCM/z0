@@ -44,8 +44,8 @@ namespace Z0
         IResolvedApi Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
        
-        IArtistryContext CreateArtistryContext(IAsmContext root, PartId[] code)
-            => ArtistryContext.Create(root, code);
+        IRunnerContext CreateArtistryContext(IAsmContext root, PartId[] code)
+            => RunnerContext.Create(root, code);
 
         public override void RunShell(params string[] args)
         {            
@@ -68,6 +68,11 @@ namespace Z0
 
         public static void Main(params string[] args)
             => Launch(args);
+
+        protected override void OnDispose()
+        {
+            Raise(status(ActorName, "Shell finished", Ct));
+        }
     }
 
     public static partial class XTend

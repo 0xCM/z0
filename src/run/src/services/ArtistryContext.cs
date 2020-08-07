@@ -11,13 +11,13 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ArtistryContext : IArtistryContext
+    public readonly struct RunnerContext : IRunnerContext
     {
         public PartId[] Parts {get;}
 
         [MethodImpl(Inline)]
-        public static IArtistryContext Create(IAsmContext root, PartId[] parts)
-            => new ArtistryContext(root, parts);
+        public static IRunnerContext Create(IAsmContext root, PartId[] parts)
+            => new RunnerContext(root, parts);
 
         public IAsmContext AsmContext {get;}        
 
@@ -25,7 +25,7 @@ namespace Z0
             => AsmContext;
                         
         [MethodImpl(Inline)]
-        ArtistryContext(IAsmContext root, PartId[] parts)
+        RunnerContext(IAsmContext root, PartId[] parts)
         {
             AsmContext = root;
             Parts = parts;

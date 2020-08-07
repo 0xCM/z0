@@ -74,6 +74,12 @@ namespace Z0.Asm
         public void Running(string worker, CorrelationToken ct)
             => Wf.Running(worker, ct);
 
+        public void Running<T>(string actor, T content, CorrelationToken ct)
+            => Wf.RunningT(actor, content, ct);
+
+        public void Ran<T>(string actor, T content, CorrelationToken ct)
+            => Wf.RanT(actor, content, ct);
+
         public void Ran(string worker, CorrelationToken ct)
             => Wf.Ran(worker, Ct);
 

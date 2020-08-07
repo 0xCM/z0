@@ -3,9 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    
+    using static Konst;
+
     public readonly struct SemanticArchive : ISemanticArchive
     {
         public static ISemanticArchive Service => default(SemanticArchive);        
-    }
+    }        
 }

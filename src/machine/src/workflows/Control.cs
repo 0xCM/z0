@@ -50,9 +50,8 @@ namespace Z0
         }
 
         public static Control create(IAppContext context, CorrelationToken ct, params string[] args)
-        {
-            var receiver = termsink(ct);
-            var wf = Flow.context(context, ct, settings(context, ct), receiver);
+        {            
+            var wf = Flow.context(context, ct, settings(context, ct));
             return new Control(context, ct, args);
         }
 
@@ -64,7 +63,7 @@ namespace Z0
             Paths = context.AppPaths;
             Asm = WfBuilder.asm(context);                           
             Config = settings(context, Ct);
-            Wf = Flow.context(context, Ct, Config, Flow.termsink(ct));                        
+            Wf = Flow.context(context, Ct, Config);  
             State = new WfState(Wf, Asm, args, Ct);
             StepConfig = WorkflowStepConfig.Load(Wf);
             Known = known;
@@ -73,9 +72,10 @@ namespace Z0
         public void Run()
         {
             Wf.Running(WorkerName, Ct);
-            //Run(default(CaptureHostStep));
+            Run(default(CaptureClientStep));
             Run(default(EmitDatasetsStep));
-            //Run(default(ProcessPartFilesStep));
+            Run(default(ProcessPartFilesStep));
+            Run(default(RunProcessorsStep));
         }
 
         public void Dispose()
@@ -83,7 +83,7 @@ namespace Z0
             Wf.Finished(WorkerName, Ct);
         }
 
-        void Run(CaptureHostStep kind)
+        void Run(CaptureClientStep kind)
         {
             if(CaptureArtifacts)
             {             
@@ -129,6 +129,7 @@ namespace Z0
 
             Wf.RanT(WorkerName, kind, Ct);
         }
+        
         void Run(ProcessPartFilesStep kind)
         {
             Wf.RunningT(WorkerName, kind, Ct);

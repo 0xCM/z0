@@ -14,31 +14,7 @@ namespace Z0
     using static z;
 
     public readonly struct DataFields
-    {
-        public static void append<F>(StringBuilder dst, F f, object content)   
-            where F : unmanaged, Enum
-        {
-            dst.Append(render(dst, content).PadRight(width(f)));
-        }
-
-        public static void Delimit<F>(StringBuilder dst, F f, object content, char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
-        {            
-            dst.Append(text.rspace(delimiter));            
-            dst.Append(render(dst, content).PadRight(width(f)));
-        }
-        
-        static string render(StringBuilder dst, object content)
-        {
-            var rendered = string.Empty;
-            if(content is null)
-                return Null.Value.Format();
-            else if(content is ITextual t)
-                return t.Format();
-            else
-                return content.ToString();
-        }    
-
+    {        
         [MethodImpl(Inline)]
         public static FieldIndex<F> define<F>()
             where F : unmanaged, Enum
@@ -53,16 +29,6 @@ namespace Z0
         public static string[] labels<F>()
             where F : unmanaged, Enum
                 => define<F>().Names;
-
-        [MethodImpl(Inline)]
-        public static short width<F>(F f)
-            where F : unmanaged, Enum
-                => define<F>().Width(f);
-
-        [MethodImpl(Inline)]
-        public static short index<F>(F f)
-            where F : unmanaged, Enum
-                => define<F>().Position(f);
 
         [MethodImpl(Inline)]
         public static FieldFormatter<F> formatter<F>(char delimiter = FieldDelimiter) 

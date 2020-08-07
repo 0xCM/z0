@@ -18,7 +18,7 @@ namespace Z0
         string IReport.ReportName
             => typeof(R).DisplayName();        
 
-        TableStore<F,R> Log 
+        TabularStore<F,R> Log 
             => default;       
 
         int IReport.RecordCount 

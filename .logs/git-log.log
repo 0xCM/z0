@@ -5666,3 +5666,54 @@
  copy src/flow/src/events/{WfError.cs => WfErrorT.cs} (53%)
  rename src/{capture/src/context/IWfCapture.cs => flow/src/services/ops/created.cs} (57%)
  create mode 100644 src/flow/src/services/ops/ran.cs
+[master 486939283] .
+ 131 files changed, 600 insertions(+), 347 deletions(-)
+ rename src/flow/src/{literals => attributes}/EventAttribute.cs (100%)
+ rename src/flow/src/{literals => attributes}/StepAttribute.cs (82%)
+ delete mode 100644 src/flow/src/events/WfError.cs
+ create mode 100644 src/flow/src/events/WfStepCreated.cs
+ rename src/flow/src/literals/{WfStepId.cs => WfStepKind.cs} (94%)
+ create mode 100644 src/flow/src/services/ops/step.cs
+ create mode 100644 src/konst/src/events/models/WfStepId.cs
+ rename src/machine/src/workflows/steps/{ => metadata}/AnalyzeCallsStep.cs (100%)
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitBitMasksStep.cs (74%)
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitCilDatasetsStep.cs (95%)
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitConstantDatasetsStep.cs (62%)
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitContentCatalogStep.cs (90%)
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitDatasetsStep.cs (100%)
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitEnumCatalogStep.cs (100%)
+ create mode 100644 src/machine/src/workflows/steps/metadata/EmitImageBlobsStep.cs
+ create mode 100644 src/machine/src/workflows/steps/metadata/EmitImageContentStep.cs
+ create mode 100644 src/machine/src/workflows/steps/metadata/EmitImageSummariesStep.cs
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitMetadataSetsStep.cs (90%)
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitPartStringsStep.cs (91%)
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitPeHeadersStep.cs (91%)
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitPeImageStep.cs (92%)
+ rename src/machine/src/workflows/steps/{ => metadata}/EmitStringRecordsStep.cs (95%)
+ rename src/machine/src/workflows/steps/{ => metadata}/ProcessInstructionsStep.cs (100%)
+ rename src/machine/src/workflows/steps/{ => metadata}/RunProcessorsStep.cs (53%)
+ rename src/machine/src/workflows/steps/{ => workers}/AnalyzeCalls.cs (96%)
+ rename src/machine/src/workflows/steps/{ => workers}/CaptureResBytes.cs (100%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitAsciTables.cs (100%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitBitMasks.cs (94%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitBlobRecords.cs (73%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitCilDatasets.cs (98%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitConstantDatasets.cs (86%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitContentCatalog.cs (97%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitDatasets.cs (98%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitEnumCatalog.cs (98%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitFieldRecords.cs (97%)
+ create mode 100644 src/machine/src/workflows/steps/workers/EmitImageContent.cs
+ rename src/machine/src/workflows/steps/{EmitImageContent.cs => workers/EmitImageSummaries.cs} (58%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitLiteralDatasets.cs (98%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitMetadataSets.cs (98%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitPartStrings.cs (100%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitPeHeaders.cs (98%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitPeImage.cs (98%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitProjectDocs.cs (98%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitResBytes.cs (98%)
+ rename src/machine/src/workflows/steps/{ => workers}/EmitStringRecords.cs (98%)
+ rename src/machine/src/workflows/steps/{ => workers}/ParseAsmFiles.cs (100%)
+ rename src/machine/src/workflows/steps/{ => workers}/ProcessInstructions.cs (100%)
+ rename src/machine/src/workflows/steps/{ => workers}/ProcessPartFiles.cs (100%)
+ rename src/machine/src/workflows/steps/{ => workers}/RunProcessors.cs (93%)

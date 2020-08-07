@@ -14,7 +14,7 @@ namespace Z0.Data
         public static EnumLiteral[] emit<E>(out FilePath dst)
             where E : unmanaged, Enum
         {            
-            dst = Publications.Default.DatasetPath(typeof(E).Name);            
+            dst = Table.Service.DatasetPath(typeof(E).Name);            
             var records = create<E>();
             using var writer = dst.Writer();
             writer.WriteLine(Tabular.HeaderText<E>());

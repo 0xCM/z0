@@ -9,15 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct AppMsgData
+    public readonly struct AppMsgData : ITextual
     {    
         [MethodImpl(Inline)]
         public static AppMsgData<T> create<T>(T content, string template, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
             => new AppMsgData<T>(content, template ?? "{0}", kind, color, source);
-
-        [MethodImpl(Inline)]
-        public static AppMsgData untyped(object content, string template, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
-            => new AppMsgData(content, template ?? "{0}", kind, color, source);
 
         /// <summary>
         /// The message payload
@@ -27,7 +23,7 @@ namespace Z0
         /// <summary>
         /// Defines a content render pattern, if applicable
         /// </summary>
-        public readonly string Template;
+        public readonly string Pattern;
 
         /// <summary>
         /// The message classification
@@ -45,58 +41,16 @@ namespace Z0
         public readonly AppMsgSource Source;
 
         [MethodImpl(Inline)]
-        AppMsgData(object content, string template, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
+        AppMsgData(object content, string pattern, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
         {
             Content = content;
-            Template = template;
+            Pattern = pattern;
             Kind = kind;
             Color = color;
             Source = source;
         }
 
-        /// <summary>
-        /// The name of the member that originated the message
-        /// </summary>
-        public string Caller 
-        {
-            [MethodImpl(Inline)]
-            get => Source.Caller;
-        }
-        
-        /// <summary>
-        /// The path to the source file in which the message originated
-        /// </summary>
-        public FilePath File 
-        {
-            [MethodImpl(Inline)]
-            get => Source.File;
-        }
-
-        /// <summary>
-        /// The source file line number on which the message originated
-        /// </summary>
-        public uint Line 
-        {
-            [MethodImpl(Inline)]
-            get => Source.Line;
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => (Content is string s ? text.blank(s) : Content is null);
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => !IsEmpty;
-        }   
-
         public string Format()
-            => text.format(Template ?? "{0}",  Content);     
-        
-        public static AppMsgData Empty 
-            => new AppMsgData(EmptyString, "{0}", 0, 0, AppMsgSource.Empty);
+            => text.format(Pattern, Content);         
     }
 }

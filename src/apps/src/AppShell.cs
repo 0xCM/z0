@@ -25,8 +25,7 @@ namespace Z0
         }
 
         public void Deposit(IAppMsg msg)
-        {
-            
+        {            
             Sink.Deposit(msg);
         }
 
@@ -41,7 +40,6 @@ namespace Z0
         {
             try
             {
-                Sink.Deposit(AppMsg.Info("Shell finished"));
                 Sink.Dispose();
             }
             catch(Exception e)

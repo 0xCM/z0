@@ -77,5 +77,15 @@ namespace Z0
         /// Line-oriented hex data where each line is prefixed with an absolute/relative offset
         /// </summary>       
         Dat = x0d,
+
+        /// <summary>
+        /// A text document of some sort
+        /// </summary>       
+        Doc = x0e,
+       
+        /// <summary>
+        /// A file produced by some sort of tool
+        /// </summary>       
+        Tool = 128,
     }   
 }

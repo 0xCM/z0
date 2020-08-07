@@ -15,12 +15,18 @@ namespace Z0
     
     public readonly struct Tabular
     {
+
+        [MethodImpl(Inline)]
+        public static IDatasetFormatter<F> formatter<F>(char delimiter = FieldDelimiter)
+            where F : unmanaged, Enum
+                => new DatasetFormatter<F>(text.build(), delimiter);
+
         /// <summary>
         /// Defines a mask that, when applied, reveals the field position
         /// </summary>
         public const ushort PosMask = 0xFFFF;
 
-        public static TableStore<F,R> Store<F,R>()
+        public static TabularStore<F,R> Store<F,R>()
             where F : unmanaged, Enum
             where R : ITabular
                 => default;
@@ -98,18 +104,6 @@ namespace Z0
         public static string HeaderText<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
                 => Header<F>().Render(delimiter);
-
-        /// <summary>
-        /// Formates a header row using a caller-supplied label producer
-        /// </summary>
-        /// <param name="f">The label factory</param>
-        /// <param name="delimiter">The delimiter</param>
-        /// <typeparam name="F">The field type</typeparam>
-        [MethodImpl(Inline)]
-        public static string HeaderText<F>(Func<int,F,string> f, char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
-                => Header<F>().Render(f,delimiter);
-
 
     }
 }

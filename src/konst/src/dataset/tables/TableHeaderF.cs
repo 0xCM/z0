@@ -14,15 +14,15 @@ namespace Z0.Data
     public readonly struct TableHeader<F>
         where F : unmanaged, Enum
     {
-        readonly FieldInfo[] Fields;
+        readonly TableFields<F> Fields;
 
-        readonly F[] Values;
+        readonly char Delimiter;
 
         [MethodImpl(Inline)]
-        public TableHeader(FieldInfo[] fields, F[] values)
+        public TableHeader(TableFields<F> fields, char delimiter = FieldDelimiter)
         {
             Fields = fields;
-            Values = values;
+            Delimiter = delimiter;
         }
 
         public HeaderCell<F> this[byte index]
@@ -31,29 +31,41 @@ namespace Z0.Data
             get => Cell(index);
         }
         
-        public int CellCount
+        public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => Fields.Length;
-        }
+            get => Fields.Count;
+        }        
         
         public string[] Names
         {
             [MethodImpl(Inline)]
-            get => Fields.Map(f => f.Name);
+            get => Fields.Names;
         }
         
-        [MethodImpl(Inline)]
-        public string HeaderText(char delimiter)
-            => text.join($" {delimiter} ", Names);
+        public string Format()
+        {
+            var formatter = Table.formatter<F>(Fields);
+            for(var i=0u; i<Fields.Count; i++)
+            {
+                if(i != 0)
+                    formatter.Delimit(Fields[i], Fields.Name(i));
+                else
+                    formatter.Append(Fields[i], Fields.Name(i));
+            }
+            return formatter.Format();
+        }
+
+        public string HeaderText
+            => Format();
 
         [MethodImpl(Inline)]
         public HeaderCell<F> Cell(byte index)
-            => new HeaderCell<F>(index, Fields[index], Value(index));
+            => new HeaderCell<F>(index, Fields.Reflected(index), Value(index));
 
         [MethodImpl(Inline)]
         ref readonly F Value(byte index)
-            => ref Values[index];
+            => ref Fields[index];
         
         [MethodImpl(Inline)]
         public ushort Width(byte index)

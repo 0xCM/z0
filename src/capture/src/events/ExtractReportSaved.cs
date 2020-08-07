@@ -26,24 +26,18 @@ namespace Z0.Asm
 
         public readonly uint RecordCount;
 
-        public readonly string ReportName;
-
-        public object Description {get;}
-
         [MethodImpl(Inline)]
         public ExtractReportSaved(string actor, ExtractReport report, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
             Report = report;
             ActorName = actor;
             Ct = ct;
-            ReportName = report.ReportName;
             RecordCount = (uint)report.RecordCount;
             Flair = flair;
             EventId = wfid(EventName, ct);
-            Description = new {RecordCount, ReportName};
         }
  
         public string Format()
-            => text.format(PSx3, EventId, ActorName, Description);
+            => text.format(PSx3, EventId, ActorName, RecordCount);
     }
 }

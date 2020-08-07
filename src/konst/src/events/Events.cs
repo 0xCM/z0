@@ -23,14 +23,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static AppError<T> error<T>(string source, T content)
             => new AppError<T>(EventId.define(nameof(AppError), source), content);        
-
-        /// <summary>
-        /// Creates a status event
-        /// </summary>
-        /// <param name="source">The event originator</param>
-        /// <param name="content">The message content</param>
-        [MethodImpl(Inline)]
-        public static AppEvent status(string source, string content, [File] string file = null, [Line] int? line = null)
-            => new AppEvent(EventId.define(nameof(AppError), $"{source} | {content} | {line} | {file}"), source, AppMsgColor.Blue);        
     }
 }

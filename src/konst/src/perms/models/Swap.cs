@@ -14,19 +14,9 @@ namespace Z0
     /// Defines a transposition, i.e. a specification for a two-element position exchange
     /// Typically denoted by an ordered pair of space-delimited indices (i j)
     /// </summary>
-    [ApiDataType]
+    [ApiHost]
     public struct Swap 
     {
-        /// <summary>
-        /// The monodial zero
-        /// </summary>
-        public static Swap Zero => (0,0);
-
-        /// <summary>
-        /// The empty element, which is not Zero
-        /// </summary>
-        public static Swap Empty => (-1,-1);
-
         /// <summary>
         /// The first index
         /// </summary>
@@ -66,6 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="s0">The leading transposition</param>
         /// <param name="len">The length of the chain</param>
+        [MethodImpl(Inline), Op]
         public static Swap[] Chain(Swap s0, int len)
         {
             var dst = new Swap[len];
@@ -134,20 +125,22 @@ namespace Z0
         /// <summary>
         /// Renders the tranposition as text in canonical form
         /// </summary>
+        [MethodImpl(Inline), Op]
         public string Format()
-        {
-            return $"({i} {j})";
-        }
+            => $"({i} {j})";
         
         public bool IsEmpy
-            => i == Empty.i && j == Empty.j;
+        {
+            [MethodImpl(Inline), Op]
+            get => i == Empty.i && j == Empty.j;
+        }
             
         /// <summary>
         /// Determines whether this transposition is identical to another.
         /// Note that the order of indices is immaterial
         /// </summary>
         /// <param name="rhs">The right transposition</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public bool Equals(Swap rhs)
             => (i == rhs.i && j == rhs.j) || (i == rhs.j && j == rhs.i);
 
@@ -161,7 +154,7 @@ namespace Z0
         /// <summary>
         /// Creates a copy
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public Swap Replicate()
             => (i,j);
 
@@ -176,5 +169,15 @@ namespace Z0
         [Ignore]
         public override bool Equals(object o)
             => o is Swap x && Equals(x);
+
+        /// <summary>
+        /// The monodial zero
+        /// </summary>
+        public static Swap Zero => (0,0);
+
+        /// <summary>
+        /// The empty element, which is not Zero
+        /// </summary>
+        public static Swap Empty => (-1,-1);
     }
 }

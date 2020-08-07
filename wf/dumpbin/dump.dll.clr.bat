@@ -7,8 +7,8 @@ call %WfRoot%\wf-vars.cmd
 call %Step%\tool.cmd
 
 set SrcPath=%SrcDir%\%SrcFile%
-set DstDir=%StgBuild%\%Tool%
-set LogPath=%StgBuild%\%Tool%.log
+set DstDir=%StageBuild%\%Tool%
+set LogPath=%StageBuild%\%Tool%.log
 
 set Flag=%Summary%
 set DstFile=%SrcFile%.%Flag%.doc

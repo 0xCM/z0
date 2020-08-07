@@ -6,7 +6,6 @@ namespace Z0.Data
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
 

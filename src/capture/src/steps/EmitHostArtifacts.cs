@@ -95,7 +95,7 @@ namespace Z0.Asm
 
             Parsed = result.Parsed;
 
-            Wf.Raise(new ExtractsParsed(Source, Parsed));
+            Wf.Raise(new ExtractsParsed(WorkerName, Source, Parsed, Ct));
         }
         
         void SaveParseReport()
@@ -107,7 +107,7 @@ namespace Z0.Asm
         void SaveHex()
         {
             var hex = IdentifiedCodeWriter.save(Source, Parsed, HexPath);                
-            Wf.Raise(new HexCodeSaved(Source,  hex, ParsedPath));
+            Wf.Raise(new HexCodeSaved(Source, hex, ParsedPath));
         }
 
         void Decode()

@@ -29,26 +29,26 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static EvalResult result<T>(int seq, in T id, Duration duration, Exception error)
-            => new EvalResult(seq, $"{id}", false, duration, error != null? AppMsg.Error(error) : AppMsg.Empty);
+            => new EvalResult(seq, $"{id}", false, duration, error);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static EvalResult result<T>(int seq, in T id, Duration duration, bool succeeded)
-            => new EvalResult(seq, $"{id}", succeeded, duration, AppMsg.Empty);
+            => new EvalResult(seq, $"{id}", succeeded, duration, $"{succeeded}");
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static EvalResult result<T>(int seq, in T id, Duration duration, AppMsg message)
-            => new EvalResult(seq,$"{id}", message.Kind != AppMsgKind.Error, duration, message);
+        public static EvalResult result<T>(int seq, in T id, Duration duration, object message, bool succeeded)
+            => new EvalResult(seq,$"{id}", succeeded, duration, message);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static EvalResult result<T>(uint seq, in T id, Duration duration, Exception error)
-            => new EvalResult((int)seq, $"{id}", false, duration, error != null? AppMsg.Error(error) : AppMsg.Empty);
+            => new EvalResult((int)seq, $"{id}", false, duration, error);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static EvalResult result<T>(uint seq, in T id, Duration duration, bool succeeded)
-            => new EvalResult((int)seq, $"{id}", succeeded, duration, AppMsg.Empty);
+            => new EvalResult((int)seq, $"{id}", succeeded, duration, "Ok");
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static EvalResult result<T>(uint seq, in T id, Duration duration, AppMsg message)
-            => new EvalResult((int)seq,$"{id}", message.Kind != AppMsgKind.Error, duration, message);
+        public static EvalResult result<T>(uint seq, in T id, Duration duration, object message, bool succeeded)
+            => new EvalResult((int)seq,$"{id}",  succeeded, duration, message);
     }
 }

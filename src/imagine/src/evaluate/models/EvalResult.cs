@@ -49,34 +49,34 @@ namespace Z0
 
         public readonly DateTime Timestamp;
 
-        public readonly AppMsg Message;
+        public readonly object Message;
 
         public static EvalResult Define<T>(int seq, in T id, Duration duration, Exception error)
-            => new EvalResult(seq, $"{id}", false, duration, error != null? AppMsg.Error(error) : AppMsg.Empty);
+            => new EvalResult(seq, $"{id}", false, duration, error);
 
         public static EvalResult Define<T>(int seq, in T id, Duration duration, bool succeeded)
-            => new EvalResult(seq, $"{id}", succeeded, duration, AppMsg.Empty);
+            => new EvalResult(seq, $"{id}", succeeded, duration, "Ok");
 
         public static EvalResult Define<T>(int seq, in T id, Duration duration, AppMsg message)
             => new EvalResult(seq,$"{id}", message.Kind != AppMsgKind.Error, duration, message);
 
         public static EvalResult Define<T>(uint seq, in T id, Duration duration, Exception error)
-            => new EvalResult((int)seq, $"{id}", false, duration, error != null? AppMsg.Error(error) : AppMsg.Empty);
+            => new EvalResult((int)seq, $"{id}", false, duration, error);
 
         public static EvalResult Define<T>(uint seq, in T id, Duration duration, bool succeeded)
-            => new EvalResult((int)seq, $"{id}", succeeded, duration, AppMsg.Empty);
+            => new EvalResult((int)seq, $"{id}", succeeded, duration, "");
 
         public static EvalResult Define<T>(uint seq, in T id, Duration duration, AppMsg message)
             => new EvalResult((int)seq,$"{id}", message.Kind != AppMsgKind.Error, duration, message);
 
-        public EvalResult(int seq, string name, bool succeeded, Duration duration, AppMsg message)
+        public EvalResult(int seq, string name, bool succeeded, Duration duration, object message)
         {
             this.Sequence = seq;
             this.CaseName = name;
             this.Status = succeeded ? EvalStatus.Passed : EvalStatus.Failed;
             this.Duration = duration;
             this.Timestamp = DateTime.Now;
-            this.Message = message;
+            this.Message = message ?? "Empty result!";
         }
         
         public string DelimitedText(char delimiter)

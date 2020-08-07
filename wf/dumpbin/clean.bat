@@ -1,7 +1,7 @@
 set WfRoot=%ZDev%\wf
 set Tool=dumpbin
 set Step=%WfRoot%\%Tool%
-set DstDir="%StgBuild%/%Tool%"
+set DstDir="%StageBuild%/%Tool%"
 
 call %WfRoot%\wf-vars.cmd
 call %Step%\%Tool%.tool.cmd

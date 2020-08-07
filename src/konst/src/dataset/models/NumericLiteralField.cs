@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Data
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Konst;
 
     public enum NumericLiteralField : uint
@@ -18,6 +15,5 @@ namespace Z0.Data
         Data = 2  | (80 << WidthOffset),
 
         Text = 3 | (80 << WidthOffset),
-    }
-           
+    }         
 }

@@ -10,7 +10,16 @@ namespace Z0.Asm
     using static Konst;
     using static Flow;
 
-    [Step(WfStepKind.DecodeParsed)]
+    using static DecodeParsedStep;
+
+    public readonly struct DecodeParsedStep
+    {   
+        public const WfStepKind Kind = WfStepKind.DecodeParsed;
+        
+        public const string Name = nameof(DecodeParsed);
+    }
+    
+    [Step(Kind)]
     public readonly ref struct DecodeParsed
     {            
         public WfState Wf {get;}
@@ -19,20 +28,20 @@ namespace Z0.Asm
 
         ICaptureContext Capture {get;}
         
-
         [MethodImpl(Inline)]
         internal DecodeParsed(WfState wf, ICaptureContext capture, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
             Capture = capture;
-            Wf.Created(nameof(DecodeParsed), Ct);
+            Wf.Created(Name, Ct);
         }
 
         public AsmFunction[] Run(ApiHostUri host, ParsedExtraction[] src)
         {   
             try
             {             
+                Wf.Running(Name, host, Ct);
                 var dst = z.alloc<AsmFunction>(src.Length);
                 for(var i=0; i<src.Length; i++)
                 {
@@ -49,8 +58,8 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                term.errlabel(e,$"{host} decoding failed");
-                return Array.Empty<AsmFunction>();
+                Wf.Error(Name, $"{host}: {e}", Ct);
+                return sys.empty<AsmFunction>();
             }
         }
 
@@ -62,12 +71,12 @@ namespace Z0.Asm
 
         void HandleUndecoded(in ParsedExtraction member)
         {
-            term.error($"Could not decode {member.Id}");
+            Wf.Error(Name, $"Could not decode {member}", Ct);
         }        
 
         public void Dispose()
         {
-            Wf.Finished(nameof(DecodeParsed), Ct);
+            Wf.Finished(Name, Ct);
         }
     }
 }

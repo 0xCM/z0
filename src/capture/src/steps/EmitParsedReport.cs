@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static Flow;
+    
     using static EmitParsedReportStep;
     
     [Step]
@@ -37,23 +38,17 @@ namespace Z0.Asm
 
         public void Run()
         {
-            Wf.Running(WorkerName, Ct);
-
             try
             {
+                Wf.Running(WorkerName, Host, Ct);
                 var report = MemberParseReport.Create(Host, Source);                    
-                var saved = report.Save(Target);
-                if(saved)
-                    Wf.Raise(new EmittedParseReport(WorkerName, report, Target, Ct));
-                else
-                    Wf.Error(WorkerName, "Report emission failed", Ct);
+                report.Save(Target);                
+                Wf.Ran(WorkerName, text.format(PSx2, Host, report.RecordCount), Ct);
             }
             catch(Exception e)
             {
                 Wf.Error(WorkerName, e, Ct);
             }
-
-            Wf.Ran(WorkerName, Ct);
         }
 
         public void Dispose()

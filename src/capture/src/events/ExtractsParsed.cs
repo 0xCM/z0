@@ -14,21 +14,26 @@ namespace Z0.Asm
 
     public readonly struct ExtractsParsed : IWfEvent<E>
     {   
-        public WfEventId EventId  => WfEventId.define("Placeholder");
-
+        public const string EventName = nameof(ExtractsParsed);
+        
+        public WfEventId EventId {get;}
+        
+        public string ActorName {get;}
+        
         public readonly ApiHostUri Host;
         
         public readonly ParsedExtraction[] Members;
 
         [MethodImpl(Inline)]
-        public ExtractsParsed(ApiHostUri host, ParsedExtraction[] members)
+        public ExtractsParsed(string actor, ApiHostUri host, ParsedExtraction[] members, CorrelationToken ct)
         {
+            EventId = wfid(EventName, ct);
+            ActorName = actor;
             Host = host;
             Members = members;
-        }
-        
+        }        
         public string Format()
-            => $"{Members.Length} {Host} members parsed";
+            => text.format(PSx3, EventId, ActorName, Members.Length);
         
         public static ExtractsParsed Empty 
             => default;

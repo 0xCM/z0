@@ -20,18 +20,11 @@ namespace Z0
     /// </summary>
     public class AppMsg : IAppMsg
     {
-        public AppMsgData Data {get;}
-
-        [MethodImpl(Inline)]
-        public static AppMsgSource source(PartId part, string caller, string file, int? line)        
-            => new AppMsgSource(part, caller, file, line);
+        public AppMsgData<object> Data {get;}
 
         [MethodImpl(Inline)]
         public static AppMsgSource source(string caller, string file, int? line)        
             => new AppMsgSource(PartId.None, caller, file, line);
-
-        public static AppMsg define(object content, AppMsgKind kind, AppMsgColor color, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, kind, color, caller, file, line);
 
         public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsg(content, kind, (AppMsgColor)kind, caller, file, line);
@@ -41,9 +34,6 @@ namespace Z0
 
         public static AppMsg Colorize(object content, AppMsgColor color)
             => new AppMsg(content, AppMsgKind.Info, color, string.Empty, EmptyString, null);
-
-        public static AppMsg Colorize(object content, AppMsgColor color, AppMsgKind kind)
-            => new AppMsg(content, kind, color, EmptyString, EmptyString, null);
 
         public static AppMsg Info(object content)
             => new AppMsg(content, AppMsgKind.Info, AppMsgColor.Green, EmptyString, EmptyString, null);
@@ -58,12 +48,10 @@ namespace Z0
             => NoCaller($"{content} {caller} {line} {file}", AppMsgKind.Error);
                 
         [MethodImpl(Inline)]
-        public AppMsg(AppMsgData src)
-            => Data = src;
-        
-        [MethodImpl(Inline)]
         AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, string file, int? line, bool displayed = false)
-            => AppMsgData.untyped(content,"{0}", kind, color, source(caller, file, line));
+        {
+            Data = AppMsgData.create(content,"{0}", kind, color, source(caller, file, line));
+        }
         
         /// <summary>
         /// The message body
@@ -84,15 +72,12 @@ namespace Z0
             => Data.Color;
 
         public bool IsEmpty
-            => Data.IsEmpty;
+            => false;
 
         public string Format()
             => Data.Format();
         
         public override string ToString()
             => Format();
-
-        public static AppMsg Empty
-            => new AppMsg(AppMsgData.Empty);
     }
 }

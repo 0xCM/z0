@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static ManagePartCaptureStep;
     using static z;
 
-    public class ManagePartCapture
+    public class ManagePartCapture : IDisposable
     {
         public static ManagePartCapture create(WfState state,  CorrelationToken ct)
             => new ManagePartCapture(state, ct);
@@ -130,6 +130,11 @@ namespace Z0.Asm
             {
                 Wf.Error(WorkerName, e, Ct);
             }
+        }
+
+        public void Dispose()
+        {
+
         }
     }
 }

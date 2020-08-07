@@ -22,7 +22,6 @@ namespace Z0
     using F = XedPatternField;
     using R = XedPatternSummary;
     
-
     [ApiHost]
     public readonly ref struct XedEtl
     {
@@ -34,7 +33,7 @@ namespace Z0
 
         readonly XedStagingArchive Dst;
 
-        readonly TableArchive Pub;
+        readonly TabularArchive Pub;
                 
         public XedEtl(WfContext<XedEtlConfig> context)
         {
@@ -42,7 +41,7 @@ namespace Z0
             Config = context.State;
             Src = XedSourceArchive.Create(Config.SourceRoot);            
             Dst = XedStagingArchive.Create(Config.StageRoot);
-            Pub = TableArchive.Service(Config.PublicationRoot);            
+            Pub = TabularArchive.Service(Config.PublicationRoot);            
         }
 
         public void Dispose()
