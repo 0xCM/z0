@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct ExtractParseFailed : IWfEvent<E>
     {
-        public WfEventId Id => WfEventId.define(nameof(ExtractParseFailed));
+        public WfEventId EventId => WfEventId.define(nameof(ExtractParseFailed));
         
         [MethodImpl(Inline)]
         public static E create(ExtractParseFailure data)

@@ -17,7 +17,7 @@ namespace Z0.Asm
         public const string WorkerName = nameof(CaptureHosts);
     }
 
-    [Step(WfStepId.CaptureHosts)]
+    [Step(WfStepKind.CaptureHosts)]
     public readonly ref struct CaptureHosts
     {
         public WfState Wf {get;}

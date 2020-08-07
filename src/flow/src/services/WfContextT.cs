@@ -47,7 +47,7 @@ namespace Z0
             where E : IWfEvent
         {
             Sink.Deposit(@event);
-            return @event.Id;
+            return @event.EventId;
         }
     }
 }

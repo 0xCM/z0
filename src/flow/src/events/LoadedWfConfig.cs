@@ -15,7 +15,7 @@ namespace Z0
     {        
         public const string EventName = nameof(LoadedWfConfig);
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
         
         public string ActorName {get;}        
         
@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public LoadedWfConfig(string actor, FilePath src, WfSettings data, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
         {
-            Id = wfid(EventName, ct);
+            EventId = wfid(EventName, ct);
             ActorName = actor;
             Flair = flair;
             ConfigPath = src;
@@ -37,6 +37,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx4, Id, ActorName, ConfigPath, ConfigData);
+            => text.format(PSx4, EventId, ActorName, ConfigPath, ConfigData);
     }
 }

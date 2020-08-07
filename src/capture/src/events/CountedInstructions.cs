@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     public readonly struct CountedInstructions : IWfEvent<CountedInstructions>
     {            
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
@@ -25,13 +25,13 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public CountedInstructions(string worker, ApiHostUri host, uint count, CorrelationToken ct)
         {
-            Id = wfid(nameof(CountedInstructions), ct);
+            EventId = wfid(nameof(CountedInstructions), ct);
             ActorName = worker;
             Count = count;
             Host = host;
         }
         public string Format() 
-            => text.format(PSx4, Id, ActorName, Host, Count);
+            => text.format(PSx4, EventId, ActorName, Host, Count);
     }    
 
 }

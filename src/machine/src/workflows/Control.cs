@@ -73,9 +73,9 @@ namespace Z0
         public void Run()
         {
             Wf.Running(WorkerName, Ct);
-            Run(default(CaptureHostStep));
+            //Run(default(CaptureHostStep));
             Run(default(EmitDatasetsStep));
-            Run(default(ProcessPartFilesStep));
+            //Run(default(ProcessPartFilesStep));
         }
 
         public void Dispose()

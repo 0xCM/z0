@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
     using static Flow;
 
-    [Step(WfStepId.DecodeParsed)]
+    [Step(WfStepKind.DecodeParsed)]
     public readonly ref struct DecodeParsed
     {            
         public WfState Wf {get;}

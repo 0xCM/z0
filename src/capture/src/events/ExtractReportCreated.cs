@@ -14,7 +14,7 @@ namespace Z0.Asm
     {            
         public const string EventName = nameof(ExtractReportCreated);
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
@@ -42,11 +42,11 @@ namespace Z0.Asm
             RecordCount = (uint)report.RecordCount;
             ReportName = report.ReportName;
             Flair = flair;
-            Id = wfid(EventName, ct);
+            EventId = wfid(EventName, ct);
             Description = new {RecordCount, ReportName};
         }
         
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);
+            => text.format(PSx3, EventId, ActorName, Description);
     }    
 }

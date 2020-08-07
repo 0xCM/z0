@@ -14,7 +14,7 @@ namespace Z0
     {
         public const string EventName = nameof(ProcessingParts);
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ProcessingParts(string actor, string processor, PartId[] parts, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
         {
-            Id = WfEventId.define(EventName, ct);
+            EventId = WfEventId.define(EventName, ct);
             ActorName = actor;
             ProcessorName = processor;
             Parts = parts;
@@ -36,6 +36,6 @@ namespace Z0
         
         [MethodImpl(Inline)]        
         public string Format()
-            => text.format(PSx4, Id, ActorName, ProcessorName, Parts.Format());               
+            => text.format(PSx4, EventId, ActorName, ProcessorName, Parts.Format());               
     }        
 }

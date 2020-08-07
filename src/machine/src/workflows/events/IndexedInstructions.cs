@@ -14,14 +14,14 @@ namespace Z0
     {
         const string Pattern = IdMarker + "Created located instruction index with {1} entries";
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public readonly LocatedInstructions Index;
 
         [MethodImpl(Inline)]
         public IndexedInstructions(LocatedInstructions src)
         {
-            Id = WfEventId.define(nameof(DecodedPart));
+            EventId = WfEventId.define(nameof(DecodedPart));
             Index = src;
         }
         
@@ -29,6 +29,6 @@ namespace Z0
             => AppMsgColor.Cyan;
                          
         public string Format()
-            => text.format(Pattern, Id, Index.Indexed.Length);        
+            => text.format(Pattern, EventId, Index.Indexed.Length);        
     }        
 }

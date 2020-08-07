@@ -15,7 +15,7 @@ namespace Z0
     {                
         public const string EventName = nameof(EmittedDataset);
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittedDataset(string worker, string dsname, uint count, FilePath target, CorrelationToken ct)
         {
-            Id = wfid(EventName, ct);
+            EventId = wfid(EventName, ct);
             ActorName = worker;
             DatasetName = dsname;
             RecordCount = count;
@@ -36,7 +36,7 @@ namespace Z0
         }        
 
         public string Format()
-            => text.format(PSx5, Id, ActorName, DatasetName, RecordCount, TargetPath);
+            => text.format(PSx5, EventId, ActorName, DatasetName, RecordCount, TargetPath);
         
         public override string ToString()
             => Format();

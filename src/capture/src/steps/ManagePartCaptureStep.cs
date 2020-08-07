@@ -11,7 +11,7 @@ namespace Z0.Asm
     [Step(true)]
     public readonly struct ManagePartCaptureStep
     {
-        public const WfStepId StepId = WfStepId.ManagePartCapture;
+        public const WfStepKind StepId = WfStepKind.ManagePartCapture;
 
         public const string WorkerName = nameof(ManagePartCapture);
     }

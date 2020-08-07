@@ -14,7 +14,7 @@ namespace Z0
     {
         const string Pattern = IdMarker + "Loaded {1} {2} records from {3}";
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public readonly MemberParseReport Report;
         
@@ -23,12 +23,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public LoadedParseReport(MemberParseReport report, FilePath src)
         {
-            Id = WfEventId.define(nameof(DecodedPart));
+            EventId = WfEventId.define(nameof(DecodedPart));
             Report = report;
             ReportPath = src;
         }
                                 
         public string Format()
-            => text.format(Pattern, Id, Report.RecordCount, Report.ReportName, ReportPath);
+            => text.format(Pattern, EventId, Report.RecordCount, Report.ReportName, ReportPath);
     }        
 }

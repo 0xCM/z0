@@ -20,7 +20,7 @@ namespace Z0
     {                
         public const string EventName = nameof(WfError<T>);
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
         
         public string ActorName {get;}
         
@@ -33,16 +33,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfError(string actor, T body, CorrelationToken ct, AppMsgSource source)
         {
-            Id = wfid(EventName, ct);
+            EventId = wfid(EventName, ct);
             ActorName = actor;
             Body = body;
             Flair =  AppMsgColor.Red;
             Source = source;
         }
 
-        public object Description => new {Id, ActorName, Source, Body};
+        public object Description => new {EventId, ActorName, Source, Body};
               
         public string Format()
-            => text.format(PSx4, Id, ActorName, Source, Body);
+            => text.format(PSx4, EventId, ActorName, Source, Body);
     }
 }

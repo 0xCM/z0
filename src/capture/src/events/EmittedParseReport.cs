@@ -14,7 +14,7 @@ namespace Z0.Asm
     {        
         public const string EventName = nameof(EmittedParseReport);
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
@@ -25,13 +25,13 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public EmittedParseReport(string actor, MemberParseReport report, FilePath dst, CorrelationToken ct)
         {
-            Id = wfid(EventName, ct);        
+            EventId = wfid(EventName, ct);        
             ActorName = actor;
             Report = report;
             Target = dst;        
         }
 
         public string Format()
-            => text.format(PSx4, Id, ActorName, Report.ApiHost, Report.RecordCount);
+            => text.format(PSx4, EventId, ActorName, Report.ApiHost, Report.RecordCount);
     }        
 }

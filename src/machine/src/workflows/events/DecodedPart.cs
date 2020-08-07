@@ -16,7 +16,7 @@ namespace Z0
     {
         public const string EventName = nameof(DecodedPart);
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
         
         public string ActorName {get;}
 
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public DecodedPart(string actor, PartInstructions src, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
-            Id = WfEventId.define(nameof(DecodedPart), ct);
+            EventId = WfEventId.define(nameof(DecodedPart), ct);
             ActorName = actor;
             Instructions = src;
             PartId = Instructions.Part;
@@ -42,6 +42,6 @@ namespace Z0
         }
                 
         public string Format()
-            => text.format(SSx3, Id, ActorName, Description);
+            => text.format(SSx3, EventId, ActorName, Description);
     }        
 }

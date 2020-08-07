@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     public readonly struct ExtractedMembers : IWfEvent<ExtractedMembers>
     {            
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public readonly ApiHostUri Host;
 
@@ -21,13 +21,13 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public ExtractedMembers(ApiHostUri host, int count, CorrelationToken? ct = null)
         {
-            Id = WfEventId.define(nameof(ExtractedMembers), ct);
+            EventId = WfEventId.define(nameof(ExtractedMembers), ct);
             Host = host;
             MemberCount = count;
         }
 
         public string Format()
-            => text.format(PSx3, Id, MemberCount, Host.Format());
+            => text.format(PSx3, EventId, MemberCount, Host.Format());
 
         public ExtractedMembers Zero
             => Empty;

@@ -14,7 +14,7 @@ namespace Z0
     {
         public const string EventName = nameof(IndexedEncoded);
                 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
@@ -26,13 +26,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public IndexedEncoded(string worker, EncodedParts index, CorrelationToken ct)
         {
-            Id = wfid(EventName, ct);
+            EventId = wfid(EventName, ct);
             Index = index;
             ActorName = worker;
         }
         
         [MethodImpl(Inline)]        
         public string Format()
-            => text.format(SSx3, Id, ActorName, Index.EntryCount);               
+            => text.format(SSx3, EventId, ActorName, Index.EntryCount);               
     }        
 }

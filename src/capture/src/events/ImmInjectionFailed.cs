@@ -15,7 +15,7 @@ namespace Z0.Asm
 
     public readonly struct ImmInjectionFailed : IWfEvent<E>
     {
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        public WfEventId EventId  => WfEventId.define("Placeholder");
 
         [MethodImpl(Inline)]
         public ImmInjectionFailed(MethodInfo method)

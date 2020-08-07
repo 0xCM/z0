@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Flow;
     using static z;
 
-    [Step(WfStepId.ClearCaptureArchives)]
+    [Step(WfStepKind.ClearCaptureArchives)]
     public readonly ref struct ClearCaptureArchives 
     {        
         readonly WfContext Wf;

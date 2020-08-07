@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     public readonly struct ExtractsParsed : IWfEvent<E>
     {   
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        public WfEventId EventId  => WfEventId.define("Placeholder");
 
         public readonly ApiHostUri Host;
         

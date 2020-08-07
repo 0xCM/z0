@@ -14,7 +14,7 @@ namespace Z0
     {
         const string Pattern = IdMarker + "{1} | {2}";
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public readonly string Label;
 
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public PartFileEvent(string label, string content)
         {
-            Id = WfEventId.define(nameof(PartFileEvent));
+            EventId = WfEventId.define(nameof(PartFileEvent));
             Label = label;
             Content = content;
             Timestamp = z.now();

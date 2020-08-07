@@ -14,7 +14,7 @@ namespace Z0
     {
         const string Pattern = IdMarker + "Emitted summary data file for {1} enum literals to {2}";
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public readonly FilePath TargetPath;
 
@@ -23,12 +23,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittedEnumCatalog(FilePath target, uint count, CorrelationToken ct)
         {
-            Id = WfEventId.define(nameof(EmittedEnumCatalog), ct);
+            EventId = WfEventId.define(nameof(EmittedEnumCatalog), ct);
             TargetPath = target;
             RecordCount = count;
         }        
         
         public string Format()
-            => text.format(Pattern, Id, RecordCount, TargetPath);
+            => text.format(Pattern, EventId, RecordCount, TargetPath);
     }
 }

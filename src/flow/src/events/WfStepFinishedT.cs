@@ -16,7 +16,7 @@ namespace Z0
     {
         public const string EventName = nameof(WfStepFinished<T>);
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
                         
         public string ActorName {get;}
 
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStepFinished(string worker, T body, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
         {
-            Id = wfid(EventName, ct);
+            EventId = wfid(EventName, ct);
             ActorName = worker;
             Body = body;
             Flair = flair;        
@@ -35,6 +35,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, Id, ActorName, Body);          
+            => text.format(PSx3, EventId, ActorName, Body);          
     }   
 }

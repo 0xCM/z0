@@ -16,7 +16,7 @@ namespace Z0.Asm
     {                  
         public const string EventName = nameof(AnalyzingExtractReport);
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
@@ -25,7 +25,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AnalyzingExtractReport(string actor, FilePath src, CorrelationToken ct)
         {
-            Id = WfEventId.define(EventName, ct);
+            EventId = WfEventId.define(EventName, ct);
             ActorName = actor;
             ReportPath = src;
         }
@@ -34,6 +34,6 @@ namespace Z0.Asm
             => new {ReportPath};
         
         public string Format() 
-            => text.format(PSx3, Id, ActorName, Description);
+            => text.format(PSx3, EventId, ActorName, Description);
     }
 }

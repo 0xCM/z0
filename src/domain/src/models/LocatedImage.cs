@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Diagnostics;
 
     using static Konst;
 
@@ -14,6 +15,20 @@ namespace Z0
     /// </summary>    
     public readonly struct LocatedImage : IAddressable<LocatedImage, MemoryAddress>, IComparable<LocatedImage>
     {
+        /// <summary>
+        /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcesModule'/>
+        /// </summary>
+        /// <param name="src">The source module</param>
+        public static LocatedImage from(ProcessModule src)
+        {
+            var path = FilePath.Define(src.FileName);
+            var part = Tables.part(path);
+            var entry = (MemoryAddress)src.EntryPointAddress;
+            var @base = src.BaseAddress;
+            var size = (uint)src.ModuleMemorySize;
+            return new LocatedImage(path, part, entry, @base, size);
+        }
+
         /// <summary>
         /// The image source path
         /// </summary>

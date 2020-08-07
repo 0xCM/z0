@@ -14,7 +14,7 @@ namespace Z0
     {        
         const string Pattern = IdMarker + "The location for {1} code is unknown";
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public readonly OpUri Uri;
 
@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Unaddressed(OpUri uri, LocatedCode code)
         {
-            Id = WfEventId.define(nameof(Unaddressed));
+            EventId = WfEventId.define(nameof(Unaddressed));
             Uri = uri;
             Code = code;
         }
@@ -32,6 +32,6 @@ namespace Z0
             => AppMsgColor.Red;
                 
         public string Format()
-            => text.format(Pattern, Id, Uri);
+            => text.format(Pattern, EventId, Uri);
     }        
 }

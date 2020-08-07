@@ -206,6 +206,6 @@ namespace Z0
         }
 
         static ResExtractor Extractor
-            => ResExtractor.Service(typeof(ZTables).Assembly);
+            => ResExtractor.Service(typeof(Z0.Parts.Tables).Assembly);
     }
 }

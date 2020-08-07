@@ -18,7 +18,7 @@ namespace Z0
     {
         const string Pattern = "{0}: {1} instructions decoded from {2} functions provided by {3} hosts across {4} parts";
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public readonly EncodedParts Index;
 
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public DecodedMachine(EncodedParts index, PartInstructions[] inxs, CorrelationToken? ct = null)
         {
-            Id = WfEventId.define(nameof(DecodedHost), ct);
+            EventId = WfEventId.define(nameof(DecodedHost), ct);
             Index = index;
             PartInstructions = inxs;
         }
@@ -42,6 +42,6 @@ namespace Z0
             => PartInstructions.Sum(x => x.TotalCount);                    
         
         public string Format()
-            => text.format(Pattern, Id, TotalCount, Index.EntryCount, Index.Hosts.Length, Index.Parts.Length);                    
+            => text.format(Pattern, EventId, TotalCount, Index.EntryCount, Index.Hosts.Length, Index.Parts.Length);                    
     }        
 }

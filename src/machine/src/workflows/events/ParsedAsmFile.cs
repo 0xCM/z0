@@ -14,7 +14,7 @@ namespace Z0
     {
         const string Pattern = PSx4;
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsedAsmFile(string worker, uint lines, FilePath src, CorrelationToken ct)
         {
-            Id = WfEventId.define(nameof(ParsedAsmFile), ct);
+            EventId = WfEventId.define(nameof(ParsedAsmFile), ct);
             ActorName = worker;
             LineCount = lines;
             SourcePath = src;
@@ -36,6 +36,6 @@ namespace Z0
         
         [MethodImpl(Inline)]        
         public string Format()
-            => text.format(Pattern, Id, ActorName, LineCount, SourcePath);               
+            => text.format(Pattern, EventId, ActorName, LineCount, SourcePath);               
     }        
 }

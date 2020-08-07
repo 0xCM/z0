@@ -14,7 +14,7 @@ namespace Z0
     {
         public const string EventName = nameof(RanProcessor);
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RanProcessor(string actor, string processor, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
         {
-            Id = WfEventId.define(EventName, ct);
+            EventId = WfEventId.define(EventName, ct);
             ActorName = actor;
             ProcessorName = processor;
             Flair = flair;
@@ -33,6 +33,6 @@ namespace Z0
         
         [MethodImpl(Inline)]        
         public string Format()
-            => text.format(PSx3, Id, ActorName, ProcessorName);               
+            => text.format(PSx3, EventId, ActorName, ProcessorName);               
     }        
 }

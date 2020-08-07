@@ -13,7 +13,7 @@ namespace Z0.Asm
     
     using static CaptureHostApiStep;
 
-    [Step(WfStepId.CaptureHostApi)]
+    [Step(WfStepKind.CaptureHostApi)]
     public readonly ref struct CaptureHostApi
     {
         public WfState Wf {get;}

@@ -15,7 +15,7 @@ namespace Z0
     {        
         public const string EventName = nameof(EmittingDataset);
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
         
         public string ActorName {get;}
 
@@ -27,7 +27,7 @@ namespace Z0
         public EmittingDataset(string worker, string dsname, FilePath target, CorrelationToken ct)
         {
             ActorName = worker;
-            Id = wfid(EventName,ct);
+            EventId = wfid(EventName,ct);
             DatasetName = dsname;
             TargetPath = target.Name;        }        
 
@@ -35,11 +35,11 @@ namespace Z0
         public EmittingDataset(string worker, string dsname, FolderPath target, CorrelationToken ct)
         {
             ActorName = worker;
-            Id = wfid(EventName,ct);
+            EventId = wfid(EventName,ct);
             DatasetName = dsname;
             TargetPath = target.Name;
         }        
         public string Format()
-            => text.format(PSx4, Id, ActorName, DatasetName, TargetPath);               
+            => text.format(PSx4, EventId, ActorName, DatasetName, TargetPath);               
     }
 }

@@ -16,7 +16,7 @@ namespace Z0.Asm
         
         public const string EventName = nameof(CapturingHosts);
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public readonly IApiHost[] Hosts;
 
@@ -26,7 +26,7 @@ namespace Z0.Asm
         public CapturingHosts(IApiHost[] hosts, CorrelationToken? ct = null)
         {
             Ct = correlate(ct);
-            Id = wfid(nameof(CapturingHosts), Ct);
+            EventId = wfid(nameof(CapturingHosts), Ct);
             Hosts = hosts;
         }
 
@@ -34,6 +34,6 @@ namespace Z0.Asm
             => Hosts.Length;
         
         public string Format() 
-            => text.format(Pattern, Id, HostCount);
+            => text.format(Pattern, EventId, HostCount);
     }    
 }

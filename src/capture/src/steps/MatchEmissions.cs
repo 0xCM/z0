@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     using static Flow;
 
-    [Step(WfStepId.MatchEmissions)]
+    [Step(WfStepKind.MatchEmissions)]
     public readonly struct MatchEmissions 
     {
         public ICaptureWorkflow Workflow {get;}

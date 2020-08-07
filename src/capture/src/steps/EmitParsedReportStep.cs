@@ -7,7 +7,7 @@ namespace Z0.Asm
     [Step(true)]
     public readonly struct EmitParsedReportStep
     {
-        public const WfStepId StepId = WfStepId.EmitParsedReport;
+        public const WfStepKind StepId = WfStepKind.EmitParsedReport;
 
         public const string WorkerName = nameof(EmitParsedReport);
     }

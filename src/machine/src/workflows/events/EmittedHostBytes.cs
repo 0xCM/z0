@@ -14,7 +14,7 @@ namespace Z0
     {
         public const string EventName = nameof(EmittedHostBytes);
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
         
@@ -25,13 +25,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittedHostBytes(string worker, ApiHostUri host, ushort count, CorrelationToken ct)
         {
-            Id = wfid(nameof(EmittedHostBytes), ct);
+            EventId = wfid(nameof(EmittedHostBytes), ct);
             Host= host;
             ActorName = worker;
             AccessorCount = count;
         }                
         
         public string Format()
-            => text.format(PSx4, Id, ActorName, Host.Format(), AccessorCount);        
+            => text.format(PSx4, EventId, ActorName, Host.Format(), AccessorCount);        
     }
 }

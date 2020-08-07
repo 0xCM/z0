@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     public readonly struct CapturingPart : IWfEvent<CapturingPart>
     {            
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        public WfEventId EventId  => WfEventId.define("Placeholder");
 
         public readonly PartId Part;
 

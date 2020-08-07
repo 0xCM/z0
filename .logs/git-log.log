@@ -5642,3 +5642,27 @@
  rename src/capture/src/events/{ParseReportEmitted.cs => EmittedParseReport.cs} (50%)
  rename src/{identity => extract}/src/services/ApiMemberJit.cs (97%)
  delete mode 100644 src/identity/src/services/ApiCollection.cs
+[master 9d583dc14] .
+ 39 files changed, 276 insertions(+), 179 deletions(-)
+ rewrite capture.csv (69%)
+ rename src/capture/src/context/{ => contracts}/ICaptureBroker.cs (100%)
+ rename src/capture/src/context/{ => contracts}/ICaptureClient.cs (97%)
+ rename src/capture/src/context/{ => contracts}/ICaptureEvents.cs (93%)
+ rename src/capture/src/context/{ => contracts}/ICaptureWorkflow.cs (74%)
+ rename src/capture/src/context/{ => contracts}/IImmBroker.cs.cs (100%)
+ rename src/capture/src/context/{ => contracts}/IImmEmissionWorkflow.cs (100%)
+ create mode 100644 src/capture/src/context/contracts/IWfState.cs
+ rename src/capture/src/context/{ => models}/AsmContext.cs (92%)
+ rename src/capture/src/context/{ => models}/CaptureBroker.cs (100%)
+ rename src/capture/src/context/{ => models}/CaptureConfig.cs (100%)
+ rename src/capture/src/context/{ => models}/CaptureContext.cs (100%)
+ rename src/capture/src/context/{ => models}/ImmBroker.cs (100%)
+ rename src/capture/src/context/{ => models}/SelectedParts.cs (100%)
+ rename src/capture/src/context/{ => models}/WfCapture.cs (92%)
+ rename src/capture/src/context/{ => models}/WfState.cs (86%)
+ create mode 100644 src/capture/src/context/ops/app.cs
+ rename src/capture/src/context/{ => services}/WfBuilder.cs (100%)
+ rewrite src/flow/src/events/WfError.cs (92%)
+ copy src/flow/src/events/{WfError.cs => WfErrorT.cs} (53%)
+ rename src/{capture/src/context/IWfCapture.cs => flow/src/services/ops/created.cs} (57%)
+ create mode 100644 src/flow/src/services/ops/ran.cs

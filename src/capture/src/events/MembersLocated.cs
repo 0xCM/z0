@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     public readonly struct MembersLocated : IWfEvent<MembersLocated>
     {
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        public WfEventId EventId  => WfEventId.define("Placeholder");
 
         public readonly ApiHostUri Host;
         

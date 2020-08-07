@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct CapturingParts : IWfEvent<CapturingParts>
     {        
 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public readonly PartId[] Parts;
 
@@ -24,12 +24,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public CapturingParts(PartId[] parts, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
-            Id = WfEventId.define(nameof(CapturingParts), ct);
+            EventId = WfEventId.define(nameof(CapturingParts), ct);
             Flair = flair;
             Parts = parts;            
         }
         
         public string Format()
-            => text.format(PSx2, Id, Parts.Format());
+            => text.format(PSx2, EventId, Parts.Format());
     }        
 }

@@ -12,6 +12,6 @@ namespace Z0.Asm
     {
         public const string WorkerName = nameof(EmitHostArtifactsStep);
 
-        public const WfStepId StepId = WfStepId.EmitHostArtifacts;
+        public const WfStepKind StepId = WfStepKind.EmitHostArtifacts;
     }
 }

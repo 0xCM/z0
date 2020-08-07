@@ -16,7 +16,7 @@ namespace Z0
     {
         public const string EventName = nameof(DecodedHost);
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string WorkerName {get;}
         
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public DecodedHost(string worker, HostInstructions inxs, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
         {
-            Id = WfEventId.define(EventName, ct);
+            EventId = WfEventId.define(EventName, ct);
             WorkerName = worker;
             Instructions = inxs;            
             Flair = flair;
@@ -40,6 +40,6 @@ namespace Z0
             => Instructions;        
 
         public string Format()
-            => text.format(PSx3, Id, WorkerName, Description);
+            => text.format(PSx3, EventId, WorkerName, Description);
     }        
 }

@@ -17,7 +17,7 @@ namespace Z0
     {        
         public const string EventName = nameof(WorkerInitialized);        
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
         
         public string ActorName {get;}
         
@@ -26,13 +26,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public WorkerInitialized(string worker, CorrelationToken ct, AppMsgColor flair = InitializedFlair)
         {
-            Id = wfid(EventName, ct);
+            EventId = wfid(EventName, ct);
             ActorName = worker;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx2, Id, ActorName);
+            => text.format(PSx2, EventId, ActorName);
     }
 }

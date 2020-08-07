@@ -11,7 +11,7 @@ namespace Z0.Asm
     [Step(true)]
     public readonly struct ExtractHostMembersStep
     {
-        public const WfStepId StepId = WfStepId.ExtractHostMembers;
+        public const WfStepKind StepId = WfStepKind.ExtractHostMembers;
 
         public const string WorkerName = nameof(ExtractHostMembers);
     }

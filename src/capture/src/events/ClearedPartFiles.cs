@@ -16,7 +16,7 @@ namespace Z0.Asm
     {            
         const string ItemPattern = "{0} file {1} Deleted";
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
         
         public readonly KeyedValues<PartId,FilePath[]> Files;
 
@@ -24,7 +24,7 @@ namespace Z0.Asm
         public ClearedPartFiles(KeyedValues<PartId,FilePath[]> files)
         {
             Files = files;
-            Id = WfEventId.define(nameof(ClearedPartFiles));
+            EventId = WfEventId.define(nameof(ClearedPartFiles));
         }
 
         ReadOnlySpan<string> Descriptions

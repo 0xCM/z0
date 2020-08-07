@@ -15,7 +15,7 @@ namespace Z0
     {   
         public const string EventName = nameof(WfWarn<T>);             
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
         
         public string ActorName {get;}
 
@@ -26,12 +26,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfWarn(string actor, T body, CorrelationToken ct)
         {
-            Id = wfid(EventName, ct);
+            EventId = wfid(EventName, ct);
             Body = body;
             ActorName = actor;
             Flair = AppMsgColor.Yellow;
         }                    
         public string Format()
-            => text.format(PSx3, Id, ActorName, Body);            
+            => text.format(PSx3, EventId, ActorName, Body);            
     }
 }

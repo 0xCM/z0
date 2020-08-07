@@ -17,7 +17,7 @@ namespace Z0
 
         public const string EventMsg = "Closing workflow context | {0}";
                 
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
         
@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ClosingWfContext(string actor, string type, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
         {
-            Id = wfid(EventName, ct);
+            EventId = wfid(EventName, ct);
             Body = type;
             ActorName = actor;
             Flair = flair;
@@ -36,6 +36,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, Id, ActorName, Body);        
+            => text.format(PSx3, EventId, ActorName, Body);        
     }
 }

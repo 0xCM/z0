@@ -17,7 +17,7 @@ namespace Z0.XedWf
         /// <summary>
         /// The event identifier
         /// </summary>
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         /// <summary>
         /// The input file path
@@ -32,12 +32,12 @@ namespace Z0.XedWf
         [MethodImpl(Inline)]
         public ParsedInstructions(WfEventId id, FilePath source, uint count)
         {
-            Id = id;
+            EventId = id;
             Source = source;
             Count = count;
         }
 
         public string Format()
-            => text.format(Pattern, Id, Count, Source);
+            => text.format(Pattern, EventId, Count, Source);
     }
 }

@@ -75,7 +75,7 @@ namespace Z0
             where E : IWfEvent
         {
             TermSink.Deposit(@event);
-            return @event.Id;
+            return @event.EventId;
         }
 
         public void Error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
@@ -114,9 +114,19 @@ namespace Z0
             Raise(new WorkerCreated(worker, ct));            
         }
 
+        public void Created(WfStepId step, CorrelationToken ct)
+        {   
+            Raise(new WfStepCreated(step, ct));            
+        }
+
         public void Finished(string worker, CorrelationToken ct)
         {   
             Raise(new WorkerFinished(worker, ct));            
+        }
+
+        public void Finished(WfStepId step, CorrelationToken ct)
+        {   
+            Raise(new WorkerFinished(step.Format(), ct));            
         }
 
         public void Initializing(string worker, CorrelationToken ct)

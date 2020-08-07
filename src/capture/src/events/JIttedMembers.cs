@@ -14,7 +14,7 @@ namespace Z0.Asm
     {            
         public const string EventName = nameof(JittedMembers);
         
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
         
@@ -25,7 +25,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public JittedMembers(IApiHost[] hosts, ApiMember[] members, [CallerMemberName] string actor = null)
         {
-            Id = wfid(EventName);
+            EventId = wfid(EventName);
             ActorName = actor;
             Hosts = hosts;
             Members = members;
@@ -34,6 +34,6 @@ namespace Z0.Asm
         public object Description
             => new {MemberCount = Members.Length, HostCount = Hosts.Length};
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);
+            => text.format(PSx3, EventId, ActorName, Description);
     }    
 }

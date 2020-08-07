@@ -12,7 +12,7 @@ namespace Z0.Asm
     [Step(true)]
     public readonly struct SpecializeImmediatesStep
     {
-        public const WfStepId StepId = WfStepId.SpecializeImmediates;
+        public const WfStepKind StepId = WfStepKind.SpecializeImmediates;
 
         public const string WorkerName = nameof(SpecializeImmediates);
     }

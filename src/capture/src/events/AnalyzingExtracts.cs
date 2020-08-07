@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     public readonly struct AnalyzingExtracts : IWfEvent<AnalyzingExtracts>
     {        
-        public WfEventId Id {get;}
+        public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
@@ -24,12 +24,12 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal AnalyzingExtracts(string worker, ExtractedCode[] extracts, CorrelationToken ct)
         {
-            Id = wfid(nameof(AnalyzingExtracts), ct);
+            EventId = wfid(nameof(AnalyzingExtracts), ct);
             ActorName = worker;
             Extracts = extracts;
         }
 
         public string Format() 
-            => text.format(PSx3, Id, ActorName, ExtractCount);
+            => text.format(PSx3, EventId, ActorName, ExtractCount);
     }
 }

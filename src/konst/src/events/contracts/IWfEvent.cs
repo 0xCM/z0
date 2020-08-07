@@ -10,7 +10,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IWfEvent : IAppEvent
     {
-        WfEventId Id {get;}
+        WfEventId EventId {get;}
     }
 
     [SuppressUnmanagedCodeSecurity]

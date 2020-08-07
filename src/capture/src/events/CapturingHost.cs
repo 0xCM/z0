@@ -14,7 +14,7 @@ namespace Z0.Asm
     {            
         const string Pattern = "";
 
-        public WfEventId Id  => WfEventId.define("Placeholder");
+        public WfEventId EventId  => WfEventId.define("Placeholder");
 
         public readonly ApiHostUri Host;
 
