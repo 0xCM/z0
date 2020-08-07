@@ -28,14 +28,6 @@ namespace Z0
             UriLocations = memuri;
             HostCode = hostcode;
         }
-
-        public EncodedParts(PartId[] parts, KeyValuePairs<MemoryAddress,MemberCode> members, KeyValuePairs<MemoryAddress,OpUri> memuri, Dictionary<ApiHostUri,MemberCode[]> hostcode)
-        {
-            Parts = parts;
-            Memories = new EncodedMemories(parts, members);
-            UriLocations = new UriLocations(parts, memuri);
-            HostCode = new HostedCode(parts, hostcode);
-        }
         
         /// <summary>
         /// The number of indexed functions

@@ -84,6 +84,9 @@ namespace Z0
         public void Error(string actor, Exception e, CorrelationToken ct)
             => Flow.error(this, actor, e, ct);
 
+        public void Warn<T>(string actor, T content, CorrelationToken ct)
+            => Flow.warn(this, actor, content, ct);
+
         public void Emitting(string worker, string dsname, FilePath dst, CorrelationToken ct)
         {
             Raise(new EmittingDataset(worker, dsname, dst, ct));

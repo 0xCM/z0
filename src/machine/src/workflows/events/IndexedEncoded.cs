@@ -6,9 +6,41 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Konst;
     using static Flow;
+
+    public struct EncodedIndexStats
+    {
+        public uint PartCount;
+
+        public uint HostCount;
+
+        public uint AddressCount;
+        
+        public uint FunctionCount;
+
+        public uint IdentityCount;
+
+        public ByteSize ByteCount;
+
+        public string Format()
+            => text.format(Slot0, new {PartCount, HostCount, AddressCount, FunctionCount, IdentityCount, ByteCount});
+        
+        public static EncodedIndexStats from(EncodedParts src)
+        {
+            var stats = default(EncodedIndexStats);
+            stats.PartCount = (uint)src.Parts.Length;
+            stats.HostCount = (uint)src.Hosts.Length;
+            stats.AddressCount =(uint)src.Locations.Length;
+            stats.FunctionCount = (uint)src.MemberCode.Length;
+            stats.IdentityCount = (uint)src.Identities.Length;
+            stats.ByteCount = src.MemberCode.Sum(x => x.Data.Length);
+            return stats;
+
+        }
+    }
 
     public readonly struct IndexedEncoded : IWfEvent<IndexedEncoded>
     {
@@ -33,6 +65,6 @@ namespace Z0
         
         [MethodImpl(Inline)]        
         public string Format()
-            => text.format(SSx3, EventId, ActorName, Index.EntryCount);               
+            => text.format(SSx3, EventId, ActorName, EncodedIndexStats.from(Index).Format());               
     }        
 }

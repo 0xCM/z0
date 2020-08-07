@@ -5717,3 +5717,136 @@
  rename src/machine/src/workflows/steps/{ => workers}/ProcessInstructions.cs (100%)
  rename src/machine/src/workflows/steps/{ => workers}/ProcessPartFiles.cs (100%)
  rename src/machine/src/workflows/steps/{ => workers}/RunProcessors.cs (93%)
+[master 6ef44b8ec] .
+ 174 files changed, 1249 insertions(+), 835 deletions(-)
+ create mode 100644 control.csv
+ rename src/capture/src/{context/services => }/WfBuilder.cs (100%)
+ delete mode 100644 src/capture/src/context/ops/state.cs
+ rename src/capture/src/steps/{CaptureHost.cs => CaptureClient.cs} (70%)
+ rename src/capture/src/steps/{CaptureHostStep.cs => CaptureClientStep.cs} (87%)
+ rename src/{flow/src/models => domain/src/services}/MemoryFile.cs (100%)
+ rename src/flow/src/{services => context}/WfConfig.cs (100%)
+ rename src/flow/src/{services => context}/WfContext.cs (100%)
+ rename src/flow/src/{services => context}/WfContextT.cs (100%)
+ rename src/flow/src/{services => context}/WfSettings.cs (100%)
+ rename src/{konst/src/dataset/ops/fields.cs => flow/src/services/ops/context.cs} (56%)
+ create mode 100644 src/flow/src/services/ops/source.cs
+ rename src/konst/src/archives/{services => }/Archives.cs (100%)
+ rename src/konst/src/archives/{services => config}/ArchiveConfig.cs (100%)
+ rename src/konst/src/archives/{services => config}/AsmArchiveConfig.cs (100%)
+ rename src/konst/src/archives/{services => config}/CaptureArchiveConfig.cs (100%)
+ rename src/konst/src/archives/{services => config}/DllArchiveConfig.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IArchiveServices.cs (99%)
+ rename src/konst/src/{artifacts/form => archives/contracts}/IArtifactKind.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/ICapturedCode.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IEncoded.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IEncodedHexArchive.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IEncodedHexReader.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IEncodedPartBuilder.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IEncodedParts.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IEncodedWriter.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IIdentifiedCode.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IIdentifiedCodeWriter.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IKnownCode.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/ILocatedCode.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IMemberCode.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IMemberCodeReader.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IMemberCodeWriter.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IReflectedCode.cs (100%)
+ rename src/konst/src/{documents/services => archives}/contracts/ITextDocParser.cs (100%)
+ rename src/konst/src/{encoded => archives}/contracts/IUriHexParser.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/AsmFileKind.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/CilFileKind.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/CsvFileKind.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/DllFileKind.cs (100%)
+ create mode 100644 src/konst/src/archives/kinds/DocFileKind.cs
+ rename src/konst/src/archives/{models => kinds}/ExeFileKind.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/ExtractFileKind.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/HexFileKind.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/JsonFileKind.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/ParsedFileKind.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/PartFile.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/PartFileKind.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/TxtFileKind.cs (100%)
+ rename src/konst/src/archives/{models => kinds}/XmlFileKind.cs (100%)
+ rename src/konst/src/{artifacts => archives/literals}/ArtifactClass.cs (100%)
+ rename src/konst/src/{documents => archives}/models/AppResource.cs (100%)
+ rename src/konst/src/{documents => archives}/models/AppResourceDoc.cs (100%)
+ rename src/konst/src/{documents => archives}/models/AppResourceT.cs (100%)
+ rename src/konst/src/{documents => archives}/models/ResExtractor.cs (100%)
+ rename src/konst/src/{documents => archives}/models/TextCell.cs (100%)
+ rename src/konst/src/{documents => archives}/models/TextDoc.cs (100%)
+ rename src/konst/src/{documents => archives}/models/TextDocFormat.cs (100%)
+ rename src/konst/src/{documents => archives}/models/TextDocHeader.cs (100%)
+ rename src/konst/src/{documents => archives}/models/TextDocInfo.cs (100%)
+ rename src/konst/src/{documents/services/hosts => archives/models}/TextDocParser.cs (100%)
+ rename src/konst/src/{documents => archives}/models/TextDocs.cs (100%)
+ rename src/konst/src/{documents => archives}/models/TextFileRows.cs (98%)
+ rename src/konst/src/{documents => archives}/models/TextLine.cs (100%)
+ rename src/konst/src/{documents/services/hosts => archives/models}/TextLineParser.cs (100%)
+ rename src/konst/src/{documents => archives}/models/TextRow.cs (100%)
+ rename src/konst/src/{documents => archives}/models/TextRows.cs (100%)
+ rename src/konst/src/{artifacts => archives/services}/ArtifactIdentity.cs (100%)
+ rename src/konst/src/{encoded => archives}/services/EncodedHexArchive.cs (100%)
+ rename src/konst/src/{encoded => archives}/services/EncodedHexReader.cs (100%)
+ rename src/konst/src/{encoded => archives}/services/IdentifiedCodeWriter.cs (100%)
+ rename src/konst/src/{encoded => archives}/services/MemberCodeWriter.cs (100%)
+ rename src/konst/src/{documents => archives}/services/TextDocParser.cs (100%)
+ rename src/konst/src/{encoded => archives}/services/UriCodeReader.cs (100%)
+ rename src/konst/src/{encoded => archives}/services/UriHexParser.cs (100%)
+ rename src/konst/src/{documents/services/ops => archives/services/docparser}/create.cs (100%)
+ rename src/konst/src/{documents/services/ops => archives/services/docparser}/header.cs (100%)
+ rename src/konst/src/{documents/services/ops => archives/services/docparser}/lines.cs (100%)
+ rename src/konst/src/{documents/services/ops => archives/services/docparser}/parse.cs (100%)
+ rename src/konst/src/{documents/services/ops => archives/services/docparser}/row.cs (100%)
+ delete mode 100644 src/konst/src/dataset/Archives.cs
+ delete mode 100644 src/konst/src/dataset/Formatters.cs
+ delete mode 100644 src/konst/src/dataset/TableStore.cs
+ create mode 100644 src/konst/src/dataset/models/DataModel.cs
+ delete mode 100644 src/konst/src/dataset/models/Dataset.cs
+ rename src/konst/src/dataset/{contracts => models}/IDataFlow.cs (90%)
+ rename src/konst/src/dataset/{contracts => models}/IDataModel.cs (69%)
+ rename src/konst/src/dataset/{contracts => models}/IDatasetArchive.cs (94%)
+ rename src/konst/src/dataset/{contracts => models}/IEntity.cs (99%)
+ delete mode 100644 src/konst/src/dataset/services/FileTableStore.cs
+ create mode 100644 src/konst/src/dataset/services/IDatasetFormatter.cs
+ rename src/konst/src/dataset/{contracts/IDatasetFormatter.cs => services/IDatasetFormatterT.cs} (58%)
+ delete mode 100644 src/konst/src/dataset/services/Publications.cs
+ rename src/konst/src/dataset/{contracts/IPublicationArchive.cs => tables/IDatasets.cs} (93%)
+ rename src/konst/src/dataset/{contracts => tables}/IRowFormatter.cs (100%)
+ rename src/konst/src/dataset/{contracts => tables}/ITable.cs (100%)
+ rename src/konst/src/dataset/{contracts/IFieldFormatter.cs => tables/ITableStore.cs} (61%)
+ create mode 100644 src/konst/src/dataset/tables/TableFields.cs
+ create mode 100644 src/konst/src/dataset/tables/TableFormatter.cs
+ create mode 100644 src/konst/src/dataset/tables/TableStore.cs
+ create mode 100644 src/konst/src/dataset/tables/TableT.cs
+ rename src/konst/src/events/{models => contracts}/DataReceiver.cs (100%)
+ rename src/konst/src/events/{models => contracts}/IndexFunction.cs (100%)
+ rewrite src/konst/src/events/models/AppError.cs (65%)
+ rename src/konst/src/events/{models => services}/DataHandlerCT.cs (100%)
+ rename src/konst/src/events/{models => services}/EventRelayT.cs (100%)
+ rename src/konst/src/{dataset/services => reports/tabular}/DatasetFormatter.cs (100%)
+ rename src/konst/src/{dataset/models => reports/tabular}/DatasetHeader.cs (93%)
+ rename src/konst/src/{dataset/services => reports/tabular}/FieldFormatterF.cs (100%)
+ rename src/konst/src/{dataset/contracts/ITableArchive.cs => reports/tabular/ITabularArchive.cs} (95%)
+ rename src/konst/src/{dataset/contracts/ITableStore.cs => reports/tabular/ITabularStore.cs} (83%)
+ rename src/konst/src/{dataset/contracts => reports/tabular}/IValueFormatter.cs (91%)
+ rename src/konst/src/{dataset/services/TableArchive.cs => reports/tabular/TabularArchive.cs} (86%)
+ rename src/konst/src/{dataset/tables => reports/tabular}/TabularField.cs (100%)
+ rename src/konst/src/{dataset/tables => reports/tabular}/TabularFieldF.cs (100%)
+ rename src/konst/src/{dataset/tables => reports/tabular}/TabularFormat.cs (100%)
+ rename src/konst/src/{dataset/tables => reports/tabular}/TabularFormatF.cs (100%)
+ rename src/konst/src/{dataset/services/TableStoreFR.cs => reports/tabular/TabularStore.cs} (92%)
+ create mode 100644 src/metareader/src/records/DatasetRelay.cs
+ create mode 100644 src/metareader/src/records/DatasetSink.cs
+ create mode 100644 src/run/src/models/DumpBin/Archive.cs
+ create mode 100644 src/run/src/models/DumpBin/DumpBin.cs
+ create mode 100644 src/run/src/models/DumpBin/FileKinds.cs
+ create mode 100644 src/run/src/models/Files.cs
+ create mode 100644 src/run/src/models/ListedFile.cs
+ create mode 100644 src/run/src/models/ListedFileField.cs
+ create mode 100644 src/run/src/models/ListedFiles.cs
+ delete mode 100644 src/run/src/services/Art.cs
+ rename src/run/src/services/{IArtistryContext.cs => IRunnerContext.cs} (89%)
+ create mode 100644 src/run/src/services/Runner.cs
+ rename wf/dumpbin/{run.bat => exec.bat} (63%)

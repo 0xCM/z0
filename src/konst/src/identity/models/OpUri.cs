@@ -113,9 +113,9 @@ namespace Z0
             Host = host;
             OpId = opid;
             GroupName = group;
-            UriText = opid.IsEmpty 
+            UriText = (opid.IsEmpty 
                 ? QueryText(scheme, host.Owner, host.Name, group) 
-                : FullUriText(scheme, host.Owner, host.Name, GroupName, opid);
+                : FullUriText(scheme, host.Owner, host.Name, GroupName, opid)).Trim();
         }
 
 

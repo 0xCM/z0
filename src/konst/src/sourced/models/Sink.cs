@@ -11,6 +11,13 @@ namespace Z0
     using static Konst;
     using static z;
 
+    public readonly struct Sink
+    {
+        [MethodImpl(Inline)]
+        public static Sink<T> from<T>(Action<T> receiver)
+            => new Sink<T>((in T x) => receiver(x));
+    }
+    
     /// <summary>
     /// Defines a receiver-predicated sink
     /// </summary>

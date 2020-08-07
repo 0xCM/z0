@@ -25,9 +25,8 @@ namespace Z0
         public PartId PartId {get;}
 
         public int TotalCount {get;}
+        
         public AppMsgColor Flair {get;}
-
-        public AppMsg Description {get;}
 
         [MethodImpl(Inline)]
         public DecodedPart(string actor, PartInstructions src, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
@@ -37,11 +36,10 @@ namespace Z0
             Instructions = src;
             PartId = Instructions.Part;
             TotalCount = Instructions.TotalCount;
-            Flair = flair;
-            Description = AppMsg.Colorize(new {PartId, TotalCount}, Flair);
+            Flair = flair;            
         }
                 
         public string Format()
-            => text.format(SSx3, EventId, ActorName, Description);
+            => text.format(PSx4, EventId, ActorName, PartId, TotalCount);
     }        
 }

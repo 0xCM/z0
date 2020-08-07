@@ -23,10 +23,6 @@ namespace Z0
         /// The host-owned code
         /// </summary>
         public readonly MemberCode[] Data;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator EncodedMembers((ApiHostUri part, MemberCode[] code) src)
-        //     => new EncodedMembers(src.part, src.code);
         
         [MethodImpl(Inline)]
         public EncodedMembers(ApiHostUri id, MemberCode[] code)

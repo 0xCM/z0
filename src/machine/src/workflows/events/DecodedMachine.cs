@@ -16,7 +16,7 @@ namespace Z0
 
     public readonly struct DecodedMachine : IWfEvent<DecodedMachine>
     {
-        const string Pattern = "{0}: {1} instructions decoded from {2} functions provided by {3} hosts across {4} parts";
+        public const string EventName = nameof(DecodedMachine);
         
         public WfEventId EventId {get;}
 
@@ -25,9 +25,9 @@ namespace Z0
         public readonly PartInstructions[] PartInstructions;        
         
         [MethodImpl(Inline)]        
-        public DecodedMachine(EncodedParts index, PartInstructions[] inxs, CorrelationToken? ct = null)
+        public DecodedMachine(EncodedParts index, PartInstructions[] inxs, CorrelationToken ct)
         {
-            EventId = WfEventId.define(nameof(DecodedHost), ct);
+            EventId = wfid(EventName, ct);
             Index = index;
             PartInstructions = inxs;
         }
@@ -42,6 +42,6 @@ namespace Z0
             => PartInstructions.Sum(x => x.TotalCount);                    
         
         public string Format()
-            => text.format(Pattern, EventId, TotalCount, Index.EntryCount, Index.Hosts.Length, Index.Parts.Length);                    
+            => text.format(PSx5, EventId, TotalCount, Index.EntryCount, Index.Hosts.Length, Index.Parts.Length);                    
     }        
 }

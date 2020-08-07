@@ -86,6 +86,12 @@ namespace Z0.Asm
         public void Finished(string worker, CorrelationToken ct)
             => Wf.Finished(worker, Ct);
 
+        public void Initializing(string worker, CorrelationToken ct)
+            => Wf.Initializing(worker, Ct);
+
+        public void Initialized(string worker, CorrelationToken ct)
+            => Wf.Initialized(worker, Ct);
+
         public void Error(string worker, Exception e, CorrelationToken ct)
             => Wf.Error(worker, e, Ct);
 

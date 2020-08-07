@@ -16,7 +16,7 @@ namespace Z0
     [Step(Kind)]
     public class RunProcessors : IMachine
     {
-        public static RunProcessors create(WfContext wf, CorrelationToken ct)
+        public static RunProcessors create(WfState wf, CorrelationToken ct)
         {
             wf.Initializing(Name, ct);
             var step = default(RunProcessors);
@@ -36,38 +36,54 @@ namespace Z0
             return step;        
         }
 
-        readonly WfContext Wf;
+        readonly WfState State;
 
         readonly CorrelationToken Ct;
-        
-        readonly IAsmContext Asm;
-
-        public IWfBroker Broker {get;}
-
-        public IWfEventSink Sink {get;}
 
         PartFiles Files {get;}
 
-        EncodedPartBuilder IndexBuilder {get;}            
 
         readonly FolderPath TargetDir;
         
-        RunProcessors(WfContext wf, CorrelationToken ct)
+        RunProcessors(WfState wf, CorrelationToken ct)
         {
-            Wf = wf;
+            State = wf;
             Ct = ct;
-            Sink = wf.Broker.Sink;
             TargetDir = Wf.AppPaths.AppDataRoot + FolderName.Define(Name);
-            Asm = WfBuilder.asm(wf.ContextRoot);
-            Broker = new WfBroker(Ct);
             Files = PartFiles.create(Asm);            
-            IndexBuilder = Encoded.builder();                  
         }
 
-        public void OnEvent(LoadedParseReport e)
+        WfContext Wf
+            => State.Wf;
+        
+        IAsmContext Asm
+            => State.Asm;
+
+        public IWfBroker Broker 
+            => State.Wf.Broker;
+
+        public IWfEventSink Sink 
+            => Wf.Broker.Sink;
+
+        public void Run()
         {
-            Index(Sink.Deposit(e).Report);
+            Wf.Running(Name, Ct);
+            try
+            {            
+                Ingest();
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+            Wf.Ran(Name, Ct);
         }
+
+        public void Dispose()
+        {
+            Wf.Finished(Name, Ct);
+        }
+
         
         public void OnEvent(IndexedEncoded e)
         {
@@ -78,9 +94,11 @@ namespace Z0
 
         public void OnEvent(DecodedMachine e)
         {
+            Sink.Deposit(e);
+
+            Wf.Status(Name, $"Handling {e.EventId}", Ct);
             try
             {
-                Sink.Deposit(e);
                 var index = LocatedInstructions.create(e.Instructions.ToArray());
                 using var step = new AnalyzeCalls(Wf, index, TargetDir, Ct);
                 step.Run();
@@ -89,37 +107,52 @@ namespace Z0
             {
                 Wf.Error(error, Ct);
             }            
+            Wf.Status(Name, $"Handling {e.EventId}", Ct);
         }
 
         public void OnEvent(DecodedPart e)
         {
+            Sink.Deposit(e);
+
+            Wf.Status(Name, $"Handling {e.EventId}", Ct);
             try
             {
-                Sink.Deposit(e);
+                Wf.Status(Name, "Processing instructions", Ct);
                 var workflow = ProcessInstructions.create(Wf, TargetDir);
                 workflow.Process(e.Instructions);
-                if(SemanticFormatEnabled)
-                    workflow.Render(e.Instructions);
+                workflow.Render(e.Instructions);
             }
             catch(Exception error)
             {
                 Wf.Error(error,Ct);
             }
+
+            Wf.Status(Name, $"Handling {e.EventId}", Ct);
         }
 
         void DecodeParts(EncodedParts src)
-        {
-            var dst = Root.list<PartInstructions>();
+        {            
+            var dst = z.dict<ApiHostUri,HostInstructions>();
+
             var parts = src.Parts;
+            var count = parts.Length;
             
-            for(var k=0; k<parts.Length; k++)
+            for(var i=0; i<count; i++)
             {
-                var part = parts[k];
-                var pcs = src.CodeSet(part);
-                dst.Add(DecodePart(pcs));
+                var part = parts[i];
+                var hosts = src.Hosts.Where(h => h.Owner == part);
+                for(var j=0; j<hosts.Length; j++)
+                {
+                    var host = hosts[j];
+                    var members = src[host];
+                    var instructions = Decode(members);
+                    dst[host] = instructions;
+                }                
             }
 
-            Broker.Raise(new DecodedMachine(src, dst.Array()));
+
+            //Wf.Raise(new DecodedMachine(src, dst.Array(), Ct));
+
         }
 
         PartInstructions DecodePart(PartCode pcs)
@@ -141,6 +174,8 @@ namespace Z0
 
         HostInstructions Decode(EncodedMembers hcs)
         {
+            Wf.Running(Name, "Decode", Ct);
+
             var inxs = Root.list<MemberInstructions>();    
             
             var dst = Root.list<Instruction>();
@@ -163,56 +198,38 @@ namespace Z0
                 inxs.Add(member);
             }
 
+            Wf.Ran(Name, "Decode", Ct);
+
             return HostInstructions.Create(hcs.Host, inxs.ToArray());
-        }
-
-        void Index(MemberParseReport report)
-        {
-            Root.iter(report.Records, Index);            
-        }
-
-        void Index(MemberParseRecord src)
-        {
-            if(src.Address.IsEmpty)
-                Wf.Raise(new Unaddressed(src.Uri, src.Data));
-            else
-                IndexBuilder.Include(MemberCode.define(src.Uri, src.Data));
-        }
-
-        void ParseReport(FilePath src)
-        {
-            var report = ParseReportParser.Service.Parse(src);
-            report.OnFailure(fail => term.error(fail.Reason))
-                  .OnSuccess(value => Wf.Raise(new LoadedParseReport(value, src)));
         }
 
         void RandomProcessor()
         {
-            // try
-            // {
-            //     var name = nameof(RandomProcessor);
-            //     Wf.Raise(new RunningProcessor(ActorName, name, Ct));
+            try
+            {
+                var name = nameof(RandomProcessor);
+                Wf.Raise(new RunningProcessor(Name, name, Ct));
                 
-            //     var processor = ProcessAsm.create(State);
-            //     var parts = Wf.ContextRoot.Composition.Resolved.Select(p => p.Id);
-            //     Wf.Raise(new ProcessingParts(ActorName, name, parts, Ct));
+                var processor = ProcessAsm.create(State);
+                var parts = Wf.ContextRoot.Composition.Resolved.Select(p => p.Id);
+                Wf.Raise(new ProcessingParts(Name, name, parts, Ct));
 
-            //     var result = processor.Process(parts);
-            //     var sets = span(result.Content);
-            //     var count = result.Count;
-            //     for(var i=0; i<count; i++)
-            //     {
-            //         ref readonly var set = ref skip(sets,i);
-            //         Process(set);                        
-            //     }
+                var result = processor.Process(parts);
+                var sets = span(result.Content);
+                var count = result.Count;
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var set = ref skip(sets,i);
+                    Process(set);                        
+                }
 
-            //     Wf.Raise(new RanProcessor(ActorName, nameof(RandomProcessor), Ct));
+                Wf.Raise(new RanProcessor(Name, nameof(RandomProcessor), Ct));
 
-            // }
-            // catch(Exception e)
-            // {
-            //     Wf.Error(ActorName, e, Ct);
-            // }
+            }
+            catch(Exception e)
+            {
+                Wf.Error(Name, e, Ct);
+            }
         }
 
         void Process(in AsmRecordSet<Mnemonic> src)
@@ -230,43 +247,47 @@ namespace Z0
             }            
         }
 
-        void ParseReports()
+        void Index(MemberParseReport report, EncodedPartBuilder dst)
         {
+            z.iter(report.Records,record => Index(record,dst));                        
+        }
+        
+        void Index(MemberParseRecord src, EncodedPartBuilder dst)
+        {
+            if(src.Address.IsEmpty)
+                Wf.Raise(new Unaddressed(src.Uri, src.Data));
+            else
+            {
+                var code = MemberCode.define(src.Uri, src.Data);
+                if(!dst.Include(code))
+                    Wf.Warn(Name, $"Duplicate | {src.Uri.Format()}", Ct);
+            }
+        }
+
+        void Ingest()
+        {
+            var parser = ParseReportParser.Service;
             var files = span(Files.ParseFiles);
             var count = files.Length;
-            Wf.Status(Name, $"Processing {count} parse files", Ct);
-
+            
+            var builder = Encoded.builder();            
             for(var i=0; i<count; i++)
             {
-                ref readonly var file = ref skip(files,i);
-                ParseReport(file);
+                ref readonly var path = ref skip(files,i);
+                var parsed = parser.Parse(path);
+                if(parsed)
+                {
+                    Index(parsed.Value,builder);
+                }
+                else
+                {
+                    Wf.Error(Name, $"Parse failed for {path}", Ct);
+                }
             }
 
-            var encoded = IndexBuilder.Freeze();
-            Wf.Raise(new IndexedEncoded(Name, encoded, Ct));
+            var encoded = builder.Freeze();
+            Wf.Raise(new IndexedEncoded(Name, encoded, Ct));            
         }
-
-        public void Run()
-        {
-            Wf.Running(Name, Ct);
-            try
-            {            
-                RandomProcessor();
-                ParseReports();
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-            }
-        }
-
-        public void Dispose()
-        {
-            Wf.Finished(Name, Ct);
-        }
-
-        public bool SemanticFormatEnabled {get;}
-            = true;
 
         IMultiSink IWfBrokerClient.Sink 
             => Wf.Broker;

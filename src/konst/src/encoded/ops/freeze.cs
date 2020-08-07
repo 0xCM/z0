@@ -21,7 +21,11 @@ namespace Z0
                                          .Select(x => (x.Key, x.Select(y => y.x).ToArray()))
                                          .ToDictionary();
             var parts = hc.Keys.Select(x => x.Owner).Distinct().ToArray();
-            return new EncodedParts(parts, memtable, memuri, hc); 
+
+            return new EncodedParts(parts, 
+                new EncodedMemories(parts, memtable), 
+               new UriLocations(parts, memuri), 
+               new HostedCode(parts, hc));               
         }
     }
 }

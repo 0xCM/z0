@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct LoadedParseReport : IWfEvent<LoadedParseReport>
     {
-        const string Pattern = IdMarker + "Loaded {1} {2} records from {3}";
+        public const string EventName = nameof(LoadedParseReport);
         
         public WfEventId EventId {get;}
 
@@ -21,14 +21,14 @@ namespace Z0
         public readonly FilePath ReportPath;
 
         [MethodImpl(Inline)]
-        public LoadedParseReport(MemberParseReport report, FilePath src)
+        public LoadedParseReport(MemberParseReport report, FilePath src, CorrelationToken ct)
         {
-            EventId = WfEventId.define(nameof(DecodedPart));
+            EventId = WfEventId.define(EventName,ct);
             Report = report;
             ReportPath = src;
         }
                                 
         public string Format()
-            => text.format(Pattern, EventId, Report.RecordCount, Report.ReportName, ReportPath);
+            => text.format(PSx4, EventId, Report.RecordCount, Report.ReportName, ReportPath);
     }        
 }

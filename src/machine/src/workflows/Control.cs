@@ -72,9 +72,9 @@ namespace Z0
         public void Run()
         {
             Wf.Running(WorkerName, Ct);
-            Run(default(CaptureClientStep));
-            Run(default(EmitDatasetsStep));
-            Run(default(ProcessPartFilesStep));
+            // Run(default(CaptureClientStep));
+            // Run(default(EmitDatasetsStep));
+            //Run(default(ProcessPartFilesStep));
             Run(default(RunProcessorsStep));
         }
 
@@ -119,7 +119,7 @@ namespace Z0
             Wf.RunningT(WorkerName, kind, Ct);
             try
             {
-                using var step = RunProcessors.create(Wf, Ct);
+                using var step = RunProcessors.create(State, Ct);
                 step.Run();
             }
             catch(Exception e)

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct EncodedPartBuilder : IEncodedPartBuilder
+    public readonly struct EncodedPartBuilder
     {
         internal readonly Dictionary<MemoryAddress,MemberCode> CodeAddress;
 
@@ -29,7 +29,27 @@ namespace Z0
         public EncodedParts Freeze()
             => Encoded.freeze(this);
 
-        public int Include(params MemberCode[] src)
-            => Encoded.include(this,src);
+        public bool Include(MemberCode src)
+        {
+            return CodeAddress.TryAdd(src.Address, src);
+        }
+
+        public int Include(MemberCode[] src, ISink<MemberCode> duplicate)
+        {
+            var count = 0;
+            for(var i=0; i<src.Length; i++)
+            {
+                var code = src[i];
+                if(!CodeAddress.TryAdd(code.Address, code))
+                    duplicate.Deposit(code);
+                else
+                    count++;
+
+                UriAddress.TryAdd(code.Address, code.OpUri);
+                CodeUri.TryAdd(code.OpUri, code);
+            }
+            return count;
+        }
+
     }
 }
