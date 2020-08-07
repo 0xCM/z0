@@ -55,7 +55,7 @@ namespace Z0
 
             try
             {
-                using var host = new CaptureClient(Wf, Wf.Broker, Wf.Config, Ct);
+                using var host = new CaptureClient(Wf, Ct);
                 host.Run();
             }
             catch(Exception e)

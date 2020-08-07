@@ -16,8 +16,8 @@ namespace Z0
     partial struct Flow    
     {
         [MethodImpl(Inline), Op]
-        public static WfError error(string actor, object body, CorrelationToken ct)
-            => new WfError(actor,body,ct);
+        public static WfError<T> error<T>(string actor, T body, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+            => new WfError<T>(actor, body, ct, AppMsgSource.create(caller,file,line));
 
         public static void error(IWfContext wf, Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
         {
@@ -30,7 +30,7 @@ namespace Z0
         }             
 
         [MethodImpl(Inline), Op]
-        public static void error<T>(IWfContext wf, string worker, T body, CorrelationToken ct)
-            => wf.Raise(new WfError<T>(worker, body, ct));
+        public static void error<T>(IWfContext wf, string worker, T body, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+            => wf.Raise(new WfError<T>(worker, body, ct, AppMsgSource.create(caller,file,line)));
     }
 }

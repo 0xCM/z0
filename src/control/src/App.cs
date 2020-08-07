@@ -5,6 +5,8 @@
 namespace Z0
 {
     using System;
+    using Z0.Asm;
+
     using static Flow;
 
     class App : AppShell<App,IAppContext>
@@ -21,25 +23,26 @@ namespace Z0
             : base(WfBuilder.app())
         {
             Ct = CorrelationToken.define((byte)Part);   
-            Raise(Events.status(ActorName, "Application created"));                     
+            Raise(Flow.created(ActorName, Ct));
         }
         
         public override void RunShell(params string[] args)
-        {              
-            Raise(Events.status(ActorName, text.format(PSx2,"Running shell", args.FormatList())));            
+        {         
+            var arglist = args.FormatList();
+            var msg = text.format(PSx2, Part.Format(), arglist);
+            Raise(Flow.running(ActorName, msg, Ct));
+
             try
             {
                 using var control = CaptureController.create(Context, Ct, args);
                 control.Run();
-                // using var control = new CaptureControl(Context, Ct, args);
-                // control.Run();
             }
             catch(Exception e)
             {
-                Raise(Events.error(ActorName, e));                
+                Raise(Flow.error(ActorName, e, Ct));
             }
             
-            Raise(Events.status(ActorName, "Shell run complete"));
+            Raise(Flow.ran(ActorName, msg, Ct));
         }
 
         public static void Main(params string[] args)

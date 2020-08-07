@@ -12,10 +12,6 @@ namespace Z0.Asm
 
     public class AsmContext : IAsmContext 
     {            
-        [MethodImpl(Inline)]
-        public static IAsmContext create(IAppContext root)
-            => new AsmContext(root);
-
         public IAppContext ContextRoot {get;}
 
         public event Action<IAppMsg> Next;

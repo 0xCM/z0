@@ -7,38 +7,60 @@ namespace Z0.Asm
     using System;
     using System.Linq;
 
-    public readonly ref struct MatchAddresses
+    using static MatchAddressesStep;
+
+    public readonly struct MatchAddressesStep
     {
-        public ICaptureWorkflow Workflow {get;}
-
-        public ICaptureContext Context 
-            => Workflow.Context;
-
-        public MatchAddresses(ICaptureWorkflow workflow)
-            => Workflow = workflow;
+        public const string WorkerName = nameof(MatchAddresses);
+    }
+    
+    public ref struct MatchAddresses
+    {        
+        readonly WfState Wf;
         
-        public void Run(ApiHostUri host, ExtractedCode[] extracted, AsmFunction[] decoded)
+        readonly CorrelationToken Ct;
+
+        readonly ExtractedCode[] Extracted;
+
+        readonly AsmFunction[] Decoded;
+
+        readonly ApiHostUri Host;
+
+        public MatchAddresses(WfState wf, ApiHostUri host, ExtractedCode[] extracted, AsmFunction[] decoded, CorrelationToken ct)
         {
+            Wf = wf;
+            Host = host;
+            Extracted = extracted;
+            Decoded = decoded;
+            Ct = ct;
+        }
+        
+        public void Run()
+        {
+            Wf.Running(WorkerName, Ct);
             try
             {
-                var a = extracted.Select(x => x.Address).ToHashSet();
-                Demands.insist(a.Count, extracted.Length);
+                var a = Extracted.Select(x => x.Address).ToHashSet();
+                Demands.insist(a.Count, Extracted.Length);
 
-                var b = decoded.Select(f => f.BaseAddress).ToHashSet();
-                Demands.insist(b.Count, decoded.Length);
+                var b = Decoded.Select(f => f.BaseAddress).ToHashSet();
+                Demands.insist(b.Count, Decoded.Length);
                 
                 b.IntersectWith(a);
-                Demands.insist(b.Count, decoded.Length);                
+                Demands.insist(b.Count, Decoded.Length);                
             }
             catch(Exception e)
             {
-                term.error(e,$"Addresses from {host} decoded functions do not match with the extract addresses");
+                Wf.Error(WorkerName, e, Ct);    
             }
+
+            Wf.Ran(WorkerName, Ct);
+
         }
         
         public void Dispose()
         {
-
+           Wf.Finished(WorkerName, Ct);
         }
     }
 }

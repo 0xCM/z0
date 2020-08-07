@@ -6,7 +6,7 @@ namespace Z0
 { 
     public interface IMachineClient : IWfBrokerClient
     {
-        WfError Error => default;
+        IWfError Error => default(WfError<object>);
         
         LoadedParseReport LoadedParseReport => default;
 
@@ -18,7 +18,7 @@ namespace Z0
 
         DecodedMachine DecodedIndex => default;
 
-        void OnEvent(WfError e) 
+        void OnEvent(IWfError e) 
             => Sink.Deposit(e);
 
         void OnEvent(LoadedParseReport e) 

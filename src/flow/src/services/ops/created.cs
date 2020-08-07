@@ -7,18 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Konst;
 
-    public interface IWfCapture : IContext
+    partial struct Flow    
     {
-        IAsmContext AsmContext {get;}
-
-        IAppContext ContextRoot 
-            => AsmContext.ContextRoot;
-        
-        IAppPaths AppPaths 
-            => ContextRoot.AppPaths;
+        [MethodImpl(Inline), Op]
+        public static WorkerCreated created(string worker, CorrelationToken ct)
+            => new WorkerCreated(worker, ct);                        
     }
 }

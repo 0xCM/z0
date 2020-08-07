@@ -6,10 +6,10 @@ namespace Z0.Asm
 {
     public interface ICaptureClient : IWfBrokerClient<ICaptureBroker>
     {
-        void OnEvent(WfStatus e) 
+        void OnEvent(IWfError e)
             => Sink.Deposit(e);
-
-        void OnEvent(WfError e) 
+        
+        void OnEvent(WfStatus e) 
             => Sink.Deposit(e);
 
         void OnEvent(CapturingPart e) 
@@ -77,7 +77,6 @@ namespace Z0.Asm
             Broker.CapturedPart.Subscribe(Broker, OnEvent);            
             Broker.CapturingHost.Subscribe(Broker, OnEvent);
             Broker.CapturedHost.Subscribe(Broker, OnEvent);
-            Broker.WorkflowError.Subscribe(Broker,OnEvent);
             Broker.MembersLocated.Subscribe(Broker,OnEvent);
             Broker.ExtractReportCreated.Subscribe(Broker,OnEvent);
             Broker.ExtractReportSaved.Subscribe(Broker,OnEvent);

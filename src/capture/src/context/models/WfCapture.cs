@@ -13,7 +13,7 @@ namespace Z0
     using static Konst;
     using static Flow;
     
-    public readonly struct WfCapture : IWfCapture
+    public readonly struct WfCapture
     {
         public IAsmContext AsmContext {get;}
 

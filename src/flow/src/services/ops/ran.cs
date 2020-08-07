@@ -12,11 +12,11 @@ namespace Z0
     partial struct Flow    
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfStepRunning<T> running<T>(string worker, T body, CorrelationToken ct)
-            => new WfStepRunning<T>(worker, body, ct);
+        public static void ran<T>(IWfContext wf, string worker, T body, CorrelationToken ct)
+            => wf.Raise(new WfStepFinished<T>(worker, body, ct));
 
         [MethodImpl(Inline), Op]
-        public static void running<T>(IWfContext wf, string worker, T body, CorrelationToken ct)
-            => wf.Raise(new WfStepRunning<T>(worker, body, ct));
+        public static WfStepFinished<T> ran<T>(string worker, T body, CorrelationToken ct)
+            => new WfStepFinished<T>(worker, body, ct);            
     }
 }

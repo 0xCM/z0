@@ -5623,3 +5623,22 @@
  rename src/win/src/os/windows/{ => kernel32}/SafeLibraryHandle.cs (100%)
  create mode 100644 src/win/src/os/windows/kernel32/Timing.cs
  rename src/win/src/os/windows/{areas => kernel32}/VirtualAlloc.cs (100%)
+[master 352525a78] .
+ 65 files changed, 639 insertions(+), 288 deletions(-)
+ rename src/{control/src/hosts/Control.cs => capture/src/CaptureControl.cs} (78%)
+ create mode 100644 src/capture/src/CaptureController.cs
+ create mode 100644 src/capture/src/context/ICaptureBroker.cs
+ rename src/capture/src/context/{ImmBroker.cs.cs => IImmBroker.cs.cs} (62%)
+ rename src/capture/src/{steps/WorkflowSteps.cs => context/IImmEmissionWorkflow.cs} (100%)
+ create mode 100644 src/capture/src/context/ImmBroker.cs
+ rename src/capture/src/context/{ContextFactory.cs => SelectedParts.cs} (52%)
+ create mode 100644 src/capture/src/context/WfBuilder.cs
+ create mode 100644 src/capture/src/context/ops/asm.cs
+ create mode 100644 src/capture/src/context/ops/capture.cs
+ create mode 100644 src/capture/src/context/ops/imm.cs
+ create mode 100644 src/capture/src/context/ops/state.cs
+ create mode 100644 src/capture/src/context/ops/wfc.cs
+ rename src/capture/src/events/{PurgedArchiveFolder.cs => ClearedDirectory.cs} (51%)
+ rename src/capture/src/events/{ParseReportEmitted.cs => EmittedParseReport.cs} (50%)
+ rename src/{identity => extract}/src/services/ApiMemberJit.cs (97%)
+ delete mode 100644 src/identity/src/services/ApiCollection.cs

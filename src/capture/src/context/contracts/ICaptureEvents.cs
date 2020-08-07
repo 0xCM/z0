@@ -11,15 +11,13 @@ namespace Z0.Asm
 
     public interface ICaptureEvents
     {
-        WfError Error => default;
-
         WfStatus Status => default;
+
+        IWfError Error => default(WfError<object>);
 
         CapturingHosts CapturingHosts => default;
         
         ExtractReportCreated ExtractReportCreated => default;
-
-        WfError WorkflowError => default;
 
         ExtractedMembers ExtractedMembers => default;
 
@@ -49,6 +47,6 @@ namespace Z0.Asm
         
         EmittedParseReport ParseReportCreated => default;
 
-        ClearedPartFiles ClearedPartFiles => default;                   
+        ClearedPartFiles ClearedPartFiles => default;                           
     }
 }

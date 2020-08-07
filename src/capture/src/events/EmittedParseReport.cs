@@ -31,9 +31,7 @@ namespace Z0.Asm
             Target = dst;        
         }
 
-        public object Description
-            => new {Report.RecordCount, Report.ApiHost, Report.ReportName, Target};
         public string Format()
-            => text.format(PSx3, Id, ActorName, Description);
+            => text.format(PSx4, Id, ActorName, Report.ApiHost, Report.RecordCount);
     }        
 }

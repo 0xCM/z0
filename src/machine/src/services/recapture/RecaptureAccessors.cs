@@ -39,7 +39,7 @@ namespace Z0
             => ResBytesDir + FolderName.Define("asm");
 
         [MethodImpl(Inline)]
-        public Recapture(IWfCapture context)
+        public Recapture(WfCapture context)
         {
             Context = context.AsmContext;            
             Context.AppPaths.AppDataRoot.Clear();

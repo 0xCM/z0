@@ -55,7 +55,7 @@ namespace Z0
             try
             {
                 var parts = PartIdParser.Service.ParseValid(args);  
-                var context = CreateArtistryContext(AsmContext.create(Context), parts);  
+                var context = CreateArtistryContext(WfBuilder.asm(Context), parts);  
                 new Runner(context).Run();
             }
             catch(Exception e)

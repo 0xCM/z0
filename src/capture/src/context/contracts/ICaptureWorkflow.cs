@@ -9,13 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public interface ICaptureWorkflow : IServiceAllocation
+    public interface ICaptureWorkflow : IDisposable
     {
         ICaptureBroker Broker {get;}
 
         ICaptureContext Context {get;}
-
-        MatchAddresses MatchAddresses 
-            => new MatchAddresses(this);
     }
 }

@@ -10,8 +10,8 @@ namespace Z0.Asm
 
     using static Konst;
     using static Flow;
-    
-    public readonly struct WfState
+        
+    public readonly struct WfState : IWfState
     {
         public WfContext Wf {get;}
 
@@ -20,6 +20,8 @@ namespace Z0.Asm
         public IAsmContext Asm {get;}
 
         public ICaptureWorkflow CWf {get;}
+        
+        public CaptureConfig Settings {get;}
 
         public WfConfig Config {get;}
         
@@ -33,7 +35,7 @@ namespace Z0.Asm
         
         readonly CorrelationToken Ct {get;}
 
-        public ICaptureBroker Broker {get;}
+        public ICaptureBroker CaptureBroker {get;}
 
         [MethodImpl(Inline)]
         public WfState(WfContext wf, IAsmContext asm, string[] args, CorrelationToken ct)        
@@ -47,13 +49,14 @@ namespace Z0.Asm
             var dstpath = wf.AppPaths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
             var dst = new ArchiveConfig(dstpath);
-            Config = new WfConfig(args, src, dst, parsed);                    
+            Config = new WfConfig(args, src, dst, parsed);   
+            Settings = CaptureConfig.From(wf.ContextRoot.Settings);                             
             Services = CaptureServices.create(Asm);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = Services.Formatter(FormatConfig);            
             FunctionDecoder = Services.FunctionDecoder(FormatConfig); 
             CWf = new CaptureWorkflow(Asm, Wf, FunctionDecoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.Target), Ct);    
-            Broker = WfBuilder.capture(FilePath.Empty, ct);
+            CaptureBroker = WfBuilder.capture(FilePath.Empty, ct);
         }
 
         public ICaptureContext CaptureContext 
@@ -89,5 +92,11 @@ namespace Z0.Asm
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent
                 => Wf.Raise(@event);
+
+        public void Dispose()
+        {
+
+            
+        }                
     }
 }

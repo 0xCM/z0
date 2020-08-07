@@ -17,63 +17,29 @@ namespace Z0
         {   
             Wf.Running(ActorName, Ct);         
             (this as ICaptureClient).Connect();             
-            var parts = Config.Parts.Length == 0 ? Wf.ContextRoot.PartIdentities : Config.Parts;                
+            var parts = Wf.Config.Parts.Length == 0 ? Wf.ContextRoot.PartIdentities : Wf.Config.Parts;                
             Wf.Raise(new CapturingParts(parts, Ct));
             Consolidate(parts);
             Wf.Ran(ActorName, Ct);
         }
 
-        readonly WfContext Wf;
-
-        readonly WfConfig Config;
-
-        readonly WfState State;
-
-        readonly IAsmContext Context;
+        readonly WfState Wf;
 
         readonly CorrelationToken Ct;
 
-        readonly ICaptureWorkflow CWf;
-
         public ICaptureBroker Broker {get;}
-
-        readonly CaptureConfig Settings;
         
         public IMultiSink Sink {get;}
         
-        readonly IAsmFormatter Formatter;
-
-        readonly IAsmFunctionDecoder FunctionDecoder;
-
         readonly IImmEmissionWorkflow ImmWorkflow;
-
-        readonly IEncodedHexReader UriBitsReader;
-
-        readonly AsmFormatSpec FormatConfig;
-
-        readonly TCaptureServices Services;
-
-        readonly uint EvalBufferSize;
         
-        public CaptureClient(WfState wf, ICaptureBroker broker, WfConfig config, CorrelationToken ct)
+        public CaptureClient(WfState wf, CorrelationToken ct)
         {                            
-            State = wf;
-            Wf = State.Wf;
+            Wf = wf;
             Ct = ct;
-            CWf = wf.CWf;
-            Sink = Wf.TermSink;
-            Broker = broker;
-            Context = wf.Asm;
-            EvalBufferSize = Pow2.T16;
-            Config = config;
-            FormatConfig = wf.FormatConfig;
-            Formatter = wf.Formatter;
-            Services = wf.Services;
-            FunctionDecoder = wf.FunctionDecoder;
-            Settings = CaptureConfig.From(wf.ContextRoot.Settings);            
-            UriBitsReader = Services.EncodedHexReader;
-            ImmWorkflow = Services.ImmEmissionWorkflow(Sink, Context.Api, Formatter, FunctionDecoder, config, Ct);     
-
+            Sink = Wf.Wf.TermSink;
+            Broker = wf.CaptureBroker;
+            ImmWorkflow = Wf.Services.ImmEmissionWorkflow(Sink, Wf.Asm.Api, Wf.Formatter, Wf.FunctionDecoder, Wf.Config, Ct);     
             Wf.Created(ActorName, Ct);       
         }
 
@@ -84,7 +50,7 @@ namespace Z0
         
         void Consolidate(params PartId[] parts)
         {
-            var wf = ManagePartCapture.create(State, Ct);
+            var wf = ManagePartCapture.create(Wf, Ct);
             wf.Consolidate();                
 
             EmitImm(parts);
@@ -100,13 +66,13 @@ namespace Z0
 
         void EmitPrimary(params PartId[] parts)
         {
-            var wf = ManagePartCapture.create(State, Ct);
+            var wf = ManagePartCapture.create(Wf, Ct);
             wf.Run();
         }
 
         void ExecuteCode(params PartId[] parts)
         {
-            var app = Context.ContextRoot;
+            var app = Wf.ContextRoot;
             var exchange = AppMsgExchange.Create(app.MessageQueue);
             var archiveRoot = app.AppPaths.AppCaptureRoot;            
             var evwf = Evaluate.workflow(app, app.Random, archiveRoot, Pow2.T14); 
@@ -117,7 +83,7 @@ namespace Z0
         {
             Sink.Deposit(e);
 
-            if(Settings.CollectAsmStats)
+            if(Wf.Settings.CollectAsmStats)
                 CollectAsmStats(e.Host, e.Functions);
         }
 
@@ -125,9 +91,9 @@ namespace Z0
         {
             Sink.Deposit(e);
 
-            if(Settings.MatchEmissions)
+            if(Wf.Settings.MatchEmissions)
             {
-                var step = new MatchEmissions(CWf, Ct);
+                var step = new MatchEmissions(Wf.CWf, Ct);
                 step.Run(e.Host, e.Code, e.Target);
             }
         }
@@ -136,7 +102,7 @@ namespace Z0
         {
             Sink.Deposit(e);
 
-            if(Settings.DuplicateCheck)
+            if(Wf.Settings.DuplicateCheck)
                 CheckDuplicates(e.Host, e.Members);
         }
        

@@ -90,7 +90,7 @@ namespace Z0
                 var cwf = capture(Asm, Wf, Context.AppPaths.AppCaptureRoot, Ct);
                 var broker = WfBuilder.capture(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
                 var config = configure(Wf, Args);
-                using var host = new CaptureClient(State, broker, config, Ct);
+                using var host = new CaptureClient(State, Ct);
                 host.Run();
             }
         }

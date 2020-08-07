@@ -10,8 +10,13 @@ namespace Z0
     using static Konst;
     using static Flow;
             
+    public interface IWfError : IWfEvent
+    {
+        object Description {get;}   
+    }
+    
     [Event]
-    public readonly struct WfError<T> : IWfEvent<WfError<T>, T>
+    public readonly struct WfError<T> : IWfError, IWfEvent<WfError<T>, T>
     {                
         public const string EventName = nameof(WfError<T>);
 
@@ -23,16 +28,21 @@ namespace Z0
 
         public AppMsgColor Flair {get;}
         
+        public AppMsgSource Source {get;}
+
         [MethodImpl(Inline)]
-        public WfError(string worker, T body, CorrelationToken ct)
+        public WfError(string actor, T body, CorrelationToken ct, AppMsgSource source)
         {
             Id = wfid(EventName, ct);
-            ActorName = worker;
+            ActorName = actor;
             Body = body;
             Flair =  AppMsgColor.Red;
+            Source = source;
         }
+
+        public object Description => new {Id, ActorName, Source, Body};
               
         public string Format()
-            => text.format(PSx3, Id, ActorName, Body);
+            => text.format(PSx4, Id, ActorName, Source, Body);
     }
 }

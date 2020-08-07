@@ -116,9 +116,10 @@ namespace Z0.Asm
             var decoded = step.Run(Source,Parsed);
             if(decoded.Length != 0)
             {
-                step.SaveDecoded(decoded, AsmPath);
+                step.SaveDecoded(decoded, AsmPath);                
                 
-                Wf.CWf.MatchAddresses.Run(Source, Extractions, decoded);
+                using var match = new MatchAddresses(Wf, Source, Extractions, decoded, Ct);
+                match.Run();                
             }
         }
     }
