@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
         
     using static Konst;
     using static Flow;
@@ -95,6 +96,9 @@ namespace Z0
             return @event.EventId;
         }
 
+       public void Error<T>(string actor, T body, CorrelationToken ct)
+            => Flow.error(this, actor, body, ct);
+
         public void Error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => Flow.error(this, e, ct, caller, file, line);
         
@@ -103,6 +107,80 @@ namespace Z0
 
         public void Warn<T>(string actor, T content, CorrelationToken ct)
             => Flow.warn(this, actor, content, ct);
+
+        public void Processing<T>(string actor, T kind, FilePath src, CorrelationToken ct)
+            => Flow.processing(this, actor, kind, src, ct);
+
+        public void Processing<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
+            => Flow.processing(this, Path.GetFileNameWithoutExtension(actor), kind, src, Ct);
+
+        public void Processed<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
+            => Flow.processed(this,ToActorName(actor), kind, src, size, Ct);
+        
+        public void Ran(string actor, CorrelationToken ct)
+            => Flow.ran(this, actor, "Finished", ct);
+
+        public void Ran<T>(string actor, T body, CorrelationToken ct)
+            => Flow.ran(this, actor, body, ct);
+        
+        public void Status<T>(string worker, T body, CorrelationToken ct)
+            => Flow.status(this, worker,body,ct);
+
+        public void RunningT<T>(string actor, T body, CorrelationToken ct)
+            => Flow.running(this, actor, body, ct);
+        
+        public void RanT<T>(string actor, T body, CorrelationToken ct)
+            => Flow.ran(this, actor, body, ct);
+
+        public void Created([File] string src = null)
+        {   
+            Raise(new WorkerCreated(ToActorName(src), Ct));            
+        }
+
+        public void Created(WfStepId step)
+        {   
+            Raise(new WfStepCreated(step, Ct));            
+        }
+
+        public void Initializing([Caller] string worker = null)
+        {
+            Raise(new WorkerInitializing(worker, Ct));
+        }
+
+        public void Initialized([Caller] string worker = null)
+        {
+            Raise(new WorkerInitialized(worker, Ct));
+        }
+
+        public void Running<T>(T message, [File] string file = null)
+        {
+            Raise(new WfStepRunning<T>(ToActorName(file), message, Ct));
+        }
+        
+        public void Running<T>([Caller] string worker = null)
+        {
+            Raise(new WfStepRunning(worker, Ct));
+        }
+
+        public void Finished([Caller] string file = null)
+        {   
+            Raise(new WorkerFinished(ToActorName(file), Ct));            
+        }
+
+        public void Finished(WfStepId step)
+        {   
+            Raise(new WorkerFinished(step.Format(), Ct));            
+        }
+
+        public void Emitting(string worker, string dsname, FilePath dst)
+        {
+            Raise(new EmittingDataset(worker, dsname, dst, Ct));
+        }
+
+        public void Emitted(string actor, string dsname, uint count, FilePath dst)
+        {
+            Raise(new EmittedDataset(actor, dsname, count,  dst, Ct));
+        }
 
         public void Emitting(string worker, string dsname, FilePath dst, CorrelationToken ct)
         {
@@ -157,24 +235,10 @@ namespace Z0
         public void Initialized(string worker, CorrelationToken ct)
         {
             Raise(new WorkerInitialized(worker, ct));
-        }
-        
-        public void Ran(string actor, CorrelationToken ct)
-            => Flow.ran(this, actor, "Finished", ct);
+        }        
 
-        public void Ran<T>(string actor, T body, CorrelationToken ct)
-            => Flow.ran(this, actor, body, ct);
-        
-        public void Status<T>(string worker, T body, CorrelationToken ct)
-            => Flow.status(this, worker,body,ct);
+        static string ToActorName(string src)
+            => Path.GetFileNameWithoutExtension(src);
 
-        public void RunningT<T>(string actor, T body, CorrelationToken ct)
-            => Flow.running(this, actor, body, ct);
-        
-        public void RanT<T>(string actor, T body, CorrelationToken ct)
-            => Flow.ran(this, actor, body, ct);
-
-        public void Error<T>(string actor, T body, CorrelationToken ct)
-            => Flow.error(this, actor, body, ct);
     }
 }

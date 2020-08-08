@@ -7,13 +7,9 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using Z0.Asm;
-
     using static Konst;
     using static Flow;
     using static z;
-
-    using P = Z0.Parts;
 
     class App : AppShell<App,IAppContext>
     {        
@@ -26,15 +22,6 @@ namespace Z0
         public CorrelationToken Ct {get;}         
 
         WfContext Wf;
-
-        static IAppContext CreateAppContext()
-        {
-            var resolved = ApiComposition.Assemble(array(P.GMath.Resolved));
-            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
-            var settings = AppSettings.Load(AppPaths.AppConfigPath);
-            var exchange = AppMsgExchange.Create();
-            return Apps.context(resolved, random, settings, exchange);
-        }
         
         public App()
             : base(Flow.app())
@@ -43,9 +30,24 @@ namespace Z0
             Raise(status(ActorName, "Application created", Ct));        
         }
 
-        IResolvedApi Api 
-            => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
-       
+        void RunDumpBin()
+        {
+            var tool = Tools.dumpbin(Wf);
+            var archive = tool.Target;
+            var files  = archive.Files(DumpBin.Flag.Disasm);
+            var listed = ListedFiles.from(files);
+            var formatted = ListedFiles.format(listed);
+            
+            // term.print(tool.Flags);
+            // term.print(formatted);
+
+            using var processor = tool.processor(default(AsmFileKind));
+            for(var i=0u; i <files.Count; i++)
+            {
+                processor.Process(files[i]);
+            }                           
+        }
+
         public override void RunShell(params string[] args)
         {                        
             Raise(status(ActorName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct));            
@@ -56,11 +58,13 @@ namespace Z0
             
             var settings = Flow.settings(Context, Ct);
             var config = Flow.configure(Context, parts, args);
-            var wfc = Flow.context(Context, parts, Ct, settings);
+            
+            Wf = Flow.context(Context, parts, Ct, settings);
 
             try
             {
-
+                RunDumpBin();
+                
             }
             catch(Exception e)
             {

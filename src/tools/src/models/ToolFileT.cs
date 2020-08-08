@@ -8,15 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    partial struct Flow    
-    {
-        [MethodImpl(Inline)]
-        public static WfWarn<T> warn<T>(string worker, T body, CorrelationToken ct)
-            => new WfWarn<T>(worker, body, ct);       
         
+    public struct ToolFile<T> : IToolFile<T>
+        where T : struct, ITool<T>
+    {
+        public FilePath Path {get;}
+                
         [MethodImpl(Inline)]
-        public static void warn<T>(IWfContext wf, string worker, T body, CorrelationToken ct)
-            => wf.Raise(warn(worker,body,ct));
-    }
+        public ToolFile(FilePath path)
+        {
+            Path = Files.normalize(path);
+        }
+    }   
 }

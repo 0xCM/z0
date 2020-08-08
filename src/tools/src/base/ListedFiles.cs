@@ -56,6 +56,18 @@ namespace Z0
         public static ListedFiles from(FilePath[] src)        
             => new ListedFiles(src.Map(Files.normalize).Mapi((i, x) => new ListedFile((uint)i,x.Name)));
 
+        public static ListedFiles from<T,F>(ToolFiles<T,F> src)   
+            where T : struct, ITool<T>
+            where F : unmanaged, Enum  
+        {   
+            var view = src.View;
+            var buffer = sys.alloc<ListedFile>(src.Count);
+            var dst = z.span(buffer);
+            for(var i=0u; i<src.Count; i++)
+                z.seek(dst,i) = new ListedFile(i, z.skip(view,i).Path.Name);
+            return buffer;
+        }
+
         public static ListedFiles from(Files src)        
             => new ListedFiles(src.Data.Mapi((i,x) => new ListedFile((uint)i,x.Name)));
 

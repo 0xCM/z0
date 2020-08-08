@@ -5880,3 +5880,25 @@
  create mode 100644 src/run/src/steps/ListFormatPatterns.cs
 [master de4f990fc] .
  5 files changed, 47 insertions(+), 21 deletions(-)
+[master 61dd1a995] .
+ 25 files changed, 199 insertions(+), 4 deletions(-)
+ create mode 100644 src/flow/src/services/ops/app.cs
+ create mode 100644 src/tools/App.cs
+ create mode 100644 src/tools/Part.cs
+ create mode 100644 src/tools/add.sh
+ create mode 100644 src/tools/build-log.sh
+ create mode 100644 src/tools/build.sh
+ create mode 100644 src/tools/clean.sh
+ create mode 100644 src/tools/config.json
+ create mode 100644 src/tools/directory.build.props
+ create mode 100644 src/tools/id.sh
+ create mode 100644 src/tools/remove.sh
+ create mode 100644 src/tools/run.sh
+ rename src/{run/src/models => tools/src}/DumpBin/Archive.cs (100%)
+ rename src/{run/src/models => tools/src}/DumpBin/DumpBin.cs (100%)
+ rename src/{run/src/models => tools/src}/DumpBin/FileKinds.cs (100%)
+ rename src/{run/src/models => tools/src/DumpBin}/Files.cs (100%)
+ rename src/{run/src/models => tools/src/DumpBin}/ListedFile.cs (100%)
+ rename src/{run/src/models => tools/src/DumpBin}/ListedFileField.cs (100%)
+ rename src/{run/src/models => tools/src/DumpBin}/ListedFiles.cs (100%)
+ create mode 100644 src/tools/z0.tools.csproj

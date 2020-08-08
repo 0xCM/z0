@@ -5,44 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
     using static Pow2x32;
 
-    public partial struct DumpBin
+    partial struct DumpBin
     {
-        public static DumpBin init(FolderPath src, FolderPath dst)
-            => new DumpBin(src,dst);
-        
-        public Flag Flags;
-
-        public readonly FolderPath SourceDir;
-        
-        public readonly FolderPath TargetDir;
-        
-        readonly Archive archive;
-
-        public DumpBin(FolderPath src, FolderPath dst)
-        {
-            SourceDir = src;
-            TargetDir = dst;
-            archive = new Archive(dst);
-            Flags = 0;
-        }
-
-        public Files Output(Flag f)
-            => Files.from(archive.Dir(f).Files(archive.Ext(f)));
-
-        static FilePath normalize(FilePath src)
-            => FilePath.Define(src.Name.Replace('\\', '/'));
-
         [Flags]
-        public enum Flag : uint
+        public enum Flag : ulong
         {
-            None = 0,
-
             ArchiveMembers = P2ᐞ00,
             
             ClrHeader = P2ᐞ01,

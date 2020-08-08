@@ -15,12 +15,7 @@ namespace Z0
 
     ref struct Runner 
     {
-        FolderPath BuildStage 
-            =>  AppPaths.Default.BuildStage;
-        
-        FolderPath ToolDir
-            => FolderPath.Define("J:/assets/tools");
-        
+
         readonly WfState Wf;   
 
         readonly Span<string> Buffer;     
@@ -45,19 +40,12 @@ namespace Z0
                 term.print(Buffer[i]);
         }
         
-        void ListDumpBin()
-        {
-            var tool = DumpBin.init(ToolDir, BuildStage + FolderName.Define(nameof(DumpBin)));
-            var disasm  = tool.Output(DumpBin.Flag.Disasm);
-            var files = ListedFiles.from(disasm);
-            var formatted = ListedFiles.format(files);
-            term.print(formatted);
-        }
 
         public void Dispose()
         {
 
         }
+
         public void Run()
         {
             using var step = new ListFormatPatterns(Wf, typeof(FormatAtoms));

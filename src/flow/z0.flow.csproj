@@ -11,6 +11,8 @@
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Domain)" />
+    <ProjectReference Include="$(Tables)" />
+    <ProjectReference Include="$(Data)" />
   </ItemGroup>
 
 </Project>

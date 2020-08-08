@@ -1,0 +1,28 @@
+ ; Flag            ; Options
+ ; /ALL            ; 
+ ; /ARCHIVEMEMBERS ;
+ ; /CLRHEADER      ;
+ ; /DEPENDENTS     ;
+ ; /DIRECTIVES     ;
+ ; /DISASM         ; [:{BYTES|NOBYTES}]
+ ; /ERRORREPORT    ; :{NONE|PROMPT|QUEUE|SEND}
+ ; /EXPORTS        ;
+ ; /FPO            ;
+ ; /HEADERS        ;
+ ; /IMPORTS1       ; [:filename]
+ ; /LINENUMBERS    ;
+ ; /LINKERMEMBER   ; [:{1|2}]
+ ; /LOADCONFIG     ;
+ ; /NOLOGO         ;
+ ; /NOPDB          ;
+ ; /OUT            ; :filename
+ ; /PDATA          ;
+ ; /PDBPATH        ; [:VERBOSE]
+ ; /RANGE          ; :vaMin[,vaMax]
+ ; /RAWDATA        ; [:{NONE|1|2|4|8}[,#]]
+ ; /RELOCATIONS    ;
+ ; /SECTION:name   ;
+ ; /SUMMARY        ;
+ ; /SYMBOLS        ;
+ ; /TLS            ;
+ ; /UNWINDINFO     ;

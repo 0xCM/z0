@@ -10,7 +10,7 @@ namespace Z0
 
         public const AppMsgColor CreatedFlair = Flairs.Created;
 
-        public const AppMsgColor RunningFlair = Flairs.Ran;
+        public const AppMsgColor RunningFlair = Flairs.Running;
 
         public const AppMsgColor RanFlair = Flairs.Ran;
 
