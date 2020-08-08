@@ -54,7 +54,7 @@ namespace Z0
 
         public void Dispose()
         {
-            term.print(new WfStepFinished<string>(nameof(WfTermEventSink), "Bye byte byte", Ct));
+            term.print(new WfStepRan<string>(nameof(WfTermEventSink), "Bye byte byte", Ct));
         }
     }
 }

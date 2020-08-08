@@ -12,29 +12,38 @@ namespace Z0
     using static Flow;
 
     [Event]
-    public readonly struct WfStepFinished<T> : IWfEvent<WfStepFinished<T>, T>
+    public readonly struct WfStepRan : IWfEvent<WfStepRan>
     {
-        public const string EventName = nameof(WfStepFinished<T>);
+        public const string EventName = nameof(WfStepRan);
 
         public WfEventId EventId {get;}
                         
-        public string ActorName {get;}
+        public WfStepId StepId {get;}
 
-        public T Body {get;}
+        public string ActorName {get;}        
 
         public AppMsgColor Flair {get;}
         
         [MethodImpl(Inline)]
-        public WfStepFinished(string worker, T body, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
+        public WfStepRan(string worker, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {
+            StepId = default;
             EventId = wfid(EventName, ct);
             ActorName = worker;
-            Body = body;
             Flair = flair;        
         }
 
         [MethodImpl(Inline)]
+        public WfStepRan(WfStepId step, CorrelationToken ct, AppMsgColor flair = RanFlair)
+        {
+            EventId = wfid(EventName, ct);
+            ActorName = step.Name;
+            Flair = flair;    
+            StepId = step;    
+        }
+
+        [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, ActorName, Body);          
+            => text.format(PSx3, EventId, ActorName);          
     }   
 }

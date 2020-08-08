@@ -12,7 +12,6 @@ namespace Z0
     using Z0.Data;
         
     using static Konst;
-    using static Flow;
     using static EmitBitMasksStep;    
     using static z;
     
@@ -21,14 +20,14 @@ namespace Z0
     [Step(WfStepKind.EmitBitMasks)]
     public ref struct EmitBitMasks 
     {
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;        
         
         readonly FilePath TargetPath;
         
         [MethodImpl(Inline)]
-        public EmitBitMasks(WfContext context, CorrelationToken ct)
+        public EmitBitMasks(IWfContext context, CorrelationToken ct)
         {
             Wf = context;
             Ct = ct;

@@ -5,17 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-
-    using static Konst;
-    using static Flow;
 
     using Z0.Asm;
 
     public interface IWfState : ICaptureWorkflow
     {
-        WfContext Wf {get;}
+        IWfContext Wf {get;}
 
         IAppContext ContextRoot {get;}        
 

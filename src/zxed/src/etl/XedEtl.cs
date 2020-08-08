@@ -27,7 +27,7 @@ namespace Z0
     {
         readonly XedEtlConfig Config;
 
-        readonly WfContext<XedEtlConfig> Context;
+        readonly IWfContext Context;
         
         readonly XedSourceArchive Src;
 
@@ -35,10 +35,10 @@ namespace Z0
 
         readonly TabularArchive Pub;
                 
-        public XedEtl(WfContext<XedEtlConfig> context)
+        public XedEtl(IWfContext context, XedEtlConfig config)
         {
             Context = context;
-            Config = context.State;
+            Config = config;
             Src = XedSourceArchive.Create(Config.SourceRoot);            
             Dst = XedStagingArchive.Create(Config.StageRoot);
             Pub = TabularArchive.Service(Config.PublicationRoot);            

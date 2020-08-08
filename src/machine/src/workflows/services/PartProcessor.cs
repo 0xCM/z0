@@ -27,7 +27,7 @@ namespace Z0
     
     public readonly struct PartProcessor : IPartProcessor
     {
-        public WfContext Wf {get;}
+        public IWfContext Wf {get;}
 
         readonly BitBroker<PartHandlerKind,PartInstructions> broker;
 
@@ -35,7 +35,7 @@ namespace Z0
             => broker;
 
         [MethodImpl(Inline)]
-        internal PartProcessor(WfContext wf)
+        internal PartProcessor(IWfContext wf)
         {
             Wf = wf;   
             broker = DataBrokers.broker64<PartHandlerKind,PartInstructions>();

@@ -18,7 +18,7 @@ namespace Z0
     [Step(Kind)]
     public ref struct EmitImageContent
     {    
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
@@ -31,7 +31,7 @@ namespace Z0
         public Span<LocatedPart> Index;
 
         [MethodImpl(Inline)]
-        public EmitImageContent(WfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitImageContent(IWfContext wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

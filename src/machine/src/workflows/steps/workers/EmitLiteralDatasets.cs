@@ -27,7 +27,7 @@ namespace Z0
     [Step(WfStepKind.EmitFieldLiterals)]
     public readonly ref struct EmitFieldLiterals
     {        
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
@@ -37,7 +37,7 @@ namespace Z0
         KnownParts Parts
             => KnownParts.Service;
 
-        public EmitFieldLiterals(WfContext context, CorrelationToken? ct = null)
+        public EmitFieldLiterals(IWfContext context, CorrelationToken? ct = null)
         {
             Ct = correlate(ct);
             Wf = context;

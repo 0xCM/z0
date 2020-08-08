@@ -11,14 +11,14 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct HostProcessor : IHostProcessor
+    public readonly struct ProcessHostAsm : IHostProcessor
     {
-        public WfContext Wf {get;}
+        public IWfContext Wf {get;}
 
         public IDataBroker<HostHandlerKind,HostInstructions> Broker {get;}
 
         [MethodImpl(Inline)]
-        internal HostProcessor(WfContext context)
+        internal ProcessHostAsm(IWfContext context)
         {
             Wf = context;   
             Broker = DataBrokers.broker64<HostHandlerKind,HostInstructions>();

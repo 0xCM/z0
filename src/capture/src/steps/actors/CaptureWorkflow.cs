@@ -17,10 +17,10 @@ namespace Z0.Asm
         
         public CorrelationToken Ct {get;}
         
-        public WfContext Wf {get;}
+        public IWfContext Wf {get;}
         
         [MethodImpl(Inline)]
-        public CaptureWorkflow(IAsmContext asm, WfContext wf, 
+        public CaptureWorkflow(IAsmContext asm, IWfContext wf, 
             IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, IPartCaptureArchive archive, CorrelationToken ct)
         {
             Ct = ct;

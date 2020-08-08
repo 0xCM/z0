@@ -12,12 +12,15 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Tools
     {
+        [MethodImpl(Inline)]
+        public static ToolConfig config(ToolId tool,FilePath src)
+            => new ToolConfig(tool,src);
 
         [MethodImpl(Inline)]
-        public static ToolProcessor<T,F> processor<T,F>(Action<IToolFile<T,F>> handler)
+        public static ToolProcessor<T,F> processor<T,F>(IWfContext wf, Action<IToolFile<T,F>> handler)
             where T : struct, ITool<T,F>            
             where F : unmanaged, Enum   
-                => new ToolProcessor<T,F>(handler);
+                => new ToolProcessor<T,F>(wf, handler);
 
         [MethodImpl(Inline)]
         public static ExtensionMap<F> ext<F>(F f = default)
@@ -25,7 +28,7 @@ namespace Z0
                 => new ExtensionMap<F>(0);
 
         [MethodImpl(Inline), Op]
-        public static DumpBin dumpbin(WfContext wf)
+        public static DumpBin dumpbin(IWfContext wf)
             => new DumpBin(wf, ToolSourceDir, ToolTargetRoot + FolderName.Define(DumpBin.ToolName));
 
         [MethodImpl(Inline)]

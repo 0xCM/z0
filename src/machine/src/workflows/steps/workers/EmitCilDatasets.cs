@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
     using static EmitCilDatasetsStep;
 
     using static z;
@@ -24,12 +23,12 @@ namespace Z0
 
         readonly IPart[] Parts;
 
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
      
         [MethodImpl(Inline)]
-        public EmitCilDatasets(WfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitCilDatasets(IWfContext wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

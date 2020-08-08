@@ -16,14 +16,14 @@ namespace Z0
     [Step(WfStepKind.EmitEnumCatalog)]
     public readonly ref struct EmitEnumCatalog
     {
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
         
         readonly CorrelationToken Ct;
 
         readonly FilePath TargetPath;
         
         [MethodImpl(Inline)]
-        public EmitEnumCatalog(WfContext context, CorrelationToken? ct = null)
+        public EmitEnumCatalog(IWfContext context, CorrelationToken? ct = null)
         {
             Wf = context;
             Ct = correlate(ct);

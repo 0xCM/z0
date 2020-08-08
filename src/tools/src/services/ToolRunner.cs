@@ -9,30 +9,27 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ToolProcessor<T,F> : IToolProcessor<T,F>
-        where T : struct, ITool<T,F>
-        where F : unmanaged, Enum
+    public readonly struct ToolRunner : IToolRunner
     {
         public IWfContext Wf {get;}
-        
-        readonly Action<IToolFile<T,F>> Handler;
-        
-        [MethodImpl(Inline)]
-        public ToolProcessor(IWfContext wf, Action<IToolFile<T,F>> handler)
+
+        public ToolRunner(IWfContext wf)
         {
             Wf = wf;
-            Handler = handler;
+            Wf.Created();
         }
 
-        [MethodImpl(Inline)]
-        public void Process(IToolFile<T,F> src)
+        public void Run(ToolConfig config)
         {
-            Handler(src);
+            Wf.Running();
+
+
+            Wf.Ran();            
         }
 
         public void Dispose()
         {
-            
+            Wf.Finished();
         }
     }
 }

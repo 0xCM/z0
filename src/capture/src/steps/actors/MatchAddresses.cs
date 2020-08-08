@@ -8,11 +8,6 @@ namespace Z0.Asm
     using System.Linq;
 
     using static MatchAddressesStep;
-
-    public readonly struct MatchAddressesStep
-    {
-        public const string WorkerName = nameof(MatchAddresses);
-    }
     
     public ref struct MatchAddresses
     {        

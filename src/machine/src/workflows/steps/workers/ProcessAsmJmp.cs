@@ -12,11 +12,11 @@ namespace Z0
     using static Konst;
 
 
-    public struct JmpProcessor : IJmpProcessor
+    public struct ProcessAsmJmp : IJmpProcessor
     {
         readonly BitBroker<JmpKind,LocatedInstruction> broker;
         
-        public WfContext Context {get;}
+        public IWfContext Context {get;}
         
         [MethodImpl(Inline)]
         public void Connect()
@@ -28,7 +28,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal JmpProcessor(WfContext wf, bool connect = true) 
+        internal ProcessAsmJmp(IWfContext wf, bool connect = true) 
         {
             Context = wf;
             broker = ProcessBrokers.jmp();

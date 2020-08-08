@@ -13,10 +13,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static void ran<T>(IWfContext wf, string worker, T body, CorrelationToken ct)
-            => wf.Raise(new WfStepFinished<T>(worker, body, ct));
+            => wf.Raise(new WfStepRan<T>(worker, body, ct));
 
         [MethodImpl(Inline), Op]
-        public static WfStepFinished<T> ran<T>(string worker, T body, CorrelationToken ct)
-            => new WfStepFinished<T>(worker, body, ct);            
+        public static WfStepRan<T> ran<T>(string worker, T body, CorrelationToken ct)
+            => new WfStepRan<T>(worker, body, ct);            
     }
 }

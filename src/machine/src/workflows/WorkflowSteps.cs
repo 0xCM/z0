@@ -17,7 +17,7 @@ namespace Z0
 
     public struct WorkflowStepConfig
     {
-        public static WorkflowStepConfig Load(WfContext context)
+        public static WorkflowStepConfig Load(IWfContext context)
             => AppSettings.load<WorkflowStepConfig>(context.AppPaths.ConfigRoot + FileName.Define("WorkflowSteps","json"));
 
         public bool EmitPeHeaders;

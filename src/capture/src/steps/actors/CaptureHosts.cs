@@ -9,13 +9,7 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Konst;
-    using static Flow;
     using static CaptureHostsStep;
-
-    public readonly struct CaptureHostsStep
-    {
-        public const string WorkerName = nameof(CaptureHosts);
-    }
 
     [Step(WfStepKind.CaptureHosts)]
     public readonly ref struct CaptureHosts

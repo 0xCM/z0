@@ -8,23 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
     using static EmitFieldMetadataStep;
-
-    [Step(WfStepKind.EmitFieldMetadata, true)]
-    public readonly struct EmitFieldMetadataStep
-    {
-        public const string WorkerName = nameof(EmitFieldMetadata);
-
-        public const string DataType = "FieldMetadata";
-
-        public const string DatasetName = "FieldMetadata";
-    }
 
     [Step(WfStepKind.EmitFieldMetadata)]
     public readonly ref struct EmitFieldMetadata
     {    
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
@@ -35,7 +24,7 @@ namespace Z0
         readonly FolderPath TargetDir;
 
         [MethodImpl(Inline)]
-        public EmitFieldMetadata(WfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitFieldMetadata(IWfContext wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

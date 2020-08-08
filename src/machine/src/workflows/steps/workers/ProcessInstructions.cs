@@ -13,14 +13,14 @@ namespace Z0
             
     public class ProcessInstructions 
     {
-        public static ProcessInstructions create(WfContext wf, FolderPath dst)
+        public static ProcessInstructions create(IWfContext wf, FolderPath dst)
             => new ProcessInstructions(wf, dst);
 
-        readonly WfContext Context;
+        readonly IWfContext Context;
         
         readonly IDataProcessor<LocatedInstruction> Processor;
 
-        public ProcessInstructions(WfContext wf, FolderPath root)
+        public ProcessInstructions(IWfContext wf, FolderPath root)
         {
             Context = wf;
             Processor = API.jmp(wf);            

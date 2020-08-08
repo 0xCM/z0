@@ -15,7 +15,7 @@ namespace Z0
     [Step(Kind)]
     public readonly ref struct EmitConstantDatasets
     {        
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
@@ -24,7 +24,7 @@ namespace Z0
         readonly IPart[] Parts;
         
         [MethodImpl(Inline)]
-        public EmitConstantDatasets(WfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitConstantDatasets(IWfContext wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

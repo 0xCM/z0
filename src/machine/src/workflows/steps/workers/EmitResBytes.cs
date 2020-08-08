@@ -14,11 +14,6 @@ namespace Z0
     using static EmitResBytesStep;
     using static z;
 
-    public readonly struct EmitResBytesStep
-    {
-        public const string WorkerName = nameof(EmitResBytes);
-    }
-
     [Step(WfStepKind.EmitResBytes)]
     public readonly ref struct EmitResBytes
     {            
@@ -30,7 +25,7 @@ namespace Z0
 
         public readonly FolderPath TargetDir;
                 
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
@@ -38,10 +33,10 @@ namespace Z0
             => Wf.Broker.Sink;        
         
         [MethodImpl(Inline)]
-        public static EmitResBytes create(WfContext context, CorrelationToken ct)
+        public static EmitResBytes create(IWfContext context, CorrelationToken ct)
             => new EmitResBytes(context, ct);
 
-        internal EmitResBytes(WfContext context, CorrelationToken ct)
+        internal EmitResBytes(IWfContext context, CorrelationToken ct)
         {
             Wf = context;
             Ct = ct;

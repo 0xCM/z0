@@ -11,19 +11,15 @@ namespace Z0
     using static z;
     using static ParseAsmFilesStep;
     
-    public readonly struct ParseAsmFilesStep
-    {
-        public const string WorkerName = nameof(ParseAsmFiles);
-    }
-
     public readonly ref struct ParseAsmFiles
     {
         readonly CorrelationToken Ct;
 
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly PartFiles Files;
-        public ParseAsmFiles(WfContext wf, PartFiles files, CorrelationToken ct)
+        
+        public ParseAsmFiles(IWfContext wf, PartFiles files, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;

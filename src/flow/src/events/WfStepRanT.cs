@@ -11,25 +11,26 @@ namespace Z0
     using static Konst;
     using static Flow;
 
-    public readonly struct WfStepRunning<T> : IWfEvent<WfStepRunning<T>>
+    [Event]
+    public readonly struct WfStepRan<T> : IWfEvent<WfStepRan<T>, T>
     {
-        public const string EventName = nameof(WfStepRunning<T>);
-        
+        public const string EventName = nameof(WfStepRan<T>);
+
         public WfEventId EventId {get;}
-        
+                        
         public string ActorName {get;}
-        
+
         public T Body {get;}
 
         public AppMsgColor Flair {get;}
-
+        
         [MethodImpl(Inline)]
-        public WfStepRunning(string actor, T body, CorrelationToken ct, AppMsgColor flair = RunningFlair)
-        {
+        public WfStepRan(string actor,  T body, CorrelationToken ct, AppMsgColor flair = RanFlair)
+        {            
             EventId = wfid(EventName, ct);
             ActorName = actor;
             Body = body;
-            Flair = flair;         
+            Flair = flair;        
         }
 
         [MethodImpl(Inline)]

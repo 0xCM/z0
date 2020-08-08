@@ -6,13 +6,10 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
 
     using static Konst;
     using static z;
-
-    using static Flow;
 
     [Step(WfStepKind.MatchEmissions)]
     public readonly struct MatchEmissions 

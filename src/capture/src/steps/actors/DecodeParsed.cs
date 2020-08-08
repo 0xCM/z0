@@ -8,16 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
 
     using static DecodeParsedStep;
-
-    public readonly struct DecodeParsedStep
-    {   
-        public const WfStepKind Kind = WfStepKind.DecodeParsed;
-        
-        public const string Name = nameof(DecodeParsed);
-    }
     
     [Step(Kind)]
     public readonly ref struct DecodeParsed

@@ -12,12 +12,10 @@ namespace Z0.Asm
     using static ManagePartCaptureStep;
     using static z;
 
-    public class ManagePartCapture : IDisposable
+    public struct ManagePartCapture : IDisposable
     {
         public static ManagePartCapture create(WfState state,  CorrelationToken ct)
             => new ManagePartCapture(state, ct);
-
-        readonly WfContext Wf;
 
         readonly WfState State;
 
@@ -38,7 +36,8 @@ namespace Z0.Asm
         readonly IApiHost[] Hosts;
 
         readonly uint HostCount;
-        
+
+
         [MethodImpl(Inline)]
         internal ManagePartCapture(WfState state, CorrelationToken ct)
         {
@@ -55,13 +54,21 @@ namespace Z0.Asm
             Hosts = a.Concat(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
             HostCount = (uint)Hosts.Length;
         }
-        
+
+        readonly IWfContext Wf 
+            => State.Wf;
+
         public void Run()
         {
             Clear(Config);  
             CaptureParts(Archives.Services.CaptureArchive(Config.Target.ArchiveRoot));
         }
 
+        public void Dispose()
+        {
+            Wf.Finished();
+        }
+ 
         void CaptureParts(IPartCaptureArchive dst)
         {
             var count = Catalogs.Length;
@@ -130,11 +137,6 @@ namespace Z0.Asm
             {
                 Wf.Error(WorkerName, e, Ct);
             }
-        }
-
-        public void Dispose()
-        {
-
         }
     }
 }

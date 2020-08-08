@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static EmitBlobsStep;
-    using static Flow;
     using static z;
 
     [Step(WfStepKind.EmitBlobs)]
@@ -19,14 +18,14 @@ namespace Z0
 
         public readonly FolderPath TargetDir;
 
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
         readonly IPart[] Parts;
         
         [MethodImpl(Inline)]
-        public EmitBlobs(WfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitBlobs(IWfContext wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

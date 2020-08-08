@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         public uint EmissionCount;
 
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
         
         readonly CorrelationToken Ct;
 
@@ -29,7 +29,7 @@ namespace Z0
         readonly FilePath TargetPath;
                 
         [MethodImpl(Inline)]
-        public EmitPartStrings(WfContext wf, IPart part, bool user, FilePath dst, CorrelationToken ct)
+        public EmitPartStrings(IWfContext wf, IPart part, bool user, FilePath dst, CorrelationToken ct)
         {
             Wf = wf;
             Part = part;

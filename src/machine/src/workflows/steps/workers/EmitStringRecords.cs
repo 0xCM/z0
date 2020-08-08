@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static EmitStringRecordsStep;
-    using static Flow;
     
     [Step(WfStepKind.EmitPartStrings)]
     public ref struct EmitStringRecords
@@ -29,14 +28,14 @@ namespace Z0
         /// </summary>
         public readonly FolderPath TargetDir;        
 
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
         
         readonly IPart[] Parts;
         
         [MethodImpl(Inline)]
-        public EmitStringRecords(WfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitStringRecords(IWfContext wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

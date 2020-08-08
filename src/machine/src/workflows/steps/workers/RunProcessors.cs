@@ -42,7 +42,6 @@ namespace Z0
 
         PartFiles Files {get;}
 
-
         readonly FolderPath TargetDir;
         
         RunProcessors(WfState wf, CorrelationToken ct)
@@ -53,7 +52,7 @@ namespace Z0
             Files = PartFiles.create(Asm);            
         }
 
-        WfContext Wf
+        IWfContext Wf
             => State.Wf;
         
         IAsmContext Asm

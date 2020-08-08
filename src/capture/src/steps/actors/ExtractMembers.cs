@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
     using static ExtractMembersStep;
 
     public readonly ref struct ExtractMembers

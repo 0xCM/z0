@@ -17,7 +17,7 @@ namespace Z0
     [Step(WfStepKind.EmitPeHeaders)]
     public readonly ref struct EmitPeHeaders
     {
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
         
         readonly IPart[] Parts;
         
@@ -26,7 +26,7 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         [MethodImpl(Inline)]        
-        public EmitPeHeaders(WfContext wf, IPart[] src, CorrelationToken ct)
+        public EmitPeHeaders(IWfContext wf, IPart[] src, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

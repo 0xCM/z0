@@ -26,19 +26,19 @@ namespace Z0
         /// </summary>
         /// <param name="context">The process context</param>
         [MethodImpl(Inline), Op]
-        public static IAsmProcessor Asm(WfContext wf)
+        public static IAsmProcessor Asm(IWfContext wf)
         {
-            var processor = new AsmProcessor(wf) as IAsmProcessor;
+            var processor = new ProcessLocatedAsm(wf) as IAsmProcessor;
             processor.Connect();
             return processor;
         }
 
         [MethodImpl(Inline), Op]
-        public static IHostProcessor Host(WfContext wf)
-            => new HostProcessor(wf);
+        public static IHostProcessor Host(IWfContext wf)
+            => new ProcessHostAsm(wf);
 
         [MethodImpl(Inline), Op]
-        public static IPartProcessor part(WfContext wf)
+        public static IPartProcessor part(IWfContext wf)
             => new PartProcessor(wf);
 
         
@@ -47,8 +47,8 @@ namespace Z0
         /// </summary>
         /// <param name="context">The process context</param>
         [MethodImpl(Inline), Op]
-        public static IDataProcessor<LocatedInstruction> jmp(WfContext context)
-            => new JmpProcessor(context);
+        public static IDataProcessor<LocatedInstruction> jmp(IWfContext context)
+            => new ProcessAsmJmp(context);
 
         /// <summary>
         /// Creates a command-parametric generic process stated

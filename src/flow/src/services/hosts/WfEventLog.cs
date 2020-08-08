@@ -85,7 +85,7 @@ namespace Z0
             ErrTarget.Flush();
             ErrTarget.Dispose();
 
-            RelayTarget.Deposit(new WfStepFinished<string>(nameof(WfEventLog), "Bye", Ct));
+            RelayTarget.Deposit(new WfStepRan<string>(nameof(WfEventLog), "Bye", Ct));
             RelayTarget.Dispose();
         }
    }

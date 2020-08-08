@@ -9,12 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct CaptureController
+    public interface IToolRunner : IWfActor
     {
-        public const string ActorName = nameof(CaptureControl);        
-
-        [MethodImpl(Inline)]
-        public static CaptureControl create(IAppContext root, CorrelationToken ct, params string[] args)
-            => new CaptureControl(root, ct, args);
+        void Run(ToolConfig config);
     }
 }

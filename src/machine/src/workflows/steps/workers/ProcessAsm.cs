@@ -13,11 +13,6 @@ namespace Z0.Asm
     using static Konst;
     using static z;
     using static ProcessAsmStep;
-
-    public readonly struct ProcessAsmStep
-    {
-        public const string ActorName = nameof(ProcessAsm);
-    }
     
     public readonly struct ProcessAsm
     {                

@@ -21,7 +21,7 @@ namespace Z0
 
         public CorrelationToken Ct {get;}         
 
-        WfContext Wf;
+        IWfContext Wf;
         
         public App()
             : base(Flow.app())

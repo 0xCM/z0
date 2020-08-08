@@ -13,7 +13,7 @@ namespace Z0.Asm
         
     public readonly struct WfState : IWfState
     {
-        public WfContext Wf {get;}
+        public IWfContext Wf {get;}
 
         public IAppContext ContextRoot {get;}
         
@@ -38,7 +38,7 @@ namespace Z0.Asm
         public ICaptureBroker CaptureBroker {get;}
 
         [MethodImpl(Inline)]
-        public WfState(WfContext wf, IAsmContext asm, string[] args, CorrelationToken ct)        
+        public WfState(IWfContext wf, IAsmContext asm, string[] args, CorrelationToken ct)        
         {
             Wf = wf;
             ContextRoot = wf.ContextRoot;

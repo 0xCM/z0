@@ -11,7 +11,7 @@ namespace Z0
     using static Flow;
 
     [Event]
-    public readonly struct WfStepRunning : IWfEvent<WfStepRunning, string>
+    public readonly struct WfStepRunning : IWfEvent<WfStepRunning>
     {        
         public const string EventName = nameof(WfStepRunning);
 
@@ -19,34 +19,18 @@ namespace Z0
     
         public string ActorName {get;}
 
-        public string Body {get;}
-
         public AppMsgColor Flair {get;}
 
-        public AppMsg Description {get;}
-
         [MethodImpl(Inline)]
-        public WfStepRunning(string worker, CorrelationToken ct, AppMsgColor flair = RunningFlair)
+        public WfStepRunning(string actor, CorrelationToken ct, AppMsgColor flair = RunningFlair)
         {
             EventId = wfid(EventName, ct);
-            ActorName = worker;
-            Body = "Running";
+            ActorName = actor;
             Flair = flair;
-            Description = AppMsg.Colorize(Body, Flair);
-        }
-
-        [MethodImpl(Inline)]
-        public WfStepRunning(string worker, string body, CorrelationToken ct, AppMsgColor flair = RunningFlair)
-        {
-            EventId = wfid(EventName, ct);
-            ActorName = worker;
-            Body = body;
-            Flair = flair;
-            Description = AppMsg.Colorize(body, Flair);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, ActorName, Description);
+            => text.format(PSx2, EventId, ActorName);
     }
 }

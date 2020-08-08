@@ -18,7 +18,7 @@ namespace Z0
     {
         readonly WfStepKind Id;
         
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
@@ -26,7 +26,7 @@ namespace Z0
 
         readonly FolderPath TargetDir;
         
-        public AnalyzeCalls(WfContext wf, LocatedInstructions src, FolderPath dst, CorrelationToken ct)
+        public AnalyzeCalls(IWfContext wf, LocatedInstructions src, FolderPath dst, CorrelationToken ct)
         {
             Id = WfStepKind.AnalyzeCalls;
             Wf = wf;

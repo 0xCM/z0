@@ -11,7 +11,6 @@ namespace Z0
 
     using Z0.Asm;
 
-
     using static Konst;
 
     public readonly struct RenderSemantic

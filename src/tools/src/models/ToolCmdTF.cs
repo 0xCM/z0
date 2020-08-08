@@ -9,19 +9,19 @@ namespace Z0
 
     using static Konst;
         
-    public readonly struct ToolCmd : IToolCmd
+    public readonly struct ToolCmd<T,F> : IToolCmd<T,F>
+        where T : struct, ITool<T,F>
+        where F : unmanaged, Enum
     {
-        public ToolId ToolId {get;}
-
         public string[] Args {get;}
 
-        public KeyedValues<string,string> Options {get;}
-
-        public ToolCmd(ToolId id, string[] args, params KeyedValue<string,string>[] options)
+        public KeyedValues<F,string> Options {get;}
+        
+        [MethodImpl(Inline)]
+        public ToolCmd(string[] args, params KeyedValue<F,string>[] options)
         {
-            ToolId = id;
             Args = args;
-            Options = new KeyedValues<string,string>(options);
+            Options = new KeyedValues<F, string>(options);
         }
     }   
 }

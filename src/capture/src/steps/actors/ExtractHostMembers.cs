@@ -20,7 +20,6 @@ namespace Z0.Asm
         readonly ApiHostUri Host;
 
         readonly IApiHost Source;
-
         
         public ExtractedCode[] Extractions;
                     

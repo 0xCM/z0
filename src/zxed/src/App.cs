@@ -45,9 +45,10 @@ namespace Z0
         public override void RunShell(params string[] args)
         {            
             var sink = termsink(Ct);
-            var config = new XedEtlConfig(Context, settings(Context, Ct));
-            using var context = new WfContext<XedEtlConfig>(Context, config, sink);
-            using var wf = new XedEtl(context);
+            var s = settings(Context, Ct);
+            var config = new XedEtlConfig(Context, s);
+            using var context = Flow.context(Context, Ct, s);
+            using var wf = new XedEtl(context, config);
             wf.Run();                                        
         }
 

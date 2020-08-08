@@ -22,7 +22,7 @@ namespace Z0
 
         readonly IAppPaths Paths;
 
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly WfState State;
         
@@ -38,7 +38,7 @@ namespace Z0
 
         WorkflowStepConfig StepConfig;
 
-        static ICaptureWorkflow capture(IAsmContext asm, WfContext wf, FolderPath target, CorrelationToken ct)
+        static ICaptureWorkflow capture(IAsmContext asm, IWfContext wf, FolderPath target, CorrelationToken ct)
         {
             var services = CaptureServices.create(asm);
             var spec = AsmFormatSpec.DefaultStreamFormat;

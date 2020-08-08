@@ -14,13 +14,13 @@ namespace Z0.Asm
     [Step(WfStepKind.ClearCaptureArchives)]
     public readonly ref struct ClearCaptureArchives 
     {        
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
         
         readonly WfConfig Config;
         
         readonly CorrelationToken Ct;
 
-        public ClearCaptureArchives(WfContext wf, WfConfig config, CorrelationToken ct)
+        public ClearCaptureArchives(IWfContext wf, WfConfig config, CorrelationToken ct)
         {
             Wf = wf;
             Config = config;

@@ -19,12 +19,12 @@ namespace Z0
         {
             public const string ActorName = nameof(AsmProcessor);
             
-            readonly WfContext Wf;
+            public IWfContext Wf {get;}
 
             public uint LineCount;
             
             [MethodImpl(Inline)]    
-            public AsmProcessor(WfContext wf)
+            public AsmProcessor(IWfContext wf)
             {
                 Wf = wf;
                 LineCount = 0;

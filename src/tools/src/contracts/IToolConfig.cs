@@ -9,12 +9,21 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct CaptureController
+    public interface IToolConfig : ITooling
     {
-        public const string ActorName = nameof(CaptureControl);        
+        FilePath Source {get;}
+    }
 
-        [MethodImpl(Inline)]
-        public static CaptureControl create(IAppContext root, CorrelationToken ct, params string[] args)
-            => new CaptureControl(root, ct, args);
+    public interface IToolConfig<T> : IToolConfig, ITooling<T>
+        where T : struct, ITool<T>
+    {
+
+    }
+
+    public interface IToolConfig<T,F> : IToolConfig<T>
+        where T : struct, ITool<T,F>
+        where F : unmanaged, Enum
+    {
+
     }
 }

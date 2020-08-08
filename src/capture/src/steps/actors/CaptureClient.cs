@@ -13,7 +13,6 @@ namespace Z0
 
     public struct CaptureClient : ICaptureClient
     {                    
-
         readonly WfState Wf;
 
         readonly CorrelationToken Ct;
@@ -28,7 +27,7 @@ namespace Z0
         {                            
             Wf = wf;
             Ct = ct;
-            Sink = Wf.Wf.TermSink;
+            Sink = Wf.Wf.WfSink;
             Broker = wf.CaptureBroker;
             ImmWorkflow = Wf.Services.ImmEmissionWorkflow(Sink, Wf.Asm.Api, Wf.Formatter, Wf.FunctionDecoder, Wf.Config, Ct);     
             Wf.Created(ActorName, Ct);       

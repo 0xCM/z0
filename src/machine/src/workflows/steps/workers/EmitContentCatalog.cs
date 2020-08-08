@@ -20,12 +20,12 @@ namespace Z0
         
         public uint EmissionCount;
 
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
         
         [MethodImpl(Inline)]
-        public EmitContentCatalog(WfContext wf, CorrelationToken ct)
+        public EmitContentCatalog(IWfContext wf, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

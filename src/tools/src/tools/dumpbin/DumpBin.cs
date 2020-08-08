@@ -16,7 +16,7 @@ namespace Z0
         
         public const ToolId Identity = ToolId.Dumpbin;
         
-        public WfContext Wf;
+        public IWfContext Wf;
 
         public ToolId ToolId {get;}
 
@@ -33,7 +33,7 @@ namespace Z0
         public ToolFlags<Flag> Flags {get;}
         
         [MethodImpl(Inline)]
-        public DumpBin(WfContext wf, FolderPath src, FolderPath dst)
+        public DumpBin(IWfContext wf, FolderPath src, FolderPath dst)
         {
             Wf = wf;
             ToolId = Identity;

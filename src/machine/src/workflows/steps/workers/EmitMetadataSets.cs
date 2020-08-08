@@ -9,13 +9,12 @@ namespace Z0
     using System.Linq;
 
     using static Konst;     
-    using static Flow;
     using static EmitMetadataSetsStep;
     
     [Step(WfStepKind.EmitMetadataSets)]
     public readonly ref struct EmitMetadataSets
     {
-        public readonly WfContext Wf;
+        public readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
         
@@ -25,7 +24,7 @@ namespace Z0
 
         readonly PartSink Sink;
         
-        public EmitMetadataSets(WfContext context, CorrelationToken ct)
+        public EmitMetadataSets(IWfContext context, CorrelationToken ct)
         {            
             Wf = context;
             Ct = ct;

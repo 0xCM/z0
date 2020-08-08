@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct Flow    
     {
-        public static WfConfig configure(WfContext context, params string[] args)
+        public static WfConfig configure(IWfContext context, params string[] args)
         {
             var parsed = AppArgs.parse(args).Data.Select(arg => PartIdParser.single(arg.Value));
             var srcpath = FilePath.Define(context.GetType().Assembly.Location).FolderPath;

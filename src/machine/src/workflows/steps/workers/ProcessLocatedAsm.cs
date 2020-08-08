@@ -11,14 +11,14 @@ namespace Z0
 
     using static Konst;
 
-    public struct AsmProcessor : IAsmProcessor
+    public struct ProcessLocatedAsm : IAsmProcessor
     {
-        public WfContext Wf {get;}
+        public IWfContext Wf {get;}
 
         public IDataBroker<Mnemonic,LocatedInstruction> Broker {get;}
         
         [MethodImpl(Inline)]
-        internal AsmProcessor(WfContext context)
+        internal ProcessLocatedAsm(IWfContext context)
         {
             Wf = context;
             Broker = DataBrokers.broker<Mnemonic,LocatedInstruction>((int)Mnemonic.LAST);

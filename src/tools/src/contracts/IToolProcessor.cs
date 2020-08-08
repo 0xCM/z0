@@ -9,7 +9,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface IToolProcessor  : IDisposable     
+    public interface IToolProcessor  : IWfActor
     {
         void Process(IToolFile src);
     }

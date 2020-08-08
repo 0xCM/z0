@@ -12,23 +12,16 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static Flow;
     using static EmitProjectDocsStep;
 
-    [Step(WfStepKind.EmitProjectDocs, true)]
-    public readonly struct EmitProjectDocsStep
-    {
-        public const string WorkerName = nameof(EmitProjectDocs);
-    }
-    
     [Step(WfStepKind.EmitProjectDocs)]
     public readonly ref struct EmitProjectDocs
     {
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
-        public EmitProjectDocs(WfContext wf, CorrelationToken ct)
+        public EmitProjectDocs(IWfContext wf, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

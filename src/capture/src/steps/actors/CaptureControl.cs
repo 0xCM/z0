@@ -27,7 +27,7 @@ namespace Z0
         
         readonly WfSettings Config;
         
-        readonly WfContext WfContext;        
+        readonly IWfContext WfContext;        
 
         readonly IAppPaths Paths;
 

@@ -15,7 +15,7 @@ namespace Z0
     [Step(WfStepKind.EmitDatasets)]
     public ref partial struct EmitDatasets  
     {
-        public readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
         
@@ -23,7 +23,7 @@ namespace Z0
 
         readonly string[] Args;
 
-        public EmitDatasets(WfContext context, CorrelationToken ct, params string[] args)
+        public EmitDatasets(IWfContext context, CorrelationToken ct, params string[] args)
         {
             Args = args;
             Ct = ct;

@@ -9,13 +9,12 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static Flow;
     using static EmitPeImageStep;
     
     [Step(WfStepKind.EmitPeImage)]
     public ref struct EmitPeImage
     {
-        readonly WfContext Wf;
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
         
@@ -40,7 +39,7 @@ namespace Z0
         readonly HexDataFormatter Formatter;
 
         [MethodImpl(Inline)]
-        public EmitPeImage(WfContext wf, IPart part, MemoryAddress @base, FilePath dst, CorrelationToken ct)
+        public EmitPeImage(IWfContext wf, IPart part, MemoryAddress @base, FilePath dst, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;

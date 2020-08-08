@@ -5902,3 +5902,41 @@
  rename src/{run/src/models => tools/src/DumpBin}/ListedFileField.cs (100%)
  rename src/{run/src/models => tools/src/DumpBin}/ListedFiles.cs (100%)
  create mode 100644 src/tools/z0.tools.csproj
+[master 29eb8199a] .
+ 46 files changed, 1273 insertions(+), 152 deletions(-)
+ create mode 100644 src/flow/src/events/WfProcessedFile.cs
+ create mode 100644 src/flow/src/events/WfProcessingFile.cs
+ create mode 100644 src/flow/src/services/ops/processed.cs
+ create mode 100644 src/flow/src/services/ops/processing.cs
+ create mode 100644 src/tables/data/syn/dumpbin.csv
+ delete mode 100644 src/tools/src/DumpBin/Archive.cs
+ create mode 100644 src/tools/src/ToolId.cs
+ create mode 100644 src/tools/src/Tools.cs
+ rename src/tools/src/{DumpBin => base}/Files.cs (100%)
+ rename src/tools/src/{DumpBin => base}/ListedFile.cs (100%)
+ rename src/tools/src/{DumpBin => base}/ListedFileField.cs (100%)
+ rename src/tools/src/{DumpBin => base}/ListedFiles.cs (85%)
+ create mode 100644 src/tools/src/contracts/IExtensionMap.cs
+ create mode 100644 src/tools/src/contracts/ITool.cs
+ create mode 100644 src/tools/src/contracts/IToolArchive.cs
+ create mode 100644 src/tools/src/contracts/IToolCmd.cs
+ create mode 100644 src/tools/src/contracts/IToolFile.cs
+ create mode 100644 src/tools/src/contracts/IToolFlags.cs
+ create mode 100644 src/tools/src/contracts/IToolProcessor.cs
+ create mode 100644 src/tools/src/contracts/ITooling.cs
+ create mode 100644 src/tools/src/models/ExtensionMapF.cs
+ create mode 100644 src/tools/src/models/ExtensionMapFX.cs
+ create mode 100644 src/tools/src/models/ToolArchive.cs
+ create mode 100644 src/tools/src/models/ToolArchiveTF.cs
+ create mode 100644 src/tools/src/models/ToolCmd.cs
+ create mode 100644 src/tools/src/models/ToolFileT.cs
+ create mode 100644 src/tools/src/models/ToolFileTF.cs
+ create mode 100644 src/tools/src/models/ToolFiles.cs
+ create mode 100644 src/tools/src/models/ToolFlags.cs
+ create mode 100644 src/tools/src/models/ToolProcessor.cs
+ create mode 100644 src/tools/src/models/ToolTF.cs
+ create mode 100644 src/tools/src/tools/dumpbin/AsmProcessor.cs
+ create mode 100644 src/tools/src/tools/dumpbin/DumpBin.cs
+ rename src/tools/src/{DumpBin/FileKinds.cs => tools/dumpbin/ExtMap.cs} (55%)
+ rename src/tools/src/{DumpBin/DumpBin.cs => tools/dumpbin/Flag.cs} (56%)
+ create mode 100644 src/tools/src/wf/CreateScript.cs
