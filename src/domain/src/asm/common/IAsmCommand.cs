@@ -16,9 +16,6 @@ namespace Z0.Asm
 
         EncodedCommand Encoded {get;}
 
-        ReadOnlySpan<byte> IEncodedCommand.Encoding 
-            => Encoded.Encoding;
-
         byte IEncodedCommand.EncodingSize 
             => Encoded.EncodingSize;
     }

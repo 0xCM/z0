@@ -32,8 +32,8 @@ namespace Z0
         {            
             InstrinsicsEmitter.create(Context).Emit();            
             term.print(text.concat("ContentForm".PadRight(20), SpacePipe, "Kind".PadRight(12), SpacePipe,  "Name".PadRight(60), SpacePipe, "Count"));
-            z.iter(ZTables.Content, Describe);       
-            z.iter(ZTables.Structured, Describe);     
+            z.iter(Tables.Content, Describe);       
+            z.iter(Tables.Structured, Describe);     
         }
 
         void Describe(Paired<StructureKind,AppResourceDoc> src)

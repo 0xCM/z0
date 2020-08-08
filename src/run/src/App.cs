@@ -57,10 +57,9 @@ namespace Z0
             if(parts.Length == 0)
                 parts = Context.PartIdentities;
             
-            var settings = Flow.settings(Context, Ct);
-            var config = Flow.configure(Context, parts, args);
-            var wfc = Flow.context(Context, parts, Ct, settings);
-            Wf = WfBuilder.state(wfc, WfBuilder.asm(Context), args);
+            var config = Flow.configure(Context, args, Ct);
+            var wfc = Flow.context(Context, config, Ct);
+            Wf = WfBuilder.state(wfc, WfBuilder.asm(Context), config);
 
             try
             {

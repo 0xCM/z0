@@ -13,28 +13,54 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct ZTables
-    {        
+    partial struct Tables
+    {
+
+        /// <summary>
+        /// Searches for embedded content with a matching identifier and, if found,
+        /// returns the first matching resource; otherwise returns an empty resource
+        /// </summary>
+        /// <param name="match">The resource identifier to match</param>
+        [Op]
+        public static AppResource content(string match)
+        {
+            try
+            {
+                return Extractor.Extract(x => x.Contains(match));
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return AppResource.Empty;
+            }
+        }
+
+        [MethodImpl(Inline), Op]
+        static void fill(in LocatedImage src,ref ProcessImageSummary dst)
+        {
+            dst.PartId = src.PartId;
+            dst.EntryAddress = src.EndAddress;
+            dst.BaseAddress = src.BaseAddress;
+            dst.EndAddress = src.EndAddress;
+            dst.Size = src.Size;
+        }
+        
+        [Op]
         public static ReadOnlySpan<ProcessImageSummary> summarize(LocatedImages src)
         {
             var count = src.Count;
             var images = src.View;
             var summaries = span<ProcessImageSummary>(count);
-            var system = ZTables.SystemImages;
+            var system = SystemImages;
             for(var i=0u; i<count; i++)
             {
                 ref readonly var image = ref skip(images, i);
                 ref var summary = ref seek(summaries,i);
                 var name = image.Name;
                 var match = system.First((in SystemImageSymbol r) => r.Name == name);
-                var symbolic = match.IsSome() ? match.Value.Identifier : image.Name.Replace("z0.", EmptyString);
+                summary.ImageId = match.IsSome() ? match.Value.Identifier : image.Name.Replace("z0.", EmptyString);
+                fill(image, ref summary);
 
-                summary.ImageId = symbolic;
-                summary.PartId = image.PartId;
-                summary.EntryAddress = image.EndAddress;
-                summary.BaseAddress = image.BaseAddress;
-                summary.EndAddress = image.EndAddress;
-                summary.Size = image.Size;
                 if(i != 0)
                 {
                     ref readonly var prior = ref skip(images, i - 1);
@@ -52,18 +78,11 @@ namespace Z0
         public static string[] ContentNames
             => Extractor.ResourceNames;
 
-        /// <summary>
-        /// Returns supported content kinds
-        /// </summary>
-        public static ContentKind[] ContentClasses
-            => Enums.literals<ContentKind>().Where(x => x != 0).OrderBy(x => x.Format());
 
-        /// <summary>
-        /// Returns supported content kinds
-        /// </summary>
-        public static StructureKind[] StructuredClasses
-            => Enums.literals<StructureKind>().Where(x => x != 0).OrderBy(x => x.Format());
-        
+        static ResExtractor Extractor
+            => ResExtractor.Service(typeof(Z0.Parts.Tables).Assembly);
+
+
         public static IEnumerable<ContentLibEntry> Catalog
         {
             get
@@ -78,6 +97,50 @@ namespace Z0
             }
         }
 
+        /// <summary>
+        /// Enumerates embedded content with matching kind
+        /// </summary>
+        /// <param name="kind">The kind to match</param>
+        [Op]
+        public static IEnumerable<AppResource> match(ContentKind kind)
+        {
+            var svc = Extractor;
+            var names = svc.ResourceNames;
+            var matches = kind switch {
+                ContentKind.AsmAlg => names.Where(name => name.Contains(".asmalg.")),
+                ContentKind.AsmId => names.Where(name => name.Contains(".asmid.")),
+                ContentKind.AsmInxs => names.Where(name => name.Contains(".asminxs.")),
+                ContentKind.AsmSyn => names.Where(name => name.Contains(".asmsyn.")),
+                ContentKind.AsmT => names.Where(name => name.Contains(".asmt.")),
+                ContentKind.Env => names.Where(name => name.Contains(".env.")),
+                ContentKind.Help => names.Where(name => name.Contains(".help.")),
+                ContentKind.PeFormat => names.Where(name => name.Contains(".peformat.")),
+                ContentKind.Tools => names.Where(name => name.Contains(".tools.")),
+                ContentKind.Xed => names.Where(name => name.Contains(".xed.")),
+                ContentKind.Xml => names.Where(name => name.Contains(".xml.")),
+
+                    _ => sys.empty<string>(),
+            };
+            
+            foreach(var match in matches)
+                yield return svc.Extract(match);
+        }
+
+
+        /// <summary>
+        /// Returns supported content kinds
+        /// </summary>
+        public static ContentKind[] ContentClasses
+            => Enums.literals<ContentKind>().Where(x => x != 0).OrderBy(x => x.Format());
+
+        /// <summary>
+        /// Returns supported content kinds
+        /// </summary>
+        public static StructureKind[] StructuredClasses
+            => Enums.literals<StructureKind>().Where(x => x != 0).OrderBy(x => x.Format());
+
+
+        [Op]
         public static ReadOnlySpan<SystemImageSymbol> SystemImages
         {
             get
@@ -101,6 +164,7 @@ namespace Z0
         /// <summary>
         /// Enumerates all content
         /// </summary>
+        [Op]
         public static IEnumerable<Paired<ContentKind,AppResource>> Content
         {
             get
@@ -112,6 +176,14 @@ namespace Z0
         }        
 
         /// <summary>
+        /// Searches for an embedded document with a matching identifier and, if found,
+        /// returns the first match; otherwise returns an empty document
+        /// </summary>
+        /// <param name="match">The resource identifier to match</param>
+        public static AppResourceDoc structured(string match)
+            => Extractor.MatcDocument(match);
+
+        /// <summary>
         /// Enumerates all structureded content
         /// </summary>
         public static IEnumerable<Paired<StructureKind,AppResourceDoc>> Structured
@@ -120,36 +192,10 @@ namespace Z0
             {
                 foreach(var k in StructuredClasses)
                     foreach(var doc in match(k))
-                        yield return (k,doc);
+                        yield return z.paired(k,doc);
             }
         }    
-
-        /// <summary>
-        /// Searches for embedded content with a matching identifier and, if found,
-        /// returns the first matching resource; otherwise returns an empty resource
-        /// </summary>
-        /// <param name="match">The resource identifier to match</param>
-        public static AppResource content(string match)
-        {
-            try
-            {
-                return Extractor.Extract(x => x.Contains(match));
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return AppResource.Empty;
-            }
-        }
-
-        /// <summary>
-        /// Searches for an embedded document with a matching identifier and, if found,
-        /// returns the first match; otherwise returns an empty document
-        /// </summary>
-        /// <param name="match">The resource identifier to match</param>
-        public static AppResourceDoc structured(string match)
-            => Extractor.MatcDocument(match);
-
+        
         /// <summary>
         /// Enumerates embedded documents with matching kind
         /// </summary>
@@ -176,36 +222,5 @@ namespace Z0
                     yield return doc.Value;
             }
         }
-
-        /// <summary>
-        /// Enumerates embedded content with matching kind
-        /// </summary>
-        /// <param name="kind">The kind to match</param>
-        public static IEnumerable<AppResource> match(ContentKind kind)
-        {
-            var svc = Extractor;
-            var names = svc.ResourceNames;
-            var matches = kind switch {
-                ContentKind.AsmAlg => names.Where(name => name.Contains(".asmalg.")),
-                ContentKind.AsmId => names.Where(name => name.Contains(".asmid.")),
-                ContentKind.AsmInxs => names.Where(name => name.Contains(".asminxs.")),
-                ContentKind.AsmSyn => names.Where(name => name.Contains(".asmsyn.")),
-                ContentKind.AsmT => names.Where(name => name.Contains(".asmt.")),
-                ContentKind.Env => names.Where(name => name.Contains(".env.")),
-                ContentKind.Help => names.Where(name => name.Contains(".help.")),
-                ContentKind.PeFormat => names.Where(name => name.Contains(".peformat.")),
-                ContentKind.Tools => names.Where(name => name.Contains(".tools.")),
-                ContentKind.Xed => names.Where(name => name.Contains(".xed.")),
-                ContentKind.Xml => names.Where(name => name.Contains(".xml.")),
-
-                    _ => sys.empty<string>(),
-            };
-            
-            foreach(var match in matches)
-                yield return svc.Extract(match);
-        }
-
-        static ResExtractor Extractor
-            => ResExtractor.Service(typeof(Z0.Parts.Tables).Assembly);
-    }
+    }    
 }

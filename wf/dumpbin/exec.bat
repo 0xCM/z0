@@ -16,20 +16,36 @@ set SrcFile=zdata.dll
 set Cmd=%Step%\dump.dll.clr.bat
 call %Cmd%
 
+set SrcFile=zdata.exe
+set Cmd=%Step%\dump.exe.bat
+call %Cmd%
+
 set SrcFile=machine.exe
 set Cmd=%Step%\dump.exe.bat
+call %Cmd%
+
+set SrcFile=machine.dll
+set Cmd=%Step%\dump.dll.clr.bat
 call %Cmd%
 
 set SrcFile=z0.exe
 set Cmd=%Step%\dump.exe.bat
 call %Cmd%
 
-set SrcFile=zdata.exe
+set SrcFile=run.exe
 set Cmd=%Step%\dump.exe.bat
 call %Cmd%
 
-set SrcFile=z0.metareader.exe
+set SrcFile=ztool.exe
 set Cmd=%Step%\dump.exe.bat
+call %Cmd%
+
+set SrcFile=ztool.dll
+set Cmd=%Step%\dump.dll.clr.bat
+call %Cmd%
+
+set SrcFile=z0.win.dll
+set Cmd=%Step%\dump.dll.clr.bat
 call %Cmd%
 
 set SrcFile=osextensions.dll
@@ -37,6 +53,10 @@ set Cmd=%Step%\dump.dll.native.bat
 call %Cmd%
 
 set SrcFile=dia2lib.dll
+set Cmd=%Step%\dump.dll.native.bat
+call %Cmd%
+
+set SrcFile=z0-vml-clib.dll
 set Cmd=%Step%\dump.dll.native.bat
 call %Cmd%
 
@@ -139,4 +159,5 @@ call %Cmd%
 set SrcFile=mscordaccore.dll
 set Cmd=%Step%\dump.dll.native.bat
 call %Cmd%
+
 

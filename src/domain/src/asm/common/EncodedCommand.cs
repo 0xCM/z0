@@ -14,20 +14,16 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an encoded instruction
     /// </summary>
-    public readonly struct EncodedCommand : IEncodedCommand<EncodedCommand>
-    {        
-        internal readonly Vector128<byte> Data;
+    public readonly struct EncodedCommand
+    {                
+        public readonly Vector128<byte> Data;
 
         [MethodImpl(Inline)]
-        internal EncodedCommand(Vector128<byte> src)
-            => Data = src;
-        
-        public ReadOnlySpan<byte> Encoding
+        public EncodedCommand(Vector128<byte> src)
         {
-            [MethodImpl(Inline)]
-            get => AsmEncoder.bytes(this);
+            Data = src;
         }
-
+    
         /// <summary>
         /// Specifies the size of the command, in bytes, which is constrained to a number 
         /// between 0 (the empty command) and 15 (The maximum instruction size)
@@ -37,14 +33,5 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => vcell(Data, 15);
         }
-
-        public string Format()
-            => AsmEncoder.format(this);
-
-        public override string ToString()
-            => Format();        
-
-        public static EncodedCommand Empty 
-            => default;
     }
 }

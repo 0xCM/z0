@@ -7,8 +7,8 @@ call %WfRoot%\wf-vars.cmd
 call %Step%\tool.cmd
 
 set SrcPath=%SrcDir%\%SrcFile%
-set DstDir=%StageBuild%\%Tool%
-set LogPath=%StageBuild%\%Tool%.log
+set DstDir=%ZLogs%\tools\%Tool%
+set LogPath=%ZLogs%\tools\logs\%Tool%.log
 
 set Flag=%Summary%
 set DstFile=%SrcFile%.%Flag%.doc
@@ -21,6 +21,12 @@ set Flag=%Disasm%
 set DstFile=%SrcFile%.asm
 set DstPath=%DstDir%\%Flag%\%DstFile%
 set Cmd=%Tool% %DefaultFlags% /%Flag% /out:%DstPath% %SrcPath%
+echo %Cmd% >> %LogPath%
+call %Cmd%
+
+set DstFile=%SrcFile%.%Flag%.instructions.asm
+set DstPath=%DstDir%\%Flag%\%DstFile%
+set Cmd=%Tool% %DefaultFlags% /%Flag%:nobytes /out:%DstPath% %SrcPath%
 echo %Cmd% >> %LogPath%
 call %Cmd%
 

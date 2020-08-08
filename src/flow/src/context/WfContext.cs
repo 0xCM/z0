@@ -16,13 +16,11 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public struct WfContext : IWfContext<WfSettings>
+    public struct WfContext : IWfContext
     {        
         public const string ActorName = nameof(WfContext);
         
-        public IAppContext ContextRoot {get;}
-        
-        public WfSettings State {get;}
+        public IAppContext ContextRoot {get;}        
 
         public WfTermEventSink TermSink {get;}
         
@@ -44,11 +42,10 @@ namespace Z0
         readonly ulong SessionId;
 
         [MethodImpl(Inline)]
-        public WfContext(IAppContext root, CorrelationToken ct, WfSettings config, WfTermEventSink sink)
+        public WfContext(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink)
         {
             Ct = ct;
             ContextRoot = root;
-            State = config;
             TermSink = sink;
             SessionId = (ulong)now().Ticks;
             CtProvider = 1;       
@@ -117,6 +114,5 @@ namespace Z0
 
         static string ToActorName(string src)
             => Path.GetFileNameWithoutExtension(src);
-
     }
 }

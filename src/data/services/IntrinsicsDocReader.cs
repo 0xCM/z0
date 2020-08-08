@@ -37,6 +37,7 @@ namespace Z0
         static XmlReader readxml(string src)
             => XmlReader.Create(new StringReader(src));
         
+        [Op]
         public static intrinsic[] read(AppResource src)
         {
             if(src.IsEmpty)

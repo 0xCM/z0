@@ -5940,3 +5940,71 @@
  rename src/tools/src/{DumpBin/FileKinds.cs => tools/dumpbin/ExtMap.cs} (55%)
  rename src/tools/src/{DumpBin/DumpBin.cs => tools/dumpbin/Flag.cs} (56%)
  create mode 100644 src/tools/src/wf/CreateScript.cs
+[master 2b4935181] .
+ 117 files changed, 709 insertions(+), 412 deletions(-)
+ rename src/capture/src/steps/{ => actors}/CaptureClient.cs (98%)
+ rename src/capture/src/{ => steps/actors}/CaptureControl.cs (97%)
+ rename src/capture/src/steps/{ => actors}/CaptureHostApi.cs (98%)
+ rename src/capture/src/steps/{ => actors}/CaptureHosts.cs (92%)
+ rename src/capture/src/steps/{ => actors}/CaptureWorkflow.cs (92%)
+ rename src/capture/src/steps/{ => actors}/ClearArchives.cs (94%)
+ rename src/capture/src/steps/{ => actors}/DecodeParsed.cs (90%)
+ rename src/capture/src/steps/{ => actors}/EmitExtractReport.cs (100%)
+ rename src/capture/src/steps/{ => actors}/EmitHostArtifacts.cs (99%)
+ rename src/capture/src/steps/{ => actors}/EmitParsedReport.cs (100%)
+ rename src/capture/src/steps/{ => actors}/ExtractHostMembers.cs (99%)
+ rename src/capture/src/steps/{ => actors}/ExtractMembers.cs (98%)
+ rename src/capture/src/steps/{ => actors}/ManagePartCapture.cs (96%)
+ rename src/capture/src/steps/{ => actors}/MatchAddresses.cs (92%)
+ rename src/capture/src/steps/{ => actors}/MatchEmissions.cs (96%)
+ rename src/capture/src/steps/{ => actors}/SpecializeImmediates.cs (100%)
+ rename src/capture/src/steps/{ => metadata}/CaptureClientStep.cs (100%)
+ rename src/capture/src/steps/{ => metadata}/CaptureHostApiStep.cs (100%)
+ create mode 100644 src/capture/src/steps/metadata/CaptureHostsStep.cs
+ create mode 100644 src/capture/src/steps/metadata/DecodeParsedStep.cs
+ rename src/capture/src/steps/{ => metadata}/EmitHostArtifactsStep.cs (100%)
+ rename src/capture/src/steps/{ => metadata}/EmitParsedReportStep.cs (100%)
+ rename src/capture/src/steps/{ => metadata}/ExtractHostMembersStep.cs (100%)
+ rename src/capture/src/steps/{ => metadata}/ExtractMembersStep.cs (100%)
+ rename src/capture/src/steps/{ => metadata}/ManagePartCaptureStep.cs (100%)
+ create mode 100644 src/capture/src/steps/metadata/MatchAddressesStep.cs
+ rename src/capture/src/steps/{ => metadata}/SpecializeImmediatesStep.cs (100%)
+ delete mode 100644 src/flow/src/context/WfContextT.cs
+ create mode 100644 src/flow/src/contracts/IWfActor.cs
+ create mode 100644 src/flow/src/events/WfStepRan.cs
+ rename src/flow/src/events/{WfStepFinishedT.cs => WfStepRanT.cs} (74%)
+ rename src/machine/src/workflows/{services/processors => context}/IHostProcessor.cs (100%)
+ rename src/machine/src/{infrastructure => workflows/context}/Workflow.cs (100%)
+ rename src/machine/src/{infrastructure => workflows/context}/WorkflowT.cs (100%)
+ rename src/machine/src/workflows/services/{processors => }/AsmAnalyzer.cs (100%)
+ rename src/machine/src/workflows/services/{processors => }/AsmProcessors.cs (100%)
+ rename src/machine/src/workflows/{models => services}/CapturedAccessor.cs (100%)
+ rename src/machine/src/{ => workflows}/services/CpuBuffer.cs (100%)
+ rename src/machine/src/{ => workflows}/services/CpuBuffers.cs (100%)
+ rename src/machine/src/workflows/services/{processors => }/CpuidProcessor.cs (100%)
+ rename src/machine/src/workflows/services/{processors => }/PartProcessor.cs (93%)
+ rename src/machine/src/workflows/services/{processors => }/ProcessBrokers.cs (100%)
+ rename src/machine/src/workflows/services/{processors => }/Processors.cs (86%)
+ rename src/machine/src/{ => workflows}/services/recapture/RecaptureAccessors.cs (100%)
+ rename src/machine/src/{ => workflows}/services/recapture/ops/Capture.cs (100%)
+ rename src/machine/src/{ => workflows}/services/recapture/ops/CaptureAsm.cs (100%)
+ rename src/machine/src/{ => workflows}/services/recapture/ops/CaptureKnown.cs (100%)
+ rename src/machine/src/{ => workflows}/services/recapture/ops/CreateFunction.cs (100%)
+ rename src/machine/src/{ => workflows}/services/recapture/ops/SaveResIndex.cs (100%)
+ rename src/machine/src/{ => workflows}/services/recapture/ops/WriteAsm.cs (100%)
+ create mode 100644 src/machine/src/workflows/steps/metadata/EmitFieldMetadataStep.cs
+ create mode 100644 src/machine/src/workflows/steps/metadata/EmitProjectDocsStep.cs
+ create mode 100644 src/machine/src/workflows/steps/metadata/EmitResBytesStep.cs
+ create mode 100644 src/machine/src/workflows/steps/metadata/ParseAsmFilesStep.cs
+ create mode 100644 src/machine/src/workflows/steps/metadata/ProcessAsmStep.cs
+ rename src/machine/src/workflows/{services/processors => steps/workers}/ProcessAsm.cs (98%)
+ rename src/machine/src/workflows/{services/processors/JmpProcessor.cs => steps/workers/ProcessAsmJmp.cs} (92%)
+ rename src/machine/src/workflows/{services/processors/HostProcessor.cs => steps/workers/ProcessHostAsm.cs} (90%)
+ rename src/machine/src/workflows/{services/processors/AsmProcessor.cs => steps/workers/ProcessLocatedAsm.cs} (83%)
+ rename src/machine/src/workflows/{services => steps/workers}/RenderSemantic.cs (99%)
+ create mode 100644 src/tools/src/contracts/IToolConfig.cs
+ create mode 100644 src/tools/src/contracts/IToolRunner.cs
+ create mode 100644 src/tools/src/models/ToolCmdTF.cs
+ create mode 100644 src/tools/src/models/ToolConfig.cs
+ create mode 100644 src/tools/src/models/ToolConfigTF.cs
+ create mode 100644 src/tools/src/services/ToolRunner.cs

@@ -38,18 +38,22 @@ namespace Z0.Asm
         public ICaptureBroker CaptureBroker {get;}
 
         [MethodImpl(Inline)]
-        public WfState(IWfContext wf, IAsmContext asm, string[] args, CorrelationToken ct)        
+        public WfState(IWfContext wf, IAsmContext asm, WfConfig config, CorrelationToken ct)        
         {
             Wf = wf;
             ContextRoot = wf.ContextRoot;
             Asm = asm;            
             Ct = ct;
-            var parsed = AppArgs.parse(args).Data.Select(arg => PartIdParser.single(arg.Value)).ToArray();
+            Config = config;        
+            // var parts = PartIdParser.Service.ParseValid(args);
+            // if(parts.Length == 0)
+            //     parts = Wf.ContextRoot.PartIdentities;
+
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.AppPaths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
             var dst = new ArchiveConfig(dstpath);
-            Config = new WfConfig(args, src, dst, parsed);   
+            //Config = new WfConfig(args, src, dst, parts);   
             Settings = CaptureConfig.From(wf.ContextRoot.Settings);                             
             Services = CaptureServices.create(Asm);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;

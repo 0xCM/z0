@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
+    [ApiHost]
     public readonly struct AsmFieldParser
     {
         [MethodImpl(Inline), Op]

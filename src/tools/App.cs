@@ -51,18 +51,11 @@ namespace Z0
         public override void RunShell(params string[] args)
         {                        
             Raise(status(ActorName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct));            
-
-            var parts = PartIdParser.Service.ParseValid(args); 
-            if(parts.Length == 0)
-                parts = Context.PartIdentities;
-            
-            var settings = Flow.settings(Context, Ct);
-            var config = Flow.configure(Context, parts, args);
-            
-            Wf = Flow.context(Context, parts, Ct, settings);
-
+        
             try
             {
+                var config = Flow.configure(Context, args, Ct);            
+                Wf = Flow.context(Context, config, Ct);
                 RunDumpBin();
                 
             }

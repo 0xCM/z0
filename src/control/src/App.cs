@@ -28,13 +28,10 @@ namespace Z0
         
         public override void RunShell(params string[] args)
         {         
-            var arglist = args.FormatList();
-            var msg = text.format(PSx2, Part.Format(), arglist);
-            Raise(Flow.running(ActorName, msg, Ct));
-
             try
             {
-                using var control = CaptureController.create(Context, Ct, args);
+                var config = Flow.configure(Context, args, Ct);
+                using var control = CaptureController.create(Context, Ct, config);
                 control.Run();
             }
             catch(Exception e)
@@ -42,7 +39,6 @@ namespace Z0
                 Raise(Flow.error(ActorName, e, Ct));
             }
             
-            Raise(Flow.ran(ActorName, msg, Ct));
         }
 
         public static void Main(params string[] args)

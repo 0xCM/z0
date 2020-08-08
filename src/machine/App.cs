@@ -45,7 +45,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {
             var ct = CorrelationToken.define(1);
-            using var control = Control.create(Context, ct, args);
+            using var control = Control.create(Context, ct, Flow.configure(Context, args, ct));
             control.Run();
         }
 

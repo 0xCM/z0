@@ -21,11 +21,9 @@ namespace Z0
         
         readonly bool Recapture;
 
-        readonly string[] Args;
 
-        public EmitDatasets(IWfContext context, CorrelationToken ct, params string[] args)
+        public EmitDatasets(IWfContext context, CorrelationToken ct)
         {
-            Args = args;
             Ct = ct;
             Wf = context;
             Recapture = false;

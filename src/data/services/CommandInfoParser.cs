@@ -13,7 +13,7 @@ namespace Z0.Asm
     using F = OpCodeRecordField;
 
     [ApiHost]
-    public readonly struct CommandInfoParser : IApiHost<CommandInfoParser>
+    public readonly struct CommandInfoParser 
     {
         public static CommandInfoParser Service 
             => default;

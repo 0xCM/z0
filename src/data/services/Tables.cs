@@ -8,14 +8,25 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
+    using F = FarCallCountsField;
+
     using Asm;
     
     using static Konst;
     using static z;
 
     [ApiHost]
-    public readonly struct Tables
+    public readonly partial struct Tables
     {
+
+        [MethodImpl(Inline), Op]
+        public static void render(in FarCallCounts src, StringBuilder dst)
+        {            
+            var formatter = Tables.formatter<F>(dst);
+            formatter.Delimit(F.TargetsFar, src.TargetsFar);
+            formatter.Delimit(F.HostedReceivers, src.HostedReceivers);
+            formatter.Delimit(F.UnhostedReceivers, src.UnhostedReceivers);        
+        }                
         public static EnumNames<Mnemonic> Mnemonics
         {
             [MethodImpl(Inline), Op]
@@ -25,6 +36,7 @@ namespace Z0
         public static PartId part(FilePath src)        
             => PartIdParser.single(src.FileName.Name.Replace("z0.", EmptyString).Replace(".dll", EmptyString).Replace(".exe", EmptyString));
 
+        [Op]
         public static ReadOnlySpan<TableColumn> fields<E>()
             where E : unmanaged, Enum
         {

@@ -88,7 +88,7 @@ namespace Z0
         [Op, MethodImpl(Inline)]
         public void Dispatch(in EncodedCommand src)
         {
-            Execute(src.Encoding);
+            Execute(AsmEncoder.bytes(src));
         }
 
         [Op, MethodImpl]

@@ -7,10 +7,12 @@ namespace Z0.Asm
     using System;
     using static AsmCommandParser;
 
+    [ApiHost]
     public readonly struct AsmHeaderParser : ITextParser<AsmFunctionHeader>
     {
         public static AsmHeaderParser Service => default(AsmHeaderParser);
 
+        [Op]
         public ParseResult<AsmFunctionHeader> Parse(string[] lines)
         {
             var fail = ParseResult.Fail<AsmFunctionHeader>(lines.Concat(Chars.NL));
@@ -38,6 +40,7 @@ namespace Z0.Asm
             return ParseResult.Success(lines.Concat(Chars.NL), new AsmFunctionHeader(uri, sig, prop, @base, tcVal));
         }
 
+        [Op]
         public ParseResult<AsmFunctionHeader> Parse(string src)
             => Parse(src.SplitClean(Chars.NL));
     }

@@ -19,14 +19,17 @@ namespace Z0
         public readonly ArchiveConfig Source;
 
         public readonly ArchiveConfig Target;
+
+        public readonly WfSettings Settings;
         
         [MethodImpl(Inline)]
-        public WfConfig(string[] args, ArchiveConfig src, ArchiveConfig dst, PartId[] parts)
+        public WfConfig(string[] args, ArchiveConfig src, ArchiveConfig dst, PartId[] parts, WfSettings settings)
         {
             Args = args;
             Source = src;
             Target = dst;
             Parts = parts;
+            Settings = settings;
         }    
     }
 }

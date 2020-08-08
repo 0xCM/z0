@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Tables)" />
+    <ProjectReference Include="$(Fixed)" />
 
   </ItemGroup>  
 

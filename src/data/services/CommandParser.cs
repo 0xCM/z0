@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
+    [ApiHost]
     public partial class AsmCommandParser
     {
         internal const string LocatedMarker = "located://";
@@ -23,15 +24,15 @@ namespace Z0.Asm
 
         internal const char CommentMarker = Chars.Semicolon;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         internal static bool IsCommentLine(string src)
             => src.Trim().StartsWith(CommentMarker);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         internal static bool IsBlockSep(string src)
             => src.Trim().StartsWith(BlockSepMarker);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         internal static bool IsBlankLine(string src)
             => string.IsNullOrWhiteSpace(src);
     }

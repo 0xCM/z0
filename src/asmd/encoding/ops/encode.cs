@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
 
     using static Konst;
     using static z;
@@ -25,8 +26,22 @@ namespace Z0.Asm
             var max = min(15,count);
             for(var i=0; i<max; i++)
                 dst = dst.WithElement(i, skip(src,i));
-            return  new EncodedCommand(dst.WithElement(15, (byte)count));            
+            var c = new EncodedCommand(dst.WithElement(15, (byte)count));
+            var b = bytes(c);
+            return c;  
         }
+
+        [MethodImpl(Inline), Nlz]
+        static int nlz(ulong src)
+            => (int)Lzcnt.X64.LeadingZeroCount(src);    
+
+        [MethodImpl(Inline)]
+        static int hipos(ulong src)            
+            => (int)bitsize<ulong>() - 1 - nlz(src);
+
+        [MethodImpl(Inline)]
+        static byte effsize(ulong src)
+            => math.sub(math.log2((byte)hipos(src)), One8u);
 
         /// <summary>
         /// Creates a command from data supplied in a 64-bit unsigned integer
@@ -35,7 +50,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static EncodedCommand encode(ulong lo64)
         {
-            var hi64 = (ulong)(Bits.effsize(lo64)/8) << 56;
+            var hi64 = (ulong)(effsize(lo64)/8) << 56;
             var v = v8u(Vector128.Create(lo64, hi64));
             return new EncodedCommand(v); 
         }

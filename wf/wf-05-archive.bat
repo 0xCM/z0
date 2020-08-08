@@ -1,23 +1,24 @@
 
-set Archive="K:\z0\archives"
-set ResDst="%ArchiveDir%\res"
-set DevRoot=%ZDev%
-set DevBin="%DevRoot%\bin"
-set BuildStage="%ZLogs%\builds"
+call wf\wf-vars.cmd
 
-set Src=%BuildStage%\dat
-set Dst=%Archive%\dat
-set Log="%ZLogs%\etl\dat-archive.log"
-robocopy %Src% %Dst% /log:%Log% /tee /TS /BYTES /V /MIR 
+set BuildSrc="%StageBuild%"
+set BuildDst="K:\z0\builds"
+set BuildLog="%ZLogs%\etl\build-archive.log"
+robocopy %BuildSrc% %BuildDst% /log:%BuildLog% /tee /TS /BYTES /V /MIR 
+
+set ToolSrc="%ZLogs%\tools"
+set ToolDst="K:\z0\archives\tools"
+set ToolLog="%ZLogs%\etl\toos-archive.log"
+robocopy %ToolSrc% %ToolDst% /log:%ToolLog% /tee /TS /BYTES /V /MIR 
 
 set CaptureSrc="%ZLogs%\apps\machine\capture"
 set CaptureDst="K:\z0\archives\res\capture"
 set CaptureLog="%ZLogs%\etl\capture-archive.log"
 robocopy %CaptureSrc% %CaptureDst% /log:%CaptureLog% /tee /TS /BYTES /V /MIR 
 
-set ZDataSrc="%ZDev%\src\zdata\content"
-set ZDataDst="K:\z0\archives\zdata"
-set ZDataLog="%ZLogs%\etl\zdata-archive.log"
+set ZDataSrc="%ZDev%\src\tables\data"
+set ZDataDst="K:\z0\archives\tables"
+set ZDataLog="%ZLogs%\etl\table-archive.log"
 robocopy %ZDataSrc% %ZDataDst% /log:%ZDataLog% /tee /TS /BYTES /V /MIR 
 
 set ResBytesSrc="%ZLogs%\res\bytes"
@@ -40,11 +41,6 @@ set ResDocsDst="K:\z0\archives\res\docs"
 set ResDocsLog="%ZLogs%\etl\res-docs-archive.log"
 robocopy %ResDocsSrc% %ResDocsDst% /log:%ResDocsLog% /tee /TS /BYTES /V /MIR 
 
-set ResMetaSrc="%ZLogs%\res\metadata"
-set ResMetaDst="K:\z0\archives\res\metadata"
-set ResMetaLog="%ZLogs%\etl\res-metadata-archive.log"
-robocopy %ResMetaSrc% %ResMetaDst% /log:%ResMetaLog% /tee /TS /BYTES /V /MIR 
-
 set ResLitSrc="%ZLogs%\apps\machine\literals"
 set ResLitDst="K:\z0\archives\res\literals"
 set ResLitLog="%ZLogs%\etl\literal-archive.log"
@@ -64,7 +60,6 @@ set EtlLogSrc="%ZLogs%\etl"
 set EtlLogDst="K:\z0\archives\.logs"
 set EltLogLog="%ZLogs%\etl\etl-archive.log"
 robocopy %EtlLogSrc% %EtlLogDst% /log:%EltLogLog% /tee /TS /BYTES /V /MIR
-
 
 set VerSrc="%ZDev%\version"
 set VerDst="K:\z0\archives"

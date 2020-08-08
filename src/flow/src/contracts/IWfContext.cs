@@ -193,13 +193,4 @@ namespace Z0
         static string ToActorName(string src)
             => Path.GetFileNameWithoutExtension(src);
     }
-
-    /// <summary>
-    /// Characterizes a workflow context that carries parametric cata
-    /// </summary>
-    /// <typeparam name="T">The data type</typeparam>
-    public interface IWfContext<T> : IWfContext
-    {
-        T State {get;}
-    }    
 }

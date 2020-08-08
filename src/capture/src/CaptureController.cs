@@ -14,7 +14,7 @@ namespace Z0
         public const string ActorName = nameof(CaptureControl);        
 
         [MethodImpl(Inline)]
-        public static CaptureControl create(IAppContext root, CorrelationToken ct, params string[] args)
-            => new CaptureControl(root, ct, args);
+        public static CaptureControl create(IAppContext root, CorrelationToken ct, WfConfig config)
+            => new CaptureControl(root, ct, config);
     }
 }

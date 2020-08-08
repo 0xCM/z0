@@ -30,6 +30,20 @@ namespace Z0
 
         public Span<LocatedPart> Index;
 
+        /// <summary>
+        /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcesModule'/>
+        /// </summary>
+        /// <param name="src">The source module</param>
+        public static LocatedImage from(ProcessModule src)
+        {
+            var path = FilePath.Define(src.FileName);
+            var part = Tables.part(path);
+            var entry = (MemoryAddress)src.EntryPointAddress;
+            var @base = src.BaseAddress;
+            var size = (uint)src.ModuleMemorySize;
+            return new LocatedImage(path, part, entry, @base, size);
+        }
+
         [MethodImpl(Inline)]
         public EmitImageContent(IWfContext wf, IPart[] parts, CorrelationToken ct)
         {
@@ -39,7 +53,7 @@ namespace Z0
             Index = default;
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("images");
             var process = Process.GetCurrentProcess();
-            Images = process.Modules.Cast<ProcessModule>().Map(LocatedImage.from).OrderBy(x => x.BaseAddress);
+            Images = process.Modules.Cast<ProcessModule>().Map(from).OrderBy(x => x.BaseAddress);
             Wf.Created(Name, Ct);
         }
 

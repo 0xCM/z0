@@ -21,11 +21,8 @@ namespace Z0
 
         readonly IAsmContext Asm;
         
-        readonly string[] Args;
-
         readonly CorrelationToken Ct;
         
-        readonly WfSettings Config;
         
         readonly IWfContext WfContext;        
 
@@ -33,16 +30,14 @@ namespace Z0
 
         public WfState Wf {get;}
 
-        public CaptureControl(IAppContext context, CorrelationToken ct, string[] args)
+        public CaptureControl(IAppContext context, CorrelationToken ct, WfConfig config)
         {
             ContextRoot = context;
-            Args = args;
             Ct = ct;
             Paths = context.AppPaths;
             Asm = WfBuilder.asm(context);                           
-            Config = settings(context, Ct);
-            WfContext = Flow.context(context, Ct, Config);                        
-            Wf = new WfState(WfContext, Asm, args, Ct);
+            WfContext = Flow.context(context, config, Ct);                        
+            Wf = new WfState(WfContext, Asm, config, Ct);
             Wf.Created(ActorName, Ct);
         }
 

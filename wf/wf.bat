@@ -16,12 +16,10 @@ call %Cmd%
 
 call machine.exe
 
-call zdata.exe
-
-set Cmd="%Wf%/wf-10-respack.bat"
+set Cmd="wf\wf-05-archive.bat"
 call %Cmd%
 
-set Cmd="wf\wf-archive.bat"
+set Cmd="%Wf%/wf-10-respack.bat"
 call %Cmd%
 
 set Cmd="commit.bat"

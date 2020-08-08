@@ -6,9 +6,12 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
 
     using static Konst;
     using static AsmCommandParser;
+    using static z;
 
     [ApiHost]
     public readonly struct AsmParsers
@@ -65,6 +68,43 @@ namespace Z0.Asm
             return ParseResult.Success(line, new AsmCommand(seq++, statement.Value, opcode, instruction, encoded.Value));
         }
 
+        [MethodImpl(Inline), Nlz]
+        static int nlz(ulong src)
+            => (int)Lzcnt.X64.LeadingZeroCount(src);    
+
+        [MethodImpl(Inline)]
+        static int hipos(ulong src)            
+            => (int)bitsize<ulong>() - 1 - nlz(src);
+
+        [MethodImpl(Inline)]
+        static byte effsize(ulong src)
+            => math.sub(math.log2((byte)hipos(src)), One8u);
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> bytes(in EncodedCommand src)
+            => Fixed.view<byte>(Fixed.from(src.Data)).Slice((int)size(src));       
+
+        [MethodImpl(Inline)]
+        static EncodedCommand encode(ReadOnlySpan<byte> src)
+        {
+            var dst = default(Vector128<byte>);
+            var count = src.Length;
+            var max = min(15,count);
+            for(var i=0; i<max; i++)
+                dst = dst.WithElement(i, skip(src,i));
+            var c = new EncodedCommand(dst.WithElement(15, (byte)count));
+            var b = bytes(c);
+            return c;  
+        }
+
+        [MethodImpl(Inline)]
+        static EncodedCommand encode(ulong lo64)
+        {
+            var hi64 = (ulong)(effsize(lo64)/8) << 56;
+            var v = v8u(Vector128.Create(lo64, hi64));
+            return new EncodedCommand(v); 
+        }
+
         // Parses text of the form encoded[4]{48 83 ec 40}
         [MethodImpl(Inline), Op]
         public static ParseResult<EncodedCommand> ParseEncoded(string src)
@@ -98,8 +138,7 @@ namespace Z0.Asm
             if(bytes.Length != count)
                 return fail;
             
-            return ParseResult.Success(src, AsmEncoder.encode(bytes));
+            return ParseResult.Success(src, encode(bytes));
         }        
- 
     }
 }

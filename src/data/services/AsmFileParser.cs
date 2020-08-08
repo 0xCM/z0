@@ -10,8 +10,10 @@ namespace Z0.Asm
     using static Memories;
     using static AsmCommandParser;
 
+    [ApiHost]
     public readonly struct AsmFileParser
     {
+        [Op]
         public static void ParseAsmFile(FilePath src, Action<int,AsmCommand[]> AsmParsed, Action<AsmFunctionHeader> HeaderParsed = null)
         {
             var commands = list<AsmCommand>(100);            

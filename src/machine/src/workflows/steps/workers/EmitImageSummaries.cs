@@ -49,7 +49,7 @@ namespace Z0
         
         static void Summarize(LocatedImages src, FilePath dst)
         {            
-            var system = ZTables.SystemImages;
+            var system = Tables.SystemImages;
             var count = src.Count;
             var images = src.View;
             var fields = Tables.fields<LocatedImageField>();

@@ -20,21 +20,12 @@ namespace Z0
     {        
         readonly IAppContext Context;
 
-        readonly IAppPaths Paths;
 
         readonly IWfContext Wf;
 
-        readonly WfState State;
-        
-        readonly WfSettings Config;
+        readonly WfState State;        
 
-        readonly IAsmContext Asm;
-
-        readonly ActorIdentity[] Known;
-
-        readonly string[] Args;
-        
-        readonly CorrelationToken Ct;        
+        readonly IAsmContext Asm;        
 
         WorkflowStepConfig StepConfig;
 
@@ -49,25 +40,22 @@ namespace Z0
             return new CaptureWorkflow(asm, wf, decoder, formatter, writer, archive, ct);
         }
 
-        public static Control create(IAppContext context, CorrelationToken ct, params string[] args)
+        public static Control create(IAppContext context, CorrelationToken ct, WfConfig config)
         {            
-            var wf = Flow.context(context, ct, settings(context, ct));
-            return new Control(context, ct, args);
+            return new Control(Flow.context(context, config, ct), config);
         }
 
-        public Control(IAppContext context, CorrelationToken ct, string[] args, params ActorIdentity[] known)
+        public Control(WfContext wf, WfConfig config)
         {
-            Context = context;
-            Args = args;
-            Ct = ct;
-            Paths = context.AppPaths;
-            Asm = WfBuilder.asm(context);                           
-            Config = settings(context, Ct);
-            Wf = Flow.context(context, Ct, Config);  
-            State = new WfState(Wf, Asm, args, Ct);
+            Wf = wf;
+            Context = wf.ContextRoot;
+            Asm = WfBuilder.asm(Context);                           
+            State = new WfState(Wf, Asm, config,Wf.Ct);
             StepConfig = WorkflowStepConfig.Load(Wf);
-            Known = known;
         }
+
+        CorrelationToken Ct 
+            => Wf.Ct;        
 
         public void Run()
         {
@@ -89,7 +77,6 @@ namespace Z0
             {             
                 var cwf = capture(Asm, Wf, Context.AppPaths.AppCaptureRoot, Ct);
                 var broker = WfBuilder.capture(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
-                var config = configure(Wf, Args);
                 using var host = new CaptureClient(State, Ct);
                 host.Run();
             }
@@ -102,7 +89,7 @@ namespace Z0
                 Wf.RunningT(WorkerName, kind, Ct);
                 try
                 {
-                    using var emission = new EmitDatasets(Wf, Ct, Args);
+                    using var emission = new EmitDatasets(Wf, Ct);
                     emission.Run();
                 }
                 catch(Exception e)

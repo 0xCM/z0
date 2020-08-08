@@ -47,7 +47,7 @@ namespace Z0
             var sink = termsink(Ct);
             var s = settings(Context, Ct);
             var config = new XedEtlConfig(Context, s);
-            using var context = Flow.context(Context, Ct, s);
+            using var context = Flow.context(Context, Flow.configure(Context, args, Ct),  Ct);
             using var wf = new XedEtl(context, config);
             wf.Run();                                        
         }

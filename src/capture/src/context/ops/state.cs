@@ -14,7 +14,7 @@ namespace Z0
     partial struct WfBuilder
     {
         [MethodImpl(Inline), Op]
-        public static WfState state(IWfContext wf, IAsmContext asm, string[] args)         
-            => new WfState(wf, asm, args, wf.Ct);
+        public static WfState state(IWfContext wf, IAsmContext asm, WfConfig config)         
+            => new WfState(wf, asm, config, wf.Ct);
     }
 }
