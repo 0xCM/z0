@@ -13,8 +13,4 @@
   
   </ItemGroup>  
 
-   <ItemGroup>
-    <EmbeddedResource Include="domain/asm/datadriven/data/**/*.csv" /> 
-  </ItemGroup>
-
 </Project>

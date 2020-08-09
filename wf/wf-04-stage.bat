@@ -10,10 +10,10 @@ copy %Src% /A %Dst% /Y
 
 set Src=%DevLib%
 set Dst=%StageLib%
-set Log="%WfLogRoot%\stage-lib.log"
+set Log="%EtlLogDir%\stage-lib.log"
 robocopy %Src% %Dst% /log:%Log% /tee /TS /BYTES /V /MIR 
 
 set Src=%DevObj%
 set Dst=%StageObj%
-set Log="%WfLogRoot%\stage-obj.log"
+set Log="%EtlLogDir%\stage-obj.log"
 robocopy %Src% %Dst% /log:%Log% /tee /TS /BYTES /V /MIR 

@@ -1,0 +1,55 @@
+# SystemStructs - https://docs.microsoft.com/en-us/dotnet/api/system?view=netcore-3.1
+------------------------------------------------------------------------------------------------------------------------------------------------
+| Name                                    | Description                                                                                                                                                 |
+| Arg Iterator                            | Represents a variable-length argument list; that is, the parameters of a function that takes a variable number of arguments.                                |
+| Array Segment<T>.Enumerator             | Provides an enumerator for the elements of an ArraySegment<T> .                                                                                             |
+| Array Segment<T>                        | Delimits a section of a one-dimensional array.                                                                                                              |
+| Boolean                                 | Represents a Boolean ( true or false ) value.                                                                                                               |
+| Byte                                    | Represents an 8-bit unsigned integer.                                                                                                                       |
+| Char                                    | Represents a character as a UTF-16 code unit.                                                                                                               |
+| Console Key Info                        | Describes the console key that was pressed, including the character represented by the console key and the state of the SHIFT, ALT, and CTRL modifier keys. |
+| Date Time                               | Represents an instant in time, typically expressed as a date and time of day.                                                                               |
+| Date Time Offset                        | Represents a point in time, typically expressed as a date and time of day, relative to Coordinated Universal Time (UTC).                                    |
+| Decimal                                 | Represents a decimal floating-point number.                                                                                                                 |
+| Double                                  | Represents a double-precision floating-point number.                                                                                                        |
+| GCMemory Info                           | Provides a set of APIs that can be used to retrieve garbage collection information.                                                                         |
+| Guid                                    | Represents a globally unique identifier (GUID).                                                                                                             |
+| Hash Code                               | Combines the hash code for multiple values into a single hash code.                                                                                         |
+| Index                                   | Represents a type that can be used to index a collection either from the start or the end.                                                                  |
+| Int16                                   | Represents a 16-bit signed integer.                                                                                                                         |
+| Int32                                   | Represents a 32-bit signed integer.                                                                                                                         |
+| Int64                                   | Represents a 64-bit signed integer.                                                                                                                         |
+| Int Ptr                                 | A platform-specific type that is used to represent a pointer or a handle.                                                                                   |
+| Memory<T>                               | Represents a contiguous region of memory.                                                                                                                   |
+| Module Handle                           | Represents a runtime handle for a module.                                                                                                                   |
+| Nullable<T>                             | Represents a value type that can be assigned null .                                                                                                         |
+| Range                                   | Represents a range that has start and end indexes.                                                                                                          |
+| Read Only Memory<T>                     | Represents a contiguous region of memory, similar to ReadOnlySpan<T> . Unlike ReadOnlySpan<T> , it is not a byref-like type.                                |
+| Read Only Span<T>.Enumerator            | Provides an enumerator for the elements of a ReadOnlySpan<T> .                                                                                              |
+| Read Only Span<T>                       | Provides a type-safe and memory-safe read-only representation of a contiguous region of arbitrary memory.                                                   |
+| Runtime Argument Handle                 | References a variable-length argument list.                                                                                                                 |
+| Runtime Field Handle                    | Represents a field using an internal metadata token.                                                                                                        |
+| Runtime Method Handle                   | RuntimeMethodHandle is a handle to the internal metadata representation of a method.                                                                        |
+| Runtime Type Handle                     | Represents a type using an internal metadata token.                                                                                                         |
+| SByte                                   | Represents an 8-bit signed integer.                                                                                                                         |
+| Sequence Position                       | Represents a position in a non-contiguous set of memory. Properties of this type should not be interpreted by anything but the type that created it.        |
+| Single                                  | Represents a single-precision floating-point number.                                                                                                        |
+| Span<T>.Enumerator                      | Provides an enumerator for the elements of a Span<T> .                                                                                                      |
+| Span<T>                                 | Provides a type- and memory-safe representation of a contiguous region of arbitrary memory.                                                                 |
+| Time Span                               | Represents a time interval.                                                                                                                                 |
+| Time Zone Info. Transition Time         | Provides information about a specific time change, such as the change from daylight saving time to standard time or vice versa, in a particular time zone.  |
+| Typed Reference                         | Describes objects that contain both a managed pointer to a location and a runtime representation of the type that may be stored at that location.           |
+| UInt16                                  | Represents a 16-bit unsigned integer.                                                                                                                       |
+| UInt32                                  | Represents a 32-bit unsigned integer.                                                                                                                       |
+| UInt64                                  | Represents a 64-bit unsigned integer.                                                                                                                       |
+| UInt Ptr                                | A platform-specific type that is used to represent a pointer or a handle.                                                                                   |
+| Value Tuple                             | Provides static methods for creating value tuples.                                                                                                          |
+| Value Tuple<T1>                         | Represents a value tuple with a single component.                                                                                                           |
+| Value Tuple<T1,T2>                      | Represents a value tuple with 2 components.                                                                                                                 |
+| Value Tuple<T1,T2,T3>                   | Represents a value tuple with 3 components.                                                                                                                 |
+| Value Tuple<T1,T2,T3,T4>                | Represents a value tuple with 4 components.                                                                                                                 |
+| Value Tuple<T1,T2,T3,T4,T5>             | Represents a value tuple with 5 components.                                                                                                                 |
+| Value Tuple<T1,T2,T3,T4,T5,T6>          | Represents a value tuple with 6 components.                                                                                                                 |
+| Value Tuple<T1,T2,T3,T4,T5,T6,T7>       | Represents a value tuple with 7 components.                                                                                                                 |
+| Value Tuple<T1,T2,T3,T4,T5,T6,T7,TRest> | Represents an n -value tuple, where n is 8 or greater.                                                                                                      |
+| Void                                    | Specifies a return value type for a method that does not return a value.                                                                                    |

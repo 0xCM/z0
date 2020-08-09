@@ -16,8 +16,5 @@
 
   </ItemGroup>  
 
-   <ItemGroup>
-    <EmbeddedResource Include="res/OpCodeSpecs.csv" LogicalName="OpCodeSpecs.csv" /> 
-  </ItemGroup>
 
 </Project>

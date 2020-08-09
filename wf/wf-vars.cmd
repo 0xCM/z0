@@ -19,3 +19,5 @@ set ToolDir="%Assets%\tools\exe"
 set LibDir="%Assets%\tools\lib"
 set IncDir="%Assets%\tools\specs\headers"
 
+set EtlLogDir="%Stage%\etl"
+

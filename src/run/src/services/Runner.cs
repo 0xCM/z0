@@ -38,6 +38,8 @@ namespace Z0
             CalcDemo.run(Buffer, ref offset);
             for(var i=pos; i<offset; i++)
                 term.print(Buffer[i]);
+
+            
         }
         
 
@@ -50,6 +52,8 @@ namespace Z0
         {
             using var step = new ListFormatPatterns(Wf, typeof(FormatAtoms));
             step.Run();
+
+            term.print(TableIndex.AsmTAddressingModRm32);            
         }
     }
 }

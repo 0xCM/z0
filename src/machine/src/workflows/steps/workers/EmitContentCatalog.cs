@@ -36,17 +36,16 @@ namespace Z0
 
         public void Run()
         {
+            var provider = TableProvider.create();
             Wf.Emitting(WorkerName, DatasetName, TargetPath, Ct);
-            var entries = z.span(Tables.Catalog.Array());
+            var entries = z.span(provider.Provided.Array());
             EmissionCount = (uint)entries.Length;
 
             var f = formatter<ContentLibField>();
             for(var i=0u; i<EmissionCount; i++)
             {
                 ref readonly var entry = ref z.skip(entries, i);
-                f.Append(F.Kind, entry.Kind);
-                f.Delimit(F.Structure, entry.Structure);
-                f.Delimit(F.Size, entry.Size);
+                f.Append(F.Type, entry.Type);
                 f.Delimit(F.Name, entry.Name);
                 f.EmitEol();
             }

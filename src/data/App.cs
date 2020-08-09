@@ -30,26 +30,9 @@ namespace Z0
         
         void RunApp(params PartId[] src)
         {            
-            InstrinsicsEmitter.create(Context).Emit();            
-            term.print(text.concat("ContentForm".PadRight(20), SpacePipe, "Kind".PadRight(12), SpacePipe,  "Name".PadRight(60), SpacePipe, "Count"));
-            z.iter(Tables.Content, Describe);       
-            z.iter(Tables.Structured, Describe);     
-        }
-
-        void Describe(Paired<StructureKind,AppResourceDoc> src)
-        {
-            (var k, var doc) = src;
-            var info = new ContentLibEntry((ContentKind)k, k, (uint)doc.RowCount, doc.Name);
-            term.print(info.Format());
 
         }
 
-        void Describe(Paired<ContentKind,AppResource> src)
-        {
-            (var k, var doc) = src;
-            var info = new ContentLibEntry(k, StructureKind.None, (uint)doc.Content.Length, doc.Name);
-            term.print(info.Format());
-        }
 
         public override void RunShell(params string[] args)
         {            

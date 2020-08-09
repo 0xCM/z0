@@ -62,8 +62,8 @@ namespace Z0
             Wf.Running(WorkerName, Ct);
             Run(default(CaptureClientStep));
             Run(default(EmitDatasetsStep));
-            //Run(default(ProcessPartFilesStep));
-            //Run(default(RunProcessorsStep));
+            Run(default(ProcessPartFilesStep));
+            Run(default(RunProcessorsStep));
         }
 
         public void Dispose()

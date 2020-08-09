@@ -1,0 +1,59 @@
+Microsoft (R) .NET Resource Generator 
+[Microsoft .Net Framework, Version 4.8.3928.0]
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+Usage:
+   ResGen inputFile.ext [outputFile.ext] [/str:lang[,namespace[,class[,file]]]]
+   ResGen [options] /compile inputFile1.ext[,outputFile1.resources] [...]
+   ResGen inputFile.ext2 [outputDirectory]
+Where .ext is .resX, .restext, .txt or .resources
+and .ext2 is .resources.dll, .dll or .exe. outputDirectory must already exist.
+Resources will be extracted under outputDirectory in resW format.
+
+Converts files from one resource format to another.  If the output
+filename is not specified, inputFile.resources will be used.
+Options:
+/compile        Converts a list of resource files from one format to another
+                in one bulk operation.  By default, it converts into .resources
+                files, using inputFile[i].resources for the output file name.
+/str:<language>[,<namespace>[,<class name>[,<file name>]]]] 
+                Creates a strongly-typed resource class in the specified
+                programming language using CodeDOM. In order for the strongly
+                typed resource class to work properly, the name of your output 
+                file without the .resources must match the
+                [namespace.]classname of your strongly typed resource class.
+                You may need to rename your output file before using it or
+                embedding it into an assembly. 
+/useSourcePath  Use each source file's directory as the current directory
+                for resolving relative file paths.
+/publicClass    Create the strongly typed resource class as a public class.
+                This option is ignored if the /str: option is not used.
+/r:<assembly>   Load types from these assemblies. A ResX file with a previous
+                version of a type will use the one in this assembly, when set.
+/define:A[,B]   For #ifdef support in .ResText files, pass a comma-separated
+                list of symbols.  ResText files can use "#ifdef A" or "#if !B".
+/allowUntrustedFiles
+                Process files that are in the Internet or Restricted zone or
+                have the mark of the web on the file.
+
+Miscellaneous:
+@<file>         Read response file for more options. At most one response file
+                may be specified, and its entries must be line-separated.
+
+.restext & .txt files have this format:
+
+    # Use # at the beginning of a line for a comment character.
+    name=value
+    more elaborate name=value
+
+Example response file contents: 
+
+    # Use # at the beginning of a line for a comment character.
+    /useSourcePath
+    /compile
+    file1.resx,file1.resources
+    file2.resx,file2.resources
+
+
+Language names valid for the /str:<language> option are:
+c#, cs, csharp, vb, vbs, visualbasic, vbscript, js, jscript, javascript, c++, mc, cpp

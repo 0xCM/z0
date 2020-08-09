@@ -6008,3 +6008,31 @@
  create mode 100644 src/tools/src/models/ToolConfig.cs
  create mode 100644 src/tools/src/models/ToolConfigTF.cs
  create mode 100644 src/tools/src/services/ToolRunner.cs
+[master b664150f2] .
+ 63 files changed, 4030 insertions(+), 367 deletions(-)
+ delete mode 100644 src/asmd/encoding/literals/PrefixKind.cs
+ delete mode 100644 src/asmd/encoding/ops/isrex.cs
+ rename src/asmd/{encoding => res/instructions}/OpCodeModels.cs (100%)
+ rename src/{asmd/encoding => data/services}/AsmFieldParser.cs (99%)
+ rename src/{asmd/encoding => data/services}/AsmFileParser.cs (98%)
+ rename src/{asmd/encoding => data/services}/AsmHeaderParser.cs (97%)
+ rename src/{asmd/encoding => data/services}/AsmParsers.cs (71%)
+ rename src/{asmd/encoding => data/services}/AsmStatementParser.cs (100%)
+ rename src/{asmd/encoding => data/services}/CommandInfoParser.cs (97%)
+ rename src/{asmd/encoding => data/services}/CommandParser.cs (90%)
+ rename src/{domain/src => data}/services/Tables.cs (84%)
+ rename src/{asmd/encoding => domain/src/asm/common}/EncodedCommand.cs (60%)
+ rename src/{asmd/encoding => domain/src/asm/common}/IAsmCommand.cs (88%)
+ rename src/{asmd/encoding => domain/src/asm/expressions}/AsmCommand.cs (100%)
+ rename src/{asmd/encoding => domain/src/asm}/literals/SegOverrideCode.cs (100%)
+ rename src/{asmd/encoding => domain/src/asm/models}/OpCodeModel.cs (100%)
+ rename src/domain/src/asm/{render/ops/MemDx.cs => ops/render.cs} (78%)
+ delete mode 100644 src/domain/src/asm/render/ops/FarCallCounts.cs
+ rename src/{domain/src/asm/render/ops/ImmInfo.cs => flow/src/services/ops/context.cs} (66%)
+ create mode 100644 src/tables/data/asmt/Intrinsics.x64.csv
+ create mode 100644 src/tables/data/asmt/Intrinsics.x86.csv
+ create mode 100644 src/tables/data/syn/ml64.bnf
+ create mode 100644 test/gvec/pub.sh
+ rewrite wf/dumpbin/clean.bat (93%)
+ create mode 100644 wf/unpub.bat
+ rename wf/{wf-archive.bat => wf-05-archive.bat} (75%)
