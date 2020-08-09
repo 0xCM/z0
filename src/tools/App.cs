@@ -26,7 +26,7 @@ namespace Z0
         public App()
             : base(Flow.app())
         {
-            Ct = CorrelationToken.define((byte)Part);   
+            Ct = CorrelationToken.define(Part);   
             Raise(status(ActorName, "Application created", Ct));        
         }
 
@@ -38,8 +38,6 @@ namespace Z0
             var listed = ListedFiles.from(files);
             var formatted = ListedFiles.format(listed);
             
-            // term.print(tool.Flags);
-            // term.print(formatted);
 
             using var processor = tool.processor(default(AsmFileKind));
             for(var i=0u; i <files.Count; i++)

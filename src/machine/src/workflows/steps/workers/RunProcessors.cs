@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Collections.Generic;
 
     using Z0.Asm;
 
@@ -50,7 +51,10 @@ namespace Z0
             Ct = ct;
             TargetDir = Wf.AppPaths.AppDataRoot + FolderName.Define(Name);
             Files = PartFiles.create(Asm);            
+            Buffer = list<Instruction>(2000);
         }
+
+        readonly List<Instruction> Buffer;        
 
         IWfContext Wf
             => State.Wf;
@@ -95,7 +99,6 @@ namespace Z0
         {
             Sink.Deposit(e);
 
-            Wf.Status(Name, $"Handling {e.EventId}", Ct);
             try
             {
                 var index = LocatedInstructions.create(e.Instructions.ToArray());
@@ -106,14 +109,11 @@ namespace Z0
             {
                 Wf.Error(error, Ct);
             }            
-            Wf.Status(Name, $"Handling {e.EventId}", Ct);
         }
 
         public void OnEvent(DecodedPart e)
         {
             Sink.Deposit(e);
-
-            Wf.Status(Name, $"Handling {e.EventId}", Ct);
             try
             {
                 Wf.Status(Name, "Processing instructions", Ct);
@@ -125,8 +125,6 @@ namespace Z0
             {
                 Wf.Error(error,Ct);
             }
-
-            Wf.Status(Name, $"Handling {e.EventId}", Ct);
         }
 
         void DecodeParts(EncodedParts src)
@@ -171,35 +169,32 @@ namespace Z0
             return inxs;                        
         }
 
-        HostInstructions Decode(EncodedMembers hcs)
-        {
-            Wf.Running(Name, "Decode", Ct);
 
-            var inxs = Root.list<MemberInstructions>();    
-            
-            var dst = Root.list<Instruction>();
-            void OnDecoded(Instruction inxs)
-                => dst.Add(inxs);
-            
-            var hostaddr = MemoryAddress.Empty;
+        void OnDecoded(Instruction src)
+        {
+            Buffer.Add(src);
+        }
+        
+        HostInstructions Decode(EncodedMembers hcs)
+        {        
+            var instructions = Root.list<MemberInstructions>();                            
+            var ip = MemoryAddress.Empty;
             var decoder = Asm.FunctionDecoder;        
 
             for(var i=0; i<hcs.Length; i++)
             {
-                dst.Clear();
+                Buffer.Clear();
                 ref readonly var uriCode = ref hcs[i];
                 decoder.Decode(uriCode, OnDecoded);
                 
                 if(i == 0)
-                    hostaddr = dst[0].IP;
+                    ip = Buffer[0].IP;
 
-                var member = MemberInstructions.Create(hostaddr, uriCode, dst.ToArray());
-                inxs.Add(member);
+                var member = MemberInstructions.Create(ip, uriCode, Buffer.ToArray());
+                instructions.Add(member);
             }
 
-            Wf.Ran(Name, "Decode", Ct);
-
-            return HostInstructions.Create(hcs.Host, inxs.ToArray());
+            return HostInstructions.Create(hcs.Host, instructions.ToArray());
         }
 
         void RandomProcessor()

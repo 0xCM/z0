@@ -45,7 +45,7 @@ namespace Z0
             => ParsedDirPath(root) + FileName.Define(host.Name, Parsed);
 
         FilePath[] AsmFilePaths(FolderPath root)
-            => AsmDirPath(root) .Files(Asm);  
+            => AsmDirPath(root).Files(Asm);  
 
         FilePath[] HexFilePaths(FolderPath root) 
             => HexDirPath(root).Files(Hex);     

@@ -19,11 +19,13 @@ namespace Z0
     {        
         public static void run(IAppContext context, params string[] args)
         {
-            var ct = CorrelationToken.define(1);
-            var config = Flow.configure(context, args, ct);
+            var ct = CorrelationToken.define(PartId.Machine);
+            var config = Flow.configure(context, args, ct);            
             using var wf = Flow.context(context, config, ct);
+            wf.RunningT(nameof(Control), Flow.delimit(config.Parts), ct);
             using var control = new Control(wf);
             control.Run();
+            wf.Ran(nameof(Control), ct);
         }
 
         readonly IAppContext Context;
@@ -36,32 +38,21 @@ namespace Z0
 
         WorkflowStepConfig StepConfig;
 
-        static ICaptureWorkflow capture(IAsmContext asm, IWfContext wf, FolderPath target, CorrelationToken ct)
-        {
-            var services = CaptureServices.create(asm);
-            var spec = AsmFormatSpec.DefaultStreamFormat;
-            var formatter = services.Formatter(spec);
-            var decoder = services.FunctionDecoder(spec);
-            var writer = Capture.Services.AsmWriterFactory;
-            var archive = services.CaptureArchive(target);
-            return new CaptureWorkflow(asm, wf, decoder, formatter, writer, archive, ct);
-        }
+        readonly CorrelationToken Ct;
 
-        public Control(WfContext wf)
+        public Control(IWfContext wf)
         {
             Wf = wf;
+            Ct = CorrelationToken.define(PartId.Machine);
             Context = wf.ContextRoot;
             Asm = WfBuilder.asm(Context);                           
             State = new WfState(Wf, Asm, wf.Config, wf.Ct);
             StepConfig = WorkflowStepConfig.Load(Wf);
         }
-
-        CorrelationToken Ct 
-            => Wf.Ct;        
-
+            
         public void Run()
         {
-            Wf.Running(WorkerName, Ct);
+            Wf.Running(Actor, Ct);
             Run(default(CaptureClientStep));
             Run(default(EmitDatasetsStep));
             Run(default(ProcessPartFilesStep));
@@ -73,12 +64,10 @@ namespace Z0
             Wf.Finished(WorkerName, Ct);
         }
 
-        void Run(CaptureClientStep kind)
+        void Run(CaptureClientStep kind, params string[] args)
         {
-            var cwf = capture(Asm, Wf, Context.AppPaths.AppCaptureRoot, Ct);
-            var broker = WfBuilder.capture(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
-            using var host = new CaptureClient(State, Ct);
-            host.Run();
+            using var control = CaptureController.create(Context, args, Ct);
+            control.Run();                        
         }
         
         void Run(EmitDatasetsStep kind)

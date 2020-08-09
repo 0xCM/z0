@@ -22,7 +22,7 @@ namespace Z0
         public App()
             : base(WfBuilder.app())
         {
-            Ct = CorrelationToken.define((byte)Part);   
+            Ct = CorrelationToken.define(Part);   
             Raise(Flow.created(Ct, ActorName));
         }
         
@@ -31,7 +31,7 @@ namespace Z0
             try
             {
                 var config = Flow.configure(Context, args, Ct);
-                using var control = CaptureController.create(Context, Ct, config);
+                using var control = CaptureController.create(Context, config, Ct);
                 control.Run();
             }
             catch(Exception e)

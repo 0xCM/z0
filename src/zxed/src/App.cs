@@ -16,6 +16,8 @@ namespace Z0
     
     class App : AppShell<App,IAppContext>
     {                
+        public readonly PartId Part = PartId.ZXed;
+
         static IAppContext CreateAppContext()
         {
             var resolved = ApiComposition.Assemble(array(P.GMath.Resolved));
@@ -30,7 +32,7 @@ namespace Z0
         public App()
             : base(CreateAppContext())
         {
-            Ct = correlate(1);
+            Ct = CorrelationToken.define(Part);
         }
 
         void Parse(FilePath src)

@@ -39,7 +39,7 @@ namespace Z0
         public App()
             : base(CreateAppContext())
         {
-            Ct = CorrelationToken.define((byte)Part);   
+            Ct = CorrelationToken.define(Part);   
             Raise(status(ActorName, "Application created", Ct));        
         }
 

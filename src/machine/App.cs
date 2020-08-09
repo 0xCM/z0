@@ -35,10 +35,7 @@ namespace Z0
         }
         
         public override void RunShell(params string[] args)
-        {            
-            var config = Flow.configure(Context, args, Ct);        
-            Control.run(Context,args);
-        }
+            => Control.run(Context,args);
 
         public static void Main(params string[] args)
             => Launch(args);

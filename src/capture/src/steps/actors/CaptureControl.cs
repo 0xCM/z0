@@ -10,57 +10,55 @@ namespace Z0
     using Z0.Asm;
     
     using static Konst;
-    using static Flow;
     using static CaptureController;
 
     using static z;
     
     public readonly ref struct CaptureControl
-    {        
+    {                
         readonly IAppContext ContextRoot;
 
         readonly IAsmContext Asm;
         
-        readonly CorrelationToken Ct;
+        readonly CorrelationToken Ct;        
         
-        
-        readonly IWfContext WfContext;        
+        readonly IWfContext Wf;        
 
         readonly IAppPaths Paths;
 
-        public WfState Wf {get;}
+        public WfState State {get;}
 
-        public CaptureControl(IAppContext context, CorrelationToken ct, WfConfig config)
+        public CaptureControl(WfState state)
         {
-            ContextRoot = context;
-            Ct = ct;
-            Paths = context.AppPaths;
-            Asm = WfBuilder.asm(context);                           
-            WfContext = Flow.context(context, config, Ct);                        
-            Wf = new WfState(WfContext, Asm, config, Ct);
-            Wf.Created(ActorName, Ct);
+            State = state;
+            ContextRoot = state.ContextRoot;
+            Ct = state.Ct;
+            Paths = ContextRoot.AppPaths;
+            Asm = WfBuilder.asm(ContextRoot);                           
+            Wf = Flow.context(ContextRoot, state.Config, Ct);    
+            State.Created(ActorName, Ct);
         }
 
         public void Run()
         {
-            Wf.Running(ActorName, Ct);
+            State.Running(ActorName, Ct);
 
             try
             {
-                using var host = new CaptureClient(Wf, Ct);
+                using var host = new CaptureClient(State, Ct);
                 host.Run();
             }
             catch(Exception e)
             {
-                Wf.Error(ActorName, e, Ct);
+                State.Error(ActorName, e, Ct);
             }
 
-            Wf.Ran(ActorName, Ct);
+            State.Ran(ActorName, Ct);
         }
 
         public void Dispose()
         {
-            WfContext.Finished(ActorName, Ct);
+            Wf.Finished(ActorName, Ct);
         }
     }
 }

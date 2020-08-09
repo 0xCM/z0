@@ -21,8 +21,8 @@ namespace Z0
             => new CorrelationToken(value);
 
         [MethodImpl(Inline)]
-        public static CorrelationToken define<T>(T value)
-            => new CorrelationToken(z.convert<T,ulong>(value));
+        public static CorrelationToken define(PartId part)
+            => new CorrelationToken((ulong)part);
 
         [MethodImpl(Inline)]
         public static CorrelationToken create()

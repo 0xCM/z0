@@ -37,9 +37,9 @@ namespace Z0
         KnownParts Parts
             => KnownParts.Service;
 
-        public EmitFieldLiterals(IWfContext context, CorrelationToken? ct = null)
+        public EmitFieldLiterals(IWfContext context, CorrelationToken ct)
         {
-            Ct = correlate(ct);
+            Ct = ct;
             Wf = context;
             Wf.Created(WorkerName, Ct);
         }

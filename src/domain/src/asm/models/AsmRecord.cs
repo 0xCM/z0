@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         public MemoryAddress Address;
 
-        public Address32 GlobalOfset;
+        public Address32 GlobalOffset;
 
         public Address16 LocalOffset;
 
@@ -55,7 +55,7 @@ namespace Z0.Asm
         {
             this.Sequence = Sequence;
             this.Address = Address;
-            this.GlobalOfset = GlobalOffset;
+            this.GlobalOffset = GlobalOffset;
             this.LocalOffset = LocalOffset;
             this.Mnemonic = Mnemonic;
             this.OpCode = OpCode;
@@ -83,7 +83,7 @@ namespace Z0.Asm
             var formatter = Tabular.Formatter<F>(delimiter);
             formatter.Delimit(F.Sequence, Sequence);
             formatter.Delimit(F.Address, Address);
-            formatter.Delimit(F.GlobalOffset, GlobalOfset);
+            formatter.Delimit(F.GlobalOffset, GlobalOffset);
             formatter.Delimit(F.LocalOffset, LocalOffset);
             formatter.Delimit(F.Mnemonic, Mnemonic);
             formatter.Delimit(F.OpCode, OpCode);

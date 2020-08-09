@@ -21,6 +21,8 @@ namespace Z0
     {
         IAppContext ContextRoot {get;}
         
+        WfConfig Config {get;}
+        
         WfBroker Broker {get;}
                 
         IMultiSink WfSink {get;}                
@@ -151,6 +153,11 @@ namespace Z0
         void Running(string worker, CorrelationToken ct)
         {
             Raise(new WfStepRunning(worker, ct));
+        }
+
+        void Running(WfActor actor, CorrelationToken ct)
+        {
+            Raise(new WfStepRunning(actor, ct));
         }
 
         void Status(string worker, string msg, CorrelationToken ct)

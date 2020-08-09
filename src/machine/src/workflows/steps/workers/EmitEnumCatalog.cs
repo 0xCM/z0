@@ -23,10 +23,10 @@ namespace Z0
         readonly FilePath TargetPath;
         
         [MethodImpl(Inline)]
-        public EmitEnumCatalog(IWfContext context, CorrelationToken? ct = null)
+        public EmitEnumCatalog(IWfContext context, CorrelationToken ct)
         {
             Wf = context;
-            Ct = correlate(ct);
+            Ct = ct;
             TargetPath = Wf.IndexRoot + FileName.Define("enums",FileExtensions.Csv);
             Wf.Created(WorkerName, Ct);    
         }

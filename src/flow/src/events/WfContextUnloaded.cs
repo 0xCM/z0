@@ -32,6 +32,6 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, Actor);        
+            => format(EventId, Actor);        
     }
 }

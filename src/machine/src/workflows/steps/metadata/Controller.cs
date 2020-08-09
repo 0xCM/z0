@@ -7,5 +7,7 @@ namespace Z0
     public readonly struct Controller
     {
         public const string WorkerName = nameof(Control);
+
+        public static WfActor Actor => z.actor(nameof(Control));
     }    
 }

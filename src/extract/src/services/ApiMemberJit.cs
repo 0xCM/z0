@@ -159,7 +159,7 @@ namespace Z0
             foreach(var host in src)
             {
                 var methods = DirectMethods(host);
-                broker.Deposit(new MethodsPrepared(z.actor(), host.Uri, methods.Length, CorrelationToken.define(0)));
+                broker.Deposit(new MethodsPrepared(z.actor(), host.Uri, methods.Length, CorrelationToken.define(PartId.None)));
                 dst.AddRange(methods);
             }
             return dst.ToArray();
@@ -171,7 +171,7 @@ namespace Z0
             foreach(var host in src)
             {
                 var methods = GenericMethods(host);
-                broker.Deposit(new MethodsPrepared(z.actor(), host.Uri, methods.Length, CorrelationToken.define(0)));
+                broker.Deposit(new MethodsPrepared(z.actor(), host.Uri, methods.Length, CorrelationToken.define(PartId.None)));
                 dst.AddRange(methods);
             }
             return dst.ToArray();

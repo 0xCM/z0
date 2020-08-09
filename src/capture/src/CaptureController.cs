@@ -7,14 +7,31 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Asm;
     using static Konst;
 
     public readonly struct CaptureController
     {
         public const string ActorName = nameof(CaptureControl);        
 
+        public static WfActor Actor => z.actor(ActorName);
+        
+        static WfState state(IAppContext context, WfConfig config, CorrelationToken ct)
+        {           
+            var Paths = context.AppPaths;
+            var Asm = WfBuilder.asm(context);                           
+            var WfContext = Flow.context(context, config, ct);                        
+            return new WfState(WfContext, Asm, config, ct);
+        }
+
         [MethodImpl(Inline)]
-        public static CaptureControl create(IAppContext root, CorrelationToken ct, WfConfig config)
-            => new CaptureControl(root, ct, config);
+        public static CaptureControl create(IAppContext root, WfConfig config, CorrelationToken ct)
+            => new CaptureControl(state(root, config, ct));
+
+
+        [MethodImpl(Inline)]
+        public static CaptureControl create(IAppContext root, string[] args, CorrelationToken ct)
+            => CaptureController.create(root, Flow.configure(root, args, ct), ct);
+
     }
 }
