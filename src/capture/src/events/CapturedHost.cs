@@ -20,7 +20,7 @@ namespace Z0.Asm
         public readonly ApiHostUri Host;
 
         [MethodImpl(Inline)]
-        public CapturedHost(ApiHostUri host, CorrelationToken? ct = null, [CallerMemberName] string actor = null)
+        public CapturedHost(ApiHostUri host, CorrelationToken ct, [CallerMemberName] string actor = null)
         {
             Host = host;
             EventId = WfEventId.define(EventName, ct);

@@ -12,11 +12,7 @@ namespace Z0
     partial struct Flow    
     {
         [MethodImpl(Inline), Op]
-        public static WfEventId wfid(string name, CorrelationToken? ct = null, Timestamp? ts = null)
-            => new WfEventId(name, ct ?? CorrelationToken.create(), ts ?? z.now());       
-
-        [MethodImpl(Inline), Op]
-        public static WfEventId wfid(string name, CorrelationToken ct)
+        public static WfEventId evid(string name, CorrelationToken ct)
             => new WfEventId(name, ct, z.now());       
     }
 }

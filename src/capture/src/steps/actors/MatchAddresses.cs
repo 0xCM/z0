@@ -19,12 +19,9 @@ namespace Z0.Asm
 
         readonly AsmFunction[] Decoded;
 
-        readonly ApiHostUri Host;
-
-        public MatchAddresses(WfState wf, ApiHostUri host, ExtractedCode[] extracted, AsmFunction[] decoded, CorrelationToken ct)
+        public MatchAddresses(WfState wf, ExtractedCode[] extracted, AsmFunction[] decoded, CorrelationToken ct)
         {
             Wf = wf;
-            Host = host;
             Extracted = extracted;
             Decoded = decoded;
             Ct = ct;
@@ -36,13 +33,17 @@ namespace Z0.Asm
             try
             {
                 var a = Extracted.Select(x => x.Address).ToHashSet();
-                Demands.insist(a.Count, Extracted.Length);
+                if(a.Count != Extracted.Length)
+                    Wf.Error(WorkerName, $"count(Extracted) = {Extracted.Length} != {a.Count} = count(set(Extracted))", Ct);
 
                 var b = Decoded.Select(f => f.BaseAddress).ToHashSet();
-                Demands.insist(b.Count, Decoded.Length);
+                if(b.Count != Decoded.Length)
+                    Wf.Error(WorkerName, $"count(Decoded) = {Decoded.Length} != {b.Count} = count(set(Decoded))", Ct);
                 
                 b.IntersectWith(a);
-                Demands.insist(b.Count, Decoded.Length);                
+                if(b.Count != Decoded.Length)
+                    Wf.Error(WorkerName, $"count(Decoded) = {Decoded.Length} != {b.Count} = count(intersect(Decoded,Extracted))", Ct);
+                               
             }
             catch(Exception e)
             {

@@ -25,7 +25,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public EmittedParseReport(string actor, MemberParseReport report, FilePath dst, CorrelationToken ct)
         {
-            EventId = wfid(EventName, ct);        
+            EventId = evid(EventName, ct);        
             ActorName = actor;
             Report = report;
             Target = dst;        

@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfWarn(string actor, T body, CorrelationToken ct)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             Body = body;
             ActorName = actor;
             Flair = AppMsgColor.Yellow;

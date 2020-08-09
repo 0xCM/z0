@@ -27,7 +27,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public ExtractsParsed(string actor, ApiHostUri host, ParsedExtraction[] members, CorrelationToken ct)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             ActorName = actor;
             Host = host;
             Members = members;

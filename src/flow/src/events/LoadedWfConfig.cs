@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static z;
     
     [Event]
     public readonly struct LoadedWfConfig : IWfEvent<LoadedWfConfig>
@@ -21,22 +22,22 @@ namespace Z0
         
         public AppMsgColor Flair {get;}
         
-        public readonly FilePath ConfigPath;
+        public readonly FilePath SourcePath;
 
-        public readonly WfSettings ConfigData;
+        public readonly WfSettings Settings;
 
         [MethodImpl(Inline)]
         public LoadedWfConfig(string actor, FilePath src, WfSettings data, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
         {
-            EventId = wfid(EventName, ct);
+            EventId = z.evid(EventName, ct);
             ActorName = actor;
             Flair = flair;
-            ConfigPath = src;
-            ConfigData = data;            
+            SourcePath = src;
+            Settings = data;            
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx4, EventId, ActorName, ConfigPath, ConfigData);
+            => text.format(PSx4, EventId, ActorName, SourcePath, Settings);
     }
 }

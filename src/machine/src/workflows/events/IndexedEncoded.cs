@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public IndexedEncoded(string worker, EncodedParts index, CorrelationToken ct)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             Index = index;
             ActorName = worker;
         }

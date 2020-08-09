@@ -60,7 +60,7 @@ namespace Z0.Asm
             try
             {
                 var members = ApiMemberJit.jit(hosts, Wf.WfEventSink);
-                Wf.Raise(new JittedMembers(hosts, members));
+                Wf.Raise(new PreparedConsolidated(nameof(ExtractMembers), hosts, members, Ct));
                 return Extractor.Extract(members);
             }
             catch(Exception e)

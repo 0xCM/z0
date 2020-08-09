@@ -9,31 +9,28 @@ namespace Z0.Asm
 
     using static Konst;
     using static Flow;
+    using static z;
 
     public readonly struct CapturingHosts : IWfEvent<CapturingHosts>
-    {              
-        const string Pattern = IdMarker + "Capturing data for {1} api hosts";
-        
+    {                      
         public const string EventName = nameof(CapturingHosts);
         
         public WfEventId EventId {get;}
 
         public readonly IApiHost[] Hosts;
 
-        public CorrelationToken Ct {get;}
+        public readonly CellCount HostCount;        
 
         [MethodImpl(Inline)]
-        public CapturingHosts(IApiHost[] hosts, CorrelationToken? ct = null)
+        public CapturingHosts(IApiHost[] hosts, CorrelationToken ct)
         {
-            Ct = correlate(ct);
-            EventId = wfid(nameof(CapturingHosts), Ct);
+            EventId = z.evid(nameof(Asm.CapturingHosts), ct);
             Hosts = hosts;
+            HostCount = hosts.Length;
         }
-
-        public readonly int HostCount
-            => Hosts.Length;
         
+        [MethodImpl(Inline)]
         public string Format() 
-            => text.format(Pattern, EventId, HostCount);
+            => Flow.format(EventId, HostCount, delimit(Hosts));
     }    
 }

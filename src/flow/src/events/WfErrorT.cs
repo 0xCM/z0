@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfError(string actor, T body, CorrelationToken ct, AppMsgSource source)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             ActorName = actor;
             Body = body;
             Flair =  AppMsgColor.Red;

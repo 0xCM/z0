@@ -25,7 +25,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public CountedInstructions(string worker, ApiHostUri host, uint count, CorrelationToken ct)
         {
-            EventId = wfid(nameof(CountedInstructions), ct);
+            EventId = evid(nameof(CountedInstructions), ct);
             ActorName = worker;
             Count = count;
             Host = host;

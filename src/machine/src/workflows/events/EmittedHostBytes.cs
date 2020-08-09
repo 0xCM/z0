@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittedHostBytes(string worker, ApiHostUri host, ushort count, CorrelationToken ct)
         {
-            EventId = wfid(nameof(EmittedHostBytes), ct);
+            EventId = evid(nameof(EmittedHostBytes), ct);
             Host= host;
             ActorName = worker;
             AccessorCount = count;

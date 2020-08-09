@@ -16,9 +16,7 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     public struct WfContext : IWfContext
-    {        
-        public const string ActorName = nameof(WfContext);
-        
+    {                
         public IAppContext ContextRoot {get;}        
 
         public CorrelationToken Ct {get;}
@@ -33,24 +31,25 @@ namespace Z0
         
         public FolderPath ResourceRoot {get;}
         
+        readonly WfActor Actor;
+
         [MethodImpl(Inline)]
-        public WfContext(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink)
+        public WfContext(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink, [Caller] string caller = null)
         {
             Ct = ct;
             ContextRoot = root;
             Config = config;
             WfSink = sink;
-            
+            Actor = z.actor(caller);
             ResourceRoot = ContextRoot.AppPaths.ResourceRoot;
             IndexRoot =  ResourceRoot + FolderName.Define("index");
-            var logPath = root.AppPaths.AppDataRoot + FileName.Define("workflow", FileExtensions.Csv);
             Broker = new WfBroker(Ct);
-            WfSink.Deposit(new OpeningWfContext(ActorName, typeof(WfContext), Ct));
+            WfSink.Deposit(new WfContextLoaded(Actor, Ct));
         }
 
         public void Dispose()
         {
-            WfSink.Deposit(new ClosingWfContext(ActorName, typeof(WfContext), Ct));
+            WfSink.Deposit(new WfContextUnloaded(Actor, Ct));
             WfSink.Dispose();
             Broker.Dispose();
         }

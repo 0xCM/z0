@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
 
+
     public readonly struct WfConfig
     {    
         public readonly string[] Args;
@@ -22,7 +23,7 @@ namespace Z0
 
         public readonly WfSettings Settings;
 
-        public readonly FolderPath ResRoot;
+        public readonly FolderPath ResourceStage;
         
         public readonly FolderPath AppData;
 
@@ -37,11 +38,13 @@ namespace Z0
             Source = src;
             Target = dst;
             Parts = parts;
-            ResRoot = resroot;
+            ResourceStage = resroot;
             AppData = appdata;
             Settings = settings;
             LogPath = AppData + FileName.Define("workflow", FileExtensions.Csv);
-            IndexRoot = ResRoot + FolderName.Define("index");
+            IndexRoot = ResourceStage + FolderName.Define("index");
         }    
+
+
     }
 }

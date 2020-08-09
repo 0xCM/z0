@@ -28,7 +28,7 @@ namespace Z0
         public WfStepRan(string worker, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {
             StepId = default;
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             ActorName = worker;
             Flair = flair;        
         }
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStepRan(WfStepId step, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             ActorName = step.Name;
             Flair = flair;    
             StepId = step;    

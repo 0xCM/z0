@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStepRunning(string actor, T body, CorrelationToken ct, AppMsgColor flair = RunningFlair)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             ActorName = actor;
             Body = body;
             Flair = flair;         

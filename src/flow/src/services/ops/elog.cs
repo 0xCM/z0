@@ -11,8 +11,9 @@ namespace Z0
     using static Konst;
 
     partial struct Flow    
-    {
-        public static WfEventLog elog(IAppContext context, CorrelationToken ct)
+    {        
+        [MethodImpl(Inline), Op]
+        public static WfEventLog log(IAppContext context, CorrelationToken ct)
         {
             return new WfEventLog(
                     context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".stdout2", FileExtensions.Csv), 

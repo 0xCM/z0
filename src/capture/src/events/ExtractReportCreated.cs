@@ -42,7 +42,7 @@ namespace Z0.Asm
             RecordCount = (uint)report.RecordCount;
             ReportName = report.ReportName;
             Flair = flair;
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             Description = new {RecordCount, ReportName};
         }
         

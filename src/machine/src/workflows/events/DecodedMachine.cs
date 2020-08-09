@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public DecodedMachine(EncodedParts index, PartInstructions[] inxs, CorrelationToken ct)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             Index = index;
             PartInstructions = inxs;
         }

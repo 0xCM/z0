@@ -34,7 +34,7 @@ namespace Z0.Asm
             Ct = ct;
             RecordCount = (uint)report.RecordCount;
             Flair = flair;
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
         }
  
         public string Format()

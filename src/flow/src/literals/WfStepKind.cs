@@ -66,7 +66,7 @@ namespace Z0
 
         DecodeParsed,
 
-        CaptureHostApi,
+        CaptureHostMembers,
 
         RunProcessors,
 

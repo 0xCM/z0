@@ -75,7 +75,7 @@ namespace Z0
 
         void Created([File] string src = null)
         {   
-            Raise(new WorkerCreated(ToActorName(src), Ct));            
+            Raise(Flow.created(Ct, src));
         }
 
         void Created(WfStepId step)
@@ -160,7 +160,7 @@ namespace Z0
 
         void Created(string worker, CorrelationToken ct)
         {   
-            Raise(new WorkerCreated(worker, ct));            
+            Raise(Flow.created(ct, worker));            
         }
 
         void Created(WfStepId step, CorrelationToken ct)

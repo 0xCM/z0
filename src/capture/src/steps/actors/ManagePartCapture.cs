@@ -19,49 +19,36 @@ namespace Z0.Asm
 
         readonly WfState State;
 
+        readonly IWfContext Wf;
+
         public WfConfig Config;
 
         readonly CorrelationToken Ct;
 
         readonly ICaptureContext Context;        
-        
-        readonly ICaptureWorkflow CWf;                
-
-        readonly IApiSet Api;
-        
+                
         readonly IPartCatalog[] Catalogs;        
         
-        readonly uint CatalogCount;
-
         readonly IApiHost[] Hosts;
-
-        readonly uint HostCount;
-
 
         [MethodImpl(Inline)]
         internal ManagePartCapture(WfState state, CorrelationToken ct)
         {
             State = state;
-            CWf = State.CWf;
+            Wf = state.Wf;
             Config = State.Config;
             Ct = ct;
-            Context = CWf.Context;
-            Api = Context.ApiSet;
-            Catalogs = Api.Catalogs;
-            CatalogCount = (uint)Catalogs.Length;            
+            Context = State.CWf.Context;
+            Catalogs = Context.ApiSet.Catalogs;
             var a = Catalogs.SelectMany(c => c.DataTypeHosts).Cast<IApiHost>();
             var b = Catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>();
             Hosts = a.Concat(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
-            HostCount = (uint)Hosts.Length;
         }
-
-        readonly IWfContext Wf 
-            => State.Wf;
 
         public void Run()
         {
             Clear(Config);  
-            CaptureParts(Archives.Services.CaptureArchive(Config.Target.ArchiveRoot));
+            Capture(Archives.Services.CaptureArchive(Config.Target.ArchiveRoot));
         }
 
         public void Dispose()
@@ -69,7 +56,7 @@ namespace Z0.Asm
             Wf.Finished();
         }
  
-        void CaptureParts(IPartCaptureArchive dst)
+        void Capture(IPartCaptureArchive dst)
         {
             var count = Catalogs.Length;
             for(var i=0; i<count; i++)
@@ -109,21 +96,16 @@ namespace Z0.Asm
 
         void CaptureHosts(IPartCatalog src, IPartCaptureArchive dst)
         {
-            var step = CaptureHostApi.create(State, Ct);   
             var hosts = span(src.OperationHosts);
             var count = hosts.Length;            
+            using var step = new CaptureHostMembers(State, dst, Ct);   
             for(var i=0; i<count; i++)          
             {
-                ref readonly var host = ref skip(hosts,i);
-                CaptureHost(step, host, dst);
+                ref readonly var host = ref skip(hosts,i);                
+                Context.Raise(new CapturingHost(host.Uri, Ct));
+                step.Execute(host);
+                Context.Raise(new CapturedHost(host.Uri, Ct));                
             } 
-        }
-
-        void CaptureHost(CaptureHostApi step, IApiHost host, IPartCaptureArchive dst)
-        {                
-            Context.Raise(new CapturingHost(host.Uri));
-            step.Execute(host, dst);
-            Context.Raise(new CapturedHost(host.Uri));
         }
 
         void Clear(WfConfig config) 

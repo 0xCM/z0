@@ -12,32 +12,36 @@ namespace Z0.Asm
 
     public readonly struct HexCodeSaved : IWfEvent<HexCodeSaved>
     {
-        public WfEventId EventId  => WfEventId.define("Placeholder");
+        public const string EventName = nameof(HexCodeSaved);
+        
+        public WfEventId EventId {get;}
+    
+        public WfActor Actor {get;}
 
         public readonly ApiHostUri Host;
         
         public readonly IdentifiedCode[] Code;
 
-        public readonly FilePath Target;
+        public readonly CellCount MemberCount;
         
+        public readonly FilePath Target;
+
+        public AppMsgColor Flair {get;}
+
         [MethodImpl(Inline)]
-        public HexCodeSaved(ApiHostUri host, IdentifiedCode[] code, FilePath dst)
+        public HexCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {
+            EventId = z.evid(EventName, ct);
+            Actor = z.actor(actor);
             Host = host;
+            MemberCount = code.Length;
             Code = code;
             Target = dst;
+            Flair = flair;
         }
         
+        [MethodImpl(Inline)]
         public string Format()
-            => $"{Code.Length} {Host} functions saved to {Target}";
-        
-        public HexCodeSaved Zero 
-            => Empty;            
-
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;
-
-        public static HexCodeSaved Empty 
-            => default;
+            => Flow.format(EventId, Host, MemberCount, Target);                   
     }    
 }

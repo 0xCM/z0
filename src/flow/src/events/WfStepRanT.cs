@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStepRan(string actor,  T body, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {            
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             ActorName = actor;
             Body = body;
             Flair = flair;        

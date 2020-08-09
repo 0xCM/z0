@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static z;
     
     [Event]
     public readonly struct EmittedDataset : IWfEvent<EmittedDataset>
@@ -26,11 +27,11 @@ namespace Z0
         public readonly FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmittedDataset(string worker, string dsname, uint count, FilePath target, CorrelationToken ct)
+        public EmittedDataset(string actor, string dataset, uint count, FilePath target, CorrelationToken ct)
         {
-            EventId = wfid(EventName, ct);
-            ActorName = worker;
-            DatasetName = dsname;
+            EventId = z.evid(EventName, ct);
+            ActorName = actor;
+            DatasetName = dataset;
             RecordCount = count;
             TargetPath = target;
         }        

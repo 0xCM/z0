@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WorkerFinished(string worker, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             ActorName = worker;
             Flair = flair;
         }

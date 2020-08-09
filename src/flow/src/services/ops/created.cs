@@ -11,9 +11,14 @@ namespace Z0
 
     partial struct Flow    
     {
+        /// <summary>
+        /// Defines a <see cref='WorkerCreated'/> event
+        /// </summary>
+        /// <param name="ct">The correlation token</param>
+        /// <param name="name">The worker name</param>
         [MethodImpl(Inline), Op]
-        public static WorkerCreated created(string worker, CorrelationToken ct)
-            => new WorkerCreated(worker, ct);                        
+        public static WorkerCreated created(CorrelationToken ct, [CallerFilePath] string name = null)
+            => new WorkerCreated(z.actor(name), ct);                        
 
         /// <summary>
         /// Defines a <see cref='WfStepCreated'/> event

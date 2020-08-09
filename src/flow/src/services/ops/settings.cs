@@ -10,6 +10,7 @@ namespace Z0
 
     partial struct Flow    
     {
+        [Op]
         public static WfSettings settings(IAppContext context, CorrelationToken ct)
         {
             var path = Flow.ConfigPath(context);

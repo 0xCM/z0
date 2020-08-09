@@ -48,7 +48,6 @@ namespace Z0
             {
                 var host = src[i];
                 var methods = host.HostType.DeclaredMethods().Unignored().NonGeneric().Select(m => new HostedMethod(host.Uri, m));
-                //var methods = host.HostType.WorldMethods().Unignored().NonGeneric().Select(m => new HostedMethod(host.Uri, m));
                 var located = methods.Select(m => m.WithLocation(Root.address(Jit(m.Method))));  
                 Array.Sort(located);
                 var members = DefineMembers(located, sink);
@@ -160,7 +159,7 @@ namespace Z0
             foreach(var host in src)
             {
                 var methods = DirectMethods(host);
-                broker.Deposit(AppStatus.create($"{methods.Length} {host.Uri} direct  methods were jitted"));
+                broker.Deposit(new MethodsPrepared(z.actor(), host.Uri, methods.Length, CorrelationToken.define(0)));
                 dst.AddRange(methods);
             }
             return dst.ToArray();
@@ -172,7 +171,7 @@ namespace Z0
             foreach(var host in src)
             {
                 var methods = GenericMethods(host);
-                broker.Deposit(AppStatus.create($"{methods.Length} {host.Uri} generic methods were jitted"));                
+                broker.Deposit(new MethodsPrepared(z.actor(), host.Uri, methods.Length, CorrelationToken.define(0)));
                 dst.AddRange(methods);
             }
             return dst.ToArray();

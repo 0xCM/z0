@@ -72,8 +72,8 @@ namespace Z0.Asm
         public IWfEventSink WfEventSink
             => Wf.Broker.Sink;
 
-        public void Created(string worker, CorrelationToken ct)
-            => Wf.Created(worker, Ct);
+        public void Created(string actor, CorrelationToken ct)
+            => Wf.Created(actor, Ct);
 
         public void Running(string worker, CorrelationToken ct)
             => Wf.Running(worker, ct);

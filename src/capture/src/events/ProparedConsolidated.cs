@@ -10,9 +10,9 @@ namespace Z0.Asm
     using static Konst;
     using static Flow;
 
-    public readonly struct JittedMembers : IWfEvent<JittedMembers>
+    public readonly struct PreparedConsolidated : IWfEvent<PreparedConsolidated>
     {            
-        public const string EventName = nameof(JittedMembers);
+        public const string EventName = nameof(PreparedConsolidated);
         
         public WfEventId EventId {get;}
 
@@ -23,9 +23,9 @@ namespace Z0.Asm
         public readonly ApiMember[] Members;
 
         [MethodImpl(Inline)]
-        public JittedMembers(IApiHost[] hosts, ApiMember[] members, [CallerMemberName] string actor = null)
+        public PreparedConsolidated(string actor, IApiHost[] hosts, ApiMember[] members, CorrelationToken ct)
         {
-            EventId = wfid(EventName);
+            EventId = evid(EventName, ct);
             ActorName = actor;
             Hosts = hosts;
             Members = members;

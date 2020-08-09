@@ -5,33 +5,35 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static Flow;
+    using static z;
 
-    [Event]
-    public readonly struct WorkerCreated : IWfEvent<WorkerCreated>
-    {        
-        public const string EventName = nameof(WorkerCreated);        
-
+    public readonly struct MethodsPrepared : IWfEvent<MethodsPrepared>
+    {
+        public const string EventName = nameof(MethodsPrepared);
+        
         public WfEventId EventId {get;}
 
-        public AppMsgColor Flair {get;}
+        public WfActor Actor {get;}
+        
+        public ApiHostUri Host {get;}
 
-        public WfActor Actor {get;}        
+        public CellCount Count {get;}
         
         [MethodImpl(Inline)]
-        public WorkerCreated(WfActor actor, CorrelationToken ct, AppMsgColor flair = CreatedFlair)
+        public MethodsPrepared(WfActor actor, ApiHostUri host, int count, CorrelationToken ct)
         {
             EventId = z.evid(EventName, ct);
             Actor = actor;
-            Flair = flair;
+            Host = host;
+            Count = count;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx2, EventId, Actor);
+            => format(EventId, Actor, Host, Count);
     }
 }

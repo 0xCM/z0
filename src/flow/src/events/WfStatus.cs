@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStatus(string actor, string body, CorrelationToken ct, AppMsgColor flair = StatusFlair)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             ActorName = actor;
             Body = body;
             Flair =  flair;

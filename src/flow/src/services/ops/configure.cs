@@ -5,18 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
     partial struct Flow    
     {
+        [Op]
         public static WfConfig configure(IAppContext context, string[] args, CorrelationToken ct)
         {
-            // var parts = PartIdParser.Service.ParseValid(args); 
-            // if(parts.Length == 0)
-            //     parts = context.PartIdentities;
-
-            var parts = PartIdParser.parse(args,context.PartIdentities);
+            var parts = PartIdParser.parse(args, context.PartIdentities);
             var settings = Flow.settings(context, ct);
             var src = new ArchiveConfig(FilePath.Define(context.GetType().Assembly.Location).FolderPath);            
             var dst = new ArchiveConfig(context.AppPaths.AppCaptureRoot);

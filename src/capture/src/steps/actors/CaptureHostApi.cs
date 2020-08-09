@@ -8,51 +8,45 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
-    
+    using static Konst;    
     using static CaptureHostApiStep;
 
-    [Step(WfStepKind.CaptureHostApi)]
-    public readonly ref struct CaptureHostApi
+    [Step(Kind)]
+    public readonly ref struct CaptureHostMembers
     {
         public WfState Wf {get;}
         
-        public ICaptureWorkflow CWf {get;}
+        readonly IPartCaptureArchive Target;
 
         public CorrelationToken Ct {get;}
 
         [MethodImpl(Inline)]
-        public static CaptureHostApi create(WfState state, CorrelationToken ct)
-            => new CaptureHostApi(state, ct);
-        
-        [MethodImpl(Inline)]
-        internal CaptureHostApi(WfState state, CorrelationToken ct)
+        public CaptureHostMembers(WfState state, IPartCaptureArchive dst, CorrelationToken ct)
         {
-            Ct = ct;
             Wf = state;
-            CWf = state.CWf;            
-            Wf.Created(WorkerName, Ct);
+            Target = dst;
+            Ct = ct;
+            Wf.Created(Name, Ct);
         }
-
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(Name, Ct);
         }
                 
-        public void Execute(IApiHost host, IPartCaptureArchive dst)
+        public void Execute(IApiHost host)
         {
             try
             {
-                using var extract = new ExtractHostMembers(Wf, host, dst, Ct);
+                using var extract = new ExtractHostMembers(Wf, host, Target, Ct);
                 extract.Run();
 
-                using var emit = new EmitHostArtifacts(Wf, host.Uri, extract.Extractions, dst, Ct);
+                using var emit = new EmitHostArtifacts(Wf, host.Uri, extract.Extractions, Target, Ct);
                 emit.Run();            
             }
             catch(Exception e)
             {
-                Wf.Error(WorkerName,e, Ct);
+                Wf.Error(Name,e, Ct);
             }
         }      
     }

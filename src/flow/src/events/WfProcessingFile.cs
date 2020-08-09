@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfProcessingFile(string worker, T kind, FilePath src, CorrelationToken ct, AppMsgColor flair = RunningFlair)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             ActorName = worker;
             SourcePath = src;            
             FileKind = kind;

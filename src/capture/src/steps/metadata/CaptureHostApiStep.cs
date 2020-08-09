@@ -8,6 +8,8 @@ namespace Z0.Asm
 
     public readonly struct CaptureHostApiStep
     {
-        public const string WorkerName = nameof(CaptureHostApi);
+        public const WfStepKind Kind = WfStepKind.CaptureHostMembers;
+        
+        public const string Name = nameof(CaptureHostMembers);
     }
 }

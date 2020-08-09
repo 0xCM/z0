@@ -11,32 +11,30 @@ namespace Z0.Asm
     using static Konst;
     using static CaptureHostsStep;
 
-    [Step(WfStepKind.CaptureHosts)]
+    [Step(Kind)]
     public readonly ref struct CaptureHosts
     {
         public WfState Wf {get;}
 
-        public ICaptureWorkflow CWf 
-            => Wf.CWf;
-        
         public IApiHost[] Hosts {get;}
 
         public CorrelationToken Ct {get;}
 
         public IPartCaptureArchive Target {get;}
 
+        [MethodImpl(Inline)]
         public CaptureHosts(WfState state, IApiHost[] hosts,  IPartCaptureArchive dst, CorrelationToken ct)
         {
             Wf = state;
             Hosts= hosts;
             Ct = ct;
             Target = dst;
-            Wf.Created(nameof(CaptureHosts), Ct);
+            Wf.Created(Name, Ct);
         }
 
         public void Run()
         {
-            Wf.Raise(new CapturingHosts(Hosts));            
+            Wf.Raise(new CapturingHosts(Hosts, Ct));            
             
             using var step = new ExtractMembers(Wf, Ct);
             var extracts = step.Extract(Hosts);            
@@ -59,7 +57,7 @@ namespace Z0.Asm
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(Name, Ct);
         }
     }
 }

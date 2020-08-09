@@ -10,31 +10,28 @@ namespace Z0
     using static Konst;
     using static Flow;
     using static z;
-
+    
     [Event]
-    public readonly struct LoadingWfConfig : IWfEvent<LoadingWfConfig>
+    public readonly struct WfContextUnloaded : IWfEvent<WfContextUnloaded>
     {
-        public const string EventName = nameof(LoadingWfConfig);        
+        public const string EventName = nameof(WfContextUnloaded);
                 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public WfActor Actor {get;}
+                
+        public AppMsgColor Flair {get;}
         
-        public FilePath SourcePath {get;}        
-        
-        public AppMsgColor Flair {get;}        
-
         [MethodImpl(Inline)]
-        public LoadingWfConfig(string actor, FilePath body, CorrelationToken ct, AppMsgColor flair = RunningFlair)
+        public WfContextUnloaded(WfActor actor, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
         {
             EventId = z.evid(EventName, ct);
-            ActorName = actor;
-            SourcePath = body;
-            Flair = flair;            
+            Actor = actor;
+            Flair = flair;
         }
-
+        
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, ActorName, SourcePath);            
+            => text.format(PSx3, EventId, Actor);        
     }
 }

@@ -51,7 +51,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Ts, Ct, Name).PadRight(64);       
+            => text.format(Pattern, Ts, Ct, Name).PadRight(56);       
 
         public uint Hashed
         {        

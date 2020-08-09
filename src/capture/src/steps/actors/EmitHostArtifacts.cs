@@ -106,7 +106,7 @@ namespace Z0.Asm
         void SaveHex()
         {
             var hex = IdentifiedCodeWriter.save(Source, Parsed, HexPath);                
-            Wf.Raise(new HexCodeSaved(Source, hex, ParsedPath));
+            Wf.Raise(new HexCodeSaved(WorkerName, Source, hex, ParsedPath, Ct));
         }
 
         void Decode()
@@ -117,7 +117,7 @@ namespace Z0.Asm
             {
                 step.SaveDecoded(decoded, AsmPath);                
                 
-                using var match = new MatchAddresses(Wf, Source, Extractions, decoded, Ct);
+                using var match = new MatchAddresses(Wf, Extractions, decoded, Ct);
                 match.Run();                
             }
         }

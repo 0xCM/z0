@@ -24,7 +24,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal AnalyzingExtracts(string worker, ExtractedCode[] extracts, CorrelationToken ct)
         {
-            EventId = wfid(nameof(AnalyzingExtracts), ct);
+            EventId = evid(nameof(AnalyzingExtracts), ct);
             ActorName = worker;
             Extracts = extracts;
         }

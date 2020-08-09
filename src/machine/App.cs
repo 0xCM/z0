@@ -13,9 +13,12 @@ namespace Z0
         
     class App : AppShell<App,IAppContext>
     {                        
+        public CorrelationToken Ct;
+
         public App()
             : base(WfBuilder.app())
         {
+            Ct = CorrelationToken.define(PartId.Machine);
         }
         
         void ReadRes()
@@ -32,7 +35,8 @@ namespace Z0
         }
         
         public override void RunShell(params string[] args)
-        {
+        {            
+            var config = Flow.configure(Context, args, Ct);        
             Control.run(Context,args);
         }
 

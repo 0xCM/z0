@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WorkerInitializing(string worker, CorrelationToken ct, AppMsgColor flair = InitializingFlair)
         {
-            EventId = wfid(EventName, ct);
+            EventId = evid(EventName, ct);
             ActorName = worker;
             Flair = flair;
         }
