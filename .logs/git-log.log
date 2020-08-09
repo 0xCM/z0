@@ -6317,3 +6317,27 @@
  rename src/{data => tables}/services/IntrinsicsEmitter.cs (85%)
  copy src/{data/services/ZTables.cs => tables/services/TableProvider.cs} (52%)
  rewrite src/tables/z0.tables.csproj (78%)
+[master dccb22eb0] .
+ 45 files changed, 878 insertions(+), 40 deletions(-)
+ create mode 100644 src/konst/src/asci/models/AsciEncoded.cs
+ create mode 100644 src/konst/src/events/models/WfActor.cs
+ create mode 100644 src/konst/src/z/ops/w/wf.cs
+ create mode 100644 src/monitor/Part.cs
+ create mode 100644 src/monitor/Shell.cs
+ create mode 100644 src/monitor/add.sh
+ create mode 100644 src/monitor/build-log.sh
+ create mode 100644 src/monitor/build.sh
+ create mode 100644 src/monitor/clean.sh
+ create mode 100644 src/monitor/directory.build.props
+ create mode 100644 src/monitor/id.sh
+ create mode 100644 src/monitor/remove.sh
+ create mode 100644 src/monitor/run.sh
+ create mode 100644 src/monitor/src/DirectoryMonitor.cs
+ create mode 100644 src/monitor/src/FileSystemChangeKind.cs
+ create mode 100644 src/monitor/src/FileSystemObject.cs
+ create mode 100644 src/monitor/src/FileSystemObjectKind.cs
+ create mode 100644 src/monitor/src/IMonitor.cs
+ create mode 100644 src/monitor/src/Monitors.cs
+ create mode 100644 src/monitor/src/Watching.cs
+ create mode 100644 src/monitor/z0.monitor.csproj
+ delete mode 100644 src/tables/catalog.csv

@@ -9,10 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
+    [ApiHost("api")]
     public readonly partial struct Tools
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ToolConfig config(ToolId tool,FilePath src)
             => new ToolConfig(tool,src);
 

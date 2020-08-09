@@ -37,6 +37,12 @@ namespace Z0
         public PartId[] ParseValid(params string[] args)
             => WhereSome(args.Map(arg => parse<PartId>(arg).ValueOrDefault()));
 
+        public static PartId[] parse(string[] args, PartId[] fallback)
+        {
+            var result = WhereSome(args.Map(arg => parse<PartId>(arg).ValueOrDefault()));
+            return result.Length == 0 ? fallback : result;
+        }
+        
         [MethodImpl(Inline)]
         static E zero<E>()
             where E : unmanaged, Enum

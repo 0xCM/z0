@@ -29,8 +29,6 @@ namespace Z0
         
         FolderPath ResourceRoot {get;}
         
-        FilePath LogPath {get;}
-
         IAppPaths AppPaths 
             => ContextRoot.AppPaths;
 

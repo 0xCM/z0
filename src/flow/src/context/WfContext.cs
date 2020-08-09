@@ -9,7 +9,6 @@ namespace Z0
     using System.IO;
         
     using static Konst;
-    using static Flow;
     using static z;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -22,10 +21,11 @@ namespace Z0
         
         public IAppContext ContextRoot {get;}        
 
-        public WfTermEventSink TermSink {get;}
+        public CorrelationToken Ct {get;}
         
-        public IMultiSink WfSink 
-            => TermSink;
+        public WfConfig Config {get;}
+        
+        public IMultiSink WfSink {get;}
         
         public WfBroker Broker {get;}
                 
@@ -33,33 +33,25 @@ namespace Z0
         
         public FolderPath ResourceRoot {get;}
         
-        public FilePath LogPath {get;}
-
-        public CorrelationToken Ct {get;}
-
-        long CtProvider;
-
-        readonly ulong SessionId;
-
         [MethodImpl(Inline)]
         public WfContext(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink)
         {
             Ct = ct;
             ContextRoot = root;
-            TermSink = sink;
-            SessionId = (ulong)now().Ticks;
-            CtProvider = 1;       
+            Config = config;
+            WfSink = sink;
+            
             ResourceRoot = ContextRoot.AppPaths.ResourceRoot;
             IndexRoot =  ResourceRoot + FolderName.Define("index");
-            LogPath = root.AppPaths.AppDataRoot + FileName.Define("workflow", FileExtensions.Csv);
+            var logPath = root.AppPaths.AppDataRoot + FileName.Define("workflow", FileExtensions.Csv);
             Broker = new WfBroker(Ct);
-            TermSink.Deposit(new OpeningWfContext(ActorName, typeof(WfContext), Ct));
+            WfSink.Deposit(new OpeningWfContext(ActorName, typeof(WfContext), Ct));
         }
 
         public void Dispose()
         {
-            TermSink.Deposit(new ClosingWfContext(ActorName, typeof(WfContext), Ct));
-            TermSink.Dispose();
+            WfSink.Deposit(new ClosingWfContext(ActorName, typeof(WfContext), Ct));
+            WfSink.Dispose();
             Broker.Dispose();
         }
                 
@@ -72,11 +64,11 @@ namespace Z0
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent
         {
-            TermSink.Deposit(@event);
+            WfSink.Deposit(@event);
             return @event.EventId;
         }
 
-       public void Error<T>(string actor, T body, CorrelationToken ct)
+        public void Error<T>(string actor, T body, CorrelationToken ct)
             => Flow.error(this, actor, body, ct);
 
         public void Error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)

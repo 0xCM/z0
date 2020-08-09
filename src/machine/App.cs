@@ -7,23 +7,12 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using Z0.Asm;
-
     using static z;
 
     using P = Z0.Parts;
         
     class App : AppShell<App,IAppContext>
-    {                
-        static IAppContext CreateAppContext()
-        {
-            var resolved = ApiComposition.Assemble(stream(P.GMath.Resolved));
-            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
-            var settings = AppSettings.Load(AppPaths.AppConfigPath);
-            var exchange = AppMsgExchange.Create();
-            return AppContext.Create(resolved, random, settings, exchange);
-        }
-        
+    {                        
         public App()
             : base(WfBuilder.app())
         {
@@ -44,9 +33,7 @@ namespace Z0
         
         public override void RunShell(params string[] args)
         {
-            var ct = CorrelationToken.define(1);
-            using var control = Control.create(Context, ct, Flow.configure(Context, args, ct));
-            control.Run();
+            Control.run(Context,args);
         }
 
         public static void Main(params string[] args)

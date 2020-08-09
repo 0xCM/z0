@@ -10,7 +10,6 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Flow;
     using static Controller;
 
     using static z;
@@ -18,8 +17,16 @@ namespace Z0
     [ApiHost]
     public ref struct Control
     {        
-        readonly IAppContext Context;
+        public static void run(IAppContext context, params string[] args)
+        {
+            var ct = CorrelationToken.define(1);
+            var config = Flow.configure(context, args, ct);
+            using var wf = Flow.context(context, config, ct);
+            using var control = new Control(wf);
+            control.Run();
+        }
 
+        readonly IAppContext Context;
 
         readonly IWfContext Wf;
 
@@ -40,17 +47,12 @@ namespace Z0
             return new CaptureWorkflow(asm, wf, decoder, formatter, writer, archive, ct);
         }
 
-        public static Control create(IAppContext context, CorrelationToken ct, WfConfig config)
-        {            
-            return new Control(Flow.context(context, config, ct), config);
-        }
-
-        public Control(WfContext wf, WfConfig config)
+        public Control(WfContext wf)
         {
             Wf = wf;
             Context = wf.ContextRoot;
             Asm = WfBuilder.asm(Context);                           
-            State = new WfState(Wf, Asm, config,Wf.Ct);
+            State = new WfState(Wf, Asm, wf.Config, wf.Ct);
             StepConfig = WorkflowStepConfig.Load(Wf);
         }
 
@@ -73,32 +75,26 @@ namespace Z0
 
         void Run(CaptureClientStep kind)
         {
-            if(CaptureArtifacts)
-            {             
-                var cwf = capture(Asm, Wf, Context.AppPaths.AppCaptureRoot, Ct);
-                var broker = WfBuilder.capture(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
-                using var host = new CaptureClient(State, Ct);
-                host.Run();
-            }
+            var cwf = capture(Asm, Wf, Context.AppPaths.AppCaptureRoot, Ct);
+            var broker = WfBuilder.capture(Context.AppPaths.AppDataRoot + FileName.Define("broker", FileExtensions.Csv), Ct);
+            using var host = new CaptureClient(State, Ct);
+            host.Run();
         }
         
         void Run(EmitDatasetsStep kind)
         {
-            if(EmitDatasets)
+            Wf.RunningT(WorkerName, kind, Ct);
+            try
             {
-                Wf.RunningT(WorkerName, kind, Ct);
-                try
-                {
-                    using var emission = new EmitDatasets(Wf, Ct);
-                    emission.Run();
-                }
-                catch(Exception e)
-                {
-                    Wf.Error(e, Ct);
-                }
-
-                Wf.RanT(WorkerName, kind, Ct);
+                using var emission = new EmitDatasets(Wf, Ct);
+                emission.Run();
             }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
+
+            Wf.RanT(WorkerName, kind, Ct);
         }
 
         void Run(RunProcessorsStep kind)
@@ -134,9 +130,5 @@ namespace Z0
             
             Wf.RanT(WorkerName, kind, Ct);
         }
-        
-        bool CaptureArtifacts => true;
-        
-        bool EmitDatasets => true;
     }
 }

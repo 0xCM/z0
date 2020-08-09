@@ -11,7 +11,7 @@ call %Cmd%
 set Cmd="%Wf%/wf-04-stage.bat"
 call %Cmd%
 
-call machine.exe
+machine > %ZLogs%\etl\machine.csv
 
 set Cmd="wf\wf-05-archive.bat"
 call %Cmd%

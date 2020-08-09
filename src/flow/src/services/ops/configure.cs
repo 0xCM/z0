@@ -10,27 +10,17 @@ namespace Z0
 
     partial struct Flow    
     {
-        // public static WfConfig configure(IWfContext context, params string[] args)
-        // {
-        //     var parsed = AppArgs.parse(args).Data.Select(arg => PartIdParser.single(arg.Value));
-        //     var srcpath = FilePath.Define(context.GetType().Assembly.Location).FolderPath;
-        //     var dstpath = context.AppPaths.AppCaptureRoot;
-        //     var src = new ArchiveConfig(srcpath);
-        //     var dst = new ArchiveConfig(dstpath);
-        //     return new WfConfig(args, src, dst, parsed);                    
-        // }
-
         public static WfConfig configure(IAppContext context, string[] args, CorrelationToken ct)
         {
-            var parts = PartIdParser.Service.ParseValid(args); 
-            if(parts.Length == 0)
-                parts = context.PartIdentities;
+            // var parts = PartIdParser.Service.ParseValid(args); 
+            // if(parts.Length == 0)
+            //     parts = context.PartIdentities;
+
+            var parts = PartIdParser.parse(args,context.PartIdentities);
             var settings = Flow.settings(context, ct);
-            var srcpath = FilePath.Define(context.GetType().Assembly.Location).FolderPath;            
-            var src = new ArchiveConfig(srcpath);            
-            var dstpath = context.AppPaths.AppCaptureRoot;        
-            var dst = new ArchiveConfig(dstpath);
-            return new WfConfig(args, src, dst, parts, settings);                    
+            var src = new ArchiveConfig(FilePath.Define(context.GetType().Assembly.Location).FolderPath);            
+            var dst = new ArchiveConfig(context.AppPaths.AppCaptureRoot);
+            return new WfConfig(args, src, dst, parts, context.AppPaths.ResourceRoot, context.AppPaths.AppDataRoot, settings);
         }
     }
 }

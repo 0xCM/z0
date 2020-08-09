@@ -13,7 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static WfContext context(IAppContext root, WfConfig config, CorrelationToken ct)
-            => new WfContext(root, ct, config, termsink(ct));   
-
+            => new WfContext(root, ct, config, termsink(ct));
     }
 }
