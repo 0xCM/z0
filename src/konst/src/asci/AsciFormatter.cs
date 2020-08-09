@@ -59,7 +59,7 @@ namespace Z0
             if(typeof(N) == typeof(N2))
             {
                 target = Buffer2;
-                pSrc = gptr(first(@as<A,asci2>(edit(src)).Encoded));
+                pSrc = gptr(first(@as<A,asci2>(edit(src)).View));
                 return pchar(target);
             }
             else if(typeof(N) == typeof(N4))

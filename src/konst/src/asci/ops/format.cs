@@ -8,11 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
+    using static z;
+
     using F = AsciFormatter;
 
     partial struct asci
     {
+        [MethodImpl(Inline), Op]
+        public static string format(in BinaryCode src)
+        {
+            var dst = span<char>(src.Length);
+            decode(src,dst);            
+            return sys.@string(dst);
+        }
+
         [MethodImpl(Inline), Op]
         public static string format(in asci2 src)
             => F.format(src);

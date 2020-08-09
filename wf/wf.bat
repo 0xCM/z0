@@ -8,9 +8,6 @@ call %Cmd%
 set Cmd="%Wf%/wf-02-build.bat"
 call %Cmd%
 
-set Cmd="%Wf%/wf-03-ilpack.bat"
-call %Cmd%
-
 set Cmd="%Wf%/wf-04-stage.bat"
 call %Cmd%
 

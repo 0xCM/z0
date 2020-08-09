@@ -33,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(A src)
-            => src.Encoded;
+            => src.View;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<char>(A src)
@@ -89,7 +89,7 @@ namespace Z0
             get => Size;
         }
 
-        public ReadOnlySpan<byte> Encoded
+        public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
             get => asci.bytes(this);

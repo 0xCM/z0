@@ -12,6 +12,10 @@ namespace Z0
 
     partial struct z
     {            
+        [MethodImpl(Inline), Op]
+        public static uint hash(string src)
+            => (uint)src?.GetHashCode();
+
         /// <summary>
         /// Calculates a combined hash for 2 unsigned 32-bit integers
         /// </summary>

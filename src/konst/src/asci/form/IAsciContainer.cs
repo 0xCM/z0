@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Characterizes a container that refifies an asci sequence
+    /// Characterizes a container that reifies an asci sequence
     /// </summary>
     /// <typeparam name="A">The asci sequence type</typeparam>
     public interface IAsciContainer<A> : IAsciSequence, IContented<A>
@@ -19,8 +19,8 @@ namespace Z0
         int IAsciSequence.Capacity 
             => Content.Capacity;
         
-        ReadOnlySpan<byte> IAsciSequence.Encoded
-            => Content.Encoded;
+        ReadOnlySpan<byte> IAsciSequence.View
+            => Content.View;
         
         bool INullity.IsEmpty   
             => Content.IsEmpty;

@@ -31,7 +31,7 @@ namespace Z0
             get => Storage.Length;
         }
 
-        public ReadOnlySpan<byte> Encoded 
+        public ReadOnlySpan<byte> View 
             => Storage.Data;
 
         public bool IsEmpty 

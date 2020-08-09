@@ -30,6 +30,15 @@ namespace Z0
         }
                 
         /// <summary>
+        /// Covers the encoded content with a readonly span
+        /// </summary>
+        public ReadOnlySpan<byte> View
+        {
+            [MethodImpl(Inline)] 
+            get => Encoded;
+        }                
+
+        /// <summary>
         /// Returns a reference to the encoded data
         /// </summary>
         public Ref Ref

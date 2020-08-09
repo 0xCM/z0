@@ -135,7 +135,7 @@ namespace Z0
         public override string ToString()
             => Text;
 
-        ReadOnlySpan<byte> IAsciSequence.Encoded
+        ReadOnlySpan<byte> IAsciSequence.View
             => z.bytes(this);
 
         bool INullity.IsEmpty
