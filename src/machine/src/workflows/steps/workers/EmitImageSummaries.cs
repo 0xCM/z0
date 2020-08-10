@@ -7,9 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Data;
+
     using static Konst;
     using static Flow;
     using static EmitImageSummariesStep;
+
 
     using static z;
     
@@ -52,8 +55,8 @@ namespace Z0
             var system = Tables.SystemImages;
             var count = src.Count;
             var images = src.View;
-            var fields = Tables.fields<LocatedImageField>();
-            var header = Tables.header(fields);
+            var fields = Table.columns<LocatedImageField>();
+            var header = Table.header(fields);
             var summaries = span<ProcessImageSummary>(count);
 
             var rows = text.build();

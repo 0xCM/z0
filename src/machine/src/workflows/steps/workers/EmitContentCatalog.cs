@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Data;
+
     using static Konst;
     using static Flow;
     using static EmitContentCatalogStep;
@@ -41,7 +43,7 @@ namespace Z0
             var entries = z.span(provider.Provided.Array());
             EmissionCount = (uint)entries.Length;
 
-            var f = formatter<ContentLibField>();
+            var f = Table.formatter<ContentLibField>();
             for(var i=0u; i<EmissionCount; i++)
             {
                 ref readonly var entry = ref z.skip(entries, i);

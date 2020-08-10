@@ -12,3 +12,10 @@ namespace Z0.Parts
 {        
     public sealed class Flow : Part<Flow> { }
 }
+
+namespace Z0
+{
+    public static partial class XTend
+    {
+    }    
+}

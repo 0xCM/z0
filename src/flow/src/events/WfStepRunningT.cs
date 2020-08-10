@@ -17,23 +17,23 @@ namespace Z0
         
         public WfEventId EventId {get;}
         
-        public string ActorName {get;}
+        public WfActor Actor {get;}
         
         public T Body {get;}
 
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepRunning(string actor, T body, CorrelationToken ct, AppMsgColor flair = RunningFlair)
+        public WfStepRunning(WfActor actor, T body, CorrelationToken ct, AppMsgColor flair = RunningFlair)
         {
             EventId = evid(EventName, ct);
-            ActorName = actor;
+            Actor = actor;
             Body = body;
             Flair = flair;         
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, ActorName, Body);          
+            => text.format(PSx3, EventId, Actor, Body);          
     }   
 }

@@ -45,15 +45,10 @@ namespace Z0.Asm
             Asm = asm;            
             Ct = ct;
             Config = config;        
-            // var parts = PartIdParser.Service.ParseValid(args);
-            // if(parts.Length == 0)
-            //     parts = Wf.ContextRoot.PartIdentities;
-
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.AppPaths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
             var dst = new ArchiveConfig(dstpath);
-            //Config = new WfConfig(args, src, dst, parts);   
             Settings = CaptureConfig.From(wf.ContextRoot.Settings);                             
             Services = CaptureServices.create(Asm);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
@@ -75,35 +70,35 @@ namespace Z0.Asm
         public void Created(string actor, CorrelationToken ct)
             => Wf.Created(actor, Ct);
 
-        public void Running(string worker, CorrelationToken ct)
-            => Wf.Running(worker, ct);
+        public void Running(string actor, CorrelationToken ct)
+            => Wf.Running(actor, ct);
 
-        public void Running<T>(string actor, T content, CorrelationToken ct)
-            => Wf.RunningT(actor, content, ct);
+        public void Running<T>(string actor, T message, CorrelationToken ct)
+            => Wf.RunningT(actor, message, ct);
 
         public void Ran<T>(string actor, T content, CorrelationToken ct)
             => Wf.RanT(actor, content, ct);
 
-        public void Ran(string worker, CorrelationToken ct)
-            => Wf.Ran(worker, Ct);
+        public void Ran(string actor, CorrelationToken ct)
+            => Wf.Ran(actor, Ct);
 
-        public void Finished(string worker, CorrelationToken ct)
-            => Wf.Finished(worker, Ct);
+        public void Finished(string actor, CorrelationToken ct)
+            => Wf.Finished(actor, Ct);
 
-        public void Initializing(string worker, CorrelationToken ct)
-            => Wf.Initializing(worker, Ct);
+        public void Initializing(string actor, CorrelationToken ct)
+            => Wf.Initializing(actor, Ct);
 
-        public void Initialized(string worker, CorrelationToken ct)
-            => Wf.Initialized(worker, Ct);
+        public void Initialized(string actor, CorrelationToken ct)
+            => Wf.Initialized(actor, Ct);
 
-        public void Error(string worker, Exception e, CorrelationToken ct)
-            => Wf.Error(worker, e, Ct);
+        public void Error(string actor, Exception e, CorrelationToken ct)
+            => Wf.Error(actor, e, Ct);
 
-        public void Error(string worker, string description, CorrelationToken ct)
-            => Wf.Error(worker, description, ct);
+        public void Error(string actor, string message, CorrelationToken ct)
+            => Wf.Error(actor, message, ct);
 
-        public void Status<T>(string worker, T body, CorrelationToken ct)
-            => Wf.Status(worker, body, ct);
+        public void Status<T>(string actor, T mesage, CorrelationToken ct)
+            => Wf.Status(actor, mesage, ct);
 
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent

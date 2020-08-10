@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
 
+    using Z0.Data;
+    
     using static Konst;
 
     using F = MemberParseField;
@@ -139,7 +141,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = DataFields.formatter<F>(delimiter);            
+            var dst = Table.formatter<F>(delimiter);            
             dst.Delimit(F.Seq, Seq);
             dst.Delimit(F.SourceSeq, SourceSeq);
             dst.Delimit(F.Address, Address);

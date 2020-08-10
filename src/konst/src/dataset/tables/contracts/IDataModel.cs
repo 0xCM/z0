@@ -24,13 +24,4 @@ namespace Z0.Data
     {
         K Kind {get;}        
     }
-
-    public readonly struct DataModel<F,R,M,D>
-        where F : unmanaged, Enum
-        where R : ITable
-        where M : IDataModel
-        where D : unmanaged, Enum
-    {
-        public D Discriminator {get;}                
-    }
 }

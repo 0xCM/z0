@@ -63,17 +63,20 @@ namespace Z0
         void Ran(string actor, CorrelationToken ct)
             => Flow.ran(this, actor, "Finished", ct);
 
-        void Ran<T>(string actor, T body, CorrelationToken ct)
-            => Flow.ran(this, actor, body, ct);
+        void Ran<T>(string actor, T message, CorrelationToken ct)
+            => Flow.ran(this, actor, message, ct);
         
-        void Status<T>(string worker, T body, CorrelationToken ct)
-            => Flow.status(this, worker,body,ct);
+        void Status<T>(string worker, T message, CorrelationToken ct)
+            => Flow.status(this, worker,message,ct);
 
-        void RunningT<T>(string actor, T body, CorrelationToken ct)
-            => Flow.running(this, actor, body, ct);
-        
-        void RanT<T>(string actor, T body, CorrelationToken ct)
-            => Flow.ran(this, actor, body, ct);
+        void RunningT<T>(string actor, T message, CorrelationToken ct)
+            => Flow.running(this, actor, message, ct);
+
+        void RunningT<T>(WfActor actor, T message, CorrelationToken ct)
+            => Flow.running(this, actor, message, ct);
+
+        void RanT<T>(string actor, T message, CorrelationToken ct)
+            => Flow.ran(this, actor, message, ct);
 
         void Created([File] string src = null)
         {   
@@ -150,12 +153,7 @@ namespace Z0
             Raise(new WfStepRunning<string>(actor, message, ct));
         }
         
-        void Running(string worker, CorrelationToken ct)
-        {
-            Raise(new WfStepRunning(worker, ct));
-        }
-
-        void Running(WfActor actor, CorrelationToken ct)
+        void Running(string actor, CorrelationToken ct)
         {
             Raise(new WfStepRunning(actor, ct));
         }

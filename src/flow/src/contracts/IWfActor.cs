@@ -14,7 +14,7 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IWfActor<T> : IWfActor        
+    public interface IWfActor<T> : IWfActor                
     {
         
     }

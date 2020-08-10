@@ -7,7 +7,8 @@ namespace Z0.CilSpecs
 	/// <summary>
 	/// CIL opcode operand type
 	/// </summary>
-	public enum OperandType : byte {
+	public enum OperandType : byte 
+	{
 		/// <summary>4-byte relative instruction offset</summary>
 		InlineBrTarget,
 		/// <summary>4-byte field token (<see cref="Table.Field"/> or <see cref="Table.MemberRef"/>)</summary>

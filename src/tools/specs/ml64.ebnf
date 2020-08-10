@@ -1,3 +1,6 @@
+(*https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form*)
+(*https://github.com/igochkov/vscode-ebnf/blob/master/test/EBNF.ebnf*)
+
 ;;
     endOfLine | comment
 

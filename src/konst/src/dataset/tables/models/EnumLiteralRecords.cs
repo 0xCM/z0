@@ -25,7 +25,7 @@ namespace Z0
             return dst;
         }
         
-        [MethodImpl(Inline), Op]
+        [Op]
         public static EnumLiterals index(Type src)
         {
             var ut = src.GetEnumUnderlyingType();

@@ -39,9 +39,9 @@ namespace Z0.Asm
             Config = State.Config;
             Ct = ct;
             Context = State.CWf.Context;
-            Catalogs = Context.ApiSet.Catalogs;
+            Catalogs = Context.ApiSet.MatchingCatalogs(state.Config.Parts).Array();
             var a = Catalogs.SelectMany(c => c.DataTypeHosts).Cast<IApiHost>();
-            var b = Catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>();
+            var b = Catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>();            
             Hosts = a.Concat(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
         }
 

@@ -35,7 +35,7 @@ namespace Z0.Parts
 
 namespace Z0
 {
-    [ApiHost("extensions")]
+    [ApiHost]
     public static partial class XTend
     {
 

@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    
+
+    using Z0.Data;
+        
     using static Konst;
     using static Flow;
     using static EmitEnumCatalogStep;
@@ -60,7 +62,7 @@ namespace Z0
                 {
                     var y = x[j];
                     (var part, var type) = y;
-                    var records = EnumLiteralRecords.from(part,type);
+                    var records = Table.literals(part,type);
                     for(var k = 0; k<records.Length; k++)
                         dst.Add(records[k]);
                 }                
@@ -69,7 +71,7 @@ namespace Z0
             var m = dst.ToArray();
             Array.Sort(m);
             
-            var formatter = Tables.formatter<EnumLiteralField>();
+            var formatter = Table.formatter<EnumLiteralField>();
             formatter.EmitHeader();
             for(var i=0; i<m.Length; i++)
                 format(m[i],formatter);

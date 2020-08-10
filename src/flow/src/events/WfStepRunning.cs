@@ -22,14 +22,6 @@ namespace Z0
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepRunning(WfActor actor, CorrelationToken ct, AppMsgColor flair = RunningFlair)
-        {
-            EventId = evid(EventName, ct);
-            Actor = actor;
-            Flair = flair;
-        }
-
-        [MethodImpl(Inline)]
         public WfStepRunning(string actor, CorrelationToken ct, AppMsgColor flair = RunningFlair)
         {
             EventId = evid(EventName, ct);
@@ -39,6 +31,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx2, EventId, Actor);
+            => format(EventId, Actor);
     }
 }

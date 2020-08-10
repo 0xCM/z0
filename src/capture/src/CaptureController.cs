@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Asm;
+
     using static Konst;
 
     public readonly struct CaptureController
@@ -28,10 +29,8 @@ namespace Z0
         public static CaptureControl create(IAppContext root, WfConfig config, CorrelationToken ct)
             => new CaptureControl(state(root, config, ct));
 
-
         [MethodImpl(Inline)]
         public static CaptureControl create(IAppContext root, string[] args, CorrelationToken ct)
             => CaptureController.create(root, Flow.configure(root, args, ct), ct);
-
     }
 }

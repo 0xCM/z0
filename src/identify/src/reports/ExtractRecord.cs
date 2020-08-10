@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
     
+    using Z0.Data;
+    
     using static Konst;
 
     using F = ExtractField;
@@ -72,7 +74,7 @@ namespace Z0
         
         public string DelimitedText(char delimiter)
         {
-            var dst = DataFields.formatter<F>(delimiter);
+            var dst = Table.formatter<F>(delimiter);
             dst.Delimit(F.Sequence, Sequence);
             dst.Delimit(F.Address, Address);
             dst.Delimit(F.Length, Length);

@@ -37,7 +37,7 @@ namespace Z0
         public static LocatedImage from(ProcessModule src)
         {
             var path = FilePath.Define(src.FileName);
-            var part = Tables.part(path);
+            var part = PartIdParser.part(path);
             var entry = (MemoryAddress)src.EntryPointAddress;
             var @base = src.BaseAddress;
             var size = (uint)src.ModuleMemorySize;

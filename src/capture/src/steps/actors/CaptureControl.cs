@@ -41,7 +41,7 @@ namespace Z0
 
         public void Run()
         {
-            State.Running(ActorName, Ct);
+            State.Running(ActorName, Flow.delimit(Wf.Config.Parts), Ct);
 
             try
             {

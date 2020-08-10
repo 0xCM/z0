@@ -24,7 +24,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public CapturingHosts(IApiHost[] hosts, CorrelationToken ct)
         {
-            EventId = z.evid(nameof(Asm.CapturingHosts), ct);
+            EventId = z.evid(EventName, ct);
             Hosts = hosts;
             HostCount = hosts.Length;
         }

@@ -7,10 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Tools;
+    
     using static Konst;
 
     [ApiHost("api")]
-    public readonly partial struct Tools
+    public readonly struct Tooling
     {
         [MethodImpl(Inline), Op]
         public static ToolConfig config(ToolId tool,FilePath src)

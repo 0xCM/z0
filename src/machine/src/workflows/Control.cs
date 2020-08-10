@@ -52,7 +52,7 @@ namespace Z0
             
         public void Run()
         {
-            Wf.Running(Actor, Ct);
+            Wf.Running(ActorName, Ct);
             Run(default(CaptureClientStep));
             Run(default(EmitDatasetsStep));
             Run(default(ProcessPartFilesStep));
@@ -61,7 +61,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(ActorName, Ct);
         }
 
         void Run(CaptureClientStep kind, params string[] args)
@@ -72,7 +72,7 @@ namespace Z0
         
         void Run(EmitDatasetsStep kind)
         {
-            Wf.RunningT(WorkerName, kind, Ct);
+            Wf.RunningT(ActorName, kind, Ct);
             try
             {
                 using var emission = new EmitDatasets(Wf, Ct);
@@ -83,12 +83,12 @@ namespace Z0
                 Wf.Error(e, Ct);
             }
 
-            Wf.RanT(WorkerName, kind, Ct);
+            Wf.RanT(ActorName, kind, Ct);
         }
 
         void Run(RunProcessorsStep kind)
         {
-            Wf.RunningT(WorkerName, kind, Ct);
+            Wf.RunningT(ActorName, kind, Ct);
             try
             {
                 using var step = RunProcessors.create(State, Ct);
@@ -99,12 +99,12 @@ namespace Z0
                 Wf.Error(e, Ct);
             }
 
-            Wf.RanT(WorkerName, kind, Ct);
+            Wf.RanT(ActorName, kind, Ct);
         }
         
         void Run(ProcessPartFilesStep kind)
         {
-            Wf.RunningT(WorkerName, kind, Ct);
+            Wf.RunningT(ActorName, kind, Ct);
             
             try
             {
@@ -117,7 +117,7 @@ namespace Z0
                 Wf.Error(e, Ct);
             }
             
-            Wf.RanT(WorkerName, kind, Ct);
+            Wf.RanT(ActorName, kind, Ct);
         }
     }
 }

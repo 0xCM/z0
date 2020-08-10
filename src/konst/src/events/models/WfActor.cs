@@ -20,6 +20,10 @@ namespace Z0
         public readonly asci32 Name;
 
         [MethodImpl(Inline)]
+        public static implicit operator WfActor(string name)
+            => new WfActor(name);
+
+        [MethodImpl(Inline)]
         WfActor(string name)
             => Name = name;
 

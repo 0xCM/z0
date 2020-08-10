@@ -8,6 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     
+    using Z0.Data;
+    
     using static Konst;
 
     public readonly struct TestLog
@@ -69,7 +71,7 @@ namespace Z0
             if(header)
                 dst.AppendLine(Tabular.HeaderText<F>(delimiter));
 
-            var formatter = DataFields.formatter<F>(delimiter);
+            var formatter = Table.formatter<F>(delimiter);
 
             Root.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
         }

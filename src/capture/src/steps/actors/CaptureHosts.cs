@@ -26,7 +26,7 @@ namespace Z0.Asm
         public CaptureHosts(WfState state, IApiHost[] hosts,  IPartCaptureArchive dst, CorrelationToken ct)
         {
             Wf = state;
-            Hosts= hosts;
+            Hosts = hosts;
             Ct = ct;
             Target = dst;
             Wf.Created(Name, Ct);

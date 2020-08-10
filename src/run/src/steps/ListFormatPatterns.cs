@@ -17,7 +17,7 @@ namespace Z0
 
         public readonly WfStepId Id;
         
-        public readonly string Caller;
+        public readonly string ActorName;
 
         public readonly Type Source;
     
@@ -25,33 +25,33 @@ namespace Z0
         {
             Wf = wf;
             Id = Flow.step(WfStepKind.AnalyzeCalls, src);   
-            Caller = caller;
+            ActorName = caller;
             Source = src;
-            Wf.Created(Caller, Ct);
+            Wf.Created(ActorName, Ct);
         }
 
         public void Run()
         {
-            Wf.Running(Caller, Id, Ct);
+            Wf.Running(ActorName, Id, Ct);
 
             try
             {
                 var patterns = DataFlow.patterns(Source);
                 foreach(var pattern in patterns.Data)
-                    Wf.Status(Caller, pattern.Description, Ct);
+                    Wf.Status(ActorName, pattern.Description, Ct);
             
             }
             catch(Exception e)
             {
-                Wf.Error(Caller, e,Ct);
+                Wf.Error(ActorName, e,Ct);
             }
             
-            Wf.Ran(Caller, Id, Ct);
+            Wf.Ran(ActorName, Id, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(Caller, Ct);
+            Wf.Finished(ActorName, Ct);
         }
 
         CorrelationToken Ct => Wf.Ct;

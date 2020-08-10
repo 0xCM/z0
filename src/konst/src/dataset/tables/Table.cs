@@ -5,6 +5,7 @@
 namespace Z0.Data
 {        
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
@@ -13,5 +14,9 @@ namespace Z0.Data
     public readonly partial struct Table : IDatasets
     {
         public static IDatasets Service => default(Table);
+
+        [Op]
+        public static ReadOnlySpan<EnumLiteralRecord> literals(PartId part, Type src)
+            => EnumLiteralRecords.from(part,src);
     }    
 }

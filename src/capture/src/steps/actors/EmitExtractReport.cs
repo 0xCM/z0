@@ -46,7 +46,7 @@ namespace Z0.Asm
             try
             {
                 Artifact = ExtractReport.Create(Host, Source); 
-                Wf.Raise(new ExtractReportCreated(ActorName, Artifact, Ct));  
+                Wf.Raise(new ExtractReportCreated(ActorName, Artifact.RecordCount, Ct));  
                 var result = Report.Save(Target);
                 if(result)
                     Wf.Raise(new ExtractReportSaved(ActorName, Artifact, Ct));  

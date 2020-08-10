@@ -6367,3 +6367,61 @@
  24 files changed, 165 insertions(+), 158 deletions(-)
  delete mode 100644 src/flow/src/services/ops/correlate.cs
  rename src/machine/src/workflows/{ => steps/metadata}/Controller.cs (83%)
+[master 3e4a49cc5] .
+ 73 files changed, 1509 insertions(+), 275 deletions(-)
+ rename src/{flow/src/models => konst/src/cells}/CellCount.cs (76%)
+ create mode 100644 src/konst/src/collective/models/NamedValues.cs
+ rewrite src/konst/src/dataset/tables/Table.cs (89%)
+ delete mode 100644 src/konst/src/dataset/tables/TableFields.cs
+ delete mode 100644 src/konst/src/dataset/tables/TableStore.cs
+ create mode 100644 src/konst/src/dataset/tables/contracts/IDataIndex.cs
+ rename src/konst/src/dataset/tables/{ => contracts}/IDatasets.cs (100%)
+ rename src/konst/src/dataset/tables/{ => contracts}/IDocument.cs (100%)
+ create mode 100644 src/konst/src/dataset/tables/contracts/IFieldValues.cs
+ rename src/konst/src/dataset/tables/{ => contracts}/IRowFormatter.cs (100%)
+ rename src/konst/src/dataset/tables/{ => contracts}/ITable.cs (83%)
+ create mode 100644 src/konst/src/dataset/tables/contracts/ITableField.cs
+ create mode 100644 src/konst/src/dataset/tables/contracts/ITableIndex.cs
+ create mode 100644 src/konst/src/dataset/tables/contracts/ITableRow.cs
+ create mode 100644 src/konst/src/dataset/tables/contracts/ITableRows.cs
+ rename src/konst/src/dataset/tables/{ => contracts}/ITableStore.cs (100%)
+ create mode 100644 src/konst/src/dataset/tables/models/FieldEvaluation.1.cs
+ create mode 100644 src/konst/src/dataset/tables/models/FieldEvaluation.cs
+ rename src/konst/src/dataset/tables/{ => models}/HeaderCell.cs (83%)
+ rename src/konst/src/dataset/tables/{ => models}/HeaderCellT.cs (99%)
+ create mode 100644 src/konst/src/dataset/tables/models/LiteralFields.cs
+ create mode 100644 src/konst/src/dataset/tables/models/LiteralFieldsF.cs
+ create mode 100644 src/konst/src/dataset/tables/models/RenderWidth.cs
+ create mode 100644 src/konst/src/dataset/tables/models/TableEmission.cs
+ create mode 100644 src/konst/src/dataset/tables/models/TableField.cs
+ create mode 100644 src/konst/src/dataset/tables/models/TableFieldF.cs
+ create mode 100644 src/konst/src/dataset/tables/models/TableFields.cs
+ create mode 100644 src/konst/src/dataset/tables/models/TableFieldsF.cs
+ rename src/konst/src/dataset/tables/{ => models}/TableHeader.cs (91%)
+ rename src/konst/src/dataset/tables/{ => models}/TableHeaderF.cs (83%)
+ create mode 100644 src/konst/src/dataset/tables/models/TableRowFT.cs
+ rename src/konst/src/dataset/tables/{TableRow.cs => models/TableRowT.cs} (100%)
+ rename src/konst/src/dataset/tables/{ => models}/TableRows.cs (100%)
+ rename src/konst/src/dataset/tables/{ => models}/TableT.cs (100%)
+ create mode 100644 src/konst/src/dataset/tables/ops/append.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/emit.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/evaluate.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/field.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/fields.cs
+ rename src/konst/src/dataset/{models/Publication.cs => tables/ops/formatter.cs} (57%)
+ rename src/konst/src/dataset/tables/{TableHeaders.cs => ops/header.cs} (70%)
+ create mode 100644 src/konst/src/dataset/tables/ops/literal.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/literals.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/publication.cs
+ create mode 100644 src/konst/src/reflective/xtend/type/Type.DeclaredFields.cs
+ create mode 100644 src/konst/src/reflective/xtend/type/Type.DeclaredInstanceFields.cs
+ create mode 100644 src/konst/src/reflective/xtend/type/Type.DeclaredLiteralFields.cs
+ create mode 100644 src/konst/src/reflective/xtend/type/Type.ElementType.cs
+ create mode 100644 src/monitor/src/FileCatalogEntry.cs
+ create mode 100644 src/monitor/src/FileCatalogEntryField.cs
+ create mode 100644 src/monitor/src/FileContentKind.cs
+ create mode 100644 src/monitor/src/FileExtKind.cs
+ create mode 100644 src/monitor/src/FileLibraryKind.cs
+ create mode 100644 src/monitor/src/FileSystemCatalog.cs
+ create mode 100644 src/monitor/src/FolderKind.cs
+ create mode 100644 src/tables/services/ResWriter.cs

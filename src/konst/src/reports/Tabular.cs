@@ -15,7 +15,6 @@ namespace Z0
     
     public readonly struct Tabular
     {
-
         [MethodImpl(Inline)]
         public static IDatasetFormatter<F> formatter<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
@@ -31,6 +30,11 @@ namespace Z0
             where R : ITabular
                 => default;
 
+        [MethodImpl(Inline)]
+        public static F[] literals<F>()
+            where F : unmanaged, Enum            
+                => Table.index<F>().Literals;
+
         /// <summary>
         /// Derives format configuration data from a type
         /// </summary>
@@ -39,7 +43,7 @@ namespace Z0
         public static TabularFormat<F> Specify<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
         {
-            var literals = @readonly(DataFields.literals<F>());
+            var literals = @readonly(literals<F>());
             var count = literals.Length;
             var headBuffer = sys.alloc<string>(count);
             var fieldBuffer = sys.alloc<TabularField<F>>(count);            
@@ -104,6 +108,5 @@ namespace Z0
         public static string HeaderText<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
                 => Header<F>().Render(delimiter);
-
     }
 }

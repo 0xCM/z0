@@ -29,15 +29,11 @@ namespace Z0.Data
             Count = (uint)Fields.Length;
             Names = sys.alloc<string>(Count);
             Values = sys.alloc<F>(Count);
-            Fill();
-        }
 
-        void Fill()
-        {
             var src = span(Fields);            
             for(var i=0; i<src.Length; i++)            
             {
-                ref readonly var field = ref z.skip(src,i);
+                ref readonly var field = ref skip(src,i);
                 Names[i] = field.Name;
                 Values[i] = (F)field.GetRawConstantValue();
             }        

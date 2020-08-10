@@ -51,10 +51,6 @@ namespace Z0
             return summaries;
         }        
 
-
-        static ResExtractor Extractor
-            => ResExtractor.Service(typeof(Z0.Parts.Tables).Assembly);
-
         [Op]
         public static ReadOnlySpan<SystemImageSymbol> SystemImages
         {
@@ -75,6 +71,9 @@ namespace Z0
                 return sys.empty<SystemImageSymbol>();
             }
         }
+
+        static ResExtractor Extractor
+            => ResExtractor.Service(typeof(Z0.Parts.Tables).Assembly);
 
         /// <summary>
         /// Searches for an embedded document with a matching identifier and, if found,

@@ -3,24 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Data;
-
     using static Konst;
 
-    public readonly struct TableArchive : ITableArchive
+    [ApiHost]
+    public readonly struct Monitors
     {
-
-
-        public FolderPath ArchiveRoot {get;}
-
-        [MethodImpl(Inline)]
-        public TableArchive(FolderPath root)
-        {
-            ArchiveRoot = root;
-        }
+        [MethodImpl(Inline), Op]
+        public static IDirectoryMonitor monitor(FolderPath src, DirectoryMonitor.ChangeHandler handler, bool recursive = true, string filter = null)
+            => new DirectoryMonitor(src, handler, recursive, filter);
     }
 }

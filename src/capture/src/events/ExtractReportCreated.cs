@@ -10,43 +10,32 @@ namespace Z0.Asm
     using static Konst;
     using static Flow;
 
-    public readonly struct ExtractReportCreated : IWfEvent<ExtractReportCreated, ExtractReport>
+    public readonly struct ExtractReportCreated : IWfEvent<ExtractReportCreated>
     {            
         public const string EventName = nameof(ExtractReportCreated);
 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public WfActor Actor {get;}
 
         public CorrelationToken Ct {get;}
 
         public AppMsgColor Flair {get;}
-
-        public readonly ExtractReport Report;
         
-        public readonly uint RecordCount;
-
-        public readonly string ReportName;
-
-        public object Description {get;}
-
-        public ExtractReport Body         
-            => Report;
+        public readonly CellCount RecordCount;
 
         [MethodImpl(Inline)]
-        public ExtractReportCreated(string actor, ExtractReport report, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
+        public ExtractReportCreated(string actor, CellCount count, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {
-            Report = report;
-            ActorName = actor;
-            Ct = ct;
-            RecordCount = (uint)report.RecordCount;
-            ReportName = report.ReportName;
-            Flair = flair;
+            Actor = actor;
             EventId = evid(EventName, ct);
-            Description = new {RecordCount, ReportName};
+            Ct = ct;
+            RecordCount = count;
+            Flair = flair;            
         }
         
+        [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, ActorName, Description);
+            => format(EventId, Actor, RecordCount);
     }    
 }

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tools
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static DumpBin;
 
-    public partial struct DumpBin : ITool<DumpBin,Flag>
+    public partial struct DumpBin : ITool<DumpBin,DumpBinFlag>
     {   
         public const string ToolName = "dumpbin";
         
@@ -26,11 +26,11 @@ namespace Z0
         
         public FolderPath TargetDir {get;}
         
-        public IToolArchive<DumpBin,Flag> Target {get;}
+        public IToolArchive<DumpBin,DumpBinFlag> Target {get;}
 
-        public IExtensionMap<Flag> Map {get;}
+        public IExtensionMap<DumpBinFlag> Map {get;}
 
-        public ToolFlags<Flag> Flags {get;}
+        public ToolFlags<DumpBinFlag> Flags {get;}
         
         [MethodImpl(Inline)]
         public DumpBin(IWfContext wf, FolderPath src, FolderPath dst)
@@ -40,9 +40,9 @@ namespace Z0
             Name = ToolName;
             SourceDir = src;
             TargetDir = dst;
-            Flags = new ToolFlags<Flag>(0);
-            Map = new ExtensionMap<Flag,ExtMap>(0);
-            Target = new ToolArchive<DumpBin,Flag>(ToolId, TargetDir, Map);
+            Flags = new ToolFlags<DumpBinFlag>(0);
+            Map = new ExtensionMap<DumpBinFlag,ExtMap>(0);
+            Target = new ToolArchive<DumpBin,DumpBinFlag>(ToolId, TargetDir, Map);
         } 
 
         public void Dispose()

@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
+    using Z0.Data;
+    
     using static Konst;
     
     using F = EvalResultField;
@@ -81,7 +83,7 @@ namespace Z0
         
         public string DelimitedText(char delimiter)
         {            
-            var dst = DataFields.formatter<F>(delimiter);
+            var dst = Table.formatter<F>(delimiter);
             dst.Append(F.Sequence, Sequence);
             dst.Delimit(F.CaseName, CaseName);
             dst.Delimit(F.Status, Status);

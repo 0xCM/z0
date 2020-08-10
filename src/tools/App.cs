@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
 
+    using Z0.Tools;
+    
     using static Konst;
     using static Flow;
     using static z;
@@ -32,9 +34,9 @@ namespace Z0
 
         void RunDumpBin()
         {
-            var tool = Tools.dumpbin(Wf);
+            var tool = Tooling.dumpbin(Wf);
             var archive = tool.Target;
-            var files  = archive.Files(DumpBin.Flag.Disasm);
+            var files  = archive.Files(DumpBinFlag.Disasm);
             var listed = ListedFiles.from(files);
             var formatted = ListedFiles.format(listed);
             

@@ -39,16 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableFormatter<F> formatter<F>(StringBuilder dst = null, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
-                => new TableFormatter<F>(dst, delimiter);
-
-
-        [MethodImpl(Inline), Op]
-        public static TableArchive archive(FolderPath root)
-            => new TableArchive(root);
-
-        [MethodImpl(Inline), Op]
-        public static FilePath path(FolderPath dst, IDataModel model)
-            => dst + FileName.Define(model.Name, FileExtensions.Csv);
+                =>  Table.formatter<F>(dst, delimiter);
 
         [MethodImpl(Inline)]
         public static Table<F,T> table<F,T>(T[] rows)
@@ -97,7 +88,7 @@ namespace Z0
             where K : unmanaged, Enum
         {
             var path = dst.ArchiveRoot + FolderName.Define(m.Name) + FileName.Define(typeof(T).Name);
-            var transform = formatter<F>();
+            var transform = Table.formatter<F>();
             var records = z.span(src);
             var count = records.Length;
 

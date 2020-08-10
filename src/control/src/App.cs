@@ -30,8 +30,7 @@ namespace Z0
         {         
             try
             {
-                var config = Flow.configure(Context, args, Ct);
-                using var control = CaptureController.create(Context, config, Ct);
+                using var control = CaptureController.create(Context, Flow.configure(Context, args, Ct), Ct);
                 control.Run();
             }
             catch(Exception e)

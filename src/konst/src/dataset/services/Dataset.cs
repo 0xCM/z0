@@ -10,14 +10,8 @@ namespace Z0.Data
     using static Konst;
     using static z;
 
-    [ApiHost]
     public readonly struct Dataset
     {
-        [MethodImpl(Inline)]
-        public static string format<T>(T src)
-            where T : ITextual
-                => src?.Format() ?? EmptyString;
-
         [MethodImpl(Inline)]
         public static DatasetHeader<F> header<F>()
             where F : unmanaged, Enum
@@ -26,7 +20,7 @@ namespace Z0.Data
         [MethodImpl(Inline)]
         public static string[] labels<F>()
             where F : unmanaged, Enum
-                => DataFields.labels<F>();    
+                => Table.labels<F>();    
 
         /// <summary>
         /// Computes the field width from a field specifier

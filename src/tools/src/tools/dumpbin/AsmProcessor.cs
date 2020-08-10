@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tools
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -15,7 +15,7 @@ namespace Z0
         public AsmProcessor processor(AsmFileKind asm)              
             => new AsmProcessor(Wf);
 
-        public struct AsmProcessor : IToolProcessor<DumpBin,Flag>
+        public struct AsmProcessor : IToolProcessor<DumpBin,DumpBinFlag>
         {
             public const string ActorName = nameof(AsmProcessor);
             
@@ -32,7 +32,7 @@ namespace Z0
                 Wf.Created();
             }
             
-            public void Process(IToolFile<DumpBin,Flag> src)
+            public void Process(IToolFile<DumpBin,DumpBinFlag> src)
             {
                 Wf.Processing(ExtMap.Asm, src.Path);
                 

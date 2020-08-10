@@ -7,6 +7,8 @@ namespace Z0
 {
     using System;
 
+    using Z0.Data;
+    
     using static Konst;
     using static Root;
     using static XedSourceMarkers;
@@ -113,7 +115,7 @@ namespace Z0
 
         public static string FormatPattern(this XedPattern src, char delimiter)
         {
-            var dst =DataFields.formatter<F>(delimiter);
+            var dst = Table.formatter<F>(delimiter);
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
             dst.Delimit(F.Extension, src.Extension);
@@ -128,7 +130,7 @@ namespace Z0
 
         public static string FormatRow(this XedPatternSummary src, char delimiter)
         {
-            var dst = DataFields.formatter<F>(delimiter);
+            var dst = Table.formatter<F>(delimiter);
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
             dst.Delimit(F.Extension, src.Extension);

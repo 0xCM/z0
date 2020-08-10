@@ -6,7 +6,7 @@ Usage: ildasm [options] <file_name> [options]
 
 ## Options for output redirection
 
-  /OUT=<file name>    Direct output to file rather than to GUI.
+  /OUT=<filename>    Direct output to file rather than to GUI.
   /TEXT               Direct output to console window rather than to GUI.
 
   /HTML               Output in HTML format (valid with /OUT option only).

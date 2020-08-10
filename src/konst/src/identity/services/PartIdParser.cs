@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
 
     using static Konst;
@@ -15,6 +14,9 @@ namespace Z0
     {
         public static IPartIdParser Service => default(PartIdParser);
      
+        public static PartId part(FilePath src)        
+            => PartIdParser.single(src.FileName.Name.Replace("z0.", EmptyString).Replace(".dll", EmptyString).Replace(".exe", EmptyString));
+
         public ParseResult<PartId> Parse(string src)
             => parse<PartId>(src);
 

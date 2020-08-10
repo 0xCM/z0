@@ -5,16 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    public readonly struct CreateScriptStep
+    public enum FileKind
     {
-        
+        None = 0,
+
     }
-    
-    public ref struct CreateScript
-    {
 
+
+    public enum FolderKind
+    {
+        None = 0,
 
     }
 }

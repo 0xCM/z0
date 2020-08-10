@@ -6,7 +6,7 @@ namespace Z0.Data
 {
     using System;
     using System.Runtime.CompilerServices;
-
+    
     using static Konst;
     
     using F = EnumLiteralField;
@@ -40,7 +40,7 @@ namespace Z0.Data
                     
         public string DelimitedText(char delimiter)
         {
-            var formatter = DataFields.formatter<F>(delimiter);
+            var formatter = Table.formatter<F>(delimiter);
             formatter.Append(F.TypeName, TypeName);
             formatter.Delimit(F.Index, Index);
             formatter.Delimit(F.Name, Name);

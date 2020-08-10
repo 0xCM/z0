@@ -1,4 +1,4 @@
-# IlAsmSwitches
+# IlAsmFlag
 ----------------------------------------------------------------------------------------------------------
 | Option                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | /32bitpreferred             | Creates a 32-bit-preferred image (PE32).                                                                                                                                                                                                                                                                                                                                                                                                                    |

@@ -5,7 +5,8 @@
 namespace Z0
 {
     using System;
-
+    using Z0.Data;
+    
     using static Konst;
     using static z;
 
@@ -41,8 +42,6 @@ namespace Z0
 
         public readonly Duration Duration;
 
-        //public readonly DateTime Executed;
-
         public readonly Timestamp Executed;
 
         public static TestCaseRecord Define(string name, bool succeeded, Duration duration)
@@ -58,7 +57,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = DataFields.formatter<F>(delimiter);
+            var dst = Table.formatter<F>(delimiter);
             dst.Delimit(F.Case, Case);
             dst.Delimit(F.Status, Status);
             dst.Delimit(F.Duration, Duration);            

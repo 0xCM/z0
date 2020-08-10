@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
+        "Disasm",
         "Intrinsics",
         "Ints",
         "Konst",
@@ -7,6 +8,7 @@
         "Nullary",
         "Unignored",
         "fxlabel",
+        "perefs",
         "vbytes",
         "vinflate",
         "vload"
