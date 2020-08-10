@@ -6,13 +6,18 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static ReflectionFlags;
+
     partial class XTend
     {
         /// <summary>
-        /// Selects the literal fields defined by a type
+        /// Queries the source <see cref='Type'/> for <see cref='FieldInfo'/> members determined by the <see cref='BF_All'/> flags where <see cref='FieldInfo.IsLiteral'/> is true
         /// </summary>
         /// <param name="src">The source type</param>
+        [MethodImpl(Inline), Op]
         public static FieldInfo[] LiteralFields(this Type src)
             => src.Fields().Literals();
     }

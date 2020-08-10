@@ -14,12 +14,12 @@ namespace Z0.Data
     public readonly struct TableHeader<F>
         where F : unmanaged, Enum
     {
-        readonly TableFields<F> Fields;
+        readonly LiteralFields<F> Fields;
 
         readonly char Delimiter;
 
         [MethodImpl(Inline)]
-        public TableHeader(TableFields<F> fields, char delimiter = FieldDelimiter)
+        public TableHeader(LiteralFields<F> fields, char delimiter = FieldDelimiter)
         {
             Fields = fields;
             Delimiter = delimiter;
@@ -37,11 +37,6 @@ namespace Z0.Data
             get => Fields.Count;
         }        
         
-        public string[] Names
-        {
-            [MethodImpl(Inline)]
-            get => Fields.Names;
-        }
         
         public string Format()
         {
@@ -61,7 +56,7 @@ namespace Z0.Data
 
         [MethodImpl(Inline)]
         public HeaderCell<F> Cell(byte index)
-            => new HeaderCell<F>(index, Fields.Reflected(index), Value(index));
+            => new HeaderCell<F>(index, Fields.Definition(index), Value(index));
 
         [MethodImpl(Inline)]
         ref readonly F Value(byte index)

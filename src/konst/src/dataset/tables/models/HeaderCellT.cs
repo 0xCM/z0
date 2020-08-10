@@ -26,6 +26,7 @@ namespace Z0.Data
             Field = field;
             Value = value;
         }
+        
         public string Name
         {
             [MethodImpl(Inline)]

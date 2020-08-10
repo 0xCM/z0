@@ -15,12 +15,12 @@ namespace Z0.Data
     {        
         readonly StringBuilder Target;
         
-        readonly TableFields<F> Fields;
+        readonly LiteralFields<F> Fields;
         
         char Delimiter;
 
         [MethodImpl(Inline)]
-        public TableFormatter(TableFields<F> fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
+        public TableFormatter(LiteralFields<F> fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
         {
             Fields = fields;
             Target = dst ?? text.build();

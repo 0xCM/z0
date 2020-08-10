@@ -6,11 +6,6 @@ set BuildDst="K:\z0\builds"
 set BuildLog="%ZLogs%\etl\build-archive.log"
 robocopy %BuildSrc% %BuildDst% /log:%BuildLog% /tee /TS /BYTES /V /MIR 
 
-set ToolSrc="%ZLogs%\tools"
-set ToolDst="K:\z0\archives\tools"
-set ToolLog="%ZLogs%\etl\toos-archive.log"
-robocopy %ToolSrc% %ToolDst% /log:%ToolLog% /tee /TS /BYTES /V /MIR 
-
 set CaptureSrc="%ZLogs%\apps\machine\capture"
 set CaptureDst="K:\z0\archives\res\capture"
 set CaptureLog="%ZLogs%\etl\capture-archive.log"

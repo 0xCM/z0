@@ -6,13 +6,19 @@ namespace Z0.Data
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Konst;
     using static z;
 
+    [ApiHost]
     public readonly struct Dataset
     {
+        [MethodImpl(Inline)]
+        public static string format<T>(T src)
+            where T : ITextual
+                => src?.Format() ?? EmptyString;
+
+        [MethodImpl(Inline)]
         public static DatasetHeader<F> header<F>()
             where F : unmanaged, Enum
                 =>  default;       
@@ -41,9 +47,6 @@ namespace Z0.Data
         public static int index<F>(F field)
             where F : unmanaged, Enum
                 => (int)(Tabular.PosMask & Enums.e32u(field));
-
-        internal static string Render(ITextual src)
-            => src?.Format() ?? string.Empty;
      
         internal static string render(object content)
         {
@@ -51,7 +54,7 @@ namespace Z0.Data
             if(content is null)
                 return Null.Value.Format();
             else if(content is ITextual t)
-                return Render(t);
+                return t.Format();
             else
                 return content.ToString();
         }    

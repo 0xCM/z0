@@ -5,13 +5,21 @@
 namespace Z0.Data
 {        
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
-    using static z;
 
-    [ApiHost]
-    public readonly partial struct Table : IDatasets
+    public interface ITableIndex<T> : IDataIndex<T>
+        where T : struct, ITable
     {
-        public static IDatasets Service => default(Table);
+
+    }
+
+    public interface ITableIndex<F,T> : ITableIndex<T>
+        where F : unmanaged, Enum
+        where T : struct, ITable<F,T>
+    {
+
     }    
 }

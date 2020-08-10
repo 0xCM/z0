@@ -41,15 +41,6 @@ namespace Z0
             where F : unmanaged, Enum
                 => new TableFormatter<F>(dst, delimiter);
 
-        [MethodImpl(Inline)]
-        public static TableHeader<F> header<F>(char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
-                => new TableHeader<F>(fields<F>(), delimiter);
-
-        [MethodImpl(Inline)]
-        public static TableFields<F> fields<F>()
-            where F : unmanaged, Enum
-                => new TableFields<F>(typeof(F).LiteralFields());
 
         [MethodImpl(Inline), Op]
         public static TableArchive archive(FolderPath root)

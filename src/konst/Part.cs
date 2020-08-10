@@ -32,3 +32,12 @@ namespace Z0.Parts
             => parts(PartId.Sys);
     }    
 }
+
+namespace Z0
+{
+    [ApiHost("extensions")]
+    public static partial class XTend
+    {
+
+    }
+}

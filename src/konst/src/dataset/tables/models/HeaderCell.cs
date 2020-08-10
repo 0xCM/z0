@@ -15,10 +15,10 @@ namespace Z0.Data
 
         public readonly string Name;
 
-        public readonly uint Width;
+        public readonly RenderWidth Width;
 
         [MethodImpl(Inline)]
-        public HeaderCell(uint index, string name, uint width)
+        public HeaderCell(uint index, string name, RenderWidth width)
         {
             Index = index;
             Name = name;

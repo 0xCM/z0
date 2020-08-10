@@ -8,19 +8,12 @@ namespace Z0.Data
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct Publication<R>
-        where R : ITabular
+    partial struct Table
     {
-        public readonly R[] Source {get;}
-
-        public FilePath Target {get;}
-        
-        [MethodImpl(Inline)]
-        public Publication(R[] src, FilePath dst)
-        {
-            Source = src;
-            Target = dst;
-        }
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Literal<T> literal<T>(string declarer, string name, uint index, T value, LiteralKind kind, bool refinement)
+            => new Literal<T>(declarer, name, index, value, kind, refinement);
     }
 }

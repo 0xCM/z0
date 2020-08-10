@@ -3,21 +3,27 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Data
-{
+{        
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
-    using static z;
 
-    public readonly struct TableHeaders
+    public interface ITableField
     {
-        [MethodImpl(Inline), Op]
-        public static HeaderCell header(uint index, string label, uint width)
-            => new HeaderCell(index,label, width);
+        FieldInfo Definition {get;}
 
-        [MethodImpl(Inline), Op]
-        public static TableHeader header(HeaderCell[] data)
-            => data;
+        RenderWidth Width {get;}
+        
+        string Name 
+            => Definition.Name;        
+    }
+
+    public interface ITableField<F> : ITableField
+        where F : unmanaged, Enum
+    {
+
+        F Id {get;}
     }
 }

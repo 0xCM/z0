@@ -6,21 +6,24 @@ namespace Z0.Data
 {        
     using System;
 
-    public interface ITable
+    public interface ITableRow : ITextual
     {
+        string ITextual.Format()
+            => "Unformatted";
 
+        BinaryCode[] Cells {get;}            
     }
-    
-    public interface ITable<F> : ITable
+
+    public interface ITableRow<F> : ITableRow
         where F : unmanaged, Enum
     {
 
     }
 
-    public interface ITable<F,T> : ITable<F>
+    public interface ITableRow<F,T> : ITableRow<F>
         where F : unmanaged, Enum
         where T : struct, ITable<F,T>
     {
-
+        T Data {get;}
     }    
 }

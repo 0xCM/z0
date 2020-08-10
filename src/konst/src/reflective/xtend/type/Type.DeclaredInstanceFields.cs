@@ -10,15 +10,15 @@ namespace Z0
 
     using static Konst;
     using static ReflectionFlags;
-    
+
     partial class XTend
     {
         /// <summary>
-        /// Queries the source <see cref='Type'/> for <see cref='PropertyInfo'/> members determined by the <see cref='BF_All'/> flags
+        /// Queries the source <see cref='Type'/> for <see cref='FieldInfo'/> members determined by the <see cref='BF_DeclaredInstance'/> flags
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
-        public static PropertyInfo[] DeclaredProperties(this Type src)
-            => src.GetProperties(BF_All);
+        public static FieldInfo[] DeclaredInstanceFields(this Type src)
+            => src.GetFields(BF_DeclaredInstance);
     }
 }

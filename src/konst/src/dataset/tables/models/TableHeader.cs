@@ -9,9 +9,9 @@ namespace Z0.Data
 
     using static Konst;
 
-    public readonly struct TableHeader
+    public readonly struct TableHeader : IDataIndex<HeaderCell>
     {        
-        public readonly HeaderCell[] Data;
+        public HeaderCell[] Data {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator TableHeader(HeaderCell[] data)

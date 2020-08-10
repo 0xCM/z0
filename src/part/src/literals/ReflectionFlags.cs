@@ -30,7 +30,7 @@ namespace Z0
         public const BindingFlags BF_Static = FlattenHierarchy | Public | NonPublic | Static;
 
         /// <summary>
-        ///  All instance mebers
+        ///  All instance members
         /// </summary>
         public const BindingFlags BF_Instance = FlattenHierarchy | Public | NonPublic | Instance;
 
@@ -59,6 +59,9 @@ namespace Z0
         /// </summary>
         public const BindingFlags BF_NonPublicInstance = FlattenHierarchy | NonPublic | Instance;
 
+        /// <summary>
+        /// All of the knowable things
+        /// </summary>
         public const BindingFlags BF_World = BF_NonPublicStatic | BF_NonPublicInstance | BF_PublicInstance | BF_PublicStatic;
         
         /// <summary>
@@ -69,6 +72,5 @@ namespace Z0
         public const BindingFlags BF_Declared = DeclaredOnly | BF_Public | BF_Static | BF_NonPublic | BF_Instance;
 
         public const BindingFlags BF_DeclaredStatic = DeclaredOnly | BF_Public | BF_NonPublic | BF_Static;
-
     }
 }

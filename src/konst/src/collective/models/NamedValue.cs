@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static NamedValue<V> define<V>(string name, V value)
-            => new NamedValue<V>(name,value);
+            => new NamedValue<V>(name, value);
 
         public static HashSet<string> names<V>(IEnumerable<NamedValue<V>> src)
             => src.Select(x => x.Name).ToHashSet();
@@ -47,15 +47,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public NamedValue(string name, V value)
         {
-            this.Name = name;
-            this.Value = value;
+            Name = name;
+            Value = value;
         }
 
         [MethodImpl(Inline)]
         public NamedValue((string name, V value) nv)
         {
-            this.Name = nv.name;
-            this.Value = nv.value;
+            Name = nv.name;
+            Value = nv.value;
         }        
 
         [MethodImpl(Inline)]

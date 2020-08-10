@@ -6363,3 +6363,7 @@
  create mode 100644 src/flow/src/models/DelimitedList.cs
  create mode 100644 src/flow/src/services/ops/data.cs
  create mode 100644 src/konst/src/dataset/tables/IDocument.cs
+[master 9f97b421f] .
+ 24 files changed, 165 insertions(+), 158 deletions(-)
+ delete mode 100644 src/flow/src/services/ops/correlate.cs
+ rename src/machine/src/workflows/{ => steps/metadata}/Controller.cs (83%)
