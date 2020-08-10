@@ -6425,3 +6425,149 @@
  create mode 100644 src/monitor/src/FileSystemCatalog.cs
  create mode 100644 src/monitor/src/FolderKind.cs
  create mode 100644 src/tables/services/ResWriter.cs
+[master 4f20e9229] .
+ 199 files changed, 1587 insertions(+), 608 deletions(-)
+ rename src/capture/src/steps/actors/{ClearArchives.cs => ClearCaptureArchives.cs} (100%)
+ rewrite src/data/services/Tables.cs (69%)
+ create mode 100644 src/flow/src/context/WfRunner.cs
+ create mode 100644 src/flow/src/contracts/IHubClient.cs
+ create mode 100644 src/flow/src/contracts/IWfRunner.cs
+ create mode 100644 src/flow/src/contracts/IWfStep.cs
+ delete mode 100644 src/flow/src/services/ops/formatter.cs
+ create mode 100644 src/flow/src/services/ops/runner.cs
+ delete mode 100644 src/konst/src/dataset/DataFields.cs
+ rename src/konst/src/dataset/{ => services}/Dataset.cs (89%)
+ rename src/{flow/src => konst/src/dataset/tables}/contracts/IDataFlow.cs (100%)
+ rename src/{flow/src => konst/src/dataset/tables}/contracts/IDataModel.cs (74%)
+ rename src/{flow/src => konst/src/dataset/tables}/contracts/ITableArchive.cs (100%)
+ rename src/{domain/src/asm => konst/src/dataset/tables}/contracts/ITableFormatter.cs (100%)
+ rename src/{flow/src => konst/src/dataset/tables}/models/DataFlowST.cs (100%)
+ rename src/{flow/src => konst/src/dataset/tables}/models/DataModelK.cs (100%)
+ rename src/{domain/src => konst/src/dataset/tables}/models/EnumLiteralRecord.cs (100%)
+ rename src/{domain/src/services => konst/src/dataset/tables/models}/EnumLiteralRecords.cs (99%)
+ rename src/konst/src/{literals => dataset/tables}/models/EnumLiterals.cs (100%)
+ rename src/konst/src/dataset/tables/models/{FieldEvaluation.1.cs => FieldEvaluationFT.cs} (100%)
+ rename src/konst/src/dataset/{ => tables/models}/FieldIndex.cs (93%)
+ rename src/{flow/src => konst/src/dataset/tables}/models/FormatPattern.cs (100%)
+ rename src/{flow/src => konst/src/dataset/tables}/models/FormatPatterns.cs (100%)
+ rename src/{flow/src => konst/src/dataset/tables}/models/TableArchive.cs (99%)
+ rename src/{domain/src/services => konst/src/dataset/tables/models}/TableColumn.cs (100%)
+ rename src/{flow/src => konst/src/dataset/tables}/models/TableFT.cs (100%)
+ create mode 100644 src/konst/src/dataset/tables/ops/archive.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/columns.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/index.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/labels.cs
+ rename src/konst/src/{reports/tabular => dataset/tables/services}/FieldFormatterF.cs (100%)
+ rename src/konst/src/dataset/tables/{TableFormatter.cs => services/TableFormatter1.cs} (100%)
+ rename src/{domain/src/services/TableFormatter.cs => konst/src/dataset/tables/services/TableFormatter2.cs} (100%)
+ rename src/{flow/src => konst/src/events}/contracts/IDataEvent.cs (87%)
+ create mode 100644 src/konst/src/events/contracts/IDataSink.cs
+ create mode 100644 src/konst/src/events/delegates/EventReceiver.cs
+ create mode 100644 src/konst/src/reflective/xtend/type/Type.LiteralFieldValue.cs
+ delete mode 100644 src/tables/data/tools/ildasm.csv
+ delete mode 100644 src/tables/index.csv.txt
+ rename src/tables/index/{TableIndex.txt => TableIndex.restext} (100%)
+ rename src/{tables/data/tools => tools/specs}/.collect.bat (100%)
+ rename src/{tables/data/tools => tools/specs}/.schtasks.bat (100%)
+ rename src/{tables/data/tools => tools/specs}/7z.doc (100%)
+ create mode 100644 src/tools/specs/DumpBinFlag.cs
+ create mode 100644 src/tools/specs/IlDasmFlag.cs
+ create mode 100644 src/tools/specs/al.doc
+ create mode 100644 src/tools/specs/al.options.csv
+ create mode 100644 src/tools/specs/al.sources.doc
+ rename src/{tables/data/tools => tools/specs}/call.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/cd.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/cdb.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/cl.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/cl.options.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/cmd.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/copy.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/csc.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/curl.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/dotnet.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/dumpbin.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/dumpbin.md (100%)
+ rename src/{tables/data/tools => tools/specs}/editbin.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/git-help-a.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/git-help.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/ilasm.csv (99%)
+ rename src/{tables/data/tools => tools/specs}/ilasm.doc (100%)
+ create mode 100644 src/tools/specs/ilasm.spec.csv
+ create mode 100644 src/tools/specs/ildasm.csv
+ create mode 100644 src/tools/specs/ildasm.ebnf
+ rename src/{tables/data/tools => tools/specs}/ildasm.md (97%)
+ rename src/{tables/data/tools => tools/specs}/kd.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/mklink.doc (100%)
+ rename src/{tables/data/tools/ml64.bnf => tools/specs/ml64.ebnf} (98%)
+ rename src/{tables/data/tools => tools/specs}/msbuild.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/msbuild/msbuild.common.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/msbuild/msbuild.compile.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/msbuild/msbuild.cpp.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/msbuild/msbuild.embedded-resource.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/msbuild/msbuild.project-reference.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/msbuild/msbuild.reference.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/msbuild/msbuild.switches.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/msbuild/msbuild.well-known.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/msvs.tools.csv (100%)
+ rename src/{tables/data/tools => tools/specs}/nuget.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/resgen.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/rmdir.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/robocopy.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/schtasks.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/set.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/setx.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/symchk.doc (100%)
+ rename src/{tables/data/tools => tools/specs}/tracker.doc (100%)
+ create mode 100644 src/tools/src/base/CodeGen.cs
+ create mode 100644 src/tools/src/base/ToolOutcome.cs
+ rename src/tools/src/{models => base/files}/ExtensionMapF.cs (100%)
+ rename src/tools/src/{models => base/files}/ExtensionMapFX.cs (100%)
+ create mode 100644 src/tools/src/base/files/FileCatalogEntry.cs
+ create mode 100644 src/tools/src/base/files/FileCatalogEntryField.cs
+ create mode 100644 src/tools/src/base/files/FileContentKind.cs
+ create mode 100644 src/tools/src/base/files/FileExtKind.cs
+ create mode 100644 src/tools/src/base/files/FileLibraryKind.cs
+ rename src/tools/src/{wf/CreateScript.cs => base/files/FileSystemCatalog.cs} (74%)
+ create mode 100644 src/tools/src/base/files/FileSystemChangeKind.cs
+ create mode 100644 src/tools/src/base/files/FileSystemObject.cs
+ create mode 100644 src/tools/src/base/files/FileSystemObjectKind.cs
+ rename src/tools/src/base/{ => files}/Files.cs (100%)
+ create mode 100644 src/tools/src/base/files/FolderKind.cs
+ rename src/tools/src/{contracts => base/files}/IExtensionMap.cs (100%)
+ rename src/tools/src/base/{ => files}/ListedFile.cs (100%)
+ rename src/tools/src/base/{ => files}/ListedFileField.cs (100%)
+ rename src/tools/src/base/{ => files}/ListedFiles.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/Literals.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/Projects.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/form/IProjectElement.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/form/IProjectItem.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/form/IProjectProperty.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/generized/ItemGroup.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/generized/ProjectItem.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/generized/ProjectItemT.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/generized/ProjectProperty.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/generized/ProjectPropertyT.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/generized/PropertyGroup.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/BuildVersions.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/EmbeddedResource.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/OutputType.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/OutputTypes.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/Project.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/ProjectModel.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/ProjectVersion.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/Property.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/Sdk.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/TargetFramework.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/TargetFrameworks.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/models/Version.cs (100%)
+ rename src/{machine/src/infrastructure => tools/src/base}/project/ops/generic.cs (100%)
+ delete mode 100644 src/tools/src/tools/dumpbin/Flag.cs
+ create mode 100644 src/tools/src/tools/monitor/DirectoryMonitor.cs
+ create mode 100644 src/tools/src/tools/monitor/Monitors.cs
+ create mode 100644 src/tools/src/tools/monitor/Watching.cs
+ create mode 100644 src/tools/src/tools/monitor/contracts/IMonitor.cs
+ create mode 100644 src/tools/src/tools/toolproxy/ToolProxies.cs
+ create mode 100644 src/tools/src/tools/toolproxy/ToolProxy.cs
+ create mode 100644 src/tools/src/tools/toolproxy/ToolProxyGen.cs
+ create mode 100644 wf/capture-all.bat
+ create mode 100644 wf/capture-selected.bat

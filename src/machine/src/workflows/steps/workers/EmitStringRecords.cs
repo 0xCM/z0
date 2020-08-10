@@ -43,7 +43,7 @@ namespace Z0
             TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define(TargetFolder);
             EmissionCount = 0;
             PartCount = (uint)parts.Length;
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(ActorName, Ct);
         }
         
         uint EmitUserStrings(IPart part)
@@ -64,7 +64,7 @@ namespace Z0
         
         public void Run()
         {
-            Wf.RunningT(WorkerName, new {PartCount, TargetDir}, Ct);
+            Wf.RunningT(ActorName, new {PartCount, TargetDir}, Ct);
 
             foreach(var part in Parts)
             {
@@ -72,12 +72,12 @@ namespace Z0
                 EmissionCount += EmitSystemStrings(part);
             }                
 
-            Wf.RanT(WorkerName, new {PartCount, EmissionCount}, Ct);
+            Wf.RanT(ActorName, new {PartCount, EmissionCount}, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(ActorName, Ct);
         }
     }
 }

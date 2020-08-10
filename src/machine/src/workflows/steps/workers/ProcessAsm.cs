@@ -17,26 +17,25 @@ namespace Z0.Asm
     public readonly struct ProcessAsm
     {                
         [MethodImpl(Inline)]
-        public static ProcessAsm create(WfState wf) 
-            => new ProcessAsm(wf);
+        public static ProcessAsm create(WfState state, in EncodedParts encoded) 
+            => new ProcessAsm(state, encoded);
 
         readonly Dictionary<Mnemonic, ArrayBuilder<AsmRecord>> Index;
 
-        readonly WfState Wf;
+        readonly IWfContext Wf;
+
+        readonly IAsmContext Asm;
+        
+        readonly EncodedParts Encoded;
 
         readonly int[] Sequence;
 
         readonly uint[] Offset;
 
-        readonly IAsmContext Context;
-
         readonly MnemonicParser Parser;
 
         IAsmFunctionDecoder Decoder
-            => Context.FunctionDecoder;
-
-        IArchiveServices DataSource 
-            => Archives.Services;            
+            => Asm.FunctionDecoder;
 
         int NextSequence
         {
@@ -51,84 +50,28 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        internal ProcessAsm(WfState wf)
+        internal ProcessAsm(WfState state, in EncodedParts encoded)
         {
-            Wf = wf;
-            Context = wf.Asm;
+            Wf = state.Wf;
+            Asm = state.Asm;
+            Encoded = encoded;
             Parser = MnemonicParser.Create();
             Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRecord>>();
             Sequence = sys.alloc<int>(1);
             Offset = sys.alloc<uint>(1);            
         }
         
-        // public AsmRecordSets<Mnemonic> Process(params PartId[] parts)
-        // {
-        //     var files = PartFiles.create(Context).ParseFileIndex(parts);
-        //     var parser = ParseReportParser.Service;
-
-        //     for(var i=0; i<parts.Length; i++)
-        //     {
-        //         var part = parts[i];
-        //         if(files.TryGetValue(part, out var partFiles))
-        //         {
-        //             for(var j= 0; j<partFiles.Length; j++)
-        //             {
-        //                 var path = partFiles[j].Path;
-        //                 var records = parser.ParseRecords(path);
-        //                 if(records)
-        //                     Process(records.Value);
-        //             }                    
-        //         }       
-        //     }   
-        //     return Processed();
-        // }
- 
-        public AsmRecordSets<Mnemonic> Process(params PartId[] parts)
-        {            
-            var paths = Context.AppPaths.ForApp(PartId.Control);
-            
-            var capture = DataSource.CaptureArchive(paths.CaptureRoot);
-            var archive = DataSource.EncodedHexArchive(capture.CodeDir);                    
-
-            for(var i=0; i<parts.Length; i++)
+        public AsmRecordSets<Mnemonic> Process()
+        {
+            var locations = z.span(Encoded.Locations);
+            var count = locations.Length;
+            for(var i=0u; i<count; i++)
             {
-                var part = parts[i];
-
-                var hosts = capture.ParseFilePaths(part);
-                for(var j=0; j<hosts.Length; j++)                
-                {
-                    var host = hosts[j];
-                    var members = ParsedRecordParser.parse(host);
-                    for(var k =0; k<members.Length; k++)
-                    {
-                        var member = members[k];
-                        Process(member);
-                    }                    
-                }        
+                ref readonly var address = ref skip(locations,i);
+                Process(Encoded[address]);
             }
+
             return Processed();
-        }
-
-        void Process(in MemberParseRecord src)
-        {
-            var instructions = Decoder.Decode(src.Data);
-            if(instructions)
-                Process(src.Data, instructions.Value);
-        }
-
-        void Process(IdentifiedCode[] src)
-        {
-            var count = src.Length;
-            for(var i=0; i< count; i++)
-                Process(src[i]);
-        }
-
-        [MethodImpl(Inline)]
-        void Process(in IdentifiedCode src)
-        {
-            var decoded = Decoder.Decode(src);
-            if(decoded)
-                Process(src.Encoded, decoded.Value);
         }
 
         [MethodImpl(Inline)]
@@ -139,13 +82,12 @@ namespace Z0.Asm
                 Process(src.Encoded, decoded.Value);
         }
 
-        void Process(MemberParseRecord[] records)
+        void Process(in MemberParseRecord src)
         {
-            var src = records.ToReadOnlySpan();
-            for(var i=0; i<src.Length; i++)
-                Process(skip(src,i));
+            var instructions = Decoder.Decode(src.Data);
+            if(instructions)
+                Process(src.Data, instructions.Value);
         }
-
 
         AsmRecordSets<Mnemonic> Processed()
         {

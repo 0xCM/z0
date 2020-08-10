@@ -21,11 +21,7 @@ namespace Z0
         
         public asci16 Process(ReadOnlySpan<CpuidFeature> src, CpuidProcessStep step)
             => CpuidProcessor.Service.Process(src,step ?? OnStep);        
-        
-        [Op]
-        public ProcessAsm Parsed(WfState wf)
-            => ProcessAsm.create(wf);
-        
+                
         static void OnStep(Vector128<byte> src) 
         {
 

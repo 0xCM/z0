@@ -77,5 +77,7 @@ namespace Z0
         EmitHostArtifacts,       
 
         EmitImageSummaries,
+
+        IndexEncodedParts
     }
 }

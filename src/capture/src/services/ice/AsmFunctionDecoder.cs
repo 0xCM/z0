@@ -83,7 +83,12 @@ namespace Z0.Asm
         {
             try
             {   
-                z.insist(code.IsNonEmpty, $"The block supplied for decoding was empty");
+                if(code.IsEmpty)
+                {
+                    term.warn("Supplied source was empty");
+                    return Option.none<AsmInstructions>();
+                }
+
                 var decoded = new Iced.InstructionList();
                 var reader = new Iced.ByteArrayCodeReader(code.Encoded);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);

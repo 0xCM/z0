@@ -12,8 +12,8 @@ namespace Z0
     {
         public const WfStepKind Kind = WfStepKind.RunProcessors;
         
-        public const string Name = nameof(RunProcessors);    
+        public const string ActorName = nameof(RunProcessors);    
 
-        public static WfStepId Id => step(Kind, Name);
+        public static WfStepId Id => step(Kind, ActorName);
     }
 }

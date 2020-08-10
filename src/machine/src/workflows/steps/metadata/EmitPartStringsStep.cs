@@ -12,6 +12,8 @@ namespace Z0
     [Step(WfStepKind.EmitPartStrings, true)]
     public readonly struct EmitPartStringsStep
     {
+        public const WfStepKind Kind = WfStepKind.EmitPartStrings;
+        
         public const string WorkerName = nameof(EmitPartStrings);
 
         public const string DataType = EmitStringRecordsStep.DataType;

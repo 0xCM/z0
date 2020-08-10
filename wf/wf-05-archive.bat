@@ -41,6 +41,11 @@ set ResLitDst="K:\z0\archives\res\literals"
 set ResLitLog="%ZLogs%\etl\literal-archive.log"
 robocopy %ResLitSrc% %ResLitDst% /log:%ResLitLog% /tee /TS /BYTES /V /MIR
 
+set AsmRecSrc="%ZLogs%\apps\machine\capture\records"
+set AsmRecDst="K:\z0\archives\res\capture\records"
+set AsmRecLog="%ZLogs%\etl\asmrecords-archive.log"
+robocopy %AsmRecSrc% %AsmRecDst% /log:%AsmRecLog% /tee /TS /BYTES /V /MIR
+
 set XedSrc="%ZLogs%\apps\xed"
 set XedDst="K:\z0\archives\xed"
 set XedLog="%ZLogs%\etl\xed-archive.log"

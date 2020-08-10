@@ -17,23 +17,26 @@ namespace Z0
         
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public WfActor Actor {get;}
 
-        public string ProcessorName {get;}
-
+        public WfProcessor Processor {get;}
+        
+        public string Message {get;}
+        
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public RanProcessor(string actor, string processor, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
+        public RanProcessor(string actor, string processor, string message, CorrelationToken ct,  AppMsgColor flair = RanFlair)
         {
             EventId = WfEventId.define(EventName, ct);
-            ActorName = actor;
-            ProcessorName = processor;
+            Actor = actor;
+            Processor = processor;
+            Message =  message;
             Flair = flair;
         }
         
         [MethodImpl(Inline)]        
         public string Format()
-            => text.format(PSx3, EventId, ActorName, ProcessorName);               
+            => text.format(PSx4, EventId, Actor, Processor, Message);
     }        
 }

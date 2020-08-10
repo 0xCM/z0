@@ -44,12 +44,13 @@ namespace Z0
         public Ref Ref
         {
             [MethodImpl(Inline)] 
-            get => SegRefs.@ref(in this[0], (uint)Encoded.Length);
+            get => SegRefs.@ref(in this[0], (uint)Length);
         }
+        
         public int Length 
         { 
             [MethodImpl(Inline)] 
-            get => Encoded.Length; 
+            get => Encoded?.Length ?? 0; 
         }
 
         public bool IsEmpty 
@@ -99,11 +100,16 @@ namespace Z0
             => !a.Equals(b);
        
         public bool Equals(BinaryCode src)
-        {
+        {        
             if(IsNonEmpty && src.IsNonEmpty)
                 return Encoded.SequenceEqual(src.Encoded);
             else
-                return false;
+            {
+                if(Length == 0 && src.Length == 0)
+                    return true;
+                else
+                    return false;
+            }                
         }        
         
         public string Format()
@@ -113,7 +119,7 @@ namespace Z0
             => Encoded.FormatHexBytes(config);
 
         public override int GetHashCode()
-            => Encoded.GetHashCode();
+            => View.GetHashCode();
         
         public override bool Equals(object src)
             => src is BinaryCode encoded && Equals(encoded);

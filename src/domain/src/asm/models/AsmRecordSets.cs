@@ -15,11 +15,9 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public AsmRecordSets(params AsmRecordSet<T>[] src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
-        public AsmRecordSet<T>[] Content
+        public ReadOnlySpan<AsmRecordSet<T>> View
         {
             [MethodImpl(Inline)]
             get => Data;
