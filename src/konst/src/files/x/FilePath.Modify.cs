@@ -16,21 +16,21 @@ namespace Z0
         /// </summary>
         /// <param name="src">The file path</param>
         public static string ReadText(this FilePath src)
-            => FileSystem.ReadText(src);
+            => FileOps.ReadText(src);
 
         /// <summary>
         /// Reads the line-partitioned content of a text file
         /// </summary>
         /// <param name="src">The file path</param>
         public static string[] ReadLines(this FilePath src)
-            => FileSystem.ReadLines(src);
+            => FileOps.ReadLines(src);
 
         /// <summary>
         /// Reads the full content of a file into a byte array
         /// </summary>
         /// <param name="src">The file path</param>
         public static byte[] ReadBytes(this FilePath src)
-            => FileSystem.ReadBytes(src);
+            => FileOps.ReadBytes(src);
 
         /// <summary>
         /// Deletes the file if it exists
@@ -40,7 +40,7 @@ namespace Z0
         {
             try
             {
-                FileSystem.delete(src);
+                FileOps.delete(src);
                 return src;
             }
             catch(Exception)
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         public static FilePath CreateParentIfMissing(this FilePath src)
-            => FileSystem.CreateParent(src);
+            => FileOps.CreateParent(src);
 
         public static void Append(this FilePath dst, params string[] src)
         {
@@ -76,7 +76,7 @@ namespace Z0
 
         static FilePath reifyParent(FilePath src)
         {
-            FileSystem.create(src.FolderPath);
+            FileOps.create(src.FolderPath);
             return src;
         }
     }

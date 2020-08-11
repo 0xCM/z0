@@ -15,11 +15,10 @@ namespace Z0.Data
         [MethodImpl(Inline)]
         public static DataFlow<S,T> flow<S,T>(S src, T dst)
             => new DataFlow<S,T>(src,dst);
-
         
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static DataFlow<T,BinaryCode> flow<T>(T src, BinaryCode dst)
+        public static DataFlow<T[],BinaryCode> flow<T>(T[] src, BinaryCode dst)
             where T : struct
-                => new DataFlow<T,BinaryCode>(src, dst);
+                => new DataFlow<T[],BinaryCode>(src, dst);
     }
 }

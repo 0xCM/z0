@@ -15,15 +15,8 @@ namespace Z0
     /// <summary>
     /// Represents a fully-qualified path to a folder on the local machine
     /// </summary>
-    public partial class FolderPath : IPathComponent<FolderPath>
+    public partial class FolderPath : ITextual
     {        
-        /// <summary>
-        /// Expects that the source is prametrized by one or more variables identified by $(VarName)
-        /// </summary>
-        /// <param name="src"></param>
-        public static FolderPath Parametric(string src)
-            => FolderPath.Define(src);
-        
         /// <summary>
         /// The full path name
         /// </summary>

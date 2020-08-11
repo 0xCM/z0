@@ -10,8 +10,23 @@ namespace Z0
     /// <summary>
     /// Specifies archive service operations for hosted bits
     /// </summary>
-    public interface IEncodedHexArchive : IFileArchive
+    public interface IEncodedHexArchive
     {
+        /// <summary>
+        /// The directory to which path calculations are relative
+        /// </summary>
+        FolderPath ArchiveRoot {get;}
+
+        /// <summary>
+        /// Enumerates the archived files
+        /// </summary>
+        IEnumerable<FilePath> Files();
+
+        /// <summary>
+        /// Enumerates the archived files owned by a specified part
+        /// </summary>
+        IEnumerable<FilePath> Files(PartId part);
+
         /// <summary>
         /// Reads all files in the archive
         /// </summary>

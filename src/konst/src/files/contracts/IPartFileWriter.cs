@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFileStreamWriter : IServiceAllocation
+    using System;
+
+    public interface IFileStreamWriter : IDisposable
     {
 
     }

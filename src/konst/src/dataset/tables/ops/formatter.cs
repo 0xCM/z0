@@ -13,16 +13,37 @@ namespace Z0.Data
 
     partial struct Table
     {
+        /// <summary>
+        /// Creates a formatter from a rendering function render:C -> T
+        /// </summary>
+        /// <param name="render">A function that produces text from an element value</param>
+        /// <typeparam name="T">The type of element to format</typeparam>
+        [MethodImpl(Inline)]
+        public static CellFormatter<C,T> formatter<C,T>(CellFormatter.RenderFunction<C,T> render)
+            where C : struct
+                => new CellFormatter<C,T>(render);
+
         [MethodImpl(Inline)]
         public static Z0.TableFormatter<F> formatter<F>()
             where F : unmanaged, Enum
                 => new Z0.TableFormatter<F>(text.build(), FieldDelimiter);
 
         [MethodImpl(Inline)]
+        public static Z0.TableFormatter<F> formatter<F>(in LiteralFields<F> fields, char delimiter = FieldDelimiter)
+            where F : unmanaged, Enum
+                => new Z0.TableFormatter<F>(text.build(), delimiter, fields);
+
+        [MethodImpl(Inline)]
+        public static Z0.TableFormatter<F> formatter<F>(in LiteralFields<F> fields, StringBuilder dst, char delimiter = FieldDelimiter)
+            where F : unmanaged, Enum
+                => new Z0.TableFormatter<F>(dst, delimiter, fields);
+
+        [MethodImpl(Inline)]
         public static Z0.TableFormatter<F> formatter<F>(StringBuilder dst, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
                 => new Z0.TableFormatter<F>(dst, delimiter);
 
+        [MethodImpl(Inline)]
         public static Z0.TableFormatter<F> formatter<F>(StringBuilder dst, bool emitheader, char delimiter = FieldDelimiter, F f = default)
             where F : unmanaged, Enum
         {
@@ -33,9 +54,10 @@ namespace Z0.Data
         }
 
         [MethodImpl(Inline)]
-        public static TableFormatter<F> formatter<F>(LiteralFields<F> fields, StringBuilder dst = null)
+        public static TableFormatter<F,T> formatter<F,T>(LiteralFields<F> fields, StringBuilder dst = null)
             where F : unmanaged, Enum
-                => new TableFormatter<F>(fields, dst);
+            where T : struct, ITable<F,T>
+                => new TableFormatter<F,T>(fields, dst);
 
         [MethodImpl(Inline)]
         public static FieldFormatter<F> formatter<F>(char delimiter = FieldDelimiter) 

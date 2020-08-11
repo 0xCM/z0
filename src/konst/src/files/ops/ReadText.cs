@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct FileSystem
+    partial struct FileOps
     {
         /// <summary>
         /// Reads the full content of a text file

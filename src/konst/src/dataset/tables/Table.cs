@@ -14,9 +14,5 @@ namespace Z0.Data
     public readonly partial struct Table : IDatasets
     {
         public static IDatasets Service => default(Table);
-
-        [Op]
-        public static ReadOnlySpan<EnumLiteralRecord> literals(PartId part, Type src)
-            => EnumLiteralRecords.from(part,src);
     }    
 }

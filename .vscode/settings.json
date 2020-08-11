@@ -8,6 +8,7 @@
         "Nullary",
         "Unignored",
         "fxlabel",
+        "opcount",
         "opid",
         "opname",
         "perefs",

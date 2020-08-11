@@ -36,11 +36,10 @@ namespace Z0.Data
             [MethodImpl(Inline)]
             get => Fields.Count;
         }        
-        
-        
+                
         public string Format()
         {
-            var formatter = Table.formatter<F>(Fields);
+            var formatter = Table.formatter<F>(Fields, Delimiter);
             for(var i=0u; i<Fields.Count; i++)
             {
                 if(i != 0)

@@ -8,7 +8,7 @@ namespace Z0
     
     using static Konst;
 
-    public interface TTestResultSink : IRecordSink<TestCaseRecord>
+    public interface TTestResultSink : ISink<TestCaseRecord>
     {
         void ReportCaseResult(string casename, bool succeeded, TimeSpan duration)
             => Deposit(TestCaseRecord.Define(casename,succeeded,duration));

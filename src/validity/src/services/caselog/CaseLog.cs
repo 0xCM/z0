@@ -11,7 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
     
-
     public readonly struct CaseLog : ICaseLog
     {
         public static ReadOnlySpan<string> rows<R>(params R[] src)

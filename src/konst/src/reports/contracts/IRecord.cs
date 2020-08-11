@@ -11,15 +11,7 @@ namespace Z0
 
     }
 
-
-    public interface IRecord<R> : IRecord, ITabular<R>
-        where R : IRecord
-    {
-
-
-    }
-
-    public interface IRecord<F,R> : IRecord<R>, ITabular<F,R>, ITextual
+    public interface IRecord<F,R> : IRecord, ITabular<F,R>, ITextual
         where F : unmanaged, Enum
         where R : IRecord
     {

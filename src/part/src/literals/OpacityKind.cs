@@ -103,5 +103,7 @@ namespace Z0
       GetEntryAssembly,
 
       GetCallingAssembly,
+
+      GetFieldValue
     }
 }

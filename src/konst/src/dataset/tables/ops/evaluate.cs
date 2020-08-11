@@ -22,7 +22,10 @@ namespace Z0.Data
                 try
                 {
                     ref readonly var field = ref fields[i];
-                    seek(dst,i) = (field.Name, skip(fields.Data,i).GetValue((int)i));
+                    ref readonly var data = ref skip(fields.Data,i);
+                    var name = field.Name;
+                    var value = sys.value(data, field.Definition);
+                    seek(dst,i) = (name, value);
                 }
                 catch(Exception e)
                 {

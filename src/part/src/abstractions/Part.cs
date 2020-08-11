@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-            
+    
     public abstract class Part<P> : IPart<P> 
         where P : Part<P>, IPart<P>, new()
     {                
@@ -17,13 +17,21 @@ namespace Z0
 
         public Assembly Owner {get;}
 
-        public readonly PartBox Box;
+        Runtime<P> _Runtime {get;}
+
+        public Runtime Runtime
+        {
+            [MethodImpl(Inline)]
+            get => _Runtime;
+        }
+
+        protected PartBox Box;
 
         public virtual PartId[] Needs {get;}
 
         protected static PartId[] parts(params PartId[] src)
             => src;
-
+        
         /// <summary>
         /// The resolved part
         /// </summary>
@@ -35,12 +43,14 @@ namespace Z0
             Box = PartBox.Empty;
             Owner = typeof(P).Assembly;            
             Id =  id(Owner);
+            _Runtime = new Runtime<P>(Box);            
         }
 
         protected Part(PartBox box)
             : this()
         {
             Box = box;
+            _Runtime = new Runtime<P>(Box);
         }
 
         [MethodImpl(Inline)]

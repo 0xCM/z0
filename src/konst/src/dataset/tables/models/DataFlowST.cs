@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct DataFlow<S,T> : IDataFlow<S,T>
+    public readonly struct DataFlow<S,T>
     {
         public readonly S Source;
 
@@ -21,11 +21,5 @@ namespace Z0
             Source = src;
             Target = dst;
         }
-
-        S IDataFlow<S,T>.Source 
-            => Source;
-
-        T IDataFlow<S,T>.Target 
-            => Target;
     }
 }

@@ -13,7 +13,7 @@ namespace Z0.Data
 
     partial struct Table
     {
-        public static void emit<F,T>(TableEmission<F,T> src, FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
+        public static void emit<F,T>(in TableEmission<F,T> src, FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
         {

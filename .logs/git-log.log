@@ -6575,3 +6575,55 @@
  19 files changed, 402 insertions(+), 190 deletions(-)
  create mode 100644 src/flow/src/context/WfProcessor.cs
  create mode 100644 src/machine/src/workflows/steps/workers/IndexEncodedParts.cs
+[master 0367a0601] .
+ 468 files changed, 1356 insertions(+), 913 deletions(-)
+ create mode 100644 src/domain/src/asm/common/AsmFunctionData.cs
+ delete mode 100644 src/domain/src/asm/common/AsmFunctionList.cs
+ create mode 100644 src/domain/src/asm/common/AsmFunctions.cs
+ rename src/{tools/src/base/files/FileLibraryKind.cs => domain/src/files/CodeLibraryKind.cs} (90%)
+ create mode 100644 src/domain/src/files/DriveLetter.cs
+ rename src/{tools/src/base => domain/src}/files/ExtensionMapF.cs (100%)
+ rename src/{tools/src/base => domain/src}/files/ExtensionMapFX.cs (100%)
+ rename src/{tools/src/base => domain/src}/files/FileCatalogEntry.cs (100%)
+ rename src/{tools/src/base => domain/src}/files/FileCatalogEntryField.cs (100%)
+ rename src/{tools/src/base => domain/src}/files/FileContentKind.cs (100%)
+ rename src/{tools/src/base => domain/src}/files/FileExtKind.cs (100%)
+ rename src/{tools/src/base => domain/src}/files/FileSystemChangeKind.cs (87%)
+ rename src/{tools/src/base => domain/src}/files/FileSystemObject.cs (94%)
+ rename src/{tools/src/base => domain/src}/files/FileSystemObjectKind.cs (83%)
+ create mode 100644 src/domain/src/files/FileSystemObjects.cs
+ rename src/{tools/src/base => domain/src}/files/Files.cs (95%)
+ rename src/{tools/src/base => domain/src}/files/FolderKind.cs (100%)
+ rename src/{tools/src/base => domain/src}/files/IExtensionMap.cs (100%)
+ rename src/{tools/src/base => domain/src}/files/ListedFile.cs (100%)
+ rename src/{tools/src/base => domain/src}/files/ListedFileField.cs (100%)
+ create mode 100644 src/domain/src/files/PathSeparator.cs
+ create mode 100644 src/domain/src/files/Workspace.cs
+ delete mode 100644 src/konst/src/asci.literals/AsciPair.cs
+ delete mode 100644 src/konst/src/asci.literals/AsciPairCode.cs
+ rename src/konst/src/asci.literals/{AsciPunkCode.cs => AsciSymCode.cs} (51%)
+ rename src/konst/src/asci.literals/{AsciPunk.cs => AsciSymSymbol.cs} (52%)
+ create mode 100644 src/konst/src/collective/aspects/ICounted.cs
+ create mode 100644 src/konst/src/dataset/tables/contracts/ICellular.cs
+ create mode 100644 src/konst/src/dataset/tables/contracts/IConstIndex.cs
+ create mode 100644 src/konst/src/dataset/tables/contracts/IContentIndex.cs
+ rename src/konst/src/dataset/{models/IEntity.cs => tables/contracts/IDataEntity.cs} (64%)
+ rename src/konst/src/dataset/{models => tables/contracts}/IDatasetArchive.cs (98%)
+ rename src/konst/src/{collective/aspects => dataset/tables/contracts}/IIndex.cs (57%)
+ create mode 100644 src/konst/src/dataset/tables/contracts/ITableCells.cs
+ create mode 100644 src/konst/src/dataset/tables/models/RowValue.cs
+ create mode 100644 src/konst/src/dataset/tables/models/RowValueT.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/flow.cs
+ create mode 100644 src/konst/src/dataset/tables/ops/value.cs
+ create mode 100644 src/machine/src/workflows/events/CapturedResourceSets.cs
+ delete mode 100644 src/metareader/src/models/metadata/readers/contracts/ITableRow.cs
+ delete mode 100644 src/metareader/src/models/metadata/readers/generalized/TableRow.cs
+ rewrite src/tools/specs/ilasm.spec.csv (100%)
+ rewrite src/tools/specs/ildasm.csv (93%)
+ create mode 100644 src/tools/specs/mklink.csv
+ delete mode 100644 src/tools/src/base/files/FileSystemCatalog.cs
+ rename src/tools/src/tools/{dumpbin => }/AsmProcessor.cs (100%)
+ rename src/tools/{specs => src/tools/dumpbin}/DumpBinFlag.cs (100%)
+ rename src/tools/{specs => src/tools/dumpbin}/dumpbin.csv (100%)
+ rename src/tools/{specs => src/tools/dumpbin}/dumpbin.md (100%)
+ create mode 100644 src/tools/src/tools/jitdasm/test.cmd

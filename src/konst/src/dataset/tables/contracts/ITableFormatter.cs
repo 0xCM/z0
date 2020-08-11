@@ -11,6 +11,17 @@ namespace Z0
     {
         void EmitEol();        
 
+        string FormatHeader();
+        
         void EmitHeader();
+    }
+
+    public interface ITableFormatter<F,T> 
+        where F : unmanaged, Enum
+        where T : struct, ITable<F,T>         
+    {
+        string FormatHeader();
+
+        string FormatRow(in T src);
     }
 }

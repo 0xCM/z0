@@ -20,5 +20,9 @@ namespace Z0.Data
         public static LiteralFields<F> literals<F>()
             where F : unmanaged, Enum
                 => new LiteralFields<F>(typeof(F).DeclaredLiteralFields());        
+
+        [Op]
+        public static ReadOnlySpan<EnumLiteralRecord> literals(PartId part, Type src)
+            => EnumLiteralRecords.from(part,src);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public interface ITestQueue : TTestResultSink, IAppMsgQueue, IRecordSink<BenchmarkRecord>
+    public interface ITestQueue : TTestResultSink, IAppMsgQueue, ISink<BenchmarkRecord>
     {
         IEnumerable<BenchmarkRecord> TakeBenchmarks();
 
