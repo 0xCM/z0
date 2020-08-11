@@ -40,12 +40,12 @@ namespace Z0
         public void Render(PartInstructions src)
         {
             var part = src.Part;
-            var inxs = src.Content;
+            var inxs = src.Data;
             var archive = Archives.Services.Semantic;
             var dir = archive.SemanticDir(part).Clear();
 
-            for(var i = 0; i < src.Content.Length; i++)
-                Render(src.Content[i]);
+            for(var i = 0; i < src.Data.Length; i++)
+                Render(src.Data[i]);
         }
 
         public void Render(HostInstructions src)        

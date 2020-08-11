@@ -8,7 +8,7 @@ namespace Z0
 
     partial struct Recapture
     {
-        Option<AsmFunctionCode> CreatFunction(CapturedCode capture)
+        Option<AsmFunctionCode> CreateFunction(CapturedCode capture)
         {
             var decoded = Context.FunctionDecoder.Decode(capture);
             if(decoded)

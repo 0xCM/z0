@@ -5,21 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
 
-    using static Konst;
-
-    public enum FileSystemChangeKind : byte
+    public enum PathSeparator : ushort
     {
-        None = 0,
+        BS = AsciSymSymbol.BS,
 
-        Created = 1,
+        FS = AsciSymSymbol.FS
+    }
 
-        Deleted = 2,
-
-        Modified = 4,
-
-        Renamed = 8,
-    }        
 }

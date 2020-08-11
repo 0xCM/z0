@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public interface ITableFormatter<F> : ITextual
         where F : unmanaged, Enum

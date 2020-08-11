@@ -6571,3 +6571,7 @@
  create mode 100644 src/tools/src/tools/toolproxy/ToolProxyGen.cs
  create mode 100644 wf/capture-all.bat
  create mode 100644 wf/capture-selected.bat
+[master 0987a4ce5] .
+ 19 files changed, 402 insertions(+), 190 deletions(-)
+ create mode 100644 src/flow/src/context/WfProcessor.cs
+ create mode 100644 src/machine/src/workflows/steps/workers/IndexEncodedParts.cs

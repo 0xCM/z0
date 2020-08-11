@@ -3,15 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
-
-    public enum FileSystemObjectKind : byte
+    using System.Security;
+        
+    [SuppressUnmanagedCodeSecurity]
+    public interface IDataEntity<T> : ITextual, INullary<T>, IEquatable<T>
+        where T : struct
     {
-        None = 0,
-
-        Directory = 1,
-
-        File = 2
+        
     }
 }

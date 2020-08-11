@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    public interface IBinaryResourceIndex : IContentedIndex<BinaryResource>
+    public interface IBinaryResourceIndex : IContentIndex<BinaryResource>
     {        
         BinaryResource Find(string id)
             => Content.First(r => r.Identifier == id);

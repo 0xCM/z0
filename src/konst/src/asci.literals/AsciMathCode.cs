@@ -11,32 +11,32 @@ namespace Z0
         /// <summary>
         /// The '!' character code 33
         /// </summary>
-        NOT = (byte)S.NOT,
+        Not = (byte)S.Not,
 
         /// <summary>
         /// The '%' character code 37
         /// </summary>
-        MOD = (byte)S.MOD,
+        Mod = (byte)S.Mod,
 
         /// <summary>
         /// The '*' character code 42
         /// </summary>
-        MUL = (byte)S.MUL,
+        Mul = (byte)S.Mul,
 
         /// <summary>
         /// The '+' character code 43
         /// </summary>
-        ADD = (byte)S.ADD,
+        Add = (byte)S.Add,
 
         /// <summary>
         /// The '-' character code 45
         /// </summary>
-        SUB = (byte)S.SUB,
+        Sub = (byte)S.Sub,
 
         /// <summary>
         /// The '/' character code 47
         /// </summary>
-        DIV = (byte)S.DIV,
+        Div = (byte)S.Div,
 
         /// <summary>
         /// The '<' character code 60
@@ -46,7 +46,7 @@ namespace Z0
         /// <summary>
         /// The '=' character code 61
         /// </summary>
-        Eq = (byte)S.EQ,
+        Eq = (byte)S.Eq,
 
         /// <summary>
         /// The '>' character code 62
@@ -56,11 +56,11 @@ namespace Z0
         /// <summary>
         /// The '^' character code 94
         /// </summary>
-        EXP = (byte)S.EXP,
+        Exp = (byte)S.Exp,
 
         /// <summary>
         /// The '~' character code 126
         /// </summary>
-        SYM = (byte)S.SYM, 
+        Complement = (byte)S.Complement, 
     }
 }

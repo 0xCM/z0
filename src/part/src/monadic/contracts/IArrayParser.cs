@@ -20,10 +20,4 @@ namespace Z0
         ParseResult<S,T>[] Parse(params S[] src)
             => (this as IStreamParser<P,S,T>).Parse(src).ToArray();
     }
-
-    public interface ICellularPaser<S,T> : IParser<S,T[]>
-        where T : unmanaged
-    {
-
-    }
 }

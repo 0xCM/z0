@@ -9,7 +9,7 @@ namespace Z0
         /// <summary>
         /// The '=' character
         /// </summary>
-        EQ = '=',
+        Eq = '=',
 
         /// <summary>
         /// The '>' symbol
@@ -24,41 +24,56 @@ namespace Z0
         /// <summary>
         /// The '^' character
         /// </summary>
-        EXP = '^',
+        Exp = '^',
 
         /// <summary>
         /// The '+' character
         /// </summary>
-        ADD = '+',
+        Add = '+',
 
         /// <summary>
         /// The '-' character
         /// </summary>
-        SUB = '-',
+        Sub = '-',
 
         /// <summary>
         /// The '*' character
         /// </summary>
-        MUL = '*',
+        Mul = '*',
 
         /// <summary>
         /// The '/' symbol
         /// </summary>
-        DIV = '/',
+        Div = '/',
 
         /// <summary>
         /// The '%' character
         /// </summary>
-        MOD = '%',
+        Mod = '%',
 
         /// <summary>
         /// The '~' character
         /// </summary>
-        SYM = '~', 
+        Complement = '~', 
 
         /// <summary>
         /// The '!' character
         /// </summary>
-        NOT = '!',
+        Not = '!',
+
+        /// <summary>
+        /// The '&' character
+        /// </summary>
+        And = '&',
+
+        /// <summary>
+        /// The '|' character
+        /// </summary>
+        Or = '|',
+
+        /// <summary>
+        /// The '^' character
+        /// </summary>
+        Xor = '^',
     }
 }

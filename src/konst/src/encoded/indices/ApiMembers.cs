@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines and index over <see cref='ApiMember'/> values
     /// </summary>
-    public readonly struct ApiMembers : IContentedIndex<ApiMember>
+    public readonly struct ApiMembers : IContentIndex<ApiMember>
     {
         public readonly ApiMember[] Data;
 

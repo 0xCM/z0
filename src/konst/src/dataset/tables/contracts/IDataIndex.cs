@@ -5,11 +5,9 @@
 namespace Z0.Data
 {        
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
+    using System.Security;
 
-    using static Konst;
-
+    [SuppressUnmanagedCodeSecurity]
     public interface IDataIndex
     {
         CellCount Count {get;}
@@ -17,6 +15,7 @@ namespace Z0.Data
         int Length {get;}
     }
     
+    [SuppressUnmanagedCodeSecurity]
     public interface IDataIndex<T> : IDataIndex
     {
         T[] Data {get;}

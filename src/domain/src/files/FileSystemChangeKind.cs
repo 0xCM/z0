@@ -2,13 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
-{        
+namespace Z0
+{
     using System;
-    
-    public interface IEntity<T> : ITextual, INullary<T>, IEquatable<T>
-        where T : struct
+
+    using static Konst;
+
+    public enum FileSystemChangeKind : byte
     {
-        
-    }
+        None = 0,
+
+        Created = 1,
+
+        Deleted = 2,
+
+        Modified = 4,
+
+        Renamed = 8,
+    }        
 }

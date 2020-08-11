@@ -23,24 +23,25 @@ namespace Z0
 
         public readonly EncodedParts Index;
 
-        public readonly PartInstructions[] PartInstructions;        
+        public readonly PartInstructions[] Data;        
         
         [MethodImpl(Inline)]        
-        public DecodedMachine(EncodedParts index, PartInstructions[] inxs, CorrelationToken ct)
+        public DecodedMachine(EncodedParts index, PartInstructions[] src, CorrelationToken ct)
         {
             EventId = evid(EventName, ct);
             Index = index;
-            PartInstructions = inxs;
+            Data = src;
         }
         
         public AppMsgColor Flair 
             => AppMsgColor.Cyan;
-        
+                
         public IEnumerable<LocatedInstruction> Instructions 
-            => PartInstructions.SelectMany(x => x.Content).SelectMany(x => x.Content).SelectMany(x => x.Content).OrderBy(x => x.IP);
+            => Data.SelectMany(x => x.Located);
+            //=> PartInstructions.SelectMany(x => x.Data).SelectMany(x => x.Content).SelectMany(x => x.Content).OrderBy(x => x.IP);
 
         public int TotalCount 
-            => PartInstructions.Sum(x => x.TotalCount);                    
+            => Data.Sum(x => x.TotalCount);                    
         
         public string Format()
             => text.format(PSx5, EventId, TotalCount, Index.EntryCount, Index.Hosts.Length, Index.Parts.Length);                    

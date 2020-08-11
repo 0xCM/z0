@@ -17,8 +17,6 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmInstructionList : IReadOnlyList<Instruction>
     {        
-        public static AsmInstructionList Empty = new AsmInstructionList(z.array<Instruction>(), LocatedCode.Empty);
-
         readonly Instruction[] Source;
 
         public LocatedCode Encoded {get;}
@@ -77,5 +75,9 @@ namespace Z0.Asm
             => ((IReadOnlyList<Instruction>)Source).GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator()
             => Source.GetEnumerator();
+
+        public static AsmInstructionList Empty 
+            => new AsmInstructionList(z.array<Instruction>(), LocatedCode.Empty);
+
     }
 }

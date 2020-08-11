@@ -11,12 +11,10 @@ namespace Z0
     /// </summary>
     public enum AsciControlCode : byte
     {
-        Null = 0,
-
         /// <summary>
         /// The backspace control symbol code
         /// </summary>
-        Back = (byte)Sym.Back,        
+        Backspace = (byte)Sym.Backspace,        
 
         /// <summary>
         /// The tab control symbol, asci code 9

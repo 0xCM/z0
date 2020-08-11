@@ -57,7 +57,7 @@ namespace Z0.Asm
         public void Flow(in AsmFunction src)
         {
             var count = src.InstructionCount;
-            ref readonly var inxs = ref src.Inxs[0];
+            ref readonly var inxs = ref src.Instructions[0];
             for(var i=0; i<count; i++)
                 Flow(skip(inxs,i));
         }

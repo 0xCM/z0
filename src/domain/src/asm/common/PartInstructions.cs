@@ -14,44 +14,56 @@ namespace Z0.Asm
     /// <summary>
     /// Collects sequences instructions from part-defined api hosts
     /// </summary>         
-    public readonly struct PartInstructions: IContentedIndex<HostInstructions>
+    public readonly struct PartInstructions
     {
-        /// <summary>
-        /// The decoded instructions
-        /// </summary>
-        public HostInstructions[] Content {get;}
-
         /// <summary>
         /// The defining part
         /// </summary>
         public PartId Part {get;}
 
+        /// <summary>
+        /// The decoded instructions
+        /// </summary>
+        public readonly HostInstructions[] Data;
+
         [MethodImpl(Inline)]        
-        public PartInstructions(PartId part, HostInstructions[] inxs)
+        public PartInstructions(PartId part, HostInstructions[] src)
         {
             Part = part;
-            Content = inxs;
+            Data = src;
         }        
-        
+
+        public ReadOnlySpan<HostInstructions> View
+        {
+            [MethodImpl(Inline)] 
+            get => Data;
+        }
+
+        public Span<HostInstructions> Edit
+        {
+            [MethodImpl(Inline)] 
+            get => Data;
+        }
+
         public ref HostInstructions this[int index] 
         {
             [MethodImpl(Inline)] 
-            get => ref Content[index];
+            get => ref Data[index];
         }
 
         public int Length 
         {
             [MethodImpl(Inline)] 
-            get => Content.Length;
+            get => Data.Length;
         }
 
         /// <summary>
         /// The total instruction count
         /// </summary>
         public int TotalCount 
-            => Content.Sum(i => i.TotalCount);
-    
-        public static PartInstructions Empty 
-            => new PartInstructions(PartId.None, Array.Empty<HostInstructions>());
+            => Data.Sum(i => i.TotalCount); 
+
+        public IEnumerable<LocatedInstruction> Located
+            => Data.SelectMany(x => x.Data).SelectMany(x => x.Content).OrderBy(x => x.IP);
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     using static Flow;
     
     [Event]
-    public readonly struct DecodedHost : IWfEvent<DecodedHost, HostInstructions>
+    public readonly struct DecodedHost : IWfEvent<DecodedHost>
     {
         public const string EventName = nameof(DecodedHost);
         
@@ -23,20 +23,20 @@ namespace Z0
 
         public string WorkerName {get;}
         
-        public HostInstructions Body {get;}
+        public HostInstructions Instructions {get;}
 
         public AppMsgColor Flair {get;}
 
         public string Description {get;}
         
         [MethodImpl(Inline)]
-        public DecodedHost(string worker, HostInstructions inxs, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
+        public DecodedHost(string worker, HostInstructions src, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {
             EventId = WfEventId.define(EventName, ct);
             WorkerName = worker;
-            Body = inxs;            
+            Instructions = src;            
             Flair = flair;
-            Description = text.format(Pattern, Body.TotalCount, Body.Host);
+            Description = text.format(Pattern, Instructions.TotalCount, Instructions.Host);
         }
         public string Format()
             => text.format(PSx3, EventId, WorkerName, Description);

@@ -112,7 +112,7 @@ namespace Z0.Asm
 
             for(var i=0; i<dst.Length; i++)
             {
-                var instruction = src.Inxs[i];
+                var instruction = src.Instructions[i];
                 
                 if(src.Code.Length < offset + instruction.ByteLength)
                     throw AppException.Define(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                

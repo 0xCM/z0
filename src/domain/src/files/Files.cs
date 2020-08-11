@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal static FilePath normalize(FilePath src)
+        public static FilePath normalize(FilePath src)
             => FilePath.Define(src.Name.Replace('\\', '/'));
 
         IEnumerator<FilePath> IEnumerable<FilePath>.GetEnumerator()

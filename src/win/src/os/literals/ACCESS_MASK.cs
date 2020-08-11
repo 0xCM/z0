@@ -1,7 +1,7 @@
 
 //-----------------------------------------------------------------------------
 // Derivative Work
-// Copyright  : Microsft/.Net foundation
+// Copyright  : Microsoft/.Net foundation
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------

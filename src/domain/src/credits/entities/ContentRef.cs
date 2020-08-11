@@ -22,7 +22,7 @@ namespace Z0
     /// that often, as a flagrant display of idiocy, have numbering schemes that are content-type 
     /// independent and even doucment-location independent
     /// </summary>
-    public readonly struct ContentRef : IEntity<E>
+    public readonly struct ContentRef : IDataEntity<E>
     {
         readonly S State;
 

@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The backspace control symbol
         /// </summary>
-        Back = '\b',        
+        Backspace = '\b',        
 
         /// <summary>
         /// The tab control symbol
@@ -42,6 +42,6 @@ namespace Z0
         /// <summary>
         /// The delete control symbol
         /// </summary>
-        DEL = (byte)sbyte.MaxValue
+        Del = (byte)sbyte.MaxValue
     }
 }

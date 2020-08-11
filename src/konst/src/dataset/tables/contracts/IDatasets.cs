@@ -2,10 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {        
     using System;
+    using System.Security;
 
+    [SuppressUnmanagedCodeSecurity]
     public interface IDatasets : IDatasetArchive
     {
         FolderName IDatasetArchive.RootFolder 
@@ -23,7 +25,7 @@ namespace Z0.Data
         FolderPath DatasetDir 
             => ArchiveRoot + DatasetFolder;
 
-        FilePath DatasetPath(string dsname)
-            => DatasetDir + FileName.Define(dsname, DataFileExt);
+        FilePath DatasetPath(string name)
+            => DatasetDir + FileName.Define(name, DataFileExt);
     }
 }

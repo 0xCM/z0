@@ -18,7 +18,7 @@ namespace Z0
         public readonly AsciEncoded Name;       
         
         [MethodImpl(Inline)]
-        public FileSystemObject(FileSystemObjectKind kind, string name)
+        public FileSystemObject(string name, FileSystemObjectKind kind)
         {
             Name = name;
             Kind = kind;

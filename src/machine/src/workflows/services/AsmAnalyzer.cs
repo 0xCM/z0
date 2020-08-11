@@ -16,7 +16,7 @@ namespace Z0.Asm
         public static ReadOnlySpan<Arrow<Imm64,Register>> moves(AsmFunction src, int capacity = 10)
         {
             var hander = new MovHandler(capacity);
-            var inxs = span(src.Inxs.Data);
+            var inxs = span(src.Instructions.Data);
             for(var i=0u; i<inxs.Length; i++)
                 hander.Handle(skip(inxs, i));            
             return hander.Collected;

@@ -12,7 +12,7 @@ namespace Z0
 
     using P = Z0.Parts;
 
-    readonly struct SelectedParts : IContentedIndex<IPart>
+    readonly struct SelectedParts : IContentIndex<IPart>
     {        
         public static IPart[] Known
             => KnownParts.Service.Known.Where(r => r.Id != 0).ToArray();

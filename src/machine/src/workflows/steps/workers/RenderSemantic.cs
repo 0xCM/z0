@@ -79,7 +79,7 @@ namespace Z0
 
         public void Render(HostInstructions src, StreamWriter dst)
         {
-            var functions = src.Content;
+            var functions = src.Data;
             var count = src.MemberCount;            
 
             for(var i=0; i<count; i++)

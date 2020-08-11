@@ -30,31 +30,31 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        public static FileSystemObject fso(FileSystemEventArgs src)
-            => new FileSystemObject(FileSystemObjectKind.File, src.FullPath);
+        public static FileSystemObject objects(FileSystemEventArgs src)
+            => new FileSystemObject(src.FullPath, FileSystemObjectKind.File);
         
         [MethodImpl(Inline)]
         void Created(object sender, FileSystemEventArgs e)
         {
-            Handler(fso(e), (FileSystemChangeKind)e.ChangeType);
+            Handler(objects(e), (FileSystemChangeKind)e.ChangeType);
         }
 
         [MethodImpl(Inline)]
         void Deleted(object sender, FileSystemEventArgs e)
         {
-            Handler(fso(e), (FileSystemChangeKind)e.ChangeType);
+            Handler(objects(e), (FileSystemChangeKind)e.ChangeType);
         }
 
         [MethodImpl(Inline)]
         void Changed(object sender, FileSystemEventArgs e)
         {
-            Handler(fso(e), (FileSystemChangeKind)e.ChangeType);
+            Handler(objects(e), (FileSystemChangeKind)e.ChangeType);
         }
 
         [MethodImpl(Inline)]
         void Renamed(object sender, FileSystemEventArgs e)
         {
-            Handler(fso(e), (FileSystemChangeKind)e.ChangeType);
+            Handler(objects(e), (FileSystemChangeKind)e.ChangeType);
         }
 
         void Subscribe()

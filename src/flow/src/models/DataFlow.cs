@@ -60,7 +60,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static DataFlow<S,T> define<S,T>(S src, T dst)
-            => new DataFlow<S,T>(src,dst);
+            => Table.flow(src,dst);
 
         public static DataFlow<Table<F,T>, ArchivedTable<F,T>> archive<F,T>(Table<F,T> src, FilePath dst)
             where T : struct, ITable<F,T>

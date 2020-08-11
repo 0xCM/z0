@@ -6,20 +6,19 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
     
     using static Konst;
 
     /// <summary>
-    /// Collects a sequence of operation instuction sequences from host-defined members
+    /// Collects sequences of instructions from host-defined members
     /// </summary>         
-    public readonly struct HostInstructions : IContentedIndex<MemberInstructions>
+    public readonly struct HostInstructions
     {
         /// <summary>
         /// The decoded instructions
         /// </summary>
-        public MemberInstructions[] Content {get;}
+        public MemberInstructions[] Data {get;}
 
         /// <summary>
         /// The defining host
@@ -30,40 +29,43 @@ namespace Z0.Asm
         /// The base address of the first member, where members are ordered by their individual base addresses
         /// </summary>
         public MemoryAddress BaseAddress {get;}
+    
+        [MethodImpl(Inline)]        
+        public HostInstructions(ApiHostUri host, MemberInstructions[] src)
+        {
+            Host = host;
+            Data = src.OrderBy(x => x.BaseAddress).ToArray();
+            BaseAddress = Data.Length != 0 ? Data[0].BaseAddress : MemoryAddress.Empty;
+        }
 
         /// <summary>
         /// The number of host-defined operations
         /// </summary>
-        public int MemberCount => Content.Length;
+        public int MemberCount 
+            => Data.Length;
 
         /// <summary>
         /// The member instruction content length
         /// </summary>
-        public int Length { [MethodImpl(Inline)] get => Content.Length; }
+        public int Length 
+        { 
+            [MethodImpl(Inline)] 
+            get => Data.Length; 
+        }
         
         /// <summary>
         /// Indexes into the member instruction content
         /// </summary>
-        public ref MemberInstructions this[int index] { [MethodImpl(Inline)] get => ref Content[index];}
+        public ref MemberInstructions this[int index] 
+        { 
+            [MethodImpl(Inline)]
+             get => ref Data[index];
+        }
 
         /// <summary>
         /// The total instruction count
         /// </summary>
-        public int TotalCount => Content.Sum(i => i.TotalCount);
-
-        [MethodImpl(Inline)]
-        public static HostInstructions Create(ApiHostUri host, MemberInstructions[] src)
-            => new HostInstructions(host, src);
-    
-        [MethodImpl(Inline)]        
-        public HostInstructions(ApiHostUri host, MemberInstructions[] inxs)
-        {
-            Host = host;
-            Content = inxs.OrderBy(x => x.BaseAddress).ToArray();
-            BaseAddress = Content.Length != 0 ? Content[0].BaseAddress : MemoryAddress.Empty;
-        }
-
-        public static HostInstructions Empty 
-            => new HostInstructions(ApiHostUri.Empty, sys.empty<MemberInstructions>());
+        public int TotalCount 
+            => Data.Sum(i => i.TotalCount);        
     }
 }

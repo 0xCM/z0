@@ -39,6 +39,15 @@ namespace Z0
         }                
 
         /// <summary>
+        /// Covers the encoded content with a span
+        /// </summary>
+        public Span<byte> Edit
+        {
+            [MethodImpl(Inline)] 
+            get => Encoded;
+        }                
+
+        /// <summary>
         /// Returns a reference to the encoded data
         /// </summary>
         public Ref Ref
@@ -65,7 +74,13 @@ namespace Z0
             get => !IsEmpty; 
         }        
         
-        public ref readonly byte this[int index] 
+        public ref byte this[int index] 
+        { 
+            [MethodImpl(Inline)] 
+            get => ref Encoded[index];
+        }
+
+        public ref byte this[uint index] 
         { 
             [MethodImpl(Inline)] 
             get => ref Encoded[index];

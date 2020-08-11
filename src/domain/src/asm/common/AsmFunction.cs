@@ -14,29 +14,25 @@ namespace Z0.Asm
     /// </summary>
     public class AsmFunction
     {           
-        public static AsmFunction define(ParsedExtraction encoding,  AsmInstructionList inxs)
+        public static AsmFunction define(ParsedExtraction encoding, AsmInstructionList src)
         {         
             var code = MemberCode.define(encoding.OpUri, encoding.Encoded);  
             var sig = encoding.Method.Signature().Format();          
-            return new AsmFunction(encoding.OpUri, sig, code, encoding.TermCode, inxs);
+            return new AsmFunction(encoding.OpUri, sig, code, encoding.TermCode, src);
         }
 
-        [MethodImpl(Inline)]
-        public static AsmFunction define(OpUri uri, string sig, MemberCode code, ExtractTermCode term, AsmInstructionList inxs)
-            => new AsmFunction(uri,sig,code,term,inxs);
-
-        internal AsmFunction(OpUri uri, string sig, MemberCode code, ExtractTermCode term, AsmInstructionList instructions)
+        public AsmFunction(OpUri uri, string sig, MemberCode code, ExtractTermCode term, AsmInstructionList instructions)
         {
             Uri = uri;
             OpId = uri.OpId;
             OpSig = sig;
-            Inxs = instructions;
+            Instructions = instructions;
             Code = code;            
             TermCode =term;
         }
 
         /// <summary>
-        /// The definining operation uri
+        /// The defining operation uri
         /// </summary>
         public OpUri Uri {get;}
 
@@ -58,7 +54,7 @@ namespace Z0.Asm
         /// <summary>
         /// The encoded instructions
         /// </summary>
-        public AsmInstructionList Inxs {get;}            
+        public AsmInstructionList Instructions {get;}            
 
         /// <summary>
         /// Specifies the reason for capture termination
@@ -80,7 +76,7 @@ namespace Z0.Asm
         public int InstructionCount
         {
             [MethodImpl(Inline)]
-            get => Inxs.Length;            
+            get => Instructions.Length;            
         }
 
         public bool IsEmpty 

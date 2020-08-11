@@ -6,9 +6,7 @@ namespace Z0
 {    
     using CSym = AsciControl;
     using MSym = AsciMath;
-    using LSym = AsciLetter;
-    using PKSym = AsciPunk;
-    using PSym = AsciPair;
+    using PKSym = AsciSymSymbol;
 
     /// <summary>
     /// All of the asci characters belong to us
@@ -349,7 +347,7 @@ namespace Z0
         /// <summary>
         /// The backslash character
         /// </summary>
-        BSlash = '\\',
+        BS = '\\',
 
         /// <summary>
         /// The '^' character
@@ -389,12 +387,12 @@ namespace Z0
         /// <summary>
         /// The '/' character
         /// </summary>
-        FSlash = '/',
+        FS = '/',
 
         /// <summary>
         /// The '>' character
         /// </summary>
-        Gt = '>',
+        GT = '>',
 
         /// <summary>
         /// The '#' character
@@ -409,7 +407,7 @@ namespace Z0
         /// <summary>
         /// The '[' character
         /// </summary>
-        LBracket = '[',
+        LB = '[',
 
         /// <summary>
         /// The '(' character
@@ -419,7 +417,7 @@ namespace Z0
         /// <summary>
         /// The '<' character
         /// </summary>
-        Lt = '<',
+        LT = '<',
 
         /// <summary>
         /// The '%' character
@@ -444,7 +442,7 @@ namespace Z0
         /// <summary>
         /// The '"' character
         /// </summary>
-        Quote = '\"',
+        DQuote = '\"',
 
         /// <summary>
         /// The ')' character
@@ -479,12 +477,12 @@ namespace Z0
         /// <summary>
         /// The '*' character
         /// </summary>
-        MUL = MSym.MUL,
+        Mul = MSym.Mul,
 
         /// <summary>
         /// The '~' character
         /// </summary>
-        SYM = MSym.SYM, 
+        Tilde = MSym.Complement, 
 
         /// <summary>
         /// The '_' character
@@ -509,6 +507,6 @@ namespace Z0
         /// <summary>
         /// The delete control symbol
         /// </summary>
-        DEL = CSym.DEL
+        Del = CSym.Del
     }
 }

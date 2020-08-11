@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using S = AsciPunk;
+    using S = AsciSymSymbol;
 
-    public enum AsciPunkCode : byte
+    public enum AsciSymCode : byte
     {
         /// <summary>
         /// The '&' character code 38
@@ -32,6 +32,11 @@ namespace Z0
         /// The '$' character code 36
         /// </summary>
         Dollar = (byte)S.Dollar,
+
+        /// <summary>
+        /// The '/' character code 47
+        /// </summary>
+        FS = (byte)S.FS,
 
         /// <summary>
         /// The '@' character code 64
@@ -61,6 +66,56 @@ namespace Z0
         /// <summary>
         /// The '?' character code 63
         /// </summary>
-        QU = (byte)S.QU,
+        Question = (byte)S.Question,
+
+        /// <summary>
+        /// The '"' character code 34
+        /// </summary>
+        DQuote = (byte)S.DQuote,
+
+        /// <summary>
+        /// The ''' character code 39
+        /// </summary>
+        SQuote = (byte)S.SQuote,
+
+        /// <summary>
+        /// The '(' character code 40
+        /// </summary>
+        LParen = (byte)S.LParen,        
+
+        /// <summary>
+        /// The ')' character code 41
+        /// </summary>
+        RParen = (byte)S.RParen,        
+
+        /// <summary>
+        /// The ':' character code 58
+        /// </summary>
+        Colon = (byte)S.Colon,
+
+        /// <summary>
+        /// The ';' character code 59
+        /// </summary>
+        Semicolon = (byte)S.Semicolon,
+
+        /// <summary>
+        /// The '[' character code 91
+        /// </summary>
+        LB = (byte)S.LB,
+
+        /// <summary>
+        /// The ']' character code 93
+        /// </summary>
+        RB = (byte)S.RB,
+
+        /// <summary>
+        /// The '{' character code 123
+        /// </summary>
+        LBrace = (byte)S.LBrace,
+
+        /// <summary>
+        /// The '}' character code 125
+        /// </summary>
+        RBrace = (byte)S.RBrace,
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public enum FileLibraryKind
+    public enum CodeLibraryKind
     {
         None,
 
@@ -14,5 +14,4 @@ namespace Z0
 
         Exe
     }
-
 }

@@ -198,7 +198,7 @@ namespace Z0
                 instructions.Add(member);
             }
 
-            return HostInstructions.Create(hcs.Host, instructions.ToArray());
+            return new HostInstructions(hcs.Host, instructions.ToArray());
         }
 
         void Process(EncodedParts encoded)

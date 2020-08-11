@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Defines a reference to document content
     /// </summary>
-    public readonly struct DocRef : IEntity<E>
+    public readonly struct DocRef : IDataEntity<E>
     {
         readonly S State;
 

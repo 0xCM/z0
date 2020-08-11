@@ -99,12 +99,12 @@ namespace Z0.Asm
         public static string header(LocatedCode src, OpIdentity id)
             => comment(ByteSpanProperty.Define(id.ToPropertyName(), src).Format());
 
-        public static string render(in AsmFunctionList src)
+        public static string render(in AsmFunctions src)
         {
             var dst = text.build();
-            for(var i=0; i<src.Content.Length; i++)
+            for(var i=0; i<src.Data.Length; i++)
             {
-                dst.Append(lines(src.Content[i]).Concat());
+                dst.Append(lines(src.Data[i]).Concat());
                 dst.AppendLine(text.PageBreak);
             }
             return dst.ToString();

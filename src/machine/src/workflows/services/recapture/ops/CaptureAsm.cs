@@ -35,7 +35,7 @@ namespace Z0
                 if(code.IsNonEmpty)
                 {
                     ref readonly var data = ref skip(codes,i);                    
-                    seek(target, i) = new CapturedAccessor(host, accessor, CreatFunction(data).ValueOrDefault(AsmFunctionCode.Empty));
+                    seek(target, i) = new CapturedAccessor(host, accessor, CreateFunction(data).ValueOrDefault(AsmFunctionCode.Empty));
                     WriteAsm(data, writer);                                        
                 }
             }

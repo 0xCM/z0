@@ -25,27 +25,28 @@ namespace Z0
             SaveResIndex(captured, csvfile);
         }
                 
-        public CapturedAccessor[] Capture(FilePath respath, FolderPath asmdir)        
+        public CapturedAccessor[] Capture(FilePath src, FolderPath dst)        
         {
-            var resdll = Assembly.LoadFrom(respath.Name);  
+            var resdll = Assembly.LoadFrom(src.Name);  
             var indices = span(Resources.declarations(resdll));
-            var idxcount = indices.Length;
+            var count = indices.Length;
 
-            term.magenta($"Capturing {idxcount} host resource sets from {respath} -> {asmdir}");
+            term.magenta($"Capturing {count} host resource sets from {src} -> {dst}");
 
             var results = list<CapturedAccessor>();
-            for(var i=0u; i<idxcount; i++)
+            for(var i=0u; i<count; i++)
             {
                 ref readonly var index = ref skip(indices,i);            
                 var host = Flow.uri(index.DeclaringType);                
-                var asmpath = asmdir + host.FileName(FileExtensions.Asm);
-                var captured = CaptureAsm(host, index.Data, asmpath);
-                results.AddRange(captured);
+                var path = dst + host.FileName(FileExtensions.Asm);
+                results.AddRange(CaptureAsm(host, index.Data, path));
             }
+            
+            var data = results.Array();
 
-            term.magenta($"Captured {results.Count} {respath.FileName} acessors");
+            term.print(new CapturedResourceSets(nameof(Recapture), data, src, dst));
 
-            return results.Array();
+            return data;
         }        
     }
 }

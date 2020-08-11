@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct OpUri : IUri<OpUri>, INullary<OpUri>
     {
         /// <summary>
-        /// The full uri in the form {Scheme}://{HostPath}/{OpId}
+        /// The full uri in the form {scheme}://{hostpath}/{opid}
         /// </summary>
         public string UriText {get;}
         
@@ -25,7 +25,7 @@ namespace Z0
         public readonly OpUriScheme Scheme;
         
         /// <summary>
-        /// The host fragment, of the form {assmblyid}/{hostname}
+        /// The host fragment, of the form {assembly_short_name}/{hostname}
         /// </summary>
         public readonly ApiHostUri Host;
         

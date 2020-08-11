@@ -16,7 +16,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source functions</param>
         public static IEnumerable<MemoryAddress> FarCalls(this AsmFunction src)
-            => from i in src.Inxs
+            => from i in src.Instructions
                 where i.FlowControl == FlowControl.Call
                     select (MemoryAddress)i.MemoryAddress64;
         
@@ -24,8 +24,8 @@ namespace Z0.Asm
         /// Selects a (non-distinct) sequence of the far addresses targeted by functions in the source
         /// </summary>
         /// <param name="src">The source functions</param>
-        public static IEnumerable<MemoryAddress> FarCalls(this AsmFunctionList src)
-            => src.SelectMany(FarCalls);
+        public static IEnumerable<MemoryAddress> FarCalls(this AsmFunctions src)
+            => src.Data.SelectMany(FarCalls);
 
         /// <summary>
         /// Selects a (non-distinct) sequence of the far addresses targeted by functions in an extract

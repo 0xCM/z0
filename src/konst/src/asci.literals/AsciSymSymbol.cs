@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum AsciPunk : ushort
+    public enum AsciSymSymbol : ushort
     {
         /// <summary>
         /// The '&' character
@@ -44,7 +44,7 @@ namespace Z0
         /// <summary>
         /// The '?' character
         /// </summary>
-        QU = '?',
+        Question = '?',
 
         /// <summary>
         /// The '_' character
@@ -60,5 +60,59 @@ namespace Z0
         /// The '\\' symbol
         /// </summary>
         BS = '\\',
+
+        /// <summary>
+        /// The '\/' symbol
+        /// </summary>
+        FS = '/',
+
+        /// The '{' symbol
+        /// </summary>
+        LBrace = '{',
+
+        /// <summary>
+        /// The '}' symbol
+        /// </summary>
+        RBrace = '}',
+
+        /// <summary>
+        /// The '[' symbol
+        /// </summary>
+        LB = '[',
+
+        /// <summary>
+        /// The ']' symbol
+        /// </summary>
+        RB = ']',
+
+        /// <summary>
+        /// The '(' symbol
+        /// </summary>
+        LParen = '(',        
+
+        /// <summary>
+        /// The ')' symbol
+        /// </summary>
+        RParen = ')',                
+
+        /// <summary>
+        /// The ':' character
+        /// </summary>
+        Colon = ':',
+
+        /// <summary>
+        /// The ';' character
+        /// </summary>
+        Semicolon = ';',
+
+        /// <summary>
+        /// The '"' (double-quote) character
+        /// </summary>
+        DQuote = '\"',
+
+        /// <summary>
+        /// The ''' (single-quote) character 
+        /// </summary>
+        SQuote = '\'',
     }
 }

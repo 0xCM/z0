@@ -41,7 +41,7 @@ namespace Z0
         /// <summary>
         /// The '"' character code 34
         /// </summary>
-        Quote = (byte)ASym.Quote,
+        Quote = (byte)ASym.DQuote,
 
         /// <summary>
         /// The '#' character code 35
@@ -86,7 +86,7 @@ namespace Z0
         /// <summary>
         /// The '*' character code 42
         /// </summary>
-        Star = (byte)ASym.MUL,
+        Star = (byte)ASym.Mul,
 
         /// <summary>
         /// The '+' character code 43
@@ -111,7 +111,7 @@ namespace Z0
         /// <summary>
         /// The '/' character code 47
         /// </summary>
-        FSlash = (byte)ASym.FSlash,
+        FSlash = (byte)ASym.FS,
 
         /// <summary>
         /// Specifies the asci code for the digit '0'
@@ -441,7 +441,7 @@ namespace Z0
         /// <summary>
         /// The backslash character code 92
         /// </summary>
-        BSlash = (byte)ASym.BSlash,
+        BSlash = (byte)ASym.BS,
 
         /// <summary>
         /// The '^' character code 94
@@ -456,7 +456,7 @@ namespace Z0
         /// <summary>
         /// The '>' character code 62
         /// </summary>
-        Gt = (byte)ASym.Gt,
+        Gt = (byte)ASym.GT,
 
         /// <summary>
         /// The '{' character code 128
@@ -466,12 +466,12 @@ namespace Z0
         /// <summary>
         /// The '[' character code 91
         /// </summary>
-        LBracket = (byte)ASym.LBracket,
+        LBracket = (byte)ASym.LB,
 
         /// <summary>
         /// The '<' character code 60
         /// </summary>
-        Lt = (byte)ASym.Lt,
+        Lt = (byte)ASym.LT,
 
         /// <summary>
         /// The '|' character code 124
@@ -491,7 +491,7 @@ namespace Z0
         /// <summary>
         /// The '~' character code 126
         /// </summary>
-        SYM = (byte)ASym.SYM, 
+        SYM = (byte)ASym.Tilde, 
 
         /// <summary>
         /// The '~' character code 95

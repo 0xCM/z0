@@ -42,7 +42,7 @@ namespace Z0.Asm
                 CheckBlockLength(src);
 
             var instructions = AsmInstructionList.Create(src.Decoded, src.Encoded.Encoded);
-            return AsmFunction.define(uri, sig, src.Encoded, src.TermCode, instructions);            
+            return new AsmFunction(uri, sig, src.Encoded, src.TermCode, instructions);            
         }
     }
 
