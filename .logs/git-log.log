@@ -6627,3 +6627,74 @@
  rename src/tools/{specs => src/tools/dumpbin}/dumpbin.csv (100%)
  rename src/tools/{specs => src/tools/dumpbin}/dumpbin.md (100%)
  create mode 100644 src/tools/src/tools/jitdasm/test.cmd
+[master 7d3f055ec] .
+ 97 files changed, 1532 insertions(+), 754 deletions(-)
+ rename src/domain/src/files/{FileExtKind.cs => FileSystem.cs} (74%)
+ rename src/domain/src/files/{ => contracts}/IExtensionMap.cs (87%)
+ create mode 100644 src/domain/src/files/contracts/IFileArchive.cs
+ rename src/domain/src/files/{FolderKind.cs => contracts/IFileSystemObject.cs} (51%)
+ rename src/domain/src/files/{ => literals}/CodeLibraryKind.cs (100%)
+ rename src/domain/src/files/{ => literals}/DriveLetter.cs (100%)
+ rename src/domain/src/files/{FileContentKind.cs => literals/FileClass.cs} (100%)
+ rename src/domain/src/files/{ => literals}/FileSystemChangeKind.cs (100%)
+ rename src/domain/src/files/{ => literals}/FileSystemObjectKind.cs (100%)
+ create mode 100644 src/domain/src/files/literals/PathPartKind.cs
+ rename src/domain/src/files/{ => literals}/PathSeparator.cs (99%)
+ rename src/domain/src/files/{ => models}/ExtensionMapF.cs (100%)
+ rename src/domain/src/files/{ => models}/ExtensionMapFX.cs (100%)
+ create mode 100644 src/domain/src/files/models/FileCatalog.cs
+ rename src/domain/src/files/{ => models}/FileCatalogEntry.cs (81%)
+ rename src/domain/src/files/{FileCatalogEntryField.cs => models/FileCatalogField.cs} (75%)
+ rename src/domain/src/files/{ => models}/FileSystemObject.cs (100%)
+ rename src/domain/src/files/{ => models}/FileSystemObjects.cs (100%)
+ rename src/domain/src/files/{ => models}/Files.cs (100%)
+ rename src/domain/src/files/{ => models}/ListedFile.cs (78%)
+ rename src/domain/src/files/{ => models}/ListedFileField.cs (77%)
+ rename src/domain/src/files/{ => models}/Workspace.cs (100%)
+ create mode 100644 src/domain/src/files/models/objects/Drive.cs
+ create mode 100644 src/domain/src/files/models/objects/Extension.cs
+ create mode 100644 src/domain/src/files/models/objects/FileName.cs
+ create mode 100644 src/domain/src/files/models/objects/FilePath.cs
+ create mode 100644 src/domain/src/files/models/objects/FoldePath.cs
+ create mode 100644 src/domain/src/files/models/objects/FolderName.cs
+ create mode 100644 src/domain/src/files/models/objects/PathPart.cs
+ create mode 100644 src/domain/src/files/ops/factories.cs
+ delete mode 100644 src/konst/src/cells/ops/cellblocks.cs
+ create mode 100644 src/konst/src/dataset/tables/contracts/ICellFormatter.cs
+ create mode 100644 src/konst/src/dataset/tables/contracts/ITableLog.cs
+ rename src/konst/src/dataset/tables/contracts/{ITableStore.cs => ITableSink.cs} (61%)
+ rename src/konst/src/{cells => dataset/tables/models}/CellCount.cs (100%)
+ create mode 100644 src/konst/src/dataset/tables/models/CellT.cs
+ rename src/konst/src/{cells => dataset/tables}/models/CellWT.cs (88%)
+ rename src/konst/src/{cells => dataset/tables/models}/Cells.cs (100%)
+ rename src/konst/src/{cells => dataset/tables}/models/CellsWT.cs (94%)
+ rename src/konst/src/dataset/{ => tables}/models/EnumLiteral.cs (96%)
+ rename src/konst/src/dataset/{stringtable => tables/models}/StringTable.cs (100%)
+ rename src/konst/src/dataset/{stringtable => tables/models}/StringTableRow.cs (100%)
+ rename src/konst/src/dataset/{stringtable => tables/models}/StringTableRows.cs (100%)
+ rename src/konst/src/dataset/{stringtable => tables/models}/StringTables.cs (100%)
+ rename src/konst/src/{formatting => dataset/tables}/ops/cells.cs (55%)
+ rename src/konst/src/dataset/{services/LiteralRecords.cs => tables/ops/enums.cs} (85%)
+ rename src/konst/src/dataset/tables/ops/{append.cs => log.cs} (50%)
+ create mode 100644 src/konst/src/dataset/tables/services/CellFormatter.cs
+ create mode 100644 src/konst/src/dataset/tables/services/MultiFormatter.cs
+ rename src/konst/src/{formatting => dataset/tables/services}/NumericFormatter.cs (100%)
+ rename src/konst/src/dataset/{ => tables}/services/NumericLiteralFormatter.cs (100%)
+ rename src/konst/src/dataset/{ => tables}/services/ReflectedLiterals.cs (99%)
+ rename src/konst/src/{formatting/models => dataset/tables/services}/SpanFormatter.cs (100%)
+ rename src/konst/src/dataset/tables/services/{TableFormatter2.cs => TableFormatterF.cs} (87%)
+ rename src/konst/src/dataset/tables/services/{TableFormatter1.cs => TableFormatterFT.cs} (76%)
+ create mode 100644 src/konst/src/dataset/tables/services/TableLogT.cs
+ rename src/konst/src/dataset/{ => tables}/services/ValueFormatter.cs (99%)
+ delete mode 100644 src/konst/src/files/contracts/IFileArchive.cs
+ delete mode 100644 src/konst/src/files/contracts/IPathComponent.cs
+ delete mode 100644 src/konst/src/formatting/MultiFormatter.cs
+ delete mode 100644 src/konst/src/formatting/literals/NumericFormatStyle.cs
+ delete mode 100644 src/konst/src/formatting/models/FormatterCxT.cs
+ rename src/konst/src/{formatting/ops/cell.cs => hex/ops/partition.cs} (80%)
+ rename src/konst/src/{forms => literals/form}/INumericLiteral.cs (100%)
+ delete mode 100644 src/konst/src/reports/contracts/IRecordSink.cs
+ create mode 100644 src/part/src/abstractions/Runtime.cs
+ create mode 100644 src/sys/src/ops/value.cs
+ create mode 100644 src/sys/src/proxy/value.cs
+ create mode 100644 src/tools/src/tools/clr/Models.cs

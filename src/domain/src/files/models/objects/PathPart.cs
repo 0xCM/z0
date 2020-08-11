@@ -56,6 +56,9 @@ namespace Z0
                 get => Data;
             }
 
+            public string Format()
+                => View.ToString();
+            
             public bool IsEmpty
             {
                 [MethodImpl(Inline)]
@@ -67,7 +70,7 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => Data != null & Data.Length >= 1 && Data[0] != NullChar;
             }
-
+                       
             const char NullChar = '\0';
 
             const string NullText = "\0";         

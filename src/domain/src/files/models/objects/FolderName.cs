@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct FileSystem
     {
-        public readonly struct FolderName : IFileSystemObject<FolderName>
+        public readonly struct FolderName : IFso<FolderName>
         {            
             public PathPart Name {get;}
 

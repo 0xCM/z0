@@ -14,6 +14,18 @@ namespace Z0
     [ApiHost("api")]
     public readonly struct Tooling
     {
+        public static ListedFiles listed<T,F>(ToolFiles<T,F> src)   
+            where T : struct, ITool<T>
+            where F : unmanaged, Enum  
+        {   
+            var view = src.View;
+            var buffer = sys.alloc<ListedFile>(src.Count);
+            var dst = z.span(buffer);
+            for(var i=0u; i<src.Count; i++)
+                z.seek(dst,i) = new ListedFile(i, z.skip(view,i).Path.Name);
+            return buffer;
+        }
+
         [MethodImpl(Inline), Op]
         public static ToolConfig config(ToolId tool,FilePath src)
             => new ToolConfig(tool,src);

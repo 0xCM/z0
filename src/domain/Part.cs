@@ -13,39 +13,34 @@ namespace Z0.Parts
 {        
     public sealed class Domain : Part<Domain> 
     {
-
-
     }
 }
 
 namespace Z0
 {
-    public readonly struct Domain<T>
-    {
-        readonly Runtime Rt;
-
-        [MethodImpl(Inline)]
-        internal Domain(Runtime rt)
-            => Rt = rt;
-    }
-
     [ApiHost]
-    public readonly partial struct Domain
+    class Runtime
     {
-        readonly Runtime Rt;
-
         [MethodImpl(Inline), Op]
-        Domain(Runtime rt)
-        {
-            Rt = rt;
-        }
+        public static ref readonly PartBox box()
+            => ref RT.Box;
 
         [MethodImpl(Inline)]
-        public static Domain<T> runtime<T>()
-            => new Domain<T>(Parts.Domain.Resolved.Runtime);
+        internal static ref T slot<T>(byte index, Func<T> factory)
+            => ref RT.Box.Slot(index,factory);
+
+        [MethodImpl(Inline)]
+        internal static ref T slot<T>(byte index)
+            => ref RT.Box.Slot<T>(index);
+
+        static readonly Runtime RT = new Runtime();
         
+        readonly PartBox Box;
+
         [MethodImpl(Inline), Op]
-        public static Domain runtime()
-            => new Domain(Parts.Domain.Resolved.Runtime);
+        Runtime()
+        {
+            Box = new PartBox();
+        }    
     }
 }

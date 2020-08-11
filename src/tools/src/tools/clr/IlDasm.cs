@@ -2,22 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
-{        
+namespace Z0.ClrTools
+{
     using System;
-    using System.Collections.Generic;
-
+    using System.Runtime.CompilerServices;
+    
     using static FileSystem;
 
-    public interface IFileSystemObject
-    {
-        PathPart Name {get;}    
-    }
 
-    public interface IFileSystemObject<F> : IFileSystemObject
-        where F : struct, IFileSystemObject<F>
+    public readonly struct IlDasm
     {
+
         
     }
-
 }

@@ -9,39 +9,52 @@ namespace Z0
 
     using static Part;
             
-    public struct PartBox
+    public class PartBox
     {        
-        object Boxed;
+        const sbyte EmptySlot = sbyte.MinValue;
 
-        [MethodImpl(Inline)]
-        public PartBox(object src)
-            => Boxed = src;
+        const byte SlotCount = byte.MaxValue;
+        
+        object[] Slots;
 
-        public bool IsNonEmpty
+        public PartBox()
+        {
+            Slots = new object[SlotCount];
+            Span<object> dst =  Slots;
+            dst.Fill(EmptySlot);            
+        }
+
+        public ReadOnlySpan<object> View
         {
             [MethodImpl(Inline)]
-            get => Boxed != null && !(Boxed is sbyte x && x == -1);
+            get => Slots;
         }
-
-        public bool IsEmpty
+        
+        public Span<object> Edit
         {
             [MethodImpl(Inline)]
-            get => Boxed is sbyte x && x == -1;
+            get => Slots;
         }
+        
+        [MethodImpl(Inline)]
+        public ref T Slot<T>(byte index)
+            => ref Unsafe.As<object,T>(ref Slots[index]);
 
         [MethodImpl(Inline)]
-        public T Extract<T>()
-            => (T)Boxed;        
-
+        public void Clear<T>(byte index)
+            => Slots[index] = EmptySlot;
 
         [MethodImpl(Inline)]
-        public static ref PartBox Update(object src, ref PartBox dst)
+        public bool IsEmpty(byte index)
+            => Slots[index] is sbyte x && x == EmptySlot;
+
+        [MethodImpl(Inline)]
+        public ref T Slot<T>(byte index, Func<T> factory)
         {
-            dst.Boxed = src;
-            return ref dst;
+            ref var slot = ref Unsafe.As<object,T>(ref Slots[index]);
+            if(IsEmpty(index))
+                slot = factory();
+            return ref slot;
         }
-
-        public static PartBox Empty 
-            => new PartBox((sbyte)-1);        
     }
 }

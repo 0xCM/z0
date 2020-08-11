@@ -11,6 +11,7 @@
         "opcount",
         "opid",
         "opname",
+        "pchar",
         "perefs",
         "vbytes",
         "vinflate",

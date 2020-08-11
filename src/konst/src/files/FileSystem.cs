@@ -25,6 +25,14 @@ namespace Z0
             return src;
         }
 
+        public static string CreateParent(string path)
+        {
+            var dir = Path.GetDirectoryName(path);
+            if(!Directory.Exists(dir)) 
+                Directory.CreateDirectory(dir);
+            return path;
+        }
+
         /// <summary>
         /// Creates the specified folder if it does not exist; if it already exists, the file system is unmodified.
         /// </summary>

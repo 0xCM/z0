@@ -17,15 +17,21 @@ namespace Z0
 
         public Assembly Owner {get;}
 
-        Runtime<P> _Runtime {get;}
+        RuntimePart<P> _Runtime {get;}
 
-        public Runtime Runtime
+        public RuntimePart<P> Runtime
         {
             [MethodImpl(Inline)]
             get => _Runtime;
         }
 
         protected PartBox Box;
+
+        public ref readonly PartBox Slots
+        {
+            [MethodImpl(Inline)]
+            get => ref Box;
+        }
 
         public virtual PartId[] Needs {get;}
 
@@ -40,17 +46,17 @@ namespace Z0
 
         protected Part()
         {
-            Box = PartBox.Empty;
+            Box = new PartBox();
             Owner = typeof(P).Assembly;            
             Id =  id(Owner);
-            _Runtime = new Runtime<P>(Box);            
+            _Runtime = new RuntimePart<P>(Box);            
         }
 
         protected Part(PartBox box)
             : this()
         {
             Box = box;
-            _Runtime = new Runtime<P>(Box);
+            _Runtime = new RuntimePart<P>(Box);
         }
 
         [MethodImpl(Inline)]

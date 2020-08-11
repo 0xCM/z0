@@ -1,0 +1,1 @@
+set CoreRun=J:\lang\net\runtime\artifacts\bin\coreclr\Windows_NT.x64.Release\CoreRun.exe

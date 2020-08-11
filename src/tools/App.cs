@@ -37,11 +37,10 @@ namespace Z0
             var tool = Tooling.dumpbin(Wf);
             var archive = tool.Target;
             var files  = archive.Files(DumpBinFlag.Disasm);
-            var listed = ListedFiles.from(files);
-            var formatted = ListedFiles.format(listed);
+            var listed = Tooling.listed(files);
+            var formatted = FileSystem.format(listed);
             
-
-            using var processor = tool.processor(default(AsmFileKind));
+            using var processor = tool.processor(default(FileKinds.Asm));
             for(var i=0u; i <files.Count; i++)
             {
                 processor.Process(files[i]);

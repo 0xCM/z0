@@ -8,11 +8,12 @@ namespace Z0.Tools
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static FileKinds;
 
     partial struct DumpBin
-    {
+    {        
         [MethodImpl(Inline)]
-        public AsmProcessor processor(AsmFileKind asm)              
+        public AsmProcessor processor(Asm asm)              
             => new AsmProcessor(Wf);
 
         public struct AsmProcessor : IToolProcessor<DumpBin,DumpBinFlag>

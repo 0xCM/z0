@@ -29,56 +29,56 @@ namespace Z0
 
         public ReflectedProperty Property => default;
 
-        public readonly struct ReflectedAssembly : IArtifactKind<ReflectedKind>
+        public readonly struct ReflectedAssembly
         {
             public ArtifactClass Class => ClrMetadata;
 
             public ReflectedKind Kind => K.Assembly;
         }
 
-        public readonly struct ReflectedModule : IArtifactKind<ReflectedKind>
+        public readonly struct ReflectedModule
         {
             public ArtifactClass Class => ClrMetadata;
 
             public ReflectedKind Kind => K.Module;
         }
 
-        public readonly struct ReflectedMethod : IArtifactKind<ReflectedKind>
+        public readonly struct ReflectedMethod
         {
             public ArtifactClass Class => ClrMetadata;
             
             public ReflectedKind Kind => K.Method;
         }
 
-        public readonly struct ReflectedType : IArtifactKind<ReflectedKind>
+        public readonly struct ReflectedType
         {
             public ArtifactClass Class => ClrMetadata;
             
             public ReflectedKind Kind => K.Type;
         }
 
-        public readonly struct ReflectedEnum : IArtifactKind<ReflectedKind>
+        public readonly struct ReflectedEnum
         {
             public ArtifactClass Class => ClrMetadata;
             
             public ReflectedKind Kind => K.Enum;
         }
 
-        public readonly struct ReflectedEnumLiteral : IArtifactKind<ReflectedKind>
+        public readonly struct ReflectedEnumLiteral
         {
             public ArtifactClass Class => ClrMetadata;
             
             public ReflectedKind Kind => K.EnumLiteral;
         }
 
-        public readonly struct ReflectedField : IArtifactKind<ReflectedKind>
+        public readonly struct ReflectedField
         {
             public ArtifactClass Class => ClrMetadata;
             
             public ReflectedKind Kind => K.Field;
         }
 
-        public readonly struct ReflectedProperty : IArtifactKind<ReflectedKind>
+        public readonly struct ReflectedProperty
         {
             public ArtifactClass Class => ClrMetadata;
 

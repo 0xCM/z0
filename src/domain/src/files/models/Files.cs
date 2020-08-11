@@ -23,10 +23,10 @@ namespace Z0
         internal Files(FilePath[] src)    
             => Data = src;
 
-        public uint Count
+        public CellCount Count
         {
             [MethodImpl(Inline)]
-            get => (uint) Data.Length;
+            get => Data.Length;
         }
         
         public ref readonly FilePath this[uint index]

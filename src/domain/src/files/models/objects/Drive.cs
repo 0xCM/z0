@@ -11,11 +11,11 @@ namespace Z0
 
     partial struct FileSystem
     {
-        public readonly struct Drive : IFileSystemObject<Drive>
+        public readonly struct Drive : IFso<Drive>
         {
             public DriveLetter Name {get;}
 
-            PathPart IFileSystemObject.Name 
+            PathPart IFso.Name 
                 => new PathPart((char)Name);
 
             [MethodImpl(Inline)]
