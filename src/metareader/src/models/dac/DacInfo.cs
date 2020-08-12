@@ -45,9 +45,9 @@ namespace Z0.MS
             TargetArchitecture = targetArch;
         }
 
-        public ModuleDescription ModuleDescription
+        public ProcessModuleInfo ModuleDescription
         {
-            get => new ModuleDescription(ImageBase, FileSize, TimeStamp, FileName, Version);
+            get => new ProcessModuleInfo(ImageBase, FileSize, TimeStamp, FileName, Version);
         }
         
         public DacLibInfo DacDescription

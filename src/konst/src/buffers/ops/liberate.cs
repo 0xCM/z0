@@ -34,7 +34,7 @@ namespace Z0
             where T : unmanaged
         {
             IntPtr buffer = (IntPtr)(void*)pSrc;
-            if (!VirtualProtectEx(CurrentProcess.Handle, buffer, (UIntPtr)length, 0x40, out uint _))
+            if (!VirtualProtectEx(CurrentProcess.ProcessHandle, buffer, (UIntPtr)length, 0x40, out uint _))
                 ThrowLiberationError(buffer, length);
             return pSrc;
         }             
@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static IntPtr liberate(IntPtr src, int length)
         {
-            if (!VirtualProtectEx(CurrentProcess.Handle, src, (UIntPtr)(ulong)length, 0x40, out uint _))
+            if (!VirtualProtectEx(CurrentProcess.ProcessHandle, src, (UIntPtr)(ulong)length, 0x40, out uint _))
                 ThrowLiberationError(src, length);
             return src;
         }

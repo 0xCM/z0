@@ -8,6 +8,7 @@ namespace Z0.MS
 {
     using System;
 
+    [Table]
     public struct ExtendedModuleData
     {
         public int IsDynamic;

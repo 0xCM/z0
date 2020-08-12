@@ -9,8 +9,6 @@ namespace Z0
     using System;
     using System.Collections.Immutable;
 
-    using Z0.MS;
-
     /// <summary>
     /// Represents an AppDomain in the target runtime.
     /// </summary>

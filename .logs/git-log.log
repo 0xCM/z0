@@ -6744,3 +6744,131 @@
  create mode 100644 src/tools/src/tools/clr/IlDasm.cs
  rename src/tools/src/tools/{jitdasm/test.cmd => clr/JitDasm.Sample.cmd} (100%)
  create mode 100644 src/tools/src/tools/clr/JitDasm.cs
+[master 047e9eae6] .
+ 139 files changed, 1131 insertions(+), 136 deletions(-)
+ rename src/{konst/src/events => flow/src}/contracts/IDataBroker.cs (100%)
+ create mode 100644 src/flow/src/contracts/IDataProcessor.cs
+ create mode 100644 src/flow/src/contracts/IDispatcher.cs
+ create mode 100644 src/flow/src/contracts/ISelectors.cs
+ create mode 100644 src/flow/src/contracts/ITableProcessor.cs
+ rename src/{konst/src/events/services => flow/src/models}/DataBrokerCT.cs (100%)
+ rename src/flow/src/{services/hosts => models}/EventHub.cs (100%)
+ rename src/flow/src/{services/hosts => models}/EventHubs.cs (97%)
+ rename src/flow/src/{services/hosts => models}/EventWriter.cs (100%)
+ rename src/flow/src/{services/hosts => models}/HubClient.cs (100%)
+ rename src/flow/src/{services/hosts => models}/HubRelay.cs (100%)
+ rename src/flow/src/{services/hosts => models}/WfBroker.cs (100%)
+ rename src/flow/src/{services/hosts => models}/WfEventLog.cs (100%)
+ rename src/flow/src/{services/hosts => models}/WfTermEventSink.cs (100%)
+ create mode 100644 src/flow/src/procesors/DataProcessor.cs
+ create mode 100644 src/flow/src/procesors/Dispatcher.cs
+ create mode 100644 src/flow/src/procesors/DispatcherProxy.cs
+ create mode 100644 src/flow/src/procesors/SelectorDS.cs
+ create mode 100644 src/flow/src/procesors/SelectorsDT.cs
+ create mode 100644 src/flow/src/procesors/TableProcessorDSTY.cs
+ rename src/{konst/src/dataset/tables/models/TableFT.cs => flow/src/procesors/TableProcessorTY.cs} (58%)
+ create mode 100644 src/flow/src/procesors/TableProcessors.cs
+ create mode 100644 src/flow/src/procesors/TableProcessorsDSTY.cs
+ delete mode 100644 src/konst/src/dataset/tables/contracts/ITableIndex.cs
+ delete mode 100644 src/konst/src/dataset/tables/ops/index.cs
+ delete mode 100644 src/konst/src/events/contracts/IDataProcessor.cs
+ rename src/konst/src/{dataset => }/tables/Table.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/ICellFormatter.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/ICellular.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IConstIndex.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IContentIndex.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IDataEntity.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IDataFlow.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IDataIndex.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IDataModel.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IDatasetArchive.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IDatasets.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IDocument.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IFieldValues.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IIndex.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/IRowFormatter.cs (100%)
+ create mode 100644 src/konst/src/tables/contracts/ITable.cs
+ rename src/konst/src/{dataset => }/tables/contracts/ITableArchive.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/ITableCells.cs (100%)
+ create mode 100644 src/konst/src/tables/contracts/ITableContent.cs
+ rename src/konst/src/{dataset => }/tables/contracts/ITableField.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/ITableFormatter.cs (100%)
+ rename src/konst/src/{dataset/tables/contracts/ITable.cs => tables/contracts/ITableIndex.cs} (62%)
+ rename src/konst/src/{dataset => }/tables/contracts/ITableLog.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/ITableRow.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/ITableRows.cs (100%)
+ rename src/konst/src/{dataset => }/tables/contracts/ITableSink.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/CellCount.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/CellT.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/CellWT.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/Cells.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/CellsWT.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/DataFlowST.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/DataModelK.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/EnumLiteral.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/EnumLiteralRecord.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/EnumLiteralRecords.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/EnumLiterals.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/FieldEvaluation.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/FieldEvaluationFT.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/FieldIndex.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/FormatPattern.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/FormatPatterns.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/HeaderCell.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/HeaderCellT.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/LiteralFields.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/LiteralFieldsF.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/RenderWidth.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/RowValue.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/RowValueT.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/StringTable.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/StringTableRow.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/StringTableRows.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/StringTables.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/TableArchive.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/TableColumn.cs (100%)
+ create mode 100644 src/konst/src/tables/models/TableContentFT.cs
+ create mode 100644 src/konst/src/tables/models/TableContentFTD.cs
+ rename src/konst/src/{dataset => }/tables/models/TableEmission.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/TableField.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/TableFieldF.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/TableFields.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/TableFieldsF.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/TableHeader.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/TableHeaderF.cs (100%)
+ create mode 100644 src/konst/src/tables/models/TableIndexFTDI.cs
+ create mode 100644 src/konst/src/tables/models/TableIndexFTI.cs
+ rename src/konst/src/{dataset => }/tables/models/TableRowFT.cs (100%)
+ rename src/konst/src/{dataset => }/tables/models/TableRowT.cs (100%)
+ rename src/konst/src/{dataset/tables/models/TableRows.cs => tables/models/TableRowsT.cs} (95%)
+ rename src/konst/src/{dataset => }/tables/models/TableT.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/archive.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/cells.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/columns.cs (100%)
+ create mode 100644 src/konst/src/tables/ops/content.cs
+ rename src/konst/src/{dataset => }/tables/ops/emit.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/enums.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/evaluate.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/field.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/fields.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/flow.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/formatter.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/header.cs (100%)
+ create mode 100644 src/konst/src/tables/ops/index.cs
+ rename src/konst/src/{dataset => }/tables/ops/labels.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/literal.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/literals.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/log.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/publication.cs (100%)
+ rename src/konst/src/{dataset => }/tables/ops/value.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/CellFormatter.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/FieldFormatterF.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/MultiFormatter.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/NumericFormatter.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/NumericLiteralFormatter.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/ReflectedLiterals.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/SpanFormatter.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/TableFormatterF.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/TableFormatterFT.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/TableLogT.cs (100%)
+ rename src/konst/src/{dataset => }/tables/services/ValueFormatter.cs (100%)

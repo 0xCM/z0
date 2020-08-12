@@ -11,27 +11,27 @@ namespace Z0.MS
     /// <summary>
     /// Returns information about the IL for a method.
     /// </summary>
-    public class ILInfo
+    public struct ILInfo
     {
         /// <summary>
         /// Gets the address in memory of where the IL for a particular method is located.
         /// </summary>
-        public ulong Address { get; }
+        public ulong Address;
 
         /// <summary>
         /// Gets the length (in bytes) of the IL method body.
         /// </summary>
-        public int Length { get; }
+        public int Length;
 
         /// <summary>
         /// Gets the flags associated with the IL code.
         /// </summary>
-        public uint Flags { get; }
+        public uint Flags;
 
         /// <summary>
         /// Gets the local variable signature token for this IL method.
         /// </summary>
-        public uint LocalVarSignatureToken { get; }
+        public uint LocalVarSignatureToken;
 
         public ILInfo(ulong address, int len, uint flags, uint localVarSignatureToken)
         {

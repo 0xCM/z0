@@ -109,7 +109,7 @@ namespace Z0.MS
         
         readonly SOSDac _sos;
         
-        readonly CacheOptions _options;
+        readonly ProcessCacheOptions _options;
         
         private readonly SOSDac6? _sos6;
         

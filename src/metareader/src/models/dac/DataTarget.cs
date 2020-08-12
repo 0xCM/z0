@@ -40,8 +40,8 @@ namespace Z0
         /// </summary>
         public IDataReader DataReader { get; }
 
-        public CacheOptions CacheOptions { get; } 
-            = new CacheOptions();
+        public ProcessCacheOptions CacheOptions { get; } 
+            = new ProcessCacheOptions();
 
         /// <summary>
         /// Gets or sets instance to manage the symbol path(s).

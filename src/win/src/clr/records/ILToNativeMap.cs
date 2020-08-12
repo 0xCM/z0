@@ -9,6 +9,7 @@ namespace Z0.MS
     /// <summary>
     /// A method's mapping from IL to native offsets.
     /// </summary>
+    [Table]
     public struct ILToNativeMap
     {
         /// <summary>

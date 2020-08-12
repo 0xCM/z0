@@ -13,8 +13,6 @@ namespace Z0
     using Z0.Image;    
     using Z0.MS;
     
-    using static ClrDataModel;
-
     /// <summary>
     /// Represents a managed module in the target process.
     /// </summary>

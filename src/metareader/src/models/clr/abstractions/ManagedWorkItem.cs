@@ -4,7 +4,7 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.MS
+namespace Z0
 {
     /// <summary>
     /// A managed threadpool object.

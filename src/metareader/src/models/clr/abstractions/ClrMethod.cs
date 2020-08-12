@@ -11,8 +11,6 @@ namespace Z0
 
     using Z0.MS;
     
-    using static ClrDataModel;
-
     /// <summary>
     /// Represents a method on a class.
     /// </summary>

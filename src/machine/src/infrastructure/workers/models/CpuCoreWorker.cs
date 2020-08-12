@@ -106,7 +106,7 @@ namespace Z0
         
         internal async Task Run()
         {
-            WorkerThread = thread(CurrentProcess.CurrentThreadId).ValueOrDefault();
+            WorkerThread = thread(CurrentProcess.OsThreadId).ValueOrDefault();
             if(WorkerThread == null)
             {
                 term.error("Thread lookup failed. Aborting worker");

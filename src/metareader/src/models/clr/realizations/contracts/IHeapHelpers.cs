@@ -9,6 +9,8 @@ namespace Z0.MS
     using System;
     using System.Collections.Generic;
 
+    using Z0.Dac;
+    
     public interface IHeapHelpers
     {
         IDataReader DataReader { get; }

@@ -164,9 +164,9 @@ namespace Z0
 
         public int PointerSize => IntPtr.Size;
 
-        public IEnumerable<ModuleDescription> EnumerateModules()
+        public IEnumerable<ProcessModuleInfo> EnumerateModules()
         {
-            List<ModuleDescription> result = new List<ModuleDescription>();
+            List<ProcessModuleInfo> result = new List<ProcessModuleInfo>();
 
             EnumProcessModules(_process, null, 0, out uint needed);
 
@@ -192,7 +192,7 @@ namespace Z0
                 GetFileProperties(baseAddr, out int filesize, out int timestamp);
 
                 string fileName = sb.ToString();
-                ModuleDescription module = new ModuleDescription(baseAddr, filesize, timestamp, fileName, default);
+                ProcessModuleInfo module = new ProcessModuleInfo(baseAddr, filesize, timestamp, fileName, default);
                 result.Add(module);
             }
 

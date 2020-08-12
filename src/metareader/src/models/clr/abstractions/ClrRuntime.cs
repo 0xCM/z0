@@ -13,8 +13,6 @@ namespace Z0
     using Z0.Dac;
     using Z0.MS;
     
-    using static ClrDataModel;
-
     /// <summary>
     /// Represents a single runtime in a target process or crash dump.  This serves as the primary
     /// entry point for getting diagnostic information.

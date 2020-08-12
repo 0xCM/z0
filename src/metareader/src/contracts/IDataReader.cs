@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>    
     /// <remarks>
     /// The <see cref='IProcessDataReader'/> interface is a clone of this interface that
-    /// enumerates <see cref='ModuleDescription'> values in lieu of <see cref='ModuleInfo'/> objects
+    /// enumerates <see cref='ProcessModuleInfo'> values in lieu of <see cref='ModuleInfo'/> objects
     /// </remarks>
     public interface IDataReader : IDisposable, IMemoryReader
     {

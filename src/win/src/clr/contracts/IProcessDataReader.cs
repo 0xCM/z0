@@ -13,7 +13,7 @@ namespace Z0.MS
     /// An interface for reading data out of the target process.
     /// </summary>
     /// <remarks>
-    /// Replica of <see cref='IDataReader'/> that enumerates <see cref='ModuleDescription'/> data in lieu of <see cref='ModuleInfo'/>
+    /// Replica of <see cref='IDataReader'/> that enumerates <see cref='ProcessModuleInfo'/> data in lieu of <see cref='ModuleInfo'/>
     /// </remarks>
     public interface IProcessDataReader : IDisposable, IMemoryReader
     {
@@ -48,7 +48,7 @@ namespace Z0.MS
         /// Enumerates modules in the target process.
         /// </summary>
         /// <returns>An enumerable of the modules in the target process.</returns>
-        IEnumerable<ModuleDescription> EnumerateModules();
+        IEnumerable<ProcessModuleInfo> EnumerateModules();
 
         /// <summary>
         /// Gets the version information for a given module (given by the base address of the module).

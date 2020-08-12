@@ -45,7 +45,7 @@ namespace Z0
         {
             var pSrc = Unsafe.AsPointer(ref src);
             IntPtr buffer = (IntPtr)pSrc;
-            if (!Buffers.VirtualProtectEx(CurrentProcess.Handle, buffer, (UIntPtr)length, 0x40, out uint _))
+            if (!Buffers.VirtualProtectEx(CurrentProcess.ProcessHandle, buffer, (UIntPtr)length, 0x40, out uint _))
                 Buffers.ThrowLiberationError(buffer, length);
             return (T*)pSrc;
         }

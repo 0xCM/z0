@@ -9,7 +9,7 @@ namespace Z0.MS
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [Table, StructLayout(LayoutKind.Sequential)]
     public readonly struct IMetaDataImportVTable
     {
         public readonly IntPtr CloseEnum;

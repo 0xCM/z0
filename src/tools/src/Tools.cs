@@ -14,6 +14,27 @@ namespace Z0
     [ApiHost("api")]
     public readonly struct Tooling
     {
+        [MethodImpl(Inline), Op]
+        public static IToolContext context()
+            => new ToolContext(AppPaths.Default, CorrelationToken.define((ulong)CurrentProcess.ProcessId));
+
+        [MethodImpl(Inline), Op]
+        public static IToolContext context(IAppPaths paths, CorrelationToken? ct = null)
+            => new ToolContext(paths, ct ?? CorrelationToken.define((ulong)CurrentProcess.ProcessId));
+
+        [MethodImpl(Inline), Op]
+        public static ToolLogger logger<T>(T id)
+            where T : unmanaged, Enum
+                => logger(id.ToString());
+        
+        [MethodImpl(Inline), Op]
+        public static ToolLogger logger(string name)
+        {
+            var ctx = context();
+            var dst = ctx.Paths.AppDataRoot + FileName.Define(name, FileExtensions.Log);
+            return new ToolLogger(ctx,dst);
+        }
+        
         public static ListedFiles listed<T,F>(ToolFiles<T,F> src)   
             where T : struct, ITool<T>
             where F : unmanaged, Enum  

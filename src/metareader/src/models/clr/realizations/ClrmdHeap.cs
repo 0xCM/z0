@@ -4,13 +4,15 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.MS
+namespace Z0.Dac
 {
     using System;
     using System.Buffers;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
+
+    using Z0.MS;
 
     sealed class ClrmdHeap : ClrHeap
     {

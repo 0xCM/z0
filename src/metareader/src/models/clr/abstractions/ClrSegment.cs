@@ -9,8 +9,6 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
-    using Z0.MS;
     
     /// <summary>
     /// A ClrSegment represents a contiguous region of memory that is devoted to the GC heap.

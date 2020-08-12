@@ -4,12 +4,12 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.MS
+namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [Table, StructLayout(LayoutKind.Sequential)]
     public readonly struct CodeHeaderData
     {
         public readonly ClrDataAddress GCInfo;

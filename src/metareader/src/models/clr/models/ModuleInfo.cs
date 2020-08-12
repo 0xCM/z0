@@ -15,7 +15,7 @@ namespace Z0.MS
     /// Provides information about loaded modules in a <see cref="DataTarget"/>.
     /// </summary>
     /// <remarks>
-    /// The <see cref='ModuleDescription'/> type encapsulates the structural content of this object
+    /// The <see cref='ProcessModuleInfo'/> type encapsulates the structural content of this object
     /// </remarks>
     public class ModuleInfo
     {
