@@ -12,19 +12,19 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct TableProcessors<D,S,T,Y>
+    public readonly struct TableMaps<D,S,T,Y>
         where D : unmanaged, Enum
         where T : struct, ITable
         where S : unmanaged
     {
-        readonly TableProcessor<D,S,T,Y>[]  Data;
+        readonly TableMap<D,S,T,Y>[]  Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator TableProcessors<D,S,T,Y>(TableProcessor<D,S,T,Y>[] src)
-            => new TableProcessors<D,S,T,Y>(src);
+        public static implicit operator TableMaps<D,S,T,Y>(TableMap<D,S,T,Y>[] src)
+            => new TableMaps<D,S,T,Y>(src);
         
         [MethodImpl(Inline)]
-        public TableProcessors(TableProcessor<D,S,T,Y>[] src)
+        public TableMaps(TableMap<D,S,T,Y>[] src)
         {
             Data = src;
         }
@@ -35,13 +35,13 @@ namespace Z0
             get => Data.Length;
         }
 
-        public ReadOnlySpan<TableProcessor<D,S,T,Y>> View
+        public ReadOnlySpan<TableMap<D,S,T,Y>> View
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public Span<TableProcessor<D,S,T,Y>> Edit
+        public Span<TableMap<D,S,T,Y>> Edit
         {
             [MethodImpl(Inline)]
             get => Data;

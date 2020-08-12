@@ -3,22 +3,27 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{        
     using System;
     using System.Security;
-    
-    using static Konst;
 
-    public interface ITableSink<T> : ISink<T>
-        where T : struct, ITable
+    public interface IWfSink : ISink
     {
         
     }
-
-    public interface ITableSink<F,T> : ITableSink<T>
-        where F : unmanaged, Enum
-        where T : struct, ITable<F,T>         
+    
+    public interface IWfSink<T> : IWfSink, IDataSink<T>
+        where T : struct
     {
-        
-    }    
+
+    }
+
+    public interface IWfSink<H,T> : IWfSink, IWfSink<T>
+        where T : struct
+        where H : struct, IWfSink<H,T>
+    {
+
+    }
+
+
 }

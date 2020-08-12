@@ -10,23 +10,20 @@ namespace Z0
     using static Konst;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IWfRunner
+    public interface IWfRunner : IWfActor
     {
-        void Run(params string[] args);
+        void Run();
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IWfRunner<T> : IWfRunner
-        where T : struct, IWfStep<T>
+    public interface IWfRunner<A> : IWfRunner
     {
-        
+        void Run(A args);
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IWfRunner<T,K> : IWfRunner<T>
-        where T : struct, IWfStep<T,K>
-        where K : unmanaged, Enum
+    public interface IWfRunner<H,A> : IWfRunner<H>
+        where H : struct, IWfRunner<H,A>
     {
-        
     }
 }

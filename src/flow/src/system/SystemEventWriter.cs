@@ -8,7 +8,7 @@ namespace Z0
     using System.Diagnostics.Tracing;
 
     [EventSource(Name = SourceName)]    
-    public sealed class SystemEventWriter : EventWriter, IPulseEventReceiver
+    public sealed class SystemEventWriter : WfEventWriter, IPulseEventReceiver
     {
         public const string SourceName = "zsyn/system-events";
 

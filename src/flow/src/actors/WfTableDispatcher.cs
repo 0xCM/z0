@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using api = TableProcessors;
+    using api = TableWorkers;
         
-    public readonly ref struct Dispatcher<F,T,D,S,Y>
+    public readonly ref struct WfTableDispatcher<F,T,D,S,Y>
         where F : unmanaged, Enum
         where T : struct, ITable<F,T,D>
         where D : unmanaged, Enum        
@@ -23,7 +23,7 @@ namespace Z0
 
         internal readonly Span<Y> Target;
 
-        internal readonly Span<TableProcessor<D,S,T,Y>> Processors;
+        internal readonly Span<TableMap<D,S,T,Y>> Processors;
 
         internal readonly Selectors<D,S> Selectors;
 
@@ -31,7 +31,7 @@ namespace Z0
             => (uint)Source.Length;
 
         [MethodImpl(Inline)]
-        public Dispatcher(IWfContext wf, T[] tables, TableProcessors<D,S,T,Y> processors, Selectors<D,S> selectors, Y[] dst)
+        public WfTableDispatcher(IWfContext wf, T[] tables, TableMaps<D,S,T,Y> processors, Selectors<D,S> selectors, Y[] dst)
         {
             Wf = wf;
             Source = tables;
@@ -41,22 +41,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Process()
+        public void Run()
         {
-            Process(first(Source), ref first(Target), 0u, SourceCount);                        
+            Map(first(Source), ref first(Target), 0u, SourceCount);                        
         }
 
         [MethodImpl(Inline)]
-        public void Process(in T src, ref Y dst, uint offset, uint count)
+        public void Map(in T src, ref Y dst, uint offset, uint count)
         {
             for(var i=offset; i<count; i++)
-                Process(skip(src,i), ref seek(dst,i));
+                Map(skip(src,i), ref seek(dst,i));
         }
 
         [MethodImpl(Inline)]
-        public ref Y Process(in T src, ref Y dst)
+        public ref Y Map(in T src, ref Y dst)
         {
-            dst = Processor(src.Id).Process(src);
+            dst = Processor(src.Id).Map(src);
             return ref dst;
         }
 
@@ -73,7 +73,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        public ref readonly TableProcessor<D,S,T,Y> Processor(D id)
+        public ref readonly TableMap<D,S,T,Y> Processor(D id)
         {
             ref readonly var selector = ref Selectors[id];                
             var position = selector.Position;

@@ -11,14 +11,16 @@ namespace Z0
 
     partial struct Flow    
     {
-        [MethodImpl(Inline), Op]
-        public static WfRunner runner(Action<string[]> handler)
-            => new WfRunner(handler);
+        [MethodImpl(Inline)]
+        public static WfRunner<A> runner<A>(IWfContext wf, Action<A> handler)
+            => new WfRunner<A>(wf, handler);
 
         [MethodImpl(Inline)]
-        public static WfRunner<T,K> runner<T,K>(Action<string[]> handler)
-            where T : struct, IWfStep<T,K>
-            where K : unmanaged, Enum
-                => new WfRunner<T,K>(handler);
+        public static WfTableRunner<F,T,D,S,Y> runner<F,T,D,S,Y>(IWfContext wf, TableMaps<D,S,T,Y> processors, Selectors<D,S> selectors)
+            where F : unmanaged, Enum
+            where T : struct, ITable<F,T,D>
+            where D : unmanaged, Enum
+            where S : unmanaged        
+                => new WfTableRunner<F,T,D,S,Y>(wf, processors, selectors);
     }
 }

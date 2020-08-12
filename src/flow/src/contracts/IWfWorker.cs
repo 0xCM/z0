@@ -3,14 +3,19 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
-    using System.Collections.Generic;
+    using System.Security;
 
-    public interface IAgentContext : IAppBase
+    [SuppressUnmanagedCodeSecurity]
+    public interface IWfWorker
     {
-        IEnumerable<ISystemAgent> Memberhsip {get;}   
+        IWfContext Wf {get;}
+    }
 
-        IAgentEventSink EventLog {get;}        
+    public interface IWfWorker<H> : IWfWorker
+        where H : struct, IWfWorker<H>
+    {
+
     }
 }

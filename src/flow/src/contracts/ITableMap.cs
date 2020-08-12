@@ -10,14 +10,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface ITableProcessor<T,Y>
+
+    public interface ITableMap<T,Y> : ITableWorker
         where T : struct, ITable
     {
-        Y Process(in T src);
+        Y Map(in T src);
     }
 
-    public interface ITableProcessor<H,T,Y> : ITableProcessor<T,Y>
-        where H : struct, ITableProcessor<H,T,Y>
+    public interface ITableMap<H,T,Y> : ITableMap<T,Y>
+        where H : struct, ITableMap<H,T,Y>
         where T : struct, ITable
     {
         
@@ -30,14 +31,12 @@ namespace Z0
     /// <typeparam name="S">The discrimnator's scalar type</typeparam>
     /// <typeparam name="T">The data type</typeparam>
     /// <typeparam name="Y">The output type</typeparam>
-    public interface ITableProcessor<D,S,T,Y>
+    public interface ITableMap<D,S,T,Y> : ITableMap<T,Y>
         where D : unmanaged, Enum
         where T : struct, ITable
         where S : unmanaged
     {
-        Selector<D,S> Id {get;}
-
-        Y Process(in T x); 
+        Selector<D,S> Id {get;}        
     }
 
     /// <summary>
@@ -48,8 +47,8 @@ namespace Z0
     /// <typeparam name="S">The discrimnator's scalar type</typeparam>
     /// <typeparam name="T">The data type</typeparam>
     /// <typeparam name="Y">The output type</typeparam>
-    public interface ITableProcessor<H,D,S,T,Y> : ITableProcessor<D,S,T,Y>
-        where H : struct, ITableProcessor<H,D,S,T,Y>
+    public interface ITableMap<H,D,S,T,Y> : ITableMap<D,S,T,Y>
+        where H : struct, ITableMap<H,D,S,T,Y>
         where D : unmanaged, Enum
         where T : struct, ITable
         where S : unmanaged

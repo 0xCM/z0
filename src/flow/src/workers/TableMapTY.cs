@@ -9,29 +9,26 @@ namespace Z0
 
     using Z0.Data;
     
-    using static Konst;
     using static ProcessFx;
 
+    using static Konst;
     using static z;
 
-    public readonly struct TableProcessor<D,S,T,Y> : ITableProcessor<TableProcessor<D,S,T,Y>, D,S,T,Y>
-        where D : unmanaged, Enum
+    public readonly struct TableMap<T,Y> : ITableMap<TableMap<T,Y>,T,Y>        
         where T : struct, ITable
-        where S : unmanaged
-    {
-        public Selector<D,S> Id {get;}
-
-        readonly ProcessTable<T,Y> Fx;
-
-        [MethodImpl(Inline)]
-        public TableProcessor(IWfContext wf, ProcessTable<T,Y> f, Selector<D,S> id)
+    {       
+        public IWfContext Wf {get;}
+        
+        readonly MapTable<T,Y> Fx;         
+        
+        public TableMap(IWfContext wf, MapTable<T,Y> f)
         {
-            Id = id;
+            Wf = wf;
             Fx = f;
         }
-                
+        
         [MethodImpl(Inline)]
-        public Y Process(in T x)
+        public Y Map(in T x)
             => Fx(x);
     }
 }

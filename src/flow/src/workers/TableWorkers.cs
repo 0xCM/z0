@@ -15,7 +15,7 @@ namespace Z0
 
 
     [ApiHost]
-    public readonly struct TableProcessors
+    public readonly struct TableWorkers
     {                
         [MethodImpl(Inline)]
         public static ulong scalar<D,S>(D id)

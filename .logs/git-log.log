@@ -7349,3 +7349,87 @@
  rename src/win/src/{clr/records => tables}/HotColdRegions.cs (100%)
  rename src/win/src/{clr/records => tables}/ILInfo.cs (100%)
  rename src/win/src/{clr/records => tables}/ILToNativeMap.cs (100%)
+[master 172497ce8] .
+ 139 files changed, 1752 insertions(+), 743 deletions(-)
+ create mode 100644 src/domain/src/files/ops/dir.cs
+ create mode 100644 src/domain/src/files/ops/drive.cs
+ rename src/{tools/src/tools/clr/IlDasm.cs => domain/src/files/ops/ext.cs} (61%)
+ delete mode 100644 src/domain/src/files/ops/factories.cs
+ create mode 100644 src/domain/src/files/ops/file.cs
+ create mode 100644 src/domain/src/files/ops/folder.cs
+ rename src/{tools/src/contracts/IToolRunner.cs => domain/src/files/ops/path.cs} (69%)
+ create mode 100644 src/domain/src/files/ops/save.cs
+ create mode 100644 src/flow/src/contracts/PrcessFx.cs
+ create mode 100644 src/flow/src/events/WfEventOrigin.cs
+ rename src/flow/src/{literals => models}/Flairs.cs (100%)
+ rename src/flow/src/{literals => models}/FlowLiteralKind.cs (100%)
+ rename src/flow/src/{literals => models}/FormatAtoms.cs (100%)
+ rename src/flow/src/{literals => models}/FormatLiterals.cs (100%)
+ rename src/flow/src/{procesors/SelectorDS.cs => models/Selector.cs} (100%)
+ rename src/flow/src/{procesors/SelectorsDT.cs => models/Selectors.cs} (100%)
+ create mode 100644 src/flow/src/models/WfCaller.cs
+ rename src/flow/src/{context => models}/WfConfig.cs (68%)
+ rename src/flow/src/{context => models}/WfConfigData.cs (100%)
+ rename src/flow/src/{context => models}/WfProcessor.cs (77%)
+ rename src/flow/src/{context => models}/WfRunner.cs (100%)
+ rename src/flow/src/{context => models}/WfSettings.cs (100%)
+ rename src/flow/src/{models => services}/EventHubs.cs (100%)
+ rename src/flow/src/{context => services}/WfContext.cs (96%)
+ rename src/flow/src/{literals => services}/WfStepKind.cs (100%)
+ rename src/flow/src/{models => services/hosts}/DataBrokerCT.cs (91%)
+ rename src/flow/src/{procesors => services/hosts}/DataProcessor.cs (80%)
+ rename src/flow/src/{procesors => services/hosts}/Dispatcher.cs (100%)
+ rename src/flow/src/{procesors => services/hosts}/DispatcherProxy.cs (63%)
+ rename src/flow/src/{models => services/hosts}/EventHub.cs (100%)
+ rename src/flow/src/{models => services/hosts}/HubClient.cs (100%)
+ rename src/flow/src/{models => services/hosts}/HubRelay.cs (100%)
+ rename src/flow/src/{procesors/TableProcessorDSTY.cs => services/hosts/TableProcessor.cs} (79%)
+ rename src/flow/src/{procesors => services/hosts}/TableProcessorTY.cs (66%)
+ rename src/flow/src/{procesors => services/hosts}/TableProcessors.cs (60%)
+ rename src/flow/src/{procesors => services/hosts}/TableProcessorsDSTY.cs (100%)
+ rename src/flow/src/{models => services/hosts}/WfBroker.cs (90%)
+ rename src/flow/src/{models/DataFlow.cs => services/ops/archive.cs} (50%)
+ create mode 100644 src/flow/src/services/ops/archived.cs
+ create mode 100644 src/flow/src/services/ops/broker.cs
+ create mode 100644 src/flow/src/services/ops/caller.cs
+ create mode 100644 src/flow/src/services/ops/delimit.cs
+ create mode 100644 src/flow/src/services/ops/dispatcher.cs
+ rename src/flow/src/services/ops/{wfid.cs => evid.cs} (100%)
+ create mode 100644 src/flow/src/services/ops/flow.cs
+ rename src/flow/src/services/ops/{elog.cs => log.cs} (100%)
+ create mode 100644 src/flow/src/services/ops/model.cs
+ create mode 100644 src/flow/src/services/ops/origin.cs
+ create mode 100644 src/flow/src/services/ops/processor.cs
+ create mode 100644 src/flow/src/services/ops/selector.cs
+ create mode 100644 src/flow/src/services/ops/selectors.cs
+ create mode 100644 src/flow/src/services/props/Slot.cs
+ create mode 100644 src/flow/zbuild.sh
+ create mode 100644 src/konst/src/formatting/Format.cs
+ rename src/{tools/src/services/ToolContext.cs => konst/src/formatting/models/DefaultFormatter.cs} (55%)
+ create mode 100644 src/konst/src/formatting/ops/append.cs
+ create mode 100644 src/konst/src/formatting/ops/concat.cs
+ rename src/konst/src/formatting/{Formattable.cs => ops/items.cs} (80%)
+ delete mode 100644 src/machine/src/infrastructure/cmd/contracts/ICmdTool.cs
+ rewrite src/tools/src/Tools.cs (89%)
+ delete mode 100644 src/tools/src/base/ToolOutcome.cs
+ rename src/{machine/src/infrastructure/cmd/models/CmdFlag.cs => tools/src/models/ToolFlag.cs} (73%)
+ rename src/{machine/src/infrastructure/cmd/models/CmdOption.cs => tools/src/models/ToolOption.cs} (73%)
+ rename src/{machine/src/infrastructure/cmd/models/CmdSpec.cs => tools/src/models/ToolSpec.cs} (70%)
+ create mode 100644 src/tools/src/models/ToolStatus.cs
+ create mode 100644 src/tools/src/services/IToolRunner.cs
+ create mode 100644 src/tools/src/services/ToolRunerOptions.cs
+ rename src/tools/src/{base/ToolCommand.cs => services/ToolRunner.cs} (92%)
+ rename src/tools/src/{base/ToolOptions.cs => services/ToolRunnerConfig.cs} (87%)
+ create mode 100644 src/tools/src/tools/api/archive.cs
+ create mode 100644 src/tools/src/tools/api/config.cs
+ create mode 100644 src/tools/src/tools/api/file.cs
+ create mode 100644 src/tools/src/tools/api/listed.cs
+ create mode 100644 src/tools/src/tools/api/logger.cs
+ create mode 100644 src/tools/src/tools/api/processor.cs
+ create mode 100644 src/tools/src/tools/api/runner.cs
+ create mode 100644 src/tools/src/tools/api/tool.cs
+ create mode 100644 src/tools/src/tools/csc/csc.doc
+ rename src/tools/src/tools/{ => dumpbin}/AsmProcessor.cs (94%)
+ rename src/{machine/src/infrastructure/cmd/tools => tools/src/tools/ildasm}/IlDasm.cs (74%)
+ rename src/tools/src/tools/{clr => ildasm}/JitDasm.Sample.cmd (100%)
+ rename src/tools/src/tools/{clr => jitdasm}/JitDasm.cs (100%)

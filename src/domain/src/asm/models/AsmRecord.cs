@@ -12,7 +12,7 @@ namespace Z0.Asm
     using F = AsmRecordField;
     using R = AsmRecord;
 
-    public struct AsmRecord : IRecord<F,R>
+    public struct AsmRecord : IRecord<F,R>, ITable<AsmRecordField,AsmRecord>
     {                   
         public static string FormatHeader(char delimiter = FieldDelimiter)
             => Tabular.HeaderText<F>(delimiter);

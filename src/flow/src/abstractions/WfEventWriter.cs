@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
-    partial struct Flow    
+    using System.Diagnostics.Tracing;
+    
+    public abstract class WfEventWriter : EventSource
     {
 
     }

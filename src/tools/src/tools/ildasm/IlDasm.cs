@@ -9,9 +9,23 @@ namespace Z0.Tools
 
     using static Konst;
     using static z;
+    
+    using api = Tooling;
 
     public partial struct IlDasm
     {
+        [MethodImpl(Inline), Op]
+        public static ToolSpec specify(IlDasm.FlagKind[] flags, ToolOption[] options)
+            => api.specify(flags, options, default(IlDasm));
+
+        [MethodImpl(Inline), Op]
+        public static ToolOption option(IlDasm.OptionKind kind, string value)
+            => api.value(kind, value);
+
+        [MethodImpl(Inline), Op]
+        public static string name(IlDasm.FlagKind @enum)
+            => api.name<IlDasm.FlagKind>(@enum);
+                
         public const string ToolName = "ildasm";
         
         public const string FlagIndicator = "/";

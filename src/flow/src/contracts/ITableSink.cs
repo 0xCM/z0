@@ -7,17 +7,21 @@ namespace Z0
     using System;
     using System.Security;
 
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IWfActor : IWfWorker, IDisposable
+    public interface ITableSink : IWfSink, ITableWorker
     {
-        
+
     }
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface IWfActor<H> : IWfActor
-        where H : struct, IWfActor<H>
+    public interface ITableSink<T> : IWfSink<T>, ITableWorker<T>
+        where T : struct, ITable
     {
-        
+
+    }
+
+    public interface ITableSink<H,T> : ITableSink<T>, IWfSink<H,T>
+        where T : struct, ITable
+        where H : struct, ITableSink<H,T>
+    {
+
     }
 }

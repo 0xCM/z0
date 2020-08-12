@@ -13,19 +13,19 @@ namespace Z0
     partial struct Flow    
     {
         [MethodImpl(Inline)]
-        public static DataProcessor<S,T> processor<S,T>(IWfContext wf, Process<S,T> f, S[] src, T[] dst)
-            => new DataProcessor<S,T>(wf, f,src,dst);
+        public static WfDataHandler<S,T> processor<S,T>(IWfContext wf, Map<S,T> f, S[] src, T[] dst)
+            => new WfDataHandler<S,T>(wf, f,src,dst);
 
         [MethodImpl(Inline)]
-        public static TableProcessor<T,Y> processor<T,Y>(IWfContext wf, ProcessTable<T,Y> f)
+        public static TableMap<T,Y> processor<T,Y>(IWfContext wf, MapTable<T,Y> f)
             where T : struct, ITable
-                => new TableProcessor<T,Y>(wf,f);
+                => new TableMap<T,Y>(wf,f);
         
         [MethodImpl(Inline)]
-        public static TableProcessor<D,S,T,Y> processor<T,D,S,Y>(IWfContext wf, ProcessTable<T,Y> f, Selector<D,S> id, T t = default, Y y = default)
+        public static TableMap<D,S,T,Y> processor<T,D,S,Y>(IWfContext wf, MapTable<T,Y> f, Selector<D,S> id, T t = default, Y y = default)
             where D : unmanaged, Enum
             where T : struct, ITable
             where S : unmanaged
-                => new TableProcessor<D,S,T,Y>(wf,f,id);
+                => new TableMap<D,S,T,Y>(wf,f,id);
     }
 }

@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Expressive)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Domain)" />
