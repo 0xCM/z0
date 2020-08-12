@@ -6,7 +6,6 @@ namespace Z0.Data
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
     using static z;
@@ -14,8 +13,16 @@ namespace Z0.Data
     partial struct Table
     {
         [MethodImpl(Inline)]
-        public static FieldIndex<F> index<F>()
+        public static TableContent<F,T> content<F,T>(T[] src, F f = default)
             where F : unmanaged, Enum
-                => new FieldIndex<F>(0);
+            where T : struct, ITable<F,T>
+                => new TableContent<F,T>(src);
+
+        [MethodImpl(Inline)]
+        public static TableContent<F,T,D> content<F,T,D>(T[] src, F f = default, D d = default)
+            where F : unmanaged, Enum
+            where D :  unmanaged, Enum
+            where T : struct, ITable<F,T,D>
+                => new TableContent<F,T,D>(src);
     }
 }

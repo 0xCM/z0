@@ -21,4 +21,9 @@ namespace Z0
     {
 
     }
+
+    public interface IHostProcessor<S> : IAsmProcessor<S>
+    {
+
+    }
 }

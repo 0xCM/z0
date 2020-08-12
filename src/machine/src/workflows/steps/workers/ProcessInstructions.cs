@@ -16,13 +16,13 @@ namespace Z0
         public static ProcessInstructions create(IWfContext wf, FolderPath dst)
             => new ProcessInstructions(wf, dst);
 
-        readonly IWfContext Context;
+        public IWfContext Wf {get;}
         
         readonly IDataProcessor<LocatedInstruction> Processor;
 
         public ProcessInstructions(IWfContext wf, FolderPath root)
         {
-            Context = wf;
+            Wf = wf;
             Processor = API.jmp(wf);            
         }
 
@@ -33,14 +33,12 @@ namespace Z0
 
         public void Process(PartInstructions src)
         {
-            var processor = API.part(Context);
-            processor.Process(src);
+            API.processor(Wf).Process(src);
         }
  
         public void Render(PartInstructions src)
         {
             var part = src.Part;
-            var inxs = src.Data;
             var archive = Archives.Services.Semantic;
             var dir = archive.SemanticDir(part).Clear();
 

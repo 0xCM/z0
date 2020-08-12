@@ -20,9 +20,7 @@ namespace Z0.Data
 
         [MethodImpl(Inline)]
         public TableRows(TableRow<T>[] data)
-        {
-            Data = data;
-        }        
+            => Data = data;
 
         public ref TableRow<T> this[uint index]
         {

@@ -6698,3 +6698,49 @@
  create mode 100644 src/sys/src/ops/value.cs
  create mode 100644 src/sys/src/proxy/value.cs
  create mode 100644 src/tools/src/tools/clr/Models.cs
+[master 65ad48079] .
+ 63 files changed, 700 insertions(+), 647 deletions(-)
+ create mode 100644 src/clrmap/CoreRun.doc
+ create mode 100644 src/clrmap/corerun.bat
+ create mode 100644 src/domain/src/files/FileKinds.cs
+ create mode 100644 src/domain/src/files/contracts/FileKindAttribute.cs
+ create mode 100644 src/domain/src/files/contracts/IFileKind.cs
+ rename src/domain/src/files/contracts/{IFileSystemObject.cs => IFso.cs} (72%)
+ create mode 100644 src/domain/src/files/kinds/AsmFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/CilFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/CsvFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/DllFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/DocFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/ExeFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/ExtractFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/HexFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/JsonFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/ParsedFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/TxtFileKind.cs
+ create mode 100644 src/domain/src/files/kinds/XmlFileKind.cs
+ create mode 100644 src/domain/src/files/models/ListedFiles.cs
+ rename src/{tools/src/base/files/ListedFiles.cs => domain/src/files/ops/format.cs} (52%)
+ create mode 100644 src/domain/src/files/ops/list.cs
+ create mode 100644 src/domain/src/files/ops/x/Extensions.cs
+ delete mode 100644 src/konst/src/archives/PartFileKinds.cs
+ delete mode 100644 src/konst/src/archives/contracts/IArtifactKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/AsmFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/CilFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/CsvFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/DllFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/DocFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/ExeFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/ExtractFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/HexFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/JsonFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/ParsedFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/TxtFileKind.cs
+ delete mode 100644 src/konst/src/archives/kinds/XmlFileKind.cs
+ create mode 100644 src/konst/src/archives/models/FileKindT.cs
+ rename src/konst/src/archives/{kinds => models}/PartFile.cs (100%)
+ rename src/konst/src/archives/{kinds => models}/PartFileKind.cs (100%)
+ create mode 100644 src/tools/src/tools/clr/CoreRun.cs
+ create mode 100644 src/tools/src/tools/clr/CrossGen.cs
+ create mode 100644 src/tools/src/tools/clr/IlDasm.cs
+ rename src/tools/src/tools/{jitdasm/test.cmd => clr/JitDasm.Sample.cmd} (100%)
+ create mode 100644 src/tools/src/tools/clr/JitDasm.cs

@@ -20,9 +20,9 @@ namespace Z0
         C = 2
     }
 
-    public interface IPartProcessor : IAsmProcessor<PartInstructions>
+    public interface IPartProcessor : IAsmProcessor<PartHandlerKind,PartInstructions>
     {
-        IDataBroker<PartHandlerKind,PartInstructions> Broker {get;}     
+        //IDataBroker<PartHandlerKind,PartInstructions> Broker {get;}     
     }
     
     public readonly struct PartProcessor : IPartProcessor
@@ -45,9 +45,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Process(PartInstructions src)
         {
-            var pHost = Processors.Host(Wf);
             for(var i=0; i<src.Length; i++)
-                pHost.Process(src[i]);
+                Processors.processor(Wf, src[i]).Process();
         }
     }
 }

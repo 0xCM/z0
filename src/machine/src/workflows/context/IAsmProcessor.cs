@@ -8,29 +8,29 @@ namespace Z0
     
     using Z0.Asm;
 
-    public interface IAsmProcessor<T> : IService, IDataProcessor<T>
+    public interface IAsmProcessor<T> : IDataProcessor<T>
     {
-
+        void Process(T src);
     }
 
-    public interface IJmpProcessor : IAsmProcessor<JmpKind,LocatedInstruction>
+    public interface IJmpProcessor :  IAsmProcessor<LocatedInstruction>, IAsmProcessor<JmpKind,LocatedInstruction>
     {
-        void OnJA(LocatedInstruction inxs)
+        void OnJA(LocatedInstruction src)
         {
             term.announce();
         }
 
-        void OnJAE(LocatedInstruction inxs)
+        void OnJAE(LocatedInstruction src)
         {
             term.announce();            
         }
 
-        void OnJB(LocatedInstruction inxs)
+        void OnJB(LocatedInstruction src)
         {
             term.announce();            
         }
 
-        void OnJBE(LocatedInstruction inxs)
+        void OnJBE(LocatedInstruction src)
         {
             term.announce();            
         }

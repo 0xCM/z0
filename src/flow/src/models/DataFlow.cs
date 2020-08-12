@@ -41,12 +41,7 @@ namespace Z0
             where F : unmanaged, Enum
                 =>  Table.formatter<F>(dst, delimiter);
 
-        [MethodImpl(Inline)]
-        public static Table<F,T> table<F,T>(T[] rows)
-            where T : struct, ITable<F,T>
-            where F : unmanaged, Enum
-                => new Table<F,T>(rows);
-
+    
         [MethodImpl(Inline)]
         public static ArchivedTable<F,T> archived<F,T>(FilePath location)
             where T : struct, ITable<F,T>
@@ -62,7 +57,7 @@ namespace Z0
         public static DataFlow<S,T> define<S,T>(S src, T dst)
             => Table.flow(src,dst);
 
-        public static DataFlow<Table<F,T>, ArchivedTable<F,T>> archive<F,T>(Table<F,T> src, FilePath dst)
+        public static DataFlow<TableContent<F,T>, ArchivedTable<F,T>> archive<F,T>(TableContent<F,T> src, FilePath dst)
             where T : struct, ITable<F,T>
             where F : unmanaged, Enum
         {
@@ -70,7 +65,7 @@ namespace Z0
             return define(src, archived<F,T>(dst));
         }        
 
-        public static DataFlow<Table<F,T>, ArchivedTable<F,T>> archive<F,T,M,K>(Table<F,T> src, TableArchive dst, M m = default,  F f = default)
+        public static DataFlow<TableContent<F,T>, ArchivedTable<F,T>> archive<F,T,M,K>(TableContent<F,T> src, TableArchive dst, M m = default,  F f = default)
             where T : struct, ITable<F,T>
             where F : unmanaged, Enum
             where M : struct, IDataModel<M,K>
@@ -81,7 +76,7 @@ namespace Z0
             return define(src, archived<F,T>(path));
         }        
 
-        public static DataFlow<Table<F,T>, ArchivedTable<F,T>> archive<F,T,M,K>(T[] src, TableArchive dst, M m = default,  F f = default)
+        public static DataFlow<TableContent<F,T>, ArchivedTable<F,T>> archive<F,T,M,K>(T[] src, TableArchive dst, M m = default,  F f = default)
             where T : struct, ITable<F,T>
             where F : unmanaged, Enum
             where M : struct, IDataModel<M,K>
@@ -101,7 +96,7 @@ namespace Z0
                 var formatted = transform.FormatRow(record);
                 writer.WriteLine(formatted);
             }
-            return define(table<F,T>(src), archived<F,T>(path));
+            return define(Table.content<F,T>(src), archived<F,T>(path));
         }        
     }
 }

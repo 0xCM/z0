@@ -8,6 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(Flow)" />
+
   </ItemGroup>
 
 </Project>

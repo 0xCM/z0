@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly struct DataBrokers : IApiHost<DataBrokers>
+    public readonly struct DataBrokers
     {        
         [MethodImpl(Inline)]
         public static BitBroker<K,T> broker64<K,T>(K kind = default, T rep = default)        

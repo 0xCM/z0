@@ -8,23 +8,20 @@ namespace Z0
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ITable : ITextual
-    {
-        string ITextual.Format()
-            => "Unformatted";
-    }
-    
-    [SuppressUnmanagedCodeSecurity]
-    public interface ITable<F> : ITable
-        where F : unmanaged, Enum
-    {
-
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface ITable<F,T> : ITable<F>
+    public interface ITableIndex<F,T,I> : ITableContent<T>
         where F : unmanaged, Enum
         where T : struct, ITable<F,T>
+        where I : unmanaged
+    {
+        ref T this[I index]{get;}
+    }    
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface ITableIndex<F,T,D,I> : ITableIndex<F,T,I>
+        where F : unmanaged, Enum
+        where D : unmanaged, Enum
+        where T : struct, ITable<F,T,D>
+        where I : unmanaged
     {
 
     }    

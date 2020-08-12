@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     using Z0.Data;
+    
+    using static Konst;
+    using static z;
 
-    public readonly struct Table<F,T>
-        where F : unmanaged, Enum
-        where T : struct, ITable<F,T>
-    {
-        public readonly T[] Data;
-
+    public readonly struct TableProcessor<T,Y> : ITableProcessor<TableProcessor<T,Y>,T,Y>        
+        where T : struct, ITable
+    {                
         [MethodImpl(Inline)]
-        public Table(T[] data)
-            => Data = data;
+        public Y Process(in T x)
+        {
+            return default;
+        }    
     }
 }
