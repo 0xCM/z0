@@ -5,32 +5,31 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
     using static Konst;
 
-    partial struct Formatters
+    partial struct Format
     {   
-        public static IFormatter find(object src)
+        public static IFormatter formatter(object src)
         {
             var attrib = src?.GetType()?.GetCustomAttribute<FormatterAttribute>();
             if(attrib != null)
-                return from(attrib.Realization);
+                return formatter(attrib.Realization);
             else
-                return default(DefaultFormatter);
+                return DefaultFormatter.Service;
         }
 
-        static IFormatter from(Type realization)
+        public static IFormatter formatter(Type host)
         {
             try
             {
-                return (IFormatter)Activator.CreateInstance(realization);
+                return (IFormatter)Activator.CreateInstance(host);
             }
             catch(Exception)
             {
-                return default(DefaultFormatter);
+                return DefaultFormatter.Service;
             }
         }        
     }

@@ -16,7 +16,6 @@ namespace Z0
     {   
         readonly Type[] KindReps;
 
-
         [MethodImpl(Inline)]
         public FileKinds(Type[] reps)
         {

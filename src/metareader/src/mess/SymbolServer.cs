@@ -172,7 +172,7 @@ namespace Z0.MS
                 try
                 {
                     // Decompress it
-                    ToolCommand.Run("Expand " + ToolCommand.Quote(result) + " " + ToolCommand.Quote(fullDestPath));
+                    ToolRunner.Run("Expand " + ToolRunner.Quote(result) + " " + ToolRunner.Quote(fullDestPath));
                     Trace($"Found '{Path.GetFileName(indexPath)}' on server '{server}'.  Copied to '{fullDestPath}'.");
                     return fullDestPath;
                 }

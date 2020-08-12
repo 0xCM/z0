@@ -18,6 +18,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public FolderPath(PathPart name)
                 => Name = name;
+            
+            [MethodImpl(Inline)]
+            public string Format()
+                => Name.Format();
         }        
     }
 }

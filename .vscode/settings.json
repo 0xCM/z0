@@ -8,6 +8,8 @@
         "Nullary",
         "Unignored",
         "fxlabel",
+        "ifblank",
+        "ildasm",
         "opcount",
         "opid",
         "opname",

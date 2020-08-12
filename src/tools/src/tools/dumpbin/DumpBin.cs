@@ -8,10 +8,13 @@ namespace Z0.Tools
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static DumpBin;
 
     public partial struct DumpBin : ITool<DumpBin,DumpBinFlag>
     {   
+        [MethodImpl(Inline), Op]
+        public static DumpBin create(IWfContext wf)
+            => new DumpBin(wf, Tooling.ToolSourceDir, (wf.AppPaths.LogRoot + FolderName.Define("tools")) + FolderName.Define(DumpBin.ToolName));
+
         public const string ToolName = "dumpbin";
         
         public const ToolId Identity = ToolId.Dumpbin;
@@ -42,12 +45,13 @@ namespace Z0.Tools
             TargetDir = dst;
             Flags = new ToolFlags<DumpBinFlag>(0);
             Map = new ExtensionMap<DumpBinFlag,ExtMap>(0);
-            Target = new ToolArchive<DumpBin,DumpBinFlag>(ToolId, TargetDir, Map);
+            Target = new ToolArchive<DumpBin,DumpBinFlag>(wf, ToolId, TargetDir, Map);
+            Wf.Created(ToolName);
         } 
 
         public void Dispose()
         {
-
+            Wf.Finished(ToolName);
         }
     }
 }

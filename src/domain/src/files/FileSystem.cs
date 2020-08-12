@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Konst;
     using static z;
@@ -16,9 +15,11 @@ namespace Z0
     {   
         readonly FileKinds[] _Kinds;
         
+        [Op]
         public static FileSystem create()
             => new FileSystem(0);
 
+        [MethodImpl(Inline)]
         FileSystem(int i)
         {
             _Kinds= new FileKinds[1]{kinds()};
@@ -36,30 +37,5 @@ namespace Z0
             var reps = typeof(FileSystem).GetNestedTypes().Tagged<FileKindAttribute>();
             return new FileKinds(reps);
         }        
-
-        [MethodImpl(Inline), Op]
-        public static string format(in FileKinds src)
-        {
-            var dst = text.build();
-            format(src,dst);
-            return dst.ToString();
-        }
-
-        [Op]
-        public static void format(in FileKinds src, StringBuilder dst)
-        {
-            dst.Append(Chars.LBracket);
-            var reps = src.Reps;
-            for(var i=0u; i<reps.Length; i++)
-            {
-                if(i != 0)
-                {
-                    dst.Append(Chars.Comma);
-                    dst.Append(Chars.Space);
-                }
-                dst.Append(skip(reps,i).Name);
-            }
-            dst.Append(Chars.RBracket);
-        }
     }
 }

@@ -6,11 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Konst;
 
     partial struct Flow    
     {
+        [MethodImpl(Inline), Op]
+        public static string format(in WfCaller src)
+            => src.Format();
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string format<T>(T content)        
             => text.format(Slot0, content);
@@ -44,5 +49,26 @@ namespace Z0
             where T3 : ITextual
             where T4 : ITextual
                 => string.Format(PSx5, x0.Format(), x1.Format(), x2.Format(), x3.Format(), x0.Format());
+
+        public static void format(in WfError<Exception> error, StringBuilder dst)
+        {        
+            const string ErrorTrace = "{0} | {1} | {2} | Outer | {3} | {4} | {5}";            
+            const string InnerTrace = "{0} | {1} | {2} | Inner | {3} | {4} | {5} | {6}";
+
+            var exception = error.Data;
+            var eType = exception.GetType();
+            var outer = string.Format(ErrorTrace, error.EventId, error.Actor, error.Source, eType.Name, exception.Message, exception.StackTrace);
+            dst.AppendLine(outer);
+            
+            int level = 0;
+
+            var e = exception.InnerException;
+            while (e != null)
+            {
+                dst.AppendLine(string.Format(InnerTrace, error.EventId, error.Actor, error.Source, level, eType.Name, e.Message, e.StackTrace));
+                e = e.InnerException;
+                level += 1;
+            }
+        }
     }
 }

@@ -18,23 +18,23 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}        
+        public WfActor Actor {get;}        
 
         public T Body {get;}
-
+        
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
         public WfStatus(string actor, T body, CorrelationToken ct, AppMsgColor flair = StatusFlair)
         {
             EventId = evid(EventName, ct);
-            ActorName = actor;
+            Actor = actor;
             Flair =  flair;
             Body = body;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, ActorName, Body);
+            => text.format(PSx3, EventId, Actor, Body);
     }
 }

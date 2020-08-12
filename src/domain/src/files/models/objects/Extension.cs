@@ -36,6 +36,10 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => new Extension(PathPart.Empty);
             }
+
+            [MethodImpl(Inline)]
+            public string Format()
+                => Name.ToString();
         }        
     }
 }

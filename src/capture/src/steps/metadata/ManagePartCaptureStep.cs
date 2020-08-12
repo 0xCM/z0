@@ -13,6 +13,6 @@ namespace Z0.Asm
     {
         public const WfStepKind StepId = WfStepKind.ManagePartCapture;
 
-        public const string WorkerName = nameof(ManagePartCapture);
+        public const string ActorName = nameof(ManagePartCapture);
     }
 }

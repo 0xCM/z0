@@ -17,7 +17,7 @@ namespace Z0
         public static WfActor create([CallerFilePath] string name = null)
             => new WfActor(Path.GetFileNameWithoutExtension(name));
         
-        public readonly asci32 Name;
+        public readonly string Name;
 
         [MethodImpl(Inline)]
         public static implicit operator WfActor(string name)
@@ -25,10 +25,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         WfActor(string name)
-            => Name = name;
-
-        [MethodImpl(Inline)]
-        WfActor(asci32 name)
             => Name = name;
 
         [MethodImpl(Inline)]

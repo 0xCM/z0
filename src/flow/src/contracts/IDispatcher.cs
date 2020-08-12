@@ -17,12 +17,7 @@ namespace Z0
         where S : unmanaged
     {
         IWfContext Wf {get;}
-        
-        T[] Source {get;}
-        
-        Span<Y> Process();
-
-        CellCount SourceCount 
-            => Source.Length;        
+                
+        void Process(T[] src, Y[] dst);        
     }
 }

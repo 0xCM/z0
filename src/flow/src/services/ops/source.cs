@@ -12,7 +12,7 @@ namespace Z0
     partial struct Flow    
     {
         [MethodImpl(Inline), Op]
-        public static AppMsgSource source([CallerMemberName] string caller = null, [CallerFilePath]string file = null, [CallerLineNumber] int? line = null, PartId? part = null)        
-            => new AppMsgSource(part ?? PartId.None, caller, file, line);
+        public static AppMsgSource source(PartId part, [CallerMemberName] string caller = null, [CallerFilePath]string file = null, [CallerLineNumber] int? line = null)        
+            => new AppMsgSource(part, caller, file, line);
     }
 }

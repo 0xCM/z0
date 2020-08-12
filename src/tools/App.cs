@@ -34,7 +34,7 @@ namespace Z0
 
         void RunDumpBin()
         {
-            var tool = Tooling.dumpbin(Wf);
+            var tool = DumpBin.create(Wf);
             var archive = tool.Target;
             var files  = archive.Files(DumpBinFlag.Disasm);
             var listed = Tooling.listed(files);
@@ -55,7 +55,6 @@ namespace Z0
             {
                 var config = Flow.configure(Context, args, Ct);            
                 Wf = Flow.context(Context, config, Ct);
-                RunDumpBin();
                 
             }
             catch(Exception e)

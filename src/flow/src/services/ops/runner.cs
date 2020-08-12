@@ -12,10 +12,6 @@ namespace Z0
     partial struct Flow    
     {
         [MethodImpl(Inline), Op]
-        public static WfProcessor processor(string name)
-            => new WfProcessor(name);
-
-        [MethodImpl(Inline), Op]
         public static WfRunner runner(Action<string[]> handler)
             => new WfRunner(handler);
 

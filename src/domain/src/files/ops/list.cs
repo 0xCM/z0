@@ -33,6 +33,5 @@ namespace Z0
 
         public static StreamWriter writer(FS.FilePath dst, FileWriteMode mode)
             => new StreamWriter(dst.CreateParentIfMissing().Name.Format(), mode == FileWriteMode.Append);
-
     }
 }

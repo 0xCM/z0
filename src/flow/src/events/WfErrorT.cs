@@ -12,20 +12,23 @@ namespace Z0
             
     public interface IWfError : IWfEvent
     {
-        object Description {get;}   
+     
     }
     
+
     [Event]
-    public readonly struct WfError<T> : IWfError, IWfEvent<WfError<T>, T>
+    public readonly struct WfError<T> : IWfEvent<WfError<T>, T>, IWfError
     {                
         public const string EventName = nameof(WfError<T>);
 
         public WfEventId EventId {get;}
         
-        public string ActorName {get;}
+        public WfActor Actor {get;}
         
-        public readonly T Body {get;}
+        public readonly T Data {get;}
 
+        public T Body => Data;
+        
         public AppMsgColor Flair {get;}
         
         public AppMsgSource Source {get;}
@@ -34,15 +37,13 @@ namespace Z0
         public WfError(string actor, T body, CorrelationToken ct, AppMsgSource source)
         {
             EventId = evid(EventName, ct);
-            ActorName = actor;
-            Body = body;
+            Actor = actor;
+            Data = body;
             Flair =  AppMsgColor.Red;
             Source = source;
         }
 
-        public object Description => new {EventId, ActorName, Source, Body};
-              
         public string Format()
-            => text.format(PSx4, EventId, ActorName, Source, Body);
+            => text.format(PSx4, EventId, Actor, Source, Data);
     }
 }

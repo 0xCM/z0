@@ -15,10 +15,10 @@ namespace Z0
         /// Defines a <see cref='WorkerCreated'/> event
         /// </summary>
         /// <param name="ct">The correlation token</param>
-        /// <param name="name">The worker name</param>
+        /// <param name="actor">The worker name</param>
         [MethodImpl(Inline), Op]
-        public static WorkerCreated created(CorrelationToken ct, [CallerFilePath] string name = null)
-            => new WorkerCreated(z.actor(name), ct);                        
+        public static WorkerCreated created(CorrelationToken ct, [CallerFilePath] string actor = null)
+            => new WorkerCreated(z.actor(actor), ct);                        
 
         /// <summary>
         /// Defines a <see cref='WfStepCreated'/> event

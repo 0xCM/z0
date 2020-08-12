@@ -11,9 +11,14 @@ namespace Z0.Asm
 
     public sealed class ImmBroker : WfBroker, IImmBroker
     {        
-        [MethodImpl(Inline)]
-        internal ImmBroker(CorrelationToken ct)
+        public ImmBroker(CorrelationToken ct)
             : base(ct)
+        {
+
+        }
+
+        public ImmBroker(IWfContext wf, CorrelationToken ct)
+            : base(wf, ct)
         {
 
         }

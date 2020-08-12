@@ -10,21 +10,22 @@ namespace Z0.Tools
     using System;
     using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Text;
     
     using static Konst;
 
     public readonly struct ToolLogger : IDisposable
     {
-        public IToolContext Context {get;}        
+        public IWfContext Wf {get;}        
     
         readonly FilePath Target;
 
         readonly Stream LogStream;
         
         [MethodImpl(Inline)]
-        public ToolLogger(IToolContext context, FilePath target)
+        public ToolLogger(IWfContext context, FilePath target)
         {
-            Context = context;
+            Wf = context;
             Target = target;
             LogStream = new FileStream(target.CreateParentIfMissing().Name, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);;
         }
@@ -34,24 +35,11 @@ namespace Z0.Tools
             LogStream.Dispose();
         }
 
-        /// <summary>
-        /// Log an exception. Also logs information about inner exceptions.
-        /// </summary>
-        public void Log(Exception exception, string reason)
+        public void Log(in WfError<Exception> error)
         {
-            LogError(ErrorTrace, exception.GetType().Name, exception.Message, reason, exception.StackTrace);
-
-            int level = 0;
-
-            Exception? e = exception.InnerException;
-            while (e != null)
-            {
-                Log(AppMsgKind.Error, InnerTrace, level, e.GetType().Name, e.Message, e.StackTrace);
-                e = e.InnerException;
-                level += 1;
-            }
-        }
-
+            Log(AppMsgKind.Error, Flow.format(error));
+        }        
+        
         /// <summary>
         /// Log a line of text to the logging file, with string.Format arguments.
         /// </summary>
@@ -65,7 +53,7 @@ namespace Z0.Tools
         /// <param name="content">The message content</param>        
         public void Log(AppMsgKind kind, string content)
         {
-            var data = Encoded.utf8(EntryPrefix + content + Eol);
+            var data = Encoded.utf8(content + Eol);
             
             // Because multiple processes might be logging to the same file, we always seek to the end, write, and flush.
             LogStream.Seek(0, SeekOrigin.End);
@@ -92,7 +80,6 @@ namespace Z0.Tools
         
         const string InnerTrace = "Inner exception[{0}] '{1}' '{2}'. Stack trace: \r\n{3}";
 
-        const string EntryPattern = "PID={1} TID={2} Ticks={3}: ";
-        
+        const string EntryPattern = "PID={1} TID={2} Ticks={3}: ";        
     }
 }

@@ -32,28 +32,10 @@ namespace Z0
             => string.Join(sep, src);
 
         public static string Concat(this ReadOnlySpan<string> src, string delimiter = null)
-        {
-            var dst = build();
-            for(var i=0; i<src.Length; i++)
-            {
-                if(i != 0 && delimiter != null)
-                    dst.Append(delimiter);                
-                dst.Append(src[i]);            
-            }
-            return dst.ToString();
-        }
+            => Z0.Format.concat(src,delimiter);
 
         public static string Concat(this ReadOnlySpan<string> src, char? delimiter)
-        {
-            var dst = build();
-            for(var i=0; i<src.Length; i++)
-            {
-                if(i != 0 && delimiter != null)
-                    dst.Append(delimiter.Value);                
-                dst.Append(src[i]);            
-            }
-            return dst.ToString();
-        }
+            => Z0.Format.concat(src,delimiter);
 
         /// <summary>
         /// Joins a sequence of source characters interspersed with a supplied separator

@@ -14,15 +14,9 @@ namespace Z0
         /// <summary>
         /// Defines the content of file path component
         /// </summary>
-        public readonly struct PathPart
+        public readonly struct PathPart : ITextual
         {               
-            public static PathPart Empty 
-            {
-                [MethodImpl(Inline)]
-                get => new PathPart(NullChar);
-            }
-            
-            public readonly char[] Data;
+            public string Name {get;}
 
             [MethodImpl(Inline)]
             public static implicit operator PathPart(char[] data)   
@@ -30,30 +24,20 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator PathPart(string data)   
-                => new PathPart(data.ToCharArray());
+                => new PathPart(data);
 
             [MethodImpl(Inline)]
-            unsafe PathPart(char src)
-            {
-                var @null = z.address(NullText).Pointer<char>();
-                ref var data = ref z.@ref(@null);
-                Data = z.@as<char,char[]>(data);
-            }
-            
+            public PathPart(string name)
+                => Name = name;
+
             [MethodImpl(Inline)]
             public PathPart(params char[] name)
-                => Data = name;
+                => Name = new string(name);
             
             public ReadOnlySpan<char> View
             {
                 [MethodImpl(Inline)]
-                get => Data;
-            }
-
-            public Span<char> Edit
-            {
-                [MethodImpl(Inline)]
-                get => Data;
+                get => Name;
             }
 
             public string Format()
@@ -62,18 +46,20 @@ namespace Z0
             public bool IsEmpty
             {
                 [MethodImpl(Inline)]
-                get => Data == null || Data[0] == NullChar;
+                get => text.empty(Name);
             }
 
             public bool IsNonEmpty
             {
                 [MethodImpl(Inline)]
-                get => Data != null & Data.Length >= 1 && Data[0] != NullChar;
-            }
-                       
-            const char NullChar = '\0';
-
-            const string NullText = "\0";         
+                get => text.nonempty(Name) && Name.Length > 0;
+            }                                    
+            
+            public static PathPart Empty 
+            {
+                [MethodImpl(Inline)]
+                get => new PathPart(EmptyString);
+            }        
         }
     }
 }

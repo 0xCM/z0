@@ -9,22 +9,15 @@ namespace Z0
 
     using static Konst;
 
-
     partial struct Flow    
     {
         /// <summary>
-        /// The parts that happen to be known here
-        /// </summary>
-        public static IPart[] Known
-            => KnownParts.Service.Known.Where(r => r.Id != 0);
-
-        /// <summary>
         /// Creates a stock application context
         /// </summary>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static IAppContext app()
             => AppContext.Create(AppPaths.Default, 
-                ApiComposition.Assemble(Known), 
+                ApiComposition.Assemble(KnownParts.Service.Known.Where(r => r.Id != 0)), 
                 Polyrand.Pcg64(PolySeed64.Seed05));                   
     }
 }

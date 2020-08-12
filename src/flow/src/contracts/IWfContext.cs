@@ -30,6 +30,8 @@ namespace Z0
         FolderPath IndexRoot {get;}
         
         FolderPath ResourceRoot {get;}
+                
+        IPart[] Known {get;}
         
         IAppPaths AppPaths 
             => ContextRoot.AppPaths;
@@ -78,9 +80,9 @@ namespace Z0
         void RanT<T>(string actor, T message, CorrelationToken ct)
             => Flow.ran(this, actor, message, ct);
 
-        void Created([File] string src = null)
+        void Created(string actor)
         {   
-            Raise(Flow.created(Ct, src));
+            Raise(Flow.created(Ct, actor));
         }
 
         void Created(WfStepId step)
@@ -88,29 +90,29 @@ namespace Z0
             Raise(new WfStepCreated(step, Ct));            
         }
 
-        void Initializing([Caller] string worker = null)
+        void Initializing(string actor)
         {
-            Raise(new WorkerInitializing(worker, Ct));
+            Raise(new WorkerInitializing(actor, Ct));
         }
 
-        void Initialized([Caller] string worker = null)
+        void Initialized(string actor)
         {
-            Raise(new WorkerInitialized(worker, Ct));
+            Raise(new WorkerInitialized(actor, Ct));
         }
 
-        void Running<T>(T message, [File] string file = null)
+        void Running<T>(T message, string actor)
         {
-            Raise(new WfStepRunning<T>(ToActorName(file), message, Ct));
+            Raise(new WfStepRunning<T>(actor, message, Ct));
         }
         
-        void Running([File] string file = null)
+        void Running(string actor)
         {
-            Raise(new WfStepRunning(ToActorName(file), Ct));
+            Raise(new WfStepRunning(actor, Ct));
         }
 
-        void Ran([File] string worker = null)
+        void Ran(string actor)
         {
-            Raise(new WfStepRan(ToActorName(worker), Ct));
+            Raise(new WfStepRan(actor, Ct));
         }
 
         void Ran(WfStepId step)
@@ -118,9 +120,9 @@ namespace Z0
             Raise(new WfStepRan(step, Ct));
         }
 
-        void Finished([Caller] string file = null)
+        void Finished(string actor)
         {   
-            Raise(new WorkerFinished(ToActorName(file), Ct));            
+            Raise(new WorkerFinished(actor, Ct));            
         }
 
         void Finished(WfStepId step)
@@ -163,9 +165,9 @@ namespace Z0
             Raise(new WfStatus(worker, msg, ct));            
         }
 
-        void Created(string worker, CorrelationToken ct)
+        void Created(string actor, CorrelationToken ct)
         {   
-            Raise(Flow.created(ct, worker));            
+            Raise(Flow.created(ct, actor));            
         }
 
         void Created(WfStepId step, CorrelationToken ct)
@@ -173,9 +175,9 @@ namespace Z0
             Raise(new WfStepCreated(step, ct));            
         }
 
-        void Finished(string worker, CorrelationToken ct)
+        void Finished(string actor, CorrelationToken ct)
         {   
-            Raise(new WorkerFinished(worker, ct));            
+            Raise(new WorkerFinished(actor, ct));            
         }
 
         void Finished(WfStepId step, CorrelationToken ct)

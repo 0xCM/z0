@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Flow    
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static IWfContext context(IAppContext root, WfConfig config, CorrelationToken ct)
             => new WfContext(root, ct, config, termsink(ct));
     }

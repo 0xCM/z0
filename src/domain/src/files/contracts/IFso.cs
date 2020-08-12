@@ -5,16 +5,18 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
 
     using static FileSystem;
 
-    public interface IFso
+    public interface IFso : ITextual
     {
         PathPart Name {get;}    
+
+        string ITextual.Format() 
+            => Name.Format();
     }
 
-    public interface IFso<F> : IFso
+    public interface IFso<F> : IFso 
         where F : struct, IFso<F>
     {
         

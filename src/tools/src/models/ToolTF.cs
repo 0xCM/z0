@@ -13,6 +13,10 @@ namespace Z0
         where T : struct, ITool<T,F>
         where F : unmanaged, Enum
     {
+        public const string ActorName = nameof(Tool<T,F>);
+        
+        public IWfContext Wf {get;}
+        
         public ToolId ToolId {get;}
 
         public FolderPath SourceDir {get;}
@@ -26,21 +30,23 @@ namespace Z0
         public ToolFlags<F> Flags {get;}
         
         [MethodImpl(Inline)]
-        public Tool(ToolId id, FolderPath src, FolderPath dst)
+        public Tool(IWfContext wf, ToolId id, FolderPath src, FolderPath dst)
         {
+            Wf = wf;
             ToolId = id;                        
             SourceDir = src;            
             TargetDir = dst;
             Flags = new ToolFlags<F>(0);            
             Map = new ExtensionMap<F>(0);
-            Target = new ToolArchive<T,F>(id, TargetDir);
+            Target = new ToolArchive<T,F>(wf, id, TargetDir);
+            Wf.Created(ActorName);
         }    
 
 
         public void Dispose()
         {
 
-            
+            Wf.Finished(ActorName);            
         }    
     }
 }

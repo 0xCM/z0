@@ -13,6 +13,8 @@ namespace Z0
         where T : struct, ITool<T,F>
         where F : unmanaged, Enum
     {
+        public const string ActorName = nameof(ToolProcessor<T,F>);
+
         public IWfContext Wf {get;}
         
         readonly Action<IToolFile<T,F>> Handler;
@@ -22,17 +24,22 @@ namespace Z0
         {
             Wf = wf;
             Handler = handler;
+            Wf.Created(ActorName);
         }
 
         [MethodImpl(Inline)]
         public void Process(IToolFile<T,F> src)
         {
+            Wf.Running(ActorName);            
+            
             Handler(src);
+            
+            Wf.Ran(ActorName);            
         }
 
         public void Dispose()
         {
-            
+            Wf.Finished(ActorName);            
         }
     }
 }

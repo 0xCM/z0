@@ -36,7 +36,7 @@ namespace Z0
 
             try
             {
-                var patterns = DataFlow.patterns(Source);
+                var patterns = Flow.patterns(Source);
                 foreach(var pattern in patterns.Data)
                     Wf.Status(ActorName, pattern.Description, Ct);
             

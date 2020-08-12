@@ -15,11 +15,11 @@ namespace Z0
     public readonly struct Shell
     {
         [MethodImpl(Inline), Op]
-        public static CmdSpec ildasm(IlDasm.FlagKind[] flags, CmdOption[] options)
+        public static ToolSpec ildasm(IlDasm.FlagKind[] flags, ToolOption[] options)
             => cmd(flags, options, default(IlDasm));
 
         [MethodImpl(Inline), Op]
-        public static CmdOption option(IlDasm.OptionKind kind, string value)
+        public static ToolOption option(IlDasm.OptionKind kind, string value)
             => Shell.value(kind, value);
 
         [MethodImpl(Inline), Op]
@@ -35,36 +35,36 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static CmdOption value<E>(E kind, string value)
+        public static ToolOption value<E>(E kind, string value)
             where E : unmanaged, Enum
-                => new CmdOption(kind.ToString(), value);
+                => new ToolOption(kind.ToString(), value);
 
         [MethodImpl(Inline)]
-        public static CmdOption value<E,V>(E kind, V value)
+        public static ToolOption value<E,V>(E kind, V value)
             where E : unmanaged, Enum
-                => new CmdOption(kind.ToString(), value.ToString());
+                => new ToolOption(kind.ToString(), value.ToString());
         
         [MethodImpl(Inline), Op]
-        public static CmdFlag flag(string name)
+        public static ToolFlag flag(string name)
             => name;
 
         [MethodImpl(Inline), Op]
-        public static CmdOption option(string name, string value)
-            => new CmdOption(name, value);
+        public static ToolOption option(string name, string value)
+            => new ToolOption(name, value);
 
         [MethodImpl(Inline), Op]
-        public static CmdSpec cmd(string tool, CmdFlag[] flags, CmdOption[] options)            
-            => new CmdSpec(tool,flags,options);
+        public static ToolSpec cmd(string tool, ToolFlag[] flags, ToolOption[] options)            
+            => new ToolSpec(tool,flags,options);
 
         [MethodImpl(Inline)]
-        public static CmdSpec cmd<T>(CmdFlag[] flags, CmdOption[] options)            
+        public static ToolSpec cmd<T>(ToolFlag[] flags, ToolOption[] options)            
             where T : unmanaged, ICmdTool<T>
-                => new CmdSpec(default(T).Name, flags,options);            
+                => new ToolSpec(default(T).Name, flags,options);            
 
         [MethodImpl(Inline)]
-        public static CmdSpec cmd<T,F>(F[] flags, CmdOption[] options, T tool = default)            
+        public static ToolSpec cmd<T,F>(F[] flags, ToolOption[] options, T tool = default)            
             where T : unmanaged, ICmdTool<T,F>
             where F : unmanaged, Enum
-                => new CmdSpec(default(T).Name, flags.Map(f => flag(f.ToString())), options);            
+                => new ToolSpec(default(T).Name, flags.Map(f => flag(f.ToString())), options);            
     }
 }

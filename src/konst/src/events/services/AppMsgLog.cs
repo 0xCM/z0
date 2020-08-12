@@ -36,7 +36,7 @@ namespace Z0
             if(errors.Length != 0)
                 ErrorTarget.Append(errors);
                                 
-            var standard = Formattable.items(src.Where(m => !m.IsError)).Array();
+            var standard = Format.items(src.Where(m => !m.IsError)).Array();
             if(standard.Length != 0)
                 DefaultTarget.Append(standard);
         }

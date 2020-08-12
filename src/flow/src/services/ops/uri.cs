@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct Flow    
     {
+        [Op]
         public static ApiHostUri uri(Type src)
         {
             var typename = src.Name;

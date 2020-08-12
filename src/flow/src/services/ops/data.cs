@@ -12,10 +12,6 @@ namespace Z0
     partial struct Flow    
     {
         [MethodImpl(Inline), Op]
-        public static DelimitedList<T> delimit<T>(T[] src, char delimiter = Chars.Comma)
-            => new DelimitedList<T>(src, delimiter);        
-
-        [MethodImpl(Inline), Op]
         public static WfConfigData data(WfConfig src)
         {
             var dst = new WfConfigData();

@@ -16,11 +16,15 @@ namespace Z0
             public DriveLetter Name {get;}
 
             PathPart IFso.Name 
-                => new PathPart((char)Name);
+                => new PathPart(Name.ToString());
 
             [MethodImpl(Inline)]
             public Drive(DriveLetter name)
                 => Name = name;
+
+            [MethodImpl(Inline)]
+            public string Format()
+                => Name.ToString();
         }        
     }
 }

@@ -15,10 +15,11 @@ namespace Z0
 
     partial struct Flow    
     {
-        [MethodImpl(Inline), Op]
+        [Op, Closures(UnsignedInts)]
         public static WfError<T> error<T>(string actor, T body, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => new WfError<T>(actor, body, ct, AppMsgSource.create(caller,file,line));
 
+        [Op]
         public static void error(IWfContext wf, Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
         {
             const string CallerPattern = "An error was trapped by {0} on line {1} in {2}";
@@ -29,7 +30,7 @@ namespace Z0
             wf.Raise(error(caller, msg, ct));
         }             
 
-        [MethodImpl(Inline), Op]
+        [Op, Closures(UnsignedInts)]
         public static void error<T>(IWfContext wf, string worker, T body, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => wf.Raise(new WfError<T>(worker, body, ct, AppMsgSource.create(caller,file,line)));
     }

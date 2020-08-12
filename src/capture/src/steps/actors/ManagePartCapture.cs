@@ -53,7 +53,7 @@ namespace Z0.Asm
 
         public void Dispose()
         {
-            Wf.Finished();
+            Wf.Finished(ActorName);
         }
  
         void Capture(IPartCaptureArchive dst)
@@ -67,7 +67,7 @@ namespace Z0.Asm
 
         public void Consolidate()
         {
-            Wf.Raise(new RunningConsolidated(WorkerName, (uint)Catalogs.Length, Ct));
+            Wf.Raise(new RunningConsolidated(ActorName, (uint)Catalogs.Length, Ct));
             
             Clear(Config);
 
@@ -80,7 +80,7 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Error(WorkerName, e, Ct);
+                Wf.Error(ActorName, e, Ct);
            }
         }
                 
@@ -117,7 +117,7 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Error(WorkerName, e, Ct);
+                Wf.Error(ActorName, e, Ct);
             }
         }
     }

@@ -8,12 +8,34 @@ namespace Z0
     using System.Text;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using Z0.Data;
 
     using static Konst;
+    using static z;
 
-    [ApiHost]
+    [ApiHost("api")]
     public readonly partial struct Flow
     {        
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<string> describe(FormatPatterns src)
+            => src.Descriptions;
+
+        [Op]
+        public static FormatPatterns patterns(Type type)            
+        {
+            var fields = span(type.LiteralFields().Where(f => f.FieldType == typeof(string)));
+            var count = fields.Length;            
+            var buffer = alloc<FormatPattern>(count);
+            var dst = span(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                var field = skip(fields,i);
+                var value = (string) field.GetRawConstantValue();
+                seek(dst,i) = new FormatPattern(field, value);
+            }
+            return new FormatPatterns(buffer);
+        }
+        
         /// <summary>
         /// Defines the default field delimiter
         /// </summary>

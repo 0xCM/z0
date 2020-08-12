@@ -12,14 +12,6 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Formatters
     {                        
-        /// <summary>
-        /// Reifies a formatter via Object.ToString()
-        /// </summary>
-        readonly struct DefaultFormatter : IFormatter
-        {
-            [MethodImpl(Inline)]
-            public string Format(object src)
-                => src?.ToString() ?? string.Empty;
-        }
+
     }
 }

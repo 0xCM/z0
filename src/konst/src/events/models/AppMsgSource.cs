@@ -24,7 +24,7 @@ namespace Z0
             => new AppMsgSource(part, caller, file, line);
 
         [MethodImpl(Inline)]
-        public static AppMsgSource create([Caller]string caller = null, [File]string file = null, [Line]int? line = null)        
+        public static AppMsgSource create([Caller]string caller = null, [File] string file = null, [Line]int? line = null)        
             => new AppMsgSource(PartId.None, caller, file, line);
 
         /// <summary>
