@@ -4,13 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IClrArtifact
-    {        
-        
+    using System;
+
+    public interface IReaderState
+    {
+        BinaryCode Source {get;}
     }
 
-    public interface IClrArtifact<T> : IClrArtifact
+    public interface IReaderState<S> : IReaderState
+        where S : struct, ISourceFacets
     {
-        T Metadata {get;}    
+        S Facets {get;}        
     }
 }

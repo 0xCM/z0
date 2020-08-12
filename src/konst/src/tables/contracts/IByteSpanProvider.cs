@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IClrArtifact
-    {        
-        
-    }
+    using System;
 
-    public interface IClrArtifact<T> : IClrArtifact
+    public interface IByteSpanProvider
     {
-        T Metadata {get;}    
+        ReadOnlySpan<byte> Bytes {get;}    
     }
 }

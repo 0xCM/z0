@@ -4,13 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IClrArtifact
-    {        
+    using System;
+
+    public interface ITableSource : ISourceFacets
+    {
         
     }
-
-    public interface IClrArtifact<T> : IClrArtifact
+    
+    public interface ITableSource<T> : ITableSource    
     {
-        T Metadata {get;}    
+        T RowSource {get;}    
     }
+
 }

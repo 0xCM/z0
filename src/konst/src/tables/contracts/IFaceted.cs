@@ -4,13 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IClrArtifact
-    {        
-        
-    }
+    using System;
 
-    public interface IClrArtifact<T> : IClrArtifact
+    public interface IFaceted<F>
+        where F : struct
     {
-        T Metadata {get;}    
+        F Facets {get;}
+
+    }
+    
+    public interface IFaceted<S,F> : IFaceted<F>
+        where S : struct, IFaceted<S,F>
+        where F : struct
+    {
+        
     }
 }

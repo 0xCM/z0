@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Z0.Clr;
+    using Z0.ClrData;
 
     /// <summary>
     /// Characterizes a model of an unmanaged type

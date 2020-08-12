@@ -4,13 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IClrArtifact
-    {        
-        
-    }
+    using System;
 
-    public interface IClrArtifact<T> : IClrArtifact
+    public interface ITableReader<F,S,T>
+        where S : struct, IReaderState
+        where F : struct, ITableReader<F,S,T>
     {
-        T Metadata {get;}    
-    }
+        F Init(S state);
+    }    
 }

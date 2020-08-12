@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Clr
+namespace Z0.ClrData
 {
     using System;
     using System.Runtime.CompilerServices;
