@@ -89,7 +89,7 @@ namespace Z0
 
             Status(files.CaptureRoot);
 
-            foreach(var file in FileSystem.dir(files.AsmDir))
+            foreach(var file in FS.dir((FS.FolderPath)files.AsmDir))
             {
                 Wf.Status(Actor, file, Ct);
             }

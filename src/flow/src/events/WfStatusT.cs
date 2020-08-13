@@ -9,6 +9,7 @@ namespace Z0
         
     using static Konst;
     using static Flow;
+    using static FormatPatterns;
     using static z;
 
     [Event]
@@ -25,7 +26,7 @@ namespace Z0
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStatus(string actor, T body, CorrelationToken ct, AppMsgColor flair = StatusFlair)
+        public WfStatus(string actor, T body, CorrelationToken ct, AppMsgColor flair = Status)
         {
             EventId = evid(EventName, ct);
             Actor = actor;
@@ -34,7 +35,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfStatus(in WfActor actor, T body, CorrelationToken ct, AppMsgColor flair = StatusFlair)
+        public WfStatus(in WfActor actor, T body, CorrelationToken ct, AppMsgColor flair = Status)
         {
             EventId = evid(EventName, ct);
             Actor = actor;

@@ -1,0 +1,71 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    public readonly struct TableSpan<T> : ITableSpan<T>
+        where T : struct
+    {
+        readonly T[] Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator TableSpan<T>(T[] src)
+            => new TableSpan<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T[](TableSpan<T> src)
+            => src.Storage;
+
+        [MethodImpl(Inline)]
+        public TableSpan(T[] src)
+            => Data = src;
+
+        public T[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public Span<T> Edit 
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public ReadOnlySpan<T> View 
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+        
+        public CellCount Count
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length;
+        }
+
+        public int Length 
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length;
+        } 
+
+        public ref T this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
+        public ref T this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+    }
+}

@@ -23,7 +23,7 @@ namespace Z0
         public AppMsgColor Flair {get;}
         
         [MethodImpl(Inline)]
-        public WfContextUnloaded(WfActor actor, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
+        public WfContextUnloaded(WfActor actor, CorrelationToken ct, AppMsgColor flair = Finished)
         {
             EventId = z.evid(EventName, ct);
             Actor = actor;

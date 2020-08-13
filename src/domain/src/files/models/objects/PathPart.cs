@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct FileSystem
+    partial struct FS
     {        
         /// <summary>
         /// Defines the content of file path component

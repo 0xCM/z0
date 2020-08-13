@@ -9,8 +9,6 @@ namespace Z0
     
     using static Konst;
     
-    using FS = FileSystem;
-
     public readonly struct AppFilePaths
     {   
         public static AppFilePaths create(in AppPathSettings settings, PartId? part = null)

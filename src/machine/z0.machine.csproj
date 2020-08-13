@@ -8,17 +8,8 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(Dynamic)" />    
-    <ProjectReference Include="$(GVec)" />
-    <ProjectReference Include="$(Stats)" />    
-    <ProjectReference Include="$(Data)" />
-    <ProjectReference Include="$(Flow)" />
 
   </ItemGroup>
   

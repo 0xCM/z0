@@ -13,7 +13,7 @@ namespace Z0
     using static Flow;
     using static EmitEnumCatalogStep;
 
-    using F = EnumLiteralField;
+    using F = EnumLiteralRecordField;
 
     [Step(WfStepKind.EmitEnumCatalog)]
     public readonly ref struct EmitEnumCatalog
@@ -33,7 +33,7 @@ namespace Z0
             Wf.Created(WorkerName, Ct);    
         }
         
-        public void format(in EnumLiteralRecord src, TableFormatter<EnumLiteralField> dst)
+        public void format(in EnumLiteralRecord src, TableFormatter<EnumLiteralRecordField> dst)
         {
             dst.Append(F.PartId, src.PartId);
             dst.Delimit(F.TypeId, src.TypeId);
@@ -71,7 +71,7 @@ namespace Z0
             var m = dst.ToArray();
             Array.Sort(m);
             
-            var formatter = Table.formatter<EnumLiteralField>();
+            var formatter = Table.formatter<EnumLiteralRecordField>();
             formatter.EmitHeader();
             for(var i=0; i<m.Length; i++)
                 format(m[i],formatter);

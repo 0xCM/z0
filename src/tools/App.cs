@@ -38,7 +38,7 @@ namespace Z0
             var archive = tool.Target;
             var files  = archive.Files(DumpBinFlag.Disasm);
             var listed = Tooling.listed(files);
-            var formatted = FileSystem.format(listed);
+            var formatted = FS.format(listed);
             
             using var processor = tool.processor(default(FileKinds.Asm));
             for(var i=0u; i <files.Count; i++)

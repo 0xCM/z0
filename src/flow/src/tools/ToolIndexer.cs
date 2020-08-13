@@ -1,0 +1,27 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    public readonly struct ToolIndexer
+    {
+        public IWfContext Wf {get;}
+
+        public ToolIndexer(IWfContext wf)
+        {
+            Wf = wf;
+        }
+        
+        public ToolIndex create()
+        {
+
+            return default;
+        }
+    }
+}

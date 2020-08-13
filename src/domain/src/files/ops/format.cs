@@ -15,7 +15,7 @@ namespace Z0
 
     using F = ListedFileField;
 
-    partial struct FileSystem
+    partial struct FS
     {
         [Op]
         public static string format(in ListedFiles src)

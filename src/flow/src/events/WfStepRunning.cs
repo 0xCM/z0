@@ -24,7 +24,7 @@ namespace Z0
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepRunning(WfActor actor, WfStepId step, CorrelationToken ct, AppMsgColor flair = RunningFlair)
+        public WfStepRunning(WfActor actor, WfStepId step, CorrelationToken ct, AppMsgColor flair = Running)
         {
             EventId = evid(EventName, ct);
             Actor = actor;

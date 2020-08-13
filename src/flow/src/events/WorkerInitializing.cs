@@ -10,6 +10,7 @@ namespace Z0
         
     using static Konst;
     using static Flow;
+    using static FormatPatterns;
     using static z;
 
     [Event]
@@ -24,7 +25,7 @@ namespace Z0
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public WorkerInitializing(string worker, CorrelationToken ct, AppMsgColor flair = InitializingFlair)
+        public WorkerInitializing(string worker, CorrelationToken ct, AppMsgColor flair = Initializing)
         {
             EventId = evid(EventName, ct);
             ActorName = worker;

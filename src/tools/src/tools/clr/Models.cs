@@ -7,7 +7,7 @@ namespace Z0.ClrTools
     using System;
     using System.Runtime.CompilerServices;
     
-    using static FileSystem;
+    using static FS;
 
     public interface IFileModule
     {

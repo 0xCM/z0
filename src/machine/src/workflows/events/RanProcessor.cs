@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
+    using static FormatPatterns;
+    using static Flairs;
 
     [Event]
     public readonly struct RanProcessor : IWfEvent<RanProcessor>
@@ -26,7 +27,7 @@ namespace Z0
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public RanProcessor(string actor, string processor, string message, CorrelationToken ct,  AppMsgColor flair = RanFlair)
+        public RanProcessor(string actor, string processor, string message, CorrelationToken ct,  AppMsgColor flair = Ran)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;

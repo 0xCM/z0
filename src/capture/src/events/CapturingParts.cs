@@ -10,8 +10,8 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Flow;
-    
+    using static FormatPatterns;
+
     public readonly struct CapturingParts : IWfEvent<CapturingParts>
     {        
         public const string EventName = nameof(CapturingParts);

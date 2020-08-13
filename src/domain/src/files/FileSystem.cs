@@ -11,16 +11,16 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly partial struct FileSystem
+    public readonly partial struct FS
     {   
         readonly FileKinds[] _Kinds;
         
         [Op]
-        public static FileSystem create()
-            => new FileSystem(0);
+        public static FS create()
+            => new FS(0);
 
         [MethodImpl(Inline)]
-        FileSystem(int i)
+        FS(int i)
         {
             _Kinds= new FileKinds[1]{kinds()};
         }
@@ -34,7 +34,7 @@ namespace Z0
         [Op]
         static FileKinds kinds()
         {            
-            var reps = typeof(FileSystem).GetNestedTypes().Tagged<FileKindAttribute>();
+            var reps = typeof(FS).GetNestedTypes().Tagged<FileKindAttribute>();
             return new FileKinds(reps);
         }        
     }

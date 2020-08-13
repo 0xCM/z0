@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static FormatPatterns;
     using static z;
     
     [Event]
@@ -27,7 +28,7 @@ namespace Z0
         public readonly WfSettings Settings;
 
         [MethodImpl(Inline)]
-        public LoadedWfConfig(string actor, FilePath src, WfSettings data, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
+        public LoadedWfConfig(string actor, FilePath src, WfSettings data, CorrelationToken ct, AppMsgColor flair = Finished)
         {
             EventId = z.evid(EventName, ct);
             ActorName = actor;

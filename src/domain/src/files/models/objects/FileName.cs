@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct FileSystem
+    partial struct FS
     {
         public readonly struct FileName : IFso<FileName>
         {

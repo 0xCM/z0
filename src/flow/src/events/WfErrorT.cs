@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static FormatPatterns;
             
     public interface IWfError : IWfEvent
     {

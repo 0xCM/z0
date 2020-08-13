@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Konst;
+    using static FormatPatterns;
     using static Flow;
 
     [Event]
@@ -23,7 +24,7 @@ namespace Z0
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public ActorCreated(in WfActor actor, CorrelationToken ct, AppMsgColor flair = CreatedFlair)
+        public ActorCreated(in WfActor actor, CorrelationToken ct, AppMsgColor flair = Created)
         {
             EventId = z.evid(EventName, ct);
             Actor = actor;

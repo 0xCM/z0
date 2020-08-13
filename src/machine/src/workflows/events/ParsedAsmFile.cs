@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
+    using static FormatPatterns;
 
     [Event]
     public readonly struct ParsedAsmFile : IWfEvent<ParsedAsmFile>

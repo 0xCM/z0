@@ -13,7 +13,7 @@ namespace Z0
 
     using F = ListedFileField;
 
-    partial struct FileSystem
+    partial struct FS
     {
         public static void save(in ListedFiles src, Z0.FilePath dst)
         {

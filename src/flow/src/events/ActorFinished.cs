@@ -9,6 +9,7 @@ namespace Z0
         
     using static Konst;
     using static Flow;
+    using static FormatPatterns;
 
     [Event]
     public readonly struct ActorFinished : IWfEvent<ActorFinished>
@@ -23,7 +24,7 @@ namespace Z0
 
         
         [MethodImpl(Inline)]
-        public ActorFinished(WfActor actor, CorrelationToken ct, AppMsgColor flair = FinishedFlair)
+        public ActorFinished(WfActor actor, CorrelationToken ct, AppMsgColor flair = Finished)
         {
             EventId = evid(EventName, ct);
             Actor = actor;

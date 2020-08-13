@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static Flow;
+    using static Flairs;
 
     public readonly struct ExtractReportCreated : IWfEvent<ExtractReportCreated>
     {            
@@ -25,7 +26,7 @@ namespace Z0.Asm
         public readonly CellCount RecordCount;
 
         [MethodImpl(Inline)]
-        public ExtractReportCreated(string actor, CellCount count, CorrelationToken ct, AppMsgColor flair = RanFlair)
+        public ExtractReportCreated(string actor, CellCount count, CorrelationToken ct, AppMsgColor flair = Ran)
         {
             Actor = actor;
             EventId = evid(EventName, ct);

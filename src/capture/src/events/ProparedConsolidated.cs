@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static Flow;
+    using static FormatPatterns;
 
     public readonly struct PreparedConsolidated : IWfEvent<PreparedConsolidated>
     {            

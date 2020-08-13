@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static Flairs;
 
     [Event]
     public readonly struct ProcessingParts : IWfEvent<ProcessingParts>
@@ -26,7 +27,7 @@ namespace Z0
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public ProcessingParts(string actor, string processor, PartId[] parts, CorrelationToken ct, AppMsgColor flair = RunningFlair)
+        public ProcessingParts(string actor, string processor, PartId[] parts, CorrelationToken ct, AppMsgColor flair = Running)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;

@@ -10,8 +10,9 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Flow;
-    
+    using static FormatPatterns;
+    using static Flairs;
+
     [Event]
     public readonly struct DecodedHost : IWfEvent<DecodedHost>
     {
@@ -30,7 +31,7 @@ namespace Z0
         public string Description {get;}
         
         [MethodImpl(Inline)]
-        public DecodedHost(string worker, HostInstructions src, CorrelationToken ct, AppMsgColor flair = RanFlair)
+        public DecodedHost(string worker, HostInstructions src, CorrelationToken ct, AppMsgColor flair = Ran)
         {
             EventId = WfEventId.define(EventName, ct);
             WorkerName = worker;

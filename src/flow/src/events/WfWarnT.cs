@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
+    using static FormatPatterns;
             
     [Event]
     public readonly struct WfWarn<T> : IWfEvent<WfWarn<T>, T>

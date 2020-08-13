@@ -6,7 +6,7 @@ namespace Z0
 {        
     using System;
 
-    using static FileSystem;
+    using static FS;
 
     public interface IFso : ITextual
     {

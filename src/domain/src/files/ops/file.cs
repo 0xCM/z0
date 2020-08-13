@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct FileSystem
+    partial struct FS
     {
         [MethodImpl(Inline), Op]
         public static FileName file(PathPart name)

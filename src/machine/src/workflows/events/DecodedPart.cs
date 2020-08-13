@@ -10,8 +10,9 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Flow;
-    
+    using static FormatPatterns;
+    using static Flairs;
+
     [Event]
     public readonly struct DecodedPart : IWfEvent<DecodedPart>
     {

@@ -10,9 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    using FS = FileSystem;
-
-    partial struct FileSystem
+    partial struct FS
     {
         public static ListedFiles list(Files src)        
             => new ListedFiles(src.Data.Mapi((i,x) => new ListedFile((uint)i,x.Name)));

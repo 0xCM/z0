@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
+    using static Flairs;
 
     public readonly struct HexCodeSaved : IWfEvent<HexCodeSaved>
     {
@@ -29,7 +29,7 @@ namespace Z0.Asm
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public HexCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, AppMsgColor flair = RanFlair)
+        public HexCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, AppMsgColor flair = Ran)
         {
             EventId = Flow.evid(EventName, ct);
             Actor = Flow.actor(actor);
