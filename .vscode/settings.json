@@ -1,13 +1,17 @@
 {
     "cSpell.words": [
         "Disasm",
+        "Dynexus",
+        "Dynops",
         "Intrinsics",
         "Ints",
         "Konst",
         "Nats",
         "Nullary",
         "Unignored",
+        "dvec",
         "fxlabel",
+        "gvec",
         "ifblank",
         "ildasm",
         "opcount",
@@ -15,6 +19,7 @@
         "opname",
         "pchar",
         "perefs",
+        "vbsll",
         "vbytes",
         "vinflate",
         "vload"

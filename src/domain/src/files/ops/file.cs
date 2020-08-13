@@ -16,7 +16,7 @@ namespace Z0
             => new FileName(name);
 
         [MethodImpl(Inline), Op]
-        public static FileName file(PathPart name, Extension ext)
+        public static FileName file(PathPart name, FileExt ext)
             => new FileName(name, ext);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     using static Konst;
 
     using static ProcessInstructionsStep;
-    using API = Processors;    
+    using api = Processors;    
             
     public class ProcessInstructions 
     {
@@ -23,7 +23,7 @@ namespace Z0
         public ProcessInstructions(IWfContext wf, FolderPath root)
         {
             Wf = wf;
-            Processor = API.jmp(wf);            
+            Processor = api.jmp(wf);            
         }
 
         public void Run(PartInstructions src)        
@@ -33,7 +33,7 @@ namespace Z0
 
         public void Process(PartInstructions src)
         {
-            API.processor(Wf).Process(src);
+            api.processor(Wf).Process(src);
         }
  
         public void Render(PartInstructions src)

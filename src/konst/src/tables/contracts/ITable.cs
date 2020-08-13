@@ -15,16 +15,16 @@ namespace Z0
     }
     
     [SuppressUnmanagedCodeSecurity]
-    public interface ITable<F> : ITable
-        where F : unmanaged, Enum
+    public interface ITable<T> : ITable
+        where T : struct
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ITable<F,T> : ITable<F>
-        where F : unmanaged, Enum
+    public interface ITable<F,T> : ITable<T>
         where T : struct, ITable<F,T>
+        where F : unmanaged, Enum
     {
 
     }    

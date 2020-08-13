@@ -18,23 +18,32 @@ namespace Z0
 
         public WfEventId EventId {get;}
                         
-        public string ActorName {get;}
+        public WfActor Actor {get;}
 
         public T Body {get;}
 
         public AppMsgColor Flair {get;}
         
         [MethodImpl(Inline)]
-        public WfStepRan(string actor,  T body, CorrelationToken ct, AppMsgColor flair = RanFlair)
+        public WfStepRan(string actor, T body, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {            
             EventId = evid(EventName, ct);
-            ActorName = actor;
+            Actor = actor;
+            Body = body;
+            Flair = flair;        
+        }
+
+        [MethodImpl(Inline)]
+        public WfStepRan(in WfActor actor, T body, CorrelationToken ct, AppMsgColor flair = RanFlair)
+        {            
+            EventId = evid(EventName, ct);
+            Actor = actor;
             Body = body;
             Flair = flair;        
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, ActorName, Body);          
+            => text.format(PSx3, EventId, Actor, Body);          
     }   
 }

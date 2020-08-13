@@ -34,6 +34,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public WfStatus(in WfActor actor, T body, CorrelationToken ct, AppMsgColor flair = StatusFlair)
+        {
+            EventId = evid(EventName, ct);
+            Actor = actor;
+            Flair =  flair;
+            Body = body;
+        }
+
+        [MethodImpl(Inline)]
         public string Format()
             => text.format(PSx3, EventId, Actor, Body);
     }

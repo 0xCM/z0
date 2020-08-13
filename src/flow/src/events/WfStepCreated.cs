@@ -15,6 +15,8 @@ namespace Z0
         public const string EventName = nameof(WfStepCreated);
 
         public WfEventId EventId {get;}
+                
+        public WfActor Actor {get;}
         
         public WfStepId StepId {get;}
 
@@ -23,12 +25,31 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStepCreated(WfStepId id, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
         {
-            StepId = id;
             EventId = WfEventId.define(EventName, ct);
+            Actor = WfActor.create();
+            StepId = id;
             Flair = flair;
         }
- 
+
+        [MethodImpl(Inline)]
+        public WfStepCreated(Type step, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
+        {
+            EventId = WfEventId.define(EventName, ct);
+            Actor = WfActor.create();
+            StepId = Flow.step(step);
+            Flair = flair;
+        }
+
+        [MethodImpl(Inline)]
+        public WfStepCreated(in WfActor actor, WfStepId id, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
+        {
+            EventId = WfEventId.define(EventName, ct);
+            Actor = actor;
+            StepId = id;
+            Flair = flair;
+        }
+
         public string Format()
-            => text.format(PSx2, EventId, StepId);
+            => format(EventId, Actor, StepId);
     }
 }

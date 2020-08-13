@@ -23,6 +23,7 @@ namespace Z0
             ArchiveRoot = root;
             Sink = TermEventSink.create();
         }        
+        
         void IAppEventSink.Deposit(IAppEvent e)
         {
             term.print(e);

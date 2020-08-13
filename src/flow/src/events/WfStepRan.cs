@@ -20,16 +20,16 @@ namespace Z0
                         
         public WfStepId StepId {get;}
 
-        public string ActorName {get;}        
+        public WfActor Actor {get;}        
 
         public AppMsgColor Flair {get;}
         
         [MethodImpl(Inline)]
-        public WfStepRan(string worker, CorrelationToken ct, AppMsgColor flair = RanFlair)
+        public WfStepRan(string actor, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {
-            StepId = default;
             EventId = evid(EventName, ct);
-            ActorName = worker;
+            Actor = actor;
+            StepId = default;
             Flair = flair;        
         }
 
@@ -37,13 +37,22 @@ namespace Z0
         public WfStepRan(WfStepId step, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {
             EventId = evid(EventName, ct);
-            ActorName = step.Name;
-            Flair = flair;    
+            Actor = step.Name;
             StepId = step;    
+            Flair = flair;    
+        }
+
+        [MethodImpl(Inline)]
+        public WfStepRan(in WfActor actor, WfStepId step, CorrelationToken ct, AppMsgColor flair = RanFlair)
+        {
+            EventId = evid(EventName, ct);
+            Actor = actor;
+            StepId = step;    
+            Flair = flair;    
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, ActorName);          
+            => text.format(PSx3, EventId, Actor, StepId);          
     }   
 }

@@ -302,7 +302,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target app id</param>
         IAppPaths ForApp(PartId dst)
-            => AppPaths.init(dst, LogRoot);
+            => new AppPaths(dst, LogRoot);
 
         /// <summary>
         /// Defines a test-specific data folder

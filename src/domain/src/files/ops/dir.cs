@@ -14,5 +14,19 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FolderPath dir(PathPart name)
             => new FolderPath(name);
+
+        public static FilePath[] dir(FolderPath src, FileExt ext, bool recurse = false)
+        {
+            var legacy = new Z0.FolderPath(src.Name);
+            var result = legacy.Files(new Z0.FileExtension(ext.Name), recurse);
+            return result.Map(x => path(x.Name));
+        }                
+
+        public static FilePath[] dir(FolderPath src)
+        {
+            var legacy = new Z0.FolderPath(src.Name);
+            var result = legacy.AllFiles;
+            return result.Map(x => path(x.Name));
+        }
     }
 }

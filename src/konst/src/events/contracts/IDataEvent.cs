@@ -11,14 +11,14 @@ namespace Z0
     {
         StringRef Id {get;}
 
-        BinaryCode Data {get;}    
+        BinaryCode Encoded {get;}    
         string ITextual.Format()
         {
             var dst = text.build();
             dst.Append(Id);
             dst.Append(Chars.Space);
             dst.Append(Chars.Pipe);
-            dst.AppendLine(Data.Format());
+            dst.AppendLine(Encoded.Format());
             return dst.ToString();
         }    
     }
@@ -28,8 +28,8 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IDataEvent<F> : IDataEvent, IAppEvent<F>
-        where F : struct, IDataEvent<F>
+    public interface IDataEvent<H> : IDataEvent, IAppEvent<H>
+        where H : struct, IDataEvent<H>
     {
 
     }    

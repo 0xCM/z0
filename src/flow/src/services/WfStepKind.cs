@@ -38,6 +38,7 @@ namespace Z0
 
         EmitPartStrings,
 
+        EmitAsmTables,
 
         EmitPeImage,
         
@@ -78,6 +79,8 @@ namespace Z0
 
         EmitImageSummaries,
 
-        IndexEncodedParts
+        IndexEncodedParts,
+
+        ListFormatPatterns
     }
 }

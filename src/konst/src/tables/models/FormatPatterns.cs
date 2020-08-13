@@ -9,7 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct FormatPatterns
+    [LiteralProvider]
+    public readonly partial struct FormatPatterns
     {
         public readonly FormatPattern[] Data;
 

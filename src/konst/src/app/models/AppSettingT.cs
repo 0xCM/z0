@@ -12,47 +12,49 @@ namespace Z0
     /// <summary>
     /// Defines a value-parametric application setting
     /// </summary>
-    public readonly struct AppSetting<T> : IAppSetting<T>, ITextual<AppSetting<T>, AppSettingFormat> 
+    public readonly struct AppSetting<T>
     {        
         /// <summary>
         /// The setting name
         /// </summary>
-        public string Name {get;}        
+        public readonly StringRef Name;
 
         /// <summary>
         /// The setting value
         /// </summary>
-        public T Value {get;}
+        public readonly T Value;
 
         [MethodImpl(Inline)]
         public static implicit operator AppSetting(AppSetting<T> src)
             => src.NonGeneric;
-         
+
+        [MethodImpl(Inline)]
+        public AppSetting(in StringRef name, T value)
+        {
+            Name = name;
+            Value = value;
+        }
+
         [MethodImpl(Inline)]
         public AppSetting(string name, T value)
         {
-            this.Name = name;
-            this.Value = value;
+            Name = name;
+            Value = value;
         }
 
-        AppSetting NonGeneric
+        public AppSetting NonGeneric
         {
             [MethodImpl(Inline)]
             get => new AppSetting(Name, Value.ToString());
         }
-
-        [MethodImpl(Inline)]
-        public AppSetting ToNonGeneric()
-            => NonGeneric;
-
-        [MethodImpl(Inline)]
-        public string Format(AppSettingFormat config)
-            => NonGeneric.Format(config);
-        
+                
         public string Format()
-            => NonGeneric.Format();
+            => Format(false);
+        
+        public string Format(bool json)
+            => json ? text.format(FormatPatterns.JsonProp, Name.Format(), Value) : text.format(Value);
         
         public override string ToString()
-            => NonGeneric.ToString();
+            => Format();
     }
 }

@@ -9,17 +9,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-
-    public readonly struct ArrayBuilder
-    {
-        [MethodImpl(Inline)]
-        public static ArrayBuilder<T> Create<T>(int? capacity = null)
-            => new ArrayBuilder<T>(capacity ?? 128);
-
-        [MethodImpl(Inline)]
-        public static ArrayBuilder<T> Create<T>(params T[] src)
-            => new ArrayBuilder<T>(src);
-    }
     
     public readonly struct ArrayBuilder<T>
     {
@@ -27,9 +16,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal ArrayBuilder(int capacity)
-        {
-            Items = new List<T>(capacity);
-        }
+            => Items = new List<T>(capacity);
 
         [MethodImpl(Inline)]
         internal ArrayBuilder(params T[] src)
@@ -38,6 +25,12 @@ namespace Z0
             Items.AddRange(src);
         }
 
+        public CellCount Count
+        {
+            [MethodImpl(Inline)]
+            get => Items.Count;
+        }
+        
         [MethodImpl(Inline)]
         public void Include(params T[] src)
             => Items.AddRange(src);
@@ -50,5 +43,26 @@ namespace Z0
                 Items.Clear();
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public void CopyTo(Span<T> dst)
+        {
+            ref var target = ref z.first(dst);
+            for(var i=0; i<Items.Count; i++)
+                z.seek(target,i) = Items[i];
+        }
+
+        /// <summary>
+        /// Copies the accumulated items to the target beginning at a specified offset
+        /// </summary>
+        /// <param name="dst">The data target</param>
+        /// <param name="offset">The target offset</param>
+        [MethodImpl(Inline)]
+        public void CopyTo(Span<T> dst, uint offset)
+        {
+            ref var target = ref z.seek(dst, offset);
+            for(var i=offset; i<Items.Count; i++)
+                z.seek(target,i) = Items[(int)i];
+        }        
     }
 }

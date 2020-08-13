@@ -17,10 +17,14 @@ namespace Z0
         {
             public PathPart Name {get;}
 
-            public Extension Ext 
+            [MethodImpl(Inline)]
+            public static FileName operator +(FileName a, FileExt b)
+                => file(text.format("{0}.{1}",a,b));
+
+            public FileExt Ext 
             {
                 [MethodImpl(Inline)]
-                get => new Extension(Path.GetExtension(Name.Name));
+                get => new FileExt(Path.GetExtension(Name.Name));
             }
             
             [MethodImpl(Inline)]
@@ -28,7 +32,7 @@ namespace Z0
                 => Name = name;
 
             [MethodImpl(Inline)]
-            public FileName(PathPart name, Extension ext)
+            public FileName(PathPart name, FileExt ext)
                 => Name = text.format(ExtPattern, name, ext);
 
             public bool HasExtension
@@ -62,6 +66,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format()
                 => Name.Format();
+
+            public override string ToString()
+                => Format();
+
         }        
     }
 }

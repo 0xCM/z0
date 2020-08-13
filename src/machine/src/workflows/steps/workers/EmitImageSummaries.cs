@@ -34,7 +34,7 @@ namespace Z0
         {
             Wf = wf;
             Ct = ct;
-            Id = step(Kind, Name);
+            Id = new WfStepId(typeof(EmitImageSummaries));
             Images = images;
             TargetPath = Wf.IndexRoot + FileName.Define("machine.images", FileExtensions.Csv);
             Wf.Created(Id, Ct);

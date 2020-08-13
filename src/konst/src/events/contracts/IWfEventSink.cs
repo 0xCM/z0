@@ -15,8 +15,21 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IWfEventSink<F> : IWfEventSink
-        where F : struct, IWfEventSink<F>
+    public interface IWfEventSink<H> : IWfEventSink
+        where H : struct, IWfEventSink<H>
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a workflow event sink that receives T-parametric table events
+    /// </summary>
+    /// <typeparam name="H"></typeparam>
+    /// <typeparam name="T"></typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IWfEventSink<H,T> : IWfEventSink
+        where H : struct, IWfEventSink<H>
+        where T : struct, ITable<T>, IWfDataEvent<T>
     {
 
     }

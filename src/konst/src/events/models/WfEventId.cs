@@ -12,9 +12,15 @@ namespace Z0
 
     public readonly struct WfEventId : IComparable<WfEventId>, IEquatable<WfEventId>, INamed<WfEventId>, ICorrelated<WfEventId>, IChronic<WfEventId>
     {
+        /// <summary>
+        /// Creates a workflow event
+        /// </summary>
+        /// <param name="name">The event name</param>
+        /// <param name="ct">The correlation token, if any</param>
+        /// <param name="ts">The timestamp which, if unspecified, will default to the event creation time (now)</param>
         [MethodImpl(Inline)]
         public static WfEventId define(string name, CorrelationToken? ct = null, Timestamp? ts = null)
-            => new WfEventId(name, ct ?? CorrelationToken.create(), ts ?? now());
+            => new WfEventId(name, ct ?? CorrelationToken.define(0ul), ts ?? now());
 
         const string Pattern = "{0} | {1} | {2}";        
 

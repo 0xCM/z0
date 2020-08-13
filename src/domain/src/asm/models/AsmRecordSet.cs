@@ -13,7 +13,7 @@ namespace Z0.Asm
     {        
         public readonly T Key;
 
-        public readonly AsmRecord[] Records;
+        readonly AsmRecord[] Records;
     
         [MethodImpl(Inline)]
         public static implicit operator AsmRecord[](AsmRecordSet<T> src)
@@ -25,6 +25,7 @@ namespace Z0.Asm
             Key = key;
             Records = data;
         }
+
 
         public AsmRecord[] Sequenced
         {

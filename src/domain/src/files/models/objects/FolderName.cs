@@ -13,6 +13,10 @@ namespace Z0
     {
         public readonly struct FolderName : IFso<FolderName>
         {            
+            [MethodImpl(Inline)]
+            public static FolderName operator +(FolderName a, FolderName b)
+                => folder(text.format("{0}/{1}",a.Name, b.Name));
+
             public PathPart Name {get;}
 
             [MethodImpl(Inline)]
@@ -22,6 +26,9 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format()
                 => Name.Format();
+
+            public override string ToString()
+                => Format();
         }               
     }
 }

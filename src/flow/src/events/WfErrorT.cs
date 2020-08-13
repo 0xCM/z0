@@ -43,6 +43,15 @@ namespace Z0
             Source = source;
         }
 
+        [MethodImpl(Inline)]
+        public WfError(in WfActor actor, T body, CorrelationToken ct, AppMsgSource source)
+        {
+            EventId = evid(EventName, ct);
+            Actor = actor;
+            Data = body;
+            Flair =  AppMsgColor.Red;
+            Source = source;
+        }
         public string Format()
             => text.format(PSx4, EventId, Actor, Source, Data);
     }

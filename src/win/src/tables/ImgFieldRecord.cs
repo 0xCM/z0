@@ -23,7 +23,7 @@ namespace Z0
     }
 
     [Table]
-    public readonly struct ImgFieldRecord : ITable<ImgFieldRecordField>
+    public readonly struct ImgFieldRecord : ITable<ImgFieldRecord>
     {
         public int Sequence {get;}
 

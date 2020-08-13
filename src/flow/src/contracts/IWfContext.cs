@@ -50,6 +50,9 @@ namespace Z0
         void Error(string actor, Exception e, CorrelationToken ct)
             => Flow.error(this, actor, e, ct);
 
+        void Error(in WfActor actor, Exception e, CorrelationToken ct)
+            => Flow.error(this, actor, e, ct);
+
         void Warn<T>(string actor, T content, CorrelationToken ct)
             => Flow.warn(this, actor, content, ct);
 
@@ -69,36 +72,40 @@ namespace Z0
             => Flow.ran(this, actor, message, ct);
         
         void Status<T>(string worker, T message, CorrelationToken ct)
-            => Flow.status(this, worker,message,ct);
+            => Flow.status(this, worker, message,ct);
+
+        void Status<T>(in WfActor actor, T message, CorrelationToken ct)
+            => Flow.status(this, actor, message, ct);
 
         void RunningT<T>(string actor, T message, CorrelationToken ct)
             => Flow.running(this, actor, message, ct);
 
-        void RunningT<T>(WfActor actor, T message, CorrelationToken ct)
+        void RunningT<T>(in WfActor actor, T message, CorrelationToken ct)
             => Flow.running(this, actor, message, ct);
 
         void RanT<T>(string actor, T message, CorrelationToken ct)
             => Flow.ran(this, actor, message, ct);
 
         void Created(string actor)
-        {   
-            Raise(Flow.created(Ct, actor));
-        }
+            => Raise(Flow.wfWorkerCreated(Ct, actor));
 
-        void Created(WfStepId step)
-        {   
-            Raise(new WfStepCreated(step, Ct));            
-        }
+        void Created(in WfActor actor, CorrelationToken ct)
+            => Raise(Flow.created(ct, actor));
+
+        void Created(in WfActor actor)
+            => Raise(Flow.created(Ct, actor));
+
+        void Created(in WfWorker worker)
+            => Raise(Flow.created(Ct, worker));
+
+        void Created(in WfActor actor, WfStepId step, CorrelationToken ct)
+            => Raise(new WfStepCreated(step, ct));
 
         void Initializing(string actor)
-        {
-            Raise(new WorkerInitializing(actor, Ct));
-        }
+            => Raise(new WorkerInitializing(actor, Ct));
 
         void Initialized(string actor)
-        {
-            Raise(new WorkerInitialized(actor, Ct));
-        }
+            => Raise(new WorkerInitialized(actor, Ct));
 
         void Running<T>(T message, string actor)
         {
@@ -107,7 +114,17 @@ namespace Z0
         
         void Running(string actor)
         {
-            Raise(new WfStepRunning(actor, Ct));
+            Raise(new WfStepRunning(actor, WfStepId.Empty, Ct));
+        }
+
+        void Running(in WfActor actor, WfStepId step, CorrelationToken ct)
+        {
+            Raise(new WfStepRunning(actor, step, ct));
+        }
+
+        void Ran(in WfActor actor, WfStepId step, CorrelationToken ct)
+        {
+            Raise(new WfStepRan(actor, step, ct));
         }
 
         void Ran(string actor)
@@ -120,9 +137,24 @@ namespace Z0
             Raise(new WfStepRan(step, Ct));
         }
 
+        void Ran(WfStepId step, CorrelationToken ct)
+        {
+            Raise(new WfStepRan(step, ct));
+        }
+
         void Finished(string actor)
         {   
             Raise(new WorkerFinished(actor, Ct));            
+        }
+
+        void Finished(in WfActor actor)
+        {   
+            Raise(new ActorFinished(actor, Ct));            
+        }
+
+        void Finished(in WfActor actor, CorrelationToken ct)
+        {   
+            Raise(new ActorFinished(actor, ct));            
         }
 
         void Finished(WfStepId step)
@@ -130,24 +162,24 @@ namespace Z0
             Raise(new WorkerFinished(step.Format(), Ct));            
         }
 
-        void Emitting(string worker, string dsname, FilePath dst)
+        void Emitting(string worker, string table, FilePath dst)
         {
-            Raise(new EmittingDataset(worker, dsname, dst, Ct));
+            Raise(new EmittingDataset(worker, table, dst, Ct));
         }
 
-        void Emitted(string actor, string dsname, uint count, FilePath dst)
+        void Emitted(string actor, string table, uint count, FilePath dst)
         {
-            Raise(new EmittedDataset(actor, dsname, count, dst, Ct));
+            Raise(new EmittedDataset(actor, table, count, dst, Ct));
         }
 
-        void Emitting(string worker, string dsname, FilePath dst, CorrelationToken ct)
+        void Emitting(string worker, string table, FilePath dst, CorrelationToken ct)
         {
-            Raise(new EmittingDataset(worker, dsname, dst, ct));
+            Raise(new EmittingDataset(worker, table, dst, ct));
         }
 
-        void Emitted(string actor, string dsname, uint count, FilePath dst, CorrelationToken ct)
+        void Emitted(string actor, string table, uint count, FilePath dst, CorrelationToken ct)
         {
-            Raise(new EmittedDataset(actor, dsname, count,  dst, ct));
+            Raise(new EmittedDataset(actor, table, count,  dst, ct));
         }
 
         void Running(string actor, string message, CorrelationToken ct)
@@ -157,7 +189,7 @@ namespace Z0
         
         void Running(string actor, CorrelationToken ct)
         {
-            Raise(new WfStepRunning(actor, ct));
+            Raise(new WfStepRunning(actor, WfStepId.Empty, ct));
         }
 
         void Status(string worker, string msg, CorrelationToken ct)
@@ -167,7 +199,7 @@ namespace Z0
 
         void Created(string actor, CorrelationToken ct)
         {   
-            Raise(Flow.created(ct, actor));            
+            Raise(Flow.wfWorkerCreated(ct, actor));            
         }
 
         void Created(WfStepId step, CorrelationToken ct)

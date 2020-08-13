@@ -13,15 +13,6 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// Defines an actor with a specified name, if given; otherwise the actor name is derived 
-        /// from the path of the invoking member file
-        /// </summary>
-        /// <param name="name">The actor name</param>
-        [MethodImpl(Inline), Op]
-        public static WfActor actor([CallerFilePath] string name = null)
-            => WfActor.create(name);
-
-        /// <summary>
         /// Defines an event identifier
         /// </summary>
         /// <param name="name">The event name</param>
@@ -30,16 +21,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static WfEventId evid(string name, CorrelationToken ct, Timestamp? ts = null)
             => new WfEventId(name, ct, ts ?? now());
-
-        /// <summary>
-        /// Defines a workflow step identifier
-        /// </summary>
-        /// <param name="kind">The step classifier</param>
-        /// <param name="actor">The actor</param>
-        /// <typeparam name="T"></typeparam>
-        [MethodImpl(Inline), Op]
-        public static WfStepId step<T>(T kind, [CallerFilePath] string actor = null)
-            where T : unmanaged, Enum
-                => new WfStepId(uint64<T>(kind), Path.GetFileNameWithoutExtension(actor));
     }
 }

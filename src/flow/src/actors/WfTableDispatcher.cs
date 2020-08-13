@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using api = TableWorkers;
+    using api = Flow;
         
     public readonly ref struct WfTableDispatcher<F,T,D,S,Y>
         where F : unmanaged, Enum
@@ -23,7 +23,7 @@ namespace Z0
 
         internal readonly Span<Y> Target;
 
-        internal readonly Span<TableMap<D,S,T,Y>> Processors;
+        internal readonly Span<WfTableMap<D,S,T,Y>> Processors;
 
         internal readonly Selectors<D,S> Selectors;
 
@@ -31,7 +31,7 @@ namespace Z0
             => (uint)Source.Length;
 
         [MethodImpl(Inline)]
-        public WfTableDispatcher(IWfContext wf, T[] tables, TableMaps<D,S,T,Y> processors, Selectors<D,S> selectors, Y[] dst)
+        public WfTableDispatcher(IWfContext wf, T[] tables, WfTableMaps<D,S,T,Y> processors, Selectors<D,S> selectors, Y[] dst)
         {
             Wf = wf;
             Source = tables;
@@ -73,7 +73,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        public ref readonly TableMap<D,S,T,Y> Processor(D id)
+        public ref readonly WfTableMap<D,S,T,Y> Processor(D id)
         {
             ref readonly var selector = ref Selectors[id];                
             var position = selector.Position;

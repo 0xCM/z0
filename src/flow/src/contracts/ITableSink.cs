@@ -15,7 +15,7 @@ namespace Z0
     public interface ITableSink<T> : IWfSink<T>, ITableWorker<T>
         where T : struct, ITable
     {
-
+        void Deposit(ReadOnlySpan<T> src);
     }
 
     public interface ITableSink<H,T> : ITableSink<T>, IWfSink<H,T>

@@ -14,7 +14,7 @@ namespace Z0.ClrTools
         FileName Name {get;}
 
 
-        Extension Ext {get;}
+        FileExt Ext {get;}
     }
     
     public interface INativeModule : IFileModule
@@ -35,20 +35,20 @@ namespace Z0.ClrTools
     
     public interface IDynamicLib : IFileModule
     {
-        Extension IFileModule.Ext 
+        FileExt IFileModule.Ext 
             => ext("dll");
     }
 
     public interface IStaticLib : IFileModule
     {
-        Extension IFileModule.Ext 
+        FileExt IFileModule.Ext 
             => ext("lib");
         
     }
 
     public interface IExecutable : IFileModule
     {
-        Extension IFileModule.Ext 
+        FileExt IFileModule.Ext 
             => ext("exe");        
     }
 

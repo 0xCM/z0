@@ -24,7 +24,6 @@ namespace Z0
     public abstract class AppSettings<F> : IAppSettings<F>
         where F : AppSettings<F>, new()
     {
-
         public static F From(IAppSettings src)
             => AppSettings.From<F>(src);        
     }

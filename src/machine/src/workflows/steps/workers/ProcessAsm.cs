@@ -17,7 +17,7 @@ namespace Z0.Asm
     public readonly struct ProcessAsm
     {                
         [MethodImpl(Inline)]
-        public static ProcessAsm create(WfState state, in EncodedParts encoded) 
+        public static ProcessAsm create(IWfState state, in EncodedParts encoded) 
             => new ProcessAsm(state, encoded);
 
         readonly Dictionary<Mnemonic, ArrayBuilder<AsmRecord>> Index;
@@ -50,7 +50,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        internal ProcessAsm(WfState state, in EncodedParts encoded)
+        public ProcessAsm(IWfState state, in EncodedParts encoded)
         {
             Wf = state.Wf;
             Asm = state.Asm;

@@ -210,7 +210,7 @@ namespace Z0
                 var name = "ProcessEncodedIndex";
                 Wf.Raise(new RunningProcessor(ActorName, name, Ct));
                 
-                var processor = ProcessAsm.create(State, encoded);
+                var processor = new ProcessAsm(State, encoded);
                 var parts = Wf.ContextRoot.Composition.Resolved.Select(p => p.Id);
                 Wf.Raise(new ProcessingParts(ActorName, name, parts, Ct));
                 var result = processor.Process();
@@ -239,10 +239,8 @@ namespace Z0
         {
             var count = src.Count;
             var records = span(src.Sequenced);
-            var dir = Wf.AppPaths.AppCaptureRoot + FolderName.Define("records");
+            var dir = Wf.AppPaths.ResourceRoot + FolderName.Define("tables") + FolderName.Define("asm");
             var dst = dir + FileName.Define(src.Key.ToString(), FileExtensions.Csv);
-
-            //var path = ((Wf.AppPaths.AppDataRoot +  FolderName.Define("processed")) + FileName.Define(src.Key.ToString(), FileExtensions.Csv)).CreateParentIfMissing();
             using var writer = dst.Writer();
             writer.WriteLine(AsmRecord.FormatHeader());
             for(var i=0; i<count; i++)

@@ -18,12 +18,12 @@ namespace Z0
     {
         public IWfContext Wf {get;}
 
-        readonly TableMaps<D,S,T,Y> Processors;
+        readonly WfTableMaps<D,S,T,Y> Processors;
 
         readonly Selectors<D,S> Selectors;
 
         [MethodImpl(Inline)]
-        public WfTableRunner(IWfContext wf, TableMaps<D,S,T,Y> processors, Selectors<D,S> selectors)
+        public WfTableRunner(IWfContext wf, WfTableMaps<D,S,T,Y> processors, Selectors<D,S> selectors)
         {
             Wf = wf;
             Processors = processors;

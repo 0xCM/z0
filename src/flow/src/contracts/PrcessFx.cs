@@ -16,5 +16,8 @@ namespace Z0
 
         public delegate Y MapTable<T,Y>(in T src)
             where T : struct, ITable;
+        
+        public delegate void Receive<T>(in T src)
+            where T : struct, ITable;
     }
 }

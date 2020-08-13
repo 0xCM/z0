@@ -16,7 +16,7 @@ namespace Z0
     partial class text
     {
         /// <summary>
-        /// Formats the pair of strings represented by repsective character spans
+        /// Formats the pair of strings represented by respective character spans
         /// </summary>
         /// <param name="a">The leading content</param>
         /// <param name="b">The trailing content</param>
@@ -25,7 +25,7 @@ namespace Z0
             => string.Concat(a,b);
 
         /// <summary>
-        /// Formats the pair of strings represented by repsective character spans
+        /// Formats the pair of strings represented by respective character spans
         /// </summary>
         /// <param name="a">The leading content</param>
         /// <param name="b">The trailing content</param>
@@ -53,7 +53,7 @@ namespace Z0
         /// <summary>
         /// Formats a pattern using a parametric argument
         /// </summary>
-        /// <param name="pattern">The source pattern</param>
+        /// <param name="pattern">The format pattern</param>
         /// <param name="arg0">The pattern argument</param>
         /// <typeparam name="T">The argument type</typeparam>
         [MethodImpl(Inline)]
@@ -61,6 +61,74 @@ namespace Z0
             => string.Format(pattern, 
                 arg0 is ITextual t ? t.Format() : $"{arg0}"
                 );
+
+        /// <summary>
+        /// Formats a <see cref='StringRef'/>
+        /// </summary>
+        /// <param name="src">The source</param>
+        [MethodImpl(Inline), Op]
+        public static string format(in StringRef src)
+            => src.Format();
+        
+        /// <summary>
+        /// Formats a source operand according to a specified pattern
+        /// </summary>
+        /// <param name="pattern">The format pattern</param>
+        /// <param name="arg0">The source operand</param>
+        [MethodImpl(Inline), Op]
+        public static string format(string pattern, in StringRef arg0)
+            => string.Format(pattern, format(arg0));
+
+        /// <summary>
+        /// Formats a source operand according to a specified pattern
+        /// </summary>
+        /// <param name="pattern">The format pattern</param>
+        /// <param name="arg0">The source operand</param>
+        [MethodImpl(Inline), Op]
+        public static string format(in StringRef pattern, in StringRef arg0)
+            => string.Format(format(pattern), format(arg0));
+
+        /// <summary>
+        /// Formats two operands according to a specified pattern
+        /// </summary>
+        /// <param name="pattern">The format pattern</param>
+        /// <param name="arg0">The first operand</param>
+        /// <param name="arg1">The second operand</param>
+        [MethodImpl(Inline), Op]
+        public static string format(string pattern, in StringRef arg0, in StringRef arg1)
+            => string.Format(pattern, format(arg0), format(arg1));
+
+        /// <summary>
+        /// Formats two operands according to a specified pattern
+        /// </summary>
+        /// <param name="pattern">The format pattern</param>
+        /// <param name="arg0">The first operand</param>
+        /// <param name="arg1">The second operand</param>
+        [MethodImpl(Inline), Op]
+        public static string format(in StringRef pattern, in StringRef arg0, in StringRef arg1)
+            => string.Format(format(pattern), format(arg0), format(arg1));
+
+        /// <summary>
+        /// Formats three operands according to a specified pattern
+        /// </summary>
+        /// <param name="pattern">The format pattern</param>
+        /// <param name="arg0">The first operand</param>
+        /// <param name="arg1">The second operand</param>
+        /// <param name="arg2">The third operand</param>
+        [MethodImpl(Inline), Op]
+        public static string format(string pattern, in StringRef arg0, in StringRef arg1, in StringRef arg2)
+            => string.Format(pattern, format(arg0), format(arg1), format(arg2));
+
+        /// <summary>
+        /// Formats three operands according to a specified pattern
+        /// </summary>
+        /// <param name="pattern">The format pattern</param>
+        /// <param name="arg0">The first operand</param>
+        /// <param name="arg1">The second operand</param>
+        /// <param name="arg2">The third operand</param>
+        [MethodImpl(Inline), Op]
+        public static string format(in StringRef pattern, in StringRef arg0, in StringRef arg1, in StringRef arg2)
+            => string.Format(format(pattern), format(arg0), format(arg1), format(arg2));
 
         /// <summary>
         /// Formats a pattern using 2 parametric arguments

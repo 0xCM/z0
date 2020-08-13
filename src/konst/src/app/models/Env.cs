@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Reifies an application evironment service predicated on environment variables
+    /// Reifies an application environment service predicated on environment variables
     /// </summary>
     public readonly struct Env
     {

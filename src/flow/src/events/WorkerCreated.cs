@@ -18,20 +18,21 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
+
+        public WfWorker Worker {get;}        
+        
         public AppMsgColor Flair {get;}
 
-        public WfActor Actor {get;}        
-        
         [MethodImpl(Inline)]
-        public WorkerCreated(WfActor actor, CorrelationToken ct, AppMsgColor flair = CreatedFlair)
+        public WorkerCreated(in WfWorker worker, CorrelationToken ct, AppMsgColor flair = CreatedFlair)
         {
             EventId = z.evid(EventName, ct);
-            Actor = actor;
+            Worker = worker;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx2, EventId, Actor);
+            => text.format(PSx2, EventId, Worker);
     }
 }

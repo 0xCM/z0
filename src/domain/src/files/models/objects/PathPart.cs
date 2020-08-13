@@ -27,6 +27,10 @@ namespace Z0
                 => new PathPart(data);
 
             [MethodImpl(Inline)]
+            public static implicit operator string(PathPart data)   
+                => data.Name;
+
+            [MethodImpl(Inline)]
             public PathPart(string name)
                 => Name = name;
 
@@ -60,6 +64,10 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => new PathPart(EmptyString);
             }        
+
+            public override string ToString()
+                => Format();
+
         }
     }
 }

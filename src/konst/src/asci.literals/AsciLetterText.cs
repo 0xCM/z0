@@ -5,37 +5,38 @@
 namespace Z0
 {    
     /// <summary>
-    /// Defines asci string iterals
+    /// Defines asci string literals
     /// </summary>
+    [LiteralProvider]
     public static class AsciCharText
     {
         /// <summary>
-        /// The'a' character represented as text
+        /// The 'a' character represented as text
         /// </summary>
         public const string a = "a";
         
         /// <summary>
-        /// The'b' character represented as text
+        /// The 'b' character represented as text
         /// </summary>
         public const string b = "b";
         
         /// <summary>
-        /// The'c' character represented as text
+        /// The 'c' character represented as text
         /// </summary>
         public const string c = "c";
         
         /// <summary>
-        /// The'd' character represented as text
+        /// The 'd' character represented as text
         /// </summary>
         public const string d = "d";
         
         /// <summary>
-        /// The'e' character represented as text
+        /// The 'e' character represented as text
         /// </summary>
         public const string e = "e";
         
         /// <summary>
-        /// The'f' character represented as text
+        /// The 'f' character represented as text
         /// </summary>
         public const string f = "f";
         
@@ -164,18 +165,64 @@ namespace Z0
 
         public const string Z = "Z";
 
-        public const string UpperCased = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-        public const string LowerCased = "abcdefghijklmnopqrstuvwxyz";
-
-        public const string Binary = "01";
+        public const string Space = " ";
         
-        public const string Octal = "01234567";
-    
-        public const string Decimal = "0123456789";
+        public const string DQuote = "\"";
 
-        public const string UpperHex = "0123456789ABCDEF";
+        public const string SQuote = "'";      
+
+        public const string LBrace = "{";
+
+        public const string RBrace = "}";
+
+        public const string LBrack = "[";
+
+        public const string RBrack = "]";
+
+        public const string LParen = "(";
+
+        public const string RParen = ")";
+
+        public const string Colon = ":";
         
-        public const string LowerHex = "0123456789abcdef";        
+        public const string Semicolon = ";";
+
+        public const string Dash = "-";
+
+        public const string Dot = ".";
+
+        public const string Underscore = "_";
+
+        public const string Pipe = "|";
+
+        public const string Bang = "!";
+
+        public const string Tilde = "~";
+
+        public const string FS = "/";
+
+        public const string BS = "\\";
+
+        public const string Null = "\0";
+
+        public const string D0 = "0";
+
+        public const string D1 = "1";
+
+        public const string D2 = "2";
+
+        public const string D3 = "3";
+
+        public const string D4 = "4";
+
+        public const string D5 = "5";
+
+        public const string D6 = "6";
+
+        public const string D7 = "7";
+
+        public const string D8 = "8";
+
+        public const string D9 = "9";        
     }
 }

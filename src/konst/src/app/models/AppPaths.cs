@@ -19,21 +19,14 @@ namespace Z0
 
         public FolderPath LogRoot {get;}
 
-        public FolderPath TrackedDataRoot {get;}
-
         [MethodImpl(Inline)]
-        public static IAppPaths init(PartId id, FolderPath log = null, FolderPath data = null)
-            => new AppPaths(id, log ?? Env.Current.LogDir, data ?? Env.Current.DevDir);
-
-        [MethodImpl(Inline)]
-        AppPaths(PartId id, FolderPath log, FolderPath data)
+        public AppPaths(PartId id, FolderPath log)
         {
             AppId = id;
             LogRoot = log;
-            TrackedDataRoot = data;
         }
 
         public static IAppPaths Default 
-            => new AppPaths(Part.ExecutingPart, Env.Current.LogDir, Env.Current.DevDir);
+            => new AppPaths(Part.ExecutingPart, Env.Current.LogDir);
     }
 }

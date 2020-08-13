@@ -40,13 +40,13 @@ namespace Z0
                 switch(e.Id)
                 {
                     case E1: 
-                        Claim.eq(e.Data, d1);
+                        Claim.eq(e.Encoded, d1);
                         break;
                     case E2: 
-                        Claim.eq(e.Data, d2);
+                        Claim.eq(e.Encoded, d2);
                         break;
                     case E3: 
-                        Claim.eq(e.Data, d3);
+                        Claim.eq(e.Encoded, d3);
                         break;
                 }                
             }

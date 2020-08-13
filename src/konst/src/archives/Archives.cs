@@ -12,9 +12,5 @@ namespace Z0
     public readonly struct Archives : IArchiveServices
     {
         public static IArchiveServices Services => default(Archives);
-
-        [MethodImpl(Inline)]
-        public static EncodedHexArchive hex(FolderPath root)
-            => new EncodedHexArchive(root);
     }    
 }

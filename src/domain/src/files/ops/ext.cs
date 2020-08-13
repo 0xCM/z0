@@ -12,7 +12,7 @@ namespace Z0
     partial struct FileSystem
     {
         [MethodImpl(Inline), Op]
-        public static Extension ext(PathPart name)
-            => new Extension(name);
+        public static FileExt ext(PathPart name)
+            => new FileExt(name);
     }
 }

@@ -42,7 +42,7 @@ namespace Z0
             ContextRoot = root;
             Config = config;
             WfSink = sink;
-            Actor = z.actor(caller);
+            Actor = Flow.actor(caller);
             ResourceRoot = ContextRoot.AppPaths.ResourceRoot;
             IndexRoot =  ResourceRoot + FolderName.Define("index");
             Known = ContextRoot.Parts;            

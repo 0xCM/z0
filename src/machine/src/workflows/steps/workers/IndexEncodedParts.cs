@@ -71,9 +71,7 @@ namespace Z0
                 Wf.Error(e, Ct);
             }
 
-
             Wf.Ran(ActorName, Ct);
-
         }
 
         void Index(MemberParseReport report, EncodedPartBuilder dst)

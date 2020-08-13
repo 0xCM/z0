@@ -15,6 +15,7 @@ namespace Z0
         {            
             public PathPart Name {get;}
 
+
             [MethodImpl(Inline)]
             public FilePath(PathPart name)
                 => Name = name;
@@ -22,6 +23,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format()
                 => Name.Format();
+
+            public override string ToString()
+                => Format();
+
         }       
     }
 }

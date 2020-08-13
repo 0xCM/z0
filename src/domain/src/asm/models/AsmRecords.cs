@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
+    
     public readonly struct AsmRecords
     {
         readonly AsmRecord[] Data;
@@ -16,6 +16,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static AsmRecordSet<T> set<T>(T key, AsmRecord[] src)
             => new AsmRecordSet<T>(key,src);
+
+        [MethodImpl(Inline), Op, Closures(UInt32k)]
+        public static AsmTableSeg<T> segment<T>(T key, ArraySegment<AsmRecord> src)
+            => new AsmTableSeg<T>(key,src);
 
         [MethodImpl(Inline)]
         public static AsmRecordSets<T> sets<T>(AsmRecordSet<T>[] src)

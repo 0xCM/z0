@@ -54,7 +54,7 @@ namespace Z0
     {
         public StringRef Id {get;}
 
-        public BinaryCode Data {get;}
+        public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
         public ExampleEvent1 Define(StringRef id, BinaryCode data)
@@ -64,7 +64,7 @@ namespace Z0
         public ExampleEvent1(StringRef id, BinaryCode data)
         {
             Id = id;
-            Data = data;
+            Encoded = data;
         }        
     }    
 
@@ -76,13 +76,13 @@ namespace Z0
 
         public StringRef Id {get;}
 
-        public BinaryCode Data {get;}
+        public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
         public ExampleEvent2(StringRef id, BinaryCode data)
         {
             Id = id;
-            Data = data;
+            Encoded = data;
         }
     }    
 
@@ -94,13 +94,13 @@ namespace Z0
 
         public StringRef Id {get;}
 
-        public BinaryCode Data {get;}
+        public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
         public ExampleEvent3(StringRef id, BinaryCode data)
         {
             Id = id;
-            Data = data;
+            Encoded = data;
         }
     }    
     

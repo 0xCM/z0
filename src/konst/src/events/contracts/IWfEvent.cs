@@ -14,15 +14,15 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IWfEvent<F> : IWfEvent, IAppEvent<F>
-        where F : struct, IWfEvent<F>
+    public interface IWfEvent<H> : IWfEvent, IAppEvent<H>
+        where H : struct, IWfEvent<H>
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IWfEvent<F,T> : IWfEvent<F>
-        where F : struct, IWfEvent<F,T>
+    public interface IWfEvent<H,T> : IWfEvent<H>
+        where H : struct, IWfEvent<H,T>
     {
         T Body {get;}
     }

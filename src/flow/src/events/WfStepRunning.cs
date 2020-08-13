@@ -19,18 +19,21 @@ namespace Z0
     
         public WfActor Actor {get;}
 
+        public WfStepId Step {get;}
+        
         public AppMsgColor Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepRunning(string actor, CorrelationToken ct, AppMsgColor flair = RunningFlair)
+        public WfStepRunning(WfActor actor, WfStepId step, CorrelationToken ct, AppMsgColor flair = RunningFlair)
         {
             EventId = evid(EventName, ct);
-            Actor = z.actor(actor);
+            Actor = actor;
+            Step = step;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Actor);
+            => format(EventId, Actor, Step);
     }
 }

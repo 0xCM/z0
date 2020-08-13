@@ -26,7 +26,7 @@ namespace Z0
     }
 
     [Table]
-    public struct ImgConstantRecord : ITable<ImgConstantField>
+    public struct ImgConstantRecord : ITable<ImgConstantRecord>
     {            
         public int Sequence;
 

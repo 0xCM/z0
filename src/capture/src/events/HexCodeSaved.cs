@@ -31,8 +31,8 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public HexCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, AppMsgColor flair = RanFlair)
         {
-            EventId = z.evid(EventName, ct);
-            Actor = z.actor(actor);
+            EventId = Flow.evid(EventName, ct);
+            Actor = Flow.actor(actor);
             Host = host;
             MemberCount = code.Length;
             Code = code;

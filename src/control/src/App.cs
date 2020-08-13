@@ -23,7 +23,7 @@ namespace Z0
             : base(WfBuilder.app())
         {
             Ct = CorrelationToken.define(Part);   
-            Raise(Flow.created(Ct, ActorName));
+            Raise(Flow.wfWorkerCreated(Ct, ActorName));
         }
         
         public override void RunShell(params string[] args)
