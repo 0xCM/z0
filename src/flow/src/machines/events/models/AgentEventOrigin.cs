@@ -12,7 +12,7 @@ namespace Z0
     /// Captures an instant in time with respect to a server/agent,
     /// real or simulated
     /// </summary>
-    public readonly struct EventOrigin
+    public readonly struct AgentEventOrigin
     {
         /// <summary>
         /// Uniquely identifies the logical event source
@@ -28,30 +28,30 @@ namespace Z0
         /// <summary>
         /// Constructs an origin from an ordered pair of location and timestamp
         /// </summary>
-        /// <param name="loc">The location of occurence</param>
+        /// <param name="loc">The location of occurrence</param>
         /// <param name="time">The time of occurrence</param>
         [MethodImpl(Inline)]
-        public static implicit operator EventOrigin((ulong loc, ulong time) src)
-            => new EventOrigin(src.loc,src.time);
+        public static implicit operator AgentEventOrigin((ulong loc, ulong time) src)
+            => new AgentEventOrigin(src.loc,src.time);
 
         /// <summary>
         /// Constructs an origin from an ordered triple of server, agent and timestamp
         /// </summary>
-        /// <param name="loc">The location of occurence</param>
+        /// <param name="loc">The location of occurrence</param>
         /// <param name="time">The time of occurrence</param>
         [MethodImpl(Inline)]
-        public static implicit operator EventOrigin((uint server, uint agent, ulong time) src)
-            => new EventOrigin(src.server, src.agent, src.time);
+        public static implicit operator AgentEventOrigin((uint server, uint agent, ulong time) src)
+            => new AgentEventOrigin(src.server, src.agent, src.time);
 
         [MethodImpl(Inline)]
-        public EventOrigin(uint server, uint agent, ulong Time)
+        public AgentEventOrigin(uint server, uint agent, ulong Time)
         {
             this.Location = ((ulong)server << 32) | agent;
             this.Timestamp = Time;
         }
     
         [MethodImpl(Inline)]
-        public EventOrigin(ulong Location, ulong Time)
+        public AgentEventOrigin(ulong Location, ulong Time)
         {
             this.Location = Location;
             this.Timestamp = Time;

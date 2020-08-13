@@ -135,5 +135,30 @@ namespace Z0
         /// Defines the literal '"{0}": "{1}"'
         /// </summary>
         public const string JsonProp = QSlot0 + Colon + Space + QSlot1;        
+
+        /// <summary>
+        /// Defines a right-padded slot of width 4
+        /// </summary>
+        public const string PS0x4 = "{0,-4}";
+
+        /// <summary>
+        /// Defines a right-padded slot of width 8
+        /// </summary>
+        public const string PS0x8 = "{0,-8}";
+
+        /// <summary>
+        /// Defines a right-padded slot of width 12
+        /// </summary>
+        public const string PS0x12 = "{0,-12}";
+
+        /// <summary>
+        /// Defines a right-padded slot of width 16
+        /// </summary>
+        public const string PS0x16 = "{0,-16}";
+
+        /// <summary>
+        /// Defines a right-padded slot of width 32
+        /// </summary>
+        public const string PS0x32 = "{0,-32}";
     }
 }

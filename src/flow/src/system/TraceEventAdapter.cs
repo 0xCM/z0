@@ -17,8 +17,8 @@ namespace Z0
         public static dynamic Payload<T>(this TraceEvent e, Expression<Func<T,dynamic>> selector)
             => e.PayloadByName(selector.GetAccessedProperty().Name);
 
-        public static EventIdentity EventIdentity(this TraceEvent data)         
-                => Z0.EventIdentity.define(
+        public static AgentEventId EventIdentity(this TraceEvent data)         
+                => Z0.AgentEventId.define(
                 data.Payload<uint>("ServerId"), 
                 data.Payload<uint>("AgentId"), 
                 data.Payload<ulong>("Timestamp"),
@@ -39,7 +39,7 @@ namespace Z0
     {
         public TraceEvent Subject {get; set;}
 
-        public EventIdentity EventIdentity
+        public AgentEventId EventIdentity
             => Subject.EventIdentity();
 
         public T Field<T>(string Name)

@@ -26,11 +26,11 @@ namespace Z0
 
         TraceEventSession Session;
         
-        ConcurrentQueue<EventIdentity> RecieptQueue = new ConcurrentQueue<EventIdentity>();
+        ConcurrentQueue<AgentEventId> RecieptQueue = new ConcurrentQueue<AgentEventId>();
 
         void OnPulse(TraceEvent data)
         {
-            EventIdentity identity = data.EventIdentity();            
+            AgentEventId identity = data.EventIdentity();            
             term.magenta($"Received event {identity}");
 
             RecieptQueue.Enqueue(identity);

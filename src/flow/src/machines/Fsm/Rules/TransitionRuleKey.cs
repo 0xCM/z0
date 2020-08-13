@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
  
@@ -12,7 +12,7 @@ namespace Z0.Machines
     public readonly struct TransitionRuleKey<E,S> : IRuleKey<E,S>
     {
         public static implicit operator TransitionRuleKey<E,S>((E trigger, S source) x)
-            => new TransitionRuleKey<E, S>(x.trigger,x.source);
+            => new TransitionRuleKey<E,S>(x.trigger,x.source);
 
         public TransitionRuleKey(E input, S source)
         {

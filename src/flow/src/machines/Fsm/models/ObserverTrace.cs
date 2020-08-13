@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
 
@@ -20,7 +20,5 @@ namespace Z0.Machines
         Errors = 8,
 
         All = Transitions | Events | Completions | Errors
-    }
-
- 
+    } 
 }

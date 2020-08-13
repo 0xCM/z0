@@ -14,13 +14,13 @@ namespace Z0
         public const ulong SystemId = IntrinsicEvents.Pulse;
     
         public static PulseEvent Define(uint ServerId, uint AgentId, ulong Timestamp)
-            => new PulseEvent(new EventIdentity(ServerId, AgentId, Timestamp, SystemId));
+            => new PulseEvent(new AgentEventId(ServerId, AgentId, Timestamp, SystemId));
 
-        PulseEvent(EventIdentity Identity)
+        PulseEvent(AgentEventId Identity)
         {
             this.Identity = Identity;
         }
 
-        public EventIdentity Identity {get;}
+        public AgentEventId Identity {get;}
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// Identifies a system event with respect to time/space/subject
         /// </summary>
-        EventIdentity Identity {get;}   
+        AgentEventId Identity {get;}   
 
         /// <summary>
         /// Specifies an event classifer that can be used to agregate/distinguish sorts of events

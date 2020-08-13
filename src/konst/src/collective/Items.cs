@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IMessagePrinter
-    {
-        void Print(IAppMsg message)
-            => Terminal.Get().WriteMessage(message);
-    }
+    using System;
 
-    public readonly struct MessagePrinter : IMessagePrinter
+    public readonly struct Items<T>
     {
-
+        public readonly T[] Content;
         
+        public Items(T[] src)
+        {
+            Content = src;
+        }        
     }
 }

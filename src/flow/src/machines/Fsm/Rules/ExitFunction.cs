@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
     using System.Linq;
     using System.Collections.Generic;
     
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a set of rules that define actions associated with state Exit
@@ -37,6 +37,4 @@ namespace Z0.Machines
         Option<IFsmRule> IFsmFunction.Rule(IRuleKey key)
             => Rule(key).TryMap(r => r as IFsmRule);
     }
-
- 
 }

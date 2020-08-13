@@ -2,9 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
+
+    using Z0.Machines;
 
     /// <summary>
     /// Receives notifications from an active machine
@@ -23,8 +25,7 @@ namespace Z0.Machines
             Tracing = tracing  ?? ObserverTrace.All;
             ReceiptEmitRate = receiptEmitRate ?? (int)Pow2.T20;
             TransitionCount = 0;
-            CompletionCount = 0;
-            
+            CompletionCount = 0;            
         }
 
         Fsm<E,S> Machine;

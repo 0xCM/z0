@@ -19,7 +19,6 @@ namespace Z0
 
         readonly Action Executor;
 
-
         [MethodImpl(Inline)]
         public HubClient(IEventHub hub, IDataSink sink, Action connect, Action exec)
         {
@@ -27,8 +26,7 @@ namespace Z0
             Sink = sink;
             Connector = connect;
             Executor = exec;
-            Connect();
-            //(this as IHubClient).Connect();
+            Connect();            
         }
 
         public void Deposit(IDataEvent e)

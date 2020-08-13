@@ -21,7 +21,7 @@ namespace Z0
         
     }
 
-    public interface ITableWorker<H,T> : ITableWorker, IWfWorker<H>
+    public interface ITableWorker<H,T> : ITableWorker<T>, IWfWorker<H>
         where T : struct, ITable
         where H : struct, ITableWorker<H,T>
     {

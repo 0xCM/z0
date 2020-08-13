@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Timers;
 
-
     /// <summary>
     /// Produces a periodic pulse event
     /// </summary>

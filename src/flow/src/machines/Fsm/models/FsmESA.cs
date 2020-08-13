@@ -35,12 +35,12 @@ namespace Z0.Machines
         /// <summary>
         /// The entry action
         /// </summary>
-        public StateEntry<S,A> EntryAction;
+        public FsmFx.StateEntry<S,A> EntryAction;
 
         /// <summary>
         /// The exit action
         /// </summary>
-        public StateExit<S,A> ExitAction;
+        public FsmFx.StateExit<S,A> ExitAction;
         
         protected override void OnEntry(S s)
         {

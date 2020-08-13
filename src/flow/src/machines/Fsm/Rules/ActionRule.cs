@@ -2,13 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+
+    using Z0.Machines;
 
     /// <summary>
     /// Characterizes an action that that executes per machine rules
@@ -21,7 +22,7 @@ namespace Z0.Machines
         /// <param name="src">The source state</param>
         /// <param name="action">The action</param>
         /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="A">The action tyep</typeparam>
+        /// <typeparam name="A">The action type</typeparam>
         [MethodImpl(Inline)]
         public static implicit operator ActionRule<S,A>((S src, A action) x)
             => new ActionRule<S,A>(x.src, x.action);

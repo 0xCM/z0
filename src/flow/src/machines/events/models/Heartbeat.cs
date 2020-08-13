@@ -12,12 +12,11 @@ namespace Z0
         public static implicit operator Heartbeat((uint server, uint agent, ulong time) src)
             => new Heartbeat(src.server, src.agent, src.time);
 
-        public Heartbeat(uint ServerId, uint AgentId, ulong Timestamp)
-            : this()
+        public Heartbeat(uint server, uint agent, ulong ts)
         {
-            this.ServerId = ServerId;
-            this.AgentId = AgentId;
-            this.Timestamp = Timestamp;
+            ServerId = server;
+            AgentId = agent;
+            Timestamp = ts;
         }
 
         /// <summary>
@@ -35,7 +34,7 @@ namespace Z0
         /// </summary>
         public readonly ulong Timestamp;
 
-        public EventOrigin Origin
+        public AgentEventOrigin Origin
             => (ServerId, AgentId, Timestamp);
 
 

@@ -11,8 +11,11 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
 
-    public interface TCheckError : IMessagePrinter
+    public interface TCheckError 
     {
+        void Print(IAppMsg message)
+            => Terminal.Get().WriteMessage(message);
+
         IAppMsg Describe(Exception e, string title, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var msg = new StringBuilder();

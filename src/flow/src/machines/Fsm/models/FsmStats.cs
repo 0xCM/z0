@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
 
@@ -32,7 +32,7 @@ namespace Z0.Machines
         public ulong ReceiptCount {get; set;}
 
         /// <summary>
-        /// The number of state transtions that have occurred
+        /// The number of state transitions that have occurred
         /// </summary>
         public uint TransitionCount {get; set;}      
 

@@ -8,7 +8,6 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
  
     using static Konst;
-    using static Memories;
   
     /// <summary>
     /// Identifies an action rule for lookup purposes
@@ -23,8 +22,8 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public ActionRuleKey(S source)
         {
-            this.Source = source;
-            this.Hash = source.GetHashCode();
+            Source = source;
+            Hash = source.GetHashCode();
         }
 
         public readonly int Hash {get;}

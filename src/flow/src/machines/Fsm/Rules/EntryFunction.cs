@@ -9,7 +9,7 @@ namespace Z0.Machines
     using System.Collections.Generic;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a set of rules that define actions associated with state entry
@@ -37,6 +37,4 @@ namespace Z0.Machines
         Option<IFsmRule> IFsmFunction.Rule(IRuleKey key)
             => Rule(key).TryMap(r => r as IFsmRule);
     }
-
- 
 }

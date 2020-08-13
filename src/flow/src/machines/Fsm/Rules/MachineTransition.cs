@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -10,7 +10,7 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Encapsulates the set of all rules (input : E, source : S) -> target : S that define state machine transitions

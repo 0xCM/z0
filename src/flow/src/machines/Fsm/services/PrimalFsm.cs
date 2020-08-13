@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {        
     using System;
     using System.Linq;
@@ -11,6 +11,8 @@ namespace Z0.Machines
     using System.Collections.Concurrent;
     using System.Threading.Tasks;
 
+    using Z0.Machines;
+    
     public static class PrimalFsm
     {
         /// <summary>

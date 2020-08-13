@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -10,7 +10,7 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a partial state machine output function of the form 
@@ -53,5 +53,4 @@ namespace Z0.Machines
         Option<IFsmRule> IFsmFunction.Rule(IRuleKey key)
             => Rule(key).TryMap(r => r as IFsmRule);
     }
-
 }

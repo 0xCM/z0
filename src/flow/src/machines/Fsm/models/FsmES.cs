@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,9 @@ namespace Z0.Machines
     using System.Diagnostics;
 
     using static Konst;
-    using static Memories;
+    using static z;
+
+    using Z0.Machines;
 
     /// <summary>
     /// Defines a state machine with minimal feature-set
@@ -49,7 +51,7 @@ namespace Z0.Machines
         public ulong ReceiptCount {get; private set;}
 
         /// <summary>
-        /// The number of state transtions that have occurred
+        /// The number of state transitions that have occurred
         /// </summary>
         public uint TransitionCount {get; private set;}
 
@@ -81,22 +83,22 @@ namespace Z0.Machines
         /// <summary>
         /// Fires when input is received
         /// </summary>
-        public event InputReceipt<E> InputReceipt;
+        public event FsmFx.InputReceipt<E> InputReceipt;
 
         /// <summary>
         /// Fires when a transition occurs from one state to a different state
         /// </summary>
-        public event Transitioned<S> Transitioned;
+        public event FsmFx.Transitioned<S> Transitioned;
 
         /// <summary>
         /// Fires when the machine has reached endstate
         /// </summary>
-        public event Completed Completed;
+        public event FsmFx.Completed Completed;
 
         /// <summary>
         /// Fires when an error is trapped
         /// </summary>
-        public event MachineError Oops;
+        public event FsmFx.MachineError Oops;
 
         /// <summary>
         /// Specifies the events that the machine can accept
@@ -246,7 +248,7 @@ namespace Z0.Machines
         void OnReceipt(E input)        
         {
             ReceiptCount++;
-            Try(() => InputReceipt?.Invoke(input));
+            Option.Try(() => InputReceipt?.Invoke(input));
         }
 
         void OnWarning(AppMsg msg)
@@ -258,7 +260,7 @@ namespace Z0.Machines
         {       
             Error = e;
                        
-            Try(() => Oops?.Invoke(e));
+            Option.Try(() => Oops?.Invoke(e));
 
             OnComplete(false);
         }                     

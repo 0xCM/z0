@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,43 +10,42 @@ namespace Z0.Data
     using static Konst;
     
     using NBK = NumericBaseKind;
-    
+        
     /// <summary>
     /// Defines a (boxed) numeric literal relative to a specified base
     /// </summary>
-    public readonly struct NumericLiteral<T> : INumericLiteral<NumericLiteral<T>,T>
-        where T : unmanaged
+    public readonly struct NumericLiteral : INumericLiteral<NumericLiteral>
     {
         public string Name {get;}
         
-        public T Data {get;}
+        public object Data {get;}
 
         public string Text {get;}
 
         public NBK Base {get;}
         
         [MethodImpl(Inline)]
-        public static NumericLiteral<T> Base2(string Name, T Value, string Text)
-            => new NumericLiteral<T>(Name, Value, Text, NBK.Base2);
+        public static NumericLiteral Base2(string Name, object Value, string Text)
+            => new NumericLiteral(Name, Value, Text, NBK.Base2);
 
         [MethodImpl(Inline)]
-        public static NumericLiteral<T> Base10(string Name, T data, string Text)
-            => new NumericLiteral<T>(Name, data, Text, NBK.Base10);
+        public static NumericLiteral Base10(string Name, object Value, string Text)
+            => new NumericLiteral(Name, Value, Text, NBK.Base10);
 
         [MethodImpl(Inline)]
-        public static NumericLiteral<T> Base16(string Name, T data, string Text)
-            => new NumericLiteral<T>(Name, data, Text, NBK.Base16);
+        public static NumericLiteral Base16(string Name, object Value, string Text)
+            => new NumericLiteral(Name, Value, Text, NBK.Base16);
 
         [MethodImpl(Inline)]
-        public static NumericLiteral<T> Define(string Name, T data, string Text, NBK @base)
-            => new NumericLiteral<T>(Name,data, Text, @base);
+        public static NumericLiteral Define(string Name, object Value, string Text, NBK NumericBase)
+            => new NumericLiteral(Name,Value,Text,NumericBase);
 
         [MethodImpl(Inline)]
-        internal NumericLiteral(string name, T data, string text, NBK @base)
+        public NumericLiteral(string name, object data, string text, NBK @base)
         {
             Name = name;
-            Data = data;
-            Text = text ?? data.ToString();
+            Data = data ?? 0;
+            Text = text ?? Data.ToString();
             Base = @base;
         }        
 
@@ -61,11 +60,11 @@ namespace Z0.Data
             [MethodImpl(Inline)]
             get => !IsEmpty;
         }
-
+        
         public bool HasValue
         {
             [MethodImpl(Inline)]
-            get => !Data.Equals(default);
+            get => Data != null && Data.GetType() != typeof(string);
         }
 
         public Type SystemType 
@@ -80,7 +79,7 @@ namespace Z0.Data
             get => Type.GetTypeCode(SystemType);
         }
 
-        public NumericLiteral<T> Zero
+        public NumericLiteral Zero
         {
             [MethodImpl(Inline)]
             get => Empty;
@@ -98,10 +97,10 @@ namespace Z0.Data
             => Format();
 
         [MethodImpl(Inline)]
-        public bool Equals(NumericLiteral<T> src)            
+        public bool Equals(NumericLiteral src)            
             => object.Equals(Data, src.Data);        
 
-        public static NumericLiteral<T> Empty 
-            => new NumericLiteral<T>(string.Empty, default, string.Empty, NBK.None);       
+        public static NumericLiteral Empty 
+            => new NumericLiteral(string.Empty, string.Empty, string.Empty, NBK.None);
     }
 }

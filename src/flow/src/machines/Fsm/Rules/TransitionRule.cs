@@ -2,13 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Defines state transition rule of the form (input : E, source : S) -> target : S 
@@ -37,7 +36,7 @@ namespace Z0.Machines
         }
 
         /// <summary>
-        /// The transiion event trigger
+        /// The transition event trigger
         /// </summary>
         public E Trigger {get;}
 

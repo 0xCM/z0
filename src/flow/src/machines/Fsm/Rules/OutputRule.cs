@@ -2,13 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Specifies a state machine rule of the form (input:E, source:S) -> output:O
@@ -75,5 +74,4 @@ namespace Z0.Machines
         public readonly override string ToString() 
             => Format();
     }
-
 }

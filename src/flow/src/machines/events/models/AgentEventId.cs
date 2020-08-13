@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Defines logical event identity
     /// </summary>
-    public readonly struct EventIdentity
+    public readonly struct AgentEventId
     {
         /// <summary>
         /// The originating server
@@ -40,11 +40,11 @@ namespace Z0
         /// <param name="time">The time of occurrence</param>
         /// <param name="kind">The kind of event that occurred</param>
         [MethodImpl(Inline)]
-        public static EventIdentity define(uint server, uint agent, ulong time, ulong kind)
-            => new EventIdentity(server, agent, time, kind);
+        public static AgentEventId define(uint server, uint agent, ulong time, ulong kind)
+            => new AgentEventId(server, agent, time, kind);
 
         [MethodImpl(Inline)]
-        public EventIdentity(uint server, uint agent, ulong ts, ulong kind)
+        public AgentEventId(uint server, uint agent, ulong ts, ulong kind)
         {
             ServerId = server;
             AgentId = agent;
@@ -61,7 +61,7 @@ namespace Z0
         /// <summary>
         /// Specifies the spacetime event origin
         /// </summary>
-        public EventOrigin Origin
+        public AgentEventOrigin Origin
         {
             [MethodImpl(Inline)]
             get => (Location, Timestamp);

@@ -7,7 +7,6 @@ namespace Z0.Machines
     using System;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Defines common messages that are issued during setup/execution

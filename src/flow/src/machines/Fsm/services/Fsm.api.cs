@@ -2,13 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
+    using Z0.Machines;
 
     public static class Fsm
     {
@@ -99,11 +100,11 @@ namespace Z0.Machines
         /// <param name="id">Identifies the machine within the context of the executing process</param>
         /// <param name="s0">The ground-state</param>
         /// <param name="sZ">The end-state</param>
-        /// <param name="f">The transiion function</param>
+        /// <param name="f">The transition function</param>
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         public static Fsm<E,S> Machine<E,S>(string id, IFsmContext context, S s0, S sZ, MachineTransition<E,S> f)
-            =>  new Fsm<E, S>(id, context, s0, sZ, f);
+            =>  new Fsm<E,S>(id, context, s0, sZ, f);
 
         /// <summary>
         /// Defines an output rule key

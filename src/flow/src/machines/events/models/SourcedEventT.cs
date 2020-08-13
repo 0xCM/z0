@@ -17,7 +17,7 @@ namespace Z0
     public readonly struct SourcedEvent<T>
         where T : unmanaged
     {
-        public readonly EventIdentity EventId;
+        public readonly AgentEventId EventId;
 
         /// <summary>
         /// Data specific to an event class
@@ -36,7 +36,7 @@ namespace Z0
             => new SourcedEvent(src.EventId);
 
         [MethodImpl(Inline)]
-        public SourcedEvent(EventIdentity id, T data)
+        public SourcedEvent(AgentEventId id, T data)
         {
             EventId = id;
             Payload = data;

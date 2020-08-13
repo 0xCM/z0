@@ -11,6 +11,7 @@ namespace Z0.Machines
 
     using static Konst;
     using static ObserverTrace;
+    using Z0.Machines;
 
     public static class FsmX
     {

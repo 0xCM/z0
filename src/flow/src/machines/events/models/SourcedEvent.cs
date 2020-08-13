@@ -14,19 +14,19 @@ namespace Z0
     /// </summary>
     public readonly struct SourcedEvent
     {
-        public readonly EventIdentity EventId;
+        public readonly AgentEventId EventId;
 
         [MethodImpl(Inline)]
-        public static SourcedEvent define(EventIdentity id)
+        public static SourcedEvent define(AgentEventId id)
             => new SourcedEvent(id);
 
         [MethodImpl(Inline)]
-        public static SourcedEvent<T> define<T>(EventIdentity id, T data)
+        public static SourcedEvent<T> define<T>(AgentEventId id, T data)
             where T : unmanaged
             => new SourcedEvent<T>(id, data);
 
         [MethodImpl(Inline)]
-        public SourcedEvent(EventIdentity id)
+        public SourcedEvent(AgentEventId id)
             => EventId = id;
     }
 }

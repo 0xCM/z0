@@ -65,10 +65,6 @@ namespace Z0
             StatusLog.Dispose();
         }
 
-        [MethodImpl(Inline)]
-        public CorrelationToken<ulong> Correlate()
-            => new CorrelationToken<ulong>((ulong)z.atomic(ref Correlation));
-
         public void Run()
             => Executor();
     }
