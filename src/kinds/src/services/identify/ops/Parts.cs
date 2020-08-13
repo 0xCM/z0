@@ -16,17 +16,72 @@ namespace Z0
         /// Extracts an index-identified segmented identity part from an operation identity
         /// </summary>
         /// <param name="src">The source identity</param>
-        /// <param name="partidx">The 0-based part index</param>
-        public static Option<SegmentedIdentity> segmented(OpIdentity src, int partidx)
-            => from p in Z0.Identify.Part(src, partidx)
-                from s in SegmentedIdentity.identify(p)
+        /// <param name="index">The 0-based part index</param>
+        public static Option<SegmentedIdentity> segmented(OpIdentity src, int index)
+            => from p in Part(src, index)
+                from s in identify(p)
                 select s;
 
-        public static Option<IdentityPart> Part(OpIdentity src, int partidx)
+        public static Option<SegmentedIdentity> identify(IdentityPart part)
+        {
+            if(part.IsSegment && TryParse(part.Identifier, out var seg))
+                return seg;
+            else
+                return z.none<SegmentedIdentity>();
+        }
+
+        public static bool TryParse(string src, out SegmentedIdentity dst)
+        {
+            dst = default;
+            if(src.Length == 0)
+                return false;
+
+            var indicator = TypeIndicator.Define(src[0]);
+            var start = 0;
+            for(var i=0; i<src.Length; i++)
+            {
+                if(char.IsDigit(src[i]))
+                {
+                    start = i;
+                    break;
+                }
+            }
+            
+            var parts = text.split(text.slice(src,start), IDI.SegSep);
+            if(parts.Length == 2)
+            {
+                var part0 = parts[0];
+                var part1 = parts[1];
+
+                var sText = part0[0] 
+                    == IDI.Generic 
+                    ? text.slice(part0, 1, part0.Length - 1) 
+                    : part0;
+
+                if(uint.TryParse(sText, out var n))
+                {
+                    if(Enum.IsDefined(typeof(FixedWidth),n))
+                    {
+                        var bText = text.slice(part1,0, part1.Length - 1);                        
+                        if(uint.TryParse(bText, out var by))
+                        {                                
+                            if(Enum.IsDefined(typeof(FixedWidth), by))
+                            {
+                                dst = SegmentedIdentity.identify(indicator, (FixedWidth)n, ((NumericWidth)by).ToNumericKind((NumericIndicator)part1.Last()));
+                                return true;
+                            }
+                        }
+                    }                       
+                }
+            }
+            return false;
+        }
+
+        public static Option<IdentityPart> Part(OpIdentity src, int index)
         {
             var parts = Parts(src).ToArray();
-            if(partidx <= parts.Length - 1)
-                return parts[partidx];
+            if(index <= parts.Length - 1)
+                return parts[index];
             else
                 return z.none<IdentityPart>();
         }

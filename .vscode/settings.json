@@ -3,11 +3,13 @@
         "Disasm",
         "Dynexus",
         "Dynops",
+        "EFLAGS",
         "Intrinsics",
         "Ints",
         "Konst",
         "Nats",
         "Nullary",
+        "RFLAGS",
         "Unignored",
         "dvec",
         "fxlabel",
@@ -21,6 +23,7 @@
         "perefs",
         "vbsll",
         "vbytes",
+        "vcell",
         "vinflate",
         "vload"
     ]

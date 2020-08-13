@@ -274,39 +274,18 @@ namespace Z0
         /// </summary>
         Seg512x64f = W512 | Float64,         
 
-        /// <summary>
-        /// Redeclaration
-        /// </summary>
         W8 = W.W8,
 
-        /// <summary>
-        /// Redeclaration
-        /// </summary>
         W16 = W.W16,
 
-        /// <summary>
-        /// Redeclaration
-        /// </summary>
         W32 = W.W32,
 
-        /// <summary>
-        /// Redeclaration
-        /// </summary>
         W64 = W.W64,
 
-        /// <summary>
-        /// Redeclaration
-        /// </summary>
         W128 = W.W128,
 
-        /// <summary>
-        /// Redeclaration
-        /// </summary>
         W256 = W.W256,
 
-        /// <summary>
-        /// Redeclaration
-        /// </summary>
         W512 = W.W512,
 
         /// <summary>

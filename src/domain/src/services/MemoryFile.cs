@@ -35,12 +35,22 @@ namespace Z0
             => new MemoryFile(path);
         
         [MethodImpl(Inline)]
-        public static MemoryFile resbytes()
+        public static MemoryFile resbundle()
             => open(AppPaths.Default.ResBytes.Name);
         
         [MethodImpl(Inline), Op]
         public Span<byte> Read(MemoryAddress src, uint size)
-            => z.cover(Base, size);
+            => z.cover(src + Base, size);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public ref readonly T Read<T>(MemoryAddress src)
+            where T : struct
+                => ref first(cover<T>(src + Base, 1));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public ReadOnlySpan<T> Read<T>(MemoryAddress src, uint count)
+            where T : struct
+                => cover<T>(src + Base, count);
 
         public MemoryFile(string path)
         {

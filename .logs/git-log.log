@@ -7514,3 +7514,95 @@
  create mode 100644 src/machine/src/workflows/workers/AsmRecordHandler.cs
  create mode 100644 src/tools/src/Tooling.cs
  delete mode 100644 src/tools/src/Tools.cs
+[master c42cecc0c] .
+ 155 files changed, 2249 insertions(+), 617 deletions(-)
+ create mode 100644 src/capture/src/steps/actors/EmitAsmTables.cs
+ create mode 100644 src/domain/src/asm/models/AsmTableSeg.cs
+ create mode 100644 src/domain/src/files/AppFilePaths.cs
+ rename src/domain/src/files/kinds/{AsmFileKind.cs => Asm.cs} (100%)
+ rename src/domain/src/files/kinds/{CilFileKind.cs => Cil.cs} (100%)
+ create mode 100644 src/domain/src/files/kinds/Cs.cs
+ rename src/domain/src/files/kinds/{CsvFileKind.cs => Csv.cs} (100%)
+ rename src/domain/src/files/kinds/{DllFileKind.cs => Dll.cs} (100%)
+ rename src/domain/src/files/kinds/{DocFileKind.cs => Doc.cs} (100%)
+ rename src/domain/src/files/kinds/{ExeFileKind.cs => Exe.cs} (100%)
+ rename src/domain/src/files/kinds/{HexFileKind.cs => Hex.cs} (100%)
+ rename src/domain/src/files/kinds/{JsonFileKind.cs => Json.cs} (100%)
+ rename src/domain/src/files/kinds/{ParsedFileKind.cs => PCsv.cs} (100%)
+ rename src/domain/src/files/kinds/{TxtFileKind.cs => Txt.cs} (100%)
+ rename src/domain/src/files/kinds/{ExtractFileKind.cs => XCsv.cs} (100%)
+ rename src/domain/src/files/kinds/{XmlFileKind.cs => Xml.cs} (100%)
+ rename src/domain/src/files/models/objects/{Extension.cs => FileExt.cs} (78%)
+ create mode 100644 src/domain/src/services/ArrayBuilderT.cs
+ create mode 100644 src/flow/src/api/Flow.cs
+ create mode 100644 src/flow/src/api/ops/actor.cs
+ rename src/flow/src/{services => api}/ops/app.cs (100%)
+ rename src/flow/src/{services => api}/ops/archive.cs (100%)
+ rename src/flow/src/{services => api}/ops/archived.cs (100%)
+ rename src/flow/src/{services => api}/ops/broker.cs (99%)
+ rename src/flow/src/{services => api}/ops/caller.cs (100%)
+ rename src/flow/src/{services => api}/ops/configure.cs (100%)
+ rename src/flow/src/{services => api}/ops/context.cs (100%)
+ rename src/flow/src/{services => api}/ops/created.cs (51%)
+ rename src/flow/src/{services => api}/ops/data.cs (100%)
+ rename src/flow/src/{services => api}/ops/delimit.cs (100%)
+ rename src/flow/src/{services => api}/ops/dispatcher.cs (100%)
+ rename src/flow/src/{services => api}/ops/error.cs (74%)
+ rename src/flow/src/{services => api}/ops/evid.cs (100%)
+ rename src/flow/src/{services => api}/ops/flow.cs (100%)
+ rename src/flow/src/{services => api}/ops/format.cs (100%)
+ rename src/flow/src/{workers/TableWorkers.cs => api/ops/index.cs} (58%)
+ create mode 100644 src/flow/src/api/ops/indices.cs
+ rename src/flow/src/{services => api}/ops/log.cs (100%)
+ rename src/flow/src/{services => api}/ops/model.cs (100%)
+ rename src/flow/src/{services => api}/ops/origin.cs (100%)
+ rename src/flow/src/{services/Flow.cs => api/ops/patterns.cs} (73%)
+ create mode 100644 src/flow/src/api/ops/positions.cs
+ rename src/flow/src/{services => api}/ops/processed.cs (100%)
+ rename src/flow/src/{services => api}/ops/processing.cs (100%)
+ rename src/flow/src/{services => api}/ops/processor.cs (70%)
+ rename src/flow/src/{services => api}/ops/ran.cs (100%)
+ rename src/flow/src/{services => api}/ops/runner.cs (91%)
+ rename src/flow/src/{services => api}/ops/running.cs (100%)
+ rename src/flow/src/{services => api}/ops/selector.cs (100%)
+ rename src/flow/src/{services => api}/ops/selectors.cs (100%)
+ rename src/flow/src/{services => api}/ops/settings.cs (66%)
+ create mode 100644 src/flow/src/api/ops/sink.cs
+ rename src/flow/src/{services => api}/ops/slot.cs (100%)
+ rename src/flow/src/{services => api}/ops/source.cs (98%)
+ rename src/flow/src/{services => api}/ops/status.cs (70%)
+ rename src/flow/src/{services => api}/ops/step.cs (55%)
+ rename src/flow/src/{services => api}/ops/termsink.cs (100%)
+ rename src/flow/src/{services => api}/ops/uri.cs (100%)
+ rename src/flow/src/{services => api}/ops/warn.cs (100%)
+ create mode 100644 src/flow/src/contracts/ITableSpan.cs
+ create mode 100644 src/flow/src/events/ActorCreated.cs
+ create mode 100644 src/flow/src/events/ActorFinished.cs
+ delete mode 100644 src/flow/src/literals/FormatAtoms.cs
+ delete mode 100644 src/flow/src/literals/FormatLiterals.cs
+ create mode 100644 src/flow/src/models/TableSpanT.cs
+ create mode 100644 src/flow/src/models/TableSpanTI.cs
+ create mode 100644 src/flow/src/models/TableSpans.cs
+ rename src/{konst/src/events => flow/src}/models/WfActor.cs (100%)
+ rename src/{konst/src/events => flow/src}/models/WfStepId.cs (53%)
+ create mode 100644 src/flow/src/models/WfStepIdT.cs
+ create mode 100644 src/flow/src/models/WfWorker.cs
+ rename src/{run => flow}/src/steps/ListFormatPatterns.cs (58%)
+ rename src/flow/src/{abstractions => system}/WfEventWriter.cs (100%)
+ rename src/flow/src/workers/{TableMap.cs => WfTableMap.cs} (83%)
+ rename src/flow/src/workers/{TableMapTY.cs => WfTableMapTY.cs} (82%)
+ rename src/flow/src/workers/{TableMaps.cs => WfTableMaps.cs} (69%)
+ create mode 100644 src/flow/src/workers/WfTableSink.cs
+ create mode 100644 src/flow/src/workers/WfTableSinks.cs
+ rename src/konst/src/app/{models/AppEnv.cs => AppBase.cs} (69%)
+ create mode 100644 src/konst/src/app/models/AppPathConfig.cs
+ create mode 100644 src/konst/src/app/models/AppPathSetting.cs
+ create mode 100644 src/konst/src/app/models/AppPathSettings.cs
+ rename src/konst/src/app/{ => models}/ExecutablePart.cs (100%)
+ delete mode 100644 src/konst/src/archives/services/PartFilePaths.cs
+ create mode 100644 src/konst/src/asci.literals/AsciStringTables.cs
+ create mode 100644 src/konst/src/events/contracts/IWfDataEvent.cs
+ create mode 100644 src/konst/src/tables/models/FormatPatterns.Literals.cs
+ delete mode 100644 src/machine/src/workflows/workers/AsmRecordHandler.cs
+ create mode 100644 src/run/src/steps/AsmTableSink.cs
+ create mode 100644 src/run/src/steps/AsmTableSteps.cs

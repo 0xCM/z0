@@ -20,6 +20,25 @@ namespace Z0
                 => new PolyStream<T>(kind,src);
 
         /// <summary>
+        /// Produces a random stream of bytes
+        /// </summary>
+        /// <param name="random">The random source</param>
+        public static IRngStream<byte> bytes(IPolyrand random)
+        {
+            IEnumerable<byte> produce()
+            {
+                while(true)
+                {
+                    var bytes = BitConverter.GetBytes(random.Next<ulong>());
+                    for(var i = 0; i< bytes.Length; i++)
+                        if(i == 0)
+                            yield return bytes[i];
+                }
+            }
+            return PolyStreams.create(produce(), random.RngKind);
+        }
+        
+        /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source
         /// </summary>
         /// <param name="src">The point source</param>

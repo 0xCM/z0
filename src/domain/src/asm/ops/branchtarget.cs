@@ -13,7 +13,7 @@ namespace Z0
     using static Asm.OpKind;
     
     partial struct asm
-    {        
+    {       
         [Op]
         public static AsmBranchTarget branchTarget(Instruction src, int index)
         {

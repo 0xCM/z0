@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct PrimalIdentity : IIdentifiedType<PrimalIdentity>
     {
-        public static PrimalIdentity Empty => new PrimalIdentity(string.Empty);
+        public static PrimalIdentity Empty => new PrimalIdentity(EmptyString);
 
         public string Identifier {get;}            
 

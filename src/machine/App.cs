@@ -21,18 +21,6 @@ namespace Z0
             Ct = CorrelationToken.define(PartId.Machine);
         }
         
-        void ReadRes()
-        {
-            var map = MemoryFile.resbytes();
-            var @base = map.BaseAddress;
-            var data = map.Read(@base, 16);
-            var info = map.FileInfo;
-            term.print(info.Length);
-
-            term.print(@base);
-            term.print(data.Length);
-            term.print(new BinaryCode(data.ToArray()));
-        }
         
         public override void RunShell(params string[] args)
             => Control.run(Context,args);

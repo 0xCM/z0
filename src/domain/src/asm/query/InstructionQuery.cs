@@ -26,16 +26,6 @@ namespace Z0.Asm
 			}
 		}    
 
-        public OpKind[] kinds<T>(T src)
-            where T : IInstructionInfo
-        {
-            var count = src.OpCount;
-            var dst = new OpKind[src.OpCount];
-            for(var i=0; i<count; i++)
-                dst[i] = OperandKind(src,i);
-            return dst;
-        }
-
         [MethodImpl(Inline), Op]
         public AsmOperandInfo operand(MemoryAddress @base, Instruction src, int index)
             => new AsmOperandInfo(index, asm.kind(src,index), ImmInfo(src,index),
@@ -75,36 +65,12 @@ namespace Z0.Asm
             return dst;
         }
 
-        [Op]
-        public InstructionInfo details(Instruction src)
-        {
-            return new InstructionInfo
-            {
-                Encoding = src.Encoding,
-                FlowControl = src.FlowControl,
-                IsProtectedMode = src.IsProtectedMode,
-                IsPrivileged = src.IsPrivileged,
-                IsSaveRestoreInstruction = src.IsSaveRestoreInstruction,
-                IsStackInstruction = src.IsStackInstruction,
-                RflagsCleared = src.RflagsCleared,
-                RflagsRead = src.RflagsRead,
-                RflagsWritten = src.RflagsWritten,
-                RflagsModified = src.RflagsModified,
-                RflagsSet = src.RflagsSet,
-                RflagsUndefined = src.RflagsUndefined,
-                UsedMemory =  src.UsedMemory(),
-                UsedRegisters = src.UsedRegisters(),
-                CpuidFeatures = src.CpuidFeatures,
-                Access = src.Access(),
-            };
-        }
-
         /// <summary>
         /// Describes the instructions that comprise a function
         /// </summary>
         /// <param name="src">The source function</param>
         [Op]
-        public AsmInstructionSummary[] summarize(AsmFunction src)
+        public AsmInstructionSummary[] summarize(in AsmFunction src)
         {
             var dst = new AsmInstructionSummary[src.InstructionCount];
             var offset = (ushort)0;
@@ -124,7 +90,7 @@ namespace Z0.Asm
         }
 
         public InstructionInfo Details(Instruction src)
-            => details(src);
+            => asm.details(src);
 
         public AsmOperandInfo[] Operands(MemoryAddress @base, Instruction src)
             => operands(@base,src);
@@ -137,20 +103,6 @@ namespace Z0.Asm
 
 		public OpKind OperandKind(Instruction src, int operand) 
             => asm.kind(src,operand);
-
-		public OpKind OperandKind<T>(T src, int operand) 
-            where T : IInstructionInfo
-        {
-			switch (operand) {
-			case 0: return src.Op0Kind;
-			case 1: return src.Op1Kind;
-			case 2: return src.Op2Kind;
-			case 3: return src.Op3Kind;
-			case 4: return src.Op4Kind;
-			default:
-				throw new ArgumentException($"The operand index {operand} is out of range");
-			}
-		}   
 
         /// <summary>
         /// Describes the instructions that comprise an instruction list

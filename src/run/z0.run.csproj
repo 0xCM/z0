@@ -13,6 +13,7 @@
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Tools)" />
+    <ProjectReference Include="$(Win)" />
 
   </ItemGroup>
   

@@ -32,7 +32,7 @@ namespace Z0.Asm
             => asm.immwidth(src);
         
         [MethodImpl(Inline)]
-        public ulong ExtractImm(Instruction src, int index) 
+        public ulong? ExtractImm(Instruction src, int index) 
             => asm.immval(src,index);
 		
         [MethodImpl(Inline)]

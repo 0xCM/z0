@@ -10,7 +10,7 @@ namespace Z0
     using ID = NumericTypeId;
 
     /// <summary>
-    /// Clasifies system-defined numeric primitive types
+    /// Classifies system-defined numeric primitive types
     /// </summary>
     [Flags]
     public enum NumericKind : uint

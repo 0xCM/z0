@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Linq;
 
     using static Konst;
     using static z;
@@ -14,6 +15,7 @@ namespace Z0
     [ApiHost]
     public readonly struct Segments
     {
+
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe Ref define(ulong location, uint size)
             => new Ref(location, size);

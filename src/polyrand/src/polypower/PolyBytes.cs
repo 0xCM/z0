@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
 
     public static class PolyBytes
     {
@@ -48,25 +46,6 @@ namespace Z0
                     yield return bytes[k];
                 }
             }
-        }
-
-        /// <summary>
-        /// Produces a random stream of bytes
-        /// </summary>
-        /// <param name="random">The random source</param>
-        public static IRngStream<byte> ByteStream(this IPolyrand random)
-        {
-            IEnumerable<byte> produce()
-            {
-                while(true)
-                {
-                    var bytes = BitConverter.GetBytes(random.Next<ulong>());
-                    for(var i = 0; i< bytes.Length; i++)
-                        if(i == 0)
-                            yield return bytes[i];
-                }
-            }
-            return PolyStreams.create(produce(), random.RngKind);
         }
     }
 }

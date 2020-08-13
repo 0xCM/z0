@@ -31,8 +31,8 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> cover<T>(MemoryAddress address, uint count)
-            where T : unmanaged
-                => cover<T>((T*)address, count); 
+            where T : struct
+                => cover<T>((void*)address, count); 
         
         /// <summary>
         /// Reveals the character data identified by a string reference

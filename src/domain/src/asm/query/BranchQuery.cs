@@ -44,6 +44,5 @@ namespace Z0.Asm
         /// <param name="src">The operand classification</param>
         public bool IsBranch(OpKind src)
             => IsNearBranch(src) || IsFarBranch(src);
-
     }  
 }

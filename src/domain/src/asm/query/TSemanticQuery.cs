@@ -44,7 +44,7 @@ namespace Z0.Asm
 		/// </summary>
 		/// <param name="src">The source instruction</param>
 		/// <param name="index">The operand index</param>
-        ulong ExtractImm(Instruction src, int index) 
+        ulong? ExtractImm(Instruction src, int index) 
             => Direct.ExtractImm(src,index);
 
         /// <summary>

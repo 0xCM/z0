@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.IO;
 
     using static Konst;
     
@@ -142,10 +143,14 @@ namespace Z0
         public override string ToString() 
             => Format();
 
+        [MethodImpl(Inline)]
+        public ByteStream Stream()
+            => new ByteStream(this);
+        
         /// <summary>
         /// The canonical zero
         /// </summary>
         public static BinaryCode Empty 
-            => new BinaryCode(Array.Empty<byte>());
+            => new BinaryCode(sys.empty<byte>());
     }
 }

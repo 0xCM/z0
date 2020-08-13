@@ -54,26 +54,53 @@ namespace Z0
 
         }
 
-        public void Run()
-        {
-            using var s0 = new ListFormatPatterns(State.Wf, typeof(FormatPatterns));
-            s0.Run();
 
+        void Status<T>(T message)
+        {
+            Wf.Status(Actor, message, Ct);
+
+        }
+        void ReadRes()
+        {
+            var map = MemoryFile.resbundle();
+            var @base = map.BaseAddress;
+            var sig = map.Read(@base, 2).AsUInt16();
+            var magic = Z0.Image.PeLiterals.Magical;
+            if(magic== sig[0])
+                Status("Magic lives!");
+
+            //var info = map.FileInfo;
+            // Status(info.Length);
+            // Status(@base);
+            // Status(data.Length);
+            // Status(new BinaryCode(data.ToArray()));
+        }
+
+
+        void ListCaptureFiles()
+        {
             var paths = AppBase.paths();
             var files = AppFilePaths.create(paths, PartId.Control);
 
-            Wf.Status(Actor, paths.Logs, Ct);
-            Wf.Status(Actor, paths.Archives, Ct);
-            Wf.Status(Actor, paths.BuildPub, Ct);
-            Wf.Status(Actor, paths.BuildStage, Ct);
+            Status(paths.Logs);
+            Status(paths.Archives);
+            Status(paths.BuildPub);
+            Status(paths.BuildStage);
 
-            Wf.Status(Actor, files.CaptureRoot, Ct);
+            Status(files.CaptureRoot);
 
             foreach(var file in FileSystem.dir(files.AsmDir))
             {
                 Wf.Status(Actor, file, Ct);
             }
-            
+
+        }
+        public void Run()
+        {
+            using var s0 = new ListFormatPatterns(State.Wf, typeof(FormatPatterns));
+            s0.Run();
+
+            ReadRes();
         
 
             term.print(TableIndex.AsmTAddressingModRm32);            

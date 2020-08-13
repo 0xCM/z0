@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [Op]
-        public static ulong immval(Instruction src, int index) 
+        public static ulong? immval(Instruction src, int index) 
         {
 			return kind(src, index) switch
             {
@@ -28,7 +28,7 @@ namespace Z0
 			    Immediate8to32 => (ulong)src.Immediate8to32,
 			    Immediate8to64 => (ulong)src.Immediate8to64,
 			    Immediate32to64 => (ulong)src.Immediate32to64,
-			    _ => throw new ArgumentException($"Op{index} isn't an immediate operand", nameof(index))
+			    _ => null
 			};
 		}
     }
