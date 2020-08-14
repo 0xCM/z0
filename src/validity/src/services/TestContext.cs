@@ -242,13 +242,13 @@ namespace Z0
         protected void CheckAction(Action f, string name)
             => Context.CheckAction(f,name);         
 
-        protected void Notify(string msg, AppMsgKind? severity = null)
+        protected void Notify(string msg, MessageKind? severity = null)
             => Queue.Notify(msg, severity);
 
         protected void Trace(object msg, [Caller] string caller = null)
             => Queue.Trace(msg, GetType(), caller);
 
-        protected void Trace(string title, object msg, AppMsgColor color, [Caller] string caller = null)
+        protected void Trace(string title, object msg, MessageFlair color, [Caller] string caller = null)
             => Queue.Trace(title, msg, color, GetType(), caller);
 
         protected void Trace(string title, string msg, [Caller] string caller = null)

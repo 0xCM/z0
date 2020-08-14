@@ -9,10 +9,8 @@ namespace Z0
     using System.Reflection;
     
     using static Konst;
-    using static Flow;
     using static EmitDatasetsStep;
     
-    [Step(Kind)]
     public ref partial struct EmitDatasets  
     {
         readonly IWfContext Wf;
@@ -26,7 +24,7 @@ namespace Z0
             Ct = ct;
             Wf = context;
             Recapture = false;
-            Wf.Initialized(WorkerName, Ct);
+            Wf.Initialized(StepName, Ct);
         }
         
         void Run(EmitProjectDocsStep kind)

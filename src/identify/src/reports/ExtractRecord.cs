@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     
-    using Z0.Data;
-    
     using static Konst;
 
     using F = ExtractField;
@@ -57,7 +55,7 @@ namespace Z0
             var len = parser.Parse(fields[2]).ValueOrDefault();            
             var uri = OpUriParser.Service.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
-            var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed).ToArray();
+            var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed).ToArray();
             var extract = new LocatedCode(address, data);
             return new R(seq, address, len, uri, sig, extract);
         }

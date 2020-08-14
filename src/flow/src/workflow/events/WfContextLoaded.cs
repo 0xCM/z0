@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
     using static z;
 
     [Event]
@@ -21,10 +21,10 @@ namespace Z0
 
         public WfActor Actor {get;}
                         
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
                                 
         [MethodImpl(Inline)]
-        public WfContextLoaded(WfActor actor, CorrelationToken ct, AppMsgColor flair = Created)
+        public WfContextLoaded(WfActor actor, CorrelationToken ct, MessageFlair flair = Created)
         {
             EventId = z.evid(EventName, ct);
             Actor = actor;

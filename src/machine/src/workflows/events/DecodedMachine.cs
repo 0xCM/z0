@@ -13,7 +13,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     [Event]
     public readonly struct DecodedMachine : IWfEvent<DecodedMachine>
@@ -34,8 +34,8 @@ namespace Z0
             Data = src;
         }
         
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;
+        public MessageFlair Flair 
+            => MessageFlair.Cyan;
                 
         public IEnumerable<LocatedInstruction> Instructions 
             => Data.SelectMany(x => x.Located);

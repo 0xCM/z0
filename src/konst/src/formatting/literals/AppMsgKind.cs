@@ -7,66 +7,66 @@ namespace Z0
     /// <summary>
     /// Classifier for application messages
     /// </summary>
-    public enum AppMsgKind
+    public enum MessageKind
     {   
         /// <summary>
         /// Boring
         /// </summary>
-        Unspecified = AppMsgColor.Unspecified,
+        Unspecified = MessageFlair.Unspecified,
         
         /// <summary>
         /// Identifies chatty content
         /// </summary>
-        Babble = AppMsgColor.DarkGray,
+        Babble = MessageFlair.DarkGray,
 
         /// <summary>
         /// Identifies iformational content
         /// </summary>
-        Info = AppMsgColor.Green,
+        Info = MessageFlair.Green,
         
         /// <summary>
         /// Identifies warning content
         /// </summary>
-        Warning = AppMsgColor.Yellow,
+        Warning = MessageFlair.Yellow,
 
         /// <summary>
         /// Identifies error content
         /// </summary>
-        Error = AppMsgColor.Red,
+        Error = MessageFlair.Red,
         
         /// <summary>
         /// Identifies benchmark/timing result
         /// </summary>
-        Benchmark = AppMsgColor.Magenta,
+        Benchmark = MessageFlair.Magenta,
 
         /// <summary>
         /// Dark blue foreground 
         /// </summary>
-        HiliteBD = AppMsgColor.DarkBlue,
+        HiliteBD = MessageFlair.DarkBlue,
 
         /// <summary>
         /// Light blue foreground 
         /// </summary>
-        HiliteBL = AppMsgColor.Blue,
+        HiliteBL = MessageFlair.Blue,
 
         /// <summary>
         /// Dark cyan foreground 
         /// </summary>
-        HiliteCD = AppMsgColor.DarkCyan,
+        HiliteCD = MessageFlair.DarkCyan,
 
         /// <summary>
         /// Cyan foreground 
         /// </summary>
-        HiliteCL = AppMsgColor.Cyan,
+        HiliteCL = MessageFlair.Cyan,
 
         /// <summary>
         /// Dark magenta foreground
         /// </summary>
-        HiliteMD = AppMsgColor.DarkMagenta,
+        HiliteMD = MessageFlair.DarkMagenta,
 
         /// <summary>
         /// Magenta foreground
         /// </summary>
-        HiliteML = AppMsgColor.Magenta,
+        HiliteML = MessageFlair.Magenta,
     }
 }

@@ -15,10 +15,10 @@ namespace Z0
         
         public string Data {get;}
         
-        public AppMsgColor Flair {get;}        
+        public MessageFlair Flair {get;}        
 
         [MethodImpl(Inline)]
-        public AppEvent(EventId id, string data, AppMsgColor flair)
+        public AppEvent(EventId id, string data, MessageFlair flair)
         {
             Id = id;
             Data = data;

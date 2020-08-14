@@ -136,7 +136,7 @@ namespace Z0
             var cpuTxt = $"cputime = {totalCpu}, ";
             var stateTxt = $"current state = {state}";            
             var msgText = $"({coreTxt}{cycleTxt}{cpuTxt}{stateTxt}";
-            return AppMsg.Colorize(msgText, AppMsgColor.Magenta);
+            return AppMsg.Colorize(msgText, MessageFlair.Magenta);
         }    
     }
 }

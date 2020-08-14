@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     [Event]
     public readonly struct IndexedEncoded : IWfEvent<IndexedEncoded>
@@ -23,8 +23,8 @@ namespace Z0
 
         public readonly EncodedParts Index;
         
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;                                 
+        public MessageFlair Flair 
+            => MessageFlair.Cyan;                                 
 
         [MethodImpl(Inline)]
         public IndexedEncoded(string worker, EncodedParts index, CorrelationToken ct)

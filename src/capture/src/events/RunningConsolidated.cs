@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     public readonly struct RunningConsolidated : IWfEvent<RunningConsolidated>
     {            

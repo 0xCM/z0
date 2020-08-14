@@ -15,8 +15,8 @@ namespace Z0
         
         public AppMsgData Data {get;}       
                          
-        public AppMsgColor Flair 
-            => AppMsgColor.Red;
+        public MessageFlair Flair 
+            => MessageFlair.Red;
         
         public string Format()
             => Data.Format();

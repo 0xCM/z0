@@ -12,12 +12,12 @@ namespace Z0
         void Deposit(IEnumerable<IAppMsg> msg)
             => z.iter(msg, Deposit);        
 
-        void Notify(string msg, AppMsgKind? kind = null)
+        void Notify(string msg, MessageKind? kind = null)
             => Deposit(AppMsg.NoCaller(msg, kind));
 
         void NotifyConsole(IAppMsg msg)
         {
-            if(msg.Kind == AppMsgKind.Error)
+            if(msg.Kind == MessageKind.Error)
                 term.print(msg);
             else
                 term.print(msg, msg.Color);

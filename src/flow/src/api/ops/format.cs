@@ -9,14 +9,10 @@ namespace Z0
     using System.Text;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     partial struct Flow    
     {
-        [MethodImpl(Inline), Op]
-        public static string format(in WfCaller src)
-            => src.Format();
-
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string format<T>(T content)        
             => text.format(Slot0, content);

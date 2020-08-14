@@ -76,7 +76,7 @@ namespace Z0
             }
             else
             {
-                msg = AppMsg.Colorize("Nothing there", AppMsgColor.Gray);
+                msg = AppMsg.Colorize("Nothing there", MessageFlair.Gray);
                 return true;
             }
         }

@@ -12,7 +12,6 @@ namespace Z0
 
     using static z;
         
-    [Step(WfStepKind.EmitCilDatasets)]
     public ref struct EmitCilDatasets
     {
         public readonly FolderPath TargetDir;
@@ -36,12 +35,12 @@ namespace Z0
             PartCount = (uint)parts.Length;
             TargetDir = Wf.ResourceRoot + FolderName.Define(DataFolder);
             EmissionCount = 0;
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {
-            Wf.RunningT(WorkerName, new {PartCount, TargetDir}, Ct);
+            Wf.RunningT(StepName, new {PartCount, TargetDir}, Ct);
 
             foreach(var part in Parts)
             {
@@ -55,12 +54,12 @@ namespace Z0
                 }
             }                                     
 
-            Wf.RanT(WorkerName, new {PartCount, TargetDir, EmissionCount}, Ct);
+            Wf.RanT(StepName, new {PartCount, TargetDir, EmissionCount}, Ct);
         }
 
         uint Emit(IPart part, FilePath dst)
         {
-            Wf.Emitting(WorkerName, DataType, dst, Ct);
+            Wf.Emitting(StepName, DataType, dst, Ct);
 
             var id = part.Id;
             var assembly = part.Owner;                
@@ -73,14 +72,14 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 writer.WriteLine(skip(methods,i).Format()); 
             
-            Wf.Emitted(WorkerName, DataType, count, dst, Ct);
+            Wf.Emitted(StepName, DataType, count, dst, Ct);
 
             return count;
         }             
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }            
     }
 }

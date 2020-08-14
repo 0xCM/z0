@@ -12,7 +12,6 @@ namespace Z0
     
     using static z;
     
-    [Step(Kind)]
     public ref struct EmitImageSummaries
     {
         readonly IWfContext Wf;

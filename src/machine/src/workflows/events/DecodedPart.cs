@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
     using static Flairs;
 
     [Event]
@@ -28,10 +28,10 @@ namespace Z0
 
         public int TotalCount {get;}
         
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public DecodedPart(string actor, PartInstructions src, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
+        public DecodedPart(string actor, PartInstructions src, CorrelationToken ct, MessageFlair flair = MessageFlair.Cyan)
         {
             EventId = WfEventId.define(nameof(DecodedPart), ct);
             ActorName = actor;

@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
 
     public readonly struct SmallHexFormat
     {
         [MethodImpl(Inline)]
         public static string format(ulong src, bool postspec = false)
-            => src.ToString(HexSpecs.SmallHexSpec) + (postspec ? HexSpecs.PostSpec : EmptyString);
+            => src.ToString(HexFormatSpecs.SmallHexSpec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
 
         [MethodImpl(Inline)]
         public static string format(byte src, bool postspec = false)

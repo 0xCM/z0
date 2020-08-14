@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     public readonly struct WfStepCreated : IWfEvent<WfStepCreated>
     {
@@ -21,10 +21,10 @@ namespace Z0
         
         public WfStepId StepId {get;}
 
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepCreated(WfStepId id, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
+        public WfStepCreated(WfStepId id, CorrelationToken ct, MessageFlair flair = MessageFlair.Magenta)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = WfActor.create();
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfStepCreated(Type step, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
+        public WfStepCreated(Type step, CorrelationToken ct, MessageFlair flair = MessageFlair.Magenta)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = WfActor.create();
@@ -42,7 +42,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfStepCreated(in WfActor actor, WfStepId id, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Magenta)
+        public WfStepCreated(in WfActor actor, WfStepId id, CorrelationToken ct, MessageFlair flair = MessageFlair.Magenta)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;

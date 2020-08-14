@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct AppMsgData : ITextual
     {    
         [MethodImpl(Inline)]
-        public static AppMsgData<T> create<T>(T content, string template, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
+        public static AppMsgData<T> create<T>(T content, string template, MessageKind kind, MessageFlair color, AppMsgSource source)
             => new AppMsgData<T>(content, template ?? "{0}", kind, color, source);
 
         /// <summary>
@@ -28,12 +28,12 @@ namespace Z0
         /// <summary>
         /// The message classification
         /// </summary>
-        public readonly AppMsgKind Kind;
+        public readonly MessageKind Kind;
 
         /// <summary>
         /// The message foreground color when rendered for display
         /// </summary>
-        public readonly AppMsgColor Color;
+        public readonly MessageFlair Color;
 
         /// <summary>
         /// Specifies the emitting executable part
@@ -41,7 +41,7 @@ namespace Z0
         public readonly AppMsgSource Source;
 
         [MethodImpl(Inline)]
-        AppMsgData(object content, string pattern, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
+        AppMsgData(object content, string pattern, MessageKind kind, MessageFlair color, AppMsgSource source)
         {
             Content = content;
             Pattern = pattern;

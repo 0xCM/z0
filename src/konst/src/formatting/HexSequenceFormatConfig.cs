@@ -9,18 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct HexSeqFormatConfig : ISeqFormatConfig<HexSeqFormatConfig>
+    public readonly struct HexSequenceFormatConfig : ISequenceFormatConfig<HexSequenceFormatConfig>
     {        
         public HexFormatConfig HexFormat {get;}            
         
         public string Delimiter {get;}
 
         [MethodImpl(Inline)]
-        public static HexSeqFormatConfig Define(in HexFormatConfig hex, string delimiter = null)
-            => new HexSeqFormatConfig(hex, delimiter ?? hex.Delimiter.ToString());
+        public static HexSequenceFormatConfig define(in HexFormatConfig hex, string delimiter = null)
+            => new HexSequenceFormatConfig(hex, delimiter ?? hex.Delimiter.ToString());
             
         [MethodImpl(Inline)]
-        public HexSeqFormatConfig(in HexFormatConfig hex, string delimiter)
+        public HexSequenceFormatConfig(in HexFormatConfig hex, string delimiter)
         {
             Delimiter = delimiter;
             HexFormat = hex;

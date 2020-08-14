@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface ISpanFormatter<T> : ISeqFormatter<T>
+    public interface ISpanFormatter<T> : ISequenceFormatter<T>
     {
         /// <summary>
         /// Formats and concatenates span content
@@ -21,8 +21,8 @@ namespace Z0
         ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src);
     }
 
-   public interface ISpanFormatter<T,C> : ISpanFormatter<T>, ISeqFormatter<T,C>
-        where C : ISeqFormatConfig
+   public interface ISpanFormatter<T,C> : ISpanFormatter<T>, ISequenceFormatter<T,C>
+        where C : ISequenceFormatConfig
     {
         /// <summary>
         /// Formats and concatenates span content using a sequence format configuration
@@ -39,8 +39,8 @@ namespace Z0
         ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in C config);
     }
 
-   public interface ISpanFormatter<T,C,E> : ISpanFormatter<T,C>, ISeqFormatter<T,C,E>
-        where C : ISeqFormatConfig
+   public interface ISpanFormatter<T,C,E> : ISpanFormatter<T,C>, ISequenceFormatter<T,C,E>
+        where C : ISequenceFormatConfig
     {
         /// <summary>
         /// Formats a span using both sequence and element format configurations

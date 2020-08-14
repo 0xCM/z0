@@ -70,12 +70,12 @@ namespace Z0
         /// </summary>
         /// <param name="c">The char to emit</param>
         /// <param name="severity">The severity</param>
-        public void WriteChar(char c, AppMsgColor? color = null)
-            => Write(c, (ConsoleColor)(color ?? AppMsgColor.Yellow));
+        public void WriteChar(char c, MessageFlair? color = null)
+            => Write(c, (ConsoleColor)(color ?? MessageFlair.Yellow));
 
-        public void WriteMessage(IAppMsg msg, AppMsgColor? color = null)
+        public void WriteMessage(IAppMsg msg, MessageFlair? color = null)
         {   
-            if(msg.Kind == AppMsgKind.Error)
+            if(msg.Kind == MessageKind.Error)
                 WriteError(msg);
             else
                 WriteLine(msg, color ?? msg.Color); 
@@ -91,7 +91,7 @@ namespace Z0
             }            
         }
 
-        public void WriteLine<F>(F src, AppMsgColor color)
+        public void WriteLine<F>(F src, MessageFlair color)
             where F : ITextual
         {
             lock(TermLock)            
@@ -103,7 +103,7 @@ namespace Z0
             }
         }
 
-        public void WriteLines<F>(AppMsgColor color, params F[] src)
+        public void WriteLines<F>(MessageFlair color, params F[] src)
             where F : ITextual
         {
             lock(TermLock)            
@@ -149,7 +149,7 @@ namespace Z0
             return Console.ReadKey().KeyChar;
         }
 
-        void WriteLine(object src, AppMsgColor color)
+        void WriteLine(object src, MessageFlair color)
         {
             lock(TermLock)
             {
@@ -219,15 +219,15 @@ namespace Z0
         }
 
         public void WriteLine(object sr)
-            => WriteLine(sr, AppMsgColor.Green);
+            => WriteLine(sr, MessageFlair.Green);
 
         public void Warn(string description)
             => WriteWarning((object)description);
         
         public void Info(string message)
-            => WriteLine((object)message, AppMsgColor.Green);
+            => WriteLine((object)message, MessageFlair.Green);
 
-        public void WriteLine(string message, AppMsgColor color)
+        public void WriteLine(string message, MessageFlair color)
             => WriteLine((object)message, color);
     }
 }

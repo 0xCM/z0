@@ -26,29 +26,29 @@ namespace Z0
         public static AppMsgSource source(string caller, string file, int? line)        
             => new AppMsgSource(PartId.None, caller, file, line);
 
-        public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, kind, (AppMsgColor)kind, caller, file, line);
+        public static AppMsg Define(object content, MessageKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new AppMsg(content, kind, (MessageFlair)kind, caller, file, line);
 
-        public static AppMsg NoCaller(object content, AppMsgKind? kind = null)
-            => new AppMsg(content, kind ?? AppMsgKind.Info, (AppMsgColor)(kind ?? AppMsgKind.Info), EmptyString, EmptyString, null);
+        public static AppMsg NoCaller(object content, MessageKind? kind = null)
+            => new AppMsg(content, kind ?? MessageKind.Info, (MessageFlair)(kind ?? MessageKind.Info), EmptyString, EmptyString, null);
 
-        public static AppMsg Colorize(object content, AppMsgColor color)
-            => new AppMsg(content, AppMsgKind.Info, color, string.Empty, EmptyString, null);
+        public static AppMsg Colorize(object content, MessageFlair color)
+            => new AppMsg(content, MessageKind.Info, color, string.Empty, EmptyString, null);
 
         public static AppMsg Info(object content)
-            => new AppMsg(content, AppMsgKind.Info, AppMsgColor.Green, EmptyString, EmptyString, null);
+            => new AppMsg(content, MessageKind.Info, MessageFlair.Green, EmptyString, EmptyString, null);
 
         public static AppMsg Babble(object content)
-            => new AppMsg(content, AppMsgKind.Babble, AppMsgColor.Gray, EmptyString, EmptyString, null);
+            => new AppMsg(content, MessageKind.Babble, MessageFlair.Gray, EmptyString, EmptyString, null);
 
         public static AppMsg Warn(object content)
-            => new AppMsg(content, AppMsgKind.Warning, AppMsgColor.Yellow, EmptyString, EmptyString, null);
+            => new AppMsg(content, MessageKind.Warning, MessageFlair.Yellow, EmptyString, EmptyString, null);
 
         public static AppMsg Error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => NoCaller($"{content} {caller} {line} {file}", AppMsgKind.Error);
+            => NoCaller($"{content} {caller} {line} {file}", MessageKind.Error);
                 
         [MethodImpl(Inline)]
-        AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, string file, int? line, bool displayed = false)
+        AppMsg(object content, MessageKind kind, MessageFlair color, string caller, string file, int? line, bool displayed = false)
         {
             Data = AppMsgData.create(content,"{0}", kind, color, source(caller, file, line));
         }
@@ -62,13 +62,13 @@ namespace Z0
         /// <summary>
         /// The message classification
         /// </summary>
-        public AppMsgKind Kind 
+        public MessageKind Kind 
             => Data.Kind;
 
         /// <summary>
         /// The message foreground color when rendered for display
         /// </summary>
-        public AppMsgColor Color 
+        public MessageFlair Color 
             => Data.Color;
 
         public bool IsEmpty

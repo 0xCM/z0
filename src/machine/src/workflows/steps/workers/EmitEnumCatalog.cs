@@ -12,10 +12,8 @@ namespace Z0
 
     using F = EnumLiteralRecordField;
 
-    [Step(Kind)]
     public readonly ref struct EmitEnumCatalog
-    {
-        public const WfStepKind Kind = WfStepKind.EmitEnumCatalog;
+    {        
         readonly IWfContext Wf;
         
         readonly CorrelationToken Ct;
@@ -28,7 +26,7 @@ namespace Z0
             Wf = context;
             Ct = ct;
             TargetPath = Wf.IndexRoot + FileName.Define("enums",FileExtensions.Csv);
-            Wf.Created(WorkerName, Ct);    
+            Wf.Created(StepName, Ct);    
         }
         
         public void format(in EnumLiteralRecord src, TableFormatter<EnumLiteralRecordField> dst)
@@ -82,7 +80,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);    
+            Wf.Finished(StepName, Ct);    
         }
     }    
 }

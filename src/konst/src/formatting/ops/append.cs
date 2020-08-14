@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
         
-    partial struct Format
+    partial struct Render
     {
         [MethodImpl(Inline), Op]
         public static void append(ReadOnlySpan<char> src, StringBuilder dst)

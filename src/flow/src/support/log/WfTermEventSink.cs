@@ -47,9 +47,9 @@ namespace Z0
             term.print(e);
         }
 
-        public void Deposit(string message, AppMsgColor? color = null)
+        public void Deposit(string message, MessageFlair? color = null)
         {
-            term.print(message, color ?? AppMsgColor.Green);
+            term.print(message, color ?? MessageFlair.Green);
         }
 
         public void Dispose()

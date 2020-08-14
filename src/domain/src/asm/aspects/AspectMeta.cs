@@ -24,7 +24,7 @@ namespace Z0.Asm
         }
 
         public static AppMsg ContractMismatch(string host, string contract) 
-            => AppMsg.NoCaller($"The source type {host} does not reify {contract}", AppMsgKind.Error);
+            => AppMsg.NoCaller($"The source type {host} does not reify {contract}", MessageKind.Error);
 
         public static PropertyInfo[] Props(Type contract)
             => contract.Properties().Instance().Where(p => p.NotIgnored());

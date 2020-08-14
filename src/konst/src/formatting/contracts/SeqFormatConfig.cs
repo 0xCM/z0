@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct SeqFormatConfig : ISeqFormatConfig<SeqFormatConfig>
+    public readonly struct SeqFormatConfig : ISequenceFormatConfig<SeqFormatConfig>
     {
         [MethodImpl(Inline)]
         public static SeqFormatConfig Define(string delimiter)
@@ -24,7 +24,7 @@ namespace Z0
         public string Delimiter {get;}
     }
 
-    public readonly struct DefaultSeqFormatConfig : ISeqFormatConfig<DefaultSeqFormatConfig>
+    public readonly struct DefaultSeqFormatConfig : ISequenceFormatConfig<DefaultSeqFormatConfig>
     {        
         public static DefaultSeqFormatConfig Default => default(DefaultSeqFormatConfig);
         

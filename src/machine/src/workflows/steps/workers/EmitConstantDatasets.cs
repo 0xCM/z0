@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
     using static EmitConstantDatasetsStep;
+    using static RenderPatterns;
     using static z;
     
-    [Step(Kind)]
     public readonly ref struct EmitConstantDatasets
     {        
         readonly IWfContext Wf;
@@ -30,12 +29,12 @@ namespace Z0
             Ct = ct;
             Parts = parts;
             TargetDir = wf.ResourceRoot + FolderName.Define("constants");
-            Wf.Created(Name, Ct);
+            Wf.Created(StepName, Ct);
         }
                         
         public void Run()
         {
-            Wf.Running(Name, Ct);
+            Wf.Running(StepName, Ct);
 
             foreach(var part in Parts)
             {
@@ -49,7 +48,7 @@ namespace Z0
                 }
             }
             
-            Wf.Ran(Name, Ct);
+            Wf.Ran(StepName, Ct);
         }
 
         ReadOnlySpan<ImgConstantRecord> Read(IPart part)
@@ -62,7 +61,7 @@ namespace Z0
         {
             var id = part.Id;
             var dstPath = TargetDir + FileName.Define(id.Format(), DataFileExt);
-            Wf.Running(Name, dstPath.Name, Ct);
+            Wf.Running(StepName, dstPath.Name, Ct);
             
             var data = Read(part);
             var count = data.Length;            
@@ -75,12 +74,12 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(dst.Render());
 
-            Wf.RanT(Name, new {PartId = id, Count = count}, Ct);
+            Wf.RanT(StepName, new {PartId = id, Count = count}, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(Name, Ct);
+            Wf.Finished(StepName, Ct);
         }
     }
 }

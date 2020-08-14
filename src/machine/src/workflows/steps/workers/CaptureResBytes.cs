@@ -8,11 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    public readonly struct CaptureResBytesStep
-    {
-        public const string Worker = nameof(CaptureResBytes);
-    }
     
     public readonly ref struct CaptureResBytes
     {

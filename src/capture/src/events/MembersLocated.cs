@@ -28,8 +28,8 @@ namespace Z0.Asm
         public string Format()
             => $"{Members.Length} {Host} members located";
 
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;            
+        public MessageFlair Flair 
+            => MessageFlair.Cyan;            
 
         public static MembersLocated Empty 
             => default;

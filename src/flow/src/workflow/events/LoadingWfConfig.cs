@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
     using static z;
 
     [Event]
@@ -23,10 +23,10 @@ namespace Z0
         
         public FilePath SourcePath {get;}        
         
-        public AppMsgColor Flair {get;}        
+        public MessageFlair Flair {get;}        
 
         [MethodImpl(Inline)]
-        public LoadingWfConfig(string actor, FilePath body, CorrelationToken ct, AppMsgColor flair = Running)
+        public LoadingWfConfig(string actor, FilePath body, CorrelationToken ct, MessageFlair flair = Running)
         {
             EventId = z.evid(EventName, ct);
             ActorName = actor;

@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
 
     using static Konst;
     using static z;
         
-    partial struct Format
+    partial struct Render
     {
+        [MethodImpl(Inline)]
         public static ReadOnlySpan<string> items<T>(ReadOnlySpan<T> src)            
             where T : ITextual
         {

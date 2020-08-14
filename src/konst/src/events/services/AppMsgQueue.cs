@@ -60,13 +60,13 @@ namespace Z0
         {
             lock(lockobj)
             {
-                Deposit(AppMsg.NoCaller($"{e}", AppMsgKind.Error));
+                Deposit(AppMsg.NoCaller($"{e}", MessageKind.Error));
                 return Dequeue();
             }
         }
 
-        public void Notify(string msg, AppMsgKind? severity = null)
-            => Deposit(AppMsg.NoCaller($"{msg}", severity ?? AppMsgKind.Babble));
+        public void Notify(string msg, MessageKind? severity = null)
+            => Deposit(AppMsg.NoCaller($"{msg}", severity ?? MessageKind.Babble));
 
         public void Emit(FilePath dst)
         {

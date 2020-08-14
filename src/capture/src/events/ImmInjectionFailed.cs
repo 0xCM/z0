@@ -28,8 +28,8 @@ namespace Z0.Asm
         public string Format()
             => $"Imm injection failure for {Method.Name}";
         
-        public AppMsgColor Flair
-            => AppMsgColor.Red;
+        public MessageFlair Flair
+            => MessageFlair.Red;
 
         public static ImmInjectionFailed Empty 
             => default;

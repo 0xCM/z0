@@ -7,8 +7,30 @@ namespace Z0
     using static AsciCharText;
 
     [LiteralProvider]
-    public readonly struct FormatLiterals
+    public readonly struct RenderPatterns
     {
+        public const string XDelimit = Dot;
+        
+        /// <summary>
+        /// Defines the default extension for structured data
+        /// </summary>
+        public const string DataFileExt = "csv";
+
+        /// <summary>
+        /// Pluralizes something
+        /// </summary>
+        public const string Plural = "s";
+
+        /// <summary>
+        /// Suffix used to pluralize a possessive
+        /// </summary>
+        public const string PluralPosses = "'s";
+
+        /// <summary>
+        /// Defines the default field delimiter
+        /// </summary>
+        public const string FieldSep = " | ";
+
         /// <summary>
         /// Defines the literal '{'
         /// </summary>

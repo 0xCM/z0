@@ -26,10 +26,10 @@ namespace Z0.Asm
         
         public readonly FilePath Target;
 
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public HexCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, AppMsgColor flair = Ran)
+        public HexCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, MessageFlair flair = Ran)
         {
             EventId = Flow.evid(EventName, ct);
             Actor = Flow.actor(actor);

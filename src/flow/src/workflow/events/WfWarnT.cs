@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
             
     [Event]
     public readonly struct WfWarn<T> : IWfEvent<WfWarn<T>, T>
@@ -22,7 +22,7 @@ namespace Z0
 
         public T Body {get;}        
         
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
         
         [MethodImpl(Inline)]
         public WfWarn(string actor, T body, CorrelationToken ct)
@@ -30,7 +30,7 @@ namespace Z0
             EventId = evid(EventName, ct);
             Body = body;
             ActorName = actor;
-            Flair = AppMsgColor.Yellow;
+            Flair = MessageFlair.Yellow;
         }                    
         public string Format()
             => text.format(PSx3, EventId, ActorName, Body);            

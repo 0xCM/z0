@@ -22,9 +22,9 @@ namespace Z0
             else if(e.InnerException is AppException app)
                 yield return app.Message;
             else if(e.InnerException != null)               
-                yield return AppMsg.NoCaller($"{e}",AppMsgKind.Error);
+                yield return AppMsg.NoCaller($"{e}",MessageKind.Error);
             else
-                yield return AppMsg.NoCaller($"{name} failed {e}", AppMsgKind.Error);
+                yield return AppMsg.NoCaller($"{name} failed {e}", MessageKind.Error);
         }
 
         static IEnumerable<IAppMsg> FormatErrors(Exception e, MethodInfo method)
@@ -40,7 +40,7 @@ namespace Z0
             else if(e.InnerException is AppException app)
                 yield return app.Message;
             else if(e.InnerException != null)               
-                yield return AppMsg.NoCaller($"{e}", AppMsgKind.Error);
+                yield return AppMsg.NoCaller($"{e}", MessageKind.Error);
             else
             {
                 var reason = e.Message;
@@ -49,7 +49,7 @@ namespace Z0
                 content.AppendLine(title);
                 content.AppendLine(e.StackTrace);                
                 var payload = content.ToString();
-                yield return AppMsg.NoCaller(payload, AppMsgKind.Error);                                          
+                yield return AppMsg.NoCaller(payload, MessageKind.Error);                                          
             }
          }
     }

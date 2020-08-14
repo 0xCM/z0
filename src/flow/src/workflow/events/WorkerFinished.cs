@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Konst;
-    using static Flow;
-    using static FormatLiterals;
+    using static Render;    
+    using static RenderPatterns;
+    using static z;
 
     [Event]
     public readonly struct WorkerFinished : IWfEvent<WorkerFinished>
@@ -18,12 +19,12 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         public string ActorName {get;}
         
         [MethodImpl(Inline)]
-        public WorkerFinished(string worker, CorrelationToken ct, AppMsgColor flair = Finished)
+        public WorkerFinished(string worker, CorrelationToken ct, MessageFlair flair = Finished)
         {
             EventId = evid(EventName, ct);
             ActorName = worker;

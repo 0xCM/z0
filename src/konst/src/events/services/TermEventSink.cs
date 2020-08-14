@@ -54,7 +54,7 @@ namespace Z0
             term.print(e);
         }
 
-        public void Deposit<T>(T content, CorrelationToken ct, AppMsgKind kind = AppMsgKind.Info,  [Caller]string caller = null, [File] string file = null, [Line] int? line = null)
+        public void Deposit<T>(T content, CorrelationToken ct, MessageKind kind = MessageKind.Info,  [Caller]string caller = null, [File] string file = null, [Line] int? line = null)
         {            
             var msg = AppMsg.Define(content, kind, caller, file, line);
             term.print(msg);            

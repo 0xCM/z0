@@ -32,12 +32,12 @@ namespace Z0
             Ct = ct;
             Source = src;
             TargetDir = dst;
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {
-            Wf.Running(WorkerName, Ct);        
+            Wf.Running(StepName, Ct);        
 
             var sep = Chars.Pipe;
             var filename = FileName.Define("Calls", FileExtensions.Csv);
@@ -52,12 +52,12 @@ namespace Z0
             writer.WriteLine(names);
             Root.iter(delimited, writer.WriteLine);
 
-            Wf.Ran(WorkerName, Ct);        
+            Wf.Ran(StepName, Ct);        
         }
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName,Ct);
+            Wf.Finished(StepName,Ct);
         }
         
         static string Delimit(string[] src, char delimiter)

@@ -58,7 +58,7 @@ namespace Z0
             => new EvalResult(seq, $"{id}", succeeded, duration, "Ok");
 
         public static EvalResult Define<T>(int seq, in T id, Duration duration, AppMsg message)
-            => new EvalResult(seq,$"{id}", message.Kind != AppMsgKind.Error, duration, message);
+            => new EvalResult(seq,$"{id}", message.Kind != MessageKind.Error, duration, message);
 
         public static EvalResult Define<T>(uint seq, in T id, Duration duration, Exception error)
             => new EvalResult((int)seq, $"{id}", false, duration, error);
@@ -67,7 +67,7 @@ namespace Z0
             => new EvalResult((int)seq, $"{id}", succeeded, duration, "");
 
         public static EvalResult Define<T>(uint seq, in T id, Duration duration, AppMsg message)
-            => new EvalResult((int)seq,$"{id}", message.Kind != AppMsgKind.Error, duration, message);
+            => new EvalResult((int)seq,$"{id}", message.Kind != MessageKind.Error, duration, message);
 
         public EvalResult(int seq, string name, bool succeeded, Duration duration, object message)
         {

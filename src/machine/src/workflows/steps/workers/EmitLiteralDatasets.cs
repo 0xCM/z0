@@ -13,16 +13,10 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static Flow;
     using static EmitFieldLiteralsStep;
 
     using PK = PrimalKindId;    
 
-    [Step(WfStepKind.EmitFieldLiterals, true)]
-    public readonly struct EmitFieldLiteralsStep
-    {
-        public const string WorkerName = nameof(EmitFieldLiterals);
-    }
     
     [Step(WfStepKind.EmitFieldLiterals)]
     public readonly ref struct EmitFieldLiterals
@@ -41,7 +35,7 @@ namespace Z0
         {
             Ct = ct;
             Wf = context;
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         void Emit(PartTypes src)

@@ -22,10 +22,10 @@ namespace Z0
 
         public WfActor Actor {get;}        
 
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
         
         [MethodImpl(Inline)]
-        public WfStepRan(string actor, CorrelationToken ct, AppMsgColor flair = Ran)
+        public WfStepRan(string actor, CorrelationToken ct, MessageFlair flair = Ran)
         {
             EventId = evid(EventName, ct);
             Actor = actor;
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfStepRan(WfStepId step, CorrelationToken ct, AppMsgColor flair = Ran)
+        public WfStepRan(WfStepId step, CorrelationToken ct, MessageFlair flair = Ran)
         {
             EventId = evid(EventName, ct);
             Actor = step.Name;
@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfStepRan(in WfActor actor, WfStepId step, CorrelationToken ct, AppMsgColor flair = Ran)
+        public WfStepRan(in WfActor actor, WfStepId step, CorrelationToken ct, MessageFlair flair = Ran)
         {
             EventId = evid(EventName, ct);
             Actor = actor;

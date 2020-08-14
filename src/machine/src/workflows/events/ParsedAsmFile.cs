@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     [Event]
     public readonly struct ParsedAsmFile : IWfEvent<ParsedAsmFile>
@@ -32,8 +32,8 @@ namespace Z0
             SourcePath = src;
         }
 
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;                                 
+        public MessageFlair Flair 
+            => MessageFlair.Cyan;                                 
         
         [MethodImpl(Inline)]        
         public string Format()

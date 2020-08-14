@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     using E = ExtractsParsed;
 

@@ -11,7 +11,6 @@ namespace Z0
     using static EmitBlobsStep;
     using static z;
 
-    [Step(WfStepKind.EmitBlobs)]
     public ref struct EmitBlobs
     {
         public uint EmissionCount;

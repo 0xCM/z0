@@ -1,12 +1,17 @@
-
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct ProcessInstructionsStep
+    public interface ISequenceFormatConfig 
     {
-        public const string WorkerName = nameof(ProcessInstructions);
+        string Delimiter {get;}
+    }
+
+    public interface ISequenceFormatConfig<C> : ISequenceFormatConfig
+        where C : struct, ISequenceFormatConfig
+    {
+
     }
 }

@@ -24,12 +24,12 @@ namespace Z0
         /// <summary>
         /// The message classification
         /// </summary>
-        public readonly AppMsgKind Kind;
+        public readonly MessageKind Kind;
 
         /// <summary>
         /// The message foreground color when rendered for display
         /// </summary>
-        public readonly AppMsgColor Color;
+        public readonly MessageFlair Color;
 
         /// <summary>
         /// Specifies the emitting executable part
@@ -37,7 +37,7 @@ namespace Z0
         public readonly AppMsgSource Source;
 
         [MethodImpl(Inline)]
-        internal AppMsgData(T content, string pattern, AppMsgKind kind, AppMsgColor color, AppMsgSource source)
+        internal AppMsgData(T content, string pattern, MessageKind kind, MessageFlair color, AppMsgSource source)
         {
             Content = content;
             Pattern = pattern;

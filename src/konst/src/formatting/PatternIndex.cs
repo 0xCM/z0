@@ -9,16 +9,16 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct FormatPatterns
+    public readonly struct PatternIndex
     {
-        readonly TableSpan<FormatPattern> Data;
+        readonly TableSpan<RenderPattern> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator FormatPatterns(FormatPattern[] src)
-            => new FormatPatterns(src);
+        public static implicit operator PatternIndex(RenderPattern[] src)
+            => new PatternIndex(src);
 
         [MethodImpl(Inline)]
-        public FormatPatterns(FormatPattern[] src)
+        public PatternIndex(RenderPattern[] src)
             => Data = src;
 
         public CellCount Count
@@ -27,13 +27,13 @@ namespace Z0
             get => Data.Length;
         }
 
-        public ReadOnlySpan<FormatPattern> View
+        public ReadOnlySpan<RenderPattern> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
         
-        public ref readonly FormatPattern this[uint index]
+        public ref readonly RenderPattern this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];

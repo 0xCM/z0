@@ -10,7 +10,7 @@ namespace Z0
         
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     [Event]
     public readonly struct WorkerCreated : IWfEvent<WorkerCreated>
@@ -22,10 +22,10 @@ namespace Z0
 
         public WfWorker Worker {get;}        
         
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public WorkerCreated(in WfWorker worker, CorrelationToken ct, AppMsgColor flair = Created)
+        public WorkerCreated(in WfWorker worker, CorrelationToken ct, MessageFlair flair = Created)
         {
             EventId = z.evid(EventName, ct);
             Worker = worker;

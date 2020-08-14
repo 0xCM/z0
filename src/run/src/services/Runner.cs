@@ -148,13 +148,12 @@ namespace Z0
         }
         public void Run()
         {
-            using var s0 = new ListFormatPatterns(State.Wf, typeof(FormatLiterals));
+            using var s0 = new ListFormatPatterns(State.Wf, typeof(RenderPatterns));
             s0.Run();
 
             ReadRes();
     
             Status(TableIndex.AsmTAddressingModRm32);            
         }
-
     }
 }

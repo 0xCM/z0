@@ -40,7 +40,7 @@ namespace Z0.Asm
         public void Deposit(IAppMsg msg)
             => MessageQueue.Deposit(msg);
 
-        public void Notify(string msg, AppMsgKind? severity = null)
+        public void Notify(string msg, MessageKind? severity = null)
             => MessageQueue.Notify(msg, severity);
 
         public IReadOnlyList<IAppMsg> Dequeue()

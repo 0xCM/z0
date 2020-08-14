@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     public readonly struct EmittedEmbeddedImm : IWfEvent<EmittedEmbeddedImm>
     {
@@ -59,8 +59,8 @@ namespace Z0.Asm
         public EmittedEmbeddedImm Zero 
             => Empty;
 
-        public AppMsgColor Flair 
-            => AppMsgColor.DarkMagenta;
+        public MessageFlair Flair 
+            => MessageFlair.DarkMagenta;
 
         public static EmittedEmbeddedImm Empty 
             => default;

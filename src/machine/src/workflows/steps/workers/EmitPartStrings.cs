@@ -37,12 +37,12 @@ namespace Z0
             TargetPath = dst;
             UserStrings = user;
             EmissionCount = 0;
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
         
         public void Run()
         {
-            Wf.Emitting(WorkerName, DataType, TargetPath, Ct);
+            Wf.Emitting(StepName, DataType, TargetPath, Ct);
 
             var data = ReadData();            
             EmissionCount = (uint)data.Length;
@@ -55,12 +55,12 @@ namespace Z0
                 PartRecords.format(skip(data,i), target);                        
             writer.Write(target.Render());
             
-            Wf.Emitted(WorkerName, DataType, EmissionCount, TargetPath, Ct);
+            Wf.Emitted(StepName, DataType, EmissionCount, TargetPath, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);        
+            Wf.Finished(StepName, Ct);        
         }
 
         ReadOnlySpan<ImgStringRecord> ReadData()

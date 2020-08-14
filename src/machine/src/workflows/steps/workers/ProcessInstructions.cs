@@ -7,8 +7,8 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-
     using static ProcessInstructionsStep;
+    
     using api = Processors;    
             
     public class ProcessInstructions 

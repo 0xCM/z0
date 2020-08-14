@@ -14,7 +14,6 @@ namespace Z0
     using static Konst;
     using static EmitProjectDocsStep;
 
-    [Step(WfStepKind.EmitProjectDocs)]
     public readonly ref struct EmitProjectDocs
     {
         readonly IWfContext Wf;

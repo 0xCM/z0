@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     public readonly struct CapturingParts : IWfEvent<CapturingParts>
     {        
@@ -22,10 +22,10 @@ namespace Z0
         
         public readonly PartId[] Parts;
 
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public CapturingParts(string actor, PartId[] parts, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
+        public CapturingParts(string actor, PartId[] parts, CorrelationToken ct, MessageFlair flair = MessageFlair.Cyan)
         {
             EventId = WfEventId.define(EventName, ct);
             ActorName = actor;

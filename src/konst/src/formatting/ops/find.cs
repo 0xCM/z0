@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Format
+    partial struct Render
     {   
         public static IFormatter formatter(object src)
         {

@@ -12,11 +12,11 @@ namespace Z0
         {
         }
 
-        public EventAttribute(bool descriptor)
+        public EventAttribute(string name)
         {
-            IsDescriptor = descriptor;
+            EventName = name;
         }
 
-        public bool IsDescriptor {get;}        
+        public string EventName {get;}        
     }
 }

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
         
     public readonly struct ExtractReportSaved : IWfEvent<ExtractReportSaved>
     {        
@@ -21,14 +21,14 @@ namespace Z0.Asm
 
         public CorrelationToken Ct {get;}
 
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         public readonly ExtractReport Report;
 
         public readonly uint RecordCount;
 
         [MethodImpl(Inline)]
-        public ExtractReportSaved(string actor, ExtractReport report, CorrelationToken ct, AppMsgColor flair = AppMsgColor.Cyan)
+        public ExtractReportSaved(string actor, ExtractReport report, CorrelationToken ct, MessageFlair flair = MessageFlair.Cyan)
         {
             Report = report;
             ActorName = actor;

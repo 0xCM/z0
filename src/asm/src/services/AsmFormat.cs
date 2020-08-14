@@ -12,12 +12,6 @@ namespace Z0.Asm
 
     partial class XTend
     {
-        public static string FormatCount(this byte src, int zpad = 3)
-            => src.ToString().PadLeft(zpad, '0').PadLeft(zpad + 1, Chars.Space) + Chars.Space;
-
-        public static string FormatCount(this ushort src, int zpad = 5)
-            => src.ToString().PadLeft(zpad, '0').PadLeft(zpad + 1, Chars.Space) + Chars.Space;
-
         public static string Format(this FlowControl src)
             => src.ToString();
 
@@ -41,7 +35,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The relative line location</param>
         public static string label(ulong src)
-            => text.concat(src.FormatSmallHex(), HexSpecs.PostSpec, blank);
+            => text.concat(src.FormatSmallHex(), HexFormatSpecs.PostSpec, blank);
 
         public static string render(in MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatSpec config)
         {

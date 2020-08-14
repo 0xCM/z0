@@ -26,10 +26,10 @@ namespace Z0
         string ITextual.Format() 
             => AppId.Format();
 
-        void Print(object content, AppMsgColor? color = null)
+        void Print(object content, MessageFlair? color = null)
         {
             var term = Terminal.Get();
-            term.WriteLine($"{content}", color ?? AppMsgColor.Green);
+            term.WriteLine($"{content}", color ?? MessageFlair.Green);
         }
         
         void IExecutable<string>.Execute(params string[] args)

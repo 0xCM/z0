@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public enum AppMsgColor
+    public enum MessageFlair
     {
         /// <summary>
         /// Boring

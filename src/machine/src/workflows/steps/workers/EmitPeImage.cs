@@ -11,7 +11,6 @@ namespace Z0
     using static Konst;
     using static EmitPeImageStep;
     
-    [Step(WfStepKind.EmitPeImage)]
     public ref struct EmitPeImage
     {
         readonly IWfContext Wf;

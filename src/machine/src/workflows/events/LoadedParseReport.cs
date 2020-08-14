@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     [Event]
     public readonly struct LoadedParseReport : IWfEvent<LoadedParseReport>

@@ -10,12 +10,10 @@ namespace Z0
     using System.Diagnostics;
 
     using static Konst;
-    using static Flow;
     using static EmitImageContentStep;
 
     using static z;
     
-    [Step(Kind)]
     public ref struct EmitImageContent
     {    
         readonly IWfContext Wf;

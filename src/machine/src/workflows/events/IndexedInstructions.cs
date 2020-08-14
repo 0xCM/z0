@@ -26,8 +26,8 @@ namespace Z0
             Index = src;
         }
         
-        public AppMsgColor Flair 
-            => AppMsgColor.Cyan;
+        public MessageFlair Flair 
+            => MessageFlair.Cyan;
                          
         public string Format()
             => text.format(Pattern, EventId, Index.Indexed.Length);        

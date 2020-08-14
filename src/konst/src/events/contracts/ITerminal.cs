@@ -17,21 +17,21 @@ namespace Z0
 
         void WriteLine(object src);        
 
-        void WriteLine(string src, AppMsgColor kind);        
+        void WriteLine(string src, MessageFlair kind);        
 
-        void WriteChar(char c, AppMsgColor? color = null);
+        void WriteChar(char c, MessageFlair? color = null);
 
-        void WriteMessage(IAppMsg msg, AppMsgColor? color = null);
+        void WriteMessage(IAppMsg msg, MessageFlair? color = null);
 
         void WriteMessages(IEnumerable<IAppMsg> messages);
 
         void WriteLines<F>(params F[] src)
             where F : ITextual;        
 
-        void WriteLine<F>(F src, AppMsgColor color)
+        void WriteLine<F>(F src, MessageFlair color)
             where F : ITextual;
 
-        void WriteLines<F>(AppMsgColor color, params F[] src)
+        void WriteLines<F>(MessageFlair color, params F[] src)
             where F : ITextual;
 
         string ReadLine(IAppMsg msg = null);

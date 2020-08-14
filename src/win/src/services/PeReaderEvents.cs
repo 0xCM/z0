@@ -16,6 +16,6 @@ namespace Z0.Image
         const string NoMagicDescription ="Magic is not here";        
 
         public static AppEvent NoMagic([Caller] string caller = null) 
-            => new AppEvent(EventId.define("NoMagic", caller), NoMagicDescription, AppMsgColor.Red);
+            => new AppEvent(EventId.define("NoMagic", caller), NoMagicDescription, MessageFlair.Red);
     }
 }

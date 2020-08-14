@@ -13,7 +13,7 @@ namespace Z0
     partial struct Formatters
     {   
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static NumericFormatter<T> numeric<T>()
+        public static NumericFormatter<T> numeric<T>(T t = default)
             where T : unmanaged
                 => numeric_u<T>();
 

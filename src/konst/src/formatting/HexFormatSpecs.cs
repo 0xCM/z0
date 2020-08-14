@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public static class HexSpecs
+    public static class HexFormatSpecs
     {
         /// <summary>
         /// Attempts to parse a hex string as an unsigned long

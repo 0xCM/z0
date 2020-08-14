@@ -10,7 +10,7 @@ namespace Z0
         
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
     using static z;
     
     [Event]
@@ -24,12 +24,12 @@ namespace Z0
 
         public string Body {get;}
         
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         public AppMsg Description {get;}
  
         [MethodImpl(Inline)]
-        public WfStatus(string actor, string body, CorrelationToken ct, AppMsgColor flair = Status)
+        public WfStatus(string actor, string body, CorrelationToken ct, MessageFlair flair = Status)
         {
             EventId = evid(EventName, ct);
             ActorName = actor;

@@ -7,15 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Data;
-
     using static Konst;
-    using static Flow;
     using static EmitContentCatalogStep;
     
     using F = ContentLibField;
     
-    [Step(WfStepKind.EmitContentCatalog)]
     public ref struct EmitContentCatalog
     {
         public readonly FilePath TargetPath;
@@ -33,13 +29,13 @@ namespace Z0
             Ct = ct;
             TargetPath =  Wf.IndexRoot + FileName.Define("catalog", FileExtensions.Csv);
             EmissionCount = 0;
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {
             var provider = TableProvider.create();
-            Wf.Emitting(WorkerName, DatasetName, TargetPath, Ct);
+            Wf.Emitting(StepName, DatasetName, TargetPath, Ct);
             var entries = z.span(provider.Provided.Array());
             EmissionCount = (uint)entries.Length;
 
@@ -55,12 +51,12 @@ namespace Z0
             using var dst = TargetPath.Writer();
             dst.Write(f.Format());
 
-            Wf.Emitted(WorkerName, DatasetName, EmissionCount, TargetPath, Ct);
+            Wf.Emitted(StepName, DatasetName, EmissionCount, TargetPath, Ct);
         }
 
         public void Dispose()        
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }
     }
 }

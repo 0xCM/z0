@@ -26,7 +26,7 @@ namespace Z0
                 var parser = Parsers.hex(true);
                 var uritext = formatted.TakeBefore(Chars.Space).Trim();
                 var uri = OpUriParser.Service.Parse(uritext);
-                var bytes = formatted.TakeAfter(Chars.Space).SplitClean(HexSpecs.DataDelimiter).Select(parser.Succeed);
+                var bytes = formatted.TakeAfter(Chars.Space).SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
                 if(uri)
                     return new IdentifiedCode(MemoryAddress.Empty, uri.Value, bytes);
                 else

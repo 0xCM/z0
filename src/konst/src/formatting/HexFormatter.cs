@@ -9,7 +9,7 @@ namespace Z0
     
     using static Konst;
     
-    public readonly struct HexFormatter<T> : ISpanFormatter<T,HexSeqFormatConfig,HexFormatConfig>
+    public readonly struct HexFormatter<T> : ISpanFormatter<T,HexSequenceFormatConfig,HexFormatConfig>
         where T : unmanaged
     {
         readonly ISystemHexFormatter<T> BaseFormatter;
@@ -25,12 +25,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public string FormatItem(T src, in HexFormatConfig hex)
             => string.Concat(
-                hex.Specifier && hex.Specifier ? HexSpecs.PreSpec : string.Empty, 
+                hex.Specifier && hex.Specifier ? HexFormatSpecs.PreSpec : string.Empty, 
                 hex.ZPad ? BaseFormatter.Format(src, hex.FormatCode).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatCode),
-                hex.Specifier && !hex.PreSpec ? HexSpecs.PostSpec : string.Empty
+                hex.Specifier && !hex.PreSpec ? HexFormatSpecs.PostSpec : string.Empty
                 );
 
-        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in HexSeqFormatConfig config)
+        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in HexSequenceFormatConfig config)
         {
             Span<string> dst = new string[src.Length];
             for(var i=0; i<dst.Length; i++)
@@ -38,7 +38,7 @@ namespace Z0
             return dst;
         }
 
-        public string Format(ReadOnlySpan<T> src, in HexSeqFormatConfig seq, in HexFormatConfig hex)
+        public string Format(ReadOnlySpan<T> src, in HexSequenceFormatConfig seq, in HexFormatConfig hex)
         {            
             var result = string.Empty.Build();
 
@@ -53,7 +53,7 @@ namespace Z0
             return result.ToString();
         }
 
-        public string Format(ReadOnlySpan<T> src, in HexSeqFormatConfig seq)
+        public string Format(ReadOnlySpan<T> src, in HexSequenceFormatConfig seq)
         {
             var result = text.build();
             var config = seq.HexFormat;
@@ -78,7 +78,7 @@ namespace Z0
         static HexFormatConfig DefaultConfig 
             => HexFormat.configure();
 
-        static HexSeqFormatConfig DefaultSeqConfig 
-            => HexSeqFormatConfig.Define(DefaultConfig);    
+        static HexSequenceFormatConfig DefaultSeqConfig 
+            => HexSequenceFormatConfig.define(DefaultConfig);    
     }
 }

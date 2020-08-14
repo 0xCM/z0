@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
     
     public readonly struct FunctionsDecoded : IWfEvent<FunctionsDecoded>
     {
@@ -31,8 +31,8 @@ namespace Z0.Asm
         public FunctionsDecoded Zero 
             => Empty;
 
-        public AppMsgColor Flair 
-            => AppMsgColor.Magenta;            
+        public MessageFlair Flair 
+            => MessageFlair.Magenta;            
 
         public static FunctionsDecoded Empty 
             => default;

@@ -17,7 +17,6 @@ namespace Z0
     
     using NBI = NumericBaseIndicator;
 
-    [Step(WfStepKind.EmitBitMasks)]
     public ref struct EmitBitMasks 
     {
         readonly IWfContext Wf;

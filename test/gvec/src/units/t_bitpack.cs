@@ -23,8 +23,8 @@ namespace Z0
                 Claim.eq(bitseq.CellCount,n4);
 
                 var packed = BitPack.pack(bitseq,mod);
-                Trace("bitstring", bs, AppMsgColor.Magenta);
-                Trace("bitseq", bitseq.Format(), AppMsgColor.Magenta);
+                Trace("bitstring", bs, MessageFlair.Magenta);
+                Trace("bitseq", bitseq.Format(), MessageFlair.Magenta);
 
                 Claim.eq(bs.TakeScalar<byte>(), packed);
             }

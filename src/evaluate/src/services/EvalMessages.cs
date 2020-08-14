@@ -25,12 +25,12 @@ namespace Z0
             => dst.NotifyConsole(AppMsg.NoCaller($"{opname}({a}, {b}) = {result}"));
 
         public static void AnalyzingEvaluation(this IAppMsgSink dst, in ApiCode api)
-            => dst.NotifyConsole(AppMsg.NoCaller($"Analyzing evaluation of {api.Uri.WithScheme(OpUriScheme.Located)}", AppMsgKind.Babble));
+            => dst.NotifyConsole(AppMsg.NoCaller($"Analyzing evaluation of {api.Uri.WithScheme(OpUriScheme.Located)}", MessageKind.Babble));
 
         public static void RuntimeEvalFailure(this IAppMsgSink dst, in ApiCode api, Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             dst.NotifyConsole(AppMsg.Error($"Runtime evaluation error occurred duing execution of {api.Id}", caller, file, line)); 
-            dst.NotifyConsole(AppMsg.NoCaller(e, AppMsgKind.Error));                               
+            dst.NotifyConsole(AppMsg.NoCaller(e, MessageKind.Error));                               
         }            
 
         public static AppMsg BufferSizeError(ApiCode code, BufferToken buffer)

@@ -10,7 +10,7 @@ namespace Z0
         
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     public readonly struct WfStepRunning<T> : IWfEvent<WfStepRunning<T>>
     {
@@ -22,10 +22,10 @@ namespace Z0
         
         public T Body {get;}
 
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepRunning(WfActor actor, T body, CorrelationToken ct, AppMsgColor flair = Running)
+        public WfStepRunning(WfActor actor, T body, CorrelationToken ct, MessageFlair flair = Running)
         {
             EventId = evid(EventName, ct);
             Actor = actor;

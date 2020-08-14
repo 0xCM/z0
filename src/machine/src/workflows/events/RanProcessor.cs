@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
     using static Flairs;
 
     [Event]
@@ -24,10 +24,10 @@ namespace Z0
         
         public string Message {get;}
         
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public RanProcessor(string actor, string processor, string message, CorrelationToken ct,  AppMsgColor flair = Ran)
+        public RanProcessor(string actor, string processor, string message, CorrelationToken ct,  MessageFlair flair = Ran)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;

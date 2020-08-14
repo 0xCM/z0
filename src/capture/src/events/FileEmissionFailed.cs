@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     public readonly struct FileEmissionFailed : IWfEvent<FileEmissionFailed>
     {
@@ -32,8 +32,8 @@ namespace Z0.Asm
             TargetFile = dst;
         }
 
-        public AppMsgColor Flair
-            => AppMsgColor.Red;                    
+        public MessageFlair Flair
+            => MessageFlair.Red;                    
         
         public string Format()
             => $"{Host} emission failure" + (Generic ? " (generic)" : string.Empty) + TargetFile.FullPath;

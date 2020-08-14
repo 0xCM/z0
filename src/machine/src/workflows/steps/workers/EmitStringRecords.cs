@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static EmitStringRecordsStep;
     
-    [Step(WfStepKind.EmitPartStrings)]
     public ref struct EmitStringRecords
     {
         /// <summary>
@@ -43,7 +42,7 @@ namespace Z0
             TargetDir = wf.ResourceRoot + FolderName.Define(TargetFolder);
             EmissionCount = 0;
             PartCount = (uint)parts.Length;
-            Wf.Created(ActorName, Ct);
+            Wf.Created(StepName, Ct);
         }
         
         uint EmitUserStrings(IPart part)
@@ -64,7 +63,7 @@ namespace Z0
         
         public void Run()
         {
-            Wf.RunningT(ActorName, new {PartCount, TargetDir}, Ct);
+            Wf.RunningT(StepName, new {PartCount, TargetDir}, Ct);
 
             foreach(var part in Parts)
             {
@@ -72,12 +71,12 @@ namespace Z0
                 EmissionCount += EmitSystemStrings(part);
             }                
 
-            Wf.RanT(ActorName, new {PartCount, EmissionCount}, Ct);
+            Wf.RanT(StepName, new {PartCount, EmissionCount}, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(ActorName, Ct);
+            Wf.Finished(StepName, Ct);
         }
     }
 }

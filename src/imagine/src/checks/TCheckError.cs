@@ -21,7 +21,7 @@ namespace Z0
             var msg = new StringBuilder();
             msg.AppendLine($"{title}: Failure ocuurred at {caller} {file} {line}");
             msg.AppendLine(e?.ToString() ?? string.Empty);
-            return AppMsg.NoCaller($"{msg.ToString()}", AppMsgKind.Error);            
+            return AppMsg.NoCaller($"{msg.ToString()}", MessageKind.Error);            
         }
 
         void Print(Exception e, string title, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

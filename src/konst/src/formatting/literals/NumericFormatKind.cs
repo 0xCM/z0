@@ -48,28 +48,4 @@ namespace Z0
 
         BinBlocks = Binary | Blocked
     }
-
-    public static class NumericFormatKindOps
-    {
-        public static bool IsBinary(this NumericFormatKind src)
-            =>  (src & NumericFormatKind.Binary) != 0;
-
-        public static bool IsDecimal(this NumericFormatKind src)
-            =>  (src & NumericFormatKind.Decimal) != 0;
-
-        public static bool IsHex(this NumericFormatKind src)
-            =>  (src & NumericFormatKind.Hex) != 0;
-            
-        public static bool IsBlocked(this NumericFormatKind src)
-            =>  (src & NumericFormatKind.Blocked) != 0;
-
-        public static bool IsPrefixed(this NumericFormatKind src)
-            =>  (src & NumericFormatKind.Prefixed) != 0;
-
-        public static bool IsSuffixed(this NumericFormatKind src)
-            =>  (src & NumericFormatKind.Suffixed) != 0;
-
-        public static bool IsZeroPadded(this NumericFormatKind src)
-            =>  (src & NumericFormatKind.ZeroPadded) != 0;
-    }
 }

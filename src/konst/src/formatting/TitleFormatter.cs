@@ -14,14 +14,14 @@ namespace Z0
     /// </summary>
     public readonly struct TitleFormatter<T> : ITitleFormatter<T>
     {
-        readonly TitleRender<T> Render;
+        readonly FormatFx.FormatTitle<T> Fx;
 
         [MethodImpl(Inline)]
-        public TitleFormatter(in TitleRender<T> render)
-            => Render = render;
+        public TitleFormatter(FormatFx.FormatTitle<T> render)
+            => Fx = render;
 
         [MethodImpl(Inline)]
         public string FormatTitle(T src)
-            => Render(src);
+            => Fx(src);
     }
 }

@@ -16,12 +16,12 @@ namespace Z0
         /// <summary>
         /// The message classification
         /// </summary>
-        AppMsgKind Kind {get;}
+        MessageKind Kind {get;}
 
         /// <summary>
         /// The message foreground color when rendered for display
         /// </summary>
-        AppMsgColor Color {get;}        
+        MessageFlair Color {get;}        
 
         /// <summary>
         /// Specifies whether the message is vaccuous
@@ -33,7 +33,7 @@ namespace Z0
         /// Specifies whether the message describes an error
         /// </summary>
         bool IsError 
-            => Kind == AppMsgKind.Error;
+            => Kind == MessageKind.Error;
     }
     
     public interface IAppMsg<C> : IAppMsg 

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     public readonly struct EmittedParseReport : IWfEvent<EmittedParseReport>
     {        

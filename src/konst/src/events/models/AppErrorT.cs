@@ -15,14 +15,14 @@ namespace Z0
         
         public T Data {get;}       
 
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
         public AppError(EventId id, T data)
         {
             Id = id;
             Data = data;
-            Flair = AppMsgColor.Red;
+            Flair = MessageFlair.Red;
         }
                 
         public string Format()

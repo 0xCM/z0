@@ -10,14 +10,14 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct FormatPattern : ITextual
+    public readonly struct RenderPattern : ITextual
     {
         readonly FieldInfo Source;
 
         readonly StringRef Content;
         
         [MethodImpl(Inline)]
-        public FormatPattern(FieldInfo src, string content)
+        public RenderPattern(FieldInfo src, string content)
         {
             Source = src;
             Content = content;

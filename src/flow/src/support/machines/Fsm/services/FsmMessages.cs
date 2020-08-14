@@ -14,12 +14,12 @@ namespace Z0.Machines
     static class FsmMessages
     {
         public static AppMsg Transition<S>(string machine, S s1, S s2)
-            => AppMsg.Colorize($"{machine} Transitioned {s1} -> {s2}", AppMsgColor.Cyan);
+            => AppMsg.Colorize($"{machine} Transitioned {s1} -> {s2}", MessageFlair.Cyan);
 
         public static AppMsg Completed(string machine, FsmStats stats, bool asPlanned)
             => AppMsg.Colorize($"{machine} executed for {stats.Runtime.Ms} ms and completed" 
             + (asPlanned ? $" as planned after receiving {stats.ReceiptCount} events and experiencing {stats.TransitionCount} transitions" : " abnormally"), 
-                AppMsgColor.Blue);
+                MessageFlair.Blue);
         
         public static AppMsg Receipt<E>(string machine, E input, ulong receipts)
             => AppMsg.Babble($"{machine} received event {input.ToString().PadLeft(6)} | Total Receipts: {receipts}");

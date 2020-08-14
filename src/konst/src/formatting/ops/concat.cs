@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Konst;
     using static z;
         
-    partial struct Format
+    partial struct Render
     {
         [Op]
         public static string concat(ReadOnlySpan<string> src, char? delimiter)

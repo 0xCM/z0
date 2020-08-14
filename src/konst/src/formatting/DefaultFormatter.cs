@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Formats anything  via Object.ToString()
+    /// Formats anything via <see cref='object.ToString()'
     /// </summary>
     public readonly struct DefaultFormatter : IFormatter
     {

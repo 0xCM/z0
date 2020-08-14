@@ -38,7 +38,7 @@ namespace Z0
 
             try
             {
-                var patterns = Format.patterns(PatternSource);
+                var patterns = Render.patterns(PatternSource);
                 foreach(var pattern in patterns.View)
                     Wf.Status(Actor, pattern.Format(), Ct);
             

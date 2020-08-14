@@ -26,6 +26,7 @@
         "vbytes",
         "vcell",
         "vinflate",
-        "vload"
+        "vload",
+        "zpad"
     ]
 }

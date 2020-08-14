@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-
-    using Z0.Data;
     
     using static Konst;
 
@@ -60,7 +58,7 @@ namespace Z0
             if(uri.Failed)
                 sys.@throw($"{uri.Reason}");
 
-            var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed);
+            var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed);
             var extract = new LocatedCode(address, data);
             return new R(seq, address, len, term, uri.Value, extract);
         }

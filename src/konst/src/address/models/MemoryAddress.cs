@@ -33,7 +33,7 @@ namespace Z0
             => Empty;
 
         public string Identifier 
-            => Location.ToString("x") + HexSpecs.PostSpec;
+            => Location.ToString("x") + HexFormatSpecs.PostSpec;
 
         MemoryAddress IAddressable.Address 
         {

@@ -29,8 +29,8 @@ namespace Z0
             Code = code;
         }
 
-        public AppMsgColor Flair 
-            => AppMsgColor.Red;
+        public MessageFlair Flair 
+            => MessageFlair.Red;
                 
         public string Format()
             => text.format(Pattern, EventId, Uri);

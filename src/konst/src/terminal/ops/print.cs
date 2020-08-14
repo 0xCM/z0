@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="message">The message text</param>
         /// <param name="color">The emission color</param>
-        public static void print(string message, AppMsgColor color)
+        public static void print(string message, MessageFlair color)
             => T.WriteLine(message, color);
         
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// Writes a single messages to the terminal
         /// </summary>
         /// <param name="msg">The message to print</param>    
-        public static void print(IAppMsg msg, AppMsgColor color)
+        public static void print(IAppMsg msg, MessageFlair color)
             => T.WriteMessage(msg, color);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// Writes formattables to the console in a contiguous block
         /// </summary>
         /// <param name="content">The content to print</param>    
-        public static void print<F>(F src, AppMsgColor color)
+        public static void print<F>(F src, MessageFlair color)
             where F : ITextual
                 => T.WriteLine(src, color);
 
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="content">The content to print</param>    
         public static void print<F>(F src)
             where F : ITextual
-                => T.WriteLine(src, AppMsgColor.Green);
+                => T.WriteLine(src, MessageFlair.Green);
 
         /// <summary>
         /// Writes formattables to the console in a contiguous block
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="color">The message foreground color</param>    
         /// <param name="content">The content to print</param>    
-        public static void print<F>(AppMsgColor color, params F[] content)
+        public static void print<F>(MessageFlair color, params F[] content)
             where F : ITextual
                 => T.WriteLines(color,content);
 

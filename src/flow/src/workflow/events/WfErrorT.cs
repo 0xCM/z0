@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
             
     public interface IWfError : IWfEvent
     {
@@ -30,7 +30,7 @@ namespace Z0
 
         public T Body => Data;
         
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
         
         public AppMsgSource Source {get;}
 
@@ -40,7 +40,7 @@ namespace Z0
             EventId = evid(EventName, ct);
             Actor = actor;
             Data = body;
-            Flair =  AppMsgColor.Red;
+            Flair =  MessageFlair.Red;
             Source = source;
         }
 
@@ -50,7 +50,7 @@ namespace Z0
             EventId = evid(EventName, ct);
             Actor = actor;
             Data = body;
-            Flair =  AppMsgColor.Red;
+            Flair =  MessageFlair.Red;
             Source = source;
         }
         public string Format()

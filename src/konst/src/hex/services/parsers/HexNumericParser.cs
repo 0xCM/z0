@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static HexSpecs;
+    using static HexFormatSpecs;
 
     public readonly struct HexNumericParser : IParametricParser
     {

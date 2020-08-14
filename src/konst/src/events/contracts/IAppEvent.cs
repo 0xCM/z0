@@ -14,10 +14,10 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IAppEvent : ICorrelated, ITextual, IChronic
     {
-        AppMsgColor Flair 
-            => AppMsgColor.Blue;
+        MessageFlair Flair 
+            => MessageFlair.Blue;
 
         bool IsError 
-            => Flair == AppMsgColor.Red;
+            => Flair == MessageFlair.Red;
     }
 }

@@ -63,8 +63,8 @@ namespace Z0
             => new HexFormatConfig(true, true, false, true, Chars.Comma);
 
         [MethodImpl(Inline)]
-        public static implicit operator HexSeqFormatConfig(in HexFormatConfig src)
-            => HexSeqFormatConfig.Define(src);
+        public static implicit operator HexSequenceFormatConfig(in HexFormatConfig src)
+            => HexSequenceFormatConfig.define(src);
         
         [MethodImpl(Inline)]
         public HexFormatConfig(bool zpad, bool specifier, bool uppercase, bool prespec, char delimiter)
@@ -73,7 +73,7 @@ namespace Z0
             Specifier = specifier;
             Uppercase = uppercase;
             PreSpec = prespec;    
-            CaseFormatChar = HexSpecs.CaseSpec(uppercase);
+            CaseFormatChar = HexFormatSpecs.CaseSpec(uppercase);
             Delimiter = delimiter;
         }
     }

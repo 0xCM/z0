@@ -8,7 +8,7 @@ namespace Z0.Events
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static FormatLiterals;
+    using static RenderPatterns;
     using static z;
 
     public readonly struct AnalyzingExtracts : IWfEvent<AnalyzingExtracts>

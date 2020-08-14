@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(bool json)
-            => json ? text.format(FormatLiterals.JsonProp, Name, Value) : Value.Format();
+            => json ? text.format(RenderPatterns.JsonProp, Name, Value) : Value.Format();
 
         [MethodImpl(Inline)]
         public string Format()

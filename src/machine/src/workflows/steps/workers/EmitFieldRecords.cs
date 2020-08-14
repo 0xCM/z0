@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static EmitFieldMetadataStep;
 
-    [Step(WfStepKind.EmitFieldMetadata)]
     public readonly ref struct EmitFieldMetadata
     {    
         readonly IWfContext Wf;

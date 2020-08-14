@@ -14,19 +14,19 @@ namespace Z0
 
     partial struct Flow    
     {
-        internal const AppMsgColor Created = F.Created;
+        internal const MessageFlair Created = F.Created;
 
-        internal const AppMsgColor Finished = F.Finished;
+        internal const MessageFlair Finished = F.Finished;
 
-        internal const AppMsgColor Running = F.Running;
+        internal const MessageFlair Running = F.Running;
 
-        internal const AppMsgColor Ran = F.Ran;
+        internal const MessageFlair Ran = F.Ran;
 
-        internal const AppMsgColor Initializing = F.Initializing;
+        internal const MessageFlair Initializing = F.Initializing;
 
-        internal const AppMsgColor Initialized = F.Initialized;
+        internal const MessageFlair Initialized = F.Initialized;
 
-        internal const AppMsgColor Status = F.Status;
+        internal const MessageFlair Status = F.Status;
 
         /// <summary>
         /// Defines a <see cref='WorkerCreated'/> event
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static WfStepCreated created(WfStepId id, CorrelationToken ct, AppMsgColor flair = Created)
+        public static WfStepCreated created(WfStepId id, CorrelationToken ct, MessageFlair flair = Created)
             => new WfStepCreated(id, ct, flair);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static WfStepCreated created(in WfActor actor, WfStepId id, CorrelationToken ct, AppMsgColor flair = Created)
+        public static WfStepCreated created(in WfActor actor, WfStepId id, CorrelationToken ct, MessageFlair flair = Created)
             => new WfStepCreated(actor, id, ct, flair);
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static WfStepCreated created<T>(WfStepKind kind, T type, CorrelationToken ct, AppMsgColor flair = Created)
+        public static WfStepCreated created<T>(WfStepKind kind, T type, CorrelationToken ct, MessageFlair flair = Created)
             => created(step(kind,type), ct, flair);
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static void created(IWfContext wf, in WfActor actor, WfStepId step, CorrelationToken ct, AppMsgColor flair = Created)
+        public static void created(IWfContext wf, in WfActor actor, WfStepId step, CorrelationToken ct, MessageFlair flair = Created)
             => wf.Raise(created(actor,step,ct,flair));
             
         /// <summary>
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static void created<T>(IWfContext wf, WfStepKind kind, T type, CorrelationToken ct, AppMsgColor flair = Created)
+        public static void created<T>(IWfContext wf, WfStepKind kind, T type, CorrelationToken ct, MessageFlair flair = Created)
             => wf.Raise(created(kind,type,ct,flair));            
     }
 }

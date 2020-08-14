@@ -12,15 +12,15 @@ namespace Z0
     public readonly struct AppStatus : IAppEvent<AppStatus,string>
     {
         [MethodImpl(Inline)]
-        public static AppStatus create(string data, AppMsgColor flair = AppMsgColor.Green)
+        public static AppStatus create(string data, MessageFlair flair = MessageFlair.Green)
             => new AppStatus(data, flair);        
         
         public string Data {get;}
         
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
                 
         [MethodImpl(Inline)]
-        public AppStatus(string data, AppMsgColor flair)
+        public AppStatus(string data, MessageFlair flair)
         {
             Data = data;
             Flair = flair;            

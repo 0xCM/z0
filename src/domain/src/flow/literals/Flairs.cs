@@ -4,26 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Text;
-
     [LiteralProvider]
     public readonly struct Flairs
     {
-        public const AppMsgColor Error = AppMsgColor.Red;
+        public const MessageFlair Created = MessageFlair.Gray;
 
-        public const AppMsgColor Created = AppMsgColor.Gray;
+        public const MessageFlair Running = MessageFlair.Magenta;
 
-        public const AppMsgColor Running = AppMsgColor.Magenta;
+        public const MessageFlair Ran = MessageFlair.Cyan;
 
-        public const AppMsgColor Ran = AppMsgColor.Cyan;
+        public const MessageFlair Finished = MessageFlair.Gray;
 
-        public const AppMsgColor Finished = AppMsgColor.Gray;
+        public const MessageFlair Status = MessageFlair.Green;
 
-        public const AppMsgColor Status = AppMsgColor.Green;
+        public const MessageFlair Initializing = MessageFlair.Gray;
 
-        public const AppMsgColor Initializing = AppMsgColor.Gray;
-
-        public const AppMsgColor Initialized = AppMsgColor.Gray;
+        public const MessageFlair Initialized = MessageFlair.Gray;
     }
 }

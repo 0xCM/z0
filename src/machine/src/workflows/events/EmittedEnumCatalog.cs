@@ -8,12 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
+    using static RenderPatterns;
 
-    [Event]
+    [Event(EventName)]
     public readonly struct EmittedEnumCatalog : IWfEvent<EmittedEnumCatalog>
     {
-        const string Pattern = IdMarker + "Emitted summary data file for {1} enum literals to {2}";
+        public const string EventName = nameof(EmittedEnumCatalog);
+        
+        const string Pattern = Slot0 + FieldSep + "Emitted summary data file for {1} enum literals to {2}";
 
         public WfEventId EventId {get;}
 

@@ -22,10 +22,10 @@ namespace Z0
     
         public WfProcessor Processor {get;}
         
-        public AppMsgColor Flair {get;}        
+        public MessageFlair Flair {get;}        
     
         [MethodImpl(Inline)]
-        public RunningProcessor(string actor, string processor, CorrelationToken ct, AppMsgColor flair = Running)
+        public RunningProcessor(string actor, string processor, CorrelationToken ct, MessageFlair flair = Running)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;

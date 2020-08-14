@@ -32,10 +32,10 @@ namespace Z0
             => string.Join(sep, src);
 
         public static string Concat(this ReadOnlySpan<string> src, string delimiter = null)
-            => Z0.Format.concat(src,delimiter);
+            => Z0.Render.concat(src,delimiter);
 
         public static string Concat(this ReadOnlySpan<string> src, char? delimiter)
-            => Z0.Format.concat(src,delimiter);
+            => Z0.Render.concat(src,delimiter);
 
         /// <summary>
         /// Joins a sequence of source characters interspersed with a supplied separator

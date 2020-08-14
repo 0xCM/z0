@@ -9,7 +9,7 @@ namespace Z0
     using System.Globalization;
 
     using static Konst;
-    using static HexSpecs;
+    using static HexFormatSpecs;
     using static z;
 
     public readonly struct HexByteParser : IHexParser<byte>
@@ -31,11 +31,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool HasPreSpec(string src) 
-            => src.TrimStart().StartsWith(HexSpecs.PreSpec);
+            => src.TrimStart().StartsWith(HexFormatSpecs.PreSpec);
 
         [MethodImpl(Inline)]
         public bool HasPostSpec(string src) 
-            => src.TrimEnd().EndsWith(HexSpecs.PostSpec);
+            => src.TrimEnd().EndsWith(HexFormatSpecs.PostSpec);
 
         /// <summary>
         /// Parses a single hex digit

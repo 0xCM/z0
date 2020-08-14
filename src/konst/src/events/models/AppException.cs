@@ -18,7 +18,7 @@ namespace Z0
             => new AppException(msg);
 
         public static AppException Define(object reason, string caller, string file, int? line)
-            => Define(AppMsg.NoCaller($"{reason?.ToString()} {caller} {file} {line}", AppMsgKind.Error));
+            => Define(AppMsg.NoCaller($"{reason?.ToString()} {caller} {file} {line}", MessageKind.Error));
 
         public AppException() { }
      

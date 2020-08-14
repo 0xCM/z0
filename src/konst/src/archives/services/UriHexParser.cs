@@ -19,14 +19,14 @@ namespace Z0
             {
                 var address = Parsers.hex().Parse(parts[0]).ValueOrDefault();   
                 var uri = OpUriParser.Service.Parse(parts[1].Trim()).Require();
-                var bytes = parts[2].SplitClean(HexSpecs.DataDelimiter).Select(parser.Succeed).ToArray();
+                var bytes = parts[2].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed).ToArray();
                 return z.parsed(src, new IdentifiedCode(address,uri,bytes));                
             }
             else if(parts.Length == 2)
             {
                 var uri = OpUriParser.Service.Parse(src.TakeBefore(Chars.Space).Trim()).Require();
                 var bytes = src.TakeAfter(Chars.Space)
-                                     .SplitClean(HexSpecs.DataDelimiter)
+                                     .SplitClean(HexFormatSpecs.DataDelimiter)
                                      .Select(parser.Succeed)
                                      .ToArray();
                 return z.parsed(src, new IdentifiedCode(0ul, uri, bytes));                

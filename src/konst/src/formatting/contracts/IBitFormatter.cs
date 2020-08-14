@@ -10,6 +10,4 @@ namespace Z0
     {
         void Format(ReadOnlySpan<byte> src, int maxbits, Span<char> dst);
     }
-
-
 }

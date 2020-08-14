@@ -10,7 +10,7 @@ namespace Z0
         
     using static Konst;
     using static Flow;
-    using static FormatLiterals;
+    using static RenderPatterns;
 
     [Event]
     public readonly struct WfProcessedFile<T> : IWfEvent<WfProcessedFile<T>>
@@ -27,10 +27,10 @@ namespace Z0
                 
         public uint ProcessedSize {get;}
         
-        public AppMsgColor Flair {get;}
+        public MessageFlair Flair {get;}
         
         [MethodImpl(Inline)]
-        public WfProcessedFile(string worker, T kind, FilePath src, uint size, CorrelationToken ct, AppMsgColor flair = Ran)
+        public WfProcessedFile(string worker, T kind, FilePath src, uint size, CorrelationToken ct, MessageFlair flair = Ran)
         {
             EventId = evid(EventName, ct);
             ActorName = worker;
