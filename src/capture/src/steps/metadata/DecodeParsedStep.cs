@@ -2,18 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static Flow;
-
+    [Step(typeof(DecodeParsed), StepName)]
     public readonly struct DecodeParsedStep
-    {   
-        public const WfStepKind Kind = WfStepKind.DecodeParsed;
-        
-        public const string Name = nameof(DecodeParsed);
+    {           
+        public const string StepName = nameof(DecodeParsed);
     }
 }

@@ -2,13 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
             
+    using Z0.Asm;            
     public readonly struct CaptureWorkflow : ICaptureWorkflow
     {
         public ICaptureContext Context {get;}

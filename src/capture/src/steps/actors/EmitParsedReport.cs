@@ -2,17 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
     using static FormatLiterals;
     using static EmitParsedReportStep;
     
-    [Step]
+    using Z0.Asm;
+
     public readonly ref struct EmitParsedReport
     {
         readonly WfState Wf ;        
@@ -33,27 +33,27 @@ namespace Z0.Asm
             Host = host;
             Source = src;
             Target = dst;
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {
             try
             {
-                Wf.Running(WorkerName, Host, Ct);
+                Wf.Running(StepName, Host, Ct);
                 var report = MemberParseReport.Create(Host, Source);                    
                 report.Save(Target);                
-                Wf.Ran(WorkerName, text.format(PSx2, Host, report.RecordCount), Ct);
+                Wf.Ran(StepName, text.format(PSx2, Host, report.RecordCount), Ct);
             }
             catch(Exception e)
             {
-                Wf.Error(WorkerName, e, Ct);
+                Wf.Error(StepName, e, Ct);
             }
         }
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     partial struct Tooling
     {
         [MethodImpl(Inline), Op]
-        public static ToolConfig config(ToolId tool,FilePath src)
-            => new ToolConfig(tool,src);
+        public static ToolConfig config(ToolId tool,FolderPath src, FolderPath dst)
+            => new ToolConfig(tool,src,dst);
     }
 }

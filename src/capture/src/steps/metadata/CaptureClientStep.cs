@@ -4,10 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
+    [Step(typeof(CaptureClient), StepName)]
     public readonly struct CaptureClientStep
     {
-        public const string ActorName = nameof(CaptureClient);
+        public const string StepName = nameof(CaptureClient);
     }
 }

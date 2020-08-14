@@ -2,18 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System;
-
-    using static Konst;
-
-
-    [Step(true)]
+    [Step(typeof(SpecializeImmediates), StepName)]
     public readonly struct SpecializeImmediatesStep
     {
-        public const WfStepKind StepId = WfStepKind.SpecializeImmediates;
-
-        public const string WorkerName = nameof(SpecializeImmediates);
+        public const string StepName = nameof(SpecializeImmediates);
     }
 }

@@ -2,15 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Konst;
     using static ExtractHostMembersStep;
 
-    [Step]
     public ref struct ExtractHostMembers
     {
         public WfState Wf {get;}
@@ -34,17 +35,17 @@ namespace Z0.Asm
 
             Extractions = new ExtractedCode[0]{};
 
-            Wf.Created(WorkerName, Ct);            
+            Wf.Created(StepName, Ct);            
         }
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }
         
         public void Run()
         {
-            Wf.Running(WorkerName, Ct);
+            Wf.Running(StepName, Ct);
             try
             {
                 using var step = new ExtractMembers(Wf, Ct);
@@ -52,10 +53,10 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Error(WorkerName, e, Ct);
+                Wf.Error(StepName, e, Ct);
             }
 
-            Wf.Ran(WorkerName, Ct);
+            Wf.Ran(StepName, Ct);
         }
     }
 }

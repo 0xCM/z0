@@ -54,7 +54,7 @@ namespace Z0
         Json = x08,
 
         /// <summary>
-        /// Unprocessed/unexecutable x86-encoded data
+        /// Unprocessed x86-encoded data
         /// </summary>
         Extract = x09, //*.x.csv
         

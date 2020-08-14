@@ -2,13 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static ExtractMembersStep;
+
+    using Z0.Asm;
 
     public readonly ref struct ExtractMembers
     {
@@ -21,12 +23,12 @@ namespace Z0.Asm
         {
             Wf = state;
             Ct = ct;
-            Wf.Created(WorkerName,  Ct);
+            Wf.Created(StepName,  Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }
 
         ApiMember[] jit(IApiHost[] hosts)
@@ -49,7 +51,7 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Error(WorkerName, e, Ct);
+                Wf.Error(StepName, e, Ct);
             }
             return extracted;
         }
@@ -65,7 +67,7 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Error(WorkerName, e, Ct);
+                Wf.Error(StepName, e, Ct);
                 return sys.empty<ExtractedCode>();
             }            
         }

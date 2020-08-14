@@ -14,7 +14,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly struct Events
+    public readonly struct Eventing
     {
         /// <summary>
         /// Creates an error event

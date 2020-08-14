@@ -17,10 +17,6 @@ namespace Z0
 
     public ref struct EmitAsmTables
     {
-        const string ActorName = nameof(EmitAsmTables);
-
-        const WfStepKind Kind = WfStepKind.EmitAsmTables;
-                
         readonly IWfState State;                
 
         readonly IWfContext Wf;

@@ -170,7 +170,6 @@ namespace Z0
         public IEnumerable<FilePath> Files(FileName name, bool recursive)        
             => recursive ? Recurse(name) : Files(name);
 
-
         /// <summary>
         /// Nonrecursively enumerates folder files owned by a specified part
         /// </summary>

@@ -2,16 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    [Step(true)]
+    [Step(typeof(EmitHostArtifacts), StepName)]
     public readonly struct EmitHostArtifactsStep
-    {
-        public const string WorkerName = nameof(EmitHostArtifactsStep);
-
-        public const WfStepKind StepId = WfStepKind.EmitHostArtifacts;
+    {        
+        public const string StepName = nameof(EmitHostArtifacts);        
     }
 }

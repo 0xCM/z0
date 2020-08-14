@@ -20,7 +20,7 @@ namespace Z0
         public readonly FilePath[] Data;
 
         [MethodImpl(Inline)]
-        internal Files(FilePath[] src)    
+        public Files(FilePath[] src)    
             => Data = src;
 
         public CellCount Count

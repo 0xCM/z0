@@ -20,8 +20,11 @@ namespace Z0
         public string Description {get;}
         
         public string SearchPattern 
-            => IsEmpty ? "*.*" : $"*{Name}";
+            => (IsEmpty || IsWildcard) ? "*.*" : $"*{Name}";
         
+        public bool IsWildcard
+            => Name.Contains("*.*");
+
         [MethodImpl(Inline)]
         public static FileExtension Define(string name)
             => new FileExtension(name);

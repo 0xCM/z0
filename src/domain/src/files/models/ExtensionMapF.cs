@@ -14,22 +14,23 @@ namespace Z0
     public readonly struct ExtensionMap<F> : IExtensionMap<F>
         where F : unmanaged, Enum
     {
-        readonly Dictionary<F,FileExtension> Data;
+        readonly Dictionary<string,FileExtension> Data;
 
         readonly F[] FlagValues;
 
         public ExtensionMap(int i)
         {
-            Data = new Dictionary<F, FileExtension>();
+            Data = new Dictionary<string, FileExtension>();
             FlagValues = Enums.literals<F>();
             foreach(var f in FlagValues)
                 MapExtension(f, FileExtension.Define(f.ToString().ToLower()));            
+
         }
 
         [MethodImpl(Inline)]
         public void MapExtension(F flag, FileExtension ext)
         {
-            Data[flag] = ext;
+            Data[flag.ToString()] = ext;
         }
 
         public ReadOnlySpan<FileExtension> Extensions
@@ -47,7 +48,12 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public FileExtension Ext(F f)   
-            => Data[f];        
+        {
+            if(Data.TryGetValue(f.ToString(), out var x))
+                return x;
+            else
+                return FileExtensions.Any;
+        }
 
         public string Format()
         {
@@ -61,7 +67,7 @@ namespace Z0
                 if(i != 1)
                     dst.Append(", ");
                 var flag = z.skip(flags,i);
-                dst.Append(text.format("{0}: {1}", flag, Data[flag]));
+                dst.Append(text.format("{0}: {1}", flag, Data[flag.ToString()]));
             }
             dst.Append("]");
             

@@ -2,11 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+
+    using Z0.Asm;
 
     using static Konst;
     using static ManagePartCaptureStep;
@@ -53,7 +55,7 @@ namespace Z0.Asm
 
         public void Dispose()
         {
-            Wf.Finished(ActorName);
+            Wf.Finished(StepName);
         }
  
         void Capture(IPartCaptureArchive dst)
@@ -67,7 +69,7 @@ namespace Z0.Asm
 
         public void Consolidate()
         {
-            Wf.Raise(new RunningConsolidated(ActorName, (uint)Catalogs.Length, Ct));
+            Wf.Raise(new RunningConsolidated(StepName, (uint)Catalogs.Length, Ct));
             
             Clear(Config);
 
@@ -80,7 +82,7 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Error(ActorName, e, Ct);
+                Wf.Error(StepName, e, Ct);
            }
         }
                 
@@ -104,7 +106,7 @@ namespace Z0.Asm
                 ref readonly var host = ref skip(hosts,i);                
                 Context.Raise(new CapturingHost(host.Uri, Ct));
                 step.Execute(host);
-                Context.Raise(new CapturedHost(host.Uri, Ct));                
+                Context.Raise(new Asm.CapturedHost(host.Uri, Ct));                
             } 
         }
 
@@ -117,7 +119,7 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Error(ActorName, e, Ct);
+                Wf.Error(StepName, e, Ct);
             }
         }
     }

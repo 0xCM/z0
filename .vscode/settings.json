@@ -4,6 +4,7 @@
         "Dynexus",
         "Dynops",
         "EFLAGS",
+        "Immediates",
         "Intrinsics",
         "Ints",
         "Konst",

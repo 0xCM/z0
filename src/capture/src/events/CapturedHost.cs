@@ -17,6 +17,7 @@ namespace Z0.Asm
         public WfEventId EventId {get;}
 
         public string ActorName {get;}
+        
         public readonly ApiHostUri Host;
 
         [MethodImpl(Inline)]
@@ -29,6 +30,7 @@ namespace Z0.Asm
 
         public object Description
             => new {Host};
+        
         public string Format() 
             => text.format(PSx3, EventId, ActorName, Description);
     }    

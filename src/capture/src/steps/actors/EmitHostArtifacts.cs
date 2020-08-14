@@ -2,15 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Konst;
     using static EmitHostArtifactsStep;
 
-    [Step]
     public ref struct EmitHostArtifacts
     {
         public WfState Wf {get;}
@@ -48,12 +49,12 @@ namespace Z0.Asm
             AsmPath = Target.AsmPath;
             Parsed = new ParsedExtraction[0]{};
             Parser = Extractors.Services.ExtractParser(Extractors.DefaultBufferLength);
-            Wf.Created(WorkerName, Ct);            
+            Wf.Created(StepName, Ct);            
         }
 
         public void Run()
         {
-            Wf.Running(WorkerName, Ct);
+            Wf.Running(StepName, Ct);
             
             try
             {
@@ -65,16 +66,16 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Error(WorkerName, e, Ct);
+                Wf.Error(StepName, e, Ct);
             }
 
-            Wf.Ran(WorkerName, Ct);
+            Wf.Ran(StepName, Ct);
 
         }
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }
 
         void SaveExtracts()
@@ -94,7 +95,7 @@ namespace Z0.Asm
 
             Parsed = result.Parsed;
 
-            Wf.Raise(new ExtractsParsed(WorkerName, Source, Parsed, Ct));
+            Wf.Raise(new ExtractsParsed(StepName, Source, Parsed, Ct));
         }
         
         void SaveParseReport()
@@ -106,7 +107,7 @@ namespace Z0.Asm
         void SaveHex()
         {
             var hex = IdentifiedCodeWriter.save(Source, Parsed, HexPath);                
-            Wf.Raise(new HexCodeSaved(WorkerName, Source, hex, ParsedPath, Ct));
+            Wf.Raise(new HexCodeSaved(StepName, Source, hex, ParsedPath, Ct));
         }
 
         void Decode()

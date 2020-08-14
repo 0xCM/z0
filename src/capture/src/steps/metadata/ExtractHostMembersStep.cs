@@ -2,17 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System;
-
-    using static Konst;
-
-    [Step(true)]
+    [Step(typeof(ExtractHostMembers), StepName)]
     public readonly struct ExtractHostMembersStep
     {
-        public const WfStepKind StepId = WfStepKind.ExtractHostMembers;
-
-        public const string WorkerName = nameof(ExtractHostMembers);
+        public const string StepName = nameof(ExtractHostMembers);
     }
 }

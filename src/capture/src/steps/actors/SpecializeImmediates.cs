@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,9 +10,10 @@ namespace Z0.Asm
     using System.Linq;
     using System.Collections.Generic;
 
+    using Z0.Asm;
+
     using static Konst;
 
-    [Step]
     public class SpecializeImmediates : IImmEmissionWorkflow
     {                        
         public CorrelationToken Ct {get;}
@@ -33,7 +34,7 @@ namespace Z0.Asm
 
         readonly IPartCaptureArchive CodeArchive;
 
-        readonly IImmSpecializer ImmSpecializer;
+        readonly IImmSpecializer Specializer;
 
         internal SpecializeImmediates(IAsmContext context, IMultiSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
         {
@@ -45,7 +46,7 @@ namespace Z0.Asm
             Decoder = decoder;
             ApiSet = api;
             CodeArchive = Archives.Services.CaptureArchive(root);
-            ImmSpecializer = Capture.Services.ImmSpecializer(decoder);
+            Specializer = Capture.Services.ImmSpecializer(decoder);
             ApiCollector =  Identities.Services.Collector;
             ConnectReceivers(Broker);
         }
@@ -56,9 +57,6 @@ namespace Z0.Asm
         }
         
         bool Append = true;
-
-        IImmEmissionWorkflow Flow 
-            => this;
         
         void ConnectReceivers(IImmBroker relay)
         {
@@ -131,7 +129,7 @@ namespace Z0.Asm
                         if(imm8.Length != 0)
                         {
                             var rft = RefinementType(member.Method);
-                            var functions = ImmSpecializer.UnaryOps(exchange, member.Method, member.Id, imm8);
+                            var functions = Specializer.UnaryOps(exchange, member.Method, member.Id, imm8);
                             if(functions.Length != 0)
                             {
                                 dst.SaveHexImm(gid, functions, Append)
@@ -147,7 +145,7 @@ namespace Z0.Asm
                         if(values.Length != 0)
                         {
                             var rft = RefinementType(member.Method);
-                            var functions = ImmSpecializer.BinaryOps(exchange, member.Method, member.Id, values);
+                            var functions = Specializer.BinaryOps(exchange, member.Method, member.Id, values);
                             if(functions.Length != 0)
                             {
                                 dst.SaveHexImm(gid, functions, Append)
@@ -249,7 +247,7 @@ namespace Z0.Asm
             foreach(var f in unary)
             {
                 var host = f.HostUri;
-                var functions = ImmSpecializer.UnaryOps(exchange, f.Method, f.Id, imm8);
+                var functions = Specializer.UnaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
                     dst.SaveHexImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Literal(host, generic, path));
@@ -264,7 +262,7 @@ namespace Z0.Asm
             foreach(var f in binary)
             {
                 var host = f.HostUri;
-                var functions = ImmSpecializer.BinaryOps(exchange, f.Method, f.Id, imm8);
+                var functions = Specializer.BinaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
                     dst.SaveHexImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Literal(host, generic, path));
@@ -280,7 +278,7 @@ namespace Z0.Asm
             var generic = true;
             foreach(var closure in f.Close())
             {
-                var functions = ImmSpecializer.UnaryOps(exchange, closure.Method, closure.Id, imm8);
+                var functions = Specializer.UnaryOps(exchange, closure.Method, closure.Id, imm8);
                 if(functions.Length != 0)
                 {
                     dst.SaveHexImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Create(host, generic, path, refinement));
@@ -296,7 +294,7 @@ namespace Z0.Asm
             var generic = true;
             foreach(var closure in f.Close())
             {
-                var functions = ImmSpecializer.BinaryOps(exchange, closure.Method, closure.Id, imm8);
+                var functions = Specializer.BinaryOps(exchange, closure.Method, closure.Id, imm8);
                 if(functions.Length != 0)
                 {
                     dst.SaveHexImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Create(host, generic, path, refinement));

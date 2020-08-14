@@ -2,14 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System;
-
+    [Step(typeof(CaptureHosts), StepName)]
     public readonly struct CaptureHostsStep
-    {
-        public const WfStepKind Kind = WfStepKind.CaptureHosts;
-        
-        public const string Name = nameof(CaptureHosts);
+    {        
+        public const string StepName = nameof(CaptureHosts);
     }
 }

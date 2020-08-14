@@ -2,14 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System;
-    using System.Linq;
-
+    [Step(typeof(MatchAddresses), StepName)]
     public readonly struct MatchAddressesStep
     {
-        public const string WorkerName = nameof(MatchAddresses);
+        public const string StepName = nameof(MatchAddresses);
     }
-
 }

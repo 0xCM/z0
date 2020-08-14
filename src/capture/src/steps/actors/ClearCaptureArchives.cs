@@ -8,10 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
     using static z;
 
-    [Step(WfStepKind.ClearCaptureArchives)]
     public readonly ref struct ClearCaptureArchives 
     {        
         readonly IWfContext Wf;

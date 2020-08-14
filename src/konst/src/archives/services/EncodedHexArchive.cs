@@ -50,7 +50,7 @@ namespace Z0
             var uri = ApiHostUri.Parse(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
-                status.Deposit(Events.error(nameof(EncodedHexArchive), uri.Reason));
+                status.Deposit(Eventing.error(nameof(EncodedHexArchive), uri.Reason));
                 return IdentifiedCodeIndex.Empty;
             }
 

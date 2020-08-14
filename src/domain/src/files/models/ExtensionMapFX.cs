@@ -15,7 +15,7 @@ namespace Z0
         where F : unmanaged, Enum
         where X : unmanaged, Enum
     {
-        readonly Dictionary<F,FileExtension> Index;
+        readonly Dictionary<string,FileExtension> Index;
 
         readonly F[] FlagValues;
 
@@ -25,7 +25,7 @@ namespace Z0
         
         public ExtensionMap(int m)
         {
-            Index = new Dictionary<F,FileExtension>();
+            Index = new Dictionary<string,FileExtension>();
             FlagValues = Enums.literals<F>();
             Map = Enums.literals<X>();
             ExtValues = z.alloc<FileExtension>(FlagValues.Length);
@@ -38,7 +38,7 @@ namespace Z0
                 else
                     ExtValues[j] = FileExtension.Define(flag.ToString().ToLower());
                 
-                Index[flag] = ExtValues[j];
+                Index[flag.ToString()] = ExtValues[j];
             }
         }
 
@@ -57,15 +57,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public FileExtension Ext(F f)   
-            => Index[f];        
+        {
+            if(Index.TryGetValue(f.ToString(), out var x))
+                return x;
+            else
+                return FileExtension.Define("*.*");
+        }
 
         [MethodImpl(Inline)]
         public void MapExtension(F flag, FileExtension ext)
         {
-            Index[flag] = ext;
+            Index[flag.ToString()] = ext;
         }
-
-
         public string Format()
         {
             var dst = text.build();
@@ -78,7 +81,7 @@ namespace Z0
                 if(i != 1)
                     dst.Append(", ");
                 var flag = z.skip(flags,i);
-                dst.Append(text.format("{0}: {1}", flag, Index[flag]));
+                dst.Append(text.format("{0}: {1}", flag, Index[flag.ToString()]));
             }
             dst.Append("]");
             

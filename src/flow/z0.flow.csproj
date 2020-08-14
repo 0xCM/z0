@@ -15,10 +15,14 @@
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Tables)" />
     <ProjectReference Include="$(Data)" />
+    <ProjectReference Include="$(WfActors)" />
+    <ProjectReference Include="$(WfCore)" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="2.0.44" />    
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0" />
+    <PackageReference Include="ICSharpCode.Decompiler" Version="6.1.0.5902" />
   </ItemGroup>
 
 </Project>

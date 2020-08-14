@@ -13,6 +13,8 @@ namespace Z0.Tools
             /// </summary>       
             Asm = DumpBinFlag.Disasm,
 
+            AsmData,
+
             /// <summary>
             /// A dumpbin-generated raw data file
             /// </summary>       

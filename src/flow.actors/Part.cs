@@ -10,9 +10,8 @@ using System.Reflection;
 
 namespace Z0.Parts
 {        
-    public sealed class Imagine : Part<Imagine> 
+    public sealed class WfActors : Part<WfActors> 
     {
-        public override PartId[] Needs  
-            => parts(PartId.Konst);
+
     }
 }

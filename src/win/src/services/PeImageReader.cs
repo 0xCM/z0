@@ -38,7 +38,7 @@ namespace Z0.Image
             }
             catch(Exception e)
             {
-                receiver.Deposit(Events.error(nameof(PeImageReader), e));
+                receiver.Deposit(Eventing.error(nameof(PeImageReader), e));
                 return z.none<PeImage>();
             }
         }

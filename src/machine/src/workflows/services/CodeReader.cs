@@ -64,7 +64,7 @@ namespace Z0
             var uri = ApiHostUri.Parse(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
-                status.Deposit(Events.error(nameof(CodeReader), uri.Reason));
+                status.Deposit(Eventing.error(nameof(CodeReader), uri.Reason));
                 return IdentifiedCodeIndex.Empty;
             }
 

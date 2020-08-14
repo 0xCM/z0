@@ -2,16 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;    
-    using static CaptureHostApiStep;
+    using Z0.Asm;
 
-    [Step(Kind)]
+    using static Konst;    
+    using static CaptureHostMembersStep;
+
     public readonly ref struct CaptureHostMembers
     {
         public WfState Wf {get;}
@@ -26,12 +27,12 @@ namespace Z0.Asm
             Wf = state;
             Target = dst;
             Ct = ct;
-            Wf.Created(Name, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(Name, Ct);
+            Wf.Finished(StepName, Ct);
         }
                 
         public void Execute(IApiHost host)
@@ -46,7 +47,7 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Error(Name,e, Ct);
+                Wf.Error(StepName,e, Ct);
             }
         }      
     }

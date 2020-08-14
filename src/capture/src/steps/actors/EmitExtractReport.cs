@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Konst;
 
-    [Step]
     public ref struct EmitExtractReport
     {
         public const string ActorName = nameof(EmitExtractReport);

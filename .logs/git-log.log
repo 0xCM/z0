@@ -8000,3 +8000,38 @@
  rename wf/{wf-05-archive.bat => archive.bat} (98%)
  create mode 100644 wf/emit.bat
  delete mode 100644 wf/wf-10-respack.bat
+[master 06d576439] .
+ 45 files changed, 529 insertions(+), 287 deletions(-)
+ create mode 100644 src/tools/base/RawAsmTable.cs
+ create mode 100644 src/tools/models/ToolOptionF.cs
+ create mode 100644 src/tools/models/ToolOptionFK.cs
+ rename src/tools/{src/services => models}/ToolRunerOptions.cs (100%)
+ rename src/tools/{src/services => models}/ToolRunnerConfig.cs (100%)
+ rename src/tools/src/{tools => }/api/archive.cs (96%)
+ rename src/tools/src/{tools => }/api/config.cs (95%)
+ rename src/tools/src/{tools => }/api/file.cs (95%)
+ rename src/tools/src/{tools => }/api/listed.cs (100%)
+ rename src/tools/src/{tools => }/api/logger.cs (96%)
+ rename src/tools/src/{tools => }/api/processor.cs (96%)
+ rename src/tools/src/{tools => }/api/runner.cs (95%)
+ rename src/tools/src/{tools => }/api/tool.cs (96%)
+ rename src/tools/src/{tools/monitor => }/contracts/IMonitor.cs (100%)
+ create mode 100644 src/tools/src/contracts/IToolOption.cs
+ rename src/tools/src/{services => contracts}/IToolRunner.cs (100%)
+ rename src/tools/src/{tools/monitor => services}/DirectoryMonitor.cs (100%)
+ rename src/tools/src/{tools/monitor => services}/Monitors.cs (100%)
+ rename src/tools/src/{tools/logger => services}/ToolLogger.cs (99%)
+ rename src/tools/src/{tools/toolproxy => services}/ToolProxies.cs (100%)
+ rename src/tools/src/{tools/toolproxy => services}/ToolProxy.cs (100%)
+ rename src/tools/src/{tools/toolproxy => services}/ToolProxyGen.cs (100%)
+ rename src/tools/src/{tools/monitor => services}/Watching.cs (100%)
+ delete mode 100644 src/tools/src/tools/dumpbin/AsmProcessor.cs
+ create mode 100644 src/tools/src/tools/dumpbin/DumpBinOptions.cs
+ create mode 100644 src/tools/src/tools/dumpbin/RawAsmProcessor.cs
+ rewrite wf/dumpbin/exec.bat (77%)
+ rewrite wf/respack.bat (94%)
+ rename wf/{wf-04-stage.bat => stage.bat} (84%)
+ delete mode 100644 wf/unpub.bat
+ delete mode 100644 wf/wf-01-needs.bat
+ delete mode 100644 wf/wf-02-build.bat
+ delete mode 100644 wf/wf-ilpack.bat

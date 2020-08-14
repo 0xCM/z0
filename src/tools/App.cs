@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-
-    using Z0.Tools;
     
     using static Konst;
     using static Flow;
@@ -23,35 +21,13 @@ namespace Z0
 
         public CorrelationToken Ct {get;}         
 
-        IWfContext Wf;
+        public IWfContext Wf {get; private set;}
         
         public App()
             : base(Flow.app())
         {
             Ct = CorrelationToken.define(Part);   
             Raise(status(ActorName, "Application created", Ct));        
-        }
-
-        public void RunDumpBin()
-        {
-            var tool = DumpBin.create(Wf);
-            var archive = tool.Target;            
-            var files  = archive.Files(DumpBinFlag.Disasm);
-            var listed = Tooling.listed(files);
-            var formatted = FS.format(listed);
-
-            term.print(listed.Count);
-            
-            using var processor = tool.processor(default(FileKinds.Asm));
-            for(var i=0u; i <files.Count; i++)
-            {
-                if(files[i].Path.Name.Contains(".instructions."))
-                {
-                    processor.Process(files[i]);
-                    var message = text.format(FormatLiterals.PSx2, processor.LineCount, processor.IxCount);
-                    Wf.Status(ActorName, message, Ct);
-                }
-            }                           
         }
 
         public override void RunShell(params string[] args)
@@ -61,9 +37,7 @@ namespace Z0
             try
             {
                 var config = Flow.configure(Context, args, Ct);            
-                Wf = Flow.context(Context, config, Ct);
-                RunDumpBin();
-                
+                Wf = Flow.context(Context, config, Ct);                
             }
             catch(Exception e)
             {

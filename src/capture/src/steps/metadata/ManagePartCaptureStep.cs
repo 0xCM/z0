@@ -2,17 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System;
-
-    using static Konst;
-
-    [Step(true)]
+    [Step(typeof(ManagePartCapture), StepName)]
     public readonly struct ManagePartCaptureStep
     {
-        public const WfStepKind StepId = WfStepKind.ManagePartCapture;
-
-        public const string ActorName = nameof(ManagePartCapture);
+        public const string StepName = nameof(ManagePartCapture);
     }
 }

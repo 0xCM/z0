@@ -6,6 +6,8 @@ namespace Z0
 {
     public static class FileExtensions
     {
+        public static FileExtension Any => FileExtension.Define("*.*", "Wildcard");
+
         public static FileExtension Csv => FileExtension.Define("csv", "Structured text");
 
         public static FileExtension Cs => FileExtension.Define("cs", "CSharp source text");
@@ -36,6 +38,6 @@ namespace Z0
 
         public static FileExtension Parsed => FileExtension.Define("p.csv", "Parsed x86 disassembly");
     
-        public static FileExtension Unparsed => FileExtension.Define("u.csv", "Unparseable x86 disassembly");
+        public static FileExtension Unparsed => FileExtension.Define("u.csv", "x86 disassembly failures");
     }
 }
