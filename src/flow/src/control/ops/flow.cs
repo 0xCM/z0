@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using Z0.Data;
 
     using static Konst;
 
@@ -14,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static DataFlow<S,T> flow<S,T>(S src, T dst)
-            => Table.flow(src,dst);
+            => new DataFlow<S,T>(src,dst);
     }
 }

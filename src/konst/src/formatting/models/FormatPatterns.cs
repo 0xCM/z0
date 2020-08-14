@@ -9,39 +9,28 @@ namespace Z0
 
     using static Konst;
 
-    [LiteralProvider]
-    public readonly partial struct FormatPatterns
+    public readonly struct FormatPatterns
     {
-        public readonly FormatPattern[] Data;
+        readonly TableSpan<FormatPattern> Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator FormatPatterns(FormatPattern[] src)
+            => new FormatPatterns(src);
 
         [MethodImpl(Inline)]
         public FormatPatterns(FormatPattern[] src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
-        public ReadOnlySpan<string> Descriptions
+        public CellCount Count
         {
             [MethodImpl(Inline)]
-            get => Data.Select(x => x.Description);
+            get => Data.Length;
         }
 
-        public uint Count
-        {
-            [MethodImpl(Inline)]
-            get => (uint)Data.Length;
-        }
-
-        public ref readonly FormatPattern First
-        {
-            [MethodImpl(Inline)]
-            get => ref Data[0];
-        }
-        
         public ReadOnlySpan<FormatPattern> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.View;
         }
         
         public ref readonly FormatPattern this[uint index]

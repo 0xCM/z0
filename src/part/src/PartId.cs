@@ -33,6 +33,7 @@ public enum PartId : ulong
     Kinds = 28, 
     
     Tools = 29,
+    
     Monitor = 30,
 
     // ~ 50
@@ -180,7 +181,8 @@ public enum PartId : ulong
     // ~ 200
     // ~ -------------------------------------------------------------------------------
 
-    ResBytes = 200,
+    ResPack = 200,
+
 
     WfActors = 201,
 

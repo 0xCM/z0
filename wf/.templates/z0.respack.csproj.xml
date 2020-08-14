@@ -1,0 +1,23 @@
+<Project Sdk='Microsoft.NET.Sdk'>
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+
+
+   <ItemGroup>
+    <EmbeddedResource Include="bytes/src/**/*.cs" /> 
+    <EmbeddedResource Include="capture/asm/**/*.asm" /> 
+    <EmbeddedResource Include="capture/asm/**/*.csv" /> 
+    <EmbeddedResource Include="capture/code/**/*.hex" /> 
+    <EmbeddedResource Include="capture/extracted/**/*.csv" /> 
+    <EmbeddedResource Include="capture/parsed/**/*.csv" /> 
+    <EmbeddedResource Include="docs/**/*.csv" /> 
+    <EmbeddedResource Include="index/**/*.csv" /> 
+    <EmbeddedResource Include="literals/**/*.csv" /> 
+    <EmbeddedResource Include="metadata/**/*.csv" /> 
+    <EmbeddedResource Include="recapture/**/*.asm" /> 
+    <EmbeddedResource Include="tables/**/*.csv" /> 
+  </ItemGroup>
+
+</Project>

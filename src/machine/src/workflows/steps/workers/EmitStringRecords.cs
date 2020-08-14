@@ -40,7 +40,7 @@ namespace Z0
             Wf = wf;
             Ct = ct;
             Parts = parts;
-            TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define(TargetFolder);
+            TargetDir = wf.ResourceRoot + FolderName.Define(TargetFolder);
             EmissionCount = 0;
             PartCount = (uint)parts.Length;
             Wf.Created(ActorName, Ct);

@@ -11,6 +11,7 @@ namespace Z0.Data
     
     using F = EnumLiteralField;
     using T = EnumLiteral;
+    using api = Z0.Table;
 
     public readonly struct EnumLiteral
     {        
@@ -40,7 +41,7 @@ namespace Z0.Data
                     
         public string DelimitedText(char delimiter)
         {
-            var formatter = Table.formatter<F>(delimiter);
+            var formatter = api.formatter<F>(delimiter);
             formatter.Append(F.TypeName, TypeName);
             formatter.Delimit(F.Index, Index);
             formatter.Delimit(F.Name, Name);

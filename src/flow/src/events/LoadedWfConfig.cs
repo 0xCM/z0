@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Flow;
-    using static FormatPatterns;
+    using static FormatLiterals;
     using static z;
     
     [Event]

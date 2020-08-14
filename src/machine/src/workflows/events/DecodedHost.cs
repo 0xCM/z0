@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static FormatPatterns;
+    using static FormatLiterals;
     using static Flairs;
 
     [Event]

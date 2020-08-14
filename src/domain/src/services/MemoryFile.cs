@@ -24,6 +24,8 @@ namespace Z0
         
         readonly MemoryMappedViewAccessor View;
 
+        public readonly ulong Size;
+
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
@@ -34,18 +36,30 @@ namespace Z0
         public static MemoryFile open(string path)
             => new MemoryFile(path);
         
-        [MethodImpl(Inline)]
-        public static MemoryFile resbundle()
-            => open(AppPaths.Default.ResBytes.Name);
+        public static MemoryFileInfo describe(in MemoryFile src)
+        {
+            var dst = new MemoryFileInfo();
+            dst.BaseAddress = src.BaseAddress;
+
+            var fi = src.Path.Info;
+            var desc =new FileDescription();
+            desc.Path = FS.path(src.Path.Name);
+            desc.Size = (ByteSize)fi.Length;
+            desc.CreateTS = fi.CreationTime;
+            desc.UpdateTS = fi.LastWriteTime;
+            desc.Attributes = fi.Attributes;
+            dst.Description = desc;
+            return dst;
+        }
         
         [MethodImpl(Inline), Op]
         public Span<byte> Read(MemoryAddress src, uint size)
-            => z.cover(src + Base, size);
+            => z.cover(src, size);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public ref readonly T Read<T>(MemoryAddress src)
             where T : struct
-                => ref first(cover<T>(src + Base, 1));
+                => ref first(cover<T>(src, 1));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public ReadOnlySpan<T> Read<T>(MemoryAddress src, uint count)
@@ -60,15 +74,24 @@ namespace Z0
             var @base = default(byte*);
             View.SafeMemoryMappedViewHandle.AcquirePointer(ref @base);
             Base = @base;
+            Size = (ulong)Path.Info.Length;
         }
-
-        public FileInfo FileInfo
-            => Path.Info;
+        
+        public MemoryFileInfo Description
+            => describe(this);
         
         public void Dispose()
         {
             View?.Dispose();
             File?.Dispose();
         }
+
+        [MethodImpl(Inline)]
+        public MemoryMappedViewStream Stream()
+            => File.CreateViewStream();
+
+        [MethodImpl(Inline)]
+        public MemoryMappedViewStream Stream(MemoryAddress src, ByteSize size)
+            => File.CreateViewStream(src, (int)size);
     }
 }

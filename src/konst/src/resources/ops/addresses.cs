@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<MemoryAddress> addresses(Type declarer)
-            => LiteralFields.values<string>(declarer).Map(Resources.address);
+            => LiteralFieldApi.values<string>(declarer).Map(Resources.address);
     }
 }

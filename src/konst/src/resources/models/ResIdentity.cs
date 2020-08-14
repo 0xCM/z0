@@ -20,7 +20,7 @@ namespace Z0
         public asci32 Name {get;}
 
         /// <summary>
-        /// The sement of memory occupied by the resource
+        /// The memory segment occupied by the resource
         /// </summary>
         public SegRef Reference {get;}
         

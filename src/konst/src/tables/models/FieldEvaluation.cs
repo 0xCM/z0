@@ -2,14 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
-
+    
+    using Z0.Data;
+    
     public struct FieldEvaluation : IFieldEvaluation
     {
         public TableFields Fields {get;}

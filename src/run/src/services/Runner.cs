@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
     using System.Linq;
+    using System.Text;
 
     using Z0.Asm;
 
@@ -60,20 +62,69 @@ namespace Z0
             Wf.Status(Actor, message, Ct);
 
         }
+        
+        static void format(ValueType src, StringBuilder dst)
+        {
+            var type = src.GetType();
+            var fields = Table.fields(src.GetType()).View;
+            var count = fields.Length;
+            for(var i=0; i<count; i++)
+            {
+                var v = skip(fields,i).Definition.Value(src).ValueOrDefault();
+                dst.Append("| ");
+
+                if(type.IsPrimitive)
+                    dst.Append(src.ToString());
+                else if(v is ITextual t)
+                    dst.Append(t.Format());
+                else if(v is ValueType x)
+                    format(x, dst);                
+                else if(v != null)
+                    dst.Append(v.ToString());                
+            }           
+        }
+
+        static void format(object src, StringBuilder dst)
+        {
+            if(src == null)
+                return;
+
+            var type = src.GetType();
+            var fields = Table.fields(type).View;
+            var count = fields.Length;
+            for(var i=0; i<count; i++)
+            {
+                var v = skip(fields,i).Definition.Value(src).ValueOrDefault();
+                dst.Append("| ");
+             
+                if(type.IsPrimitive)
+                    dst.Append(src.ToString());
+                else if(v is ITextual t)
+                    dst.Append(t.Format());
+                else if(v is ValueType x)
+                    format(x, dst);                
+                else if(v != null)
+                    dst.Append(v.ToString());                
+            }
+
+        }
+
+        static string format<T>(in T src)
+            where T : struct
+        {
+            var dst = text.build();
+            format(src, dst);
+            return dst.ToString();
+        }
+        
         void ReadRes()
         {
-            var map = MemoryFile.resbundle();
+            using var map = MemoryFile.open(Wf.ResPack.Name);
             var @base = map.BaseAddress;
             var sig = map.Read(@base, 2).AsUInt16();
             var magic = Z0.Image.PeLiterals.Magical;
-            if(magic== sig[0])
-                Status("Magic lives!");
-
-            //var info = map.FileInfo;
-            // Status(info.Length);
-            // Status(@base);
-            // Status(data.Length);
-            // Status(new BinaryCode(data.ToArray()));
+            var info = map.Description;
+            Status(format(info));
         }
 
 
@@ -91,22 +142,19 @@ namespace Z0
 
             foreach(var file in FS.dir((FS.FolderPath)files.AsmDir))
             {
-                Wf.Status(Actor, file, Ct);
+                Status(file);
             }
 
         }
         public void Run()
         {
-            using var s0 = new ListFormatPatterns(State.Wf, typeof(FormatPatterns));
+            using var s0 = new ListFormatPatterns(State.Wf, typeof(FormatLiterals));
             s0.Run();
 
             ReadRes();
-        
-
-            term.print(TableIndex.AsmTAddressingModRm32);            
+    
+            Status(TableIndex.AsmTAddressingModRm32);            
         }
-
-
 
     }
 }

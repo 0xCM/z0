@@ -15,6 +15,6 @@ namespace Z0.Data
         [MethodImpl(Inline)]
         public static string[] labels<F>()
             where F : unmanaged, Enum
-                => Table.index<F>().Names;
+                => Z0.Table.index<F>().Names;
     }
 }

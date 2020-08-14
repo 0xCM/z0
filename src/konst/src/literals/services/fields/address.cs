@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct LiteralFields
+    partial struct LiteralFieldApi
     {
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address(Type src)

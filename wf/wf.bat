@@ -11,12 +11,13 @@ call %Cmd%
 set Cmd="%Wf%/wf-04-stage.bat"
 call %Cmd%
 
-machine > %ZLogs%\etl\machine.csv
-
-set Cmd="wf\wf-05-archive.bat"
+set Cmd="%Wf%/emit.bat"
 call %Cmd%
 
-set Cmd="%Wf%/wf-10-respack.bat"
+set Cmd="%Wf%/archive.bat"
+call %Cmd%
+
+set Cmd="%Wf%/respack.bat"
 call %Cmd%
 
 set Cmd="commit.bat"

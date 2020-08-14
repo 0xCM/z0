@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
@@ -10,12 +10,11 @@ namespace Z0.Data
     using static Konst;
     using static z;
 
+    using Z0.Data;
+    using static Z0.Data.Table;
+
     partial struct Table
     {
-        [MethodImpl(Inline), Op]
-        public static HeaderCell header(uint index, string label, RenderWidth width)
-            => new HeaderCell(index,label, width);
-
         [MethodImpl(Inline), Op]
         public static TableHeader header(HeaderCell[] data)
             => data;
@@ -29,7 +28,6 @@ namespace Z0.Data
         public static string headerText<E>(char delimiter = FieldDelimiter)
             where E : unmanaged, Enum
                 => header(columns<E>(), delimiter);
-
         [Op]
         public static string header(ReadOnlySpan<TableColumn> columns, char delimiter = FieldDelimiter)
         {

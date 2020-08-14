@@ -29,7 +29,7 @@ namespace Z0
             Wf = wf;
             Ct = ct;
             Parts = parts;
-            TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("constants");
+            TargetDir = wf.ResourceRoot + FolderName.Define("constants");
             Wf.Created(Name, Ct);
         }
                         

@@ -47,7 +47,7 @@ namespace Z0
         public static IdentifiedCode[] save(ApiHostUri host, ParsedExtraction[] src, FilePath dst)
         {
             using var writer = new IdentifiedCodeWriter(dst);
-            var data = src.Map(x => new IdentifiedCode(x.OpUri, x.Encoded.Encoded));
+            var data = src.Map(x => new IdentifiedCode(x.Address, x.OpUri, x.Encoded.Encoded));
             writer.WriteLines(data);
             return data;
         }                

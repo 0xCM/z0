@@ -10,8 +10,11 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface ITable : ITextual
     {
+        string FormatPattern 
+            => "{0}";
+            
         string ITextual.Format()
-            => "Unformatted";
+            => string.Format(FormatPattern, this);
     }
     
     [SuppressUnmanagedCodeSecurity]

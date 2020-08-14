@@ -20,25 +20,13 @@ namespace Z0
         public static MemberCode define(OpUri uri, in LocatedCode data)
             => new MemberCode(uri, data);
 
-        /// <summary>
-        /// Defines uri bits with a potentially bad uri (for diagnostic purposes)
-        /// </summary>
-        /// <param name="perhaps">The uri, perhaps</param>
-        /// <param name="src">The source code</param>
-        [MethodImpl(Inline), Op]
-        public static IdentifiedCode define(ParseResult<OpUri> perhaps, BinaryCode src)
-            => perhaps.MapValueOrSource(
-                    uri => new IdentifiedCode(uri,src), 
-                    baduri => new IdentifiedCode(baduri, src)
-                    );
-
         [MethodImpl(Inline), Op]
         public static LocatedCode define(MemoryAddress address, in BinaryCode code)
             => new LocatedCode(address, code);       
 
         [MethodImpl(Inline), Op]
-        public static IdentifiedCode define(OpUri uri, in BinaryCode data)
-            => new IdentifiedCode(uri, data);
+        public static IdentifiedCode define(MemoryAddress address, OpUri uri, in BinaryCode data)
+            => new IdentifiedCode(address, uri, data);
 
         [MethodImpl(Inline), Op]
         public static BinaryCode define(byte[] data)

@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using Z0.Data;
-
     using F = FarCallCountsField;
 
     using Asm;
@@ -18,9 +16,8 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly partial struct Tables
+    public partial struct ZTables
     {
-
         [MethodImpl(Inline), Op]
         public static void render(in FarCallCounts src, StringBuilder dst)
         {            
@@ -30,10 +27,5 @@ namespace Z0
             formatter.Delimit(F.UnhostedReceivers, src.UnhostedReceivers);        
         }                
         
-        public static EnumNames<Mnemonic> Mnemonics
-        {
-            [MethodImpl(Inline), Op]
-            get => Enums.NameIndex<Mnemonic>();
-        }
     }
 }

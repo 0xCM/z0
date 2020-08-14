@@ -7,7 +7,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly partial struct LiteralFields
+    public readonly partial struct LiteralFieldApi
     {       
         const NumericKind Closure = Integers;        
     }

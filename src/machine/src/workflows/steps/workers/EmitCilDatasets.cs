@@ -34,7 +34,7 @@ namespace Z0
             Ct = ct;
             Parts = parts;
             PartCount = (uint)parts.Length;
-            TargetDir = Wf.AppPaths.ResourceRoot + FolderName.Define(DataFolder);
+            TargetDir = Wf.ResourceRoot + FolderName.Define(DataFolder);
             EmissionCount = 0;
             Wf.Created(WorkerName, Ct);
         }

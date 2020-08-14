@@ -51,7 +51,7 @@ namespace Z0
             Ct = ct;
             Parts = parts;
             Index = default;
-            TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("images");
+            TargetDir = wf.ResourceRoot + FolderName.Define("images");
             var process = Process.GetCurrentProcess();
             Images = process.Modules.Cast<ProcessModule>().Map(from).OrderBy(x => x.BaseAddress);
             Wf.Created(Name, Ct);

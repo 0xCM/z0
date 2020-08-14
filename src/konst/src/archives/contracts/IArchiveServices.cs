@@ -17,9 +17,6 @@ namespace Z0
         FolderPath LogRoot 
             => AppPathDefault.LogRoot;
 
-        FolderPath CaptureRoot
-            => AppPathDefault.CaptureRoot;
-
         ISemanticArchive Semantic 
             => SemanticArchive.Service;
 

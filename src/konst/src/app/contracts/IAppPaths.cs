@@ -114,7 +114,7 @@ namespace Z0
         /// The path to the root application resource directory
         /// </summary>
         FolderPath ResourceRoot 
-            => LogRoot + ResoureFolder;
+            => LogRoot + FolderName.Define("respack/content");
 
         /// <summary>
         /// The path to the resource index directory
@@ -122,18 +122,6 @@ namespace Z0
         FolderPath ResIndexDir
             => ResourceRoot + ResIndexFolder;
             
-        /// <summary>
-        /// The path to the root application resource directory
-        /// </summary>
-        FolderPath ExportRoot 
-            => LogRoot + ExportFolder;
-
-        /// <summary>
-        /// The global capture archive root directory
-        /// </summary>
-        FolderPath CaptureRoot
-            => LogRoot + RelativeLocation.Define("apps/control/capture");
-
         /// <summary>
         /// The runtime root
         /// </summary>
@@ -320,11 +308,5 @@ namespace Z0
 
         string ITextual.Format() 
             => AppName;
-
-        /// <summary>
-        /// The path to the captured x86 resource assembly
-        /// </summary>
-        FilePath ResBytes
-            => FilePath.Define(@"K:\z0\archives\res\bin\lib\netcoreapp3.0\z0.res.dll");
     }
 }

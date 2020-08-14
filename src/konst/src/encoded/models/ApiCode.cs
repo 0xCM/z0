@@ -70,7 +70,7 @@ namespace Z0
         public ApiCode(ApiMember member, BinaryCode code)
         {
             Member = member;
-            Encoded = new IdentifiedCode(member.OpUri, code);
+            Encoded = new IdentifiedCode(member.Address, member.OpUri, code);
         }
 
         public OpKindId KindId

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     public readonly struct TableSpan<T> : ITableSpan<T>
         where T : struct
@@ -47,14 +48,26 @@ namespace Z0
         public CellCount Count
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Data?.Length ?? 0;
         }
 
         public int Length 
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Data?.Length ?? 0;
         } 
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Length == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Length != 0;
+        }
 
         public ref T this[long index]
         {
@@ -66,6 +79,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
+        }
+        
+        [MethodImpl(Inline)]
+        public void Iter(Action<T> f)
+        {
+            var count = Count;
+            ref readonly var src = ref first(View);
+            for(var i=0; i<count; i++)   
+                f(skip(src,i));
         }
     }
 }

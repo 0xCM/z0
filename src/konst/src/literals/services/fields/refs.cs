@@ -11,12 +11,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct LiteralFields
+    partial struct LiteralFieldApi
     {        
         [Op]
         unsafe static FieldRef from(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
         {
-            var data = LiteralFields.value(src);
+            var data = LiteralFieldApi.value(src);
             var type = src.FieldType;
 
             var datatype = Primitive.kind(type);

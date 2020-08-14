@@ -9,7 +9,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct LiteralFields
+    partial struct LiteralFieldApi
     {
 
     }

@@ -46,6 +46,24 @@ namespace Z0
                 => src.ReadOnly().FormatHex(sep, specifier);
 
         /// <summary>
+        /// Formats a span of numeric cell type as a sequence of hex values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        public static string FormatHex<T>(this Span<T> src)
+            where T : unmanaged
+                => src.ReadOnly().FormatHex(Chars.Space, false);
+
+        /// <summary>
+        /// Formats a span of numeric cell type as a sequence of hex values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        public static string FormatHex<T>(this ReadOnlySpan<T> src)
+            where T : unmanaged
+                => src.FormatHex(Chars.Space, false);
+
+        /// <summary>
         /// Formats a (hopefully finite) stream of values (hopefully numeric) as a sequence of hex values
         /// </summary>
         /// <param name="src">The source span</param>

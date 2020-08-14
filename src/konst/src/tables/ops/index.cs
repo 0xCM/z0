@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
@@ -10,27 +10,16 @@ namespace Z0.Data
 
     using static Konst;
     using static z;
+    using Z0.Data;
 
     partial struct Table
     {
-        [MethodImpl(Inline)]
-        public static FieldIndex<F> index<F>()
-            where F : unmanaged, Enum
-                => new FieldIndex<F>(0);
-        
-        [MethodImpl(Inline)]
-        public static TableIndex<F,T,I> index<F,T,I>(T[] data, F f = default, I i = default)
-            where F : unmanaged, Enum
-            where T : struct, ITable<F,T>
-            where I : unmanaged
-                => new TableIndex<F,T,I>(content(data,f));
+        [MethodImpl(Inline), Op]
+        public static LiteralFields literals(Type src)
+            => new LiteralFields(src.LiteralFields());
 
-        [MethodImpl(Inline)]
-        public static TableIndex<F,T,D,I> index<F,T,D,I>(T[] data, F f = default, D d = default, I i = default)
-            where F : unmanaged, Enum
-            where D :  unmanaged, Enum
-            where I : unmanaged
-            where T : struct, ITable<F,T,D>
-                    => new TableIndex<F,T,D,I>(content(data,f,d));
+        [Op]
+        public static ReadOnlySpan<EnumLiteralRecord> literals(PartId part, Type src)
+            => EnumLiteralRecords.from(part,src);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Konst;
-    using static FormatPatterns;
+    using static FormatLiterals;
     using static Flow;
 
     [Event]

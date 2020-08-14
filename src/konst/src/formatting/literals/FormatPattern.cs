@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct FormatPattern
+    public readonly struct FormatPattern : ITextual
     {
         readonly FieldInfo Source;
 
@@ -23,11 +23,8 @@ namespace Z0
             Content = content;
         }     
 
-        public string Description
-        {
-            [MethodImpl(Inline)]
-            get => text.concat(Source.Name, ": ", Content);
-        }
+        public string Format()
+            => StringRefs.format("{0}: {1}", Source.Name, Content);
 
         public string Apply<T0>(T0 t0)   
         {

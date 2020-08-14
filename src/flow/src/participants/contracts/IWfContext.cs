@@ -33,8 +33,20 @@ namespace Z0
                 
         IPart[] Known {get;}
         
+        FolderPath AppDataRoot
+            => ContextRoot.AppPaths.AppDataRoot;
+
+        FolderPath ConfigRoot
+            => ContextRoot.AppPaths.ConfigRoot;
+
         IAppPaths AppPaths 
             => ContextRoot.AppPaths;
+
+        FilePath ResPack
+            => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
+
+        FilePath ResPackStage
+            => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
 
         CorrelationToken Ct {get;}
         
@@ -106,6 +118,7 @@ namespace Z0
 
         void Initialized(string actor)
             => Raise(new WorkerInitialized(actor, Ct));
+
 
         void Running<T>(T message, string actor)
         {

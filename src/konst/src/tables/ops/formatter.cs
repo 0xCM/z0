@@ -2,17 +2,29 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
+
+    using Z0.Data;
 
     using static Konst;
     using static z;
 
     partial struct Table
     {
+        [MethodImpl(Inline)]
+        public static Z0.TableFormatter<F> formatter<F>(in LiteralFields<F> fields, char delimiter = FieldDelimiter)
+            where F : unmanaged, Enum
+                => new Z0.TableFormatter<F>(text.build(), delimiter, fields);
+
+        [MethodImpl(Inline)]
+        public static FieldFormatter<F> formatter<F>(char delimiter = FieldDelimiter) 
+            where F : unmanaged, Enum
+                => new FieldFormatter<F>(text.build(), delimiter);        
+
         /// <summary>
         /// Creates a formatter from a rendering function render:C -> T
         /// </summary>
@@ -28,10 +40,6 @@ namespace Z0.Data
             where F : unmanaged, Enum
                 => new Z0.TableFormatter<F>(text.build(), FieldDelimiter);
 
-        [MethodImpl(Inline)]
-        public static Z0.TableFormatter<F> formatter<F>(in LiteralFields<F> fields, char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
-                => new Z0.TableFormatter<F>(text.build(), delimiter, fields);
 
         [MethodImpl(Inline)]
         public static Z0.TableFormatter<F> formatter<F>(in LiteralFields<F> fields, StringBuilder dst, char delimiter = FieldDelimiter)
@@ -58,10 +66,5 @@ namespace Z0.Data
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
                 => new TableFormatter<F,T>(fields, dst);
-
-        [MethodImpl(Inline)]
-        public static FieldFormatter<F> formatter<F>(char delimiter = FieldDelimiter) 
-            where F : unmanaged, Enum
-                => new FieldFormatter<F>(text.build(), delimiter);        
     }
 }

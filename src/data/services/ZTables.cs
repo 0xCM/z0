@@ -8,12 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
+    using Z0.Asm;
 
     using static Konst;
     using static z;
 
-    partial struct Tables
+    public partial struct ZTables
     {
+        public static EnumNames<Mnemonic> Mnemonics
+        {
+            [MethodImpl(Inline), Op]
+            get => Enums.NameIndex<Mnemonic>();
+        }
+
+
         [MethodImpl(Inline), Op]
         static void fill(in LocatedImage src,ref ProcessImageSummary dst)
         {

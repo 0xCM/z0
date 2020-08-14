@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> cover<T>(MemoryAddress address, uint count)
             where T : struct
-                => cover<T>((void*)address, count); 
+                => CreateSpan<T>(ref address.Ref<T>(), (int)count); 
         
         /// <summary>
         /// Reveals the character data identified by a string reference

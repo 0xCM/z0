@@ -16,10 +16,6 @@ namespace Z0.Asm
     
     public readonly struct ProcessAsm
     {                
-        [MethodImpl(Inline)]
-        public static ProcessAsm create(IWfState state, in EncodedParts encoded) 
-            => new ProcessAsm(state, encoded);
-
         readonly Dictionary<Mnemonic, ArrayBuilder<AsmRecord>> Index;
 
         readonly IWfContext Wf;

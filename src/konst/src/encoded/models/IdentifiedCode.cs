@@ -13,7 +13,12 @@ namespace Z0
     /// The hex bits found at the end of a uri
     /// </summary>
     public readonly struct IdentifiedCode : IIdentifiedCode<IdentifiedCode,BinaryCode>
-    {
+    {        
+        /// <summary>
+        /// The code's base address
+        /// </summary>
+        public readonly MemoryAddress Base;
+
         /// <summary>
         /// The operation uri
         /// </summary>
@@ -25,17 +30,19 @@ namespace Z0
         public readonly BinaryCode Code;
 
         [MethodImpl(Inline)]
-        public IdentifiedCode(OpUri uri, BinaryCode src)
+        public IdentifiedCode(MemoryAddress @base, OpUri uri, BinaryCode src)
         {
+            Base = @base;
             Uri = uri;
             Code = src;            
         }
 
         [MethodImpl(Inline)]
-        internal IdentifiedCode(string baduri, BinaryCode src)
+        public IdentifiedCode(OpUri uri, BinaryCode src)
         {
-            Uri = OpUri.Empty;
-            Code = src;
+            Base = 0ul;
+            Uri = uri;
+            Code = src;            
         }
 
         /// <summary>
@@ -121,6 +128,6 @@ namespace Z0
         /// No code, no identity, no life
         /// </summary>
         public static IdentifiedCode Empty 
-            => new IdentifiedCode(OpUri.Empty, BinaryCode.Empty);
+            => new IdentifiedCode(MemoryAddress.Empty, OpUri.Empty, BinaryCode.Empty);
     }
 }

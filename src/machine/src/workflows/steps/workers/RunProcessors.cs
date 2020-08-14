@@ -51,7 +51,7 @@ namespace Z0
         {
             State = wf;
             Ct = ct;
-            TargetDir = Wf.AppPaths.AppDataRoot + FolderName.Define(ActorName);
+            TargetDir = Wf.AppDataRoot + FolderName.Define(ActorName);
             Files = PartFiles.create(Asm);            
             Buffer = list<Instruction>(2000);
         }

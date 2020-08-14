@@ -22,6 +22,17 @@ namespace Z0
         /// A bow to the ubiquitous and unreasonable devotion to *signed* 32-bit integers
         /// </summary>
         int Length {get;}
+
+        /// <summary>
+        /// Specifies whether the data is missing
+        /// </summary>
+        bool IsEmpty {get;}
+
+        /// <summary>
+        /// Specifies whether at least one cell is populated
+        /// </summary>
+        bool IsNonEmpty {get;}
+
     }
 
     /// <summary>
@@ -35,10 +46,10 @@ namespace Z0
         T[] Storage {get;}
         
         int ITableSpan.Length 
-            => Storage.Length;
+            => Storage?.Length ?? 0;
 
         CellCount ITableSpan.Count 
-            => Storage.Length;
+            => Storage?.Length ?? 0;
         
         Span<T> Edit 
             => Storage;
@@ -51,6 +62,12 @@ namespace Z0
 
         ref T this[ulong index] 
             => ref Storage[index];
+
+        bool ITableSpan.IsEmpty
+            => Length == 0;
+
+        bool ITableSpan.IsNonEmpty
+            => Length != 0;
     }
 
     /// <summary>

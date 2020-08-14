@@ -10,15 +10,28 @@ namespace Z0
 
     using static Konst;
     using static ReflectionFlags;
+    using static z;
 
     partial class XTend
     {
         /// <summary>
-        /// Queries the source <see cref='Type'/> for <see cref='FieldInfo'/> members determined by the <see cref='BF_All'/> flags where <see cref='FieldInfo.IsLiteral'/> is true
+        /// Queries the source <see cref='Type'/> for <see cref='FieldInfo'/> members determined by the 
+        /// <see cref='BF_Declared'/> flags where <see cref='FieldInfo.IsLiteral'/> is true
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static FieldInfo[] LiteralFields(this Type src)
-            => src.Fields().Literals();
+            => src.GetFields(BF_Declared).Where(f => f.IsLiteral);
+
+        /// <summary>
+        /// Queries the source <see cref='Type'/> for <see cref='FieldInfo'/> members determined by the 
+        /// <see cref='BF_Declared'/> flags where <see cref='FieldInfo.IsLiteral'/> is true with field types that match
+        /// a specified type
+        /// </summary>
+        /// <param name="src">The source type</param>
+        /// <param name="match">The literal field type to match</param>
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<FieldInfo> LiteralFields(this Type src, Type match)
+            => src.GetFields(BF_Declared).Where(f => f.IsLiteral && f.FieldType == match);    
     }
 }

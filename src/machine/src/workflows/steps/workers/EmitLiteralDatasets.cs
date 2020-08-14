@@ -32,7 +32,7 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         FolderPath Target 
-            => Wf.AppPaths.ResourceRoot + FolderName.Define("fields");
+            => Wf.ResourceRoot + FolderName.Define("fields");
 
         KnownParts Parts
             => KnownParts.Service;
@@ -78,7 +78,7 @@ namespace Z0
         [Op]
         public static string[] strings(Type src)
         {
-            var fields = LiteralFields.stringlits(src);
+            var fields = LiteralFieldApi.stringlits(src);
             var @base = address(src);
             var count = fields.Length;
             var offset = MemoryAddress.Empty;  
@@ -88,7 +88,7 @@ namespace Z0
             for(var j=0u; j<count; j++)
             {
                 ref readonly var field = ref fields[j];
-                var content = LiteralFields.@string(field) ?? EmptyString;
+                var content = LiteralFieldApi.@string(field) ?? EmptyString;
                 seek(dst,j) = content;
                 if(!text.blank(content))
                     offset += from(@base, offset, field).DataSize;
@@ -99,7 +99,7 @@ namespace Z0
         [Op]
         unsafe static FieldRef from(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
         {
-            var data = LiteralFields.value(src);
+            var data = LiteralFieldApi.value(src);
             var type = src.FieldType;
 
             var datatype = Primitive.kind(type);
@@ -139,7 +139,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 var type = src[i];
-                var fields = LiteralFields.search(type);
+                var fields = LiteralFieldApi.search(type);
                 var @base = address(type);
                 var offset = MemoryAddress.Empty;
                 for(var j=0u; j<fields.Length; j++)

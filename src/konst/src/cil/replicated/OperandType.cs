@@ -11,14 +11,13 @@ namespace Z0.CilSpecs
 	{
 		/// <summary>4-byte relative instruction offset</summary>
 		InlineBrTarget,
-		/// <summary>4-byte field token (<see cref="Table.Field"/> or <see cref="Table.MemberRef"/>)</summary>
+		/// <summary>4-byte field token</summary>
 		InlineField,
 		/// <summary>int32</summary>
 		InlineI,
 		/// <summary>int64</summary>
 		InlineI8,
-		/// <summary>4-byte method token (<see cref="Table.Method"/>, <see cref="Table.MemberRef"/>
-		/// or <see cref="Table.MethodSpec"/>)</summary>
+		/// <summary>4-byte method token </summary>
 		InlineMethod,
 		/// <summary>No operand</summary>
 		InlineNone,
@@ -28,18 +27,15 @@ namespace Z0.CilSpecs
 		InlineR,
 		/// <summary/>
 		NOT_USED_8,
-		/// <summary>4-byte method sig token (<see cref="Table.StandAloneSig"/>)</summary>
+		/// <summary>4-byte method sig token</summary>
 		InlineSig,
 		/// <summary>4-byte string token (<c>0x70xxxxxx</c>)</summary>
 		InlineString,
 		/// <summary>4-byte count N followed by N 4-byte relative instruction offsets</summary>
 		InlineSwitch,
-		/// <summary>4-byte token (<see cref="Table.Field"/>, <see cref="Table.MemberRef"/>,
-		/// <see cref="Table.Method"/>, <see cref="Table.MethodSpec"/>, <see cref="Table.TypeDef"/>,
-		/// <see cref="Table.TypeRef"/> or <see cref="Table.TypeSpec"/>)</summary>
+		/// <summary>4-byte token </summary>
 		InlineTok,
-		/// <summary>4-byte type token (<see cref="Table.TypeDef"/>, <see cref="Table.TypeRef"/> or
-		/// <see cref="Table.TypeSpec"/>)</summary>
+		/// <summary>4-byte type token </summary>
 		InlineType,
 		/// <summary>2-byte param/local index</summary>
 		InlineVar,

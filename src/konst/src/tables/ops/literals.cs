@@ -12,17 +12,12 @@ namespace Z0.Data
 
     partial struct Table
     {
-        [MethodImpl(Inline), Op]
-        public static LiteralFields literals(Type src)
-            => new LiteralFields(src.DeclaredLiteralFields());
         
         [MethodImpl(Inline)]
         public static LiteralFields<F> literals<F>()
             where F : unmanaged, Enum
-                => new LiteralFields<F>(typeof(F).DeclaredLiteralFields());        
+                => new LiteralFields<F>(typeof(F).LiteralFields());        
 
-        [Op]
-        public static ReadOnlySpan<EnumLiteralRecord> literals(PartId part, Type src)
-            => EnumLiteralRecords.from(part,src);
+
     }
 }

@@ -117,7 +117,7 @@ namespace Z0
             var count = src.Count;
             var buffer = span(src.Content.Array);
             var tables = buffer.Slice(offset,count);
-            var dir = (Wf.AppPaths.ResourceRoot + FolderName.Define("tables")) + FolderName.Define("asm");
+            var dir = (Wf.ResourceRoot + FolderName.Define("tables")) + FolderName.Define("asm");
             var dst = dir + FileName.Define(src.Key.ToString(), FileExtensions.Csv);
             using var writer = dst.Writer();
             writer.WriteLine(AsmRecord.FormatHeader());        

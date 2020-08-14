@@ -7,17 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    using Z0.Data;
-        
     using static Konst;
-    using static Flow;
     using static EmitEnumCatalogStep;
 
     using F = EnumLiteralRecordField;
 
-    [Step(WfStepKind.EmitEnumCatalog)]
+    [Step(Kind)]
     public readonly ref struct EmitEnumCatalog
     {
+        public const WfStepKind Kind = WfStepKind.EmitEnumCatalog;
         readonly IWfContext Wf;
         
         readonly CorrelationToken Ct;

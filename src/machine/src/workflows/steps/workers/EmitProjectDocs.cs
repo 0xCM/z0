@@ -58,7 +58,7 @@ namespace Z0
 
         Dictionary<PartId, Dictionary<string,string>> collect()
         {
-            var docs = AppPaths.Default.ResourceRoot + FolderName.Define("docs");
+            var docs = Wf.ResourceRoot + FolderName.Define("docs");
             docs.Clear();
             var src = collect(KnownParts.Service.ComponentPaths.ToArray());
             var dst = new Dictionary<PartId, Dictionary<string,ProjectDocRecord>>();

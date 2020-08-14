@@ -9,7 +9,7 @@ namespace Z0
     using System.Text;
 
     using static Konst;
-    using static FormatPatterns;
+    using static FormatLiterals;
 
     partial struct Flow    
     {

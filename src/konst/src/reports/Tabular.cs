@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static F[] literals<F>()
             where F : unmanaged, Enum            
-                => Table.index<F>().Literals;
+                => Z0.Table.index<F>().Literals;
 
         /// <summary>
         /// Derives format configuration data from a type

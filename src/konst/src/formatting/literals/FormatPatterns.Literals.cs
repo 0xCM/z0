@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static AsciCharText;
 
-    public readonly partial struct FormatPatterns
+    [LiteralProvider]
+    public readonly struct FormatLiterals
     {
         /// <summary>
         /// Defines the literal '{'

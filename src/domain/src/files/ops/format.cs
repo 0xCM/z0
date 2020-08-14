@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using Z0.Data;
-
     using static Konst;
     using static z;
+    using api = Table;
 
     using F = ListedFileField;
 
@@ -34,7 +33,7 @@ namespace Z0
         {
             var records = span(src.Data);
             var count = records.Length;
-            var header = Table.header<F>();
+            var header = api.header<F>();
             dst.AppendLine(header.HeaderText);
             for(var i=0u; i<count; i++)
             {

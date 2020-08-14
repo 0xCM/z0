@@ -149,6 +149,26 @@ namespace Z0
             => new MemoryAddress(a.Location + b.Location);
 
         [MethodImpl(Inline)]
+        public static MemoryAddress operator+(MemoryAddress a, byte* b)
+            => new MemoryAddress(a.Location + (ulong)b);
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress operator+(MemoryAddress a, ushort* b)
+            => new MemoryAddress(a.Location + (ulong)b);
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress operator+(MemoryAddress a, uint* b)
+            => new MemoryAddress(a.Location + (ulong)b);
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress operator+(MemoryAddress a, ulong* b)
+            => new MemoryAddress(a.Location + (ulong)b);
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress operator+(MemoryAddress a, void* b)
+            => new MemoryAddress(a.Location + (ulong)b);
+
+        [MethodImpl(Inline)]
         public static MemoryAddress operator-(MemoryAddress a, MemoryAddress b)
             => new MemoryAddress(a.Location - b.Location);
 

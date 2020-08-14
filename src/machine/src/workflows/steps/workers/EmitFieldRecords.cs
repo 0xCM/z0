@@ -30,7 +30,7 @@ namespace Z0
             Ct = ct;
             Parts = parts;
             Spec = ImageRecords.Fields;
-            TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("fields");
+            TargetDir = wf.ResourceRoot + FolderName.Define("fields");
             Wf.Created(WorkerName, Ct);
         }
 

@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct LiteralFields
+    partial struct LiteralFieldApi
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static FieldValues<T> from<T>(Type src)

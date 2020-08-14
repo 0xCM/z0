@@ -1,5 +1,6 @@
 echo off
-call wf\wf-vars.cmd
-echo on
-set Cmd="%Wf%/wf-10-respack.bat"
-call %Cmd%
+set SlnName="z0.res.sln"
+set Archive="K:\z0\archives"
+set SrcDir="%Archive%/res"
+set SlnPath="%SrcDir%/%SlnName%"
+call dotnet.exe build %SlnPath%

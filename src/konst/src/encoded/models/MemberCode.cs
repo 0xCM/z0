@@ -88,7 +88,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator IdentifiedCode(MemberCode src)
-            => new IdentifiedCode(src.OpUri, src.Encoded);
+            => new IdentifiedCode(src.Address, src.OpUri, src.Encoded);
 
         [MethodImpl(Inline)]
         public MemberCode(OpUri uri, LocatedCode code)

@@ -10,6 +10,7 @@ namespace Z0.Data
 
     using static Konst;
     using static z;
+    using api = Z0.Table;
 
     public readonly struct TableHeader<F>
         where F : unmanaged, Enum
@@ -39,7 +40,7 @@ namespace Z0.Data
                 
         public string Format()
         {
-            var formatter = Table.formatter<F>(Fields, Delimiter);
+            var formatter = api.formatter<F>(Fields, Delimiter);
             for(var i=0u; i<Fields.Count; i++)
             {
                 if(i != 0)

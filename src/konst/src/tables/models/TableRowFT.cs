@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -23,10 +23,10 @@ namespace Z0.Data
         [MethodImpl(Inline)]
         public TableRow(T src)
         {
-            var fields = Table.fields<F,T>();
+            var fields = Z0.Table.fields<F,T>();
             var count = fields.Count;
             var buffer = alloc<BinaryCode>(count);
-            Values = Table.evaluate<F,T>(src,fields);
+            Values = Z0.Data.Table.evaluate<F,T>(src,fields);
             Data = src;            
             Cells = buffer;
             for(var i=0u; i<count; i++)

@@ -11,30 +11,10 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static FormatPatterns;
+    using static FormatLiterals;
 
     partial struct Flow
     {
-        [Op]
-        public static FormatPatterns patterns(Type type)            
-        {
-            var fields = span(type.LiteralFields().Where(f => f.FieldType == typeof(string)));
-            var count = fields.Length;            
-            var buffer = alloc<FormatPattern>(count);
-            var dst = span(buffer);
-            for(var i=0u; i<count; i++)
-            {
-                var field = skip(fields,i);
-                var value = (string) field.GetRawConstantValue();
-                seek(dst,i) = new FormatPattern(field, value);
-            }
-            return new FormatPatterns(buffer);
-        }
-
-        [MethodImpl(Inline), Op]
-        static ReadOnlySpan<string> describe(FormatPatterns src)
-            => src.Descriptions;
-
         /// <summary>
         /// Defines the default field delimiter
         /// </summary>

@@ -12,7 +12,7 @@ namespace Z0
     using static Flow;
     using static EmitDatasetsStep;
     
-    [Step(WfStepKind.EmitDatasets)]
+    [Step(Kind)]
     public ref partial struct EmitDatasets  
     {
         readonly IWfContext Wf;
@@ -20,7 +20,6 @@ namespace Z0
         readonly CorrelationToken Ct;
         
         readonly bool Recapture;
-
 
         public EmitDatasets(IWfContext context, CorrelationToken ct)
         {
@@ -43,19 +42,18 @@ namespace Z0
             }
         }
 
+ 
+        public void Dispose()
+        {
+            Wf.Finished(nameof(EmitDatasets), Ct);
+        }
+
         void Run(EmitResBytesStep kind)
         {
             using var step = EmitResBytes.create(Wf, Ct);
             step.Run();
         }
         
-        void Run(RecaptureStep kind)
-        {
-            var resources = Resources.code(Assembly.LoadFrom(Wf.AppPaths.ResBytes.Name));
-            var capture = WfBuilder.wfc(Wf, Ct);
-            using var step = new Recapture(capture);
-            step.CaptureResBytes();        
-        }
 
         void Run(EmitMetadataSetsStep kind)
         {
@@ -97,10 +95,13 @@ namespace Z0
             Run(default(EmitFieldLiteralsStep));
             Run(default(EmitContentCatalogStep));
         }
- 
-        public void Dispose()
+
+        void Run(RecaptureStep kind)
         {
-            Wf.Finished(nameof(EmitDatasets), Ct);
+            var resources = Resources.code(Assembly.LoadFrom(Wf.ResPack.Name));
+            var capture = WfBuilder.wfc(Wf, Ct);
+            using var step = new Recapture(capture);
+            step.CaptureResBytes();        
         }
     }
 }

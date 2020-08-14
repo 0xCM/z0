@@ -22,10 +22,10 @@ namespace Z0
             var ct = CorrelationToken.define(PartId.Machine);
             var config = Flow.configure(context, args, ct);            
             using var wf = Flow.context(context, config, ct);
-            wf.RunningT(nameof(Control), Flow.delimit(config.Parts), ct);
+            wf.RunningT(ActorName, Flow.delimit(config.Parts), ct);
             using var control = new Control(wf);
             control.Run();
-            wf.Ran(nameof(Control), ct);
+            wf.Ran(ActorName, ct);
         }
 
         readonly IAppContext Context;
@@ -47,7 +47,7 @@ namespace Z0
             Context = wf.ContextRoot;
             Asm = WfBuilder.asm(Context);                           
             State = new WfState(Wf, Asm, wf.Config, wf.Ct);
-            StepConfig = WorkflowStepConfig.Load(Wf);
+            StepConfig = WorkflowStepConfig.load(Wf);
         }
             
         public void Run()

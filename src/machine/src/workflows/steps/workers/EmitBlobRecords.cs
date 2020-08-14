@@ -30,7 +30,7 @@ namespace Z0
             Wf = wf;
             Ct = ct;
             Parts = parts;
-            TargetDir = wf.AppPaths.ResourceRoot + FolderName.Define("blobs");
+            TargetDir = wf.ResourceRoot + FolderName.Define("blobs");
             EmissionCount = 0;
             Wf.Created(StepName, ct);
         }

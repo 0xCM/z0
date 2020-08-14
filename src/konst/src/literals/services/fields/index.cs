@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct LiteralFields
+    partial struct LiteralFieldApi
     {
         [MethodImpl(Inline)]
         public static FieldValues<E,T> index<E,T>(FieldValue<E,T>[] src)
