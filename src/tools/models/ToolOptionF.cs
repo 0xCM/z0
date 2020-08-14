@@ -7,15 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Tools;
-    
     using static Konst;
 
-    partial struct Tooling
+    public readonly struct ToolOption<F> : IToolOption<F>
+        where F : unmanaged, Enum
     {
-        [Op]
-        public static ToolRunner runner(IWfContext context, string command, ToolRunnerConfig config)
-            => new ToolRunner(command, config);
-    }
+        public F Flag {get;}
 
+        public string Value {get;}
+
+        [MethodImpl(Inline)]
+        public ToolOption(F flag, string value)
+        {
+            Flag = flag;
+            Value = value;
+        }
+    }
 }

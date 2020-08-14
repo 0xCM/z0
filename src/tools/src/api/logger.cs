@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Tools;
-    
     using static Konst;
 
     partial struct Tooling

@@ -7968,3 +7968,35 @@
  rename src/konst/src/{tables/models => formatting/literals}/FormatPatterns.cs (100%)
  rename src/{domain/src/models => machine/src/workflows/steps/workers}/EnumLiteralField.cs (90%)
  create mode 100644 wf/needs.bat
+[master 269023a0e] .
+ 182 files changed, 1367 insertions(+), 403 deletions(-)
+ create mode 100644 src/domain/src/files/models/FileDescription.cs
+ create mode 100644 src/domain/src/files/models/MemoryFileInfo.cs
+ rename src/domain/src/files/models/objects/{FoldePath.cs => FolderPath.cs} (70%)
+ rename src/konst/src/formatting/{literals => models}/FormatPatterns.cs (57%)
+ create mode 100644 src/konst/src/formatting/ops/patterns.cs
+ create mode 100644 src/konst/src/reflective/xtend/type/Type.LiteralFieldValues.cs
+ rename src/konst/src/reflective/xtend/type/{Type.DeclaredLiteralFields.cs => Type.LiteralFields.cs} (53%)
+ rename src/konst/src/resources/models/{BinaryResourceIndex.cs => BinaryResources.cs} (100%)
+ create mode 100644 src/konst/src/stringref/ops/format.cs
+ rename src/{domain/src/flow => konst/src/tables}/TableSpans.cs (100%)
+ rename src/konst/src/tables/contracts/{IFieldValues.cs => IFieldEvaluation.cs} (100%)
+ rename src/{domain/src/flow => konst/src/tables/contracts}/ITableSpan.cs (86%)
+ rename src/{domain/src/flow => konst/src/tables/models}/TableSpanT.cs (72%)
+ rename src/{domain/src/flow => konst/src/tables/models}/TableSpanTI.cs (100%)
+ rewrite src/konst/src/tables/ops/index.cs (67%)
+ create mode 100644 src/konst/src/tables/ops/init.cs
+ create mode 100644 src/run/src/services/MetadatIndex.cs
+ create mode 100644 src/run/src/services/MetadataReader.Fields.cs
+ create mode 100644 src/run/src/services/MetadataReader.Handles.cs
+ create mode 100644 src/run/src/services/MetadataReader.Index.cs
+ create mode 100644 src/run/src/services/MetadataReader.Readers.cs
+ create mode 100644 src/run/src/services/MetadataReader.cs
+ create mode 100644 src/run/src/services/MetdataTables.cs
+ create mode 100644 wf/.templates/Empty.sln
+ create mode 100644 wf/.templates/z0.respack.csproj.xml
+ create mode 100644 wf/.templates/z0.respack.directory.build.props
+ create mode 100644 wf/.templates/z0.respack.sln
+ rename wf/{wf-05-archive.bat => archive.bat} (98%)
+ create mode 100644 wf/emit.bat
+ delete mode 100644 wf/wf-10-respack.bat

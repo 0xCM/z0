@@ -30,7 +30,11 @@ namespace Z0
             => new CaptureControl(state(root, config, ct));
 
         [MethodImpl(Inline)]
-        public static CaptureControl create(IAppContext root, string[] args, CorrelationToken ct)
-            => CaptureController.create(root, Flow.configure(root, args, ct), ct);
+        public static CaptureControl create(WfState state)
+            => new CaptureControl(state);
+
+        // [MethodImpl(Inline)]
+        // public static CaptureControl create(IAppContext root, string[] args, CorrelationToken ct)
+        //     => CaptureController.create(root, Flow.configure(root, args, ct), ct);
     }
 }

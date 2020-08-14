@@ -32,18 +32,25 @@ namespace Z0
             Raise(status(ActorName, "Application created", Ct));        
         }
 
-        void RunDumpBin()
+        public void RunDumpBin()
         {
             var tool = DumpBin.create(Wf);
-            var archive = tool.Target;
+            var archive = tool.Target;            
             var files  = archive.Files(DumpBinFlag.Disasm);
             var listed = Tooling.listed(files);
             var formatted = FS.format(listed);
+
+            term.print(listed.Count);
             
             using var processor = tool.processor(default(FileKinds.Asm));
             for(var i=0u; i <files.Count; i++)
             {
-                processor.Process(files[i]);
+                if(files[i].Path.Name.Contains(".instructions."))
+                {
+                    processor.Process(files[i]);
+                    var message = text.format(FormatLiterals.PSx2, processor.LineCount, processor.IxCount);
+                    Wf.Status(ActorName, message, Ct);
+                }
             }                           
         }
 
@@ -55,6 +62,7 @@ namespace Z0
             {
                 var config = Flow.configure(Context, args, Ct);            
                 Wf = Flow.context(Context, config, Ct);
+                RunDumpBin();
                 
             }
             catch(Exception e)

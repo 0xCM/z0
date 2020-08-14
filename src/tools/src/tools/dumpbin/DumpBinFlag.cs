@@ -6,7 +6,6 @@ namespace Z0.Tools
 {
     using System;
 
-    using static Konst;
     using static Pow2x32;
 
     [Flags]
@@ -46,5 +45,4 @@ namespace Z0.Tools
         
         Tls = P2ᐞ16,
     }
-
 }

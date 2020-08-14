@@ -18,7 +18,7 @@ namespace Z0
     
     /// <summary>
     /// Command represents a running of a command lineNumber process.  It is basically
-    /// a wrapper over System.Diagnostics.Process, which hides the complexitity
+    /// a wrapper over System.Diagnostics.Process, which hides the complexity
     /// of System.Diagnostics.Process, and knows how to capture output and otherwise
     /// makes calling commands very easy.
     /// </summary>

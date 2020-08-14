@@ -13,7 +13,7 @@ namespace Z0.Tools
     {   
         [MethodImpl(Inline), Op]
         public static DumpBin create(IWfContext wf)
-            => new DumpBin(wf, Tooling.ToolSourceDir, (wf.AppPaths.LogRoot + FolderName.Define("tools")) + FolderName.Define(DumpBin.ToolName));
+            => new DumpBin(wf, Tooling.ToolSourceDir, (wf.ArchiveRoot + FolderName.Define("tools")) + FolderName.Define(DumpBin.ToolName));
 
         public const string ToolName = "dumpbin";                
         
@@ -34,13 +34,13 @@ namespace Z0.Tools
         public ToolFlags<DumpBinFlag> Flags {get;}
         
         [MethodImpl(Inline)]
-        public DumpBin(IWfContext wf, FolderPath src, FolderPath dst)
+        public DumpBin(IWfContext wf, FolderPath src, FolderPath outdir)
         {
             Wf = wf;
             Name = ToolName;
             ToolId = Name;
             SourceDir = src;
-            TargetDir = dst;
+            TargetDir = outdir;
             Flags = new ToolFlags<DumpBinFlag>(0);
             Map = new ExtensionMap<DumpBinFlag,ExtMap>(0);
             Target = new ToolArchive<DumpBin,DumpBinFlag>(wf, Name, TargetDir, Map);

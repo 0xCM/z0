@@ -20,7 +20,8 @@ namespace Z0
         public static void run(IAppContext context, params string[] args)
         {
             var ct = CorrelationToken.define(PartId.Machine);
-            var config = Flow.configure(context, args, ct);            
+            var paths = context.AppPaths;
+            var config = Flow.configure(context, args, paths.ResourceRoot + FolderName.Define("capture"), ct);
             using var wf = Flow.context(context, config, ct);
             wf.RunningT(ActorName, Flow.delimit(config.Parts), ct);
             using var control = new Control(wf);
@@ -66,7 +67,8 @@ namespace Z0
 
         void Run(CaptureClientStep kind, params string[] args)
         {
-            using var control = CaptureController.create(Context, args, Ct);
+            // using var control = CaptureController.create(Context, Wf.Config, Ct);
+            using var control = CaptureController.create(State);
             control.Run();                        
         }
         

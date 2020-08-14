@@ -7,16 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Tools;
-    
     using static Konst;
 
-    partial struct Tooling
-    {
+    public readonly struct ToolOption<F,K> : IToolOption<F,K>
+        where F : unmanaged, Enum
+        where K : unmanaged, Enum
+    {        
+        public F Flag {get;}
+
+        public K Value {get;}
+
         [MethodImpl(Inline)]
-        public static ToolArchive<T,F> archive<T,F>(IWfContext wf, ToolId id, FolderPath root)
-            where T : struct, ITool<T,F>
-            where F : unmanaged, Enum   
-                => new ToolArchive<T,F>(wf, id, root);
+        public ToolOption(F flag, K value)
+        {
+            Flag = flag;
+            Value = value;
+        }
     }
 }

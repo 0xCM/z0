@@ -5,7 +5,7 @@
 // License    :  MIT
 // Original   : roslyn/src/Compilers/Core/CommandLine/CompilerServerLogger.cs
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
     using System.IO;

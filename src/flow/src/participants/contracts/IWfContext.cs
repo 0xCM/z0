@@ -42,6 +42,9 @@ namespace Z0
         IAppPaths AppPaths 
             => ContextRoot.AppPaths;
 
+        FolderPath ArchiveRoot
+            => FolderPath.Define(@"k:/z0/archives");
+        
         FilePath ResPack
             => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
 
