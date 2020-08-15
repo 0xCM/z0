@@ -16,10 +16,10 @@ namespace Z0.Asm
         public MemoryAddress Target {get;}
 
         public static string[] AspectNames
-            => Aspects.Names<ICallInfo>();
+            => AsmAspects.Names<ICallInfo>();
 
         public string[] AspectValues
-            => Aspects.Values<ICallInfo>(this);
+            => AsmAspects.Values<ICallInfo>(this);
         
         public MemoryAddress Source 
             => Instruction.IP;                

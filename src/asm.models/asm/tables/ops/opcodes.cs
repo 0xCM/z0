@@ -17,14 +17,6 @@ namespace Z0
     partial struct AsmTables
     {
         [MethodImpl(Inline), Op]
-        public AsmCommandGroup group(in asci16 name)
-            => new AsmCommandGroup(name);
-    
-        [MethodImpl(Inline), Op]
-        public OpCodeOperand operand(ulong src, uint2 index)
-            => new OpCodeOperand((ushort)Bits.slice(src, index*16, 16));
-
-        [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> encode(in EncodedOpCode src)
             => MemoryMarshal.CreateReadOnlySpan(ref z.edit(src),1).Bytes();                     
 

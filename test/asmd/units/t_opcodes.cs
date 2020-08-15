@@ -73,7 +73,7 @@ namespace Z0.Asm.Data
 
         public void instruction_tokens()
         {
-            var opcodes = span(OpCodeServices.InstructionTokens);
+            var opcodes = span(AsmOpCodes.Tokens);
             using var dst = CaseWriter("InstructionTokens", FileExtensions.Csv);
             var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
             dst.WriteLine(header);
@@ -87,7 +87,7 @@ namespace Z0.Asm.Data
 
         public void opcode_reccords()
         {            
-            var data = OpCodeServices.dataset();
+            var data = AsmOpCodes.dataset();
             var count = data.OpCodeCount;
             var records = data.Records.ToReadOnlySpan();
             using var writer = CaseWriter("OpCodes");            
@@ -96,22 +96,22 @@ namespace Z0.Asm.Data
                 writer.WriteLine(skip(records,i).Format());        
         }
 
-        void opcode_tokens()
-        {
-            var data = OpCodeServices.dataset();
-            var count = data.OpCodeCount;
-            var records = data.Records.ToReadOnlySpan();
-            var identifers = data.OpCodeIdentifiers.ToReadOnlySpan();
-            Claim.eq(count, records.Length);
-            Claim.eq(count, identifers.Length);
+        // void opcode_tokens()
+        // {
+        //     var data = AsmOpCodes.dataset();
+        //     var count = data.OpCodeCount;
+        //     var records = data.Records.ToReadOnlySpan();
+        //     var identifers = data.OpCodeIdentifiers.ToReadOnlySpan();
+        //     Claim.eq(count, records.Length);
+        //     Claim.eq(count, identifers.Length);
 
-            var processor = OpCodePartitoner.Create();
-            var handler = OpCodePartition.Create(count);
-            processor.Partition(records, handler);
+        //     var processor = AsmOpCodePartitoner.Create();
+        //     var handler = OpCodePartition.Create(count);
+        //     processor.Partition(records, handler);
 
-            emit(handler.Instructions);
-            emit(handler.OpCodes);
-            emit(handler.Mnemonics);
-        }
+        //     emit(handler.Instructions);
+        //     emit(handler.OpCodes);
+        //     emit(handler.Mnemonics);
+        // }
     }
 }

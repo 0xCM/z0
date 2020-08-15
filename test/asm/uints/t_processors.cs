@@ -9,8 +9,6 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using Z0.Asm.Data;
-
     using static Konst;
     using static Root;
 

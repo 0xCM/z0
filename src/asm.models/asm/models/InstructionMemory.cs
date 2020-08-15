@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Konst;
     using static OpKind;
 
-    [Label(TypeLabels.Mem)]
     public struct InstructionMemory
     {
         public Register MemoryBase;

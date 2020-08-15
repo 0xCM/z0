@@ -84,7 +84,7 @@ namespace Z0.Asm
             emit<RegisterWidth,ushort>();
             emit<OperatingMode,byte>();
             emit<AsmTokenKind,byte>();
-            emit<AsmOpCodeToken,byte>();
+            emit<AsmOpCodeTokenKind,byte>();
         }
         
         public void enum_dataset_convert()

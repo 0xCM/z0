@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [Label(Asm.TypeLabels.Dx)]
+    [Label(Asm.AsmTypeLabels.Dx)]
     public readonly struct MemDx
     {        
         /// <summary>

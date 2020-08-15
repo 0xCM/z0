@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     partial class AsmPatterns
     {
-
         const byte imm8 = 0xF0;
 
         const sbyte imm8i = -0xF;

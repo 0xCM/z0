@@ -12,7 +12,6 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    [ApiHost]
     public readonly ref struct OpCodePartition  
     {
         [MethodImpl(Inline), Op]
@@ -32,7 +31,7 @@ namespace Z0.Asm
         readonly Span<uint> MnemonicSeq;
 
         [MethodImpl(Inline)]
-        OpCodePartition(uint count)
+        internal OpCodePartition(uint count)
         {
             MnemonicSeq = new uint[1];
             instructions = new InstructionExpression[count];
@@ -43,13 +42,13 @@ namespace Z0.Asm
         }
         
         [MethodImpl(Inline), Op]
-        public void Include(in OpCodePartitoner ocp, in InstructionExpression src)
+        public void Include(in AsmOpCodePartitoner ocp, in InstructionExpression src)
         {
             Instruction((uint)ocp.Sequence) = src;
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(in OpCodePartitoner ocp, in AsmOpCode src)
+        public void Include(in AsmOpCodePartitoner ocp, in AsmOpCode src)
         {
             OpCode((uint)ocp.Sequence) = src;
         }
@@ -65,7 +64,7 @@ namespace Z0.Asm
         }
         
         [MethodImpl(Inline), Op]
-        public void Include(OpCodePartitoner ocp, in MnemonicExpression src)
+        public void Include(AsmOpCodePartitoner ocp, in MnemonicExpression src)
         {
             if(first(MnemonicSeq) > 0)
             {
@@ -77,13 +76,13 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(in OpCodePartitoner ocp, in CpuidExpression src)
+        public void Include(in AsmOpCodePartitoner ocp, in CpuidExpression src)
         {
             seek(cpuid, (uint)ocp.Sequence) = src;
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(OpCodePartitoner ocp, in OperatingMode src)
+        public void Include(AsmOpCodePartitoner ocp, in OperatingMode src)
         {
 
             Mode((uint)ocp.Sequence) = src;

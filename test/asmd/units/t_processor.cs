@@ -13,7 +13,7 @@ namespace Z0.Asm.Data
     {
         public void xmm_register_list()
         {
-            var index = XmmRegs.Create();
+            var index = XmmIndex.Create();
             var locations = index.Locations;
             var data = index.Data;
             var @base = Root.head(locations);

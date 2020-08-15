@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AspectLabels;
+    using static AsmAspectLabels;
 
     public interface IInstructionMemory
     {
