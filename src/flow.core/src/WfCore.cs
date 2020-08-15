@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
 
+    [ApiHost]
     public readonly partial struct WfCore
     {
         /// <summary>

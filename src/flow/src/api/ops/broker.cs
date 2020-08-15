@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct Flow    
-    {
+    {    
 
         [MethodImpl(Inline)]
         public static DataBroker<K,C,T> broker<K,C,T>(IWfContext wf, int capacity, IndexFunction<K> xf)

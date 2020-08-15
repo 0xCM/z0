@@ -10,7 +10,6 @@ namespace Z0.Asm
     {    
         public override bool Enabled => false;
 
-
         public void call32_intr_pattern()
         {
             var patterns = EncodingPatterns.Default;

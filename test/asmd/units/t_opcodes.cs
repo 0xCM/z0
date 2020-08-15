@@ -11,15 +11,6 @@ namespace Z0.Asm.Data
 
     public class t_opcodes : t_asmd<t_opcodes>
     {
-        public void check_opcoded_models()
-        {
-            // var sr = StringRef.create("ABCDEFG");
-            // term.print(sr.Diagnostic());
-            
-            term.print(OpCodeModels.Service.JaeRel16().Format(true));
-            term.print(OpCodeModels.Service.JaeRel32().Format(true));
-            term.print(OpCodeModels.Service.JaeRel8().Format(true));
-        }
 
         void emit(ReadOnlySpan<InstructionExpression> src)
         {
@@ -71,19 +62,19 @@ namespace Z0.Asm.Data
             }
         }
 
-        public void instruction_tokens()
-        {
-            var opcodes = span(AsmOpCodes.Tokens);
-            using var dst = CaseWriter("InstructionTokens", FileExtensions.Csv);
-            var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
-            dst.WriteLine(header);
-            for(var i=1; i<opcodes.Length; i++)
-            {
-                ref readonly var token = ref skip(opcodes,i);
-                var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
-                dst.WriteLine(line);
-            }
-        }
+        // public void instruction_tokens()
+        // {
+        //     var opcodes = span(AsmOpCodes.Tokens);
+        //     using var dst = CaseWriter("InstructionTokens", FileExtensions.Csv);
+        //     var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
+        //     dst.WriteLine(header);
+        //     for(var i=1; i<opcodes.Length; i++)
+        //     {
+        //         ref readonly var token = ref skip(opcodes,i);
+        //         var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
+        //         dst.WriteLine(line);
+        //     }
+        // }
 
         public void opcode_reccords()
         {            

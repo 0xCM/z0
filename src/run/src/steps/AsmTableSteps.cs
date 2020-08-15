@@ -23,7 +23,7 @@ namespace Z0
         readonly EncodedParts Encoded;
 
         public static implicit operator WfActor(AsmTableSteps src)
-            => api.actor(ActorName);
+            => WfCore.actor(ActorName);
 
         public AsmTableSteps(IWfState state, in EncodedParts encoded)
         {

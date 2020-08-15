@@ -3,11 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    
+{    
     public interface IParser<S,T>
     {
         ParseResult<S,T> Parse(S src);
     }
- 
 }

@@ -15,7 +15,7 @@ namespace Z0
     {
         public const string ActorName = nameof(CaptureControl);        
 
-        public static WfActor Actor => Flow.actor(ActorName);
+        public static WfActor Actor => WfCore.actor(ActorName);
         
         static WfState state(IAppContext context, WfConfig config, CorrelationToken ct)
         {           

@@ -9,35 +9,13 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using W = AsmFieldWidths;
     using F = OpCodeRecordField;
     using R = OpCodeRecord;
 
-    public enum OpCodeRecordField : uint
-    {
-        Sequence = 0 | (W.Sequence << WidthOffset),
-
-        Mnemonic = 1 | (W.Mnemonic << WidthOffset), 
-
-        OpCode = 2 | (W.OpCode << WidthOffset), 
-
-        Instruction = 3 | (W.Instruction << WidthOffset), 
-
-        M16 = 4 | (W.YeaOrNea << WidthOffset),
-
-        M32 = 5 | (W.YeaOrNea << WidthOffset),
-        
-        M64 = 6 | (W.YeaOrNea << WidthOffset),
-
-        CpuId = 7 | (W.CpuId << WidthOffset),
-
-        CodeId = 8 | (W.OpCodeId << WidthOffset),
-    }
-
-    public struct OpCodeRecord : IRecord<F,R>
+    public struct OpCodeRecord : ITable<F,R>
     {                   
         public static string FormatHeader(char delimiter = FieldDelimiter)
-            => Tabular.HeaderText<F>(delimiter);
+            => Table.headerText<F>(delimiter);
             
         public int Sequence;
 
@@ -113,9 +91,6 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
         
-        int ISequential.Sequence
-            => 0;
-
         public static OpCodeRecord Empty 
             => default;
     }    

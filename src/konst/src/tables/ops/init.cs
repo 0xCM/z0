@@ -6,11 +6,8 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Text;
 
     using static Konst;
-    using Z0.Data;
 
     using static z;
 

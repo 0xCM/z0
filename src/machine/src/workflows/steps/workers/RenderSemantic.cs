@@ -19,10 +19,6 @@ namespace Z0
         public static RenderSemantic Create() 
             => new RenderSemantic(new List<string>());
 
-        [MethodImpl(Inline)]
-        public static RenderSemantic Create(List<string> buffer) 
-            => new RenderSemantic(buffer);
-
         readonly HexFormatConfig DataFormat;
 
         readonly List<string> Buffer;
@@ -117,7 +113,6 @@ namespace Z0
             for(var j=0; j<rendered.Length; j++)
                 dst.WriteLine(rendered[j]);            
         }
-
 
         string RenderMemoryOperand(MemoryAddress @base, Instruction src, int i)
         {

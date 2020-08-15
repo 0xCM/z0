@@ -14,7 +14,7 @@ namespace Z0
     using static z;
     using F = Asm.OpCodeRecordField;
 
-    partial struct AsmTables
+    public partial struct AsmTables
     {
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> encode(in EncodedOpCode src)

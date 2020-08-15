@@ -22,13 +22,13 @@ namespace Z0
 
         public event Action<IAppMsg> Next;
 
-        public static IAppContext Create(IAppPaths paths, IResolvedApi api, IPolyrand random)
+        public static IAppContext create(IAppPaths paths, IResolvedApi api, IPolyrand random)
             => new AppContext(paths, api, random, AppSettings.Load(paths.AppConfigPath), AppMsgExchange.Create());
 
-        public static IAppContext Create(IResolvedApi composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+        public static IAppContext create(IResolvedApi composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
             => new AppContext(composition, random, settings, queue);
 
-        public static IAppContext Create(IApiSet api, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+        public static IAppContext create(IApiSet api, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
             => new AppContext(api, random, settings, queue);
 
         internal AppContext(IResolvedApi composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)

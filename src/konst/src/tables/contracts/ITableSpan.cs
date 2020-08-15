@@ -32,7 +32,6 @@ namespace Z0
         /// Specifies whether at least one cell is populated
         /// </summary>
         bool IsNonEmpty {get;}
-
     }
 
     /// <summary>

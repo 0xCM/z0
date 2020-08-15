@@ -234,7 +234,7 @@ namespace Z0
         /// The <see cref='PartId.Machine'/> capture archive directory
         /// </summary>
         FolderPath MachineCaptureRoot
-            =>  (LogRoot + FolderName.Define(PartId.Machine.Format())) + CaptureFolder;
+            =>  ResourceRoot + CaptureFolder;
         
         /// <summary>
         /// The root folder for test-specific data

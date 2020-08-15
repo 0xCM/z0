@@ -18,7 +18,7 @@ namespace Z0
             return new WfEventLog(
                     context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".stdout2", FileExtensions.Csv), 
                     context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".errout2", FileExtensions.Csv), 
-                    termsink(ct));
+                    WfCore.termsink(ct));
         }        
     }
 }

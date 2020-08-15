@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct TableProvider : ITableProvider
     {
-        public static ITableProvider create()
+        public static TableProvider create()
             => default(TableProvider);
                 
         public IEnumerable<ContentLibEntry> Provided
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="match">The resource identifier to match</param>
         [Op]
-        static AppResource content(string match)
+        public AppResource Search(string match)
         {
             try
             {

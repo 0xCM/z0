@@ -19,14 +19,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static WfActor actor([CallerFilePath] string name = null)
             => WfActor.create(name);
-
-        /// <summary>
-        /// Defines an actor with a specified name, if given; otherwise the actor name is derived 
-        /// from the path of the invoking member file
-        /// </summary>
-        /// <param name="name">The actor name</param>
-        [MethodImpl(Inline), Op]
-        public static WfWorker worker([CallerFilePath] string name = null)
-            => WfWorker.create(name);
     }
 }

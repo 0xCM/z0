@@ -282,7 +282,7 @@ namespace Z0
             if(n != doc.Rows[0].CellCount)
                 return default;
 
-            var parser = NumericParser.create<T>();
+            var parser = Parsers.numeric<T>();
             var dst =  Matrix.blockload<M,N,T>(Blocks.rectangle<T>(n256, value<M>(), value<N>()));
             for(var i = 0; i<doc.Rows.Length; i++)
             {

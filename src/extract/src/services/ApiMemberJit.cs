@@ -10,6 +10,8 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
+    using Z0.Events;
+
     using static Konst;
         
     public readonly struct ApiMemberJit
@@ -159,8 +161,11 @@ namespace Z0
             foreach(var host in src)
             {
                 var methods = DirectMethods(host);
-                broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, CorrelationToken.define(PartId.None)));
-                dst.AddRange(methods);
+                if(methods.Length != 0)
+                {
+                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, CorrelationToken.define(PartId.None)));
+                    dst.AddRange(methods);
+                }
             }
             return dst.ToArray();
         }
@@ -171,8 +176,11 @@ namespace Z0
             foreach(var host in src)
             {
                 var methods = GenericMethods(host);
-                broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, CorrelationToken.define(PartId.None)));
-                dst.AddRange(methods);
+                if(methods.Length != 0)
+                {
+                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, CorrelationToken.define(PartId.None)));
+                    dst.AddRange(methods);
+                }
             }
             return dst.ToArray();
         }

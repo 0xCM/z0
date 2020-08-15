@@ -11,7 +11,6 @@ namespace Z0
     using static z;
 
     using Z0.Data;
-    using static Z0.Data.Table;
 
     partial struct Table
     {

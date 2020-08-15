@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Events
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public MethodsPrepared(WfActor actor, ApiHostUri host, int count, CorrelationToken ct)
         {
-            EventId = z.evid(EventName, ct);
+            EventId = evid(EventName, ct);
             Actor = actor;
             Host = host;
             Count = count;

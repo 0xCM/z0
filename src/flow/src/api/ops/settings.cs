@@ -24,13 +24,13 @@ namespace Z0
             }        
 
             var path = configPath();
-            termsink(ct).Deposit(new LoadingWfConfig(nameof(Flow), path, ct));
+            WfCore.termsink(ct).Deposit(new LoadingWfConfig(nameof(Flow), path, ct));
 
             var dst = z.dict<string,string>();
             AppSettings.absorb(path,dst);
             var config = new WfSettings(dst);
                         
-            termsink(ct).Deposit(new LoadedWfConfig(nameof(Flow), path, config, ct));            
+            WfCore.termsink(ct).Deposit(new LoadedWfConfig(nameof(Flow), path, config, ct));            
             return config;
         }        
     }

@@ -24,7 +24,7 @@ namespace Z0
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
-            return AppContext.Create(resolved, random, settings, exchange);
+            return AppContext.create(resolved, random, settings, exchange);
         }
         
         public CorrelationToken Ct {get;}
@@ -46,7 +46,7 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {            
-            var sink = termsink(Ct);
+            var sink = WfCore.termsink(Ct);
             var s = settings(Context, Ct);
             var config = new XedEtlConfig(Context, s);
             using var context = Flow.context(Context, Flow.configure(Context, args, Ct),  Ct);

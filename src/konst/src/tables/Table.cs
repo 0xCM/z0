@@ -2,17 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Konst;
     using static z;
 
     [ApiHost]
-    public readonly partial struct Table : IDatasets
+    public readonly partial struct Table
     {
-        public static IDatasets Service => default(Table);
-    }    
+
+    }
 }

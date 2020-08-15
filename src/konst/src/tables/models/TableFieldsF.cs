@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct TableFields<F>
         where F : unmanaged, Enum
     {
-        public TableField<F>[] Data {get;}
+        public TableSpan<TableField<F>> Table {get;}
         
         [MethodImpl(Inline)]
         public static implicit operator TableFields<F>(TableField<F>[] src)
@@ -23,39 +23,46 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator TableFields(TableFields<F> src)
-            => new TableFields(src.Data.Map(x => new TableField(x.Definition, x.Width)));
+            => new TableFields(src.Table.Map(x => new TableField(x.Definition, x.Width)));
         
         [MethodImpl(Inline)]
         public TableFields(TableField<F>[] src)
-            => Data = src;
+            => Table = src;
 
         public CellCount Count
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Table.Length;
         }
         
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Table.Length;
         }
+
+        public ReadOnlySpan<TableField<F>> View
+        {
+            [MethodImpl(Inline)]
+            get => Table.View;
+        }       
+
         public TableField<F> this[F id]
         {
             [MethodImpl(Inline)]
-            get => Data.Where(x => x.Id.ToString() == id.ToString()).Single();
+            get => Table.Where(x => x.Id.ToString() == id.ToString()).Storage.Single();
         }
 
         public TableField<F> this[string name]
         {
             [MethodImpl(Inline)]
-            get => Data.Where(x => x.Id.ToString() == name).Single();
+            get => Table.Where(x => x.Id.ToString() == name).Storage.Single();
         }
 
         public ref TableField<F> this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => ref Table[index];
         }
 
         [MethodImpl(Inline)]
@@ -65,6 +72,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Name(uint index)
             => this[index].Name;
-
     }
 }

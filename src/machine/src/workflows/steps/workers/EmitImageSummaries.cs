@@ -50,7 +50,7 @@ namespace Z0
             var system = Imaging.SystemImages;
             var count = src.Count;
             var images = src.View;
-            var fields = Z0.Data.Table.columns<LocatedImageField>();
+            var fields = Table.columns<LocatedImageField>();
             var header = Table.header(fields);
             var summaries = span<ProcessImageSummary>(count);
 

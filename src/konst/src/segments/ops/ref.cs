@@ -15,5 +15,9 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Ref<T> @ref<T>(in T src, uint size)
             => new Ref<T>(new Ref(z.address(src), size));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Ref<byte> @ref(ReadOnlySpan<byte> src)
+            => new Ref<byte>(new Ref(z.address(src), (uint)src.Length));
     }
 }

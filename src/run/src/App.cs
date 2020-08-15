@@ -68,7 +68,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Raise(error(ActorName, e, Ct));                
+                Raise(WfCore.error(ActorName, e, Ct));                
             }
 
             Raise(status(ActorName, "Shell run complete", Ct));

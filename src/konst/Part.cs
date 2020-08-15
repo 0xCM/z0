@@ -28,8 +28,6 @@ namespace Z0.Parts
             get => ref Codes_Instance;
         }
 
-        public override PartId[] Needs  
-            => parts(PartId.Sys);
     }    
 }
 

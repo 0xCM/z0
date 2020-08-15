@@ -13,7 +13,7 @@ namespace Z0
         void Process(T src);
     }
 
-    public interface IJmpProcessor :  IAsmProcessor<LocatedInstruction>, IAsmProcessor<JmpKind,LocatedInstruction>
+    public interface IJmpProcessor 
     {
         void OnJA(LocatedInstruction src)
         {

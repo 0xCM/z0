@@ -10,8 +10,14 @@ namespace Z0
     
     using static Konst;
 
+    [ApiHost]
     public readonly struct Parsers
     {
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static T apply<T>(IParser<string,T> parser, string src) 
+            where T : struct
+                => parser.Parse(src).ValueOrDefault(default(T));
+
         /// <summary>
         /// Defines a parser predicated on a parse function
         /// </summary>
@@ -22,12 +28,12 @@ namespace Z0
         public static IParser<S,T> from<S,T>(Parse<S,T> f)
             => new Parser<S,T>(f);    
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static NumericParser<T> numeric<T>()
             where T : unmanaged
-                => NumericParser.create<T>();
+                => default(NumericParser<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ScalarParser scalar()
             => ScalarParser.Service;
 

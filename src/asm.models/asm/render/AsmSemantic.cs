@@ -16,7 +16,7 @@ namespace Z0.Asm
     }
     
     [ApiHost("semantic")]
-    public readonly struct AsmSemantic : IAsmSemantic, IApiHost<AsmSemantic>
+    public readonly struct AsmSemantic : IAsmSemantic
     {
         public static IAsmSemantic Service => default(AsmSemantic);
     }

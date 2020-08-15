@@ -34,7 +34,7 @@ namespace Z0
 
         static NumericKind ParseNumericKind(string kind)
         {
-            var numeric = NumericParser.create<ulong>();
+            var numeric = Parsers.numeric<ulong>();
             var indicator = (NumericIndicator)kind.Last();
             var w =  (NumericWidth)numeric.Parse(kind.TrimEnd(kind.Last())).ValueOrDefault();
             return ((NumericWidth)w).ToNumericKind(indicator);
@@ -42,7 +42,7 @@ namespace Z0
 
         public static NatNumericIdentity Parse(string src)
         {
-            var numeric = NumericParser.create<ulong>();
+            var numeric = Parsers.numeric<ulong>();
             var parts = text.split(src, IDI.SegSep);
             if(parts.Length == 3)
             {

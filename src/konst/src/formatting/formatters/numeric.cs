@@ -13,6 +13,16 @@ namespace Z0
     partial struct Formatters
     {   
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static INumericFormatter<T> numeric<T>(Func<T,string> f, Func<T,NumericBaseKind,string> g)
+            where T : unmanaged
+                => new FunctionalNumericFormatter<T>(f,g);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static INumericFormatter<T> numeric<T>(Func<T,NumericBaseKind,string> g)
+            where T : unmanaged
+                => new FunctionalNumericFormatter<T>(g);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static NumericFormatter<T> numeric<T>(T t = default)
             where T : unmanaged
                 => numeric_u<T>();

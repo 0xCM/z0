@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(math)" />
     <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(Tables)" />
   
   </ItemGroup>  
 

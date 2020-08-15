@@ -18,7 +18,6 @@ namespace Z0
     using PK = PrimalKindId;    
 
     
-    [Step(WfStepKind.EmitFieldLiterals)]
     public readonly ref struct EmitFieldLiterals
     {        
         readonly IWfContext Wf;

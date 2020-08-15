@@ -18,9 +18,8 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public EncodedOpCode(ulong data)
-        {
-            Data = data;
-        }       
+            => Data = data;
+            
         public string Format()
             => asci.format(Data);
 

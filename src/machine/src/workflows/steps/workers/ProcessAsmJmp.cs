@@ -69,8 +69,5 @@ namespace Z0
         {
             term.announce();            
         }
-
-        IDataBroker<JmpKind,LocatedInstruction> IAsmProcessor<JmpKind,LocatedInstruction>.Broker 
-            => broker;
     }
 }

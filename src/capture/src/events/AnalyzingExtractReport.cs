@@ -2,10 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Events
 {
     using System;
     using System.Runtime.CompilerServices;
+
+    using Z0.Events;
 
     using static Konst;
     using static RenderPatterns;

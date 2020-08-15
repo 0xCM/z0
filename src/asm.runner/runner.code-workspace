@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\asm"
+		},
+		{
+			"path": "..\\asm.models"
+		}
+	],
+	"settings": {}
+}

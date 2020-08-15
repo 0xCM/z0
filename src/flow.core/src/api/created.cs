@@ -14,16 +14,6 @@ namespace Z0
 
     partial struct WfCore
     {
-
-        // /// <summary>
-        // /// Defines a <see cref='WorkerCreated'/> event
-        // /// </summary>
-        // /// <param name="ct">The correlation token</param>
-        // /// <param name="name">The actor name</param>
-        // [MethodImpl(Inline), Op]
-        // public static WorkerCreated wfWorkerCreated(CorrelationToken ct, [CallerFilePath] string name = null)
-        //     => new WorkerCreated(worker(name), ct);                        
-
         /// <summary>
         /// Defines a <see cref='WorkerCreated'/> event
         /// </summary>

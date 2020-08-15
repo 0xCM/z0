@@ -70,6 +70,16 @@ namespace Z0
         public const string StepName = nameof(EmitPeHeaders);
     }
 
+    [Step(typeof(EmitPeImage))]
+    public readonly struct EmitPeImageStep
+    {
+        public const string StepName = nameof(EmitPeImage);        
+
+        public const string DataType = "hexline";
+
+        public const string DatasetName = "PeImage";
+    }
+    
     [Step(typeof(EmitProjectDocs))]
     public readonly struct EmitProjectDocsStep
     {

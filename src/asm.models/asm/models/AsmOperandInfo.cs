@@ -45,12 +45,12 @@ namespace Z0.Asm
         public readonly AsmBranchInfo Branch;
 
         [MethodImpl(Inline)]
-        public AsmOperandInfo(int index, OpKind kind, in ImmInfo imminfo, in MemInfo memory, 
+        public AsmOperandInfo(int index, OpKind kind, in ImmInfo imm, in MemInfo memory, 
             in Register register, AsmBranchInfo branch)
         {
             Index = (byte)index;
             Kind = kind;
-            ImmInfo = imminfo;
+            ImmInfo = imm;
             Memory = memory;
             Register = register;
             Branch = branch;

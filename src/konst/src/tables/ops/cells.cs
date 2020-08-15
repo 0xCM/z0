@@ -13,18 +13,6 @@ namespace Z0
 
     partial struct Table
     {
-        public static ReadOnlySpan<TableColumn> columns(Type table)
-        {
-            var fields = span(table.DeclaredFields());
-            var count = fields.Length;
-            var dst = span<TableColumn>(count);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var field = ref skip(fields,i);
-                seek(dst,i) = new TableColumn((ushort)i, field.Name, 0);
-            }
-            return dst;
-        }
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static string cell<T>(in CellFormatter<T,string> formatter, in T src)            

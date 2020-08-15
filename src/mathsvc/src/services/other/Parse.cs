@@ -16,7 +16,7 @@ namespace Z0
             where T : unmanaged        
         {
             [MethodImpl(Inline)]
-            public readonly T Invoke(string a) => NumericParser.create<T>().Parse(a).ValueOrDefault();
+            public readonly T Invoke(string a) => Parsers.numeric<T>().Parse(a).ValueOrDefault();
         }
     }
 }

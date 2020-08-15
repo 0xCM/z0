@@ -20,7 +20,7 @@ namespace Z0.Data
         [MethodImpl(Inline)]
         public static string[] labels<F>()
             where F : unmanaged, Enum
-                => Table.labels<F>();    
+                => Z0.Table.index<F>().Names;    
 
         /// <summary>
         /// Computes the field width from a field specifier

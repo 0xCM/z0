@@ -24,22 +24,13 @@ namespace Z0
             if(indices.Length != 2)
                 return ParseResult.Fail<Pair<T>>(src);
             
-            var parser = NumericParser.create<T>();
+            var parser = Parsers.numeric<T>();
             var result = Option.Try(() => Tuples.pair(parser.Parse(indices[0]).ValueOrDefault(), parser.Parse(indices[1]).ValueOrDefault()));
             if(result.IsSome())
                 return ParseResult.Success(src, result.Value());
             else
                 return ParseResult.Fail<Pair<T>>(src);
         }
-
-        /// <summary>
-        /// Creates a numeric parser
-        /// </summary>
-        /// <typeparam name="T">The numeric type to parse</typeparam>
-        [MethodImpl(Inline)]
-        public static NumericParser<T> create<T>()
-            where T : unmanaged
-                => default(NumericParser<T>);
 
         /// <summary>
         /// Creates an infallible numeric parser

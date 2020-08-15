@@ -16,9 +16,9 @@ namespace Z0
     partial struct Table
     {
         [MethodImpl(Inline)]
-        public static Z0.TableFormatter<F> formatter<F>(in LiteralFields<F> fields, char delimiter = FieldDelimiter)
+        public static TableFormatter<F> formatter<F>(in LiteralFields<F> fields, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
-                => new Z0.TableFormatter<F>(text.build(), delimiter, fields);
+                => new TableFormatter<F>(text.build(), delimiter, fields);
 
         [MethodImpl(Inline)]
         public static FieldFormatter<F> formatter<F>(char delimiter = FieldDelimiter) 
@@ -36,26 +36,25 @@ namespace Z0
                 => new CellFormatter<C,T>(render);
 
         [MethodImpl(Inline)]
-        public static Z0.TableFormatter<F> formatter<F>()
+        public static TableFormatter<F> formatter<F>()
             where F : unmanaged, Enum
-                => new Z0.TableFormatter<F>(text.build(), FieldDelimiter);
-
+                => new TableFormatter<F>(text.build(), FieldDelimiter);
 
         [MethodImpl(Inline)]
-        public static Z0.TableFormatter<F> formatter<F>(in LiteralFields<F> fields, StringBuilder dst, char delimiter = FieldDelimiter)
+        public static TableFormatter<F> formatter<F>(in LiteralFields<F> fields, StringBuilder dst, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
-                => new Z0.TableFormatter<F>(dst, delimiter, fields);
+                => new TableFormatter<F>(dst, delimiter, fields);
 
         [MethodImpl(Inline)]
-        public static Z0.TableFormatter<F> formatter<F>(StringBuilder dst, char delimiter = FieldDelimiter)
+        public static TableFormatter<F> formatter<F>(StringBuilder dst, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
-                => new Z0.TableFormatter<F>(dst, delimiter);
+                => new TableFormatter<F>(dst, delimiter);
 
         [MethodImpl(Inline)]
-        public static Z0.TableFormatter<F> formatter<F>(StringBuilder dst, bool emitheader, char delimiter = FieldDelimiter, F f = default)
+        public static TableFormatter<F> formatter<F>(StringBuilder dst, bool emitheader, char delimiter = FieldDelimiter, F f = default)
             where F : unmanaged, Enum
         {
-            var formatter = new Z0.TableFormatter<F>(dst, delimiter);
+            var formatter = new TableFormatter<F>(dst, delimiter);
             if(emitheader)
                 formatter.EmitHeader();
             return formatter;

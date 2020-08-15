@@ -6,15 +6,13 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
+    using System.Reflection;
 
     using static Konst;
     using static z;
-
-    using static Z0.Data.Table;
     
     partial struct Table
-    {
+    {        
         [Op]
         public static TableFields fields(Type type)
         {

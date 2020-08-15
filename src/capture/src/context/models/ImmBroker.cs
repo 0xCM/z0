@@ -18,7 +18,7 @@ namespace Z0.Asm
         }
 
         public ImmBroker(IWfContext wf, CorrelationToken ct)
-            : base(wf, ct)
+            : base(ct)
         {
 
         }

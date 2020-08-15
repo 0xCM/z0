@@ -23,7 +23,7 @@ namespace Z0
             : base(WfBuilder.app())
         {
             Ct = CorrelationToken.define(Part);   
-            Raise(Flow.wfWorkerCreated(Ct, ActorName));
+            Raise(WfCore.wfWorkerCreated(Ct, ActorName));
         }
         
         public override void RunShell(params string[] args)
@@ -35,7 +35,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Raise(Flow.error(ActorName, e, Ct));
+                Raise(WfCore.error(ActorName, e, Ct));
             }
             
         }

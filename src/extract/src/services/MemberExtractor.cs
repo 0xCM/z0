@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Extracts operations from an api host
     /// </summary>
-    public readonly struct MemberExtractor : IMemberExtractor
+    public readonly struct MemberExtractor
     {     
         readonly byte[] _Buffer;
 
@@ -40,7 +40,7 @@ namespace Z0
         public ExtractedCode[] Extract(ApiMember[] members)
             => MemberExtraction.extract(members, Buffer);
 
-        public ExtractedCode[] Extract(IApiHost src)
+        public ExtractedCode[] Extract(IApiHost src, IWfBroker broker)
             => MemberExtraction.extract(ApiMemberJit.jit(src), Buffer);
 
         public ExtractedCode[] Extract(IApiHost[] src, IWfBroker broker)

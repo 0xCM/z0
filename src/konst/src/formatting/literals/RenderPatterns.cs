@@ -12,6 +12,40 @@ namespace Z0
         public const string XDelimit = Dot;
         
         /// <summary>
+        /// Retrieves the <see cref='Slot0' /> literal
+        /// </summary>
+        /// <param name="n">The slot selector</param>
+        public static string slot(N0 n)
+            => Slot0;
+        
+        /// <summary>
+        /// Retrieves the <see cref='Slot1' /> literal
+        /// </summary>
+        /// <param name="n">The slot selector</param>
+        public static string slot(N1 n)
+            => Slot1;
+
+        /// <summary>
+        /// Retrieves the <see cref='Slot2' /> literal
+        /// </summary>
+        /// <param name="n">The slot selector</param>
+        public static string slot(N2 n)
+            => Slot2;
+
+        /// <summary>
+        /// Retrieves the <see cref='Slot3' /> literal
+        /// </summary>
+        /// <param name="n">The slot selector</param>
+        public static string slot(N3 n)
+            => Slot3;
+        
+        /// <summary>
+        /// Retrieves the <see cref='Slot4' /> literal
+        /// </summary>
+        /// <param name="n">The slot selector</param>
+        public static string slot(N4 n)
+            => Slot4;        
+        /// <summary>
         /// Defines the default extension for structured data
         /// </summary>
         public const string DataFileExt = "csv";

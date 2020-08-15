@@ -15,8 +15,8 @@ namespace Z0
         public static WfWarn<T> warn<T>(string worker, T body, CorrelationToken ct)
             => new WfWarn<T>(worker, body, ct);       
         
-        // [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        // public static void warn<T>(IWfContext wf, string worker, T body, CorrelationToken ct)
-        //     => wf.Raise(warn(worker,body,ct));
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static void warn<T>(IWfContext wf, string worker, T body, CorrelationToken ct)
+            => wf.Raise(warn(worker,body,ct));
     }
 }

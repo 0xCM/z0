@@ -8,7 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flairs;
+    using static Render;
+    using static z;
 
     public readonly struct HexCodeSaved : IWfEvent<HexCodeSaved>
     {
@@ -31,8 +32,8 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public HexCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, MessageFlair flair = Ran)
         {
-            EventId = Flow.evid(EventName, ct);
-            Actor = Flow.actor(actor);
+            EventId = evid(EventName, ct);
+            Actor = WfCore.actor(actor);
             Host = host;
             MemberCount = code.Length;
             Code = code;
@@ -42,6 +43,6 @@ namespace Z0.Asm
         
         [MethodImpl(Inline)]
         public string Format()
-            => Flow.format(EventId, Host, MemberCount, Target);                   
+            => format(EventId, Host, MemberCount, Target);                   
     }    
 }

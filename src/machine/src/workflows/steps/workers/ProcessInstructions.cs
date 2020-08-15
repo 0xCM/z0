@@ -18,7 +18,7 @@ namespace Z0
 
         public IWfContext Wf {get;}
         
-        readonly IDataProcessor<LocatedInstruction> Processor;
+        readonly ProcessAsmJmp Processor;
 
         public ProcessInstructions(IWfContext wf, FolderPath root)
         {

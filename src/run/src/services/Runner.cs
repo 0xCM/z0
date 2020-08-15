@@ -33,7 +33,7 @@ namespace Z0
         public Runner(WfState wf)
         {
             Ct = wf.Ct;
-            Actor = Flow.actor(nameof(Runner));
+            Actor = WfCore.actor(nameof(Runner));
             State = wf;
             Buffer = z.span<string>(256);
             offset = 0;

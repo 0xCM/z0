@@ -15,8 +15,6 @@ namespace Z0
         public static void ran<T>(IWfContext wf, string worker, T body, CorrelationToken ct)
             => wf.Raise(new WfStepRan<T>(worker, body, ct));
 
-        [Op, Closures(UnsignedInts)]
-        public static WfStepRan<T> ran<T>(string worker, T body, CorrelationToken ct)
-            => new WfStepRan<T>(worker, body, ct);            
+
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
     [ApiHost]
     public readonly struct AsmOpCodes
     {
-        public static TokenModel[] Tokens
+        public static TableSpan<TokenModel> Tokens
             => AsmTokenIndex.create().Models; 
 
         [MethodImpl(Inline), Op]
@@ -33,7 +33,7 @@ namespace Z0
         [Op]
         public static OpCodeDataset dataset()
         {
-            var resource = ResExtractor.Service().ExtractDocument(OpCodeSpecName).Require();
+            var resource = ResExtractor.Service(typeof(TableProvider).Assembly).MatcDocument("OpCodeSpecs");
             var count = resource.RowCount;
             var records = sys.alloc<OpCodeRecord>(count);
             AsmTables.parse(resource, records);
@@ -128,12 +128,6 @@ namespace Z0
         static StreamWriter CaseWriter(string name)
             =>  CasePath(name).Writer();
 
-        public void check()
-        {
-            term.print(OpCodeModels.Service.JaeRel16().Format(true));
-            term.print(OpCodeModels.Service.JaeRel32().Format(true));
-            term.print(OpCodeModels.Service.JaeRel8().Format(true));
-        }
 
         void emit(ReadOnlySpan<InstructionExpression> src)
         {
@@ -185,7 +179,7 @@ namespace Z0
 
         public void instruction_tokens()
         {
-            var opcodes = span(AsmOpCodes.Tokens);
+            var opcodes = AsmOpCodes.Tokens.View;
             using var dst = CaseWriter("InstructionTokens", FileExtensions.Csv);
             var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
             dst.WriteLine(header);

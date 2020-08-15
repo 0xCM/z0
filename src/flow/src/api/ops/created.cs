@@ -8,26 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-
-    using F = Flairs;
+    using static Flairs;
 
     partial struct Flow    
     {
-        internal const MessageFlair Created = F.Created;
-
-        internal const MessageFlair Finished = F.Finished;
-
-        internal const MessageFlair Running = F.Running;
-
-        internal const MessageFlair Ran = F.Ran;
-
-        internal const MessageFlair Initializing = F.Initializing;
-
-        internal const MessageFlair Initialized = F.Initialized;
-
-        internal const MessageFlair Status = F.Status;
-
         /// <summary>
         /// Defines a <see cref='WorkerCreated'/> event
         /// </summary>
@@ -35,7 +19,7 @@ namespace Z0
         /// <param name="name">The actor name</param>
         [MethodImpl(Inline), Op]
         public static WorkerCreated wfWorkerCreated(CorrelationToken ct, [CallerFilePath] string name = null)
-            => new WorkerCreated(worker(name), ct);                        
+            => new WorkerCreated(WfCore.worker(name), ct);                        
 
         /// <summary>
         /// Defines a <see cref='WorkerCreated'/> event
@@ -95,7 +79,7 @@ namespace Z0
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
         public static void created(IWfContext wf, in WfActor actor, WfStepId step, CorrelationToken ct, MessageFlair flair = Created)
-            => wf.Raise(created(actor,step,ct,flair));
+            => wf.Raise(WfCore.created(actor,step,ct,flair));
             
         /// <summary>
         /// Raises a <see cref='WfStepCreated'/> event

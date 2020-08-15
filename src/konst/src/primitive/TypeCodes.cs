@@ -18,6 +18,10 @@ namespace Z0
         public static ref readonly TypeCodes init()
             => ref Parts.Konst.Resolved.Codes;
 
+        // [MethodImpl(Inline), Op]
+        // public static TypeCodes init()
+        //     => new TypeCodes(0);
+
         [MethodImpl(Inline), Op]
         public static TypeCodeIndex index(in TypeCodes src)
             => new TypeCodeIndex(src.Types);

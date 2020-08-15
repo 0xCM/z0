@@ -45,6 +45,10 @@ namespace Z0
         }      
 
 
+        [MethodImpl(Inline), Op]
+        public static Ref<byte> reference()
+            => SegRefs.@ref(Buffer_2688);
+        
         const byte Sz = SegRef.Size;
 
         static ReadOnlySpan<byte> SegIndex => new byte[8*Sz]{

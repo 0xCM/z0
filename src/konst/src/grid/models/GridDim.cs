@@ -27,7 +27,7 @@ namespace Z0
         public static GridDim Parse(string s)
         {
             var parts = s.Split('x');
-            var parser = NumericParser.create<int>();
+            var parser = Parsers.numeric<int>();
             if(parts.Length == 2)
             {
                 var result = from m in parser.Parse(parts[0])

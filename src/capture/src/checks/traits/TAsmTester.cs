@@ -40,15 +40,6 @@ namespace Z0.Asm
         IPartCaptureArchive CaptureArchive(FolderPath root)
             => Archives.CaptureArchive(root, null, null);
 
-        FilePath AsmFilePath<T>(PartId part) 
-            => CaptureArchive(part).AsmPath<T>();
-
-        FilePath HexFilePath<T>(PartId part) 
-            => CaptureArchive(part).HexPath<T>();
-
-        IEncodedHexArchive UriBitsArchive(FolderPath root)
-            => Archives.EncodedHexArchive(root);
-
         void WriteAsm(CapturedCode capture, StreamWriter dst)
         {
             var asm = Decoder.Decode(capture).Require();

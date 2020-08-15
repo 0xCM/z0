@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
 
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition

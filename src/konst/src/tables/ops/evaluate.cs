@@ -2,16 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static z;
 
     partial struct Table
     {
+
         [Op]
         public static FieldEvaluation evaluate(Type src, TableFields fields, Action<Exception> handler = null)
         {
@@ -50,7 +52,7 @@ namespace Z0.Data
                 try
                 {
                     ref readonly var field = ref fields[i];
-                    seek(dst,i) = (field.Name, skip(fields.Data,i).GetValue((int)i));
+                    seek(dst,i) = (field.Name, field.Definition.GetValue((int)i));
                 }
                 catch(Exception e)
                 {

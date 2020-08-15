@@ -18,8 +18,6 @@ namespace Z0.Asm
         
         public IApiSet ApiSet {get;}
 
-        public IMemberExtractor Extractor {get;}
-
         public IExtractionParser Parser {get;}
 
         public IAsmFunctionDecoder Decoder {get;}
@@ -40,7 +38,6 @@ namespace Z0.Asm
             Asm = context;
             Ct = ct;
             ApiSet = context.ContextRoot;
-            Extractor = Capture.Services.HostExtractor(Extractors.DefaultBufferLength);
             Parser = Extractors.Services.ExtractParser(Extractors.DefaultBufferLength);
             Decoder = decoder;
             Formatter = formatter;

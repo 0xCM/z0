@@ -20,18 +20,11 @@ namespace Z0.Asm
         public static AsmStatementParser statement()
             => new AsmStatementParser(ParseMnemonic);
         
-        [MethodImpl(Inline), Op]
-        public static AsmFieldParser fields()
-            => default;            
 
         [MethodImpl(Inline), Op]
         public static Mnemonic ParseMnemonic(string src)
             => Enums.Parse(src, Mnemonic.INVALID);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T apply<T>(IParser<string,T> parser, string src) 
-            where T : struct
-                => parser.Parse(src).ValueOrDefault(default(T));
 
         [MethodImpl(Inline), Op]
         public static ParseResult<AsmCommand> ParseLine(string line, ref int seq)
@@ -110,7 +103,7 @@ namespace Z0.Asm
         public static ParseResult<EncodedCommand> ParseEncoded(string src)
         {       
             var fail = ParseResult.Fail<EncodedCommand>(src);
-            var np = NumericParser.create<int>();
+            var np = Parsers.numeric<int>();
 
             (var iS0, var iS1) = text.indices(src,Chars.LBracket, Chars.RBracket);            
             if(iS0 == -1 || iS1 == -1)

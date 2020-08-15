@@ -31,9 +31,6 @@ namespace Z0
             Wf.Finished(StepName, Ct);
         }
 
-        ApiMember[] jit(IApiHost[] hosts)
-            => ApiMemberJit.jit(hosts, Wf.AppEventSink);
-        
         ExtractedCode[] Extract(ICaptureContext context, IApiHost host)
         {            
             var members = ApiMemberJit.jit(host);

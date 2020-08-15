@@ -12,17 +12,8 @@ namespace Z0.Asm
 
     public interface TSemanticQuery
     {
-        InstructionMemory InxsMemory(Instruction src, int index)            
-            => InstructionMemory.From(src,index);
-
-        bool HasInxsMemory(Instruction src, int index)            
-            => InstructionMemory.Has(src,index);
-
         SegmentedIdentity Identify(MemorySize src)        
             => Direct.Identify(src);
-
-        AsmBranchInfo BranchInfo(MemoryAddress @base, Instruction src, int index)
-            => asm.branch(@base, src,index);        
 
         /// <summary>
         /// Extracts immediate information, if applicable, from an instruction operand

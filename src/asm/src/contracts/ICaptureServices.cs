@@ -16,11 +16,5 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
         IAsmFunctionDecoder FunctionDecoder(in AsmFormatSpec? format = null);
-
-        /// <summary>
-        /// Creates a code extractor with a specified buffer length
-        /// </summary>
-        /// <param name="bufferlen">The desired buffer length</param>
-        IMemberExtractor HostExtractor(int bufferlen);
     }
 }

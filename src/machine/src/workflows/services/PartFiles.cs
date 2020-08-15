@@ -56,15 +56,15 @@ namespace Z0
         
         public FolderPath ArchiveRoot 
             => AppPaths.AppCaptureRoot;
-        
+                
         public FilePath[] ParseFiles
-            => CaptureArchive(AppPaths.AppCaptureRoot).ParseFiles;
+            => CaptureArchive(AppPaths.MachineCaptureRoot).ParseFiles;
 
         public FilePath[] AsmFiles
-            => CaptureArchive(AppPaths.AppCaptureRoot).AsmFiles;
+            => CaptureArchive(AppPaths.MachineCaptureRoot).AsmFiles;
 
         public FilePath[] HexFiles
-            => CaptureArchive(AppPaths.AppCaptureRoot).HexFiles;
+            => CaptureArchive(AppPaths.MachineCaptureRoot).HexFiles;
 
         public Dictionary<PartId,PartFile[]> ParseFileIndex(params PartId[] parts)
             => SelectFiles(PartFileClass.Parsed, ParseFiles, parts);

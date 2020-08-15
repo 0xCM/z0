@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="context">The process context</param>
         [MethodImpl(Inline), Op]
-        public static IAsmProcessor<LocatedInstruction> jmp(IWfContext context)
+        public static ProcessAsmJmp jmp(IWfContext context)
             => new ProcessAsmJmp(context);
 
         /// <summary>

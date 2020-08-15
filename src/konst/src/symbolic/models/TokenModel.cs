@@ -9,7 +9,18 @@ namespace Z0
 
     using static Konst;    
 
-    public readonly struct TokenModel
+    public enum TokenField : ushort
+    {
+        Index = 8,
+
+        Identifier = 32,
+
+        Value = 32,
+
+        Description = 120
+    }
+
+    public readonly struct TokenModel : ITable<TokenField,TokenModel>
     {        
         public readonly int Index;
         

@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
+    using static z;
 
     public readonly struct AsmCommandGroup : ISymbolic<AsmCommandGroup,asci16>
     {        
@@ -16,15 +16,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public AsmCommandGroup(string name)
-        {
-            Body = asci.encode(n16, name);
-        }
+            => Body = asci.encode(n16, name);
 
         [MethodImpl(Inline)]
         public AsmCommandGroup(asci16 name)
-        {
-            Body = name;
-        }
+            => Body = name;
     
         public bool IsEmpty
         {
@@ -47,6 +43,5 @@ namespace Z0.Asm
 
         public static AsmCommandGroup Empty 
             => new AsmCommandGroup(asci16.Null);
-
     }
 }

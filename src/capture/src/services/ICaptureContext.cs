@@ -12,8 +12,6 @@ namespace Z0.Asm
         
         IApiSet ApiSet {get;}
 
-        IMemberExtractor Extractor {get;}
-
         IExtractionParser Parser {get;}
 
         IAsmFunctionDecoder Decoder {get;}
