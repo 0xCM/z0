@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(MetaReader)" />
 
   </ItemGroup>
   
