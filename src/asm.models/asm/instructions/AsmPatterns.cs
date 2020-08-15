@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     [ApiHost("patterns")]
-    public partial class AsmPatterns : IApiHost<AsmPatterns>
+    public partial class AsmPatterns
     {
 
     }

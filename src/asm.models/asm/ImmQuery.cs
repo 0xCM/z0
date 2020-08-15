@@ -29,11 +29,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public NumericWidth ImmWidth(OpKind src)
-            => asm.immwidth(src);
+            => Z0.asm.immwidth(src);
         
         [MethodImpl(Inline)]
         public ulong? ExtractImm(Instruction src, int index) 
-            => asm.immval(src,index);
+            => Z0.asm.immval(src,index);
 		
         [MethodImpl(Inline)]
         public bool IsSignedImm(OpKind src)
@@ -53,6 +53,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public ImmInfo ImmInfo(Instruction src, int index) 
-            => asm.imminfo(src,index);
+            => Z0.asm.imminfo(src,index);
     }
 }

@@ -21,7 +21,7 @@ namespace Z0.Asm
 
 
         public string Render(in ImmInfo src)
-            => asm.render(src);
+            => Z0.asm.render(src);
 
         public string Render(MemDx src)
             => src.Format();

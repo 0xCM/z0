@@ -7,13 +7,11 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using FW = FixedWidth;
     using NI = NumericIndicator;
     using TI = TypeIndicator;
     using MZ = Asm.MemorySize;
     using NK = NumericKind;
     using SI = SegmentedIdentity;
-    using NW = NumericWidth;
     using FIX = FixedWidth;
 
     using static Konst;    
@@ -21,7 +19,7 @@ namespace Z0.Asm
     partial struct AsmQuery : TSemanticQuery
     {
         public bool IsSegBase(OpKind src)
-            => asm.testsegbase(src);
+            => Z0.asm.testsegbase(src);
 
         public bool IsSegEs(OpKind src)            
             => src == OpKind.MemoryESDI
@@ -58,7 +56,7 @@ namespace Z0.Asm
                 var prefix = (isDirect || isSegBase) ? src.SegmentPrefix : Register.None;
                 var segreg = (isDirect || isSegBase) ? src.MemorySegment : Register.None;
                 var mem64 = IsMem64(k) ? src.MemoryAddress64 : 0;
-                return asm.meminfo(segreg, prefix, memdirect, mem64, sz);
+                return Z0.asm.meminfo(segreg, prefix, memdirect, mem64, sz);
             }
 
             return default;

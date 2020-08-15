@@ -9105,3 +9105,10 @@
  delete mode 100644 src/machine/src/workflows/steps/metadata/EmitPeImageStep.cs
  rename src/tables/data/asm/opcodes/{opcodes.ice.csv => OpCodeSpecs.csv} (100%)
  delete mode 100644 src/tables/services/ResWriter.cs
+[master 696a56e38] .
+ 8 files changed, 246 insertions(+), 15 deletions(-)
+ rename src/{flow/src/support => flow.core/src}/WfBroker.cs (100%)
+ rename src/{flow/src/support/brokers => flow.core/src}/WfContext.cs (82%)
+ create mode 100644 src/flow.core/src/api/configure.cs
+ create mode 100644 src/flow.core/src/api/context.cs
+ create mode 100644 src/flow.core/src/api/settings.cs

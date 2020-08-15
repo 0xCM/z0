@@ -124,13 +124,13 @@ namespace Z0
         static string Format(OpKind src)
             => src.ToString();
 
-        string RenderOperand(MemoryAddress @base, Instruction src, int i)
+        string RenderOperand(MemoryAddress @base, Instruction src, byte i)
         {            
             var kind = Semantic.OperandKind(src, i);
             var desc = Format(kind);
 
             if(Semantic.IsRegister(kind))
-                desc = render.Render(Semantic.RegisterInfo(src,i));
+                desc = render.Render(asm.register(src,i));
             else if(Semantic.IsMem(kind))
                 desc = RenderMemoryOperand(@base, src, i);
             else if (Semantic.IsBranch(kind))
@@ -184,7 +184,7 @@ namespace Z0
                 var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(Col0Pad);
                 var kindLabel = render.Render(kind).PadRight(OpKindPad);
                 var col03 = text.concat(col01, ColSep, kindLabel, Chars.Pipe, Chars.Space);
-                var desc = RenderOperand(@base, inxs, i);
+                var desc = RenderOperand(@base, inxs, (byte)i);
                 
                 summaries.Add(col03 + desc);       
             }

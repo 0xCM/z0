@@ -83,7 +83,7 @@ namespace Z0.Asm
         //     property if the operand has kind Iced.Intel.OpKind.Memory
         public int MemoryDisplSize {get; set;}
 
-        public MemDx MemDx => asm.memdx(MemoryDisplacement, MemoryDisplSize);
+        public MemDx MemDx => Z0.asm.memdx(MemoryDisplacement, MemoryDisplSize);
 
         //
         // Summary:

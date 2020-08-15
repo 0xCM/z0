@@ -40,12 +40,12 @@ namespace Z0.Asm
         public static InstructionMemory From(Instruction src, int index)
         {
             var dst = default(InstructionMemory);
-            dst.MemoryBase = asm.membase(src,index);
-            dst.MemoryIndex = asm.memidx(src,index);
-            dst.MemorySize = asm.memsize(src,index);
-            dst.MemoryIndexScale = asm.memscale(src,index);
-            dst.MemDx = asm.memdx(asm.memdx(src,index), asm.memdxsize(src,index));
-            dst.MemorySegment = asm.memseg(src,index);
+            dst.MemoryBase = Z0.asm.membase(src,index);
+            dst.MemoryIndex = Z0.asm.memidx(src,index);
+            dst.MemorySize = Z0.asm.memsize(src,index);
+            dst.MemoryIndexScale = Z0.asm.memscale(src,index);
+            dst.MemDx = Z0.asm.memdx(Z0.asm.memdx(src,index), Z0.asm.memdxsize(src,index));
+            dst.MemorySegment = Z0.asm.memseg(src,index);
             dst.SegmentPrefix = GetSegmentPrefix(src,index);
             dst.IsStackInstruction = src.IsStackInstruction;
             dst.StackPointerIncrement = src.StackPointerIncrement;
@@ -56,7 +56,7 @@ namespace Z0.Asm
 
         public static bool Has(Instruction src, int index)
         {
-            switch(asm.kind(src,index))
+            switch(Z0.asm.kind(src,index))
             {
                 case Memory:
                 case Memory64:

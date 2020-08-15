@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines the widths of common asm record fields
     /// </summary>
-    public enum AsmFieldWidths
+    public enum AsmOpCodeFieldWidths
     {
         Sequence = C.Sequence,
 

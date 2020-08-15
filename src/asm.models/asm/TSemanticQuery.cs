@@ -13,7 +13,7 @@ namespace Z0.Asm
     public interface TSemanticQuery
     {
         SegmentedIdentity Identify(MemorySize src)        
-            => Direct.Identify(src);
+            => asm.identify(src);
 
         /// <summary>
         /// Extracts immediate information, if applicable, from an instruction operand
@@ -51,8 +51,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source instruction</param>
         /// <param name="index">The operand index</param>
-        Register RegisterInfo(Instruction src, int index) 
-            => Direct.RegisterInfo(src, index);
+        Register register(Instruction src, int index) 
+            => Direct.register(src, index);
                     
         /// <summary>
         /// Determines whether the classified operand is a segment of the form 

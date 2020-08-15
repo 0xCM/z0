@@ -22,7 +22,7 @@ namespace Z0.Asm
 		/// Gets the operand's register value. Use this property if the operand has kind <see cref="OpKind.Register"/>
 		/// </summary>
 		/// <param name="operand">Operand number, 0-4</param>
-		public Register RegisterInfo(Instruction src, int operand) 
+		public Register register(Instruction src, int operand) 
             => asm.register(src,(byte)operand);
     }
 }

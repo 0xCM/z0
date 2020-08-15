@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using W = AsmFieldWidths;
+    using W = AsmOpCodeFieldWidths;
 
     public enum AsmRecordField : uint
     {

@@ -21,7 +21,7 @@ namespace Z0.Asm
             => Register == Register.None;
 
         public static bool test(Instruction inxs, int index)     
-            => !asm.segprefix(inxs, index).IsEmpty;
+            => !Z0.asm.segprefix(inxs, index).IsEmpty;
 
         public static SegmentPrefix Empty 
             => new SegmentPrefix(Register.None);   
