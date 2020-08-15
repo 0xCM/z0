@@ -24,7 +24,7 @@ namespace Z0
         public IWfContext Wf {get; private set;}
         
         public App()
-            : base(Flow.app())
+            : base(WfCore.app())
         {
             Ct = CorrelationToken.define(Part);   
             Raise(status(ActorName, "Application created", Ct));        
@@ -36,8 +36,8 @@ namespace Z0
         
             try
             {
-                var config = Flow.configure(Context, args, Ct);            
-                Wf = Flow.context(Context, config, Ct);                
+                var config = WfCore.configure(Context, args, Ct);            
+                Wf = WfCore.context(Context, config, Ct);                
             }
             catch(Exception e)
             {

@@ -8980,3 +8980,128 @@
  rename src/asm.models/{asm/aspects => base}/AspectData.cs (100%)
  rename src/konst/src/{reflective/models/TokenInfo.cs => symbolic/models/TokenModel.cs} (82%)
  create mode 100644 src/konst/src/symbolic/ops/token.cs
+[master c35f4a839] .
+ 242 files changed, 1187 insertions(+), 1084 deletions(-)
+ rename src/asm.models/asm/models/opcodes/{InstructionTokenDataset.cs => InstructionTokens.cs} (79%)
+ create mode 100644 src/asm.models/asm/models/opcodes/OpCodeRecordField.cs
+ rename src/asm.models/asm/models/{ => records}/AsmRecord.cs (100%)
+ rename src/asm.models/asm/models/{ => records}/AsmRecordField.cs (100%)
+ rename src/asm.models/asm/models/{ => records}/AsmRecordSet.cs (100%)
+ rename src/asm.models/asm/models/{ => records}/AsmRecordSets.cs (100%)
+ rename src/asm.models/asm/models/{ => records}/AsmRecords.cs (100%)
+ rename src/asm.models/asm/{models => processing}/InstructionSink.cs (100%)
+ delete mode 100644 src/asm.models/asm/render/AsmImmInfo.cs
+ delete mode 100644 src/asm.models/asm/render/AsmMemDirect.cs
+ delete mode 100644 src/asm.models/asm/render/AsmMemDx.cs
+ delete mode 100644 src/asm.models/asm/render/AsmMemInfo.cs
+ delete mode 100644 src/asm.models/asm/render/AsmMemScale.cs
+ delete mode 100644 src/asm.models/asm/render/AspectRender.cs
+ delete mode 100644 src/asm.models/asm/render/FlowControl.cs
+ delete mode 100644 src/asm.models/asm/render/OpKindRender.cs
+ delete mode 100644 src/asm.models/asm/render/SegRender.cs
+ delete mode 100644 src/asm.models/asm/res/instructions/InstructionExpressions.cs
+ delete mode 100644 src/asm.models/asm/res/instructions/OpCodeExpressions.cs
+ delete mode 100644 src/asm.models/asm/res/instructions/OpCodeIdentity.cs
+ delete mode 100644 src/asm.models/asm/res/instructions/OpCodeModels.cs
+ create mode 100644 src/asm.runner/.vscode/launch.json
+ create mode 100644 src/asm.runner/.vscode/tasks.json
+ create mode 100644 src/asm.runner/App.cs
+ rename test/asmd/base/opcodes/poc/OpCodes.cs => src/asm.runner/Part.cs (61%)
+ create mode 100644 src/asm.runner/add.sh
+ create mode 100644 src/asm.runner/build-log.sh
+ create mode 100644 src/asm.runner/build.sh
+ create mode 100644 src/asm.runner/clean.sh
+ create mode 100644 src/asm.runner/config.json
+ create mode 100644 src/asm.runner/directory.build.props
+ create mode 100644 src/asm.runner/id.sh
+ create mode 100644 src/asm.runner/remove.sh
+ create mode 100644 src/asm.runner/run.sh
+ create mode 100644 src/asm.runner/runner.code-workspace
+ create mode 100644 src/asm.runner/z0.asm.runner.csproj
+ rename src/capture/src/events/{ProparedConsolidated.cs => PreparedConsolidated.cs} (100%)
+ rename src/capture/src/steps/actors/{CaptureHostApi.cs => CaptureHostMembers.cs} (100%)
+ rename src/extract/src/{specs => contracts}/IBytePatternSet.cs (100%)
+ rename src/extract/src/{specs => contracts}/IExtractionParser.cs (100%)
+ rename src/extract/src/{specs => contracts}/IExtractors.cs (100%)
+ rename src/extract/src/{services => models}/BytePatternParserState.cs (100%)
+ rename src/extract/src/{services => models}/EncodingPatternKinds.cs (100%)
+ rename src/extract/src/{services => models}/EncodingPatternOffset.cs (100%)
+ rename src/extract/src/{services => models}/EncodingPatternTokens.cs (100%)
+ delete mode 100644 src/extract/src/services/LocatedCodeParser.cs
+ rename src/{flow/src/support/tools/services => flow.core/src}/ToolArchive.cs (100%)
+ rename src/{flow/src/api/ops => flow.core/src/api}/archive.cs (78%)
+ create mode 100644 src/flow.core/src/api/error.cs
+ create mode 100644 src/flow.core/src/api/processed.cs
+ create mode 100644 src/flow.core/src/api/processing.cs
+ rename src/{flow/src/api/ops/termsink.cs => flow.core/src/api/ran.cs} (60%)
+ create mode 100644 src/flow.core/src/api/status.cs
+ rename src/{flow/src/api/ops/actor.cs => flow.core/src/api/worker.cs} (68%)
+ rename src/{flow/src/support/tools => flow.core/src/contracts}/DirectoryMonitor.cs (100%)
+ rename src/{flow/src/workflow => flow.core/src}/contracts/IWfActor.cs (100%)
+ rename src/{flow/src/workflow => flow.core/src}/contracts/IWfContext.cs (85%)
+ rename src/{flow/src/workflow => flow.core/src}/contracts/IWfRunner.cs (100%)
+ rename src/{flow/src/workflow => flow.core/src}/contracts/IWfSink.cs (100%)
+ rename src/{flow/src/workflow => flow.core/src}/contracts/IWfStep.cs (100%)
+ rename src/{flow/src/workflow => flow.core/src}/contracts/IWfWorker.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/IMonitor.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/ITool.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/IToolArchive.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/IToolCmd.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/IToolConfig.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/IToolContext.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/IToolFile.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/IToolFlags.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/IToolOption.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/IToolProcessor.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/contracts}/IToolRunner.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolArchive.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolArchiveTF.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolCmd.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolCmdTF.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolConfig.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolConfigT.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolFileT.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolFileTF.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolFilesT.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolFilesTF.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolFlag.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolFlags.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolId.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolIndex.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolIndexEntries.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolIndexEntry.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolIndexer.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolLogger.cs (97%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolOption.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolOptionF.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolOptionFK.cs (100%)
+ rename src/{flow/src/support/tools/TooPathT.cs => flow.core/src/tools/models/ToolPathT.cs} (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolProxies.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolProxy.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolRunerOptions.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolRunnerConfig.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolSpec.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolStatus.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/models}/ToolTF.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/services}/CodeGen.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/services}/Monitors.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/services}/ToolProcessor.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/services}/ToolProxyGen.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/services}/ToolRunner.cs (100%)
+ rename src/{flow/src/support/tools => flow.core/src/tools/services}/Watching.cs (100%)
+ delete mode 100644 src/flow/src/api/ops/app.cs
+ delete mode 100644 src/flow/src/api/ops/archived.cs
+ delete mode 100644 src/flow/src/api/ops/flow.cs
+ delete mode 100644 src/flow/src/api/ops/slot.cs
+ rename src/konst/src/formatting/{ops/find.cs => formatters/custom.cs} (80%)
+ rename src/konst/src/{tables/services/NumericFormatter.cs => formatting/ops/numeric.cs} (59%)
+ delete mode 100644 src/konst/src/identity/contracts/IMemberExtractor.cs
+ rename src/konst/src/tables/{models => }/Cells.cs (100%)
+ rename src/konst/src/tables/ops/{publication.cs => emission.cs} (97%)
+ rename src/konst/src/{dataset/services/ListPublisher.cs => tables/ops/emit.cs} (58%)
+ create mode 100644 src/konst/src/tables/ops/format.cs
+ delete mode 100644 src/konst/src/tables/ops/labels.cs
+ create mode 100644 src/konst/src/tables/x/Map.cs
+ delete mode 100644 src/machine/src/workflows/steps/metadata/EmitPeImageStep.cs
+ rename src/tables/data/asm/opcodes/{opcodes.ice.csv => OpCodeSpecs.csv} (100%)
+ delete mode 100644 src/tables/services/ResWriter.cs

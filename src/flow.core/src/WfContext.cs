@@ -72,40 +72,40 @@ namespace Z0
         }
 
         public void Error<T>(string actor, T body, CorrelationToken ct)
-            => Flow.error(this, actor, body, ct);
+            => WfCore.error(this, actor, body, ct);
 
         public void Error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => Flow.error(this, e, ct, caller, file, line);
+            => WfCore.error(this, e, ct, caller, file, line);
         
         public void Error(string actor, Exception e, CorrelationToken ct)
-            => Flow.error(this, actor, e, ct);
+            => WfCore.error(this, actor, e, ct);
 
         public void Warn<T>(string actor, T content, CorrelationToken ct)
-            => Flow.warn(this, actor, content, ct);
+            => WfCore.warn(this, actor, content, ct);
 
         public void Processing<T>(string actor, T kind, FilePath src, CorrelationToken ct)
-            => Flow.processing(this, actor, kind, src, ct);
+            => WfCore.processing(this, actor, kind, src, ct);
 
         public void ProcessingFile<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
-            => Flow.processing(this, Path.GetFileNameWithoutExtension(actor), kind, src, Ct);
+            => WfCore.processing(this, Path.GetFileNameWithoutExtension(actor), kind, src, Ct);
 
         public void ProcessedFile<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
-            => Flow.processed(this,ToActorName(actor), kind, src, size, Ct);
+            => WfCore.processed(this,ToActorName(actor), kind, src, size, Ct);
         
         public void Ran(string actor, CorrelationToken ct)
-            => Flow.ran(this, actor, "Finished", ct);
+            => WfCore.ran(this, actor, "Finished", ct);
 
         public void Ran<T>(string actor, T body, CorrelationToken ct)
-            => Flow.ran(this, actor, body, ct);
+            => WfCore.ran(this, actor, body, ct);
         
         public void Status<T>(string worker, T body, CorrelationToken ct)
-            => Flow.status(this, worker,body,ct);
+            => WfCore.status(this, worker,body,ct);
 
         public void RunningT<T>(string actor, T body, CorrelationToken ct)
-            => Flow.running(this, actor, body, ct);
+            => WfCore.running(this, actor, body, ct);
         
         public void RanT<T>(string actor, T body, CorrelationToken ct)
-            => Flow.ran(this, actor, body, ct);
+            => WfCore.ran(this, actor, body, ct);
 
         static string ToActorName(string src)
             => Path.GetFileNameWithoutExtension(src);
