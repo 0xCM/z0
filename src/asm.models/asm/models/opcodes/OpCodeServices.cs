@@ -11,8 +11,7 @@ namespace Z0.Asm
     using Z0.Tokens;
 
     using static Konst;
-    using static Root;
-    using static As;
+    using static z;
  
     [ApiHost("opcodes")]
     public readonly struct OpCodeServices
@@ -28,7 +27,7 @@ namespace Z0.Asm
             var doc = OpCodeServices.doc();
             var count = doc.RowCount;
             var records = sys.alloc<OpCodeRecord>(count);
-            CommandInfoParser.Service.Parse(doc, records);
+            AsmTables.parse(doc, records);
             var identifers = sys.alloc<OpCodeIdentifier>(count);
             OpCodeServices.identify(records, identifers);
             return new OpCodeDataset(records,identifers);
@@ -54,7 +53,7 @@ namespace Z0.Asm
         public static unsafe OpCodeTokens load(ReadOnlySpan<FieldRef> src, OpCodeToken[] dst)
         {
             var buffer = span(dst);
-            ref var target = ref head(buffer);
+            ref var target = ref first(buffer);
             for(byte i=0; i<src.Length; i++)
             {
                 ref readonly var field = ref skip(src,i);
@@ -85,18 +84,6 @@ namespace Z0.Asm
             var processor = OpCodePartitoner.Create(seq);
             Partition(processor, handler, records);
             return handler;            
-        }
-        
-        [MethodImpl(Inline), Op]
-        public AsmCommandGroup group(in asci16 name)
-            => new AsmCommandGroup(name);
-    
-        [MethodImpl(Inline), Op]
-        public OpCodeOperand operand(ulong src, uint2 index)
-            => new OpCodeOperand((ushort)Bits.slice(src, index*16, 16));
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<byte> encode(in EncodedOpCode src)
-            => MemoryMarshal.CreateReadOnlySpan(ref As.edit(src),1).Bytes();                     
+        }        
    }
 }

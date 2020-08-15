@@ -2,14 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
-{
-    using System;
+using System;
+using System.Runtime.CompilerServices;
+using System.Reflection;
+using static Z0.Part;
 
-    [Step(WfStepKind.EmitProjectDocs, true)]
-    public readonly struct EmitProjectDocsStep
+[assembly: PartId(PartId.AsmModels)]
+namespace Z0.Parts
+{        
+    public sealed class AsmModels : Part<AsmModels> 
     {
-        public const string WorkerName = nameof(EmitProjectDocs);
     }
-
 }
+

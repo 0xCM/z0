@@ -28,6 +28,10 @@ namespace Z0
         public static ref T seek<T>(Span<byte> src, uint count)
             =>  ref seek<byte,T>(skip(src,count*size<T>()), 1);
 
+        // [MethodImpl(Inline)]
+        // public static ref T seek<T>(Span<T> src, int count)
+        //     =>  ref seek<byte,T>(skip(src,count*size<T>()), 1);
+
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
         /// </summary>

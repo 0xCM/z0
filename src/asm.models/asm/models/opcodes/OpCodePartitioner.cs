@@ -10,7 +10,7 @@ namespace Z0.Asm
     using Z0.Tokens;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     [ApiHost]
     public struct OpCodePartitoner

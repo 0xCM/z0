@@ -50,6 +50,32 @@ namespace Z0
         public const string DatasetExt = DataType + XDelimit +  DataFileExt;
     }
 
+    [Step(typeof(ProcessAsm))]
+    public readonly struct ProcessAsmStep
+    {
+        public const string StepName = nameof(ProcessAsm);
+    }
+
+    [Step(typeof(RunProcessors))]
+    public readonly struct RunProcessorsStep
+    {
+        public const WfStepKind Kind = WfStepKind.RunProcessors;
+        
+        public const string StepName = nameof(RunProcessors);           
+    }    
+
+    [Step(typeof(EmitPeHeaders))]
+    public readonly struct EmitPeHeadersStep
+    {
+        public const string StepName = nameof(EmitPeHeaders);
+    }
+
+    [Step(typeof(EmitProjectDocs))]
+    public readonly struct EmitProjectDocsStep
+    {
+        public const string StepName = nameof(EmitProjectDocs);
+    }
+    
     [Step(typeof(EmitContentCatalog))]
     public readonly struct EmitContentCatalogStep
     {
@@ -109,4 +135,60 @@ namespace Z0
     {
         public const string StepName = nameof(ProcessInstructions);
     }     
+
+    public readonly struct Controller
+    {
+        public const string ActorName = nameof(Control);
+    }    
+
+    [Step(typeof(EmitBlobs))]
+    public readonly struct EmitBlobsStep
+    {
+        public const string StepName = nameof(EmitBlobs);        
+
+        public const string EmissionType = "Metablobs";
+    }    
+
+    [Step(typeof(EmitImageSummaries))]
+    public readonly struct EmitImageSummariesStep
+    {        
+        public const string StepName = nameof(EmitImageSummaries);       
+    }
+
+    [Step(typeof(EmitResBytes))]
+    public readonly struct EmitResBytesStep
+    {
+        public const string StepName = nameof(EmitResBytes);
+    }
+    
+    [Step(typeof(ParseAsmFiles))]
+    public readonly struct ParseAsmFilesStep
+    {
+        public const string StepName = nameof(ParseAsmFiles);
+    }
+
+    public readonly struct EmitDatasetsStep
+    {
+        public const string StepName = nameof(EmitDatasets);
+    }     
+
+    [Step(typeof(EmitFieldMetadata))]
+    public readonly struct EmitFieldMetadataStep
+    {
+        public const string StepName = nameof(EmitFieldMetadata);
+
+        public const string DatasetName = "FieldMetadata";
+    }       
+
+    [Step(typeof(EmitImageContent))]
+    public readonly struct EmitImageContentStep
+    {        
+        public const string StepName = nameof(EmitImageContent);        
+    }       
+    
+    [Step(typeof(EmitMetadataSets))]
+    public readonly struct EmitMetadataSetsStep
+    {
+        public const string WorkerName = nameof(EmitMetadataSets);
+    }        
 }

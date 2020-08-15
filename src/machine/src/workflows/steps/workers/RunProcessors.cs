@@ -14,12 +14,11 @@ namespace Z0
     using static RunProcessorsStep;
     using static z;    
     
-    [Step(Kind)]
     public class RunProcessors : IMachine
     {
         public static RunProcessors create(WfState wf, CorrelationToken ct)
         {
-            wf.Initializing(ActorName, ct);
+            wf.Initializing(StepName, ct);
             var step = default(RunProcessors);
             try
             {
@@ -29,11 +28,11 @@ namespace Z0
             }
             catch(Exception e)
             {
-                wf.Error(ActorName, e, ct);
+                wf.Error(StepName, e, ct);
                 throw;
             }
             
-            wf.Initialized(ActorName, ct);
+            wf.Initialized(StepName, ct);
             return step;        
         }
 
@@ -51,7 +50,7 @@ namespace Z0
         {
             State = wf;
             Ct = ct;
-            TargetDir = Wf.AppDataRoot + FolderName.Define(ActorName);
+            TargetDir = Wf.AppDataRoot + FolderName.Define(StepName);
             Files = PartFiles.create(Asm);            
             Buffer = list<Instruction>(2000);
         }
@@ -72,7 +71,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(ActorName, Ct);
+            Wf.Running(StepName, Ct);
             try
             {            
                 using var step = new IndexEncodedParts(Wf, Files, Ct);
@@ -84,12 +83,12 @@ namespace Z0
             {
                 term.error(e);
             }
-            Wf.Ran(ActorName, Ct);
+            Wf.Ran(StepName, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(ActorName, Ct);
+            Wf.Finished(StepName, Ct);
         }
 
         
@@ -121,7 +120,7 @@ namespace Z0
             Sink.Deposit(e);
             try
             {
-                Wf.Status(ActorName, "Processing instructions", Ct);
+                Wf.Status(StepName, "Processing instructions", Ct);
                 var workflow = ProcessInstructions.create(Wf, TargetDir);
                 workflow.Process(e.Instructions);
                 workflow.Render(e.Instructions);
@@ -166,11 +165,11 @@ namespace Z0
                 var hcs = hcSets[i];
                 var decoded = Decode(hcs);
                 dst.Add(decoded);
-                Wf.Raise(new DecodedHost(ActorName, decoded, Ct));
+                Wf.Raise(new DecodedHost(StepName, decoded, Ct));
             }  
 
             var inxs = new PartInstructions(pcs.Part, dst.Array());
-            Wf.Raise(new DecodedPart(ActorName, inxs, Ct));
+            Wf.Raise(new DecodedPart(StepName, inxs, Ct));
             return inxs;                        
         }
 
@@ -205,17 +204,17 @@ namespace Z0
         {
             try
             {
-                Wf.Running(ActorName,Ct);
+                Wf.Running(StepName,Ct);
 
                 var name = "ProcessEncodedIndex";
-                Wf.Raise(new RunningProcessor(ActorName, name, Ct));
+                Wf.Raise(new RunningProcessor(StepName, name, Ct));
                 
                 var processor = new ProcessAsm(State, encoded);
                 var parts = Wf.ContextRoot.Composition.Resolved.Select(p => p.Id);
-                Wf.Raise(new ProcessingParts(ActorName, name, parts, Ct));
+                Wf.Raise(new ProcessingParts(StepName, name, parts, Ct));
                 var result = processor.Process();
 
-                Wf.Raise(new RanProcessor(ActorName, name, $"Process result contains {result.Count} recordsets", Ct));
+                Wf.Raise(new RanProcessor(StepName, name, $"Process result contains {result.Count} recordsets", Ct));
 
 
                 var sets = result.View;
@@ -226,12 +225,12 @@ namespace Z0
                     Process(set);                        
                 }
 
-                Wf.Ran(ActorName,Ct);
+                Wf.Ran(StepName,Ct);
 
             }
             catch(Exception e)
             {
-                Wf.Error(ActorName, e, Ct);
+                Wf.Error(StepName, e, Ct);
             }
         }
 

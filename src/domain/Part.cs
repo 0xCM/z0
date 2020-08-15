@@ -43,4 +43,6 @@ namespace Z0
             Box = new PartBox();
         }    
     }
+
+    public static partial class XTend{}
 }

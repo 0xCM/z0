@@ -14,6 +14,7 @@
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(WfCore)" />
+    <ProjectReference Include="$(AsmModels)" />
 
   </ItemGroup>
 

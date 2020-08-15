@@ -11,8 +11,9 @@
     <Data>$(Src)data/z0.data.csproj</Data>    
     <Expressive>$(Src)expressive/z0.expressive.csproj</Expressive>
     <Imagine>$(Src)imagine/z0.imagine.csproj</Imagine>
-    <Tokens>$(Src)tokens/z0.tokens.csproj</Tokens>
     <V0>$(Src)v0/z0.v0.csproj</V0>
+
+    <AsmModels>$(Src)asm.models/z0.asm.models.csproj</AsmModels>
 
     <WfActors>$(Src)flow.actors/z0.flow.actors.csproj</WfActors>
     <WfCore>$(Src)flow.core/z0.flow.core.csproj</WfCore>
@@ -45,11 +46,9 @@
     <Identity>$(Src)identity/z0.identity.csproj</Identity>
 
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
-    <AsmD>$(Src)asmd/z0.asmd.csproj</AsmD>        
     <Machine>$(Src)machine/z0.machine.csproj</Machine>
 
     <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
-    <ZIce>$(Src)commands/zice/z0.zice.csproj</ZIce>
     <ZAsm>$(Src)commands/zasm/z0.zasm.csproj</ZAsm>
 
     <VRoot>$(Src)vroot/z0.vroot.csproj</VRoot>

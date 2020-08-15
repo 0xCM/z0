@@ -52,12 +52,12 @@ namespace Z0
             TargetDir = wf.ResourceRoot + FolderName.Define("images");
             var process = Process.GetCurrentProcess();
             Images = process.Modules.Cast<ProcessModule>().Map(from).OrderBy(x => x.BaseAddress);
-            Wf.Created(Name, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {  
-             Wf.Running(Name, Ct);
+             Wf.Running(StepName, Ct);
 
              Index = z.span<LocatedPart>(Parts.Length);
              for(var i=0u; i< Parts.Length; i++)
@@ -74,12 +74,12 @@ namespace Z0
             using var summarize = new EmitImageSummaries(Wf, Images, Ct);
             summarize.Run();
 
-            Wf.Ran(Name, Ct);
+            Wf.Ran(StepName, Ct);
         }
 
         public void Dispose()
         {
-             Wf.Finished(Name, Ct);
+             Wf.Finished(StepName, Ct);
         }
     }
 }

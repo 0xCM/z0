@@ -24,19 +24,19 @@ namespace Z0
         {
             Wf = wf;
             Ct = ct;
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
         
         public void Run()
         {
-            Wf.Running(WorkerName, Ct);
+            Wf.Running(StepName, Ct);
             collect();
-            Wf.Ran(WorkerName, Ct);
+            Wf.Ran(StepName, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }
         
         const string Sep = "| ";
@@ -99,7 +99,7 @@ namespace Z0
                         if(parsed.Count != 0)
                         {
                             dst[id] = parsed;
-                            Wf.Status(WorkerName, $"Parsed {dst[id].Count} entries from {xmlfile}", Ct);
+                            Wf.Status(StepName, $"Parsed {dst[id].Count} entries from {xmlfile}", Ct);
                         }
                     }
                 }

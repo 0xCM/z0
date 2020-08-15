@@ -2,45 +2,56 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
+    using Z0.Asm;
 
     using static Konst;
     using static z;
+    using F = Asm.OpCodeRecordField;
 
-    using F = OpCodeRecordField;
-
-    [ApiHost]
-    public readonly struct CommandInfoParser 
+    partial struct AsmTables
     {
-        public static CommandInfoParser Service 
-            => default;
+        [MethodImpl(Inline), Op]
+        public AsmCommandGroup group(in asci16 name)
+            => new AsmCommandGroup(name);
+    
+        [MethodImpl(Inline), Op]
+        public OpCodeOperand operand(ulong src, uint2 index)
+            => new OpCodeOperand((ushort)Bits.slice(src, index*16, 16));
+
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<byte> encode(in EncodedOpCode src)
+            => MemoryMarshal.CreateReadOnlySpan(ref z.edit(src),1).Bytes();                     
 
         [Op, MethodImpl(Inline)]
-        public void Parse(in AppResourceDoc specs, Span<OpCodeRecord> dst)
+        public static void parse(in AppResourceDoc specs, Span<OpCodeRecord> dst)
         {
             var fields = Enums.literals<F>();
             var src = span(specs.Rows);
             for(var i=0u; i<src.Length; i++)
-               Parse(skip(src,i), fields, ref seek(dst,i));            
+               parse(skip(src,i), fields, ref seek(dst,i));            
         }
 
-        public Span<OpCodeRecord> Parse(in AppResourceDoc specs)
+        [Op, MethodImpl(Inline)]
+        public static Span<OpCodeRecord> opcodes(in AppResourceDoc specs)
         {
             var dst = Spans.alloc<OpCodeRecord>(specs.Rows.Length);
-            Parse(specs, dst);
+            parse(specs, dst);
             return dst;
         }
 
         [Op]
-        ref readonly OpCodeRecord Parse(in TextRow src, ReadOnlySpan<F> fields, ref OpCodeRecord dst)
+        static ref readonly OpCodeRecord parse(in TextRow src, ReadOnlySpan<F> fields, ref OpCodeRecord dst)
         {                        
             ReadOnlySpan<string> cells = src.CellContent;
             var count = length(cells,fields);
 
-            var parser = AsmParsers.fields();
+            var parser = AsmModels.FieldParser;
             for(var i=0; i<count; i++)
             {   
                 ref readonly var cell = ref skip(cells,i);
@@ -78,6 +89,6 @@ namespace Z0.Asm
             }
 
             return ref dst;
-        } 
+        }         
     }
 }

@@ -6,15 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static Flow;
+    using System.Text;
 
-    [Step(Kind, true)]
-    public readonly struct EmitImageSummariesStep
+    using Z0.Asm;
+
+    using static Konst;
+
+    [ApiHost]
+    public readonly partial struct AsmModels
     {
-        public const WfStepKind Kind = WfStepKind.EmitImageSummaries;
-
-        public const string Name = nameof(EmitImageSummaries);
-
-        public static WfStepId Id => step(Kind, Name);
-    }
+        public static AsmFieldParser FieldParser
+            => default;            
+    }    
 }

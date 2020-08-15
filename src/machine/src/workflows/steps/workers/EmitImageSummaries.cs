@@ -47,7 +47,7 @@ namespace Z0
         
         static void Summarize(LocatedImages src, FilePath dst)
         {            
-            var system = ZTables.SystemImages;
+            var system = Imaging.SystemImages;
             var count = src.Count;
             var images = src.View;
             var fields = Z0.Data.Table.columns<LocatedImageField>();
@@ -101,6 +101,5 @@ namespace Z0
             using var writer = dst.Writer();
             writer.Write(rows.ToString());
         }
-
     }
 }

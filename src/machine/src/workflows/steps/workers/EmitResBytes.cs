@@ -14,7 +14,6 @@ namespace Z0
     using static EmitResBytesStep;
     using static z;
 
-    [Step(WfStepKind.EmitResBytes)]
     public readonly ref struct EmitResBytes
     {            
         const string ProjectName = "bytes";
@@ -43,17 +42,17 @@ namespace Z0
             SourceDir = context.AppPaths.AppCaptureRoot;
             TargetDir = context.AppPaths.ResourceRoot + FolderName.Define(ProjectName);
             Archive = Archives.Services.EncodedHexArchive(SourceDir);            
-            Wf.Created(WorkerName,Ct);
+            Wf.Created(StepName,Ct);
         }
         
         public void Run()        
         {
-            Wf.RunningT(WorkerName, new {SourceDir, TargetDir}, Ct);
+            Wf.RunningT(StepName, new {SourceDir, TargetDir}, Ct);
             
             var indices = CodeReader.identified(SourceDir, Sink);            
             foreach(var index in indices)
             {
-                Wf.Status(WorkerName, $"Loaded {index.Code.Length} {index.Host} code blocks", Ct);
+                Wf.Status(StepName, $"Loaded {index.Code.Length} {index.Host} code blocks", Ct);
                 
                 try
                 {
@@ -68,7 +67,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }
 
         void Emit(IdentifiedCodeIndex src, FolderPath dst)
@@ -95,7 +94,7 @@ namespace Z0
             CloseTypeDeclaration(writer);
             CloseFileNamespace(writer);
             
-            Wf.Raise(new EmittedHostBytes(WorkerName, src.Host, (ushort)resources.Count, Ct));
+            Wf.Raise(new EmittedHostBytes(StepName, src.Host, (ushort)resources.Count, Ct));
         }
     }
 }

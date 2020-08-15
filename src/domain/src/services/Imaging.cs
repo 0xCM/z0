@@ -3,25 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using Z0.Asm;
 
     using static Konst;
     using static z;
 
-    public partial struct ZTables
+    public readonly struct Imaging
     {
-        public static EnumNames<Mnemonic> Mnemonics
-        {
-            [MethodImpl(Inline), Op]
-            get => Enums.NameIndex<Mnemonic>();
-        }
-
-
         [MethodImpl(Inline), Op]
         static void fill(in LocatedImage src,ref ProcessImageSummary dst)
         {
@@ -81,7 +71,7 @@ namespace Z0
         }
 
         static ResExtractor Extractor
-            => ResExtractor.Service(typeof(Z0.Parts.Tables).Assembly);
+            => ResExtractor.Service(typeof(Z0.Parts.Domain).Assembly);
 
         /// <summary>
         /// Searches for an embedded document with a matching identifier and, if found,
@@ -90,5 +80,6 @@ namespace Z0
         /// <param name="match">The resource identifier to match</param>
         public static AppResourceDoc structured(string match)
             => Extractor.MatcDocument(match);        
-    }    
+        
+    }
 }

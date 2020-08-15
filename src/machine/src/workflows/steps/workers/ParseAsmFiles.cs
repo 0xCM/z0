@@ -24,19 +24,19 @@ namespace Z0
             Ct = ct;
             Wf = wf;
             Files = files;
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {
-            Wf.Running(WorkerName, Ct);
+            Wf.Running(StepName, Ct);
 
             try
             {
                 var files = z.span(Files.AsmFiles);
                 var count = files.Length;
 
-                Wf.Status(WorkerName, $"Parsing {count} asm files", Ct);
+                Wf.Status(StepName, $"Parsing {count} asm files", Ct);
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var path = ref z.skip(files,i);
@@ -44,11 +44,11 @@ namespace Z0
                     if(result.Succeeded)
                     {
                         var doc = result.Value;
-                        Wf.Raise(new ParsedAsmFile(WorkerName, (uint)doc.RowCount, path, Ct));                         
+                        Wf.Raise(new ParsedAsmFile(StepName, (uint)doc.RowCount, path, Ct));                         
                     }
                     else
                     {
-                        Wf.Error(WorkerName, $"The document {path} failed to parse", Ct);                
+                        Wf.Error(StepName, $"The document {path} failed to parse", Ct);                
                     }
                 }            
 
@@ -58,12 +58,12 @@ namespace Z0
                 Wf.Error(e, Ct);
             }
 
-            Wf.Ran(WorkerName, Ct);
+            Wf.Ran(StepName, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }
     }
 }

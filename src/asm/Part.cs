@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class AsmModels : Part<AsmModels>
+    public sealed class Asm : Part<Asm>
     {
         
     }
@@ -14,12 +14,6 @@ namespace Z0.Parts
 
 namespace Z0.Asm
 {
-
-    public static partial class AsmModels
-    {
-
-        
-    }
 
     public static partial class ModelQueries
     {

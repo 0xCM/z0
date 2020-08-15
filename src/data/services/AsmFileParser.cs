@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static AsmCommandParser;
 
     [ApiHost]

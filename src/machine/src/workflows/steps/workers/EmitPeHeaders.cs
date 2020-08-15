@@ -14,7 +14,6 @@ namespace Z0
 
     using F = PeHeaderField;
     
-    [Step(WfStepKind.EmitPeHeaders)]
     public readonly ref struct EmitPeHeaders
     {
         readonly IWfContext Wf;
@@ -32,14 +31,14 @@ namespace Z0
             Ct = ct;
             Parts = src;
             TargetPath = wf.ResourceRoot + FileName.Define("z0", "pe.csv");
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {
             var pCount = Parts.Length;
             var total = 0u;
-            Wf.RunningT(WorkerName,new {PartCount = pCount}, Ct);
+            Wf.RunningT(StepName,new {PartCount = pCount}, Ct);
 
             var formatter = DatasetFormatter<F>.Default;            
             using var writer = TargetPath.Writer();
@@ -60,7 +59,7 @@ namespace Z0
                 total += count;
             }  
 
-            Wf.RanT(WorkerName, new {PartCount = pCount, TotalRecordCount = total}, Ct);
+            Wf.RanT(StepName, new {PartCount = pCount, TotalRecordCount = total}, Ct);
         }
 
         static void format(in PeHeaderRecord src, IDatasetFormatter<F> dst)

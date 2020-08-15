@@ -8460,3 +8460,70 @@
  rename src/konst/src/{archives/services/docparser => parsers/docs}/lines.cs (100%)
  rename src/konst/src/{archives/services/docparser => parsers/docs}/parse.cs (100%)
  rename src/konst/src/{archives/services/docparser => parsers/docs}/row.cs (100%)
+[master 0e19a7441] .
+ 69 files changed, 111 insertions(+), 170 deletions(-)
+ rename src/{asmd => asm}/src/OpCodePartitioner.cs (100%)
+ rename src/asm/src/{specs => contracts}/IAsmContext.cs (100%)
+ rename src/asm/src/{specs => contracts}/IAsmFormatter.cs (100%)
+ rename src/asm/src/{specs => contracts}/IAsmFunctionBuilder.cs (100%)
+ rename src/asm/src/{specs => contracts}/IAsmFunctionDecoder.cs (100%)
+ rename src/asm/src/{specs => contracts}/IAsmFunctionTrigger.cs (100%)
+ rename src/asm/src/{specs => contracts}/IAsmFunctionWriter.cs (100%)
+ rename src/asm/src/{specs => contracts}/IAsmInstructionSource.cs (100%)
+ rename src/asm/src/{specs => contracts}/IAsmTrigger.cs (100%)
+ rename src/asm/src/{specs => contracts}/IAsmTriggerSet.cs (100%)
+ rename src/asm/src/{specs => contracts}/ICaptureCore.cs (100%)
+ rename src/asm/src/{specs => contracts}/ICaptureExchange.cs (100%)
+ rename src/asm/src/{specs => contracts}/ICaptureServiceProxy.cs (100%)
+ rename src/asm/src/{specs => contracts}/ICaptureServices.cs (100%)
+ rename src/asm/src/{specs => contracts}/IHostArchiver.cs (100%)
+ rename src/asm/src/{specs => contracts}/IImmCapture.cs (100%)
+ rename src/asm/src/{specs => contracts}/IImmSpecializer.cs (100%)
+ rename src/asm/src/{specs => contracts}/IMemoryCapture.cs (100%)
+ rename src/asm/src/{specs => contracts}/IUriHexDecoder.cs (100%)
+ rename src/asm/src/{specs => contracts}/ParsedOperation.cs (100%)
+ rename src/asm/src/{specs => contracts}/TAsmContextual.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/AsmDecoder.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/AsmEncoder.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/ModRmEncoder.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/OpCodePartition.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/OpCodeServices.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/RexEncoder.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/modrm/ModRm.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/modrm/ModRmEncoding.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/ops/bytes.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/ops/encode.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/ops/format.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/ops/size.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/rex/RexFieldIndex.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/rex/RexFieldWidth.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/rex/RexPrefixBits.cs (100%)
+ rename src/{asmd => asm/src/services}/encoding/rex/RexPrefixCode.cs (100%)
+ delete mode 100644 src/asmd/.vscode/launch.json
+ delete mode 100644 src/asmd/.vscode/tasks.json
+ delete mode 100644 src/asmd/Part.cs
+ delete mode 100644 src/asmd/add.sh
+ delete mode 100644 src/asmd/build-log.sh
+ delete mode 100644 src/asmd/build.sh
+ delete mode 100644 src/asmd/clean.sh
+ delete mode 100644 src/asmd/directory.build.props
+ delete mode 100644 src/asmd/id.sh
+ delete mode 100644 src/asmd/remove.sh
+ delete mode 100644 src/asmd/src/Asm.x.cs
+ delete mode 100644 src/asmd/src/AsmD.x.cs
+ delete mode 100644 src/asmd/z0.asmd.csproj
+ rename src/{win/src/tables => domain/src/models}/HandleInfo.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/IImgStringField.cs (100%)
+ rename src/{metareader/src/mess => domain/src/models}/IPeMetaReader.cs (100%)
+ rename src/{win/src/services => domain/src/models}/ImageRecords.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/ImgBlobRecord.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/ImgConstantRecord.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/ImgFieldRecord.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/ImgFieldRva.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/ImgLiteralFieldRecord.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/ImgMethodBody.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/ImgRecordKind.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/ImgResourceRecord.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/ImgStringField.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/PeHeaderField.cs (100%)
+ rename src/{win/src/tables => domain/src/models}/PeHeaderRecord.cs (100%)

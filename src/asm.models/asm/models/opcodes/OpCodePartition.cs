@@ -10,14 +10,14 @@ namespace Z0.Asm
     using Z0.Tokens;
     
     using static Konst;
-    using static Root;
+    using static z;
 
     [ApiHost]
     public readonly ref struct OpCodePartition  
     {
         [MethodImpl(Inline), Op]
         public static OpCodePartition Create(int count)
-            => new OpCodePartition(count);
+            => new OpCodePartition((uint)count);
         
         readonly Span<InstructionExpression> instructions;
 
@@ -29,12 +29,12 @@ namespace Z0.Asm
 
         readonly Span<OperatingMode> modes;
 
-        readonly Span<int> MnemonicSeq;
+        readonly Span<uint> MnemonicSeq;
 
         [MethodImpl(Inline)]
-        OpCodePartition(int count)
+        OpCodePartition(uint count)
         {
-            MnemonicSeq = new int[1];
+            MnemonicSeq = new uint[1];
             instructions = new InstructionExpression[count];
             codes = new AsmOpCode[count];
             mnemonics = new MnemonicExpression[count];
@@ -45,29 +45,29 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public void Include(in OpCodePartitoner ocp, in InstructionExpression src)
         {
-            Instruction(ocp.Sequence) = src;
+            Instruction((uint)ocp.Sequence) = src;
         }
 
         [MethodImpl(Inline), Op]
         public void Include(in OpCodePartitoner ocp, in AsmOpCode src)
         {
-            OpCode(ocp.Sequence) = src;
+            OpCode((uint)ocp.Sequence) = src;
         }
 
         [MethodImpl(Inline), Op]
         void Include(in MnemonicExpression src)
-            => seek(mnemonics, head(MnemonicSeq)++) = src;
+            => z.seek(mnemonics, first(MnemonicSeq)++) = src;
 
         ref readonly MnemonicExpression LastMnemonic
         {
             [MethodImpl(Inline)]
-            get => ref skip(mnemonics, head(MnemonicSeq) - 1);
+            get => ref skip(mnemonics, first(MnemonicSeq) - 1);
         }
         
         [MethodImpl(Inline), Op]
         public void Include(OpCodePartitoner ocp, in MnemonicExpression src)
         {
-            if(head(MnemonicSeq) > 0)
+            if(first(MnemonicSeq) > 0)
             {
                 if(!LastMnemonic.Value.Equals(src.Value))
                     Include(src);
@@ -79,14 +79,14 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public void Include(in OpCodePartitoner ocp, in CpuidExpression src)
         {
-            seek(cpuid, ocp.Sequence) = src;
+            seek(cpuid, (uint)ocp.Sequence) = src;
         }
 
         [MethodImpl(Inline), Op]
         public void Include(OpCodePartitoner ocp, in OperatingMode src)
         {
 
-            Mode(ocp.Sequence) = src;
+            Mode((uint)ocp.Sequence) = src;
         }
 
         public int ProcessedCount
@@ -126,19 +126,19 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        ref MnemonicExpression Mnemonic(int seq)
+        ref MnemonicExpression Mnemonic(uint seq)
             => ref seek(mnemonics, seq);
 
         [MethodImpl(Inline), Op]
-        ref AsmOpCode OpCode(int seq)
+        ref AsmOpCode OpCode(uint seq)
             => ref seek(codes, seq);
 
         [MethodImpl(Inline), Op]
-        ref OperatingMode Mode(int seq)
+        ref OperatingMode Mode(uint seq)
             => ref seek(modes, seq);
 
         [MethodImpl(Inline), Op]
-        ref InstructionExpression Instruction(int seq)
+        ref InstructionExpression Instruction(uint seq)
             => ref seek(instructions, seq);
 
         [MethodImpl(Inline), Op]

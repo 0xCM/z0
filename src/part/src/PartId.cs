@@ -176,6 +176,8 @@ public enum PartId : ulong
     V0 = 170,
 
     Control = 180,
+    
+    AsmModels = 181,
 
 
     // ~ 200
@@ -247,7 +249,8 @@ public enum PartId : ulong
 
     AsmTest = Asm | Test,
 
-    AsmDTest = AsmD | Test,
+    
+    AsmDTest = AsmModels | Test,
 
     SymbolicTest = Symbolic | Test,
 

@@ -12,28 +12,28 @@ namespace Z0.Asm
     [ApiHost]
     public partial class AsmCommandParser
     {
-        internal const string LocatedMarker = "located://";
+        public const string LocatedMarker = "located://";
 
-        internal const char Assign = Chars.Eq;
+        public const char Assign = Chars.Eq;
 
-        internal const string BlockSepMarker = "-----";
+        public const string BlockSepMarker = "-----";
 
-        internal const string DescriptorSep = "||";       
+        public const string DescriptorSep = "||";       
 
-        internal const char BodySep = Chars.Semicolon;
+        public const char BodySep = Chars.Semicolon;
 
-        internal const char CommentMarker = Chars.Semicolon;
+        public const char CommentMarker = Chars.Semicolon;
 
         [MethodImpl(Inline), Op]
-        internal static bool IsCommentLine(string src)
+        public static bool IsCommentLine(string src)
             => src.Trim().StartsWith(CommentMarker);
 
         [MethodImpl(Inline), Op]
-        internal static bool IsBlockSep(string src)
+        public static bool IsBlockSep(string src)
             => src.Trim().StartsWith(BlockSepMarker);
 
         [MethodImpl(Inline), Op]
-        internal static bool IsBlankLine(string src)
+        public static bool IsBlankLine(string src)
             => string.IsNullOrWhiteSpace(src);
     }
 }

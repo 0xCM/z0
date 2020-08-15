@@ -30,14 +30,14 @@ namespace Z0
             Parts = parts;
             Spec = ImageRecords.Fields;
             TargetDir = wf.ResourceRoot + FolderName.Define("fields");
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {  
             var count = 0u;
             var partCount = Parts.Length;
-            Wf.RunningT(WorkerName, new {PartCount = partCount}, Ct);
+            Wf.RunningT(StepName, new {PartCount = partCount}, Ct);
             
             foreach(var part in Parts)
             {
@@ -51,7 +51,7 @@ namespace Z0
                 }
             }
 
-            Wf.RanT(WorkerName, new {PartCount = partCount, RecordCount = count}, Ct);
+            Wf.RanT(StepName, new {PartCount = partCount, RecordCount = count}, Ct);
         }
         
         static IPeMetaReader Reader(string src)
@@ -66,7 +66,7 @@ namespace Z0
             var id = part.Id;
             var path = TargetPath(id);
 
-            Wf.Emitting(WorkerName, DatasetName, path, Ct);
+            Wf.Emitting(StepName, DatasetName, path, Ct);
 
             var assembly = part.Owner;                
             using var reader = Reader(assembly.Location);
@@ -79,14 +79,14 @@ namespace Z0
                 PartRecords.format(record, formatter);
 
             path.Ovewrite(formatter.Render());  
-            Wf.Emitted(WorkerName, DatasetName, (uint)src.Length, path, Ct);
+            Wf.Emitted(StepName, DatasetName, (uint)src.Length, path, Ct);
             return (uint)count;
         }
 
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }
     }
 }

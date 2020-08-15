@@ -12,6 +12,7 @@
         "Nullary",
         "RFLAGS",
         "Unignored",
+        "cpuid",
         "dvec",
         "fxlabel",
         "gvec",
