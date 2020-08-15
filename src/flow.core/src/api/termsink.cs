@@ -9,17 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    public interface IWfBroker : IAppBase, IDisposable, IMultiSink
+    partial struct WfCore
     {
-        Outcome Subscribe<E>(Action<E> receiver, E model = default)
-            where E : IAppEvent;        
-
-        void Raise(IWfEvent e);
-
-        void Raise(IAppEvent e);
-
-        IWfEventSink Sink {get;}
-
-        
+        [MethodImpl(Inline), Op]
+        public static WfTermEventSink termsink(CorrelationToken ct)
+            => WfTermEventSink.create(ct);       
     }
 }

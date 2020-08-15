@@ -22,7 +22,7 @@ namespace Z0
         
         WfConfig Config {get;}
         
-        WfBroker Broker {get;}
+        IWfBroker Broker {get;}
                 
         IMultiSink WfSink {get;}                
         

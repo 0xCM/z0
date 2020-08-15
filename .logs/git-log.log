@@ -8300,3 +8300,53 @@
  rename src/flow/src/{participants => workflow}/steps/ListFormatPatterns.cs (100%)
  create mode 100644 src/tools/specs/dotnet.new.doc
  delete mode 100644 src/tools/src/tools/clr/CoreRun.cs
+[master 9afd88c55] .
+ 210 files changed, 1087 insertions(+), 776 deletions(-)
+ rewrite src/domain/src/flow/literals/Flairs.cs (63%)
+ rename src/{konst/src/formatting/ops/bits.cs => flow/src/api/ops/patterns.cs} (60%)
+ rename src/konst/src/formatting/{models => }/DefaultFormatter.cs (91%)
+ rename src/konst/src/formatting/{models => }/Entitled.cs (100%)
+ delete mode 100644 src/konst/src/formatting/Format.cs
+ rename src/konst/src/formatting/{models => }/FormatterT.cs (76%)
+ rename src/konst/src/{hex/services/formatters => formatting}/HexDataFormatter.cs (100%)
+ rename src/konst/src/{hex/services/formatters => formatting}/HexDataFormatterT.cs (100%)
+ rename src/konst/src/{hex/services/formatters => formatting}/HexFormat.cs (100%)
+ rename src/konst/src/{hex/services/formatters => formatting}/HexFormatConfig.cs (92%)
+ rename src/konst/src/{hex/services/formatters/HexSpecs.cs => formatting/HexFormatSpecs.cs} (98%)
+ rename src/konst/src/{hex/services/formatters => formatting}/HexFormatter.cs (81%)
+ rename src/konst/src/{hex/services/formatters => formatting}/HexFormatters.cs (100%)
+ rename src/konst/src/{hex/services/formatters => formatting}/HexLineConfig.cs (100%)
+ rename src/konst/src/{hex/services/formatters/HexSeqFormatConfig.cs => formatting/HexSequenceFormatConfig.cs} (62%)
+ rename src/konst/src/formatting/{models => }/NumericFormatterFT.cs (100%)
+ rename src/konst/src/formatting/{models => }/NumericFormatterT.cs (100%)
+ rename src/konst/src/formatting/{models/FormatPatterns.cs => PatternIndex.cs} (66%)
+ create mode 100644 src/konst/src/formatting/Render.cs
+ rename src/konst/src/{hex/services/formatters => formatting}/SmallHexFormat.cs (88%)
+ rename src/konst/src/{hex/services/formatters => formatting}/SystemHexFormatters.cs (100%)
+ rename src/konst/src/formatting/{models => }/TitleFormatter.cs (79%)
+ create mode 100644 src/konst/src/formatting/contracts/FormatFx.cs
+ rename src/{machine/src/workflows/steps/metadata/EmitEnumCatalogStep.cs => konst/src/formatting/contracts/ISequenceFormatConfig.cs} (54%)
+ rename src/konst/src/{hex => formatting}/contracts/ISystemFormater.cs (100%)
+ rename src/konst/src/{hex => formatting}/contracts/ISystemHexFormatter.cs (100%)
+ delete mode 100644 src/konst/src/formatting/contracts/RenderDelegates.cs
+ rename src/konst/src/formatting/{ops/content.cs => formatters/bits.cs} (75%)
+ rename src/{machine/src/workflows/steps/metadata/AnalyzeCallsStep.cs => konst/src/formatting/formatters/default.cs} (64%)
+ rename src/konst/src/formatting/{ops => formatters}/entitled.cs (55%)
+ rename src/konst/src/formatting/{ops => formatters}/numeric.cs (99%)
+ create mode 100644 src/konst/src/formatting/formatters/title.cs
+ rename src/konst/src/formatting/literals/{AppMsgColor.cs => MessageFlair.cs} (98%)
+ rename src/konst/src/formatting/literals/{FormatPatterns.Literals.cs => RenderPatterns.cs} (90%)
+ create mode 100644 src/konst/src/formatting/ops/tests.cs
+ rename src/konst/src/{hex/xtend => formatting/x}/FormatAsmHex.cs (97%)
+ create mode 100644 src/konst/src/formatting/x/FormatCount.cs
+ rename src/konst/src/{hex/xtend => formatting/x}/FormatHexBytes.cs (100%)
+ rename src/konst/src/{hex/xtend => formatting/x}/FormatHexScalar.cs (99%)
+ rename src/konst/src/{hex/xtend => formatting/x}/Span.FormatHex.cs (100%)
+ create mode 100644 src/machine/src/workflows/steps/Specs.cs
+ delete mode 100644 src/machine/src/workflows/steps/metadata/EmitBitMasksStep.cs
+ delete mode 100644 src/machine/src/workflows/steps/metadata/EmitCilDatasetsStep.cs
+ delete mode 100644 src/machine/src/workflows/steps/metadata/EmitConstantDatasetsStep.cs
+ delete mode 100644 src/machine/src/workflows/steps/metadata/EmitContentCatalogStep.cs
+ rename src/machine/src/workflows/steps/metadata/{ProcessInstructionsStep.cs => EmitDatasetsStep.cs} (62%)
+ delete mode 100644 src/machine/src/workflows/steps/metadata/EmitPartStringsStep.cs
+ delete mode 100644 src/machine/src/workflows/steps/metadata/EmitStringRecordsStep.cs

@@ -9,7 +9,7 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Identity)" />
-    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(WfCore)" />
   </ItemGroup>
 
 </Project>

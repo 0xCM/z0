@@ -5,35 +5,37 @@
 namespace Z0
 {
     using System;
+    using System.IO;
     using System.Runtime.CompilerServices;
-
+        
     using static Konst;
     using static Render;
+    using static RenderPatterns;
     using static z;
 
-    public readonly struct MethodsPrepared : IWfEvent<MethodsPrepared>
+    public readonly struct WfStepRunning<T> : IWfEvent<WfStepRunning<T>>
     {
-        public const string EventName = nameof(MethodsPrepared);
+        public const string EventName = nameof(WfStepRunning<T>);
         
         public WfEventId EventId {get;}
-
+        
         public WfActor Actor {get;}
         
-        public ApiHostUri Host {get;}
+        public T Body {get;}
 
-        public CellCount Count {get;}
-        
+        public MessageFlair Flair {get;}
+
         [MethodImpl(Inline)]
-        public MethodsPrepared(WfActor actor, ApiHostUri host, int count, CorrelationToken ct)
+        public WfStepRunning(WfActor actor, T body, CorrelationToken ct, MessageFlair flair = Running)
         {
-            EventId = z.evid(EventName, ct);
+            EventId = evid(EventName, ct);
             Actor = actor;
-            Host = host;
-            Count = count;
+            Body = body;
+            Flair = flair;         
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Actor, Host, Count);
-    }
+            => text.format(PSx3, EventId, Actor, Body);          
+    }   
 }

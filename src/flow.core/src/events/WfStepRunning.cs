@@ -6,34 +6,35 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
+        
     using static Konst;
     using static Render;
     using static z;
 
-    public readonly struct MethodsPrepared : IWfEvent<MethodsPrepared>
-    {
-        public const string EventName = nameof(MethodsPrepared);
-        
+    [Event]
+    public readonly struct WfStepRunning : IWfEvent<WfStepRunning>
+    {        
+        public const string EventName = nameof(WfStepRunning);
+
         public WfEventId EventId {get;}
-
+    
         public WfActor Actor {get;}
-        
-        public ApiHostUri Host {get;}
 
-        public CellCount Count {get;}
+        public WfStepId Step {get;}
         
+        public MessageFlair Flair {get;}
+
         [MethodImpl(Inline)]
-        public MethodsPrepared(WfActor actor, ApiHostUri host, int count, CorrelationToken ct)
+        public WfStepRunning(WfActor actor, WfStepId step, CorrelationToken ct, MessageFlair flair = Running)
         {
-            EventId = z.evid(EventName, ct);
+            EventId = evid(EventName, ct);
             Actor = actor;
-            Host = host;
-            Count = count;
+            Step = step;
+            Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Actor, Host, Count);
+            => format(EventId, Actor, Step);
     }
 }

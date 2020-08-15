@@ -9,31 +9,30 @@ namespace Z0
 
     using static Konst;
     using static Render;
+    using static RenderPatterns;
     using static z;
 
-    public readonly struct MethodsPrepared : IWfEvent<MethodsPrepared>
+    [Event]
+    public readonly struct WfContextLoaded : IWfEvent<WfContextLoaded>
     {
-        public const string EventName = nameof(MethodsPrepared);
+        public const string EventName = nameof(WfContextLoaded);
         
         public WfEventId EventId {get;}
 
         public WfActor Actor {get;}
-        
-        public ApiHostUri Host {get;}
-
-        public CellCount Count {get;}
-        
+                        
+        public MessageFlair Flair {get;}
+                                
         [MethodImpl(Inline)]
-        public MethodsPrepared(WfActor actor, ApiHostUri host, int count, CorrelationToken ct)
+        public WfContextLoaded(WfActor actor, CorrelationToken ct, MessageFlair flair = Created)
         {
             EventId = z.evid(EventName, ct);
             Actor = actor;
-            Host = host;
-            Count = count;
+            Flair = flair;            
         }
-
+        
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Actor, Host, Count);
+            => text.format(PSx2, EventId, Actor);        
     }
 }

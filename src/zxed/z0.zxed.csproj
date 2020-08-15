@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(WfCore)" />
     <ProjectReference Include="$(Flow)" />
   </ItemGroup>  
 </Project>

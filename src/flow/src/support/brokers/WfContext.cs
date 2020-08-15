@@ -25,7 +25,7 @@ namespace Z0
         
         public IMultiSink WfSink {get;}
         
-        public WfBroker Broker {get;}
+        public IWfBroker Broker {get;}
                 
         public FolderPath IndexRoot {get;}
         
@@ -47,7 +47,7 @@ namespace Z0
             IndexRoot =  ResourceRoot + FolderName.Define("index");
             Known = ContextRoot.Parts;            
             Broker = new WfBroker(Ct);
-            Broker.WithContext(this);
+            ((WfBroker)Broker).WithContext(this);
             WfSink.Deposit(new WfContextLoaded(Actor, Ct));
         }
 

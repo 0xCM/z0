@@ -16,6 +16,8 @@ namespace Z0
     /// </summary>
     public readonly struct SegRef : ISegRef, ITextual, IEquatable<SegRef>, IHashed
     {
+        public const byte Size = 16;
+        
         readonly Vector128<ulong> Segment;        
 
         public MemoryAddress Address

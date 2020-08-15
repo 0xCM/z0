@@ -11,9 +11,11 @@ namespace Z0
 
     using E = ExtractParseFailed;
 
-    public readonly struct ExtractParseFailed : IWfEvent<E>
+    public readonly struct ExtractParseFailed : IWfEvent<ExtractParseFailed>
     {
-        public WfEventId EventId => WfEventId.define(nameof(ExtractParseFailed));
+        public const string EventName = nameof(ExtractParseFailed);
+        
+        public WfEventId EventId {get;}
         
         [MethodImpl(Inline)]
         public static E create(ExtractParseFailure data)
@@ -21,7 +23,10 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public ExtractParseFailed(ExtractParseFailure data)
-            => Data = data;
+        {
+            Data = data;
+            EventId = WfEventId.define(EventName);
+        }
         
         public ExtractParseFailure Data {get;}
         

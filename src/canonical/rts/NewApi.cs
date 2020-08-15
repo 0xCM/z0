@@ -10,23 +10,21 @@ namespace Z0
 
     using static Konst;    
     using static z;
-    using static AsciCharCode;
-    using C = AsciCharCode;
     [ApiHost]
     public readonly struct NewApi
-    {
-                
+    {                
         public static Span<byte> buffer(int index)
             => edit(Buffer_2688);
 
         static Span<byte> index()
             => edit(IndexBuffer);
 
-        public static ReadOnlySpan<byte> Buffer_8 =>  new byte[8]{0x0f,0x1f,0x44,0x00,0x00,0x48,0x8b,0xc1};
+        public static ReadOnlySpan<byte> Buffer_8 
+            =>  new byte[8]{0x0f,0x1f,0x44,0x00,0x00,0x48,0x8b,0xc1};
 
         public static ReadOnlySpan<byte> Buffer_16  =>  new byte[16]{0xc5,0xf8,0x77,0x66,0x90,0xc5,0xf9,0x2e,0xd1,0x0f,0x93,0xc0,0x0f,0xb6,0xc0,0xc3};
 
-        public static ReadOnlySpan<byte> Buffer_32 =>  new byte[32]{0x44,0x00,0x00,0x41,0x0f,0xb6,0xc0,0xf7,0xd0,0x0f,0xb6,0xc0,0x0f,0xb6,0xc9,0x0f,0xb6,0xd2,0x0b,0xd1,0x0f,0xb6,0xd2,0x0f,0xb6,0xc0,0x23,0xc2,0x0f,0xb6,0xc0,0xc3};        
+        public static ReadOnlySpan<byte> Buffer_32 =>  new byte[32]{0x44,0x00,0x00,0x41,0x0f,0xb6,0xc0,0xf7,0xd0,0x0f,0xb6,0xc0,0x0f,0xb6,0xc9,0x0f,0xb6,0xd2,0x0b,0xd1,    0x0f,0xb6,0xd2,0x0f,0xb6,0xc0,0x23,0xc2,0x0f,0xb6,0xc0,0xc3};        
         
         public static ReadOnlySpan<byte> Buffer_48 =>  new byte[48]{0x0f,0x1f,0x44,0x00,0x00,0x33,0xc0,0x0f,0xb6,0xc9,0x0f,0xb6,0xd2,0x3b,0xca,0x7c,0x07,0xb8,0x0d,0x00,0x00,0x00,0xeb,0x14,0x3b,0xca,0x7f,0x07,0xb8,0x0e,0x00,0x00,0x00,0xeb,0x09,0x3b,0xca,0x74,0x05,0xb8,0x05,0x00,0x00,0x00,0xc3,0xc3,0xc3,0xc3};
         
@@ -39,15 +37,50 @@ namespace Z0
         [Op, MethodImpl(Inline)]
         public static ReadOnlySpan<SegRef> init()
         {
-            const uint PartSize = 10;
             var x = index();
             seek64(x,0) = address(Buffer_8);
             seek64(x,16) = address(Buffer_16);
             seek64(x,16) = address(Buffer_32);
             return recover<SegRef>(x);
-        }
+        }      
+
+
+        const byte Sz = SegRef.Size;
+
+        static ReadOnlySpan<byte> SegIndex => new byte[8*Sz]{
+            0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,    
+            0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,    
+            0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0
+            };
+
+
+
+        static ReadOnlySpan<byte> IndexPos => new byte[6]{
+            0, 24, 47, 92, 128, 200
+        };
+
+        [Op, MethodImpl(Inline)]
+        public static ReadOnlySpan<SegRef> segments()
+        {
+            var index = edit(SegIndex);
+            var src = edit(Buffer_2688);
+            var pos = IndexPos;
+
+            seek64(index,0) = address(skip(src, skip(pos, 0)));
+            seek64(index,1) = (ulong)(skip(pos, 1) - skip(pos,0));            
+            
+            seek64(index,2) = address(skip(src,skip(pos, 1)));
+            seek64(index,3) = (ulong)(skip(pos, 2) - skip(pos,1));
         
+            seek64(index,4) = address(skip(src,skip(pos, 2)));
+            seek64(index,5) = (ulong)(skip(pos, 3) - skip(pos,2));
+            
+            return recover<SegRef>(index);
+        }        
     }
-
-
 }
