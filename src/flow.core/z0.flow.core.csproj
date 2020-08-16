@@ -13,6 +13,7 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Imagine)" />
+    <ProjectReference Include="$(Expressive)" />
 
   </ItemGroup>  
 
