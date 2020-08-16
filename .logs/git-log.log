@@ -10206,3 +10206,37 @@
  delete mode 100644 src/flow/src/api/ops/warn.cs
 [master 9e31b1185] .
  3 files changed, 38 insertions(+), 5 deletions(-)
+[master 595c6c5c7] .
+ 74 files changed, 753 insertions(+), 630 deletions(-)
+ rename src/asm.models/asm/{models/capture/ParsedOperation.cs => capture/models/ParsedEncoding.cs} (85%)
+ rename src/asm.models/asm/{formatting => contracts}/IAsmFormatter.cs (100%)
+ delete mode 100644 src/asm.models/asm/formatting/AsmFormat.cs
+ create mode 100644 src/asm.models/asm/formatting/AsmTextEmitter.cs
+ rename src/asm.models/asm/formatting/{AsmFunctionWriter.cs => AsmWriter.cs} (70%)
+ rename src/asm.models/asm/formatting/{ => literals}/AsmAspectLabels.cs (100%)
+ rename src/asm.models/asm/formatting/{ => literals}/AsmRenderPatterns.cs (100%)
+ rename src/asm.models/asm/formatting/{ => literals}/AsmTypeLabels.cs (100%)
+ create mode 100644 src/asm.models/asm/formatting/ops/comment.cs
+ create mode 100644 src/asm.models/asm/formatting/ops/emitter.cs
+ create mode 100644 src/asm.models/asm/formatting/ops/format.cs
+ create mode 100644 src/asm.models/asm/formatting/ops/header.cs
+ create mode 100644 src/asm.models/asm/formatting/ops/label.cs
+ create mode 100644 src/asm.models/asm/formatting/ops/lines.cs
+ rename src/asm.models/asm/models/processing/contracts/{IAsmRoutineDecoder.cs => IAsmDecoder.cs} (96%)
+ rename src/asm.models/asm/models/processing/contracts/{IInstructionSink.cs => IAsmFxSink.cs} (67%)
+ rename src/asm.models/asm/models/processing/contracts/{IAsmFunctionWriter.cs => IAsmTextWriter.cs} (66%)
+ create mode 100644 src/asm.models/asm/models/processing/services/AsmDataWriter.cs
+ rename src/capture/src/services/{EncodingDecoder.cs => AsmDecoderProxy.cs} (66%)
+ rewrite src/capture/src/services/MemoryCapture.cs (74%)
+ rename src/capture/src/services/{Reveal.cs => _Reveal.cs} (99%)
+ rename src/capture/src/services/{ => contracts}/IAsmCaptureFormatter.cs (100%)
+ rename src/capture/src/services/{ => contracts}/ICaptureContext.cs (60%)
+ rename src/capture/src/services/{ => hosts}/AsmCaptureFormatter.cs (98%)
+ rename src/capture/src/services/{ => hosts}/AsmRoutineDecoder.cs (98%)
+ create mode 100644 src/capture/src/workflow/ops/memory.cs
+ create mode 100644 src/flow.core/src/WfEventBuilder.cs
+ delete mode 100644 src/imagine/src/locate/IMemoryExtractor.cs
+ rewrite src/imagine/src/locate/MemoryExtractor.cs (68%)
+ delete mode 100644 src/imagine/src/locate/MemoryReaderService.cs
+ delete mode 100644 wf/emit.bat
+ delete mode 100644 wf/needs.bat
