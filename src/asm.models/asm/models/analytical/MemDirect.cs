@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using Z0.Asm;
 
-    public readonly struct MemDirect : INullity
+    public readonly struct MemDirect
     {        
         public readonly Register Base;
 
@@ -18,11 +18,6 @@ namespace Z0
 
         public readonly MemDx Dx;
         
-        [MethodImpl(Inline)]
-        public static MemDirect From(Instruction src)
-            => new MemDirect(src.MemoryBase, src.MemoryIndexScale,
-                    asm.memdx(src.MemoryDisplacement, src.MemoryDisplSize));
-
         [MethodImpl(Inline)]
         public MemDirect(Register register, MemScale scale, MemDx dx)
         {

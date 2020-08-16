@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmAspect : IValued<AsmAspect>
+    public readonly struct AsmAspect
     {
         /// <summary>
         /// The aspect name

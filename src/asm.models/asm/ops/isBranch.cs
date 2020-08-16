@@ -8,13 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+        
     using static Konst;
-    
+
     partial struct asm
     {
+        /// <summary>
+        /// Determines whether a classified operand is associated with a branching instruction
+        /// </summary>
+        /// <param name="src">The operand classification</param>
         [MethodImpl(Inline), Op]
-        public static MemInfo meminfo(Register segreg, Register prefix, MemDirect mem, MemoryAddress address, MemorySize size)        
-            => new MemInfo(segreg, prefix, mem, address, size);
+        public static bool isBranch(OpKind src)
+            => isNearBranch(src) || isFarBranch(src);
     }
 }

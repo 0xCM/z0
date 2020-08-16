@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {        
         [MethodImpl(Inline), Op]
-        public static Register memidx(Instruction src, int index)
+        public static Register memIdx(Instruction src, int index)
             => kind(src, index) == Memory ? src.MemoryIndex : 0;
     }
 }

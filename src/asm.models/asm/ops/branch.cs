@@ -15,7 +15,7 @@ namespace Z0
     {        
         [MethodImpl(Inline), Op]
         public static AsmBranchInfo branch(in MemoryAddress @base, in Instruction ix, in AsmBranchTarget target)
-            => new AsmBranchInfo(ix, @base, ix.IP, target, offset(ix.IP, (byte)ix.ByteLength, target.TargetAddress));
+            => new AsmBranchInfo(ix, @base, ix.IP, target, fxOffset(ix.IP, (byte)ix.ByteLength, target.TargetAddress));
 
         [MethodImpl(Inline), Op]
         public static AsmBranchInfo branch(in MemoryAddress @base, in Instruction src, int index)

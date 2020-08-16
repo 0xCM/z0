@@ -11,8 +11,6 @@ namespace Z0
     
     using static Konst;
 
-    using Z0.Asm.Dsl;
-
     partial struct asm
     {
         [MethodImpl(Inline)]

@@ -11,11 +11,11 @@ namespace Z0
     
     using static Konst;
     using static Asm.OpKind;
-    
+        
     partial struct asm
     {        
         [MethodImpl(Inline), Op]
-        public static Register memSeg(in Instruction src, int index)
+        public bool isMem(in Instruction src, int index)
         {
             switch(kind(src,index))
             {
@@ -24,11 +24,21 @@ namespace Z0
                 case MemorySegSI:
                 case MemorySegESI:
                 case MemorySegRSI:
-                    return src.MemorySegment;
+                case MemoryESDI:
+                case MemoryESEDI:
+                case MemoryESRDI:
+                    return true;
                 default:
-                    return 0;
+                    return false;
             }
         }
 
+        /// <summary>
+        /// Determines whether the classified operand is some sort of memory
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        [MethodImpl(Inline), Op]
+        public static  bool isMem(OpKind src)            
+            => isMemDirect(src) || isMem64(src) || isSegEs(src) || isSegBase(src);
     }
 }

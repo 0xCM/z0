@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmBranchTarget : INullity, INullary<AsmBranchTarget>, ITextual
+    public readonly struct AsmBranchTarget : INullity, INullary<AsmBranchTarget>
     {
         /// <summary>
         /// The target classifier, near or far
@@ -42,7 +42,8 @@ namespace Z0.Asm
         public bool IsFar 
             => Kind == BranchTargetKind.Far;    
         
-        public string Label => Kind.Format(Size);
+        public string Label 
+            => SemanticRender.format(Kind, Size);
 
         [MethodImpl(Inline)]
         public AsmBranchTarget(BranchTargetKind kind, BranchTargetSize size, MemoryAddress address, ushort selector = 0)
@@ -52,15 +53,7 @@ namespace Z0.Asm
             TargetAddress = address;
             Selector = selector;
         }
-
-        public string Format()
-        {
-            var address = TargetAddress.FormatMinimal();
-            return Label + (IsNear 
-                ? text.bracket(address)
-                : text.bracket(text.concat(address, Chars.Colon, Selector.FormatAsmHex())));                    
-        }
-
+        
         public static AsmBranchTarget Empty 
             => new AsmBranchTarget(BranchTargetKind.None, BranchTargetSize.None, 0, 0);
     }

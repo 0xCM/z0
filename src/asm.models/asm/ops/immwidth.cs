@@ -16,8 +16,12 @@ namespace Z0
    
     partial struct asm
     {
+        /// <summary>
+        /// Determines the size of a classified immediate operand, if applicable; otherwise, returns 0
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
         [Op]
-        public static NumericWidth immwidth(OpKind src)
+        public static NumericWidth immWidth(OpKind src)
         {
             if(src == Immediate8 || src == Immediate8_2nd)
                 return W.W8;

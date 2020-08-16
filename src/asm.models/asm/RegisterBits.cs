@@ -63,25 +63,25 @@ namespace Z0.Asm
         public static RegisterKind join(RegisterCode c, RegisterClass k, RegisterWidth w)
             => (RegisterKind)((uint)c  << CodeIndex | (uint)k << ClassIndex | (uint)w << WidthIndex);
 
-        // [MethodImpl(Inline), Op]
-        // public static RegisterCode code1(RegisterKind src)
-        //     => (RegisterCode)Bits.slice((uint)src, (byte)FI.C, (byte)FW.C);
+        [MethodImpl(Inline), Op]
+        public static RegisterCode code1(RegisterKind src)
+            => (RegisterCode)Bits.slice((uint)src, (byte)FI.C, (byte)FW.C);
 
-        // [MethodImpl(Inline), Op]
-        // public static RegisterClass @class1(RegisterKind src)
-        //     => (RegisterClass)Bits.slice((uint)src, (byte)FI.K, (byte)FW.K);
+        [MethodImpl(Inline), Op]
+        public static RegisterClass @class1(RegisterKind src)
+            => (RegisterClass)Bits.slice((uint)src, (byte)FI.K, (byte)FW.K);
 
-        // [MethodImpl(Inline), Op]
-        // public static RegisterKind code(RegisterCode src, RegisterKind dst)
-        //     => (RegisterKind)(Bits.copy((uint)src, (byte)FI.C, (byte)(FW.C), (uint)dst));
+        [MethodImpl(Inline), Op]
+        public static RegisterKind code(RegisterCode src, RegisterKind dst)
+            => (RegisterKind)(Bits.copy((uint)src, (byte)FI.C, (byte)(FW.C), (uint)dst));
 
-        // [MethodImpl(Inline), Op] 
-        // public static RegisterKind @class(RegisterClass src, RegisterKind dst)
-        //     => (RegisterKind)(Bits.copy((uint)src, (byte)FI.K, (byte)(FW.K), (uint)dst));
+        [MethodImpl(Inline), Op] 
+        public static RegisterKind @class(RegisterClass src, RegisterKind dst)
+            => (RegisterKind)(Bits.copy((uint)src, (byte)FI.K, (byte)(FW.K), (uint)dst));
 
-        // [MethodImpl(Inline), Op]
-        // public static RegisterKind width(RegisterWidth src, RegisterKind dst)
-        //     => (RegisterKind)(Bits.copy((uint)src, (byte)FI.K, (byte)(FW.W), (uint)dst));
+        [MethodImpl(Inline), Op]
+        public static RegisterKind width(RegisterWidth src, RegisterKind dst)
+            => (RegisterKind)(Bits.copy((uint)src, (byte)FI.K, (byte)(FW.W), (uint)dst));
  
         public static RegisterKind[] SymbolKinds
             => Enums.literals<RegisterKind>();

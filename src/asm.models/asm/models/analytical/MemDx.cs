@@ -66,7 +66,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MemDx((ulong value, int size) src)
-            => asm.memdx(src.value, src.size);
+            => asm.memDx(src.value, src.size);
 
         public static MemDx Empty 
             => default;

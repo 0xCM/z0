@@ -2,22 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
-{        
+namespace Z0
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    public interface IAsmSemantic : TSemanticQuery
-    {
-
-            
-    }
+    using Z0.Asm;
     
-    [ApiHost("semantic")]
-    public readonly struct AsmSemantic : IAsmSemantic
-    {
-        public static IAsmSemantic Service => default(AsmSemantic);
+    using static Konst;
+        
+    partial struct asm
+    {        
+        [MethodImpl(Inline), Op]
+        public static bool isCall(Instruction src)
+            => src.Mnemonic == Mnemonic.Call;    
     }
 }

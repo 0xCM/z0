@@ -10,25 +10,24 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Describes a zero exension operation
+    /// Describes a zero extension operation
     /// </summary>
-    public readonly struct ZeroExensionKind
+    [LiteralCover]
+    public readonly struct ZeroExtensionKind : ILiteralCover<ZeroExtensionKind>
     {        
         public readonly NumericWidth SourceWidth;
 
         public readonly NumericWidth TargetWidth;
 
         [MethodImpl(Inline)]
-        public static implicit operator ZeroExensionKind((NumericWidth src, NumericWidth dst) x)
-            => new ZeroExensionKind(x.src, x.dst);
+        public static implicit operator ZeroExtensionKind((NumericWidth src, NumericWidth dst) x)
+            => new ZeroExtensionKind(x.src, x.dst);
         
         [MethodImpl(Inline)]
-        public ZeroExensionKind(NumericWidth src, NumericWidth dst)
+        public ZeroExtensionKind(NumericWidth src, NumericWidth dst)
         {
             SourceWidth = src;
             TargetWidth = dst;
         }
-
-        public static ZeroExensionKind None => default;
     }
 }

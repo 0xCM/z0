@@ -7,12 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-    
     using static Konst;
-    
+
     partial struct asm
-    {      
+    {
         /// <summary>
         /// Defines an IP offset relative to a specified base address, instruction size and target address
         /// </summary>
@@ -20,7 +18,7 @@ namespace Z0
         /// <param name="size">The size, in bytes, of the call/branch/jmp instruction</param>
         /// <param name="dst">The call/branch/jmp target</param>
         [MethodImpl(Inline), Op]
-        public static uint offset(in MemoryAddress @base, byte size, in MemoryAddress dst)
-            => (uint)(dst - (@base + size));
+        public static uint fxOffset(MemoryAddress src, byte fxSize, MemoryAddress dst)
+            => (uint)(dst - (src + fxSize));
     }
 }

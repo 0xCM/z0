@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
     using static AsmAspectInfo;
 
-    public readonly struct AsmAspects : IValues<AsmAspects, AsmAspect>
+    public readonly struct AsmAspects
     {
         public static string[] Values<T>(object src)
             where T : class

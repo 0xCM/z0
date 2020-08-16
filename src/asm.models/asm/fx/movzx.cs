@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Represents the <see cref='Mnemonic.Movzx'/> instruction
     /// </summary>
-    partial struct asm
+    partial struct AsmFx
     {
         [MethodImpl(Inline), Op]
         public static AsmArgs<R8,R16> movzx(R8 src, R16 dst)

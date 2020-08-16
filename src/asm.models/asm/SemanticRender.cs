@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
+    using System;
+    using System.Runtime.CompilerServices;
+
     using static OpKind;
     using static Konst;
 
@@ -11,22 +14,60 @@ namespace Z0.Asm
     { 
         public static SemanticRender Service => default(SemanticRender);
 
+        public static string format(in AsmBranchTarget src)
+        {
+            var address = src.TargetAddress.FormatMinimal();
+            return src.Label + (src.IsNear 
+                ? text.bracket(address)
+                : text.bracket(text.concat(address, Chars.Colon, src.Selector.FormatAsmHex())));                    
+        }
+
+        [MethodImpl(Inline), Op]
+        public static string format(BranchTargetSize src)
+            => src == 0 ? string.Empty : ((byte)src).ToString();        
+
+        [MethodImpl(Inline), Op]
+        public static string format(BranchTargetKind src, BranchTargetSize sz)
+            => src == 0 ? string.Empty : text.concat(src.ToString().ToLower(), format(sz));        
+
         public string Render(AsmBranchInfo src)
-            => src.Render();
+            => text.concat(src.Source.Format(), " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
     
-        const string Unknown = "???";
+        [MethodImpl(Inline), Op]
+        public static string render(in AsmState state, in MemDx src)
+            => (src.Size switch{
+                DataSize.y1 => ((byte)src.Value).FormatHex(state.HexConfig),
+                DataSize.y2 => ((ushort)src.Value).FormatHex(state.HexConfig),
+                DataSize.y4 => ((uint)src.Value).FormatHex(state.HexConfig),
+                _ => (src.Value).FormatHex(state.HexConfig),
+            }) + "dx";
+
+        static HexFormatConfig HexSpec 
+            => HexFormat.configure(zpad:false, specifier:false);
+
+        public static string format(in MemDx src)
+            => (src.Size switch{
+                DataSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
+                DataSize.y2 => ((ushort)src.Value).FormatHex(HexSpec),
+                DataSize.y4 => ((uint)src.Value).FormatHex(HexSpec),
+                _ => (src.Value).FormatHex(HexSpec),
+            }) + "dx";
+
+        [MethodImpl(Inline), Op]
+        public static string format(in ImmInfo src)
+            => text.concat(src.Value.FormatHex(zpad:false, prespec:false));
 
         public string Render(Register src)
-            => src.ToString();
+            => text.format("{0}",src);
 
-
+        [MethodImpl(Inline), Op]
         public string Render(in ImmInfo src)
-            => Z0.asm.render(src);
+            => format(src);
 
         public string Render(MemDx src)
-            => src.Format();
+            => format(src);
 
-        public string Render(OpKind src)
+        public static string format(OpKind src)
         {
             var si = RenderSegKind(src);
             if(text.nonempty(si))
@@ -55,6 +96,9 @@ namespace Z0.Asm
 
             return result;
         }
+
+        public string Render(OpKind src)
+            => format(src);
 
         public string Render(MemDirect src)        
         {
@@ -104,11 +148,10 @@ namespace Z0.Asm
         public string RenderAddress(Instruction src, int pad = 16)
             => text.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
 
-        static AsmQuery Q => AsmQuery.Direct;
-
         public string Render(MemorySize src)
-            => Q.Identify(src).Format();
+            => asm.identify(src).Format();
 
+        [Op]
         public string Render(MemInfo src)        
         {
             var builder = text.build();
@@ -139,7 +182,7 @@ namespace Z0.Asm
             return builder.ToString();
         }
 
-
+        [MethodImpl(Inline), Op]
         public string Render(MemScale src)
         {
             if(src.IsNonEmpty)

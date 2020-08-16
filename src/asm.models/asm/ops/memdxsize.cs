@@ -11,11 +11,11 @@ namespace Z0
     
     using static Konst;
     using static Asm.OpKind;
-    
+        
     partial struct asm
     {        
         [MethodImpl(Inline), Op]
-        public static int memdxsize(Instruction src, int index)
+        public static int memDxSize(in Instruction src, int index)
             => kind(src,index) == Memory ? src.MemoryDisplSize : 0;
     }
 }

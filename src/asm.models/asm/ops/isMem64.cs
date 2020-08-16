@@ -10,16 +10,17 @@ namespace Z0
     using Z0.Asm;
     
     using static Konst;
-    using static Asm.OpKind;
         
     partial struct asm
     {        
+        /// <summary>
+        /// Determines whether the classified operand is a 64-bit memory offset. 
+        /// Relevant instruction attributes include:
+        /// MemoryAddress64, MemorySegment, SegmentPrefix, MemorySize
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static MemDx memDx(ulong value, int size)
-            => new MemDx(value, Enums.undefined((DataSize)size, DataSize.None));
-
-        [MethodImpl(Inline), Op]
-        public static uint memDx(Instruction src, int index)
-            => kind(src,index) == Memory ? src.MemoryDisplacement : 0;
+        public static bool isMem64(OpKind src)
+            => src == OpKind.Memory64;
     }
 }

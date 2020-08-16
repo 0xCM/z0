@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {        
         [MethodImpl(Inline), Op]
-        public static MemScale memscale(Instruction src, int index)
+        public static MemScale memScale(Instruction src, int index)
             => kind(src,index) == Memory ? src.MemoryIndexScale : MemScale.Empty;
     }
 }

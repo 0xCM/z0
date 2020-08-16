@@ -11,7 +11,7 @@ namespace Z0
 
     using Z0.Asm.Dsl;
 
-    partial struct asm
+    partial struct AsmFx
     {
         [MethodImpl(Inline), Op]
         public static rax set(ulong src,  rax dst)

@@ -20,7 +20,7 @@ namespace Z0
             => new ImmInfo(W.W8, value, direct, null);
 
         [MethodImpl(Inline), Op]
-        public static ImmInfo imm(short value, bool direct, SignExensionKind sek)
+        public static ImmInfo imm(short value, bool direct, SignExtensionKind sek)
             => new ImmInfo(W.W16, value, direct, sek);
 
         [MethodImpl(Inline), Op]
@@ -28,7 +28,7 @@ namespace Z0
             => new ImmInfo(W.W16, value, direct, null);
 
         [MethodImpl(Inline), Op]
-        public static ImmInfo imm(int value, bool direct, SignExensionKind sek)
+        public static ImmInfo imm(int value, bool direct, SignExtensionKind sek)
             => new ImmInfo(W.W32, value, direct, sek);
 
         [MethodImpl(Inline), Op]
@@ -36,7 +36,7 @@ namespace Z0
             => new ImmInfo(W.W32, value, direct);
 
         [MethodImpl(Inline), Op]
-        public static ImmInfo imm(long value, bool direct, SignExensionKind sek)
+        public static ImmInfo imm(long value, bool direct, SignExtensionKind sek)
             => new ImmInfo(W.W64, value, direct, sek);
 
         [MethodImpl(Inline), Op]

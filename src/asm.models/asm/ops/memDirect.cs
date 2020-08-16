@@ -8,18 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+
     using static Konst;
-    using static Asm.OpKind;
-        
+            
     partial struct asm
     {        
         [MethodImpl(Inline), Op]
-        public static MemDx memDx(ulong value, int size)
-            => new MemDx(value, Enums.undefined((DataSize)size, DataSize.None));
-
-        [MethodImpl(Inline), Op]
-        public static uint memDx(Instruction src, int index)
-            => kind(src,index) == Memory ? src.MemoryDisplacement : 0;
+        public static MemDirect memDirect(in Instruction src)
+            => new MemDirect(src.MemoryBase, src.MemoryIndexScale, asm.memDx(src.MemoryDisplacement, src.MemoryDisplSize));
     }
 }

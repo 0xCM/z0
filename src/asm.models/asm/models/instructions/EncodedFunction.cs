@@ -25,7 +25,7 @@ namespace Z0
         public static EncodedFunction operator +(in EncodedFunction dst, in EncodedCommand src)
             => Add(dst, src);
 
-        public static implicit operator AsmFx(EncodedFunction src)
+        public static implicit operator EncodedAsmFunction(EncodedFunction src)
             => src.Emit();
 
         [MethodImpl(Inline)]
@@ -58,16 +58,16 @@ namespace Z0
             return this;
         }
 
-        static AsmFx Emit(in EncodedFunction builder)
+        static EncodedAsmFunction Emit(in EncodedFunction builder)
         {
-            var f = new AsmFx(first(builder.name), builder.buffer.ToArray());
+            var f = new EncodedAsmFunction(first(builder.name), builder.buffer.ToArray());
             builder.Index = 0;
             builder.Name = asci32.Null;
             builder.buffer.Clear();
             return f;
         }
 
-        public AsmFx Emit()
+        public EncodedAsmFunction Emit()
             => Emit(this);
         
         ref uint Index

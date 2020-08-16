@@ -13,14 +13,15 @@ namespace Z0
    
     partial struct asm
     {
-    	/// <summary>
-		/// Gets the operand's register value. Use this property if the operand has kind <see cref="OpKind.Register"/>
-		/// </summary>
-		/// <param name="operand">Operand number, 0-4</param>
+        /// <summary>
+        /// Extracts register information, should it exist, from an index-identified register operand
+        /// </summary>
+        /// <param name="src">The source instruction</param>
+        /// <param name="index">The operand index</param>
         [MethodImpl(Inline), Op]
-		public static Register register(in Instruction src, byte operand) 
+		public static Register register(in Instruction src, byte index) 
         {
-			switch (operand) 
+			switch (index) 
             {
                 case 0: return src.Op0Register;
                 case 1: return src.Op1Register;

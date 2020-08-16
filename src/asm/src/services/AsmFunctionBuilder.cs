@@ -34,7 +34,7 @@ namespace Z0.Asm
                 if(RunChecks)
                     CheckInstructionSize(instruction, offset, src);
 
-                info[i] = AsmSemantic.Service.Summarize(@base, instruction,src.Encoded.Encoded, instruction.FormattedInstruction, offset);
+                info[i] = asm.summarize(@base, instruction,src.Encoded.Encoded, instruction.FormattedInstruction, offset);
                 offset += (ushort)instruction.ByteLength;
             }
 

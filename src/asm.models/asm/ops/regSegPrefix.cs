@@ -11,23 +11,23 @@ namespace Z0
     
     using static Konst;
     using static Asm.OpKind;
-      
+   
     partial struct asm
     {
-        [Op]
-        public static SegmentPrefix segPrefix(Instruction fx, int index) 
+        [MethodImpl(Inline), Op]
+        public static Register regSegPrefix(Instruction src, int index)
         {
-            var k = kind(fx, index);
-            switch(k)
+            switch(kind(src,index))
             {
                 case Memory:
                 case Memory64:
                 case MemorySegSI:
                 case MemorySegESI:
                 case MemorySegRSI:
-                    return new SegmentPrefix(fx.MemorySegment);
+                    return src.MemorySegment;
+                default:
+                    return 0;
             }
-            return default;
-        } 
-   }
+        }        
+    }
 }

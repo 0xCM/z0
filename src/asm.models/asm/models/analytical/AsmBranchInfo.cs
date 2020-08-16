@@ -14,15 +14,15 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmBranchInfo
     {        
-        public Instruction Instruction {get;}
+        public readonly Instruction Instruction {get;}
         
-        public MemoryAddress Base {get;}
+        public readonly MemoryAddress Base;
 
-        public MemoryAddress Source {get;}
+        public readonly MemoryAddress Source;
 
-        public AsmBranchTarget Target {get;}
+        public readonly AsmBranchTarget Target;
 
-        public MemoryAddress TargetOffset {get;}
+        public readonly MemoryAddress TargetOffset;
         
         public bool IsEmpty 
         { 
@@ -39,28 +39,18 @@ namespace Z0.Asm
         public bool IsNear 
             => Target.IsNear;
         
-        public AsmBranchInfo Zero 
-            => Empty;
 
         [MethodImpl(Inline)]
-        static uint Offset(MemoryAddress src, int inxsSize, MemoryAddress dst)
-            => (uint)(dst - (src + inxsSize));
-
-
-        [MethodImpl(Inline)]
-        public AsmBranchInfo(in Instruction inxs, MemoryAddress @base, MemoryAddress src, in AsmBranchTarget target, uint offset)
+        public AsmBranchInfo(in Instruction fx, MemoryAddress @base, MemoryAddress src, in AsmBranchTarget target, uint offset)
         {            
-            Instruction = inxs;
+            Instruction = fx;
             Base = @base;
             Source = src;
             Target = target;
             TargetOffset = offset;
         }
 
-        public string Render()
-            => text.concat(Source.Format(), " + ",  TargetOffset.FormatMinimal(), " -> ",  (Source + TargetOffset).Format());
-
         public static AsmBranchInfo Empty 
-            => new AsmBranchInfo(new Instruction(),MemoryAddress.Empty, 0, AsmBranchTarget.Empty, 0);
+            => new AsmBranchInfo(new Instruction(), 0, 0, AsmBranchTarget.Empty, 0);
     }
 }

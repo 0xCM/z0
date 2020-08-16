@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+        
     using static Konst;
     using static Asm.OpKind;
     
     partial struct asm
     {        
         [Op]
-        public static MemorySize memsize(Instruction src, int index)
+        public static MemorySize memSize(Instruction src, int index)
         {
             switch(asm.kind(src,index))
             {

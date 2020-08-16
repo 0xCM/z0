@@ -13,11 +13,11 @@ namespace Z0
     using static Asm.OpKind;
 
     using W = NumericWidth;
-   
+      
     partial struct asm
     {
         [Op]
-        public static ImmInfo imminfo(Instruction src, int index) 
+        public static ImmInfo immInfo(Instruction src, int index) 
         {                        
 			switch (kind(src,index)) 
             {

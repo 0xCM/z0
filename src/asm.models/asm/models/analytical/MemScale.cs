@@ -8,14 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    public readonly struct MemScale : INullary<MemScale>, INullity
+    
+    [LiteralCover]
+    public readonly struct MemScale : ILiteralCover<MemScale>
     {   
         public MemScaleKind Kind {get;}
 
         public static MemScale Empty 
             => new MemScale(MemScaleKind.None);
-        
+                
         public bool IsEmpty 
         { 
             [MethodImpl(Inline)] 

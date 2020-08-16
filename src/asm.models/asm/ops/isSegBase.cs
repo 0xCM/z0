@@ -14,8 +14,14 @@ namespace Z0
 
     partial struct asm
     {
+        /// <summary>
+        /// Determines whether the classified operand is a segment of the form 
+        /// seg:[di], seg:[edi], seg:[esi], seg:[rdi], seg:[rsi], seg:[si]
+        /// Relevant instruction attributes include: MemorySize, MemorySegment, SegmentPrefix 
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool testsegbase(OpKind src)
+        public static bool isSegBase(OpKind src)
             => src == MemorySegDI
             || src == MemorySegEDI
             || src == MemorySegESI

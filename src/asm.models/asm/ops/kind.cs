@@ -13,6 +13,10 @@ namespace Z0
 
     partial struct asm
     {        
+ 		/// <summary>
+		/// Gets an operand's kind if it exists
+		/// </summary>
+		/// <param name="operand">Operand number, 0-4</param>
         [Op]
 		public static OpKind kind(Instruction src, int operand) 
         {

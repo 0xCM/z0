@@ -9,14 +9,14 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmFx
+    public readonly struct EncodedAsmFunction
     {        
         public readonly asci32 Name;
 
         public readonly EncodedCommand[] Commands;
 
         [MethodImpl(Inline)]
-        public AsmFx(asci32 name, EncodedCommand[] commands)
+        public EncodedAsmFunction(asci32 name, EncodedCommand[] commands)
         {
             Name = name;
             Commands = commands;
@@ -29,7 +29,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmFx(asci32 name)
+        public EncodedAsmFunction(asci32 name)
         {
             Name = name;
             Commands = new EncodedCommand[]{};
@@ -41,10 +41,10 @@ namespace Z0.Asm
             get => Commands.Length == 0;
         }
         
-        public static AsmFx Empty 
+        public static EncodedAsmFunction Empty 
         {
             [MethodImpl(Inline)]
-            get => new AsmFx(asci.Null);
+            get => new EncodedAsmFunction(asci.Null);
         }
     }
 }

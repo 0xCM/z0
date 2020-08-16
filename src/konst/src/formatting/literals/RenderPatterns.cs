@@ -45,10 +45,31 @@ namespace Z0
         /// <param name="n">The slot selector</param>
         public static string slot(N4 n)
             => Slot4;        
+
         /// <summary>
         /// Defines the default extension for structured data
         /// </summary>
         public const string DataFileExt = "csv";
+
+        /// <summary>
+        /// Defines the default extension for structured data
+        /// </summary>
+        public const string Dash40 = "----------------------------------------";
+
+        /// <summary>
+        /// Defines the default extension for structured data
+        /// </summary>
+        public const string Dash80 = Dash40 + Dash40;
+
+        /// <summary>
+        /// Defines the default extension for structured data
+        /// </summary>
+        public const string Dash120 = Dash80 + Dash40;
+
+        /// <summary>
+        /// Defines the default extension for structured data
+        /// </summary>
+        public const string Dash160 = Dash80 + Dash80;
 
         /// <summary>
         /// Pluralizes something

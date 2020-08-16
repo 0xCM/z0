@@ -58,7 +58,7 @@ namespace Z0.Asm
         /// <param name="config">An optional format configuration</param>
         public static ReadOnlySpan<string> lines(in AsmFunction src, in AsmFormatSpec? cfg = null)
         {
-            var descriptions = AsmSemantic.Service.Summarize(src);
+            var descriptions = asm.summarize(src);
             var count = descriptions.Length;
             var lines = Spans.alloc<string>(count);
             var config = cfg ?? AsmFormatSpec.Default;
@@ -78,7 +78,7 @@ namespace Z0.Asm
                 return default;
 
             var config = cfg ?? AsmFormatSpec.Default;
-            var descriptions =  AsmSemantic.Service.Summarize(src);
+            var descriptions =  asm.summarize(src);
             var lines = Spans.alloc<string>(src.Length);
             var @base = src[0].IP;
             for(var i=0; i< src.Length; i++)

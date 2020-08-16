@@ -11,11 +11,16 @@ namespace Z0
     
     using static Konst;
     using static Asm.OpKind;
-   
+      
     partial struct asm
     {
+		/// <summary>
+		/// Extracts an immediate operand from an instruction
+		/// </summary>
+		/// <param name="src">The source instruction</param>
+		/// <param name="index">The operand index</param>
         [Op]
-        public static ulong? immval(Instruction src, int index) 
+        public static ulong? immVal(Instruction src, int index) 
         {
 			return kind(src, index) switch
             {
