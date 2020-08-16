@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
 
@@ -17,7 +16,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public InstructionCodeData(string src)
         {
-            this.Data = src;
+            Data = src;
         }
         
         public string Format()

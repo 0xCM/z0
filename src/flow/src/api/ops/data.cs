@@ -19,10 +19,10 @@ namespace Z0
             dst.SourceArchive = src.Source.ArchiveRoot;
             dst.TargetArchive = src.Target.ArchiveRoot;
             dst.Settings = src.Settings;
-            dst.ResourceStage = src.ResourceStage;
-            dst.AppDataRoot = src.AppData;
-            dst.LogPath = src.LogPath;
-            dst.IndexRoot = src.IndexRoot;
+            dst.ResourceStage = FolderPath.Define(src.ResStage.Name);
+            dst.AppDataRoot = FolderPath.Define(src.AppData.Name);
+            dst.LogPath = FilePath.Define(src.StatusPath.Name);
+            dst.IndexRoot = FolderPath.Define(src.IndexRoot.Name);
             return dst;
         }
     }

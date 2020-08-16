@@ -15,7 +15,6 @@
 
     <AsmModels>$(Src)asm.models/z0.asm.models.csproj</AsmModels>
 
-    <WfActors>$(Src)flow.actors/z0.flow.actors.csproj</WfActors>
     <WfCore>$(Src)flow.core/z0.flow.core.csproj</WfCore>
 
     <Flow>$(Src)flow/z0.flow.csproj</Flow>

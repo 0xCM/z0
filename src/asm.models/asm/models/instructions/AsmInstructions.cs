@@ -21,7 +21,7 @@ namespace Z0.Asm
         IEncoded<AsmInstructions,BinaryCode>, 
         IEquatable<AsmInstructions>
     {
-        readonly Instruction[] Inxs;
+        readonly Instruction[] Fx;
         
         public BinaryCode Encoded {get;}
 
@@ -35,19 +35,19 @@ namespace Z0.Asm
         public ref readonly Instruction this[int index]  
         { 
             [MethodImpl(Inline)] 
-            get => ref Inxs[index]; 
+            get => ref Fx[index]; 
         }
         
         public int Length 
         { 
             [MethodImpl(Inline)] 
-            get => Inxs.Length; 
+            get => Fx.Length; 
         }
 
         public int Count
         {
             [MethodImpl(Inline)] 
-            get => Inxs.Length;
+            get => Fx.Length;
         }
 
         public bool IsEmpty 
@@ -63,12 +63,12 @@ namespace Z0.Asm
         }
 
         public static implicit operator Instruction[](AsmInstructions src)
-            => src.Inxs;
+            => src.Fx;
 
         [MethodImpl(Inline)]        
         internal AsmInstructions(Instruction[] src, BinaryCode data)
         {
-            Inxs = src;
+            Fx = src;
             Encoded = data;
         }
 
@@ -81,8 +81,8 @@ namespace Z0.Asm
         public override string ToString()
             => Format();       
         IEnumerator<Instruction> IEnumerable<Instruction>.GetEnumerator()
-            => Inxs.AsEnumerable().GetEnumerator();        
+            => Fx.AsEnumerable().GetEnumerator();        
         IEnumerator IEnumerable.GetEnumerator()
-            => Inxs.AsEnumerable().GetEnumerator();        
+            => Fx.AsEnumerable().GetEnumerator();        
     }
 }

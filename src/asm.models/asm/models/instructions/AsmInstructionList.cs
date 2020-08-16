@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Collections;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
     
     using static Konst;
 
@@ -30,7 +29,7 @@ namespace Z0.Asm
             => new AsmInstructionList(src, data);
 
         [MethodImpl(Inline)]
-        AsmInstructionList(Instruction[] instructions, LocatedCode data)
+        public AsmInstructionList(Instruction[] instructions, LocatedCode data)
         {
             Source = instructions;
             Encoded = data;

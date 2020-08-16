@@ -5,15 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics;
-    using System.Security;
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate void InstructionHandler(in Instruction src);    
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate bool InstructionTest(in Instruction src);
 
     public struct Instruction : IInstructionInfo
     {

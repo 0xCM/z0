@@ -6,8 +6,6 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
     
     using static Konst;
 
@@ -20,10 +18,9 @@ namespace Z0.Asm
         
         readonly KVP Data;
 
-        HostInstructionIndex(KVP src)
-        {
-            Data = src;
-        }
+        [MethodImpl(Inline)]
+        public HostInstructionIndex(KVP src)
+            => Data = src;
 
         public HostInstructions this[ApiHostUri host]
         {

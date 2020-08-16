@@ -9258,3 +9258,49 @@
  create mode 100644 src/asm.models/asm/ops/identify.cs
  create mode 100644 src/asm.models/asm/ops/summarize.cs
  rename src/asm.models/asm/tables/{ops => }/opcodes.cs (100%)
+[master 9848c51ad] .
+ 81 files changed, 1206 insertions(+), 991 deletions(-)
+ create mode 100644 src/asm.models/XTend.cs
+ create mode 100644 src/asm.models/asm/AsmFx.cs
+ delete mode 100644 src/asm.models/asm/AsmOperandTest.cs
+ delete mode 100644 src/asm.models/asm/AsmQuery.cs
+ rename src/asm.models/asm/{tables/opcodes.cs => AsmTables.OpCodes.cs} (100%)
+ delete mode 100644 src/asm.models/asm/BranchQuery.cs
+ delete mode 100644 src/asm.models/asm/Format.cs
+ rename src/asm.models/asm/{AsmSemantic.cs => ImmQuery.cs} (60%)
+ delete mode 100644 src/asm.models/asm/InstructionQuery.cs
+ delete mode 100644 src/asm.models/asm/TSemanticQuery.cs
+ rename src/asm.models/asm/{ops => fx}/cmp.cs (86%)
+ rename src/asm.models/asm/{ops => fx}/movzx.cs (97%)
+ rename src/asm.models/asm/{ops => fx}/set.r16.cs (98%)
+ rename src/asm.models/asm/{ops => fx}/set.r32.cs (98%)
+ rename src/asm.models/asm/{ops => fx}/set.r64.cs (97%)
+ rename src/asm.models/asm/{ops => fx}/set.r8.cs (98%)
+ rename src/asm.models/asm/models/instructions/{AsmFx.cs => EncodedAsmFunction.cs} (78%)
+ rewrite src/asm.models/asm/models/instructions/InstructionMemory.cs (74%)
+ rename src/asm.models/asm/ops/{meminfo.cs => _operand.cs} (66%)
+ create mode 100644 src/asm.models/asm/ops/empty.cs
+ rename src/asm.models/asm/ops/{offset.cs => fxOffset.cs} (80%)
+ rename src/asm.models/asm/{AsmMemory.cs => ops/identify.cs} (56%)
+ create mode 100644 src/asm.models/asm/ops/isBranch.cs
+ create mode 100644 src/asm.models/asm/ops/isCall.cs
+ create mode 100644 src/asm.models/asm/ops/isFarBranch.cs
+ create mode 100644 src/asm.models/asm/ops/isImm.cs
+ create mode 100644 src/asm.models/asm/ops/isMem.cs
+ create mode 100644 src/asm.models/asm/ops/isMem64.cs
+ create mode 100644 src/asm.models/asm/ops/isMemDirect.cs
+ create mode 100644 src/asm.models/asm/ops/isNearBranch.cs
+ rename src/asm.models/asm/{RegisterQuery.cs => ops/isRegister.cs} (54%)
+ create mode 100644 src/asm.models/asm/ops/isSegBase.cs
+ create mode 100644 src/asm.models/asm/ops/isSegEs.cs
+ create mode 100644 src/asm.models/asm/ops/memDirect.cs
+ rename src/asm.models/asm/ops/{testsegbase.cs => membase.cs} (62%)
+ rename src/asm.models/asm/ops/{membase.cs => memory.cs} (57%)
+ create mode 100644 src/asm.models/asm/ops/operands.cs
+ create mode 100644 src/asm.models/asm/ops/regSegPrefix.cs
+ delete mode 100644 src/asm.models/asm/ops/render.cs
+ create mode 100644 src/asm.models/base/ILiteralCover.cs
+ create mode 100644 src/asm.models/base/LiteralCover.cs
+ create mode 100644 src/asm.models/base/LiteralCoverC.cs
+ create mode 100644 src/asm.models/base/LiteralCovers.cs
+ create mode 100644 src/machine/src/workflows/steps/AsmRenderPatterns.cs

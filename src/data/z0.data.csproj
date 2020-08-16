@@ -11,10 +11,18 @@
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Tables)" />
     <ProjectReference Include="$(Fixed)" />
-    <ProjectReference Include="$(AsmModels)" />
-
   </ItemGroup>  
+
+   <ItemGroup>
+    <EmbeddedResource Include="tables/**/*.*" /> 
+   </ItemGroup>
+
+
+  <ItemGroup>
+    <EmbeddedResource Include="index/TableIndex.resources">
+      <LogicalName>TableIndex.resources</LogicalName>
+    </EmbeddedResource> 
+  </ItemGroup>
 
 </Project>

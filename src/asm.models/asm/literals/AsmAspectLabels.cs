@@ -4,15 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    public class AsmTypeLabels
-    {
-        public const string Size = nameof(Size);
 
-        public const string Mem = nameof(Mem);
-
-        public const string Dx = nameof(Dx);
-    }
-
+    [LiteralProvider]
     public class AsmAspectLabels
     {
         public const string mem = nameof(mem);

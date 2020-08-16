@@ -39,7 +39,7 @@ namespace Z0.Asm
             => new AsmInstructionBlock(encoded, decoded, term);
 
         [MethodImpl(Inline)]
-        AsmInstructionBlock(MemberCode encoded, Instruction[] decoded, ExtractTermCode term)
+        public AsmInstructionBlock(MemberCode encoded, Instruction[] decoded, ExtractTermCode term)
         {
             Encoded = encoded;
             Decoded = decoded;

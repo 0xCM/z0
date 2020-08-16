@@ -6,61 +6,55 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Runtime.CompilerServices;
+    
+    using static Part;
 
-    public readonly struct AppArg
-    {        
-        public static AppArg parse(string src)
+    public readonly struct AppArgs
+    {
+        public readonly AppArg[] Parsed;
+
+        [MethodImpl(Inline)]
+        public AppArgs(AppArg[] src)
+            => Parsed = src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator AppArgs(AppArg[] src)
+            => new AppArgs(src);
+        
+        const string Missing = "";
+
+        const StringSplitOptions RemoveEmpties = StringSplitOptions.RemoveEmptyEntries;
+
+        const StringComparison Compare = StringComparison.InvariantCultureIgnoreCase;
+
+        public static AppArg parse(string src, char flag = '/', char argspec = '?')
         {
             var content = src.Trim();
             if(!String.IsNullOrWhiteSpace(content))
             {
-                if(src[0] == '/')
+                if(src[0] == flag)
                 {
-                    var parts = src.Substring(1).Split(':', StringSplitOptions.RemoveEmptyEntries);
+                    var parts = src.Substring(1).Split(argspec, RemoveEmpties);
 
                     if(parts.Length == 2)
                         return new AppArg(parts[0], parts[1]);
                     else if(parts.Length == 0)
-                        return Empty;
+                        return EmptyArg;
                     else
                     {
                         var dst = parts[0];
                         for(var i=1; i<parts.Length; i++)
-                            dst += $" {parts[i]}";
-                        return new AppArg(string.Empty, dst);
+                            dst += string.Format(" {0}", parts[i]);
+                        return (Missing, dst);
                     }
                 }
                 else
-                    return new AppArg(string.Empty, src);
+                    return (Missing, src);
             }
 
-            return Empty;
+            return EmptyArg;
         }
-        
-        public AppArg(string name, string value)
-        {
-            Name = name;
-            Value = value;
-        }
-
-        public readonly string Name;
-
-        public readonly string Value;
-
-        public bool IsEmpty 
-            => string.IsNullOrWhiteSpace(Value);
-
-        public bool IsNonEmpty 
-            => !IsEmpty;
-        
-        public static AppArg Empty 
-            => new AppArg(string.Empty, string.Empty);
-    }
-    
-    public readonly struct AppArgs
-    {
-        public static AppArgs Empty => new AppArgs(new AppArg[0]{});
         
         public static AppArgs parse(string[] src)
         {
@@ -69,47 +63,35 @@ namespace Z0
                 var dst = new List<AppArg>();
                 foreach(var item in src)
                 {
-                    var parsed= AppArg.parse(item);
+                    var parsed= parse(item);
                     if(parsed.IsNonEmpty)
                         dst.Add(parsed);
                 }
                 
                 if(dst.Count != 0)
-                    return new AppArgs(dst.ToArray());
+                    return dst.ToArray();
             }
             return Empty;
         }
-        
-        public readonly AppArg[] Data;
-
-        public AppArgs(AppArg[] src)
-            => Data = src;
-
+                
         public AppArg this[string name]
         {
             get
             {
-                for(var i=0; i<Data.Length; i++)
+                for(var i=0; i<Parsed.Length; i++)
                 {
-                    ref readonly var arg = ref Data[i];
-                    if(string.Equals(arg.Name, name, StringComparison.InvariantCultureIgnoreCase))
+                    ref readonly var arg = ref Parsed[i];
+                    if(string.Equals(arg.Name, name, Compare))
                         return arg;
                 }
                 return AppArg.Empty;
             }
         }
-    }
-    
-    public readonly struct AppArg<T>
-    {
-        public AppArg(string name, T value)
-        {
-            Name = name;
-            Value = value;
-        }
 
-        public readonly string Name;
-
-        public readonly T Value;
+        public static AppArgs Empty 
+            => new AppArgs(new AppArg[0]{});
+        
+        public static AppArg EmptyArg 
+            => AppArg.Empty;        
     }
 }

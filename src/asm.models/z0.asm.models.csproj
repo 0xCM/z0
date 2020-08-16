@@ -11,7 +11,11 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(math)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(Tables)" />
+    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(WfCore)" />
+    <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(Identity)" />
+    <ProjectReference Include="$(Data)" />
   
   </ItemGroup>  
 

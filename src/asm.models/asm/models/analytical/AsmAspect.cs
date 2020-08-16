@@ -14,22 +14,22 @@ namespace Z0.Asm
         /// <summary>
         /// The aspect name
         /// </summary>
-        public string Name {get;}
+        public readonly string Name;
 
         /// <summary>
-        /// The defining oject
+        /// The defining source
         /// </summary>
-        public object Source {get;}
+        public readonly object Source;
 
         /// <summary>
         /// The aspect value
         /// </summary>
-        public object Value {get;}
+        public readonly object Value;
 
         /// <summary>
         /// An informative description
         /// </summary>
-        public string Description {get;}
+        public readonly string Description;
 
         [MethodImpl(Inline)]
         public static AsmAspect Create(string name, object src, object value, string description)

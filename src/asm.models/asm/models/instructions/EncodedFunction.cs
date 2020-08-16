@@ -11,7 +11,6 @@ namespace Z0
     using static z;
 
     using Z0.Asm;
-    using Z0.Asm.Dsl;
 
     public readonly ref struct EncodedFunction
     {

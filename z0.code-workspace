@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\z0-logs\\apps\\control\\capture",
+			"name": "capture"
+		},
+		{
+			"path": "..\\z0-logs",
+			"name": "logs"
+		},
+		{
+			"path": "K:\\z0\\archives"
+		}
+	],
+	"settings": {}
+}

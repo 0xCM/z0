@@ -2,13 +2,7 @@ call wf\wf-vars.cmd
 
 echo off
 
-set Cmd="%Wf%/needs.bat"
-call %Cmd%
-
 set Cmd="%Wf%/build.bat"
-call %Cmd%
-
-set Cmd="%Wf%/stage.bat"
 call %Cmd%
 
 set Cmd="%Wf%/emit.bat"

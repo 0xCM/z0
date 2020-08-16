@@ -5,35 +5,34 @@
 namespace Z0.Asm
 {        
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct AsmFunctionData
+    public struct AsmFunctionData
     {
         /// <summary>
         /// The defining operation uri
         /// </summary>
-        public readonly OpUri Uri;
+        public OpUri Uri;
 
         /// <summary>
         /// The source member signature
         /// </summary>
-        public readonly string Sig;
+        public string Sig;
         
         /// <summary>
         /// The defining instructions
         /// </summary>
-        public readonly Instruction[] Instructions;
+        public Instruction[] Instructions;
 
         /// <summary>
         /// The encoded instructions
         /// </summary>
-        public readonly MemberCode Encoded;
+        public MemberCode Encoded;
 
         /// <summary>
         /// Specifies the reason for capture termination
         /// </summary>
-        public readonly ExtractTermCode TermCode;
+        public ExtractTermCode TermCode;
     }
 }

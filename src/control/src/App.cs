@@ -11,6 +11,23 @@ namespace Z0
 
     class App : AppShell<App,IAppContext>
     {               
+        [Op]
+        public static WfConfig configure(IAppContext context, string[] args, CorrelationToken ct)
+        {            
+            var parts = PartIdParser.parse(args, context.PartIdentities);
+            var settings = Flow.settings(context, ct);
+            var paths = context.AppPaths;
+            var captureOut = FS.dir(paths.LogRoot.Name) + FS.folder("capture/artifacts");
+            var captureLog = FS.dir(paths.LogRoot.Name) + FS.folder("capture/logs");
+            var srcArchive = new ArchiveConfig(FilePath.Define(context.GetType().Assembly.Location).FolderPath);            
+            var dstArchive = new ArchiveConfig(FolderPath.Define(captureOut.Name));
+            var config  = new WfConfig(args, srcArchive, dstArchive, parts, context.AppPaths.ResourceRoot, context.AppPaths.AppDataRoot, settings);
+            config.LogRoot = captureLog;
+            config.StatusPath = captureLog + FS.file("status", FileExtNames.csv);
+            config.ErrorPath = captureLog + FS.file("errors", FileExtNames.csv);
+            return config;
+        }
+
         public const PartId Part = PartId.Control;
         
         public const string PartName = nameof(PartId.Control);
@@ -30,7 +47,7 @@ namespace Z0
         {         
             try
             {
-                using var control = CaptureController.create(Context, Flow.configure(Context, args, Ct), Ct);
+                using var control = CaptureController.create(Context, configure(Context, args, Ct), Ct);
                 control.Run();
             }
             catch(Exception e)

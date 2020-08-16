@@ -33,7 +33,7 @@ namespace Z0
         [Op]
         public static OpCodeDataset dataset()
         {
-            var resource = ResExtractor.Service(typeof(TableProvider).Assembly).MatcDocument("OpCodeSpecs");
+            var resource = ResExtractor.Service(typeof(Parts.Data).Assembly).MatcDocument("OpCodeSpecs");
             var count = resource.RowCount;
             var records = sys.alloc<OpCodeRecord>(count);
             AsmTables.parse(resource, records);

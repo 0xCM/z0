@@ -14,7 +14,7 @@ namespace Z0.Asm
     
     public unsafe readonly struct CaptureCore : ICaptureCore
     {      
-        public static CaptureCore Service => default;
+        public static CaptureCore Service => default;                
         
         [MethodImpl(Inline)]
         static IntPtr jit(MethodInfo src)
@@ -314,5 +314,7 @@ namespace Z0.Asm
             && c.x == c.y 
             && d.x == d.y
             && e.x == e.y;
+
+
     }
 }

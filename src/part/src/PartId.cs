@@ -94,18 +94,11 @@ public enum PartId : ulong
     Identity = 120, 
     
     LSquare = 121,
-
-    Datasets = 122,
-
-    Gen = 123,
     
     Blocked = 125,
 
     MetaReader = 126,
 
-    Artistry = 129,
-
-    Spans = 131,
     
     Nats = 133, 
 
@@ -123,10 +116,6 @@ public enum PartId : ulong
 
     Asm = 140,  
     
-    AsmD = 141,
-
-    Codes = 142,
-
     Machine = 143,
 
     Capture = 144,
@@ -134,8 +123,6 @@ public enum PartId : ulong
     Cil = 145, 
 
     Evaluate = 146,
-
-    Archives = 147,
 
     Extract = 148,
 
@@ -171,26 +158,22 @@ public enum PartId : ulong
 
     ZXed = 165,
     
-    Tokens = 168,
-
     V0 = 170,
 
     Control = 180,
     
     AsmModels = 181,
 
-    AsmRunner = 182,
+    AsmRun = 182,
 
     // ~ 200
     // ~ -------------------------------------------------------------------------------
 
     ResPack = 200,
 
-
     WfActors = 201,
 
     WfCore = 202,
-
 
     // ~ 300
     // ~ -------------------------------------------------------------------------------
