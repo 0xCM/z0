@@ -28,7 +28,7 @@ namespace Z0
 
         readonly IAsmFormatter Formatter;
 
-        readonly IAsmRoutineDecoder Decoder;
+        readonly IAsmDecoder Decoder;
 
         readonly IApiCollector ApiCollector;
 
@@ -38,7 +38,7 @@ namespace Z0
 
         readonly IWfEventLog Log;
         
-        internal EmitImmSpecials(IAsmContext context, WfConfig config, IMultiSink sink, IAsmFormatter formatter, IAsmRoutineDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
+        internal EmitImmSpecials(IAsmContext context, WfConfig config, IMultiSink sink, IAsmFormatter formatter, IAsmDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
         {
             Ct = ct ?? CorrelationToken.create();
             Log = Flow.log(config);

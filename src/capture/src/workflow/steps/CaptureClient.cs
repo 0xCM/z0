@@ -21,7 +21,7 @@ namespace Z0
         
         public IMultiSink Sink {get;}
         
-        readonly IImmEmitter ImmWorkflow;
+        readonly IImmEmitter ImmEmitter;
         
         public CaptureClient(WfCaptureState wf, CorrelationToken ct)
         {                            
@@ -29,7 +29,7 @@ namespace Z0
             Ct = ct;
             Sink = Wf.Wf.WfSink;
             Broker = wf.CaptureBroker;
-            ImmWorkflow = Wf.Services.ImmEmissionWorkflow(Sink, Wf.Asm.Api, Wf.Formatter, Wf.FunctionDecoder, Wf.Config, Ct);     
+            ImmEmitter = Wf.Services.ImmEmitter(Sink, Wf.Asm.Api, Wf.Formatter, Wf.RoutineDecoder, Wf.Config, Ct);     
             Wf.Created(StepName, Ct);       
         }
 
@@ -42,16 +42,16 @@ namespace Z0
         {
             (this as IWfCaptureClient).Connect();             
 
-            var parts = Wf.Config.Parts.Length == 0 ? Wf.ContextRoot.PartIdentities : Wf.Config.Parts;
+            var parts = Wf.Config.Parts.Length == 0 ? Wf.Root.PartIdentities : Wf.Config.Parts;
             Wf.Raise(new CapturingParts(StepName, parts, Ct));
 
             using var manage = ManagePartCapture.create(Wf, Ct);
             manage.Consolidate();                
 
-            ImmWorkflow.ClearArchive(parts);
-            ImmWorkflow.EmitRefined(parts);
+            ImmEmitter.ClearArchive(parts);
+            ImmEmitter.EmitRefined(parts);
 
-            var eval = Evaluate.workflow(Wf.ContextRoot, Wf.ContextRoot.Random, Wf.ContextRoot.AppPaths.AppCaptureRoot, Pow2.T14); 
+            var eval = Evaluate.workflow(Wf.Root, Wf.Root.Random, Wf.Root.AppPaths.AppCaptureRoot, Pow2.T14); 
             eval.Execute();            
 
             Wf.Ran(StepName, Ct);

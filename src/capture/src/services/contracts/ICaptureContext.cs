@@ -4,27 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     public interface ICaptureContext : IAppBase
-    {
-        IAsmContext Asm{get;}
+    {        
+        IAppContext Root {get;}
         
-        IApiSet ApiSet {get;}
+        IApiSet ApiSet
+             => Root;
 
-        IExtractionParser Parser {get;}
-
-        IAsmRoutineDecoder Decoder {get;}
+        IAsmDecoder Decoder {get;}
 
         IAsmFormatter Formatter {get;}
 
-        AsmWriterFactory WriterFactory {get;}
+        AsmTextWriterFactory WriterFactory {get;}
 
         IWfCaptureBroker CaptureBroker {get;}
-
-        IPartCaptureArchive Archive {get;}
-
-        IAppMsgSink MsgSink {get;}
 
         void Raise<E>(E e)
             where E : IAppEvent; 

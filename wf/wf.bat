@@ -5,8 +5,7 @@ echo off
 set Cmd="%Wf%/build.bat"
 call %Cmd%
 
-set Cmd="%Wf%/emit.bat"
-call %Cmd%
+machine
 
 set Cmd="%Wf%/archive.bat"
 call %Cmd%

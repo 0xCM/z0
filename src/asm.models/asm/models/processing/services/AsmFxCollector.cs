@@ -15,10 +15,6 @@ namespace Z0.Asm
         readonly List<Instruction> items;
 
         [MethodImpl(Inline)]
-        public static AsmFxCollector Create(params Instruction[] seed)
-            => new AsmFxCollector(seed);
-        
-        [MethodImpl(Inline)]
         public AsmFxCollector(params Instruction[] fx)
         {
             items = new List<Instruction>();

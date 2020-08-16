@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Characterizes function-centric asm decoding operations
     /// </summary>
-    public interface IAsmRoutineDecoder
+    public interface IAsmDecoder
     {        
         /// <summary>
         /// Decodes a function from member capture data

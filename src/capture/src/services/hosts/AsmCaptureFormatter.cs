@@ -90,7 +90,7 @@ namespace Z0.Asm
                 switch(kind)
                 {
                     case Iced.FormatterOutputTextKind.LabelAddress:
-                        Writer.Write(AsmFormat.label(text, BaseAddress));
+                        Writer.Write(AsmRender.label(text, BaseAddress));
                     break;
                     default:
                         Writer.Write(text);    

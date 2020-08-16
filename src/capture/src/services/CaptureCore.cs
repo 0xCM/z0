@@ -134,11 +134,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedOperation bits, ExtractTermCode term)
+        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
             => new CapturedCode(id, null, src, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, Delegate src, Z0.ParsedOperation bits, ExtractTermCode term)
+        static CapturedCode DefineMember(OpIdentity id, Delegate src, Z0.ParsedEncoding bits, ExtractTermCode term)
             => new CapturedCode(id, src, src.Method, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
@@ -197,7 +197,7 @@ namespace Z0.Asm
             var outcome = Complete(state, tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
-            var bits = new Z0.ParsedOperation((MemoryAddress)start, raw, trimmed);
+            var bits = new Z0.ParsedEncoding((MemoryAddress)start, raw, trimmed);
             return new CapturedOperation(id, outcome, bits);
         }
 

@@ -9,15 +9,13 @@ namespace Z0.Asm
     
     using static Konst;
 
-    public readonly struct CapturedMemory : ILocatedCode<CapturedMemory, Z0.ParsedOperation>
+    public readonly struct CapturedMemory
     {
-        public Z0.ParsedOperation Encoded {get;}
-
-        public MemoryAddress Address {get;}
+        public ParsedEncoding Encoded {get;}
 
         public AsmFxList Decoded {get;}
 
-        public string FormattedAsm {get;}       
+        public string[] Formatted {get;}       
 
         public byte[] Data 
         { 
@@ -59,12 +57,11 @@ namespace Z0.Asm
             => Format();       
         
         [MethodImpl(Inline)]
-        public CapturedMemory(MemoryAddress address, Z0.ParsedOperation data, AsmFxList instructions, string formatted)
+        public CapturedMemory(ParsedEncoding encoded, AsmFxList fxList, string[] formatted)
         {
-            Address = address;
-            Encoded = data;
-            Decoded = instructions;
-            FormattedAsm = formatted;
+            Encoded = encoded;
+            Decoded = fxList;
+            Formatted = formatted;
         }        
     }
 }

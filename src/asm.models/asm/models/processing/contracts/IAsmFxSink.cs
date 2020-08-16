@@ -4,25 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IInstructionSink
+    public interface IAsmFxSink
     {
         void Deposit(in Instruction src);        
 
         Mnemonic Kind {get;}
     }
     
-    public interface IInstructionSink<M> : IInstructionSink
+    public interface IAsmFxSink<M> : IAsmFxSink
         where M : unmanaged, IInstructionModel   
     {
         M Model 
             => default;    
 
-        Mnemonic IInstructionSink.Kind 
+        Mnemonic IAsmFxSink.Kind 
             => Model.Mnemonic;
     }
 
-    public interface IInstructionHSink<F,M> : IInstructionSink<M>
-        where F : struct, IInstructionHSink<F,M>
+    public interface IAsmFxSink<F,M> : IAsmFxSink<M>
+        where F : struct, IAsmFxSink<F,M>
         where M : unmanaged, IInstructionModel
     {
 

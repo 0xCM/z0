@@ -13,6 +13,8 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
+    using EvF = WfEventBuilder;
+        
     /// <summary>
     /// Characterizes a worklow context
     /// </summary>
@@ -61,20 +63,20 @@ namespace Z0
         WfEventId Raise<E>(in E e)
             where E : IWfEvent;        
 
-        void Error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => Flow.error(this, e, ct, caller, file, line);
+        void Error(Exception e, CorrelationToken? ct = null, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+            => Raise(EvF.error(e, ct ?? Ct, caller, file, line));
 
-        void Error<T>(string worker, T body, CorrelationToken ct)
-            => Flow.error(worker, body, ct);
+        void Error<T>(string worker, T body, CorrelationToken? ct = null)
+            => Raise(EvF.error(worker, body, ct ?? Ct));
         
-        void Error(string actor, Exception e, CorrelationToken ct)
-            => Flow.error(this, actor, e, ct);
+        void Error(string actor, Exception e, CorrelationToken? ct = null)
+            => Raise(EvF.error(actor, e, ct ?? Ct));
 
-        void Error(in WfActor actor, Exception e, CorrelationToken ct)
-            => Flow.error(this, actor, e, ct);
+        void Error(in WfActor actor, Exception e, CorrelationToken? ct = null)
+            => Flow.error(this, actor, e, ct ?? Ct);
 
-        void Warn<T>(string actor, T content, CorrelationToken ct)
-            => Flow.warn(this, actor, content, ct);
+        void Warn<T>(string actor, T content, CorrelationToken? ct = null)
+            => Flow.warn(this, actor, content, ct ?? Ct);
 
         void Processing<T>(string actor, T kind, FilePath src, CorrelationToken ct)
             => Flow.processing(this, actor, kind, src, ct);
@@ -88,32 +90,32 @@ namespace Z0
         void Ran(string actor, CorrelationToken ct)
             => Flow.ran(this, actor, "Finished", ct);
 
-        void Ran<T>(string actor, T data, CorrelationToken ct)
-            => Flow.ran(this, actor, data, ct);
+        void Ran<T>(string actor, T output, CorrelationToken? ct = null)
+            => Flow.ran(this, actor, output, ct ?? Ct);
         
-        void Status<T>(string worker, T data, CorrelationToken ct)
-            => Flow.status(this, worker, data,ct);
+        void Status<T>(string worker, T message, CorrelationToken ct)
+            => Flow.status(this, worker, message,ct);
 
         void Status<T>(T data, [Caller] string actor = null)
             => Flow.status(this, Path.GetFileNameWithoutExtension(actor), data,Ct);
 
-        void Status<T>(in WfActor actor, T data, CorrelationToken ct)
-            => Flow.status(this, actor, data, ct);
+        void Status<T>(in WfActor actor, T message, CorrelationToken ct)
+            => Flow.status(this, actor, message, ct);
 
-        void RunningT<T>(string actor, T data, CorrelationToken ct)
-            => Flow.running(this, actor, data, ct);
+        void RunningT<T>(string actor, T output, CorrelationToken? ct = null)
+            => Flow.running(this, actor, output, ct  ?? Ct);
 
-        void RunningT<T>(in WfActor actor, T data, CorrelationToken ct)
-            => Flow.running(this, actor, data, ct);
+        void RunningT<T>(in WfActor actor, T output, CorrelationToken? ct = null)
+            => Flow.running(this, actor, output, ct ?? Ct);
 
-        void RanT<T>(string actor, T message, CorrelationToken ct)
-            => Flow.ran(this, actor, message, ct);
+        void RanT<T>(string actor, T output, CorrelationToken? ct = null)
+            => Flow.ran(this, actor, output, ct ?? Ct);
 
         void Created(string actor)
-            => Raise(Flow.wfWorkerCreated(Ct, actor));
+            => Raise(WfEventBuilder.newWorker(Ct, actor));
 
-        void Created(in WfActor actor, CorrelationToken ct)
-            => Raise(Flow.created(ct, actor));
+        void Created(in WfActor actor, CorrelationToken? ct = null)
+            => Raise(Flow.created(ct ?? Ct, actor));
 
         void Created(in WfActor actor)
             => Raise(Flow.created(Ct, actor));
@@ -222,7 +224,7 @@ namespace Z0
 
         void Created(string actor, CorrelationToken ct)
         {   
-            Raise(Flow.wfWorkerCreated(ct, actor));            
+            Raise(EvF.newWorker(ct, actor));            
         }
 
         void Created(WfStepId step, CorrelationToken ct)

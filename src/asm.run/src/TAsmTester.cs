@@ -14,7 +14,7 @@ namespace Z0.Asm
         TCheckVectors, 
         ICheckCapture 
     {        
-        IAsmRoutineDecoder Decoder 
+        IAsmDecoder Decoder 
             => Context.RoutineDecoder; 
 
         IAsmFormatter Formatter 

@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     class ImmSpecializer : IImmSpecializer
     {        
-        readonly IAsmRoutineDecoder Decoder;
+        readonly IAsmDecoder Decoder;
 
         readonly ICaptureCore Capture;
 
@@ -26,7 +26,7 @@ namespace Z0.Asm
             => term.error($"Embedding failure for {src.Name}");
 
         [MethodImpl(Inline)]
-        internal ImmSpecializer(IAsmRoutineDecoder decoder)
+        internal ImmSpecializer(IAsmDecoder decoder)
         {            
             Decoder = decoder;
             Capture = new CaptureCore();

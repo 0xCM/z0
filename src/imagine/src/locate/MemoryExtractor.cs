@@ -6,40 +6,55 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
+    
     using static Konst;
-
-    public readonly struct MemoryExtractor : IMemoryExtractor
+    using static z;
+    
+    [ApiHost]
+    public unsafe readonly struct MemoryExtractor
     {
-        public readonly MemoryReaderService Reader;
+        const int MaxZeroCount = 10;
+        
+        public static MemoryExtractor Service => default;
 
-        readonly byte[] Buffer;
+        [MethodImpl(Inline), Op]
+        public unsafe int Read(MemoryAddress src, Span<byte> dst, int? count = null)
+            => read(src,dst,count);
 
-        [MethodImpl(Inline)]
-        public static IMemoryExtractor service(byte[] buffer)
-            => new MemoryExtractor(buffer);
-
-        [MethodImpl(Inline)]
-        public MemoryExtractor(byte[] buffer)
+        [MethodImpl(Inline), Op]
+        public static int read(MemoryAddress src, Span<byte> dst, int? count = null)
         {
-            Buffer = buffer;
-            Reader =  MemoryReaderService.Service;
+            var pSrc = src.Pointer<byte>();
+            var limit = count ?? dst.Length;
+            return read(ref pSrc, limit, dst);
         }
 
-        [MethodImpl(Inline)]
-        public Option<LocatedCode> Extract(MemoryAddress src)
+        [MethodImpl(Inline), Op]
+        public static int read(MemoryAddress src, ref byte dst, int count)
         {
-            try
+            var pSrc = z.ptr(ref dst);
+            return read(ref pSrc, count, ref dst);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static int read(ref byte* pSrc, int count, Span<byte> dst)
+            => read(ref pSrc, count, ref first(dst));
+
+        [MethodImpl(Inline), Op]
+        public static int read(ref byte* pSrc, int limit, ref byte dst)
+        {
+            var offset = 0;
+            var count = 0;
+            while(offset < limit && count < MaxZeroCount)        
             {
-                Span<byte> buffer = Buffer.Clear();
-                var length = Reader.Read(src, buffer);            
-                return new LocatedCode(src, buffer.Slice(0,length).ToArray());
+                var value = Unsafe.Read<byte>(pSrc++);
+                seek(dst, offset++) = value;
+                if(value != 0)
+                    count = 0;
+                else
+                    count++;
             }
-            catch(Exception e)
-            {
-                term.error(e);
-                return Option.none<LocatedCode>();
-            }
+            return offset;
         }
     }
 }

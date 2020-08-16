@@ -10,13 +10,13 @@ namespace Z0
 
     public interface IWfCaptureState : IWfCaptureService
     {
+        IAppContext Root {get;}        
+
         IWfContext Wf {get;}
 
-        IAppContext ContextRoot {get;}        
+        WfConfig Config {get;}        
 
         IAsmContext Asm {get;}        
-
-        WfConfig Config {get;}        
 
         IWfCaptureService CWf {get;}
         
@@ -26,7 +26,7 @@ namespace Z0
 
         TCaptureServices Services{get;}        
 
-        IAsmRoutineDecoder FunctionDecoder {get;}
+        IAsmDecoder RoutineDecoder {get;}
 
         IWfCaptureBroker CaptureBroker {get;}
 

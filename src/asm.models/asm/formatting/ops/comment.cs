@@ -3,21 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{
+{        
     using System;
     using System.Runtime.CompilerServices;
-   
+    
     using static Konst;
 
-    public readonly struct Capture
+    partial struct AsmRender
     {
-        public static ICaptureServices Services 
-            => default(CaptureServices);
-    
-        public static AsmDecoderProxy DefaultDecoder
-        {
-             [MethodImpl(Inline)]
-             get => AsmDecoderProxy.Service;
-        }
+        [MethodImpl(Inline), Op]
+        public static string comment(string text)
+            =>  $"; {text}";
     }
 }

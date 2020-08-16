@@ -45,7 +45,7 @@ namespace Z0
         ReadOnlySpan<Mnemonic> Keys         
             => Index.Keys.ToArray();
 
-        IAsmRoutineDecoder Decoder
+        IAsmDecoder Decoder
             => Asm.RoutineDecoder;
 
         int NextSequence

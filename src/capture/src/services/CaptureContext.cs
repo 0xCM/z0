@@ -14,37 +14,25 @@ namespace Z0.Asm
     { 
         public CorrelationToken Ct {get;}
         
-        public IAsmContext Asm {get;}
-        
-        public IApiSet ApiSet {get;}
+        public IAppContext Root {get;}
 
-        public IExtractionParser Parser {get;}
-
-        public IAsmRoutineDecoder Decoder {get;}
+        public IAsmDecoder Decoder {get;}
 
         public IAsmFormatter Formatter {get;}
 
-        public AsmWriterFactory WriterFactory {get;}
+        public AsmTextWriterFactory WriterFactory {get;}
 
         public IWfCaptureBroker CaptureBroker {get;}
 
-        public IPartCaptureArchive Archive {get;}
-
-        public IAppMsgSink MsgSink {get;}
-
-        public CaptureContext(IAsmContext context, IAsmRoutineDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
-            IWfCaptureBroker broker, IPartCaptureArchive archive, CorrelationToken ct)
+        public CaptureContext(IAppContext root, IAsmDecoder decoder, IAsmFormatter formatter, AsmTextWriterFactory wf, 
+            IWfCaptureBroker broker, CorrelationToken ct)
         {
-            Asm = context;
             Ct = ct;
-            ApiSet = context.ContextRoot;
-            Parser = Extractors.Services.ExtractParser(Extractors.DefaultBufferLength);
+            Root = root;
             Decoder = decoder;
             Formatter = formatter;
             WriterFactory = wf;
             CaptureBroker = broker;
-            Archive = archive;
-            MsgSink = context;
         }
 
         [MethodImpl(Inline)]

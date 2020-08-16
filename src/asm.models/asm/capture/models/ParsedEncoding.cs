@@ -9,7 +9,7 @@ namespace Z0
  
     using static Konst;
 
-    public readonly struct ParsedOperation : ILocatedCode<ParsedOperation,LocatedCode>
+    public readonly struct ParsedEncoding : ILocatedCode<ParsedEncoding,LocatedCode>
     {
         readonly BinaryCode Input;
 
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ParsedOperation(MemoryAddress src, LocatedCode raw, LocatedCode parsed)
+        public ParsedEncoding(MemoryAddress src, LocatedCode raw, LocatedCode parsed)
         {
             z.insist(src, raw.Address);
             z.insist(src, parsed.Address);
@@ -73,7 +73,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ParsedOperation(LocatedCode src, LocatedCode parsed)
+        public ParsedEncoding(LocatedCode src, LocatedCode parsed)
         {
             z.insist(src.Address, parsed.Address);
             Input = src;
@@ -81,14 +81,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ParsedOperation(MemoryAddress src, byte[] raw, byte[] parsed)
+        public ParsedEncoding(MemoryAddress src, byte[] raw, byte[] parsed)
         {
             Input = new LocatedCode(src, raw);
             ParseResult = new LocatedCode(src, parsed);
         }
  
         [MethodImpl(Inline)]
-        public bool Equals(ParsedOperation src)
+        public bool Equals(ParsedEncoding src)
             => Encoded.Equals(src.Encoded);
         
         public string Format()

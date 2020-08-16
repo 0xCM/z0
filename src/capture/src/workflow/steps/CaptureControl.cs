@@ -16,7 +16,7 @@ namespace Z0
     
     public readonly ref struct CaptureControl
     {                
-        readonly IAppContext ContextRoot;
+        readonly IAppContext Root;
 
         readonly IAsmContext Asm;
         
@@ -31,10 +31,10 @@ namespace Z0
         public CaptureControl(WfCaptureState state)
         {
             State = state;
-            ContextRoot = state.ContextRoot;
+            Root = state.Root;
             Ct = state.Ct;
-            Paths = ContextRoot.AppPaths;
-            Asm = WfBuilder.asm(ContextRoot);                           
+            Paths = Root.AppPaths;
+            Asm = WfBuilder.asm(Root);                           
             Wf = state.Wf;
             State.Created(ActorName, Ct);
         }

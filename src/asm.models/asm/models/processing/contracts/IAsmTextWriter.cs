@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public delegate IAsmRoutineWriter AsmWriterFactory(FilePath dst, IAsmFormatter formatter);
+    public delegate IAsmTextWriter AsmTextWriterFactory(FilePath dst, IAsmFormatter formatter);
 
-    public interface IAsmRoutineWriter : IFileStreamWriter
+    public interface IAsmTextWriter : IFileStreamWriter
     {
         void WriteAsm(params AsmRoutine[] src);
     }

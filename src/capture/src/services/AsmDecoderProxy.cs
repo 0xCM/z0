@@ -9,48 +9,48 @@ namespace Z0.Asm
    
     using static Konst;
 
-    public readonly struct EncodingDecoder : IAsmRoutineDecoder
+    public readonly struct AsmDecoderProxy : IAsmDecoder
     {
-        readonly IAsmRoutineDecoder AsmDecoder;
+        readonly IAsmDecoder Decoder;
 
-        public static EncodingDecoder Service
+        public static AsmDecoderProxy Service
         {
              [MethodImpl(Inline)]
-             get => new EncodingDecoder(AsmRoutineDecoder.Default);
+             get => new AsmDecoderProxy(AsmRoutineDecoder.Default);
         }        
         
         [MethodImpl(Inline)]
-        internal EncodingDecoder(IAsmRoutineDecoder service)
-            => AsmDecoder = service; 
+        internal AsmDecoderProxy(IAsmDecoder service)
+            => Decoder = service; 
 
         /// <summary>
         /// Decodes a function from member capture data
         /// </summary>
         /// <param name="src">The source data</param>
         public Option<AsmRoutine> Decode(CapturedCode src)
-            => AsmDecoder.Decode(src);       
+            => Decoder.Decode(src);       
 
         /// <summary>
-        /// Decodes a fucntion for a parsed extract
+        /// Decodes a function for a parsed extract
         /// </summary>
         /// <param name="src">The source data</param>
         public Option<AsmRoutine> Decode(ParsedExtraction src)
-            => AsmDecoder.Decode(src);       
+            => Decoder.Decode(src);       
 
         public Option<AsmInstructions> Decode(IdentifiedCode src)
-            => AsmDecoder.Decode(src);       
+            => Decoder.Decode(src);       
 
         public Option<AsmRoutine> Decode(ParsedExtraction src, Action<Instruction> f)
-            => AsmDecoder.Decode(src,f);       
+            => Decoder.Decode(src,f);       
         
         public Option<AsmFxList> Decode(LocatedCode src, Action<Instruction> f)                      
-            => AsmDecoder.Decode(src,f);       
+            => Decoder.Decode(src,f);       
         
         /// <summary>
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
         public Option<AsmFxList> Decode(LocatedCode src)
-            => AsmDecoder.Decode(src);       
+            => Decoder.Decode(src);       
     }
 }

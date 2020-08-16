@@ -8,58 +8,90 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public class MemoryCapture 
-    {        
+    public ref struct MemoryCapture 
+    {   
+        public const string StepName = nameof(MemoryCapture);
+
+        readonly IAsmContext Root;     
+        
+        readonly IWfContext Wf;
+        
+        readonly IAsmDecoder Decoder;
+
+        readonly IAsmFormatter Formatter;
+
+        readonly AsmFormatSpec FormatConfig;
+
         readonly byte[] ExtractBuffer;
 
         readonly byte[] ParseBuffer;
 
-        readonly IMemoryExtractor Extractor;
+        [MethodImpl(Inline)]
+        public MemoryCapture(IAsmContext root, IWfContext wf, int bufferlen)
+        {
+            Root = root;
+            Wf = wf;
+            Formatter = root.Formatter;
+            FormatConfig = root.FormatConfig;
+            ExtractBuffer = alloc<byte>(bufferlen);
+            ParseBuffer = alloc<byte>(bufferlen);
+            Decoder = AsmDecoderProxy.Service;
+            Wf.Created(StepName);
+        }
 
-        readonly IAsmRoutineDecoder Decoder;
+        public void Dispose()
+        {
+            Wf.Finished(StepName);
+        }
 
         [MethodImpl(Inline)]
-        public MemoryCapture(int bufferlen)
+        void ClearBuffers()
         {
-            ExtractBuffer = new byte[bufferlen];
-            ParseBuffer = new byte[bufferlen];
-            Extractor = MemoryExtractor.service(ExtractBuffer);
-            Decoder = EncodingDecoder.Service;
+            ExtractBuffer.Clear();
+            ParseBuffer.Clear();
         }
+        
+        public CapturedMemory Run(MemoryAddress src)
+        {                                
+            Wf.RunningT(StepName, src);
+            
+            ClearBuffers();
 
-        public static void capture(MemoryAddress src, byte[] buffer)
-        {
-            var extract = Extractors.extract(src, buffer);
-        }
-
-        public static void parse(LocatedCode src, byte[] buffer)
-        {
-            if(ExtractParsers.parse(src, buffer, out var parsed) && parsed.IsNonEmpty)
+            var raw = Extractors.extract(src, ExtractBuffer);
+            var tryParse = Extractors.parse(raw, ParseBuffer);
+            var captured = default(CapturedMemory);
+            if(tryParse.IsSome())
             {
-                var decoder = AsmRoutineDecoder.Default;
-                var instructions = decoder.Decode(parsed); 
-                var bits = new Z0.ParsedOperation(src.Address, src, parsed)               ;
+                var parsed = tryParse.Value;
+                var parsedView = @readonly(parsed.Data);
+                var tryDecode = Decoder.Decode(parsed);                
+                if(tryDecode.IsSome())
+                {
+                    var decoded = tryDecode.Value;
+                    var fxView = decoded.View;
+                    var count = decoded.Length;
+                    var formatBuffer = alloc<string>(count);
+                    var formatTarget = span(formatBuffer);
+                    ushort offset = 0;
+                    for(ushort i=0; i<count; i++)
+                    {
+                        ref readonly var fx = ref skip(fxView, i);
+                        var size = (byte)fx.ByteLength;
+                        var fxData = slice(parsedView, offset, size);
+                        var summary = asm.Summarize(src, fx, fxData, fx.FormattedInstruction, offset);
+                        seek(formatTarget,i) = Formatter.FormatInstruction(src,summary);
+                        offset += size;
+                    }
+
+                    captured = new CapturedMemory(new ParsedEncoding(src, raw, parsed), decoded, formatBuffer);
+                }
             }
-        }
-
-        public Option<CapturedMemory> Capture(MemoryAddress src)        
-            => from raw in Option.some(Extractors.extract(src, ParseBuffer.Clear()))
-                from parsed in Parse(raw)
-                where parsed.IsNonEmpty
-                from instructions in Decoder.Decode(parsed)
-                let bits = new Z0.ParsedOperation(src, raw, parsed)
-                select new CapturedMemory(src, bits, instructions, string.Empty);
-
-        [MethodImpl(Inline)]
-        public Option<LocatedCode> Extract(MemoryAddress src)
-            => Extractor.Extract(src);
-
-        public Option<LocatedCode> Parse(LocatedCode src)
-            => Extractors.parse(src, ParseBuffer.Clear());
-
-        [MethodImpl(Inline)]
-        public Option<AsmFxList> Decode(LocatedCode src)
-            => Decoder.Decode(src);
+            
+            Wf.RanT(StepName, captured);
+            
+            return captured;
+        }    
     }
 }

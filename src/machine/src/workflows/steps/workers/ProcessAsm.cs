@@ -31,7 +31,7 @@ namespace Z0
 
         readonly MnemonicParser Parser;
 
-        IAsmRoutineDecoder Decoder
+        IAsmDecoder Decoder
             => Asm.RoutineDecoder;
 
         int NextSequence

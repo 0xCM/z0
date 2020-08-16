@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
         
     using static Konst;
     using static z;
@@ -15,11 +14,7 @@ namespace Z0
     /// Represents a non-contextual workflow participant
     /// </summary>
     public readonly struct WfWorker : ITextual
-    {
-        [MethodImpl(Inline)]
-        public static WfWorker create([CallerFilePath] string name = null)
-            => new WfWorker(Path.GetFileNameWithoutExtension(name));
-        
+    {        
         /// <summary>
         /// The participant name
         /// </summary>
@@ -30,7 +25,7 @@ namespace Z0
             => new WfWorker(name);
 
         [MethodImpl(Inline)]
-        WfWorker(string name)
+        public WfWorker(string name)
             => Name = name;
 
         [MethodImpl(Inline)]

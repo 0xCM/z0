@@ -11,13 +11,13 @@ namespace Z0.Asm
         CaptureExchange CaptureExchange
             => Asm.CaptureExchange.Create(Context);        
 
-        IImmSpecializer ICaptureServices.ImmSpecializer(IAsmRoutineDecoder decoder)
+        IImmSpecializer ICaptureServices.ImmSpecializer(IAsmDecoder decoder)
             => new ImmSpecializer(decoder);        
 
-        IAsmRoutineDecoder ICaptureServices.RoutineDecoder(in AsmFormatSpec? format)
+        IAsmDecoder ICaptureServices.RoutineDecoder(in AsmFormatSpec? format)
             => new AsmRoutineDecoder(format ?? AsmFormatSpec.Default);
 
-        IImmEmitter ImmEmissionWorkflow(IMultiSink sink, IApiSet api, IAsmFormatter formatter, IAsmRoutineDecoder decoder, WfConfig config, CorrelationToken? ct = null)        
+        IImmEmitter ImmEmitter(IMultiSink sink, IApiSet api, IAsmFormatter formatter, IAsmDecoder decoder, WfConfig config, CorrelationToken? ct = null)        
             => new EmitImmSpecials(Context, config, sink, formatter, decoder, api, config.Target.ArchiveRoot, ct);
     }
 }

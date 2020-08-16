@@ -25,13 +25,6 @@ namespace Z0.Asm
         FolderPath ArchiveRoot {get;}
 
         /// <summary>
-        /// Saves the encoded data contained in an array of dedoded functions
-        /// </summary>
-        /// <param name="src">The source functions</param>
-        /// <param name="append">Whether to append to an existing file or else overwrite</param>
-        Option<FilePath> SaveHex(AsmRoutine[] src, bool append);   
-
-        /// <summary>
         /// Saves an array of functions as formatted asm
         /// </summary>
         /// <param name="src">The source functions</param>

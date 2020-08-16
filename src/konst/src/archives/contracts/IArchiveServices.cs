@@ -28,10 +28,6 @@ namespace Z0
             => new EncodedHexArchive(root ?? LogRoot);
         
         [MethodImpl(Inline)]
-        IdentifiedCodeWriter IdentifiedCodeWriter(FilePath dst)
-            => new IdentifiedCodeWriter(dst);
-
-        [MethodImpl(Inline)]
         MemberCodeWriter MemberCodeWriter(FilePath dst)
             => new MemberCodeWriter(dst);        
 

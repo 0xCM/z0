@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     using Iced = Iced.Intel;
 
-    readonly struct AsmRoutineDecoder : IAsmRoutineDecoder
+    readonly struct AsmRoutineDecoder : IAsmDecoder
     {
         readonly AsmFormatSpec AsmFormat;
         

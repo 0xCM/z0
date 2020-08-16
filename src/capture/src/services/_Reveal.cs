@@ -24,7 +24,7 @@ namespace Z0
         
         readonly IAsmContext Asm;
         
-        readonly IAsmRoutineDecoder Decoder;
+        readonly IAsmDecoder Decoder;
         
         readonly IAsmFormatter Formatter;
         

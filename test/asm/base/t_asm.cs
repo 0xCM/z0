@@ -47,7 +47,7 @@ namespace Z0.Asm
             return Archives.Services.MemberCodeWriter(dstPath);
         }
 
-        protected IAsmRoutineWriter AsmWriter([Caller] string caller = null)
+        protected IAsmTextWriter AsmWriter([Caller] string caller = null)
         {
             var dst = TargetArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
             return AsmCore.Services.AsmWriter(dst, AsmFormatSpec.WithSectionDelimiter);

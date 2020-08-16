@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
             
     using Z0.Asm;            
+
     public readonly struct CaptureWorkflow : IWfCaptureService
     {
         public ICaptureContext Context {get;}
@@ -23,13 +24,13 @@ namespace Z0
         readonly IWfEventLog Log;
         
         [MethodImpl(Inline)]
-        public CaptureWorkflow(IAsmContext asm, IWfContext wf, IAsmRoutineDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, IPartCaptureArchive archive, CorrelationToken ct)
+        public CaptureWorkflow(IAsmContext asm, IWfContext wf, IAsmDecoder decoder, IAsmFormatter formatter, AsmTextWriterFactory writerfactory, IPartCaptureArchive archive, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;
             Log = Flow.log(wf.Config);
             Broker = WfBuilder.capture(Log, Ct);
-            Context = new CaptureContext(asm, decoder, formatter, writerfactory, Broker, archive, Ct);
+            Context = new CaptureContext(asm.ContextRoot, decoder, formatter, writerfactory, Broker, Ct);
             Wf.Created(nameof(CaptureWorkflow), Ct);
         }
 

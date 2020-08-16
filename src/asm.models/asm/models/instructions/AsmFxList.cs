@@ -49,7 +49,7 @@ namespace Z0.Asm
             get => Source;
         }
         
-        public int Count 
+        public CellCount Count 
         { 
             [MethodImpl(Inline)] 
             get => Source.Length; 

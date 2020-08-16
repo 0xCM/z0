@@ -14,8 +14,8 @@ namespace Z0.Asm
         /// <summary>
         /// Writer factory accessor
         /// </summary>
-        AsmWriterFactory AsmWriterFactory
-            => AsmRoutineWriter.Factory;
+        AsmTextWriterFactory AsmWriterFactory
+            => Asm.AsmWriter.Factory;
 
         /// <summary>
         /// Default asm formatter accessor
@@ -37,24 +37,24 @@ namespace Z0.Asm
         /// Allocates a caller-disposed asm text writer with the default formatter
         /// </summary>
         /// <param name="dst">The target path</param>
-        AsmRoutineWriter AsmWriter(FilePath dst)
-            => new AsmRoutineWriter(dst, DefaultFormatter);  
+        AsmWriter AsmWriter(FilePath dst)
+            => new AsmWriter(dst, DefaultFormatter);  
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer with a specified formatter
         /// </summary>
         /// <param name="dst">The target path</param>
         /// <param name="formatter">The formatter to use</param>
-        AsmRoutineWriter AsmWriter(FilePath dst, IAsmFormatter formatter)
-            => new AsmRoutineWriter(dst, formatter);
+        AsmWriter AsmWriter(FilePath dst, IAsmFormatter formatter)
+            => new AsmWriter(dst, formatter);
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer with a customized format configuration
         /// </summary>
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The target path</param>
-        AsmRoutineWriter AsmWriter(FilePath dst, in AsmFormatSpec config)
-            => new AsmRoutineWriter(dst, DefaultFormatter);  
+        AsmWriter AsmWriter(FilePath dst, in AsmFormatSpec config)
+            => new AsmWriter(dst, DefaultFormatter);  
 
         /// <summary>
         /// Creates a cil function formatter with an optionally-specified configuration

@@ -12,8 +12,6 @@ namespace Z0
     using static Konst;
     using static ProcessFx;
 
-    using api = OldFlow;
-
     public readonly struct AsmTableSteps
     {
         public const string ActorName = nameof(AsmTableSteps);

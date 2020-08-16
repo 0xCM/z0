@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
+
+    using Z0.Asm;
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct WfBuilder
     {
         /// <summary>
-        /// Defines an actor with a specified name, if given; otherwise the actor name is derived 
-        /// from the path of the invoking member file
+        /// Creates a memory capture service
         /// </summary>
-        /// <param name="name">The actor name</param>
+        /// <param name="buffer">The buffer size to allocate</param>
         [MethodImpl(Inline), Op]
-        public static WfWorker worker([CallerFilePath] string name = null)
-            => new WfWorker(Path.GetFileNameWithoutExtension(name));
+        public static MemoryCapture memory(IAsmContext root, IWfContext wf, ByteSize buffer)
+            => new MemoryCapture(root, wf, buffer);
     }
 }

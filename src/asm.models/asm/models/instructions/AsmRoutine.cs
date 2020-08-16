@@ -14,17 +14,6 @@ namespace Z0.Asm
     /// </summary>
     public class AsmRoutine
     {           
-        [MethodImpl(Inline)]
-        public AsmRoutine(OpUri uri, string sig, MemberCode code, ExtractTermCode term, AsmFxList instructions)
-        {
-            Uri = uri;
-            OpId = uri.OpId;
-            OpSig = sig;
-            Instructions = instructions;
-            Code = code;            
-            TermCode =term;
-        }
-
         /// <summary>
         /// The defining operation uri
         /// </summary>
@@ -55,6 +44,17 @@ namespace Z0.Asm
         /// </summary>
         public ExtractTermCode TermCode {get;}
 
+        [MethodImpl(Inline)]
+        public AsmRoutine(OpUri uri, string sig, MemberCode code, ExtractTermCode term, AsmFxList instructions)
+        {
+            Uri = uri;
+            OpId = uri.OpId;
+            OpSig = sig;
+            Instructions = instructions;
+            Code = code;            
+            TermCode =term;
+        }
+
         /// <summary>
         /// The head of the address range
         /// </summary>
@@ -78,6 +78,7 @@ namespace Z0.Asm
 
         public bool IsNonEmpty 
             => InstructionCount != 0;
+
 
         public static AsmRoutine Empty 
             => new AsmRoutine(OpUri.Empty, string.Empty, MemberCode.Empty, 0, AsmFxList.Empty);

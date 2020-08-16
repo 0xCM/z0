@@ -15,7 +15,7 @@ namespace Z0
 
         public readonly CaptureOutcome Outcome;
 
-        public readonly ParsedOperation Encoded;
+        public readonly ParsedEncoding Encoded;
 
         public byte[] Data 
         { 
@@ -48,7 +48,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CapturedOperation(OpIdentity id,  CaptureOutcome outcome, ParsedOperation code)
+        public CapturedOperation(OpIdentity id,  CaptureOutcome outcome, ParsedEncoding code)
         {            
             Id = id;
             Outcome = outcome;

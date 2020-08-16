@@ -54,7 +54,7 @@ namespace Z0
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
         [MethodImpl(Inline)]        
-        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedOperation bits, ExtractTermCode term)
+        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
             => new CapturedCode(id, null, src, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
@@ -103,7 +103,7 @@ namespace Z0
             var outcome = Complete(state, tc, start, end, delta);
             var raw = buffer.Slice(0, (int)(end - start)).ToArray();
             var trimmed = buffer.Slice(0, outcome.ByteCount).ToArray();
-            var bits = new Z0.ParsedOperation(start, raw, trimmed);
+            var bits = new Z0.ParsedEncoding(start, raw, trimmed);
             return new CapturedOperation(id, outcome, bits);
         }
 

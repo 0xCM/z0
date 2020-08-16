@@ -35,27 +35,6 @@ namespace Z0.Asm
             CilFormatter =  AsmCore.Services.CilFormatter();
         }
         
-        public Option<FilePath> SaveHex(AsmRoutine[] src, bool append)    
-        {
-            try
-            {
-                var dst = HostArchive.HexPath;
-                using var writer = Archives.Services.IdentifiedCodeWriter(dst);
-                for(var i=0; i<src.Length; i++)
-                {
-                    ref readonly var f = ref src[i];
-                    if(f.IsNonEmpty)
-                        writer.WriterLine(f.Code);
-                }
-                return dst;
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return Option.none<FilePath>();
-            }
-        }
-
         public Option<FilePath> SaveAsm(AsmRoutine[] src, bool append)
         {            
             try

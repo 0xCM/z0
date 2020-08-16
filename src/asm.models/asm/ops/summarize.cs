@@ -14,19 +14,19 @@ namespace Z0
     partial struct asm
     { 
         [MethodImpl(Inline), Op]
-        public static AsmInstructionSummary summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset)
-            => new AsmInstructionSummary(@base, (ushort)offset,  content,  src.InstructionCode, operands(@base, src),  encoded.Slice(offset, src.ByteLength).ToArray());
+        public static AsmInstructionSummary summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
+            => new AsmInstructionSummary(@base, (ushort)offset,  formatted,  src.InstructionCode, operands(@base, src),  encoded.Slice(offset, src.ByteLength).ToArray());
 
         [MethodImpl(Inline), Op]
-        public static AsmInstructionSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset)
-            => summarize(@base, src, encoded, content, offset);
+        public static AsmInstructionSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
+            => summarize(@base, src, encoded, formatted, offset);
 
         /// <summary>
         /// Describes the instructions that comprise an instruction list
         /// </summary>
         /// <param name="src">The source instruction list</param>
         [Op]
-        public static AsmInstructionSummary[] summarize(AsmFxList src)
+        public static ReadOnlySpan<AsmInstructionSummary> summarize(AsmFxList src)
         {
             var dst = new AsmInstructionSummary[src.Length];
             var offset = (ushort)0;
@@ -35,7 +35,7 @@ namespace Z0
             for(var i=0; i<dst.Length; i++)
             {
                 var instruction = src[i];                            
-                dst[i] =   Z0.asm.Summarize(@base, instruction, src.Encoded, instruction.FormattedInstruction, offset );
+                dst[i] =   asm.Summarize(@base, instruction, src.Encoded, instruction.FormattedInstruction, offset);
                 offset += (ushort)instruction.ByteLength;
             }
             return dst;
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source function</param>
         [Op]
-        public static AsmInstructionSummary[] summarize(in AsmRoutine src)
+        public static ReadOnlySpan<AsmInstructionSummary> summarize(in AsmRoutine src)
         {
             var dst = new AsmInstructionSummary[src.InstructionCount];
             var offset = (ushort)0;

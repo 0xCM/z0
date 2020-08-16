@@ -52,7 +52,7 @@ namespace Z0.Asm
         /// <summary>
         /// The context decoder
         /// </summary>
-        IAsmRoutineDecoder RoutineDecoder 
+        IAsmDecoder RoutineDecoder 
             => CaptureServices.RoutineDecoder(FormatConfig);    
     }   
 }

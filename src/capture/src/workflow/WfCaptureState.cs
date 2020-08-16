@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         public IWfContext Wf {get;}
 
-        public IAppContext ContextRoot {get;}
+        public IAppContext Root {get;}
         
         public IAsmContext Asm {get;}
 
@@ -29,7 +29,7 @@ namespace Z0.Asm
 
         public TCaptureServices Services{get;}
 
-        public IAsmRoutineDecoder FunctionDecoder {get;}
+        public IAsmDecoder RoutineDecoder {get;}
         
         public CorrelationToken Ct {get;}
 
@@ -41,7 +41,7 @@ namespace Z0.Asm
         public WfCaptureState(IWfContext wf, IAsmContext asm, WfConfig config, CorrelationToken ct)        
         {
             Wf = wf;
-            ContextRoot = wf.ContextRoot;
+            Root = wf.ContextRoot;
             Asm = asm;            
             Ct = ct;
             Config = config;     
@@ -54,8 +54,8 @@ namespace Z0.Asm
             Services = CaptureServices.create(Asm);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = Services.Formatter(FormatConfig);            
-            FunctionDecoder = Services.RoutineDecoder(FormatConfig); 
-            CWf = new CaptureWorkflow(Asm, Wf, FunctionDecoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.Target), Ct);    
+            RoutineDecoder = Services.RoutineDecoder(FormatConfig); 
+            CWf = new CaptureWorkflow(Asm, Wf, RoutineDecoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.Target), Ct);    
             CaptureBroker = WfBuilder.capture(Log, ct);
         }
 
@@ -103,8 +103,8 @@ namespace Z0.Asm
         public void Error(string actor, string message, CorrelationToken ct)
             => Wf.Error(actor, message, ct);
 
-        public void Status<T>(string actor, T mesage, CorrelationToken ct)
-            => Wf.Status(actor, mesage, ct);
+        // public void Status<T>(string actor, T mesage, CorrelationToken ct)
+        //     => Wf.Status(actor, mesage, ct);
 
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent

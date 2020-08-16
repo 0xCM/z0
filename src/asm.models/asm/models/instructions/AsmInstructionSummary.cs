@@ -43,12 +43,7 @@ namespace Z0.Asm
         /// The encoded bytes
         /// </summary>
         public readonly byte[] Encoded {get;}        
-        
-        [MethodImpl(Inline)]
-        public static AsmInstructionSummary Define(MemoryAddress @base, ushort offset, string content, 
-            AsmFxCode spec, AsmOperandInfo[] operands, byte[] encoded)
-                => new AsmInstructionSummary(@base, offset, content, spec, operands, encoded);
-        
+                
         [MethodImpl(Inline)]
         public AsmInstructionSummary(MemoryAddress @base, ushort offset, string content, AsmFxCode spec, AsmOperandInfo[] operands, byte[] encoded)
         {
@@ -58,8 +53,6 @@ namespace Z0.Asm
             Operands = operands;
             Encoded = encoded;
             Spec = spec;
-        }
-        
-
+        }    
     }
 }
