@@ -10172,3 +10172,35 @@
  rename src/konst/src/{calls/models => address}/Invocation.cs (95%)
  delete mode 100644 src/konst/src/calls/form/IMemOperand.cs
  create mode 100644 src/konst/src/z/ops/t/tspan.cs
+[master 8cf4e16c3] .
+ 64 files changed, 677 insertions(+), 597 deletions(-)
+ rename src/asm.models/asm/{AsmFxPatterns.cs => models/patterns/AsmPatterns.cs} (100%)
+ rename src/asm.models/asm/{fx => models}/patterns/cmp.cs (100%)
+ rename src/{flow/src/api/ops/model.cs => capture/src/workflow/WfCaptureControl.cs} (59%)
+ rename src/{flow/src/api/ops/patterns.cs => capture/src/workflow/WfImmBroker.cs} (51%)
+ rename src/{flow/src/api/ops/evid.cs => capture/src/workflow/ops/imm.cs} (62%)
+ rename src/{flow/src/api/ops => flow.core/src/api}/created.cs (87%)
+ rename src/{flow/src/api/ops => flow.core/src/api}/data.cs (96%)
+ create mode 100644 src/flow.core/src/api/log.cs
+ rename src/{flow/src/api/ops => flow.core/src/api}/runner.cs (96%)
+ rename src/{flow/src/api/ops => flow.core/src/api}/selector.cs (94%)
+ rename src/{flow/src/api/ops => flow.core/src/api}/selectors.cs (60%)
+ create mode 100644 src/flow.core/src/api/step.cs
+ rename src/{flow/src/api/ops/processed.cs => flow.core/src/base/IWfEventLog.cs} (71%)
+ create mode 100644 src/flow.core/src/base/Textual.cs
+ create mode 100644 src/flow.core/src/base/WfTermEvent.cs
+ create mode 100644 src/flow.core/src/base/WfTermEventLog.cs
+ rename src/flow.core/src/{support/log => base}/WfTermEventSink.cs (76%)
+ create mode 100644 src/flow.core/src/base/WfTermEventT.cs
+ delete mode 100644 src/flow/src/api/ops/configure.cs
+ delete mode 100644 src/flow/src/api/ops/context.cs
+ delete mode 100644 src/flow/src/api/ops/error.cs
+ delete mode 100644 src/flow/src/api/ops/format.cs
+ delete mode 100644 src/flow/src/api/ops/index.cs
+ delete mode 100644 src/flow/src/api/ops/log.cs
+ delete mode 100644 src/flow/src/api/ops/processing.cs
+ delete mode 100644 src/flow/src/api/ops/settings.cs
+ delete mode 100644 src/flow/src/api/ops/sink.cs
+ delete mode 100644 src/flow/src/api/ops/status.cs
+ delete mode 100644 src/flow/src/api/ops/step.cs
+ delete mode 100644 src/flow/src/api/ops/warn.cs

@@ -15,11 +15,6 @@ namespace Z0
     [ApiHost("api")]
     public readonly partial struct OldFlow
     {                            
-        public static string AppName 
-        {
-            [MethodImpl(Inline), Op]
-            get => Assembly.GetEntryAssembly().GetSimpleName();
-        }        
 
         public static int Main(params string[] args)
         {
