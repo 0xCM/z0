@@ -14,7 +14,7 @@ namespace Z0.Asm
 
         IExtractionParser Parser {get;}
 
-        IAsmFunctionDecoder Decoder {get;}
+        IAsmRoutineDecoder Decoder {get;}
 
         IAsmFormatter Formatter {get;}
 

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct LocatedInstruction : IInstructionInfo<Instruction>
+    public readonly struct LocatedAsmFx : IInstructionInfo<Instruction>
     {
         public MemberCode Encoded {get;}
 
@@ -37,7 +37,7 @@ namespace Z0.Asm
         public string FormattedInstruction 
             => Instruction.FormattedInstruction;
 
-        public AsmInstructionCode InstructionCode 
+        public AsmFxCode InstructionCode 
             => Instruction.InstructionCode;
 
         public MemoryAddress IP 
@@ -62,15 +62,15 @@ namespace Z0.Asm
             => Instruction.ByteLength;
 
         [MethodImpl(Inline)]
-        public static LocatedInstruction One(MemoryAddress @base, OffsetSequence offseq, Instruction inxs, MemberCode encoded)
-            => new LocatedInstruction(@base,offseq,inxs,encoded);
+        public static LocatedAsmFx One(MemoryAddress @base, OffsetSequence offseq, Instruction inxs, MemberCode encoded)
+            => new LocatedAsmFx(@base,offseq,inxs,encoded);
 
-        public static LocatedInstruction[] Many(MemberCode code, Instruction[] src)
+        public static LocatedAsmFx[] Many(MemberCode code, Instruction[] src)
         {            
             var @base = code.Address;
             var offseq = OffsetSequence.Zero;
             var count = src.Length;
-            var dst = new LocatedInstruction[count];
+            var dst = new LocatedAsmFx[count];
             
             for(ushort i=0; i<count; i++)
             {
@@ -85,7 +85,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public LocatedInstruction(MemoryAddress @base, OffsetSequence offseq, Instruction inxs, MemberCode encoded)
+        public LocatedAsmFx(MemoryAddress @base, OffsetSequence offseq, Instruction inxs, MemberCode encoded)
         {
             BaseAddress = @base;
             OffsetSeq = offseq;

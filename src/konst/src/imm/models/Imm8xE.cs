@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a refined 8-bit immediate value
     /// </summary>
-    public readonly struct Imm8<E> : IOperand<Imm8<E>,W,E>
+    public readonly struct Imm8<E> : IAsmOperand<Imm8<E>,W,E>
         where E : unmanaged, Enum
     {
         public readonly E Data;

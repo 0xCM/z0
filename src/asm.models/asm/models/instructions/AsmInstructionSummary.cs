@@ -32,7 +32,7 @@ namespace Z0.Asm
         /// <summary>
         /// The instruction string paired with the op code
         /// </summary>
-        public readonly AsmInstructionCode Spec {get;}
+        public readonly AsmFxCode Spec {get;}
 
         /// <summary>
         /// Describes the instruction operands
@@ -46,11 +46,11 @@ namespace Z0.Asm
         
         [MethodImpl(Inline)]
         public static AsmInstructionSummary Define(MemoryAddress @base, ushort offset, string content, 
-            AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
+            AsmFxCode spec, AsmOperandInfo[] operands, byte[] encoded)
                 => new AsmInstructionSummary(@base, offset, content, spec, operands, encoded);
         
         [MethodImpl(Inline)]
-        public AsmInstructionSummary(MemoryAddress @base, ushort offset, string content, AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
+        public AsmInstructionSummary(MemoryAddress @base, ushort offset, string content, AsmFxCode spec, AsmOperandInfo[] operands, byte[] encoded)
         {
             Base = @base;
             Offset = offset;

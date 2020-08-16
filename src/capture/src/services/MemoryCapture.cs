@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         readonly IMemoryExtractor Extractor;
 
-        readonly IAsmFunctionDecoder Decoder;
+        readonly IAsmRoutineDecoder Decoder;
 
         [MethodImpl(Inline)]
         public MemoryCapture(int bufferlen)
@@ -37,7 +37,7 @@ namespace Z0.Asm
         {
             if(ExtractParsers.parse(src, buffer, out var parsed) && parsed.IsNonEmpty)
             {
-                var decoder = AsmFunctionDecoder.Default;
+                var decoder = AsmRoutineDecoder.Default;
                 var instructions = decoder.Decode(parsed); 
                 var bits = new Z0.ParsedOperation(src.Address, src, parsed)               ;
             }
@@ -59,7 +59,7 @@ namespace Z0.Asm
             => Extractors.parse(src, ParseBuffer.Clear());
 
         [MethodImpl(Inline)]
-        public Option<AsmInstructionList> Decode(LocatedCode src)
+        public Option<AsmFxList> Decode(LocatedCode src)
             => Decoder.Decode(src);
     }
 }

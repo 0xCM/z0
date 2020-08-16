@@ -45,7 +45,7 @@ namespace Z0.Asm
             return Archives.Services.MemberCodeWriter(dstPath);
         }
 
-        protected AsmFunctionWriter AsmWriter([Caller] string caller = null)
+        protected AsmRoutineWriter AsmWriter([Caller] string caller = null)
         {
             var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
             var format = AsmFormatSpec.WithFunctionTimestamp;

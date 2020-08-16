@@ -63,7 +63,7 @@ namespace Z0.Asm
         public int TotalCount 
             => Data.Sum(i => i.TotalCount); 
 
-        public IEnumerable<LocatedInstruction> Located
+        public IEnumerable<LocatedAsmFx> Located
             => Data.SelectMany(x => x.Data).SelectMany(x => x.Content).OrderBy(x => x.IP);
     }
 }

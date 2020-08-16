@@ -84,7 +84,7 @@ namespace Z0
                 CheckDuplicates(e.Host, e.Members);
         }
        
-        void CollectAsmStats(ApiHostUri host, ReadOnlySpan<AsmFunction> functions)
+        void CollectAsmStats(ApiHostUri host, ReadOnlySpan<AsmRoutine> functions)
         {
             var count = 0u;
             for(var i = 0u; i<functions.Length; i++)

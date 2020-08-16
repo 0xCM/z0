@@ -21,7 +21,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="receiver"></param>
         [MethodImpl(Inline), Op]
-        public static AsmCallSink sink(InstructionHandler receiver)
+        public static AsmCallSink sink(AsmFxHandler receiver)
             => new AsmCallSink(receiver);
     }
 }

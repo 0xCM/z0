@@ -11,11 +11,6 @@ namespace Z0
 
     using static Konst;
     using static ProcessPartFilesStep;
-
-    public readonly struct ProcessPartFilesStep
-    {
-        public const string WorkerName = nameof(ProcessPartFiles);
-    }
     
     [ApiHost]
     public class ProcessPartFiles : IDisposable
@@ -43,7 +38,7 @@ namespace Z0
             Files = PartFiles.create(asm);        
             Buffers = buffers(DefaultBufferSize);
             ProcessedCount = 0;
-            Wf.Created(WorkerName, Ct);
+            Wf.Created(StepName, Ct);
         }
         
         void RunTestCase()
@@ -86,7 +81,7 @@ namespace Z0
         }
 
         [Op, MethodImpl(Inline)]
-        public void Dispatch(in EncodedCommand src)
+        public void Dispatch(in EncodedFx src)
         {
             Execute(AsmEncoder.bytes(src));
         }
@@ -103,7 +98,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(WorkerName, Ct);
+            Wf.Finished(StepName, Ct);
         }
     }
 }

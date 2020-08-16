@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct m256 : IMemOperand256<m256,Fixed256>
+    public readonly struct m256 : IAsmMemOperand256<m256,Fixed256>
     {
         public Fixed256 Content {get;}
 

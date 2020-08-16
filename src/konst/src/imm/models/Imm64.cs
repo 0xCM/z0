@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a 64-bit immediate value
     /// </summary>
-    public readonly struct Imm64 : IOperand<I,W64,ulong>
+    public readonly struct Imm64 : IAsmOperand<I,W64,ulong>
     {
         public readonly ulong Data;
 

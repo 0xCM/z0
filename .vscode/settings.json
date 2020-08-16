@@ -21,6 +21,7 @@
         "gvec",
         "ifblank",
         "ildasm",
+        "intrasegment",
         "opcount",
         "opid",
         "opname",

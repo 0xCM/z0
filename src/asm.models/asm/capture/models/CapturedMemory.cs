@@ -15,7 +15,7 @@ namespace Z0.Asm
 
         public MemoryAddress Address {get;}
 
-        public AsmInstructionList Decoded {get;}
+        public AsmFxList Decoded {get;}
 
         public string FormattedAsm {get;}       
 
@@ -59,7 +59,7 @@ namespace Z0.Asm
             => Format();       
         
         [MethodImpl(Inline)]
-        public CapturedMemory(MemoryAddress address, Z0.ParsedOperation data, AsmInstructionList instructions, string formatted)
+        public CapturedMemory(MemoryAddress address, Z0.ParsedOperation data, AsmFxList instructions, string formatted)
         {
             Address = address;
             Encoded = data;

@@ -26,7 +26,7 @@ namespace Z0.Asm
             get => default(R).Kind;
         }
 
-        byte IOperand<byte>.Content
+        byte IAsmOperand<byte>.Content
             => Data;
     }
 }

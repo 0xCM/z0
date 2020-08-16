@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public interface TTestCapture : TAsmTester
     {
-        Option<AsmFunction> CaptureAsm<D>(DynamicDelegate<D> src)
+        Option<AsmRoutine> CaptureAsm<D>(DynamicDelegate<D> src)
             where D : Delegate
                 => from capture in CaptureService.Capture(CaptureExchange.Context, src.Id, src)
                 from asm in Decoder.Decode(capture)

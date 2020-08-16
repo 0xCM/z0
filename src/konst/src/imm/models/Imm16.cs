@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a 16-bit immediate value
     /// </summary>
-    public readonly struct Imm16 : IOperand<I,W16,ushort>
+    public readonly struct Imm16 : IAsmOperand<I,W16,ushort>
     {
         public readonly ushort Data;
 

@@ -13,9 +13,9 @@ namespace Z0.Asm
     /// Defines an enclosure for an operand triple
     /// </summary>
     public readonly struct AsmArgs<T0,T1,T2>
-        where T0 : unmanaged, IOperand
-        where T1 : unmanaged, IOperand
-        where T2 : unmanaged, IOperand
+        where T0 : unmanaged, IAsmOperand
+        where T1 : unmanaged, IAsmOperand
+        where T2 : unmanaged, IAsmOperand
     {
         public readonly T0 A;
 

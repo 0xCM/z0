@@ -12,7 +12,7 @@ namespace Z0.Asm
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
         /// </summary>
-        public AsmInstructionCode InstructionCode {get;set;}
+        public AsmFxCode InstructionCode {get;set;}
 
         /// <summary>
         /// Captures the formatted view of the instruction

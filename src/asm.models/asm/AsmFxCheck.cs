@@ -6,7 +6,6 @@ namespace Z0.Asm
 {        
     using System;
     using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -15,28 +14,25 @@ namespace Z0.Asm
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-
-    static class AsmFxCheck
+    public readonly struct AsmFxCheck
     {
-        [MethodImpl(Inline)]
-        public static void CheckInstructionSize(in Instruction instruction, int offset, in AsmInstructionBlock src)
+        public static void CheckInstructionSize(in Instruction instruction, int offset, in AsmFxBlock src)
         {
             if(src.Encoded.Length < offset + instruction.ByteLength)
                 throw SizeMismatch(instruction, offset, src);
         }
 
-        [MethodImpl(Inline)]
-        public static void CheckBlockLength(in AsmInstructionBlock src)
+        public static void CheckBlockLength(in AsmFxBlock src)
         {
             var blocklen = src.Decoded.Select(i => i.ByteLength).Sum();
             if(blocklen != src.Encoded.Length)
                 throw BadBlockLength(src,blocklen);
         }
 
-        static AppException BadBlockLength(in AsmInstructionBlock src, int computedLength)
+        static AppException BadBlockLength(in AsmFxBlock src, int computedLength)
             => AppException.Define(InstructionBlockSizeMismatch(src.BaseAddress, src.Encoded.Length, computedLength));
 
-        static AppException SizeMismatch(in Instruction instruction, int offset, in AsmInstructionBlock src)
+        static AppException SizeMismatch(in Instruction instruction, int offset, in AsmFxBlock src)
             => AppException.Define(InstructionSizeMismatch(instruction.IP, offset, src.Encoded.Length, instruction.ByteLength));
 
         static AppMsg InstructionSizeMismatch(MemoryAddress ip, int offset, int actual, int reported,

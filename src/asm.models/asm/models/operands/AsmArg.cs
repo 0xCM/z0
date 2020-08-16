@@ -9,7 +9,7 @@ namespace Z0.Asm
     
     using static Konst;
 
-    public readonly struct AsmArg<T> : IOperand<T>
+    public readonly struct AsmArg<T> : IAsmOperand<T>
         where T : unmanaged
     {
         public T Content {get;}

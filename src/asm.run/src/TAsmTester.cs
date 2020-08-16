@@ -14,8 +14,8 @@ namespace Z0.Asm
         TCheckVectors, 
         ICheckCapture 
     {        
-        IAsmFunctionDecoder Decoder 
-            => Context.FunctionDecoder; 
+        IAsmRoutineDecoder Decoder 
+            => Context.RoutineDecoder; 
 
         IAsmFormatter Formatter 
             => Context.Formatter;
@@ -53,7 +53,7 @@ namespace Z0.Asm
                 WriteAsm(src[i], dst);
         }
 
-        void WriteAsm(AsmFunction f, StreamWriter dst)
+        void WriteAsm(AsmRoutine f, StreamWriter dst)
             => dst.WriteLine(Formatter.FormatFunction(f));
     }
 }

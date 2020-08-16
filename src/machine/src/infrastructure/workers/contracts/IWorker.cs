@@ -11,7 +11,7 @@ namespace Z0
 
     public interface IWorker
     {
-        void Process(IOperands args, IWorkState state) 
+        void Process(IAsmOperands args, IWorkState state) 
         {
 
             
@@ -19,25 +19,25 @@ namespace Z0
     }
 
     public interface IWorker<C>: IWorker
-        where C : IOperands
+        where C : IAsmOperands
     {
         
     }
 
     public interface IWorker<C,S> : IWorker<C>
-        where C : unmanaged, IOperands
+        where C : unmanaged, IAsmOperands
         where S : IWorkState
     {
         void Process(in C cmd, ref S state);      
 
         [MethodImpl(Inline)]
-        void Process(IOperands cmd, ref S state)
+        void Process(IAsmOperands cmd, ref S state)
             => Process((C)cmd, ref state);
     }
             
     public interface IWorker<P,C,S> : IWorker<C>
         where P : unmanaged, IWorker<P,C,S>
-        where C : unmanaged, IOperands
+        where C : unmanaged, IAsmOperands
         where S : IWorkState
     {
         void Process(in C cmd, ref S state);    

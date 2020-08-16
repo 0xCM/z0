@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Characterizes a register operand
     /// </summary>
-    public interface IRegOperand : IOperand
+    public interface IRegOperand : IAsmOperand
     {
         /// <summary>
         /// The register's kind classifier
@@ -20,11 +20,11 @@ namespace Z0.Asm
         RegisterClass Class
             => default;
 
-        AsmOperandKind IOperand.OpKind 
+        AsmOperandKind IAsmOperand.OpKind 
             => AsmOperandKind.R;        
     }
 
-    public interface IRegOperand<T> : IRegOperand, IOperand<T>
+    public interface IRegOperand<T> : IRegOperand, IAsmOperand<T>
         where T : unmanaged
     {
 
@@ -35,7 +35,7 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="W">The register width</typeparam>
-    public interface IRegOperand<W,T> : IRegOperand<T>, IOperand<W,T>
+    public interface IRegOperand<W,T> : IRegOperand<T>, IAsmOperand<W,T>
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {

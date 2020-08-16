@@ -26,7 +26,7 @@ namespace Z0
 
         TCaptureServices Services{get;}        
 
-        IAsmFunctionDecoder FunctionDecoder {get;}
+        IAsmRoutineDecoder FunctionDecoder {get;}
 
         IWfCaptureBroker CaptureBroker {get;}
 

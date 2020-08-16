@@ -5,35 +5,22 @@
 namespace Z0.Asm
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
-    using FT = IAsmFunctionTrigger;
-    using IT = IInstructionTrigger;
+    using FT = IAsmRoutineTrigger;
+    using IT = IAsmFxTrigger;
 
-    public readonly struct AsmTriggerSet : IAsmTriggerSet, INullary<AsmTriggerSet>
+    public readonly struct AsmTriggerSet : IAsmFxTriggerSet, INullary<AsmTriggerSet>
     {
         readonly IT[] ITriggers;
 
         readonly FT[] FTriggers;
-
-        public static AsmTriggerSet Empty 
-            => Define(array<FT>(), array<IT>());
                     
         [MethodImpl(Inline)]
-        public static AsmTriggerSet Define(FT[] fTriggers, IT[] iTriggers)
-            => new AsmTriggerSet(fTriggers, iTriggers);
-
-        [MethodImpl(Inline)]
-        public static AsmTriggerSet Define(params IT[] iTriggers)
-            => new AsmTriggerSet(array<IAsmFunctionTrigger>(), iTriggers);
-
-        [MethodImpl(Inline)]
-        AsmTriggerSet(FT[] fTriggers, IT[] iTriggers)
+        public AsmTriggerSet(FT[] fTriggers, IT[] iTriggers)
         {
             FTriggers = fTriggers;
             ITriggers = iTriggers;
@@ -46,7 +33,7 @@ namespace Z0.Asm
             => Empty;
 
         [MethodImpl(Inline)]
-        void FireOnMatch(IT trigger, in AsmInstructionList list)
+        void FireOnMatch(IT trigger, in AsmFxList list)
         {
             var src = span(list.Data);
             for(var i=0; i<src.Length; i++)
@@ -54,11 +41,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        void FireOnMatch(FT trigger, in AsmFunction function)
+        void FireOnMatch(FT trigger, in AsmRoutine function)
             => trigger.FireOnMatch(function);
 
         [MethodImpl(Inline)]
-        public void FireOnMatch(in AsmInstructionList list)
+        public void FireOnMatch(in AsmFxList list)
         {
             var src = span(ITriggers);
             for(var i=0; i<src.Length; i++)
@@ -66,12 +53,15 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public void FireOnMatch(in AsmFunction f)
+        public void FireOnMatch(in AsmRoutine f)
         {
             var src = span(FTriggers);
             var count = src.Length;
             for(var i=0; i<count; i++)
                 FireOnMatch(skip(src,i), f);                                
         }
+
+        public static AsmTriggerSet Empty 
+            => asm.set(array<FT>(), array<IT>());
     }
 }

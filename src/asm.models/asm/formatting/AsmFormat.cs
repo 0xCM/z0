@@ -27,7 +27,7 @@ namespace Z0.Asm
         public static string comment(string text)
             =>  $"; {text}";
 
-        public static string render(AsmInstructionCode src, in AsmFormatSpec fmt)
+        public static string render(AsmFxCode src, in AsmFormatSpec fmt)
             => $"{src.Expression}{fmt.FieldDelimiter}{src.OpCode}";
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="config">An optional format configuration</param>
-        public static ReadOnlySpan<string> lines(in AsmFunction src, in AsmFormatSpec? cfg = null)
+        public static ReadOnlySpan<string> lines(in AsmRoutine src, in AsmFormatSpec? cfg = null)
         {
             var descriptions = asm.summarize(src);
             var count = descriptions.Length;
@@ -72,7 +72,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The instruction source</param>
         /// <param name="config">An optional format configuration</param>
-        public static ReadOnlySpan<string> lines(in AsmInstructionList src, in AsmFormatSpec? cfg = null)
+        public static ReadOnlySpan<string> lines(in AsmFxList src, in AsmFormatSpec? cfg = null)
         {
             if(src.Length == 0)
                 return default;
@@ -93,7 +93,7 @@ namespace Z0.Asm
         public static string header(LocatedCode src, OpIdentity id)
             => comment(ByteSpanProperty.Define(id.ToPropertyName(), src).Format());
 
-        public static string render(in AsmFunctions src)
+        public static string render(in AsmRoutines src)
         {
             var dst = text.build();
             for(var i=0; i<src.Data.Length; i++)
@@ -109,7 +109,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="fmt">The format configuration</param>
-        public static string render(AsmFunction src, in AsmFormatSpec? cfg = null)
+        public static string render(AsmRoutine src, in AsmFormatSpec? cfg = null)
         {            
             var config = cfg ?? AsmFormatSpec.Default;
             var dst = text.build();
@@ -132,7 +132,7 @@ namespace Z0.Asm
         /// Formats the function header
         /// </summary>
         /// <param name="src">The source function</param>
-        public static ReadOnlySpan<string> header(AsmFunction src, in AsmFormatSpec? cfg = null)
+        public static ReadOnlySpan<string> header(AsmRoutine src, in AsmFormatSpec? cfg = null)
         {            
             var config = cfg ?? AsmFormatSpec.Default;
 

@@ -15,22 +15,22 @@ namespace Z0
 
     public interface IJmpProcessor 
     {
-        void OnJA(LocatedInstruction src)
+        void OnJA(LocatedAsmFx src)
         {
             term.announce();
         }
 
-        void OnJAE(LocatedInstruction src)
+        void OnJAE(LocatedAsmFx src)
         {
             term.announce();            
         }
 
-        void OnJB(LocatedInstruction src)
+        void OnJB(LocatedAsmFx src)
         {
             term.announce();            
         }
 
-        void OnJBE(LocatedInstruction src)
+        void OnJBE(LocatedAsmFx src)
         {
             term.announce();            
         }
@@ -45,22 +45,22 @@ namespace Z0
             => Broker.Relay(kind,data);
     }
 
-    public interface IAsmProcessor : IAsmProcessor<Mnemonic,LocatedInstruction>
+    public interface IAsmProcessor : IAsmProcessor<Mnemonic,LocatedAsmFx>
     {
-        void OnAnd(LocatedInstruction located)
+        void OnAnd(LocatedAsmFx located)
         {
             
         }
 
-        void OnOr(LocatedInstruction located)
+        void OnOr(LocatedAsmFx located)
         {
             
         }
 
         void IDataProcessor.Connect()
         {
-            Broker[Mnemonic.And] = DataHandlers.Create<LocatedInstruction>(OnAnd);
-            Broker[Mnemonic.Or] = DataHandlers.Create<LocatedInstruction>(OnOr);
+            Broker[Mnemonic.And] = DataHandlers.Create<LocatedAsmFx>(OnAnd);
+            Broker[Mnemonic.Or] = DataHandlers.Create<LocatedAsmFx>(OnOr);
         }
     }
 }

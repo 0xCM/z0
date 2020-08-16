@@ -15,8 +15,7 @@ namespace Z0
     { 
         [MethodImpl(Inline), Op]
         public static AsmInstructionSummary summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset)
-            => new AsmInstructionSummary(@base, (ushort)offset,  content,  src.InstructionCode,
-                    operands(@base, src),  encoded.Slice(offset, src.ByteLength).ToArray());
+            => new AsmInstructionSummary(@base, (ushort)offset,  content,  src.InstructionCode, operands(@base, src),  encoded.Slice(offset, src.ByteLength).ToArray());
 
         [MethodImpl(Inline), Op]
         public static AsmInstructionSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset)
@@ -27,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source instruction list</param>
         [Op]
-        public static AsmInstructionSummary[] summarize(AsmInstructionList src)
+        public static AsmInstructionSummary[] summarize(AsmFxList src)
         {
             var dst = new AsmInstructionSummary[src.Length];
             var offset = (ushort)0;
@@ -47,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source function</param>
         [Op]
-        public static AsmInstructionSummary[] summarize(in AsmFunction src)
+        public static AsmInstructionSummary[] summarize(in AsmRoutine src)
         {
             var dst = new AsmInstructionSummary[src.InstructionCount];
             var offset = (ushort)0;

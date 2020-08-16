@@ -15,20 +15,20 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static AsmArgs<A> args<A>(A a)
-            where A : unmanaged, IOperand
+            where A : unmanaged, IAsmOperand
                 => new AsmArgs<A>(a);
 
         [MethodImpl(Inline)]
         public static AsmArgs<A,B> args<A,B>(A a, B b)
-            where A : unmanaged, IOperand
-            where B : unmanaged, IOperand        
+            where A : unmanaged, IAsmOperand
+            where B : unmanaged, IAsmOperand        
                 => new AsmArgs<A,B>(a,b);
 
         [MethodImpl(Inline)]
         public static AsmArgs<A,B,C> args<A,B,C>(A a, B b, C c)
-            where A : unmanaged, IOperand
-            where B : unmanaged, IOperand        
-            where C : unmanaged, IOperand        
+            where A : unmanaged, IAsmOperand
+            where B : unmanaged, IAsmOperand        
+            where C : unmanaged, IAsmOperand        
                 => new AsmArgs<A,B,C>(a,b,c);
     }
 }

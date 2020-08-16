@@ -18,13 +18,11 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static AsmStatementParser statement()
-            => new AsmStatementParser(ParseMnemonic);
-        
+            => new AsmStatementParser(ParseMnemonic);        
 
         [MethodImpl(Inline), Op]
         public static Mnemonic ParseMnemonic(string src)
             => Enums.Parse(src, Mnemonic.INVALID);
-
 
         [MethodImpl(Inline), Op]
         public static ParseResult<AsmCommand> ParseLine(string line, ref int seq)
@@ -74,35 +72,35 @@ namespace Z0.Asm
             => math.sub(math.log2((byte)hipos(src)), One8u);
 
         [MethodImpl(Inline)]
-        static ReadOnlySpan<byte> bytes(in EncodedCommand src)
+        static ReadOnlySpan<byte> bytes(in EncodedFx src)
             => Fixed.view<byte>(Fixed.from(src.Data)).Slice((int)size(src));       
 
         [MethodImpl(Inline)]
-        static EncodedCommand encode(ReadOnlySpan<byte> src)
+        static EncodedFx encode(ReadOnlySpan<byte> src)
         {
             var dst = default(Vector128<byte>);
             var count = src.Length;
             var max = min(15,count);
             for(var i=0; i<max; i++)
                 dst = dst.WithElement(i, skip(src,i));
-            var c = new EncodedCommand(dst.WithElement(15, (byte)count));
+            var c = new EncodedFx(dst.WithElement(15, (byte)count));
             var b = bytes(c);
             return c;  
         }
 
         [MethodImpl(Inline)]
-        static EncodedCommand encode(ulong lo64)
+        static EncodedFx encode(ulong lo64)
         {
             var hi64 = (ulong)(effsize(lo64)/8) << 56;
             var v = v8u(Vector128.Create(lo64, hi64));
-            return new EncodedCommand(v); 
+            return new EncodedFx(v); 
         }
 
         // Parses text of the form encoded[4]{48 83 ec 40}
         [MethodImpl(Inline), Op]
-        public static ParseResult<EncodedCommand> ParseEncoded(string src)
+        public static ParseResult<EncodedFx> ParseEncoded(string src)
         {       
-            var fail = ParseResult.Fail<EncodedCommand>(src);
+            var fail = ParseResult.Fail<EncodedFx>(src);
             var np = Parsers.numeric<int>();
 
             (var iS0, var iS1) = text.indices(src,Chars.LBracket, Chars.RBracket);            

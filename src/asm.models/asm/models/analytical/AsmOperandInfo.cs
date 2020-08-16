@@ -12,41 +12,40 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an operand in the context of an assembly instruction
     /// </summary>
-    public readonly struct AsmOperandInfo 
+    public struct AsmOperandInfo 
     {                        
         /// <summary>
         /// The 0-based operand position
         /// </summary>
-        public readonly byte Index;
+        public byte Index;
 
         /// <summary>
         /// Classifies the operand
         /// </summary>
-        public readonly OpKind Kind;
+        public OpKind Kind;
 
         /// <summary>
         /// Operand immediate info, if applicable
         /// </summary>
-        public readonly ImmInfo ImmInfo;
+        public ImmInfo ImmInfo;
 
         /// <summary>
         /// Operand memory info, if applicable
         /// </summary>
-        public readonly MemInfo Memory;
+        public MemInfo Memory;
         
         /// <summary>
         /// Operand register info, if applicable
         /// </summary>
-        public readonly Register Register;
+        public Register Register;
 
         /// <summary>
         /// Instruction branching info, if applicable
         /// </summary>
-        public readonly AsmBranchInfo Branch;
+        public AsmBranchInfo Branch;
 
         [MethodImpl(Inline)]
-        public AsmOperandInfo(int index, OpKind kind, in ImmInfo imm, in MemInfo memory, 
-            in Register register, AsmBranchInfo branch)
+        public AsmOperandInfo(int index, OpKind kind, in ImmInfo imm, in MemInfo memory, in Register register, AsmBranchInfo branch)
         {
             Index = (byte)index;
             Kind = kind;

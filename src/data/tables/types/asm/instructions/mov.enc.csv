@@ -1,0 +1,9 @@
+# MOV - Encoding
+-----------------------------------------------------------------------------------------------------------------------
+| Op/En | Operand 1       | Operand 2     | Operand 3 | Operand 4 |
+| MR    | ModRM:r/m (w)   | ModRM:reg (r) | NA        | NA        |
+| RM    | ModRM:reg (w)   | ModRM:r/m (r) | NA        | NA        |
+| FD    | AL/AX/EAX/RAX   | Moffs         | NA        | NA        |
+| TD    | Moffs (w)       | AL/AX/EAX/RAX | NA        | NA        |
+| OI    | opcode + rd (w) | imm8/16/32/64 | NA        | NA        |
+| MI    | ModRM:r/m (w)   | imm8/16/32/64 | NA        | NA        |

@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines an 8-bit immediate value
     /// </summary>
-    public readonly struct Imm8 : IOperand<I,W,byte>
+    public readonly struct Imm8 : IAsmOperand<I,W,byte>
     {
         public readonly byte Data;
 

@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct Worker<P,C,S> : IWorker<Worker<P,C,S>, C, S>
         where P : unmanaged, IWorker
-        where C : unmanaged, IOperands
+        where C : unmanaged, IAsmOperands
         where S : IWorkState<C,S>
     {
         [MethodImpl(Inline)]
@@ -23,7 +23,7 @@ namespace Z0
             => Generalized.Process(cmd,ref state);
 
         [MethodImpl(Inline)]
-        public void Process(IOperands cmd, ref S state)
+        public void Process(IAsmOperands cmd, ref S state)
             => Generalized.Process(cmd, ref state);
 
         Worker<C,S> Generalized

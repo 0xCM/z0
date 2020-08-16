@@ -16,10 +16,10 @@ namespace Z0.Asm
 
         public readonly ApiHostUri Host;
         
-        public readonly AsmFunction[] Functions;
+        public readonly AsmRoutine[] Functions;
 
         [MethodImpl(Inline)]
-        public FunctionsDecoded(ApiHostUri host, AsmFunction[] functions)
+        public FunctionsDecoded(ApiHostUri host, AsmRoutine[] functions)
         {
             Host = host;
             Functions = functions;

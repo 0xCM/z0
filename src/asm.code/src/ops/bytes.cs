@@ -16,7 +16,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The command source</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> bytes(in EncodedCommand src)
+        public static ReadOnlySpan<byte> bytes(in EncodedFx src)
             => Fixed.view<byte>(Fixed.from(src.Data)).Slice(size(src));       
     }
 }

@@ -15,17 +15,17 @@ namespace Z0
     {
         public IWfContext Wf {get;}
 
-        public IDataBroker<Mnemonic,LocatedInstruction> Broker {get;}
+        public IDataBroker<Mnemonic,LocatedAsmFx> Broker {get;}
         
         [MethodImpl(Inline)]
         internal ProcessLocatedAsm(IWfContext context)
         {
             Wf = context;
-            Broker = DataBrokers.broker<Mnemonic,LocatedInstruction>((int)Mnemonic.LAST);
+            Broker = DataBrokers.broker<Mnemonic,LocatedAsmFx>((int)Mnemonic.LAST);
         }
 
         [MethodImpl(Inline)]
-        public void Process(LocatedInstruction src)
+        public void Process(LocatedAsmFx src)
         {
             Broker.Relay(src.Mnemonic, src);
         }

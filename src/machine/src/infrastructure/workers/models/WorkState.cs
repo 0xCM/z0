@@ -15,13 +15,13 @@ namespace Z0
     {
         internal object Current;
         
-        List<IOperands> Commands;
+        List<IAsmOperands> Commands;
 
         public object State 
             => Current;
 
         [MethodImpl(Inline)]
-        public WorkState(object state, Seq<IOperands> commands)
+        public WorkState(object state, Seq<IAsmOperands> commands)
         {
             Current = state;
             Commands = commands.ToList();
@@ -31,10 +31,10 @@ namespace Z0
         public WorkState(object state)
         {
             Current = state;
-            Commands = new List<IOperands>();
+            Commands = new List<IAsmOperands>();
         }
 
-        public void Handled(IOperands cmd)
+        public void Handled(IAsmOperands cmd)
             => Commands.Add(cmd);        
     }
 }

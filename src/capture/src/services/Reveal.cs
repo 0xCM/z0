@@ -24,7 +24,7 @@ namespace Z0
         
         readonly IAsmContext Asm;
         
-        readonly IAsmFunctionDecoder Decoder;
+        readonly IAsmRoutineDecoder Decoder;
         
         readonly IAsmFormatter Formatter;
         
@@ -39,14 +39,14 @@ namespace Z0
             Services = CaptureServices.create(Asm);
             var format = AsmFormatSpec.DefaultStreamFormat;
             Formatter = Services.Formatter(format);
-            Decoder = Services.FunctionDecoder(format);
+            Decoder = Services.RoutineDecoder(format);
             Buffer = sys.alloc<byte>(Pow2.T16);
         }
         
-        public ReadOnlySpan<AsmFunctionCode> FunctionCode(FolderPath root)
+        public ReadOnlySpan<AsmRoutineCode> FunctionCode(FolderPath root)
         {
             var assemblies = span(Root.Composition.Assemblies);
-            var dst = list<AsmFunctionCode>();
+            var dst = list<AsmRoutineCode>();
             var count = assemblies.Length;
             for(var i=0; i<count; i++)
             {
@@ -57,14 +57,14 @@ namespace Z0
             return dst.ToArray();
         }                
 
-        public AsmFunctionCode[] Capture(Assembly src)            
+        public AsmRoutineCode[] Capture(Assembly src)            
         {
             var dataTypes = span(src.Types().Tagged<ApiDataTypeAttribute>());
             var apiHosts = span(src.Types().Tagged<ApiHostAttribute>());                
             var dtCount = dataTypes.Length;
             var apiHostCount = apiHosts.Length;
 
-            var dst = list<AsmFunctionCode>();
+            var dst = list<AsmRoutineCode>();
             for(var j=0u; j<dtCount; j++)
             {
                 var type = skip(dataTypes,j);
@@ -79,7 +79,7 @@ namespace Z0
                     var identified = IdentifiedMethod.Define(identify(method), method);
                     var code = capture(identified, Buffer);
                     var f = Decoder.Decode(code).Require();
-                    dst.Add(new AsmFunctionCode(f, code));
+                    dst.Add(new AsmRoutineCode(f, code));
                 }
             }
 
@@ -94,11 +94,11 @@ namespace Z0
             return dst.ToArray();
         }
         
-        public ReadOnlySpan<AsmFunctionCode> Capture(ApiHostUri host, ReadOnlySpan<MethodInfo> src, FilePath dst)
+        public ReadOnlySpan<AsmRoutineCode> Capture(ApiHostUri host, ReadOnlySpan<MethodInfo> src, FilePath dst)
         {            
             var count = src.Length;
             var code = span<CapturedCode>(count);
-            var target = span<AsmFunctionCode>(count);
+            var target = span<AsmRoutineCode>(count);
             
             using var writer = dst.Writer();
             using var quick = QuickCapture.create(Asm);
@@ -110,8 +110,8 @@ namespace Z0
                 if(captured.IsNonEmpty)
                 {
                     seek(code, i) = captured;                
-                    var decoded = Decoder.Decode(captured).ValueOrDefault(AsmFunction.Empty);      
-                    seek(target, i) = new AsmFunctionCode(decoded, captured);
+                    var decoded = Decoder.Decode(captured).ValueOrDefault(AsmRoutine.Empty);      
+                    seek(target, i) = new AsmRoutineCode(decoded, captured);
                     Save(captured, writer);                                        
                 }
             }

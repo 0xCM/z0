@@ -42,7 +42,7 @@ namespace Z0.Asm
             }
 
             var parts = z.array(PartId.DVec, PartId.GVec);            
-            var runner = AsmPipeRunner.create(pipelog);
+            var runner = AsmRunner.pipe(pipelog);
             runner.Include(AsmCall.sink(CallHandler));            
             var handled = runner.RunPipe(parts);                     
         }

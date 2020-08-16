@@ -15,10 +15,10 @@ namespace Z0.Asm
         
         public readonly ResourceAccessor Accessor;
 
-        public readonly AsmFunctionCode Code;        
+        public readonly AsmRoutineCode Code;        
         
         [MethodImpl(Inline)]
-        public CapturedAccessor(ApiHostUri host, in ResourceAccessor accessor, in AsmFunctionCode code)
+        public CapturedAccessor(ApiHostUri host, in ResourceAccessor accessor, in AsmRoutineCode code)
         {
             Host = host;
             Accessor = accessor;
@@ -38,6 +38,6 @@ namespace Z0.Asm
         }
 
         public static CapturedAccessor Empty
-            => new CapturedAccessor(ApiHostUri.Empty, ResourceAccessor.Empty, AsmFunctionCode.Empty);        
+            => new CapturedAccessor(ApiHostUri.Empty, ResourceAccessor.Empty, AsmRoutineCode.Empty);        
     }
 }

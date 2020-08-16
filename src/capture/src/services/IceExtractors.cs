@@ -49,10 +49,10 @@ namespace Z0.Asm
         public static Func<AsmFlowInfo> FlowInfoDefer(Iced.Code src)    
             => () => FlowInfo(src);
 
-        public static AsmInstructionCode InstructionCode(Iced.Instruction src)
+        public static AsmFxCode InstructionCode(Iced.Instruction src)
         {
             var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            return new AsmInstructionCode(
+            return new AsmFxCode(
                 opcode.ToOpCodeString(), 
                 opcode.ToInstructionString());
         }

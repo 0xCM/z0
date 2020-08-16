@@ -12,7 +12,8 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static OldFlow;
+    using static Flow;
+    using static z;
     using static RenderPatterns;
 
     [Event]
@@ -37,10 +38,9 @@ namespace Z0
         public MessageFlair Flair 
             => MessageFlair.Cyan;
                 
-        public IEnumerable<LocatedInstruction> Instructions 
+        public IEnumerable<LocatedAsmFx> Instructions 
             => Data.SelectMany(x => x.Located);
-            //=> PartInstructions.SelectMany(x => x.Data).SelectMany(x => x.Content).SelectMany(x => x.Content).OrderBy(x => x.IP);
-
+ 
         public int TotalCount 
             => Data.Sum(x => x.TotalCount);                    
         

@@ -14,12 +14,12 @@ namespace Z0
         /// <summary>
         /// Invoked by the processor to signal that a command has been processed
         /// </summary>
-        void Handled(IOperands cmd);
+        void Handled(IAsmOperands cmd);
 
         /// <summary>
         /// The commands that effected the current state
         /// </summary>
-        Seq<IOperands> Processed {get;}
+        Seq<IAsmOperands> Processed {get;}
     }
 
     public interface IWorkState<S> : IWorkState
@@ -34,7 +34,7 @@ namespace Z0
     }
 
     public interface IWorkState<C,S> : IWorkState<S>
-        where C : unmanaged, IOperands
+        where C : unmanaged, IAsmOperands
     {
         /// <summary>
         /// Invoked by the processor to signal that a command has been processed
@@ -46,10 +46,10 @@ namespace Z0
         /// </summary>
         new Seq<C> Processed {get;}
 
-        Seq<IOperands> IWorkState.Processed 
-            => from c in Processed select c as IOperands;
+        Seq<IAsmOperands> IWorkState.Processed 
+            => from c in Processed select c as IAsmOperands;
 
-        void IWorkState.Handled(IOperands cmd) 
+        void IWorkState.Handled(IAsmOperands cmd) 
             => Handled((C)cmd);
     }
 }

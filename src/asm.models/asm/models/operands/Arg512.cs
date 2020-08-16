@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 512-bit oparand
     /// </summary>
-    public readonly struct Arg512: IOperand<Arg512,W512,Fixed512>
+    public readonly struct Arg512: IAsmOperand<Arg512,W512,Fixed512>
     {
         public Fixed512 Content {get;}
 

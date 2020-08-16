@@ -15,14 +15,14 @@ namespace Z0
 
     public readonly struct LocatedInstructions
     {
-        public readonly LocatedInstruction[] Indexed;
+        public readonly LocatedAsmFx[] Indexed;
 
-        readonly Dictionary<MemoryAddress, LocatedInstruction> Index;
+        readonly Dictionary<MemoryAddress, LocatedAsmFx> Index;
         
-        public static LocatedInstructions create(LocatedInstruction[] src)
+        public static LocatedInstructions create(LocatedAsmFx[] src)
         {
             var count = src.Length;
-            var index = new Dictionary<MemoryAddress, LocatedInstruction>(count);
+            var index = new Dictionary<MemoryAddress, LocatedAsmFx>(count);
             var fail = 0;
             var success = 0;
             var source = sys.span(src);
@@ -39,24 +39,24 @@ namespace Z0
             return new LocatedInstructions(src, index);
         }
         
-        public IEnumerable<LocatedInstruction> All 
+        public IEnumerable<LocatedAsmFx> All 
             => Index.Values;
 
-        public IEnumerable<LocatedInstruction> Calls 
+        public IEnumerable<LocatedAsmFx> Calls 
             => from a in All
                 let i = a.Instruction
                 where i.Mnemonic == Mnemonic.Call
                 select a;
-        public IEnumerable<AspectData<ICallInfo>> CallData
+        public IEnumerable<AspectData<IAsmCallInfo>> CallData
             => from c in CallInfo
                 let values = c.AspectValues
-                select new AspectData<ICallInfo>(c, c.AspectValues.ToArray());
+                select new AspectData<IAsmCallInfo>(c, c.AspectValues.ToArray());
 
-        public IEnumerable<CallInfo> CallInfo 
-            => Calls.Select(x => new CallInfo(x)).Where(x => !x.Target.IsEmpty).OrderBy(x => x.TargetOffset);
+        public IEnumerable<AsmCallInfo> CallInfo 
+            => Calls.Select(x => new AsmCallInfo(x)).Where(x => !x.Target.IsEmpty).OrderBy(x => x.TargetOffset);
         
         [MethodImpl(Inline)]
-        internal LocatedInstructions(LocatedInstruction[] indexed,  Dictionary<MemoryAddress, LocatedInstruction> index)
+        internal LocatedInstructions(LocatedAsmFx[] indexed,  Dictionary<MemoryAddress, LocatedAsmFx> index)
         {
             Indexed = indexed;
             Index = index;

@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// Defines an enclosure for a single operand
     /// </summary>
     public readonly struct AsmArgs<T>
-        where T : unmanaged, IOperand
+        where T : unmanaged, IAsmOperand
     {
         public readonly T A;
 

@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct m16 : IMemOperand16<m16,ushort>        
+    public readonly struct m16 : IAsmMemOperand16<m16,ushort>        
     {
         public readonly ushort Data;
 
@@ -25,7 +25,7 @@ namespace Z0.Asm.Dsl
         public m16(ushort src)
             => Data = src;
 
-        ushort IOperand<ushort>.Content 
+        ushort IAsmOperand<ushort>.Content 
             => Data;
         public DataWidth Width 
             => DataWidth.W16;

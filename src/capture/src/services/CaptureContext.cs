@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         public IExtractionParser Parser {get;}
 
-        public IAsmFunctionDecoder Decoder {get;}
+        public IAsmRoutineDecoder Decoder {get;}
 
         public IAsmFormatter Formatter {get;}
 
@@ -32,7 +32,7 @@ namespace Z0.Asm
 
         public IAppMsgSink MsgSink {get;}
 
-        public CaptureContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
+        public CaptureContext(IAsmContext context, IAsmRoutineDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
             IWfCaptureBroker broker, IPartCaptureArchive archive, CorrelationToken ct)
         {
             Asm = context;

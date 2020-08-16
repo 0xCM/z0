@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
-
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
@@ -54,7 +52,7 @@ namespace Z0.Asm
         /// <summary>
         /// The context decoder
         /// </summary>
-        IAsmFunctionDecoder FunctionDecoder 
-            => CaptureServices.FunctionDecoder(FormatConfig);    
+        IAsmRoutineDecoder RoutineDecoder 
+            => CaptureServices.RoutineDecoder(FormatConfig);    
     }   
 }

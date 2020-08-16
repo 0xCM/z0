@@ -19,9 +19,9 @@ namespace Z0
 
         readonly ExtractedCode[] Extracted;
 
-        readonly AsmFunction[] Decoded;
+        readonly AsmRoutine[] Decoded;
 
-        public MatchAddresses(WfCaptureState wf, ExtractedCode[] extracted, AsmFunction[] decoded, CorrelationToken ct)
+        public MatchAddresses(WfCaptureState wf, ExtractedCode[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
         {
             Wf = wf;
             Extracted = extracted;

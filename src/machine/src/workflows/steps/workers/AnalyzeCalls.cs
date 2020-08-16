@@ -47,7 +47,7 @@ namespace Z0
             var data = Source.CallData.ToArray();
             var delimited = data.Select(x => Delimit(x.Rows, sep));
 
-            var names = Delimit(CallInfo.AspectNames, sep);            
+            var names = Delimit(AsmCallInfo.AspectNames, sep);            
 
             writer.WriteLine(names);
             Root.iter(delimited, writer.WriteLine);

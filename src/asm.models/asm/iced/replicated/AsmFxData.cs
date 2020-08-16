@@ -5,15 +5,13 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Diagnostics;
 
     public struct AsmFxData
     {
-
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
         /// </summary>
-        public AsmInstructionCode InstructionCode;
+        public AsmFxCode InstructionCode;
 
         /// <summary>
         /// Captures the formatted view of the instruction

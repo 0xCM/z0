@@ -22,10 +22,10 @@ namespace Z0
 
         public readonly ParsedExtraction[] Parsed;
         
-        public readonly AsmFunction[] Decoded;
+        public readonly AsmRoutine[] Decoded;
         
         [MethodImpl(Inline)]
-        public CapturedHost(ApiHostUri host, ExtractedCode[] extracts, ParsedExtraction[] parsed, AsmFunction[] decoded)
+        public CapturedHost(ApiHostUri host, ExtractedCode[] extracts, ParsedExtraction[] parsed, AsmRoutine[] decoded)
         {
             Host = host;
             Extracts = extracts;

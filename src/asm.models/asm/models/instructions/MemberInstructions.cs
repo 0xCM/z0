@@ -18,7 +18,7 @@ namespace Z0.Asm
     {
         public OpUri OpUri {get;}
     
-        public LocatedInstruction[] Content {get;}
+        public LocatedAsmFx[] Content {get;}
 
         public MemoryAddress BaseAddress {get;}
         
@@ -53,7 +53,7 @@ namespace Z0.Asm
             get => Content.Length;
         }
         
-        public ref LocatedInstruction this[int i] 
+        public ref LocatedAsmFx this[int i] 
         { 
             [MethodImpl(Inline)] 
             get => ref Content[i];
@@ -63,7 +63,7 @@ namespace Z0.Asm
             => Empty;
 
         [MethodImpl(Inline)]        
-        public MemberInstructions(MemoryAddress hostaddr, LocatedInstruction[] located)
+        public MemberInstructions(MemoryAddress hostaddr, LocatedAsmFx[] located)
         {
             OpUri = located.Length != 0 ? located[0].OpUri : OpUri.Empty;
             Content = located;
@@ -72,10 +72,10 @@ namespace Z0.Asm
         }
 
         public static MemberInstructions Empty 
-            => new MemberInstructions(MemoryAddress.Empty, Array.Empty<LocatedInstruction>());
+            => new MemberInstructions(MemoryAddress.Empty, Array.Empty<LocatedAsmFx>());
         
         [MethodImpl(Inline)]
         public static MemberInstructions Create(MemoryAddress hostaddr, MemberCode uriCode, Instruction[] src)
-            => new MemberInstructions(hostaddr, LocatedInstruction.Many(uriCode, src.ToArray()));
+            => new MemberInstructions(hostaddr, LocatedAsmFx.Many(uriCode, src.ToArray()));
     }
 }

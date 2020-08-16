@@ -58,7 +58,7 @@ namespace Z0
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
         public static WorkState<C,S> state<C,S>(S initial, C cmd = default)
-            where C : unmanaged, IOperands<C>
+            where C : unmanaged, IAsmOperands<C>
                 => new WorkState<C,S>(initial);
 
         /// <summary>
@@ -70,14 +70,14 @@ namespace Z0
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
         public static Worker<C,S> processor<C,S>(C cmd = default, S state = default)
-            where C : unmanaged, IOperands<C>
+            where C : unmanaged, IAsmOperands<C>
             where S : IWorkState<C,S>
                 => default;
 
         [MethodImpl(Inline)]
         public static Worker<P,C,S> processor<P,C,S>(P p = default, C cmd = default, S state = default)
             where P : unmanaged, IWorker
-            where C : unmanaged, IOperands<C>
+            where C : unmanaged, IAsmOperands<C>
             where S : IWorkState<C,S>
                 => default;
     }

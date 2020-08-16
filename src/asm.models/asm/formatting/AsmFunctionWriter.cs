@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmFunctionWriter : IAsmFunctionWriter
+    public readonly struct AsmRoutineWriter : IAsmRoutineWriter
     {        
         readonly StreamWriter StreamOut;
 
@@ -19,21 +19,21 @@ namespace Z0.Asm
         public FilePath TargetPath {get;}
         
         public static AsmWriterFactory Factory
-            => (dst,formatter) => new AsmFunctionWriter(dst,formatter);
+            => (dst,formatter) => new AsmRoutineWriter(dst,formatter);
 
         [MethodImpl(Inline)]
-        public static AsmFunctionWriter Create(FilePath dst, IAsmFormatter formatter)
-            => new AsmFunctionWriter(dst, formatter);
+        public static AsmRoutineWriter Create(FilePath dst, IAsmFormatter formatter)
+            => new AsmRoutineWriter(dst, formatter);
 
         [MethodImpl(Inline)]
-        public AsmFunctionWriter(FilePath path, IAsmFormatter formatter)
+        public AsmRoutineWriter(FilePath path, IAsmFormatter formatter)
         {
             TargetPath = path;
             Formatter = formatter;
             StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
     
-        public void WriteAsm(params AsmFunction[] src)
+        public void WriteAsm(params AsmRoutine[] src)
         {
             foreach(var f in src)
                 StreamOut.Write(Formatter.FormatFunction(f));

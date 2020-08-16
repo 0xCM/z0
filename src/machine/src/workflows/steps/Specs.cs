@@ -5,11 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Konst;
     using static RenderPatterns;
-    using static z;
+
+    [Step(typeof(ProcessPartFiles))]
+    public readonly struct ProcessPartFilesStep
+    {
+        public const string StepName = nameof(ProcessPartFiles);
+    }
 
     [Step(typeof(AnalyzeCalls))]
     public readonly struct AnalyzeCallsStep
@@ -22,7 +26,6 @@ namespace Z0
     {
         public const string StepName = nameof(CaptureResBytes);
     }
-
 
     [Step(typeof(EmitBitMasks))]
     public readonly struct EmitBitMasksStep

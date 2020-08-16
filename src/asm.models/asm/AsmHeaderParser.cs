@@ -8,14 +8,14 @@ namespace Z0.Asm
     using static AsmCommandParser;
 
     [ApiHost]
-    public readonly struct AsmHeaderParser : ITextParser<AsmFunctionHeader>
+    public readonly struct AsmHeaderParser : ITextParser<AsmRoutineHeader>
     {
         public static AsmHeaderParser Service => default(AsmHeaderParser);
 
         [Op]
-        public ParseResult<AsmFunctionHeader> Parse(string[] lines)
+        public ParseResult<AsmRoutineHeader> Parse(string[] lines)
         {
-            var fail = ParseResult.Fail<AsmFunctionHeader>(lines.Concat(Chars.NL));
+            var fail = ParseResult.Fail<AsmRoutineHeader>(lines.Concat(Chars.NL));
 
             if(lines.Length < 4)
                 return fail;
@@ -37,11 +37,11 @@ namespace Z0.Asm
             var tcText = l3Parts.Length == 2 ? l3Parts[1] : string.Empty;
             var tcVal = Enums.Parse(tcText, ExtractTermCode.None);
 
-            return ParseResult.Success(lines.Concat(Chars.NL), new AsmFunctionHeader(uri, sig, prop, @base, tcVal));
+            return ParseResult.Success(lines.Concat(Chars.NL), new AsmRoutineHeader(uri, sig, prop, @base, tcVal));
         }
 
         [Op]
-        public ParseResult<AsmFunctionHeader> Parse(string src)
+        public ParseResult<AsmRoutineHeader> Parse(string src)
             => Parse(src.SplitClean(Chars.NL));
     }
 }

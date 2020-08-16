@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.Intrinsics;
 
     using Z0.Asm;
 
@@ -46,8 +45,8 @@ namespace Z0
         ReadOnlySpan<Mnemonic> Keys         
             => Index.Keys.ToArray();
 
-        IAsmFunctionDecoder Decoder
-            => Asm.FunctionDecoder;
+        IAsmRoutineDecoder Decoder
+            => Asm.RoutineDecoder;
 
         int NextSequence
         {
@@ -167,7 +166,7 @@ namespace Z0
             }                        
         }
                
-        void Process(in LocatedCode code, in AsmInstructionList asm)
+        void Process(in LocatedCode code, in AsmFxList asm)
         {
             Process(code.Encoded, asm.Data);
         }

@@ -47,7 +47,7 @@ namespace Z0.Asm
             return Archives.Services.MemberCodeWriter(dstPath);
         }
 
-        protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)
+        protected IAsmRoutineWriter AsmWriter([Caller] string caller = null)
         {
             var dst = TargetArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
             return AsmCore.Services.AsmWriter(dst, AsmFormatSpec.WithSectionDelimiter);
@@ -61,14 +61,14 @@ namespace Z0.Asm
             return UriCodeReader.Service.Read(capture.HexPath(host)).ToArray();
         }
 
-        protected AsmInstructionList[] DecodeHostBits(ApiHostUri[] hosts)
+        protected AsmFxList[] DecodeHostBits(ApiHostUri[] hosts)
         {
             var decoder = AsmCheck.Decoder;
 
             var totalCount = 0ul;
             var hostCount = 0ul;
 
-            var dst = Root.list<AsmInstructionList>();
+            var dst = Root.list<AsmFxList>();
 
             void Decoded(Instruction i)
             {

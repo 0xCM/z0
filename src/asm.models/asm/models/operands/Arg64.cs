@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 64-bit operand
     /// </summary>
-    public readonly struct Arg64 : IOperand<Arg64,W64,ulong>
+    public readonly struct Arg64 : IAsmOperand<Arg64,W64,ulong>
     {
         public ulong Content {get;}
 

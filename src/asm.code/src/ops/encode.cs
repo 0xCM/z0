@@ -19,14 +19,14 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static EncodedCommand encode(ReadOnlySpan<byte> src)
+        public static EncodedFx encode(ReadOnlySpan<byte> src)
         {
             var dst = default(Vector128<byte>);
             var count = src.Length;
             var max = min(15,count);
             for(var i=0; i<max; i++)
                 dst = dst.WithElement(i, skip(src,i));
-            var c = new EncodedCommand(dst.WithElement(15, (byte)count));
+            var c = new EncodedFx(dst.WithElement(15, (byte)count));
             var b = bytes(c);
             return c;  
         }
@@ -48,11 +48,11 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="lo64">The data source</param>
         [MethodImpl(Inline), Op]
-        public static EncodedCommand encode(ulong lo64)
+        public static EncodedFx encode(ulong lo64)
         {
             var hi64 = (ulong)(effsize(lo64)/8) << 56;
             var v = v8u(Vector128.Create(lo64, hi64));
-            return new EncodedCommand(v); 
+            return new EncodedFx(v); 
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="lo32">The data source</param>
         [MethodImpl(Inline), Op]
-        public static EncodedCommand encode(uint lo32)
+        public static EncodedFx encode(uint lo32)
             => encode((ulong)lo32);
     }
 }

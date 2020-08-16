@@ -14,17 +14,17 @@ namespace Z0
 
     public struct ProcessAsmJmp : IJmpProcessor
     {
-        readonly BitBroker<JmpKind,LocatedInstruction> broker;
+        readonly BitBroker<JmpKind,LocatedAsmFx> broker;
         
         public IWfContext Wf {get;}
         
         [MethodImpl(Inline)]
         public void Connect()
         {
-            broker[JmpKind.JA] = DataHandlers.Create<LocatedInstruction>(OnJA);
-            broker[JmpKind.JAE] = DataHandlers.Create<LocatedInstruction>(OnJAE);
-            broker[JmpKind.JB] = DataHandlers.Create<LocatedInstruction>(OnJB);
-            broker[JmpKind.JBE] = DataHandlers.Create<LocatedInstruction>(OnJBE);
+            broker[JmpKind.JA] = DataHandlers.Create<LocatedAsmFx>(OnJA);
+            broker[JmpKind.JAE] = DataHandlers.Create<LocatedAsmFx>(OnJAE);
+            broker[JmpKind.JB] = DataHandlers.Create<LocatedAsmFx>(OnJB);
+            broker[JmpKind.JBE] = DataHandlers.Create<LocatedAsmFx>(OnJBE);
         }
 
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Process(LocatedInstruction src)
+        public void Process(LocatedAsmFx src)
         {
             if(src.Instruction.IsJccShortOrNear)
             {
@@ -47,25 +47,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void OnJA(LocatedInstruction inxs)
+        public void OnJA(LocatedAsmFx inxs)
         {
             term.announce();
         }
 
         [MethodImpl(Inline)]
-        public void OnJAE(LocatedInstruction inxs)
+        public void OnJAE(LocatedAsmFx inxs)
         {
             term.announce();            
         }
 
         [MethodImpl(Inline)]
-        public void OnJB(LocatedInstruction inxs)
+        public void OnJB(LocatedAsmFx inxs)
         {
             term.announce();            
         }
 
         [MethodImpl(Inline)]
-        public void OnJBE(LocatedInstruction inxs)
+        public void OnJBE(LocatedAsmFx inxs)
         {
             term.announce();            
         }

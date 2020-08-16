@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct Worker : IWorker
     {
         [MethodImpl(Inline)]
-        public void Process(IOperands cmd, IWorkState state)
+        public void Process(IAsmOperands cmd, IWorkState state)
         {
             state.Handled(cmd);
         }

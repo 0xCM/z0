@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     public readonly struct Worker<C,S> : IWorker<C,S>
-        where C : unmanaged, IOperands
+        where C : unmanaged, IAsmOperands
         where S : IWorkState<C,S>
     {
         [MethodImpl(Inline)]
@@ -20,7 +20,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Process(IOperands cmd, ref S state)
+        public void Process(IAsmOperands cmd, ref S state)
             => Process((C)cmd, ref state);
     }
 }

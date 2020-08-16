@@ -11,15 +11,15 @@ namespace Z0.Asm
 
     using KVP = System.Collections.Generic.Dictionary<ApiHostUri,HostInstructions>;
 
-    public readonly struct HostInstructionIndex
+    public readonly struct HostAsmFxIndex
     {
-        public static HostInstructionIndex create()
-            => new HostInstructionIndex(new KVP());
+        public static HostAsmFxIndex create()
+            => new HostAsmFxIndex(new KVP());
         
         readonly KVP Data;
 
         [MethodImpl(Inline)]
-        public HostInstructionIndex(KVP src)
+        public HostAsmFxIndex(KVP src)
             => Data = src;
 
         public HostInstructions this[ApiHostUri host]

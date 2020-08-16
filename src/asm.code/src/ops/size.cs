@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The command source</param>
         [MethodImpl(Inline), Op]
-        public static byte size(in EncodedCommand src)
+        public static byte size(in EncodedFx src)
             => vcell(src.Data, 15);
     }
 }

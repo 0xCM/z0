@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct m32 : IMemOperand32<m32,uint>
+    public readonly struct m32 : IAsmMemOperand32<m32,uint>
     {
         public uint Content {get;}
 

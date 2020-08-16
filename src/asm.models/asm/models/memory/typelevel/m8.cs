@@ -9,7 +9,7 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-    public readonly struct m8 : IMemOperand8<m8,byte>
+    public readonly struct m8 : IAsmMemOperand8<m8,byte>
     {
         public readonly byte Data;
 
@@ -28,7 +28,7 @@ namespace Z0.Asm.Dsl
         public DataWidth Width 
             => DataWidth.W8;
 
-        byte IOperand<byte>.Content 
+        byte IAsmOperand<byte>.Content 
             => Data;
     }
 }

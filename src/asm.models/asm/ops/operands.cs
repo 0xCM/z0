@@ -10,20 +10,24 @@ namespace Z0
     using Z0.Asm;
     
     using static Konst;
+    using static z;
         
     partial struct asm
-    {        
+    {   
         /// <summary>
         /// Extracts operand instruction data
         /// </summary>
-        /// <param name="src">The source instruction</param>
+        /// <param name="fx">The source instruction</param>
         /// <param name="@base">The base address</param>
-        public static AsmOperandInfo[] operands(MemoryAddress @base, in Instruction src)
-        {
-            var args = new AsmOperandInfo[src.OpCount];
-            for(byte j=0; j< src.OpCount; j++)
-                args[j] = operand(@base, src, j);
-            return args;
+        [MethodImpl(Inline), Op]
+        public static AsmOperandInfo[] operands(MemoryAddress @base, in Instruction fx)
+        {            
+            var count = fx.OpCount;
+            var buffer = tspan<AsmOperandInfo>(count);
+            var dst = buffer.Edit;
+            for(byte j=0; j<count; j++)
+                seek(dst, j) = operand(@base, fx, j);
+            return buffer;
         }
     }
 }

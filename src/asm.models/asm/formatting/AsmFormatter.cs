@@ -30,7 +30,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="fmt">The format configuration</param>
-        public string FormatFunction(AsmFunction src)
+        public string FormatFunction(AsmRoutine src)
             => AsmFormat.render(src, Config);
 
         [MethodImpl(Inline)]        
@@ -38,11 +38,11 @@ namespace Z0.Asm
             => AsmFormat.render(@base, src, Config);
 
         [MethodImpl(Inline)]        
-        public ReadOnlySpan<string> FormatLines(AsmInstructionList src)
+        public ReadOnlySpan<string> FormatLines(AsmFxList src)
             => AsmFormat.lines(src,Config);
 
         [MethodImpl(Inline)]        
-        public ReadOnlySpan<string> FormatLines(AsmFunction src)
+        public ReadOnlySpan<string> FormatLines(AsmRoutine src)
             => AsmFormat.lines(src, Config);
     }
 }

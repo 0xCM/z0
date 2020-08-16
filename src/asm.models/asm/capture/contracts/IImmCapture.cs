@@ -10,16 +10,16 @@ namespace Z0
 
     public interface IImmCapture : IService
     {
-        Option<AsmFunction> Capture(in CaptureExchange exchange, byte imm8);
+        Option<AsmRoutine> Capture(in CaptureExchange exchange, byte imm8);
 
-        AsmFunction[] Capture(in CaptureExchange exchange, params byte[] immediates)
+        AsmRoutine[] Capture(in CaptureExchange exchange, params byte[] immediates)
         {
-            var dst = new AsmFunction[immediates.Length];
+            var dst = new AsmRoutine[immediates.Length];
 
             for(var i=0; i<dst.Length; i++)
             {
                 var cap = Capture(exchange, immediates[i]).OnNone(()=> term.error($"Capture failure")); 
-                dst[i] = cap ? cap.Value : AsmFunction.Empty;
+                dst[i] = cap ? cap.Value : AsmRoutine.Empty;
             }
             return dst;
         }                    

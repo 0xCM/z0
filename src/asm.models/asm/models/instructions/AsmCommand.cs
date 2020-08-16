@@ -20,17 +20,17 @@ namespace Z0.Asm
 
         public string OpCode {get;}
 
-        public InstructionCodeData Instruction {get;}
+        public AsmFxCodeData Instruction {get;}
 
-        public EncodedCommand Encoded {get;}
+        public EncodedFx Encoded {get;}
 
         [MethodImpl(Inline)]
-        public AsmCommand(int seq, AsmStatement statement, string opcode, string instruction, EncodedCommand encoded)
+        public AsmCommand(int seq, AsmStatement statement, string opcode, string instruction, EncodedFx encoded)
         {
             Sequence = seq;
             Statement = statement;
             OpCode = opcode;
-            Instruction = new InstructionCodeData(instruction);
+            Instruction = new AsmFxCodeData(instruction);
             Encoded = encoded;
         }
         

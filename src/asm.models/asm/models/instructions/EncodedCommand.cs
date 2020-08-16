@@ -14,15 +14,13 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an encoded instruction
     /// </summary>
-    public readonly struct EncodedCommand
+    public readonly struct EncodedFx
     {                
         public readonly Vector128<byte> Data;
 
         [MethodImpl(Inline)]
-        public EncodedCommand(Vector128<byte> src)
-        {
-            Data = src;
-        }
+        public EncodedFx(Vector128<byte> src)
+            => Data = src;
     
         /// <summary>
         /// Specifies the size of the command, in bytes, which is constrained to a number 

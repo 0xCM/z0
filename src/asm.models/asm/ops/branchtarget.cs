@@ -17,7 +17,7 @@ namespace Z0
         [Op]
         public static AsmBranchTarget branchTarget(Instruction src, int index)
         {
-            var k = AsmOperands.kind(src, index);
+            var k = asm.kind(src, index);
             switch(k)
             {
                 case NearBranch16:

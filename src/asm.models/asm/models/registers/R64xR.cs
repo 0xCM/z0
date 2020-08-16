@@ -24,7 +24,7 @@ namespace Z0.Asm
             get => default(R).Kind;
         }
 
-        ulong IOperand<ulong>.Content 
+        ulong IAsmOperand<ulong>.Content 
             => Data;
     }
 }

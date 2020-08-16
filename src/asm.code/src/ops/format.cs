@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct AsmEncoder
     {            
         [Op]
-        public static string format(in EncodedCommand src)
+        public static string format(in EncodedFx src)
         {         
             var data = AsmEncoder.bytes(src);
             var size = src.EncodingSize;

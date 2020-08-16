@@ -14,7 +14,6 @@ namespace Z0
     
     partial struct Recapture
     {
-
         public CapturedAccessor[] Capture(ApiHostUri host, FilePath dst)
             => Capture(host, Resources.accessors(Context.ContextRoot.Composition.Assemblies), dst);
 
@@ -37,7 +36,7 @@ namespace Z0
                 if(code.IsNonEmpty)
                 {
                     ref readonly var data = ref skip(codes,i);                    
-                    seek(target, i) = new CapturedAccessor(host, accessor, CreateFunction(data).ValueOrDefault(AsmFunctionCode.Empty));
+                    seek(target, i) = new CapturedAccessor(host, accessor, CreateFunction(data).ValueOrDefault(AsmRoutineCode.Empty));
                     Save(data, writer);                                        
                 }
             }
@@ -46,13 +45,13 @@ namespace Z0
         }
 
 
-        Option<AsmFunctionCode> CreateFunction(CapturedCode capture)
+        Option<AsmRoutineCode> CreateFunction(CapturedCode capture)
         {
-            var decoded = Context.FunctionDecoder.Decode(capture);
+            var decoded = Context.RoutineDecoder.Decode(capture);
             if(decoded)
-                return new AsmFunctionCode(decoded.Value, capture);
+                return new AsmRoutineCode(decoded.Value, capture);
             else
-                return z.none<AsmFunctionCode>();
+                return z.none<AsmRoutineCode>();
         }
 
     }

@@ -24,7 +24,7 @@ namespace Z0.Asm
             get => default(R).Kind;
         }
 
-        ushort IOperand<ushort>.Content 
+        ushort IAsmOperand<ushort>.Content 
             => Data;
     }
 }

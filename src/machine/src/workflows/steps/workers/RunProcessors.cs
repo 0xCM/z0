@@ -182,7 +182,7 @@ namespace Z0
         {        
             var instructions = Root.list<MemberInstructions>();                            
             var ip = MemoryAddress.Empty;
-            var decoder = Asm.FunctionDecoder;        
+            var decoder = Asm.RoutineDecoder;        
 
             for(var i=0; i<hcs.Length; i++)
             {

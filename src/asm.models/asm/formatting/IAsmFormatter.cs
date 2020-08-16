@@ -20,7 +20,7 @@ namespace Z0.Asm
         /// Creates a detailed presentation of decoded x86 asm data per the accompanying configuration spec
         /// </summary>
         /// <param name="src">The function to render as asm text</param>
-        string FormatFunction(AsmFunction src);        
+        string FormatFunction(AsmRoutine src);        
 
         /// <summary>
         /// Formats a single instruction
@@ -33,12 +33,12 @@ namespace Z0.Asm
         /// Formats the instruction in the source and returns a line for each and every one
         /// </summary>
         /// <param name="src">The source function</param>
-        ReadOnlySpan<string> FormatLines(AsmFunction src);     
+        ReadOnlySpan<string> FormatLines(AsmRoutine src);     
 
         /// <summary>
         /// Formats the instruction in the source and returns a line for each and every one
         /// </summary>
         /// <param name="src">The source function</param>
-        ReadOnlySpan<string> FormatLines(AsmInstructionList src);               
+        ReadOnlySpan<string> FormatLines(AsmFxList src);               
     }
 }

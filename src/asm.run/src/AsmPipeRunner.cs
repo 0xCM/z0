@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Collections.Generic;
     using System.IO;
 
@@ -14,17 +13,13 @@ namespace Z0.Asm
     using static z;
 
     public readonly struct AsmPipeRunner
-    {
-        [MethodImpl(Inline)]
-        public static AsmPipeRunner create(FilePath logpath)
-            => new AsmPipeRunner(logpath);
-        
+    {        
         public FilePath LogPath {get;}
 
         public IAppPaths AppPaths 
             => Z0.AppPaths.Default;        
 
-        readonly InstructionHandlers Handlers;
+        readonly AsmFxHandlers Handlers;
         
         readonly MemoryAddress BaseAddress;
 
@@ -37,16 +32,16 @@ namespace Z0.Asm
         internal AsmPipeRunner(FilePath logpath)
         {
             LogPath = logpath;
-            Handlers = InstructionHandlers.Default;
+            Handlers = AsmFxHandlers.Default;
             BaseAddress = Pow2.T08;
             ListCount = new int[]{0};
         }
 
         [MethodImpl(Inline)]
-        public bool Include(InstructionSink sink)
+        public bool Include(AsmFxSink sink)
             => Handlers.Include(sink);
 
-        public void Flow(params AsmFunction[] src)
+        public void Flow(params AsmRoutine[] src)
         {
             var count = src.Length;
             ref readonly var f = ref first(span(src));
@@ -54,7 +49,7 @@ namespace Z0.Asm
                 Flow(skip(f,i));
         }
         
-        public void Flow(in AsmFunction src)
+        public void Flow(in AsmRoutine src)
         {
             var count = src.InstructionCount;
             ref readonly var inxs = ref src.Instructions[0];
@@ -85,26 +80,26 @@ namespace Z0.Asm
             return Handlers.Handled;       
         }
         
-        AsmInstructionList Pipe(AsmInstructionList src)
+        AsmFxList Pipe(AsmFxList src)
         {        
             ListCounter++;
             return src;
         }
 
         [MethodImpl(Inline)]
-        AsmInstructionList ToList(AsmInstructions src)
-            => AsmInstructionList.Create(src, new LocatedCode(BaseAddress, src.Encoded));
+        AsmFxList ToList(AsmInstructions src)
+            => asm.list(src, new LocatedCode(BaseAddress, src.Encoded));
 
         void RunPipe(ReadOnlySpan<IdentifiedCode> src, StreamWriter log)
         {
-            var t1 = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, Handlers.OnVinserti128);
-            var t2 = AsmMnemonicTrigger.Define(Mnemonic.Vmovupd, Handlers.OnVmovupd);
-            var t3 = AsmMnemonicTrigger.Define(Mnemonic.Call, Handlers.OnCall);
-            var triggers = AsmTriggerSet.Define(t1,t2,t3);
+            var t1 = asm.trigger(Mnemonic.Vinserti128, Handlers.OnVinserti128);
+            var t2 = asm.trigger(Mnemonic.Vmovupd, Handlers.OnVmovupd);
+            var t3 = asm.trigger(Mnemonic.Call, Handlers.OnCall);
+            var triggers = asm.set(t1,t2,t3);
             var decoded = UriHexDecoder.decode(src).Map(ToList);
-            var flow = AsmInstructionFlow.Create(decoded, triggers);
-            var pipe = AsmInstructionPipe.From(Pipe); 
-            var results = flow.Push(pipe);
+            var fxFlow = asm.flow(decoded, triggers);
+            var fxPipe = asm.pipe(Pipe); 
+            var results = fxFlow.Push(fxPipe);
 
             log.WriteLine($"Analyzed {ListCounter} instruction lists");
             

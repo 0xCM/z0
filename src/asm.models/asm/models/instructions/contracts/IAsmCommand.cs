@@ -12,9 +12,9 @@ namespace Z0.Asm
 
         string OpCode {get;}
 
-        InstructionCodeData Instruction {get;}
+        AsmFxCodeData Instruction {get;}
 
-        EncodedCommand Encoded {get;}
+        EncodedFx Encoded {get;}
 
         byte IEncodedCommand.EncodingSize 
             => Encoded.EncodingSize;

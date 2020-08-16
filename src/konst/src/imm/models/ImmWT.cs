@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Imm<W,T> : IImmOperand<Imm<W,T>, W,T>
+    public readonly struct Imm<W,T> : IAsmImmOperand<Imm<W,T>, W,T>
         where W : unmanaged, INumericWidth
         where T : unmanaged
     {

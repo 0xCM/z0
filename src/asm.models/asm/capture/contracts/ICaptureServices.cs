@@ -8,13 +8,13 @@ namespace Z0.Asm
     {
         ICaptureCore CaptureCore {get;}
         
-        IImmSpecializer ImmSpecializer(IAsmFunctionDecoder decoder);        
+        IImmSpecializer ImmSpecializer(IAsmRoutineDecoder decoder);        
 
         /// <summary>
         /// Creates a function decoder
         /// </summary>
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
-        IAsmFunctionDecoder FunctionDecoder(in AsmFormatSpec? format = null);
+        IAsmRoutineDecoder RoutineDecoder(in AsmFormatSpec? format = null);
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     /// Tracks the state of a process stream and the commands that effected the state
     /// </summary>
     public struct WorkState<C,S> : IWorkState<C,S>
-        where C : unmanaged, IOperands
+        where C : unmanaged, IAsmOperands
     {
         internal S Current;
 
@@ -46,6 +46,6 @@ namespace Z0
             => Commands.Add(cmd);
         
         public WorkState Generalized
-            => new WorkState(Current, from c in Processed select c as IOperands);
+            => new WorkState(Current, from c in Processed select c as IAsmOperands);
     }
 }
