@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         AsmWriterFactory WriterFactory {get;}
 
-        ICaptureBroker CaptureBroker {get;}
+        IWfCaptureBroker CaptureBroker {get;}
 
         IPartCaptureArchive Archive {get;}
 

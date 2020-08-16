@@ -4,16 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Text;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
     using static RenderPatterns;
 
-    partial struct Flow
+    partial struct OldFlow
     {
         public const string IdMarker = Slot0 + FieldSep;
         

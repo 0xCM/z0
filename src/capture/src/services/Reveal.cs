@@ -57,12 +57,6 @@ namespace Z0
             return dst.ToArray();
         }                
 
-        static void jit(MethodInfo[] src, Span<LocatedCode> dst)
-        {
-
-
-        }
-
         public AsmFunctionCode[] Capture(Assembly src)            
         {
             var dataTypes = span(src.Types().Tagged<ApiDataTypeAttribute>());

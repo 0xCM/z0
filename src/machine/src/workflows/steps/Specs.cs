@@ -50,6 +50,12 @@ namespace Z0
         public const string DatasetExt = DataType + XDelimit +  DataFileExt;
     }
 
+    [Step(typeof(Recapture))]
+    public readonly struct RecaptureStep
+    {
+        public const string StepName = nameof(RecaptureStep);
+    }    
+    
     [Step(typeof(ProcessAsm))]
     public readonly struct ProcessAsmStep
     {

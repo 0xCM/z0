@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static RenderPatterns;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string format<T>(T content)        

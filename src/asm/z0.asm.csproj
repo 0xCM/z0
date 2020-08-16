@@ -6,17 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Vectors)" />
-    <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(Evaluate)" />
-    <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(BitFields)" />
-    <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(WfCore)" />
+    <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(AsmModels)" />
-
+    <ProjectReference Include="$(AsmCode)" />
+    <ProjectReference Include="$(AsmRun)" />
   </ItemGroup>
-
 
 </Project>

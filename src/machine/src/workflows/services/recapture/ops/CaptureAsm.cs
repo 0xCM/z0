@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using Z0.Asm;
 
@@ -16,17 +15,20 @@ namespace Z0
     partial struct Recapture
     {
 
-        public CapturedAccessor[] CaptureAsm(ApiHostUri host, ReadOnlySpan<ResourceAccessor> src, FilePath dst)
+        public CapturedAccessor[] Capture(ApiHostUri host, FilePath dst)
+            => Capture(host, Resources.accessors(Context.ContextRoot.Composition.Assemblies), dst);
+
+        public CapturedAccessor[] Capture(ApiHostUri host, ReadOnlySpan<ResourceAccessor> src, FilePath dst)
         {            
-            var srcount = src.Length;
-            var codes = span(alloc<CapturedCode>(srcount));
-            var captured = alloc<CapturedAccessor>(srcount);
+            var count = src.Length;
+            var codes = span(alloc<CapturedCode>(count));
+            var captured = alloc<CapturedAccessor>(count);
             var target = span(captured);
             
             using var writer = dst.Writer();
             using var quick = QuickCapture.create(Context);
                         
-            for(var i=0u; i<srcount; i++)
+            for(var i=0u; i<count; i++)
             {
                 ref readonly var accessor = ref skip(src,i);
                 var code = quick.Capture(accessor.Member).ValueOrDefault(CapturedCode.Empty);
@@ -36,11 +38,22 @@ namespace Z0
                 {
                     ref readonly var data = ref skip(codes,i);                    
                     seek(target, i) = new CapturedAccessor(host, accessor, CreateFunction(data).ValueOrDefault(AsmFunctionCode.Empty));
-                    WriteAsm(data, writer);                                        
+                    Save(data, writer);                                        
                 }
             }
             
             return captured;
         }
+
+
+        Option<AsmFunctionCode> CreateFunction(CapturedCode capture)
+        {
+            var decoded = Context.FunctionDecoder.Decode(capture);
+            if(decoded)
+                return new AsmFunctionCode(decoded.Value, capture);
+            else
+                return z.none<AsmFunctionCode>();
+        }
+
     }
 }

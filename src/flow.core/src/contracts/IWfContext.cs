@@ -62,64 +62,64 @@ namespace Z0
             where E : IWfEvent;        
 
         void Error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => WfCore.error(this, e, ct, caller, file, line);
+            => Flow.error(this, e, ct, caller, file, line);
 
         void Error<T>(string worker, T body, CorrelationToken ct)
-            => WfCore.error(worker, body, ct);
+            => Flow.error(worker, body, ct);
         
         void Error(string actor, Exception e, CorrelationToken ct)
-            => WfCore.error(this, actor, e, ct);
+            => Flow.error(this, actor, e, ct);
 
         void Error(in WfActor actor, Exception e, CorrelationToken ct)
-            => WfCore.error(this, actor, e, ct);
+            => Flow.error(this, actor, e, ct);
 
         void Warn<T>(string actor, T content, CorrelationToken ct)
-            => WfCore.warn(this, actor, content, ct);
+            => Flow.warn(this, actor, content, ct);
 
         void Processing<T>(string actor, T kind, FilePath src, CorrelationToken ct)
-            => WfCore.processing(this, actor, kind, src, ct);
+            => Flow.processing(this, actor, kind, src, ct);
 
         void ProcessingFile<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
-            => WfCore.processing(this, Path.GetFileNameWithoutExtension(actor), kind, src, Ct);
+            => Flow.processing(this, Path.GetFileNameWithoutExtension(actor), kind, src, Ct);
 
         void ProcessedFile<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
-            => WfCore.processed(this,ToActorName(actor), kind, src, size, Ct);
+            => Flow.processed(this,ToActorName(actor), kind, src, size, Ct);
         
         void Ran(string actor, CorrelationToken ct)
-            => WfCore.ran(this, actor, "Finished", ct);
+            => Flow.ran(this, actor, "Finished", ct);
 
         void Ran<T>(string actor, T data, CorrelationToken ct)
-            => WfCore.ran(this, actor, data, ct);
+            => Flow.ran(this, actor, data, ct);
         
         void Status<T>(string worker, T data, CorrelationToken ct)
-            => WfCore.status(this, worker, data,ct);
+            => Flow.status(this, worker, data,ct);
 
         void Status<T>(T data, [Caller] string actor = null)
-            => WfCore.status(this, Path.GetFileNameWithoutExtension(actor), data,Ct);
+            => Flow.status(this, Path.GetFileNameWithoutExtension(actor), data,Ct);
 
         void Status<T>(in WfActor actor, T data, CorrelationToken ct)
-            => WfCore.status(this, actor, data, ct);
+            => Flow.status(this, actor, data, ct);
 
         void RunningT<T>(string actor, T data, CorrelationToken ct)
-            => WfCore.running(this, actor, data, ct);
+            => Flow.running(this, actor, data, ct);
 
         void RunningT<T>(in WfActor actor, T data, CorrelationToken ct)
-            => WfCore.running(this, actor, data, ct);
+            => Flow.running(this, actor, data, ct);
 
         void RanT<T>(string actor, T message, CorrelationToken ct)
-            => WfCore.ran(this, actor, message, ct);
+            => Flow.ran(this, actor, message, ct);
 
         void Created(string actor)
-            => Raise(WfCore.wfWorkerCreated(Ct, actor));
+            => Raise(Flow.wfWorkerCreated(Ct, actor));
 
         void Created(in WfActor actor, CorrelationToken ct)
-            => Raise(WfCore.created(ct, actor));
+            => Raise(Flow.created(ct, actor));
 
         void Created(in WfActor actor)
-            => Raise(WfCore.created(Ct, actor));
+            => Raise(Flow.created(Ct, actor));
 
         void Created(in WfWorker worker)
-            => Raise(WfCore.created(Ct, worker));
+            => Raise(Flow.created(Ct, worker));
 
         void Created(in WfActor actor, WfStepId step, CorrelationToken ct)
             => Raise(new WfStepCreated(step, ct));
@@ -222,7 +222,7 @@ namespace Z0
 
         void Created(string actor, CorrelationToken ct)
         {   
-            Raise(WfCore.wfWorkerCreated(ct, actor));            
+            Raise(Flow.wfWorkerCreated(ct, actor));            
         }
 
         void Created(WfStepId step, CorrelationToken ct)

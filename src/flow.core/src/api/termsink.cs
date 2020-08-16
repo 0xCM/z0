@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfCore
+    partial struct Flow
     {
         [MethodImpl(Inline), Op]
         public static WfTermEventSink termsink(CorrelationToken ct)

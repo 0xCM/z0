@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Flow;
+    using static OldFlow;
     using static Flairs;
 
     [Event]
@@ -38,6 +38,6 @@ namespace Z0
         
         [MethodImpl(Inline)]        
         public string Format()
-            => format(EventId, Actor, Processor, delimit(Parts));               
+            => format(EventId, Actor, Processor, Flow.delimit(Parts));               
     }        
 }

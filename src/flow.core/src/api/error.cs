@@ -13,7 +13,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    partial struct WfCore
+    partial struct Flow
     {
         [Op, Closures(UnsignedInts)]
         public static void running<T>(IWfContext wf, WfActor worker, T message, CorrelationToken ct)
@@ -27,7 +27,7 @@ namespace Z0
             var where = text.format(CallerPattern, caller, line, file);
             var what = e.ToString();
             var msg = text.format(Pattern, where, what);
-            wf.Raise(WfCore.error(caller, msg, ct));
+            wf.Raise(Flow.error(caller, msg, ct));
         }             
 
         [Op, Closures(UnsignedInts)]

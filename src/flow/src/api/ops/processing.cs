@@ -9,10 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         [Op, Closures(UnsignedInts)]
         public static void processing<T>(IWfContext wf, string actor, T kind, FilePath src, CorrelationToken ct)
-            => wf.Raise(WfCore.processing(actor,kind,src,ct));
+            => wf.Raise(Flow.processing(actor,kind,src,ct));
     }
 }

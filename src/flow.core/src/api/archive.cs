@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     
-    partial struct WfCore
+    partial struct Flow
     {
         [MethodImpl(Inline)]
         public static ArchivedTable<F,T> archived<F,T>(FilePath location)
@@ -55,7 +55,7 @@ namespace Z0
         public static DataFlow<TableContent<F,T>, ArchivedTable<F,T>> archive<F,T>(TableContent<F,T> src, FilePath dst)
             where T : struct, ITable<F,T>
             where F : unmanaged, Enum
-                => Table.flow(src, WfCore.archived<F,T>(dst));
+                => Table.flow(src, Flow.archived<F,T>(dst));
 
     }
 }

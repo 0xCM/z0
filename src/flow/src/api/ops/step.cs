@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         /// <summary>
         /// Identifies a step predicated on a specified type name and kind

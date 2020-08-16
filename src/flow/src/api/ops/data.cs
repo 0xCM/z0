@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         [MethodImpl(Inline), Op]
         public static WfConfigData data(WfConfig src)

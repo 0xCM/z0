@@ -4,7 +4,7 @@
 			"path": "."
 		},
 		{
-			"path": "..\\z0-logs\\apps\\control\\capture",
+			"path": "..\\z0-logs\\capture\\artifacts",
 			"name": "capture"
 		},
 		{
@@ -15,5 +15,9 @@
 			"path": "K:\\z0\\archives"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.words": [
+			"ZXed"
+		]
+	}
 }

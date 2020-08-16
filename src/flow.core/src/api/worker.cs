@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfCore    
+    partial struct Flow    
     {
         /// <summary>
         /// Defines a <see cref='WorkerCreated'/> event
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="name">The actor name</param>
         [MethodImpl(Inline), Op]
         public static WorkerCreated wfWorkerCreated(CorrelationToken ct, [CallerFilePath] string name = null)
-            => new WorkerCreated(WfCore.worker(name), ct);                        
+            => new WorkerCreated(Flow.worker(name), ct);                        
 
         /// <summary>
         /// Defines an actor with a specified name, if given; otherwise the actor name is derived 

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {        
         [Op]
         public static WfSettings settings(IAppContext context, CorrelationToken ct)
@@ -24,13 +24,13 @@ namespace Z0
             }        
 
             var path = configPath();
-            WfCore.termsink(ct).Deposit(new LoadingWfConfig(nameof(Flow), path, ct));
+            Flow.termsink(ct).Deposit(new LoadingWfConfig(nameof(OldFlow), path, ct));
 
             var dst = z.dict<string,string>();
             AppSettings.absorb(path,dst);
             var config = new WfSettings(dst);
                         
-            WfCore.termsink(ct).Deposit(new LoadedWfConfig(nameof(Flow), path, config, ct));            
+            Flow.termsink(ct).Deposit(new LoadedWfConfig(nameof(OldFlow), path, config, ct));            
             return config;
         }        
     }

@@ -17,7 +17,7 @@ namespace Z0
 
     ref struct Runner 
     {
-        readonly WfState State;   
+        readonly WfCaptureState State;   
 
         readonly Span<string> Buffer;     
 
@@ -30,10 +30,10 @@ namespace Z0
         byte offset;
 
         [MethodImpl(Inline)]
-        public Runner(WfState wf)
+        public Runner(WfCaptureState wf)
         {
             Ct = wf.Ct;
-            Actor = WfCore.actor(nameof(Runner));
+            Actor = Flow.actor(nameof(Runner));
             State = wf;
             Buffer = z.span<string>(256);
             offset = 0;

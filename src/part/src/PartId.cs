@@ -115,6 +115,8 @@ public enum PartId : ulong
     VBlock = 139,
 
     Asm = 140,  
+
+    AsmCode = 141,
     
     Machine = 143,
 

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static ProcessFx;
 
-    using api = Flow;
+    using api = OldFlow;
 
     public readonly struct AsmTableSink : ITableSink<AsmTableSink, AsmRecord>
     {

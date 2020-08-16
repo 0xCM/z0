@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         [MethodImpl(Inline)]
         public static WfRunner<A> runner<A>(IWfContext wf, Action<A> handler, A? args = null)
@@ -17,7 +17,7 @@ namespace Z0
                 => new WfRunner<A>(wf, handler, args);
 
         [MethodImpl(Inline)]
-        public static WfTableRunner<F,T,D,S,Y> runner<F,T,D,S,Y>(IWfContext wf, WfTableMaps<D,S,T,Y> processors, Selectors<D,S> selectors)
+        public static WfTableRunner<F,T,D,S,Y> runner<F,T,D,S,Y>(IWfContext wf, TableMaps<D,S,T,Y> processors, TableSectors<D,S> selectors)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T,D>
             where D : unmanaged, Enum

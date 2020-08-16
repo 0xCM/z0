@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfCore    
+    partial struct Flow    
     {        
         [Op]
         public static WfSettings settings(IAppContext context, CorrelationToken ct)

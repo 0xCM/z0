@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Flow;
+    using static OldFlow;
     using static z;
 
     using P = Z0.Parts;
@@ -25,7 +25,7 @@ namespace Z0
 
         public CorrelationToken Ct {get;}         
 
-        WfState Wf;
+        WfCaptureState Wf;
 
         static IAppContext CreateAppContext()
         {
@@ -57,8 +57,8 @@ namespace Z0
             if(parts.Length == 0)
                 parts = Context.PartIdentities;
             
-            var config = Flow.configure(Context, args, Ct);
-            var wfc = Flow.context(Context, config, Ct);
+            var config = OldFlow.configure(Context, args, Ct);
+            var wfc = OldFlow.context(Context, config, Ct);
             Wf = WfBuilder.state(wfc, WfBuilder.asm(Context), config);
 
             try
@@ -68,7 +68,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Raise(WfCore.error(ActorName, e, Ct));                
+                Raise(Flow.error(ActorName, e, Ct));                
             }
 
             Raise(status(ActorName, "Shell run complete", Ct));

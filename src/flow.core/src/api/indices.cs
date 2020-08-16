@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct WfCore
+    partial struct Flow
     {
         [MethodImpl(Inline)]        
         public static ClosedInterval<ulong> indices<D,S>(in ClosedInterval<ulong> positions, S min, S max)

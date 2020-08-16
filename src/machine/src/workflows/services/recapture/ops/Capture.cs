@@ -22,7 +22,7 @@ namespace Z0
             var resfile = z.insist(ResBytesCompiled);
             var captured = Capture(resfile, ResBytesUncompiled);                        
             var csvfile = ResIndexDir + FileName.Define("z0.res.bytes", FileExtensions.Csv);
-            SaveResIndex(captured, csvfile);
+            SaveIndex(captured, csvfile);
         }
                 
         public CapturedAccessor[] Capture(FilePath src, FolderPath dst)        
@@ -39,13 +39,11 @@ namespace Z0
                 ref readonly var index = ref skip(indices,i);            
                 var host = Flow.uri(index.DeclaringType);                
                 var path = dst + host.FileName(FileExtensions.Asm);
-                results.AddRange(CaptureAsm(host, index.Data, path));
+                results.AddRange(Capture(host, index.Data, path));
             }
             
             var data = results.Array();
-
             term.print(new CapturedResourceSets(nameof(Recapture), data, src, dst));
-
             return data;
         }        
     }

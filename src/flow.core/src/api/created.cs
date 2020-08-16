@@ -12,7 +12,7 @@ namespace Z0
 
     using F = Flairs;
 
-    partial struct WfCore
+    partial struct Flow
     {
         /// <summary>
         /// Defines a <see cref='WorkerCreated'/> event

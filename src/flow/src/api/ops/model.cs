@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         [MethodImpl(Inline)]
         public static DataModel<K> model<K>(string name, K kind)

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Checks;
+    using static CalcChecks;
     using static z;
     using static Konst;
 
@@ -94,14 +94,14 @@ namespace Z0
                 seek(mulRef, i) = skip(divCode,i);
 
             var z1 = CalcSlots.mul(x,y);
-            seek(dst, offset++) = (Checks.describe(K.mul(), x,y, z1));
+            seek(dst, offset++) = (CalcChecks.describe(K.mul(), x,y, z1));
 
             ref var divRef = ref div.Address.Ref<byte>();
             for(var i=0; i<size; i++)
                 seek(divRef, i) = skip(mulCode,i);
 
             var z2 = CalcSlots.div(x,y);
-            seek(dst, offset++) = Checks.describe(K.div(), x,y, z2);             
+            seek(dst, offset++) = CalcChecks.describe(K.div(), x,y, z2);             
         }
     }
 }

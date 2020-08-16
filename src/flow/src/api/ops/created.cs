@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Flairs;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         /// <summary>
         /// Defines a <see cref='WorkerCreated'/> event
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="name">The actor name</param>
         [MethodImpl(Inline), Op]
         public static WorkerCreated wfWorkerCreated(CorrelationToken ct, [CallerFilePath] string name = null)
-            => new WorkerCreated(WfCore.worker(name), ct);                        
+            => new WorkerCreated(Flow.worker(name), ct);                        
 
         /// <summary>
         /// Defines a <see cref='WorkerCreated'/> event
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
         public static void created(IWfContext wf, in WfActor actor, WfStepId step, CorrelationToken ct, MessageFlair flair = Created)
-            => wf.Raise(WfCore.created(actor,step,ct,flair));
+            => wf.Raise(Flow.created(actor,step,ct,flair));
             
         /// <summary>
         /// Raises a <see cref='WfStepCreated'/> event

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct WfCore
+    partial struct Flow
     { 
         [MethodImpl(Inline)]        
         public static ulong index<D,S>(in ClosedInterval<ulong> positions, in D id)
@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]        
-        public static ulong index<D,S>(in Selector<D,S> selector, ulong offset)
+        public static ulong index<D,S>(in TableSelector<D,S> selector, ulong offset)
             where D : unmanaged, Enum        
             where S : unmanaged    
                 => uint64(selector.Position) - offset;        

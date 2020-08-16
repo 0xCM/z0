@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Flow
+    partial struct OldFlow
     {
         /// <summary>
         /// Creates a T-parametric sink predicated on a <see cref='Receive{T}'/> process function

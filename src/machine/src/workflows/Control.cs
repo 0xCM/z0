@@ -33,7 +33,7 @@ namespace Z0
 
         readonly IWfContext Wf;
 
-        readonly WfState State;        
+        readonly WfCaptureState State;        
 
         readonly IAsmContext Asm;        
 
@@ -47,7 +47,7 @@ namespace Z0
             Ct = CorrelationToken.define(PartId.Machine);
             Context = wf.ContextRoot;
             Asm = WfBuilder.asm(Context);                           
-            State = new WfState(Wf, Asm, wf.Config, wf.Ct);
+            State = new WfCaptureState(Wf, Asm, wf.Config, wf.Ct);
             StepConfig = WorkflowStepConfig.load(Wf);
         }
             
@@ -68,7 +68,7 @@ namespace Z0
         void Run(CaptureClientStep kind, params string[] args)
         {
             // using var control = CaptureController.create(Context, Wf.Config, Ct);
-            using var control = CaptureController.create(State);
+            using var control = WfCaptureControl.create(State);
             control.Run();                        
         }
         

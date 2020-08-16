@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {        
         [MethodImpl(Inline), Op]
         public static WfEventLog log(IAppContext context, CorrelationToken ct)
@@ -18,7 +18,7 @@ namespace Z0
             return new WfEventLog(
                     context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".stdout2", FileExtensions.Csv), 
                     context.AppPaths.AppDataRoot + FileName.Define(context.AppName + ".errout2", FileExtensions.Csv), 
-                    WfCore.termsink(ct));
+                    Flow.termsink(ct));
         }        
     }
 }

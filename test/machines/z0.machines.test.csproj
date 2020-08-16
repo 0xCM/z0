@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Machine)" />
     <ProjectReference Include="$(MathSvc)" />
+    <ProjectReference Include="$(AsmRun)" />
 
   </ItemGroup>
 

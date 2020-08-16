@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Flow;
+    using static OldFlow;
     using static z;
 
     [Event]

@@ -12,20 +12,20 @@ namespace Z0
     using static Konst;
     using static ProcessFx;
 
-    using api = Flow;
+    using api = OldFlow;
 
     public readonly struct AsmTableSteps
     {
         public const string ActorName = nameof(AsmTableSteps);
         
-        public IWfState State {get;}        
+        public IWfCaptureState State {get;}        
                 
         readonly EncodedParts Encoded;
 
         public static implicit operator WfActor(AsmTableSteps src)
-            => WfCore.actor(ActorName);
+            => Flow.actor(ActorName);
 
-        public AsmTableSteps(IWfState state, in EncodedParts encoded)
+        public AsmTableSteps(IWfCaptureState state, in EncodedParts encoded)
         {
             State = state;
             Encoded = encoded;

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfCore    
+    partial struct Flow    
     {
         [Op, Closures(UnsignedInts)]
         public static WfProcessingFile<T> processing<T>(string actor, T kind, FilePath src, CorrelationToken ct)

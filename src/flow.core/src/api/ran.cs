@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     
-    partial struct WfCore
+    partial struct Flow
     {
         [Op, Closures(UnsignedInts)]
         public static void ran<T>(IWfContext wf, string worker, T body, CorrelationToken ct)

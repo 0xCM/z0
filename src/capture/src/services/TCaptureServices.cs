@@ -17,7 +17,7 @@ namespace Z0.Asm
         IAsmFunctionDecoder ICaptureServices.FunctionDecoder(in AsmFormatSpec? format)
             => new AsmFunctionDecoder(format ?? AsmFormatSpec.Default);
 
-        IImmEmissionWorkflow ImmEmissionWorkflow(IMultiSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, WfConfig config, CorrelationToken? ct = null)        
+        IImmEmitter ImmEmissionWorkflow(IMultiSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, WfConfig config, CorrelationToken? ct = null)        
             => new SpecializeImmediates(Context, sink, formatter, decoder, api, config.Target.ArchiveRoot, ct);
     }
 }

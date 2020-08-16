@@ -9,9 +9,14 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(WfCore)" />
+    <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(Evaluate)" />
+    <ProjectReference Include="$(Vectors)" />
+    <ProjectReference Include="$(BitFields)" />
+    <ProjectReference Include="$(VCheck)" />
 
   </ItemGroup>
   

@@ -16,7 +16,7 @@ namespace Z0
     
     public class RunProcessors : IMachine
     {
-        public static RunProcessors create(WfState wf, CorrelationToken ct)
+        public static RunProcessors create(WfCaptureState wf, CorrelationToken ct)
         {
             wf.Initializing(StepName, ct);
             var step = default(RunProcessors);
@@ -36,7 +36,7 @@ namespace Z0
             return step;        
         }
 
-        readonly WfState State;
+        readonly WfCaptureState State;
 
         readonly CorrelationToken Ct;
 
@@ -46,7 +46,7 @@ namespace Z0
 
         public EncodedParts Index;
         
-        RunProcessors(WfState wf, CorrelationToken ct)
+        RunProcessors(WfCaptureState wf, CorrelationToken ct)
         {
             State = wf;
             Ct = ct;

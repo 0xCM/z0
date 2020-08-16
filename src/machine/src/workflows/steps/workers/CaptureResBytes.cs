@@ -30,7 +30,7 @@ namespace Z0
             var resfile = z.insist(Workflow.ResBytesCompiled);
             var captured = Workflow.Capture(resfile, Workflow.ResBytesUncompiled);                        
             var csvfile = Workflow.ResIndexDir + FileName.Define("z0.res.bytes", FileExtensions.Csv);
-            Workflow.SaveResIndex(captured, csvfile);
+            Workflow.SaveIndex(captured, csvfile);
         }
     }
 }

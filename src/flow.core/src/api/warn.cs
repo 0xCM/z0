@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfCore    
+    partial struct Flow    
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static WfWarn<T> warn<T>(string worker, T body, CorrelationToken ct)

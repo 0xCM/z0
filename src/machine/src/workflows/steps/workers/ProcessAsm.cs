@@ -48,7 +48,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProcessAsm(IWfState state, in EncodedParts encoded)
+        public ProcessAsm(IWfCaptureState state, in EncodedParts encoded)
         {
             Wf = state.Wf;
             Asm = state.Asm;

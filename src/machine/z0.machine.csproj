@@ -6,12 +6,14 @@
     <AssemblyName>machine</AssemblyName>
   </PropertyGroup>
 
-
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(MetaReader)" />
+    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(Asm)" />
 
+    <ProjectReference Include="$(MetaReader)" />
+    <ProjectReference Include="$(BitFields)" />
   </ItemGroup>
   
   <ItemGroup>

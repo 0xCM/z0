@@ -13,7 +13,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         [Op]
         public static void error(IWfContext wf, Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
@@ -23,7 +23,7 @@ namespace Z0
             var where = text.format(CallerPattern, caller, line, file);
             var what = e.ToString();
             var msg = text.format(Pattern, where, what);
-            wf.Raise(WfCore.error(caller, msg, ct));
+            wf.Raise(Flow.error(caller, msg, ct));
         }             
 
         [Op, Closures(UnsignedInts)]

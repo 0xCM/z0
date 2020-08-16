@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     
     using static Konst;
-    using static WfCore;
+    using static Flow;
     using static z;
 
     class App : AppShell<App,IAppContext>
@@ -24,7 +24,7 @@ namespace Z0
         public IWfContext Wf {get; private set;}
         
         public App()
-            : base(WfCore.app())
+            : base(Flow.app())
         {
             Ct = CorrelationToken.define(Part);   
             Raise(status(ActorName, "Application created", Ct));        
@@ -36,12 +36,12 @@ namespace Z0
         
             try
             {
-                var config = WfCore.configure(Context, args, Ct);            
-                Wf = WfCore.context(Context, config, Ct);                
+                var config = Flow.configure(Context, args, Ct);            
+                Wf = Flow.context(Context, config, Ct);                
             }
             catch(Exception e)
             {
-                Raise(WfCore.error(ActorName, e, Ct));                
+                Raise(Flow.error(ActorName, e, Ct));                
             }
 
             Raise(status(ActorName, "Shell run complete", Ct));

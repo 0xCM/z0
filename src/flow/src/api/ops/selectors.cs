@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         /// <summary>
         /// Creates a stock application context
@@ -21,9 +21,9 @@ namespace Z0
                 Polyrand.Pcg64(PolySeed64.Seed05));                   
 
         [MethodImpl(Inline)]
-        public static Selectors<D,S> selectors<D,S>(Selector<D,S>[] src, S min, S max)
+        public static TableSectors<D,S> selectors<D,S>(TableSelector<D,S>[] src, S min, S max)
             where D : unmanaged, Enum        
             where S : unmanaged
-                => new Selectors<D,S>(src,min,max);
+                => new TableSectors<D,S>(src,min,max);
     }
 }

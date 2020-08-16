@@ -6,14 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Extract)" />
-    <ProjectReference Include="$(Identity)" />  
-    <ProjectReference Include="$(Cil)" />    
-    <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(Identity)" />  
     <ProjectReference Include="$(WfCore)" />
+    <ProjectReference Include="$(Cil)" />    
+    <ProjectReference Include="$(AsmModels)" />
+    <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(Evaluate)" />
+    <ProjectReference Include="$(Extract)" />
   </ItemGroup>
 
   <ItemGroup>

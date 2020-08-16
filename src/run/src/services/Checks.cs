@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    readonly struct Checks
+    readonly struct CalcChecks
     {
         public static string apply<K,T>(K k, T x, T y)
             where K : IOpKind

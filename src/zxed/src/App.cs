@@ -8,29 +8,15 @@ namespace Z0
     
     using static Konst;
     using static z;
- 
-    using P = Z0.Parts;
-    
-
-    using static Flow;    
-    
+     
     class App : AppShell<App,IAppContext>
     {                
         public readonly PartId Part = PartId.ZXed;
-
-        static IAppContext CreateAppContext()
-        {
-            var resolved = ApiComposition.Assemble(array(P.GMath.Resolved));
-            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
-            var settings = AppSettings.Load(AppPaths.AppConfigPath);
-            var exchange = AppMsgExchange.Create();
-            return AppContext.create(resolved, random, settings, exchange);
-        }
         
         public CorrelationToken Ct {get;}
         
         public App()
-            : base(CreateAppContext())
+            : base(Flow.app())
         {
             Ct = CorrelationToken.define(Part);
         }
@@ -46,8 +32,8 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {            
-            var sink = WfCore.termsink(Ct);
-            var s = settings(Context, Ct);
+            var sink = Flow.termsink(Ct);
+            var s = Flow.settings(Context, Ct);
             var config = new XedEtlConfig(Context, s);
             using var context = Flow.context(Context, Flow.configure(Context, args, Ct),  Ct);
             using var wf = new XedEtl(context, config);

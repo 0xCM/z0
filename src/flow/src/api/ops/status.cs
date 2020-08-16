@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static WfStatus<T> status<T>(string actor, T body, CorrelationToken ct)
@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void status<T>(IWfContext wf, in WfActor actor, T body, CorrelationToken ct)
-            => wf.Raise(WfCore.status(actor, body, ct));
+            => wf.Raise(Flow.status(actor, body, ct));
 
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     using static z;
 
     [ApiHost("api")]
-    public readonly partial struct Flow
+    public readonly partial struct OldFlow
     {                            
         public static string AppName 
         {

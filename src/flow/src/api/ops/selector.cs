@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct OldFlow    
     {
         [MethodImpl(Inline)]
-        public static Selector<D,S> selector<D,S>(D id, S s = default)
+        public static TableSelector<D,S> selector<D,S>(D id, S s = default)
             where D : unmanaged, Enum        
             where S : unmanaged
-                => new Selector<D,S>(id);
+                => new TableSelector<D,S>(id);
     }
 }

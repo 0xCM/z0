@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfCore
+    partial struct Flow
     {
         [Op]
         public static WfConfig configure(IAppContext context, string[] args, CorrelationToken ct)
         {
             var parts = PartIdParser.parse(args, context.PartIdentities);
-            var settings = WfCore.settings(context, ct);
+            var settings = Flow.settings(context, ct);
             var src = new ArchiveConfig(FilePath.Define(context.GetType().Assembly.Location).FolderPath);            
             var dst = new ArchiveConfig(context.AppPaths.AppCaptureRoot);
             return new WfConfig(args, src, dst, parts, context.AppPaths.ResourceRoot, context.AppPaths.AppDataRoot, settings);
@@ -25,7 +25,7 @@ namespace Z0
         public static WfConfig configure(IAppContext context, string[] args, FolderPath target, CorrelationToken ct)
         {
             var parts = PartIdParser.parse(args, context.PartIdentities);
-            var settings = WfCore.settings(context, ct);
+            var settings = Flow.settings(context, ct);
             var src = new ArchiveConfig(FilePath.Define(context.GetType().Assembly.Location).FolderPath);            
             var dst = new ArchiveConfig(target);
             return new WfConfig(args, src, dst, parts, context.AppPaths.ResourceRoot, context.AppPaths.AppDataRoot, settings);

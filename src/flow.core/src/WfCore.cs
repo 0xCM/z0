@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly partial struct WfCore
+    public readonly partial struct Flow
     {
         /// <summary>
         /// Identifies a step predicated on a specified type name and kind

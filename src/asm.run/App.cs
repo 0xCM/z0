@@ -36,7 +36,7 @@ namespace Z0
             : base(CreateAppContext())
         {
             Ct = CorrelationToken.define(Part);   
-            Raise(WfCore.status(ActorName, "Application created", Ct));  
+            Raise(Flow.status(ActorName, "Application created", Ct));  
         }
 
         IResolvedApi Api 
@@ -64,7 +64,7 @@ namespace Z0
 
         void Status<T>(T content)
         {
-            Raise(WfCore.status(ActorName, content, Ct));
+            Raise(Flow.status(ActorName, content, Ct));
         }
 
         public void LoadOpCodes()
