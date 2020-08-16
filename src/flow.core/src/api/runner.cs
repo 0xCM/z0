@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct OldFlow    
+    partial struct Flow    
     {
         [MethodImpl(Inline)]
         public static WfRunner<A> runner<A>(IWfContext wf, Action<A> handler, A? args = null)

@@ -52,13 +52,11 @@ namespace Z0
             get => ExtensionData;
         }
 
-
         public xed_cat[] Categories
         {
             [Op]
             get => CategoryData;
         }
-
 
        static xed_ext[] ExtensionData => new xed_ext[]{
             xed_ext.XED_EXTENSION_BASE,             

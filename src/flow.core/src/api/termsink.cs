@@ -12,7 +12,7 @@ namespace Z0
     partial struct Flow
     {
         [MethodImpl(Inline), Op]
-        public static WfTermEventSink termsink(CorrelationToken ct)
-            => WfTermEventSink.create(ct);       
+        public static WfTermEventSink termsink(IWfEventLog log, CorrelationToken ct)
+            => WfTermEventSink.create(log, ct);       
     }
 }

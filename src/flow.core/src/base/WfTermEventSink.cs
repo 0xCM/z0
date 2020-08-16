@@ -14,21 +14,25 @@ namespace Z0
     /// </summary>
     public readonly struct WfTermEventSink : IWfEventSink<WfTermEventSink>, IMultiSink
     {
-        public static WfTermEventSink create(CorrelationToken ct)
-            => new WfTermEventSink(ct);
+        public static WfTermEventSink create(IWfEventLog log, CorrelationToken ct)
+            => new WfTermEventSink(log, ct);
 
         readonly CorrelationToken Ct;    
         
-        public WfTermEventSink(CorrelationToken ct)
+        readonly IWfEventLog Log;
+        
+        internal WfTermEventSink(IWfEventLog log, CorrelationToken ct)
         {
             Ct = ct;
+            Log = log;
         }
-        
+                
         [MethodImpl(Inline)]
         public ref readonly E Deposit<E>(in E e)
             where E : IWfEvent
         {
             term.print(e.Format(), e.Flair);            
+            Log.Deposit(e);            
             return ref e;
         }
 
@@ -36,15 +40,19 @@ namespace Z0
         public void Deposit(IWfEvent e)
         {
             term.print(e.Format(), e.Flair);
+            Log.Deposit(e);            
         }
 
         public void Deposit(IAppMsg e)
         {
             term.print(e);
         }
+        
         public void Deposit(IAppEvent e)
         {
             term.print(e);
+            Log.Deposit(e);            
+
         }
 
         public void Deposit(string message, MessageFlair? color = null)
@@ -54,7 +62,7 @@ namespace Z0
 
         public void Dispose()
         {
-            term.print(new WfStepRan<string>(nameof(WfTermEventSink), "Bye byte byte", Ct));
+            term.print(new WfStepRan<string>(nameof(WfTermEventSink), "Bye bye byte", Ct));                 
         }
     }
 }

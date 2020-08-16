@@ -20,13 +20,15 @@ namespace Z0
         
         public IWfContext Wf {get;}
         
+        readonly IWfEventLog Log;
+        
         [MethodImpl(Inline)]
-        public CaptureWorkflow(IAsmContext asm, IWfContext wf, 
-            IAsmRoutineDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, IPartCaptureArchive archive, CorrelationToken ct)
+        public CaptureWorkflow(IAsmContext asm, IWfContext wf, IAsmRoutineDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, IPartCaptureArchive archive, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;
-            Broker = WfBuilder.capture(asm.AppPaths.AppCaptureRoot + FileName.Define("workflow", FileExtensions.Csv), Ct);
+            Log = Flow.log(wf.Config);
+            Broker = WfBuilder.capture(Log, Ct);
             Context = new CaptureContext(asm, decoder, formatter, writerfactory, Broker, archive, Ct);
             Wf.Created(nameof(CaptureWorkflow), Ct);
         }
@@ -35,6 +37,7 @@ namespace Z0
         {                            
             Wf.Finished(nameof(CaptureWorkflow), Ct);
             Broker.Dispose();
+            Log.Dispose();
         }
     }
 }

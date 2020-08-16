@@ -9,7 +9,6 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static OldFlow;
     using static RenderPatterns;
 
     [Event]
@@ -29,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public IndexedEncoded(string worker, EncodedParts index, CorrelationToken ct)
         {
-            EventId = evid(EventName, ct);
+            EventId = z.evid(EventName, ct);
             Index = index;
             ActorName = worker;
         }

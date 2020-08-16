@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    partial struct OldFlow    
+    public interface IWfEventLog :  IDataSink<WfTermEvent>, ISink<IAppEvent>, ISink<IAppMsg>, IDisposable
     {
-        [Op, Closures(UnsignedInts)]
-        public static void processing<T>(IWfContext wf, string actor, T kind, FilePath src, CorrelationToken ct)
-            => wf.Raise(Flow.processing(actor,kind,src,ct));
+        
     }
 }

@@ -22,7 +22,7 @@ namespace Z0.Asm
         NO = b0001,
 
         /// <summary>
-        /// Below, not above or equl
+        /// Below, not above or equal
         /// </summary>
         B = b0010,
 

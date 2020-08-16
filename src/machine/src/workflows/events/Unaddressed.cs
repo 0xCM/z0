@@ -8,13 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static OldFlow;
+    using static RenderPatterns;
     
     [Event]
     public readonly struct Unaddressed : IWfEvent<Unaddressed>
-    {        
-        const string Pattern = IdMarker + "The location for {1} code is unknown";
-        
+    {                
         public WfEventId EventId {get;}
 
         public readonly OpUri Uri;
@@ -33,6 +31,6 @@ namespace Z0
             => MessageFlair.Red;
                 
         public string Format()
-            => text.format(Pattern, EventId, Uri);
+            => text.format(PSx2, EventId, Uri);
     }        
 }

@@ -30,23 +30,26 @@ namespace Z0
         public FolderPath IndexRoot {get;}
         
         public FolderPath ResourceRoot {get;}
-        
+                
         public IPart[] Known {get;}
         
         readonly WfActor Actor;
+
+        readonly IWfEventLog Log;
 
         [MethodImpl(Inline)]
         public WfContext(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink, [Caller] string caller = null)
         {
             Ct = ct;
-            ContextRoot = root;
             Config = config;
-            WfSink = sink;
+            ContextRoot = root;
+            Log = Flow.log(config);
+            Broker = new WfBroker(Log, Ct);
+            WfSink = sink;            
             Actor = Flow.actor(caller);
             ResourceRoot = ContextRoot.AppPaths.ResourceRoot;
             IndexRoot =  ResourceRoot + FolderName.Define("index");
             Known = ContextRoot.Parts;            
-            Broker = new WfBroker(Ct);
             ((WfBroker)Broker).WithContext(this);
             WfSink.Deposit(new WfContextLoaded(Actor, Ct));
         }
@@ -54,8 +57,8 @@ namespace Z0
         public void Dispose()
         {
             WfSink.Deposit(new WfContextUnloaded(Actor, Ct));
-            WfSink.Dispose();
             Broker.Dispose();
+            Log.Dispose();
         }
                 
         public IAppPaths AppPaths

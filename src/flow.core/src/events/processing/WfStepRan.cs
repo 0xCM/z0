@@ -20,9 +20,9 @@ namespace Z0
 
         public WfEventId EventId {get;}
                         
-        public WfStepId StepId {get;}
-
         public WfActor Actor {get;}        
+
+        public WfStepId StepId {get;}
 
         public MessageFlair Flair {get;}
         

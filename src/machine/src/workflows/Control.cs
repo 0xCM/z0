@@ -19,14 +19,22 @@ namespace Z0
     {        
         public static void run(IAppContext context, params string[] args)
         {
-            var ct = CorrelationToken.define(PartId.Machine);
-            var paths = context.AppPaths;
-            var config = Flow.configure(context, args, paths.ResourceRoot + FolderName.Define("capture"), ct);
-            using var wf = Flow.context(context, config, ct);
-            wf.RunningT(ActorName, Flow.delimit(config.Parts), ct);
-            using var control = new Control(wf);
-            control.Run();
-            wf.Ran(ActorName, ct);
+            try
+            {
+                var ct = CorrelationToken.define(PartId.Machine);
+                var paths = context.AppPaths;
+                var config = Flow.configure(context, args, paths.ResourceRoot + FolderName.Define("capture"), ct);
+                using var log = Flow.log(config);
+                using var wf = Flow.context(context, config, log, ct);
+                wf.RunningT(ActorName, Flow.delimit(config.Parts), ct);            
+                using var control = new Control(wf);
+                control.Run();
+                wf.Ran(ActorName, ct);            
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
         }
 
         readonly IAppContext Context;
@@ -53,7 +61,6 @@ namespace Z0
             
         public void Run()
         {
-            Wf.Running(ActorName, Ct);
             Run(default(CaptureClientStep));
             Run(default(EmitDatasetsStep));
             Run(default(ProcessPartFilesStep));
@@ -62,12 +69,11 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(ActorName, Ct);
+            
         }
 
         void Run(CaptureClientStep kind, params string[] args)
         {
-            // using var control = CaptureController.create(Context, Wf.Config, Ct);
             using var control = WfCaptureControl.create(State);
             control.Run();                        
         }

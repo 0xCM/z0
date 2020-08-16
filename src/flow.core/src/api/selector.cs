@@ -7,15 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Data;
-
     using static Konst;
 
-    partial struct OldFlow    
+    partial struct Flow    
     {
         [MethodImpl(Inline)]
-        public static DataModel<K> model<K>(string name, K kind)
-            where K : unmanaged, Enum
-                => new DataModel<K>(name, kind);
+        public static TableSelector<D,S> selector<D,S>(D id, S s = default)
+            where D : unmanaged, Enum        
+            where S : unmanaged
+                => new TableSelector<D,S>(id);
     }
 }

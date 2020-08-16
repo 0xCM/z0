@@ -14,7 +14,7 @@ namespace Z0
     partial struct WfBuilder
     {
         [MethodImpl(Inline), Op]
-        public static IWfCaptureBroker capture(FilePath target, CorrelationToken ct)
-            => new WfCaptureBroker(ct); 
+        public static IWfCaptureBroker capture(IWfEventLog log, CorrelationToken ct)
+            => new WfCaptureBroker(log, ct); 
     }
 }

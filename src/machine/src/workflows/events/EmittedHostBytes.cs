@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static OldFlow;
     using static RenderPatterns;
 
     [Event]
@@ -27,12 +26,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittedHostBytes(string worker, ApiHostUri host, ushort count, CorrelationToken ct)
         {
-            EventId = evid(nameof(EmittedHostBytes), ct);
+            EventId = z.evid(nameof(EmittedHostBytes), ct);
             Host= host;
             ActorName = worker;
             AccessorCount = count;
-        }                
-        
+        }                       
         public string Format()
             => text.format(PSx4, EventId, ActorName, Host.Format(), AccessorCount);        
     }

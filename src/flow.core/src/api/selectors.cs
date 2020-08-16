@@ -9,10 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    partial struct OldFlow    
+    partial struct Flow    
     {
-        [MethodImpl(Inline), Op]
-        public static WfEventId evid(string name, CorrelationToken ct)
-            => new WfEventId(name, ct, z.now());       
+        [MethodImpl(Inline)]
+        public static TableSectors<D,S> selectors<D,S>(TableSelector<D,S>[] src, S min, S max)
+            where D : unmanaged, Enum        
+            where S : unmanaged
+                => new TableSectors<D,S>(src,min,max);
     }
 }

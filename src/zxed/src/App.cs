@@ -32,11 +32,11 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {            
-            var sink = Flow.termsink(Ct);
             var s = Flow.settings(Context, Ct);
-            var config = new XedEtlConfig(Context, s);
-            using var context = Flow.context(Context, Flow.configure(Context, args, Ct),  Ct);
-            using var wf = new XedEtl(context, config);
+            var config = Flow.configure(Context, args, Ct);
+            using var log = Flow.log(config);
+            using var context = Flow.context(Context, config, log, Ct);
+            using var wf = new XedEtl(context, new XedEtlConfig(Context, s));
             wf.Run();                                        
         }
 

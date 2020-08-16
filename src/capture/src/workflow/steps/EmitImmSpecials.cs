@@ -36,10 +36,13 @@ namespace Z0
 
         readonly IImmSpecializer Specializer;
 
-        internal EmitImmSpecials(IAsmContext context, IMultiSink sink, IAsmFormatter formatter, IAsmRoutineDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
+        readonly IWfEventLog Log;
+        
+        internal EmitImmSpecials(IAsmContext context, WfConfig config, IMultiSink sink, IAsmFormatter formatter, IAsmRoutineDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
         {
             Ct = ct ?? CorrelationToken.create();
-            Broker = WfBuilder.imm(context.AppPaths.AppStandardOutPath, Ct);
+            Log = Flow.log(config);
+            Broker = WfBuilder.imm(Log, Ct);
             Context = context;
             Sink = sink;
             Formatter = formatter;
@@ -54,6 +57,7 @@ namespace Z0
         public void Dispose()
         {
             Broker.Dispose();
+            Log.Dispose();
         }
         
         bool Append = true;

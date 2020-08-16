@@ -35,7 +35,7 @@ namespace Z0
             Ct = state.Ct;
             Paths = ContextRoot.AppPaths;
             Asm = WfBuilder.asm(ContextRoot);                           
-            Wf = Flow.context(ContextRoot, state.Config, Ct);    
+            Wf = state.Wf;
             State.Created(ActorName, Ct);
         }
 

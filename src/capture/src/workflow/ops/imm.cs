@@ -14,7 +14,7 @@ namespace Z0
     partial struct WfBuilder
     {
         [MethodImpl(Inline), Op]
-        public static WfImmBroker imm(FilePath target, CorrelationToken ct)
-            => new WfImmBroker(ct);                                                     
+        public static WfImmBroker imm(IWfEventLog log, CorrelationToken ct)
+            => new WfImmBroker(log, ct);                                                     
     }
 }

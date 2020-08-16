@@ -25,21 +25,15 @@ namespace Z0
         IWfContext Wf;
 
         [MethodImpl(Inline)]
-        public WfBroker(CorrelationToken ct)
+        public WfBroker(IWfEventLog log, CorrelationToken ct)        
         {
             Ct = ct;
-            Sink = WfTermEventSink.create(Ct);
+            Sink = Flow.termsink(log, Ct);
             Subscriptions = new Dictionary<Type,ISink>();
             Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
             locker = new object();                             
         }
 
-        public WfBroker(IWfContext wf, CorrelationToken ct)
-            : this(ct)
-        {
-            Wf = wf;
-        }
-        
         [MethodImpl(Inline)]
         public IWfBroker WithContext(IWfContext wf)
         {

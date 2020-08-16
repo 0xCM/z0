@@ -12,7 +12,6 @@ namespace Z0
     using Z0.Asm;
     using Z0.Asm.Dsl;
     
-
     partial struct AsmFx
     {        
         /// <summary>

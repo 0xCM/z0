@@ -9922,3 +9922,253 @@
  delete mode 100644 src/machine/src/workflows/services/recapture/ops/CreateFunction.cs
  rename src/machine/src/workflows/services/recapture/ops/{WriteAsm.cs => Save.cs} (89%)
  rename src/machine/src/workflows/services/recapture/ops/{SaveResIndex.cs => SaveIndex.cs} (90%)
+[master d24d9f943] .
+ 371 files changed, 1895 insertions(+), 2168 deletions(-)
+ delete mode 100644 src/asm.models/asm/AsmOperands.cs
+ rewrite src/asm.models/asm/capture/contracts/IImmSpecializer.cs (68%)
+ delete mode 100644 src/asm.models/asm/capture/contracts/IMemoryCapture.cs
+ delete mode 100644 src/asm.models/asm/capture/contracts/IUriHexDecoder.cs
+ create mode 100644 src/asm.models/asm/flow/AsmFlows.cs
+ create mode 100644 src/asm.models/asm/flow/ops/encoded.cs
+ rename src/asm.models/asm/{literals => formatting}/AsmAspectLabels.cs (99%)
+ rename src/asm.models/asm/{literals => formatting}/AsmTypeLabels.cs (100%)
+ delete mode 100644 src/asm.models/asm/literals/AsmErrors.cs
+ rename src/asm.models/asm/models/analytical/{CallInfo.cs => AsmCallInfo.cs} (82%)
+ rename src/asm.models/asm/models/analytical/{ProcessFx.cs => AsmFxHandler.cs} (67%)
+ rename src/asm.models/asm/models/{processing/IAsmInstructionSource.cs => analytical/AsmFxTest.cs} (63%)
+ rename src/asm.models/asm/models/instructions/{AsmInstructionCode.cs => AsmFxCode.cs} (87%)
+ rename src/asm.models/asm/models/instructions/{AsmInstructionCodeData.cs => AsmFxCodeData.cs} (79%)
+ rename src/asm.models/asm/models/{capture/InstructionFilter.cs => instructions/AsmFxFilter.cs} (74%)
+ rename src/asm.models/asm/models/instructions/{AsmInstructionList.cs => AsmFxList.cs} (71%)
+ rename src/asm.models/asm/models/instructions/{AsmFunction.cs => AsmRoutine.cs} (73%)
+ rename src/asm.models/asm/models/instructions/{AsmFunctionCode.cs => AsmRoutineCode.cs} (72%)
+ rename src/asm.models/asm/models/instructions/{AsmFunctionData.cs => AsmRoutineData.cs} (96%)
+ rename src/asm.models/asm/models/instructions/{AsmFunctionGroup.cs => AsmRoutineGroup.cs} (77%)
+ rename src/asm.models/asm/models/instructions/{AsmFunctionHeader.cs => AsmRoutineHeader.cs} (82%)
+ rename src/asm.models/asm/models/{base/AsmFunctions.cs => instructions/AsmRoutines.cs} (63%)
+ rename src/asm.models/asm/models/instructions/{AsmInstructionBlock.cs => AsnFxBlock.cs} (69%)
+ rename src/asm.models/asm/models/instructions/{EncodedAsmFunction.cs => EncodedAsmRoutine.cs} (67%)
+ rename src/asm.models/asm/models/instructions/{EncodedFunction.cs => EncodedRoutine.cs} (66%)
+ delete mode 100644 src/asm.models/asm/models/processing/IAsmFunctionBuilder.cs
+ delete mode 100644 src/asm.models/asm/models/processing/IAsmTrigger.cs
+ delete mode 100644 src/asm.models/asm/models/processing/IAsmTriggerSet.cs
+ rename src/asm.models/asm/models/processing/{ => contracts}/IAsmFunctionWriter.cs (55%)
+ create mode 100644 src/asm.models/asm/models/processing/contracts/IAsmFxTrigger.cs
+ create mode 100644 src/asm.models/asm/models/processing/contracts/IAsmFxTriggerSet.cs
+ rename src/asm.models/asm/models/processing/{IAsmFunctionDecoder.cs => contracts/IAsmRoutineDecoder.cs} (64%)
+ rename src/asm.models/asm/models/processing/{IAsmFunctionTrigger.cs => contracts/IAsmRoutineTrigger.cs} (68%)
+ rename src/asm.models/asm/models/processing/{IHostArchiver.cs => contracts/IHostAsmArchiver.cs} (84%)
+ rename src/asm.models/asm/models/processing/{ => contracts}/IInstructionSink.cs (100%)
+ rename src/asm.models/asm/models/processing/{ => services}/AsmCallSink.cs (74%)
+ rename src/asm.models/asm/models/processing/{InstructionCollector.cs => services/AsmFxCollector.cs} (73%)
+ rename src/asm.models/asm/models/processing/{AsmInstructionFlow.cs => services/AsmFxFlow.cs} (50%)
+ rename src/asm.models/asm/models/processing/{InstructionSink.cs => services/AsmFxSink.cs} (78%)
+ rename src/asm.models/asm/models/processing/{ => services}/AsmMnemonicTrigger.cs (69%)
+ rename src/asm.models/asm/models/processing/{MovHandler.cs => services/AsmMovHandler.cs} (94%)
+ rename src/asm.models/asm/models/{capture/HostArchiver.cs => processing/services/HostAsmArchiver.cs} (86%)
+ create mode 100644 src/asm.models/asm/ops/block.cs
+ create mode 100644 src/asm.models/asm/ops/collector.cs
+ create mode 100644 src/asm.models/asm/ops/encoded.cs
+ create mode 100644 src/asm.models/asm/ops/flow.cs
+ create mode 100644 src/asm.models/asm/ops/list.cs
+ create mode 100644 src/asm.models/asm/ops/operand.cs
+ create mode 100644 src/asm.models/asm/ops/pipe.cs
+ rename src/asm.models/asm/{AsmFunctionBuilder.cs => ops/routine.cs} (53%)
+ rename src/asm.models/asm/ops/{func.cs => set.cs} (54%)
+ rename src/asm.models/asm/ops/{_operand.cs => trigger.cs} (71%)
+ rename src/asm.run/src/{InstructionHandlers.cs => AsmFxHandlers.cs} (73%)
+ rename src/{asm.models/asm/models/operands/AsmArgs.cs => asm.run/src/AsmRunner.cs} (80%)
+ create mode 100644 src/asm.run/src/ops/pipe.cs
+ rename src/capture/src/services/{AsmFunctionDecoder.cs => AsmRoutineDecoder.cs} (70%)
+ rename src/capture/src/workflow/{WfStepIndex.cs => CaptureSteps.cs} (94%)
+ rename src/capture/src/workflow/steps/{SpecializeImmediates.cs => EmitImmSpecials.cs} (94%)
+ rename src/data/{tables/asm/bitfields/AsmT.OperandOffset.csv => notes/AsmT.OperandOffset.md} (66%)
+ rename src/data/{tables/asm/bitfields/AsmTEFlagsCExpr.csv => notes/AsmTEFlagsCExpr.md} (100%)
+ rename src/data/{tables/asm/bitfields/AsmTEFlagsCState.csv => notes/AsmTEFlagsCState.md} (100%)
+ rename src/data/{tables/asm/bitfields/AsmTEffOpSize.csv => notes/AsmTEffOpSize.md} (100%)
+ rename src/data/{tables/asm/bitfields/AsmTSegRegSelection.csv => notes/AsmTSegRegSelection.md} (100%)
+ rename src/data/notes/{Encoding.Notes.csv => Encoding.Notes.md} (98%)
+ rename src/data/notes/{Syntax.OTC.Eflags.csv => Syntax.OTC.Eflags.md} (100%)
+ rename src/data/notes/{Syntax.OpCodeTables.csv => Syntax.OpCodeTables.md} (100%)
+ delete mode 100644 src/data/notes/TLS.csv
+ delete mode 100644 src/data/notes/adc.csv
+ create mode 100644 src/data/notes/adc.md
+ rename src/data/notes/{adcx.csv => adcx.md} (61%)
+ delete mode 100644 src/data/notes/and.csv
+ create mode 100644 src/data/notes/and.md
+ rename src/data/notes/{call.csv => call.md} (81%)
+ delete mode 100644 src/data/notes/cmp.csv
+ create mode 100644 src/data/notes/cmp.md
+ delete mode 100644 src/data/notes/jcc.csv
+ create mode 100644 src/data/notes/jcc.md
+ rename src/data/notes/{jmp.csv => jmp.md} (55%)
+ delete mode 100644 src/data/notes/lea.csv
+ delete mode 100644 src/data/notes/mov.csv
+ create mode 100644 src/data/notes/mov.md
+ delete mode 100644 src/data/notes/movsq.csv
+ delete mode 100644 src/data/notes/movsx.csv
+ delete mode 100644 src/data/notes/movzx.csv
+ create mode 100644 src/data/notes/movzx.md
+ delete mode 100644 src/data/notes/or.csv
+ delete mode 100644 src/data/notes/pmovzx.csv
+ create mode 100644 src/data/notes/pmovzx.md
+ rename src/data/notes/{popf.csv => popf.md} (94%)
+ rename src/data/notes/{pushf.csv => pushf.md} (82%)
+ delete mode 100644 src/data/notes/setcc.csv
+ delete mode 100644 src/data/notes/sub.csv
+ create mode 100644 src/data/notes/sub.md
+ delete mode 100644 src/data/notes/test.csv
+ create mode 100644 src/data/notes/test.md
+ delete mode 100644 src/data/notes/xor.csv
+ rename src/data/tables/{clr/corelib/DateTime.Format.csv => api/Core_API_DateTime_Format.csv} (100%)
+ rename src/data/tables/{clr/corelib/CoreApi.v31.csv => api/Core_API_Namespaces.csv} (100%)
+ rename src/data/tables/{clr/corelib/System.Classes.csv => api/Core_API_System.Classes.csv} (100%)
+ rename src/data/tables/{clr/corelib/System.Delegates.csv => api/Core_API_System.Delegates.csv} (100%)
+ rename src/data/tables/{clr/corelib/System.Enums.csv => api/Core_API_System.Enums.csv} (100%)
+ rename src/data/tables/{clr/corelib/System.Interfaces.csv => api/Core_API_System.Interfaces.csv} (100%)
+ rename src/data/tables/{clr/corelib/System.Structs.csv => api/Core_API_System.Structs.csv} (100%)
+ rename src/data/tables/{c/MsvcIntrinsicsx64.csv => api/Msvc_API_x64Intrinsics.csv} (100%)
+ rename src/data/tables/{c/MsvcIntrinsicsx32.csv => api/Msvc_API_x86Intrinsics.csv} (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/A.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/B.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/C.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/D.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/E.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/F.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/H.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/I.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/K.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/L.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/M.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/O.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/P.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/R.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/S.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/T.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/U.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/V.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/W.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/X.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/_AMX.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/_AVX-512-KNC.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/_AVX-512.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/_AVX.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/_AVX2.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/_Other.md (100%)
+ rename src/data/tables/asm/algorithms/{ => descriptions}/_SVML.md (100%)
+ rename src/data/tables/asm/{ => algorithms}/syntax/algorithms.expressions.csv (100%)
+ rename src/data/tables/asm/{ => algorithms}/syntax/algorithms.functions.csv (100%)
+ rename src/data/tables/{c => env}/MsvcHeaders.csv (100%)
+ rename src/data/tables/{asm/syntax => types/asm}/algorithms.identifiers.csv (100%)
+ rename src/data/tables/{ => types}/asm/identifiers/col_encoding.csv (100%)
+ rename src/data/tables/{ => types}/asm/identifiers/col_instructions.csv (100%)
+ rename src/data/tables/{ => types}/asm/identifiers/col_instructions_novex.csv (100%)
+ rename src/data/tables/{ => types}/asm/identifiers/col_legacymode.csv (100%)
+ rename src/data/tables/{ => types}/asm/identifiers/col_legacyprefix.csv (100%)
+ rename src/data/tables/{ => types}/asm/identifiers/col_mode64.csv (100%)
+ rename src/data/tables/{ => types}/asm/identifiers/eflagcc.csv (100%)
+ rename src/data/tables/{ => types}/asm/identifiers/vex.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/adc.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/adcx.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/and.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/call.csv (100%)
+ create mode 100644 src/data/tables/types/asm/instructions/call.enc.csv
+ rename src/data/tables/{ => types}/asm/instructions/cmp.csv (100%)
+ create mode 100644 src/data/tables/types/asm/instructions/cmp.enc.csv
+ rename src/data/tables/{ => types}/asm/instructions/jcc.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/jmp.csv (100%)
+ create mode 100644 src/data/tables/types/asm/instructions/jmp.enc.csv
+ rename src/data/tables/{ => types}/asm/instructions/lea.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/mov.csv (100%)
+ create mode 100644 src/data/tables/types/asm/instructions/mov.enc.csv
+ rename src/data/tables/{ => types}/asm/instructions/movsq.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/movsx.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/movzx.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/or.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/pmovzx.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/popf.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/pushf.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/setcc.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/sub.csv (100%)
+ create mode 100644 src/data/tables/types/asm/instructions/sub.enc.csv
+ rename src/data/tables/{ => types}/asm/instructions/test.csv (100%)
+ rename src/data/tables/{ => types}/asm/instructions/xor.csv (100%)
+ rename src/data/tables/{ => types}/asm/opcodes/OpCodeSpecs.csv (100%)
+ rename src/data/tables/{asm/syntax => types/asm/opcodes}/opcodes.tables.addressing.csv (100%)
+ rename src/data/tables/{asm/syntax => types/asm/opcodes}/opcodes.tables.combined.csv (100%)
+ rename src/data/tables/{asm/syntax => types/asm/opcodes}/opcodes.tables.operands.csv (100%)
+ rename src/data/tables/{asm/syntax => types/asm/opcodes}/opcodes.tables.parametric.csv (100%)
+ rename src/data/tables/{asm/syntax => types/asm/opcodes}/opcodes.tables.reg.csv (100%)
+ rename src/data/tables/{asm/syntax => types/asm/opcodes}/opcodes.tables.registers.csv (100%)
+ rename src/data/tables/{asm/syntax => types/asm/opcodes}/opcodes.tables.ss.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm}/prefixes_legacy.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm}/prefixes_rex.csv (100%)
+ rename src/data/tables/{asm/syntax => types/asm}/regbits.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/eflags_bits.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/eflags_ctest.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/eflags_xref.csv (100%)
+ rename src/data/tables/{asm/bitfields/AsmTEFlagsCrossRefNotation.csv => types/asm/registers/eflags_xref_notation.csv} (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_gp.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_addressing_32.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_addressing_32x64.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_reg.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_reg_128.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_reg_16.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_reg_16_w_non64.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_reg_256.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_reg_64.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_reg_64_xw_64.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_reg_mmx.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_reg_w_non64.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_reg_xw_non64.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_rm.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_modrm_xw_non64.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_reg_32.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_segreg_2.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_segreg_3.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_sib_addressing_32.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/regbits_vex_vvvv.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/reglayout_gp.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/reglayout_seg.csv (100%)
+ rename src/data/tables/{asm/bitfields => types/asm/registers}/reglayout_v.csv (100%)
+ rename src/data/tables/{clr/cil/Cil.FlowControl.csv => types/cil/Cil_F_FlowControl.csv} (100%)
+ rename src/data/tables/{clr/cil/Cil.OpCode.Alt.csv => types/cil/Cil_F_OpCode.Alt.csv} (100%)
+ rename src/data/tables/{clr/cil/Cil.OpCode.csv => types/cil/Cil_F_OpCode.csv} (100%)
+ rename src/data/tables/{clr/cil/Cil.OpCodeType.csv => types/cil/Cil_F_OpCodeType.csv} (100%)
+ rename src/data/tables/{clr/cil/Cil.OperandType.csv => types/cil/Cil_F_OperandType.csv} (100%)
+ rename src/data/tables/{clr/cil/Cil.PackingSize.csv => types/cil/Cil_F_PackingSize.csv} (100%)
+ rename src/data/tables/{images/pe/COFF.Header.csv => types/pe/PE_T_COFF_SECTION_HEADER.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_RESOURCE_DATA_ENTRY.csv => types/pe/PE_T_IMAGE_RESOURCE_DATA_ENTRY.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_RESOURCE_DIRECTORY.csv => types/pe/PE_T_IMAGE_RESOURCE_DIRECTORY.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_RESOURCE_DIRECTORY_ENTRY.csv => types/pe/PE_T_IMAGE_RESOURCE_DIRECTORY_ENTRY.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_SECTION_HEADER.csv => types/pe/PE_T_IMAGE_SECTION_HEADER.csv} (100%)
+ rename src/data/tables/{images/pe/RESOURCE_TABLE.csv => types/pe/PE_T_RESOURCES.csv} (100%)
+ rename src/data/tables/{images/pe/COFF_HEADER_FIELDS.csv => types/pe/Pe_F_COFF_HEADER_FIELDS.csv} (100%)
+ rename src/data/tables/{images/pe/Characteristics.CSV => types/pe/Pe_F_Characteristics.csv} (55%)
+ rename src/data/tables/{images/pe/IMAGE_DLLCHARACTERISTICS.csv => types/pe/Pe_F_IMAGE_DLLCHARACTERISTICS.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_FILE_MACHINE.csv => types/pe/Pe_F_IMAGE_FILE_MACHINE.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_REL_AMD64.csv => types/pe/Pe_F_IMAGE_REL_AMD64.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_SCN.csv => types/pe/Pe_F_IMAGE_SCN.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_SUBSYSTEM.csv => types/pe/Pe_F_IMAGE_SUBSYSTEM.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_SYM_CLASS.csv => types/pe/Pe_F_IMAGE_SYM_CLASS.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_SYM_TYPE.csv => types/pe/Pe_F_IMAGE_SYM_TYPE.csv} (100%)
+ rename src/data/tables/{images/pe/SPECIAL.csv => types/pe/Pe_S_SPECIAL.csv} (100%)
+ rename src/data/tables/{images/pe/COFF_HEADER.csv => types/pe/Pe_T_COFF_HEADER.csv} (100%)
+ rename src/data/tables/{images/pe/OptionalHeaderDataDirectories.csv => types/pe/Pe_T_COFF_HEADER_OPTIONAL.csv} (100%)
+ rename src/data/tables/{images/pe/COFF_SYMBOL_TABLE.csv => types/pe/Pe_T_COFF_SYMBOL_TABLE.csv} (100%)
+ rename src/data/tables/{images/pe/IMAGE_DEBUG_DIRECTORY.csv => types/pe/Pe_T_IMAGE_DEBUG_DIRECTORY.csv} (100%)
+ rename src/data/tables/{images/pe/MAGE_LOAD_CONFIG_DIRECTORY.csv => types/pe/Pe_T_IMAGE_LOAD_CONFIG_DIRECTORY.csv} (100%)
+ rename src/data/tables/{images/pe/TLS.csv => types/pe/Pe_T_TLS.csv} (100%)
+ rename src/konst/src/{calls/form => address}/AsmOperandKind.cs (100%)
+ rename src/konst/src/{calls/models/Operands.cs => address/AsmOperands.cs} (75%)
+ rename src/konst/src/{calls/models => address}/CallClient.cs (100%)
+ rename src/konst/src/{calls/models => address}/CallTarget.cs (100%)
+ rename src/konst/src/{calls => address}/Calls.cs (95%)
+ rename src/konst/src/{calls/form/ICallInfo.cs => address/IAsmCallInfo.cs} (93%)
+ rename src/konst/src/{calls/form/IImmOperand.cs => address/IAsmImmOperand.cs} (57%)
+ create mode 100644 src/konst/src/address/IAsmMemOperand.cs
+ rename src/konst/src/{calls/form/IOperand.cs => address/IAsmOperand.cs} (74%)
+ rename src/konst/src/{calls/form/IOperands.cs => address/IAsmOperands.cs} (79%)
+ rename src/konst/src/{calls/models => address}/Invocation.cs (95%)
+ delete mode 100644 src/konst/src/calls/form/IMemOperand.cs
+ create mode 100644 src/konst/src/z/ops/t/tspan.cs

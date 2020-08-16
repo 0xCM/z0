@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
 
     partial struct Flow    
-    {
+    {        
         [Op]
-        public static IWfContext context(IAppContext root, WfConfig config, CorrelationToken ct)
-            => new WfContext(root, ct, config, Flow.termsink(ct));
+        public static IWfContext context(IAppContext root, WfConfig config, IWfEventLog log, CorrelationToken ct)
+            => new WfContext(root, ct, config, termsink(log, ct));
     }
 }

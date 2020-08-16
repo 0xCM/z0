@@ -10,10 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static OldFlow;
     using static z;
-
-    using P = Z0.Parts;
 
     class App : AppShell<App,IAppContext>
     {        
@@ -24,23 +21,11 @@ namespace Z0
         public const string ActorName = PartName + "/" + nameof(App);
 
         public CorrelationToken Ct {get;}         
-
-        WfCaptureState Wf;
-
-        static IAppContext CreateAppContext()
-        {
-            var resolved = ApiComposition.Assemble(array(P.GMath.Resolved));
-            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
-            var settings = AppSettings.Load(AppPaths.AppConfigPath);
-            var exchange = AppMsgExchange.Create();
-            return Apps.context(resolved, random, settings, exchange);
-        }
         
         public App()
-            : base(CreateAppContext())
+            : base(Flow.app())
         {
-            Ct = CorrelationToken.define(Part);   
-            Raise(status(ActorName, "Application created", Ct));        
+            Ct = CorrelationToken.define(Part);                 
         }
 
         IResolvedApi Api 
@@ -51,27 +36,26 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {                        
-            Raise(status(ActorName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct));            
-
             var parts = PartIdParser.Service.ParseValid(args); 
             if(parts.Length == 0)
                 parts = Context.PartIdentities;
             
-            var config = OldFlow.configure(Context, args, Ct);
-            var wfc = OldFlow.context(Context, config, Ct);
-            Wf = WfBuilder.state(wfc, WfBuilder.asm(Context), config);
+            var config = Flow.configure(Context, args, Ct);
+            using var log = Flow.log(config);
+            var wfc = Flow.context(Context, config, log, Ct);
+            using var state = WfBuilder.state(wfc, WfBuilder.asm(Context), config);
 
             try
             {
-                using var runner = new Runner(Wf);
+                Flow.status(wfc, ActorName, new {Message ="Running", Args = text.bracket(args.FormatList())},Ct);            
+                using var runner = new Runner(state);
                 runner.Run();                
+                Flow.status(wfc, ActorName,  "Ran", Ct);
             }
             catch(Exception e)
             {
-                Raise(Flow.error(ActorName, e, Ct));                
+                Flow.error(wfc, ActorName, e, Ct);                
             }
-
-            Raise(status(ActorName, "Shell run complete", Ct));
         }
 
         public static void Main(params string[] args)
@@ -79,8 +63,7 @@ namespace Z0
 
         protected override void OnDispose()
         {
-            Wf.Dispose();
-            Raise(status(ActorName, "Shell finished", Ct));
+            
         }
     }
 

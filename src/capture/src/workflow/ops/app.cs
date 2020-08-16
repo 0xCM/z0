@@ -16,9 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static IAppContext app()
-            => AppContext.create(AppPaths.Default, 
-                ApiComposition.Assemble(SelectedParts.Known), 
-                Polyrand.Pcg64(PolySeed64.Seed05));           
+            => AppContext.create(AppPaths.Default, ApiComposition.Assemble(SelectedParts.Known), Polyrand.Pcg64(PolySeed64.Seed05));           
  
         readonly struct SelectedParts : IContentIndex<IPart>
         {        

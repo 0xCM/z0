@@ -9,12 +9,21 @@ namespace Z0
 
     using static Konst;
 
-    partial struct OldFlow    
+    public readonly struct Textual<T> : ITextual
     {
+        public readonly T Data;
+
+        public readonly string Text;
+
         [MethodImpl(Inline)]
-        public static TableSelector<D,S> selector<D,S>(D id, S s = default)
-            where D : unmanaged, Enum        
-            where S : unmanaged
-                => new TableSelector<D,S>(id);
+        public Textual(T data, string text)
+        {
+            Data = data;
+            Text = text;
+        }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Text;        
     }
 }

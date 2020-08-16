@@ -11,11 +11,11 @@ namespace Z0.Asm
     
     public sealed class WfCaptureBroker : WfBroker, IWfCaptureBroker
     {   
-        [MethodImpl(Inline)]
-        internal WfCaptureBroker(CorrelationToken ct)
-            : base(ct)
+        public WfCaptureBroker(IWfEventLog log, CorrelationToken ct)
+            : base(log, ct)
         {
 
         }
+
     }
 }

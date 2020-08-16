@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct FLow    
-    {
+    {        
         [Op]
         public static WfEventOrigin origin(in WfEventId id, string actor, in WfCaller call)
             => new WfEventOrigin(id,actor, call);

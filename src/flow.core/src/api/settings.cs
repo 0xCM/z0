@@ -14,7 +14,6 @@ namespace Z0
         [Op]
         public static WfSettings settings(IAppContext context, CorrelationToken ct)
         {
-
             FilePath configPath()
             {
                 var assname = Assembly.GetEntryAssembly().GetSimpleName();
@@ -23,15 +22,9 @@ namespace Z0
                 return src;
             }        
 
-            var path = configPath();
-            termsink(ct).Deposit(new LoadingWfConfig("Flow", path, ct));
-
             var dst = z.dict<string,string>();
-            AppSettings.absorb(path,dst);
-            var config = new WfSettings(dst);
-                        
-            termsink(ct).Deposit(new LoadedWfConfig("Flow", path, config, ct));            
-            return config;
+            AppSettings.absorb(configPath(),dst);                        
+            return new WfSettings(dst);
         }        
     }
 }

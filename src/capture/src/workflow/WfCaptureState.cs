@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
         
@@ -36,6 +35,8 @@ namespace Z0.Asm
 
         public IWfCaptureBroker CaptureBroker {get;}
 
+        readonly IWfEventLog Log;
+
         [MethodImpl(Inline)]
         public WfCaptureState(IWfContext wf, IAsmContext asm, WfConfig config, CorrelationToken ct)        
         {
@@ -43,7 +44,8 @@ namespace Z0.Asm
             ContextRoot = wf.ContextRoot;
             Asm = asm;            
             Ct = ct;
-            Config = config;        
+            Config = config;     
+            Log = Flow.log(Config);   
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.AppPaths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
@@ -54,9 +56,14 @@ namespace Z0.Asm
             Formatter = Services.Formatter(FormatConfig);            
             FunctionDecoder = Services.RoutineDecoder(FormatConfig); 
             CWf = new CaptureWorkflow(Asm, Wf, FunctionDecoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.Target), Ct);    
-            CaptureBroker = WfBuilder.capture(FilePath.Empty, ct);
+            CaptureBroker = WfBuilder.capture(Log, ct);
         }
 
+        public void Dispose()
+        {
+            Log.Dispose();            
+        }                
+        
         public ICaptureContext CaptureContext 
             => CWf.Context;
 
@@ -102,11 +109,5 @@ namespace Z0.Asm
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent
                 => Wf.Raise(@event);
-
-        public void Dispose()
-        {
-
-            
-        }                
     }
 }

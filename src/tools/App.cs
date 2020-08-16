@@ -20,31 +20,29 @@ namespace Z0
         public const string ActorName = PartName + "/" + nameof(App);
 
         public CorrelationToken Ct {get;}         
-
-        public IWfContext Wf {get; private set;}
-        
+                
         public App()
             : base(Flow.app())
         {
             Ct = CorrelationToken.define(Part);   
-            Raise(status(ActorName, "Application created", Ct));        
         }
 
         public override void RunShell(params string[] args)
         {                        
-            Raise(status(ActorName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct));            
-        
             try
             {
-                var config = Flow.configure(Context, args, Ct);            
-                Wf = Flow.context(Context, config, Ct);                
+                var config = Flow.configure(Context,args, Ct);            
+                using var log = Flow.log(config);                
+                using var wf = Flow.context(Context, config, log, Ct);                                
+                Flow.status(wf, ActorName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct);
+
+                Flow.status(wf, ActorName, "Shell run complete", Ct);
             }
             catch(Exception e)
             {
                 Raise(Flow.error(ActorName, e, Ct));                
             }
 
-            Raise(status(ActorName, "Shell run complete", Ct));
         }
 
         public static void Main(params string[] args)
@@ -52,8 +50,7 @@ namespace Z0
 
         protected override void OnDispose()
         {
-            Wf.Dispose();
-            Raise(status(ActorName, "Shell finished", Ct));
+            
         }
     }
 

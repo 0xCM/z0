@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static OldFlow;
-    using static Flairs;
+    using static Render;
 
     [Event]
     public readonly struct RunningProcessor : IWfEvent<RunningProcessor>
@@ -32,7 +31,6 @@ namespace Z0
             Processor = processor;            
             Flair = flair;
         }
-
         
         [MethodImpl(Inline)]        
         public string Format()
