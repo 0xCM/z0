@@ -6,12 +6,23 @@ namespace Z0
 {        
     using System;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
-
-    using static Fsm1Spec.StateKinds;
     
-    public class Fsm1Test : UnitTest<Fsm1Test>
+    using static Konst;
+    using static z;
+    using static Fsm1Spec.StateKinds;
+
+    public ref struct RunFsm
     {
+        readonly IWfContext Wf;
+
+        [MethodImpl(Inline)]
+        public RunFsm(IWfContext wf)
+        {
+            Wf = wf;
+        }
+        
         public void Run()
         {
             var spec = new Fsm1Spec();
@@ -25,6 +36,11 @@ namespace Z0
                 tasks[i] = Fsm.run(machine);
             }
             Task.WaitAll(tasks);                            
+        }
+
+        public void Dispose()
+        {
+
         }
     }
 }

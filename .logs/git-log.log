@@ -10240,3 +10240,10 @@
  delete mode 100644 src/imagine/src/locate/MemoryReaderService.cs
  delete mode 100644 wf/emit.bat
  delete mode 100644 wf/needs.bat
+[master 273b62827] .
+ 6 files changed, 123 insertions(+)
+ create mode 100644 src/data/tables/url/asm.md
+ create mode 100644 src/data/tables/url/asp.md
+ create mode 100644 src/data/tables/url/lang.md
+ create mode 100644 src/data/tables/url/ms.md
+ create mode 100644 src/data/tables/url/tools.md

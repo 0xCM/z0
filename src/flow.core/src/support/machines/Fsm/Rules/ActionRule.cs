@@ -9,32 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    using Z0.Machines;
-
     /// <summary>
     /// Characterizes an action that that executes per machine rules
     /// </summary>
     public readonly struct ActionRule<S,A> : IFsmActionRule<S,A>
     {
-        /// <summary>
-        /// Constructs a rule from a source/action pair
-        /// </summary>
-        /// <param name="src">The source state</param>
-        /// <param name="action">The action</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="A">The action type</typeparam>
-        [MethodImpl(Inline)]
-        public static implicit operator ActionRule<S,A>((S src, A action) x)
-            => new ActionRule<S,A>(x.src, x.action);
-
-        [MethodImpl(Inline)]
-        public ActionRule(S source, A action)
-        {
-            this.Source = source;
-            this.Action= action;
-            this.Key = new ActionRuleKey<S>(source);
-        }
-
         /// <summary>
         /// The state upon which the rule is predicated
         /// </summary>
@@ -58,6 +37,26 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Key.Hash;
         }
+
+        /// <summary>
+        /// Constructs a rule from a source/action pair
+        /// </summary>
+        /// <param name="src">The source state</param>
+        /// <param name="action">The action</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="A">The action type</typeparam>
+        [MethodImpl(Inline)]
+        public static implicit operator ActionRule<S,A>((S src, A action) x)
+            => new ActionRule<S,A>(x.src, x.action);
+
+        [MethodImpl(Inline)]
+        public ActionRule(S source, A action)
+        {
+            Source = source;
+            Action= action;
+            Key = new ActionRuleKey<S>(source);
+        }
+
 
         public readonly override string ToString() 
             => $"({Source}) -> {Action}";

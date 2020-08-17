@@ -18,27 +18,6 @@ namespace Z0
     public readonly struct OutputRule<E,S,O> : IOutputRule<E,S,O>
     {
         /// <summary>
-        /// Constructs an output rule from a (source,target,output) triple
-        /// </summary>
-        /// <param name="source">The source state</param>
-        /// <param name="target">The target state</param>
-        /// <param name="output">The output to emit upon a source -> target transition</param>
-        /// <typeparam name="S">The state type</typeparam>
-        /// <typeparam name="O">The output type</typeparam>
-        [MethodImpl(Inline)]
-        public static implicit operator OutputRule<E,S,O>((E trigger, S source, O output) x)
-            => new OutputRule<E, S, O>(x.trigger, x.source, x.output);
-                    
-        [MethodImpl(Inline)]
-        public OutputRule(E trigger, S source, O output)
-        {
-            this.Trigger = trigger;
-            this.Source = source;
-            this.Output = output;
-            this.Key = Fsm.OutputRuleKey(trigger,source);
-        }
-
-        /// <summary>
         /// The source state
         /// </summary>
         public readonly E Trigger {get;}
@@ -56,7 +35,7 @@ namespace Z0
         /// <summary>
         /// The key that identifies the rule
         /// </summary>
-        public readonly IRuleKey<E,S> Key {get;}
+        public readonly OutputRuleKey<E,S> Key {get;}
 
         /// <summary>
         /// The rule id as determined by the key
@@ -67,11 +46,35 @@ namespace Z0
             get => Key.Hash;
         }
 
+        /// <summary>
+        /// Constructs an output rule from a (source,target,output) triple
+        /// </summary>
+        /// <param name="source">The source state</param>
+        /// <param name="target">The target state</param>
+        /// <param name="output">The output to emit upon a source -> target transition</param>
+        /// <typeparam name="S">The state type</typeparam>
+        /// <typeparam name="O">The output type</typeparam>
+        [MethodImpl(Inline)]
+        public static implicit operator OutputRule<E,S,O>((E trigger, S source, O output) x)
+            => new OutputRule<E, S, O>(x.trigger, x.source, x.output);
+                    
+        [MethodImpl(Inline)]
+        public OutputRule(E trigger, S source, O output)
+        {
+            Trigger = trigger;
+            Source = source;
+            Output = output;
+            Key = Fsm.outKey(trigger,source);
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => $"({Trigger},{Source}) -> {Output}";
 
         public readonly override string ToString() 
             => Format();
+
+        IRuleKey<E,S> IFsmRule<E,S>.Key 
+            => Key;
     }
 }

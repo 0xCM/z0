@@ -5,22 +5,16 @@
 namespace Z0
 {
     using System;
- 
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static z;
+
     /// <summary>
     /// Defines a key, predicated on input event and current state, identifies a transition rule
     /// </summary>
     public readonly struct TransitionRuleKey<E,S> : IRuleKey<E,S>
     {
-        public static implicit operator TransitionRuleKey<E,S>((E trigger, S source) x)
-            => new TransitionRuleKey<E,S>(x.trigger,x.source);
-
-        public TransitionRuleKey(E input, S source)
-        {
-            this.Trigger = input;
-            this.Source = source;
-            this.Hash = HashCode.Combine(input,source);
-        }
-
         /// <summary>
         /// The triggering event
         /// </summary>
@@ -32,6 +26,18 @@ namespace Z0
         public S Source {get;}
 
         public int Hash {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator TransitionRuleKey<E,S>((E trigger, S source) x)
+            => new TransitionRuleKey<E,S>(x.trigger,x.source);
+
+        [MethodImpl(Inline)]
+        public TransitionRuleKey(E input, S source)
+        {
+            Trigger = input;
+            Source = source;
+            Hash = HashCode.Combine(input,source);
+        }
 
         public override int GetHashCode()
             => Hash; 

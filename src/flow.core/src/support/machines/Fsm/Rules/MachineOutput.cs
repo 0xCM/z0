@@ -18,14 +18,14 @@ namespace Z0
     /// for source/target pairs in the domain. If an input value (s1:S, s2:S) 
     /// is not in the function domain, en empty option is returned
     /// </summary>
-    public class MachineOutput<E,S,O> : IFsmFunction
+    public class MachineOutput<E,S,O> : IFsmFunc
     {
         readonly Dictionary<int,IOutputRule<E,S,O>> RuleIndex;        
 
         [MethodImpl(Inline)]
         public MachineOutput(IEnumerable<IOutputRule<E,S,O>> Rules)
         {
-            RuleIndex = Rules.Select(x => (Fsm.OutputRuleKey(x.Trigger, x.Source).Hash,x)).ToDictionary();
+            RuleIndex = Rules.Select(x => (Fsm.outKey(x.Trigger, x.Source).Hash,x)).ToDictionary();
         }
         
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="source">The source state</param>
         [MethodImpl(Inline)]
         public Option<O> Output(E trigger, S source)
-            => Rule(Fsm.OutputRuleKey(trigger, source)).TryMap(r => r.Output);
+            => Rule(Fsm.outKey(trigger, source)).TryMap(r => r.Output);
 
         /// <summary>
         /// Searches for the output rule given a key
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        Option<IFsmRule> IFsmFunction.Rule(IRuleKey key)
+        Option<IFsmRule> IFsmFunc.Rule(IRuleKey key)
             => Rule(key).TryMap(r => r as IFsmRule);
     }
 }

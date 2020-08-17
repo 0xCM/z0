@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
     
     /// <summary>
     /// Defines a key for efficient/predicatable output rule indexing/lookup
@@ -12,16 +15,6 @@ namespace Z0
     /// <typeparam name="S">The state type</typeparam>
     public readonly struct OutputRuleKey<E,S> : IRuleKey<E,S>
     {
-        public static implicit operator OutputRuleKey<E,S>((E trigger, S source) x)
-            => new OutputRuleKey<E,S>(x.trigger, x.source);
-        
-        public OutputRuleKey(E trigger, S target)
-        {
-            this.Trigger = trigger;
-            this.Source = target;
-            this.Hash = HashCode.Combine(trigger,target);
-        }
-
         public readonly E Trigger {get;}
 
         public readonly S Source {get;}
@@ -31,6 +24,17 @@ namespace Z0
         /// </summary>
         public readonly int Hash {get;}
 
+        [MethodImpl(Inline)]
+        public static implicit operator OutputRuleKey<E,S>((E trigger, S source) x)
+            => new OutputRuleKey<E,S>(x.trigger, x.source);
+                
+        [MethodImpl(Inline)]
+        public OutputRuleKey(E trigger, S target)
+        {
+            this.Trigger = trigger;
+            this.Source = target;
+            this.Hash = HashCode.Combine(trigger,target);
+        }
 
         public override string ToString() 
             => $"({Trigger}, {Source})";

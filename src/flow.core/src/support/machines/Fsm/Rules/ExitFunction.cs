@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a set of rules that define actions associated with state Exit
     /// </summary>
-    public class ExitFunction<S,A> : IFsmFunction
+    public class ExitFunction<S,A> : IFsmFunc
     {
         public ExitFunction(IEnumerable<IFsmActionRule<A>> rules)
         {
@@ -24,7 +24,7 @@ namespace Z0
         readonly Dictionary<int, IFsmActionRule<A>> RuleIndex;
         
         public Option<A> Eval(S source)
-            => Rule(Fsm.ExitRuleKey(source)).TryMap(r => r.Action);
+            => Rule(Fsm.exitKey(source)).TryMap(r => r.Action);
 
         public Option<IFsmActionRule<A>> Rule(IRuleKey key)
         {
@@ -34,7 +34,7 @@ namespace Z0
                 return default;
         }
 
-        Option<IFsmRule> IFsmFunction.Rule(IRuleKey key)
+        Option<IFsmRule> IFsmFunc.Rule(IRuleKey key)
             => Rule(key).TryMap(r => r as IFsmRule);
     }
 }

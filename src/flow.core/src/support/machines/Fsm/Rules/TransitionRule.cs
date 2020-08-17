@@ -29,10 +29,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public TransitionRule(E trigger, S source, S target)
         {
-            this.Trigger = trigger;
-            this.Source = source;
-            this.Target = target;
-            this.Key = Fsm.TransitionRuleKey(Trigger,Source);
+            Trigger = trigger;
+            Source = source;
+            Target = target;
+            Key = Fsm.transitionKey(Trigger,Source);
         }
 
         /// <summary>

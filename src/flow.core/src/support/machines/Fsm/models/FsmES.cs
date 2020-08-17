@@ -22,7 +22,7 @@ namespace Z0
     /// <typeparam name="S">The state type</typeparam>
     public class Fsm<E,S>
     {
-        public Fsm(string Id, IFsmContext context, S GroundState, S EndState, IFsmFunction<E,S> transition)
+        public Fsm(string Id, IFsmContext context, S GroundState, S EndState, IFsmFunc<E,S> transition)
         {
             this.Id = Id;
             this.Context = context;
@@ -43,7 +43,7 @@ namespace Z0
         /// <summary>
         /// The machine transition function
         /// </summary>
-        IFsmFunction<E,S> Transition {get;}
+        IFsmFunc<E,S> Transition {get;}
 
         /// <summary>
         /// The number of events that have been received

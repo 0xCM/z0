@@ -14,17 +14,17 @@ namespace Z0.Machines
     /// <summary>
     /// Defines a set of rules that define actions associated with state entry
     /// </summary>
-    public class EntryFunction<S,A> : IFsmFunction
+    public readonly struct EntryFunction<S,A> : IFsmFunc
     {
+        readonly Dictionary<int, IFsmActionRule<A>> RuleIndex;
+
         public EntryFunction(IEnumerable<IFsmActionRule<A>> rules)
         {
-            this.RuleIndex = rules.Select(rule => (rule.RuleId, rule)).ToDictionary();
-        }
-        
-        readonly Dictionary<int, IFsmActionRule<A>> RuleIndex;
+            RuleIndex = rules.Select(rule => (rule.RuleId, rule)).ToDictionary();
+        }        
         
         public Option<A> Eval(S source)
-            => Rule(Fsm.EntryRuleKey(source)).TryMap(r => r.Action);
+            => Rule(Fsm.entryKey(source)).TryMap(r => r.Action);
 
         public Option<IFsmActionRule<A>> Rule(IRuleKey key)
         {
@@ -34,7 +34,7 @@ namespace Z0.Machines
                 return default;
         }
 
-        Option<IFsmRule> IFsmFunction.Rule(IRuleKey key)
+        Option<IFsmRule> IFsmFunc.Rule(IRuleKey key)
             => Rule(key).TryMap(r => r as IFsmRule);
     }
 }
