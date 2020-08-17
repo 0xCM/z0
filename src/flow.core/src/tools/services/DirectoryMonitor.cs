@@ -12,15 +12,13 @@ namespace Z0
             
     public readonly struct DirectoryMonitor : IDirectoryMonitor
     {
-        public delegate void ChangeHandler(FileSystemObject subject, FileSystemChangeKind kind);
-
-        public FolderPath Subject {get;}
+        public FS.FolderPath Subject {get;}
 
         readonly FileSystemWatcher Watcher;
 
-        readonly ChangeHandler Handler;
+        readonly FS.ChangeHandler Handler;
 
-        internal DirectoryMonitor(FolderPath subject, ChangeHandler handler, bool recursive = true, string filter = null)
+        public DirectoryMonitor(FS.FolderPath subject, FS.ChangeHandler handler, bool recursive = true, string filter = null)
         {
             Subject = subject;
             Watcher = new FileSystemWatcher(subject.Name, filter ?? EmptyString);
@@ -30,31 +28,31 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        public static FileSystemObject objects(FileSystemEventArgs src)
-            => new FileSystemObject(src.FullPath, FileSystemObjectKind.File);
+        public static FS.Entry objects(FileSystemEventArgs src)
+            => new FS.Entry(src.FullPath, FS.ObjectKind.File);
         
         [MethodImpl(Inline)]
         void Created(object sender, FileSystemEventArgs e)
         {
-            Handler(objects(e), (FileSystemChangeKind)e.ChangeType);
+            Handler(objects(e), (FS.ChangeKind)e.ChangeType);
         }
 
         [MethodImpl(Inline)]
         void Deleted(object sender, FileSystemEventArgs e)
         {
-            Handler(objects(e), (FileSystemChangeKind)e.ChangeType);
+            Handler(objects(e), (FS.ChangeKind)e.ChangeType);
         }
 
         [MethodImpl(Inline)]
         void Changed(object sender, FileSystemEventArgs e)
         {
-            Handler(objects(e), (FileSystemChangeKind)e.ChangeType);
+            Handler(objects(e), (FS.ChangeKind)e.ChangeType);
         }
 
         [MethodImpl(Inline)]
         void Renamed(object sender, FileSystemEventArgs e)
         {
-            Handler(objects(e), (FileSystemChangeKind)e.ChangeType);
+            Handler(objects(e), (FS.ChangeKind)e.ChangeType);
         }
 
         void Subscribe()

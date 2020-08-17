@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IExecutable<A>
+    public interface IExeModule<A>
     {
         void Execute(params A[] args);
     }
@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a thread of execution control that has whatever context it needs, if any, to do something of use
     /// </summary>
-    public interface IExecutable : IExecutable<string>
+    public interface IExecutable : IExeModule<string>
     {
 
     }

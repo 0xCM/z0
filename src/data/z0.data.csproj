@@ -15,7 +15,7 @@
   </ItemGroup>  
 
    <ItemGroup>
-    <EmbeddedResource Include="tables/**/*.*" /> 
+    <EmbeddedResource Include="content/**/*.*" /> 
    </ItemGroup>
 
 

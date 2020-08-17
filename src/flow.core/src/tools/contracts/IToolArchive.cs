@@ -39,7 +39,7 @@ namespace Z0
             => Owner.ToolId;
         
         ToolFiles<T> Dir()
-            => ToolArchive.output(this).Map(f => new ToolFile<T>(f));
+            => ToolArchives.output(this).Map(f => new ToolFile<T>(f));
     }
 
     // public interface IToolArchive<T,F> : IToolArchive<T>

@@ -11,15 +11,15 @@ namespace Z0
 
     public readonly struct Workspace
     {
-        public readonly FileSystemObject Root;                
+        public readonly FS.Entry Root;                
         
-        public readonly FileSystemObjects[] Members;   
+        public readonly FS.Entry[] Files;   
 
         [MethodImpl(Inline)]
-        public Workspace(FileSystemObject root, FileSystemObjects[] members)
+        public Workspace(FS.Entry root, FS.Entry[] files)
         {
             Root = root;
-            Members = members;
+            Files = files;
         }
     }
 }

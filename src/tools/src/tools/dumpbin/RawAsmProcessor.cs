@@ -38,7 +38,7 @@ namespace Z0.Tools
                 Wf = wf;
                 LineCount = 0;
                 IxCount = 0;
-                Archive = ToolArchive.create<DumpBin>(output, processed);
+                Archive = ToolArchives.create<DumpBin>(output, processed);
                 Flags = flags;
                 Options = options;
                 Wf.Created(ActorName);

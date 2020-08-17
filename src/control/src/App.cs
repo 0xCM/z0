@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using Z0.Asm;
+    using static FS;
 
     class App : AppShell<App,IAppContext>
     {               
@@ -21,8 +22,8 @@ namespace Z0
             var dstArchive = new ArchiveConfig(FolderPath.Define(captureOut.Name));
             var config  = new WfConfig(args, srcArchive, dstArchive, parts, context.AppPaths.ResourceRoot, context.AppPaths.AppDataRoot, settings);
             config.LogRoot = captureLog;
-            config.StatusPath = captureLog + FS.file("status", FileExtNames.csv);
-            config.ErrorPath = captureLog + FS.file("errors", FileExtNames.csv);
+            config.StatusPath = captureLog + FS.file("status", ExtensionNames.csv);
+            config.ErrorPath = captureLog + FS.file("errors", ExtensionNames.csv);
             return config;
         }
 

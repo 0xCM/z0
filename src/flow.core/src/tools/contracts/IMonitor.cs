@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
 
     public interface IMonitor : IDisposable
     {
@@ -20,7 +18,7 @@ namespace Z0
         T Subject {get;}        
     }
 
-    public interface IDirectoryMonitor : IMonitor<FolderPath>
+    public interface IDirectoryMonitor : IMonitor<FS.FolderPath>
     {
         
     }

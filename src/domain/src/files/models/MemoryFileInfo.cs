@@ -11,6 +11,6 @@ namespace Z0
     {
         public MemoryAddress BaseAddress;
 
-        public FileDescription Description;    
+        public FS.EntryDetail Description;    
     }
 }

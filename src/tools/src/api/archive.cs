@@ -11,10 +11,6 @@ namespace Z0
 
     partial struct Tooling
     {
-        [MethodImpl(Inline)]
-        public static ToolArchive<T,F> archive<T,F>(IWfContext wf, ToolId id, FolderPath root)
-            where T : struct, ITool<T,F>
-            where F : unmanaged, Enum   
-                => new ToolArchive<T,F>(wf, id, root);
+
     }
 }

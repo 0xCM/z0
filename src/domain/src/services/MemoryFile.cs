@@ -40,9 +40,8 @@ namespace Z0
         {
             var dst = new MemoryFileInfo();
             dst.BaseAddress = src.BaseAddress;
-
             var fi = src.Path.Info;
-            var desc =new FileDescription();
+            var desc =new FS.EntryDetail();
             desc.Path = FS.path(src.Path.Name);
             desc.Size = (ByteSize)fi.Length;
             desc.CreateTS = fi.CreationTime;

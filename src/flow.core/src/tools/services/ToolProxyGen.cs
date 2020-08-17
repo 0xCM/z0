@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
     using System.Diagnostics;
@@ -11,13 +11,15 @@ namespace Z0.Tools
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
 
+    using Z0.Tools;
 
     public struct ToolProxyGen
-    {
+    {    
         public ToolProxyGen(FilePath dst)
         {
             TargetPath = dst;
         }
+        
         public FilePath TargetPath;
 
         public string Pattern => $@"
@@ -44,8 +46,8 @@ class Program
     }}
 }};
 ";
-        public  MetadataReference[] References 
-            => CodeGen.perefs(typeof(object),typeof(Enumerable),typeof(ProcessStartInfo));
+        public MetadataReference[] References 
+            => CodeGen.pe(typeof(object),typeof(Enumerable),typeof(ProcessStartInfo));
 
         public static CSharpCompilation compilation(ToolProxy config)
         {
@@ -59,5 +61,4 @@ class Program
 
         }
     }
-
 }

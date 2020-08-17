@@ -32,7 +32,7 @@ namespace Z0
             term.WriteLine($"{content}", color ?? MessageFlair.Green);
         }
         
-        void IExecutable<string>.Execute(params string[] args)
+        void IExeModule<string>.Execute(params string[] args)
         {
             try   
             {

@@ -108,8 +108,6 @@ namespace Z0.Asm
         JS = 2*JPO,
 
         /// <summary> Jump if Zero; ZF=1 </summary>
-        JZ = 2*JS,
-
-        Max = JZ       
+        JZ = 2*JS,             
     }
 }

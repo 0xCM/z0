@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Structures
     {
-         /// <summary>
+        /// <summary>
         /// Determines whether at least one byte of a structural value is nonzero
         /// </summary>
         /// <param name="src">The value to evaluate</param>

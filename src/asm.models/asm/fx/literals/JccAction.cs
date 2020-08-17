@@ -9,50 +9,50 @@ namespace Z0.Asm
 
     public enum JccAction : byte
     {
-        Jcc = x70,
+        JCC = x70,
 
         /// <summary>
         /// Jump short if overflow (OF=1)
         /// </summary>
-        Jo = Jcc | O,
+        JO = JCC | O,
 
         /// <summary>
         /// Jump short if not overflow (OF=0).
         /// </summary>
-        Jno = Jcc | NO,
+        JNO = JCC | NO,
 
         /// <summary>
         /// Jump short if below (CF=1)
         /// </summary>
-        Jb = Jcc | B,
+        JB = JCC | B,
 
         /// <summary>
         /// Jump short if not below (CF=0)
         /// </summary>
-        Jnb = Jcc | NB,
+        JNB = JCC | NB,
 
-        Je = Jcc | E,
+        JE = JCC | E,
 
-        Jne = Jcc | NE,
+        JNE = JCC | NE,
 
-        Jbe = Jcc | BE,
+        JBE = JCC | BE,
 
-        Jnbe = Jcc | NBE,
+        JNBE = JCC | NBE,
 
-        Js = Jcc | S,
+        JS = JCC | S,
 
-        Jns = Jcc | NS,
+        JNS = JCC | NS,
 
-        Jp = Jcc | P,
+        JP = JCC | P,
 
-        Jnp = Jcc | NP,
+        JNP = JCC | NP,
 
-        Jl = Jcc | L,
+        JL = JCC | L,
 
-        Jnl = Jcc | NL,
+        JNL = JCC | NL,
 
-        Jle = Jcc | LE,
+        JLE = JCC | LE,
 
-        Jlne = Jcc | NLE
+        JLNE = JCC | NLE
     }
 }

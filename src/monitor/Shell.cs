@@ -11,7 +11,7 @@ namespace Z0
     
     sealed class AppShell : Shell<AppShell>
     {
-        void OnChange(FileSystemObject subject, FileSystemChangeKind kind)
+        void OnChange(FS.Entry subject, FS.ChangeKind kind)
         {
             term.print(subject);
         }
@@ -19,7 +19,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {
             var path = args.Length != 0 ? FolderPath.Define(args[0]) : FolderPath.Define(AppPaths.LogRoot.Name);            
-            using var monitor = Monitors.monitor(path,OnChange);
+            using var monitor = Monitors.monitor(FS.dir(path.Name),OnChange);
             term.print(WfEventBuilder.watching(nameof(PartId.Monitor), path, CorrelationToken.from((ulong)PartId.Monitor)));
             monitor.Start();
             Console.ReadKey();

@@ -10265,3 +10265,192 @@
  create mode 100644 src/run/src/steps/Fsm1Spec.cs
  create mode 100644 src/run/src/steps/PrimalFsmSpec.cs
  create mode 100644 src/run/src/steps/RunFsm.cs
+[master c4ef00764] .
+ 254 files changed, 1270 insertions(+), 912 deletions(-)
+ rename src/asm.models/asm/{models/processing => }/contracts/IAsmDecoder.cs (100%)
+ rename src/asm.models/asm/{models/processing => }/contracts/IAsmFxSink.cs (100%)
+ rename src/asm.models/asm/{models/processing => }/contracts/IAsmFxTrigger.cs (100%)
+ rename src/asm.models/asm/{models/processing => }/contracts/IAsmFxTriggerSet.cs (100%)
+ rename src/asm.models/asm/{models/processing => }/contracts/IAsmRoutineTrigger.cs (100%)
+ rename src/asm.models/asm/{models/processing => }/contracts/IAsmTextWriter.cs (100%)
+ rename src/asm.models/asm/{models/processing => }/contracts/IHostAsmArchiver.cs (100%)
+ rename src/asm.models/asm/models/instructions/{HostInstructionIndex.cs => HostAsmFxIndex.cs} (92%)
+ rename src/asm.models/asm/models/instructions/{InstructionMemory.cs => descriptive/AsmFxMemory.cs} (96%)
+ rename src/asm.models/asm/models/instructions/{AsmInstructionSummary.cs => descriptive/AsmFxSummary.cs} (88%)
+ rename src/asm.models/asm/models/instructions/{LocatedInstruction.cs => descriptive/BasedAsmFx.cs} (83%)
+ rename src/asm.models/asm/models/instructions/{ => routines}/AsmRoutine.cs (100%)
+ rename src/asm.models/asm/models/instructions/{ => routines}/AsmRoutineCode.cs (100%)
+ rename src/asm.models/asm/models/instructions/{ => routines}/AsmRoutineData.cs (100%)
+ rename src/asm.models/asm/models/instructions/{ => routines}/AsmRoutineGroup.cs (100%)
+ rename src/asm.models/asm/models/instructions/{ => routines}/AsmRoutineHeader.cs (100%)
+ rename src/asm.models/asm/models/instructions/{ => routines}/AsmRoutines.cs (100%)
+ rename src/asm.models/asm/models/instructions/{ => routines}/EncodedAsmRoutine.cs (100%)
+ rename src/asm.models/asm/models/instructions/{ => routines}/EncodedRoutine.cs (100%)
+ rename src/asm.models/asm/models/instructions/{ => sequenced}/AsmFxList.cs (100%)
+ rename src/asm.models/asm/models/instructions/{ => sequenced}/AsmInstructions.cs (100%)
+ rename src/asm.models/asm/models/instructions/{ => sequenced}/AsnFxBlock.cs (100%)
+ rename src/asm.models/asm/models/instructions/{HostInstructions.cs => sequenced/HostAsmFx.cs} (89%)
+ rename src/asm.models/asm/models/instructions/{LocatedInstructions.cs => sequenced/LocatedAsmFxList.cs} (74%)
+ rename src/asm.models/asm/models/instructions/{MemberInstructions.cs => sequenced/MemberAsmFx.cs} (74%)
+ rename src/asm.models/asm/models/instructions/{PartInstructions.cs => sequenced/PartAsmFx.cs} (80%)
+ delete mode 100644 src/asm.models/asm/models/opcodes/InstructionField.cs
+ delete mode 100644 src/asm.models/asm/models/opcodes/OpCodeOffset.cs
+ rename src/asm.models/asm/models/processing/{services => }/AsmCallSink.cs (100%)
+ rename src/asm.models/asm/models/processing/{services => }/AsmDataWriter.cs (100%)
+ rename src/asm.models/asm/models/processing/{services => }/AsmFxCollector.cs (100%)
+ rename src/asm.models/asm/models/processing/{services => }/AsmFxFlow.cs (100%)
+ rename src/asm.models/asm/models/processing/{AsmInstructionPipe.cs => AsmFxPipe.cs} (100%)
+ rename src/asm.models/asm/models/processing/{services => }/AsmFxSink.cs (100%)
+ rename src/asm.models/asm/models/processing/{services => }/AsmMnemonicTrigger.cs (100%)
+ rename src/asm.models/asm/models/processing/{services => }/AsmMovHandler.cs (100%)
+ rename src/asm.models/asm/models/processing/{services => }/HostAsmArchiver.cs (100%)
+ rename src/asm.models/asm/{ => opcodes}/AsmOpCodes.cs (62%)
+ rename src/asm.models/asm/{ => opcodes}/AsmTables.OpCodes.cs (85%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/AsmTokens.cs (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/index/AsmTokenIdentity.cs (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/index/AsmTokenIndex.cs (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/index/AsmTokenMeanings.cs (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/index/AsmTokenModels.cs (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/index/AsmTokenValues.cs (100%)
+ rename src/asm.models/asm/{models/opcodes/AsmFieldWidths.cs => opcodes/literals/AsmOpCodeFieldWidths.cs} (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/literals/AsmOpCodeTokenKind.cs (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/literals/AsmOpCodeTokens.cs (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/literals/AsmTokenId.cs (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/literals/AsmTokenKind.cs (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/literals/AsmTokenMeaning.cs (100%)
+ rename src/asm.models/asm/{models/tokens => opcodes}/literals/AsmTokenValues.cs (100%)
+ rename src/asm.models/asm/{models/opcodes => opcodes/literals}/OperatingMode.cs (100%)
+ rename src/asm.models/asm/{models/instructions => opcodes/models}/AsmFxCode.cs (100%)
+ rename src/asm.models/asm/{models/instructions => opcodes/models}/AsmFxCodeData.cs (100%)
+ rename src/asm.models/asm/{models/opcodes/AsmCommandGroup.cs => opcodes/models/AsmFxGroup.cs} (72%)
+ rename src/asm.models/asm/{models/opcodes/InstructionToken.cs => opcodes/models/AsmFxToken.cs} (80%)
+ rename src/asm.models/asm/{models/opcodes/InstructionTokens.cs => opcodes/models/AsmFxTokens.cs} (85%)
+ rename src/asm.models/asm/{models/opcodes => opcodes/models}/AsmOpCode.cs (100%)
+ rename src/asm.models/asm/{models/opcodes/OpCodeDataset.cs => opcodes/models/AsmOpCodeDataset.cs} (65%)
+ rename src/asm.models/asm/{models/opcodes/OpCodeRecordField.cs => opcodes/models/AsmOpCodeField.cs} (82%)
+ rename src/asm.models/asm/{models/opcodes/OpCodePartition.cs => opcodes/models/AsmOpCodeGroup.cs} (75%)
+ rename src/asm.models/asm/{models/opcodes/OpCodeIdentifier.cs => opcodes/models/AsmOpCodeId.cs} (65%)
+ rename src/asm.models/asm/{models/opcodes/OpCodeDescription.cs => opcodes/models/AsmOpCodeInfo.cs} (69%)
+ rename src/asm.models/asm/{models/opcodes/OpCodeModel.cs => opcodes/models/AsmOpCodeModel.cs} (93%)
+ rename src/asm.models/asm/{models/opcodes/OpCodeOperand.cs => opcodes/models/AsmOpCodeOperand.cs} (79%)
+ rename src/asm.models/asm/{models/opcodes => opcodes/models}/AsmOpCodePart.cs (100%)
+ rename src/asm.models/asm/{models/opcodes => opcodes/models}/AsmOpCodeParts.cs (82%)
+ rename src/asm.models/asm/{models/opcodes/OpCodeRecord.cs => opcodes/models/AsmOpCodeTable.cs} (92%)
+ rename src/asm.models/asm/{models/opcodes/OpCodeToken.cs => opcodes/models/AsmOpCodeToken.cs} (83%)
+ rename src/asm.models/asm/{models/tokens/AsmOpCodeTokenIndex.cs => opcodes/models/AsmOpCodeTokens.cs} (70%)
+ rename src/asm.models/asm/{models/opcodes/EncodedOpCode.cs => opcodes/models/AsmSyntaxEncoding.cs} (86%)
+ rename src/asm.models/asm/{OpCodePartitioner.cs => opcodes/services/AsmOpCodePartitioner.cs} (67%)
+ create mode 100644 src/asm.models/asm/ops/tokens.cs
+ rename src/flow.core/src/{ => builder}/WfEventBuilder.cs (97%)
+ create mode 100644 src/flow.core/src/builder/watching.cs
+ create mode 100644 src/flow.core/src/config/ConfiguredStep.cs
+ rename src/flow.core/src/{ => config}/WfConfig.cs (100%)
+ rename src/flow.core/src/{ => config}/WfConfigData.cs (100%)
+ create mode 100644 src/flow.core/src/config/WfRunSpec.cs
+ rename src/flow.core/src/{ => config}/WfSettings.cs (100%)
+ create mode 100644 src/flow.core/src/config/WfStepArg.cs
+ create mode 100644 src/flow.core/src/config/WfStepArgs.cs
+ create mode 100644 src/flow.core/src/config/WfStepConfig.cs
+ create mode 100644 src/flow.core/src/orchestration/WfStepRunner.cs
+ rename src/flow.core/src/orchestration/{ => models}/WfRunner.cs (100%)
+ rename src/flow.core/src/orchestration/{ => models}/WfTableDispatcher.cs (100%)
+ rename src/flow.core/src/orchestration/{ => models}/WfTableMap.cs (100%)
+ rename src/flow.core/src/orchestration/{ => models}/WfTableMapTY.cs (100%)
+ rename src/flow.core/src/orchestration/{ => models}/WfTableRunner.cs (100%)
+ rename src/flow.core/src/orchestration/{ => models}/WfTableSink.cs (100%)
+ rename src/flow.core/src/orchestration/{ => models}/WfTableSinks.cs (100%)
+ rename src/flow.core/src/orchestration/{ => models}/Workflow.cs (100%)
+ create mode 100644 src/flow.core/src/support/machines/Fsm/api/transition.cs
+ rename src/{monitor/src => flow.core/src/tools/services}/Watching.cs (62%)
+ rename src/{flow.core/src/participants => konst/src/events}/ActorIdentity.cs (100%)
+ rename src/{flow.core/src/participants => konst/src/events}/ActorIdentityT.cs (100%)
+ rename src/konst/src/events/{Events.cs => Eventing.cs} (75%)
+ rename src/{flow.core/src/participants => konst/src/events}/WfActor.cs (96%)
+ rename src/{flow.core/src/participants => konst/src/events}/WfCaller.cs (100%)
+ rename src/{flow.core/src/identity => konst/src/events}/WfStepId.cs (100%)
+ rename src/{flow.core/src/identity => konst/src/events}/WfStepIdT.cs (100%)
+ rename src/{flow.core/src/base => konst/src/events}/WfTermEvent.cs (100%)
+ rename src/{flow.core/src/base => konst/src/events}/WfTermEventLog.cs (85%)
+ rename src/{flow.core/src/base => konst/src/events}/WfTermEventSink.cs (90%)
+ rename src/{flow.core/src/base => konst/src/events}/WfTermEventT.cs (100%)
+ rename src/{flow.core/src/participants => konst/src/events}/WfWorker.cs (100%)
+ rename src/{flow.core/src/identity => konst/src/events/contracts}/EventAttribute.cs (100%)
+ rename src/{flow.core/src/base => konst/src/events/contracts}/IWfEventLog.cs (100%)
+ rename src/{flow.core/src/identity => konst/src/events/contracts}/StepAttribute.cs (87%)
+ rename src/konst/src/files/{FileSystem.cs => FileOps.cs} (100%)
+ rename src/{domain/src/files/models => konst/src/files}/Files.cs (100%)
+ rename src/{domain/src/files/FileSystem.cs => konst/src/fs/FS.cs} (100%)
+ rename src/{domain/src/files => konst/src/fs}/FileKinds.cs (100%)
+ rename src/{domain/src/files/models => konst/src/fs}/FileSystemObject.cs (100%)
+ rename src/{domain/src/files/models => konst/src/fs}/FileSystemObjects.cs (92%)
+ rename src/{domain/src/files/ops => konst/src/fs/api}/dir.cs (100%)
+ rename src/{domain/src/files/ops => konst/src/fs/api}/drive.cs (100%)
+ rename src/{domain/src/files/ops => konst/src/fs/api}/ext.cs (100%)
+ rename src/{domain/src/files/ops => konst/src/fs/api}/file.cs (100%)
+ rename src/{domain/src/files/ops => konst/src/fs/api}/folder.cs (100%)
+ rename src/{domain/src/files/ops => konst/src/fs/api}/format.cs (100%)
+ rename src/{domain/src/files/ops => konst/src/fs/api}/list.cs (100%)
+ rename src/{domain/src/files/ops => konst/src/fs/api}/path.cs (100%)
+ rename src/{domain/src/files/ops => konst/src/fs/api}/save.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/contracts/FileKindAttribute.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/contracts/IFileKind.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/contracts/IFso.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Asm.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Cil.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Cs.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Csv.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Dll.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Doc.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Exe.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Hex.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Json.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/PCsv.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Txt.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/XCsv.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/kinds/Xml.cs (100%)
+ rename src/{domain/src/files/models => konst/src/fs/listed}/ListedFile.cs (100%)
+ rename src/{domain/src/files/models => konst/src/fs/listed}/ListedFileField.cs (100%)
+ rename src/{domain/src/files/models => konst/src/fs/listed}/ListedFiles.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/literals/DriveLetter.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/literals/FileSystemObjectKind.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/literals/PathPartKind.cs (100%)
+ rename src/{domain/src/files => konst/src/fs}/literals/PathSeparator.cs (100%)
+ rename src/{domain/src/files/models/objects => konst/src/fs/parts}/Drive.cs (100%)
+ rename src/{domain/src/files/models => konst/src/fs/parts}/ExtNames.cs (88%)
+ rename src/{domain/src/files/models => konst/src/fs/parts}/Extensions.cs (87%)
+ rename src/{domain/src/files/models/objects => konst/src/fs/parts}/FileExt.cs (99%)
+ rename src/{domain/src/files/models/objects => konst/src/fs/parts}/FileName.cs (100%)
+ rename src/{domain/src/files/models/objects => konst/src/fs/parts}/FilePath.cs (100%)
+ rename src/{domain/src/files/models/objects => konst/src/fs/parts}/FolderName.cs (100%)
+ rename src/{domain/src/files/models/objects => konst/src/fs/parts}/FolderPath.cs (100%)
+ rename src/{domain/src/files/models/objects => konst/src/fs/parts}/PathPart.cs (100%)
+ create mode 100644 src/konst/src/fs/x/Reader.cs
+ rename src/{domain/src/files/ops/x/Extensions.cs => konst/src/fs/x/Writer.cs} (76%)
+ create mode 100644 src/konst/src/tables/models/StringTableCell.cs
+ create mode 100644 src/konst/src/tables/models/StringTableCells.cs
+ create mode 100644 src/konst/src/tables/models/StringTableCellsT.cs
+ create mode 100644 src/konst/src/tables/models/StringTableRowT.cs
+ create mode 100644 src/konst/src/tables/models/StringTableRowsT.cs
+ create mode 100644 src/konst/src/tables/models/StringTableT.cs
+ rename src/konst/src/tables/models/{CellT.cs => TableCellT.cs} (79%)
+ rename src/konst/src/tables/ops/{index.cs => cell.cs} (51%)
+ create mode 100644 src/konst/src/tables/ops/create.cs
+ create mode 100644 src/konst/src/tables/ops/path.cs
+ rename src/konst/src/tables/{models/StringTables.cs => ops/row.cs} (68%)
+ rename src/{flow.core/src/base => konst/src/text}/Textual.cs (100%)
+ rename src/machine/src/workflows/{steps/workers/RunProcessors.cs => Engine.cs} (86%)
+ delete mode 100644 src/monitor/src/DirectoryMonitor.cs
+ delete mode 100644 src/monitor/src/FileCatalogEntry.cs
+ delete mode 100644 src/monitor/src/FileCatalogEntryField.cs
+ delete mode 100644 src/monitor/src/FileContentKind.cs
+ delete mode 100644 src/monitor/src/FileExtKind.cs
+ delete mode 100644 src/monitor/src/FileLibraryKind.cs
+ delete mode 100644 src/monitor/src/FileSystemCatalog.cs
+ delete mode 100644 src/monitor/src/FileSystemChangeKind.cs
+ delete mode 100644 src/monitor/src/FileSystemObject.cs
+ delete mode 100644 src/monitor/src/FileSystemObjectKind.cs
+ delete mode 100644 src/monitor/src/FolderKind.cs
+ delete mode 100644 src/monitor/src/IMonitor.cs
+ delete mode 100644 src/monitor/src/Monitors.cs
+ create mode 100644 src/run/src/steps/PrimalFsmSpec1.cs
+ create mode 100644 src/run/src/steps/PrimalFsmSpecs.cs

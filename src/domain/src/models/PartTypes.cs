@@ -7,11 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using System.Linq;
-
     using static z;
     using static Konst;
 
+    /// <summary>
+    /// Represents the types defined by a part
+    /// </summary>
     public readonly struct PartTypes
     {
         [MethodImpl(Inline)]

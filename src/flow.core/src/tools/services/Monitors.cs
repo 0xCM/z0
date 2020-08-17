@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct Monitors
     {
         [MethodImpl(Inline), Op]
-        public static IDirectoryMonitor monitor(FolderPath src, DirectoryMonitor.ChangeHandler handler, bool recursive = true, string filter = null)
+        public static IDirectoryMonitor monitor(FS.FolderPath src, FS.ChangeHandler handler, bool recursive = true, string filter = null)
             => new DirectoryMonitor(src, handler, recursive, filter);
     }
 }

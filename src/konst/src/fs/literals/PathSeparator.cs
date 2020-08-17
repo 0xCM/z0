@@ -4,12 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public enum PathSeparator : ushort
+    partial struct FS
     {
-        BS = AsciSymSymbol.BS,
+        public enum PathSeparator : ushort
+        {
+            BS = AsciSymSymbol.BS,
 
-        FS = AsciSymSymbol.FS
+            FS = AsciSymSymbol.FS
+        }
     }
 }

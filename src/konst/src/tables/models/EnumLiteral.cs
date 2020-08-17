@@ -10,33 +10,31 @@ namespace Z0.Data
     using static Konst;
     
     using F = EnumLiteralField;
-    using T = EnumLiteral;
     using api = Z0.Table;
 
-    public readonly struct EnumLiteral
-    {        
-        public int Sequence => (int)Index;
-        
-        public readonly string TypeName;
+    public struct EnumLiteral
+    {                
+        public string TypeName;
 
-        public readonly uint Index;
+        public uint Index;
 
-        public readonly string Name;
+        public string Name;
 
-        public readonly string Hex;
+        public string Hex;
 
-        public readonly string BitString;
+        public string BitString;
 
-        public readonly string Description;
+        public string Description;
 
-        public EnumLiteral(string TypeName, uint Index, string Name, string Hex, string BitString, string Description = null)
+        [MethodImpl(Inline)]
+        public EnumLiteral(string type, uint index, string name, string hex, string bits, string description)
         {
-            this.TypeName = TypeName;
-            this.Index = Index;
-            this.Name = Name;
-            this.Hex = Hex;
-            this.BitString = BitString;
-            this.Description = Description ?? string.Empty;
+            TypeName = type;
+            Index = index;
+            Name = name;
+            Hex = hex;
+            BitString = bits;
+            Description = description ?? EmptyString;
         }
                     
         public string DelimitedText(char delimiter)

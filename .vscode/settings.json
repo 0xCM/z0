@@ -27,6 +27,7 @@
         "opname",
         "pchar",
         "perefs",
+        "toolchains",
         "unbased",
         "vbsll",
         "vbytes",

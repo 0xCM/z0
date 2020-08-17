@@ -10,14 +10,14 @@ namespace Z0
     
     public readonly struct CodeGen
     {
-        public static PortableExecutableReference peref<T>()
+        public static PortableExecutableReference pe<T>()
             => PortableExecutableReference.CreateFromFile(typeof(T).Assembly.Location);
 
-        public static PortableExecutableReference peref(Type src)
+        public static PortableExecutableReference pe(Type src)
             => PortableExecutableReference.CreateFromFile(src.Assembly.Location);
 
-        public static PortableExecutableReference[] perefs(params Type[] src)
-            => src.Select(peref);
+        public static PortableExecutableReference[] pe(params Type[] src)
+            => src.Select(pe);
 
         public static CSharpCompilation compilation(string name)
             => CSharpCompilation.Create(name);
