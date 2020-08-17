@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Konst;
     using static RenderPatterns;
 
@@ -15,14 +17,14 @@ namespace Z0
     {
         public WfEventId EventId {get;}
 
-        public readonly LocatedInstructions Index;
+        public readonly LocatedAsmFxList Index;
 
         [MethodImpl(Inline)]
-        public IndexedInstructions(LocatedInstructions src)
+        public IndexedInstructions(LocatedAsmFxList src)
         {
             EventId = WfEventId.define(nameof(DecodedPart));
             Index = src;
-        }
+        }       
         
         public MessageFlair Flair 
             => MessageFlair.Cyan;

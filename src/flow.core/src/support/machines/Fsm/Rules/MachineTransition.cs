@@ -17,17 +17,13 @@ namespace Z0
     /// </summary>
     public class MachineTransition<E,S> : IFsmFunc<E,S>
     {
+        readonly Dictionary<int,ITransitionRule<E,S>> Index;
+
         public MachineTransition(IEnumerable<ITransitionRule<E,S>> rules)
-        {
-            this.RuleIndex = rules.Select(x => (Fsm.transitionKey(x.Trigger,x.Source).Hash, x)).ToDictionary();
-        }
+            => Index = rules.Select(x => (Fsm.transitionKey(x.Trigger,x.Source).Hash, x)).ToDictionary();
 
         public MachineTransition(IEnumerable<TransitionRule<E,S>> rules)
-        {
-            this.RuleIndex = rules.Select(x => (Fsm.transitionKey(x.Trigger,x.Source).Hash, x as ITransitionRule<E,S>)).ToDictionary();
-        }
-
-        readonly Dictionary<int,ITransitionRule<E,S>> RuleIndex;
+            => Index = rules.Select(x => (Fsm.transitionKey(x.Trigger,x.Source).Hash, x as ITransitionRule<E,S>)).ToDictionary();
     
         [MethodImpl(Inline)]
         public Option<S> Eval(E input, S source)        
@@ -35,7 +31,7 @@ namespace Z0
         
         public Option<ITransitionRule<E,S>> Rule(IRuleKey key)
         {
-            if(RuleIndex.TryGetValue(key.Hash, out ITransitionRule<E,S> dst))
+            if(Index.TryGetValue(key.Hash, out ITransitionRule<E,S> dst))
                 return some(dst);
             else
                 return default;
@@ -48,9 +44,6 @@ namespace Z0
         /// Specifies the set of events that can effect a transition
         /// </summary>
         public IEnumerable<E> Triggers
-            => RuleIndex.Values.Select(x => x.Trigger).Distinct();
-
-    }
-
- 
+            => Index.Values.Select(x => x.Trigger).Distinct();
+    } 
 }

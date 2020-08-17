@@ -21,7 +21,7 @@ namespace Z0
         {
             try
             {
-                var ct = CorrelationToken.define(PartId.Machine);
+                var ct = CorrelationToken.from(PartId.Machine);
                 var paths = context.AppPaths;
                 var config = Flow.configure(context, args, paths.ResourceRoot + FolderName.Define("capture"), ct);
                 using var log = Flow.log(config);
@@ -52,7 +52,7 @@ namespace Z0
         public Control(IWfContext wf)
         {
             Wf = wf;
-            Ct = CorrelationToken.define(PartId.Machine);
+            Ct = CorrelationToken.from(PartId.Machine);
             Context = wf.ContextRoot;
             Asm = WfBuilder.asm(Context);                           
             State = new WfCaptureState(Wf, Asm, wf.Config, wf.Ct);
@@ -99,7 +99,7 @@ namespace Z0
             Wf.RunningT(ActorName, kind, Ct);
             try
             {
-                using var step = RunProcessors.create(State, Ct);
+                using var step = Engine.create(State, Ct);
                 step.Run();
             }
             catch(Exception e)

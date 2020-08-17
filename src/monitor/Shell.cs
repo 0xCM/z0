@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-
     
     sealed class AppShell : Shell<AppShell>
     {
@@ -21,7 +20,7 @@ namespace Z0
         {
             var path = args.Length != 0 ? FolderPath.Define(args[0]) : FolderPath.Define(AppPaths.LogRoot.Name);            
             using var monitor = Monitors.monitor(path,OnChange);
-            term.print(text.format("",""));
+            term.print(WfEventBuilder.watching(nameof(PartId.Monitor), path, CorrelationToken.from((ulong)PartId.Monitor)));
             monitor.Start();
             Console.ReadKey();
         }
@@ -31,7 +30,7 @@ namespace Z0
         
         protected override void OnDispose()
         {
-
+            
         }
     }
 }

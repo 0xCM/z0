@@ -25,7 +25,7 @@ namespace Z0
         [Op]
         public static AsmRoutine routine(OpUri uri, string sig, AsmFxBlock src, bool check = false)
         {
-            var info = new AsmInstructionSummary[src.InstructionCount];
+            var info = new AsmFxSummary[src.InstructionCount];
             var offset = (ushort)0;
             var @base = src.BaseAddress;
 

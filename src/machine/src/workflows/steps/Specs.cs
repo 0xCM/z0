@@ -65,12 +65,12 @@ namespace Z0
         public const string StepName = nameof(ProcessAsm);
     }
 
-    [Step(typeof(RunProcessors))]
+    [Step(typeof(Engine))]
     public readonly struct RunProcessorsStep
     {
         public const WfStepKind Kind = WfStepKind.RunProcessors;
         
-        public const string StepName = nameof(RunProcessors);           
+        public const string StepName = nameof(Engine);           
     }    
 
     [Step(typeof(EmitPeHeaders))]

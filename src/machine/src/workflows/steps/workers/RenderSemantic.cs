@@ -33,7 +33,7 @@ namespace Z0
             DataFormat = HexFormatConfig.HexData;
         }
 
-        public void Render(HostInstructions src, StreamWriter dst)
+        public void Render(HostAsmFx src, StreamWriter dst)
         {
             var functions = src.Data;
             var count = src.MemberCount;            
@@ -47,7 +47,7 @@ namespace Z0
             }    
         }
 
-        void Render(MemberInstructions src, StreamWriter dst)
+        void Render(MemberAsmFx src, StreamWriter dst)
         {
             Buffer.Clear();
 
@@ -107,7 +107,7 @@ namespace Z0
         string Format(BinaryCode src)
             => text.concat("encoded", text.bracket(src.Length), Assign, FormatBytes(src.Data));
 
-        string Footer(LocatedAsmFx src)
+        string Footer(BasedAsmFx src)
         {   
             if(asm.isCall(src.Instruction))
             {
@@ -125,7 +125,7 @@ namespace Z0
             return string.Empty;
         }
         
-        void Render(LocatedAsmFx src, MemoryOffset address,  OffsetSequence sequence)
+        void Render(BasedAsmFx src, MemoryOffset address,  OffsetSequence sequence)
         {
             var id = src.OpId;
             var @base = src.BaseAddress;
@@ -175,7 +175,7 @@ namespace Z0
                 sequence.Format(InstructionCountPad)
                 ); 
 
-        string InstructionHeader(LocatedAsmFx src, MemoryOffset address, OffsetSequence sequence)
+        string InstructionHeader(BasedAsmFx src, MemoryOffset address, OffsetSequence sequence)
         {
             var left = LineLocation(src.Instruction, address, sequence);
             var right = text.concat(src.FormattedInstruction, LeftImply, src.InstructionCode, HeaderSep, Format(src.Encoded));

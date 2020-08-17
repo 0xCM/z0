@@ -17,11 +17,11 @@ namespace Z0
         public readonly ulong Value;
 
         [MethodImpl(Inline)]
-        public static CorrelationToken define(ulong value)
+        public static CorrelationToken from(ulong value)
             => new CorrelationToken(value);
 
         [MethodImpl(Inline)]
-        public static CorrelationToken define(PartId part)
+        public static CorrelationToken from(PartId part)
             => new CorrelationToken((ulong)part);
 
         [MethodImpl(Inline)]

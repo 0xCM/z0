@@ -14,7 +14,7 @@ namespace Z0
     partial struct asm
     {        
         [MethodImpl(Inline), Op]
-        public static bool empty(in InstructionMemory src)
+        public static bool empty(in AsmFxMemory src)
         {
             var empty = true;
             empty &= (src.MemoryBase == 0);

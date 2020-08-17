@@ -14,11 +14,11 @@ namespace Z0
     partial struct asm
     { 
         [MethodImpl(Inline), Op]
-        public static AsmInstructionSummary summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
-            => new AsmInstructionSummary(@base, (ushort)offset,  formatted,  src.InstructionCode, operands(@base, src),  encoded.Slice(offset, src.ByteLength).ToArray());
+        public static AsmFxSummary summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
+            => new AsmFxSummary(@base, (ushort)offset,  formatted,  src.InstructionCode, operands(@base, src),  encoded.Slice(offset, src.ByteLength).ToArray());
 
         [MethodImpl(Inline), Op]
-        public static AsmInstructionSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
+        public static AsmFxSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
             => summarize(@base, src, encoded, formatted, offset);
 
         /// <summary>
@@ -26,9 +26,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source instruction list</param>
         [Op]
-        public static ReadOnlySpan<AsmInstructionSummary> summarize(AsmFxList src)
+        public static ReadOnlySpan<AsmFxSummary> summarize(AsmFxList src)
         {
-            var dst = new AsmInstructionSummary[src.Length];
+            var dst = new AsmFxSummary[src.Length];
             var offset = (ushort)0;
             var @base = src.Encoded.Address;
 
@@ -46,9 +46,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source function</param>
         [Op]
-        public static ReadOnlySpan<AsmInstructionSummary> summarize(in AsmRoutine src)
+        public static ReadOnlySpan<AsmFxSummary> summarize(in AsmRoutine src)
         {
-            var dst = new AsmInstructionSummary[src.InstructionCount];
+            var dst = new AsmFxSummary[src.InstructionCount];
             var offset = (ushort)0;
             var @base = src.BaseAddress;
 

@@ -15,19 +15,19 @@ namespace Z0
     public readonly struct ProcessBrokers
     {
         [MethodImpl(Inline), Op]
-        public static BitBroker<HostHandlerKind,HostInstructions> host(HostHandlerKind kind = default)
-            => DataBrokers.broker64<HostHandlerKind,HostInstructions>(kind);
+        public static BitBroker<HostHandlerKind,HostAsmFx> host(HostHandlerKind kind = default)
+            => DataBrokers.broker64<HostHandlerKind,HostAsmFx>(kind);
 
         [MethodImpl(Inline), Op]
-        public static BitBroker<HostHandlerKind,HostInstructions> host(DataHandler<HostInstructions>[] buffer, HostHandlerKind kind = default)
-            => DataBrokers.broker64<HostHandlerKind,HostInstructions>(buffer, kind);
+        public static BitBroker<HostHandlerKind,HostAsmFx> host(DataHandler<HostAsmFx>[] buffer, HostHandlerKind kind = default)
+            => DataBrokers.broker64<HostHandlerKind,HostAsmFx>(buffer, kind);
 
         [MethodImpl(Inline), Op]
-        public static BitBroker<JmpKind,LocatedAsmFx> jmp(JmpKind kind = default)        
-            => DataBrokers.broker64<JmpKind,LocatedAsmFx>(kind);
+        public static BitBroker<JmpKind,BasedAsmFx> jmp(JmpKind kind = default)        
+            => DataBrokers.broker64<JmpKind,BasedAsmFx>(kind);
         
         [MethodImpl(Inline), Op]
-        public static BitBroker<JmpKind,LocatedAsmFx> jmp(DataHandler<LocatedAsmFx>[] buffer, JmpKind kind = default)        
-            => DataBrokers.broker64<JmpKind,LocatedAsmFx>(buffer, kind);
+        public static BitBroker<JmpKind,BasedAsmFx> jmp(DataHandler<BasedAsmFx>[] buffer, JmpKind kind = default)        
+            => DataBrokers.broker64<JmpKind,BasedAsmFx>(buffer, kind);
     }
 }

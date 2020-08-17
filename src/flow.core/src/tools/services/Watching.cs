@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static Konst;
 
@@ -14,25 +13,23 @@ namespace Z0
         where T : ITextual
     {
         public const string EventName = nameof(Watching<T>);
-
-        public const string Message = "{0} | {1} | {2}";
-        
+                
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public WfActor Actor {get;}
 
-        public T Subject {get;}
+        public T Target {get;}
 
         [MethodImpl(Inline)]
-        public Watching(T subject, CorrelationToken ct, [CallerFilePath] string actor = null)
+        public Watching(string actor, T subject, CorrelationToken ct)
         {
             EventId = WfEventId.define(EventName, ct);
-            ActorName = Path.GetFileNameWithoutExtension(actor);
-            Subject = subject;
+            Actor = actor;
+            Target = subject;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Message, EventId, ActorName, Subject);
+            => Render.format(EventId, Actor, Target);
     }
 }

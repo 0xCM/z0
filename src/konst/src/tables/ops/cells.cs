@@ -6,18 +6,12 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Konst;
     using static z;
 
     partial struct Table
     {
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static string cell<T>(in CellFormatter<T,string> formatter, in T src)            
-            => formatter.Format(src);
-
         [Op, Closures(AllNumeric)]
         public static ReadOnlySpan<string> cells<T>(in CellFormatter<T,string> formatter, ReadOnlySpan<T> src)
         {
@@ -26,5 +20,14 @@ namespace Z0
                 seek(dst,i) = cell(formatter, skip(src,i));            
             return dst;
         }
+
+        [MethodImpl(Inline), Op]
+        public static StringTableCells cells(params string[] src)
+            => new StringTableCells(src);
+
+        [MethodImpl(Inline), Op]
+        public static StringTableCells<T> cells<T>(params StringTableCell<T>[] src)
+            where T : ITextual
+                => new StringTableCells<T>(src);
     }
 }

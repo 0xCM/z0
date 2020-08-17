@@ -22,7 +22,7 @@ namespace Z0
         
         public string ActorName {get;}
 
-        public PartInstructions Instructions {get;}
+        public PartAsmFx Instructions {get;}
 
         public PartId PartId {get;}
 
@@ -31,7 +31,7 @@ namespace Z0
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public DecodedPart(string actor, PartInstructions src, CorrelationToken ct, MessageFlair flair = MessageFlair.Cyan)
+        public DecodedPart(string actor, PartAsmFx src, CorrelationToken ct, MessageFlair flair = MessageFlair.Cyan)
         {
             EventId = WfEventId.define(nameof(DecodedPart), ct);
             ActorName = actor;

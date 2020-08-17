@@ -8,17 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    public readonly struct PrimalFsmSpecs
-    {
-        public static PrimalSpec<S,E,R> create<S,E,R>(S[] states, E[] events, R[] results)
-            where S : unmanaged
-            where E : unmanaged
-            where R : unmanaged
-                => new PrimalSpec<S,E,R>(states,events,results);
-    }
     
-    public readonly struct PrimalSpec<S,E,R>
+    public readonly struct PrimalFsmSpec<S,E,R>
         where S : unmanaged
         where E : unmanaged
         where R : unmanaged
@@ -29,12 +20,15 @@ namespace Z0
 
         public readonly TableSpan<R> Results;
         
+        public readonly TableSpan<TransitionRule<E,S>> Rules;
+        
         [MethodImpl(Inline)]
-        public PrimalSpec(S[] states, E[] events, R[] results)
+        public PrimalFsmSpec(S[] states, E[] events, R[] results, params TransitionRule<E,S>[] rules)
         {
             States = states;
             Events = events;
             Results = results;
+            Rules = rules;
         }        
     }
 }

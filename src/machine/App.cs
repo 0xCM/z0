@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
 
     using static z;
-
-    using P = Z0.Parts;
         
     class App : AppShell<App,IAppContext>
     {                        
@@ -18,10 +15,9 @@ namespace Z0
         public App()
             : base(WfBuilder.app())
         {
-            Ct = CorrelationToken.define(PartId.Machine);
+            Ct = CorrelationToken.from(PartId.Machine);
         }
-        
-        
+                
         public override void RunShell(params string[] args)
             => Control.run(Context,args);
 

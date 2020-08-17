@@ -15,7 +15,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    ref struct Runner 
+    public ref struct Runner 
     {
         readonly WfCaptureState State;   
 
@@ -39,6 +39,11 @@ namespace Z0
             offset = 0;
         }
 
+        public void Run<C,S,T>(in WfRunSpec<C,S,T> spec)
+        {
+
+        }
+        
         void RunCalc()
         {
             CalcDemo.compute();
@@ -51,6 +56,12 @@ namespace Z0
         }
         
 
+        void RunFsm()
+        {
+            using var step = new RunFsm(Wf);
+            step.Run();
+        }
+        
         public void Dispose()
         {
 
@@ -60,7 +71,6 @@ namespace Z0
         void Status<T>(T message)
         {
             Wf.Status(Actor, message, Ct);
-
         }
         
         static void format(ValueType src, StringBuilder dst)
@@ -152,6 +162,8 @@ namespace Z0
             s0.Run();
 
             ReadRes();
+
+            RunFsm();
     
             Status(TableIndex.AsmTAddressingModRm32);            
         }

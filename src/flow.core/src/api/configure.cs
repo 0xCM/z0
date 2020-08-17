@@ -11,6 +11,15 @@ namespace Z0
 
     partial struct Flow
     {
+        [MethodImpl(Inline)]
+        public static void configure<T>(T step, params WfStepArg[] args)
+            where T : struct, IWfStep<T>
+                => step.Configure(args);
+
+        [MethodImpl(Inline)]
+        public static ConfiguredStep<T> configured<T>(T step, params WfStepArg[] args)
+            where T : struct, IWfStep<T>
+                => new ConfiguredStep<T>(step, args);
         [Op]
         public static WfConfig configure(IAppContext context, string[] args, CorrelationToken ct)
         {

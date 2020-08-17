@@ -9,8 +9,7 @@ namespace Z0
 
     using static Konst;        
 
-    [ApiHost]
-    public readonly partial struct Cells
+    public readonly struct Cells
     {
 
     }

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
-    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -20,7 +19,6 @@ namespace Z0
             var content = src is ITextual x ? x.Format() : src.ToString();
             return text.rpad(text.format("{0} {1}", delimiter, content), width);
         }
-        
         
         public static void format<F,T>(in TableFields<F> fields, in T src, StringBuilder dst)
             where T : struct, ITable<F,T>

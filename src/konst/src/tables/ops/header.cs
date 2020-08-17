@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using Z0.Data;
-
     partial struct Table
     {
         [MethodImpl(Inline), Op]

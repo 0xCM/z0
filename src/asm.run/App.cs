@@ -35,7 +35,7 @@ namespace Z0
         public App()
             : base(CreateAppContext())
         {
-            Ct = CorrelationToken.define(Part);   
+            Ct = CorrelationToken.from(Part);   
             Raise(Flow.status(ActorName, "Application created", Ct));  
         }
 
@@ -85,8 +85,7 @@ namespace Z0
 
         protected override void OnDispose()
         {
-            // Wf.Dispose();
-            // Raise(status(ActorName, "Shell finished", Ct));
+ 
         }
     }
 

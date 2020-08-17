@@ -48,7 +48,6 @@ namespace Z0.Asm
         public bool gteq_8i(sbyte x, sbyte y)
             => x >= y;
 
-
         [Op]
         public bool eq_imm8(sbyte x)
             => x == imm8i;

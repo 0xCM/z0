@@ -213,7 +213,7 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         public static Fsm<E,S> machine<E,S>(string id, IFsmContext context, S s0, S sZ, MachineTransition<E,S> f)
-            =>  new Fsm<E,S>(id, context, s0, sZ, f);
+            => new Fsm<E,S>(id, context, s0, sZ, f);
 
         /// <summary>
         /// Defines an output rule key

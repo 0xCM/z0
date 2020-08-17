@@ -142,7 +142,7 @@ namespace Z0.Asm
             });
 
 
-        public string Render(InstructionMemory src)
+        public string Render(AsmFxMemory src)
             => src.AspectRender;
         
         public string RenderAddress(Instruction src, int pad = 16)

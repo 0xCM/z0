@@ -26,17 +26,17 @@ namespace Z0
             Processor = api.jmp(wf);            
         }
 
-        public void Run(PartInstructions src)        
+        public void Run(PartAsmFx src)        
         {            
             Process(src);            
         }
 
-        public void Process(PartInstructions src)
+        public void Process(PartAsmFx src)
         {
             api.processor(Wf).Process(src);
         }
  
-        public void Render(PartInstructions src)
+        public void Render(PartAsmFx src)
         {
             var part = src.Part;
             var archive = Archives.Services.Semantic;
@@ -46,7 +46,7 @@ namespace Z0
                 Render(src.Data[i]);
         }
 
-        public void Render(HostInstructions src)        
+        public void Render(HostAsmFx src)        
         {
             var archive = Archives.Services.Semantic;
             var path = archive.SemanticPath(src.Host);  

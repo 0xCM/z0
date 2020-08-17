@@ -17,12 +17,12 @@ namespace Z0
     public abstract class FsmSpec<E,S,O>
     {
         public virtual IEnumerable<TransitionRule<E,S>> TransRules {get;}
+        
         public virtual IEnumerable<OutputRule<E,S,O>> OutputRules{get;}
 
         public MachineTransition<E,S> TransFunc
             => TransRules.ToFunction();
     }
-
 
     public class Fsm1Spec : FsmSpec<EventKinds,StateKinds,OutputKinds>
     {

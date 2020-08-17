@@ -11,7 +11,7 @@ namespace Z0
 
     using static z;
 
-    public readonly partial struct Table
+    partial struct Table
     {
         [MethodImpl(Inline)]
         public static T init<T>()

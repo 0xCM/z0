@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct HeaderCell
+    public readonly struct HeaderCell : ITextual, IComparable<HeaderCell>
     {
         public readonly uint Index;        
 
@@ -24,5 +24,16 @@ namespace Z0
             Name = name;
             Width = width;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => text.rpad(Name, Width);
+        
+        [MethodImpl(Inline)]
+        public int CompareTo(HeaderCell src)
+            => Index.CompareTo(src.Index);
+
+        public static HeaderCell Empty 
+            => new HeaderCell(0, EmptyString, 0);    
     }
 }

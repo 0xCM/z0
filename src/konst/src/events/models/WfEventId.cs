@@ -20,9 +20,9 @@ namespace Z0
         /// <param name="ts">The timestamp which, if unspecified, will default to the event creation time (now)</param>
         [MethodImpl(Inline)]
         public static WfEventId define(string name, CorrelationToken? ct = null, Timestamp? ts = null)
-            => new WfEventId(name, ct ?? CorrelationToken.define(0ul), ts ?? now());
+            => new WfEventId(name, ct ?? CorrelationToken.from(0ul), ts ?? now());
 
-        const string Pattern = "{0} | {1} | {2}";        
+        const string Pattern = "| {0} | {1} | {2}";        
 
         /// <summary>
         /// The event data type name

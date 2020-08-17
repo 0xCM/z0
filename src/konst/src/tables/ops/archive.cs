@@ -15,9 +15,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static TableArchive archive(FolderPath root)
             => new TableArchive(root);
-
-        [MethodImpl(Inline), Op]
-        public static FilePath path(FolderPath dst, IDataModel model)
-            => dst + FileName.Define(model.Name, FileExtensions.Csv);
     }
 }

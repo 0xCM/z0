@@ -17,7 +17,7 @@ namespace Z0
         C = 2
     }
 
-    public interface IHostProcessor : IAsmProcessor<HostHandlerKind,HostInstructions>
+    public interface IHostProcessor : IAsmProcessor<HostHandlerKind,HostAsmFx>
     {
 
     }

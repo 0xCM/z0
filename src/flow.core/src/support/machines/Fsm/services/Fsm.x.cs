@@ -11,7 +11,6 @@ namespace Z0.Machines
 
     using static Konst;
     using static ObserverTrace;
-    using Z0.Machines;
 
     public static class FsmX
     {
@@ -23,8 +22,7 @@ namespace Z0.Machines
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
         public static MachineTransition<E,S> ToFunction<E,S>(this IEnumerable<TransitionRule<E,S>> rules)
-            => new MachineTransition<E, S>(rules);
-
+            => Fsm.transition(rules.Array());
  
         /// <summary>
         /// Specifies whether an observer should be notified when a machine transitions from

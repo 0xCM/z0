@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableHeader : IDataIndex<HeaderCell>
+    public readonly struct TableHeader : IDataIndex<HeaderCell>, ITextual
     {        
         public HeaderCell[] Data {get;}
 
@@ -44,5 +44,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (uint)Data.Length;
         }
+
+        public string Format()
+        {
+            var dst = text.build();
+            for(var i=0; i<Count; i++)
+                dst.Append(text.format(RenderPatterns.PSx1, Data[i].Format()));
+            return dst.ToString();
+        }
+        public static TableHeader Empty 
+            => new TableHeader(new HeaderCell[0]{});
     }
 }

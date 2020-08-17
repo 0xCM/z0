@@ -14,6 +14,7 @@ namespace Z0
     
     partial struct asm
     {        
+
         [MethodImpl(Inline), Op]
         public static Register memSeg(in Instruction src, int index)
         {

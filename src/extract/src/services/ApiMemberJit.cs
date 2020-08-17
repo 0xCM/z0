@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
 
@@ -163,7 +162,7 @@ namespace Z0
                 var methods = DirectMethods(host);
                 if(methods.Length != 0)
                 {
-                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, CorrelationToken.define(PartId.None)));
+                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, CorrelationToken.from(PartId.None)));
                     dst.AddRange(methods);
                 }
             }
@@ -178,7 +177,7 @@ namespace Z0
                 var methods = GenericMethods(host);
                 if(methods.Length != 0)
                 {
-                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, CorrelationToken.define(PartId.None)));
+                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, CorrelationToken.from(PartId.None)));
                     dst.AddRange(methods);
                 }
             }

@@ -16,6 +16,8 @@ namespace Z0
         string StepName {get;}
 
         WfStepId StepId {get;}
+
+        void Run(){}
     }
 
     /// <summary>
@@ -24,6 +26,11 @@ namespace Z0
     public interface IWfStep<T> : IWfStep
         where T : struct, IWfStep<T>
     {
+        void Configure(params WfStepArg[] args)
+            => Configure(new WfStepArgs(args));
+
+        void Configure(WfStepArgs args){}
+
         string IWfStep.StepName 
             => typeof(T).LiteralFieldValue<string>(nameof(StepName), EmptyString);
     }

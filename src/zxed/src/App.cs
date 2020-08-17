@@ -18,7 +18,7 @@ namespace Z0
         public App()
             : base(Flow.app())
         {
-            Ct = CorrelationToken.define(Part);
+            Ct = CorrelationToken.from(Part);
         }
 
         void Parse(FilePath src)

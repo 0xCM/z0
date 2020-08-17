@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     
     using static Konst;
     using static Flow;
@@ -24,7 +23,7 @@ namespace Z0
         public App()
             : base(Flow.app())
         {
-            Ct = CorrelationToken.define(Part);   
+            Ct = CorrelationToken.from(Part);   
         }
 
         public override void RunShell(params string[] args)

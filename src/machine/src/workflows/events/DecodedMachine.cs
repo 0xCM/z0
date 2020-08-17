@@ -25,10 +25,10 @@ namespace Z0
 
         public readonly EncodedParts Index;
 
-        public readonly PartInstructions[] Data;        
+        public readonly PartAsmFx[] Data;        
         
         [MethodImpl(Inline)]        
-        public DecodedMachine(EncodedParts index, PartInstructions[] src, CorrelationToken ct)
+        public DecodedMachine(EncodedParts index, PartAsmFx[] src, CorrelationToken ct)
         {
             EventId = evid(EventName, ct);
             Index = index;
@@ -38,7 +38,7 @@ namespace Z0
         public MessageFlair Flair 
             => MessageFlair.Cyan;
                 
-        public IEnumerable<LocatedAsmFx> Instructions 
+        public IEnumerable<BasedAsmFx> Instructions 
             => Data.SelectMany(x => x.Located);
  
         public int TotalCount 

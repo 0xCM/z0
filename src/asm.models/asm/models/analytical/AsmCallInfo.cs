@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public readonly struct AsmCallInfo : IAsmCallInfo
     {
-        readonly LocatedAsmFx Instruction;
+        readonly BasedAsmFx Instruction;
 
         public MemoryAddress Target {get;}
 
@@ -34,7 +34,7 @@ namespace Z0.Asm
             => Instruction.Encoded;
 
         [MethodImpl(Inline)]
-        public AsmCallInfo(LocatedAsmFx src)
+        public AsmCallInfo(BasedAsmFx src)
         {
             Instruction = src;
             Target = MemoryAddress.Empty;

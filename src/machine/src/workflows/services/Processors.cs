@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ProcessHostAsm processor(IWfContext wf, HostInstructions src)
+        public static ProcessHostAsm processor(IWfContext wf, HostAsmFx src)
             => new ProcessHostAsm(wf, src);
 
         [MethodImpl(Inline), Op]

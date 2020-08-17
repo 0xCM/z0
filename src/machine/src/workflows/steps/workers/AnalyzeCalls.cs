@@ -21,11 +21,11 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly LocatedInstructions Source;
+        readonly LocatedAsmFxList Source;
 
         readonly FolderPath TargetDir;
         
-        public AnalyzeCalls(IWfContext wf, LocatedInstructions src, FolderPath dst, CorrelationToken ct)
+        public AnalyzeCalls(IWfContext wf, LocatedAsmFxList src, FolderPath dst, CorrelationToken ct)
         {
             Id = WfStepKind.AnalyzeCalls;
             Wf = wf;

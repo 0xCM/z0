@@ -37,7 +37,7 @@ namespace Z0
         public App()
             : base(WfBuilder.app())
         {
-            Ct = CorrelationToken.define(Part);               
+            Ct = CorrelationToken.from(Part);               
         }
         
         public override void RunShell(params string[] args)

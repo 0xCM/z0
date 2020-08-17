@@ -19,8 +19,6 @@ namespace Z0
         /// <param name="f">The operation selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        /// <remarks>Note that plainy idiotic casting required to teach the compiler that
-        /// multiplication of unsigned 8-bit integers should not produce a 32-bit signed integer</remarks>
         [MethodImpl(Inline), Op]
         public static byte eval(Add f, byte x, byte y)
             => (byte)(x+y);
@@ -30,8 +28,6 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        /// <remarks>Note that plainy idiotic casting required to teach the compiler that
-        /// multiplication of unsigned 8-bit integers should not produce a 32-bit signed integer</remarks>
         [MethodImpl(Inline), Op]
         public static byte eval(Sub f, byte x, byte y)
             => (byte)(x-y);
@@ -41,8 +37,6 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        /// <remarks>Note that plainy idiotic casting required to teach the compiler that
-        /// multiplication of unsigned 8-bit integers should not produce a 32-bit signed integer</remarks>
         [MethodImpl(Inline), Op]
         public static byte eval(Mul f, byte x, byte y)
             => (byte)(x*y);
@@ -52,8 +46,6 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        /// <remarks>Note that plainy idiotic casting required to teach the compiler that
-        /// multiplication of unsigned 8-bit integers should not produce a 32-bit signed integer</remarks>
         [MethodImpl(Inline), Op]
         public static byte eval(Div f, byte x, byte y)
             => (byte)(x/y);
@@ -63,8 +55,6 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        /// <remarks>Note that plainy idiotic casting required to teach the compiler that
-        /// multiplication of unsigned 8-bit integers should not produce a 32-bit signed integer</remarks>
         [MethodImpl(Inline), Op]
         public static byte eval(And f, byte x, byte y)
             => (byte)(x&y);

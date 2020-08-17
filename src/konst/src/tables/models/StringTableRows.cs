@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Data;
-
     using static Konst;
 
     public readonly struct StringTableRows
     {        
-        public readonly StringTableRow[] Data;
+        public readonly TableSpan<StringTableRow> Data;
 
         [MethodImpl(Inline)]
         public static implicit operator StringTableRows(StringTableRow[] data)
@@ -21,9 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public StringTableRows(StringTableRow[] data)
-        {
-            Data = data;
-        }        
+            => Data = data;
 
         public ref StringTableRow this[uint index]
         {

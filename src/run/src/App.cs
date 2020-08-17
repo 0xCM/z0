@@ -25,7 +25,7 @@ namespace Z0
         public App()
             : base(Flow.app())
         {
-            Ct = CorrelationToken.define(Part);                 
+            Ct = CorrelationToken.from(Part);                 
         }
 
         IResolvedApi Api 
@@ -33,6 +33,7 @@ namespace Z0
        
         IRunnerContext CreateArtistryContext(IAsmContext root, PartId[] code)
             => RunnerContext.Create(root, code);
+
 
         public override void RunShell(params string[] args)
         {                        

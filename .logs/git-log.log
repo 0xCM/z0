@@ -10247,3 +10247,21 @@
  create mode 100644 src/data/tables/url/lang.md
  create mode 100644 src/data/tables/url/ms.md
  create mode 100644 src/data/tables/url/tools.md
+[master 074fa6f64] .
+ 30 files changed, 585 insertions(+), 393 deletions(-)
+ rename src/flow.core/src/support/machines/Fsm/{services/Fsm.api.cs => Fsm.cs} (53%)
+ delete mode 100644 src/flow.core/src/support/machines/Fsm/contracts/FsmContracts.cs
+ create mode 100644 src/flow.core/src/support/machines/Fsm/contracts/IFsmActionRule.cs
+ create mode 100644 src/flow.core/src/support/machines/Fsm/contracts/IFsmContext.cs
+ create mode 100644 src/flow.core/src/support/machines/Fsm/contracts/IFsmEventRule.cs
+ create mode 100644 src/flow.core/src/support/machines/Fsm/contracts/IFsmFunc.cs
+ create mode 100644 src/flow.core/src/support/machines/Fsm/contracts/IFsmRule.cs
+ create mode 100644 src/flow.core/src/support/machines/Fsm/contracts/IFsmStateRule.cs
+ create mode 100644 src/flow.core/src/support/machines/Fsm/contracts/IOutputRule.cs
+ create mode 100644 src/flow.core/src/support/machines/Fsm/contracts/IRuleKey.cs
+ create mode 100644 src/flow.core/src/support/machines/Fsm/contracts/ITransitionRule.cs
+ delete mode 100644 src/flow.core/src/support/machines/Fsm/services/PrimalFsm.cs
+ rename src/{machine/src/workflows/ResBytes.xml => flow.core/src/support/synthesis/z0.respack.xml} (100%)
+ create mode 100644 src/run/src/steps/Fsm1Spec.cs
+ create mode 100644 src/run/src/steps/PrimalFsmSpec.cs
+ create mode 100644 src/run/src/steps/RunFsm.cs

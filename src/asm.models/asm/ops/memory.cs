@@ -19,9 +19,9 @@ namespace Z0
         /// <param name="src">The source instruction</param>
         /// <param name="index">The operand index</param>
         [MethodImpl(Inline), Op]
-        public static InstructionMemory memory(Instruction src, byte index)            
+        public static AsmFxMemory memory(Instruction src, byte index)            
         {
-            var dst = default(InstructionMemory);
+            var dst = default(AsmFxMemory);
             dst.MemoryBase = memBase(src,index);
             dst.MemoryIndex = memIdx(src,index);
             dst.MemorySize = memSize(src,index);

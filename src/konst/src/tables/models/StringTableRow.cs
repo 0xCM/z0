@@ -7,19 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Data;
-
     using static Konst;
 
     public readonly struct StringTableRow
     {    
-        public readonly string[] Cells;
+        public readonly StringTableCells Cells;
         
         [MethodImpl(Inline)]
         public StringTableRow(string[] cells)
-        {
-            Cells = cells;            
-        }
+            => Cells = cells;            
 
         public int Length
         {
@@ -27,13 +23,13 @@ namespace Z0
             get => Cells.Length;
         }
 
-        public uint CellCount
+        public CellCount Count
         {
             [MethodImpl(Inline)]
             get => (uint)Cells.Length;
         }
 
-        public ref string this[int index]
+        public ref StringTableCell this[int index]
         {
             [MethodImpl(Inline)]
             get => ref Cells[index];

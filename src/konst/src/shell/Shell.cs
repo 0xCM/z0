@@ -19,7 +19,7 @@ namespace Z0
 
         protected Shell()
         {
-            Sink = TermEventSink.create(CorrelationToken.define(1));
+            Sink = TermEventSink.create(CorrelationToken.from(1));
         }
 
         /// <summary>

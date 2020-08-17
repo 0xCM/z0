@@ -15,21 +15,21 @@ namespace Z0
     {
         public IWfContext Wf {get;}
 
-        public HostInstructions Source {get;}
+        public HostAsmFx Source {get;}
         
-        public IDataBroker<HostHandlerKind,HostInstructions> Broker {get;}
+        public IDataBroker<HostHandlerKind,HostAsmFx> Broker {get;}
         
         [MethodImpl(Inline)]
-        public ProcessHostAsm(IWfContext context, HostInstructions src)
+        public ProcessHostAsm(IWfContext context, HostAsmFx src)
         {
             Wf = context;   
-            Broker = DataBrokers.broker64<HostHandlerKind,HostInstructions>();
+            Broker = DataBrokers.broker64<HostHandlerKind,HostAsmFx>();
             Source = src;
             (this as IDataProcessor).Connect();
         }
 
         [MethodImpl(Inline)]
-        void ProcessJmp(HostInstructions src)
+        void ProcessJmp(HostAsmFx src)
         {
             var pJmp = Processors.jmp(Wf);
             for(var j=0; j<src.Length; j++)
@@ -55,7 +55,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Process(HostInstructions src)
+        public void Process(HostAsmFx src)
         {
             var processor = Processors.Asm(Wf);
             for(var j=0; j<Source.Length; j++)

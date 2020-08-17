@@ -34,6 +34,6 @@ namespace Z0
         }
 
         public static IWfEventLog log(WfConfig config, bool clear = true)
-            => WfTermEventLog.create(config,clear);
+            => new WfTermEventLog(FilePath.Define(config.StatusPath.Name), FilePath.Define(config.ErrorPath.Name), clear);
     }
 }

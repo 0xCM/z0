@@ -24,7 +24,7 @@ namespace Z0.Asm.Data
             }
         }
 
-        void emit(ReadOnlySpan<OpCodeIdentifier> src)
+        void emit(ReadOnlySpan<AsmOpCodeId> src)
         {
             var dstPath = CasePath($"OpCodeIdentifiers");
             using var writer = dstPath.Writer();
@@ -82,7 +82,7 @@ namespace Z0.Asm.Data
             var count = data.OpCodeCount;
             var records = data.Records.ToReadOnlySpan();
             using var writer = CaseWriter("OpCodes");            
-            writer.WriteLine(OpCodeRecord.FormatHeader());
+            writer.WriteLine(AsmOpCodeTable.FormatHeader());
             for(var i=0; i<records.Length; i++)
                 writer.WriteLine(skip(records,i).Format());        
         }

@@ -20,7 +20,7 @@ namespace Z0
         C = 2
     }
 
-    public interface IPartProcessor : IAsmProcessor<PartHandlerKind,PartInstructions>
+    public interface IPartProcessor : IAsmProcessor<PartHandlerKind,PartAsmFx>
     {
         //IDataBroker<PartHandlerKind,PartInstructions> Broker {get;}     
     }
@@ -29,21 +29,21 @@ namespace Z0
     {
         public IWfContext Wf {get;}
 
-        readonly BitBroker<PartHandlerKind,PartInstructions> broker;
+        readonly BitBroker<PartHandlerKind,PartAsmFx> broker;
 
-        public IDataBroker<PartHandlerKind,PartInstructions> Broker 
+        public IDataBroker<PartHandlerKind,PartAsmFx> Broker 
             => broker;
 
         [MethodImpl(Inline)]
         internal PartProcessor(IWfContext wf)
         {
             Wf = wf;   
-            broker = DataBrokers.broker64<PartHandlerKind,PartInstructions>();
+            broker = DataBrokers.broker64<PartHandlerKind,PartAsmFx>();
             (this as IDataProcessor).Connect();
         }
 
         [MethodImpl(Inline)]
-        public void Process(PartInstructions src)
+        public void Process(PartAsmFx src)
         {
             for(var i=0; i<src.Length; i++)
                 Processors.processor(Wf, src[i]).Process();

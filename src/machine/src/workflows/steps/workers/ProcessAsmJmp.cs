@@ -14,17 +14,17 @@ namespace Z0
 
     public struct ProcessAsmJmp : IJmpProcessor
     {
-        readonly BitBroker<JmpKind,LocatedAsmFx> broker;
+        readonly BitBroker<JmpKind,BasedAsmFx> broker;
         
         public IWfContext Wf {get;}
         
         [MethodImpl(Inline)]
         public void Connect()
         {
-            broker[JmpKind.JA] = DataHandlers.Create<LocatedAsmFx>(OnJA);
-            broker[JmpKind.JAE] = DataHandlers.Create<LocatedAsmFx>(OnJAE);
-            broker[JmpKind.JB] = DataHandlers.Create<LocatedAsmFx>(OnJB);
-            broker[JmpKind.JBE] = DataHandlers.Create<LocatedAsmFx>(OnJBE);
+            broker[JmpKind.JA] = DataHandlers.Create<BasedAsmFx>(OnJA);
+            broker[JmpKind.JAE] = DataHandlers.Create<BasedAsmFx>(OnJAE);
+            broker[JmpKind.JB] = DataHandlers.Create<BasedAsmFx>(OnJB);
+            broker[JmpKind.JBE] = DataHandlers.Create<BasedAsmFx>(OnJBE);
         }
 
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Process(LocatedAsmFx src)
+        public void Process(BasedAsmFx src)
         {
             if(src.Instruction.IsJccShortOrNear)
             {
@@ -47,25 +47,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void OnJA(LocatedAsmFx inxs)
+        public void OnJA(BasedAsmFx inxs)
         {
             term.announce();
         }
 
         [MethodImpl(Inline)]
-        public void OnJAE(LocatedAsmFx inxs)
+        public void OnJAE(BasedAsmFx inxs)
         {
             term.announce();            
         }
 
         [MethodImpl(Inline)]
-        public void OnJB(LocatedAsmFx inxs)
+        public void OnJB(BasedAsmFx inxs)
         {
             term.announce();            
         }
 
         [MethodImpl(Inline)]
-        public void OnJBE(LocatedAsmFx inxs)
+        public void OnJBE(BasedAsmFx inxs)
         {
             term.announce();            
         }

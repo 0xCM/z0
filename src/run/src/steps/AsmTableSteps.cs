@@ -7,10 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Konst;
-    using static ProcessFx;
 
     public readonly struct AsmTableSteps
     {
@@ -20,9 +17,11 @@ namespace Z0
                 
         readonly EncodedParts Encoded;
 
+        [MethodImpl(Inline)]
         public static implicit operator WfActor(AsmTableSteps src)
             => Flow.actor(ActorName);
 
+        [MethodImpl(Inline)]
         public AsmTableSteps(IWfCaptureState state, in EncodedParts encoded)
         {
             State = state;

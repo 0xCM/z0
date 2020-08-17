@@ -16,7 +16,7 @@ namespace Z0.Asm
             => $"{src.Expression}{fmt.FieldDelimiter}{src.OpCode}";
 
         [Op]
-        public static string format(in MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatSpec config)
+        public static string format(in MemoryAddress @base, in AsmFxSummary src, in AsmFormatSpec config)
         {
             var description = text.build();
             var absolute = @base + (MemoryAddress)src.Offset;  
@@ -28,7 +28,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static string format(in MemoryAddress @base, in AsmInstructionSummary src)
+        public static string format(in MemoryAddress @base, in AsmFxSummary src)
             => format(@base, src, AsmFormatSpec.Default);
 
         [Op]
