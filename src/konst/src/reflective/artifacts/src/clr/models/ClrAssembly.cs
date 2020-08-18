@@ -7,28 +7,28 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     partial struct ComponentModels
     {
         public readonly struct ClrAssembly
         {
-            public Assembly Metadata {get;}
-        
-            public ArtifactIdentity Identifier
+            public Assembly Definition {get;}
+
+            public ArtifactIdentity Id
             {
                 [MethodImpl(Inline)]
-                get => new ArtifactIdentity(Metadata);
+                get => new ArtifactIdentity(Definition);
             }
 
             [MethodImpl(Inline)]
             public ClrAssembly(Assembly src)
-                => Metadata = src;
+                => Definition = src;
 
             [MethodImpl(Inline)]
             public static implicit operator Assembly(ClrAssembly src)
-                => src.Metadata;
+                => src.Definition;
         }
     }
 }

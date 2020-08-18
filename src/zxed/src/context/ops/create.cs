@@ -8,7 +8,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    
+
     using Z0.ClrData;
 
     using static Konst;
@@ -17,16 +17,16 @@ namespace Z0
     using Xed;
 
     partial struct XedContext
-    {                        
+    {
         public static XedContext create()
-            => new XedContext(data());            
-        
+            => new XedContext(data());
+
         [MethodImpl(Inline), Op]
         public static ClrTypes types()
             => types(Assembly.GetExecutingAssembly());
 
         [MethodImpl(Inline), Op]
         public static ClrTypes types(Assembly a)
-            => Reflex.index(a);
+            => Reflex.index(a.GetTypes());
     }
 }

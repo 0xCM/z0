@@ -8,20 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.ClrData;
-    using static TypeModels;
-    
     using static Konst;
 
     partial struct Reflex
     {
         [MethodImpl(Inline), Op]
-        public static ClrEnum @enum(Type src)
-            => src.IsEnum ? new ClrEnum(src) : new ClrEnum(EmptyVessels.EmptyEnum);
-
-        [MethodImpl(Inline)]
-        public static ClrEnum<T> @enum<T>()
-            where T : unmanaged, Enum
-                => new ClrEnum<T>(typeof(T));
+        public static bool @enum(Type src)
+            => src.IsEnum;
     }
 }

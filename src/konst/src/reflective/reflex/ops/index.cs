@@ -12,11 +12,11 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     partial struct Reflex
     {
-          [MethodImpl(Inline), Op]
-          public static ClrTypes index(Assembly src)
-              => ClrTypes.create(types(src));
+        [MethodImpl(Inline), Op]
+        public static ClrTypes index(Type[] src)
+            => ClrTypes.create(src);
     }
 }

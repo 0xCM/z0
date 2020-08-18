@@ -8,14 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static MemberModels;
-
     using static Konst;
 
     partial struct Reflex
     {
         [MethodImpl(Inline), Op]
         public static MethodInfo method(Delegate src)
-            => src.Method;    
+            => src.Method;
     }
 }

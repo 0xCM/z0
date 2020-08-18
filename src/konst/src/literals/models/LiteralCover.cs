@@ -3,25 +3,26 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
     using static Konst;
+    using static z;
 
     public struct LiteralCover
     {
         public ValueType Cover;
-        
+
         public FieldInfo[] Covered {get;}
-        
+
         [MethodImpl(Inline)]
         public LiteralCover(ValueType cover, FieldInfo[] covered)
         {
             Cover = cover;
             Covered = covered;
-        }  
+        }
 
         [MethodImpl(Inline)]
         public void WriteValues(Span<object> dst)

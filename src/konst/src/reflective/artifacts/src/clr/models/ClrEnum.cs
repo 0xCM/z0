@@ -8,35 +8,35 @@ namespace Z0.ClrData
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public readonly struct ClrEnum : IClrEnum<ClrEnum>
     {
-        public Type Metadata {get;}
+        public Type Definition {get;}
 
-        public ArtifactIdentity Identifier
+        public ArtifactIdentity Id
         {
             [MethodImpl(Inline)]
-            get => Metadata.MetadataToken;
+            get => Definition.MetadataToken;
         }
 
         public ClrStruct BaseType
         {
             [MethodImpl(Inline)]
-            get => new ClrStruct(Metadata.GetEnumUnderlyingType());
+            get => new ClrStruct(Definition.GetEnumUnderlyingType());
         }
 
         [MethodImpl(Inline)]
         public ClrEnum(Type src)
         {
-            Metadata = src;
+            Definition = src;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator ClrType(ClrEnum src)
-            => src.Metadata;
+            => src.Definition;
 
         [MethodImpl(Inline)]
         public static implicit operator Type(ClrEnum src)
-            => src.Metadata;
+            => src.Definition;
     }
 }

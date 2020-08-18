@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
- 
+
     using Z0.ClrData;
 
     /// <summary>
@@ -13,8 +13,8 @@ namespace Z0
     /// </summary>
     public interface IClrEnum : IClrType
     {
-        ClrTypeKind IClrType.Kind 
-            => ClrTypeKind.Enum;        
+        ClrTypeKind IClrType.Kind
+            => ClrTypeKind.Enum;
     }
 
     /// <summary>
@@ -37,9 +37,8 @@ namespace Z0
         where T : unmanaged, Enum
     {
 
-        ClrType IClrType<M>.Generalized 
+        ClrType IClrType<M>.Generalized
             => Untyped.Generalized;
-
     }
 
     /// <summary>

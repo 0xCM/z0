@@ -16,6 +16,8 @@ author: 0xcm
 * [root://tools/vscode/resources/app/extensions/bat](..\..\..\..\tools\vscode\resources\app\extensions\bat\language-configuration.json)
 * [root://tools/vscode/resources/app/extensions/csharp](..\..\..\..\tools\vscode\resources\app\extensions\csharp\language-configuration.json)
 * [root://tools/vscode/resources/app/extensions/typescript-language-features](..\..\..\..\tools\vscode\resources\app\extensions\typescript-basics\package.json)
+* [root://lang/net/runtime](..\..\..\..\lang\net\runtime\artifacts\bin\runtime\netcoreapp-Windows_NT-Release-x64\_index.md)
+* [root://lang/net/runtime/crossgen2](..\..\..\..\lang\net\runtime\artifacts\bin\crossgen2\x64\Release\win-x64\SOS_readme.md)
 
 ## Http
 

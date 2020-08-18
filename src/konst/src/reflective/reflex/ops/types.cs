@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.ClrData;
-
     using static Konst;
     using static z;
 
@@ -19,13 +17,12 @@ namespace Z0
         public static ArtifactIdentity identity(in Type src)
             => src.MetadataToken;
 
-
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Type> types(Assembly src)
+        public static Type[] types(Assembly src)
             => src.GetTypes();
 
         [MethodImpl(Inline), Op]
-        public static Type type(in Indexed<Type>  src, ArtifactIdentity id)       
+        public static Type type(in Indexed<Type>  src, ArtifactIdentity id)
         {
             for(var i=0; i<src.Length; i++)
             {

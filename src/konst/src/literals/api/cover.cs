@@ -16,5 +16,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static LiteralCover cover(ValueType src, FieldInfo[] fields)
             => new LiteralCover(src,fields);
+
+
     }
 }

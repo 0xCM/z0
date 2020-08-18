@@ -8,7 +8,7 @@ namespace Z0.ClrData
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -17,25 +17,25 @@ namespace Z0.ClrData
     public readonly struct ClrStruct<T> : IClrStruct
         where T : struct
     {
-        public Type Metadata {get;}
-        
+        public Type Definition {get;}
+
         [MethodImpl(Inline)]
         public ClrStruct(Type src)
         {
-            Metadata = src;
+            Definition = src;
         }
 
-        public ArtifactIdentity Identifier
+        public ArtifactIdentity Id
 
         {
             [MethodImpl(Inline)]
-            get => Metadata.MetadataToken;
+            get => Definition.MetadataToken;
         }
 
-        public ClrStruct Untyped 
+        public ClrStruct Untyped
         {
             [MethodImpl(Inline)]
-            get => new ClrStruct(Metadata);
+            get => new ClrStruct(Definition);
         }
 
         [MethodImpl(Inline)]
@@ -44,13 +44,13 @@ namespace Z0.ClrData
 
         [MethodImpl(Inline)]
         public static implicit operator Type(ClrStruct<T> src)
-            => src.Metadata;
+            => src.Definition;
 
         [MethodImpl(Inline)]
         public static implicit operator ClrType<T>(ClrStruct<T> src)
             => ClrType.From<T>();
 
-        public IEnumerable<ClrStruct> NestedTypes 
+        public IEnumerable<ClrStruct> NestedTypes
         {
             [MethodImpl(Inline)]
             get => Untyped.NestedTypes;

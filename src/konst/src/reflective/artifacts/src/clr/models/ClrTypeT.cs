@@ -6,7 +6,7 @@ namespace Z0.ClrData
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -14,32 +14,32 @@ namespace Z0.ClrData
     /// </summary>
     public readonly struct ClrType<T> : IClrType<T>
     {
-        public Type Metadata{ get;}
+        public Type Definition {get;}
 
         [MethodImpl(Inline)]
         public ClrType(Type src)
         {
-            Metadata = src;
+            Definition = src;
         }
-        
-        public ArtifactIdentity Identifier
+
+        public ArtifactIdentity Id
         {
             [MethodImpl(Inline)]
-            get => Metadata.MetadataToken;
+            get => Definition.MetadataToken;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator ClrType(ClrType<T> src)
-            => src.Metadata;
+            => src.Definition;
 
         [MethodImpl(Inline)]
         public static implicit operator Type(ClrType<T> src)
-            => src.Metadata;
+            => src.Definition;
 
-        public Type[] NestedTypes 
-            => Reflex.nested(Metadata);
+        public Type[] NestedTypes
+            => Reflex.nested(Definition);
 
-        public ClrTypeKind Kind 
+        public ClrTypeKind Kind
             => ClrTypeKind.None;
     }
 }

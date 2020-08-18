@@ -7,44 +7,44 @@ namespace Z0.ClrData
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
-    
-    public readonly struct ClrProperty
-    {   
-        public PropertyInfo Metadata {get;}
 
-        public ArtifactIdentity Identifier
+    using static Konst;
+
+    public readonly struct ClrProperty
+    {
+        public readonly PropertyInfo Definition;
+
+        public ArtifactIdentity Id
 
         {
             [MethodImpl(Inline)]
-            get => Metadata.MetadataToken;
+            get => Definition.MetadataToken;
         }
 
         [MethodImpl(Inline)]
         public static bool operator ==(ClrProperty lhs, ClrProperty rhs)
             => lhs.Equals(rhs);
-        
+
         [MethodImpl(Inline)]
         public static bool operator !=(ClrProperty lhs, ClrProperty rhs)
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
         public static implicit operator PropertyInfo(ClrProperty src)
-            => src.Metadata;
+            => src.Definition;
 
         [MethodImpl(Inline)]
         public ClrProperty(PropertyInfo data)
-            => Metadata = data;
-        
+            => Definition = data;
+
         public string Format()
-            => Metadata.ToString();
-        
+            => Definition.Name;
+
         public override bool Equals(object obj)
-            => Metadata.Equals(obj);
+            => Definition.Equals(obj);
 
         public override int GetHashCode()
-            => Metadata.GetHashCode();
+            => Definition.GetHashCode();
 
         public override string ToString()
             => Format();

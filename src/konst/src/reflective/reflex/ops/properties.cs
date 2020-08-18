@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.ClrData;
 
     using static Konst;
 
@@ -20,6 +19,6 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static Indexed<PropertyInfo> properties(Type src)
-            => src.GetProperties(BF);     
+            => src.GetProperties(BF);
     }
 }

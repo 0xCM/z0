@@ -12,27 +12,27 @@ namespace Z0.ClrData
     /// <summary>
     /// Represents a parametrically-identified clr enum
     /// </summary>
-    public readonly struct ClrEnum<T> : IClrEnum<ClrEnum<T>,ClrEnum,T>  
+    public readonly struct ClrEnum<T> : IClrEnum<ClrEnum<T>,ClrEnum,T>
         where T : unmanaged, Enum
     {
-        public Type Metadata {get;}
+        public Type Definition {get;}
 
         [MethodImpl(Inline)]
         public ClrEnum(Type src)
         {
-            Metadata = src;
-        }
-        
-        public ArtifactIdentity Identifier
-        {
-            [MethodImpl(Inline)]
-            get => Metadata.MetadataToken;
+            Definition = src;
         }
 
-        public ClrEnum Untyped 
+        public ArtifactIdentity Id
         {
             [MethodImpl(Inline)]
-            get => new ClrEnum(Metadata);
+            get => Definition.MetadataToken;
+        }
+
+        public ClrEnum Untyped
+        {
+            [MethodImpl(Inline)]
+            get => new ClrEnum(Definition);
         }
 
         [MethodImpl(Inline)]
@@ -41,10 +41,10 @@ namespace Z0.ClrData
 
         [MethodImpl(Inline)]
         public static implicit operator Type(ClrEnum<T> src)
-            => src.Metadata;
+            => src.Definition;
 
         [MethodImpl(Inline)]
         public static implicit operator ClrType<T>(ClrEnum<T> src)
-            => new ClrType<T>(src.Metadata);
+            => new ClrType<T>(src.Definition);
     }
 }

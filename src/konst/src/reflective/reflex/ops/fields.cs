@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.ClrData;
-
     using static Konst;
     using static z;
 
@@ -22,9 +20,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Indexed<FieldInfo> fields(Type src)
             => src.GetFields(BF);
-
-        [MethodImpl(Inline), Op]
-        public static Indexed<FieldInfo> fields<T>()
-            => typeof(T).GetFields(BF);
     }
 }

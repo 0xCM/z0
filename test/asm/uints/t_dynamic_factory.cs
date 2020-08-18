@@ -15,23 +15,23 @@ namespace Z0.Asm
 
     using K = Kinds;
     using M = CaseMethods;
-    
+
     public class t_dynamic_factory : t_asm<t_dynamic_factory>
     {
         public override bool Enabled => true;
-            
+
         IDynexus Dynamic => Dynops.Services.Dynexus;
-        
+
         public void create_emitter()
         {
             var n = n0;
             var t = z32;
             var m = M.K17_Method;
             var id = m.Identify();
-            
+
             var factory = Dynamic.Factory(K.emitter(t));
-            var f = factory.Manufacture(m);            
-            Claim.eq(f(), M.K17());        
+            var f = factory.Manufacture(m);
+            Claim.eq(f(), M.K17());
         }
 
         public void create_unary_op()
@@ -40,10 +40,10 @@ namespace Z0.Asm
             var t = z32;
             var m = M.Square_Method;
             var id = m.Identify();
-            
+
             var factory = Dynamic.Factory(K.unaryop(t));
-            var f = factory.Manufacture(m);            
-            Claim.eq(f(3), M.Square(3));        
+            var f = factory.Manufacture(m);
+            Claim.eq(f(3), M.Square(3));
         }
 
         public void create_binary_op()
@@ -52,45 +52,45 @@ namespace Z0.Asm
             var t = z32;
             var m = M.BinaryAdd_Method;
             var id = m.Identify();
-            
+
             var factory = Dynamic.Factory(K.binaryop(t));
-            var f = factory.Manufacture(m);            
-            Claim.eq(f(10,5), M.BinaryAdd(10,5));        
+            var f = factory.Manufacture(m);
+            Claim.eq(f(10,5), M.BinaryAdd(10,5));
         }
 
         public void create_ternary_op()
         {
             var n = n3;
             var t = z32;
-            var m = M.TernaryAdd_Method;        
+            var m = M.TernaryAdd_Method;
             var id = m.Identify();
-            
+
             var factory = Dynamic.Factory(K.ternaryop(t));
-            var f = factory.Manufacture(m);            
-            Claim.eq(f(10,5,5), M.TernaryAdd(10,5,5));        
+            var f = factory.Manufacture(m);
+            Claim.eq(f(10,5,5), M.TernaryAdd(10,5,5));
         }
 
         public void check_blocks()
         {
             var methods = typeof(Blocked).DeclaredMethods().Tagged<OpAttribute>().WithName("add");
             foreach(var method in methods)
-            {                
+            {
                 foreach(var t in method.ParameterTypes())
                 {
                     Claim.yea(t.IsBlocked(), $"The parameter {t.Name} from the method {method.Name} is not of blocked type");
                     var width = Widths.divine(t);
                     Claim.yea(width == TypeWidth.W128 || width == TypeWidth.W256, $"{width}");
-                }                    
+                }
             }
         }
-            
+
         public unsafe void vbsll_128x32u()
         {
             const byte imm8 = 9;
 
             var resolver = default(VImm8UnaryResolver128<uint>);
             var vbsll = resolver.inject(imm8, OpKindId.Bsll).DynamicOp;
-                    
+
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<uint>(n128);
@@ -108,28 +108,28 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         static Func<Vector256<uint>, Vector256<uint>> shuffler(N3 n)
             => v => Avx2.Shuffle(v, (byte)Arrange4L.ABCD);
-        
+
         void capture_shuffler()
         {
             var f = shuffler<uint>(n2);
             var g = shuffler(n3);
-            
-            using var hexout = HexWriter();
-            using var asmout = AsmWriter();         
-    
+
+            using var hexTarget = HexWriter();
+            using var asmTarget = AsmWriter();
+
             var fCaptured = AsmCheck.Capture(f.Identify(), f).Require();
-            hexout.Write(fCaptured.HostedBits);
-            asmout.WriteAsm(AsmCheck.Decoder.Decode(fCaptured).Require());
+            hexTarget.Write(fCaptured.HostedBits);
+            asmTarget.WriteAsm(AsmCheck.Decoder.Decode(fCaptured).Require());
 
             var gCaptured = AsmCheck.Capture(g.Identify(), g).Require();
-            hexout.Write(gCaptured.HostedBits);
-            asmout.WriteAsm(AsmCheck.Decoder.Decode(gCaptured).Require());
+            hexTarget.Write(gCaptured.HostedBits);
+            asmTarget.WriteAsm(AsmCheck.Decoder.Decode(gCaptured).Require());
         }
 
         TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)
         {
             var dId = OpIdentityBuilder.build(name, w, kind, false);
-            var gId = OpIdentityBuilder.build(name, w, kind, true);            
+            var gId = OpIdentityBuilder.build(name, w, kind, true);
             var archive = new EncodedHexArchive(TargetArchive.CodeDir);
             var dBits = archive.Read(ApiHosts.from<dvec>().Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiHosts.from<gvec>().Uri).Where(x => x.Id == gId).Single();
@@ -146,7 +146,7 @@ namespace Z0.Asm
             foreach(var n in names)
             foreach(var w in widths)
             foreach(var k in kinds)
-                dst[i++] = TestVectorMatch(buffers, n, w, k);                        
+                dst[i++] = TestVectorMatch(buffers, n, w, k);
             return dst;
         }
     }

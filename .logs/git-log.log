@@ -10849,3 +10849,76 @@
  create mode 100644 src/konst/src/z/ops/h/handle.cs
  rename src/konst/src/z/ops/p/{ptr.cs => pointer.cs} (67%)
  create mode 100644 src/part/src/attributes/definitions/StringLiteralAttribute.cs
+[master e3e0135b6] .
+ 90 files changed, 2207 insertions(+), 181701 deletions(-)
+ create mode 100644 .editorconfig
+ create mode 100644 .gitattributes
+ rename {docs/notes => data}/PeInfo.doc (100%)
+ rename {docs => data}/cs.intrinsics/avx.txt (100%)
+ rename {docs => data}/cs.intrinsics/avx2.txt (100%)
+ rename {docs => data/cs.intrinsics}/cs.intrinsics.txt (100%)
+ rename {docs => data}/cs.intrinsics/sse.txt (100%)
+ rename {docs => data}/cs.intrinsics/sse2.txt (100%)
+ rename {docs => data}/gf2poly.txt (100%)
+ delete mode 100644 docs/Glossary.csv
+ create mode 100644 docs/cSpell.json
+ delete mode 100644 docs/clr/CLILibraryTypes.dtd
+ delete mode 100644 docs/clr/CLILibraryTypes.xml
+ delete mode 100644 docs/clr/PE32.svg
+ rename docs/{notes.cs => content/notes.md} (72%)
+ rename docs/{ => content}/outline.md (59%)
+ create mode 100644 docs/docfx.json
+ create mode 100644 docs/include/tools.md
+ create mode 100644 docs/index.yml
+ create mode 100644 docs/local.md
+ delete mode 100644 docs/md5.note.txt
+ delete mode 100644 docs/notes/links.md
+ delete mode 100644 docs/notes/z0.sys.hex
+ delete mode 100644 docs/notes/z0.sys.il
+ create mode 100644 omnisharp.json
+ rename {docs => src/data/content/notes}/amd/Amd.OpCodeNotation.csv (100%)
+ rename {docs => src/data/content/notes}/amd/Amd.OperandSyntax.csv (100%)
+ rename {docs => src/data/content/notes}/amd/OpCodes.0F_38.csv (100%)
+ rename {docs => src/data/content/notes}/amd/OpCodes.1B.csv (100%)
+ rename src/konst/src/{apihost => api}/FileHost.cs (91%)
+ rename src/konst/src/{identity/services => api}/OpIndex.cs (100%)
+ rename src/konst/src/{identity => api}/contracts/IApiCollector.cs (100%)
+ create mode 100644 src/konst/src/api/contracts/IApiHost.cs
+ rename src/konst/src/{identity => api}/contracts/IApiHostF.cs (100%)
+ rename src/konst/src/{identity => api}/contracts/IApiMember.cs (100%)
+ rename src/konst/src/{identity => api}/contracts/IApiMethod.cs (100%)
+ rename src/konst/src/{identity => api}/contracts/IApiSet.cs (100%)
+ rename src/konst/src/{identity => api}/contracts/IHostedApiMethod.cs (100%)
+ rename src/konst/src/{identity/contracts/IApiCatalog.cs => api/contracts/IPartCatalog.cs} (100%)
+ rename src/konst/src/{identity => api}/contracts/IResolvedApi.cs (66%)
+ rename src/konst/src/{identity/traits => api/contracts}/TPartResolver.cs (100%)
+ rename src/konst/src/{identity => api}/models/ApiDataType.cs (89%)
+ rename src/konst/src/{apihost => api/models}/ApiHost.cs (79%)
+ rename src/konst/src/{apihost => api/models}/ApiHostUri.cs (100%)
+ create mode 100644 src/konst/src/api/models/ApiSet.cs
+ rename src/konst/src/{identity => api}/models/ClosedApiMethod.cs (100%)
+ rename src/konst/src/{identity => api}/models/DirectApiGroup.cs (100%)
+ rename src/konst/src/{identity => api}/models/DirectApiMethod.cs (100%)
+ rename src/konst/src/{identity => api}/models/GenericApiMethod.cs (100%)
+ rename src/konst/src/{located => api/models}/HostedMethod.cs (100%)
+ create mode 100644 src/konst/src/api/models/KnownParts.cs
+ rename src/konst/src/{located => api/models}/LocatedMember.cs (100%)
+ rename src/konst/src/{located => api/models}/LocatedMethod.cs (100%)
+ rename src/konst/src/{identity => api}/models/OpIndex.cs (100%)
+ rename src/konst/src/{identity/models/ApiCatalog.cs => api/models/PartCatalog.cs} (51%)
+ rename src/konst/src/{identity => api}/models/PartDescription.cs (100%)
+ rename src/konst/src/{identity => api}/models/PartIndex.cs (100%)
+ rename src/konst/src/{identity/services => api/models}/PartResolver.cs (100%)
+ rename src/konst/src/{identity/services => api/models}/Parted.cs (100%)
+ delete mode 100644 src/konst/src/identity/contracts/IApiHost.cs
+ delete mode 100644 src/konst/src/identity/contracts/IKnownParts.cs
+ delete mode 100644 src/konst/src/identity/models/ApiSet.cs
+ delete mode 100644 src/konst/src/identity/services/ApiReflected.cs
+ delete mode 100644 src/konst/src/identity/services/KnownParts.cs
+ delete mode 100644 src/konst/src/identity/traits/TApiReflected.cs
+ delete mode 100644 src/konst/src/literals/api/stringlits.cs
+ delete mode 100644 src/konst/src/located/LocatedValues.cs
+ create mode 100644 src/konst/src/pointers/ops/format.cs
+ create mode 100644 src/konst/src/reflective/xtend/method/Method.Exclude.cs
+ rename docs/dot.help => src/tools/specs/dot.doc (100%)
+ delete mode 100644 z0.code-workspace

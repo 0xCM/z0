@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using Z0.ClrData;
-    
+
     using static Konst;
 
     /// <summary>
@@ -20,21 +20,12 @@ namespace Z0
     {
         ClrTypeKind Kind {get;}
 
-        ArtifactIdentity Identifier {get;}        
-
-        /// <summary>
-        /// Indicates whether the model is empty and thus models nothing
-        /// </summary>
-        bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Identifier.IsEmpty;
-        }
+        ArtifactIdentity Id {get;}
 
         /// <summary>
         /// Models of the types nested within the subject, if any
         /// </summary>
-        IEnumerable<IClrType> NestedTypes 
+        IEnumerable<IClrType> NestedTypes
             => z.stream<IClrType>();
     }
 
@@ -42,11 +33,11 @@ namespace Z0
     /// Characterizes an F-bound polyorphic type model reification
     /// </summary>
     /// <typeparam name="M">The reifying type</typeparam>
-    public interface IClrType<T> : IClrType        
+    public interface IClrType<T> : IClrType
     {
-        ClrType Generalized 
-            => Metadata;
-        
+        ClrType Generalized
+            => Definition;
+
         new IEnumerable<T> NestedTypes
             => z.stream<T>();
 
@@ -61,16 +52,16 @@ namespace Z0
     /// <typeparam name="T">The subject of the model</typeparam>
     public interface IClrType<M,T> : IClrType<M>
         where M : struct, IClrType<M>
-    {        
+    {
         /// <summary>
         /// The equivalent non-parametric model
         /// </summary>
         M Untyped {get;}
 
-        ClrType IClrType<M>.Generalized 
+        ClrType IClrType<M>.Generalized
             => Untyped.Generalized;
 
-        Type IClrArtifact<Type>.Metadata 
+        Type IClrArtifact<Type>.Definition
             => typeof(T);
     }
 
@@ -83,7 +74,7 @@ namespace Z0
     public interface IClrType<X,M,T> : IClrType<M,T>
         where M : struct, IClrType<M>
         where X : struct, IClrType<X,M,T>
-    {        
-        
+    {
+
     }
 }

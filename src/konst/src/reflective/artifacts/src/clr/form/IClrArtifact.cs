@@ -5,12 +5,12 @@
 namespace Z0
 {
     public interface IClrArtifact
-    {        
-        
+    {
+
     }
 
     public interface IClrArtifact<T> : IClrArtifact
     {
-        T Metadata {get;}    
+        T Definition {get;}
     }
 }
