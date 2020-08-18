@@ -17,21 +17,18 @@ namespace Z0
 
     public readonly ref struct Reveal
     {
-        public static Reveal create(IAppContext context)
-            => new Reveal(context);
-        
         readonly IAppContext Root;
-        
+
         readonly IAsmContext Asm;
-        
+
         readonly IAsmDecoder Decoder;
-        
+
         readonly IAsmFormatter Formatter;
-        
+
         readonly ICaptureServices Services;
-        
+
         readonly Span<byte> Buffer;
-        
+
         public Reveal(IAppContext root)
         {
             Root = root;
@@ -42,7 +39,7 @@ namespace Z0
             Decoder = Services.RoutineDecoder(format);
             Buffer = sys.alloc<byte>(Pow2.T16);
         }
-        
+
         public ReadOnlySpan<AsmRoutineCode> FunctionCode(FolderPath root)
         {
             var assemblies = span(Root.Composition.Assemblies);
@@ -55,12 +52,12 @@ namespace Z0
 
             }
             return dst.ToArray();
-        }                
+        }
 
-        public AsmRoutineCode[] Capture(Assembly src)            
+        public AsmRoutineCode[] Capture(Assembly src)
         {
             var dataTypes = span(src.Types().Tagged<ApiDataTypeAttribute>());
-            var apiHosts = span(src.Types().Tagged<ApiHostAttribute>());                
+            var apiHosts = span(src.Types().Tagged<ApiHostAttribute>());
             var dtCount = dataTypes.Length;
             var apiHostCount = apiHosts.Length;
 
@@ -70,12 +67,12 @@ namespace Z0
                 var type = skip(dataTypes,j);
                 var uri = Flow.uri(type);
                 var methods = span(type.Methods().Concrete().NonGeneric().Unignored());
-                
-                var mCount = methods.Length;                    
-                
+
+                var mCount = methods.Length;
+
                 for(var k=0u; k<mCount; k++)
                 {
-                    ref readonly var method = ref skip(methods,k);                    
+                    ref readonly var method = ref skip(methods,k);
                     var identified = IdentifiedMethod.Define(identify(method), method);
                     var code = capture(identified, Buffer);
                     var f = Decoder.Decode(code).Require();
@@ -93,29 +90,29 @@ namespace Z0
 
             return dst.ToArray();
         }
-        
+
         public ReadOnlySpan<AsmRoutineCode> Capture(ApiHostUri host, ReadOnlySpan<MethodInfo> src, FilePath dst)
-        {            
+        {
             var count = src.Length;
             var code = span<CapturedCode>(count);
             var target = span<AsmRoutineCode>(count);
-            
+
             using var writer = dst.Writer();
             using var quick = QuickCapture.create(Asm);
-                        
+
             for(var i=0u; i<count; i++)
             {
                 ref readonly var method = ref skip(src,i);
                 var captured = quick.Capture(method).ValueOrDefault(CapturedCode.Empty);
                 if(captured.IsNonEmpty)
                 {
-                    seek(code, i) = captured;                
-                    var decoded = Decoder.Decode(captured).ValueOrDefault(AsmRoutine.Empty);      
+                    seek(code, i) = captured;
+                    var decoded = Decoder.Decode(captured).ValueOrDefault(AsmRoutine.Empty);
                     seek(target, i) = new AsmRoutineCode(decoded, captured);
-                    Save(captured, writer);                                        
+                    Save(captured, writer);
                 }
             }
-            
+
             return target;
         }
 
@@ -123,7 +120,7 @@ namespace Z0
         {
             var asm = Decoder.Decode(code).Require();
             var formatted = Formatter.FormatFunction(asm);
-            dst.Write(formatted);            
+            dst.Write(formatted);
         }
 
         static OpIdentity identify(MethodInfo src)

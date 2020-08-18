@@ -17,11 +17,23 @@ namespace Z0
     public unsafe struct Ptr<T>
         where T : unmanaged
     {
-        public T* P;    
+        public T* P;
 
         [MethodImpl(Inline)]
         public Ptr(T* src)
             => P = src;
+
+        [MethodImpl(Inline)]
+        public static T operator !(Ptr<T> x)
+            => *x.P;
+
+        [MethodImpl(Inline)]
+        public static Ptr<T> operator ++(Ptr<T> x)
+            => api.next(x);
+
+        [MethodImpl(Inline)]
+        public static Ptr<T> operator --(Ptr<T> x)
+            => api.prior(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Ptr<T>(T* src)
@@ -33,6 +45,32 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(Ptr<T> src)
-            => api.address(src);
+            => src.Address;
+
+        public readonly MemoryAddress Address
+        {
+            [MethodImpl(Inline)]
+            get => api.address<T>(P);
+        }
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => (uint)((ulong)api.address<T>(P)).GetHashCode();
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(Ptr<T> src)
+            => P == src.P;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => api.format<T>(this);
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        public override string ToString()
+            => Format();
     }
 }

@@ -9,9 +9,8 @@ namespace Z0
 
     partial struct z
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ulong locate<T>(in T src)
             => (ulong)pvoid(src);
-
     }
 }

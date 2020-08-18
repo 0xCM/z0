@@ -10718,3 +10718,134 @@
  delete mode 100644 src/tools/src/tools/clr/CrossGen.cs
  create mode 100644 src/tools/src/tools/clr/IFileModules.cs
  delete mode 100644 src/tools/src/tools/clr/Models.cs
+[master f1b70a691] .
+ 208 files changed, 2400 insertions(+), 978 deletions(-)
+ rename src/asm.models/asm/opcodes/{models => index}/AsmFxTokens.cs (82%)
+ delete mode 100644 src/asm.models/asm/opcodes/index/AsmTokenIdentity.cs
+ rename src/asm.models/asm/opcodes/{literals => index}/AsmTokenKind.cs (98%)
+ rename src/asm.models/asm/opcodes/{literals/AsmTokenId.cs => index/data/AsmTokenIdentfier.Source.cs} (99%)
+ create mode 100644 src/asm.models/asm/opcodes/index/data/AsmTokenIdentifier.cs
+ rename src/asm.models/asm/opcodes/{literals/AsmTokenMeaning.cs => index/data/AsmTokenMeaning.Source.cs} (100%)
+ rename src/asm.models/asm/opcodes/index/{AsmTokenMeanings.cs => data/AsmTokenMeaning.cs} (96%)
+ rename src/asm.models/asm/opcodes/{AsmTokens.cs => index/data/AsmTokenModel.Source.cs} (99%)
+ rename src/asm.models/asm/opcodes/index/{AsmTokenModels.cs => data/AsmTokenModel.cs} (96%)
+ rename src/asm.models/asm/opcodes/{literals/AsmTokenValues.cs => index/data/AsmTokenValue.Source.cs} (100%)
+ rename src/asm.models/asm/opcodes/index/{ => data}/AsmTokenValues.cs (96%)
+ delete mode 100644 src/asm.models/asm/opcodes/literals/AsmOpCodeTokens.cs
+ create mode 100644 src/asm.models/base/ISemanticIndex.cs
+ create mode 100644 src/asm.models/base/SemanticIndex.cs
+ create mode 100644 src/asm.models/base/SemanticIndexKPT.cs
+ create mode 100644 src/asm.models/base/SemanticIndexKT.cs
+ delete mode 100644 src/konst/src/bitformatter/BitFormatter.cs
+ delete mode 100644 src/konst/src/bitformatter/IBitFormatter.cs
+ rename src/konst/src/{variant => collective/aspects}/IAny.cs (100%)
+ create mode 100644 src/konst/src/collective/aspects/INonEmptySet.cs
+ delete mode 100644 src/konst/src/formatting/HexFormat.cs
+ rewrite src/konst/src/formatting/Render.cs (67%)
+ create mode 100644 src/konst/src/formatting/RenderOptions.cs
+ rename src/konst/src/formatting/{ops => api}/append.cs (100%)
+ create mode 100644 src/konst/src/formatting/api/bitchars.cs
+ create mode 100644 src/konst/src/formatting/api/bits.cs
+ rename src/konst/src/formatting/{ops => api}/concat.cs (100%)
+ create mode 100644 src/konst/src/formatting/api/data.cs
+ create mode 100644 src/konst/src/formatting/api/format.cs
+ create mode 100644 src/konst/src/formatting/api/hex.cs
+ rename src/konst/src/formatting/{ops => api}/items.cs (100%)
+ rename src/konst/src/formatting/{ops => api}/numeric.cs (90%)
+ rename src/konst/src/formatting/{ops => api}/patterns.cs (86%)
+ rename src/konst/src/formatting/{ops => api}/tests.cs (100%)
+ create mode 100644 src/konst/src/formatting/api/textual.cs
+ rename src/konst/src/formatting/{ops => api}/title.cs (100%)
+ rename src/konst/src/formatting/{literals => config}/AppMsgKind.cs (100%)
+ rename src/konst/src/{bitformatter => formatting/config}/BitFormatConfig.cs (100%)
+ create mode 100644 src/konst/src/formatting/config/DefaultSeqFormatConfig.cs
+ rename src/konst/src/formatting/{ => config}/HexFormatConfig.cs (100%)
+ rename src/konst/src/formatting/{ => config}/HexFormatSpecs.cs (100%)
+ rename src/konst/src/formatting/{ => config}/HexSequenceFormatConfig.cs (100%)
+ rename src/konst/src/formatting/{literals => config}/MessageFlair.cs (100%)
+ rename src/konst/src/formatting/{literals => config}/NumericFormatKind.cs (100%)
+ create mode 100644 src/konst/src/formatting/config/SeqFormatConfig.cs
+ rename src/konst/src/formatting/{literals => config}/SequenceFormatKind.cs (100%)
+ rename src/konst/src/formatting/{literals => config}/TupleFormat.cs (100%)
+ rename src/konst/src/formatting/contracts/{IFormatterCxT.cs => IDataFormatter.cs} (93%)
+ delete mode 100644 src/konst/src/formatting/contracts/IFormatProvider.cs
+ delete mode 100644 src/konst/src/formatting/contracts/INumericFormatProvider.cs
+ rename src/konst/src/{literals/services/fields/emit.cs => formatting/contracts/INumericFormattable.cs} (67%)
+ delete mode 100644 src/konst/src/formatting/contracts/ISystemFormater.cs
+ create mode 100644 src/konst/src/formatting/contracts/ISystemFormatter.cs
+ delete mode 100644 src/konst/src/formatting/contracts/ISystemHexFormatter.cs
+ delete mode 100644 src/konst/src/formatting/contracts/SeqFormatConfig.cs
+ rename src/konst/src/formatting/{formatters => factories}/bits.cs (100%)
+ rename src/konst/src/formatting/{formatters => factories}/custom.cs (100%)
+ rename src/konst/src/formatting/{HexFormatters.cs => factories/data.cs} (87%)
+ rename src/konst/src/formatting/{formatters => factories}/default.cs (100%)
+ rename src/konst/src/formatting/{formatters => factories}/entitled.cs (100%)
+ create mode 100644 src/konst/src/formatting/factories/hex.cs
+ rename src/konst/src/formatting/{formatters => factories}/numeric.cs (100%)
+ create mode 100644 src/konst/src/formatting/factories/provided.cs
+ rename src/konst/src/formatting/{formatters => factories}/title.cs (100%)
+ rename src/konst/src/formatting/{literals/FormatPattern.cs => patterns/RenderPattern.cs} (100%)
+ rename src/konst/src/formatting/{PatternIndex.cs => patterns/RenderPatternIndex.cs} (79%)
+ create mode 100644 src/konst/src/formatting/patterns/RenderPatternOps.cs
+ rename src/konst/src/formatting/{literals => patterns}/RenderPatterns.cs (75%)
+ create mode 100644 src/konst/src/formatting/services/BitFormatter.cs
+ rename src/konst/src/{bitformatter => formatting/services}/BitFormatterT.cs (79%)
+ rename src/konst/src/formatting/{ => services}/DefaultFormatter.cs (90%)
+ rename src/konst/src/formatting/{ => services}/Entitled.cs (100%)
+ rename src/konst/src/formatting/{ => services}/FormatterT.cs (100%)
+ rename src/konst/src/formatting/{ => services}/HexDataFormatter.cs (96%)
+ rename src/konst/src/formatting/{ => services}/HexDataFormatterT.cs (70%)
+ rename src/konst/src/formatting/{ => services}/HexFormatter.cs (87%)
+ rename src/konst/src/formatting/{ => services}/HexLineConfig.cs (100%)
+ rename src/konst/src/formatting/{ => services}/NumericFormatterFT.cs (100%)
+ rename src/konst/src/formatting/{ => services}/NumericFormatterT.cs (100%)
+ create mode 100644 src/konst/src/formatting/services/ProvidedFormatterT.1.cs
+ create mode 100644 src/konst/src/formatting/services/ProvidedFormatterT.cs
+ rename src/konst/src/formatting/{ => services}/TitleFormatter.cs (100%)
+ rename src/konst/src/literals/{models => }/LiteralCovers.cs (100%)
+ rename src/konst/src/literals/{LiteralFields.cs => Literals.cs} (87%)
+ rename src/konst/src/literals/{services/fields/values.cs => api/base10.cs} (60%)
+ create mode 100644 src/konst/src/literals/api/base16.cs
+ create mode 100644 src/konst/src/literals/api/base2.cs
+ rename src/konst/src/literals/{services/fields => api}/char.cs (93%)
+ rename src/konst/src/literals/{services/fields => api}/chars.cs (81%)
+ create mode 100644 src/konst/src/literals/api/cover.cs
+ rename src/konst/src/literals/{services/fields => api}/enums.cs (60%)
+ create mode 100644 src/konst/src/literals/api/fieldValues.cs
+ rename src/konst/src/literals/{services/fields => api}/index.cs (81%)
+ rename src/konst/src/literals/{services/fields => api}/literals.cs (92%)
+ rename src/konst/src/literals/{services/fields => api}/numeric.cs (75%)
+ rename src/konst/src/{enums/ops/correlate.cs => literals/api/pair.cs} (50%)
+ create mode 100644 src/konst/src/literals/api/read.cs
+ rename src/konst/src/literals/{services/fields => api}/refs.cs (95%)
+ rename src/konst/src/literals/{services/fields => api}/search.cs (95%)
+ rename src/konst/src/literals/{services/fields => api}/string.cs (93%)
+ rename src/konst/src/literals/{services/fields => api}/stringlits.cs (85%)
+ rename src/konst/src/literals/{services/fields => api}/strings.cs (91%)
+ rename src/konst/src/literals/{services/fields => api}/value.cs (94%)
+ rename src/konst/src/literals/{services/fields/from.cs => api/values.cs} (77%)
+ rename src/konst/src/literals/{models => form}/ILiteralCover.cs (100%)
+ rename src/konst/src/{resources/models/FieldValueET.cs => literals/models/EnumFieldValueEP.cs} (85%)
+ rename src/konst/src/literals/models/{EnumLiteral.cs => EnumLiteralDetail.cs} (91%)
+ rename src/konst/src/literals/models/{EnumLiteralE.cs => EnumLiteralDetailE.cs} (67%)
+ rename src/konst/src/literals/models/{EnumLiteralEV.cs => EnumLiteralDetailEP.cs} (68%)
+ rename src/konst/src/literals/models/{EnumLiteralsE.cs => EnumLiteralDetailsE.cs} (67%)
+ rename src/konst/src/literals/models/{EnumInfoET.cs => EnumLiteralInfoEP.cs} (78%)
+ rename src/konst/src/literals/{EnumNames.cs => models/EnumLiteralNames.cs} (88%)
+ create mode 100644 src/konst/src/literals/models/EnumLiteralNamesE.cs
+ rename src/konst/src/literals/models/{EnumLiteralsEV.cs => EnumLiteralsDetailsEP.cs} (54%)
+ delete mode 100644 src/konst/src/literals/models/EnumNamesE.cs
+ rename src/konst/src/literals/models/{LiteralCorrelation.cs => EnumPair.cs} (81%)
+ rename src/konst/src/literals/{ => models}/Literal.cs (100%)
+ create mode 100644 src/konst/src/literals/models/LiteralPairKP.cs
+ create mode 100644 src/konst/src/literals/models/LiteralPairKPQ.cs
+ rename src/konst/src/literals/{ => models}/NumericLiteral.cs (88%)
+ rename src/konst/src/literals/{ => models}/NumericLiteralT.cs (95%)
+ delete mode 100644 src/konst/src/literals/services/fields/address.cs
+ create mode 100644 src/konst/src/pointers/ops/fix.cs
+ rename src/konst/src/{refined => primitive}/IRefinement.cs (100%)
+ rename src/konst/src/{refined => primitive}/Refinement.cs (100%)
+ create mode 100644 src/konst/src/tables/contracts/IMutableIndex.cs
+ create mode 100644 src/konst/src/z/ops/h/handle.cs
+ rename src/konst/src/z/ops/p/{ptr.cs => pointer.cs} (67%)
+ create mode 100644 src/part/src/attributes/definitions/StringLiteralAttribute.cs

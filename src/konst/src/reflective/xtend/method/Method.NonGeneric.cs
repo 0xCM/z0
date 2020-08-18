@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
+    using System.Linq;
+
     partial class XTend
     {
         /// <summary>

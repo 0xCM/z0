@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using Z0.Asm.Dsl;
 
     using static Konst;
     using static Root;
@@ -15,22 +14,22 @@ namespace Z0.Asm
     using K = Kinds;
 
     public class t_asm_pipe : t_asm<t_asm_pipe>
-    {        
+    {
         public t_asm_pipe()
         {
             OnDispose += HandleDispose;
         }
-            
+
         void HandleDispose()
         {
- 
+
         }
-        
+
         public void RunPipe(FilePath dst)
-        {   
-            var pipelog = dst.ChangeExtension(FileExtension.Define($"pipe.{dst.Ext}"));         
+        {
+            var pipelog = dst.ChangeExtension(FileExtension.Define($"pipe.{dst.Ext}"));
             using var log = dst.Writer();
-            
+
             var counter = 0;
 
             void CallHandler(in Instruction src)
@@ -41,17 +40,17 @@ namespace Z0.Asm
                 log.WriteLine(row);
             }
 
-            var parts = z.array(PartId.DVec, PartId.GVec);            
+            var parts = z.array(PartId.DVec, PartId.GVec);
             var runner = AsmRunner.pipe(pipelog);
-            runner.Include(AsmCall.sink(CallHandler));            
-            var handled = runner.RunPipe(parts);                     
+            runner.Include(AsmCall.sink(CallHandler));
+            var handled = runner.RunPipe(parts);
         }
 
         void check_unary_ops(IdentifiedCode[] src)
         {
             var query = AsmCheck.UriBitQuery;
             foreach(var code in query.WithParameterCount(src, 1))
-            {                
+            {
                 if(query.AcceptsParameter(code, NumericKind.U8))
                     AsmCheck.CheckFixedMatch<Fixed8>(K.UnaryOp, code, code);
                 else if(query.AcceptsParameter(code, NumericKind.U16))
@@ -67,14 +66,14 @@ namespace Z0.Asm
         {
             var dSrc = ApiHostUri.FromHost(typeof(math));
             var gSrc = ApiHostUri.FromHost(typeof(gmath));
-            var id = PartId.GMath;   
+            var id = PartId.GMath;
             var paths = AppPaths.ForApp(PartId.Control);
             var capture = AsmCheck.CaptureArchive(paths.AppCaptureRoot);
             var archive = Archives.Services.EncodedHexArchive(capture.CodeDir);
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();
-            check_unary_ops(direct);        
-            check_unary_ops(generic);        
+            check_unary_ops(direct);
+            check_unary_ops(generic);
         }
     }
 
@@ -83,7 +82,7 @@ namespace Z0.Asm
         fixed ulong Data[10];
 
         TxN<sbyte,byte,short,ushort,int,uint> T;
-        
+
         [MethodImpl(Inline), Op]
         public static FixedTest init(ref ulong src)
         {
@@ -109,7 +108,7 @@ namespace Z0.Asm
             {
                 ref var rData = ref Unsafe.AsRef<ulong>(pData);
                 return ref Unsafe.Add(ref rData, index);
-            }            
+            }
         }
     }
 }

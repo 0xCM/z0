@@ -27,15 +27,6 @@ namespace Z0
         /// <param name="src">The source pointer</param>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op]
-        public static MemoryAddress address(in Ptr src)
-            => src.P;
-
-        /// <summary>
-        /// Reveals the memory location to which the represented pointer points
-        /// </summary>
-        /// <param name="src">The source pointer</param>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op]
         public static MemoryAddress address(in Ptr8 src)
             => src.P;
 

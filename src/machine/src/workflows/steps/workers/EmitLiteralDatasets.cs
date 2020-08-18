@@ -14,15 +14,15 @@ namespace Z0
     using static Konst;
     using static EmitFieldLiteralsStep;
 
-    using PK = PrimalKindId;    
-    
+    using PK = PrimalKindId;
+
     public readonly ref struct EmitFieldLiterals
-    {        
+    {
         readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
-        FolderPath Target 
+        FolderPath Target
             => Wf.ResourceRoot + FolderName.Define("fields");
 
         KnownParts Parts
@@ -41,10 +41,10 @@ namespace Z0
             if(fields.Length != 0)
                 Emit(fields, Target + FileName.Define(src.Part.Format(), FileExtensions.Csv));
         }
-        
+
         public void Run()
         {
-            Target.Clear();            
+            Target.Clear();
             var parts = span(Parts.Known.Map(part => PartTypes.from(part)));
             foreach(var part in parts)
             {
@@ -63,17 +63,17 @@ namespace Z0
         {
             Wf.Finished(nameof(EmitFieldLiterals), Ct);
         }
-        
+
         const string Sep = "| ";
 
         [Op]
         public static string[] strings(Type src)
         {
-            var fields = Literals.stringlits(src);
+            var fields = Literals.strings(src);
             var @base = address(src);
             var count = fields.Length;
-            var offset = MemoryAddress.Empty;  
-            var buffer = sys.alloc<string>(count);  
+            var offset = MemoryAddress.Empty;
+            var buffer = sys.alloc<string>(count);
             var dst = span(buffer);
 
             for(var j=0u; j<count; j++)
@@ -95,7 +95,7 @@ namespace Z0
 
             var datatype = Primitive.kind(type);
             if(data is string s)
-            {                                
+            {
                 var content = z.span(s);
                 var size = s.Length*2;
                 var segment = memref(pvoid(first(content)), size);
@@ -118,7 +118,7 @@ namespace Z0
             else if(type.IsChar())
                 return new FieldRef(src, memref(@base + offset, 2));
             else if(type.IsDecimal())
-                return new FieldRef(src, memref(@base + offset, 16));                
+                return new FieldRef(src, memref(@base + offset, 16));
             return FieldRef.Empty;
         }
 
@@ -148,9 +148,9 @@ namespace Z0
         }
 
         static string format(in FieldRef src)
-        {       
+        {
             var datatype = src.KindId;
-            var data = src.Field.GetRawConstantValue();            
+            var data = src.Field.GetRawConstantValue();
             if(src.Field.FieldType.IsEnum)
                 return data.ToString();
 
@@ -176,14 +176,14 @@ namespace Z0
         [MethodImpl(Inline)]
         static string hex<T>(T src)
             where T : unmanaged
-                => Render.hex(src, false, false);        
+                => Render.hex(src, false, false);
 
         static string FormatHeader()
             => text.concat(
                 "FieldAddress".PadRight(16), Sep,
                 "FieldWidth".PadRight(16), Sep,
-                "DeclaringType".PadRight(36), Sep, 
-                "FieldName".PadRight(36), Sep, 
+                "DeclaringType".PadRight(36), Sep,
+                "FieldName".PadRight(36), Sep,
                 "Value".PadRight(48), Sep
                 );
 
@@ -199,21 +199,21 @@ namespace Z0
         }
 
         void Emit(FieldRef[] src, FilePath dst)
-        {            
-            Wf.Running(nameof(EmitFieldLiterals), dst.Name, Ct);           
-            var input = span(src);            
+        {
+            Wf.Running(nameof(EmitFieldLiterals), dst.Name, Ct);
+            var input = span(src);
             var count = input.Length;
 
-            using var writer = dst.Writer();            
+            using var writer = dst.Writer();
             writer.WriteLine(FormatHeader());
 
             for(var i=0u; i<count; i++)
-            { 
+            {
                 ref readonly var field = ref skip(input,i);
                 writer.WriteLine(FormatLine(field));
-            }        
+            }
 
-            Wf.Ran(nameof(EmitFieldLiterals), dst.Name, Ct);           
+            Wf.Ran(nameof(EmitFieldLiterals), dst.Name, Ct);
         }
     }
 }

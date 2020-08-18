@@ -16,11 +16,11 @@ namespace Z0
     /// </summary>
     public unsafe struct Ptr
     {
-        public void* P;         
+        public void* P;
 
         [MethodImpl(Inline)]
         public Ptr(void* src)
-            => P = src;            
+            => P = src;
 
         [MethodImpl(Inline)]
         public static implicit operator Ptr(void* src)
@@ -32,6 +32,32 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(Ptr src)
-            => api.address(src);
+            => src.Address;
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => (uint)((ulong)P).GetHashCode();
+        }
+
+        public MemoryAddress Address
+        {
+            [MethodImpl(Inline)]
+            get => P;
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(Ptr src)
+            => P == src.P;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => api.format<ulong>((ulong*)this);
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        public override string ToString()
+            => Format();
     }
 }
