@@ -50,7 +50,7 @@ namespace Z0
 
         public const string DataFolder = DataType;
 
-        public const string DatasetExt = DataType + XDelimit +  DataFileExt;
+        public const string DatasetExt = DataType + ExtSep +  DataExt;
     }
 
     [Step(typeof(Recapture))]
@@ -134,11 +134,11 @@ namespace Z0
 
         public const string TargetFolder = DataType + Plural;
 
-        public const string DataTypeExt = DataType + XDelimit + DataFileExt;
+        public const string DataTypeExt = DataType + ExtSep + DataExt;
 
-        public const string UserKindExt = SystemKind + XDelimit + DataTypeExt;
+        public const string UserKindExt = SystemKind + ExtSep + DataTypeExt;
 
-        public const string SystemKindExt = UserKind + XDelimit + DataTypeExt;
+        public const string SystemKindExt = UserKind + ExtSep + DataTypeExt;
     }
 
     [Step(typeof(EmitPartStrings))]

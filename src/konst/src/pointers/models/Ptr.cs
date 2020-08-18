@@ -12,7 +12,7 @@ namespace Z0
     using api = Pointers;
 
     /// <summary>
-    /// Models a void pointer
+    /// Captures and represents a void pointer
     /// </summary>
     public unsafe struct Ptr
     {

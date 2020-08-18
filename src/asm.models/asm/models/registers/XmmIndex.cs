@@ -12,8 +12,6 @@ namespace Z0.Asm
 
     using Z0.Asm.Dsl;
     
-    using R = Dsl;
-
     public unsafe readonly ref struct XmmIndex
     {
         readonly Span<Xmm> Buffer;        
@@ -318,7 +316,7 @@ namespace Z0.Asm
         unsafe ReadOnlySpan<MemoryAddress> UpdateLocations()
         {
             for(byte i=0; i<RegisterCount; i++)   
-                seek(LocationBuffer,i) = ptr(ref this[i]);
+                seek(LocationBuffer,i) = pointer(ref this[i]);
             return LocationBuffer;
         }
     }

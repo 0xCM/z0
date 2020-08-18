@@ -23,8 +23,8 @@ namespace Z0
                 => Enum.GetNames(typeof(E));
 
         [MethodImpl(Inline)]
-        public static EnumNames<E> NameIndex<E>(E e = default)                   
+        public static EnumLiteralNames<E> NameIndex<E>(E e = default)                   
             where E : unmanaged, Enum
-                => new EnumNames<E>(Enum.GetNames(typeof(E)));    
+                => new EnumLiteralNames<E>(Enum.GetNames(typeof(E)));    
     }
 }

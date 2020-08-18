@@ -88,8 +88,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        int IFinite.Count() 
-            => Count;
+        CellCount IFinite.Count() 
+            => Data.Length;
 
         public ref T this[int index] 
         { 

@@ -16,22 +16,27 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static AsmTokenIndex create()
-            => new AsmTokenIndex();
+        {
+            var index = new AsmTokenIndex();
+
+
+            return index;    
+        }
 
         [MethodImpl(Inline), Op]
-        public string identifier(AsmTokenKind kind)
-            => Identity[(int)kind];            
+        public ref readonly string identifier(AsmTokenKind kind)
+            => ref Identifier[kind];            
 
         [MethodImpl(Inline), Op]
         public string meaning(AsmTokenKind kind)
-            => Meanings[(int)kind];
+            => Meaning[(int)kind];
 
         [MethodImpl(Inline), Op]
         public string value(AsmTokenKind kind)
-            => Values[(int)kind];            
+            => Value[(int)kind];            
 
         [MethodImpl(Inline), Op]
         public TokenModel model(AsmTokenKind kind)
-            => Models[(int)kind];
+            => Model[(int)kind];
     }        
 }

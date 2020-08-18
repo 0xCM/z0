@@ -31,6 +31,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string identifier(in AsmFxTokens tokens, AsmTokenKind id)
-            => tokens.Identity[(int)id];
+            => tokens.Identity[id];
     }
 }

@@ -19,9 +19,7 @@ namespace Z0
         /// <param name="case">The case selector</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<HexSymUp> symbols(byte src, UpperCased @case)
-        {
-            return default;
-        }
+            => recover<byte,HexSymUp>(UpperDigits);
 
         /// <summary>
         /// Presents the source value as a sequence of hex symbols
@@ -30,8 +28,6 @@ namespace Z0
         /// <param name="case">The case selector</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<HexSymLo> symbols(byte src, LowerCased @case)
-        {
-            return default;
-        }
+            => recover<byte,HexSymLo>(LowerDigits);
     }
 }

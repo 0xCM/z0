@@ -13,6 +13,14 @@ namespace Z0
     partial struct z
     {
         /// <summary>
+        /// Derives the address of a <see cref='Type'/> from the value of its <see cref='Type.TypeHandle' />
+        /// </summary>
+        /// <param name="src">The source type</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe MemoryAddress address(Type src)
+            => pointer(handle(src));
+
+        /// <summary>
         /// Presents a uint64 as an address
         /// </summary>
         /// <param name="src">The source value</param>
@@ -53,10 +61,6 @@ namespace Z0
         public static unsafe MemoryAddress address<T>(in T src)
             => new MemoryAddress(pvoid(src));
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe MemoryAddress address<T>(T[] src, int index)
-            =>  pvoid(in src[index]);
-
         /// <summary>
         /// Determines the address of the leading source cell
         /// </summary>
@@ -65,6 +69,16 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address<T>(T[] src)
             => address<T>(in src[0]);
+
+        /// <summary>
+        /// Determines the address of a cell in an array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <param name="index">The cell index</param>
+        /// <typeparam name="T">The stored type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe MemoryAddress address<T>(T[] src, int index)
+            =>  pvoid(in src[index]);
 
         [MethodImpl(Inline), Op]
         public unsafe static MemoryAddress address(void* p)

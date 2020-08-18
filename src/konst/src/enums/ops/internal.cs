@@ -29,12 +29,12 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The value type</typeparam>
-        public static EnumLiterals<E,T> LiteralSequence<E,T>()
+        public static EnumLiteralDetails<E,T> LiteralSequence<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
         {
             var index = CreateIndex<E>();
-            var dst = new EnumLiteral<E,T>[index.Length];
+            var dst = new EnumLiteralDetail<E,T>[index.Length];
             for(var i=0; i<index.Length; i++)
             {
                 var literal = index[i];

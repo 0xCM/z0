@@ -10,4 +10,9 @@ namespace Z0
     {
         void Format(ReadOnlySpan<byte> src, int maxbits, Span<char> dst);
     }
+
+    public interface IBitFormatter<T> : IBitFormatter, IDataFormatter<BitFormatConfig,T>
+        where T : struct
+    {
+    }        
 }

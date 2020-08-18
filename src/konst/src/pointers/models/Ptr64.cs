@@ -12,7 +12,7 @@ namespace Z0
     using api = Pointers;
 
     /// <summary>
-    /// Models a <see cref='ulong'/> pointer
+    /// Captures and represents <see cref='ulong'/> pointer
     /// </summary>
     public unsafe struct Ptr64
     {

@@ -12,7 +12,7 @@ namespace Z0
     unsafe partial struct Pointers
     {
         /// <summary>
-        /// Creates a <see cref='Ptr8'/> representation over a specifed source
+        /// Creates a <see cref='Ptr8'/> representation over a specified source
         /// </summary>
         /// <param name="pSrc">The source pointer</param>
         [MethodImpl(Inline), Op]
@@ -20,7 +20,7 @@ namespace Z0
             => new Ptr8(pSrc);
 
         /// <summary>
-        /// Creates a <see cref='Ptr8'/> representation over a specifed source
+        /// Creates a <see cref='Ptr8'/> representation over a specified source
         /// </summary>
         /// <param name="pSrc">The source pointer</param>
         [MethodImpl(Inline), Op]
@@ -28,7 +28,7 @@ namespace Z0
             => new Ptr8((byte*)pSrc);
 
         /// <summary>
-        /// Creates a <see cref='Ptr8'/> representation over a specifed source
+        /// Creates a <see cref='Ptr8'/> representation over a specified source
         /// </summary>
         /// <param name="pSrc">The source pointer</param>
         [MethodImpl(Inline), Op]
@@ -36,7 +36,7 @@ namespace Z0
             => new Ptr8((byte*)pSrc);
 
         /// <summary>
-        /// Creates a <see cref='Ptr8'/> representation over a specifed source
+        /// Creates a <see cref='Ptr8'/> representation over a specified source
         /// </summary>
         /// <param name="pSrc">The source pointer</param>
         [MethodImpl(Inline), Op]
@@ -44,7 +44,7 @@ namespace Z0
             => new Ptr8((byte*)pSrc);
 
         /// <summary>
-        /// Creates a <see cref='Ptr8'/> representation over a specifed source
+        /// Creates a <see cref='Ptr8'/> representation over a specified source
         /// </summary>
         /// <param name="pSrc">The source pointer</param>
         [MethodImpl(Inline), Op]

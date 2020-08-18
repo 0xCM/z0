@@ -25,6 +25,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static variant define(object src, Type dst)
+            => define(src, dst.NumericKind());
+        
+        [MethodImpl(Inline), Op]
         public static variant define(object src, NumericKind dst)
         {
             switch(dst)

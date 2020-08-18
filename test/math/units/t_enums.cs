@@ -31,7 +31,7 @@ namespace Z0
 
             for(var i = 0; i<values.Length; i++)
             {
-                var ival = values[i].NumericValue;
+                var ival = values[i].PrimalValue;
                 if(ival == byte.MaxValue)
                     break;
 

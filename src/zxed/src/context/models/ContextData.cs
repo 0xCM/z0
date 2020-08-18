@@ -13,13 +13,12 @@ namespace Z0
     
     using static Konst;
 
-
     using Xed;
 
     [ApiHost]
     public readonly struct XedContextData
     {
-        public readonly EnumNames[] EnumNames;
+        public readonly EnumLiteralNames[] EnumNames;
         
         public readonly Indexed<FieldInfo> DataFields;
 
@@ -28,7 +27,7 @@ namespace Z0
         public readonly ClrTypes TypeIndex;
 
         [MethodImpl(Inline), Op]
-        public XedContextData(Type t, ClrTypes index, Indexed<FieldInfo> fields, params EnumNames[] names)
+        public XedContextData(Type t, ClrTypes index, Indexed<FieldInfo> fields, params EnumLiteralNames[] names)
         {
             ContextType = t;
             TypeIndex = index;
@@ -36,25 +35,25 @@ namespace Z0
             DataFields = fields;
         }
 
-        public ref readonly EnumNames CategoryNames
+        public ref readonly EnumLiteralNames CategoryNames
         {
             [MethodImpl(Inline), Op]
             get => ref EnumNames[0];
         }
         
-        public ref readonly EnumNames ExtensionNames
+        public ref readonly EnumLiteralNames ExtensionNames
         {
             [MethodImpl(Inline), Op]
             get => ref EnumNames[1];
         }
 
-        public ref readonly EnumNames FlagNames
+        public ref readonly EnumLiteralNames FlagNames
         {
             [MethodImpl(Inline), Op]
             get => ref EnumNames[2];
         }
 
-        public ref readonly EnumNames ClassNames
+        public ref readonly EnumLiteralNames ClassNames
         {
             [MethodImpl(Inline), Op]
             get => ref EnumNames[3];

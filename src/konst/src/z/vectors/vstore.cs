@@ -19,11 +19,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector128<byte> src, ref byte dst)
-            => Store(ptr(ref dst), src);            
+            => Store(pointer(ref dst), src);            
 
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector256<byte> src, ref byte dst)
-            => Store(ptr(ref dst), src);            
+            => Store(pointer(ref dst), src);            
 
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector512<byte> src, ref byte dst)
@@ -34,11 +34,11 @@ namespace Z0
 
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector128<ushort> src, ref ushort dst)
-            => Store(ptr(ref dst), src);            
+            => Store(pointer(ref dst), src);            
 
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector256<ushort> src, ref ushort dst)
-            => Store(ptr(ref dst), src);            
+            => Store(pointer(ref dst), src);            
 
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector512<ushort> src, ref ushort dst)

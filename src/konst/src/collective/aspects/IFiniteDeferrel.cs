@@ -23,7 +23,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a reifed finite sequence
+    /// Characterizes a reified finite sequence
     /// </summary>
     /// <typeparam name="S">The reifying type</typeparam>
     /// <typeparam name="T">The sequence element type</typeparam>

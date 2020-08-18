@@ -12,7 +12,7 @@ namespace Z0
     using api = Pointers;
 
     /// <summary>
-    /// Models a generic pointer
+    /// Captures and represents an <see cref='unmanaged'/> generic pointer
     /// </summary>
     public unsafe struct Ptr<T>
         where T : unmanaged

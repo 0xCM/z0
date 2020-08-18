@@ -9,7 +9,7 @@ namespace Z0.Data
     
     using static Konst;
     
-    using F = EnumLiteralField;
+    using F = EnumLiteralField;    
     using api = Z0.Table;
 
     public struct EnumLiteral

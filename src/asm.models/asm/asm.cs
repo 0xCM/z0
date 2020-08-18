@@ -47,7 +47,7 @@ namespace Z0
         public asm(int i)
         {
             state = new object[i];
-            state[0] = HexFormat.configure(zpad:false, specifier:false);
+            state[0] = RenderOptions.hex(zpad:false, specifier:false);
             state[1] = new StringBuilder(1024);
         }
     }

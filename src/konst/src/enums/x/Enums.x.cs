@@ -65,11 +65,11 @@ namespace Z0
         public static TypeCode TypeCode(this EnumTypeCode k)
             =>(System.TypeCode)k;
     
-        public static EnumLiterals<E> ToIndex<E>(this IEnumerable<EnumLiteral<E>> src)
+        public static EnumLiteralDetails<E> ToIndex<E>(this IEnumerable<EnumLiteralDetail<E>> src)
             where E : unmanaged, Enum
-                => new EnumLiterals<E>(src.ToArray());
+                => new EnumLiteralDetails<E>(src.ToArray());
 
-        public static EnumLiterals ToIndex(this IEnumerable<EnumLiteral> src)
+        public static EnumLiterals ToIndex(this IEnumerable<EnumLiteralDetail> src)
             => new EnumLiterals(src.ToArray());
 
         [MethodImpl(Inline)]

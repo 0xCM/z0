@@ -10,12 +10,10 @@ namespace Z0
     
     using static Konst;
 
-    using Xed;
-
     partial struct XedContext
     {
         [MethodImpl(Inline), Op]
-        public static EnumNames names(Type src)                   
-            => new EnumNames(src, System.Enum.GetNames(src));
+        public static EnumLiteralNames names(Type src)                   
+            => new EnumLiteralNames(src, System.Enum.GetNames(src));
     }
 }

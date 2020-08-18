@@ -34,15 +34,15 @@ namespace Z0
 
 
         [MethodImpl(Inline), Op]
-        public static Z0.EnumNames[] names(ReadOnlySpan<ClrEnum> src)       
+        public static Z0.EnumLiteralNames[] names(ReadOnlySpan<ClrEnum> src)       
         {
             var count = src.Length;
-            var buffer = z.alloc<Z0.EnumNames>(count);
+            var buffer = z.alloc<Z0.EnumLiteralNames>(count);
             var dst  = span(buffer);
             for(var i=0u; i<count; i++)
             {  
                 ref readonly var et = ref skip(src,i);
-                seek(dst,i) = new Z0.EnumNames(et, System.Enum.GetNames(et));
+                seek(dst,i) = new Z0.EnumLiteralNames(et, System.Enum.GetNames(et));
             }
 
             return buffer;

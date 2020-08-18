@@ -24,7 +24,7 @@ namespace Z0
             index.Search(t => t.Name == nameof(XedContextData), out var ctx);            
             var fields = Reflex.fields(ctx);
             
-            var nameBuffer = sys.alloc<EnumNames>(4);
+            var nameBuffer = sys.alloc<EnumLiteralNames>(4);
             var _names = span(nameBuffer);
 
             index.Search(x => x.Name == nameof(xed_category_enum_t), out var e0);
@@ -42,7 +42,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static XedContextData data(Type t, ClrTypes index, Indexed<FieldInfo> fields, EnumNames[] names)
+        public static XedContextData data(Type t, ClrTypes index, Indexed<FieldInfo> fields, EnumLiteralNames[] names)
             => new XedContextData(t, index, fields, names);
     }
 }

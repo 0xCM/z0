@@ -51,7 +51,7 @@ namespace Z0.Asm
         public void test_bit_parse()
         {
             var src = Random.Bytes(8).Array();
-            var formatted = BitFormatter.chars(src);
+            var formatted = Render.bitchars(src);
             Trace(formatted.ToString());
         }
 

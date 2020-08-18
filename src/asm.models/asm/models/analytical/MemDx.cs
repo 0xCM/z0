@@ -50,7 +50,7 @@ namespace Z0
             => Empty;
 
         HexFormatConfig HexSpec 
-            => HexFormat.configure(zpad:false, specifier:false);
+            => RenderOptions.hex(zpad:false, specifier:false);
 
         public string Format()
             => (Size switch{

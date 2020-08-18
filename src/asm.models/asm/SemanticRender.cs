@@ -43,7 +43,7 @@ namespace Z0.Asm
             }) + "dx";
 
         static HexFormatConfig HexSpec 
-            => HexFormat.configure(zpad:false, specifier:false);
+            => RenderOptions.hex(zpad:false, specifier:false);
 
         public static string format(in MemDx src)
             => (src.Size switch{

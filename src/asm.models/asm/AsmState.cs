@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         AsmState(int i)
         {
-            HexConfig = HexFormat.configure(zpad:false, specifier:false);
+            HexConfig = RenderOptions.hex(zpad:false, specifier:false);
         }
         
         public readonly HexFormatConfig HexConfig;

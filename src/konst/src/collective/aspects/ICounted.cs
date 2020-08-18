@@ -14,9 +14,9 @@ namespace Z0
         /// <summary>
         /// The count value
         /// </summary>
-        new int Count {get;}
+        new CellCount Count {get;}
 
-        int IFinite.Count() 
+        CellCount IFinite.Count() 
             => Count;
 
         bool INullity.IsEmpty 

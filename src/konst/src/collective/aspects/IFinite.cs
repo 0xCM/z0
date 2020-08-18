@@ -15,6 +15,6 @@ namespace Z0
         /// <summary>
         /// Counts the finite things
         /// </summary>
-        int Count();   
+        CellCount Count();   
     }
 }

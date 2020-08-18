@@ -127,7 +127,7 @@ namespace Z0
         /// </summary>
         /// <param name="match">The resource identifier to match</param>
         static AppResourceDoc structured(string match)
-            => Extractor.MatcDocument(match);
+            => Extractor.MatchDocument(match);
 
         /// <summary>
         /// Enumerates all structured content

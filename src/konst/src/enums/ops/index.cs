@@ -24,21 +24,21 @@ namespace Z0
         /// </summary>
         /// <param name="peek">If true, extracts the content directly, bypassing any caching</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static EnumLiterals<E> index<E>()
+        public static EnumLiteralDetails<E> index<E>()
             where E : unmanaged, Enum
-                => (EnumLiterals<E>)IndexCache.GetOrAdd(typeof(E), _ => CreateIndex<E>());
+                => (EnumLiteralDetails<E>)IndexCache.GetOrAdd(typeof(E), _ => CreateIndex<E>());
 
-        static EnumLiterals<E> CreateIndex<E>()
+        static EnumLiteralDetails<E> CreateIndex<E>()
             where E : unmanaged, Enum
         {
             var type = Enums.@base<E>();
             var fields = typeof(E).LiteralFields().ToArray();
-            var indices = new List<EnumLiteral<E>>(fields.Length);
+            var indices = new List<EnumLiteralDetail<E>>(fields.Length);
             for(var i=0u; i< fields.Length; i++)
             {
                 var field = fields[i];
                 var value = (E)field.GetRawConstantValue();
-                indices.Add(new EnumLiteral<E>(field, type, i, field.Name, value, string.Empty, UserMetadata.Empty));
+                indices.Add(new EnumLiteralDetail<E>(field, type, i, field.Name, value, string.Empty, UserMetadata.Empty));
             }
             return indices.ToIndex();
         }

@@ -18,7 +18,7 @@ namespace Z0.Data
             => ValueFormatter.from(default(NumericLiteralFormatter));
 
         static string Format(Base2 @base, NumericLiteral src)
-            => BitFormatter.format(src.Data, src.TypeCode);
+            => Render.bits(src.Data, src.TypeCode);
 
         public void Format(in R src, IDatasetFormatter<F> dst)
         {

@@ -15,7 +15,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct AsmTables
     {
-        public static EnumNames<Mnemonic> Mnemonics
+        public static EnumLiteralNames<Mnemonic> Mnemonics
         {
             [MethodImpl(Inline), Op]
             get => Enums.NameIndex<Mnemonic>();
@@ -30,6 +30,6 @@ namespace Z0
         /// </summary>
         /// <param name="match">The resource identifier to match</param>
         public static AppResourceDoc structured(string match)
-            => Extractor.MatcDocument(match); 
+            => Extractor.MatchDocument(match); 
     }    
 }

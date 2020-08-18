@@ -34,7 +34,7 @@ namespace Z0
             => new InstructionExpression(src.Instruction);
 
         public static TableSpan<TokenModel> Tokens
-            => AsmTokenIndex.create().Models; 
+            => AsmTokenIndex.create().Model; 
 
         [MethodImpl(Inline), Op]
         public AsmOpCodeOperand operand(ulong src, uint2 index)
@@ -47,7 +47,7 @@ namespace Z0
         [Op]
         public static AsmOpCodeDataset dataset()
         {
-            var resource = ResExtractor.Service(typeof(Parts.Data).Assembly).MatcDocument("OpCodeSpecs");
+            var resource = ResExtractor.Service(typeof(Parts.Data).Assembly).MatchDocument("OpCodeSpecs");
             var count = resource.RowCount;
             var records = sys.alloc<AsmOpCodeTable>(count);
             AsmTables.parse(resource, records);

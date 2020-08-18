@@ -30,7 +30,7 @@ namespace Z0.Asm
             return dst.ToString();
         }
 
-        public string format<E,T>(in EnumInfo<E,T> src, char delimiter = Chars.Pipe)
+        public string format<E,T>(in EnumLiteralInfo<E,T> src, char delimiter = Chars.Pipe)
             where E : unmanaged, Enum
             where T : unmanaged
         {
@@ -43,7 +43,7 @@ namespace Z0.Asm
             return dst.ToString();
         }
         
-        public void emit<E,T>(ReadOnlySpan<EnumInfo<E,T>> src, FilePath dst)
+        public void emit<E,T>(ReadOnlySpan<EnumLiteralInfo<E,T>> src, FilePath dst)
             where E : unmanaged, Enum
             where T : unmanaged
         {

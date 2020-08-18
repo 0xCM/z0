@@ -61,18 +61,18 @@ namespace Z0
             
             var fields = span(src.LiteralFields());
             var count = fields.Length;            
-            var buffer = sys.alloc<EnumLiteral>(count);
+            var buffer = sys.alloc<EnumLiteralDetail>(count);
             var index = span(buffer);
             
             for(var i=0u; i<fields.Length; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                var dst = new EnumLiteral();
+                var dst = new EnumLiteralDetail();
                 dst.Id = field.MetadataToken;
                 dst.TypeName = src.Name;
                 dst.TypeHandle = src.TypeHandle.Value;
                 dst.TypeId = src.MetadataToken;
-                dst.DataType = Enums.@base(nk);
+                dst.PrimalKind = Enums.@base(nk);
                 dst.Name = field.Name;
                 dst.Position = i;
                 dst.Value = Variant.define(field.GetRawConstantValue(), nk);

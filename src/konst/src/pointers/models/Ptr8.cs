@@ -12,7 +12,7 @@ namespace Z0
     using api = Pointers;
 
     /// <summary>
-    /// Models a <see cref='byte'/> pointer
+    /// Captures and represents <see cref='byte'/> pointer
     /// </summary>
     [ApiDataType]
     public unsafe struct Ptr8

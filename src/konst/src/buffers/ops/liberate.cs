@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The buffer to let it be what it wants</param>
         [MethodImpl(Inline), Op]
         public static byte* liberate(Span<byte> src)
-            => liberate((byte*)z.ptr(ref z.first(src)), src.Length);
+            => liberate((byte*)z.pointer(ref z.first(src)), src.Length);
 
         /// <summary>
         /// Enables execution over a reference-identified memory segment of specified length
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The buffer to let it be what it wants</param>
         [MethodImpl(Inline), Op]
         public static byte* liberate(ref byte src, int length)
-            => liberate((byte*)z.ptr(ref src), length);
+            => liberate((byte*)z.pointer(ref src), length);
 
         [MethodImpl(Inline)]
         public static T* liberate<T>(T* pSrc, int length)

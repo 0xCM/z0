@@ -7,12 +7,12 @@ namespace Z0
     public interface IListed<T> : IMeasured
     {
         /// <summary>
-        /// Returns the first constituent if extant; othewise, returns the monoidal 0
+        /// Returns the first constituent if extant; otherwise, returns the monoidal 0
         /// </summary>
         T Head {get;}
 
         /// <summary>
-        /// Returns the last constituent if extant; othewise, returns the monoidal 0
+        /// Returns the last constituent if extant; otherwise, returns the monoidal 0
         /// </summary>
         T Tail {get;}
     }

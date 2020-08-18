@@ -86,10 +86,10 @@ namespace Z0
         /// <param name="peek">If true, extracts the content, bypassing any caching</param>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="V">The numeric value type</typeparam>
-        public static EnumLiterals<E,V> values<E,V>()
+        public static EnumLiteralDetails<E,V> values<E,V>()
             where E : unmanaged, Enum
             where V : unmanaged
-                => (EnumLiterals<E,V>)ValueCache.GetOrAdd(typeof(E), _ => LiteralSequence<E,V>());
+                => (EnumLiteralDetails<E,V>)ValueCache.GetOrAdd(typeof(E), _ => LiteralSequence<E,V>());
 
         /// <summary>
         /// Defines an E-V parametric enum value given an E-parametric literal an a value:V
@@ -99,10 +99,10 @@ namespace Z0
         /// <typeparam name="E">The enum source type</typeparam>
         /// <typeparam name="V">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static EnumLiteral<E,V> evalue<E,V>(EnumLiteral<E> literal, V value)
+        public static EnumLiteralDetail<E,V> evalue<E,V>(EnumLiteralDetail<E> literal, V value)
             where E : unmanaged, Enum
             where V : unmanaged
-                => new EnumLiteral<E,V>(literal,value);
+                => new EnumLiteralDetail<E,V>(literal,value);
 
         public static IEnumerable<BinaryLiteral<T>> BinaryLiterals<E,T>()
             where E : unmanaged, Enum
@@ -142,7 +142,7 @@ namespace Z0
             var pairs = values<E,V>();
             var index = new Dictionary<V,E>();
             foreach(var pair in pairs)
-                index.TryAdd(pair.NumericValue, pair.LiteralValue);
+                index.TryAdd(pair.PrimalValue, pair.LiteralValue);
             return index;
         }
    }

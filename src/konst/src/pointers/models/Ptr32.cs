@@ -12,7 +12,7 @@ namespace Z0
     using api = Pointers;
 
     /// <summary>
-    /// Models a <see cref='uint'/> pointer
+    /// Captures and represents <see cref='uint'/> pointer
     /// </summary>
     public unsafe struct Ptr32
     {

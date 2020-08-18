@@ -51,7 +51,7 @@ namespace Z0
             return z.unparsed<AppResourceDoc>(name);
         }
 
-        public AppResourceDoc MatcDocument(string doc)
+        public AppResourceDoc MatchDocument(string doc)
         {
             try
             {

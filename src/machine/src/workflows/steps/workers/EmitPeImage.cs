@@ -45,7 +45,7 @@ namespace Z0
             Part = part;
             TargetPath = dst;
             BaseAddress = @base;
-            Formatter = HexFormatters.data(BaseAddress);
+            Formatter = Formatters.data(BaseAddress);
             Offset = 0;
             LineCount = 0;
             LabelDelimiter = Chars.Pipe;

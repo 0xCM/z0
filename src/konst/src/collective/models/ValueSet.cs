@@ -81,7 +81,7 @@ namespace Z0
         public static bool operator !=(ValueSet<T> a, ValueSet<T> b)
             => !a.Equals(b);
 
-        public int Count 
+        public CellCount Count 
         {
             [MethodImpl(Inline)]
             get => Data.Count;

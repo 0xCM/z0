@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         variant ScalarValue {get;}        
     
-        NumericKind DataType {get;}
+        Type DataType {get;}
 
         string ITextual.Format()
             => $"{Position.ToString().PadLeft(2, '0')} {ScalarValue}:{Name}";        
@@ -64,6 +64,6 @@ namespace Z0
         /// <summary>
         /// The literal value presented as a numeric value
         /// </summary>
-        V NumericValue {get;}            
+        V PrimalValue {get;}            
     }
 }

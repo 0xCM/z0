@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    public readonly struct AsmFormatSpec
+    public struct AsmFormatSpec
     {        
         public static AsmFormatSpec Default 
             => Create();
@@ -68,31 +68,31 @@ namespace Z0.Asm
            this.EmitLineAddresses = ShowLineAddresses;
            this.FieldDelimiter = string.Concat(Chars.Space, FieldDelimiter, FieldDelimiter, Chars.Space);
            this.SectionDelimiter  = new string(Chars.Dash, 120);
-           this.HeaderEncodingFormat = HexFormat.configure();
+           this.HeaderEncodingFormat = RenderOptions.hex();
        }
 
-        public readonly bool EmitCaptureTermCode;
+        public bool EmitCaptureTermCode;
 
-        public readonly bool EmitFileHeader;
+        public bool EmitFileHeader;
 
-        public readonly bool EmitFunctionHeaderEncoding;
+        public bool EmitFunctionHeaderEncoding;
 
-        public readonly bool EmitBaseAddress;
+        public bool EmitBaseAddress;
 
-        public readonly bool EmitFunctionHeader;
+        public bool EmitFunctionHeader;
 
-        public readonly bool EmitFunctionTimestamp;
+        public bool EmitFunctionTimestamp;
 
-        public readonly bool EmitSectionDelimiter;
+        public bool EmitSectionDelimiter;
 
-        public readonly int InstructionPad;
+        public int InstructionPad;
 
-        public readonly bool EmitLineAddresses;
+        public bool EmitLineAddresses;
 
-        public readonly string FieldDelimiter;
+        public string FieldDelimiter;
 
-        public readonly string SectionDelimiter;
+        public string SectionDelimiter;
 
-        public readonly HexFormatConfig HeaderEncodingFormat;
+        public HexFormatConfig HeaderEncodingFormat;
     }
 }

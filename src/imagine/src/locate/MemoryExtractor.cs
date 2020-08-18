@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int read(MemoryAddress src, ref byte dst, int count)
         {
-            var pSrc = z.ptr(ref dst);
+            var pSrc = z.pointer(ref dst);
             return read(ref pSrc, count, ref dst);
         }
 

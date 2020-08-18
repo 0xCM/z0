@@ -36,7 +36,7 @@ namespace Z0
             dst.Delimit(F.TypeAddress, src.TypeAddress);
             dst.Delimit(F.NameAddress, src.NameAddress);
             dst.Delimit(F.TypeName, src.TypeName);
-            dst.Delimit(F.DataType, src.DataType);                
+            dst.Delimit(F.DataType, src.PrimalKind);                
             dst.Delimit(F.Index, src.Index);
             dst.Delimit(F.ScalarValue, src.ScalarValue);                
             dst.Delimit(F.Name, src.Name);

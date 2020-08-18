@@ -19,7 +19,7 @@ namespace Z0
         /// Determines whether a value is a member
         /// </summary>
         /// <param name="candidate">The potential member</param>
-        bool Contains(T candidate);
+        bool Contains(T candidate);        
     }
     
     /// <summary>

@@ -10,8 +10,10 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Pairs a field with a (compatible) value
+    /// </summary>
     public readonly struct FieldValue<T>
-        where T : unmanaged
     {
         public readonly FieldInfo Field;
 

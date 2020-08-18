@@ -14,22 +14,22 @@ namespace Z0
     /// <summary>
     /// Defines an untyped literal index
     /// </summary>
-    public readonly struct EnumLiterals : IConstIndex<EnumLiteral>
+    public readonly struct EnumLiterals : IConstIndex<EnumLiteralDetail>
     {
         public static EnumLiterals Empty 
-            => new EnumLiterals(sys.empty<EnumLiteral>());
+            => new EnumLiterals(sys.empty<EnumLiteralDetail>());
 
-        readonly EnumLiteral[] Data;
+        readonly EnumLiteralDetail[] Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator EnumLiterals(EnumLiteral[] src)
+        public static implicit operator EnumLiterals(EnumLiteralDetail[] src)
             => new EnumLiterals(src);
         
         [MethodImpl(Inline)]
-        public EnumLiterals(EnumLiteral[] src) 
+        public EnumLiterals(EnumLiteralDetail[] src) 
             => Data = src;
         
-        public EnumLiteral[] Content
+        public EnumLiteralDetail[] Content
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -41,13 +41,13 @@ namespace Z0
             get => Data.Length;
         }
         
-        public ref readonly EnumLiteral this[int i]
+        public ref readonly EnumLiteralDetail this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];
         }
 
-        public ref readonly EnumLiteral this[uint i]
+        public ref readonly EnumLiteralDetail this[uint i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];

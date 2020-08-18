@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
     using static HexFormatSpecs;
-    using static z;
+    using static z;    
  
     partial class Hex
-    {
+    {        
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+        internal static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
                 => format_u(src,zpad, specifier, uppercase,prespec);
 

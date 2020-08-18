@@ -11,7 +11,6 @@ namespace Z0
     using static Konst;
 
     public readonly struct FieldValues<T>
-        where T : unmanaged
     {
         public readonly FieldValue<T>[] Data;
 
@@ -38,6 +37,12 @@ namespace Z0
         }
 
         public ref readonly FieldValue<T> this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
+        public ref readonly FieldValue<T> this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
