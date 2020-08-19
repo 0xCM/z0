@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     partial struct Flow
     {
         [MethodImpl(Inline)]
@@ -25,8 +25,8 @@ namespace Z0
             where K : unmanaged, Enum
         {
             var path = dst.ArchiveRoot + FolderName.Define(m.Name) + FileName.Define(typeof(T).Name);
-            return Table.flow(src, archived<F,T>(path));
-        }        
+            return (src, archived<F,T>(path));
+        }
 
         public static DataFlow<TableContent<F,T>, ArchivedTable<F,T>> archive<F,T,M,K>(T[] src, TableArchive dst, M m = default,  F f = default)
             where T : struct, ITable<F,T>
@@ -48,14 +48,14 @@ namespace Z0
                 var formatted = transform.FormatRow(record);
                 writer.WriteLine(formatted);
             }
-            return Table.flow(Table.content<F,T>(src), archived<F,T>(path));
-        }        
+            return (Table.content<F,T>(src), archived<F,T>(path));
+        }
 
         [MethodImpl(Inline)]
         public static DataFlow<TableContent<F,T>, ArchivedTable<F,T>> archive<F,T>(TableContent<F,T> src, FilePath dst)
             where T : struct, ITable<F,T>
             where F : unmanaged, Enum
-                => Table.flow(src, Flow.archived<F,T>(dst));
+                => (src, Flow.archived<F,T>(dst));
 
     }
 }

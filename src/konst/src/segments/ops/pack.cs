@@ -10,44 +10,44 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     partial struct SegRefs
     {
         [MethodImpl(Inline), Op]
-        internal static void unpack(ulong src, out uint length, out uint user)
+        public static void unpack(ulong src, out uint length, out uint user)
         {
             length = (uint)src;
             user  = (uint)(src >> 32);
-        }            
+        }
 
         [MethodImpl(Inline), Op]
-        internal static void unpack(Vector128<ulong> src, out uint length, out uint user)
+        public static void unpack(Vector128<ulong> src, out uint length, out uint user)
             => unpack(vcell(src,1), out length, out user);
 
 
         [MethodImpl(Inline), Op]
-        internal static void unpack(Vector128<ulong> src, out MemoryAddress a, out uint length, out uint user)
+        public static void unpack(Vector128<ulong> src, out MemoryAddress a, out uint length, out uint user)
         {
             a = address(src);
             unpack(src, out length, out user);
         }
 
         [MethodImpl(Inline), Op]
-        internal static ref Vector128<ulong> pack(MemoryAddress address, uint length, uint user, out Vector128<ulong> dst)
+        public static ref Vector128<ulong> pack(MemoryAddress address, uint length, uint user, out Vector128<ulong> dst)
         {
             dst = pack(address, length, user);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        static ref ulong pack(uint length, uint user, out ulong dst)
+        public static ref ulong pack(uint length, uint user, out ulong dst)
         {
             dst = (ulong)length | ((ulong)user << 32);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        internal static Vector128<ulong> pack(MemoryAddress address, uint length, uint user)
+        public static Vector128<ulong> pack(MemoryAddress address, uint length, uint user)
             => vparts(N128.N, address, pack(length*scale<char>(), user, out var dst));
     }
 }

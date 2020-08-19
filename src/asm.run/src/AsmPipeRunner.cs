@@ -13,14 +13,14 @@ namespace Z0.Asm
     using static z;
 
     public readonly struct AsmPipeRunner
-    {        
+    {
         public FilePath LogPath {get;}
 
-        public IAppPaths AppPaths 
-            => Z0.AppPaths.Default;        
+        public IAppPaths AppPaths
+            => Z0.AppPaths.Default;
 
         readonly AsmFxHandlers Handlers;
-        
+
         readonly MemoryAddress BaseAddress;
 
         readonly int[] ListCount;
@@ -48,7 +48,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 Flow(skip(f,i));
         }
-        
+
         public void Flow(in AsmRoutine src)
         {
             var count = src.InstructionCount;
@@ -56,14 +56,14 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 Flow(skip(inxs,i));
         }
-        
+
         public void Flow(in Instruction src)
         {
 
         }
-        
+
         public Dictionary<Mnemonic,Instruction[]> RunPipe(params PartId[] parts)
-        {            
+        {
             using var log = LogPath.Writer();
             var paths = AppPaths.ForApp(PartId.Control);
             var capture = CaptureArchive(paths.AppCaptureRoot);
@@ -77,11 +77,11 @@ namespace Z0.Asm
                 RunPipe(data,log);
             }
 
-            return Handlers.Handled;       
+            return Handlers.Handled;
         }
-        
+
         AsmFxList Pipe(AsmFxList src)
-        {        
+        {
             ListCounter++;
             return src;
         }
@@ -95,19 +95,19 @@ namespace Z0.Asm
             var t1 = asm.trigger(Mnemonic.Vinserti128, Handlers.OnVinserti128);
             var t2 = asm.trigger(Mnemonic.Vmovupd, Handlers.OnVmovupd);
             var t3 = asm.trigger(Mnemonic.Call, Handlers.OnCall);
-            var triggers = asm.set(t1,t2,t3);
+            var triggers = asm.triggers(t1,t2,t3);
             var decoded = UriHexDecoder.decode(src).Map(ToList);
             var fxFlow = asm.flow(decoded, triggers);
-            var fxPipe = asm.pipe(Pipe); 
+            var fxPipe = asm.pipe(Pipe);
             var results = fxFlow.Push(fxPipe);
 
             log.WriteLine($"Analyzed {ListCounter} instruction lists");
-            
+
             for(var i =0; i<(int)Mnemonic.LAST; i++)
             {
                 var count = Handlers.Activations[i];
                 if(count != 0)
-                    log.WriteLine($"Logged {count} {(Mnemonic)i} activations");        
+                    log.WriteLine($"Logged {count} {(Mnemonic)i} activations");
             }
         }
 
@@ -120,11 +120,11 @@ namespace Z0.Asm
             => Capture.Services.CaptureArchive(root, null, null);
 
         [MethodImpl(Inline)]
-        FilePath AsmFilePath<T>(PartId part) 
+        FilePath AsmFilePath<T>(PartId part)
             => CaptureArchive(part).AsmPath<T>();
 
         [MethodImpl(Inline)]
-        FilePath HexFilePath<T>(PartId part) 
+        FilePath HexFilePath<T>(PartId part)
             => CaptureArchive(part).HexPath<T>();
 
         [MethodImpl(Inline)]

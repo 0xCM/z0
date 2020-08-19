@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -19,22 +19,22 @@ namespace Z0
 
         public int Length  {get;}
 
-        internal AsciSequence(BinaryCode data, int length)
+        public AsciSequence(BinaryCode src)
         {
-            Storage = data;
-            Length = length;
+            Storage = src;
+            Length = asci.length(src);
         }
 
-        public int Capacity 
+        public int Capacity
         {
             [MethodImpl(Inline)]
             get => Storage.Length;
         }
 
-        public ReadOnlySpan<byte> View 
+        public ReadOnlySpan<byte> View
             => Storage.Data;
 
-        public bool IsEmpty 
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Storage.IsEmpty;

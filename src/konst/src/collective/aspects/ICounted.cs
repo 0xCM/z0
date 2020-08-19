@@ -4,11 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
-    /// Characterizes a finite thing that yields a count value that does not require computation/enumeration 
+    /// Characterizes a finite thing that yields a count value that does not require computation/enumeration
     /// to reveal; in other words, the count function for counted things is free, as evinced by
     /// the default implementation
     /// </summary>
+    [Free]
     public interface ICounted : IFinite, INullity
     {
         /// <summary>
@@ -16,10 +19,10 @@ namespace Z0
         /// </summary>
         new CellCount Count {get;}
 
-        CellCount IFinite.Count() 
+        CellCount IFinite.Count()
             => Count;
 
-        bool INullity.IsEmpty 
+        bool INullity.IsEmpty
             => Count == 0;
     }
 }

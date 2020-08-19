@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -11,13 +11,12 @@ namespace Z0
     using static Typed;
 
     partial struct asci
-    {    
-
+    {
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> chars<A>(in A src)
             where A : unmanaged, IAsciSequence
                 => chars(n2, src);
-        
+
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> chars<A>(N2 n, in A src)
             where A : unmanaged, IAsciSequence
@@ -30,7 +29,7 @@ namespace Z0
                 return decode(cast(n8,src));
             else if(typeof(A) == typeof(asci16))
                 return decode(cast(n16,src));
-            else                
+            else
                 return chars(n32, src);
         }
 

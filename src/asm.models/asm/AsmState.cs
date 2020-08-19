@@ -11,16 +11,6 @@ namespace Z0
 
     public readonly struct AsmState
     {
-        [MethodImpl(Inline)]
-        public static AsmState create()
-            => new AsmState(0);
-        
-        [MethodImpl(Inline)]
-        AsmState(int i)
-        {
-            HexConfig = RenderOptions.hex(zpad:false, specifier:false);
-        }
-        
-        public readonly HexFormatConfig HexConfig;
+
     }
 }

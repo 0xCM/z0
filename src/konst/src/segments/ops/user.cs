@@ -10,24 +10,24 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     partial struct SegRefs
     {
         [MethodImpl(Inline), Op]
-        internal static Vector128<ulong> location(SegRef src)
-            => vparts(N128.N, src.Address, (ulong)src.DataSize); 
+        public static Vector128<ulong> location(SegRef src)
+            => vparts(N128.N, src.Address, (ulong)src.DataSize);
 
         [MethodImpl(Inline), Op]
-        internal static uint length<T>(Vector128<ulong> src)
+        public static uint length<T>(Vector128<ulong> src)
         {
-            SegRefs.unpack(vcell(src,1), out var size, out var _);
+            unpack(vcell(src,1), out var size, out var _);
             return size/scale<T>();
         }
 
         [MethodImpl(Inline), Op]
-        internal static uint user(Vector128<ulong> src)
+        public static uint user(Vector128<ulong> src)
         {
-            SegRefs.unpack(vcell(src,1), out _, out var user);
+            unpack(vcell(src,1), out _, out var user);
             return user;
         }
     }

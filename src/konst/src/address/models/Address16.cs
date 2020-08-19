@@ -13,28 +13,29 @@ namespace Z0
     using W = W16;
     using T = System.UInt16;
 
+    [ApiDataType]
     public readonly struct Address16 : IAddress<A,W,T>
     {
         public readonly T Location;
 
         public static W W => default;
 
-        public bool IsEmpty 
+        public bool IsEmpty
         {
-             [MethodImpl(Inline)] 
-             get => Location == 0; 
+             [MethodImpl(Inline)]
+             get => Location == 0;
         }
 
-        public bool IsNonEmpty  
+        public bool IsNonEmpty
         {
-             [MethodImpl(Inline)] 
-             get => Location != 0; 
+             [MethodImpl(Inline)]
+             get => Location != 0;
         }
 
-        public A Zero 
+        public A Zero
         {
-             [MethodImpl(Inline)] 
-             get => Empty; 
+             [MethodImpl(Inline)]
+             get => Empty;
         }
 
         [MethodImpl(Inline)]
@@ -48,6 +49,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator A(Address<W,T> src)
             => new A(src.Location);
+
+        [MethodImpl(Inline)]
+        public static implicit operator int(A src)
+            => src.Location;
 
         [MethodImpl(Inline)]
         public static A operator+(A x, T y)
@@ -64,9 +69,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Location.FormatAsmHex();
-        
+
         [MethodImpl(Inline)]
-        public bool Equals(A src)        
+        public bool Equals(A src)
             => Location == src.Location;
 
         [MethodImpl(Inline)]
@@ -75,17 +80,17 @@ namespace Z0
 
         public override string ToString()
             => Format();
-        
+
         public override int GetHashCode()
             => Location.GetHashCode();
-        
-        public override bool Equals(object src)        
+
+        public override bool Equals(object src)
             => src is A a && Equals(a);
-        
-        public static A Empty 
+
+        public static A Empty
             => new A(0);
 
-        T IAddress<T>.Location 
+        T IAddress<T>.Location
             => Location;
 
         [MethodImpl(Inline)]

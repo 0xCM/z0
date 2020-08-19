@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     partial struct asci
-    {        
+    {
         /// <summary>
         /// Tests whether a character is an uppercase asci letter character
         /// </summary>
@@ -81,10 +81,10 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci64 src)
-            => IndexLength(first(src, AsciNone), src.Capacity);      
+            => IndexLength(first(src, AsciNone), src.Capacity);
 
         [MethodImpl(Inline), Op]
-        static int length(byte[] src)      
-            => IndexLength(first(src, AsciNone), src.Length);            
+        internal static int length(byte[] src)
+            => IndexLength(first(src, AsciNone), src.Length);
     }
 }

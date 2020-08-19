@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using static AsciCharText;
     using A = AsciChar;
     using T = AsciCharText;
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         [StringLiteral(".")]
         public const string ExtSep = Dot;
-        
+
         /// <summary>
         /// Defines the literal '('
         /// </summary>
@@ -102,7 +102,7 @@ namespace Z0
         /// </summary>
         [StringLiteral("}")]
         public const string CloseSlot = RBrace;
-        
+
         /// <summary>
         /// Defines the literal '"{'
         /// </summary>
@@ -114,13 +114,13 @@ namespace Z0
         /// </summary>
         [StringLiteral("\"}")]
         public const string CloseQSlot = RBrace + DQuote;
-        
+
         /// <summary>
         /// Defines the literal '"{0}"'
         /// </summary>
         [StringLiteral("\"{\"}")]
         public const string QSlot0 = OpenQSlot + D0 + CloseQSlot;
-        
+
         /// <summary>
         /// Defines the literal '"{1}"'
         /// </summary>
@@ -144,66 +144,115 @@ namespace Z0
         /// <summary>
         /// Defines the literal '{0}'
         /// </summary>
+        [StringLiteral("{0}")]
         public const string Slot0 = OpenSlot + D0 + CloseSlot;
-        
+
         /// <summary>
         /// Defines the literal '{1}'
         /// </summary>
+        [StringLiteral("{1}")]
         public const string Slot1 = OpenSlot + D1 + CloseSlot;
 
         /// <summary>
         /// Defines the literal '{2}'
         /// </summary>
+        [StringLiteral("{2}")]
         public const string Slot2 = OpenSlot + D2 + CloseSlot;
 
         /// <summary>
         /// Defines the literal '{3}'
         /// </summary>
+        [StringLiteral("{3}")]
         public const string Slot3 = OpenSlot + D3 + CloseSlot;
 
         /// <summary>
         /// Defines the literal "{4}"
         /// </summary>
+        [StringLiteral("{4}")]
         public const string Slot4 = OpenSlot + D4 + CloseSlot;
 
         /// <summary>
         /// Defines the literal "{5}"
         /// </summary>
+        [StringLiteral("{5}")]
         public const string Slot5 = OpenSlot + D5 + CloseSlot;
 
         /// <summary>
         /// Defines the literal "{6}"
         /// </summary>
+        [StringLiteral("{6}")]
         public const string Slot6 = OpenSlot + D6 + CloseSlot;
 
         /// <summary>
         /// Defines the literal "{7}"
         /// </summary>
+        [StringLiteral("{7}")]
         public const string Slot7 = OpenSlot + D7 + CloseSlot;
+
+        /// <summary>
+        /// Defines the literal "{0} "
+        /// </summary>
+        [StringLiteral("{0} ")]
+        public const string Slot0Space = Slot0 + Space;
+
+        /// <summary>
+        /// Defines the literal "{1} "
+        /// </summary>
+        [StringLiteral("{1} ")]
+        public const string Slot1Space = Slot1 + Space;
+
+        /// <summary>
+        /// Defines the literal "{2} "
+        /// </summary>
+        [StringLiteral("{2} ")]
+        public const string Slot2Space = Slot2 + Space;
+
+        /// <summary>
+        /// Defines the literal "{3} "
+        /// </summary>
+        [StringLiteral("{3} ")]
+        public const string Slot3Space = Slot3 + Space;
+
+        /// <summary>
+        /// Defines the literal "{4} "
+        /// </summary>
+        [StringLiteral("{4} ")]
+        public const string Slot4Space = Slot4 + Space;
+
+        /// <summary>
+        /// Defines the literal "{5} "
+        /// </summary>
+        [StringLiteral("{5} ")]
+        public const string Slot5Space = Slot5 + Space;
 
         /// <summary>
         /// Defines the literal " |"
         /// </summary>
+        [StringLiteral(" |")]
         public const string SpacePipe = Space + Pipe;
 
         /// <summary>
         /// Defines the literal '| {0}'
         /// </summary>
-        public const string PSx1 = Pipe + Space + Slot0;
+        [StringLiteral("{0} | ")]
+        public const string SlottedSpacePipe = Slot0 + SpacePipe + Space;
 
         /// <summary>
-        /// Defines the literal | {0} | {1}
+        /// Defines the literal '{0} | {1}'
         /// </summary>
-        public const string PSx2 = PSx1 + SpacePipe + Space + Slot1;
-        
+        [StringLiteral("{0} | {1}")]
+        public const string PSx2 = Slot0 + SpacePipe + Space + Slot1;
+
         /// <summary>
-        /// Defines the literal '| {0} | {1} | {2}'
+        /// Defines the literal '{0} | {1} | {2}'
         /// </summary>
+        [StringLiteral("{0} | {1} | {2}")]
         public const string PSx3 = PSx2 + SpacePipe + Space + Slot2;
 
         /// <summary>
         /// Defines the literal '| {0} | {1} | {2} | {3}'
         /// </summary>
+        [StringLiteral("{0} | {1} | {2} | {3}")]
         public const string PSx4 = PSx3 + SpacePipe + Space + Slot3;
 
         /// <summary>
@@ -219,7 +268,7 @@ namespace Z0
         /// <summary>
         /// Defines the literal '"{0}": "{1}"'
         /// </summary>
-        public const string JsonProp = QSlot0 + Colon + Space + QSlot1;        
+        public const string JsonProp = QSlot0 + Colon + Space + QSlot1;
 
         /// <summary>
         /// Defines a right-padded slot of width 4
@@ -279,12 +328,12 @@ namespace Z0
         /// <summary>
         /// Defines the literal "{0} {1}"
         /// </summary>
-        public const string SSx2 = Slot0 + SS1;        
+        public const string SSx2 = Slot0 + SS1;
 
         /// <summary>
         /// Defines the literal "{0} {1} {2}"
         /// </summary>
-        public const string SSx3 = Slot0 + SS1 + SS2;        
+        public const string SSx3 = Slot0 + SS1 + SS2;
 
         /// <summary>
         /// Defines the literal "{1} {2}"
@@ -294,8 +343,8 @@ namespace Z0
         /// <summary>
         /// Defines the literal '{1} {2} {3}'
         /// </summary>
-        public const string SS1x3 = Slot0 + SS1 + SS2 + SS3;        
-        
+        public const string SS1x3 = Slot0 + SS1 + SS2 + SS3;
+
         /// <summary>
         /// Defines the literal '{0}.{1}'
         /// </summary>
@@ -305,7 +354,7 @@ namespace Z0
         /// Defines the literal '{0}.{1}.{2}'
         /// </summary>
         public const string SlotDot3 = SlotDot2 + Dot + Slot2;
-       
+
         public const string SlotTuple1 = OpenTuple + Slot0 + CloseTuple;
 
         public const string SlotTuple2 = "({0}, {1})";
@@ -318,13 +367,24 @@ namespace Z0
 
         public const string SlotTuple6 = "({0}, {1}, {2}, {3}, {4}, {5})";
 
-        public const string SlotTuple7 = "({0}, {1}, {2}, {3}, {4}, {5}, {6})";  
+        public const string SlotTuple7 = "({0}, {1}, {2}, {3}, {4}, {5}, {6})";
 
-        public const string SlotArrow2 = "{0} -> {1}";      
+        public const string SlotArrow2 = Slot0 + Space + Arrow + Space + Slot1;
 
-        public const string SlotArrow3 = "{0} -> {1} -> {3}";      
+        public const string SlotArrow3 = "{0} -> {1} -> {3}";
 
-        public const string SlotArrow4 = "{0} -> {1} -> {3} -> {4}";      
+        public const string SlotArrow4 = "{0} -> {1} -> {3} -> {4}";
 
+        /// <summary>
+        /// Defines the literal '{0} -> {1}'
+        /// </summary>
+        [StringLiteral("{0} -> {1}")]
+        public const string AtoB = SlotArrow2;
+
+        /// <summary>
+        /// Defines the literal '{0} -> {1}'
+        /// </summary>
+        [StringLiteral("{0} -> {1}")]
+        public const string AtoBtoC = AtoB;
     }
 }

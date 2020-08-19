@@ -10,11 +10,11 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     partial struct SegRefs
     {
         [MethodImpl(Inline), Op]
-        internal static MemoryAddress address(Vector128<ulong> src)
+        public static MemoryAddress address(Vector128<ulong> src)
             => vcell(src,0);
     }
 }

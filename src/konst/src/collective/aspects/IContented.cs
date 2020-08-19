@@ -4,10 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a container that owns content
     /// </summary>
     /// <typeparam name="C">The content type</typeparam>
+    [Free]
     public interface IContented<C> : IContainer<C>
     {
         C Content {get;}
@@ -18,12 +22,13 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="C">The content type</typeparam>
+    [Free]
     public interface IContented<F,C> : IContented<C>, IReified<F>
         where F : IContented<F,C>, new()
     {
         /// <summary>
         /// Assigns content; whether existing content is replaced, accrued or
-        /// if a new container is created is determined by the reifying type 
+        /// if a new container is created is determined by the reifying type
         /// and its purpose in life
         /// </summary>
         /// <param name="content">The source content</param>
@@ -36,9 +41,10 @@ namespace Z0
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="C">The content type</typeparam>
     /// <typeparam name="T">The type over which the content is stratified</typeparam>
+    [Free]
     public interface IContented<F,C,T> : IContented<F,C>
         where F : IContented<F,C,T>, new()
     {
-           
+
     }
 }

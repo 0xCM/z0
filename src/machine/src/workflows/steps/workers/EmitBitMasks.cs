@@ -5,62 +5,62 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Collections.Generic;
 
     using Z0.Data;
-        
+
     using static Konst;
-    using static EmitBitMasksStep;    
+    using static EmitBitMasksStep;
     using static z;
-    
+
     using NBI = NumericBaseIndicator;
 
-    public ref struct EmitBitMasks 
+    public ref struct EmitBitMasks
     {
         readonly IWfContext Wf;
 
-        readonly CorrelationToken Ct;        
-        
+        readonly CorrelationToken Ct;
+
         readonly FilePath TargetPath;
-        
+
         [MethodImpl(Inline)]
         public EmitBitMasks(IWfContext context, CorrelationToken ct)
         {
             Wf = context;
             Ct = ct;
             TargetPath = Wf.IndexRoot + FileName.Define("bitmasks", FileExtensions.Csv);;
-            Wf.Created(Name, Ct);
+            Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {
-            Wf.Running(Name, text.format(RunningPattern, TargetPath), Ct);
+            Wf.Running(StepName, text.format(RunningPattern, TargetPath), Ct);
             var count = emit(typeof(BitMasks));
-            Wf.Ran(Name, text.format(RanPattern, count, TargetPath), Ct);
+            Wf.Ran(StepName, text.format(RanPattern, count, TargetPath), Ct);
         }
-        
+
         public void Dispose()
         {
-            Wf.Finished(Name, Ct);
+            Wf.Finished(StepName, Ct);
         }
 
         uint emit(Type src)
         {
-            
+
             var literals = span(find(src));
             var count = literals.Length;
-            var formatter = NumericLiteralFormatter.Service;            
+            var formatter = NumericLiteralFormatter.Service;
             using var writer = TargetPath.Writer();
             writer.WriteLine(formatter.HeaderText);
-            
+
             for(var i=0u; i <count; i++)
             {
                 ref readonly var literal = ref skip(literals,i);
-                writer.WriteLine(formatter.Format(literal));                
-            }            
-            
+                writer.WriteLine(formatter.Format(literal));
+            }
+
             return (uint)count;
         }
 
@@ -80,7 +80,7 @@ namespace Z0
                 else
                     dst.Add(NumericLiteral.Base2(field.Name, vRaw, Render.bits(vRaw, tc)));
             }
-            return dst.ToArray();            
+            return dst.ToArray();
         }
 
         static NumericLiteral[] numeric(LiteralInfo src, object value)
@@ -111,16 +111,16 @@ namespace Z0
                                     src.Name,
                                     value,
                                     component.Substring(0, length - 1),
-                                    NumericBases.kind(indicator)                                    
+                                    NumericBases.kind(indicator)
                                     );
-                            }                            
+                            }
                         }
                         else
                             dst[i] = NumericLiteral.Empty;
                     }
                 }
-            }   
+            }
             return sys.empty<NumericLiteral>();
-        }        
+        }
     }
 }

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -18,18 +18,18 @@ namespace Z0.Asm
         readonly IT[] ITriggers;
 
         readonly FT[] FTriggers;
-                    
+
         [MethodImpl(Inline)]
         public AsmTriggerSet(FT[] fTriggers, IT[] iTriggers)
         {
             FTriggers = fTriggers;
             ITriggers = iTriggers;
         }
-        
-        public bool IsEmpty 
+
+        public bool IsEmpty
             => ITriggers.Length == 0 && FTriggers.Length == 0;
-        
-        AsmTriggerSet INullary<AsmTriggerSet>.Zero 
+
+        AsmTriggerSet INullary<AsmTriggerSet>.Zero
             => Empty;
 
         [MethodImpl(Inline)]
@@ -58,10 +58,10 @@ namespace Z0.Asm
             var src = span(FTriggers);
             var count = src.Length;
             for(var i=0; i<count; i++)
-                FireOnMatch(skip(src,i), f);                                
+                FireOnMatch(skip(src,i), f);
         }
 
-        public static AsmTriggerSet Empty 
-            => asm.set(array<FT>(), array<IT>());
+        public static AsmTriggerSet Empty
+            => asm.triggers(array<FT>(), array<IT>());
     }
 }

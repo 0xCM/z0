@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Konst;
     using static RenderPatterns;
 
     [Step(typeof(ProcessPartFiles))]
@@ -31,19 +28,19 @@ namespace Z0
     public readonly struct EmitBitMasksStep
     {
         public const WfStepKind Kind = WfStepKind.EmitBitMasks;
-        
-        public const string Name = nameof(EmitBitMasks);
-        
+
+        public const string StepName = nameof(EmitBitMasks);
+
         public const string RunningPattern = "Emitting bitmasks to {0}";
 
-        public const string RanPattern = "Emitted {0} bitmasks to {1}";        
+        public const string RanPattern = "Emitted {0} bitmasks to {1}";
     }
 
     [Step(typeof(EmitCilDatasets))]
     public readonly struct EmitCilDatasetsStep
     {
         public const string StepName = nameof(EmitCilDatasets);
-        
+
         public const string DatasetName = "Cil";
 
         public const string DataType = "il";
@@ -57,8 +54,8 @@ namespace Z0
     public readonly struct RecaptureStep
     {
         public const string StepName = nameof(RecaptureStep);
-    }    
-    
+    }
+
     [Step(typeof(ProcessAsm))]
     public readonly struct ProcessAsmStep
     {
@@ -69,9 +66,9 @@ namespace Z0
     public readonly struct RunProcessorsStep
     {
         public const WfStepKind Kind = WfStepKind.RunProcessors;
-        
-        public const string StepName = nameof(Engine);           
-    }    
+
+        public const string StepName = nameof(Engine);
+    }
 
     [Step(typeof(EmitPeHeaders))]
     public readonly struct EmitPeHeadersStep
@@ -82,19 +79,19 @@ namespace Z0
     [Step(typeof(EmitPeImage))]
     public readonly struct EmitPeImageStep
     {
-        public const string StepName = nameof(EmitPeImage);        
+        public const string StepName = nameof(EmitPeImage);
 
         public const string DataType = "hexline";
 
         public const string DatasetName = "PeImage";
     }
-    
+
     [Step(typeof(EmitProjectDocs))]
     public readonly struct EmitProjectDocsStep
     {
         public const string StepName = nameof(EmitProjectDocs);
     }
-    
+
     [Step(typeof(EmitContentCatalog))]
     public readonly struct EmitContentCatalogStep
     {
@@ -102,13 +99,13 @@ namespace Z0
 
         public const string DatasetName = "ContentCatalog";
     }
-    
+
     [Step(typeof(EmitConstantDatasets))]
     public readonly struct EmitConstantDatasetsStep
-    {    
-        public const string StepName = nameof(EmitConstantDatasets);       
+    {
+        public const string StepName = nameof(EmitConstantDatasets);
     }
-    
+
     [Step(typeof(EmitDatasetsStep))]
     public readonly struct EmitEnumCatalogStep
     {
@@ -147,31 +144,31 @@ namespace Z0
         public const string StepName = nameof(EmitPartStrings);
 
         public const string DataType = EmitStringRecordsStep.DataType;
-    }   
+    }
 
     [Step(typeof(ProcessInstructions))]
     public readonly struct ProcessInstructionsStep
     {
         public const string StepName = nameof(ProcessInstructions);
-    }     
+    }
 
     public readonly struct Controller
     {
         public const string ActorName = nameof(Control);
-    }    
+    }
 
     [Step(typeof(EmitBlobs))]
     public readonly struct EmitBlobsStep
     {
-        public const string StepName = nameof(EmitBlobs);        
+        public const string StepName = nameof(EmitBlobs);
 
         public const string EmissionType = "Metablobs";
-    }    
+    }
 
     [Step(typeof(EmitImageSummaries))]
     public readonly struct EmitImageSummariesStep
-    {        
-        public const string StepName = nameof(EmitImageSummaries);       
+    {
+        public const string StepName = nameof(EmitImageSummaries);
     }
 
     [Step(typeof(EmitResBytes))]
@@ -179,7 +176,7 @@ namespace Z0
     {
         public const string StepName = nameof(EmitResBytes);
     }
-    
+
     [Step(typeof(ParseAsmFiles))]
     public readonly struct ParseAsmFilesStep
     {
@@ -189,7 +186,7 @@ namespace Z0
     public readonly struct EmitDatasetsStep
     {
         public const string StepName = nameof(EmitDatasets);
-    }     
+    }
 
     [Step(typeof(EmitFieldMetadata))]
     public readonly struct EmitFieldMetadataStep
@@ -197,17 +194,17 @@ namespace Z0
         public const string StepName = nameof(EmitFieldMetadata);
 
         public const string DatasetName = "FieldMetadata";
-    }       
+    }
 
     [Step(typeof(EmitImageContent))]
     public readonly struct EmitImageContentStep
-    {        
-        public const string StepName = nameof(EmitImageContent);        
-    }       
-    
+    {
+        public const string StepName = nameof(EmitImageContent);
+    }
+
     [Step(typeof(EmitMetadataSets))]
     public readonly struct EmitMetadataSetsStep
     {
         public const string WorkerName = nameof(EmitMetadataSets);
-    }        
+    }
 }

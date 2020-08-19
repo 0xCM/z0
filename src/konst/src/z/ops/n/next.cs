@@ -48,7 +48,7 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
-        ///  
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -57,7 +57,7 @@ namespace Z0
             => ref @as<byte>(gNext(src, ref dst));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src"></param>
         /// <param name="dst"></param>
@@ -66,7 +66,7 @@ namespace Z0
             => ref @as<byte>(gNext(src, ref dst));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -75,7 +75,7 @@ namespace Z0
             => ref @as<byte>(gNext(src, ref dst));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -93,7 +93,7 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -102,7 +102,7 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -111,7 +111,7 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -120,7 +120,7 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -129,7 +129,7 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -138,7 +138,7 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -147,7 +147,7 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -156,7 +156,7 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
@@ -165,7 +165,7 @@ namespace Z0
             => ref gNext(src, ref dst);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>

@@ -18,7 +18,7 @@ namespace Z0
 
     [ApiHost]
     public readonly struct CalcDemo
-    {    
+    {
         static ReadOnlySpan<LocatedMethod> Slots
             => FunctionJit.jit(typeof(CalcSlots));
 
@@ -27,14 +27,14 @@ namespace Z0
             var x = As.uint8(4);
             var y = As.uint8(16);
             var f = K.mul();
-            
-            var expect = M.eval(f, x, y);            
-            var actual = N.eval(f, x, y);            
+
+            var expect = M.eval(f, x, y);
+            var actual = N.eval(f, x, y);
             var message = describe(f, x,y, expect, actual);
 
             term.print(message);
         }
-        
+
         void Display2()
         {
             var slots = Slots;
@@ -61,7 +61,7 @@ namespace Z0
                 term.print($"i = {i} => e = {e}");
 
             }
-            return e;            
+            return e;
         }
 
         [MethodImpl(Inline),Op]
@@ -73,10 +73,19 @@ namespace Z0
             return ops[I.Add](e,b);
         }
 
+        [MethodImpl(Inline), Op]
+        public static MemSlotView from(Type src)
+            => FunctionJit.jit(src).Map(m => new SegRef(m.Address, m.Size));
+
+        [MethodImpl(Inline)]
+        public static MemSlotView<E> from<E>(Type src)
+            where E : unmanaged, Enum
+                => new MemSlotView<E>(from(src));
+
         [Op]
         public static void run(Span<string> dst, ref byte offset)
         {
-            var slots = MemSlots.from<CalcOpIndex>(typeof(CalcSlots));
+            var slots = from<CalcOpIndex>(typeof(CalcSlots));
             ref readonly var add = ref slots[CalcOpIndex.Add];
             ref readonly var sub = ref slots[CalcOpIndex.Sub];
             ref readonly var mul = ref slots[CalcOpIndex.Mul];
@@ -101,7 +110,7 @@ namespace Z0
                 seek(divRef, i) = skip(mulCode,i);
 
             var z2 = CalcSlots.div(x,y);
-            seek(dst, offset++) = CalcChecks.describe(K.div(), x,y, z2);             
+            seek(dst, offset++) = CalcChecks.describe(K.div(), x,y, z2);
         }
     }
 }

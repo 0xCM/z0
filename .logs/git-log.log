@@ -10922,3 +10922,24 @@
  create mode 100644 src/konst/src/reflective/xtend/method/Method.Exclude.cs
  rename docs/dot.help => src/tools/specs/dot.doc (100%)
  delete mode 100644 z0.code-workspace
+[master e522370c2] .
+ 46 files changed, 689 insertions(+), 432 deletions(-)
+ create mode 100644 src/konst/src/literals/api/extract.cs
+ delete mode 100644 src/konst/src/literals/api/refs.cs
+ create mode 100644 src/konst/src/pointers/models/FPtr.cs
+ create mode 100644 src/konst/src/pointers/models/FPtrD.cs
+ create mode 100644 src/konst/src/pointers/ops/fptr.cs
+ create mode 100644 src/konst/src/pointers/ops/map.cs
+ rename src/konst/src/reflective/reflex/ops/{empty.cs => enum.cs} (82%)
+ delete mode 100644 src/konst/src/reflective/reflex/ops/field.cs
+ create mode 100644 src/konst/src/reflective/reflex/ops/offsets.cs
+ create mode 100644 src/konst/src/structured/interfaces/IPointedMap.cs
+ create mode 100644 src/konst/src/structured/interfaces/IRefMap.cs
+ create mode 100644 src/tools/specs/crossgen2.md
+ create mode 100644 src/tools/specs/superpmi.doc
+ delete mode 100644 test/asm/workspace/Decoder.cs
+ delete mode 100644 test/asmd/base/opcodes/poc/Descriptions.cs
+ delete mode 100644 test/asmd/base/opcodes/poc/Expressions.cs
+ delete mode 100644 test/asmd/base/opcodes/poc/Identifiers.cs
+ delete mode 100644 test/asmd/base/opcodes/poc/Instructions.cs
+ rename src/konst/src/reflective/reflex/ops/assembly.cs => test/dynamic/units/t_vsign.cs (58%)
