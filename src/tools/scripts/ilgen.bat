@@ -5,10 +5,19 @@ set SrcRoot=j:\dev\projects\z0
 set SrcDir=%SrcRoot%\bin\lib\netcoreapp3.0
 set DstRoot=j:\dev\projects\z0-logs
 
+REM MDHEADER    Show MetaData header information and sizes.
+REM HEX         Show more things in hex as well as words.
+REM CSV         Show the record counts and heap sizes.
+REM UNREX       Show unresolved externals.
+REM SCHEMA      Show the MetaData header and schema information.
+REM RAW         Show the raw MetaData tables.
+REM HEAPS       Show the raw heaps.
+REM VALIDATE    Validate the consistency of the metadata.
 
-set SrcName=z0.asm.models.dll
+
+set SrcName=z0.math.dll
 set Tool=ildasm
-set MdOptionName=mdheader
+set MdOptionName=heaps
 set MdOptions=-METADATA=%MdOptionName%
 set DefaultOptions=-bytes -raweh -tokens -linenum -forward -typelist -headers -stats -classlist
 set Options=%DefaultOptions% %MdOptions%

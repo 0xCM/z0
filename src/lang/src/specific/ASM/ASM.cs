@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang.ASM
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,4 +10,8 @@ namespace Z0.Lang.ASM
     using static Konst;
 
 
+    public readonly struct AsmLang
+    {
+
+    }
 }
