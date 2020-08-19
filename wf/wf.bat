@@ -13,7 +13,7 @@ call %Cmd%
 set Cmd="%Wf%/respack.bat"
 call %Cmd%
 
-set Cmd="commit.bat"
+set Cmd="%Wf%/commit.bat"
 call %Cmd%
 
 echo on

@@ -10943,3 +10943,113 @@
  delete mode 100644 test/asmd/base/opcodes/poc/Identifiers.cs
  delete mode 100644 test/asmd/base/opcodes/poc/Instructions.cs
  rename src/konst/src/reflective/reflex/ops/assembly.cs => test/dynamic/units/t_vsign.cs (58%)
+[master 8e766e7ed] .
+ 139 files changed, 1768 insertions(+), 1035 deletions(-)
+ create mode 100644 src/asm.models/asm/AsmBuilder.cs
+ rename src/{konst/src/segments => asm.models/asm}/ContentSegments.cs (100%)
+ rename src/{konst/src/hex/services => asm.models/asm}/HexLookup.cs (97%)
+ rename src/asm.models/asm/{ => builder}/fx/cmp.cs (79%)
+ create mode 100644 src/asm.models/asm/builder/fx/mov.cs
+ rename src/{konst/src/imm => asm.models/asm}/contracts/IAsmImmOperand.cs (100%)
+ rename src/{konst/src/imm => asm.models/asm/contracts}/IAsmMemOperand.cs (100%)
+ rename src/{konst/src/imm => asm.models/asm/contracts}/IAsmOperand.cs (100%)
+ rename src/{konst/src/imm => asm.models/asm/contracts}/IAsmOperands.cs (100%)
+ delete mode 100644 src/asm.models/asm/formatting/ops/format.cs
+ rename src/{konst/src/address/models => asm.models/asm/models/addressing}/Addresses.cs (100%)
+ rename src/{konst/src/storage/models => asm.models/asm/models/addressing}/ContentSegment.cs (100%)
+ rename src/{konst/src/hex/models => asm.models/asm/models/addressing}/HexIndex.cs (85%)
+ rename src/{konst/src/hex/models => asm.models/asm/models/addressing}/HexLookup.cs (99%)
+ rename src/{konst/src/hex/models => asm.models/asm/models/addressing}/HexLookupEntry.cs (100%)
+ rename src/{konst/src/hex/services => asm.models/asm/models/addressing}/HexTextIndex.cs (100%)
+ rename src/{konst/src/segments/models => asm.models/asm/models/addressing}/MemSlotView.cs (100%)
+ rename src/{konst/src/segments/models => asm.models/asm/models/addressing}/MemSlotViewT.cs (100%)
+ rename src/{konst/src/address/models => asm.models/asm/models/addressing}/MemoryClass.cs (100%)
+ rename src/{konst/src/address/models => asm.models/asm/models/addressing}/MemoryOffset.cs (100%)
+ rename src/{konst/src/address/models => asm.models/asm/models/addressing}/MemoryOffsets.cs (93%)
+ rename src/{konst/src/address/models => asm.models/asm/models/addressing}/OffsetSequence.cs (100%)
+ rename src/{konst/src/address/models => asm.models/asm/models/addressing}/RelAddress.cs (100%)
+ rename src/{konst/src/address/models => asm.models/asm/models/addressing}/RelAddressT.cs (100%)
+ rename src/{konst/src/address/models => asm.models/asm/models/addressing}/RelAddressWT.cs (100%)
+ rename src/{konst/src/address/models => asm.models/asm/models/addressing}/ScaledOffset.cs (97%)
+ rename src/{konst/src/segments/models => asm.models/asm/models/addressing}/SegKind.cs (100%)
+ rename src/{konst/src/segments/models => asm.models/asm/models/addressing}/SegOpClass.cs (100%)
+ rename src/{konst/src/segments/models => asm.models/asm/models/addressing}/SegOpKind.cs (100%)
+ rename src/{konst/src/segments/models => asm.models/asm/models/addressing}/SegSpec.cs (100%)
+ create mode 100644 src/asm.models/asm/models/imm/Addresss.cs
+ rename src/{konst/src => asm.models/asm/models}/imm/AsmOperandKind.cs (100%)
+ rename src/{konst/src => asm.models/asm/models}/imm/AsmOperands.cs (100%)
+ rename src/{konst/src => asm.models/asm/models}/imm/CallClient.cs (100%)
+ rename src/{konst/src => asm.models/asm/models}/imm/CallTarget.cs (100%)
+ rename src/{konst/src => asm.models/asm/models}/imm/Calls.cs (100%)
+ rename src/{konst/src/imm/contracts => asm.models/asm/models/imm}/IImmAddress.cs (100%)
+ rename src/{konst/src => asm.models/asm/models}/imm/Imm.cs (100%)
+ rename src/{konst/src/imm/models => asm.models/asm/models/imm}/Imm16.cs (100%)
+ rename src/{konst/src/imm/models => asm.models/asm/models/imm}/Imm16xE.cs (100%)
+ rename src/{konst/src/imm/models => asm.models/asm/models/imm}/Imm32.cs (100%)
+ rename src/{konst/src/imm/models => asm.models/asm/models/imm}/Imm32xE.cs (100%)
+ rename src/{konst/src/imm/models => asm.models/asm/models/imm}/Imm64.cs (100%)
+ rename src/{konst/src/imm/models => asm.models/asm/models/imm}/Imm64xE.cs (100%)
+ rename src/{konst/src/imm/models => asm.models/asm/models/imm}/Imm8.cs (100%)
+ rename src/{konst/src/imm/models => asm.models/asm/models/imm}/Imm8xE.cs (100%)
+ rename src/{konst/src/imm/models => asm.models/asm/models/imm}/ImmWT.cs (100%)
+ rename src/{konst/src => asm.models/asm/models}/imm/Invocation.cs (100%)
+ create mode 100644 src/asm.models/asm/models/memory/models/m128.cs
+ rename src/asm.models/asm/models/memory/{typelevel => models}/m16.cs (53%)
+ create mode 100644 src/asm.models/asm/models/memory/models/m256.cs
+ create mode 100644 src/asm.models/asm/models/memory/models/m32.cs
+ create mode 100644 src/asm.models/asm/models/memory/models/m512.cs
+ rename src/asm.models/asm/models/memory/{typelevel => models}/m64.cs (51%)
+ rename src/asm.models/asm/models/memory/{typelevel => models}/m8.cs (55%)
+ delete mode 100644 src/asm.models/asm/models/memory/typelevel/m128.cs
+ delete mode 100644 src/asm.models/asm/models/memory/typelevel/m32.cs
+ delete mode 100644 src/asm.models/asm/models/memory/typelevel/m512.cs
+ create mode 100644 src/asm.models/asm/models/operands/AsmArgs4.cs
+ rename src/{konst/src/hex/services => asm.models/asm/models/processing}/HexCodeSink.cs (81%)
+ rename src/{konst/src/imm/Addresss.cs => asm.models/asm/ops/address.cs} (50%)
+ create mode 100644 src/asm.models/asm/ops/offset.cs
+ rename src/{konst/src/hex => asm.models/asm}/ops/partition.cs (92%)
+ rename src/{konst/src/tables/models/DataFlowST.cs => asm.models/asm/ops/sink.cs} (61%)
+ create mode 100644 src/asm.models/asm/ops/slots.cs
+ rename src/asm.models/asm/ops/{set.cs => triggers.cs} (81%)
+ create mode 100644 src/asm.models/asm/ops/update.cs
+ rename src/asm.models/asm/{formatting => render}/AsmFormatSpec.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/AsmFormatter.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/AsmRender.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/AsmTextEmitter.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/AsmWriter.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/literals/AsmAspectLabels.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/literals/AsmRenderPatterns.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/literals/AsmTypeLabels.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/ops/comment.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/ops/emitter.cs (100%)
+ create mode 100644 src/asm.models/asm/render/ops/format.cs
+ rename src/asm.models/asm/{formatting => render}/ops/header.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/ops/label.cs (100%)
+ rename src/asm.models/asm/{formatting => render}/ops/lines.cs (100%)
+ delete mode 100644 src/dynamic/src/structures/StructureEmit.cs
+ delete mode 100644 src/dynamic/src/structures/StructureSpec.cs
+ delete mode 100644 src/dynamic/src/structures/StructuredField.cs
+ create mode 100644 src/dynamic/src/tables/ReflectiveEmit.cs
+ create mode 100644 src/dynamic/src/tables/TableBuilder.cs
+ create mode 100644 src/dynamic/src/tables/TableSpecBuilder.cs
+ create mode 100644 src/dynamic/src/tables/models/TableBuilderLiterals.cs
+ create mode 100644 src/dynamic/src/tables/models/TableFieldSpec.cs
+ rename src/{asm.models/asm/models/memory/typelevel/m256.cs => dynamic/src/tables/models/TableSpec.cs} (51%)
+ delete mode 100644 src/konst/src/address/form/IIndexedAddress.cs
+ delete mode 100644 src/konst/src/address/ops/format.cs
+ rename src/konst/src/asci/ops/{contain.cs => sequence.cs} (51%)
+ create mode 100644 src/konst/src/flow/DataFlowST.cs
+ rename src/konst/src/{tables/contracts => flow}/IDataFlow.cs (65%)
+ create mode 100644 src/konst/src/flow/IName.cs
+ create mode 100644 src/konst/src/flow/Name.cs
+ create mode 100644 src/konst/src/flow/NameS.cs
+ create mode 100644 src/konst/src/flow/NameST.cs
+ delete mode 100644 src/konst/src/memory/ops/relative.cs
+ delete mode 100644 src/konst/src/segments/MemSlot.cs
+ create mode 100644 src/konst/src/tables/models/TableCellBuilder.cs
+ create mode 100644 src/konst/src/tables/models/TableCellSpec.cs
+ create mode 100644 src/konst/src/tables/models/TableCellSpecs.cs
+ delete mode 100644 src/konst/src/tables/models/TableSpec.cs
+ create mode 100644 src/konst/src/z/ops/f/flow.cs
+ create mode 100644 src/konst/src/z/ops/n/name.cs
+ rename commit.bat => wf/commit.bat (100%)
