@@ -15,7 +15,7 @@ namespace Z0
     public enum ParametricTargetKind : byte
     {
         None = 0,
-        
+
         /// <summary>
         /// Indicates A generic argument targets a class
         /// </summary>
@@ -27,7 +27,7 @@ namespace Z0
         Struct = T.Struct,
 
         /// <summary>
-        /// Indicates A generic argument targets an inteface
+        /// Indicates A generic argument targets an interface
         /// </summary>
         Interface = T.Interface,
 
@@ -35,7 +35,7 @@ namespace Z0
         /// Indicates A generic argument targets a delgate
         /// </summary>
         Delegate = T.Delegate,
-        
+
         /// <summary>
         /// A generic argument applies to a type of some sort
         /// </summary>
@@ -44,6 +44,6 @@ namespace Z0
         /// <summary>
         /// Indicates A generic argument targets a method
         /// </summary>
-        Method = 4,       
+        Method = 4,
     }
 }

@@ -11,17 +11,17 @@ namespace Z0
     using static Konst;
 
     public interface IImmInjector
-    {     
-        DynamicDelegate EmbedImmediate(MethodInfo method, byte imm);
+    {
+        DynamicDelegate Inject(MethodInfo method, byte imm);
     }
 
     public interface IImmInjector<D> : IImmInjector
         where D : Delegate
     {
-        new DynamicDelegate<D> EmbedImmediate(MethodInfo src, byte imm);
+        DynamicDelegate<D> EmbedImmediate(MethodInfo src, byte imm);
 
         [MethodImpl(Inline)]
-        DynamicDelegate IImmInjector.EmbedImmediate(MethodInfo src, byte imm) 
-            => EmbedImmediate(src, imm).Untyped; 
-    }   
+        DynamicDelegate IImmInjector.Inject(MethodInfo src, byte imm)
+            => EmbedImmediate(src, imm).Untyped;
+    }
 }

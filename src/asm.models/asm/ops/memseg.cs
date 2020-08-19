@@ -8,15 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+
     using static Konst;
     using static Asm.OpKind;
-    
+
     partial struct asm
-    {        
+    {
 
         [MethodImpl(Inline), Op]
-        public static Register memSeg(in Instruction src, int index)
+        public static IceRegister memSeg(in Instruction src, int index)
         {
             switch(kind(src,index))
             {

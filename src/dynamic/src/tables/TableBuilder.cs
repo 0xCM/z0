@@ -11,9 +11,8 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static TableBuilderLiterals;
+    using static TableSpecLiterals;
     using static ReflectiveEmit;
-    using RE = ReflectiveEmit;
 
     [ApiHost]
     public readonly struct TableBuilder
@@ -23,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The record definition</param>
         [Op]
-        public static Type create(string assname, TableSpec spec)
+        public static Type create(Name assname, TableSpec spec)
             => build(module(assname), spec);
 
         /// <summary>
@@ -31,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The record definition</param>
         [Op]
-        public static Type[] create(string assname, params TableSpec[] specs)
+        public static Type[] create(Name assname, params TableSpec[] specs)
         {
             var count = specs.Length;
             var buffer = alloc<Type>(count);
@@ -41,16 +40,15 @@ namespace Z0
 
             for(var i=0u; i<count; i++)
                 seek(dst,i) = build(mb, skip(src,i));
+
             return buffer;
         }
 
         static Type build(ModuleBuilder mb, TableSpec spec)
         {
-            var fullName = RE.fullName(spec.Namespace, spec.TypeName);
-            var tb = RE.valueType(mb, fullName, TableAttributes);
-
-            foreach(var field in spec.Fields)
-                RE.field(tb, field.Name, field.FieldTypeName, field.Offset);
+            var tb = valueType(mb, spec.Type, ExplicitAnsi);
+            foreach(var f in spec.Fields)
+                field(tb, f.Name, f.Type, f.Offset);
             var type = tb.CreateType();
             return type;
         }

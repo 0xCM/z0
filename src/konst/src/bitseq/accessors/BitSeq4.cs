@@ -3,13 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using B = BitSeq4;
 
-    public partial class BitSeqValues
-    {        
-        public const B b0000 = B.b0000;        
-                
+    partial struct BitSeq
+    {
+        public const B b0000 = B.b0000;
+
         public const B b0001 = B.b0001;
 
         public const B b0010 = B.b0010;

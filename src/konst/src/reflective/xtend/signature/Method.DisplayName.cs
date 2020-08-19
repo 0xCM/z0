@@ -21,8 +21,8 @@ namespace Z0
             => String.IsNullOrWhiteSpace(content) ? string.Empty : $"<{content}>";
 
         static string GenericMethodDisplayName(this MethodInfo src, IReadOnlyList<Type> args)
-        {                
-            var argFmt = args.Count != 0 ?  string.Join(", ", args.Select(t => t.DisplayName()).ToArray()) : string.Empty;            
+        {
+            var argFmt = args.Count != 0 ?  string.Join(", ", args.Select(t => t.DisplayName()).ToArray()) : string.Empty;
             var typeName = src.Name.Replace($"`{args.Count}", string.Empty);
             return typeName + (args.Count != 0 ? angled(argFmt) : string.Empty);
         }
@@ -37,22 +37,15 @@ namespace Z0
             if(attrib != null)
                 return attrib.DisplayName;
             var slots = src.GenericParameters(false);
-            return slots.Length == 0 ? src.Name : src.GenericMethodDisplayName(slots);            
+            return slots.Length == 0 ? src.Name : src.GenericMethodDisplayName(slots);
         }
 
         /// <summary>
         /// Constructs a display name for a generic method specialized for a specified type
         /// </summary>
         /// <typeparam name="T">The relative type</typeparam>
-        /// <param name="src">The source method</param> 
+        /// <param name="src">The source method</param>
         public static string DisplayName<T>(this MethodBase src)
             => src.DeclaringType.DisplayName() + "/" + src.Name + "<" + typeof(T).DisplayName() + ">";
-                
-        /// <summary>
-        /// Constructs a display name for a method
-        /// </summary>
-        /// <param name="src">The source method</param>
-        public static string FullDisplayName(this MethodInfo src)
-            => $"{src.DeclaringType.DisplayName()}/{src.DisplayName()}";
     }
 }

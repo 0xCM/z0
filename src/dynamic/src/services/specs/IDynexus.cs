@@ -4,13 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IDynexus : 
-        IDynamicImmediate, 
-        IDynamicFactories, 
-        IFixedDynamic, 
-        IDynamicNumeric
+    public interface IDynexus : IDynamicImmediate, IDynamicFactories, IFixedDynamic, IDynamicNumeric
     {
-        
-    }    
 
+    }
 }

@@ -14,7 +14,7 @@ namespace Z0
     public interface IDynamicImmediate
     {
         /// <summary>
-        /// Creates a unary operator with an immedded immediate value
+        /// Creates a unary operator with an embedded immediate value
         /// </summary>
         /// <param name="w">The operand width</param>
         /// <param name="src">The defining method that requires an immediate value</param>
@@ -22,7 +22,7 @@ namespace Z0
         Option<DynamicDelegate> CreateUnaryOp(TypeWidth w, MethodInfo src, byte imm);
 
         /// <summary>
-        /// Creates a binary operator with an immedded immediate value
+        /// Creates a binary operator with an embedded immediate value
         /// </summary>
         /// <param name="w">The operand width</param>
         /// <param name="src">The defining method that requires an immediate value</param>
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="W">The operand width</typeparam>
         IImmInjector BinaryInjector<W>()
-            where W : ITypeWidth;         
+            where W : ITypeWidth;
 
         /// <summary>
         /// Creates a 128-bit T-parametric unary immediate injector
@@ -49,9 +49,9 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]            
+        [MethodImpl(Inline)]
         IImmInjector<UnaryOp<Vector128<T>>> UnaryInjector<T>(W128 w)
-            where T : unmanaged;               
+            where T : unmanaged;
 
         /// <summary>
         /// Creates a 256-bit T-parametric unary immediate injector
@@ -59,9 +59,9 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]            
+        [MethodImpl(Inline)]
         IImmInjector<UnaryOp<Vector256<T>>> UnaryInjector<T>(W256 w)
-            where T : unmanaged;               
+            where T : unmanaged;
 
         /// <summary>
         /// Creates a 128-bit T-parametric binary immediate injector
@@ -69,9 +69,9 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]            
+        [MethodImpl(Inline)]
         IImmInjector<BinaryOp<Vector128<T>>> BinaryInjector<T>(W128 w)
-            where T : unmanaged;               
+            where T : unmanaged;
 
         /// <summary>
         /// Creates a 256-bit T-parametric binary immediate injector
@@ -79,9 +79,9 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]            
+        [MethodImpl(Inline)]
         IImmInjector<BinaryOp<Vector256<T>>> BinaryInjector<T>(W256 w)
-            where T : unmanaged;               
+            where T : unmanaged;
 
         /// <summary>
         /// Creates a 128-bit vectorized parametric unary operator that consumes an immediate value in the second argument
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]            
+        [MethodImpl(Inline)]
         DynamicDelegate<UnaryOp<Vector128<T>>> CreateUnaryOp<T>(MethodInfo src, W128 w, byte imm)
             where T : unmanaged;
 
@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        DynamicDelegate<UnaryOp<Vector256<T>>> CreateUnaryOp<T>(MethodInfo src, W256 w, byte imm)        
+        DynamicDelegate<UnaryOp<Vector256<T>>> CreateUnaryOp<T>(MethodInfo src, W256 w, byte imm)
             where T : unmanaged;
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        DynamicDelegate<BinaryOp<Vector256<T>>> CreateBinaryOp<T>(MethodInfo src, W256 w, byte imm)        
+        DynamicDelegate<BinaryOp<Vector256<T>>> CreateBinaryOp<T>(MethodInfo src, W256 w, byte imm)
             where T : unmanaged;
-    }   
+    }
 }

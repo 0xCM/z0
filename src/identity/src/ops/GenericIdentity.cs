@@ -17,13 +17,13 @@ namespace Z0
         /// source method is nongeneric, returns <see cref='GenericOpIdentity.Empty' />
         /// </summary>
         /// <param name="src">The source method</param>
-        public static GenericOpIdentity GenericIdentity(MethodInfo src)            
+        public static GenericOpIdentity GenericIdentity(MethodInfo src)
         {
             if(!src.IsGenericMethod)
                 return GenericOpIdentity.Empty;
-                        
+
             var id = Identify.ApiMemberName(src);
-            id += IDI.PartSep; 
+            id += IDI.PartSep;
             id += IDI.Generic;
 
             var args = src.GetParameters();
@@ -37,7 +37,7 @@ namespace Z0
 
                 last = EmptyString;
 
-                if(args[i].IsTypeParametric())
+                if(args[i].IsParametric())
                     last = Identity.ParameterTypeIdentity(args[i]);
                 else if(argtype.IsOpenGeneric())
                 {
@@ -48,7 +48,7 @@ namespace Z0
                     else if(SpanTypes.IsSystemSpan(argtype))
                         last = SpanTypes.kind(argtype).Format();
                 }
-                
+
                 id += last;
             }
 

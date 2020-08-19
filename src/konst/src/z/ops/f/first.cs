@@ -23,6 +23,14 @@ namespace Z0
             => ref GetReference<T>(src);
 
         /// <summary>
+        /// Returns a readonly reference to the first source cell
+        /// </summary>
+        /// <param name="src">The source span</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly char first(ReadOnlySpan<char> src)
+            => ref GetReference(src);
+
+        /// <summary>
         /// Returns a reference to the head of a readonly span
         /// </summary>
         /// <param name="src">The source span</param>

@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Reflection;
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-   
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
     using static Kinds;
 
@@ -33,8 +33,8 @@ namespace Z0
             this.Diviner = diviner;
         }
 
-        [MethodImpl(Inline)]            
-        public DynamicDelegate EmbedImmediate(MethodInfo src, byte imm)
+        [MethodImpl(Inline)]
+        public DynamicDelegate Inject(MethodInfo src, byte imm)
             => DynamicImmediate.EmbedV128UnaryOpImm(src,imm,Diviner.Identify(src));
     }
 
@@ -49,7 +49,7 @@ namespace Z0
             this.Diviner = diviner;
         }
 
-        [MethodImpl(Inline)]            
+        [MethodImpl(Inline)]
         public DynamicDelegate<UnaryOp<Vector128<T>>> EmbedImmediate(MethodInfo src, byte imm)
             => DynamicImmediate.EmbedVUnaryOpImm(vk128<T>(), Diviner.Identify(src), src, imm);
     }

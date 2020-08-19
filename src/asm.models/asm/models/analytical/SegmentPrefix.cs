@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -11,19 +11,19 @@ namespace Z0.Asm
 
     public readonly struct SegmentPrefix : INullity
     {
-        public readonly Register Register;
+        public readonly IceRegister Register;
 
         [MethodImpl(Inline)]
-        public SegmentPrefix(Register src)
+        public SegmentPrefix(IceRegister src)
             => Register = src;
 
-        public bool IsEmpty 
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Register == 0;
         }
 
-        public static SegmentPrefix Empty 
+        public static SegmentPrefix Empty
             => default;
     }
 }

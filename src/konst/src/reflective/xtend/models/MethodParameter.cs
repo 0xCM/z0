@@ -5,30 +5,35 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     /// <summary>
-    /// Represents a method (value, not type) parameter 
+    /// Represents a method (value, not type) parameter
     /// </summary>
     public readonly struct MethodParameter : ITextual
-    {        
-        public string Name {get;}
+    {
+        public readonly string Name;
 
-        public int Position {get;}
+        public readonly ushort Position;
 
-        public TypeSig Type {get;}
+        public readonly TypeSig Type;
 
-        public ParamRefKind RefKind {get;}
+        public readonly ArgRefKind RefKind;
 
-        public MethodParameter(TypeSig sig, ParamRefKind refkind, string name, int position)
+        [MethodImpl(Inline)]
+        public MethodParameter(TypeSig type, ArgRefKind refkind, string name, ushort pos)
         {
-            Type = sig;
+            Type = type;
             Name = name;
-            Position = position;
+            Position = pos;
             RefKind = refkind;
         }
-        
+
+        [MethodImpl(Inline)]
         public string Format()
-            => $"{Type} {Name}";
+            => text.format("{0} {1}", Type.Format(), Name);
 
         public override string ToString()
             => Format();

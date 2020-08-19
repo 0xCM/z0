@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -15,18 +15,18 @@ namespace Z0
     /// Describes a block of memory the context of an asm instruction operand
     /// </summary>
     public readonly struct MemInfo
-    {                      
-        public readonly Register Seg;
-                
-        public readonly Register SegPrefix;
-        
+    {
+        public readonly IceRegister Seg;
+
+        public readonly IceRegister SegPrefix;
+
         public readonly MemDirect Direct;
 
         public readonly MemoryAddress Address;
 
         public readonly MemorySize Size;
 
-        public MemInfo(Register segreg, Register prefix, MemDirect mem, MemoryAddress address, MemorySize size)        
+        public MemInfo(IceRegister segreg, IceRegister prefix, MemDirect mem, MemoryAddress address, MemorySize size)
         {
             Seg = segreg;
             SegPrefix = prefix;
@@ -53,7 +53,7 @@ namespace Z0
             get => Size != 0;
         }
 
-        public static MemInfo Empty 
+        public static MemInfo Empty
             => default;
     }
 }

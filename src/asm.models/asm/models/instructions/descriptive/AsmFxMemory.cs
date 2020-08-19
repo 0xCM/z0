@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -13,9 +13,9 @@ namespace Z0.Asm
 
     public struct AsmFxMemory
     {
-        public Register MemoryBase;
+        public IceRegister MemoryBase;
 
-        public Register MemoryIndex;
+        public IceRegister MemoryIndex;
 
         public MemorySize MemorySize;
 
@@ -23,9 +23,9 @@ namespace Z0.Asm
 
         public MemDx MemDx;
 
-        public Register MemorySegment;
+        public IceRegister MemorySegment;
 
-        public Register SegmentPrefix;
+        public IceRegister SegmentPrefix;
 
         public bool IsStackInstruction;
 
@@ -36,9 +36,9 @@ namespace Z0.Asm
         public MemoryAddress IPRelativeMemoryAddress;
 
         public string AspectRender
-            => SemanticRender.Service.RenderAspects<IInstructionMemory>(this);
+            => SemanticRender.Service.RenderAspects<IAsmFxMemory>(this);
 
-        public bool IsEmpty 
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => api.empty(this);

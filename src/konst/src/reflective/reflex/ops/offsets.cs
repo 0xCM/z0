@@ -15,14 +15,12 @@ namespace Z0
     partial struct Reflex
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Address16> offsets(Type src)
-        {
-            var fields = span(src.DeclaredFields());
-            var count = fields.Length;
-            var dst = span<Address16>(count);
-            offsets(src,dst);
-            return dst;
-        }
+        public static Address16 offset(Type host, FieldInfo field)
+            =>(ushort)Marshal.OffsetOf(host, field.Name);
+
+        [MethodImpl(Inline), Op]
+        public static Address16[] offsets(Type host, FieldInfo[] fields)
+            => fields.Select(f => offset(host,f));
 
         [MethodImpl(Inline), Op]
         public static void offsets(Type src, Span<Address16> dst)
@@ -38,7 +36,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var f = ref skip(fields,i);
-                seek(dst,i) = (ushort)Marshal.OffsetOf(src,f.Name);
+                seek(dst,i) = offset(src,f);
             }
         }
     }

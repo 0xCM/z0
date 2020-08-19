@@ -3,13 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using B = BitSeq5;
 
-    public partial class BitSeqValues
-    {                
+    partial struct BitSeq
+    {
         public const B b00000 = B.b00000;
-                
+
         public const B b00001 = B.b00001;
 
         public const B b00010 = B.b00010;
@@ -41,7 +41,7 @@ namespace Z0
         public const B b01111 = B.b01111;
 
         public const B b10000 = B.b10000;
-                
+
         public const B b10001 = B.b10001;
 
         public const B b10010 = B.b10010;
@@ -70,6 +70,6 @@ namespace Z0
 
         public const B b11110 = B.b11110;
 
-        public const B b11111 = B.b11111;        
+        public const B b11111 = B.b11111;
     }
 }

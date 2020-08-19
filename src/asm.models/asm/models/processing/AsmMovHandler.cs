@@ -10,16 +10,16 @@ namespace Z0.Asm
     using static z;
     using static Konst;
 
-    public readonly ref struct AsmMovHandler 
+    public readonly ref struct AsmMovHandler
     {
-        readonly Span<Arrow<Imm64,Register>> Buffer;
+        readonly Span<Arrow<Imm64,IceRegister>> Buffer;
 
         readonly Span<int> I;
 
         [MethodImpl(Inline)]
         public AsmMovHandler(int capacity)
         {
-            Buffer = new Arrow<Imm64,Register>[capacity];
+            Buffer = new Arrow<Imm64,IceRegister>[capacity];
             I = new int[]{0};
         }
 
@@ -30,7 +30,7 @@ namespace Z0.Asm
                 Handle(i.Immediate64, i.Op0Register);
         }
 
-        public ReadOnlySpan<Arrow<Imm64,Register>> Collected
+        public ReadOnlySpan<Arrow<Imm64,IceRegister>> Collected
         {
             [MethodImpl(Inline)]
             get => Buffer.Slice(0, Index);
@@ -42,29 +42,29 @@ namespace Z0.Asm
             get => Index;
         }
 
-        Arrow<Imm64,Register> this[int index]
+        Arrow<Imm64,IceRegister> this[int index]
         {
             [MethodImpl(Inline)]
             set => seek(Buffer, (uint)index) = value;
         }
-        
+
         ref int Index
         {
             [MethodImpl(Inline)]
             get => ref z.first(I);
         }
-        
+
         bool HasCapacity
         {
             [MethodImpl(Inline)]
             get => Index < Buffer.Length;
         }
-        
+
         [MethodImpl(Inline)]
-        void Handle(Imm64 src, Register dst)
+        void Handle(Imm64 src, IceRegister dst)
         {
             if(HasCapacity)
                 this[Index++] = Arrows.connect(src, dst);
-        }   
+        }
     }
 }

@@ -3,13 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct BasedAsmFx : IInstructionInfo<Instruction>
+    public readonly struct BasedAsmFx : IAsmFxInfo<Instruction>
     {
         public MemberCode Encoded {get;}
 
@@ -22,43 +22,43 @@ namespace Z0.Asm
         /// <summary>
         /// The encoded content as byte array
         /// </summary>
-        public byte[] Data 
-        { 
-            [MethodImpl(Inline)] 
+        public byte[] Data
+        {
+            [MethodImpl(Inline)]
             get => Encoded.Data;
         }
 
         public OpUri OpUri
             => Encoded.OpUri;
 
-        public OpIdentity OpId 
+        public OpIdentity OpId
             => OpUri.OpId;
 
-        public string FormattedInstruction 
+        public string FormattedInstruction
             => Instruction.FormattedInstruction;
 
-        public AsmFxCode InstructionCode 
+        public AsmFxCode InstructionCode
             => Instruction.InstructionCode;
 
-        public MemoryAddress IP 
+        public MemoryAddress IP
             => Instruction.IP;
-        
-        public MemoryAddress NextIp 
+
+        public MemoryAddress NextIp
             => Instruction.NextIP;
 
-        public MemoryAddress NextIp16 
+        public MemoryAddress NextIp16
             => Instruction.NextIP16;
 
-        public MemoryAddress NextIp32 
+        public MemoryAddress NextIp32
             => Instruction.NextIP32;
 
-        public Mnemonic Mnemonic 
+        public Mnemonic Mnemonic
             => Instruction.Mnemonic;
 
         /// <summary>
         /// The encoded byte count
         /// </summary>
-        public int ByteLength 
+        public int ByteLength
             => Instruction.ByteLength;
 
         [MethodImpl(Inline)]
@@ -66,18 +66,18 @@ namespace Z0.Asm
             => new BasedAsmFx(@base,offseq,inxs,encoded);
 
         public static BasedAsmFx[] Many(MemberCode code, Instruction[] src)
-        {            
+        {
             var @base = code.Address;
             var offseq = OffsetSequence.Zero;
             var count = src.Length;
             var dst = new BasedAsmFx[count];
-            
+
             for(ushort i=0; i<count; i++)
             {
                 var inxs = src[i];
                 var data = z.span(code.Encoded.Data);
                 var slice = data.Slice(offseq.Offset, inxs.ByteLength).ToArray();
-                var recoded = MemberCode.define(code.OpUri, inxs.IP, slice);  
+                var recoded = MemberCode.define(code.OpUri, inxs.IP, slice);
                 dst[i] = One(@base, offseq, inxs, recoded);
                 offseq = offseq.AccrueOffset(inxs.ByteLength);
             }

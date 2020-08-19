@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
@@ -29,13 +29,13 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static MemoryOperand Thaw(Iced.MemoryOperand src)
             => new MemoryOperand(
-                    (Register)src.Base,
-                    (Register)src.Index, 
-                    src.Scale, 
-                    src.Displacement, 
-                    src.DisplSize, 
-                    src.IsBroadcast, 
-                    (Register)src.SegmentPrefix
+                    (IceRegister)src.Base,
+                    (IceRegister)src.Index,
+                    src.Scale,
+                    src.Displacement,
+                    src.DisplSize,
+                    src.IsBroadcast,
+                    (IceRegister)src.SegmentPrefix
                     );
 
 
@@ -72,7 +72,7 @@ namespace Z0.Asm
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline)]
         public UsedMemory Thaw(Iced.UsedMemory src)
-            => new UsedMemory(        
+            => new UsedMemory(
                 Access : Thaw(src.Access),
                 Base  : Thaw(src.Base),
                 Displacement : src.Displacement,
@@ -200,8 +200,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline)]
-        public Register Thaw(Iced.Register src)
-            => (Register)src;
+        public IceRegister Thaw(Iced.Register src)
+            => (IceRegister)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
@@ -225,7 +225,7 @@ namespace Z0.Asm
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline)]
         public TupleType Thaw(Iced.TupleType src)
-            => (TupleType)src;        
+            => (TupleType)src;
 
 
     }

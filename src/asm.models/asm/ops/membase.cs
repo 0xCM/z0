@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+
     using static Konst;
     using static Asm.OpKind;
-        
+
     partial struct asm
-    {        
+    {
         [MethodImpl(Inline), Op]
-        public static Register memBase(Instruction src, int index)
+        public static IceRegister memBase(Instruction src, int index)
             => kind(src,index) == Memory ? src.MemoryBase : 0;
     }
 }

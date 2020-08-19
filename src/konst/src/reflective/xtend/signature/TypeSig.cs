@@ -7,27 +7,45 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    using static Konst;
+
     /// <summary>
     /// A succinct type signature
     /// </summary>
-    public readonly struct TypeSig
-    {        
-        public static TypeSig FromType(Type src)
+    public struct TypeSig
+    {
+        public string DisplayName;
+
+        public string Modifier;
+
+        public bool IsOpenGeneric;
+
+        public bool IsClosedGeneric;
+
+        public bool IsByRef;
+
+        public bool IsIn;
+
+        public bool IsOut;
+
+        public bool IsPointer;
+
+        public static TypeSig from(Type src)
             => new TypeSig(
-                src.DisplayName(), 
-                src.IsConstructedGenericType,  
-                src.IsGenericType && !src.IsConstructedGenericType, 
-                src.IsByRef, 
+                src.DisplayName(),
+                src.IsConstructedGenericType,
+                src.IsGenericType && !src.IsConstructedGenericType,
+                src.IsByRef,
                 false,
                 false,
                 src.IsPointer);
 
-        public static TypeSig FromParameter(ParameterInfo src)
-        {                        
+        public static TypeSig from(ParameterInfo src)
+        {
             var type = src.ParameterType;
-            var name = type.EffectiveType().DisplayName();            
-            return new TypeSig(name, 
-                type.IsConstructedGenericType, 
+            var name = type.EffectiveType().DisplayName();
+            return new TypeSig(name,
+                type.IsConstructedGenericType,
                 type.IsGenericType && !type.IsConstructedGenericType,
                 type.IsRef(),
                 src.IsIn,
@@ -35,7 +53,7 @@ namespace Z0
                 type.IsPointer);
         }
 
-        TypeSig(string DisplayName, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn, bool IsOut, bool IsPointer)
+        internal TypeSig(string DisplayName, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn, bool IsOut, bool IsPointer)
         {
             this.DisplayName = DisplayName;
             this.IsOpenGeneric = IsOpenGeneric;
@@ -44,28 +62,12 @@ namespace Z0
             this.IsIn = IsIn;
             this.IsOut = IsOut;
             this.IsPointer = IsPointer;
+            Modifier = IsIn ? "in " : IsOut ? "out " : IsByRef ? "ref " : EmptyString;
         }
 
-        public string DisplayName {get;}
-
-        public bool IsOpenGeneric {get;}
-
-        public bool IsClosedGeneric {get;}
-
-        public bool IsByRef {get;}
-
-        public bool IsIn {get;}
-
-        public bool IsOut {get;}
-
-        public bool IsPointer {get;}
-        
-        string Modifier
-            => IsIn ? "in " : IsOut ? "out " : IsByRef ? "ref " : string.Empty;
-
         public string Format()
-            => $"{Modifier}{DisplayName}";        
- 
+            => $"{Modifier}{DisplayName}";
+
         public override string ToString()
             => Format();
     }

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -27,7 +27,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static ModRm define(byte src)
-            => new ModRm(src);        
+            => new ModRm(src);
 
         [MethodImpl(Inline), Op]
         public static ModRm define(uint3 rm, uint3 reg, uint2 mod)
@@ -36,10 +36,10 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static uint fill(Span<ModRmEncoding> dst)
         {
-            var rmF = Bit.data(w3);
-            var regF = Bit.data(w3);
-            var modF = Bit.data(w2);
-            
+            var rmF = BitSeq.bits(w3);
+            var regF = BitSeq.bits(w3);
+            var modF = BitSeq.bits(w2);
+
             var i = 0u;
             for(var a=0u; a<rmF.Length; a++)
             for(var b=0u; b<regF.Length; b++)
@@ -56,9 +56,9 @@ namespace Z0.Asm
 
         public static ModRmEncoding[] Table()
         {
-            var dst = sys.alloc<ModRmEncoding>(256);            
+            var dst = sys.alloc<ModRmEncoding>(256);
             fill(dst);
             return dst;
-        }            
+        }
     }
 }

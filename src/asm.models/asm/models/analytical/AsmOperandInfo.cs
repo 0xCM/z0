@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -12,8 +12,8 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an operand in the context of an assembly instruction
     /// </summary>
-    public struct AsmOperandInfo 
-    {                        
+    public struct AsmOperandInfo
+    {
         /// <summary>
         /// The 0-based operand position
         /// </summary>
@@ -33,11 +33,11 @@ namespace Z0.Asm
         /// Operand memory info, if applicable
         /// </summary>
         public MemInfo Memory;
-        
+
         /// <summary>
         /// Operand register info, if applicable
         /// </summary>
-        public Register Register;
+        public IceRegister Register;
 
         /// <summary>
         /// Instruction branching info, if applicable
@@ -45,7 +45,7 @@ namespace Z0.Asm
         public AsmBranchInfo Branch;
 
         [MethodImpl(Inline)]
-        public AsmOperandInfo(int index, OpKind kind, in ImmInfo imm, in MemInfo memory, in Register register, AsmBranchInfo branch)
+        public AsmOperandInfo(int index, OpKind kind, in ImmInfo imm, in MemInfo memory, in IceRegister register, AsmBranchInfo branch)
         {
             Index = (byte)index;
             Kind = kind;

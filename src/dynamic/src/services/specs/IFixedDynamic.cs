@@ -15,7 +15,7 @@ namespace Z0
         FixedUnaryOp<F> EmitFixedUnary<F>(BufferToken dst, IdentifiedCode src);
 
         /// <summary>
-        /// Loads source into a token-identifed buffer and covers it with a fixed binary operator
+        /// Loads source into a token-identified buffer and covers it with a fixed binary operator
         /// </summary>
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The code to load</param>

@@ -16,25 +16,26 @@ namespace Z0
     public readonly partial struct ReflectiveEmit
     {
         [MethodImpl(Inline), Op]
-        public static ModuleBuilder module(string name)
+        public static ModuleBuilder module(Name name)
         {
             var ab = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(name), AssemblyBuilderAccess.Run);
             return ab.DefineDynamicModule("Primary");
         }
 
         [MethodImpl(Inline), Op]
-        public static TypeBuilder type(ModuleBuilder mb, string fullName, TypeAttributes attributes, Type parent)
+        public static TypeBuilder type(ModuleBuilder mb, FullTypeName fullName, TypeAttributes attributes, Type parent)
             => mb.DefineType(fullName, attributes, parent);
 
         [MethodImpl(Inline), Op]
-        public static TypeBuilder valueType(ModuleBuilder mb, string fullName, TypeAttributes attributes)
+        public static TypeBuilder valueType(ModuleBuilder mb, FullTypeName fullName, TypeAttributes attributes)
             => mb.DefineType(fullName, attributes, typeof(ValueType));
 
         [MethodImpl(Inline), Op]
-        public static FieldBuilder field(TypeBuilder tb, string name, string type, Address16 offset)
+        public static FieldBuilder field(TypeBuilder tb, Name name, FullTypeName type, Address16? offset = null)
         {
             var fb = tb.DefineField(name, Type.GetType(type), FieldAttributes.Public);
-            fb.SetOffset(offset);
+            if(offset != null)
+                fb.SetOffset(offset.Value);
             return fb;
         }
 

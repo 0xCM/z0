@@ -5,50 +5,50 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Reflection;
-    using System.Text;
+
+    using static Konst;
 
     /// <summary>
     /// Identifies and describes a method that, whithin some useful scope, is unique
     /// </summary>
-    public readonly struct MethodSig
+    public struct MethodSig
     {
-        public readonly int MethodId;
-        
-        public readonly string MethodName;
+        public ArtifactIdentity MethodId;
 
-        public readonly string DefiningAssembly;
+        public string MethodName;
 
-        public readonly string DefiningModule;
+        public Name DefiningAssembly;
 
-        public readonly TypeSig DeclaringType;
+        public Name DefiningModule;
 
-        public readonly TypeSig ReturnType;
+        public TypeSig DeclaringType;
 
-        public readonly MethodParameters Args;
+        public TypeSig ReturnType;
 
-        public readonly TypeParameters TypeParams;
+        public MethodParameters ValueParams;
 
-        public static MethodSig define(MethodInfo method)                    
+        public TypeParameters TypeParams;
+
+        public static MethodSig from(MethodInfo method)
             => new MethodSig(
                 MethodId: method.MetadataToken,
                 DefiningAssembly: method.Module.Assembly.GetSimpleName(),
                 DefiningModule: method.Module.Name,
-                DeclaringType: TypeSig.FromType(method.DeclaringType),
+                DeclaringType: TypeSig.from(method.DeclaringType),
                 MethodName: method.DisplayName(),
-                ReturnType: TypeSig.FromType(method.ReturnType),
-                Args: method.GetParameters().Select(p => new MethodParameter(TypeSig.FromParameter(p), p.ReferenceKind(), p.Name, p.Position)),
+                ReturnType: TypeSig.from(method.ReturnType),
+                Args: method.GetParameters().Select(p => new MethodParameter(TypeSig.from(p), p.RefKind(), p.Name, (ushort)p.Position)),
                 TypeParams: TypeParameters(method));
-        
-        MethodSig(
-            int MethodId, 
-            string DefiningAssembly, 
-            string DefiningModule, 
-            TypeSig DeclaringType, 
-            string MethodName, 
-            TypeSig ReturnType, 
-            MethodParameters Args, 
+
+        internal MethodSig(
+            int MethodId,
+            string DefiningAssembly,
+            string DefiningModule,
+            TypeSig DeclaringType,
+            string MethodName,
+            TypeSig ReturnType,
+            MethodParameters Args,
             TypeParameters TypeParams
             )
         {
@@ -58,19 +58,18 @@ namespace Z0
             this.DeclaringType = DeclaringType;
             this.MethodName = MethodName;
             this.ReturnType = ReturnType;
-            this.Args = Args;
+            this.ValueParams = Args;
             this.TypeParams = TypeParams;
         }
-        
-                
+
         public string Format()
         {
-            var sigtext = new StringBuilder();
-            sigtext.Append(ReturnType.Format());
-            sigtext.Append(Chars.Space);
-            sigtext.Append(MethodName);
-            sigtext.Append(Args.Format());
-            return sigtext.ToString();            
+            var dst = text.build();
+            dst.Append(ReturnType.Format());
+            dst.Append(Chars.Space);
+            dst.Append(MethodName);
+            dst.Append(ValueParams.Format());
+            return dst.ToString();
         }
 
         public override string ToString()

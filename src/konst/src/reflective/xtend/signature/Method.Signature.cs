@@ -15,6 +15,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         public static MethodSig Signature(this MethodInfo src)
-            => MethodSig.define(src);
+            => MethodSig.from(src);
     }
 }

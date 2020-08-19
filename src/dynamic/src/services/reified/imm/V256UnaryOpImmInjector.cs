@@ -3,18 +3,18 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Reflection;
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-   
-    using static Konst; 
+
+    using static Konst;
     using static Kinds;
 
     readonly struct V256UnaryOpImmInjector : IImmInjector
-    {        
+    {
         public IMultiDiviner Diviner {get;}
 
         [MethodImpl(Inline)]
@@ -32,14 +32,14 @@ namespace Z0
             this.Diviner = diviner;
         }
 
-        [MethodImpl(Inline)]            
-        public DynamicDelegate EmbedImmediate(MethodInfo src, byte imm)
+        [MethodImpl(Inline)]
+        public DynamicDelegate Inject(MethodInfo src, byte imm)
             => DynamicImmediate.EmbedV256UnaryOpImm(src,imm,Diviner.Identify(src));
     }
 
     readonly struct V256UnaryOpImmInjector<T> : IImmInjector<UnaryOp<Vector256<T>>>
         where T : unmanaged
-    {            
+    {
         public IMultiDiviner Diviner {get;}
 
         [MethodImpl(Inline)]
@@ -48,7 +48,7 @@ namespace Z0
             this.Diviner = diviner;
         }
 
-        [MethodImpl(Inline)]            
+        [MethodImpl(Inline)]
         public DynamicDelegate<UnaryOp<Vector256<T>>> EmbedImmediate(MethodInfo src, byte imm)
             => DynamicImmediate.EmbedVUnaryOpImm(vk256<T>(), Diviner.Identify(src), src, imm);
     }

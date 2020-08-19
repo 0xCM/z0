@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -11,20 +11,20 @@ namespace Z0
     using Z0.Asm;
 
     public readonly struct MemDirect
-    {        
-        public readonly Register Base;
+    {
+        public readonly IceRegister Base;
 
         public readonly MemScale Scale;
 
         public readonly MemDx Dx;
-        
+
         [MethodImpl(Inline)]
-        public MemDirect(Register register, MemScale scale, MemDx dx)
+        public MemDirect(IceRegister register, MemScale scale, MemDx dx)
         {
             Base = register;
             Dx = dx;
             Scale = scale;
-        }       
+        }
 
         public bool IsEmpty
         {
@@ -32,7 +32,7 @@ namespace Z0
             get => Base == 0 && Scale.IsEmpty && Dx.IsEmpty;
         }
 
-        public static MemDirect Empty 
-            => new MemDirect(Register.None, MemScale.Empty, MemDx.Empty);
+        public static MemDirect Empty
+            => new MemDirect(IceRegister.None, MemScale.Empty, MemDx.Empty);
     }
 }

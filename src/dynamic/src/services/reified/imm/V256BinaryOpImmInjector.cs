@@ -3,13 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-   
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
     using static Kinds;
 
@@ -32,31 +32,31 @@ namespace Z0
             Diviner = diviner;
         }
 
-        [MethodImpl(Inline)]            
-        public DynamicDelegate EmbedImmediate(MethodInfo src, byte imm)        
+        [MethodImpl(Inline)]
+        public DynamicDelegate Inject(MethodInfo src, byte imm)
             => DynamicImmediate.EmbedVBinaryOpImm(w256, src,imm, Diviner.Identify(src)).Require();
     }
 
     readonly struct V256BinaryOpImmInjector<T> : IImmInjector<BinaryOp<Vector256<T>>>
         where T : unmanaged
-    { 
+    {
         readonly IMultiDiviner Diviner;
 
         [MethodImpl(Inline)]
         public V256BinaryOpImmInjector(IMultiDiviner diviner)
         {
-            Diviner = diviner;            
+            Diviner = diviner;
         }
 
-        [MethodImpl(Inline)]            
+        [MethodImpl(Inline)]
         public DynamicDelegate<BinaryOp<Vector256<T>>> EmbedImmediate(MethodInfo src, byte imm)
         {
             var constructed = src.Reify(typeof(T));
             var id = Diviner.Identify(src).WithImm8(imm);
-            var tOperand = typeof(Vector256<T>);  
-            var dst = DynamicImmediate.DynamicSignature(constructed.Name, constructed.DeclaringType, tOperand, tOperand, tOperand);            
+            var tOperand = typeof(Vector256<T>);
+            var dst = DynamicImmediate.DynamicSignature(constructed.Name, constructed.DeclaringType, tOperand, tOperand, tOperand);
             dst.GetILGenerator().EmitImmBinaryCall(constructed,imm);
             return Delegates.dynamic<BinaryOp<Vector256<T>>>(id, constructed, dst);
-        }            
+        }
     }
 }

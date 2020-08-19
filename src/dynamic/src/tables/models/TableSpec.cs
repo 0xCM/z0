@@ -11,17 +11,14 @@ namespace Z0
 
     public readonly struct TableSpec
     {
-        public readonly string Namespace;
+        public readonly FullTypeName Type;
 
-        public readonly string TypeName;
-
-        public readonly TableFieldSpec[] Fields;
+        public readonly FieldSpec[] Fields;
 
         [MethodImpl(Inline)]
-        public TableSpec(string ns, string name, params TableFieldSpec[] fields)
+        public TableSpec(FullTypeName type, params FieldSpec[] fields)
         {
-            Namespace = ns;
-            TypeName = name;
+            Type = type;
             Fields = fields;
         }
     }

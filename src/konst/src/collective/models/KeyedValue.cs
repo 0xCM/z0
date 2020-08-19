@@ -25,7 +25,7 @@ namespace Z0
     public delegate K KeyFunction<K,V>(in V src);
 
     /// <summary>
-    /// Signature for an injective key function that satisifies kf(v1) = kf(v2) => v1 = v2
+    /// Signature for an injective key function that satisfied kf(v1) = kf(v2) => v1 = v2
     /// </summary>
     /// <param name="src"></param>
     /// <typeparam name="K">The key type</typeparam>
@@ -35,7 +35,7 @@ namespace Z0
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
     /// </summary>
-    public struct KeyedValue<K,V> 
+    public struct KeyedValue<K,V>
     {
         /// <summary>
         /// The key that identifies the value
@@ -71,7 +71,7 @@ namespace Z0
         {
             Key = kv.key;
             Value = kv.value;
-        }        
+        }
 
         [MethodImpl(Inline)]
         public void Deconstruct(out K key, out V value)

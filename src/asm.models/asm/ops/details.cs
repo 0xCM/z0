@@ -13,13 +13,13 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static MemInfo memInfo(Register sReg, Register prefix, MemDirect mem, MemoryAddress address, MemorySize size)        
+        public static MemInfo memInfo(IceRegister sReg, IceRegister prefix, MemDirect mem, MemoryAddress address, MemorySize size)
             => new MemInfo(sReg, prefix, mem, address, size);
 
         [Op]
         public static MemInfo memInfo(Instruction src, int index)
-        {            
-            var k = kind(src, index);        
+        {
+            var k = kind(src, index);
 
             if(isMem(k))
             {
@@ -29,14 +29,14 @@ namespace Z0
                 var info = new MemInfo();
                 var sz = src.MemorySize;
                 var memdirect = direct ? memDirect(src) : MemDirect.Empty;
-                var prefix = (direct || segBase) ? src.SegmentPrefix : Z0.Asm.Register.None;
-                var sReg = (direct || segBase) ? src.MemorySegment : Z0.Asm.Register.None;
+                var prefix = (direct || segBase) ? src.SegmentPrefix : Z0.Asm.IceRegister.None;
+                var sReg = (direct || segBase) ? src.MemorySegment : Z0.Asm.IceRegister.None;
                 var address = mem64 ? src.MemoryAddress64 : 0;
                 return new MemInfo(sReg, prefix, memdirect, address, sz);
             }
 
             return default;
-        } 
+        }
 
         [Op]
         public static InstructionInfo details(in Instruction src)

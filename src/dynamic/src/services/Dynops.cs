@@ -4,13 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct Dynops : TDynops
+    public readonly struct Dynops : IDynamic
     {
-        public static TDynops Services => default(Dynops);
-    }   
-
-    public interface TDynops
-    {
-        IDynexus Dynexus => new Dynexus(Identities.Services.Diviner);
+        public static IDynamic Services => default(Dynops);
     }
 }

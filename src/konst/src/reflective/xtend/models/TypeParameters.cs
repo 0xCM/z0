@@ -16,22 +16,18 @@ namespace Z0
     /// </summary>
     public readonly struct TypeParameters  : ITextual
     {
-        public TypeParameter[] Items {get;}
+        public readonly TypeParameter[] Items;
 
         [MethodImpl(Inline)]
         public static implicit operator TypeParameters(TypeParameter[] src)
             => new TypeParameters(src);
-                
+
         [MethodImpl(Inline)]
         public TypeParameters(TypeParameter[] reps)
-            => this.Items = reps;
-
-        [MethodImpl(Inline)]
-        public TypeParameters(IEnumerable<TypeParameter> reps)
-            => this.Items = reps.ToArray();
+            => Items = reps;
 
         public string Format(bool fence)
-        {            
+        {
             var content = string.Join(", ", Items.Select(x => x.Format(false)));
             return fence ?  ('<' + content + '>') : content;
         }

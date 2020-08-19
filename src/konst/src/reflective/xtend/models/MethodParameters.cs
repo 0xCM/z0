@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct MethodParameters : ITextual
     {
-        public MethodParameter[] Index {get;}
+        public readonly MethodParameter[] Index;
 
         [MethodImpl(Inline)]
         public static implicit operator MethodParameters(MethodParameter[] src)
@@ -35,8 +35,8 @@ namespace Z0
 
         public string Format()
             => Format(true);
-        
+
         public override string ToString()
-            => Format();         
+            => Format();
     }
 }
