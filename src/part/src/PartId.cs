@@ -13,12 +13,12 @@ public enum PartId : ulong
     Part = 1,
 
     Sys = 2,
-    
+
     Domain = 3,
 
     Konst = 5,
 
-    Math = 7,     
+    Math = 7,
 
     Expressive = 10,
 
@@ -26,144 +26,147 @@ public enum PartId : ulong
 
     Flow = 13,
 
-    Seed = 17,     
+    Seed = 17,
+
+    Lang = 20,
 
     Memories = 23,
 
-    Kinds = 28, 
-    
+    Kinds = 28,
+
     Tools = 29,
-    
+
     Monitor = 30,
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
+
     Run = 50,
 
     Data = 51,
 
     Tables = 52,
-    
-    Canonical = 63, 
-    
+
+    Canonical = 63,
+
     Bits = 70,
     Win = 71,
+
 
     // ~ 100
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    BitVectors = 100, 
+    BitVectors = 100,
 
-    VBits = 101, 
-    
-    BitSpans = 102, 
-    
-    BitStrings = 103, 
-    
-    BitGrids = 104, 
-    
+    VBits = 101,
+
+    BitSpans = 102,
+
+    BitStrings = 103,
+
+    BitGrids = 104,
+
     BitPack = 105,
 
     BitSvc = 106,
 
     BitMasks = 107,
 
-    BitFields = 108, 
+    BitFields = 108,
 
-    BitSuite = 109, 
-    
-    BitCore = 110, 
+    BitSuite = 109,
+
+    BitCore = 110,
 
     BitMatrix = 111,
-    
-    GMath = 113, 
 
-    MathSvc = 114, 
+    GMath = 113,
 
-    Logix = 115, 
-    
-    LibM = 116, 
-    
-    Matrix = 117, 
-    
-    Machines = 118, 
+    MathSvc = 114,
+
+    Logix = 115,
+
+    LibM = 116,
+
+    Matrix = 117,
+
+    Machines = 118,
 
     Polyrand = 119,
 
-    Identity = 120, 
-    
+    Identity = 120,
+
     LSquare = 121,
-    
+
     Blocked = 125,
 
     MetaReader = 126,
 
-    
-    Nats = 133, 
 
-    Mkl = 134, 
-    
-    Stats = 135, 
-    
-    Blocks = 136, 
-    
-    Dynamic = 137, 
-    
-    Fixed = 138,  
+    Nats = 133,
+
+    Mkl = 134,
+
+    Stats = 135,
+
+    Blocks = 136,
+
+    Dynamic = 137,
+
+    Fixed = 138,
 
     VBlock = 139,
 
-    Asm = 140,  
+    Asm = 140,
 
     AsmCode = 141,
-    
+
     Machine = 143,
 
     Capture = 144,
 
-    Cil = 145, 
+    Cil = 145,
 
     Evaluate = 146,
 
     Extract = 148,
 
-    VData = 149, 
+    VData = 149,
 
-    FVec = 150, 
+    FVec = 150,
 
-    DVec = 151, 
-    
-    GVec = 152, 
-    
-    VSvc = 153, 
-    
+    DVec = 151,
+
+    GVec = 152,
+
+    VSvc = 153,
+
     Circuits = 154,
 
-    Vectors = 155, 
+    Vectors = 155,
 
     Structured = 156,
 
-    Symbolic = 157, 
-    
-    Identify = 158, 
-                  
-    Apps = 160,     
-    
-    Numeric = 161,  
-        
+    Symbolic = 157,
+
+    Identify = 158,
+
+    Apps = 160,
+
+    Numeric = 161,
+
     Core = 162,
-         
+
     Validity = 163,
 
     VCheck = 164,
 
     ZXed = 165,
-    
+
     V0 = 170,
 
     Control = 180,
-    
+
     AsmModels = 181,
 
     AsmRun = 182,
@@ -187,12 +190,12 @@ public enum PartId : ulong
     Dynamo = 302,
 
     Collections = 303,
-    
+
     Floor = 305,
 
     Json = 306,
 
-    Lang = 307,
+    //Lang = 307,
 
     Messaging = 308,
 
@@ -203,7 +206,7 @@ public enum PartId : ulong
     Command = 312,
 
     Commands = 313,
-    
+
     Agents = 315,
 
     Etude = 325,
@@ -212,35 +215,35 @@ public enum PartId : ulong
 
     // ~ 2000
     // ~ -------------------------------------------------------------------------------
-    
+
 
     // ~ Test
     // ~ -------------------------------------------------------------------------------
 
     IdentityTest = Identity | Test,
 
-    LogixTest = Logix | Test, 
+    LogixTest = Logix | Test,
 
     LibMTest = LibM | Test,
 
     MachinesTest = Machines | Test,
 
-    MathTest = Math | Test, 
-    
+    MathTest = Math | Test,
+
     BitsTest = BitSuite | Test,
-    
+
     MklApiTest = Mkl | Test,
 
     DynopsTest = Dynamic | Test,
 
     AsmTest = Asm | Test,
 
-    
+
     AsmDTest = AsmModels | Test,
 
     SymbolicTest = Symbolic | Test,
 
-    GVecTest = GVec | Test,     
+    GVecTest = GVec | Test,
 
 
     // ~ Classifiers

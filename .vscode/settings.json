@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
+        "CLASSLIST",
         "Disasm",
         "Dynexus",
         "Dynops",
@@ -8,11 +9,19 @@
         "Intrinsics",
         "Ints",
         "Konst",
+        "LINENUM",
+        "MDHEADER",
+        "NOCA",
         "Nats",
         "Nullary",
+        "OBJECTFILE",
+        "PUBONLY",
+        "QUOTEALLNAMES",
+        "RAWEH",
         "REX",
         "REXᕀW",
         "RFLAGS",
+        "UNREX",
         "Unignored",
         "W",
         "cpuid",
@@ -34,6 +43,7 @@
         "vcell",
         "vinflate",
         "vload",
+        "winmd",
         "zpad"
     ]
 }

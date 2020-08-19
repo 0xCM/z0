@@ -44,10 +44,11 @@ namespace Z0
             return buffer;
         }
 
-        public static Type build(ModuleBuilder mb, TableSpec spec)
+        static Type build(ModuleBuilder mb, TableSpec spec)
         {
             var fullName = RE.fullName(spec.Namespace, spec.TypeName);
             var tb = RE.valueType(mb, fullName, TableAttributes);
+
             foreach(var field in spec.Fields)
                 RE.field(tb, field.Name, field.FieldTypeName, field.Offset);
             var type = tb.CreateType();
