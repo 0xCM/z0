@@ -6,9 +6,16 @@ author: 0xcm
 
 # Local Resources
 
+
 ## Repositories
 
-* [root://lang/net/docs/repos/docs/docs/index.yml](..\..\..\..\lang\net\docs\repos\docs\docs\index.yml)
+* [external://msdocs/docs/readme.md](external\msdocs\docs\readme.md)
+
+## WinSdk
+
+* [external://winsdk](external\winsdk\pinvoke\SupportedAPIs.xml)
+
+
 
 ## Tools
 
@@ -23,3 +30,4 @@ author: 0xcm
 
 * [http://ms-docs-markdown-reference](https://docs.microsoft.com/contribute/markdown-reference)
 * [http://ms-vscode-docs-authoring-pack](https://docs.microsoft.com/contribute/how-to-write-docs-auth-pack)
+

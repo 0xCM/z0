@@ -1,0 +1,2 @@
+j:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\crossgen.exe /in j:\lang\net\runtime\artifacts\bin\system.runtime\netcoreapp-Windows_NT-Release\system.runtime.dll /out j:\lang\net\runtime\artifacts\bin\system.runtime.ni.dll 
+dumpbin /nologo /disasm:nobytes j:\lang\net\runtime\artifacts\bin\system.runtime.ni.dll /out:J:/dev/projects/z0-logs\tools\dumpbin\runtime\system.runtime.ni.dll.asm 

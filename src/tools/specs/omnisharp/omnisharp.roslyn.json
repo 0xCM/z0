@@ -1,0 +1,8 @@
+{
+    "RoslynExtensionsOptions": {
+      "enableAnalyzersSupport": true,
+      "locationPaths": [
+         "//path_to/code_actions.dll"
+      ]
+    }
+  }

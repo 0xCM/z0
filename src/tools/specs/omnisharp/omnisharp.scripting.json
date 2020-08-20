@@ -1,0 +1,7 @@
+{
+    "script": {
+       "enabled": true,
+       "defaultTargetFramework": "net461",
+       "enableScriptNuGetReferences": false
+    }
+  }

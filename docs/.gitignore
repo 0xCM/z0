@@ -1,0 +1,4 @@
+runtime
+winsdk
+vars/**
+external/**

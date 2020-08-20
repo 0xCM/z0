@@ -13,3 +13,5 @@ obj/
 *.pdb
 *.obj
 mkl.redist/
+./docs/runtime/**
+.bash_history
