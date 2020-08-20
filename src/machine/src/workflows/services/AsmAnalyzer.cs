@@ -16,9 +16,10 @@ namespace Z0.Asm
         public static ReadOnlySpan<Arrow<Imm64,IceRegister>> moves(AsmRoutine src, int capacity = 10)
         {
             var hander = new AsmMovHandler(capacity);
-            var inxs = span(src.Instructions.Data);
-            for(var i=0u; i<inxs.Length; i++)
-                hander.Handle(skip(inxs, i));
+            var fx = span(src.Instructions.Data);
+            var count = fx.Length;
+            for(var i=0u; i<count; i++)
+                hander.Handle(skip(fx, i));
             return hander.Collected;
         }
     }

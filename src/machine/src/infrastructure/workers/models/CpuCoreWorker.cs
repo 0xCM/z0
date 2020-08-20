@@ -13,10 +13,10 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Embodies an asynchrounous thread of execution that is assigned to a specific CPU core
+    /// Embodies an asynchronous thread of execution that is assigned to a specific CPU core
     /// </summary>
     public class CpuCoreWorker<T>
-    {        
+    {
         public readonly uint CoreNumber;
 
         public readonly TimeSpan Frequency;
@@ -68,7 +68,7 @@ namespace Z0
         /// Searches for a thread given an OS-assigned id, not the useless clr id
         /// </summary>
         /// <param name="id">The OS thread Id</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         static Option<ProcessThread> thread(uint id)
             => CurrentProcess.ProcessThread(id);
 
@@ -79,8 +79,8 @@ namespace Z0
         void RunCycle()
         {
             var max = MaxCycles ?? 1_000_000ul;
-            for(var i=0ul; i<max; i++)           
-                State = Worker(State);                    
+            for(var i=0ul; i<max; i++)
+                State = Worker(State);
         }
 
         async Task RunOnce()
@@ -92,18 +92,18 @@ namespace Z0
         }
 
         async Task RunForever()
-        {                
+        {
             while(true)
                await RunOnce();
         }
 
         async Task RunCycles()
-        {                
+        {
             var max = MaxCycles.Value;
             while(CycleCount++ <= max)
                 await RunOnce();
         }
-        
+
         internal async Task Run()
         {
             WorkerThread = thread(CurrentProcess.OsThreadId).ValueOrDefault();
@@ -117,7 +117,7 @@ namespace Z0
 
             if(MaxCycles == null)
                 await RunForever();
-            else 
+            else
                 await RunCycles();
         }
 
@@ -128,15 +128,15 @@ namespace Z0
 
         static async Task asyncDelay(TimeSpan duration)
             => await Task.Delay(duration);
-    
+
         public static AppMsg FinishedCycle(ulong cycle, Duration totalCpu, T state, uint? core = null)
         {
             var coreTxt = core != null ? $"core = {core}, " : string.Empty;
             var cycleTxt = $"cycle = {cycle.ToString().PadLeft(5, '0')}, ";
             var cpuTxt = $"cputime = {totalCpu}, ";
-            var stateTxt = $"current state = {state}";            
+            var stateTxt = $"current state = {state}";
             var msgText = $"({coreTxt}{cycleTxt}{cpuTxt}{stateTxt}";
             return AppMsg.Colorize(msgText, MessageFlair.Magenta);
-        }    
+        }
     }
 }

@@ -8,39 +8,40 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
+    using Z0.Events;
 
     using static Konst;
     using static z;
-    
+
     partial struct Recapture
     {
         public CapturedAccessor[] Capture(ApiHostUri host, FilePath dst)
             => Capture(host, Resources.accessors(Context.ContextRoot.Composition.Assemblies), dst);
 
         public CapturedAccessor[] Capture(ApiHostUri host, ReadOnlySpan<ResourceAccessor> src, FilePath dst)
-        {            
+        {
             var count = src.Length;
             var codes = span(alloc<CapturedCode>(count));
             var captured = alloc<CapturedAccessor>(count);
             var target = span(captured);
-            
+
             using var writer = dst.Writer();
             using var quick = QuickCapture.create(Context);
-                        
+
             for(var i=0u; i<count; i++)
             {
                 ref readonly var accessor = ref skip(src,i);
                 var code = quick.Capture(accessor.Member).ValueOrDefault(CapturedCode.Empty);
                 seek(codes, i) = code;
-                
+
                 if(code.IsNonEmpty)
                 {
-                    ref readonly var data = ref skip(codes,i);                    
-                    seek(target, i) = new CapturedAccessor(host, accessor, CreateFunction(data).ValueOrDefault(AsmRoutineCode.Empty));
-                    Save(data, writer);                                        
+                    ref readonly var data = ref skip(codes,i);
+                    seek(target, i) = new CapturedAccessor(nameof(Recapture), host, accessor, CreateFunction(data).ValueOrDefault(AsmRoutineCode.Empty));
+                    Save(data, writer);
                 }
             }
-            
+
             return captured;
         }
 

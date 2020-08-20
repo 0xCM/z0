@@ -14,24 +14,22 @@ namespace Z0
     public readonly struct EmittedEnumCatalog : IWfEvent<EmittedEnumCatalog>
     {
         public const string EventName = nameof(EmittedEnumCatalog);
-        
-        const string Pattern = Slot0 + FieldSep + "Emitted summary data file for {1} enum literals to {2}";
 
         public WfEventId EventId {get;}
 
         public readonly FilePath TargetPath;
 
-        public readonly uint RecordCount;
+        public readonly CellCount Count;
 
         [MethodImpl(Inline)]
         public EmittedEnumCatalog(FilePath target, uint count, CorrelationToken ct)
         {
-            EventId = WfEventId.define(nameof(EmittedEnumCatalog), ct);
+            EventId = WfEventId.define(EventName, ct);
             TargetPath = target;
-            RecordCount = count;
-        }        
-        
+            Count = count;
+        }
+
         public string Format()
-            => text.format(Pattern, EventId, RecordCount, TargetPath);
+            => text.format(PSx3, EventId, Count, TargetPath);
     }
 }

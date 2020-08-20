@@ -18,7 +18,7 @@ namespace Z0
             : this(context.AppPaths.AppStandardOutPath, context.AppPaths.AppErrorOutPath)
         {
 
-        }        
+        }
 
         public PartSink(FilePath standard, FilePath error)
         {
@@ -31,7 +31,7 @@ namespace Z0
         public void Deposit(IAppEvent e)
         {
             lock(Locker)
-                Writer.WriterLine(e.Format());            
+                Writer.WriterLine(e.Format());
         }
 
         public void Deposit(AppEvent<BinaryCode> e)

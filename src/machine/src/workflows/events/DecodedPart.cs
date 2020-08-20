@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
     using static RenderPatterns;
-    using static Flairs;
+    using static z;
 
     [Event]
     public readonly struct DecodedPart : IWfEvent<DecodedPart>
@@ -19,29 +19,29 @@ namespace Z0
         public const string EventName = nameof(DecodedPart);
 
         public WfEventId EventId {get;}
-        
-        public string ActorName {get;}
+
+        public WfActor Actor {get;}
 
         public PartAsmFx Instructions {get;}
 
         public PartId PartId {get;}
 
-        public int TotalCount {get;}
-        
+        public CellCount TotalCount {get;}
+
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
         public DecodedPart(string actor, PartAsmFx src, CorrelationToken ct, MessageFlair flair = MessageFlair.Cyan)
         {
-            EventId = WfEventId.define(nameof(DecodedPart), ct);
-            ActorName = actor;
+            EventId = WfEventId.define(EventName, ct);
+            Actor = actor;
             Instructions = src;
             PartId = Instructions.Part;
             TotalCount = Instructions.TotalCount;
-            Flair = flair;            
+            Flair = flair;
         }
-                
+
         public string Format()
-            => text.format(PSx4, EventId, ActorName, PartId, TotalCount);
-    }        
+            => text.format(PSx4, EventId, Actor, PartId, TotalCount);
+    }
 }

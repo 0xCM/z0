@@ -13,8 +13,6 @@ namespace Z0
 
     public readonly struct FunctionCil : IFunctionCil
     {
-        public static FunctionCil Service => default;
-
         [MethodImpl(Inline)]
         public static CilCode extract(DynamicMethod src)
             => CilCode.define(src.Name, bytes(src), src.GetMethodImplementationFlags());
@@ -36,7 +34,7 @@ namespace Z0
         /// See https://stackoverflow.com/questions/4148297/resolving-the-tokens-found-in-the-il-from-a-dynamic-method/35711376#35711376
         /// </summary>
         internal static byte[] bytes(DynamicMethod src)
-        {            
+        {
             var resolver = typeof(DynamicMethod).GetField("m_resolver", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(src);
             if (resolver == null) throw new ArgumentException("The dynamic method's IL has not been finalized.");
             return (byte[])resolver.GetType().GetField("m_code", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(resolver);

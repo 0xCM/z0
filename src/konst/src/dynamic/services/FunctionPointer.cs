@@ -8,12 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;    
+    using static Konst;
 
     public readonly struct FunctionPointer : IFunctionPointer
     {
-        public static FunctionPointer Service => default;
-
         /// <summary>
         /// Creates a dynamic pointer from an untyped dynamic delegate
         /// </summary>

@@ -13,14 +13,12 @@ namespace Z0
 
     public readonly struct FunctionJit : IFunctionJit
     {
-        public static FunctionJit Service => default;
-
         [MethodImpl(Inline)]
         public static LocatedMethod jit(MethodInfo src, int? size = null)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
             var location = (MemoryAddress)src.MethodHandle.GetFunctionPointer();
-            return  new LocatedMethod(OpIdentity.Empty, src, location, size);            
+            return  new LocatedMethod(OpIdentity.Empty, src, location, size);
         }
 
         [MethodImpl(Inline)]
@@ -28,7 +26,7 @@ namespace Z0
         {
             RuntimeHelpers.PrepareMethod(src.Method.MethodHandle);
             var location = (MemoryAddress)src.Method.MethodHandle.GetFunctionPointer();
-            return new LocatedMethod(src.Id, src.Method, location);            
+            return new LocatedMethod(src.Id, src.Method, location);
         }
 
         /// <summary>
@@ -40,17 +38,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IntPtr jit(Delegate src)
-        {   
+        {
             RuntimeHelpers.PrepareDelegate(src);
             return src.Method.MethodHandle.GetFunctionPointer();
-        }    
+        }
 
         [MethodImpl(Inline)]
         public static DynamicPointer jit(DynamicDelegate src)
-        {   
+        {
             RuntimeHelpers.PrepareDelegate(src.DynamicOp);
             return DynamicPointer.From(src);
-        }        
+        }
 
         [MethodImpl(Inline)]
         public static DynamicPointer jit<D>(DynamicDelegate<D> src)

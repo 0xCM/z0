@@ -13,8 +13,6 @@ namespace Z0
 
     public readonly struct FunctionHandle : IFunctionHandle
     {
-        public static FunctionHandle Service => default;
-
         public static RuntimeMethodHandle from(DynamicMethod src)
         {
             var getMethodDescriptorInfo = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -27,9 +25,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static RuntimeMethodHandle from(Delegate src)
-            => src.Method.MethodHandle;        
+            => src.Method.MethodHandle;
 
         public static MethodBase from(RuntimeMethodHandle src)
-            => MethodBase.GetMethodFromHandle(src);                    
+            => MethodBase.GetMethodFromHandle(src);
     }
 }

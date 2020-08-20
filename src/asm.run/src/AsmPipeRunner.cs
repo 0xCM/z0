@@ -52,9 +52,9 @@ namespace Z0.Asm
         public void Flow(in AsmRoutine src)
         {
             var count = src.InstructionCount;
-            ref readonly var inxs = ref src.Instructions[0];
+            ref readonly var fx = ref src.Instructions[0];
             for(var i=0; i<count; i++)
-                Flow(skip(inxs,i));
+                Flow(skip(fx,i));
         }
 
         public void Flow(in Instruction src)

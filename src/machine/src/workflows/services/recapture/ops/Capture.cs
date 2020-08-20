@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
+    using Z0.Events;
 
     using static z;
 
@@ -18,16 +19,16 @@ namespace Z0
         /// All of your resbytes belong to us
         /// </summary>
         public void CaptureResBytes()
-        {            
+        {
             var resfile = z.insist(ResBytesCompiled);
-            var captured = Capture(resfile, ResBytesUncompiled);                        
+            var captured = Capture(resfile, ResBytesUncompiled);
             var csvfile = ResIndexDir + FileName.Define("z0.res.bytes", FileExtensions.Csv);
             SaveIndex(captured, csvfile);
         }
-                
-        public CapturedAccessor[] Capture(FilePath src, FolderPath dst)        
+
+        public CapturedAccessor[] Capture(FilePath src, FolderPath dst)
         {
-            var resdll = Assembly.LoadFrom(src.Name);  
+            var resdll = Assembly.LoadFrom(src.Name);
             var indices = span(Resources.declarations(resdll));
             var count = indices.Length;
 
@@ -36,15 +37,15 @@ namespace Z0
             var results = list<CapturedAccessor>();
             for(var i=0u; i<count; i++)
             {
-                ref readonly var index = ref skip(indices,i);            
-                var host = Flow.uri(index.DeclaringType);                
+                ref readonly var index = ref skip(indices,i);
+                var host = Flow.uri(index.DeclaringType);
                 var path = dst + host.FileName(FileExtensions.Asm);
                 results.AddRange(Capture(host, index.Data, path));
             }
-            
+
             var data = results.Array();
             term.print(new CapturedResourceSets(nameof(Recapture), data, src, dst));
             return data;
-        }        
+        }
     }
 }
