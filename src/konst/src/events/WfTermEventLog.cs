@@ -9,38 +9,36 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    
-    public struct WfTermEventLog : IWfEventLog
-    {        
-        public static IWfEventLog create(FS.FilePath status, FS.FilePath error, bool clear = true)
-            => new WfTermEventLog(FilePath.Define(status.Name), FilePath.Define(error.Name), clear);
+    using static z;
 
+    public struct WfTermEventLog : IWfEventLog
+    {
         FilePath Status;
 
         readonly FilePath Error;
-        
-        StreamWriter StatusWriter; 
-        
+
+        StreamWriter StatusWriter;
+
         static FilePath path(FilePath status)
         {
-            var ext = FileExtension.Define(text.format("{0}{1}", Timestamp.create(), status.Ext.Name));
+            var ext = FileExtension.Define(text.format("{0}{1}", timestamp(), status.Ext.Name));
             var name = FileName.Define(Path.GetFileNameWithoutExtension(status.Name), ext);
             return status.FolderPath + name;
         }
-        
+
         public WfTermEventLog(FilePath status, FilePath error, bool clear)
-        {  
-            if(clear)       
+        {
+            if(clear)
             {
                 status.FolderPath.Clear();
                 error.Delete();
             }
-            
+
             Status =  path(status);
             StatusWriter = Status.Writer();
             Error = error.CreateParentIfMissing();
         }
-        
+
         public void Deposit(IAppMsg e)
         {
             try
@@ -84,7 +82,7 @@ namespace Z0
         {
             StatusWriter.WriteLine(e.Format());
         }
-        
+
         public void Dispose()
         {
             StatusWriter?.Flush();

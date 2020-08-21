@@ -9,45 +9,25 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    
-    using NK = NumericKind;
-    using DW = DataWidth;
+    using System.IO;
 
     [ApiHost("api")]
     public readonly partial struct Part
     {
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-                
-        public const string EmpyString = "";
-
-        public const string Connector = " -> ";                
-
         /// <summary>
-        /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field
+        /// Retrieves the part identifier, if any, of the entry assembly
         /// </summary>
-        public const int WidthOffset = 16;        
+        public static PartId ExecutingPart
+            => id(Assembly.GetEntryAssembly());
 
-        /// <summary>
-        /// Specifies the widths of system-supported primal numeric data types
-        /// </summary>
-        public const DW NumericWidths = DW.W8 | DW.W16 | DW.W32 | DW.W64;
+        public static string RuntimeRoot
+            => Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
-        /// <summary>
-        /// Specifies unsigned integral types of widths <see cref='NumericWidths'/>
-        /// </summary>
-         public const NK UnsignedInts = NK.UnsignedInts;
+        public static PartId[] identities(Assembly[] src)
+            => src.Where(test).Select(x => Part.@base(x.Id()));
 
-        /// <summary>
-        /// Specifies signed integral types of widths <see cref='NumericWidths'/>
-        /// </summary>
-        public const NK SignedInts = NK.SignedInts;
-
-        /// <summary>
-        /// Specifies signed and unsigned integral types of widths <see cref='NumericWidths'/>
-        /// </summary>
-        public const NK Integers = NK.Integers;
-
-        public const NK AllNumeric = NK.All;
+        public static PartId CallingPart
+            => id(Assembly.GetCallingAssembly());
 
         [MethodImpl(Inline), Op]
         public static PartId withoutTest(PartId a)
@@ -85,9 +65,9 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates and populates a new array by filtering the source array with a specified predicate 
+        /// Allocates and populates a new array by filtering the source array with a specified predicate
         /// </summary>
-        /// <param name="src">The soruce array</param>
+        /// <param name="src">The source array</param>
         /// <param name="f">The predicate</param>
         /// <typeparam name="T">The array element type</typeparam>
         [MethodImpl(Inline)]
@@ -100,15 +80,14 @@ namespace Z0
             {
                 ref readonly var test = ref src[i];
                 if(f(test))
-                    dst[count++] = test;                    
-            }   
+                    dst[count++] = test;
+            }
             return dst.Slice(0, (int)count).ToArray();
-        }        
+        }
     }
-    
-    
+
     public static partial class XTend
     {
-        
+
     }
 }

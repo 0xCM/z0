@@ -3,22 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     public interface IPartLogExtensions
     {
         /// <summary>
-        /// Extension for application log files
+        /// Extension for application status logs
         /// </summary>
-        FileExtension Log => FileExtensions.Log;
-
-        /// <summary>
-        /// Extension for standard output capture logs
-        /// </summary>
-        FileExtension StdOut => FileExtensions.StdOut;
+        FileExtension StatusLog => FileExtensions.StatusLog;
 
         /// <summary>
         /// Extension for error output capture logs
         /// </summary>
-        FileExtension ErrOut => FileExtensions.ErrOut;
+        FileExtension ErrorLog => FileExtensions.ErrorLog;
     }
 }

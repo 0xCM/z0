@@ -7,34 +7,34 @@ namespace Z0.Asm
     using System;
     using System.IO;
 
-    public interface TAsmTester : 
-        IService<IAsmContext>, 
-        IBufferedChecker, 
-        ITestDynamic, 
-        TCheckVectors, 
-        ICheckCapture 
-    {        
-        IAsmDecoder Decoder 
-            => Context.RoutineDecoder; 
+    public interface TAsmTester :
+        IService<IAsmContext>,
+        IBufferedChecker,
+        ITestDynamic,
+        TCheckVectors,
+        ICheckCapture
+    {
+        IAsmDecoder Decoder
+            => Context.RoutineDecoder;
 
-        IAsmFormatter Formatter 
+        IAsmFormatter Formatter
             => Context.Formatter;
 
-        IUriHexQuery UriBitQuery 
+        IUriHexQuery UriBitQuery
             => Z0.UriHexQuery.Service;
 
-        IArchiveServices Archives 
+        IArchiveServices Archives
             => Z0.Archives.Services;
 
-        IPolyrand IPolyrandProvider.Random 
+        IPolyrand IPolyrandProvider.Random
             => Context.Random;
 
-        ICaptureCore ICaptureServiceProxy.CaptureService 
-            => Context.CaptureCore;        
+        ICaptureCore ICaptureServiceProxy.CaptureService
+            => Context.CaptureCore;
 
         IPartCaptureArchive CaptureArchive(PartId part)
             => Archives.CaptureArchive(
-                (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
+                (EnvVars.Common.LogRoot + FolderName.Define("apps")) + FolderName.Define(part.Format()),
                 FolderName.Define("capture"));
 
         IPartCaptureArchive CaptureArchive(FolderPath root)
@@ -44,7 +44,7 @@ namespace Z0.Asm
         {
             var asm = Decoder.Decode(capture).Require();
             var formatted = Formatter.FormatFunction(asm);
-            dst.Write(formatted);            
+            dst.Write(formatted);
         }
 
         void WriteAsm(CapturedCode[] src, StreamWriter dst)

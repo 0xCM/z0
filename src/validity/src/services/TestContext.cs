@@ -14,7 +14,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    
+
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public abstract class TestContext
@@ -25,17 +25,17 @@ namespace Z0
         {
             DiagnosticMode = diagnostic;
         }
-        
-         protected IResolvedApi Api 
+
+         protected IResolvedApi Api
             => _Api.Value;
 
         static IResolvedApi ComposeApi()
-            => ApiComposition.Assemble(Parted.index());
-        
+            => ApiPart.Assemble(Parted.executing());
+
         static Lazy<IResolvedApi> _Api {get;}
             = Root.defer(ComposeApi);
     }
-    
+
     public abstract class TestContext<U> : TestContext, ITestContext<U>
         where U : TestContext<U>
     {
@@ -58,7 +58,7 @@ namespace Z0
         {
             void Relay(IAppMsg msg) => Next(msg);
 
-            Context = this;            
+            Context = this;
             Next += x => {};
             Queue = AppMsgExchange.Create();
             Queue.Next += Relay;
@@ -66,7 +66,7 @@ namespace Z0
         }
 
         public void Dispose()
-        {            
+        {
             OnDispose();
         }
 
@@ -75,7 +75,7 @@ namespace Z0
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
             => Queue.Deposit(msg);
 
-        void IAppMsgSink.NotifyConsole(IAppMsg msg)            
+        void IAppMsgSink.NotifyConsole(IAppMsg msg)
             => Queue.NotifyConsole(msg);
 
         public IEnumerable<TestCaseRecord> TakeOutcomes()
@@ -101,19 +101,19 @@ namespace Z0
 
         public IReadOnlyList<IAppMsg> Flush(Exception e)
             => Queue.Flush(e);
-            
+
         public void Flush(Exception e, IAppMsgSink target)
             => Queue.Flush(e, target);
 
-        public void Emit(FilePath dst) 
-            => Queue.Emit(dst);        
-        
+        public void Emit(FilePath dst)
+            => Queue.Emit(dst);
+
         /// <summary>
         /// The number of elements to be selected from some sort of stream
         /// </summary>
         protected virtual int RepCount
             => Context.RepCount;
-        
+
         /// <summary>
         /// The number times to repeat an action
         /// </summary>
@@ -131,32 +131,32 @@ namespace Z0
         /// </summary>
         protected virtual int OpCount
             => RoundCount*CycleCount;
-        
-        public virtual bool Enabled 
+
+        public virtual bool Enabled
             => true;
-        
+
         protected virtual bool TraceDetailEnabled
             => false;
 
-        protected TChecks Claim 
+        protected TChecks Claim
             => Checks.Checker;
 
         protected TCheckInvariant ClaimInvariant
             => Claim;
-        
-        protected TCheckPrimal ClaimPrimal 
+
+        protected TCheckPrimal ClaimPrimal
             => Claim;
 
-        protected TCheckPrimalSeq ClaimPrimalSeq 
+        protected TCheckPrimalSeq ClaimPrimalSeq
             => Claim;
 
-        protected TCheckNumeric ClaimNumeric 
+        protected TCheckNumeric ClaimNumeric
             => CheckNumeric.Checker;
 
-        protected TCheckEquatable ClaimEquatable 
+        protected TCheckEquatable ClaimEquatable
             => CheckEquatable.Checker;
 
-        protected IAppPaths AppPaths 
+        protected IAppPaths AppPaths
             => Context.AppPaths;
 
         protected PartId TestedPart
@@ -181,13 +181,13 @@ namespace Z0
             => caller;
 
 
-        protected TTestCaseIdentity CaseIdentityService 
+        protected TTestCaseIdentity CaseIdentityService
             => Context;
 
         protected OpIdentity CaseOpId<T>(string label, T t = default)
             where T : unmanaged
                 => Context.CaseOpId<T>(label);
-                
+
         protected OpIdentity BaselineId<K>(string label,K t = default)
             where K : unmanaged
                 => Context.BaselineId<K>(label);
@@ -204,22 +204,22 @@ namespace Z0
             where C : unmanaged
                 => Context.CaseName<W,C>(label, generic);
 
-        protected string CaseName(IFunc f) 
+        protected string CaseName(IFunc f)
             => Context.CaseName(f);
 
         [MethodImpl(Inline)]
-        protected FilePath UnitPath(FileName name)    
+        protected FilePath UnitPath(FileName name)
             => UnitDataDir + name;
 
         protected StreamWriter UnitWriter(FileName filename)
             => UnitPath(filename).Writer();
 
         [MethodImpl(Inline)]
-        protected FilePath CasePath(FileExtension ext, [CallerMemberName] string caller = null)    
+        protected FilePath CasePath(FileExtension ext, [CallerMemberName] string caller = null)
             => UnitPath(FileName.Define(caller,  ext));
 
         [MethodImpl(Inline)]
-        protected FilePath CasePath(string CaseName, FileExtension ext = null)    
+        protected FilePath CasePath(string CaseName, FileExtension ext = null)
             => UnitPath(FileName.Define(CaseName, ext ?? FileExtensions.Csv));
 
         protected StreamWriter CaseWriter(FileExtension ext, [Caller] string caller = null)
@@ -227,10 +227,10 @@ namespace Z0
 
         protected StreamWriter CaseWriter(string CaseName, FileExtension ext = null)
             => CasePath(CaseName, ext).Writer();
-            
+
         protected BenchmarkRecord Benchmark(long opcount, Duration time, [Caller] string label = null)
             => Context.Benchmark(opcount, time, label);
-        
+
         protected BenchmarkRecord ReportBenchmark(string name, long opcount, TimeSpan duration)
             => Context.ReportBenchmark(name,opcount, duration);
 
@@ -240,7 +240,7 @@ namespace Z0
                 => Context.ReportBenchmark<W,T>(f,ops,time);
 
         protected void CheckAction(Action f, string name)
-            => Context.CheckAction(f,name);         
+            => Context.CheckAction(f,name);
 
         protected void Notify(string msg, MessageKind? severity = null)
             => Queue.Notify(msg, severity);
@@ -260,27 +260,27 @@ namespace Z0
         protected void Trace(ITextual msg)
             => Notify(msg.Format());
 
-        /// <summary> 
+        /// <summary>
         /// Allocates and optionally starts a system counter
         /// </summary>
-        [MethodImpl(Inline)]   
-        public SystemCounter counter(bool start = false) 
+        [MethodImpl(Inline)]
+        public SystemCounter counter(bool start = false)
             => SystemCounters.counter(start);
 
         /// <summary>
         /// Creates a new stopwatch and optionally start it
         /// </summary>
         /// <param name="start">Whether to start the new stopwatch</param>
-        [MethodImpl(Inline)]   
-        public Stopwatch stopwatch(bool start = true) 
+        [MethodImpl(Inline)]
+        public Stopwatch stopwatch(bool start = true)
             => start ? Stopwatch.StartNew() : new Stopwatch();
 
         /// <summary>
         /// Captures a stopwatch duration
         /// </summary>
         /// <param name="sw">A running/stopped stopwatch</param>
-        [MethodImpl(Inline)]   
-        public Duration snapshot(Stopwatch sw)     
+        [MethodImpl(Inline)]
+        public Duration snapshot(Stopwatch sw)
             => Duration.Define(sw.ElapsedTicks);
     }
 }

@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Konst;
     using static RenderPatterns;
 
     [Event]
     public readonly struct IndexedInstructions : IWfEvent<IndexedInstructions>
     {
+        public const string EventName = nameof(IndexedInstructions);
+
         public WfEventId EventId {get;}
 
         public readonly LocatedAsmFxList Index;
@@ -22,14 +22,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public IndexedInstructions(LocatedAsmFxList src)
         {
-            EventId = WfEventId.define(nameof(DecodedPart));
+            EventId = WfEvents.id(EventName);
             Index = src;
-        }       
-        
-        public MessageFlair Flair 
+        }
+
+        public MessageFlair Flair
             => MessageFlair.Cyan;
-                         
+
         public string Format()
-            => text.format(PSx2, EventId, Index.Indexed.Length);        
-    }        
+            => text.format(PSx2, EventId, Index.Indexed.Length);
+    }
 }

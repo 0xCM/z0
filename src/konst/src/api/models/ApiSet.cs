@@ -13,9 +13,6 @@ namespace Z0
 
     public readonly struct ApiSet : IApiSet
     {
-        public static IApiSet create(IResolvedApi resolved)
-            => new ApiSet(resolved);
-
         public IResolvedApi Composition {get;}
 
         public IApiHost[] Hosts {get;}

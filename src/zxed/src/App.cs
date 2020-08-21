@@ -5,20 +5,20 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
     using static z;
-     
+
     class App : AppShell<App,IAppContext>
-    {                
+    {
         public readonly PartId Part = PartId.ZXed;
-        
+
         public CorrelationToken Ct {get;}
-        
+
         public App()
             : base(Flow.app())
         {
-            Ct = CorrelationToken.from(Part);
+            Ct = correlate(Part);
         }
 
         void Parse(FilePath src)
@@ -31,13 +31,13 @@ namespace Z0
         }
 
         public override void RunShell(params string[] args)
-        {            
+        {
             var s = Flow.settings(Context, Ct);
             var config = Flow.configure(Context, args, Ct);
             using var log = Flow.log(config);
             using var context = Flow.context(Context, config, log, Ct);
             using var wf = new XedEtl(context, new XedEtlConfig(Context, s));
-            wf.Run();                                        
+            wf.Run();
         }
 
         public static void Main(params string[] args)

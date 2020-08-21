@@ -1,4 +1,6 @@
 echo off
+call wf\wf-vars.cmd
+
 set DstDir=%ZLogs%\builds
 set DstFile=z0.needs.json
 set DstPath="%DstDir%\%DstFile%"

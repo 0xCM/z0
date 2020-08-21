@@ -13,12 +13,13 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
+    using static z;
 
     public class EmitImmSpecials : IImmEmitter
-    {                        
+    {
         public CorrelationToken Ct {get;}
 
-        public IWfImmBroker Broker {get;} 
+        public IWfImmBroker Broker {get;}
 
         readonly IAsmContext Context;
 
@@ -37,10 +38,10 @@ namespace Z0
         readonly IImmSpecializer Specializer;
 
         readonly IWfEventLog Log;
-        
+
         internal EmitImmSpecials(IAsmContext context, WfConfig config, IMultiSink sink, IAsmFormatter formatter, IAsmDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
         {
-            Ct = ct ?? CorrelationToken.create();
+            Ct = correlate(ct);
             Log = Flow.log(config);
             Broker = WfBuilder.imm(Log, Ct);
             Context = context;
@@ -59,14 +60,14 @@ namespace Z0
             Broker.Dispose();
             Log.Dispose();
         }
-        
+
         bool Append = true;
-        
+
         void ConnectReceivers(IWfImmBroker relay)
         {
-            relay.EmittedEmbeddedImm.Subscribe(relay, OnEvent);          
+            relay.EmittedEmbeddedImm.Subscribe(relay, OnEvent);
             relay.HostFileEmissionFailed.Subscribe(relay, OnEvent);
-            relay.ImmInjectionFailed.Subscribe(relay,OnEvent);            
+            relay.ImmInjectionFailed.Subscribe(relay,OnEvent);
         }
 
         void OnEvent(EmittedEmbeddedImm e)
@@ -117,7 +118,7 @@ namespace Z0
             => RefiningParameter(src).RefinedImmValues();
 
         void EmitDirectRefinements(in CaptureExchange exchange, ApiHost host, IHostAsmArchiver dst)
-        {            
+        {
             var archive = Archive(host);
             var groups = ApiCollector.ImmDirect(host, ImmRefinementKind.Refined);
             var uri = host.Uri;
@@ -174,21 +175,21 @@ namespace Z0
         void EmitUnrefined(in CaptureExchange exchange, Imm8R[] imm8, params PartId[] parts)
         {
             EmitUnrefinedDirect(exchange, imm8, parts);
-            EmitUnrefinedGeneric(exchange, imm8, parts);            
+            EmitUnrefinedGeneric(exchange, imm8, parts);
         }
-        
+
         void EmitRefined(in CaptureExchange exchange, params PartId[] parts)
         {
             foreach(var host in Hosts(parts))
-            {                
+            {
                 var archive = Archive(host);
-                EmitDirectRefinements(exchange, host, archive);                
+                EmitDirectRefinements(exchange, host, archive);
                 EmitGenericRefinements(exchange, host, archive);
-            }            
+            }
         }
 
         void EmitUnrefinedDirect(in CaptureExchange exchange, Imm8R[] imm8, params PartId[] parts)
-        {            
+        {
             foreach(var host in Hosts(parts))
             {
                 var archive = Archive(host);
@@ -198,7 +199,7 @@ namespace Z0
         }
 
         void EmitUnrefinedDirect(in CaptureExchange exchange, IEnumerable<DirectApiGroup> groups, Imm8R[] imm8, IHostAsmArchiver dst)
-        {            
+        {
             var unary = from g in groups
                         let members = g.Members.Where(m => m.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
                         select (g,members);
@@ -215,32 +216,32 @@ namespace Z0
         }
 
         void EmitUnrefinedGeneric(in CaptureExchange exchange, Imm8R[] imm8, params PartId[] parts)
-        {        
+        {
             foreach(var host in Hosts(parts))
             {
                 var archive = Archive(host);
                 var specs = ApiCollector.ImmGeneric(host, ImmRefinementKind.Unrefined);
                 foreach(var spec in specs)
-                    EmitUnrefinedGeneric(exchange, spec, imm8, archive); 
-            }        
+                    EmitUnrefinedGeneric(exchange, spec, imm8, archive);
+            }
         }
 
         void EmitGenericRefinements(in CaptureExchange exchange, ApiHost host, IHostAsmArchiver dst)
-        {            
+        {
             var specs = ApiCollector.ImmGeneric(host, ImmRefinementKind.Refined);
             foreach(var f in specs)
-            {                    
+            {
                 if(f.Method.IsVectorizedUnaryImm(ImmRefinementKind.Refined))
                     EmitUnary(exchange, f, RefinedValues(f.Method), dst, RefinementType(f.Method));
                 else if(f.Method.IsVectorizedBinaryImm(ImmRefinementKind.Refined))
                     EmitBinary(exchange, f, RefinedValues(f.Method), dst, RefinementType(f.Method));
-            }        
+            }
         }
 
         void EmitUnrefinedGeneric(in CaptureExchange exchange, GenericApiMethod f,  Imm8R[] imm8, IHostAsmArchiver dst)
         {
             if(f.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
-                EmitUnary(exchange, f, imm8, dst);                       
+                EmitUnary(exchange, f, imm8, dst);
             else if(f.Method.IsVectorizedBinaryImm(ImmRefinementKind.Unrefined))
                 EmitBinary(exchange, f, imm8, dst);
         }

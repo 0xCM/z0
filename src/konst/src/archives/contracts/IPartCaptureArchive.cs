@@ -3,30 +3,30 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{                
+{
     using System;
-    
-    public interface IPartCaptureArchive : IPartFilePaths, IPartFileArchive, IPartImmArchive 
+
+    public interface IPartCaptureArchive : IPartFilePaths, IPartFileArchive, IPartImmArchive
     {
-        FolderPath ExtractDir 
+        FolderPath ExtractDir
             => ExtractDirPath(ArchiveRoot);
 
-        FolderPath UnparsedDir 
+        FolderPath UnparsedDir
             => UnparsedDirPath(ArchiveRoot);
 
-        FolderPath ParsedDir 
+        FolderPath ParsedDir
             => ParsedDirPath(ArchiveRoot);
-        
-        FolderPath CodeDir 
+
+        FolderPath CodeDir
             => HexDirPath(ArchiveRoot);
-    
-        FolderPath AsmDir 
+
+        FolderPath AsmDir
             => AsmDirPath(ArchiveRoot);
 
-        FolderPath LogDir 
+        FolderPath LogDir
             => LogDirPath(ArchiveRoot);
 
-        FolderName AreaName 
+        FolderName AreaName
             => FolderName.Empty;
 
         FilePath AsmPath(FileName name)
@@ -46,7 +46,7 @@ namespace Z0
 
         FilePath AsmPath(ApiHostUri host)
             => AsmDir +  FileName.Define(text.concat(host.Owner.Format(), ".", host.Name), FileExtensions.Asm);
-            
+
         FilePath ExtractPath(ApiHostUri host)
             => ExtractFilePath(ArchiveRoot, host);
 
@@ -57,21 +57,21 @@ namespace Z0
             => ParseFilePath(ArchiveRoot, host);
 
         FilePath HostLogPath(ApiHostUri host)
-            => HostLogPath(ArchiveRoot, host);
+            => StatusLogPath(ArchiveRoot, host);
 
-        FilePath[] AsmFiles 
+        FilePath[] AsmFiles
             => AsmFilePaths(ArchiveRoot);
 
-        FilePath[] HexFiles 
+        FilePath[] HexFiles
             => HexFilePaths(ArchiveRoot);
 
-        FilePath[] ExtractFiles 
+        FilePath[] ExtractFiles
             => ExtractFilePaths(ArchiveRoot);
 
-        FilePath[] ParseFiles 
+        FilePath[] ParseFiles
             => ParseFilePaths(ArchiveRoot);
 
-        FolderName SubjectName 
+        FolderName SubjectName
             => FolderName.Empty;
 
         FilePath[] ExtractFilePaths(params PartId[] parts)
@@ -88,6 +88,6 @@ namespace Z0
 
         FilePath[] HexFilePaths(params PartId[] parts)
             => PartFilePaths(CodeDir, parts);
-        
+
     }
 }

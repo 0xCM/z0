@@ -28,7 +28,7 @@ namespace Z0
 
         public object Reason {get;}
 
-        public bool Failed 
+        public bool Failed
         {
             [MethodImpl(Inline)]
             get => !Succeeded;
@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ParseResult<T>(ParseResult<string,T> src)
             => new ParseResult<T>(src.Source, src.Value, src.Reason);
-        
+
         [MethodImpl(Inline)]
         public static ParseResult<T> Success(string source, T value)
             => new ParseResult<T>(source, value, null);
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ParseResult(ParseResult<T> src)
             => ParseResult.Define(src.Source, typeof(T), src.Succeeded, src.Value);
-        
+
         [MethodImpl(Inline)]
         public static bool operator true(ParseResult<T> src)
             => src.Succeeded;
@@ -72,8 +72,8 @@ namespace Z0
             Source = source;
             Succeeded = true;
             Value = value;
-            Reason = reason ?? EmpyString;
-        }        
+            Reason = reason ?? EmptyString;
+        }
 
         [MethodImpl(Inline)]
         public ParseResult<T> WithReason(object reason)
@@ -135,7 +135,7 @@ namespace Z0
             => Succeeded ? Value : @default;
 
         /// <summary>
-        /// Returns the encapsulated value if it exists; otherwise, invokes the supplied fallback function 
+        /// Returns the encapsulated value if it exists; otherwise, invokes the supplied fallback function
         /// </summary>
         /// <param name="fallback">The function called to produce a value when there is no value in the source</param>
         [MethodImpl(Inline)]
@@ -204,7 +204,7 @@ namespace Z0
         {
             if(Succeeded)
                 return Value;
-            else    
+            else
                 throw new Exception($"{Source} unparsed:{Reason}");
         }
 

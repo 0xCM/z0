@@ -11,60 +11,56 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using P = Z0.Parts;    
+    using P = Z0.Parts;
+
+    using static Shell;
 
     class App : AppShell<App,IAppContext>
-    {        
-        public const PartId Part = PartId.Run;
-        
-        public const string PartName = nameof(PartId.Run);
-
-        public const string ActorName = PartName + "/" + nameof(App);
-
-        public CorrelationToken Ct {get;}         
+    {
+        public CorrelationToken Ct {get;}
 
         static IAppContext CreateAppContext()
         {
-            var resolved = ApiComposition.Assemble(array(P.GMath.Resolved));
-            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
+            var resolved = ApiPart.assemble(array(P.GMath.Resolved));
+            var random = Polyrand.Pcg64(PolySeed64.Seed05);
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
             return Apps.context(resolved, random, settings, exchange);
         }
-        
+
         public App()
             : base(CreateAppContext())
         {
-            Ct = CorrelationToken.from(Part);   
-            Raise(Flow.status(ActorName, "Application created", Ct));  
+            Ct = correlate(ShellId);
+            Raise(Flow.status(ShellName, "Application created", Ct));
         }
 
-        IResolvedApi Api 
-            => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
-       
+        IResolvedApi Api
+            => ApiPart.Assemble(KnownParts.Where(r => r.Id != 0));
+
         public override void RunShell(params string[] args)
-        {                        
-         
-            var parts = PartIdParser.Service.ParseValid(args); 
+        {
+
+            var parts = PartIdParser.Service.ParseValid(args);
             if(parts.Length == 0)
                 parts = Context.PartIdentities;
-            
 
-            LoadOpCodes();     
+
+            LoadOpCodes();
 
         }
 
         public void LoadTokens()
         {
             var tokens = AsmOpCodes.Tokens;
-            tokens.Iter(t => term.print(t.Format()));                                
+            tokens.Iter(t => term.print(t.Format()));
 
-            
+
         }
 
         void Status<T>(T content)
         {
-            Raise(Flow.status(ActorName, content, Ct));
+            Raise(Flow.status(ShellName, content, Ct));
         }
 
         public void LoadOpCodes()
@@ -77,7 +73,7 @@ namespace Z0
                 ref readonly var record = ref skip(view,i);
                 Status(record.Format());
             }
-                           
+
         }
 
         public static void Main(params string[] args)
@@ -85,13 +81,12 @@ namespace Z0
 
         protected override void OnDispose()
         {
- 
+
         }
     }
 
     public static partial class XTend
     {
-        
 
     }
 }

@@ -7,29 +7,30 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    
+
     using static Konst;
     using static ReflectionFlags;
 
+    [ApiDataType]
     public readonly struct EmptyVessels
-    {   
-        const byte _EmptyField = 0;    
+    {
+        const byte _EmptyField = 0;
 
         static void _EmptyMethod() { }
-        
-        static byte _EmptyProp 
+
+        static byte _EmptyProp
             => _EmptyField;
-    
+
         struct _EmptyStruct { }
 
         class _EmptyClass {}
 
         enum _EmptyEnum {}
-        
-        static Type VesselType 
+
+        static Type VesselType
             => typeof(EmptyVessels);
-        
-        public static FieldInfo EmptyField 
+
+        public static FieldInfo EmptyField
         {
             [MethodImpl(Inline)]
             get  => VesselType.GetFields(BF_All)[0];
@@ -80,7 +81,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsNonEmpty(Type src)
             => EmptyStruct.MetadataToken != src.MetadataToken;
-
 
         [MethodImpl(Inline)]
         public static bool IsEmpty(MethodInfo src)

@@ -16,19 +16,31 @@ namespace Z0
     {
         public static Files from(FilePath[] src)
             => new Files(src.Map(normalize));
-        
+
         public readonly FilePath[] Data;
 
         [MethodImpl(Inline)]
-        public Files(FilePath[] src)    
+        public static implicit operator Files(FilePath[] src)
+            => new Files(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator FilePath[](Files src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public Files(FilePath[] src)
             => Data = src;
+
+        [MethodImpl(Inline)]
+        public Files(FS.FilePath[] src)
+            => Data = src.Select(x => FilePath.Define(x.Name));
 
         public CellCount Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;
         }
-        
+
         public ref readonly FilePath this[uint index]
         {
             [MethodImpl(Inline)]

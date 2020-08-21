@@ -25,14 +25,14 @@ namespace Z0
                 else
                 {
                     yield return new string(buffer);
-                    buffer = stackalloc char[maxlen];
+                    buffer = new char[maxlen];
                     j = 0;
                     buffer[j] = src[i];
                 }
             }
             var trim = buffer.Trim();
             if(trim.Length != 0)
-                yield return new string(trim);                
+                yield return new string(trim);
         }
     }
 }

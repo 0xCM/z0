@@ -3,15 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System.Linq;
 
     public interface IPartImmArchive : IPartImmFilePaths, IPartFileArchive
-    {        
+    {
         /// <summary>
         /// The imm root directory path
         /// </summary>
-        FolderPath ImmRootDir 
+        FolderPath ImmRootDir
             => ImmRootDirPath(ArchiveRoot);
 
         /// <summary>
@@ -57,13 +57,13 @@ namespace Z0
             => hosts.SelectMany(host => ImmDirs(host)).ToArray();
 
         FilePath[] HexImmFiles(PartId part)
-            => ImmDir(part).Files(part, Hex);
+            => ImmDir(part).Files(part, HexLine);
 
         FilePath[] AsmImmFiles(PartId part)
             => ImmDir(part).Files(part, Asm);
 
         FilePath[] HexImmFiles(ApiHostUri host)
-            => ImmDir(host).Files(host, Hex);
+            => ImmDir(host).Files(host, HexLine);
 
         FilePath[] AsmImmFiles(ApiHostUri host)
             => ImmDir(host).Files(host, Asm);
@@ -74,10 +74,10 @@ namespace Z0
         FilePath[] AsmImmFiles(PartId[] parts)
             => parts.Select(AsmImmFiles).Join();
 
-        FolderPath ImmSubDir(FolderName name) 
+        FolderPath ImmSubDir(FolderName name)
             => (ImmRootDir + name);
 
-        FolderPath ImmSubDir(RelativeLocation name) 
+        FolderPath ImmSubDir(RelativeLocation name)
             => (ImmRootDir +  name);
 
         FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id)

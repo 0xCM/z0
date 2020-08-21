@@ -5,17 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.IO;
 
     using static Konst;
+    using static z;
 
     public struct WfEventLog : IMultiSink
-    {           
+    {
         readonly StreamWriter StdTarget;
-        
+
         readonly StreamWriter ErrTarget;
 
         readonly IMultiSink RelayTarget;
@@ -29,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfEventLog(FilePath std, FilePath err, IMultiSink relay, CorrelationToken? ct = null)
         {
-            Ct = ct ?? CorrelationToken.create();
+            Ct = correlate(ct);
             StdLock = new object();
             ErrLock = new object();
             StdTarget = std.Writer();
@@ -49,15 +48,15 @@ namespace Z0
             else
             {
                 lock(StdLock)
-                    StdTarget.WriteLine(formatted);                    
+                    StdTarget.WriteLine(formatted);
             }
-            
+
             RelayTarget.Deposit(src);
         }
 
         public void Deposit(IAppEvent src)
         {
-            Deposit(new WfStatus("anonymous", src.Format(), Ct, src.Flair));            
+            Deposit(new WfStatus("anonymous", src.Format(), Ct, src.Flair));
         }
 
         public void Deposit(IAppMsg src)
@@ -71,14 +70,14 @@ namespace Z0
             else
             {
                 lock(StdLock)
-                    StdTarget.WriteLine(formatted);                    
+                    StdTarget.WriteLine(formatted);
             }
-            
+
             RelayTarget.Deposit(src);
         }
 
          public void Dispose()
-         {            
+         {
             StdTarget.Flush();
             StdTarget.Dispose();
 

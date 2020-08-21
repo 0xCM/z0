@@ -24,11 +24,11 @@ namespace Z0.Asm
             Context = context;
             Buffers = Z0.Buffers.sequence(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
             CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureCore, Buffers[Aux3]);
-        }                
-        
+        }
+
         public void Dispose()
         {
-            BufferAlloc.Dispose();            
+            BufferAlloc.Dispose();
         }
 
         TTestAsm Me => this;
@@ -36,12 +36,12 @@ namespace Z0.Asm
         public ref readonly BufferToken this[BufferSeqId index]
             => ref Buffers[index];
 
-        IPartCaptureArchive CodeArchive 
+        IPartCaptureArchive CodeArchive
             => Me.CaptureArchive(Part.ExecutingPart);
 
         protected IFileStreamWriter HexWriter([Caller] string caller = null)
-        {            
-            var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
+        {
+            var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.HexLine));
             return Archives.Services.MemberCodeWriter(dstPath);
         }
 

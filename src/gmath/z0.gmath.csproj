@@ -2,11 +2,10 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />  
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(Memories)" />
   </ItemGroup>

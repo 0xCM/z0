@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Int8x64k)]
         public static T cell<T>(ReadOnlySpan<byte> src)
-            where T : unmanaged        
+            where T : unmanaged
                 => read<T>(src);
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Int8x64k)]
         public static T cell<T>(ReadOnlySpan<byte> src, int offset)
-            where T : unmanaged        
+            where T : unmanaged
                 => read<T>(slice(src,offset));
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Int8x64k)]
         public static T cell<T>(Span<byte> src)
-            where T : unmanaged           
+            where T : unmanaged
                 => read<T>(src);
 
         /// <summary>

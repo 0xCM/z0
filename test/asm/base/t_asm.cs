@@ -8,26 +8,20 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    
+
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public abstract class t_asm<U> : UnitTest<U,CheckVectors,TCheckVectors>
         where U : t_asm<U>
-    {     
-        protected IPartCaptureArchive TargetArchive 
+    {
+        protected IPartCaptureArchive TargetArchive
             => Archives.Services.CaptureArchive(UnitDataDir);
-        
-        protected StreamWriter FileStreamWriter([Caller] string caller = null)
-            => TargetArchive.HexPath(FileName.Define(caller)).Writer();
 
         protected new IAsmContext Context;
-        
-        IAppContext AppContext 
-            => Z0.AppContext.create(Api, Random, base.Context.Settings, Queue);
-        
+
         public t_asm()
         {
-            Context = WfBuilder.asm(AppContext);
+            Context = new AsmContext(Flow.app());
             AsmCheck = AsmTest.tester(Context);
             UnitDataDir.Clear();
         }
@@ -37,13 +31,13 @@ namespace Z0.Asm
         protected StreamWriter AsmCaseWriter([Caller] string caller = null)
             => CaseWriter(FileExtensions.Asm,caller);
 
-        protected BufferSeqId Main 
+        protected BufferSeqId Main
             => BufferSeqId.Main;
 
 
         protected IMemberCodeWriter HexWriter([Caller] string caller = null)
-        {            
-            var dstPath = TargetArchive.HexPath(FileName.Define(caller, FileExtensions.Hex));
+        {
+            var dstPath = TargetArchive.HexPath(FileName.Define(caller, FileExtensions.HexLine));
             return Archives.Services.MemberCodeWriter(dstPath);
         }
 
@@ -54,7 +48,7 @@ namespace Z0.Asm
         }
 
         protected MemberCode[] ReadHostBits(ApiHostUri host)
-        {            
+        {
             var paths = AppPaths.ForApp(PartId.Control);
             var root = paths.AppCaptureRoot;
             var capture = Archives.Services.CaptureArchive(root);
@@ -73,15 +67,15 @@ namespace Z0.Asm
             void Decoded(Instruction i)
             {
                 hostCount++;
-                totalCount++;                
+                totalCount++;
             }
 
             foreach(var host in hosts)
             {
                 hostCount = 0;
                 var bits = ReadHostBits(host).ToArray();
-                foreach(var f in bits) 
-                    decoder.Decode(f.Encoded, Decoded).OnSome(i => dst.Add(i));                    
+                foreach(var f in bits)
+                    decoder.Decode(f.Encoded, Decoded).OnSome(i => dst.Add(i));
             }
 
             return dst.ToArray();

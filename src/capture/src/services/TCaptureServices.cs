@@ -18,6 +18,6 @@ namespace Z0.Asm
             => new AsmRoutineDecoder(format ?? AsmFormatSpec.Default);
 
         IImmEmitter ImmEmitter(IMultiSink sink, IApiSet api, IAsmFormatter formatter, IAsmDecoder decoder, WfConfig config, CorrelationToken? ct = null)
-            => new EmitImmSpecials(Context, config, sink, formatter, decoder, api, config.Target.ArchiveRoot, ct);
+            => new EmitImmSpecials(Context, config, sink, formatter, decoder, api, config.TargetArchive.Root, ct);
     }
 }

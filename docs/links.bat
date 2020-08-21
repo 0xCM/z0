@@ -1,7 +1,0 @@
-mklink /d external\winsdk "%PATH_WINSDK%"
-mklink /d external\runtime "J:\lang\net\runtime"
-mklink /d external\coreclr "J:\tools\coreclr"
-mklink /d external\msdocs "J:\lang\net\docs\repos"
-mklink /d external\msbuild "J:\tools\msvs\MSBuild"
-mklink /d external\roslyn.src "J:\lang\net\roslyn"
-mklink /d external\msvc "J:\tools\msvs\VC\Tools\MSVC\14.26.28801"

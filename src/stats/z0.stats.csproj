@@ -3,7 +3,6 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +10,7 @@
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Matrix)" />    
+    <ProjectReference Include="$(Matrix)" />
 
   </ItemGroup>
 </Project>

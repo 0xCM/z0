@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {            
+    {
         /// <summary>
         /// Creates an unsigned hash code
         /// </summary>

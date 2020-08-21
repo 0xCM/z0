@@ -2,13 +2,12 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Matrix)" />    
+    <ProjectReference Include="$(Matrix)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitSpans)" />
   </ItemGroup>

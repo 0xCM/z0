@@ -3,16 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface ITestLogPaths : IPartFolderPaths, IPartLogExtensions  
+{
+    public interface ITestLogPaths : IPartFolderPaths, IPartLogExtensions
     {
         FolderPath TestRootPath(FolderPath root)
-            => root + TestFolderName;        
-            
+            => root + TestFolderName;
+
         FilePath TestMessages(FolderPath root,  PartId id)
-            => TestRootPath(root) + FileName.Define(id.Format(), StdOut);
-    
+            => TestRootPath(root) + FileName.Define(id.Format(), StatusLog);
+
         FilePath TestErrors(FolderPath root,  PartId id)
-            => TestRootPath(root) + FileName.Define(id.Format(), ErrOut);
+            => TestRootPath(root) + FileName.Define(id.Format(), ErrorLog);
     }
 }

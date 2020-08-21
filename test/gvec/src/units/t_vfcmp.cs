@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
-    using static System.Runtime.Intrinsics.X86.Avx;    
+
+    using static System.Runtime.Intrinsics.X86.Avx;
     using static Konst;
     using static z;
-        
+
     public class t_vfcmp : t_inx<t_vfcmp>
-    {                    
+    {
         public void eq_128xf64()
             => cmp_128x64_check(FpCmpMode.EQ_OQ);
 
@@ -107,15 +107,19 @@ namespace Z0
 
         protected void cmp_128x64_check(FpCmpMode mode)
         {
+            Span<double> lDst = stackalloc double[2];
+            Span<double> rDst = stackalloc double[2];
+
             for(var i = 0; i<RepCount; i++)
             {
+                lDst.Clear();
+                rDst.Clear();
+
                 var lhs = Random.CpuVector<double>(n128);
                 var rhs = Random.CpuVector<double>(n128);
 
-                Span<double> lDst = stackalloc double[2];
                 lhs.StoreTo(lDst);
 
-                Span<double> rDst = stackalloc double[2];
                 rhs.StoreTo(rDst);
 
                 var expect = fmath.fcmp(lDst, rDst, mode);
@@ -127,15 +131,19 @@ namespace Z0
 
         protected void cmp_256xf32_check(FpCmpMode mode)
         {
+            Span<float> xDst = stackalloc float[8];
+            Span<float> yDst = stackalloc float[8];
+
             for(var i = 0; i<RepCount; i++)
             {
+                xDst.Clear();
+                yDst.Clear();
+
                 var x = Random.CpuVector<float>(n256);
                 var y = Random.CpuVector<float>(n256);
 
-                Span<float> xDst = stackalloc float[8];
                 x.StoreTo(xDst);
 
-                Span<float> yDst = stackalloc float[8];
                 y.StoreTo(yDst);
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
@@ -146,15 +154,18 @@ namespace Z0
 
         protected void cmp_256x64_check(FpCmpMode mode)
         {
+            Span<double> xDst = stackalloc double[4];
+            Span<double> yDst = stackalloc double[4];
+
             for(var i = 0; i<RepCount; i++)
             {
+                xDst.Clear();
+                yDst.Clear();
                 var x = Random.CpuVector<double>(n256);
                 var y = Random.CpuVector<double>(n256);
 
-                Span<double> xDst = stackalloc double[4];
                 x.StoreTo(ref first(xDst));
 
-                Span<double> yDst = stackalloc double[4];
                 y.StoreTo(ref first(yDst));
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
@@ -215,6 +226,6 @@ namespace Z0
             bits[2] = double.IsNaN(vresult[2]);
             bits[3] = double.IsNaN(vresult[3]);
             return bits;
-        } 
+        }
     }
 }

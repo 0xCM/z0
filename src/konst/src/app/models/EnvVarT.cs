@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -19,7 +19,7 @@ namespace Z0
         public readonly T Value;
 
         public static implicit operator EnvVar(EnvVar<T> src)
-            => EnvVar.Define(src.Name, src.Value.ToString());
+            => EnvVars.define(src.Name, src.Value.ToString());
 
         [MethodImpl(Inline)]
         public static implicit operator EnvVar<T>((string name, T value) src)
@@ -38,17 +38,17 @@ namespace Z0
 
         public string Format()
             => $"{Name} := {Value}";
-        
+
         public override string ToString()
             => Format();
-        
+
         public override int GetHashCode()
             => Format().GetHashCode();
 
         public bool Equals(EnvVar<T> src)
-            => string.Equals(Name,src.Name, NoCase) 
+            => string.Equals(Name,src.Name, NoCase)
             && Object.Equals(Value, src.Value);
-        
+
         public override bool Equals(object src)
             => src is EnvVar<T> v && Equals(v);
     }

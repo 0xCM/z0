@@ -13,11 +13,11 @@ namespace Z0
     /// </summary>
     public class PurposeAttribute : Attribute
     {
+        public string Description {get;}
+
         public PurposeAttribute(string description)
         {
-            Description = description ?? EmpyString;
+            Description = description ?? EmptyString;
         }
-        
-        public string Description {get;}
     }
 }

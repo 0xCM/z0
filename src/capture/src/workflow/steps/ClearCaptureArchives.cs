@@ -9,21 +9,28 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
+    using static ClearCaptureArchivesStep;
 
-    public readonly ref struct ClearCaptureArchives 
-    {        
+    [Step(typeof(ClearCaptureArchives))]
+    public readonly struct ClearCaptureArchivesStep
+    {
+        public const string StepName = nameof(ClearCaptureArchives);
+    }
+
+    public readonly ref struct ClearCaptureArchives
+    {
         readonly IWfContext Wf;
-        
+
         readonly WfConfig Config;
-        
+
         readonly CorrelationToken Ct;
 
         public ClearCaptureArchives(IWfContext wf, WfConfig config, CorrelationToken ct)
         {
             Wf = wf;
             Config = config;
-            Ct = ct;            
-            Wf.Created(nameof(ClearCaptureArchives), Ct);            
+            Ct = ct;
+            Wf.Created(StepName, Ct);
         }
 
         /// <summary>
@@ -31,7 +38,7 @@ namespace Z0.Asm
         /// </summary>
         void Clear(Action<FilePath> deleted, params PartId[] parts)
         {
-            var archive = Archives.Services.CaptureArchive(Config.Target.ArchiveRoot);
+            var archive = Archives.Services.CaptureArchive(Config.TargetArchive.Root);
             foreach(var part in parts)
             {
                 foreach(var file in archive.ExtractDir.Files(part))
@@ -45,23 +52,23 @@ namespace Z0.Asm
 
                 foreach(var file in archive.CodeDir.Files(part))
                     file.Delete().OnSome(deleted);
-            }                
-        }                
+            }
+        }
 
         static void OnDelete(FilePath src)
         {
 
         }
-        
+
         public void Run()
         {
             var parts = Config.Parts;
-            Clear(OnDelete,Config.Parts);        
+            Clear(OnDelete,Config.Parts);
         }
-       
+
         public void Dispose()
-        {         
-            Wf.Finished(nameof(ClearCaptureArchives), Ct);
+        {
+            Wf.Finished(StepName, Ct);
         }
     }
 }

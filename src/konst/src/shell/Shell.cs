@@ -6,12 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
+    using static z;
+
     public abstract class Shell<S> : IShell<S>
         where S : Shell<S>, new()
     {
         protected IMultiSink Sink {get;}
-        
+
         protected Shell(IMultiSink sink)
         {
             Sink = sink;
@@ -19,19 +21,19 @@ namespace Z0
 
         protected Shell()
         {
-            Sink = TermEventSink.create(CorrelationToken.from(1));
+            Sink = WfSinks.term();
         }
 
         /// <summary>
         /// The default application path collection
         /// </summary>
-        protected static IAppPaths AppPaths 
+        protected static IAppPaths AppPaths
             => Z0.AppPaths.Default;
 
         /// <summary>
         /// The shell terminal
         /// </summary>
-        protected static ITerminal Term 
+        protected static ITerminal Term
             => Terminal.Get();
 
         public void Dispose()
@@ -39,7 +41,7 @@ namespace Z0
 
         public abstract void RunShell(params string[] args);
 
-        protected virtual void OnDispose() 
+        protected virtual void OnDispose()
             => term.warn($"Dispose handler not implemented");
 
         public virtual void OnFatalError(Exception e)
@@ -51,11 +53,11 @@ namespace Z0
         /// <summary>
         /// The parts that are not unknown
         /// </summary>
-        protected static PartIndex KnownParts 
+        protected static PartIndex KnownParts
             => LazyParts.Value;
 
-        static Lazy<PartIndex> LazyParts {get;} 
-            = z.defer(Parted.index);        
+        static Lazy<PartIndex> LazyParts {get;}
+            = z.defer(Parted.executing);
 
         protected static void Launch(params string[] args)
         {
@@ -74,7 +76,7 @@ namespace Z0
                     term.errlabel(e, $"Shell abended upon creation!");
             }
         }
-    }    
+    }
 
     /// <summary>
     /// Base class for shells with pararametric context
@@ -86,7 +88,7 @@ namespace Z0
         where C : IContext
     {
         public C Context {get;}
-    
+
         protected Shell(C context)
             : base()
         {

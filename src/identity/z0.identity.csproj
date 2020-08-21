@@ -2,12 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />        
-    <ProjectReference Include="$(Blocks)" />        
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Identify)" />
   </ItemGroup>
 

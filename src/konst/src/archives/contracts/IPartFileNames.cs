@@ -3,10 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    /// <summary>
-    /// Defines filename facilites common to all archives
-    /// </summary>
+{
     public interface IPartFileNames : IPartFileExtensions
     {
         FileName LegalFileName(OpIdentity id, FileExtension ext)
@@ -21,16 +18,16 @@ namespace Z0
         FileName LegalFileName(ApiHostUri host, FileExtension ext)
             => FileName.Define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
-        FileName AsmFileName(OpIdentity id) 
+        FileName AsmFileName(OpIdentity id)
             => LegalFileName(id, Asm);
 
         FileName AsmFileName(ApiHostUri host)
             => LegalFileName(host, Asm);
 
-        FileName HexFileName(OpIdentity id) 
-            => LegalFileName(id, Hex);       
+        FileName HexFileName(OpIdentity id)
+            => LegalFileName(id, HexLine);
 
-        FileName CilFileName(OpIdentity id) 
+        FileName CilFileName(OpIdentity id)
             => LegalFileName(id, Il);
 
         FileName ParseFileName(ApiHostUri host)

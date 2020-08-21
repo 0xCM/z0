@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -19,14 +18,17 @@ namespace Z0
 
         public FolderPath LogRoot {get;}
 
+        public FolderPath RuntimeRoot {get;}
+
         [MethodImpl(Inline)]
         public AppPaths(PartId id, FolderPath log)
         {
             AppId = id;
             LogRoot = log;
+            RuntimeRoot = FolderPath.Define(Part.RuntimeRoot);
         }
 
-        public static IAppPaths Default 
-            => new AppPaths(Part.ExecutingPart, Env.Current.LogDir);
+        public static IAppPaths Default
+            => new AppPaths(Part.ExecutingPart, EnvVars.Common.LogRoot);
     }
 }

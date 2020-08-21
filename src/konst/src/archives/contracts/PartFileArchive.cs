@@ -3,10 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
@@ -21,12 +21,12 @@ namespace Z0
         readonly IPartCaptureArchive Archive;
 
         [MethodImpl(Inline)]
-        public PartCaptureArchive(IPartCaptureArchive archive)  
+        public PartCaptureArchive(IPartCaptureArchive archive)
             => Archive = archive;
 
         static void Clear(PartId part, FilePath file, Action<FilePath> handler)
             => file.Delete().OnSome(handler);
-        
+
         static void Clear(PartId part, ReadOnlySpan<FilePath> files, Action<FilePath> handler)
         {
             var count = files.Length;
@@ -39,7 +39,7 @@ namespace Z0
 
         public void ClearExtracts(PartId part, Action<FilePath> handler)
             => Clear(part, Archive.ExtractDir, X.Extract, handler);
-        
+
         public void ClearParsed(PartId part, Action<FilePath> handler)
             => Clear(part, Archive.ParsedDir, X.Parsed, handler);
 
@@ -47,10 +47,10 @@ namespace Z0
             => Clear(part, Archive.AsmDir, X.Asm, handler);
 
         public void ClearHexCode(PartId part, Action<FilePath> handler)
-            => Clear(part, Archive.CodeDir, X.Hex, handler);
+            => Clear(part, Archive.CodeDir, X.HexLine, handler);
 
         public void ClearUnparsed(PartId part, Action<FilePath> handler)
-            => Clear(part, Archive.UnparsedDir, X.Unparsed, handler); 
+            => Clear(part, Archive.UnparsedDir, X.Unparsed, handler);
 
         public void Clear(PartId part, Action<FilePath> handler)
         {
@@ -59,6 +59,6 @@ namespace Z0
             ClearAsm(part,handler);
             ClearHexCode(part,handler);
             ClearUnparsed(part,handler);
-        }        
+        }
     }
 }

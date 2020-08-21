@@ -25,8 +25,8 @@ namespace Z0
         FolderPath Target
             => Wf.ResourceRoot + FolderName.Define("fields");
 
-        KnownParts Parts
-            => KnownParts.Service;
+        ModuleArchive Modules
+            => ModuleArchives.executing();
 
         public EmitFieldLiterals(IWfContext context, CorrelationToken ct)
         {
@@ -45,7 +45,7 @@ namespace Z0
         public void Run()
         {
             Target.Clear();
-            var parts = span(Parts.Known.Map(part => PartTypes.from(part)));
+            var parts = span(Modules.Known.Map(part => PartTypes.from(part)));
             foreach(var part in parts)
             {
                 try

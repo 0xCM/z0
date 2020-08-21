@@ -2,11 +2,10 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(VSvc)" />    
+    <ProjectReference Include="$(VSvc)" />
   </ItemGroup>
 
 </Project>

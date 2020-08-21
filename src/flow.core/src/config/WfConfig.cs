@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -13,7 +13,12 @@ namespace Z0
     /// Captures workflow configuration data
     /// </summary>
     public struct WfConfig
-    {    
+    {
+        /// <summary>
+        /// The controlling part
+        /// </summary>
+        public PartId Control;
+
         /// <summary>
         /// The controlling arguments, in raw form as supplied by the entry point or caller
         /// </summary>
@@ -22,17 +27,17 @@ namespace Z0
         /// <summary>
         /// The parts considered by the workflow
         /// </summary>
-        public PartId[] Parts;        
+        public PartId[] Parts;
 
         /// <summary>
-        /// Input data archive
-        /// </summary>        
-        public ArchiveConfig Source;
+        /// The input data archive configuration
+        /// </summary>
+        public ArchiveConfig SourceArchive;
 
         /// <summary>
-        /// Output data archive
-        /// </summary>        
-        public ArchiveConfig Target;
+        /// The output data archive configuration
+        /// </summary>
+        public ArchiveConfig TargetArchive;
 
         /// <summary>
         /// The persistent settings supplied by a json.config
@@ -42,53 +47,43 @@ namespace Z0
         /// <summary>
         /// The resource staging area
         /// </summary>
-        public FS.FolderPath ResStage;
-        
+        public ArchiveConfig Resources;
+
         /// <summary>
         /// The application-specific data root
         /// </summary>
-        public FS.FolderPath AppData;
-        
+        public ArchiveConfig AppData;
+
         /// <summary>
-        /// The application-specific log root
+        /// The specified log configuration
         /// </summary>
-        public FS.FolderPath LogRoot;
-        
+        public WfLogConfig Logs;
+
         /// <summary>
         /// The application-specific status log path
         /// </summary>
-        public FS.FilePath StatusPath;
+        public FS.FilePath StatusLog
+            => Logs.StatusLog;
 
         /// <summary>
         /// The application-specific error log path
         /// </summary>
-        public FS.FilePath ErrorPath;
+        public FS.FilePath ErrorLog
+            => Logs.ErrorLog;
 
-        public FS.FolderPath IndexRoot;
-        
         [MethodImpl(Inline)]
-        public WfConfig(string[] args, 
-            ArchiveConfig src, 
-            ArchiveConfig dst, 
-            PartId[] parts, 
-            FolderPath resroot, 
-            FolderPath appdata, 
-            WfSettings settings, 
-            FS.FolderPath? logroot = null, 
-            FS.FilePath? status = null, 
-            FS.FilePath? error = null)
+        public WfConfig(string[] args, ArchiveConfig src, ArchiveConfig dst, PartId[] parts,
+            FolderPath resroot, FolderPath appdata, FS.FolderPath logroot, WfSettings settings)
         {
+            Control = Part.ExecutingPart;
             Args = args;
-            Source = src;
-            Target = dst;
+            SourceArchive = src;
+            TargetArchive = dst;
             Parts = parts;
-            ResStage = FS.dir(resroot.Name);
-            AppData = FS.dir(appdata.Name);
+            Resources = new ArchiveConfig(resroot);
+            AppData = new ArchiveConfig(appdata);
             Settings = settings;
-            LogRoot = logroot ?? FS.dir(AppData.Name);
-            StatusPath = status ?? FS.path(LogRoot,  FS.file("status", "csv"));
-            ErrorPath = error ?? (LogRoot + FS.file("errors", "csv"));
-            IndexRoot = ResStage + FS.folder("index");
-        }    
+            Logs = new WfLogConfig(Control, logroot);
+        }
     }
 }

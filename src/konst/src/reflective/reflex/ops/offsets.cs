@@ -7,17 +7,12 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
     using static z;
 
     partial struct Reflex
     {
-        [MethodImpl(Inline), Op]
-        public static Address16 offset(Type host, FieldInfo field)
-            =>(ushort)Marshal.OffsetOf(host, field.Name);
-
         [MethodImpl(Inline), Op]
         public static Address16[] offsets(Type host, FieldInfo[] fields)
             => fields.Select(f => offset(host,f));

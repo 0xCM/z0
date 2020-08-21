@@ -12,28 +12,28 @@ namespace Z0
 
     partial struct Tooling
     {
-        public static ListedFiles listed<T,F>(ToolFiles<T,F> src)   
+        public static ListedFiles listed<T,F>(ToolFiles<T,F> src)
             where T : struct, ITool<T>
-            where F : unmanaged, Enum  
-        {   
+            where F : unmanaged, Enum
+        {
             var view = src.View;
             var buffer = sys.alloc<ListedFile>(src.Count);
             var dst = span(buffer);
             for(var i=0u; i<src.Count; i++)
-                seek(dst,i) = new ListedFile(i, skip(view,i).EmissionPath.Name);
+                seek(dst,i) = new ListedFile(i, FS.path(skip(view,i).EmissionPath.Name));
             return buffer;
         }
 
-        public static ListedFiles listed<T>(ToolFiles<T> src)   
+        public static ListedFiles listed<T>(ToolFiles<T> src)
             where T : struct, ITool<T>
-        {   
+        {
             var table = src.Table;
             var view = table.View;
             var count = table.Count;
             var buffer = sys.alloc<ListedFile>(count);
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = new ListedFile(i, skip(view,i).EmissionPath.Name);
+                seek(dst,i) = new ListedFile(i, FS.path(skip(view,i).EmissionPath.Name));
             return buffer;
         }
     }

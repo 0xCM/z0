@@ -18,23 +18,23 @@ namespace Z0
         Bench,
 
         App,
-        
+
     }
 
     class EnvConfig
     {
         public EnvConfig()
         {
-        
+
         }
 
         FolderPath OutputFolder
             => FolderPath.Define(Settings.LogRoot);
 
-        public FolderPath LogDir(LogArea target)        
+        public FolderPath LogDir(LogArea target)
             => OutputFolder + FolderName.Define(target.ToString().ToLower());
 
-        public FolderPath LogDir(LogArea target, FolderName subdir)        
+        public FolderPath LogDir(LogArea target, FolderName subdir)
             => OutputFolder + (FolderName.Define(target.ToString().ToLower()) + subdir);
     }
 
@@ -43,8 +43,8 @@ namespace Z0
         public static TestLogPaths The => default;
 
 
-        static FileExtension LogExt => FileExtensions.Log;
-        
+        static FileExtension LogExt => FileExtensions.StatusLog;
+
         public FilePath LogPath(LogArea area, string basename, FileExtension ext = null)
             => Settings.LogDir(area) + FileName.Define(basename, ext ?? LogExt);
 
@@ -69,43 +69,43 @@ namespace Z0
             var elapsed = (long) (current - first).TotalMilliseconds;
             return LogPath(area, subdir, basename, ext ?? LogExt, elapsed);
         }
-        
+
         static FilePath LogPath(LogArea area, string basename, FileExtension ext, long timestamp)
             => LogDir(area) + FileName.Define($"{basename}.{timestamp}", ext);
 
         static FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext, long timestamp)
             => LogDir(area, subdir) + FileName.Define($"{basename}.{timestamp}.{ext}", ext);
-   
+
         static EnvConfig Settings
             => new EnvConfig();
 
         static long LogDate
             => Date.Today.ToDateKey();
-        
-        static FolderPath LogDir(LogArea target)        
+
+        static FolderPath LogDir(LogArea target)
             => Settings.LogDir(target);
 
-        static FolderPath LogDir(LogArea target, FolderName subject)        
+        static FolderPath LogDir(LogArea target, FolderName subject)
             => Settings.LogDir(target, subject);
     }
 
     static class Log
-    {        
-        static TestLogPaths Paths 
+    {
+        static TestLogPaths Paths
             => TestLogPaths.The;
 
-        public static ITestLogger BenchLog 
+        public static ITestLogger BenchLog
             => BenchLogger.TheOnly;
 
         class TestLogger<A> : ITestLogger, IAppMsgContext
             where A : TestLogger<A>, new()
         {
             public static A TheOnly = new A();
-            
+
             public LogArea Area {get;}
 
             protected object locker = new object();
-            
+
             protected TestLogger(LogArea area)
             {
                 Area = area;
@@ -116,19 +116,19 @@ namespace Z0
 
             void Emit<R>(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)
                 where R : ITabular
-            {                
+            {
                 if(records.Count == 0)
                     return;
 
                 if(header)
                     dst.AppendLine(string.Join(delimiter, records[0].HeaderNames));
-                
+
                 Root.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
             }
 
             FilePath ComputePath(FolderName subdir, string basename, bool create, FileExtension ext)
-                => create 
-                    ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename,ext) : Paths.UniqueLogPath(Area, subdir, basename,ext)) 
+                => create
+                    ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename,ext) : Paths.UniqueLogPath(Area, subdir, basename,ext))
                     : (subdir.IsEmpty ?  Paths.LogPath(Area, basename, ext) : Paths.LogPath(Area, subdir, basename, ext)) ;
 
             public FilePath Write<R>(IEnumerable<R> src, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header = true, FileExtension ext = null)
@@ -136,7 +136,7 @@ namespace Z0
             {
                 var records = src.ToArray();
                 if(records.Length == 0)
-                    return FilePath.Empty;                
+                    return FilePath.Empty;
 
                 var path = ComputePath(subdir,basename, mode == LogWriteMode.Create, ext);
 
@@ -167,7 +167,7 @@ namespace Z0
 
         sealed class AppLogger : TestLogger<AppLogger>
         {
-            public AppLogger()            
+            public AppLogger()
              : base(LogArea.App)
             {
 
@@ -176,7 +176,7 @@ namespace Z0
 
         sealed class BenchLogger : TestLogger<BenchLogger>
         {
-            public BenchLogger()            
+            public BenchLogger()
              : base(LogArea.Bench)
             {
 

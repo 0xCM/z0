@@ -5,41 +5,44 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
-    using static Flow;
+    using static Shell;
+
     using static z;
 
+    readonly struct Shell
+    {
+        public const PartId ShellId = PartId.Tools;
+
+        public const string ShellName = nameof(PartId.Tools) + "/" + nameof(App);
+    }
+
     class App : AppShell<App,IAppContext>
-    {        
-        public const PartId Part = PartId.Tools;
-        
-        public const string PartName = nameof(PartId.Tools);
+    {
 
-        public const string ActorName = PartName + "/" + nameof(App);
+        public CorrelationToken Ct {get;}
 
-        public CorrelationToken Ct {get;}         
-                
         public App()
             : base(Flow.app())
         {
-            Ct = CorrelationToken.from(Part);   
+            Ct = correlate(ShellId);
         }
 
         public override void RunShell(params string[] args)
-        {                        
+        {
             try
             {
-                var config = Flow.configure(Context,args, Ct);            
-                using var log = Flow.log(config);                
-                using var wf = Flow.context(Context, config, log, Ct);                                
-                Flow.status(wf, ActorName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct);
+                var config = Flow.configure(Context,args, Ct);
+                using var log = Flow.log(config);
+                using var wf = Flow.context(Context, config, log, Ct);
+                Flow.status(wf, ShellName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct);
 
-                Flow.status(wf, ActorName, "Shell run complete", Ct);
+                Flow.status(wf, ShellName, "Shell run complete", Ct);
             }
             catch(Exception e)
             {
-                Raise(Flow.error(ActorName, e, Ct));                
+                Raise(Flow.error(ShellName, e, Ct));
             }
 
         }
@@ -49,7 +52,7 @@ namespace Z0
 
         protected override void OnDispose()
         {
-            
+
         }
     }
 

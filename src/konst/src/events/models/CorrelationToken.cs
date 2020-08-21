@@ -8,25 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+    using static z;
+
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
     /// </summary>
     public readonly struct CorrelationToken : ITextual, IComparable<CorrelationToken>, IEquatable<CorrelationToken>
     {
         public readonly ulong Value;
-
-        [MethodImpl(Inline)]
-        public static CorrelationToken from(ulong value)
-            => new CorrelationToken(value);
-
-        [MethodImpl(Inline)]
-        public static CorrelationToken from(PartId part)
-            => new CorrelationToken((ulong)part);
-
-        [MethodImpl(Inline)]
-        public static CorrelationToken create()
-            => new CorrelationToken((ulong)z.now().Ticks);
 
         [MethodImpl(Inline)]
         public static implicit operator ulong (CorrelationToken src)
@@ -43,34 +32,34 @@ namespace Z0
         [MethodImpl(Inline)]
         public CorrelationToken(ulong value)
             => Value = value;
-        
-        public bool IsEmpty 
+
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Value == 0;
         }
-         
+
         [MethodImpl(Inline)]
         public bool Equals(CorrelationToken src)
             => Value == src.Value;
-       
+
         [MethodImpl(Inline)]
         public int CompareTo(CorrelationToken other)
             => Value.CompareTo(other.Value);
 
         public override string ToString()
             => Value.ToString();
- 
+
         public override int GetHashCode()
-            => (int)z.hash(Value);
+            => (int)hash(Value);
 
         public override bool Equals(object src)
             => src is CorrelationToken t && Equals(t);
 
         public string Format()
             => Value.ToString();
-        
-        public static CorrelationToken Empty 
+
+        public static CorrelationToken Empty
             => default;
     }
 }

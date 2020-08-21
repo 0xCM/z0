@@ -1,9 +1,4 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <PropertyGroup>
-    <LogDir>$(ZLogs)\</LogDir>
-    <ResLibDir>$(LogDir)res\bin\lib\netcoreapp3.0\</ResLibDir>
-    <ResBytesLib>z0.res</ResBytesLib>
-  </PropertyGroup>
 
 </Project>

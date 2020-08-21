@@ -9,10 +9,11 @@ namespace Z0.XedWf
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
     using E = Z0.XedWf;
-    
+
     [ApiHost]
-    public readonly struct WfEvents
+    public readonly struct XedEvents
     {
         [MethodImpl(Inline), Op]
         public static E.ParsingInstructions ParsingInstructions(FilePath src, CorrelationToken? ct = null)
@@ -24,9 +25,9 @@ namespace Z0.XedWf
 
         [MethodImpl(Inline), Op]
         public static WfEventId id(string name, CorrelationToken? ct = null)
-            => WfEventId.define(name, ct ?? CorrelationToken.create(), z.now());
+            => WfEventId.define(name, correlate(ct), timestamp());
 
         public static WfEventId id<T>(CorrelationToken? ct = null)
-            => WfEventId.define(typeof(T).Name, ct ?? CorrelationToken.create(), z.now());
+            => WfEventId.define(typeof(T).Name, correlate(ct), timestamp());
     }
 }

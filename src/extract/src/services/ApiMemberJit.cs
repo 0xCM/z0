@@ -13,6 +13,7 @@ namespace Z0
     using Z0.Events;
 
     using static Konst;
+    using static z;
 
     public readonly struct ApiMemberJit
     {
@@ -165,7 +166,7 @@ namespace Z0
                 var methods = DirectMethods(host);
                 if(methods.Length != 0)
                 {
-                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, CorrelationToken.from(PartId.None)));
+                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, correlate(0ul)));
                     dst.AddRange(methods);
                 }
             }
@@ -180,7 +181,7 @@ namespace Z0
                 var methods = GenericMethods(host);
                 if(methods.Length != 0)
                 {
-                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, CorrelationToken.from(PartId.None)));
+                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, correlate(0ul)));
                     dst.AddRange(methods);
                 }
             }

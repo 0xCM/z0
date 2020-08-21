@@ -1,22 +1,27 @@
 <Project>
 
+  <Import Project="z0.props"/>
+
   <PropertyGroup>
-    <TopDir>$(MSBuildThisFileDirectory)</TopDir>    
-    <Src>$(TopDir)src/</Src>
-    <Test>$(TopDir)test/</Test>
-    <Native>$(TopDir)native/</Native>
-    <SrcDir>$(TopDir)src/</SrcDir>
-    <TestDir>$(TopDir)test/</TestDir>
-    <NativeDir>$(TopDir)native/</NativeDir>    
-    <BuildRootDir>$(TopDir)bin\</BuildRootDir>    
+    <TopDir>$(MSBuildThisFileDirectory)</TopDir>
+    <Src>$(TopDir)src\</Src>
+    <Test>$(TopDir)test\</Test>
+    <Native>$(TopDir)native\</Native>
+    <SrcDir>$(TopDir)src\</SrcDir>
+    <TestDir>$(TopDir)test\</TestDir>
+    <NativeDir>$(TopDir)native\</NativeDir>
+    <BuildRootDir>$(TopDir)bin\</BuildRootDir>
+    <ResBytesLib>z0.res</ResBytesLib>
   </PropertyGroup>
 
-  <Import Project="$(Src)symbols.props"/>  
-  <Import Project="$(Native)symbols.props"/>
-  <Import Project=".props/version.props"/>    
-  <Import Project=".props/options.props"/>    
-  <Import Project=".props/locations.props"/>    
+  <Import Project=".props/options.props"/>
 
-  <Import Project="z0.props"/>    
+  <Import Project="$(Src)symbols.props"/>
+
+  <Import Project="$(Native)symbols.props"/>
+
+  <Import Project=".props/version.props"/>
+
+  <Import Project=".props/locations.props"/>
 
 </Project>

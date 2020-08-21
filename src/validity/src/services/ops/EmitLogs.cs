@@ -14,14 +14,14 @@ namespace Z0
         void EmitLogs()
         {
             var basename = AppName;
-            
+
             var benchmarks = SortBenchmarks();
             if(benchmarks.Any())
                 EmitBenchmarkLog(basename.Replace(".test",".bench"),benchmarks, LogWriteMode.Overwrite);
-            
+
             var results = SortResults();
             if(results.Any())
-                EmitTestCaseLog(AppPaths.TestResultFolder, basename, results);
+                EmitTestCaseLog(AppPaths.OutcomeFolder, basename, results);
 
         }
 
@@ -29,7 +29,7 @@ namespace Z0
         {
             if(records.Length == 0)
                 return FilePath.Empty;
-            
+
             return TestLog.Create().Write(records, subdir, basename, LogWriteMode.Overwrite, Chars.Pipe, true, FileExtension.Define("csv"));
         }
 
@@ -38,7 +38,7 @@ namespace Z0
         {
             if(records.Length == 0)
                 return FilePath.Empty;
-            
+
             return TestLog.Create().Write(records, subdir, basename, LogWriteMode.Overwrite, Chars.Pipe, true, FileExtension.Define("csv"));
         }
 
@@ -47,7 +47,7 @@ namespace Z0
         {
             if(records.Length == 0)
                 return FilePath.Empty;
-                        
+
             return Z0.Log.BenchLog.Write(records, FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 

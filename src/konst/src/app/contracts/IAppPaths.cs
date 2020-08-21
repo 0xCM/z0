@@ -8,16 +8,46 @@ namespace Z0
 
     public interface IAppPaths : ITextual
     {
+        FolderPath RuntimeRoot
+            => FolderPath.Define(Part.RuntimeRoot);
+
+        /// <summary>
+        /// The global application log root
+        /// </summary>
+        FolderPath LogRoot
+            => EnvVars.Common.LogRoot;
+
+        /// <summary>
+        /// The executing application's name
+        /// </summary>
+        string AppName
+            => AppId.Format();
+
+        FS.FolderPath AppLogRoot
+            => FS.dir(text.format("{0}/apps/{1}/logs", LogRoot.Name, AppName));
+
+        /// <summary>
+        /// The path to the root development directory
+        /// </summary>
+        FolderPath DevRoot
+            => EnvVars.Common.DevRoot;
+
+        /// <summary>
+        /// The path to the root development directory
+        /// </summary>
+        FolderPath PubRoot
+            => EnvVars.Common.PubRoot;
+
         /// <summary>
         /// The name of the folder that receives standard out stream data
         /// </summary>
-        FolderName StandardOutFolder 
-            => FolderName.Define("stdout");
+        FolderName StatusLogFolder
+            => FolderName.Define("status");
 
         /// <summary>
         /// The name of the folder that receives error stream data
         /// </summary>
-        FolderName ErrorOutFolder 
+        FolderName ErrorLogFolder
             => FolderName.Define("errors");
 
         /// <summary>
@@ -41,7 +71,7 @@ namespace Z0
         /// <summary>
         /// The name of an application resource folder
         /// </summary>
-        FolderName ResoureFolder 
+        FolderName ResourceFolder
             => FolderName.Define("res");
 
         /// <summary>
@@ -53,31 +83,31 @@ namespace Z0
         /// <summary>
         /// The name of the folder into which test results are deposited
         /// </summary>
-        FolderName TestResultFolder 
+        FolderName OutcomeFolder
             => FolderName.Define("results");
 
         /// <summary>
         /// The name of the runtime log folder
         /// </summary>
-        FolderName RuntimeLogFolder
+        FolderName AppLogFolder
             => FolderName.Define("apps");
 
         /// <summary>
         /// The name of the folder into which capture results are deposited
         /// </summary>
-        FolderName CaptureFolder 
-            => FolderName.Define("capture");        
+        FolderName CaptureFolder
+            => FolderName.Define("capture");
 
         /// <summary>
         /// The name of the development source folder
         /// </summary>
-        FolderName SrcFolder 
-            => FolderName.Define("src");        
+        FolderName DevSrcFolder
+            => FolderName.Define("src");
 
         /// <summary>
         /// The name of an application configuration file
         /// </summary>
-        FileName ConfigFileName 
+        FileName ConfigFileName
             => FileName.Define("config.json");
 
         /// <summary>
@@ -85,24 +115,6 @@ namespace Z0
         /// </summary>
         FolderName ResIndexFolder
             => FolderName.Define("index");
-
-        /// <summary>
-        /// The global application log root
-        /// </summary>
-        FolderPath LogRoot 
-            => Env.Current.LogDir;
-
-        /// <summary>
-        /// The path to the root development directory
-        /// </summary>
-        FolderPath DevRoot 
-            => Env.Current.DevDir;
-
-        /// <summary>
-        /// The path to the root data directory
-        /// </summary>
-        FolderPath TrackedDataRoot 
-            => DevRoot + DataFolder;
 
         /// <summary>
         /// The path to the directory that contains runtime configuration data
@@ -113,7 +125,7 @@ namespace Z0
         /// <summary>
         /// The path to the root application resource directory
         /// </summary>
-        FolderPath ResourceRoot 
+        FolderPath ResourceRoot
             => LogRoot + FolderName.Define("respack/content");
 
         /// <summary>
@@ -121,24 +133,13 @@ namespace Z0
         /// </summary>
         FolderPath ResIndexDir
             => ResourceRoot + ResIndexFolder;
-            
-        /// <summary>
-        /// The runtime root
-        /// </summary>
-        FolderPath RuntimeRoot
-            => LogRoot +  RuntimeLogFolder;
 
         /// <summary>
         /// The executing application's part identifier
         /// </summary>
-        PartId AppId 
+        PartId AppId
             => Part.ExecutingPart;
 
-        /// <summary>
-        /// The executing application's name
-        /// </summary>
-        string AppName 
-            => AppId.Format();
 
         /// <summary>
         /// The executing application's folder name
@@ -149,32 +150,32 @@ namespace Z0
         /// <summary>
         /// The root test directory
         /// </summary>
-        FolderPath TestLogRoot 
+        FolderPath TestLogRoot
             => LogRoot + TestLogFolder;
 
         /// <summary>
         /// The build staging directory
         /// </summary>
         FolderPath BuildStage
-            => LogRoot + FolderName.Define("builds");        
+            => LogRoot + FolderName.Define("builds");
 
         /// <summary>
         /// The directory into into which standard out stream emissions are deposited
         /// </summary>
-        FolderPath AppStandardOut 
-            => RuntimeRoot + StandardOutFolder;
+        FolderPath AppStandardOut
+            => RuntimeRoot + StatusLogFolder;
 
         /// <summary>
         /// The path to the global test error log directory
         /// </summary>
-        FolderPath AppErrorOut 
-            => RuntimeRoot + ErrorOutFolder;
+        FolderPath AppErrorOut
+            => RuntimeRoot + ErrorLogFolder;
 
         /// <summary>
         /// The executing application's standard out log filename
         /// </summary>
-        FileName AppStandardOutName 
-            => FileName.Define($"{AppName}.stdout", FileExtensions.Log);
+        FileName AppStandardOutName
+            => FileName.Define($"{AppName}.stdout", FileExtensions.StatusLog);
 
         /// <summary>
         /// The executing application's standard out log filename
@@ -185,8 +186,8 @@ namespace Z0
         /// <summary>
         /// The executing application's error log filename
         /// </summary>
-        FileName AppErrorOutName 
-            => FileName.Define($"{AppName}.errors", FileExtensions.Log);
+        FileName AppErrorOutName
+            => FileName.Define($"{AppName}.errors", FileExtensions.StatusLog);
 
         /// <summary>
         /// The executing application's data filename
@@ -197,11 +198,11 @@ namespace Z0
         /// <summary>
         /// The executing application's standard out log path
         /// </summary>
-        FilePath AppStandardOutPath 
+        FilePath AppStandardOutPath
             => AppStandardOut + AppStandardOutName;
-        
+
         /// <summary>
-        /// The executing application's error log path 
+        /// The executing application's error log path
         /// </summary>
         FilePath AppErrorOutPath
             => AppErrorOut + AppErrorOutName;
@@ -209,25 +210,25 @@ namespace Z0
         /// <summary>
         /// The application-relative source code directory
         /// </summary>
-        FolderPath AppDevRoot 
-            => (DevRoot +  SrcFolder) + AppFolder;
+        FolderPath AppDevRoot
+            => (DevRoot +  DevSrcFolder) + AppFolder;
 
         /// <summary>
         /// The executing application's configuration file path
         /// </summary>
-        FilePath AppConfigPath 
+        FilePath AppConfigPath
             => AppDevRoot + ConfigFileName;
 
         /// <summary>
         /// The executing application's data directory
         /// </summary>
-        FolderPath AppDataRoot 
-            => (LogRoot + RuntimeLogFolder) + AppFolder;
+        FolderPath AppDataRoot
+            => (LogRoot + AppLogFolder) + AppFolder;
 
         /// <summary>
         /// The application-relative capture directory
         /// </summary>
-        FolderPath AppCaptureRoot 
+        FolderPath AppCaptureRoot
             => AppDataRoot + CaptureFolder;
 
         /// <summary>
@@ -235,26 +236,26 @@ namespace Z0
         /// </summary>
         FolderPath MachineCaptureRoot
             =>  ResourceRoot + CaptureFolder;
-        
+
         /// <summary>
         /// The root folder for test-specific data
         /// </summary>
-        FolderPath TestDataRoot 
+        FolderPath TestDataRoot
             => TestLogRoot + TestDataFolder;
 
         /// <summary>
         /// The path to the global test error log directory
         /// </summary>
-        FolderPath TestErrorOut 
-            => TestLogRoot + ErrorOutFolder;
+        FolderPath TestErrorOut
+            => TestLogRoot + ErrorLogFolder;
 
-        FilePath TestErrorPath 
+        FilePath TestErrorPath
             => TestErrorOut + AppErrorOutName;
 
-        FolderPath TestStandardOutDir 
-            => TestLogRoot + StandardOutFolder;
+        FolderPath TestStandardOutDir
+            => TestLogRoot + StatusLogFolder;
 
-        FilePath TestStandardPath 
+        FilePath TestStandardPath
             => TestStandardOutDir + AppStandardOutName;
 
         FilePath CaseLogPath
@@ -263,28 +264,28 @@ namespace Z0
         /// <summary>
         /// The directory into which structured data describing test results are deposited
         /// </summary>
-        FolderPath TestResults 
-            => TestLogRoot + TestResultFolder;
+        FolderPath TestResults
+            => TestLogRoot + OutcomeFolder;
 
 
         /// <summary>
         /// The name of the root bench partition
         /// </summary>
-        FolderName BenchRootFolder 
+        FolderName BenchRootFolder
             => FolderName.Define("bench");
 
         /// <summary>
         /// The directory into which structured data describing test results are deposited
         /// </summary>
-        FolderPath BenchResults 
+        FolderPath BenchResults
             => LogRoot + BenchRootFolder;
 
         /// <summary>
         /// The application-specific bench result file path
         /// </summary>
         FilePath BenchResultPath
-            => BenchResults + FileName.Define($"{AppName}", FileExtensions.Csv);        
- 
+            => BenchResults + FileName.Define($"{AppName}", FileExtensions.Csv);
+
         /// <summary>
         /// Creates a provider rooted at the current root directory for another application
         /// </summary>
@@ -303,10 +304,10 @@ namespace Z0
         /// Defines a parametrically-identified test-specific data folder
         /// </summary>
         /// <typeparam name="T">The test host type</typeparam>
-        FolderPath TestDataDir<T>() 
+        FolderPath TestDataDir<T>()
             => TestDataDir(typeof(T));
 
-        string ITextual.Format() 
+        string ITextual.Format()
             => AppName;
     }
 }

@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <AssemblyVersion>1.0.43</AssemblyVersion>
-    <VersionPrefix>$(AssemblyVersion)</VersionPrefix>    
+    <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
   </PropertyGroup>
-
 
 </Project>

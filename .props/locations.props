@@ -1,13 +1,15 @@
 <Project>
 
   <PropertyGroup>
-    <IntermediateBuildDir>$(BuildRootDir)obj\$(MSBuildProjectName)\</IntermediateBuildDir>
+    <LogDir>$(ZLogs)\</LogDir>
+    <ResLibDir>$(LogDir)res\bin\lib\$(TargetFramework)\</ResLibDir>
+    <IntermediateBuildDir>$(BuildRootDir)$(MSBuildProjectName)\</IntermediateBuildDir>
+    <LibBuildDir>$(BuildRootDir)lib\</LibBuildDir>
     <BaseIntermediateOutputPath>$(IntermediateBuildDir)</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(IntermediateBuildDir)</IntermediateOutputPath>
-    <LibBuildDir>$(BuildRootDir)lib\</LibBuildDir>            
-    <DocumentationFile>$(LibBuildDir)$(MsBuildProjectName).xml</DocumentationFile>
+    <DocumentationFile>$(LibBuildDir)$(TargetFramework)\$(MsBuildProjectName).xml</DocumentationFile>
     <OutputDir>$(LibBuildDir)</OutputDir>
-    <OutputPath>$(LibBuildDir)</OutputPath>    
+    <OutputPath>$(LibBuildDir)</OutputPath>
   </PropertyGroup>
 
 </Project>

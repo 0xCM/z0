@@ -3,16 +3,18 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
 
     using static FS;
 
     partial struct FS
     {
-        public readonly struct Tool : ITool<Tool>
+        public readonly struct Tool : IModule<Tool>
         {
-            public FS.FileName Name {get;}        
+            public FilePath Path {get;}
+
+            public ModuleKind Kind => ModuleKind.Unknown;
         }
     }
 }

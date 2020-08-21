@@ -2,14 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />    
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(Dynamic)" />    
+    <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(BitCore)" />
   </ItemGroup>
 

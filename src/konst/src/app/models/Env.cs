@@ -3,10 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -14,40 +14,18 @@ namespace Z0
     /// </summary>
     public readonly struct Env
     {
-        public FolderPath LogDir {get;}
-    
-        public FolderPath DevDir {get;}        
+        public readonly FolderPath LogRoot;
 
-        public const string LogDirName = "ZLogs";
+        public readonly FolderPath DevRoot;
 
-        public const string DevDirName = "ZDev";
+        public readonly FolderPath PubRoot;
 
         [MethodImpl(Inline)]
-        public static EnvVar define(string name, string value)
-            => new EnvVar(name,value);
-
-        [MethodImpl(Inline)]
-        public static EnvVar<T> define<T>(string name, T value)
-            => new EnvVar<T>(name,value);
-        
-        [MethodImpl(Inline)]
-        public static EnvVar readvar(string name) 
-            => new EnvVar(name, Environment.GetEnvironmentVariable(name));
-        
-        public static Env read()
+        public Env(EnvVar<FolderPath> log, EnvVar<FolderPath> dev, EnvVar<FolderPath> archive)
         {
-            var log = readvar(LogDirName).Transform(FolderPath.Define);
-            var dev = readvar(DevDirName).Transform(FolderPath.Define);
-            return new Env(log,dev);
-        }
-        
-        public static Env Current
-            => read();
-
-        internal Env(EnvVar<FolderPath> log, EnvVar<FolderPath> dev)
-        {
-            LogDir = log;
-            DevDir = dev;
+            LogRoot = log;
+            DevRoot = dev;
+            PubRoot = archive;
         }
     }
 }

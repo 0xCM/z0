@@ -15,12 +15,12 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     partial class BitGrid
-    {                
+    {
         /// <summary>
         /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -170,8 +170,8 @@ namespace Z0
             where W: unmanaged, ITypeNat
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
-            where T: unmanaged        
-                => FileName.Define($"{label}_{sigtext(w,m,n,t)}","grid");            
+            where T: unmanaged
+                => FileName.Define($"{label}_{sigtext(w,m,n,t)}","grid");
 
         /// <summary>
         /// Creates a grid writer predicated on type parameters
@@ -189,8 +189,8 @@ namespace Z0
             where W: unmanaged, ITypeNat
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
-            where T: unmanaged        
-                => ((Env.Current.LogDir + FolderName.Define("grids")) +  filename(label,w,m,n,t)).Writer();
+            where T: unmanaged
+                => ((EnvVars.Common.LogRoot + FolderName.Define("grids")) +  filename(label,w,m,n,t)).Writer();
 
         /// <summary>
         /// Exports grid data to a file
@@ -295,6 +295,6 @@ namespace Z0
         }
 
          static string HeaderSep
-            => new string('-',80);     
+            => new string('-',80);
     }
 }

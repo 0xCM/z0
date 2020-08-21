@@ -14,47 +14,47 @@ namespace Z0
 
     public readonly struct CodeReader
     {
-        public static IEnumerable<IdentifiedCodeIndex> identified(FolderPath src, IWfEventSink sink, params PartId[] owners)     
+        public static IEnumerable<IdentifiedCodeIndex> identified(FolderPath src, IWfEventSink sink, params PartId[] owners)
         {
             if(owners.Length != 0)
             {
-                foreach(var owner in owners)            
+                foreach(var owner in owners)
                 foreach(var file in Files(src, owner))
                 {
                     var idx = index(file, sink);
                     if(idx.IsNonEmpty)
                         yield return idx;
                 }
-            }  
+            }
             else
             {
                 foreach(var file in Files(src))
-                {                    
+                {
                     var idx = index(file, sink);
                     if(idx.IsNonEmpty)
                         yield return idx;
                 }
-            }          
+            }
         }
 
-        public static IEnumerable<FilePath> Files(FolderPath src) 
-            => src.Files(FileExtensions.Hex, true);
+        public static IEnumerable<FilePath> Files(FolderPath src)
+            => src.Files(FileExtensions.HexLine, true);
 
-        public static IEnumerable<FilePath> Files(FolderPath src, PartId owner) 
-            => src.Files(owner, FileExtensions.Hex, true);
+        public static IEnumerable<FilePath> Files(FolderPath src, PartId owner)
+            => src.Files(owner, FileExtensions.HexLine, true);
 
-        public static FilePath[] files(FolderPath root, PartId owner) 
-            => root.Files(owner, FileExtensions.Hex, true).Array();
+        public static FilePath[] files(FolderPath root, PartId owner)
+            => root.Files(owner, FileExtensions.HexLine, true).Array();
 
         public static FilePath[] files(FolderPath root)
-            => root.Files(FileExtensions.Hex, true).Array();
+            => root.Files(FileExtensions.HexLine, true).Array();
 
         public static IdentifiedCode[] read(FilePath src)
             => EncodedHexReader.Service.Read(src).Where(x => x.IsNonEmpty).Array();
 
         public static IdentifiedCode[] read(FolderPath root, ApiHostUri host)
         {
-            var hfn = ApiHostUri.HostFileName(host.Owner, host.Name, FileExtensions.Hex);
+            var hfn = ApiHostUri.HostFileName(host.Owner, host.Name, FileExtensions.HexLine);
             var path = files(root).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
             return read(path);
         }
@@ -68,12 +68,12 @@ namespace Z0
                 return IdentifiedCodeIndex.Empty;
             }
 
-            var dst = z.list<IdentifiedCode>();                
+            var dst = z.list<IdentifiedCode>();
             foreach(var item in read(src))
                 if(item.IsNonEmpty)
                     dst.Add(item);
-            
-            return Encoded.index(uri.Value, dst.Array());                        
+
+            return Encoded.index(uri.Value, dst.Array());
         }
     }
 }

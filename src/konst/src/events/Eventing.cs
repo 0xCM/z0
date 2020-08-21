@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="content">The event content</param>
         [MethodImpl(Inline)]
         public static AppError<T> error<T>(string source, T content)
-            => new AppError<T>(EventId.define(nameof(AppError), source), content);        
+            => new AppError<T>(EventId.define(nameof(AppError), source), content);
     }
 }

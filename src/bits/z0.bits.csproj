@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +11,7 @@
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(BitMatrix)" />
-    <ProjectReference Include="$(BitPack)" />    
+    <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitSpans)" />
     <ProjectReference Include="$(BitStrings)" />
     <ProjectReference Include="$(BitSvc)" />

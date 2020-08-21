@@ -11,27 +11,24 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct Flow
     {
-        public static string AppName 
+        public static string AppName
         {
             [MethodImpl(Inline), Op]
             get => Assembly.GetEntryAssembly().GetSimpleName();
-        }        
+        }
 
         [MethodImpl(Inline), Op]
         public static IAppContext app()
-            => AppContext.create(AppPaths.Default, 
-                ApiComposition.Assemble(SelectedParts.Known), 
-                Polyrand.Pcg64(PolySeed64.Seed05));           
+            => ContextFactory.create();
 
-        readonly struct SelectedParts : IContentIndex<IPart>
-        {        
-            public static IPart[] Known
-                => KnownParts.Service.Known.Where(r => r.Id != 0).ToArray();
-            
-            IPart[] IContented<IPart[]>.Content
-                => new IPart[]{Parts.GMath.Resolved};
-        }
+        // {
+        //     var paths = AppPaths.Default;
+        //     var modules = ModuleArchives.from(paths.RuntimeRoot);
+        //     return AppContext.create(paths,
+        //         ApiPart.Assemble(modules),
+        //         Polyrand.Pcg64(PolySeed64.Seed05));
+        // }
     }
 }

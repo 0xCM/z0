@@ -3,16 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface IPartLogPaths : IPartFolderPaths, IPartLogExtensions  
+{
+    public interface IPartLogPaths : IPartFolderPaths, IPartLogExtensions
     {
-        FilePath PartMessagLogPath(FolderPath root, PartId id)
-            => PartExeRoot(root) + FileName.Define(id.Format(), StdOut);
+        FilePath StatusLogPath(FolderPath root, PartId id)
+            => PartExeRoot(root) + FileName.Define(id.Format(), StatusLog);
 
-        FilePath PartErrorLogPath(FolderPath root, PartId id)
-            => PartExeRoot(root) + FileName.Define(id.Format(), ErrOut);
+        FilePath ErrorLogPath(FolderPath root, PartId id)
+            => PartExeRoot(root) + FileName.Define(id.Format(), ErrorLog);
 
-        FilePath HostLogPath(FolderPath root, ApiHostUri host)
-            => LogDirPath(root) + FileName.Define(host.Name, Log);
+        FilePath StatusLogPath(FolderPath root, ApiHostUri host)
+            => LogDirPath(root) + FileName.Define(host.Name, StatusLog);
     }
 }

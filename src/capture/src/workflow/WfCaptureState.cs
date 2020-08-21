@@ -8,21 +8,21 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-        
+
     public readonly struct WfCaptureState : IWfCaptureState
     {
         public IWfContext Wf {get;}
 
         public IAppContext Root {get;}
-        
+
         public IAsmContext Asm {get;}
 
         public IWfCaptureService CWf {get;}
-        
+
         public CaptureConfig Settings {get;}
 
         public WfConfig Config {get;}
-        
+
         public AsmFormatSpec FormatConfig {get;}
 
         public AsmFormatter Formatter {get;}
@@ -30,7 +30,7 @@ namespace Z0.Asm
         public TCaptureServices Services{get;}
 
         public IAsmDecoder RoutineDecoder {get;}
-        
+
         public CorrelationToken Ct {get;}
 
         public IWfCaptureBroker CaptureBroker {get;}
@@ -38,38 +38,38 @@ namespace Z0.Asm
         readonly IWfEventLog Log;
 
         [MethodImpl(Inline)]
-        public WfCaptureState(IWfContext wf, IAsmContext asm, WfConfig config, CorrelationToken ct)        
+        public WfCaptureState(IWfContext wf, IAsmContext asm, WfConfig config, CorrelationToken ct)
         {
             Wf = wf;
             Root = wf.ContextRoot;
-            Asm = asm;            
+            Asm = asm;
             Ct = ct;
-            Config = config;     
-            Log = Flow.log(Config);   
+            Config = config;
+            Log = Flow.log(Config);
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.AppPaths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
             var dst = new ArchiveConfig(dstpath);
-            Settings = CaptureConfig.From(wf.ContextRoot.Settings);                             
-            Services = CaptureServices.create(Asm);            
+            Settings = CaptureConfig.From(wf.ContextRoot.Settings);
+            Services = CaptureServices.create(Asm);
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
-            Formatter = Services.Formatter(FormatConfig);            
-            RoutineDecoder = Services.RoutineDecoder(FormatConfig); 
-            CWf = new CaptureWorkflow(Asm, Wf, RoutineDecoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.Target), Ct);    
+            Formatter = Services.Formatter(FormatConfig);
+            RoutineDecoder = Services.RoutineDecoder(FormatConfig);
+            CWf = new CaptureWorkflow(Asm, Wf, RoutineDecoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.TargetArchive), Ct);
             CaptureBroker = WfBuilder.capture(Log, ct);
         }
 
         public void Dispose()
         {
-            Log.Dispose();            
-        }                
-        
-        public ICaptureContext CaptureContext 
+            Log.Dispose();
+        }
+
+        public ICaptureContext CaptureContext
             => CWf.Context;
 
-        public IAppEventSink AppEventSink 
+        public IAppEventSink AppEventSink
             => CWf.Broker.Sink;
-                
+
         public IWfEventSink WfEventSink
             => Wf.Broker.Sink;
 
@@ -102,9 +102,6 @@ namespace Z0.Asm
 
         public void Error(string actor, string message, CorrelationToken ct)
             => Wf.Error(actor, message, ct);
-
-        // public void Status<T>(string actor, T mesage, CorrelationToken ct)
-        //     => Wf.Status(actor, mesage, ct);
 
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent

@@ -9,23 +9,27 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
     using static Seq;
 
     /// <summary>
-    /// Refies a canonical sequence container with content that need not be finite
+    /// Defines a LINQ-monadic cover for a deferred finite or infinite parametric sequence
     /// </summary>
     public readonly struct Seq<T> : IDeferred<Seq<T>,T>
     {
-        public readonly IEnumerable<T> Source;
-        
+        readonly IEnumerable<T> Source;
+
+        [MethodImpl(Inline)]
+        public Seq(IEnumerable<T> src)
+            => Source = src;
+
         public readonly IEnumerable<T> Content
         {
-            [MethodImpl(Inline)]   
+            [MethodImpl(Inline)]
             get => Source;
         }
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static Seq<T> operator + (Seq<T> lhs, Seq<T> rhs)
             => lhs.Concat(rhs);
 
@@ -36,9 +40,6 @@ namespace Z0
         public static implicit operator Seq<T>(T[] src)
             => new Seq<T>(src);
 
-        [MethodImpl(Inline)]   
-        public Seq(IEnumerable<T> src)
-            => Source = src;
 
         [MethodImpl(Inline)]
         public Seq<T> WithContent(IEnumerable<T> src)
@@ -47,7 +48,7 @@ namespace Z0
         public Seq<T> Concat(Seq<T> rhs)
             => new Seq<T>(Content.Concat(rhs.Content));
 
-        public Seq<Y> Select<Y>(Func<T,Y> selector)       
+        public Seq<Y> Select<Y>(Func<T,Y> selector)
              => from(from x in Content select selector(x));
 
         public Seq<Z> SelectMany<Y,Z>(Func<T,Seq<Y>> lift, Func<T,Y,Z> project)
@@ -63,7 +64,7 @@ namespace Z0
         public Seq<T> Where(Func<T,bool> predicate)
             => from(from x in Content where predicate(x) select x);
 
-        public static Seq<T> Empty 
+        public static Seq<T> Empty
             => new Seq<T>(sys.empty<T>());
     }
 }

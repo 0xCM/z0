@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static z;
+
     public interface ICorrelated
     {
-        CorrelationToken Ct 
-            => CorrelationToken.create();
+        CorrelationToken Ct
+            => correlate(0ul);
     }
 
     public interface ICorrelated<F> : ICorrelated

@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     public sealed class AppMsgExchange : IAppMsgQueue
@@ -16,18 +16,12 @@ namespace Z0
         readonly IAppMsgQueue Queue;
 
         /// <summary>
-        /// Creates an exchange over an existing queue
-        /// </summary>
-        public static AppMsgExchange Create(IAppMsgQueue queue)
-            => new AppMsgExchange(queue);
-
-        /// <summary>
         /// Creates an exchange and underlying queue
         /// </summary>
         public static AppMsgExchange Create()
             => new AppMsgExchange(AppMsgQueue.Create());
 
-        AppMsgExchange(IAppMsgQueue dst)
+        public AppMsgExchange(IAppMsgQueue dst)
         {
             Queue = dst;
             Queue.Next += Relay;
@@ -38,9 +32,9 @@ namespace Z0
         {
             term.print(src);
         }
-        
-        public event Action<IAppMsg> Next;        
-        
+
+        public event Action<IAppMsg> Next;
+
         [MethodImpl(Inline)]
         public void Notify(string msg, MessageKind? severity = null)
         {
@@ -50,12 +44,12 @@ namespace Z0
         public IReadOnlyList<IAppMsg> Dequeue()
             => Queue.Dequeue();
 
-        public void Emit(FilePath dst) 
+        public void Emit(FilePath dst)
             => Queue.Emit(dst);
 
-        public IReadOnlyList<IAppMsg> Flush(Exception e)        
+        public IReadOnlyList<IAppMsg> Flush(Exception e)
         {
-            var messages = Queue.Flush(e);            
+            var messages = Queue.Flush(e);
             z.iter(messages, msg => term.print(msg));
             return messages;
         }

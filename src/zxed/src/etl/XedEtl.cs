@@ -21,27 +21,27 @@ namespace Z0
 
     using F = XedPatternField;
     using R = XedPatternSummary;
-    
+
     [ApiHost]
     public readonly ref struct XedEtl
     {
         readonly XedEtlConfig Config;
 
         readonly IWfContext Context;
-        
+
         readonly XedSourceArchive Src;
 
         readonly XedStagingArchive Dst;
 
         readonly TabularArchive Pub;
-                
+
         public XedEtl(IWfContext context, XedEtlConfig config)
         {
             Context = context;
             Config = config;
-            Src = XedSourceArchive.Create(Config.SourceRoot);            
+            Src = XedSourceArchive.Create(Config.SourceRoot);
             Dst = XedStagingArchive.Create(Config.StageRoot);
-            Pub = TabularArchive.Service(Config.PublicationRoot);            
+            Pub = TabularArchive.Service(Config.PublicationRoot);
         }
 
         public void Dispose()
@@ -59,7 +59,7 @@ namespace Z0
                 for(var i=0; i< files.Length; i++)
                 {
                     ref readonly var file = ref skip(files,i);
-                    var id = Context.Raise(WfEvents.ParsingInstructions(file));
+                    var id = Context.Raise(XedEvents.ParsingInstructions(file));
                     var parsed = span(parser.ParseInstructions(file));
                     for(var j = 0; j< parsed.Length; j++)
                     {
@@ -68,7 +68,7 @@ namespace Z0
                         Dst.Deposit(parsed, file.FileName);
                     }
 
-                    Context.Raise(WfEvents.ParsedInstructions(file, parsed.Length, id));
+                    Context.Raise(XedEvents.ParsedInstructions(file, parsed.Length, id));
                 }
             }
             catch(Exception e)
@@ -78,7 +78,7 @@ namespace Z0
 
             return patterns.ToArray();
         }
-        
+
         static XedInstructionRecord[] InstructionRecords(XedPattern[] src)
         {
             var input = Root.@readonly(src);
@@ -89,12 +89,12 @@ namespace Z0
             {
                 ref readonly var x = ref skip(input,i);
                 seek(target,i) = new XedInstructionRecord(
-                    Sequence: (int)i, 
-                    Mnemonic: x.Class, 
-                    Extension: x.Extension, 
-                    BaseCode: x.BaseCodeText(), 
+                    Sequence: (int)i,
+                    Mnemonic: x.Class,
+                    Extension: x.Extension,
+                    BaseCode: x.BaseCodeText(),
                     Mod: default,
-                    Reg: default);                
+                    Reg: default);
             }
             return dst;
         }
@@ -118,7 +118,7 @@ namespace Z0
         public XedPatternSummary[] PublishSummary(XedPattern[] src)
 
         {
-            var sorted = (src as IEnumerable<XedPattern>).OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).Array();                        
+            var sorted = (src as IEnumerable<XedPattern>).OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).Array();
             var records = sorted.Map(p => p.Summary());
             Pub.Deposit<F,R>(records, FileName.Define("summary", FileExtensions.Csv));
             return records;
@@ -131,10 +131,10 @@ namespace Z0
             => src.Where(p => p.Category == Xed.XedConst.Name(match)).ToArray();
 
         void SaveExtensions(XedPatternSummary[] src)
-        {                        
+        {
             foreach(var selected in Config.Extensions)
-                Pub.Deposit<F,R>(Filter(src, selected), 
-                    Config.ExtensionFolder, 
+                Pub.Deposit<F,R>(Filter(src, selected),
+                    Config.ExtensionFolder,
                     FileName.Define(Xed.XedConst.Name(selected), Config.DataFileExt)
                     );
         }
@@ -142,8 +142,8 @@ namespace Z0
         void SaveCategories(XedPatternSummary[] src)
         {
             foreach(var selected in Config.Categories)
-                Pub.Deposit<F,R>(Filter(src, selected), 
-                    Config.CategoryFolder, 
+                Pub.Deposit<F,R>(Filter(src, selected),
+                    Config.CategoryFolder,
                     FileName.Define(Xed.XedConst.Name(selected), Config.DataFileExt)
                     );
         }
@@ -168,24 +168,24 @@ namespace Z0
                         writer.WriteLine(f.Declaration);
                         writer.WriteLine(HSep120);
 
-                        for(var j = 0; j < body.Length; j++)                
+                        for(var j = 0; j < body.Length; j++)
                             writer.WriteLine(body[j]);
 
-                        if(i != src.Length - 1)                        
+                        if(i != src.Length - 1)
                             writer.WriteLine();
                     }
             }
         }
 
         public void Run()
-        {                        
+        {
             Pub.Clear();
             Pub.Clear(Config.ExtensionFolder);
             Pub.Clear(Config.CategoryFolder);
-            
+
             var patterns = ExtractPatterns();
-            var summaries = PublishSummary(patterns);  
-            var functions = ExtractFunctions();                      
+            var summaries = PublishSummary(patterns);
+            var functions = ExtractFunctions();
 
             SaveExtensions(summaries);
             SaveCategories(summaries);

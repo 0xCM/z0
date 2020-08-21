@@ -15,11 +15,11 @@ namespace Z0
         public static ToolLogger logger<T>(IWfContext context, T id)
             where T : unmanaged, Enum
                 => logger(context, id.ToString());
-        
+
         [Op]
         public static ToolLogger logger(IWfContext wf, string name)
-        {            
-            var dst = wf.AppPaths.AppDataRoot + FileName.Define(name, FileExtensions.Log);
+        {
+            var dst = wf.AppPaths.AppDataRoot + FileName.Define(name, FileExtensions.StatusLog);
             return new ToolLogger(wf,dst);
         }
     }

@@ -26,7 +26,7 @@ namespace Z0
             Ct = ct;
             Wf.Created(StepName, Ct);
         }
-        
+
         public void Run()
         {
             Wf.Running(StepName, Ct);
@@ -38,12 +38,12 @@ namespace Z0
         {
             Wf.Finished(StepName, Ct);
         }
-        
+
         const string Sep = "| ";
 
         static string format(ProjectDocRecord src)
         {
-            return text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);   
+            return text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);
         }
 
         static DocTargetKind kind(char src)
@@ -53,37 +53,37 @@ namespace Z0
                 'P' => DocTargetKind.Property,
                 'F' => DocTargetKind.Field,
                 _ => DocTargetKind.None,
-            };                    
+            };
 
         Dictionary<PartId, Dictionary<string,string>> collect()
         {
             var docs = Wf.ResourceRoot + FolderName.Define("docs");
             docs.Clear();
-            var src = collect(KnownParts.Service.ComponentPaths.ToArray());
+            var src = collect(ModuleArchives.executing().Files);
             var dst = new Dictionary<PartId, Dictionary<string,ProjectDocRecord>>();
             foreach(var part in src.Keys)
-            {                                
+            {
                 var path = docs + FileName.Define(part.Format(), FileExtensions.Csv);
                 var partDocs = new Dictionary<string, ProjectDocRecord>();
                 dst[part] = partDocs;
-                using var writer = path.Writer();                
+                using var writer = path.Writer();
 
                 var kvp = src[part];
                 foreach(var key in kvp.Keys)
                 {
                     var member = parse(key, kvp[key])
                                 .OnSuccess(d => partDocs[d.Identifer] = d);
-                    if(member.Succeeded)                                
+                    if(member.Succeeded)
                     {
-                        var line = format(member.Value);                        
+                        var line = format(member.Value);
                         writer.WriteLine(line);
-                    }                                
+                    }
                 }
             }
             return src;
         }
 
-        Dictionary<PartId, Dictionary<string,string>> collect(FilePath[] paths)        
+        Dictionary<PartId, Dictionary<string,string>> collect(FilePath[] paths)
         {
             var dst = new Dictionary<PartId, Dictionary<string,string>>();
             foreach(var path in paths)
@@ -103,10 +103,10 @@ namespace Z0
                         }
                     }
                 }
-            }            
+            }
 
             return dst;
-        }            
+        }
 
         static Dictionary<string,string> parse(string src)
         {
@@ -121,20 +121,20 @@ namespace Z0
                 }
             }
             return index;
-        }                    
+        }
 
         static ParseResult<ProjectDocRecord> parse(string key, string value)
         {
-            var components = key.SplitClean(Chars.Colon); 
-            if(components.Length == 2 && components[0].Length == 1)      
-            {     
+            var components = key.SplitClean(Chars.Colon);
+            if(components.Length == 2 && components[0].Length == 1)
+            {
                 var k = kind(components[0][0]);
                 var name = components[1];
                 var summary = text.content(value, "<summary>", "</summary>").RemoveAny((char)AsciControl.CR, (char)AsciControl.NL).Trim();
-                return ParseResult.Success(key, new ProjectDocRecord(k, name, summary));                    
+                return ParseResult.Success(key, new ProjectDocRecord(k, name, summary));
             }
             else
                 return ParseResult.Fail<ProjectDocRecord>(key);
-        }        
+        }
     }
 }

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     public interface IPartFileExtensions : IPartLogExtensions
     {
         /// <summary>
@@ -15,7 +15,7 @@ namespace Z0
         /// Parse log extension
         /// </summary>
         FileExtension Parsed => FileExtensions.Parsed;
-    
+
         /// <summary>
         /// Parse failure log extension
         /// </summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// Extension for hex files
         /// </summary>
-        FileExtension Hex => FileExtensions.Hex;
+        FileExtension HexLine => FileExtensions.HexLine;
 
         /// <summary>
         /// Extension for formatted asm files
@@ -39,22 +39,21 @@ namespace Z0
         /// <summary>
         /// Extension for nonexecutable part components
         /// </summary>
-        FileExtension Dll => FileExtensions.Dll;          
+        FileExtension Dll => FileExtensions.Dll;
 
         /// <summary>
         /// Extension for executable part components
         /// </summary>
         FileExtension Exe => FileExtensions.Exe;
-        
+
         /// <summary>
         /// Extension for CSharp code files
         /// </summary>
-        FileExtension Cs => FileExtensions.Cs;    
-
+        FileExtension Cs => FileExtensions.Cs;
 
         /// <summary>
         /// Extension for part configuration files
         /// </summary>
-        FileExtension Config =>  FileExtensions.Json;    
+        FileExtension Config =>  FileExtensions.Json;
     }
 }

@@ -2,13 +2,12 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Vectors)" />
-    <ProjectReference Include="$(VData)" />    
+    <ProjectReference Include="$(VData)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitStrings)" />
     <ProjectReference Include="$(FVec)" />

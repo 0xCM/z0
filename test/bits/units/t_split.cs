@@ -45,21 +45,21 @@ namespace Z0
         {
             static ref byte pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7, byte pos, ref byte dst)
             {
-                if(gbits.testbit(x0, pos)) 
+                if(gbits.testbit(x0, pos))
                     dst = Bits.enable(dst, 0);
-                if(gbits.testbit(x1, pos)) 
+                if(gbits.testbit(x1, pos))
                     dst = Bits.enable(dst, 1);
-                if(gbits.testbit(x2, pos)) 
+                if(gbits.testbit(x2, pos))
                     dst = Bits.enable(dst, 2);
-                if(gbits.testbit(x3, pos)) 
+                if(gbits.testbit(x3, pos))
                     dst = Bits.enable(dst, 3);
-                if(gbits.testbit(x4, pos)) 
+                if(gbits.testbit(x4, pos))
                     dst = Bits.enable(dst, 4);
-                if(gbits.testbit(x5, pos)) 
+                if(gbits.testbit(x5, pos))
                     dst = Bits.enable(dst, 5);
-                if(gbits.testbit(x6, pos)) 
+                if(gbits.testbit(x6, pos))
                     dst = Bits.enable(dst, 6);
-                if(gbits.testbit(x7, pos)) 
+                if(gbits.testbit(x7, pos))
                     dst = Bits.enable(dst, 7);
                 return ref dst;
             }
@@ -77,7 +77,7 @@ namespace Z0
                     var dst = (byte)0;
                     var pos = (byte)(Pow2.pow(i) - 1);
                     pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
-                    
+
                     byte j = 0;
                     Claim.Require(gbits.bitmatch(dst, j++, x0, pos));
                     Claim.Require(gbits.bitmatch(dst, j++, x1, pos));
@@ -86,7 +86,7 @@ namespace Z0
                     Claim.Require(gbits.bitmatch(dst, j++, x4, pos));
                     Claim.Require(gbits.bitmatch(dst, j++, x5, pos));
                     Claim.Require(gbits.bitmatch(dst, j++, x6, pos));
-                    Claim.Require(gbits.bitmatch(dst, j++, x7, pos));                    
+                    Claim.Require(gbits.bitmatch(dst, j++, x7, pos));
                 }
             }
 
@@ -103,23 +103,25 @@ namespace Z0
             {
                 var dst = Bits.concat(lhs[i], rhs[i]);
                 Bits.split(dst,out var x0, out var x1);
-                
+
                 Claim.Eq(x0, lhs[i]);
                 Claim.Eq(x1, rhs[i]);
-            }        
+            }
         }
 
         public void sb_unpack_8x1()
         {
-            for(var i=0; i<= 255; i++)            
+            Span<byte> up2 = stackalloc byte[8];
+            for(var i=0; i<= 255; i++)
             {
+                up2.Clear();
+
                 byte b = (byte)i;
                 var x = BitStore.bitseq(b);
                 var y = BitStore.select(b);
                 ClaimNumeric.eq(x,y);
 
                 var up1 = BitStore.select((byte)i);
-                Span<byte> up2 = stackalloc byte[8];
                 Bits.unpack8x1(b, up2);
                 Claim.eq(BitString.load(up1), BitString.load(up2));
             }
@@ -136,7 +138,7 @@ namespace Z0
                 var bitsPC = dst.PopCount();
                 var bytes = z.bytes(src);
                 var bytesPC = bytes.PopCount();
-                Claim.Eq(bitsPC, bytesPC);        
+                Claim.Eq(bitsPC, bytesPC);
             }
         }
 
@@ -150,7 +152,7 @@ namespace Z0
                 Bits.unpack32x1(x, y1);
                 Bits.unpack32x1(x, y2);
                 Claim.eq(y1.ToBitString(), y2.ToBitString());
-            }            
-        }    
+            }
+        }
     }
 }

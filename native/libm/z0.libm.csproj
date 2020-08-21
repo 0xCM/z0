@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
 
@@ -14,12 +13,12 @@
     <ContentWithTargetPath Include="$(NativeDir)/libm/.assets/libopenlibm.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>libopenlibm.dll</TargetPath>
-    </ContentWithTargetPath>    
+    </ContentWithTargetPath>
 
     <ContentWithTargetPath Include="$(NativeDir)/libm/.assets/libopenlibm.dll.a">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>libopenlibm.dll.a</TargetPath>
-    </ContentWithTargetPath>    
+    </ContentWithTargetPath>
 
   </ItemGroup>
 

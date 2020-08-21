@@ -11,6 +11,10 @@ namespace Z0
 
     public readonly struct Archives : IArchiveServices
     {
+        [MethodImpl(Inline)]
+        public static IPartCaptureArchive capture(FolderPath root = null, FolderName area = null, FolderName subject = null)
+            => new CaptureArchives(root ?? EnvVars.Common.LogRoot, area ?? FolderName.Empty, subject ?? FolderName.Empty);
+
         public static IArchiveServices Services => default(Archives);
-    }    
+    }
 }

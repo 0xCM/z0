@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System.Linq;
 
     public interface IPartFilePaths : IPartFileExtensions, IPartFolderNames, IPartFileNames, IPartFolderPaths, IPartLogPaths
@@ -13,19 +13,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The directory to search</param>
         /// <param name="parts">The owning parts</param>
-        FilePath[] PartFilePaths(FolderPath src, params PartId[] parts) 
+        FilePath[] PartFilePaths(FolderPath src, params PartId[] parts)
             =>  (from part in parts
                 from file in src.Files(part)
-                select file).Array();      
+                select file).Array();
 
         FilePath HexFilePath(FolderPath root, FileName name)
             => HexDirPath(root) + name;
 
         FilePath HexFilePath(FolderPath root, ApiHostUri host)
-            => HexDirPath(root) + FileName.Define(host.Name, Hex);
+            => HexDirPath(root) + FileName.Define(host.Name, HexLine);
 
         FilePath HexFilePath<T>(FolderPath root)
-            => HexFilePath(root, FileName.Define(typeof(T).Name, Hex));
+            => HexFilePath(root, FileName.Define(typeof(T).Name, HexLine));
 
         FilePath AsmFilePath(FolderPath root, FileName name)
             => AsmDirPath(root) + name;
@@ -45,15 +45,15 @@ namespace Z0
             => ParsedDirPath(root) + FileName.Define(host.Name, Parsed);
 
         FilePath[] AsmFilePaths(FolderPath root)
-            => AsmDirPath(root).Files(Asm);  
+            => AsmDirPath(root).Files(Asm);
 
-        FilePath[] HexFilePaths(FolderPath root) 
-            => HexDirPath(root).Files(Hex);     
+        FilePath[] HexFilePaths(FolderPath root)
+            => HexDirPath(root).Files(HexLine);
 
-        FilePath[] ExtractFilePaths(FolderPath root) 
-            => ExtractDirPath(root).Files(Extract);     
+        FilePath[] ExtractFilePaths(FolderPath root)
+            => ExtractDirPath(root).Files(Extract);
 
-        FilePath[] ParseFilePaths(FolderPath root) 
+        FilePath[] ParseFilePaths(FolderPath root)
             => ParsedDirPath(root).Files(Parsed);
     }
 }

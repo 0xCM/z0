@@ -2,16 +2,15 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Matrix)" />        
+    <ProjectReference Include="$(Matrix)" />
     <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Blocked)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(BitVectors)" />    
+    <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(LSquare)" />
 

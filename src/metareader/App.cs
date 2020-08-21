@@ -7,11 +7,11 @@ namespace Z0
     using P = Z0.Parts;
 
     class App : AppShell<App,IAppContext>
-    {                
+    {
         static IAppContext CreateAppContext()
         {
-            var resolved = ApiComposition.Assemble(z.stream(P.Imagine.Resolved));
-            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
+            var resolved = ApiPart.Assemble(z.stream(P.Imagine.Resolved));
+            var random = Polyrand.Pcg64(PolySeed64.Seed05);
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
             return Apps.context(resolved, random, settings, exchange);
@@ -29,8 +29,8 @@ namespace Z0
         }
 
         public override void RunShell(params string[] args)
-        {            
-            var parts = PartIdParser.Service.ParseValid(args);              
+        {
+            var parts = PartIdParser.Service.ParseValid(args);
             RunApp(parts);
         }
 

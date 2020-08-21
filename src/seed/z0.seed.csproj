@@ -2,10 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>    
+  <ItemGroup>
     <ProjectReference Include="$(Imagine)" />
   </ItemGroup>
 

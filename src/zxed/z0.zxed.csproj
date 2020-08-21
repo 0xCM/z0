@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>zxed</AssemblyName>
   </PropertyGroup>
 
@@ -10,5 +9,5 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(WfCore)" />
     <ProjectReference Include="$(Flow)" />
-  </ItemGroup>  
+  </ItemGroup>
 </Project>

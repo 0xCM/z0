@@ -17,12 +17,8 @@ namespace Z0
         const string Pattern = "yyyyMMdd.HH.mm.ss.ffff";
 
         [MethodImpl(Inline)]
-        public static Timestamp create()
-            => new Timestamp((ulong)now().Ticks);        
-
-        [MethodImpl(Inline)]
         public Timestamp(ulong ticks)
-            => Ticks = ticks;        
+            => Ticks = ticks;
 
         [MethodImpl(Inline)]
         public static implicit operator ulong(Timestamp src)
@@ -72,10 +68,10 @@ namespace Z0
         public override bool Equals(object src)
             => src is Timestamp x && Equals(x);
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public int CompareTo(Timestamp src)
             => Ticks.CompareTo(src.Ticks);
-        
+
         public uint Hashed
         {
             [MethodImpl(Inline)]

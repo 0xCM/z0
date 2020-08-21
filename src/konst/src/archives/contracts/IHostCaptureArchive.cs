@@ -3,34 +3,34 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     public interface IHostCaptureArchive : IPartCaptureArchive
     {
         ApiHostUri Host {get;}
 
-        FileName ExtractFileName 
+        FileName ExtractFileName
             => LegalFileName(Host, Extract);
 
-        new FilePath ExtractPath 
+        new FilePath ExtractPath
             => ExtractDir + ExtractFileName;
 
-        FileName ParsedFileName 
+        FileName ParsedFileName
             => LegalFileName(Host, Parsed);
 
-        FilePath ParsedPath 
+        FilePath ParsedPath
             => ParsedDir + ParsedFileName;
 
-        new FileName HexFileName 
-            => LegalFileName(Host, Hex);
+        new FileName HexFileName
+            => LegalFileName(Host, HexLine);
 
-        new FilePath HexPath 
+        new FilePath HexPath
             => CodeDir + HexFileName;
 
-        FileName AmsFileName 
+        FileName AmsFileName
             => LegalFileName(Host, Asm);
 
-        new FilePath AsmPath 
-            => AsmDir + AmsFileName;         
+        new FilePath AsmPath
+            => AsmDir + AmsFileName;
 
         new FileName CilFileName
             => LegalFileName(Host, Il);
