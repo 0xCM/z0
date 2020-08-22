@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(AsmModels)" />
-    <ProjectReference Include="$(WfCore)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Evaluate)" />

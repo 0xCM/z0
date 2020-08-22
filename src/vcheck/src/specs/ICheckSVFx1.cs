@@ -11,9 +11,9 @@ namespace Z0
     using static z;
     using static Kinds;
 
-    readonly struct CheckSVF<T> : ICheckSVF<T>
+    public readonly struct CheckSVF<T> : ICheckSVF<T>
         where T : unmanaged
-    {   
+    {
         public ITestContext Context {get;}
 
         public static CheckSVF<T> Create(ITestContext context)
@@ -22,12 +22,12 @@ namespace Z0
         public CheckSVF(ITestContext context)
         {
             Context = context;
-        }        
-    }   
+        }
+    }
 
-    public interface ICheckSVF<T> : ICheckSF, ICheckBinarySVFD<W128,IBinaryOp128D<T>,T> 
+    public interface ICheckSVF<T> : ICheckSF, ICheckBinarySVFD<W128,IBinaryOp128D<T>,T>
         where T : unmanaged
-    {   
+    {
         /// <summary>
         /// Computes the vector component count for a given bit-width and component type
         /// </summary>
@@ -92,7 +92,7 @@ namespace Z0
                 Context.ReportCaseResult(casename,succeeded,clock);
             }
         }
- 
+
         /// <summary>
         /// Validates a 128-bit unary operator via cellular decomposition
         /// </summary>
@@ -102,7 +102,7 @@ namespace Z0
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, UnaryOpClass op, W128 w)
             where F : IUnaryOp128D<T>
-        {            
+        {
             var t = default(T);
             void run()
             {
@@ -115,7 +115,7 @@ namespace Z0
                         Eq(f.Invoke(vcell(x,j)), vcell(z,j));
                 }
             }
-            
+
             Run(f, run, w, op.Generalized);
         }
 
@@ -305,6 +305,6 @@ namespace Z0
             }
 
             Run(f, run, w, k.Generalized);
-        }        
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AssemblyName>flow</AssemblyName>
   </PropertyGroup>
 
@@ -13,7 +13,6 @@
     <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Data)" />
-    <ProjectReference Include="$(WfCore)" />
   </ItemGroup>
 
   <ItemGroup>

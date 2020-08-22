@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// CPrimalyright   :  (c) Chris Moore, 2020
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -13,13 +13,13 @@ namespace Z0
     public unsafe readonly struct StringBuffers
     {
         const string Storage = "A null argument was provided                                                                                                                                                                ";
-        
-        static Span<char> Buffer 
+
+        static Span<char> Buffer
         {
             [MethodImpl(Inline)]
-            get => liberate(Storage);        
+            get => liberate(Storage);
         }
-        
+
         public static uint Capacity
         {
             [MethodImpl(Inline)]
@@ -36,11 +36,11 @@ namespace Z0
         public static string format()
         {
             var dst = Buffer;
-            
+
             var seg0 = chars(Part0);
             var seg1 = chars(Part1);
             var seg2 = chars(Part2);
-            
+
             var n0 = (uint)seg0.Length;
             var n1 = (uint)seg1.Length;
             var n2 = (uint)seg2.Length;
@@ -55,7 +55,7 @@ namespace Z0
 
             for(uint i=n2, j=0; i<last; i++, j++)
                 seek(dst, i) = skip(seg2, j);
-            
+
             seek(dst,last) = (char)0;
 
             return Storage;
@@ -71,7 +71,7 @@ namespace Z0
 
             for(uint i=first, j=0; i<last; i++, j++)
                 seek(dst,i) = skip(name,j);
-            
+
             return Storage;
         }
 
@@ -81,7 +81,7 @@ namespace Z0
             return Part0;
         }
 
-        public const string MsgText = "A null argument was provided";        
+        public const string MsgText = "A null argument was provided";
     }
 
 }

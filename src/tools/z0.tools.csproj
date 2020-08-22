@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(WfCore)" />
+    <ProjectReference Include="$(Flow)" />
   </ItemGroup>
 
   <ItemGroup>

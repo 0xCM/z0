@@ -22,6 +22,7 @@
 /Gy[-] separate functions for linker    /GS[-] enable security checks
 /GR[-] enable C++ RTTI                  /GX[-] enable C++ EH (same as /EHsc)
 /guard:cf[-] enable CFG (control flow guard)
+/guard:ehcont[-] enable EH continuation metadata (CET)
 /EHs enable C++ EH (no SEH exceptions)  /EHa enable C++ EH (w/ SEH exceptions)
 /EHc extern "C" defaults to nothrow     
 /EHr always generate noexcept runtime termination checks

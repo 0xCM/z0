@@ -6,23 +6,24 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    
+
     using static z;
- 
+
     using Z0.Asm.Data;
 
+    [ApiDataType]
     public class t_memstore : t_asmd<t_memstore>
-    {        
+    {
         public void read_ref_1()
         {
-            var src = array(3u,5u,6u,7u);        
+            var src = array(3u,5u,6u,7u);
             var r = Segments.from(src);
             var z = r.As<uint>();
-            
+
             Claim.eq(16, r.DataSize);
             Claim.eq(4, r.CellCount);
             for(var i=0; i<src.Length; i++)
-                Claim.eq(r[i],src[i]);                        
+                Claim.eq(r[i],src[i]);
         }
 
 
@@ -45,8 +46,8 @@ namespace Z0
         unsafe void Process(in SegRef src, in MemoryStore store)
         {
             var reader = PointedReader.create(src.Address.Pointer<byte>(), (int)src.DataSize);
-            var dstA = Spans.alloc<byte>(src.DataSize);            
-            var count = reader.ReadAll(dstA);            
+            var dstA = Spans.alloc<byte>(src.DataSize);
+            var count = reader.ReadAll(dstA);
             Claim.eq(count,src.DataSize);
 
             var dstB = MemStores.Service.load(src);
@@ -81,13 +82,13 @@ namespace Z0
 
             var decoded = CilServices.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
             var cilwriter = new CilFunctionWriter(CasePath(FileExtensions.Il));
-            cilwriter.Write(decoded);        
+            cilwriter.Write(decoded);
         }
 
         public void emit_data()
         {
-                                
-            var refs = Hex.HexRefs;   
+
+            var refs = Hex.HexRefs;
             using var dst = CasePath($"Symbolic").Writer();
             for(var i=0; i<refs.Length; i++)
             {

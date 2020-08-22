@@ -12,8 +12,8 @@ namespace Z0
     using static Memories;
 
     using K = Kinds;
-    
-    readonly struct CheckSVF : ICheckSVF
+
+    public readonly struct CheckSVF : ICheckSVF
     {
         public ITestContext Context {get;}
 
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         void ISink<TestCaseRecord>.Deposit(TestCaseRecord src)
             => Context.Deposit(src);
-    }    
+    }
 
     public interface ICheckSVF : ITestService, TCheckVectors, ITestRandom, TCheckAction
     {
@@ -42,7 +42,7 @@ namespace Z0
             where T : unmanaged
             where F : IUnaryOp128D<T>
                 => Typed<T>().CheckSVF(f, K.UnaryOp, w);
-        
+
         void CheckUnaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : IUnaryOp256D<T>
@@ -86,7 +86,7 @@ namespace Z0
             var succeeded = true;
             var casename = Context.CaseName(f);
             var count = Time.counter();
-            
+
             count.Start();
             try
             {
@@ -108,7 +108,7 @@ namespace Z0
                 Context.ReportCaseResult(casename,succeeded,count);
             }
         }
-            
+
         void CheckCells<F,T>(F f, Func<int,Pair<Vector256<T>>> src)
             where T : unmanaged
             where F : IBinaryOp256D<T>
@@ -117,7 +117,7 @@ namespace Z0
             var succeeded = true;
             var casename = Context.CaseName(f);
             var count = Time.counter();
-            
+
             count.Start();
             try
             {
@@ -138,9 +138,9 @@ namespace Z0
             {
                 Context.ReportCaseResult(casename,succeeded,count);
             }
-        }       
+        }
 
-        void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null) 
+        void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null)
             where T : unmanaged
             where F : IBinaryOp128<T>
         {
@@ -175,7 +175,7 @@ namespace Z0
             }
         }
 
-        void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null) 
+        void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null)
             where T : unmanaged
             where F : IBinaryOp256<T>
         {
@@ -186,7 +186,7 @@ namespace Z0
             var succeeded = true;
             var blocks = left.BlockCount;
             var count = Time.counter();
-            
+
             count.Start();
             try
             {
@@ -225,7 +225,7 @@ namespace Z0
             var succeeded = true;
             var casename = Context.CaseName(f);
             var count = Time.counter();
-            
+
             count.Start();
 
             try
@@ -240,7 +240,7 @@ namespace Z0
             finally
             {
                 Context.ReportCaseResult(casename,succeeded,count);
-            }                   
+            }
         }
 
         /// <summary>
@@ -257,7 +257,7 @@ namespace Z0
             var succeeded = true;
             var casename = Context.CaseName(f);
             var count = Time.counter();
-            
+
             count.Start();
 
             try
@@ -272,7 +272,7 @@ namespace Z0
             finally
             {
                 Context.ReportCaseResult(casename,succeeded,count);
-            }                   
+            }
         }
 
         /// <summary>
@@ -292,11 +292,11 @@ namespace Z0
             where T : unmanaged
             where F : IFactory128<S,T>
             where C : ICheckSF128<S,T>
-        {            
+        {
             var succeeded = true;
             var casename = Context.CaseName(f);
             var count = Time.counter();
-            
+
             count.Start();
 
             void exec()
@@ -321,7 +321,7 @@ namespace Z0
             finally
             {
                 Context.ReportCaseResult(casename,succeeded,count);
-            }                   
+            }
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace Z0
             var succeeded = true;
             var casename = Context.CaseName(f);
             var count = Time.counter();
-            
+
             count.Start();
 
             void exec()
@@ -370,7 +370,7 @@ namespace Z0
             finally
             {
                 Context.ReportCaseResult(casename,succeeded,count);
-            }                   
+            }
         }
     }
 }

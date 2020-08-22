@@ -11,7 +11,7 @@
     <ProjectReference Include="$(math)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(WfCore)" />
+    <ProjectReference Include="$(Flow)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Identity)" />
     <ProjectReference Include="$(Data)" />

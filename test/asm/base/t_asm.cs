@@ -44,7 +44,7 @@ namespace Z0.Asm
         protected IAsmTextWriter AsmWriter([Caller] string caller = null)
         {
             var dst = TargetArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
-            return AsmCore.Services.AsmWriter(dst, AsmFormatSpec.WithSectionDelimiter);
+            return AsmCore.Services.AsmWriter(dst, AsmFormatSpec.DefaultStreamFormat);
         }
 
         protected MemberCode[] ReadHostBits(ApiHostUri host)

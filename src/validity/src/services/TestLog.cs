@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     using Z0.Data;
-    
+
     using static Konst;
 
     public readonly struct TestLog
@@ -17,38 +17,38 @@ namespace Z0
         public static TestLog<TestCaseField, TestCaseRecord> Create()
             => new TestLog<TestCaseField, TestCaseRecord>();
     }
-        
+
     public class TestLog<F,R> : IAppMsgContext
         where F : unmanaged, Enum
         where R : ITabular
     {
         object locker;
 
-        static TestLogPaths Paths 
+        static TestLogPaths Paths
             => TestLogPaths.The;
 
-        internal TestLog()       
+        internal TestLog()
         {
             locker = new object();
-        } 
-        
+        }
+
         const LogArea Area = LogArea.Test;
 
         public FilePath Target
-            => Paths.Timestamped(Area, Area.ToString().ToLower());
+            => Paths.Timestamped(Area, Area.ToString().ToLower()).CreateParentIfMissing();
 
         static FilePath ComputePath(FolderName subdir, string basename, bool create, FileExtension ext)
-            => create 
-                ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename,ext) : Paths.UniqueLogPath(Area, subdir, basename,ext)) 
+            => create
+                ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename,ext) : Paths.UniqueLogPath(Area, subdir, basename,ext))
                 : (subdir.IsEmpty ?  Paths.LogPath(Area, basename, ext) : Paths.LogPath(Area, subdir, basename, ext)) ;
 
         public FilePath Write(IEnumerable<R> src, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header = true, FileExtension ext = null)
         {
             var records = src.ToArray();
             if(records.Length == 0)
-                return FilePath.Empty;                
+                return FilePath.Empty;
 
-            var path = ComputePath(subdir,basename, mode == LogWriteMode.Create, ext);
+            var path = ComputePath(subdir,basename, mode == LogWriteMode.Create, ext).CreateParentIfMissing();
 
             if(mode == LogWriteMode.Create)
                     Emit(records, delimiter, header, path);
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         void Emit(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)
-        {                
+        {
             if(records.Count == 0)
                 return;
 
