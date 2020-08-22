@@ -3,7 +3,7 @@ echo off
 set Tool=dumpbin
 
 set WfRoot=%ZDev%\wf
-call %WfRoot%\wf-vars.cmd
+call %WfRoot%\vars.cmd
 call %WfRoot%\%Tool%\config.cmd
 
 set LogPath=%ToolLogPath%

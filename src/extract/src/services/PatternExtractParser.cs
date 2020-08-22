@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    
+
     using static Konst;
     using static Memories;
-    
+
     using BP = BytePatternParser<EncodingPatternKind>;
 
     readonly struct PatternExtractParser : IExtractionParser
@@ -28,8 +28,8 @@ namespace Z0
             Buffer = buffer;
         }
 
-        BP Parser 
-        {        
+        BP Parser
+        {
             [MethodImpl(Inline)]
             get => Extractors.Services.PatternParser(Buffer.Clear());
         }
@@ -74,7 +74,7 @@ namespace Z0
             try
             {
                 var parser = Parser;
-                var status = parser.Parse(src.Encoded);                
+                var status = parser.Parse(src.Encoded);
                 var term = status.HasFailed() ? ExtractTermCode.Fail : parser.Result.ToTermCode();
                 if(term != ExtractTermCode.Fail)
                 {
@@ -86,7 +86,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                var msg = AppMsg.Colorize($"{src.Member.OpUri} extract parse FAIL: {e}", MessageFlair.Yellow);
+                var msg = AppMsg.colorize($"{src.Member.OpUri} extract parse FAIL: {e}", MessageFlair.Yellow);
                 term.print(msg);
                 return ExtractParseResult.FromFailure(new ExtractParseFailure(src, seq, ExtractTermCode.Fail));
             }
@@ -98,9 +98,9 @@ namespace Z0
             var failed = list<ExtractParseFailure>();
             for(var i=0; i<src.Length; i++)
             {
-                Parse(src[i], i).OnResult(f => failed.Add(f), p => parsed.Add(p));                
+                Parse(src[i], i).OnResult(f => failed.Add(f), p => parsed.Add(p));
             }
-            return (failed.ToArray(), parsed.ToArray());            
+            return (failed.ToArray(), parsed.ToArray());
         }
     }
 }

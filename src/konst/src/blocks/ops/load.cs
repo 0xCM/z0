@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.InteropServices;    
+    using System.Runtime.CompilerServices;
 
-    using static Konst;        
+    using static Konst;
     using static z;
 
     partial struct Blocks
@@ -25,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                AppErrors.ThrowBadSize(w, src.Length - offset);      
+                AppErrors.ThrowBadSize(w, src.Length - offset);
 
             return unsafeload(w, offset == 0 ? src : slice(src,offset));
         }
@@ -42,7 +41,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                AppErrors.ThrowBadSize(w, src.Length - offset);      
+                AppErrors.ThrowBadSize(w, src.Length - offset);
 
             return unsafeload(w, offset == 0 ? src : slice(src,offset));
         }
@@ -59,7 +58,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                AppErrors.ThrowBadSize(w, src.Length - offset);      
+                AppErrors.ThrowBadSize(w, src.Length - offset);
 
             return unsafeload(w, offset == 0 ? src : slice(src,offset));
         }
@@ -76,7 +75,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                AppErrors.ThrowBadSize(w, src.Length - offset);      
+                AppErrors.ThrowBadSize(w, src.Length - offset);
 
             return unsafeload(w, offset == 0 ? src : slice(src,offset));
         }
@@ -93,12 +92,12 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w, src.Length - offset))
-                AppErrors.ThrowBadSize(w, src.Length - offset);      
+                AppErrors.ThrowBadSize(w, src.Length - offset);
 
             return unsafeload(w, offset == 0 ? src : slice(src,offset));
         }
 
- 
+
         /// <summary>
         /// Loads 256-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>
@@ -111,7 +110,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                AppErrors.ThrowBadSize(w, src.Length - offset);      
+                AppErrors.ThrowBadSize(w, src.Length - offset);
 
             return unsafeload(w,offset == 0 ? src : slice(src,offset));
         }
@@ -128,7 +127,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                AppErrors.ThrowBadSize(w, src.Length - offset);      
+                AppErrors.ThrowBadSize(w, src.Length - offset);
 
             return unsafeload(w,offset == 0 ? src : slice(src,offset));
         }

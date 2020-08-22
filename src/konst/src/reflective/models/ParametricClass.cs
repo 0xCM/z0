@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using T = ParametricTargetKind;
+    using T = ParametricTarget;
     using S = GenericKind;
 
     [Flags]

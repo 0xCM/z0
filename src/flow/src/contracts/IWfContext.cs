@@ -14,43 +14,44 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using EvF = WfEventBuilder;
-        
+
     /// <summary>
     /// Characterizes a worklow context
     /// </summary>
     public interface IWfContext : IDisposable
     {
         IAppContext ContextRoot {get;}
-        
+
         WfConfig Config {get;}
-        
+
         IWfBroker Broker {get;}
-                
-        IMultiSink WfSink {get;}                
-        
+
+        IMultiSink WfSink {get;}
+
         FolderPath IndexRoot {get;}
-        
+
         FolderPath ResourceRoot {get;}
-                
+
         IPart[] Known {get;}
-        
+
         FolderPath AppDataRoot
             => ContextRoot.AppPaths.AppDataRoot;
 
         FolderPath ConfigRoot
             => ContextRoot.AppPaths.ConfigRoot;
 
-        IAppPaths AppPaths 
+        IAppPaths AppPaths
             => ContextRoot.AppPaths;
 
         FolderPath ArchiveRoot
             => FolderPath.Define(@"k:/z0/archives");
-        
+
         FolderPath ToolOuputDir(string tool)
             => ArchiveRoot + FolderName.Define("tools") + FolderName.Define(tool) + FolderName.Define("output");
 
         FolderPath ToolProcessDir(string tool)
             => ArchiveRoot + FolderName.Define("tools") + FolderName.Define(tool) + FolderName.Define("processed");
+
 
         FilePath ResPack
             => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
@@ -59,16 +60,16 @@ namespace Z0
             => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
 
         CorrelationToken Ct {get;}
-        
+
         WfEventId Raise<E>(in E e)
-            where E : IWfEvent;        
+            where E : IWfEvent;
 
         void Error(Exception e, CorrelationToken? ct = null, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => Raise(EvF.error(e, ct ?? Ct, caller, file, line));
 
         void Error<T>(string worker, T body, CorrelationToken? ct = null)
             => Raise(EvF.error(worker, body, ct ?? Ct));
-        
+
         void Error(string actor, Exception e, CorrelationToken? ct = null)
             => Raise(EvF.error(actor, e, ct ?? Ct));
 
@@ -86,13 +87,13 @@ namespace Z0
 
         void ProcessedFile<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
             => Flow.processed(this,ToActorName(actor), kind, src, size, Ct);
-        
+
         void Ran(string actor, CorrelationToken ct)
             => Flow.ran(this, actor, "Finished", ct);
 
         void Ran<T>(string actor, T output, CorrelationToken? ct = null)
             => Flow.ran(this, actor, output, ct ?? Ct);
-        
+
         void Status<T>(string worker, T message, CorrelationToken ct)
             => Flow.status(this, worker, message,ct);
 
@@ -136,7 +137,7 @@ namespace Z0
         {
             Raise(new WfStepRunning<T>(actor, message, Ct));
         }
-        
+
         void Running(string actor)
         {
             Raise(new WfStepRunning(actor, WfStepId.Empty, Ct));
@@ -168,23 +169,23 @@ namespace Z0
         }
 
         void Finished(string actor)
-        {   
-            Raise(new WorkerFinished(actor, Ct));            
+        {
+            Raise(new WorkerFinished(actor, Ct));
         }
 
         void Finished(in WfActor actor)
-        {   
-            Raise(new ActorFinished(actor, Ct));            
+        {
+            Raise(new ActorFinished(actor, Ct));
         }
 
         void Finished(in WfActor actor, CorrelationToken ct)
-        {   
-            Raise(new ActorFinished(actor, ct));            
+        {
+            Raise(new ActorFinished(actor, ct));
         }
 
         void Finished(WfStepId step)
-        {   
-            Raise(new WorkerFinished(step.Format(), Ct));            
+        {
+            Raise(new WorkerFinished(step.Format(), Ct));
         }
 
         void Emitting(string worker, string table, FilePath dst)
@@ -211,35 +212,35 @@ namespace Z0
         {
             Raise(new WfStepRunning<string>(actor, message, ct));
         }
-        
+
         void Running(string actor, CorrelationToken ct)
         {
             Raise(new WfStepRunning(actor, WfStepId.Empty, ct));
         }
 
         void Status(string worker, string msg, CorrelationToken ct)
-        {   
-            Raise(new WfStatus(worker, msg, ct));            
+        {
+            Raise(new WfStatus(worker, msg, ct));
         }
 
         void Created(string actor, CorrelationToken ct)
-        {   
-            Raise(EvF.newWorker(ct, actor));            
+        {
+            Raise(EvF.newWorker(ct, actor));
         }
 
         void Created(WfStepId step, CorrelationToken ct)
-        {   
-            Raise(new WfStepCreated(step, ct));            
+        {
+            Raise(new WfStepCreated(step, ct));
         }
 
         void Finished(string actor, CorrelationToken ct)
-        {   
-            Raise(new WorkerFinished(actor, ct));            
+        {
+            Raise(new WorkerFinished(actor, ct));
         }
 
         void Finished(WfStepId step, CorrelationToken ct)
-        {   
-            Raise(new WorkerFinished(step.Format(), ct));            
+        {
+            Raise(new WorkerFinished(step.Format(), ct));
         }
 
         void Initializing(string worker, CorrelationToken ct)
@@ -250,7 +251,7 @@ namespace Z0
         void Initialized(string worker, CorrelationToken ct)
         {
             Raise(new WorkerInitialized(worker, ct));
-        }        
+        }
 
         static string ToActorName(string src)
             => Path.GetFileNameWithoutExtension(src);

@@ -12,14 +12,6 @@ namespace Z0
 
     partial struct Table
     {
-        /// <summary>
-        /// Creates a <see cref='TableCellBuilder'/> used to constructs a <see cref='TableCellSpecs'/> index
-        /// </summary>
-        /// <param name="capacity">The maximum number of cells in the constructed index</param>
-        [MethodImpl(Inline), Op]
-        public static TableCellBuilder cells(uint capacity = 30)
-            => new TableCellBuilder(capacity);
-
         [Op, Closures(AllNumeric)]
         public static ReadOnlySpan<string> cells<T>(in CellFormatter<T,string> formatter, ReadOnlySpan<T> src)
         {
@@ -28,7 +20,6 @@ namespace Z0
                 seek(dst,i) = cell(formatter, skip(src,i));
             return dst;
         }
-
 
         /// <summary>
         /// Creates a <see cref='StringTableCells'/> sequence from a <see cref='string'/> array

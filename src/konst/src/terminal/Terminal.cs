@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices; 
+    using System.Runtime.CompilerServices;
     using System.Text;
 
     using static Konst;
@@ -16,40 +16,40 @@ namespace Z0
     {
         static readonly Terminal T = Terminal.Get();
     }
-    
+
     /// <summary>
-    /// Implments a thread-safe/thread-aware terminal absraction
+    /// Implements a thread-safe/thread-aware terminal abstraction
     /// </summary>
     public class Terminal : ITerminal
     {
         [MethodImpl(Inline)]
-        public static Terminal Get() 
+        public static Terminal Get()
             => JustTheOne;
-        
+
         static readonly Terminal JustTheOne = new Terminal();
-        
+
         readonly object TermLock;
 
         readonly object ErrLock;
 
         readonly object StdLock;
-     
+
         Option<Action> TerminationHandler;
 
         readonly FilePath ErrorLogPath;
-        
+
         Terminal()
         {
              TermLock = new object();
-             ErrLock = new object();             
+             ErrLock = new object();
              StdLock = new object();
-             Console.OutputEncoding = new UnicodeEncoding();      
-             Console.CancelKeyPress += OnCancelKeyPressed;  
+             Console.OutputEncoding = new UnicodeEncoding();
+             Console.CancelKeyPress += OnCancelKeyPressed;
              ErrorLogPath = AppBase.Default.AppPaths.AppErrorOutPath.ChangeExtension(FileExtension.Define("term.errors.log")).CreateParentIfMissing();
         }
 
         /// <summary>
-        /// Specfifies the handler to invoke when the user enters a cancellation
+        /// Specifies the handler to invoke when the user enters a cancellation
         /// command, such as Ctrl+C
         /// </summary>
         /// <param name="handler">The handler to invoke when a termination command is received</param>
@@ -64,7 +64,7 @@ namespace Z0
             lock(TermLock)
                 Console.WriteLine();
         }
-                                    
+
         /// <summary>
         /// Writes a single character to the console
         /// </summary>
@@ -74,27 +74,27 @@ namespace Z0
             => Write(c, (ConsoleColor)(color ?? MessageFlair.Yellow));
 
         public void WriteMessage(IAppMsg msg, MessageFlair? color = null)
-        {   
+        {
             if(msg.Kind == MessageKind.Error)
                 WriteError(msg);
             else
-                WriteLine(msg, color ?? msg.Color); 
+                WriteLine(msg, color ?? msg.Flair);
         }
 
         public void WriteLines<F>(params F[] src)
             where F : ITextual
         {
-            lock(TermLock)            
+            lock(TermLock)
             {
                 foreach(var item in src)
                     Console.WriteLine(item.Format());
-            }            
+            }
         }
 
         public void WriteLine<F>(F src, MessageFlair color)
             where F : ITextual
         {
-            lock(TermLock)            
+            lock(TermLock)
             {
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = (ConsoleColor)color;
@@ -106,32 +106,32 @@ namespace Z0
         public void WriteLines<F>(MessageFlair color, params F[] src)
             where F : ITextual
         {
-            lock(TermLock)            
+            lock(TermLock)
             {
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = (ConsoleColor)color;
                 foreach(var msg in src)
                     Console.WriteLine(msg);
                 Console.ForegroundColor = current;
-            }            
+            }
         }
 
         public void WriteMessages(IEnumerable<IAppMsg> messages)
         {
-            lock(TermLock)            
+            lock(TermLock)
             {
                 var current = Console.ForegroundColor;
                 foreach(var msg in messages)
                 {
-                    Console.ForegroundColor = (ConsoleColor)msg.Color;
+                    Console.ForegroundColor = (ConsoleColor)msg.Flair;
                     if(msg.IsError)
                         Console.Error.WriteLine(msg);
                     else
                         Console.WriteLine(msg);
                     Console.ForegroundColor = current;
-                }                
+                }
                 Console.ForegroundColor = current;
-            }            
+            }
         }
 
         public string ReadLine(IAppMsg msg = null)
@@ -145,7 +145,7 @@ namespace Z0
         {
              if(msg != null)
                 WriteMessage(msg);
-              
+
             return Console.ReadKey().KeyChar;
         }
 
@@ -154,7 +154,7 @@ namespace Z0
             lock(TermLock)
             {
                 var current = Console.ForegroundColor;
-                Console.ForegroundColor = (ConsoleColor)color;                
+                Console.ForegroundColor = (ConsoleColor)color;
                 Console.WriteLine(src);
                 Console.ForegroundColor = current;
             }
@@ -181,7 +181,7 @@ namespace Z0
                 Console.ForegroundColor = current;
             }
         }
-                
+
         public void WriteError(IAppMsg src)
         {
             if(src == null)
@@ -189,7 +189,7 @@ namespace Z0
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Error.WriteLine("Error message is null!");
-                Console.ForegroundColor = current;                    
+                Console.ForegroundColor = current;
             }
             else
             {
@@ -199,23 +199,23 @@ namespace Z0
                     var current = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Error.WriteLine("Error message is blank!");
-                    Console.ForegroundColor = current;    
+                    Console.ForegroundColor = current;
                 }
                 else
                 {
                     lock(TermLock)
-                    {                
+                    {
                         var current = Console.ForegroundColor;
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.Error.Write(src);
                         Console.Error.Write(Chars.Eol);
-                        Console.ForegroundColor = current;    
-                    }  
+                        Console.ForegroundColor = current;
+                    }
 
                     lock(ErrLock)
                         ErrorLogPath.AppendLine(rendered);
                 }
-            }              
+            }
         }
 
         public void WriteLine(object sr)
@@ -223,7 +223,7 @@ namespace Z0
 
         public void Warn(string description)
             => WriteWarning((object)description);
-        
+
         public void Info(string message)
             => WriteLine((object)message, MessageFlair.Green);
 

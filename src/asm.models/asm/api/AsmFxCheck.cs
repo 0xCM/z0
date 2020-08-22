@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
@@ -37,15 +37,15 @@ namespace Z0.Asm
 
         static AppMsg InstructionSizeMismatch(MemoryAddress ip, int offset, int actual, int reported,
             [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-                => AppMsg.Error(text.concat(
-                    $"The encoded instruction length does not match the reported instruction length:", 
+                => AppMsg.error(text.concat(
+                    $"The encoded instruction length does not match the reported instruction length:",
                     $"address = {ip}, datalen = {reported}, offset = {offset}, bytelen = {reported}"),
                         caller, file, line);
-                        
+
         static AppMsg InstructionBlockSizeMismatch(MemoryAddress @base, int actual, int reported,
             [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-                => AppMsg.Error(text.concat(
-                    $"The encoded instruction block length does not match the reported total instruction length:", 
+                => AppMsg.error(text.concat(
+                    $"The encoded instruction block length does not match the reported total instruction length:",
                     $"@base = {@base}, block length = {reported}, reported length = {reported}"),
                         caller, file, line);
     }

@@ -1,5 +1,5 @@
 echo off
-call wf\wf-vars.cmd
+call wf\vars.cmd
 
 set FileName=z0.binlog
 set Src="%DevBuildRoot%\%FileName%"

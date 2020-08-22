@@ -1,0 +1,15 @@
+set TargetFramework=netcoreapp3.1
+set AppName=z0
+set AppResName=respack
+set Dev=%ZDev%
+set Wf="%Dev%\wf"
+set LogRoot=%ZLogs%
+set Stage=%ZLogs%
+set AssetDir="j:\assets"
+set Archive="k:\z0\archives"
+set DevBuild="%Dev%\bin\lib\%TargetFramework%%"
+set StageBuild="%Stage%\builds\%AppName%\%TargetFramework%"
+set ToolDir="%AssetDir%\tools\exe"
+set LibDir="%AssetDir%\tools\lib"
+set IncDir="%AssetDir%\tools\specs\headers"
+set EtlLogDir="%Stage%\etl"

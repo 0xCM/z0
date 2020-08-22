@@ -7,27 +7,27 @@ namespace Z0
     using System;
     using System.IO;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static Render;
     using static RenderPatterns;
     using static z;
-    
+
     [Event]
     public readonly struct WfStatus : IWfEvent<WfStatus, string>
-    {        
-        public const string EventName = nameof(WfStatus);        
+    {
+        public const string EventName = nameof(WfStatus);
 
         public WfEventId EventId {get;}
-    
+
         public string ActorName {get;}
 
         public string Body {get;}
-        
+
         public MessageFlair Flair {get;}
 
         public AppMsg Description {get;}
- 
+
         [MethodImpl(Inline)]
         public WfStatus(string actor, string body, CorrelationToken ct, MessageFlair flair = Status)
         {
@@ -35,7 +35,7 @@ namespace Z0
             ActorName = actor;
             Body = body;
             Flair =  flair;
-            Description = AppMsg.Colorize(Body, Flair);
+            Description = AppMsg.colorize(Body, Flair);
         }
 
         [MethodImpl(Inline)]

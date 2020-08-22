@@ -9,20 +9,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Emit;
 
-    using static z;
-    using static Konst;
     using static TableSpecLiterals;
     using static ReflectiveEmit;
+    using static Konst;
+    using static z;
 
-    [ApiHost]
-    public readonly struct TableBuilder
+    [ApiDataType]
+    public ref struct TableBuilder
     {
+        readonly Span<FieldSpec> Fields;
+
+        ushort Index;
+
         /// <summary>
         /// Manufactures the type that reifies a supplied record definition
         /// </summary>
         /// <param name="spec">The record definition</param>
         [Op]
-        public static Type create(Name assname, TableSpec spec)
+        public static Type type(Name assname, TableSpec spec)
             => build(module(assname), spec);
 
         /// <summary>
@@ -30,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The record definition</param>
         [Op]
-        public static Type[] create(Name assname, params TableSpec[] specs)
+        public static Type[] types(Name assname, params TableSpec[] specs)
         {
             var count = specs.Length;
             var buffer = alloc<Type>(count);
@@ -46,11 +50,67 @@ namespace Z0
 
         static Type build(ModuleBuilder mb, TableSpec spec)
         {
-            var tb = valueType(mb, spec.Type, ExplicitAnsi);
-            foreach(var f in spec.Fields)
-                field(tb, f.Name, f.Type, f.Offset);
+            var tb = valueType(mb, spec.TableName, ExplicitAnsi);
+            var fields = spec.Fields;
+            foreach(var f in fields)
+                field(tb, f.FieldName, f.TypeName, f.Offset);
             var type = tb.CreateType();
             return type;
+        }
+        [MethodImpl(Inline)]
+        public TableBuilder(uint capacity)
+        {
+            Index = 0;
+            Fields = span<FieldSpec>(capacity);
+        }
+
+        [MethodImpl(Inline)]
+        public TableBuilder WithField(PropertyInfo src)
+        {
+            var field = new FieldSpec(src.Name, src.PropertyType.AssemblyQualifiedName, Index);
+            seek(Fields, Index++) = field;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public TableBuilder WithField(string name, Type type)
+        {
+            var field = new FieldSpec(name, type.AssemblyQualifiedName, Index);
+            seek(Fields, Index++) = field;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public TableBuilder WithField(FieldInfo src)
+        {
+            var field = new FieldSpec(src.Name, src.FieldType.AssemblyQualifiedName, Index);
+            seek(Fields, Index++) = field;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public TableBuilder WithFields(params PropertyInfo[] src)
+        {
+            foreach(var item in src)
+                WithField(item);
+
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public TableBuilder WithFields(params FieldInfo[] src)
+        {
+            foreach(var item in src)
+                WithField(item);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public TableSpec Complete(string name)
+        {
+            var cells = Fields.Slice(0,(int)Index).ToArray();
+            Fields.Clear();
+            return new TableSpec(name, cells);
         }
     }
 }

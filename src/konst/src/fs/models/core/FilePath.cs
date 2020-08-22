@@ -36,6 +36,12 @@ namespace Z0
             [MethodImpl(Inline)]
             public FilePath Replace(char src, char dst)
                 => new FilePath(Name.Replace(src,dst));
+
+            public bool Exists
+            {
+                [MethodImpl(Inline)]
+                get => File.Exists(Name);
+            }
         }
     }
 }

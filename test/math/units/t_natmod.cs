@@ -11,7 +11,7 @@ namespace Z0
     using static Memories;
 
     public class t_natmod : t_gmath<t_natmod>
-    {                
+    {
         public void mod_mul32_n3()
             => mod_mul_check(n3);
 
@@ -47,7 +47,7 @@ namespace Z0
         {
             mod_inc_check(n128);
             mod_inc_check(n5);
-            mod_inc_check(n20);            
+            mod_inc_check(n20);
         }
 
         public void mod_dec()
@@ -70,7 +70,7 @@ namespace Z0
         public void mod_create()
         {
             var n = new N32();
-            
+
             var a = Mod.Define(11, n);
             var b = Mod.Define(21, n);
             var c = Mod.Define(0, n);
@@ -94,7 +94,7 @@ namespace Z0
             var n = new N15();
 
             Mod<N15> a = 5;
-            
+
             var b14a = a + 9;
             Claim.Eq(Mod.Define(14,n), b14a);
 
@@ -116,16 +116,16 @@ namespace Z0
             {
                 var x = lhs[i];
                 var y = rhs[i];
-                
+
                 var xN = n0 + x;
                 Claim.Eq(Mod.Define(x,n), xN);
 
                 var yN = n0 + y;
                 Claim.Eq(Mod.Define(y,n), yN);
-                
-                var zN = xN + yN;                
+
+                var zN = xN + yN;
                 var z = (uint)(((ulong)x + (ulong)y) % (ulong)nVal);
-                Claim.eq(z, zN.State, AppMsg.Error($"{xN} + {yN} = {zN} != {z} = ({x} + {y}) % {n}"));                
+                Claim.eq(z, zN.State, AppMsg.error($"{xN} + {yN} = {zN} != {z} = ({x} + {y}) % {n}"));
             }
 
             TypeCaseEnd<N>();
@@ -150,18 +150,18 @@ namespace Z0
                 sb.Append($"{i} |".PadRight(4));
                 for(var j=offset; j<n; j++)
                     sb.Append($"{entries[i,j]}".PadRight(3));
-                sb.AppendLine();                
+                sb.AppendLine();
             }
             return sb.ToString();
 
         }
 
-        
+
         protected void mod_mul_check<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
             var nVal = (uint)n.NatValue;
-            var n0 = Mod.Define(n);            
+            var n0 = Mod.Define(n);
             var expect = new uint[nVal,nVal];
             for(var i=0u; i<nVal; i++)
             for(var j=0u; j<nVal; j++)
@@ -174,7 +174,7 @@ namespace Z0
                 Claim.eq(expect[i,j], z);
             }
         }
- 
+
         protected void mod_dec_check<N>(N n = default)
             where N :unmanaged, ITypeNat
         {
@@ -183,19 +183,19 @@ namespace Z0
             var max = (uint)n.NatValue - 1;
             var last = Mod.Define(max, n);
             var m = last;
-            
+
             var i = (int)max;
             do --m;
             while(--i >= 0);
-            
+
             Claim.Eq(m, last);
 
             var x = max;
             var y = Mod.Define(max,n);
 
-            for(var k = 1; k<i*3; k++)            
+            for(var k = 1; k<i*3; k++)
             {
-                --x; 
+                --x;
                 Claim.eq(x, y -= 1u);
             }
 
@@ -224,9 +224,9 @@ namespace Z0
             var a = Mod.Define(max,n);
             var b = Mod.Define(max,n);
 
-            for(var k = 1; k<max*3; k++)            
+            for(var k = 1; k<max*3; k++)
             {
-                ++a; 
+                ++a;
                 Claim.Eq(a, b += 1u);
             }
 
@@ -234,9 +234,9 @@ namespace Z0
         }
 
         protected void TypeCaseStart<C>([Caller] string caller = null)
-            => Trace(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", MessageKind.HiliteCL));
+            => Trace(AppMsg.define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", MessageKind.HiliteCL));
 
         protected void TypeCaseEnd<C>([Caller] string caller = null)
-            => Trace(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", MessageKind.HiliteCL));
+            => Trace(AppMsg.define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", MessageKind.HiliteCL));
     }
 }

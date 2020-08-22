@@ -20,9 +20,9 @@ namespace Z0
         public readonly LocatedAsmFxList Index;
 
         [MethodImpl(Inline)]
-        public IndexedInstructions(LocatedAsmFxList src)
+        public IndexedInstructions(LocatedAsmFxList src, CorrelationToken ct)
         {
-            EventId = WfEvents.id(EventName);
+            EventId = AB.id(EventName, ct);
             Index = src;
         }
 

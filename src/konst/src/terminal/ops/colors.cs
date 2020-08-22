@@ -12,7 +12,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void magenta(object content)
-            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, MessageFlair.Magenta));
+            => T.WriteMessage(AppMsg.colorize(content?.ToString() ?? string.Empty, MessageFlair.Magenta));
 
         /// <summary>
         /// Emits an information-level message with a magenta foreground
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void magenta(string title, object content)
-            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, MessageFlair.Magenta));
+            => T.WriteMessage(AppMsg.colorize( $"{title}: " + content?.ToString() ?? string.Empty, MessageFlair.Magenta));
 
         /// <summary>
         /// Emits an information-level message with a magenta foreground
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void green(object content)
-            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, MessageFlair.Green));
+            => T.WriteMessage(AppMsg.colorize(content?.ToString() ?? string.Empty, MessageFlair.Green));
 
         /// <summary>
         /// Emits an information-level message with a magenta foreground
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void green(string title, object content)
-            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, MessageFlair.Green));
+            => T.WriteMessage(AppMsg.colorize( $"{title}: " + content?.ToString() ?? string.Empty, MessageFlair.Green));
 
         /// <summary>
         /// Emits an information-level message with a cyan foreground
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void cyan(object content)
-            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, MessageFlair.Cyan));
+            => T.WriteMessage(AppMsg.colorize(content?.ToString() ?? string.Empty, MessageFlair.Cyan));
 
         /// <summary>
         /// Emits an information-level message with a cyan foreground
@@ -52,25 +52,25 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void cyan(string title, object content)
-            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, MessageFlair.Cyan));
+            => T.WriteMessage(AppMsg.colorize( $"{title}: " + content?.ToString() ?? string.Empty, MessageFlair.Cyan));
 
         /// <summary>
-        /// Emits an information-level message with a red foreground, typically used to emit error messages 
+        /// Emits an information-level message with a red foreground, typically used to emit error messages
         /// at the point of occurrence, not at the point at which they are handled
         /// </summary>
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void red(object content)
-            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, MessageFlair.Red));
+            => T.WriteMessage(AppMsg.colorize(content?.ToString() ?? string.Empty, MessageFlair.Red));
 
         /// <summary>
-        /// Emits an information-level message with a red foreground, typically used to emit error messages 
+        /// Emits an information-level message with a red foreground, typically used to emit error messages
         /// at the point of occurrence, not at the point at which they are handled
         /// </summary>
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void red(string title, object content)
-            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, MessageFlair.Red));
+            => T.WriteMessage(AppMsg.colorize( $"{title}: " + content?.ToString() ?? string.Empty, MessageFlair.Red));
 
         /// <summary>
         /// Emits an information-level message with a yellow foreground
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void yellow(object content)
-            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, MessageFlair.Yellow));
+            => T.WriteMessage(AppMsg.colorize(content?.ToString() ?? string.Empty, MessageFlair.Yellow));
 
         /// <summary>
         /// Emits an information-level message with a yellow foreground
@@ -86,6 +86,6 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void yellow(string title, object content)
-            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, MessageFlair.Yellow));
+            => T.WriteMessage(AppMsg.colorize( $"{title}: " + content?.ToString() ?? string.Empty, MessageFlair.Yellow));
     }
 }

@@ -15,5 +15,9 @@ namespace Z0
         /// <param name="src">The file path</param>
         public static StreamReader Reader(this FS.FilePath src)
             => FS.reader(src);
+
+        public static FS.FolderPath Normalize(this FS.FolderPath src)
+            => new FS.FolderPath(src.Name.Replace(Chars.BSlash, Chars.FSlash));
+
     }
 }

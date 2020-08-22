@@ -11,16 +11,16 @@ namespace Z0
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
 
-    using Z0.Tools;
+    using static z;
 
     public struct ToolProxyGen
-    {    
-        public ToolProxyGen(FilePath dst)
+    {
+        public ToolProxyGen(FS.FilePath dst)
         {
             TargetPath = dst;
         }
-        
-        public FilePath TargetPath;
+
+        public FS.FilePath TargetPath;
 
         public string Pattern => $@"
 using System;
@@ -46,13 +46,14 @@ class Program
     }}
 }};
 ";
-        public MetadataReference[] References 
+        public MetadataReference[] References
             => CodeGen.pe(typeof(object),typeof(Enumerable),typeof(ProcessStartInfo));
 
         public static CSharpCompilation compilation(ToolProxy config)
         {
-            z.insist(config.Source);
-            var dst = config.OutDir.Create() + FileName.Define(config.Name, FileExtensions.Exe);
+            z.insist(config.Source.Exists, $"The file {config.Source}, it must exist");
+
+            var dst = FS.create(config.OutDir) + FS.file(config.Name, FS.Extensions.Exe);
             var gen = new ToolProxyGen(dst);
 
             return CodeGen.compilation(config.Name)

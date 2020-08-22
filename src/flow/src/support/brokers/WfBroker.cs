@@ -9,13 +9,13 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    
+
     public class WfBroker : IWfBroker
     {
         readonly Dictionary<Type,ISink> Subscriptions;
 
         readonly Dictionary<ulong, Receiver<IAppEvent>> Receivers;
-        
+
         public IWfEventSink Sink {get;}
 
         object locker;
@@ -25,13 +25,13 @@ namespace Z0
         IWfContext Wf;
 
         [MethodImpl(Inline)]
-        public WfBroker(IWfEventLog log, CorrelationToken ct)        
+        public WfBroker(IWfEventLog log, CorrelationToken ct)
         {
             Ct = ct;
             Sink = Flow.termsink(log, Ct);
             Subscriptions = new Dictionary<Type,ISink>();
             Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
-            locker = new object();                             
+            locker = new object();
         }
 
         [MethodImpl(Inline)]
@@ -42,8 +42,8 @@ namespace Z0
         }
 
         public void Dispose()
-        {            
-            
+        {
+
         }
 
         public Outcome Subscribe<S,E>(S sink, E model)
@@ -53,7 +53,7 @@ namespace Z0
             if(Subscriptions.TryAdd(typeof(E), sink))
                 return true;
             else
-                return (false, AppMsg.Warn($"Key for {model} was previously added for {sink}"));
+                return (false, AppMsg.warn($"Key for {model} was previously added for {sink}"));
         }
 
         [MethodImpl(Inline)]

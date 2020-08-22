@@ -21,6 +21,8 @@ echo %Cmd% >> %DbLogPath%
 echo on
 call %Cmd%
 
+echo off
+
 set DbFlag=archivemembers
 set DbExt=%DbFlag%.doc
 set DbOptions=/%DbFlag%

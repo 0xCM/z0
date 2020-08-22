@@ -9,7 +9,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-    
+
     public interface TCheckNull : TValidator
     {
         /// <summary>
@@ -21,13 +21,13 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         unsafe void notnull(void* p, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => (p != null).OnNone(() => throw new ArgumentNullException(AppMsg.Define($"Pointer was null", MessageKind.Error, caller,file,line).ToString()));
+            => (p != null).OnNone(() => throw new ArgumentNullException(AppMsg.called($"Pointer was null", MessageKind.Error, caller,file,line).ToString()));
 
         void notnull<T>(T src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : class
         {
-            if(src is null)    
-                throw new ArgumentNullException(AppMsg.Define($"Argument was null", MessageKind.Error, caller,file,line).ToString());                
+            if(src is null)
+                throw new ArgumentNullException(AppMsg.called($"Argument was null", MessageKind.Error, caller,file,line).ToString());
         }
     }
 }

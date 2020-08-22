@@ -9,7 +9,7 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public abstract class t_mkl<U> : UnitTest<U>
         where U : t_mkl<U>
     {
@@ -66,7 +66,7 @@ namespace Z0.Mkl
         /// <param name="msg">The message to submit</param>
         protected void TracePerf(string msg)
         {
-            Trace(AppMsg.NoCaller($"{msg}", MessageKind.Benchmark));
+            Trace(AppMsg.define($"{msg}", MessageKind.Benchmark));
         }
     }
 }

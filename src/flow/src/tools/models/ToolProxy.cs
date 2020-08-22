@@ -2,28 +2,31 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
-    using System.Diagnostics;
+    using System.Runtime.CompilerServices;
     using System.IO;
-    
+
+    using static Konst;
+
     public struct ToolProxy
     {
         public string Name;
 
-        public FilePath Source;
+        public FS.FilePath Source;
 
-        public FolderPath OutDir;
+        public FS.FolderPath OutDir;
 
-        public ToolProxy(string name, FilePath src, FolderPath dst)
+        public FS.FilePath TargetPath;
+
+        [MethodImpl(Inline)]
+        public ToolProxy(string name, FS.FilePath src, FS.FolderPath dst)
         {
             Name = name;
             Source = src;
             OutDir = dst;
+            TargetPath = OutDir + FS.file(Name, FS.Extensions.Exe);
         }
-
-        public FilePath TargetPath 
-            => OutDir + FileName.Define(Name, FileExtensions.Exe);
     }
 }

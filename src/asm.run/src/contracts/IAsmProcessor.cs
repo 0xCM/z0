@@ -59,8 +59,8 @@ namespace Z0
 
         void IDataProcessor.Connect()
         {
-            Broker[Mnemonic.And] = WfDataHandlers.create<BasedAsmFx>(OnAnd);
-            Broker[Mnemonic.Or] = WfDataHandlers.create<BasedAsmFx>(OnOr);
+            Broker[Mnemonic.And] = AB.handler<BasedAsmFx>(OnAnd);
+            Broker[Mnemonic.Or] = AB.handler<BasedAsmFx>(OnOr);
         }
     }
 }

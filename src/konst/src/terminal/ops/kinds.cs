@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="content">The message to emit</param>
         public static void babble(object content)
-            => T.WriteMessage(AppMsg.Babble(content?.ToString() ?? string.Empty));
+            => T.WriteMessage(AppMsg.babble(content?.ToString() ?? string.Empty));
 
         /// <summary>
         /// Emits an information-level message
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="caller">The invoked method</param>
         public static void announce([Caller] string caller = null)
-            => T.WriteMessage(AppMsg.Colorize(caller, MessageFlair.Magenta));
+            => T.WriteMessage(AppMsg.colorize(caller, MessageFlair.Magenta));
 
         /// <summary>
         /// Emits a warning-level message
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void warn(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, MessageKind.Warning, caller, file, line));
+            => T.WriteMessage(AppMsg.called(content?.ToString() ?? string.Empty, MessageKind.Warning, caller, file, line));
 
         /// <summary>
         /// Emits message to the error output stream
@@ -53,7 +53,7 @@ namespace Z0
             var msg = string.Empty.Build();
             msg.AppendLine($"Failure ocuurred at {caller} {file} {line}");
             msg.AppendLine(content?.ToString() ?? string.Empty);
-            T.WriteError(AppMsg.NoCaller($"{msg.ToString()}", MessageKind.Error));
+            T.WriteError(AppMsg.define($"{msg.ToString()}", MessageKind.Error));
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
             var dst = text.build();
             dst.AppendLine($"Failure trapped by {caller} at {file} {line}");
             dst.AppendLine(e?.ToString() ?? string.Empty);
-            var msg = AppMsg.NoCaller($"{dst.ToString()}", MessageKind.Error);            
+            var msg = AppMsg.define($"{dst.ToString()}", MessageKind.Error);
             T.WriteError(msg);
         }
 
@@ -80,7 +80,7 @@ namespace Z0
             var msg = string.Empty.Build();
             msg.AppendLine($"{title}: Failure ocuurred at {caller} {file} {line}");
             msg.AppendLine(e?.ToString() ?? string.Empty);
-            T.WriteError(AppMsg.NoCaller($"{msg.ToString()}", MessageKind.Error));
+            T.WriteError(AppMsg.define($"{msg.ToString()}", MessageKind.Error));
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
             var msg = string.Empty.Build();
             msg.AppendLine($"{title}: Failure ocuurred at {caller} {file} {line}");
             msg.AppendLine(e?.ToString() ?? string.Empty);
-            T.WriteError(AppMsg.NoCaller($"{msg.ToString()}", MessageKind.Error));
+            T.WriteError(AppMsg.define($"{msg.ToString()}", MessageKind.Error));
         }
     }
 }

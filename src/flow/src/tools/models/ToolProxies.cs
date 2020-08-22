@@ -2,15 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
-    using System.Diagnostics;
+    using System.Runtime.CompilerServices;
     using System.IO;
-    
+
+    using static Konst;
+
     public readonly struct ToolProxies
     {
-        public static string[] create(ToolProxy config)        
+        public static string[] create(ToolProxy config)
         {
             var compilation = ToolProxyGen.compilation(config);
             var dst = config.TargetPath.CreateParentIfMissing();
@@ -25,6 +27,6 @@ namespace Z0.Tools
             }
 
             return default;
-        }    
+        }
     }
 }

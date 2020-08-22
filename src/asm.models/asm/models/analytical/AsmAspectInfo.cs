@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
     using System.Reflection;
 
     using static Konst;
-    
+
     public class AsmAspectInfo
     {
         public static string FormatValue(object value)
@@ -23,8 +23,8 @@ namespace Z0.Asm
                 return value.ToString();
         }
 
-        public static AppMsg ContractMismatch(string host, string contract) 
-            => AppMsg.NoCaller($"The source type {host} does not reify {contract}", MessageKind.Error);
+        public static AppMsg ContractMismatch(string host, string contract)
+            => AppMsg.define($"The source type {host} does not reify {contract}", MessageKind.Error);
 
         public static PropertyInfo[] Props(Type contract)
             => contract.Properties().Instance().Where(p => p.NotIgnored());
@@ -39,7 +39,7 @@ namespace Z0.Asm
             = new ConcurrentDictionary<Type, string>();
 
         static ConcurrentDictionary<PropertyInfo, string> AspectLabels {get;}
-            = new ConcurrentDictionary<PropertyInfo, string>();        
+            = new ConcurrentDictionary<PropertyInfo, string>();
     }
 
 }

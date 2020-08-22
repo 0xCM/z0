@@ -125,13 +125,6 @@ namespace Z0
         public FilePath[] Files(string pattern = null)
             =>  Directory.EnumerateFiles(Name, pattern ?? "*.*").Select(x => FilePath.Define(x)).Array();
 
-        // /// <summary>
-        // /// Nonrecursively enumerates folder files with names (including the extension) that contain a specified substring
-        // /// </summary>
-        // /// <param name="substring">The substring to match</param>
-        // public FilePath[] Files(string substring)
-        //     => AllFiles.Where(f => f.FileName.Contains(substring));
-
         public FilePath[] Files(FileName name)
             => Exists.IfSome(() => Directory.GetFiles(Name, $"{name}").Map(FilePath.Define), FilePath.None);
 

@@ -15,7 +15,7 @@ namespace Z0
     using static z;
 
     public readonly ref struct EmitResBytes
-    {            
+    {
         const string ProjectName = "bytes";
 
         readonly IEncodedHexArchive Archive;
@@ -23,37 +23,33 @@ namespace Z0
         public readonly FolderPath SourceDir;
 
         public readonly FolderPath TargetDir;
-                
+
         readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
-        IWfEventSink Sink 
-            => Wf.Broker.Sink;        
-        
-        [MethodImpl(Inline)]
-        public static EmitResBytes create(IWfContext context, CorrelationToken ct)
-            => new EmitResBytes(context, ct);
+        IWfEventSink Sink
+            => Wf.Broker.Sink;
 
-        internal EmitResBytes(IWfContext context, CorrelationToken ct)
+        public EmitResBytes(IWfContext context, CorrelationToken ct)
         {
             Wf = context;
             Ct = ct;
             SourceDir = context.AppPaths.AppCaptureRoot;
             TargetDir = context.AppPaths.ResourceRoot + FolderName.Define(ProjectName);
-            Archive = Archives.Services.EncodedHexArchive(SourceDir);            
+            Archive = Archives.Services.EncodedHexArchive(SourceDir);
             Wf.Created(StepName,Ct);
         }
-        
-        public void Run()        
+
+        public void Run()
         {
             Wf.RunningT(StepName, new {SourceDir, TargetDir}, Ct);
-            
-            var indices = CodeReader.identified(SourceDir, Sink);            
+
+            var indices = CodeReader.identified(SourceDir, Sink);
             foreach(var index in indices)
             {
                 Wf.Status(StepName, $"Loaded {index.Code.Length} {index.Host} code blocks", Ct);
-                
+
                 try
                 {
                     Emit(index, TargetDir);
@@ -72,7 +68,7 @@ namespace Z0
 
         void Emit(IdentifiedCodeIndex src, FolderPath dst)
         {
-            var path = (dst + FolderName.Define("src")) + src.Host.FileName(FileExtensions.Cs);            
+            var path = (dst + FolderName.Define("src")) + src.Host.FileName(FileExtensions.Cs);
             var resources = HostResources.from(src);
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, src.Host.Name);
             var members = new HashSet<string>();
@@ -89,11 +85,11 @@ namespace Z0
                     EmitMember(writer, property(res));
                     members.Add(res.Identifier);
                 }
-                
+
             }
             CloseTypeDeclaration(writer);
             CloseFileNamespace(writer);
-            
+
             Wf.Raise(new EmittedHostBytes(StepName, src.Host, (ushort)resources.Count, Ct));
         }
     }

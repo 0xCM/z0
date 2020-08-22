@@ -20,10 +20,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Connect()
         {
-            broker[JmpKind.JA] = WfDataHandlers.create<BasedAsmFx>(OnJA);
-            broker[JmpKind.JAE] = WfDataHandlers.create<BasedAsmFx>(OnJAE);
-            broker[JmpKind.JB] = WfDataHandlers.create<BasedAsmFx>(OnJB);
-            broker[JmpKind.JBE] = WfDataHandlers.create<BasedAsmFx>(OnJBE);
+            broker[JmpKind.JA] = AB.handler<BasedAsmFx>(OnJA);
+            broker[JmpKind.JAE] = AB.handler<BasedAsmFx>(OnJAE);
+            broker[JmpKind.JB] = AB.handler<BasedAsmFx>(OnJB);
+            broker[JmpKind.JBE] = AB.handler<BasedAsmFx>(OnJBE);
         }
 
         [MethodImpl(Inline)]

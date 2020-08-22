@@ -1,5 +1,5 @@
 set WfRoot=%ZDev%\wf
-call %WfRoot%\wf-vars.cmd
+call %WfRoot%\vars.cmd
 
 set Tool=dumpbin
 set ToolDstDir=%ZLogs%\tools\%Tool%

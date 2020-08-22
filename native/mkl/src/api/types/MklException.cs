@@ -6,7 +6,7 @@ namespace Z0.Mkl
 {
     using System;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;    
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
@@ -52,8 +52,8 @@ namespace Z0.Mkl
         public static void Throw(int retcode, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw Define(retcode, caller, file,line);
 
-        MklException(string msg,string caller, string file, int? line)        
-            : base(AppMsg.NoCaller($"{msg} {caller} {file} {line}",MessageKind.Error))
+        MklException(string msg,string caller, string file, int? line)
+            : base(AppMsg.define($"{msg} {caller} {file} {line}",MessageKind.Error))
         {
 
         }

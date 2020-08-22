@@ -5,20 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Reflection;
 
     using Z0.Asm;
-        
+
     using static Konst;
     using static EmitDatasetsStep;
-    
-    public ref partial struct EmitDatasets  
+
+    public ref partial struct EmitDatasets
     {
         readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
-        
+
         readonly bool Recapture;
 
         public EmitDatasets(IWfContext context, CorrelationToken ct)
@@ -28,7 +28,7 @@ namespace Z0
             Recapture = false;
             Wf.Initialized(StepName, Ct);
         }
-        
+
         void Run(EmitProjectDocsStep kind)
         {
             try
@@ -42,7 +42,7 @@ namespace Z0
             }
         }
 
- 
+
         public void Dispose()
         {
             Wf.Finished(nameof(EmitDatasets), Ct);
@@ -50,10 +50,10 @@ namespace Z0
 
         void Run(EmitResBytesStep kind)
         {
-            using var step = EmitResBytes.create(Wf, Ct);
+            using var step = new EmitResBytes(Wf, Ct);
             step.Run();
         }
-        
+
 
         void Run(EmitMetadataSetsStep kind)
         {
@@ -66,7 +66,7 @@ namespace Z0
             using var step = new EmitEnumCatalog(Wf, Ct);
             step.Run();
         }
-        
+
         void Run(EmitFieldLiteralsStep kind)
         {
             using var step = new EmitFieldLiterals(Wf, Ct);
@@ -84,13 +84,13 @@ namespace Z0
             using var step = new EmitBitMasks(Wf, Ct);
             step.Run();
         }
-                                
+
         public void Run()
         {
-            Run(default(EmitMetadataSetsStep));        
+            Run(default(EmitMetadataSetsStep));
             Run(default(EmitBitMasksStep));
             Run(default(EmitProjectDocsStep));
-            Run(default(EmitResBytesStep));            
+            Run(default(EmitResBytesStep));
             Run(default(EmitEnumCatalogStep));
             Run(default(EmitFieldLiteralsStep));
             Run(default(EmitContentCatalogStep));
@@ -98,13 +98,13 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static IAsmContext asm(IAppContext root)
-            => new AsmContext(root); 
+            => new AsmContext(root);
 
         void Run(RecaptureStep kind)
         {
             var resources = Resources.code(Assembly.LoadFrom(Wf.ResPack.Name));
             using var step = new Recapture(asm(Wf.ContextRoot));
-            step.CaptureResBytes();        
+            step.CaptureResBytes();
         }
     }
 }

@@ -5,9 +5,9 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    
-    using static Konst;    
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
     using static z;
 
     public readonly struct HashTable<K,V>
@@ -16,11 +16,11 @@ namespace Z0.Asm
 
         readonly K[] Keys;
 
-        readonly V[] Values;        
+        readonly V[] Values;
     }
-    
+
     public sealed class t_mask_capture : t_asm<t_mask_capture>
-    {    
+    {
         public static T[] binlits<T>(Type declarer, Action<AppMsg> msg)
             where T : unmanaged
         {
@@ -28,16 +28,16 @@ namespace Z0.Asm
             var count = literals.Length;
             var buffer = sys.alloc<T>(count);
             var dst = span(buffer);
-            for(var i=0; i<count; i++)        
+            for(var i=0; i<count; i++)
             {
                 var mask = literals[i];
                 var bits = BitSpans.parse(mask.Text);
                 var bitval = bits.Convert<T>();
                 if(gmath.neq(bitval, mask.Data))
-                    msg(AppMsg.Error($"{bitval} != {mask.Data}"));                    
+                    msg(AppMsg.error($"{bitval} != {mask.Data}"));
             }
 
-            return buffer;            
+            return buffer;
         }
 
         public void chedk_bit_masks()
@@ -72,10 +72,10 @@ namespace Z0.Asm
 
             foreach(var src in MaskCases.NaturalClosures)
             {
-                var captured = AsmCheck.Capture(src.Identify(), src).Require();                                
+                var captured = AsmCheck.Capture(src.Identify(), src).Require();
                 hexout.Write(captured.HostedBits);
                 asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
-            }    
+            }
         }
 
     }

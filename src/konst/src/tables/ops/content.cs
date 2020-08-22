@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -18,17 +18,17 @@ namespace Z0
                 => new FieldIndex<F>(0);
 
         [MethodImpl(Inline)]
-        public static TableContent<F,T> content<F,T>(T[] src, F f = default)
+        public static TableGrid<F,T> content<F,T>(T[] src, F f = default)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
-                => new TableContent<F,T>(src);
+                => new TableGrid<F,T>(src);
 
         [MethodImpl(Inline)]
-        public static TableContent<F,T,D> content<F,T,D>(T[] src, F f = default, D d = default)
+        public static TableGrid<F,T,D> content<F,T,D>(T[] src, F f = default, D d = default)
             where F : unmanaged, Enum
             where D :  unmanaged, Enum
             where T : struct, ITable<F,T,D>
-                => new TableContent<F,T,D>(src);
+                => new TableGrid<F,T,D>(src);
 
         [MethodImpl(Inline)]
         public static TableIndex<F,T,I> index<F,T,I>(T[] data, F f = default, I i = default)

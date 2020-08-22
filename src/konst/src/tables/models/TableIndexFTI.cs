@@ -9,29 +9,29 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     public readonly struct TableIndex<F,T,I> : ITableIndex<F,T,I>
         where F : unmanaged, Enum
         where T : struct, ITable<F,T>
         where I : unmanaged
     {
-        readonly TableContent<F,T> Data;
+        readonly TableGrid<F,T> Data;
 
         [MethodImpl(Inline)]
-        public TableIndex(TableContent<F,T> data)
+        public TableIndex(TableGrid<F,T> data)
             => Data = data;
-        
+
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
-        }      
+        }
 
         public Span<T> Edit
         {
             [MethodImpl(Inline)]
             get => Data.Edit;
-        }      
+        }
 
         public CellCount Count
         {

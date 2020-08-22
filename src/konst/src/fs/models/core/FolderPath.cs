@@ -18,6 +18,14 @@ namespace Z0
 
         public readonly struct FolderPath : IEntry<FolderPath>
         {
+            public static FolderPath Empty => new FolderPath(PathPart.Empty);
+
+            public PathPart Name {get;}
+
+            [MethodImpl(Inline)]
+            public FolderPath(PathPart name)
+                => Name = name;
+
             [MethodImpl(Inline)]
             public static FolderPath operator +(FolderPath a, FolderName b)
                 => new FolderPath(text.format(FolderJoinPattern, a, b));
@@ -26,11 +34,12 @@ namespace Z0
             public static FilePath operator +(FolderPath a, FileName b)
                 => new FilePath(text.format(FileJoinPattern, a, b));
 
-            public PathPart Name {get;}
 
-            [MethodImpl(Inline)]
-            public FolderPath(PathPart name)
-                => Name = name;
+            /// <summary>
+            /// Specifies whether the represented directory actually exists within the file system
+            /// </summary>
+            public bool Exists
+                => Directory.Exists(Name);
 
             public DirectoryInfo Info
             {

@@ -15,14 +15,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public ref struct Runner 
+    public ref struct Runner
     {
-        readonly WfCaptureState State;   
+        readonly WfCaptureState State;
 
-        readonly Span<string> Buffer;     
+        readonly Span<string> Buffer;
 
         IWfContext Wf => State.Wf;
-        
+
         CorrelationToken Ct;
 
         WfActor Actor;
@@ -43,25 +43,25 @@ namespace Z0
         {
 
         }
-        
+
         void RunCalc()
         {
             CalcDemo.compute();
-         
+
             var pos = offset;
             CalcDemo.run(Buffer, ref offset);
             for(var i=pos; i<offset; i++)
                 term.print(Buffer[i]);
-           
+
         }
-        
+
 
         void RunFsm()
         {
             using var step = new RunFsm(Wf);
             step.Run();
         }
-        
+
         public void Dispose()
         {
 
@@ -72,7 +72,7 @@ namespace Z0
         {
             Wf.Status(Actor, message, Ct);
         }
-        
+
         static void format(ValueType src, StringBuilder dst)
         {
             var type = src.GetType();
@@ -88,10 +88,10 @@ namespace Z0
                 else if(v is ITextual t)
                     dst.Append(t.Format());
                 else if(v is ValueType x)
-                    format(x, dst);                
+                    format(x, dst);
                 else if(v != null)
-                    dst.Append(v.ToString());                
-            }           
+                    dst.Append(v.ToString());
+            }
         }
 
         static void format(object src, StringBuilder dst)
@@ -106,15 +106,15 @@ namespace Z0
             {
                 var v = skip(fields,i).Definition.Value(src).ValueOrDefault();
                 dst.Append("| ");
-             
+
                 if(type.IsPrimitive)
                     dst.Append(src.ToString());
                 else if(v is ITextual t)
                     dst.Append(t.Format());
                 else if(v is ValueType x)
-                    format(x, dst);                
+                    format(x, dst);
                 else if(v != null)
-                    dst.Append(v.ToString());                
+                    dst.Append(v.ToString());
             }
 
         }
@@ -126,7 +126,7 @@ namespace Z0
             format(src, dst);
             return dst.ToString();
         }
-        
+
         void ReadRes()
         {
             using var map = MemoryFile.open(Wf.ResPack.Name);
@@ -150,12 +150,12 @@ namespace Z0
 
             Status(files.CaptureRoot);
 
-            foreach(var file in FS.dir((FS.FolderPath)files.AsmDir))
+            foreach(var file in FS.list((FS.FolderPath)files.AsmDir))
             {
                 Status(file);
             }
-
         }
+
         public void Run()
         {
             using var s0 = new ListFormatPatterns(State.Wf, typeof(RenderPatterns));
@@ -164,8 +164,8 @@ namespace Z0
             ReadRes();
 
             RunFsm();
-    
-            Status(TableIndex.AsmTAddressingModRm32);            
+
+            Status(TableIndex.AsmTAddressingModRm32);
         }
     }
 }

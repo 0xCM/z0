@@ -23,15 +23,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static TypeBuilder type(ModuleBuilder mb, FullTypeName fullName, TypeAttributes attributes, Type parent)
+        public static TypeBuilder type(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes, Type parent)
             => mb.DefineType(fullName, attributes, parent);
 
         [MethodImpl(Inline), Op]
-        public static TypeBuilder valueType(ModuleBuilder mb, FullTypeName fullName, TypeAttributes attributes)
+        public static TypeBuilder valueType(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes)
             => mb.DefineType(fullName, attributes, typeof(ValueType));
 
         [MethodImpl(Inline), Op]
-        public static FieldBuilder field(TypeBuilder tb, Name name, FullTypeName type, Address16? offset = null)
+        public static FieldBuilder field(TypeBuilder tb, Name name, ClrTypeName type, Address16? offset = null)
         {
             var fb = tb.DefineField(name, Type.GetType(type), FieldAttributes.Public);
             if(offset != null)

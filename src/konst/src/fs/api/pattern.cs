@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System.Collections.Generic;
-    using System.Linq;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -15,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string pattern(params FileExt[] src)
-            => text.join(Chars.Pipe,src.Select(x => x.SearchPattern));
+            => text.join(Chars.Pipe, src.Select(x => x.SearchPattern));
     }
 }

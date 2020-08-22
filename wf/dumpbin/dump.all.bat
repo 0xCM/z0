@@ -3,8 +3,6 @@ echo off
 set WfRoot=%ZDev%\wf
 set Step=%WfRoot%\%Tool%
 set SrcPath=%SrcDir%\%SrcFile%
-rem set DstDir=%ToolDstDir%
-rem set LogPath=%ToolLogPath%
 
 set Flag=%Summary%
 set DstFile=%SrcFile%.%Flag%.doc

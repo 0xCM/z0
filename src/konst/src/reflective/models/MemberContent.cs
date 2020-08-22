@@ -12,10 +12,10 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Unifies fields and properites from a structural metadata represetnation perspective
+    /// Unifies fields and properties from a structural metadata represetnation perspective
     /// </summary>
     public readonly struct DataMember
-    {    
+    {
         /// <summary>
         /// The represented member
         /// </summary>
@@ -26,15 +26,15 @@ namespace Z0
         public readonly Option<FieldInfo> BackingField;
 
         [MethodImpl(Inline)]
-        public static implicit operator DataMember(PropertyInfo src) 
+        public static implicit operator DataMember(PropertyInfo src)
             => new DataMember(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator DataMember(FieldInfo src) 
+        public static implicit operator DataMember(FieldInfo src)
             => new DataMember(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemberInfo(DataMember src) 
+        public static implicit operator MemberInfo(DataMember src)
             => src.Member;
 
         [MethodImpl(Inline)]
@@ -60,7 +60,7 @@ namespace Z0
             IsField = false;
             BackingField = field;
         }
- 
+
         public object GetValue(object o)
         {
             var objType = o.GetType();
@@ -70,7 +70,7 @@ namespace Z0
         }
 
         public T GetValue<T>(object o)
-            => (T)(IsField ? (Member as FieldInfo).GetValue(o) 
+            => (T)(IsField ? (Member as FieldInfo).GetValue(o)
                 : (Member as PropertyInfo).GetValue(o));
 
         public void SetValue(object o, object value)

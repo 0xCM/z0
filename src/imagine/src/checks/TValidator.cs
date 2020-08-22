@@ -15,13 +15,13 @@ namespace Z0
     public interface TValidator
     {
         Type HostType => GetType();
-        
+
         /// <summary>
         /// Creates, but does not throw, a claim exception
         /// </summary>
         /// <param name="claim">The sort of claim that failed</param>
         /// <param name="msg">The failure description</param>
-        ClaimException Failed(ClaimKind claim, IAppMsg msg)    
+        ClaimException Failed(ClaimKind claim, IAppMsg msg)
             => api.failed(claim, msg);
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace Z0
         /// Creates, but does not throw, a claim exception
         /// </summary>
         /// <param name="claim">The sort of claim that failed</param>
-        ClaimException Failed(ClaimKind claim, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)    
-            => api.failed(claim, AppMsg.Error("failed", caller, file,line));
+        ClaimException Failed(ClaimKind claim, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.failed(claim, AppMsg.error("failed", caller, file,line));
 
         /// <summary>
         /// Fails unconditionally with a message

@@ -3,23 +3,27 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
 
     using static Konst;
     using static z;
-    
+
     partial struct Table
-    {        
+    {
         [MethodImpl(Inline), Op]
         public static string format(object src, Type t, char delimiter, RenderWidth width)
         {
             var content = src is ITextual x ? x.Format() : src.ToString();
             return text.rpad(text.format("{0} {1}", delimiter, content), width);
         }
-        
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static string cell<T>(in CellFormatter<T,string> formatter, in T src)
+            => formatter.Format(src);
+
         public static void format<F,T>(in TableFields<F> fields, in T src, StringBuilder dst)
             where T : struct, ITable<F,T>
             where F : unmanaged, Enum
@@ -33,11 +37,11 @@ namespace Z0
                 ref readonly var field = ref skip(view,i);
                 var width = field.Width;
                 var type = field.DataType;
-                var def = field.Definition;                
+                var def = field.Definition;
                 var val = value(def,tr);
                 var fmt = format(val, type, FieldDelimiter, width);
-                dst.Append(fmt);        
-            }            
+                dst.Append(fmt);
+            }
         }
 
         public static void format<F,T>(in T src, StringBuilder dst)

@@ -4,14 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;    
+    using System;
 
     using static Konst;
 
     partial class TestApp<A>
     {
         const int CasePad = (int)((ulong)TestCaseField.Case >> 32);
-        
+
         const int ExecutedPad = (int)((ulong)TestCaseField.Executed >> 32);
 
         const int DurationPad = (int)((ulong)TestCaseField.Duration >> 32);
@@ -20,7 +20,7 @@ namespace Z0
 
         const string FieldSep = "| ";
 
-        static string DurationPlaceholder 
+        static string DurationPlaceholder
             => string.Empty.PadRight(DurationPad);
 
         static string FormatTs(DateTime ts)
@@ -45,53 +45,53 @@ namespace Z0
 
         string TestActionName
         {
-            get 
+            get
             {
                 var owner = Identify.OwningPartText(GetType());
                 var hostname = GetType().Name;
-                var opname = "action";         
+                var opname = "action";
                 return $"{owner}/{hostname}/{opname}";
             }
-        }   
+        }
 
         static AppMsg PreCase(string testName, DateTime start)
         {
             var fields = Arrays.from(
-                FormatName(testName), 
-                FormatStatus("executing"), 
-                DurationPlaceholder, 
+                FormatName(testName),
+                FormatStatus("executing"),
+                DurationPlaceholder,
                 FormatTs(start)
-                );                
+                );
 
-            return AppMsg.Colorize(fields.Concat(FieldSep), MessageFlair.Blue);
+            return AppMsg.colorize(fields.Concat(FieldSep), MessageFlair.Blue);
         }
 
         static AppMsg PostCase(string testName, TimeSpan elapsed, DateTime start, DateTime end)
         {
             var fields = Arrays.from(
-                FormatName(testName), 
-                FormatStatus("executed"), 
-                Format(elapsed), 
-                FormatTs(start), 
+                FormatName(testName),
+                FormatStatus("executed"),
+                Format(elapsed),
+                FormatTs(start),
                 FormatTs(end),
                 Format(end - start)
                 );
 
-            return AppMsg.Colorize(fields.Concat(FieldSep), MessageFlair.Blue);
+            return AppMsg.colorize(fields.Concat(FieldSep), MessageFlair.Blue);
         }
 
         static AppMsg PostUnit(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
         {
             var fields = Arrays.from(
-                FormatName(hosturi), 
-                FormatStatus("completed"), 
-                Format(elapsed), 
-                FormatTs(start), 
+                FormatName(hosturi),
+                FormatStatus("completed"),
+                Format(elapsed),
+                FormatTs(start),
                 FormatTs(end),
                 Format(end - start)
                 );
 
-            return AppMsg.Colorize(fields.Concat(FieldSep), MessageFlair.Blue);
+            return AppMsg.colorize(fields.Concat(FieldSep), MessageFlair.Blue);
         }
     }
 }

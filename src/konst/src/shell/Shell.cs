@@ -21,7 +21,7 @@ namespace Z0
 
         protected Shell()
         {
-            Sink = WfSinks.term();
+            Sink = AB.sink();
         }
 
         /// <summary>

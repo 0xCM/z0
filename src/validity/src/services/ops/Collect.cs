@@ -21,7 +21,7 @@ namespace Z0
             if(e != null)
                 messages.AddRange(FormatErrors(testName,e));
             else
-                messages.Add(AppMsg.Info($"{testName} executed. {runtime}"));
+                messages.Add(AppMsg.info($"{testName} executed. {runtime}"));
             return messages.ToArray();
         }
 

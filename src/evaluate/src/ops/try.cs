@@ -18,10 +18,10 @@ namespace Z0
             {
                 var buffer = exchange.Buffers[Left];
                 var code = exchange.ApiCode;
-                
+
                 if(!CheckBufferSize(code, buffer, out var msg))
-                    term.print(msg);   
-                
+                    term.print(msg);
+
                 var f = exchange.Member.Method.CreateDelegate<UnaryOp<T>>();
                 var g = GenericDynamic.unary<T>(buffer, code.Encoded);
                 var reps = exchange.PointCount;
@@ -29,7 +29,7 @@ namespace Z0
                 {
                     ref readonly var x = ref exchange.Input[i];
                     exchange.Outcomes[i] = (f(x), g(x));
-                }   
+                }
 
             }
             catch(Exception e)
@@ -47,7 +47,7 @@ namespace Z0
                 var code = exchange.ApiCode;
 
                 if(!CheckBufferSize(code, buffer, out var msg))
-                    term.print(msg);                    
+                    term.print(msg);
 
                 var f = exchange.Member.Method.CreateDelegate<BinaryOp<T>>();
                 var g = GenericDynamic.binary<T>(buffer, code.Encoded);
@@ -56,7 +56,7 @@ namespace Z0
                 {
                     ref readonly var pair = ref exchange.Input[i];
                     ref readonly var x = ref pair.Left;
-                    ref readonly var y = ref pair.Right;                    
+                    ref readonly var y = ref pair.Right;
                     exchange.Outcomes[i] = (f(x,y), g(x, y));
                 }
 
@@ -68,7 +68,7 @@ namespace Z0
         }
 
         static bool CheckBufferSize(ApiCode code, BufferToken buffer, out AppMsg msg)
-        {            
+        {
             if(buffer.BufferSize < code.Encoded.Length)
             {
                 msg = EvalMessages.BufferSizeError(code,buffer);
@@ -76,7 +76,7 @@ namespace Z0
             }
             else
             {
-                msg = AppMsg.Colorize("Nothing there", MessageFlair.Gray);
+                msg = AppMsg.colorize("Nothing there", MessageFlair.Gray);
                 return true;
             }
         }

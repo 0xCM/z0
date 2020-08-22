@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+
     using api = Z0.Table;
 
     public readonly struct TableHeader<F>
@@ -31,13 +32,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Cell(index);
         }
-        
+
         public uint CellCount
         {
             [MethodImpl(Inline)]
             get => Fields.Count;
-        }        
-                
+        }
+
         public string Format()
         {
             var formatter = api.formatter<F>(Fields, Delimiter);
@@ -61,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline)]
         ref readonly F Value(byte index)
             => ref Fields[index];
-        
+
         [MethodImpl(Inline)]
         public ushort Width(byte index)
             => @as<F,ushort>(Value(index));

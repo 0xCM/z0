@@ -162,7 +162,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public void Notify(string msg, MessageKind? severity = null)
-                => Deposit(AppMsg.NoCaller(msg,severity ?? MessageKind.Info));
+                => Deposit(AppMsg.define(msg,severity ?? MessageKind.Info));
         }
 
         sealed class AppLogger : TestLogger<AppLogger>

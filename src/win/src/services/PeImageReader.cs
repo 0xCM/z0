@@ -14,7 +14,7 @@ namespace Z0.Image
     using static PeReaderEvents;
     using static PeLiterals;
     using static z;
-        
+
     public struct PeImageReader : IDisposable
     {
         readonly IAppEventSink Sink;
@@ -28,8 +28,8 @@ namespace Z0.Image
             try
             {
                 using var source = Images.source(src,@virtual);
-                var dst = new PeImage();  
-                var reader = new PeImageReader(source, receiver);          
+                var dst = new PeImage();
+                var reader = new PeImageReader(source, receiver);
                 ref var image = ref reader.Read(source, ref dst);
                 if(reader.Succeeded)
                     return image;
@@ -38,7 +38,7 @@ namespace Z0.Image
             }
             catch(Exception e)
             {
-                receiver.Deposit(Eventing.error(nameof(PeImageReader), e));
+                receiver.Deposit(AppErrors.define(nameof(PeImageReader), e));
                 return z.none<PeImage>();
             }
         }
@@ -50,11 +50,11 @@ namespace Z0.Image
             Succeeded = false;
             Offsets = default;
         }
-        
+
         [MethodImpl(Inline)]
         public static bool magical(ushort src)
             => src == PeLiterals.Magical;
-        
+
         PeImageOffsets Offsets;
 
         ref PeImage Read(SourceStream src, ref PeImage dst)
@@ -69,7 +69,7 @@ namespace Z0.Image
                     var peSignature = src.Read<int>((int)index);
                     if(peSignature == SigExpect)
                         Read(ref dst);
-                }                
+                }
             }
             else
                 Sink.Deposit(NoMagic());
@@ -82,7 +82,7 @@ namespace Z0.Image
             if (Stream.TryRead(Offsets.HeaderOffset, out IMAGE_FILE_HEADER header))
                 dst.Header = new PeImageHeader(header);
 
-            dst.Directories = ReadDataDirectories(Stream, Offsets.DataDirectoryOffset);           
+            dst.Directories = ReadDataDirectories(Stream, Offsets.DataDirectoryOffset);
         }
 
         public void Dispose()
@@ -93,7 +93,7 @@ namespace Z0.Image
         void ReadImageOptionalHeader()
         {
             if (Stream.TryRead(Offsets.OptionalHeaderOffset, out IMAGE_OPTIONAL_HEADER_AGNOSTIC optional))
-            {            
+            {
                 var is32Bit = optional.Magic == 0x010b;
                 Stream.SeekTo(Offsets.SpecificHeaderOffset);
                 var specific = default(IMAGE_OPTIONAL_HEADER_SPECIFIC);

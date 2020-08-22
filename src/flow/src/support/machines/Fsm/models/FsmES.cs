@@ -63,8 +63,8 @@ namespace Z0
         /// <summary>
         /// The current state
         /// </summary>
-        S CurrentState;        
-                        
+        S CurrentState;
+
         /// <summary>
         /// An arror that occurred, if any, prior to normal completion
         /// </summary>
@@ -79,7 +79,7 @@ namespace Z0
         /// Identifies the machine within the process
         /// </summary>
         public string Id {get;}
-        
+
         /// <summary>
         /// Fires when input is received
         /// </summary>
@@ -125,13 +125,13 @@ namespace Z0
         /// <summary>
         /// Specifies whether the machine has started
         /// </summary>
-        public bool Started 
+        public bool Started
             => StartTime.HasValue;
 
         /// <summary>
         /// Specifies the maximum number of events that will be accept prior
         /// to forceful termination
-        /// </summary>        
+        /// </summary>
         ulong ReceiptLimit
             => Context.ReceiptLimit ?? UInt64.MaxValue;
 
@@ -143,7 +143,7 @@ namespace Z0
                 EndTime = EndTime,
                 ReceiptCount = ReceiptCount,
                 Runtime = Duration.Define(Runtime.ElapsedTicks),
-                TransitionCount = TransitionCount                            
+                TransitionCount = TransitionCount
             };
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Z0
 
         bool CanProcess()
         {
-            if(Finished)    
+            if(Finished)
             {
                 RaiseWarning(FsmMessages.ReceiptAfterFinish(Id));
                 return false;
@@ -167,7 +167,7 @@ namespace Z0
                 RaiseWarning(FsmMessages.ReceiptBeforeStart(Id));
                 return false;
             }
-            
+
             if(ReceiptCount > ReceiptLimit)
             {
                 RaiseError(ReceiptLimitExceeded.Define(Id, ReceiptLimit));
@@ -182,30 +182,30 @@ namespace Z0
         /// </summary>
         /// <param name="input">The input data</param>
         public void Submit(E input)
-        {        
+        {
             Runtime.Start();
 
             try
-            {                    
+            {
                 if(CanProcess())
                 {
                     OnReceipt(input);
                     var prior = CurrentState;
                     CurrentState = Transition.Eval(input, CurrentState).ValueOrElse(CurrentState);
-                    
+
                     if(!prior.Equals(CurrentState))
                         OnTransition(prior, CurrentState);
-                    
+
                     if(Finished)
                         OnComplete(true);
-                }                
+                }
             }
             catch(Exception e)
             {
                 OnError(e);
             }
-                    
-            Runtime.Stop();                        
+
+            Runtime.Stop();
         }
 
         void OnComplete(bool asPlanned)
@@ -235,17 +235,17 @@ namespace Z0
         /// <param name="exit">The exit state</param>
         protected virtual void OnExit(S exit) { }
 
-        void RaiseWarning(AppMsg msg) 
+        void RaiseWarning(AppMsg msg)
         {
             OnWarning(msg);
         }
-        
+
         void RaiseError(AppException e)
         {
             OnError(e);
         }
 
-        void OnReceipt(E input)        
+        void OnReceipt(E input)
         {
             ReceiptCount++;
             Option.Try(() => InputReceipt?.Invoke(input));
@@ -256,23 +256,23 @@ namespace Z0
 
         }
 
-        void OnError(Exception e)  
-        {       
+        void OnError(Exception e)
+        {
             Error = e;
-                       
+
             Option.Try(() => Oops?.Invoke(e));
 
             OnComplete(false);
-        }                     
+        }
     }
-   
+
     public class ReceiptLimitExceeded : AppException
     {
         public static ReceiptLimitExceeded Define(string machine, ulong limit)
             => new ReceiptLimitExceeded(machine, limit);
 
         public ReceiptLimitExceeded(string machine, ulong limit)
-            : base(AppMsg.Define($"{machine} Event receipt limit of {limit} was exeeded", MessageKind.Warning))
+            : base(AppMsg.called($"{machine} Event receipt limit of {limit} was exeeded", MessageKind.Warning))
         {
 
         }

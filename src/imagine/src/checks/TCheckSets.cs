@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
-        /// <param name="line">The source file line number where invocation ocurred</param>        
+        /// <param name="line">The source file line number where invocation ocurred</param>
         bool seteq<T>(ISet<T> lhs, ISet<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.SetEquals(rhs) ? true : throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T"></typeparam>
         bool contains<T>(ISet<T> set, T item, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => set.Contains(item) ? true : throw  Failed(ClaimKind.NotIn, AppMsg.Error($"Item {item} not in set", caller, file, line));
+            => set.Contains(item) ? true : throw  Failed(ClaimKind.NotIn, AppMsg.error($"Item {item} not in set", caller, file, line));
 
         /// <summary>
         /// Asserts that a set contains a specified element
@@ -50,6 +50,6 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T"></typeparam>
         bool contains<T>(ISet<T> set, params T[] items)
-            => items.Where(x => set.Contains(x)).Count() == items.Length ?  true : throw  Failed(ClaimKind.NotIn, AppMsg.Error($"Not all items in set"));
+            => items.Where(x => set.Contains(x)).Count() == items.Length ?  true : throw  Failed(ClaimKind.NotIn, AppMsg.error($"Not all items in set"));
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
         public EncodedHexArchive(FolderPath root)
         {
             ArchiveRoot = root;
-            Sink = WfSinks.term();
+            Sink = AB.sink();
         }
 
         void IAppEventSink.Deposit(IAppEvent e)
@@ -50,7 +50,7 @@ namespace Z0
             var uri = ApiHostUri.Parse(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
-                status.Deposit(Eventing.error(nameof(EncodedHexArchive), uri.Reason));
+                status.Deposit(AppErrors.define(nameof(EncodedHexArchive), uri.Reason));
                 return IdentifiedCodeIndex.Empty;
             }
 
