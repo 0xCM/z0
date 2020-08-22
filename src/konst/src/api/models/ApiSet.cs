@@ -30,7 +30,7 @@ namespace Z0
             Composition = api;
             Parts = api.Resolved;
             Assemblies = Parts.Select(x => x.Owner);
-            Catalogs = Parts.Select(x => ApiHosts.catalog(x)).Where(c => c.IsIdentified);
+            Catalogs = Parts.Select(x => ApiPart.catalog(x)).Where(c => c.IsIdentified);
             Hosts = Catalogs.SelectMany(c => c.ApiHosts);
             PartIdentities = api.Resolved.Map(p => p.Id);
         }

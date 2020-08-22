@@ -12,7 +12,7 @@ namespace Z0.Asm
         IBufferedChecker,
         ITestDynamic,
         TCheckVectors,
-        ICheckCapture
+        ICaptureChecker
     {
         IAsmDecoder Decoder
             => Context.RoutineDecoder;

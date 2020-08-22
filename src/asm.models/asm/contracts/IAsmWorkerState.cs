@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IWorkState
+    public interface IAsmWorkerState
     {
         /// <summary>
         /// The state effected by the processed commands
@@ -22,18 +22,18 @@ namespace Z0
         Seq<IAsmOperands> Processed {get;}
     }
 
-    public interface IWorkState<S> : IWorkState
+    public interface IAsmWorkerState<S> : IAsmWorkerState
     {
         /// <summary>
         /// The state effected by the processed commands
         /// </summary>
         new S Evolved {get;}
 
-        object IWorkState.Evolved 
+        object IAsmWorkerState.Evolved
             => Evolved;
     }
 
-    public interface IWorkState<C,S> : IWorkState<S>
+    public interface IAsmWorkerState<C,S> : IAsmWorkerState<S>
         where C : unmanaged, IAsmOperands
     {
         /// <summary>
@@ -46,10 +46,10 @@ namespace Z0
         /// </summary>
         new Seq<C> Processed {get;}
 
-        Seq<IAsmOperands> IWorkState.Processed 
+        Seq<IAsmOperands> IAsmWorkerState.Processed
             => from c in Processed select c as IAsmOperands;
 
-        void IWorkState.Handled(IAsmOperands cmd) 
+        void IAsmWorkerState.Handled(IAsmOperands cmd)
             => Handled((C)cmd);
     }
 }

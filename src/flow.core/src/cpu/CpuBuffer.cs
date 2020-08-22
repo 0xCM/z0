@@ -9,8 +9,8 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
-    public readonly struct CpuBuffer<N,W,T>        
+
+    public readonly struct CpuBuffer<N,W,T>
         where N : unmanaged, ITypeNat
         where W : unmanaged, ITypeWidth
         where T : unmanaged
@@ -18,7 +18,7 @@ namespace Z0
         readonly T[] Data;
 
         [MethodImpl(Inline)]
-        internal CpuBuffer(T[] data)
+        public CpuBuffer(T[] data)
         {
             Data = data;
         }
@@ -33,7 +33,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data;
-        }        
+        }
 
         [MethodImpl(Inline)]
         public void Clear(W16 w)

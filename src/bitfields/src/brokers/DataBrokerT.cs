@@ -9,42 +9,42 @@ namespace Z0
 
     using static Konst;
     using static Root;
-        
+
     public readonly struct DataBroker<K,T> : IDataBroker<K,T>
         where K : unmanaged, Enum
     {
-        readonly DataHandler<T>[] handlers;
+        readonly WfDataHandler<T>[] handlers;
 
         readonly IndexFunction<K> xf;
 
-        Span<DataHandler<T>> Handlers
+        Span<WfDataHandler<T>> Handlers
         {
             [MethodImpl(Inline)]
             get => handlers;
         }
-        
+
         [MethodImpl(Inline)]
         public DataBroker(int capacity, IndexFunction<K> xf)
         {
-            handlers = new DataHandler<T>[capacity];
-            handlers.Fill(DataHandler<T>.Empty);
+            handlers = new WfDataHandler<T>[capacity];
+            handlers.Fill(WfDataHandler<T>.Empty);
             this.xf = xf;
         }
 
         [MethodImpl(Inline)]
-        public ref DataHandler<T> Set(K kind, in DataHandler<T> handler)
+        public ref WfDataHandler<T> Set(K kind, in WfDataHandler<T> handler)
         {
             var index = xf(kind);
             ref var dst = ref seek(Handlers, index);
             dst = handler;
-            return ref dst;            
+            return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public ref readonly DataHandler<T> Get(K kind)
+        public ref readonly WfDataHandler<T> Get(K kind)
             => ref skip(Handlers, xf(kind));
 
-        public ref DataHandler<T> this[K kind]
+        public ref WfDataHandler<T> this[K kind]
         {
             [MethodImpl(Inline)]
             get => ref seek(Handlers, xf(kind));

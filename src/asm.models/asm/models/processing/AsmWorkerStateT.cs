@@ -11,13 +11,13 @@ namespace Z0
 
     using static Konst;
 
-    public struct WorkState<T>
+    public struct AsmWorkerState<T>
     {
         T[] Current;
 
         List<IAsmOperands> Operands;
 
-        public ref readonly T View 
+        public ref readonly T View
         {
             [MethodImpl(Inline)]
             get => ref Current[0];
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WorkState(T state, params IAsmOperands[] operands)
+        public AsmWorkerState(T state, params IAsmOperands[] operands)
         {
             Current = new T[1]{state};
             Operands = operands.ToList();
@@ -38,6 +38,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Handled(IAsmOperands cmd)
-            => Operands.Add(cmd);        
+            => Operands.Add(cmd);
     }
 }

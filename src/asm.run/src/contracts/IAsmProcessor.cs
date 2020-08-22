@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     using Z0.Asm;
 
     public interface IAsmProcessor<T> : IDataProcessor<T>
@@ -13,7 +13,7 @@ namespace Z0
         void Process(T src);
     }
 
-    public interface IJmpProcessor 
+    public interface IJmpProcessor
     {
         void OnJA(BasedAsmFx src)
         {
@@ -22,20 +22,20 @@ namespace Z0
 
         void OnJAE(BasedAsmFx src)
         {
-            term.announce();            
+            term.announce();
         }
 
         void OnJB(BasedAsmFx src)
         {
-            term.announce();            
+            term.announce();
         }
 
         void OnJBE(BasedAsmFx src)
         {
-            term.announce();            
+            term.announce();
         }
     }
-    
+
     public interface IAsmProcessor<E,T> : IAsmProcessor<T>
         where E : unmanaged, Enum
     {
@@ -49,18 +49,18 @@ namespace Z0
     {
         void OnAnd(BasedAsmFx located)
         {
-            
+
         }
 
         void OnOr(BasedAsmFx located)
         {
-            
+
         }
 
         void IDataProcessor.Connect()
         {
-            Broker[Mnemonic.And] = DataHandlers.Create<BasedAsmFx>(OnAnd);
-            Broker[Mnemonic.Or] = DataHandlers.Create<BasedAsmFx>(OnOr);
+            Broker[Mnemonic.And] = WfDataHandlers.create<BasedAsmFx>(OnAnd);
+            Broker[Mnemonic.Or] = WfDataHandlers.create<BasedAsmFx>(OnOr);
         }
     }
 }

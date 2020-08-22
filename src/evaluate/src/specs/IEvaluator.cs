@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IEvalWorkflow : IExeModule<PartId>
+    public interface IEvaluator : IExeModule<PartId>
     {
 
     }

@@ -10,10 +10,10 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly struct DataHandlers
+    public readonly struct WfDataHandlers
     {
         [MethodImpl(Inline)]
-        public static DataHandler<T> Create<T>(DataReceiver<T> receiver)
-            => new DataHandler<T>(receiver);        
+        public static WfDataHandler<T> create<T>(DataReceiver<T> receiver)
+            => new WfDataHandler<T>(receiver);
     }
 }

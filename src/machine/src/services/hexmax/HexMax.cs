@@ -8,22 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Root;
     using static Konst;
     using static HexLevel;
-    using static V0;
+    using static z;
 
     [ApiHost]
     public partial struct HexMax
     {
-        Vector128<byte> State;        
+        Vector128<byte> State;
 
         [MethodImpl(Inline), Op]
         public void Process(ReadOnlySpan<Hex8Kind> src)
         {
-            var count = 0;
-            for(var i=0; i<src.Length; i++)
-                Process(skip(src, i));
+            var count = src.Length;
+            ref readonly var kind = ref first(src);
+            for(var i=0u; i<count; i++)
+                Process(skip(kind, i));
         }
 
         [MethodImpl(Inline)]
@@ -36,8 +36,8 @@ namespace Z0
         public sbyte Process(Hex8Kind code)
         {
             Process(h00, h0F, code);
-            return (sbyte)vcell(State,15);
-        }        
+            return (sbyte)vcell(State, 15);
+        }
 
         [Op]
         public void Process(X00 a, X0F b, Hex8Kind code)
@@ -64,6 +64,79 @@ namespace Z0
             }
         }
 
+        [Op, Closures(UInt64k)]
+        public void Process<T>(X00 a, X3F b, Hex8Kind code, in T src)
+            where T : struct
+        {
+            switch(code)
+            {
+                case x00: Process(h00, src); break;
+                case x01: Process(h01, src); break;
+                case x02: Process(h02, src); break;
+                case x03: Process(h03, src); break;
+                case x04: Process(h04, src); break;
+                case x05: Process(h05, src); break;
+                case x06: Process(h06, src); break;
+                case x07: Process(h07, src); break;
+                case x08: Process(h08, src); break;
+                case x09: Process(h09, src); break;
+                case x0A: Process(h0A, src); break;
+                case x0B: Process(h0B, src); break;
+                case x0C: Process(h0C, src); break;
+                case x0D: Process(h0D, src); break;
+                case x0E: Process(h0E, src); break;
+                case x0F: Process(h0F, src); break;
+                case x10: Process(h10, src); break;
+                case x11: Process(h11, src); break;
+                case x12: Process(h12, src); break;
+                case x13: Process(h13, src); break;
+                case x14: Process(h14, src); break;
+                case x15: Process(h15, src); break;
+                case x16: Process(h16, src); break;
+                case x17: Process(h17, src); break;
+                case x18: Process(h18, src); break;
+                case x19: Process(h19, src); break;
+                case x1A: Process(h1A, src); break;
+                case x1B: Process(h1B, src); break;
+                case x1C: Process(h1C, src); break;
+                case x1D: Process(h1D, src); break;
+                case x1E: Process(h1E, src); break;
+                case x1F: Process(h1F, src); break;
+                case x20: Process(h20, src); break;
+                case x21: Process(h21, src); break;
+                case x22: Process(h22, src); break;
+                case x23: Process(h23, src); break;
+                case x24: Process(h24, src); break;
+                case x25: Process(h25, src); break;
+                case x26: Process(h26, src); break;
+                case x27: Process(h27, src); break;
+                case x28: Process(h28, src); break;
+                case x29: Process(h29, src); break;
+                case x2A: Process(h2A, src); break;
+                case x2B: Process(h2B, src); break;
+                case x2C: Process(h2C, src); break;
+                case x2D: Process(h2D, src); break;
+                case x2E: Process(h2E, src); break;
+                case x2F: Process(h2F, src); break;
+                case x30: Process(h30, src); break;
+                case x31: Process(h31, src); break;
+                case x32: Process(h32, src); break;
+                case x33: Process(h33, src); break;
+                case x34: Process(h34, src); break;
+                case x35: Process(h35, src); break;
+                case x36: Process(h36, src); break;
+                case x37: Process(h37, src); break;
+                case x38: Process(h38, src); break;
+                case x39: Process(h39, src); break;
+                case x3A: Process(h3A, src); break;
+                case x3B: Process(h3B, src); break;
+                case x3C: Process(h3C, src); break;
+                case x3D: Process(h3D, src); break;
+                case x3E: Process(h3E, src); break;
+                case x3F: Process(h3F, src); break;
+            }
+        }
+
         [Op]
         public void Process(X10 a, X1F b, Hex8Kind code)
         {
@@ -84,7 +157,7 @@ namespace Z0
                 case x1C: Process(h1C); break;
                 case x1D: Process(h1D); break;
                 case x1E: Process(h1E); break;
-                case x1F: Process(h1F); break;            
+                case x1F: Process(h1F); break;
                 default: Process(h20, h2F, code); break;
             }
         }
@@ -208,7 +281,7 @@ namespace Z0
                 case x6B: Process(h6B); break;
                 case x6C: Process(h6C); break;
                 case x6D: Process(h6D); break;
-                case x6E: Process(h6E); break;  
+                case x6E: Process(h6E); break;
                 default: break;
             }
         }

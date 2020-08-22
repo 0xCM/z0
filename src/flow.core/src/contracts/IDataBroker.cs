@@ -8,19 +8,19 @@ namespace Z0
 
     public interface IDataBroker
     {
-    
+
     }
 
     public interface IDataBroker<K,T> : IDataBroker
         where K : unmanaged, Enum
     {
-        ref readonly DataHandler<T> Get(K key);
+        ref readonly WfDataHandler<T> Get(K key);
 
-        ref DataHandler<T> Set(K key, in DataHandler<T> handler);
+        ref WfDataHandler<T> Set(K key, in WfDataHandler<T> handler);
 
         void Relay(K key, T value);
 
-        ref DataHandler<T> this[K key] {get;}
+        ref WfDataHandler<T> this[K key] {get;}
     }
 
     public interface IDataBroker<K,C,T> : IDataBroker
@@ -33,5 +33,5 @@ namespace Z0
         void Relay(K key, C context, T value);
 
         ref DataHandler<C,T> this[K key] {get;}
-    }    
+    }
 }

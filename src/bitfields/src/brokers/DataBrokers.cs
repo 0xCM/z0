@@ -11,14 +11,14 @@ namespace Z0
 
     [ApiHost]
     public readonly struct DataBrokers
-    {        
+    {
         [MethodImpl(Inline)]
-        public static BitBroker<K,T> broker64<K,T>(K kind = default, T rep = default)        
+        public static BitBroker<K,T> broker64<K,T>(K kind = default, T rep = default)
             where K : unmanaged, Enum
-                => new BitBroker<K,T>(kind);        
+                => new BitBroker<K,T>(kind);
 
         [MethodImpl(Inline)]
-        public static BitBroker<K,T> broker64<K,T>(DataHandler<T>[] buffer, K kind = default)        
+        public static BitBroker<K,T> broker64<K,T>(WfDataHandler<T>[] buffer, K kind = default)
             where K : unmanaged, Enum
                 => new BitBroker<K,T>(kind, buffer);
 

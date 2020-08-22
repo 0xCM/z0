@@ -6,22 +6,18 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    public interface ICheckCapture : ICaptureServiceProxy
-    {
 
-    }
-
-    public readonly struct CheckCapture : ICheckCapture
+    public readonly struct CheckCapture : ICaptureChecker
     {
         public ICaptureExchange CaptureExchange {get;}
 
-        public ICaptureCore CaptureService {get;}        
-        
+        public ICaptureCore CaptureService {get;}
+
         [MethodImpl(Inline)]
-        public static ICheckCapture Create(ICaptureCore service, ICaptureExchange exchange)
+        public static ICaptureChecker Create(ICaptureCore service, ICaptureExchange exchange)
             => new CheckCapture(service, exchange);
 
         [MethodImpl(Inline)]
@@ -31,6 +27,6 @@ namespace Z0.Asm
             CaptureExchange = exchange;
         }
 
-        
+
     }
 }

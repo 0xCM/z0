@@ -9,12 +9,20 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Worker : IWorker
+    public readonly struct WfDataHandler<T> : IDataHandler<T>
     {
+        public static WfDataHandler<T> Empty => new WfDataHandler<T>(t => {});
+
+        readonly DataReceiver<T> Receiver;
+
         [MethodImpl(Inline)]
-        public void Process(IAsmOperands cmd, IWorkState state)
+        public WfDataHandler(DataReceiver<T> receiver)
         {
-            state.Handled(cmd);
+            Receiver = receiver;
         }
+
+        [MethodImpl(Inline)]
+        public void Handle(T data)
+            => Receiver(data);
     }
 }

@@ -16,9 +16,8 @@ namespace Z0.Asm
     {
         public void process_cpuid()
         {
-            var processors = AsmProcessors.Service;
             var src = array(CpuidFeature.AVX2, CpuidFeature.AVX, CpuidFeature.X64);
-            var dst = processors.Process(src,Step);
+            var dst = AsmProcessors.process(src,Step);
             Trace(dst.Format());
         }
 
@@ -36,7 +35,7 @@ namespace Z0.Asm
         //     var sets = result.Content.ToReadOnlySpan();
         //     var count = result.Count;
         //     for(var i=0; i<count; i++)
-        //         Emit(skip(sets,i));                        
+        //         Emit(skip(sets,i));
         // }
 
         void Emit(in AsmRecordSet<Mnemonic> src)
@@ -49,7 +48,7 @@ namespace Z0.Asm
             {
                 ref readonly var record = ref skip(records,i);
                 writer.WriteLine(record.Format());
-            }            
+            }
         }
 
 
@@ -57,6 +56,6 @@ namespace Z0.Asm
         {
             var records = PartFiles.parsed(Context, PartId.Sys);
             Trace(records.Length);
-        }        
+        }
     }
 }

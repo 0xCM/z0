@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Embodies an asynchronous thread of execution that is assigned to a specific CPU core
     /// </summary>
-    public class CpuCoreWorker<T>
+    public class CpuWorker<T>
     {
         public readonly uint CoreNumber;
 
@@ -23,18 +23,27 @@ namespace Z0
 
         public readonly ulong? MaxCycles;
 
-        internal CpuCoreWorker(IContext Context, uint CoreNumber, Func<T,T> Worker, T Data, TimeSpan Frequency, ulong? MaxCycles = null)
-        {
-            this.Context = Context;
-            this.CoreNumber = CoreNumber;
-            this.Worker = Worker;
-            this.State =Data;
-            this.Frequency = Frequency;
-            this.MaxCycles = MaxCycles;
-            this.WorkerThread = null;
-            this.CycleCount = 0;
-        }
+        readonly Func<T,T> Worker;
 
+        ulong CycleCount;
+
+        ProcessThread WorkerThread;
+
+        T State;
+
+        IContext Context;
+
+        internal CpuWorker(IContext context, uint core, Func<T,T> worker, T data, TimeSpan freq, ulong? maxCycles = null)
+        {
+            Context = context;
+            CoreNumber = core;
+            Worker = worker;
+            State =data;
+            Frequency = freq;
+            MaxCycles = maxCycles;
+            WorkerThread = null;
+            CycleCount = maxCycles ?? 0;
+        }
 
         public ulong CurrentCycle
         {
@@ -53,16 +62,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get  => State;
         }
-
-        readonly Func<T,T> Worker;
-
-        ulong CycleCount;
-
-        ProcessThread WorkerThread;
-
-        T State;
-
-        IContext Context;
 
         /// <summary>
         /// Searches for a thread given an OS-assigned id, not the useless clr id

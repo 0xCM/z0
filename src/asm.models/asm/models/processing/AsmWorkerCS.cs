@@ -9,20 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct DataHandler<T> : IDataHandler<T>
+    public readonly struct AsmWorker<C,S> : IAsmWorker<C,S>
+        where C : unmanaged, IAsmOperands
+        where S : IAsmWorkerState<C,S>
     {
-        public static DataHandler<T> Empty => new DataHandler<T>(t => {});
-
-        readonly DataReceiver<T> Receiver;
-
         [MethodImpl(Inline)]
-        public DataHandler(DataReceiver<T> receiver)
+        public void Process(in C cmd, ref S state)
         {
-            Receiver = receiver;
+            state.Handled(cmd);
         }
 
         [MethodImpl(Inline)]
-        public void Handle(T data)
-            => Receiver(data);
+        public void Process(IAsmOperands cmd, ref S state)
+            => Process((C)cmd, ref state);
     }
 }

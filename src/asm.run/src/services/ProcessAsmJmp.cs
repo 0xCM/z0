@@ -6,32 +6,31 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using Z0.Asm;
 
     using static Konst;
 
-
     public struct ProcessAsmJmp : IJmpProcessor
     {
         readonly BitBroker<JmpKind,BasedAsmFx> broker;
-        
+
         public IWfContext Wf {get;}
-        
+
         [MethodImpl(Inline)]
         public void Connect()
         {
-            broker[JmpKind.JA] = DataHandlers.Create<BasedAsmFx>(OnJA);
-            broker[JmpKind.JAE] = DataHandlers.Create<BasedAsmFx>(OnJAE);
-            broker[JmpKind.JB] = DataHandlers.Create<BasedAsmFx>(OnJB);
-            broker[JmpKind.JBE] = DataHandlers.Create<BasedAsmFx>(OnJBE);
+            broker[JmpKind.JA] = WfDataHandlers.create<BasedAsmFx>(OnJA);
+            broker[JmpKind.JAE] = WfDataHandlers.create<BasedAsmFx>(OnJAE);
+            broker[JmpKind.JB] = WfDataHandlers.create<BasedAsmFx>(OnJB);
+            broker[JmpKind.JBE] = WfDataHandlers.create<BasedAsmFx>(OnJBE);
         }
 
         [MethodImpl(Inline)]
-        internal ProcessAsmJmp(IWfContext wf, bool connect = true) 
+        public ProcessAsmJmp(IWfContext wf, bool connect = true)
         {
             Wf = wf;
-            broker = ProcessBrokers.jmp();
+            broker = AsmBrokers.jmp();
             if(connect)
                 Connect();
         }
@@ -42,32 +41,32 @@ namespace Z0
             if(src.Instruction.IsJccShortOrNear)
             {
                 var kind = Enums.Parse(src.Mnemonic.ToString(),JmpKind.None);
-                broker.Relay(kind,src);   
+                broker.Relay(kind,src);
             }
         }
 
         [MethodImpl(Inline)]
-        public void OnJA(BasedAsmFx inxs)
+        public void OnJA(BasedAsmFx fx)
         {
             term.announce();
         }
 
         [MethodImpl(Inline)]
-        public void OnJAE(BasedAsmFx inxs)
+        public void OnJAE(BasedAsmFx fx)
         {
-            term.announce();            
+            term.announce();
         }
 
         [MethodImpl(Inline)]
-        public void OnJB(BasedAsmFx inxs)
+        public void OnJB(BasedAsmFx fx)
         {
-            term.announce();            
+            term.announce();
         }
 
         [MethodImpl(Inline)]
-        public void OnJBE(BasedAsmFx inxs)
+        public void OnJBE(BasedAsmFx fx)
         {
-            term.announce();            
+            term.announce();
         }
     }
 }

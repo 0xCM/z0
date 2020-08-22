@@ -5,18 +5,18 @@
 namespace Z0.Asm
 {
     using System;
-    
-    using K = Kinds;
-    
-    using static Konst;
-    using static Memories;
 
-    public class EvalWorkflow : IEvalWorkflow
+    using K = Kinds;
+
+    using static Konst;
+    using static z;
+
+    public class Evaluator : IEvaluator
     {
         readonly IAppContext Context;
-        
+
         readonly IEvalDispatcher Dispatcher;
-        
+
         readonly uint BufferSize;
 
         readonly byte BufferCount;
@@ -24,9 +24,9 @@ namespace Z0.Asm
         readonly IPartCaptureArchive CodeArchive;
 
         readonly IApiSet ApiSet;
-                
-        internal EvalWorkflow(IAppContext context, IPolyrand random, FolderPath root, uint buffersize)
-        {                    
+
+        internal Evaluator(IAppContext context, IPolyrand random, FolderPath root, uint buffersize)
+        {
             BufferCount = 3;
             BufferSize = buffersize;
             Context = context;
@@ -34,7 +34,7 @@ namespace Z0.Asm
             CodeArchive = Archives.Services.CaptureArchive(root);
             ApiSet = context;
         }
-                
+
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
             var dst = HostCaptureArchive.create(CodeArchive.ArchiveRoot, host.Uri);
@@ -54,11 +54,11 @@ namespace Z0.Asm
         void ExecuteCatalog(IPartCatalog catalog)
         {
             using var buffers = Buffers.sequence(BufferSize, BufferCount);
-            
-            foreach(var host in catalog.OperationHosts)
+
+            foreach(var host in catalog.Operations)
                 ExecuteHost(buffers.Tokenize(), host);
         }
-        
+
         public void Execute(params PartId[] parts)
         {
             using var buffers = Buffers.sequence(BufferSize, BufferCount);

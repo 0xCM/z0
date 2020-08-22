@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// The known types that reify contracted operation services, potentially generic
         /// </summary>
-        Type[] ServiceHostTypes {get;}
+        Type[] ServiceHosts {get;}
 
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
@@ -31,19 +31,19 @@ namespace Z0
         /// <summary>
         /// The data type hosts
         /// </summary>
-        ApiDataType[] DataTypeHosts {get;}
+        ApiDataType[] ApiDataTypes {get;}
 
         /// <summary>
         /// The operation hosts
         /// </summary>
-        ApiHost[] OperationHosts {get;}
-        
+        ApiHost[] Operations {get;}
+
         /// <summary>
         /// The api hosts known to the catalog, including both operation and data type hosts
         /// </summary>
-        IApiHost[] ApiHosts 
-            => DataTypeHosts.Cast<IApiHost>().Concat(OperationHosts.Cast<IApiHost>()).Array();
-        
+        IApiHost[] ApiHosts
+            => ApiDataTypes.Cast<IApiHost>().Concat(Operations.Cast<IApiHost>()).Array();
+
         /// <summary>
         /// Specifies whether the catalog contains content from an identifid assembly
         /// </summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
-        bool IsNonEmpty 
-            => (OperationHosts.Length + DataTypeHosts.Length) != 0;
-    }    
+        bool IsNonEmpty
+            => (Operations.Length + ApiDataTypes.Length) != 0;
+    }
 }

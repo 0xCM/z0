@@ -8,34 +8,33 @@ namespace Z0
 
     using static Konst;
     using static ProcessInstructionsStep;
-    
-    using api = Processors;    
-            
-    public class ProcessInstructions 
+
+
+    public class ProcessInstructions
     {
         public static ProcessInstructions create(IWfContext wf, FolderPath dst)
             => new ProcessInstructions(wf, dst);
 
         public IWfContext Wf {get;}
-        
+
         readonly ProcessAsmJmp Processor;
 
         public ProcessInstructions(IWfContext wf, FolderPath root)
         {
             Wf = wf;
-            Processor = api.jmp(wf);            
+            Processor = AsmProcessors.jmp(wf);
         }
 
-        public void Run(PartAsmFx src)        
-        {            
-            Process(src);            
+        public void Run(PartAsmFx src)
+        {
+            Process(src);
         }
 
         public void Process(PartAsmFx src)
         {
-            api.processor(Wf).Process(src);
+            AsmProcessors.parts(Wf).Process(src);
         }
- 
+
         public void Render(PartAsmFx src)
         {
             var part = src.Part;
@@ -46,10 +45,10 @@ namespace Z0
                 Render(src.Data[i]);
         }
 
-        public void Render(HostAsmFx src)        
+        public void Render(HostAsmFx src)
         {
             var archive = Archives.Services.Semantic;
-            var path = archive.SemanticPath(src.Host);  
+            var path = archive.SemanticPath(src.Host);
             var semantic = RenderSemantic.Create();
             using var writer = path.Writer();
             semantic.Render(src,writer);

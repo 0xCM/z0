@@ -7,10 +7,10 @@ namespace Z0
     using System;
 
     using Z0.Asm;
-    
+
     public readonly struct AsmTest
     {
-        public static TTestAsm checker(IAsmContext context)
+        public static IAsmTester checker(IAsmContext context)
             => new AsmChecks(context);
 
         public static TAsmTester tester(IAsmContext context)

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
     using static Memories;
 
     using API = BitFields;
@@ -19,9 +19,9 @@ namespace Z0
         internal ulong Data;
 
         internal readonly BitFieldSpec<I,W> Spec;
-            
+
         [MethodImpl(Inline)]
-        internal BitField64(in BitFieldSpec<I,W> spec, ulong data)
+        public BitField64(in BitFieldSpec<I,W> spec, ulong data)
         {
             Spec = spec;
             Data = data;
@@ -35,7 +35,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => API.extract(segment(index), Data);
-            
+
             [MethodImpl(Inline)]
             set => API.deposit(segment(index), value, ref Data);
         }

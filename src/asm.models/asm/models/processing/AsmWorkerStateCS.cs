@@ -13,21 +13,21 @@ namespace Z0
     /// <summary>
     /// Tracks the state of a process stream and the commands that effected the state
     /// </summary>
-    public struct WorkState<C,S> : IWorkState<C,S>
+    public struct AsmWorkerState<C,S> : IAsmWorkerState<C,S>
         where C : unmanaged, IAsmOperands
     {
-        internal S Current;
+        S Current;
 
         List<C> Commands;
 
         [MethodImpl(Inline)]
-        public WorkState(S state)
+        public AsmWorkerState(S state)
         {
             Current = state;
             Commands = new List<C>();
         }
 
-        public S Evolved 
+        public S Evolved
         {
             [MethodImpl(Inline)]
             get => Current;
@@ -44,8 +44,5 @@ namespace Z0
 
         public void Handled(in C cmd)
             => Commands.Add(cmd);
-        
-        public WorkState Generalized
-            => new WorkState(Current, from c in Processed select c as IAsmOperands);
     }
 }

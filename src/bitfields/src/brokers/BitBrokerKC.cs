@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Mediates parametric data exchange for up to 64 enumeration-predicated classifiers
@@ -27,11 +27,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal BitBroker(DataHandler<C,T>[] buffer)
+        public BitBroker(DataHandler<C,T>[] buffer)
         {
             Bits = default;
             handlers = buffer;
-            Handlers.Fill(DataHandler<C,T>.Empty);            
+            Handlers.Fill(DataHandler<C,T>.Empty);
         }
 
         [MethodImpl(Inline)]
@@ -45,15 +45,15 @@ namespace Z0
         public BitBroker(K kind)
             : this(kind, new DataHandler<C,T>[64])
         {
-            
-        }        
-        
+
+        }
+
         [MethodImpl(Inline)]
         public ref DataHandler<C,T> Set(K kind, in DataHandler<C,T> handler)
         {
             ref var dst = ref seek(Handlers, Bits.Index(kind));
             dst = handler;
-            return ref dst;            
+            return ref dst;
         }
 
         [MethodImpl(Inline)]

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public class AsmChecks : TTestAsm
+    public class AsmChecks : IAsmTester
     {
         public IAsmContext Context {get;}
 
@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public ICaptureExchange CaptureExchange {get;}
 
-        internal AsmChecks(IAsmContext context)
+        public AsmChecks(IAsmContext context)
         {
             Context = context;
             Buffers = Z0.Buffers.sequence(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
@@ -31,7 +31,7 @@ namespace Z0.Asm
             BufferAlloc.Dispose();
         }
 
-        TTestAsm Me => this;
+        IAsmTester Me => this;
 
         public ref readonly BufferToken this[BufferSeqId index]
             => ref Buffers[index];

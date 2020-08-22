@@ -2,23 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System;
-
-    using Z0.Asm;
-
-    public enum HostHandlerKind : byte
+    public interface IAsmTester : TTestCapture, TTestImmCapture, TTestDynamicVectors
     {
-        A = 0,
 
-        B = 1,
-
-        C = 2
-    }
-
-    public interface IHostProcessor : IAsmProcessor<HostHandlerKind,HostAsmFx>
-    {
 
     }
 }

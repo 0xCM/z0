@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Threading;
 
-    public static class CpuCoreWorker
+    public static class CpuWorkers
     {
         /// <summary>
         /// Creates and starts a worker
@@ -16,12 +16,12 @@ namespace Z0
         /// <param name="cpucore">The CPU core number</param>
         /// <param name="worker">The worker function</param>
         /// <param name="state">The subject input</param>
-        /// <param name="frequency">The worker frequence</param>
+        /// <param name="frequency">The worker frequency</param>
         /// <param name="MaxCycles">The maximum number of cycles the worker will be allowed to execute before forceful termination</param>
         /// <typeparam name="T">The subject type</typeparam>
-        public static CpuCoreWorker<T> Start<T>(IContext context, uint cpucore, Func<T,T> worker, T state, TimeSpan frequency, ulong? MaxCycles = null)
+        public static CpuWorker<T> start<T>(IContext context, uint cpucore, Func<T,T> worker, T state, TimeSpan frequency, ulong? MaxCycles = null)
         {
-            var cpuWorker = new CpuCoreWorker<T>(context, cpucore, worker, state, frequency, MaxCycles);
+            var cpuWorker = new CpuWorker<T>(context, cpucore, worker, state, frequency, MaxCycles);
             var workerThread = new Thread(new ThreadStart(cpuWorker.Control))
             {
                 IsBackground = true,
@@ -33,11 +33,11 @@ namespace Z0
         }
 
         static int WorkerId;
-        
+
         static string WorkerName(uint cpucore)
             => $"{Interlocked.Increment(ref WorkerId)}/{cpucore}";
 
-        static CpuCoreWorker<ulong> Example(IContext context)
+        static CpuWorker<ulong> Example(IContext context)
         {
             ulong Sum(ulong max)
             {
@@ -46,8 +46,8 @@ namespace Z0
                     sum += (ulong)i;
                 return sum;
             }
-            
-            return Start(context, 1, Sum, (ulong)Pow2.T20, new TimeSpan(0,0,1));            
+
+            return start(context, 1, Sum, (ulong)Pow2.T20, new TimeSpan(0,0,1));
         }
     }
 }

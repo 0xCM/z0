@@ -8,11 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Root;
     using static Konst;
-    using static Typed;
-    using static V0;
-    using static V0d;
+    using static z;
 
     partial struct HexMax
     {
@@ -110,6 +107,6 @@ namespace Z0
         public void Process(X4F x)
         {
             State = vadd(State, vbroadcast(w128, (byte)x));
-        }           
+        }
     }
 }

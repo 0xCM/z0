@@ -16,26 +16,26 @@ namespace Z0
     public readonly struct BitBroker<K,T> : IDataProcessor<T>, IDataBroker<K,T>
         where K : unmanaged, Enum
     {
-        readonly DataHandler<T>[] handlers;
+        readonly WfDataHandler<T>[] handlers;
 
         readonly BitField64<K> Bits;
 
-        Span<DataHandler<T>> Handlers
+        Span<WfDataHandler<T>> Handlers
         {
             [MethodImpl(Inline)]
             get => handlers;
         }
 
         [MethodImpl(Inline)]
-        internal BitBroker(DataHandler<T>[] buffer)
+        internal BitBroker(WfDataHandler<T>[] buffer)
         {
             Bits = default;
             handlers = buffer;
-            Handlers.Fill(DataHandler<T>.Empty);            
+            Handlers.Fill(WfDataHandler<T>.Empty);
         }
 
         [MethodImpl(Inline)]
-        public BitBroker(K kind, DataHandler<T>[] buffer)
+        public BitBroker(K kind, WfDataHandler<T>[] buffer)
             : this(buffer)
         {
             Bits = BitFields.bf64(kind);
@@ -43,24 +43,24 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitBroker(K kind)
-            : this(kind, new DataHandler<T>[64])
+            : this(kind, new WfDataHandler<T>[64])
         {
-            
-        }        
-        
-        [MethodImpl(Inline)]
-        public ref DataHandler<T> Set(K kind, in DataHandler<T> handler)
-        {
-            ref var dst = ref seek(Handlers, Bits.Index(kind));
-            dst = handler;
-            return ref dst;            
+
         }
 
         [MethodImpl(Inline)]
-        public ref readonly DataHandler<T> Get(K kind)
+        public ref WfDataHandler<T> Set(K kind, in WfDataHandler<T> handler)
+        {
+            ref var dst = ref seek(Handlers, Bits.Index(kind));
+            dst = handler;
+            return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        public ref readonly WfDataHandler<T> Get(K kind)
             => ref skip(Handlers, Bits.Index(kind));
 
-        public ref DataHandler<T> this[K kind]
+        public ref WfDataHandler<T> this[K kind]
         {
             [MethodImpl(Inline)]
             get => ref seek(Handlers, Bits.Index(kind));

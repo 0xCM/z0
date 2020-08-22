@@ -11,8 +11,7 @@ namespace Z0
 
     using static Konst;
     using static ProcessPartFilesStep;
-    
-    [ApiHost]
+
     public class ProcessPartFiles : IDisposable
     {
         const int DefaultBufferSize = CpuBuffer.BufferSize;
@@ -27,20 +26,17 @@ namespace Z0
 
         readonly PartFiles Files;
 
-        public static CpuBuffers buffers(int size)
-            => new CpuBuffers(size);
-
         [MethodImpl(Inline)]
         internal ProcessPartFiles(IWfContext wf, IAsmContext asm, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
-            Files = PartFiles.create(asm);        
-            Buffers = buffers(DefaultBufferSize);
+            Files = PartFiles.create(asm);
+            Buffers = CpuBuffer.alloc(DefaultBufferSize);
             ProcessedCount = 0;
             Wf.Created(StepName, Ct);
         }
-        
+
         void RunTestCase()
         {
             const string Case01 = "002ch vmovdqu xmmword ptr [rcx],xmm0 ; VMOVDQU xmm2/m128, xmm1 || VEX.128.F3.0F.WIG 7F /r || encoded[4]{c5 fa 7f 01}";
@@ -59,7 +55,7 @@ namespace Z0
 
         [Op]
         public void Run()
-        {            
+        {
             try
             {
                 var steps = Buffers.Run().Slice(0, ProcessedCount);

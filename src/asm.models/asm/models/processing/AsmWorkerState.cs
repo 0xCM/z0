@@ -10,31 +10,31 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    
-    public struct WorkState
+
+    public struct AsmWorkerState
     {
         internal object Current;
-        
+
         List<IAsmOperands> Commands;
 
-        public object State 
+        public object State
             => Current;
 
         [MethodImpl(Inline)]
-        public WorkState(object state, Seq<IAsmOperands> commands)
+        public AsmWorkerState(object state, Seq<IAsmOperands> commands)
         {
             Current = state;
             Commands = commands.ToList();
         }
 
         [MethodImpl(Inline)]
-        public WorkState(object state)
+        public AsmWorkerState(object state)
         {
             Current = state;
             Commands = new List<IAsmOperands>();
         }
 
         public void Handled(IAsmOperands cmd)
-            => Commands.Add(cmd);        
+            => Commands.Add(cmd);
     }
 }

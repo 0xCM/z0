@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
@@ -15,8 +15,12 @@ namespace Z0
     {
         readonly byte[] Data;
 
+        [MethodImpl(Inline), Op]
+        public static CpuBuffers alloc(int size)
+            => new CpuBuffers(size);
+
         [MethodImpl(Inline)]
-        public static CpuBuffer<N,W,T> Alloc<N,W,T>()
+        public static CpuBuffer<N,W,T> alloc<N,W,T>()
             where N : unmanaged, ITypeNat
             where W : unmanaged, ITypeWidth
             where T : unmanaged
@@ -55,10 +59,10 @@ namespace Z0
         /// <summary>
         /// The number of 512-bit elements covered by the buffer
         /// </summary>
-        public const int Buffer512 = BufferSize/64;        
+        public const int Buffer512 = BufferSize/64;
 
         [MethodImpl(Inline)]
-        internal CpuBuffer(byte[] data)
+        public CpuBuffer(byte[] data)
         {
             Data = data;
         }
@@ -74,7 +78,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data;
         }
-        
+
         [MethodImpl(Inline)]
         public void Clear(W16 w)
         {
@@ -97,6 +101,6 @@ namespace Z0
         public void Clear(W128 w)
         {
             first(Content.Cast<byte,Fixed128>()) = Fixed128.Empty;
-        }        
-    }    
+        }
+    }
 }

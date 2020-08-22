@@ -39,8 +39,8 @@ namespace Z0
             Ct = ct;
             Context = State.CWf.Context;
             Catalogs = Context.ApiSet.MatchingCatalogs(state.Config.Parts).Array();
-            var a = Catalogs.SelectMany(c => c.DataTypeHosts).Cast<IApiHost>();
-            var b = Catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>();
+            var a = Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>();
+            var b = Catalogs.SelectMany(c => c.Operations).Cast<IApiHost>();
             Hosts = a.Concat(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
         }
 
@@ -95,7 +95,7 @@ namespace Z0
 
         void CaptureHosts(IPartCatalog src, IPartCaptureArchive dst)
         {
-            var hosts = span(src.OperationHosts);
+            var hosts = span(src.Operations);
             var count = hosts.Length;
             using var step = new CaptureHostMembers(State, dst, Ct);
             for(var i=0; i<count; i++)

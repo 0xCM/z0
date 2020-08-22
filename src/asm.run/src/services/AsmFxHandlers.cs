@@ -22,7 +22,7 @@ namespace Z0.Asm
         readonly Dictionary<Mnemonic, AsmFxCollector> Collectors;
 
         [MethodImpl(Inline)]
-        internal AsmFxHandlers(int? count)
+        public AsmFxHandlers(int? count)
         {
             BufferLength = count ??(int)Mnemonic.LAST + 1;
             Activations = new uint[BufferLength];
@@ -39,13 +39,13 @@ namespace Z0.Asm
                 Collectors[i.Mnemonic] = asm.collector(i);
 
             if(Sinks.TryGetValue(i.Mnemonic, out var sink))
-                sink.Deposit(i);            
+                sink.Deposit(i);
 
             Activations[(int)i.Mnemonic]++;
 
             return ref i;
         }
-        
+
         [MethodImpl(Inline)]
         public void OnVinserti128(in Instruction i)
             => Collect(i);
@@ -56,7 +56,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public void OnCall(in Instruction i)
-            => Collect(i);        
+            => Collect(i);
 
         [MethodImpl(Inline)]
         public bool Include(AsmFxSink sink)
@@ -67,7 +67,7 @@ namespace Z0.Asm
             get => Collectors.Select(kvp => (kvp.Key, kvp.Value.Collected())).ToDictionary();
         }
 
-        public static AsmFxHandlers Default 
-            => new AsmFxHandlers(null);        
+        public static AsmFxHandlers Default
+            => new AsmFxHandlers(null);
     }
 }

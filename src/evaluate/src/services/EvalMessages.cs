@@ -5,13 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using static Konst;
-    using static Memories;
-    using static Kinds;
 
     using K = Kinds;
 
@@ -29,9 +22,9 @@ namespace Z0
 
         public static void RuntimeEvalFailure(this IAppMsgSink dst, in ApiCode api, Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            dst.NotifyConsole(AppMsg.Error($"Runtime evaluation error occurred duing execution of {api.Id}", caller, file, line)); 
-            dst.NotifyConsole(AppMsg.NoCaller(e, MessageKind.Error));                               
-        }            
+            dst.NotifyConsole(AppMsg.Error($"Runtime evaluation error occurred duing execution of {api.Id}", caller, file, line));
+            dst.NotifyConsole(AppMsg.NoCaller(e, MessageKind.Error));
+        }
 
         public static AppMsg BufferSizeError(ApiCode code, BufferToken buffer)
             => AppMsg.NoCaller($"There are {buffer.BufferSize} available buffer bytes but at least {code.Length} is required by {code.Member.Id}");

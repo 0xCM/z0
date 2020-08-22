@@ -131,8 +131,8 @@ namespace Z0.Asm
             var dId = OpIdentityBuilder.build(name, w, kind, false);
             var gId = OpIdentityBuilder.build(name, w, kind, true);
             var archive = new EncodedHexArchive(TargetArchive.CodeDir);
-            var dBits = archive.Read(ApiHosts.from<dvec>().Uri).Where(x => x.Id == dId).Single();
-            var gBits = archive.Read(ApiHosts.from<gvec>().Uri).Where(x => x.Id == gId).Single();
+            var dBits = archive.Read(ApiPart.host<dvec>().Uri).Where(x => x.Id == dId).Single();
+            var gBits = archive.Read(ApiPart.host<gvec>().Uri).Where(x => x.Id == gId).Single();
             return AsmCheck.Match(K.BinaryOp, w, dBits, gBits, dst);
         }
 

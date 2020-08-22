@@ -23,17 +23,17 @@ namespace Z0
         /// <summary>
         /// The data types defined by the assembly
         /// </summary>
-        public ApiDataType[] DataTypeHosts {get;}
+        public ApiDataType[] ApiDataTypes {get;}
 
         /// <summary>
         /// The data types defined by the assembly
         /// </summary>
-        public ApiHost[] OperationHosts {get;}
+        public ApiHost[] Operations {get;}
 
         /// <summary>
         /// The api service types types defined by the assembly
         /// </summary>
-        public Type[] ServiceHostTypes {get;}
+        public Type[] ServiceHosts {get;}
 
         /// <summary>
         /// The api hosts known to the catalog, including both operation and data type hosts
@@ -44,10 +44,10 @@ namespace Z0
         {
             PartId = part.Id;
             Owner = part.Owner;
-            DataTypeHosts = dtHosts;
-            OperationHosts = opHosts;
-            ServiceHostTypes = svcHostTypes;
-            ApiHosts = DataTypeHosts.Cast<IApiHost>().Concat(OperationHosts.Cast<IApiHost>()).Array();
+            ApiDataTypes = dtHosts;
+            Operations = opHosts;
+            ServiceHosts = svcHostTypes;
+            ApiHosts = ApiDataTypes.Cast<IApiHost>().Concat(Operations.Cast<IApiHost>()).Array();
         }
 
         /// <summary>
@@ -60,6 +60,6 @@ namespace Z0
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         public bool IsNonEmpty
-            => (OperationHosts.Length + DataTypeHosts.Length) != 0;
+            => (Operations.Length + ApiDataTypes.Length) != 0;
     }
 }

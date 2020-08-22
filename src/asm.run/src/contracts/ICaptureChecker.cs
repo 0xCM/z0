@@ -2,19 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Konst;
 
-    partial struct Evaluate
+    public interface ICaptureChecker : ICaptureServiceProxy
     {
-        [MethodImpl(Inline), Op]
-        public static IEvaluator workflow(IAppContext context, IPolyrand random, FolderPath root, uint bufferSize)
-            => new Asm.Evaluator(context, random, root, bufferSize);
+
     }
+
 }
