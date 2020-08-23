@@ -27,8 +27,6 @@ namespace Z0
     [Step(typeof(EmitBitMasks))]
     public readonly struct EmitBitMasksStep
     {
-        public const WfStepKind Kind = WfStepKind.EmitBitMasks;
-
         public const string StepName = nameof(EmitBitMasks);
 
         public const string RunningPattern = "Emitting bitmasks to {0}";
@@ -65,8 +63,6 @@ namespace Z0
     [Step(typeof(Engine))]
     public readonly struct RunProcessorsStep
     {
-        public const WfStepKind Kind = WfStepKind.RunProcessors;
-
         public const string StepName = nameof(Engine);
     }
 
@@ -144,6 +140,12 @@ namespace Z0
         public const string StepName = nameof(EmitPartStrings);
 
         public const string DataType = EmitStringRecordsStep.DataType;
+    }
+
+    [Step(typeof(IndexEncodedParts))]
+    public readonly struct IndexEncodedPartsStep
+    {
+        public const string StepName = nameof(IndexEncodedParts);
     }
 
     [Step(typeof(ProcessInstructions))]

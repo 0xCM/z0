@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{ 
+{
     public interface IMachineClient : IWfBrokerClient
     {
         IWfError Error => default(WfError<object>);
-        
+
         LoadedParseReport LoadedParseReport => default;
 
         IndexedEncoded IndexedCode => default;
@@ -18,32 +18,32 @@ namespace Z0
 
         DecodedMachine DecodedIndex => default;
 
-        void OnEvent(IWfError e) 
+        void OnEvent(IWfError e)
             => Sink.Deposit(e);
 
-        void OnEvent(LoadedParseReport e) 
+        void OnEvent(LoadedParseReport e)
             => Sink.Deposit(e);
 
-        void OnEvent(IndexedEncoded e) 
+        void OnEvent(IndexedEncoded e)
             => Sink.Deposit(e);
 
-        void OnEvent(DecodedHost e) 
+        void OnEvent(DecodedHost e)
             => Sink.Deposit(e);
 
-        void OnEvent(DecodedPart e) 
+        void OnEvent(DecodedPart e)
             => Sink.Deposit(e);
 
-        void OnEvent(DecodedMachine e) 
+        void OnEvent(DecodedMachine e)
             => Sink.Deposit(e);
 
         void Connect()
         {
-            Error.Subscribe(Broker,OnEvent);            
+            Error.Subscribe(Broker,OnEvent);
             LoadedParseReport.Subscribe(Broker,OnEvent);
-            IndexedCode.Subscribe(Broker,OnEvent);
+            //IndexedCode.Subscribe(Broker,OnEvent);
             DecodedHost.Subscribe(Broker,OnEvent);
-            DecodedPart.Subscribe(Broker,OnEvent);
-            DecodedIndex.Subscribe(Broker,OnEvent);
-        }        
+            //DecodedPart.Subscribe(Broker,OnEvent);
+            //DecodedIndex.Subscribe(Broker,OnEvent);
+        }
     }
 }

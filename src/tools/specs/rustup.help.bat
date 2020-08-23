@@ -1,1 +1,0 @@
-rustup -h > rustup.doc

@@ -12,8 +12,8 @@ namespace Z0
 
     using static Konst;
     using static RunProcessorsStep;
-    using static z;    
-    
+    using static z;
+
     public class Engine : IMachine
     {
         public static Engine create(WfCaptureState wf, CorrelationToken ct)
@@ -31,9 +31,9 @@ namespace Z0
                 wf.Error(StepName, e, ct);
                 throw;
             }
-            
+
             wf.Initialized(StepName, ct);
-            return step;        
+            return step;
         }
 
         readonly WfCaptureState State;
@@ -45,39 +45,41 @@ namespace Z0
         readonly FolderPath TargetDir;
 
         public EncodedParts Index;
-        
+
         Engine(WfCaptureState wf, CorrelationToken ct)
         {
             State = wf;
             Ct = ct;
             TargetDir = Wf.AppDataRoot + FolderName.Define(StepName);
-            Files = PartFiles.create(Asm);            
+            Files = PartFiles.create(Asm);
             Buffer = list<Instruction>(2000);
         }
 
-        readonly List<Instruction> Buffer;        
+        readonly List<Instruction> Buffer;
 
         IWfContext Wf
             => State.Wf;
-        
+
         IAsmContext Asm
             => State.Asm;
 
-        public IWfBroker Broker 
+        public IWfBroker Broker
             => State.Wf.Broker;
 
-        public IWfEventSink Sink 
+        public IWfEventSink Sink
             => Wf.Broker.Sink;
 
         public void Run()
         {
             Wf.Running(StepName, Ct);
             try
-            {            
+            {
                 using var step = new IndexEncodedParts(Wf, Files, Ct);
                 step.Run();
                 Index = step.EncodedIndex;
                 Process(Index);
+                var parts = DecodeParts(Index);
+                Process(parts);
             }
             catch(Exception e)
             {
@@ -91,39 +93,54 @@ namespace Z0
             Wf.Finished(StepName, Ct);
         }
 
-        
-        public void OnEvent(IndexedEncoded e)
+        Span<PartAsmFx> DecodeParts(EncodedParts src)
         {
-            Sink.Deposit(e);
+            var parts = src.Parts;
+            var dst = z.alloc<PartAsmFx>(parts.Length);
+            var hostFx = z.list<HostAsmFx>();
+            for(var i=0; i<parts.Length; i++)
+            {
+                hostFx.Clear();
+                var part = parts[i];
+                var hosts = src.Hosts.Where(h => h.Owner == part);
 
-            DecodeParts(e.Index);
+                for(var j=0; j<hosts.Length; j++)
+                {
+                    var host = hosts[j];
+                    var members = src[host];
+                    hostFx.Add(Decode(members));
+                }
+                dst[i] = new PartAsmFx(part, hostFx.ToArray());
+            }
+            return dst;
         }
 
-        public void OnEvent(DecodedMachine e)
+        public void Process(ReadOnlySpan<PartAsmFx> src)
         {
-            Sink.Deposit(e);
-
             try
             {
-                var index = LocatedAsmFxList.create(e.Instructions.ToArray());
-                using var step = new AnalyzeCalls(Wf, index, TargetDir, Ct);
-                step.Run();
+                foreach(var part in src)
+                {
+                    var index = LocatedAsmFxList.create(part.Located.ToArray());
+                    Process(part);
+                    using var step = new AnalyzeCalls(Wf, index, TargetDir, Ct);
+                    step.Run();
+                }
             }
             catch(Exception error)
             {
                 Wf.Error(error, Ct);
-            }            
+            }
         }
 
-        public void OnEvent(DecodedPart e)
+        public void Process(PartAsmFx fx)
         {
-            Sink.Deposit(e);
             try
             {
                 Wf.Status(StepName, "Processing instructions", Ct);
                 var workflow = ProcessInstructions.create(Wf, TargetDir);
-                workflow.Process(e.Instructions);
-                workflow.Render(e.Instructions);
+                workflow.Process(fx);
+                workflow.Render(fx);
             }
             catch(Exception error)
             {
@@ -131,66 +148,23 @@ namespace Z0
             }
         }
 
-        void DecodeParts(EncodedParts src)
-        {            
-            var dst = z.dict<ApiHostUri,HostAsmFx>();
-
-            var parts = src.Parts;
-            var count = parts.Length;
-            
-            for(var i=0; i<count; i++)
-            {
-                var part = parts[i];
-                var hosts = src.Hosts.Where(h => h.Owner == part);
-                for(var j=0; j<hosts.Length; j++)
-                {
-                    var host = hosts[j];
-                    var members = src[host];
-                    var instructions = Decode(members);
-                    dst[host] = instructions;
-                }                
-            }
-
-            
-            //var e = new DecodedMachine(src,dst.Array(), Ct);
-
-            //Wf.Raise(new DecodedMachine(src, dst.Array(), Ct));
-        }
-
-        PartAsmFx DecodePart(PartCode pcs)
-        {
-            var dst = list<HostAsmFx>();
-            var hcSets = pcs.Data;
-            for(var i=0; i<hcSets.Length; i++)
-            {
-                var hcs = hcSets[i];
-                var decoded = Decode(hcs);
-                dst.Add(decoded);
-                Wf.Raise(new DecodedHost(StepName, decoded, Ct));
-            }  
-
-            var fx = new PartAsmFx(pcs.Part, dst.Array());
-            Wf.Raise(new DecodedPart(StepName, fx, Ct));
-            return fx;                        
-        }
-
         void OnDecoded(Instruction src)
         {
             Buffer.Add(src);
         }
-        
+
         HostAsmFx Decode(EncodedMembers hcs)
-        {        
-            var instructions = Root.list<MemberAsmFx>();                            
+        {
+            var instructions = Root.list<MemberAsmFx>();
             var ip = MemoryAddress.Empty;
-            var decoder = Asm.RoutineDecoder;        
+            var decoder = Asm.RoutineDecoder;
 
             for(var i=0; i<hcs.Length; i++)
             {
                 Buffer.Clear();
                 ref readonly var uriCode = ref hcs[i];
                 decoder.Decode(uriCode, OnDecoded);
-                
+
                 if(i == 0)
                     ip = Buffer[0].IP;
 
@@ -209,7 +183,7 @@ namespace Z0
 
                 var name = "ProcessEncodedIndex";
                 Wf.Raise(new RunningProcessor(StepName, name, Ct));
-                
+
                 var processor = new ProcessAsm(State, encoded);
                 var parts = Wf.ContextRoot.Composition.Resolved.Select(p => p.Id);
                 Wf.Raise(new ProcessingParts(StepName, name, parts, Ct));
@@ -217,13 +191,12 @@ namespace Z0
 
                 Wf.Raise(new RanProcessor(StepName, name, $"Process result contains {result.Count} recordsets", Ct));
 
-
                 var sets = result.View;
                 var count = result.Count;
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var set = ref skip(sets,i);
-                    Process(set);                        
+                    Process(set);
                 }
 
                 Wf.Ran(StepName,Ct);
@@ -247,13 +220,13 @@ namespace Z0
             {
                 ref readonly var record = ref skip(records,i);
                 writer.WriteLine(record.Format());
-            }            
+            }
         }
 
-        IMultiSink IWfBrokerClient.Sink 
+        IMultiSink IWfBrokerClient.Sink
             => Wf.Broker;
 
-        IWfBroker IWfBrokerClient.Broker 
+        IWfBroker IWfBrokerClient.Broker
             => Wf.Broker;
     }
 }

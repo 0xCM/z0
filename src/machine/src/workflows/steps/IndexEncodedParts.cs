@@ -10,10 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using static IndexEncodedPartsStep;
+
     public ref struct IndexEncodedParts
     {
-        public const string ActorName = nameof(IndexEncodedParts);
-        
         readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
@@ -21,33 +21,33 @@ namespace Z0
         readonly PartFiles SourceFiles;
 
         public EncodedParts EncodedIndex;
-        
+
         public IndexEncodedParts(IWfContext wf, PartFiles src, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
             SourceFiles = src;
-            Wf.Created(ActorName, Ct);
+            Wf.Created(StepName, Ct);
             EncodedIndex = default(EncodedParts);
         }
 
         public void Dispose()
         {
-            Wf.Finished(ActorName, Ct);
+            Wf.Finished(StepName, Ct);
 
         }
-        
+
         public void Run()
         {
-            Wf.Running(ActorName, Ct);
+            Wf.Running(StepName, Ct);
 
             try
             {
                 var parser = ParseReportParser.Service;
                 var files = span(SourceFiles.ParseFiles);
                 var count = files.Length;
-                
-                var builder = Encoded.builder();            
+
+                var builder = Encoded.builder();
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var path = ref skip(files,i);
@@ -58,12 +58,12 @@ namespace Z0
                     }
                     else
                     {
-                        Wf.Error(ActorName, $"Parse failed for {path}", Ct);
+                        Wf.Error(StepName, $"Parse failed for {path}", Ct);
                     }
                 }
 
                 EncodedIndex = builder.Freeze();
-                Wf.Raise(new IndexedEncoded(ActorName, EncodedIndex, Ct));            
+                Wf.Raise(new IndexedEncoded(StepName, EncodedIndex, Ct));
 
             }
             catch(Exception e)
@@ -71,7 +71,7 @@ namespace Z0
                 Wf.Error(e, Ct);
             }
 
-            Wf.Ran(ActorName, Ct);
+            Wf.Ran(StepName, Ct);
         }
 
         void Index(MemberParseReport report, EncodedPartBuilder dst)
@@ -79,9 +79,9 @@ namespace Z0
             var count = report.RecordCount;
             var view = @readonly(report.Records);
             for(var i=0; i<count; i++)
-                Index(skip(view,i), dst);                        
+                Index(skip(view,i), dst);
         }
-        
+
         void Index(MemberParseRecord src, EncodedPartBuilder dst)
         {
             if(src.Address.IsEmpty)
@@ -90,7 +90,7 @@ namespace Z0
             {
                 var code = MemberCode.define(src.Uri, src.Data);
                 if(!dst.Include(code))
-                    Wf.Warn(ActorName, $"Duplicate | {src.Uri.Format()}", Ct);
+                    Wf.Warn(StepName, $"Duplicate | {src.Uri.Format()}", Ct);
             }
         }
     }

@@ -9,7 +9,6 @@ namespace Z0
     using static Konst;
     using static ProcessInstructionsStep;
 
-
     public class ProcessInstructions
     {
         public static ProcessInstructions create(IWfContext wf, FolderPath dst)

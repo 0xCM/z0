@@ -48,7 +48,6 @@ namespace Z0
             for(var j=0; j<Source.Length; j++)
             {
                 ref readonly var member = ref Source[j];
-
                 for(var k=0; k<member.Length; k++)
                     processor.Process(member[k]);
             }

@@ -1,7 +1,0 @@
-| Parameter | Description                                                                               |
-| /d        | Creates a directory symbolic link. By default, this command creates a file symbolic link. |
-| /h        | Creates a hard link instead of a symbolic link.                                           |
-| /j        | Creates a Directory Junction.                                                             |
-| <link>    | Specifies the name of the symbolic link being created.                                    |
-| <target>  | Specifies the path (relative or absolute) that the new symbolic link refers to.           |
-| /?        | Displays help at the command prompt.                                                      |

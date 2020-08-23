@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="worker">The actor</param>
         [MethodImpl(Inline), Op]
         public static WorkerCreated created(CorrelationToken ct, in WfWorker worker)
-            => new WorkerCreated(worker, ct);                        
+            => new WorkerCreated(worker, ct);
 
         /// <summary>
         /// Defines a <see cref='ActorCreated'/> event
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="actor">The actor</param>
         [MethodImpl(Inline), Op]
         public static ActorCreated created(CorrelationToken ct, in WfActor actor)
-            => new ActorCreated(actor, ct);                        
+            => new ActorCreated(actor, ct);
 
         /// <summary>
         /// Defines a <see cref='WfStepCreated'/> event
@@ -60,30 +60,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static WfStepCreated created<T>(WfStepKind kind, T type, CorrelationToken ct, MessageFlair flair = Created)
-            => created(step(kind,type), ct, flair);
-
-        /// <summary>
-        /// Defines a <see cref='WfStepCreated'/> event
-        /// </summary>
-        /// <param name="kind">The step kind</param>
-        /// <param name="type">The name of the reifying type</param>
-        /// <param name="ct">The correlation token</param>
-        /// <param name="flair">The flair</param>
-        [MethodImpl(Inline), Op]
         public static void created(IWfContext wf, in WfActor actor, WfStepId step, CorrelationToken ct, MessageFlair flair = Created)
             => wf.Raise(created(actor,step,ct,flair));
-            
-        /// <summary>
-        /// Raises a <see cref='WfStepCreated'/> event
-        /// </summary>
-        /// <param name="wf">The workflow context</param>
-        /// <param name="kind">The step kind</param>
-        /// <param name="type">The name of the reifying type</param>
-        /// <param name="ct">The correlation token</param>
-        /// <param name="flair">The flair</param>
-        [MethodImpl(Inline), Op]
-        public static void created<T>(IWfContext wf, WfStepKind kind, T type, CorrelationToken ct, MessageFlair flair = Created)
-            => wf.Raise(created(kind,type,ct,flair));            
     }
 }

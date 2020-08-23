@@ -13,7 +13,7 @@ namespace Z0
     /// The hex bits found at the end of a uri
     /// </summary>
     public readonly struct IdentifiedCode : IIdentifiedCode<IdentifiedCode,BinaryCode>
-    {        
+    {
         /// <summary>
         /// The code's base address
         /// </summary>
@@ -34,7 +34,7 @@ namespace Z0
         {
             Base = @base;
             Uri = uri;
-            Code = src;            
+            Code = src;
         }
 
         [MethodImpl(Inline)]
@@ -42,11 +42,11 @@ namespace Z0
         {
             Base = 0ul;
             Uri = uri;
-            Code = src;            
+            Code = src;
         }
 
         /// <summary>
-        /// An identifier populated with parsed operation uri text, when possible; otherwise populated with unparseable uri text 
+        /// An identifier populated with parsed operation uri text, when possible; otherwise populated with unparseable uri text
         /// </summary>
         public readonly string Identifier
         {
@@ -57,58 +57,58 @@ namespace Z0
         /// <summary>
         /// The operation uri
         /// </summary>
-        public readonly OpUri OpUri 
+        public readonly OpUri OpUri
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => Uri;
         }
-  
+
         /// <summary>
         /// The encoded operation data
         /// </summary>
-        public readonly BinaryCode Encoded 
+        public readonly BinaryCode Encoded
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => Code;
         }
-        
-        public byte[] Data 
-        { 
-            [MethodImpl(Inline)] 
+
+        public byte[] Data
+        {
+            [MethodImpl(Inline)]
             get => Encoded.Data;
         }
-        
-        public int Length 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.Length; 
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Length;
         }
 
-        public ref readonly byte this[int index] 
-        { 
-            [MethodImpl(Inline)] 
-            get => ref Encoded[index]; 
+        public ref readonly byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Encoded[index];
         }
 
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsEmpty; 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsEmpty;
         }
 
-        public bool IsNonEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsNonEmpty; 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsNonEmpty;
         }
 
         /// <summary>
         /// The identifier of the defined operation
         /// </summary>
-        public OpIdentity Id 
-        { 
-            [MethodImpl(Inline)] 
-            get => Uri.OpId; 
+        public OpIdentity Id
+        {
+            [MethodImpl(Inline)]
+            get => Uri.OpId;
         }
 
         [MethodImpl(Inline)]
@@ -119,7 +119,7 @@ namespace Z0
             => text.concat(OpUri.UriText, text.spaces(5), Encoded.Format());
 
         public string Format(int uripad)
-            => text.concat(OpUri.UriText.PadRight(uripad), Encoded.Format());            
+            => text.concat(OpUri.UriText.PadRight(uripad), Space, Base.Format(), Space, Encoded.Format());
 
         public override string ToString()
             => Format();
@@ -127,7 +127,7 @@ namespace Z0
         /// <summary>
         /// No code, no identity, no life
         /// </summary>
-        public static IdentifiedCode Empty 
+        public static IdentifiedCode Empty
             => new IdentifiedCode(MemoryAddress.Empty, OpUri.Empty, BinaryCode.Empty);
     }
 }

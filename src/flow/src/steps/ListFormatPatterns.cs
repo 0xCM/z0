@@ -8,25 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     using api = Flow;
 
     public ref struct ListFormatPatterns
     {
-        public const WfStepKind Kind = WfStepKind.ListFormatPatterns;
-            
         readonly IWfContext Wf;
 
         public readonly WfStepId Id;
-        
+
         public readonly WfActor Actor;
 
         public readonly Type PatternSource;
-    
+
         public ListFormatPatterns(IWfContext wf, Type src, [CallerMemberName] string caller = null)
         {
             Wf = wf;
-            Id = api.step(Kind, typeof(ListFormatPatterns));   
+            Id = api.step(typeof(ListFormatPatterns), caller);
             Actor = caller;
             PatternSource = src;
             Wf.Created(Actor);
@@ -41,13 +39,13 @@ namespace Z0
                 var patterns = Render.patterns(PatternSource);
                 foreach(var pattern in patterns.View)
                     Wf.Status(Actor, pattern.Format(), Ct);
-            
+
             }
             catch(Exception e)
             {
                 Wf.Error(Actor, e, Ct);
             }
-            
+
             Wf.Ran(Actor, Id, Ct);
         }
 
@@ -56,7 +54,7 @@ namespace Z0
             Wf.Finished(Actor, Ct);
         }
 
-        CorrelationToken Ct 
+        CorrelationToken Ct
             => Wf.Ct;
     }
 }

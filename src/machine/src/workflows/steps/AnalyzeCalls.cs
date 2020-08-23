@@ -12,11 +12,9 @@ namespace Z0
     using static Konst;
     using static AnalyzeCallsStep;
     using static z;
-    
+
     public ref struct AnalyzeCalls
     {
-        readonly WfStepKind Id;
-        
         readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
@@ -24,10 +22,9 @@ namespace Z0
         readonly LocatedAsmFxList Source;
 
         readonly FolderPath TargetDir;
-        
+
         public AnalyzeCalls(IWfContext wf, LocatedAsmFxList src, FolderPath dst, CorrelationToken ct)
         {
-            Id = WfStepKind.AnalyzeCalls;
             Wf = wf;
             Ct = ct;
             Source = src;
@@ -37,7 +34,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(StepName, Ct);        
+            Wf.Running(StepName, Ct);
 
             var sep = Chars.Pipe;
             var filename = FileName.Define("Calls", FileExtensions.Csv);
@@ -47,19 +44,19 @@ namespace Z0
             var data = Source.CallData.ToArray();
             var delimited = data.Select(x => Delimit(x.Rows, sep));
 
-            var names = Delimit(AsmCallInfo.AspectNames, sep);            
+            var names = Delimit(AsmCallInfo.AspectNames, sep);
 
             writer.WriteLine(names);
-            Root.iter(delimited, writer.WriteLine);
+            z.iter(delimited, writer.WriteLine);
 
-            Wf.Ran(StepName, Ct);        
+            Wf.Ran(StepName, Ct);
         }
 
         public void Dispose()
         {
             Wf.Finished(StepName,Ct);
         }
-        
+
         static string Delimit(string[] src, char delimiter)
         {
             var dst = text.build();
@@ -72,14 +69,13 @@ namespace Z0
                     dst.Append(delimiter);
                     dst.Append(Chars.Space);
                 }
-                
+
                 if(i != last)
                     dst.Append(src[i].PadRight(16));
                 else
                     dst.Append(src[i]);
-
             }
-            
+
             return dst.ToString();
         }
     }
