@@ -84,7 +84,7 @@ namespace Z0.Asm
             }
         }
 
-        public unsafe void vbsll_128x32u()
+        public void vbsll_128x32u()
         {
             const byte imm8 = 9;
 

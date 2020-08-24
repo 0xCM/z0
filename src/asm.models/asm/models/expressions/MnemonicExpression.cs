@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public readonly struct MnemonicExpression
     {
         public readonly asci16 Value;
@@ -29,9 +29,6 @@ namespace Z0.Asm
         public MnemonicExpression(char[] src)
             => asci.encode(src, out Value);
 
-        public MnemonicExpression Zero 
-            => Empty;
-
         /// <summary>
         /// The expression length
         /// </summary>
@@ -41,13 +38,13 @@ namespace Z0.Asm
             get => Value.Length;
         }
 
-        public bool IsEmpty 
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Value.IsEmpty;
         }
 
-        public bool IsNonEmpty 
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
             get => Value.IsNonEmpty;
@@ -68,19 +65,19 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public bool Equals(MnemonicExpression src)
             => src.Value.Equals(Value);
-        
+
         public override bool Equals(object src)
             => src is MnemonicExpression x && Equals(x);
-        
+
         public override int GetHashCode()
-            => Value.GetHashCode();        
+            => Value.GetHashCode();
         public string Format()
             => Value.Format();
-        
+
         public override string ToString()
             => Format();
 
-        public static MnemonicExpression Empty 
+        public static MnemonicExpression Empty
             => new MnemonicExpression(asci16.Null);
     }
 }

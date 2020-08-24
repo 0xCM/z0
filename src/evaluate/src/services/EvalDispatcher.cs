@@ -14,21 +14,21 @@ namespace Z0
     using static Kinds;
 
     using K = Kinds;
-    
+
     class EvalDispatcher : IEvalDispatcher
-    {        
+    {
         readonly IPolyrand Random;
 
         readonly IAppMsgSink Sink;
 
         readonly uint BufferSize;
-                                
+
         [MethodImpl(Inline)]
-        internal EvalDispatcher(IPolyrand random, IAppMsgSink sink, uint bufferSize)
+        public EvalDispatcher(IPolyrand random, IAppMsgSink sink, uint bufferSize)
         {
             Random = random;
             Sink = sink;
-            BufferSize = bufferSize;            
+            BufferSize = bufferSize;
         }
 
         uint PointCount<T>()
@@ -38,7 +38,7 @@ namespace Z0
             => Evaluate.evaluator(buffers);
 
         TCheckNumeric Numeric => CheckNumeric.Checker;
-        
+
         Pair<string> Labels => ("method", "asm");
 
         PairEvalOutcomes<T> init<T>()
@@ -53,16 +53,16 @@ namespace Z0
         {
             term.error(e);
         }
-        
+
         UnaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiCode code, UnaryOpClass<T> k)
             where T : unmanaged
         {
             var target = init<T>();
             var src = Random.Array<T>(target.PointCount);
-            var context = EvalContext.unary(buffers, code, Evaluated.unary(src, target));            
+            var context = EvalContext.unary(buffers, code, Evaluated.unary(src, target));
             return Evaluate.compute(context, error);
         }
-        
+
         BinaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiCode code, BinaryOpClass<T> k)
             where T : unmanaged
         {
@@ -119,10 +119,10 @@ namespace Z0
                 {
                     case NumericKind.U8:
                     case NumericKind.I8:
-                        return Dispatch(buffers, FixedPairs<Fixed8>(count), api);                    
+                        return Dispatch(buffers, FixedPairs<Fixed8>(count), api);
                     case NumericKind.I16:
                     case NumericKind.U16:
-                        return Dispatch(buffers, FixedPairs<Fixed16>(count), api);                    
+                        return Dispatch(buffers, FixedPairs<Fixed16>(count), api);
                     case NumericKind.I32:
                     case NumericKind.U32:
                         return 0;
@@ -154,17 +154,17 @@ namespace Z0
 
             Sink.AnalyzingEvaluation(api);
 
-            var xLabel = eval.LeftLabel;                
+            var xLabel = eval.LeftLabel;
             var yLabel = eval.RightLabel;
 
             for(var i=0; i<eval.Count; i++, sample++)
             {
                 ref readonly var input = ref eval.Source[i];
                 ref readonly var result = ref eval.Target;
-                
+
                 var x = result[i].Left;
-                var y = result[i].Right;                
-                
+                var y = result[i].Right;
+
                 if(fp)
                     Numeric.close(x,y);
                 else
@@ -185,7 +185,7 @@ namespace Z0
 
             Sink.AnalyzingEvaluation(api);
 
-            var xLabel = eval.LeftLabel;                
+            var xLabel = eval.LeftLabel;
             var yLabel = eval.RightLabel;
 
             for(var i=0; i<eval.PointCount; i++, sample++)
@@ -245,12 +245,12 @@ namespace Z0
                         break;
                     default:
                         break;
-                } 
+                }
             }
             catch(Exception e)
-            {            
+            {
                 Sink.RuntimeEvalFailure(api, e);
-            }           
+            }
         }
 
         public void Dispatch(BufferTokens buffers, in ApiCode api, BinaryOpClass k)
@@ -297,16 +297,16 @@ namespace Z0
                         break;
                     default:
                         break;
-                } 
+                }
             }
             catch(Exception e)
             {
                 Sink.RuntimeEvalFailure(api, e);
-            }           
+            }
         }
 
         /// <summary>
-        /// Loads executable code into an index-identifed target buffer and manufactures a fixed binary operator 
+        /// Loads executable code into an index-identifed target buffer and manufactures a fixed binary operator
         /// that executes the code in the buffer upon invocation
         /// </summary>
         /// <param name="buffers">The target buffer sequence</param>
@@ -380,7 +380,7 @@ namespace Z0
 
         void Analyze<T>(in Pairs<T> src, in Triples<T> dst, in ApiCode api)
             where T : unmanaged
-        
+
         {
 
         }
@@ -388,8 +388,8 @@ namespace Z0
         Triples<T> Dispatch<E,T>(BufferTokens buffers, in ApiCode api, IOpClass<E,T> k, in Pairs<T> src)
             where E : unmanaged, Enum
             where T : unmanaged
-        {        
-            
+        {
+
             var evaluator = Evaluator(buffers, k);
             var dst = evaluator.Eval(api, K.BinaryOp, src);
             Analyze(src, dst, api);

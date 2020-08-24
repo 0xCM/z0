@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
     using static z;
@@ -15,7 +14,7 @@ namespace Z0
         where W : unmanaged
     {
         public readonly T Id;
-        
+
         public readonly ClosedInterval<W> Width;
 
         [MethodImpl(Inline)]

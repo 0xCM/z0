@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
@@ -16,10 +16,10 @@ namespace Z0.Asm
     readonly struct AsmRoutineDecoder : IAsmDecoder
     {
         readonly AsmFormatSpec AsmFormat;
-        
+
         public static AsmRoutineDecoder Default
         {
-            [MethodImpl(Inline)]         
+            [MethodImpl(Inline)]
             get => new AsmRoutineDecoder(AsmFormatSpec.Default);
         }
 
@@ -28,23 +28,23 @@ namespace Z0.Asm
             => AsmFormat = format;
 
         public Option<AsmRoutine> Decode(CapturedCode src)
-            => from i in Decode(src.Encoded)
+            => from i in Decode(src.Parsed)
                 let block = asm.block(src.HostedBits, i, src.TermCode)
                 select asm.routine(src.OpUri, src.Method.Signature().Format(), block);
 
         public Option<AsmRoutine> Decode(ParsedExtraction src)
             =>  from i in Decode(src.Encoded) select asm.routine(src,i);
 
-        public Option<AsmFxList> Decode(LocatedCode src)        
+        public Option<AsmFxList> Decode(LocatedCode src)
             => Decode(src.Encoded, src.Address).TryMap(x => asm.list(x, src));
 
-        public Option<AsmInstructions> Decode(IdentifiedCode src)        
-            => Decode(src.Encoded, MemoryAddress.Empty);
+        public Option<AsmInstructions> Decode(IdentifiedCode src)
+            => Decode(src.Encoded, src.Base);
 
         public Option<AsmRoutine> Decode(ParsedExtraction src, Action<Asm.Instruction> f)
             => Decode(src.Encoded,f).TryMap(x => asm.routine(src,x));
 
-        public Option<AsmFxList> Decode(LocatedCode src, Action<Asm.Instruction> f)        
+        public Option<AsmFxList> Decode(LocatedCode src, Action<Asm.Instruction> f)
         {
             try
             {
@@ -57,10 +57,10 @@ namespace Z0.Asm
                 var stop = false;
                 var dst = new List<Asm.Instruction>(decoded.Count);
 
-                while (reader.CanReadByte && !stop) 
+                while (reader.CanReadByte && !stop)
                 {
                     ref var iced = ref decoded.AllocUninitializedElement();
-                    decoder.Decode(out iced); 
+                    decoder.Decode(out iced);
                     var format = formatter.FormatInstruction(iced, @base);
                     var z = IceExtractors.Inxs(iced,format);
                     dst.Add(z);
@@ -71,15 +71,15 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                term.error(e);     
-                return Option.none<AsmFxList>();           
+                term.error(e);
+                return Option.none<AsmFxList>();
             }
         }
 
-        Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base)        
+        Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base)
         {
             try
-            {   
+            {
                 if(code.IsEmpty)
                 {
                     term.warn("Supplied source was empty");
@@ -90,10 +90,10 @@ namespace Z0.Asm
                 var reader = new Iced.ByteArrayCodeReader(code.Encoded);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
                 decoder.IP = @base;
-                while (reader.CanReadByte) 
+                while (reader.CanReadByte)
                 {
                     ref var instruction = ref decoded.AllocUninitializedElement();
-                    decoder.Decode(out instruction); 
+                    decoder.Decode(out instruction);
                 }
 
                 var formatter = AsmCaptureFormatter.Create(AsmFormat);

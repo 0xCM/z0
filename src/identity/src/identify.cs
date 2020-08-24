@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    
+
     public static partial class Identity
     {
         /// <summary>
@@ -16,14 +16,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         public static OpIdentity identify(MethodInfo src)
-        {            
+        {
             if(src.IsOpenGeneric())
-                return GenericIdentity(src).Generialize();
+                return GenericIdentity(src).Generalize();
             else if(src.IsConstructedGenericMethod)
                 return ConstructedIdentity(src);
             else
                 return NonGenericIdentity(src);
-        }            
+        }
 
         /// <summary>
         /// Assigns identity to a delegate

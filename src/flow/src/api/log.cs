@@ -36,7 +36,7 @@ namespace Z0
             }
         }
 
-        public static IWfEventLog log(WfConfig config, bool clear = false)
+        public static IWfEventLog log(WfConfig config, bool clear = true)
             => new WfTermEventLog(FilePath.Define(config.StatusLog.Name), FilePath.Define(config.ErrorLog.Name), clear);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
     /// Exposes capture services without the hassle of passing a ref struct about hither thither and yon
     /// </summary>
@@ -26,11 +26,18 @@ namespace Z0.Asm
         ICaptureCore CaptureService {get;}
 
         /// <summary>
+        /// Captures an api member that has already been jitted
+        /// </summary>
+        /// <param name="exchange">The selected exchange</param>
+        /// <param name="src">The api member</param>
+        Option<CapturedApiMember> Capture(in ApiMember src)
+            => CaptureService.Capture(CaptureExchange.Context, src);
+
+        /// <summary>
         /// Captures jitted x86 encoded assembly for nongeneric methods
         /// </summary>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The source method</param>
-        [MethodImpl(Inline)]
         Option<CapturedCode> Capture(OpIdentity id, MethodInfo src)
             => CaptureService.Capture(CaptureExchange.Context, id, src);
 
@@ -43,7 +50,6 @@ namespace Z0.Asm
         /// If the method is open generic, it is closed over supplied type arguments or
         /// If the method is nongeneric or closed-generic, the method is captured as-is
         /// </remarks>
-        [MethodImpl(Inline)]
         Option<CapturedCode> Capture(MethodInfo src, params Type[] args)
             => CaptureService.Capture(CaptureExchange.Context, src, args);
 
@@ -52,7 +58,6 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The dynamic delegate to capture</param>
-        [MethodImpl(Inline)]
         Option<CapturedCode> Capture(OpIdentity id, in DynamicDelegate src)
             => CaptureService.Capture(CaptureExchange.Context, id, src);
 
@@ -61,7 +66,6 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The delegate to capture</param>
-        [MethodImpl(Inline)]
         Option<CapturedCode> Capture(OpIdentity id, Delegate src)
             => CaptureService.Capture(CaptureExchange.Context, id, src);
 
@@ -70,17 +74,15 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="id">The identity to confer to the parsed buffer</param>
         /// <param name="src">The source buffer</param>
-        [MethodImpl(Inline)]
         Option<ParsedOperation> ParseBuffer(OpIdentity id, Span<byte> src)
-            => CaptureService.ParseBuffer(CaptureExchange.Context, id, src);         
- 
+            => CaptureService.ParseBuffer(CaptureExchange.Context, id, src);
+
         /// <summary>
         /// Captures jitted x86 encoded assembly for a dynamic delegate
         /// </summary>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The dynamic delegate to capture</param>
-        [MethodImpl(Inline)]
         Option<CapturedCode> Capture<D>(OpIdentity id, DynamicDelegate<D> src)
-            where D : Delegate => Capture(id, src.Untyped);            
+            where D : Delegate => Capture(id, src.Untyped);
     }
 }

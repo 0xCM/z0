@@ -13,20 +13,20 @@ namespace Z0
 
     using static Konst;
     using static AsmRenderPatterns;
-    
+
     public readonly struct RenderSemantic
-    {     
+    {
         [MethodImpl(Inline)]
-        public static RenderSemantic Create() 
+        public static RenderSemantic Create()
             => new RenderSemantic(new List<string>());
 
         readonly HexFormatConfig DataFormat;
 
         readonly List<string> Buffer;
-                
-        SemanticRender render 
+
+        SemanticRender render
             => SemanticRender.Service;
-        
+
         public RenderSemantic(List<string> descriptions)
         {
             Buffer = descriptions;
@@ -36,15 +36,15 @@ namespace Z0
         public void Render(HostAsmFx src, StreamWriter dst)
         {
             var functions = src.Data;
-            var count = src.MemberCount;            
+            var count = src.MemberCount;
 
             for(var i=0; i<count; i++)
             {
-                Render(functions[i],dst);                
-                
+                Render(functions[i],dst);
+
                 if(i != count - 1)
-                    dst.WriteLine();                
-            }    
+                    dst.WriteLine();
+            }
         }
 
         void Render(MemberAsmFx src, StreamWriter dst)
@@ -52,42 +52,34 @@ namespace Z0
             Buffer.Clear();
 
             var id = src.OpId;
-
             Buffer.Add(id);
             Buffer.Add(SectionSep);
 
             var sequence = OffsetSequence.Zero;
             var address = src.OffsetAddress;
 
-            for(ushort i=0; i<src.TotalCount; i++)
+            for(var i=0; i<src.TotalCount; i++)
             {
                 var fx = src[i];
                 Render(fx, address, sequence);
 
-                var size = (ushort)fx.ByteLength;
+                var size = (uint)fx.ByteLength;
                 address = address.AccrueOffset(size);
                 sequence = sequence.AccrueOffset(size);
             }
-            
+
             var rendered = Buffer.ToArray();
             for(var j=0; j<rendered.Length; j++)
-                dst.WriteLine(rendered[j]);            
+                dst.WriteLine(rendered[j]);
         }
 
         string FormatMemory(MemoryAddress @base, Instruction src, int i)
-        {
-            var subject = asm.memInfo(src, i);
-            return render.Render(subject);            
-        }
-
-        [MethodImpl(Inline)]
-        static string Format(OpKind src)
-            => src.ToString();
+            => render.Render(asm.memInfo(src, i));
 
         string Format(MemoryAddress @base, Instruction src, byte i)
-        {            
+        {
             var kind = asm.kind(src, i);
-            var desc = Format(kind);
+            var desc = kind.ToString();
 
             if(asm.isRegister(kind))
                 desc = render.Render(asm.register(src,i));
@@ -96,19 +88,16 @@ namespace Z0
             else if (asm.isBranch(kind))
                 desc = render.Render(asm.branch(@base, src, i));
             else if(asm.isImm(kind))
-                desc = render.Render(asm.immInfo(src, i));                
-            
+                desc = render.Render(asm.immInfo(src, i));
+
             return desc;
         }
 
-        string FormatBytes(byte[] src)
-            => src.FormatHexBytes(DataFormat);
-
         string Format(BinaryCode src)
-            => text.concat("encoded", text.bracket(src.Length), Assign, FormatBytes(src.Data));
+            => text.concat("encoded", text.bracket(src.Length), Assign, src.Data.FormatHexBytes(DataFormat));
 
         string Footer(BasedAsmFx src)
-        {   
+        {
             if(asm.isCall(src.Instruction))
             {
                 var bytes = Root.span(src.Encoded.Data);
@@ -121,10 +110,10 @@ namespace Z0
                     return text.concat(delta.FormatMinimal(), " | ", offset.FormatAsmHex(), " | ", target.Format());
                 }
             }
-        
+
             return string.Empty;
         }
-        
+
         void Render(BasedAsmFx src, MemoryOffset address,  OffsetSequence sequence)
         {
             var id = src.OpId;
@@ -134,18 +123,18 @@ namespace Z0
             var location = LineLocation(fx, address, sequence);
             var header = InstructionHeader(src, address, sequence);
             Buffer.Add(header);
-            
+
             var opcount = src.Instruction.OpCount;
             var summaries = Root.list<string>();
-            for(var i =0; i<opcount; i++)               
+            for(var i =0; i<opcount; i++)
             {
                 var kind = asm.kind(fx, i);
                 var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(Col0Pad);
                 var kindLabel = render.Render(kind).PadRight(OpKindPad);
                 var col03 = text.concat(col01, ColSep, kindLabel, Chars.Pipe, Chars.Space);
                 var desc = Format(@base, fx, (byte)i);
-                
-                summaries.Add(col03 + desc);       
+
+                summaries.Add(col03 + desc);
             }
 
             foreach(var s in summaries)
@@ -154,7 +143,7 @@ namespace Z0
 
              var fc = Footer(src);
              if(text.nonempty(fc))
-             {   
+             {
                 var footer = text.concat(location, ColSep, fc);
                 Buffer.Add(footer);
              }
@@ -167,13 +156,9 @@ namespace Z0
             => text.concat(location, ColSep, FxDelimiter);
 
         string LineLocation(Instruction src, MemoryOffset address, OffsetSequence sequence)
-            => text.concat(
-                render.RenderAddress(src, AddressPad), 
-                text.concat(
-                    text.spaced(address.Offset.FormatAsmHex(6))
-                    ).PadRight(OffsetAddrPad),
-                sequence.Format(InstructionCountPad)
-                ); 
+            => text.concat(render.RenderAddress(src, AddressPad),
+                text.concat(text.spaced(address.Offset.FormatAsmHex(6))).PadRight(OffsetAddrPad),
+                sequence.Format(InstructionCountPad));
 
         string InstructionHeader(BasedAsmFx src, MemoryOffset address, OffsetSequence sequence)
         {

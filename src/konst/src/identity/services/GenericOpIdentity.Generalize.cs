@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-        
+
     partial class XTend
     {
         [MethodImpl(Inline)]
-        public static OpIdentity Generialize(this GenericOpIdentity src)
+        public static OpIdentity Generalize(this GenericOpIdentity src)
             => OpIdentityParser.parse(src.Identifier);
     }
 }

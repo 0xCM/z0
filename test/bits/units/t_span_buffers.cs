@@ -28,13 +28,13 @@ namespace Z0
 
         public void bitstack_basecase()
         {
-            var stack = BitStack.Create(0b101011);
+            var stack = new BitStack(0b101011);
             Claim.yea(stack.Pop() != 0);
             Claim.yea(stack.Pop() != 0);
             Claim.yea(stack.Pop() == 0);
             Claim.yea(stack.Pop() != 0);
             Claim.yea(stack.Pop() == 0);
-            Claim.yea(stack.Pop() != 0);            
+            Claim.yea(stack.Pop() != 0);
             stack.Push(BitState.On);
             Claim.yea(stack.Pop() != 0);
         }
@@ -56,7 +56,7 @@ namespace Z0
         {
             var capacity = Pow2.T10;
             var partwidth = 4;
-            var buffer = SpanBuffers.parts<byte,ulong>(capacity);  
+            var buffer = SpanBuffers.parts<byte,ulong>(capacity);
             buffer.Next = 0xFul;
             buffer.Next = 0xFFul;
             buffer.Next = 0xFFFul;
@@ -66,7 +66,7 @@ namespace Z0
             Claim.eq(buffer.Data.AsUInt64()[1],0xFF);
             Claim.eq(buffer.Data.AsUInt64()[2],0xFFF);
             Claim.eq(buffer.Data.AsUInt64()[3],0xFFFF);
-            
+
         }
     }
 }

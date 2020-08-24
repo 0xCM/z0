@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
@@ -31,17 +31,17 @@ namespace Z0
             for(var block = 0; block < blocks; block++)
                 f.Invoke(src.LoadVector(block)).StoreTo(dst, block);
             return ref dst;
-        }         
+        }
 
         [MethodImpl(Inline)]
         public static Span<bit> map<F,T>(in Block128<T> src, in Span<bit> dst, F f)
             where T : unmanaged
             where F : IUnaryPred128<T>
         {
-            var blocks = src.BlockCount;            
-            ref var result = ref refs.head(dst);
+            var blocks = src.BlockCount;
+            ref var result = ref z.first(dst);
             for(var block = 0; block < blocks; block++)
-                refs.seek(ref result, block) = f.Invoke(src.LoadVector(block));
+                z.seek(result, block) = f.Invoke(src.LoadVector(block));
             return dst;
         }
 
@@ -50,11 +50,11 @@ namespace Z0
             where T : unmanaged
             where F : IUnaryPred256<T>
         {
-            var blocks = src.BlockCount;            
-            ref var result = ref refs.head(dst);
+            var blocks = src.BlockCount;
+            ref var result = ref z.first(dst);
             for(var block = 0; block < blocks; block++)
-                refs.seek(ref result, block) = f.Invoke(src.LoadVector(block));
+                z.seek(result, block) = f.Invoke(src.LoadVector(block));
             return dst;
-        }         
+        }
     }
 }

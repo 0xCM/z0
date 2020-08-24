@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static LocatedCode define(MemoryAddress address, in BinaryCode code)
-            => new LocatedCode(address, code);       
+            => new LocatedCode(address, code);
 
         [MethodImpl(Inline), Op]
         public static IdentifiedCode define(MemoryAddress address, OpUri uri, in BinaryCode data)
@@ -37,7 +37,7 @@ namespace Z0
             => new ApiCode(member, data);
 
         [MethodImpl(Inline), Op]
-        public static CapturedCode define(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
-            => new CapturedCode(id, src, method, extracted, parsed, term);
+        public static CapturedCode define(OpIdentity id, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
+            => new CapturedCode(id, method, extracted, parsed, term);
     }
 }

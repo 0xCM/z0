@@ -51,8 +51,10 @@ namespace Z0
             ImmEmitter.ClearArchive(parts);
             ImmEmitter.EmitRefined(parts);
 
-            var eval = Evaluate.workflow(Wf.Root, Wf.Root.Random, Wf.Root.AppPaths.AppCaptureRoot, Pow2.T14);
+            Wf.Running(nameof(Evaluate), Ct);
+            var eval = Evaluate.control(Wf.Root, Wf.Root.Random, Wf.Root.AppPaths.AppCaptureRoot, Pow2.T14);
             eval.Execute();
+            Wf.Ran(nameof(Evaluate), Ct);
 
             Wf.Ran(StepName, Ct);
         }
@@ -95,7 +97,7 @@ namespace Z0
 
         void CheckDuplicates(ApiHostUri host, ReadOnlySpan<ApiMember> src)
         {
-            var index = ApiMemberOps.Service.CreateIndex(src);
+            var index = ApiMemberOps.index(src);
             foreach(var key in index.DuplicateKeys)
                 Wf.Raise(new WfWarn<string>(StepName, $"Duplicate key {key}", Ct));
         }

@@ -24,7 +24,7 @@ namespace Z0
         public ListFormatPatterns(IWfContext wf, Type src, [CallerMemberName] string caller = null)
         {
             Wf = wf;
-            Id = api.step(typeof(ListFormatPatterns), caller);
+            Id = AB.step(typeof(ListFormatPatterns));
             Actor = caller;
             PatternSource = src;
             Wf.Created(Actor);

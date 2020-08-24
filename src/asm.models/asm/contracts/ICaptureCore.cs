@@ -13,6 +13,13 @@ namespace Z0.Asm
     public interface ICaptureCore
     {
         /// <summary>
+        /// Captures an api member that has already been jitted
+        /// </summary>
+        /// <param name="exchange">The selected exchange</param>
+        /// <param name="src">The api member</param>
+        Option<CapturedApiMember> Capture(in CaptureExchange exchange, in ApiMember src);
+
+        /// <summary>
         /// Captures jitted x86 encoded assembly for nongeneric methods
         /// </summary>
         /// <param name="exchange">The selected exchange</param>

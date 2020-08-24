@@ -78,8 +78,7 @@ namespace Z0
                 step.Run();
                 Index = step.EncodedIndex;
                 Process(Index);
-                var parts = DecodeParts(Index);
-                Process(parts);
+                Process(DecodeParts(Index));
             }
             catch(Exception e)
             {
@@ -122,8 +121,9 @@ namespace Z0
                 foreach(var part in src)
                 {
                     var index = LocatedAsmFxList.create(part.Located.ToArray());
+                    var path = TargetDir + FileName.Define($"{part.Part.Format()}.calls", FileExtensions.Csv);
                     Process(part);
-                    using var step = new AnalyzeCalls(Wf, index, TargetDir, Ct);
+                    using var step = new AnalyzeCalls(Wf, index, path, Ct);
                     step.Run();
                 }
             }

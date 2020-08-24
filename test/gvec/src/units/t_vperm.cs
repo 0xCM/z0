@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
 
@@ -26,8 +26,8 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         public void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs)
-            where T : unmanaged 
-            where N : unmanaged, ITypeNat             
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
                 => ClaimNumeric.Eq(lhs.Data,rhs.Data);
 
         /// <summary>
@@ -44,16 +44,16 @@ namespace Z0
         public void numeq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-            where T : unmanaged 
+            where T : unmanaged
                 => ClaimNumeric.Eq(lhs.Data, rhs.Data);
 
         public void perm_symbols()
-        {            
+        {
             Claim.eq($"{Perm4L.ABDC}", Perm4L.ABDC.Format());
-            Claim.eq($"{Perm4L.DCBA}", Perm4L.DCBA.Format());           
-            Claim.eq($"ABCDEFGH", PermLits.Perm8Identity.Format());   
-            Claim.eq($"HGFEDCBA", PermLits.Perm8Reversed.Format());  
-            Claim.eq($"0123456789ABCDEF", PermLits.Perm16Identity.Format());                   
+            Claim.eq($"{Perm4L.DCBA}", Perm4L.DCBA.Format());
+            Claim.eq($"ABCDEFGH", PermLits.Perm8Identity.Format());
+            Claim.eq($"HGFEDCBA", PermLits.Perm8Reversed.Format());
+            Claim.eq($"0123456789ABCDEF", PermLits.Perm16Identity.Format());
         }
 
         public void perm4_digits()
@@ -78,7 +78,7 @@ namespace Z0
 
         public void vpermlo_4x16_outline()
         {
-            const byte A = 0b00;        
+            const byte A = 0b00;
             const byte B = 0b01;
             const byte C = 0b10;
             const byte D = 0b11;
@@ -96,12 +96,12 @@ namespace Z0
             var xACBD = z.vpermlo4x16(x, Perm4L.ACBD);
             Claim.veq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            Claim.veq(z.vpermlo4x16(vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vparts(n128, 0,3,2,1,6,7,8,9));           
+            Claim.veq(z.vpermlo4x16(vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vparts(n128, 0,3,2,1,6,7,8,9));
         }
 
         public void vpermhi_4x16_outline()
         {
-            const byte A = 0b00;            
+            const byte A = 0b00;
             const byte B = 0b01;
             const byte C = 0b10;
             const byte D = 0b11;
@@ -117,7 +117,7 @@ namespace Z0
             Claim.veq(xDCBA, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[D + 4], xs[C + 4], xs[B + 4], xs[A + 4]));
 
             var xACBD = z.vpermhi4x16(x, Perm4L.ACBD);
-            Claim.veq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));            
+            Claim.veq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));
 
             Claim.veq(z.vpermhi4x16(vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vparts(n128,0,1,2,3,6,9,8,7));
 
@@ -141,7 +141,7 @@ namespace Z0
         {
             var w = W128.W;
             var x = vparts(w,0,1,2,3,4,5,6,7);
-                        
+
             var a0 = z.vpermlo4x16(x, Perm4L.DCBA);
             var a1 = vparts(w,3,2,1,0,4,5,6,7);
             Claim.veq(a0,a1);
@@ -155,7 +155,7 @@ namespace Z0
             Claim.veq(c0,c1);
 
             var d0 = z.vpermlo4x16(x, Perm4L.BADC);
-            var d1 = vparts(w,1,0,3,2,4,5,6,7);            
+            var d1 = vparts(w,1,0,3,2,4,5,6,7);
             Claim.veq(d0,d1);
 
             var e0 = z.vpermhi4x16(x, Perm4L.BADC);
@@ -169,17 +169,17 @@ namespace Z0
 
         public void vperm_4x64_outline()
         {
-         
+
             var n = n256;
             var x = vparts(n,0,1,2,3);
-            
+
             Claim.veq(vparts(n,0,1,2,3), z.vperm4x64(x, Perm4L.ABCD));
             Claim.veq(vparts(n,0,1,3,2), z.vperm4x64(x, Perm4L.ABDC));
             Claim.veq(vparts(n,0,2,1,3), z.vperm4x64(x, Perm4L.ACBD));
             Claim.veq(vparts(n,0,2,3,1), z.vperm4x64(x, Perm4L.ACDB));
             Claim.veq(vparts(n,0,3,1,2), z.vperm4x64(x, Perm4L.ADBC));
             Claim.veq(vparts(n,0,3,2,1), z.vperm4x64(x, Perm4L.ADCB));
-            
+
             Claim.veq(vparts(n,1,0,2,3), z.vperm4x64(x, Perm4L.BACD));
             Claim.veq(vparts(n,1,0,3,2), z.vperm4x64(x, Perm4L.BADC));
             Claim.veq(vparts(n,1,2,0,3), z.vperm4x64(x, Perm4L.BCAD));
@@ -207,11 +207,11 @@ namespace Z0
         }
 
         static Vector128<T> vswapspec<T>(N128 n, params Swap[] swaps)
-            where T : unmanaged  
+            where T : unmanaged
         {
-            var src = V0.vinc<T>(n).ToSpan();
+            var src = z.vinc<T>(n).ToSpan();
             var dst = src.Swap(swaps);
-            return Vectors.vload(n, in refs.head(src));
+            return Vectors.vload(n, in z.first(src));
         }
 
         [MethodImpl(Inline)]
@@ -219,9 +219,9 @@ namespace Z0
             => z.vshuf16x8(src, vswapspec<byte>(n128, swaps));
 
         public void perm_swaps()
-        {            
-            
-            var src = V0.vinc<byte>(n128);
+        {
+
+            var src = z.vinc<byte>(n128);
 
             Swap s = (0,1);
             var x1 = vswap(src, s);
@@ -231,7 +231,7 @@ namespace Z0
             //Shuffle the first element all the way through to the last element
             var chain = Swap.Chain((0,1), 15);
             var x3 = vswap(src, chain).ToSpan();
-            Claim.eq(x3[15],(byte)0);            
+            Claim.eq(x3[15],(byte)0);
         }
 
         public void perm4_symbols_random()
@@ -318,24 +318,24 @@ namespace Z0
 
         public void vperm4_reverse()
         {
-            const Perm4L  p = Perm4L.DCBA;            
+            const Perm4L  p = Perm4L.DCBA;
             const string pbs_expect = "00011011";
             const string pformat_epect = "[00 01 10 11]: ABCD -> DCBA";
 
-            var pbs_actual = BitString.scalar((byte)p);            
+            var pbs_actual = BitString.scalar((byte)p);
             Claim.eq(pbs_expect, pbs_actual);
-            
-            var p_assembled = Permutary.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
-            Claim.Eq(p, p_assembled);            
-            
+
+            var p_assembled = Permutary.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
+            Claim.Eq(p, p_assembled);
+
             var pformat_actual = p.FormatMap();
             Claim.eq(pformat_epect, pformat_actual);
 
             var vIn = vparts(w128, 0,1,2,3);
             var vExpect = vparts(w128, 3,2,1,0);
             var vActual = vperm4x32(vIn,p);
-            Claim.veq(vExpect, vActual);                                
-        }        
+            Claim.veq(vExpect, vActual);
+        }
 
         void perm4_symbol_check(Perm4L perm, params Perm4L[] expect)
         {

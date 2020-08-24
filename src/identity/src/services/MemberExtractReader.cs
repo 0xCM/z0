@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Linq;
     using System.Collections.Generic;
@@ -17,34 +17,30 @@ namespace Z0
         readonly IApiSet ApiSet;
 
         [MethodImpl(Inline)]
-        internal MemberExtractReader(IApiSet api)
+        public MemberExtractReader(IApiSet api)
             => ApiSet = api;
 
-        [MethodImpl(Inline)]
-        public static IMemberExtractReader create(IApiSet api)
-            => new MemberExtractReader(api);
-
-        static ApiIndex IndexApi(IEnumerable<ApiMember> src)
+        static ApiIndex IndexApi(ApiMembers src)
         {
-            var pairs = src.Select(h => (h.Id, h));
-            var opindex = Identify.index(pairs,true);
-            return new ApiIndex(opindex.HashTable, opindex.Duplicates);                
-        }            
+            var pairs = src.Storage.Select(h => (h.Id, h));
+            var ops = Identify.index(pairs,true);
+            return new ApiIndex(ops.HashTable, ops.Duplicates);
+        }
 
         public ExtractedCode[] Read(FilePath src)
         {
-            var report = ExtractReport.Load(src);    
-            if(report.IsNonEmpty)     
-            {                               
+            var report = ExtractReport.Load(src);
+            if(report.IsNonEmpty)
+            {
                 var uri = report[0].Uri.Host;
                 var host = ApiSet.FindHost(uri).TryMap(x => x as IApiHost);
                 if(host)
                     CreateExtracts(host.Value, report.Records);
                 else
-                    term.error($"Coult not find host {uri} in api set");
+                    term.error($"Could not find host {uri} in api set");
             }
             else
-                term.warn($"No data in extract report {src}");            
+                term.warn($"No data in extract report {src}");
 
             return default;
         }

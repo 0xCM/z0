@@ -11,8 +11,6 @@ namespace Z0
 
     public readonly struct WfDataHandler<T> : IDataHandler<T>
     {
-        public static WfDataHandler<T> Empty => new WfDataHandler<T>(t => {});
-
         readonly DataReceiver<T> Receiver;
 
         [MethodImpl(Inline)]
@@ -24,5 +22,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Handle(T data)
             => Receiver(data);
+
+        public static WfDataHandler<T> Empty
+            => new WfDataHandler<T>(t => {});
     }
 }

@@ -73,7 +73,6 @@ namespace Z0
                 ref readonly var record = ref skip(view,i);
                 Status(record.Format());
             }
-
         }
 
         public static void Main(params string[] args)

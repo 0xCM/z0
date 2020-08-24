@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
     using static EmitImageSummariesStep;
-    
+
     using static z;
-    
+
     public ref struct EmitImageSummaries
     {
         readonly IWfContext Wf;
@@ -29,7 +29,7 @@ namespace Z0
         {
             Wf = wf;
             Ct = ct;
-            Id = new WfStepId(typeof(EmitImageSummaries));
+            Id = AB.step(typeof(EmitImageSummaries));
             Images = images;
             TargetPath = Wf.IndexRoot + FileName.Define("machine.images", FileExtensions.Csv);
             Wf.Created(Id, Ct);
@@ -42,11 +42,11 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(Id, Ct);   
+            Wf.Finished(Id, Ct);
         }
-        
+
         static void Summarize(LocatedImages src, FilePath dst)
-        {            
+        {
             var system = Imaging.SystemImages;
             var count = src.Count;
             var images = src.View;
@@ -82,7 +82,7 @@ namespace Z0
                 rows.Append(SpacePipe);
                 rows.Append(image.EndAddress.Format().PadRight(fields[4].Width));
                 rows.Append(SpacePipe);
-                rows.Append(image.Size.Format().PadRight(fields[5].Width));                
+                rows.Append(image.Size.Format().PadRight(fields[5].Width));
                 rows.Append(SpacePipe);
 
                 if(i == 0)
@@ -95,7 +95,7 @@ namespace Z0
                     rows.Append(gap.ToString("#,#"));
                 }
 
-                rows.Append(Eol); 
+                rows.Append(Eol);
             }
 
             using var writer = dst.Writer();

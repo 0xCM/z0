@@ -3,21 +3,33 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Linq;
 
     using static Konst;
 
+    public readonly struct CapturedApiMember
+    {
+        public readonly ApiMember Member;
+
+        public readonly CapturedCode Code;
+
+        public CapturedApiMember(ApiMember member, CapturedCode code)
+        {
+            Member = member;
+            Code = code;
+        }
+    }
+
     /// <summary>
-    /// Describes a reified api member wich may be of hosted or located state
+    /// Describes a reified api member which may be of hosted or located state
     /// </summary>
-    public readonly struct ApiMember : IApiMember<ApiMember>
+    public readonly struct ApiMember : IApiMember<ApiMember>, IComparable<ApiMember>
     {
         public OpIdentity Id {get;}
-        
+
         public OpUri OpUri {get;}
 
         public MethodInfo Method {get;}
@@ -26,9 +38,9 @@ namespace Z0
 
         public MemoryAddress Address {get;}
 
-        public ApiHostUri HostUri {get;}   
+        public ApiHostUri HostUri {get;}
 
-        public ApiMember Zero 
+        public ApiMember Zero
             => Empty;
 
         [MethodImpl(Inline)]
@@ -51,7 +63,7 @@ namespace Z0
             Method = z.insist(method);
             Address = address;
             HostUri = OpUri.Host;
-        }        
+        }
 
         public bool Equals(ApiMember src)
         {
@@ -63,8 +75,12 @@ namespace Z0
             result &= HostUri.Equals(src.HostUri);
             return result;
         }
-        
-        public static ApiMember Empty 
+
+        [MethodImpl(Inline)]
+        public int CompareTo(ApiMember src)
+            => Address.CompareTo(src.Address);
+
+        public static ApiMember Empty
             => new ApiMember(OpUri.Empty, EmptyVessels.EmptyMethod, 0, 0);
-    }        
+    }
 }

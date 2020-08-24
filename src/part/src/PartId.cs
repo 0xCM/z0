@@ -37,6 +37,7 @@ public enum PartId : ulong
     Tools = 29,
 
     Monitor = 30,
+    Json = 31,
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -193,7 +194,7 @@ public enum PartId : ulong
 
     Floor = 305,
 
-    Json = 306,
+    //Json = 306,
 
     //Lang = 307,
 

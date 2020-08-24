@@ -3,15 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    /// <summary>
-    /// Represents the <see cref='Mnemonic.Call'/> instruction
-    /// </summary>
     public readonly struct AsmCall
     {
         public Mnemonic Mnemonic => Mnemonic.Call;

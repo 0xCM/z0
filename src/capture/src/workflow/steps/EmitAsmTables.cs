@@ -16,7 +16,7 @@ namespace Z0
 
     public ref struct EmitAsmTables
     {
-        readonly IWfCaptureState State;                
+        readonly IWfCaptureState State;
 
         readonly IWfContext Wf;
 
@@ -33,16 +33,16 @@ namespace Z0
         readonly MnemonicParser Parser;
 
         readonly ReadOnlySpan<MemoryAddress> Locations;
-        
+
         AsmTableSeg<Mnemonic>[] Segments;
-        
+
         int Sequence;
 
         uint Offset;
 
         readonly Dictionary<Mnemonic, ArrayBuilder<AsmRecord>> Index;
 
-        ReadOnlySpan<Mnemonic> Keys         
+        ReadOnlySpan<Mnemonic> Keys
             => Index.Keys.ToArray();
 
         IAsmDecoder Decoder
@@ -53,7 +53,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Sequence++;
         }
-        
+
         Address32 NextOffset
         {
             [MethodImpl(Inline)]
@@ -65,14 +65,14 @@ namespace Z0
             State = state;
             Wf = state.Wf;
             Actor = actor;
-            Id = new WfStepId(typeof(EmitAsmTables));
+            Id = AB.step(typeof(EmitAsmTables));
             Encoded = encoded;
             Locations = encoded.Locations;
             Sequence = 0;
             Offset = 0;
             Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRecord>>();
-            Asm = state.Asm;            
-            Ct = ct;            
+            Asm = state.Asm;
+            Ct = ct;
             Segments = sys.empty<AsmTableSeg<Mnemonic>>();
             Wf.Created(Actor, Ct);
         }
@@ -106,7 +106,7 @@ namespace Z0
         {
             Wf.Finished(Actor, Ct);
         }
-        
+
         void Save(in AsmTableSeg<Mnemonic> src, int offset)
         {
             var count = src.Count;
@@ -115,12 +115,12 @@ namespace Z0
             var dir = (Wf.ResourceRoot + FolderName.Define("tables")) + FolderName.Define("asm");
             var dst = dir + FileName.Define(src.Key.ToString(), FileExtensions.Csv);
             using var writer = dst.Writer();
-            writer.WriteLine(AsmRecord.FormatHeader());        
+            writer.WriteLine(AsmRecord.FormatHeader());
             for(var i=0; i<count; i++)
             {
                 ref readonly var record = ref skip(tables,i);
                 writer.WriteLine(record.Format());
-            }            
+            }
         }
 
         [MethodImpl(Inline)]
@@ -139,57 +139,57 @@ namespace Z0
                 count += Index[skip(keys,i)].Count;
             return count;
         }
-            
+
         void Collect()
         {
             var kTables = RecordCount();
             var buffer = sys.alloc<AsmRecord>(kTables);
             var tables = span(buffer);
             var keys = Keys;
-            var kKeys = keys.Length;            
+            var kKeys = keys.Length;
             Segments = new AsmTableSeg<Mnemonic>[kTables];
             var dst = span(Segments);
-            
+
             var offset = 0;
             for(uint i=0u; i<kKeys; i++)
             {
-                var key = skip(keys,i);                
+                var key = skip(keys,i);
                 var current = Index[key];
-                
+
                 current.CopyTo(tables, (uint)offset);
-                
+
                 var s0 = offset;
-                offset += (int)current.Count.Value;                
+                offset += (int)current.Count.Value;
                 var s1 = offset;
 
-                seek(dst,i) = AsmRecords.segment(key, new ArraySegment<AsmRecord>(buffer, s0, s1-s0));                                            
-            }                        
+                seek(dst,i) = AsmRecords.segment(key, new ArraySegment<AsmRecord>(buffer, s0, s1-s0));
+            }
         }
-               
+
         void Process(in LocatedCode code, in AsmFxList asm)
         {
             Process(code.Encoded, asm.Data);
         }
 
-        void Process(in BinaryCode code, Instruction[] asm)        
+        void Process(in BinaryCode code, Instruction[] asm)
         {
             var bytes = Root.span(code.Data);
-            
+
             ushort offset = 0;
 
-            for(var i=0; i<asm.Length; i++)    
+            for(var i=0; i<asm.Length; i++)
             {
                 ref readonly var instruction = ref asm[i];
-                
+
                 var size = (ushort)instruction.ByteLength;
                 var encoded = bytes.Slice(offset, size);
-                
+
                 var a16 = new Address16(offset);
                 Process(a16, encoded, instruction);
                 offset += size;
             }
         }
-        
+
         void Process(Address16 localOffset, Span<byte> encoded, in Instruction asm)
         {
             var mnemonic = asm.Mnemonic;
@@ -207,9 +207,9 @@ namespace Z0
                     InstructionFormat: asm.FormattedInstruction,
                     InstructionCode: asm.InstructionCode.Expression,
                     CpuId: text.embrace(asm.CpuidFeatures.Select(x => x.ToString()).Concat(",")),
-                    Id: (OpCodeId)asm.Code 
+                    Id: (OpCodeId)asm.Code
                     );
-                
+
                 if(Index.TryGetValue(mnemonic, out var builder))
                     builder.Include(record);
                 else

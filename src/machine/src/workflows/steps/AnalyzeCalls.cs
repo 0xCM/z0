@@ -21,35 +21,33 @@ namespace Z0
 
         readonly LocatedAsmFxList Source;
 
-        readonly FolderPath TargetDir;
+        readonly FilePath DstPath;
 
-        public AnalyzeCalls(IWfContext wf, LocatedAsmFxList src, FolderPath dst, CorrelationToken ct)
+        public AnalyzeCalls(IWfContext wf, LocatedAsmFxList src, FilePath dst, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
             Source = src;
-            TargetDir = dst;
+            DstPath = dst;
             Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {
-            Wf.Running(StepName, Ct);
+
+            Wf.RunningT(StepName, DstPath, Ct);
 
             var sep = Chars.Pipe;
-            var filename = FileName.Define("Calls", FileExtensions.Csv);
-            var path = TargetDir + filename;
-            using var writer = path.Writer();
+            using var writer = DstPath.Writer();
 
             var data = Source.CallData.ToArray();
             var delimited = data.Select(x => Delimit(x.Rows, sep));
 
             var names = Delimit(AsmCallInfo.AspectNames, sep);
-
             writer.WriteLine(names);
             z.iter(delimited, writer.WriteLine);
 
-            Wf.Ran(StepName, Ct);
+            Wf.RanT(StepName, names.Length, Ct);
         }
 
         public void Dispose()

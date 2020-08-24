@@ -11,6 +11,11 @@ set Src="%DevBuildRoot%\%FileName%"
 set Dst="%StageBuildRoot%\%FileName%"
 copy %Src% /A %Dst% /Y
 
+set SrcDir="%CodeDir%\data\content"
+set DstDir="%LogRoot%\refs"
+set LogPath="%ZLogs%\etl\refs-archive.log"
+robocopy %SrcDir% %DstDir% /log:%LogPath% /tee /TS /BYTES /V /MIR
+
 set Src=%DevBuild%
 set Dst=%StageBuild%
 set Log="%EtlLogDir%\stage-build.log"

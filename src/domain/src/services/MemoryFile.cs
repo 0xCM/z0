@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.IO;
     using System.IO.MemoryMappedFiles;
-    
+
     using static Konst;
     using static z;
 
@@ -21,7 +21,7 @@ namespace Z0
         readonly FilePath Path;
 
         readonly MemoryMappedFile File;
-        
+
         readonly MemoryMappedViewAccessor View;
 
         public readonly ulong Size;
@@ -35,7 +35,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static MemoryFile open(string path)
             => new MemoryFile(path);
-        
+
+        [MethodImpl(Inline)]
+        public static MemoryFile open(FS.FilePath path)
+            => new MemoryFile(path.Name);
+
         public static MemoryFileInfo describe(in MemoryFile src)
         {
             var dst = new MemoryFileInfo();
@@ -50,7 +54,7 @@ namespace Z0
             dst.Description = desc;
             return dst;
         }
-        
+
         [MethodImpl(Inline), Op]
         public Span<byte> Read(MemoryAddress src, uint size)
             => z.cover(src, size);
@@ -75,10 +79,10 @@ namespace Z0
             Base = @base;
             Size = (ulong)Path.Info.Length;
         }
-        
+
         public MemoryFileInfo Description
             => describe(this);
-        
+
         public void Dispose()
         {
             View?.Dispose();

@@ -16,7 +16,7 @@ namespace Z0.Asm
         public ICaptureCore CaptureService {get;}
 
         [MethodImpl(Inline)]
-        public static ICaptureServiceProxy Create(ICaptureCore service, ICaptureExchange exchange)
+        public static ICaptureServiceProxy create(ICaptureCore service, ICaptureExchange exchange)
             => new CaptureServiceProxy(service, exchange);
 
         [MethodImpl(Inline)]

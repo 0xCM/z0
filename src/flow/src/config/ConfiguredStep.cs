@@ -31,8 +31,8 @@ namespace Z0
             Step.Configure(Args) ;
         }
 
-        public WfStepId StepId
-            => Step.StepId;
+        public WfStepId Id
+            => Step.Id;
 
         [MethodImpl(Inline)]
         public void Run()

@@ -56,9 +56,6 @@ namespace Z0
         FilePath ResPack
             => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
 
-        FilePath ResPackStage
-            => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
-
         CorrelationToken Ct {get;}
 
         WfEventId Raise<E>(in E e)
@@ -97,7 +94,7 @@ namespace Z0
         void Status<T>(string worker, T message, CorrelationToken ct)
             => Flow.status(this, worker, message,ct);
 
-        void Status<T>(T data, [Caller] string actor = null)
+        void Status<T>(T data, [File] string actor = null)
             => Flow.status(this, Path.GetFileNameWithoutExtension(actor), data,Ct);
 
         void Status<T>(in WfActor actor, T message, CorrelationToken ct)
@@ -114,6 +111,15 @@ namespace Z0
 
         void Created(string actor)
             => Raise(WfEventBuilder.newWorker(Ct, actor));
+
+        void Created(WfStepId id)
+            => Raise(Flow.created(id, Ct));
+
+        void Running(WfStepId step, [File] string actor = null)
+            => Raise(Flow.running(Path.GetFileNameWithoutExtension(actor), step, Ct));
+
+        void Ran(WfStepId step, [File] string actor = null)
+            => Raise(Flow.ran(Path.GetFileNameWithoutExtension(actor), step, Ct));
 
         void Created(in WfActor actor, CorrelationToken? ct = null)
             => Raise(Flow.created(ct ?? Ct, actor));

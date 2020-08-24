@@ -9,11 +9,14 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-    
-    public abstract class Part<P> : IPart<P> 
+
+    public abstract class Part<P> : IPart<P>
         where P : Part<P>, IPart<P>, new()
-    {                
+    {
         public PartId Id {get;}
+
+        public static Assembly Assembly
+            => typeof(P).Assembly;
 
         public Assembly Owner {get;}
 
@@ -37,19 +40,19 @@ namespace Z0
 
         protected static PartId[] parts(params PartId[] src)
             => src;
-        
+
         /// <summary>
         /// The resolved part
         /// </summary>
-        public static P Resolved 
+        public static P Resolved
             => new P();
 
         protected Part()
         {
             Box = new PartBox();
-            Owner = typeof(P).Assembly;            
+            Owner = typeof(P).Assembly;
             Id =  id(Owner);
-            _Runtime = new RuntimePart<P>(Box);            
+            _Runtime = new RuntimePart<P>(Box);
         }
 
         protected Part(PartBox box)
@@ -66,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(Part<P> p1, Part<P> p2)
             => p1.Id != p2.Id;
-                                    
+
         [MethodImpl(Inline)]
         public bool Equals(P src)
             => Id == src.Id;
@@ -74,16 +77,16 @@ namespace Z0
         public override bool Equals(object src)
             => src is P x && Equals(x);
         public uint Hash
-        { 
+        {
             [MethodImpl(Inline)]
             get => hash(Id);
         }
 
-        public override int GetHashCode() 
+        public override int GetHashCode()
             => (int)Hash;
 
         [MethodImpl(Inline)]
-        public string Format() 
+        public string Format()
             => format(Id);
 
         public override string ToString()

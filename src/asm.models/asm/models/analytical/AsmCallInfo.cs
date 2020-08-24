@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public readonly struct AsmCallInfo : IAsmCallInfo
     {
-        readonly BasedAsmFx Instruction;
+        readonly BasedAsmFx Fx;
 
         public MemoryAddress Target {get;}
 
@@ -20,28 +20,28 @@ namespace Z0.Asm
 
         public string[] AspectValues
             => AsmAspects.Values<IAsmCallInfo>(this);
-        
-        public MemoryAddress Source 
-            => Instruction.IP;                
 
-        public MemoryAddress TargetOffset 
+        public MemoryAddress Source
+            => Fx.IP;
+
+        public MemoryAddress TargetOffset
             => Target - (Source + InstructionSize);
 
-        public byte InstructionSize 
-            => (byte)Instruction.ByteLength;
+        public byte InstructionSize
+            => (byte)Fx.ByteLength;
 
-        public BinaryCode Encoded 
-            => Instruction.Encoded;
+        public BinaryCode Encoded
+            => Fx.Encoded;
 
         [MethodImpl(Inline)]
         public AsmCallInfo(BasedAsmFx src)
         {
-            Instruction = src;
+            Fx = src;
             Target = MemoryAddress.Empty;
-            var bytes = z.span(src.Encoded.Data);            
+            var bytes = z.span(src.Encoded.Data);
             var count = (byte)(bytes.Length - 1); //op code takes up one byte
             var offset = ByteReader.read(bytes.Slice(1));
-            Target = src.NextIp + offset;            
-        }        
+            Target = src.NextIp + offset;
+        }
     }
 }

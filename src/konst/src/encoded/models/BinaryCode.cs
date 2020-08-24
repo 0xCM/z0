@@ -10,7 +10,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    
+
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
     /// </summary>
@@ -24,66 +24,66 @@ namespace Z0
         /// <summary>
         /// The encoded content as byte array
         /// </summary>
-        public byte[] Data 
-        { 
-            [MethodImpl(Inline)] 
+        public byte[] Data
+        {
+            [MethodImpl(Inline)]
             get => Encoded;
         }
-                
+
         /// <summary>
         /// Covers the encoded content with a readonly span
         /// </summary>
         public ReadOnlySpan<byte> View
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => Encoded;
-        }                
+        }
 
         /// <summary>
         /// Covers the encoded content with a span
         /// </summary>
         public Span<byte> Edit
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => Encoded;
-        }                
+        }
 
         /// <summary>
         /// Returns a reference to the encoded data
         /// </summary>
         public Ref Ref
         {
-            [MethodImpl(Inline)] 
-            get => SegRefs.@ref(in this[0], (uint)Length);
-        }
-        
-        public int Length 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded?.Length ?? 0; 
+            [MethodImpl(Inline)]
+            get => memory.@ref(in this[0], (uint)Length);
         }
 
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0); 
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Encoded?.Length ?? 0;
         }
 
-        public bool IsNonEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => !IsEmpty; 
-        }        
-        
-        public ref byte this[int index] 
-        { 
-            [MethodImpl(Inline)] 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
+
+        public ref byte this[int index]
+        {
+            [MethodImpl(Inline)]
             get => ref Encoded[index];
         }
 
-        public ref byte this[uint index] 
-        { 
-            [MethodImpl(Inline)] 
+        public ref byte this[uint index]
+        {
+            [MethodImpl(Inline)]
             get => ref Encoded[index];
         }
 
@@ -114,9 +114,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(BinaryCode a, BinaryCode b)
             => !a.Equals(b);
-       
+
         public bool Equals(BinaryCode src)
-        {        
+        {
             if(IsNonEmpty && src.IsNonEmpty)
                 return Encoded.SequenceEqual(src.Encoded);
             else
@@ -125,9 +125,9 @@ namespace Z0
                     return true;
                 else
                     return false;
-            }                
-        }        
-        
+            }
+        }
+
         public string Format()
             => Encoded.FormatHexBytes();
 
@@ -136,21 +136,21 @@ namespace Z0
 
         public override int GetHashCode()
             => View.GetHashCode();
-        
+
         public override bool Equals(object src)
             => src is BinaryCode encoded && Equals(encoded);
-        
-        public override string ToString() 
+
+        public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public ByteStream Stream()
             => new ByteStream(this);
-        
+
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static BinaryCode Empty 
+        public static BinaryCode Empty
             => new BinaryCode(sys.empty<byte>());
     }
 }

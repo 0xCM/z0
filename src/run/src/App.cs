@@ -28,13 +28,6 @@ namespace Z0
             Ct = correlate(Part);
         }
 
-        // IResolvedApi Api
-        //     => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
-
-        // IRunnerContext CreateArtistryContext(IAsmContext root, PartId[] code)
-        //     => RunnerContext.Create(root, code);
-
-
         public override void RunShell(params string[] args)
         {
             var parts = PartIdParser.Service.ParseValid(args);

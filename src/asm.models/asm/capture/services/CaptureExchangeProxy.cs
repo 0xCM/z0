@@ -12,7 +12,7 @@ namespace Z0.Asm
     public readonly struct CaptureExchangeProxy : ICaptureExchange
     {
         /// <summary>
-        /// The juncture-coincident operation set 
+        /// The juncture-coincident operation set
         /// </summary>
         public ICaptureCore Service {get;}
 
@@ -20,13 +20,13 @@ namespace Z0.Asm
         /// The buffer that receives the captured data
         /// </summary>
         public BufferToken TargetBuffer {get;}
-        
+
         [MethodImpl(Inline)]
-        public static ICaptureExchange Create(ICaptureCore service, BufferToken capture)
+        public static ICaptureExchange create(ICaptureCore service, BufferToken capture)
             => new CaptureExchangeProxy(service, capture);
-        
+
         [MethodImpl(Inline)]
-        internal CaptureExchangeProxy(ICaptureCore service, BufferToken target)            
+        internal CaptureExchangeProxy(ICaptureCore service, BufferToken target)
         {
             TargetBuffer = target;
             Service = service;

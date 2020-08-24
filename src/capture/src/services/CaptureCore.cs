@@ -11,11 +11,11 @@ namespace Z0.Asm
     using static Konst;
     using static Memories;
     using static ExtractTermCode;
-    
+
     public unsafe readonly struct CaptureCore : ICaptureCore
-    {      
-        public static CaptureCore Service => default;                
-        
+    {
+        public static CaptureCore Service => default;
+
         [MethodImpl(Inline)]
         static IntPtr jit(MethodInfo src)
         {
@@ -25,24 +25,24 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static IntPtr jit(Delegate src)
-        {   
+        {
             RuntimeHelpers.PrepareDelegate(src);
             return src.Method.MethodHandle.GetFunctionPointer();
-        }    
+        }
 
         [MethodImpl(Inline)]
         static DynamicPointer jit(DynamicDelegate src)
-        {   
+        {
             RuntimeHelpers.PrepareDelegate(src.DynamicOp);
             return DynamicPointer.From(src);
-        }                
-        
+        }
+
         public Option<ParsedOperation> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
             try
             {
                 var parsed = capture(exchange, id, ref head(src));
-                var outcome = parsed.Outcome;            
+                var outcome = parsed.Outcome;
                 var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
                 return new ParsedOperation(id, outcome, bytes);
             }
@@ -53,15 +53,31 @@ namespace Z0.Asm
             }
         }
 
+        public Option<CapturedApiMember> Capture(in CaptureExchange exchange, in ApiMember src)
+        {
+            try
+            {
+                var summary = capture(exchange, src.Id, src.Address);
+                var size = summary.Data.Length;
+                var code = new CapturedCode(src.Id, src.Method, summary.Encoded.ParseInput, summary.Encoded.Encoded, summary.Outcome.TermCode);
+                return new CapturedApiMember(src, code);
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return none<CapturedApiMember>();
+            }
+        }
+
         public Option<CapturedCode> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
         {
             try
             {
                 var pSrc = jit(src);
                 var summary = capture(exchange, id, pSrc);
-                var outcome = summary.Outcome;            
-                var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode); 
-                Demands.insist((MemoryAddress)pSrc, captured.Address);               
+                var outcome = summary.Outcome;
+                var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode);
+                Demands.insist((MemoryAddress)pSrc, captured.Address);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -77,9 +93,9 @@ namespace Z0.Asm
             {
                 var pSrc = jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
-                var outcome =  summary.Outcome;   
-                var captured = new CapturedCode(id, src.DynamicOp, src.SourceMethod, summary.Encoded.ParseInput, summary.Encoded.ParseResult, outcome.TermCode);                
-                Demands.insist((MemoryAddress)pSrc,captured.Address);               
+                var outcome =  summary.Outcome;
+                var captured = new CapturedCode(id, src.SourceMethod, summary.Encoded.ParseInput, summary.Encoded.ParseResult, outcome.TermCode);
+                Demands.insist((MemoryAddress)pSrc,captured.Address);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -110,8 +126,8 @@ namespace Z0.Asm
                 var pSrc = jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
-                var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode);  
-                Demands.insist((MemoryAddress)pSrc,captured.Address);               
+                var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode);
+                Demands.insist((MemoryAddress)pSrc,captured.Address);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -125,32 +141,28 @@ namespace Z0.Asm
         {
             if(src.IsOpenGeneric())
             {
-                var target = src.Reify(args);                
+                var target = src.Reify(args);
                 var id = Identities.Services.Diviner.DivineIdentity(target);
                 return Capture(exchange, id, target);
             }
             else
-                return Capture(exchange, src.Identify(), src);                
+                return Capture(exchange, src.Identify(), src);
         }
 
         [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
-            => new CapturedCode(id, null, src, bits.ParseInput, bits.Encoded, term);
+            => new CapturedCode(id, src, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, Delegate src, Z0.ParsedEncoding bits, ExtractTermCode term)
-            => new CapturedCode(id, src, src.Method, bits.ParseInput, bits.Encoded, term);
-
-        [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, Delegate src, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
-            => new CapturedCode(id, src, src.Method, extracted, parsed, term);
+            => new CapturedCode(id, src.Method, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
         static CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
             => capture(exchange, id, (byte*)Unsafe.AsPointer(ref src));
 
         [MethodImpl(Inline)]
-        static CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)        
+        static CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
             => capture(exchange, id, src.ToPointer<byte>());
 
         [MethodImpl(Inline)]
@@ -158,25 +170,25 @@ namespace Z0.Asm
         {
             var limit = exchange.BufferLength - 1;
             var start = (long)pSrc;
-            var offset = 0;            
+            var offset = 0;
             int? ret_offset = null;
             var end = (long)pSrc;
             var state = default(ExtractState);
 
             while(offset < limit)
             {
-                state = Step(exchange, id, ref offset, ref end, ref pSrc);                                
-                exchange.CaptureStep(state);                
+                state = Step(exchange, id, ref offset, ref end, ref pSrc);
+                exchange.CaptureStep(state);
 
                 if(ret_offset == null && state.Captured == RET)
-                    ret_offset = offset;                 
+                    ret_offset = offset;
 
                 var tc = CalcTerm(exchange, offset, ret_offset, out var delta);
-                if(tc != null)         
+                if(tc != null)
                     return SummarizeParse(exchange, state, id, tc.Value, start, end, delta);
             }
             return SummarizeParse(exchange, state, id, CTC_BUFFER_OUT, start, end, 0);
-        }                    
+        }
 
         [MethodImpl(Inline)]
         static ExtractState Step(in CaptureExchange exchange, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
@@ -218,7 +230,7 @@ namespace Z0.Asm
                 if(tc != null)
                     return tc;
             }
-                    
+
             if(offset >= 7 && Zx7(exchange, offset))
             {
                 if(ret_offset == null)
@@ -229,18 +241,18 @@ namespace Z0.Asm
                 delta = -(offset - ret_offset.Value);
                 return CTC_RET_Zx7;
             }
-            
+
             return null;
         }
 
         const byte ZED = 0;
-        
+
         const byte RET = 0xc3;
-        
+
         const byte INTR = 0xcc;
-        
+
         const byte SBB = 0x19;
-        
+
         const byte FF = 0xff;
 
         const byte E0 = 0xe0;
@@ -279,7 +291,7 @@ namespace Z0.Asm
             var x3 = exchange[offset - 2];
             var x4 = exchange[offset - 1];
             delta = 0;
-            
+
             if(match((x0,ZED), (x1,ZED), (x2,J48), (x3,FF), (x4,E0)))
                 return CTC_JMP_RAX;
             else
@@ -288,30 +300,30 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static bool Zx7(in CaptureExchange exchange, int offset)
-            =>      exchange[offset - 6] == ZED 
-                && (exchange[offset - 5] == ZED) 
-                && (exchange[offset - 4] == ZED) 
-                && (exchange[offset - 3] == ZED) 
-                && (exchange[offset - 2] == ZED) 
-                && (exchange[offset - 1] == ZED)                     
+            =>      exchange[offset - 6] == ZED
+                && (exchange[offset - 5] == ZED)
+                && (exchange[offset - 4] == ZED)
+                && (exchange[offset - 3] == ZED)
+                && (exchange[offset - 2] == ZED)
+                && (exchange[offset - 1] == ZED)
                 && (exchange[offset - 0] == ZED);
 
         [MethodImpl(Inline)]
         static bit match((byte x, byte y) a, (byte x, byte y) b)
-            => a.x == a.y 
+            => a.x == a.y
             && b.x == b.y;
 
         [MethodImpl(Inline)]
         static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c)
-            => a.x == a.y 
-            && b.x == b.y 
+            => a.x == a.y
+            && b.x == b.y
             && c.x == c.y;
 
         [MethodImpl(Inline)]
         static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c, (byte x, byte y) d, (byte x, byte y) e)
-            => a.x == a.y 
-            && b.x == b.y 
-            && c.x == c.y 
+            => a.x == a.y
+            && b.x == b.y
+            && c.x == c.y
             && d.x == d.y
             && e.x == e.y;
 

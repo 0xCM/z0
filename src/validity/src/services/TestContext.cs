@@ -30,7 +30,7 @@ namespace Z0
             => _Api.Value;
 
         static IResolvedApi ComposeApi()
-            => ApiPart.Assemble(Parted.executing());
+            => ApiQuery.assemble(Parted.executing());
 
         static Lazy<IResolvedApi> _Api {get;}
             = Root.defer(ComposeApi);

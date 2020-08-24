@@ -17,13 +17,13 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         public static ParseResult<ulong> ParseHex(string src)
-        {            
+        {
             if(ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ulong value))
                 return z.parsed(src,value);
-            else 
+            else
                 return z.unparsed<ulong>(src);
-        }        
-        
+        }
+
         /// <summary>
         /// The uppercase hex format code
         /// </summary>
@@ -71,6 +71,38 @@ namespace Z0
 
         public const string SmallHexSpec = "x4";
 
+        public const string Hex4 = "x1";
+
+        public const string Hex8 = "x2";
+
+        public const string Hex12 = "x3";
+
+        public const string Hex16 = "x4";
+
+        public const string Hex20 = "x5";
+
+        public const string Hex24 = "x6";
+
+        public const string Hex28 = "x7";
+
+        public const string Hex32 = "x8";
+
+        public const string Hex36 = "x9";
+
+        public const string Hex40 = "x10";
+
+        public const string Hex44 = "x11";
+
+        public const string Hex48 = "x12";
+
+        public const string Hex52 = "x13";
+
+        public const string Hex56 = "x14";
+
+        public const string Hex60 = "x15";
+
+        public const string Hex64 = "x16";
+
         /// <summary>
         /// Selects either the uppercase format code 'X' or lowercase format code 'x'
         /// </summary>
@@ -78,13 +110,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static char CaseSpec(bool upper)
             => upper ? 'X' : 'x';
-        
+
         /// <summary>
         /// Removes leading or trailing hex specifiers
         /// </summary>
         /// <param name="src">The source string</param>
         [MethodImpl(Inline)]
         public static string ClearSpecs(string src)
-            => src.Remove("0x").RemoveAny('h');        
+            => src.Remove("0x").RemoveAny('h');
     }
 }

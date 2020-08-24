@@ -45,7 +45,7 @@ namespace Z0
             => ApiDataTypes.Cast<IApiHost>().Concat(Operations.Cast<IApiHost>()).Array();
 
         /// <summary>
-        /// Specifies whether the catalog contains content from an identifid assembly
+        /// Specifies whether the catalog contains content from an identified assembly
         /// </summary>
         bool IsIdentified
             => PartId != 0;

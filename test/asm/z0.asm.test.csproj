@@ -12,7 +12,8 @@
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Blocked)" />
     <ProjectReference Include="$(Machine)" />
-    <ProjectReference Include="$(AsmRun)" />
+    <ProjectReference Include="$(Run)" />
+    <ProjectReference Include="$(VCheck)" />
   </ItemGroup>
 
 </Project>

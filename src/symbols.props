@@ -5,10 +5,10 @@
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
     <Domain>$(Src)domain/z0.domain.csproj</Domain>
 
-    <Tables>$(Src)tables/z0.tables.csproj</Tables>    
+    <Tables>$(Src)tables/z0.tables.csproj</Tables>
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
 
-    <Data>$(Src)data/z0.data.csproj</Data>    
+    <Data>$(Src)data/z0.data.csproj</Data>
     <Expressive>$(Src)expressive/z0.expressive.csproj</Expressive>
     <Imagine>$(Src)imagine/z0.imagine.csproj</Imagine>
     <V0>$(Src)v0/z0.v0.csproj</V0>
@@ -16,17 +16,18 @@
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
     <AsmModels>$(Src)asm.models/z0.asm.models.csproj</AsmModels>
     <AsmCode>$(Src)asm.code/z0.asm.code.csproj</AsmCode>
-    <AsmRun>$(Src)asm.run/z0.asm.run.csproj</AsmRun>
+    <Run>$(Src)run/z0.run.csproj</Run>
+    <Json>$(Src)json/z0.json.csproj</Json>
 
     <WfCore>$(Src)flow.core/z0.flow.core.csproj</WfCore>
 
     <Flow>$(Src)flow/z0.flow.csproj</Flow>
     <Win>$(Src)win/z0.win.csproj</Win>
     <Tools>$(Src)tools/z0.tools.csproj</Tools>
-    
+
     <Text>$(Src)text/z0.text.csproj</Text>
     <Memories>$(Src)memories/z0.memories.csproj</Memories>
-    <Seed>$(Src)seed/z0.seed.csproj</Seed>    
+    <Seed>$(Src)seed/z0.seed.csproj</Seed>
     <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
     <Artifacts>$(Src)artifacts/z0.artifacts.csproj</Artifacts>
     <Stores>$(Src)stores/z0.stores.csproj</Stores>
@@ -34,7 +35,7 @@
     <Structured>$(Src)structured/z0.structured.csproj</Structured>
     <Fixed>$(Src)fixed/z0.fixed.csproj</Fixed>
     <Numeric>$(Src)numeric/z0.numeric.csproj</Numeric>
-    <Math>$(Src)math/z0.math.csproj</Math>      
+    <Math>$(Src)math/z0.math.csproj</Math>
     <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
@@ -59,7 +60,7 @@
     <Vectors>$(Src)vectors/z0.vectors.csproj</Vectors>
     <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
     <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
-    <GVec>$(Src)gvec/z0.gvec.csproj</GVec>    
+    <GVec>$(Src)gvec/z0.gvec.csproj</GVec>
     <VData>$(Src)vdata/z0.vdata.csproj</VData>
     <VBits>$(Src)vbits/z0.vbits.csproj</VBits>
     <VCheck>$(Src)vcheck/z0.vcheck.csproj</VCheck>
@@ -86,10 +87,10 @@
     <BitSvc>$(Src)bitsvc/z0.bitsvc.csproj</BitSvc>
     <Checks>$(Src)checks/z0.checks.csproj</Checks>
 
-    <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>    
+    <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
     <Logix>$(Src)logix/z0.logix.csproj</Logix>
-    <Matrix>$(Src)matrix/z0.matrix.csproj</Matrix>  
+    <Matrix>$(Src)matrix/z0.matrix.csproj</Matrix>
     <Machines>$(Src)machines/z0.machines.csproj</Machines>
     <Cil>$(Src)cil/z0.cil.csproj</Cil>
   </PropertyGroup>

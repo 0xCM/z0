@@ -15,7 +15,7 @@ namespace Z0
     {
         static IAppContext CreateAppContext()
         {
-            var resolved = ApiPart.Assemble(z.stream(P.Imagine.Resolved));
+            var resolved = ApiQuery.assemble(z.stream(P.Imagine.Resolved));
             var random = Polyrand.Pcg64(PolySeed64.Seed05);
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();

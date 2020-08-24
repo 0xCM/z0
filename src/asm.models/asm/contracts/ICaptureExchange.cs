@@ -20,11 +20,11 @@ namespace Z0.Asm
         /// The buffer that receives the captured data
         /// </summary>
         BufferToken TargetBuffer {get;}
-        
+
         CaptureExchange Context
         {
             [MethodImpl(Inline)]
-            get => CaptureExchange.Create(Service, Buffers.cover(TargetBuffer));
+            get => CaptureExchange.create(Service, Buffers.cover(TargetBuffer));
         }
     }
 }

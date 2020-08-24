@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     public struct BitStack
@@ -14,11 +14,7 @@ namespace Z0
         ulong State;
 
         [MethodImpl(Inline)]
-        public static BitStack Create(ulong state = 0)
-            => new BitStack(state);            
-
-        [MethodImpl(Inline)]
-        internal BitStack(ulong state)
+        public BitStack(ulong state)
             => State  = state;
 
         [MethodImpl(Inline)]

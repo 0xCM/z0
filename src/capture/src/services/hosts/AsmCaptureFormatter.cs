@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Linq;
     using System.Collections.Generic;
@@ -11,9 +11,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
-    using Iced = Iced.Intel;
 
+    using Iced = Iced.Intel;
 
     readonly struct AsmCaptureFormatter : IAsmCaptureFormatter
     {
@@ -30,19 +29,19 @@ namespace Z0.Asm
                 DecimalDigitGroupSize = 4,
                 BranchLeadingZeroes = false,
                 HexDigitGroupSize = 4,
-                UpperCaseRegisters = false, 
+                UpperCaseRegisters = false,
                 LeadingZeroes = false,
-                DisplInBrackets = true, 
+                DisplInBrackets = true,
                 UpperCaseHex = false,
                 RipRelativeAddresses = true,
-                SignedMemoryDisplacements = true,                        
+                SignedMemoryDisplacements = true,
             };
 
         [MethodImpl(Inline)]
         AsmCaptureFormatter(in AsmFormatSpec config)
         {
             Config = config;
-            MasmFormatter = new Iced.MasmFormatter(DefaultOptions);                           
+            MasmFormatter = new Iced.MasmFormatter(DefaultOptions);
         }
 
         public string FormatInstruction(in Iced.Instruction src, ulong @base)
@@ -55,7 +54,7 @@ namespace Z0.Asm
         }
 
         public ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong @base)
-        {                        
+        {
             if(src.Count == 0)
                 return ReadOnlySpan<string>.Empty;
 
@@ -66,7 +65,7 @@ namespace Z0.Asm
             for(var i = 0; i < src.Count; i++)
             {
                 ref readonly var instruction = ref src[i];
-                MasmFormatter.Format(in instruction, output);                    
+                MasmFormatter.Format(in instruction, output);
                 dst[i] = sb.ToString();
                 sb.Clear();
             }
@@ -76,7 +75,7 @@ namespace Z0.Asm
         class AsmOutput : Iced.FormatterOutput
         {
             readonly TextWriter Writer;
-            
+
             readonly ulong BaseAddress;
 
             public AsmOutput(TextWriter writer, ulong baseaddress)
@@ -84,7 +83,7 @@ namespace Z0.Asm
                 this.Writer = writer;
                 this.BaseAddress = baseaddress;
             }
-            
+
             public override void Write(string text, Iced.FormatterOutputTextKind kind)
             {
                 switch(kind)
@@ -93,10 +92,10 @@ namespace Z0.Asm
                         Writer.Write(AsmRender.label(text, BaseAddress));
                     break;
                     default:
-                        Writer.Write(text);    
+                        Writer.Write(text);
                     break;
                 }
-            }                
+            }
         }
     }
 }

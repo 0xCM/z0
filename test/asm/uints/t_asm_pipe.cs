@@ -25,26 +25,6 @@ namespace Z0.Asm
 
         }
 
-        public void RunPipe(FilePath dst)
-        {
-            var pipelog = dst.ChangeExtension(FileExtension.Define($"pipe.{dst.Ext}"));
-            using var log = dst.Writer();
-
-            var counter = 0;
-
-            void CallHandler(in Instruction src)
-            {
-                var ip = (MemoryAddress)src.IP;
-                var mnemonic = src.Mnemonic.ToString().PadRight(12);
-                var row = text.concat(ip.Format(), Space,  mnemonic, ++counter);
-                log.WriteLine(row);
-            }
-
-            var parts = z.array(PartId.DVec, PartId.GVec);
-            var runner = AsmRunner.pipe(pipelog);
-            runner.Include(AsmCall.sink(CallHandler));
-            var handled = runner.RunPipe(parts);
-        }
 
         void check_unary_ops(IdentifiedCode[] src)
         {

@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Linq;        
+    using System.Linq;
     using System.Reflection;
 
     using LD = LinqDynamic;
@@ -13,7 +13,7 @@ namespace Z0.Asm
     public sealed class t_method_capture : t_asm<t_method_capture>
     {
         public override bool Enabled => true;
-    
+
         public void parse_address_segment()
         {
             var parser = Parsers.address(true);
@@ -21,7 +21,7 @@ namespace Z0.Asm
             {
                 var start = Random.Next(0ul, uint.MaxValue);
                 var end = Random.Next((ulong)uint.MaxValue, ulong.MaxValue);
-                var expect = MemoryRange.Define(start,end);
+                var expect = new MemoryRange(start,end);
                 var format = expect.Format();
                 var actual = parser.Parse(format).Value;
                 Claim.Eq(expect,actual);
@@ -54,19 +54,19 @@ namespace Z0.Asm
             {
                 var code = quick.Capture(m);
                 code.OnSome(c => AsmCheck.WriteAsm(c,dst));
-            }            
+            }
         }
-        
+
         public void capture_direct()
-        {            
+        {
             using var dst = CaseWriter(FileExtensions.Asm);
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
-                AsmCheck.Capture(m.Identify(), m).OnSome(capture => AsmCheck.WriteAsm(capture, dst));                
+                AsmCheck.Capture(m.Identify(), m).OnSome(capture => AsmCheck.WriteAsm(capture, dst));
         }
 
         public void capture_imm()
         {
-            
+
         }
 
         public void capture_dynamic_delegates()
@@ -75,7 +75,7 @@ namespace Z0.Asm
             var f = LinqDynamic.xor<uint>();
             var id = Identity.identify(f.Method);
             var capture = CaptureAlt.capture(new IdentifiedMethod(id, f.Method));
-            AsmCheck.WriteAsm(capture, dst);            
+            AsmCheck.WriteAsm(capture, dst);
         }
 
         public void capture_dynamic_delegate_batch()
@@ -90,7 +90,7 @@ namespace Z0.Asm
             var buffer = sys.alloc<byte>(Pow2.T14);
 
             var capture = CaptureAlt.capture(identified, buffer);
-            AsmCheck.WriteAsm(capture, dst);                
+            AsmCheck.WriteAsm(capture, dst);
         }
 
         public void capture_delegates()
@@ -114,7 +114,7 @@ namespace Z0.Asm
             AsmCheck.WriteAsm(case4Out, dst);
 
             var case5In = CaptureCases.vand;
-            Root.iter(case5In, 
+            Root.iter(case5In,
                 src => AsmCheck.WriteAsm(AsmCheck.Capture(src.Identify(), src).Require(), dst));
         }
 

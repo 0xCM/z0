@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         public MemoryAddress OffsetAddress
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => Offset;
         }
 
@@ -31,35 +31,35 @@ namespace Z0
         /// </summary>
         public MemoryAddress Absolute
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => IsEmpty ? MemoryAddress.Empty : (Base + Offset);
         }
 
         MemoryAddress IAddressable<MemoryAddress>.Address
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => Absolute;
         }
 
-        MemoryAddress IAddressable.Address 
+        MemoryAddress IAddressable.Address
             => IsEmpty ? MemoryAddress.Empty : (Base + Offset);
 
-        public MemoryOffset Zero  
-        { 
-            [MethodImpl(Inline)] 
-            get => Empty; 
+        public MemoryOffset Zero
+        {
+            [MethodImpl(Inline)]
+            get => Empty;
         }
 
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
             get => Base.Location == 0 && Offset == 0;
         }
 
-        public bool IsNonEmpty  
-        { 
-            [MethodImpl(Inline)] 
-            get => !IsNonEmpty; 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
@@ -77,10 +77,10 @@ namespace Z0
             Offset = offset;
             OffsetWidth = width;
         }
-        
+
         public string Format(char delimiter)
         {
-            MemoryAddress offset = Offset;            
+            MemoryAddress offset = Offset;
             return string.Concat(Base.Format(), delimiter, offset.Format(OffsetWidth));
         }
 
@@ -103,12 +103,12 @@ namespace Z0
             => (int)z.hash(Base,Offset);
 
         public override bool Equals(object obj)
-            => obj is MemoryOffset a && Equals(a);                    
+            => obj is MemoryOffset a && Equals(a);
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
 
-        public static MemoryOffset Empty 
-            => new MemoryOffset(MemoryAddress.Empty, 0, NumericWidth.None);
+        public static MemoryOffset Empty
+            => new MemoryOffset(0ul, 0, 0);
     }
 }

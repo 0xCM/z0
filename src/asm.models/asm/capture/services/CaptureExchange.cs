@@ -22,21 +22,14 @@ namespace Z0.Asm
         public readonly ICaptureCore Service;
 
         /// <summary>
-        /// Allocatates buffers and creates an exchange over the allocation
+        /// Allocates buffers and creates an exchange over the allocation
         /// </summary>
         /// <param name="context">The source context</param>
-        public static CaptureExchange Create(IAsmContext context)
+        public static CaptureExchange create(IAsmContext context)
             => new CaptureExchange(context.CaptureCore, new byte[context.DefaultBufferLength]);
 
-        /// <summary>
-        /// Allocatates buffers and creates an exchange over the allocation
-        /// </summary>
-        /// <param name="context">The source context</param>
-        public static CaptureExchange Create(ICaptureCore service, int size = Pow2.T14)
-            => new CaptureExchange(service, new byte[size]);
-
         [MethodImpl(Inline)]
-        public static CaptureExchange Create(ICaptureCore service, Span<byte> capture, Span<byte> state = default)
+        public static CaptureExchange create(ICaptureCore service, Span<byte> capture, Span<byte> state = default)
             => new CaptureExchange(service, capture);
 
         internal CaptureExchange(ICaptureCore service, Span<byte> capture)

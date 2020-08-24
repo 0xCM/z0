@@ -15,10 +15,6 @@ namespace Z0
 
     partial struct Flow
     {
-        [Op, Closures(UnsignedInts)]
-        public static void running<T>(IWfContext wf, WfActor worker, T message, CorrelationToken ct)
-            => wf.Raise(new WfStepRunning<T>(worker, message, ct));
-
         [Op]
         public static void error(IWfContext wf, Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
         {
@@ -28,7 +24,7 @@ namespace Z0
             var what = e.ToString();
             var msg = text.format(Pattern, where, what);
             wf.Raise(Flow.error(caller, msg, ct));
-        }             
+        }
 
         [Op, Closures(UnsignedInts)]
         public static void error<T>(IWfContext wf, string worker, T body, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)

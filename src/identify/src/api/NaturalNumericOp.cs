@@ -13,14 +13,14 @@ namespace Z0
       public readonly struct NaturalNumericOp : IHostedApiMethod
       {
           /// <summary>
-          /// The operation host to which generic definition and any concrete closures belowng
+          /// The operation host to which generic definition and any concrete closures belong
           /// </summary>
           public IApiHost Host {get;}
-      
+
           /// <summary>
           /// The generic operation identity
           /// </summary>
-          public GenericOpIdentity GenericId {get;}            
+          public GenericOpIdentity GenericId {get;}
 
           /// <summary>
           /// The supported closures
@@ -30,8 +30,8 @@ namespace Z0
           /// <summary>
           /// The generalized identity
           /// </summary>
-          public OpIdentity Id 
-            => GenericId.Generialize();
+          public OpIdentity Id
+            => GenericId.Generalize();
 
           /// <summary>
           /// The generic method definition
@@ -41,7 +41,7 @@ namespace Z0
           /// <summary>
           /// The hosting type uri
           /// </summary>
-          public ApiHostUri HostUri 
+          public ApiHostUri HostUri
             => Host.Uri;
 
           [MethodImpl(Inline)]
@@ -51,6 +51,6 @@ namespace Z0
               GenericId = id;
               Method = method;
               Closures = closures;
-          }        
+          }
     }
 }

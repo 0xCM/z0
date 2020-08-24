@@ -11,13 +11,13 @@ namespace Z0
 
     /// <summary>
     /// Describes a PE image from the perspective of process entry point
-    /// </summary>    
+    /// </summary>
     public readonly struct LocatedImage : IAddressable<LocatedImage, MemoryAddress>, IComparable<LocatedImage>
     {
         /// <summary>
         /// The image source path
         /// </summary>
-        public readonly FilePath ImagePath;        
+        public readonly FilePath ImagePath;
 
         /// <summary>
         /// The image part identifier, if any
@@ -28,7 +28,7 @@ namespace Z0
         /// The process entry point
         /// </summary>
         public readonly MemoryAddress EntryAddress;
-        
+
         /// <summary>
         /// The image's memory base
         /// </summary>
@@ -46,7 +46,7 @@ namespace Z0
             PartId = part;
             EntryAddress = entry;
             BaseAddress = @base;
-            Size = size;                        
+            Size = size;
         }
 
         /// <summary>
@@ -57,14 +57,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ImagePath.FileName.WithoutExtension.Name;
         }
-        
+
         /// <summary>
         /// The terminal address as determined by <see cref='BaseAddress'/> + <see cref='Size'/>
         /// </summary>
         public MemoryAddress EndAddress
         {
             [MethodImpl(Inline)]
-            get => BaseAddress + (uint)Size;
+            get => BaseAddress + Size;
         }
 
         /// <summary>
@@ -76,19 +76,19 @@ namespace Z0
             get =>  (BaseAddress, EndAddress);
         }
 
-        MemoryAddress IAddressable<MemoryAddress>.Address 
+        MemoryAddress IAddressable<MemoryAddress>.Address
             => BaseAddress;
 
         public int CompareTo(LocatedImage src)
             => BaseAddress.CompareTo(src.BaseAddress);
-        
+
         public string Format()
-        {            
+        {
             var expression = text.bracket(text.concat(BaseAddress, Chars.Comma, Chars.Space, EndAddress, Chars.Colon, Size));
             return text.assign(Name, expression);
         }
 
         public override string ToString()
-            => Format();                
+            => Format();
     }
 }

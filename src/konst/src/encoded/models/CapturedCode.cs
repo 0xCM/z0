@@ -7,100 +7,100 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
 
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
-    public readonly struct CapturedCode : ICapturedCode<CapturedCode,LocatedCode>
-    {        
+    public readonly struct CapturedCode
+    {
         readonly LocatedCode Extracted;
 
-        public LocatedCode Encoded {get;}
+        public readonly LocatedCode Parsed;
 
-        public OpUri OpUri {get;}
+        public readonly OpUri OpUri;
 
-        public MethodInfo Method {get;}
+        public readonly MethodInfo Method;
 
-        public ExtractTermCode TermCode {get;}
-
-        public byte[] Data 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.Data;
-        }
-        
-        public int Length 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.Length; 
-        }
-
-        public ref readonly byte this[int index] 
-        { 
-            [MethodImpl(Inline)] 
-            get => ref Encoded[index]; 
-        }
-
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsEmpty; 
-        }
-
-        public bool IsNonEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsNonEmpty; 
-        }
+        public readonly ExtractTermCode TermCode;
 
         [MethodImpl(Inline)]
-        public CapturedCode(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
+        public CapturedCode(OpIdentity id, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
         {
-            Extracted = extracted; 
-            Encoded = parsed;
+            Extracted = extracted;
+            Parsed = parsed;
             Method = method;
             OpUri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
             TermCode = term;
         }
 
-        public MemberCode HostedBits  
+        public byte[] Data
         {
-             [MethodImpl(Inline)] 
-             get => new MemberCode(OpUri, Encoded); 
+            [MethodImpl(Inline)]
+            get => Parsed.Data;
+        }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Parsed.Length;
+        }
+
+        public ref readonly byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Parsed[index];
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Parsed.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Parsed.IsNonEmpty;
+        }
+
+        public MemberCode HostedBits
+        {
+             [MethodImpl(Inline)]
+             get => new MemberCode(OpUri, Parsed);
         }
 
         public OpIdentity Id
             => OpUri.OpId;
 
-        public CapturedCode Zero 
+        public CapturedCode Zero
             => Empty;
 
-        public MemoryAddress Address 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.Address; 
+        public MemoryAddress Address
+        {
+            [MethodImpl(Inline)]
+            get => Parsed.Address;
         }
 
 
-        [MethodImpl(Inline)] 
+        [MethodImpl(Inline)]
         public bool Equals(CapturedCode src)
-            => Encoded.Equals(src.Encoded);        
-        
+            => Parsed.Equals(src.Parsed);
+
         public string Format()
-            => Encoded.Format();
-        
+            => Parsed.Format();
+
         public override string ToString()
             => Format();
 
-        public static CapturedCode Empty 
+        public static CapturedCode Empty
             => new CapturedCode(
                 id: OpIdentity.Empty,
-                src: new Func<int>(() => 0), 
-                method: typeof(object).GetMethod(nameof(object.GetHashCode)), 
-                extracted: LocatedCode.Empty, 
-                parsed: LocatedCode.Empty, 
+                method: typeof(object).GetMethod(nameof(object.GetHashCode)),
+                extracted: LocatedCode.Empty,
+                parsed: LocatedCode.Empty,
                 term: ExtractTermCode.None);
+
     }
 }

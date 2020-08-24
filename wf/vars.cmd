@@ -3,6 +3,7 @@ set AppName=z0
 set AppResName=respack
 set Dev=%ZDev%
 set Wf="%Dev%\wf"
+set CodeDir="%Dev%\src"
 set LogRoot=%ZLogs%
 set Stage=%ZLogs%
 set AssetDir="j:\assets"

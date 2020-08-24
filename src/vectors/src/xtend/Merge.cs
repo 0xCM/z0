@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
+
     using static Konst;
     using static Vectors;
     using static Typed;
@@ -28,7 +28,7 @@ namespace Z0
         public static Vector256<T> Merge<T>(this Vector128<T> x, Vector128<T> y, Func<T,T> f)
             where T : unmanaged
         {
-            var srcLen = V0.vcount<T>(n128);
+            var srcLen = z.vcount<T>(n128);
             var dstLen = 2*srcLen;
             var lhsData = x.ToSpan();
             var rhsData = y.ToSpan();
@@ -39,8 +39,8 @@ namespace Z0
                 dst[j++] = f(lhsData[i]);
                 dst[j++] = f(rhsData[i]);
             }
-            
-            return Vectors.vload(n256, in refs.head(dst));        
-        }  
+
+            return Vectors.vload(n256, in z.first(dst));
+        }
     }
 }

@@ -5,27 +5,21 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
-            
+
     using static Konst;
     using static z;
 
-    public readonly struct WfStepId : 
-        IComparable<WfStepId>, 
-        IEquatable<WfStepId>, 
-        INamed<WfStepId>, 
-        ICorrelated<WfStepId>, 
-        IChronic<WfStepId>, 
+    public readonly struct WfStepId :
+        IComparable<WfStepId>,
+        IEquatable<WfStepId>,
+        INamed<WfStepId>,
         ITextual
     {
-        public static WfStepId Empty 
-            => new WfStepId(typeof(void));
-            
         /// <summary>
-        /// The step's kind classifier
+        /// The step token
         /// </summary>
-        public ulong Kind {get;}
+        public WfToken Token {get;}
 
         /// <summary>
         /// The step name
@@ -33,64 +27,59 @@ namespace Z0
         public string Name {get;}
 
         /// <summary>
-        /// The invoking member
+        /// The host type
         /// </summary>
-        public string Caller {get;}
+        public Type Host {get;}
 
         [MethodImpl(Inline)]
-        public WfStepId(Type host, [CallerFilePath] string caller = null)
+        internal WfStepId(Type host, string name, WfToken token)
         {
-            Kind = (ulong)host.MetadataToken;
+            Host = host;
+            Token = token;
             Name = host.Name;
-            Caller = Path.GetFileNameWithoutExtension(caller);
-        }        
-
-        [MethodImpl(Inline)]
-        public WfStepId(ulong kind, string name, [CallerFilePath] string caller = null)
-        {
-            Kind = kind;
-            Name = name;
-            Caller = Path.GetFileNameWithoutExtension(caller);
-        }        
+        }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.blank(Name);
+            get => Token.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Name);
+            get => Token.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(WfStepId src)
-            => Name == src.Name && Kind == src.Kind;
-        
+            => Token.Value == src.Token.Value;
+
         [MethodImpl(Inline)]
         public int CompareTo(WfStepId src)
-            => Kind.CompareTo(src.Kind);
-        
+            => Name.CompareTo(src.Name);
+
         [MethodImpl(Inline)]
         public string Format()
             => Name;
-        
+
         public uint Hashed
-        {        
+        {
             [MethodImpl(Inline)]
-            get => z.hash(Kind);
+            get => z.hash(Token);
         }
-        
+
         public override int GetHashCode()
             => (int)Hashed;
 
-        
+
         public override bool Equals(object src)
             => src is WfStepId i && Equals(i);
 
         public override string ToString()
             => Format();
+
+        public static WfStepId Empty
+            => AB.step(typeof(void));
     }
 }

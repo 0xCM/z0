@@ -17,9 +17,9 @@ namespace Z0
         public const string EventName = nameof(WfStepCreated);
 
         public WfEventId EventId {get;}
-                
+
         public WfActor Actor {get;}
-        
+
         public WfStepId StepId {get;}
 
         public MessageFlair Flair {get;}
@@ -34,11 +34,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfStepCreated(Type step, CorrelationToken ct, MessageFlair flair = MessageFlair.Magenta)
+        public WfStepCreated(Type host, CorrelationToken ct, MessageFlair flair = MessageFlair.Magenta)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = WfActor.create();
-            StepId = Flow.step(step);
+            StepId = AB.step(host);
             Flair = flair;
         }
 

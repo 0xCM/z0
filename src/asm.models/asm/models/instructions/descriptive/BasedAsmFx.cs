@@ -62,8 +62,8 @@ namespace Z0.Asm
             => Instruction.ByteLength;
 
         [MethodImpl(Inline)]
-        public static BasedAsmFx One(MemoryAddress @base, OffsetSequence offseq, Instruction inxs, MemberCode encoded)
-            => new BasedAsmFx(@base,offseq,inxs,encoded);
+        public static BasedAsmFx One(MemoryAddress @base, OffsetSequence offseq, Instruction fx, MemberCode encoded)
+            => new BasedAsmFx(@base, offseq, fx, encoded);
 
         public static BasedAsmFx[] Many(MemberCode code, Instruction[] src)
         {
@@ -74,22 +74,22 @@ namespace Z0.Asm
 
             for(ushort i=0; i<count; i++)
             {
-                var inxs = src[i];
+                var fx = src[i];
                 var data = z.span(code.Encoded.Data);
-                var slice = data.Slice(offseq.Offset, inxs.ByteLength).ToArray();
-                var recoded = MemberCode.define(code.OpUri, inxs.IP, slice);
-                dst[i] = One(@base, offseq, inxs, recoded);
-                offseq = offseq.AccrueOffset(inxs.ByteLength);
+                var slice = data.Slice((int)offseq.Offset, fx.ByteLength).ToArray();
+                var recoded = MemberCode.define(code.OpUri, fx.IP, slice);
+                dst[i] = One(@base, offseq, fx, recoded);
+                offseq = offseq.AccrueOffset((uint)fx.ByteLength);
             }
             return dst;
         }
 
         [MethodImpl(Inline)]
-        public BasedAsmFx(MemoryAddress @base, OffsetSequence offseq, Instruction inxs, MemberCode encoded)
+        public BasedAsmFx(MemoryAddress @base, OffsetSequence offseq, Instruction fx, MemberCode encoded)
         {
             BaseAddress = @base;
             OffsetSeq = offseq;
-            Instruction = inxs;
+            Instruction = fx;
             Encoded = encoded;
         }
     }

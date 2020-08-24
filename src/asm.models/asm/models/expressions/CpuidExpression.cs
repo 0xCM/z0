@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public readonly struct CpuidExpression
     {
         public readonly asci16 Value;
@@ -29,21 +29,19 @@ namespace Z0.Asm
         public CpuidExpression(char[] src)
             => asci.encode(src, out Value);
 
-        [Ignore]
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
             get => asci.bytes(Value);
         }
 
-        [Ignore]
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
             get => asci.decode(Value);
         }
 
-        public CpuidExpression Zero 
+        public CpuidExpression Zero
             => Empty;
 
         /// <summary>
@@ -55,13 +53,13 @@ namespace Z0.Asm
             get => Value.Length;
         }
 
-        public bool IsEmpty 
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Value.IsEmpty;
         }
 
-        public bool IsNonEmpty 
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
             get => Value.IsNonEmpty;
@@ -70,19 +68,19 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public bool Equals(CpuidExpression src)
             => src.Value.Equals(Value);
-        
+
         public override bool Equals(object src)
             => src is CpuidExpression x && Equals(x);
-        
+
         public override int GetHashCode()
-            => Value.GetHashCode();        
+            => Value.GetHashCode();
         public string Format()
             => Value.Format();
-        
+
         public override string ToString()
             => Format();
 
-        public static CpuidExpression Empty 
+        public static CpuidExpression Empty
             => new CpuidExpression(asci.Null);
     }
 }

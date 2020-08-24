@@ -50,6 +50,16 @@ namespace Z0
             ApiHosts = ApiDataTypes.Cast<IApiHost>().Concat(Operations.Cast<IApiHost>()).Array();
         }
 
+        public PartCatalog(Assembly src, ApiDataType[] dtHosts, ApiHost[] opHosts, Type[] svcHostTypes)
+        {
+            PartId = src.Id();
+            Owner = src;
+            ApiDataTypes = dtHosts;
+            Operations = opHosts;
+            ServiceHosts = svcHostTypes;
+            ApiHosts = ApiDataTypes.Cast<IApiHost>().Concat(Operations.Cast<IApiHost>()).Array();
+        }
+
         /// <summary>
         /// Specifies whether the catalog contains content from an identified assembly
         /// </summary>

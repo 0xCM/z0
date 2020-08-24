@@ -16,17 +16,17 @@ namespace Z0
     public readonly unsafe struct CaptureAlt
     {
         public static CapturedCode[] capture(IdentifiedMethod[] src)
-            => capture(src,sys.alloc<byte>(Pow2.T14));
-        
+            => capture(src, sys.alloc<byte>(Pow2.T14));
+
         public static CapturedCode[] capture(IdentifiedMethod[] src, Span<byte> buffer)
         {
             var count = src.Length;
             var located = sys.alloc<LocatedMethod>(count);
             for(var i=0; i<count; i++)
                 located[i] = FunctionJit.jit(src[i].Method);
-                        
+
             var captured = sys.alloc<CapturedCode>(count);
-            
+
             for(var i=0; i<count; i++)
             {
                 var method = located[i];
@@ -37,14 +37,22 @@ namespace Z0
             return captured;
         }
 
+        public static CapturedApiMember capture(in ApiMember src, Span<byte> buffer)
+        {
+            var summary = capture(buffer, src.Id, ApiMemberJit.jit(src));
+            var size = summary.Data.Length;
+            var code = new CapturedCode(src.Id, src.Method, summary.Encoded.ParseInput, summary.Encoded.Encoded, summary.Outcome.TermCode);
+            return new CapturedApiMember(src, code);
+        }
+
         public static CapturedCode capture(LocatedMethod located, Span<byte> buffer)
-        {                        
+        {
             var summary = capture(buffer, located.Id, located.Address);
             return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }
 
         public static CapturedCode capture(IdentifiedMethod src, Span<byte> buffer)
-        {            
+        {
             var located = FunctionJit.jit(src.Method);
             var summary = capture(buffer, src.Id, located.Address);
             return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
@@ -53,12 +61,12 @@ namespace Z0
         public static CapturedCode capture(IdentifiedMethod src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
-            => new CapturedCode(id, null, src, bits.ParseInput, bits.Encoded, term);
+            => new CapturedCode(id, src, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
-        static CapturedOperation capture(Span<byte> buffer, OpIdentity id, MemoryAddress src)        
+        static CapturedOperation capture(Span<byte> buffer, OpIdentity id, MemoryAddress src)
             => capture(buffer, id, src.Pointer<byte>());
 
         [MethodImpl(Inline), Op]
@@ -66,24 +74,24 @@ namespace Z0
         {
             var limit = buffer.Length - 1;
             var start = (MemoryAddress)pSrc;
-            var offset = 0;            
+            var offset = 0;
             int? ret_offset = null;
             var end = (MemoryAddress)pSrc;
             var state = default(ExtractState);
 
             while(offset < limit)
             {
-                state = Step(buffer, id, ref offset, ref end, ref pSrc);                                
+                state = Step(buffer, id, ref offset, ref end, ref pSrc);
 
                 if(ret_offset == null && state.Captured == RET)
-                    ret_offset = offset;                 
+                    ret_offset = offset;
 
                 var tc = CalcTerm(buffer, offset, ret_offset, out var delta);
-                if(tc != 0)         
+                if(tc != 0)
                     return SummarizeParse(buffer, state, id, tc, start, end, delta);
             }
             return SummarizeParse(buffer, state, id, CTC_BUFFER_OUT, start, end, 0);
-        }                    
+        }
 
         [MethodImpl(Inline)]
         static ExtractState Step(Span<byte> buffer, OpIdentity id, ref int offset, ref MemoryAddress location, ref byte* pSrc)
@@ -125,7 +133,7 @@ namespace Z0
                 if(tc != 0)
                     return tc;
             }
-                    
+
             if(offset >= 7 && Zx7(buffer, offset))
             {
                 if(ret_offset == null)
@@ -136,18 +144,18 @@ namespace Z0
                 delta = -(offset - ret_offset.Value);
                 return CTC_RET_Zx7;
             }
-            
+
             return 0;
         }
 
         const byte ZED = 0;
-        
+
         const byte RET = 0xc3;
-        
+
         const byte INTR = 0xcc;
-        
+
         const byte SBB = 0x19;
-        
+
         const byte FF = 0xff;
 
         const byte E0 = 0xe0;
@@ -175,7 +183,7 @@ namespace Z0
                 return CTC_RET_Zx3;
             else if(x0 == INTR && x1 == INTR)
                 return CTC_INTRx2;
-            else 
+            else
                 return 0;
 
         }
@@ -203,7 +211,7 @@ namespace Z0
         static bool Zx7(ReadOnlySpan<byte> buffer, int offset)
         {
             var result = true;
-            ref readonly var x = ref first(buffer);            
+            ref readonly var x = ref first(buffer);
             result &= regress(x,0) == ZED;
             result &= regress(x,1) == ZED;
             result &= regress(x,2) == ZED;

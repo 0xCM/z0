@@ -15,7 +15,7 @@ namespace Z0
         public static ApiParts KnownParts
         {
             [MethodImpl(Inline), Op]
-            get => ApiPart.Known;
+            get => ApiQuery.Known;
         }
 
         public static IAppPaths Paths
@@ -71,7 +71,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ApiPart compose(IPart[] parts)
-            => ApiPart.assemble(parts);
+            => ApiQuery.assemble(parts);
 
         [MethodImpl(Inline), Op]
         static IPolyrand random()

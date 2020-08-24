@@ -17,7 +17,7 @@ namespace Z0
         public void read_ref_1()
         {
             var src = array(3u,5u,6u,7u);
-            var r = Segments.from(src);
+            var r = Refs.from(src);
             var z = r.As<uint>();
 
             Claim.eq(16, r.DataSize);

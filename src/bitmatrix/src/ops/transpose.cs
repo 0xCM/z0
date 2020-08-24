@@ -18,9 +18,9 @@ namespace Z0
         /// Transposes a copy of the matrix
         /// </summary>
         public static BitMatrix4 transpose(in BitMatrix4 A)
-        {        
+        {
             var B = A.Replicate();
-            for(var i=0; i<BitMatrix4.N; i++)                
+            for(var i=0; i<BitMatrix4.N; i++)
                 B[i] = col(A,i);
 
             return B;
@@ -37,7 +37,7 @@ namespace Z0
             }
             return ref Z;
         }
-        
+
         [MethodImpl(Inline)]
         public static BitMatrix8 transpose_v2(in BitMatrix8 A)
         {
@@ -69,13 +69,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix8 transpose_v3(in BitMatrix8 A)
-            => BitMatrix.primal(n8, 
-                  ((ulong)A.Col(0) << 0*8) 
-                | ((ulong)A.Col(1) << 1*8) 
-                | ((ulong)A.Col(2) << 2*8) 
+            => BitMatrix.primal(n8,
+                  ((ulong)A.Col(0) << 0*8)
+                | ((ulong)A.Col(1) << 1*8)
+                | ((ulong)A.Col(2) << 2*8)
                 | ((ulong)A.Col(3) << 3*8)
-                | ((ulong)A.Col(4) << 4*8) 
-                | ((ulong)A.Col(5) << 5*8) 
+                | ((ulong)A.Col(4) << 4*8)
+                | ((ulong)A.Col(5) << 5*8)
                 | ((ulong)A.Col(6) << 6*8)
                 | ((ulong)A.Col(7) << 7*8)
                 );
@@ -84,7 +84,7 @@ namespace Z0
         public static void transpose_v3(in BitMatrix8 A, ref BitMatrix8 Z)
         {
             const int width = 8;
-            var data = 0ul;            
+            var data = 0ul;
             for(var i=0; i<width; i++)
                 data |= ((ulong)A.Col(i) << i*width);
             As.uint64(ref Z.Head) = data;
@@ -122,7 +122,7 @@ namespace Z0
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {
             var vec = V0.vload(n128,A.Bytes);
-            Vectors.vstore(z.vshuf16x8(vec, Tr8x16Mask), ref refs.head(A.Bytes));
+            z.vstore(z.vshuf16x8(vec, Tr8x16Mask), ref z.first(A.Bytes));
             return BitMatrix.load<N16,N8,uint>(A.Content);
         }
 
