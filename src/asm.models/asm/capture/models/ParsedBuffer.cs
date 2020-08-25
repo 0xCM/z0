@@ -8,20 +8,20 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct ParsedOperation
-    {        
-        public readonly BinaryCode Encoded;
-
+    public readonly struct ParsedBuffer
+    {
         public readonly OpIdentity Id;
+
+        public readonly ParsedEncoding Encoded;
 
         public readonly CaptureOutcome Outcome;
 
         [MethodImpl(Inline)]
-        public ParsedOperation(OpIdentity id, CaptureOutcome info, byte[] content)
+        public ParsedBuffer(OpIdentity id, CaptureOutcome info, ParsedEncoding encoded)
         {
             Id = id;
             Outcome = info;
-            Encoded = content;
-        }        
+            Encoded = encoded;
+        }
     }
 }

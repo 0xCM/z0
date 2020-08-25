@@ -10,14 +10,14 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    public ref struct MemoryCapture 
-    {   
-        public const string StepName = nameof(MemoryCapture);
+    public ref struct CaptureMemory
+    {
+        public const string StepName = nameof(CaptureMemory);
 
-        readonly IAsmContext Root;     
-        
+        readonly IAsmContext Root;
+
         readonly IWfContext Wf;
-        
+
         readonly IAsmDecoder Decoder;
 
         readonly IAsmFormatter Formatter;
@@ -29,7 +29,7 @@ namespace Z0.Asm
         readonly byte[] ParseBuffer;
 
         [MethodImpl(Inline)]
-        public MemoryCapture(IAsmContext root, IWfContext wf, int bufferlen)
+        public CaptureMemory(IAsmContext root, IWfContext wf, int bufferlen)
         {
             Root = root;
             Wf = wf;
@@ -52,11 +52,11 @@ namespace Z0.Asm
             ExtractBuffer.Clear();
             ParseBuffer.Clear();
         }
-        
+
         public CapturedMemory Run(MemoryAddress src)
-        {                                
+        {
             Wf.RunningT(StepName, src);
-            
+
             ClearBuffers();
 
             var raw = Extractors.extract(src, ExtractBuffer);
@@ -66,7 +66,7 @@ namespace Z0.Asm
             {
                 var parsed = tryParse.Value;
                 var parsedView = @readonly(parsed.Data);
-                var tryDecode = Decoder.Decode(parsed);                
+                var tryDecode = Decoder.Decode(parsed);
                 if(tryDecode.IsSome())
                 {
                     var decoded = tryDecode.Value;
@@ -88,10 +88,10 @@ namespace Z0.Asm
                     captured = new CapturedMemory(new ParsedEncoding(src, raw, parsed), decoded, formatBuffer);
                 }
             }
-            
+
             Wf.RanT(StepName, captured);
-            
+
             return captured;
-        }    
+        }
     }
 }

@@ -75,13 +75,13 @@ namespace Z0
             get => !IsEmpty;
         }
 
-        public ref byte this[int index]
+        public ref byte this[long index]
         {
             [MethodImpl(Inline)]
             get => ref Encoded[index];
         }
 
-        public ref byte this[uint index]
+        public ref byte this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Encoded[index];

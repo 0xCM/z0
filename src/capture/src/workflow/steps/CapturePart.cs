@@ -76,7 +76,6 @@ namespace Z0
             var buffer = span<byte>(Pow2.T14);
             var catalog = ApiQuery.catalog(src);
             var members = methods(catalog.ApiDataTypes);
-
             var count = members.Length;
             var target = sys.alloc<AsmMemberRoutine>(count);
             var dst = span(target);

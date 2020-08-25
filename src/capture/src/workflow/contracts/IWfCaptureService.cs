@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    public interface IWfCaptureService : IDisposable
+    public interface IWfCaptureContext : IDisposable
     {
         IWfCaptureBroker Broker {get;}
 

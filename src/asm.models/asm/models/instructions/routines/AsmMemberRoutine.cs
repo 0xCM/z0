@@ -35,13 +35,13 @@ namespace Z0.Asm
         public MemoryAddress Base
         {
             [MethodImpl(Inline)]
-            get => Encoded.Address;
+            get => Encoded.BaseAddress;
         }
 
         public ByteSize Size
         {
             [MethodImpl(Inline)]
-            get => Encoded.Data.Length;
+            get => Encoded.Length;
         }
 
         public int CompareTo(AsmMemberRoutine src)

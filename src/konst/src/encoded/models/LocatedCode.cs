@@ -18,43 +18,49 @@ namespace Z0
         /// The head of the memory location from which the data originated
         /// </summary>
         public MemoryAddress Address {get;}
-         
+
         /// <summary>
         /// The encoded content
         /// </summary>
         public BinaryCode Encoded {get;}
-        
+
         /// <summary>
         /// The encoded content as byte array
         /// </summary>
-        public byte[] Data 
-        { 
-            [MethodImpl(Inline)] 
+        public byte[] Data
+        {
+            [MethodImpl(Inline)]
             get => Encoded.Data;
         }
-        
-        public int Length 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.Length; 
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Length;
         }
 
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsEmpty; 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsEmpty;
         }
 
-        public bool IsNonEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsNonEmpty; 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsNonEmpty;
         }
-        
-        public ref readonly byte this[int index] 
-        { 
-            [MethodImpl(Inline)] 
-            get => ref Encoded[index]; 
+
+        public ref readonly byte this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Encoded[index];
+        }
+
+        public ref readonly byte this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Encoded[index];
         }
 
         [MethodImpl(Inline)]
@@ -86,15 +92,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(LocatedCode src)
-            => Encoded.Equals(src.Encoded);         
-        
+            => Encoded.Equals(src.Encoded);
+
         public string Format()
-            => Encoded.Format(); 
+            => Encoded.Format();
 
 
         public override int GetHashCode()
             => Encoded.GetHashCode();
-        
+
         public override bool Equals(object src)
             => src is BinaryCode encoded && Equals(encoded);
 
@@ -111,7 +117,7 @@ namespace Z0
             get => (Address, Address + (MemoryAddress)Encoded.Length);
         }
 
-        public static LocatedCode Empty 
+        public static LocatedCode Empty
             => new LocatedCode(0);
     }
 }

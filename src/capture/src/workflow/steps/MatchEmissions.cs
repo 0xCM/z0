@@ -15,7 +15,7 @@ namespace Z0
 
     public readonly struct MatchEmissions
     {
-        public IWfCaptureService Workflow {get;}
+        public IWfCaptureContext Workflow {get;}
 
         readonly CorrelationToken Ct;
 
@@ -23,7 +23,7 @@ namespace Z0
             => Workflow.Context;
 
         [MethodImpl(Inline)]
-        public MatchEmissions(IWfCaptureService workflow, CorrelationToken ct)
+        public MatchEmissions(IWfCaptureContext workflow, CorrelationToken ct)
         {
             Workflow = workflow;
             Ct = ct;

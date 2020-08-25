@@ -8,32 +8,32 @@ namespace Z0
 
     using Z0.Asm;
 
-    public interface IWfCaptureState : IWfCaptureService
+    public interface IWfCaptureState : IWfCaptureContext
     {
-        IAppContext Root {get;}        
+        IAppContext Root {get;}
 
         IWfContext Wf {get;}
 
-        WfConfig Config {get;}        
+        WfConfig Config {get;}
 
-        IAsmContext Asm {get;}        
+        IAsmContext Asm {get;}
 
-        IWfCaptureService CWf {get;}
-        
+        IWfCaptureContext CWf {get;}
+
         AsmFormatSpec FormatConfig {get;}
 
-        AsmFormatter Formatter {get;}        
+        AsmFormatter Formatter {get;}
 
-        TCaptureServices Services{get;}        
+        TCaptureServices Services{get;}
 
         IAsmDecoder RoutineDecoder {get;}
 
         IWfCaptureBroker CaptureBroker {get;}
 
-        IWfCaptureBroker IWfCaptureService.Broker 
+        IWfCaptureBroker IWfCaptureContext.Broker
             => CaptureBroker;
 
-        ICaptureContext IWfCaptureService.Context
-            => CWf.Context;            
-    }    
+        ICaptureContext IWfCaptureContext.Context
+            => CWf.Context;
+    }
 }
