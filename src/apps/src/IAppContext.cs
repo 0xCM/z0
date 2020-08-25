@@ -6,15 +6,22 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
 
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>
-    public interface IAppContext : IAppMsgQueue, IPolyrandProvider, IApiSet, IAppMsgContext, IAppBase
-    {        
+    public interface IAppContext : IAppMsgQueue, IPolyrandProvider, IApiSet, IAppMsgContext, IShellContext
+    {
         IAppMsgQueue MessageQueue {get;}
-        
-        Action<IAppMsg> MessageRelay 
+
+        IApiSet IShellContext.Api
+            => this;
+
+        Assembly[] IShellContext.Components
+            => Api.Parts.Select(x => x.Owner);
+
+        Action<IAppMsg> MessageRelay
             => (e => term.print(e));
 
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
@@ -29,7 +36,7 @@ namespace Z0
         IReadOnlyList<IAppMsg> IAppMsgQueue.Flush(Exception e)
             => MessageQueue.Flush(e);
 
-        void IAppMsgQueue.Emit(FilePath dst) 
+        void IAppMsgQueue.Emit(FilePath dst)
             => MessageQueue.Emit(dst);
     }
 }

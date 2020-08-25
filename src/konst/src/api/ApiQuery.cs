@@ -16,8 +16,31 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiQuery
     {
-        public static IPart[] Known
-            => ModuleArchives.executing().Known.Where(r => r.Id != 0);
+        public static IPart[] KnownParts
+            => ModuleArchives.executing().Parts.Where(r => r.Id != 0);
+
+        public static Assembly[] KnownComponents
+            => ModuleArchives.executing().Components;
+
+        /// <summary>
+        /// Attempts to resolve a part resolution type
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static Option<IPart> part(Assembly src)
+            => Option.Try(() => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).FirstOrDefault());
+
+        [Op]
+        public static IPart[] parts(Assembly[] src)
+            => src.Where(isPart).Select(part).Where(x => x.IsSome()).Select(x => x.Value);
+
+        /// <summary>
+        /// Loads an assembly from a potential part path
+        /// </summary>
+        public static Option<Assembly> assembly(FS.FilePath src)
+            => Option.Try(src, x => Assembly.LoadFrom(x.Name));
+
+        public static Assembly[] components(FS.FilePath[] src)
+            => src.Map(assembly).Where(x => x.IsSome()).Select(x => x.Value).Where(isPart);
 
         [MethodImpl(Inline), Op]
         public static bool isSvc(PartId a)
@@ -26,6 +49,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool isTest(PartId a)
             => (a & PartId.Test) != 0;
+
+        [MethodImpl(Inline), Op]
+        public static bool isPart(Assembly src)
+            => Attribute.IsDefined(src, typeof(PartIdAttribute));
 
         /// <summary>
         /// Describes an api host
@@ -62,20 +89,21 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static bool isPart(Assembly src)
-            => Attribute.IsDefined(src, typeof(PartIdAttribute));
-
-        [MethodImpl(Inline), Op]
-        public static void identities(Assembly[] src)
+        public static PartId[] identities(Assembly[] src)
             => Part.identities(src);
 
         [MethodImpl(Inline), Op]
-        public static Assembly[] parts(in ModuleArchive src)
-            => src.Assemblies.Where(isPart);
+        public static Assembly[] components(in ModuleArchive src)
+            => src.Components.Where(isPart);
 
         [MethodImpl(Inline), Op]
         public static ApiPart assemble(params IPart[] parts)
             => new ApiPart(parts);
+
+        [MethodImpl(Inline), Op]
+        public static ApiSet set(params IPart[] parts)
+            => new ApiSet(assemble(parts));
+
 
         [MethodImpl(Inline), Op]
         public static ApiPart assemble(IEnumerable<IPart> parts)

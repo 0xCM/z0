@@ -142,7 +142,7 @@ namespace Z0
 
         void ListCaptureFiles()
         {
-            var paths = AppBase.paths();
+            var paths = ShellBase.paths();
             var files = AppFilePaths.create(paths, PartId.Control);
 
             Status(paths.Logs);

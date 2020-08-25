@@ -1,4 +1,12 @@
-<Project>
+<Project  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ToolCoreId>tool.core</ToolCoreId>
+    <ToolCliId>tool.cli</ToolCliId>
+
+    <ToolCore>$(Src)$(ToolCoreId)/z0.$(ToolCoreId).csproj</ToolCore>
+    <ToolCli>$(Src)$(ToolCliId)/z0.$(ToolCliId).csproj</ToolCli>
+  </PropertyGroup>
 
   <PropertyGroup>
     <Part>$(Src)part/z0.part.csproj</Part>
@@ -23,7 +31,6 @@
 
     <Flow>$(Src)flow/z0.flow.csproj</Flow>
     <Win>$(Src)win/z0.win.csproj</Win>
-    <Tools>$(Src)tools/z0.tools.csproj</Tools>
 
     <Text>$(Src)text/z0.text.csproj</Text>
     <Memories>$(Src)memories/z0.memories.csproj</Memories>

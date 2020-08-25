@@ -28,7 +28,7 @@ namespace Z0
             Wf = context;
             Ct = ct;
             TargetRoot = Wf.ResourceRoot;
-            Parts = ModuleArchives.executing().Known.Array();
+            Parts = ModuleArchives.executing().Parts.Array();
             Sink = new PartSink(context.ContextRoot);
             Wf.Created(WorkerName, Ct);
         }

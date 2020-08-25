@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>ztool</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(ToolCore)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="specs/**/*.doc" />
+    <EmbeddedResource Include="specs/**/*.csv" />
+  </ItemGroup>
+
+
+</Project>

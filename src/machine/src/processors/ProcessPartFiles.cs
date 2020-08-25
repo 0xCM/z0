@@ -45,7 +45,7 @@ namespace Z0
             var command = AsmEncoder.encode(data);
             Dispatch(command);
 
-            var seq = 0;
+            var seq = 0u;
             var parsed = AsmParsers.ParseLine(Case01,ref seq);
             if(parsed)
                 term.print($"{parsed.Value.Statement.ToString()}");

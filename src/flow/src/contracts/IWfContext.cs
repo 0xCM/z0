@@ -12,7 +12,6 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
     using EvF = WfEventBuilder;
 
     /// <summary>
@@ -32,15 +31,13 @@ namespace Z0
 
         FolderPath ResourceRoot {get;}
 
-        IPart[] Known {get;}
-
         FolderPath AppDataRoot
             => ContextRoot.AppPaths.AppDataRoot;
 
         FolderPath ConfigRoot
             => ContextRoot.AppPaths.ConfigRoot;
 
-        IAppPaths AppPaths
+        IShellPaths AppPaths
             => ContextRoot.AppPaths;
 
         FolderPath ArchiveRoot
@@ -51,8 +48,6 @@ namespace Z0
 
         FolderPath ToolProcessDir(string tool)
             => ArchiveRoot + FolderName.Define("tools") + FolderName.Define(tool) + FolderName.Define("processed");
-
-
 
         FilePath ResPack
             => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");

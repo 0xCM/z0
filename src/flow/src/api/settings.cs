@@ -9,8 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
-    {        
+    partial struct Flow
+    {
         [Op]
         public static WfSettings settings(IAppContext context, CorrelationToken ct)
         {
@@ -20,11 +20,11 @@ namespace Z0
                 var filename = FileName.Define(assname, FileExtensions.Json);
                 var src = context.AppPaths.ConfigRoot + filename;
                 return src;
-            }        
+            }
 
             var dst = z.dict<string,string>();
-            AppSettings.absorb(configPath(),dst);                        
+            SettingValues.absorb(configPath(),dst);
             return new WfSettings(dst);
-        }        
+        }
     }
 }

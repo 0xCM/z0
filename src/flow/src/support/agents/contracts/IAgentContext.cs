@@ -8,10 +8,10 @@ namespace Z0
     using System.Collections.Generic;
 
 
-    public interface IAgentContext : IAppBase
+    public interface IAgentContext : IShellBase
     {
-        IEnumerable<ISystemAgent> Memberhsip {get;}   
+        IEnumerable<ISystemAgent> Members {get;}
 
-        IAgentEventSink EventLog {get;}        
+        IAgentEventSink EventLog {get;}
     }
 }

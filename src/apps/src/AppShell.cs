@@ -9,30 +9,30 @@ namespace Z0
     public abstract class AppShell<A,C> : Shell<A,C>, IAppShell<A>
         where A : AppShell<A,C>, new()
         where C : IAppContext
-    {            
+    {
         public virtual IPart[] Resolved {get;}
 
         protected AppShell(C context)
             : base(context)
-        {         
-            
+        {
+
         }
 
         protected AppShell(C context, IMultiSink sink)
             : base(context, sink)
-        {         
-            
+        {
+
         }
 
         public void Deposit(IAppMsg msg)
-        {            
+        {
             Sink.Deposit(msg);
         }
 
         public void Raise<T>(T @event)
             where T : IAppEvent
         {
-            
+
             Sink.Deposit(@event);
         }
 
@@ -43,9 +43,9 @@ namespace Z0
                 Sink.Dispose();
             }
             catch(Exception e)
-            {                
+            {
                 OnFatalError(e);
             }
-        }        
+        }
     }
 }

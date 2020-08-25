@@ -45,7 +45,7 @@ namespace Z0
 
         public void Run()
         {
-            var src = from part in  ModuleArchives.executing().Known
+            var src = from part in  ModuleArchives.executing().Parts
                        let enums = part.Owner.Enums()
                         orderby part.Id
                         select KeyedValues.@from(part.Id, enums);

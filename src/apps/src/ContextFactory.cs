@@ -15,13 +15,13 @@ namespace Z0
         public static ApiParts KnownParts
         {
             [MethodImpl(Inline), Op]
-            get => ApiQuery.Known;
+            get => ApiQuery.KnownParts;
         }
 
-        public static IAppPaths Paths
+        public static IShellPaths Paths
         {
             [MethodImpl(Inline), Op]
-            get => AppPaths.Default;
+            get => ShellPaths.Default;
         }
 
         [MethodImpl(Inline), Op]
@@ -29,35 +29,35 @@ namespace Z0
             => create(Paths, compose(KnownParts), random());
 
         [MethodImpl(Inline), Op]
-        public static IAppContext create(IAppPaths paths)
+        public static IAppContext create(IShellPaths paths)
             => create(paths, compose(KnownParts), random());
 
         [MethodImpl(Inline), Op]
-        public static IAppContext create(IAppPaths paths, IResolvedApi api)
+        public static IAppContext create(IShellPaths paths, IResolvedApi api)
             => new AppContext(paths, api, random(), settings(paths), exchange());
 
         [MethodImpl(Inline), Op]
-        public static IAppContext create(IAppPaths paths, IResolvedApi api, IPolyrand random)
+        public static IAppContext create(IShellPaths paths, IResolvedApi api, IPolyrand random)
             => new AppContext(paths, api, random, settings(paths), exchange());
 
         [MethodImpl(Inline), Op]
-        public static IAppContext create(IAppSettings settings, IResolvedApi api, IAppMsgQueue queue, IPolyrand random)
+        public static IAppContext create(ISettings settings, IResolvedApi api, IAppMsgQueue queue, IPolyrand random)
             => new AppContext(api, random, settings, queue);
 
-        public static IAppContext create(IAppSettings settings, IAppPaths paths, IResolvedApi api, IAppMsgQueue queue, IPolyrand random)
+        public static IAppContext create(ISettings settings, IShellPaths paths, IResolvedApi api, IAppMsgQueue queue, IPolyrand random)
             => new AppContext(paths, api, random, settings, queue);
 
         [MethodImpl(Inline), Op]
-        public static IAppContext create(IAppPaths paths, ApiPart api)
+        public static IAppContext create(IShellPaths paths, ApiPart api)
             => create(paths, api, random());
 
         [MethodImpl(Inline), Op]
-        public static IAppContext create(IAppPaths paths, IPart[] parts)
+        public static IAppContext create(IShellPaths paths, IPart[] parts)
             => create(paths, compose(parts), random());
 
         [MethodImpl(Inline), Op]
-        public static IAppSettings settings(IAppPaths paths)
-            => AppSettings.Load(paths.AppConfigPath);
+        public static ISettings settings(IShellPaths paths)
+            => SettingValues.Load(paths.AppConfigPath);
 
         /// <summary>
         /// Creates an exchange over an existing queue

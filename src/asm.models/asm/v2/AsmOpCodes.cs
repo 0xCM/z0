@@ -188,10 +188,10 @@ namespace Z0
         }
 
         static FilePath CasePath(string name)
-            => AppPaths.Default.AppDataRoot + FileName.Define(name);
+            => ShellPaths.Default.AppDataRoot + FileName.Define(name);
 
         static FilePath CasePath(string name, FileExtension ext)
-            => AppPaths.Default.AppDataRoot + FileName.Define(name, ext);
+            => ShellPaths.Default.AppDataRoot + FileName.Define(name, ext);
 
         static StreamWriter CaseWriter(string name, FileExtension ext)
             =>  CasePath(name, ext).Writer();

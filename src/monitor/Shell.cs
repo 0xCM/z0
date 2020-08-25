@@ -29,7 +29,7 @@ namespace Z0
         {
             var path = args.Length != 0 ? FolderPath.Define(args[0]) : FolderPath.Define(AppPaths.LogRoot.Name);
             using var monitor = Monitors.monitor(FS.dir(path.Name),OnChange);
-            term.print(WfEventBuilder.watching(ShellName, path, correlate(ShellId)));
+            //term.print(WfEventBuilder.watching(ShellName, path, correlate(ShellId)));
             monitor.Start();
             Console.ReadKey();
         }

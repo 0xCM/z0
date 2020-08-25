@@ -10,9 +10,9 @@ namespace Z0
 
     using static Konst;
 
-    public interface IApiSet : IAppBase
+    public interface IApiSet : IShellBase
     {
-        IPart[] Parts {get;}   
+        IPart[] Parts {get;}
 
         IPartCatalog[] Catalogs {get;}
 
@@ -23,11 +23,11 @@ namespace Z0
         IResolvedApi Composition {get;}
 
         Option<IPart> FindPart(PartId id)
-            => z.option(Parts.FirstOrDefault(p => p.Id == id));      
+            => z.option(Parts.FirstOrDefault(p => p.Id == id));
 
         Option<IApiHost> FindHost(ApiHostUri uri)
             => z.option(Hosts.Where(h => h.Uri == uri).FirstOrDefault());
-        
+
         IEnumerable<IPartCatalog> MatchingCatalogs(params PartId[] parts)
         {
             if(parts.Length == 0)

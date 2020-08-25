@@ -7,28 +7,28 @@ namespace Z0
     using System;
     using System.Linq;
     using System.IO;
-    
+
     using static Konst;
 
     using M = IntrinsicsDocument;
 
     readonly struct IntrinsicsEmitter
-    {   
+    {
         public static IntrinsicsEmitter create()
             => default;
 
         public static string fxlabel(string name)
-            => name.StartsWith("_mm512") ? "_mm512"  : 
-            name.StartsWith("_mm256") ? "_mm256" : 
-            (name.StartsWith("_mm_") || name.StartsWith("_MM_")) ? "_mm" : 
-            name.StartsWith("_bnd") ? "_bnd" : 
-            name.StartsWith("_cast") ? "_cast" : 
-            name.StartsWith("_cvt") ? "_cvt" : 
+            => name.StartsWith("_mm512") ? "_mm512"  :
+            name.StartsWith("_mm256") ? "_mm256" :
+            (name.StartsWith("_mm_") || name.StartsWith("_MM_")) ? "_mm" :
+            name.StartsWith("_bnd") ? "_bnd" :
+            name.StartsWith("_cast") ? "_cast" :
+            name.StartsWith("_cvt") ? "_cvt" :
             "_unknown";
-        
-        static string[] TechLables 
+
+        static string[] TechLables
             => new string[]{"AVX-512","AVX","AMX", "SVML", "AVX2"};
-        
+
         public static FileName filename(M.intrinsic src, FileExtension kind)
         {
             var identifier = src.identifier;
@@ -60,22 +60,22 @@ namespace Z0
                 else
                     current = current + Space + part;
             }
-            
+
             dst.Add(Space + current);
-            
+
             return dst.ToArray();
         }
 
         static string label(M.intrinsic src)
-            => text.concat("## ", 
-                src.instructions.Count != 0 
-                ? text.concat(src.identifier, Space, Chars.Dash, Space, src.name) 
+            => text.concat("## ",
+                src.instructions.Count != 0
+                ? text.concat(src.identifier, Space, Chars.Dash, Space, src.name)
                 : src.identifier);
 
         public void Emit()
-        {            
+        {
             var list = IntrinsicsDocReader.read();
-            var target = (AppPaths.Default.ResourceRoot + FolderName.Define("intrinsics")) + FolderName.Define("algorithms");
+            var target = (ShellPaths.Default.ResourceRoot + FolderName.Define("intrinsics")) + FolderName.Define("algorithms");
             var kind = FileExtension.Define("md");
             var folder = IntrinsicsDocReader.folder(kind);
             target.Clear();
@@ -91,13 +91,13 @@ namespace Z0
                 var name = filename(current, kind);
                 var writer = default(StreamWriter);
                 if(!writers.TryGetValue(name.Name, out writer))
-                {   
+                {
                     writer = (target + name).Writer();
                     var header = text.concat("#", Space, name.WithoutExtension);
                     writer.WriteLine(header);
                     writers.Add(name.Name, writer);
                 }
-                                
+
                 var description = (current.description.Content ?? EmptyString).Trim();
                 var lined = lines(description, pagewidth);
                 var described = text.build();
@@ -127,7 +127,7 @@ namespace Z0
                             info = info + SpacePipe;
                     }
                     writer.WriteLine(info);
-                    
+
                     writer.WriteLine();
                 }
 
@@ -137,21 +137,21 @@ namespace Z0
                 if(text.nonempty(algorithm))
                 {
                     writer.WriteLine(text.bracket("algorithm"));
-                    writer.WriteLine();        
-                    writer.WriteLine(algorithm);        
+                    writer.WriteLine();
+                    writer.WriteLine(algorithm);
                 }
                 else
                 {
                     writer.WriteLine(text.bracket("missing"));
                 }
-                
-                writer.WriteLine();                
+
+                writer.WriteLine();
                 writer.WriteLine(text.PageBreak);
             }
-            
+
             term.print($"Emitted {list.Length} intrinsics algorithms");
 
-            z.iter(writers.Values, w => w.Dispose());         
+            z.iter(writers.Values, w => w.Dispose());
         }
     }
 }

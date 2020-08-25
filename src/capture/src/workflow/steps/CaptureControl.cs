@@ -8,23 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+
     using static Konst;
     using static WfCaptureControl;
 
     using static z;
-    
+
     public readonly ref struct CaptureControl
-    {                
+    {
         readonly IAppContext Root;
 
         readonly IAsmContext Asm;
-        
-        readonly CorrelationToken Ct;        
-        
-        readonly IWfContext Wf;        
 
-        readonly IAppPaths Paths;
+        readonly CorrelationToken Ct;
+
+        readonly IWfContext Wf;
+
+        readonly IShellPaths Paths;
 
         public WfCaptureState State {get;}
 
@@ -34,7 +34,7 @@ namespace Z0
             Root = state.Root;
             Ct = state.Ct;
             Paths = Root.AppPaths;
-            Asm = WfBuilder.asm(Root);                           
+            Asm = WfBuilder.asm(Root);
             Wf = state.Wf;
             State.Created(ActorName, Ct);
         }

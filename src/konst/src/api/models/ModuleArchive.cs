@@ -16,17 +16,25 @@ namespace Z0
 
         public readonly Files Files;
 
-        public readonly IPart[] Known;
+        public readonly IPart[] Parts;
 
-        public readonly Assembly[] Assemblies;
+        public readonly Assembly[] Components;
+
+        public ModuleArchive(Assembly[] src)
+        {
+            Root = FolderPath.Empty;
+            Parts = ApiQuery.parts(src);
+            Components = Parts.Select(x => x.Owner);
+            Files = Components.Select(x => FilePath.Define(x.Location));
+        }
 
         public ModuleArchive(FolderPath root)
         {
             Root = root;
             Files = root.Files().Where(f => FS.managed(FS.path(f.Name)));
             insist(Files.Count != 0, $"The files in {root}, there must be some");
-            Known = Parted.resolve(Files);
-            Assemblies = Parted.parts(Files);
+            Parts = Parted.resolve(Files);
+            Components = Parted.parts(Files);
         }
     }
 }

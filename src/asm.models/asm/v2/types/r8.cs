@@ -115,7 +115,7 @@ namespace Z0.Asm.Dsl
 
     }
 
-    public readonly struct sil : IRegOperand8<sil,byte>
+    public readonly struct sil : IRegOperand<sil,W8,byte>
     {
         public readonly byte Data;
 
@@ -141,7 +141,7 @@ namespace Z0.Asm.Dsl
         public K Kind => K.SIL;
     }
 
-    public readonly struct dil : IRegOperand8<dil,byte>
+    public readonly struct dil : IRegOperand<dil,W8,byte>
     {
         public readonly byte Data;
 

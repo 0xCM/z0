@@ -25,6 +25,10 @@ namespace Z0
         public static ModuleArchive from(FolderPath src)
             => new ModuleArchive(src);
 
+        [MethodImpl(Inline)]
+        public static ModuleArchive from(params Assembly[] src)
+            => new ModuleArchive(src);
+
         public static ModuleArchive from(Type src)
             => from(FilePath.Define(src.Assembly.Location).FolderPath);
     }

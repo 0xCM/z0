@@ -12,32 +12,32 @@ namespace Z0
     {
         readonly IApiSet Api;
 
-        public IAppSettings Settings {get;}
+        public ISettings Settings {get;}
 
         public IPolyrand Random {get;}
 
         public IAppMsgQueue MessageQueue {get;}
 
-        public IAppPaths AppPaths {get;}
+        public IShellPaths AppPaths {get;}
 
         public event Action<IAppMsg> Next;
 
-        public AppContext(IResolvedApi composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+        public AppContext(IResolvedApi composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
         {
-            AppPaths = Z0.AppPaths.Default;
+            AppPaths = Z0.ShellPaths.Default;
             Next = msg => {};
             Random = random;
-            Settings = settings ?? AppSettings.Load(AppPaths.AppConfigPath);
+            Settings = settings ?? SettingValues.Load(AppPaths.AppConfigPath);
             MessageQueue = queue;
             Api = ApiQuery.apiset(composition);
         }
 
-        public AppContext(IAppPaths paths, IResolvedApi composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+        public AppContext(IShellPaths paths, IResolvedApi composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
         {
             AppPaths = paths;
             Next = msg => {};
             Random = random;
-            Settings = settings ?? AppSettings.Load(AppPaths.AppConfigPath);
+            Settings = settings ?? SettingValues.Load(AppPaths.AppConfigPath);
             MessageQueue = queue;
             Api = ApiQuery.apiset(composition);
         }

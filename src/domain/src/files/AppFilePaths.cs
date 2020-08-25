@@ -3,16 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    
+
     public readonly struct AppFilePaths
-    {   
-        public static AppFilePaths create(in AppPathSettings settings, PartId? part = null)
-            => new AppFilePaths(settings, part);        
+    {
+        public static AppFilePaths create(in PathSettings settings, PartId? part = null)
+            => new AppFilePaths(settings, part);
 
         const string AsmFolderName = "asm";
 
@@ -28,47 +28,47 @@ namespace Z0
 
         public readonly FS.FolderPath CaptureRoot;
 
-        readonly FS.FolderName AppFolder;        
-                
-        [MethodImpl(Inline)]
-        public AppFilePaths(in AppPathSettings paths, PartId? app)
-        {
-            AppFolder = FS.folder(app != null ?app.Value.Format() : AppBase.Default.AppName);
-            CaptureRoot = new FS.FolderPath(text.format("{0}/{1}/{2}/{3}", paths.Logs, "apps", AppFolder, "capture"));
-        } 
+        readonly FS.FolderName AppFolder;
 
-        FS.FolderName CaptureFolder 
+        [MethodImpl(Inline)]
+        public AppFilePaths(in PathSettings paths, PartId? app)
+        {
+            AppFolder = FS.folder(app != null ?app.Value.Format() : ShellBase.Default.ShellName);
+            CaptureRoot = new FS.FolderPath(text.format("{0}/{1}/{2}/{3}", paths.Logs, "apps", AppFolder, "capture"));
+        }
+
+        FS.FolderName CaptureFolder
             => FS.folder(CaptureFolderName);
 
-        FS.FolderName AsmFolder 
+        FS.FolderName AsmFolder
             => FS.folder(AsmFolderName);
-        
-        FS.FolderName HexFolder 
+
+        FS.FolderName HexFolder
             => FS.folder(HexFolderName);
 
-        FS.FolderName XCsvFolder 
+        FS.FolderName XCsvFolder
             => FS.folder(XCsvFolderName);
 
-        FS.FolderName PCsvFolder 
+        FS.FolderName PCsvFolder
             => FS.folder(PCsvFolderName);
 
-        FS.FolderName ImmFolder 
+        FS.FolderName ImmFolder
             => FS.folder(ImmFolderName);
-        
+
 
         public FS.FolderPath AsmDir
-            => CaptureRoot + AsmFolder;    
+            => CaptureRoot + AsmFolder;
 
         public FS.FolderPath XCsvDir
-            => CaptureRoot + XCsvFolder;    
+            => CaptureRoot + XCsvFolder;
 
         public FS.FolderPath PCsvDir
-            => CaptureRoot + PCsvFolder;    
+            => CaptureRoot + PCsvFolder;
 
         public FS.FolderPath HexDir
-            => CaptureRoot + PCsvFolder;    
+            => CaptureRoot + PCsvFolder;
 
         public FS.FolderPath ImmDir
             => CaptureRoot + ImmFolder;
-    }    
+    }
 }

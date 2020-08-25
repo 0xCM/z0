@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface IPartResPaths : IAppPaths
+    public interface IPartResPaths : IShellPaths
     {
         /// <summary>
         /// The path to the root application resource directory

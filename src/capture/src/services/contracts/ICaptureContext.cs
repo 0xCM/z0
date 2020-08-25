@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface ICaptureContext : IAppBase
-    {        
+    public interface ICaptureContext : IShellBase
+    {
         IAppContext Root {get;}
-        
+
         IApiSet ApiSet
              => Root;
 
@@ -20,6 +20,6 @@ namespace Z0.Asm
         IWfCaptureBroker CaptureBroker {get;}
 
         void Raise<E>(E e)
-            where E : IAppEvent; 
+            where E : IAppEvent;
     }
 }

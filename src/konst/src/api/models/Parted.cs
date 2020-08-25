@@ -49,10 +49,10 @@ namespace Z0
         /// Creates an index over the known parts
         /// </summary>
         public static PartIndex executing()
-            => index(ModuleArchives.executing().Known);
+            => index(ModuleArchives.executing().Parts);
 
         public static PartIndex index(Type src)
-            => index(ModuleArchives.from(src).Known);
+            => index(ModuleArchives.from(src).Parts);
 
         public static PartIndex index(IEnumerable<IPart> src)
         {
@@ -68,8 +68,6 @@ namespace Z0
         public static Assembly[] parts(FilePath[] src)
             => src.Map(assembly).Where(x => x.IsSome()).Select(x => x.Value).Where(test);
 
-        public static Assembly[] parts(FS.FilePath[] src)
-            => src.Map(assembly).Where(x => x.IsSome()).Select(x => x.Value).Where(test);
 
         /// <summary>
         /// Attempts to resolve a part from an assembly file path
@@ -102,12 +100,6 @@ namespace Z0
         /// </summary>
         internal static Option<Assembly> assembly(FilePath src)
             => Option.Try(src, x => Assembly.LoadFrom(x.FullPath));
-
-        /// <summary>
-        /// Loads an assembly from a potential part path
-        /// </summary>
-        public static Option<Assembly> assembly(FS.FilePath src)
-            => Option.Try(src, x => Assembly.LoadFrom(x.Name));
 
         /// <summary>
         /// Attempts to resolve a part resolution type

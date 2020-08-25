@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
-        
+
     using static Konst;
     using static z;
 
@@ -16,23 +16,21 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     public struct WfContext : IWfContext
-    {                
-        public IAppContext ContextRoot {get;}        
+    {
+        public IAppContext ContextRoot {get;}
 
         public CorrelationToken Ct {get;}
-        
+
         public WfConfig Config {get;}
-        
+
         public IMultiSink WfSink {get;}
-        
+
         public IWfBroker Broker {get;}
-                
+
         public FolderPath IndexRoot {get;}
-        
+
         public FolderPath ResourceRoot {get;}
-                
-        public IPart[] Known {get;}
-        
+
         readonly WfActor Actor;
 
         readonly IWfEventLog Log;
@@ -45,11 +43,10 @@ namespace Z0
             ContextRoot = root;
             Log = Flow.log(config);
             Broker = new WfBroker(Log, Ct);
-            WfSink = sink;            
+            WfSink = sink;
             Actor = Flow.actor(caller);
             ResourceRoot = ContextRoot.AppPaths.ResourceRoot;
             IndexRoot =  ResourceRoot + FolderName.Define("index");
-            Known = ContextRoot.Parts;            
             ((WfBroker)Broker).WithContext(this);
             WfSink.Deposit(new WfContextLoaded(Actor, Ct));
         }
@@ -60,8 +57,8 @@ namespace Z0
             Broker.Dispose();
             Log.Dispose();
         }
-                
-        public IAppPaths AppPaths
+
+        public IShellPaths AppPaths
         {
             [MethodImpl(Inline)]
             get => ContextRoot.AppPaths;
@@ -79,7 +76,7 @@ namespace Z0
 
         // public void Error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
         //     => Raise(WfEventFactory.error(e, ct, caller, file, line));
-        
+
         // public void Error(string actor, Exception e, CorrelationToken ct)
         //     => Flow.error(this, actor, e, ct);
 
@@ -94,19 +91,19 @@ namespace Z0
 
         public void ProcessedFile<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
             => Flow.processed(this,ToActorName(actor), kind, src, size, Ct);
-        
+
         public void Ran(string actor, CorrelationToken ct)
             => Flow.ran(this, actor, "Finished", ct);
 
         // public void Ran<T>(string actor, T body, CorrelationToken ct)
         //     => Flow.ran(this, actor, body, ct);
-        
+
         // public void Status<T>(string worker, T body, CorrelationToken ct)
         //     => Flow.status(this, worker,body,ct);
 
         public void RunningT<T>(string actor, T body, CorrelationToken ct)
             => Flow.running(this, actor, body, ct);
-        
+
         public void RanT<T>(string actor, T body, CorrelationToken ct)
             => Flow.ran(this, actor, body, ct);
 

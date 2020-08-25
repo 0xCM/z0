@@ -9,11 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfEventBuilder    
+    partial struct WfEventBuilder
     {
-        [MethodImpl(Inline)]
-        public static Watching<T> watching<T>(string actor, T target, CorrelationToken ct)
-            where T : ITextual
-                => new Watching<T>(actor, target, ct);
+
     }
 }

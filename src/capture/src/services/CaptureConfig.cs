@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-  
-    public class CaptureConfig : AppSettings<CaptureConfig>
+
+    public class CaptureConfig : SettingValues<CaptureConfig>
     {
-        public IAppSettingsProvider Ops => this;        
+        public ISettingSource Ops => this;
 
         public bool EmitPrimaryArtifacts {get; set;} = true;
 
@@ -31,7 +31,7 @@ namespace Z0
 
         public bool HandleExtractReportCreated {get; set;} = false;
 
-        public bool HandleParseReportCreated {get; set;} = false;        
+        public bool HandleParseReportCreated {get; set;} = false;
 
         public override string ToString()
             => Ops.Format();

@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(ToolCore)" />
   </ItemGroup>
 
 </Project>

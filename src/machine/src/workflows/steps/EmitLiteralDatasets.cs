@@ -45,7 +45,7 @@ namespace Z0
         public void Run()
         {
             Target.Clear();
-            var parts = span(Modules.Known.Map(part => PartTypes.from(part)));
+            var parts = span(Modules.Parts.Map(part => PartTypes.from(part)));
             foreach(var part in parts)
             {
                 try

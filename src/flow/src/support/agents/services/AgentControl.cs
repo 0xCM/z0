@@ -10,21 +10,21 @@ namespace Z0
 
     public class AgentControl : AgentControl<IAgentControl,IAgentContext>, IAgentControl
     {
-        public static IAgentControl FromContext(IAppBase context)
+        public static IAgentControl FromContext(IShellBase context)
             => new AgentControl(context);
-        
-        public AgentControl(IAppBase Context)
+
+        public AgentControl(IShellBase Context)
             : base(Context)
         {
 
         }
 
-        IAgentContext AgentContext;        
+        IAgentContext AgentContext;
 
         void UpdateAgentContext(IAgentContext context)
         {
             this.AgentContext = context;
-            SummaryStats = new AgentStats(context.Memberhsip.Count());
+            SummaryStats = new AgentStats(context.Members.Count());
         }
 
         protected override async Task Configure(IAgentContext context)

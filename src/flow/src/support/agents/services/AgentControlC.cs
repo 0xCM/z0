@@ -10,16 +10,16 @@ namespace Z0
 
     public abstract class AgentControl<S,C> : IAgentControl<S,C>
         where S : IAgentControl
-        where C : IAgentContext         
+        where C : IAgentContext
     {
-        protected AgentControl(IAppBase context)
+        protected AgentControl(IShellBase context)
         {
             Context = context;
         }
 
         public AgentStats SummaryStats {get; protected set;}
 
-        public IAppBase Context {get;}
+        public IShellBase Context {get;}
 
         public event Action<C> Configured;
 
@@ -41,7 +41,7 @@ namespace Z0
             await Configure((C)config);
         }
 
-        protected virtual void OnConfigure(dynamic config) {}        
+        protected virtual void OnConfigure(dynamic config) {}
 
         public virtual void Dispose() {}
     }

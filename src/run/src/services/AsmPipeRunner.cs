@@ -16,8 +16,8 @@ namespace Z0.Asm
     {
         public FilePath LogPath {get;}
 
-        public IAppPaths AppPaths
-            => Z0.AppPaths.Default;
+        public IShellPaths AppPaths
+            => Z0.ShellPaths.Default;
 
         readonly AsmFxHandlers Handlers;
 

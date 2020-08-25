@@ -10,13 +10,13 @@ namespace Z0
     using System.Linq;
 
     using Z0.Asm;
-    using static z;
 
+    using static z;
     using static Konst;
 
     public readonly struct PartFiles
     {
-        readonly IAppPaths AppPaths;
+        readonly IShellPaths AppPaths;
 
         [MethodImpl(Inline)]
         internal PartFiles(IAsmContext context)

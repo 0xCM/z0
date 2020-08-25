@@ -28,9 +28,9 @@ namespace Z0
 
         public void Register(ISystemAgent agent)
             => Agents.TryAdd(agent.Identity, agent);
-                
-        public IEnumerable<ISystemAgent> Memberhsip 
-            => Agents.Values;        
+
+        public IEnumerable<ISystemAgent> Members
+            => Agents.Values;
 
         ConcurrentDictionary<ulong,ISystemAgent> Agents {get;}
             = new ConcurrentDictionary<ulong, ISystemAgent>();
