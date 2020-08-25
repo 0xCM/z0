@@ -1,0 +1,1 @@
+dotnet publish z0.machine.csproj /p:PublishSingleFile=true -r win-x64

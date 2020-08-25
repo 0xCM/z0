@@ -20,7 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static OffsetSequence operator ++(OffsetSequence src)
-            => src.NextSeq();
+            => src.Next();
 
         [MethodImpl(Inline)]
         public static implicit operator OffsetSequence((ushort seq, ushort offset) src)
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public OffsetSequence NextSeq()
+        public OffsetSequence Next()
             => new OffsetSequence((ushort)(Seq + 1), Offset);
 
         [MethodImpl(Inline)]

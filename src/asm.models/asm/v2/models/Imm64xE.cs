@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
 
     using W = W64;
-    using I = Imm64;
-
 
     /// <summary>
     /// Defines a refined 64-bit immediate value

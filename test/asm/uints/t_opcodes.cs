@@ -12,7 +12,7 @@ namespace Z0.Asm.Data
     public class t_opcodes : t_asmd<t_opcodes>
     {
 
-        void emit(ReadOnlySpan<InstructionExpression> src)
+        void emit(ReadOnlySpan<AsmFxPattern> src)
         {
             var dstPath = CasePath($"InstructionExpression");
             using var writer = dstPath.Writer();
@@ -77,14 +77,14 @@ namespace Z0.Asm.Data
         // }
 
         public void opcode_reccords()
-        {            
+        {
             var data = AsmOpCodes.dataset();
             var count = data.OpCodeCount;
             var records = data.Records.ToReadOnlySpan();
-            using var writer = CaseWriter("OpCodes");            
+            using var writer = CaseWriter("OpCodes");
             writer.WriteLine(AsmOpCodeTable.FormatHeader());
             for(var i=0; i<records.Length; i++)
-                writer.WriteLine(skip(records,i).Format());        
+                writer.WriteLine(skip(records,i).Format());
         }
 
         // void opcode_tokens()

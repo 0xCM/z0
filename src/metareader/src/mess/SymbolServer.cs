@@ -14,6 +14,8 @@ namespace Z0.MS
     using System.Net.Http;
     using Z0.Image;
 
+    #if No
+
     public sealed class SymbolServerLocator : IBinaryLocator
     {
         public string SymbolPath { get; }
@@ -357,4 +359,5 @@ namespace Z0.MS
         }
     }
 
+    #endif
 }

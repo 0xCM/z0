@@ -1,9 +1,51 @@
 # include <stdio.h>
 # include <inttypes.h>
 # include <immintrin.h>
-# include <wmmintrin.h>
 # include <emmintrin.h>
 # include <smmintrin.h>
+# include <wmmintrin.h>
+# include <xmmintrin.h>
+
+
+static int8_t mod8i(int8_t x, int8_t y)
+{
+    return x % y;
+}
+
+inline uint8_t mod8u(uint8_t x, uint8_t y)
+{
+    return x % y;
+}
+
+inline int16_t mod16i(int16_t x, int16_t y)
+{
+    return x % y;
+}
+
+inline uint16_t mod16u(uint16_t x, uint16_t y)
+{
+    return x % y;
+}
+
+inline int32_t mod32i(int32_t x, int32_t y)
+{
+    return x % y;
+}
+
+inline uint32_t mod32u(uint32_t x, uint32_t y)
+{
+    return x % y;
+}
+
+inline int64_t mod64i(int64_t x, int64_t y)
+{
+    return x % y;
+}
+
+inline uint64_t mod64u(uint64_t x, uint64_t y)
+{
+    return x % y;
+}
 
 
 uint32_t rotate1(uint32_t value, uint32_t rotate)
@@ -14,16 +56,16 @@ uint32_t rotate1(uint32_t value, uint32_t rotate)
 uint32_t rotate2(uint32_t value, int rotate)
 {
     return (value >> rotate) | (value << ((-rotate & 31) - 1));
-}            
+}
 
 static uint16_t threshold1(uint16_t bound)
 {
-    return ((uint16_t)(-bound)) % bound;        
+    return ((uint16_t)(-bound)) % bound;
 }
 
 static uint16_t threshold2(uint16_t bound)
 {
-    return ((uint16_t)(~bound) + 1) % bound;        
+    return ((uint16_t)(~bound) + 1) % bound;
 }
 
 static uint32_t output1(uint64_t state)
@@ -34,32 +76,8 @@ static uint32_t output1(uint64_t state)
     return (c * 12605985483714917081ull) >> 32u;
 }
 
-static uint32_t output2(uint64_t state)
-{
-    
-    int32_t a = state >> 59;
-    printf("a = %d\n",a);
-    
-    int32_t b = a + 5;
-    printf("b = %d\n",b);
 
-    uint64_t c = state >> b;
-    printf("c = %llu\n",c);
-
-    uint64_t d = c ^ state;
-    printf("d = %llu\n",d);
-    
-    uint64_t e = (d * 12605985483714917081ull) >> 32;
-    printf("e = %llu\n",e);
-    
-    uint32_t f = e;
-    printf("f = %d\n",f);
-    
-    
-    return f;
-}
-
-void print128(__m128i var) 
+void print128(__m128i var)
 {
     int64_t *v64val = (int64_t*) &var;
     printf("%.16llx %.16llx\n", v64val[1], v64val[0]);
@@ -104,6 +122,4 @@ __m128i gfmul (__m128i a, __m128i b)
     tmp3 = _mm_xor_si128(tmp3, tmp2);
     tmp6 = _mm_xor_si128(tmp6, tmp3);
     return tmp6;
-    
 }
-

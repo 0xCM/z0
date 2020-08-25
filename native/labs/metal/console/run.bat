@@ -1,2 +1,2 @@
-cl main.c
+cl main.cpp /Famain.asm
 main.exe

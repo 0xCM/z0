@@ -6,13 +6,13 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
 
-    public readonly struct R8 : IRegOperand8
-    {    
+    public readonly struct R8 : IRegOperand<R8,W8,byte>
+    {
         public readonly byte Content  {get;}
-        
+
         public readonly RegisterKind Kind {get;}
 
         [MethodImpl(Inline)]
@@ -20,6 +20,6 @@ namespace Z0.Asm
         {
             Content = value;
             Kind = kind;
-        }            
-    } 
+        }
+    }
 }

@@ -93,12 +93,11 @@ namespace Z0
         public bool Equals(I src)
             => Data == src.Data;
 
-        public override bool Equals(object src)            
+        public override bool Equals(object src)
             => src is I x && Equals(x);
 
         [MethodImpl(Inline)]
         public Address32 ToAddress()
             => Data;
-
     }
 }

@@ -10,22 +10,25 @@ namespace Z0.Asm
     using static Konst;
 
     /// <summary>
-    /// Defines an 8-bit operand
+    /// Defines an encoded instruction
     /// </summary>
-    public readonly struct Op8 : IAsmOperand<Op8,W8,byte>
+    public struct EncodedFxInfo
     {
-        public byte Content {get;}
+        public uint Sequence;
 
-        public SignKind Sign {get;}
+        public AsmStatement Statement;
 
-        public AsmOperandKind OpKind {get;}
+        public AsmFxCode OpCode;
+
+        public EncodedFx Encoded;
 
         [MethodImpl(Inline)]
-        public Op8(byte value, SignKind sign, AsmOperandKind kind)
+        public EncodedFxInfo(uint seq, AsmStatement statement, AsmFxCode code, EncodedFx encoded)
         {
-            Content = value;
-            OpKind = kind;
-            Sign = sign;
+            Sequence = seq;
+            Statement = statement;
+            OpCode = code;
+            Encoded = encoded;
         }
     }
 }

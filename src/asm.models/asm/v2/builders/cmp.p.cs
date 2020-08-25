@@ -21,7 +21,7 @@ namespace Z0.Asm
         const ulong imm64 = 0xA0A0A05050;
 
         const double imm64f = 34441.25;
-        
+
         const decimal imm128 = 34.256m;
 
         [Op]
@@ -94,8 +94,7 @@ namespace Z0.Asm
 
         [Op]
         public bool gteq_8u(byte x, byte y)
-            => x >= y;            
-
+            => x >= y;
 
         [Op]
         public bool eq_imm8(byte x)
@@ -143,7 +142,7 @@ namespace Z0.Asm
 
         [Op]
         public bool gteq(uint x, uint y)
-            => x >= y;            
+            => x >= y;
 
         [Op]
         public bool eq(ulong x, ulong y)
@@ -191,8 +190,8 @@ namespace Z0.Asm
 
         [Op]
         public bool gteq_imm64(ulong x)
-            => x >= imm64;            
-        
+            => x >= imm64;
+
         [Op]
         public bool eq(double x, double y)
             => x == y;
@@ -214,8 +213,8 @@ namespace Z0.Asm
             => x > y;
 
         [Op]
-        public bool gteq(double x, double y)        
-            => x >= y;            
+        public bool gteq(double x, double y)
+            => x >= y;
 
         [Op]
         public bool eq_imm64(double x)
@@ -239,6 +238,6 @@ namespace Z0.Asm
 
         [Op]
         public bool gteq_imm64(double x)
-            => x >= imm64;            
+            => x >= imm64;
     }
 }

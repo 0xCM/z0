@@ -6,13 +6,13 @@ set BuildLog="%ZLogs%\builds\logs\z0.main.binlog"
 set NeedsFile=z0.needs.json
 set NeedsPath="%ZLogs%\builds\%NeedsFile%"
 
-set Cmd=dotnet build %SlnPath% /detailedSummary /t:GenerateRestoreGraphFile /p:RestoreGraphOutputPath=%NeedsPath% -m
+set Cmd=dotnet build %SlnPath% /t:GenerateRestoreGraphFile /p:RestoreGraphOutputPath=%NeedsPath% -m -detailedSummary
 
 echo on
 call %Cmd%
 echo off
 
-set Cmd=dotnet build %SlnPath% -bl:%BuildLog%;ProjectImports=ZipFile /detailedSummary -m
+set Cmd=dotnet build %SlnPath% -bl:%BuildLog%;ProjectImports=ZipFile -m -detailedSummary -graph:true
 
 echo on
 call %Cmd%

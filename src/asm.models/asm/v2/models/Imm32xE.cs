@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
 
     using W = W32;
-    using I = Imm32;
 
     /// <summary>
     /// Defines a refined 32-bit immediate value

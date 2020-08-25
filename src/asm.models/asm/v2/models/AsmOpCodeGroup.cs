@@ -8,17 +8,17 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using Z0.Tokens;
-    
+
     using static Konst;
     using static z;
 
-    public readonly ref struct AsmOpCodeGroup  
+    public readonly ref struct AsmOpCodeGroup
     {
         [MethodImpl(Inline), Op]
         public static AsmOpCodeGroup Create(int count)
             => new AsmOpCodeGroup((uint)count);
-        
-        readonly Span<InstructionExpression> instructions;
+
+        readonly Span<AsmFxPattern> instructions;
 
         readonly Span<AsmOpCode> codes;
 
@@ -34,7 +34,7 @@ namespace Z0.Asm
         internal AsmOpCodeGroup(uint count)
         {
             MnemonicSeq = new uint[1];
-            instructions = new InstructionExpression[count];
+            instructions = new AsmFxPattern[count];
             codes = new AsmOpCode[count];
             mnemonics = new MnemonicExpression[count];
             cpuid = new CpuidExpression[count];
@@ -42,7 +42,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(uint seq, in InstructionExpression src)
+        public void Include(uint seq, in AsmFxPattern src)
         {
             Instruction(seq) = src;
         }
@@ -67,7 +67,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(in AsmOpCodePartitoner ocp, in InstructionExpression src)
+        public void Include(in AsmOpCodePartitoner ocp, in AsmFxPattern src)
         {
             Instruction((uint)ocp.Sequence) = src;
         }
@@ -87,7 +87,7 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => ref skip(mnemonics, first(MnemonicSeq) - 1);
         }
-        
+
         [MethodImpl(Inline), Op]
         public void Include(AsmOpCodePartitoner ocp, in MnemonicExpression src)
         {
@@ -131,7 +131,7 @@ namespace Z0.Asm
             get => codes.Length;
         }
 
-        public ReadOnlySpan<InstructionExpression> Instructions
+        public ReadOnlySpan<AsmFxPattern> Instructions
         {
             [MethodImpl(Inline)]
             get => instructions;
@@ -174,7 +174,7 @@ namespace Z0.Asm
             => ref seek(modes, seq);
 
         [MethodImpl(Inline), Op]
-        ref InstructionExpression Instruction(uint seq)
+        ref AsmFxPattern Instruction(uint seq)
             => ref seek(instructions, seq);
 
         [MethodImpl(Inline), Op]

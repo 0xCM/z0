@@ -9,8 +9,9 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmOp<T> : IAsmOperand<T>
+    public readonly struct AsmOp<W,T> : IAsmOperand<AsmOp<W,T>,W,T>
         where T : unmanaged
+        where W : unmanaged, IDataWidth
     {
         public T Content {get;}
 

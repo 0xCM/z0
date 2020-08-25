@@ -27,8 +27,5 @@ namespace Z0.Asm
             OpKind = kind;
             Sign = sign;
         }
-
-        public DataWidth Width
-            => DataWidth.W128;
     }
 }

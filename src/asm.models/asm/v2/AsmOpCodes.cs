@@ -30,11 +30,11 @@ namespace Z0
             => new AsmOpCode(src.OpCode);
 
         [MethodImpl(Inline), Op]
-        public static InstructionExpression fxExpr(in AsmOpCodeTable src)
-            => new InstructionExpression(src.Instruction);
+        public static AsmFxPattern fxExpr(in AsmOpCodeTable src)
+            => new AsmFxPattern(src.Instruction);
 
         public static TableSpan<TokenModel> Tokens
-            => AsmTokenIndex.create().Model; 
+            => AsmTokenIndex.create().Model;
 
         [MethodImpl(Inline), Op]
         public AsmOpCodeOperand operand(ulong src, uint2 index)
@@ -69,20 +69,20 @@ namespace Z0
             var handler = new AsmOpCodeGroup((uint)count);
             var processor = partitioner(seq);
             Partition(processor, handler, records);
-            return handler;            
-        }        
+            return handler;
+        }
 
         [MethodImpl(Inline), Op]
         public static uint partition(ReadOnlySpan<AsmOpCodeTable> src, in AsmOpCodeGroup handler)
         {
-            var count = src.Length;            
+            var count = src.Length;
             var s0 = 0u;
             for(var i=s0; i<count; i++)
                 partition(skip(src,i), handler, ref s0);
 
             return s0;
         }
-        
+
         [MethodImpl(Inline), Op]
         static void partition(in AsmOpCodeTable src, in AsmOpCodeGroup handler, ref uint s0)
         {
@@ -102,11 +102,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static void process(OperatingMode src, in AsmOpCodeGroup handler, ref uint seq)
         {
-            handler.Include(seq, src);        
+            handler.Include(seq, src);
         }
 
         [MethodImpl(Inline), Op]
-        static void process(in InstructionExpression src, in AsmOpCodeGroup handler, uint seq)
+        static void process(in AsmFxPattern src, in AsmOpCodeGroup handler, uint seq)
         {
             handler.Include(seq, src);
         }
@@ -114,19 +114,19 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static void process(in AsmOpCode src, in AsmOpCodeGroup handler, uint seq)
         {
-            handler.Include(seq, src);            
+            handler.Include(seq, src);
         }
 
         [MethodImpl(Inline), Op]
         static void process(in MnemonicExpression src, in AsmOpCodeGroup handler, uint seq)
         {
-            handler.Include(seq, src);            
+            handler.Include(seq, src);
         }
 
         [MethodImpl(Inline), Op]
         static void process(in CpuidExpression src, in AsmOpCodeGroup handler, uint seq)
         {
-            handler.Include(seq, src);            
+            handler.Include(seq, src);
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Z0
                 var sr = field.ToStringRef();
                 seek(buffer, i) = new AsmOpCodeToken(i, (AsmOpCodeTokenKind)(i + 1), sr);
             }
-            return new Asm.AsmOpCodeTokens(dst);            
+            return new Asm.AsmOpCodeTokens(dst);
         }
 
         [Op]
@@ -199,7 +199,7 @@ namespace Z0
         static StreamWriter CaseWriter(string name)
             =>  CasePath(name).Writer();
 
-        void emit(ReadOnlySpan<InstructionExpression> src)
+        void emit(ReadOnlySpan<AsmFxPattern> src)
         {
             var dstPath = CasePath($"InstructionExpression");
             using var writer = dstPath.Writer();
@@ -262,14 +262,14 @@ namespace Z0
         }
 
         public void opcode_reccords()
-        {            
+        {
             var data = AsmOpCodes.dataset();
             var count = data.OpCodeCount;
             var records = data.Records.ToReadOnlySpan();
-            using var writer = CaseWriter("OpCodes");            
+            using var writer = CaseWriter("OpCodes");
             writer.WriteLine(AsmOpCodeTable.FormatHeader());
             for(var i=0; i<records.Length; i++)
-                writer.WriteLine(skip(records,i).Format());        
+                writer.WriteLine(skip(records,i).Format());
         }
 
         void opcode_tokens()

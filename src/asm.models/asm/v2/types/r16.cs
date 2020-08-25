@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Dsl
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -11,7 +11,7 @@ namespace Z0.Asm.Dsl
 
     using K = RegisterKind;
 
-    public readonly struct ax : IRegOperand16<ax,ushort>
+    public readonly struct ax : IRegOperand<ax,W16,ushort>
     {
         public ushort Content  {get;}
 
@@ -34,7 +34,7 @@ namespace Z0.Asm.Dsl
         }
     }
 
-    public readonly struct cx : IRegOperand16<cx,ushort>
+    public readonly struct cx : IRegOperand<cx,W16,ushort>
     {
         public ushort Content  {get;}
 
@@ -55,10 +55,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }    
+    }
 
-    public readonly struct dx : IRegOperand16<dx,ushort>
-    {        
+    public readonly struct dx : IRegOperand<dx,W16,ushort>
+    {
         public ushort Content  {get;}
 
         [MethodImpl(Inline)]
@@ -79,9 +79,9 @@ namespace Z0.Asm.Dsl
             get =>new R16(Content, Kind);
         }
 
-    }    
+    }
 
-    public readonly struct bx : IRegOperand16<bx,ushort>
+    public readonly struct bx : IRegOperand<bx,W16,ushort>
     {
         public ushort Content  {get;}
 
@@ -94,7 +94,7 @@ namespace Z0.Asm.Dsl
         {
             Content = value;
         }
-        
+
         public K Kind => K.BX;
 
         public R16 Generalized
@@ -102,9 +102,9 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }    
+    }
 
-    public readonly struct si : IRegOperand16<si,ushort>
+    public readonly struct si : IRegOperand<si,W16,ushort>
     {
         public ushort Content  {get;}
 
@@ -126,9 +126,9 @@ namespace Z0.Asm.Dsl
             get =>new R16(Content, Kind);
         }
 
-    }    
+    }
 
-    public readonly struct di : IRegOperand16<di,ushort>
+    public readonly struct di : IRegOperand<di,W16,ushort>
     {
         public ushort Content  {get;}
 
@@ -149,10 +149,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }        
+    }
 
     public readonly struct sp : IRegOperand16<sp,ushort>
-    {            
+    {
         public ushort Content  {get;}
 
 
@@ -173,7 +173,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }            
+    }
 
     public readonly struct bp : IRegOperand16<bp,ushort>
     {
@@ -196,7 +196,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }                
+    }
 
     public readonly struct r8w : IRegOperand16<r8w,ushort>
     {
@@ -220,7 +220,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }                    
+    }
 
     public readonly struct r9w : IRegOperand16<r9w,ushort>
     {
@@ -243,10 +243,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r10w : IRegOperand16<r10w,ushort>
-    {        
+    {
         public ushort Content  {get;}
 
         [MethodImpl(Inline)]
@@ -266,10 +266,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r11w : IRegOperand16<r11w,ushort>
-    {            
+    {
         public ushort Content  {get;}
 
         [MethodImpl(Inline)]
@@ -289,7 +289,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r12w : IRegOperand16<r12w,ushort>
     {
@@ -312,7 +312,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }                    
+    }
 
     public readonly struct r13w : IRegOperand16<r13w,ushort>
     {
@@ -335,10 +335,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r14w : IRegOperand16<r14w,ushort>
-    {            
+    {
         public ushort Content  {get;}
 
         [MethodImpl(Inline)]
@@ -358,7 +358,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R16(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r15w : IRegOperand16<r15w,ushort>
     {
@@ -375,7 +375,7 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.R15W;
- 
+
         public R16 Generalized
         {
             [MethodImpl(Inline)]

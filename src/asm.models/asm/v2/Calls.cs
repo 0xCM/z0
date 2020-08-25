@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static CallTarget target(MemoryAddress @base)
-            => new CallTarget(@base);            
+            => new CallTarget(@base);
 
         [MethodImpl(Inline), Op]
         public static CallClient client(string id, MemoryAddress @base)
@@ -26,11 +26,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static CallTarget target(string id, MemoryAddress @base)
-            => new CallTarget(id, @base);            
+            => new CallTarget(id, @base);
 
         [MethodImpl(Inline), Op]
         public static Invocation call(string id, MemoryAddress src, ushort callsite, MemoryAddress dst, string actualId, MemoryAddress actual = default)
-            => new Invocation(client(id, src), callsite, target(dst), target(actualId, actual));        
+            => new Invocation(client(id, src), callsite, target(dst), target(actualId, actual));
 
         [MethodImpl(Inline), Op]
         public static Invocation call(MemoryAddress src, ushort callsite, MemoryAddress dst, MemoryAddress actual = default)
@@ -43,7 +43,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static MemoryAddress offset(Invocation src)
             => src.Client.Base + src.CallSite;
- 
+
+        [Op]
         public static string format(Invocation src)
         {
             var site = Calls.offset(src);
@@ -51,8 +52,8 @@ namespace Z0
             var offset = (site - target).Location;
             var delta = (src.ActualTarget.Base - site).Location;
             var actual = src.ActualTarget.Id;
-            var client_field = text.concat(src.Client.Id, text.embrace(site.Format()));                
+            var client_field = text.concat(src.Client.Id, text.embrace(site.Format()));
             return $"{client_field} | {target} | {offset} | {actual} | {delta}";
-        }        
+        }
     }
 }

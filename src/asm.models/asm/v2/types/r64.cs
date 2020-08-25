@@ -10,9 +10,9 @@ namespace Z0.Asm.Dsl
     using static Konst;
 
     using K = RegisterKind;
-    
-    public readonly struct rax : IRegOperand64<rax,ulong>
-    {        
+
+    public readonly struct rax : IRegOperand<rax,W64,ulong>
+    {
         public ulong Content  {get;}
 
         [MethodImpl(Inline)]
@@ -34,7 +34,7 @@ namespace Z0.Asm.Dsl
         }
     }
 
-    public readonly struct rcx : IRegOperand64<rcx,ulong>
+    public readonly struct rcx : IRegOperand<rcx,W64,ulong>
     {
         public ulong Content  {get;}
 
@@ -55,9 +55,9 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }    
+    }
 
-    public readonly struct rdx : IRegOperand64<rdx,ulong>
+    public readonly struct rdx : IRegOperand<rdx,W64,ulong>
     {
         public ulong Content  {get;}
 
@@ -78,7 +78,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }    
+    }
 
     public readonly struct rbx : IRegOperand64<rbx,ulong>
     {
@@ -101,7 +101,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }    
+    }
 
     public readonly struct rsi : IRegOperand64<rsi,ulong>
     {
@@ -124,7 +124,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }    
+    }
 
     public readonly struct rdi : IRegOperand64<rdi,ulong>
     {
@@ -135,7 +135,7 @@ namespace Z0.Asm.Dsl
         {
             Content = value;
         }
-        
+
         public K Kind => K.RDI;
 
         public R64 Generalized
@@ -143,7 +143,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }        
+    }
 
     public readonly struct rsp : IRegOperand64<rsp,ulong>
     {
@@ -162,10 +162,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }            
+    }
 
     public readonly struct rbp : IRegOperand64<rbp,ulong>
-    {            
+    {
         public ulong Content  {get;}
 
         [MethodImpl(Inline)]
@@ -181,7 +181,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }                
+    }
 
     public readonly struct r8q : IRegOperand64<r8q,ulong>
     {
@@ -200,7 +200,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }                    
+    }
 
     public readonly struct r9q : IRegOperand64<r9q,ulong>
     {
@@ -219,7 +219,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r10q : IRegOperand64<r10q,ulong>
     {
@@ -238,7 +238,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r11q : IRegOperand64<r11q,ulong>
     {
@@ -257,7 +257,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r12q : IRegOperand64<r12q,ulong>
     {
@@ -276,7 +276,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }                    
+    }
 
     public readonly struct r13q : IRegOperand64<r13q,ulong>
     {
@@ -295,7 +295,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r14q : IRegOperand64<r14q,ulong>
     {
@@ -314,7 +314,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r15q : IRegOperand64<r15q,ulong>
     {
@@ -333,5 +333,5 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R64(Content, Kind);
         }
-    } 
+    }
 }

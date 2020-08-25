@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
 
     public readonly struct R8<R> : IRegOperand8<R8<R>,byte>
-        where R : unmanaged, IRegOperand8
+        where R : unmanaged, IRegOperand<R>
     {
         public readonly byte Data;
 
@@ -20,7 +20,7 @@ namespace Z0.Asm
             Data = value;
         }
 
-        public RegisterKind Kind 
+        public RegisterKind Kind
         {
             [MethodImpl(Inline)]
             get => default(R).Kind;

@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     public interface IRegOperand8 : IRegOperand<W8,byte>
     {
-        RegisterClass IRegOperand.Class 
+        RegisterClass IRegOperand.Class
             => RegisterClass.GP;
     }
 
@@ -15,11 +15,5 @@ namespace Z0.Asm
         where T : unmanaged
     {
 
-    }        
-
-    public interface IRegOperand8<T> : IRegOperand<W8,T>
-        where T : unmanaged
-    {
-    
     }
 }

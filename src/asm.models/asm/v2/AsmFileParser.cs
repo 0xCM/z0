@@ -14,21 +14,21 @@ namespace Z0.Asm
     public readonly struct AsmFileParser
     {
         [Op]
-        public static void ParseAsmFile(FilePath src, Action<int,AsmCommand[]> AsmParsed, Action<AsmRoutineHeader> HeaderParsed = null)
+        public static void ParseAsmFile(FilePath src, Action<int,EncodedFxInfo[]> AsmParsed, Action<AsmRoutineHeader> HeaderParsed = null)
         {
-            var commands = list<AsmCommand>(100);            
+            var commands = list<EncodedFxInfo>(100);
             var comments = list<string>(8);
 
             var i = 0;
-            var seq = 0;
+            var seq = 0u;
 
             using var reader = src.Reader();
             reader.ReadLine();
-            
+
             while(!reader.EndOfStream)
-            {                
+            {
                 var line = reader.ReadLine();
-                                
+
                 if(IsBlockSep(line))
                 {
                     AsmParsed(i++, commands.ToArray());
@@ -47,10 +47,10 @@ namespace Z0.Asm
                         {
                             line = reader.ReadLine();
                             if(IsCommentLine(line))
-                                comments.Add(line);    
+                                comments.Add(line);
                             else
                             {
-                                AsmHeaderParser.Service.Parse(comments.ToArray().Concat(Chars.NL)).OnSuccess(HeaderParsed);                                
+                                AsmHeaderParser.Service.Parse(comments.ToArray().Concat(Chars.NL)).OnSuccess(HeaderParsed);
                                 break;
                             }
                         }
@@ -64,7 +64,7 @@ namespace Z0.Asm
                     continue;
 
                 commands.Add(parsed.Value);
-            }                                            
+            }
         }
     }
 }

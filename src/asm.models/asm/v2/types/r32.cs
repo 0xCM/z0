@@ -8,11 +8,11 @@ namespace Z0.Asm.Dsl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     using K = RegisterKind;
 
-    public readonly struct eax : IRegOperand32<eax,uint>
-    {            
+    public readonly struct eax : IRegOperand<eax,W32,uint>
+    {
         public uint Content {get;}
 
         [MethodImpl(Inline)]
@@ -24,7 +24,7 @@ namespace Z0.Asm.Dsl
         {
             Content = value;
         }
-                    
+
         public K Kind => K.EAX;
 
         public R32 Generalized
@@ -34,7 +34,7 @@ namespace Z0.Asm.Dsl
         }
     }
 
-    public readonly struct ecx : IRegOperand32<ecx,uint>
+    public readonly struct ecx : IRegOperand<ecx,W32,uint>
     {
         public uint Content {get;}
 
@@ -55,9 +55,9 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }    
+    }
 
-    public readonly struct edx : IRegOperand32<edx,uint>
+    public readonly struct edx : IRegOperand<edx,W32,uint>
     {
         public uint Content {get;}
 
@@ -79,9 +79,9 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }    
+    }
 
-    public readonly struct ebx : IRegOperand32<ebx,uint>
+    public readonly struct ebx : IRegOperand<ebx,W32,uint>
     {
         public uint Content {get;}
 
@@ -102,10 +102,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }    
+    }
 
-    public readonly struct esi : IRegOperand32<esi,uint>
-    {            
+    public readonly struct esi : IRegOperand<esi,W32,uint>
+    {
         public uint Content {get;}
 
         [MethodImpl(Inline)]
@@ -125,7 +125,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }    
+    }
 
     public readonly struct edi : IRegOperand32<edi,uint>
     {
@@ -148,10 +148,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }        
+    }
 
     public readonly struct esp : IRegOperand32<esp,uint>
-    {            
+    {
         public uint Content {get;}
 
         [MethodImpl(Inline)]
@@ -171,7 +171,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }            
+    }
 
     public readonly struct ebp : IRegOperand32<ebp,uint>
     {
@@ -194,7 +194,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }                
+    }
 
     public readonly struct r8d : IRegOperand32<r8d,uint>
     {
@@ -213,10 +213,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }                    
+    }
 
     public readonly struct r9d : IRegOperand32<r9d,uint>
-    {            
+    {
         public uint Content {get;}
 
         [MethodImpl(Inline)]
@@ -232,10 +232,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r10d : IRegOperand32<r10d,uint>
-    {            
+    {
         public uint Content {get;}
 
         [MethodImpl(Inline)]
@@ -251,7 +251,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r11d : IRegOperand32<r11d,uint>
     {
@@ -270,10 +270,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r12d : IRegOperand32<r12d,uint>
-    {            
+    {
         public uint Content {get;}
 
         [MethodImpl(Inline)]
@@ -289,18 +289,18 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }                    
+    }
 
     public readonly struct r13d : IRegOperand32<r13d,uint>
     {
         public uint Content {get;}
-        
+
         [MethodImpl(Inline)]
         public r13d(uint value)
         {
             Content = value;
         }
-        
+
         public K Kind => K.R13D;
 
         public R32 Generalized
@@ -308,7 +308,7 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r14d : IRegOperand32<r14d,uint>
     {
@@ -328,10 +328,10 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    }                        
+    }
 
     public readonly struct r15d : IRegOperand32<r15d,uint>
-    {            
+    {
         public uint Content {get;}
 
         [MethodImpl(Inline)]
@@ -347,5 +347,5 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new R32(Content, Kind);
         }
-    } 
+    }
 }

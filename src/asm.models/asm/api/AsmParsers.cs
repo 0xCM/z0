@@ -18,20 +18,20 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static AsmStatementParser statement()
-            => new AsmStatementParser(ParseMnemonic);        
+            => new AsmStatementParser(ParseMnemonic);
 
         [MethodImpl(Inline), Op]
         public static Mnemonic ParseMnemonic(string src)
             => Enums.Parse(src, Mnemonic.INVALID);
 
         [MethodImpl(Inline), Op]
-        public static ParseResult<AsmCommand> ParseLine(string line, ref int seq)
+        public static ParseResult<EncodedFxInfo> ParseLine(string line, ref uint seq)
         {
-            var fail = ParseResult<AsmCommand>.Fail(line);
+            var fail = ParseResult<EncodedFxInfo>.Fail(line);
 
             if(IsBlankLine(line))
                 return fail;
-            
+
             if(IsCommentLine(line))
                 return fail;
 
@@ -46,7 +46,7 @@ namespace Z0.Asm
                 return fail;
 
             var info = parts[1];
-            var descriptors = info.SplitClean(DescriptorSep);                
+            var descriptors = info.SplitClean(DescriptorSep);
             if(descriptors.Length !=3)
                 return fail;
 
@@ -56,15 +56,15 @@ namespace Z0.Asm
             if(encoded.Failed)
                 return fail;
 
-            return ParseResult.Success(line, new AsmCommand(seq++, statement.Value, opcode, instruction, encoded.Value));
+            return ParseResult.Success(line, new EncodedFxInfo(seq++, statement.Value, new AsmFxCode(opcode, instruction), encoded.Value));
         }
 
         [MethodImpl(Inline), Nlz]
         static int nlz(ulong src)
-            => (int)Lzcnt.X64.LeadingZeroCount(src);    
+            => (int)Lzcnt.X64.LeadingZeroCount(src);
 
         [MethodImpl(Inline)]
-        static int hipos(ulong src)            
+        static int hipos(ulong src)
             => (int)bitsize<ulong>() - 1 - nlz(src);
 
         [MethodImpl(Inline)]
@@ -73,7 +73,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static ReadOnlySpan<byte> bytes(in EncodedFx src)
-            => Fixed.view<byte>(Fixed.from(src.Data)).Slice((int)size(src));       
+            => Fixed.view<byte>(Fixed.from(src.Data)).Slice((int)size(src));
 
         [MethodImpl(Inline)]
         static EncodedFx encode(ReadOnlySpan<byte> src)
@@ -85,7 +85,7 @@ namespace Z0.Asm
                 dst = dst.WithElement(i, skip(src,i));
             var c = new EncodedFx(dst.WithElement(15, (byte)count));
             var b = bytes(c);
-            return c;  
+            return c;
         }
 
         [MethodImpl(Inline)]
@@ -93,29 +93,29 @@ namespace Z0.Asm
         {
             var hi64 = (ulong)(effsize(lo64)/8) << 56;
             var v = v8u(Vector128.Create(lo64, hi64));
-            return new EncodedFx(v); 
+            return new EncodedFx(v);
         }
 
         // Parses text of the form encoded[4]{48 83 ec 40}
         [MethodImpl(Inline), Op]
         public static ParseResult<EncodedFx> ParseEncoded(string src)
-        {       
+        {
             var fail = ParseResult.Fail<EncodedFx>(src);
             var np = Parsers.numeric<int>();
 
-            (var iS0, var iS1) = text.indices(src,Chars.LBracket, Chars.RBracket);            
+            (var iS0, var iS1) = text.indices(src,Chars.LBracket, Chars.RBracket);
             if(iS0 == -1 || iS1 == -1)
                 return fail;
-                                
+
             var size =  np.Parse(text.segment(src, iS0 + 1, iS1 - 1));
             if(size.Failed)
                 return fail;
-            
-            (var iB0, var iB1) = text.indices(src, Chars.LBrace, Chars.RBrace);             
+
+            (var iB0, var iB1) = text.indices(src, Chars.LBrace, Chars.RBrace);
             if(iB0 == -1 || iB1 == -1)
                 return fail;
 
-            var count = size.Value;            
+            var count = size.Value;
             var hexdata = text.segment(src, iB0 + 1, iB1 - 1);
             if(hexdata.Length != count)
                 return fail;
@@ -124,12 +124,12 @@ namespace Z0.Asm
             var bytesMaybe = hexparser.ParseData(hexdata);
             if(bytesMaybe.Failed)
                 return fail;
-            
+
             var bytes = bytesMaybe.Value;
             if(bytes.Length != count)
                 return fail;
-            
+
             return ParseResult.Success(src, encode(bytes));
-        }        
+        }
     }
 }

@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
 
     using W = W8;
-    using I = Imm8;
 
     /// <summary>
     /// Defines a refined 8-bit immediate value

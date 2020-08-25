@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,8 +11,7 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Identify)" />
-    <ProjectReference Include="$(Tools)" />
-
+    <ProjectReference Include="$(Domain)" />
   </ItemGroup>
 
 </Project>

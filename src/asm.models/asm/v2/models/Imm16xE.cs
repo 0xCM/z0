@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
 
     using W = W16;
-    using I = Imm16;
 
     /// <summary>
     /// Defines a refined 16-bit immediate value
