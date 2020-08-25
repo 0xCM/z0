@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using Z0.Machines;
-
     /// <summary>
     /// Receives notifications from an active machine
     /// </summary>
@@ -25,7 +23,7 @@ namespace Z0
             Tracing = tracing  ?? ObserverTrace.All;
             ReceiptEmitRate = receiptEmitRate ?? (int)Pow2.T20;
             TransitionCount = 0;
-            CompletionCount = 0;            
+            CompletionCount = 0;
         }
 
         Fsm<E,S> Machine;
@@ -43,7 +41,7 @@ namespace Z0
         int CompletionCount;
 
         ulong ReceiptCount;
-        
+
         void Trace(IAppMsg msg)
         {
             term.print(msg);
@@ -87,7 +85,7 @@ namespace Z0
                 Trace(FsmMessages.Receipt(Id, input, ReceiptCount));
                 ReceiptCounter = 0;
             }
-            
+
             ReceiptCounter++;
         }
 
@@ -108,7 +106,7 @@ namespace Z0
                         Trace(FsmMessages.Error(Id, e));
                     break;
                 }
-            }            
+            }
         }
     }
 }

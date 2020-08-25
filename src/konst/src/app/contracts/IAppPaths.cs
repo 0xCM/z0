@@ -50,11 +50,6 @@ namespace Z0
         FolderName ErrorLogFolder
             => FolderName.Define("errors");
 
-        /// <summary>
-        /// The name of a data folder
-        /// </summary>
-        FolderName DataFolder
-            => FolderName.Define("data");
 
         /// <summary>
         /// The name of a folder that contains test result logs
@@ -68,17 +63,6 @@ namespace Z0
         FolderName TestDataFolder
             => FolderName.Define("data");
 
-        /// <summary>
-        /// The name of an application resource folder
-        /// </summary>
-        FolderName ResourceFolder
-            => FolderName.Define("res");
-
-        /// <summary>
-        /// The name of an application resource folder
-        /// </summary>
-        FolderName ExportFolder
-            => FolderName.Define("exports");
 
         /// <summary>
         /// The name of the folder into which test results are deposited
@@ -139,7 +123,6 @@ namespace Z0
         /// </summary>
         PartId AppId
             => Part.ExecutingPart;
-
 
         /// <summary>
         /// The executing application's folder name
@@ -260,31 +243,6 @@ namespace Z0
 
         FilePath CaseLogPath
             => TestStandardOutDir + CaseLogName;
-
-        /// <summary>
-        /// The directory into which structured data describing test results are deposited
-        /// </summary>
-        FolderPath TestResults
-            => TestLogRoot + OutcomeFolder;
-
-
-        /// <summary>
-        /// The name of the root bench partition
-        /// </summary>
-        FolderName BenchRootFolder
-            => FolderName.Define("bench");
-
-        /// <summary>
-        /// The directory into which structured data describing test results are deposited
-        /// </summary>
-        FolderPath BenchResults
-            => LogRoot + BenchRootFolder;
-
-        /// <summary>
-        /// The application-specific bench result file path
-        /// </summary>
-        FilePath BenchResultPath
-            => BenchResults + FileName.Define($"{AppName}", FileExtensions.Csv);
 
         /// <summary>
         /// Creates a provider rooted at the current root directory for another application

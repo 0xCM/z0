@@ -11,10 +11,14 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {            
+    {
         [MethodImpl(Inline), Op]
         public static uint hash(string src)
             => (uint)src?.GetHashCode();
+
+        [MethodImpl(Inline), Op]
+        public static uint hash(Type src)
+            => (uint)src.GetHashCode();
 
         /// <summary>
         /// Calculates a combined hash for 2 unsigned 32-bit integers

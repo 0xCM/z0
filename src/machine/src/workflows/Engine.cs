@@ -11,31 +11,11 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static RunProcessorsStep;
+    using static Machines;
     using static z;
 
-    public class Engine : IMachine
+    public class Engine : IMachineEngine<Engine>
     {
-        public static Engine create(WfCaptureState wf, CorrelationToken ct)
-        {
-            wf.Initializing(StepName, ct);
-            var step = default(Engine);
-            try
-            {
-                step = new Engine(wf, ct);
-                var client = step as IMachine;
-                client.Connect();
-            }
-            catch(Exception e)
-            {
-                wf.Error(StepName, e, ct);
-                throw;
-            }
-
-            wf.Initialized(StepName, ct);
-            return step;
-        }
-
         readonly WfCaptureState State;
 
         readonly CorrelationToken Ct;
@@ -46,7 +26,9 @@ namespace Z0
 
         public EncodedParts Index;
 
-        Engine(WfCaptureState wf, CorrelationToken ct)
+        readonly List<Instruction> Buffer;
+
+        internal Engine(WfCaptureState wf, CorrelationToken ct)
         {
             State = wf;
             Ct = ct;
@@ -54,8 +36,6 @@ namespace Z0
             Files = PartFiles.create(Asm);
             Buffer = list<Instruction>(2000);
         }
-
-        readonly List<Instruction> Buffer;
 
         IWfContext Wf
             => State.Wf;
@@ -120,10 +100,9 @@ namespace Z0
             {
                 foreach(var part in src)
                 {
-                    var index = LocatedAsmFxList.create(part.Located.ToArray());
-                    var path = TargetDir + FileName.Define($"{part.Part.Format()}.calls", FileExtensions.Csv);
                     Process(part);
-                    using var step = new AnalyzeCalls(Wf, index, path, Ct);
+
+                    using var step = new EmitCallIndex(Wf, part, Ct);
                     step.Run();
                 }
             }
@@ -138,9 +117,8 @@ namespace Z0
             try
             {
                 Wf.Status(StepName, "Processing instructions", Ct);
-                var workflow = ProcessInstructions.create(Wf, TargetDir);
+                var workflow = ProcessInstructions.create(Wf);
                 workflow.Process(fx);
-                workflow.Render(fx);
             }
             catch(Exception error)
             {

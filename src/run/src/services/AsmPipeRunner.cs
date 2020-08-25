@@ -133,11 +133,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         IPartCaptureArchive CaptureArchive(PartId part)
-            => Capture.Services.CaptureArchive();
+            => Archives.capture(part);
 
         [MethodImpl(Inline)]
         IPartCaptureArchive CaptureArchive(FolderPath root)
-            => Capture.Services.CaptureArchive(root, null, null);
+            => Archives.capture(root);
 
         [MethodImpl(Inline)]
         FilePath AsmFilePath<T>(PartId part)
@@ -149,6 +149,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         IEncodedHexArchive UriBitsArchive(FolderPath root)
-            =>  Archives.Services.EncodedHexArchive(root);
+            =>  Archives.hex(root);
     }
 }

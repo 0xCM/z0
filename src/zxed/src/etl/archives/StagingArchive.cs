@@ -9,32 +9,32 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    
-    public readonly struct XedStagingArchive : IPartFileArchive
+
+    public readonly struct XedStagingArchive : IPartFilePaths
     {
         public static XedStagingArchive Create(FolderPath root)
             => new XedStagingArchive(root);
 
         public FolderPath ArchiveRoot {get;}
 
-        public FolderName InstructionFolder 
+        public FolderName InstructionFolder
             => FolderName.Define("instructions");
 
         public FolderName FunctionFolder
             => FolderName.Define("functions");
 
-        public FolderPath InstructionDir 
+        public FolderPath InstructionDir
             => ArchiveRoot + InstructionFolder;
-        
-        public FolderPath FunctionDir 
+
+        public FolderPath FunctionDir
             => ArchiveRoot + FunctionFolder;
-        
+
         public XedStagingArchive(FolderPath root)
         {
             ArchiveRoot = root;
         }
-        
-        public IEnumerable<FilePath> Files  
+
+        public IEnumerable<FilePath> Files
             => ArchiveRoot.Files(FileExtensions.Txt,true);
 
         public int FileCount => Files.Count();
@@ -46,7 +46,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 var rows = src[i];
-                for(var j = 0; j < rows.RowCount; j++)                
+                for(var j = 0; j < rows.RowCount; j++)
                     writer.WriteLine(rows[j].Text);
                 if(i != src.Length - 1)
                     writer.WriteLine(HSep);
@@ -58,7 +58,7 @@ namespace Z0
             var path = FunctionDir + name;
             using var writer = path.Writer();
             for(var i=0; i<src.Length; i++)
-            {   
+            {
 
                 ref readonly var f = ref src[i];
                 var body = f.Body;
@@ -68,13 +68,13 @@ namespace Z0
                     writer.WriteLine(f.Declaration);
                     writer.WriteLine(HSep);
 
-                    for(var j = 0; j < body.Length; j++)                
+                    for(var j = 0; j < body.Length; j++)
                         writer.WriteLine(body[j]);
 
-                    if(i != src.Length - 1)                        
+                    if(i != src.Length - 1)
                         writer.WriteLine();
                 }
-                
+
             }
         }
 

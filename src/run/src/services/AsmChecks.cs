@@ -36,13 +36,13 @@ namespace Z0.Asm
         public ref readonly BufferToken this[BufferSeqId index]
             => ref Buffers[index];
 
-        IPartCaptureArchive CodeArchive
+        IPartCapturePaths CodeArchive
             => Me.CaptureArchive(Part.ExecutingPart);
 
-        protected IFileStreamWriter HexWriter([Caller] string caller = null)
+        protected IArchiveWriter HexWriter([Caller] string caller = null)
         {
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.HexLine));
-            return Archives.Services.MemberCodeWriter(dstPath);
+            return Archives.writer<MemberCodeWriter>(dstPath);
         }
 
         protected AsmWriter AsmWriter([Caller] string caller = null)

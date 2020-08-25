@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public interface IAsmCore : TIdentities, IArchiveServices, IDynamic
+    public interface IAsmCore : TIdentities, IDynamic
     {
         /// <summary>
         /// Writer factory accessor

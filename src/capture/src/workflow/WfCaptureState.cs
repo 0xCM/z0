@@ -55,7 +55,7 @@ namespace Z0.Asm
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = Services.Formatter(FormatConfig);
             RoutineDecoder = Services.RoutineDecoder(FormatConfig);
-            CWf = new CaptureWorkflow(Asm, Wf, RoutineDecoder, Formatter, Services.AsmWriterFactory, Services.CaptureArchive(Config.TargetArchive), Ct);
+            CWf = new CaptureWorkflow(Asm, Wf, RoutineDecoder, Formatter, Services.AsmWriterFactory, Archives.capture(Config.TargetArchive), Ct);
             CaptureBroker = WfBuilder.capture(Log, ct);
         }
 

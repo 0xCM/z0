@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     public interface IMetaclass
     {
-        
+
     }
 
     /// <summary>
@@ -14,19 +16,14 @@ namespace Z0
     /// </summary>
     public interface IClassifier : IMetaclass
     {
-        
+
     }
 
-    public interface IClassified<C>
-        where C : unmanaged, IClassifier
-    {
-        C Class  => default;
-    }
 
     /// <summary>
     /// Characterizes an F-bound polymorphic classifier reification
     /// </summary>
-    /// <typeparam name="T">The parametric type</typeparam>    
+    /// <typeparam name="T">The parametric type</typeparam>
     public interface IClassF<F> : IClassifier
         where F : IClassF<F>, new()
     {
@@ -36,7 +33,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a T-parametric classifier
     /// </summary>
-    /// <typeparam name="T">The parametric type</typeparam>    
+    /// <typeparam name="T">The parametric type</typeparam>
     public interface IClassT<T> : IClassifier
     {
 
@@ -45,7 +42,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an F-bound polymorphic T-parametric classifier reification
     /// </summary>
-    /// <typeparam name="T">The parametric type</typeparam>    
+    /// <typeparam name="T">The parametric type</typeparam>
     public interface IClass<F,T> : IClassF<F>, IClassT<T>
         where F : IClass<F,T>, new()
     {

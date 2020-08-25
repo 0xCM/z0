@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct EncodedHexArchive : IEncodedHexArchive, IAppEventSink
+    public readonly struct EncodedHexArchive : IEncodedHexArchive<EncodedHexArchive>
     {
         public FolderPath ArchiveRoot {get;}
 
@@ -36,7 +36,7 @@ namespace Z0
             => root.Files(FileExtensions.HexLine, true).Array();
 
         public static IdentifiedCode[] read(FilePath src)
-            => EncodedHexReader.Service.Read(src).Where(x => x.IsNonEmpty).Array();
+            => EncodedHexReader.Service.Read(src).Where(x => x.IsNonEmpty);
 
         public static IdentifiedCode[] read(FolderPath root, ApiHostUri host)
         {

@@ -13,8 +13,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using Z0.Machines;
-
     /// <summary>
     /// Defines a state machine with minimal feature-set
     /// </summary>

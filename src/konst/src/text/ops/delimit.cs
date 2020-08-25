@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     partial class text
-    {    
+    {
         [Op, Closures(AllNumeric)]
         public static string delimit<T>(T[] src, string delimiter)
             where T : unmanaged
@@ -25,7 +25,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 seek(dst,i) = format(span(skip(input,i).ToString()),b);
 
-            return string.Concat(buffer);                   
+            return string.Concat(buffer);
         }
 
         [Op]

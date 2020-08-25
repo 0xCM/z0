@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+
     /// <summary>
     /// Characterizes type classifiers predicated on enumerations
     /// </summary>
@@ -15,7 +16,7 @@ namespace Z0
     {
         E Class {get;}
 
-        string Name 
+        string Name
             => Class.ToString().ToLower();
     }
 
@@ -42,6 +43,6 @@ namespace Z0
         where E : unmanaged, Enum
         where T : unmanaged
     {
-        
+
     }
 }

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -23,7 +23,7 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public static MachineTransition<E,S> ToFunction<E,S>(this IEnumerable<TransitionRule<E,S>> rules)
             => Fsm.transition(rules.Array());
- 
+
         /// <summary>
         /// Specifies whether an observer should be notified when a machine transitions from
         /// one state to a different state

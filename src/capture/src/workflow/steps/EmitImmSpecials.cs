@@ -33,7 +33,7 @@ namespace Z0
 
         readonly IApiCollector ApiCollector;
 
-        readonly IPartCaptureArchive CodeArchive;
+        readonly IPartCapturePaths CodeArchive;
 
         readonly IImmSpecializer Specializer;
 
@@ -49,7 +49,7 @@ namespace Z0
             Formatter = formatter;
             Decoder = decoder;
             ApiSet = api;
-            CodeArchive = Archives.Services.CaptureArchive(root);
+            CodeArchive = Archives.capture(root);
             Specializer = Capture.Services.ImmSpecializer(decoder);
             ApiCollector =  Identities.Services.Collector;
             ConnectReceivers(Broker);

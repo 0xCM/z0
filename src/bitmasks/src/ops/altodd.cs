@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
+    using static z;
 
     partial class BitMask
-    {                
+    {
         /// <summary>
         /// Defines an alternating bit pattern 01 01...01
         /// </summary>
@@ -28,7 +28,7 @@ namespace Z0
                 return generic<T>(U32_AltOdd);
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(U64_AltOdd);
-            else 
+            else
                 throw no<T>();
         }
 

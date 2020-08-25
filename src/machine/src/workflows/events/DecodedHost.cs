@@ -37,7 +37,7 @@ namespace Z0
             WorkerName = worker;
             Instructions = src;
             Flair = flair;
-            Description = text.format(Pattern, Instructions.TotalCount, Instructions.Host);
+            Description = text.format(Pattern, Instructions.TotalCount, Instructions.Uri);
         }
         public string Format()
             => text.format(PSx3, EventId, WorkerName, Description);

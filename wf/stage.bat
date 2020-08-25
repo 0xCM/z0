@@ -1,15 +1,15 @@
 echo off
 call wf\vars.cmd
 
-set FileName=z0.binlog
-set Src="%DevBuildRoot%\%FileName%"
-set Dst="%StageBuildRoot%\%FileName%"
-copy %Src% /A %Dst% /Y
+REM set FileName=z0.binlog
+REM set Src="%DevBuildRoot%\%FileName%"
+REM set Dst="%StageBuildRoot%\%FileName%"
+REM copy %Src% /A %Dst% /Y
 
-set FileName=z0.ProjectImports.zip
-set Src="%DevBuildRoot%\%FileName%"
-set Dst="%StageBuildRoot%\%FileName%"
-copy %Src% /A %Dst% /Y
+REM set FileName=z0.ProjectImports.zip
+REM set Src="%DevBuildRoot%\%FileName%"
+REM set Dst="%StageBuildRoot%\%FileName%"
+REM copy %Src% /A %Dst% /Y
 
 set SrcDir="%CodeDir%\data\content"
 set DstDir="%LogRoot%\refs"

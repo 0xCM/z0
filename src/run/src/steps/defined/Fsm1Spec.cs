@@ -3,11 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Collections.Generic;
 
-    using Z0.Machines;
 
     using static Fsm1Spec;
     using static Fsm1Spec.StateKinds;
@@ -17,7 +16,7 @@ namespace Z0
     public abstract class FsmSpec<E,S,O>
     {
         public virtual IEnumerable<TransitionRule<E,S>> TransRules {get;}
-        
+
         public virtual IEnumerable<OutputRule<E,S,O>> OutputRules{get;}
 
         public MachineTransition<E,S> TransFunc
@@ -37,7 +36,7 @@ namespace Z0
         }
 
         public enum OutputKinds : byte
-        {            
+        {
             O0, O1, O2, O3, O4, O5, O6, O7, O8, O9, O10
         }
 
@@ -64,6 +63,6 @@ namespace Z0
                 yield return (E1, S3, S4);
                 yield return (E1, S4, S5);
             }
-        }       
+        }
     }
 }

@@ -17,32 +17,32 @@ namespace Z0
         public WfCaptureState Wf {get;}
 
         readonly CorrelationToken Ct;
-        
+
         readonly ApiHostUri Host;
 
         readonly IApiHost Source;
-        
+
         public ExtractedCode[] Extractions;
-                    
+
         [MethodImpl(Inline)]
-        internal ExtractHostMembers(WfCaptureState state, IApiHost host, IPartCaptureArchive dst, CorrelationToken ct)
+        internal ExtractHostMembers(WfCaptureState state, IApiHost host, IPartCapturePaths dst, CorrelationToken ct)
         {
             Wf = state;
             Ct = ct;
-            
-            Host = host.Uri;            
+
+            Host = host.Uri;
             Source = host;
 
             Extractions = new ExtractedCode[0]{};
 
-            Wf.Created(StepName, Ct);            
+            Wf.Created(StepName, Ct);
         }
 
         public void Dispose()
         {
             Wf.Finished(StepName, Ct);
         }
-        
+
         public void Run()
         {
             Wf.Running(StepName, Ct);

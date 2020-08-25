@@ -10,19 +10,19 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;    
+    using static Konst;
     using static CaptureHostMembersStep;
 
     public readonly ref struct CaptureHostMembers
     {
         public WfCaptureState Wf {get;}
-        
-        readonly IPartCaptureArchive Target;
+
+        readonly IPartCapturePaths Target;
 
         public CorrelationToken Ct {get;}
 
         [MethodImpl(Inline)]
-        public CaptureHostMembers(WfCaptureState state, IPartCaptureArchive dst, CorrelationToken ct)
+        public CaptureHostMembers(WfCaptureState state, IPartCapturePaths dst, CorrelationToken ct)
         {
             Wf = state;
             Target = dst;
@@ -34,7 +34,7 @@ namespace Z0
         {
             Wf.Finished(StepName, Ct);
         }
-                
+
         public void Execute(IApiHost host)
         {
             try
@@ -43,12 +43,12 @@ namespace Z0
                 extract.Run();
 
                 using var emit = new EmitHostArtifacts(Wf, host.Uri, extract.Extractions, Target, Ct);
-                emit.Run();            
+                emit.Run();
             }
             catch(Exception e)
             {
                 Wf.Error(StepName,e, Ct);
             }
-        }      
+        }
     }
 }

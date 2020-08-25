@@ -8,9 +8,9 @@ namespace Z0
 
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
-    /// </summary>    
+    /// </summary>
     public enum BitLogicKind : ulong
-    {         
+    {
         /// <summary>
         /// The empty identity which, unfortunately conflicts with the inescapable defintion of 'False'
         /// </summary>
@@ -50,7 +50,7 @@ namespace Z0
         CNonImpl = Id.CNonImpl,
 
         /// <summary>
-        /// Classifes a logical binary operator left(a,b) := a = bv(1010)
+        /// Classifies a logical binary operator left(a,b) := a = bv(1010)
         /// </summary>
         /// <remarks>
         /// bv(1010) = id(RightNot)
@@ -125,7 +125,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        Nor = Id.Nor, 
+        Nor = Id.Nor,
 
         /// <summary>
         /// Classifies a binary operator xnor(a,b) := not(xor(a,b)) = bv(1001)
@@ -138,7 +138,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        Xnor = Id.Xnor, 
+        Xnor = Id.Xnor,
 
         /// <summary>
         /// Classifes a logical binary operator rnot(a,b) := not(b) = bv(0011)
@@ -151,7 +151,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        RNot = Id.RNot, 
+        RNot = Id.RNot,
 
         /// <summary>
         /// Classifies a logical binary operator imply(a,b) := or(a, not(b)) = bv(1011)
@@ -177,7 +177,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        LNot = Id.LNot, 
+        LNot = Id.LNot,
 
         /// <summary>
         /// Classifies a logical binary operator cimply(a,b) := or(not(a), b) = bv(1101)
@@ -203,8 +203,8 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        Nand = Id.Nand, 
-        
+        Nand = Id.Nand,
+
         /// <summary>
         /// Classifies a logical binary operator true(a,b) = bv(1111)
         /// </summary>
@@ -215,8 +215,8 @@ namespace Z0
 
         Not = Id.Not,
 
-        Select = Id.Select, 
+        Select = Id.Select,
 
         XorNot = Id.XorNot
-    }      
+    }
 }

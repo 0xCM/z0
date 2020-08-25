@@ -12,9 +12,6 @@ namespace Z0
     public delegate void HexReceiver<H>(H h)
         where H : unmanaged, IHexType;
 
-    public class HexCodeSink
-    {
-    }
 
     public readonly struct HexCodeSink<H> : IHexHandler<H>, IHexHandler
         where H:unmanaged, IHexType

@@ -49,7 +49,7 @@ namespace Z0.Asm
             var id = PartId.GMath;
             var paths = AppPaths.ForApp(PartId.Control);
             var capture = AsmCheck.CaptureArchive(paths.AppCaptureRoot);
-            var archive = Archives.Services.EncodedHexArchive(capture.CodeDir);
+            var archive = Archives.hex(capture.CodeDir);
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();
             check_unary_ops(direct);

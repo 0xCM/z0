@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-
-    public interface IBitMatrixWriter : IFileStreamWriter
+    public interface IBitMatrixWriter : IArchiveWriter
     {
         void Write<T>(in BitMatrix<T> src)
             where T: unmanaged;
@@ -22,5 +21,11 @@ namespace Z0
             where N: unmanaged, ITypeNat
             where T: unmanaged
             where K: struct, Enum;
+    }
+
+    public interface IBitMatrixWriter<H> : IBitMatrixWriter, IArchiveWriter<H>
+        where H : struct, IBitMatrixWriter<H>
+    {
+
     }
 }

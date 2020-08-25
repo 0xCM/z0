@@ -14,8 +14,8 @@ namespace Z0.Asm
     public abstract class t_asm<U> : UnitTest<U,CheckVectors,TCheckVectors>
         where U : t_asm<U>
     {
-        protected IPartCaptureArchive TargetArchive
-            => Archives.Services.CaptureArchive(UnitDataDir);
+        protected IPartCapturePaths TargetArchive
+            => Archives.capture(UnitDataDir);
 
         protected new IAsmContext Context;
 
@@ -34,11 +34,10 @@ namespace Z0.Asm
         protected BufferSeqId Main
             => BufferSeqId.Main;
 
-
         protected IMemberCodeWriter HexWriter([Caller] string caller = null)
         {
             var dstPath = TargetArchive.HexPath(FileName.Define(caller, FileExtensions.HexLine));
-            return Archives.Services.MemberCodeWriter(dstPath);
+            return Archives.writer<MemberCodeWriter>(dstPath);
         }
 
         protected IAsmTextWriter AsmWriter([Caller] string caller = null)
@@ -51,7 +50,7 @@ namespace Z0.Asm
         {
             var paths = AppPaths.ForApp(PartId.Control);
             var root = paths.AppCaptureRoot;
-            var capture = Archives.Services.CaptureArchive(root);
+            var capture = Archives.capture(root);
             return UriCodeReader.Service.Read(capture.HexPath(host)).ToArray();
         }
 

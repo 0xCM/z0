@@ -21,10 +21,10 @@ namespace Z0
 
         public CorrelationToken Ct {get;}
 
-        public IPartCaptureArchive Target {get;}
+        public IPartCapturePaths Target {get;}
 
         [MethodImpl(Inline)]
-        public CaptureHosts(WfCaptureState state, IApiHost[] hosts,  IPartCaptureArchive dst, CorrelationToken ct)
+        public CaptureHosts(WfCaptureState state, IApiHost[] hosts,  IPartCapturePaths dst, CorrelationToken ct)
         {
             Wf = state;
             Hosts = hosts;
@@ -35,10 +35,10 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Raise(new CapturingHosts(Hosts, Ct));            
-            
+            Wf.Raise(new CapturingHosts(Hosts, Ct));
+
             using var step = new ExtractMembers(Wf, Ct);
-            var extracts = step.Extract(Hosts);            
+            var extracts = step.Extract(Hosts);
             if(extracts.Length == 0)
                 return;
 
@@ -50,7 +50,7 @@ namespace Z0
             }
         }
 
-        void Store(ApiHostUri host, ExtractedCode[] extracts, IPartCaptureArchive dst)
+        void Store(ApiHostUri host, ExtractedCode[] extracts, IPartCapturePaths dst)
         {
             using var step = new EmitHostArtifacts(Wf, host, extracts, dst, Ct);
             step.Run();

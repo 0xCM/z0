@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -12,8 +12,8 @@ namespace Z0
     /// <summary>
     /// A host-specific capture archive
     /// </summary>
-    public readonly struct HostCaptureArchive : IHostCaptureArchive
-    {                      
+    public readonly struct HostCaptureArchive : IHostCaptureArchive<HostCaptureArchive>
+    {
         public ApiHostUri Host {get;}
 
         public FolderPath ArchiveRoot {get;}
@@ -23,10 +23,10 @@ namespace Z0
             => new HostCaptureArchive(root, host);
 
         [MethodImpl(Inline)]
-        public HostCaptureArchive(FolderPath root, ApiHostUri host)
+        internal HostCaptureArchive(FolderPath root, ApiHostUri host)
         {
             Host = host;
             ArchiveRoot = root;
-        }    
+        }
     }
 }

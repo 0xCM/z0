@@ -17,12 +17,12 @@ namespace Z0
         public WfCaptureState Wf {get;}
 
         readonly CorrelationToken Ct;
-        
+
         readonly ExtractedCode[] Extractions;
 
         readonly ApiHostUri Source;
 
-        readonly IHostCaptureArchive Target;       
+        readonly IHostCapturePaths Target;
 
         readonly IExtractionParser Parser;
 
@@ -33,10 +33,10 @@ namespace Z0
         readonly FilePath ParsedPath;
 
         readonly FilePath HexPath;
-        
+
         readonly FilePath AsmPath;
 
-        public EmitHostArtifacts(WfCaptureState wf, ApiHostUri src, ExtractedCode[] extracts, IPartCaptureArchive dst, CorrelationToken ct)    
+        public EmitHostArtifacts(WfCaptureState wf, ApiHostUri src, ExtractedCode[] extracts, IPartCapturePaths dst, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
@@ -49,20 +49,20 @@ namespace Z0
             AsmPath = Target.AsmPath;
             Parsed = new ParsedExtraction[0]{};
             Parser = Extractors.Services.ExtractParser(Extractors.DefaultBufferLength);
-            Wf.Created(StepName, Ct);            
+            Wf.Created(StepName, Ct);
         }
 
         public void Run()
         {
             Wf.Running(StepName, Ct);
-            
+
             try
             {
                 SaveExtracts();
                 Parse();
                 SaveParseReport();
-                SaveHex();        
-                Decode();            
+                SaveHex();
+                Decode();
             }
             catch(Exception e)
             {
@@ -79,14 +79,14 @@ namespace Z0
         }
 
         void SaveExtracts()
-        {            
+        {
             using var step = new EmitExtractReport(Wf, Source, Extractions, ExtractPath, Ct);
             step.Run();
         }
-        
+
         void Parse()
         {
-            var result = Parser.Parse(Extractions);                    
+            var result = Parser.Parse(Extractions);
             for(var i = 0; i<result.Failed.Length; i++)
                 Wf.Raise(ExtractParseFailed.create(result.Failed[i]));
 
@@ -97,16 +97,16 @@ namespace Z0
 
             Wf.Raise(new ExtractsParsed(StepName, Source, Parsed, Ct));
         }
-        
+
         void SaveParseReport()
         {
-            using var step = new EmitParsedReport(Wf, Source, Parsed, ParsedPath, Ct);            
+            using var step = new EmitParsedReport(Wf, Source, Parsed, ParsedPath, Ct);
             step.Run();
         }
 
         void SaveHex()
         {
-            var hex = IdentifiedCodeWriter.save(Source, Parsed, HexPath);                
+            var hex = IdentifiedCodeWriter.save(Source, Parsed, HexPath);
             Wf.Raise(new HexCodeSaved(StepName, Source, hex, ParsedPath, Ct));
         }
 
@@ -116,10 +116,10 @@ namespace Z0
             var decoded = step.Run(Source,Parsed);
             if(decoded.Length != 0)
             {
-                step.SaveDecoded(decoded, AsmPath);                
-                
+                step.SaveDecoded(decoded, AsmPath);
+
                 using var match = new MatchAddresses(Wf, Extractions, decoded, Ct);
-                match.Run();                
+                match.Run();
             }
         }
     }

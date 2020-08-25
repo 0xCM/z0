@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static DataFlow<T[],BinaryCode> flow<T>(T[] src, BinaryCode dst)
+        public static WfDataFlow<T[],BinaryCode> flow<T>(T[] src, BinaryCode dst)
             where T : struct
                 => (src,dst);
 
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="dst">The target sequence</param>
         [MethodImpl(Inline), Op]
-        public static DataFlow<string[],StringTableCells> flow(string[] src, ref StringTableCells dst)
+        public static WfDataFlow<string[],StringTableCells> flow(string[] src, ref StringTableCells dst)
         {
             var count = src.Length;
             ref var target = ref first(dst.Edit);

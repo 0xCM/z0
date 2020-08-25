@@ -11,8 +11,8 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct IdentifiedCodeWriter : IIdentifiedCodeWriter
-    {        
+    public readonly struct IdentifiedCodeWriter : IIdentifiedCodeWriter<IdentifiedCodeWriter>
+    {
         readonly StreamWriter StreamOut;
 
         public FilePath TargetPath {get;}
@@ -21,13 +21,13 @@ namespace Z0
         public IdentifiedCodeWriter(FilePath path)
         {
             TargetPath = path;
-            StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
+            StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath, false);
         }
 
-        public void Write(IdentifiedCode src, int idpad)
+        public void Write(in IdentifiedCode src, int idpad)
             => StreamOut.WriteLine(src.Format(idpad));
 
-        public void WriterLine(IdentifiedCode src)
+        public void WriterLine(in IdentifiedCode src)
             => StreamOut.WriteLine(src.Format(0));
 
         public void WriteLines(IdentifiedCode[] src)
@@ -36,8 +36,8 @@ namespace Z0
             for(var i=0; i< src.Length; i++)
                 Write(src[i], uripad);
             StreamOut.Flush();
-        }        
-        
+        }
+
         public void Dispose()
         {
             StreamOut.Flush();
@@ -50,6 +50,9 @@ namespace Z0
             var data = src.Map(x => new IdentifiedCode(x.Address, x.OpUri, x.Encoded.Encoded));
             writer.WriteLines(data);
             return data;
-        }                
+        }
+
+        public void Write(in IdentifiedCode code)
+            => Write(code,60);
     }
 }

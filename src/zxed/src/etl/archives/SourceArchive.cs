@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    public readonly struct XedSourceArchive : IPartFileArchive
+    public readonly struct XedSourceArchive : IPartFilePaths
     {
         public static XedSourceArchive Create(FolderPath root)
             => new XedSourceArchive(root);
@@ -21,11 +21,11 @@ namespace Z0
         }
 
         public FolderPath ArchiveRoot {get;}
-        
-        public IEnumerable<FilePath> Files  
+
+        public IEnumerable<FilePath> Files
             => ArchiveRoot.Files(FileExtensions.Txt,true);
 
-        public int FileCount 
+        public int FileCount
             => Files.Count();
 
         bool ContainsMarker(FilePath file, string marker)
@@ -50,7 +50,7 @@ namespace Z0
             {
                 var line = reader.ReadLine();
                 if(
-                    line.Contains(XedSourceMarkers.FUNC_MARKER) && 
+                    line.Contains(XedSourceMarkers.FUNC_MARKER) &&
                     !line.Contains(XedSourceMarkers.INSTRUCTION_SEQ)
                     )
                     return true;
@@ -63,12 +63,12 @@ namespace Z0
 
         public IEnumerable<FilePath> InstructionFiles
             => Files.Where(DefinesInstructions);
-        
+
         public IEnumerable<FilePath> FunctionFiles
             => Files.Where(DefinesFunctions);
 
         public IEnumerable<FilePath> EnumFiles
             => Files.Where(f => f.FileName.EndsWith("enum"));
     }
- 
+
 }

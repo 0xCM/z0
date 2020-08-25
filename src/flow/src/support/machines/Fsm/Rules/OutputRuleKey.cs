@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
-    /// Defines a key for efficient/predicatable output rule indexing/lookup
+    /// Defines a key for output rule indexing/lookup
     /// </summary>
     /// <typeparam name="S">The state type</typeparam>
     public readonly struct OutputRuleKey<E,S> : IRuleKey<E,S>
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator OutputRuleKey<E,S>((E trigger, S source) x)
             => new OutputRuleKey<E,S>(x.trigger, x.source);
-                
+
         [MethodImpl(Inline)]
         public OutputRuleKey(E trigger, S target)
         {
@@ -36,7 +36,7 @@ namespace Z0
             this.Hash = HashCode.Combine(trigger,target);
         }
 
-        public override string ToString() 
+        public override string ToString()
             => $"({Trigger}, {Source})";
 
     }

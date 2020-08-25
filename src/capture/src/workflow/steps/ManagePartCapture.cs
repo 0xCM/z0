@@ -47,7 +47,7 @@ namespace Z0
         public void Run()
         {
             Clear(Config);
-            Capture(Archives.Services.CaptureArchive(Config.TargetArchive.Root));
+            Capture(Archives.capture(Config.TargetArchive.Root));
         }
 
         public void Dispose()
@@ -55,7 +55,7 @@ namespace Z0
             Wf.Finished(StepName);
         }
 
-        void Capture(IPartCaptureArchive dst)
+        void Capture(IPartCapturePaths dst)
         {
             var count = Catalogs.Length;
             for(var i=0; i<count; i++)
@@ -72,7 +72,7 @@ namespace Z0
 
             try
             {
-                var dst = Archives.Services.CaptureArchive(Config.TargetArchive.Root);
+                var dst = Archives.capture(Config.TargetArchive.Root);
                 using var step = new CaptureHosts(State, Hosts, dst, Ct);
                 step.Run();
 
@@ -83,7 +83,7 @@ namespace Z0
            }
         }
 
-        void CapturePart(IPartCatalog src, IPartCaptureArchive dst)
+        void CapturePart(IPartCatalog src, IPartCapturePaths dst)
         {
             if(src.IsNonEmpty)
             {
@@ -93,7 +93,7 @@ namespace Z0
             }
         }
 
-        void CaptureHosts(IPartCatalog src, IPartCaptureArchive dst)
+        void CaptureHosts(IPartCatalog src, IPartCapturePaths dst)
         {
             var hosts = span(src.Operations);
             var count = hosts.Length;

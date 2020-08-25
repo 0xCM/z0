@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Linq;
     using System.IO;
@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Konst;
 
     public readonly struct HostAsmArchiver : IHostAsmArchiver
-    {                
+    {
         public PartId Owner => Host.Owner;
 
         public ApiHostUri Host {get;}
@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         readonly ICilFunctionFormatter CilFormatter;
 
-        readonly IHostCaptureArchive HostArchive;
+        readonly IHostCapturePaths HostArchive;
 
         [MethodImpl(Inline)]
         public HostAsmArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath root)
@@ -34,20 +34,20 @@ namespace Z0.Asm
             HostArchive = HostCaptureArchive.create(root, host);
             CilFormatter =  AsmCore.Services.CilFormatter();
         }
-        
+
         public Option<FilePath> SaveAsm(AsmRoutine[] src, bool append)
-        {            
+        {
             try
             {
                 var dst = HostArchive.AsmPath;
-                using var writer = new StreamWriter(dst.FullPath, append);                
+                using var writer = new StreamWriter(dst.FullPath, append);
                 for(var i=0; i<src.Length; i++)
                 {
                     ref readonly var f = ref src[i];
                     if(f.IsNonEmpty)
                         writer.Write(AsmFormatter.FormatFunction(f));
                 }
-                return dst;                
+                return dst;
             }
             catch(Exception e)
             {

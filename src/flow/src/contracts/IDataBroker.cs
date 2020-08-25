@@ -6,12 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IDataBroker
-    {
-
-    }
-
-    public interface IDataBroker<K,T> : IDataBroker
+    public interface IDataBroker<K,T>
         where K : unmanaged, Enum
     {
         ref readonly WfDataHandler<T> Get(K key);
@@ -23,7 +18,7 @@ namespace Z0
         ref WfDataHandler<T> this[K key] {get;}
     }
 
-    public interface IDataBroker<K,C,T> : IDataBroker
+    public interface IDataBroker<K,C,T>
         where K : unmanaged, Enum
     {
         ref readonly DataHandler<C,T> Get(K key);

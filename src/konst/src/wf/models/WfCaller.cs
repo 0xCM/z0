@@ -19,32 +19,32 @@ namespace Z0
 
         FileLine
     }
-    
+
     /// <summary>
     /// Captures invocation origin details
     /// </summary>
     [Table]
-    public readonly struct WfCaller : ITextual, ITable<WfCallerField,WfCaller>
-    {        
+    public struct WfCaller : ITextual, ITable<WfCallerField,WfCaller>
+    {
         /// <summary>
         /// The part from which the call originated
         /// </summary>
-        public readonly PartId Part;
-        
+        public PartId Part;
+
         /// <summary>
         /// The originator name
         /// </summary>
-        public readonly string Name;
-        
+        public string Name;
+
         /// <summary>
         /// The name of the file from which the invocation occurred
         /// </summary>
-        public readonly FS.FilePath File; 
+        public FS.FilePath File;
 
         /// <summary>
-        /// The file-relative invocation line number 
+        /// The file-relative invocation line number
         /// </summary>
-        public readonly uint FileLine;
+        public uint FileLine;
 
         [MethodImpl(Inline)]
         public WfCaller(PartId part, string name, FS.FilePath file, int line)

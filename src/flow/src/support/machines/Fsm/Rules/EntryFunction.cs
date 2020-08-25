@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -21,8 +21,8 @@ namespace Z0.Machines
         public EntryFunction(IEnumerable<IFsmActionRule<A>> rules)
         {
             RuleIndex = rules.Select(rule => (rule.RuleId, rule)).ToDictionary();
-        }        
-        
+        }
+
         public Option<A> Eval(S source)
             => Rule(Fsm.entryKey(source)).TryMap(r => r.Action);
 

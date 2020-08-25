@@ -36,8 +36,8 @@ namespace Z0
         {
             var members = locator.Locate(api.FindHost(host).Require());
             var idx = index(members);
-            var archive =  Archives.Services.CaptureArchive(root);
-            var paths =   HostCaptureArchive.create(root, host);
+            var archive =  Archives.capture(root);
+            var paths =  HostCaptureArchive.create(root, host);
             var code = EncodedHexReader.Service.Read(paths.HexPath);
             var opIndex =  UriHexQuery.Service.CreateIndex(code);
             return ApiCodeIndex.create(idx, opIndex);

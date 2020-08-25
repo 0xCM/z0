@@ -18,7 +18,7 @@ namespace Z0
                 => new ArchivedTable<F,T>(location);
 
         [MethodImpl(Inline)]
-        public static DataFlow<TableGrid<F,T>, ArchivedTable<F,T>> archive<F,T,M,K>(TableGrid<F,T> src, TableArchive dst, M m = default,  F f = default)
+        public static WfDataFlow<TableGrid<F,T>, ArchivedTable<F,T>> archive<F,T,M,K>(TableGrid<F,T> src, TableArchive dst, M m = default,  F f = default)
             where T : struct, ITable<F,T>
             where F : unmanaged, Enum
             where M : struct, IDataModel<M,K>
@@ -28,7 +28,7 @@ namespace Z0
             return (src, archived<F,T>(path));
         }
 
-        public static DataFlow<TableGrid<F,T>, ArchivedTable<F,T>> archive<F,T,M,K>(T[] src, TableArchive dst, M m = default,  F f = default)
+        public static WfDataFlow<TableGrid<F,T>, ArchivedTable<F,T>> archive<F,T,M,K>(T[] src, TableArchive dst, M m = default,  F f = default)
             where T : struct, ITable<F,T>
             where F : unmanaged, Enum
             where M : struct, IDataModel<M,K>
@@ -52,7 +52,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static DataFlow<TableGrid<F,T>, ArchivedTable<F,T>> archive<F,T>(TableGrid<F,T> src, FilePath dst)
+        public static WfDataFlow<TableGrid<F,T>, ArchivedTable<F,T>> archive<F,T>(TableGrid<F,T> src, FilePath dst)
             where T : struct, ITable<F,T>
             where F : unmanaged, Enum
                 => (src, Flow.archived<F,T>(dst));

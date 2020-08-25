@@ -11,8 +11,8 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct MemberCodeWriter : IMemberCodeWriter
-    {        
+    public readonly struct MemberCodeWriter : IMemberCodeWriter<MemberCodeWriter>
+    {
         /// <summary>
         /// The writer's target path
         /// </summary>
@@ -39,10 +39,10 @@ namespace Z0
         {
             var idpad = src.Max(x => x.OpUri.UriText.Length) + 1;
             for(var i=0; i< src.Length; i++)
-                Write(src[i], idpad);                        
+                Write(src[i], idpad);
             StreamOut.Flush();
         }
- 
+
         public void Dispose()
         {
             StreamOut.Flush();

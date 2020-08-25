@@ -9,16 +9,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
 
-    using static Konst;    
-    
+    using static Konst;
+
     using static Memories;
 
-    public readonly struct BitMatrixWriter : IBitMatrixWriter
+    public readonly struct BitMatrixWriter : IBitMatrixWriter<BitMatrixWriter>
     {
         public FilePath TargetPath {get;}
 
         readonly StreamWriter Stream;
-        
+
         [MethodImpl(Inline)]
         internal BitMatrixWriter(FilePath dst)
         {
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static IBitMatrixWriter Share(StreamWriter dst)
             => new BitMatrixWriter(dst);
-        
+
         [MethodImpl(Inline)]
         BitMatrixWriter(StreamWriter dst)
         {
@@ -44,7 +44,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Write<T>(in BitMatrix<T> src) 
+        public void Write<T>(in BitMatrix<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -58,7 +58,7 @@ namespace Z0
             else
                 throw Unsupported.define<T>();
         }
- 
+
         public void Write<M,N,T>(in BitMatrix<M,N,T> src)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
@@ -126,6 +126,5 @@ namespace Z0
         void Write<T>(BitMatrix<T> src, N64 order)
             where T : unmanaged
                 => Write(BitMatrix.load<N64,N64,ulong>(src.Data.AsUInt64()));
-
     }
 }

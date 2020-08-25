@@ -38,7 +38,7 @@ namespace Z0.Asm
         /// </summary>
         void Clear(Action<FilePath> deleted, params PartId[] parts)
         {
-            var archive = Archives.Services.CaptureArchive(Config.TargetArchive.Root);
+            var archive = Archives.capture(Config.TargetArchive.Root);
             foreach(var part in parts)
             {
                 foreach(var file in archive.ExtractDir.Files(part))

@@ -37,7 +37,7 @@ namespace Z0
             Ct = ct;
             SourceDir = context.AppPaths.AppCaptureRoot;
             TargetDir = context.AppPaths.ResourceRoot + FolderName.Define(ProjectName);
-            Archive = Archives.Services.EncodedHexArchive(SourceDir);
+            Archive = Archives.hex(SourceDir);
             Wf.Created(StepName,Ct);
         }
 

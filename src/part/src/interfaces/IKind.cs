@@ -9,6 +9,6 @@ namespace Z0
     /// </summary>
     public interface IKind : IClassifier
     {
-        
+
     }
 }

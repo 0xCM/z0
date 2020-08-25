@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         readonly byte BufferCount;
 
-        readonly IPartCaptureArchive CodeArchive;
+        readonly IPartCapturePaths CodeArchive;
 
         readonly IApiSet ApiSet;
 
@@ -31,7 +31,7 @@ namespace Z0.Asm
             BufferSize = buffersize;
             Context = context;
             Dispatcher = Evaluate.dispatcher(random, context, buffersize);
-            CodeArchive = Archives.Services.CaptureArchive(root);
+            CodeArchive = Archives.capture(root);
             ApiSet = context;
         }
 

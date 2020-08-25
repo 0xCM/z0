@@ -11,11 +11,10 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Threading;
     using System.Threading.Tasks;
-    using Z0.Machines;
 
     public readonly partial struct Fsm
     {
-        static int MachineCounter = 0;        
+        static int MachineCounter = 0;
 
         /// <summary>
         /// Defines a primal state machine
@@ -73,7 +72,7 @@ namespace Z0
         /// <typeparam name="T">The primal FSM type</typeparam>
         static IEnumerable<FsmStats> concurrent<T>(PrimalFsmSpec<T> spec, Span<ulong> seeds, Span<ulong> indices)
             where T : unmanaged
-        {            
+        {
             var stats = new ConcurrentBag<FsmStats>();
             var tasks = new Task[seeds.Length];
             for(var i=0; i< tasks.Length; i++)
@@ -81,7 +80,7 @@ namespace Z0
                 var machine = create(spec, seeds[i],indices[i]);
                 tasks[i] = Fsm.run(machine).ContinueWith(t => t.Result.OnSome(s => stats.Add(s)));
             }
-                
+
             Task.WaitAll(tasks);
             return stats;
         }
@@ -98,22 +97,22 @@ namespace Z0
         {
             var stats = new ConcurrentBag<FsmStats>();
             for(var i=0; i< seeds.Length; i++)
-            {             
+            {
                var machine = create(spec, seeds[i], indices[i]);
                var result = Fsm.run(machine).Result;
                result.OnSome(s => stats.Add(s));
-            }            
+            }
             return stats;
         }
 
-        static MachineTransition<T,T> transition<T>(IFsmContext context, PrimalFsmSpec<T> spec)        
+        static MachineTransition<T,T> transition<T>(IFsmContext context, PrimalFsmSpec<T> spec)
             where T : unmanaged
-        {            
+        {
             var sources = gmath.range<T>(spec.StateCount).ToArray();
             var random = context.Random;
             var rules = new List<TransitionRule<T,T>>();
             foreach(var source in sources)
-            {                                
+            {
                 var evss = random.Next<T>(spec.MinEventSamples, spec.MaxEventSamples);
                 var targets = from t in random.Distinct(spec.StateCount, evss) where gmath.neq(t,source) select t;
                 var events = random.Distinct(spec.EventCount, evss);
@@ -123,7 +122,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Defines a single state transition rule of the form (trigger : E, source : S) -> target : S 
+        /// Defines a single state transition rule of the form (trigger : E, source : S) -> target : S
         /// </summary>
         /// <param name="trigger">The incoming event</param>
         /// <param name="source">The source state</param>
@@ -131,10 +130,10 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         public static TransitionRule<E,S> transition<E,S>(E trigger, S source, S target)
-            => new TransitionRule<E, S>(trigger,source,target);            
+            => new TransitionRule<E, S>(trigger,source,target);
 
         /// <summary>
-        /// Defines a machine transition function (trigger : E, source: S) -> target : S 
+        /// Defines a machine transition function (trigger : E, source: S) -> target : S
         /// that determines machine transition behavior
         /// </summary>
         /// <param name="rules">The rules that comprise the function</param>
@@ -156,7 +155,7 @@ namespace Z0
             => (trigger, source, output);
 
         /// <summary>
-        /// Defines a machine transition function (trigger : E, source: S) -> target : S 
+        /// Defines a machine transition function (trigger : E, source: S) -> target : S
         /// that determines machine transition behavior
         /// </summary>
         /// <param name="rules"></param>
@@ -173,7 +172,7 @@ namespace Z0
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The action type</typeparam>
         public static ActionRule<S,A> entry<S,A>(S source, A action)
-            => new ActionRule<S,A>(source,action);            
+            => new ActionRule<S,A>(source,action);
 
         /// <summary>
         /// Defines an entry action function
@@ -192,7 +191,7 @@ namespace Z0
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The action type</typeparam>
         public static ActionRule<S,A> exit<S,A>(S source, A action)
-            => new ActionRule<S,A>(source,action);            
+            => new ActionRule<S,A>(source,action);
 
         /// <summary>
         /// Defines an exit action function
@@ -223,7 +222,7 @@ namespace Z0
         /// <typeparam name="S">The state type</typeparam>
         public static OutputRuleKey<E,S> outKey<E,S>(E trigger, S source)
             => (trigger,source);
-    
+
         /// <summary>
         /// Defines an entry rule key
         /// </summary>
@@ -270,7 +269,7 @@ namespace Z0
             =>  new Fsm<E,S,A>(id, context, s0, sZ, t, entry,exit);
 
         /// <summary>
-        /// Creates a default machine observer 
+        /// Creates a default machine observer
         /// </summary>
         /// <param name="fsm">The machine under observation</param>
         /// <param name="trace">Whether to emit trace messages</param>
@@ -278,7 +277,7 @@ namespace Z0
         /// <typeparam name="S">The state type</typeparam>
         public static FsmObserver<E,S> observer<E,S>(Fsm<E,S> fsm, ObserverTrace? tracing = null)
             => new FsmObserver<E, S>(fsm, tracing);
- 
+
         /// <summary>
         /// Creates a machine context
         /// </summary>

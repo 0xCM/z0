@@ -53,6 +53,7 @@ namespace Z0
             => ArchiveRoot + FolderName.Define("tools") + FolderName.Define(tool) + FolderName.Define("processed");
 
 
+
         FilePath ResPack
             => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
 
@@ -117,6 +118,22 @@ namespace Z0
 
         void Running(WfStepId step, [File] string actor = null)
             => Raise(Flow.running(Path.GetFileNameWithoutExtension(actor), step, Ct));
+
+        void Created<T>(IWfStep<T> step)
+            where T: struct,  IWfStep<T>
+                => Created(step.Id);
+
+        void Running<T>(IWfStep<T> step)
+            where T: struct,  IWfStep<T>
+                => Running(step.Id);
+
+        void Ran<T>(IWfStep<T> step)
+            where T: struct,  IWfStep<T>
+                => Ran(step.Id);
+
+        void Finished<T>(IWfStep<T> step)
+            where T: struct,  IWfStep<T>
+                => Finished(step.Id);
 
         void Ran(WfStepId step, [File] string actor = null)
             => Raise(Flow.ran(Path.GetFileNameWithoutExtension(actor), step, Ct));

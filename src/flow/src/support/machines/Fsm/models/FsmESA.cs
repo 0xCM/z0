@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {
     using System;
 
@@ -14,11 +14,11 @@ namespace Z0.Machines
    /// <typeparam name="A">The action type</typeparam>
     public class Fsm<E,S,A> : Fsm<E,S>
     {
-        internal Fsm(string Id, IFsmContext context, S GroundState, S EndState, 
+        internal Fsm(string Id, IFsmContext context, S GroundState, S EndState,
                 MachineTransition<E,S> Transition, EntryFunction<S,A> Entry, ExitFunction<S,A> Exit)
             : base(Id, context, GroundState, EndState, Transition)
         {
-            this.EntryFunc = Entry;   
+            this.EntryFunc = Entry;
             this.ExitFunc = Exit;
         }
 
@@ -41,7 +41,7 @@ namespace Z0.Machines
         /// The exit action
         /// </summary>
         public FsmFx.StateExit<S,A> ExitAction;
-        
+
         protected override void OnEntry(S s)
         {
             EntryFunc.Eval(s).OnSome(action => EntryAction?.Invoke(s, action));

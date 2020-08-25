@@ -18,6 +18,26 @@ namespace Z0
     [ApiHost]
     public ref struct Control
     {
+        public static Engine engine(WfCaptureState wf, CorrelationToken ct)
+        {
+            wf.Initializing(Machines.StepName, ct);
+            var step = default(Engine);
+            try
+            {
+                step = new Engine(wf, ct);
+                var client = step as IMachineEngine;
+                client.Connect();
+            }
+            catch(Exception e)
+            {
+                wf.Error(Machines.StepName, e, ct);
+                throw;
+            }
+
+            wf.Initialized(Machines.StepName, ct);
+            return step;
+        }
+
         public static void run(IAppContext context, params string[] args)
         {
             try
@@ -46,8 +66,6 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        WorkflowStepConfig StepConfig;
-
         readonly CorrelationToken Ct;
 
         public Control(IWfContext wf)
@@ -57,7 +75,7 @@ namespace Z0
             Context = wf.ContextRoot;
             Asm = WfBuilder.asm(Context);
             State = new WfCaptureState(Wf, Asm, wf.Config, wf.Ct);
-            StepConfig = WorkflowStepConfig.load(Wf);
+
         }
 
         public void Run()
@@ -65,7 +83,7 @@ namespace Z0
             Run(default(CaptureClientStep));
             Run(default(EmitDatasetsStep));
             Run(default(ProcessPartFilesStep));
-            Run(default(RunProcessorsStep));
+            Run(default(Machines));
         }
 
         public void Dispose()
@@ -95,12 +113,12 @@ namespace Z0
             Wf.RanT(ActorName, kind, Ct);
         }
 
-        void Run(RunProcessorsStep kind)
+        void Run(Machines kind)
         {
             Wf.RunningT(ActorName, kind, Ct);
             try
             {
-                using var step = Engine.create(State, Ct);
+                using var step = Control.engine(State, Ct);
                 step.Run();
             }
             catch(Exception e)
