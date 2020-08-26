@@ -13,18 +13,14 @@ namespace Z0
     {
         readonly BufferAllocation BufferAlloc;
 
-        public readonly BufferTokens Buffers {get;}
+        public readonly BufferTokens Tokens {get;}
 
         [MethodImpl(Inline)]
-        public static IBufferedChecker Create(int length, byte count)
-            => new BufferedChecker(length, count);
-
-        [MethodImpl(Inline)]
-        public BufferedChecker(int length, byte count)
+        public BufferedChecker(uint length, byte count)
         {
-            Buffers = Z0.Buffers.sequence(length, count, out BufferAlloc).Tokenize();            
+            Tokens = Buffers.sequence(length, count, out BufferAlloc).Tokenize();
         }
-         
+
         public void Dispose()
             => BufferAlloc.Dispose();
     }

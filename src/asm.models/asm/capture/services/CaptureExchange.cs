@@ -21,18 +21,8 @@ namespace Z0.Asm
         /// </summary>
         public readonly ICaptureCore Service;
 
-        /// <summary>
-        /// Allocates buffers and creates an exchange over the allocation
-        /// </summary>
-        /// <param name="context">The source context</param>
-        public static CaptureExchange create(IAsmContext context)
-            => new CaptureExchange(context.CaptureCore, new byte[context.DefaultBufferLength]);
-
         [MethodImpl(Inline)]
-        public static CaptureExchange create(ICaptureCore service, Span<byte> capture, Span<byte> state = default)
-            => new CaptureExchange(service, capture);
-
-        internal CaptureExchange(ICaptureCore service, Span<byte> capture)
+        public CaptureExchange(ICaptureCore service, Span<byte> capture)
         {
             TargetBuffer = capture;
             Service = service;

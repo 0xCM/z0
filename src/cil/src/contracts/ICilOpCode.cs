@@ -5,23 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata;
 
     using static Konst;
 
-    public readonly struct ToolIndexer
+    public interface ICilOpCode
     {
-        public IWfShell Wf {get;}
+        ILOpCode Id {get;}
 
-        public ToolIndexer(IWfShell wf)
-        {
-            Wf = wf;
-        }
+    }
 
-        public ToolIndex create()
-        {
+    public interface ICilOpCode<K> : ICilOpCode
+        where K : unmanaged, ICilOpCode<K>
+    {
 
-            return default;
-        }
     }
 }

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
@@ -21,7 +21,7 @@ namespace Z0
     /// </summary>
     public readonly struct asci16 : IAsciSequence<A,N>
     {
-        internal readonly S Storage;        
+        public readonly S Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator A(string src)
@@ -70,7 +70,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => !Equals(Null);
         }
-        
+
         public A Zero
         {
             [MethodImpl(Inline)]
@@ -123,8 +123,8 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => asci.decode(this);
-        } 
-        
+        }
+
         public string Text
         {
             [MethodImpl(Inline)]
@@ -134,7 +134,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(A src)
             => Storage.Equals(src.Storage);
- 
+
         [MethodImpl(Inline)]
         public void CopyTo(Span<byte> dst)
             => asci.copy(this,dst);
@@ -152,19 +152,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Text;
- 
+
         public override string ToString()
             => Text;
 
-        public const int Size = 16;            
+        public const int Size = 16;
 
-        public static A Spaced 
+        public static A Spaced
         {
             [MethodImpl(Inline)]
             get => asci.init(n);
         }
-        
-        public static A Null 
+
+        public static A Null
         {
             [MethodImpl(Inline)]
             get => new A(default(S));

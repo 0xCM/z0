@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         readonly BufferAllocation BufferAlloc;
 
-        public BufferTokens Buffers {get;}
+        public BufferTokens Tokens {get;}
 
         public ICaptureExchange CaptureExchange {get;}
 
@@ -24,14 +24,14 @@ namespace Z0.Asm
         public AsmTester(IAsmContext context)
         {
             Context = context;
-            Buffers = Z0.Buffers.sequence(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
-            CaptureExchange = CaptureExchangeProxy.create(Context.CaptureCore, Buffers[Aux3]);
+            Tokens = Z0.Buffers.sequence(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
+            CaptureExchange = CaptureExchangeProxy.create(Context.CaptureCore, Tokens[Aux3]);
         }
 
         public ref readonly BufferToken this[BufferSeqId id]
         {
             [MethodImpl(Inline)]
-            get => ref Buffers[id];
+            get => ref Tokens[id];
         }
 
         public void Dispose()

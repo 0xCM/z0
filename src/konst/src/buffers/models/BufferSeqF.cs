@@ -12,7 +12,7 @@ namespace Z0
     using static z;
 
     public readonly ref struct BufferSeq<F>
-        where F : unmanaged, IFixed    
+        where F : unmanaged, IFixed
     {
         readonly Span<F> View;
 
@@ -22,17 +22,17 @@ namespace Z0
 
         readonly byte BufferCount;
 
-        readonly int BufferSize;
+        readonly uint BufferSize;
 
-        readonly int TotalSize;
+        readonly uint TotalSize;
 
         public unsafe BufferSeq(byte count)
         {
             BufferCount = count;
-            BufferSize = default(F).ByteCount;
+            BufferSize = (uint)default(F).ByteCount;
             TotalSize = BufferCount*BufferSize;
             Buffered = Buffers.native(TotalSize);
-            View = new Span<F>(Buffered.Handle.ToPointer(), TotalSize);
+            View = new Span<F>(Buffered.Handle.ToPointer(), (int)TotalSize);
             Tokens = Buffers.tokenize<F>(Buffered.Handle, BufferSize, BufferCount);
         }
 
@@ -50,19 +50,19 @@ namespace Z0
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public ref F Buffer(byte index)    
+        public ref F Buffer(byte index)
             => ref seek(Head, index);
 
         /// <summary>
-        /// Presents an index-identifed buffer as a span of bytes
+        /// Presents an index-identified buffer as a span of bytes
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
         public unsafe Span<byte> Bytes(byte index)
-            => new Span<byte>(Token(index).Handle.ToPointer(), BufferSize);
+            => new Span<byte>(Token(index).Handle.ToPointer(), (int)BufferSize);
 
         /// <summary>
-        /// Presents an index-identifed buffer as a span of bytes
+        /// Presents an index-identified buffer as a span of bytes
         /// </summary>
         /// <param name="index">The buffer index</param>
         public ref readonly BufferToken<F> this[byte index]
@@ -72,7 +72,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Retrieves an index-identifed token
+        /// Retrieves an index-identified token
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
@@ -89,20 +89,8 @@ namespace Z0
             return Bytes(index);
         }
 
-        // /// <summary>
-        // /// Covers a token-identified buffer with a span over cells of unmanaged type
-        // /// </summary>
-        // /// <param name="index">The buffer index</param>
-        // [MethodImpl(Inline)]
-        // public unsafe Span<T> Cells<T>(byte index)
-        //     where T : unmanaged          
-        //     {      
-        //      z.cover<T>(Token(index).Address, (BufferSize/);
-        //       return z.cover(, BufferSize);
-        //     }
-
         /// <summary>
-        /// Fills a token-identifed buffer with content from a source span and returns the covering span
+        /// Fills a token-identified buffer with content from a source span and returns the covering span
         /// </summary>
         /// <param name="index">The buffer index</param>
         /// <param name="src">The source content</param>

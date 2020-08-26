@@ -24,7 +24,7 @@ namespace Z0.Asm
         CaptureExchange Context
         {
             [MethodImpl(Inline)]
-            get => CaptureExchange.create(Service, Buffers.cover(TargetBuffer));
+            get => new CaptureExchange(Service, Buffers.cover(TargetBuffer));
         }
     }
 }

@@ -15,12 +15,12 @@ namespace Z0
     {
         public const string ActorName = nameof(ToolProcessor<T,F>);
 
-        public IWfContext Wf {get;}
-        
+        public IWfShell Wf {get;}
+
         readonly Action<IToolFile<T,F>> Handler;
-        
+
         [MethodImpl(Inline)]
-        public ToolProcessor(IWfContext wf, Action<IToolFile<T,F>> handler)
+        public ToolProcessor(IWfShell wf, Action<IToolFile<T,F>> handler)
         {
             Wf = wf;
             Handler = handler;
@@ -30,16 +30,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Process(IToolFile<T,F> src)
         {
-            Wf.Running(ActorName);            
-            
+            Wf.Running(ActorName);
+
             Handler(src);
-            
-            Wf.Ran(ActorName);            
+
+            Wf.Ran(ActorName);
         }
 
         public void Dispose()
         {
-            Wf.Finished(ActorName);            
+            Wf.Finished(ActorName);
         }
     }
 }

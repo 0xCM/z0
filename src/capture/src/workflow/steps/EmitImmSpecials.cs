@@ -97,14 +97,16 @@ namespace Z0
         {
             if(imm8.Length != 0)
             {
-                var exchange =  CaptureServices.create(Context).CaptureExchange;
+                //var exchange =  CaptureServices.create(Context).CaptureExchange;
+                var exchange = Capture.exchange(Context);
                 EmitUnrefined(exchange, imm8.ToImm8Values(ImmRefinementKind.Unrefined), parts);
             }
         }
 
         public void EmitRefined(params PartId[] parts)
         {
-            var exchange = CaptureServices.create(Context).CaptureExchange;
+            var exchange = Capture.exchange(Context);
+            //var exchange = CaptureServices.create(Context).CaptureExchange;
             EmitRefined(exchange, parts);
         }
 

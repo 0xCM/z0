@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
- 
+
     partial struct Buffers
     {
         /// <summary>
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="length">The sequence length</param>
         [MethodImpl(Inline), Op]
         public static BufferSeq sequence(uint size, byte length)
-            => new BufferSeq((int)size, length);
+            => new BufferSeq(size, length);
 
         /// <summary>
         /// Creates a caller-owed buffer sequence
@@ -27,11 +27,11 @@ namespace Z0
         /// <param name="length">The sequence length</param>
         /// <param name="allocation">The allocation handle that defines ownership</param>
         [MethodImpl(Inline), Op]
-        public static BufferSeq sequence(int size, byte length, out BufferAllocation allocation)
-        {            
+        public static BufferSeq sequence(uint size, byte length, out BufferAllocation allocation)
+        {
             var buffers = new BufferSeq(size,length,false);
             allocation = buffers.Allocation;
             return buffers;
-        }       
+        }
     }
 }

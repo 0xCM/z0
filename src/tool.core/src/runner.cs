@@ -16,7 +16,7 @@ namespace Z0
             where T : ITextual
                 => new Watching<T>(actor, target, ct);
         [Op]
-        public static ToolRunner runner(IWfContext context, string command, ToolRunnerConfig config)
+        public static ToolRunner runner(IWfShell context, string command, ToolRunnerConfig config)
             => new ToolRunner(command, config);
     }
 }

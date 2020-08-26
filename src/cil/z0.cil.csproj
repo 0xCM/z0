@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Symbolic)" />
+    <ProjectReference Include="$(Konst)" />
+    <!-- <ProjectReference Include="$(Symbolic)" /> -->
   </ItemGroup>
 
   <ItemGroup>

@@ -8,9 +8,6 @@ namespace Z0.Asm
     {
         IAsmContext Context {get;}
 
-        CaptureExchange CaptureExchange
-            => Asm.CaptureExchange.create(Context);
-
         IImmSpecializer ICaptureServices.ImmSpecializer(IAsmDecoder decoder)
             => new ImmSpecializer(decoder);
 

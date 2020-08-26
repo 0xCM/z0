@@ -19,30 +19,30 @@ namespace Z0
 
         readonly byte BufferCount;
 
-        readonly int BufferSize;
+        readonly uint BufferSize;
 
-        readonly int TotalSize;
+        readonly uint TotalSize;
 
         readonly bool OwnsBuffer;
-        
-        internal BufferSeq(int size, byte count, bool owns = true)
+
+        internal BufferSeq(uint size, byte count, bool owns = true)
         {
             OwnsBuffer = owns;
             BufferCount = count;
             BufferSize = size;
             TotalSize = BufferCount*BufferSize;
             Allocation = Buffers.native(TotalSize);
-            View = new Span<byte>(Allocation.Handle.ToPointer(), TotalSize);
+            View = new Span<byte>(Allocation.Handle.ToPointer(), (int)TotalSize);
             Tokens = Buffers.tokenize(Allocation.Handle, BufferSize, BufferCount);
         }
 
         /// <summary>
-        /// Presents an index-identifed buffer as a span of bytes
+        /// Presents an index-identified buffer as a span of bytes
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public Span<byte> Buffer(byte index)    
-            => View.Slice(index*BufferSize, BufferSize);
+        public Span<byte> Buffer(byte index)
+            => z.slice(View, index*BufferSize, BufferSize);
 
         /// <summary>
         /// Covers a token-identified buffer with a span over cells of unmanaged type
@@ -54,7 +54,7 @@ namespace Z0
                 => Buffer(index).Cast<T>();
 
         /// <summary>
-        /// Retrieves an index-identifed token
+        /// Retrieves an index-identified token
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
@@ -62,7 +62,7 @@ namespace Z0
             => ref z.skip(Tokens,index);
 
         /// <summary>
-        /// Retrieves an index-identifed token
+        /// Retrieves an index-identified token
         /// </summary>
         /// <param name="index">The buffer index</param>
         public ref readonly BufferToken this[byte index]
@@ -82,12 +82,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BufferTokens Tokenize() 
+        public BufferTokens Tokenize()
             => Tokens.ToArray();
 
         public void Dispose()
         {
-            if(OwnsBuffer)   
+            if(OwnsBuffer)
                 Allocation.Dispose();
         }
     }

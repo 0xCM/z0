@@ -12,12 +12,12 @@ namespace Z0
     /// <summary>
     /// Characterizes a test service that provides access to a buffer sequence
     /// </summary>
-    public interface IBufferedChecker : TChecker, IServiceAllocation, IBufferTokenSource
+    public interface IBufferedChecker : TChecker, IDisposable, IBufferTokenSource
     {
         /// <summary>
         /// All the buffers belong to this
         /// </summary>
-        BufferTokens Buffers {get;}        
+        BufferTokens Tokens {get;}
 
         /// <summary>
         /// Returns the token of an index-identified buffer
@@ -25,7 +25,7 @@ namespace Z0
         ref readonly BufferToken IBufferTokenSource.this[BufferSeqId id]
         {
             [MethodImpl(Inline)]
-            get => ref Buffers[id];
+            get => ref Tokens[id];
         }
     }
 }

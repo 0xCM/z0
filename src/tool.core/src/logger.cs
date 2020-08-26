@@ -12,12 +12,12 @@ namespace Z0
     partial struct Tooling
     {
         [Op]
-        public static ToolLogger logger<T>(IWfContext context, T id)
+        public static ToolLogger logger<T>(IWfShell context, T id)
             where T : unmanaged, Enum
                 => logger(context, id.ToString());
 
         [Op]
-        public static ToolLogger logger(IWfContext wf, string name)
+        public static ToolLogger logger(IWfShell wf, string name)
         {
             var dst = wf.AppPaths.AppDataRoot + FileName.Define(name, FileExtensions.StatusLog);
             return new ToolLogger(wf,dst);

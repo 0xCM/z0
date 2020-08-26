@@ -12,9 +12,9 @@ namespace Z0
     partial struct Tooling
     {
         [MethodImpl(Inline)]
-        public static ToolProcessor<T,F> processor<T,F>(IWfContext wf, Action<IToolFile<T,F>> handler)
-            where T : struct, ITool<T,F>            
-            where F : unmanaged, Enum   
-                => new ToolProcessor<T,F>(wf, handler);        
+        public static ToolProcessor<T,F> processor<T,F>(IWfShell wf, Action<IToolFile<T,F>> handler)
+            where T : struct, ITool<T,F>
+            where F : unmanaged, Enum
+                => new ToolProcessor<T,F>(wf, handler);
     }
 }

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -16,8 +16,13 @@ namespace Z0
     public readonly struct Symbol<S,T,N> : ISymbol<S,N,T>
         where S : unmanaged
         where T : unmanaged
-        where N : unmanaged, ITypeNat         
-    {                
+        where N : unmanaged, ITypeNat
+    {
+        /// <summary>
+        /// The symbol name, if not anonymous
+        /// </summary>
+        public SymbolName Name {get;}
+
         /// <summary>
         /// The symbol value
         /// </summary>
@@ -26,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S,T,N> src)
             => @char(src);
-        
+
         [MethodImpl(Inline)]
         public static implicit operator S(Symbol<S,T,N> src)
             => src.Value;
@@ -41,7 +46,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Symbol(S value)
-            => Value = value;
+        {
+            Value = value;
+            Name = SymbolName.Empty;
+        }
+
+        [MethodImpl(Inline)]
+        public Symbol(string name, S value)
+        {
+            Name = name;
+            Value = value;
+        }
 
         public Symbol<S> Simplified
         {
@@ -50,35 +65,35 @@ namespace Z0
         }
 
         /// <summary>
-        /// The symbol value, from storage cell persective
+        /// The symbol value, from storage cell perspective
         /// </summary>
         public T Cell
         {
             [MethodImpl(Inline)]
             get => Unsafe.As<S,T>(ref edit(Value));
-        }      
+        }
 
         /// <summary>
         /// The bit-width of a symbol
         /// </summary>
-        public static ushort SymWidth 
+        public static ushort SymWidth
         {
             [MethodImpl(Inline)]
             get => (ushort)value<N>();
         }
-        
+
         /// <summary>
         /// The bit-width of a storage cell
         /// </summary>
-        public static ushort SegWidth 
+        public static ushort SegWidth
         {
             get => (ushort)bitsize<T>();
         }
-        
+
         /// <summary>
         /// The maximum number of symbols that can be packed into a storage cell
         /// </summary>
-        public static ushort Capacity 
+        public static ushort Capacity
         {
             [MethodImpl(Inline)]
             get => (ushort)(SegWidth/SymWidth);

@@ -14,38 +14,38 @@ namespace Z0
         where F : unmanaged, Enum
     {
         public const string ActorName = nameof(Tool<T,F>);
-        
-        public IWfContext Wf {get;}
-        
+
+        public IWfShell Wf {get;}
+
         public ToolId ToolId {get;}
 
         public FolderPath SourceDir {get;}
-        
+
         public FolderPath Source {get;}
 
         public IExtensionMap<F> Map {get;}
-        
+
         public IToolArchive<T> Archive {get;}
 
         public ToolFlags<F> AvailableFlags {get;}
-        
+
         [MethodImpl(Inline)]
-        public Tool(IWfContext wf, ToolId id, FolderPath src, FolderPath dst)
+        public Tool(IWfShell wf, ToolId id, FolderPath src, FolderPath dst)
         {
             Wf = wf;
-            ToolId = id;                        
-            SourceDir = src;            
+            ToolId = id;
+            SourceDir = src;
             Source = dst;
-            AvailableFlags = new ToolFlags<F>(0);            
+            AvailableFlags = new ToolFlags<F>(0);
             Map = new ExtensionMap<F>(0);
             Archive = new ToolArchive<T>(id, src,dst);
             Wf.Created(ActorName);
-        }    
+        }
 
 
         public void Dispose()
         {
-            Wf.Finished(ActorName);            
-        }    
+            Wf.Finished(ActorName);
+        }
     }
 }

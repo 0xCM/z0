@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="length">The buffer length in bytes</param>
         [MethodImpl(Inline), Op]
-        public static BufferAllocation native(int length)
-            => Buffers.own((liberate(Marshal.AllocHGlobal(length), length), length));        
+        public static BufferAllocation native(uint length)
+            => Buffers.own((liberate(Marshal.AllocHGlobal((int)length), (int)length), length));
     }
 }
