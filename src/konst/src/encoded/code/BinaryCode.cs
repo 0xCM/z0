@@ -144,8 +144,8 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public ByteStream Stream()
-            => new ByteStream(this);
+        public EncodedStream Stream()
+            => new EncodedStream(this);
 
         /// <summary>
         /// The canonical zero

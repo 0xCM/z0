@@ -45,7 +45,7 @@ namespace Z0
             => Service.Capture(z.insist(src).Identify(), src);
 
         [MethodImpl(Inline)]
-        public Option<CapturedApiMember> Capture(ApiMember src)
+        public Option<CapturedMember> Capture(ApiMember src)
             => Service.Capture(src);
 
         [MethodImpl(Inline)]

@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="src">The api member</param>
-        Option<CapturedApiMember> Capture(in CaptureExchange exchange, in ApiMember src);
+        Option<CapturedMember> Capture(in CaptureExchange exchange, in ApiMember src);
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for nongeneric methods

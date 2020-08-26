@@ -15,10 +15,10 @@ namespace Z0
         FolderPath PartExeRoot(FolderPath root)
             => root + AppFolderName;
 
-        FolderPath PartDataDir(FolderPath root, FolderName folder)            
-            => (((root + AppFolderName) + PartExeFolderName) + DataFolderName) + folder;        
+        FolderPath PartDataDir(FolderPath root, FolderName folder)
+            => (((root + AppFolderName) + PartExeFolderName) + DataFolderName) + folder;
 
-        FolderPath PartExtractDir(FolderPath root) 
+        FolderPath PartExtractDir(FolderPath root)
             => (root + ExtractFolderName).Create();
 
         FolderPath PartUnparsedDir(FolderPath root)
@@ -26,35 +26,38 @@ namespace Z0
 
         FolderPath PartParsedDir(FolderPath root)
             => (root + ParsedFolderName).Create();
-        
-        FolderPath PartHexDir(FolderPath root) 
+
+        FolderPath PartHexDir(FolderPath root)
             => (root + HexFolderName).Create();
-    
-        FolderPath PartAsmDir(FolderPath root) 
+
+        FolderPath PartAsmDir(FolderPath root)
             => (root + AsmFolderName).Create();
 
         FolderPath HostDir(FolderPath root, ApiHostUri host)
             => root + RelativeLocation.Define(PartFolderName(host.Owner), HostFolderName(host));
 
-        FolderPath ExtractDirPath(FolderPath root) 
+        FolderPath ExtractDirPath(FolderPath root)
             => (root + ExtractFolderName).Create();
 
-        FolderPath UnparsedDirPath(FolderPath root) 
+        FolderPath UnparsedDirPath(FolderPath root)
             => (root + UnparsedFolderName).Create();
 
-        FolderPath ParsedDirPath(FolderPath root) 
+        FolderPath ParsedDirPath(FolderPath root)
             => (root + ParsedFolderName).Create();
 
-        FolderPath HexDirPath(FolderPath root) 
+        FolderPath HexDirPath(FolderPath root)
             => (root + HexFolderName).Create();
 
-        FolderPath AsmDirPath(FolderPath root) 
+        FolderPath CilDataDirPath(FolderPath root)
+            => (root + CilDataFolder).Create();
+
+        FolderPath AsmDirPath(FolderPath root)
             => (root + AsmFolderName).Create();
 
-        FolderPath LogDirPath(FolderPath root) 
+        FolderPath LogDirPath(FolderPath root)
             => (root + LogFolderName).Create();
 
-        FolderPath LogDirPath(FolderPath root, PartId id) 
+        FolderPath LogDirPath(FolderPath root, PartId id)
             => (PartExeRoot(root) + LogFolderName).Create();
     }
 }

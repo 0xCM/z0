@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
     /// Describes an extract parse failure
     /// </summary>
     public readonly struct ExtractParseFailure
-    {        
+    {
         /// <summary>
-        /// The data over which the parse failure occurrred
+        /// The data over which the parse failure occurred
         /// </summary>
-        public readonly ExtractedCode Data;   
+        public readonly ExtractedCode Data;
 
         /// <summary>
         /// The extracted member sequence
@@ -28,7 +28,7 @@ namespace Z0
         /// Specifies the reason the parser stopped parsing
         /// </summary>
         public readonly ExtractTermCode TermCode;
-        
+
         [MethodImpl(Inline)]
         public ExtractParseFailure(ExtractedCode data, int seq, ExtractTermCode term)
         {
@@ -37,10 +37,10 @@ namespace Z0
             TermCode = term;
         }
 
-        public OpUri OpUri 
+        public OpUri OpUri
             => Data.Member.OpUri;
 
-        public static ExtractParseFailure Empty 
+        public static ExtractParseFailure Empty
             => new ExtractParseFailure(ExtractedCode.Empty, 0, ExtractTermCode.None);
     }
 }

@@ -2,21 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
+    using Z0.Asm;
     public ref struct EmitExtractReport
     {
         public const string ActorName = nameof(EmitExtractReport);
 
         readonly CorrelationToken Ct;
-     
+
         readonly WfCaptureState Wf;
-        
+
         readonly ApiHostUri Host;
 
         readonly ExtractedCode[] Source;
@@ -25,7 +26,7 @@ namespace Z0.Asm
 
         ExtractReport Artifact;
 
-        public ExtractReport Report 
+        public ExtractReport Report
             => Artifact;
 
         [MethodImpl(Inline)]
@@ -44,11 +45,11 @@ namespace Z0.Asm
         {
             try
             {
-                Artifact = ExtractReport.Create(Host, Source); 
-                Wf.Raise(new ExtractReportCreated(ActorName, Artifact.RecordCount, Ct));  
+                Artifact = ExtractReport.Create(Host, Source);
+                Wf.Raise(new ExtractReportCreated(ActorName, Artifact.RecordCount, Ct));
                 var result = Report.Save(Target);
                 if(result)
-                    Wf.Raise(new ExtractReportSaved(ActorName, Artifact, Ct));  
+                    Wf.Raise(new ExtractReportSaved(ActorName, Artifact, Ct));
                 else
                     Wf.Error(ActorName, "Unable to save extract report", Ct);
             }
@@ -57,10 +58,10 @@ namespace Z0.Asm
                 Wf.Error(ActorName, e, Ct);
             }
         }
-        
+
         public void Dispose()
         {
             Wf.Finished(ActorName, Ct);
-        }    
+        }
     }
 }

@@ -56,6 +56,9 @@ namespace Z0
         FolderName HexFolderName
             => FolderName.Define("code", "Hex formatted encoded x86 assembly");
 
+        FolderName CilDataFolder
+            => FolderName.Define("cil", "Common Intermediate Langage");
+
         /// <summary>
         /// The imm root folder name
         /// </summary>

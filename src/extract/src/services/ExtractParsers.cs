@@ -13,28 +13,28 @@ namespace Z0
     public readonly struct ExtractParsers
     {
         [MethodImpl(Inline), Op]
-        public static BytePatternParser<EncodingPatternKind> pattern(byte[] buffer)        
+        public static BytePatternParser<EncodingPatternKind> pattern(byte[] buffer)
             => new BytePatternParser<EncodingPatternKind>(EncodingPatterns.Default, buffer);
 
         [MethodImpl(Inline), Op]
-        public static IExtractionParser member(byte[] buffer)
+        public static PatternExtractParser member(byte[] buffer)
             => new PatternExtractParser(buffer);
 
         [MethodImpl(Inline), Op]
-        public static IExtractionParser member(ByteSize bufferlen)
-            => new PatternExtractParser(sys.alloc<byte>(bufferlen));  
+        public static PatternExtractParser member(ByteSize bufferlen)
+            => new PatternExtractParser(sys.alloc<byte>(bufferlen));
 
         [MethodImpl(Inline), Op]
         public static ParseResult<BinaryCode,LocatedCode> parse(in LocatedCode src, in BinaryCode buffer)
         {
             var parser = pattern(buffer);
-            var status = parser.Parse(src);            
+            var status = parser.Parse(src);
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();
-            return succeeded 
-                ? ParseResult.Success(buffer, new LocatedCode(src.Address, parser.Parsed)) 
+            return succeeded
+                ? ParseResult.Success(buffer, new LocatedCode(src.Address, parser.Parsed))
                 : ParseResult.Fail<BinaryCode,LocatedCode>(buffer);
-        }               
+        }
 
         [MethodImpl(Inline), Op]
         public static bool parse(in LocatedCode src, in BinaryCode buffer, out LocatedCode dst)
@@ -44,7 +44,7 @@ namespace Z0
                 dst = result.Value;
             else
                 dst = LocatedCode.Empty;
-            return result.Succeeded;                
-        }            
+            return result.Succeeded;
+        }
     }
 }

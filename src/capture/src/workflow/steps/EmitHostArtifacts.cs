@@ -34,6 +34,8 @@ namespace Z0
 
         readonly FilePath HexPath;
 
+        readonly FilePath CilDataPath;
+
         readonly FilePath AsmPath;
 
         public EmitHostArtifacts(WfCaptureState wf, ApiHostUri src, ExtractedCode[] extracts, IPartCapturePaths dst, CorrelationToken ct)
@@ -47,6 +49,7 @@ namespace Z0
             ParsedPath = Target.ParsedPath;
             HexPath = Target.HexPath;
             AsmPath = Target.AsmPath;
+            CilDataPath = Target.CilDataPath;
             Parsed = new ParsedExtraction[0]{};
             Parser = Extractors.Services.ExtractParser(Extractors.DefaultBufferLength);
             Wf.Created(StepName, Ct);
@@ -62,6 +65,7 @@ namespace Z0
                 Parse();
                 SaveParseReport();
                 SaveHex();
+                SaveCil();
                 Decode();
             }
             catch(Exception e)
@@ -108,6 +112,12 @@ namespace Z0
         {
             var hex = IdentifiedCodeWriter.save(Source, Parsed, HexPath);
             Wf.Raise(new HexCodeSaved(StepName, Source, hex, ParsedPath, Ct));
+        }
+
+        void SaveCil()
+        {
+            var cil = IdentifiedCodeWriter.save(Source, Parsed, CilDataPath);
+            Wf.Raise(new CilCodeSaved(StepName, Source, cil, ParsedPath, Ct));
         }
 
         void Decode()

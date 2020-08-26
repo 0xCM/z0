@@ -50,19 +50,19 @@ namespace Z0.Asm
             }
         }
 
-        public Option<CapturedApiMember> Capture(in CaptureExchange exchange, in ApiMember src)
+        public Option<CapturedMember> Capture(in CaptureExchange exchange, in ApiMember src)
         {
             try
             {
                 var summary = capture(exchange, src.Id, src.Address);
                 var size = summary.Encoded.Length;
                 var code = new CapturedCode(src.Id, src.Method, summary.Encoded.ParseInput, summary.Encoded.Encoded, summary.Outcome.TermCode);
-                return new CapturedApiMember(src, code);
+                return new CapturedMember(src, code);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<CapturedApiMember>();
+                return none<CapturedMember>();
             }
         }
 

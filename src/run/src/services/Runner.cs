@@ -149,7 +149,6 @@ namespace Z0
             Status(paths.Archives);
             Status(paths.BuildPub);
             Status(paths.BuildStage);
-
             Status(files.CaptureRoot);
 
             foreach(var file in FS.list((FS.FolderPath)files.AsmDir))

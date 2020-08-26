@@ -29,6 +29,9 @@ namespace Z0
         FileName AmsFileName
             => LegalFileName(Host, Asm);
 
+        FilePath CilDataPath
+            => CilDataDir + CilFileName;
+
         new FilePath AsmPath
             => AsmDir + AmsFileName;
 

@@ -45,7 +45,7 @@ namespace Z0
 
             try
             {
-                using var host = new CaptureClient(State, Ct);
+                using var host = new ManageCapture(State, Ct);
                 host.Run();
             }
             catch(Exception e)

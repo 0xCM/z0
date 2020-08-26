@@ -88,7 +88,7 @@ namespace Z0
                 Wf.Raise(new Unaddressed(src.Uri, src.Data));
             else
             {
-                var code = MemberCode.define(src.Uri, src.Data);
+                var code = new MemberCode(src.Uri, src.Data);
                 if(!dst.Include(code))
                     Wf.Warn(StepName, $"Duplicate | {src.Uri.Format()}", Ct);
             }

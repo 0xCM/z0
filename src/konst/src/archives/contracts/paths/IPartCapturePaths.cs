@@ -20,6 +20,9 @@ namespace Z0
         FolderPath CodeDir
             => HexDirPath(ArchiveRoot);
 
+        FolderPath CilDataDir
+            => CilDataDirPath(ArchiveRoot);
+
         FolderPath AsmDir
             => AsmDirPath(ArchiveRoot);
 

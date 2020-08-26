@@ -6,14 +6,13 @@ namespace Z0.Asm
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
 
     using static Konst;
 
     /// <summary>
     /// Exposes capture services without the hassle of passing a ref struct about hither thither and yon
     /// </summary>
-    public interface ICaptureServiceProxy : IService
+    public interface ICaptureServiceProxy
     {
         /// <summary>
         /// The capture exchange
@@ -30,7 +29,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="src">The api member</param>
-        Option<CapturedApiMember> Capture(in ApiMember src)
+        Option<CapturedMember> Capture(in ApiMember src)
             => CaptureService.Capture(CaptureExchange.Context, src);
 
         /// <summary>

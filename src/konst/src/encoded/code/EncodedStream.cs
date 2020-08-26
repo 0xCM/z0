@@ -10,19 +10,19 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    
-    public readonly struct ByteStream : IDisposable
+
+    public readonly struct EncodedStream : IDisposable
     {
         readonly BinaryCode Store;
 
         readonly MemoryStream Stream;
 
         [MethodImpl(Inline)]
-        public ByteStream(BinaryCode src)
+        public EncodedStream(BinaryCode src)
         {
             Store = src;
             Stream =  new MemoryStream(src.Encoded);
-        }        
+        }
 
         public void Dispose()
         {

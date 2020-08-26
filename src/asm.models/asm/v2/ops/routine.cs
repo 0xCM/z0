@@ -3,12 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+
     using static Konst;
     using static Asm.AsmFxCheck;
 
@@ -16,9 +16,9 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static AsmRoutine routine(ParsedExtraction encoding, AsmFxList src)
-        {         
-            var code = MemberCode.define(encoding.OpUri, encoding.Encoded);  
-            var sig = encoding.Method.Signature().Format();          
+        {
+            var code = new MemberCode(encoding.OpUri, encoding.Encoded);
+            var sig = encoding.Method.Signature().Format();
             return new AsmRoutine(encoding.OpUri, sig, code, encoding.TermCode, src);
         }
 
@@ -31,7 +31,7 @@ namespace Z0
 
             for(var i=0; i<info.Length; i++)
             {
-                var instruction = src[i];                
+                var instruction = src[i];
                 if(check)
                     CheckInstructionSize(instruction, offset, src);
 
@@ -43,7 +43,7 @@ namespace Z0
                 CheckBlockLength(src);
 
             var instructions = asm.list(src.Decoded, src.Encoded.Encoded);
-            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, instructions);            
+            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, instructions);
         }
     }
 }

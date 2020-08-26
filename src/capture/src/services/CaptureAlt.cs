@@ -37,12 +37,12 @@ namespace Z0
             return captured;
         }
 
-        public static CapturedApiMember capture(in ApiMember src, Span<byte> buffer)
+        public static CapturedMember capture(in ApiMember src, Span<byte> buffer)
         {
             var summary = capture(buffer, src.Id, ApiMemberJit.jit(src));
             var size = summary.Data.Length;
             var code = new CapturedCode(src.Id, src.Method, summary.Encoded.ParseInput, summary.Encoded.Encoded, summary.Outcome.TermCode);
-            return new CapturedApiMember(src, code);
+            return new CapturedMember(src, code);
         }
 
         public static CapturedCode capture(LocatedMethod located, Span<byte> buffer)

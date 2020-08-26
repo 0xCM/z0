@@ -16,12 +16,12 @@ namespace Z0
         public WfStepId Id => StepId;
     }
 
-    [Step(typeof(CaptureClient), StepName)]
-    public readonly struct CaptureClientStep
+    [Step(typeof(ManageCapture), StepName)]
+    public readonly struct ManageCaptureStep
     {
-        public const string StepName = nameof(CaptureClient);
+        public const string StepName = nameof(ManageCapture);
 
-        public static WfStepId StepId => step(typeof(CaptureClient));
+        public static WfStepId StepId => step(typeof(ManageCapture));
 
         public WfStepId Id => StepId;
     }
@@ -41,18 +41,33 @@ namespace Z0
     public readonly struct CaptureHostsStep
     {
         public const string StepName = nameof(CaptureHosts);
+
+        public static WfStepId StepId => step(typeof(CaptureHosts));
+
+        public WfStepId Id => StepId;
     }
 
     [Step(typeof(DecodeParsed), StepName)]
     public readonly struct DecodeParsedStep
     {
         public const string StepName = nameof(DecodeParsed);
+
+        public static WfStepId StepId => step(typeof(DecodeParsed));
+
+        public WfStepId Id => StepId;
+
     }
 
     [Step(typeof(EmitHostArtifacts), StepName)]
     public readonly struct EmitHostArtifactsStep
     {
         public const string StepName = nameof(EmitHostArtifacts);
+    }
+
+    [Step(typeof(EmitExtractReport), StepName)]
+    public readonly struct EmitExtractReportStep
+    {
+        public const string StepName = nameof(EmitExtractReport);
     }
 
     [Step(typeof(EmitParsedReport), StepName)]

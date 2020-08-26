@@ -51,9 +51,8 @@ namespace Z0
             Wf.Finished(StepId);
         }
 
-       static IMultiDiviner Diviner
+        static IMultiDiviner Diviner
             => MultiDiviner.Service;
-
 
         public static ReadOnlySpan<IdentifiedMethod> methods(ApiDataType[] src)
         {

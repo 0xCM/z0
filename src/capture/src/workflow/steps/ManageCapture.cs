@@ -9,9 +9,9 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static CaptureClientStep;
+    using static ManageCaptureStep;
 
-    public struct CaptureClient : IWfCaptureClient
+    public struct ManageCapture : IManageCapture
     {
         readonly WfCaptureState Wf;
 
@@ -23,7 +23,7 @@ namespace Z0
 
         readonly IImmEmitter ImmEmitter;
 
-        public CaptureClient(WfCaptureState wf, CorrelationToken ct)
+        public ManageCapture(WfCaptureState wf, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
@@ -35,12 +35,12 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(nameof(CaptureClient), Ct);
+            Wf.Finished(nameof(ManageCapture), Ct);
         }
 
         public void Run()
         {
-            (this as IWfCaptureClient).Connect();
+            (this as IManageCapture).Connect();
 
             var parts = Wf.Config.Parts.Length == 0 ? Wf.Root.PartIdentities : Wf.Config.Parts;
             Wf.Raise(new CapturingParts(StepName, parts, Ct));

@@ -10,23 +10,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct CapturedApiMember
-    {
-        public readonly ApiMember Member;
-
-        public readonly CapturedCode Code;
-
-        public CapturedApiMember(ApiMember member, CapturedCode code)
-        {
-            Member = member;
-            Code = code;
-        }
-    }
-
     /// <summary>
     /// Describes a reified api member which may be of hosted or located state
     /// </summary>
-    public readonly struct ApiMember : IApiMember<ApiMember>, IComparable<ApiMember>
+    public struct ApiMember : IApiMember<ApiMember>
     {
         public OpIdentity Id {get;}
 
@@ -40,19 +27,10 @@ namespace Z0
 
         public ApiHostUri HostUri {get;}
 
+        public CilCode Cil {get;}
+
         public ApiMember Zero
             => Empty;
-
-        [MethodImpl(Inline)]
-        public ApiMember(OpUri uri, MethodInfo method, OpKindId kindId)
-        {
-            Id = uri.OpId;
-            OpUri = uri;
-            KindId = kindId;
-            Method = z.insist(method);
-            Address = MemoryAddress.Empty;
-            HostUri = OpUri.Host;
-        }
 
         [MethodImpl(Inline)]
         public ApiMember(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
@@ -63,8 +41,22 @@ namespace Z0
             Method = z.insist(method);
             Address = address;
             HostUri = OpUri.Host;
+            Cil = FunctionCil.extract(method);
         }
 
+        [MethodImpl(Inline)]
+        public ApiMember(OpUri uri, LocatedMethod method, OpKindId kindId)
+        {
+            Id = uri.OpId;
+            OpUri = uri;
+            KindId = kindId;
+            Method = method.Method;
+            Address = method.Address;
+            HostUri = OpUri.Host;
+            Cil = FunctionCil.extract(Method);
+        }
+
+        [MethodImpl(Inline)]
         public bool Equals(ApiMember src)
         {
             var result = Id.Equals(src.Id);

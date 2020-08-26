@@ -13,7 +13,7 @@ namespace Z0
 
     using BP = BytePatternParser<EncodingPatternKind>;
 
-    readonly struct PatternExtractParser : IExtractionParser
+    public readonly struct PatternExtractParser : IExtractionParser
     {
         /// <summary>
         /// The default length of the segment removed from the tail of the parsed byte array when the term code is Zx7

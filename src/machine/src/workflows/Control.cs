@@ -80,7 +80,7 @@ namespace Z0
 
         public void Run()
         {
-            Run(default(CaptureClientStep));
+            Run(default(ManageCaptureStep));
             Run(default(EmitDatasetsStep));
             Run(default(ProcessPartFilesStep));
             Run(default(Machines));
@@ -91,7 +91,7 @@ namespace Z0
 
         }
 
-        void Run(CaptureClientStep kind, params string[] args)
+        void Run(ManageCaptureStep kind, params string[] args)
         {
             using var control = WfCaptureControl.create(State);
             control.Run();

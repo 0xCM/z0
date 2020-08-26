@@ -25,53 +25,59 @@ namespace Z0
         public LocatedCode Encoded {get;}
 
         [MethodImpl(Inline)]
-        public static MemberCode define(OpUri uri, LocatedCode data)
-            => new MemberCode(uri, data);
+        public MemberCode(OpUri uri, MemoryAddress address, BinaryCode encoded)
+        {
+            OpUri = uri;
+            Encoded = new LocatedCode(address,encoded);
+        }
 
         [MethodImpl(Inline)]
-        public static MemberCode define(OpUri uri, MemoryAddress address, BinaryCode encoded)
-            => new MemberCode(uri, new LocatedCode(address,encoded));
-            
+        public MemberCode(OpUri uri, LocatedCode code)
+        {
+            OpUri = uri;
+            Encoded = code;
+        }
+
         /// <summary>
         /// The encoded content as byte array
         /// </summary>
-        public byte[] Data 
-        { 
-            [MethodImpl(Inline)] 
+        public byte[] Data
+        {
+            [MethodImpl(Inline)]
             get => Encoded.Data;
         }
-        
+
         /// <summary>
         /// The encoded byte count
         /// </summary>
-        public int Size 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.Length; 
-        }
-        
-        public int Length 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.Length; 
+        public int Size
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Length;
         }
 
-        public ref readonly byte this[int index] 
-        { 
-            [MethodImpl(Inline)] 
-            get => ref Encoded[index]; 
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Length;
         }
 
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsEmpty; 
+        public ref readonly byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Encoded[index];
         }
 
-        public bool IsNonEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsNonEmpty; 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
@@ -90,26 +96,20 @@ namespace Z0
         public static implicit operator IdentifiedCode(MemberCode src)
             => new IdentifiedCode(src.Address, src.OpUri, src.Encoded);
 
-        [MethodImpl(Inline)]
-        public MemberCode(OpUri uri, LocatedCode code)
+
+        public MemoryAddress Address
         {
-            OpUri = uri;
-            Encoded = code;
+            [MethodImpl(Inline)]
+            get => Encoded.Address;
         }
 
-        public MemoryAddress Address  
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.Address; 
-        }
-
-        public PartId Part 
+        public PartId Part
             => OpUri.Part;
-        
-        public OpIdentity OpId 
+
+        public OpIdentity OpId
             => OpUri.OpId;
 
-        public ApiHostUri Host 
+        public ApiHostUri Host
             => OpUri.Host;
 
         public string Format(int idpad)
@@ -129,9 +129,9 @@ namespace Z0
             => OpUri.GetHashCode();
 
         public override bool Equals(object src)
-            => src is MemberCode x && Equals(x);        
+            => src is MemberCode x && Equals(x);
 
-        public static MemberCode Empty 
-            => define(OpUri.Empty, LocatedCode.Empty);
+        public static MemberCode Empty
+            => new MemberCode(OpUri.Empty, LocatedCode.Empty);
     }
 }

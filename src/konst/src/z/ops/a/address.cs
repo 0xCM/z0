@@ -28,6 +28,10 @@ namespace Z0
         public static MemoryAddress address(ulong src)
             => new MemoryAddress(src);
 
+        [MethodImpl(Inline), Op]
+        public static MemoryAddress address(IntPtr src)
+            => new MemoryAddress((ulong)src.ToInt64());
+
         /// <summary>
         /// Extracts the address captured by a <see cref='StringRef'/>
         /// </summary>
@@ -51,7 +55,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address(string src)
             => address(pchar(src));
-            
+
+        [MethodImpl(Inline), Op]
+        public static unsafe MemoryAddress address(in byte src)
+            => p8u(src);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe MemoryAddress address(in char src)
+            => p16c(src);
+
         /// <summary>
         /// Determines the address of a reference
         /// </summary>
@@ -68,7 +80,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address<T>(T[] src)
-            => address<T>(in src[0]);
+            => pvoid(in src[0]);
 
         /// <summary>
         /// Determines the address of a cell in an array
@@ -82,7 +94,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public unsafe static MemoryAddress address(void* p)
-            => address((ulong)p);            
+            => address((ulong)p);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress address<P>(P* pSrc)

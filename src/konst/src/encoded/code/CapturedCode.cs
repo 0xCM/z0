@@ -13,7 +13,8 @@ namespace Z0
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
-    public struct CapturedCode : IComparable<CapturedCode>, IEquatable<CapturedCode>, ITextual
+    [ApiDataType]
+    public struct CapturedCode : ICapturedCode<CapturedCode,LocatedCode>
     {
         readonly LocatedCode Extracted;
 
@@ -25,7 +26,7 @@ namespace Z0
 
         public ExtractTermCode TermCode;
 
-        public BinaryCode IlBody;
+        public CilCode Cil;
 
         [MethodImpl(Inline)]
         public CapturedCode(OpIdentity id, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
@@ -33,9 +34,10 @@ namespace Z0
             Extracted = extracted;
             Parsed = parsed;
             Method = method;
+            z.insist(extracted.Address, parsed.Address);
             OpUri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
             TermCode = term;
-            IlBody = method.GetMethodBody().GetILAsByteArray();
+            Cil = FunctionCil.extract(method);
         }
 
         public ReadOnlySpan<byte> InputData
@@ -48,12 +50,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Parsed.Encoded;
-        }
-
-        public byte[] Data
-        {
-            [MethodImpl(Inline)]
-            get => Parsed.Data;
         }
 
         public ByteSize InputSize
@@ -113,7 +109,7 @@ namespace Z0
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => Parsed.Address;
+            get => Extracted.Address;
         }
 
         public uint Hash
@@ -141,6 +137,20 @@ namespace Z0
             => Parsed.Format();
 
         [Ignore]
+        bool INullity.IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Parsed.IsEmpty;
+        }
+
+        [Ignore]
+        bool INullity.IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Parsed.IsNonEmpty;
+        }
+
+        [Ignore]
         bool IEquatable<CapturedCode>.Equals(CapturedCode src)
             => Identical(src);
 
@@ -152,18 +162,24 @@ namespace Z0
         string ITextual.Format()
             => Format();
 
+        [Ignore]
+        public LocatedCode Encoded
+            => Parsed;
+
+        [Ignore]
+        int IMeasured.Length
+            => Parsed.Length;
+
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
             => (int)Hash;
 
+        public override bool Equals(object src)
+            => src is CapturedCode x && Identical(x);
+
         public static CapturedCode Empty
-            => new CapturedCode(
-                id: OpIdentity.Empty,
-                method: typeof(object).GetMethod(nameof(object.GetHashCode)),
-                extracted: LocatedCode.Empty,
-                parsed: LocatedCode.Empty,
-                term: ExtractTermCode.None);
+            => default;
     }
 }
