@@ -50,7 +50,7 @@ namespace Z0.Asm
             {
                 var decoded = new Iced.InstructionList();
                 var reader = new Iced.ByteArrayCodeReader(src.Encoded);
-                var formatter = AsmCaptureFormatter.Create(AsmFormat);
+                var formatter = Capture.formatter(AsmFormat);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
                 var @base = src.Address;
                 decoder.IP = @base;
@@ -62,7 +62,7 @@ namespace Z0.Asm
                     ref var iced = ref decoded.AllocUninitializedElement();
                     decoder.Decode(out iced);
                     var format = formatter.FormatInstruction(iced, @base);
-                    var z = IceExtractors.Inxs(iced,format);
+                    var z = IceExtractors.Fx(iced,format);
                     dst.Add(z);
                     f(z);
                 }
@@ -96,11 +96,11 @@ namespace Z0.Asm
                     decoder.Decode(out instruction);
                 }
 
-                var formatter = AsmCaptureFormatter.Create(AsmFormat);
+                var formatter = Capture.formatter(AsmFormat);
                 var instructions = new Asm.Instruction[decoded.Count];
                 var formatted = formatter.FormatInstructions(decoded, @base);
                 for(var i=0; i<instructions.Length; i++)
-                    instructions[i] = IceExtractors.Inxs(decoded[i], formatted[i]);
+                    instructions[i] = IceExtractors.Fx(decoded[i], formatted[i]);
                 return AsmInstructions.Create(instructions, code);
             }
             catch(Exception e)

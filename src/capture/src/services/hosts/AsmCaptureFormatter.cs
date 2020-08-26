@@ -20,10 +20,6 @@ namespace Z0.Asm
 
         readonly Iced.MasmFormatter MasmFormatter;
 
-        [MethodImpl(Inline)]
-        public static IAsmCaptureFormatter Create(in AsmFormatSpec config)
-            => new AsmCaptureFormatter(config);
-
         static Iced.MasmFormatterOptions DefaultOptions => new Iced.MasmFormatterOptions
             {
                 DecimalDigitGroupSize = 4,
@@ -38,7 +34,7 @@ namespace Z0.Asm
             };
 
         [MethodImpl(Inline)]
-        AsmCaptureFormatter(in AsmFormatSpec config)
+        internal AsmCaptureFormatter(in AsmFormatSpec config)
         {
             Config = config;
             MasmFormatter = new Iced.MasmFormatter(DefaultOptions);
@@ -55,18 +51,19 @@ namespace Z0.Asm
 
         public ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong @base)
         {
-            if(src.Count == 0)
-                return ReadOnlySpan<string>.Empty;
+            var count = src.Count;
+            if(count == 0)
+                return default;
 
-            var dst = new string[src.Count];
+            Span<string> dst = new string[count];
             var sb = text.build();
             var writer = new StringWriter(sb);
             var output = new AsmOutput(writer, @base);
-            for(var i = 0; i < src.Count; i++)
+            for(var i= 0u; i <count; i++)
             {
-                ref readonly var instruction = ref src[i];
+                ref readonly var instruction = ref src[(int)i];
                 MasmFormatter.Format(in instruction, output);
-                dst[i] = sb.ToString();
+                z.seek(dst, i) = sb.ToString();
                 sb.Clear();
             }
             return dst;
@@ -80,8 +77,15 @@ namespace Z0.Asm
 
             public AsmOutput(TextWriter writer, ulong baseaddress)
             {
-                this.Writer = writer;
-                this.BaseAddress = baseaddress;
+                Writer = writer;
+                BaseAddress = baseaddress;
+            }
+
+            [MethodImpl(Inline), Op]
+            static string label(string src, ulong baseaddress)
+            {
+                var hex = HexFormatSpecs.ParseHex(src).ValueOrDefault();
+                return (hex - baseaddress).FormatSmallHex(true);
             }
 
             public override void Write(string text, Iced.FormatterOutputTextKind kind)
@@ -89,7 +93,7 @@ namespace Z0.Asm
                 switch(kind)
                 {
                     case Iced.FormatterOutputTextKind.LabelAddress:
-                        Writer.Write(AsmRender.label(text, BaseAddress));
+                        Writer.Write(label(text, BaseAddress));
                     break;
                     default:
                         Writer.Write(text);

@@ -15,6 +15,10 @@ namespace Z0.Asm
             => default(CaptureServices);
 
         [MethodImpl(Inline)]
+        internal static IAsmCaptureFormatter formatter(in AsmFormatSpec config)
+            => new AsmCaptureFormatter(config);
+
+        [MethodImpl(Inline)]
         public static CaptureExchange exchange(IAsmContext context)
             => new CaptureExchange(context.CaptureCore, new byte[context.DefaultBufferLength]);
 

@@ -83,8 +83,13 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static string format(AsmFxCode src, in AsmFormatSpec fmt)
-            => $"{src.Expression}{fmt.FieldDelimiter}{src.OpCode}";
+        public static string format(AsmFxCode src, byte[] encoded, string sep)
+            =>  text.format("{0,-30}{1}{2,-40}{3}{4,-3}{5}{6}",
+                src.Expression, sep,
+                src.OpCode, sep,
+                encoded.Length, sep,
+                encoded.FormatHexBytes(Space,true,false)
+                );
 
         [Op]
         public static string format(in MemoryAddress @base, in AsmFxSummary src, in AsmFormatSpec config)
@@ -92,9 +97,8 @@ namespace Z0.Asm
             var description = text.build();
             var absolute = @base + (MemoryAddress)src.Offset;
             description.Append(text.concat(label(src.Offset), src.Formatted.PadRight(config.InstructionPad, Space)));
-            description.Append(comment(format(src.Spec, config)));
-            description.Append(text.concat(config.FieldDelimiter,"encoded", text.bracket(src.Encoded.Length.ToString())));
-            description.Append(text.embrace(src.Encoded.FormatHexBytes(Space, true, false)));
+            description.Append(comment(format(src.Spec, src.Encoded, config.FieldDelimiter)));
+            //description.Append(text.concat(config.FieldDelimiter, src.Encoded.Length, config.FieldDelimiter, src.Encoded.FormatHexBytes(Space, true, false)));
             return description.ToString();
         }
 

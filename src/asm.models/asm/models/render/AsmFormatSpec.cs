@@ -6,6 +6,10 @@ namespace Z0.Asm
 {
     public struct AsmFormatSpec
     {
+        public const string SectionSep = text.PageBreak + text.PageBreak;
+
+        public const string FieldSep = " || ";
+
         public static AsmFormatSpec Default
             => create();
 
@@ -28,7 +32,6 @@ namespace Z0.Asm
            bool EmitSectionDelimiter = false,
            int InstructionPad = 40,
            bool ShowLineAddresses = true,
-           char FieldDelimiter = Chars.Pipe,
            int SectionDelimiterWidth = 120
            ) => new AsmFormatSpec(
                EmitCaptureTermCode,
@@ -40,7 +43,6 @@ namespace Z0.Asm
                EmitSectionDelimiter,
                InstructionPad,
                ShowLineAddresses,
-               FieldDelimiter,
                SectionDelimiterWidth);
 
         public AsmFormatSpec(
@@ -53,8 +55,7 @@ namespace Z0.Asm
            bool EmitSectionDelimiter,
            int InstructionPad,
            bool ShowLineAddresses,
-           char FieldDelimiter,
-           int SectionDelimiterWidth
+          int SectionDelimiterWidth
            )
        {
            this.EmitCaptureTermCode = EmitCaptureTermCode;
@@ -66,8 +67,8 @@ namespace Z0.Asm
            this.EmitSectionDelimiter = EmitSectionDelimiter;
            this.InstructionPad = InstructionPad;
            this.EmitLineAddresses = ShowLineAddresses;
-           this.FieldDelimiter = string.Concat(Chars.Space, FieldDelimiter, FieldDelimiter, Chars.Space);
-           this.SectionDelimiter  = new string(Chars.Dash, 120);
+           this.FieldDelimiter = FieldSep;
+           this.SectionDelimiter  = SectionSep;
            this.HeaderEncodingFormat = RenderOptions.hex();
        }
 
