@@ -45,10 +45,10 @@ namespace Z0
             Source = src;
             Target = HostCaptureArchive.create(dst.ArchiveRoot, Source);
             Extractions = extracts;
-            ExtractPath = Target.ExtractPath;
+            ExtractPath = Target.HostExtractPath;
             ParsedPath = Target.ParsedPath;
-            HexPath = Target.HexPath;
-            AsmPath = Target.AsmPath;
+            HexPath = Target.HostHexPath;
+            AsmPath = Target.HostAsmPath;
             CilDataPath = Target.CilDataPath;
             Parsed = new ParsedExtraction[0]{};
             Parser = Extractors.Services.ExtractParser(Extractors.DefaultBufferLength);

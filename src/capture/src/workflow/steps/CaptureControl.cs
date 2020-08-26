@@ -16,8 +16,6 @@ namespace Z0
 
     public readonly ref struct CaptureControl
     {
-        readonly IAppContext Root;
-
         readonly IAsmContext Asm;
 
         readonly CorrelationToken Ct;
@@ -31,11 +29,10 @@ namespace Z0
         public CaptureControl(WfCaptureState state)
         {
             State = state;
-            Root = state.Root;
-            Ct = state.Ct;
-            Paths = Root.AppPaths;
-            Asm = WfBuilder.asm(Root);
             Wf = state.Wf;
+            Ct = state.Ct;
+            Paths = Wf.AppPaths;
+            Asm = WfBuilder.asm(state.Root);
             State.Created(ActorName, Ct);
         }
 

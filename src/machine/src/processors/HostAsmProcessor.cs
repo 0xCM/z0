@@ -17,7 +17,7 @@ namespace Z0
 
         public HostAsmFx Source {get;}
 
-        public IDataBroker<HostHandlerKind,HostAsmFx> Broker {get;}
+        public IWfDataBroker<HostHandlerKind,HostAsmFx> Broker {get;}
 
         [MethodImpl(Inline)]
         public HostAsmProcessor(IWfContext context, HostAsmFx src)
@@ -25,7 +25,7 @@ namespace Z0
             Wf = context;
             Broker = DataBrokers.broker64<HostHandlerKind,HostAsmFx>();
             Source = src;
-            (this as IDataProcessor).Connect();
+            (this as IWfDataProcessor).Connect();
         }
 
         [MethodImpl(Inline)]

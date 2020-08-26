@@ -8,7 +8,7 @@ namespace Z0
     using System.Text;
     using System.Runtime.CompilerServices;
 
-    using static ProcessFx;
+    using static TableFunctions;
     using static Konst;
     using static z;
 

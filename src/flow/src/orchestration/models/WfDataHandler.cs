@@ -9,34 +9,31 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ProcessFx;
+    using static TableFunctions;
 
     public readonly ref struct WfDataHandler<S,T>
-    {        
-        internal readonly Span<S> Source;
+    {
+        readonly Span<S> Source;
 
-        internal readonly Span<T> Target;
+        readonly Span<T> Target;
 
         readonly Map<S,T> Fx;
 
-        readonly IWfContext Wf;
-        
-        internal uint SourceCount 
-            => (uint)Source.Length;
+        readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
-        public WfDataHandler(IWfContext wf, Map<S,T> f, S[] src, T[] dst)
+        public WfDataHandler(IWfShell wf, Map<S,T> f, S[] src, T[] dst)
         {
             Wf = wf;
             Fx = f;
             Source = src;
             Target = dst;
         }
-        
+
         [MethodImpl(Inline)]
         public void Run()
         {
-            Map(first(Source), ref first(Target), 0u, SourceCount);                        
+            Map(first(Source), ref first(Target), 0u, (uint)Source.Length);
         }
 
         [MethodImpl(Inline)]
@@ -52,7 +49,7 @@ namespace Z0
 
         public void Dispose()
         {
-            
+
         }
     }
 }

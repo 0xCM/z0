@@ -81,7 +81,7 @@ namespace Z0
             => (ImmRootDir +  name);
 
         FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id)
-            => ImmSubDir(RelativeLocation.Define(owner.Format(), host.Name)) + HexFileName(id);
+            => ImmSubDir(RelativeLocation.Define(owner.Format(), host.Name)) + HexOpFileName(id);
 
         FilePath AsmImmPath(PartId owner, ApiHostUri host, OpIdentity id)
             => ImmSubDir(RelativeLocation.Define(owner.Format(), host.Name)) + AsmFileName(id);

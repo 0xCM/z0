@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static ProcessFx;
+    using static TableFunctions;
 
-    partial struct Flow    
+    partial struct Flow
     {
         [MethodImpl(Inline)]
         public static WfDataHandler<S,T> handler<S,T>(IWfContext wf, Map<S,T> f, S[] src, T[] dst)

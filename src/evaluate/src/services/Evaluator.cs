@@ -38,7 +38,7 @@ namespace Z0.Asm
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
             var dst = HostCaptureArchive.create(CodeArchive.ArchiveRoot, host.Uri);
-            if(dst.HexPath.Exists)
+            if(dst.HostHexPath.Exists)
             {
                 var code = ApiMemberOps.index(Identities.Services.Locator, ApiSet, host.Uri, CodeArchive.ArchiveRoot);
                 Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");

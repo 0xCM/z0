@@ -24,10 +24,10 @@ namespace Z0
         FileName AsmFileName(ApiHostUri host)
             => LegalFileName(host, Asm);
 
-        FileName HexFileName(OpIdentity id)
+        FileName HexOpFileName(OpIdentity id)
             => LegalFileName(id, HexLine);
 
-        FileName CilFileName(OpIdentity id)
+        FileName CilOpFileName(OpIdentity id)
             => LegalFileName(id, Il);
 
         FileName ParseFileName(ApiHostUri host)

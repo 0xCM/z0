@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Root;
 
-    public readonly struct DataBroker<K,T> : IDataBroker<K,T>
+    public readonly struct DataBroker<K,T> : IWfDataBroker<K,T>
         where K : unmanaged, Enum
     {
         readonly WfDataHandler<T>[] handlers;

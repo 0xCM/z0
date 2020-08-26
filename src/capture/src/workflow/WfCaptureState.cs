@@ -37,6 +37,8 @@ namespace Z0.Asm
 
         readonly IWfEventLog Log;
 
+        public PartId[] Parts {get;}
+
         [MethodImpl(Inline)]
         public WfCaptureState(IWfContext wf, IAsmContext asm, WfConfig config, CorrelationToken ct)
         {
@@ -57,6 +59,7 @@ namespace Z0.Asm
             RoutineDecoder = Services.RoutineDecoder(FormatConfig);
             CWf = new WfCaptureContext(Asm, Wf, RoutineDecoder, Formatter, Services.AsmWriterFactory, Archives.capture(Config.TargetArchive), Ct);
             CaptureBroker = WfBuilder.capture(Log, ct);
+            Parts = Wf.Config.Parts.Length == 0 ? Asm.ContextRoot.PartIdentities : Wf.Config.Parts;
         }
 
         public void Dispose()

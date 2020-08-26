@@ -13,7 +13,9 @@ namespace Z0
 
     public struct ManageCapture : IManageCapture
     {
-        readonly WfCaptureState Wf;
+        readonly WfCaptureState State;
+
+        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
@@ -23,38 +25,38 @@ namespace Z0
 
         readonly IImmEmitter ImmEmitter;
 
-        public ManageCapture(WfCaptureState wf, CorrelationToken ct)
+        public ManageCapture(WfCaptureState state, CorrelationToken ct)
         {
-            Wf = wf;
+            State = state;
+            Wf = state.Wf;
             Ct = ct;
-            Sink = Wf.Wf.WfSink;
-            Broker = wf.CaptureBroker;
-            ImmEmitter = Wf.Services.ImmEmitter(Sink, Wf.Asm.Api, Wf.Formatter, Wf.RoutineDecoder, Wf.Config, Ct);
+            Sink = Wf.WfSink;
+            Broker = state.CaptureBroker;
+            ImmEmitter = State.Services.ImmEmitter(Sink, State.Asm.Api, State.Formatter, State.RoutineDecoder, State.Config, Ct);
             Wf.Created(StepName, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(nameof(ManageCapture), Ct);
+            State.Finished(nameof(ManageCapture), Ct);
         }
 
         public void Run()
         {
             (this as IManageCapture).Connect();
 
-            var parts = Wf.Config.Parts.Length == 0 ? Wf.Root.PartIdentities : Wf.Config.Parts;
-            Wf.Raise(new CapturingParts(StepName, parts, Ct));
+            Wf.Raise(new CapturingParts(StepName, State.Parts, Ct));
 
-            using var manage = new ManagePartCapture(Wf, Ct);
+            using var manage = new ManagePartCapture(State, Ct);
             manage.Consolidate();
 
-            ImmEmitter.ClearArchive(parts);
-            ImmEmitter.EmitRefined(parts);
+            ImmEmitter.ClearArchive(State.Parts);
+            ImmEmitter.EmitRefined(State.Parts);
 
             Wf.Running(nameof(Evaluate), Ct);
-            var eval = Evaluate.control(Wf.Root, Wf.Root.Random, Wf.Root.AppPaths.AppCaptureRoot, Pow2.T14);
+            var eval = Evaluate.control(State.Root, State.Root.Random, Wf.AppPaths.AppCaptureRoot, Pow2.T14);
             eval.Execute();
-            Wf.Ran(nameof(Evaluate), Ct);
+            State.Ran(nameof(Evaluate), Ct);
 
             Wf.Ran(StepName, Ct);
         }
@@ -63,7 +65,7 @@ namespace Z0
         {
             Sink.Deposit(e);
 
-            if(Wf.Settings.CollectAsmStats)
+            if(State.Settings.CollectAsmStats)
                 CollectAsmStats(e.Host, e.Functions);
         }
 
@@ -71,9 +73,9 @@ namespace Z0
         {
             Sink.Deposit(e);
 
-            if(Wf.Settings.MatchEmissions)
+            if(State.Settings.MatchEmissions)
             {
-                var step = new MatchEmissions(Wf.CWf, Ct);
+                var step = new MatchEmissions(State.CWf, Ct);
                 step.Run(e.Host, e.Code, e.Target);
             }
         }
@@ -82,7 +84,7 @@ namespace Z0
         {
             Sink.Deposit(e);
 
-            if(Wf.Settings.DuplicateCheck)
+            if(State.Settings.DuplicateCheck)
                 CheckDuplicates(e.Host, e.Members);
         }
 
@@ -99,7 +101,7 @@ namespace Z0
         {
             var index = ApiMemberOps.index(src);
             foreach(var key in index.DuplicateKeys)
-                Wf.Raise(new WfWarn<string>(StepName, $"Duplicate key {key}", Ct));
+                State.Raise(new WfWarn<string>(StepName, $"Duplicate key {key}", Ct));
         }
     }
 }

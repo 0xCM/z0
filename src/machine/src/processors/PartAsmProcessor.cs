@@ -20,7 +20,7 @@ namespace Z0
         C = 2
     }
 
-    public interface IAsmProcessor<T> : IDataProcessor<T>
+    public interface IAsmProcessor<T> : IWfDataProcessor<T>
     {
         void Process(T src);
     }
@@ -29,7 +29,7 @@ namespace Z0
     public interface IAsmProcessor<E,T> : IAsmProcessor<T>
         where E : unmanaged, Enum
     {
-        IDataBroker<E,T> Broker {get;}
+        IWfDataBroker<E,T> Broker {get;}
 
         void Relay(E kind, T data)
             => Broker.Relay(kind,data);
@@ -47,7 +47,7 @@ namespace Z0
 
         }
 
-        void IDataProcessor.Connect()
+        void IWfDataProcessor.Connect()
         {
             Broker[Mnemonic.And] = AB.handler<BasedAsmFx>(OnAnd);
             Broker[Mnemonic.Or] = AB.handler<BasedAsmFx>(OnOr);
@@ -60,7 +60,7 @@ namespace Z0
 
         readonly BitBroker<PartHandlerKind,PartAsmFx> broker;
 
-        public IDataBroker<PartHandlerKind,PartAsmFx> Broker
+        public IWfDataBroker<PartHandlerKind,PartAsmFx> Broker
             => broker;
 
         [MethodImpl(Inline)]
@@ -68,7 +68,7 @@ namespace Z0
         {
             Wf = wf;
             broker = DataBrokers.broker64<PartHandlerKind,PartAsmFx>();
-            (this as IDataProcessor).Connect();
+            (this as IWfDataProcessor).Connect();
         }
 
         [MethodImpl(Inline)]

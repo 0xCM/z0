@@ -8,10 +8,13 @@ namespace Z0
     {
         ApiHostUri Host {get;}
 
+        FolderPath HostAsmDir
+            => AsmDir + PartFolderName(Host.Owner);
+
         FileName ExtractFileName
             => LegalFileName(Host, Extract);
 
-        new FilePath ExtractPath
+        FilePath HostExtractPath
             => ExtractDir + ExtractFileName;
 
         FileName ParsedFileName
@@ -20,22 +23,25 @@ namespace Z0
         FilePath ParsedPath
             => ParsedDir + ParsedFileName;
 
-        new FileName HexFileName
+        FileName HexFileName
             => LegalFileName(Host, HexLine);
 
-        new FilePath HexPath
+        FilePath HostHexPath
             => CodeDir + HexFileName;
 
         FileName AmsFileName
             => LegalFileName(Host, Asm);
 
-        FilePath CilDataPath
-            => CilDataDir + CilFileName;
+        FilePath HostAsmPath
+            => HostAsmDir + AmsFileName;
 
-        new FilePath AsmPath
-            => AsmDir + AmsFileName;
-
-        new FileName CilFileName
+        FileName CilFileName
             => LegalFileName(Host, Il);
+
+        FileName CilDataFileName
+            => LegalFileName(Host, IlData);
+
+        FilePath CilDataPath
+            => CilDataDir + CilDataFileName;
     }
 }

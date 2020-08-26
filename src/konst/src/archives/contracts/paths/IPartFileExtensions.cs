@@ -37,6 +37,11 @@ namespace Z0
         FileExtension Il => FileExtensions.Il;
 
         /// <summary>
+        /// Extension for Cil data files
+        /// </summary>
+        FileExtension IlData => FileExtension.Define($"{Il}.{HexLine}");
+
+        /// <summary>
         /// Extension for nonexecutable part components
         /// </summary>
         FileExtension Dll => FileExtensions.Dll;

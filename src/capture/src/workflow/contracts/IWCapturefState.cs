@@ -10,8 +10,6 @@ namespace Z0
 
     public interface IWfCaptureState : IWfCaptureContext
     {
-        IAppContext Root {get;}
-
         IWfContext Wf {get;}
 
         WfConfig Config {get;}
@@ -29,6 +27,8 @@ namespace Z0
         IAsmDecoder RoutineDecoder {get;}
 
         IWfCaptureBroker CaptureBroker {get;}
+
+        PartId[] Parts {get;}
 
         IWfCaptureBroker IWfCaptureContext.Broker
             => CaptureBroker;

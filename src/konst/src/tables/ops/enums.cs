@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
@@ -51,19 +51,19 @@ namespace Z0
                     dst[i] = default;
             }
             return dst;
-        }               
-        
+        }
+
         [Op]
         public static EnumLiterals enums(Type src)
         {
             var ut = src.GetEnumUnderlyingType();
             var nk = ut.NumericKind();
-            
+
             var fields = span(src.LiteralFields());
-            var count = fields.Length;            
+            var count = fields.Length;
             var buffer = sys.alloc<EnumLiteralDetail>(count);
             var index = span(buffer);
-            
+
             for(var i=0u; i<fields.Length; i++)
             {
                 ref readonly var field = ref skip(fields,i);
@@ -96,10 +96,10 @@ namespace Z0
             where E : unmanaged, Enum
         {
             var literals = Enums.index<E>();
-            var dst = new Data.EnumLiteral[literals.Length];            
+            var dst = new Data.EnumLiteral[literals.Length];
             var primal = typeof(E).GetEnumUnderlyingType();
             var flags = typeof(E).Tagged<FlagsAttribute>();
-            var baseTag =typeof(E).Tag<NumericBaseAttribute>(); 
+            var baseTag =typeof(E).Tag<NumericBaseAttribute>();
             var @base = baseTag.MapValueOrDefault(x => x.Base, NumericBaseKind.Base10);
             var bitmax = baseTag.MapValueOrDefault(x => x.MaxDigits, (int?)null);
             var hexmax = bitmax != null ? bitmax.Value/4 : (int?)null;
@@ -108,7 +108,7 @@ namespace Z0
             for(var i=0; i<dst.Length; i++)
             {
                 var literal = literals[i];
-                
+
                 var description = ReflectedLiterals.attributed(typeof(E).Field(literal.ToString()).Require()).Text;
                 if(string.IsNullOrWhiteSpace(description) && flags)
                     description = literal.LiteralValue.ToString();
@@ -119,11 +119,11 @@ namespace Z0
             }
 
             return dst;
-        }        
+        }
 
         public static Data.EnumLiteral[] enums<E>(FilePath dst)
             where E : unmanaged, Enum
-        {            
+        {
             var records = Table.enums<E>();
             using var writer = dst.Writer();
             writer.WriteLine(Tabular.HeaderText<E>());

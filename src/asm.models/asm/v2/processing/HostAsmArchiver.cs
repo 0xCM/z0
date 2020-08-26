@@ -39,7 +39,7 @@ namespace Z0.Asm
         {
             try
             {
-                var dst = HostArchive.AsmPath;
+                var dst = HostArchive.HostAsmPath;
                 using var writer = new StreamWriter(dst.FullPath, append);
                 for(var i=0; i<src.Length; i++)
                 {

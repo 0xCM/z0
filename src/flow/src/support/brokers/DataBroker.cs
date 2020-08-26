@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
     using static z;
-        
-    public readonly struct DataBroker<K,C,T> : IDataBroker<K,C,T>
+
+    public readonly struct DataBroker<K,C,T> : IWfDataBroker<K,C,T>
         where K : unmanaged, Enum
     {
         public IWfContext Wf {get;}
-        
+
         readonly DataHandler<C,T>[] handlers;
 
         readonly IndexFunction<K> xf;
@@ -24,7 +24,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => handlers;
         }
-        
+
         [MethodImpl(Inline)]
         public DataBroker(IWfContext wf, int capacity, IndexFunction<K> xf)
         {
@@ -40,7 +40,7 @@ namespace Z0
             var index = (uint)xf(kind);
             ref var dst = ref seek(Handlers, index);
             dst = handler;
-            return ref dst;            
+            return ref dst;
         }
 
         [MethodImpl(Inline)]

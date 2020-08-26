@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -16,13 +16,13 @@ namespace Z0
         where A : struct
     {
         public const string ActorName = nameof(WfRunner<A>);
-        
+
         public IWfContext Wf {get;}
-        
-        readonly Action<A> Handler;        
-        
+
+        readonly Action<A> Handler;
+
         readonly A? InitialArgs;
-        
+
         [MethodImpl(Inline)]
         public WfRunner(IWfContext wf, Action<A> handler, A? args = null)
         {
@@ -33,9 +33,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Run(A args)        
+        public void Run(A args)
         {
-            Wf.RunningT(ActorName,args, Wf.Ct);
+            Wf.RunningT(ActorName, args, Wf.Ct);
+
             try
             {
                 Handler(args);
@@ -44,10 +45,10 @@ namespace Z0
             {
                 Wf.Error(e, Wf.Ct);
             }
-            
+
             Wf.RanT(ActorName,args, Wf.Ct);
         }
-        
+
         [MethodImpl(Inline)]
         public void Run()
         {

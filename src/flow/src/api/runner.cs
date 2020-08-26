@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct Flow
     {
         [MethodImpl(Inline)]
         public static WfRunner<A> runner<A>(IWfContext wf, Action<A> handler, A? args = null)
@@ -21,7 +21,7 @@ namespace Z0
             where F : unmanaged, Enum
             where T : struct, ITable<F,T,D>
             where D : unmanaged, Enum
-            where S : unmanaged        
+            where S : unmanaged
                 => new WfTableRunner<F,T,D,S,Y>(wf, processors, selectors);
     }
 }

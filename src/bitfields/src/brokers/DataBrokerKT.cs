@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Mediates parametric data exchange for up to 64 enumeration-predicated classifiers
     /// </summary>
-    public readonly struct BitBroker<K,T> : IDataProcessor<T>, IDataBroker<K,T>
+    public readonly struct BitBroker<K,T> : IWfDataProcessor<T>, IWfDataBroker<K,T>
         where K : unmanaged, Enum
     {
         readonly WfDataHandler<T>[] handlers;

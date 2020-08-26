@@ -15,8 +15,8 @@ namespace Z0
     {
         public IWfContext Wf {get;}
 
-        public IDataBroker<Mnemonic,BasedAsmFx> Broker {get;}
-        
+        public IWfDataBroker<Mnemonic,BasedAsmFx> Broker {get;}
+
         [MethodImpl(Inline)]
         internal ProcessLocatedAsm(IWfContext context)
         {
