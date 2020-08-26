@@ -8,7 +8,7 @@ namespace Z0.Asm
     {
         public const string SectionSep = text.PageBreak + text.PageBreak;
 
-        public const string FieldSep = " || ";
+        public const string FieldSep = RenderPatterns.FieldSep;
 
         public static AsmFormatSpec Default
             => create();

@@ -84,7 +84,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static string format(AsmFxCode src, byte[] encoded, string sep)
-            =>  text.format("{0,-30}{1}{2,-40}{3}{4,-3}{5}{6}",
+            =>  text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}",
                 src.Expression, sep,
                 src.OpCode, sep,
                 encoded.Length, sep,
