@@ -5,20 +5,17 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
+    using System.Reflection.Emit;
     using System.Reflection.Metadata;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static z;
 
-    partial struct Cil
+    public readonly partial struct Cil
     {
-        public readonly struct OpCode<K>
-            where K : unmanaged, ICilOpCode<K>
-        {
-            public static implicit operator OpCode<K>(K src)
-                => default;
 
-            public ILOpCode Id => default(K).Id;
-        }
     }
 }

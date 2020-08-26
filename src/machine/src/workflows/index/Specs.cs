@@ -18,7 +18,6 @@ namespace Z0
     public readonly struct EmitCallIndexStep : IWfStep<EmitCallIndexStep,PartAsmFx,FilePath>
     {
         public const string StepName = nameof(EmitCallIndex);
-
     }
 
     [Step(typeof(CaptureResBytes))]
@@ -44,11 +43,11 @@ namespace Z0
 
         public const string DatasetName = "Cil";
 
-        public const string DataType = "il";
+        public const string EmissionType = "il";
 
-        public const string DataFolder = DataType;
+        public const string DataFolder = EmissionType;
 
-        public const string DatasetExt = DataType + ExtSep +  DataExt;
+        public const string DatasetExt = EmissionType + ExtSep +  DataExt;
     }
 
     [Step(typeof(Recapture))]
@@ -142,7 +141,7 @@ namespace Z0
     {
         public const string StepName = nameof(EmitPartStrings);
 
-        public const string DataType = EmitStringRecordsStep.DataType;
+        public const string EmissionType = EmitStringRecordsStep.DataType;
     }
 
     [Step(typeof(IndexEncodedParts))]

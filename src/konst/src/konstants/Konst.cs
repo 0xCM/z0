@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Reflection;
-    
+
     [ApiHost("api")]
     public readonly partial struct Konst
     {
@@ -19,12 +19,12 @@ namespace Z0
         public const MethodImplOptions Suboptimal = MethodImplOptions.NoOptimization;
 
         public const string Kernel32 = "kernel32.dll";
-    
+
         /// <summary>
         /// A type considered to be empty
         /// </summary>
         public static Type EmptyType => typeof(void);
-        
+
         /// <summary>
         /// Uppercase letter classifier accessor
         /// </summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// Letter classifier accessor
         /// </summary>
         public static Letter Letter => default;
-        
+
         /// <summary>
         /// Number classifier accessor
         /// </summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <summary>
         /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field
         /// </summary>
-        public const int WidthOffset = 16;        
+        public const int WidthOffset = 16;
 
         /// <summary>
         /// The default delimiter to use when formatting structured text
@@ -81,7 +81,7 @@ namespace Z0
         /// The end-of-line escape sequence
         /// </summary>
         public const string Eol = Chars.Eol;
-                
+
         /// <summary>
         /// The '{' character
         /// </summary>
@@ -122,7 +122,7 @@ namespace Z0
         /// <summary>
         /// The "->" character sequence
         /// </summary>
-        public const string AsciArrow = "->";         
+        public const string AsciArrow = "->";
 
         /// <summary>
         /// The ":=" character sequence
@@ -163,7 +163,10 @@ namespace Z0
 
         public const string Connector = " -> ";
 
-        
+        public const ApiClassKind DataStructure = ApiClassKind.DataStructure;
+
+        public const ApiClassKind DataType = ApiClassKind.ApiDataType;
+
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T zed<T>(T t = default)
             where T : unmanaged

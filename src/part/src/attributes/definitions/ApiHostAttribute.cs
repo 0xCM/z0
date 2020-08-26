@@ -10,19 +10,21 @@ namespace Z0
     /// Identifies an api host
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class ApiHostAttribute : Attribute
+    public class ApiHostAttribute : ApiClassAttribute
     {
         public string HostName {get;}
 
-        public ApiHostKind HostKind {get;}        
-        
+        public ApiHostKind HostKind {get;}
+
         public ApiHostAttribute(string name, ApiHostKind kind)
+            : base(ApiClassKind.ApiHost)
         {
             HostName = name;
             HostKind = kind;
         }
 
         public ApiHostAttribute(ApiHostKind kind)
+            : base(ApiClassKind.ApiHost)
         {
             HostName = string.Empty;
             HostKind = kind;
@@ -36,7 +38,7 @@ namespace Z0
         public ApiHostAttribute()
             : this(string.Empty, ApiHostKind.DirectAndGeneric)
         {
- 
+
         }
     }
 }

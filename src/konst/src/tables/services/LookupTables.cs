@@ -5,20 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Reflection.Metadata;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
+    using static z;
 
-    partial struct Cil
+    [ApiHost]
+    public readonly partial struct LookupTables
     {
-        public readonly struct OpCode<K>
-            where K : unmanaged, ICilOpCode<K>
-        {
-            public static implicit operator OpCode<K>(K src)
-                => default;
+        [MethodImpl(Inline)]
+        static LuFx64<K> luFx<K>(TableSpan<ulong> index, TableSpan<K> values)
+            where K : unmanaged
+                => new LuFx64<K>(index,values);
 
-            public ILOpCode Id => default(K).Id;
-        }
     }
 }

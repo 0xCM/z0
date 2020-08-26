@@ -119,6 +119,11 @@ namespace Z0
 
         }
 
+        void SaveCilOpCodes()
+        {
+            var cil = Cil.init();
+        }
+
         static string format<T>(in T src)
             where T : struct
         {

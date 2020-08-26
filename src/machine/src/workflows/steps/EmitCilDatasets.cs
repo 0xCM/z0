@@ -11,13 +11,13 @@ namespace Z0
     using static EmitCilDatasetsStep;
 
     using static z;
-        
+
     public ref struct EmitCilDatasets
     {
         public readonly FolderPath TargetDir;
 
         public uint EmissionCount;
-        
+
         public uint PartCount;
 
         readonly IPart[] Parts;
@@ -25,7 +25,7 @@ namespace Z0
         readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
-     
+
         [MethodImpl(Inline)]
         public EmitCilDatasets(IWfContext wf, IPart[] parts, CorrelationToken ct)
         {
@@ -52,34 +52,34 @@ namespace Z0
                 {
                     Wf.Error(e, Ct);
                 }
-            }                                     
+            }
 
             Wf.RanT(StepName, new {PartCount, TargetDir, EmissionCount}, Ct);
         }
 
         uint Emit(IPart part, FilePath dst)
         {
-            Wf.Emitting(StepName, DataType, dst, Ct);
+            Wf.Emitting(StepName, EmissionType, dst, Ct);
 
             var id = part.Id;
-            var assembly = part.Owner;                
+            var assembly = part.Owner;
             var methods = PeMetaReader.methods(FilePath.Define(assembly.Location));
             var count = (uint)methods.Length;
-            
-            using var writer = dst.Writer();       
-            writer.WriteLine(ImgMethodBody.Header);      
+
+            using var writer = dst.Writer();
+            writer.WriteLine(ImgMethodBody.Header);
 
             for(var i=0u; i<count; i++)
-                writer.WriteLine(skip(methods,i).Format()); 
-            
-            Wf.Emitted(StepName, DataType, count, dst, Ct);
+                writer.WriteLine(skip(methods,i).Format());
+
+            Wf.Emitted(StepName, EmissionType, count, dst, Ct);
 
             return count;
-        }             
+        }
 
         public void Dispose()
         {
             Wf.Finished(StepName, Ct);
-        }            
+        }
     }
 }

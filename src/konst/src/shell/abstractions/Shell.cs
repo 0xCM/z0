@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime;
+    using System.IO;
 
     using static z;
 
@@ -14,23 +16,27 @@ namespace Z0
     {
         protected IMultiSink Sink {get;}
 
-        protected Shell()
-        {
-            Sink = AB.sink();
-            Context = new ShellContext(ApiQuery.KnownComponents);
-        }
-
-        protected Shell(IShellContext context)
-        {
-            Sink = AB.sink();
-            Context = context;
-        }
 
         protected Shell(IShellContext context, IMultiSink sink)
         {
             Sink = sink;
             Context = context;
+            ProfileOptimization.SetProfileRoot(Path.GetDirectoryName(typeof(S).Assembly.Location));
+            ProfileOptimization.StartProfile("Startup.Profile");
         }
+
+        protected Shell(IShellContext context)
+            : this(context, AB.sink())
+        {
+
+        }
+
+        protected Shell()
+            : this(new ShellContext(ApiQuery.KnownComponents))
+        {
+
+        }
+
 
         public IShellContext Context {get;}
 
